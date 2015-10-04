@@ -23,46 +23,12 @@ OsmRunner::OsmRunner(QObject *parent) :
 {
 }
 
-OsmRunner::~OsmRunner()
-{
-}
-
 GeoDataDocument *OsmRunner::parseFile(const QString &fileName, DocumentRole role, QString &error)
 {
-#define USE_OLD_OSM_PARSER
-#ifdef USE_OLD_OSM_PARSER
-    QFile file( fileName );
-    if ( !file.exists() ) {
-        error = QString("File %1 does not exist").arg(fileName);
-        mDebug() << error;
-        return nullptr;
-    }
-
-    // Open file in right mode
-    file.open( QIODevice::ReadOnly );
-
-    OsmParser parser;
-
-    if ( !parser.read( &file ) ) {
-        error = parser.errorString();
-        mDebug() << error;
-        return nullptr;
-    }
-    GeoDocument* document = parser.releaseDocument();
-    Q_ASSERT( document );
-    GeoDataDocument* doc = static_cast<GeoDataDocument*>( document );
-    parser.adjustStyles(doc);
-#else
-    GeoDataDocument* doc = OsmXmlParser::parse(fileName, error);
-#endif
-
-    doc->setDocumentRole( role );
-    doc->setFileName( fileName );
-
-#ifdef USE_OLD_OSM_PARSER
-    file.close();
-#endif
-    return doc;
+    GeoDataDocument* document = OsmParser::parse(fileName, error);
+    document->setDocumentRole(role);
+    document->setFileName(fileName);
+    return document;
 }
 
 }

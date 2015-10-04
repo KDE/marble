@@ -5,75 +5,26 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2011 Thibaut Gridel <tgridel@free.fr>
+// Copyright 2011      Thibaut Gridel <tgridel@free.fr>
 // Copyright 2011      Konstantin Oblaukhov <oblaukhov.konstantin@gmail.com>
 // Copyright 2014      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+// Copyright 2015      Dennis Nienhüser <nienhueser@kde.org>
 //
 
 #ifndef OSMPARSER_H
 #define OSMPARSER_H
 
-#include "GeoParser.h"
-#include "GeoDataCoordinates.h"
-#include "GeoDataLinearRing.h"
-#include "MarbleDirs.h"
-#include "osm/OsmPlacemarkData.h"
 #include "OsmNode.h"
 #include "OsmWay.h"
 #include "OsmRelation.h"
 
-#include <QColor>
-#include <QList>
-#include <QMap>
-#include <QSet>
+#include <QString>
 
 namespace Marble {
 
-class GeoDataLineString;
-class GeoDataPlacemark;
-class GeoDataPoint;
-class GeoDataPolygon;
-class OsmPlacemarkData;
 class GeoDataDocument;
 
-class OsmParser : public GeoParser
-{
-public:
-    OsmParser();
-    virtual ~OsmParser();
-
-    void setNode( qint64 id, GeoDataPoint *point );
-    GeoDataPoint *node( qint64 id );
-
-    void setWay( qint64 id, GeoDataLineString *way );
-    GeoDataLineString *way( qint64 id );
-
-    void setPolygon( qint64 id, GeoDataPolygon *polygon );
-    GeoDataPolygon *polygon( qint64 id );
-
-    void addDummyPlacemark( GeoDataPlacemark *placemark );
-
-    static const QColor backgroundColor;
-
-    void adjustStyles(GeoDataDocument* document);
-
-private:
-    virtual bool isValidElement(const QString& tagName) const;
-    virtual bool isValidRootElement();
-    bool isHighway(const GeoDataPlacemark *placemark) const;
-    void calculateHighwayWidth(GeoDataPlacemark *placemark) const;
-    void adjustGraveyardPattern(GeoDataPlacemark *placemark) const;
-
-    virtual GeoDocument* createDocument() const;
-
-    QMap<qint64, GeoDataPoint *> m_nodes;
-    QMap<qint64, GeoDataPolygon *> m_polygons;
-    QMap<qint64, GeoDataLineString *> m_ways;
-    QList<GeoDataPlacemark *> m_dummyPlacemarks;
-};
-
-
-class OsmXmlParser
+class OsmParser
 {
 public:
     static GeoDataDocument* parse(const QString &filename, QString &error);

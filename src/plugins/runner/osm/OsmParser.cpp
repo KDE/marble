@@ -8,6 +8,7 @@
 // Copyright 2011      Thibaut Gridel <tgridel@free.fr>
 // Copyright 2011      Konstantin Oblaukhov <oblaukhov.konstantin@gmail.com>
 // Copyright 2014      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+// Copyright 2015      Dennis Nienhüser <nienhueser@kde.org>
 //
 
 #include "OsmParser.h"
@@ -20,139 +21,11 @@
 #include "GeoDataTypes.h"
 #include "GeoDataStyle.h"
 
+#include <QFile>
+
 namespace Marble {
 
-const QColor OsmParser::backgroundColor( 0xF1, 0xEE, 0xE8 );
-
-OsmParser::OsmParser()
-    : GeoParser( 0 )
-{
-    // nothing to do
-}
-
-OsmParser::~OsmParser()
-{
-    qDeleteAll( m_dummyPlacemarks );
-    qDeleteAll( m_nodes );
-}
-
-void OsmParser::setNode( qint64 id, GeoDataPoint *point )
-{
-    m_nodes[id] = point;
-}
-
-GeoDataPoint *OsmParser::node( qint64 id )
-{
-    return m_nodes.value( id );
-}
-
-void OsmParser::setWay( qint64 id, GeoDataLineString *way )
-{
-    m_ways[id] = way;
-}
-
-GeoDataLineString *OsmParser::way( qint64 id )
-{
-    return m_ways.value( id );
-}
-
-void OsmParser::setPolygon( qint64 id, GeoDataPolygon *polygon )
-{
-    m_polygons[id] = polygon;
-}
-
-GeoDataPolygon *OsmParser::polygon( qint64 id )
-{
-    return m_polygons.value( id );
-}
-
-void OsmParser::addDummyPlacemark( GeoDataPlacemark *placemark )
-{
-    m_dummyPlacemarks << placemark;
-}
-
-void OsmParser::adjustStyles(GeoDataDocument* document)
-{
-    for (int i=0, n=document->size(); i<n; ++i) {
-        GeoDataFeature* feature = document->child(i);
-        if (feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
-            GeoDataPlacemark* placemark = static_cast<GeoDataPlacemark*>(feature);
-            if (isHighway(placemark)) {
-                calculateHighwayWidth(placemark);
-            }
-            else if( placemark->visualCategory() == GeoDataFeature::AmenityGraveyard ||
-                     placemark->visualCategory() == GeoDataFeature::LanduseCemetery ){
-                adjustGraveyardPattern( placemark );
-            }
-        }
-    }
-}
-
-bool OsmParser::isValidRootElement()
-{
-    return isValidElement(osm::osmTag_osm);
-}
-
-bool OsmParser::isHighway(const GeoDataPlacemark *placemark) const
-{
-    return placemark->visualCategory() >= GeoDataFeature::HighwaySteps &&
-           placemark->visualCategory() <= GeoDataFeature::HighwayMotorway;
-}
-
-void OsmParser::calculateHighwayWidth(GeoDataPlacemark *placemark) const
-{
-    if (placemark->visualCategory() >= GeoDataFeature::HighwaySteps &&
-        placemark->visualCategory() <= GeoDataFeature::HighwayService) {
-        return;
-    }
-
-    OsmPlacemarkData const & data = placemark->osmData();
-    bool const isOneWay = data.containsTag("oneway", "yes") || data.containsTag("oneway", "-1");
-    int const lanes = isOneWay ? 1 : 2; // also for motorway which implicitly is one way, but has two lanes and each direction has its own highway
-    double const laneWidth = 3.0;
-    double const margins = placemark->visualCategory() == GeoDataFeature::HighwayMotorway ? 2.0 : (isOneWay ? 1.0 : 0.0);
-    double const physicalWidth = margins + lanes * laneWidth;
-
-    GeoDataLineStyle lineStyle = placemark->style()->lineStyle();
-    lineStyle.setPhysicalWidth(physicalWidth);
-    GeoDataStyle* style = new GeoDataStyle(*placemark->style());
-    style->setLineStyle(lineStyle);
-    placemark->setStyle(style);
-}
-
-void OsmParser::adjustGraveyardPattern(GeoDataPlacemark *placemark) const
-{
-    OsmPlacemarkData const & data = placemark->osmData();
-    GeoDataPolyStyle polyStyle = placemark->style()->polyStyle();
-    if( data.containsTag("religion","jewish") ){
-        polyStyle.setTexturePath(MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_jewish.png"));
-    } else if( data.containsTag("religion","christian") ){
-        polyStyle.setTexturePath(MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_christian.png"));
-    } else if( data.containsTag("religion","INT-generic") ){
-        polyStyle.setTexturePath(MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_generic.png"));
-    } else {
-        return;
-    }
-    GeoDataStyle* style = new GeoDataStyle(*placemark->style());
-    style->setPolyStyle(polyStyle);
-    placemark->setStyle(style);
-}
-
-bool OsmParser::isValidElement(const QString& tagName) const
-{
-    if (!GeoParser::isValidElement(tagName))
-        return false;
-
-    //always "valid" because there is no namespace
-    return true;
-}
-
-GeoDocument* OsmParser::createDocument() const
-{
-    return new GeoDataDocument;
-}
-
-GeoDataDocument *OsmXmlParser::parse(const QString &filename, QString &error)
+GeoDataDocument *OsmParser::parse(const QString &filename, QString &error)
 {
     QFile file(filename);
     if (!file.open(QFile::ReadOnly)) {
@@ -210,7 +83,7 @@ GeoDataDocument *OsmXmlParser::parse(const QString &filename, QString &error)
     return createDocument(m_nodes, m_ways, m_relations);
 }
 
-GeoDataDocument *OsmXmlParser::createDocument(OsmNodes &nodes, OsmWays &ways, OsmRelations &relations)
+GeoDataDocument *OsmParser::createDocument(OsmNodes &nodes, OsmWays &ways, OsmRelations &relations)
 {
     GeoDataDocument* document = new GeoDataDocument;
     GeoDataPolyStyle backgroundPolyStyle;
