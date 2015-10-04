@@ -154,6 +154,11 @@ double GeoPolygonGraphicsItem::extractBuildingHeight(double defaultValue) const
             bool extracted = false;
             double height = heightValue.toDouble(&extracted);
             return extracted ? height : defaultValue;
+        } else if (placemark->osmData().containsTagKey("building:levels")) {
+            int const levels = placemark->osmData().tagValue("building:levels").toInt();
+            int const skipLevels = placemark->osmData().tagValue("building:min_level").toInt();
+            /** @todo Is 35 as an upper bound for the number of levels sane? */
+            return 3.0 * qBound(1, 1+levels-skipLevels, 35);
         }
     }
 
