@@ -325,6 +325,12 @@ void GeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportParams* v
         } else if ( m_ring ) {
             painter->drawPolygon( *m_ring );
         }
+
+        bool const hasIcon = !style()->iconStyle().iconPath().isEmpty();
+        if (hasIcon) {
+            QImage const icon = style()->iconStyle().scaledIcon();
+            painter->drawImage(latLonAltBox().center(), icon);
+        }
     }
 
     painter->restore();
