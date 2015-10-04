@@ -63,6 +63,18 @@ void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes) const
                 placemark->setStyle(style);
             }
         }
+
+        if (placemark->visualCategory() == GeoDataFeature::Building) {
+            QList<GeoDataFeature::GeoDataVisualCategory> categories = OsmPresetLibrary::visualCategories(m_osmData);
+            foreach(GeoDataFeature::GeoDataVisualCategory category, categories) {
+                GeoDataStyle* categoryStyle = GeoDataFeature::presetStyle(category);
+                if (!categoryStyle->iconStyle().iconPath().isEmpty()) {
+                    GeoDataStyle* style = new GeoDataStyle(*placemark->style());
+                    style->setIconStyle(categoryStyle->iconStyle());
+                    placemark->setStyle(style);
+                }
+            }
+        }
     } else {
         GeoDataLineString* lineString = new GeoDataLineString;
         placemark->setGeometry(lineString);

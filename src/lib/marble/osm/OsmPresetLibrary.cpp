@@ -581,5 +581,17 @@ GeoDataFeature::GeoDataVisualCategory OsmPresetLibrary::determineVisualCategory(
     return GeoDataFeature::None;
 }
 
+QList<GeoDataFeature::GeoDataVisualCategory> OsmPresetLibrary::visualCategories(const OsmPlacemarkData &osmData)
+{
+    QList<GeoDataFeature::GeoDataVisualCategory> categories;
+    for (auto iter = osmData.tagsBegin(), end=osmData.tagsEnd(); iter != end; ++iter) {
+        QString const keyValue = QString("%1=%2").arg(iter.key()).arg(iter.value());
+        GeoDataFeature::GeoDataVisualCategory category = OsmVisualCategory(keyValue);
+        if (category != GeoDataFeature::None) {
+            categories << category;
+        }
+    }
+    return categories;
 }
 
+}
