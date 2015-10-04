@@ -288,7 +288,19 @@ void GeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportParams* v
         } else if (m_ring) {
             viewport->screenCoordinates(*m_ring, polygons);
         }
+        bool const hasIcon = !style()->iconStyle().iconPath().isEmpty();
+        qreal maxSize(0.0);
+        QPointF roofCenter;
         foreach(QPolygonF* polygon, polygons) {
+            QRectF const boundingRect = polygon->boundingRect();
+            if (hasIcon) {
+                QSizeF const polygonSize = boundingRect.size();
+                qreal size = polygonSize.width() * polygonSize.height();
+                if (size > maxSize) {
+                    maxSize = size;
+                    roofCenter = boundingRect.center() + buildingOffset(boundingRect.center(), viewport);
+                }
+            }
             if ( drawAccurate3D) {
                 QPolygonF buildingRoof;
                 foreach(const QPointF &point, *polygon) {
@@ -296,10 +308,15 @@ void GeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportParams* v
                 }
                 painter->drawPolygon(buildingRoof);
             } else {
-                QPointF const offset = buildingOffset(polygon->boundingRect().center(), viewport);
+                QPointF const offset = buildingOffset(boundingRect.center(), viewport);
                 painter->translate(offset);
                 painter->drawPolygon(*polygon);
             }
+        }
+        if (hasIcon && !roofCenter.isNull()) {
+            QImage const icon = style()->iconStyle().scaledIcon();
+            QPointF const iconCenter(icon.size().width()/2.0, icon.size().height()/2.0);
+            painter->drawImage(roofCenter-iconCenter, icon);
         }
         qDeleteAll(polygons);
     } else {
