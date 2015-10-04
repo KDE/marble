@@ -14,6 +14,7 @@
 #include <QMap>
 #include <QPair>
 #include <QIcon>
+#include <QSet>
 
 #include "GeoDataFeature.h"
 #include "marble_export.h"
@@ -81,7 +82,7 @@ private:
      */
     static QList<OsmTag> s_additionalOsmTags;
 
-    static QStringList s_areaTags;
+    static QSet<QString> s_areaTags;
 };
 
 
