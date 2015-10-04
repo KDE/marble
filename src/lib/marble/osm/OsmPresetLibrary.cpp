@@ -238,6 +238,7 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "landuse", "orchard" ) ]            = GeoDataFeature::LanduseOrchard;
     s_visualCategories[ OsmTag( "landuse", "vineyard" ) ]           = GeoDataFeature::LanduseVineyard;
     s_visualCategories[ OsmTag( "landuse", "village_green" ) ]      = GeoDataFeature::LanduseGrass;
+    s_visualCategories[ OsmTag( "landuse", "grass" ) ]              = GeoDataFeature::LanduseGrass;
 
     s_visualCategories[ OsmTag( "leisure", "common" ) ]             = GeoDataFeature::LanduseGrass;
     s_visualCategories[ OsmTag( "leisure", "garden" ) ]             = GeoDataFeature::LanduseGrass;
@@ -539,6 +540,7 @@ bool OsmPresetLibrary::isAreaTag(const QString &keyValue)
         s_areaTags.insert( "landuse=retail" );
         s_areaTags.insert( "landuse=orchard" );
         s_areaTags.insert( "landuse=vineyard" );
+        s_areaTags.insert( "landuse=grass" );
     }
 
     return s_areaTags.contains(keyValue);
