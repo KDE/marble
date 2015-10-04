@@ -29,7 +29,9 @@ OsmRunner::~OsmRunner()
 
 GeoDataDocument *OsmRunner::parseFile(const QString &fileName, DocumentRole role, QString &error)
 {
-    QFile  file( fileName );
+#define USE_OLD_OSM_PARSER
+#ifdef USE_OLD_OSM_PARSER
+    QFile file( fileName );
     if ( !file.exists() ) {
         error = QString("File %1 does not exist").arg(fileName);
         mDebug() << error;
@@ -50,10 +52,16 @@ GeoDataDocument *OsmRunner::parseFile(const QString &fileName, DocumentRole role
     Q_ASSERT( document );
     GeoDataDocument* doc = static_cast<GeoDataDocument*>( document );
     parser.adjustStyles(doc);
+#else
+    GeoDataDocument* doc = OsmXmlParser::parse(fileName, error);
+#endif
+
     doc->setDocumentRole( role );
     doc->setFileName( fileName );
 
+#ifdef USE_OLD_OSM_PARSER
     file.close();
+#endif
     return doc;
 }
 

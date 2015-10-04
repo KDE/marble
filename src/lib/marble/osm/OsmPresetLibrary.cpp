@@ -563,5 +563,23 @@ QStringList OsmPresetLibrary::buildingValues()
     return osmBuildingValues;
 }
 
+GeoDataFeature::GeoDataVisualCategory OsmPresetLibrary::determineVisualCategory(const OsmPlacemarkData &osmData)
+{
+    if (osmData.containsTagKey("building") && buildingValues().contains(osmData.tagValue("building")) ) {
+        return GeoDataFeature::Building;
+    }
+
+    for (auto iter = osmData.tagsBegin(), end=osmData.tagsEnd(); iter != end; ++iter) {
+        QString const keyValue = QString("%1=%2").arg(iter.key()).arg(iter.value());
+        GeoDataFeature::GeoDataVisualCategory category = OsmVisualCategory(keyValue);
+        if (category != GeoDataFeature::None) {
+            return OsmVisualCategory(keyValue);
+        }
+    }
+
+
+    return GeoDataFeature::None;
+}
+
 }
 

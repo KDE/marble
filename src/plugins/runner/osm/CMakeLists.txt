@@ -38,7 +38,7 @@ set( osm_translators_SRCS
         translators/OsmFeatureTagTranslator.cpp
    )
 
-set( osm_SRCS OsmParser.cpp OsmPlugin.cpp OsmRunner.cpp )
+set( osm_SRCS OsmParser.cpp OsmPlugin.cpp OsmRunner.cpp OsmNode.cpp OsmWay.cpp OsmRelation.cpp )
 
 marble_add_plugin( OsmPlugin ${osm_SRCS}  ${osm_handlers_SRCS} ${osm_writers_SRCS} ${osm_translators_SRCS} )
 

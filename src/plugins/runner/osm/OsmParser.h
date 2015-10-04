@@ -15,7 +15,12 @@
 
 #include "GeoParser.h"
 #include "GeoDataCoordinates.h"
+#include "GeoDataLinearRing.h"
 #include "MarbleDirs.h"
+#include "osm/OsmPlacemarkData.h"
+#include "OsmNode.h"
+#include "OsmWay.h"
+#include "OsmRelation.h"
 
 #include <QColor>
 #include <QList>
@@ -65,6 +70,16 @@ private:
     QMap<qint64, GeoDataPolygon *> m_polygons;
     QMap<qint64, GeoDataLineString *> m_ways;
     QList<GeoDataPlacemark *> m_dummyPlacemarks;
+};
+
+
+class OsmXmlParser
+{
+public:
+    static GeoDataDocument* parse(const QString &filename, QString &error);
+
+private:
+    static GeoDataDocument *createDocument(OsmNodes &nodes, OsmWays &way, OsmRelations &relations);
 };
 
 }

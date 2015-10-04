@@ -65,6 +65,8 @@ public:
 
     static QStringList buildingValues();
 
+    static GeoDataFeature::GeoDataVisualCategory determineVisualCategory(const OsmPlacemarkData &osmData);
+
 private:
     static void initializeOsmVisualCategories();
     static void initializeAdditionalOsmTags();
