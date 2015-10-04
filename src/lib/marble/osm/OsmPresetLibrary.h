@@ -61,6 +61,8 @@ public:
     static QList<OsmTag>::const_iterator additionalTagsBegin();
     static QList<OsmTag>::const_iterator additionalTagsEnd();
 
+    static bool isAreaTag(const QString &keyValue);
+
     static QStringList buildingValues();
 
 private:
@@ -76,6 +78,8 @@ private:
      * @brief s_additionalOsmTags is a list of useful, popular osm tags that currently don't have a visual category associated with them
      */
     static QList<OsmTag> s_additionalOsmTags;
+
+    static QStringList s_areaTags;
 };
 
 

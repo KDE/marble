@@ -46,7 +46,6 @@ public:
     void setPolygon( qint64 id, GeoDataPolygon *polygon );
     GeoDataPolygon *polygon( qint64 id );
 
-    bool tagNeedArea( const QString &keyValue ) const;
     void addDummyPlacemark( GeoDataPlacemark *placemark );
 
     static const QColor backgroundColor;
@@ -65,7 +64,6 @@ private:
     QMap<qint64, GeoDataPoint *> m_nodes;
     QMap<qint64, GeoDataPolygon *> m_polygons;
     QMap<qint64, GeoDataLineString *> m_ways;
-    QSet<QString> m_areaTags;
     QList<GeoDataPlacemark *> m_dummyPlacemarks;
 };
 

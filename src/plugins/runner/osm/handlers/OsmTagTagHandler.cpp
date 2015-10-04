@@ -91,7 +91,7 @@ GeoNode* OsmTagTagHandler::parse( GeoParser &geoParser ) const
 
     // Ways or relations can represent closed areas such as buildings
     if ( parentItem.represents( osmTag_way ) || parentItem.represents( osmTag_relation ) ) {
-        if( !dynamic_cast<GeoDataPolygon*>( geometry ) && parser.tagNeedArea( key + '=' + value ) ) {
+        if( !dynamic_cast<GeoDataPolygon*>( geometry ) && OsmPresetLibrary::isAreaTag( key + '=' + value ) ) {
             //Convert area ways or relations to polygons
             GeoDataLineString *polyline = dynamic_cast<GeoDataLineString *>( geometry );
             Q_ASSERT( polyline );

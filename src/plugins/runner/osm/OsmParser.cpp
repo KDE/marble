@@ -27,59 +27,7 @@ const QColor OsmParser::backgroundColor( 0xF1, 0xEE, 0xE8 );
 OsmParser::OsmParser()
     : GeoParser( 0 )
 {
-    // All these tags can be found updated at
-    // http://wiki.openstreetmap.org/wiki/Map_Features#Landuse
-
-    m_areaTags.insert( "landuse=forest" );
-    m_areaTags.insert( "natural=wood" );
-    m_areaTags.insert( "natural=beach" );
-    m_areaTags.insert( "natural=wetland" );
-    m_areaTags.insert( "natural=glacier" );
-    m_areaTags.insert( "natural=scrub" );
-    m_areaTags.insert( "natural=cliff" );
-    m_areaTags.insert( "area=yes" );
-    m_areaTags.insert( "waterway=riverbank" );
-
-    foreach(const QString &value, OsmPresetLibrary::buildingValues() ) {
-        m_areaTags.insert( QString("building=%1").arg(value) );
-    }
-
-    m_areaTags.insert( "amenity=graveyard" );
-    m_areaTags.insert( "amenity=parking" );
-    m_areaTags.insert( "leisure=common" );
-    m_areaTags.insert( "leisure=garden" );
-    m_areaTags.insert( "leisure=playground" );
-    m_areaTags.insert( "leisure=pitch" );
-    m_areaTags.insert( "leisure=park" );
-    m_areaTags.insert( "leisure=sportscentre" );
-    m_areaTags.insert( "leisure=stadium" );
-    m_areaTags.insert( "leisure=track" );
-
-    m_areaTags.insert( "military=danger_area" );
-
-    m_areaTags.insert( "landuse=allotments" );
-    m_areaTags.insert( "landuse=basin" );
-    m_areaTags.insert( "landuse=brownfield" );
-    m_areaTags.insert( "landuse=cemetery" );
-    m_areaTags.insert( "landuse=commercial" );
-    m_areaTags.insert( "landuse=construction" );
-    m_areaTags.insert( "landuse=farm" );
-    m_areaTags.insert( "landuse=farmland" );
-    m_areaTags.insert( "landuse=farmyard" );
-    m_areaTags.insert( "landuse=garages" );
-    m_areaTags.insert( "landuse=greenfield" );
-    m_areaTags.insert( "landuse=industrial" );
-    m_areaTags.insert( "landuse=landfill" );
-    m_areaTags.insert( "landuse=meadow" );
-    m_areaTags.insert( "landuse=military" );
-    m_areaTags.insert( "landuse=orchard" );
-    m_areaTags.insert( "landuse=quarry" );
-    m_areaTags.insert( "landuse=railway" );
-    m_areaTags.insert( "landuse=reservoir" );
-    m_areaTags.insert( "landuse=residential" );
-    m_areaTags.insert( "landuse=retail" );
-    m_areaTags.insert( "landuse=orchard" );
-    m_areaTags.insert( "landuse=vineyard" );
+    // nothing to do
 }
 
 OsmParser::~OsmParser()
@@ -116,11 +64,6 @@ void OsmParser::setPolygon( qint64 id, GeoDataPolygon *polygon )
 GeoDataPolygon *OsmParser::polygon( qint64 id )
 {
     return m_polygons.value( id );
-}
-
-bool OsmParser::tagNeedArea( const QString &keyValue ) const
-{
-    return m_areaTags.contains( keyValue );
 }
 
 void OsmParser::addDummyPlacemark( GeoDataPlacemark *placemark )
