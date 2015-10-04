@@ -261,6 +261,7 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "railway", "construction" ) ]       = GeoDataFeature::RailwayConstruction;
     s_visualCategories[ OsmTag( "railway", "monorail" ) ]           = GeoDataFeature::RailwayMonorail;
     s_visualCategories[ OsmTag( "railway", "funicular" ) ]          = GeoDataFeature::RailwayFunicular;
+    s_visualCategories[ OsmTag( "railway", "platform" ) ]           = GeoDataFeature::TransportPlatform;
     s_visualCategories[ OsmTag( "railway", "station" ) ]            = GeoDataFeature::TransportTrainStation;
     s_visualCategories[ OsmTag( "railway", "halt" ) ]               = GeoDataFeature::TransportTrainStation;
 
@@ -272,6 +273,7 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "transport", "car_share" ) ]        = GeoDataFeature::TransportCarShare;
     s_visualCategories[ OsmTag( "transport", "fuel" ) ]             = GeoDataFeature::TransportFuel;
     s_visualCategories[ OsmTag( "transport", "parking" ) ]          = GeoDataFeature::TransportParking;
+    s_visualCategories[ OsmTag( "public_transport", "platform" ) ]  = GeoDataFeature::TransportPlatform;
     s_visualCategories[ OsmTag( "amenity", "bicycle_rental" ) ]     = GeoDataFeature::TransportRentalBicycle;
     s_visualCategories[ OsmTag( "amenity", "car_rental" ) ]         = GeoDataFeature::TransportRentalCar;
     s_visualCategories[ OsmTag( "transport", "taxi_rank" ) ]        = GeoDataFeature::TransportTaxiRank;

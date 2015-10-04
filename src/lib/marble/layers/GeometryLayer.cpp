@@ -268,6 +268,7 @@ void GeometryLayerPrivate::initializeDefaultValues()
     s_defaultMinZoomLevels[GeoDataFeature::RailwayConstruction] = 10;
     s_defaultMinZoomLevels[GeoDataFeature::RailwayMonorail]     = 12;
     s_defaultMinZoomLevels[GeoDataFeature::RailwayFunicular]    = 13;
+    s_defaultMinZoomLevels[GeoDataFeature::TransportPlatform]   = 16;
 
     s_defaultMinZoomLevels[GeoDataFeature::Satellite]           = 0;
 
