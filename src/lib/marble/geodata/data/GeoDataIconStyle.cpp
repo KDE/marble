@@ -26,7 +26,7 @@ class GeoDataIconStylePrivate
   public:
     GeoDataIconStylePrivate()
         : m_scale( 1.0 ),
-        m_iconPath( MarbleDirs::path( "bitmaps/default_location.png" ) ),
+        m_iconPath(),
         m_heading( 0 )
     {
     }
