@@ -303,6 +303,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         TransportCarShare,
         TransportFuel,
         TransportParking,
+        TransportParkingSpace,
         TransportPlatform,
         TransportRentalBicycle,
         TransportRentalCar,

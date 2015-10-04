@@ -55,6 +55,7 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "amenity", "car_sharing" ) ]        = GeoDataFeature::TransportCarShare;
     s_visualCategories[ OsmTag( "amenity", "fuel" ) ]               = GeoDataFeature::TransportFuel;
     s_visualCategories[ OsmTag( "amenity", "parking" ) ]            = GeoDataFeature::TransportParking;
+    s_visualCategories[ OsmTag( "amenity", "parking_space" ) ]      = GeoDataFeature::TransportParkingSpace;
     s_visualCategories[ OsmTag( "amenity", "atm" ) ]                = GeoDataFeature::MoneyAtm;
     s_visualCategories[ OsmTag( "amenity", "bank" ) ]               = GeoDataFeature::MoneyBank;
 
@@ -506,6 +507,7 @@ bool OsmPresetLibrary::isAreaTag(const QString &keyValue)
 
         s_areaTags.insert( "amenity=graveyard" );
         s_areaTags.insert( "amenity=parking" );
+        s_areaTags.insert( "amenity=parking_space" );
         s_areaTags.insert( "leisure=common" );
         s_areaTags.insert( "leisure=garden" );
         s_areaTags.insert( "leisure=playground" );

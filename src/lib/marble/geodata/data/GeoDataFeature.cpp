@@ -485,6 +485,7 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
     s_defaultStyle[GeoDataFeature::TransportCarShare]        = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "transportation/car_share.16", transportationColor );
     s_defaultStyle[GeoDataFeature::TransportFuel]            = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "transportation/fuel.16", transportationColor );
     s_defaultStyle[GeoDataFeature::TransportParking]         = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "transportation/parking", transportationColor, "#F6EEB6", QColor( "#F6EEB6" ).darker() );
+    s_defaultStyle[GeoDataFeature::TransportParkingSpace]    = GeoDataFeaturePrivate::createWayStyle( "#F6EEB6", QColor( "#F6EEB6" ).darker(), true, true );
     s_defaultStyle[GeoDataFeature::TransportPlatform]        = GeoDataFeaturePrivate::createWayStyle( "#bbbbbb", Qt::transparent, true, false );
     s_defaultStyle[GeoDataFeature::TransportTrainStation]    = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "individual/railway_station", transportationColor );
     s_defaultStyle[GeoDataFeature::TransportTramStop]        = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, QString(), transportationColor );
