@@ -543,6 +543,8 @@ void GeoPainter::drawPolyline ( const GeoDataLineString & lineString,
             }
             QPainterPath path;
             path.addPolygon(*itPolygon);
+            qreal pathLength = path.length();
+            if (pathLength == 0) continue;
 
             labelNodes.clear();
             ClipPainter::drawPolyline( *itPolygon, labelNodes, labelPositionFlags );
@@ -552,10 +554,10 @@ void GeoPainter::drawPolyline ( const GeoDataLineString & lineString,
             setFont(font);
 
             int labelWidth = fontMetrics().width( labelText );
-            int maxNumLabels = static_cast<int>(path.length() / labelWidth);
+            int maxNumLabels = static_cast<int>(pathLength / labelWidth);
 
             if (fontSize >= 6.0 && maxNumLabels > 0) {
-                qreal textRelativeLength = labelWidth / path.length();
+                qreal textRelativeLength = labelWidth / pathLength;
                 int numLabels = 1;
                 if (maxNumLabels > 1) {
                     numLabels = maxNumLabels/2;
@@ -582,17 +584,18 @@ void GeoPainter::drawPolyline ( const GeoDataLineString & lineString,
                             d->drawTextRotated(point, angle, labelText);
                         } else {
                             for (int i = 0; i < labelText.length(); ++i) {
-                                qreal currentGlyphTextLength = fontMetrics().width(labelText.left(i)) / path.length();
+                                qreal currentGlyphTextLength = fontMetrics().width(labelText.left(i)) / pathLength;
 
-                                angle = -path.angleAtPercent(startPercent + currentGlyphTextLength);
-                                point = path.pointAtPercent(startPercent + currentGlyphTextLength);
-
-                                if ( upsideDown ) {
-                                    angle += 180.0;
+                                if ( !upsideDown ) {
+                                    angle = -path.angleAtPercent(startPercent + currentGlyphTextLength);
+                                    point = path.pointAtPercent(startPercent + currentGlyphTextLength);
+                                }
+                                else {
+                                    angle = -path.angleAtPercent(startPercent + textRelativeLength - currentGlyphTextLength) + 180;
                                     point = path.pointAtPercent(startPercent + textRelativeLength - currentGlyphTextLength);
                                 }
 
-                                d->drawTextRotated(point, angle, labelText[i]);
+                                d->drawTextRotated(point, angle, labelText.at(i));
                             }
                         }
                     }
