@@ -11,6 +11,8 @@
 #ifndef ASTROLIB_EXPORT_H
 #define ASTROLIB_EXPORT_H
 
+#define QT_NO_VERSION_TAGGING 1
+
 #include <QtGlobal>
 
 #ifndef ASTROLIB_EXPORT
