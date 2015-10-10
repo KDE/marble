@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+     This xml file is free software licensed under the GNU LGPL. You can
+     find a copy of this license in LICENSE.txt in the top directory of
+     the source code.
+-->
 <dgml xmlns="http://edu.kde.org/marble/dgml/2.0">
   <document>
     <head>
+      <!-- The license here applies to the actual map content, not this dgml file. See the license header above for the dgml file license -->
+      <!-- The content that this license refers to is not distributed with this package -->
       <license short="© OpenStreetMap contributors">Source: © OpenStreetMap contributors, License: Creative Commons Attribution-ShareAlike 2.0 (CC BY-SA)</license>
       <name>OpenStreetMap</name>
       <target>earth</target>

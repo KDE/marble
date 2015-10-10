@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+     This xml file is free software licensed under the GNU LGPL. You can
+     find a copy of this license in LICENSE.txt in the top directory of
+     the source code.
+-->
 <dgml xmlns="http://edu.kde.org/marble/dgml/2.0">
     <document>
         <head>
-            <license short="CIA / Public Domain" attribution="always">Source: Yale Catalogue of Bright Stars, License: Public Domain</license>
+            <license short="Public Domain" attribution="always">Source: Yale Catalogue of Bright Stars, License: Public Domain</license>
             <name>Night Sky</name>
             <target>sky</target>
             <theme>nightsky</theme>
