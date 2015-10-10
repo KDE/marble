@@ -436,7 +436,7 @@ void OsmPresetLibrary::initializeAdditionalOsmTags()
 
 GeoDataStyle *OsmPresetLibrary::presetStyle( const OsmTag &tag )
 {
-  GeoDataFeature::GeoDataVisualCategory category = OsmPresetLibrary::OsmVisualCategory( tag.first + "=" + tag.second );
+  GeoDataFeature::GeoDataVisualCategory category = osmVisualCategory( tag.first + "=" + tag.second );
   return GeoDataFeature::presetStyle( category );
 }
 
@@ -446,7 +446,7 @@ bool OsmPresetLibrary::hasVisualCategory ( const OsmTag &tag )
     return s_visualCategories.contains( tag );
 }
 
-GeoDataFeature::GeoDataVisualCategory OsmPresetLibrary::OsmVisualCategory( const QString &keyValue )
+GeoDataFeature::GeoDataVisualCategory OsmPresetLibrary::osmVisualCategory( const QString &keyValue )
 {
     initializeOsmVisualCategories();
     QStringList tokens = keyValue.split( '=' );
@@ -575,9 +575,9 @@ GeoDataFeature::GeoDataVisualCategory OsmPresetLibrary::determineVisualCategory(
 
     for (auto iter = osmData.tagsBegin(), end=osmData.tagsEnd(); iter != end; ++iter) {
         QString const keyValue = QString("%1=%2").arg(iter.key()).arg(iter.value());
-        GeoDataFeature::GeoDataVisualCategory category = OsmVisualCategory(keyValue);
+        GeoDataFeature::GeoDataVisualCategory category = osmVisualCategory(keyValue);
         if (category != GeoDataFeature::None) {
-            return OsmVisualCategory(keyValue);
+            return osmVisualCategory(keyValue);
         }
     }
 
@@ -590,7 +590,7 @@ QList<GeoDataFeature::GeoDataVisualCategory> OsmPresetLibrary::visualCategories(
     QList<GeoDataFeature::GeoDataVisualCategory> categories;
     for (auto iter = osmData.tagsBegin(), end=osmData.tagsEnd(); iter != end; ++iter) {
         QString const keyValue = QString("%1=%2").arg(iter.key()).arg(iter.value());
-        GeoDataFeature::GeoDataVisualCategory category = OsmVisualCategory(keyValue);
+        GeoDataFeature::GeoDataVisualCategory category = osmVisualCategory(keyValue);
         if (category != GeoDataFeature::None) {
             categories << category;
         }

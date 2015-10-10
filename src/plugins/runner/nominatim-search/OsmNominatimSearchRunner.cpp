@@ -196,7 +196,7 @@ void OsmNominatimRunner::handleResult( QNetworkReply* reply )
             placemark->setDescription(description);
             placemark->setAddress(desc);
             placemark->setCoordinate( lon.toDouble(), lat.toDouble(), 0, GeoDataCoordinates::Degree );
-            GeoDataFeature::GeoDataVisualCategory category = OsmPresetLibrary::OsmVisualCategory( key + '=' + value );
+            GeoDataFeature::GeoDataVisualCategory category = OsmPresetLibrary::osmVisualCategory( key + '=' + value );
             placemark->setVisualCategory( category );
             placemark->setExtendedData(placemarkData);
             placemarks << placemark;

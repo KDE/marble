@@ -350,7 +350,7 @@ void EditPlacemarkDialog::updateTextAnnotation()
     else {
         QString suitableTag = d->m_osmTagEditorWidget->suitableTag();
         if ( !suitableTag.isEmpty() ) {
-            GeoDataFeature::GeoDataVisualCategory category = OsmPresetLibrary::OsmVisualCategory( suitableTag );
+            GeoDataFeature::GeoDataVisualCategory category = OsmPresetLibrary::osmVisualCategory( suitableTag );
             d->m_placemark->setVisualCategory( category );
             d->m_placemark->setStyle( 0 );
         }

@@ -258,7 +258,7 @@ void EditPolygonDialog::updatePolygon()
     // available, set it
     QString suitableTag = d->m_osmTagEditorWidget->suitableTag();
     if ( d->m_placemark->styleUrl() == "#polygon" && !suitableTag.isEmpty() ) {
-        GeoDataFeature::GeoDataVisualCategory category = OsmPresetLibrary::OsmVisualCategory( suitableTag );
+        GeoDataFeature::GeoDataVisualCategory category = OsmPresetLibrary::osmVisualCategory( suitableTag );
         GeoDataStyle *style = GeoDataFeature::presetStyle( category );
         d->m_placemark->setStyle( style );
     }
