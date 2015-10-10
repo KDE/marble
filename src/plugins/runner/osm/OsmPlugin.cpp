@@ -56,7 +56,7 @@ QString OsmPlugin::fileFormatDescription() const
 
 QStringList OsmPlugin::fileExtensions() const
 {
-    return QStringList() << "osm";
+    return QStringList() << "osm" << "osm.zip";
 }
 
 ParsingRunner* OsmPlugin::newRunner() const

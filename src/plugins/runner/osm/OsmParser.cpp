@@ -20,21 +20,40 @@
 #include "GeoDataPoint.h"
 #include "GeoDataTypes.h"
 #include "GeoDataStyle.h"
+#include <MarbleZipReader.h>
 
 #include <QFile>
+#include <QFileInfo>
+#include <QBuffer>
 
 namespace Marble {
 
 GeoDataDocument *OsmParser::parse(const QString &filename, QString &error)
 {
-    QFile file(filename);
-    if (!file.open(QFile::ReadOnly)) {
-        error = QString("Cannot open file %1").arg(filename);
-        return nullptr;
+    QXmlStreamReader parser;
+    QFile file;
+    QBuffer buffer;
+    QFileInfo fileInfo(filename);
+    if (fileInfo.completeSuffix() == "osm.zip") {
+        MarbleZipReader zipReader(filename);
+        if (zipReader.fileInfoList().size() != 1) {
+            int const fileNumber = zipReader.fileInfoList().size();
+            error = QString("Unexpected number of files (%1) in %2").arg(fileNumber).arg(filename);
+            return nullptr;
+        }
+        QByteArray const data = zipReader.fileData(zipReader.fileInfoList().first().filePath);
+        buffer.setData(data);
+        buffer.open(QBuffer::ReadOnly);
+        parser.setDevice(&buffer);
+    } else {
+        file.setFileName(filename);
+        if (!file.open(QFile::ReadOnly)) {
+            error = QString("Cannot open file %1").arg(filename);
+            return nullptr;
+        }
+        parser.setDevice(&file);
     }
 
-    QXmlStreamReader parser;
-    parser.setDevice(&file);
     OsmPlacemarkData* osmData(0);
     QString parentTag;
     qint64 parentId(0);
