@@ -429,10 +429,17 @@ void QZipPrivate::fillFileInfo(int index, MarbleZipReader::FileInfo &fileInfo) c
     FileHeader header = fileHeaders.at(index);
     fileInfo.filePath = QString::fromLocal8Bit(header.file_name);
     const quint32 mode = (qFromLittleEndian<quint32>(&header.h.external_file_attributes[0]) >> 16) & 0xFFFF;
-    fileInfo.isDir = S_ISDIR(mode);
-    fileInfo.isFile = S_ISREG(mode);
-    fileInfo.isSymLink = S_ISLNK(mode);
-    fileInfo.permissions = modeToPermissions(mode);
+    if (mode == 0) {
+        fileInfo.isDir = false;
+        fileInfo.isFile = true;
+        fileInfo.isSymLink = false;
+        fileInfo.permissions = QFile::ReadOwner;
+    } else {
+        fileInfo.isDir = S_ISDIR(mode);
+        fileInfo.isFile = S_ISREG(mode);
+        fileInfo.isSymLink = S_ISLNK(mode);
+        fileInfo.permissions = modeToPermissions(mode);
+    }
     fileInfo.crc32 = readUInt(header.h.crc_32);
     fileInfo.size = readUInt(header.h.uncompressed_size);
     fileInfo.lastModified = readMSDosDate(header.h.last_mod_file);
@@ -963,6 +970,7 @@ bool MarbleZipReader::extractAll(const QString &destinationDir) const
     foreach (FileInfo fi, allFiles) {
         const QString absPath = destinationDir + QDir::separator() + fi.filePath;
         if (fi.isFile) {
+            QDir::root().mkpath(QFileInfo(absPath).dir().absolutePath());
             QFile f(absPath);
             if (!f.open(QIODevice::WriteOnly))
                 return false;
