@@ -9,20 +9,20 @@
 
 #include "KmzHandler.h"
 #include "MarbleDebug.h"
+#include <MarbleZipReader.h>
 
 #include <QTemporaryFile>
 #include <QDir>
-
-#include <quazip.h>
-#include <quazipfile.h>
 
 namespace Marble {
 
 bool KmzHandler::open( const QString &kmz )
 {
-    QuaZip zip( kmz );
-    if ( !zip.open( QuaZip::mdUnzip ) ) {
-        mDebug() << "Failed to extract " << kmz;
+    qDebug() << "Trying to open" << kmz;
+
+    MarbleZipReader zip( kmz );
+    if ( zip.status() != MarbleZipReader::NoError ) {
+        qDebug() << "Failed to extract " << kmz << ": error code " << zip.status();
         return false;
     }
 
@@ -30,34 +30,37 @@ bool KmzHandler::open( const QString &kmz )
     outputDir.setAutoRemove( false );
     outputDir.open();
     if ( !QFile::remove( outputDir.fileName() ) || !QDir("/").mkdir( outputDir.fileName() ) ) {
-        mDebug() << "Failed to create temporary storage for extracting " << kmz;
+        qDebug() << "Failed to create temporary storage for extracting " << kmz;
         return false;
     }
 
-    m_kmzPath = outputDir.fileName();
-    QuaZipFile zipFile( &zip );
-    for ( bool moreFiles=zip.goToFirstFile(); moreFiles; moreFiles=zip.goToNextFile() ) {
-        QFileInfo output = QFileInfo( outputDir.fileName() + '/' + zip.getCurrentFileName() );
-        if ( !output.dir().exists() ) {
-            QDir::root().mkpath( output.dir().absolutePath() );
-        }
-
-        QFile outputFile( output.absoluteFilePath() );
-        outputFile.open( QIODevice::WriteOnly );
-        zipFile.open( QIODevice::ReadOnly );
-        outputFile.write( zipFile.readAll() );
-        outputFile.close();
-        zipFile.close();
-        m_kmzFiles << output.absoluteFilePath();
-
-        if ( output.suffix().toLower() == "kml" ) {
-            if ( !m_kmlFile.isEmpty() ) {
-                mDebug() << "File" << kmz << "contains more than one .kml files";
-            }
-            m_kmlFile = output.absoluteFilePath();
-        }
+    m_kmzPath = outputDir.fileName() + '/';
+    qDebug() << "Extracting all to " << m_kmzPath << ", and all are " << zip.fileInfoList().size() << " items";
+    if (!zip.extractAll( m_kmzPath ))
+    {
+        qDebug() << "Failed to extract kmz file contents to " << m_kmzPath;
+        return false;
     }
-    zip.close();
+    else
+    {
+        qDebug() << "Everythign extracted: " << QDir(m_kmzPath).entryList();
+    }
+
+    foreach(const MarbleZipReader::FileInfo &fileInfo, zip.fileInfoList()) {
+        //if (!fileInfo.isFile) {
+        //    continue;
+        //}
+        QString file = outputDir.fileName() + '/' + fileInfo.filePath;
+        qDebug() << "Appending " << file;
+        m_kmzFiles << fileInfo.filePath;
+        if (file.endsWith(".kml", Qt::CaseInsensitive)) {
+            if ( !m_kmlFile.isEmpty() ) {
+                qDebug() << "File" << kmz << "contains more than one .kml files";
+            }
+            m_kmlFile = file;
+        }
+        qDebug() << "kml file is now " << m_kmlFile;
+    }
     return true;
 }
 

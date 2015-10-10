@@ -13,10 +13,7 @@
 #include "KmlParser.h"
 #include "KmlDocument.h"
 #include "MarbleDebug.h"
-
-#ifdef MARBLE_HAVE_QUAZIP
 #include "KmzHandler.h"
-#endif
 
 #include <QFile>
 #include <QFileInfo>
@@ -39,12 +36,12 @@ GeoDataDocument *KmlRunner::parseFile(const QString &fileName, DocumentRole role
     QString kmzPath;
     QStringList kmzFiles;
 
-#ifdef MARBLE_HAVE_QUAZIP
     QFileInfo const kmzFile( fileName );
     if ( kmzFile.exists() && kmzFile.suffix().toLower() == "kmz" ) {
         KmzHandler kmzHandler;
         if ( kmzHandler.open( fileName ) ) {
             kmlFileName = kmzHandler.kmlFile();
+            qDebug() << "Got kml file " << kmlFileName;
             kmzPath = kmzHandler.kmzPath();
             kmzFiles = kmzHandler.kmzFiles();
         } else {
@@ -53,11 +50,10 @@ GeoDataDocument *KmlRunner::parseFile(const QString &fileName, DocumentRole role
             return nullptr;
         }
     }
-#endif
 
-    QFile  file( kmlFileName );
+    QFile file( kmlFileName );
     if ( !file.exists() ) {
-        error = QString("File %1 does not exist").arg(fileName);
+        error = QString("File %1 does not exist").arg(kmlFileName);
         mDebug() << error;
         return nullptr;
     }

@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2011 Thibaut Gridel <tgridel@free.fr>
+// Copyright 2015 Dennis Nienhüser <nienhueser@kde.org>
 
 #include "KmlPlugin.h"
 #include "KmlRunner.h"
@@ -30,7 +31,7 @@ QString KmlPlugin::nameId() const
 
 QString KmlPlugin::version() const
 {
-    return "1.1";
+    return "1.2";
 }
 
 QString KmlPlugin::description() const
@@ -40,7 +41,7 @@ QString KmlPlugin::description() const
 
 QString KmlPlugin::copyrightYears() const
 {
-    return "2011, 2013";
+    return "2011, 2013, 2015";
 }
 
 QList<PluginAuthor> KmlPlugin::pluginAuthors() const
@@ -57,11 +58,7 @@ QString KmlPlugin::fileFormatDescription() const
 
 QStringList KmlPlugin::fileExtensions() const
 {
-#ifdef MARBLE_HAVE_QUAZIP
     return QStringList() << "kml" << "kmz";
-#else
-    return QStringList() << "kml";
-#endif
 }
 
 ParsingRunner* KmlPlugin::newRunner() const
