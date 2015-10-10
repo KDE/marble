@@ -1,3 +1,15 @@
+//
+// This file is part of the Marble Virtual Globe.
+//
+// This program is free software licensed under the GNU LGPL. You can
+// find a copy of this license in LICENSE.txt in the top directory of
+// the source code.
+//
+// This file is based on qzipreader_p.h from Qt with the original license
+// below, taken from
+// http://code.qt.io/cgit/qt/qt.git/plain/src/gui/text/qzipreader_p.h
+
+
 /****************************************************************************
 **
 ** Copyright (C) 2015 The Qt Company Ltd.
@@ -38,8 +50,10 @@
 ** $QT_END_LICENSE$
 **
 ****************************************************************************/
-#ifndef QZIPWRITER_H
-#define QZIPWRITER_H
+
+#ifndef QZIPREADER_H
+#define QZIPREADER_H
+
 #ifndef QT_NO_TEXTODFWRITER
 
 //
@@ -47,36 +61,63 @@
 //  -------------
 //
 // This file is not part of the Qt API.  It exists for the convenience
-// of the QZipWriter class.  This header file may change from
+// of the QZipReader class.  This header file may change from
 // version to version without notice, or even be removed.
 //
 // We mean it.
 //
 
-#include <QtCore/qstring.h>
+#include <QtCore/qdatetime.h>
 #include <QtCore/qfile.h>
+#include <QtCore/qstring.h>
 
-QT_BEGIN_NAMESPACE
+#include <marble_export.h>
 
-class QZipWriterPrivate;
+namespace Marble {
 
+class MarbleZipReaderPrivate;
 
-class Q_GUI_EXPORT QZipWriter
+class MARBLE_EXPORT MarbleZipReader
 {
 public:
-    QZipWriter(const QString &fileName, QIODevice::OpenMode mode = (QIODevice::WriteOnly | QIODevice::Truncate) );
+    MarbleZipReader(const QString &fileName, QIODevice::OpenMode mode = QIODevice::ReadOnly );
 
-    explicit QZipWriter(QIODevice *device);
-    ~QZipWriter();
+    explicit MarbleZipReader(QIODevice *device);
+    ~MarbleZipReader();
 
     QIODevice* device() const;
 
-    bool isWritable() const;
+    bool isReadable() const;
     bool exists() const;
+
+    struct Q_GUI_EXPORT FileInfo
+    {
+        FileInfo();
+        FileInfo(const FileInfo &other);
+        ~FileInfo();
+        FileInfo &operator=(const FileInfo &other);
+        bool isValid() const;
+        QString filePath;
+        uint isDir : 1;
+        uint isFile : 1;
+        uint isSymLink : 1;
+        QFile::Permissions permissions;
+        uint crc32;
+        qint64 size;
+        QDateTime lastModified;
+        void *d;
+    };
+
+    QList<FileInfo> fileInfoList() const;
+    int count() const;
+
+    FileInfo entryInfoAt(int index) const;
+    QByteArray fileData(const QString &fileName) const;
+    bool extractAll(const QString &destinationDir) const;
 
     enum Status {
         NoError,
-        FileWriteError,
+        FileReadError,
         FileOpenError,
         FilePermissionsError,
         FileError
@@ -84,33 +125,14 @@ public:
 
     Status status() const;
 
-    enum CompressionPolicy {
-        AlwaysCompress,
-        NeverCompress,
-        AutoCompress
-    };
-
-    void setCompressionPolicy(CompressionPolicy policy);
-    CompressionPolicy compressionPolicy() const;
-
-    void setCreationPermissions(QFile::Permissions permissions);
-    QFile::Permissions creationPermissions() const;
-
-    void addFile(const QString &fileName, const QByteArray &data);
-
-    void addFile(const QString &fileName, QIODevice *device);
-
-    void addDirectory(const QString &dirName);
-
-    void addSymLink(const QString &fileName, const QString &destination);
-
     void close();
+
 private:
-    QZipWriterPrivate *d;
-    Q_DISABLE_COPY(QZipWriter)
+    MarbleZipReaderPrivate *d;
+    Q_DISABLE_COPY(MarbleZipReader)
 };
 
-QT_END_NAMESPACE
+}
 
 #endif // QT_NO_TEXTODFWRITER
-#endif // QZIPWRITER_H
+#endif // QZIPREADER_H
