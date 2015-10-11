@@ -87,6 +87,9 @@ void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes) const
             lineString->append(node.coordinates());
         }
 
+        GeoDataLineStyle lineStyle = placemark->style()->lineStyle();
+        lineStyle.setCosmeticOutline(true);
+
         if (placemark->visualCategory() > GeoDataFeature::HighwayService &&
                 placemark->visualCategory() <= GeoDataFeature::HighwayMotorway) {
             bool const isOneWay = m_osmData.containsTag("oneway", "yes") || m_osmData.containsTag("oneway", "-1");
@@ -95,13 +98,13 @@ void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes) const
             double const margins = placemark->visualCategory() == GeoDataFeature::HighwayMotorway ? 2.0 : (isOneWay ? 1.0 : 0.0);
             double const physicalWidth = margins + lanes * laneWidth;
 
-            GeoDataLineStyle lineStyle = placemark->style()->lineStyle();
             lineStyle.setPhysicalWidth(physicalWidth);
-            lineStyle.setCosmeticOutline(true);
-            GeoDataStyle* style = new GeoDataStyle(*placemark->style());
-            style->setLineStyle(lineStyle);
-            placemark->setStyle(style);
         }
+
+        GeoDataStyle* style = new GeoDataStyle(*placemark->style());
+        style->setLineStyle(lineStyle);
+        placemark->setStyle(style);
+
     }
 
     OsmObjectManager::registerId(m_osmData.id());
