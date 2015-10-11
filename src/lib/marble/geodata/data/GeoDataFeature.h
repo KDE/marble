@@ -210,6 +210,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         MoneyBank,
 
         AmenityArchaeologicalSite,
+        AmenityEmbassy,
         AmenityEmergencyPhone,
         AmenityWaterPark,
         AmenityCommunityCentre,
@@ -231,6 +232,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         AmenityGraveyard,
 
         NaturalPeak,
+        NaturalTree,
 
         // OpenStreetMap category Shopping
         ShopBeverages,

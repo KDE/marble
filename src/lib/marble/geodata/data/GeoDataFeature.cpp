@@ -398,6 +398,7 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
     s_defaultStyle[GeoDataFeature::MoneyBank]                = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "amenity/bank.16", amenityColor );
 
     s_defaultStyle[GeoDataFeature::AmenityArchaeologicalSite] = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "amenity/archaeological_site.16", amenityColor );
+    s_defaultStyle[GeoDataFeature::AmenityEmbassy]           = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "transportation/embassy.16", transportationColor );
     s_defaultStyle[GeoDataFeature::AmenityEmergencyPhone]    = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "amenity/emergency_phone.16", amenityColor );
     s_defaultStyle[GeoDataFeature::AmenityWaterPark]         = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "amenity/water_park.16", amenityColor );
     s_defaultStyle[GeoDataFeature::AmenityCommunityCentre]   = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "amenity/community_centre-14", amenityColor );
@@ -419,6 +420,7 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
     s_defaultStyle[GeoDataFeature::AmenityDrinkingWater]     = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "amenity/drinking_water.16", amenityColor );
 
     s_defaultStyle[GeoDataFeature::NaturalPeak]              = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "individual/peak", amenityColor );
+    s_defaultStyle[GeoDataFeature::NaturalTree]              = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "individual/tree-29", amenityColor ); // tree-16 provides the official icon
 
     s_defaultStyle[GeoDataFeature::ShopBeverages]            = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/beverages-14", shopColor );
     s_defaultStyle[GeoDataFeature::ShopHifi]                 = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/hifi-14", shopColor );
@@ -458,6 +460,7 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
     s_defaultStyle[GeoDataFeature::ShopBook]                 = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/shop_books.16", shopColor );
     s_defaultStyle[GeoDataFeature::ShopGift]                 = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/shop_gift.16", shopColor );
     s_defaultStyle[GeoDataFeature::ShopStationery]           = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/stationery-14", shopColor );
+    s_defaultStyle[GeoDataFeature::ShopLaundry]              = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/laundry-14", shopColor );
     s_defaultStyle[GeoDataFeature::ShopPet]                  = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/shop_pet.16", shopColor );
     s_defaultStyle[GeoDataFeature::ShopToys]                 = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/toys-14", shopColor );
     s_defaultStyle[GeoDataFeature::ShopTravelAgency]         = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/travel_agency-14", shopColor );

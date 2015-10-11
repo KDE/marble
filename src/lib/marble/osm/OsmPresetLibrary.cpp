@@ -60,9 +60,9 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "amenity", "bank" ) ]               = GeoDataFeature::MoneyBank;
 
     s_visualCategories[ OsmTag( "historic", "archaeological_site" ) ] = GeoDataFeature::AmenityArchaeologicalSite;
+    s_visualCategories[ OsmTag( "amenity", "embassy" ) ]            = GeoDataFeature::AmenityEmbassy;
     s_visualCategories[ OsmTag( "emergency", "phone" ) ]            = GeoDataFeature::AmenityEmergencyPhone;
     s_visualCategories[ OsmTag( "leisure", "water_park" ) ]         = GeoDataFeature::AmenityWaterPark;
-
     s_visualCategories[ OsmTag( "amenity", "community_centre" ) ]   = GeoDataFeature::AmenityCommunityCentre;
     s_visualCategories[ OsmTag( "amenity", "nightclub" ) ]          = GeoDataFeature::AmenityNightClub;
     s_visualCategories[ OsmTag( "amenity", "bench" ) ]              = GeoDataFeature::AmenityBench;
@@ -93,6 +93,7 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "amenity", "place_of_worship" ) ]   = GeoDataFeature::ReligionPlaceOfWorship;
 
     s_visualCategories[ OsmTag( "natural", "peak" ) ]               = GeoDataFeature::NaturalPeak;
+    s_visualCategories[ OsmTag( "natural", "tree" ) ]               = GeoDataFeature::NaturalTree;
 
     //FIXME: alcohol != beverages
     s_visualCategories[ OsmTag( "shop", "beverages" ) ]             = GeoDataFeature::ShopBeverages;
@@ -278,7 +279,7 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "public_transport", "platform" ) ]  = GeoDataFeature::TransportPlatform;
     s_visualCategories[ OsmTag( "amenity", "bicycle_rental" ) ]     = GeoDataFeature::TransportRentalBicycle;
     s_visualCategories[ OsmTag( "amenity", "car_rental" ) ]         = GeoDataFeature::TransportRentalCar;
-    s_visualCategories[ OsmTag( "transport", "taxi_rank" ) ]        = GeoDataFeature::TransportTaxiRank;
+    s_visualCategories[ OsmTag( "amenity", "taxi" ) ]        = GeoDataFeature::TransportTaxiRank;
     s_visualCategories[ OsmTag( "transport", "train_station" ) ]    = GeoDataFeature::TransportTrainStation;
     s_visualCategories[ OsmTag( "transport", "tram_stop" ) ]        = GeoDataFeature::TransportTramStop;
     s_visualCategories[ OsmTag( "transport", "bus_stop" ) ]         = GeoDataFeature::TransportBusStop;
