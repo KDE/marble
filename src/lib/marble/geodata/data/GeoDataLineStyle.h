@@ -79,6 +79,16 @@ class GEODATA_EXPORT GeoDataLineStyle : public GeoDataColorStyle
      * @return the current width
      */
     float physicalWidth() const;
+
+    /**
+     * @brief Set whether the line has a cosmetic 1 pixel outline
+     */
+    void setCosmeticOutline( bool enabled );
+    /**
+     * @brief Return whether the line has a cosmetic 1 pixel outline
+     */
+    bool cosmeticOutline() const;
+
     
     /**
      * @brief Set pen cap style

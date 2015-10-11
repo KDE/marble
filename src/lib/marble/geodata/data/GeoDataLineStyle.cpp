@@ -22,7 +22,8 @@ class GeoDataLineStylePrivate
 {
   public:
     GeoDataLineStylePrivate() 
-        : m_width( 1.0 ), m_physicalWidth( 0.0 ), m_capStyle( Qt::FlatCap ),
+        : m_width( 1.0 ), m_physicalWidth( 0.0 ),
+          m_cosmeticOutline( false ), m_capStyle( Qt::FlatCap ),
           m_penStyle( Qt::SolidLine ), m_background( false )
     {
     }
@@ -36,6 +37,7 @@ class GeoDataLineStylePrivate
     float  m_width;
     /// The current real width of the line
     float  m_physicalWidth;
+    bool  m_cosmeticOutline;
     Qt::PenCapStyle m_capStyle;
     Qt::PenStyle m_penStyle;
     bool m_background;
@@ -112,6 +114,16 @@ float GeoDataLineStyle::physicalWidth() const
 void GeoDataLineStyle::setPhysicalWidth( const float& realWidth )
 {
     d->m_physicalWidth = realWidth;
+}
+
+bool GeoDataLineStyle::cosmeticOutline() const
+{
+    return d->m_cosmeticOutline;
+}
+
+void GeoDataLineStyle::setCosmeticOutline(bool enabled)
+{
+    d->m_cosmeticOutline = enabled;
 }
 
 Qt::PenCapStyle GeoDataLineStyle::capStyle() const

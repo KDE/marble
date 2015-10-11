@@ -32,7 +32,7 @@ const float GeoLineStringGraphicsItem::s_outlineZValue = -0.001;
 void GeoLineStringGraphicsItem::createDecorations()
 {
     if ( style() != nullptr ) {
-        if ( style()->polyStyle().outline() ) {
+        if ( style()->lineStyle().cosmeticOutline() ) {
             GeoLineStringGraphicsItem* outline = new GeoLineStringGraphicsItem(this->feature(), this->m_lineString);
             outline->setZValue(this->zValue() + s_outlineZValue);
 
@@ -119,7 +119,7 @@ void GeoLineStringGraphicsItem::paint( GeoPainter* painter, const ViewportParams
 
     if ( ! ( isDecoration() && currentPen.widthF() < 2.5f ) )
     {
-        if( style()->polyStyle().outline() &&
+        if( style()->lineStyle().cosmeticOutline() &&
             style()->lineStyle().penStyle() == Qt::SolidLine ) {
             if ( isDecoration() ) {
                 painter->drawPolyline( *m_lineString, "", NoLabel );

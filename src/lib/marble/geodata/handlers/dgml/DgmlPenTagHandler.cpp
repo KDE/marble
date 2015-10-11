@@ -43,7 +43,8 @@ GeoNode* DgmlPenTagHandler::parse(GeoParser& parser) const
 
     QString color = parser.attribute(dgmlAttr_color).trimmed();
     QString style = parser.attribute(dgmlAttr_style).toLower().trimmed();
-    qreal  width = parser.attribute(dgmlAttr_width).toDouble();
+    QString widthString = parser.attribute(dgmlAttr_width);
+    qreal  width = widthString.isEmpty() ? 1.0 : widthString.toDouble();
 
     QPen pen;
 
@@ -52,7 +53,7 @@ GeoNode* DgmlPenTagHandler::parse(GeoParser& parser) const
     }
 
     if ( !style.isEmpty() ) {
-        if ( style == "nopen" ) pen.setStyle( Qt::NoPen ); 
+        if ( style == "nopen" ) pen.setStyle( Qt::NoPen );
         if ( style == "solidline" ) pen.setStyle( Qt::SolidLine ); 
         if ( style == "dashline" ) pen.setStyle( Qt::DashLine ); 
         if ( style == "dotline" ) pen.setStyle( Qt::DotLine ); 

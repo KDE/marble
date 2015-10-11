@@ -98,6 +98,7 @@ void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes) const
 
             GeoDataLineStyle lineStyle = placemark->style()->lineStyle();
             lineStyle.setPhysicalWidth(physicalWidth);
+            lineStyle.setCosmeticOutline(true);
             GeoDataStyle* style = new GeoDataStyle(*placemark->style());
             style->setLineStyle(lineStyle);
             placemark->setStyle(style);
