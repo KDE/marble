@@ -105,6 +105,8 @@ private:
     // Previous coordinates
     qreal  m_prevLat;
     qreal  m_prevLon;
+    qreal  m_prevPixelX;
+    qreal  m_prevPixelY;
 };
 
 inline int ScanlineTextureMapperContext::globalWidth() const
