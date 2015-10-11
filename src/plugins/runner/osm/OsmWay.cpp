@@ -27,7 +27,6 @@ void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes) const
     placemark->setOsmData(m_osmData);
     placemark->setName(m_osmData.tagValue("name"));
     placemark->setVisualCategory(OsmPresetLibrary::determineVisualCategory(m_osmData));
-    placemark->setStyle( 0 );
 
     if (isArea()) {
         GeoDataLinearRing* linearRing = new GeoDataLinearRing;
