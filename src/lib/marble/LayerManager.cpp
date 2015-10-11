@@ -155,7 +155,7 @@ void LayerManager::renderLayers( GeoPainter *painter, ViewportParams *viewport )
         }
 
         // sort them according to their zValue()s
-        qSort( layers.begin(), layers.end(), [] ( const LayerInterface * const one, const LayerInterface * const two ) {
+        qSort( layers.begin(), layers.end(), [] ( const LayerInterface * const one, const LayerInterface * const two ) -> bool {
             Q_ASSERT( one && two );
             return one->zValue() < two->zValue();
         } );
