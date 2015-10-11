@@ -24,6 +24,7 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}/cloudsync
  ${CMAKE_SOURCE_DIR}/src/lib/astro
  ${QT_INCLUDE_DIR}
+ ${ZLIB_INCLUDE_DIRS}
 )
 
 if( QT4BUILD )
@@ -372,6 +373,9 @@ ADD_LIBRARY(${MARBLEWIDGET} SHARED ${marblewidget_SRCS} ${SOURCES_UI_HDRS})
 
 # link with libastro
 TARGET_LINK_LIBRARIES (${MARBLEWIDGET} astro)
+
+# link against zlib
+TARGET_LINK_LIBRARIES (${MARBLEWIDGET} ${ZLIB_LIBRARIES})
 
 # link with release version of Qt libs
 if( QT4BUILD )
