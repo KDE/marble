@@ -87,6 +87,7 @@ void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes) const
             lineString->append(node.coordinates());
         }
 
+        GeoDataPolyStyle polyStyle = placemark->style()->polyStyle();
         GeoDataLineStyle lineStyle = placemark->style()->lineStyle();
         lineStyle.setCosmeticOutline(true);
 
@@ -99,9 +100,19 @@ void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes) const
             double const physicalWidth = margins + lanes * laneWidth;
 
             lineStyle.setPhysicalWidth(physicalWidth);
+
+            if( m_osmData.containsTag("tunnel", "yes") ) {
+                QColor polyColor = polyStyle.color();
+                qreal hue, sat, val;
+                polyColor.getHsvF(&hue, &sat, &val);
+                polyColor.setHsvF(hue, 0.25 * sat, 0.95 * val);
+                polyStyle.setColor(polyColor);
+                lineStyle.setColor(lineStyle.color().lighter(115));
+            }
         }
 
         GeoDataStyle* style = new GeoDataStyle(*placemark->style());
+        style->setPolyStyle(polyStyle);
         style->setLineStyle(lineStyle);
         placemark->setStyle(style);
 
