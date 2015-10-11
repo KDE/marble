@@ -12,6 +12,7 @@
 
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
+#include "MarbleZipReader.h"
 
 #include <QUrl>
 #include <QVector>
@@ -137,6 +138,10 @@ public:
     static NewstuffItem importNode( const QDomNode &node );
 
     bool isTransitioning( int index ) const;
+
+    void unzip();
+
+    void updateRegistry(const QStringList &files);
 
     template<class T>
     static void readValue( const QDomNode &node, const QString &key, T* target );
@@ -339,7 +344,10 @@ void NewstuffModelPrivate::installMap()
         m_unpackProcess->close();
         delete m_unpackProcess;
         m_unpackProcess = 0;
-    } else if ( m_currentFile->fileName().endsWith( QLatin1String( "tar.gz" ) ) && canExecute( "tar" ) ) {
+    } else if ( m_currentFile->fileName().endsWith( QLatin1String( "zip" ) ) ) {
+        unzip();
+    }
+    else if ( m_currentFile->fileName().endsWith( QLatin1String( "tar.gz" ) ) && canExecute( "tar" ) ) {
         m_unpackProcess = new QProcess;
         QObject::connect( m_unpackProcess, SIGNAL(finished(int)),
                           m_parent, SLOT(contentsListed(int)) );
@@ -353,6 +361,18 @@ void NewstuffModelPrivate::installMap()
             mDebug() << "Cannot extract archive: tar executable not found in PATH.";
         }
     }
+}
+
+void NewstuffModelPrivate::unzip()
+{
+    MarbleZipReader zipReader(m_currentFile->fileName());
+    QStringList files;
+    foreach(const MarbleZipReader::FileInfo &fileInfo, zipReader.fileInfoList()) {
+        files << fileInfo.filePath;
+    }
+    updateRegistry(files);
+    zipReader.extractAll(m_targetDirectory);
+    m_parent->mapInstalled(0);
 }
 
 void NewstuffModelPrivate::updateModel()
@@ -818,52 +838,9 @@ void NewstuffModel::mapUninstalled()
 
 void NewstuffModel::contentsListed( int exitStatus )
 {
-    emit installationProgressed( d->m_currentAction.first, 0.92 );
     if ( exitStatus == 0 ) {
-        if ( !d->m_registryFile.isEmpty() ) {
-            NewstuffItem &item = d->m_items[d->m_currentAction.first];
-            QDomNode node = item.m_registryNode;
-            NewstuffModelPrivate::NodeAction action = node.isNull() ? NewstuffModelPrivate::Append : NewstuffModelPrivate::Replace;
-            if ( node.isNull() ) {
-                node = d->m_root.appendChild( d->m_registryDocument.createElement( "stuff" ) );
-            }
-
-            node.toElement().setAttribute( "category", d->m_items[d->m_currentAction.first].m_category );
-            d->changeNode( node, d->m_registryDocument, "name", item.m_name, action );
-            d->changeNode( node, d->m_registryDocument, "providerid", d->m_provider, action );
-            d->changeNode( node, d->m_registryDocument, "author", item.m_author, action );
-            d->changeNode( node, d->m_registryDocument, "homepage", QString(), action );
-            d->changeNode( node, d->m_registryDocument, "licence", item.m_license, action );
-            d->changeNode( node, d->m_registryDocument, "version", item.m_version, action );
-            QString const itemId = d->m_idTag == PayloadTag ? item.m_payloadUrl.toString() : item.m_name;
-            d->changeNode( node, d->m_registryDocument, "id", itemId, action );
-            d->changeNode( node, d->m_registryDocument, "releasedate", item.m_releaseDate, action );
-            d->changeNode( node, d->m_registryDocument, "summary", item.m_summary, action );
-            d->changeNode( node, d->m_registryDocument, "changelog", QString(), action );
-            d->changeNode( node, d->m_registryDocument, "preview", item.m_previewUrl.toString(), action );
-            d->changeNode( node, d->m_registryDocument, "previewBig", item.m_previewUrl.toString(), action );
-            d->changeNode( node, d->m_registryDocument, "payload", item.m_payloadUrl.toString(), action );
-            d->changeNode( node, d->m_registryDocument, "status", "installed", action );
-            d->m_items[d->m_currentAction.first].m_registryNode = node;
-
-            bool hasChildren = true;
-            while ( hasChildren ) {
-                /** @todo FIXME: fileList does not contain all elements opposed to what docs say */
-                QDomNodeList fileList = node.toElement().elementsByTagName( "installedfile" );
-                hasChildren = !fileList.isEmpty();
-                for ( int i=0; i<fileList.count(); ++i ) {
-                    node.removeChild( fileList.at( i ) );
-                }
-            }
-
-            QStringList const files = QString( d->m_unpackProcess->readAllStandardOutput() ).split( '\n', QString::SkipEmptyParts );
-            foreach( const QString &file, files ) {
-                QDomNode fileNode = node.appendChild( d->m_registryDocument.createElement( "installedfile" ) );
-                fileNode.appendChild( d->m_registryDocument.createTextNode( d->m_targetDirectory + '/' + file ) );
-            }
-
-            d->saveRegistry();
-        }
+        QStringList const files = QString( d->m_unpackProcess->readAllStandardOutput() ).split( '\n', QString::SkipEmptyParts );
+        d->updateRegistry(files);
 
         QObject::disconnect( d->m_unpackProcess, SIGNAL(finished(int)),
                              this, SLOT(contentsListed(int)) );
@@ -880,6 +857,54 @@ void NewstuffModel::contentsListed( int exitStatus )
             d->m_currentAction = NewstuffModelPrivate::Action( -1, NewstuffModelPrivate::Install );
         }
         d->processQueue();
+    }
+}
+
+void NewstuffModelPrivate::updateRegistry(const QStringList &files)
+{
+    emit m_parent->installationProgressed( m_currentAction.first, 0.92 );
+    if ( !m_registryFile.isEmpty() ) {
+        NewstuffItem &item = m_items[m_currentAction.first];
+        QDomNode node = item.m_registryNode;
+        NewstuffModelPrivate::NodeAction action = node.isNull() ? NewstuffModelPrivate::Append : NewstuffModelPrivate::Replace;
+        if ( node.isNull() ) {
+            node = m_root.appendChild( m_registryDocument.createElement( "stuff" ) );
+        }
+
+        node.toElement().setAttribute( "category", m_items[m_currentAction.first].m_category );
+        changeNode( node, m_registryDocument, "name", item.m_name, action );
+        changeNode( node, m_registryDocument, "providerid", m_provider, action );
+        changeNode( node, m_registryDocument, "author", item.m_author, action );
+        changeNode( node, m_registryDocument, "homepage", QString(), action );
+        changeNode( node, m_registryDocument, "licence", item.m_license, action );
+        changeNode( node, m_registryDocument, "version", item.m_version, action );
+        QString const itemId = m_idTag == NewstuffModel::PayloadTag ? item.m_payloadUrl.toString() : item.m_name;
+        changeNode( node, m_registryDocument, "id", itemId, action );
+        changeNode( node, m_registryDocument, "releasedate", item.m_releaseDate, action );
+        changeNode( node, m_registryDocument, "summary", item.m_summary, action );
+        changeNode( node, m_registryDocument, "changelog", QString(), action );
+        changeNode( node, m_registryDocument, "preview", item.m_previewUrl.toString(), action );
+        changeNode( node, m_registryDocument, "previewBig", item.m_previewUrl.toString(), action );
+        changeNode( node, m_registryDocument, "payload", item.m_payloadUrl.toString(), action );
+        changeNode( node, m_registryDocument, "status", "installed", action );
+        m_items[m_currentAction.first].m_registryNode = node;
+
+        bool hasChildren = true;
+        while ( hasChildren ) {
+            /** @todo FIXME: fileList does not contain all elements opposed to what docs say */
+            QDomNodeList fileList = node.toElement().elementsByTagName( "installedfile" );
+            hasChildren = !fileList.isEmpty();
+            for ( int i=0; i<fileList.count(); ++i ) {
+                node.removeChild( fileList.at( i ) );
+            }
+        }
+
+        foreach( const QString &file, files ) {
+            QDomNode fileNode = node.appendChild( m_registryDocument.createElement( "installedfile" ) );
+            fileNode.appendChild( m_registryDocument.createTextNode( m_targetDirectory + '/' + file ) );
+        }
+
+        saveRegistry();
     }
 }
 
