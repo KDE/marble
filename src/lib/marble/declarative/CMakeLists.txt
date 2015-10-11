@@ -60,4 +60,9 @@ set_target_properties( marbledeclarative PROPERTIES
     SKIP_BUILD_RPATH TRUE
     BUILD_WITH_INSTALL_RPATH TRUE
 )
-install( TARGETS marbledeclarative LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR} )
+
+if(WIN32)
+  install(TARGETS marbledeclarative RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX})
+else()
+  install(TARGETS marbledeclarative LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
+endif()
