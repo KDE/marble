@@ -11,6 +11,7 @@
 #ifndef MARBLE_OSMOBJECTMANAGER_H
 #define MARBLE_OSMOBJECTMANAGER_H
 
+#include <marble_export.h>
 #include <QtGlobal>
 
 namespace Marble
@@ -24,7 +25,7 @@ class OsmPlacemarkData;
  * do not have them at write time. Objects with no osmData usually consist of
  * new placemarks created in the editor and placemarks loaded from KML files.
  */
-class OsmObjectManager
+class MARBLE_EXPORT OsmObjectManager
 {
 public:
 

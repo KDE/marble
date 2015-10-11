@@ -39,6 +39,11 @@ add_library( marbledeclarative SHARED
     Settings.cpp
 )
 
+# needed for marble_declarative_export.h
+set_target_properties(marbledeclarative PROPERTIES
+  DEFINE_SYMBOL MAKE_MARBLE_DECLARATIVE_LIB
+)
+
 marble_add_project_resources(qmldir)
 
 target_link_libraries( marbledeclarative

@@ -11,6 +11,7 @@
 #ifndef MARBLEQUICKITEM_H
 #define MARBLEQUICKITEM_H
 
+#include "marble_declarative_export.h"
 #include <QSharedPointer>
 #include <QQuickPaintedItem>
 #include "GeoDataPlacemark.h"
@@ -26,7 +27,7 @@ namespace Marble
     class MarbleQuickItemPrivate;
 
     //Class is still being developed
-    class MARBLE_EXPORT MarbleQuickItem : public QQuickPaintedItem
+    class MARBLE_DECLARATIVE_EXPORT MarbleQuickItem : public QQuickPaintedItem
     {
     Q_OBJECT
 

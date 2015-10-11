@@ -11,6 +11,7 @@
 #ifndef MARBLE_DECLARATIVE_PLUGIN_H
 #define MARBLE_DECLARATIVE_PLUGIN_H
 
+#include "marble_declarative_export.h"
 #include "qglobal.h"
 
 #include <QQmlExtensionPlugin>
@@ -19,7 +20,7 @@
   * Registers MarbleWidget, MarbleRunnerManager and MarbleThemeManager
   * as QQml extensions for use in QML.
   */
-class MarbleDeclarativePlugin : public QQmlExtensionPlugin
+class MARBLE_DECLARATIVE_EXPORT MarbleDeclarativePlugin : public QQmlExtensionPlugin
 {
     Q_PLUGIN_METADATA( IID "org.kde.edu.marble.MarbleDeclarativePlugin" )
     Q_OBJECT

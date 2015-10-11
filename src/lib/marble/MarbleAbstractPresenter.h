@@ -20,10 +20,11 @@
 #include "MarbleMap.h"
 #include "MarbleModel.h"
 #include "MarblePhysics.h"
+#include <marble_export.h>
 
 namespace Marble
 {
-    class MarbleAbstractPresenter : public QObject
+    class MARBLE_EXPORT MarbleAbstractPresenter : public QObject
     {
     Q_OBJECT
 
