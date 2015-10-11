@@ -465,6 +465,7 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
     s_defaultStyle[GeoDataFeature::ShopToys]                 = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/toys-14", shopColor );
     s_defaultStyle[GeoDataFeature::ShopTravelAgency]         = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/travel_agency-14", shopColor );
 
+    s_defaultStyle[GeoDataFeature::ManmadeLighthouse]        = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "transportation/lighthouse.16", transportationColor, "#f2efe9", QColor( "#f2efe9" ).darker() );
     s_defaultStyle[GeoDataFeature::ManmadePier]              = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "", transportationColor, "#f2efe9", QColor( "#f2efe9" ).darker() );
     s_defaultStyle[GeoDataFeature::ManmadeWaterTower]        = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "amenity/water_tower.16", amenityColor );
     s_defaultStyle[GeoDataFeature::ManmadeWindMill]          = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "amenity/windmill.16", amenityColor );
@@ -480,8 +481,8 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
     s_defaultStyle[GeoDataFeature::TouristThemePark]         = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, QString(), amenityColor );
     s_defaultStyle[GeoDataFeature::TouristViewPoint]         = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "amenity/viewpoint.16", amenityColor );
     s_defaultStyle[GeoDataFeature::TouristZoo]               = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, QString(), amenityColor, Qt::transparent );
-    s_defaultStyle[GeoDataFeature::TransportAerodrome]       = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "airdrome/aerodrome", airTransportColor );
-    s_defaultStyle[GeoDataFeature::TransportHelipad]         = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "airdrome/helipad", airTransportColor );
+    s_defaultStyle[GeoDataFeature::TransportAerodrome]       = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "airtransport/aerodrome", airTransportColor );
+    s_defaultStyle[GeoDataFeature::TransportHelipad]         = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "airtransport/helipad", airTransportColor );
     s_defaultStyle[GeoDataFeature::TransportAirportTerminal] = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, QString(), airTransportColor );
     s_defaultStyle[GeoDataFeature::TransportBusStation]      = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "transportation/bus_station.16", transportationColor );
     s_defaultStyle[GeoDataFeature::TransportBusStop]         = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "transportation/bus_stop.12", transportationColor );

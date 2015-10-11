@@ -278,6 +278,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         ShopToys,
         ShopTravelAgency,
 
+        ManmadeLighthouse,
         ManmadePier,
         ManmadeWaterTower,
         ManmadeWindMill,

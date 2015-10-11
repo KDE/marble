@@ -139,8 +139,9 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "shop", "toys" ) ]                  = GeoDataFeature::ShopToys;
     s_visualCategories[ OsmTag( "shop", "travel_agency" ) ]         = GeoDataFeature::ShopTravelAgency;
 
+    s_visualCategories[ OsmTag( "man_made", "lighthouse" ) ]        = GeoDataFeature::ManmadeLighthouse;
     s_visualCategories[ OsmTag( "man_made", "pier" ) ]              = GeoDataFeature::ManmadePier;
-    s_visualCategories[ OsmTag( "man_made", "water_park" ) ]        = GeoDataFeature::ManmadeWaterTower;
+    s_visualCategories[ OsmTag( "man_made", "water_tower" ) ]       = GeoDataFeature::ManmadeWaterTower;
     s_visualCategories[ OsmTag( "man_made", "windmill" ) ]          = GeoDataFeature::ManmadeWindMill;
 
     s_visualCategories[ OsmTag( "religion", "" ) ]                  = GeoDataFeature::ReligionPlaceOfWorship;
