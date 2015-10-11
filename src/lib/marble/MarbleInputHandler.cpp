@@ -699,7 +699,8 @@ bool MarbleDefaultInputHandler::handleMouseEvent(QMouseEvent *event)
     // handled, however.
     if (event->type() != QEvent::MouseMove && !selectionRubber()->isVisible())
     {
-        foreach (AbstractFloatItem *floatItem, MarbleInputHandler::d->m_marblePresenter->map()->floatItems())
+		auto const floatItems = MarbleInputHandler::d->m_marblePresenter->map()->floatItems();
+        foreach (AbstractFloatItem *floatItem, floatItems)
         {
             if ( floatItem->enabled() && floatItem->visible()
                  && floatItem->contains( event->pos() ) )
