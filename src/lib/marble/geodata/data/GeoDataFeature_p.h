@@ -141,7 +141,7 @@ class GeoDataFeaturePrivate
     }
     
     static GeoDataStyle* createHighwayStyle( const QString &bitmap, const QColor& color, const QColor& outlineColor,
-                                             const QFont& font = QFont(QStringLiteral("Arial")), const QColor& fontColor = Qt::black,
+                                             const QFont& font = QFont(QLatin1String("Arial")), const QColor& fontColor = Qt::black,
                                              qreal width = 1, qreal realWidth = 0.0,
                                              Qt::PenStyle penStyle = Qt::SolidLine,
                                              Qt::PenCapStyle capStyle = Qt::RoundCap,
@@ -169,7 +169,7 @@ class GeoDataFeaturePrivate
                                       Qt::BrushStyle brushStyle, Qt::PenStyle penStyle,
                                       Qt::PenCapStyle capStyle, bool lineBackground,
                                       const QVector< qreal >& dashPattern = QVector< qreal >(),
-                                      const QFont& font = QFont(QStringLiteral("Arial")), const QColor& fontColor = Qt::black,
+                                      const QFont& font = QFont(QLatin1String("Arial")), const QColor& fontColor = Qt::black,
                                       const QString& texturePath = QString())
     {
         GeoDataStyle *style = new GeoDataStyle;
