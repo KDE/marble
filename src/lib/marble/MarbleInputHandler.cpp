@@ -628,11 +628,13 @@ QPoint MarbleDefaultInputHandler::mouseMovedOutside(QMouseEvent *event)
     int dirY = 0;
     int polarity = MarbleInputHandler::d->m_marblePresenter->viewport()->polarity();
 
-    d->m_leftPressed = false;
+    if (d->m_leftPressed) {
+        d->m_leftPressed = false;
 
-    if (MarbleInputHandler::d->m_inertialEarthRotation)
-    {
-        d->m_kineticSpinning.start();
+        if (MarbleInputHandler::d->m_inertialEarthRotation)
+        {
+            d->m_kineticSpinning.start();
+        }
     }
 
     QRect boundingRect = MarbleInputHandler::d->m_marblePresenter->viewport()->mapRegion().boundingRect();
