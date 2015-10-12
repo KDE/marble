@@ -27,7 +27,7 @@
       <widget class="QComboBox" name="editorComboBox">
        <item>
         <property name="text">
-         <string>Web browser (Potlatch)</string>
+         <string>Web browser (iD)</string>
         </property>
        </item>
        <item>
@@ -100,7 +100,7 @@
          </size>
         </property>
         <property name="text">
-         <string>Potlatch is an OpenStreetMap editor for quick editing tasks and beginners. It requires a web browser with flash support.</string>
+         <string>iD is an OpenStreetMap editor for quick editing tasks and beginners. It requires a web browser.</string>
         </property>
         <property name="wordWrap">
          <bool>true</bool>

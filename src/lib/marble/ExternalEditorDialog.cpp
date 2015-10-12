@@ -102,7 +102,7 @@ void ExternalEditorDialog::updateDefaultEditor( int index )
         break;
     default:
         d->m_defaultEditor = potlatch;
-        description = tr( "Potlatch is a very easy to use OpenStreetMap editor, though lacks the power of Merkaartor and JOSM. It runs on all platforms for which web browsers with Flash support are available. Performance of Potlatch is depending on the quality of the installed Flash version." );
+        description = tr( "iD is a very easy to use OpenStreetMap editor, though lacks the power of Merkaartor and JOSM. It runs on all platforms with a web browser." );
         break;
     }
 
