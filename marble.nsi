@@ -45,7 +45,7 @@
 ; optional stuff
   
 ; license text file
-!define licensefile lgpl2.txt
+!define licensefile LICENSE.txt
  
 ; icons must be Microsoft .ICO files
 ; !define icon "icon.ico"
@@ -85,7 +85,7 @@ InstallDirRegKey HKLM "${regkey}" ""
  
 !ifdef licensefile
 LicenseText "License"
-LicenseData "${srcdir}\data\licenses\${licensefile}"
+LicenseData "${srcdir}\data\${licensefile}"
 !endif
  
 ; pages
@@ -210,7 +210,7 @@ File /a "${qtdir}\plugins\sqldrivers\qsqlite.dll"
 SetOutPath $INSTDIR
   
 !ifdef licensefile
-File /a "${srcdir}\data\licenses\${licensefile}"
+File /a "${srcdir}\data\${licensefile}"
 !endif
  
 !ifdef notefile
