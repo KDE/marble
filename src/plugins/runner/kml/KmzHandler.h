@@ -18,7 +18,7 @@ namespace Marble {
 class KmzHandler
 {
 public:
-    bool open( const QString &file );
+    bool open(const QString &file, QString &error);
 
     QString kmlFile() const;
 

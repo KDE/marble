@@ -39,12 +39,11 @@ GeoDataDocument *KmlRunner::parseFile(const QString &fileName, DocumentRole role
     QFileInfo const kmzFile( fileName );
     if ( kmzFile.exists() && kmzFile.suffix().toLower() == "kmz" ) {
         KmzHandler kmzHandler;
-        if ( kmzHandler.open( fileName ) ) {
+        if ( kmzHandler.open( fileName, error ) ) {
             kmlFileName = kmzHandler.kmlFile();
             kmzPath = kmzHandler.kmzPath();
             kmzFiles = kmzHandler.kmzFiles();
         } else {
-            error = QString("File %1 is not a valid .kmz file").arg(fileName);
             mDebug() << error;
             return nullptr;
         }

@@ -13,29 +13,32 @@
 
 #include <QTemporaryFile>
 #include <QDir>
+#include <QUuid>
 
 namespace Marble {
 
-bool KmzHandler::open( const QString &kmz )
+bool KmzHandler::open(const QString &kmz, QString &error)
 {
     MarbleZipReader zip( kmz );
     if ( zip.status() != MarbleZipReader::NoError ) {
-        mDebug() << "Failed to extract " << kmz << ": error code " << zip.status();
+        error = QString("Failed to extract %1: error code %2").arg(kmz).arg(zip.status());
+		mDebug() << error;
+		return false;
+    }
+
+	QString const uuid = QUuid::createUuid().toString().mid(1, 8);
+	QString const filename = QString("%1/marble-kmz-%2").arg(QDir::tempPath()).arg(uuid);
+	if (!QDir::root().mkpath(filename)) {
+        error = QString("Failed to create temporary storage %1 for extracting %2").arg(filename).arg(kmz);
+        mDebug() << error;
         return false;
     }
 
-    QTemporaryFile outputDir ( QDir::tempPath() + "/marble-kmz-XXXXXX" );
-    outputDir.setAutoRemove( false );
-    outputDir.open();
-    if ( !QFile::remove( outputDir.fileName() ) || !QDir("/").mkdir( outputDir.fileName() ) ) {
-        mDebug() << "Failed to create temporary storage for extracting " << kmz;
-        return false;
-    }
-
-    m_kmzPath = outputDir.fileName() + '/';
+    m_kmzPath = filename + '/';
     if (!zip.extractAll( m_kmzPath ))
     {
-        mDebug() << "Failed to extract kmz file contents to " << m_kmzPath;
+        error = QString("Failed to extract kmz file contents to %1").arg(m_kmzPath);
+        mDebug() << error;
         return false;
     }
 
@@ -43,7 +46,7 @@ bool KmzHandler::open( const QString &kmz )
         //if (!fileInfo.isFile) {
         //    continue;
         //}
-        QString file = outputDir.fileName() + '/' + fileInfo.filePath;
+        QString file = filename + '/' + fileInfo.filePath;
         m_kmzFiles << fileInfo.filePath;
         if (file.endsWith(".kml", Qt::CaseInsensitive)) {
             if ( !m_kmlFile.isEmpty() ) {
