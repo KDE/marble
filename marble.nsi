@@ -142,6 +142,7 @@ Section
  
   WriteRegStr HKCR "${prodname}\Shell\open\command\" "" '"$INSTDIR\${exec} "%1"'
   ${registerExtension} "$INSTDIR\${exec}" ".kml" "Keyhole Markup Language (KML)"
+  ${registerExtension} "$INSTDIR\${exec}" ".kmz" "Keyhole Markup Language (KML)"
   ${registerExtension} "$INSTDIR\${exec}" ".gpx" "GPS Exchange Format (GPX)"
  
 !ifdef icon
@@ -274,6 +275,7 @@ Section "Uninstall"
 DeleteRegKey HKLM "${uninstkey}"
 DeleteRegKey HKLM "${regkey}"
 ${unregisterExtension} ".kml" "Keyhole Markup Language (KML)"
+${unregisterExtension} ".kmz" "Keyhole Markup Language (KML)"
 ${unregisterExtension} ".gpx" "GPS Exchange Format (GPX)"
 
 RMDir /r "${startmenu}"
