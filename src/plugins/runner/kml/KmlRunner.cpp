@@ -41,7 +41,6 @@ GeoDataDocument *KmlRunner::parseFile(const QString &fileName, DocumentRole role
         KmzHandler kmzHandler;
         if ( kmzHandler.open( fileName ) ) {
             kmlFileName = kmzHandler.kmlFile();
-            qDebug() << "Got kml file " << kmlFileName;
             kmzPath = kmzHandler.kmzPath();
             kmzFiles = kmzHandler.kmzFiles();
         } else {
