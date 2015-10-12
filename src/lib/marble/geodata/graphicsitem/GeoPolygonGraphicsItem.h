@@ -13,6 +13,8 @@
 
 #include "GeoGraphicsItem.h"
 #include "marble_export.h"
+#include <QImage>
+#include <QColor>
 
 class QPointF;
 
@@ -43,6 +45,9 @@ private:
     const GeoDataLinearRing *const m_ring;
     static const float s_decorationZValue;
     double m_buildingHeight;
+    QString m_cachedTexturePath;
+    QColor m_cachedTextureColor;
+    QImage m_cachedTexture;
 };
 
 }

@@ -222,14 +222,17 @@ void GeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportParams* v
                     GeoDataCoordinates coords = latLonAltBox().center();
                     qreal x, y;
                     viewport->screenCoordinates(coords, x, y);
-                    QImage image( textureImage.size(), QImage::Format_ARGB32_Premultiplied );
-                    image.fill(style()->polyStyle().paintedColor());
-                    QPainter imagePainter(&image);
-                    imagePainter.drawImage(0, 0, textureImage);
-                    imagePainter.end();
-
+                    if (m_cachedTexturePath != style()->polyStyle().texturePath() || m_cachedTextureColor != style()->polyStyle().paintedColor() ) {
+                        m_cachedTexture = QImage ( textureImage.size(), QImage::Format_ARGB32_Premultiplied );
+                        m_cachedTexture.fill(style()->polyStyle().paintedColor());
+                        QPainter imagePainter(&m_cachedTexture );
+                        imagePainter.drawImage(0, 0, textureImage);
+                        imagePainter.end();
+                        m_cachedTexturePath = style()->polyStyle().texturePath();
+                        m_cachedTextureColor = style()->polyStyle().paintedColor();
+                    }
                     QBrush brush;
-                    brush.setTextureImage(image);
+                    brush.setTextureImage(m_cachedTexture);
                     QTransform transform;
                     brush.setTransform(transform.translate(x,y));
                     painter->setBrush(brush);
