@@ -23,10 +23,17 @@ namespace Marble {
 
 void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes) const
 {
+    bool const shouldRender =
+        !m_osmData.containsTag("boundary", "postal_code") &&
+        !m_osmData.containsTagKey("closed:highway") &&
+        !m_osmData.containsTagKey("abandoned:highway") &&
+        !m_osmData.containsTagKey("disused:highway");
+
     GeoDataPlacemark* placemark = new GeoDataPlacemark;
     placemark->setOsmData(m_osmData);
     placemark->setName(m_osmData.tagValue("name"));
     placemark->setVisualCategory(OsmPresetLibrary::determineVisualCategory(m_osmData));
+    placemark->setVisible(shouldRender);
 
     if (isArea()) {
         GeoDataLinearRing* linearRing = new GeoDataLinearRing;
