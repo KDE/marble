@@ -231,6 +231,9 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         AmenityDrinkingWater,
         AmenityGraveyard,
 
+        // OpenStreetMap category Barrier
+        BarrierWall,
+
         NaturalPeak,
         NaturalTree,
 

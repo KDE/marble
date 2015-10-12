@@ -167,6 +167,7 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "tourism", "viewpoint" ) ]          = GeoDataFeature::TouristViewPoint;
     s_visualCategories[ OsmTag( "tourism", "zoo" ) ]                = GeoDataFeature::TouristZoo;
 
+    s_visualCategories[ OsmTag( "barrier", "wall" ) ]               = GeoDataFeature::BarrierWall;
 
     s_visualCategories[ OsmTag( "historic", "castle" ) ]            = GeoDataFeature::TouristCastle;
     s_visualCategories[ OsmTag( "historic", "fort" ) ]              = GeoDataFeature::TouristCastle;
