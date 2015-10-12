@@ -178,6 +178,7 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "highway", "unknown" ) ]            = GeoDataFeature::HighwayUnknown;
     s_visualCategories[ OsmTag( "highway", "steps" ) ]              = GeoDataFeature::HighwaySteps;
     s_visualCategories[ OsmTag( "highway", "footway" ) ]            = GeoDataFeature::HighwayFootway;
+    s_visualCategories[ OsmTag( "highway", "cycleway" ) ]           = GeoDataFeature::HighwayCycleway;
     s_visualCategories[ OsmTag( "highway", "path" ) ]               = GeoDataFeature::HighwayPath;
     s_visualCategories[ OsmTag( "highway", "track" ) ]              = GeoDataFeature::HighwayTrack;
     s_visualCategories[ OsmTag( "highway", "pedestrian" ) ]         = GeoDataFeature::HighwayPedestrian;
