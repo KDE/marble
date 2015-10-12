@@ -600,7 +600,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     static QColor defaultLabelColor();
     static void setDefaultLabelColor( const QColor& color );
 
-    static GeoDataStyle* presetStyle( GeoDataVisualCategory category );
+    static const GeoDataStyle *presetStyle( GeoDataVisualCategory category );
 
     virtual void detach();
 

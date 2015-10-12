@@ -37,7 +37,7 @@ public:
     /**
      * @brief corespondingIcon returns the icon that is associated with a visual category
      */
-    static GeoDataStyle *presetStyle( const OsmTag &tag );
+    static const GeoDataStyle *presetStyle( const OsmTag &tag );
 
     /**
      * @brief  Convenience categorization of placemarks for Osm key=value pairs

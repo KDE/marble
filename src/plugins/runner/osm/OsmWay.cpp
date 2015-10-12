@@ -65,7 +65,7 @@ void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes) const
 
         QList<GeoDataFeature::GeoDataVisualCategory> categories = OsmPresetLibrary::visualCategories(m_osmData);
         foreach(GeoDataFeature::GeoDataVisualCategory category, categories) {
-            GeoDataStyle* categoryStyle = GeoDataFeature::presetStyle(category);
+            const GeoDataStyle* categoryStyle = GeoDataFeature::presetStyle(category);
             if (!categoryStyle->iconStyle().iconPath().isEmpty()) {
                 GeoDataStyle* style = new GeoDataStyle(*placemark->style());
                 style->setIconStyle(categoryStyle->iconStyle());

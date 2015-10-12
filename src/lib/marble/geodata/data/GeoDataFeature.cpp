@@ -635,7 +635,7 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
     s_defaultStyle[GeoDataFeature::LargeNationCapital]->labelStyle().setFont( tmp );
 }
 
-GeoDataStyle* GeoDataFeature::presetStyle( GeoDataVisualCategory category )
+const GeoDataStyle *GeoDataFeature::presetStyle( GeoDataVisualCategory category )
 {
     return GeoDataFeaturePrivate::s_defaultStyle[ category ];
 }
