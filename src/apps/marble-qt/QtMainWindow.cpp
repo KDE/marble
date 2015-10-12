@@ -1584,7 +1584,14 @@ void MainWindow::printMapScreenShot()
 void MainWindow::updateMapEditButtonVisibility( const QString &mapTheme )
 {
     Q_ASSERT( m_osmEditAction );
-    m_osmEditAction->setVisible( mapTheme == "earth/openstreetmap/openstreetmap.dgml" );
+    QStringList osmThemes = QStringList()
+            << "earth/openstreetmap/openstreetmap.dgml"
+            << "earth/hikebikemap/hikebikemap.dgml"
+            << "earth/opencyclemap/opencyclemap.dgml"
+            << "earth/public-transport/public-transport.dgml"
+            << "earth/openseamap/openseamap.dgml"
+            << "earth/vectorosm/vectorosm.dgml";
+    m_osmEditAction->setVisible(osmThemes.contains(mapTheme));
 }
 
 void MainWindow::showMovieCaptureDialog()
