@@ -13,6 +13,10 @@
 #include "osm/OsmPresetLibrary.h"
 #include "osm/OsmObjectManager.h"
 #include <GeoDataPlacemark.h>
+#include <GeoDataStyle.h>
+#include <GeoDataIconStyle.h>
+#include <MarbleDirs.h>
+#include <QDate>
 
 namespace Marble {
 
@@ -44,6 +48,26 @@ void OsmNode::create(GeoDataDocument *document) const
     placemark->setZoomLevel( 18 );
     placemark->setVisualCategory(category);
     placemark->setStyle( 0 );
+
+    if (category == GeoDataFeature::NaturalTree) {
+        qreal const lat = m_coordinates.latitude(GeoDataCoordinates::Degree);
+        if (qAbs(lat) > 15) {
+            /** @todo Should maybe auto-adjust to MarbleClock at some point */
+            QDate const date = QDate::currentDate();
+            bool const southernHemisphere = lat < 0;
+            QDate const autumnStart = QDate(date.year(), southernHemisphere ? 3 : 9, 15);
+            QDate const autumnEnd = QDate(date.year(), southernHemisphere ? 5 : 11, 15);
+            if (date > autumnStart && date < autumnEnd) {
+                GeoDataIconStyle iconStyle = placemark->style()->iconStyle();
+                iconStyle.setIconPath(MarbleDirs::path("bitmaps/osmcarto/symbols/48/individual/tree-29-autumn.png"));
+
+                GeoDataStyle* style = new GeoDataStyle(*placemark->style());
+                style->setIconStyle(iconStyle);
+                placemark->setStyle(style);
+
+            }
+        }
+    }
 
     OsmObjectManager::registerId(m_osmData.id());
     document->append(placemark);
