@@ -726,6 +726,12 @@ namespace Marble
         return d->map()->propertyValue(property);
     }
 
+    void MarbleQuickItem::setShowRuntimeTrace(bool showRuntimeTrace)
+    {
+        d->map()->setShowRuntimeTrace(showRuntimeTrace);
+        update();
+    }
+
     QObject *MarbleQuickItem::getEventFilter() const
     {   //We would want to install the same event filter for abstract layer QuickItems such as PinchArea
         return &d->m_inputHandler;

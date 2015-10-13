@@ -13,6 +13,7 @@
         <file>WaypointImage.qml</file>
         <file>RoutingManager.qml</file>
         <file>PlacemarkDialog.qml</file>
+        <file>DeveloperDialog.qml</file>
         <file>ProfileSelectorMenu.qml</file>
         <file>FloatingMenuButton.qml</file>
         <file>RouteEditor.qml</file>

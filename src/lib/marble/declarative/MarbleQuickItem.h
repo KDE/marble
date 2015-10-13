@@ -49,6 +49,7 @@ namespace Marble
         Q_PROPERTY(bool showScaleBar READ showScaleBar WRITE setShowScaleBar NOTIFY showScaleBarChanged)
         Q_PROPERTY(bool showBackground READ showBackground WRITE setShowBackground NOTIFY showBackgroundChanged)
         Q_PROPERTY(bool showPositionMarker READ showPositionMarker WRITE setShowPositionMarker NOTIFY showPositionMarkerChanged)
+        Q_PROPERTY(bool showRuntimeTrace WRITE setShowRuntimeTrace)
         Q_PROPERTY(QString positionProvider READ positionProvider WRITE setPositionProvider NOTIFY positionProviderChanged)
         Q_PROPERTY(bool positionAvailable READ positionAvailable NOTIFY positionAvailableChanged)
         Q_PROPERTY(bool positionVisible READ positionVisible NOTIFY positionVisibleChanged)
@@ -116,6 +117,8 @@ namespace Marble
 
         void setPropertyEnabled(const QString &property, bool enabled);
         bool isPropertyEnabled(const QString &property) const;
+
+        void setShowRuntimeTrace(bool showRuntimeTrace);
 
     public:
         void paint(QPainter *painter);

@@ -30,8 +30,10 @@ Item {
     function search(query) {
         routing.clearSearchResultPlacemarks();
         query = query.trim();
-        if(query !== "") {
-            root.busy = true
+        if(query.toLowerCase() === "ok marble") {
+            developerDialog.visible = true;
+        } else if(query !== "") {
+            root.busy = true;
             searchRequested(query);
             field.focus = false;
         }
