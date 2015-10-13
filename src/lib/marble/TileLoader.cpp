@@ -262,9 +262,12 @@ QString TileLoader::tileFileName( GeoSceneTileDataset const * tileData, TileId c
 
 void TileLoader::triggerDownload( GeoSceneTileDataset const *tileData, TileId const &id, DownloadUsage const usage )
 {
-    if (id.zoomLevel() > 0 && id.zoomLevel() != qBound(tileData->minimumTileLevel(), id.zoomLevel(), tileData->maximumTileLevel())) {
-        // Download only level 0 tiles and tiles between minimum and maximum tile level
-        return;
+    if (id.zoomLevel() > 0) {
+        int minValue = tileData->maximumTileLevel() == -1 ? id.zoomLevel() : qMin( id.zoomLevel(), tileData->maximumTileLevel() );
+        if (id.zoomLevel() != qMax(tileData->minimumTileLevel(), minValue) ) {
+            // Download only level 0 tiles and tiles between minimum and maximum tile level
+            return;
+        }
     }
 
     QUrl const sourceUrl = tileData->downloadUrl( id );
