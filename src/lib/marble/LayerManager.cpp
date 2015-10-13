@@ -181,12 +181,13 @@ void LayerManager::renderLayers( GeoPainter *painter, ViewportParams *viewport )
         painter->setFont( QFont( QStringLiteral("Sans Serif"), 10, QFont::Bold ) );
 
         int i=0;
+        int const top = 150;
         int const lineHeight = painter->fontMetrics().height();
         foreach ( const auto &text, traceList ) {
             painter->setPen( Qt::black );
-            painter->drawText( QPoint(10,40+lineHeight*i), text );
+            painter->drawText( QPoint(10,top+1+lineHeight*i), text );
             painter->setPen( Qt::white );
-            painter->drawText( QPoint(9,39+lineHeight*i), text );
+            painter->drawText( QPoint(9,top+lineHeight*i), text );
             ++i;
         }
         painter->restore();
