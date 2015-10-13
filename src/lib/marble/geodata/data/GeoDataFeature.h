@@ -232,6 +232,8 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         AmenityGraveyard,
 
         // OpenStreetMap category Barrier
+        BarrierGate,
+        BarrierLiftGate,
         BarrierWall,
 
         NaturalPeak,

@@ -513,6 +513,8 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
     s_defaultStyle[GeoDataFeature::HighwayTrafficSignals]    = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "individual/traffic_light" );
 
 
+    s_defaultStyle[GeoDataFeature::BarrierGate]              = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "individual/gate" );
+    s_defaultStyle[GeoDataFeature::BarrierLiftGate]              = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "individual/liftgate" );
     s_defaultStyle[GeoDataFeature::BarrierWall]              = GeoDataFeaturePrivate::createWayStyle( "#444444", Qt::transparent, true, false );
 
     s_defaultStyle[GeoDataFeature::HighwaySteps]             = GeoDataFeaturePrivate::createStyle(0.0, 2.0, "#F98072", "#F98072", true, true, Qt::SolidPattern, Qt::CustomDashLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3 );
