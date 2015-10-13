@@ -143,6 +143,12 @@ void GeometryLayerPrivate::initializeDefaultValues()
     //Amenity
     s_defaultZValues[GeoDataFeature::AmenityGraveyard]    = s_defaultZValue - 12;
 
+
+    s_defaultZValues[GeoDataFeature::EducationCollege]    = s_defaultZValue - 12;
+    s_defaultZValues[GeoDataFeature::EducationSchool]     = s_defaultZValue - 12;
+    s_defaultZValues[GeoDataFeature::EducationUniversity] = s_defaultZValue - 12;
+    s_defaultZValues[GeoDataFeature::HealthHospital]      = s_defaultZValue - 12;
+
     //Landuse
 
     for ( int i = GeoDataFeature::LanduseAllotments; i <= GeoDataFeature::LanduseVineyard; i++ )

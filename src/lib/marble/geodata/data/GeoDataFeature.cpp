@@ -367,6 +367,7 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
     QColor const amenityColor("#734a08");
     QColor const healthColor("#da0092");
     QColor const airTransportColor("#8461C4");
+    QColor const educationalAreasAndHospital("#f0f0d8");
 
 
 
@@ -378,9 +379,9 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
     s_defaultStyle[GeoDataFeature::AccomodationYouthHostel]  = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "transportation/hostel.16", transportationColor );
     s_defaultStyle[GeoDataFeature::AccomodationGuestHouse]   = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "transportation/guest_house.16", transportationColor );
     s_defaultStyle[GeoDataFeature::AmenityLibrary]           = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "amenity/library.20", amenityColor );
-    s_defaultStyle[GeoDataFeature::EducationCollege]         = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, QString(), amenityColor );
-    s_defaultStyle[GeoDataFeature::EducationSchool]          = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, QString(), amenityColor );
-    s_defaultStyle[GeoDataFeature::EducationUniversity]      = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, QString(), amenityColor );
+    s_defaultStyle[GeoDataFeature::EducationCollege]         = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, QString(), amenityColor, educationalAreasAndHospital, amenityColor );
+    s_defaultStyle[GeoDataFeature::EducationSchool]          = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, QString(), amenityColor, educationalAreasAndHospital, amenityColor );
+    s_defaultStyle[GeoDataFeature::EducationUniversity]      = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, QString(), amenityColor, educationalAreasAndHospital, amenityColor );
     s_defaultStyle[GeoDataFeature::FoodBar]                  = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "amenity/bar.16", amenityColor );
     s_defaultStyle[GeoDataFeature::FoodBiergarten]           = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "amenity/biergarten.16", amenityColor );
     s_defaultStyle[GeoDataFeature::FoodCafe]                 = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "amenity/cafe.16", amenityColor );
@@ -390,7 +391,7 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
 
     s_defaultStyle[GeoDataFeature::HealthDentist]            = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "health/dentist.16", healthColor );
     s_defaultStyle[GeoDataFeature::HealthDoctors]            = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "health/doctors.16", healthColor );
-    s_defaultStyle[GeoDataFeature::HealthHospital]           = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "health/hospital.16", healthColor );
+    s_defaultStyle[GeoDataFeature::HealthHospital]           = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "health/hospital.16", healthColor, educationalAreasAndHospital, amenityColor );
     s_defaultStyle[GeoDataFeature::HealthPharmacy]           = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "health/pharmacy.16", healthColor );
     s_defaultStyle[GeoDataFeature::HealthVeterinary]         = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "health/veterinary-14", healthColor );
 
