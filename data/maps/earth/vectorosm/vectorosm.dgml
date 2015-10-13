@@ -28,7 +28,7 @@
       <layer name="openstreetmap" backend="texture">
         <!-- OpenStreetMap mapnik rendered tiles expire after seven days
                      or 604800 seconds -->
-        <texture name="dennis" expire="604800">
+        <texture name="mapnik" expire="604800">
           <sourcedir format="PNG"> earth/openstreetmap </sourcedir>
           <tileSize width="256" height="256"/>
           <storageLayout levelZeroColumns="1" levelZeroRows="1" maximumTileLevel="19" mode="OpenStreetMap"/>
@@ -115,7 +115,7 @@
         </property>
       </group>
       <group name="Texture Layers">
-        <property name="dennis">
+        <property name="mapnik">
           <value>true</value>
           <available>true</available>
         </property>
@@ -128,7 +128,7 @@
     </settings>
     <legend>
 
-    <section name="hilly" checkable="true" connect="dennis" spacing="12">
+    <section name="hilly" checkable="true" connect="mapnik" spacing="12">
         <heading>OSM Bitmap Tiles</heading>
     </section>
 
