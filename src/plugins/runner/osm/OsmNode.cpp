@@ -56,10 +56,13 @@ void OsmNode::create(GeoDataDocument *document) const
             QDate const date = QDate::currentDate();
             bool const southernHemisphere = lat < 0;
             QDate const autumnStart = QDate(date.year(), southernHemisphere ? 3 : 9, 15);
-            QDate const autumnEnd = QDate(date.year(), southernHemisphere ? 5 : 11, 15);
-            if (date > autumnStart && date < autumnEnd) {
+            QDate const winterEnd = southernHemisphere ? QDate(date.year(), 8, 15) : QDate(date.year()+1, 2, 15);
+            if (date > autumnStart && date < winterEnd) {
+                QDate const autumnEnd = QDate(date.year(), southernHemisphere ? 5 : 11, 15);
+                QString const season = date < autumnEnd ? "autumn" : "winter";
                 GeoDataIconStyle iconStyle = placemark->style()->iconStyle();
-                iconStyle.setIconPath(MarbleDirs::path("bitmaps/osmcarto/symbols/48/individual/tree-29-autumn.png"));
+                QString const bitmap = QString("bitmaps/osmcarto/symbols/48/individual/tree-29-%1.png").arg(season);
+                iconStyle.setIconPath(MarbleDirs::path(bitmap));
 
                 GeoDataStyle* style = new GeoDataStyle(*placemark->style());
                 style->setIconStyle(iconStyle);
