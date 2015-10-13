@@ -498,6 +498,7 @@ bool OsmPresetLibrary::isAreaTag(const QString &keyValue)
         // http://wiki.openstreetmap.org/wiki/Map_Features#Landuse
 
         s_areaTags.insert( "landuse=forest" );
+        s_areaTags.insert( "natural=water" );
         s_areaTags.insert( "natural=wood" );
         s_areaTags.insert( "natural=beach" );
         s_areaTags.insert( "natural=wetland" );
