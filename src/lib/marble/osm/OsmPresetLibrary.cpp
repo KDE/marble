@@ -566,7 +566,7 @@ QStringList OsmPresetLibrary::buildingValues()
         << "yes" << "house" << "residential" << "garage" << "apartments"
         << "hut" << "industrial" << "detached" << "roof" << "garages"
         << "commercial" << "terrace" << "shed" << "school" << "retail"
-        << "farm_auxiliary" << "church" << "greenhouse" << "barn"
+        << "farm_auxiliary" << "church" << "cathedral" << "greenhouse" << "barn"
         << "service" << "manufacture" << "construction" << "cabin"
         << "farm" << "warehouse" << "House" << "office"
         << "civic" << "Residential" << "hangar" << "public" << "university"

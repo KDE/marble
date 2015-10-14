@@ -368,8 +368,9 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
     QColor const healthColor("#da0092");
     QColor const airTransportColor("#8461C4");
     QColor const educationalAreasAndHospital("#f0f0d8");
-
-
+    QColor const buildingColor("#beadad");
+    // Allows to visualize multiple repaints of buildings
+//    QColor const buildingColor(0, 255, 0, 64);
 
     QFont const osmFont( defaultFamily, 10, 50, false );
     s_defaultStyle[GeoDataFeature::AccomodationCamping]      = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "transportation/camping.16", transportationColor );
@@ -596,7 +597,7 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
     s_defaultStyle[GeoDataFeature::RailwayMonorail]          = GeoDataFeaturePrivate::createStyle( 2.0, 1.435, "#706E70", "#EEEEEE", false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false );
     s_defaultStyle[GeoDataFeature::RailwayFunicular]         = GeoDataFeaturePrivate::createStyle( 2.0, 1.435, "#706E70", "#EEEEEE", false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false );
 
-    s_defaultStyle[GeoDataFeature::Building]                 = GeoDataFeaturePrivate::createStyle( 1, 0, QColor( 0xBE, 0xAD, 0xAD ), QColor( 0xBE, 0xAD, 0xAD ).darker(),
+    s_defaultStyle[GeoDataFeature::Building]                 = GeoDataFeaturePrivate::createStyle( 1, 0, buildingColor, buildingColor.darker(),
                                                                                    true, true, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false );
 
     s_defaultStyle[GeoDataFeature::Satellite]
