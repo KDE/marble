@@ -27,7 +27,11 @@ void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes) const
         !m_osmData.containsTag("boundary", "postal_code") &&
         !m_osmData.containsTagKey("closed:highway") &&
         !m_osmData.containsTagKey("abandoned:highway") &&
-        !m_osmData.containsTagKey("disused:highway");
+        !m_osmData.containsTagKey("abandoned:natural") &&
+        !m_osmData.containsTagKey("abandoned:building") &&
+        !m_osmData.containsTagKey("abandoned:leisure") &&
+        !m_osmData.containsTagKey("disused:highway") &&
+        !m_osmData.containsTag("highway", "razed");
 
     GeoDataPlacemark* placemark = new GeoDataPlacemark;
     placemark->setOsmData(m_osmData);
