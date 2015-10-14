@@ -574,7 +574,7 @@ QStringList OsmPresetLibrary::buildingValues()
         << "kindergarten" << "stable" << "storage_tank" << "shop" << "college"
         << "supermarket" << "factory" << "bungalow" << "tower" << "silo"
         << "storage" << "station" << "education" << "carport" << "houseboat"
-        << "castle" << "social_facility";
+        << "castle" << "social_facility" << "water_tower" << "container";
     return osmBuildingValues;
 }
 
