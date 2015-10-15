@@ -379,7 +379,7 @@ void GeometryLayerPrivate::createGraphicsItemFromGeometry( const GeoDataGeometry
             QMap<qint64,int>* osmItems = 0;
             if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPointType) {
                 osmItems = &m_osmNodeItems;
-            } else if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType || placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLinearRingType) {
+            } else if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLinearRingType) {
                 osmItems = &m_osmWayItems;
             } else if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType) {
                 osmItems = &m_osmRelationItems;
@@ -471,7 +471,7 @@ void GeometryLayerPrivate::removeGraphicsItems( const GeoDataFeature *feature )
             QMap<qint64,int>* osmItems = 0;
             if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPointType) {
                 osmItems = &m_osmNodeItems;
-            } else if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType || placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLinearRingType) {
+            } else if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLinearRingType) {
                 osmItems = &m_osmWayItems;
             } else if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType) {
                 osmItems = &m_osmRelationItems;
