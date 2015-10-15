@@ -43,6 +43,7 @@
 #include "MarbleGraphicsItem.h"
 #include "MarblePlacemarkModel.h"
 #include "GeoDataTreeModel.h"
+#include <OsmPlacemarkData.h>
 
 // Qt
 #include <qmath.h>
@@ -68,6 +69,9 @@ public:
     GeoGraphicsScene m_scene;
     QString m_runtimeTrace;
     QList<ScreenOverlayGraphicsItem*> m_items;
+    QMap<qint64,int> m_osmNodeItems;
+    QMap<qint64,int> m_osmWayItems;
+    QMap<qint64,int> m_osmRelationItems;
 
 private:
     static void initializeDefaultValues();
@@ -369,6 +373,26 @@ void GeometryLayerPrivate::createGraphicsItems( const GeoDataObject *object )
 
 void GeometryLayerPrivate::createGraphicsItemFromGeometry( const GeoDataGeometry* object, const GeoDataPlacemark *placemark )
 {
+    if (placemark->hasOsmData()){
+        qint64 const osmId = placemark->osmData().id();
+        if (osmId > 0) {
+            QMap<qint64,int>* osmItems = 0;
+            if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPointType) {
+                osmItems = &m_osmNodeItems;
+            } else if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType || placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLinearRingType) {
+                osmItems = &m_osmWayItems;
+            } else if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType) {
+                osmItems = &m_osmRelationItems;
+            }
+            if (osmItems) {
+                ++(*osmItems)[osmId];
+                if ((*osmItems)[osmId]>1) {
+                    return;
+                }
+            }
+        }
+    }
+
     GeoGraphicsItem *item = 0;
     if ( object->nodeType() == GeoDataTypes::GeoDataLineStringType )
     {
@@ -442,6 +466,21 @@ void GeometryLayerPrivate::removeGraphicsItems( const GeoDataFeature *feature )
 {
 
     if( feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
+        GeoDataPlacemark const * placemark = static_cast<GeoDataPlacemark const *>(feature);
+        if (placemark->hasOsmData() && placemark->osmData().id() > 0) {
+            QMap<qint64,int>* osmItems = 0;
+            if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPointType) {
+                osmItems = &m_osmNodeItems;
+            } else if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType || placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLinearRingType) {
+                osmItems = &m_osmWayItems;
+            } else if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType) {
+                osmItems = &m_osmRelationItems;
+            }
+            if (osmItems) {
+                --(*osmItems)[placemark->osmData().id()];
+                Q_ASSERT((*osmItems)[placemark->osmData().id()] >= 0);
+            }
+        }
         m_scene.removeItem( feature );
     }
     else if( feature->nodeType() == GeoDataTypes::GeoDataFolderType
@@ -500,6 +539,9 @@ void GeometryLayer::resetCacheData()
     d->m_scene.clear();
     qDeleteAll( d->m_items );
     d->m_items.clear();
+    d->m_osmNodeItems.clear();
+    d->m_osmWayItems.clear();
+    d->m_osmRelationItems.clear();
 
     const GeoDataObject *object = static_cast<GeoDataObject*>( d->m_model->index( 0, 0, QModelIndex() ).internalPointer() );
     if ( object && object->parent() )
