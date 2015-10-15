@@ -188,6 +188,11 @@ int VectorTileModel::cachedDocuments() const
 
 void VectorTileModel::updateTile( const TileId &id, GeoDataDocument *document )
 {
+    m_pendingDocuments.removeAll(id);
+    if (!document) {
+        return;
+    }
+
     if ( m_tileZoomLevel != id.zoomLevel() ) {
         delete document;
         return;
@@ -203,7 +208,6 @@ void VectorTileModel::updateTile( const TileId &id, GeoDataDocument *document )
     GeoDataLatLonBox const boundingBox = id.toLatLonBox(m_layer);
     m_documents[id] = QSharedPointer<CacheDocument>(new CacheDocument(document, this, boundingBox));
     emit tileAdded(document);
-    m_pendingDocuments.removeAll(id);
 }
 
 void VectorTileModel::clear()

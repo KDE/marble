@@ -129,8 +129,7 @@ GeoDataDocument *TileLoader::loadTileVectorData( GeoSceneVectorTileDataset const
 
     // tile was not locally available => trigger download
     triggerDownload( textureLayer, tileId, usage );
-
-    return new GeoDataDocument;
+    return nullptr;
 }
 
 // This method triggers a download of the given tile (without checking
