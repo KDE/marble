@@ -438,7 +438,7 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
     s_defaultStyle[GeoDataFeature::ShopClothes]              = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/shop_clothes.16", shopColor );
     s_defaultStyle[GeoDataFeature::ShopFashion]              = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/shop_clothes.16", shopColor );
     s_defaultStyle[GeoDataFeature::ShopJewelry]              = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/shop_jewelry.16", shopColor );
-    s_defaultStyle[GeoDataFeature::ShopJewelry]              = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/shop_shoes.16", shopColor );
+    s_defaultStyle[GeoDataFeature::ShopShoes]                = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/shop_shoes.16", shopColor );
     s_defaultStyle[GeoDataFeature::ShopVarietyStore]         = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/variety_store-14", shopColor );
     s_defaultStyle[GeoDataFeature::ShopBeauty]               = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/beauty-14", shopColor );
     s_defaultStyle[GeoDataFeature::ShopChemist]              = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/chemist-14", shopColor );
@@ -466,6 +466,7 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
     s_defaultStyle[GeoDataFeature::ShopPet]                  = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/shop_pet.16", shopColor );
     s_defaultStyle[GeoDataFeature::ShopToys]                 = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/toys-14", shopColor );
     s_defaultStyle[GeoDataFeature::ShopTravelAgency]         = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/travel_agency-14", shopColor );
+    s_defaultStyle[GeoDataFeature::Shop]                     = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/shop-14", shopColor );
 
     s_defaultStyle[GeoDataFeature::ManmadeLighthouse]        = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "transportation/lighthouse.16", transportationColor, "#f2efe9", QColor( "#f2efe9" ).darker() );
     s_defaultStyle[GeoDataFeature::ManmadePier]              = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "", transportationColor, "#f2efe9", QColor( "#f2efe9" ).darker() );

@@ -64,6 +64,7 @@ public:
 
     static bool isAreaTag(const QString &keyValue);
 
+    static QStringList shopValues();
     static QStringList buildingValues();
 
     static GeoDataFeature::GeoDataVisualCategory determineVisualCategory(const OsmPlacemarkData &osmData);

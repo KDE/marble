@@ -139,6 +139,12 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "shop", "toys" ) ]                  = GeoDataFeature::ShopToys;
     s_visualCategories[ OsmTag( "shop", "travel_agency" ) ]         = GeoDataFeature::ShopTravelAgency;
 
+    // Default for all other shops
+    foreach(const QString &value, shopValues() ) {
+        s_visualCategories[ OsmTag( "shop", value ) ]               = GeoDataFeature::Shop;
+    }
+
+
     s_visualCategories[ OsmTag( "man_made", "lighthouse" ) ]        = GeoDataFeature::ManmadeLighthouse;
     s_visualCategories[ OsmTag( "man_made", "pier" ) ]              = GeoDataFeature::ManmadePier;
     s_visualCategories[ OsmTag( "man_made", "water_tower" ) ]       = GeoDataFeature::ManmadeWaterTower;
@@ -557,6 +563,27 @@ bool OsmPresetLibrary::isAreaTag(const QString &keyValue)
     }
 
     return s_areaTags.contains(keyValue);
+}
+
+QStringList OsmPresetLibrary::shopValues()
+{
+    // from https://taginfo.openstreetmap.org/keys/building#values
+    static QStringList osmShopValues = QStringList()
+        << "cheese" << "chocolate" << "coffee" << "deli" << "dairy" << "farm"
+        << "pasta" << "pastry" << "tea" << "wine" << "general" << "mall"
+        << "baby_goods" << "boutique" << "fabric" << "leather" << "tailor" << "watches"
+        << "charity" << "second_hand" << "erotic" << "hearing_aids" << "herbalist" << "massage"
+        << "medical_supply" << "tattoo" << "bathroom_furnishing" << "electrical" << "energy" << "furnace"
+        << "garden_centre" << "garden_furniture" << "gas" << "glaziery" << "houseware" << "locksmith"
+        << "paint" << "trade" << "antiques" << "bed" << "candles" << "carpet"
+        << "curtain" << "interior_decoration" << "kitchen" << "lamps" << "window_blind" << "computer"
+        << "radiotechnics" << "vacuum_cleaner" << "fishing" << "free_flying" << "hunting" << "outdoor"
+        << "scuba_diving" << "sports" << "tyres" << "swimming_pool" << "art" << "craft"
+        << "frame" << "games" << "model" << "music" << "trophy" << "video"
+        << "video_games" << "anime" << "ticket" << "copyshop" << "dry_cleaning" << "e-cigarette"
+        << "funeral_directors" << "money_lender" << "pawnbroker" << "pyrotechnics" << "religion" << "storage_rental"
+        << "tobacco" << "weapons" << "user defined";
+    return osmShopValues;
 }
 
 QStringList OsmPresetLibrary::buildingValues()
