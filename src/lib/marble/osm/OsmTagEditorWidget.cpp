@@ -33,10 +33,30 @@ namespace Marble
 
 OsmTagEditorWidget::OsmTagEditorWidget( GeoDataPlacemark *placemark, QWidget *parent )
     : QWidget( parent ),
-      d( new OsmTagEditorWidgetPrivate( this ) )
+      d( new OsmTagEditorWidgetPrivate )
 {
     d->m_placemark = placemark;
-    d->init( this );
+    d->setupUi( this );
+    d->populatePresetTagsList();
+    d->populateCurrentTagsList();
+    d->m_recommendedTagsList->setSelectionBehavior( QAbstractItemView::SelectRows );
+    d->m_recommendedTagsList->setSelectionMode( QAbstractItemView::SingleSelection );
+    d->m_recommendedTagsList->setRootIsDecorated( false );
+
+    d->m_currentTagsList->setSelectionBehavior( QAbstractItemView::SelectRows );
+    d->m_currentTagsList->setSelectionMode( QAbstractItemView::SingleSelection );
+    d->m_currentTagsList->setRootIsDecorated( false );
+
+    QObject::connect( d->m_addTagButton, SIGNAL( pressed() ),
+                      this, SLOT( addSelectedTag() ) );
+    QObject::connect( d->m_recommendedTagsList, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ),
+                      this, SLOT( addSelectedTag() ) );
+    QObject::connect( d->m_removeTagButton, SIGNAL( pressed() ),
+                      this, SLOT( removeSelectedTag() ) );
+    QObject::connect( d->m_currentTagsList, SIGNAL( itemChanged( QTreeWidgetItem*, int ) ),
+                      this, SLOT( handleItemChanged( QTreeWidgetItem*, int ) ) );
+    QObject::connect( d->m_currentTagsList, SIGNAL( itemDoubleClicked(QTreeWidgetItem*,int) ),
+                      this, SLOT( handleDoubleClick( QTreeWidgetItem*, int) ) );
 }
 
 OsmTagEditorWidget::~OsmTagEditorWidget()

@@ -28,8 +28,7 @@
 namespace Marble
 {
 
-OsmRelationManagerWidgetPrivate::OsmRelationManagerWidgetPrivate( OsmRelationManagerWidget* q_ )
-    :q( q_ )
+OsmRelationManagerWidgetPrivate::OsmRelationManagerWidgetPrivate()
 {
     // nothing to do
 }
@@ -37,31 +36,6 @@ OsmRelationManagerWidgetPrivate::OsmRelationManagerWidgetPrivate( OsmRelationMan
 OsmRelationManagerWidgetPrivate::~OsmRelationManagerWidgetPrivate()
 {
     // nothing to do
-}
-
-void OsmRelationManagerWidgetPrivate::init( QWidget* parent )
-{
-    setupUi( parent );
-    populateRelationsList();
-    m_relationDropMenu = new QMenu( m_addRelation );
-    m_currentRelations->setRootIsDecorated( false );
-    m_currentRelations->setEditTriggers( QTreeWidget::DoubleClicked );
-    m_currentRelations->setContextMenuPolicy( Qt::CustomContextMenu );
-    m_currentRelations->setMinimumWidth( m_currentRelations->columnCount() *
-                                         m_currentRelations->columnWidth( 0 ) + 10 );
-
-    m_addRelation->setMenu( m_relationDropMenu );
-    populateDropMenu();
-
-    QObject::connect( m_currentRelations, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ),
-                      q, SLOT( handleDoubleClick(QTreeWidgetItem*,int) ) );
-    QObject::connect( m_currentRelations, SIGNAL( customContextMenuRequested( QPoint ) ),
-                      q, SLOT( handleRelationContextMenuRequest( QPoint ) ) );
-    QObject::connect( m_relationDropMenu, SIGNAL( triggered( QAction* ) ),
-                      q, SLOT( addRelation( QAction* ) ) );
-    QObject::connect( m_currentRelations, SIGNAL( itemChanged(QTreeWidgetItem*,int) ),
-                      q, SLOT( handleItemChange( QTreeWidgetItem*,int ) ) );
-
 }
 
 void OsmRelationManagerWidgetPrivate::populateRelationsList()

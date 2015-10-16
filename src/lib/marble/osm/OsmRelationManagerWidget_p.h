@@ -23,15 +23,13 @@ class OsmPlacemarkData;
 class OsmRelationManagerWidgetPrivate : public Ui::OsmRelationManagerWidgetPrivate
 {
 public:
-    OsmRelationManagerWidgetPrivate( OsmRelationManagerWidget *q_ );
+    OsmRelationManagerWidgetPrivate();
     ~OsmRelationManagerWidgetPrivate();
-    void init( QWidget* parent );
     void populateRelationsList();
     void populateDropMenu();
-    
+
 private:
     friend class OsmRelationManagerWidget;
-    OsmRelationManagerWidget* const q;
     GeoDataPlacemark *m_placemark;
     const QHash< qint64, OsmPlacemarkData > *m_allRelations;
     QMenu *m_relationDropMenu;

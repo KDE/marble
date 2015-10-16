@@ -37,11 +37,29 @@ OsmRelationManagerWidget::OsmRelationManagerWidget( GeoDataPlacemark *placemark,
                                                     const QHash<qint64, OsmPlacemarkData> *relations,
                                                     QWidget *parent )
     : QWidget( parent ),
-      d( new OsmRelationManagerWidgetPrivate( this ) )
+      d( new OsmRelationManagerWidgetPrivate )
 {
     d->m_placemark = placemark;
     d->m_allRelations = relations;
-    d->init( this );
+    d->setupUi( this );
+    d->populateRelationsList();
+    d->m_relationDropMenu = new QMenu( d->m_addRelation );
+    d->m_currentRelations->setRootIsDecorated( false );
+    d->m_currentRelations->setEditTriggers( QTreeWidget::DoubleClicked );
+    d->m_currentRelations->setContextMenuPolicy( Qt::CustomContextMenu );
+    d->m_currentRelations->setMinimumWidth( d->m_currentRelations->columnCount() * d->m_currentRelations->columnWidth( 0 ) + 10 );
+
+    d->m_addRelation->setMenu( d->m_relationDropMenu );
+    d->populateDropMenu();
+
+    QObject::connect( d->m_currentRelations, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ),
+                      this, SLOT( handleDoubleClick(QTreeWidgetItem*,int) ) );
+    QObject::connect( d->m_currentRelations, SIGNAL( customContextMenuRequested( QPoint ) ),
+                      this, SLOT( handleRelationContextMenuRequest( QPoint ) ) );
+    QObject::connect( d->m_relationDropMenu, SIGNAL( triggered( QAction* ) ),
+                      this, SLOT( addRelation( QAction* ) ) );
+    QObject::connect( d->m_currentRelations, SIGNAL( itemChanged(QTreeWidgetItem*,int) ),
+                      this, SLOT( handleItemChange( QTreeWidgetItem*,int ) ) );
 }
 
 OsmRelationManagerWidget::~OsmRelationManagerWidget()

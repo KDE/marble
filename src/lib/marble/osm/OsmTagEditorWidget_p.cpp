@@ -28,8 +28,7 @@ namespace Marble
 {
 
 const QString OsmTagEditorWidgetPrivate::m_customTagAdderText = QObject::tr( "Add custom tag..." );
-OsmTagEditorWidgetPrivate::OsmTagEditorWidgetPrivate( OsmTagEditorWidget* q_)
-    :q( q_ )
+OsmTagEditorWidgetPrivate::OsmTagEditorWidgetPrivate()
 {
     // nothing to do
 }
@@ -37,31 +36,6 @@ OsmTagEditorWidgetPrivate::OsmTagEditorWidgetPrivate( OsmTagEditorWidget* q_)
 OsmTagEditorWidgetPrivate::~OsmTagEditorWidgetPrivate()
 {
     // nothing to do
-}
-
-void OsmTagEditorWidgetPrivate::init( QWidget* parent )
-{
-    setupUi( parent );
-    populatePresetTagsList();
-    populateCurrentTagsList();
-    m_recommendedTagsList->setSelectionBehavior( QAbstractItemView::SelectRows );
-    m_recommendedTagsList->setSelectionMode( QAbstractItemView::SingleSelection );
-    m_recommendedTagsList->setRootIsDecorated( false );
-
-    m_currentTagsList->setSelectionBehavior( QAbstractItemView::SelectRows );
-    m_currentTagsList->setSelectionMode( QAbstractItemView::SingleSelection );
-    m_currentTagsList->setRootIsDecorated( false );
-
-    QObject::connect( m_addTagButton, SIGNAL( pressed() ),
-                      q, SLOT( addSelectedTag() ) );
-    QObject::connect( m_recommendedTagsList, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ),
-                      q, SLOT( addSelectedTag() ) );
-    QObject::connect( m_removeTagButton, SIGNAL( pressed() ),
-                      q, SLOT( removeSelectedTag() ) );
-    QObject::connect( m_currentTagsList, SIGNAL( itemChanged( QTreeWidgetItem*, int ) ),
-                      q, SLOT( handleItemChanged( QTreeWidgetItem*, int ) ) );
-    QObject::connect( m_currentTagsList, SIGNAL( itemDoubleClicked(QTreeWidgetItem*,int) ),
-                      q, SLOT( handleDoubleClick( QTreeWidgetItem*, int) ) );
 }
 
 void OsmTagEditorWidgetPrivate::populateCurrentTagsList()

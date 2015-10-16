@@ -23,9 +23,8 @@ class OsmTagEditorWidgetPrivate : public Ui::OsmTagEditorWidgetPrivate
 {
 public:
     typedef OsmPresetLibrary::OsmTag OsmTag;
-    OsmTagEditorWidgetPrivate( OsmTagEditorWidget *q_ );
+    OsmTagEditorWidgetPrivate();
     ~OsmTagEditorWidgetPrivate();
-    void init( QWidget* parent );
     void populatePresetTagsList();
     void populateCurrentTagsList();
 
@@ -57,8 +56,6 @@ private:
      */
     void addPattern( QStringList &filter, const OsmPlacemarkData &osmData, const QStringList &pattern ) const;
 
-
-    OsmTagEditorWidget* const q;
     GeoDataPlacemark *m_placemark;
     static const QString m_customTagAdderText;
 };
