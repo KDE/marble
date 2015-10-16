@@ -201,8 +201,7 @@ void VectorTileModel::updateTile( const TileId &id, GeoDataDocument *document )
     document->setName(QString("%1/%2/%3").arg(id.zoomLevel()).arg(id.x()).arg(id.y()));
     m_garbageQueue << document;
     if (m_documents.contains(id)) {
-        auto const document = m_documents.take(id);
-        m_treeModel->removeFeature(document->m_document);
+        m_documents.remove(id);
     }
 
     GeoDataLatLonBox const boundingBox = id.toLatLonBox(m_layer);
