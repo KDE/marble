@@ -68,6 +68,9 @@ GeoNode* DgmlStorageLayoutTagHandler::parse(GeoParser& parser) const
         maximumTileLevel = maximumTileLevelStr.toInt();
     }
 
+    // Attribute maximumTileLevel
+    const QString tileLevels = parser.attribute( dgmlAttr_tileLevels ).trimmed();
+
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(dgmlTag_Texture) || parentItem.represents(dgmlTag_Vectortile)) {
@@ -102,6 +105,7 @@ GeoNode* DgmlStorageLayoutTagHandler::parse(GeoParser& parser) const
         texture->setLevelZeroRows( levelZeroRows );
         texture->setMinimumTileLevel( minimumTileLevel );
         texture->setMaximumTileLevel( maximumTileLevel );
+        texture->setTileLevels( tileLevels );
         texture->setStorageLayout( storageLayout );
         texture->setServerLayout( serverLayout );
     }

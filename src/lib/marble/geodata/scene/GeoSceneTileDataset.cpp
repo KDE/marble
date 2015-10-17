@@ -135,6 +135,36 @@ void GeoSceneTileDataset::setMinimumTileLevel(int level)
     m_minimumTileLevel = level;
 }
 
+void GeoSceneTileDataset::setTileLevels(const QString &tileLevels)
+{
+    if (tileLevels.isEmpty()) {
+        m_tileLevels.clear();
+        return;
+    }
+
+    QStringList values = tileLevels.split(',');
+    foreach(const QString &value, values) {
+        bool canParse(false);
+        int const tileLevel = value.trimmed().toInt(&canParse);
+        if (canParse && tileLevel >= 0 && tileLevel < 100) {
+            m_tileLevels << tileLevel;
+        } else {
+            mDebug() << "Cannot parse tile level part " << value << " in " << tileLevels << ", ignoring it.";
+        }
+    }
+
+    if (!m_tileLevels.isEmpty()) {
+        qSort(m_tileLevels);
+        m_minimumTileLevel = m_tileLevels.first();
+        m_maximumTileLevel = m_tileLevels.last();
+    }
+}
+
+QVector<int> GeoSceneTileDataset::tileLevels() const
+{
+    return m_tileLevels;
+}
+
 QVector<QUrl> GeoSceneTileDataset::downloadUrls() const
 {
     return m_downloadUrls;

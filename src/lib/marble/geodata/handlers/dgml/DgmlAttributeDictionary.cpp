@@ -69,6 +69,7 @@ const char* dgmlAttr_short            = "short";
 const char* dgmlAttr_spacing          = "spacing";
 const char* dgmlAttr_style            = "style";
 const char* dgmlAttr_text             = "text";
+const char* dgmlAttr_tileLevels       = "tileLevels";
 const char* dgmlAttr_type             = "type";
 const char* dgmlAttr_usage            = "usage";
 const char* dgmlAttr_user             = "user";

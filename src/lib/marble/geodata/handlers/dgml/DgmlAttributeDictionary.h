@@ -71,6 +71,7 @@ namespace dgml
     extern const char* dgmlAttr_spacing;
     extern const char* dgmlAttr_style;
     extern const char* dgmlAttr_text;
+    extern const char* dgmlAttr_tileLevels;
     extern const char* dgmlAttr_type;
     extern const char* dgmlAttr_usage;
     extern const char* dgmlAttr_user;
