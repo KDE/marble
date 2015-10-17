@@ -28,11 +28,6 @@
 namespace Marble
 {
 
-bool zValueLessThan( GeoGraphicsItem* i1, GeoGraphicsItem* i2 )
-{
-    return i1->zValue() < i2->zValue();
-}
-
 class GeoGraphicsScenePrivate
 {
 public:
@@ -46,8 +41,6 @@ public:
     {
         q->clear();
     }
-
-    static void mergeItems( QList<GeoGraphicsItem *> &result, const QList<GeoGraphicsItem *> &objects, int maxZoomLevel );
 
     QMap<TileId, QList<GeoGraphicsItem*> > m_items;
     QMultiHash<const GeoDataFeature*, TileId> m_features;
@@ -148,10 +141,16 @@ QList< GeoGraphicsItem* > GeoGraphicsScene::items( const GeoDataLatLonBox &box, 
         for ( int x = x1; x <= x2; ++x ) {
             for ( int y = y1; y <= y2; ++y ) {
                 const TileId tileId = TileId( 0, level, x, y );
-                GeoGraphicsScenePrivate::mergeItems( result, d->m_items.value( tileId ), zoomLevel );
+                foreach(GeoGraphicsItem *object, d->m_items.value( tileId )) {
+                    if (object->minZoomLevel() <= zoomLevel && object->visible()) {
+                        result.push_back(object);
+                    }
+                }
             }
         }
     }
+
+    qSort(result.begin(), result.end(), GeoGraphicsItem::zValueLessThan);
     return result;
 }
 
@@ -265,27 +264,9 @@ void GeoGraphicsScene::addItem( GeoGraphicsItem* item )
     const TileId key = TileId::fromCoordinates( GeoDataCoordinates(west, north, 0), zoomLevel ); // same as GeoDataCoordinates(east, south, 0), see above
 
     QList< GeoGraphicsItem* >& tileList = d->m_items[key];
-    QList< GeoGraphicsItem* >::iterator position = qLowerBound( tileList.begin(), tileList.end(), item, zValueLessThan );
+    QList< GeoGraphicsItem* >::iterator position = qLowerBound( tileList.begin(), tileList.end(), item, GeoGraphicsItem::zValueLessThan );
     tileList.insert( position, item );
     d->m_features.insert( item->feature(), key );
-}
-
-void GeoGraphicsScenePrivate::mergeItems( QList<GeoGraphicsItem *> &result, const QList<GeoGraphicsItem *> &objects, int maxZoomLevel )
-{
-    QList< GeoGraphicsItem* >::iterator before = result.begin();
-    QList< GeoGraphicsItem* >::const_iterator currentItem = objects.constBegin();
-    while( currentItem != objects.end() ) {
-        while( ( currentItem != objects.end() )
-          && ( ( before == result.end() ) || ( (*currentItem)->zValue() < (*before)->zValue() ) ) ) {
-            if( (*currentItem)->minZoomLevel() <= maxZoomLevel && (*currentItem)->visible() ) {
-                before = result.insert( before, *currentItem );
-            }
-            ++currentItem;
-        }
-        if ( before != result.end() ) {
-            ++before;
-        }
-    }
 }
 
 }
