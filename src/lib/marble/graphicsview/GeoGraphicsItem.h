@@ -118,6 +118,8 @@ class MARBLE_EXPORT GeoGraphicsItem
      */
     void setZValue( qreal z );
 
+    static bool zValueLessThan(GeoGraphicsItem* one, GeoGraphicsItem* two);
+
     /**
      * Paints the item using the given GeoPainter.
      *
@@ -149,10 +151,6 @@ class MARBLE_EXPORT GeoGraphicsItem
     virtual void createDecorations();
 
     void addDecoration(GeoGraphicsItem* decoration);
-
- private:
-    GeoGraphicsItemPrivate *p();
-    const GeoGraphicsItemPrivate *p() const;
 };
 
 } // Namespace Marble
