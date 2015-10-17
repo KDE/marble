@@ -88,8 +88,12 @@ void VectorTileModel::setViewport( const GeoDataLatLonBox &bbox, int radius )
     // roughly equals the global texture width
 
 
-    if ( tileZoomLevel > m_layer->maximumTileLevel() )
-        tileZoomLevel = m_layer->maximumTileLevel();
+    QVector<int> tileLevels = m_layer->tileLevels();
+    auto iter = qLowerBound(tileLevels, tileZoomLevel);
+    if (*iter != tileZoomLevel && iter != tileLevels.begin()) {
+        --iter;
+        tileZoomLevel = *iter;
+    }
 
     // if zoom level has changed, empty vectortile cache
     if ( tileZoomLevel != m_tileZoomLevel ) {
