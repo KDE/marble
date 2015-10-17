@@ -775,7 +775,9 @@ bool MarbleDefaultInputHandler::handleMouseEvent(QMouseEvent *event)
         direction = mouseMovedOutside(event);
     }
 
-    adjustCursorShape(mousePosition, direction);
+    if (MarbleInputHandler::d->m_marblePresenter->viewContext() != Animation) {
+        adjustCursorShape(mousePosition, direction);
+    }
     return acceptMouse();
 }
 
