@@ -1,0 +1,4 @@
+california-latest.osm.pbf;Palo Alto;-122.20214;37.42038;-122.11276;37.47172
+california-latest.osm.pbf;Mountain View;-122.13435;37.36149;-122.03610;37.42396
+california-latest.osm.pbf;Sunnyvale;-122.08173;37.34423;-121.98917;37.41816
+new-york-latest.osm.pbf;-74.03463;40.69531;-73.91447;40.81180

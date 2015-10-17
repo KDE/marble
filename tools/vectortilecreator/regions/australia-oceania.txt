@@ -1,0 +1,1 @@
+new-zealand-latest.osm.pbf;Christchurch;172.60557;-43.54313;172.65601;-43.51782
