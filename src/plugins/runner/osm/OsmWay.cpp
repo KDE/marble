@@ -35,8 +35,10 @@ void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes) const
 
     GeoDataPlacemark* placemark = new GeoDataPlacemark;
     placemark->setOsmData(m_osmData);
-    placemark->setName(m_osmData.tagValue("name"));
     placemark->setVisualCategory(OsmPresetLibrary::determineVisualCategory(m_osmData));
+    if (!(placemark->visualCategory() >= GeoDataFeature::RailwayRail && placemark->visualCategory() <= GeoDataFeature::RailwayFunicular)) {
+        placemark->setName(m_osmData.tagValue("name"));
+    }
     placemark->setVisible(shouldRender);
 
     if (isArea()) {
