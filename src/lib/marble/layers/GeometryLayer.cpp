@@ -314,9 +314,7 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
         }
 
         // Needs sorting by z-value
-        qStableSort(items.begin(), items.end(), [](const GeoGraphicsItem* a, const GeoGraphicsItem* b) {
-            return a->zValue() < b->zValue();
-        });
+        qSort(items.begin(), items.end(), GeoGraphicsItem::zValueLessThan);
 
         break;
     default:
