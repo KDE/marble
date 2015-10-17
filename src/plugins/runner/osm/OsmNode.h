@@ -30,6 +30,8 @@ public:
     void create(GeoDataDocument* document) const;
 
 private:
+    int populationIndex(qint64 population) const;
+
     OsmPlacemarkData m_osmData;
     GeoDataCoordinates m_coordinates;
 };

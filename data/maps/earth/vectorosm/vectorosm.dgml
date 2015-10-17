@@ -102,8 +102,8 @@
           <available>true</available>
         </property>
         <property name="cities">
-          <value>false</value>
-          <available>false</available>
+          <value>true</value>
+          <available>true</available>
         </property>
         <property name="terrain">
           <value>false</value>

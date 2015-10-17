@@ -45,7 +45,6 @@ void OsmNode::create(GeoDataDocument *document) const
     } else {
         placemark->setName(m_osmData.tagValue("name"));
     }
-    placemark->setZoomLevel( 18 );
     placemark->setVisualCategory(category);
     placemark->setStyle( 0 );
 
@@ -72,8 +71,41 @@ void OsmNode::create(GeoDataDocument *document) const
         }
     }
 
+    placemark->setZoomLevel( 18 );
+    if (category >= GeoDataFeature::SmallCity && category <= GeoDataFeature::Nation && m_osmData.containsTagKey("population")) {
+        int const population = m_osmData.tagValue("population").toInt();
+        placemark->setPopulation(qMax(0, population));
+        if (population > 0) {
+            placemark->setZoomLevel(populationIndex(population));
+            placemark->setPopularity(population);
+        } else {
+            switch (category) {
+            case GeoDataFeature::SmallCity:  placemark->setZoomLevel(9);  break;
+            case GeoDataFeature::MediumCity: placemark->setZoomLevel(8);  break;
+            case GeoDataFeature::BigCity:    placemark->setZoomLevel(6);  break;
+            case GeoDataFeature::LargeCity:  placemark->setZoomLevel(5);  break;
+            default:                         placemark->setZoomLevel(10); break;
+            }
+        }
+    }
+
     OsmObjectManager::registerId(m_osmData.id());
     document->append(placemark);
+}
+
+int OsmNode::populationIndex(qint64 population) const
+{
+    int popidx = 3;
+
+    if ( population < 2500 )        popidx=10;
+    else if ( population < 5000)    popidx=9;
+    else if ( population < 25000)   popidx=8;
+    else if ( population < 75000)   popidx=7;
+    else if ( population < 250000)  popidx=6;
+    else if ( population < 750000)  popidx=5;
+    else if ( population < 2500000) popidx=4;
+
+    return popidx;
 }
 
 GeoDataCoordinates OsmNode::coordinates() const
