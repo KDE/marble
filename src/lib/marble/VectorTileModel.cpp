@@ -89,11 +89,14 @@ void VectorTileModel::setViewport( const GeoDataLatLonBox &bbox, int radius )
 
 
     QVector<int> tileLevels = m_layer->tileLevels();
-    auto iter = qLowerBound(tileLevels, tileZoomLevel);
-    if (*iter != tileZoomLevel && iter != tileLevels.begin()) {
-        --iter;
-        tileZoomLevel = *iter;
+    int tileLevel = tileLevels.isEmpty() ? 0 : tileLevels.first();
+    for (int i=1, n=tileLevels.size(); i<n; ++i) {
+        if (tileLevels[i] > tileZoomLevel) {
+            break;
+        }
+        tileLevel = tileLevels[i];
     }
+    tileZoomLevel = tileLevel;
 
     // if zoom level has changed, empty vectortile cache
     if ( tileZoomLevel != m_tileZoomLevel ) {
