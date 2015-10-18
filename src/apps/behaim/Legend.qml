@@ -45,7 +45,8 @@ Item {
         Tab {
             id: infoTab
             anchors.margins: Screen.pixelDensity * 2
-            title: "Info"
+            //: Tab title for a tab with information about the app
+            title: qsTr("Info")
 
             Flickable {
                 anchors.fill: parent
@@ -56,11 +57,14 @@ Item {
 
                 Text {
                     id: infoText
-                    text: "<h3>Martin Behaim's Erdapfel</h3>\
-                       <p>The oldest existent globe of the Earth.<br/>\
-                       Martin Behaim and collaborators created the globe at the time of Columbus' first sea travel to the west.\
+                    text: qsTr("<h3>Martin Behaim's Erdapfel</h3>\
+                       <p>The oldest existent globe of the Earth.\
+                       Martin Behaim and collaborators created the globe around 1492 at the time of \
+                       <a href=\"https://en.wikipedia.org/wiki/Voyages_of_Christopher_Columbus\">Columbus'</a> first sea travel to the west.\
                        Hence the American continent is missing on this globe.\
-                       Also note the detailed inscriptions in early modern German.</p>"
+                       Also note the detailed inscriptions in early modern German.</p>\
+                       <p>Please see <a href=\"https://en.wikipedia.org/wiki/Erdapfel\">Wikipedia: Erdapfel</a> \
+                       for further information about the Behaim globe.")
                     width: infoTab.width
                     wrapMode: Text.WordWrap
                     onLinkActivated: Qt.openUrlExternally(link)
@@ -71,7 +75,8 @@ Item {
         Tab {
             id: variantsTab
             anchors.margins: Screen.pixelDensity * 2
-            title: "Variants"
+            //: Tab title for a tab with globe variant configuration
+            title: qsTr("Variants")
 
             Flickable {
                 anchors.fill: parent
@@ -90,7 +95,7 @@ Item {
 
                     Text {
                         wrapMode: Text.Wrap
-                        text: "<h3>Globe Variant</h3>"
+                        text: qsTr("<h3>Globe Variant</h3>")
                     }
 
                     ExclusiveGroup {
@@ -98,10 +103,10 @@ Item {
                         onCurrentChanged: current.apply()
                     }
                     RadioButton {
-                        text: "Original (1492)"
+                        text: qsTr("Original (1492)")
                         checked: true
                         exclusiveGroup: layerGroup
-                        property string description: "Digital imagery taken directly from the original Behaim globe."
+                        property string description: qsTr("Digital imagery taken directly from the original Behaim globe.")
                         function apply() {
                             marbleMaps.setPropertyEnabled("ravenstein", false)
                             marbleMaps.setPropertyEnabled("ghillany", false)
@@ -109,8 +114,8 @@ Item {
                     }
 
                     RadioButton {
-                        text: "Ghillany (1853)"
-                        property string description: "A (rough) facsimile created by Friedrich Wilhelm Ghillany in 1853."
+                        text: qsTr("Ghillany (1853)")
+                        property string description: qsTr("A (rough) facsimile created by Friedrich Wilhelm Ghillany in 1853.")
                         exclusiveGroup: layerGroup
 
                         function apply() {
@@ -120,8 +125,8 @@ Item {
                     }
 
                     RadioButton {
-                        text: "Ravenstein (1908)"
-                        property string description: "A (rough) facsimile created by Ernest George Ravenstein in 1908."
+                        text: qsTr("Ravenstein (1908)")
+                        property string description: qsTr("A (rough) facsimile created by Ernest George Ravenstein in 1908.")
                         exclusiveGroup: layerGroup
                         function apply() {
                             marbleMaps.setPropertyEnabled("ghillany", false)
@@ -142,7 +147,8 @@ Item {
 
         Tab {
             anchors.margins: Screen.pixelDensity * 2
-            title: "Settings"
+            //: Tab title for a tab with app settings
+            title: qsTr("Settings")
 
             Flickable {
                 anchors.fill: parent
@@ -160,20 +166,20 @@ Item {
 
                     Text {
                         wrapMode: Text.Wrap
-                        text: "<h3>Globe Settings</h3>"
+                        text: qsTr("<h3>Globe Settings</h3>")
                     }
 
                     CheckBox {
-                        text: "Show Behaim places"
+                        text: qsTr("Show Behaim places")
                         onCheckedChanged: marbleMaps.setPropertyEnabled("cities", checked)
                     }
                     CheckBox {
-                        text: "Show texts and illustrations"
+                        text: qsTr("Show texts and illustrations")
                         onCheckedChanged: marbleMaps.setPropertyEnabled("otherplaces", checked)
 
                     }
                     CheckBox {
-                        text: "Show the accurate coastline"
+                        text: qsTr("Show the accurate coastline")
                         onCheckedChanged: marbleMaps.setPropertyEnabled("coastlines", checked)
                     }
                 }
@@ -183,7 +189,8 @@ Item {
         Tab {
             id: aboutTab
             anchors.margins: Screen.pixelDensity * 2
-            title: "About"
+            //: Tab title for a tab with information about the app creators and content sources
+            title: qsTr("About")
 
             Flickable {
                 anchors.fill: parent
@@ -199,13 +206,18 @@ Item {
                         topMargin: Screen.pixelDensity * 14
                     }
 
-                    text: "<h3>Germanisches Nationalmuseum</h3>\
+                    text: qsTr("<h3>Germanisches Nationalmuseum</h3>\
                    <p>The original Behaim globe can be visited in the
-                   <a href=\"http://www.gnm.de/\">Germanisches Nationalmuseum</a> in Nuremberg, Germany.\
-                   It was digitized in an elaborate process over several years and made available to the public under the CC-BY-SA license.</p>\
+                   <a href=\"http://www.gnm.de/\">Germanisches Nationalmuseum</a> in Nuremberg, Germany.</p>\
                    <h3>KDE Marble</h3>\
-                   <p>This app is part of the <a href=\"http://marble.kde.org\">Marble</a> Project.\
-                   The Marble community works on maps and virtual globes with the goal to produce visually appealing, easy-to-use Free Software.</p>"
+                   <p>This app is part of the <a href=\"http://marble.kde.org\">Marble</a> project.\
+                   The Marble community works on maps and virtual globes with the goal to produce visually appealing, easy-to-use Free Software.</p>\
+                   <h3>Map Content</h3>\
+                   <p>Digitized map based on orthophotographic gores by TU Vienna, 1990. Germanisches Nationalmuseum and\
+                   Friedrich-Alexander-Universität Erlangen-Nürnberg, CC BY-SA 3.0.\
+                   Ghillany map based on two planiglobes which are provided as a map supplement\
+                   to F.W. Ghillany's \"Geschichte des Seefahrers Ritter Martin Behaim nach den ältesten vorhandenen Urkunden\",\
+                   Nuremberg 1853. CC BY-SA 3.0.</p>")
                     width: aboutTab.width
                     wrapMode: Text.WordWrap
                     onLinkActivated: Qt.openUrlExternally(link)
