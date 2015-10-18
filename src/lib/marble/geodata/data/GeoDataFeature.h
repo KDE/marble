@@ -145,6 +145,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         NaturalGlacier,
         NaturalScrub,
         NaturalCliff,
+        NaturalHeath,
 
         HighwayTrafficSignals,
 
@@ -336,12 +337,14 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         ReligionSikh,
 
         // OpenStreetMap category Leisure
+        LeisureGolfCourse,
         LeisurePark,
         LeisurePlayground,
         LeisurePitch,
         LeisureSportsCentre,
         LeisureStadium,
         LeisureTrack,
+        LeisureSwimmingPool,
 
         LanduseAllotments,
         LanduseBasin,

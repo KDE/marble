@@ -95,7 +95,6 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "natural", "peak" ) ]               = GeoDataFeature::NaturalPeak;
     s_visualCategories[ OsmTag( "natural", "tree" ) ]               = GeoDataFeature::NaturalTree;
 
-    //FIXME: alcohol != beverages
     s_visualCategories[ OsmTag( "shop", "beverages" ) ]             = GeoDataFeature::ShopBeverages;
     s_visualCategories[ OsmTag( "shop", "hifi" ) ]                  = GeoDataFeature::ShopHifi;
     s_visualCategories[ OsmTag( "shop", "supermarket" ) ]           = GeoDataFeature::ShopSupermarket;
@@ -208,8 +207,8 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "highway", "motorway" ) ]           = GeoDataFeature::HighwayMotorway;
 
     s_visualCategories[ OsmTag( "natural", "water" ) ]              = GeoDataFeature::NaturalWater;
-    s_visualCategories[ OsmTag( "natural", "bay" ) ]              = GeoDataFeature::NaturalWater;
-    s_visualCategories[ OsmTag( "natural", "coastline" ) ]              = GeoDataFeature::NaturalWater;
+    s_visualCategories[ OsmTag( "natural", "bay" ) ]                = GeoDataFeature::NaturalWater;
+    s_visualCategories[ OsmTag( "natural", "coastline" ) ]          = GeoDataFeature::NaturalWater;
     s_visualCategories[ OsmTag( "waterway", "stream" ) ]            = GeoDataFeature::NaturalWater;
     s_visualCategories[ OsmTag( "waterway", "river" ) ]             = GeoDataFeature::NaturalWater;
     s_visualCategories[ OsmTag( "waterway", "riverbank" ) ]         = GeoDataFeature::NaturalWater;
@@ -255,12 +254,14 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
 
     s_visualCategories[ OsmTag( "leisure", "common" ) ]             = GeoDataFeature::LanduseGrass;
     s_visualCategories[ OsmTag( "leisure", "garden" ) ]             = GeoDataFeature::LanduseGrass;
+    s_visualCategories[ OsmTag( "leisure", "golf_course" ) ]        = GeoDataFeature::LeisureGolfCourse;
     s_visualCategories[ OsmTag( "leisure", "park" ) ]               = GeoDataFeature::LeisurePark;
     s_visualCategories[ OsmTag( "leisure", "playground" ) ]         = GeoDataFeature::LeisurePlayground;
     s_visualCategories[ OsmTag( "leisure", "pitch" ) ]              = GeoDataFeature::LeisurePitch;
     s_visualCategories[ OsmTag( "leisure", "sports_centre" ) ]      = GeoDataFeature::LeisureSportsCentre;
     s_visualCategories[ OsmTag( "leisure", "stadium" ) ]            = GeoDataFeature::LeisureStadium;
     s_visualCategories[ OsmTag( "leisure", "track" ) ]              = GeoDataFeature::LeisureTrack;
+    s_visualCategories[ OsmTag( "leisure", "swimming_pool" ) ]      = GeoDataFeature::LeisureSwimmingPool;
 
     s_visualCategories[ OsmTag( "railway", "rail" ) ]               = GeoDataFeature::RailwayRail;
     s_visualCategories[ OsmTag( "railway", "narrow_gauge" ) ]       = GeoDataFeature::RailwayNarrowGauge;
@@ -527,11 +528,13 @@ bool OsmPresetLibrary::isAreaTag(const QString &keyValue)
         s_areaTags.insert( "amenity=university" );
         s_areaTags.insert( "leisure=common" );
         s_areaTags.insert( "leisure=garden" );
+        s_areaTags.insert( "leisure=golf_course" );
         s_areaTags.insert( "leisure=playground" );
         s_areaTags.insert( "leisure=pitch" );
         s_areaTags.insert( "leisure=park" );
-        s_areaTags.insert( "leisure=sportscentre" );
+        s_areaTags.insert( "leisure=sports_centre" );
         s_areaTags.insert( "leisure=stadium" );
+        s_areaTags.insert( "leisure=swimming_pool" );
         s_areaTags.insert( "leisure=track" );
 
         s_areaTags.insert( "military=danger_area" );

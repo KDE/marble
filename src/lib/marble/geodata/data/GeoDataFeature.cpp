@@ -369,6 +369,7 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
     QColor const airTransportColor("#8461C4");
     QColor const educationalAreasAndHospital("#f0f0d8");
     QColor const buildingColor("#beadad");
+    QColor const waterColor("#b5d0d0");
     // Allows to visualize multiple repaints of buildings
 //    QColor const buildingColor(0, 255, 0, 64);
 
@@ -469,7 +470,7 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
     s_defaultStyle[GeoDataFeature::Shop]                     = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/shop-14", shopColor );
 
     s_defaultStyle[GeoDataFeature::ManmadeLighthouse]        = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "transportation/lighthouse.16", transportationColor, "#f2efe9", QColor( "#f2efe9" ).darker() );
-    s_defaultStyle[GeoDataFeature::ManmadePier]              = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "", transportationColor, "#f2efe9", QColor( "#f2efe9" ).darker() );
+    s_defaultStyle[GeoDataFeature::ManmadePier]              = GeoDataFeaturePrivate::createStyle(0.0, 3.0, "#f2efe9", "#f2efe9", true, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false );
     s_defaultStyle[GeoDataFeature::ManmadeWaterTower]        = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "amenity/water_tower.16", amenityColor );
     s_defaultStyle[GeoDataFeature::ManmadeWindMill]          = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "amenity/windmill.16", amenityColor );
 
@@ -542,9 +543,9 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
     s_defaultStyle[GeoDataFeature::HighwayMotorway]          = GeoDataFeaturePrivate::createHighwayStyle( "highway_motorway", "#809BC0", QColor("#809BC0").darker(150), QFont(QStringLiteral("Arial")), "000000", 3.0, 10 );
     s_defaultStyle[GeoDataFeature::HighwayMotorwayLink]      = GeoDataFeaturePrivate::createHighwayStyle( "highway_motorway", "#809BC0", QColor("#809BC0").darker(150), QFont(QStringLiteral("Arial")), "000000", 3.0, 10 );
 
-    s_defaultStyle[GeoDataFeature::NaturalWater]             = GeoDataFeaturePrivate::createStyle( 2, 10, "#B5D0D0", "#B5D0D0", true, false,
+    s_defaultStyle[GeoDataFeature::NaturalWater]             = GeoDataFeaturePrivate::createStyle( 2, 10, waterColor, waterColor, true, true,
                                                                                                    Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false, QVector< qreal >(),
-                                                                                                   QFont(QStringLiteral("Arial")), QColor("#B5D0D0").darker(150));
+                                                                                                   QFont(QStringLiteral("Arial")), waterColor.darker(150));
 
     s_defaultStyle[GeoDataFeature::AmenityGraveyard]         = GeoDataFeaturePrivate::createWayStyle( "#AACBAF", "#AACBAF", true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_generic.png") );
 
@@ -554,13 +555,16 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
     s_defaultStyle[GeoDataFeature::NaturalGlacier]           = GeoDataFeaturePrivate::createWayStyle( "#DDECEC", "#DDECEC", true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/glacier.png") );
     s_defaultStyle[GeoDataFeature::NaturalScrub]             = GeoDataFeaturePrivate::createWayStyle( "#B5E3B5", "#B5E3B5", true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/scrub.png") );
     s_defaultStyle[GeoDataFeature::NaturalCliff]             = GeoDataFeaturePrivate::createWayStyle( Qt::transparent, Qt::transparent, true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/cliff2.png") );
+    s_defaultStyle[GeoDataFeature::NaturalHeath]             = GeoDataFeaturePrivate::createWayStyle( "#d6d99f", QColor("#d6d99f").darker(150), true, false );
 
-    s_defaultStyle[GeoDataFeature::LeisurePark]              = GeoDataFeaturePrivate::createWayStyle( "#CDF6CA", "#CDF6CA", true, false );
+    s_defaultStyle[GeoDataFeature::LeisureGolfCourse]        = GeoDataFeaturePrivate::createWayStyle( QColor("#b5e3b5"), QColor("#b5e3b5").darker(150), true, true );
+    s_defaultStyle[GeoDataFeature::LeisurePark]              = GeoDataFeaturePrivate::createWayStyle( QColor("#c8facc"), QColor("#c8facc").darker(150), true, true );
     s_defaultStyle[GeoDataFeature::LeisurePlayground]        = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "amenity/playground.16", amenityColor, "#CCFFF1", "#BDFFED" );
     s_defaultStyle[GeoDataFeature::LeisurePitch]             = GeoDataFeaturePrivate::createWayStyle( "#8ad3af", QColor("#8ad3af").darker(150), true, true );
     s_defaultStyle[GeoDataFeature::LeisureSportsCentre]      = GeoDataFeaturePrivate::createWayStyle( "#33cc99", QColor("#33cc99").darker(150), true, true );
     s_defaultStyle[GeoDataFeature::LeisureStadium]           = GeoDataFeaturePrivate::createWayStyle( "#33cc99", QColor("#33cc99").darker(150), true, true );
     s_defaultStyle[GeoDataFeature::LeisureTrack]             = GeoDataFeaturePrivate::createWayStyle( "#74dcba", QColor("#74dcba").darker(150), true, true );
+    s_defaultStyle[GeoDataFeature::LeisureSwimmingPool]      = GeoDataFeaturePrivate::createWayStyle( waterColor, waterColor.darker(150), true, true );
 
     s_defaultStyle[GeoDataFeature::LanduseAllotments]        = GeoDataFeaturePrivate::createWayStyle( "#E4C6AA", "#E4C6AA", true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/allotments.png") );
     s_defaultStyle[GeoDataFeature::LanduseBasin]             = GeoDataFeaturePrivate::createWayStyle( QColor(0xB5, 0xD0, 0xD0, 0x80 ), QColor( 0xB5, 0xD0, 0xD0 ) );
@@ -577,7 +581,7 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
     s_defaultStyle[GeoDataFeature::LanduseMilitary]          = GeoDataFeaturePrivate::createWayStyle( "#F3D8D2", "#F3D8D2", true, true, Qt::BDiagPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/military_red_hatch.png") );
     s_defaultStyle[GeoDataFeature::LanduseQuarry]            = GeoDataFeaturePrivate::createWayStyle( "#C4C2C2", "#C4C2C2", true, true, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/quarry.png") );
     s_defaultStyle[GeoDataFeature::LanduseRailway]           = GeoDataFeaturePrivate::createWayStyle( "#DED0D5", "#DED0D5", true, true );
-    s_defaultStyle[GeoDataFeature::LanduseReservoir]         = GeoDataFeaturePrivate::createWayStyle( "#B5D0D0", "#B5D0D0", true, true );
+    s_defaultStyle[GeoDataFeature::LanduseReservoir]         = GeoDataFeaturePrivate::createWayStyle( waterColor, waterColor, true, true );
     s_defaultStyle[GeoDataFeature::LanduseResidential]       = GeoDataFeaturePrivate::createWayStyle( "#DCDCDC", "#DCDCDC", true, true );
     s_defaultStyle[GeoDataFeature::LanduseRetail]            = GeoDataFeaturePrivate::createWayStyle( "#FFD6D1", "#D99C95", true, true );
     s_defaultStyle[GeoDataFeature::LanduseOrchard]           = GeoDataFeaturePrivate::createWayStyle( "#AEDFA3", "#AEDFA3", true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/orchard.png") );
