@@ -87,9 +87,12 @@ void VectorTileModel::setViewport( const GeoDataLatLonBox &bbox, int radius )
     // to work around rounding errors when the radius
     // roughly equals the global texture width
 
-
     QVector<int> tileLevels = m_layer->tileLevels();
-    int tileLevel = tileLevels.isEmpty() ? 0 : tileLevels.first();
+    if (tileLevels.isEmpty() || tileZoomLevel < tileLevels.first()) {
+        m_documents.clear();
+        return;
+    }
+    int tileLevel = tileLevels.first();
     for (int i=1, n=tileLevels.size(); i<n; ++i) {
         if (tileLevels[i] > tileZoomLevel) {
             break;
