@@ -54,15 +54,15 @@ if __name__ == "__main__":
                 for zoom in args.zoomLevels:
                     topLeft = deg2num(float(bounds[3]), float(bounds[2]), zoom)
                     bottomRight = deg2num(float(bounds[5]), float(bounds[4]), zoom)
-                    xDiff = bottomRight[0]-topLeft[0]-1
-                    yDiff = topLeft[1]-bottomRight[1]-1
+                    xDiff = bottomRight[0]-topLeft[0]
+                    yDiff = topLeft[1]-bottomRight[1]
                     print ("total number of tiles " + bounds[1] + ": " + str(xDiff) + "x" + str(yDiff) + " = " + str(xDiff*yDiff))
                     cutted = "{}.{}-{}-{}-{}.osm.o5m".format(filename, bounds[2], bounds[3], bounds[4], bounds[5])
                     if not os.path.exists(cutted):
                         print ("Creating cut out region {}".format(cutted))
                         call(["osmconvert", "--complete-ways", "--complex-ways", "--drop-version", "-b={},{},{},{}".format(bounds[2], bounds[3], bounds[4], bounds[5]), "-o={}".format(cutted), filename])
-                    for x in range(1+topLeft[0], bottomRight[0]):
-                        for y in range(1+bottomRight[1], topLeft[1]):
+                    for x in range(1+topLeft[0], bottomRight[0]+1):
+                        for y in range(1+bottomRight[1], topLeft[1]+1):
                             tl = num2deg(x-1, y-1, zoom)
                             br = num2deg(x, y, zoom)
                             path = "{}/{}/{}".format(args.directory, zoom, x-1)
