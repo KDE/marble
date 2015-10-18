@@ -4,3 +4,5 @@ bern.osm.pbf;Bern;7.420;46.96832;7.49775;46.92306
 greater-london-latest.osm.pbf;London;-0.18903;51.48537;-0.07464;51.54125
 mittelfranken-latest.osm.pbf;Nürnberg;11.03015;49.42598;11.12378;49.47545
 schleswig-holstein-latest.osm.pbf;Flensburg;9.39948;54.79555;9.49091;54.85030
+centro-latest.osm.pbf;Roma;12.3490;41.7792;12.6593;42.0016
+czech-republic-latest.osm.pbf;Praha;14.3775;50.0631;14.4712;50.1222
