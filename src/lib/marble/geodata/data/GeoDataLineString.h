@@ -354,6 +354,10 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry
 */
     void remove ( int i );
 
+    /*!
+        \brief Returns a linestring with detail values assigned to each node.
+    */
+    GeoDataLineString optimized() const;
 
     // Serialization
 /*!

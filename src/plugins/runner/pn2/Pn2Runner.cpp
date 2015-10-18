@@ -111,6 +111,8 @@ bool Pn2Runner::importPolygon( QDataStream &stream, GeoDataLineString* linestrin
         }
     }
 
+    *linestring = linestring->optimized();
+
     return error;
 }
 

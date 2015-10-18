@@ -290,21 +290,17 @@ bool CylindricalProjectionPrivate::lineStringToPolygon( const GeoDataLineString 
     // Linear rings require to tessellate the path from the last node to the first node
     // which isn't really convenient to achieve with a for loop ...
 
-    const bool isLong = lineString.size() > 50;
-    const int maximumDetail = ( viewport->radius() > 5000 ) ? 5 :
-                              ( viewport->radius() > 2500 ) ? 4 :
-                              ( viewport->radius() > 1000 ) ? 3 :
-                              ( viewport->radius() >  600 ) ? 2 :
-                              ( viewport->radius() >   50 ) ? 1 :
-                                                              0;
+    const bool isLong = lineString.size() > 10;
+    const int maximumDetail = levelForResolution(viewport->angularResolution());
+    // The first node of optimized linestrings has a non-zero detail value.
+    const bool hasDetail = itBegin->detail() != 0;
 
     while ( itCoords != itEnd )
     {
-
         // Optimization for line strings with a big amount of nodes
-        bool skipNode = itCoords != itBegin && isLong && !processingLastNode &&
-                ( (*itCoords).detail() > maximumDetail
-                  || viewport->resolves( *itPreviousCoords, *itCoords ) );
+        bool skipNode = (hasDetail ? itCoords->detail() > maximumDetail
+                : itCoords != itBegin && isLong && !processingLastNode &&
+                !viewport->resolves( *itPreviousCoords, *itCoords ) );
 
         if ( !skipNode ) {
 
@@ -359,18 +355,29 @@ bool CylindricalProjectionPrivate::lineStringToPolygon( const GeoDataLineString 
     }
 
     GeoDataLatLonAltBox box = lineString.latLonAltBox();
+
+    // Closing e.g. in the Antarctica case.
+    // This code makes the assumption that
+    // - the first node is located at 180 E
+    // - and the last node is located at 180 W
+    // TODO: add a similar pattern in the crossDateLine() code.
+    /*
     if( lineString.isClosed() && box.width() == 2*M_PI ) {
         QPolygonF *poly = polygons.last();
         if( box.containsPole( NorthPole ) ) {
-            poly->push_front( QPointF( poly->first().x(), 0 ) );
-            poly->push_back( QPointF( poly->last().x(), 0 ) );
-            poly->push_back( QPointF( poly->first().x(), 0 ) );
+            qreal topMargin = 0.0;
+            qreal dummy = 0.0;
+            q_ptr->screenCoordinates(0.0, q_ptr->maxLat(), viewport, topMargin, dummy );
+            poly->push_back( QPointF( poly->last().x(), topMargin ) );
+            poly->push_back( QPointF( poly->first().x(), topMargin ) );
         } else {
-            poly->push_front( QPointF( poly->first().x(), viewport->height() ) );
-            poly->push_back( QPointF( poly->last().x(), viewport->height() ) );
-            poly->push_back( QPointF( poly->first().x(), viewport->height() ) );
+            qreal bottomMargin = 0.0;
+            qreal dummy = 0.0;
+            q_ptr->screenCoordinates(0.0, q_ptr->minLat(), viewport, bottomMargin, dummy );
+            poly->push_back( QPointF( poly->last().x(), bottomMargin ) );
+            poly->push_back( QPointF( poly->first().x(), bottomMargin ) );
         }
-    }
+    } */
 
     repeatPolygons( viewport, polygons );
 

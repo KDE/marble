@@ -378,21 +378,17 @@ bool AzimuthalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
     // Linear rings require to tessellate the path from the last node to the first node
     // which isn't really convenient to achieve with a for loop ...
 
-    const bool isLong = lineString.size() > 50;
-    const int maximumDetail = ( viewport->radius() > 5000 ) ? 5 :
-                              ( viewport->radius() > 2500 ) ? 4 :
-                              ( viewport->radius() > 1000 ) ? 3 :
-                              ( viewport->radius() >  600 ) ? 2 :
-                              ( viewport->radius() >   50 ) ? 1 :
-                                                              0;
+    const bool isLong = lineString.size() > 10;
+    const int maximumDetail = levelForResolution(viewport->angularResolution());
+    // The first node of optimized linestrings has a non-zero detail value.
+    const bool hasDetail = itBegin->detail() != 0;
 
     while ( itCoords != itEnd )
     {
-
         // Optimization for line strings with a big amount of nodes
-        bool skipNode = itCoords != itBegin && isLong && !processingLastNode &&
-                ( (*itCoords).detail() > maximumDetail
-                  || viewport->resolves( *itPreviousCoords, *itCoords ) );
+        bool skipNode = (hasDetail ? itCoords->detail() > maximumDetail
+                : itCoords != itBegin && isLong && !processingLastNode &&
+                !viewport->resolves( *itPreviousCoords, *itCoords ) );
 
         if ( !skipNode ) {
 

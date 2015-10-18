@@ -132,6 +132,151 @@ GeoDataCoordinates GeoDataLineStringPrivate::findDateLine( const GeoDataCoordina
     return findDateLine( previousCoords, interpolatedCoords, recursionCounter );
 }
 
+int GeoDataLineStringPrivate::levelForResolution(qreal resolution) const {
+    if (m_previousResolution == resolution) return m_level;
+
+    m_previousResolution = resolution;
+
+    if (resolution < 0.0000005) m_level = 17;
+    else if (resolution < 0.0000010) m_level = 16;
+    else if (resolution < 0.0000020) m_level = 15;
+    else if (resolution < 0.0000040) m_level = 14;
+    else if (resolution < 0.0000080) m_level = 13;
+    else if (resolution < 0.0000160) m_level = 12;
+    else if (resolution < 0.0000320) m_level = 11;
+    else if (resolution < 0.0000640) m_level = 10;
+    else if (resolution < 0.0001280) m_level = 9;
+    else if (resolution < 0.0002560) m_level = 8;
+    else if (resolution < 0.0005120) m_level = 7;
+    else if (resolution < 0.0010240) m_level = 6;
+    else if (resolution < 0.0020480) m_level = 5;
+    else if (resolution < 0.0040960) m_level = 4;
+    else if (resolution < 0.0081920) m_level = 3;
+    else if (resolution < 0.0163840) m_level = 2;
+    else m_level =  1;
+
+    return m_level;
+}
+
+qreal GeoDataLineStringPrivate::resolutionForLevel(int level) const {
+    switch (level) {
+        case 0:
+            return 0.0655360;
+            break;
+        case 1:
+            return 0.0327680;
+            break;
+        case 2:
+            return 0.0163840;
+            break;
+        case 3:
+            return 0.0081920;
+            break;
+        case 4:
+            return 0.0040960;
+            break;
+        case 5:
+            return 0.0020480;
+            break;
+        case 6:
+            return 0.0010240;
+            break;
+        case 7:
+            return 0.0005120;
+            break;
+        case 8:
+            return 0.0002560;
+            break;
+        case 9:
+            return 0.0001280;
+            break;
+        case 10:
+            return 0.0000640;
+            break;
+        case 11:
+            return 0.0000320;
+            break;
+        case 12:
+            return 0.0000160;
+            break;
+        case 13:
+            return 0.0000080;
+            break;
+        case 14:
+            return 0.0000040;
+            break;
+        case 15:
+            return 0.0000020;
+            break;
+        case 16:
+            return 0.0000010;
+            break;
+        default:
+        case 17:
+            return 0.0000005;
+            break;
+    }
+}
+
+void GeoDataLineStringPrivate::optimize (GeoDataLineString& lineString) const
+{
+
+    QVector<GeoDataCoordinates>::iterator itCoords = lineString.begin();
+    QVector<GeoDataCoordinates>::const_iterator itEnd = lineString.constEnd();
+
+    if (lineString.size() < 2) return;
+
+    // Calculate the least non-zero detail-level by checking the bounding box
+    int startLevel = levelForResolution( ( lineString.latLonAltBox().width() + lineString.latLonAltBox().height() ) / 2 );
+
+    int currentLevel = startLevel;
+    int maxLevel = startLevel;
+    GeoDataCoordinates currentCoords;
+    lineString.first().setDetail(startLevel);
+
+    // Iterate through the linestring to assign different detail levels to the nodes.
+    // In general the first and last node should have the start level assigned as
+    // a detail level.
+    // Starting from the first node the algorithm picks those nodes which
+    // have a distance from each other that is just above the resolution that is
+    // associated with the start level (which we use as a "current level").
+    // Each of those nodes get the current level assigned as the detail level.
+    // After iterating through the linestring we increment the current level value
+    // and starting again with the first node we assign detail values in a similar way
+    // to the remaining nodes which have no final detail level assigned yet.
+    // We do as many iterations through the lineString as needed and bump up the
+    // current level until all nodes have a non-zero detail level assigned.
+
+    while ( currentLevel  < 16 && currentLevel <= maxLevel + 1 ) {
+        itCoords = lineString.begin();
+
+        currentCoords = *itCoords;
+        ++itCoords;
+
+        for( ; itCoords != itEnd; ++itCoords) {
+            if (itCoords->detail() != 0 && itCoords->detail() < currentLevel) continue;
+
+            if ( currentLevel == startLevel && (itCoords->longitude() == -M_PI || itCoords->longitude() == M_PI
+                || itCoords->latitude() < -89 * DEG2RAD || itCoords->latitude() > 89 * DEG2RAD)) {
+                itCoords->setDetail(startLevel);
+                currentCoords = *itCoords;
+                maxLevel = currentLevel;
+                continue;
+            }
+            if (distanceSphere( currentCoords, *itCoords ) < resolutionForLevel(currentLevel + 1)) {
+                itCoords->setDetail(currentLevel + 1);
+            }
+            else {
+                itCoords->setDetail(currentLevel);
+                currentCoords = *itCoords;
+                maxLevel = currentLevel;
+            }
+        }
+        ++currentLevel;
+    }
+    lineString.last().setDetail(startLevel);
+}
+
 bool GeoDataLineString::isEmpty() const
 {
     return p()->m_vector.isEmpty();
@@ -652,6 +797,19 @@ void GeoDataLineString::remove ( int i )
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
     d->m_vector.remove( i );
+}
+
+GeoDataLineString GeoDataLineString::optimized () const
+{
+    if( isClosed() ) {
+        GeoDataLinearRing linearRing(*this);
+        p()->optimize(linearRing);
+        return linearRing;
+    } else {
+        GeoDataLineString lineString(*this);
+        p()->optimize(lineString);
+        return lineString;
+    }
 }
 
 void GeoDataLineString::pack( QDataStream& stream ) const

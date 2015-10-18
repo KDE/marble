@@ -375,7 +375,7 @@ bool ViewportParams::resolves ( const GeoDataCoordinates &coord1,
     coord2.geoCoordinates( lon2, lat2 );
 
     // We take the manhattan length as an approximation for the distance
-    return ( fabs( lon2 - lon1 ) + fabs( lat2 - lat1 ) < angularResolution() );
+    return ( fabs( lon2 - lon1 ) + fabs( lat2 - lat1 ) > angularResolution() );
 }
 
 

@@ -56,6 +56,8 @@ void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes) const
             linearRing->append(node.coordinates());
         }
 
+        *linearRing = linearRing->optimized();
+
         if(placemark->visualCategory() == GeoDataFeature::AmenityGraveyard ||
                  placemark->visualCategory() == GeoDataFeature::LanduseCemetery) {
             bool adjustStyle = true;
@@ -99,6 +101,8 @@ void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes) const
             placemark->osmData().addNodeReference(node.coordinates(), node.osmData());
             lineString->append(node.coordinates());
         }
+
+        *lineString = lineString->optimized();
 
         GeoDataPolyStyle polyStyle = placemark->style()->polyStyle();
         GeoDataLineStyle lineStyle = placemark->style()->lineStyle();

@@ -261,7 +261,7 @@ class GEODATA_EXPORT GeoDataCoordinates
     * @brief set the detail flag
     * @param det detail
     */
-    void setDetail( const int det );
+    void setDetail( const int detail );
 
     /**
      * @brief Rotates one coordinate around another.
