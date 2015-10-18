@@ -150,6 +150,7 @@ QList< GeoGraphicsItem* > GeoGraphicsScene::items( const GeoDataLatLonBox &box, 
         }
     }
 
+    qSort(result.begin(), result.end(), GeoGraphicsItem::zValueLessThan);
     return result;
 }
 
