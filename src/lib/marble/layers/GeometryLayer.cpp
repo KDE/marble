@@ -319,7 +319,7 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
     }
 
     // Needs sorting by z-value
-    qSort(items.begin(), items.end(), GeoGraphicsItem::zValueLessThan);
+    qStableSort(items.begin(), items.end(), GeoGraphicsItem::zValueLessThan);
 
     int painted = 0;
     foreach( GeoGraphicsItem* item, items )
