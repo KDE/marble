@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="0.0.1" package="org.kde.marble.behaim" android:installLocation="auto" android:versionCode="2">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="1.0.0" package="org.kde.marble.behaim" android:installLocation="auto" android:versionCode="3">
         <uses-permission android:name="android.permission.INTERNET"/>
         <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
         <application android:label="Behaim Globe" android:name="org.qtproject.qt5.android.bindings.QtApplication" android:icon="@drawable/behaimlogo" android:theme="@android:style/Theme.Holo.Light">
