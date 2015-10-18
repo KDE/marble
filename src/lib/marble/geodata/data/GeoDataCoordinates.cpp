@@ -26,6 +26,7 @@
 #include <QAtomicInt>
 #include <QDataStream>
 #include <QPointF>
+#include <QStringBuilder>
 
 #include "MarbleGlobal.h"
 #include "MarbleDebug.h"
@@ -1692,6 +1693,15 @@ qreal GeoDataCoordinatesPrivate::lonLatToNorthing( qreal lon, qreal lat ){
     }
 
     return northing;
+}
+
+uint qHash(const GeoDataCoordinates &coordinates)
+{
+    QString lon, lat, alt;
+    lon.setNum(coordinates.longitude(), 'f', 10);
+    lat.setNum(coordinates.latitude(), 'f', 10);
+    alt.setNum(coordinates.altitude(), 'f', 3);
+    return qHash(lon % lat % alt);
 }
 
 }
