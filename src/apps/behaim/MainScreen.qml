@@ -37,7 +37,7 @@ ApplicationWindow {
         color: palette.window
     }
 
-    GridLayout {
+    Grid {
         id: mainLayout
         columns: root.landscape ? 2 : 1
         columnSpacing: 0
@@ -48,8 +48,8 @@ ApplicationWindow {
         Item {
             id: mapItem
 
-            implicitWidth: root.landscape ? root.width - infoItem.width : root.width
-            implicitHeight: root.landscape ? root.height : root.height - infoItem.height
+            width: root.landscape ? root.width - infoItem.width : root.width
+            height: root.landscape ? root.height : root.height - infoItem.height
 
             Rectangle {
                 color: "black"
@@ -100,17 +100,41 @@ ApplicationWindow {
                         setPluginSetting("stars", "renderCelestialPole", "false");
                     }
                 }
+
+                Button {
+                    id: minimizeLandscapeButton
+                    visible: root.landscape
+                    anchors.left: marbleMaps.left
+                    anchors.top: marbleMaps.top
+                    anchors.leftMargin: Screen.pixelDensity * (infoItem.minimized ? 0.5 : 1.5)
+                    anchors.topMargin: Screen.pixelDensity * 0.5
+                    iconSource: "menu.png"
+                    onClicked: infoItem.minimized = !infoItem.minimized
+                }
+
+                Button {
+                    id: minimizePortraitButton
+                    visible: !root.landscape
+                    anchors.right: marbleMaps.right
+                    anchors.bottom: marbleMaps.bottom
+                    anchors.rightMargin: Screen.pixelDensity * 0.5
+                    anchors.bottomMargin: Screen.pixelDensity * (infoItem.minimized ? 0.5 : 1.5)
+                    iconSource: "menu.png"
+                    onClicked: infoItem.minimized = !infoItem.minimized
+                }
             }
         }
 
         Item {
             id: infoItem
-            implicitWidth: root.landscape ? root.width / 2.5 : root.width
-            implicitHeight: root.landscape ? root.height : root.height / 2.5
+            property bool minimized: false
+            width: root.landscape ? (minimized ? 0 : root.width / 2.5) : root.width
+            height: root.landscape ? root.height : (minimized ? 0 : root.height / 2.5)
 
             Legend {
                 id: legend
                 anchors.fill: parent
+                visible: !infoItem.minimized
             }
         }
     }
