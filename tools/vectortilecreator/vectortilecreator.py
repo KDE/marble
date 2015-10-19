@@ -48,7 +48,7 @@ def download(url, directory):
     r = http.request('GET', url, preload_content=False)
     chunk_size = 8192
     file_size_dl = 0
-    fileSize = int(r.getheader("Content-Length"))
+    fileSize = int(r.getheader("content-length"))
     print ("Downloading: %s %.1f Mb" % (filename, fileSize / 1024.0 / 1024.0))
 
     with open(os.path.join(directory, filename), 'wb') as out:
