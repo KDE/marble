@@ -532,70 +532,75 @@ void GeoPainter::drawPolyline ( const GeoDataLineString & lineString,
         const qreal maximumLabelFontSize = 20;
         qreal fontSize = pen().widthF() * 0.45;
         fontSize = qMin( fontSize, maximumLabelFontSize );
-        QFont font = labelFont;
-        font.setPointSizeF(fontSize);
 
         QVector<QPointF> labelNodes;
         QRectF viewportRect = QRectF(QPointF(0, 0), d->m_viewport->size());
         foreach( QPolygonF* itPolygon, polygons ) {
             if (!itPolygon->boundingRect().intersects(viewportRect)) {
-                return;
+                continue;
             }
-            QPainterPath path;
-            path.addPolygon(*itPolygon);
-            qreal pathLength = path.length();
-            if (pathLength == 0) continue;
 
             labelNodes.clear();
             ClipPainter::drawPolyline( *itPolygon, labelNodes, labelPositionFlags );
 
             save();
-            setPen(labelColor);
-            setFont(font);
 
-            int labelWidth = fontMetrics().width( labelText );
-            int maxNumLabels = static_cast<int>(pathLength / labelWidth);
+            if (fontSize >= 6.0) {
+                QFont font = labelFont;
+                font.setPointSizeF(fontSize);
+                setFont(font);
+                int labelWidth = fontMetrics().width( labelText );
 
-            if (fontSize >= 6.0 && maxNumLabels > 0) {
-                qreal textRelativeLength = labelWidth / pathLength;
-                int numLabels = 1;
-                if (maxNumLabels > 1) {
-                    numLabels = maxNumLabels/2;
-                }
-                qreal offset = (1.0 - numLabels*textRelativeLength)/numLabels;
-                qreal startPercent = offset/2.0;
+                QPainterPath path;
+                path.addPolygon(*itPolygon);
+                qreal pathLength = path.length();
+                if (pathLength == 0) continue;
 
-                for (int k = 0; k < numLabels; ++k, startPercent += textRelativeLength + offset) {
-                    QPointF point = path.pointAtPercent(startPercent);
+                int maxNumLabels = static_cast<int>(pathLength / labelWidth);
 
-                    if ( viewport().contains(point.toPoint()) ) {
-                        qreal angle = -path.angleAtPercent(startPercent);
-                        qreal angle2 = -path.angleAtPercent(startPercent + textRelativeLength);
-                        angle = GeoPainterPrivate::normalizeAngle(angle);
-                        angle2 = GeoPainterPrivate::normalizeAngle(angle2);
-                        bool upsideDown = angle > 90.0 && angle < 270.0;
+                if (maxNumLabels > 0) {
+                    qreal textRelativeLength = labelWidth / pathLength;
+                    int numLabels = 1;
+                    if (maxNumLabels > 1) {
+                        numLabels = maxNumLabels/2;
+                    }
+                    qreal offset = (1.0 - numLabels*textRelativeLength)/numLabels;
+                    qreal startPercent = offset/2.0;
 
-                        if ( qAbs(angle - angle2) < 3.0 ) {
-                            if ( upsideDown ) {
-                                angle += 180.0;
-                                point = path.pointAtPercent(startPercent + textRelativeLength);
-                            }
+                    setPen(labelColor);
 
-                            d->drawTextRotated(point, angle, labelText);
-                        } else {
-                            for (int i = 0; i < labelText.length(); ++i) {
-                                qreal currentGlyphTextLength = fontMetrics().width(labelText.left(i)) / pathLength;
+                    for (int k = 0; k < numLabels; ++k, startPercent += textRelativeLength + offset) {
+                        QPointF point = path.pointAtPercent(startPercent);
 
-                                if ( !upsideDown ) {
-                                    angle = -path.angleAtPercent(startPercent + currentGlyphTextLength);
-                                    point = path.pointAtPercent(startPercent + currentGlyphTextLength);
-                                }
-                                else {
-                                    angle = -path.angleAtPercent(startPercent + textRelativeLength - currentGlyphTextLength) + 180;
-                                    point = path.pointAtPercent(startPercent + textRelativeLength - currentGlyphTextLength);
+                        if ( viewport().contains(point.toPoint()) ) {
+                            qreal angle = -path.angleAtPercent(startPercent);
+                            qreal angle2 = -path.angleAtPercent(startPercent + textRelativeLength);
+                            angle = GeoPainterPrivate::normalizeAngle(angle);
+                            angle2 = GeoPainterPrivate::normalizeAngle(angle2);
+                            bool upsideDown = angle > 90.0 && angle < 270.0;
+
+                            if ( qAbs(angle - angle2) < 3.0 ) {
+                                if ( upsideDown ) {
+                                    angle += 180.0;
+                                    point = path.pointAtPercent(startPercent + textRelativeLength);
                                 }
 
-                                d->drawTextRotated(point, angle, labelText.at(i));
+                                d->drawTextRotated(point, angle, labelText);
+                            } else {
+                                for (int i = 0; i < labelText.length(); ++i) {
+                                    qreal currentGlyphTextLength = fontMetrics().width(labelText.left(i)) / pathLength;
+
+                                    if ( !upsideDown ) {
+                                        angle = -path.angleAtPercent(startPercent + currentGlyphTextLength);
+                                        point = path.pointAtPercent(startPercent + currentGlyphTextLength);
+                                    }
+                                    else {
+                                        angle = -path.angleAtPercent(startPercent + textRelativeLength - currentGlyphTextLength) + 180;
+                                        point = path.pointAtPercent(startPercent + textRelativeLength - currentGlyphTextLength);
+                                    }
+
+                                    d->drawTextRotated(point, angle, labelText.at(i));
+                                }
                             }
                         }
                     }
