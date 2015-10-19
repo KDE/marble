@@ -435,6 +435,7 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
     s_defaultStyle[GeoDataFeature::ShopConvenience]          = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/shop_convenience", shopColor );
     s_defaultStyle[GeoDataFeature::ShopGreengrocer]          = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/greengrocer-14", shopColor );
     s_defaultStyle[GeoDataFeature::ShopSeafood]              = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/seafood-14", shopColor );
+    s_defaultStyle[GeoDataFeature::ShopDepartmentStore]      = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/department_store-16", shopColor );
     s_defaultStyle[GeoDataFeature::ShopKiosk]                = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/kiosk-14", shopColor );
     s_defaultStyle[GeoDataFeature::ShopClothes]              = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/shop_clothes.16", shopColor );
     s_defaultStyle[GeoDataFeature::ShopFashion]              = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/shop_clothes.16", shopColor );

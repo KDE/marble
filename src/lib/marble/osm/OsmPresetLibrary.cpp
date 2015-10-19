@@ -105,6 +105,7 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "shop", "convenience" ) ]           = GeoDataFeature::ShopConvenience;
     s_visualCategories[ OsmTag( "shop", "greengrocer" ) ]           = GeoDataFeature::ShopGreengrocer;
     s_visualCategories[ OsmTag( "shop", "seafood" ) ]               = GeoDataFeature::ShopSeafood;
+    s_visualCategories[ OsmTag( "shop", "department_store" ) ]      = GeoDataFeature::ShopDepartmentStore;
     s_visualCategories[ OsmTag( "shop", "kiosk" ) ]                 = GeoDataFeature::ShopKiosk;
     s_visualCategories[ OsmTag( "shop", "clothes" ) ]               = GeoDataFeature::ShopClothes;
     s_visualCategories[ OsmTag( "shop", "fashion" ) ]               = GeoDataFeature::ShopFashion;

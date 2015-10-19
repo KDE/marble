@@ -251,6 +251,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         ShopConvenience,
         ShopGreengrocer,
         ShopSeafood,
+        ShopDepartmentStore,
         ShopKiosk,
         ShopClothes,
         ShopFashion,
