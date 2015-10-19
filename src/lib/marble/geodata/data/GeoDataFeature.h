@@ -84,8 +84,8 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         // The order of the cities needs to stay fixed as the
         // algorithms rely on that.
         SmallCity,
-        SmallCountyCapital,  
-        SmallStateCapital,   
+        SmallCountyCapital,
+        SmallStateCapital,
         SmallNationCapital,
         MediumCity,
         MediumCountyCapital,
@@ -137,7 +137,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
 
         Folder,
         Bookmark,
-        
+
         NaturalWater,
         NaturalWood,
         NaturalBeach,
@@ -174,7 +174,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
 
         //OSM building
         Building,
-        
+
         // OpenStreetMap category Accomodation
         AccomodationCamping,
         AccomodationHostel,
@@ -215,6 +215,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         AmenityEmergencyPhone,
         AmenityWaterPark,
         AmenityCommunityCentre,
+        AmenityFountain,
         AmenityNightClub,
         AmenityBench,
         AmenityCourtHouse,
@@ -253,6 +254,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         ShopSeafood,
         ShopDepartmentStore,
         ShopKiosk,
+        ShopBag,
         ShopClothes,
         ShopFashion,
         ShopJewelry,
@@ -275,6 +277,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         ShopCarRepair,
         ShopCarParts,
         ShopMotorcycle,
+        ShopOutdoor,
         ShopMusicalInstrument,
         ShopPhoto,
         ShopBook,
@@ -380,9 +383,12 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         RailwayMonorail,
         RailwayFunicular,
 
+        // OpenStreetMap category Power
+        PowerTower,
+
         Satellite,
 
-        // Important: Make sure that this is always the last 
+        // Important: Make sure that this is always the last
         // item and just use it to specify the array size
         LastIndex
     };
@@ -468,7 +474,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
      * This function sets the visibility, i.e. whether this feature
      * should be shown or not.  This can be changed either from a GUI
      * or through some action of the program.
-     */ 
+     */
     void setVisible( bool value );
 
     /**

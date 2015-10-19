@@ -150,7 +150,6 @@ void GeometryLayerPrivate::initializeDefaultValues()
     //Amenity
     s_defaultZValues[GeoDataFeature::AmenityGraveyard]    = s_defaultZValue - 12;
 
-
     s_defaultZValues[GeoDataFeature::EducationCollege]    = s_defaultZValue - 12;
     s_defaultZValues[GeoDataFeature::EducationSchool]     = s_defaultZValue - 12;
     s_defaultZValues[GeoDataFeature::EducationUniversity] = s_defaultZValue - 12;
@@ -244,6 +243,7 @@ void GeometryLayerPrivate::initializeDefaultValues()
         s_defaultMinZoomLevels[i] = 15;
 
     s_defaultMinZoomLevels[GeoDataFeature::AmenityGraveyard]    = 14;
+    s_defaultMinZoomLevels[GeoDataFeature::AmenityFountain]     = 17;
 
     s_defaultMinZoomLevels[GeoDataFeature::MilitaryDangerArea]  = 11;
 

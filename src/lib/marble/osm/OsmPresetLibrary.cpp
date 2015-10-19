@@ -64,6 +64,7 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "emergency", "phone" ) ]            = GeoDataFeature::AmenityEmergencyPhone;
     s_visualCategories[ OsmTag( "leisure", "water_park" ) ]         = GeoDataFeature::AmenityWaterPark;
     s_visualCategories[ OsmTag( "amenity", "community_centre" ) ]   = GeoDataFeature::AmenityCommunityCentre;
+    s_visualCategories[ OsmTag( "amenity", "fountain" ) ]           = GeoDataFeature::AmenityFountain;
     s_visualCategories[ OsmTag( "amenity", "nightclub" ) ]          = GeoDataFeature::AmenityNightClub;
     s_visualCategories[ OsmTag( "amenity", "bench" ) ]              = GeoDataFeature::AmenityBench;
     s_visualCategories[ OsmTag( "amenity", "courthouse" ) ]         = GeoDataFeature::AmenityCourtHouse;
@@ -107,6 +108,7 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "shop", "seafood" ) ]               = GeoDataFeature::ShopSeafood;
     s_visualCategories[ OsmTag( "shop", "department_store" ) ]      = GeoDataFeature::ShopDepartmentStore;
     s_visualCategories[ OsmTag( "shop", "kiosk" ) ]                 = GeoDataFeature::ShopKiosk;
+    s_visualCategories[ OsmTag( "shop", "bag" ) ]                   = GeoDataFeature::ShopBag;
     s_visualCategories[ OsmTag( "shop", "clothes" ) ]               = GeoDataFeature::ShopClothes;
     s_visualCategories[ OsmTag( "shop", "fashion" ) ]               = GeoDataFeature::ShopFashion;
     s_visualCategories[ OsmTag( "shop", "jewelry" ) ]               = GeoDataFeature::ShopJewelry;
@@ -129,6 +131,7 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "shop", "car_repair" ) ]            = GeoDataFeature::ShopCarRepair;
     s_visualCategories[ OsmTag( "shop", "car_parts" ) ]             = GeoDataFeature::ShopCarParts;
     s_visualCategories[ OsmTag( "shop", "motorcycle" ) ]            = GeoDataFeature::ShopMotorcycle;
+    s_visualCategories[ OsmTag( "shop", "outdoor" ) ]               = GeoDataFeature::ShopOutdoor;
     s_visualCategories[ OsmTag( "shop", "musical_instrument" ) ]    = GeoDataFeature::ShopMusicalInstrument;
     s_visualCategories[ OsmTag( "shop", "photo" ) ]                 = GeoDataFeature::ShopPhoto;
     s_visualCategories[ OsmTag( "shop", "books" ) ]                 = GeoDataFeature::ShopBook;
@@ -281,6 +284,8 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "railway", "station" ) ]            = GeoDataFeature::TransportTrainStation;
     s_visualCategories[ OsmTag( "railway", "halt" ) ]               = GeoDataFeature::TransportTrainStation;
 
+    s_visualCategories[ OsmTag( "power", "tower" ) ]                = GeoDataFeature::PowerTower;
+
     s_visualCategories[ OsmTag( "aeroway", "aerodrome" ) ]          = GeoDataFeature::TransportAerodrome;
     s_visualCategories[ OsmTag( "aeroway", "helipad" ) ]            = GeoDataFeature::TransportHelipad;
     s_visualCategories[ OsmTag( "transport", "airpor_terminal" ) ]  = GeoDataFeature::TransportAirportTerminal;
@@ -320,7 +325,6 @@ void OsmPresetLibrary::initializeAdditionalOsmTags()
     }
 
     // Recommended for nodes
-    s_additionalOsmTags << OsmTag( "power", "tower" );
     s_additionalOsmTags << OsmTag( "power", "pole" );
     s_additionalOsmTags << OsmTag( "power", "generator" );
     s_additionalOsmTags << OsmTag( "barrier", "fence" );
