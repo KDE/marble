@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dgml xmlns="http://edu.kde.org/marble/dgml/2.0">
+  <document>
+
+    <head>
+      <name>Empty globe</name>
+      <target>earth</target>
+      <theme>empty</theme>
+      <icon pixmap="empty-preview.png"/>
+      <visible>true</visible>
+      <description><![CDATA[<p>An <i>empty globe</i> used as a base to load and view .osm files (offline maps).</p>]]></description>
+      <zoom>
+        <minimum>   900  </minimum>
+        <maximum>  3700  </maximum>
+        <discrete> false </discrete>
+      </zoom>
+    </head>
+
+    <map bgcolor="#8888FF">
+      <canvas/>
+      <target/>
+      <layer name="empty" backend="geodata">
+      </layer>
+    </map>
+
+    <settings>
+      <property name="coordinate-grid">
+        <value>true</value>
+        <available>true</available>
+      </property>
+      <property name="compass">
+        <value>true</value>
+        <available>true</available>
+      </property>
+      <property name="scalebar">
+        <value>true</value>
+        <available>true</available>
+      </property>
+    </settings>
+
+    <legend>
+      <section name="coordinate-grid" checkable="true" connect="coordinate-grid" spacing="12">
+        <heading>Coordinate Grid</heading>
+      </section>
+    </legend>
+
+  </document>
+</dgml>

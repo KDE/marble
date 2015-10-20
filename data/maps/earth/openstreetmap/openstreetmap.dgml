@@ -19,7 +19,7 @@
       <zoom>
         <minimum>   900  </minimum>
         <maximum>  3500  </maximum>
-        <discrete> false </discrete>
+        <discrete> true </discrete>
       </zoom>
     </head>
     <map bgcolor="#000000">

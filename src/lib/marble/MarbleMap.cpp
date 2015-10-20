@@ -443,6 +443,14 @@ int  MarbleMap::maximumZoom() const
     return 2100;
 }
 
+bool MarbleMap::discreteZoom() const
+{
+    if ( d->m_model->mapTheme() )
+        return d->m_model->mapTheme()->head()->zoom()->discrete();
+
+    return false;
+}
+
 QVector<const GeoDataFeature*> MarbleMap::whichFeatureAt( const QPoint& curpos ) const
 {
     return d->m_placemarkLayer.whichPlacemarkAt( curpos ) + d->m_geometryLayer.whichFeatureAt( curpos, viewport() );

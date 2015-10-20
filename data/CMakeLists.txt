@@ -121,6 +121,11 @@ if(EXPERIMENTAL_VECTOR_TILING OR CMAKE_SYSTEM_NAME STREQUAL Android)
     install (DIRECTORY maps/earth/vectorosm DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth)
 endif()
 
+OPTION(MARBLE_EMPTY_MAPTHEME "Install an empty map theme for developmental purposes")
+if(MARBLE_EMPTY_MAPTHEME)
+    install (DIRECTORY maps/earth/empty DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth)
+endif()
+
 install (FILES
 maps/earth/temp-july/temp-july.jpg
 maps/earth/temp-july/temp-july-preview.png

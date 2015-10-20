@@ -293,20 +293,28 @@ bool MarbleDefaultInputHandler::handleWheel(QWheelEvent *wheelevt)
     marblePresenter->setViewContext(Animation);
 
     int steps = wheelevt->delta() / 3;
-    qreal zoom = marblePresenter->zoom();
-    qreal target = MarbleInputHandler::d->m_wheelZoomTargetDistance;
-    if (marblePresenter->animationsEnabled() && target > 0.0)
+
+    if (marblePresenter->map()->discreteZoom())
     {
-        // Do not use intermediate (interpolated) distance values caused by animations
-        zoom = marblePresenter->zoomFromDistance(target);
+        marblePresenter->zoomAtBy(wheelevt->pos(), steps/5);
     }
-    qreal newDistance = marblePresenter->distanceFromZoom(zoom + steps);
-    MarbleInputHandler::d->m_wheelZoomTargetDistance = newDistance;
-    marblePresenter->zoomAt(wheelevt->pos(), newDistance);
-    if (MarbleInputHandler::d->m_inertialEarthRotation)
+    else
     {
-        d->m_kineticSpinning.jumpToPosition(MarbleInputHandler::d->m_marblePresenter->centerLongitude(),
-                                            MarbleInputHandler::d->m_marblePresenter->centerLatitude());
+        qreal zoom = marblePresenter->zoom();
+        qreal target = MarbleInputHandler::d->m_wheelZoomTargetDistance;
+        if (marblePresenter->animationsEnabled() && target > 0.0)
+        {
+            // Do not use intermediate (interpolated) distance values caused by animations
+            zoom = marblePresenter->zoomFromDistance(target);
+        }
+        qreal newDistance = marblePresenter->distanceFromZoom(zoom + steps);
+        MarbleInputHandler::d->m_wheelZoomTargetDistance = newDistance;
+        marblePresenter->zoomAt(wheelevt->pos(), newDistance);
+        if (MarbleInputHandler::d->m_inertialEarthRotation)
+        {
+            d->m_kineticSpinning.jumpToPosition(MarbleInputHandler::d->m_marblePresenter->centerLongitude(),
+                                                MarbleInputHandler::d->m_marblePresenter->centerLatitude());
+        }
     }
 
     MarbleInputHandler::d->m_mouseWheelTimer->start(400);

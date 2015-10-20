@@ -184,6 +184,8 @@ class MARBLE_EXPORT MarbleMap : public QObject
      */
     int maximumZoom() const;
 
+    bool discreteZoom() const;
+
     /**
      * @brief Get the screen coordinates corresponding to geographical coordinates in the map.
      * @param lon    the lon coordinate of the requested pixel position

@@ -121,6 +121,7 @@ namespace Marble
         void zoomViewBy(int zoomStep, FlyToMode mode = Instant);
         void zoomIn(FlyToMode mode = Automatic);
         void zoomOut(FlyToMode mode = Automatic);
+        void zoomAtBy(const QPoint &pos, int zoomStep);
 
         void setViewContext(ViewContext viewContext);
 

@@ -222,8 +222,8 @@ namespace Marble
         }
         else
         {
-            int radiusVal = map()->preferredRadiusCeil(map()->radius() / 0.95);
-            radiusVal = qMax<int>(radius(minimumZoom()), qMin<int>(radiusVal, radius(maximumZoom())));
+            qreal radiusVal = map()->preferredRadiusCeil(map()->radius() / 0.95);
+            radiusVal = qBound( radius(minimumZoom()), radiusVal, radius(maximumZoom()) );
 
             GeoDataLookAt target = lookAt();
             target.setRange(KM2METER * distanceFromRadius(radiusVal));
@@ -240,8 +240,8 @@ namespace Marble
         }
         else
         {
-            int radiusVal = map()->preferredRadiusFloor(map()->radius() * 0.95);
-            radiusVal = qMax<int>(radius(minimumZoom()), qMin<int>(radiusVal, radius(maximumZoom())));
+            qreal radiusVal = map()->preferredRadiusFloor(map()->radius() * 0.95);
+            radiusVal = qBound( radius(minimumZoom()), radiusVal, radius(maximumZoom()) );
 
             GeoDataLookAt target = lookAt();
             target.setRange(KM2METER * distanceFromRadius(radiusVal));
@@ -249,6 +249,21 @@ namespace Marble
             flyTo(target, mode);
         }
     }
+
+    void MarbleAbstractPresenter::zoomAtBy(const QPoint &pos, int zoomStep)
+        {
+            qreal radiusVal;
+            if (map()->tileZoomLevel() <= 0) {
+                radiusVal = radius(zoom() + zoomStep);
+            } else {
+
+                radiusVal = zoomStep > 0 ? map()->preferredRadiusCeil(map()->radius() / 0.95) :
+                                           map()->preferredRadiusFloor(map()->radius() * 0.95);
+                radiusVal = qBound( radius(minimumZoom()), radiusVal, radius(maximumZoom()) );
+            }
+
+            zoomAt(pos, distanceFromRadius(radiusVal));
+        }
 
     qreal MarbleAbstractPresenter::distanceFromZoom(qreal zoom) const
     {
