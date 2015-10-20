@@ -77,6 +77,8 @@ class MergedLayerDecorator
 
     RenderState renderState( const TileId &stackedTileId ) const;
 
+    bool hasTextureLayer() const;
+
  protected:
     Q_DISABLE_COPY( MergedLayerDecorator )
 

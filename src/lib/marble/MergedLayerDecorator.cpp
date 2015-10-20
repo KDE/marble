@@ -361,6 +361,11 @@ RenderState MergedLayerDecorator::renderState( const TileId &stackedTileId ) con
     return state;
 }
 
+bool MergedLayerDecorator::hasTextureLayer() const
+{
+    return !d->m_textureLayers.isEmpty();
+}
+
 StackedTile *MergedLayerDecorator::updateTile( const StackedTile &stackedTile, const TileId &tileId, const QImage &tileImage )
 {
     Q_ASSERT( !tileImage.isNull() );

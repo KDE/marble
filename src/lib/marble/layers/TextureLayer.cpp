@@ -519,6 +519,9 @@ qint64 TextureLayer::volatileCacheLimit() const
 
 int TextureLayer::preferredRadiusCeil( int radius ) const
 {
+    if (!d->m_layerDecorator.hasTextureLayer()) {
+        return radius;
+    }
     const int tileWidth = d->m_layerDecorator.tileSize().width();
     const int levelZeroColumns = d->m_layerDecorator.tileColumnCount( 0 );
     const qreal linearLevel = 4.0 * (qreal)( radius ) / (qreal)( tileWidth * levelZeroColumns );
@@ -533,6 +536,9 @@ int TextureLayer::preferredRadiusCeil( int radius ) const
 
 int TextureLayer::preferredRadiusFloor( int radius ) const
 {
+    if (!d->m_layerDecorator.hasTextureLayer()) {
+        return radius;
+    }
     const int tileWidth = d->m_layerDecorator.tileSize().width();
     const int levelZeroColumns = d->m_layerDecorator.tileColumnCount( 0 );
     const qreal linearLevel = 4.0 * (qreal)( radius ) / (qreal)( tileWidth * levelZeroColumns );
