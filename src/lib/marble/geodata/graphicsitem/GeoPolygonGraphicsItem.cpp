@@ -265,14 +265,22 @@ void GeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportParams* v
             if ( drawAccurate3D && isCameraAboveBuilding ) {
                 int const size = polygon->size();
                 QPointF & a = (*polygon)[0];
-                QPointF shiftA = a + buildingOffset(a, viewport);
-                for (int i=1; i<size; ++i) {
-                    QPointF const & b = (*polygon)[i];
-                    QPointF const shiftB = b + buildingOffset(b, viewport);
-                    QPolygonF buildingSide = QPolygonF() << a << shiftA << shiftB << b;
-                    painter->drawPolygon(buildingSide);
-                    a = b;
-                    shiftA = shiftB;
+                QPointF centerBuildingOffset = buildingOffset(polygon->boundingRect().center(), viewport);
+                if (painter->mapQuality() == MapQuality::HighQuality || qAbs(centerBuildingOffset.x()) > 5.0 || qAbs(centerBuildingOffset.y()) > 5.0) {
+                    QPointF shiftA = a + buildingOffset(a, viewport);;
+                    for (int i=1; i<size; ++i) {
+                        QPointF const & b = (*polygon)[i];
+                        QPointF const shiftB = b + buildingOffset(b, viewport);
+                        QPolygonF buildingSide = QPolygonF() << a << shiftA << shiftB << b;
+                        painter->drawPolygon(buildingSide);
+                        a = b;
+                        shiftA = shiftB;
+                    }
+                }
+                else if ( qAbs(centerBuildingOffset.x()) > 1.4 || qAbs(centerBuildingOffset.y()) > 1.4) {
+                    QPolygonF offsetPolygon;
+                    offsetPolygon = polygon->translated(-0.25*centerBuildingOffset.x(),-0.25*centerBuildingOffset.y());
+                    painter->drawPolygon(offsetPolygon);
                 }
             } else {
                 painter->drawPolygon(*polygon);
