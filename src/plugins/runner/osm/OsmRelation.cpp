@@ -94,16 +94,14 @@ QList<GeoDataLinearRing> OsmRelation::rings(const QStringList &roles, const OsmW
         }
     }
 
-    /** @todo: Merge ways with common start/end nodes here, then check sanity (result should be all rings) */
-
     QList<GeoDataLinearRing> result;
+    QList<OsmWay> unclosedWays;
     foreach(qint64 wayId, roleMembers) {
         GeoDataLinearRing ring;
         OsmWay const & way = ways[wayId];
         if (way.references().first() != way.references().last()) {
-            // Non-trivial rings (where multiple ways have to be merged) are not yet supported. Return nothing
-            mDebug() << "Ignoring non-trivial polygon boundary in relation " << m_osmData.id();
-            return QList<GeoDataLinearRing>();
+            unclosedWays.append(way);
+            continue;
         }
         foreach(qint64 id, way.references()) {
             if (!nodes.contains(id)) {
@@ -113,6 +111,49 @@ QList<GeoDataLinearRing> OsmRelation::rings(const QStringList &roles, const OsmW
             ring << nodes[id].coordinates();
         }
         result << ring;
+    }
+
+    if( !unclosedWays.isEmpty() ) {
+        //mDebug() << "Trying to merge non-trivial polygon boundary in relation " << m_osmData.id();
+        while( unclosedWays.length() > 0 ) {
+            GeoDataLinearRing ring;
+            qint64 firstReference = unclosedWays.first().references().first();
+            qint64 lastReference = firstReference;
+            bool ok = true;
+            while( ok ) {
+                ok = false;
+                for(int i = 0; i<unclosedWays.length(); ++i ) {
+                    const OsmWay &nextWay = unclosedWays.at(i);
+                    if( nextWay.references().first() == lastReference
+                            || nextWay.references().last() == lastReference ) {
+
+                        bool isReversed = nextWay.references().last() == lastReference;
+                        QVector<qint64> v = nextWay.references();
+                        while( !v.isEmpty() ) {
+                            qint64 id = isReversed ? v.takeLast() : v.takeFirst();
+                            if (!nodes.contains(id)) {
+                                // A node is missing. Return nothing.
+                                return QList<GeoDataLinearRing>();
+                            }
+                            if ( id != lastReference ) {
+                                ring << nodes[id].coordinates();
+                            }
+                        }
+                        lastReference = isReversed ? nextWay.references().first()
+                                                   : nextWay.references().last();
+                        unclosedWays.removeAt(i);
+                        ok = true;
+                        break;
+                    }
+                }
+            }
+
+            if(lastReference != firstReference) {
+                return QList<GeoDataLinearRing>();
+            } else {
+                result << ring;
+            }
+        }
     }
     return result;
 }
