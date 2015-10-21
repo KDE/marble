@@ -248,7 +248,7 @@ void GeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportParams* v
     if (isBuildingFrame || isBuildingRoof) {
         QPointF offsetAtCorner = buildingOffset(QPointF(0, 0), viewport, &isCameraAboveBuilding);
         qreal maxOffset = qMax( qAbs( offsetAtCorner.x() ), qAbs( offsetAtCorner.y() ) );
-        drawAccurate3D = maxOffset > 5.0;
+        drawAccurate3D = painter->mapQuality() == HighQuality ? maxOffset > 5.0 : maxOffset > 8.0;
     }
 
     if ( isBuildingFrame ) {
