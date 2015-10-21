@@ -122,24 +122,26 @@ QPointF GeoPolygonGraphicsItem::buildingOffset(const QPointF &point, const Viewp
 
     qreal const cameraHeightPixel = viewport->width() * cameraFactor;
     qreal buildingHeightPixel = viewport->radius() * buildingFactor;
+    qreal const cameraDistance = cameraHeightPixel-buildingHeightPixel;
+
     if (isCameraAboveBuilding) {
-        *isCameraAboveBuilding = cameraHeightPixel > buildingHeightPixel;
+        *isCameraAboveBuilding = cameraDistance > 0;
     }
 
-    qreal const offsetX = point.x() - viewport->width() / 2.0;
-    qreal const xx = cameraHeightPixel / offsetX;
-    qreal const xy = (cameraHeightPixel-buildingHeightPixel) / offsetX;
-    qreal const shiftX = (cameraHeightPixel-buildingHeightPixel) * (xx-xy)/(sqrt((xx*xx+1)*(xy*xy+1)));
+    qreal const cc = cameraDistance * cameraHeightPixel;
+    qreal const cb = cameraDistance * buildingHeightPixel;
+
     // The following lines calculate the same result, but are potentially slower due
     // to using more trigonometric method calls
     // qreal const alpha1 = atan2(offsetX, cameraHeightPixel);
     // qreal const alpha2 = atan2(offsetX, cameraHeightPixel-buildingHeightPixel);
     // qreal const shiftX = 2 * (cameraHeightPixel-buildingHeightPixel) * sin(0.5*(alpha2-alpha1));
 
+    qreal const offsetX = point.x() - viewport->width() / 2.0;
     qreal const offsetY = point.y() - viewport->height() / 2.0;
-    qreal const yx = cameraHeightPixel / offsetY;
-    qreal const yy = (cameraHeightPixel-buildingHeightPixel) / offsetY;
-    qreal const shiftY = (cameraHeightPixel-buildingHeightPixel) * (yx-yy)/(sqrt((yx*yx+1)*(yy*yy+1)));
+
+    qreal const shiftX = offsetX * cb / (cc + offsetX);
+    qreal const shiftY = offsetY * cb / (cc + offsetY);
 
     return QPointF(shiftX, shiftY);
 }
