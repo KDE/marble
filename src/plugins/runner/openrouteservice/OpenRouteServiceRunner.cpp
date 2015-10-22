@@ -214,12 +214,7 @@ GeoDataDocument* OpenRouteServiceRunner::parse( const QByteArray &content ) cons
         // The code below can be used to parse OpenGis errors reported by ORS
         // and may be useful in the future
 
-#if QT_VERSION < 0x050000
-    unsigned int i=0;
-#else
-    int i=0;
-#endif
-        for ( ; i < errors.length(); ++i ) {
+        for (int i=0 ; i < errors.length(); ++i ) {
             QDomNode node = errors.item( i );
             QString errorMessage = node.attributes().namedItem( "message" ).nodeValue();
             QRegExp regexp = QRegExp( "^(.*) Please Check your Position: (-?[0-9]+.[0-9]+) (-?[0-9]+.[0-9]+) !" );
@@ -282,12 +277,7 @@ GeoDataDocument* OpenRouteServiceRunner::parse( const QByteArray &content ) cons
     QDomNodeList geometry = root.elementsByTagName( "xls:RouteGeometry" );
     if ( geometry.size() > 0 ) {
         QDomNodeList waypoints = geometry.item( 0 ).toElement().elementsByTagName( "gml:pos" );
-#if QT_VERSION < 0x050000
-    unsigned int i=0;
-#else
-    int i=0;
-#endif
-        for ( ; i < waypoints.length(); ++i ) {
+        for (int i=0 ; i < waypoints.length(); ++i ) {
             QDomNode node = waypoints.item( i );
             QStringList content = node.toElement().text().split( ' ' );
             if ( content.length() == 2 ) {
@@ -311,12 +301,7 @@ GeoDataDocument* OpenRouteServiceRunner::parse( const QByteArray &content ) cons
     QDomNodeList instructionList = root.elementsByTagName( "xls:RouteInstructionsList" );
     if ( instructionList.size() > 0 ) {
         QDomNodeList instructions = instructionList.item( 0 ).toElement().elementsByTagName( "xls:RouteInstruction" );
-#if QT_VERSION < 0x050000
-    unsigned int i=0;
-#else
-    int i=0;
-#endif
-        for ( ; i < instructions.length(); ++i ) {
+        for (int i=0 ; i < instructions.length(); ++i ) {
             QDomElement node = instructions.item( i ).toElement();
 
             QDomNodeList textNodes = node.elementsByTagName( "xls:Instruction" );

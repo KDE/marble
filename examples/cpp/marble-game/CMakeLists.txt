@@ -7,10 +7,6 @@ include_directories(
  ${QT_INCLUDE_DIR}
 )
 
-if( QT4_FOUND )
-  include( ${QT_USE_FILE} )
-endif()
-
 set(${TARGET}_SRCS
     gamemain.cpp 
     GameMainWindow.cpp
@@ -32,11 +28,7 @@ target_link_libraries(
     ${MARBLEWIDGET}
     marbleui)
 
-if (QT4_FOUND)
-  target_link_libraries( ${TARGET} ${QT_QTCORE_LIBRARY} ${QT_QTMAIN_LIBRARY} )
-else()
-  target_link_libraries( ${TARGET} ${Qt5Core_LIBRARIES} )
-endif()
+target_link_libraries( ${TARGET} ${Qt5Core_LIBRARIES} )
 
 install( TARGETS ${TARGET} RUNTIME DESTINATION ${MARBLE_EXAMPLES_INSTALL_DIR}/${TARGET} )
 install( FILES ${${TARGET}_SRCS} DESTINATION ${MARBLE_EXAMPLES_INSTALL_DIR}/${TARGET} )

@@ -27,9 +27,8 @@
 #include <QNetworkReply>
 #include <QDomDocument>
 
-#if QT_VERSION >= 0x050000
-  #include <QUrlQuery>
-#endif
+#include <QUrlQuery>
+
 namespace Marble
 {
 
@@ -111,14 +110,10 @@ void MapQuestRunner::retrieveRoute( const RouteRequest *route )
             }
         }
     QUrl qurl(url);
-// FIXME: verify that this works with special characters.
-#if QT_VERSION >= 0x050000
+    // FIXME: verify that this works with special characters.
     QUrlQuery urlQuery;
     urlQuery.addQueryItem( "key", settings.value( "appKey" ).toByteArray() );
     qurl.setQuery(urlQuery);
-#else
-    qurl.addEncodedQueryItem( "key", settings.value( "appKey" ).toByteArray() );
-#endif
     m_request.setUrl( qurl );
     m_request.setRawHeader( "User-Agent", HttpDownloadManager::userAgent( "Browser", "MapQuestRunner" ) );
 

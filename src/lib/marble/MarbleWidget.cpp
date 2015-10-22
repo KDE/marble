@@ -637,23 +637,6 @@ void MarbleWidget::resizeEvent( QResizeEvent *event )
     QWidget::resizeEvent( event );
 }
 
-#if QT_VERSION < 0x050000
-void MarbleWidget::connectNotify( const char * signal )
-{
-    if ( QByteArray( signal ) == 
-         QMetaObject::normalizedSignature ( SIGNAL(mouseMoveGeoPosition(QString)) ) )
-        if ( d->m_inputhandler )
-            d->m_inputhandler->setPositionSignalConnected( true );
-}
-
-void MarbleWidget::disconnectNotify( const char * signal )
-{
-    if ( QByteArray( signal ) == 
-         QMetaObject::normalizedSignature ( SIGNAL(mouseMoveGeoPosition(QString)) ) )
-        if ( d->m_inputhandler )
-            d->m_inputhandler->setPositionSignalConnected( false );
-}
-#else
 void MarbleWidget::connectNotify( const QMetaMethod &signal )
 {
     if ( d->m_inputhandler && signal == QMetaMethod::fromSignal( &MarbleWidget::mouseMoveGeoPosition ) ) {
@@ -667,7 +650,6 @@ void MarbleWidget::disconnectNotify( const QMetaMethod &signal )
         d->m_inputhandler->setPositionSignalConnected( false );
     }
 }
-#endif
 
 bool MarbleWidget::screenCoordinates( qreal lon, qreal lat,
                                       qreal& x, qreal& y ) const

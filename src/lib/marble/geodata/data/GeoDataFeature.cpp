@@ -975,12 +975,9 @@ void GeoDataFeature::resetDefaultStyles()
 
 void GeoDataFeature::detach()
 {
-#if QT_VERSION < 0x050000
-    if(d->ref == 1)
-#else
-    if(d->ref.load() == 1)
-#endif
+    if(d->ref.load() == 1) {
         return;
+    }
 
     GeoDataFeaturePrivate* new_d = d->copy();
 

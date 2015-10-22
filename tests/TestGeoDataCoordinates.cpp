@@ -950,13 +950,8 @@ public:
 
 public: // QTranslator API
     virtual bool isEmpty() const { return false; }
-#if QT_VERSION < 0x050000
-    virtual QString translate( const char* context, const char* sourceText,
-                               const char* disambiguation = 0 ) const;
-#else
     virtual QString translate( const char* context, const char* sourceText,
                                const char* disambiguation = 0, int n = -1 ) const;
-#endif
 private:
     const QString degree;
     const QString minutes;
@@ -967,16 +962,10 @@ private:
     const QString west;
 };
 
-#if QT_VERSION < 0x050000
-QString FromStringRegExpTranslator::translate(const char* context, const char* sourceText,
-                                               const char* disambiguation) const
-{
-#else
 QString FromStringRegExpTranslator::translate(const char* context, const char* sourceText,
                                                const char* disambiguation , int n) const
 {
     Q_UNUSED(n);
-#endif
     if (qstrcmp(context, "GeoDataCoordinates") != 0 )
         return QString();
 

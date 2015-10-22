@@ -10,10 +10,6 @@ IF( BUILD_INHIBIT_SCREENSAVER_PLUGIN )
    ${QT_QTNETWORK_INCLUDE_DIR}
   )
 
-  if( QT4BUILD )
-    INCLUDE(${QT_USE_FILE})
-  endif()
-
   set( inhibit-screensaver_SRCS InhibitScreensaverPlugin.cpp )		 
 
   marble_add_plugin( InhibitScreensaverPlugin ${inhibit-screensaver_SRCS} )

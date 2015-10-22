@@ -25,9 +25,7 @@
 #include <QVector>
 #include <QPair>
 
-#if QT_VERSION >= 0x050000
-  #include <QUrlQuery>
-#endif
+#include <QUrlQuery>
 
 namespace Marble
 {
@@ -85,19 +83,11 @@ void CycleStreetsRunner::retrieveRoute( const RouteRequest *route )
     }
     queryStrings["itinerarypoints"] = itinerarypoints;
 
-#if QT_VERSION >= 0x050000
 	QUrlQuery urlQuery;
 	Q_FOREACH( const QString& key, queryStrings.keys()){
 		urlQuery.addQueryItem(key, queryStrings.value(key));
 	}
 	url.setQuery( urlQuery);
-#else
-    typedef QMap<QString, QString>::ConstIterator Iterator;
-    Iterator end = queryStrings.constEnd();
-    for ( Iterator iter = queryStrings.constBegin(); iter != end; ++iter ) {
-        url.addQueryItem(iter.key(), iter.value());
-    }
-#endif
 
     m_request.setUrl( url );
     m_request.setRawHeader( "User-Agent", HttpDownloadManager::userAgent( "Browser", "CycleStreetsRunner" ) );

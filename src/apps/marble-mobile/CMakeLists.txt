@@ -7,13 +7,10 @@ include_directories(
  ${QT_INCLUDE_DIR}
  ${CMAKE_CURRENT_SOURCE_DIR}/../marble-ui
 )
-if( QT4BUILD )
-  include(${QT_USE_FILE})
-else()
-  INCLUDE_DIRECTORIES(
-   ${Qt5WebKitWidgets_INCLUDE_DIRS}
-  )
-endif()
+
+INCLUDE_DIRECTORIES(
+${Qt5WebKitWidgets_INCLUDE_DIRS}
+)
 
 set( marblemobile_SRCS
   main.cpp

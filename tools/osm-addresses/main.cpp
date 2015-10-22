@@ -17,9 +17,7 @@
 #include <QFileInfo>
 #include <QTime>
 
-#if QT_VERSION >= 0x050000
 #include <QMessageLogContext>
-#endif
 
 using namespace Marble;
 
@@ -31,47 +29,27 @@ enum DebugLevel {
 
 DebugLevel debugLevel = Info;
 
-#if QT_VERSION >= 0x050000
 void debugOutput( QtMsgType type, const QMessageLogContext &context, const QString &msg )
-#else
-void debugOutput( QtMsgType type, const char *msg )
-#endif
 {
     switch ( type ) {
     case QtDebugMsg:
         if ( debugLevel == Debug ) {
-#if QT_VERSION >= 0x050000
             qDebug() << "Debug: " << context.file << ":" << context.line << " " << msg;
-#else
-            fprintf( stderr, "Debug: %s\n", msg );
-#endif
         }
         break;
     case QtWarningMsg:
         if ( debugLevel < Mute ) {
-#if QT_VERSION >= 0x050000
             qDebug() << "Info: " << context.file << ":" << context.line << " " << msg;
-#else
-            fprintf( stderr, "Info: %s\n", msg );
-#endif
         }
         break;
     case QtCriticalMsg:
         if ( debugLevel < Mute ) {
-#if QT_VERSION >= 0x050000
             qDebug() << "Warning: " << context.file << ":" << context.line << " " << msg;
-#else
-            fprintf( stderr, "Warning: %s\n", msg );
-#endif
         }
         break;
     case QtFatalMsg:
         if ( debugLevel < Mute ) {
-#if QT_VERSION >= 0x050000
             qDebug() << "Fatal: " << context.file << ":" << context.line << " " << msg;
-#else
-            fprintf( stderr, "Fatal: %s\n", msg );
-#endif
             abort();
         }
     }
@@ -128,11 +106,7 @@ int main( int argc, char *argv[] )
         }
     }
 
-#if QT_VERSION >= 0x050000
     qInstallMessageHandler( debugOutput );
-#else
-    qInstallMsgHandler( debugOutput );
-#endif
 
     QFileInfo file( inputFile );
     if ( !file.exists() ) {

@@ -62,7 +62,7 @@ target_link_libraries (
     KF5::I18n
     )
 
-## this works for win32 only because FindQt4 does not handle this correct
+## this works for win32 only because FindQt does not handle this correct
 if(STATIC_BUILD)
     target_link_libraries(marble ${QT_PLUGINS_DIR}/imageformats/qjpeg.lib)
     target_link_libraries(marble ${QT_PLUGINS_DIR}/imageformats/qsvg.lib)

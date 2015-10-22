@@ -5,9 +5,6 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_BINARY_DIR}
  ${QT_INCLUDE_DIR}
 )
-if( QT4BUILD )
-  INCLUDE(${QT_USE_FILE})
-endif()
 
 set( navigation_SRCS NavigationFloatItem.cpp ArrowDiscWidget.cpp NavigationButton.cpp NavigationSlider.cpp )
 set (navigation_UI navigation.ui)

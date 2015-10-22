@@ -37,9 +37,7 @@ public:
     QMap<QNetworkReply*, int> m_previewQueue;
     QSet<QString> m_requestedPreviews;
 
-#if QT_VERSION >= 0x050000
     QHash<int, QByteArray> m_roleNames;
-#endif
 };
 
 CloudRouteModel::Private::Private() :
@@ -64,11 +62,7 @@ CloudRouteModel::CloudRouteModel( QObject* parent ) :
     roles[ IsCached ] = "isCached";
     roles[ IsDownloading ] = "isDownloading";
     roles[ IsOnCloud ] = "isOnCloud";
-#if QT_VERSION < 0x050000
-    setRoleNames( roles );
-#else
     d->m_roleNames = roles;
-#endif
 }
 
 QVariant CloudRouteModel::data( const QModelIndex& index, int role ) const
@@ -95,12 +89,10 @@ int CloudRouteModel::rowCount( const QModelIndex &parent ) const
     return parent.isValid() ? 0 : d->m_items.count();
 }
 
-#if QT_VERSION >= 0x050000
 QHash<int, QByteArray> CloudRouteModel::roleNames() const
 {
     return d->m_roleNames;
 }
-#endif
 
 void CloudRouteModel::setItems( const QVector<RouteItem> &items )
 {

@@ -1078,13 +1078,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     virtual void resizeEvent( QResizeEvent *event );
 
-#if QT_VERSION < 0x050000
-    void connectNotify( const char * signal );
-    void disconnectNotify( const char * signal );
-#else
     virtual void connectNotify(const QMetaMethod &signal);
     virtual void disconnectNotify(const QMetaMethod &signal);
-#endif
 
     /**
       * @brief Reimplementation of the changeEvent() function in QWidget to

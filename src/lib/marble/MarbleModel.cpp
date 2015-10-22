@@ -27,11 +27,6 @@
 #include <QSortFilterProxyModel>
 #include <QTextDocument>
 
-#if (QT_VERSION < 0x040800)
-// See comment below why this is needed
-#include <QNetworkConfigurationManager>
-#endif
-
 #include "kdescendantsproxymodel.h"
 
 #include "MapThemeManager.h"
@@ -201,17 +196,6 @@ MarbleModel::MarbleModel( QObject *parent )
     : QObject( parent ),
       d( new MarbleModelPrivate() )
 {
-#if (QT_VERSION < 0x040800)
-    // fix for KDE bug 288612
-    // Due to a race condition in Qt 4.7 (https://bugreports.qt-project.org/browse/QTBUG-22107),
-    // a segfault might occur at startup when e.g. reverse geocoding is called very early.
-    // The race condition can be avoided by instantiating QNetworkConfigurationManager
-    // when only one thread is running (i.e. here).
-    // QNetworkConfigurationManager was introduced in Qt 4.7, the bug is fixed
-    // in 4.8, thus the Qt version check.
-    new QNetworkConfigurationManager( this );
-#endif
-
     // connect the StoragePolicy used by the download manager to the FileStorageWatcher
     connect( &d->m_storagePolicy, SIGNAL(cleared()),
              &d->m_storageWatcher, SLOT(resetCurrentSize()) );

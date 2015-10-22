@@ -7,10 +7,6 @@ INCLUDE_DIRECTORIES(
  ${QT_INCLUDE_DIR}
 )
 
-if( QT4BUILD )
-  INCLUDE(${QT_USE_FILE})
-endif()
-
 set( eclipses_SRCS
     EclipsesModel.cpp
     EclipsesItem.cpp

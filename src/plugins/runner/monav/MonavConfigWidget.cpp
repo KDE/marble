@@ -214,12 +214,7 @@ void MonavConfigWidgetPrivate::parseNewStuff( const QByteArray &data )
 
     QDomElement root = xml.documentElement();
     QDomNodeList items = root.elementsByTagName( "stuff" );
-#if QT_VERSION < 0x050000
-    unsigned int i=0;
-#else
-    int i=0;
-#endif
-    for ( ; i < items.length(); ++i ) {
+    for (int i=0 ; i < items.length(); ++i ) {
         MonavStuffEntry item;
         QDomNode node = items.item( i );
 

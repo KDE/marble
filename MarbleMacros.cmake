@@ -20,27 +20,15 @@ else()
 endif()
 
 macro(qt_add_resources)
-  if( QT4BUILD )
-    qt4_add_resources(${ARGN})
-  else()
-    qt5_add_resources(${ARGN})
-  endif()
+  qt5_add_resources(${ARGN})
 endmacro()
 
 macro(qt_wrap_ui)
-  if( QT4BUILD )
-    qt4_wrap_ui(${ARGN})
-  else()
-    qt5_wrap_ui(${ARGN})
-  endif()
+  qt5_wrap_ui(${ARGN})
 endmacro()
 
 macro(qt_generate_moc)
-  if( QT4BUILD )
-    qt4_generate_moc(${ARGN})
-  else()
-    qt5_generate_moc(${ARGN})
-  endif()
+  qt5_generate_moc(${ARGN})
 endmacro()
 
 # the place to put in common cmake macros
@@ -111,15 +99,8 @@ macro( marble_add_test TEST_NAME )
 
         add_executable( ${TEST_NAME} ${${TEST_NAME}_SRCS} )
         target_link_libraries( ${TEST_NAME} ${MARBLEWIDGET} )
-        if( QT4BUILD )
-          target_link_libraries( ${TEST_NAME} ${QT_QTMAIN_LIBRARY}
-                                              ${QT_QTCORE_LIBRARY}
-                                              ${QT_QTGUI_LIBRARY}
-                                              ${QT_QTTEST_LIBRARY} )
-        else()
-          target_link_libraries( ${TEST_NAME} ${Qt5Test_LIBRARIES}
+        target_link_libraries( ${TEST_NAME} ${Qt5Test_LIBRARIES}
                                               ${Qt5DBus_LIBRARIES} )
-        endif()
 
         set_target_properties( ${TEST_NAME} PROPERTIES 
                                COMPILE_FLAGS "-DDATA_PATH=\"\\\"${DATA_PATH}\\\"\" -DPLUGIN_PATH=\"\\\"${PLUGIN_PATH}\\\"\"" )
@@ -191,35 +172,3 @@ macro(ADD_FEATURE_INFO)
   # just ignore it
 endmacro()
 endif()
-
-# FIXME: The original QT4_ADD_RESOURCES should be extended to support this filetype too
-#
-# QT4_ADD_RESOURCE2(outfiles inputfile ... )
-# TODO  perhaps consider adding support for compression and root options to rcc
-
-if (MINGW)
-MACRO (QT4_ADD_RESOURCES2 outfiles )
-
-FOREACH (it ${ARGN})
-  GET_FILENAME_COMPONENT(outfilename ${it} NAME_WE)
-  GET_FILENAME_COMPONENT(infile ${it} ABSOLUTE)
-  GET_FILENAME_COMPONENT(rc_path ${infile} PATH)
-  SET(outfile ${CMAKE_CURRENT_BINARY_DIR}/${outfilename}_res.o)
-  #  parse file for dependencies
-  FILE(READ "${infile}" _RC_FILE_CONTENTS)
-  STRING(REGEX MATCHALL "<file>[^<]*" _RC_FILES "${_RC_FILE_CONTENTS}")
-  SET(_RC_DEPENDS)
-  FOREACH(_RC_FILE ${_RC_FILES})
-    STRING(REGEX REPLACE "^<file>" "" _RC_FILE "${_RC_FILE}")
-    SET(_RC_DEPENDS ${_RC_DEPENDS} "${rc_path}/${_RC_FILE}")
-  ENDFOREACH(_RC_FILE)
-  ADD_CUSTOM_COMMAND(OUTPUT ${outfile}
-    COMMAND windres
-    ARGS -i ${infile} -o ${outfile} --include-dir=${CMAKE_CURRENT_SOURCE_DIR}
-    MAIN_DEPENDENCY ${infile}
-    DEPENDS ${_RC_DEPENDS})
-  SET(${outfiles} ${${outfiles}} ${outfile})
-ENDFOREACH (it)
-
-ENDMACRO (QT4_ADD_RESOURCES2)
-ENDIF(MINGW)

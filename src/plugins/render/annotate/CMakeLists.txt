@@ -7,9 +7,6 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_SOURCE_DIR}/src/lib/marble/layers
  ${QT_INCLUDE_DIR}
 )
-if( QT4BUILD )
-  INCLUDE(${QT_USE_FILE})
-endif()
 
 set( annotate_UI
   EditGroundOverlayDialog.ui

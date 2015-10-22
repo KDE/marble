@@ -17,13 +17,8 @@ add_subdirectory( reverse-geocoding )
 add_subdirectory( vehicletracking )
 add_subdirectory( search )
 
-if(QT5BUILD)
-    add_subdirectory( marble-game )
-endif()
-
-if(NOT QT4BUILD)
-    add_subdirectory( marbleQuick2 )
-endif()
+add_subdirectory( marble-game )
+add_subdirectory( marbleQuick2 )
 
 FIND_PACKAGE (OpenCV QUIET COMPONENTS core imgproc highgui)
 if(OPENCV_HIGHGUI_FOUND)

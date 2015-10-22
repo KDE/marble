@@ -7,12 +7,7 @@ INCLUDE_DIRECTORIES(
  ${liblocation_INCLUDE_DIRS}
 )
 
-if( QT4BUILD )
-  include(${QT_USE_FILE})
-else()
-  INCLUDE_DIRECTORIES(
-   ${Qt5Concurrent_INCLUDE_DIRS})
-endif()
+INCLUDE_DIRECTORIES(${Qt5Concurrent_INCLUDE_DIRS})
 
 set( wlocate_SRCS
  WlocatePositionProviderPlugin.cpp

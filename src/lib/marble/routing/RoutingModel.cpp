@@ -41,9 +41,7 @@ public:
     RouteDeviation m_deviation;
     PositionTracking* m_positionTracking;
     RouteRequest* const m_request;
-#if QT_VERSION >= 0x050000
     QHash<int, QByteArray> m_roleNames;
-#endif
 
     void updateViaPoints( const GeoDataCoordinates &position );
 };
@@ -82,11 +80,7 @@ RoutingModel::RoutingModel( RouteRequest* request, MarbleModel *model, QObject *
    roles.insert( RoutingModel::TurnTypeIconRole, "turnTypeIcon" );
    roles.insert( RoutingModel::LongitudeRole, "longitude" );
    roles.insert( RoutingModel::LatitudeRole, "latitude" );
-#if QT_VERSION < 0x050000
-   setRoleNames( roles );
-#else
    d->m_roleNames = roles;
-#endif
 }
 
 RoutingModel::~RoutingModel()
@@ -160,12 +154,10 @@ QVariant RoutingModel::data ( const QModelIndex & index, int role ) const
     return QVariant();
 }
 
-#if QT_VERSION >= 0x050000
 QHash<int, QByteArray> RoutingModel::roleNames() const
 {
     return d->m_roleNames;
 }
-#endif
 
 void RoutingModel::setRoute( const Route &route )
 {

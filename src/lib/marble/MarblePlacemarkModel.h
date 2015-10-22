@@ -88,12 +88,10 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
     int rowCount( const QModelIndex &parent = QModelIndex() ) const;
     int columnCount( const QModelIndex &parent = QModelIndex() ) const;
 
-#if QT_VERSION >= 0x050000
     /**
      * Return the supported role names
      */
     QHash<int, QByteArray> roleNames() const;
-#endif
 
     /**
      * Return the data according to the index.
@@ -130,9 +128,7 @@ Q_SIGNALS:
     Q_DISABLE_COPY( MarblePlacemarkModel )
     class Private;
     Private* const d;
-#if QT_VERSION >= 0x050000
     QHash<int, QByteArray> m_roleNames;
-#endif
 };
 
 }

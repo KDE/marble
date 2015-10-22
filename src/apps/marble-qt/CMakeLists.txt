@@ -6,10 +6,6 @@ if(MSVC)
   set(marble_SRCS ${marble_SRCS} marble.rc)
 endif(MSVC)
 
-if(MINGW AND QT4BUILD)
-   QT4_ADD_RESOURCES2(marble_SRCS marble.rc)
-endif(MINGW AND QT4BUILD)
-
 qt_wrap_ui(marble_SRCS ${marble_UI})
 
 if (WIN32)
@@ -27,34 +23,18 @@ else (WIN32)
     endif (APPLE)
 endif (WIN32)
 
-if (QT4BUILD)
-  target_link_libraries (
-    marble-qt
-    ${QT_QTCORE_LIBRARY}
-    ${QT_QTGUI_LIBRARY}
-    ${QT_QTXML_LIBRARY}
-    ${QT_QTSVG_LIBRARY}
-    ${QT_QTNETWORK_LIBRARY}
-    ${QT_QTSCRIPT_LIBRARY}
-    ${QT_QTMAIN_LIBRARY}
-    ${QT_QTDBUS_LIBRARY}
-    marbleui
-    ${MARBLEWIDGET}
-    astro)
-else()
-  target_link_libraries (
-    marble-qt
-    ${Qt5Core_LIBRARIES}
-    ${Qt5Xml_LIBRARIES}
-    ${Qt5Widgets_LIBRARIES}
-    ${Qt5PrintSupport_LIBRARIES}
-    ${Qt5Network_LIBRARIES}
-    ${Qt5WebKitWidgets_LIBRARIES}
-    ${Qt5WebKit_LIBRARIES}
-    marbleui
-    ${MARBLEWIDGET}
-    astro)
-endif()
+target_link_libraries (
+marble-qt
+${Qt5Core_LIBRARIES}
+${Qt5Xml_LIBRARIES}
+${Qt5Widgets_LIBRARIES}
+${Qt5PrintSupport_LIBRARIES}
+${Qt5Network_LIBRARIES}
+${Qt5WebKitWidgets_LIBRARIES}
+${Qt5WebKit_LIBRARIES}
+marbleui
+${MARBLEWIDGET}
+astro)
 
 if(WIN32)
   target_link_libraries(
@@ -65,7 +45,7 @@ if(WIN32)
     )
 endif(WIN32)
 
-## this works for win32 only because FindQt4 does not handle this correct
+## this works for win32 only because FindQt does not handle this correct
 if(STATIC_BUILD)
     target_link_libraries(marble ${QT_PLUGINS_DIR}/imageformats/qjpeg.lib)
     target_link_libraries(marble ${QT_PLUGINS_DIR}/imageformats/qsvg.lib)

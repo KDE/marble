@@ -104,11 +104,7 @@ void SphericalScanlineTextureMapper::mapTexture( GeoPainter *painter,
 
     QRect rect( viewport->width() / 2 - radius, viewport->height() / 2 - radius,
                 2 * radius, 2 * radius);
-#if QT_VERSION < 0x050000
-    rect = rect.intersect( dirtyRect );
-#else
     rect = rect.intersected( dirtyRect );
-#endif
     painter->drawImage( rect, m_canvasImage, rect );
 }
 

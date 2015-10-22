@@ -11,9 +11,6 @@ INCLUDE_DIRECTORIES(
  ${QT_INCLUDE_DIR}
  ${PHONON_INCLUDES}
 )
-if( QT4BUILD )
-  INCLUDE(${QT_USE_FILE})
-endif()
 
 IF( PHONON_FOUND )
   set( routing_SRCS RoutingPlugin.cpp AudioOutput.cpp )

@@ -87,57 +87,21 @@ find_package(Qt5PrintSupport)
 if(QTONLY)
   # Forward the old QTONLY=TRUE option to the new WITH_KDE=FALSE
   set(WITH_KF5 FALSE)
-  # And unset it quickly. Nobody shall use it anymore anywhere. Use the following variables instead:
-  # to detect if building with Qt 5.x (set by us/cmake based on qmake -v): QT5BUILD
-  # to detect if building with Qt 4.x (set by us/cmake based on qmake -v): QT4BUILD
+  # And unset it quickly. Nobody shall use it anymore anywhere.
   # to detect if KDE _should_ be used (set by user): WITH_KDE but do not use it within src/lib/
   unset(QTONLY)
 endif()
 
-option(QT5BUILD "Build for Qt5" ON)
+cmake_minimum_required(VERSION 2.8.12)
+set(MARBLEWIDGET marblewidget-qt5)
 
-if(QT5BUILD AND Qt5Core_FOUND)
-  cmake_minimum_required(VERSION 2.8.12)
-  set(QT4BUILD FALSE)
-  set(MARBLEWIDGET marblewidget-qt5)
-
-  include_directories( ${Qt5Svg_INCLUDE_DIRS} )
-  include_directories( ${Qt5PrintSupport_INCLUDE_DIRS} )
-  include_directories( ${Qt5Network_INCLUDE_DIRS} )
-  include_directories( ${Qt5Script_INCLUDE_DIRS} )
-  include_directories( ${Qt5Test_INCLUDE_DIRS} )
-  include_directories( ${Qt5Xml_INCLUDE_DIRS} )
-  include_directories( ${Qt5Sql_INCLUDE_DIRS} )
-else()
-  cmake_minimum_required(VERSION 2.8.6)
-  unset(QT_MOC_EXECUTABLE) # somehow the qt5 check sneaks in moc for qt5 even if qmake points to qt4
-  set(WITH_KF5 FALSE)
-  set(QT4BUILD TRUE)
-  set(MARBLEWIDGET marblewidget)
-  find_package(Qt4 REQUIRED)
-  set( QT_USE_QTXML         ON )
-  set( QT_USE_QTNETWORK     ON )
-  set( QT_USE_QTTEST        ON )
-  set( QT_USE_QTSCRIPT      ON )
-  set( QT_USE_QTWEBKIT      ON )
-  set( QT_USE_QTSVG         ON )
-  set( QT_USE_QTDECLARATIVE ON )
-  set( QT_USE_QTSQL         ON )
-  set( QT_USE_QTDBUS        ON )
-  include( ${QT_USE_FILE} )
-  marble_set_package_properties( Qt4 PROPERTIES DESCRIPTION "cross-platform application framework" )
-  marble_set_package_properties( Qt4 PROPERTIES URL "http://qt.digia.com/" )
-  marble_set_package_properties( Qt4 PROPERTIES TYPE REQUIRED PURPOSE "core framework" )
-  IF ( NOT QT_QTDECLARATIVE_FOUND )
-    # older cmake versions have a FindQt4.cmake without support for declarative,
-    # but the library may still be available
-    FIND_PACKAGE(QtDeclarative)
-    include_directories(${QT_QTDECLARATIVE_INCLUDE_DIR})
-  endif()
-  if ( NOT QT_QTWEBKIT_FOUND )
-    set ( MARBLE_NO_WEBKIT TRUE )
-  endif()
-endif()
+include_directories( ${Qt5Svg_INCLUDE_DIRS} )
+include_directories( ${Qt5PrintSupport_INCLUDE_DIRS} )
+include_directories( ${Qt5Network_INCLUDE_DIRS} )
+include_directories( ${Qt5Script_INCLUDE_DIRS} )
+include_directories( ${Qt5Test_INCLUDE_DIRS} )
+include_directories( ${Qt5Xml_INCLUDE_DIRS} )
+include_directories( ${Qt5Sql_INCLUDE_DIRS} )
 
 SET(CMAKE_AUTOMOC TRUE)
 
@@ -250,7 +214,7 @@ if(STATIC_BUILD)
 endif(STATIC_BUILD)
 
 ####################################################
-# Workaround FindQt4.cmake bug not finding
+# Workaround FindQt.cmake bug not finding
 # QtDesigner includes
 if(APPLE)
   if (NOT DEFINED ${QT_QTDESIGNER_INCLUDE_DIR})

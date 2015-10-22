@@ -13,11 +13,7 @@
 //
 
 #include <MarbleAbstractPresenter.h>
-#if QT_VERSION >= 0x050000
-    #include <QtMath>
-#else
-    #include <qmath.h>
-#endif
+#include <QtMath>
 #include <Quaternion.h>
 #include <ViewportParams.h>
 #include <MarbleLocale.h>

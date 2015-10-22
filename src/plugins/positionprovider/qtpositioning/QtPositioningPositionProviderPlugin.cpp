@@ -16,12 +16,6 @@
 #include <QGeoCoordinate>
 #include <QTimer>
 
-#if QT_VERSION < 0x050000
-
-QTM_USE_NAMESPACE
-
-#endif
-
 namespace Marble {
 
 class QtPositioningPositionProviderPluginPrivate

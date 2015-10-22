@@ -25,19 +25,10 @@
 #include <QTimer>
 #include <QMouseEvent>
 #include <QRegion>
-#if QT_VERSION < 0x050000
-  #include <QDeclarativeComponent>
-  #include <QDeclarativeContext>
-  #include <QDeclarativeItem>
-  typedef QDeclarativeComponent QQmlComponent;
-  typedef QDeclarativeContext QQmlContext;
-  typedef QDeclarativeItem QQuickItem;
-#else
-  #include <QQmlComponent>
-  #include <QQmlContext>
-  #include <QQuickItem>
-  #include <QGraphicsItem>
-#endif
+#include <QQmlComponent>
+#include <QQmlContext>
+#include <QQuickItem>
+#include <QGraphicsItem>
 
 namespace Marble
 {

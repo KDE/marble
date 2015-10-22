@@ -10,9 +10,7 @@
 
 #include <QString>
 #include <QUrl>
-#if QT_VERSION >= 0x050000
 #include <QUrlQuery>
-#endif
 
 #include "Planet.h"
 #include "PlanetFactory.h"
@@ -52,13 +50,6 @@ Planet GeoUriParser::planet() const
 
 QString GeoUriParser::queryValue(const QUrl& url, const QString& one, const QString& two)
 {
-#if QT_VERSION < 0x050000
-    QString value = url.queryItemValue( one );
-    if ( value.isEmpty() && !two.isEmpty() ) {
-        value = url.queryItemValue( two );
-    }
-    return value;
-#else
     QUrlQuery query( url );
     if ( query.hasQueryItem( one ) ) {
         return query.queryItemValue( one );
@@ -67,7 +58,6 @@ QString GeoUriParser::queryValue(const QUrl& url, const QString& one, const QStr
     }
 
     return QString();
-#endif
 }
 
 bool GeoUriParser::parse()

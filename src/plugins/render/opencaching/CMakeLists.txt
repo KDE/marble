@@ -19,7 +19,7 @@ SET( my_SRCS
 SET( opencaching_UI OpenCachingConfigWidget.ui )
 SET( opencachingcache_UI OpenCachingCacheDialog.ui )
 
-QT4_WRAP_UI(my_SRCS ${opencaching_UI})
-QT4_WRAP_UI(my_SRCS ${opencachingcache_UI})
+QT_WRAP_UI(my_SRCS ${opencaching_UI})
+QT_WRAP_UI(my_SRCS ${opencachingcache_UI})
 
 MARBLE_ADD_PLUGIN( OpenCachingPlugin ${my_SRCS} )

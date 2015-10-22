@@ -7,10 +7,6 @@ INCLUDE_DIRECTORIES(
  ${LIBSHP_INCLUDE_DIR}
 )
 
-if( QT4BUILD )
-  INCLUDE(${QT_USE_FILE})
-endif()
-
 set( shp_SRCS ShpPlugin.cpp ShpRunner.cpp )
 
 set( ShpPlugin_LIBS ${LIBSHP_LIBRARIES} )

@@ -104,12 +104,10 @@ public:
 
     void reset();
 
-#if QT_VERSION >= 0x050000
     QHash<int, QByteArray> roleNames() const;
 
 private:
     QHash<int, QByteArray> m_roleNames;
-#endif
 };
 
 AbstractDataPluginModelPrivate::AbstractDataPluginModelPrivate( const QString& name,
@@ -201,11 +199,7 @@ FavoritesModel::FavoritesModel( AbstractDataPluginModelPrivate *_d, QObject* par
     }
     roles[Qt::DisplayRole] = "display";
     roles[Qt::DecorationRole] = "decoration";
-#if QT_VERSION < 0x050000
-    setRoleNames( roles );
-#else
     m_roleNames = roles;
-#endif
 }
 
 int FavoritesModel::rowCount ( const QModelIndex &parent ) const
@@ -249,12 +243,10 @@ void FavoritesModel::reset()
     endResetModel();
 }
 
-#if QT_VERSION >= 0x050000
 QHash<int, QByteArray> FavoritesModel::roleNames() const
 {
     return m_roleNames;
 }
-#endif
 
 AbstractDataPluginModel::AbstractDataPluginModel( const QString &name, const MarbleModel *marbleModel, QObject *parent )
     : QObject(  parent ),

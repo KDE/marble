@@ -43,9 +43,6 @@
 #include <QDialog>
 #include <QPushButton>
 #include <QSpacerItem>
-#if QT_VERSION < 0x050000
-#include <QPlastiqueStyle>
-#endif
 
 namespace Marble
 {
@@ -513,18 +510,6 @@ void RoutingPlugin::initialize()
     d->m_widget.routingButton->setEnabled( false );
     connect( d->m_widget.instructionLabel, SIGNAL(linkActivated(QString)),
              this, SLOT(reverseRoute()) );
-
-#if QT_VERSION < 0x050000
-    bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
-    if ( smallScreen ) {
-        /** @todo: The maemo styling of the progressbar adds a black background and some frame
-          * which are even painted when no background painting is requested like WidgetItem does.
-          * This looks really bad on a float item. Using a different style here, but that is only
-          * a workaround.
-          */
-        d->m_widget.progressBar->setStyle( new QPlastiqueStyle );
-    }
-#endif
 
     MarbleGraphicsGridLayout *layout = new MarbleGraphicsGridLayout( 1, 1 );
     layout->addItem( d->m_widgetItem, 0, 0 );

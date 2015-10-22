@@ -4,9 +4,6 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_BINARY_DIR}/src/plugins/render/opencachingcom
  ${QT_INCLUDE_DIR}
 )
-if( QT4BUILD )
-  INCLUDE(${QT_USE_FILE})
-endif()
 
 SET( my_SRCS
   OpenCachingComPlugin.cpp

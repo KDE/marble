@@ -6,9 +6,6 @@ INCLUDE_DIRECTORIES(
  ${QT_INCLUDE_DIR}
  ${LIBGPS_INCLUDE_DIR}
 )
-if( QT4BUILD )
-  include(${QT_USE_FILE})
-endif()
 
 set( gpsd_SRCS
  GpsdConnection.cpp

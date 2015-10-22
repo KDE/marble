@@ -21,11 +21,7 @@
 
 #include <stdlib.h>
 
-#if QT_VERSION >= 0x050000
 #include <QStandardPaths>
-#else
-#include <QDesktopServices>
-#endif
 
 #ifdef Q_OS_WIN
 //for getting appdata path
@@ -238,11 +234,7 @@ QString MarbleDirs::localPath()
 
     return dataHome + "/marble"; // local path
 #else
-#if QT_VERSION >= 0x050000
 	return QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/.marble/data";
-#else
-	return QDesktopServices::storageLocation(QDesktopServices::DataLocation) + "/.marble/data";
-#endif
 #endif
 }
 
@@ -295,11 +287,7 @@ QString MarbleDirs::pluginLocalPath()
 #ifndef Q_OS_WIN
     return QString( QDir::homePath() + "/.marble/plugins" ); // local path
 #else
-#if QT_VERSION >= 0x050000
 	return QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/.marble/plugins";
-#else
-	return QDesktopServices::storageLocation(QDesktopServices::DataLocation) + "/.marble/plugins";
-#endif
 #endif
 }
 

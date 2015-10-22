@@ -9,9 +9,6 @@ include_directories(
  ${ZLIB_INCLUDE_DIRS}
  ../../src/plugins/runner/local-osm-search
 )
-if( QT4BUILD )
-  include( ${QT_USE_FILE} )
-endif()
 
 set( ${TARGET}_SRC
 OsmRegion.cpp
@@ -33,8 +30,4 @@ add_definitions( -DMAKE_MARBLE_LIB )
 add_executable( ${TARGET} ${${TARGET}_SRC} ${PROTO_SRCS} ${PROTO_HDRS} )
 
 target_link_libraries( ${TARGET} ${PROTOBUF_LIBRARIES} ${ZLIB_LIBRARIES} )
-if(QT4BUILD)
-   target_link_libraries( ${TARGET} ${QT_QTCORE_LIBRARY} ${QT_QTMAIN_LIBRARY} ${QT_QTSQL_LIBRARY} marblewidget )
-else()
-  target_link_libraries( ${TARGET} ${Qt5Core_LIBRARIES} ${Qt5Sql_LIBRARIES} marblewidget-qt5 )
-endif()
+target_link_libraries( ${TARGET} ${Qt5Core_LIBRARIES} ${Qt5Sql_LIBRARIES} marblewidget-qt5 )
