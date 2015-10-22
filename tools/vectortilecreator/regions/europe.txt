@@ -1,3 +1,4 @@
+http://download.geofabrik.de/europe/germany/berlin-latest.osm.pbf;Berlin;13.2653;52.4470;13.5225;52.5868
 http://download.geofabrik.de/europe/germany/baden-wuerttemberg-latest.osm.pbf;Karlsruhe;8.36174;48.97914;8.45439;49.03088
 http://download.geofabrik.de/europe/germany/nordrhein-westfalen-latest.osm.pbf;Brochterbeck;6.71048;51.25500;6.74864;51.27721
 http://download.geofabrik.de/europe/austria/bern.osm.pbf;Bern;7.420;46.96832;7.49775;46.92306
