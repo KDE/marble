@@ -156,6 +156,7 @@ void TextureLayer::Private::updateTextureLayers()
     m_layerDecorator.setTextureLayers( result );
     m_tileLoader.clear();
 
+    m_tileZoomLevel = -1;
     m_parent->setNeedsUpdate();
 }
 
