@@ -106,6 +106,7 @@ private:
     const GeoSceneVectorTileDataset *const m_layer;
     GeoDataTreeModel *const m_treeModel;
     QThreadPool *const m_threadPool;
+    int m_tileLoadLevel;
     int m_tileZoomLevel;
     QMap<TileId, QSharedPointer<CacheDocument> > m_documents;
     QList<TileId> m_pendingDocuments;

@@ -59,7 +59,8 @@ VectorTileModel::VectorTileModel( TileLoader *loader, const GeoSceneVectorTileDa
     m_layer( layer ),
     m_treeModel( treeModel ),
     m_threadPool( threadPool ),
-    m_tileZoomLevel( -1 )
+    m_tileLoadLevel( -1 ),
+    m_tileZoomLevel(-1)
 {
     connect(this, SIGNAL(tileAdded(GeoDataDocument*)), treeModel, SLOT(addDocument(GeoDataDocument*)) );
     connect(this, SIGNAL(tileRemoved(GeoDataDocument*)), treeModel, SLOT(removeDocument(GeoDataDocument*)) );
@@ -86,6 +87,7 @@ void VectorTileModel::setViewport( const GeoDataLatLonBox &bbox, int radius )
     // snap to the sharper tile level a tiny bit earlier
     // to work around rounding errors when the radius
     // roughly equals the global texture width
+    m_tileZoomLevel = tileZoomLevel;
 
     QVector<int> tileLevels = m_layer->tileLevels();
     if (tileLevels.isEmpty() || tileZoomLevel < tileLevels.first()) {
@@ -102,8 +104,8 @@ void VectorTileModel::setViewport( const GeoDataLatLonBox &bbox, int radius )
     tileZoomLevel = tileLevel;
 
     // if zoom level has changed, empty vectortile cache
-    if ( tileZoomLevel != m_tileZoomLevel ) {
-        m_tileZoomLevel = tileZoomLevel;
+    if ( tileZoomLevel != m_tileLoadLevel ) {
+        m_tileLoadLevel = tileZoomLevel;
         m_documents.clear();
     }
 
@@ -203,7 +205,7 @@ void VectorTileModel::updateTile( const TileId &id, GeoDataDocument *document )
         return;
     }
 
-    if ( m_tileZoomLevel != id.zoomLevel() ) {
+    if ( m_tileLoadLevel != id.zoomLevel() ) {
         delete document;
         return;
     }
