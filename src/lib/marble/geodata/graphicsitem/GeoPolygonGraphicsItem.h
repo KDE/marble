@@ -40,6 +40,7 @@ protected:
 private:
     QPointF buildingOffset(const QPointF &point, const ViewportParams *viewport, bool* isCameraAboveBuilding=0) const;
     double extractBuildingHeight(double defaultValue) const;
+    void screenPolygons(const ViewportParams *viewport, const GeoDataPolygon* polygon, QVector<QPolygonF*> &polygons,  QVector<QPolygonF> &outlines);
 
     const GeoDataPolygon *const m_polygon;
     const GeoDataLinearRing *const m_ring;
