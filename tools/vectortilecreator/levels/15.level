@@ -1,6 +1,6 @@
 --keep=
 
---keep-ways=
+--keep=
 highway=motorway
 highway=motorway_link
 highway=trunk
@@ -22,16 +22,17 @@ railway=rail
 railway=subway
 railway=tram
 
---keep-ways=
+--keep=
 landuse=*
 natural=wood
+natural=water
 leisure=nature_reserve
 leisure=park
 leisure=pitch
 leisure=stadium
 leisure=swimming_area
 
---keep-ways=
+--keep=
 waterway=river
 waterway=stream
 waterway=canal
@@ -66,4 +67,4 @@ man_made=lighthouse
 man_made=tower
 man_made=water_tower
 man_made=windmill
-natural=water
+

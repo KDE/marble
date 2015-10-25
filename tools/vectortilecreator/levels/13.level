@@ -1,6 +1,6 @@
 --keep=
 
---keep-ways=
+--keep=
 highway=motorway
 highway=motorway_link
 highway=trunk
@@ -19,20 +19,21 @@ railway=rail
 railway=subway
 railway=tram
 
---keep-ways=
-natural=wood
+--keep=
 natural=scrub
 natural=heath
 natural=grassland
 natural=glacier
 natural=beach
 natural=coastline
+natural=water
+natural=wood
 landuse=forest
 leisure=nature_reserve
 leisure=park
 leisure=stadium
 
---keep-ways=
+--keep=
 waterway=river
 waterway=stream
 waterway=canal
@@ -52,4 +53,3 @@ boundary=administrative
 boundary=political
 boundary=national_park
 boundary=protected_area
-natural=water
