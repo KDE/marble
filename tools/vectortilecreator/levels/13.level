@@ -40,6 +40,7 @@ waterway=canal
 
 --keep-nodes=
 place=city
+place=suburb
 place=town
 place=village
 place=locality
