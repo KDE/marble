@@ -258,21 +258,21 @@ void GeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportParams* v
         // polygon with a "connecting line" between the inner and outer part we need
         // to first paint the inner area with no pen and then the outlines with the correct pen.
         QVector<QPolygonF*> outlines;
+        QVector<QPolygonF*> innerPolygons;
         QVector<QPolygonF*> polygons;
         bool const hasInnerBoundaries = m_polygon ? !m_polygon->innerBoundaries().isEmpty() : false;
         if (m_polygon) {
             if (hasInnerBoundaries) {
-                screenPolygons(viewport, m_polygon, polygons, outlines);
+                screenPolygons(viewport, m_polygon, innerPolygons, outlines);
             }
-            else {
-                viewport->screenCoordinates(m_polygon->outerBoundary(), polygons);
-            }
+            viewport->screenCoordinates(m_polygon->outerBoundary(), polygons);
         } else if (m_ring) {
             viewport->screenCoordinates(*m_ring, polygons);
         }
 
         if ( isBuildingFrame ) {
             QVector<QPolygonF*> sides = (hasInnerBoundaries && drawAccurate3D && isCameraAboveBuilding) ? outlines : polygons;
+
             foreach(QPolygonF* polygon, sides) {
                 if (polygon->isEmpty()) {
                     continue;
@@ -286,12 +286,24 @@ void GeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportParams* v
                         QPointF const & b = (*polygon)[i];
                         QPointF const shiftB = b + buildingOffset(b, viewport);
                         QPolygonF buildingSide = QPolygonF() << a << shiftA << shiftB << b;
+                        if (hasInnerBoundaries) {
+                            //smoothen away our loss of antialiasing due to the QRegion Qt-bug workaround
+                            painter->setPen(QPen(painter->brush().color(), 1.5));
+                        }
                         painter->drawPolygon(buildingSide);
                         a = b;
                         shiftA = shiftB;
                     }
                 } else {
                     // don't draw the building sides - just draw the base frame instead
+                    if (hasInnerBoundaries) {
+                        QRegion clip(polygon->toPolygon());
+
+                        foreach(QPolygonF* clipPolygon, innerPolygons) {
+                            clip-=QRegion(clipPolygon->toPolygon());
+                        }
+                        painter->setClipRegion(clip);
+                    }
                     painter->drawPolygon(*polygon);
                 }
             }
@@ -326,10 +338,30 @@ void GeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportParams* v
                     foreach(const QPointF &point, *polygon) {
                         buildingRoof << point + buildingOffset(point, viewport);
                     }
+                    if (hasInnerBoundaries) {
+                        QRegion clip(buildingRoof.toPolygon());
+
+                        foreach(QPolygonF* innerPolygon, innerPolygons) {
+                            QPolygonF buildingInner;
+                            foreach(const QPointF &point, *innerPolygon) {
+                                buildingInner << point + buildingOffset(point, viewport);
+                            }
+                            clip-=QRegion(buildingInner.toPolygon());
+                        }
+                        painter->setClipRegion(clip);
+                    }
                     painter->drawPolygon(buildingRoof);
                 } else {
                     QPointF const offset = buildingOffset(boundingRect.center(), viewport);
                     painter->translate(offset);
+                    if (hasInnerBoundaries) {
+                        QRegion clip(polygon->toPolygon());
+
+                        foreach(QPolygonF* clipPolygon, innerPolygons) {
+                            clip-=QRegion(clipPolygon->toPolygon());
+                        }
+                        painter->setClipRegion(clip);
+                    }
                     painter->drawPolygon(*polygon);
                     painter->resetTransform();
                 }
@@ -403,19 +435,11 @@ void GeoPolygonGraphicsItem::screenPolygons(const ViewportParams *viewport, cons
         if ( hasInnerBoundaries ) {
             foreach( QPolygonF* innerPolygon, innerPolygons ) {
                 outlines << innerPolygon;
+                polygons << new QPolygonF(*innerPolygon);
             }
         }
 
-        foreach( QPolygonF* itOuterPolygon, outerPolygons ) {
-            foreach( QPolygonF* itInnerPolygon, innerPolygons ) {
-                if (viewportRect.intersects(itInnerPolygon->boundingRect())) {
-                    *itOuterPolygon = itOuterPolygon->subtracted( *itInnerPolygon );
-                }
-            }
-        }
     }
-
-    polygons = outerPolygons;
 }
 
 
