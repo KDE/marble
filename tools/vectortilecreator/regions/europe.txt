@@ -1,3 +1,4 @@
+http://download.geofabrik.de/europe/germany/baden-wuerttemberg-latest.osm.pbf;Feldberg;7.9711;47.8344;8.0554;47.8974
 http://download.geofabrik.de/europe/france/ile-de-france-latest.osm.pbf;Paris;2.2144;48.8096;2.4833;48.9184
 http://download.geofabrik.de/europe/italy/nord-est-latest.osm.pbf;Venice;12.3001;45.4215;12.4345;45.4765
 http://download.geofabrik.de/europe/italy/centro-latest.osm.pbf;Florence;11.1367;43.7483;11.3403;43.8511
