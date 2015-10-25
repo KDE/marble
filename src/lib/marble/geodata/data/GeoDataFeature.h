@@ -101,7 +101,12 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         LargeNationCapital,
         Nation,
 
+        PlaceCity,
         PlaceSuburb,
+        PlaceHamlet,
+        PlaceLocality,
+        PlaceTown,
+        PlaceVillage,
 
         // Terrain
         Mountain,

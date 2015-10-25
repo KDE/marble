@@ -263,10 +263,18 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
     // Align area labels centered
     s_defaultStyle[GeoDataFeature::Nation]->labelStyle().setAlignment( GeoDataLabelStyle::Center );
 
-    s_defaultStyle[GeoDataFeature::PlaceSuburb]
-        = new GeoDataStyle( QString(),
-              QFont( defaultFamily, (int)(defaultSize * 2.0 ), 75, false ), QColor( "#707070" ) );
+    s_defaultStyle[GeoDataFeature::PlaceCity] = new GeoDataStyle( QString(), QFont( defaultFamily, (int)(defaultSize * 2.0 ), 75, false ), QColor( "#202020" ) );
+    s_defaultStyle[GeoDataFeature::PlaceCity]->labelStyle().setAlignment( GeoDataLabelStyle::Center );
+    s_defaultStyle[GeoDataFeature::PlaceSuburb] = new GeoDataStyle( QString(), QFont( defaultFamily, (int)(defaultSize * 2.0 ), 75, false ), QColor( "#707070" ) );
     s_defaultStyle[GeoDataFeature::PlaceSuburb]->labelStyle().setAlignment( GeoDataLabelStyle::Center );
+    s_defaultStyle[GeoDataFeature::PlaceHamlet] = new GeoDataStyle( QString(), QFont( defaultFamily, (int)(defaultSize * 2.0 ), 75, false ), QColor( "#707070" ) );
+    s_defaultStyle[GeoDataFeature::PlaceHamlet]->labelStyle().setAlignment( GeoDataLabelStyle::Center );
+    s_defaultStyle[GeoDataFeature::PlaceLocality] = new GeoDataStyle( QString(), QFont( defaultFamily, (int)(defaultSize * 2.0 ), 75, false ), QColor( "#707070" ) );
+    s_defaultStyle[GeoDataFeature::PlaceLocality]->labelStyle().setAlignment( GeoDataLabelStyle::Center );
+    s_defaultStyle[GeoDataFeature::PlaceTown] = new GeoDataStyle( QString(), QFont( defaultFamily, (int)(defaultSize * 2.0 ), 75, false ), QColor( "#404040" ) );
+    s_defaultStyle[GeoDataFeature::PlaceTown]->labelStyle().setAlignment( GeoDataLabelStyle::Center );
+    s_defaultStyle[GeoDataFeature::PlaceVillage] = new GeoDataStyle( QString(), QFont( defaultFamily, (int)(defaultSize * 2.0 ), 75, false ), QColor( "#505050" ) );
+    s_defaultStyle[GeoDataFeature::PlaceVillage]->labelStyle().setAlignment( GeoDataLabelStyle::Center );
 
     s_defaultStyle[GeoDataFeature::Mountain]
         = new GeoDataStyle( MarbleDirs::path( "bitmaps/mountain_1.png" ),

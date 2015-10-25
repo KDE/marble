@@ -306,12 +306,12 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "amenity", "motorcycle_parking" ) ] = GeoDataFeature::TransportMotorcycleParking;
     s_visualCategories[ OsmTag( "railway", "subway_entrance" ) ]    = GeoDataFeature::TransportSubwayEntrance;
 
-    s_visualCategories[ OsmTag( "place", "city" ) ]                 = GeoDataFeature::LargeCity;
+    s_visualCategories[ OsmTag( "place", "city" ) ]                 = GeoDataFeature::PlaceCity;
     s_visualCategories[ OsmTag( "place", "suburb" ) ]               = GeoDataFeature::PlaceSuburb;
-    s_visualCategories[ OsmTag( "place", "hamlet" ) ]               = GeoDataFeature::SmallCity;
-    s_visualCategories[ OsmTag( "place", "locality" ) ]             = GeoDataFeature::SmallCity;
-    s_visualCategories[ OsmTag( "place", "town" ) ]                 = GeoDataFeature::BigCity;
-    s_visualCategories[ OsmTag( "place", "village" ) ]              = GeoDataFeature::MediumCity;
+    s_visualCategories[ OsmTag( "place", "hamlet" ) ]               = GeoDataFeature::PlaceHamlet;
+    s_visualCategories[ OsmTag( "place", "locality" ) ]             = GeoDataFeature::PlaceLocality;
+    s_visualCategories[ OsmTag( "place", "town" ) ]                 = GeoDataFeature::PlaceTown;
+    s_visualCategories[ OsmTag( "place", "village" ) ]              = GeoDataFeature::PlaceVillage;
 
     // Default for buildings
     foreach(const QString &value, buildingValues() ) {
