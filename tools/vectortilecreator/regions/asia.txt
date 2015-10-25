@@ -1,0 +1,2 @@
+http://download.geofabrik.de/asia/japan-latest.osm.pbf;Tokyo;139.6561;35.5825;139.8820;35.7850
+http://download.geofabrik.de/asia/thailand-latest.osm.pbf;Bangkok;100.4610;13.6647;100.5771;13.8394
