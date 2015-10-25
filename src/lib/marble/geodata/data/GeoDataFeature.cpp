@@ -473,6 +473,7 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
     s_defaultStyle[GeoDataFeature::ShopTravelAgency]         = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/travel_agency-14", shopColor );
     s_defaultStyle[GeoDataFeature::Shop]                     = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/shop-14", shopColor );
 
+    s_defaultStyle[GeoDataFeature::ManmadeBridge]            = GeoDataFeaturePrivate::createWayStyle( QColor("#b8b8b8"), QColor("transparent"), true, true );
     s_defaultStyle[GeoDataFeature::ManmadeLighthouse]        = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "transportation/lighthouse.16", transportationColor, "#f2efe9", QColor( "#f2efe9" ).darker() );
     s_defaultStyle[GeoDataFeature::ManmadePier]              = GeoDataFeaturePrivate::createStyle(0.0, 3.0, "#f2efe9", "#f2efe9", true, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false );
     s_defaultStyle[GeoDataFeature::ManmadeWaterTower]        = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "amenity/water_tower.16", amenityColor );

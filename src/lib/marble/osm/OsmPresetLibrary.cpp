@@ -148,6 +148,7 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     }
 
 
+    s_visualCategories[ OsmTag( "man_made", "bridge" ) ]            = GeoDataFeature::ManmadeBridge;
     s_visualCategories[ OsmTag( "man_made", "lighthouse" ) ]        = GeoDataFeature::ManmadeLighthouse;
     s_visualCategories[ OsmTag( "man_made", "pier" ) ]              = GeoDataFeature::ManmadePier;
     s_visualCategories[ OsmTag( "man_made", "water_tower" ) ]       = GeoDataFeature::ManmadeWaterTower;
@@ -342,7 +343,6 @@ void OsmPresetLibrary::initializeAdditionalOsmTags()
     s_additionalOsmTags << OsmTag( "service", "driveway" );
     s_additionalOsmTags << OsmTag( "service", "parking_aisle" );
     s_additionalOsmTags << OsmTag( "service", "alley" );
-    s_additionalOsmTags << OsmTag( "bridge", "yes" );
     s_additionalOsmTags << OsmTag( "tunnel", "yes" );
     s_additionalOsmTags << OsmTag( "abutters", "commercial" );
     s_additionalOsmTags << OsmTag( "abutters", "industrial" );
@@ -357,7 +357,6 @@ void OsmPresetLibrary::initializeAdditionalOsmTags()
     s_additionalOsmTags << OsmTag( "surface", "gravel" );
     s_additionalOsmTags << OsmTag( "surface", "dirt" );
     s_additionalOsmTags << OsmTag( "surface", "grass" );
-
 
 
     // Relations
@@ -523,6 +522,7 @@ bool OsmPresetLibrary::isAreaTag(const QString &keyValue)
         foreach(const QString &value, buildingValues() ) {
             s_areaTags.insert( QString("building=%1").arg(value) );
         }
+        s_areaTags.insert( "man_made=bridge" );
 
         s_areaTags.insert( "amenity=graveyard" );
         s_areaTags.insert( "amenity=parking" );
