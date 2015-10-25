@@ -145,7 +145,7 @@ class PlacemarkLayout : public QObject
     QMap<TileId, QList<const GeoDataPlacemark*> > m_placemarkCache;
     QSet<qint64> m_osmIds;
 
-    const QVector< GeoDataFeature::GeoDataVisualCategory > m_acceptedVisualCategories;
+    const QSet< GeoDataFeature::GeoDataVisualCategory > m_acceptedVisualCategories;
 
     // earth
     bool m_showPlaces;

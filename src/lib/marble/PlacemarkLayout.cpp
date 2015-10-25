@@ -73,9 +73,9 @@ namespace
 namespace Marble
 {
 
-QVector<GeoDataFeature::GeoDataVisualCategory> sortedVisualCategories()
+QSet<GeoDataFeature::GeoDataVisualCategory> acceptedVisualCategories()
 {
-    QVector<GeoDataFeature::GeoDataVisualCategory> visualCategories;
+    QSet<GeoDataFeature::GeoDataVisualCategory> visualCategories;
 
     visualCategories
         << GeoDataFeature::SmallCity
@@ -159,8 +159,6 @@ QVector<GeoDataFeature::GeoDataVisualCategory> sortedVisualCategories()
         << GeoDataFeature::ReligionShinto
         << GeoDataFeature::ReligionSikh;
 
-    qSort( visualCategories );
-
     return visualCategories;
 }
 
@@ -172,7 +170,7 @@ PlacemarkLayout::PlacemarkLayout( QAbstractItemModel  *placemarkModel,
     : QObject( parent ),
       m_selectionModel( selectionModel ),
       m_clock( clock ),
-      m_acceptedVisualCategories( sortedVisualCategories() ),
+      m_acceptedVisualCategories( acceptedVisualCategories() ),
       m_showPlaces( false ),
       m_showCities( false ),
       m_showTerrain( false ),
@@ -635,8 +633,7 @@ GeoDataCoordinates PlacemarkLayout::placemarkIconCoordinates( const GeoDataPlace
 {
     bool ok;
     GeoDataCoordinates coordinates = placemark->coordinate( m_clock->dateTime(), &ok );
-    if ( !ok && qBinaryFind( m_acceptedVisualCategories, placemark->visualCategory() )
-                != m_acceptedVisualCategories.constEnd() ) {
+    if ( !ok && m_acceptedVisualCategories.contains(placemark->visualCategory()) ) {
         ok = true;
     }
 
