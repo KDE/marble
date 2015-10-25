@@ -399,7 +399,7 @@ void GeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportParams* v
 
     } else {
         if ( m_polygon ) {
-           painter->drawPolygon( *m_polygon );
+            painter->drawPolygon( *m_polygon );
         } else if ( m_ring ) {
             painter->drawPolygon( *m_ring );
         }
@@ -431,8 +431,8 @@ void GeoPolygonGraphicsItem::screenPolygons(const ViewportParams *viewport, cons
         viewport->screenCoordinates( itInnerBoundary, innerPolygons );
 
         if ( hasInnerBoundaries ) {
+            outlines << innerPolygons;
             foreach( QPolygonF* innerPolygon, innerPolygons ) {
-                outlines << innerPolygon;
                 polygons << new QPolygonF(*innerPolygon);
             }
         }

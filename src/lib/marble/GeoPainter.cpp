@@ -762,55 +762,54 @@ void GeoPainter::drawPolygon ( const GeoDataPolygon & polygon,
     // In QPathClipper We Trust ...
     // ... and in the speed of a threesome of nested foreachs!
 
-    QVector<QPolygonF> outline;
+    QVector<QPolygonF*> outlines;
+    QVector<QPolygonF*> polygons;
     QPen const oldPen = pen();
     // When inner boundaries exist, the outline of the polygon must be painted
     // separately to avoid connections between the outer and inner boundaries
     // To avoid performance penalties the separate painting is only done when
     // it's really needed. See review 105019 for details.
-    bool const needOutlineWorkaround = !polygon.innerBoundaries().isEmpty();
-    if ( needOutlineWorkaround ) {
-        foreach( QPolygonF* polygon, outerPolygons ) {
-            outline << *polygon;
-        }
+    bool const hasInnerBoundaries = !polygon.innerBoundaries().isEmpty();
+
+    if ( hasInnerBoundaries ) {
+        outlines << outerPolygons;
         setPen( QPen( Qt::NoPen ) );
-    }
 
+        QVector<GeoDataLinearRing> innerBoundaries = polygon.innerBoundaries();
+        foreach( const GeoDataLinearRing& itInnerBoundary, innerBoundaries ) {
+            QVector<QPolygonF*> innerPolygons;
+            d->m_viewport->screenCoordinates( itInnerBoundary, innerPolygons );
 
-    QRectF const viewportRect(QPointF(0.0,0.0), d->m_viewport->size());
-    QVector<GeoDataLinearRing> innerBoundaries = polygon.innerBoundaries();
-    foreach( const GeoDataLinearRing& itInnerBoundary, innerBoundaries ) {
-        QVector<QPolygonF*> innerPolygons;
-        d->m_viewport->screenCoordinates( itInnerBoundary, innerPolygons );
-
-        if ( needOutlineWorkaround ) {
-            foreach( QPolygonF* polygon, innerPolygons ) {
-                outline << *polygon;
-            }
-        }
-
-        foreach( QPolygonF* itOuterPolygon, outerPolygons ) {
-            foreach( QPolygonF* itInnerPolygon, innerPolygons ) {
-                if (viewportRect.intersects(itInnerPolygon->boundingRect())) {
-                    *itOuterPolygon = itOuterPolygon->subtracted( *itInnerPolygon );
+            if ( hasInnerBoundaries ) {
+                outlines << innerPolygons;
+                foreach( QPolygonF* innerPolygon, innerPolygons ) {
+                    polygons << new QPolygonF(*innerPolygon);
                 }
             }
         }
-        qDeleteAll( innerPolygons );    
     }
 
     foreach( QPolygonF* itOuterPolygon, outerPolygons ) {
+        if (hasInnerBoundaries) {
+            QRegion clip(itOuterPolygon->toPolygon());
+
+            foreach(QPolygonF* clipPolygon, polygons) {
+                clip-=QRegion(clipPolygon->toPolygon());
+            }
+            ClipPainter::setClipRegion(clip);
+        }
         ClipPainter::drawPolygon( *itOuterPolygon, fillRule );
     }
 
-    if ( needOutlineWorkaround ) {
+    if ( hasInnerBoundaries ) {
         setPen( oldPen );
-        foreach( const QPolygonF &polygon, outline ) {
-            ClipPainter::drawPolyline( polygon );
+        foreach( const QPolygonF* polygon, outlines ) {
+            ClipPainter::drawPolyline( *polygon );
         }
     }
 
-    qDeleteAll( outerPolygons );    
+    qDeleteAll(outlines);
+    qDeleteAll(polygons);
 }
 
 
