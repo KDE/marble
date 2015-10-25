@@ -20,6 +20,7 @@ import sys
 import os
 import math
 import csv
+import time
 from subprocess import call
 import zipfile
 import argparse
@@ -39,17 +40,24 @@ def num2deg(xtile, ytile, zoom):
     lat_deg = math.degrees(lat_rad)
     return (lat_deg, lon_deg)
 
-def download(url, directory):
+def download(url, directory, refresh):
     filename = url.split('/')[-1]
-    if os.path.exists(os.path.join(directory, filename)):
-        return filename
+    path = os.path.join(directory, filename)
+    if os.path.exists(path):
+        if refresh >= 0:
+            aDay = 60 * 60 * 24
+            age = (time.time() - os.path.getmtime(path)) / aDay
+            if age < refresh:
+                return filename
+            # else download again
+        else:
+            return filename
 
     http = urllib3.PoolManager()
     r = http.request('GET', url, preload_content=False)
     chunk_size = 8192
     file_size_dl = 0
     fileSize = int(r.getheader("content-length"))
-    print ("Downloading: %s %.1f Mb" % (filename, fileSize / 1024.0 / 1024.0))
 
     with open(os.path.join(directory, filename), 'wb') as out:
         while True:
@@ -58,10 +66,7 @@ def download(url, directory):
                 break
             file_size_dl += len(data)
             out.write(data)
-
-            status = r"%10d  [%3.2f%%]" % (file_size_dl, file_size_dl * 100. / fileSize)
-            status = status + chr(8)*(len(status)+1)
-            print (status, end='')
+            print ("Downloading %s: %.1f/%.1f Mb (%3.1f%%)\r" % (filename, file_size_dl / 1024.0 / 1024.0, fileSize / 1024.0 / 1024.0, file_size_dl * 100. / fileSize), end='')
 
     r.release_conn()
     out.close()
@@ -75,6 +80,7 @@ if __name__ == "__main__":
     parser.add_argument('-o', '--overwrite', action='store_true', help='Create tiles even if they exist already')
     parser.add_argument('-d', '--directory', help='directory to write tiles to', default='.')
     parser.add_argument('-c', '--cache', help='directory to store intermediate files in', default='.')
+    parser.add_argument('-r', '--refresh', type=int, default=-1, help='Re-download cached OSM base file if it is older than REFRESH days (-1: do not re-download)')
     parser.add_argument('-z', '--zoomLevels', type=int, nargs='+', help='zoom levels to generate', default=[13,15,17])
     args = parser.parse_args()    
     
@@ -82,7 +88,7 @@ if __name__ == "__main__":
         with open(csvfilename, 'r') as csvfile:
             reader = csv.reader(csvfile, delimiter=';', quotechar='|')
             for bounds in reader:
-                filename = download(bounds[0], args.cache)
+                filename = download(bounds[0], args.cache, args.refresh)
                 for zoom in args.zoomLevels:
                     topLeft = deg2num(float(bounds[3]), float(bounds[2]), zoom)
                     bottomRight = deg2num(float(bounds[5]), float(bounds[4]), zoom)
