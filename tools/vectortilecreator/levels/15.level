@@ -45,6 +45,9 @@ place=hamlet
 place=isolated_dwelling
 place=locality
 
+--keep-nodes=
+natural=peak
+
 --keep=
 boundary=administrative
 boundary=political

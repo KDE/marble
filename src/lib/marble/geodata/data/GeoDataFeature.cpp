@@ -429,6 +429,8 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
     s_defaultStyle[GeoDataFeature::AmenityDrinkingWater]     = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "amenity/drinking_water.16", amenityColor );
 
     s_defaultStyle[GeoDataFeature::NaturalPeak]              = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "individual/peak", amenityColor );
+    s_defaultStyle[GeoDataFeature::NaturalPeak]->iconStyle().setScale(0.33);
+    s_defaultStyle[GeoDataFeature::NaturalPeak]->labelStyle().setAlignment(GeoDataLabelStyle::Center);
     s_defaultStyle[GeoDataFeature::NaturalTree]              = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "individual/tree-29", amenityColor ); // tree-16 provides the official icon
 
     s_defaultStyle[GeoDataFeature::ShopBeverages]            = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "shop/beverages-14", shopColor );

@@ -128,6 +128,7 @@ QSet<GeoDataFeature::GeoDataVisualCategory> acceptedVisualCategories()
         << GeoDataFeature::HealthHospital
         << GeoDataFeature::HealthPharmacy
         << GeoDataFeature::MoneyBank
+        << GeoDataFeature::NaturalPeak
         << GeoDataFeature::ShopBeverages
         << GeoDataFeature::ShopHifi
         << GeoDataFeature::ShopSupermarket
