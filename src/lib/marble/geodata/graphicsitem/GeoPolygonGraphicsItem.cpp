@@ -416,14 +416,12 @@ void GeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportParams* v
 
 void GeoPolygonGraphicsItem::screenPolygons(const ViewportParams *viewport, const GeoDataPolygon * polygon, QVector<QPolygonF*> & polygons, QVector<QPolygonF*> & outlines) {
 
-    if (!polygon) return;
-    QRectF const viewportRect(QPointF(0.0,0.0), viewport->size());
+    Q_ASSERT(polygon);
+
     QVector<QPolygonF*> outerPolygons;
     viewport->screenCoordinates( polygon->outerBoundary(), outerPolygons );
 
-    foreach( QPolygonF* outerPolygon, outerPolygons ) {
-        outlines << new QPolygonF(*outerPolygon);
-    }
+    outlines << outerPolygons;
 
     bool const hasInnerBoundaries = !m_polygon->innerBoundaries().isEmpty();
 
