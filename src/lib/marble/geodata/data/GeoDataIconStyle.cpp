@@ -53,6 +53,7 @@ class GeoDataIconStylePrivate
     float            m_scale;
 
     QImage           m_icon;
+    QImage           m_scaledIcon;
     QString          m_iconPath;
     GeoDataHotSpot   m_hotSpot;
     int              m_heading;
@@ -111,6 +112,7 @@ const char* GeoDataIconStyle::nodeType() const
 void GeoDataIconStyle::setIcon(const QImage &icon)
 {
     d->m_icon = icon;
+    d->m_scaledIcon = QImage();
 }
 
 void GeoDataIconStyle::setIconPath( const QString& filename )
@@ -123,6 +125,7 @@ void GeoDataIconStyle::setIconPath( const QString& filename )
      * prevously loaded icon.
      */
     d->m_icon = QImage();
+    d->m_scaledIcon = QImage();
 }
 
 QString GeoDataIconStyle::iconPath() const
@@ -179,6 +182,10 @@ float GeoDataIconStyle::scale() const
 
 QImage GeoDataIconStyle::scaledIcon() const
 {
+    if (!d->m_scaledIcon.isNull()) {
+        return d->m_scaledIcon;
+    }
+
     // Scale shouldn't be 0, but if it is, returning regular icon.
     if( scale() <= 0 || icon().isNull() ) {
         return icon();
@@ -199,8 +206,10 @@ QImage GeoDataIconStyle::scaledIcon() const
     else {
        iconSize *= scale();
     }
-    if (icon().isNull()) return QImage();
-    return icon().scaled( iconSize, Qt::KeepAspectRatio, Qt::SmoothTransformation ) ;
+    if (!icon().isNull()) {
+        d->m_scaledIcon = icon().scaled( iconSize, Qt::KeepAspectRatio, Qt::SmoothTransformation ) ;
+    }
+    return d->m_scaledIcon;
 }
 
 int GeoDataIconStyle::heading() const
