@@ -72,7 +72,7 @@ void OsmNode::create(GeoDataDocument *document) const
     }
 
     placemark->setZoomLevel( 18 );
-    if (category >= GeoDataFeature::SmallCity && category <= GeoDataFeature::Nation && m_osmData.containsTagKey("population")) {
+    if (category >= GeoDataFeature::SmallCity && category <= GeoDataFeature::PlaceSuburb) {
         int const population = m_osmData.tagValue("population").toInt();
         placemark->setPopulation(qMax(0, population));
         if (population > 0) {
@@ -80,11 +80,12 @@ void OsmNode::create(GeoDataDocument *document) const
             placemark->setPopularity(population);
         } else {
             switch (category) {
-            case GeoDataFeature::SmallCity:  placemark->setZoomLevel(9);  break;
-            case GeoDataFeature::MediumCity: placemark->setZoomLevel(8);  break;
-            case GeoDataFeature::BigCity:    placemark->setZoomLevel(6);  break;
-            case GeoDataFeature::LargeCity:  placemark->setZoomLevel(5);  break;
-            default:                         placemark->setZoomLevel(10); break;
+            case GeoDataFeature::SmallCity:   placemark->setZoomLevel(9);  break;
+            case GeoDataFeature::MediumCity:  placemark->setZoomLevel(8);  break;
+            case GeoDataFeature::BigCity:     placemark->setZoomLevel(6);  break;
+            case GeoDataFeature::LargeCity:   placemark->setZoomLevel(5);  break;
+            case GeoDataFeature::PlaceSuburb: placemark->setZoomLevel(13); break;
+            default:                          placemark->setZoomLevel(10); break;
             }
         }
     }

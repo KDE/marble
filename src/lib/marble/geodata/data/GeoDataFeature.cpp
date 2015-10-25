@@ -263,6 +263,11 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
     // Align area labels centered
     s_defaultStyle[GeoDataFeature::Nation]->labelStyle().setAlignment( GeoDataLabelStyle::Center );
 
+    s_defaultStyle[GeoDataFeature::PlaceSuburb]
+        = new GeoDataStyle( QString(),
+              QFont( defaultFamily, (int)(defaultSize * 2.0 ), 75, false ), QColor( "#707070" ) );
+    s_defaultStyle[GeoDataFeature::PlaceSuburb]->labelStyle().setAlignment( GeoDataLabelStyle::Center );
+
     s_defaultStyle[GeoDataFeature::Mountain]
         = new GeoDataStyle( MarbleDirs::path( "bitmaps/mountain_1.png" ),
               QFont( defaultFamily, (int)(defaultSize * 0.9 ), 50, false ), s_defaultLabelColor );

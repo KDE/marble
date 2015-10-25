@@ -307,6 +307,7 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "railway", "subway_entrance" ) ]    = GeoDataFeature::TransportSubwayEntrance;
 
     s_visualCategories[ OsmTag( "place", "city" ) ]                 = GeoDataFeature::LargeCity;
+    s_visualCategories[ OsmTag( "place", "suburb" ) ]               = GeoDataFeature::PlaceSuburb;
     s_visualCategories[ OsmTag( "place", "hamlet" ) ]               = GeoDataFeature::SmallCity;
     s_visualCategories[ OsmTag( "place", "locality" ) ]             = GeoDataFeature::SmallCity;
     s_visualCategories[ OsmTag( "place", "town" ) ]                 = GeoDataFeature::BigCity;
