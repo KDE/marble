@@ -137,6 +137,7 @@ class GeoDataFeaturePrivate
         style->setIconStyle( GeoDataIconStyle( imagePath) );
         style->iconStyle().setScale(0.67);
         style->setLabelStyle( GeoDataLabelStyle( font, textColor ) );
+        style->labelStyle().setAlignment(GeoDataLabelStyle::Center);
         return style;
     }
     
