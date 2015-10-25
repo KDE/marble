@@ -143,6 +143,7 @@ class PlacemarkLayout : public QObject
 
     /// map providing the list of placemark belonging in TileId as key
     QMap<TileId, QList<const GeoDataPlacemark*> > m_placemarkCache;
+    QSet<qint64> m_osmIds;
 
     const QVector< GeoDataFeature::GeoDataVisualCategory > m_acceptedVisualCategories;
 
