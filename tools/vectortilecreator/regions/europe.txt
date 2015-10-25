@@ -1,3 +1,5 @@
+http://download.geofabrik.de/europe/greece-latest.osm.pbf;Athens;23.6381;37.9244;23.8070;38.0865
+http://download.geofabrik.de/europe/germany/hamburg-latest.osm.pbf;Hamburg;9.8067;53.4500;10.1575;53.6760
 http://download.geofabrik.de/europe/germany/berlin-latest.osm.pbf;Berlin;13.2653;52.4470;13.5225;52.5868
 http://download.geofabrik.de/europe/germany/baden-wuerttemberg-latest.osm.pbf;Karlsruhe;8.36174;48.97914;8.45439;49.03088
 http://download.geofabrik.de/europe/germany/nordrhein-westfalen-latest.osm.pbf;Brochterbeck;6.71048;51.25500;6.74864;51.27721
