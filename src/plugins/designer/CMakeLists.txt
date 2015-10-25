@@ -1,8 +1,6 @@
 if (WITH_DESIGNER_PLUGIN)
 
-  if(QT5BUILD)
-    find_package(Qt5Designer)
-  endif()
+  find_package(Qt5Designer)
 
   add_subdirectory( marblewidget )
   add_subdirectory( latloneditwidget )

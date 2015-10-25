@@ -43,9 +43,7 @@ if( BUILD_MARBLE_TESTS )
     include_directories(
         ${CMAKE_CURRENT_BINARY_DIR}/tests
     )
-    if( QT5BUILD )
-      include_directories(${Qt5Test_INCLUDE_DIRS})
-    endif()
+    include_directories(${Qt5Test_INCLUDE_DIRS})
     set( TestTrack_SRCS TestTrack.moc ${TestTrack_SRCS} )
 
     add_executable( TestTrack ${TestTrack_SRCS} )
@@ -54,9 +52,7 @@ if( BUILD_MARBLE_TESTS )
                                      ${QT_QTGUI_LIBRARY}
                                      ${QT_QTTEST_LIBRARY}
                                      ${MARBLEWIDGET} )
-    if( QT5BUILD )
-      target_link_libraries( TestTrack ${Qt5Test_LIBRARIES})
-    endif()
+    target_link_libraries( TestTrack ${Qt5Test_LIBRARIES})
     set_target_properties( TestTrack PROPERTIES
                             COMPILE_FLAGS "-DDATA_PATH=\"\\\"${DATA_PATH}\\\"\" -DPLUGIN_PATH=\"\\\"${PLUGIN_PATH}\\\"\"" )
     add_test( TestTrack TestTrack )
