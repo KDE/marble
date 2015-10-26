@@ -315,6 +315,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         TouristThemePark,
         TouristViewPoint,
         TouristZoo,
+        TouristAlpineHut,
 
         // OpenStreetMap category Transport
         TransportAerodrome,

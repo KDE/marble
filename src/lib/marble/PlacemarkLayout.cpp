@@ -132,6 +132,7 @@ QSet<GeoDataFeature::GeoDataVisualCategory> acceptedVisualCategories()
         << GeoDataFeature::ShopBeverages
         << GeoDataFeature::ShopHifi
         << GeoDataFeature::ShopSupermarket
+        << GeoDataFeature::TouristAlpineHut
         << GeoDataFeature::TouristAttraction
         << GeoDataFeature::TouristCastle
         << GeoDataFeature::TouristCinema
