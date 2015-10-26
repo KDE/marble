@@ -36,9 +36,7 @@ void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes) const
     GeoDataPlacemark* placemark = new GeoDataPlacemark;
     placemark->setOsmData(m_osmData);
     placemark->setVisualCategory(OsmPresetLibrary::determineVisualCategory(m_osmData));
-    if (!(placemark->visualCategory() >= GeoDataFeature::RailwayRail && placemark->visualCategory() <= GeoDataFeature::RailwayFunicular)) {
-        placemark->setName(m_osmData.tagValue("name"));
-    }
+    placemark->setName(m_osmData.tagValue("name"));
     placemark->setVisible(shouldRender);
 
     if (isArea()) {
@@ -133,6 +131,14 @@ void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes) const
         style->setLineStyle(lineStyle);
         placemark->setStyle(style);
 
+    }
+
+    bool const hideLabel = placemark->visualCategory() == GeoDataFeature::HighwayTrack
+            || (placemark->visualCategory() >= GeoDataFeature::RailwayRail && placemark->visualCategory() <= GeoDataFeature::RailwayFunicular);
+    if (hideLabel) {
+        GeoDataStyle* style = new GeoDataStyle(*placemark->style());
+        style->labelStyle().setColor(QColor(Qt::transparent));
+        placemark->setStyle(style);
     }
 
     OsmObjectManager::registerId(m_osmData.id());

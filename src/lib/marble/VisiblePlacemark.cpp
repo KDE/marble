@@ -136,7 +136,7 @@ void VisiblePlacemark::drawLabelPixmap()
     const GeoDataStyle* style = m_placemark->style();
 
     QString labelName = m_placemark->name();
-    if ( labelName.isEmpty() ) {
+    if ( labelName.isEmpty() || style->labelStyle().color() == QColor(Qt::transparent) ) {
         m_labelPixmap = QPixmap();
         return;
     }

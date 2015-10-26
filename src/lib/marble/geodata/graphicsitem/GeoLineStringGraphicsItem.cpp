@@ -134,7 +134,9 @@ void GeoLineStringGraphicsItem::paint( GeoPainter* painter, const ViewportParams
                                         style()->labelStyle().font());
             }
         } else {
-            painter->drawPolyline( *m_lineString, feature()->name(), labelPositionFlags );
+            painter->drawPolyline( *m_lineString, feature()->name(), labelPositionFlags,
+                                   style()->labelStyle().paintedColor(),
+                                   style()->labelStyle().font() );
         }
     }
 

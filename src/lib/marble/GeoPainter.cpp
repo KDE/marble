@@ -616,7 +616,9 @@ void GeoPainter::drawPolyline ( const GeoDataLineString & lineString,
         foreach( QPolygonF* itPolygon, polygons ) {
             labelNodes.clear();
             ClipPainter::drawPolyline( *itPolygon, labelNodes, labelPositionFlags );
-            if ( !labelNodes.isEmpty() ) {
+            if ( !labelNodes.isEmpty() && labelColor != Qt::transparent ) {
+                save();
+                setPen(labelColor);
                 foreach ( const QPointF& labelNode, labelNodes ) {
                     QPointF labelPosition = labelNode + QPointF( 3.0, -2.0 );
 
@@ -630,6 +632,7 @@ void GeoPainter::drawPolyline ( const GeoDataLineString & lineString,
 
                     drawText( QRectF( labelPosition, fontMetrics().size( 0, labelText) ), labelText );
                 }
+                restore();
             }
         }
     }
