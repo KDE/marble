@@ -124,6 +124,11 @@ void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes) const
                 polyStyle.setColor(polyColor);
                 lineStyle.setColor(lineStyle.color().lighter(115));
             }
+        } else if (placemark->visualCategory() == GeoDataFeature::NaturalWater) {
+            QString const widthValue = m_osmData.tagValue("width").replace(" meters", QString()).replace(" m", QString());
+            bool ok;
+            qreal const width = widthValue.toFloat(&ok);
+            lineStyle.setPhysicalWidth(ok ? qBound(0.1, width, 200.0) : 0.0);
         }
 
         GeoDataStyle* style = new GeoDataStyle(*placemark->style());
