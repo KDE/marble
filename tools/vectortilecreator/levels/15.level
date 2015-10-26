@@ -13,6 +13,7 @@ highway=tertiary
 highway=tertiary_link
 highway=unclassified
 highway=residential
+highway=track
 public_transport=station
 railway=light_rail
 railway=monorail
