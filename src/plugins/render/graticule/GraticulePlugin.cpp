@@ -446,7 +446,7 @@ void GraticulePlugin::renderLatitudeLine( GeoPainter *painter, qreal latitude,
         }
     }
 
-    painter->drawPolyline( line, lineLabel, labelPositionFlags );     
+    painter->drawPolyline( line, lineLabel, labelPositionFlags, painter->pen().color() );
 }
 
 void GraticulePlugin::renderLongitudeLine( GeoPainter *painter, qreal longitude,
@@ -489,7 +489,7 @@ void GraticulePlugin::renderLongitudeLine( GeoPainter *painter, qreal longitude,
         line << n1 << n3;
     }
 
-    painter->drawPolyline( line, lineLabel, labelPositionFlags );     
+    painter->drawPolyline( line, lineLabel, labelPositionFlags, painter->pen().color() );
 }
 
 void GraticulePlugin::renderLatitudeLines( GeoPainter *painter,
