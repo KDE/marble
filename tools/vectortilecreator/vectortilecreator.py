@@ -90,18 +90,18 @@ if __name__ == "__main__":
             for bounds in reader:
                 filename = download(bounds[0], args.cache, args.refresh)
                 for zoom in args.zoomLevels:
-                    topLeft = deg2num(float(bounds[3]), float(bounds[2]), zoom)
-                    bottomRight = deg2num(float(bounds[5]), float(bounds[4]), zoom)
-                    xDiff = bottomRight[0]-topLeft[0]
-                    yDiff = topLeft[1]-bottomRight[1]
+                    bottomLeft = deg2num(float(bounds[3]), float(bounds[2]), zoom)
+                    topRight = deg2num(float(bounds[5]), float(bounds[4]), zoom)
+                    xDiff = topRight[0]-bottomLeft[0]
+                    yDiff = bottomLeft[1]-topRight[1]
                     total = xDiff*yDiff
                     count = 0
                     cutted = "{}/{}.{}-{}-{}-{}.osm.o5m".format(args.cache, filename, bounds[2], bounds[3], bounds[4], bounds[5])
                     if not os.path.exists(cutted):
                         print ("Creating cut out region {}".format(cutted))
                         call(["osmconvert", "-t={}/osmconvert_tmp-".format(args.cache), "--complete-ways", "--complex-ways", "--drop-version", "-b={},{},{},{}".format(bounds[2], bounds[3], bounds[4], bounds[5]), "-o={}".format(cutted), os.path.join(args.cache, filename)])
-                    for x in range(1+topLeft[0], bottomRight[0]+1):
-                        for y in range(1+bottomRight[1], topLeft[1]+1):
+                    for x in range(1+bottomLeft[0], topRight[0]+1):
+                        for y in range(1+topRight[1], bottomLeft[1]+1):
                             count += 1
                             tl = num2deg(x-1, y-1, zoom)
                             br = num2deg(x, y, zoom)
