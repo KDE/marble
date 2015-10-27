@@ -185,13 +185,13 @@ qreal GeoPainterPrivate::normalizeAngle(qreal angle)
 void GeoPainterPrivate::drawTextRotated( const QPointF &startPoint, qreal angle, const QString &text )
 {
     QRectF textRect(startPoint, m_parent->fontMetrics().size( 0, text));
-    m_parent->save();
-        m_parent->translate(startPoint);
-        m_parent->rotate(angle);
-        m_parent->translate( -startPoint - QPointF(0.0, m_parent->fontMetrics().height()/2.0)  );
+    QTransform const oldTransform = m_parent->transform();
+    m_parent->translate(startPoint);
+    m_parent->rotate(angle);
+    m_parent->translate( -startPoint - QPointF(0.0, m_parent->fontMetrics().height()/2.0)  );
 
-        m_parent->drawText( textRect, text);
-    m_parent->restore();
+    m_parent->drawText( textRect, text);
+    m_parent->setTransform(oldTransform);
 }
 
 // -------------------------------------------------------------------------------------------------
