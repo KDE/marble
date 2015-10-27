@@ -363,7 +363,7 @@ void GeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportParams* v
                         painter->setClipRegion(clip);
                     }
                     painter->drawPolygon(*polygon);
-                    painter->resetTransform();
+                    painter->translate(-offset);
                 }
                 if (hasIcon && !roofCenter.isNull()) {
                     QImage const icon = style()->iconStyle().scaledIcon();
@@ -388,7 +388,7 @@ void GeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportParams* v
                         QPointF const offset = buildingOffset(boundingRect.center(), viewport);
                         painter->translate(offset);
                         painter->drawPolyline(*polygon);
-                        painter->resetTransform();
+                        painter->translate(-offset);
                     }
                 }
             }
