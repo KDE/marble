@@ -810,7 +810,9 @@ void GeoPainter::drawPolygon ( const GeoDataPolygon & polygon,
             ClipPainter::drawPolyline( *polygon );
         }
     }
-
+    if (!hasInnerBoundaries) {
+        qDeleteAll(outerPolygons);
+    }
     qDeleteAll(outlines);
     qDeleteAll(polygons);
 }
