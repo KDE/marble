@@ -775,6 +775,13 @@ void GeoPainter::drawPolygon ( const GeoDataPolygon & polygon,
     bool const hasInnerBoundaries = !polygon.innerBoundaries().isEmpty();
 
     if ( hasInnerBoundaries ) {
+        QVector<QPointF> screenPoly;
+        screenPoly << QPointF(0, 0) << QPointF(0, d->m_viewport->height());
+        screenPoly << QPointF(d->m_viewport->width(), d->m_viewport->height()) << QPointF(d->m_viewport->width(), 0);
+        foreach(QPolygonF* poly, outerPolygons) {
+            *poly = poly->intersected(QPolygonF(screenPoly));
+        }
+
         outlines << outerPolygons;
         setPen( QPen( Qt::NoPen ) );
 
