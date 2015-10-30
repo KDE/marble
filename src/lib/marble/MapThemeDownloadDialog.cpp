@@ -150,6 +150,9 @@ void MapItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &opti
         QRect installRect = position( CancelButton, option );
         cancelButton.rect = installRect;
         QApplication::style()->drawControl( QStyle::CE_PushButton, &cancelButton, painter );
+        QRect buttonTextRect(installRect);
+        buttonTextRect.adjust(cancelButton.iconSize.width() + 4, 0, 0, 0);
+        painter->drawText(buttonTextRect, Qt::AlignCenter, cancelButton.text);
     } else {
         bool const installed = index.data( NewstuffModel::IsInstalled ).toBool();
         bool const upgradable = index.data( NewstuffModel::IsUpgradable ).toBool();
@@ -161,12 +164,18 @@ void MapItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &opti
         QRect installRect = position( element, option );
         actionButton.rect = installRect;
         QApplication::style()->drawControl( QStyle::CE_PushButton, &actionButton, painter );
+        QRect buttonTextRect(installRect);
+        buttonTextRect.adjust(actionButton.iconSize.width() + 4, 0, 0, 0);
+        painter->drawText(buttonTextRect, Qt::AlignCenter, actionButton.text);
 
         if ( installed ) {
             QStyleOptionButton removeButton = button( RemoveButton, option );
             QRect removeRect = position( RemoveButton, option );
             removeButton.rect = removeRect;
             QApplication::style()->drawControl( QStyle::CE_PushButton, &removeButton, painter );
+            buttonTextRect = removeRect;
+            buttonTextRect.adjust(removeButton.iconSize.width() + 4, 0, 0 ,0);
+            painter->drawText(buttonTextRect, Qt::AlignCenter, removeButton.text);
         }
     }
 }
