@@ -35,20 +35,21 @@ public:
     ElevationModelPrivate( ElevationModel *_q, HttpDownloadManager *downloadManager, PluginManager* pluginManager )
         : q( _q ),
           m_tileLoader( downloadManager, pluginManager ),
-          m_textureLayer( 0 )
+          m_textureLayer( 0 ),
+          m_srtmTheme(0)
     {
         m_cache.setMaxCost( 10 ); //keep 10 tiles in memory (~17MB)
 
-        const GeoSceneDocument *srtmTheme = MapThemeManager::loadMapTheme( "earth/srtm2/srtm2.dgml" );
-        if ( !srtmTheme ) {
+        m_srtmTheme = MapThemeManager::loadMapTheme( "earth/srtm2/srtm2.dgml" );
+        if ( !m_srtmTheme ) {
             mDebug() << "Failed to load map theme earth/srtm2/srtm2.dgml. Check your installation. No elevation will be returned.";
             return;
         }
 
-        const GeoSceneHead *head = srtmTheme->head();
+        const GeoSceneHead *head = m_srtmTheme->head();
         Q_ASSERT( head );
 
-        const GeoSceneMap *map = srtmTheme->map();
+        const GeoSceneMap *map = m_srtmTheme->map();
         Q_ASSERT( map );
 
         const GeoSceneLayer *sceneLayer = map->layer( head->theme() );
@@ -56,6 +57,11 @@ public:
 
         m_textureLayer = dynamic_cast<GeoSceneTextureTileDataset*>( sceneLayer->datasets().first() );
         Q_ASSERT( m_textureLayer );
+    }
+
+    ~ElevationModelPrivate()
+    {
+       delete m_srtmTheme;
     }
 
     void tileCompleted( const TileId & tileId, const QImage &image )
@@ -70,6 +76,7 @@ public:
     TileLoader m_tileLoader;
     const GeoSceneTextureTileDataset *m_textureLayer;
     QCache<TileId, const QImage> m_cache;
+    GeoSceneDocument *m_srtmTheme;
 };
 
 ElevationModel::ElevationModel( HttpDownloadManager *downloadManager, PluginManager* pluginManager, QObject *parent ) :
@@ -78,6 +85,11 @@ ElevationModel::ElevationModel( HttpDownloadManager *downloadManager, PluginMana
 {
     connect( &d->m_tileLoader, SIGNAL(tileCompleted(TileId,QImage)),
              this, SLOT(tileCompleted(TileId,QImage)) );
+}
+
+ElevationModel::~ElevationModel()
+{
+    delete d;
 }
 
 
