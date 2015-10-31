@@ -182,6 +182,8 @@ void GeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportParams* v
 {
     painter->save();
 
+
+
     bool const isBuildingFrame = isDecoration();
     bool const isBuildingRoof = !isDecoration() && !decorations().isEmpty();
 
@@ -225,19 +227,21 @@ void GeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportParams* v
                     qreal x, y;
                     viewport->screenCoordinates(coords, x, y);
                     if (m_cachedTexturePath != style()->polyStyle().texturePath() || m_cachedTextureColor != style()->polyStyle().paintedColor() ) {
-                        m_cachedTexture = QImage ( textureImage.size(), QImage::Format_ARGB32_Premultiplied );
-                        m_cachedTexture.fill(style()->polyStyle().paintedColor());
-                        QPainter imagePainter(&m_cachedTexture );
-                        imagePainter.drawImage(0, 0, textureImage);
-                        imagePainter.end();
+                        if (textureImage.hasAlphaChannel()) {
+                            m_cachedTexture = QImage ( textureImage.size(), QImage::Format_ARGB32_Premultiplied );
+                            m_cachedTexture.fill(style()->polyStyle().paintedColor());
+                            QPainter imagePainter(&m_cachedTexture );
+                            imagePainter.drawImage(0, 0, textureImage);
+                        }
+                        else {
+                            m_cachedTexture = textureImage;
+                        }
                         m_cachedTexturePath = style()->polyStyle().texturePath();
                         m_cachedTextureColor = style()->polyStyle().paintedColor();
                     }
-                    QBrush brush;
-                    brush.setTextureImage(m_cachedTexture);
-                    QTransform transform;
-                    brush.setTransform(transform.translate(x,y));
+                    QBrush brush(m_cachedTexture);
                     painter->setBrush(brush);
+                    painter->setBrushOrigin(QPoint(x,y));
                 } else {
                     painter->setBrush( style()->polyStyle().paintedColor() );
                 }
