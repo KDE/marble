@@ -513,6 +513,7 @@ bool AzimuthalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
     }
 
     if ( polygons.last()->size() <= 1 ){
+        delete polygons.last();
         polygons.pop_back(); // Clean up "unused" empty polygon instances
     }
 
