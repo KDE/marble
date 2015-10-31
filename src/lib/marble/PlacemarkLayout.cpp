@@ -156,6 +156,7 @@ PlacemarkLayout::PlacemarkLayout( QAbstractItemModel  *placemarkModel,
                                   MarbleClock *clock,
                                   QObject* parent )
     : QObject( parent ),
+      m_placemarkModel(placemarkModel),
       m_selectionModel( selectionModel ),
       m_clock( clock ),
       m_acceptedVisualCategories( acceptedVisualCategories() ),
@@ -169,22 +170,19 @@ PlacemarkLayout::PlacemarkLayout( QAbstractItemModel  *placemarkModel,
       m_maxLabelHeight( 0 ),
       m_styleResetRequested( true )
 {
-    m_placemarkModel.setSourceModel( placemarkModel );
-    m_placemarkModel.setDynamicSortFilter( true );
-    m_placemarkModel.setSortRole( MarblePlacemarkModel::PopularityIndexRole );
-    m_placemarkModel.sort( 0, Qt::AscendingOrder );
+    Q_ASSERT(m_placemarkModel);
 
     connect( m_selectionModel,  SIGNAL( selectionChanged( QItemSelection,
                                                            QItemSelection) ),
              this,               SLOT(requestStyleReset()) );
 
-    connect( &m_placemarkModel, SIGNAL(dataChanged(QModelIndex,QModelIndex)),
+    connect( m_placemarkModel, SIGNAL(dataChanged(QModelIndex,QModelIndex)),
              this, SLOT(resetCacheData()) );
-    connect( &m_placemarkModel, SIGNAL(rowsInserted(QModelIndex,int,int)),
+    connect( m_placemarkModel, SIGNAL(rowsInserted(QModelIndex,int,int)),
              this, SLOT(addPlacemarks(QModelIndex,int,int)) );
-    connect( &m_placemarkModel, SIGNAL(rowsAboutToBeRemoved(QModelIndex,int,int)),
+    connect( m_placemarkModel, SIGNAL(rowsAboutToBeRemoved(QModelIndex,int,int)),
              this, SLOT(removePlacemarks(QModelIndex,int,int)) );
-    connect( &m_placemarkModel, SIGNAL(modelReset()),
+    connect( m_placemarkModel, SIGNAL(modelReset()),
              this, SLOT(resetCacheData()) );
 }
 
@@ -266,8 +264,8 @@ int PlacemarkLayout::maxLabelHeight() const
 {
     int maxLabelHeight = 0;
 
-    for ( int i = 0; i < m_placemarkModel.rowCount(); ++i ) {
-        QModelIndex index = m_placemarkModel.index( i, 0 );
+    for ( int i = 0; i < m_placemarkModel->rowCount(); ++i ) {
+        QModelIndex index = m_placemarkModel->index( i, 0 );
         const GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
         if ( placemark ) {
             GeoDataStyle::ConstPtr style = placemark->style();
@@ -285,10 +283,10 @@ int PlacemarkLayout::maxLabelHeight() const
 /// feed an internal QMap of placemarks with TileId as key when model changes
 void PlacemarkLayout::addPlacemarks( QModelIndex parent, int first, int last )
 {
-    Q_ASSERT( first < m_placemarkModel.rowCount() );
-    Q_ASSERT( last < m_placemarkModel.rowCount() );
+    Q_ASSERT( first < m_placemarkModel->rowCount() );
+    Q_ASSERT( last < m_placemarkModel->rowCount() );
     for( int i=first; i<=last; ++i ) {
-        QModelIndex index = m_placemarkModel.index( i, 0, parent );
+        QModelIndex index = m_placemarkModel->index( i, 0, parent );
         Q_ASSERT( index.isValid() );
         const GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
         const GeoDataCoordinates coordinates = placemarkIconCoordinates( placemark );
@@ -316,10 +314,10 @@ void PlacemarkLayout::addPlacemarks( QModelIndex parent, int first, int last )
 
 void PlacemarkLayout::removePlacemarks( QModelIndex parent, int first, int last )
 {
-    Q_ASSERT( first < m_placemarkModel.rowCount() );
-    Q_ASSERT( last < m_placemarkModel.rowCount() );
+    Q_ASSERT( first < m_placemarkModel->rowCount() );
+    Q_ASSERT( last < m_placemarkModel->rowCount() );
     for( int i=first; i<=last; ++i ) {
-        QModelIndex index = m_placemarkModel.index( i, 0, parent );
+        QModelIndex index = m_placemarkModel->index( i, 0, parent );
         Q_ASSERT( index.isValid() );
         const GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>( index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
         const GeoDataCoordinates coordinates = placemarkIconCoordinates( placemark );
@@ -342,12 +340,12 @@ void PlacemarkLayout::removePlacemarks( QModelIndex parent, int first, int last 
 
 void PlacemarkLayout::resetCacheData()
 {
-    const int rowCount = m_placemarkModel.rowCount();
+    const int rowCount = m_placemarkModel->rowCount();
 
     m_osmIds.clear();
     m_placemarkCache.clear();
     requestStyleReset();
-    addPlacemarks( m_placemarkModel.index( 0, 0 ), 0, rowCount );
+    addPlacemarks( m_placemarkModel->index( 0, 0 ), 0, rowCount );
     emit repaintNeeded();
 }
 
@@ -406,7 +404,7 @@ QSet<TileId> PlacemarkLayout::visibleTiles( const ViewportParams *viewport )
 QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParams *viewport )
 {
     m_runtimeTrace.clear();
-    if ( m_placemarkModel.rowCount() <= 0 )
+    if ( m_placemarkModel->rowCount() <= 0 )
         return QVector<VisiblePlacemark *>();
 
     if ( m_styleResetRequested ) {

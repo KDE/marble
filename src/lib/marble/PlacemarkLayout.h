@@ -131,7 +131,7 @@ class PlacemarkLayout : public QObject
 
  private:
     Q_DISABLE_COPY( PlacemarkLayout )
-    QSortFilterProxyModel  m_placemarkModel;
+    QAbstractItemModel*  m_placemarkModel;
     QItemSelectionModel *const m_selectionModel;
     MarbleClock *const m_clock;
 
