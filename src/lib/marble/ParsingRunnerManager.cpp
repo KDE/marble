@@ -58,10 +58,14 @@ ParsingRunnerManager::Private::~Private()
     // nothing to do
 }
 
-void ParsingRunnerManager::Private::cleanupParsingTask( ParsingTask *task )
+void ParsingRunnerManager::Private::cleanupParsingTask( ParsingTask *finishedTask )
 {
-    m_parsingTasks.removeAll( task );
-    mDebug() << "removing task" << m_parsingTasks.size() << " " << (quintptr)task;
+    for (int i=m_parsingTasks.size()-1; i>=0; --i) {
+        if (m_parsingTasks[i] == finishedTask) {
+            m_parsingTasks[i]->deleteLater();
+            m_parsingTasks.removeAt(i);
+        }
+    }
 
     if ( m_parsingTasks.isEmpty() ) {
         emit q->parsingFinished();

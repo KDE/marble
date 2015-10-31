@@ -96,6 +96,7 @@ void ParsingTask::run()
     QString error;
     GeoDataDocument* document = m_runner->parseFile( m_fileName, m_role, error );
     emit parsed(document, error);
+    m_runner->deleteLater();
     emit finished( this );
 }
 
