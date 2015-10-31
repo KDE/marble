@@ -40,20 +40,6 @@
 #include "MathHelper.h"
 
 namespace
-{
-    bool placemarkLayoutOrderCompare(const Marble::GeoDataPlacemark *left, const Marble::GeoDataPlacemark *right)
-    {
-        if (left->zoomLevel() != right->zoomLevel())
-            return (left->zoomLevel() < right->zoomLevel()); //lower zoom level comes first
-
-        if (left->popularity() != right->popularity())
-            return left->popularity() > right->popularity(); //higher popularity comes first
-
-        return left < right; //lower pointer value comes first
-    }
-}
-
-namespace
 {   //Helper function that checks for available room for the label
     bool hasRoomFor(const QVector<Marble::VisiblePlacemark*> & placemarks, const QRectF &labelRect)
     {
@@ -481,7 +467,7 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParam
     foreach ( const TileId &tileId, tileIdList ) {
         placemarkList += m_placemarkCache.value( tileId );
     }
-    qSort(placemarkList.begin(), placemarkList.end(), placemarkLayoutOrderCompare);
+    qSort(placemarkList.begin(), placemarkList.end(), GeoDataPlacemark::placemarkLayoutOrderCompare);
 
     foreach ( const GeoDataPlacemark *placemark, placemarkList ) {
         const GeoDataCoordinates coordinates = placemarkIconCoordinates( placemark );

@@ -234,6 +234,8 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     const GeoDataLookAt *lookAt() const;
     GeoDataLookAt *lookAt();
 
+    static bool placemarkLayoutOrderCompare(const GeoDataPlacemark *a, const GeoDataPlacemark* b);
+
  private:
     GeoDataPlacemarkPrivate *p();
     const GeoDataPlacemarkPrivate *p() const;

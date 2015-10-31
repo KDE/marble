@@ -212,6 +212,19 @@ GeoDataLookAt *GeoDataPlacemark::lookAt()
     return dynamic_cast<GeoDataLookAt*>( abstractView() );
 }
 
+bool GeoDataPlacemark::placemarkLayoutOrderCompare(const GeoDataPlacemark *left, const GeoDataPlacemark *right)
+{
+    if (left->d->m_zoomLevel != right->d->m_zoomLevel) {
+        return (left->d->m_zoomLevel < right->d->m_zoomLevel); // lower zoom level comes first
+    }
+
+    if (left->d->m_popularity != right->d->m_popularity) {
+        return left->d->m_popularity > right->d->m_popularity; // higher popularity comes first
+    }
+
+    return left < right; // lower pointer value comes first
+}
+
 GeoDataCoordinates GeoDataPlacemark::coordinate( const QDateTime &dateTime, bool *iconAtCoordinates ) const
 {
     bool hasIcon = false;
