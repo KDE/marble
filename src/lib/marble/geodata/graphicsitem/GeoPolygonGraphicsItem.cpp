@@ -182,8 +182,6 @@ void GeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportParams* v
 {
     painter->save();
 
-
-
     bool const isBuildingFrame = isDecoration();
     bool const isBuildingRoof = !isDecoration() && !decorations().isEmpty();
 

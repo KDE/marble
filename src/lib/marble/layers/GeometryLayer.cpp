@@ -193,6 +193,7 @@ void GeometryLayerPrivate::initializeDefaultValues()
     s_defaultZValues[GeoDataFeature::HighwayFootway]      = s_defaultZValue - 8;
     s_defaultZValues[GeoDataFeature::HighwayCycleway]     = s_defaultZValue - 8;
     s_defaultZValues[GeoDataFeature::HighwayService]      = s_defaultZValue - 7;
+    s_defaultZValues[GeoDataFeature::HighwayResidential]  = s_defaultZValue - 7;
     s_defaultZValues[GeoDataFeature::HighwayLivingStreet] = s_defaultZValue - 7;
     s_defaultZValues[GeoDataFeature::HighwayPedestrian]   = s_defaultZValue - 6;
     s_defaultZValues[GeoDataFeature::HighwayRoad]         = s_defaultZValue - 6;
