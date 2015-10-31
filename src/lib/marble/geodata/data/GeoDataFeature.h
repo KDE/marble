@@ -166,6 +166,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         HighwayCycleway,
         HighwayService,
         HighwayRoad,
+        HighwayResidential,
         HighwayLivingStreet,
         HighwayUnclassified,
         HighwayTertiaryLink,

@@ -199,7 +199,7 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "highway", "service" ) ]            = GeoDataFeature::HighwayService;
     s_visualCategories[ OsmTag( "highway", "living_street" ) ]      = GeoDataFeature::HighwayLivingStreet;
     s_visualCategories[ OsmTag( "highway", "unclassified" ) ]       = GeoDataFeature::HighwayUnclassified;
-    s_visualCategories[ OsmTag( "highway", "residential" ) ]        = GeoDataFeature::HighwayUnclassified;
+    s_visualCategories[ OsmTag( "highway", "residential" ) ]        = GeoDataFeature::HighwayResidential;
     s_visualCategories[ OsmTag( "highway", "road" ) ]               = GeoDataFeature::HighwayRoad;
     s_visualCategories[ OsmTag( "highway", "tertiary_link" ) ]      = GeoDataFeature::HighwayTertiaryLink;
     s_visualCategories[ OsmTag( "highway", "tertiary" ) ]           = GeoDataFeature::HighwayTertiary;
