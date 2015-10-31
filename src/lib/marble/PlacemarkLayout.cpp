@@ -294,7 +294,6 @@ void PlacemarkLayout::addPlacemarks( QModelIndex parent, int first, int last )
         TileId key = TileId::fromCoordinates( coordinates, zoomLevel );
         m_placemarkCache[key].append( placemark );
     }
-    requestStyleReset();
     emit repaintNeeded();
 }
 
