@@ -41,14 +41,14 @@ void OsmRelation::parseMember(const QXmlStreamAttributes &attributes)
     m_members << member;
 }
 
-void OsmRelation::create(GeoDataDocument *document, const OsmWays &ways, const OsmNodes &nodes) const
+void OsmRelation::create(GeoDataDocument *document, const OsmWays &ways, const OsmNodes &nodes, QSet<qint64> &usedWays) const
 {
     if (!m_osmData.containsTag("type", "multipolygon")) {
         return;
     }
 
     QStringList const outerRoles = QStringList() << "outer" << "";
-    QList<GeoDataLinearRing> outer = rings(outerRoles, ways, nodes);
+    QList<GeoDataLinearRing> outer = rings(outerRoles, ways, nodes, usedWays);
     if (outer.isEmpty()) {
         return;
     } else if (outer.size() > 1) {
@@ -69,7 +69,7 @@ void OsmRelation::create(GeoDataDocument *document, const OsmWays &ways, const O
     // placemark->osmData().addMemberReference(-1, );
 
     QStringList const innerRoles = QStringList() << "inner";
-    QList<GeoDataLinearRing> inner = rings(innerRoles, ways, nodes);
+    QList<GeoDataLinearRing> inner = rings(innerRoles, ways, nodes, usedWays);
     foreach(const GeoDataLinearRing &ring, inner) {
         // @todo: How to get the reference here?
         // placemark->osmData().addMemberReference(polygon->innerBoundaries().size(), );
@@ -81,7 +81,7 @@ void OsmRelation::create(GeoDataDocument *document, const OsmWays &ways, const O
     document->append(placemark);
 }
 
-QList<GeoDataLinearRing> OsmRelation::rings(const QStringList &roles, const OsmWays &ways, const OsmNodes &nodes) const
+QList<GeoDataLinearRing> OsmRelation::rings(const QStringList &roles, const OsmWays &ways, const OsmNodes &nodes, QSet<qint64> &usedWays) const
 {
     QList<qint64> roleMembers;
     foreach(const OsmMember &member, m_members) {
@@ -110,6 +110,7 @@ QList<GeoDataLinearRing> OsmRelation::rings(const QStringList &roles, const OsmW
             }
             ring << nodes[id].coordinates();
         }
+        usedWays << wayId;
         result << ring;
     }
 

@@ -114,8 +114,12 @@ GeoDataDocument *OsmParser::createDocument(OsmNodes &nodes, OsmWays &ways, OsmRe
     backgroundStyle->setId( "background" );
     document->addStyle( backgroundStyle );
 
+    QSet<qint64> usedWays;
     foreach(OsmRelation const &relation, relations) {
-        relation.create(document, ways, nodes);
+        relation.create(document, ways, nodes, usedWays);
+    }
+    foreach(qint64 id, usedWays) {
+        ways.remove(id);
     }
 
     foreach(OsmWay const &way, ways) {
