@@ -14,7 +14,7 @@
 #include <QImage>
 #include <QFlags>
 
-#include "GeoDataFeature.h"
+#include "GeoDataObject.h"
 
 namespace Marble
 {

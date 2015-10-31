@@ -11,7 +11,6 @@
 #ifndef MARBLE_GEOWRITER_H
 #define MARBLE_GEOWRITER_H
 
-#include "GeoDataFeature.h"
 #include "marble_export.h"
 
 #include <QXmlStreamWriter>
@@ -19,6 +18,8 @@
 
 namespace Marble
 {
+
+class GeoNode;
 
 /**
  * @brief Standard Marble way of writing XML

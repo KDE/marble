@@ -10,6 +10,7 @@
 
 #include "GeoWriter.h"
 
+#include "GeoDocument.h"
 #include "GeoTagWriter.h"
 #include "KmlElementDictionary.h"
 #include "DgmlElementDictionary.h"
