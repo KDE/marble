@@ -459,10 +459,8 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParam
 
     const QItemSelection selection = m_selectionModel->selection();
 
-    QList<TileId> tileIdList = visibleTiles( viewport ).toList();
-    qSort( tileIdList );
     QList<const GeoDataPlacemark*> placemarkList;
-    foreach ( const TileId &tileId, tileIdList ) {
+    foreach ( const TileId &tileId, visibleTiles( viewport ) ) {
         placemarkList += m_placemarkCache.value( tileId );
     }
     qSort(placemarkList.begin(), placemarkList.end(), GeoDataPlacemark::placemarkLayoutOrderCompare);
