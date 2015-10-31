@@ -465,6 +465,7 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParam
     }
     qSort(placemarkList.begin(), placemarkList.end(), GeoDataPlacemark::placemarkLayoutOrderCompare);
 
+    auto const viewLatLonAltBox = viewport->viewLatLonAltBox();
     foreach ( const GeoDataPlacemark *placemark, placemarkList ) {
         const GeoDataCoordinates coordinates = placemarkIconCoordinates( placemark );
         if ( !coordinates.isValid() ) {
@@ -479,7 +480,7 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParam
         qreal x = 0;
         qreal y = 0;
 
-        if ( !viewport->viewLatLonAltBox().contains( coordinates ) ||
+        if ( !viewLatLonAltBox.contains( coordinates ) ||
              ! viewport->screenCoordinates( coordinates, x, y )) {
                 delete m_visiblePlacemarks.take( placemark );
                 continue;
