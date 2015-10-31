@@ -167,7 +167,7 @@ PlacemarkLayout::PlacemarkLayout( QAbstractItemModel  *placemarkModel,
       m_showLandingSites( false ),
       m_showCraters( false ),
       m_showMaria( false ),
-      m_maxLabelHeight( 0 ),
+      m_maxLabelHeight(maxLabelHeight()),
       m_styleResetRequested( true )
 {
     Q_ASSERT(m_placemarkModel);
@@ -262,22 +262,8 @@ QVector<const GeoDataFeature*> PlacemarkLayout::whichPlacemarkAt( const QPoint& 
 
 int PlacemarkLayout::maxLabelHeight() const
 {
-    int maxLabelHeight = 0;
-
-    for ( int i = 0; i < m_placemarkModel->rowCount(); ++i ) {
-        QModelIndex index = m_placemarkModel->index( i, 0 );
-        const GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
-        if ( placemark ) {
-            GeoDataStyle::ConstPtr style = placemark->style();
-            QFont labelFont = style->labelStyle().scaledFont();
-            int textHeight = QFontMetrics( labelFont ).height();
-            if ( textHeight > maxLabelHeight )
-                maxLabelHeight = textHeight;
-        }
-    }
-
-    //mDebug() <<"Detected maxLabelHeight: " << maxLabelHeight;
-    return maxLabelHeight;
+    QFont const standardFont(QStringLiteral("Arial"));
+    return QFontMetrics(standardFont).height();
 }
 
 /// feed an internal QMap of placemarks with TileId as key when model changes
@@ -611,6 +597,7 @@ bool PlacemarkLayout::layoutPlacemark( const GeoDataPlacemark *placemark, qreal 
 
     m_paintOrder.append( mark );
     m_labelArea += labelRect.width() * labelRect.height();
+    m_maxLabelHeight = qMax(m_maxLabelHeight, qCeil(labelRect.height()));
     return true;
 }
 
