@@ -9,7 +9,7 @@ endif(BUILD_WITH_DBUS)
 
 if( QT_QTDECLARATIVE_FOUND OR Qt5Quick_FOUND )
   OPTION(IGNORE_CMAKE_INSTALL_PREFIX_FOR_DECLARATIVE_PLUGINS "Install Marble Qt Declarative plugins to QT_IMPORTS_DIR even if that is out of the CMAKE_INSTALL_PREFIX")
-  IF(DEFINED QT_IMPORTS_DIR)
+  IF(QT_IMPORTS_DIR)
     SET(MARBLE_QT_IMPORTS_DIR ${QT_IMPORTS_DIR})
   ELSE()
     # Fallback when FindQt.cmake (part of cmake) does not define QT_IMPORTS_DIR. Get it from qmake instead.
