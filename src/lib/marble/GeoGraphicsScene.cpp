@@ -48,24 +48,24 @@ public:
     // Stores the items which have been clicked;
     QList<GeoGraphicsItem*> m_selectedItems;
 
-    GeoDataStyle *highlightStyle(const GeoDataDocument *document, const GeoDataStyleMap &styleMap);
+    GeoDataStyle::Ptr highlightStyle(const GeoDataDocument *document, const GeoDataStyleMap &styleMap);
 
     void selectItem( GeoGraphicsItem *item );
-    void applyHighlightStyle( GeoGraphicsItem *item, GeoDataStyle *style );
+    void applyHighlightStyle(GeoGraphicsItem *item, const GeoDataStyle::Ptr &style );
 };
 
-GeoDataStyle *GeoGraphicsScenePrivate::highlightStyle( const GeoDataDocument *document,
+GeoDataStyle::Ptr GeoGraphicsScenePrivate::highlightStyle( const GeoDataDocument *document,
                                                        const GeoDataStyleMap &styleMap )
 {
     // @todo Consider QUrl parsing when external styles are suppported
     QString highlightStyleId = styleMap.value("highlight");
     highlightStyleId.remove('#');
     if ( !highlightStyleId.isEmpty() ) {
-        GeoDataStyle *highlightStyle = new GeoDataStyle( document->style(highlightStyleId) );
+        GeoDataStyle::Ptr highlightStyle(new GeoDataStyle( *document->style(highlightStyleId) ));
         return highlightStyle;
     }
     else {
-        return 0;
+        return GeoDataStyle::Ptr();
     }
 }
 
@@ -74,7 +74,7 @@ void GeoGraphicsScenePrivate::selectItem( GeoGraphicsItem* item )
     m_selectedItems.append( item );
 }
 
-void GeoGraphicsScenePrivate::applyHighlightStyle(GeoGraphicsItem* item, GeoDataStyle* highlightStyle )
+void GeoGraphicsScenePrivate::applyHighlightStyle(GeoGraphicsItem* item, const GeoDataStyle::Ptr &highlightStyle )
 {
     item->setHighlightStyle( highlightStyle );
     item->setHighlighted( true );
@@ -190,7 +190,7 @@ void GeoGraphicsScene::applyHighlight( const QVector< GeoDataPlacemark* > &selec
                             styleUrl.remove('#');
                             if ( !styleUrl.isEmpty() ) {
                                 GeoDataStyleMap const &styleMap = doc->styleMap( styleUrl );
-                                GeoDataStyle *style = d->highlightStyle( doc, styleMap );
+                                GeoDataStyle::Ptr style = d->highlightStyle( doc, styleMap );
                                 if ( style ) {
                                     d->selectItem( item );
                                     d->applyHighlightStyle( item, style );
@@ -205,7 +205,7 @@ void GeoGraphicsScene::applyHighlight( const QVector< GeoDataPlacemark* > &selec
                             */
                             else {
                                 foreach ( const GeoDataStyleMap &styleMap, doc->styleMaps() ) {
-                                    GeoDataStyle *style = d->highlightStyle( doc, styleMap );
+                                    GeoDataStyle::Ptr style = d->highlightStyle( doc, styleMap );
                                     if ( style ) {
                                         d->selectItem( item );
                                         d->applyHighlightStyle( item, style );

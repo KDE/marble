@@ -32,6 +32,7 @@
 
 #include "GeoDataContainer.h"
 #include "GeoDocument.h"
+#include <GeoDataStyle.h>
 
 namespace Marble
 {
@@ -122,7 +123,7 @@ public:
      * @brief Add a style to the style storage
      * @param style  the new style
      */
-    void addStyle( const GeoDataStyle& style );
+    void addStyle(const Marble::GeoDataStyle::Ptr &style );
 
     /**
      * @brief Add a style to the style storage
@@ -134,13 +135,14 @@ public:
      * @brief Return a style in the style storage
      * @param styleId  the id of the style
      */
-    GeoDataStyle& style( const QString& styleId );
-    GeoDataStyle style( const QString& styleId ) const;
+    GeoDataStyle::Ptr style( const QString& styleId );
+    GeoDataStyle::ConstPtr style( const QString& styleId ) const;
 
     /**
     * @brief dump a Vector of all styles
     */
-    QList<GeoDataStyle> styles() const;
+    QList<GeoDataStyle::Ptr> styles();
+    QList<GeoDataStyle::ConstPtr> styles() const;
 
     /**
     * @brief Add a stylemap to the stylemap storage

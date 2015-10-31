@@ -104,7 +104,7 @@ void TestGeoData::parentingTest()
     /// Set a style
     GeoDataIconStyle iconStyle;
     iconStyle.setIconPath( "myicon.png" );
-    GeoDataStyle* style = new GeoDataStyle;
+    GeoDataStyle::Ptr style(new GeoDataStyle);
     style->setId( "mystyle" );
     style->setIconStyle( iconStyle );
     GeoDataObject* noParent = 0;
@@ -112,7 +112,7 @@ void TestGeoData::parentingTest()
     QCOMPARE( iconStyle.parent(), noParent );
     document->setStyle( style );
     QCOMPARE( style->parent(), document ); // Parent should be assigned now
-    QCOMPARE( style->iconStyle().parent(), style );
+    QCOMPARE( style->iconStyle().parent(), style.data() );
     QCOMPARE( iconStyle.parent(), noParent ); // setIconStyle copies
     QCOMPARE( placemark->style()->parent(), noParent );
     placemark->setStyle( style );
@@ -123,7 +123,7 @@ void TestGeoData::parentingTest()
     styleMap->setId( "mystylemap" );
     styleMap->insert( "normal", "#mystyle" );
     styleMap->insert( "highlight", "#mystyle" );
-    document->addStyle( *style );
+    document->addStyle( style );
     document->setStyleMap( styleMap );
     QCOMPARE( placemark2->style()->parent(), noParent );
     placemark2->setStyleUrl( "#mystyle" );

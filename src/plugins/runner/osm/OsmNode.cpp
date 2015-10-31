@@ -46,7 +46,7 @@ void OsmNode::create(GeoDataDocument *document) const
         placemark->setName(m_osmData.tagValue("name"));
     }
     placemark->setVisualCategory(category);
-    placemark->setStyle( 0 );
+    placemark->setStyle( GeoDataStyle::Ptr() );
 
     if (category == GeoDataFeature::NaturalTree) {
         qreal const lat = m_coordinates.latitude(GeoDataCoordinates::Degree);
@@ -63,7 +63,7 @@ void OsmNode::create(GeoDataDocument *document) const
                 QString const bitmap = QString("bitmaps/osmcarto/symbols/48/individual/tree-29-%1.png").arg(season);
                 iconStyle.setIconPath(MarbleDirs::path(bitmap));
 
-                GeoDataStyle* style = new GeoDataStyle(*placemark->style());
+                GeoDataStyle::Ptr style(new GeoDataStyle(*placemark->style()));
                 style->setIconStyle(iconStyle);
                 placemark->setStyle(style);
 

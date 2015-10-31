@@ -251,7 +251,7 @@ GeoDataPlacemark EditBookmarkDialog::bookmark() const
     GeoDataPlacemark bookmark;
     bookmark.setName( name() );
     bookmark.setDescription( description() );
-    GeoDataStyle *newStyle = new GeoDataStyle( *bookmark.style() );
+    GeoDataStyle::Ptr newStyle(new GeoDataStyle( *bookmark.style() ));
     newStyle->iconStyle().setIconPath( iconLink() );
     bookmark.setStyle( newStyle );
     //allow for HTML in the description

@@ -126,13 +126,13 @@ class GeoDataFeaturePrivate
 
     static void initializeDefaultStyles();
 
-    static GeoDataStyle* createOsmPOIStyle( const QFont &font, const QString &bitmap,
+    static GeoDataStyle::Ptr createOsmPOIStyle( const QFont &font, const QString &bitmap,
                                          const QColor &textColor = Qt::black,
                                          const QColor &color = QColor( 0xBE, 0xAD, 0xAD ),
                                          const QColor &outline = QColor( 0xBE, 0xAD, 0xAD ).darker()
                                          )
     {
-        GeoDataStyle *style =  createStyle(1, 0, color, outline, true, true, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false);
+        GeoDataStyle::Ptr style =  createStyle(1, 0, color, outline, true, true, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false);
         QString const imagePath = MarbleDirs::path( "bitmaps/osmcarto/symbols/48/" + bitmap + ".png" );
         style->setIconStyle( GeoDataIconStyle( imagePath) );
         style->iconStyle().setScale(0.67);
@@ -141,14 +141,14 @@ class GeoDataFeaturePrivate
         return style;
     }
     
-    static GeoDataStyle* createHighwayStyle( const QString &bitmap, const QColor& color, const QColor& outlineColor,
+    static GeoDataStyle::Ptr createHighwayStyle( const QString &bitmap, const QColor& color, const QColor& outlineColor,
                                              const QFont& font = QFont(QLatin1String("Arial")), const QColor& fontColor = Qt::black,
                                              qreal width = 1, qreal realWidth = 0.0,
                                              Qt::PenStyle penStyle = Qt::SolidLine,
                                              Qt::PenCapStyle capStyle = Qt::RoundCap,
                                              bool lineBackground = false)
     {
-        GeoDataStyle *style = createStyle( width, realWidth, color, outlineColor, true, true,
+        GeoDataStyle::Ptr style = createStyle( width, realWidth, color, outlineColor, true, true,
                                            Qt::SolidPattern, penStyle, capStyle, lineBackground, QVector< qreal >(),
                                            font, fontColor );
         if( !bitmap.isEmpty() ) {
@@ -157,7 +157,7 @@ class GeoDataFeaturePrivate
         return style;
     }
 
-    static GeoDataStyle* createWayStyle( const QColor& color, const QColor& outlineColor, 
+    static GeoDataStyle::Ptr createWayStyle( const QColor& color, const QColor& outlineColor,
                                          bool fill = true, bool outline = true,
                                          Qt::BrushStyle brushStyle = Qt::SolidPattern,
                                          const QString& texturePath = QString())
@@ -165,7 +165,7 @@ class GeoDataFeaturePrivate
         return createStyle( 1, 0, color, outlineColor, fill, outline, brushStyle, Qt::SolidLine, Qt::RoundCap, false, QVector< qreal >(), QFont("Arial"), Qt::black, texturePath );
     }
 
-    static GeoDataStyle* createStyle( qreal width, qreal realWidth, const QColor& color,
+    static GeoDataStyle::Ptr createStyle( qreal width, qreal realWidth, const QColor& color,
                                       const QColor& outlineColor, bool fill, bool outline,
                                       Qt::BrushStyle brushStyle, Qt::PenStyle penStyle,
                                       Qt::PenCapStyle capStyle, bool lineBackground,
@@ -190,7 +190,7 @@ class GeoDataFeaturePrivate
         style->setLineStyle( lineStyle );
         style->setPolyStyle( polyStyle );
         style->setLabelStyle( labelStyle );
-        return style;
+        return GeoDataStyle::Ptr(style);
     }
 
     QString             m_name;         // Name of the feature. Is shown on screen
@@ -210,7 +210,7 @@ class GeoDataFeaturePrivate
 
     QString       m_role;
 
-    const GeoDataStyle* m_style;
+    GeoDataStyle::Ptr m_style;
     const GeoDataStyleMap* m_styleMap;
 
     GeoDataExtendedData m_extendedData;
@@ -226,7 +226,7 @@ class GeoDataFeaturePrivate
     static QFont         s_defaultFont;
     static QColor        s_defaultLabelColor;
 
-    static GeoDataStyle* s_defaultStyle[GeoDataFeature::LastIndex];
+    static GeoDataStyle::Ptr s_defaultStyle[GeoDataFeature::LastIndex];
     static bool          s_defaultStyleInitialized;
 };
 

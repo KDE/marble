@@ -90,7 +90,7 @@ AnnotatePlugin::AnnotatePlugin( const MarbleModel *model )
     m_annotationDocument->setDocumentRole( UserDocument );
 
     // Default polygon style
-    GeoDataStyle defaultPolygonStyle;
+    GeoDataStyle::Ptr defaultPolygonStyle(new GeoDataStyle);
     GeoDataPolyStyle polyStyle;
     GeoDataLineStyle edgeStyle;
     GeoDataLabelStyle labelStyle;
@@ -101,22 +101,22 @@ AnnotatePlugin::AnnotatePlugin( const MarbleModel *model )
     polyStyle.setColor( polygonColor );
     edgeStyle.setColor( edgeColor );
     labelStyle.setColor( labelColor );
-    defaultPolygonStyle.setId( "polygon" );
-    defaultPolygonStyle.setPolyStyle( polyStyle );
-    defaultPolygonStyle.setLineStyle( edgeStyle );
-    defaultPolygonStyle.setLabelStyle( labelStyle );
+    defaultPolygonStyle->setId( "polygon" );
+    defaultPolygonStyle->setPolyStyle( polyStyle );
+    defaultPolygonStyle->setLineStyle( edgeStyle );
+    defaultPolygonStyle->setLabelStyle( labelStyle );
     m_annotationDocument->addStyle( defaultPolygonStyle );
 
 
     // Default polyline style
-    GeoDataStyle defaultPolylineStyle;
+    GeoDataStyle::Ptr defaultPolylineStyle(new GeoDataStyle);
     GeoDataLineStyle lineStyle;
     QColor polylineColor = Qt::white;
     lineStyle.setColor( polylineColor );
     lineStyle.setWidth( 1 );
-    defaultPolylineStyle.setId( "polyline" );
-    defaultPolylineStyle.setLineStyle( lineStyle );
-    defaultPolylineStyle.setLabelStyle( labelStyle );
+    defaultPolylineStyle->setId( "polyline" );
+    defaultPolylineStyle->setLineStyle( lineStyle );
+    defaultPolylineStyle->setLabelStyle( labelStyle );
     m_annotationDocument->addStyle( defaultPolylineStyle );
 
 }

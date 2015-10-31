@@ -39,7 +39,7 @@ class FileLoaderPrivate
 {
 public:
     FileLoaderPrivate( FileLoader* parent, const PluginManager *pluginManager, bool recenter,
-                       const QString& file, const QString& property, const GeoDataStyle* style, DocumentRole role )
+                       const QString& file, const QString& property, const GeoDataStyle::Ptr &style, DocumentRole role )
         : q( parent),
           m_runner( pluginManager ),
           m_recenter( recenter ),
@@ -63,7 +63,6 @@ public:
           m_recenter( false ),
           m_filepath ( file ),
           m_contents ( contents ),
-          m_style( 0 ),
           m_documentRole ( role ),
           m_styleMap( 0 ),
           m_document( 0 )
@@ -72,7 +71,6 @@ public:
 
     ~FileLoaderPrivate()
     {
-        delete m_style;
         delete m_styleMap;
     }
 
@@ -89,7 +87,7 @@ public:
     QString m_filepath;
     QString m_contents;
     QString m_property;
-    const GeoDataStyle *const m_style;
+    GeoDataStyle::Ptr m_style;
     DocumentRole m_documentRole;
     GeoDataStyleMap* m_styleMap;
     GeoDataDocument *m_document;
@@ -97,7 +95,7 @@ public:
 };
 
 FileLoader::FileLoader( QObject* parent, const PluginManager *pluginManager, bool recenter,
-                       const QString& file, const QString& property, const GeoDataStyle* style, DocumentRole role )
+                       const QString& file, const QString& property, const GeoDataStyle::Ptr &style, DocumentRole role )
     : QThread( parent ),
       d( new FileLoaderPrivate( this, pluginManager, recenter, file, property, style, role ) )
 {
@@ -219,7 +217,7 @@ void FileLoaderPrivate::documentParsed( GeoDataDocument* doc, const QString& err
         doc->setProperty( m_property );
         if( m_style ) {
             doc->addStyleMap( *m_styleMap );
-            doc->addStyle( *m_style );
+            doc->addStyle( m_style );
         }
 
         createFilterProperties( doc );

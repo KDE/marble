@@ -17,12 +17,12 @@
 #include <QSet>
 
 #include "GeoDataFeature.h"
+#include <GeoDataStyle.h>
 #include "marble_export.h"
 
 namespace Marble
 {
 class GeoDataPlacemark;
-class GeoDataStyle;
 class OsmPlacemarkData;
 
 /**
@@ -37,7 +37,7 @@ public:
     /**
      * @brief corespondingIcon returns the icon that is associated with a visual category
      */
-    static const GeoDataStyle *presetStyle( const OsmTag &tag );
+    static GeoDataStyle::ConstPtr presetStyle( const OsmTag &tag );
 
     /**
      * @brief  Convenience categorization of placemarks for Osm key=value pairs

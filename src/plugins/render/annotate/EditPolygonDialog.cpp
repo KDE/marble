@@ -231,7 +231,7 @@ void EditPolygonDialog::handleChangingStyle()
     // The default style of the polygon has been changed, thus the old style URL is no longer valid
     d->m_placemark->setStyleUrl( "" );
 
-    GeoDataStyle *style = new GeoDataStyle( *d->m_placemark->style() );
+    GeoDataStyle::Ptr style(new GeoDataStyle( *d->m_placemark->style() ));
     style->lineStyle().setWidth( d->m_linesWidth->value() );
     // 0 corresponds to "Filled" and 1 corresponds to "Not Filled".
     style->polyStyle().setFill( !d->m_filledColor->currentIndex() );
@@ -259,7 +259,7 @@ void EditPolygonDialog::updatePolygon()
     QString suitableTag = d->m_osmTagEditorWidget->suitableTag();
     if ( d->m_placemark->styleUrl() == "#polygon" && !suitableTag.isEmpty() ) {
         GeoDataFeature::GeoDataVisualCategory category = OsmPresetLibrary::osmVisualCategory( suitableTag );
-        d->m_placemark->setStyle( 0 ); // first clear style so style gets set by setVisualCategory()
+        d->m_placemark->setStyle( GeoDataStyle::Ptr() ); // first clear style so style gets set by setVisualCategory()
         d->m_placemark->setVisualCategory( category );
     }
 
@@ -328,7 +328,7 @@ void EditPolygonDialog::restoreInitial( int result )
     }
 
     if ( *d->m_placemark->style() != d->m_initialStyle ) {
-        d->m_placemark->setStyle( new GeoDataStyle( d->m_initialStyle ) );
+        d->m_placemark->setStyle( GeoDataStyle::Ptr(new GeoDataStyle( d->m_initialStyle )) );
     }
 
     if( d->m_hadInitialOsmData ) {

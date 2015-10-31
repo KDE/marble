@@ -514,16 +514,16 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     /**
      * Return the style assigned to the placemark, or a default style if none has been set
      */
-    const GeoDataStyle* style() const;
+    QSharedPointer<const GeoDataStyle> style() const;
     /**
      * Return the style assigned to the placemark with setStyle (can be 0)
      */
-    const GeoDataStyle* customStyle() const;
+    QSharedPointer<const GeoDataStyle> customStyle() const;
     /**
      * Sets the style of the placemark.
      * @param  style  the new style to be used.
      */
-    void setStyle( GeoDataStyle *style );
+    void setStyle( const QSharedPointer<GeoDataStyle> &style );
 
     /**
      * Return the ExtendedData assigned to the feature.
@@ -626,7 +626,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     static QColor defaultLabelColor();
     static void setDefaultLabelColor( const QColor& color );
 
-    static const GeoDataStyle *presetStyle( GeoDataVisualCategory category );
+    static QSharedPointer<Marble::GeoDataStyle> presetStyle( GeoDataVisualCategory category );
 
     virtual void detach();
 

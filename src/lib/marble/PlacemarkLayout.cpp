@@ -284,7 +284,7 @@ int PlacemarkLayout::maxLabelHeight() const
         QModelIndex index = m_placemarkModel.index( i, 0 );
         const GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
         if ( placemark ) {
-            const GeoDataStyle* style = placemark->style();
+            GeoDataStyle::ConstPtr style = placemark->style();
             QFont labelFont = style->labelStyle().scaledFont();
             int textHeight = QFontMetrics( labelFont ).height();
             if ( textHeight > maxLabelHeight )
@@ -585,7 +585,7 @@ bool PlacemarkLayout::layoutPlacemark( const GeoDataPlacemark *placemark, qreal 
 
     // Find out whether the area around the placemark is covered already.
     // If there's not enough space free don't add a VisiblePlacemark here.
-    const GeoDataStyle* style = placemark->style();
+    GeoDataStyle::ConstPtr style = placemark->style();
 
     QRectF labelRect;
     if( !placemark->name().isEmpty() ) {
@@ -646,7 +646,7 @@ GeoDataCoordinates PlacemarkLayout::placemarkIconCoordinates( const GeoDataPlace
     return GeoDataCoordinates();
 }
 
-QRectF PlacemarkLayout::roomForLabel( const GeoDataStyle * style,
+QRectF PlacemarkLayout::roomForLabel( const GeoDataStyle::ConstPtr &style,
                                       const qreal x, const qreal y,
                                       const QString &labelText ) const
 {

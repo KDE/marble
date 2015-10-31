@@ -94,18 +94,18 @@ void parseBoundingBox( const QFileInfo &file, const QString &name,
         }
     }
 
-    GeoDataStyle style;
+    GeoDataStyle::Ptr style(new GeoDataStyle);
     GeoDataLineStyle lineStyle;
     QColor color = randomColor();
     color.setAlpha( 200 );
     lineStyle.setColor( color );
     lineStyle.setWidth( 4 );
-    style.setLineStyle(lineStyle);
-    style.setId("border");
+    style->setLineStyle(lineStyle);
+    style->setId("border");
 
     GeoDataStyleMap styleMap;
     styleMap.setId("map-border");
-    styleMap.insert("normal", QString("#").append(style.id()));
+    styleMap.insert("normal", QString("#").append(style->id()));
     document->addStyleMap(styleMap);
     document->addStyle(style);
 

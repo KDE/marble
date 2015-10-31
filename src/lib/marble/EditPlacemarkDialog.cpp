@@ -336,7 +336,7 @@ void EditPlacemarkDialog::updateTextAnnotation()
     if ( !d->m_header->iconLink().isEmpty() ) {
         QFileInfo fileInfo( d->m_header->iconLink() );
 
-        GeoDataStyle *newStyle = new GeoDataStyle( *d->m_placemark->style() );
+        GeoDataStyle::Ptr newStyle(new GeoDataStyle( *d->m_placemark->style() ));
         if ( fileInfo.exists() ) {
             newStyle->iconStyle().setIconPath( d->m_header->iconLink() );
         }
@@ -352,7 +352,7 @@ void EditPlacemarkDialog::updateTextAnnotation()
         if ( !suitableTag.isEmpty() ) {
             GeoDataFeature::GeoDataVisualCategory category = OsmPresetLibrary::osmVisualCategory( suitableTag );
             d->m_placemark->setVisualCategory( category );
-            d->m_placemark->setStyle( 0 );
+            d->m_placemark->setStyle(GeoDataStyle::Ptr());
         }
     }
 
@@ -480,7 +480,7 @@ void EditPlacemarkDialog::restoreInitial( int result )
     }
 
     if ( *d->m_placemark->style() != d->m_initialStyle ) {
-        d->m_placemark->setStyle( new GeoDataStyle( d->m_initialStyle ) );
+        d->m_placemark->setStyle( GeoDataStyle::Ptr(new GeoDataStyle( d->m_initialStyle )) );
     }
 
     if( d->m_placemark->isVisible() != d->m_initialIsPlacemarkVisible ) {

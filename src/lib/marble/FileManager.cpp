@@ -78,7 +78,7 @@ FileManager::~FileManager()
     delete d;
 }
 
-void FileManager::addFile( const QString& filepath, const QString& property, const GeoDataStyle* style, DocumentRole role, bool recenter )
+void FileManager::addFile( const QString& filepath, const QString& property, const GeoDataStyle::Ptr &style, DocumentRole role, bool recenter )
 {
     if( d->m_fileItemHash.contains( filepath ) ) {
             return;  // already loaded

@@ -130,7 +130,7 @@ QTreeWidgetItem *OsmTagEditorWidgetPrivate::tagWidgetItem( const OsmTag &tag ) c
     QTreeWidgetItem *tagItem = new QTreeWidgetItem( itemText );
 
     // Getting the icon preset for the tag ( if there's one available )
-    const GeoDataStyle *style = OsmPresetLibrary::presetStyle( tag );
+    GeoDataStyle::ConstPtr style = OsmPresetLibrary::presetStyle( tag );
     QPixmap iconPixmap = QPixmap::fromImage( style->iconStyle().icon() );
     tagItem->setIcon( 1, QIcon( iconPixmap ) );
 

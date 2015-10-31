@@ -135,7 +135,7 @@ class MarbleModelPrivate
      * load of parsing the data file again.
      * @see assignFillColors()
      */
-    void assignNewStyle( const QString &filePath, const GeoDataStyle &style );
+    void assignNewStyle(const QString &filePath, const GeoDataStyle::Ptr &style );
 
     /**
      * @brief Assigns each placemark an inline
@@ -338,7 +338,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument *document )
 
     QStringList fileList;
     QStringList propertyList;
-    QList<const GeoDataStyle*> styleList;
+    QList<GeoDataStyle::Ptr> styleList;
 
     bool skip = false;
     bool sourceFileMatch = false;
@@ -378,7 +378,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument *document )
             QString property = data->property();
             QPen pen = data->pen();
             QBrush brush = data->brush();
-            GeoDataStyle* style = 0;
+            GeoDataStyle::Ptr style;
 
             /**
              * data->colors() are the colorMap values from dgml file. If this is not
@@ -394,7 +394,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument *document )
                 lineStyle.setWidth( pen.width() );
                 GeoDataPolyStyle polyStyle( brush.color() );
                 polyStyle.setFill( true );
-                style = new GeoDataStyle;
+                style = GeoDataStyle::Ptr(new GeoDataStyle);
                 style->setLineStyle( lineStyle );
                 style->setPolyStyle( polyStyle );
                 style->setId( "default" );
@@ -407,9 +407,8 @@ void MarbleModel::setMapTheme( GeoSceneDocument *document )
                 currentDatasets.removeAt( datasetIndex );
                 if ( style ) {
                     qDebug() << "setMapThemeId-> color: " << style->polyStyle().color() << " file: " << filename;
-                    d->assignNewStyle( filename, *style );
-                    delete style;
-                    style = 0;
+                    d->assignNewStyle( filename, style );
+                    style = GeoDataStyle::Ptr();
                 }
                 else {
                     d->assignFillColors( data->sourceFile() );
@@ -445,37 +444,37 @@ void MarbleModelPrivate::addHighlightStyle(GeoDataDocument* doc)
         QColor highlightBrushColor = m_mapTheme->map()->highlightBrushColor();
         QColor highlightPenColor = m_mapTheme->map()->highlightPenColor();
 
-        GeoDataStyle highlightStyle;
-        highlightStyle.setId("highlight");
+        GeoDataStyle::Ptr highlightStyle(new GeoDataStyle);
+        highlightStyle->setId("highlight");
 
         if ( highlightBrushColor.isValid() ) {
             GeoDataPolyStyle highlightPolyStyle;
             highlightPolyStyle.setColor( highlightBrushColor );
             highlightPolyStyle.setFill( true );
-            highlightStyle.setPolyStyle( highlightPolyStyle );
+            highlightStyle->setPolyStyle( highlightPolyStyle );
         }
         if ( highlightPenColor.isValid() ) {
             GeoDataLineStyle highlightLineStyle( highlightPenColor );
-            highlightStyle.setLineStyle( highlightLineStyle );
+            highlightStyle->setLineStyle( highlightLineStyle );
         }
         if ( highlightBrushColor.isValid()
             || highlightPenColor.isValid() )
         {
             GeoDataStyleMap styleMap = doc->styleMap("default-map");
-            styleMap.insert( "highlight", QString("#").append(highlightStyle.id()) );
+            styleMap.insert( "highlight", QString("#").append(highlightStyle->id()) );
             doc->addStyle( highlightStyle );
             doc->addStyleMap( styleMap );
         }
     }
 }
 
-void MarbleModelPrivate::assignNewStyle( const QString &filePath, const GeoDataStyle &style )
+void MarbleModelPrivate::assignNewStyle( const QString &filePath, const GeoDataStyle::Ptr &style )
 {
     GeoDataDocument *doc = m_fileManager.at( filePath );
     Q_ASSERT( doc );
     GeoDataStyleMap styleMap;
     styleMap.setId("default-map");
-    styleMap.insert( "normal", QString("#").append(style.id()) );
+    styleMap.insert( "normal", QString("#").append(style->id()) );
     doc->addStyleMap( styleMap );
     doc->addStyle( style );
 
@@ -780,8 +779,7 @@ void MarbleModel::setLegend( QTextDocument * legend )
 
 void MarbleModel::addGeoDataFile( const QString& filename )
 {
-    GeoDataStyle* dummyStyle = new GeoDataStyle;
-    d->m_fileManager.addFile( filename, filename, dummyStyle, UserDocument, true );
+    d->m_fileManager.addFile( filename, filename, GeoDataStyle::Ptr(), UserDocument, true );
 }
 
 void MarbleModel::addGeoDataString( const QString& data, const QString& key )
@@ -835,7 +833,7 @@ void MarbleModelPrivate::assignFillColors( const QString &filePath ) {
                             for ( ; it != itEnd; ++it ) {
                                 GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>( *it );
                                 if ( placemark ) {
-                                    GeoDataStyle *style = new GeoDataStyle;
+                                    GeoDataStyle::Ptr style(new GeoDataStyle);
                                     style->setId( QString("normal") );
                                     style->setLineStyle( lineStyle );
                                     quint8 colorIndex = placemark->style()->polyStyle().colorIndex();
@@ -861,15 +859,15 @@ void MarbleModelPrivate::assignFillColors( const QString &filePath ) {
                             }
                         }
                         else {
-                            GeoDataStyle style;
+                            GeoDataStyle::Ptr style(new GeoDataStyle);
                             GeoDataPolyStyle polyStyle( brush.color() );
                             polyStyle.setFill( true );
-                            style.setLineStyle( lineStyle );
-                            style.setPolyStyle( polyStyle );
-                            style.setId( "default" );
+                            style->setLineStyle( lineStyle );
+                            style->setPolyStyle( polyStyle );
+                            style->setId( "default" );
                             GeoDataStyleMap styleMap;
                             styleMap.setId("default-map");
-                            styleMap.insert( "normal", QString("#").append(style.id()) );
+                            styleMap.insert( "normal", QString("#").append(style->id()) );
                             doc->addStyle( style );
                             doc->addStyleMap( styleMap );
 

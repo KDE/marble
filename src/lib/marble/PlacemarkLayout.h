@@ -26,6 +26,7 @@
 #include <QSortFilterProxyModel>
 
 #include "GeoDataFeature.h"
+#include <GeoDataStyle.h>
 
 class QAbstractItemModel;
 class QItemSelectionModel;
@@ -37,7 +38,6 @@ namespace Marble
 
 class GeoDataCoordinates;
 class GeoDataPlacemark;
-class GeoDataStyle;
 class GeoPainter;
 class MarbleClock;
 class PlacemarkPainter;
@@ -123,7 +123,7 @@ class PlacemarkLayout : public QObject
      */
     GeoDataCoordinates placemarkIconCoordinates( const GeoDataPlacemark *placemark ) const;
 
-    QRectF  roomForLabel( const GeoDataStyle * style,
+    QRectF  roomForLabel(const GeoDataStyle::ConstPtr &style,
                          const qreal x, const qreal y,
                          const QString &labelText ) const;
 

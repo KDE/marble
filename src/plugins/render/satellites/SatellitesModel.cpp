@@ -189,7 +189,7 @@ void SatellitesModel::parseCatalog( const QString &id,
         SatellitesMSCItem *item = new SatellitesMSCItem( name, category, body, id,
                                       missionStart, missionEnd,
                                       index++, planSat, m_clock );
-        GeoDataStyle *style = new GeoDataStyle( *item->placemark()->style() );
+        GeoDataStyle::Ptr style(new GeoDataStyle( *item->placemark()->style() ));
         style->lineStyle().setPenStyle( Qt::SolidLine );
         style->lineStyle().setColor( nextColor() );
         style->labelStyle().setGlow( true );
@@ -246,7 +246,7 @@ void SatellitesModel::parseTLE( const QString &id,
         }
 
         SatellitesTLEItem *item = new SatellitesTLEItem( satelliteName, satrec, m_clock );
-        GeoDataStyle *style = new GeoDataStyle( *item->placemark()->style() );
+        GeoDataStyle::Ptr style(new GeoDataStyle( *item->placemark()->style() ));
         style->lineStyle().setPenStyle( Qt::SolidLine );
         style->lineStyle().setColor( nextColor() );
         style->labelStyle().setGlow( true );

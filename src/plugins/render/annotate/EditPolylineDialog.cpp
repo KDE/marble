@@ -204,7 +204,7 @@ void EditPolylineDialog::handleChangingStyle()
     // The polyline is now considered to have a customStyle
     d->m_placemark->setStyleUrl( "" );
 
-    GeoDataStyle *newStyle = new GeoDataStyle( *d->m_placemark->style() );
+    GeoDataStyle::Ptr newStyle(new GeoDataStyle( *d->m_placemark->style() ));
     newStyle->lineStyle().setColor( d->m_linesDialog->currentColor() );
     newStyle->lineStyle().setWidth( d->m_linesWidth->value() );
     newStyle->setId( d->m_placemark->id() + "Style" );
@@ -223,7 +223,7 @@ void EditPolylineDialog::updatePolyline()
     QString suitableTag = d->m_osmTagEditorWidget->suitableTag();
     if ( d->m_placemark->styleUrl() == "#polyline" && !suitableTag.isEmpty() ) {
         GeoDataFeature::GeoDataVisualCategory category = OsmPresetLibrary::osmVisualCategory( suitableTag );
-        d->m_placemark->setStyle( 0 ); // first clear style so style gets set by setVisualCategory()
+        d->m_placemark->setStyle( GeoDataStyle::Ptr() ); // first clear style so style gets set by setVisualCategory()
         d->m_placemark->setVisualCategory( category );
     }
 
@@ -260,7 +260,7 @@ void EditPolylineDialog::restoreInitial( int result )
     }
 
     if ( d->m_placemark->style()->lineStyle() != d->m_initialLineStyle ) {
-        GeoDataStyle *newStyle = new GeoDataStyle( *d->m_placemark->style() );
+        GeoDataStyle::Ptr newStyle(new GeoDataStyle( *d->m_placemark->style() ));
         newStyle->setLineStyle( d->m_initialLineStyle );
         d->m_placemark->setStyle( newStyle );
     }

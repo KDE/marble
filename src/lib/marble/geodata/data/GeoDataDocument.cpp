@@ -62,15 +62,34 @@ const GeoDataDocumentPrivate* GeoDataDocument::p() const
 
 bool GeoDataDocument::operator==( const GeoDataDocument &other ) const
 {
-    return GeoDataContainer::equals(other) &&
-           p()->m_styleHash == other.p()->m_styleHash &&
-           p()->m_styleMapHash == other.p()->m_styleMapHash &&
-           p()->m_schemaHash == other.p()->m_schemaHash &&
-           p()->m_filename == other.p()->m_filename &&
-           p()->m_baseUri == other.p()->m_baseUri &&
-           p()->m_networkLinkControl == other.p()->m_networkLinkControl &&
-           p()->m_property == other.p()->m_property &&
-           p()->m_documentRole == other.p()->m_documentRole;
+    if (!GeoDataContainer::equals(other)) {
+        return false;
+    }
+
+    if (!(p()->m_styleHash.size() == other.p()->m_styleHash.size() &&
+          p()->m_styleMapHash == other.p()->m_styleMapHash &&
+          p()->m_schemaHash == other.p()->m_schemaHash &&
+          p()->m_filename == other.p()->m_filename &&
+          p()->m_baseUri == other.p()->m_baseUri &&
+          p()->m_networkLinkControl == other.p()->m_networkLinkControl &&
+          p()->m_property == other.p()->m_property &&
+          p()->m_documentRole == other.p()->m_documentRole)) {
+        return false;
+    }
+
+    auto iter = p()->m_styleHash.constBegin();
+    auto const end = p()->m_styleHash.constEnd();
+    for (; iter != end; ++iter) {
+        if (!other.p()->m_styleHash.contains(iter.key())) {
+            return false;
+        }
+
+        if (*iter.value() != *other.p()->m_styleHash[iter.key()]) {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 bool GeoDataDocument::operator!=( const GeoDataDocument &other ) const
@@ -131,11 +150,11 @@ void GeoDataDocument::setNetworkLinkControl( const GeoDataNetworkLinkControl &ne
     p()->m_networkLinkControl = networkLinkControl;
 }
 
-void GeoDataDocument::addStyle( const GeoDataStyle& style )
+void GeoDataDocument::addStyle( const GeoDataStyle::Ptr &style )
 {
     detach();
-    p()->m_styleHash.insert( style.id(), style );
-    p()->m_styleHash[ style.id() ].setParent( this );
+    p()->m_styleHash.insert( style->id(), style );
+    p()->m_styleHash[ style->id() ]->setParent( this );
 }
 
 void GeoDataDocument::removeStyle( const QString& styleId )
@@ -144,7 +163,7 @@ void GeoDataDocument::removeStyle( const QString& styleId )
     p()->m_styleHash.remove( styleId );
 }
 
-GeoDataStyle& GeoDataDocument::style( const QString& styleId )
+GeoDataStyle::Ptr GeoDataDocument::style( const QString& styleId )
 {
     /*
      * FIXME: m_styleHash always should contain at least default
@@ -153,13 +172,24 @@ GeoDataStyle& GeoDataDocument::style( const QString& styleId )
     return p()->m_styleHash[ styleId ];
 }
 
-GeoDataStyle GeoDataDocument::style( const QString &styleId ) const
+GeoDataStyle::ConstPtr GeoDataDocument::style( const QString &styleId ) const
 {
     return p()->m_styleHash.value( styleId );
 }
 
-QList<GeoDataStyle> GeoDataDocument::styles() const
+QList<GeoDataStyle::ConstPtr> GeoDataDocument::styles() const
 {
+    QList<GeoDataStyle::ConstPtr> result;
+    foreach(auto const & style, p()->m_styleHash.values()) {
+        result << style;
+    }
+
+    return result;
+}
+
+QList<GeoDataStyle::Ptr> GeoDataDocument::styles()
+{
+    detach();
     return p()->m_styleHash.values();
 }
 
@@ -227,11 +257,11 @@ void GeoDataDocument::pack( QDataStream& stream ) const
     stream << p()->m_styleHash.size();
     
     
-    for( QMap<QString, GeoDataStyle>::const_iterator iterator 
+    for( QMap<QString, GeoDataStyle::Ptr>::const_iterator iterator
           = p()->m_styleHash.constBegin(); 
         iterator != p()->m_styleHash.constEnd(); 
         ++iterator ) {
-        iterator.value().pack( stream );
+        iterator.value()->pack( stream );
     }
 }
 
@@ -245,9 +275,9 @@ void GeoDataDocument::unpack( QDataStream& stream )
 
     stream >> size;
     for( int i = 0; i < size; i++ ) {
-        GeoDataStyle style;
-        style.unpack( stream );
-        p()->m_styleHash.insert( style.id(), style );
+        GeoDataStyle::Ptr style;
+        style->unpack( stream );
+        p()->m_styleHash.insert( style->id(), style );
     }
 }
 

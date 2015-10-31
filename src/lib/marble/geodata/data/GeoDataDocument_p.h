@@ -47,7 +47,7 @@ class GeoDataDocumentPrivate : public GeoDataContainerPrivate
         return GeoDataDocumentId;
     }
 
-    QMap<QString, GeoDataStyle> m_styleHash;
+    QMap<QString, GeoDataStyle::Ptr> m_styleHash;
     QMap<QString, GeoDataStyleMap> m_styleMapHash;
     QMap<QString, GeoDataSchema> m_schemaHash;
     QString m_filename;

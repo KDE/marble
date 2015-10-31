@@ -109,9 +109,9 @@ GeoDataDocument *OsmParser::createDocument(OsmNodes &nodes, OsmWays &ways, OsmRe
     backgroundPolyStyle.setFill( true );
     backgroundPolyStyle.setOutline( false );
     backgroundPolyStyle.setColor("#f1eee8");
-    GeoDataStyle backgroundStyle;
-    backgroundStyle.setPolyStyle( backgroundPolyStyle );
-    backgroundStyle.setId( "background" );
+    GeoDataStyle::Ptr backgroundStyle(new GeoDataStyle);
+    backgroundStyle->setPolyStyle( backgroundPolyStyle );
+    backgroundStyle->setId( "background" );
     document->addStyle( backgroundStyle );
 
     foreach(OsmRelation const &relation, relations) {

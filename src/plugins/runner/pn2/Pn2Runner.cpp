@@ -159,7 +159,7 @@ GeoDataDocument* Pn2Runner::parseForVersion1(const QString& fileName, DocumentRo
     quint32 ID, nrAbsoluteNodes;
     quint8 flag, prevFlag = -1;
 
-    GeoDataStyle *style =0;
+    GeoDataStyle::Ptr style;
     GeoDataPolygon *polygon = new GeoDataPolygon;
 
     for ( quint32 currentPoly = 1; ( currentPoly <= m_fileHeaderPolygons ) && ( !error ) && ( !m_stream.atEnd() ); currentPoly++ ) {
@@ -191,7 +191,7 @@ GeoDataDocument* Pn2Runner::parseForVersion1(const QString& fileName, DocumentRo
             if ( flag == OUTERBOUNDARY && m_isMapColorField ) {
                 quint8 colorIndex;
                 m_stream >> colorIndex;
-                style = new GeoDataStyle;
+                style = GeoDataStyle::Ptr(new GeoDataStyle);
                 GeoDataPolyStyle polyStyle;
                 polyStyle.setColorIndex( colorIndex );
                 style->setPolyStyle( polyStyle );
@@ -256,7 +256,7 @@ GeoDataDocument* Pn2Runner::parseForVersion2( const QString &fileName, DocumentR
     quint8 flag, prevFlag = -1;
 
     GeoDataPolygon *polygon = new GeoDataPolygon;
-    GeoDataStyle *style =0;
+    GeoDataStyle::Ptr style;
     GeoDataPlacemark *placemark =0; // new GeoDataPlacemark;
 
     quint32 currentPoly;
@@ -287,7 +287,7 @@ GeoDataDocument* Pn2Runner::parseForVersion2( const QString &fileName, DocumentR
             if( m_isMapColorField ) {
                 quint8 colorIndex;
                 m_stream >> colorIndex;
-                style = new GeoDataStyle;
+                style = GeoDataStyle::Ptr(new GeoDataStyle);
                 GeoDataPolyStyle polyStyle;
                 polyStyle.setColorIndex( colorIndex );
                 polyStyle.setFill( true );

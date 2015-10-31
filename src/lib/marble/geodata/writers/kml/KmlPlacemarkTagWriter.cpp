@@ -34,7 +34,7 @@ bool KmlPlacemarkTagWriter::writeMid( const GeoNode *node, GeoWriter& writer ) c
 
     writer.writeOptionalElement( kml::kmlTag_styleUrl, placemark->styleUrl() );
     if ( placemark->styleUrl().isEmpty() && placemark->customStyle() ) {
-        writeElement( placemark->customStyle(), writer );
+        writeElement( placemark->customStyle().data(), writer );
     }
 
     if( placemark->geometry() ) {

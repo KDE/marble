@@ -60,7 +60,7 @@ GeoNode* GPXwptTagHandler::parse(GeoParser& parser) const
         placemark->setCoordinate( lon, lat, 0, GeoDataCoordinates::Degree );
         placemark->setRole("Waypoint");
 
-        placemark->setStyle(&doc->style("waypoint"));
+        placemark->setStyle(doc->style("waypoint"));
 
         doc->append(placemark);
         return placemark;

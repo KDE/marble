@@ -26,8 +26,8 @@ class FileLoader : public QThread
 {
     Q_OBJECT
     public:
-        FileLoader( QObject* parent, const PluginManager *pluginManager, bool recenter,
-                    const QString& file, const QString& property, const GeoDataStyle* style, DocumentRole role );
+        FileLoader(QObject* parent, const PluginManager *pluginManager, bool recenter,
+                    const QString& file, const QString& property, const GeoDataStyle::Ptr &style, DocumentRole role );
         FileLoader( QObject* parent, const PluginManager *pluginManager,
                     const QString& contents, const QString& name, DocumentRole role );
         virtual ~FileLoader();

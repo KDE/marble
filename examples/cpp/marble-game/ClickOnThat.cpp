@@ -176,15 +176,15 @@ void ClickOnThat::initiateGame()
         d->m_selectPinDocument = new GeoDataDocument;
         GeoDataPlacemark *pinPlacemark = new GeoDataPlacemark;
 
-        GeoDataStyle pinStyle;
-        pinStyle.setId("answer");
+        GeoDataStyle::Ptr pinStyle(new GeoDataStyle);
+        pinStyle->setId("answer");
         GeoDataIconStyle iconStyle;
         iconStyle.setIconPath( MarbleDirs::path("bitmaps/target.png") );
-        pinStyle.setIconStyle( iconStyle );
+        pinStyle->setIconStyle( iconStyle );
 
         GeoDataStyleMap styleMap;
         styleMap.setId("default-map");
-        styleMap.insert( "normal", QString("#").append( pinStyle.id()) );
+        styleMap.insert( "normal", QString("#").append( pinStyle->id()) );
 
         d->m_selectPinDocument->addStyle( pinStyle );
         d->m_selectPinDocument->addStyleMap( styleMap );
@@ -256,8 +256,8 @@ void ClickOnThat::updateSelectPin(bool result, const GeoDataCoordinates &clicked
         iconPath = iconPath.append("/MapTackRoundHeadRed.png");
     }
 
-    GeoDataStyle style = d->m_selectPinDocument->style("answer");
-    style.iconStyle().setIconPath( iconPath );
+    GeoDataStyle::Ptr style = d->m_selectPinDocument->style("answer");
+    style->iconStyle().setIconPath( iconPath );
     d->m_selectPinDocument->addStyle( style );
 
     QVector<GeoDataPlacemark*> placemarkList = d->m_selectPinDocument->placemarkList();

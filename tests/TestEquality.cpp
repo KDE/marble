@@ -559,7 +559,7 @@ void TestEquality::tourTest()
     tour1.setVisible( true );
     tour1.setRole( QString("Role1") );
 
-    GeoDataStyle style1, style2;
+    GeoDataStyle::Ptr style1(new GeoDataStyle), style2(new GeoDataStyle);
     GeoDataIconStyle iconStyle;
     QImage icon( 50, 50, QImage::Format_Mono );
     icon.fill( Qt::black );
@@ -611,12 +611,12 @@ void TestEquality::tourTest()
         listStyle.append( icon );
     }
 
-    style1.setIconStyle( iconStyle );
-    style1.setLineStyle( lineStyle );
-    style1.setLabelStyle( labelStyle );
-    style1.setPolyStyle( polyStyle );
-    style1.setBalloonStyle( balloon );
-    style1.setListStyle( listStyle );
+    style1->setIconStyle( iconStyle );
+    style1->setLineStyle( lineStyle );
+    style1->setLabelStyle( labelStyle );
+    style1->setPolyStyle( polyStyle );
+    style1->setBalloonStyle( balloon );
+    style1->setListStyle( listStyle );
 
     style2 = style1;
 
@@ -693,7 +693,7 @@ void TestEquality::tourTest()
     tour1.setTimeStamp( timeStamp1 );
     tour1.setExtendedData( extendedData1 );
     tour1.setRegion( region1 );
-    tour1.setStyle( &style1 );
+    tour1.setStyle( style1 );
     tour1.setStyleMap( &styleMap1 );
     tour2 = tour1;
 

@@ -93,7 +93,7 @@ GeoDataDocument *ShpRunner::parseFile(const QString &fileName, DocumentRole role
 
         double mapColor = DBFReadDoubleAttribute( dbfhandle, i, mapColorField );
         if ( mapColor ) {
-            GeoDataStyle *style = new GeoDataStyle;
+            GeoDataStyle::Ptr style(new GeoDataStyle);
             if ( mapColor >= 0 && mapColor <=255 ) {
                 quint8 colorIndex = quint8( mapColor );
                 style->polyStyle().setColorIndex( colorIndex );

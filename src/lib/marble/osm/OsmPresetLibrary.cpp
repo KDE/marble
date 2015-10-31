@@ -453,7 +453,7 @@ void OsmPresetLibrary::initializeAdditionalOsmTags()
     s_additionalOsmTags << OsmTag( "access", "permissive" );
 }
 
-const GeoDataStyle *OsmPresetLibrary::presetStyle( const OsmTag &tag )
+GeoDataStyle::ConstPtr OsmPresetLibrary::presetStyle( const OsmTag &tag )
 {
   GeoDataFeature::GeoDataVisualCategory category = osmVisualCategory( tag.first + "=" + tag.second );
   return GeoDataFeature::presetStyle( category );

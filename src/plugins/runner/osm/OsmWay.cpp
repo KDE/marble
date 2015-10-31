@@ -70,7 +70,7 @@ void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes) const
                 adjustStyle = false;
             }
             if (adjustStyle) {
-                GeoDataStyle* style = new GeoDataStyle(*placemark->style());
+                GeoDataStyle::Ptr style(new GeoDataStyle(*placemark->style()));
                 style->setPolyStyle(polyStyle);
                 placemark->setStyle(style);
             }
@@ -78,9 +78,9 @@ void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes) const
 
         QList<GeoDataFeature::GeoDataVisualCategory> categories = OsmPresetLibrary::visualCategories(m_osmData);
         foreach(GeoDataFeature::GeoDataVisualCategory category, categories) {
-            const GeoDataStyle* categoryStyle = GeoDataFeature::presetStyle(category);
+            const GeoDataStyle::Ptr categoryStyle = GeoDataFeature::presetStyle(category);
             if (!categoryStyle->iconStyle().iconPath().isEmpty()) {
-                GeoDataStyle* style = new GeoDataStyle(*placemark->style());
+                GeoDataStyle::Ptr style(new GeoDataStyle(*placemark->style()));
                 style->setIconStyle(categoryStyle->iconStyle());
                 placemark->setStyle(style);
             }
@@ -131,7 +131,7 @@ void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes) const
             lineStyle.setPhysicalWidth(ok ? qBound(0.1, width, 200.0) : 0.0);
         }
 
-        GeoDataStyle* style = new GeoDataStyle(*placemark->style());
+        GeoDataStyle::Ptr style(new GeoDataStyle(*placemark->style()));
         style->setPolyStyle(polyStyle);
         style->setLineStyle(lineStyle);
         placemark->setStyle(style);
@@ -141,7 +141,7 @@ void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes) const
     bool const hideLabel = placemark->visualCategory() == GeoDataFeature::HighwayTrack
             || (placemark->visualCategory() >= GeoDataFeature::RailwayRail && placemark->visualCategory() <= GeoDataFeature::RailwayFunicular);
     if (hideLabel) {
-        GeoDataStyle* style = new GeoDataStyle(*placemark->style());
+        GeoDataStyle::Ptr style(new GeoDataStyle(*placemark->style()));
         style->labelStyle().setColor(QColor(Qt::transparent));
         placemark->setStyle(style);
     }

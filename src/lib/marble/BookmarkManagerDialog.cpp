@@ -223,7 +223,7 @@ void BookmarkManagerDialogPrivate::editBookmark()
             bookmark->setName( dialog->name() );
             bookmark->setDescription( dialog->description() );
             bookmark->setCoordinate( dialog->coordinates() );
-            GeoDataStyle *newStyle = new GeoDataStyle( *bookmark->style() );
+            GeoDataStyle::Ptr newStyle(new GeoDataStyle( *bookmark->style() ));
             newStyle->iconStyle().setIconPath( dialog->iconLink() );
             bookmark->setStyle( newStyle );
             if ( bookmark->lookAt() ) {

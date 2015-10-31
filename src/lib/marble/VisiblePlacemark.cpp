@@ -28,7 +28,7 @@ VisiblePlacemark::VisiblePlacemark( const GeoDataPlacemark *placemark )
     : m_placemark( placemark ),
       m_selected( false )
 {
-    const GeoDataStyle *style = m_placemark->style();
+    GeoDataStyle::ConstPtr style = m_placemark->style();
     const RemoteIconLoader *remoteLoader = style->iconStyle().remoteIconLoader();
     QObject::connect( remoteLoader, SIGNAL(iconReady()),
                      this, SLOT(setSymbolPixmap()) );
@@ -110,7 +110,7 @@ const QPixmap& VisiblePlacemark::labelPixmap() const
 
 void VisiblePlacemark::setSymbolPixmap()
 {
-    const GeoDataStyle *style = m_placemark->style();
+    GeoDataStyle::ConstPtr style = m_placemark->style();
     if ( style ) {
 
         m_symbolPixmap = QPixmap::fromImage( style->iconStyle().scaledIcon() );
@@ -133,7 +133,7 @@ void VisiblePlacemark::setLabelRect( const QRectF& labelRect )
 
 void VisiblePlacemark::drawLabelPixmap()
 {
-    const GeoDataStyle* style = m_placemark->style();
+    GeoDataStyle::ConstPtr style = m_placemark->style();
 
     QString labelName = m_placemark->name();
     if ( labelName.isEmpty() || style->labelStyle().color() == QColor(Qt::transparent) ) {

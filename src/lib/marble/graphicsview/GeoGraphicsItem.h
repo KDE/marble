@@ -14,6 +14,7 @@
 
 // Marble
 #include "marble_export.h"
+#include <GeoDataStyle.h>
 
 class QString;
 
@@ -23,7 +24,6 @@ namespace Marble
 class GeoDataFeature;
 class GeoDataLatLonAltBox;
 class GeoGraphicsItemPrivate;
-class GeoDataStyle;
 class GeoPainter;
 class ViewportParams;
 
@@ -93,12 +93,12 @@ class MARBLE_EXPORT GeoGraphicsItem
     /**
      * Returns the style of item.
      */
-    const GeoDataStyle* style() const;
+    GeoDataStyle::ConstPtr style() const;
 
     /**
      * Set the style for the item.
      */
-    void setStyle( const GeoDataStyle* style );
+    void setStyle(const GeoDataStyle::ConstPtr &style );
 
     /**
      * Set the style which will be used when
@@ -106,7 +106,7 @@ class MARBLE_EXPORT GeoGraphicsItem
      * GeoGraphicsItem takes ownership of the
      * passed style and deletes it when appropriate.
      */
-    void setHighlightStyle( GeoDataStyle *highlightStyle );
+    void setHighlightStyle( const GeoDataStyle::ConstPtr &highlightStyle );
 
     /**
      * Returns the z value of the item

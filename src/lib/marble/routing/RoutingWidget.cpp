@@ -953,7 +953,7 @@ void RoutingWidget::initializeTour()
             placemarkCreate->setId( waypointId );
             placemarkCreate->setTargetId( d->m_document->id() );
             placemarkCreate->setCoordinate( waypoint.coordinates );
-            GeoDataStyle *style = new GeoDataStyle;
+            GeoDataStyle::Ptr style(new GeoDataStyle);
             style->iconStyle().setIconPath( waypoint.maneuver.directionPixmap() );
             placemarkCreate->setStyle( style );
             updateCreate->update()->create()->append( placemarkCreate );

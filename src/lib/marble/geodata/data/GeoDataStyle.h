@@ -30,6 +30,8 @@
 
 #include "geodata_export.h"
 
+#include <QSharedPointer>
+
 namespace Marble
 {
 
@@ -55,6 +57,9 @@ class GeoDataStylePrivate;
 class GEODATA_EXPORT GeoDataStyle : public GeoDataStyleSelector
 {
   public:
+    typedef QSharedPointer<GeoDataStyle> Ptr;
+    typedef QSharedPointer<const GeoDataStyle> ConstPtr;
+
     /// Construct a default style
     GeoDataStyle();
     GeoDataStyle( const GeoDataStyle& other );

@@ -54,7 +54,7 @@ class FileManager : public QObject
     /**
      * Loads a new file into the manager.
      */
-    void addFile( const QString &fileName, const QString &property, const GeoDataStyle* style, DocumentRole role, bool recenter = false );
+    void addFile(const QString &fileName, const QString &property, const GeoDataStyle::Ptr &style, DocumentRole role, bool recenter = false );
 
 
     /**

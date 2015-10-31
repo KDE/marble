@@ -153,18 +153,18 @@ PositionTracking::PositionTracking( GeoDataTreeModel *model )
     d->m_currentTrackPlacemark->setGeometry(d->m_trackSegments);
     d->m_currentTrackPlacemark->setName("Current Track");
 
-    GeoDataStyle style;
+    GeoDataStyle::Ptr style(new GeoDataStyle);
     GeoDataLineStyle lineStyle;
     QColor transparentRed = Oxygen::brickRed4;
     transparentRed.setAlpha( 200 );
     lineStyle.setColor( transparentRed );
     lineStyle.setWidth( 4 );
-    style.setLineStyle(lineStyle);
-    style.setId("track");
+    style->setLineStyle(lineStyle);
+    style->setId("track");
 
     GeoDataStyleMap styleMap;
     styleMap.setId("map-track");
-    styleMap.insert("normal", QString("#").append(style.id()));
+    styleMap.insert("normal", QString("#").append(style->id()));
     d->m_document.addStyleMap(styleMap);
     d->m_document.addStyle(style);
     d->m_document.append( d->m_currentTrackPlacemark );
@@ -267,7 +267,7 @@ bool PositionTracking::saveTrack( const QString& fileName )
     QFileInfo fileInfo( fileName );
     QString name = fileInfo.baseName();
     document->setName( name );
-    foreach( const GeoDataStyle &style, d->m_document.styles() ) {
+    foreach( const GeoDataStyle::Ptr &style, d->m_document.styles() ) {
         document->addStyle( style );
     }
     foreach( const GeoDataStyleMap &map, d->m_document.styleMaps() ) {

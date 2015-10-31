@@ -38,7 +38,7 @@ PlacemarkTextAnnotation::PlacemarkTextAnnotation( GeoDataPlacemark *placemark ) 
     m_labelColor( QColor() )
 {
     if ( placemark->style()->iconStyle().iconPath().isNull() ) {
-        GeoDataStyle *newStyle = new GeoDataStyle( *placemark->style() );
+        GeoDataStyle::Ptr newStyle(new GeoDataStyle( *placemark->style() ));
         newStyle->iconStyle().setIconPath( MarbleDirs::path("bitmaps/redflag_22.png") );
         placemark->setStyle( newStyle );
     }
@@ -54,7 +54,7 @@ void PlacemarkTextAnnotation::paint( GeoPainter *painter, const ViewportParams *
     Q_UNUSED( painter );
     m_viewport = viewport;
 
-    GeoDataStyle *newStyle = new GeoDataStyle(*placemark()->style());
+    GeoDataStyle::Ptr newStyle(new GeoDataStyle(*placemark()->style()));
     GeoDataLabelStyle labelStyle = newStyle->labelStyle();
 
     if (labelStyle.color() != QApplication::palette().highlight().color())

@@ -30,7 +30,6 @@ GeoGraphicsItem::GeoGraphicsItem( const GeoDataFeature *feature )
 GeoGraphicsItem::~GeoGraphicsItem()
 {
     qDeleteAll< QList<GeoGraphicsItem*> >(d->m_decorations);
-    delete d->m_highlightStyle;
     delete d;
 }
 
@@ -84,7 +83,7 @@ void GeoGraphicsItem::setLatLonAltBox( const GeoDataLatLonAltBox& latLonAltBox )
     }
 }
 
-void GeoGraphicsItem::setStyle( const GeoDataStyle* style )
+void GeoGraphicsItem::setStyle( const GeoDataStyle::ConstPtr &style )
 {
     d->m_style = style;
     foreach( GeoGraphicsItem* decoration, d->m_decorations ) {
@@ -92,20 +91,19 @@ void GeoGraphicsItem::setStyle( const GeoDataStyle* style )
     }
 }
 
-void GeoGraphicsItem::setHighlightStyle( GeoDataStyle* highlightStyle)
+void GeoGraphicsItem::setHighlightStyle( const GeoDataStyle::ConstPtr &highlightStyle)
 {
     /**
      * Delete any previously set style
      * and assign the new style @highlightStyle
      */
-    delete d->m_highlightStyle;
     d->m_highlightStyle = highlightStyle;
     foreach( GeoGraphicsItem* decoration, d->m_decorations ) {
         decoration->setHighlightStyle( highlightStyle );
     }
 }
 
-const GeoDataStyle* GeoGraphicsItem::style() const
+GeoDataStyle::ConstPtr GeoGraphicsItem::style() const
 {
     /**
      * m_isHighlight is set true when the item is
