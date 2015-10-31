@@ -45,7 +45,7 @@ Item {
 
         CheckBox {
             text: "Show Render Performance"
-            onCheckedChanged: marbleMaps.showRuntimeTrace = checked
+            onCheckedChanged: marbleMaps.setShowRuntimeTrace(checked)
         }
 
         CheckBox {
