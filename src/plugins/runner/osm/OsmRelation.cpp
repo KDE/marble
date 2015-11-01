@@ -124,7 +124,7 @@ QList<GeoDataLinearRing> OsmRelation::rings(const QStringList &roles, const OsmW
             bool ok = true;
             while( ok ) {
                 ok = false;
-                for(int i = 0; i<unclosedWays.length(); ++i ) {
+                for(int i = 0; i<unclosedWays.length(); ) {
                     const OsmWay &nextWay = unclosedWays.at(i);
                     if( nextWay.references().first() == lastReference
                             || nextWay.references().last() == lastReference ) {
@@ -147,6 +147,8 @@ QList<GeoDataLinearRing> OsmRelation::rings(const QStringList &roles, const OsmW
                         ok = true;
                         currentWays << nextWay.osmData().id();
                         break;
+                    } else {
+                        ++i;
                     }
                 }
             }
