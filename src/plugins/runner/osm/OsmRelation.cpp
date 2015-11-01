@@ -48,7 +48,8 @@ void OsmRelation::create(GeoDataDocument *document, const OsmWays &ways, const O
     }
 
     QStringList const outerRoles = QStringList() << "outer" << "";
-    QList<GeoDataLinearRing> outer = rings(outerRoles, ways, nodes, usedWays);
+    QSet<qint64> outerWays;
+    QList<GeoDataLinearRing> outer = rings(outerRoles, ways, nodes, outerWays);
     if (outer.isEmpty()) {
         return;
     } else if (outer.size() > 1) {
@@ -56,11 +57,30 @@ void OsmRelation::create(GeoDataDocument *document, const OsmWays &ways, const O
         mDebug() << "Polygons with " << outer.size() << " ways are not yet supported";
         return;
     }
+    GeoDataFeature::GeoDataVisualCategory outerCategory = OsmPresetLibrary::determineVisualCategory(m_osmData);
+    if (outerCategory == GeoDataFeature::None) {
+        // Try to determine the visual category from the relation members
+        foreach(qint64 wayId, outerWays) {
+            GeoDataFeature::GeoDataVisualCategory const category = OsmPresetLibrary::determineVisualCategory(ways[wayId].osmData());
+            if (category != GeoDataFeature::None) {
+                outerCategory = category;
+                break;
+            }
+        }
+    }
+    foreach(qint64 wayId, outerWays) {
+        Q_ASSERT(ways.contains(wayId));
+        GeoDataFeature::GeoDataVisualCategory const category = OsmPresetLibrary::determineVisualCategory(ways[wayId].osmData());
+        if (category == GeoDataFeature::None || category == outerCategory) {
+            // Schedule way for removal: It's a non-styled way only used to create the outer boundary in this polygon
+            usedWays << wayId;
+        } // else we keep it
+    }
 
     GeoDataPlacemark* placemark = new GeoDataPlacemark;
     placemark->setName(m_osmData.tagValue("name"));
     placemark->setOsmData(m_osmData);
-    placemark->setVisualCategory(OsmPresetLibrary::determineVisualCategory(m_osmData));
+    placemark->setVisualCategory(outerCategory);
     placemark->setStyle( GeoDataStyle::Ptr() );
 
     GeoDataPolygon* polygon = new GeoDataPolygon;
@@ -69,7 +89,15 @@ void OsmRelation::create(GeoDataDocument *document, const OsmWays &ways, const O
     // placemark->osmData().addMemberReference(-1, );
 
     QStringList const innerRoles = QStringList() << "inner";
-    QList<GeoDataLinearRing> inner = rings(innerRoles, ways, nodes, usedWays);
+    QSet<qint64> innerWays;
+    QList<GeoDataLinearRing> inner = rings(innerRoles, ways, nodes, innerWays);
+    foreach(qint64 wayId, innerWays) {
+        Q_ASSERT(ways.contains(wayId));
+        if (OsmPresetLibrary::determineVisualCategory(ways[wayId].osmData()) == GeoDataFeature::None) {
+            // Schedule way for removal: It's a non-styled way only used to create the inner boundary in this polygon
+            usedWays << wayId;
+        }
+    }
     foreach(const GeoDataLinearRing &ring, inner) {
         // @todo: How to get the reference here?
         // placemark->osmData().addMemberReference(polygon->innerBoundaries().size(), );
@@ -111,6 +139,7 @@ QList<GeoDataLinearRing> OsmRelation::rings(const QStringList &roles, const OsmW
             }
             ring << nodes[id].coordinates();
         }
+        Q_ASSERT(ways.contains(wayId));
         currentWays << wayId;
         result << ring;
     }
@@ -143,9 +172,10 @@ QList<GeoDataLinearRing> OsmRelation::rings(const QStringList &roles, const OsmW
                         }
                         lastReference = isReversed ? nextWay.references().first()
                                                    : nextWay.references().last();
+                        Q_ASSERT(ways.contains(nextWay.osmData().id()));
+                        currentWays << nextWay.osmData().id();
                         unclosedWays.removeAt(i);
                         ok = true;
-                        currentWays << nextWay.osmData().id();
                         break;
                     } else {
                         ++i;
