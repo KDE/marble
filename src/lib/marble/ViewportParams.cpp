@@ -352,17 +352,16 @@ qreal ViewportParams::angularResolution() const
     return d->m_angularResolution;
 }
 
-bool ViewportParams::resolves ( const GeoDataLatLonBox &latLonBox ) const
+bool ViewportParams::resolves ( const GeoDataLatLonBox &latLonBox, qreal pixel ) const
 {
-    return latLonBox.width() + latLonBox.height() > 2.0 * angularResolution();
+    return latLonBox.width() + latLonBox.height() > pixel * angularResolution();
 }
 
 
-bool ViewportParams::resolves ( const GeoDataLatLonAltBox &latLonAltBox ) const
+bool ViewportParams::resolves ( const GeoDataLatLonAltBox &latLonAltBox, qreal pixel, qreal altitude ) const
 {
-    return    latLonAltBox.width() + latLonAltBox.height() > 2.0 * angularResolution()
-           || latLonAltBox.maxAltitude() - latLonAltBox.minAltitude() > 10000;
-           
+    return    latLonAltBox.width() + latLonAltBox.height() > pixel * angularResolution()
+           || latLonAltBox.maxAltitude() - latLonAltBox.minAltitude() > altitude;
 }
 
 bool ViewportParams::resolves ( const GeoDataCoordinates &coord1, 

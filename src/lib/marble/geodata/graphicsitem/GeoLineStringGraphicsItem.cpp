@@ -54,6 +54,10 @@ const GeoDataLatLonAltBox& GeoLineStringGraphicsItem::latLonAltBox() const
 
 void GeoLineStringGraphicsItem::paint( GeoPainter* painter, const ViewportParams* viewport )
 {
+    if ( ( !viewport->resolves( m_lineString->latLonAltBox(), 2) ) ) {
+        return;
+    }
+
     LabelPositionFlags labelPositionFlags = NoLabel;
 
     painter->save();

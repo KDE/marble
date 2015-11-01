@@ -249,6 +249,12 @@ void GeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportParams* v
 
     if ( isBuildingFrame || isBuildingRoof ) {
 
+        if ((m_polygon && !viewport->resolves(m_polygon->outerBoundary().latLonAltBox(), 4))
+            || (m_ring && !viewport->resolves(m_ring->latLonAltBox(), 4))) {
+            painter->restore();
+            return;
+        }
+
         bool drawAccurate3D = false;
         bool isCameraAboveBuilding = false;
 

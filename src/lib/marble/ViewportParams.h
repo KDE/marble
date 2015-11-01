@@ -76,9 +76,9 @@ class MARBLE_EXPORT ViewportParams
     // represent a single point on the screen already.
     // See angularResolution()
 
-    bool resolves ( const GeoDataLatLonBox &latLonBox ) const;
+    bool resolves ( const GeoDataLatLonBox &latLonBox, qreal pixel = 2.0 ) const;
 
-    bool resolves ( const GeoDataLatLonAltBox &latLonAltBox ) const;
+    bool resolves ( const GeoDataLatLonAltBox &latLonAltBox, qreal pixel = 2.0, qreal altitude = 10000.0 ) const;
 
     // Determines whether two points are located enough apart so that it makes 
     // sense to display them as distinct points. If this is not the case
