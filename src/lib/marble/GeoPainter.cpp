@@ -571,8 +571,9 @@ void GeoPainter::drawPolyline ( const GeoDataLineString & lineString,
 
                     for (int k = 0; k < numLabels; ++k, startPercent += textRelativeLength + offset) {
                         QPointF point = path.pointAtPercent(startPercent);
+                        QPointF endPoint = path.pointAtPercent(startPercent + textRelativeLength);
 
-                        if ( viewport().contains(point.toPoint()) ) {
+                        if ( viewport().contains(point.toPoint()) || viewport().contains(endPoint.toPoint()) ) {
                             qreal angle = -path.angleAtPercent(startPercent);
                             qreal angle2 = -path.angleAtPercent(startPercent + textRelativeLength);
                             angle = GeoPainterPrivate::normalizeAngle(angle);
