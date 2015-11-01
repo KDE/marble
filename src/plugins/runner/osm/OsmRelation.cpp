@@ -83,6 +83,7 @@ void OsmRelation::create(GeoDataDocument *document, const OsmWays &ways, const O
 
 QList<GeoDataLinearRing> OsmRelation::rings(const QStringList &roles, const OsmWays &ways, const OsmNodes &nodes, QSet<qint64> &usedWays) const
 {
+    QSet<qint64> currentWays;
     QList<qint64> roleMembers;
     foreach(const OsmMember &member, m_members) {
         if (roles.contains(member.role)) {
@@ -110,7 +111,7 @@ QList<GeoDataLinearRing> OsmRelation::rings(const QStringList &roles, const OsmW
             }
             ring << nodes[id].coordinates();
         }
-        usedWays << wayId;
+        currentWays << wayId;
         result << ring;
     }
 
@@ -144,6 +145,7 @@ QList<GeoDataLinearRing> OsmRelation::rings(const QStringList &roles, const OsmW
                                                    : nextWay.references().last();
                         unclosedWays.removeAt(i);
                         ok = true;
+                        currentWays << nextWay.osmData().id();
                         break;
                     }
                 }
@@ -156,6 +158,8 @@ QList<GeoDataLinearRing> OsmRelation::rings(const QStringList &roles, const OsmW
             }
         }
     }
+
+    usedWays |= currentWays;
     return result;
 }
 
