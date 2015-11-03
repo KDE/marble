@@ -77,6 +77,10 @@ void OsmRelation::create(GeoDataDocument *document, const OsmWays &ways, const O
         } // else we keep it
     }
 
+    if (m_osmData.containsTag("historic", "castle") && m_osmData.containsTag("castle_type", "kremlin")) {
+        outerCategory = GeoDataFeature::None;
+    }
+
     GeoDataPlacemark* placemark = new GeoDataPlacemark;
     placemark->setName(m_osmData.tagValue("name"));
     placemark->setOsmData(m_osmData);
