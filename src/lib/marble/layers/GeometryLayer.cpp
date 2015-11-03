@@ -185,6 +185,7 @@ void GeometryLayerPrivate::initializeDefaultValues()
     s_defaultZValues[GeoDataFeature::TransportParking]    = s_defaultZValue - 13;
 
     s_defaultZValues[GeoDataFeature::ManmadeBridge]       = s_defaultZValue - 12;
+    s_defaultZValues[GeoDataFeature::BarrierCityWall]     = s_defaultZValue - 1;
 
     s_defaultZValues[GeoDataFeature::HighwayUnknown]      = s_defaultZValue - 11;
     s_defaultZValues[GeoDataFeature::HighwayPath]         = s_defaultZValue - 10;
@@ -220,6 +221,7 @@ void GeometryLayerPrivate::initializeDefaultValues()
     s_defaultMinZoomLevels[GeoDataFeature::NaturalScrub]        = 10;
     s_defaultMinZoomLevels[GeoDataFeature::NaturalCliff]        = 15;
     s_defaultMinZoomLevels[GeoDataFeature::NaturalPeak]         = 11;
+    s_defaultMinZoomLevels[GeoDataFeature::BarrierCityWall]     = 15;
     s_defaultMinZoomLevels[GeoDataFeature::Building]            = 15;
 
     s_defaultMinZoomLevels[GeoDataFeature::ManmadeBridge]       = 15;
