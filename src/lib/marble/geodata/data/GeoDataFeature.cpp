@@ -418,7 +418,7 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
     s_defaultStyle[GeoDataFeature::AmenityEmergencyPhone]    = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "amenity/emergency_phone.16", amenityColor );
     s_defaultStyle[GeoDataFeature::AmenityWaterPark]         = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "amenity/water_park.16", amenityColor );
     s_defaultStyle[GeoDataFeature::AmenityCommunityCentre]   = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "amenity/community_centre-14", amenityColor );
-    s_defaultStyle[GeoDataFeature::AmenityFountain]          = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "amenity/fountain-14", amenityColor, waterColor, waterColor.darker(150) );
+    s_defaultStyle[GeoDataFeature::AmenityFountain]          = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "amenity/fountain-14", QColor("#7989de"), waterColor, waterColor.darker(150) );
     s_defaultStyle[GeoDataFeature::AmenityNightClub]         = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "amenity/nightclub.18", amenityColor );
     s_defaultStyle[GeoDataFeature::AmenityBench]             = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "individual/bench.16", amenityColor );
     s_defaultStyle[GeoDataFeature::AmenityCourtHouse]        = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "amenity/courthouse-16", amenityColor );
