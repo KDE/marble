@@ -272,7 +272,7 @@ bool MarblePart::openFile()
     }
 
     foreach( const QString &fileName, fileNames ) {
-        openUrl( fileName );
+        openUrl( QUrl::fromLocalFile(fileName) );
     }
 
     return true;
