@@ -127,8 +127,8 @@ void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes) const
         } else if (placemark->visualCategory() == GeoDataFeature::NaturalWater) {
             QString const widthValue = m_osmData.tagValue("width").replace(" meters", QString()).replace(" m", QString());
             bool ok;
-            qreal const width = widthValue.toFloat(&ok);
-            lineStyle.setPhysicalWidth(ok ? qBound(0.1, width, 200.0) : 0.0);
+            float const width = widthValue.toFloat(&ok);
+            lineStyle.setPhysicalWidth(ok ? qBound(0.1f, width, 200.0f) : 0.0f);
         }
 
         GeoDataStyle::Ptr style(new GeoDataStyle(*placemark->style()));

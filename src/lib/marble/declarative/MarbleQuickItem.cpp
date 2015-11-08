@@ -496,7 +496,7 @@ namespace Marble
     void MarbleQuickItem::handlePinchUpdated(const QPointF &point, qreal scale)
     {
         scale = sqrt(sqrt(scale));
-        scale = qBound(0.5, scale, 2.0);
+        scale = qBound(static_cast<qreal>(0.5), scale, static_cast<qreal>(2.0));
         pinch(point, scale, Qt::GestureUpdated);
     }
 
