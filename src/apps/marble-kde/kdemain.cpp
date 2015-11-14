@@ -13,13 +13,14 @@
 #include <kaboutdata.h>
 #include <KConfig>
 #include <KConfigGroup>
+#include <kcrash.h>
 #include <klocalizedstring.h>
 #include <KSharedConfig>
 
 #include <QFile>
 #include <QCommandLineParser>
 #include <QApplication>
- 
+
 #include "ControlView.h"
 #include "KdeMainWindow.h"
 #include "GeoUriParser.h"
@@ -263,6 +264,9 @@ int main ( int argc, char *argv[] )
                                 " important source of inspiration by creating"
                                 " Marble's predecessor \"Kartographer\"." ));
     KAboutData::setApplicationData(aboutData);
+
+    KCrash::setCrashHandler( KCrash::defaultCrashHandler );
+    KCrash::setDrKonqiEnabled( true );
 
     QApplication app( argc, argv );
     QCommandLineParser parser;

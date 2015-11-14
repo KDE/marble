@@ -6,7 +6,7 @@ if(ECM_FOUND)
   include(KDECMakeSettings)
   include(ECMInstallIcons)
 endif()
-macro_optional_find_package(KF5 QUIET COMPONENTS Wallet NewStuff Parts CoreAddons I18n)
+macro_optional_find_package(KF5 QUIET COMPONENTS Crash Wallet NewStuff Parts CoreAddons I18n)
 
 if (NOT KF5_FOUND)       
   return()
@@ -58,6 +58,7 @@ target_link_libraries (
     KF5::NewStuff
     KF5::Wallet
     KF5::Parts
+    KF5::Crash
     KF5::CoreAddons
     KF5::I18n
     )
