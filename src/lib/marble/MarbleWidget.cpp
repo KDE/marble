@@ -36,7 +36,6 @@
 #include "MarbleLocale.h"
 #include "MarbleMap.h"
 #include "MarbleModel.h"
-#include "MarblePhysics.h"
 #include "MarbleWidgetInputHandler.h"
 #include "MarbleWidgetPopupMenu.h"
 #include "Planet.h"
@@ -92,7 +91,6 @@ class MarbleWidgetPrivate : public MarbleAbstractPresenter
         : MarbleAbstractPresenter(),
           m_widget( parent ),
           m_inputhandler( 0 ),
-          m_physics( this ),
           m_routingLayer( 0 ),
           m_mapInfoDialog( 0 ),
           m_customPaintLayer( parent ),
@@ -127,8 +125,6 @@ class MarbleWidgetPrivate : public MarbleAbstractPresenter
     MarbleWidget    *const m_widget;
 
     MarbleWidgetInputHandler  *m_inputhandler;
-
-    MarblePhysics    m_physics;
 
     RoutingLayer     *m_routingLayer;
     PopupLayer    *m_mapInfoDialog;
