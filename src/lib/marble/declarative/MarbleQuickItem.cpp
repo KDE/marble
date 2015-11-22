@@ -224,7 +224,6 @@ namespace Marble
     void MarbleQuickItem::paint(QPainter *painter)
     {   //TODO - much to be done here still, i.e paint !enabled version
         QPaintDevice *paintDevice = painter->device();
-        QImage image;
         QRect rect = contentsBoundingRect().toRect();
 
         {
