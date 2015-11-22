@@ -965,8 +965,7 @@ ViewContext MarbleWidget::viewContext() const
 }
 
 void MarbleWidget::setViewContext( ViewContext viewContext )
-{   //TODO - move to MarbleAbstractPresenter as soon as RoutingLayer is ported there, replace with pImpl call
-    d->m_routingLayer->setViewContext( viewContext );
+{
     if ( d->map()->viewContext() != viewContext ) {
         d->map()->setViewContext( viewContext );
     }

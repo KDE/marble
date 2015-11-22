@@ -493,9 +493,6 @@ namespace Marble
         if (map()->viewContext() != viewContext)
         {
             map()->setViewContext(viewContext);
-
-            //TODO - set view context for routing layer
-            //m_routingLayer->setViewContext( viewContext );
         }
     }
 
