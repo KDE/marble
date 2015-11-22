@@ -966,9 +966,7 @@ ViewContext MarbleWidget::viewContext() const
 
 void MarbleWidget::setViewContext( ViewContext viewContext )
 {
-    if ( d->map()->viewContext() != viewContext ) {
-        d->map()->setViewContext( viewContext );
-    }
+    d->map()->setViewContext( viewContext );
 }
 
 bool MarbleWidget::animationsEnabled() const

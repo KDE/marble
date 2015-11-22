@@ -490,10 +490,7 @@ namespace Marble
 
     void MarbleAbstractPresenter::setViewContext(ViewContext viewContext)
     {
-        if (map()->viewContext() != viewContext)
-        {
-            map()->setViewContext(viewContext);
-        }
+        map()->setViewContext(viewContext);
     }
 
     bool MarbleAbstractPresenter::animationsEnabled() const
