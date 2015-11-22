@@ -592,8 +592,6 @@ Projection MarbleWidget::projection() const
 void MarbleWidget::setProjection( Projection projection )
 {
     d->map()->setProjection( projection );
-
-    update();
 }
 
 void MarbleWidget::setProjection( int projection )
@@ -778,50 +776,36 @@ void MarbleWidget::setPropertyValue( const QString& name, bool value )
 {
     mDebug() << "In MarbleWidget the property " << name << "was set to " << value;
     d->map()->setPropertyValue( name, value );
-
-    update();
 }
 
 void MarbleWidget::setShowOverviewMap( bool visible )
 {
     d->map()->setShowOverviewMap( visible );
-
-    update();
 }
 
 void MarbleWidget::setShowScaleBar( bool visible )
 {
     d->map()->setShowScaleBar( visible );
-
-    update();
 }
 
 void MarbleWidget::setShowCompass( bool visible )
 {
     d->map()->setShowCompass( visible );
-
-    update();
 }
 
 void MarbleWidget::setShowClouds( bool visible )
 {
     d->map()->setShowClouds( visible );
-
-    update();
 }
 
 void MarbleWidget::setShowSunShading( bool visible )
 {
     d->map()->setShowSunShading( visible );
-
-    update();
 }
 
 void MarbleWidget::setShowCityLights( bool visible )
 {
     d->map()->setShowCityLights( visible );
-
-    update();
 }
 
 void MarbleWidget::setLockToSubSolarPoint( bool visible )
@@ -851,85 +835,61 @@ void MarbleWidget::setSubSolarPointIconVisible( bool visible )
 void MarbleWidget::setShowAtmosphere( bool visible )
 {
     d->map()->setShowAtmosphere( visible );
-
-    update();
 }
 
 void MarbleWidget::setShowCrosshairs( bool visible )
 {
     d->map()->setShowCrosshairs( visible );
-
-    update();
 }
 
 void MarbleWidget::setShowGrid( bool visible )
 {
     d->map()->setShowGrid( visible );
-
-    update();
 }
 
 void MarbleWidget::setShowPlaces( bool visible )
 {
     d->map()->setShowPlaces( visible );
-
-    update();
 }
 
 void MarbleWidget::setShowCities( bool visible )
 {
     d->map()->setShowCities( visible );
-
-    update();
 }
 
 void MarbleWidget::setShowTerrain( bool visible )
 {
     d->map()->setShowTerrain( visible );
-
-    update();
 }
 
 void MarbleWidget::setShowOtherPlaces( bool visible )
 {
     d->map()->setShowOtherPlaces( visible );
-
-    update();
 }
 
 void MarbleWidget::setShowRelief( bool visible )
 {
     d->map()->setShowRelief( visible );
-
-    update();
 }
 
 void MarbleWidget::setShowIceLayer( bool visible )
 {
     d->map()->setShowIceLayer( visible );
-
-    update();
 }
 
 void MarbleWidget::setShowBorders( bool visible )
 {
     d->map()->setShowBorders( visible );
-
-    update();
 }
 
 void MarbleWidget::setShowRivers( bool visible )
 {
     d->map()->setShowRivers( visible );
-
-    update();
 }
 
 void MarbleWidget::setShowLakes( bool visible )
 {
     d->map()->setShowLakes( visible );
-
-    update();
 }
 
 void MarbleWidget::setShowFrameRate( bool visible )
@@ -942,8 +902,6 @@ void MarbleWidget::setShowFrameRate( bool visible )
 void MarbleWidget::setShowBackground( bool visible )
 {
     d->map()->setShowBackground( visible );
-
-    update();
 }
 
 void MarbleWidget::setShowRuntimeTrace( bool visible )
@@ -998,12 +956,7 @@ MapQuality MarbleWidget::mapQuality( ViewContext viewContext ) const
 
 void MarbleWidget::setMapQualityForViewContext( MapQuality quality, ViewContext viewContext )
 {
-    const MapQuality oldQuality = d->map()->mapQuality();
-
     d->map()->setMapQualityForViewContext( quality, viewContext );
-
-    if ( d->map()->mapQuality() != oldQuality )
-        update();
 }
 
 ViewContext MarbleWidget::viewContext() const
@@ -1015,11 +968,7 @@ void MarbleWidget::setViewContext( ViewContext viewContext )
 {   //TODO - move to MarbleAbstractPresenter as soon as RoutingLayer is ported there, replace with pImpl call
     d->m_routingLayer->setViewContext( viewContext );
     if ( d->map()->viewContext() != viewContext ) {
-        const MapQuality oldQuality = d->map()->mapQuality();
         d->map()->setViewContext( viewContext );
-
-        if ( d->map()->mapQuality() != oldQuality )
-            update();
     }
 }
 
