@@ -86,8 +86,6 @@ namespace Marble
 
                 emit zoomChanged(m_logzoom);
                 emit distanceChanged(distanceString());
-
-                emit updateRequired();
             }
         }
         else
@@ -190,7 +188,6 @@ namespace Marble
 
             emit zoomChanged(m_logzoom);
             emit distanceChanged(distanceString());
-            emit updateRequired();
         }
         else
         {
@@ -337,7 +334,6 @@ namespace Marble
 
             emit zoomChanged(m_logzoom);
             emit distanceChanged(distanceString());
-            emit updateRequired();
         }
     }
 
@@ -496,16 +492,10 @@ namespace Marble
     {
         if (map()->viewContext() != viewContext)
         {
-            const MapQuality oldQuality = map()->mapQuality();
             map()->setViewContext(viewContext);
 
             //TODO - set view context for routing layer
             //m_routingLayer->setViewContext( viewContext );
-
-            if (map()->mapQuality() != oldQuality)
-            {
-                emit updateRequired();
-            }
         }
     }
 

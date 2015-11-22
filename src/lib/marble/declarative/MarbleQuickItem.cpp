@@ -140,7 +140,6 @@ namespace Marble
           ,m_inputHandler(this, marble)
         {
             m_currentPosition.setName(tr("Current Location"));
-            connect(this, SIGNAL(updateRequired()), m_marble, SLOT(update()));
         }
 
     private:

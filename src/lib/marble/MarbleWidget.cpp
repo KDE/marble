@@ -183,8 +183,6 @@ void MarbleWidgetPrivate::construct()
 
     m_widget->connect(this, SIGNAL(regionSelected(QList<double>)), m_widget, SIGNAL(regionSelected(QList<double>)));
 
-    m_widget->connect(this, SIGNAL(updateRequired()),
-                      m_widget, SLOT(update()));
     m_widget->connect(this, SIGNAL(zoomChanged(int)), m_widget, SIGNAL(zoomChanged(int)));
     m_widget->connect(this, SIGNAL(distanceChanged(QString)), m_widget, SIGNAL(distanceChanged(QString)));
 

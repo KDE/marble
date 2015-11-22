@@ -31,7 +31,6 @@ namespace Marble
     signals:
         void zoomChanged(int zoom);
         void distanceChanged(const QString& distanceString);
-        void updateRequired();
 
         /** This signal is emitted when a new rectangle region is selected over the map
         *  The list of double values includes coordinates in degrees using the following:
