@@ -17,6 +17,8 @@
 #include <Quaternion.h>
 #include <ViewportParams.h>
 #include <MarbleLocale.h>
+#include "MarbleMap.h"
+#include "MarbleModel.h"
 #include <Planet.h>
 #include <GeoDataPlacemark.h>
 #include <MarbleClock.h>
@@ -24,10 +26,9 @@
 
 namespace Marble
 {
-    MarbleAbstractPresenter::MarbleAbstractPresenter() :
-        QObject()
-        ,m_model()
-        ,m_map(&m_model)
+    MarbleAbstractPresenter::MarbleAbstractPresenter(MarbleMap *map, QObject *parent) :
+        QObject(parent)
+        ,m_map(map)
         ,m_physics(this)
         ,m_animationsEnabled(false)
         ,m_logzoom(0)
@@ -525,22 +526,22 @@ namespace Marble
 
     MarbleMap* MarbleAbstractPresenter::map()
     {
-        return &m_map;
+        return m_map;
     }
 
     const MarbleMap* MarbleAbstractPresenter::map() const
     {
-        return &m_map;
+        return m_map;
     }
 
     MarbleModel* MarbleAbstractPresenter::model()
     {
-        return &m_model;
+        return m_map->model();
     }
 
     const MarbleModel* MarbleAbstractPresenter::model() const
     {
-        return &m_model;
+        return m_map->model();
     }
 
     ViewportParams* MarbleAbstractPresenter::viewport()

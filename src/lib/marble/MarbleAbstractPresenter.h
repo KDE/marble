@@ -17,13 +17,17 @@
 #include <QList>
 #include "GeoDataLookAt.h"
 #include "GeoDataLatLonBox.h"
-#include "MarbleMap.h"
-#include "MarbleModel.h"
 #include "MarblePhysics.h"
 #include <marble_export.h>
 
 namespace Marble
 {
+
+class GeoDataPlacemark;
+class MarbleMap;
+class MarbleModel;
+class ViewportParams;
+
     class MARBLE_EXPORT MarbleAbstractPresenter : public QObject
     {
     Q_OBJECT
@@ -39,8 +43,7 @@ namespace Marble
         void regionSelected(const QList<double>&);
 
     public:
-        MarbleAbstractPresenter();
-        void initialize(MarbleModel *model, MarbleMap *map);
+        MarbleAbstractPresenter(MarbleMap *map, QObject *parent = 0);
         virtual ~MarbleAbstractPresenter();
 
         qreal moveStep() const;
@@ -137,9 +140,7 @@ namespace Marble
         void setSelection(const QRect& region);
 
     private:
-        //MarbleAbstractPresenter owns these
-        MarbleModel m_model;
-        MarbleMap m_map;
+        MarbleMap *const m_map;
         MarblePhysics m_physics;
 
         bool m_animationsEnabled;

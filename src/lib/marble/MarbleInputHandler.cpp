@@ -20,11 +20,11 @@
 #include <QPixmap>
 #include <QGestureEvent>
 #include <QPinchGesture>
-#include <QDebug> //removethis
 
 #include "kineticmodel.h"
 #include "MarbleGlobal.h"
 #include "MarbleDebug.h"
+#include "MarbleMap.h"
 #include "GeoDataCoordinates.h"
 #include "MarbleAbstractPresenter.h"
 #include "ViewportParams.h"
