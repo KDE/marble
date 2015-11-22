@@ -226,8 +226,8 @@ namespace Marble
         QPaintDevice *paintDevice = painter->device();
         QRect rect = contentsBoundingRect().toRect();
 
+        painter->end();
         {
-            painter->end();
             GeoPainter geoPainter(paintDevice, d->map()->viewport(), d->map()->mapQuality());
             d->map()->paint(geoPainter, rect);
         }
