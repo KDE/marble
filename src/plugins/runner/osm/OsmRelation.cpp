@@ -60,12 +60,20 @@ void OsmRelation::create(GeoDataDocument *document, const OsmWays &ways, const O
     GeoDataFeature::GeoDataVisualCategory outerCategory = OsmPresetLibrary::determineVisualCategory(m_osmData);
     if (outerCategory == GeoDataFeature::None) {
         // Try to determine the visual category from the relation members
-        foreach(qint64 wayId, outerWays) {
-            GeoDataFeature::GeoDataVisualCategory const category = OsmPresetLibrary::determineVisualCategory(ways[wayId].osmData());
-            if (category != GeoDataFeature::None) {
-                outerCategory = category;
+        bool categoriesAreSame = true;
+        auto iterator = outerWays.begin();
+        GeoDataFeature::GeoDataVisualCategory const firstCategory =
+                OsmPresetLibrary::determineVisualCategory(ways[*iterator].osmData());
+        for( ; iterator != outerWays.end(); ++iterator ) {
+            GeoDataFeature::GeoDataVisualCategory const category =
+                    OsmPresetLibrary::determineVisualCategory(ways[*iterator].osmData());
+            if( category != firstCategory ) {
+                categoriesAreSame = false;
                 break;
             }
+        }
+        if( categoriesAreSame ) {
+            outerCategory = firstCategory;
         }
     }
     foreach(qint64 wayId, outerWays) {
