@@ -8,6 +8,7 @@
 // Copyright 2012   Mohammed Nafees   <nafees.technocool@gmail.com>
 // Copyright 2012   Dennis Nienhüser  <nienhueser@kde.org>
 // Copyright 2012   Illya Kovalevskyy <illya.kovalevskyy@gmail.com>
+// Copyright 2015   Imran Tatriev     <itatriev@gmail.com>
 //
 
 #include "PopupLayer.h"
@@ -17,6 +18,7 @@
 #include "MarbleWidget.h"
 #include "PopupItem.h"
 #include "ViewportParams.h"
+#include "RenderPlugin.h"
 
 #include <QSizeF>
 
@@ -44,11 +46,15 @@ public:
     PopupItem *const m_popupItem;
     MarbleWidget *const m_widget;
     QSizeF m_requestedSize;
+    bool m_hasCrosshairsPlugin;
+    bool m_crosshairsVisible;
 };
 
 PopupLayer::Private::Private( MarbleWidget *marbleWidget, PopupLayer *q ) :
     m_popupItem( new PopupItem( q ) ),
-    m_widget( marbleWidget )
+    m_widget( marbleWidget ),
+    m_hasCrosshairsPlugin( false ),
+    m_crosshairsVisible( true )
 {
 }
 
@@ -56,6 +62,13 @@ PopupLayer::PopupLayer( MarbleWidget *marbleWidget, QObject *parent ) :
     QObject( parent ),
     d( new Private( marbleWidget, this ) )
 {
+    foreach (const RenderPlugin *renderPlugin, d->m_widget->renderPlugins()) {
+        if( renderPlugin->nameId() == "crosshairs" ) {
+            d->m_hasCrosshairsPlugin = true;
+            break;
+        }
+    }
+
     connect( d->m_popupItem, SIGNAL(repaintNeeded()), this, SIGNAL(repaintNeeded()) );
     connect( d->m_popupItem, SIGNAL(hide()), this, SLOT(hidePopupItem()) );
 }
@@ -127,6 +140,15 @@ void PopupLayer::popup()
     coords.setLatitude( lat );
     coords.setLongitude( lon );
     d->m_widget->centerOn( coords, true );
+
+    if( d->m_hasCrosshairsPlugin ) {
+        d->m_crosshairsVisible = d->m_widget->showCrosshairs();
+
+        if( d->m_crosshairsVisible ) {
+            d->m_widget->setShowCrosshairs( false );
+        }
+    }
+
     setVisible( true );
 }
 
@@ -180,6 +202,10 @@ void PopupLayer::Private::setAppropriateSize( const ViewportParams *viewport )
 
 void PopupLayer::hidePopupItem()
 {
+    if( d->m_hasCrosshairsPlugin && d->m_crosshairsVisible ) {
+        d->m_widget->setShowCrosshairs( d->m_crosshairsVisible );
+    }
+
     setVisible( false );
 }
 
