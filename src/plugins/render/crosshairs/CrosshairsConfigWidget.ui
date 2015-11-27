@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>318</width>
-    <height>119</height>
+    <height>136</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -44,7 +44,7 @@
       </property>
       <property name="icon">
        <iconset resource="crosshairs.qrc">
-        <normaloff>:/crosshairs-pointed.svg</normaloff>:/crosshairs-pointed.svg</iconset>
+        <normaloff>:/crosshairs-darkened.png</normaloff>:/crosshairs-darkened.png</iconset>
       </property>
      </item>
      <item>

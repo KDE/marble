@@ -4,6 +4,6 @@
     <file>crosshairs-german.svg</file>
     <file>crosshairs-gun1.svg</file>
     <file>crosshairs-gun2.svg</file>
-    <file>crosshairs-pointed.svg</file>
+    <file>crosshairs-darkened.png</file>
   </qresource>
 </RCC>

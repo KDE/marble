@@ -31,6 +31,7 @@ CrosshairsPlugin::CrosshairsPlugin()
     : RenderPlugin( 0 ),
       m_svgobj( 0 ),
       m_themeIndex( 0 ),
+      m_theme( "" ),
       m_configDialog( 0 ),
       m_uiConfigWidget( 0 )
 {
@@ -41,6 +42,7 @@ CrosshairsPlugin::CrosshairsPlugin( const MarbleModel *marbleModel )
       m_isInitialized( false ),
       m_svgobj( 0 ),
       m_themeIndex( 0 ),
+      m_theme( "" ),
       m_configDialog( 0 ),
       m_uiConfigWidget( 0 )
 {
@@ -169,25 +171,25 @@ void CrosshairsPlugin::readSettings()
         m_uiConfigWidget->m_themeList->setCurrentRow( m_themeIndex );
     }
 
-    QString theme = ":/crosshairs-pointed.svg";
+    m_theme = ":/crosshairs-darkened.png";
     switch( m_themeIndex ) {
     case 1:
-        theme = ":/crosshairs-gun1.svg";
+        m_theme = ":/crosshairs-gun1.svg";
         break;
     case 2:
-        theme = ":/crosshairs-gun2.svg";
+        m_theme = ":/crosshairs-gun2.svg";
         break;
     case 3:
-        theme = ":/crosshairs-circled.svg";
+        m_theme = ":/crosshairs-circled.svg";
         break;
     case 4:
-        theme = ":/crosshairs-german.svg";
+        m_theme = ":/crosshairs-german.svg";
         break;
     }
 
     delete m_svgobj;
     CrosshairsPlugin * me = const_cast<CrosshairsPlugin*>( this );
-    m_svgobj = new QSvgRenderer( theme, me );
+    m_svgobj = new QSvgRenderer( m_theme, me );
     m_crosshairs = QPixmap();
 }
 
@@ -211,11 +213,17 @@ bool CrosshairsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
     const int height = 21;
 
     if ( m_crosshairs.isNull() ) {
-        painter->setRenderHint( QPainter::Antialiasing, true );
-        m_crosshairs = QPixmap( QSize( width, height ) );
-        m_crosshairs.fill( Qt::transparent );
-        QPainter mapPainter( &m_crosshairs );
-        m_svgobj->render( &mapPainter );
+        if( QImageReader::imageFormat( m_theme ) == "svg" ) {
+            painter->setRenderHint( QPainter::Antialiasing, true );
+            m_crosshairs = QPixmap( QSize( width, height ) );
+            m_crosshairs.fill( Qt::transparent );
+
+            QPainter mapPainter( &m_crosshairs );
+            m_svgobj->render( &mapPainter );
+        }
+        else {
+            m_crosshairs.load( m_theme );
+        }
     }
 
     GeoDataCoordinates const focusPoint = viewport->focusPoint();

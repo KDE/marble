@@ -17,6 +17,8 @@
 #define MARBLE_CROSSHAIRSPLUGIN_H
 
 #include <QObject>
+#include <QImageReader>
+
 
 #include "RenderPlugin.h"
 #include "DialogConfigurationInterface.h"
@@ -100,6 +102,8 @@ private Q_SLOTS:
     QSvgRenderer *m_svgobj;
     QPixmap m_crosshairs;
     int m_themeIndex;
+
+    QString m_theme;
 
     QDialog * m_configDialog;
     Ui::CrosshairsConfigWidget * m_uiConfigWidget;
