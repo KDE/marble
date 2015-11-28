@@ -187,9 +187,10 @@ void CrosshairsPlugin::readSettings()
         break;
     }
 
-    delete m_svgobj;
-    CrosshairsPlugin * me = const_cast<CrosshairsPlugin*>( this );
-    m_svgobj = new QSvgRenderer( m_theme, me );
+    if( QImageReader::imageFormat( m_theme ) == "svg" ) {
+        delete m_svgobj;
+        m_svgobj = new QSvgRenderer( m_theme, this );
+    }
     m_crosshairs = QPixmap();
 }
 
