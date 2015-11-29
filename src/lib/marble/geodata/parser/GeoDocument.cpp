@@ -25,10 +25,6 @@
 
 namespace Marble
 {
-#if DUMP_GEONODE_LEAKS > 0
-     // Initialize here, as there is no GeoDocument.cpp file     
-     unsigned long GeoDocument::s_leakProtector = 0;     
-#endif      
 
 GeoDocument::GeoDocument()
 {
@@ -36,14 +32,6 @@ GeoDocument::GeoDocument()
 
 GeoDocument::~GeoDocument()
 {
-#if DUMP_GEONODE_LEAKS > 0
-    if (s_leakProtector != 0) {
-        fprintf(stderr, "Found %li GeoNode object LEAKS!\n", s_leakProtector);
-        s_leakProtector = 0;
-    } else {
-        fprintf(stderr, "No GeoNode object leak!\n");
-    }
-#endif
 }
 
 bool GeoDocument::isGeoDataDocument() const
@@ -59,16 +47,10 @@ bool GeoDocument::isGeoSceneDocument() const
 
 GeoNode::GeoNode()
 {
-#if DUMP_GEONODE_LEAKS > 0
-    GeoDocument::s_leakProtector++;
-#endif
 }
 
 GeoNode::~GeoNode()
 {
-#if DUMP_GEONODE_LEAKS > 0
-    --GeoDocument::s_leakProtector;
-#endif
 }
 
 const char* GeoNode::nodeType() const
