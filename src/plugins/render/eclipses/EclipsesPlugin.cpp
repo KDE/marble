@@ -424,7 +424,7 @@ void EclipsesPlugin::updateSettings()
 
 void EclipsesPlugin::updateEclipses()
 {
-    mDebug() << "Updating eclipses....";
+    // mDebug() << "Updating eclipses....";
     const int year = marbleModel()->clock()->dateTime().date().year();
     const bool lun = m_settings.value( "enableLunarEclipses" ).toBool();
 
