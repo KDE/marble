@@ -265,6 +265,7 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "leisure", "park" ) ]               = GeoDataFeature::LeisurePark;
     s_visualCategories[ OsmTag( "leisure", "playground" ) ]         = GeoDataFeature::LeisurePlayground;
     s_visualCategories[ OsmTag( "leisure", "pitch" ) ]              = GeoDataFeature::LeisurePitch;
+    s_visualCategories[ OsmTag( "leisure", "picnic_table" ) ]       = GeoDataFeature::LeisurePicnicTable;
     s_visualCategories[ OsmTag( "leisure", "sports_centre" ) ]      = GeoDataFeature::LeisureSportsCentre;
     s_visualCategories[ OsmTag( "leisure", "stadium" ) ]            = GeoDataFeature::LeisureStadium;
     s_visualCategories[ OsmTag( "leisure", "track" ) ]              = GeoDataFeature::LeisureTrack;
@@ -539,6 +540,7 @@ bool OsmPresetLibrary::isAreaTag(const QString &keyValue)
         s_areaTags.insert( "leisure=golf_course" );
         s_areaTags.insert( "leisure=playground" );
         s_areaTags.insert( "leisure=pitch" );
+        s_areaTags.insert( "leisure=picnic_table" );
         s_areaTags.insert( "leisure=park" );
         s_areaTags.insert( "leisure=sports_centre" );
         s_areaTags.insert( "leisure=stadium" );

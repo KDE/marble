@@ -584,6 +584,7 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
     s_defaultStyle[GeoDataFeature::LeisurePark]              = GeoDataFeaturePrivate::createWayStyle( QColor("#c8facc"), QColor("#c8facc").darker(150), true, true );
     s_defaultStyle[GeoDataFeature::LeisurePlayground]        = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "amenity/playground.16", amenityColor, "#CCFFF1", "#BDFFED" );
     s_defaultStyle[GeoDataFeature::LeisurePitch]             = GeoDataFeaturePrivate::createWayStyle( "#8ad3af", QColor("#8ad3af").darker(150), true, true );
+    s_defaultStyle[GeoDataFeature::LeisurePicnicTable]       = GeoDataFeaturePrivate::createOsmPOIStyle( osmFont, "amenity/picnic.16", amenityColor, "#CCFFF1", "#BDFFED"  );
     s_defaultStyle[GeoDataFeature::LeisureSportsCentre]      = GeoDataFeaturePrivate::createWayStyle( "#33cc99", QColor("#33cc99").darker(150), true, true );
     s_defaultStyle[GeoDataFeature::LeisureStadium]           = GeoDataFeaturePrivate::createWayStyle( "#33cc99", QColor("#33cc99").darker(150), true, true );
     s_defaultStyle[GeoDataFeature::LeisureTrack]             = GeoDataFeaturePrivate::createWayStyle( "#74dcba", QColor("#74dcba").darker(150), true, true );
