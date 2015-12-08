@@ -48,5 +48,6 @@
         <file alias="ic_place_via.png">../../../data/android/drawable-xxxhdpi/ic_place_via.png</file>
         <file alias="add.png">../../../data/android/drawable-xxxhdpi/ic_add_black_48dp.png</file>
         <file>RouteProfileRadioButton.qml</file>
+        <file>ScrollBar.qml</file>
     </qresource>
 </RCC>

@@ -88,4 +88,9 @@ Item {
             }
         }
     }
+
+    ScrollBar {
+        id: scrollBar
+        flickableItem: view
+    }
 }
