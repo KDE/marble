@@ -9,9 +9,9 @@
 //
 
 #include "MarbleMaps.h"
+#include <FileManager.h>
 
 #include <MarbleModel.h>
-
 #include <QGuiApplication>
 
 #ifdef Q_OS_ANDROID
@@ -42,6 +42,7 @@ MarbleMaps::MarbleMaps(QQuickItem *parent) :
                 QAndroidJniObject const path = data.callObjectMethod("getPath", "()Ljava/lang/String;");
                 if (path.isValid()) {
                     model()->addGeoDataFile(path.toString());
+                    connect( model()->fileManager(), SIGNAL(centeredDocument(GeoDataLatLonBox)), this, SLOT(centerOn(GeoDataLatLonBox)) );
                 }
             }
         }
