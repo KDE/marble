@@ -65,6 +65,7 @@ private:
     int m_currentIndex;
     PositionProviderStatus m_status;
     GeoDataLineString m_lineString;
+    GeoDataLineString m_lineStringInterpolated;
     GeoDataCoordinates m_currentPosition;
     QDateTime m_currentDateTime;
     qreal m_speed;

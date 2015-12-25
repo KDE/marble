@@ -6,7 +6,7 @@
 // the source code.
 //
 // Copyright 2011      Konrad Enzensberger <e.konrad@mpegcode.com>
-// Copyright 2011      Dennis Nienhüser <nienhueser@kde.org>
+// Copyright 2011      Dennis NienhÃ¼ser <nienhueser@kde.org>
 // Copyright 2012      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
@@ -61,7 +61,7 @@ QList<PluginAuthor> RouteSimulationPositionProviderPlugin::pluginAuthors() const
 {
     return QList<PluginAuthor>()
             << PluginAuthor( "Konrad Enzensberger", "e.konrad@mpegcode.com" )
-            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "nienhueser@kde.org" )
+            << PluginAuthor( QString::fromUtf8( "Dennis NienhÃ¼ser" ), "nienhueser@kde.org" )
             << PluginAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de" );
 }
 
@@ -116,8 +116,10 @@ RouteSimulationPositionProviderPlugin::~RouteSimulationPositionProviderPlugin()
 void RouteSimulationPositionProviderPlugin::initialize()
 {
     m_currentIndex = -1;
-
-    m_lineString = m_marbleModel->routingManager()->routingModel()->route().path();
+    
+    m_lineString = m_lineStringInterpolated = m_marbleModel->routingManager()->routingModel()->route().path();
+    
+    m_speed=25;   //initialize speed to be around 25 m/s;
 
     m_status = m_lineString.isEmpty() ? PositionProviderStatusUnavailable : PositionProviderStatusAcquiring;
 
@@ -150,17 +152,31 @@ void RouteSimulationPositionProviderPlugin::update()
 {
     ++m_currentIndex;
 
-    if ( m_currentIndex >= 0 && m_currentIndex < m_lineString.size() ) {
+    if ( m_currentIndex >= 0 && m_currentIndex < m_lineStringInterpolated.size() ) {
         if ( m_status != PositionProviderStatusAvailable ) {
             m_status = PositionProviderStatusAvailable;
             emit statusChanged( PositionProviderStatusAvailable );
         }
 
-        GeoDataCoordinates newPosition = m_lineString.at( m_currentIndex );
+        GeoDataCoordinates newPosition = m_lineStringInterpolated.at( m_currentIndex );
         const QDateTime newDateTime = QDateTime::currentDateTime();
-        if ( m_currentPosition.isValid() ) {
-            m_speed = distanceSphere( m_currentPosition, newPosition ) * m_marbleModel->planetRadius() / ( m_currentDateTime.msecsTo( newDateTime ) ) * 1000;
-            m_direction = m_currentPosition.bearing( newPosition, GeoDataCoordinates::Degree, GeoDataCoordinates::FinalBearing );
+        qreal time= m_currentDateTime.msecsTo(newDateTime)/1000.0;
+	if ( m_currentPosition.isValid() ) { 
+	     
+	    //Assume the car's moving at 25 m/s. The distance moved will be speed*time which is equal to the speed of the car if time is equal to one.
+	    //If the function isn't called once exactly after a second, multiplying by the time will compensate for the error and maintain the speed.
+	    
+	    double_t fraction = 25*time/(distanceSphere( m_currentPosition, newPosition )* m_marbleModel->planetRadius());
+	    
+	    //Interpolate and find the next point to move to if needed.
+	    if(fraction>0 && fraction <1){
+	        GeoDataCoordinates newPoint = m_currentPosition.interpolate(newPosition,fraction);
+
+	        m_lineStringInterpolated.insert(m_currentIndex, newPosition);
+	        newPosition=newPoint;
+	    }
+	    m_speed = distanceSphere( m_currentPosition, newPosition )* m_marbleModel->planetRadius()/time;
+	    m_direction = m_currentPosition.bearing( newPosition, GeoDataCoordinates::Degree, GeoDataCoordinates::FinalBearing );
         }
         m_currentPosition = newPosition;
         m_currentDateTime = newDateTime;
@@ -169,6 +185,9 @@ void RouteSimulationPositionProviderPlugin::update()
     else {
         // Repeat from start
         m_currentIndex = -1;
+        m_lineStringInterpolated = m_lineString;
+        GeoDataCoordinates dummyCoords;
+        m_currentPosition = dummyCoords;	//Reset The current position so that the the simulation starts from the correct starting point.
         if ( m_status != PositionProviderStatusUnavailable ) {
             m_status = PositionProviderStatusUnavailable;
             emit statusChanged( PositionProviderStatusUnavailable );
