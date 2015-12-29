@@ -35,11 +35,7 @@ Rectangle {
 
     id: gameOptionsPanel
     objectName: "gameOptionsPanel"
-    width: 200
-    height: 600
-    
     color: "#d3d7cf"
-
     state: "GAMES_VIEW_HIDDEN"
 
     Column {

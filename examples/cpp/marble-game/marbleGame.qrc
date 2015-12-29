@@ -8,6 +8,7 @@
         <file>ClickOnThat.qml</file>
         <file>CustomButton.qml</file>
         <file>CustomRadioButton.qml</file>
+        <file>InitialMenu.qml</file>
         <file>../../../data/flags/flag_cr.svg</file>
         <file>../../../data/flags/flag_id.svg</file>
         <file>../../../data/flags/flag_ms.svg</file>

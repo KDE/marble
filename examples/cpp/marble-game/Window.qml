@@ -10,11 +10,9 @@
 
 
 import QtQuick 2.0
+import QtQuick.Controls 1.4
 
 Rectangle {
-    property real partition: 1/4
-    property real spacingFraction: 1/10
-
     property bool showInitialMenu: true
     property bool showGameOptions: false
 
@@ -27,100 +25,39 @@ Rectangle {
     width: leftPanelWidth
     height: leftPanelHeight
 
-    state: "GAME_OPTIONS_HIDDEN"
+    StackView {
+        id: stackContainer
+        anchors.fill: parent
+        initialItem: buttonArea
+    }
 
-    /*
-     * Provides two initial options
-     * "Browse Map" and "Play Game"
-     */
-    Rectangle {
+    InitialMenu {
         id: buttonArea
         objectName: "buttonArea"
-        width: leftPanelWidth
-        height: leftPanelHeight
-        color: "#d3d7cf"
 
-        anchors.centerIn:leftPanel
-
-        visible: showInitialMenu
-
-        Column {
-            anchors.centerIn: buttonArea
-            spacing: buttonArea.height*spacingFraction
-
-            CustomButton {
-                id: browseMapButton
-                buttonWidth: leftPanel.width*4/5
-                normalColor: "#114269"
-                borderColor: "#000000"
-                labelText: qsTr("Browse Map")
-                labelColor: "white"
-
-                onButtonClick: {
-                    browseMapButtonClicked();
-                }
-            }
-
-            CustomButton {
-                id: gameButton
-                buttonWidth: leftPanel.width*4/5
-                normalColor: "#114730"
-                borderColor: "#000000"
-                labelText: qsTr("Play Game")
-                labelColor: "white"
-
-                onButtonClick: {
-                    if ( leftPanel.state == "GAME_OPTIONS_HIDDEN" ) {
-                        leftPanel.state = "GAME_OPTIONS_VISIBLE"
-                    }
-                }
-            }
+        onGameMenuButtonClicked: {
+            stackContainer.push(gameOptions);
+        }
+        onBrowseMapButtonClicked: {
+            browseMapButtonClicked();
+            stackContainer.pop(gameOptions);
         }
     }
 
     // This element contains the game menu
     GameOptions {
-        id: "gameOptions"
+        id: gameOptions
         objectName: "gameOptions"
-        gameOptionsPanelWidth: leftPanelWidth
-        gameOptionsPanelHeight: leftPanelHeight
-
-        anchors.centerIn: leftPanel
-        visible: showGameOptions
 
         onBackButtonClick: {
-            if ( leftPanel.state == "GAME_OPTIONS_VISIBLE" ) {
-                leftPanel.state = "GAME_OPTIONS_HIDDEN"
-            }
+            stackContainer.pop(buttonArea);
         }
     }
 
-    states: [
-        /*
-         * State when game menu is visible.
-         * At this point we remove the two
-         * initial options "Browse Map" and
-         * "Play Game".
-         */
-        State {
-            name: "GAME_OPTIONS_VISIBLE"
-            PropertyChanges { target: gameOptions; width: leftPanelWidth; height: leftPanelHeight; visible: true }
-            PropertyChanges { target: buttonArea; width:0; height: 0; visible: false }
-        },
+    Component.onCompleted: {
+        stackContainer.push(buttonArea);
+    }
 
-        /*
-         * State hides the game menu and takes
-         * the user to initial menu. It can be
-         * achieved by clicking on "Main Menu"
-         * button in game menu
-         */
-        State {
-            name: "GAME_OPTIONS_HIDDEN"
-            PropertyChanges { target: buttonArea; width: leftPanelWidth; height: leftPanelHeight; visible: true }
-            PropertyChanges { target: gameOptions; width:0; height: 0; visible: false }
-        }
-    ]
-    
     transitions: [
         Transition {
             to: "*"
