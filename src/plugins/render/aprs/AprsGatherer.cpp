@@ -75,6 +75,10 @@ AprsGatherer::run()
     // prevents accidentially coloring signals heard over some sources
     // as heard directly where it's never possible (such as over the
     // internet).
+    Q_ASSERT(m_source);
+    if (!m_source) {
+        return;
+    }
     bool canDoDirect = m_source->canDoDirect();
     
     while( m_running ) {
@@ -87,7 +91,7 @@ AprsGatherer::run()
         }
         
             
-        if ( !m_socket && m_source )
+        if ( !m_socket )
             m_socket = m_source->openSocket();
 
         if ( !m_socket ) {
