@@ -161,7 +161,7 @@ void EditBookmarkDialog::setMarbleWidget( MarbleWidget* widget )
     const GeoDataCoordinates::Notation notation =
         (defaultAngleUnit == DecimalDegree) ? GeoDataCoordinates::Decimal :
         (defaultAngleUnit == DMSDegree) ?     GeoDataCoordinates::DMS :
-        /* else, UTM */                       GeoDataCoordinates::DMS;
+        /* else, UTM */                       GeoDataCoordinates::UTM;
     d->m_ui.m_header->setNotation(notation);
 
     d->m_manager = new ReverseGeocodingRunnerManager( d->m_widget->model(), this );

@@ -134,7 +134,7 @@ EditPlacemarkDialog::EditPlacemarkDialog( GeoDataPlacemark *placemark,
         const GeoDataCoordinates::Notation notation =
             (defaultAngleUnit == DecimalDegree) ? GeoDataCoordinates::Decimal :
             (defaultAngleUnit == DMSDegree) ?     GeoDataCoordinates::DMS :
-            /* else, UTM */                       GeoDataCoordinates::DMS;
+            /* else, UTM */                       GeoDataCoordinates::UTM;
         d->m_header->setNotation( notation );
     }
     connect( d->m_header, SIGNAL(valueChanged()), this, SLOT(
