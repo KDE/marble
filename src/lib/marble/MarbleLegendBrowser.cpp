@@ -133,6 +133,10 @@ void MarbleLegendBrowser::initTheme()
 
 void MarbleLegendBrowser::loadLegend()
 {
+    if (!d->m_marbleModel) {
+        return;
+    }
+
 #ifndef MARBLE_NO_WEBKIT
     if (d->m_currentThemeId != d->m_marbleModel->mapThemeId()) {
         d->m_currentThemeId = d->m_marbleModel->mapThemeId();
@@ -144,8 +148,7 @@ void MarbleLegendBrowser::loadLegend()
     QString legendPath;
 
     // Check for a theme specific legend.html first
-    if ( d->m_marbleModel != 0 && d->m_marbleModel->mapTheme() != 0 )
-    {
+    if (d->m_marbleModel->mapTheme() != 0 ) {
         const GeoSceneDocument *currentMapTheme = d->m_marbleModel->mapTheme();
 
         legendPath = MarbleDirs::path( "maps/" +
@@ -176,10 +179,8 @@ void MarbleLegendBrowser::loadLegend()
     // Set the html string in the QTextBrowser.
     setHtml(finalHtml, baseUrl);
 
-    if ( d->m_marbleModel ) {
-        QTextDocument *document = new QTextDocument(page()->mainFrame()->toHtml());
-        d->m_marbleModel->setLegend( document );
-    }
+    QTextDocument *document = new QTextDocument(page()->mainFrame()->toHtml());
+    d->m_marbleModel->setLegend( document );
 #endif
 }
 
