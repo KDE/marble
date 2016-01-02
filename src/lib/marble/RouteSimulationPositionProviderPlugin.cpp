@@ -148,6 +148,8 @@ void RouteSimulationPositionProviderPlugin::update()
 {
     ++m_currentIndex;
 
+    bool isCurrentIndexValid = true;
+
     if ( m_currentIndex >= 0 && m_currentIndex < m_lineStringInterpolated.size() ) {
         if ( m_status != PositionProviderStatusAvailable ) {
             m_status = PositionProviderStatusAvailable;
@@ -171,6 +173,28 @@ void RouteSimulationPositionProviderPlugin::update()
                 m_lineStringInterpolated.insert(m_currentIndex, newPosition);
                 newPosition=newPoint;
             }
+            else if ( fraction > 1 ) {
+                while ( fraction > 1 ) {
+
+                    if ( m_currentIndex+1 >= m_lineStringInterpolated.size() ) {
+                        isCurrentIndexValid = false;
+                        break;
+                    }
+
+                    m_currentIndex++;
+
+                    newPosition = m_lineStringInterpolated.at( m_currentIndex );
+                    fraction = 25*time / (distanceSphere( m_currentPosition, newPosition )* m_marbleModel->planetRadius());
+                }
+
+                if ( isCurrentIndexValid ) {
+                    GeoDataCoordinates newPoint = m_currentPosition.interpolate( newPosition, fraction );
+
+                    m_lineStringInterpolated.insert( m_currentIndex, newPosition );
+                    newPosition = newPoint;
+                }
+            }
+
             m_speed = distanceSphere( m_currentPosition, newPosition )* m_marbleModel->planetRadius()/time;
             m_direction = m_currentPosition.bearing( newPosition, GeoDataCoordinates::Degree, GeoDataCoordinates::FinalBearing );
         }
