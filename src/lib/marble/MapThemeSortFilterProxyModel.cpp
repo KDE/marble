@@ -38,11 +38,6 @@ bool MapThemeSortFilterProxyModel::lessThan ( const QModelIndex & left, const QM
             return false;
         }
     }
-    if( isFavorite( left ) && isFavorite( right ) ) {
-        if( favoriteDateTime( left ) != favoriteDateTime( right ) ) {
-            return favoriteDateTime( left ) > favoriteDateTime( right );
-        }
-    }
     return sourceModel()->data( left ).toString() < sourceModel()->data( right ).toString();;
 }
 
