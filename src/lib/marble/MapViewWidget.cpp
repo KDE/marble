@@ -234,9 +234,10 @@ class Q_DECL_HIDDEN MapViewWidget::Private {
     void toggleFavorite();
     void toggleIconSize();
 
-    bool isCurrentFavorite();
+    bool isCurrentFavorite() const;
     QString currentThemeName() const;
     QString currentThemePath() const;
+    QString favoriteKey(const QModelIndex &index) const;
 
     MapViewWidget *const q;
 
@@ -631,6 +632,11 @@ QString MapViewWidget::Private::currentThemePath() const
     return m_mapSortProxy.data( columnIndex, Qt::UserRole + 1 ).toString();
 }
 
+QString MapViewWidget::Private::favoriteKey(const QModelIndex &index) const
+{
+    return "Favorites/" + m_mapSortProxy.data(index).toString();
+}
+
 void MapViewWidget::Private::showContextMenu( const QPoint& pos )
 {
     QMenu menu;
@@ -664,23 +670,17 @@ void MapViewWidget::Private::deleteMap()
 
 void MapViewWidget::Private::toggleFavorite()
 {
-    const QModelIndex index = m_mapViewUi.marbleThemeSelectView->currentIndex();
-    const QModelIndex columnIndex = m_mapSortProxy.index( index.row(), 0 );
-
+    QModelIndex index = m_mapViewUi.marbleThemeSelectView->currentIndex();
     if( isCurrentFavorite() ) {
-        m_settings.beginGroup( "Favorites" );
-        m_settings.remove( m_mapSortProxy.data( columnIndex ).toString() );
+        m_settings.remove(favoriteKey(index));
+    } else {
+        m_settings.setValue(favoriteKey(index), QDateTime::currentDateTime() );
     }
-    else {
-        m_settings.beginGroup( "Favorites" );
-        m_settings.setValue( m_mapSortProxy.data( columnIndex ).toString(), QDateTime::currentDateTime() );
-    }
-    m_settings.endGroup();
-
-    QStandardItemModel* sourceModel = (QStandardItemModel*)m_mapSortProxy.sourceModel();
-    const QModelIndex sourceIndex = m_mapSortProxy.mapToSource( columnIndex );
+    QStandardItemModel* sourceModel = qobject_cast<QStandardItemModel*>(m_mapSortProxy.sourceModel());
+    const QModelIndex sourceIndex = m_mapSortProxy.mapToSource(index);
     emit sourceModel->dataChanged( sourceIndex, sourceIndex );
-    m_mapViewUi.marbleThemeSelectView->scrollTo( m_mapViewUi.marbleThemeSelectView->currentIndex() );
+    index = m_mapViewUi.marbleThemeSelectView->currentIndex();
+    m_mapViewUi.marbleThemeSelectView->scrollTo(index);
 }
 
 void MapViewWidget::Private::toggleIconSize()
@@ -691,16 +691,10 @@ void MapViewWidget::Private::toggleIconSize()
     m_settings.setValue("MapView/iconSize", m_mapViewUi.marbleThemeSelectView->iconSize() );
 }
 
-bool MapViewWidget::Private::isCurrentFavorite()
+bool MapViewWidget::Private::isCurrentFavorite() const
 {
     const QModelIndex index = m_mapViewUi.marbleThemeSelectView->currentIndex();
-    const QModelIndex nameIndex = m_mapSortProxy.index( index.row(), 0 );
-
-    m_settings.beginGroup( "Favorites" );
-    const bool isFavorite = m_settings.contains( m_mapSortProxy.data( nameIndex ).toString() );
-    m_settings.endGroup();
-
-    return isFavorite;
+    return m_settings.contains(favoriteKey(index));
 }
 
 }
