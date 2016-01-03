@@ -676,6 +676,11 @@ void MapViewWidget::Private::toggleFavorite()
         m_settings.setValue( m_mapSortProxy.data( columnIndex ).toString(), QDateTime::currentDateTime() );
     }
     m_settings.endGroup();
+
+    QStandardItemModel* sourceModel = (QStandardItemModel*)m_mapSortProxy.sourceModel();
+    const QModelIndex sourceIndex = m_mapSortProxy.mapToSource( columnIndex );
+    emit sourceModel->dataChanged( sourceIndex, sourceIndex );
+    m_mapViewUi.marbleThemeSelectView->scrollTo( m_mapViewUi.marbleThemeSelectView->currentIndex() );
 }
 
 void MapViewWidget::Private::toggleIconSize()
