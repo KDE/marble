@@ -62,8 +62,8 @@ QDir OsmTileClusterRenderer::checkAndCreateDirectory( int const tileX ) const
 
 void OsmTileClusterRenderer::initMapSources()
 {
-    QVector<ReadOnlyMapDefinition>::const_iterator pos = m_mapSourceDefinitions.begin();
-    QVector<ReadOnlyMapDefinition>::const_iterator const end = m_mapSourceDefinitions.end();
+    QVector<ReadOnlyMapDefinition>::const_iterator pos = m_mapSourceDefinitions.constBegin();
+    QVector<ReadOnlyMapDefinition>::const_iterator const end = m_mapSourceDefinitions.constEnd();
     for (; pos != end; ++pos )
     {
         ReadOnlyMapImage * const mapImage = (*pos).createReadOnlyMap();
