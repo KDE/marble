@@ -154,8 +154,8 @@ int main(int argc, char *argv[])
                         << "            <LineString> \n"
                         << "                <coordinates> \n";
                 }
-                QHash<int, QPair<qreal, qreal> >::const_iterator j = hash.find( starIndexes.at(i).toInt() );
-                while( j != hash.end() && j.key() == starIndexes.at(i).toInt() ) {
+                QHash<int, QPair<qreal, qreal> >::const_iterator j = hash.constFind( starIndexes.at(i).toInt() );
+                while( j != hash.constEnd() && j.key() == starIndexes.at(i).toInt() ) {
                     out << "                " << j.value().first << "," << j.value().second << " \n";
                     x.append( cos( j.value().first * DEG2RAD ) * cos( j.value().second * DEG2RAD ) );
                     y.append( sin( j.value().first * DEG2RAD ) * cos( j.value().second * DEG2RAD ) );
