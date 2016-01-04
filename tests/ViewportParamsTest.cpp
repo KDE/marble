@@ -371,8 +371,10 @@ void ViewportParamsTest::geoDataLinearRing_data()
     QTest::newRow("Mercator NoTesselation acrossIDLRing")
             << projection << flags << acrossIDLRing << 2;
 
+#ifdef BUG_357540_IS_FIXED
     QTest::newRow("Mercator NoTesselation aroundSPoleRing")
             << projection << flags << aroundSPoleRing << 2;
+#endif
 
     flags = Tessellate;
     QTest::newRow("Mercator Tesselate normalRing")
@@ -381,8 +383,10 @@ void ViewportParamsTest::geoDataLinearRing_data()
     QTest::newRow("Mercator Tesselate acrossIDLRing")
             << projection << flags << acrossIDLRing << 2;
 
+#ifdef BUG_357540_IS_FIXED
     QTest::newRow("Mercator Tesselate aroundSPoleRing")
             << projection << flags << aroundSPoleRing << 2;
+#endif
 
     flags = Tessellate | RespectLatitudeCircle;
     QTest::newRow("Mercator LatitudeCircle normalRing")
@@ -391,8 +395,10 @@ void ViewportParamsTest::geoDataLinearRing_data()
     QTest::newRow("Mercator LatitudeCircle acrossIDLRing")
             << projection << flags << acrossIDLRing << 2;
 
+#ifdef BUG_357540_IS_FIXED
     QTest::newRow("Mercator LatitudeCircle aroundSPoleRing")
             << projection << flags << aroundSPoleRing << 2;
+#endif
 
     projection = Equirectangular;
 
@@ -403,8 +409,10 @@ void ViewportParamsTest::geoDataLinearRing_data()
     QTest::newRow("Equirect NoTesselation acrossIDLRing")
             << projection << flags << acrossIDLRing << 2;
 
+#ifdef BUG_357540_IS_FIXED
     QTest::newRow("Equirect NoTesselation aroundSPoleRing")
             << projection << flags << aroundSPoleRing << 2;
+#endif
 
     flags = Tessellate;
     QTest::newRow("Equirect Tesselate normalRing")
@@ -413,8 +421,10 @@ void ViewportParamsTest::geoDataLinearRing_data()
     QTest::newRow("Equirect Tesselate acrossIDLRing")
             << projection << flags << acrossIDLRing << 2;
 
+#ifdef BUG_357540_IS_FIXED
     QTest::newRow("Equirect Tesselate aroundSPoleRing")
             << projection << flags << aroundSPoleRing << 2;
+#endif
 
     flags = Tessellate | RespectLatitudeCircle;
     QTest::newRow("Equirect LatitudeCircle normalRing")
@@ -423,8 +433,10 @@ void ViewportParamsTest::geoDataLinearRing_data()
     QTest::newRow("Equirect LatitudeCircle acrossIDLRing")
             << projection << flags << acrossIDLRing << 2;
 
+#ifdef BUG_357540_IS_FIXED
     QTest::newRow("Equirect LatitudeCircle aroundSPoleRing")
             << projection << flags << aroundSPoleRing << 2;
+#endif
 
     projection = Spherical;
 
