@@ -164,7 +164,7 @@ void RouteSimulationPositionProviderPlugin::update()
             //Assume the car's moving at 25 m/s. The distance moved will be speed*time which is equal to the speed of the car if time is equal to one.
             //If the function isn't called once exactly after a second, multiplying by the time will compensate for the error and maintain the speed.
 
-            double_t fraction = 25*time/(distanceSphere( m_currentPosition, newPosition )* m_marbleModel->planetRadius());
+            double fraction = 25*time/(distanceSphere( m_currentPosition, newPosition )* m_marbleModel->planetRadius());
 
             //Interpolate and find the next point to move to if needed.
             if(fraction>0 && fraction <1){
