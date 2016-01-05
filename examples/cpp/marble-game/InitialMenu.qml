@@ -22,7 +22,7 @@ Rectangle {
     property real spacingFraction: 1/10
 
     signal gameMenuButtonClicked()
-    signal browseMapButtonClicked()
+    signal browseButtonClicked()
 
     id: buttonArea
     objectName: "buttonArea"

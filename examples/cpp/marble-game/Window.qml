@@ -38,7 +38,7 @@ Rectangle {
         onGameMenuButtonClicked: {
             stackContainer.push(gameOptions);
         }
-        onBrowseMapButtonClicked: {
+        onBrowseButtonClicked: {
             browseMapButtonClicked();
             stackContainer.pop(gameOptions);
         }
