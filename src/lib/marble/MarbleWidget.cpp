@@ -969,6 +969,13 @@ ViewContext MarbleWidget::viewContext() const
 
 void MarbleWidget::setViewContext( ViewContext viewContext )
 {
+    // Inform routing layer about view context change. If not done,
+    // the routing layer causes severe performance problems when dragging the
+    // map. So either do not remove this line, or keep a similar call in place
+    // when you refactor it and test your changes wrt drag performance at
+    // high zoom level with long routes!
+    d->m_routingLayer->setViewContext( viewContext );
+
     d->m_map.setViewContext( viewContext );
 }
 
