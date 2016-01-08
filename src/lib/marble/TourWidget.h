@@ -17,7 +17,7 @@
 #include <QWidget>
 #include <QStyledItemDelegate>
 #include <QListView>
-#include <GeoDataCoordinates.h>
+#include "GeoDataCoordinates.h"
 
 class QItemSelection;
 class QModelIndex;
