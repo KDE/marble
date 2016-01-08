@@ -32,7 +32,7 @@
 
 #include "GeoDataContainer.h"
 #include "GeoDocument.h"
-#include <GeoDataStyle.h>
+#include "GeoDataStyle.h"
 
 namespace Marble
 {

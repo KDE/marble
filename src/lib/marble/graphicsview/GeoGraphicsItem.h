@@ -14,7 +14,7 @@
 
 // Marble
 #include "marble_export.h"
-#include <GeoDataStyle.h>
+#include "GeoDataStyle.h"
 
 class QString;
 
