@@ -104,7 +104,8 @@ RouteSimulationPositionProviderPlugin::RouteSimulationPositionProviderPlugin( Ma
     m_status( PositionProviderStatusUnavailable ),
     m_currentDateTime(),
     m_speed( 0.0 ),
-    m_direction( 0.0 )
+    m_direction( 0.0 ),
+    m_directionWithNoise(0.0)
 {
     // nothing to do
 }
@@ -136,7 +137,7 @@ qreal RouteSimulationPositionProviderPlugin::speed() const
 
 qreal RouteSimulationPositionProviderPlugin::direction() const
 {
-    return m_direction;
+    return m_directionWithNoise;
 }
 
 QDateTime RouteSimulationPositionProviderPlugin::timestamp() const
@@ -232,6 +233,7 @@ void RouteSimulationPositionProviderPlugin::update()
             }
 
             m_direction = m_currentPosition.bearing( newPosition, GeoDataCoordinates::Degree, GeoDataCoordinates::FinalBearing );
+            m_directionWithNoise = addNoise(m_direction);
         }
         m_currentPosition = newPosition;
         m_currentPositionWithNoise = addNoise(m_currentPosition, accuracy());
@@ -256,9 +258,15 @@ void RouteSimulationPositionProviderPlugin::update()
 
 GeoDataCoordinates RouteSimulationPositionProviderPlugin::addNoise(const Marble::GeoDataCoordinates &position, const Marble::GeoDataAccuracy &accuracy ) const
 {
-    qreal randomBearing = fmod(qrand(), M_PI);
-    qreal randomDistance = fmod(qrand(), accuracy.horizontal / m_marbleModel->planetRadius());
+    qreal randomBearing = static_cast<qreal>(qrand()) / (static_cast<qreal>(RAND_MAX/M_PI));
+    qreal randomDistance = static_cast<qreal>(qrand()) / (static_cast<qreal>(RAND_MAX/(accuracy.horizontal / 2.0 / m_marbleModel->planetRadius())));
     return position.moveByBearing(randomBearing, randomDistance);
+}
+
+qreal RouteSimulationPositionProviderPlugin::addNoise(qreal bearing) const
+{
+    qreal const maxBearingError = 30.0;
+    return bearing + static_cast<qreal>(qrand()) / (static_cast<qreal>(RAND_MAX/maxBearingError/2.0)) - maxBearingError / 2.0;
 }
 
 } // namespace Marble

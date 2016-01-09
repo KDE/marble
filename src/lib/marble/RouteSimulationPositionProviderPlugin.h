@@ -62,6 +62,7 @@ private Q_SLOTS:
 
 private:
     GeoDataCoordinates addNoise(const Marble::GeoDataCoordinates &,const Marble::GeoDataAccuracy &) const;
+    qreal addNoise(qreal bearing) const;
 
     MarbleModel *const m_marbleModel;
     int m_currentIndex;
@@ -73,6 +74,7 @@ private:
     QDateTime m_currentDateTime;
     qreal m_speed;
     qreal m_direction;
+    qreal m_directionWithNoise;
 };
 
 }
