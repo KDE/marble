@@ -61,12 +61,15 @@ private Q_SLOTS:
     void update();
 
 private:
+    GeoDataCoordinates addNoise(const Marble::GeoDataCoordinates &,const Marble::GeoDataAccuracy &) const;
+
     MarbleModel *const m_marbleModel;
     int m_currentIndex;
     PositionProviderStatus m_status;
     GeoDataLineString m_lineString;
     GeoDataLineString m_lineStringInterpolated;
     GeoDataCoordinates m_currentPosition;
+    GeoDataCoordinates m_currentPositionWithNoise;
     QDateTime m_currentDateTime;
     qreal m_speed;
     qreal m_direction;

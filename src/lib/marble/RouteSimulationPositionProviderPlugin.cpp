@@ -82,7 +82,7 @@ PositionProviderStatus RouteSimulationPositionProviderPlugin::status() const
 
 GeoDataCoordinates RouteSimulationPositionProviderPlugin::position() const
 {
-    return m_currentPosition;
+    return m_currentPositionWithNoise;
 }
 
 GeoDataAccuracy RouteSimulationPositionProviderPlugin::accuracy() const
@@ -234,6 +234,7 @@ void RouteSimulationPositionProviderPlugin::update()
             m_direction = m_currentPosition.bearing( newPosition, GeoDataCoordinates::Degree, GeoDataCoordinates::FinalBearing );
         }
         m_currentPosition = newPosition;
+        m_currentPositionWithNoise = addNoise(m_currentPosition, accuracy());
         m_currentDateTime = newDateTime;
         emit positionChanged( position(), accuracy() );
     }
@@ -242,6 +243,7 @@ void RouteSimulationPositionProviderPlugin::update()
         m_currentIndex = 0;
         m_lineStringInterpolated = m_lineString;
         m_currentPosition = GeoDataCoordinates();	//Reset The current position so that the the simulation starts from the correct starting point.
+        m_currentPositionWithNoise = GeoDataCoordinates();
         m_speed = 0;
         if ( m_status != PositionProviderStatusUnavailable ) {
             m_status = PositionProviderStatusUnavailable;
@@ -250,6 +252,13 @@ void RouteSimulationPositionProviderPlugin::update()
     }
 
     QTimer::singleShot( 1000.0 / c_frequency, this, SLOT(update()) );
+}
+
+GeoDataCoordinates RouteSimulationPositionProviderPlugin::addNoise(const Marble::GeoDataCoordinates &position, const Marble::GeoDataAccuracy &accuracy ) const
+{
+    qreal randomBearing = fmod(qrand(), M_PI);
+    qreal randomDistance = fmod(qrand(), accuracy.horizontal / m_marbleModel->planetRadius());
+    return position.moveByBearing(randomBearing, randomDistance);
 }
 
 } // namespace Marble
