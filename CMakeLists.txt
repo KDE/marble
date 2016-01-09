@@ -170,17 +170,17 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL Android)
       set(plugin_dir "${CMAKE_INSTALL_PREFIX}/assets/plugins")
       set(data_dir "${CMAKE_INSTALL_PREFIX}/assets/data")
 else() # Linux / bsd etc...
-      set(data_dir ${CMAKE_INSTALL_PREFIX}/share/marble/data)
+      set(data_dir ${CMAKE_INSTALL_FULL_DATAROOTDIR}/marble/data)
       set(plugin_dir ${CMAKE_INSTALL_FULL_LIBDIR}/marble/plugins)
-      set(CMAKE_MODULES_INSTALL_PATH ${CMAKE_INSTALL_PREFIX}/share/marble/cmake)
+      set(CMAKE_MODULES_INSTALL_PATH ${CMAKE_INSTALL_FULL_DATAROOTDIR}/marble/cmake)
 endif()
 
 if(NOT ICON_INSTALL_DIR)
-  set(ICON_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/share/icons)
+	set(ICON_INSTALL_DIR ${CMAKE_INSTALL_FULL_DATAROOTDIR}/icons)
 endif(NOT ICON_INSTALL_DIR)
 
 if(NOT APPS_INSTALL_DIR)
-  set(APPS_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/share/applications)
+	set(APPS_INSTALL_DIR ${CMAKE_INSTALL_FULL_DATAROOTDIR}/applications)
 endif(NOT APPS_INSTALL_DIR)
 
 if (NOT MARBLE_DATA_PATH)
@@ -298,7 +298,7 @@ endif()
 ####################################################
 # Install extra files
 install(FILES LICENSE.txt DESTINATION ${MARBLE_DATA_INSTALL_PATH})
-install(FILES marble.appdata.xml DESTINATION ${CMAKE_INSTALL_PREFIX}/share/appdata/)
+install(FILES marble.appdata.xml DESTINATION ${CMAKE_INSTALL_FULL_DATAROOTDIR}/appdata/)
 
 ####################################################
 # Install CMake module
