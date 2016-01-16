@@ -26,7 +26,6 @@ namespace Marble
 
 class MarbleModel;
 class PluginManager;
-class ParsingTask;
 
 class MARBLE_EXPORT ParsingRunnerManager : public QObject
 {
@@ -64,7 +63,7 @@ Q_SIGNALS:
     void parsingFinished();
 
 private:
-    Q_PRIVATE_SLOT( d, void cleanupParsingTask( ParsingTask *task ) )
+    Q_PRIVATE_SLOT( d, void cleanupParsingTask() )
     Q_PRIVATE_SLOT( d, void addParsingResult( GeoDataDocument *document, const QString &error ) )
 
     class Private;

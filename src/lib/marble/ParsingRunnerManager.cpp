@@ -23,6 +23,7 @@
 #include <QList>
 #include <QThreadPool>
 #include <QTimer>
+#include <QMutex>
 
 namespace Marble
 {
@@ -36,18 +37,20 @@ public:
 
     ~Private();
 
-    void cleanupParsingTask( ParsingTask *task );
+    void cleanupParsingTask();
     void addParsingResult(GeoDataDocument *document, const QString &error);
 
     ParsingRunnerManager *const q;
     const PluginManager *const m_pluginManager;
-    QList<ParsingTask *> m_parsingTasks;
+    QMutex m_parsingTasksMutex;
+    int m_parsingTasks;
     GeoDataDocument *m_fileResult;
 };
 
 ParsingRunnerManager::Private::Private( ParsingRunnerManager *parent, const PluginManager *pluginManager ) :
     q( parent ),
     m_pluginManager( pluginManager ),
+    m_parsingTasks(0),
     m_fileResult( 0 )
 {
     qRegisterMetaType<GeoDataDocument*>( "GeoDataDocument*" );
@@ -58,16 +61,11 @@ ParsingRunnerManager::Private::~Private()
     // nothing to do
 }
 
-void ParsingRunnerManager::Private::cleanupParsingTask( ParsingTask *finishedTask )
+void ParsingRunnerManager::Private::cleanupParsingTask()
 {
-    for (int i=m_parsingTasks.size()-1; i>=0; --i) {
-        if (m_parsingTasks[i] == finishedTask) {
-            m_parsingTasks[i]->deleteLater();
-            m_parsingTasks.removeAt(i);
-        }
-    }
-
-    if ( m_parsingTasks.isEmpty() ) {
+    QMutexLocker locker(&m_parsingTasksMutex);
+    m_parsingTasks = qMax(0, m_parsingTasks-1);
+    if (m_parsingTasks == 0) {
         emit q->parsingFinished();
     }
 }
@@ -93,22 +91,20 @@ void ParsingRunnerManager::parseFile( const QString &fileName, DocumentRole role
     const QString suffix = fileInfo.suffix().toLower();
     const QString completeSuffix = fileInfo.completeSuffix().toLower();
 
+    d->m_parsingTasks = 0;
     foreach( const ParseRunnerPlugin *plugin, plugins ) {
         QStringList const extensions = plugin->fileExtensions();
         if ( extensions.isEmpty() || extensions.contains( suffix ) || extensions.contains( completeSuffix ) ) {
             ParsingTask *task = new ParsingTask( plugin->newRunner(), this, fileName, role );
-            connect( task, SIGNAL(finished(ParsingTask*)), this, SLOT(cleanupParsingTask(ParsingTask*)) );
+            connect( task, SIGNAL(finished()), this, SLOT(cleanupParsingTask()) );
             mDebug() << "parse task " << plugin->nameId() << " " << (quintptr)task;
-            d->m_parsingTasks << task;
+            ++d->m_parsingTasks;
+            QThreadPool::globalInstance()->start( task );
         }
     }
 
-    foreach ( ParsingTask *task, d->m_parsingTasks ) {
-        QThreadPool::globalInstance()->start( task );
-    }
-
-    if ( d->m_parsingTasks.isEmpty() ) {
-        d->cleanupParsingTask( 0 );
+    if (d->m_parsingTasks == 0) {
+        emit parsingFinished();
     }
 }
 
