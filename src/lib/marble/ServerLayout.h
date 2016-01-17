@@ -40,6 +40,11 @@ public:
      */
     virtual QString name() const = 0;
 
+    /**
+     * Returns the sourceDir of the texture layer, or an empty string if the texture layer is 0
+     */
+    QString sourceDir() const;
+
 protected:
     GeoSceneTileDataset *const m_textureLayer;
 };

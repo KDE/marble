@@ -38,9 +38,8 @@ MarbleServerLayout::MarbleServerLayout( GeoSceneTileDataset *textureLayer )
 
 QUrl MarbleServerLayout::downloadUrl( const QUrl &prototypeUrl, const TileId &id ) const
 {
-    const QString path = QString( "%1maps/%2/%3/%4/%4_%5.%6" )
+    const QString path = QString( "%1/%2/%3/%3_%4.%5" )
         .arg( prototypeUrl.path() )
-        .arg( m_textureLayer->sourceDir() )
         .arg( id.zoomLevel() )
         .arg( id.y(), tileDigits, 10, QChar('0') )
         .arg( id.x(), tileDigits, 10, QChar('0') )
@@ -55,6 +54,11 @@ QUrl MarbleServerLayout::downloadUrl( const QUrl &prototypeUrl, const TileId &id
 QString MarbleServerLayout::name() const
 {
     return "Marble";
+}
+
+QString ServerLayout::sourceDir() const
+{
+    return m_textureLayer ? m_textureLayer->sourceDir() : QString();
 }
 
 

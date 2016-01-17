@@ -222,8 +222,14 @@ void GeoSceneTileDataset::setProjection( const Projection projection )
 QUrl GeoSceneTileDataset::downloadUrl( const TileId &id ) const
 {
     // default download url
-    if ( m_downloadUrls.empty() )
-        return m_serverLayout->downloadUrl( QUrl( "http://files.kde.org/marble/" ), id );
+    if ( m_downloadUrls.empty() ) {
+        QUrl const defaultUrl = QUrl(QString("%1/%2")
+                                     .arg("https://maps.kde.org")
+                                     .arg(m_serverLayout->sourceDir()));
+        mDebug() << "No download URL specified for tiles stored in "
+                 << m_sourceDir << ", falling back to " << defaultUrl.toString();
+        return m_serverLayout->downloadUrl(defaultUrl, id);
+    }
 
     if ( m_nextUrl == m_downloadUrls.constEnd() )
         m_nextUrl = m_downloadUrls.constBegin();
