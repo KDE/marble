@@ -78,6 +78,7 @@ void MarbleDeclarativePlugin::registerTypes( const char *uri )
     qmlRegisterUncreatableType<BookmarksModel>( uri, 0, 20, "BookmarksModel", "Do not create" );
     qmlRegisterUncreatableType<Marble::AbstractFloatItem>( uri, 0, 20, "FloatItem", "Do not create" );
     qmlRegisterUncreatableType<Marble::RenderPlugin>( uri, 0, 20, "RenderPlugin", "Do not create" );
+    qmlRegisterUncreatableType<Marble::MarbleMap>( uri, 0, 20, "MarbleMap", "Do not create" );
 }
 
 void MarbleDeclarativePlugin::initializeEngine( QQmlEngine *engine, const char *)
