@@ -8,6 +8,7 @@ Notes:
   <mime-type type="application/x-gpx+xml">
     <!-- prevent txt/plain thumbnailer <sub-class-of type="application/xml"/> -->
     <comment>GPX geographic data</comment>
+    <comment xml:lang="ast">Datos xeográficos GPX</comment>
     <comment xml:lang="bg">Географски данни GPX</comment>
     <comment xml:lang="bs">GPX geografski podaci</comment>
     <comment xml:lang="ca">Dades geogràfiques GPX</comment>
@@ -63,7 +64,7 @@ Notes:
   <mime-type type="application/x-osm+xml">
     <!-- prevent txt/plain thumbnailer <sub-class-of type="application/xml"/> -->
     <comment>OSM Data</comment>
-    <comment xml:lang="ast">Datos OSM</comment>
+    <comment xml:lang="ast">Datos d'OSM</comment>
     <comment xml:lang="bg">Данни OSM</comment>
     <comment xml:lang="bs">OSM podaci</comment>
     <comment xml:lang="ca">Dades OSM</comment>
@@ -116,6 +117,7 @@ Notes:
   <mime-type type="application/x-esri-shape">
     <generic-icon name="application-vnd-google-earth-kml"/>
     <comment>ESRI Shapefile</comment>
+    <comment xml:lang="ast">Ficheru de formes ESRI</comment>
     <comment xml:lang="bg">Файл с форми ESRI</comment>
     <comment xml:lang="bs">ESRI datoteka s likovima</comment>
     <comment xml:lang="ca">Fitxers de formes ESRI</comment>
@@ -159,6 +161,7 @@ Notes:
   </mime-type>
   <mime-type type="application/x-esri-shape-index">
     <comment>ESRI Shapefile Index</comment>
+    <comment xml:lang="ast">Índiz de ficheros de formes ESRI</comment>
     <comment xml:lang="bg">Индекс на файл с форми ESRI</comment>
     <comment xml:lang="bs">ESRI indeks datoteka s likovima</comment>
     <comment xml:lang="ca">Índex del fitxer de formes ESRI</comment>
