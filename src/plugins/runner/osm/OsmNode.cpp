@@ -52,13 +52,24 @@ void OsmNode::create(GeoDataDocument *document) const
         qreal const lat = m_coordinates.latitude(GeoDataCoordinates::Degree);
         if (qAbs(lat) > 15) {
             /** @todo Should maybe auto-adjust to MarbleClock at some point */
-            QDate const date = QDate::currentDate();
+            int const month = QDate::currentDate().month();
+            QString season;
             bool const southernHemisphere = lat < 0;
-            QDate const autumnStart = QDate(date.year(), southernHemisphere ? 3 : 9, 15);
-            QDate const winterEnd = southernHemisphere ? QDate(date.year(), 8, 15) : QDate(date.year()+1, 2, 15);
-            if (date > autumnStart && date < winterEnd) {
-                QDate const autumnEnd = QDate(date.year(), southernHemisphere ? 5 : 11, 15);
-                QString const season = date < autumnEnd ? "autumn" : "winter";
+            if (southernHemisphere) {
+                if (month >= 3 && month <= 5) {
+                    season = "autumn";
+                } else if (month >= 6 && month <= 8) {
+                    season = "winter";
+                }
+            } else {
+                if (month >= 9 && month <= 11) {
+                    season = "autumn";
+                } else if (month == 12 || month == 1 || month == 2) {
+                    season = "winter";
+                }
+            }
+
+            if (!season.isEmpty()) {
                 GeoDataIconStyle iconStyle = placemark->style()->iconStyle();
                 QString const bitmap = QString("bitmaps/osmcarto/symbols/48/individual/tree-29-%1.png").arg(season);
                 iconStyle.setIconPath(MarbleDirs::path(bitmap));
@@ -66,7 +77,6 @@ void OsmNode::create(GeoDataDocument *document) const
                 GeoDataStyle::Ptr style(new GeoDataStyle(*placemark->style()));
                 style->setIconStyle(iconStyle);
                 placemark->setStyle(style);
-
             }
         }
     }
