@@ -26,6 +26,7 @@
 #include "MarbleDebug.h"
 #include "GeoDataTrack.h"
 #include "GeoDataModel.h"
+#include <QString>
 
 namespace Marble
 {
@@ -290,6 +291,30 @@ void GeoDataPlacemark::setGeometry( GeoDataGeometry *entry )
     p()->m_geometry = entry;
     p()->m_geometry->setParent( this );
 }
+
+
+QString GeoDataPlacemark::displayName() const
+{
+    if(hasOsmData()){
+        OsmPlacemarkData const &data= osmData();
+        QStringList user = QLocale::system().uiLanguages();
+        foreach (const QString &lang, user){
+            QString userPref = (lang).toLocal8Bit().constData();
+            for ( auto tagIter = data.tagsBegin(),end = data.tagsEnd(); tagIter != end; ++tagIter ){
+                if (tagIter.key().startsWith("name:")) {
+                    QString const tagLanguage = tagIter.key().mid(5);
+                    if (tagLanguage == userPref)
+                        return tagIter.value();
+                }
+            }
+        }
+    }
+
+    return name();
+
+}
+
+
 
 qreal GeoDataPlacemark::area() const
 {

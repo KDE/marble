@@ -556,7 +556,7 @@ bool PlacemarkLayout::layoutPlacemark( const GeoDataPlacemark *placemark, qreal 
     GeoDataStyle::ConstPtr style = placemark->style();
 
     QRectF labelRect;
-    if( !placemark->name().isEmpty() ) {
+    if( !placemark->displayName().isEmpty() ) {
         labelRect = roomForLabel( style, x, y, placemark->name() );
         if ( labelRect.isNull() ) {
             return false;

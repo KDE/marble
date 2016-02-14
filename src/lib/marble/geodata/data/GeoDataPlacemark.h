@@ -107,6 +107,11 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     const GeoDataGeometry* geometry() const;
 
     /**
+      * @brief displays the name of a place in the locale language of the user
+      */
+     QString displayName() const;
+
+    /**
      * Return the coordinates of the placemark as @p longitude,
      * @p latitude and @p altitude.
      */
