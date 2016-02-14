@@ -295,23 +295,23 @@ void GeoDataPlacemark::setGeometry( GeoDataGeometry *entry )
 
 QString GeoDataPlacemark::displayName() const
 {
-    if(hasOsmData()){
-        OsmPlacemarkData const &data= osmData();
-        QStringList user = QLocale::system().uiLanguages();
-        foreach (const QString &lang, user){
-            QString userPref = (lang).toLocal8Bit().constData();
-            for ( auto tagIter = data.tagsBegin(),end = data.tagsEnd(); tagIter != end; ++tagIter ){
+    if (hasOsmData()) {
+        OsmPlacemarkData const &data = osmData();
+        QStringList const uiLanguages = QLocale::system().uiLanguages();
+        foreach (const QString &uiLanguage, uiLanguages) {
+            QString const language = uiLanguage.toLocal8Bit().constData();
+            for (auto tagIter = data.tagsBegin(), end = data.tagsEnd(); tagIter != end; ++tagIter) {
                 if (tagIter.key().startsWith("name:")) {
                     QString const tagLanguage = tagIter.key().mid(5);
-                    if (tagLanguage == userPref)
+                    if (tagLanguage == language) {
                         return tagIter.value();
+                    }
                 }
             }
         }
     }
 
     return name();
-
 }
 
 
