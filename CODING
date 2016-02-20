@@ -121,14 +121,14 @@ parenthesis.  For example
 
 Correct:
 
-   if ( width > 100 ) {
+   if (width > 100) {
       setHeight( 200 );
    }
 
 
 Wrong:
 
-   if (width > 100) {
+   if(width > 100){
       setHeight(200);
    }
 
@@ -142,8 +142,8 @@ increase readability.
 
 Correct:
 
-   if ( very_long_sub_expression
-        && another_very_long_sub_expression )
+   if (very_long_sub_expression
+       && another_very_long_sub_expression)
    {
        doSomething();
        doSomethingElse();
@@ -151,8 +151,8 @@ Correct:
 
 Wrong:
 
-   if ( very_long_sub_expression
-        && another_very_long_sub_expression ) {
+   if (very_long_sub_expression
+       && another_very_long_sub_expression) {
        doSomething();
        doSomethingElse();
    }
