@@ -111,28 +111,6 @@ Exceptions
 The Marble coding style has a couple of exceptions to the foundation.
 
 
-Spaces and Parenthesis
-- - - - - - - - - - -
-
-Due to historic reasons, the coding style of Marble has one
-exception to the kdelibs style.  That exception is that we use the Qt
-way of using parenthesis, with a space inside both opening and closing
-parenthesis.  For example
-
-Correct:
-
-   if (width > 100) {
-      setHeight( 200 );
-   }
-
-
-Wrong:
-
-   if(width > 100){
-      setHeight(200);
-   }
-
-
 Braces After Multi-line Expressions
 - - - - - - - - - - - - - - - - - -
 
