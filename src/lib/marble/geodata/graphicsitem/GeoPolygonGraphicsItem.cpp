@@ -98,10 +98,11 @@ void GeoPolygonGraphicsItem::createDecorations()
     case GeoDataFeature::ReligionSikh:
     {
         fake3D = m_polygon ? new GeoPolygonGraphicsItem( feature(), m_polygon ) : new GeoPolygonGraphicsItem( feature(), m_ring );
-        fake3D->setZValue(this->zValue() + s_decorationZValue);
         double const height = extractBuildingHeight(8.0);
         m_buildingHeight = qBound(1.0, height, 1000.0);
         fake3D->m_buildingHeight = m_buildingHeight;
+        setZValue(this->zValue() + m_buildingHeight);
+        fake3D->setZValue(this->zValue() + s_decorationZValue);
         Q_ASSERT(m_buildingHeight > 0.0);
     }
         break;
