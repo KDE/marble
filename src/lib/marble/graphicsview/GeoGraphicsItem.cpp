@@ -29,7 +29,6 @@ GeoGraphicsItem::GeoGraphicsItem( const GeoDataFeature *feature )
 
 GeoGraphicsItem::~GeoGraphicsItem()
 {
-    qDeleteAll< QList<GeoGraphicsItem*> >(d->m_decorations);
     delete d;
 }
 
@@ -41,9 +40,6 @@ bool GeoGraphicsItem::visible() const
 void GeoGraphicsItem::setVisible( bool visible )
 {
     setFlag( ItemIsVisible, visible );
-    foreach( GeoGraphicsItem* decoration, d->m_decorations ) {
-        decoration->setVisible( visible );
-    }
 }
 
 GeoGraphicsItem::GeoGraphicsItemFlags GeoGraphicsItem::flags() const
@@ -78,17 +74,11 @@ const GeoDataLatLonAltBox& GeoGraphicsItem::latLonAltBox() const
 void GeoGraphicsItem::setLatLonAltBox( const GeoDataLatLonAltBox& latLonAltBox )
 {
     d->m_latLonAltBox = latLonAltBox;
-    foreach( GeoGraphicsItem* decoration, d->m_decorations ) {
-        decoration->setLatLonAltBox( latLonAltBox );
-    }
 }
 
 void GeoGraphicsItem::setStyle( const GeoDataStyle::ConstPtr &style )
 {
     d->m_style = style;
-    foreach( GeoGraphicsItem* decoration, d->m_decorations ) {
-        decoration->setStyle( style );
-    }
 }
 
 void GeoGraphicsItem::setHighlightStyle( const GeoDataStyle::ConstPtr &highlightStyle)
@@ -98,9 +88,6 @@ void GeoGraphicsItem::setHighlightStyle( const GeoDataStyle::ConstPtr &highlight
      * and assign the new style @highlightStyle
      */
     d->m_highlightStyle = highlightStyle;
-    foreach( GeoGraphicsItem* decoration, d->m_decorations ) {
-        decoration->setHighlightStyle( highlightStyle );
-    }
 }
 
 GeoDataStyle::ConstPtr GeoGraphicsItem::style() const
@@ -128,14 +115,21 @@ void GeoGraphicsItem::setZValue( qreal z )
 void GeoGraphicsItem::setHighlighted( bool highlight )
 {
     d->m_highlighted = highlight;
-    foreach( GeoGraphicsItem* decoration, d->m_decorations ) {
-        decoration->setHighlighted( highlight );
-    }
 }
 
 bool GeoGraphicsItem::isHighlighted() const
 {
     return d->m_highlighted;
+}
+
+QStringList GeoGraphicsItem::paintLayers() const
+{
+    return d->m_paintLayers;
+}
+
+void GeoGraphicsItem::setPaintLayers(const QStringList &paintLayers)
+{
+    d->m_paintLayers = paintLayers;
 }
 
 int GeoGraphicsItem::minZoomLevel() const
@@ -146,39 +140,6 @@ int GeoGraphicsItem::minZoomLevel() const
 void GeoGraphicsItem::setMinZoomLevel(int zoomLevel)
 {
     d->m_minZoomLevel = zoomLevel;
-    foreach( GeoGraphicsItem* decoration, d->m_decorations ) {
-        decoration->setMinZoomLevel( zoomLevel );
-    }
-}
-
-const QList<GeoGraphicsItem*>& GeoGraphicsItem::decorations()
-{
-    if ( d->m_decorations.isEmpty() ) {
-        createDecorations();
-    }
-
-    return d->m_decorations;
-}
-
-void GeoGraphicsItem::addDecoration(GeoGraphicsItem* decoration)
-{
-    if (decoration != nullptr) {
-        decoration->d->m_isDecoration = true;
-
-        decoration->setLatLonAltBox(this->latLonAltBox());
-        decoration->setFlags(this->flags());
-        decoration->setHighlighted(this->isHighlighted());
-        decoration->setStyle(this->style());
-        decoration->setMinZoomLevel(this->minZoomLevel());
-        decoration->setVisible(this->visible());
-
-        d->m_decorations.append(decoration);
-    }
-}
-
-bool GeoGraphicsItem::isDecoration() const
-{
-    return d->m_isDecoration;
 }
 
 bool GeoGraphicsItem::zValueLessThan(GeoGraphicsItem *one, GeoGraphicsItem *two)
@@ -186,7 +147,3 @@ bool GeoGraphicsItem::zValueLessThan(GeoGraphicsItem *one, GeoGraphicsItem *two)
     return one->d->m_zValue < two->d->m_zValue;
 }
 
-void GeoGraphicsItem::createDecorations()
-{
-    return;
-}

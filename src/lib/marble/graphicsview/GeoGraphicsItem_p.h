@@ -28,7 +28,6 @@ class GeoGraphicsItemPrivate
           m_minZoomLevel( 0 ),
           m_feature( feature ),
           m_latLonAltBox(),
-          m_isDecoration( false ),
           m_highlighted( false )
     {
     }
@@ -45,8 +44,7 @@ class GeoGraphicsItemPrivate
     GeoDataLatLonAltBox m_latLonAltBox;
     GeoDataStyle::ConstPtr m_style;
 
-    bool m_isDecoration;
-    QList<GeoGraphicsItem*> m_decorations;
+    QStringList m_paintLayers;
 
     // To highlight a placemark
     bool m_highlighted;

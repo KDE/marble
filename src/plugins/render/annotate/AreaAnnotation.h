@@ -43,7 +43,7 @@ public:
      * @brief Paints the nodes on the screen and updates the regions which correspond
      * to each node using the given GeoPainter.
      */
-    virtual void paint( GeoPainter *painter, const ViewportParams *viewport );
+    virtual void paint( GeoPainter *painter, const ViewportParams *viewport, const QString &layer );
 
     /**
      * @brief Returns true if the given QPoint is contained by the current polygon. Note

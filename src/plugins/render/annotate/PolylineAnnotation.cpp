@@ -53,7 +53,7 @@ PolylineAnnotation::PolylineAnnotation( GeoDataPlacemark *placemark ) :
     m_virtualHoveredNode( -1 )
 
 {
-    // nothing to do
+    setPaintLayers(QStringList() << "PolylineAnnotation");
 }
 
 PolylineAnnotation::~PolylineAnnotation()
@@ -61,8 +61,9 @@ PolylineAnnotation::~PolylineAnnotation()
     delete m_animation;
 }
 
-void PolylineAnnotation::paint( GeoPainter *painter, const ViewportParams *viewport )
+void PolylineAnnotation::paint(GeoPainter *painter, const ViewportParams *viewport , const QString &layer)
 {
+    Q_UNUSED(layer);
     m_viewport = viewport;
     Q_ASSERT( placemark()->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType );
 

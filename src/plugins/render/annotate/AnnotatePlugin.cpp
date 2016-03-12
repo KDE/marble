@@ -241,7 +241,7 @@ bool AnnotatePlugin::render( GeoPainter *painter, ViewportParams *viewport, cons
 
     QListIterator<SceneGraphicsItem*> iter( m_graphicsItems );
     while ( iter.hasNext() ) {
-        iter.next()->paint( painter, viewport );
+        iter.next()->paint( painter, viewport, "Annotation" );
     }
 
     return true;

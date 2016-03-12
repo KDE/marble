@@ -76,21 +76,18 @@ public:
     QMap<qint64,OsmQueue> m_osmRelationItems;
 
 private:
-
     static void initializeDefaultValues();
+    static QString createPaintLayerOrder(const QString &itemType, GeoDataFeature::GeoDataVisualCategory visualCategory, const QString &subType = QString());
 
-    static int s_defaultZValues[GeoDataFeature::LastIndex];
     static int s_defaultMinZoomLevels[GeoDataFeature::LastIndex];
     static bool s_defaultValuesInitialized;
     static int s_maximumZoomLevel;
-    static const int s_defaultZValue;
 };
 
-int GeometryLayerPrivate::s_defaultZValues[GeoDataFeature::LastIndex];
 int GeometryLayerPrivate::s_defaultMinZoomLevels[GeoDataFeature::LastIndex];
 bool GeometryLayerPrivate::s_defaultValuesInitialized = false;
 int GeometryLayerPrivate::s_maximumZoomLevel = 0;
-const int GeometryLayerPrivate::s_defaultZValue = 50;
+QStringList s_paintLayerOrder;
 
 GeometryLayerPrivate::GeometryLayerPrivate( const QAbstractItemModel *model )
     : m_model( model )
@@ -101,6 +98,16 @@ GeometryLayerPrivate::GeometryLayerPrivate( const QAbstractItemModel *model )
 int GeometryLayerPrivate::maximumZoomLevel()
 {
     return s_maximumZoomLevel;
+}
+
+QString GeometryLayerPrivate::createPaintLayerOrder(const QString &itemType, GeoDataFeature::GeoDataVisualCategory visualCategory, const QString &subType)
+{
+    QString const category = GeoDataFeature::visualCategoryName(visualCategory);
+    if (subType.isEmpty()) {
+        return QString("%1/%2").arg(itemType).arg(category);
+    } else {
+        return QString("%1/%2/%3").arg(itemType).arg(category).arg(subType);
+    }
 }
 
 GeometryLayer::GeometryLayer( const QAbstractItemModel *model )
@@ -140,77 +147,91 @@ void GeometryLayerPrivate::initializeDefaultValues()
         return;
 
     for ( int i = 0; i < GeoDataFeature::LastIndex; i++ )
-        s_defaultZValues[i] = s_defaultZValue;
-
-    for ( int i = 0; i < GeoDataFeature::LastIndex; i++ )
         s_defaultMinZoomLevels[i] = 15;
 
-    s_defaultZValues[GeoDataFeature::None]                = 0;
+    for ( int i = GeoDataFeature::LanduseAllotments; i <= GeoDataFeature::LanduseVineyard; i++ ) {
+        if ((GeoDataFeature::GeoDataVisualCategory)i != GeoDataFeature::LanduseGrass) {
+            s_paintLayerOrder << createPaintLayerOrder("Polygon", (GeoDataFeature::GeoDataVisualCategory)i);
+        }
+    }
+    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::NaturalBeach);
+    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::NaturalWetland);
+    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::NaturalGlacier);
+    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::NaturalCliff);
+    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::NaturalPeak);
+    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::MilitaryDangerArea);
+    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::LeisurePark);
+    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::LeisurePitch);
+    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::LeisureSportsCentre);
+    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::LeisureStadium);
+    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::NaturalWood);
+    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::LanduseGrass);
+    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::LeisurePlayground);
+    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::NaturalScrub);
+    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::LeisureTrack);
+    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::TransportParking);
+    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::TransportParkingSpace);
+    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::ManmadeBridge);
+    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::BarrierCityWall);
 
-    //Amenity
-    s_defaultZValues[GeoDataFeature::AmenityGraveyard]    = s_defaultZValue - 12;
+    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::AmenityGraveyard);
 
-    s_defaultZValues[GeoDataFeature::EducationCollege]    = s_defaultZValue - 12;
-    s_defaultZValues[GeoDataFeature::EducationSchool]     = s_defaultZValue - 12;
-    s_defaultZValues[GeoDataFeature::EducationUniversity] = s_defaultZValue - 12;
-    s_defaultZValues[GeoDataFeature::HealthHospital]      = s_defaultZValue - 12;
+    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::EducationCollege);
+    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::EducationSchool);
+    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::EducationUniversity);
+    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::HealthHospital);
 
-    //Landuse
+    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::NaturalWater);
+    s_paintLayerOrder << createPaintLayerOrder("LineString", GeoDataFeature::NaturalWater);
+    for ( int i = GeoDataFeature::HighwaySteps; i <= GeoDataFeature::HighwayMotorway; i++ ) {
+        s_paintLayerOrder << createPaintLayerOrder("LineString", (GeoDataFeature::GeoDataVisualCategory)i, "outline");
+    }
+    for ( int i = GeoDataFeature::HighwaySteps; i <= GeoDataFeature::HighwayMotorway; i++ ) {
+        s_paintLayerOrder << createPaintLayerOrder("LineString", (GeoDataFeature::GeoDataVisualCategory)i, "inline");
+    }
+    for ( int i = GeoDataFeature::HighwaySteps; i <= GeoDataFeature::HighwayMotorway; i++ ) {
+        s_paintLayerOrder << createPaintLayerOrder("LineString", (GeoDataFeature::GeoDataVisualCategory)i, "label");
+    }
+    for ( int i = GeoDataFeature::RailwayRail; i <= GeoDataFeature::RailwayFunicular; i++ ) {
+        s_paintLayerOrder << createPaintLayerOrder("LineString", (GeoDataFeature::GeoDataVisualCategory)i, "outline");
+    }
+    for ( int i = GeoDataFeature::RailwayRail; i <= GeoDataFeature::RailwayFunicular; i++ ) {
+        s_paintLayerOrder << createPaintLayerOrder("LineString", (GeoDataFeature::GeoDataVisualCategory)i, "inline");
+    }
+    for ( int i = GeoDataFeature::RailwayRail; i <= GeoDataFeature::RailwayFunicular; i++ ) {
+        s_paintLayerOrder << createPaintLayerOrder("LineString", (GeoDataFeature::GeoDataVisualCategory)i, "label");
+    }
 
-    for ( int i = GeoDataFeature::LanduseAllotments; i <= GeoDataFeature::LanduseVineyard; i++ )
-        s_defaultZValues[(GeoDataFeature::GeoDataVisualCategory)i] = s_defaultZValue - 17;
+    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::TransportPlatform);
 
-    s_defaultZValues[GeoDataFeature::NaturalWood]         = s_defaultZValue - 15;
-    s_defaultZValues[GeoDataFeature::NaturalBeach]        = s_defaultZValue - 13;
-    s_defaultZValues[GeoDataFeature::NaturalWetland]      = s_defaultZValue - 13;
-    s_defaultZValues[GeoDataFeature::NaturalGlacier]      = s_defaultZValue - 10;
-    s_defaultZValues[GeoDataFeature::NaturalScrub]        = s_defaultZValue - 13;
-    s_defaultZValues[GeoDataFeature::NaturalWater]        = s_defaultZValue - 13;
-    s_defaultZValues[GeoDataFeature::NaturalCliff]        = s_defaultZValue - 13;
-    s_defaultZValues[GeoDataFeature::NaturalPeak]         = s_defaultZValue - 13;
+    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::AmenityGraveyard);
+    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::NaturalWood);
+    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::NaturalBeach);
+    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::NaturalWetland);
+    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::NaturalGlacier);
+    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::NaturalScrub);
+    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::LeisurePark);
+    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::LeisurePlayground);
+    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::LeisurePitch);
+    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::LeisureSportsCentre);
+    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::LeisureStadium);
+    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::LeisureTrack);
+    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::TransportParking);
+    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::ManmadeBridge);
+    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::BarrierCityWall);
+    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::NaturalWater);
+    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::NaturalCliff);
+    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::NaturalPeak);
+    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::EducationCollege);
+    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::EducationSchool);
+    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::EducationUniversity);
+    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::HealthHospital);
+    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::MilitaryDangerArea);
 
-    //Military
+    s_paintLayerOrder << "Polygon/Building/frame";
+    s_paintLayerOrder << "Polygon/Building/roof";
 
-    s_defaultZValues[GeoDataFeature::MilitaryDangerArea]  = s_defaultZValue - 10;
-
-    //Leisure
-
-    s_defaultZValues[GeoDataFeature::LeisurePark]         = s_defaultZValue - 14;
-    s_defaultZValues[GeoDataFeature::LeisurePlayground]   = s_defaultZValue - 13;
-    s_defaultZValues[GeoDataFeature::LeisurePitch]        = s_defaultZValue - 13;
-    s_defaultZValues[GeoDataFeature::LeisureSportsCentre] = s_defaultZValue - 13;
-    s_defaultZValues[GeoDataFeature::LeisureStadium]      = s_defaultZValue - 13;
-    s_defaultZValues[GeoDataFeature::LeisureTrack]        = s_defaultZValue - 13;
-
-    s_defaultZValues[GeoDataFeature::TransportParking]    = s_defaultZValue - 13;
-
-    s_defaultZValues[GeoDataFeature::ManmadeBridge]       = s_defaultZValue - 12;
-    s_defaultZValues[GeoDataFeature::BarrierCityWall]     = s_defaultZValue - 1;
-
-    s_defaultZValues[GeoDataFeature::HighwayUnknown]      = s_defaultZValue - 11;
-    s_defaultZValues[GeoDataFeature::HighwayPath]         = s_defaultZValue - 10;
-    s_defaultZValues[GeoDataFeature::HighwayTrack]        = s_defaultZValue - 9;
-    s_defaultZValues[GeoDataFeature::HighwaySteps]        = s_defaultZValue - 8;
-    s_defaultZValues[GeoDataFeature::HighwayFootway]      = s_defaultZValue - 8;
-    s_defaultZValues[GeoDataFeature::HighwayCycleway]     = s_defaultZValue - 8;
-    s_defaultZValues[GeoDataFeature::HighwayService]      = s_defaultZValue - 7;
-    s_defaultZValues[GeoDataFeature::HighwayResidential]  = s_defaultZValue - 7;
-    s_defaultZValues[GeoDataFeature::HighwayLivingStreet] = s_defaultZValue - 7;
-    s_defaultZValues[GeoDataFeature::HighwayPedestrian]   = s_defaultZValue - 6;
-    s_defaultZValues[GeoDataFeature::HighwayRoad]         = s_defaultZValue - 6;
-    s_defaultZValues[GeoDataFeature::HighwayUnclassified] = s_defaultZValue - 6;
-    s_defaultZValues[GeoDataFeature::HighwayTertiary]     = s_defaultZValue - 5;
-    s_defaultZValues[GeoDataFeature::HighwaySecondary]    = s_defaultZValue - 4;
-    s_defaultZValues[GeoDataFeature::HighwayPrimary]      = s_defaultZValue - 3;
-    s_defaultZValues[GeoDataFeature::HighwayTrunk]        = s_defaultZValue - 2;
-    s_defaultZValues[GeoDataFeature::HighwayMotorway]     = s_defaultZValue - 1;
-    s_defaultZValues[GeoDataFeature::RailwayRail]         = s_defaultZValue - 1;
-
-    s_defaultZValues[GeoDataFeature::HighwayTertiaryLink] = s_defaultZValues[GeoDataFeature::HighwayTertiary];
-    s_defaultZValues[GeoDataFeature::HighwaySecondaryLink]= s_defaultZValues[GeoDataFeature::HighwaySecondary];
-    s_defaultZValues[GeoDataFeature::HighwayPrimaryLink]  = s_defaultZValues[GeoDataFeature::HighwayPrimary];
-    s_defaultZValues[GeoDataFeature::HighwayTrunkLink]    = s_defaultZValues[GeoDataFeature::HighwayTrunk];
-    s_defaultZValues[GeoDataFeature::HighwayMotorwayLink] = s_defaultZValues[GeoDataFeature::HighwayMotorway];
+    Q_ASSERT(QSet<QString>::fromList(s_paintLayerOrder).size() == s_paintLayerOrder.size());
 
     s_defaultMinZoomLevels[GeoDataFeature::Default]             = 1;
     s_defaultMinZoomLevels[GeoDataFeature::NaturalWater]        = 8;
@@ -313,30 +334,44 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
     int maxZoomLevel = qMin<int>( qMax<int>( qLn( viewport->radius() *4 / 256 ) / qLn( 2.0 ), 1), GeometryLayerPrivate::maximumZoomLevel() );
     QList<GeoGraphicsItem*> items = d->m_scene.items( viewport->viewLatLonAltBox(), maxZoomLevel );
 
-    switch ( painter->mapQuality() ) {
-    case Marble::MapQuality::LowQuality :
-    case Marble::MapQuality::NormalQuality :
-    case Marble::MapQuality::HighQuality :
-    case Marble::MapQuality::PrintQuality :
-        for ( int i = 0, n = items.size(); i < n; ++i ) {
-            items << items[i]->decorations();
-        }
-
-        break;
-    default:
-        break;
-    }
-
-    // Needs sorting by z-value
-    qStableSort(items.begin(), items.end(), GeoGraphicsItem::zValueLessThan);
-
-    int painted = 0;
+    typedef QPair<QString, GeoGraphicsItem*> LayerItem;
+    QList<LayerItem> defaultLayer;
+    int paintedItems = 0;
+    QHash<QString, QList<GeoGraphicsItem*> > paintedFragments;
     foreach( GeoGraphicsItem* item, items )
     {
         if ( item->latLonAltBox().intersects( viewport->viewLatLonAltBox() ) ) {
-            item->paint( painter, viewport );
-            ++painted;
+            QStringList paintLayers = item->paintLayers();
+            if (paintLayers.isEmpty()) {
+                mDebug() << item << " provides no paint layers, so I force one onto it.";
+                paintLayers << QString();
+            }
+            foreach(const auto &layer, paintLayers) {
+                if (s_paintLayerOrder.contains(layer)) {
+                    paintedFragments[layer] << item;
+                } else {
+                    defaultLayer << LayerItem(layer, item);
+                    static QSet<QString> missingLayers;
+                    if (!missingLayers.contains(layer)) {
+                        mDebug() << "Missing layer " << layer << ", in render order, will render it on top";
+                        missingLayers << layer;
+                    }
+                }
+            }
+            ++paintedItems;
         }
+    }
+
+    QStringList paintedLayers = s_paintLayerOrder;
+    foreach(const QString &layer, paintedLayers) {
+        QList<GeoGraphicsItem*> & layerItems = paintedFragments[layer];
+        qStableSort(layerItems.begin(), layerItems.end(), GeoGraphicsItem::zValueLessThan);
+        foreach(auto item, layerItems) {
+            item->paint(painter, viewport, layer);
+        }
+    }
+    foreach(const auto & item, defaultLayer) {
+        item.second->paint(painter, viewport, item.first);
     }
 
     foreach( ScreenOverlayGraphicsItem* item, d->m_items ) {
@@ -346,7 +381,7 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
     painter->restore();
     d->m_runtimeTrace = QString( "Geometries: %1 Drawn: %2 Zoom: %3")
                 .arg( items.size() )
-                .arg( painted )
+                .arg( paintedItems )
                 .arg( maxZoomLevel );
     return true;
 }
@@ -446,7 +481,6 @@ void GeometryLayerPrivate::createGraphicsItemFromGeometry(const GeoDataGeometry*
         return;
     item->setStyle( placemark->style() );
     item->setVisible( placemark->isGloballyVisible() );
-    item->setZValue( s_defaultZValues[placemark->visualCategory()] );
     item->setMinZoomLevel( s_defaultMinZoomLevels[placemark->visualCategory()] );
     m_scene.addItem( item );
 }

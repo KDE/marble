@@ -629,6 +629,8 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
 
     static QSharedPointer<Marble::GeoDataStyle> presetStyle( GeoDataVisualCategory category );
 
+    static QString visualCategoryName(GeoDataVisualCategory category);
+
     virtual void detach();
 
  protected:

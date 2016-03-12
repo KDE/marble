@@ -16,6 +16,7 @@
 #include "GeoPainter.h"
 #include "ViewportParams.h"
 #include "GeoDataStyle.h"
+#include "MarbleDebug.h"
 
 namespace Marble
 {
@@ -25,22 +26,14 @@ GeoLineStringGraphicsItem::GeoLineStringGraphicsItem( const GeoDataFeature *feat
         : GeoGraphicsItem( feature ),
           m_lineString( lineString )
 {
+    QString const category = GeoDataFeature::visualCategoryName(feature->visualCategory());
+    QStringList paintLayers;
+    paintLayers << QString("LineString/%1/outline").arg(category);
+    paintLayers << QString("LineString/%1/inline").arg(category);
+    paintLayers << QString("LineString/%1/label").arg(category);
+    setPaintLayers(paintLayers);
 }
 
-
-const float GeoLineStringGraphicsItem::s_outlineZValue = -0.001;
-
-void GeoLineStringGraphicsItem::createDecorations()
-{
-    if ( style() != nullptr ) {
-        if ( style()->lineStyle().cosmeticOutline() ) {
-            GeoLineStringGraphicsItem* outline = new GeoLineStringGraphicsItem(this->feature(), this->m_lineString);
-            outline->setZValue(this->zValue() + s_outlineZValue);
-
-            this->addDecoration(outline);
-        }
-    }
-}
 
 void GeoLineStringGraphicsItem::setLineString( const GeoDataLineString* lineString )
 {
@@ -52,16 +45,88 @@ const GeoDataLatLonAltBox& GeoLineStringGraphicsItem::latLonAltBox() const
     return m_lineString->latLonAltBox();
 }
 
-void GeoLineStringGraphicsItem::paint( GeoPainter* painter, const ViewportParams* viewport )
+void GeoLineStringGraphicsItem::paint(GeoPainter* painter, const ViewportParams* viewport , const QString &layer)
+{
+    if (layer.endsWith("/outline")) {
+        paintOutline(painter, viewport);
+    } else if (layer.endsWith("/label")) {
+        paintLabel(painter, viewport);
+    } else if (layer.endsWith("/inline")) {
+        paintInline(painter, viewport);
+    } else {
+        painter->drawPolyline(*m_lineString);
+    }
+}
+
+void GeoLineStringGraphicsItem::paintInline(GeoPainter* painter, const ViewportParams* viewport)
 {
     if ( ( !viewport->resolves( m_lineString->latLonAltBox(), 2) ) ) {
         return;
     }
 
+    painter->save();
     LabelPositionFlags labelPositionFlags = NoLabel;
+    QPen currentPen = configurePainter(painter, viewport, labelPositionFlags);
+
+    if ( ! ( currentPen.widthF() < 2.5f ) ) {
+        if( style()->lineStyle().cosmeticOutline() &&
+            style()->lineStyle().penStyle() == Qt::SolidLine ) {
+            if ( currentPen.widthF() > 2.5f ) {
+                currentPen.setWidthF( currentPen.widthF() - 2.0f );
+            }
+            currentPen.setColor( style()->polyStyle().paintedColor() );
+            painter->setPen( currentPen );
+            painter->drawPolyline(*m_lineString);
+        } else {
+            painter->drawPolyline(*m_lineString);
+        }
+    }
+
+    painter->restore();
+}
+
+void GeoLineStringGraphicsItem::paintOutline(GeoPainter *painter, const ViewportParams *viewport)
+{
+    if ( ( !viewport->resolves( m_lineString->latLonAltBox(), 2) ) ) {
+        return;
+    }
 
     painter->save();
+    LabelPositionFlags labelPositionFlags = NoLabel;
+    QPen currentPen = configurePainter(painter, viewport, labelPositionFlags);
+    if (!( currentPen.widthF() < 2.5f )) {
+        painter->drawPolyline(*m_lineString);
+    }
+    painter->restore();
+}
 
+void GeoLineStringGraphicsItem::paintLabel(GeoPainter *painter, const ViewportParams *viewport)
+{
+    if ( ( !viewport->resolves( m_lineString->latLonAltBox(), 2) ) ) {
+        return;
+    }
+
+    painter->save();
+    LabelPositionFlags labelPositionFlags = NoLabel;
+    QPen currentPen = configurePainter(painter, viewport, labelPositionFlags);
+
+    if (!( currentPen.widthF() < 2.5f )) {
+        QPen pen(QColor(Qt::transparent));
+        pen.setWidthF(currentPen.widthF());
+        painter->setPen(pen);
+        QColor const color = style()->polyStyle().paintedColor();
+        painter->setBackground(QBrush(color));
+        painter->setBackgroundMode(Qt::OpaqueMode);
+        painter->drawPolyline( *m_lineString, feature()->name(), FollowLine,
+                               style()->labelStyle().paintedColor(),
+                               style()->labelStyle().font());
+    }
+
+    painter->restore();
+}
+
+QPen GeoLineStringGraphicsItem::configurePainter(GeoPainter *painter, const ViewportParams *viewport, LabelPositionFlags &labelPositionFlags) const
+{
     QPen currentPen = painter->pen();
     if ( !style() ) {
         painter->setPen( QPen() );
@@ -122,30 +187,7 @@ void GeoLineStringGraphicsItem::paint( GeoPainter* painter, const ViewportParams
         }
     }
 
-    if ( ! ( isDecoration() && currentPen.widthF() < 2.5f ) )
-    {
-        if( style()->lineStyle().cosmeticOutline() &&
-            style()->lineStyle().penStyle() == Qt::SolidLine ) {
-            if ( isDecoration() ) {
-                painter->drawPolyline( *m_lineString, "", NoLabel );
-            } else {
-                if ( currentPen.widthF() > 2.5f ) {
-                    currentPen.setWidthF( currentPen.widthF() - 2.0f );
-                }
-                currentPen.setColor( style()->polyStyle().paintedColor() );
-                painter->setPen( currentPen );
-                painter->drawPolyline( *m_lineString, feature()->name(), FollowLine,
-                                        style()->labelStyle().paintedColor(),
-                                        style()->labelStyle().font());
-            }
-        } else {
-            painter->drawPolyline( *m_lineString, feature()->name(), labelPositionFlags,
-                                   style()->labelStyle().paintedColor(),
-                                   style()->labelStyle().font() );
-        }
-    }
-
-    painter->restore();
+    return currentPen;
 }
 
 }

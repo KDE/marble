@@ -91,10 +91,12 @@ GroundOverlayFrame::GroundOverlayFrame( GeoDataPlacemark *placemark,
     m_rotateIcons.append( QImage( MarbleDirs::systemPath() + "/bitmaps/editarrows/arrow-vertical-active.png" ) );
 
     update();
+    setPaintLayers(QStringList() << "GroundOverlayFrame");
 }
 
-void GroundOverlayFrame::paint(GeoPainter *painter, const ViewportParams *viewport )
+void GroundOverlayFrame::paint(GeoPainter *painter, const ViewportParams *viewport , const QString &layer)
 {
+    Q_UNUSED(layer);
     m_viewport = viewport;
     m_regionList.clear();
 

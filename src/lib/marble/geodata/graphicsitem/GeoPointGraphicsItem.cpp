@@ -11,6 +11,7 @@
 #include "GeoPointGraphicsItem.h"
 
 #include "GeoPainter.h"
+#include "GeoDataFeature.h"
 
 namespace Marble
 {
@@ -18,6 +19,10 @@ namespace Marble
 GeoPointGraphicsItem::GeoPointGraphicsItem( const GeoDataFeature *feature )
         : GeoGraphicsItem( feature )
 {
+    if (feature) {
+        QString const paintLayer = QString("Point/%1").arg(GeoDataFeature::visualCategoryName(feature->visualCategory()));
+        setPaintLayers(QStringList() << paintLayer);
+    }
 }
 
 void GeoPointGraphicsItem::setPoint( const GeoDataPoint& point )
@@ -30,9 +35,10 @@ GeoDataPoint GeoPointGraphicsItem::point() const
     return m_point;
 }
 
-void GeoPointGraphicsItem::paint( GeoPainter* painter, const ViewportParams* viewport )
+void GeoPointGraphicsItem::paint(GeoPainter* painter, const ViewportParams* viewport , const QString &layer)
 {
-    Q_UNUSED( viewport );
+    Q_UNUSED(viewport);
+    Q_UNUSED(layer);
     painter->drawPoint( m_point );
 }
 

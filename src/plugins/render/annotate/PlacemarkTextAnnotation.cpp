@@ -42,6 +42,7 @@ PlacemarkTextAnnotation::PlacemarkTextAnnotation( GeoDataPlacemark *placemark ) 
         newStyle->iconStyle().setIconPath( MarbleDirs::path("bitmaps/redflag_22.png") );
         placemark->setStyle( newStyle );
     }
+    setPaintLayers(QStringList() << "PlacemarkTextAnnotation");
 }
 
 PlacemarkTextAnnotation::~PlacemarkTextAnnotation()
@@ -49,8 +50,9 @@ PlacemarkTextAnnotation::~PlacemarkTextAnnotation()
     // nothing to do
 }
 
-void PlacemarkTextAnnotation::paint( GeoPainter *painter, const ViewportParams *viewport )
+void PlacemarkTextAnnotation::paint( GeoPainter *painter, const ViewportParams *viewport, const QString &layer )
 {
+    Q_UNUSED(layer);
     Q_UNUSED( painter );
     m_viewport = viewport;
 

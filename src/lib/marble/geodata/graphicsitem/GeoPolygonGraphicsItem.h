@@ -32,19 +32,24 @@ public:
 
     virtual const GeoDataLatLonAltBox& latLonAltBox() const;
 
-    virtual void paint( GeoPainter* painter, const ViewportParams *viewport );
-
-protected:
-    virtual void createDecorations();
+    void paint(GeoPainter* painter, const ViewportParams *viewport, const QString &layer);
 
 private:
+    void paintFrame( GeoPainter* painter, const ViewportParams *viewport );
+    void paintRoof( GeoPainter* painter, const ViewportParams *viewport );
+
     QPointF buildingOffset(const QPointF &point, const ViewportParams *viewport, bool* isCameraAboveBuilding=0) const;
     double extractBuildingHeight(double defaultValue) const;
-    void screenPolygons(const ViewportParams *viewport, const GeoDataPolygon* polygon, QVector<QPolygonF*> &polygons,  QVector<QPolygonF*> &outlines);
+    void screenPolygons(const ViewportParams *viewport, const GeoDataPolygon* polygon, QVector<QPolygonF*> &polygons,  QVector<QPolygonF*> &outlines) const;
+    QPen configurePainter(GeoPainter* painter, const ViewportParams *viewport, bool isBuildingFrame);
+    void determineBuildingHeight();
+    void initializeBuildingPainting(const GeoPainter* painter, const ViewportParams *viewport,
+                                    bool &drawAccurate3D, bool &isCameraAboveBuilding, bool &hasInnerBoundaries,
+                                    QVector<QPolygonF*>& outlinePolygons,
+                                    QVector<QPolygonF*>& innerPolygons) const;
 
     const GeoDataPolygon *const m_polygon;
     const GeoDataLinearRing *const m_ring;
-    static const float s_decorationZValue;
     double m_buildingHeight;
     QString m_cachedTexturePath;
     QColor m_cachedTextureColor;

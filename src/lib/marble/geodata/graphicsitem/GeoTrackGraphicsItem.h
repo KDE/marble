@@ -26,7 +26,7 @@ public:
 
     void setTrack( const GeoDataTrack *track );
 
-    virtual void paint( GeoPainter *painter, const ViewportParams *viewport );
+    virtual void paint(GeoPainter *painter, const ViewportParams *viewport, const QString &layer);
 
 private:
     const GeoDataTrack *m_track;

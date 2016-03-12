@@ -126,31 +126,18 @@ class MARBLE_EXPORT GeoGraphicsItem
      * Note that depending on the projection and zoom level, the item may be visible more than once,
      * which is taken care of by GeoPainter.
      */
-    virtual void paint( GeoPainter *painter, const ViewportParams *viewport ) = 0;
+    virtual void paint(GeoPainter *painter, const ViewportParams *viewport, const QString &layer) = 0;
 
     void setHighlighted( bool highlight );
 
     bool isHighlighted() const;
 
-    const QList<GeoGraphicsItem*>& decorations();
+    QStringList paintLayers() const;
 
-    bool isDecoration() const;
+    void setPaintLayers(const QStringList &paintLayers);
 
  protected:
     GeoGraphicsItemPrivate *const d;
-
-    /**
-     * Creates a new decoration for this item.
-     *
-     * Override this function to create a new type of decoration,
-     * e.g. outlines for lines or "fake 3D effect" for polygons.
-     * After a decoration was created add it to the item with
-     * addDecoration(). You can create multiple decoration for a
-     * single GeoGraphicsItem.
-     */
-    virtual void createDecorations();
-
-    void addDecoration(GeoGraphicsItem* decoration);
 };
 
 } // Namespace Marble

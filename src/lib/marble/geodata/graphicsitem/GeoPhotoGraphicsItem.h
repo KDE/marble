@@ -29,7 +29,7 @@ public:
 
     GeoDataPoint point() const;
 
-    virtual void paint( GeoPainter* painter, const ViewportParams *viewport );
+    virtual void paint(GeoPainter* painter, const ViewportParams *viewport, const QString &layer);
 
     virtual const GeoDataLatLonAltBox& latLonAltBox() const;
 

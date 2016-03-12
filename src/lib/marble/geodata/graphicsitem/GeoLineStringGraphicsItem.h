@@ -29,13 +29,18 @@ public:
 
     virtual const GeoDataLatLonAltBox& latLonAltBox() const;
 
-    virtual void paint( GeoPainter* painter, const ViewportParams *viewport );
+
+    void paint(GeoPainter* painter, const ViewportParams *viewport, const QString &layer);
 
 protected:
     const GeoDataLineString *m_lineString;
-    static const float s_outlineZValue;
 
-    virtual void createDecorations();
+private:
+    void paintOutline(GeoPainter *painter, const ViewportParams *viewport);
+    void paintInline(GeoPainter *painter, const ViewportParams *viewport);
+    void paintLabel(GeoPainter *painter, const ViewportParams *viewport);
+
+    QPen configurePainter(GeoPainter* painter, const ViewportParams *viewport, LabelPositionFlags &labelPositionFlags) const;
 };
 
 }

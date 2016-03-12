@@ -12,6 +12,7 @@
 
 #include "GeoPainter.h"
 #include "GeoDataStyle.h"
+#include "GeoDataFeature.h"
 #include "ViewportParams.h"
 
 #include <QImageReader>
@@ -24,10 +25,15 @@ namespace Marble
 GeoPhotoGraphicsItem::GeoPhotoGraphicsItem( const GeoDataFeature *feature )
     : GeoGraphicsItem( feature )
 {
+    if (feature) {
+        QString const paintLayer = QString("Photo/%1").arg(GeoDataFeature::visualCategoryName(feature->visualCategory()));
+        setPaintLayers(QStringList() << paintLayer);
+    }
 }
 
-void GeoPhotoGraphicsItem::paint( GeoPainter* painter, const ViewportParams* viewport )
+void GeoPhotoGraphicsItem::paint(GeoPainter* painter, const ViewportParams* viewport , const QString &layer)
 {
+    Q_UNUSED(layer);
     /* The code below loads the image lazily (only
     * when it will actually be displayed). Once it was
     * loaded but moves out of the viewport, it is unloaded
