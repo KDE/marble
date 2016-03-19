@@ -113,14 +113,20 @@ ReadOnlyMapDefinition parseInput( char * subopts )
         TheEnd
     };
 
+    char optionType[] = "type";
+    char optionBaseDirectory[] = "base-directory";
+    char optionFile[] = "file";
+    char optionTileLevel[] = "tile-level";
+    char optionInterpolationMethod[] = "interpolation-method";
+    char optionCacheSize[] = "cache-size";
     char * const input_opts[] =
     {
-        "type",
-        "base-directory",
-        "file",
-        "tile-level",
-        "interpolation-method",
-        "cache-size",
+        optionType,
+        optionBaseDirectory,
+        optionFile,
+        optionTileLevel,
+        optionInterpolationMethod,
+        optionCacheSize,
         NULL
     };
 
