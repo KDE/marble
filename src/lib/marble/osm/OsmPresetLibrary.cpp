@@ -530,6 +530,7 @@ bool OsmPresetLibrary::isAreaTag(const QString &keyValue)
         s_areaTags.insert( "amenity=graveyard" );
         s_areaTags.insert( "amenity=parking" );
         s_areaTags.insert( "amenity=parking_space" );
+        s_areaTags.insert( "amenity=bicycle_parking" );
         s_areaTags.insert( "amenity=college" );
         s_areaTags.insert( "amenity=hospital" );
         s_areaTags.insert( "amenity=school" );
