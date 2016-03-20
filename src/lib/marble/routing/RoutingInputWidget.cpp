@@ -54,7 +54,7 @@ namespace Marble
 class RoutingInputLineEdit : public MarbleLineEdit
 {
 public:
-    RoutingInputLineEdit( QWidget *parent = 0 );
+    explicit RoutingInputLineEdit( QWidget *parent = 0 );
 
 protected:
     virtual void keyPressEvent(QKeyEvent *);

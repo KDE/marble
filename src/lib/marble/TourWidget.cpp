@@ -70,7 +70,7 @@ class TourWidgetPrivate
 {
 
 public:
-    TourWidgetPrivate( TourWidget *parent );
+    explicit TourWidgetPrivate( TourWidget *parent );
     GeoDataFeature *getPlaylistFeature() const;
     void updateRootIndex();
 

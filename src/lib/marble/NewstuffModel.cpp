@@ -110,7 +110,7 @@ public:
 
     QHash<int, QByteArray> m_roleNames;
 
-    NewstuffModelPrivate( NewstuffModel* parent );
+    explicit NewstuffModelPrivate( NewstuffModel* parent );
 
     QIcon preview( int index );
     void setPreview( int index, const QIcon &previewIcon );

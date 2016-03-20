@@ -24,7 +24,7 @@ class AnimatedUpdateTrack : public QObject
     Q_OBJECT
 
 public:
-    AnimatedUpdateTrack( PlaybackAnimatedUpdateItem* item );
+    explicit AnimatedUpdateTrack( PlaybackAnimatedUpdateItem* item );
     void setDelayBeforeTrackStarts( double delay );
     double delayBeforeTrackStarts() const;
     void play();

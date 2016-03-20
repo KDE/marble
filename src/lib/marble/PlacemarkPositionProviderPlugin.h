@@ -30,7 +30,7 @@ class PlacemarkPositionProviderPlugin: public PositionProviderPlugin
     Q_INTERFACES( Marble::PositionProviderPluginInterface )
 
  public:
-    PlacemarkPositionProviderPlugin( MarbleModel *marbleModel );
+    explicit PlacemarkPositionProviderPlugin( MarbleModel *marbleModel );
 
     virtual QString name() const;
     virtual QString nameId() const;

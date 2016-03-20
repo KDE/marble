@@ -24,7 +24,7 @@ class SoundTrack : public QObject
     Q_OBJECT
 
 public:
-    SoundTrack( PlaybackSoundCueItem* item );
+    explicit SoundTrack( PlaybackSoundCueItem* item );
     void setDelayBeforeTrackStarts( double delay );
     double delayBeforeTrackStarts() const;
     void play();

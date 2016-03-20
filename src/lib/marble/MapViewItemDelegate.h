@@ -31,7 +31,7 @@ class MapViewItemDelegate : public QStyledItemDelegate
     Q_OBJECT
 
 public:
-    MapViewItemDelegate( QListView* view );
+    explicit MapViewItemDelegate( QListView* view );
     void paint( QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index ) const;
     QSize sizeHint( const QStyleOptionViewItem &option, const QModelIndex &index ) const;
 

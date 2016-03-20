@@ -21,7 +21,7 @@ class PlaybackWaitItem : public PlaybackItem
 {
     Q_OBJECT
 public:
-    PlaybackWaitItem( const GeoDataWait* wait );
+    explicit PlaybackWaitItem( const GeoDataWait* wait );
     const GeoDataWait* wait() const;
     double duration() const;
     void play();

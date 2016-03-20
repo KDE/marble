@@ -35,7 +35,7 @@ public:
 
     qreal m_planetRadius;
 
-    MarblePhysicsPrivate( MarbleAbstractPresenter *presenter )
+    explicit MarblePhysicsPrivate( MarbleAbstractPresenter *presenter )
         : m_presenter( presenter ),
           m_mode( Instant ),
           m_planetRadius( EARTH_RADIUS )

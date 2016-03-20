@@ -30,7 +30,7 @@ class RouteSimulationPositionProviderPlugin: public PositionProviderPlugin
     Q_INTERFACES( Marble::PositionProviderPluginInterface )
 
 public:
-    RouteSimulationPositionProviderPlugin( MarbleModel *marbleModel );
+    explicit RouteSimulationPositionProviderPlugin( MarbleModel *marbleModel );
     virtual ~RouteSimulationPositionProviderPlugin();
 
     // Implementing PluginInterface

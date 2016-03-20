@@ -24,7 +24,7 @@ namespace Marble
 class ClipPainterPrivate
 {
  public:
-    ClipPainterPrivate( ClipPainter * parent );
+    explicit ClipPainterPrivate( ClipPainter * parent );
 
     ClipPainter * q;
 

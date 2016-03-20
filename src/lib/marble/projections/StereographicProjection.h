@@ -91,7 +91,7 @@ class StereographicProjection : public AzimuthalProjection
                          GeoDataCoordinates::Unit unit = GeoDataCoordinates::Degree ) const;
 
  protected:
-    StereographicProjection(StereographicProjectionPrivate *dd );
+    explicit StereographicProjection(StereographicProjectionPrivate *dd );
 
  private:
     Q_DECLARE_PRIVATE(StereographicProjection)

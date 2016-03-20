@@ -91,7 +91,7 @@ class VerticalPerspectiveProjection : public AzimuthalProjection
                          GeoDataCoordinates::Unit unit = GeoDataCoordinates::Degree ) const;
 
  protected:
-    VerticalPerspectiveProjection(VerticalPerspectiveProjectionPrivate *dd );
+    explicit VerticalPerspectiveProjection(VerticalPerspectiveProjectionPrivate *dd );
 
  private:
     Q_DECLARE_PRIVATE(VerticalPerspectiveProjection)

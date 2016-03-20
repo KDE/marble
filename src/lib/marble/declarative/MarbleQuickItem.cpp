@@ -134,7 +134,7 @@ namespace Marble
     class MarbleQuickItemPrivate
     {
     public:
-        MarbleQuickItemPrivate(MarbleQuickItem *marble) :
+        explicit MarbleQuickItemPrivate(MarbleQuickItem *marble) :
             m_marble(marble),
             m_model(),
             m_map(&m_model),

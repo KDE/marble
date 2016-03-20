@@ -37,7 +37,7 @@ public:
 
     NewstuffModel m_newstuffModel;
 
-    SpeakersModelPrivate( SpeakersModel* parent );
+    explicit SpeakersModelPrivate( SpeakersModel* parent );
 
     void fillModel();
 

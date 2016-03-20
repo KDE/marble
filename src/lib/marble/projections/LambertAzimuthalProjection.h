@@ -91,7 +91,7 @@ class LambertAzimuthalProjection : public AzimuthalProjection
                          GeoDataCoordinates::Unit unit = GeoDataCoordinates::Degree ) const;
 
  protected:
-    LambertAzimuthalProjection(LambertAzimuthalProjectionPrivate *dd );
+    explicit LambertAzimuthalProjection(LambertAzimuthalProjectionPrivate *dd );
 
  private:
     Q_DECLARE_PRIVATE(LambertAzimuthalProjection)

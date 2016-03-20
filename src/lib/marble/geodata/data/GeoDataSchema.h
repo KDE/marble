@@ -31,7 +31,7 @@ class GEODATA_EXPORT GeoDataSchema : public GeoDataObject
 {
 public:
     GeoDataSchema();
-    GeoDataSchema( const QHash<QString, GeoDataSimpleField>& simpleFields );
+    explicit GeoDataSchema( const QHash<QString, GeoDataSimpleField>& simpleFields );
     GeoDataSchema( const GeoDataSchema& other );
     GeoDataSchema& operator=( const GeoDataSchema& other );
     bool operator==( const GeoDataSchema& other ) const;

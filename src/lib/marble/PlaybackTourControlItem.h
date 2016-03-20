@@ -21,7 +21,7 @@ class GeoDataTourControl;
 class PlaybackTourControlItem : public PlaybackItem
 {
 public:
-    PlaybackTourControlItem( const GeoDataTourControl* tourControl );
+    explicit PlaybackTourControlItem( const GeoDataTourControl* tourControl );
     const GeoDataTourControl* tourControl() const;
     double duration() const;
     void play();

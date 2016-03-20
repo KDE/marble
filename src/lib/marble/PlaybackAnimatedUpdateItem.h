@@ -25,7 +25,7 @@ class PlaybackAnimatedUpdateItem : public PlaybackItem
 {
     Q_OBJECT
 public:
-    PlaybackAnimatedUpdateItem( GeoDataAnimatedUpdate *animatedUpdate );
+    explicit PlaybackAnimatedUpdateItem( GeoDataAnimatedUpdate *animatedUpdate );
     const GeoDataAnimatedUpdate* animatedUpdate() const;
     double duration() const;
     void play();

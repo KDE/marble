@@ -92,7 +92,7 @@ class AzimuthalEquidistantProjection : public AzimuthalProjection
                          GeoDataCoordinates::Unit unit = GeoDataCoordinates::Degree ) const;
 
  protected:
-    AzimuthalEquidistantProjection(AzimuthalEquidistantProjectionPrivate *dd );
+    explicit AzimuthalEquidistantProjection(AzimuthalEquidistantProjectionPrivate *dd );
 
  private:
     Q_DECLARE_PRIVATE(AzimuthalEquidistantProjection)

@@ -45,7 +45,7 @@ public:
 
     int m_iconSize;
 
-    MarbleLineEditPrivate( MarbleLineEdit* parent );
+    explicit MarbleLineEditPrivate( MarbleLineEdit* parent );
 
     void createProgressAnimation();
 };

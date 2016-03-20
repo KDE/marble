@@ -43,7 +43,7 @@ public:
 
     bool m_deviated;
 
-    VoiceNavigationModelPrivate( VoiceNavigationModel* parent );
+    explicit VoiceNavigationModelPrivate( VoiceNavigationModel* parent );
 
     void reset();
 

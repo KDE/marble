@@ -33,7 +33,7 @@ public:
         OffRoute
     };
 
-    RoutingModelPrivate( RouteRequest* request );
+    explicit RoutingModelPrivate( RouteRequest* request );
     MarbleModel *m_marbleModel;
 
     Route m_route;

@@ -59,7 +59,7 @@ namespace Marble
         Q_PROPERTY(bool inertialGlobeRotation READ inertialGlobeRotation WRITE setInertialGlobeRotation NOTIFY inertialGlobeRotationChanged)
 
     public:
-        MarbleQuickItem(QQuickItem *parent = 0);
+        explicit MarbleQuickItem(QQuickItem *parent = 0);
 
         enum Projection{
             Spherical = Marble::Spherical,

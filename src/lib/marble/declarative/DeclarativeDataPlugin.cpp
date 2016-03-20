@@ -45,7 +45,7 @@ public:
     static int m_global_counter;
     int m_counter;
 
-    DeclarativeDataPluginPrivate( DeclarativeDataPlugin* q );
+    explicit DeclarativeDataPluginPrivate( DeclarativeDataPlugin* q );
 
     static void parseChunk( DeclarativeDataPluginItem * item, GeoDataCoordinates &coordinates, const QString &key, const QVariant &value );
 

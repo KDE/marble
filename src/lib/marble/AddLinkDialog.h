@@ -23,7 +23,7 @@ class MARBLE_EXPORT AddLinkDialog : public QDialog
     Q_OBJECT
 
 public:
-    AddLinkDialog(QWidget *parent = 0 );
+    explicit AddLinkDialog(QWidget *parent = 0 );
     ~AddLinkDialog();
     QString name() const;
     QString url() const;

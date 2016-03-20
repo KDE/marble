@@ -53,7 +53,7 @@ namespace Marble
 class MarbleWidget::CustomPaintLayer : public LayerInterface
 {
  public:
-    CustomPaintLayer( MarbleWidget *widget )
+    explicit CustomPaintLayer( MarbleWidget *widget )
         : m_widget( widget )
     {
     }
@@ -87,7 +87,7 @@ class MarbleWidget::CustomPaintLayer : public LayerInterface
 class MarbleWidgetPrivate
 {
  public:
-    MarbleWidgetPrivate( MarbleWidget *parent ) :
+    explicit MarbleWidgetPrivate( MarbleWidget *parent ) :
           m_widget( parent ),
           m_model(),
           m_map( &m_model ),

@@ -91,7 +91,7 @@ class GnomonicProjection : public AzimuthalProjection
                          GeoDataCoordinates::Unit unit = GeoDataCoordinates::Degree ) const;
 
  protected:
-    GnomonicProjection(GnomonicProjectionPrivate *dd );
+    explicit GnomonicProjection(GnomonicProjectionPrivate *dd );
 
  private:
     Q_DECLARE_PRIVATE(GnomonicProjection)

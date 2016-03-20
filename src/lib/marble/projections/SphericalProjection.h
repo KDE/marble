@@ -98,7 +98,7 @@ class SphericalProjection : public AzimuthalProjection
                          GeoDataCoordinates::Unit unit = GeoDataCoordinates::Degree ) const;
 
  protected:
-    SphericalProjection(SphericalProjectionPrivate *dd );
+    explicit SphericalProjection(SphericalProjectionPrivate *dd );
 
  private:
     Q_DECLARE_PRIVATE(SphericalProjection)

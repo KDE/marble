@@ -43,7 +43,7 @@ namespace Marble
 class StackedTileLoaderPrivate
 {
 public:
-    StackedTileLoaderPrivate( MergedLayerDecorator *mergedLayerDecorator )
+    explicit StackedTileLoaderPrivate( MergedLayerDecorator *mergedLayerDecorator )
         : m_layerDecorator( mergedLayerDecorator )
     {
         m_tileCache.setMaxCost( 20000 * 1024 ); // Cache size measured in bytes

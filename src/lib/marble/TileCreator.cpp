@@ -71,7 +71,7 @@ class TileCreatorPrivate
 class TileCreatorSourceImage : public TileCreatorSource
 {
 public:
-    TileCreatorSourceImage( const QString &sourcePath )
+    explicit TileCreatorSourceImage( const QString &sourcePath )
         : m_sourceImage( QImage( sourcePath ) ),
           m_cachedRowNum( -1 )
     {

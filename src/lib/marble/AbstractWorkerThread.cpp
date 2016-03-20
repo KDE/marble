@@ -24,7 +24,7 @@ const int WAIT_TIME = 100;
 class AbstractWorkerThreadPrivate
 {
  public:
-    AbstractWorkerThreadPrivate( AbstractWorkerThread *parent )
+    explicit AbstractWorkerThreadPrivate( AbstractWorkerThread *parent )
             : m_running( false ),
               m_end( false ),
               m_parent( parent )

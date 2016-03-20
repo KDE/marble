@@ -79,7 +79,7 @@ namespace Marble
 class MarbleMap::CustomPaintLayer : public LayerInterface
 {
 public:
-    CustomPaintLayer( MarbleMap *map )
+    explicit CustomPaintLayer( MarbleMap *map )
         : m_map( map )
     {
     }

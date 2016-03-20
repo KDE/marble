@@ -40,7 +40,7 @@ class LatLonEditPrivate;
 class AbstractInputHandler // TODO: better name
 {
 protected:
-    AbstractInputHandler(LatLonEditPrivate *ui) : m_ui(ui) {}
+    explicit AbstractInputHandler(LatLonEditPrivate *ui) : m_ui(ui) {}
 public:
     virtual ~AbstractInputHandler() {}
 
@@ -60,7 +60,7 @@ protected:
 class DecimalInputHandler : public AbstractInputHandler
 {
 public:
-    DecimalInputHandler(LatLonEditPrivate *ui) : AbstractInputHandler(ui) {}
+    explicit DecimalInputHandler(LatLonEditPrivate *ui) : AbstractInputHandler(ui) {}
 public: // AbstractInputHandler API
     virtual void setupUi();
     virtual void setupMinMax(Dimension dimension);
@@ -74,7 +74,7 @@ public: // AbstractInputHandler API
 class DMSInputHandler : public AbstractInputHandler
 {
 public:
-    DMSInputHandler(LatLonEditPrivate *ui) : AbstractInputHandler(ui) {}
+    explicit DMSInputHandler(LatLonEditPrivate *ui) : AbstractInputHandler(ui) {}
 public: // AbstractInputHandler API
     virtual void setupUi();
     virtual void setupMinMax(Dimension dimension);
@@ -88,7 +88,7 @@ public: // AbstractInputHandler API
 class DMInputHandler : public AbstractInputHandler
 {
 public:
-    DMInputHandler(LatLonEditPrivate *ui) : AbstractInputHandler(ui) {}
+    explicit DMInputHandler(LatLonEditPrivate *ui) : AbstractInputHandler(ui) {}
 public: // AbstractInputHandler API
     virtual void setupUi();
     virtual void setupMinMax(Dimension dimension);

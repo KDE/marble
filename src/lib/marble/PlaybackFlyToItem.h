@@ -21,7 +21,7 @@ class PlaybackFlyToItem : public PlaybackItem
 {
     Q_OBJECT
 public:
-    PlaybackFlyToItem( const GeoDataFlyTo* flyTo );
+    explicit PlaybackFlyToItem( const GeoDataFlyTo* flyTo );
     const GeoDataFlyTo* flyTo() const;
     double duration() const;
     void play();

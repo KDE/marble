@@ -216,7 +216,7 @@ class MARBLE_EXPORT AbstractProjection
 
  protected:
      const QScopedPointer<AbstractProjectionPrivate> d_ptr;
-     AbstractProjection( AbstractProjectionPrivate* dd );
+     explicit AbstractProjection( AbstractProjectionPrivate* dd );
 
  private:
      Q_DECLARE_PRIVATE(AbstractProjection)

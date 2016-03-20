@@ -28,7 +28,7 @@ namespace Marble
 class MarblePluginSettingsWidgetPrivate : public Ui::MarblePluginSettingsWidget
 {
  public:
-    MarblePluginSettingsWidgetPrivate( Marble::MarblePluginSettingsWidget *parent ) :
+    explicit MarblePluginSettingsWidgetPrivate( Marble::MarblePluginSettingsWidget *parent ) :
         q( parent ),
         m_itemDelegate( 0 )
     {}

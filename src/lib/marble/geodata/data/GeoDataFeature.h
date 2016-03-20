@@ -634,7 +634,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
  protected:
     // the d-pointer needs to be protected to be accessible from derived classes
     GeoDataFeaturePrivate* d;
-    GeoDataFeature( GeoDataFeaturePrivate* priv );
+    explicit GeoDataFeature( GeoDataFeaturePrivate* priv );
 
     bool equals( const GeoDataFeature &other ) const;
     using GeoDataObject::equals;

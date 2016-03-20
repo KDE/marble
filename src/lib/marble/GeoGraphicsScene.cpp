@@ -32,7 +32,7 @@ class GeoGraphicsScenePrivate
 {
 public:
     GeoGraphicsScene *q;
-    GeoGraphicsScenePrivate(GeoGraphicsScene *parent) :
+    explicit GeoGraphicsScenePrivate(GeoGraphicsScene *parent) :
         q(parent)
     {
     }

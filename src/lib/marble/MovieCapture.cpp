@@ -22,7 +22,7 @@ namespace Marble
 class MovieCapturePrivate
 {
 public:
-    MovieCapturePrivate(MarbleWidget *widget) :
+    explicit MovieCapturePrivate(MarbleWidget *widget) :
         marbleWidget(widget), method(MovieCapture::TimeDriven)
     {}
 

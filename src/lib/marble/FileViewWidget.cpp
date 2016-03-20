@@ -40,7 +40,7 @@ class FileViewWidgetPrivate
 {
 
  public:
-    FileViewWidgetPrivate( FileViewWidget *parent );
+    explicit FileViewWidgetPrivate( FileViewWidget *parent );
     void setTreeModel( GeoDataTreeModel *model );
     void setFileManager( FileManager *manager );
 

@@ -33,7 +33,7 @@ class MarbleWidgetInputHandlerPrivate
     class MarbleWidgetSelectionRubber : public AbstractSelectionRubber
     {
         public:
-            MarbleWidgetSelectionRubber(MarbleWidget *widget)
+            explicit MarbleWidgetSelectionRubber(MarbleWidget *widget)
                 : m_rubberBand(QRubberBand::Rectangle, widget)
             {
                 m_rubberBand.hide();

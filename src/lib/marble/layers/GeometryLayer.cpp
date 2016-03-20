@@ -58,7 +58,7 @@ class GeometryLayerPrivate
 public:
     typedef QList<GeoDataPlacemark const *> OsmQueue;
 
-    GeometryLayerPrivate( const QAbstractItemModel *model );
+    explicit GeometryLayerPrivate( const QAbstractItemModel *model );
 
     void createGraphicsItems( const GeoDataObject *object );
     void createGraphicsItemFromGeometry( const GeoDataGeometry *object, const GeoDataPlacemark *placemark, bool avoidOsmDuplicates );

@@ -28,7 +28,7 @@ class PlacemarkEditHeaderPrivate : public Ui::PlacemarkEditHeaderPrivate
 {
 
 public:
-    PlacemarkEditHeaderPrivate(PlacemarkEditHeader *_q);
+    explicit PlacemarkEditHeaderPrivate(PlacemarkEditHeader *_q);
     ~PlacemarkEditHeaderPrivate();
     void init(QWidget* parent);
     void setNotation(GeoDataCoordinates::Notation notation);

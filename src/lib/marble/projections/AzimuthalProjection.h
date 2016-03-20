@@ -65,7 +65,7 @@ class AzimuthalProjection : public AbstractProjection
                                       const ViewportParams *viewport ) const;
 
  protected:
-    AzimuthalProjection( AzimuthalProjectionPrivate* dd );
+    explicit AzimuthalProjection( AzimuthalProjectionPrivate* dd );
 
  private:
     Q_DECLARE_PRIVATE( AzimuthalProjection )

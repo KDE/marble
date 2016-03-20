@@ -33,7 +33,7 @@ namespace Marble {
 class RoutingPrivate
 {
 public:
-    RoutingPrivate(QObject * parent = nullptr);
+    explicit RoutingPrivate(QObject * parent = nullptr);
 
     MarbleMap* m_marbleMap;
     QMap<QString, Marble::RoutingProfile> m_profiles;
