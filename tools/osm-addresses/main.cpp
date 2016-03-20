@@ -37,6 +37,7 @@ void debugOutput( QtMsgType type, const QMessageLogContext &context, const QStri
             qDebug() << "Debug: " << context.file << ":" << context.line << " " << msg;
         }
         break;
+    case QtInfoMsg:
     case QtWarningMsg:
         if ( debugLevel < Mute ) {
             qDebug() << "Info: " << context.file << ":" << context.line << " " << msg;
