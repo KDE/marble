@@ -97,9 +97,6 @@ void Bookmarks::addBookmark( qreal longitude, qreal latitude, const QString &nam
     Marble::GeoDataCoordinates coordinate( longitude, latitude, 0.0, Marble::GeoDataCoordinates::Degree );
     placemark.setCoordinate( coordinate );
     placemark.setName( name );
-    Marble::GeoDataLookAt* lookat = new Marble::GeoDataLookAt;
-    lookat->setCoordinates( coordinate );
-    lookat->setRange( 750 );
     placemark.extendedData().addValue( Marble::GeoDataData( "isBookmark", true ) );
 
     manager->addBookmark( target, placemark );
