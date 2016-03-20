@@ -149,7 +149,7 @@ SpeakersModel::SpeakersModel( QObject *parent ) :
 
 SpeakersModel::~SpeakersModel()
 {
-    // nothing to do
+    delete d;
 }
 
 int SpeakersModel::rowCount ( const QModelIndex &parent ) const
