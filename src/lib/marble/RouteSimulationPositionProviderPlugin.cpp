@@ -147,8 +147,6 @@ QDateTime RouteSimulationPositionProviderPlugin::timestamp() const
 
 void RouteSimulationPositionProviderPlugin::update()
 {
-    bool isCurrentIndexValid = true;
-
     if ( m_currentIndex >= 0 && m_currentIndex < m_lineStringInterpolated.size() ) {
         if ( m_status != PositionProviderStatusAvailable ) {
             m_status = PositionProviderStatusAvailable;
@@ -211,6 +209,7 @@ void RouteSimulationPositionProviderPlugin::update()
                 newPosition=newPoint;
             }
             else if ( fraction > 1 ) {
+                bool isCurrentIndexValid = true;
                 while ( fraction > 1 ) {
                     ++m_currentIndex;
                     if ( m_currentIndex >= m_lineStringInterpolated.size() ) {
