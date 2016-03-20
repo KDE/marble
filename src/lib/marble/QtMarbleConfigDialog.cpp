@@ -576,7 +576,7 @@ bool QtMarbleConfigDialog::inertialEarthRotation() const
 
 int QtMarbleConfigDialog::volatileTileCacheLimit() const
 {
-    int defaultValue = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ? 6 : 100;
+    int defaultValue = (MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen) ? 6 : 100;
     return d->m_settings.value( "Cache/volatileTileCacheLimit", defaultValue ).toInt();
 }
 
