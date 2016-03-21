@@ -43,8 +43,15 @@ void SearchBackend::search(const QString &place)
 void SearchBackend::setCompletionPrefix(const QString &prefix)
 {
     if( m_completer != nullptr && m_completer->completionPrefix() != prefix ) {
+        if (!m_lastSuccessfulCompletion.isEmpty()
+                && prefix.startsWith(m_lastSuccessfulCompletion)
+                && prefix.size() > m_lastSuccessfulCompletion.size()) {
+            return;
+        }
+
         m_completionModel->removePlacemarks(QString("Completion model"), 0, m_completionModel->rowCount());
         m_completionContainer->clear();
+        QString const lastPrefix = m_completer->completionPrefix();
         m_completer->setCompletionPrefix(prefix);
         if( prefix.isEmpty() ) {
             emit completionModelChanged(m_completionModel);
@@ -59,6 +66,11 @@ void SearchBackend::setCompletionPrefix(const QString &prefix)
             if( placemark != nullptr ) {
                 container->append(placemark);
             }
+        }
+        if (container->isEmpty() && prefix.startsWith(lastPrefix) ) {
+            m_lastSuccessfulCompletion = lastPrefix;
+        } else if (!container->isEmpty()) {
+            m_lastSuccessfulCompletion.clear();
         }
         m_completionModel->setPlacemarkContainer(container);
         m_completionModel->addPlacemarks(0, container->size());
