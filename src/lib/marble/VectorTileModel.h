@@ -108,9 +108,9 @@ private:
     QThreadPool *const m_threadPool;
     int m_tileLoadLevel;
     int m_tileZoomLevel;
-    QMap<TileId, QSharedPointer<CacheDocument> > m_documents;
     QList<TileId> m_pendingDocuments;
     QList<GeoDataDocument*> m_garbageQueue;
+    QMap<TileId, QSharedPointer<CacheDocument> > m_documents;
 };
 
 }
