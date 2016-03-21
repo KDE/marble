@@ -9,26 +9,30 @@
 //
 
 import QtQuick 2.3
+import QtQuick.Window 2.2
 
 Item {
     id: scrollBarItem
 
     property Flickable flickableItem: null
+    property real position: flickableItem.visibleArea.yPosition
+    property real pageSize: flickableItem.visibleArea.heightRatio
 
-    width: 12; height: flickableItem.height
+    width: Screen.pixelDensity * 1.5
+    height: flickableItem.height
     anchors.right: flickableItem.right
 
-    opacity: flickableItem.flicking ? 1 : 0.6
+    opacity: flickableItem.movingVertically ? 1 : 0
+    clip: true
 
     Rectangle {
         id: indicator
-
+        y: scrollBarItem.position * (scrollBarItem.height-2) + 1
         width: parent.width-2
-        height: scrollBarItem.height * flickableItem.visibleArea.heightRatio
-
-        y: scrollBarItem.height * flickableItem.visibleArea.yPosition
-
-        color: "black"
-        radius: 10
+        height: scrollBarItem.pageSize * (scrollBarItem.height-2)
+        radius: width/2 - 1
+        color: "lightgray"
     }
+
+    Behavior on opacity { NumberAnimation { duration: 125 } }
 }
