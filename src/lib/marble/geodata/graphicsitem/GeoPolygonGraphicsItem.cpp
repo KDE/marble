@@ -141,6 +141,25 @@ void GeoPolygonGraphicsItem::initializeBuildingPainting(const GeoPainter* painte
     }
 }
 
+QPointF GeoPolygonGraphicsItem::centroid(const QPolygonF &polygon) const
+{
+    auto centroid = QPointF(0.0, 0.0);
+    auto area = 0.0;
+    for (auto i=0, n=polygon.size(); i<n; ++i) {
+        auto const x0 = polygon[i].x();
+        auto const y0 = polygon[i].y();
+        auto const j = i == n-1 ? 0 : i+1;
+        auto const x1 = polygon[j].x();
+        auto const y1 = polygon[j].y();
+        auto const a = x0*y1 - x1*y0;
+        area += a;
+        centroid.rx() += (x0 + x1)*a;
+        centroid.ry() += (y0 + y1)*a;
+    }
+
+    return centroid / (3.0*area);
+}
+
 QPointF GeoPolygonGraphicsItem::buildingOffset(const QPointF &point, const ViewportParams *viewport, bool* isCameraAboveBuilding) const
 {
     qreal const cameraFactor = 0.5 * tan(0.5 * 110 * DEG2RAD);
@@ -272,7 +291,8 @@ void GeoPolygonGraphicsItem::paintRoof( GeoPainter* painter, const ViewportParam
             qreal size = polygonSize.width() * polygonSize.height();
             if (size > maxSize) {
                 maxSize = size;
-                roofCenter = boundingRect.center() + buildingOffset(boundingRect.center(), viewport);
+                roofCenter = centroid(*outlinePolygon);
+                roofCenter += buildingOffset(roofCenter, viewport);
             }
         }
         if ( drawAccurate3D) {
