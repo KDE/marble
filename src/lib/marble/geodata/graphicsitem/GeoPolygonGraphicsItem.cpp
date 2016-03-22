@@ -97,8 +97,7 @@ void GeoPolygonGraphicsItem::determineBuildingHeight()
     case GeoDataFeature::ReligionShinto:
     case GeoDataFeature::ReligionSikh:
     {
-        double const height = extractBuildingHeight(8.0);
-        m_buildingHeight = qBound(1.0, height, 1000.0);
+        extractBuildingHeight();
         setZValue(this->zValue() + m_buildingHeight);
         Q_ASSERT(m_buildingHeight > 0.0);
 
@@ -174,25 +173,34 @@ QPointF GeoPolygonGraphicsItem::buildingOffset(const QPointF &point, const Viewp
     return QPointF(shiftX, shiftY);
 }
 
-double GeoPolygonGraphicsItem::extractBuildingHeight(double defaultValue) const
+void GeoPolygonGraphicsItem::extractBuildingHeight()
 {
+    double height = 8.0;
     if (feature()->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
         GeoDataPlacemark const * placemark = static_cast<GeoDataPlacemark const *>(feature());
         if (placemark->osmData().containsTagKey("height")) {
             /** @todo Also parse non-SI units, see https://wiki.openstreetmap.org/wiki/Key:height#Height_of_buildings */
             QString const heightValue = placemark->osmData().tagValue("height").replace(" meters", QString()).replace(" m", QString());
             bool extracted = false;
-            double height = heightValue.toDouble(&extracted);
-            return extracted ? height : defaultValue;
+            double extractedHeight = heightValue.toDouble(&extracted);
+            if (extracted) {
+                height = extractedHeight;
+            }
         } else if (placemark->osmData().containsTagKey("building:levels")) {
             int const levels = placemark->osmData().tagValue("building:levels").toInt();
             int const skipLevels = placemark->osmData().tagValue("building:min_level").toInt();
             /** @todo Is 35 as an upper bound for the number of levels sane? */
-            return 3.0 * qBound(1, 1+levels-skipLevels, 35);
+            height = 3.0 * qBound(1, 1+levels-skipLevels, 35);
+        }
+
+        if (placemark->osmData().containsTagKey("addr:housenumber")) {
+            m_buildingLabel = placemark->osmData().tagValue("addr:housenumber");
+        } else if (placemark->osmData().containsTagKey("addr:housename")) {
+            m_buildingLabel = placemark->osmData().tagValue("addr:housename");
         }
     }
 
-    return defaultValue;
+    m_buildingHeight = qBound(1.0, height, 1000.0);
 }
 
 const GeoDataLatLonAltBox& GeoPolygonGraphicsItem::latLonAltBox() const
@@ -258,7 +266,8 @@ void GeoPolygonGraphicsItem::paintRoof( GeoPainter* painter, const ViewportParam
 
     foreach(QPolygonF* outlinePolygon, outlinePolygons) {
         QRectF const boundingRect = outlinePolygon->boundingRect();
-        if (hasIcon) {
+        QPolygonF buildingRoof;
+        if (hasIcon || !m_buildingLabel.isEmpty()) {
             QSizeF const polygonSize = boundingRect.size();
             qreal size = polygonSize.width() * polygonSize.height();
             if (size > maxSize) {
@@ -267,7 +276,6 @@ void GeoPolygonGraphicsItem::paintRoof( GeoPainter* painter, const ViewportParam
             }
         }
         if ( drawAccurate3D) {
-            QPolygonF buildingRoof;
             foreach(const QPointF &point, *outlinePolygon) {
                 buildingRoof << point + buildingOffset(point, viewport);
             }
@@ -298,10 +306,24 @@ void GeoPolygonGraphicsItem::paintRoof( GeoPainter* painter, const ViewportParam
             painter->drawPolygon(*outlinePolygon);
             painter->translate(-offset);
         }
+
         if (hasIcon && !roofCenter.isNull()) {
             QImage const icon = style()->iconStyle().scaledIcon();
             QPointF const iconCenter(icon.size().width()/2.0, icon.size().height()/2.0);
             painter->drawImage(roofCenter-iconCenter, icon);
+        } else if (drawAccurate3D && !m_buildingLabel.isEmpty() && !roofCenter.isNull()) {
+            double const w2 = 0.5 * painter->fontMetrics().width(m_buildingLabel);
+            double const ascent = painter->fontMetrics().ascent();
+            double const descent = painter->fontMetrics().descent();
+            double const a2 = 0.5 * painter->fontMetrics().ascent();
+            QPointF const textPosition = roofCenter - QPointF(w2, -a2);
+            if (buildingRoof.containsPoint(textPosition + QPointF(-2, -ascent), Qt::OddEvenFill)
+                    && buildingRoof.containsPoint(textPosition + QPointF(-2, descent), Qt::OddEvenFill)
+                    && buildingRoof.containsPoint(textPosition + QPointF(2+2*w2, descent), Qt::OddEvenFill)
+                    && buildingRoof.containsPoint(textPosition + QPointF(2+2*w2, -ascent), Qt::OddEvenFill)
+                    ) {
+                painter->drawText(textPosition, m_buildingLabel);
+            }
         }
     }
 

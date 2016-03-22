@@ -39,7 +39,7 @@ private:
     void paintRoof( GeoPainter* painter, const ViewportParams *viewport );
 
     QPointF buildingOffset(const QPointF &point, const ViewportParams *viewport, bool* isCameraAboveBuilding=0) const;
-    double extractBuildingHeight(double defaultValue) const;
+    void extractBuildingHeight();
     void screenPolygons(const ViewportParams *viewport, const GeoDataPolygon* polygon, QVector<QPolygonF*> &polygons,  QVector<QPolygonF*> &outlines) const;
     QPen configurePainter(GeoPainter* painter, const ViewportParams *viewport, bool isBuildingFrame);
     void determineBuildingHeight();
@@ -51,6 +51,7 @@ private:
     const GeoDataPolygon *const m_polygon;
     const GeoDataLinearRing *const m_ring;
     double m_buildingHeight;
+    QString m_buildingLabel;
     QString m_cachedTexturePath;
     QColor m_cachedTextureColor;
     QImage m_cachedTexture;
