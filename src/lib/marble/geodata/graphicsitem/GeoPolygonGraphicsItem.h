@@ -12,6 +12,7 @@
 #define MARBLE_GEOPOLYGONGRAPHICSITEM_H
 
 #include "GeoGraphicsItem.h"
+#include "GeoDataCoordinates.h"
 #include "marble_export.h"
 #include <QImage>
 #include <QColor>
@@ -56,6 +57,12 @@ private:
     QString m_cachedTexturePath;
     QColor m_cachedTextureColor;
     QImage m_cachedTexture;
+
+    struct NamedEntry {
+        GeoDataCoordinates point;
+        QString label;
+    };
+    QList<NamedEntry> m_entries;
 };
 
 }

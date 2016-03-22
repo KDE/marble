@@ -219,6 +219,16 @@ void GeoPolygonGraphicsItem::extractBuildingHeight()
         } else if (placemark->osmData().containsTagKey("addr:housenumber")) {
             m_buildingLabel = placemark->osmData().tagValue("addr:housenumber");
         }
+
+        auto const end = placemark->osmData().nodeReferencesEnd();
+        for (auto iter = placemark->osmData().nodeReferencesBegin(); iter != end; ++iter) {
+            if (iter.value().containsTagKey("addr:housenumber")) {
+                NamedEntry entry;
+                entry.point = iter.key();
+                entry.label = iter.value().tagValue("addr:housenumber");
+                m_entries.push_back(entry);
+            }
+        }
     }
 
     m_buildingHeight = qBound(1.0, height, 1000.0);
@@ -347,6 +357,17 @@ void GeoPolygonGraphicsItem::paintRoof( GeoPainter* painter, const ViewportParam
                 painter->drawText(textPosition, m_buildingLabel);
             }
         }
+    }
+
+    // Render additional housenumbers at building entries
+    foreach(const auto &entry, m_entries) {
+        qreal x, y;
+        viewport->screenCoordinates(entry.point, x, y);
+        QPointF point(x, y);
+        point += buildingOffset(point, viewport);
+        point.rx() -= 0.5 * painter->fontMetrics().width(entry.label);
+        point.ry() += 0.5 * painter->fontMetrics().ascent();
+        painter->drawText(point, entry.label);
     }
 
     // then paint the outlines if there are inner boundaries
