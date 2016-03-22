@@ -106,7 +106,7 @@ void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes) const
         GeoDataLineStyle lineStyle = placemark->style()->lineStyle();
         lineStyle.setCosmeticOutline(true);
 
-        if (placemark->visualCategory() > GeoDataFeature::HighwayService &&
+        if (placemark->visualCategory() >= GeoDataFeature::HighwayService &&
                 placemark->visualCategory() <= GeoDataFeature::HighwayMotorway) {
             bool const isOneWay = m_osmData.containsTag("oneway", "yes") || m_osmData.containsTag("oneway", "-1");
             int const lanes = isOneWay ? 1 : 2; // also for motorway which implicitly is one way, but has two lanes and each direction has its own highway
@@ -116,7 +116,16 @@ void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes) const
 
             lineStyle.setPhysicalWidth(physicalWidth);
 
-            if( m_osmData.containsTag("tunnel", "yes") ) {
+            if (m_osmData.containsTag("access", "private") || m_osmData.containsTag("access", "no") || m_osmData.containsTag("access", "agricultural") || m_osmData.containsTag("access", "delivery") || m_osmData.containsTag("access", "forestry") ) {
+                QColor polyColor = polyStyle.color();
+                qreal hue, sat, val;
+                polyColor.getHsvF(&hue, &sat, &val);
+                polyColor.setHsvF(0.98, qMin(1.0, 0.2 + sat), val);
+                polyStyle.setColor(polyColor);
+                lineStyle.setColor(lineStyle.color().darker(150));
+            }
+
+            if (m_osmData.containsTag("tunnel", "yes") ) {
                 QColor polyColor = polyStyle.color();
                 qreal hue, sat, val;
                 polyColor.getHsvF(&hue, &sat, &val);
@@ -124,6 +133,7 @@ void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes) const
                 polyStyle.setColor(polyColor);
                 lineStyle.setColor(lineStyle.color().lighter(115));
             }
+
         } else if (placemark->visualCategory() == GeoDataFeature::NaturalWater) {
             QString const widthValue = m_osmData.tagValue("width").replace(" meters", QString()).replace(" m", QString());
             bool ok;
