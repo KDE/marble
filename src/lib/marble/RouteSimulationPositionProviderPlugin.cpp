@@ -181,7 +181,7 @@ void RouteSimulationPositionProviderPlugin::update()
                     }
                     angleSum +=differenceHeading;
                     double maxSpeedAtTurn = qMax(((1 - (angleSum/60.0/curveLength*10.0))*maxSpeed), minSpeed);//speed limit at turn
-                    if( checkedDistance<25 and maxSpeedAtTurn<newSpeed )//if we are near turn don't accelerate, if we will have to slow down
+                    if( checkedDistance<25 && maxSpeedAtTurn<newSpeed )//if we are near turn don't accelerate, if we will have to slow down
                         newSpeed = qMin(newSpeed, qMax(m_speed,maxSpeedAtTurn));
                     // formulas:
                     //     s = Vc * t + a*t*t/2
