@@ -61,7 +61,7 @@ void GeoPolygonGraphicsItem::determineBuildingHeight()
     case GeoDataFeature::AccomodationYouthHostel:
     case GeoDataFeature::AmenityLibrary:
     case GeoDataFeature::EducationCollege:
-    case GeoDataFeature::EducationSchool:
+    //case GeoDataFeature::EducationSchool:
     case GeoDataFeature::EducationUniversity:
     case GeoDataFeature::FoodBar:
     case GeoDataFeature::FoodBiergarten:
