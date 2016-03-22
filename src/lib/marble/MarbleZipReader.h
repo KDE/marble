@@ -90,7 +90,7 @@ public:
     bool isReadable() const;
     bool exists() const;
 
-    struct Q_GUI_EXPORT FileInfo
+    struct MARBLE_EXPORT FileInfo
     {
         FileInfo();
         FileInfo(const FileInfo &other);
