@@ -212,10 +212,12 @@ void GeoPolygonGraphicsItem::extractBuildingHeight()
             height = 3.0 * qBound(1, 1+levels-skipLevels, 35);
         }
 
-        if (placemark->osmData().containsTagKey("addr:housenumber")) {
-            m_buildingLabel = placemark->osmData().tagValue("addr:housenumber");
+        if (!placemark->name().isEmpty()) {
+            m_buildingLabel = placemark->name();
         } else if (placemark->osmData().containsTagKey("addr:housename")) {
             m_buildingLabel = placemark->osmData().tagValue("addr:housename");
+        } else if (placemark->osmData().containsTagKey("addr:housenumber")) {
+            m_buildingLabel = placemark->osmData().tagValue("addr:housenumber");
         }
     }
 
