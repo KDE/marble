@@ -1,3 +1,22 @@
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the "Software"),
+// to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense,
+// and/or sell copies of the Software, and to permit persons to whom the
+// Software is furnished to do so, subject to the following conditions:
+
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+
+
 #include "o5mreader.h"
 #include <stdint.h>
 #include <stdio.h>
@@ -92,12 +111,13 @@ O5mreaderRet o5mreader_reset(O5mreader *pReader) {
 	pReader->lon = pReader->lat = 0;
 	pReader->offset = 0;	
 	pReader->canIterateTags = pReader->canIterateNds = pReader->canIterateRefs = 0;
+        return O5MREADER_RET_OK;
 }
 
 O5mreaderRet o5mreader_open(O5mreader **ppReader,FILE* f) {
 	uint8_t byte;
 	int i;
-	*ppReader = malloc(sizeof(O5mreader));
+        *ppReader = (O5mreader*)malloc(sizeof(O5mreader));
 	if ( !(*ppReader) ) {
 		return O5MREADER_RET_ERR;
 	}
@@ -120,7 +140,7 @@ O5mreaderRet o5mreader_open(O5mreader **ppReader,FILE* f) {
 	
 	o5mreader_reset(*ppReader);
 	
-	(*ppReader)->strPairTable = malloc(STR_PAIR_TABLE_SIZE*sizeof(char*));
+        (*ppReader)->strPairTable = (char**) malloc(STR_PAIR_TABLE_SIZE*sizeof(char*));
 	if ( (*ppReader)->strPairTable == 0 ) {
 		o5mreader_setError(*ppReader,
 			O5MREADER_ERR_CODE_MEMORY_ERROR,
@@ -129,7 +149,7 @@ O5mreaderRet o5mreader_open(O5mreader **ppReader,FILE* f) {
 		return O5MREADER_RET_ERR;
 	}
 	for ( i = 0; i < STR_PAIR_TABLE_SIZE; ++i ) {
-		(*ppReader)->strPairTable[i] = malloc(sizeof(char)*STR_PAIR_STRING_SIZE);
+                (*ppReader)->strPairTable[i] = (char*) malloc(sizeof(char)*STR_PAIR_STRING_SIZE);
 		if ( (*ppReader)->strPairTable[i] == 0 ) {
 			o5mreader_setError(*ppReader,
 				O5MREADER_ERR_CODE_MEMORY_ERROR,
@@ -176,18 +196,18 @@ const char* o5mreader_strerror(int errCode) {
 	}
 }
 
-o5mreader_setError(O5mreader *pReader,int code, const char* message) {
+void o5mreader_setError(O5mreader *pReader,int code, const char* message) {
 	pReader->errCode = code;
 	if ( pReader->errMsg ) {
 		free(pReader->errMsg);
 	}
 	if ( message ) {
-		pReader->errMsg = malloc(strlen(message)+1);
+                pReader->errMsg = (char*) malloc(strlen(message)+1);
 		strcpy(pReader->errMsg,message);
 	}
 }
 
-o5mreader_setNoError(O5mreader *pReader) {
+void o5mreader_setNoError(O5mreader *pReader) {
 	pReader->errCode = O5MREADER_ERR_CODE_OK;
 	if ( pReader->errMsg ) {
 		free(pReader->errMsg);
@@ -331,7 +351,7 @@ O5mreaderIterateRet o5mreader_skipTags(O5mreader *pReader) {
 O5mreaderIterateRet o5mreader_readNode(O5mreader *pReader, O5mreaderDataset* ds) {	
 	int64_t nodeId;
 	int64_t lon,lat;
-	if ( o5mreader_readInt(pReader,&nodeId) == O5MREADER_RET_ERR )
+        if ( o5mreader_readInt(pReader,(uint64_t *)&nodeId) == O5MREADER_RET_ERR )
 		return O5MREADER_ITERATE_RET_ERR;	
 
 	pReader->canIterateRefs = 0;
@@ -353,11 +373,11 @@ O5mreaderIterateRet o5mreader_readNode(O5mreader *pReader, O5mreaderDataset* ds)
 		return O5MREADER_ITERATE_RET_NEXT;
 	}
 
-	if ( o5mreader_readInt(pReader,&lon) == O5MREADER_RET_ERR )
+        if ( o5mreader_readInt(pReader,(uint64_t *)&lon) == O5MREADER_RET_ERR )
 		return O5MREADER_ITERATE_RET_ERR;
 	pReader->lon += (int32_t)lon;
 	
-	if ( o5mreader_readInt(pReader,&lat) == O5MREADER_RET_ERR ) {
+        if ( o5mreader_readInt(pReader,(uint64_t *)&lat) == O5MREADER_RET_ERR ) {
 		return O5MREADER_ITERATE_RET_ERR;
 	}
 	pReader->lat += (int32_t)lat;
@@ -385,7 +405,7 @@ O5mreaderIterateRet o5mreader_iterateNds(O5mreader *pReader, uint64_t *nodeId) {
 		return O5MREADER_ITERATE_RET_DONE;
 	}
 			
-	if ( o5mreader_readInt(pReader,&wayNodeId) == O5MREADER_RET_ERR )
+        if ( o5mreader_readInt(pReader,(uint64_t *)&wayNodeId) == O5MREADER_RET_ERR )
 		return O5MREADER_ITERATE_RET_ERR;
 	
 	pReader->wayNodeId += wayNodeId;
@@ -405,7 +425,7 @@ O5mreaderIterateRet o5mreader_skipNds(O5mreader *pReader) {
 
 O5mreaderIterateRet o5mreader_readWay(O5mreader *pReader, O5mreaderDataset* ds) {	
 	int64_t wayId;
-	if ( o5mreader_readInt(pReader,&wayId) == O5MREADER_RET_ERR)
+        if ( o5mreader_readInt(pReader,(uint64_t *)&wayId) == O5MREADER_RET_ERR)
 		return O5MREADER_ITERATE_RET_ERR;
 	
 	pReader->wayId += wayId;
@@ -443,7 +463,7 @@ O5mreaderIterateRet o5mreader_iterateRefs(O5mreader *pReader, uint64_t *refId, u
 		return O5MREADER_ITERATE_RET_DONE;
 	}
 			
-	if ( o5mreader_readInt(pReader, &relRefId) == O5MREADER_RET_ERR )
+        if ( o5mreader_readInt(pReader, (uint64_t *)&relRefId) == O5MREADER_RET_ERR )
 		return O5MREADER_ITERATE_RET_ERR;
 			
 	
@@ -493,7 +513,7 @@ O5mreaderIterateRet o5mreader_skipRefs(O5mreader *pReader) {
 
 O5mreaderIterateRet o5mreader_readRel(O5mreader *pReader, O5mreaderDataset* ds) {
 	int64_t relId;
-	if ( o5mreader_readInt(pReader,&relId) == O5MREADER_RET_ERR )
+        if ( o5mreader_readInt(pReader,(uint64_t *)&relId) == O5MREADER_RET_ERR )
 		return O5MREADER_ITERATE_RET_ERR;
 	pReader->relId += relId;
 	ds->id = pReader->relId;
