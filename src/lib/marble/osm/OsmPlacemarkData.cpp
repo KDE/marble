@@ -129,11 +129,8 @@ void OsmPlacemarkData::removeTag( const QString &key )
 
 bool OsmPlacemarkData::containsTag( const QString &key, const QString &value ) const
 {
-    if ( m_tags.contains( key ) ) {
-        return m_tags.value( key ) == value;
-    }
-
-    return false;
+    auto const iter = m_tags.constFind(key);
+    return iter == m_tags.constEnd() ? false : iter.value() == value;
 }
 
 bool OsmPlacemarkData::containsTagKey( const QString &key ) const

@@ -26,6 +26,8 @@
 #include <QFile>
 #include <QFileInfo>
 #include <QBuffer>
+#include <QElapsedTimer>
+#include <QDebug>
 
 namespace Marble {
 
@@ -174,6 +176,8 @@ GeoDataDocument* OsmParser::parseXml(const QString &filename, QString &error)
 
 GeoDataDocument *OsmParser::createDocument(OsmNodes &nodes, OsmWays &ways, OsmRelations &relations)
 {
+    QElapsedTimer timer;
+    timer.start();
     GeoDataDocument* document = new GeoDataDocument;
     GeoDataPolyStyle backgroundPolyStyle;
     backgroundPolyStyle.setFill( true );
@@ -199,6 +203,8 @@ GeoDataDocument *OsmParser::createDocument(OsmNodes &nodes, OsmWays &ways, OsmRe
     foreach(OsmNode const &node, nodes) {
         node.create(document);
     }
+
+    qDebug() << "grepme " << timer.elapsed();
     return document;
 }
 
