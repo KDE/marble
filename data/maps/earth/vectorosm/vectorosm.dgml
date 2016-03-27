@@ -52,7 +52,7 @@
       </layer>
       <layer name="vectorosm" backend="vectortile" >
           <vectortile name="geojson_data" expire="604800" >
-              <sourcedir format="OSM.ZIP"> earth/vectorosm </sourcedir>
+              <sourcedir format="O5M"> earth/vectorosm </sourcedir>
               <tileSize width="256" height="256" />
               <storageLayout levelZeroColumns="1" levelZeroRows="1" tileLevels="13,15,17" mode="OpenStreetMap" />
               <projection name="Mercator" />
