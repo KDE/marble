@@ -23,6 +23,7 @@ class OsmNode {
 public:
     OsmPlacemarkData & osmData();
     void parseCoordinates(const QXmlStreamAttributes &attributes);
+    void setCoordinates(const GeoDataCoordinates &coordinates);
 
     GeoDataCoordinates coordinates() const;
     const OsmPlacemarkData & osmData() const;

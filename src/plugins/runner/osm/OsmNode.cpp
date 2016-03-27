@@ -24,7 +24,12 @@ void OsmNode::parseCoordinates(const QXmlStreamAttributes &attributes)
 {
     qreal const lon = attributes.value( "lon" ).toDouble();
     qreal const lat = attributes.value( "lat" ).toDouble();
-    m_coordinates = GeoDataCoordinates(lon, lat, 0, GeoDataCoordinates::Degree);
+    setCoordinates(GeoDataCoordinates(lon, lat, 0, GeoDataCoordinates::Degree));
+}
+
+void OsmNode::setCoordinates(const GeoDataCoordinates &coordinates)
+{
+    m_coordinates = coordinates;
 }
 
 void OsmNode::create(GeoDataDocument *document) const

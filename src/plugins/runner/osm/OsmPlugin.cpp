@@ -40,13 +40,14 @@ QString OsmPlugin::description() const
 
 QString OsmPlugin::copyrightYears() const
 {
-    return "2011";
+    return "2011, 2016";
 }
 
 QList<PluginAuthor> OsmPlugin::pluginAuthors() const
 {
     return QList<PluginAuthor>()
-            << PluginAuthor( "Thibaut Gridel", "tgridel@free.fr" );
+            << PluginAuthor( "Thibaut Gridel", "tgridel@free.fr" )
+            << PluginAuthor( "Dennis Nienhüser", "nienhueser@kde.org" );
 }
 
 QString OsmPlugin::fileFormatDescription() const
@@ -56,7 +57,7 @@ QString OsmPlugin::fileFormatDescription() const
 
 QStringList OsmPlugin::fileExtensions() const
 {
-    return QStringList() << "osm" << "osm.zip";
+    return QStringList() << "osm" << "osm.zip" << "o5m";
 }
 
 ParsingRunner* OsmPlugin::newRunner() const

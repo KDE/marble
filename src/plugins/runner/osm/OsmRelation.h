@@ -28,6 +28,7 @@ class OsmRelation
 public:
     OsmPlacemarkData & osmData();
     void parseMember(const QXmlStreamAttributes &attributes);
+    void addMember(qint64 reference, const QString &role, const QString &type);
 
     const OsmPlacemarkData & osmData() const;
 

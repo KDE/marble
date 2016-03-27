@@ -30,6 +30,7 @@ set( osm_SRCS
   OsmWay.cpp
   OsmRelation.cpp
   OsmElementDictionary.cpp
+  o5mreader.cpp
 )
 
 marble_add_plugin( OsmPlugin ${osm_SRCS} ${osm_writers_SRCS} ${osm_translators_SRCS} )

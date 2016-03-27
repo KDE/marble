@@ -21,6 +21,7 @@
 #include "GeoDataTypes.h"
 #include "GeoDataStyle.h"
 #include <MarbleZipReader.h>
+#include "o5mreader.h"
 
 #include <QFile>
 #include <QFileInfo>
@@ -29,6 +30,72 @@
 namespace Marble {
 
 GeoDataDocument *OsmParser::parse(const QString &filename, QString &error)
+{
+    QFileInfo const fileInfo(filename);
+    if (fileInfo.completeSuffix() == "o5m") {
+        return parseO5m(filename, error);
+    } else {
+        return parseXml(filename, error);
+    }
+}
+
+GeoDataDocument* OsmParser::parseO5m(const QString &filename, QString &error)
+{
+    O5mreader* reader;
+    O5mreaderDataset data;
+    O5mreaderIterateRet outerState, innerState;
+    char *key, *value;
+
+    OsmNodes nodes;
+    OsmWays ways;
+    OsmRelations relations;
+    QHash<uint8_t, QString> relationTypes;
+    relationTypes[O5MREADER_DS_NODE] = "node";
+    relationTypes[O5MREADER_DS_WAY] = "way";
+    relationTypes[O5MREADER_DS_REL] = "relation";
+
+    auto file = fopen(filename.toStdString().c_str(), "rb");
+    o5mreader_open(&reader, file);
+
+    while( (outerState = o5mreader_iterateDataSet(reader, &data)) == O5MREADER_ITERATE_RET_NEXT) {
+        switch (data.type) {
+        case O5MREADER_DS_NODE:
+            nodes[data.id].setCoordinates(GeoDataCoordinates(data.lon*1.0e-7, data.lat*1.0e-7,
+                                                             0.0, GeoDataCoordinates::Degree));
+            while ((innerState = o5mreader_iterateTags(reader, &key, &value)) == O5MREADER_ITERATE_RET_NEXT) {
+                nodes[data.id].osmData().addTag(key, value);
+            }
+            break;
+        case O5MREADER_DS_WAY:
+            uint64_t nodeId;
+            while ((innerState = o5mreader_iterateNds(reader, &nodeId)) == O5MREADER_ITERATE_RET_NEXT) {
+                ways[data.id].addReference(nodeId);
+            }
+            while ((innerState = o5mreader_iterateTags(reader, &key, &value)) == O5MREADER_ITERATE_RET_NEXT) {
+                ways[data.id].osmData().addTag(key, value);
+            }
+            break;
+        case O5MREADER_DS_REL:
+            char *role;
+            uint8_t type;
+            uint64_t refId;
+            while ((innerState = o5mreader_iterateRefs(reader, &refId, &type, &role)) == O5MREADER_ITERATE_RET_NEXT) {
+                relations[data.id].addMember(refId, role, relationTypes[type]);
+            }
+            while ((innerState = o5mreader_iterateTags(reader, &key, &value)) == O5MREADER_ITERATE_RET_NEXT) {
+                relations[data.id].osmData().addTag(key, value);
+            }
+            break;
+        }
+    }
+
+    fclose(file);
+    error = reader->errMsg;
+    o5mreader_close(reader);
+    return createDocument(nodes, ways, relations);
+}
+
+GeoDataDocument* OsmParser::parseXml(const QString &filename, QString &error)
 {
     QXmlStreamReader parser;
     QFile file;
