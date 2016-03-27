@@ -37,7 +37,7 @@ private:
     GeoDataCoordinates m_coordinates;
 };
 
-typedef QMap<qint64,OsmNode> OsmNodes;
+typedef QHash<qint64,OsmNode> OsmNodes;
 
 }
 

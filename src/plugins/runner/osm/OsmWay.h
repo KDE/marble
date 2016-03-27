@@ -36,7 +36,7 @@ private:
     OsmPlacemarkData m_osmData;
     QVector<qint64> m_references;
 };
-typedef QMap<qint64,OsmWay> OsmWays;
+typedef QHash<qint64,OsmWay> OsmWays;
 
 }
 

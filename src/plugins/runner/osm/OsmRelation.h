@@ -50,7 +50,7 @@ private:
     QVector<OsmMember> m_members;
 };
 
-typedef QMap<qint64,OsmRelation> OsmRelations;
+typedef QHash<qint64,OsmRelation> OsmRelations;
 
 }
 
