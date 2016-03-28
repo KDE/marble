@@ -12,7 +12,7 @@
 #
 
 """
-Creates vector tiles (small .osm.zip files with standardized path/filenames) from larger osm files
+Creates vector tiles (small .o5m files with standardized path/filenames) from larger osm (pbf) files
 """
 
 
@@ -22,7 +22,6 @@ import math
 import csv
 import time
 from subprocess import call
-import zipfile
 import argparse
 import urllib3
 
@@ -106,22 +105,18 @@ if __name__ == "__main__":
                             tl = num2deg(x-1, y-1, zoom)
                             br = num2deg(x, y, zoom)
                             path = "{}/{}/{}".format(args.directory, zoom, x-1)
-                            target = "{}.osm".format(y-1)
-                            filterTarget = "{}_tmp.osm".format(y-1)
-                            zipTarget = "{}.osm.zip".format(y-1)
-                            if not args.overwrite and os.path.exists(os.path.join(path, zipTarget)):
-                                print("Skipping existing file {}\r".format(os.path.join(path, zipTarget)), end='')
+                            target = "{}.o5m".format(y-1)
+                            filterTarget = "{}_tmp.o5m".format(y-1)
+                            if not args.overwrite and os.path.exists(os.path.join(path, target)):
+                                print("Skipping existing file {}\r".format(os.path.join(path, target)), end='')
                             else:
                                 call(["mkdir", "-p", path])
-                                print ("{} level {}: {}/{} {}\r".format(bounds[1], zoom, count, total, os.path.join(path, zipTarget)), end='')
+                                print ("{} level {}: {}/{} {}\r".format(bounds[1], zoom, count, total, os.path.join(path, target)), end='')
                                 filterLevel = "levels/{}.level".format(zoom)
                                 if os.path.exists(filterLevel):
                                     call(["osmconvert", "-t={}/osmconvert_tmp-".format(args.cache), "--complete-ways", "--complex-ways", "--drop-version", "-b={},{},{},{}".format(tl[1],br[0],br[1],tl[0]), cutted, "-o={}".format(os.path.join(path, filterTarget))])
-                                    call(["osmfilter", "--parameter-file={}".format(filterLevel), os.path.join(path, filterTarget), "-o={}".format(os.path.join(args.cache, target))])
+                                    call(["osmfilter", "--parameter-file={}".format(filterLevel), os.path.join(path, filterTarget), "-o={}".format(os.path.join(path, target))])
                                     os.remove(os.path.join(path, filterTarget))
                                 else:
-                                    call(["osmconvert", "-t={}/osmconvert_tmp-".format(args.cache), "--complete-ways", "--complex-ways", "--drop-version", "-b={},{},{},{}".format(tl[1],br[0],br[1],tl[0]), cutted, "-o={}".format(os.path.join(args.cache, target))])
-                                call(["chmod", "644", os.path.join(args.cache, target)])
-                                with zipfile.ZipFile(os.path.join(path, zipTarget), 'w') as myzip:
-                                    myzip.write(os.path.join(args.cache, target), "{}.osm".format(y-1))
-                                os.remove(os.path.join(args.cache, target))
+                                    call(["osmconvert", "-t={}/osmconvert_tmp-".format(args.cache), "--complete-ways", "--complex-ways", "--drop-version", "-b={},{},{},{}".format(tl[1],br[0],br[1],tl[0]), cutted, "-o={}".format(os.path.join(path, target))])
+                                call(["chmod", "644", os.path.join(path, target)])
