@@ -132,7 +132,7 @@ int OsmNode::populationIndex(qint64 population) const
     return popidx;
 }
 
-GeoDataCoordinates OsmNode::coordinates() const
+const GeoDataCoordinates &OsmNode::coordinates() const
 {
     return m_coordinates;
 }

@@ -25,7 +25,7 @@ public:
     void parseCoordinates(const QXmlStreamAttributes &attributes);
     void setCoordinates(const GeoDataCoordinates &coordinates);
 
-    GeoDataCoordinates coordinates() const;
+    const GeoDataCoordinates & coordinates() const;
     const OsmPlacemarkData & osmData() const;
 
     void create(GeoDataDocument* document) const;
