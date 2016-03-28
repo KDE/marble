@@ -44,12 +44,13 @@ void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes) const
         placemark->setGeometry(linearRing);
 
         foreach(qint64 nodeId, m_references) {
-            if (!nodes.contains(nodeId)) {
+            auto const nodeIter = nodes.constFind(nodeId);
+            if (nodeIter == nodes.constEnd()) {
                 delete placemark;
                 return;
             }
 
-            OsmNode const & node = nodes[nodeId];
+            OsmNode const & node = nodeIter.value();
             placemark->osmData().addNodeReference(node.coordinates(), node.osmData());
             linearRing->append(node.coordinates());
         }
@@ -90,12 +91,13 @@ void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes) const
         placemark->setGeometry(lineString);
 
         foreach(qint64 nodeId, m_references) {
-            if (!nodes.contains(nodeId)) {
+            auto const nodeIter = nodes.constFind(nodeId);
+            if (nodeIter == nodes.constEnd()) {
                 delete placemark;
                 return;
             }
 
-            OsmNode const & node = nodes[nodeId];
+            OsmNode const & node = nodeIter.value();
             placemark->osmData().addNodeReference(node.coordinates(), node.osmData());
             lineString->append(node.coordinates());
         }
@@ -116,7 +118,8 @@ void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes) const
 
             lineStyle.setPhysicalWidth(physicalWidth);
 
-            if (m_osmData.containsTag("access", "private") || m_osmData.containsTag("access", "no") || m_osmData.containsTag("access", "agricultural") || m_osmData.containsTag("access", "delivery") || m_osmData.containsTag("access", "forestry") ) {
+            QString const accessValue = m_osmData.tagValue("access");
+            if (accessValue == "private" || accessValue == "no" || accessValue == "agricultural" || accessValue == "delivery" || accessValue == "forestry") {
                 QColor polyColor = polyStyle.color();
                 qreal hue, sat, val;
                 polyColor.getHsvF(&hue, &sat, &val);

@@ -60,34 +60,43 @@ GeoDataDocument* OsmParser::parseO5m(const QString &filename, QString &error)
     while( (outerState = o5mreader_iterateDataSet(reader, &data)) == O5MREADER_ITERATE_RET_NEXT) {
         switch (data.type) {
         case O5MREADER_DS_NODE:
-            nodes[data.id].osmData().setId(data.id);
-            nodes[data.id].setCoordinates(GeoDataCoordinates(data.lon*1.0e-7, data.lat*1.0e-7,
-                                                             0.0, GeoDataCoordinates::Degree));
+        {
+            OsmNode& node = nodes[data.id];
+            node.osmData().setId(data.id);
+            node.setCoordinates(GeoDataCoordinates(data.lon*1.0e-7, data.lat*1.0e-7,
+                                                   0.0, GeoDataCoordinates::Degree));
             while ((innerState = o5mreader_iterateTags(reader, &key, &value)) == O5MREADER_ITERATE_RET_NEXT) {
-                nodes[data.id].osmData().addTag(key, value);
+                node.osmData().addTag(key, value);
             }
+        }
             break;
         case O5MREADER_DS_WAY:
-            ways[data.id].osmData().setId(data.id);
+        {
+            OsmWay &way = ways[data.id];
+            way.osmData().setId(data.id);
             uint64_t nodeId;
             while ((innerState = o5mreader_iterateNds(reader, &nodeId)) == O5MREADER_ITERATE_RET_NEXT) {
-                ways[data.id].addReference(nodeId);
+                way.addReference(nodeId);
             }
             while ((innerState = o5mreader_iterateTags(reader, &key, &value)) == O5MREADER_ITERATE_RET_NEXT) {
-                ways[data.id].osmData().addTag(key, value);
+                way.osmData().addTag(key, value);
             }
+        }
             break;
         case O5MREADER_DS_REL:
-            relations[data.id].osmData().setId(data.id);
+        {
+            OsmRelation &relation = relations[data.id];
+            relation.osmData().setId(data.id);
             char *role;
             uint8_t type;
             uint64_t refId;
             while ((innerState = o5mreader_iterateRefs(reader, &refId, &type, &role)) == O5MREADER_ITERATE_RET_NEXT) {
-                relations[data.id].addMember(refId, role, relationTypes[type]);
+                relation.addMember(refId, role, relationTypes[type]);
             }
             while ((innerState = o5mreader_iterateTags(reader, &key, &value)) == O5MREADER_ITERATE_RET_NEXT) {
-                relations[data.id].osmData().addTag(key, value);
+                relation.osmData().addTag(key, value);
             }
+        }
             break;
         }
     }
