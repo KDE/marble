@@ -65,7 +65,6 @@ O5mreaderRet o5mreader_readStrPair(O5mreader *pReader, char **tagpair, int singl
 	char* pBuf;
 	static uint64_t pointer = 0;
 	int length;
-	char byte;
 	uint64_t key; 
 	int i;
 	
