@@ -114,9 +114,12 @@ void GeoLineStringGraphicsItem::paintLabel(GeoPainter *painter, const ViewportPa
         QPen pen(QColor(Qt::transparent));
         pen.setWidthF(currentPen.widthF());
         painter->setPen(pen);
-        QColor const color = style()->polyStyle().paintedColor();
-        painter->setBackground(QBrush(color));
-        painter->setBackgroundMode(Qt::OpaqueMode);
+        // Activate the lines below to paint a label background which
+        // prevents antialiasing overpainting glitches, but leads to
+        // other glitches.
+        //QColor const color = style()->polyStyle().paintedColor();
+        //painter->setBackground(QBrush(color));
+        //painter->setBackgroundMode(Qt::OpaqueMode);
         painter->drawPolyline( *m_lineString, feature()->name(), FollowLine,
                                style()->labelStyle().paintedColor(),
                                style()->labelStyle().font());
