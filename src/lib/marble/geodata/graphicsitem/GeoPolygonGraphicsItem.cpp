@@ -141,10 +141,10 @@ void GeoPolygonGraphicsItem::initializeBuildingPainting(const GeoPainter* painte
     }
 }
 
-QPointF GeoPolygonGraphicsItem::centroid(const QPolygonF &polygon) const
+QPointF GeoPolygonGraphicsItem::centroid(const QPolygonF &polygon, double &area) const
 {
     auto centroid = QPointF(0.0, 0.0);
-    auto area = 0.0;
+    area = 0.0;
     for (auto i=0, n=polygon.size(); i<n; ++i) {
         auto const x0 = polygon[i].x();
         auto const y0 = polygon[i].y();
@@ -157,7 +157,8 @@ QPointF GeoPolygonGraphicsItem::centroid(const QPolygonF &polygon) const
         centroid.ry() += (y0 + y1)*a;
     }
 
-    return centroid / (3.0*area);
+    area *= 0.5;
+    return centroid / (6.0*area);
 }
 
 QPointF GeoPolygonGraphicsItem::buildingOffset(const QPointF &point, const ViewportParams *viewport, bool* isCameraAboveBuilding) const
@@ -295,15 +296,18 @@ void GeoPolygonGraphicsItem::paintRoof( GeoPainter* painter, const ViewportParam
 
     // first paint the area and icon (and the outline if there are no inner boundaries)
 
+    double maxArea = 0.0;
     foreach(QPolygonF* outlinePolygon, outlinePolygons) {
         QRectF const boundingRect = outlinePolygon->boundingRect();
         QPolygonF buildingRoof;
-        if (hasIcon || !m_buildingLabel.isEmpty()) {
+        if (hasIcon || !m_buildingLabel.isEmpty() || !m_entries.isEmpty()) {
             QSizeF const polygonSize = boundingRect.size();
             qreal size = polygonSize.width() * polygonSize.height();
             if (size > maxSize) {
                 maxSize = size;
-                roofCenter = centroid(*outlinePolygon);
+                double area;
+                roofCenter = centroid(*outlinePolygon, area);
+                maxArea = qMax(area, maxArea);
                 roofCenter += buildingOffset(roofCenter, viewport);
             }
         }
@@ -360,14 +364,27 @@ void GeoPolygonGraphicsItem::paintRoof( GeoPainter* painter, const ViewportParam
     }
 
     // Render additional housenumbers at building entries
-    foreach(const auto &entry, m_entries) {
-        qreal x, y;
-        viewport->screenCoordinates(entry.point, x, y);
-        QPointF point(x, y);
-        point += buildingOffset(point, viewport);
-        point.rx() -= 0.5 * painter->fontMetrics().width(entry.label);
-        point.ry() += 0.5 * painter->fontMetrics().ascent();
-        painter->drawText(point, entry.label);
+    if (!m_entries.isEmpty() && maxArea > 1600 * m_entries.size()) {
+        QBrush brush = painter->brush();
+        QColor const brushColor = brush.color();
+        QColor lighterColor = brushColor.lighter(110);
+        lighterColor.setAlphaF(0.9);
+        brush.setColor(lighterColor);
+        painter->setBrush(brush);
+        foreach(const auto &entry, m_entries) {
+            qreal x, y;
+            viewport->screenCoordinates(entry.point, x, y);
+            QPointF point(x, y);
+            point += buildingOffset(point, viewport);
+            auto const width = painter->fontMetrics().width(entry.label);
+            auto const height = painter->fontMetrics().height();
+            QRectF rectangle(point, QSizeF(qMax(1.2*width, 1.1*height), 1.2*height));
+            rectangle.moveCenter(point);
+            painter->drawRoundedRect(rectangle, 3, 3);
+            painter->drawText(rectangle, Qt::AlignCenter, entry.label);
+        }
+        brush.setColor(brushColor);
+        painter->setBrush(brush);
     }
 
     // then paint the outlines if there are inner boundaries

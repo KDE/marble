@@ -48,7 +48,7 @@ private:
                                     bool &drawAccurate3D, bool &isCameraAboveBuilding, bool &hasInnerBoundaries,
                                     QVector<QPolygonF*>& outlinePolygons,
                                     QVector<QPolygonF*>& innerPolygons) const;
-    QPointF centroid(const QPolygonF &polygon) const;
+    QPointF centroid(const QPolygonF &polygon, double &area) const;
 
     const GeoDataPolygon *const m_polygon;
     const GeoDataLinearRing *const m_ring;
