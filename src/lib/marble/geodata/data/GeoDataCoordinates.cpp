@@ -620,6 +620,9 @@ GeoDataCoordinates::GeoDataCoordinates()
  */
 GeoDataCoordinates::~GeoDataCoordinates()
 {
+    delete d->m_q;
+    d->m_q = 0;
+
     if (!d->ref.deref())
         delete d;
 #ifdef DEBUG_GEODATA
@@ -640,8 +643,11 @@ bool GeoDataCoordinates::isValid() const
  * this state shouldn't happen, but if it does, we have to clean up behind us.
  */
 void GeoDataCoordinates::detach()
-{
+{    
     if(d->ref.load() == 1) {
+        delete d->m_q;
+        d->m_q = 0;
+
         return;
     }
 
@@ -664,12 +670,10 @@ void GeoDataCoordinates::set( qreal _lon, qreal _lat, qreal _alt, GeoDataCoordin
     switch( unit ){
     default:
     case Radian:
-        d->m_q = Quaternion::fromSpherical( _lon, _lat );
         d->m_lon = _lon;
         d->m_lat = _lat;
         break;
     case Degree:
-        d->m_q = Quaternion::fromSpherical( _lon * DEG2RAD , _lat * DEG2RAD  );
         d->m_lon = _lon * DEG2RAD;
         d->m_lat = _lat * DEG2RAD;
         break;
@@ -685,11 +689,9 @@ void GeoDataCoordinates::setLongitude( qreal _lon, GeoDataCoordinates::Unit unit
     switch( unit ){
     default:
     case Radian:
-        d->m_q = Quaternion::fromSpherical( _lon, d->m_lat );
         d->m_lon = _lon;
         break;
     case Degree:
-        d->m_q = Quaternion::fromSpherical( _lon * DEG2RAD , d->m_lat  );
         d->m_lon = _lon * DEG2RAD;
         break;
     }
@@ -704,11 +706,9 @@ void GeoDataCoordinates::setLatitude( qreal _lat, GeoDataCoordinates::Unit unit 
     detach();
     switch( unit ){
     case Radian:
-        d->m_q = Quaternion::fromSpherical( d->m_lon, _lat );
         d->m_lat = _lat;
         break;
     case Degree:
-        d->m_q = Quaternion::fromSpherical( d->m_lon, _lat * DEG2RAD   );
         d->m_lat = _lat * DEG2RAD;
         break;
     }
@@ -1318,13 +1318,17 @@ GeoDataCoordinates GeoDataCoordinates::moveByBearing( qreal bearing, qreal dista
 
 const Quaternion& GeoDataCoordinates::quaternion() const
 {
-    return d->m_q;
+    if (d->m_q == 0) {
+        d->m_q = new Quaternion();
+        *d->m_q = Quaternion::fromSpherical( d->m_lon , d->m_lat );
+    }
+    return *d->m_q;
 }
 
 GeoDataCoordinates GeoDataCoordinates::interpolate( const GeoDataCoordinates &target, double t_ ) const
 {
     double const t = qBound( 0.0, t_, 1.0 );
-    Quaternion const quat = Quaternion::slerp( d->m_q, target.d->m_q, t );
+    Quaternion const quat = Quaternion::slerp( quaternion(), target.quaternion(), t );
     qreal lon, lat;
     quat.getSpherical( lon, lat );
     double const alt = (1.0-t) * d->m_altitude + t * target.d->m_altitude;
@@ -1334,9 +1338,9 @@ GeoDataCoordinates GeoDataCoordinates::interpolate( const GeoDataCoordinates &ta
 GeoDataCoordinates GeoDataCoordinates::interpolate( const GeoDataCoordinates &before, const GeoDataCoordinates &target, const GeoDataCoordinates &after, double t_ ) const
 {
     double const t = qBound( 0.0, t_, 1.0 );
-    Quaternion const b1 = GeoDataCoordinatesPrivate::basePoint( before.d->m_q, d->m_q, target.d->m_q );
-    Quaternion const a2 = GeoDataCoordinatesPrivate::basePoint( d->m_q, target.d->m_q, after.d->m_q );
-    Quaternion const a = Quaternion::slerp( d->m_q, target.d->m_q, t );
+    Quaternion const b1 = GeoDataCoordinatesPrivate::basePoint( before.quaternion(), quaternion(), target.quaternion() );
+    Quaternion const a2 = GeoDataCoordinatesPrivate::basePoint( quaternion(), target.quaternion(), after.quaternion() );
+    Quaternion const a = Quaternion::slerp( quaternion(), target.quaternion(), t );
     Quaternion const b = Quaternion::slerp( b1, a2, t );
     Quaternion c = Quaternion::slerp( a, b, 2 * t * (1.0-t) );
     qreal lon, lat;
@@ -1422,8 +1426,6 @@ void GeoDataCoordinates::unpack( QDataStream& stream )
     stream >> d->m_lon;
     stream >> d->m_lat;
     stream >> d->m_altitude;
-
-    d->m_q = Quaternion::fromSpherical( d->m_lon, d->m_lat );
 }
 
 Quaternion GeoDataCoordinatesPrivate::basePoint( const Quaternion &q1, const Quaternion &q2, const Quaternion &q3 )

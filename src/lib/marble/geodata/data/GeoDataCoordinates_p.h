@@ -28,7 +28,8 @@ class GeoDataCoordinatesPrivate
     * needs this name. Maybe we can rename it to our scheme later on.
     */
     GeoDataCoordinatesPrivate()
-        : m_lon( 0 ),
+        : m_q( 0 ),
+          m_lon( 0 ),
           m_lat( 0 ),
           m_altitude( 0 ),
           m_detail( 0 ),
@@ -46,19 +47,18 @@ class GeoDataCoordinatesPrivate
     GeoDataCoordinatesPrivate( qreal _lon, qreal _lat, qreal _alt,
                         GeoDataCoordinates::Unit unit,
                         int _detail )
-        : m_altitude( _alt ),
+        : m_q( 0 ),
+          m_altitude( _alt ),
           m_detail( _detail ),
           ref( 0 )
     {
         switch( unit ){
         default:
         case GeoDataCoordinates::Radian:
-            m_q = Quaternion::fromSpherical( _lon, _lat );
             m_lon = _lon;
             m_lat = _lat;
             break;
         case GeoDataCoordinates::Degree:
-            m_q = Quaternion::fromSpherical( _lon * DEG2RAD , _lat * DEG2RAD  );
             m_lon = _lon * DEG2RAD;
             m_lat = _lat * DEG2RAD;
             break;
@@ -70,7 +70,7 @@ class GeoDataCoordinatesPrivate
     * initialize the reference with the value of the other
     */
     GeoDataCoordinatesPrivate( const GeoDataCoordinatesPrivate &other )
-        : m_q( Quaternion::fromSpherical( other.m_lon, other.m_lat ) ),
+        : m_q( 0 ),
           m_lon( other.m_lon ),
           m_lat( other.m_lat ),
           m_altitude( other.m_altitude ),
@@ -88,8 +88,9 @@ class GeoDataCoordinatesPrivate
         m_lat = other.m_lat;
         m_altitude = other.m_altitude;
         m_detail = other.m_detail;
-        m_q = other.m_q;
         ref = 0;
+        delete m_q;
+        m_q = 0;
         return *this;
     }
 
@@ -201,7 +202,7 @@ class GeoDataCoordinatesPrivate
     */
     static qreal lonLatToEasting( qreal lon, qreal lat );
 
-    Quaternion m_q;
+    Quaternion * m_q;
     qreal      m_lon;
     qreal      m_lat;
     qreal      m_altitude;     // in meters above sea level
