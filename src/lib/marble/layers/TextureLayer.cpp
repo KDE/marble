@@ -396,7 +396,7 @@ void TextureLayer::setShowTileId( bool show )
 
 void TextureLayer::setProjection( Projection projection )
 {
-    if ( d->m_textures.isEmpty() ) {
+    if ( d->m_textures.isEmpty() || textureLayerCount() == 0 ) {
         return;
     }
 
