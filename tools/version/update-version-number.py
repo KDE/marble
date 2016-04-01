@@ -109,7 +109,7 @@ libVersionHexNew = '#define MARBLE_VERSION 0x{:02x}{:02x}{:02x}'.format(major, m
 replaceInFile(libVersionFile, libVersionHexOld, libVersionHexNew)
 
 appVersionOld = '    return "[0-5]\\.[0-9]+\\.[0-9]+ (.*)";'
-appVersionNew = '    return "{}";'.format(generateVersionString(major+1, minor-10, patch))
+appVersionNew = '    return "{}";'.format(generateVersionString(major+2, minor-25, patch))
 replaceInFile(appVersionFile, appVersionOld, appVersionNew)
 
 if args.commit:
