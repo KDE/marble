@@ -57,7 +57,7 @@ QString JsonPlugin::fileFormatDescription() const
 
 QStringList JsonPlugin::fileExtensions() const
 {
-    return QStringList() << "json";
+    return QStringList() << "json" << "geojson";
 }
 
 ParsingRunner* JsonPlugin::newRunner() const
