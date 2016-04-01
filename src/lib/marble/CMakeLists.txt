@@ -36,8 +36,8 @@ INCLUDE(layers/CMakeLists.txt)
 INCLUDE(osm/CMakeLists.txt)
 
 if(NOT CMAKE_SYSTEM_NAME STREQUAL Android)
-set(GENERIC_LIB_VERSION "0.22.20")
-set(GENERIC_LIB_SOVERSION "23")
+set(GENERIC_LIB_VERSION "0.23.90")
+set(GENERIC_LIB_SOVERSION "24")
 endif()
 
 # link_directories (${QT_LIBRARY_DIR})
