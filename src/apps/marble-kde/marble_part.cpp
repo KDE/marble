@@ -948,8 +948,10 @@ void MarblePart::setupActions()
     QList<RenderPlugin *>::const_iterator it = pluginList.constBegin();
     QList<RenderPlugin *>::const_iterator const itEnd = pluginList.constEnd();
     for (; it != itEnd; ++it ) {
-        connect( (*it), SIGNAL(actionGroupsChanged()),
-                 this, SLOT(createPluginMenus()) );
+        if ((*it)->nameId() != "annotation") {
+            connect( (*it), SIGNAL(actionGroupsChanged()),
+                     this, SLOT(createPluginMenus()) );
+        }
     }
 
     m_addBookmarkAction = new QAction( this );
