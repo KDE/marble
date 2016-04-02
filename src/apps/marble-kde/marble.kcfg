@@ -338,8 +338,5 @@
   <entry name="owncloudPassword" type="String">
    <default></default>
   </entry>
-  <entry name="accessKWallet" type="Bool">
-   <default>true</default>
-  </entry>
  </group>
 </kcfg>

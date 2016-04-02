@@ -20,7 +20,6 @@
 #include "MarbleGlobal.h"
 #include "cloudsync/CloudSyncManager.h"
 #include <krecentfilesaction.h>
-#include <KWallet/kwallet.h>
 #include <QDomNode>
 
 #include "ui_MarbleCloudSyncSettingsWidget.h"
@@ -247,8 +246,6 @@ class MarblePart: public KParts::ReadOnlyPart
     KConfigDialog *m_configDialog;
 
     QHash<QString, int> m_pluginEnabled;
-
-    KWallet::Wallet *m_wallet;
 
     QString m_position;
     QString m_clock;

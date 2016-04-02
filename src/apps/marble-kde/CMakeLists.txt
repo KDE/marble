@@ -6,7 +6,7 @@ if(ECM_FOUND)
   include(KDECMakeSettings)
   include(ECMInstallIcons)
 endif()
-macro_optional_find_package(KF5 QUIET COMPONENTS Crash Wallet NewStuff Parts CoreAddons I18n)
+macro_optional_find_package(KF5 QUIET COMPONENTS Crash NewStuff Parts CoreAddons I18n)
 
 if (NOT KF5_FOUND)       
   return()
@@ -25,7 +25,6 @@ add_library(marble_part ${marblepart_SRCS})
 set_target_properties(marble_part PROPERTIES PREFIX "${CMAKE_SHARED_LIBRARY_PREFIX}")
 target_link_libraries(marble_part marbleui ${MARBLEWIDGET}
     KF5::NewStuff
-    KF5::Wallet
     KF5::Parts
     KF5::CoreAddons
     KF5::I18n
@@ -56,7 +55,6 @@ target_link_libraries (
     ${MARBLEWIDGET}
     astro
     KF5::NewStuff
-    KF5::Wallet
     KF5::Parts
     KF5::Crash
     KF5::CoreAddons
