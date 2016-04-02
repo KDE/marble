@@ -15,6 +15,7 @@
 #include <QSlider>
 #include <qurl.h>
 #include <QtCore/qnamespace.h>
+#include <QPointer>
 
 #include "MarbleDebug.h"
 #include "MarbleWidget.h"
@@ -52,7 +53,7 @@ public:
     QList<SoundTrack*> m_soundTracks;
     QList<AnimatedUpdateTrack*> m_animatedUpdateTracks;
     GeoDataFlyTo m_mapCenter;
-    MarbleWidget *m_widget;
+    QPointer<MarbleWidget> m_widget;
     QUrl m_baseUrl;
 };
 
