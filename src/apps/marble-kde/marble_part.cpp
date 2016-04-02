@@ -259,7 +259,7 @@ bool MarblePart::openFile()
 
     filters.sort();
     filters.prepend( allFileTypes );
-    const QString filter = filters.join( "\n" );
+    const QString filter = filters.join( ";;" );
 
     QStringList fileNames = QFileDialog::getOpenFileNames( widget(), i18n("Open File"),
                                                            m_lastFileOpenPath, filter );
