@@ -105,12 +105,7 @@ void FlyToEditWidget::setEditable( bool editable )
 void FlyToEditWidget::setFirstFlyTo(const QPersistentModelIndex &index)
 {
     if( m_index.internalPointer() == index.internalPointer() ) {
-        m_durationSpin->setEnabled( false );
-    } else {
-        if( !m_durationSpin->isEnabled() )
-        {
-            m_durationSpin->setEnabled( true );
-        }
+        m_durationSpin->setValue(0);
     }
 }
 
