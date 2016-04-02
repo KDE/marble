@@ -248,18 +248,17 @@ bool MarblePart::openFile()
             continue;
 
         const QStringList fileExtensions = plugin->fileExtensions().replaceInStrings( QRegExp( "^" ), "*." );
-        const QString filter = QString( "%1|%2" ).arg( fileExtensions.join( " " ) ).arg( plugin->fileFormatDescription() );
+        const QString filter = QString( "%1 (%2)" ).arg( plugin->fileFormatDescription() ).arg( fileExtensions.join( " " ) );
         filters << filter;
-
         allFileExtensions << fileExtensions;
     }
 
-    allFileExtensions.sort();
-    const QString allFileTypes = QString( "%1|%2" ).arg( allFileExtensions.join( " " ) ).arg( i18n( "All Supported Files" ) );
+    allFileExtensions.sort();  // sort since file extensions are visible under Windows
+    const QString allFileTypes = QString( "%1 (%2)" ).arg( i18n( "All Supported Files" ) ).arg( allFileExtensions.join( " " ) );
 
     filters.sort();
     filters.prepend( allFileTypes );
-    const QString filter = filters.join( "\n" );
+    const QString filter = filters.join( ";;" );
 
     QStringList fileNames = QFileDialog::getOpenFileNames( widget(), i18n("Open File"),
                                                            m_lastFileOpenPath, filter );
