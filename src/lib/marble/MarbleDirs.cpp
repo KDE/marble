@@ -120,6 +120,10 @@ QStringList MarbleDirs::pluginEntryList( const QString& relativePath, QDir::Filt
 
 QString MarbleDirs::systemPath()
 {
+    if (!runTimeMarbleDataPath.isEmpty()) {
+        return runTimeMarbleDataPath;
+    }
+
     QString systempath;
 
 #ifdef Q_OS_WIN
@@ -154,10 +158,6 @@ QString MarbleDirs::systemPath()
     return systempath;
 #endif
 
-// Should this happen before the Mac bundle already?
-if ( !runTimeMarbleDataPath.isEmpty() )
-    return runTimeMarbleDataPath;
-
 #ifdef MARBLE_DATA_PATH
     //MARBLE_DATA_PATH is a compiler define set by cmake
     QString compileTimeMarbleDataPath(MARBLE_DATA_PATH);
@@ -178,6 +178,10 @@ if ( !runTimeMarbleDataPath.isEmpty() )
 
 QString MarbleDirs::pluginSystemPath()
 {
+    if (!runTimeMarblePluginPath.isEmpty()) {
+        return runTimeMarblePluginPath;
+    }
+
     QString systempath;
 
 #ifdef Q_OS_MACX
@@ -202,10 +206,6 @@ QString MarbleDirs::pluginSystemPath()
       return systempath;
     }
 #endif   // mac bundle
-
-// Should this happen before the Mac bundle already?
-if ( !runTimeMarblePluginPath.isEmpty() )
-    return runTimeMarblePluginPath;
 
 #ifdef Q_OS_WIN
 	return QCoreApplication::applicationDirPath() + QDir::separator() + "plugins";
