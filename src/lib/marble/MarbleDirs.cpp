@@ -122,6 +122,10 @@ QString MarbleDirs::systemPath()
 {
     QString systempath;
 
+#ifdef Q_OS_WIN
+	return QCoreApplication::applicationDirPath() + QDir::separator() + "data";
+#endif
+
 #ifdef Q_OS_MACX
     //
     // On OSX lets try to find any file first in the bundle
@@ -202,6 +206,10 @@ QString MarbleDirs::pluginSystemPath()
 // Should this happen before the Mac bundle already?
 if ( !runTimeMarblePluginPath.isEmpty() )
     return runTimeMarblePluginPath;
+
+#ifdef Q_OS_WIN
+	return QCoreApplication::applicationDirPath() + QDir::separator() + "plugins";
+#endif
 
 #ifdef Q_OS_ANDROID
     return "assets:/plugins";
