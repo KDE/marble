@@ -339,6 +339,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument *document )
     QStringList fileList;
     QStringList propertyList;
     QList<GeoDataStyle::Ptr> styleList;
+    QList<int> renderOrderList;
 
     bool skip = false;
     bool sourceFileMatch = false;
@@ -379,6 +380,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument *document )
             QPen pen = data->pen();
             QBrush brush = data->brush();
             GeoDataStyle::Ptr style;
+            int renderOrder = data->renderOrder();
 
             /**
              * data->colors() are the colorMap values from dgml file. If this is not
@@ -418,6 +420,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument *document )
                 fileList << filename;
                 propertyList << property;
                 styleList << style;
+                renderOrderList << renderOrder;
             }
         }
     }
@@ -427,7 +430,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument *document )
     }
     // load new datasets
     for ( int i = 0 ; i < fileList.size(); ++i ) {
-        d->m_fileManager.addFile( fileList.at(i), propertyList.at(i), styleList.at(i), MapDocument );
+        d->m_fileManager.addFile( fileList.at(i), propertyList.at(i), styleList.at(i), MapDocument, renderOrderList.at(i) );
     }
 
     mDebug() << "THEME CHANGED: ***" << mapTheme->head()->mapThemeId();

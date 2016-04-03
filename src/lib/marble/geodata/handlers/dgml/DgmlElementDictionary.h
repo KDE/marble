@@ -79,6 +79,7 @@ namespace dgml
     extern  const char* dgmlTag_Vectortile;
     extern  const char* dgmlTag_Visible;
     extern  const char* dgmlTag_Zoom;
+    extern  const char* dgmlTag_RenderOrder;
 }
 
 // Helper macro

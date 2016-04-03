@@ -164,7 +164,7 @@ public:
     GeoDataStyleMap styleMap( const QString& styleId ) const;
 
     /**
-    * @brief dump a Vector of all styles
+    * @brief dump a Vector of all stylemaps
     */
     QList<GeoDataStyleMap> styleMaps() const;
 

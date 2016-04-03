@@ -55,6 +55,7 @@ class GeoDataPolygonPrivate : public GeoDataGeometryPrivate
                                             // GeoDataPoints since the LatLonAltBox has 
                                             // been calculated. Saves performance. 
     TessellationFlags           m_tessellationFlags;
+    int                         m_renderOrder;
 };
 
 } // namespace Marble

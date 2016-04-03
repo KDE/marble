@@ -78,7 +78,7 @@ FileManager::~FileManager()
     delete d;
 }
 
-void FileManager::addFile( const QString& filepath, const QString& property, const GeoDataStyle::Ptr &style, DocumentRole role, bool recenter )
+void FileManager::addFile( const QString& filepath, const QString& property, const GeoDataStyle::Ptr &style, DocumentRole role, int renderOrder, bool recenter )
 {
     if( d->m_fileItemHash.contains( filepath ) ) {
             return;  // already loaded
@@ -92,7 +92,7 @@ void FileManager::addFile( const QString& filepath, const QString& property, con
     mDebug() << "adding container:" << filepath;
     mDebug() << "Starting placemark loading timer";
     d->m_timer.start();
-    FileLoader* loader = new FileLoader( this, d->m_pluginManager, recenter, filepath, property, style, role );
+    FileLoader* loader = new FileLoader( this, d->m_pluginManager, recenter, filepath, property, style, role, renderOrder );
     d->appendLoader( loader );
 }
 

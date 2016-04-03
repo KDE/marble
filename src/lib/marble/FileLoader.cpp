@@ -25,6 +25,7 @@
 #include "GeoDataStyleMap.h"
 #include "GeoDataPolyStyle.h"
 #include "GeoDataLineStyle.h"
+#include "GeoDataPolygon.h"
 #include "GeoDataStyle.h"
 #include "GeoDataTypes.h"
 #include "MarbleDirs.h"
@@ -39,7 +40,7 @@ class FileLoaderPrivate
 {
 public:
     FileLoaderPrivate( FileLoader* parent, const PluginManager *pluginManager, bool recenter,
-                       const QString& file, const QString& property, const GeoDataStyle::Ptr &style, DocumentRole role )
+                       const QString& file, const QString& property, const GeoDataStyle::Ptr &style, DocumentRole role, int renderOrder )
         : q( parent),
           m_runner( pluginManager ),
           m_recenter( recenter ),
@@ -48,7 +49,8 @@ public:
           m_style( style ),
           m_documentRole ( role ),
           m_styleMap( new GeoDataStyleMap ),
-          m_document( 0 )
+          m_document( 0 ),
+          m_renderOrder( renderOrder )
     {
         if( m_style ) {
             m_styleMap->setId("default-map");
@@ -92,12 +94,13 @@ public:
     GeoDataStyleMap* m_styleMap;
     GeoDataDocument *m_document;
     QString m_error;
+    int m_renderOrder;
 };
 
-FileLoader::FileLoader( QObject* parent, const PluginManager *pluginManager, bool recenter,
-                       const QString& file, const QString& property, const GeoDataStyle::Ptr &style, DocumentRole role )
+FileLoader::FileLoader( QObject* parent, const PluginManager *pluginManager, bool recenter, const QString& file,
+                        const QString& property, const GeoDataStyle::Ptr &style, DocumentRole role, int renderOrder )
     : QThread( parent ),
-      d( new FileLoaderPrivate( this, pluginManager, recenter, file, property, style, role ) )
+      d( new FileLoaderPrivate( this, pluginManager, recenter, file, property, style, role, renderOrder ) )
 {
 }
 
@@ -218,6 +221,15 @@ void FileLoaderPrivate::documentParsed( GeoDataDocument* doc, const QString& err
         if( m_style ) {
             doc->addStyleMap( *m_styleMap );
             doc->addStyle( m_style );
+        }
+
+        if (m_renderOrder != 0) {
+            foreach (GeoDataPlacemark* placemark, doc->placemarkList()) {
+                if (placemark->geometry() && placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType) {
+                    GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>(placemark->geometry());
+                    polygon->setRenderOrder(m_renderOrder);
+                }
+            }
         }
 
         createFilterProperties( doc );

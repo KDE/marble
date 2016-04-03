@@ -76,5 +76,6 @@ const char* dgmlTag_Vector = "vector";
 const char* dgmlTag_Vectortile = "vectortile";
 const char* dgmlTag_Visible = "visible";
 const char* dgmlTag_Zoom = "zoom";
+const char* dgmlTag_RenderOrder = "renderOrder";
 }
 }

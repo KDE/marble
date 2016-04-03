@@ -48,6 +48,9 @@ class GEODATA_EXPORT GeoSceneGeodata : public GeoSceneAbstractDataset
     QBrush brush() const;
     void setBrush( const QBrush& brush );
 
+    int renderOrder() const;
+    void setRenderOrder( int renderOrder );
+
     QList<QColor> colors() const;
     void setColors( const QList<QColor> &colors );
 
@@ -58,6 +61,7 @@ class GEODATA_EXPORT GeoSceneGeodata : public GeoSceneAbstractDataset
     qreal   m_alpha;
     QPen    m_pen;
     QBrush  m_brush;
+    int m_renderOrder;
     QList<QColor> m_colors;
 };
 

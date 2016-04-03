@@ -158,6 +158,15 @@ void GeoDataPolygon::appendInnerBoundary( const GeoDataLinearRing& boundary )
     p()->inner.append( boundary );
 }
 
+void GeoDataPolygon::setRenderOrder(int renderOrder){
+    detach();
+    p()->m_renderOrder = renderOrder;
+}
+
+int GeoDataPolygon::renderOrder() const{
+    return p()->m_renderOrder;
+}
+
 void GeoDataPolygon::pack( QDataStream& stream ) const
 {
     GeoDataObject::pack( stream );

@@ -20,7 +20,8 @@ GeoSceneGeodata::GeoSceneGeodata( QString name )
       m_sourceFile( QString() ),
       m_alpha( 1.0 ),
       m_pen( QPen( Qt::NoPen ) ),
-      m_brush( QBrush( Qt::transparent ) )
+      m_brush( QBrush( Qt::transparent ) ),
+      m_renderOrder( 0 )
 {
 }
 
@@ -98,6 +99,16 @@ QBrush GeoSceneGeodata::brush() const
 void GeoSceneGeodata::setBrush( const QBrush& brush )
 {
     m_brush = brush;
+}
+
+int GeoSceneGeodata::renderOrder() const
+{
+    return m_renderOrder;
+}
+
+void GeoSceneGeodata::setRenderOrder( int renderOrder )
+{
+    m_renderOrder = renderOrder;
 }
 
 QList<QColor> GeoSceneGeodata::colors() const

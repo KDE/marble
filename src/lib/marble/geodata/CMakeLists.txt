@@ -191,6 +191,8 @@ SET ( geodata_handlers_dgml_SRCS
         geodata/handlers/dgml/DgmlSettingsTagHandler.cpp
         geodata/handlers/dgml/DgmlAuxillaryDictionary.h
         geodata/handlers/dgml/DgmlLayerTagHandler.h
+        geodata/handlers/dgml/DgmlRenderOrderTagHandler.cpp
+        geodata/handlers/dgml/DgmlRenderOrderTagHandler.h
 )
 
 SET ( geodata_writers_dgml_SRCS
