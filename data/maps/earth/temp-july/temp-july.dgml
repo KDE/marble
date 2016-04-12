@@ -58,7 +58,7 @@
             <layer name="naturalearth" backend="geodata">
                 <geodata name="coast">
                     <sourcefile> naturalearth/ne_50m_land.pn2 </sourcefile>
-                    <pen color="#555753"/>
+                    <pen color="#555753" width="1" style="solidline"/>
                 </geodata>
                 <geodata name="lake" property="waterbodies">
                     <sourcefile> naturalearth/ne_50m_lakes.pn2 </sourcefile>
@@ -66,7 +66,7 @@
                 </geodata>
                 <geodata name="border" property="borders">
                     <sourcefile> naturalearth/ne_50m_admin_0_boundary_lines_land.pn2 </sourcefile>
-                    <pen color="#555753" width="1" />
+                    <pen color="#555753" width="1" style="solidline"/>
                 </geodata>
                 <geodata name="breakawaydisputed" property="borders">
                     <sourcefile> naturalearth/ne_50m_admin_0_breakaway_disputed_areas.pn2 </sourcefile>

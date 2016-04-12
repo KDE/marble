@@ -63,12 +63,10 @@
                 </geodata>
                 <geodata name="lake" property="waterbodies" colorize="sea">
                     <sourcefile> naturalearth/ne_50m_lakes.pn2 </sourcefile>
-                    <brush color="f00e0eff" />
                     <pen color="transparent" style="nopen"/>
                 </geodata>
                 <geodata name="glacier" property="ice" colorize="sea">
                     <sourcefile> naturalearth/ne_50m_glaciated_areas.pn2 </sourcefile>
-                    <brush color="ffffffff" />
                     <pen color="transparent" style="nopen"/>
                 </geodata>
             </layer>
