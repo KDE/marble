@@ -20,7 +20,7 @@
 
 #include <QString>
 
-#ifdef MARBLE_NO_WEBKIT
+#ifdef MARBLE_NO_WEBKITWIDGETS
 #include "NullMarbleWebView.h"
 #else
 #include "MarbleWebView.h"
