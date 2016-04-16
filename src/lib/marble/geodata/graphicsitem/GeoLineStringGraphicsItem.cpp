@@ -111,7 +111,7 @@ void GeoLineStringGraphicsItem::paintLabel(GeoPainter *painter, const ViewportPa
     QPen currentPen = configurePainter(painter, viewport, labelPositionFlags);
 
     if (!( currentPen.widthF() < 2.5f )) {
-        QPen pen(QColor(Qt::transparent));
+        QPen pen = QPen(QColor(Qt::transparent));
         pen.setWidthF(currentPen.widthF());
         painter->setPen(pen);
         // Activate the lines below to paint a label background which
