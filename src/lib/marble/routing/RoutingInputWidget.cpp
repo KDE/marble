@@ -15,7 +15,7 @@
 #include "MarblePlacemarkModel.h"
 #include "RouteRequest.h"
 
-#ifdef MARBLE_NO_WEBKIT
+#ifdef MARBLE_NO_WEBKITWIDGETS
 #include "NullTinyWebBrowser.h"
 #else
 #include "TinyWebBrowser.h"

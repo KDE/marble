@@ -43,8 +43,8 @@ endif()
 # link_directories (${QT_LIBRARY_DIR})
 ########### next target ###############
 
-if(MARBLE_NO_WEBKIT)
-add_definitions(-DMARBLE_NO_WEBKIT)
+if(MARBLE_NO_WEBKITWIDGETS)
+add_definitions(-DMARBLE_NO_WEBKITWIDGETS)
 endif()
 
 set(marblewidget_SRCS
@@ -282,7 +282,7 @@ set(marblewidget_SRCS
 )
 
 
-if (MARBLE_NO_WEBKIT)
+if (MARBLE_NO_WEBKITWIDGETS)
     LIST(APPEND marblewidget_SRCS
         NullMarbleWebView.cpp
         NullTinyWebBrowser.cpp
@@ -341,7 +341,7 @@ set (marblewidget_UI
     FormattedTextWidget.ui
     ElevationWidget.ui
 )
-if (MARBLE_NO_WEBKIT)
+if (MARBLE_NO_WEBKITWIDGETS)
     LIST(APPEND marblewidget_UI
         NullLegendWidget.ui
         NullWebPopupWidget.ui
@@ -420,7 +420,7 @@ endif()
 
 ########### install files ###############
 
-if (MARBLE_NO_WEBKIT)
+if (MARBLE_NO_WEBKITWIDGETS)
     set(marble_WebKit
         NullMarbleWebView.h
         NullTinyWebBrowser.h
