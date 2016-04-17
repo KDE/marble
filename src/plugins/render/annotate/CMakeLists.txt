@@ -5,7 +5,6 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_BINARY_DIR}
  ${CMAKE_SOURCE_DIR}/src/lib/marble/geodata/handlers/kml
  ${CMAKE_SOURCE_DIR}/src/lib/marble/layers
- ${QT_INCLUDE_DIR}
 )
 
 set( annotate_UI

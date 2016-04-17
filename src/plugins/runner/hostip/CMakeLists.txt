@@ -3,7 +3,6 @@ PROJECT( HostipPlugin )
 INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}
  ${CMAKE_CURRENT_BINARY_DIR}
- ${QT_INCLUDE_DIR}
 )
 
 set( hostip_SRCS HostipRunner.cpp HostipPlugin.cpp )

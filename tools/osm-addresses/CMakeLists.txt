@@ -4,7 +4,6 @@ PROJECT (${TARGET})
 include_directories(
  ${CMAKE_CURRENT_SOURCE_DIR}
  ${CMAKE_CURRENT_BINARY_DIR}
- ${QT_INCLUDE_DIR}
  ${PROTOBUF_INCLUDE_DIRS}
  ${ZLIB_INCLUDE_DIRS}
  ../../src/plugins/runner/local-osm-search

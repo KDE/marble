@@ -1,5 +1,4 @@
 include_directories(
-    ${QT_INCLUDES}
     ${CMAKE_CURRENT_BINARY_DIR}
 )
 

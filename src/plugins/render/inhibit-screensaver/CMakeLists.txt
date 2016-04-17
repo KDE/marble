@@ -6,8 +6,6 @@ IF( BUILD_INHIBIT_SCREENSAVER_PLUGIN )
   INCLUDE_DIRECTORIES(
    ${CMAKE_CURRENT_SOURCE_DIR}
    ${CMAKE_CURRENT_BINARY_DIR}
-   ${QT_INCLUDE_DIR}
-   ${QT_QTNETWORK_INCLUDE_DIR}
   )
 
   set( inhibit-screensaver_SRCS InhibitScreensaverPlugin.cpp )		 

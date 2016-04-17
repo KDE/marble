@@ -3,7 +3,6 @@ PROJECT( GosmoreReverseGeocodingPlugin )
 INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}
  ${CMAKE_CURRENT_BINARY_DIR}
- ${QT_INCLUDE_DIR}
 )
 
 set( gosmore_SRCS GosmoreReverseGeocodingRunner.cpp GosmoreReverseGeocodingPlugin.cpp )

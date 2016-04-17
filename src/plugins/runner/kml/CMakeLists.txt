@@ -4,7 +4,6 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}
  ${CMAKE_CURRENT_BINARY_DIR}
  ${CMAKE_SOURCE_DIR}/src/lib/marble/geodata/handlers/kml
- ${QT_INCLUDE_DIR}
 )
 
 set( kml_SRCS KmlDocument.cpp KmlParser.cpp KmlPlugin.cpp KmlRunner.cpp KmzHandler.cpp )
