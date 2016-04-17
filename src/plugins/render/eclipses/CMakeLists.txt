@@ -2,8 +2,8 @@ PROJECT(EclipsesPlugin)
 
 INCLUDE_DIRECTORIES(
  ${CMAKE_SOURCE_DIR}/src/lib/astro
- ${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/render/eclipses
- ${CMAKE_BINARY_DIR}/src/plugins/render/eclipses
+ ${CMAKE_CURRENT_SOURCE_DIR}
+ ${CMAKE_CURRENT_BINARY_DIR}
 )
 
 set( eclipses_SRCS
