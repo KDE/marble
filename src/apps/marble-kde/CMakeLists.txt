@@ -19,7 +19,7 @@ set(marble_kde_SRCS
 )
 
 set(marblepart_SRCS marble_part.cpp)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../marble-ui ${KDE4_INCLUDES})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../marble-ui)
 kconfig_add_kcfg_files(marblepart_SRCS settings.kcfgc)
 add_library(marble_part ${marblepart_SRCS})
 set_target_properties(marble_part PROPERTIES PREFIX "${CMAKE_SHARED_LIBRARY_PREFIX}")
