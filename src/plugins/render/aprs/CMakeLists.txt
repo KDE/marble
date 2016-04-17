@@ -40,7 +40,6 @@ add_custom_command(
 )
 
 marble_add_plugin( AprsPlugin ${aprs_SRCS} )
-#target_link_libraries( Aprs ${QT_QTWEBKIT_LIBRARY} )
 
 CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/aprsconfig.h.in
 	       ${CMAKE_CURRENT_BINARY_DIR}/aprsconfig.h)

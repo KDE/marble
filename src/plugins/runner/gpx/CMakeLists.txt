@@ -43,12 +43,8 @@ if( BUILD_MARBLE_TESTS )
     set( TestTrack_SRCS TestTrack.moc ${TestTrack_SRCS} )
 
     add_executable( TestTrack ${TestTrack_SRCS} )
-    target_link_libraries( TestTrack ${QT_QTMAIN_LIBRARY}
-                                     ${QT_QTCORE_LIBRARY}
-                                     ${QT_QTGUI_LIBRARY}
-                                     ${QT_QTTEST_LIBRARY}
+    target_link_libraries( TestTrack ${Qt5Test_LIBRARIES}
                                      ${MARBLEWIDGET} )
-    target_link_libraries( TestTrack ${Qt5Test_LIBRARIES})
     set_target_properties( TestTrack PROPERTIES
                             COMPILE_FLAGS "-DDATA_PATH=\"\\\"${DATA_PATH}\\\"\" -DPLUGIN_PATH=\"\\\"${PLUGIN_PATH}\\\"\"" )
     add_test( TestTrack TestTrack )

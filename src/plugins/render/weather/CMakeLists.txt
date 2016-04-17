@@ -28,4 +28,3 @@ qt_wrap_ui( weather_SRCS ${weather_UI} )
 qt_add_resources( weather_SRCS weather.qrc )
 
 marble_add_plugin( Weather ${weather_SRCS} )
-target_link_libraries( Weather ${QT_QTWEBKIT_LIBRARY} )

@@ -36,14 +36,7 @@ endmacro()
 macro( marble_add_plugin _target_name )
 set( _src ${ARGN} )
 add_library( ${_target_name} MODULE ${_src} )
-target_link_libraries( ${_target_name} ${QT_QTCORE_LIBRARY}
-                                       ${QT_QTDBUS_LIBRARY}
-                                       ${QT_QTGUI_LIBRARY}
-                                       ${QT_QTXML_LIBRARY}
-                                       ${QT_QTSVG_LIBRARY}
-                                       ${QT_QTNETWORK_LIBRARY}
-                                       ${QT_QTMAIN_LIBRARY}
-                                       ${${_target_name}_LIBS}
+target_link_libraries( ${_target_name} ${${_target_name}_LIBS}
                                        ${MARBLEWIDGET} )
 install( TARGETS ${_target_name} DESTINATION ${MARBLE_PLUGIN_INSTALL_PATH} )
 
@@ -63,14 +56,7 @@ set( _src ${ARGN} )
 qt_add_resources( _src ../../../apps/marble-ui/marble.qrc )
 
 add_library( ${_target_name} MODULE ${_src} )
-target_link_libraries( ${_target_name} ${QT_QTCORE_LIBRARY}
-                                       ${QT_QTDBUS_LIBRARY}
-                                       ${QT_QTGUI_LIBRARY}
-                                       ${QT_QTXML_LIBRARY}
-                                       ${QT_QTSVG_LIBRARY}
-                                       ${QT_QTNETWORK_LIBRARY}
-                                       ${QT_QTMAIN_LIBRARY}
-                                       ${${_target_name}_LIBS}
+target_link_libraries( ${_target_name} ${${_target_name}_LIBS}
                                        ${MARBLEWIDGET} )
 install( TARGETS ${_target_name} DESTINATION ${QT_PLUGINS_DIR}/designer )
 

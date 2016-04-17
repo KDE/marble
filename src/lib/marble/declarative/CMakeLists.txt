@@ -46,14 +46,6 @@ set_target_properties(marbledeclarative PROPERTIES
 marble_add_project_resources(qmldir)
 
 target_link_libraries( marbledeclarative
-    ${QT_QTCORE_LIBRARY}
-    ${QT_QTDBUS_LIBRARY}
-    ${QT_QTGUI_LIBRARY}
-    ${QT_QTXML_LIBRARY}
-    ${QT_QTSVG_LIBRARY}
-    ${QT_QTNETWORK_LIBRARY}
-    ${QT_QTMAIN_LIBRARY}
-    ${QT_QTDECLARATIVE_LIBRARY}
     ${Qt5Quick_LIBRARIES}
     ${Qt5Positioning_LIBRARIES}
     ${MARBLEWIDGET}
