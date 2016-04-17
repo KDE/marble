@@ -39,9 +39,6 @@ if( BUILD_MARBLE_TESTS )
     include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/tests )
     set( TestTrack_SRCS tests/TestTrack.cpp GpxParser.cpp ${gpx_handlers_SRCS} )
     qt_generate_moc( tests/TestTrack.cpp ${CMAKE_CURRENT_BINARY_DIR}/TestTrack.moc )
-    include_directories(
-        ${CMAKE_CURRENT_BINARY_DIR}/tests
-    )
     include_directories(${Qt5Test_INCLUDE_DIRS})
     set( TestTrack_SRCS TestTrack.moc ${TestTrack_SRCS} )
 
