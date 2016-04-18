@@ -376,7 +376,6 @@ ${Qt5WebKitWidgets_LIBRARIES}
 ${Qt5Svg_LIBRARIES}
 ${Qt5Script_LIBRARIES}
 ${Qt5Quick_LIBRARIES}
-${Qt5OpenGL_LIBRARIES}
 ${Qt5PrintSupport_LIBRARIES}
 ${Qt5DBus_LIBRARIES}
 )

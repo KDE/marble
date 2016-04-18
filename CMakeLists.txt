@@ -81,7 +81,6 @@ find_package(Qt5Svg REQUIRED)
 find_package(Qt5Sql REQUIRED)
 find_package(Qt5Concurrent REQUIRED)
 find_package(Qt5Quick REQUIRED)
-find_package(Qt5OpenGL REQUIRED)
 find_package(Qt5PrintSupport REQUIRED)
 
 if(QTONLY)
