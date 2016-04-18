@@ -22,6 +22,8 @@ SET(astrolib_SRCS
 )
 
 ADD_LIBRARY(astro SHARED ${astrolib_SRCS})
+generate_export_header(astro BASE_NAME astrolib)
+target_include_directories(astro PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>)
 
 if (APPLE)
   #defined in top level makefile
@@ -65,7 +67,7 @@ endif()
     eclsolar.h
     planetarySats.h
     solarsystem.h
-    astrolib_export.h
+    ${CMAKE_CURRENT_BINARY_DIR}/astrolib_export.h
 
     DESTINATION ${CMAKE_INSTALL_PREFIX}/include/astro
 )

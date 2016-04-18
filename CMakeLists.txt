@@ -39,6 +39,7 @@ set ( CMAKE_MODULE_PATH
      )
 
 # add cmake macros
+include(GenerateExportHeader)
 include( MarbleMacros )
 
 ####################################################
