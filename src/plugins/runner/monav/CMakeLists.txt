@@ -5,8 +5,6 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-INCLUDE_DIRECTORIES(${Qt5Xml_INCLUDE_DIRS})
-
 set( monav_SRCS
   MonavRunner.cpp
   MonavPlugin.cpp

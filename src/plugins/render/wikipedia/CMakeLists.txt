@@ -5,8 +5,6 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-INCLUDE_DIRECTORIES(${Qt5WebKitWidgets_INCLUDE_DIRS})
-
 set( wikipedia_SRCS WikipediaPlugin.cpp
                     WikipediaModel.cpp
                     WikipediaItem.cpp

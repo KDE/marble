@@ -5,8 +5,6 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-INCLUDE_DIRECTORIES(${Qt5Script_INCLUDE_DIRS})
-
 set( my_SRCS
   EarthquakePlugin.cpp
   EarthquakeModel.cpp

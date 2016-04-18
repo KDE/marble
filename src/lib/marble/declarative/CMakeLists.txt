@@ -8,9 +8,6 @@ endif(Qt5Positioning_LIBRARIES)
 INCLUDE_DIRECTORIES(
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_BINARY_DIR}
-    ${Qt5Qml_INCLUDE_DIRS}
-    ${Qt5Quick_INCLUDE_DIRS}
-    ${Qt5Positioning_INCLUDE_DIR}
 )
 
 add_library( marbledeclarative SHARED

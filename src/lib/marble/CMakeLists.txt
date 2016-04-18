@@ -23,10 +23,6 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}/osm
  ${CMAKE_CURRENT_SOURCE_DIR}/cloudsync
  ${CMAKE_SOURCE_DIR}/src/lib/astro
- ${Qt5WebKitWidgets_INCLUDE_DIRS}
- ${Qt5Xml_INCLUDE_DIRS}
- ${Qt5Concurrent_INCLUDE_DIRS}
- ${Qt5Quick_INCLUDE_DIRS}
  ${ZLIB_INCLUDE_DIRS}
 )
 
@@ -378,6 +374,7 @@ ${Qt5Script_LIBRARIES}
 ${Qt5Quick_LIBRARIES}
 ${Qt5PrintSupport_LIBRARIES}
 ${Qt5DBus_LIBRARIES}
+${Qt5Concurrent_LIBRARIES}
 )
 
 if (APPLE)

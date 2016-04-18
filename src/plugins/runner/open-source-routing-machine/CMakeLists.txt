@@ -5,11 +5,6 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-INCLUDE_DIRECTORIES(
-  ${Qt5WebKitWidgets_INCLUDE_DIRS}
-  ${Qt5Xml_INCLUDE_DIRS}
-)
-
 set( osrm_SRCS OSRMRunner.cpp OSRMPlugin.cpp )
 
 marble_add_plugin( OSRMPlugin ${osrm_SRCS} )

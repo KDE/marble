@@ -5,11 +5,6 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-INCLUDE_DIRECTORIES(
-  ${Qt5WebKitWidgets_INCLUDE_DIRS}
-  ${Qt5Xml_INCLUDE_DIRS}
-)
-
 set( openrouteservice_SRCS OpenRouteServiceRunner.cpp OpenRouteServicePlugin.cpp )
 
 set( openrouteservice_UI OpenRouteServiceConfigWidget.ui )

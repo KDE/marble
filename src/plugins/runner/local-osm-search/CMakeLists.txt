@@ -5,8 +5,6 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-INCLUDE_DIRECTORIES(${Qt5Sql_INCLUDE_DIRS})
-
 set( localOsmSearch_SRCS
 LocalOsmSearchRunner.cpp
 LocalOsmSearchPlugin.cpp

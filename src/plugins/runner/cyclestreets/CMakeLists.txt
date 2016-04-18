@@ -5,11 +5,6 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-INCLUDE_DIRECTORIES(
-  ${Qt5WebKitWidgets_INCLUDE_DIRS}
-  ${Qt5Xml_INCLUDE_DIRS}
-)
-
 set( cyclestreets_SRCS CycleStreetsRunner.cpp CycleStreetsPlugin.cpp )
 
 set( cyclestreets_UI CycleStreetsConfigWidget.ui )
