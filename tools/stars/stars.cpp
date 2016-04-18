@@ -13,7 +13,7 @@
 
 #include <QFile>
 #include <QDebug>
-#include <QApplication>
+#include <QCoreApplication>
 #include <QStringList>
 #include <QFileInfo>
 #include <QDataStream>

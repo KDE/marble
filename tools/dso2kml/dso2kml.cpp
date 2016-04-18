@@ -11,7 +11,7 @@
 
 #include <QFile>
 #include <QDebug>
-#include <QApplication>
+#include <QCoreApplication>
 #include <QStringList>
 
 #include <cmath>
