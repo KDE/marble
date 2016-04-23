@@ -1,8 +1,8 @@
 {
  "description": "This file is to be read by androiddeployqt",
  "qt": "@QT_ANDROID_QT_ROOT@",
- "sdk": "@QT_ANDROID_SDK_ROOT@",
- "ndk": "@QT_ANDROID_NDK_ROOT@",
+ "sdk": "@ANDROID_SDK_ROOT@",
+ "ndk": "@ANDROID_NDK_ROOT@",
  "toolchain-prefix": "@ANDROID_TOOLCHAIN@",
  "tool-prefix": "@ANDROID_TOOLCHAIN@",
  "toolchain-version": "@ANDROID_GCC_VERSION@",
