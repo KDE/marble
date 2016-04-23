@@ -64,6 +64,9 @@ class Filter(object):
             if len(files) - len(masked) != len(whitelist):
                 print ('Warning: At least one white-listed plugin is not installed')
             return masked
+        elif dir.startswith('/libs/'):
+            # other android app binary
+            return ['libMarbleBehaim.so']
 
         return []
 
