@@ -24,7 +24,7 @@ class Filter(object):
     '''
 
     def __init__(self, base):
-        self.base = base
+        self.base = base.rstrip(os.sep)
 
     def shouldPackage(self, dir, files):
         # Change absolute directory name to one relative to the installation directory
