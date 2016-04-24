@@ -27,8 +27,6 @@ target_link_libraries(
     ${MARBLEWIDGET}
     marbleui)
 
-target_link_libraries( ${TARGET} ${Qt5Core_LIBRARIES} )
-
 install( TARGETS ${TARGET} RUNTIME DESTINATION ${MARBLE_EXAMPLES_INSTALL_DIR}/${TARGET} )
 install( FILES ${${TARGET}_SRCS} DESTINATION ${MARBLE_EXAMPLES_INSTALL_DIR}/${TARGET} )
 install( FILES CMakeLists.txt.external DESTINATION ${MARBLE_EXAMPLES_INSTALL_DIR}/${TARGET} RENAME CMakeLists.txt )

@@ -17,5 +17,7 @@ QT_WRAP_UI(my_SRCS ${cachedetailsdialog_UI})
 
 qt_add_resources(my_SRCS opencachingcom.qrc)
 
+set( OpenCachingComPlugin_LIBS Qt5::Script )
+
 MARBLE_ADD_PLUGIN( OpenCachingComPlugin ${my_SRCS} )
 

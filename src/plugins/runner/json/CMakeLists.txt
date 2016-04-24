@@ -7,4 +7,6 @@ INCLUDE_DIRECTORIES(
 
 set( json_SRCS JsonRunner.cpp JsonPlugin.cpp JsonParser.cpp )
 
+set( JsonPlugin_LIBS Qt5::Script )
+
 marble_add_plugin( JsonPlugin ${json_SRCS} )

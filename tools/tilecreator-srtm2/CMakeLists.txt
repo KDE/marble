@@ -10,7 +10,7 @@ set( ${TARGET}_SRC main.cpp tccore.cpp )
 add_definitions( -DMAKE_MARBLE_LIB -DTILECREATOR )
 add_executable( ${TARGET} ${${TARGET}_SRC} )
 
-target_link_libraries( ${TARGET} ${Qt5Core_LIBRARIES} marblewidget-qt5 )
+target_link_libraries( ${TARGET} marblewidget-qt5 )
 
 if (APPLE)
   target_link_libraries (${TARGET} ${APP_SERVICES_LIBRARY})

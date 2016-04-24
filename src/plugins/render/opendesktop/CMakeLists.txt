@@ -14,4 +14,6 @@ set( my_SRCS
 set( opendesktop_UI OpenDesktopConfigWidget.ui )
 qt_wrap_ui( my_SRCS ${opendesktop_UI} )
 
+set( OpenDesktopPlugin_LIBS Qt5::Script )
+
 marble_add_plugin( OpenDesktopPlugin ${my_SRCS} )

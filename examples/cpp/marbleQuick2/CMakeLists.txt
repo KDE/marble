@@ -12,7 +12,6 @@ qt5_add_resources(marble_QRCS marbleQuick2.qrc)
 add_executable( ${TARGET} ${${TARGET}_SRC} ${marble_QRCS} )
 
 target_link_libraries( ${TARGET} ${OpenCV_LIBRARIES} )
-target_link_libraries( ${TARGET} ${Qt5Core_LIBRARIES} ${Qt5Gui_LIBRARIES} ${Qt5Quick_LIBRARIES} ${Qt5Widget_LIBRARIES} )
 target_link_libraries( ${TARGET} ${MARBLEWIDGET} marbledeclarative )
 
 add_custom_command(TARGET ${TARGET} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different

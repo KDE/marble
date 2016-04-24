@@ -9,4 +9,4 @@ include_directories(
 set( ${TARGET}_SRC pntreplace.cpp svgxmlhandler.cpp )
 add_executable( ${TARGET} ${${TARGET}_SRC} )
 
-target_link_libraries( ${TARGET} ${Qt5Core_LIBRARIES} ${Qt5Xml_LIBRARIES} ${Qt5Widgets_LIBRARIES} )
+target_link_libraries( ${TARGET} Qt5::Xml Qt5::Widgets )

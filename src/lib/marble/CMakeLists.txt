@@ -36,7 +36,6 @@ set(GENERIC_LIB_VERSION "0.24.21")
 set(GENERIC_LIB_SOVERSION "25")
 endif()
 
-# link_directories (${QT_LIBRARY_DIR})
 ########### next target ###############
 
 if(MARBLE_NO_WEBKITWIDGETS)
@@ -356,38 +355,55 @@ qt_wrap_ui(marblewidget_SRCS ${marblewidget_UI})
 
 ADD_LIBRARY(${MARBLEWIDGET} SHARED ${marblewidget_SRCS} ${SOURCES_UI_HDRS})
 
+# TODO: use PUBLIC/PRIVATE everywhere instead of LINK_PUBLIC/LINK_PRIVATE
+# once SailfishOS has cmake >= 2.8.12
+
 # link with libastro
-TARGET_LINK_LIBRARIES (${MARBLEWIDGET} astro)
+TARGET_LINK_LIBRARIES (${MARBLEWIDGET} LINK_PRIVATE astro)
 
 # link against zlib
-TARGET_LINK_LIBRARIES (${MARBLEWIDGET} ${ZLIB_LIBRARIES})
+TARGET_LINK_LIBRARIES (${MARBLEWIDGET} LINK_PRIVATE ${ZLIB_LIBRARIES})
 
 # link with release version of Qt libs
 TARGET_LINK_LIBRARIES (${MARBLEWIDGET}
-${Qt5Core_LIBRARIES}
-${Qt5Xml_LIBRARIES}
-${Qt5Widgets_LIBRARIES}
-${Qt5Gui_LIBRARIES}
-${Qt5WebKitWidgets_LIBRARIES}
-${Qt5Svg_LIBRARIES}
-${Qt5Script_LIBRARIES}
-${Qt5Quick_LIBRARIES}
-${Qt5PrintSupport_LIBRARIES}
-${Qt5DBus_LIBRARIES}
-${Qt5Concurrent_LIBRARIES}
+    LINK_PUBLIC
+        Qt5::Xml
+        Qt5::Gui
+        Qt5::Widgets
+        Qt5::Quick
+    LINK_PRIVATE
+        Qt5::Svg
+        Qt5::Script
+        Qt5::PrintSupport
+        Qt5::Concurrent
 )
+if (NOT MARBLE_NO_WEBKITWIDGETS)
+    TARGET_LINK_LIBRARIES (${MARBLEWIDGET}
+        LINK_PUBLIC
+            Qt5::WebKitWidgets
+    )
+endif ()
+if (NOT QT_NO_DBUS AND NOT CMAKE_SYSTEM_NAME STREQUAL Android)
+    TARGET_LINK_LIBRARIES (${MARBLEWIDGET}
+        LINK_PRIVATE
+            Qt5::DBus
+    )
+endif ()
 
 if (APPLE)
+  # TODO: PUBLIC or can be PRIVATE?
   #defined in top level makefile
-  TARGET_LINK_LIBRARIES(${MARBLEWIDGET} ${MAC_EXTRA_LIBS} )
+  TARGET_LINK_LIBRARIES(${MARBLEWIDGET} LINK_PUBLIC ${MAC_EXTRA_LIBS} )
 endif (APPLE)
 
+# TODO: still supported?
 if (CMAKE_SYSTEM_NAME MATCHES "SunOS")
-  TARGET_LINK_LIBRARIES(${MARBLEWIDGET} m)
+  TARGET_LINK_LIBRARIES(${MARBLEWIDGET} LINK_PUBLIC m)
 endif (CMAKE_SYSTEM_NAME MATCHES "SunOS")
 
 if(WIN32)
-  TARGET_LINK_LIBRARIES(${MARBLEWIDGET} ws2_32 imm32 winmm)
+  # TODO: PUBLIC or can be PRIVATE?
+  TARGET_LINK_LIBRARIES(${MARBLEWIDGET} LINK_PUBLIC ws2_32 imm32 winmm)
 endif(WIN32)
 
 if(NOT CMAKE_SYSTEM_NAME STREQUAL Android)

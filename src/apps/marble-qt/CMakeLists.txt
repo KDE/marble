@@ -25,13 +25,11 @@ endif (WIN32)
 
 target_link_libraries (
 marble-qt
-${Qt5Core_LIBRARIES}
-${Qt5Xml_LIBRARIES}
-${Qt5Widgets_LIBRARIES}
-${Qt5PrintSupport_LIBRARIES}
-${Qt5Network_LIBRARIES}
-${Qt5WebKitWidgets_LIBRARIES}
-${Qt5WebKit_LIBRARIES}
+Qt5::Xml
+Qt5::Widgets
+Qt5::PrintSupport
+Qt5::Network
+Qt5::WebKitWidgets
 marbleui
 ${MARBLEWIDGET}
 astro)

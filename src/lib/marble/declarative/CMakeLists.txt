@@ -1,9 +1,9 @@
 PROJECT( MarbleDeclarativePlugin )
 
 macro_optional_find_package(Qt5Positioning)
-if(Qt5Positioning_LIBRARIES)
+if(Qt5Positioning_FOUND)
     add_definitions(-DHAVE_QT5_POSITIONING)
-endif(Qt5Positioning_LIBRARIES)
+endif(Qt5Positioning_FOUND)
 
 INCLUDE_DIRECTORIES(
     ${CMAKE_CURRENT_SOURCE_DIR}
@@ -42,11 +42,22 @@ set_target_properties(marbledeclarative PROPERTIES
 
 marble_add_project_resources(qmldir)
 
+# TODO: use PUBLIC/PRIVATE everywhere instead of LINK_PUBLIC/LINK_PRIVATE
+# once SailfishOS has cmake >= 2.8.12
+
 target_link_libraries( marbledeclarative
-    ${Qt5Quick_LIBRARIES}
-    ${Qt5Positioning_LIBRARIES}
-    ${MARBLEWIDGET}
+    LINK_PUBLIC
+        Qt5::Quick
+        ${MARBLEWIDGET}
+    LINK_PRIVATE
+        Qt5::Script
 )
+if(Qt5Positioning_FOUND)
+    target_link_libraries( marbledeclarative
+        LINK_PRIVATE
+            Qt5::Positioning
+    )
+endif()
 
 set_target_properties( marbledeclarative PROPERTIES
     INSTALL_RPATH_USE_LINK_PATH TRUE

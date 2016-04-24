@@ -9,6 +9,6 @@ SET( qtpositioning_SRCS
  QtPositioningPositionProviderPlugin.cpp
 )
 
-SET( QtPositioningPositionProviderPlugin_LIBS ${Qt5Location_LIBRARIES} ${Qt5Positioning_LIBRARIES} )
+SET( QtPositioningPositionProviderPlugin_LIBS Qt5::Location Qt5::Positioning )
 
 MARBLE_ADD_PLUGIN( QtPositioningPositionProviderPlugin ${qtpositioning_SRCS} )

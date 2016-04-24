@@ -95,14 +95,6 @@ endif()
 cmake_minimum_required(VERSION 2.8.12)
 set(MARBLEWIDGET marblewidget-qt5)
 
-include_directories( ${Qt5Svg_INCLUDE_DIRS} )
-include_directories( ${Qt5PrintSupport_INCLUDE_DIRS} )
-include_directories( ${Qt5Network_INCLUDE_DIRS} )
-include_directories( ${Qt5Script_INCLUDE_DIRS} )
-include_directories( ${Qt5Test_INCLUDE_DIRS} )
-include_directories( ${Qt5Xml_INCLUDE_DIRS} )
-include_directories( ${Qt5Sql_INCLUDE_DIRS} )
-
 SET(CMAKE_AUTOMOC TRUE)
 
 # Use M_PI under Windows

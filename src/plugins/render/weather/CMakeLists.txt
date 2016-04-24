@@ -25,4 +25,6 @@ set( weather_UI WeatherConfigWidget.ui )
 qt_wrap_ui( weather_SRCS ${weather_UI} )
 qt_add_resources( weather_SRCS weather.qrc )
 
+set( Weather_LIBS Qt5::Script Qt5::Svg )
+
 marble_add_plugin( Weather ${weather_SRCS} )

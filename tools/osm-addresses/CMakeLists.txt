@@ -29,4 +29,4 @@ add_definitions( -DMAKE_MARBLE_LIB )
 add_executable( ${TARGET} ${${TARGET}_SRC} ${PROTO_SRCS} ${PROTO_HDRS} )
 
 target_link_libraries( ${TARGET} ${PROTOBUF_LIBRARIES} ${ZLIB_LIBRARIES} )
-target_link_libraries( ${TARGET} ${Qt5Core_LIBRARIES} ${Qt5Sql_LIBRARIES} marblewidget-qt5 )
+target_link_libraries( ${TARGET} Qt5::Sql marblewidget-qt5 )

@@ -11,28 +11,34 @@ qt_wrap_ui(marble_SRCS ${marble_UI})
 
 add_library (marbleui STATIC ${marble_SRCS})
 
+# TODO: use PUBLIC/PRIVATE everywhere instead of LINK_PUBLIC/LINK_PRIVATE
+# once SailfishOS has cmake >= 2.8.12
+
 target_link_libraries (
     marbleui
-    ${Qt5Core_LIBRARIES}
-    ${Qt5Xml_LIBRARIES}
-    ${Qt5Widgets_LIBRARIES}
-    ${Qt5PrintSupport_LIBRARIES}
-    ${Qt5Network_LIBRARIES}
-    ${Qt5WebKitWidgets_LIBRARIES}
-    ${Qt5WebKit_LIBRARIES}
-    ${MARBLEWIDGET})
+    LINK_PUBLIC
+        ${MARBLEWIDGET}
+        Qt5::Widgets
+        Qt5::PrintSupport
+    LINK_PRIVATE
+        Qt5::Network
+        Qt5::DBus
+)
 
 if(WIN32)
+  # TODO: PUBLIC or can be PRIVATE?
   target_link_libraries(
     marbleui
-    ws2_32 
-    imm32 
-    winmm
+    LINK_PUBLIC
+        ws2_32
+        imm32
+        winmm
     )
 endif(WIN32)
 
 ## this works for win32 only because FindQt does not handle this correct
 if(STATIC_BUILD)
-    target_link_libraries(marble ${QT_PLUGINS_DIR}/imageformats/qjpeg.lib)
-    target_link_libraries(marble ${QT_PLUGINS_DIR}/imageformats/qsvg.lib)
+    # TODO: PUBLIC or can be PRIVATE?
+    target_link_libraries(marble LINK_PUBLIC ${QT_PLUGINS_DIR}/imageformats/qjpeg.lib)
+    target_link_libraries(marble LINK_PUBLIC ${QT_PLUGINS_DIR}/imageformats/qsvg.lib)
 endif(STATIC_BUILD)

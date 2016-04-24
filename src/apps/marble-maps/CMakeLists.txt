@@ -7,31 +7,36 @@ if (CMAKE_SYSTEM_NAME STREQUAL Android)
     set(TARGET Marble)
 
     find_package(Qt5AndroidExtras)
-    include_directories(${Qt5AndroidExtras_INCLUDE_DIRS})
 
     add_library (${TARGET} SHARED ${marble_SRCS} ${marble_QRCS})
+
+    # while not directly linked, need to be listed here to have deployqt pick up those libs
+    target_link_libraries (
+        ${TARGET}
+        ${MARBLEWIDGET}
+        astro
+        Qt5::Concurrent
+        Qt5::Xml
+        Qt5::Widgets
+        Qt5::PrintSupport
+        Qt5::Network
+        Qt5::Script
+        Qt5::Sql
+        Qt5::Svg
+        Qt5::Location
+        Qt5::Positioning
+        Qt5::AndroidExtras
+        Qt5::Multimedia
+    )
 else()
     set(TARGET marble-maps)
     add_executable (${TARGET} ${marble_SRCS} ${marble_QRCS})
 endif()
 
 target_link_libraries (
-      ${TARGET}
-      ${Qt5Core_LIBRARIES}
-      ${Qt5Xml_LIBRARIES}
-      ${Qt5Widgets_LIBRARIES}
-      ${Qt5PrintSupport_LIBRARIES}
-      ${Qt5Network_LIBRARIES}
-      ${Qt5WebKitWidgets_LIBRARIES}
-      ${Qt5WebKit_LIBRARIES}
-      ${Qt5Sql_LIBRARIES}
-      ${Qt5Location_LIBRARIES}
-      ${Qt5Positioning_LIBRARIES}
-      ${Qt5AndroidExtras_LIBRARIES}
-      ${Qt5Multimedia_LIBRARIES}
-      astro
-      ${MARBLEWIDGET}
-      marbledeclarative)
+    ${TARGET}
+    marbledeclarative
+)
 
 FILE(GLOB QML_FILES *.qml)
 add_custom_target(marble-maps_resources ALL SOURCES ${QML_FILES} package/AndroidManifest.xml)

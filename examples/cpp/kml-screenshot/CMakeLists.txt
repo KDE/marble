@@ -10,6 +10,5 @@ set( ${TARGET}_SRC main.cpp)
 add_executable( ${TARGET} ${${TARGET}_SRC} )
 
 target_link_libraries( ${TARGET} ${MARBLEWIDGET} )
-target_link_libraries( ${TARGET} ${Qt5Core_LIBRARIES} )
 
 install( TARGETS ${TARGET} RUNTIME DESTINATION bin )

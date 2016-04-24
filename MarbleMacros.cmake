@@ -85,8 +85,7 @@ macro( marble_add_test TEST_NAME )
 
         add_executable( ${TEST_NAME} ${${TEST_NAME}_SRCS} )
         target_link_libraries( ${TEST_NAME} ${MARBLEWIDGET} )
-        target_link_libraries( ${TEST_NAME} ${Qt5Test_LIBRARIES}
-                                              ${Qt5DBus_LIBRARIES} )
+        target_link_libraries( ${TEST_NAME} Qt5::Test )
 
         set_target_properties( ${TEST_NAME} PROPERTIES 
                                COMPILE_FLAGS "-DDATA_PATH=\"\\\"${DATA_PATH}\\\"\" -DPLUGIN_PATH=\"\\\"${PLUGIN_PATH}\\\"\"" )

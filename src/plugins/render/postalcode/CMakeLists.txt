@@ -12,4 +12,6 @@ set( postalcode_SRCS PostalCodePlugin.cpp
                      PostalCodeItem.cpp
                      PostalCodeItem.h )
 
+set( PostalCode_LIBS Qt5::Script )
+
 marble_add_plugin( PostalCode ${postalcode_SRCS} )

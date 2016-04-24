@@ -13,4 +13,6 @@ set( wikipedia_UI WikipediaConfigWidget.ui )
 
 qt_wrap_ui(wikipedia_SRCS ${wikipedia_UI})
 
+set( Wikipedia_LIBS Qt5::Svg )
+
 marble_add_plugin( Wikipedia ${wikipedia_SRCS} )

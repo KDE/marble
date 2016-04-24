@@ -9,4 +9,4 @@ include_directories(
 set( ${TARGET}_SRC main.cpp )
 add_executable( ${TARGET} ${${TARGET}_SRC} )
 
-target_link_libraries( ${TARGET} ${Qt5Core_LIBRARIES} ${Qt5Sql_LIBRARIES} )
+target_link_libraries( ${TARGET} Qt5::Core Qt5::Sql )
