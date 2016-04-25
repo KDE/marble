@@ -6,7 +6,7 @@ Notes:
 -->
 <mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
   <mime-type type="application/x-gpx+xml">
-    <!-- prevent txt/plain thumbnailer <sub-class-of type="application/xml"/> -->
+    <sub-class-of type="application/xml"/>
     <comment>GPX geographic data</comment>
     <comment xml:lang="ast">Datos xeográficos GPX</comment>
     <comment xml:lang="bg">Географски данни GPX</comment>
@@ -53,16 +53,11 @@ Notes:
     <alias type="application/gpx"/>
     <alias type="application/gpx+xml"/>
     <alias type="application/x-gpx"/>
-    <!-- temporary solution, until thumbnailer is done, remove for root-XML stuff -->
-    <magic priority="80">
-      <match value="&lt;gpx" type="string" offset="0:256"/>
-    </magic>
-    <!-- use again if thumbnailer is done -->
-    <!-- <root-XML namespaceURI='http://www.topografix.com/GPX/1/0' localName='gpx'/> -->
-    <!-- <root-XML namespaceURI='http://www.topografix.com/GPX/1/1' localName='gpx'/> -->
+    <root-XML namespaceURI='http://www.topografix.com/GPX/1/0' localName='gpx'/>
+    <root-XML namespaceURI='http://www.topografix.com/GPX/1/1' localName='gpx'/>
   </mime-type>
   <mime-type type="application/x-osm+xml">
-    <!-- prevent txt/plain thumbnailer <sub-class-of type="application/xml"/> -->
+    <sub-class-of type="application/xml"/>
     <comment>OSM Data</comment>
     <comment xml:lang="ast">Datos d'OSM</comment>
     <comment xml:lang="bg">Данни OSM</comment>
@@ -107,12 +102,10 @@ Notes:
     <generic-icon name="application-vnd-google-earth-kml"/>
     <glob pattern="*.osm" />
     <glob pattern="*.osc" />
-    <!-- temporary solution, until thumbnailer is done, remove for root-XML stuff -->
+    <!-- no official namespaceURI defined for OSM XML, so cannot use root-XML tag -->
     <magic priority="80">
       <match value="&lt;osm" type="string" offset="0:256"/>
     </magic>
-    <!-- use again if thumbnailer is done -->
-    <!-- <root-XML namespaceURI='? TODO' localName='osm'/> -->
   </mime-type>
   <mime-type type="application/x-esri-shape">
     <generic-icon name="application-vnd-google-earth-kml"/>
