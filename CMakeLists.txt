@@ -86,7 +86,9 @@ find_package(Qt5PrintSupport REQUIRED)
 
 if(QTONLY)
   # Forward the old QTONLY=TRUE option to the new WITH_KDE=FALSE
-  set(WITH_KF5 FALSE)
+  # needs to be written to cache and forcefully, otherwise macro_optional_find_package's
+  # option(WITH_${_name} ON) seems to operate on a shadowed variant of the variable
+  set(WITH_KF5 FALSE CACHE BOOL "Search for KF5 package" FORCE)
   # And unset it quickly. Nobody shall use it anymore anywhere.
   # to detect if KDE _should_ be used (set by user): WITH_KDE but do not use it within src/lib/
   unset(QTONLY)
