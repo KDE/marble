@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+TryExec=marble
+Exec=marble %F
+Name=Marble
+NoDisplay=true
+GenericName=Virtual Globe
+MimeType=application/vnd.geo+json;
+Icon=marble
+Terminal=false
+Categories=Qt;KDE;Education;Geography;

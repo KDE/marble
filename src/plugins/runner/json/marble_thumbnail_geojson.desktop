@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Service
+Name=GeoJSON Geographic Data
+
+X-KDE-ServiceTypes=ThumbCreator
+MimeType=application/vnd.geo+json;
+
+X-KDE-Library=marblethumbnail
+CacheThumbnail=true
