@@ -16,6 +16,7 @@
                                 <data android:scheme="file" android:host="*" android:mimeType="*/*" android:pathPattern=".*\\.kml"/>
                                 <data android:scheme="file" android:host="*" android:mimeType="*/*" android:pathPattern=".*\\.gpx"/>
                                 <data android:scheme="file" android:host="*" android:mimeType="*/*" android:pathPattern=".*\\.osm"/>
+                                <data android:scheme="file" android:host="*" android:mimeType="*/*" android:pathPattern=".*\\.geojson"/>
                         </intent-filter>
                         <meta-data android:name="android.app.lib_name" android:value="-- %%INSERT_APP_LIB_NAME%% --"/>
                         <meta-data android:name="android.app.qt_sources_resource_id" android:resource="@array/qt_sources"/>
