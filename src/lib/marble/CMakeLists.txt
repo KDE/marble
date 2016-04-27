@@ -4,6 +4,9 @@ macro_optional_find_package(Phonon)
 marble_set_package_properties( Phonon PROPERTIES DESCRIPTION "cross-platform multimedia framework that enables the use of audio and video content" )
 marble_set_package_properties( Phonon PROPERTIES URL "http://qt.digia.com/" )
 marble_set_package_properties( Phonon PROPERTIES TYPE OPTIONAL PURPOSE "Support for playback of soundcue elements" )
+if(PHONON_FOUND)
+    set(HAVE_PHONON TRUE)
+endif()
 
 INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}
@@ -24,6 +27,7 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}/cloudsync
  ${CMAKE_SOURCE_DIR}/src/lib/astro
  ${ZLIB_INCLUDE_DIRS}
+ ${PHONON_INCLUDES}
 )
 
 INCLUDE(geodata/CMakeLists.txt)
@@ -389,6 +393,12 @@ if (NOT QT_NO_DBUS AND NOT CMAKE_SYSTEM_NAME STREQUAL Android)
             Qt5::DBus
     )
 endif ()
+if (PHONON_FOUND)
+    TARGET_LINK_LIBRARIES (${MARBLEWIDGET}
+        LINK_PRIVATE
+            ${PHONON_LIBS}
+    )
+endif()
 
 if (APPLE)
   # TODO: PUBLIC or can be PRIVATE?
