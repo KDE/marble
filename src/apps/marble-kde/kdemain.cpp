@@ -263,12 +263,14 @@ int main ( int argc, char *argv[] )
                          i18n( "Special thanks for providing an"
                                 " important source of inspiration by creating"
                                 " Marble's predecessor \"Kartographer\"." ));
-    KAboutData::setApplicationData(aboutData);
 
     KCrash::setCrashHandler( KCrash::defaultCrashHandler );
     KCrash::setDrKonqiEnabled( true );
 
     QApplication app( argc, argv );
+
+    KAboutData::setApplicationData(aboutData);
+
     QCommandLineParser parser;
     parser.addHelpOption();
     parser.addVersionOption();
