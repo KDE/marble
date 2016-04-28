@@ -274,6 +274,7 @@ int main ( int argc, char *argv[] )
     QCommandLineParser parser;
     parser.addHelpOption();
     parser.addVersionOption();
+    aboutData.setupCommandLine(&parser);
 
     // Autodetect profiles
     MarbleGlobal::Profiles profiles = MarbleGlobal::detectProfiles();
@@ -307,6 +308,7 @@ int main ( int argc, char *argv[] )
     parser.addPositionalArgument("file", i18n( "One or more placemark files to be opened") );
 
     parser.process( app );
+    aboutData.processCommandLine(&parser);
 
     KLocalizedString::setApplicationDomain("marble");
 
