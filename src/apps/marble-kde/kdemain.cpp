@@ -13,7 +13,6 @@
 #include <kaboutdata.h>
 #include <KConfig>
 #include <KConfigGroup>
-#include <kcrash.h>
 #include <klocalizedstring.h>
 #include <KSharedConfig>
 
@@ -263,9 +262,6 @@ int main ( int argc, char *argv[] )
                          i18n( "Special thanks for providing an"
                                 " important source of inspiration by creating"
                                 " Marble's predecessor \"Kartographer\"." ));
-
-    KCrash::setCrashHandler( KCrash::defaultCrashHandler );
-    KCrash::setDrKonqiEnabled( true );
 
     QApplication app( argc, argv );
 
