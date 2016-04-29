@@ -1,6 +1,15 @@
 [Desktop Entry]
 Type=Service
 Name=GeoJSON Geographic Data
+Name[ca]=Dades geogràfiques GeoJSON
+Name[de]=GeoJSON-Geografiedaten
+Name[es]=Datos geográficos GeoJSON
+Name[gl]=Datos xeográficos GeoJSON
+Name[nl]=GeoJSON Geografische gegevens
+Name[pt]=Dados Geográficos em GeoJSON
+Name[sv]=GeoJSON geografisk data
+Name[uk]=географічні дані GeoJSON
+Name[x-test]=xxGeoJSON Geographic Dataxx
 
 X-KDE-ServiceTypes=ThumbCreator
 MimeType=application/vnd.geo+json;
