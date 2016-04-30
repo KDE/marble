@@ -2,10 +2,12 @@
 Type=Service
 Name=GeoJSON Geographic Data
 Name[ca]=Dades geogràfiques GeoJSON
+Name[ca@valencia]=Dades geogràfiques GeoJSON
 Name[de]=GeoJSON-Geografiedaten
 Name[es]=Datos geográficos GeoJSON
 Name[gl]=Datos xeográficos GeoJSON
 Name[nl]=GeoJSON Geografische gegevens
+Name[pl]=Dane geograficzne GeoJSON
 Name[pt]=Dados Geográficos em GeoJSON
 Name[sv]=GeoJSON geografisk data
 Name[uk]=географічні дані GeoJSON
