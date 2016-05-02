@@ -1,2 +1,2 @@
-CHECKSETS kde4
+CHECKSETS kde5
 EXCLUDE qclasses,cpp
