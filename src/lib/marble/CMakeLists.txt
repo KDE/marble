@@ -36,7 +36,7 @@ INCLUDE(layers/CMakeLists.txt)
 INCLUDE(osm/CMakeLists.txt)
 
 if(NOT CMAKE_SYSTEM_NAME STREQUAL Android)
-set(GENERIC_LIB_VERSION "0.23.90")
+set(GENERIC_LIB_VERSION "0.24.1")
 set(GENERIC_LIB_SOVERSION "24")
 endif()
 
