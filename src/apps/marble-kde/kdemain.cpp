@@ -266,6 +266,7 @@ int main ( int argc, char *argv[] )
     QApplication app( argc, argv );
 
     KAboutData::setApplicationData(aboutData);
+    QApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("marble")));
 
     QCommandLineParser parser;
     parser.addHelpOption();
