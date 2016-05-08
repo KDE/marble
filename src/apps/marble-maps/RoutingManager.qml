@@ -16,7 +16,6 @@ Routing {
     id: root
 
     property var marbleItem: null
-    property var selectedPlacemark: null
 
     marbleMap: marbleItem.marbleMap
     waypointDelegate: Waypoint {visible: false}

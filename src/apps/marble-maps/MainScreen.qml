@@ -120,7 +120,6 @@ ApplicationWindow {
                         id: routing
                         anchors.fill: parent
                         marbleItem: marbleMaps
-                        selectedPlacemark: search.searchResultPlacemark
                         routingProfile: routeEditor.routingProfile
                     }
 
