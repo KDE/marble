@@ -53,7 +53,7 @@ GeoDataImagePyramid &GeoDataImagePyramid::operator=( const GeoDataImagePyramid &
     return *this;
 }
 
-bool GeoDataImagePyramid::operator==( const GeoDataImagePyramid& other )
+bool GeoDataImagePyramid::operator==( const GeoDataImagePyramid& other ) const
 {
     return equals(other) &&
            d->m_tileSize == other.d->m_tileSize &&
@@ -62,7 +62,7 @@ bool GeoDataImagePyramid::operator==( const GeoDataImagePyramid& other )
            d->m_gridOrigin == other.d->m_gridOrigin;
 }
 
-bool GeoDataImagePyramid::operator!=( const GeoDataImagePyramid& other )
+bool GeoDataImagePyramid::operator!=( const GeoDataImagePyramid& other ) const
 {
     return !this->operator==(other);
 }

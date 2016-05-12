@@ -330,11 +330,11 @@ public:
         return _leftToRight.operator[](t);
     }
 
-    bool operator==(const KBiAssociativeContainer<LeftContainer, RightContainer> &other) {
+    bool operator==(const KBiAssociativeContainer<LeftContainer, RightContainer> &other) const {
         return _leftToRight.operator == (other._leftToRight);
     }
 
-    bool operator!=(const KBiAssociativeContainer<LeftContainer, RightContainer> &other) {
+    bool operator!=(const KBiAssociativeContainer<LeftContainer, RightContainer> &other) const {
         return _leftToRight.operator != (other._leftToRight);
     }
 

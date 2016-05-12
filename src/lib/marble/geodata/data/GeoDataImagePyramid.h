@@ -27,8 +27,8 @@ public:
     GeoDataImagePyramid( const GeoDataImagePyramid &other );
 
     GeoDataImagePyramid& operator=( const GeoDataImagePyramid &other );
-    bool operator==( const GeoDataImagePyramid &other );
-    bool operator!=( const GeoDataImagePyramid &other );
+    bool operator==( const GeoDataImagePyramid &other ) const;
+    bool operator!=( const GeoDataImagePyramid &other ) const;
 
     ~GeoDataImagePyramid();
 
