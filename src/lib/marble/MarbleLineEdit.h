@@ -12,8 +12,8 @@
 // Copyright 2010,2012      Dennis Nienhüser <nienhueser@kde.org>
 //
 
-#ifndef MARBLE_ROUTINGLINEEDIT_H
-#define MARBLE_ROUTINGLINEEDIT_H
+#ifndef MARBLE_MARBLELINEEDIT_H
+#define MARBLE_MARBLELINEEDIT_H
 
 #include "marble_export.h"
 
@@ -68,4 +68,4 @@ private:
 
 } // namespace Marble
 
-#endif // MARBLE_ROUTINGLINEEDIT_H
+#endif // MARBLE_MARBLELINEEDIT_H

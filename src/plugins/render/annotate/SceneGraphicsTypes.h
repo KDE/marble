@@ -8,8 +8,8 @@
 // Copyright 2014      Calin Cruceru   <crucerucalincristian@gmail.com
 //
 
-#ifndef SCENEGRAPHICTYPES_H
-#define SCENEGRAPHICTYPES_H
+#ifndef MARBLE_SCENEGRAPHICSTYPES_H
+#define MARBLE_SCENEGRAPHICSTYPES_H
 
 namespace Marble
 {

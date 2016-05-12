@@ -12,8 +12,8 @@
  Copyright 2012 Ander Pijoan <ander.pijoan@deusto.es>
 */
 
-#ifndef MARBLE_GEOSCENETILED_H
-#define MARBLE_GEOSCENETILED_H
+#ifndef MARBLE_GEOSCENETILEDATASET_H
+#define MARBLE_GEOSCENETILEDATASET_H
 
 #include <QList>
 #include <QStringList>

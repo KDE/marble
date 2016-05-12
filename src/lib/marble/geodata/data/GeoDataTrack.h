@@ -8,8 +8,8 @@
 // Copyright 2011 Guillaume Martres <smarter@ubuntu.com>
 //
 
-#ifndef MARBLE_GEODATAGXTRACK_H
-#define MARBLE_GEODATAGXTRACK_H
+#ifndef MARBLE_GEODATATRACK_H
+#define MARBLE_GEODATATRACK_H
 
 #include "GeoDataCoordinates.h"
 #include "GeoDataGeometry.h"
@@ -193,4 +193,4 @@ private:
 
 Q_DECLARE_METATYPE( Marble::GeoDataTrack* )
 
-#endif // MARBLE_GEODATAGXTRACK_H
+#endif // MARBLE_GEODATATRACK_H

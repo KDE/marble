@@ -8,8 +8,8 @@
 // Copyright 2015      Gábor Péterffy <peterffy95@gmail.com>
 //
 
-#ifndef MARBLE_SEARCHBARBACKEND_H
-#define MARBLE_SEARCHBARBACKEND_H
+#ifndef MARBLE_SEARCHBACKEND_H
+#define MARBLE_SEARCHBACKEND_H
 
 #include <QObject>
 #include <QSortFilterProxyModel>

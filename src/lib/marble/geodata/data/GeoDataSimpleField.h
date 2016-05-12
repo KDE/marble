@@ -8,8 +8,8 @@
 // Copyright 2014 Abhinav Gangwar <abhgang@gmail.com>
 //
 
-#ifndef MARBLE_GEODATDASIMPLEFIELD_H
-#define MARBLE_GEODATDASIMPLEFIELD_H
+#ifndef MARBLE_GEODATASIMPLEFIELD_H
+#define MARBLE_GEODATASIMPLEFIELD_H
 
 #include "geodata_export.h"
 #include "GeoDocument.h"
@@ -108,4 +108,4 @@ private:
 
 }
 
-#endif // MARBLE_GEODATDASIMPLEFIELD_H
+#endif // MARBLE_GEODATASIMPLEFIELD_H

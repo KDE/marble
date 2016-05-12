@@ -8,8 +8,8 @@
 // Copyright 2015      Stanciu Marius-Valeriu <stanciumarius94@gmail.com>
 //
 
-#ifndef MARBLE_OSMDOCUMENTTAGWRITER_H
-#define MARBLE_OSMDOCUMENTTAGWRITER_H
+#ifndef MARBLE_OSMDOCUMENTTAGTRANSLATOR_H
+#define MARBLE_OSMDOCUMENTTAGTRANSLATOR_H
 
 #include "GeoTagWriter.h"
 #include "OsmFeatureTagTranslator.h"

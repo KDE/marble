@@ -1,5 +1,5 @@
-#ifndef NWWIMAGE_H
-#define NWWIMAGE_H
+#ifndef NWWMAPIMAGE_H
+#define NWWMAPIMAGE_H
 
 #include "mapreproject.h"
 #include "ReadOnlyMapImage.h"

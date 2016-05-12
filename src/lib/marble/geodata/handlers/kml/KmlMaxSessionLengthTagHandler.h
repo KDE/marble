@@ -8,8 +8,8 @@
 // Copyright 2013      Mohammed Nafees <nafees.technocool@gmail.com>
 //
 
-#ifndef KMLMAXREFRESHPERIODTAGHANDLER_H
-#define KMLMAXREFRESHPERIODTAGHANDLER_H
+#ifndef MARBLE_KMLMAXSESSIONLENGTHTAGHANDLER_H
+#define MARBLE_KMLMAXSESSIONLENGTHTAGHANDLER_H
 
 #include "GeoTagHandler.h"
 

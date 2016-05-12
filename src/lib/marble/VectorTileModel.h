@@ -9,8 +9,8 @@
  Copyright 2013      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 */
 
-#ifndef MARBLE_VECTORTILEMAPPER_H
-#define MARBLE_VECTORTILEMAPPER_H
+#ifndef MARBLE_VECTORTILEMODEL_H
+#define MARBLE_VECTORTILEMODEL_H
 
 #include <QObject>
 #include <QRunnable>
@@ -115,4 +115,4 @@ private:
 
 }
 
-#endif // MARBLE_VECTORTILEMAPPER_H
+#endif // MARBLE_VECTORTILEMODEL_H

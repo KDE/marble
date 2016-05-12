@@ -12,8 +12,8 @@
  Copyright 2012 Ander Pijoan <ander.pijoan@deusto.es>
 */
 
-#ifndef MARBLE_GEOSCENEVECTORTILE_H
-#define MARBLE_GEOSCENEVECTORTILE_H
+#ifndef MARBLE_GEOSCENEVECTORTILEDATASET_H
+#define MARBLE_GEOSCENEVECTORTILEDATASET_H
 
 #include "GeoSceneTileDataset.h"
 
@@ -31,4 +31,4 @@ class GeoSceneVectorTileDataset : public GeoSceneTileDataset
 
 }
 
-#endif // MARBLE_GEOSCENEVECTORTILE_H
+#endif // MARBLE_GEOSCENEVECTORTILEDATASET_H

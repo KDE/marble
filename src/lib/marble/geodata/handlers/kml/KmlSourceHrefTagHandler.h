@@ -8,8 +8,8 @@
 // Copyright 2013      Sanjiban Bairagya <sanjiban22393@gmail.com>
 //
 
-#ifndef KMLXSOURCEHREFHANDLER_H
-#define KMLXSOURCEHREFHANDLER_H
+#ifndef MARBLE_KMLSOURCEHREFTAGHANDLER_H
+#define MARBLE_KMLSOURCEHREFTAGHANDLER_H
 
 #include "GeoTagHandler.h"
 

@@ -1,5 +1,5 @@
-#ifndef RENDEROSMTILECLUSTERTHREAD_H
-#define RENDEROSMTILECLUSTERTHREAD_H
+#ifndef OSMTILECLUSTERRENDERER_H
+#define OSMTILECLUSTERRENDERER_H
 
 #include "mapreproject.h"
 #include "ReadOnlyMapDefinition.h"

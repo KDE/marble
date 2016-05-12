@@ -8,8 +8,8 @@
 // Copyright 2010      Siddharth Srivastava <akssps011@gmail.com>
 //
 
-#ifndef ADJUSTNAVIGATION_H
-#define ADJUSTNAVIGATION_H
+#ifndef MARBLE_AUTONAVIGATION_H
+#define MARBLE_AUTONAVIGATION_H
 
 #include "marble_export.h"
 #include "GeoDataCoordinates.h"
@@ -105,4 +105,4 @@ private:
 };
 } //namespace marble
 
-#endif // ADJUSTNAVIGATION_H
+#endif // MARBLE_AUTONAVIGATION_H

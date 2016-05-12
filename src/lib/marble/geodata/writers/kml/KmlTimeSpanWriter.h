@@ -8,8 +8,8 @@
 // Copyright 2012      Shou Ya <shouyalovelyx@gmail.com>
 //
 
-#ifndef MARBLE_KMLTIMESPANTAGWRITER_H
-#define MARBLE_KMLTIMESPANTAGWRITER_H
+#ifndef MARBLE_KMLTIMESPANWRITER_H
+#define MARBLE_KMLTIMESPANWRITER_H
 
 #include "GeoTagWriter.h"
 

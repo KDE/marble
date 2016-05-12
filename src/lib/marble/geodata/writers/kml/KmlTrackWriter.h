@@ -8,8 +8,8 @@
 // Copyright 2011 Guillaume Martres <smarter@ubuntu.com>
 //
 
-#ifndef MARBLE_KMLGXTRACKWRITER_H
-#define MARBLE_KMLGXTRACKWRITER_H
+#ifndef MARBLE_KMLTRACKWRITER_H
+#define MARBLE_KMLTRACKWRITER_H
 
 #include "GeoTagWriter.h"
 
@@ -24,4 +24,4 @@ public:
 
 }
 
-#endif // MARBLE_KMLGXTRACKWRITER_H
+#endif // MARBLE_KMLTRACKWRITER_H

@@ -9,8 +9,8 @@
 // Copyright 2012      Thibaut Gridel <tgridel@free.fr>
 //
 
-#ifndef MARBLE_BOOKMARKINFODIALOG_H
-#define MARBLE_BOOKMARKINFODIALOG_H
+#ifndef MARBLE_EDITBOOKMARKDIALOG_H
+#define MARBLE_EDITBOOKMARKDIALOG_H
 
 #include <QDialog>
 
