@@ -28,7 +28,6 @@
 #include <QStandardItemModel>
 #include <QShortcut>
 #include <QNetworkProxy>
-#include <QLabel>
 #include <QDomDocument>
 #include <QDomNodeList>
 #include <QFileDialog>

@@ -1,7 +1,5 @@
 #include "RouteItemDelegate.h"
 
-#include <QPainter>
-
 #ifdef MARBLE_NO_WEBKITWIDGETS
 #include <QWidget>
 #else

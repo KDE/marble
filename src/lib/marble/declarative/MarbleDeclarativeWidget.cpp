@@ -21,7 +21,6 @@
 #include "AbstractFloatItem.h"
 #include "AbstractDataPlugin.h"
 #include "RenderPlugin.h"
-#include "MarbleMap.h"
 #include "MarbleDirs.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
