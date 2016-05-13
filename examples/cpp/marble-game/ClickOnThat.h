@@ -28,7 +28,7 @@ class ClickOnThat : public QObject
 {
     Q_OBJECT
 public:
-    ClickOnThat( MarbleWidget *marbleWidget );
+    explicit ClickOnThat( MarbleWidget *marbleWidget );
     ~ClickOnThat();
 
     /**

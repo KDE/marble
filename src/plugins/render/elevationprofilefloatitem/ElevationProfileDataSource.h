@@ -37,7 +37,7 @@ class ElevationProfileDataSource : public QObject
     Q_OBJECT
 
 public:
-    ElevationProfileDataSource( QObject *parent = 0 );
+    explicit ElevationProfileDataSource( QObject *parent = 0 );
 
     /**
      * @brief isDataAvailable

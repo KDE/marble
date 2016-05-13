@@ -30,7 +30,7 @@ class MARBLE_EXPORT CountryByFlag : public QObject
 {
     Q_OBJECT;
 public:
-    CountryByFlag( MarbleWidget *marbleWidget );
+    explicit CountryByFlag( MarbleWidget *marbleWidget );
     ~CountryByFlag();
 
 public Q_SLOTS:

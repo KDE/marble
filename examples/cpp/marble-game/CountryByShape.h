@@ -27,7 +27,7 @@ class MARBLE_EXPORT CountryByShape : public QObject
 {
     Q_OBJECT
 public:
-    CountryByShape( MarbleWidget *widget );
+    explicit CountryByShape( MarbleWidget *widget );
     ~CountryByShape();
 
 Q_SIGNALS:

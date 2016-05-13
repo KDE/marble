@@ -43,7 +43,7 @@ class ViewportParams;
         void regionSelected(const QList<double>&);
 
     public:
-        MarbleAbstractPresenter(MarbleMap *map, QObject *parent = 0);
+        explicit MarbleAbstractPresenter(MarbleMap *map, QObject *parent = 0);
         virtual ~MarbleAbstractPresenter();
 
         qreal moveStep() const;

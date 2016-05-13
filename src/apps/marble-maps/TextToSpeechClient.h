@@ -18,7 +18,7 @@ class TextToSpeechClient : public QObject
     Q_OBJECT
 
 public:
-    TextToSpeechClient(QObject * parent = 0);
+    explicit TextToSpeechClient(QObject * parent = 0);
     ~TextToSpeechClient();
 
 public slots:

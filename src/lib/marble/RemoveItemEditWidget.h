@@ -27,7 +27,7 @@ class RemoveItemEditWidget: public QWidget
     Q_OBJECT
 
 public:
-    RemoveItemEditWidget( const QModelIndex& index, QWidget* parent=0 );
+    explicit RemoveItemEditWidget( const QModelIndex& index, QWidget* parent=0 );
     bool editable() const;
 
 Q_SIGNALS:

@@ -22,7 +22,7 @@ class MarbleMaps : public MarbleQuickItem
     Q_PROPERTY( bool suspended READ isSuspended NOTIFY isSuspendedChanged )
 
 public:
-    MarbleMaps(QQuickItem *parent = 0);
+    explicit MarbleMaps(QQuickItem *parent = 0);
 
     bool isSuspended() const;
 

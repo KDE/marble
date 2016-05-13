@@ -31,7 +31,7 @@ class MyPaintLayer : public QObject, public LayerInterface
 
 public:
     // Constructor
-    MyPaintLayer( MarbleWidget* widget );
+    explicit MyPaintLayer( MarbleWidget* widget );
 
     // LayerInterface
     QStringList renderPosition() const;

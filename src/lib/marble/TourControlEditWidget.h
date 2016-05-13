@@ -29,7 +29,7 @@ class TourControlEditWidget: public QWidget
     Q_OBJECT
 
 public:
-    TourControlEditWidget( const QModelIndex& index, QWidget* parent=0 );
+    explicit TourControlEditWidget( const QModelIndex& index, QWidget* parent=0 );
     bool editable() const;
 
 Q_SIGNALS:

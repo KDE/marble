@@ -24,7 +24,7 @@ class PanoramioPlugin : public AbstractDataPlugin
     MARBLE_PLUGIN( PanoramioPlugin )
 
  public:
-    PanoramioPlugin( const MarbleModel *marbleModel = 0 );
+    explicit PanoramioPlugin( const MarbleModel *marbleModel = 0 );
 
     QString nameId() const;
 

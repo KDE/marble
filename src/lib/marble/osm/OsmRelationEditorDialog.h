@@ -34,7 +34,7 @@ class MARBLE_EXPORT OsmRelationEditorDialog : public QDialog
     Q_OBJECT
 
 public:
-    OsmRelationEditorDialog( OsmPlacemarkData *relationData, QWidget *parent = 0 );
+    explicit OsmRelationEditorDialog( OsmPlacemarkData *relationData, QWidget *parent = 0 );
     ~OsmRelationEditorDialog();
 
 private slots:

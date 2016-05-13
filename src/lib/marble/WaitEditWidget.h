@@ -29,7 +29,7 @@ class WaitEditWidget: public QWidget
     Q_OBJECT
 
 public:
-    WaitEditWidget( const QModelIndex& index, QWidget* parent=0 );
+    explicit WaitEditWidget( const QModelIndex& index, QWidget* parent=0 );
     bool editable() const;
 
 Q_SIGNALS:

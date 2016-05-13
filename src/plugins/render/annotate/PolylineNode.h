@@ -29,7 +29,7 @@ public:
     };
     Q_DECLARE_FLAGS(PolyNodeFlags, PolyNodeFlag)
 
-    PolylineNode( QRegion region = QRegion() );
+    explicit PolylineNode( QRegion region = QRegion() );
     ~PolylineNode();
 
     bool isSelected() const;
