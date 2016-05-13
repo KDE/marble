@@ -27,7 +27,7 @@ using namespace Marble;
 class TestGeoDataWriter : public QObject
 {
     Q_OBJECT
-private slots:
+private Q_SLOTS:
     void initTestCase();
     void countFeatures_data();
     void saveFile_data();

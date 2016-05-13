@@ -47,7 +47,7 @@ public:
     QString owncloudPassword() const;
     void setOwncloudPassword( const QString &password );
 
-public slots:
+public Q_SLOTS:
     void uploadRoute();
     void uploadRoute( const QString &identifier );
     void openRoute( const QString &identifier );
@@ -57,7 +57,7 @@ public slots:
     void syncBookmarks();
     void resolveConflict( Marble::MergeItem *item );
 
-signals:
+Q_SIGNALS:
     void mapChanged();
     void routeModelChanged();
     void cloudSyncManagerChanged();

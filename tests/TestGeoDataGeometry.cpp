@@ -20,7 +20,7 @@ using namespace Marble;
 class TestGeoDataGeometry : public QObject
 {
     Q_OBJECT
-private slots:
+private Q_SLOTS:
     void downcastPointTest_data();
     void downcastPointTest();
     void deleteAndDetachTest1();

@@ -20,7 +20,7 @@ public:
     bool editorEvent(QEvent* event, QAbstractItemModel* model, const QStyleOptionViewItem& option, const QModelIndex& index);
 
 
-signals:
+Q_SIGNALS:
     void downloadButtonClicked( QString timestamp );
     void openButtonClicked( QString timestamp );
     void deleteButtonClicked( QString timestamp );

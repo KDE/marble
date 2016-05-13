@@ -33,7 +33,7 @@ public:
     explicit TourCaptureDialog(MarbleWidget *widget, QWidget *parent = 0);
     ~TourCaptureDialog();
 
-public slots:
+public Q_SLOTS:
     void startRecording();
     void stopRecording();
     void setRate( double rate );
@@ -41,7 +41,7 @@ public slots:
     void setDefaultFilename( const QString &filename );
     void handleError();
 
-private slots:
+private Q_SLOTS:
     void loadDestinationFile();
     void updateProgress( double position );
     void recordNextFrame();

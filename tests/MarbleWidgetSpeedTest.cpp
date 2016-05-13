@@ -25,7 +25,7 @@ namespace Marble
 class MarbleWidgetSpeedTest: public QObject
 {
   Q_OBJECT
-  private slots:
+  private Q_SLOTS:
   void timeTest();
   void initTestCase();// will be called before the first testfunction is executed.
   void cleanupTestCase();// will be called after the last testfunction was executed.

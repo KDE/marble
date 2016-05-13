@@ -43,7 +43,7 @@ Q_SIGNALS:
 private:
     GpsdConnection* m_connection;
     
- signals:
+ Q_SIGNALS:
     void gpsdInfo( gps_data_t data );
 };
 

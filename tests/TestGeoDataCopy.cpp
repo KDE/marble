@@ -51,7 +51,7 @@ class TestGeoDataCopy : public QObject
     Q_OBJECT
     private:
         void testCoordinate( GeoDataCoordinates coord, qreal alt, int detail, QString coordtest );
-    private slots:
+    private Q_SLOTS:
         void initTestCase();
         // misc.:
         void copyCoordinates();

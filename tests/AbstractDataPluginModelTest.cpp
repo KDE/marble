@@ -66,7 +66,7 @@ public:
         QObject( parent )
     {}
 
- private slots:
+private Q_SLOTS:
     void init_testcase();
 
     void defaultConstructor();

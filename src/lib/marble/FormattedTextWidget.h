@@ -33,7 +33,7 @@ public:
      const QString text();
      void setReadOnly( bool state );
 
-private slots:
+private Q_SLOTS:
      void toggleDescriptionEditMode( bool isFormattedTextMode = false );
      void setTextCursorBold( bool bold );
      void setTextCursorItalic( bool italic );
@@ -45,7 +45,7 @@ private slots:
      void addLinkToDescription();
      void updateDescriptionEditButtons();
 
-signals:
+Q_SIGNALS:
      void textUpdated();
 
 private:

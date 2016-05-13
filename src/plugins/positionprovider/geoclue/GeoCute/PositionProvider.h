@@ -35,7 +35,7 @@ class PositionProvider : public Provider
 
         static PositionProvider* detailed();
 
-    signals:
+    Q_SIGNALS:
         void positionChanged(GeoCute::Position position);
         
     private:

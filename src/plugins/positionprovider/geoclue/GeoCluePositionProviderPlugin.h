@@ -56,7 +56,7 @@ class GeoCluePositionProviderPlugin: public PositionProviderPlugin
     GeoDataCoordinates m_position;
     GeoDataAccuracy m_accuracy;
     
- private slots:
+ private Q_SLOTS:
     void updatePosition(GeoCute::Position newPosition);
     void updateStatus(GeoCute::Status newStatus);
 };

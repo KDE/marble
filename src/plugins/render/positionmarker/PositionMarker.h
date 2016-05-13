@@ -88,7 +88,7 @@ class PositionMarker  : public RenderPlugin, public DialogConfigurationInterface
     virtual void setSettings( const QHash<QString,QVariant> &settings );
 
 
- public slots:
+ public Q_SLOTS:
     void readSettings();
     void writeSettings();
 

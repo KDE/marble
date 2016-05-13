@@ -52,7 +52,7 @@ public:
     void initialize ();
     bool isInitialized () const;
 
-private slots:
+private Q_SLOTS:
     void updateLicenseText();
     void toggleLicenseSize();
     void showAboutDialog();

@@ -30,7 +30,7 @@ class ViewportParamsTest : public QObject
 {
     Q_OBJECT
 
- private slots:
+private Q_SLOTS:
     void constructorDefaultValues();
 
     void constructorValues_data();

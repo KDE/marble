@@ -76,7 +76,7 @@ public:
      */
     QVector<RouteItem> cachedRouteList() const;
 
-public slots:
+public Q_SLOTS:
     /**
      * Uploads the route with given timestamp.
      * @param timestamp Timestamp of the route which will be uploaded.
@@ -122,7 +122,7 @@ public slots:
      */
     void updateUploadProgressbar( qint64 sent, qint64 total );
 
-private slots:
+private Q_SLOTS:
     /**
      * Appends downloaded route list to RouteSyncManager's private list
      * and then forwards the list to CloudRouteModel
@@ -131,7 +131,7 @@ private slots:
     void setRouteModelItems( const QVector<RouteItem> &routeList );
 
 
-signals:
+Q_SIGNALS:
     void routeSyncEnabledChanged(bool enabled);
     void routeListDownloadProgress( qint64 received, qint64 total );
     void routeUploadProgress( qint64 sent, qint64 total );

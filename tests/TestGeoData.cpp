@@ -28,7 +28,7 @@ namespace Marble
 class TestGeoData : public QObject
 {
     Q_OBJECT
- private slots:
+private Q_SLOTS:
     void nodeTypeTest();
     void parentingTest();
 };

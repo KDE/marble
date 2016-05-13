@@ -53,7 +53,7 @@ public:
 
     bool operator<( const AbstractDataPluginItem *other ) const;
 
-public slots:
+public Q_SLOTS:
     void showInfoDialog();
 
 private:
@@ -72,7 +72,7 @@ private:
     static QFont s_font;
     static QPixmap s_icon;
 
-private slots:
+private Q_SLOTS:
     void updateDescriptionLanguage( QString language );
 
     void nextLogEntry();                                  ///< Display next log entry.

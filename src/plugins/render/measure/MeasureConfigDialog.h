@@ -44,10 +44,10 @@ public:
     void setShowCircularArea(bool);
     void setPaintMode(MeasureToolPlugin::PaintMode);
 
-private slots:
+private Q_SLOTS:
     void updateTabs();
 
-signals:
+Q_SIGNALS:
     void applied();
 
 private:

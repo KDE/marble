@@ -28,7 +28,7 @@ public:
     QString name() const;
     QString url() const;
 
-private slots:
+private Q_SLOTS:
     void checkFields();
 
 private:

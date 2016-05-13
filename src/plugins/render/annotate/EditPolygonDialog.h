@@ -35,13 +35,13 @@ public:
                        QWidget *parent = 0 );
     ~EditPolygonDialog();
 
-public slots:
+public Q_SLOTS:
     void handleAddingNode( const GeoDataCoordinates &node );
     void handleItemMoving( GeoDataPlacemark *item );
     void handleChangingStyle();
     void updatePolygon();
 
-signals:
+Q_SIGNALS:
     void polygonUpdated( GeoDataFeature *feature );
 
     /**
@@ -51,7 +51,7 @@ signals:
      */
     void relationCreated( const OsmPlacemarkData &relation );
 
-private slots:
+private Q_SLOTS:
     void updateLinesDialog( const QColor &color );
     void updatePolyDialog( const QColor &color );
     void checkFields();

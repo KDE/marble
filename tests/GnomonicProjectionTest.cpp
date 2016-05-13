@@ -19,7 +19,7 @@ class GnomonicProjectionTest : public QObject
 {
     Q_OBJECT
 
- private slots:
+private Q_SLOTS:
     void screenCoordinatesOfCenter_data();
     void screenCoordinatesOfCenter();
 };

@@ -68,7 +68,7 @@ namespace Marble
             (void)handlePinch(center, scale, state);
         }
 
-    private slots:
+    private Q_SLOTS:
         void showLmbMenu(int, int) {}
         void showRmbMenu(int, int) {}
         void openItemToolTip() {}
@@ -77,7 +77,7 @@ namespace Marble
             m_marbleQuick->setCursor(cursor);
         }
 
-    private slots:
+    private Q_SLOTS:
         void installPluginEventFilter(RenderPlugin *) {}
 
     private:

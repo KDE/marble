@@ -40,7 +40,7 @@ protected:
     void leaveEvent( QEvent *event );
     void repaint();
 
-private slots:
+private Q_SLOTS:
     void startPressRepeat();
     void repeatPress();
 

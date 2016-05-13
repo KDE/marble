@@ -64,14 +64,14 @@ public:
 public Q_SLOTS:
     void cancelUpload();
 
-private slots:
+private Q_SLOTS:
     void checkAuthReply();
     void checkAuthError(QNetworkReply::NetworkError error);
     void prepareRouteList();
     void saveDownloadedRoute();
     void validateSettings();
 
-signals:
+Q_SIGNALS:
     void routeListDownloaded( const QVector<RouteItem> &routeList );
     void routeDownloaded();
     void routeDeleted();

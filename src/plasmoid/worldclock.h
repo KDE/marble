@@ -49,16 +49,16 @@ class WorldClock : public Plasma::Applet
         void paintInterface(QPainter *painter,
                     const QStyleOptionGraphicsItem *option,
                     const QRect& contentsRect);
-    public slots:
+    public Q_SLOTS:
         void dataUpdated(const QString &source,
                     const Plasma::DataEngine::Data &data);
         void createConfigurationInterface(KConfigDialog *parent);
         void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
         void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
         void hoverMoveEvent(QGraphicsSceneHoverEvent *event);
-    protected slots:
+    protected Q_SLOTS:
         void configAccepted();
-    private slots:
+    private Q_SLOTS:
         //connected to geometryChanged()
         void resizeMap(bool changeAspect = false);
         void slotRepaint();

@@ -78,7 +78,7 @@ public:
     MergeItem::Resolution resolution() const;
     void setResolution( MergeItem::Resolution resolution );
 
-signals:
+Q_SIGNALS:
     void pathAChanged();
     void pathBChanged();
     void placemarkAChanged();

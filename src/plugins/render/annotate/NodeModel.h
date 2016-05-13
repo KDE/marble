@@ -29,7 +29,7 @@ public:
     QVariant headerData( int section, Qt::Orientation orientation, int role ) const;
     void clear();
     Qt::ItemFlags flags(const QModelIndex & index) const ;
-public slots:
+public Q_SLOTS:
     int addNode( const GeoDataCoordinates &node );
 private:
     QList<GeoDataCoordinates> m_nodes;

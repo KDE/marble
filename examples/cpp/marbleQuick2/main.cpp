@@ -37,7 +37,7 @@ public:
         }
     }
 
-public slots:
+public Q_SLOTS:
 
     void handlePinchStart(QPointF center)
     {

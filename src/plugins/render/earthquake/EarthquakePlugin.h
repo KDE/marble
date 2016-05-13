@@ -69,7 +69,7 @@ public:
      */
     virtual void setSettings( const QHash<QString,QVariant> &settings );
 
-public slots:
+public Q_SLOTS:
     void readSettings();
     void writeSettings();
     void updateModel();
@@ -85,7 +85,7 @@ private:
     int m_numResults;
     int m_maximumNumberOfItems;
     
-private slots:
+private Q_SLOTS:
     void validateDateRange();
 };
 

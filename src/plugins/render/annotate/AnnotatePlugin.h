@@ -89,13 +89,13 @@ public:
     bool render( GeoPainter *painter, ViewportParams *viewport,
                  const QString &renderPos, GeoSceneLayer *layer = 0 );
 
-signals:
+Q_SIGNALS:
     void placemarkMoved();
     void nodeAdded( const GeoDataCoordinates &coordinates );
     void itemMoved( GeoDataPlacemark *placemark );
     void mouseMoveGeoPosition( const QString& );
 
-private slots:
+private Q_SLOTS:
     void enableModel( bool enabled );
     void askToRemoveFocusItem();
     void removeFocusItem();

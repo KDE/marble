@@ -25,7 +25,7 @@ class AbstractDataPluginTest : public QObject
 {
     Q_OBJECT
 
- private slots:
+private Q_SLOTS:
     void initialize_data();
     void initialize();
 

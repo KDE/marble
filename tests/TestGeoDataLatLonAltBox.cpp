@@ -26,7 +26,7 @@ class TestGeoDataLatLonAltBox : public QObject
 {
     Q_OBJECT
 
-private slots:
+private Q_SLOTS:
     void testDefaultConstruction();
     void testCopyConstruction_data();
     void testCopyConstruction();

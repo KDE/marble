@@ -64,7 +64,7 @@ class OpenDesktopItem : public AbstractDataPluginItem
 
         void setMarbleWidget(MarbleWidget *widget);
     
-    public slots:
+    public Q_SLOTS:
         void openBrowser();
 
     private:

@@ -22,7 +22,7 @@ class MarbleMapTest : public QObject
 {
     Q_OBJECT
 
- private slots:
+ private Q_SLOTS:
     void centerOnSpherical_data();
     void centerOnSpherical();
 

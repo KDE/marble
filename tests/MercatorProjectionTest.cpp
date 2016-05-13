@@ -19,7 +19,7 @@ class MercatorProjectionTest : public QObject
 {
     Q_OBJECT
 
- private slots:
+private Q_SLOTS:
     void screenCoordinatesValidLat_data();
     void screenCoordinatesValidLat();
 

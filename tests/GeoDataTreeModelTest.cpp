@@ -22,7 +22,7 @@ class GeoDataTreeModelTest : public QObject
 {
     Q_OBJECT
 
- private Q_SLOTS:
+private Q_SLOTS:
     void defaultConstructor();
     void setRootDocument();
     void addDocument();

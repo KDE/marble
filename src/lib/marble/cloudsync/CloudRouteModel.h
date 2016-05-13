@@ -98,7 +98,7 @@ public:
      */
     QIcon preview( const QModelIndex &index ) const;
 
-public slots:
+public Q_SLOTS:
     void updateProgress( qint64 currentSize, qint64 totalSize );
     void setPreview( QNetworkReply *reply );
 

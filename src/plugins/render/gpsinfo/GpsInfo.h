@@ -70,7 +70,7 @@ class GpsInfo : public AbstractFloatItem
 
     void forceRepaint();
 
- private slots:
+ private Q_SLOTS:
     void updateLocation( GeoDataCoordinates coordinates, qreal speed);
 
  private:

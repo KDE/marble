@@ -23,10 +23,10 @@ public:
     void setOsmBaseDirectory( QDir const & osmBaseDirectory );
     void setOsmTileLevel( int const level );
 
-signals:
+Q_SIGNALS:
     void clusterRendered( OsmTileClusterRenderer * );
 
-public slots:
+public Q_SLOTS:
     void initMapSources();
     void renderOsmTileCluster( int const clusterX, int const clusterY );
 

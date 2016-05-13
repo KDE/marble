@@ -25,7 +25,7 @@ class RenderPluginModelTest : public QObject
         m_map( 0 )
     {}
 
- private slots:
+ private Q_SLOTS:
     void initTestCase() { m_map = new MarbleMap(); }
     void cleanupTestCase() { delete m_map; }
 

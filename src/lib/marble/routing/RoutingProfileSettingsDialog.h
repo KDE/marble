@@ -35,7 +35,7 @@ public:
 
     void editProfile( int profileIndex );
 
-private slots:
+private Q_SLOTS:
     void updateConfigWidget();
 
     void openConfigDialog();

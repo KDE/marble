@@ -62,7 +62,7 @@ class GpsdPositionProviderPlugin: public PositionProviderPlugin
     qreal m_track;
     QDateTime m_timestamp;
 
- private slots:
+ private Q_SLOTS:
     void update(gps_data_t data);
 };
 

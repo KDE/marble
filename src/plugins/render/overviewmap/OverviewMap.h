@@ -86,7 +86,7 @@ class OverviewMap : public AbstractFloatItem, public DialogConfigurationInterfac
      */
     virtual void setSettings( const QHash<QString,QVariant> &settings );
 
- public slots:
+ public Q_SLOTS:
     void readSettings();
     void writeSettings();
     void updateSettings();
@@ -119,7 +119,7 @@ class OverviewMap : public AbstractFloatItem, public DialogConfigurationInterfac
     qreal m_centerLon;
     bool m_mapChanged;
 
- private slots:
+ private Q_SLOTS:
     void chooseCustomMap();
     void synchronizeSpinboxes();
     void showCurrentPlanetPreview() const;

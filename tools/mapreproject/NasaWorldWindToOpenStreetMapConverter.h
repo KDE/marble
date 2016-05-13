@@ -36,10 +36,10 @@ public:
 
     void testReprojection();
 
-signals:
+Q_SIGNALS:
     void finished();
 
-public slots:
+public Q_SLOTS:
     void assignNextCluster( OsmTileClusterRenderer * );
 
 private:

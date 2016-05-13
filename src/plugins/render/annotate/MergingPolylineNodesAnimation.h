@@ -31,14 +31,14 @@ public:
     explicit MergingPolylineNodesAnimation( PolylineAnnotation *polyline );
     ~MergingPolylineNodesAnimation();
 
-public slots:
+public Q_SLOTS:
     void startAnimation();
 
-signals:
+Q_SIGNALS:
     void nodesMoved();
     void animationFinished();
 
-private slots:
+private Q_SLOTS:
     void updateNodes();
 
 private:

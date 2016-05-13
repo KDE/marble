@@ -73,11 +73,11 @@ public:
 
     ~twitterPlugin();
 
-public slots:
+public Q_SLOTS:
     void slotJsonDownloadComplete(QString , QString);   //completed download of json reply fom panoramio
     void slotGeoCodingReplyRecieved(QString , QString);   //completed download of image
 
-signals:
+Q_SIGNALS:
     void statusMessageForImageDownloadingProcess(QString);
 private:
     CacheStoragePolicy *m_storagePolicy;

@@ -61,7 +61,7 @@ public:
      */
     bool isIdFieldVisible() const;
 
-public slots:
+public Q_SLOTS:
     /**
      * @brief updateDialogFields is connected to a signal from AnnotatePlugin in order
      * to update some fields in the dialog as the user interacts directly with the text
@@ -96,7 +96,7 @@ public slots:
      */
     void setReadOnly( bool state );
 
-private slots:
+private Q_SLOTS:
 
     /**
      * @brief checkFields shows warnings if there are important fields which don't hold
@@ -140,7 +140,7 @@ private slots:
      * @brief toogleDescriptionEditMode toggles edit mode for description field.
      */
 
-signals:
+Q_SIGNALS:
     /**
      * @brief textAnnotationUpdated signals that some property of the PlacemarkTextAnnotation
      * instance has changed.

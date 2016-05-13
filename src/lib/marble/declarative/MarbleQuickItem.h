@@ -76,7 +76,7 @@ namespace Marble
         MarbleInputHandler *inputHandler();
         int zoom() const;
 
-    public slots:
+    public Q_SLOTS:
         void goHome();
         void setZoom(int zoom, FlyToMode mode = Instant);
         Q_INVOKABLE void setZoomToMaximumLevel();
@@ -164,7 +164,7 @@ namespace Marble
 
         bool inertialGlobeRotation() const;
 
-    signals:
+    Q_SIGNALS:
         void mapWidthChanged(int mapWidth);
         void mapHeightChanged(int mapHeight);
         void showFrameRateChanged(bool showFrameRate);
@@ -195,7 +195,7 @@ namespace Marble
         QObject *getEventFilter() const;
         void pinch(QPointF center, qreal scale, Qt::GestureState state);
 
-    private slots:
+    private Q_SLOTS:
         void resizeMap();
         void positionDataStatusChanged(PositionProviderStatus status);
         void positionChanged(const GeoDataCoordinates &, GeoDataAccuracy);

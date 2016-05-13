@@ -68,7 +68,7 @@ class Speedometer : public AbstractFloatItem
 
     bool isInitialized () const;
 
- private slots:
+ private Q_SLOTS:
     void updateLocation( GeoDataCoordinates coordinates, qreal speed );
 
  private:

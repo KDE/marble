@@ -48,12 +48,12 @@ class MARBLE_EXPORT MarbleLegendBrowser : public MarbleWebView
     void setMarbleModel( MarbleModel *marbleModel );
     QSize sizeHint() const;
 
- public slots:
+ public Q_SLOTS:
     void setCheckedProperty( const QString& name, bool checked );
     void setRadioCheckedProperty( const QString& value,const QString& name, bool checked );
 
 
- signals:
+ Q_SIGNALS:
     void toggledShowProperty( QString, bool );
     void tourLinkClicked( const QString &url );
 

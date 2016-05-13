@@ -107,7 +107,7 @@ class ControlView : public QWidget
 
     static QActionGroup* createViewSizeActionGroup( QObject* parent );
 
- public slots:
+ public Q_SLOTS:
     void printMapScreenShot( QPointer<QPrintDialog> dialog );
     void printPreview();
     void paintPrintPreview( QPrinter * printer );
@@ -126,7 +126,7 @@ class ControlView : public QWidget
 
     void openTour( const QString &filename );
 
-signals:
+Q_SIGNALS:
     void showMapWizard();
     void showUploadDialog();
     void mapThemeDeleted();

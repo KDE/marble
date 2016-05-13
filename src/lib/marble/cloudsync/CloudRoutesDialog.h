@@ -29,10 +29,10 @@ public:
     ~CloudRoutesDialog();
     CloudRouteModel *model();
 
-public slots:
+public Q_SLOTS:
     void updateListDownloadProgressbar( qint64 received, qint64 total );
 
-signals:
+Q_SIGNALS:
     void downloadButtonClicked( QString timestamp );
     void openButtonClicked( QString timestamp );
     void deleteButtonClicked( QString timestamp );
@@ -43,7 +43,7 @@ private:
     class Private;
     Private *d;
 
-private slots:
+private Q_SLOTS:
     void updateNoRouteLabel();
 };
 

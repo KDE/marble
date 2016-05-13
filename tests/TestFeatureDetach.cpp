@@ -26,7 +26,7 @@ class TestFeatureDetach : public QObject
 {
     Q_OBJECT
 
-private slots:
+private Q_SLOTS:
     /**
      * FIXME: Doesn't work for the moment because calling detach() in
      * GeoDataFeature::set/abstractView() doesn't help because the object

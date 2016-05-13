@@ -43,7 +43,7 @@ public:
     QString name() const;
     QString address() const;
 
-public slots:
+public Q_SLOTS:
     void setName(const QString &name);
 
 Q_SIGNALS:

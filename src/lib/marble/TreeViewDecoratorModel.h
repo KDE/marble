@@ -24,7 +24,7 @@ class TreeViewDecoratorModel : public QSortFilterProxyModel
 {
     Q_OBJECT
 
-public slots:
+public Q_SLOTS:
     void trackExpandedState( const QModelIndex &index );
     void trackCollapsedState( const QModelIndex &index );
 

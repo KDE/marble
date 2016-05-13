@@ -31,7 +31,7 @@ class Provider : public QObject
         virtual ~Provider();
         Status status() const;
 
-    signals:
+    Q_SIGNALS:
         void statusChanged(GeoCute::Status status);
     
     private:

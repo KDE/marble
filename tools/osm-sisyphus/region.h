@@ -55,7 +55,7 @@ public:
 
     static QString fileSize(const QFileInfo &file);
 
-public slots:
+public Q_SLOTS:
 
 private:
     QString m_name;

@@ -29,7 +29,7 @@ using namespace Marble;
 class TestGeoDataTrack : public QObject
 {
     Q_OBJECT
-private slots:
+private Q_SLOTS:
     void initTestCase();
     void defaultConstructor();
     void interpolate();

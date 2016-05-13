@@ -51,7 +51,7 @@ class AbstractFloatItemTest : public QObject
  public:
     AbstractFloatItemTest();
 
- private slots:
+ private Q_SLOTS:
     void defaultConstructor();
 
     void newInstance_data();

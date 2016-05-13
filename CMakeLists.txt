@@ -199,7 +199,11 @@ if(WIN32)
   set (STATIC_BUILD FALSE CACHE BOOL "Link to static Qt libs (win32 only)?")
 endif(WIN32)
 
-add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
+add_definitions(
+    -DQT_USE_FAST_CONCATENATION
+    -DQT_USE_FAST_OPERATOR_PLUS
+    -DQT_NO_SIGNALS_SLOTS_KEYWORDS
+)
 
 ####################################################
 # Options for static build

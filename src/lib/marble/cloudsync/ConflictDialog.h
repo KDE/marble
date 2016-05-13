@@ -40,14 +40,14 @@ public:
     explicit ConflictDialog( QWidget *parent = 0 );
     void setMergeItem( MergeItem *item );
 
-public slots:
+public Q_SLOTS:
     void open();
     void stopAutoResolve();
 
-signals:
+Q_SIGNALS:
     void resolveConflict( MergeItem *mergeItem );
 
-private slots:
+private Q_SLOTS:
     void resolveConflict( QAbstractButton *button );
 
 private:

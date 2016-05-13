@@ -48,10 +48,10 @@ public:
 
     void addDownloadedFile( const QString &url, const QString &type );
 
-public slots:
+public Q_SLOTS:
     void showInfoDialog();
 
-private slots:
+private Q_SLOTS:
     void dialogCloseClicked();
     void openWww();
 

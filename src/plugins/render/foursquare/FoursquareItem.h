@@ -92,7 +92,7 @@ private:
  
     static QFont s_font;
 
-signals:
+Q_SIGNALS:
     void nameChanged();
     
     void categoryChanged();

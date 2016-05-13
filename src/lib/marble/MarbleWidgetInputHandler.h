@@ -31,7 +31,7 @@ class MarbleWidgetInputHandler : public MarbleDefaultInputHandler
 public:
     MarbleWidgetInputHandler(MarbleAbstractPresenter *marblePresenter, MarbleWidget *marbleWidget);
 
-private slots:
+private Q_SLOTS:
     void installPluginEventFilter(RenderPlugin *renderPlugin);
     void showLmbMenu(int x, int y);
     void showRmbMenu(int x, int y);

@@ -66,7 +66,7 @@ public:
      */
     virtual void setSettings( const QHash<QString,QVariant> &settings );
 
-public slots:
+public Q_SLOTS:
     void readSettings();
     void writeSettings();
     void updateSettings();
@@ -77,7 +77,7 @@ private:
     QDialog *m_configDialog;
     QHash<QString,QVariant> m_settings;
 
-private slots:
+private Q_SLOTS:
     void validateDateRange();
     void validateDifficultyRange();
 };

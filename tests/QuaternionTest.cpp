@@ -23,7 +23,7 @@ class QuaternionTest : public QObject
 {
     Q_OBJECT
 
- private slots:
+private Q_SLOTS:
     void testEuler_data();
     void testEuler();
 

@@ -21,7 +21,7 @@ public:
     explicit TextToSpeechClient(QObject * parent = 0);
     ~TextToSpeechClient();
 
-public slots:
+public Q_SLOTS:
     Q_INVOKABLE void readText(const QString & text);
     Q_INVOKABLE void setLocale(const QString & locale);
 };

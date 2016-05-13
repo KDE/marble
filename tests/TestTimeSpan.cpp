@@ -23,7 +23,7 @@ using namespace Marble;
 class TestTimeStamp : public QObject
 {
     Q_OBJECT
-private slots:
+private Q_SLOTS:
     void initTestCase();
     void simpleParseTest();
 };

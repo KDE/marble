@@ -37,7 +37,7 @@ public:
     explicit OsmRelationEditorDialog( OsmPlacemarkData *relationData, QWidget *parent = 0 );
     ~OsmRelationEditorDialog();
 
-private slots:
+private Q_SLOTS:
     void checkFields();
 
 private:

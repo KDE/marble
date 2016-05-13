@@ -32,7 +32,7 @@ class PlacemarkPositionProviderPluginTest : public QObject
     static PositionProviderPlugin *createUninitializedPlugin( const PluginManager *pluginManager );
     static PositionProviderPlugin *createInitializedPlugin( const MarbleModel *model );
 
- private slots:
+ private Q_SLOTS:
     void initialize_data();
     void initialize();
 

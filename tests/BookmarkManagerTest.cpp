@@ -22,7 +22,7 @@ class BookmarkManagerTest : public QObject
 {
     Q_OBJECT
 
- private slots:
+private Q_SLOTS:
     void construct();
 
     void loadFile_data();

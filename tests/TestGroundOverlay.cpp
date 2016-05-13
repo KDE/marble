@@ -21,7 +21,7 @@ using namespace Marble;
 class TestGroundOverlay : public QObject
 {
     Q_OBJECT
-private slots:
+private Q_SLOTS:
     void initTestCase();
     void simpleParseTest();
 };

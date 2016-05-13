@@ -85,7 +85,7 @@ public:
 
     Q_INVOKABLE QPointF positionOnRoute() const;
 
-public slots:
+public Q_SLOTS:
     void setMarbleQuickItem(Marble::MarbleQuickItem * marbleQuickItem);
 
 Q_SIGNALS:
