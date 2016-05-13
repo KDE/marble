@@ -46,7 +46,7 @@ private:
     bool isValidOLC( const QString &ocl ) const;
 
     /**
-     * Maps each character from the accepted chars to its coresponding index
+     * Maps each character from the accepted chars to its corresponding index
      * inside the string.
      */
     QHash<QChar, int> charIndex;

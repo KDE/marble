@@ -243,7 +243,7 @@ void RouteSimulationPositionProviderPlugin::update()
         // Repeat from start
         m_currentIndex = 0;
         m_lineStringInterpolated = m_lineString;
-        m_currentPosition = GeoDataCoordinates();	//Reset The current position so that the the simulation starts from the correct starting point.
+        m_currentPosition = GeoDataCoordinates();	//Reset the current position so that the simulation starts from the correct starting point.
         m_currentPositionWithNoise = GeoDataCoordinates();
         m_speed = 0;
         if ( m_status != PositionProviderStatusUnavailable ) {

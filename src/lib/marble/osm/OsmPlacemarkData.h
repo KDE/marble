@@ -113,7 +113,7 @@ public:
 
 
     /**
-     * @brief this function returns the osmData assosciated with a nd
+     * @brief this function returns the osmData associated with a nd
      */
     OsmPlacemarkData &nodeReference( const GeoDataCoordinates& coordinates );
     OsmPlacemarkData nodeReference( const GeoDataCoordinates& coordinates ) const;

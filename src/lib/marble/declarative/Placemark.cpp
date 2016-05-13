@@ -78,7 +78,7 @@ QString Placemark::address() const
             QString const street = data.value("road").value().toString();
             QString const houseNumber = data.value("house_number").value().toString();
             QString const fullStreet = houseNumber.isEmpty() ? street : tr("%1 %2",
-                "House number (first argument) and street name (second argument) in an adress").arg(houseNumber).arg(street).trimmed();
+                "House number (first argument) and street name (second argument) in an address").arg(houseNumber).arg(street).trimmed();
             address.setStreet(fullStreet);
         }
 
