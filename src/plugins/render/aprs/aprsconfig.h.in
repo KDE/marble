@@ -1,2 +1,2 @@
 /* Defined when QextSerialPort is available */
-#cmakedefine HAVE_QEXTSERIALPORT 1
+#cmakedefine HAVE_QTSERIALPORT 1

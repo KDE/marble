@@ -18,7 +18,7 @@ namespace Marble {
     class AprsTTY : public AprsSource
     {
       public:
-        explicit AprsTTY( QString ttyName );
+        explicit AprsTTY( const QString &ttyName );
         ~AprsTTY();
 
         QString sourceName() const;

@@ -10,7 +10,7 @@
 
 #include "AprsTTY.h"
 
-#include <qextserialport.h>
+#include <QSerialPort>
 
 #include "MarbleDebug.h"
 
@@ -18,7 +18,7 @@
 
 using namespace Marble;
 
-AprsTTY::AprsTTY( QString ttyName )
+AprsTTY::AprsTTY( const QString &ttyName )
     : m_ttyName( ttyName ),
       m_numErrors( 0 )
 {
@@ -43,14 +43,13 @@ AprsTTY::canDoDirect() const
 QIODevice *
 AprsTTY::openSocket() 
 {
-    QextSerialPort *m_port =
-        new QextSerialPort( m_ttyName, QextSerialPort::Polling );
-    m_port->setBaudRate( BAUD9600 );
-    m_port->setParity( PAR_NONE );
-    m_port->setDataBits( DATA_8 );
-    m_port->setStopBits( STOP_1 );
-    m_port->setTimeout( 60000 ); // ms
-    m_port->open( QIODevice::ReadWrite );
+    QSerialPort *m_port = new QSerialPort( m_ttyName );
+    m_port->setBaudRate( QSerialPort::Baud9600, QSerialPort::Input );
+    m_port->setParity( QSerialPort::NoParity );
+    m_port->setDataBits( QSerialPort::Data8 );
+    m_port->setStopBits( QSerialPort::OneStop );
+//    m_port->setTimeout( 60000 ); // ms
+    m_port->open( QIODevice::ReadOnly );
     mDebug() << "opened TTY socket";
     if ( m_port->isOpen() ) {
         mDebug() << "connected to " << m_ttyName.toLocal8Bit().data();

@@ -33,7 +33,7 @@
 
 #include <aprsconfig.h>
 
-#ifdef HAVE_QEXTSERIALPORT
+#ifdef HAVE_QTSERIALPORT
 #include "AprsTTY.h"
 #endif
 
@@ -172,7 +172,7 @@ void AprsPlugin::stopGatherers()
     if ( m_tcpipGatherer )
         m_tcpipGatherer->shutDown();
 
-#ifdef HAVE_QEXTSERIALPORT
+#ifdef HAVE_QTSERIALPORT
     if ( m_ttyGatherer )
         m_ttyGatherer->shutDown();
 #endif
@@ -185,7 +185,7 @@ void AprsPlugin::stopGatherers()
         if ( m_tcpipGatherer->wait(2000) )
             delete m_tcpipGatherer;
 
-#ifdef HAVE_QEXTSERIALPORT
+#ifdef HAVE_QTSERIALPORT
     if ( m_ttyGatherer )
         if ( m_ttyGatherer->wait(2000) )
             delete m_ttyGatherer;
@@ -215,7 +215,7 @@ void AprsPlugin::restartGatherers()
         mDebug() << "started TCPIP gatherer";
     }
 
-#ifdef HAVE_QEXTSERIALPORT
+#ifdef HAVE_QTSERIALPORT
     if ( m_useTty ) {
         m_ttyGatherer =
             new AprsGatherer( new AprsTTY( m_tncTty ),
@@ -278,7 +278,7 @@ void AprsPlugin::readSettings()
         return;
     }
 
-#ifndef HAVE_QEXTSERIALPORT
+#ifndef HAVE_QTSERIALPORT
     ui_configWidget->tabWidget->setTabEnabled( ui_configWidget->tabWidget->indexOf(
                                                    ui_configWidget->Device ), false );
 #endif
