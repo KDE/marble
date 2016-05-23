@@ -8,6 +8,8 @@
 // Copyright 2011      Konstantin Oblaukhov <oblaukhov.konstantin@gmail.com>
 //
 
+#include "OsmElementDictionary.h"
+
 namespace Marble
 {
 namespace osm
