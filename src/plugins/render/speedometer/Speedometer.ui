@@ -34,7 +34,7 @@
      <property name="frameShape">
       <enum>QFrame::NoFrame</enum>
      </property>
-     <property name="numDigits">
+     <property name="digitCount">
       <number>3</number>
      </property>
     </widget>
