@@ -91,10 +91,10 @@
 
 namespace
 {
-    const char* POSITION_STRING = "Position:";
-    const char* DISTANCE_STRING = "Altitude:";
-    const char* ZOOM_STRING = "Zoom:";
-    const char* DATETIME_STRING = "Time:";
+    const char POSITION_STRING[] = "Position:";
+    const char DISTANCE_STRING[] = "Altitude:";
+    const char ZOOM_STRING[] = "Zoom:";
+    const char DATETIME_STRING[] = "Time:";
 }
 
 using namespace Marble;

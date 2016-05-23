@@ -295,14 +295,14 @@ bool LonLatParser::parse( const QString& string )
 bool LonLatParser::tryMatchFromDms( const QString& input, DirPosition dirPosition )
 {
     // direction as postfix
-    const char *postfixCapExp =
+    const char postfixCapExp[] =
         "([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2})(?:%4|\\s)\\s*"
         "(\\d{1,2}%1?\\d*)(?:%5)?\\s*%2[,;]?\\s*"
         "([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2})(?:%4|\\s)\\s*"
         "(\\d{1,2}%1?\\d*)(?:%5)?\\s*%2";
 
     // direction as prefix
-    const char *prefixCapExp =
+    const char prefixCapExp[] =
         "%2\\s*([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2})(?:%4|\\s)\\s*"
         "(\\d{1,2}%1?\\d*)(?:%5)?\\s*(?:,|;|\\s)\\s*"
         "%2\\s*([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2})(?:%4|\\s)\\s*"
@@ -344,12 +344,12 @@ bool LonLatParser::tryMatchFromDms( const QString& input, DirPosition dirPositio
 bool LonLatParser::tryMatchFromDm( const QString& input, DirPosition dirPosition )
 {
     // direction as postfix
-    const char *postfixCapExp =
+    const char postfixCapExp[] =
         "([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2}%1?\\d*)(?:%4)?\\s*%2[,;]?\\s*"
         "([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2}%1?\\d*)(?:%4)?\\s*%2";
 
     // direction as prefix
-    const char *prefixCapExp =
+    const char prefixCapExp[] =
         "%2\\s*([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2}%1?\\d*)(?:%4)?\\s*(?:,|;|\\s)\\s*"
         "%2\\s*([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2}%1?\\d*)(?:%4)?";
 
@@ -388,12 +388,12 @@ bool LonLatParser::tryMatchFromDm( const QString& input, DirPosition dirPosition
 bool LonLatParser::tryMatchFromD( const QString& input, DirPosition dirPosition )
 {
     // direction as postfix, e.g. 74.2245 N 32.2434 W
-    const char *postfixCapExp =
+    const char postfixCapExp[] =
         "([-+]?\\d{1,3}%1?\\d*)(?:%3)?(?:\\s*)%2(?:,|;|\\s)\\s*"
         "([-+]?\\d{1,3}%1?\\d*)(?:%3)?(?:\\s*)%2";
 
     // direction as prefix, e.g. N 74.2245 W 32.2434
-    const char *prefixCapExp =
+    const char prefixCapExp[] =
         "%2\\s*([-+]?\\d{1,3}%1?\\d*)(?:%3)?\\s*(?:,|;|\\s)\\s*"
         "%2\\s*([-+]?\\d{1,3}%1?\\d*)(?:%3)?";
 

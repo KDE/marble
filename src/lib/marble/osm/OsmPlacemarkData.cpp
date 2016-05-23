@@ -22,7 +22,7 @@ namespace Marble
 {
 
 const QString OsmPlacemarkData::osmDataKey = "osm_data";
-const char* OsmPlacemarkData::osmPlacemarkDataType = "OsmPlacemarkDataType";
+const char OsmPlacemarkData::osmPlacemarkDataType[] = "OsmPlacemarkDataType";
 
 OsmPlacemarkData::OsmPlacemarkData():
     m_id( 0 )

@@ -108,10 +108,10 @@ namespace Marble
 
 namespace
 {
-    const char* POSITION_STRING = I18N_NOOP( "Position: %1" );
-    const char* DISTANCE_STRING = I18N_NOOP( "Altitude: %1" );
-    const char* TILEZOOMLEVEL_STRING = I18N_NOOP( "Tile Zoom Level: %1" );
-    const char* DATETIME_STRING = I18N_NOOP( "Time: %1" );
+    const char POSITION_STRING[] = I18N_NOOP( "Position: %1" );
+    const char DISTANCE_STRING[] = I18N_NOOP( "Altitude: %1" );
+    const char TILEZOOMLEVEL_STRING[] = I18N_NOOP( "Tile Zoom Level: %1" );
+    const char DATETIME_STRING[] = I18N_NOOP( "Time: %1" );
 }
 
 K_PLUGIN_FACTORY(MarblePartFactory, registerPlugin<MarblePart>();)

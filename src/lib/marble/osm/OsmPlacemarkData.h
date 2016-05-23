@@ -196,7 +196,7 @@ public:
     /**
      * @brief osmPlacemarkDataType used for identifying OsmPlacemarkData objects as GeoNodes
      */
-    static const char* osmPlacemarkDataType;
+    static const char osmPlacemarkDataType[];
 
 private:
     qint64 m_id;

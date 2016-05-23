@@ -27,7 +27,7 @@ int main(int argc, char ** argv)
 #endif
 
     MarbleDeclarativePlugin declarativePlugin;
-    const char * uri = "org.kde.edu.marble";
+    const char uri[] = "org.kde.edu.marble";
     declarativePlugin.registerTypes(uri);
 
     QQmlApplicationEngine engine;
