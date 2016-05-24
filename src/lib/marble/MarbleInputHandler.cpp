@@ -48,6 +48,8 @@ public:
     qreal m_wheelZoomTargetDistance;
     bool m_panViaArrowsEnabled;
     bool m_inertialEarthRotation;
+    int m_steps;
+    const int m_discreteZoomSteps = 120;
 };
 
 MarbleInputHandler::Protected::Protected(MarbleAbstractPresenter *marblePresenter)
@@ -57,7 +59,8 @@ MarbleInputHandler::Protected::Protected(MarbleAbstractPresenter *marblePresente
       m_disabledMouseButtons( Qt::NoButton ),
       m_wheelZoomTargetDistance( 0.0 ),
       m_panViaArrowsEnabled( true ),
-      m_inertialEarthRotation( true )
+      m_inertialEarthRotation( true ),
+      m_steps(0)
 {
 }
 
@@ -292,11 +295,23 @@ bool MarbleDefaultInputHandler::handleWheel(QWheelEvent *wheelevt)
     MarbleAbstractPresenter *marblePresenter = MarbleInputHandler::d->m_marblePresenter;
     marblePresenter->setViewContext(Animation);
 
-    int steps = wheelevt->delta() / 3;
+    if( (MarbleInputHandler::d->m_steps > 0 && wheelevt->delta() < 0) ||
+        (MarbleInputHandler::d->m_steps < 0 && wheelevt->delta() > 0) )
+    {
+        MarbleInputHandler::d->m_steps = wheelevt->delta();
+    }
+    else
+    {
+        MarbleInputHandler::d->m_steps += wheelevt->delta();
+    }
 
     if (marblePresenter->map()->discreteZoom())
     {
-        marblePresenter->zoomAtBy(wheelevt->pos(), steps/5);
+        if(qAbs(MarbleInputHandler::d->m_steps) >= MarbleInputHandler::d->m_discreteZoomSteps)
+        {
+            marblePresenter->zoomAtBy(wheelevt->pos(), MarbleInputHandler::d->m_steps);
+            MarbleInputHandler::d->m_steps = 0;
+        }
     }
     else
     {
@@ -307,7 +322,7 @@ bool MarbleDefaultInputHandler::handleWheel(QWheelEvent *wheelevt)
             // Do not use intermediate (interpolated) distance values caused by animations
             zoom = marblePresenter->zoomFromDistance(target);
         }
-        qreal newDistance = marblePresenter->distanceFromZoom(zoom + steps);
+        qreal newDistance = marblePresenter->distanceFromZoom(zoom + MarbleInputHandler::d->m_steps);
         MarbleInputHandler::d->m_wheelZoomTargetDistance = newDistance;
         marblePresenter->zoomAt(wheelevt->pos(), newDistance);
         if (MarbleInputHandler::d->m_inertialEarthRotation)
@@ -315,6 +330,7 @@ bool MarbleDefaultInputHandler::handleWheel(QWheelEvent *wheelevt)
             d->m_kineticSpinning.jumpToPosition(MarbleInputHandler::d->m_marblePresenter->centerLongitude(),
                                                 MarbleInputHandler::d->m_marblePresenter->centerLatitude());
         }
+        MarbleInputHandler::d->m_steps = 0;
     }
 
     MarbleInputHandler::d->m_mouseWheelTimer->start(400);
