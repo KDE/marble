@@ -36,8 +36,7 @@ will usually suffice.
 # in this dictionary. 
 
 fixed_tags = {
-  'source': 'MassGIS OpenSpace (http://www.mass.gov/mgis/osp.htm)',
-  'area': 'yes',
+  'source': 'Natural Earth (http://www.naturalearthdata.com/)',
   'created_by': 'polyshp2osm'
 }  
 
@@ -104,6 +103,41 @@ def purpose(data):
         if data['prim_purp'] in keys:
             return keys[data['prim_purp']]
 
+
+def road_map(data):
+    keys = {
+    'Ferry Route': [('route','ferry')],
+    'Major Highway': [('highway','motorway')],
+    'Beltway': [('highway','primary')],
+    'Track': [('highway','tertiary')],
+    'Unknown': [('highway','unclassified')],
+    'Secondary Highway': [('highway','trunk')],
+    'Bypass': [('highway','secondary')],
+    'Road': [('highway','primary')]
+    }
+    if 'type' in data:
+        if data['type'] in keys:
+            return keys[data['type']]
+
+def feature_class(data):
+    keys = {
+    'Lake': [('natural', 'water')],
+    'Alkaline Lake': [('natural', 'water')],
+    'Road': [(road_map,None)],
+    'River': [('waterway', 'river')]
+    }
+    if 'featurecla' in data:
+        if data['featurecla'] in keys:
+            if hasattr(keys[data['featurecla']][0][0], '__call__'):
+                return keys[data['featurecla']][0][0](data)
+            else:
+                return keys[data['featurecla']]
+
+def name_map(data):
+    if 'name' in data:
+        return [('name', data['name'])]
+
+
 def name_tags(data):
     """This function returns two things: a 'pretty' name to use, and
        may return a landuse of either 'cemetery' or 'forest' if the name
@@ -156,6 +190,8 @@ tag_mapping = [
     ('owner_type', owner_type),
     ('prim_purp', purpose),
     ('site_name', name_tags),
+    ('featurecla', feature_class),
+    ('name', name_map)
 ]    
 
 # These tags are not exported, even with the source data; this should be
@@ -168,13 +204,13 @@ boring_tags = [ 'AREA', 'LEN', 'GIS_ACRES' ]
 # '--no-source' is set, then source attributes are not exported, only
 # attributes in tag_mapping.
 
-namespace = "massgis"
+namespace = "natural_earth"
 #namespace = None 
 
 # Uncomment the "DONT_RUN = False" line to get started. 
 
-DONT_RUN = True
-#DONT_RUN = False
+#DONT_RUN = True
+DONT_RUN = False
 
 # =========== DO NOT CHANGE AFTER THIS LINE. ===========================
 # Below here is regular code, part of the file. This is not designed to
@@ -218,6 +254,58 @@ def clean_attr(val):
     val = val.replace("&", "&amp;").replace("'", "&quot;").replace("<", "&lt;").replace(">", "&gt;").strip()
     return val
 
+def add_relation_multipolygon(geom, ways):
+    global id_counter, file_counter, counter, file_name, open_file, namespace
+    if geom.GetGeometryCount() > 1:
+        for i in range(1, geom.GetGeometryCount()):
+            ways.append(add_ring_way(geom.GetGeometryRef(i)))
+        print >>open_file, "<relation id='-%s'><tag k='type' v='multipolygon' />" % id_counter
+        id_counter += 1
+        print >>open_file, '<member type="way" ref="-%s" role="outer" />' % ways[0]    
+        for way in ways[1:]:
+            print >>open_file, '<member type="way" ref="-%s" role="inner" />' % way 
+        print >>open_file, "</relation>" 
+
+def add_way(ids,geom_name,ways,f):
+    global id_counter, file_counter, counter, file_name, open_file, namespace
+    print >>open_file, "<way id='-%s'>" % id_counter
+    ways.append(id_counter) 
+    id_counter += 1
+    for i in ids:
+        print >>open_file, "<nd ref='-%s' />" % i
+    if geom_name == 'POLYGON':
+        print >>open_file, "<nd ref='-%s' />" % ids[0]
+    add_tags(f)
+    print >>open_file, "</way>" 
+
+def add_tags(f):
+    global id_counter, file_counter, counter, file_name, open_file, namespace
+    field_count = f.GetFieldCount()
+    fields  = {}
+    for field in range(field_count):
+        value = f.GetFieldAsString(field)
+        name = f.GetFieldDefnRef(field).GetName()
+        if namespace and name and value and name not in boring_tags:
+            print >>open_file, "<tag k='%s:%s' v='%s' />" % (namespace, name, clean_attr(value))
+        fields[name.lower()] = value
+    tags={}
+    for tag_name, map_value in tag_mapping:
+        if hasattr(map_value, '__call__'):
+            tag_values = map_value(fields)
+            if tag_values:
+                for tag in tag_values:
+                    tags[tag[0]] = tag[1]
+        else:
+            if tag_name in fields:
+                tags[map_value] = fields[tag_name].title()
+    for key, value in tags.items():
+        if key and value:
+            print >>open_file, "<tag k='%s' v='%s' />" % (key, clean_attr(value))    
+    for name, value in fixed_tags.items():
+        print >>open_file, "<tag k='%s' v='%s' />" % (name, clean_attr(value))
+    if f.GetGeometryRef().GetGeometryName() == 'POLYGON':
+        print >>open_file, "<tag k='area' v='yes' />" 
+
 def add_ring_nodes(ring):
     """Internal. Write the first ring nodes."""
     global open_file, id_counter
@@ -229,7 +317,20 @@ def add_ring_nodes(ring):
         ids.append(id_counter)
         print >>open_file, "<node id='-%s' lon='%s' lat='%s' />" % (id_counter, ring.GetX(count), ring.GetY(count)) #print count
         id_counter += 1
-    return ids    
+    return ids   
+
+def add_line_nodes(line):
+    """Internal. Write the first line nodes."""
+    global open_file, id_counter
+    ids = []
+    if range(line.GetPointCount()) == 0 or line.GetPointCount() == 0:
+        print >>sys.stderr, "Degenerate line string." 
+        return    
+    for count in range(line.GetPointCount()):
+        ids.append(id_counter)
+        print >>open_file, "<node id='-%s' lon='%s' lat='%s' />" % (id_counter, line.GetX(count), line.GetY(count)) #print count
+        id_counter += 1
+    return ids   
 
 def add_ring_way(ring): 
     """Internal. write out the 'holes' in a polygon."""
@@ -248,8 +349,17 @@ def add_ring_way(ring):
         print >>open_file, "<nd ref='-%s' />" % i
     print >>open_file, "<nd ref='-%s' />" % ids[0]
     print >>open_file, "</way>"
-
     return way_id
+'''
+def add_line_string(geom,f,ways):
+    global id_counter, file_counter, counter, file_name, open_file, namespace
+    ids = add_line_nodes(geom)
+    if not ids or len(ids) == 0: 
+        f = l.GetNextFeature()
+        continue
+    add_way(ids,geom.GetGeometryName(),ways,f)
+'''
+
 
 open_file = None
 
@@ -317,53 +427,33 @@ def run(filename, slice_count=1, obj_count=50000, output_location=None, no_sourc
             ways = []
         
             geom = f.GetGeometryRef()
-            ring = geom.GetGeometryRef(0)
-            ids = add_ring_nodes(ring)
-            if not ids or len(ids) == 0: 
-                f = l.GetNextFeature()
-                continue
-            print >>open_file, "<way id='-%s'>" % id_counter
-            ways.append(id_counter) 
-            id_counter += 1
-            for i in ids:
-                print >>open_file, "<nd ref='-%s' />" % i
-            print >>open_file, "<nd ref='-%s' />" % ids[0]
-            field_count = f.GetFieldCount()
-            fields  = {}
-            for field in range(field_count):
-                value = f.GetFieldAsString(field)
-                name = f.GetFieldDefnRef(field).GetName()
-                if namespace and name and value and name not in boring_tags:
-                    print >>open_file, "<tag k='%s:%s' v='%s' />" % (namespace, name, clean_attr(value))
-                fields[name.lower()] = value
-            tags={}
-            for tag_name, map_value in tag_mapping:
-                if hasattr(map_value, '__call__'):
-                    tag_values = map_value(fields)
-                    if tag_values:
-                        for tag in tag_values:
-                            tags[tag[0]] = tag[1]
+            geom_name = geom.GetGeometryName()
+            if geom_name == 'POLYGON':
+                ring = geom.GetGeometryRef(0)
+                ids = add_ring_nodes(ring)
+                if not ids or len(ids) == 0: 
+                    f = l.GetNextFeature()
+                    continue
+                add_way(ids,geom_name,ways,f)
+                add_relation_multipolygon(geom, ways)
+            elif geom_name == 'LINESTRING':
+                ids = add_line_nodes(geom)
+                if not ids or len(ids) == 0: 
+                    f = l.GetNextFeature()
+                    continue
+                add_way(ids,geom_name,ways,f)
+            elif geom_name == 'MULTILINESTRING':
+                for i in range(geom.GetGeometryCount()):
+                    line = geom.GetGeometryRef(i)
+                    ids = add_line_nodes(line)
+                    if not ids or len(ids) == 0: 
+                        continue
+                    add_way(ids,geom_name,ways,f)
 
-                else:
-                    if tag_name in fields:
-                        tags[map_value] = fields[tag_name].title()
-            for key, value in tags.items():
-                if key and value:
-                    print >>open_file, "<tag k='%s' v='%s' />" % (key, clean_attr(value))
+            else:
+                print 'ak Unknown Type Discovered', geom_name
+                ids = []       
                     
-            for name, value in fixed_tags.items():
-                print >>open_file, "<tag k='%s' v='%s' />" % (name, clean_attr(value))
-            print >>open_file, "</way>"   
-            if geom.GetGeometryCount() > 1:
-                for i in range(1, geom.GetGeometryCount()):
-                    ways.append(add_ring_way(geom.GetGeometryRef(i)))
-                print >>open_file, "<relation id='-%s'><tag k='type' v='multipolygon' />" % id_counter
-                id_counter += 1
-                print >>open_file, '<member type="way" ref="-%s" role="outer" />' % ways[0]    
-                for way in ways[1:]:
-                    print >>open_file, '<member type="way" ref="-%s" role="inner" />' % way 
-                print >>open_file, "</relation>"    
-                
             counter += 1
             f = l.GetNextFeature()
             obj_counter += (id_counter - start_id_counter)
@@ -403,6 +493,6 @@ if __name__ == "__main__":
         kw[key] = getattr(options, key)
     
     try:
-        run(args[0], **kw)   
+        run(args[0], **kw)
     except AppError, E:
         print "An error occurred: \n%s" % E  
