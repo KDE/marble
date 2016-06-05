@@ -40,6 +40,12 @@ fixed_tags = {
   'created_by': 'polyshp2osm'
 }  
 
+feat_dict = {}
+
+non_fcla = 0
+non_geom = 0
+
+
 # Here are a number of functions: These functions define tag mappings. The API
 # For these functions is that they are passed the attributes from a feature,
 # and they return a list of two-tuples which match to key/value pairs.
@@ -119,19 +125,82 @@ def road_map(data):
         if data['type'] in keys:
             return keys[data['type']]
 
+def city_map(data):
+    population = 0
+    capital = 'no'
+    country = ''
+    if data['featurecla'] == 'Admin-0 capital' or data['featurecla'] == 'Admin-1 capital' or data['featurecla'] == 'Admin-0 region capital' or data['featurecla'] == 'Admin-1 region capital':
+        capital = 'yes' 
+    if 'pop_max' in data:
+        population = data['pop_max']
+    if 'adm0name' in data:
+        country = data['adm0name']
+    temp =  [('is_in:country', country), ('capital', capital), ('population', population), ('place', 'city') ]
+    print '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',
+    print temp
+    return temp
+
+
+
 def feature_class(data):
+    global non_fcla
     keys = {
     'Lake': [('natural', 'water')],
     'Alkaline Lake': [('natural', 'water')],
+    'Reservoir': [('natural', 'water')],
     'Road': [(road_map,None)],
-    'River': [('waterway', 'river')]
+    'River': [('waterway', 'river')],
+    'Coastline': [('natural', 'coastline')],
+    'Minor coastline': [('natural', 'coastline')],
+    'Ocean': [('natural', 'water')],
+    'Land': [('marble_land', 'landmass')],
+    'Minor island': [('marble_land', 'landmass')],
+    'Reefs': [('natural', 'reef')],
+    'Admin-0 country': [('marble_land', 'landmass')],
+    'Admin-0 sovereignty': [('marble_land', 'landmass')],
+    'International boundary (verify)': [('boundary', 'administrative'), ('admin_level', '2')],
+    'Overlay limit': [('boundary', 'administrative'), ('admin_level', '2')],
+    'Disputed (please verify)': [('boundary', 'administrative'), ('admin_level', '2')],
+    'Line of control (please verify)': [('boundary', 'administrative'), ('admin_level', '2')],
+    'Indefinite (please verify)': [('boundary', 'administrative'), ('admin_level', '2')],
+    'Lease limit': [('boundary', 'administrative'), ('admin_level', '2')],
+    'Indeterminant frontier': [('boundary', 'administrative'), ('admin_level', '2')],
+    'Admin-0 lease': [('marble_land', 'landmass')],
+    'Admin-0 claim area': [('marble_land', 'landmass')],
+    'Admin-0 breakaway and disputed': [('marble_land', 'landmass')],
+    'Admin-0 overlay': [('marble_land', 'landmass')],
+    'Admin-0 indeterminant': [('marble_land', 'landmass')],
+    'Admin-1 aggregation': [('marble_land', 'landmass')],
+    'Admin-1 minor island': [('marble_land', 'landmass')],
+    'Admin-1 scale rank': [('marble_land', 'landmass')],
+    'Railroad': [('railway', 'rail')],
+    'Railroad ferry': [('route', 'ferry')],
+    'Urban area': [('marble_land', 'landmass')],
+    'Timezone': [('marble_land', 'landmass')],
+    'Historic place': [(city_map,None)],
+    'Populated place': [(city_map,None)],
+    'Scientific station': [(city_map,None)],
+    'Meteorological Station': [(city_map,None)],
+    'Admin-0 capital': [(city_map,None)],
+    'Admin-1 capital': [(city_map,None)],
+    'Admin-0 region capital': [(city_map,None)],
+    'Admin-1 region capital': [(city_map,None)],
+    'Admin-0 capital alt': [(city_map,None)],
+    'Airport': [('amenity', 'cinema')]
+    #aeroway" v="aerodrome"
     }
     if 'featurecla' in data:
+        if data['featurecla'] in feat_dict:
+            feat_dict[data['featurecla']] += 1
+        else:
+            feat_dict[data['featurecla']] = 1
         if data['featurecla'] in keys:
             if hasattr(keys[data['featurecla']][0][0], '__call__'):
                 return keys[data['featurecla']][0][0](data)
             else:
                 return keys[data['featurecla']]
+        else:
+            non_fcla += 1
 
 def name_map(data):
     if 'name' in data:
@@ -246,6 +315,7 @@ def start_new_file():
     if open_file:
         close_file()
     open_file = open("%s.%s.osm" % (file_name, file_counter), "w")
+    print >>open_file, "<?xml version='1.0' encoding='UTF-8'?>"
     print >>open_file, "<osm version='0.5'>"
 
 def clean_attr(val):
@@ -254,11 +324,20 @@ def clean_attr(val):
     val = val.replace("&", "&amp;").replace("'", "&quot;").replace("<", "&lt;").replace(">", "&gt;").strip()
     return val
 
-def add_relation_multipolygon(geom, ways):
+def add_point(f):
+    global id_counter
+    pt = f.GetGeometryRef()
+    print 'Longitude: ', pt.GetX(0)
+    print 'Longitude: ', pt.GetY(0)
+    add_node(id_counter, pt.GetX(0), pt.GetY(0), 'POINT', f)
+    id_counter += 1
+    
+
+def add_relation_multipolygon(geom, ways, f):
     global id_counter, file_counter, counter, file_name, open_file, namespace
     if geom.GetGeometryCount() > 1:
         for i in range(1, geom.GetGeometryCount()):
-            ways.append(add_ring_way(geom.GetGeometryRef(i)))
+            ways.append(add_ring_way(geom.GetGeometryRef(i), f))
         print >>open_file, "<relation id='-%s'><tag k='type' v='multipolygon' />" % id_counter
         id_counter += 1
         print >>open_file, '<member type="way" ref="-%s" role="outer" />' % ways[0]    
@@ -272,21 +351,23 @@ def add_way(ids,geom_name,ways,f):
     ways.append(id_counter) 
     id_counter += 1
     for i in ids:
-        print >>open_file, "<nd ref='-%s' />" % i
+        print >>open_file, " <nd ref='-%s' />" % i
     if geom_name == 'POLYGON':
-        print >>open_file, "<nd ref='-%s' />" % ids[0]
+        print >>open_file, " <nd ref='-%s' />" % ids[0]
     add_tags(f)
     print >>open_file, "</way>" 
 
 def add_tags(f):
     global id_counter, file_counter, counter, file_name, open_file, namespace
     field_count = f.GetFieldCount()
+    print '*********************',
+    print ' Field Count is = ', field_count
     fields  = {}
     for field in range(field_count):
         value = f.GetFieldAsString(field)
         name = f.GetFieldDefnRef(field).GetName()
         if namespace and name and value and name not in boring_tags:
-            print >>open_file, "<tag k='%s:%s' v='%s' />" % (namespace, name, clean_attr(value))
+            print >>open_file, " <tag k='%s:%s' v='%s' />" % (namespace, name, clean_attr(value))
         fields[name.lower()] = value
     tags={}
     for tag_name, map_value in tag_mapping:
@@ -300,13 +381,13 @@ def add_tags(f):
                 tags[map_value] = fields[tag_name].title()
     for key, value in tags.items():
         if key and value:
-            print >>open_file, "<tag k='%s' v='%s' />" % (key, clean_attr(value))    
+            print >>open_file, " <tag k='%s' v='%s' />" % (key, clean_attr(value))    
     for name, value in fixed_tags.items():
-        print >>open_file, "<tag k='%s' v='%s' />" % (name, clean_attr(value))
-    if f.GetGeometryRef().GetGeometryName() == 'POLYGON':
-        print >>open_file, "<tag k='area' v='yes' />" 
+        print >>open_file, " <tag k='%s' v='%s' />" % (name, clean_attr(value))
+    if f.GetGeometryRef().GetGeometryName() == 'POLYGON' or f.GetGeometryRef().GetGeometryName() == 'MULTIPOLYGON':
+        print >>open_file, " <tag k='area' v='yes' />" 
 
-def add_ring_nodes(ring):
+def add_ring_nodes(ring, f):
     """Internal. Write the first ring nodes."""
     global open_file, id_counter
     ids = []
@@ -315,30 +396,31 @@ def add_ring_nodes(ring):
         return    
     for count in range(ring.GetPointCount()-1):
         ids.append(id_counter)
-        print >>open_file, "<node id='-%s' lon='%s' lat='%s' />" % (id_counter, ring.GetX(count), ring.GetY(count)) #print count
+        add_node(id_counter, ring.GetX(count), ring.GetY(count), 'LINEARRING', f)
         id_counter += 1
     return ids   
 
-def add_line_nodes(line):
+def add_line_nodes(line, f):
     """Internal. Write the first line nodes."""
     global open_file, id_counter
+    #print '--------------------------- Line name',line.GetGeometryName()
     ids = []
     if range(line.GetPointCount()) == 0 or line.GetPointCount() == 0:
         print >>sys.stderr, "Degenerate line string." 
         return    
     for count in range(line.GetPointCount()):
         ids.append(id_counter)
-        print >>open_file, "<node id='-%s' lon='%s' lat='%s' />" % (id_counter, line.GetX(count), line.GetY(count)) #print count
+        add_node(id_counter, line.GetX(count), line.GetY(count), 'LINEARSTRING', f)
         id_counter += 1
     return ids   
 
-def add_ring_way(ring): 
+def add_ring_way(ring, f): 
     """Internal. write out the 'holes' in a polygon."""
     global open_file, id_counter
     ids = []
     for count in range(ring.GetPointCount()-1):
         ids.append(id_counter)
-        print >>open_file, "<node id='-%s' lon='%s' lat='%s' />" % (id_counter, ring.GetX(count), ring.GetY(count)) #print count
+        add_node(id_counter, ring.GetX(count), ring.GetY(count), 'LINEARRING', f)
         id_counter += 1
     if len(ids) == 0:
         return None
@@ -350,6 +432,17 @@ def add_ring_way(ring):
     print >>open_file, "<nd ref='-%s' />" % ids[0]
     print >>open_file, "</way>"
     return way_id
+
+def add_node(num_id, lon, lat, geom_name, f):
+    global open_file
+    if geom_name == 'POINT':
+        print >>open_file, "<node id='-%s' visible='true' lon='%s' lat='%s' >" % (num_id, lon, lat) 
+        add_tags(f)
+        print >>open_file, "</node>"
+    else:
+        print >>open_file, "<node id='-%s' visible='true' lon='%s' lat='%s' />" % (num_id, lon, lat) 
+
+
 '''
 def add_line_string(geom,f,ways):
     global id_counter, file_counter, counter, file_name, open_file, namespace
@@ -370,13 +463,18 @@ id_counter = 1
 file_counter = 0
 counter = 0
 
+geom_counter = {}
+
 class AppError(Exception): pass
 
 def run(filename, slice_count=1, obj_count=50000, output_location=None, no_source=False):
     """Run the converter. Requires open_file, file_name, id_counter,
     file_counter, counter to be defined in global space; not really a very good
     singleton."""
-    global id_counter, file_counter, counter, file_name, open_file, namespace
+    global id_counter, file_counter, counter, file_name, open_file, namespace, non_geom, non_fcla
+
+    non_geom = 0
+    non_fcla = 0
     
     if no_source:
         namespace=None
@@ -392,8 +490,8 @@ def run(filename, slice_count=1, obj_count=50000, output_location=None, no_sourc
     max_objs_per_file = obj_count 
 
     extent = l.GetExtent()
-    if extent[0] < -180 or extent[0] > 180 or extent[2] < -90 or extent[2] > 90:
-        raise AppError("Extent does not look like degrees; are you sure it is? \n(%s, %s, %s, %s)" % (extent[0], extent[2], extent[1], extent[3]))  
+    #if extent[0] < -180 or extent[0] > 180 or extent[2] < -90 or extent[2] > 90:
+    #   raise AppError("Extent does not look like degrees; are you sure it is? \n(%s, %s, %s, %s)" % (extent[0], extent[2], extent[1], extent[3]))  
     slice_width = (extent[1] - extent[0]) / slice_count
 
     seen = {}
@@ -425,34 +523,61 @@ def run(filename, slice_count=1, obj_count=50000, output_location=None, no_sourc
                 last_obj_split = obj_counter
 
             ways = []
+            feat_dict = f.items()
+            print 
+            print '#' * 20
+            #print 'Feature items',f.items()
+            for key in feat_dict:
+               print key, feat_dict[key]
         
             geom = f.GetGeometryRef()
             geom_name = geom.GetGeometryName()
+            if geom_name in geom_counter:
+                geom_counter[geom_name] += 1
+            else:
+                geom_counter[geom_name] = 1
             if geom_name == 'POLYGON':
+                print 'ak Its a POLYGON'
                 ring = geom.GetGeometryRef(0)
-                ids = add_ring_nodes(ring)
+                ids = add_ring_nodes(ring, f)
                 if not ids or len(ids) == 0: 
                     f = l.GetNextFeature()
                     continue
                 add_way(ids,geom_name,ways,f)
-                add_relation_multipolygon(geom, ways)
+                add_relation_multipolygon(geom, ways, f)
             elif geom_name == 'LINESTRING':
-                ids = add_line_nodes(geom)
+                print 'ak Its a LINESTRING'
+                ids = add_line_nodes(geom, f)
                 if not ids or len(ids) == 0: 
                     f = l.GetNextFeature()
                     continue
                 add_way(ids,geom_name,ways,f)
             elif geom_name == 'MULTILINESTRING':
+                print 'ak Its a MULTILINESTRING'
                 for i in range(geom.GetGeometryCount()):
                     line = geom.GetGeometryRef(i)
-                    ids = add_line_nodes(line)
+                    ids = add_line_nodes(line, f)
                     if not ids or len(ids) == 0: 
                         continue
                     add_way(ids,geom_name,ways,f)
-
+            elif geom_name == 'MULTIPOLYGON':
+                print 'ak Its a MULTIPOLYGON'
+                for i in range(geom.GetGeometryCount()):
+                    print 'Making polygon ',i
+                    poly = geom.GetGeometryRef(i)
+                    ring = poly.GetGeometryRef(0)
+                    ids = add_ring_nodes(ring, f)
+                    if not ids or len(ids) == 0: 
+                        f = l.GetNextFeature()
+                        continue
+                    add_way(ids,'POLYGON',ways,f)
+                    add_relation_multipolygon(poly, ways, f)
+            elif geom_name == 'POINT':
+                add_point(f)
             else:
                 print 'ak Unknown Type Discovered', geom_name
-                ids = []       
+                ids = []
+                non_geom += 1       
                     
             counter += 1
             f = l.GetNextFeature()
@@ -495,4 +620,24 @@ if __name__ == "__main__":
     try:
         run(args[0], **kw)
     except AppError, E:
-        print "An error occurred: \n%s" % E  
+        print "An error occurred: \n%s" % E
+
+    print 
+    print 'Geometry types present: '
+    for key in geom_counter:
+        print key, geom_counter[key]
+    print 
+    print 'Feature type present: '
+    for key in feat_dict:
+        print key, feat_dict[key]
+
+    print 
+    if non_fcla == 0 and non_geom == 0:
+        print 'Conversion Successful'
+    else:
+        print 'Conversion not Successful :'
+        if non_fcla != 0:
+            print 'Unknown features present in SHP file', non_fcla
+        if non_geom != 0:
+            print 'Unknown geometry present in SHP file', non_geom
+
