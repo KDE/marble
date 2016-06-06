@@ -42,7 +42,6 @@ fixed_tags = {
 
 feat_dict = {}
 
-non_fcla = 0
 non_geom = 0
 
 
@@ -136,14 +135,31 @@ def city_map(data):
     if 'adm0name' in data:
         country = data['adm0name']
     temp =  [('is_in:country', country), ('capital', capital), ('population', population), ('place', 'city') ]
-    print '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',
-    print temp
+    #print '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',
+    #print temp
+    return temp
+
+def airport_map(data):
+    global id_counter, file_counter, counter, file_name, open_file, namespace
+    wid = id_counter - 1
+    print >>open_file, "<way id='-%s'>" % wid
+    print >>open_file, " <nd ref='-%s' />" % i
+    if geom_name == 'POLYGON':
+        print >>open_file, " <nd ref='-%s' />" % ids[0]
+    add_tags(f)
+    print >>open_file, "</way>" 
+
+def mountain_map(data):
+    elevation = 0
+    if 'elevation' in data:
+        elevation = data['elevation']
+    temp = [('natural', 'peak'), ('ele', elevation)]
     return temp
 
 
 
 def feature_class(data):
-    global non_fcla
+    global non_fcla_dict
     keys = {
     'Lake': [('natural', 'water')],
     'Alkaline Lake': [('natural', 'water')],
@@ -154,7 +170,7 @@ def feature_class(data):
     'Minor coastline': [('natural', 'coastline')],
     'Ocean': [('natural', 'water')],
     'Land': [('marble_land', 'landmass')],
-    'Minor island': [('marble_land', 'landmass')],
+    'Minor island': [('marble_land', 'landmass'), ('place', 'island')],
     'Reefs': [('natural', 'reef')],
     'Admin-0 country': [('marble_land', 'landmass')],
     'Admin-0 sovereignty': [('marble_land', 'landmass')],
@@ -186,7 +202,58 @@ def feature_class(data):
     'Admin-0 region capital': [(city_map,None)],
     'Admin-1 region capital': [(city_map,None)],
     'Admin-0 capital alt': [(city_map,None)],
-    'Airport': [('amenity', 'cinema')]
+    'Lake Centerline': [('natural', 'water')],
+    'Port': [('harbour', 'yes')],
+    'Island': [('marble_land', 'landmass'), ('place', 'island')],
+    'Island group': [('marble_land', 'landmass'), ('place', 'island')],
+    'Wetlands': [('natural', 'wetland')],
+    'Basin': [('landuse', 'basin')],
+    'Desert': [('natural', 'desert')],  #no tag support in marble, no clue as to how to render
+    'Depression': [('natural', 'sinkhole')],  #no tag support in marble, no clue as to how to render
+    'Range/mtn': [('marble_land', 'landmass')], # no clue as to how to render
+    'Geoarea': [('marble_land', 'landmass')], # no clue as to how to render
+    'Plain' : [('marble_land', 'landmass')], # no clue as to how to render
+    'Tundra': [('natural', 'tundra')], #no tag support in marble, no clue as to how to render
+    'Foothills' : [('marble_land', 'landmass')], #no tag support in OSM, nothing in Marble, no clue as to how to render
+    'Lowland' : [('marble_land', 'landmass')], #no tag support in OSM, nothing in Marble, no clue as to how to render
+    'Dragons-be-here': [('marble_land', 'landmass')], #no tag support in OSM, nothing in Marble, no clue as to how to render
+    'Delta': [('marble_land', 'landmass')], #no tag support in OSM, nothing in Marble, no clue as to how to render
+    'Peninsula':  [('marble_land', 'landmass')],
+    'Plateau' : [('marble_land', 'landmass')],
+    'Pen/cape' : [('natural', 'cape')], #osm tag still in proposal stage, no clue as to how to render
+    'Gorge': [('marble_land', 'landmass')],  #no tag support in OSM, nothing in Marble, no clue as to how to render
+    'Coast':  [('marble_land', 'landmass')], #no tag support in OSM, nothing in Marble, no clue as to how to render
+    'Continent':  [('marble_land', 'landmass')], #no tag support in OSM, nothing in Marble, redundant data
+    'Isthmus': [('marble_land', 'landmass')], #no tag support in OSM, nothing in Marble, no clue as to how to render
+    'Valley': [('natural', 'valley')],  #no tag support in marble
+    'waterfall' : [('waterway', 'waterfall')], #no tag support in marble
+    'cape': [('natural', 'cape')], #osm tag still in proposal stage, no clue as to how to render      'NONE'
+    'pole': [],
+    'plain': [],
+    'island group': [],
+    'island': [],
+    'mountain': [(mountain_map,None)], #this tag has to be mapped to Mountain feature of Marble
+    'spot elevation': [],
+    'plateau': [],
+    'depression': [],
+    'pass': [],
+    'sound': [('natural', 'water')],
+    'river':  [('natural', 'water')],
+    'generic': [('natural', 'water')], #still have to confirm what generic means exactly in marine_polygons?
+    'lagoon': [('natural', 'water'), ('water', 'lagoon')], 
+    'reef': [('natural', 'reef')],
+    'gulf': [('natural', 'water')],
+    'inlet': [('natural', 'water')],
+    'strait': [('natural', 'water')],
+    'bay': [('natural', 'water')],
+    'fjord': [('natural', 'water')],
+    'sea': [('natural', 'water')],
+    'ocean': [('natural', 'water')],
+    'channel': [('natural', 'water')],
+    'Playa': [('natural', 'water')],
+    'Antarctic Ice Shelf': [(' glacier:type','shelf'), ('natural', 'glacier')], #Marble does not support the glacier:type tag
+    'Antarctic Ice Shelf Edge': [('glacier:edge', 'calving_line')], #marble does not support this osm tag
+    'Glaciated areas': [('natural', 'glacier')]
     #aeroway" v="aerodrome"
     }
     if 'featurecla' in data:
@@ -195,12 +262,19 @@ def feature_class(data):
         else:
             feat_dict[data['featurecla']] = 1
         if data['featurecla'] in keys:
+            if len(keys[data['featurecla']]) == 0:
+                return keys[data['featurecla']]
             if hasattr(keys[data['featurecla']][0][0], '__call__'):
                 return keys[data['featurecla']][0][0](data)
             else:
                 return keys[data['featurecla']]
         else:
-            non_fcla += 1
+            if data['featurecla'] in non_fcla_dict:
+                non_fcla_dict[data['featurecla']] += 1
+            else:
+                non_fcla_dict[data['featurecla']] = 1
+
+
 
 def name_map(data):
     if 'name' in data:
@@ -267,7 +341,7 @@ tag_mapping = [
 # used for tags which are usually calculated in a GIS. AREA and LEN are
 # common.
 
-boring_tags = [ 'AREA', 'LEN', 'GIS_ACRES' ]
+boring_tags = [ 'AREA', 'LEN', 'GIS_ACRES']
 
 # Namespace is used to prefix existing data attributes. If 'None', or 
 # '--no-source' is set, then source attributes are not exported, only
@@ -360,8 +434,8 @@ def add_way(ids,geom_name,ways,f):
 def add_tags(f):
     global id_counter, file_counter, counter, file_name, open_file, namespace
     field_count = f.GetFieldCount()
-    print '*********************',
-    print ' Field Count is = ', field_count
+    #print '*********************',
+    #print ' Field Count is = ', field_count
     fields  = {}
     for field in range(field_count):
         value = f.GetFieldAsString(field)
@@ -442,6 +516,23 @@ def add_node(num_id, lon, lat, geom_name, f):
     else:
         print >>open_file, "<node id='-%s' visible='true' lon='%s' lat='%s' />" % (num_id, lon, lat) 
 
+def add_way_around_node(f):
+    global id_counter, open_file
+    nid = id_counter - 1
+    print >>open_file, "<way id='-%s'>" % id_counter
+    id_counter += 1
+    print >>open_file, " <nd ref='-%s' />" % nid
+    tag_dict = {}
+    tag_dict['name'] = f['name']
+    if f['featurecla'] == 'Airport':
+        tag_dict['aeroway'] = 'aerodrome'
+    for key in tag_dict:
+        print >>open_file, " <tag k='%s' v='%s' />" % (key, clean_attr(tag_dict[key]))
+    print >>open_file, "</way >"
+
+    
+
+
 
 '''
 def add_line_string(geom,f,ways):
@@ -471,10 +562,10 @@ def run(filename, slice_count=1, obj_count=50000, output_location=None, no_sourc
     """Run the converter. Requires open_file, file_name, id_counter,
     file_counter, counter to be defined in global space; not really a very good
     singleton."""
-    global id_counter, file_counter, counter, file_name, open_file, namespace, non_geom, non_fcla
+    global id_counter, file_counter, counter, file_name, open_file, namespace, non_geom, non_fcla_dict
 
     non_geom = 0
-    non_fcla = 0
+    non_fcla_dict = {}
     
     if no_source:
         namespace=None
@@ -574,6 +665,9 @@ def run(filename, slice_count=1, obj_count=50000, output_location=None, no_sourc
                     add_relation_multipolygon(poly, ways, f)
             elif geom_name == 'POINT':
                 add_point(f)
+                if f['featurecla'] == 'Airport':
+                    print 'Hi'
+                    add_way_around_node(f)
             else:
                 print 'ak Unknown Type Discovered', geom_name
                 ids = []
@@ -632,12 +726,15 @@ if __name__ == "__main__":
         print key, feat_dict[key]
 
     print 
-    if non_fcla == 0 and non_geom == 0:
+    if len(non_fcla_dict) == 0 and non_geom == 0:
         print 'Conversion Successful'
     else:
         print 'Conversion not Successful :'
-        if non_fcla != 0:
-            print 'Unknown features present in SHP file', non_fcla
+        if len(non_fcla_dict) != 0:
+            print 'Unknown features present in SHP file', len(non_fcla_dict)
+            print 
+            for key in non_fcla_dict:
+                print key, non_fcla_dict[key]
         if non_geom != 0:
             print 'Unknown geometry present in SHP file', non_geom
 
