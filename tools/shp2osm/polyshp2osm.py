@@ -174,6 +174,8 @@ def feature_class(data):
     'Reefs': [('natural', 'reef')],
     'Admin-0 country': [('marble_land', 'landmass')],
     'Admin-0 sovereignty': [('marble_land', 'landmass')],
+    'Admin-0 map unit': [('marble_land', 'landmass')],
+    'Adm-0 scale ranks': [('marble_land', 'landmass')],
     'International boundary (verify)': [('boundary', 'administrative'), ('admin_level', '2')],
     'Overlay limit': [('boundary', 'administrative'), ('admin_level', '2')],
     'Disputed (please verify)': [('boundary', 'administrative'), ('admin_level', '2')],
@@ -253,7 +255,25 @@ def feature_class(data):
     'Playa': [('natural', 'water')],
     'Antarctic Ice Shelf': [(' glacier:type','shelf'), ('natural', 'glacier')], #Marble does not support the glacier:type tag
     'Antarctic Ice Shelf Edge': [('glacier:edge', 'calving_line')], #marble does not support this osm tag
-    'Glaciated areas': [('natural', 'glacier')]
+    'Glaciated areas': [('natural', 'glacier')],
+    'Admin-0 Tiny Countries': [],
+    'Admin-0 Tiny GeoUnit': [],
+    'Admin-0 Tiny GeoSubunit': [],
+    'Admin-0 Tiny Countries Pacific': [],
+    'Pacific Groupings': [],
+    'Admin-1 scale rank': [('marble_land', 'landmass')],
+    'Admin-1 boundary': [('boundary', 'administrative'), ('admin_level', '4')],
+    'Map unit boundary':[],
+    'Marine Indicator Treaty':[],
+    'Marine Indicator Median':[],
+    'Boundary Treaty':[],
+    'Marine Indicator 200 mi nl':[],
+    'Marine Indicator Disputed':[],
+    'Claim boundary': [('boundary', 'administrative'), ('admin_level', '2')],
+    'Reference line': [('boundary', 'administrative'), ('admin_level', '2')],
+    'Breakaway': [('boundary', 'administrative'), ('admin_level', '2')],
+    'Elusive frontier': [('boundary', 'administrative'), ('admin_level', '2')]
+
     #aeroway" v="aerodrome"
     }
     if 'featurecla' in data:
