@@ -19,6 +19,9 @@
 #include <QFile>
 #include <QCommandLineParser>
 #include <QApplication>
+#include <QLocale>
+#include <QStandardPaths>
+#include <QTranslator>
 
 #include "ControlView.h"
 #include "KdeMainWindow.h"
@@ -36,8 +39,56 @@
 
 using namespace Marble;
 
+
+static bool loadTranslation(const QString &localeDirName, QApplication &app)
+{
+    const QString subPath = QStringLiteral("locale/") + localeDirName + QStringLiteral("/LC_MESSAGES/marble_qt.qm");
+    const QString fullPath = QStandardPaths::locate(QStandardPaths::GenericDataLocation, subPath);
+    if (fullPath.isEmpty()) {
+        return false;
+    }
+
+    QTranslator* translator = new QTranslator(&app);
+    if (!translator->load(fullPath)) {
+        delete translator;
+        return false;
+    }
+
+    app.installTranslator(translator);
+
+    return true;
+}
+
+static void loadLibAndPluginTranslations(QApplication &app)
+{
+    // Quote from ecm_create_qm_loader created code:
+    // The way Qt translation system handles plural forms makes it necessary to
+    // have a translation file which contains only plural forms for `en`.
+    // That's why we load the `en` translation unconditionally, then load the
+    // translation for the current locale to overload it.
+    const QString en(QStringLiteral("en"));
+
+    loadTranslation(en, app);
+
+    QLocale locale = QLocale::system();
+    if (locale.name() != en) {
+        if (!loadTranslation(locale.name(), app)) {
+            loadTranslation(locale.bcp47Name(), app);
+        }
+    }
+}
+
+
 int main ( int argc, char *argv[] )
 {
+    QApplication app( argc, argv );
+
+    // Load Qt translation system catalog for the plugins and libmarblewidget
+    loadLibAndPluginTranslations(app);
+    // Init KF5 translation system
+    KLocalizedString::setApplicationDomain("marble");
+
+
     KAboutData aboutData( "marble",
                           i18n( "Marble Virtual Globe" ),
                           ControlView::applicationVersion(),
@@ -263,8 +314,6 @@ int main ( int argc, char *argv[] )
                                 " important source of inspiration by creating"
                                 " Marble's predecessor \"Kartographer\"." ));
 
-    QApplication app( argc, argv );
-
     KAboutData::setApplicationData(aboutData);
     QApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("marble")));
 
@@ -306,8 +355,6 @@ int main ( int argc, char *argv[] )
 
     parser.process( app );
     aboutData.processCommandLine(&parser);
-
-    KLocalizedString::setApplicationDomain("marble");
 
     // use ecm_create_qm_loader(marblewidget_SRCS marble_qt)
     // in the library src/lib/marble/CMakeList.txt to load the second catalog

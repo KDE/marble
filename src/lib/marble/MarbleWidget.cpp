@@ -624,7 +624,7 @@ void MarbleWidget::moveDown( FlyToMode mode )
 
 void MarbleWidget::leaveEvent( QEvent* )
 {
-    emit mouseMoveGeoPosition( tr( NOT_AVAILABLE ) );
+    emit mouseMoveGeoPosition( QCoreApplication::translate( "Marble", NOT_AVAILABLE ) );
 }
 
 void MarbleWidget::resizeEvent( QResizeEvent *event )

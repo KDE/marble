@@ -564,7 +564,7 @@ void MarbleDefaultInputHandler::notifyPosition(bool isMouseAboveMap, qreal mouse
     if (MarbleInputHandler::d->m_positionSignalConnected) {
         if (!isMouseAboveMap)
         {
-            emit mouseMoveGeoPosition(tr(NOT_AVAILABLE));
+            emit mouseMoveGeoPosition(QCoreApplication::translate( "Marble", NOT_AVAILABLE));
         }
         else
         {

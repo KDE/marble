@@ -21,6 +21,7 @@
 #include <QCloseEvent>
 
 // KDE
+#include <klocalizedstring.h>
 #include <kactioncollection.h>
 #include <kparts/part.h>
 #include <kxmlguifactory.h>
@@ -93,7 +94,7 @@ void MainWindow::setMapTitle()
 {
     GeoSceneDocument *mapTheme = marbleWidget()->mapTheme();
     if ( mapTheme ) {
-        setWindowTitle(tr("Marble Virtual Globe") + " - " + mapTheme->head()->name());
+        setWindowTitle(i18n("Marble Virtual Globe") + " - " + mapTheme->head()->name());
     }
 }
 

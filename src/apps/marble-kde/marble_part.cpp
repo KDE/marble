@@ -128,8 +128,8 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QVariantLi
     m_stopRecordingAction( 0 ),
     m_recentFilesAction( 0 ),
     m_configDialog( 0 ),
-    m_position( i18n( NOT_AVAILABLE ) ),
-    m_tileZoomLevel( i18n( NOT_AVAILABLE ) ),
+    m_position( QCoreApplication::translate( "Marble", NOT_AVAILABLE ) ),
+    m_tileZoomLevel( QCoreApplication::translate( "Marble", NOT_AVAILABLE ) ),
     m_positionLabel( 0 ),
     m_distanceLabel( 0 )
 {
@@ -931,17 +931,17 @@ void MarblePart::setupActions()
     connect( m_controlView->marbleWidget(), SIGNAL(themeChanged(QString)),
              this, SLOT(updateMapEditButtonVisibility(QString)) );
 
-     m_recordMovieAction = new QAction( tr( "&Record Movie" ), this );
+     m_recordMovieAction = new QAction( i18n( "&Record Movie" ), this );
      actionCollection()->addAction( "record_movie" , m_recordMovieAction );
-     m_recordMovieAction->setStatusTip( tr( "Records a movie of the globe" ) );
+     m_recordMovieAction->setStatusTip( i18n( "Records a movie of the globe" ) );
      actionCollection()->setDefaultShortcut( m_recordMovieAction, Qt::CTRL + Qt::SHIFT + Qt::Key_R );
      m_recordMovieAction->setIcon( QIcon( ":/icons/animator.png" ) );
      connect( m_recordMovieAction, SIGNAL(triggered()),
              this, SLOT(showMovieCaptureDialog()) );
 
-     m_stopRecordingAction = new QAction( tr( "&Stop recording" ), this );
+     m_stopRecordingAction = new QAction( i18n( "&Stop recording" ), this );
      actionCollection()->addAction( "stop_recording" , m_stopRecordingAction );
-     m_stopRecordingAction->setStatusTip( tr( "Stop recording a movie of the globe" ) );
+     m_stopRecordingAction->setStatusTip( i18n( "Stop recording a movie of the globe" ) );
      actionCollection()->setDefaultShortcut( m_recordMovieAction, Qt::CTRL + Qt::SHIFT + Qt::Key_S );
      m_stopRecordingAction->setEnabled( false );
      connect( m_stopRecordingAction, SIGNAL(triggered()),
@@ -1064,7 +1064,7 @@ void MarblePart::showPosition( const QString& position )
 void MarblePart::showZoomLevel( const int tileLevel )
 {
     if ( tileLevel == -1 )
-        m_tileZoomLevel = i18n( NOT_AVAILABLE );
+        m_tileZoomLevel = QCoreApplication::translate( "Marble", NOT_AVAILABLE );
     else {
         m_tileZoomLevel.setNum( tileLevel );
     }
@@ -1113,7 +1113,7 @@ void MarblePart::updateTileZoomLevel()
     const int tileZoomLevel =
         m_controlView->marbleWidget()->tileZoomLevel();
     if ( tileZoomLevel == -1 )
-        m_tileZoomLevel = i18n( NOT_AVAILABLE );
+        m_tileZoomLevel = QCoreApplication::translate( "Marble", NOT_AVAILABLE );
     else {
         m_tileZoomLevel.setNum( tileZoomLevel );
     }

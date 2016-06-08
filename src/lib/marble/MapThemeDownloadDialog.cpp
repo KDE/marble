@@ -26,6 +26,8 @@ namespace Marble
 
 class MapItemDelegate : public QStyledItemDelegate
 {
+    Q_OBJECT
+
 public:
     MapItemDelegate( QListView* view, NewstuffModel* newstuffModel, MarbleWidget* marbleWidget );
     void paint( QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index ) const;
@@ -363,4 +365,4 @@ QString MapItemDelegate::text( const QModelIndex &index )
 
 }
 
-#include "moc_MapThemeDownloadDialog.cpp"
+#include "MapThemeDownloadDialog.moc" // needed for Q_OBJECT here in source

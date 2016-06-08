@@ -265,7 +265,7 @@ const QString MARBLE_VERSION_STRING = QString::fromLatin1( "0.24.21 (0.25 develo
 //        pp = patch revision.
 #define MARBLE_VERSION 0x001815
 
-static const char NOT_AVAILABLE[] = QT_TR_NOOP("not available");
+static const char NOT_AVAILABLE[] = QT_TRANSLATE_NOOP("Marble", "not available");
 
 const int tileDigits = 6;
 

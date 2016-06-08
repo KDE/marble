@@ -67,6 +67,8 @@ RoutingRunner *OpenRouteServicePlugin::newRunner() const
 
 class OpenRouteServiceConfigWidget : public RoutingRunnerPlugin::ConfigWidget
 {
+    Q_OBJECT
+
 public:
 
     OpenRouteServiceConfigWidget()
@@ -157,4 +159,4 @@ QHash< QString, QVariant > OpenRouteServicePlugin::templateSettings( RoutingProf
 
 Q_EXPORT_PLUGIN2( OpenRouteServicePlugin, Marble::OpenRouteServicePlugin )
 
-#include "moc_OpenRouteServicePlugin.cpp"
+#include "OpenRouteServicePlugin.moc" // needed for Q_OBJECT here in source

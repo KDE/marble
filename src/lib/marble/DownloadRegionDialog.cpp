@@ -451,7 +451,9 @@ void DownloadRegionDialog::updateTilesCount()
 
     if ( tilesCount > maxTilesCount ) {
         d->m_tileSizeInfo->setToolTip( QString() );
-        d->m_tileSizeInfo->setText( tr( "There is a limit of %n tiles to download.", "",
+        //~ singular There is a limit of %n tile to download.
+        //~ plural There is a limit of %n tiles to download.
+        d->m_tileSizeInfo->setText( tr( "There is a limit of %n tile(s) to download.", "",
                                                maxTilesCount ) );
     } else if ( themeId == "earth/openstreetmap/openstreetmap.dgml" ) {
         qreal tileDownloadSize = tilesCount * averageTileSize;

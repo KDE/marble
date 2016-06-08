@@ -99,6 +99,7 @@ public:
 
 class PreviewDialog : public QDialog
 {
+    Q_OBJECT
 public:
     PreviewDialog( QWidget* parent, QString mapThemeId );
     virtual void closeEvent(QCloseEvent* e );
@@ -1119,3 +1120,4 @@ void MapWizard::showPreview()
 }
 
 #include "moc_MapWizard.cpp"
+#include "MapWizard.moc" // needed for Q_OBJECT here in source

@@ -67,6 +67,8 @@ RoutingRunner *MapQuestPlugin::newRunner() const
 
 class MapQuestConfigWidget : public RoutingRunnerPlugin::ConfigWidget
 {
+    Q_OBJECT
+
 public:
 
     MapQuestConfigWidget()
@@ -183,4 +185,4 @@ QHash< QString, QVariant > MapQuestPlugin::templateSettings( RoutingProfilesMode
 
 Q_EXPORT_PLUGIN2( MapQuestPlugin, Marble::MapQuestPlugin )
 
-#include "moc_MapQuestPlugin.cpp"
+#include "MapQuestPlugin.moc" // needed for Q_OBJECT here in source

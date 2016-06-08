@@ -20,6 +20,8 @@ namespace Marble
 
 class CycleStreetsConfigWidget : public RoutingRunnerPlugin::ConfigWidget
 {
+    Q_OBJECT
+
 public:
     CycleStreetsConfigWidget();
     virtual void loadSettings( const QHash<QString, QVariant> &settings );
@@ -143,4 +145,4 @@ bool CycleStreetsPlugin::supportsTemplate( RoutingProfilesModel::ProfileTemplate
 
 Q_EXPORT_PLUGIN2( CycleStreetsPlugin, Marble::CycleStreetsPlugin )
 
-#include "moc_CycleStreetsPlugin.cpp"
+#include "CycleStreetsPlugin.moc" // needed for Q_OBJECT here in source

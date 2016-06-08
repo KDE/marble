@@ -34,6 +34,7 @@ namespace Marble
 
 class TargetModel : public QAbstractListModel
 {
+    Q_OBJECT
 public:
     TargetModel( MarbleModel* marbleModel, QObject * parent = 0 );
 
@@ -439,9 +440,12 @@ void GoToDialogPrivate::stopProgressAnimation()
 
 void GoToDialogPrivate::updateResultMessage( int results )
 {
-    descriptionLabel->setText( QObject::tr( "%n results found.", "Number of search results", results ) );
+    //~ singular %n result found.
+    //~ plural %n results found.
+    descriptionLabel->setText( QObject::tr( "%n result(s) found.", "Number of search results", results ) );
 }
 
 }
 
-#include "moc_GoToDialog.cpp"
+#include "moc_GoToDialog.cpp" // needed for private slots in header
+#include "GoToDialog.moc" // needed for Q_OBJECT here in source

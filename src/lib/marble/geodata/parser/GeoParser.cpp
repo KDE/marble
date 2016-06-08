@@ -95,6 +95,10 @@ bool GeoParser::read( QIODevice* device )
 
                 if ( !m_nodeStack.isEmpty() )
                     raiseError(
+                        // Keep trailing space in both strings, to match translated string
+                        // TODO: check if that space is kept through the tool pipeline
+                        //~ singular Parsing failed line %1. Still %n unclosed tag after document end. 
+                        //~ plural Parsing failed line %1. Still %n unclosed tags after document end. 
                         QObject::tr("Parsing failed line %1. Still %n unclosed tag(s) after document end. ", "",
                                      m_nodeStack.size() ).arg( lineNumber() ) + errorString());
             } else
