@@ -41,7 +41,7 @@ fixed_tags = {
 }  
 
 feat_dict = {}
-
+node_dict = {}
 non_geom = 0
 
 
@@ -135,8 +135,6 @@ def city_map(data):
     if 'adm0name' in data:
         country = data['adm0name']
     temp =  [('is_in:country', country), ('capital', capital), ('population', population), ('place', 'city') ]
-    #print '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',
-    #print temp
     return temp
 
 def airport_map(data):
@@ -156,8 +154,6 @@ def mountain_map(data):
     temp = [('natural', 'peak'), ('ele', elevation)]
     return temp
 
-
-
 def feature_class(data):
     global non_fcla_dict
     keys = {
@@ -165,6 +161,7 @@ def feature_class(data):
     'Alkaline Lake': [('natural', 'water')],
     'Reservoir': [('natural', 'water')],
     'Road': [(road_map,None)],
+    'Ferry': [('route','ferry')],
     'River': [('waterway', 'river')],
     'Coastline': [('natural', 'coastline')],
     'Minor coastline': [('natural', 'coastline')],
@@ -272,8 +269,8 @@ def feature_class(data):
     'Claim boundary': [('boundary', 'administrative'), ('admin_level', '2')],
     'Reference line': [('boundary', 'administrative'), ('admin_level', '2')],
     'Breakaway': [('boundary', 'administrative'), ('admin_level', '2')],
-    'Elusive frontier': [('boundary', 'administrative'), ('admin_level', '2')]
-
+    'Elusive frontier': [('boundary', 'administrative'), ('admin_level', '2')],
+    'Country': [('marble_land', 'landmass')]
     #aeroway" v="aerodrome"
     }
     if 'featurecla' in data:
@@ -404,13 +401,14 @@ def close_file():
 
 def start_new_file():
     """ Internal. Open a new file, closing existing file if neccesary."""
-    global open_file, file_counter
+    global open_file, file_counter, node_dict
     file_counter += 1
     if open_file:
         close_file()
     open_file = open("%s.%s.osm" % (file_name, file_counter), "w")
     print >>open_file, "<?xml version='1.0' encoding='UTF-8'?>"
     print >>open_file, "<osm version='0.5'>"
+    node_dict = {}
 
 def clean_attr(val):
     """Internal. Hacky way to make attribute XML safe."""
@@ -421,10 +419,11 @@ def clean_attr(val):
 def add_point(f):
     global id_counter
     pt = f.GetGeometryRef()
-    print 'Longitude: ', pt.GetX(0)
-    print 'Longitude: ', pt.GetY(0)
-    add_node(id_counter, pt.GetX(0), pt.GetY(0), 'POINT', f)
-    id_counter += 1
+    #print 'Longitude: ', pt.GetX(0)
+    #print 'Longitude: ', pt.GetY(0)
+    node_id = add_node(id_counter, pt.GetX(0), pt.GetY(0), 'POINT', f)
+    if node_id == id_counter:
+        id_counter += 1
     
 
 def add_relation_multipolygon(geom, ways, f):
@@ -489,9 +488,10 @@ def add_ring_nodes(ring, f):
         print >>sys.stderr, "Degenerate ring." 
         return    
     for count in range(ring.GetPointCount()-1):
-        ids.append(id_counter)
-        add_node(id_counter, ring.GetX(count), ring.GetY(count), 'LINEARRING', f)
-        id_counter += 1
+        node_id = add_node(id_counter, ring.GetX(count), ring.GetY(count), 'LINEARRING', f)
+        if node_id == id_counter:   #means a new node is created, if not means node already exists
+            id_counter += 1
+        ids.append(node_id)
     return ids   
 
 def add_line_nodes(line, f):
@@ -503,9 +503,10 @@ def add_line_nodes(line, f):
         print >>sys.stderr, "Degenerate line string." 
         return    
     for count in range(line.GetPointCount()):
-        ids.append(id_counter)
-        add_node(id_counter, line.GetX(count), line.GetY(count), 'LINEARSTRING', f)
-        id_counter += 1
+        node_id = add_node(id_counter, line.GetX(count), line.GetY(count), 'LINEARSTRING', f)
+        if node_id == id_counter:   #means a new node is created, if not means node already exists
+            id_counter += 1
+        ids.append(node_id)
     return ids   
 
 def add_ring_way(ring, f): 
@@ -513,9 +514,10 @@ def add_ring_way(ring, f):
     global open_file, id_counter
     ids = []
     for count in range(ring.GetPointCount()-1):
-        ids.append(id_counter)
-        add_node(id_counter, ring.GetX(count), ring.GetY(count), 'LINEARRING', f)
-        id_counter += 1
+        node_id = add_node(id_counter, ring.GetX(count), ring.GetY(count), 'LINEARRING', f)
+        if node_id == id_counter:   #means a new node is created, if not means node already exists
+            id_counter += 1
+        ids.append(node_id)
     if len(ids) == 0:
         return None
     print >>open_file, "<way id='-%s'>" % id_counter
@@ -528,13 +530,21 @@ def add_ring_way(ring, f):
     return way_id
 
 def add_node(num_id, lon, lat, geom_name, f):
-    global open_file
+    global open_file, node_dict
+    key = (lon, lat)
     if geom_name == 'POINT':
         print >>open_file, "<node id='-%s' visible='true' lon='%s' lat='%s' >" % (num_id, lon, lat) 
         add_tags(f)
+        node_dict[key] = num_id
         print >>open_file, "</node>"
     else:
-        print >>open_file, "<node id='-%s' visible='true' lon='%s' lat='%s' />" % (num_id, lon, lat) 
+        if key in node_dict:
+            print 'Existing node:', key
+            num_id = node_dict[key]
+        else:
+            print >>open_file, "<node id='-%s' visible='true' lon='%s' lat='%s' />" % (num_id, lon, lat) 
+            node_dict[key] = num_id
+    return num_id
 
 def add_way_around_node(f):
     global id_counter, open_file
@@ -551,9 +561,6 @@ def add_way_around_node(f):
     print >>open_file, "</way >"
 
     
-
-
-
 '''
 def add_line_string(geom,f,ways):
     global id_counter, file_counter, counter, file_name, open_file, namespace
@@ -578,126 +585,124 @@ geom_counter = {}
 
 class AppError(Exception): pass
 
-def run(filename, slice_count=1, obj_count=50000, output_location=None, no_source=False):
+def run(filenames, slice_count=1, obj_count=5000000, output_location=None, no_source=False):
     """Run the converter. Requires open_file, file_name, id_counter,
     file_counter, counter to be defined in global space; not really a very good
     singleton."""
     global id_counter, file_counter, counter, file_name, open_file, namespace, non_geom, non_fcla_dict
-
-    non_geom = 0
-    non_fcla_dict = {}
-    
-    if no_source:
-        namespace=None
-
     if output_location:
        file_name = output_location
-
-    ds = ogr.Open(filename)
-    if not ds:
-        raise AppError("OGR Could not open the file %s" % filename)
-    l = ds.GetLayer(0)
-   
-    max_objs_per_file = obj_count 
-
-    extent = l.GetExtent()
-    #if extent[0] < -180 or extent[0] > 180 or extent[2] < -90 or extent[2] > 90:
-    #   raise AppError("Extent does not look like degrees; are you sure it is? \n(%s, %s, %s, %s)" % (extent[0], extent[2], extent[1], extent[3]))  
-    slice_width = (extent[1] - extent[0]) / slice_count
-
-    seen = {}
-
-    print "Running %s slices with %s base filename against shapefile %s" % (
-            slice_count, file_name, filename)
-
-    for i in range(slice_count): 
-
-        l.ResetReading()
-        l.SetSpatialFilterRect(extent[0] + slice_width * i, extent[2], extent[0] + (slice_width * (i + 1)), extent[3])
-
-        start_new_file()
-        f = l.GetNextFeature()
+    start_new_file()
+    for filename in filenames:
+        non_geom = 0
+        non_fcla_dict = {}
         
-        obj_counter = 0
-        last_obj_split = 0
+        if no_source:
+            namespace=None
 
-        while f:
-            start_id_counter = id_counter
-            if f.GetFID() in seen:
-                f = l.GetNextFeature()
-                continue
-            seen[f.GetFID()] = True             
+        ds = ogr.Open(filename)
+        if not ds:
+            raise AppError("OGR Could not open the file %s" % filename)
+        l = ds.GetLayer(0)
+       
+        max_objs_per_file = obj_count 
+
+        extent = l.GetExtent()
+        #if extent[0] < -180 or extent[0] > 180 or extent[2] < -90 or extent[2] > 90:
+        #   raise AppError("Extent does not look like degrees; are you sure it is? \n(%s, %s, %s, %s)" % (extent[0], extent[2], extent[1], extent[3]))  
+        slice_width = (extent[1] - extent[0]) / slice_count
+
+        seen = {}
+
+        print "Running %s slices with %s base filename against shapefile %s" % (
+                slice_count, file_name, filename)
+
+        for i in range(slice_count): 
+
+            l.ResetReading()
+            l.SetSpatialFilterRect(extent[0] + slice_width * i, extent[2], extent[0] + (slice_width * (i + 1)), extent[3])
+
+            #start_new_file()
+            f = l.GetNextFeature()
             
-            if (obj_counter - last_obj_split) > max_objs_per_file:
-                print "Splitting file with %s objs" % (obj_counter - last_obj_split)
-                start_new_file()
-                last_obj_split = obj_counter
+            obj_counter = 0
+            last_obj_split = 0
 
-            ways = []
-            feat_dict = f.items()
-            print 
-            print '#' * 20
-            #print 'Feature items',f.items()
-            for key in feat_dict:
-               print key, feat_dict[key]
-        
-            geom = f.GetGeometryRef()
-            geom_name = geom.GetGeometryName()
-            if geom_name in geom_counter:
-                geom_counter[geom_name] += 1
-            else:
-                geom_counter[geom_name] = 1
-            if geom_name == 'POLYGON':
-                print 'ak Its a POLYGON'
-                ring = geom.GetGeometryRef(0)
-                ids = add_ring_nodes(ring, f)
-                if not ids or len(ids) == 0: 
+            while f:
+                start_id_counter = id_counter
+                if f.GetFID() in seen:
                     f = l.GetNextFeature()
                     continue
-                add_way(ids,geom_name,ways,f)
-                add_relation_multipolygon(geom, ways, f)
-            elif geom_name == 'LINESTRING':
-                print 'ak Its a LINESTRING'
-                ids = add_line_nodes(geom, f)
-                if not ids or len(ids) == 0: 
-                    f = l.GetNextFeature()
-                    continue
-                add_way(ids,geom_name,ways,f)
-            elif geom_name == 'MULTILINESTRING':
-                print 'ak Its a MULTILINESTRING'
-                for i in range(geom.GetGeometryCount()):
-                    line = geom.GetGeometryRef(i)
-                    ids = add_line_nodes(line, f)
-                    if not ids or len(ids) == 0: 
-                        continue
-                    add_way(ids,geom_name,ways,f)
-            elif geom_name == 'MULTIPOLYGON':
-                print 'ak Its a MULTIPOLYGON'
-                for i in range(geom.GetGeometryCount()):
-                    print 'Making polygon ',i
-                    poly = geom.GetGeometryRef(i)
-                    ring = poly.GetGeometryRef(0)
+                seen[f.GetFID()] = True             
+                
+                if (obj_counter - last_obj_split) > max_objs_per_file:
+                    print "Splitting file with %s objs" % (obj_counter - last_obj_split)
+                    start_new_file()
+                    last_obj_split = obj_counter
+
+                ways = []
+                feat_dict = f.items()
+                #print 
+                #print '#' * 20
+                #print 'Feature items',f.items()
+                #for key in feat_dict:
+                #  print key, feat_dict[key]
+            
+                geom = f.GetGeometryRef()
+                geom_name = geom.GetGeometryName()
+                if geom_name in geom_counter:
+                    geom_counter[geom_name] += 1
+                else:
+                    geom_counter[geom_name] = 1
+                if geom_name == 'POLYGON':
+                    #print 'ak Its a POLYGON'
+                    ring = geom.GetGeometryRef(0)
                     ids = add_ring_nodes(ring, f)
                     if not ids or len(ids) == 0: 
                         f = l.GetNextFeature()
                         continue
-                    add_way(ids,'POLYGON',ways,f)
-                    add_relation_multipolygon(poly, ways, f)
-            elif geom_name == 'POINT':
-                add_point(f)
-                if f['featurecla'] == 'Airport':
-                    print 'Hi'
-                    add_way_around_node(f)
-            else:
-                print 'ak Unknown Type Discovered', geom_name
-                ids = []
-                non_geom += 1       
-                    
-            counter += 1
-            f = l.GetNextFeature()
-            obj_counter += (id_counter - start_id_counter)
-        
-        close_file()
+                    add_way(ids,geom_name,ways,f)
+                    add_relation_multipolygon(geom, ways, f)
+                elif geom_name == 'LINESTRING':
+                    #print 'ak Its a LINESTRING'
+                    ids = add_line_nodes(geom, f)
+                    if not ids or len(ids) == 0: 
+                        f = l.GetNextFeature()
+                        continue
+                    add_way(ids,geom_name,ways,f)
+                elif geom_name == 'MULTILINESTRING':
+                    #print 'ak Its a MULTILINESTRING'
+                    for i in range(geom.GetGeometryCount()):
+                        line = geom.GetGeometryRef(i)
+                        ids = add_line_nodes(line, f)
+                        if not ids or len(ids) == 0: 
+                            continue
+                        add_way(ids,geom_name,ways,f)
+                elif geom_name == 'MULTIPOLYGON':
+                    #print 'ak Its a MULTIPOLYGON'
+                    for i in range(geom.GetGeometryCount()):
+                        #print 'Making polygon ',i
+                        poly = geom.GetGeometryRef(i)
+                        ring = poly.GetGeometryRef(0)
+                        ids = add_ring_nodes(ring, f)
+                        if not ids or len(ids) == 0: 
+                            f = l.GetNextFeature()
+                            continue
+                        add_way(ids,'POLYGON',ways,f)
+                        add_relation_multipolygon(poly, ways, f)
+                elif geom_name == 'POINT':
+                    add_point(f)
+                    if f['featurecla'] == 'Airport':
+                        add_way_around_node(f)
+                else:
+                    #print 'ak Unknown Type Discovered', geom_name
+                    ids = []
+                    non_geom += 1       
+                        
+                counter += 1
+                f = l.GetNextFeature()
+                obj_counter += (id_counter - start_id_counter)        
+    close_file()
 
 if __name__ == "__main__":
     if DONT_RUN:
@@ -713,7 +718,7 @@ if __name__ == "__main__":
     parse.add_option("-o", "--obj-count", 
                      dest="obj_count", 
                      help="Target Maximum number of objects in a single .osm file", 
-                     default=50000, type="int")
+                     default=5000000, type="int")
     parse.add_option("-n", "--no-source", dest="no_source", 
                      help="Do not store source attributes as tags.",
                      action="store_true", default=False)
@@ -732,7 +737,8 @@ if __name__ == "__main__":
         kw[key] = getattr(options, key)
     
     try:
-        run(args[0], **kw)
+        print args
+        run(args, **kw)
     except AppError, E:
         print "An error occurred: \n%s" % E
 
@@ -758,3 +764,9 @@ if __name__ == "__main__":
         if non_geom != 0:
             print 'Unknown geometry present in SHP file', non_geom
 
+    print 'Num of repeated nodes', len(node_dict)
+
+    #for key in node_dict:
+    #    print key, node_dict[key]
+    #print 'Number of nodes' ,len(node_dict)
+    
