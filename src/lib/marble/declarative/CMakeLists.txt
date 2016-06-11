@@ -66,7 +66,7 @@ set_target_properties( marbledeclarative PROPERTIES
 )
 
 if(WIN32)
-  install(TARGETS marbledeclarative RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX})
+  install(TARGETS marbledeclarative RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX} ARCHIVE DESTINATION lib)
 else()
   install(TARGETS marbledeclarative LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
 endif()
