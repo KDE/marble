@@ -68,19 +68,19 @@ void GeoLineStringGraphicsItem::paintInline(GeoPainter* painter, const ViewportP
     LabelPositionFlags labelPositionFlags = NoLabel;
     QPen currentPen = configurePainter(painter, viewport, labelPositionFlags);
 
-    if ( ! ( currentPen.widthF() < 2.5f ) ) {
-        if( style()->lineStyle().cosmeticOutline() &&
-            style()->lineStyle().penStyle() == Qt::SolidLine ) {
-            if ( currentPen.widthF() > 2.5f ) {
-                currentPen.setWidthF( currentPen.widthF() - 2.0f );
-            }
-            currentPen.setColor( style()->polyStyle().paintedColor() );
-            painter->setPen( currentPen );
-            painter->drawPolyline(*m_lineString);
-        } else {
-            painter->drawPolyline(*m_lineString);
+
+    if( style()->lineStyle().cosmeticOutline() &&
+        style()->lineStyle().penStyle() == Qt::SolidLine ) {
+        if ( currentPen.widthF() > 2.5f ) {
+            currentPen.setWidthF( currentPen.widthF() - 2.0f );
         }
+        currentPen.setColor( style()->polyStyle().paintedColor() );
+        painter->setPen( currentPen );
+        painter->drawPolyline(*m_lineString);
+    } else {
+        painter->drawPolyline(*m_lineString);
     }
+    
 
     painter->restore();
 }
