@@ -20,7 +20,7 @@ add_subdirectory( search )
 add_subdirectory( marble-game )
 add_subdirectory( marbleQuick2 )
 
-FIND_PACKAGE (OpenCV QUIET COMPONENTS core imgproc highgui)
+FIND_PACKAGE (OpenCV QUIET COMPONENTS core imgproc highgui videoio)
 if(OPENCV_HIGHGUI_FOUND)
   add_subdirectory( animation-video )
   add_subdirectory( tour-preview )
