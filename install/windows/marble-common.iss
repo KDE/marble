@@ -1,12 +1,10 @@
-#define MyAppName "Marble"
 #define MyAppVersion "1.14.1"
+
+#define MySrcDir SourcePath + "\..\..\"
+#define MyAppName "Marble"
 #define MyAppPublisher "KDE"
 #define MyAppURL "https://marble.kde.org/"
 #define MyAppExeName "marble-qt.exe"
-#define MyArch "x64"
-#define MyQtDir "C:\Qt\5.5\msvc2013_64"
-#define MySrcDir "C:\marble\src"
-#define MyBuildDir "C:\marble\export-64bit"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -35,7 +33,7 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "marble.kde.org.url"; DestDir: "{app}"
+Source: "{#MySrcDir}\marble.kde.org.url"; DestDir: "{app}"
 Source: "{#MyBuildDir}\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "{#MyQtDir}\bin\icudt54.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#MyQtDir}\bin\icuin54.dll"; DestDir: "{app}"; Flags: ignoreversion
