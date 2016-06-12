@@ -160,7 +160,7 @@ void GeoPolygonGraphicsItem::initializeBuildingPainting(const GeoPainter* painte
     }
 }
 
-QPointF GeoPolygonGraphicsItem::centroid(const QPolygonF &polygon, double &area) const
+QPointF GeoPolygonGraphicsItem::centroid(const QPolygonF &polygon, double &area)
 {
     auto centroid = QPointF(0.0, 0.0);
     area = 0.0;
@@ -518,8 +518,8 @@ void GeoPolygonGraphicsItem::paintFrame(GeoPainter *painter, const ViewportParam
     painter->restore();
 }
 
-void GeoPolygonGraphicsItem::screenPolygons(const ViewportParams *viewport, const GeoDataPolygon * polygon, QVector<QPolygonF*> & innerPolygons, QVector<QPolygonF*> & outlines) const {
-
+void GeoPolygonGraphicsItem::screenPolygons(const ViewportParams *viewport, const GeoDataPolygon *polygon, QVector<QPolygonF *> &innerPolygons, QVector<QPolygonF *> &outlines)
+{
     Q_ASSERT(polygon);
 
     QVector<QPolygonF*> outerPolygons;
