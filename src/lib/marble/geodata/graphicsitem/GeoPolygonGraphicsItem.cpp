@@ -45,13 +45,8 @@ GeoPolygonGraphicsItem::GeoPolygonGraphicsItem( const GeoDataFeature *feature, c
     determineBuildingHeight();
 }
 
-void GeoPolygonGraphicsItem::determineBuildingHeight()
+bool GeoPolygonGraphicsItem::isBuilding(GeoDataFeature::GeoDataVisualCategory visualCategory)
 {
-    if (!m_polygon && !m_ring ) {
-        return;
-    }
-
-    GeoDataFeature::GeoDataVisualCategory const visualCategory = feature()->visualCategory();
     switch (visualCategory) {
     case GeoDataFeature::Building:
         //case GeoDataFeature::AccomodationCamping:
@@ -96,6 +91,23 @@ void GeoPolygonGraphicsItem::determineBuildingHeight()
     case GeoDataFeature::ReligionJewish:
     case GeoDataFeature::ReligionShinto:
     case GeoDataFeature::ReligionSikh:
+        return true;
+
+    default:
+        break;
+    }
+
+    return false;
+}
+
+void GeoPolygonGraphicsItem::determineBuildingHeight()
+{
+    if (!m_polygon && !m_ring ) {
+        return;
+    }
+
+    GeoDataFeature::GeoDataVisualCategory const visualCategory = feature()->visualCategory();
+    if (isBuilding(visualCategory))
     {
         extractBuildingHeight();
         setZValue(this->zValue() + m_buildingHeight);
@@ -106,12 +118,10 @@ void GeoPolygonGraphicsItem::determineBuildingHeight()
         paintLayers << QString("Polygon/Building/roof");
         setPaintLayers(paintLayers);
     }
-        break;
-
-    default:
+    else
+    {
         QString const paintLayer = QString("Polygon/%1").arg(GeoDataFeature::visualCategoryName(visualCategory));
         setPaintLayers(QStringList() << paintLayer);
-        break;
     }
 }
 

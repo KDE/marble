@@ -12,8 +12,11 @@
 #define MARBLE_GEOPOLYGONGRAPHICSITEM_H
 
 #include "GeoGraphicsItem.h"
-#include "GeoDataCoordinates.h"
 #include "marble_export.h"
+
+#include "GeoDataCoordinates.h"
+#include "GeoDataFeature.h"
+
 #include <QImage>
 #include <QColor>
 
@@ -43,6 +46,7 @@ private:
     void extractBuildingHeight();
     void screenPolygons(const ViewportParams *viewport, const GeoDataPolygon* polygon, QVector<QPolygonF*> &polygons,  QVector<QPolygonF*> &outlines) const;
     QPen configurePainter(GeoPainter* painter, const ViewportParams *viewport, bool isBuildingFrame);
+    static bool isBuilding(GeoDataFeature::GeoDataVisualCategory visualCategory);
     void determineBuildingHeight();
     void initializeBuildingPainting(const GeoPainter* painter, const ViewportParams *viewport,
                                     bool &drawAccurate3D, bool &isCameraAboveBuilding, bool &hasInnerBoundaries,
