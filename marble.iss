@@ -35,6 +35,7 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
+Source: "marble.kde.org.url"; DestDir: "{app}"
 Source: "{#MyBuildDir}\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "{#MyQtDir}\bin\icudt54.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#MyQtDir}\bin\icuin54.dll"; DestDir: "{app}"; Flags: ignoreversion
@@ -73,8 +74,9 @@ Source: "{#MyQtDir}\plugins\sqldrivers\qsqlite.dll"; DestDir: "{app}\sqldrivers"
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
-Name: "{commonprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
+Name: "{commonprograms}\{#MyAppName}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
 Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
+Name: "{commonprograms}\{#MyAppName}\Marble Website"; Filename: "{app}\marble.kde.org.url"
 
 [Tasks]
 Name: kmlAssociation; Description: "Associate ""kml"" extension (KML files from e.g. Google Earth)"; GroupDescription: File extensions:
