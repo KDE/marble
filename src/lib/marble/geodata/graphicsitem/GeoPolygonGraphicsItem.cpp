@@ -27,22 +27,56 @@
 namespace Marble
 {
 
-GeoPolygonGraphicsItem::GeoPolygonGraphicsItem( const GeoDataFeature *feature, const GeoDataPolygon* polygon )
-        : GeoGraphicsItem( feature ),
-          m_polygon( polygon ),
-          m_ring( 0 ),
-          m_buildingHeight(0.0)
+GeoPolygonGraphicsItem::GeoPolygonGraphicsItem(const GeoDataFeature *feature, const GeoDataPolygon *polygon) :
+    GeoGraphicsItem(feature),
+    m_polygon(polygon),
+    m_ring(0),
+    m_buildingHeight(extractBuildingHeight(feature)),
+    m_buildingLabel(extractBuildingLabel(feature)),
+    m_entries(extractNamedEntries(feature))
 {
-    determineBuildingHeight();
+    const GeoDataFeature::GeoDataVisualCategory visualCategory = feature->visualCategory();
+    if (isBuilding(visualCategory))
+    {
+        setZValue(this->zValue() + m_buildingHeight);
+        Q_ASSERT(m_buildingHeight > 0.0);
+
+        QStringList paintLayers;
+        paintLayers << QString("Polygon/Building/frame");
+        paintLayers << QString("Polygon/Building/roof");
+        setPaintLayers(paintLayers);
+    }
+    else
+    {
+        const QString paintLayer = QString("Polygon/%1").arg(GeoDataFeature::visualCategoryName(visualCategory));
+        setPaintLayers(QStringList() << paintLayer);
+    }
 }
 
-GeoPolygonGraphicsItem::GeoPolygonGraphicsItem( const GeoDataFeature *feature, const GeoDataLinearRing* ring )
-        : GeoGraphicsItem( feature ),
-          m_polygon( 0 ),
-          m_ring( ring ),
-          m_buildingHeight(0.0)
+GeoPolygonGraphicsItem::GeoPolygonGraphicsItem(const GeoDataFeature *feature, const GeoDataLinearRing *ring) :
+    GeoGraphicsItem(feature),
+    m_polygon(0),
+    m_ring(ring),
+    m_buildingHeight(extractBuildingHeight(feature)),
+    m_buildingLabel(extractBuildingLabel(feature)),
+    m_entries(extractNamedEntries(feature))
 {
-    determineBuildingHeight();
+    const GeoDataFeature::GeoDataVisualCategory visualCategory = feature->visualCategory();
+    if (isBuilding(visualCategory))
+    {
+        setZValue(this->zValue() + m_buildingHeight);
+        Q_ASSERT(m_buildingHeight > 0.0);
+
+        QStringList paintLayers;
+        paintLayers << QString("Polygon/Building/frame");
+        paintLayers << QString("Polygon/Building/roof");
+        setPaintLayers(paintLayers);
+    }
+    else
+    {
+        const QString paintLayer = QString("Polygon/%1").arg(GeoDataFeature::visualCategoryName(visualCategory));
+        setPaintLayers(QStringList() << paintLayer);
+    }
 }
 
 bool GeoPolygonGraphicsItem::isBuilding(GeoDataFeature::GeoDataVisualCategory visualCategory)
@@ -98,33 +132,6 @@ bool GeoPolygonGraphicsItem::isBuilding(GeoDataFeature::GeoDataVisualCategory vi
     }
 
     return false;
-}
-
-void GeoPolygonGraphicsItem::determineBuildingHeight()
-{
-    if (!m_polygon && !m_ring ) {
-        return;
-    }
-
-    GeoDataFeature::GeoDataVisualCategory const visualCategory = feature()->visualCategory();
-    if (isBuilding(visualCategory))
-    {
-        m_buildingHeight = extractBuildingHeight(feature());
-        m_buildingLabel = extractBuildingLabel(feature());
-        m_entries = extractNamedEntries(feature());
-        setZValue(this->zValue() + m_buildingHeight);
-        Q_ASSERT(m_buildingHeight > 0.0);
-
-        QStringList paintLayers;
-        paintLayers << QString("Polygon/Building/frame");
-        paintLayers << QString("Polygon/Building/roof");
-        setPaintLayers(paintLayers);
-    }
-    else
-    {
-        QString const paintLayer = QString("Polygon/%1").arg(GeoDataFeature::visualCategoryName(visualCategory));
-        setPaintLayers(QStringList() << paintLayer);
-    }
 }
 
 void GeoPolygonGraphicsItem::initializeBuildingPainting(const GeoPainter* painter, const ViewportParams *viewport,
@@ -207,6 +214,10 @@ QPointF GeoPolygonGraphicsItem::buildingOffset(const QPointF &point, const Viewp
 
 double GeoPolygonGraphicsItem::extractBuildingHeight(const GeoDataFeature *feature)
 {
+    if (!isBuilding(feature->visualCategory())) {
+        return 0;
+    }
+
     double height = 8.0;
 
     if (feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
@@ -233,7 +244,7 @@ double GeoPolygonGraphicsItem::extractBuildingHeight(const GeoDataFeature *featu
 
 QString GeoPolygonGraphicsItem::extractBuildingLabel(const GeoDataFeature *feature)
 {
-    if (feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
+    if (isBuilding(feature->visualCategory()) && feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
         const GeoDataPlacemark *placemark = static_cast<const GeoDataPlacemark *>(feature);
 
         if (!placemark->name().isEmpty()) {
@@ -252,7 +263,7 @@ QList<GeoPolygonGraphicsItem::NamedEntry> GeoPolygonGraphicsItem::extractNamedEn
 {
     QList<NamedEntry> entries;
 
-    if (feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
+    if (isBuilding(feature->visualCategory()) && feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
         const GeoDataPlacemark *placemark = static_cast<const GeoDataPlacemark *>(feature);
 
         const auto end = placemark->osmData().nodeReferencesEnd();
