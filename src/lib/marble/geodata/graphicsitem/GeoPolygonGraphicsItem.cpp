@@ -527,20 +527,15 @@ void GeoPolygonGraphicsItem::screenPolygons(const ViewportParams *viewport, cons
 
     outlines << outerPolygons;
 
-    bool const hasInnerBoundaries = !polygon->innerBoundaries().isEmpty();
-
     QVector<GeoDataLinearRing> innerBoundaries = polygon->innerBoundaries();
-    foreach( const GeoDataLinearRing& itInnerBoundary, innerBoundaries ) {
+    foreach (const GeoDataLinearRing &innerBoundary, innerBoundaries) {
         QVector<QPolygonF*> innerPolygonsPerBoundary;
-        viewport->screenCoordinates( itInnerBoundary, innerPolygonsPerBoundary );
+        viewport->screenCoordinates(innerBoundary, innerPolygonsPerBoundary);
 
-        if ( hasInnerBoundaries ) {
-            outlines << innerPolygonsPerBoundary;
-            foreach( QPolygonF* innerPolygonPerBoundary, innerPolygonsPerBoundary ) {
-                innerPolygons << innerPolygonPerBoundary;
-            }
+        outlines << innerPolygonsPerBoundary;
+        foreach( QPolygonF* innerPolygonPerBoundary, innerPolygonsPerBoundary ) {
+            innerPolygons << innerPolygonPerBoundary;
         }
-
     }
 }
 
