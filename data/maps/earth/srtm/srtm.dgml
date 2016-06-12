@@ -83,7 +83,7 @@
                     <pen color="#89b0da" style="dashline"/>
                     <brush color="#bfd5ee" alpha="0.3" />
                 </geodata>
-                <geodata name="antarciticiceshelves" property="ice">
+                <geodata name="antarciticiceshelves" property="!ice">
                     <sourcefile> naturalearth/ne_50m_antarctic_ice_shelves_polys.pn2 </sourcefile>
                     <pen color="#5182b4" style="dashline"/>
                     <brush color="transparent" />
