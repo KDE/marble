@@ -1,5 +1,5 @@
 #define MyAppName "Marble"
-#define MyAppVersion "1.13.90"
+#define MyAppVersion "1.14.1"
 #define MyAppPublisher "KDE"
 #define MyAppURL "https://marble.kde.org/"
 #define MyAppExeName "marble-qt.exe"
