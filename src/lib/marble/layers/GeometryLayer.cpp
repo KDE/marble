@@ -149,6 +149,7 @@ void GeometryLayerPrivate::initializeDefaultValues()
     for ( int i = 0; i < GeoDataFeature::LastIndex; i++ )
         s_defaultMinZoomLevels[i] = 15;
 
+    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::Landmass);
     for ( int i = GeoDataFeature::LanduseAllotments; i <= GeoDataFeature::LanduseVineyard; i++ ) {
         if ((GeoDataFeature::GeoDataVisualCategory)i != GeoDataFeature::LanduseGrass) {
             s_paintLayerOrder << createPaintLayerOrder("Polygon", (GeoDataFeature::GeoDataVisualCategory)i);
@@ -181,8 +182,17 @@ void GeometryLayerPrivate::initializeDefaultValues()
     s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::EducationUniversity);
     s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::HealthHospital);
 
+    s_paintLayerOrder << createPaintLayerOrder("LineString", GeoDataFeature::Landmass);
+
     s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::NaturalWater);
     s_paintLayerOrder << createPaintLayerOrder("LineString", GeoDataFeature::NaturalWater);
+
+
+    s_paintLayerOrder << createPaintLayerOrder("LineString", GeoDataFeature::NaturalReef, "outline");
+    s_paintLayerOrder << createPaintLayerOrder("LineString", GeoDataFeature::NaturalReef, "inline");
+    s_paintLayerOrder << createPaintLayerOrder("LineString", GeoDataFeature::NaturalReef, "label");
+
+
     for ( int i = GeoDataFeature::HighwaySteps; i <= GeoDataFeature::HighwayMotorway; i++ ) {
         s_paintLayerOrder << createPaintLayerOrder("LineString", (GeoDataFeature::GeoDataVisualCategory)i, "outline");
     }
@@ -204,6 +214,16 @@ void GeometryLayerPrivate::initializeDefaultValues()
 
     s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::TransportPlatform);
 
+    for ( int i = GeoDataFeature::AdminLevel1; i <= GeoDataFeature::AdminLevel11; i++ ) {
+        s_paintLayerOrder << createPaintLayerOrder("LineString", (GeoDataFeature::GeoDataVisualCategory)i, "outline");
+    }
+    for ( int i = GeoDataFeature::AdminLevel1; i <= GeoDataFeature::AdminLevel11; i++ ) {
+        s_paintLayerOrder << createPaintLayerOrder("LineString", (GeoDataFeature::GeoDataVisualCategory)i, "inline");
+    }
+    for ( int i = GeoDataFeature::AdminLevel1; i <= GeoDataFeature::AdminLevel11; i++ ) {
+        s_paintLayerOrder << createPaintLayerOrder("LineString", (GeoDataFeature::GeoDataVisualCategory)i, "label");
+    }
+
     s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::AmenityGraveyard);
     s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::NaturalWood);
     s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::NaturalBeach);
@@ -220,6 +240,8 @@ void GeometryLayerPrivate::initializeDefaultValues()
     s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::ManmadeBridge);
     s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::BarrierCityWall);
     s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::NaturalWater);
+    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::NaturalReef);
+    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::Landmass);
     s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::NaturalCliff);
     s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::NaturalPeak);
     s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::EducationCollege);
@@ -234,6 +256,7 @@ void GeometryLayerPrivate::initializeDefaultValues()
     Q_ASSERT(QSet<QString>::fromList(s_paintLayerOrder).size() == s_paintLayerOrder.size());
 
     s_defaultMinZoomLevels[GeoDataFeature::Default]             = 1;
+    s_defaultMinZoomLevels[GeoDataFeature::NaturalReef]         = 5;
     s_defaultMinZoomLevels[GeoDataFeature::NaturalWater]        = 8;
     s_defaultMinZoomLevels[GeoDataFeature::NaturalWood]         = 8;
     s_defaultMinZoomLevels[GeoDataFeature::NaturalBeach]        = 10;
@@ -314,6 +337,21 @@ void GeometryLayerPrivate::initializeDefaultValues()
     s_defaultMinZoomLevels[GeoDataFeature::TransportPlatform]   = 16;
 
     s_defaultMinZoomLevels[GeoDataFeature::Satellite]           = 0;
+
+    s_defaultMinZoomLevels[GeoDataFeature::Landmass]            = 0;
+
+    s_defaultMinZoomLevels[GeoDataFeature::AdminLevel1]         = 0;
+    s_defaultMinZoomLevels[GeoDataFeature::AdminLevel2]         = 1;
+    s_defaultMinZoomLevels[GeoDataFeature::AdminLevel3]         = 1;
+    s_defaultMinZoomLevels[GeoDataFeature::AdminLevel4]         = 2;
+    s_defaultMinZoomLevels[GeoDataFeature::AdminLevel5]         = 4;
+    s_defaultMinZoomLevels[GeoDataFeature::AdminLevel6]         = 5;
+    s_defaultMinZoomLevels[GeoDataFeature::AdminLevel7]         = 5;
+    s_defaultMinZoomLevels[GeoDataFeature::AdminLevel8]         = 7;
+    s_defaultMinZoomLevels[GeoDataFeature::AdminLevel9]         = 7;
+    s_defaultMinZoomLevels[GeoDataFeature::AdminLevel10]        = 8;
+    s_defaultMinZoomLevels[GeoDataFeature::AdminLevel11]        = 8;
+
 
     for ( int i = 0; i < GeoDataFeature::LastIndex; ++i ) {
         s_maximumZoomLevel = qMax( s_maximumZoomLevel, s_defaultMinZoomLevels[i] );

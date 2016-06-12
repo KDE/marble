@@ -571,6 +571,10 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
                                                                                                    Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false, QVector< qreal >(),
                                                                                                    QFont(QStringLiteral("Arial")), waterColor.darker(150));
 
+    s_defaultStyle[GeoDataFeature::NaturalReef]              = GeoDataFeaturePrivate::createStyle( 5.5, 0, "#36677c", "#36677c", true, true,
+                                                                                                   Qt::Dense7Pattern, Qt::DotLine, Qt::RoundCap, false, QVector< qreal >(),
+                                                                                                   QFont(QStringLiteral("Arial")), waterColor.darker(150));
+
     s_defaultStyle[GeoDataFeature::AmenityGraveyard]         = GeoDataFeaturePrivate::createWayStyle( "#AACBAF", "#AACBAF", true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_generic.png") );
 
     s_defaultStyle[GeoDataFeature::NaturalWood]              = GeoDataFeaturePrivate::createWayStyle( "#8DC46C", "#8DC46C", true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/forest.png") );
@@ -628,6 +632,20 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
 
     s_defaultStyle[GeoDataFeature::Building]                 = GeoDataFeaturePrivate::createStyle( 1, 0, buildingColor, buildingColor.darker(),
                                                                                    true, true, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false );
+
+    s_defaultStyle[GeoDataFeature::Landmass]                 = GeoDataFeaturePrivate::createWayStyle( "#F1EEE8", "#F1EEE8", true, true );
+
+    s_defaultStyle[GeoDataFeature::AdminLevel1]              = GeoDataFeaturePrivate::createStyle(0.0, 0.0, "#DF9CCF", "#DF9CCF", true, true, Qt::SolidPattern, Qt::CustomDashLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3 );
+    s_defaultStyle[GeoDataFeature::AdminLevel2]              = GeoDataFeaturePrivate::createStyle(2.0, 0.0, "#DF9CCF", "#DF9CCF", true, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3 );
+    s_defaultStyle[GeoDataFeature::AdminLevel3]              = GeoDataFeaturePrivate::createStyle(1.8, 0.0, "#DF9CCF", "#DF9CCF", true, true, Qt::SolidPattern, Qt::DashLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3 );
+    s_defaultStyle[GeoDataFeature::AdminLevel4]              = GeoDataFeaturePrivate::createStyle(1.5, 0.0, "#DF9CCF", "#DF9CCF", true, true, Qt::SolidPattern, Qt::DotLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3 );
+    s_defaultStyle[GeoDataFeature::AdminLevel5]              = GeoDataFeaturePrivate::createStyle(1.25, 0.0, "#DF9CCF", "#DF9CCF", true, true, Qt::SolidPattern, Qt::DashDotDotLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3 );
+    s_defaultStyle[GeoDataFeature::AdminLevel6]              = GeoDataFeaturePrivate::createStyle(1, 0.0, "#DF9CCF", "#DF9CCF", true, true, Qt::SolidPattern, Qt::DashDotLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3 );
+    s_defaultStyle[GeoDataFeature::AdminLevel7]              = GeoDataFeaturePrivate::createStyle(1, 0.0, "#DF9CCF", "#DF9CCF", true, true, Qt::SolidPattern, Qt::DashLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3 );
+    s_defaultStyle[GeoDataFeature::AdminLevel8]              = GeoDataFeaturePrivate::createStyle(1, 0.0, "#DF9CCF", "#DF9CCF", true, true, Qt::SolidPattern, Qt::DashLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3 );
+    s_defaultStyle[GeoDataFeature::AdminLevel9]              = GeoDataFeaturePrivate::createStyle(1.5, 0.0, "#DF9CCF", "#DF9CCF", true, true, Qt::SolidPattern, Qt::DotLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3 );
+    s_defaultStyle[GeoDataFeature::AdminLevel10]             = GeoDataFeaturePrivate::createStyle(1.5, 0.0, "#DF9CCF", "#DF9CCF", true, true, Qt::SolidPattern, Qt::DotLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3 );
+    s_defaultStyle[GeoDataFeature::AdminLevel11]             = GeoDataFeaturePrivate::createStyle(1.5, 0.0, "#DF9CCF", "#DF9CCF", true, true, Qt::SolidPattern, Qt::DotLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3 );
 
     s_defaultStyle[GeoDataFeature::Satellite]
         = GeoDataStyle::Ptr(new GeoDataStyle( MarbleDirs::path( "bitmaps/satellite.png" ),
@@ -731,6 +749,7 @@ QString GeoDataFeature::visualCategoryName(GeoDataFeature::GeoDataVisualCategory
         s_visualCategoryNames[Folder] = "Folder";
         s_visualCategoryNames[Bookmark] = "Bookmark";
         s_visualCategoryNames[NaturalWater] = "NaturalWater";
+        s_visualCategoryNames[NaturalReef] = "NaturalReef";
         s_visualCategoryNames[NaturalWood] = "NaturalWood";
         s_visualCategoryNames[NaturalBeach] = "NaturalBeach";
         s_visualCategoryNames[NaturalWetland] = "NaturalWetland";
@@ -945,6 +964,18 @@ QString GeoDataFeature::visualCategoryName(GeoDataFeature::GeoDataVisualCategory
         s_visualCategoryNames[RailwayFunicular] = "RailwayFunicular";
         s_visualCategoryNames[PowerTower] = "PowerTower";
         s_visualCategoryNames[Satellite] = "Satellite";
+        s_visualCategoryNames[Landmass] = "Landmass";
+        s_visualCategoryNames[AdminLevel1] = "AdminLevel1";
+        s_visualCategoryNames[AdminLevel2] = "AdminLevel2";
+        s_visualCategoryNames[AdminLevel3] = "AdminLevel3";
+        s_visualCategoryNames[AdminLevel4] = "AdminLevel4";
+        s_visualCategoryNames[AdminLevel5] = "AdminLevel5";
+        s_visualCategoryNames[AdminLevel6] = "AdminLevel6";
+        s_visualCategoryNames[AdminLevel7] = "AdminLevel7";
+        s_visualCategoryNames[AdminLevel8] = "AdminLevel8";
+        s_visualCategoryNames[AdminLevel9] = "AdminLevel9";
+        s_visualCategoryNames[AdminLevel10] = "AdminLevel10";
+        s_visualCategoryNames[AdminLevel11] = "AdminLevel11";
         s_visualCategoryNames[LastIndex] = "LastIndex";
     }
 

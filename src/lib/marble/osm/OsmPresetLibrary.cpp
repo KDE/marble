@@ -32,14 +32,17 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
         return;
     }
 
-    s_visualCategories[ OsmTag( "admin_level", "1" ) ]              = GeoDataFeature::OtherTerrain;
-    s_visualCategories[ OsmTag( "admin_level", "2" ) ]              = GeoDataFeature::OtherTerrain;
-    s_visualCategories[ OsmTag( "admin_level", "3" ) ]              = GeoDataFeature::OtherTerrain;
-    s_visualCategories[ OsmTag( "admin_level", "4" ) ]              = GeoDataFeature::OtherTerrain;
-    s_visualCategories[ OsmTag( "admin_level", "5" ) ]              = GeoDataFeature::OtherTerrain;
-    s_visualCategories[ OsmTag( "admin_level", "6" ) ]              = GeoDataFeature::OtherTerrain;
-    s_visualCategories[ OsmTag( "admin_level", "7" ) ]              = GeoDataFeature::OtherTerrain;
-    s_visualCategories[ OsmTag( "admin_level", "8" ) ]              = GeoDataFeature::OtherTerrain;
+    s_visualCategories[ OsmTag( "admin_level", "1" ) ]              = GeoDataFeature::AdminLevel1;
+    s_visualCategories[ OsmTag( "admin_level", "2" ) ]              = GeoDataFeature::AdminLevel2;
+    s_visualCategories[ OsmTag( "admin_level", "3" ) ]              = GeoDataFeature::AdminLevel3;
+    s_visualCategories[ OsmTag( "admin_level", "4" ) ]              = GeoDataFeature::AdminLevel4;
+    s_visualCategories[ OsmTag( "admin_level", "5" ) ]              = GeoDataFeature::AdminLevel5;
+    s_visualCategories[ OsmTag( "admin_level", "6" ) ]              = GeoDataFeature::AdminLevel6;
+    s_visualCategories[ OsmTag( "admin_level", "7" ) ]              = GeoDataFeature::AdminLevel7;
+    s_visualCategories[ OsmTag( "admin_level", "8" ) ]              = GeoDataFeature::AdminLevel8;
+    s_visualCategories[ OsmTag( "admin_level", "9" ) ]              = GeoDataFeature::AdminLevel9;
+    s_visualCategories[ OsmTag( "admin_level", "10" ) ]             = GeoDataFeature::AdminLevel10;
+    s_visualCategories[ OsmTag( "admin_level", "11" ) ]             = GeoDataFeature::AdminLevel11;
 
     s_visualCategories[ OsmTag( "amenity", "restaurant" ) ]         = GeoDataFeature::FoodRestaurant;
     s_visualCategories[ OsmTag( "amenity", "fast_food" ) ]          = GeoDataFeature::FoodFastFood;
@@ -214,6 +217,7 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "highway", "motorway" ) ]           = GeoDataFeature::HighwayMotorway;
 
     s_visualCategories[ OsmTag( "natural", "water" ) ]              = GeoDataFeature::NaturalWater;
+    s_visualCategories[ OsmTag( "natural", "reef" ) ]               = GeoDataFeature::NaturalReef;
     s_visualCategories[ OsmTag( "natural", "bay" ) ]                = GeoDataFeature::NaturalWater;
     s_visualCategories[ OsmTag( "natural", "coastline" ) ]          = GeoDataFeature::NaturalWater;
     s_visualCategories[ OsmTag( "waterway", "stream" ) ]            = GeoDataFeature::NaturalWater;
@@ -314,6 +318,9 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "place", "locality" ) ]             = GeoDataFeature::PlaceLocality;
     s_visualCategories[ OsmTag( "place", "town" ) ]                 = GeoDataFeature::PlaceTown;
     s_visualCategories[ OsmTag( "place", "village" ) ]              = GeoDataFeature::PlaceVillage;
+
+    //Custom Marble OSM Tags
+    s_visualCategories[ OsmTag( "marble_land", "landmass" ) ]       = GeoDataFeature::Landmass;
 
     // Default for buildings
     foreach(const QString &value, buildingValues() ) {
@@ -572,6 +579,8 @@ bool OsmPresetLibrary::isAreaTag(const QString &keyValue)
         s_areaTags.insert( "landuse=orchard" );
         s_areaTags.insert( "landuse=vineyard" );
         s_areaTags.insert( "landuse=grass" );
+
+        s_areaTags.insert( "marble_land=landmass" );
     }
 
     return s_areaTags.contains(keyValue);

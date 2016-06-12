@@ -146,6 +146,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         Bookmark,
 
         NaturalWater,
+        NaturalReef,
         NaturalWood,
         NaturalBeach,
         NaturalWetland,
@@ -399,9 +400,26 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
 
         Satellite,
 
+        //Admin level tags for depicting boundary
+        AdminLevel1,
+        AdminLevel2,
+        AdminLevel3,
+        AdminLevel4,
+        AdminLevel5,
+        AdminLevel6,
+        AdminLevel7,
+        AdminLevel8,
+        AdminLevel9,
+        AdminLevel10,
+        AdminLevel11,
+
+        //Custom OSM Tags
+        Landmass,
+
         // Important: Make sure that this is always the last
         // item and just use it to specify the array size
         LastIndex
+
     };
 
     /**
@@ -631,12 +649,12 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
 
     static QString visualCategoryName(GeoDataVisualCategory category);
 
+    virtual void detach();
+
  protected:
     // the d-pointer needs to be protected to be accessible from derived classes
     GeoDataFeaturePrivate* d;
     explicit GeoDataFeature( GeoDataFeaturePrivate* priv );
-
-    virtual void detach();
 
     bool equals( const GeoDataFeature &other ) const;
     using GeoDataObject::equals;
