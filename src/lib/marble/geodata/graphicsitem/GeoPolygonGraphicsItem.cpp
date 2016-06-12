@@ -551,32 +551,24 @@ QPen GeoPolygonGraphicsItem::configurePainter(GeoPainter *painter, const Viewpor
             currentPen.setColor( Qt::transparent );
         }
         else {
-            if ( currentPen.color() != style()->lineStyle().paintedColor() ||
-                 currentPen.widthF() != style()->lineStyle().width() ) {
-                currentPen.setColor( style()->lineStyle().paintedColor() );
-                currentPen.setWidthF( style()->lineStyle().width() );
-            }
-
-            if ( currentPen.capStyle() != style()->lineStyle().capStyle() )
-                currentPen.setCapStyle( style()->lineStyle().capStyle() );
-
-            if ( currentPen.style() != style()->lineStyle().penStyle() )
-                currentPen.setStyle( style()->lineStyle().penStyle() );
+            currentPen.setColor(style()->lineStyle().paintedColor());
+            currentPen.setWidthF(style()->lineStyle().width());
+            currentPen.setCapStyle(style()->lineStyle().capStyle());
+            currentPen.setStyle(style()->lineStyle().penStyle());
         }
 
-        if ( painter->pen() != currentPen )
-            painter->setPen( currentPen );
+        painter->setPen(currentPen);
 
         if ( !style()->polyStyle().fill() ) {
-            if ( painter->brush().color() != Qt::transparent )
-                painter->setBrush( QColor( Qt::transparent ) );
+            painter->setBrush(QColor(Qt::transparent));
         }
         else {
             if ( isBuildingFrame ) {
                 painter->setBrush( style()->polyStyle().paintedColor().darker(150) );
-            } else if ( painter->brush().color() != style()->polyStyle().paintedColor() ) {
+            }
+            else if ( painter->brush().color() != style()->polyStyle().paintedColor() ) {
                 QImage textureImage = style()->polyStyle().textureImage();
-                if( !textureImage.isNull()){
+                if (!textureImage.isNull()) {
                     GeoDataCoordinates coords = latLonAltBox().center();
                     qreal x, y;
                     viewport->screenCoordinates(coords, x, y);
@@ -596,7 +588,8 @@ QPen GeoPolygonGraphicsItem::configurePainter(GeoPainter *painter, const Viewpor
                     QBrush brush(m_cachedTexture);
                     painter->setBrush(brush);
                     painter->setBrushOrigin(QPoint(x,y));
-                } else {
+                }
+                else {
                     painter->setBrush( style()->polyStyle().paintedColor() );
                 }
             }
