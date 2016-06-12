@@ -631,12 +631,12 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
 
     static QString visualCategoryName(GeoDataVisualCategory category);
 
-    virtual void detach();
-
  protected:
     // the d-pointer needs to be protected to be accessible from derived classes
     GeoDataFeaturePrivate* d;
     explicit GeoDataFeature( GeoDataFeaturePrivate* priv );
+
+    virtual void detach();
 
     bool equals( const GeoDataFeature &other ) const;
     using GeoDataObject::equals;
