@@ -39,11 +39,18 @@ public:
     void paint(GeoPainter* painter, const ViewportParams *viewport, const QString &layer);
 
 private:
+    struct NamedEntry {
+        GeoDataCoordinates point;
+        QString label;
+    };
+
     void paintFrame( GeoPainter* painter, const ViewportParams *viewport );
     void paintRoof( GeoPainter* painter, const ViewportParams *viewport );
 
     QPointF buildingOffset(const QPointF &point, const ViewportParams *viewport, bool* isCameraAboveBuilding=0) const;
-    void extractBuildingHeight();
+    static double extractBuildingHeight(const GeoDataFeature *feature);
+    static QString extractBuildingLabel(const GeoDataFeature *feature);
+    static QList<NamedEntry> extractNamedEntries(const GeoDataFeature *feature);
     void screenPolygons(const ViewportParams *viewport, const GeoDataPolygon* polygon, QVector<QPolygonF*> &polygons,  QVector<QPolygonF*> &outlines) const;
     QPen configurePainter(GeoPainter* painter, const ViewportParams *viewport, bool isBuildingFrame);
     static bool isBuilding(GeoDataFeature::GeoDataVisualCategory visualCategory);
@@ -62,10 +69,6 @@ private:
     QColor m_cachedTextureColor;
     QImage m_cachedTexture;
 
-    struct NamedEntry {
-        GeoDataCoordinates point;
-        QString label;
-    };
     QList<NamedEntry> m_entries;
 };
 

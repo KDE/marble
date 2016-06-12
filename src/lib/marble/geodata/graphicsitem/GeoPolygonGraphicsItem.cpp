@@ -109,7 +109,9 @@ void GeoPolygonGraphicsItem::determineBuildingHeight()
     GeoDataFeature::GeoDataVisualCategory const visualCategory = feature()->visualCategory();
     if (isBuilding(visualCategory))
     {
-        extractBuildingHeight();
+        m_buildingHeight = extractBuildingHeight(feature());
+        m_buildingLabel = extractBuildingLabel(feature());
+        m_entries = extractNamedEntries(feature());
         setZValue(this->zValue() + m_buildingHeight);
         Q_ASSERT(m_buildingHeight > 0.0);
 
@@ -203,11 +205,13 @@ QPointF GeoPolygonGraphicsItem::buildingOffset(const QPointF &point, const Viewp
     return QPointF(shiftX, shiftY);
 }
 
-void GeoPolygonGraphicsItem::extractBuildingHeight()
+double GeoPolygonGraphicsItem::extractBuildingHeight(const GeoDataFeature *feature)
 {
     double height = 8.0;
-    if (feature()->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
-        GeoDataPlacemark const * placemark = static_cast<GeoDataPlacemark const *>(feature());
+
+    if (feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
+        const GeoDataPlacemark *placemark = static_cast<const GeoDataPlacemark *>(feature);
+
         if (placemark->osmData().containsTagKey("height")) {
             /** @todo Also parse non-SI units, see https://wiki.openstreetmap.org/wiki/Key:height#Height_of_buildings */
             QString const heightValue = placemark->osmData().tagValue("height").replace(" meters", QString()).replace(" m", QString());
@@ -222,27 +226,47 @@ void GeoPolygonGraphicsItem::extractBuildingHeight()
             /** @todo Is 35 as an upper bound for the number of levels sane? */
             height = 3.0 * qBound(1, 1+levels-skipLevels, 35);
         }
+    }
+
+    return qBound(1.0, height, 1000.0);
+}
+
+QString GeoPolygonGraphicsItem::extractBuildingLabel(const GeoDataFeature *feature)
+{
+    if (feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
+        const GeoDataPlacemark *placemark = static_cast<const GeoDataPlacemark *>(feature);
 
         if (!placemark->name().isEmpty()) {
-            m_buildingLabel = placemark->name();
+            return placemark->name();
         } else if (placemark->osmData().containsTagKey("addr:housename")) {
-            m_buildingLabel = placemark->osmData().tagValue("addr:housename");
+            return placemark->osmData().tagValue("addr:housename");
         } else if (placemark->osmData().containsTagKey("addr:housenumber")) {
-            m_buildingLabel = placemark->osmData().tagValue("addr:housenumber");
+            return placemark->osmData().tagValue("addr:housenumber");
         }
+    }
 
-        auto const end = placemark->osmData().nodeReferencesEnd();
+    return QString();
+}
+
+QList<GeoPolygonGraphicsItem::NamedEntry> GeoPolygonGraphicsItem::extractNamedEntries(const GeoDataFeature *feature)
+{
+    QList<NamedEntry> entries;
+
+    if (feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
+        const GeoDataPlacemark *placemark = static_cast<const GeoDataPlacemark *>(feature);
+
+        const auto end = placemark->osmData().nodeReferencesEnd();
         for (auto iter = placemark->osmData().nodeReferencesBegin(); iter != end; ++iter) {
             if (iter.value().containsTagKey("addr:housenumber")) {
                 NamedEntry entry;
                 entry.point = iter.key();
                 entry.label = iter.value().tagValue("addr:housenumber");
-                m_entries.push_back(entry);
+                entries.push_back(entry);
             }
         }
     }
 
-    m_buildingHeight = qBound(1.0, height, 1000.0);
+    return entries;
 }
 
 const GeoDataLatLonAltBox& GeoPolygonGraphicsItem::latLonAltBox() const
