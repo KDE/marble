@@ -327,10 +327,10 @@ Mat3& Mat3::operator *= (const Mat3& c)
      b.m[i][j] = r;
     }
 
-   for (i=0; i<3; i++)
-    for (j=0; j<3; j++) m[i][j] = b.m[i][j];
+  for (i=0; i<3; i++)
+   for (j=0; j<3; j++) m[i][j] = b.m[i][j];
 
-   return *this;
+  return *this;
  }
 
 Mat3& Mat3::operator *= (double r)
