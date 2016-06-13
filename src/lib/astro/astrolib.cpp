@@ -17,7 +17,7 @@
   and modified correspondingly.
 
   License: GNU LGPL Version 2+
-  Copyright : Gerhard HOLTKAMP          28-JAN-2013
+  Copyright : Gerhard HOLTKAMP          15-APR-2015
   ========================================================================= */
 
 #include <cmath>
@@ -841,7 +841,7 @@ void AppPos (double jd, double ep2, double lat, double lng, double ht,
 	  ht : height above normal in meters.
 	  solsys : = 1 if object is in solar system and parallax has to be
 						taken into account, 0 otherwise.
-	  r = vector of celestial object. The unit of length of this vector
+	  r = vector of celestial object. The unit of lenght of this vector
 			has to be in terms of the equatorial Earth radius (6378.14 km)
 			if solsys = 1, otherwise it's arbitrary.
 	  azim : azimuth in radians (0 is to the North).
@@ -2156,11 +2156,11 @@ void Eclipse::equ_sun_moon(double jd, double tdut)
 double Eclipse::duration (double jd, double tdut, double& width)
  {
   /* Get the duration of a central eclipse at the center point
-	  for MJD jd and TDT-UT tdut in seconds.
-	  Also return the width of the umbra in km.
-	  A call to solar with the respective jd must have been done
-	  prior to calling this function !!!
-	 */
+     for MJD jd and TDT-UT tdut in seconds.
+     Also return the width of the umbra in km.
+     A call to solar with the respective jd must have been done
+     prior to calling this function !!!
+ */
   const double omega = 4.3755e-3;  // radial velocity of Earth in rad/min.
 
   double dur, lm, pa, umbold;
@@ -2176,17 +2176,17 @@ double Eclipse::duration (double jd, double tdut, double& width)
 
   dur = 0.1;  // 0.1 min
   if (solar(jd+dur/1440.0,tdut, lm, pa) > 3)
-	{
-	 mx = zrot(dur*omega);
-	 rint = mxvct(mx,rint);
-	 rint -= rold;
-	 pa = dot (rint, eold);
-	 lm = dot (rint, rint) - pa*pa;
-	 if (lm > 0) lm = sqrt(lm);
-	 else lm = 0;
-	 if (lm > 0) dur = fabs(umbold) / lm * dur * 60.0;
-	 else dur = 0;
-	}
+   {
+    mx = zrot(dur*omega);
+    rint = mxvct(mx,rint);
+    rint -= rold;
+    pa = dot (rint, eold);
+    lm = dot (rint, rint) - pa*pa;
+    if (lm > 0) lm = sqrt(lm);
+    else lm = 0;
+    if (lm > 0) dur = fabs(umbold) / lm * dur * 60.0;
+    else dur = 0;
+   }
 
   else dur = -1;
 
@@ -2199,14 +2199,38 @@ double Eclipse::duration (double jd, double tdut, double& width)
   rm = rmold;
 
   // get width of umbra at center location
+  rold = vnorm (rint);
+  pa = dot(rold,eshadow);
+  if (pa > 1.0) pa = 1.0;
+  if (pa < -1.0) pa = -1.0;
+  if (fabs(pa) < 1.0e-15) lm = fabs(d_umbra);  // just in case
+  else lm = fabs(d_umbra / pa);  // projection along shadow vector
+
+  rsold = vnorm(rint*eshadow);
+  rmold = vnorm(eold);
+  pa = dot(rsold,rmold); // cos of projection shadow - perperndicular
+  if (pa > 1.0) pa = 1.0;
+  if (pa < -1.0) pa = -1.0;
+  umbold = fabs(sin(acos(pa)));
+
+  // this is for very slant shadow angles respective to movement
+  lm = lm * umbold;
+  umbold = fabs(pa * d_umbra); 
+  if (umbold > lm) width = umbold;
+  else width = lm;
+
+  // this is the normal case
   rold = vnorm (eold);
   pa = dot(rold,eshadow);
   if (pa > 1.0) pa = 1.0;
   if (pa < -1.0) pa = -1.0;
   pa = fabs(sin(acos(pa)));
   if (pa < 0.00001) pa = 0.00001;
-  width = d_umbra / pa * 6378.14;  // allow for projection
-  width = fabs(width);
+  lm = d_umbra / pa;  // allow for projection
+  lm = fabs(lm);
+
+  if (lm > width) width = lm;
+  width = width * 6378.14;  
 
   return dur;
  }
@@ -2259,7 +2283,7 @@ int Eclipse::lunar (double jd, double tdut)
 	/* (the factor 1.02 allows for enlargment of shadow due to
 		 Earth's atmosphere) */
 
-	// get angular separation of center of shadow and Moon
+	// get angular seperation of center of shadow and Moon
 	r2 = abs(rm);
 	sep = dot(rs,rm)/(abs(rs)*r2);
 	if (fabs(sep) > 1.0) sep = 1.0;
