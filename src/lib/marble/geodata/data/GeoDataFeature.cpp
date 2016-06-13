@@ -691,6 +691,8 @@ void GeoDataFeaturePrivate::initializeDefaultStyles()
 
 QSharedPointer<GeoDataStyle> GeoDataFeature::presetStyle( GeoDataVisualCategory category )
 {
+    if ( GeoDataFeaturePrivate::s_defaultStyleInitialized == false )
+        GeoDataFeaturePrivate::initializeDefaultStyles();
     return GeoDataFeaturePrivate::s_defaultStyle[ category ];
 }
 

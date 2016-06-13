@@ -62,7 +62,8 @@ bool OsmDocumentTagTranslator::writeMid( const GeoNode *node, GeoWriter& writer 
         if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPointType ) {
             writeElement( placemark, writer );
         }
-        else if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType ) {
+        else if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType ||
+                  placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLinearRingType ) {
             // Writing all the lineString nodes directly from the hash, as order is irrelevant
             OsmNodeTagWriter::writeAllNodes( osmData, writer );
             polylines.append( placemark );

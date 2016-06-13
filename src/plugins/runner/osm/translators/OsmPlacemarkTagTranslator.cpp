@@ -53,6 +53,10 @@ bool OsmPlacemarkTagTranslator::writeMid( const GeoNode *node, GeoWriter& writer
         const GeoDataLineString* lineString = static_cast<const GeoDataLineString*>( placemark->geometry() );
         OsmWayTagWriter::writeWay( *lineString, osmData, writer );
     }
+    else if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLinearRingType ) {
+            const GeoDataLinearRing* linearRing = static_cast<const GeoDataLinearRing*>( placemark->geometry() );
+            OsmWayTagWriter::writeWay( *linearRing, osmData, writer );
+    }
     else if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
         const GeoDataPolygon* polygon = static_cast<const GeoDataPolygon*>( placemark->geometry() );
         OsmRelationTagWriter::writeMultipolygon( *polygon, osmData, writer );
