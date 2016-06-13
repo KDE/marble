@@ -99,6 +99,7 @@ public:
             ui_configWidget->preference->findData( settings.value( "preference" ).toString() ) );
         ui_configWidget->noMotorways->setCheckState( static_cast<Qt::CheckState>( settings.value( "noMotorways" ).toInt() ) );
         ui_configWidget->noTollways->setCheckState( static_cast<Qt::CheckState>( settings.value( "noTollways" ).toInt() ) );
+        ui_configWidget->noFerries->setCheckState( static_cast<Qt::CheckState>( settings.value( "noFerries" ).toInt() ) );
     }
 
     virtual QHash<QString, QVariant> settings() const
@@ -108,6 +109,7 @@ public:
                         ui_configWidget->preference->itemData( ui_configWidget->preference->currentIndex() ) );
         settings.insert( "noMotorways", ui_configWidget->noMotorways->checkState() );
         settings.insert( "noTollways", ui_configWidget->noTollways->checkState() );
+        settings.insert( "noFerries", ui_configWidget->noFerries->checkState() );
         return settings;
     }
 private:
