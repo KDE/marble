@@ -134,6 +134,7 @@ public:
     ViewParams       m_viewParams;
     ViewportParams   m_viewport;
     bool             m_showFrameRate;
+    bool             m_showDebugPolygons;
 
 
     LayerManager     m_layerManager;
@@ -156,6 +157,7 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model ) :
     m_model( model ),
     m_viewParams(),
     m_showFrameRate( false ),
+    m_showDebugPolygons( false ),
     m_layerManager( model, parent ),
     m_customPaintLayer( parent ),
     m_geometryLayer( model->treeModel() ),
@@ -755,6 +757,10 @@ void MarbleMap::paint( GeoPainter &painter, const QRect &dirtyRect )
 {
     Q_UNUSED( dirtyRect );
 
+    if (d->m_showDebugPolygons) {
+        painter.setDebugDrawNodes(true);
+    }
+
     if ( !d->m_model->mapTheme() ) {
         mDebug() << "No theme yet!";
         d->m_marbleSplashLayer.render( &painter, &d->m_viewport );
@@ -1158,6 +1164,10 @@ void MarbleMap::setShowFrameRate( bool visible )
 void MarbleMap::setShowRuntimeTrace( bool visible )
 {
     d->m_layerManager.setShowRuntimeTrace( visible );
+}
+
+void MarbleMap::setShowDebugPolygons( bool visible) {
+    d->m_showDebugPolygons = visible;
 }
 
 void MarbleMap::setShowBackground( bool visible )

@@ -20,6 +20,7 @@
 #include <QTime>
 #include <QItemSelectionModel>
 #include <QPaintEvent>
+#include <QPaintEngine>
 #include <QRegion>
 #include <QSizePolicy>
 #include <QNetworkProxy>
@@ -910,6 +911,11 @@ void MarbleWidget::setShowBackground( bool visible )
 void MarbleWidget::setShowRuntimeTrace( bool visible )
 {
     d->m_map.setShowRuntimeTrace( visible );
+}
+
+void MarbleWidget::setShowDebugPolygons( bool visible)
+{
+    d->m_map.setShowDebugPolygons( visible );
 }
 
 void MarbleWidget::setShowTileId( bool visible )

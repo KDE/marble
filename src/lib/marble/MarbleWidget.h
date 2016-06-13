@@ -931,6 +931,13 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void setShowRuntimeTrace( bool visible );
 
     /**
+     * @brief Set whether to enter the debug mode for
+     * polygon node drawing
+     * @param visible visibility of the node debug mode
+     */
+    void setShowDebugPolygons( bool visible);
+
+    /**
      * @brief Set the map quality for the specified view context.
      *
      * @param quality map quality for the specified view context

@@ -16,7 +16,6 @@
 
 #include "MarbleDebug.h"
 
-// #define DEBUG_DRAW_NODES
 
 namespace Marble
 {
@@ -86,11 +85,11 @@ class ClipPainterPrivate
 
     static inline qreal _m( const QPointF & start, const QPointF & end );
 
-#ifdef DEBUG_DRAW_NODES
     void debugDrawNodes( const QPolygonF & ); 
-#endif
 
     qreal m_labelAreaMargin;
+
+    bool m_debugDrawNodes;
 };
 
 }
@@ -147,18 +146,18 @@ void ClipPainter::drawPolygon ( const QPolygonF & polygon,
                 // mDebug() << "Size: " << clippedPolyObject.size();
                 QPainter::drawPolygon ( clippedPolyObject, fillRule );
                 // mDebug() << "done";
-                #ifdef DEBUG_DRAW_NODES
+                if (d->m_debugDrawNodes) {
                     d->debugDrawNodes( clippedPolyObject );
-                #endif
+                }
             }
         }
     }
     else {
         QPainter::drawPolygon ( polygon, fillRule );
 
-        #ifdef DEBUG_DRAW_NODES
+        if (d->m_debugDrawNodes) {
             d->debugDrawNodes( polygon );
-        #endif
+        }
     }
 }
 
@@ -176,18 +175,18 @@ void ClipPainter::drawPolyline( const QPolygonF & polygon )
                 QPainter::drawPolyline ( clippedPolyObject );
                 // mDebug() << "done";
 
-                #ifdef DEBUG_DRAW_NODES
+                if (d->m_debugDrawNodes) {
                     d->debugDrawNodes( clippedPolyObject );
-                #endif
+                }
             }
         }
     }
     else {
         QPainter::drawPolyline( polygon );
 
-        #ifdef DEBUG_DRAW_NODES
+        if (d->m_debugDrawNodes) {
             d->debugDrawNodes( polygon );
-        #endif
+        }
     }
 }
 
@@ -206,9 +205,9 @@ void ClipPainter::drawPolyline( const QPolygonF & polygon, QVector<QPointF>& lab
                 QPainter::drawPolyline ( clippedPolyObject );
                 // mDebug() << "done";
 
-                #ifdef DEBUG_DRAW_NODES
+                if (d->m_debugDrawNodes) {
                     d->debugDrawNodes( clippedPolyObject );
-                #endif
+                }
 
                 d->labelPosition( clippedPolyObject, labelNodes, positionFlags );
             }
@@ -217,9 +216,9 @@ void ClipPainter::drawPolyline( const QPolygonF & polygon, QVector<QPointF>& lab
     else {
         QPainter::drawPolyline( polygon );
 
-        #ifdef DEBUG_DRAW_NODES
+        if (d->m_debugDrawNodes) {
             d->debugDrawNodes( polygon );
-        #endif
+        }
 
         d->labelPosition( polygon, labelNodes, positionFlags );
     }
@@ -345,7 +344,8 @@ ClipPainterPrivate::ClipPainterPrivate( ClipPainter * parent )
       m_previousSector(4),
       m_currentPoint(QPointF()),
       m_previousPoint(QPointF()), 
-      m_labelAreaMargin(10.0)
+      m_labelAreaMargin(10.0),
+      m_debugDrawNodes(false)
 {
     q = parent;
 }
@@ -1106,7 +1106,9 @@ void ClipPainterPrivate::clipOnce( QPolygonF & clippedPolyObject,
 
 }
 
-#ifdef DEBUG_DRAW_NODES
+void ClipPainter::setDebugDrawNodes( bool enabled ) {
+    d->m_debugDrawNodes = enabled;
+}
 
 void ClipPainterPrivate::debugDrawNodes( const QPolygonF & polygon )
 {
@@ -1115,46 +1117,54 @@ void ClipPainterPrivate::debugDrawNodes( const QPolygonF & polygon )
     q->setRenderHint( QPainter::Antialiasing, false );
 
     q->setPen( Qt::red );
-    q->setBrush( Qt::transparent );
+    q->setBrush(QBrush("#40FF0000"));
 
     const QVector<QPointF>::const_iterator  itStartPoint = polygon.constBegin();
     const QVector<QPointF>::const_iterator  itEndPoint   = polygon.constEnd();
     QVector<QPointF>::const_iterator        itPoint      = itStartPoint;
 
+    int i = 0;
+
     for (; itPoint != itEndPoint; ++itPoint ) {
+
+        ++i;
         
         if ( itPoint == itStartPoint || itPoint == itStartPoint + 1 || itPoint == itStartPoint + 2 ) {
             q->setPen( Qt::darkGreen );
+            q->setBrush(QBrush("#4000FF00"));
             if ( itPoint == itStartPoint ) {
-                q->drawRect( itPoint->x() - 3.0, itPoint->y() - 3.0 , 6.0, 6.0 );
+                q->drawRect( itPoint->x() - 6.0, itPoint->y() - 6.0 , 12.0, 12.0 );
             }
             else if ( itPoint == itStartPoint + 1 ) {
-                q->drawRect( itPoint->x() - 2.0, itPoint->y() - 2.0 , 4.0, 4.0 );
+                q->drawRect( itPoint->x() - 4.0, itPoint->y() - 4.0 , 8.0, 8.0 );
             }
             else {
-                q->drawRect( itPoint->x() - 1.0, itPoint->y() - 1.0 , 2.0, 2.0 );
+                q->drawRect( itPoint->x() - 2.0, itPoint->y() - 2.0 , 4.0, 4.0 );
             }
             q->setPen( Qt::red );
+            q->setBrush(QBrush("#40FF0000"));
         }
         else if ( itPoint == itEndPoint - 1 || itPoint == itEndPoint - 2 || itPoint == itEndPoint - 3 ) {
             q->setPen( Qt::blue );
+            q->setBrush(QBrush("#400000FF"));
             if ( itPoint == itEndPoint - 3 ) {
-                q->drawRect( itPoint->x() - 3.0, itPoint->y() - 3.0 , 6.0, 6.0 );
+                q->drawRect( itPoint->x() - 6.0, itPoint->y() - 6.0 , 12.0, 12.0 );
             }
             else if ( itPoint == itEndPoint - 2 ) {
-                q->drawRect( itPoint->x() - 2.0, itPoint->y() - 2.0 , 4.0, 4.0 );
+                q->drawRect( itPoint->x() - 4.0, itPoint->y() - 4.0 , 8.0, 8.0 );
             }
             else {
-                q->drawRect( itPoint->x() - 1.0, itPoint->y() - 1.0 , 2.0, 2.0 );
+                q->drawRect( itPoint->x() - 2.0, itPoint->y() - 2.0 , 4.0, 4.0 );
             }
             q->setPen( Qt::red );
+            q->setBrush(QBrush("#400000FF"));
         }
         else {
-            q->drawRect( itPoint->x() - 1.5, itPoint->y() - 1.5 , 3.0, 3.0 );
+            q->drawRect( itPoint->x() - 4, itPoint->y() - 4 , 8.0, 8.0 );
         }
-
+        q->setFont(QFont("Helvetica", 6));
+        q->setPen("black");
+        q->drawText(itPoint->x() + 6.0, itPoint->y() + (15 - i%30) , QString::number(i));
     }
     q->restore();
 }
-
-#endif
