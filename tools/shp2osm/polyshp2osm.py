@@ -45,6 +45,11 @@ node_dict = {}
 non_geom = 0
 eflag = False
 
+nodes = []  #(id, lon, lat, tags)
+ways = []  #(id, node_refs, tags)
+relations = []  #(id, ways)
+
+non_polygons = ['Admin-1 aggregation', 'Admin-1 minor island', 'Admin-1 scale rank']
 
 # Here are a number of functions: These functions define tag mappings. The API
 # For these functions is that they are passed the attributes from a feature,
@@ -112,13 +117,13 @@ def purpose(data):
 
 def road_map(data):
     keys = {
-    'Ferry Route': [('route','ferry')],
+    #'Ferry Route': [('route','ferry')],
     'Major Highway': [('highway','motorway')],
     'Beltway': [('highway','primary')],
-    'Track': [('highway','tertiary')],
-    'Unknown': [('highway','unclassified')],
-    'Secondary Highway': [('highway','trunk')],
-    'Bypass': [('highway','secondary')],
+    #'Track': [('highway','tertiary')],
+    #'Unknown': [('highway','unclassified')],
+    #'Secondary Highway': [('highway','trunk')],
+    #'Bypass': [('highway','secondary')],
     'Road': [('highway','primary')]
     }
     if 'type' in data:
@@ -186,9 +191,9 @@ def feature_class(data):
     'Admin-0 breakaway and disputed': [('marble_land', 'landmass')],
     'Admin-0 overlay': [('marble_land', 'landmass')],
     'Admin-0 indeterminant': [('marble_land', 'landmass')],
-    'Admin-1 aggregation': [('marble_land', 'landmass')],
-    'Admin-1 minor island': [('marble_land', 'landmass')],
-    'Admin-1 scale rank': [('marble_land', 'landmass')],
+    'Admin-1 aggregation': [('boundary', 'administrative'), ('admin_level', '4')],
+    'Admin-1 minor island': [('boundary', 'administrative'), ('admin_level', '4')],
+    'Admin-1 scale rank': [('boundary', 'administrative'), ('admin_level', '4')],
     'Railroad': [('railway', 'rail')],
     'Railroad ferry': [('route', 'ferry')],
     'Urban area': [('marble_land', 'landmass')],
@@ -259,7 +264,6 @@ def feature_class(data):
     'Admin-0 Tiny GeoSubunit': [],
     'Admin-0 Tiny Countries Pacific': [],
     'Pacific Groupings': [],
-    'Admin-1 scale rank': [('marble_land', 'landmass')],
     'Admin-1 boundary': [('boundary', 'administrative'), ('admin_level', '4')],
     'Map unit boundary':[],
     'Marine Indicator Treaty':[],
@@ -426,37 +430,49 @@ def add_point(f):
     pt = f.GetGeometryRef()
     #print 'Longitude: ', pt.GetX(0)
     #print 'Longitude: ', pt.GetY(0)
-    node_id = write_node(id_counter, pt.GetX(0), pt.GetY(0), 'POINT', f)
+    node_id = add_node(id_counter, pt.GetX(0), pt.GetY(0), 'POINT', f)
     if node_id == id_counter:
         id_counter += 1
     
 
-def write_relation_multipolygon(geom, f):
-    """ Writes the multipolygon relation to the OSM file"""
+def add_relation_multipolygon(geom, f):
+    """ Writes the multipolygon relation to the OSM file, returns 0 if no relation is formed"""
     global id_counter, file_counter, counter, file_name, open_file, namespace
-    ways = []
+    rel_ways = []
     rel_id = 0
-    way_id = write_way(geom.GetGeometryRef(0), f, True)
+    way_id = add_way(geom.GetGeometryRef(0), f, True)
     if way_id == None:
         print 'Error in writing relation'
         return None
-    ways.append(way_id)
+    rel_ways.append(way_id)
 
     if geom.GetGeometryCount() > 1:
         for i in range(1, geom.GetGeometryCount()):
-            way_id = write_way(geom.GetGeometryRef(i), f, False)
+            way_id = add_way(geom.GetGeometryRef(i), f, False)
             if way_id == None:
                 print 'Error in writing relation'
                 return None
-            ways.append(way_id)
+            rel_ways.append(way_id)
         rel_id = id_counter
-        print >>open_file, "<relation id='-%s'><tag k='type' v='multipolygon' />" % id_counter
+        if f['featurecla'] in non_polygons:
+            return 0 #means no relation is there
+        relations.append((rel_id, rel_ways))
+        #print >>open_file, "<relation id='-%s'><tag k='type' v='multipolygon' />" % id_counter
         id_counter += 1
-        print >>open_file, '<member type="way" ref="-%s" role="outer" />' % ways[0]    
-        for way in ways[1:]:
-            print >>open_file, '<member type="way" ref="-%s" role="inner" />' % way 
-        print >>open_file, "</relation>" 
+        #print >>open_file, '<member type="way" ref="-%s" role="outer" />' % ways[0]    
+        #for way in ways[1:]:
+        #   print >>open_file, '<member type="way" ref="-%s" role="inner" />' % way 
+        #print >>open_file, "</relation>" 
+
     return rel_id   #if rel_id return 0, means no relations is there
+
+def write_relation_multipolygon(relation):
+    global open_file
+    print >>open_file, "<relation id='-%s'><tag k='type' v='multipolygon' />" % relation[0]
+    print >>open_file, '<member type="way" ref="-%s" role="outer" />' % relation[1][0]   
+    for way in relation[1][1:]:
+        print >>open_file, '<member type="way" ref="-%s" role="inner" />' % way 
+    print >>open_file, "</relation>"  
 
 
 def write_tags(f):
@@ -488,27 +504,43 @@ def write_tags(f):
     for name, value in fixed_tags.items():
         print >>open_file, " <tag k='%s' v='%s' />" % (name, clean_attr(value))
     if f.GetGeometryRef().GetGeometryName() == 'POLYGON' or f.GetGeometryRef().GetGeometryName() == 'MULTIPOLYGON':
-        print >>open_file, " <tag k='area' v='yes' />"
+        if f['featurecla'] not in non_polygons:
+            print >>open_file, " <tag k='area' v='yes' />"
 
-def write_way(geom, f, tag_flag):
+def add_way(geom, f, tag_flag):
     """ Writes the way of a particular geometry to the OSM file"""
-    global open_file, id_counter
-    ids = write_way_nodes(geom, f)
+    global open_file, id_counter, ways
+    ids = add_way_nodes(geom, f)
     if len(ids) == 0:
         print 'Error in writing way'
         return None
-    print >>open_file, "<way id='-%s'>" % id_counter
+    #print >>open_file, "<way id='-%s'>" % id_counter
     way_id = id_counter
     id_counter += 1
-    for i in ids:
-        print >>open_file, " <nd ref='-%s' />" % i
-    #print >>open_file, "<nd ref='-%s' />" % ids[0]
+    #for i in ids:
+        #print >>open_file, " <nd ref='-%s' />" % i
+    node_refs = ids
     if tag_flag:
-        write_tags(f)
-    print >>open_file, "</way>"
+        tags = f
+        #write_tags(f)
+    else:
+        tags = None
+    ways.append((way_id, node_refs, tags))
+    #print >>open_file, "</way>"
     return way_id
 
-def write_way_nodes(geom, f):
+def write_way(way):
+    global open_file
+    print >>open_file, "<way id='-%s'>" % way[0]
+    for i in way[1]:
+        print >>open_file, " <nd ref='-%s' />" % i
+    if way[2]:
+        write_tags(way[2])
+    print >>open_file, "</way>"
+
+
+
+def add_way_nodes(geom, f):
     """Writes the nodes of a particular way"""
     global open_file, id_counter
     ids = []
@@ -524,29 +556,43 @@ def write_way_nodes(geom, f):
     #if geom_name != 'LINESTRING':
     #    pt_count -= 1
     for count in range(pt_count):
-        node_id = write_node(id_counter, geom.GetX(count), geom.GetY(count), geom_name, f)
+        node_id = add_node(id_counter, geom.GetX(count), geom.GetY(count), geom_name, f)
         if node_id == id_counter:   #means a new node is created, if not means node already exists
             id_counter += 1
         ids.append(node_id)
     return ids   
 
-def write_node(num_id, lon, lat, geom_name, f):
+
+def add_node(num_id, lon, lat, geom_name, f):
     """ Writes the node to the OSM file"""
     global open_file, node_dict
     key = (lon, lat)
     if geom_name == 'POINT':
-        print >>open_file, "<node id='-%s' visible='true' lon='%s' lat='%s' >" % (num_id, lon, lat) 
-        write_tags(f)
+        nodes.append((num_id, lon, lat, f))
+        #print >>open_file, "<node id='-%s' visible='true' lon='%s' lat='%s' >" % (num_id, lon, lat) 
+        #write_tags(f)
         node_dict[key] = num_id
-        print >>open_file, "</node>"
+        #print >>open_file, "</node>"
     else:
         if key in node_dict:
             #print 'Existing node:', key
             num_id = node_dict[key]
         else:
-            print >>open_file, "<node id='-%s' visible='true' lon='%s' lat='%s' />" % (num_id, lon, lat) 
+            nodes.append((num_id, lon, lat, None))
+            #print >>open_file, "<node id='-%s' visible='true' lon='%s' lat='%s' />" % (num_id, lon, lat) 
             node_dict[key] = num_id
     return num_id
+
+def write_node(node):
+    global open_file
+    if node[3] == None:
+        print >>open_file, "<node id='-%s' visible='true' lon='%s' lat='%s' />" % (node[0], node[1], node[2])
+    else:
+        print >>open_file, "<node id='-%s' visible='true' lon='%s' lat='%s' >" % (node[0], node[1], node[2])
+        write_tags(node[3]) 
+        print >>open_file, "</node>"
+
+
 
 def add_way_around_node(f):
     """ Writes a way around a single point"""
@@ -601,6 +647,8 @@ def run(filenames, slice_count=1, obj_count=5000000, output_location=None, no_so
         max_objs_per_file = obj_count 
 
         extent = l.GetExtent()
+        print 'Filename:', filename
+        print 'Extent', extent
         #if extent[0] < -180 or extent[0] > 180 or extent[2] < -90 or extent[2] > 90:
         #   raise AppError("Extent does not look like degrees; are you sure it is? \n(%s, %s, %s, %s)" % (extent[0], extent[2], extent[1], extent[3]))  
         slice_width = (extent[1] - extent[0]) / slice_count
@@ -633,7 +681,7 @@ def run(filenames, slice_count=1, obj_count=5000000, output_location=None, no_so
                     start_new_file()
                     last_obj_split = obj_counter
 
-                ways = []
+                #ways = []
                 feat_dict = f.items()
                 #print 
                 #print '#' * 20
@@ -649,27 +697,27 @@ def run(filenames, slice_count=1, obj_count=5000000, output_location=None, no_so
                     geom_counter[geom_name] = 1
                 if geom_name == 'POLYGON':
                     #print 'ak Its a POLYGON'
-                    rel_id = write_relation_multipolygon(geom, f)
+                    rel_id = add_relation_multipolygon(geom, f)
                     if rel_id == None:
                         f = l.GetNextFeature()
                         continue
                 elif geom_name == 'LINESTRING':
                     #print 'ak Its a LINESTRING'
-                    way_id = write_way(geom, f, True)
+                    way_id = add_way(geom, f, True)
                     if way_id == None:
                         f = l.GetNextFeature()
                         continue
                 elif geom_name == 'MULTILINESTRING':
                     #print 'ak Its a MULTILINESTRING'
                     for i in range(geom.GetGeometryCount()):
-                        way_id = write_way(geom.GetGeometryRef(i), f, True)
+                        way_id = add_way(geom.GetGeometryRef(i), f, True)
                         if way_id == None:
                             f = l.GetNextFeature()
                             continue
                 elif geom_name == 'MULTIPOLYGON':
                     #print 'ak Its a MULTIPOLYGON'
                     for i in range(geom.GetGeometryCount()):
-                        rel_id = write_relation_multipolygon(geom.GetGeometryRef(i), f)
+                        rel_id = add_relation_multipolygon(geom.GetGeometryRef(i), f)
                         if rel_id == None:
                             f = l.GetNextFeature()
                             continue
@@ -684,7 +732,15 @@ def run(filenames, slice_count=1, obj_count=5000000, output_location=None, no_so
                         
                 counter += 1
                 f = l.GetNextFeature()
-                obj_counter += (id_counter - start_id_counter)        
+                obj_counter += (id_counter - start_id_counter)
+
+    for node in nodes:
+        write_node(node)
+    for way in ways:
+        write_way(way)
+    for relation in relations:
+        write_relation_multipolygon(relation)
+                    
     close_file()
 
 if __name__ == "__main__":
