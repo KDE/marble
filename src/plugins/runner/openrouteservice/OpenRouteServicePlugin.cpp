@@ -82,7 +82,7 @@ public:
         ui_configWidget->preference->addItem( tr( "Bicycle (Mountainbike)" ), "BicycleMTB" );
         ui_configWidget->preference->addItem( tr( "Bicycle (Racer)" ), "BicycleRacer" );
         ui_configWidget->preference->addItem( tr( "Bicycle (safest track)" ), "BicycleSafety" );
-        ui_configWidget->preference->addItem( tr( "Bicycle (preferred Cycleway/-route)" ), "BicycleRoute" );
+        ui_configWidget->preference->addItem( tr( "Bicycle (preferred Cycleway/-route)" ), "BicycleTour" );
     }
 
     virtual void loadSettings( const QHash<QString, QVariant> &settings_ )
