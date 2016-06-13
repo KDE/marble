@@ -267,6 +267,7 @@ RoutingInputWidget::RoutingInputWidget( MarbleModel* model, int index, QWidget *
         QWidget( parent ), d( new RoutingInputWidgetPrivate( model, index, this ) )
 {
     QHBoxLayout *layout = new QHBoxLayout( this );
+    layout->setSizeConstraint( QLayout::SetMinimumSize );
     layout->setSpacing( 0 );
     layout->setMargin( 0 );
     layout->addWidget( d->m_lineEdit );

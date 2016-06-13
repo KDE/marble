@@ -240,9 +240,6 @@ qreal ElevationProfileRouteDataSource::getElevation(const GeoDataCoordinates &co
     const qreal lat = coordinates.latitude ( GeoDataCoordinates::Degree );
     const qreal lon = coordinates.longitude( GeoDataCoordinates::Degree );
     qreal ele = m_elevationModel->height( lon, lat );
-    if ( ele == invalidElevationData ) { // no data
-        ele = 0;
-    }
     return ele;
 }
 // end of impl of ElevationProfileRouteDataSource

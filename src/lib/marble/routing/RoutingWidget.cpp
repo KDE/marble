@@ -536,7 +536,7 @@ void RoutingWidget::insertInputWidget( int index )
         connect( input, SIGNAL(targetValidityChanged(bool)),
                  this, SLOT(adjustSearchButton()) );
 
-        d->m_ui.routingLayout->insertWidget( index, input );
+        d->m_ui.inputLayout->insertWidget( index, input );
         d->adjustInputWidgets();
     }
 }
@@ -559,7 +559,7 @@ void RoutingWidget::removeInputWidget( int index )
     if ( index >= 0 && index < d->m_inputWidgets.size() ) {
         RoutingInputWidget *widget = d->m_inputWidgets.at( index );
         d->m_inputWidgets.remove( index );
-        d->m_ui.routingLayout->removeWidget( widget );
+        d->m_ui.inputLayout->removeWidget( widget );
         widget->deleteLater();
         if ( widget == d->m_activeInput ) {
             d->m_activeInput = 0;
