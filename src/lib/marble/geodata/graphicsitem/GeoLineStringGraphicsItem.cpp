@@ -48,7 +48,9 @@ const GeoDataLatLonAltBox& GeoLineStringGraphicsItem::latLonAltBox() const
 void GeoLineStringGraphicsItem::paint(GeoPainter* painter, const ViewportParams* viewport , const QString &layer)
 {
     if (layer.endsWith("/outline")) {
-        paintOutline(painter, viewport);
+        if (painter->mapQuality() == HighQuality || painter->mapQuality() == PrintQuality) {
+            paintOutline(painter, viewport);
+        }
     } else if (layer.endsWith("/label")) {
         paintLabel(painter, viewport);
     } else if (layer.endsWith("/inline")) {
@@ -153,11 +155,15 @@ QPen GeoLineStringGraphicsItem::configurePainter(GeoPainter *painter, const View
         if ( currentPen.capStyle() != style()->lineStyle().capStyle() )
             currentPen.setCapStyle( style()->lineStyle().capStyle() );
 
-        if ( currentPen.style() != style()->lineStyle().penStyle() )
-            currentPen.setStyle( style()->lineStyle().penStyle() );
+        if (painter->mapQuality() == HighQuality || painter->mapQuality() == PrintQuality) {
+            if ( currentPen.style() != style()->lineStyle().penStyle() )
+                currentPen.setStyle( style()->lineStyle().penStyle() );
 
-        if ( style()->lineStyle().penStyle() == Qt::CustomDashLine )
-            currentPen.setDashPattern( style()->lineStyle().dashPattern() );
+            if ( style()->lineStyle().penStyle() == Qt::CustomDashLine )
+                currentPen.setDashPattern( style()->lineStyle().dashPattern() );
+        } else {
+            currentPen.setStyle(Qt::SolidLine);
+        }
 
         if ( painter->mapQuality() != Marble::HighQuality
                 && painter->mapQuality() != Marble::PrintQuality ) {
