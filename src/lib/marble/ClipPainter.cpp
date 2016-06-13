@@ -85,11 +85,11 @@ class ClipPainterPrivate
 
     static inline qreal _m( const QPointF & start, const QPointF & end );
 
-    void debugDrawNodes( const QPolygonF & ); 
+    void debugDrawNodes( const QPolygonF & );
 
     qreal m_labelAreaMargin;
 
-    bool m_debugDrawNodes;
+    int m_debugPolygonsLevel;
 };
 
 }
@@ -146,7 +146,7 @@ void ClipPainter::drawPolygon ( const QPolygonF & polygon,
                 // mDebug() << "Size: " << clippedPolyObject.size();
                 QPainter::drawPolygon ( clippedPolyObject, fillRule );
                 // mDebug() << "done";
-                if (d->m_debugDrawNodes) {
+                if (d->m_debugPolygonsLevel) {
                     d->debugDrawNodes( clippedPolyObject );
                 }
             }
@@ -155,7 +155,7 @@ void ClipPainter::drawPolygon ( const QPolygonF & polygon,
     else {
         QPainter::drawPolygon ( polygon, fillRule );
 
-        if (d->m_debugDrawNodes) {
+        if (d->m_debugPolygonsLevel) {
             d->debugDrawNodes( polygon );
         }
     }
@@ -175,7 +175,7 @@ void ClipPainter::drawPolyline( const QPolygonF & polygon )
                 QPainter::drawPolyline ( clippedPolyObject );
                 // mDebug() << "done";
 
-                if (d->m_debugDrawNodes) {
+                if (d->m_debugPolygonsLevel) {
                     d->debugDrawNodes( clippedPolyObject );
                 }
             }
@@ -184,7 +184,7 @@ void ClipPainter::drawPolyline( const QPolygonF & polygon )
     else {
         QPainter::drawPolyline( polygon );
 
-        if (d->m_debugDrawNodes) {
+        if (d->m_debugPolygonsLevel) {
             d->debugDrawNodes( polygon );
         }
     }
@@ -205,7 +205,7 @@ void ClipPainter::drawPolyline( const QPolygonF & polygon, QVector<QPointF>& lab
                 QPainter::drawPolyline ( clippedPolyObject );
                 // mDebug() << "done";
 
-                if (d->m_debugDrawNodes) {
+                if (d->m_debugPolygonsLevel) {
                     d->debugDrawNodes( clippedPolyObject );
                 }
 
@@ -216,7 +216,7 @@ void ClipPainter::drawPolyline( const QPolygonF & polygon, QVector<QPointF>& lab
     else {
         QPainter::drawPolyline( polygon );
 
-        if (d->m_debugDrawNodes) {
+        if (d->m_debugPolygonsLevel) {
             d->debugDrawNodes( polygon );
         }
 
@@ -345,7 +345,7 @@ ClipPainterPrivate::ClipPainterPrivate( ClipPainter * parent )
       m_currentPoint(QPointF()),
       m_previousPoint(QPointF()), 
       m_labelAreaMargin(10.0),
-      m_debugDrawNodes(false)
+      m_debugPolygonsLevel(0)
 {
     q = parent;
 }
@@ -1106,8 +1106,8 @@ void ClipPainterPrivate::clipOnce( QPolygonF & clippedPolyObject,
 
 }
 
-void ClipPainter::setDebugDrawNodes( bool enabled ) {
-    d->m_debugDrawNodes = enabled;
+void ClipPainter::setDebugPolygonsLevel( int level ) {
+    d->m_debugPolygonsLevel = level;
 }
 
 void ClipPainterPrivate::debugDrawNodes( const QPolygonF & polygon )
@@ -1162,9 +1162,11 @@ void ClipPainterPrivate::debugDrawNodes( const QPolygonF & polygon )
         else {
             q->drawRect( itPoint->x() - 4, itPoint->y() - 4 , 8.0, 8.0 );
         }
-        q->setFont(QFont("Helvetica", 6));
-        q->setPen("black");
-        q->drawText(itPoint->x() + 6.0, itPoint->y() + (15 - i%30) , QString::number(i));
+        if (m_debugPolygonsLevel == 2) {
+            q->setFont(QFont("Helvetica", 7));
+            q->setPen("black");
+            q->drawText(itPoint->x() + 6.0, itPoint->y() + (15 - i%30) , QString::number(i));
+        }
     }
     q->restore();
 }

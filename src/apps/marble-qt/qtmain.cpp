@@ -112,7 +112,7 @@ int main(int argc, char *argv[])
         qWarning() << "  --runtimeTrace.............. Show the time spent and other debug info of each layer";
         qWarning() << "  --tile-id................... Write the identifier of texture tiles on top of them";
         qWarning() << "  --timedemo ................. Measure the paint performance while moving the map and quit";
-        qWarning() << "  --debugPolygons .............Display the polygon nodes and their index for debugging";
+        qWarning() << "  --debug-polygons .............Display the polygon nodes and their index for debugging";
         qWarning();
         qWarning() << "profile options (note that marble should automatically detect which profile to use. Override that with the options below):";
         qWarning() << "  --highresolution ........... Enforce the profile for devices with high resolution (e.g. desktop computers)";
@@ -243,7 +243,7 @@ int main(int argc, char *argv[])
         else if( arg == "--runtimeTrace" ) {
             window->marbleControl()->marbleWidget()->setShowRuntimeTrace( true );
         }
-        else if( arg == "--debugPolygons" ) {
+        else if( arg == "--debug-polygons" ) {
             window->marbleControl()->marbleWidget()->setShowDebugPolygons( true );
         }
         else if ( i != dataPathIndex && QFile::exists( arg ) )

@@ -757,8 +757,13 @@ void MarbleMap::paint( GeoPainter &painter, const QRect &dirtyRect )
 {
     Q_UNUSED( dirtyRect );
 
-    if (d->m_showDebugPolygons) {
-        painter.setDebugDrawNodes(true);
+    if (d->m_showDebugPolygons ) {
+        if (viewContext() == Animation) {
+            painter.setDebugPolygonsLevel(1);
+        }
+        else {
+            painter.setDebugPolygonsLevel(2);
+        }
     }
 
     if ( !d->m_model->mapTheme() ) {
