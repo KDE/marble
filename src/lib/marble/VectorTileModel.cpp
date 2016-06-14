@@ -61,7 +61,8 @@ VectorTileModel::VectorTileModel( TileLoader *loader, const GeoSceneVectorTileDa
     m_treeModel( treeModel ),
     m_threadPool( threadPool ),
     m_tileLoadLevel( -1 ),
-    m_tileZoomLevel(-1)
+    m_tileZoomLevel(-1),
+    m_deleteDocumentsLater(false)
 {
     connect(this, SIGNAL(tileAdded(GeoDataDocument*)), treeModel, SLOT(addDocument(GeoDataDocument*)) );
     connect(this, SIGNAL(tileRemoved(GeoDataDocument*)), treeModel, SLOT(removeDocument(GeoDataDocument*)) );
@@ -111,7 +112,7 @@ void VectorTileModel::setViewport( const GeoDataLatLonBox &latLonBox, int radius
     // if zoom level has changed, empty vectortile cache
     if ( tileZoomLevel != m_tileLoadLevel ) {
         m_tileLoadLevel = tileZoomLevel;
-        m_documents.clear();
+        m_deleteDocumentsLater = true;
     }
 
     const unsigned int maxTileX = ( 1 << tileZoomLevel ) * m_layer->levelZeroColumns();
@@ -192,7 +193,10 @@ void VectorTileModel::updateTile( const TileId &id, GeoDataDocument *document )
     if (m_documents.contains(id)) {
         m_documents.remove(id);
     }
-
+    if (m_deleteDocumentsLater) {
+        m_deleteDocumentsLater = false;
+        m_documents.clear();
+    }
     GeoDataLatLonBox const boundingBox = id.toLatLonBox(m_layer);
     m_documents[id] = QSharedPointer<CacheDocument>(new CacheDocument(document, this, boundingBox));
     emit tileAdded(document);

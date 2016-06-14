@@ -111,6 +111,7 @@ private:
     QList<TileId> m_pendingDocuments;
     QList<GeoDataDocument*> m_garbageQueue;
     QMap<TileId, QSharedPointer<CacheDocument> > m_documents;
+    bool m_deleteDocumentsLater;
 };
 
 }
