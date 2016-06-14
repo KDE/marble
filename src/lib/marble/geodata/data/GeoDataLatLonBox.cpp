@@ -242,8 +242,14 @@ void GeoDataLatLonBox::scale(qreal verticalFactor, qreal horizontalFactor) const
     qreal const deltaX = 0.5 * width() * horizontalFactor;
     d->m_north = GeoDataCoordinates::normalizeLat(middle.latitude() + deltaY);
     d->m_south = GeoDataCoordinates::normalizeLat(middle.latitude() - deltaY);
-    d->m_east = GeoDataCoordinates::normalizeLon(middle.longitude() + deltaX);
-    d->m_west = GeoDataCoordinates::normalizeLon(middle.longitude() - deltaX);
+    if (deltaX > 180 * DEG2RAD) {
+        d->m_east = M_PI;
+        d->m_west = -M_PI;
+    }
+    else {
+        d->m_east = GeoDataCoordinates::normalizeLon(middle.longitude() + deltaX);
+        d->m_west = GeoDataCoordinates::normalizeLon(middle.longitude() - deltaX);
+    }
 }
 
 GeoDataLatLonBox GeoDataLatLonBox::scaled(qreal verticalFactor, qreal horizontalFactor) const

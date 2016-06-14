@@ -80,7 +80,7 @@ private Q_SLOTS:
 
 private:
     void removeTilesOutOfView(const GeoDataLatLonBox &boundingBox);
-    void setViewport( int tileZoomLevel, unsigned int minX, unsigned int minY, unsigned int maxX, unsigned int maxY );
+    void queryTiles( int tileZoomLevel, unsigned int minX, unsigned int minY, unsigned int maxX, unsigned int maxY );
 
     static unsigned int lon2tileX( qreal lon, unsigned int maxTileX );
     static unsigned int lat2tileY( qreal lat, unsigned int maxTileY );
