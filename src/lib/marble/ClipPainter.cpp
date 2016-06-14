@@ -144,19 +144,43 @@ void ClipPainter::drawPolygon ( const QPolygonF & polygon,
         foreach( const QPolygonF & clippedPolyObject, clippedPolyObjects ) { 
             if ( clippedPolyObject.size() > 2 ) {
                 // mDebug() << "Size: " << clippedPolyObject.size();
-                QPainter::drawPolygon ( clippedPolyObject, fillRule );
-                // mDebug() << "done";
                 if (d->m_debugPolygonsLevel) {
+                    QBrush brush = QPainter::brush();
+                    QBrush originalBrush = brush;
+                    QColor color = brush.color();
+                    color.setAlpha(color.alpha()*0.75);
+                    brush.setColor(color);
+                    QPainter::setBrush(brush);
+
+                    QPainter::drawPolygon ( clippedPolyObject, fillRule );
+
+                    QPainter::setBrush(originalBrush);
+
                     d->debugDrawNodes( clippedPolyObject );
+                }
+                else {
+                    QPainter::drawPolygon ( clippedPolyObject, fillRule );
                 }
             }
         }
     }
     else {
-        QPainter::drawPolygon ( polygon, fillRule );
-
         if (d->m_debugPolygonsLevel) {
+            QBrush brush = QPainter::brush();
+            QBrush originalBrush = brush;
+            QColor color = brush.color();
+            color.setAlpha(color.alpha()*0.75);
+            brush.setColor(color);
+            QPainter::setBrush(brush);
+
+            QPainter::drawPolygon ( polygon, fillRule );
+
+            QPainter::setBrush(originalBrush);
+
             d->debugDrawNodes( polygon );
+        }
+        else {
+            QPainter::drawPolygon ( polygon, fillRule );
         }
     }
 }
@@ -171,21 +195,43 @@ void ClipPainter::drawPolyline( const QPolygonF & polygon )
 
         foreach( const QPolygonF & clippedPolyObject, clippedPolyObjects ) { 
             if ( clippedPolyObject.size() > 1 ) {
-                // mDebug() << "Size: " << clippedPolyObject.size();
-                QPainter::drawPolyline ( clippedPolyObject );
-                // mDebug() << "done";
-
                 if (d->m_debugPolygonsLevel) {
+                    QPen pen = QPainter::pen();
+                    QPen originalPen = pen;
+                    QColor color = pen.color();
+                    color.setAlpha(color.alpha()*0.75);
+                    pen.setColor(color);
+                    QPainter::setPen(pen);
+
+                    QPainter::drawPolyline ( clippedPolyObject );
+
+                    QPainter::setPen(originalPen);
+
                     d->debugDrawNodes( clippedPolyObject );
+                }
+                else {
+                    QPainter::drawPolyline ( clippedPolyObject );
                 }
             }
         }
     }
     else {
-        QPainter::drawPolyline( polygon );
-
         if (d->m_debugPolygonsLevel) {
+            QPen pen = QPainter::pen();
+            QPen originalPen = pen;
+            QColor color = pen.color();
+            color.setAlpha(color.alpha()*0.75);
+            pen.setColor(color);
+            QPainter::setPen(pen);
+
+            QPainter::drawPolyline ( polygon );
+
+            QPainter::setPen(originalPen);
+
             d->debugDrawNodes( polygon );
+        }
+        else {
+            QPainter::drawPolyline ( polygon );
         }
     }
 }
@@ -200,24 +246,42 @@ void ClipPainter::drawPolyline( const QPolygonF & polygon, QVector<QPointF>& lab
         d->clipPolyObject( polygon, clippedPolyObjects, false );
 
         foreach( const QPolygonF & clippedPolyObject, clippedPolyObjects ) { 
-            if ( clippedPolyObject.size() > 1 ) {
-                // mDebug() << "Size: " << clippedPolyObject.size();
+            if (d->m_debugPolygonsLevel) {
+                QPen pen = QPainter::pen();
+                QPen originalPen = pen;
+                QColor color = pen.color();
+                color.setAlpha(color.alpha()*0.75);
+                pen.setColor(color);
+                QPainter::setPen(pen);
+
                 QPainter::drawPolyline ( clippedPolyObject );
-                // mDebug() << "done";
 
-                if (d->m_debugPolygonsLevel) {
-                    d->debugDrawNodes( clippedPolyObject );
-                }
+                QPainter::setPen(originalPen);
 
-                d->labelPosition( clippedPolyObject, labelNodes, positionFlags );
+                d->debugDrawNodes( clippedPolyObject );
+            }
+            else {
+                QPainter::drawPolyline ( clippedPolyObject );
             }
         }
     }
     else {
-        QPainter::drawPolyline( polygon );
-
         if (d->m_debugPolygonsLevel) {
+            QPen pen = QPainter::pen();
+            QPen originalPen = pen;
+            QColor color = pen.color();
+            color.setAlpha(color.alpha()*0.75);
+            pen.setColor(color);
+            QPainter::setPen(pen);
+
+            QPainter::drawPolyline ( polygon );
+
+            QPainter::setPen(originalPen);
+
             d->debugDrawNodes( polygon );
+        }
+        else {
+            QPainter::drawPolyline ( polygon );
         }
 
         d->labelPosition( polygon, labelNodes, positionFlags );
@@ -1165,7 +1229,7 @@ void ClipPainterPrivate::debugDrawNodes( const QPolygonF & polygon )
         if (m_debugPolygonsLevel == 2) {
             q->setFont(QFont("Helvetica", 7));
             q->setPen("black");
-            q->drawText(itPoint->x() + 6.0, itPoint->y() + (15 - i%30) , QString::number(i));
+            q->drawText(itPoint->x() + 6.0, itPoint->y() + (15 - (i * 5) % 30) , QString::number(i));
         }
     }
     q->restore();
