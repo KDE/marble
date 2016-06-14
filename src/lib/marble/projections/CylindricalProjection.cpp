@@ -126,8 +126,8 @@ int CylindricalProjectionPrivate::tessellateLineSegment( const GeoDataCoordinate
     )
     {
 #endif
-        bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
-        int const finalTessellationPrecision = smallScreen ? 3 * tessellationPrecision : tessellationPrecision;
+        int maxTessellationFactor = viewport->radius() < 20000 ? 10 : 20;
+        int const finalTessellationPrecision = qBound(2, viewport->radius()/200, maxTessellationFactor) * tessellationPrecision;
 
         // Let the line segment follow the spherical surface
         // if the distance between the previous point and the current point
@@ -295,6 +295,8 @@ bool CylindricalProjectionPrivate::lineStringToPolygon( const GeoDataLineString 
     // The first node of optimized linestrings has a non-zero detail value.
     const bool hasDetail = itBegin->detail() != 0;
 
+    bool isStraight = lineString.latLonAltBox().height() == 0 || lineString.latLonAltBox().width() == 0;
+
     while ( itCoords != itEnd )
     {
         // Optimization for line strings with a big amount of nodes
@@ -320,7 +322,7 @@ bool CylindricalProjectionPrivate::lineStringToPolygon( const GeoDataLineString 
             // segments of a linestring. If you are about to learn how the code of
             // this class works you can safely ignore this section for a start.
 
-            if ( lineString.tessellate() ) {
+            if ( lineString.tessellate() && !isStraight) {
 
                 mirrorCount = tessellateLineSegment( *itPreviousCoords, previousX, previousY,
                                            *itCoords, x, y,

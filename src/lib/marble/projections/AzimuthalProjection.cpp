@@ -204,8 +204,8 @@ void AzimuthalProjectionPrivate::tessellateLineSegment( const GeoDataCoordinates
     )
     {
 #endif
-        bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
-        int const finalTessellationPrecision = smallScreen ? 3 * tessellationPrecision : tessellationPrecision;
+        int maxTessellationFactor = viewport->radius() < 20000 ? 10 : 20;
+        int const finalTessellationPrecision = qBound(2, viewport->radius()/200, maxTessellationFactor) * tessellationPrecision;
 
         // Let the line segment follow the spherical surface
         // if the distance between the previous point and the current point
