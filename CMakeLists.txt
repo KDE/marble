@@ -47,8 +47,8 @@ include( MarbleMacros )
 # if this option is set, srtm.jpg will not be installed but the generated tiles instead
 option(MOBILE "Create a Marble version optimized for handheld devices")
 
-####################################################
-# Specific options for building with Qt 4 vs 5
+#######################################################
+# Specific options for building for different platforms
 
 if(CMAKE_SYSTEM_NAME STREQUAL Android)
    add_definitions(-DANDROID)
