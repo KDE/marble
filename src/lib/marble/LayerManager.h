@@ -52,6 +52,8 @@ class LayerManager : public QObject
 
     bool showBackground() const;
 
+    bool showRuntimeTrace() const;
+
     /**
      * @brief Returns a list of all RenderPlugins on the layer, this includes float items
      * @return the list of RenderPlugins

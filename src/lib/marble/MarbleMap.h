@@ -632,12 +632,16 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
     void setShowRuntimeTrace( bool visible );
 
+    bool showRuntimeTrace() const;
+
     /**
      * @brief Set whether to enter the debug mode for
      * polygon node drawing
      * @param visible visibility of the node debug mode
      */
     void setShowDebugPolygons( bool visible);
+
+    bool showDebugPolygons() const;
 
     void setShowBackground( bool visible );
 

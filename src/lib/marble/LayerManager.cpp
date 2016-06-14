@@ -91,6 +91,11 @@ bool LayerManager::showBackground() const
     return d->m_showBackground;
 }
 
+bool LayerManager::showRuntimeTrace() const
+{
+    return d->m_showRuntimeTrace;
+}
+
 QList<RenderPlugin *> LayerManager::renderPlugins() const
 {
     return d->m_renderPlugins;

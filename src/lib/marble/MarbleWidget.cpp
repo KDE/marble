@@ -913,9 +913,19 @@ void MarbleWidget::setShowRuntimeTrace( bool visible )
     d->m_map.setShowRuntimeTrace( visible );
 }
 
+bool MarbleWidget::showRuntimeTrace() const
+{
+    return d->m_map.showRuntimeTrace();
+}
+
 void MarbleWidget::setShowDebugPolygons( bool visible)
 {
     d->m_map.setShowDebugPolygons( visible );
+}
+
+bool MarbleWidget::showDebugPolygons() const
+{
+    return d->m_map.showDebugPolygons();
 }
 
 void MarbleWidget::setShowTileId( bool visible )

@@ -1168,11 +1168,28 @@ void MarbleMap::setShowFrameRate( bool visible )
 
 void MarbleMap::setShowRuntimeTrace( bool visible )
 {
-    d->m_layerManager.setShowRuntimeTrace( visible );
+    if (visible != d->m_layerManager.showRuntimeTrace()) {
+        d->m_layerManager.setShowRuntimeTrace(visible);
+        emit repaintNeeded();
+    }
 }
 
-void MarbleMap::setShowDebugPolygons( bool visible) {
-    d->m_showDebugPolygons = visible;
+bool MarbleMap::showRuntimeTrace() const
+{
+    return d->m_layerManager.showRuntimeTrace();
+}
+
+void MarbleMap::setShowDebugPolygons( bool visible)
+{
+    if (visible != d->m_showDebugPolygons) {
+        d->m_showDebugPolygons = visible;
+        emit repaintNeeded();
+    }
+}
+
+bool MarbleMap::showDebugPolygons() const
+{
+    return d->m_showDebugPolygons;
 }
 
 void MarbleMap::setShowBackground( bool visible )

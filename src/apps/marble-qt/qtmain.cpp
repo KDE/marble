@@ -20,6 +20,7 @@
 #include "QtMainWindow.h"
 
 #include "MapThemeManager.h"
+#include "MarbleWidgetInputHandler.h"
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
 #include "MarbleTest.h"
@@ -249,6 +250,10 @@ int main(int argc, char *argv[])
         else if ( i != dataPathIndex && QFile::exists( arg ) )
             window->addGeoDataFile( arg );
     }
+
+    auto const marbleWidget = window->marbleControl()->marbleWidget();
+    bool const debugModeEnabled = marbleWidget->showRuntimeTrace() || marbleWidget->showDebugPolygons() || MarbleDebug::isEnabled();
+    marbleWidget->inputHandler()->setDebugModeEnabled(debugModeEnabled);
 
     return app.exec();
 }
