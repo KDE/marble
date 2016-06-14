@@ -143,7 +143,7 @@ void CurrentLocationWidget::setMarbleWidget( MarbleWidget *widget )
     disconnect( d->m_widget->model(), SIGNAL(trackedPlacemarkChanged(const GeoDataPlacemark*)),
              this, SLOT(trackPlacemark()) );
 
-    //connect CurrentLoctaion signals
+    //connect CurrentLocation signals
     connect( d->m_widget->model()->positionTracking(),
              SIGNAL(gpsLocation(GeoDataCoordinates,qreal)),
              this, SLOT(receiveGpsCoordinates(GeoDataCoordinates,qreal)) );
