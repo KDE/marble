@@ -16,6 +16,8 @@
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataStyle.h"
 #include "ViewportParams.h"
+#include "StyleBuilder.h"
+#include "GeoGraphicsItem.h"
 
 namespace Marble
 {
@@ -42,7 +44,9 @@ class GeoGraphicsItemPrivate
     int m_minZoomLevel;
     const GeoDataFeature *m_feature;
     GeoDataLatLonAltBox m_latLonAltBox;
+    RenderContext m_renderContext;
     GeoDataStyle::ConstPtr m_style;
+    StyleBuilder::Ptr m_styleBuilder;
 
     QStringList m_paintLayers;
 

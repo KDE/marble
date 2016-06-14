@@ -645,7 +645,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     static QColor defaultLabelColor();
     static void setDefaultLabelColor( const QColor& color );
 
-    static QSharedPointer<Marble::GeoDataStyle> presetStyle( GeoDataVisualCategory category );
+    static QSharedPointer<const GeoDataStyle> presetStyle( GeoDataVisualCategory category );
 
     static QString visualCategoryName(GeoDataVisualCategory category);
 

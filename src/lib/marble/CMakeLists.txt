@@ -267,6 +267,8 @@ set(marblewidget_SRCS
     kineticmodel.cpp
     NewstuffModel.cpp
     MarbleZip.cpp
+
+    StyleBuilder.cpp
     
     cloudsync/CloudSyncManager.cpp
     cloudsync/RouteSyncManager.cpp

@@ -76,11 +76,6 @@ void GeoGraphicsItem::setLatLonAltBox( const GeoDataLatLonAltBox& latLonAltBox )
     d->m_latLonAltBox = latLonAltBox;
 }
 
-void GeoGraphicsItem::setStyle( const GeoDataStyle::ConstPtr &style )
-{
-    d->m_style = style;
-}
-
 void GeoGraphicsItem::setHighlightStyle( const GeoDataStyle::ConstPtr &highlightStyle)
 {
     /**
@@ -99,7 +94,18 @@ GeoDataStyle::ConstPtr GeoGraphicsItem::style() const
     if ( d->m_highlighted && d->m_highlightStyle ) {
         return d->m_highlightStyle;
     }
+
+    if (!d->m_style) {
+        auto const styling = StyleParameters(d->m_feature, d->m_renderContext.tileLevel());
+        d->m_style = d->m_styleBuilder->createStyle(styling);
+    }
+
     return d->m_style;
+}
+
+void GeoGraphicsItem::setStyleBuilder(const StyleBuilder::Ptr &styleBuilder)
+{
+    d->m_styleBuilder = styleBuilder;
 }
 
 qreal GeoGraphicsItem::zValue() const
@@ -132,6 +138,14 @@ void GeoGraphicsItem::setPaintLayers(const QStringList &paintLayers)
     d->m_paintLayers = paintLayers;
 }
 
+void GeoGraphicsItem::setRenderContext(const RenderContext &renderContext)
+{
+    if (renderContext != d->m_renderContext) {
+        d->m_renderContext = renderContext;
+        d->m_style = GeoDataStyle::ConstPtr();
+    }
+}
+
 int GeoGraphicsItem::minZoomLevel() const
 {
     return d->m_minZoomLevel;
@@ -147,3 +161,23 @@ bool GeoGraphicsItem::zValueLessThan(GeoGraphicsItem *one, GeoGraphicsItem *two)
     return one->d->m_zValue < two->d->m_zValue;
 }
 
+bool RenderContext::operator==(const RenderContext &other) const
+{
+    return m_tileLevel == other.m_tileLevel;
+}
+
+bool RenderContext::operator!=(const RenderContext &other) const
+{
+    return !operator==(other);
+}
+
+int RenderContext::tileLevel() const
+{
+    return m_tileLevel;
+}
+
+RenderContext::RenderContext(int tileLevel) :
+    m_tileLevel(tileLevel)
+{
+    // nothing to do
+}

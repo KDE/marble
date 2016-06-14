@@ -18,6 +18,8 @@
 #include "GeoDataStyle.h"
 #include "MarbleDebug.h"
 
+#include <qmath.h>
+
 namespace Marble
 {
 
@@ -47,6 +49,9 @@ const GeoDataLatLonAltBox& GeoLineStringGraphicsItem::latLonAltBox() const
 
 void GeoLineStringGraphicsItem::paint(GeoPainter* painter, const ViewportParams* viewport , const QString &layer)
 {
+    int const tileLevel = qLn( viewport->radius() * 4 / 256 ) / qLn( 2.0 );
+    setRenderContext(RenderContext(tileLevel));
+
     if (layer.endsWith("/outline")) {
         if (painter->mapQuality() == HighQuality || painter->mapQuality() == PrintQuality) {
             paintOutline(painter, viewport);

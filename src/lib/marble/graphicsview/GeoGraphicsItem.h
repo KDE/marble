@@ -15,6 +15,7 @@
 // Marble
 #include "marble_export.h"
 #include "GeoDataStyle.h"
+#include "StyleBuilder.h"
 
 class QString;
 
@@ -26,6 +27,19 @@ class GeoDataLatLonAltBox;
 class GeoGraphicsItemPrivate;
 class GeoPainter;
 class ViewportParams;
+
+class RenderContext
+{
+public:
+    bool operator==(const RenderContext &other) const;
+    bool operator!=(const RenderContext &other) const;
+
+    RenderContext(int tileLevel=-1);
+    int tileLevel() const;
+
+private:
+    int m_tileLevel;
+};
 
 class MARBLE_EXPORT GeoGraphicsItem
 {
@@ -98,7 +112,7 @@ class MARBLE_EXPORT GeoGraphicsItem
     /**
      * Set the style for the item.
      */
-    void setStyle(const GeoDataStyle::ConstPtr &style );
+    void setStyleBuilder(const StyleBuilder::Ptr &styleBuilder );
 
     /**
      * Set the style which will be used when
@@ -135,6 +149,8 @@ class MARBLE_EXPORT GeoGraphicsItem
     QStringList paintLayers() const;
 
     void setPaintLayers(const QStringList &paintLayers);
+
+    void setRenderContext(const RenderContext &renderContext);
 
  protected:
     GeoGraphicsItemPrivate *const d;

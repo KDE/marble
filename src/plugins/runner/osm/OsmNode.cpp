@@ -53,39 +53,6 @@ void OsmNode::create(GeoDataDocument *document) const
     placemark->setVisualCategory(category);
     placemark->setStyle( GeoDataStyle::Ptr() );
 
-    if (category == GeoDataFeature::NaturalTree) {
-        qreal const lat = m_coordinates.latitude(GeoDataCoordinates::Degree);
-        if (qAbs(lat) > 15) {
-            /** @todo Should maybe auto-adjust to MarbleClock at some point */
-            int const month = QDate::currentDate().month();
-            QString season;
-            bool const southernHemisphere = lat < 0;
-            if (southernHemisphere) {
-                if (month >= 3 && month <= 5) {
-                    season = "autumn";
-                } else if (month >= 6 && month <= 8) {
-                    season = "winter";
-                }
-            } else {
-                if (month >= 9 && month <= 11) {
-                    season = "autumn";
-                } else if (month == 12 || month == 1 || month == 2) {
-                    season = "winter";
-                }
-            }
-
-            if (!season.isEmpty()) {
-                GeoDataIconStyle iconStyle = placemark->style()->iconStyle();
-                QString const bitmap = QString("bitmaps/osmcarto/symbols/48/individual/tree-29-%1.png").arg(season);
-                iconStyle.setIconPath(MarbleDirs::path(bitmap));
-
-                GeoDataStyle::Ptr style(new GeoDataStyle(*placemark->style()));
-                style->setIconStyle(iconStyle);
-                placemark->setStyle(style);
-            }
-        }
-    }
-
     placemark->setZoomLevel( 18 );
     if (category >= GeoDataFeature::PlaceCity && category <= GeoDataFeature::PlaceVillage) {
         int const population = m_osmData.tagValue("population").toInt();

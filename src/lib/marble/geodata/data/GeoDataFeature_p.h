@@ -24,6 +24,7 @@
 #include "GeoDataStyle.h"
 #include "GeoDataSnippet.h"
 #include "MarbleDirs.h"
+#include "StyleBuilder.h"
 
 namespace Marble
 {
@@ -124,75 +125,6 @@ class GeoDataFeaturePrivate
         return GeoDataTypes::GeoDataFeatureType;
     }
 
-    static void initializeDefaultStyles();
-
-    static GeoDataStyle::Ptr createOsmPOIStyle( const QFont &font, const QString &bitmap,
-                                         const QColor &textColor = Qt::black,
-                                         const QColor &color = QColor( 0xBE, 0xAD, 0xAD ),
-                                         const QColor &outline = QColor( 0xBE, 0xAD, 0xAD ).darker()
-                                         )
-    {
-        GeoDataStyle::Ptr style =  createStyle(1, 0, color, outline, true, true, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false);
-        QString const imagePath = MarbleDirs::path( "bitmaps/osmcarto/symbols/48/" + bitmap + ".png" );
-        style->setIconStyle( GeoDataIconStyle( imagePath) );
-        style->iconStyle().setScale(0.67);
-        style->setLabelStyle( GeoDataLabelStyle( font, textColor ) );
-        style->labelStyle().setAlignment(GeoDataLabelStyle::Center);
-        return style;
-    }
-    
-    static GeoDataStyle::Ptr createHighwayStyle( const QString &bitmap, const QColor& color, const QColor& outlineColor,
-                                             const QFont& font = QFont(QLatin1String("Arial")), const QColor& fontColor = Qt::black,
-                                             qreal width = 1, qreal realWidth = 0.0,
-                                             Qt::PenStyle penStyle = Qt::SolidLine,
-                                             Qt::PenCapStyle capStyle = Qt::RoundCap,
-                                             bool lineBackground = false)
-    {
-        GeoDataStyle::Ptr style = createStyle( width, realWidth, color, outlineColor, true, true,
-                                           Qt::SolidPattern, penStyle, capStyle, lineBackground, QVector< qreal >(),
-                                           font, fontColor );
-        if( !bitmap.isEmpty() ) {
-            style->setIconStyle( GeoDataIconStyle( MarbleDirs::path( "bitmaps/" + bitmap + ".png" ) ) );
-        }
-        return style;
-    }
-
-    static GeoDataStyle::Ptr createWayStyle( const QColor& color, const QColor& outlineColor,
-                                         bool fill = true, bool outline = true,
-                                         Qt::BrushStyle brushStyle = Qt::SolidPattern,
-                                         const QString& texturePath = QString())
-    {
-        return createStyle( 1, 0, color, outlineColor, fill, outline, brushStyle, Qt::SolidLine, Qt::RoundCap, false, QVector< qreal >(), QFont("Arial"), Qt::black, texturePath );
-    }
-
-    static GeoDataStyle::Ptr createStyle( qreal width, qreal realWidth, const QColor& color,
-                                      const QColor& outlineColor, bool fill, bool outline,
-                                      Qt::BrushStyle brushStyle, Qt::PenStyle penStyle,
-                                      Qt::PenCapStyle capStyle, bool lineBackground,
-                                      const QVector< qreal >& dashPattern = QVector< qreal >(),
-                                      const QFont& font = QFont(QLatin1String("Arial")), const QColor& fontColor = Qt::black,
-                                      const QString& texturePath = QString())
-    {
-        GeoDataStyle *style = new GeoDataStyle;
-        GeoDataLineStyle lineStyle( outlineColor );
-        lineStyle.setCapStyle( capStyle );
-        lineStyle.setPenStyle( penStyle );
-        lineStyle.setWidth( width );
-        lineStyle.setPhysicalWidth( realWidth );
-        lineStyle.setBackground( lineBackground );
-        lineStyle.setDashPattern( dashPattern );
-        GeoDataPolyStyle polyStyle( color );
-        polyStyle.setOutline( outline );
-        polyStyle.setFill( fill );
-        polyStyle.setBrushStyle( brushStyle );
-        polyStyle.setTexturePath( texturePath );
-        GeoDataLabelStyle labelStyle(font, fontColor);
-        style->setLineStyle( lineStyle );
-        style->setPolyStyle( polyStyle );
-        style->setLabelStyle( labelStyle );
-        return GeoDataStyle::Ptr(style);
-    }
-
     QString             m_name;         // Name of the feature. Is shown on screen
     GeoDataSnippet      m_snippet;      // Snippet of the feature.
     QString             m_description;  // A longer textual description
@@ -226,8 +158,7 @@ class GeoDataFeaturePrivate
     static QFont         s_defaultFont;
     static QColor        s_defaultLabelColor;
 
-    static GeoDataStyle::Ptr s_defaultStyle[GeoDataFeature::LastIndex];
-    static bool          s_defaultStyleInitialized;
+    static StyleBuilder  s_styleBuilder;
 };
 
 } // namespace Marble

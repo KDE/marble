@@ -44,6 +44,7 @@
 #include "MarblePlacemarkModel.h"
 #include "GeoDataTreeModel.h"
 #include <OsmPlacemarkData.h>
+#include "StyleBuilder.h"
 
 // Qt
 #include <qmath.h>
@@ -75,6 +76,8 @@ public:
     QMap<qint64,OsmQueue> m_osmWayItems;
     QMap<qint64,OsmQueue> m_osmRelationItems;
 
+    StyleBuilder::Ptr m_styleBuilder;
+
 private:
     static void initializeDefaultValues();
     static QString createPaintLayerOrder(const QString &itemType, GeoDataFeature::GeoDataVisualCategory visualCategory, const QString &subType = QString());
@@ -90,7 +93,8 @@ int GeometryLayerPrivate::s_maximumZoomLevel = 0;
 QStringList s_paintLayerOrder;
 
 GeometryLayerPrivate::GeometryLayerPrivate( const QAbstractItemModel *model )
-    : m_model( model )
+    : m_model( model ),
+      m_styleBuilder(new StyleBuilder)
 {
     initializeDefaultValues();
 }
@@ -518,7 +522,7 @@ void GeometryLayerPrivate::createGraphicsItemFromGeometry(const GeoDataGeometry*
     }
     if ( !item )
         return;
-    item->setStyle( placemark->style() );
+    item->setStyleBuilder(m_styleBuilder);
     item->setVisible( placemark->isGloballyVisible() );
     item->setMinZoomLevel( s_defaultMinZoomLevels[placemark->visualCategory()] );
     m_scene.addItem( item );
@@ -539,7 +543,7 @@ void GeometryLayerPrivate::createGraphicsItemFromOverlay( const GeoDataOverlay *
     }
 
     if ( item ) {
-        item->setStyle( overlay->style() );
+        item->setStyleBuilder(m_styleBuilder);
         item->setVisible( overlay->isGloballyVisible() );
         m_scene.addItem( item );
     }
