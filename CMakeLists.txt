@@ -211,17 +211,6 @@ if(STATIC_BUILD)
   add_definitions(-DSTATIC_BUILD=1)
 endif(STATIC_BUILD)
 
-####################################################
-# Workaround FindQt.cmake bug not finding
-# QtDesigner includes
-if(APPLE)
-  if (NOT DEFINED ${QT_QTDESIGNER_INCLUDE_DIR})
-    set ( QT_QTDESIGNER_INCLUDE_DIR
-    ${QT_LIBRARY_DIR}/QtDesigner.framework/Headers
-    )
-  endif(NOT DEFINED ${QT_QTDESIGNER_INCLUDE_DIR})
-endif(APPLE)
-
 #############################################################
 if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_C_COMPILER MATCHES "icc")
     # Its good programming practice to build with no warnings...
