@@ -85,6 +85,8 @@ public:
 
     Q_INVOKABLE QPointF positionOnRoute() const;
 
+    Q_INVOKABLE double screenAccuracy() const;
+
 public Q_SLOTS:
     void setMarbleQuickItem(Marble::MarbleQuickItem * marbleQuickItem);
 

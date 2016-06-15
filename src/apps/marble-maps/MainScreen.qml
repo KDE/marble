@@ -91,7 +91,7 @@ ApplicationWindow {
                     showScaleBar: false
                     showBackground: false
                     positionProvider: suspended ? "" : "QtPositioning"
-                    showPositionMarker: true
+                    showPositionMarker: false
 
                     onPositionAvailableChanged: {
                         updateIndicator();
@@ -300,6 +300,7 @@ ApplicationWindow {
                     posY: navigationManager.visible ? navigationManager.snappedPositionMarkerScreenPosition.y : 0
                     angle: marbleMaps.angle
                     visible: navigationManager.visible
+                    radius: navigationManager.screenAccuracy
                 }
             }
         }

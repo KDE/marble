@@ -43,6 +43,8 @@ public:
 
     qreal m_destinationDistance;
 
+    double m_screenAccuracy;
+
     Marble::RouteSegment nextRouteSegment();
 
     void updateNextInstructionDistance( const Marble::Route &route );
@@ -52,7 +54,7 @@ public:
 
 NavigationPrivate::NavigationPrivate() :
     m_marbleWidget( nullptr ), m_marbleQuickItem( nullptr ), m_muted( false ), m_autoNavigation( 0 ), m_nextInstructionDistance( 0.0 ),
-    m_destinationDistance( 0.0 )
+    m_destinationDistance( 0.0 ), m_screenAccuracy(0)
 {
     // nothing to do
 }
@@ -282,6 +284,15 @@ QPointF Navigation::positionOnRoute() const
     qreal y = 0;
     d->m_marbleQuickItem->map()->viewport()->screenCoordinates(coordinates, x, y);
     return QPointF(x,y);
+}
+
+double Navigation::screenAccuracy() const
+{
+    double distanceMeter = d->model()->positionTracking()->accuracy().horizontal;
+    if(d->m_marbleQuickItem == 0){
+        return 0;
+    }
+    return distanceMeter * d->m_marbleQuickItem->map()->radius() / d->model()->planetRadius();
 }
 
 void Navigation::setMarbleQuickItem(Marble::MarbleQuickItem *marbleQuickItem)
