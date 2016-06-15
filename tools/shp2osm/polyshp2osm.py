@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 """
 This script is designed to act as assistance in converting shapefiles
@@ -146,12 +146,12 @@ def city_map(data):
 def airport_map(data):
     global id_counter, file_counter, counter, file_name, open_file, namespace
     wid = id_counter - 1
-    print >>open_file, "<way id='-%s'>" % wid
-    print >>open_file, " <nd ref='-%s' />" % i
+    print("<way id='-%s'>" % wid, end = '\n', file = open_file) 
+    print(" <nd ref='-%s' />" % i, end = '\n', file = open_file) 
     if geom_name == 'POLYGON':
-        print >>open_file, " <nd ref='-%s' />" % ids[0]
+        print(" <nd ref='-%s' />" % ids[0], end = '\n', file = open_file) 
     write_tags(f)
-    print >>open_file, "</way>" 
+    print("</way>" , end = '\n', file = open_file) 
 
 def mountain_map(data):
     elevation = 0
@@ -275,7 +275,8 @@ def feature_class(data):
     'Reference line': [('boundary', 'administrative'), ('admin_level', '2')],
     'Breakaway': [('boundary', 'administrative'), ('admin_level', '2')],
     'Elusive frontier': [('boundary', 'administrative'), ('admin_level', '2')],
-    'Country': [('marble_land', 'landmass')]
+    'Country': [('marble_land', 'landmass')],
+    '1st Order Admin Lines': [('boundary', 'administrative'), ('admin_level', '4')]
     #aeroway" v="aerodrome"
     }
     if 'featurecla' in data:
@@ -332,7 +333,7 @@ def cal_date(data):
             return [['start_date', '%4i' % y]]
         return [['start_date', '%04i-%02i-%02i' % (y, m, d)]] 
     except:
-        print "Invalid date: %s" % date
+        print("Invalid date: %s" % date)
         eflag = True
         return None
 
@@ -394,9 +395,9 @@ try:
 except ImportError:
     __doc__ += gdal_install 
     if DONT_RUN:
-        print __doc__
+        print(__doc__)
         sys.exit(2)
-    print "OGR Python Bindings not installed.\n%s" % gdal_install
+    print("OGR Python Bindings not installed.\n%s" % gdal_install)
     sys.exit(1)
     eflag = True
 
@@ -414,8 +415,8 @@ def start_new_file():
     if open_file:
         close_file()
     open_file = open("%s.%s.osm" % (file_name, file_counter), "w")
-    print >>open_file, "<?xml version='1.0' encoding='UTF-8'?>"
-    print >>open_file, "<osm version='0.5'>"
+    print("<?xml version='1.0' encoding='UTF-8'?>" , end = '\n', file = open_file) 
+    print("<osm version='0.5'>" , end = '\n', file = open_file)  
     node_dict = {}
 
 def clean_attr(val):
@@ -428,8 +429,6 @@ def add_point(f):
     """Adds a point geometry to the OSM file"""
     global id_counter
     pt = f.GetGeometryRef()
-    #print 'Longitude: ', pt.GetX(0)
-    #print 'Longitude: ', pt.GetY(0)
     node_id = add_node(id_counter, pt.GetX(0), pt.GetY(0), 'POINT', f)
     if node_id == id_counter:
         id_counter += 1
@@ -442,7 +441,7 @@ def add_relation_multipolygon(geom, f):
     rel_id = 0
     way_id = add_way(geom.GetGeometryRef(0), f, True)
     if way_id == None:
-        print 'Error in writing relation'
+        print('Error in writing relation')
         return None
     rel_ways.append(way_id)
 
@@ -450,43 +449,35 @@ def add_relation_multipolygon(geom, f):
         for i in range(1, geom.GetGeometryCount()):
             way_id = add_way(geom.GetGeometryRef(i), f, False)
             if way_id == None:
-                print 'Error in writing relation'
+                print('Error in writing relation')
                 return None
             rel_ways.append(way_id)
         rel_id = id_counter
         if f['featurecla'] in non_polygons:
             return 0 #means no relation is there
         relations.append((rel_id, rel_ways))
-        #print >>open_file, "<relation id='-%s'><tag k='type' v='multipolygon' />" % id_counter
         id_counter += 1
-        #print >>open_file, '<member type="way" ref="-%s" role="outer" />' % ways[0]    
-        #for way in ways[1:]:
-        #   print >>open_file, '<member type="way" ref="-%s" role="inner" />' % way 
-        #print >>open_file, "</relation>" 
 
     return rel_id   #if rel_id return 0, means no relations is there
 
 def write_relation_multipolygon(relation):
     global open_file
-    print >>open_file, "<relation id='-%s'><tag k='type' v='multipolygon' />" % relation[0]
-    print >>open_file, '<member type="way" ref="-%s" role="outer" />' % relation[1][0]   
+    print("<relation id='-%s'><tag k='type' v='multipolygon' />" % relation[0] , end = '\n', file = open_file)  
+    print('<member type="way" ref="-%s" role="outer" />' % relation[1][0] , end = '\n', file = open_file)    
     for way in relation[1][1:]:
-        print >>open_file, '<member type="way" ref="-%s" role="inner" />' % way 
-    print >>open_file, "</relation>"  
-
+        print('<member type="way" ref="-%s" role="inner" />' % way  , end = '\n', file = open_file)
+    print("</relation>" , end = '\n', file = open_file)
 
 def write_tags(f):
     """Writes the tags associated with a way or a relation"""
     global id_counter, file_counter, counter, file_name, open_file, namespace
     field_count = f.GetFieldCount()
-    #print '*********************',
-    #print ' Field Count is = ', field_count
     fields  = {}
     for field in range(field_count):
         value = f.GetFieldAsString(field)
         name = f.GetFieldDefnRef(field).GetName()
         if namespace and name and value and name not in boring_tags:
-            print >>open_file, " <tag k='%s:%s' v='%s' />" % (namespace, name, clean_attr(value))
+            print(" <tag k='%s:%s' v='%s' />" % (namespace, name, clean_attr(value)) , end = '\n', file = open_file)
         fields[name.lower()] = value
     tags={}
     for tag_name, map_value in tag_mapping:
@@ -500,45 +491,38 @@ def write_tags(f):
                 tags[map_value] = fields[tag_name].title()
     for key, value in tags.items():
         if key and value:
-            print >>open_file, " <tag k='%s' v='%s' />" % (key, clean_attr(value))    
+            print(" <tag k='%s' v='%s' />" % (key, clean_attr(value))  , end = '\n', file = open_file)   
     for name, value in fixed_tags.items():
-        print >>open_file, " <tag k='%s' v='%s' />" % (name, clean_attr(value))
+        print(" <tag k='%s' v='%s' />" % (name, clean_attr(value)) , end = '\n', file = open_file)   
     if f.GetGeometryRef().GetGeometryName() == 'POLYGON' or f.GetGeometryRef().GetGeometryName() == 'MULTIPOLYGON':
         if f['featurecla'] not in non_polygons:
-            print >>open_file, " <tag k='area' v='yes' />"
+            print(" <tag k='area' v='yes' />" , end = '\n', file = open_file)  
 
 def add_way(geom, f, tag_flag):
     """ Writes the way of a particular geometry to the OSM file"""
     global open_file, id_counter, ways
     ids = add_way_nodes(geom, f)
     if len(ids) == 0:
-        print 'Error in writing way'
+        print('Error in writing way')
         return None
-    #print >>open_file, "<way id='-%s'>" % id_counter
     way_id = id_counter
     id_counter += 1
-    #for i in ids:
-        #print >>open_file, " <nd ref='-%s' />" % i
     node_refs = ids
     if tag_flag:
         tags = f
-        #write_tags(f)
     else:
         tags = None
     ways.append((way_id, node_refs, tags))
-    #print >>open_file, "</way>"
     return way_id
 
 def write_way(way):
     global open_file
-    print >>open_file, "<way id='-%s'>" % way[0]
+    print("<way id='-%s'>" % way[0] , end = '\n', file = open_file)  
     for i in way[1]:
-        print >>open_file, " <nd ref='-%s' />" % i
+        print(" <nd ref='-%s' />" % i , end = '\n', file = open_file)  
     if way[2]:
         write_tags(way[2])
-    print >>open_file, "</way>"
-
-
+    print("</way>", end = '\n', file = open_file)  
 
 def add_way_nodes(geom, f):
     """Writes the nodes of a particular way"""
@@ -551,7 +535,7 @@ def add_way_nodes(geom, f):
     else:
         range_count = range(geom.GetPointCount() - 1)
     if range_count == 0 or pt_count == 0:
-        print >>sys.stderr, "Degenerate ", geom_name 
+        print( "Degenerate ", geom_name , end = '\n', file = sys.stderr)  
         return
     #if geom_name != 'LINESTRING':
     #    pt_count -= 1
@@ -569,45 +553,38 @@ def add_node(num_id, lon, lat, geom_name, f):
     key = (lon, lat)
     if geom_name == 'POINT':
         nodes.append((num_id, lon, lat, f))
-        #print >>open_file, "<node id='-%s' visible='true' lon='%s' lat='%s' >" % (num_id, lon, lat) 
-        #write_tags(f)
         node_dict[key] = num_id
-        #print >>open_file, "</node>"
     else:
         if key in node_dict:
-            #print 'Existing node:', key
             num_id = node_dict[key]
         else:
             nodes.append((num_id, lon, lat, None))
-            #print >>open_file, "<node id='-%s' visible='true' lon='%s' lat='%s' />" % (num_id, lon, lat) 
             node_dict[key] = num_id
     return num_id
 
 def write_node(node):
     global open_file
     if node[3] == None:
-        print >>open_file, "<node id='-%s' visible='true' lon='%s' lat='%s' />" % (node[0], node[1], node[2])
+        print("<node id='-%s' visible='true' lon='%s' lat='%s' />" % (node[0], node[1], node[2]), end = '\n', file = open_file)   
     else:
-        print >>open_file, "<node id='-%s' visible='true' lon='%s' lat='%s' >" % (node[0], node[1], node[2])
+        print("<node id='-%s' visible='true' lon='%s' lat='%s' >" % (node[0], node[1], node[2]), end = '\n', file = open_file)
         write_tags(node[3]) 
-        print >>open_file, "</node>"
-
-
+        print("</node>", end = '\n', file = open_file)
 
 def add_way_around_node(f):
     """ Writes a way around a single point"""
     global id_counter, open_file
     nid = id_counter - 1
-    print >>open_file, "<way id='-%s'>" % id_counter
+    print("<way id='-%s'>" % id_counter, end = '\n', file = open_file)
     id_counter += 1
-    print >>open_file, " <nd ref='-%s' />" % nid
+    print(" <nd ref='-%s' />" % nid, end = '\n', file = open_file)
     tag_dict = {}
     tag_dict['name'] = f['name']
     if f['featurecla'] == 'Airport':
         tag_dict['aeroway'] = 'aerodrome'
     for key in tag_dict:
-        print >>open_file, " <tag k='%s' v='%s' />" % (key, clean_attr(tag_dict[key]))
-    print >>open_file, "</way >"
+        print(" <tag k='%s' v='%s' />" % (key, clean_attr(tag_dict[key])), end = '\n', file = open_file)
+    print("</way >", end = '\n', file = open_file)
 
     
 open_file = None
@@ -647,16 +624,14 @@ def run(filenames, slice_count=1, obj_count=5000000, output_location=None, no_so
         max_objs_per_file = obj_count 
 
         extent = l.GetExtent()
-        print 'Filename:', filename
-        print 'Extent', extent
         #if extent[0] < -180 or extent[0] > 180 or extent[2] < -90 or extent[2] > 90:
         #   raise AppError("Extent does not look like degrees; are you sure it is? \n(%s, %s, %s, %s)" % (extent[0], extent[2], extent[1], extent[3]))  
         slice_width = (extent[1] - extent[0]) / slice_count
 
         seen = {}
 
-        print "Running %s slices with %s base filename against shapefile %s" % (
-                slice_count, file_name, filename)
+        print("Running %s slices with %s base filename against shapefile %s" % (
+                slice_count, file_name, filename))
 
         for i in range(slice_count): 
 
@@ -677,18 +652,10 @@ def run(filenames, slice_count=1, obj_count=5000000, output_location=None, no_so
                 seen[f.GetFID()] = True             
                 
                 if (obj_counter - last_obj_split) > max_objs_per_file:
-                    print "Splitting file with %s objs" % (obj_counter - last_obj_split)
+                    print("Splitting file with %s objs" % (obj_counter - last_obj_split))
                     start_new_file()
                     last_obj_split = obj_counter
-
-                #ways = []
                 feat_dict = f.items()
-                #print 
-                #print '#' * 20
-                #print 'Feature items',f.items()
-                #for key in feat_dict:
-                #  print key, feat_dict[key]
-            
                 geom = f.GetGeometryRef()
                 geom_name = geom.GetGeometryName()
                 if geom_name in geom_counter:
@@ -696,26 +663,22 @@ def run(filenames, slice_count=1, obj_count=5000000, output_location=None, no_so
                 else:
                     geom_counter[geom_name] = 1
                 if geom_name == 'POLYGON':
-                    #print 'ak Its a POLYGON'
                     rel_id = add_relation_multipolygon(geom, f)
                     if rel_id == None:
                         f = l.GetNextFeature()
                         continue
                 elif geom_name == 'LINESTRING':
-                    #print 'ak Its a LINESTRING'
                     way_id = add_way(geom, f, True)
                     if way_id == None:
                         f = l.GetNextFeature()
                         continue
                 elif geom_name == 'MULTILINESTRING':
-                    #print 'ak Its a MULTILINESTRING'
                     for i in range(geom.GetGeometryCount()):
                         way_id = add_way(geom.GetGeometryRef(i), f, True)
                         if way_id == None:
                             f = l.GetNextFeature()
                             continue
                 elif geom_name == 'MULTIPOLYGON':
-                    #print 'ak Its a MULTIPOLYGON'
                     for i in range(geom.GetGeometryCount()):
                         rel_id = add_relation_multipolygon(geom.GetGeometryRef(i), f)
                         if rel_id == None:
@@ -726,7 +689,6 @@ def run(filenames, slice_count=1, obj_count=5000000, output_location=None, no_so
                     if f['featurecla'] == 'Airport':
                         add_way_around_node(f)
                 else:
-                    #print 'ak Unknown Type Discovered', geom_name
                     ids = []
                     non_geom += 1       
                         
@@ -745,7 +707,7 @@ def run(filenames, slice_count=1, obj_count=5000000, output_location=None, no_so
 
 if __name__ == "__main__":
     if DONT_RUN:
-        print __doc__
+        print(__doc__)
         sys.exit(2)
     
     from optparse import OptionParser
@@ -767,7 +729,7 @@ if __name__ == "__main__":
     (options, args) = parse.parse_args()
     
     if not len(args):
-        print "No shapefile name given!"
+        print("No shapefile name given!")
         parse.print_help()
         sys.exit(3)
 
@@ -777,40 +739,33 @@ if __name__ == "__main__":
     
     try:
         run(args, **kw)
-    except AppError, E:
-        print "An error occurred: \n%s" % E
+    except AppError as E:
+        print("An error occurred: \n%s" % E)
         eflag = True
 
-    print 
-    print 'Geometry types present: '
+    print() 
+    print('Geometry types present: ')
     for key in geom_counter:
-        print key, geom_counter[key]
-    print 
-    print 'Feature type present: '
+        print(key, geom_counter[key])
+    print() 
+    print('Feature type present: ')
     for key in feat_dict:
-        print key, feat_dict[key]
-    print
+        print(key, feat_dict[key])
+    print()
 
     
     if eflag:
-        print 'Conversion not Successful :'
+        print('Conversion not Successful :')
     else:
         if len(non_fcla_dict) == 0 and non_geom == 0:
-            print 'Conversion Successful'
+            print('Conversion Successful')
         else:
-            print 'Conversion not Successful :'
+            print('Conversion not Successful :')
             if len(non_fcla_dict) != 0:
-                print 'Unknown features present in SHP file: ', len(non_fcla_dict)
-                print 
+                print('Unknown features present in SHP file: ', len(non_fcla_dict))
+                print() 
                 for key in non_fcla_dict:
-                    print key, non_fcla_dict[key]
+                    print(key, non_fcla_dict[key])
             if non_geom != 0:
-                print 'Unknown geometry present in SHP file: ', non_geom
-
-        #print 'Num of repeated nodes', len(node_dict)
-        #for key in node_dict:
-        #    print key, node_dict[key]
-        #print 'Number of nodes' ,len(node_dict)
-
-    
+                print('Unknown geometry present in SHP file: ', non_geom)
     
