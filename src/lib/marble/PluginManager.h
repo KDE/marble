@@ -135,6 +135,22 @@ class MARBLE_EXPORT PluginManager : public QObject
      */
     void addParseRunnerPlugin( const ParseRunnerPlugin *plugin );
 
+    /**
+     * @brief blacklistPlugin Prevent that a plugin is loaded from the given filename
+     * @param filename The name of the file (excluding prefix and file extension) to blacklist. E.g.
+     * to ignore "libWikipedia.so" on Linux and "Wikipedia.dll" on Windows, pass "Wikipedia"
+     */
+    static void blacklistPlugin(const QString &filename);
+
+    /**
+     * @brief whitelistPlugin Add a plugin to the whitelist of plugins. If the whitelist is not
+     * empty, only whitelisted plugins are loaded. If a plugin is both whitelisted and blacklisted,
+     * it will not be loaded
+     * @param filename The name of the file (excluding prefix and file extension) to whitelist. E.g.
+     * to ignore "libWikipedia.so" on Linux and "Wikipedia.dll" on Windows, pass "Wikipedia"
+     */
+    static void whitelistPlugin(const QString &filename);
+
 Q_SIGNALS:
     void renderPluginsChanged();
 
