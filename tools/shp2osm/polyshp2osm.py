@@ -604,7 +604,17 @@ def run(filenames, slice_count=1, obj_count=5000000, output_location=None, no_so
     """Run the converter. Requires open_file, file_name, id_counter,
     file_counter, counter to be defined in global space; not really a very good
     singleton."""
-    global id_counter, file_counter, counter, file_name, open_file, namespace, non_geom, non_fcla_dict
+    global id_counter, file_counter, counter, file_name, open_file, namespace, non_geom, non_fcla_dict, nodes, ways, relations
+    open_file = None
+
+    file_name = None 
+
+    id_counter = 1
+
+    file_counter = 0
+    counter = 0
+
+    geom_counter = {}
     if output_location:
        file_name = output_location
     start_new_file()
@@ -704,6 +714,9 @@ def run(filenames, slice_count=1, obj_count=5000000, output_location=None, no_so
         write_relation_multipolygon(relation)
                     
     close_file()
+    nodes = []  #(id, lon, lat, tags)
+    ways = []  #(id, node_refs, tags)
+    relations = []  #(id, ways)
 
 if __name__ == "__main__":
     if DONT_RUN:

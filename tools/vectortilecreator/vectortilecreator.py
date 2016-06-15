@@ -51,7 +51,6 @@ def download(url, directory, refresh):
             # else download again
         else:
             return filename
-
     http = urllib3.PoolManager()
     r = http.request('GET', url, preload_content=False)
     chunk_size = 8192
@@ -73,6 +72,46 @@ def download(url, directory, refresh):
 
     return filename
 
+def run(filenames, cache, refresh, directory, overwrite, zoomLevels):
+    for csvfilename in filenames:
+        with open(csvfilename, 'r') as csvfile:
+            reader = csv.reader(csvfile, delimiter=';', quotechar='|')
+            for bounds in reader:
+                filename = download(bounds[0], cache, refresh)
+                for zoom in zoomLevels:
+                    bottomLeft = deg2num(float(bounds[3]), float(bounds[2]), zoom)
+                    topRight = deg2num(float(bounds[5]), float(bounds[4]), zoom)
+                    xDiff = topRight[0]-bottomLeft[0]
+                    yDiff = bottomLeft[1]-topRight[1]
+                    total = xDiff*yDiff
+                    count = 0
+                    cutted = "{}/{}.{}-{}-{}-{}.osm.o5m".format(cache, filename, bounds[2], bounds[3], bounds[4], bounds[5])
+                    if not os.path.exists(cutted):
+                        print ("Creating cut out region {}".format(cutted))
+                        call(["osmconvert", "-t={}/osmconvert_tmp-".format(cache), "--complete-ways", "--complex-ways", "--drop-version", "-b={},{},{},{}".format(bounds[2], bounds[3], bounds[4], bounds[5]), "-o={}".format(cutted), os.path.join(cache, filename)])
+                    for x in range(1+bottomLeft[0], topRight[0]+1):
+                        for y in range(1+topRight[1], bottomLeft[1]+1):
+                            count += 1
+                            tl = num2deg(x-1, y-1, zoom)
+                            br = num2deg(x, y, zoom)
+                            path = "{}/{}/{}".format(directory, zoom, x-1)
+                            target = "{}.o5m".format(y-1)
+                            filterTarget = "{}_tmp.o5m".format(y-1)
+                            if not overwrite and os.path.exists(os.path.join(path, target)):
+                                print("Skipping existing file {}\r".format(os.path.join(path, target)), end='')
+                            else:
+                                call(["mkdir", "-p", path])
+                                print ("{} level {}: {}/{} {}\r".format(bounds[1], zoom, count, total, os.path.join(path, target)), end='')
+                                filterLevel = "levels/{}.level".format(zoom)
+                                if os.path.exists(filterLevel):
+                                    call(["osmconvert", "-t={}/osmconvert_tmp-".format(cache), "--complete-ways", "--complex-ways", "--drop-version", "-b={},{},{},{}".format(tl[1],br[0],br[1],tl[0]), cutted, "-o={}".format(os.path.join(path, filterTarget))])
+                                    call(["osmfilter", "--parameter-file={}".format(filterLevel), os.path.join(path, filterTarget), "-o={}".format(os.path.join(path, target))])
+                                    os.remove(os.path.join(path, filterTarget))
+                                else:
+                                    call(["osmconvert", "-t={}/osmconvert_tmp-".format(cache), "--complete-ways", "--complex-ways", "--drop-version", "-b={},{},{},{}".format(tl[1],br[0],br[1],tl[0]), cutted, "-o={}".format(os.path.join(path, target))])
+                                call(["chmod", "644", os.path.join(path, target)])
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Create OSM Vector Tiles for Marble')
     parser.add_argument('file', nargs='+', help='a file with semicolon separated lines in the form filename.osm.pbf;Area Name;west;south;east;north')
@@ -81,42 +120,7 @@ if __name__ == "__main__":
     parser.add_argument('-c', '--cache', help='directory to store intermediate files in', default='.')
     parser.add_argument('-r', '--refresh', type=int, default=-1, help='Re-download cached OSM base file if it is older than REFRESH days (-1: do not re-download)')
     parser.add_argument('-z', '--zoomLevels', type=int, nargs='+', help='zoom levels to generate', default=[13,15,17])
-    args = parser.parse_args()    
+    args = parser.parse_args()
+    run(args.file, args.cache, args.refresh, args.directory, args.overwrite)    
     
-    for csvfilename in args.file:
-        with open(csvfilename, 'r') as csvfile:
-            reader = csv.reader(csvfile, delimiter=';', quotechar='|')
-            for bounds in reader:
-                filename = download(bounds[0], args.cache, args.refresh)
-                for zoom in args.zoomLevels:
-                    bottomLeft = deg2num(float(bounds[3]), float(bounds[2]), zoom)
-                    topRight = deg2num(float(bounds[5]), float(bounds[4]), zoom)
-                    xDiff = topRight[0]-bottomLeft[0]
-                    yDiff = bottomLeft[1]-topRight[1]
-                    total = xDiff*yDiff
-                    count = 0
-                    cutted = "{}/{}.{}-{}-{}-{}.osm.o5m".format(args.cache, filename, bounds[2], bounds[3], bounds[4], bounds[5])
-                    if not os.path.exists(cutted):
-                        print ("Creating cut out region {}".format(cutted))
-                        call(["osmconvert", "-t={}/osmconvert_tmp-".format(args.cache), "--complete-ways", "--complex-ways", "--drop-version", "-b={},{},{},{}".format(bounds[2], bounds[3], bounds[4], bounds[5]), "-o={}".format(cutted), os.path.join(args.cache, filename)])
-                    for x in range(1+bottomLeft[0], topRight[0]+1):
-                        for y in range(1+topRight[1], bottomLeft[1]+1):
-                            count += 1
-                            tl = num2deg(x-1, y-1, zoom)
-                            br = num2deg(x, y, zoom)
-                            path = "{}/{}/{}".format(args.directory, zoom, x-1)
-                            target = "{}.o5m".format(y-1)
-                            filterTarget = "{}_tmp.o5m".format(y-1)
-                            if not args.overwrite and os.path.exists(os.path.join(path, target)):
-                                print("Skipping existing file {}\r".format(os.path.join(path, target)), end='')
-                            else:
-                                call(["mkdir", "-p", path])
-                                print ("{} level {}: {}/{} {}\r".format(bounds[1], zoom, count, total, os.path.join(path, target)), end='')
-                                filterLevel = "levels/{}.level".format(zoom)
-                                if os.path.exists(filterLevel):
-                                    call(["osmconvert", "-t={}/osmconvert_tmp-".format(args.cache), "--complete-ways", "--complex-ways", "--drop-version", "-b={},{},{},{}".format(tl[1],br[0],br[1],tl[0]), cutted, "-o={}".format(os.path.join(path, filterTarget))])
-                                    call(["osmfilter", "--parameter-file={}".format(filterLevel), os.path.join(path, filterTarget), "-o={}".format(os.path.join(path, target))])
-                                    os.remove(os.path.join(path, filterTarget))
-                                else:
-                                    call(["osmconvert", "-t={}/osmconvert_tmp-".format(args.cache), "--complete-ways", "--complex-ways", "--drop-version", "-b={},{},{},{}".format(tl[1],br[0],br[1],tl[0]), cutted, "-o={}".format(os.path.join(path, target))])
-                                call(["chmod", "644", os.path.join(path, target)])
+    
