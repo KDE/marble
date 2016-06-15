@@ -37,8 +37,8 @@ Item {
          Image {
              id: image
              source: "qrc:///navigation_blue.png"
-             width: 30
-             height: 30
+             width: 100
+             height: 100
              anchors.centerIn: parent
              transform: Rotation {
                  id: rotation
