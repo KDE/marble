@@ -301,6 +301,8 @@ ApplicationWindow {
                     angle: marbleMaps.angle
                     visible: navigationManager.visible
                     radius: navigationManager.screenAccuracy
+                    color: navigationManager.deviated ? "#40ff0000" : "transparent"
+                    border.color: navigationManager.deviated ? "red" : "transparent"
                 }
             }
         }
