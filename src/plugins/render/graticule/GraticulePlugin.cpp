@@ -329,17 +329,21 @@ void GraticulePlugin::renderGrid( GeoPainter *painter, ViewportParams *viewport,
         renderLatitudeLine( painter, 84.0, viewLatLonAltBox );
 
         renderLongitudeLines( painter, viewLatLonAltBox,
-                    6.0, 18.0, 154.0, LineEnd | IgnoreXMargin );
+                    6.0, 0.0,
+                    18.0, 154.0, LineEnd | IgnoreXMargin );
         renderLongitudeLines( painter, viewLatLonAltBox,
-                    6.0, 34.0, 10.0, LineStart | IgnoreXMargin );
+                    6.0, 0.0,
+                    34.0, 10.0, LineStart | IgnoreXMargin );
 
         // Paint longitudes with exceptions
         renderLongitudeLines( painter, viewLatLonAltBox,
-                    6.0, 6.0, 162.0, LineEnd | IgnoreXMargin );
+                    6.0, 0.0,
+                    6.0, 162.0, LineEnd | IgnoreXMargin );
         renderLongitudeLines( painter, viewLatLonAltBox,
-                    6.0, 26.0, 146.0, LineEnd | IgnoreXMargin  );
+                    6.0, 0.0,
+                    26.0, 146.0, LineEnd | IgnoreXMargin  );
 
-        renderLatitudeLines( painter, viewLatLonAltBox, 8.0 /*,
+        renderLatitudeLines( painter, viewLatLonAltBox, 8.0, 0.0 /*,
                              LineStart | IgnoreYMargin */ );
 
         return;
@@ -355,10 +359,12 @@ void GraticulePlugin::renderGrid( GeoPainter *painter, ViewportParams *viewport,
         labelXPosition = LineStart | IgnoreXMargin;
         labelYPosition = LineStart | IgnoreYMargin;
     }
+    qreal boldDegreeStep = 360.0 / m_boldLineMap.lowerBound(viewport->radius()).value();
     renderLongitudeLines( painter, viewLatLonAltBox,
-                          normalDegreeStep, normalDegreeStep, normalDegreeStep,
+                          normalDegreeStep, boldDegreeStep,
+                          normalDegreeStep, normalDegreeStep,
                           labelXPosition );
-    renderLatitudeLines(  painter, viewLatLonAltBox, normalDegreeStep,
+    renderLatitudeLines(  painter, viewLatLonAltBox, normalDegreeStep, boldDegreeStep,
                           labelYPosition );
 
     // Render some non-cut off longitude lines ..
@@ -371,19 +377,20 @@ void GraticulePlugin::renderGrid( GeoPainter *painter, ViewportParams *viewport,
          || painter->mapQuality() == PrintQuality ) {
 
         QPen boldPen = gridCirclePen;
-        boldPen.setWidthF( 1.5 );
+        boldPen.setWidthF( 2.0 );
         painter->setPen( boldPen );
-    
-        // calculate the angular distance between coordinate lines of the bold grid
-        qreal boldDegreeStep = 360.0 / m_boldLineMap.lowerBound(viewport->radius()).value();
-
-        renderLongitudeLines( painter, viewLatLonAltBox,
-                            boldDegreeStep, normalDegreeStep, normalDegreeStep,
-                            NoLabel
-                            );
-        renderLatitudeLines(  painter, viewLatLonAltBox, boldDegreeStep,
-                            NoLabel );
     }
+
+    // calculate the angular distance between coordinate lines of the bold grid
+
+    renderLongitudeLines( painter, viewLatLonAltBox,
+                        boldDegreeStep, 0.0,
+                        normalDegreeStep, normalDegreeStep,
+                        NoLabel
+                        );
+
+    renderLatitudeLines(  painter, viewLatLonAltBox, boldDegreeStep, 0.0,
+                        NoLabel );
 
     QPen tropicsPen = tropicsCirclePen;
     if (   painter->mapQuality() != OutlineQuality
@@ -494,7 +501,7 @@ void GraticulePlugin::renderLongitudeLine( GeoPainter *painter, qreal longitude,
 
 void GraticulePlugin::renderLatitudeLines( GeoPainter *painter,
                                            const GeoDataLatLonAltBox& viewLatLonAltBox,
-                                           qreal step,
+                                           qreal step, qreal skipStep,
                                            LabelPositionFlags labelPositionFlags
                                          )
 {
@@ -532,7 +539,7 @@ void GraticulePlugin::renderLatitudeLines( GeoPainter *painter,
         }
 
         // Paint all latitude coordinate lines except for the equator
-        if ( itStep != 0.0 ) {
+        if ( itStep != 0.0 && fmod(itStep, skipStep) != 0 ) {
             renderLatitudeLine( painter, itStep, viewLatLonAltBox, label, labelPositionFlags );
         }
 
@@ -583,7 +590,8 @@ void GraticulePlugin::renderUtmExceptions( GeoPainter *painter,
 
 void GraticulePlugin::renderLongitudeLines( GeoPainter *painter, 
                                             const GeoDataLatLonAltBox& viewLatLonAltBox, 
-                                            qreal step, qreal northPolarGap, qreal southPolarGap,
+                                            qreal step, qreal skipStep,
+                                            qreal northPolarGap, qreal southPolarGap,
                                             LabelPositionFlags labelPositionFlags )
 {
     if ( step <= 0 ) {
@@ -625,8 +633,10 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
                 renderUtmExceptions( painter, viewLatLonAltBox, itStep, northPolarGap,
                 southPolarGap, label, labelPositionFlags );
             } else if ( itStep != 0.0 && itStep != 180.0 && itStep != -180.0 ) {
-                renderLongitudeLine( painter, itStep, viewLatLonAltBox, northPolarGap,
-                southPolarGap, label, labelPositionFlags );
+                if (fmod(itStep, skipStep) != 0 || skipStep == 0.0) {
+                    renderLongitudeLine( painter, itStep, viewLatLonAltBox, northPolarGap,
+                    southPolarGap, label, labelPositionFlags );
+                }
             }
             itStep += step;
         }
@@ -652,8 +662,10 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
                 renderUtmExceptions( painter, viewLatLonAltBox, itStep, northPolarGap,
                 southPolarGap, label, labelPositionFlags );
             } else if ( itStep != 0.0 && itStep != 180.0 && itStep != -180.0 ) {
-                renderLongitudeLine( painter, itStep, viewLatLonAltBox, northPolarGap,
-                southPolarGap, label, labelPositionFlags );
+                if (fmod((itStep), skipStep) != 0 || skipStep == 0.0) {
+                    renderLongitudeLine( painter, itStep, viewLatLonAltBox, northPolarGap,
+                    southPolarGap, label, labelPositionFlags );
+                }
             }
             itStep += step;
         }
@@ -677,8 +689,10 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
                 renderUtmExceptions( painter, viewLatLonAltBox, itStep, northPolarGap,
                 southPolarGap, label, labelPositionFlags );
             } else if ( itStep != 0.0 && itStep != 180.0 && itStep != -180.0 ) {
-                renderLongitudeLine( painter, itStep, viewLatLonAltBox, northPolarGap,
-                southPolarGap, label, labelPositionFlags );
+                if (fmod((itStep+180), skipStep) != 0 || skipStep == 0.0) {
+                    renderLongitudeLine( painter, itStep, viewLatLonAltBox, northPolarGap,
+                    southPolarGap, label, labelPositionFlags );
+                }
             }
             itStep += step;
         }
