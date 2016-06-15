@@ -240,8 +240,8 @@ void GeoDataLatLonBox::scale(qreal verticalFactor, qreal horizontalFactor) const
     GeoDataCoordinates const middle = center();
     qreal const deltaY = 0.5 * height() * verticalFactor;
     qreal const deltaX = 0.5 * width() * horizontalFactor;
-    d->m_north = GeoDataCoordinates::normalizeLat(middle.latitude() + deltaY);
-    d->m_south = GeoDataCoordinates::normalizeLat(middle.latitude() - deltaY);
+    d->m_north = qMin((middle.latitude() + deltaY), M_PI/2);
+    d->m_south = qMax((middle.latitude() - deltaY), -M_PI/2);
     if (deltaX > 180 * DEG2RAD) {
         d->m_east = M_PI;
         d->m_west = -M_PI;
