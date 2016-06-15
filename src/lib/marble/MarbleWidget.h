@@ -140,6 +140,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     Q_PROPERTY(bool showRivers   READ showRivers      WRITE setShowRivers)
     Q_PROPERTY(bool showLakes    READ showLakes       WRITE setShowLakes)
 
+    Q_PROPERTY(ViewContext viewContext READ viewContext WRITE setViewContext NOTIFY viewContextChanged)
+
     Q_PROPERTY( RenderStatus renderStatus READ renderStatus NOTIFY renderStatusChanged )
 
     Q_PROPERTY(quint64 volatileTileCacheLimit    READ volatileTileCacheLimit    WRITE setVolatileTileCacheLimit)
@@ -1026,6 +1028,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void distanceChanged( const QString& distanceString );
 
     void tileLevelChanged( int level );
+
+    void viewContextChanged(ViewContext newViewContext);
 
     /**
      * @brief Signal that the theme has changed

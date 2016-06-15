@@ -210,6 +210,8 @@ void MarbleWidgetPrivate::construct()
     // react to some signals of m_map
     m_widget->connect( &m_map,   SIGNAL(themeChanged(QString)),
                        m_widget, SLOT(updateMapTheme()) );
+    m_widget->connect( &m_map,   SIGNAL(viewContextChanged(ViewContext)),
+                       m_widget, SIGNAL(viewContextChanged(ViewContext)) );
     m_widget->connect( &m_map,   SIGNAL(repaintNeeded(QRegion)),
                        m_widget, SLOT(update()) );
     m_widget->connect( &m_map,   SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)),
