@@ -12,11 +12,14 @@
 #include "GeoWriter.h"
 
 #include <QCoreApplication>
+#include <QCommandLineParser>
 #include <QDebug>
 #include <QFileInfo>
 #include <QTime>
 
 #include <QMessageLogContext>
+
+#include "LineStringProcessor.h"
 
 using namespace Marble;
 
@@ -37,6 +40,10 @@ void debugOutput( QtMsgType type, const QMessageLogContext &context, const QStri
         }
         break;
     case QtInfoMsg:
+        if ( debugLevel < Mute ) {
+            qDebug() << "Debug: " << context.file << ":" << context.line << " " << msg;
+        }
+        break;
     case QtWarningMsg:
         if ( debugLevel < Mute ) {
             qDebug() << "Info: " << context.file << ":" << context.line << " " << msg;
@@ -57,67 +64,100 @@ void debugOutput( QtMsgType type, const QMessageLogContext &context, const QStri
 void usage()
 {
     qDebug() << "Usage: osm-simplify [options] input.osm output.osm";
-    qDebug() << "\t-q quiet";
-    qDebug() << "\t-v debug output";
+    qDebug() << "\t--no-streets-smaller-than %f - eliminates streets which have realsize smaller than %f";
 }
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication a(argc, argv);
+    QCoreApplication app(argc, argv);
 
-    if ( argc < 3 ) {
-        usage();
-        return 1;
+    QCoreApplication::setApplicationName("osm-simplify");
+    QCoreApplication::setApplicationVersion("0.1");
+
+    QCommandLineParser parser;
+    parser.setApplicationDescription("A tool for Marble, which is used to reduce the details of osm maps.");
+    parser.addHelpOption();
+    parser.addVersionOption();
+    parser.addPositionalArgument("input.osm", "The input .osm file.");
+    parser.addPositionalArgument("output.osm", "The output .osm file.");
+
+    parser.addOptions({
+                          {
+                              {"d","debug"},
+                              QCoreApplication::translate("main", "Debug output in the terminal.")
+                          },
+
+                          {
+                              {"m","mute"},
+                              QCoreApplication::translate("main", "Don't output to terminal.")
+                          },
+
+                          {
+                              {"ns", "no-streets-smaller-than"},
+                              QCoreApplication::translate("main", "eliminates streets which have realsize smaller than <real number>"),
+                              QCoreApplication::translate("main", "real number")
+                          },
+                      });
+
+    // Process the actual command line arguments given by the user
+    parser.process(app);
+
+    const QStringList args = parser.positionalArguments();
+    // input is args.at(0), output is args.at(1)
+
+    QString inputFileName = args.at(0);
+    QString outputFileName = args.at(1);
+
+    bool debug = parser.isSet("debug");
+    bool mute = parser.isSet("mute");
+    QString smallStreetLimit = parser.value("no-streets-smaller-than"); // just an example
+
+    if(debug) {
+        debugLevel = Debug;
+        qInstallMessageHandler( debugOutput );
+    }
+    if(mute) {
+        debugLevel = Mute;
+        qInstallMessageHandler( debugOutput );
     }
 
-    QString inputSrc = argv[argc-2];
-    QString outputSrc = argv[argc-1];
 
-    for ( int i=1; i< argc-2; ++i ) {
-        QString arg( argv[i] );
-        if ( arg == "-v" ) {
-            debugLevel = Debug;
-        } else if ( arg == "-q" ) {
-            debugLevel = Mute;
-        } else {
-            usage();
-            return 1;
-        }
-    }
-
-    qInstallMessageHandler( debugOutput );
-
-    QFileInfo file( inputSrc );
+    QFileInfo file( inputFileName );
     if ( !file.exists() ) {
         qDebug() << "File " << file.absoluteFilePath() << " does not exist. Exiting.";
         return 2;
     }
 
+    GeoDataDocument* osmMap;
     if ( file.suffix() == "osm") {
 
         QString error;
-        Marble::GeoDataDocument* osmMap = OsmParser::parse(inputSrc, error);
+        osmMap = OsmParser::parse(inputFileName, error);
 
         if(!error.isEmpty()) {
             qDebug() << error;
             return 3;
         }
-
-        Marble::GeoWriter writer;
-        writer.setDocumentType("0.6");
-
-        QFile outputfile( outputSrc );
-        outputfile.open( QIODevice::WriteOnly );
-        if ( !writer.write( &outputfile, osmMap ) ) {
-            qDebug() << "Could not write the file " << outputSrc;
-            return 4;
-        }
-
-        qDebug() << "Done.";
     } else {
-        qDebug() << "Unsupported file format: " << outputSrc;
+        qDebug() << "Unsupported file format: " << inputFileName;
         return 5;
     }
+
+    LineStringProcessor processor(osmMap);
+
+    processor.process();
+
+    GeoWriter writer;
+    writer.setDocumentType("0.6");
+
+    QFile outputFile( outputFileName );
+    outputFile.open( QIODevice::WriteOnly );
+    if ( !writer.write( &outputFile, osmMap ) ) {
+        qDebug() << "Could not write the file " << outputFileName;
+        return 4;
+    }
+
+    qInfo() << "Done.";
 
     return 0;
 }

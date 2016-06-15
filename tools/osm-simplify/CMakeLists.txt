@@ -1,6 +1,10 @@
 SET (TARGET osm-simplify)
 PROJECT (${TARGET})
 
+find_package(Qt5Core REQUIRED)
+find_package(Qt5Widgets)
+find_package(Qt5Declarative)
+
 include_directories(
  ${CMAKE_CURRENT_SOURCE_DIR}
  ${CMAKE_CURRENT_BINARY_DIR}
@@ -16,6 +20,9 @@ include_directories(
 
 set( ${TARGET}_SRC 
 main.cpp
+BaseFilter.cpp
+  PlacemarkFilter.cpp
+    LineStringProcessor.cpp
 ../../src/plugins/runner/osm/OsmParser.cpp
 ../../src/plugins/runner/osm/o5mreader.cpp
 ../../src/plugins/runner/osm/OsmElementDictionary.cpp
@@ -37,6 +44,6 @@ main.cpp
 )
 add_definitions( -DMAKE_MARBLE_LIB )
 add_executable( ${TARGET} ${${TARGET}_SRC} )
-
+ 
 target_link_libraries( ${TARGET} )
 target_link_libraries( ${TARGET} Qt5::Core marblewidget-qt5 )
