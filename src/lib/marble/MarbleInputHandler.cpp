@@ -285,7 +285,6 @@ bool MarbleDefaultInputHandler::handleDoubleClick(QMouseEvent *event)
     {
         d->m_lmbTimer.stop();
         MarbleInputHandler::d->m_marblePresenter->moveTo(event->pos(), 0.67);
-        MarbleInputHandler::d->m_mouseWheelTimer->start(400);
     }
     return acceptMouse();
 }
