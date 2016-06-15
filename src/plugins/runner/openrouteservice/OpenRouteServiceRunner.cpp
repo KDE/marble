@@ -322,7 +322,7 @@ GeoDataDocument* OpenRouteServiceRunner::parse( const QByteArray &content ) cons
 
                     GeoDataPlacemark* instruction = new GeoDataPlacemark;
 
-                    QString const text = textNodes.item( 0 ).toElement().text();
+                    QString const text = textNodes.item( 0 ).toElement().text().remove(QRegExp("<[^>]*>"));
                     GeoDataExtendedData extendedData;
                     GeoDataData turnTypeData;
                     turnTypeData.setName( "turnType" );
