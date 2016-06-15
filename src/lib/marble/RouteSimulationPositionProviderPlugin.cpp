@@ -107,7 +107,7 @@ RouteSimulationPositionProviderPlugin::RouteSimulationPositionProviderPlugin( Ma
     m_direction( 0.0 ),
     m_directionWithNoise(0.0)
 {
-    // nothing to do
+    connect(&m_updateTimer, SIGNAL(timeout()), this, SLOT(update()));
 }
 
 RouteSimulationPositionProviderPlugin::~RouteSimulationPositionProviderPlugin()
@@ -116,13 +116,8 @@ RouteSimulationPositionProviderPlugin::~RouteSimulationPositionProviderPlugin()
 
 void RouteSimulationPositionProviderPlugin::initialize()
 {
-    m_currentIndex = -1;
-    m_lineString = m_lineStringInterpolated = m_marbleModel->routingManager()->routingModel()->route().path();
-    m_speed = 0;   //initialize speed to be around 25 m/s;
-    m_status = m_lineString.isEmpty() ? PositionProviderStatusUnavailable : PositionProviderStatusAcquiring;
-    if ( !m_lineString.isEmpty() ) {
-        QTimer::singleShot( 1000.0 / c_frequency, this, SLOT(update()) );
-    }
+    updateRoute();
+    connect(m_marbleModel->routingManager()->routingModel(), SIGNAL(currentRouteChanged()), this, SLOT(updateRoute()));
 }
 
 bool RouteSimulationPositionProviderPlugin::isInitialized() const
@@ -143,6 +138,18 @@ qreal RouteSimulationPositionProviderPlugin::direction() const
 QDateTime RouteSimulationPositionProviderPlugin::timestamp() const
 {
     return m_currentDateTime;
+}
+
+void RouteSimulationPositionProviderPlugin::updateRoute(){
+    m_currentIndex = -1;
+    m_lineString = m_lineStringInterpolated = m_marbleModel->routingManager()->routingModel()->route().path();
+    m_speed = 0;   //initialize speed to be around 25 m/s;
+    m_status = m_lineString.isEmpty() ? PositionProviderStatusUnavailable : PositionProviderStatusAcquiring;
+    if ( !m_lineString.isEmpty() ) {
+        m_updateTimer.start(1000.0 / c_frequency);
+    } else {
+        m_updateTimer.stop();
+    }
 }
 
 void RouteSimulationPositionProviderPlugin::update()
@@ -251,8 +258,6 @@ void RouteSimulationPositionProviderPlugin::update()
             emit statusChanged( PositionProviderStatusUnavailable );
         }
     }
-
-    QTimer::singleShot( 1000.0 / c_frequency, this, SLOT(update()) );
 }
 
 GeoDataCoordinates RouteSimulationPositionProviderPlugin::addNoise(const Marble::GeoDataCoordinates &position, const Marble::GeoDataAccuracy &accuracy ) const

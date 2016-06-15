@@ -18,6 +18,7 @@
 #include "GeoDataLineString.h"
 
 #include <QDateTime>
+#include <QTimer>
 
 namespace Marble
 {
@@ -59,6 +60,7 @@ public:
 private Q_SLOTS:
     /** Regular (each second) position and status update */
     void update();
+    void updateRoute();
 
 private:
     GeoDataCoordinates addNoise(const Marble::GeoDataCoordinates &,const Marble::GeoDataAccuracy &) const;
@@ -75,6 +77,7 @@ private:
     qreal m_speed;
     qreal m_direction;
     qreal m_directionWithNoise;
+    QTimer m_updateTimer;
 };
 
 }
