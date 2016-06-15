@@ -295,7 +295,7 @@ void GeoDataContainer::remove(int index, int count)
     p()->m_vector.remove( index, count );
 }
 
-int	GeoDataContainer::removeAll(GeoDataFeature* const &feature)
+int	GeoDataContainer::removeAll(GeoDataFeature *feature)
 {
     detach();
     return p()->m_vector.removeAll(feature);
