@@ -116,6 +116,18 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
 
     void remove( int index );
 
+    void remove(int index, int count);
+
+    int	removeAll(GeoDataFeature* const &feature);
+
+    void removeAt(int index);
+
+    void removeFirst();
+
+    void removeLast();
+
+    bool removeOne( GeoDataFeature *feature );
+
     /**
     * @brief size of the container
     */

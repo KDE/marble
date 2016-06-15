@@ -289,6 +289,42 @@ void GeoDataContainer::remove( int index )
     p()->m_vector.remove( index );
 }
 
+void GeoDataContainer::remove(int index, int count)
+{
+    detach();
+    p()->m_vector.remove( index, count );
+}
+
+int	GeoDataContainer::removeAll(GeoDataFeature* const &feature)
+{
+    detach();
+    return p()->m_vector.removeAll(feature);
+}
+
+void GeoDataContainer::removeAt(int index)
+{
+    detach();
+    p()->m_vector.removeAt( index );
+}
+
+void GeoDataContainer::removeFirst()
+{
+    detach();
+    p()->m_vector.removeFirst();
+}
+
+void GeoDataContainer::removeLast()
+{
+    detach();
+    p()->m_vector.removeLast();
+}
+
+bool GeoDataContainer::removeOne( GeoDataFeature *feature )
+{
+    detach();
+    return p()->m_vector.removeOne( feature );
+}
+
 int GeoDataContainer::size() const
 {
     return p()->m_vector.size();
