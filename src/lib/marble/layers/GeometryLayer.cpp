@@ -260,12 +260,12 @@ void GeometryLayerPrivate::initializeDefaultValues()
     Q_ASSERT(QSet<QString>::fromList(s_paintLayerOrder).size() == s_paintLayerOrder.size());
 
     s_defaultMinZoomLevels[GeoDataFeature::Default]             = 1;
-    s_defaultMinZoomLevels[GeoDataFeature::NaturalReef]         = 5;
-    s_defaultMinZoomLevels[GeoDataFeature::NaturalWater]        = 8;
+    s_defaultMinZoomLevels[GeoDataFeature::NaturalReef]         = 3;
+    s_defaultMinZoomLevels[GeoDataFeature::NaturalWater]        = 3;
     s_defaultMinZoomLevels[GeoDataFeature::NaturalWood]         = 8;
     s_defaultMinZoomLevels[GeoDataFeature::NaturalBeach]        = 10;
     s_defaultMinZoomLevels[GeoDataFeature::NaturalWetland]      = 10;
-    s_defaultMinZoomLevels[GeoDataFeature::NaturalGlacier]      = 8;
+    s_defaultMinZoomLevels[GeoDataFeature::NaturalGlacier]      = 3;
     s_defaultMinZoomLevels[GeoDataFeature::NaturalScrub]        = 10;
     s_defaultMinZoomLevels[GeoDataFeature::NaturalCliff]        = 15;
     s_defaultMinZoomLevels[GeoDataFeature::NaturalPeak]         = 11;
