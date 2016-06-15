@@ -92,15 +92,6 @@ enum MapQuality {
 }; 
 
 /**
- * @brief This enum is used to choose which graphics system Qt is using.
- */
-enum GraphicsSystem {
-    NativeGraphics,     ///< Uses the native graphics system of the OS
-    RasterGraphics,     ///< Renders everything onto a pixmap
-    OpenGLGraphics      ///< Uses OpenGL
-};
-
-/**
  * @brief This enum is used to specify the proxy that is used.
  */
 enum ProxyType {

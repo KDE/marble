@@ -44,10 +44,6 @@ class MARBLE_EXPORT QtMarbleConfigDialog : public QDialog
     Marble::MapQuality animationQuality() const;
     QFont mapFont() const;
 
-    // View
-    Marble::GraphicsSystem graphicsSystem() const;
-
-
     // Navigation Settings
     int onStartup() const;
     bool animateTargetVoyage() const;

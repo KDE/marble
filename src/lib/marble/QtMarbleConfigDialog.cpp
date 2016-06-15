@@ -24,7 +24,6 @@
 #include <QNetworkProxy>
 #include <QApplication>
 #include <QDialogButtonBox>
-#include <QMessageBox>
 #include <QStandardItem>
 #include <QTabWidget>
 #include <QVBoxLayout>
@@ -64,9 +63,7 @@ class QtMarbleConfigDialogPrivate
           m_marbleWidget( marbleWidget ),
           m_syncManager( cloudSyncManager ? cloudSyncManager->bookmarkSyncManager() : 0 ),
           m_cloudSyncManager(cloudSyncManager),
-          m_pluginModel(),
-          m_initialGraphicsSystem(),
-          m_previousGraphicsSystem()
+          m_pluginModel()
     {
     }
 
@@ -88,10 +85,6 @@ class QtMarbleConfigDialogPrivate
     RenderPluginModel m_pluginModel;
 
     QHash< int, int > m_timezone;            
-
-    // Information about the graphics system
-    Marble::GraphicsSystem m_initialGraphicsSystem;
-    Marble::GraphicsSystem m_previousGraphicsSystem;
 };
 
 QtMarbleConfigDialog::QtMarbleConfigDialog(MarbleWidget *marbleWidget, CloudSyncManager *cloudSyncManager,
@@ -122,20 +115,6 @@ QtMarbleConfigDialog::QtMarbleConfigDialog(MarbleWidget *marbleWidget, CloudSync
     d->ui_viewSettings.setupUi( w_viewSettings );
     tabWidget->addTab( w_viewSettings, tr( "View" ) );
 
-    // It's experimental -- so we remove it for now.
-    // FIXME: Delete the following  line once OpenGL support is officially supported.
-    d->ui_viewSettings.kcfg_graphicsSystem->removeItem( Marble::OpenGLGraphics );
-
-    QString nativeString ( tr("Native") );
-
-    #ifdef Q_WS_X11
-    nativeString = tr( "Native (X11)" );
-    #endif
-    #ifdef Q_OS_MAC
-    nativeString = tr( "Native (Mac OS X Core Graphics)" );
-    #endif
-
-    d->ui_viewSettings.kcfg_graphicsSystem->setItemText( Marble::NativeGraphics, nativeString );
     d->ui_viewSettings.kcfg_labelLocalization->hide();
     d->ui_viewSettings.label_labelLocalization->hide();
 
@@ -309,9 +288,6 @@ void QtMarbleConfigDialog::updateLastSync()
 
 void QtMarbleConfigDialog::readSettings()
 {
-    d->m_initialGraphicsSystem = graphicsSystem();
-    d->m_previousGraphicsSystem = d->m_initialGraphicsSystem;
-
     // Sync settings to make sure that we read the current settings.
     syncSettings();
     
@@ -322,7 +298,6 @@ void QtMarbleConfigDialog::readSettings()
     d->ui_viewSettings.kcfg_animationQuality->setCurrentIndex( animationQuality() );
     d->ui_viewSettings.kcfg_labelLocalization->setCurrentIndex( Marble::Native );
     d->ui_viewSettings.kcfg_mapFont->setCurrentFont( mapFont() );
-    d->ui_viewSettings.kcfg_graphicsSystem->setCurrentIndex( graphicsSystem() );
     
     // Navigation
     d->ui_navigationSettings.kcfg_dragLocation->setCurrentIndex( Marble::KeepAxisVertically );
@@ -410,29 +385,12 @@ void QtMarbleConfigDialog::writeSettings()
 {
     syncSettings();
 
-    // Determining the graphicsSystemString
-    QString graphicsSystemString;
-    switch ( d->ui_viewSettings.kcfg_graphicsSystem->currentIndex() )
-    {
-        case Marble::RasterGraphics :
-            graphicsSystemString = "raster";
-            break;
-        case Marble::OpenGLGraphics :
-            graphicsSystemString = "opengl";
-            break;
-        default:
-        case Marble::NativeGraphics :
-            graphicsSystemString = "native";
-            break;
-    }
-    
     d->m_settings.beginGroup( "View" );
     d->m_settings.setValue( "distanceUnit", d->ui_viewSettings.kcfg_distanceUnit->currentIndex() );
     d->m_settings.setValue( "angleUnit", d->ui_viewSettings.kcfg_angleUnit->currentIndex() );
     d->m_settings.setValue( "stillQuality", d->ui_viewSettings.kcfg_stillQuality->currentIndex() );
     d->m_settings.setValue( "animationQuality", d->ui_viewSettings.kcfg_animationQuality->currentIndex() );
     d->m_settings.setValue( "mapFont", d->ui_viewSettings.kcfg_mapFont->currentFont() );
-    d->m_settings.setValue( "graphicsSystem", graphicsSystemString );
     d->m_settings.endGroup();
     
     d->m_settings.beginGroup( "Navigation" );
@@ -490,15 +448,6 @@ void QtMarbleConfigDialog::writeSettings()
     d->m_marbleWidget->writePluginSettings( d->m_settings );
 
     emit settingsChanged();
-
-    if (    d->m_initialGraphicsSystem != graphicsSystem()
-         && d->m_previousGraphicsSystem != graphicsSystem() ) {
-        QMessageBox::information (this, tr("Graphics System Change"),
-                                tr("You have decided to run Marble with a different graphics system.\n"
-                                   "For this change to become effective, Marble has to be restarted.\n"
-                                   "Please close the application and start Marble again.") );
-    }    
-    d->m_previousGraphicsSystem = graphicsSystem();
 }
 
 MarbleLocale::MeasurementSystem QtMarbleConfigDialog::measurementSystem() const
@@ -538,17 +487,6 @@ Marble::MapQuality QtMarbleConfigDialog::animationQuality() const
 QFont QtMarbleConfigDialog::mapFont() const
 {
     return d->m_settings.value( "View/mapFont", QApplication::font() ).value<QFont>();
-}
-
-Marble::GraphicsSystem QtMarbleConfigDialog::graphicsSystem() const
-{
-    QString graphicsSystemString = d->m_settings.value( "View/graphicsSystem", "raster" ).toString();
-
-    if ( graphicsSystemString == "raster" ) return Marble::RasterGraphics;
-    if ( graphicsSystemString == "opengl" ) return Marble::OpenGLGraphics;
-
-    // default case:  graphicsSystemString == "raster"
-    return Marble::NativeGraphics;
 }
 
 int QtMarbleConfigDialog::onStartup() const

@@ -33,7 +33,6 @@ public:
     Marble::MapQuality      animationQuality () const;
     int                     labelLocalization () const;
     QFont                   mapFont () const;
-    Marble::GraphicsSystem  graphicsSystem () const;
     int                     dragLocation () const;
     int                     onStartup () const;
     bool                    animateTargetVoyage () const;

@@ -261,10 +261,6 @@ class MarblePart: public KParts::ReadOnlyPart
 
     KParts::StatusBarExtension *m_statusBarExtension;
 
-    // Information about the graphics system
-    GraphicsSystem m_initialGraphicsSystem;
-    GraphicsSystem m_previousGraphicsSystem;
-
     QHash< int, int > m_timezone;
     QMap<int, QString> m_externalEditorMapping;
     Ui_MarbleCloudSyncSettingsWidget m_ui_cloudSyncSettings;

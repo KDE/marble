@@ -876,15 +876,6 @@ If a GPS device is connected with your computer, &marble; displays longitude and
 </varlistentry>
 
 <varlistentry>
-<term><guilabel>Graphics system</guilabel></term>
-<listitem>
-<para>Specifies the graphics system - <guilabel>Native X11</guilabel> or <guilabel>Raster (Software rendering)</guilabel> - 
-that &Qt; uses to draw the map. Changing this setting might be a good idea if there are performance issues with 
-the system's graphics drivers. </para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
 <term><guilabel>Place names</guilabel></term>
 <listitem>
 <para>Places often have different names in different languages. The label on the map can show the name in the user's language. Alternatively it can display the name in the official language and glyphs of that place.</para>

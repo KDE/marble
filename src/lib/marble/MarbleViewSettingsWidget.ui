@@ -241,39 +241,6 @@ p, li { white-space: pre-wrap; }
         </item>
        </widget>
       </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="label_graphicsSystem">
-        <property name="text">
-         <string>G&amp;raphics system:</string>
-        </property>
-        <property name="buddy">
-         <cstring>kcfg_graphicsSystem</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
-       <widget class="QComboBox" name="kcfg_graphicsSystem">
-        <property name="toolTip">
-         <string>Specifies the graphics system that Qt uses to draw the map.
-Changing this setting might be a good idea if there are performance issues with the system's graphics drivers.</string>
-        </property>
-        <item>
-         <property name="text">
-          <string>Native</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Raster (Software rendering)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>OpenGL</string>
-         </property>
-        </item>
-       </widget>
-      </item>
       <item row="2" column="0">
        <spacer name="verticalSpacer">
         <property name="orientation">

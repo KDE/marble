@@ -466,9 +466,6 @@ void MarblePart::readSettings()
     m_lockToSubSolarPoint->setChecked( MarbleSettings::lockToSubSolarPoint() );
 
     // View
-    m_initialGraphicsSystem = (GraphicsSystem) MarbleSettings::graphicsSystem();
-    m_previousGraphicsSystem = m_initialGraphicsSystem;
-
     m_lastFileOpenPath = MarbleSettings::lastFileOpenDir();
 
     // Tracking settings
@@ -628,10 +625,6 @@ void MarblePart::writeSettings()
                                          mapQuality( Animation ) );
 
     MarbleSettings::setShowBookmarks( m_controlView->marbleModel()->bookmarkManager()->showBookmarks() );
-
-    // FIXME: Hopefully Qt will have a getter for this one in the future ...
-    GraphicsSystem graphicsSystem = (GraphicsSystem) MarbleSettings::graphicsSystem();
-    MarbleSettings::setGraphicsSystem( graphicsSystem );
 
     MarbleSettings::setLastFileOpenDir( m_lastFileOpenPath );
 
@@ -1414,20 +1407,6 @@ void MarblePart::editSettings()
     ui_viewSettings.setupUi( w_viewSettings );
     m_configDialog->addPage( w_viewSettings, i18n( "View" ), "configure" );
 
-    // It's experimental -- so we remove it for now.
-    // FIXME: Delete the following  line once OpenGL support is officially supported.
-    ui_viewSettings.kcfg_graphicsSystem->removeItem( OpenGLGraphics );
-
-    QString nativeString ( i18n("Native") );
-
-    #ifdef Q_WS_X11
-    nativeString = i18n( "Native (X11)" );
-    #endif
-    #ifdef Q_OS_MAC
-    nativeString = i18n( "Native (Mac OS X Core Graphics)" );
-    #endif
-
-    ui_viewSettings.kcfg_graphicsSystem->setItemText( NativeGraphics, nativeString );
     ui_viewSettings.label_labelLocalization->hide();
     ui_viewSettings.kcfg_labelLocalization->hide();
 
@@ -1554,8 +1533,6 @@ void MarblePart::updateSettings()
         setMapQualityForViewContext( (MapQuality) MarbleSettings::animationQuality(),
                                      Animation );
 
-    GraphicsSystem graphicsSystem = (GraphicsSystem) MarbleSettings::graphicsSystem();
-
     m_controlView->marbleWidget()->
         setDefaultAngleUnit( (AngleUnit) MarbleSettings::angleUnit() );
     MarbleGlobal::getInstance()->locale()->
@@ -1601,17 +1578,6 @@ void MarblePart::updateSettings()
     QNetworkProxy::setApplicationProxy(proxy);
 
     m_controlView->marbleWidget()->update();
-
-    // Show message box
-    if (    m_initialGraphicsSystem != graphicsSystem
-         && m_previousGraphicsSystem != graphicsSystem ) {
-        KMessageBox::information (m_controlView->marbleWidget(),
-                                i18n("You have decided to run Marble with a different graphics system.\n"
-                                   "For this change to become effective, Marble has to be restarted.\n"
-                                   "Please close the application and start Marble again."),
-                                i18n("Graphics System Change") );
-    }
-    m_previousGraphicsSystem = graphicsSystem;
 
     // Time
     if( MarbleSettings::systemTimezone() == true  )
