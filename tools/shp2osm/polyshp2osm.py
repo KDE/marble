@@ -142,7 +142,7 @@ def city_map(data):
         country = data['adm0name']
     temp =  [('is_in:country', country), ('capital', capital), ('population', population), ('place', 'city') ]
     return temp
-
+'''
 def airport_map(data):
     global id_counter, file_counter, counter, file_name, open_file, namespace
     wid = id_counter - 1
@@ -152,7 +152,7 @@ def airport_map(data):
         print(" <nd ref='-%s' />" % ids[0], end = '\n', file = open_file) 
     write_tags(f)
     print("</way>" , end = '\n', file = open_file) 
-
+'''
 def mountain_map(data):
     elevation = 0
     if 'elevation' in data:
@@ -277,8 +277,8 @@ def feature_class(data):
     'Elusive frontier': [('boundary', 'administrative'), ('admin_level', '2')],
     'Country': [('marble_land', 'landmass')],
     '1st Order Admin Lines': [('boundary', 'administrative'), ('admin_level', '4')],
-    'Claim': [('boundary', 'administrative'), ('admin_level', '4')]
-    #aeroway" v="aerodrome"
+    'Claim': [('boundary', 'administrative'), ('admin_level', '4')],
+    'Airport': [('aeroway', 'aerodrome')]
     }
     if 'featurecla' in data:
         if data['featurecla'] in feat_dict:
@@ -429,10 +429,17 @@ def clean_attr(val):
 def add_point(f):
     """Adds a point geometry to the OSM file"""
     global id_counter
+    airport_metadata = None
     pt = f.GetGeometryRef()
+    if f['featurecla'] == 'Airport':
+        airport_metadata = f
+        f = None
     node_id = add_node(id_counter, pt.GetX(0), pt.GetY(0), 'POINT', f)
     if node_id == id_counter:
         id_counter += 1
+    if airport_metadata != None:
+        add_way_around_node(airport_metadata)
+    
     
 
 def add_relation_multipolygon(geom, f):
@@ -574,20 +581,12 @@ def write_node(node):
 
 def add_way_around_node(f):
     """ Writes a way around a single point"""
-    global id_counter, open_file
+    global id_counter, ways
     nid = id_counter - 1
-    print("<way id='-%s'>" % id_counter, end = '\n', file = open_file)
+    ways.append((id_counter, [nid], f))
     id_counter += 1
-    print(" <nd ref='-%s' />" % nid, end = '\n', file = open_file)
-    tag_dict = {}
-    tag_dict['name'] = f['name']
-    if f['featurecla'] == 'Airport':
-        tag_dict['aeroway'] = 'aerodrome'
-    for key in tag_dict:
-        print(" <tag k='%s' v='%s' />" % (key, clean_attr(tag_dict[key])), end = '\n', file = open_file)
-    print("</way >", end = '\n', file = open_file)
-
     
+
 open_file = None
 
 file_name = None 
@@ -697,8 +696,6 @@ def run(filenames, slice_count=1, obj_count=5000000, output_location=None, no_so
                             continue
                 elif geom_name == 'POINT':
                     add_point(f)
-                    if f['featurecla'] == 'Airport':
-                        add_way_around_node(f)
                 else:
                     ids = []
                     non_geom += 1       
