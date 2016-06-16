@@ -168,6 +168,8 @@ namespace Marble
             }
         }
 
+        d->m_model.positionTracking()->setTrackVisible(false);
+
         connect(&d->m_map, SIGNAL(repaintNeeded(QRegion)), this, SLOT(update()));
         connect(this, SIGNAL(widthChanged()), this, SLOT(resizeMap()));
         connect(this, SIGNAL(heightChanged()), this, SLOT(resizeMap()));
