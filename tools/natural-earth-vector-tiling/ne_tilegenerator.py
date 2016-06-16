@@ -111,17 +111,16 @@ if __name__ == "__main__":
 	exception_names = ['ne_50m_admin_1_states_provinces_lines']
 
 	level_info = parse_file(args.file, args.in_dir)
-	print("Level Info:", level_info)
 	for level in level_info:
 		abs_file_paths = []
 		for filename in level_info[level]:
 			print('Checking - {}'.format(filename))
+			check_existence(filename, args.in_dir)
 			if filename not in exception_names:
-				check_existence(filename, args.in_dir)
-				path = os.path.join(args.in_dir, filename) + '/' + filename + '.shp'
-				abs_file_paths.append(path)
+				path = os.path.join(args.in_dir, filename) + '/' + filename + '.shp'				
 			else:
-				print('Download this data manually - {}'.format(filename))
+				path = os.path.join(args.in_dir, filename) + '/' + filename + '_shp.shp'
+			abs_file_paths.append(path)
 		print('Level has following SHP datasets: ', abs_file_paths)
 		polyshp2osm.run(abs_file_paths, 1, 5000000, 'tiny_planet_{}'.format(level))
 		print('Tiny planetosm for Level = {} complete.'.format(level))
@@ -131,9 +130,3 @@ if __name__ == "__main__":
 		vectortilecreator.run(['bound_info_{}'.format(level)], args.cache, args.refresh, args.out_dir, args.overwrite, [level])
 		
 		
-
-
-
-
-
-
