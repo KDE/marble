@@ -16,10 +16,10 @@
         <file>../../../data/bitmaps/turn-continue.png</file>
         <file>../../../data/bitmaps/turn-left.png</file>
         <file>../../../data/bitmaps/turn-right.png</file>
-        <file>../../../data/bitmaps/turn-roundabout-far.png</file>
-        <file>../../../data/bitmaps/turn-roundabout-first.png</file>
-        <file>../../../data/bitmaps/turn-roundabout-second.png</file>
-        <file>../../../data/bitmaps/turn-roundabout-third.png</file>
+        <file>../../../data/bitmaps/turn-roundabout-ccw-far.png</file>
+        <file>../../../data/bitmaps/turn-roundabout-ccw-first.png</file>
+        <file>../../../data/bitmaps/turn-roundabout-ccw-second.png</file>
+        <file>../../../data/bitmaps/turn-roundabout-ccw-third.png</file>
         <file>../../../data/bitmaps/turn-sharp-left.png</file>
         <file>../../../data/bitmaps/turn-sharp-right.png</file>
         <file>../../../data/bitmaps/turn-slight-left.png</file>

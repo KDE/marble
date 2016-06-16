@@ -31,10 +31,10 @@ Maneuver::Maneuver() :
     m_turnTypePixmaps[SharpLeft] = ":/data/bitmaps/turn-sharp-left.png";
     m_turnTypePixmaps[Left] = ":/data/bitmaps/turn-left.png";
     m_turnTypePixmaps[SlightLeft] = ":/data/bitmaps/turn-slight-left.png";
-    m_turnTypePixmaps[RoundaboutFirstExit] = ":/data/bitmaps/turn-roundabout-first.png";
-    m_turnTypePixmaps[RoundaboutSecondExit] = ":/data/bitmaps/turn-roundabout-second.png";
-    m_turnTypePixmaps[RoundaboutThirdExit] = ":/data/bitmaps/turn-roundabout-third.png";
-    m_turnTypePixmaps[RoundaboutExit] = ":/data/bitmaps/turn-roundabout-far.png";
+    m_turnTypePixmaps[RoundaboutFirstExit] = ":/data/bitmaps/turn-roundabout-ccw-first.png";
+    m_turnTypePixmaps[RoundaboutSecondExit] = ":/data/bitmaps/turn-roundabout-ccw-second.png";
+    m_turnTypePixmaps[RoundaboutThirdExit] = ":/data/bitmaps/turn-roundabout-ccw-third.png";
+    m_turnTypePixmaps[RoundaboutExit] = ":/data/bitmaps/turn-roundabout-ccw-far.png";
     m_turnTypePixmaps[ExitLeft] = ":/data/bitmaps/turn-exit-left.png";
     m_turnTypePixmaps[ExitRight] = ":/data/bitmaps/turn-exit-right.png";
 }
