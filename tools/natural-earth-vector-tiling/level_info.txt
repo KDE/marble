@@ -13,8 +13,8 @@ ne_110m_lakes
 *5
 ne_50m_land
 ne_50m_admin_0_boundary_lines_land
-#ne_50m_admin_1_states_provinces_lines
-#ne_50m_admin_0_boundary_lines_disputed_areas
+ne_50m_admin_1_states_provinces_lines
+ne_50m_admin_0_boundary_lines_disputed_areas
 ne_50m_admin_0_boundary_lines_maritime_indicator
 ne_50m_admin_0_pacific_groupings
 ne_50m_rivers_lake_centerlines
@@ -24,8 +24,8 @@ ne_50m_antarctic_ice_shelves_lines
 *7
 ne_10m_land
 ne_10m_admin_0_boundary_lines_land
-ne_10m_admin_1_states_provinces
-#ne_10m_admin_0_disputed_areas
+ne_10m_admin_1_states_provinces_lines
+ne_10m_admin_0_boundary_lines_disputed_areas
 ne_10m_admin_0_boundary_lines_maritime_indicator
 ne_10m_admin_0_pacific_groupings
 ne_10m_rivers_lake_centerlines
@@ -34,15 +34,16 @@ ne_10m_lakes_north_america
 ne_10m_lakes_europe
 ne_10m_glaciated_areas
 ne_10m_antarctic_ice_shelves_polys
-ne_10m_admin_0_antarctic_claims
+ne_10m_admin_0_antarctic_claim_limit_lines
 ne_10m_playas
 ne_10m_urban_areas
 ne_10m_roads
+ne_10m_airports
 *9
 ne_10m_land
 ne_10m_admin_0_boundary_lines_land
-ne_10m_admin_1_states_provinces
-#ne_10m_admin_0_disputed_areas
+ne_10m_admin_1_states_provinces_lines
+ne_10m_admin_0_boundary_lines_disputed_areas
 ne_10m_admin_0_boundary_lines_maritime_indicator
 ne_10m_admin_0_pacific_groupings
 ne_10m_rivers_lake_centerlines
@@ -52,7 +53,7 @@ ne_10m_lakes_europe
 ne_10m_minor_islands
 ne_10m_glaciated_areas
 ne_10m_antarctic_ice_shelves_polys
-ne_10m_admin_0_antarctic_claims
+ne_10m_admin_0_antarctic_claim_limit_lines
 ne_10m_reefs
 ne_10m_playas
 ne_10m_urban_areas
@@ -61,5 +62,7 @@ ne_10m_roads_north_america
 ne_10m_railroads
 ne_10m_railroads_north_america
 ne_10m_parks_and_protected_lands
+ne_10m_airports
+ne_10m_ports
 
 
