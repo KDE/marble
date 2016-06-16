@@ -65,6 +65,8 @@ ApplicationWindow {
                 MarbleMaps {
                     id: marbleMaps
 
+                    property string currentPositionProvider: "QtPositioning"
+
                     anchors {
                         top: parent.top
                         left: parent.left
@@ -90,7 +92,7 @@ ApplicationWindow {
                     showOtherPlaces: false
                     showScaleBar: false
                     showBackground: false
-                    positionProvider: suspended ? "" : "QtPositioning"
+                    positionProvider: suspended ? "" : currentPositionProvider
                     showPositionMarker: false
 
                     onPositionAvailableChanged: {

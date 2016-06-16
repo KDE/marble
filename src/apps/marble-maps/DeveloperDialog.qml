@@ -44,6 +44,17 @@ Item {
         }
 
         CheckBox {
+            text: "Simulate GPS Position near Route"
+            onCheckedChanged: marbleMaps.currentPositionProvider = checked ? "RouteSimulationPositionProviderPlugin" : "QtPositioning"
+        }
+
+        CheckBox {
+            text: "Show OSM Bitmap Tiles"
+            checked: true
+            onCheckedChanged: marbleMaps.setPropertyEnabled("mapnik", checked)
+        }
+
+        CheckBox {
             text: "Show Render Performance"
             onCheckedChanged: marbleMaps.setShowRuntimeTrace(checked)
         }
@@ -51,12 +62,6 @@ Item {
         CheckBox {
             text: "Render in Debug Mode"
             onCheckedChanged: marbleMaps.setShowDebugPolygons(checked)
-        }
-
-        CheckBox {
-            text: "Show OSM Bitmap Tiles"
-            checked: true
-            onCheckedChanged: marbleMaps.setPropertyEnabled("mapnik", checked)
         }
 
         Button {
