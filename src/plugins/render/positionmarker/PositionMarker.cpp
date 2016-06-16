@@ -185,10 +185,14 @@ bool PositionMarker::render( GeoPainter *painter,
         m_lastBoundingBox = viewport->viewLatLonAltBox();
 
         qreal screenPositionX, screenPositionY;
-        viewport->screenCoordinates( m_currentPosition, screenPositionX, screenPositionY );
+        if (!viewport->screenCoordinates( m_currentPosition, screenPositionX, screenPositionY )){
+            return true;
+        }
         const GeoDataCoordinates top( m_currentPosition.longitude(), m_currentPosition.latitude()+0.1 );
         qreal screenTopX, screenTopY;
-        viewport->screenCoordinates( top, screenTopX, screenTopY );
+        if (!viewport->screenCoordinates( top, screenTopX, screenTopY )){
+            return true;
+        }
         qreal const correction = -90.0 + RAD2DEG * atan2( screenPositionY -screenTopY, screenPositionX - screenTopX );
         const qreal rotation = m_heading + correction;
 
