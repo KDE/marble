@@ -78,6 +78,8 @@ def parse_file(filename, in_dir):
 		line = line.rstrip()
 		if len(line) == 0:
 			continue
+		if line.startswith('#'):
+			continue
 		if line[0] == '*':
 			level = int(line[1:])
 			level_info[level] = []
