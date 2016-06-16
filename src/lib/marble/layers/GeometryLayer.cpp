@@ -154,6 +154,7 @@ void GeometryLayerPrivate::initializeDefaultValues()
         s_defaultMinZoomLevels[i] = 15;
 
     s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::Landmass);
+    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::UrbanArea);
     for ( int i = GeoDataFeature::LanduseAllotments; i <= GeoDataFeature::LanduseVineyard; i++ ) {
         if ((GeoDataFeature::GeoDataVisualCategory)i != GeoDataFeature::LanduseGrass) {
             s_paintLayerOrder << createPaintLayerOrder("Polygon", (GeoDataFeature::GeoDataVisualCategory)i);

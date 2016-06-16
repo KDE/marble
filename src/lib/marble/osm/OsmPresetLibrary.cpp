@@ -321,6 +321,7 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
 
     //Custom Marble OSM Tags
     s_visualCategories[ OsmTag( "marble_land", "landmass" ) ]       = GeoDataFeature::Landmass;
+    s_visualCategories[ OsmTag( "settlement", "yes" ) ]             = GeoDataFeature::UrbanArea;
 
     // Default for buildings
     foreach(const QString &value, buildingValues() ) {
@@ -581,6 +582,7 @@ bool OsmPresetLibrary::isAreaTag(const QString &keyValue)
         s_areaTags.insert( "landuse=grass" );
 
         s_areaTags.insert( "marble_land=landmass" );
+        s_areaTags.insert( "settlement=yes" );
     }
 
     return s_areaTags.contains(keyValue);
