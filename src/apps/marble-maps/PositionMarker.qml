@@ -10,6 +10,7 @@
 
 
 import QtQuick 2.3
+import QtQuick.Window 2.2
 
 Rectangle {
     id: root
@@ -32,8 +33,8 @@ Rectangle {
         source: "qrc:///navigation_blue.svg"
         sourceSize.width: width
         sourceSize.height: height
-        width: 32
-        height: 32
+        width: Screen.pixelDensity * 6
+        height: width
         anchors.centerIn: parent
         smooth: true
         transform: Rotation {
