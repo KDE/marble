@@ -286,6 +286,15 @@ QPointF Navigation::positionOnRoute() const
     return QPointF(x,y);
 }
 
+QPointF Navigation::currentPosition() const
+{
+    GeoDataCoordinates coordinates = d->model()->positionTracking()->currentLocation();
+    qreal x = 0;
+    qreal y = 0;
+    d->m_marbleQuickItem->map()->viewport()->screenCoordinates(coordinates, x, y);
+    return QPointF(x,y);
+}
+
 double Navigation::screenAccuracy() const
 {
     double distanceMeter = d->model()->positionTracking()->accuracy().horizontal;
@@ -322,6 +331,8 @@ void Navigation::setMarbleQuickItem(Marble::MarbleQuickItem *marbleQuickItem)
         d->model()->routingManager()->setShowGuidanceModeStartupWarning( false );
         connect( d->model()->routingManager()->routingModel(),
                 SIGNAL(positionChanged()), this, SLOT(update()) );
+        connect( d->model()->routingManager()->routingModel(),
+                SIGNAL(deviatedFromRoute(bool)), this, SIGNAL(deviationChanged()) );
 
         delete d->m_autoNavigation;
         d->m_autoNavigation = new Marble::AutoNavigation( d->model(), d->m_marbleQuickItem->map()->viewport(), this );
@@ -336,6 +347,7 @@ void Navigation::setMarbleQuickItem(Marble::MarbleQuickItem *marbleQuickItem)
                  d->m_autoNavigation, SLOT(inhibitAutoAdjustments()) );
         connect( d->model()->positionTracking(), SIGNAL(statusChanged(PositionProviderStatus)),
                  &d->m_voiceNavigation, SLOT(handleTrackingStatusChange(PositionProviderStatus)) );
+
     }
     emit marbleQuickItemChanged(marbleQuickItem);
 }

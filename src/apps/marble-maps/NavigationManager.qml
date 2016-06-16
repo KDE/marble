@@ -23,6 +23,7 @@ Item {
     property var snappedPositionMarkerScreenPosition: null
     property bool guidanceMode: false
     property double screenAccuracy: 0
+    property alias deviated: navigation.deviated
 
     onGuidanceModeChanged: {
         if (guidanceMode && marbleItem) {
@@ -150,7 +151,11 @@ Item {
     function updateItem()
     {
         if (navigation.marbleQuickItem) {
-            root.snappedPositionMarkerScreenPosition = navigation.positionOnRoute();
+            if (navigation.deviated){
+                root.snappedPositionMarkerScreenPosition = navigation.currentPosition();
+            } else {
+                root.snappedPositionMarkerScreenPosition = navigation.positionOnRoute();
+            }
             root.screenAccuracy = navigation.screenAccuracy();
         }
         else
