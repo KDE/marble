@@ -90,7 +90,7 @@ ApplicationWindow {
                     showOtherPlaces: false
                     showScaleBar: false
                     showBackground: false
-                    positionProvider: suspended ? "" : "RouteSimulationPositionProviderPlugin"
+                    positionProvider: suspended ? "" : "QtPositioning"
                     showPositionMarker: false
 
                     onPositionAvailableChanged: {
