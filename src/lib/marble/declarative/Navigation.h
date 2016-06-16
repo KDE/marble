@@ -41,6 +41,8 @@ class Navigation : public QObject
     Q_PROPERTY(qreal destinationDistance READ destinationDistance NOTIFY destinationDistanceChanged)
     Q_PROPERTY(QString voiceNavigationAnnouncement READ voiceNavigationAnnouncement NOTIFY voiceNavigationAnnouncementChanged)
     Q_PROPERTY(bool deviated READ deviated NOTIFY deviationChanged)
+    Q_PROPERTY(double screenAccuracy READ screenAccuracy NOTIFY screenAccuracyChanged)
+    Q_PROPERTY(QPointF screenPosition READ screenPosition NOTIFY screenPositionChanged)
 
 public:
     explicit Navigation( QObject* parent = 0 );
@@ -83,11 +85,9 @@ public:
 
     Marble::MarbleQuickItem * marbleQuickItem() const;
 
-    Q_INVOKABLE QPointF positionOnRoute() const;
+    double screenAccuracy() const;
 
-    Q_INVOKABLE double screenAccuracy() const;
-
-    Q_INVOKABLE QPointF currentPosition() const;
+    QPointF screenPosition() const;
 
 public Q_SLOTS:
     void setMarbleQuickItem(Marble::MarbleQuickItem * marbleQuickItem);
@@ -119,8 +119,13 @@ Q_SIGNALS:
 
     void marbleQuickItemChanged(Marble::MarbleQuickItem * marbleQuickItem);
 
+    void screenAccuracyChanged();
+
+    void screenPositionChanged();
+
 private Q_SLOTS:
     void update();
+    void updateScreenPosition();
 
 private:
     NavigationPrivate* const d;

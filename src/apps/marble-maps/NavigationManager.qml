@@ -20,9 +20,9 @@ Item {
     id: root
     property var marbleItem: null
     property var tts: null
-    property var snappedPositionMarkerScreenPosition: Qt.point(0, 0)
+    property alias snappedPositionMarkerScreenPosition: navigation.screenPosition
     property bool guidanceMode: false
-    property double screenAccuracy: 0
+    property alias screenAccuracy: navigation.screenAccuracy
     property alias deviated: navigation.deviated
 
     onGuidanceModeChanged: {
@@ -144,15 +144,5 @@ Item {
                 return command;
             }
         }
-    }
-
-    function updateItem()
-    {
-        if (navigation.deviated){
-            root.snappedPositionMarkerScreenPosition = navigation.currentPosition();
-        } else {
-            root.snappedPositionMarkerScreenPosition = navigation.positionOnRoute();
-        }
-        root.screenAccuracy = navigation.screenAccuracy();
     }
 }

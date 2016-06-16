@@ -95,19 +95,15 @@ ApplicationWindow {
 
                     onPositionAvailableChanged: {
                         updateIndicator();
-                        navigationManager.updateItem();
                     }
                     onPositionVisibleChanged: {
                         updateIndicator();
-                        navigationManager.updateItem();
                     }
                     onVisibleLatLonAltBoxChanged: {
                         updateIndicator();
-                        navigationManager.updateItem();
                     }
                     onCurrentPositionChanged: {
                         updateIndicator();
-                        navigationManager.updateItem();
                     }
 
                     function updateIndicator() {
