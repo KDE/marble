@@ -119,6 +119,7 @@ namespace Marble
         bool isPropertyEnabled(const QString &property) const;
 
         Q_INVOKABLE void setShowRuntimeTrace(bool showRuntimeTrace);
+        Q_INVOKABLE void setShowDebugPolygons(bool showDebugPolygons);
 
     public:
         void paint(QPainter *painter);

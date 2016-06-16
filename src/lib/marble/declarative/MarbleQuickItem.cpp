@@ -740,6 +740,12 @@ namespace Marble
         update();
     }
 
+    void MarbleQuickItem::setShowDebugPolygons(bool showDebugPolygons)
+    {
+        d->m_map.setShowDebugPolygons(showDebugPolygons);
+        update();
+    }
+
     QObject *MarbleQuickItem::getEventFilter() const
     {   //We would want to install the same event filter for abstract layer QuickItems such as PinchArea
         return &d->m_inputHandler;

@@ -49,6 +49,11 @@ Item {
         }
 
         CheckBox {
+            text: "Render in Debug Mode"
+            onCheckedChanged: marbleMaps.setShowDebugPolygons(checked)
+        }
+
+        CheckBox {
             text: "Show OSM Bitmap Tiles"
             checked: true
             onCheckedChanged: marbleMaps.setPropertyEnabled("mapnik", checked)
