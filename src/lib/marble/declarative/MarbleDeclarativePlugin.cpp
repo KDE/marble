@@ -53,7 +53,7 @@ void MarbleDeclarativePlugin::registerTypes( const char *uri )
     qmlRegisterType<Bookmarks>( uri, 0, 20, "Bookmarks" );
     qmlRegisterType<Tracking>( uri, 0, 20, "Tracking" );
     qmlRegisterType<Marble::Routing>( uri, 0, 20, "Routing" );
-    qmlRegisterType<Navigation>( uri, 0, 20, "Navigation" );
+    qmlRegisterType<Marble::Navigation>( uri, 0, 20, "Navigation" );
     qmlRegisterType<Search>( uri, 0, 20, "Find" );
     qmlRegisterType<CloudSync>( uri, 0, 20, "CloudSync" );
     qmlRegisterType<Marble::MergeItem>( uri, 0, 20, "MergeItem" );

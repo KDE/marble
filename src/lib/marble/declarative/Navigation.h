@@ -16,19 +16,15 @@
 
 class QAbstractItemModel;
 
-class MarbleWidget;
-
 namespace Marble {
+
 class MarbleQuickItem;
 class MarbleModel;
-}
-
 class NavigationPrivate;
 
 class Navigation : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(MarbleWidget* map READ map WRITE setMap NOTIFY mapChanged)
     Q_PROPERTY(Marble::MarbleQuickItem * marbleQuickItem READ marbleQuickItem WRITE setMarbleQuickItem NOTIFY marbleQuickItemChanged)
     Q_PROPERTY(bool guidanceModeEnabled READ guidanceModeEnabled WRITE setGuidanceModeEnabled NOTIFY guidanceModeEnabledChanged)
     Q_PROPERTY(bool muted READ muted WRITE setMuted NOTIFY mutedChanged)
@@ -48,10 +44,6 @@ public:
     explicit Navigation( QObject* parent = 0 );
 
     ~Navigation();
-
-    MarbleWidget* map();
-
-    void setMap( MarbleWidget* widget );
 
     bool guidanceModeEnabled() const;
 
@@ -130,5 +122,7 @@ private Q_SLOTS:
 private:
     NavigationPrivate* const d;
 };
+
+}
 
 #endif
