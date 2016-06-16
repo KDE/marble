@@ -276,7 +276,8 @@ def feature_class(data):
     'Breakaway': [('boundary', 'administrative'), ('admin_level', '2')],
     'Elusive frontier': [('boundary', 'administrative'), ('admin_level', '2')],
     'Country': [('marble_land', 'landmass')],
-    '1st Order Admin Lines': [('boundary', 'administrative'), ('admin_level', '4')]
+    '1st Order Admin Lnies': [('boundary', 'administrative'), ('admin_level', '4')],
+    'Claim': [('boundary', 'administrative'), ('admin_level', '4')]
     #aeroway" v="aerodrome"
     }
     if 'featurecla' in data:
