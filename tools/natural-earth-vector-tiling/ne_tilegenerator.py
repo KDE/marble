@@ -55,8 +55,11 @@ def download(filename, in_dir):
 	r = http.request('GET', url, preload_content=False)
 	chunk_size = 8192
 	file_size_dl = 0
-	fileSize = int(r.getheader("content-length"))
-
+	content_length = r.getheader("content-length")
+	if content_length != None:
+		fileSize = int(r.getheader("content-length"))
+	else:
+		fileSize = None
 	with open(os.path.join(in_dir, filename + '.zip'), 'wb') as out:
 		while True:
 			data = r.read(chunk_size)
@@ -64,7 +67,10 @@ def download(filename, in_dir):
 				break
 			file_size_dl += len(data)
 			out.write(data)
-			print ("Downloading %s: %.1f/%.1f Mb (%3.1f%%)\r" % (filename, file_size_dl / 1024.0 / 1024.0, fileSize / 1024.0 / 1024.0, file_size_dl * 100. / fileSize), end='')
+			if fileSize != None:
+				print ("Downloading %s: %.4f/%.4f Mb (%3.1f%%)\r" % (filename, file_size_dl / 1024.0 / 1024.0, fileSize / 1024.0 / 1024.0, file_size_dl * 100. / fileSize), end='')
+			else:
+				print ("Downloading %s: %.4f Mb downloaded (file size unknown)\r" % (filename, file_size_dl / 1024.0 / 1024.0), end='')
 	r.release_conn()
 	out.close()
 	print ("Done")
@@ -72,7 +78,6 @@ def download(filename, in_dir):
 def parse_file(filename, in_dir):
 	level_info = {}
 	path = os.path.join(in_dir, filename)
-	print('ak Path', path)
 	f = open(path, 'rU')
 	for line in f:
 		line = line.rstrip()
