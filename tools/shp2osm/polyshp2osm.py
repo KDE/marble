@@ -1,60 +1,60 @@
 #!/usr/bin/python3
-
+ 
 """
 This script is designed to act as assistance in converting shapefiles
 to OpenStreetMap data. This file is optimized and tested with MassGIS
 shapefiles, converted to EPSG:4326 before being passed to the script.
 You can perform this conversion with 
-
+ 
    ogr2ogr -t_srs EPSG:4326 new_file.shp old_file.shp
-
+ 
 It is expected that you will modify the fixed_tags, tag_mapping, and
 boring_tags attributes of this script before running. You should read,
 or at least skim, the code up until it says:
-
+ 
   DO NOT CHANGE AFTER THIS LINE.
-
+ 
 to accomodate your own data. 
 """
-
+ 
 __author__ = "Christopher Schmidt <crschmidt@crschmidt.net>"
 __version__ = "$Id$"
-
+ 
 gdal_install = """
 Installing GDAL depends on your platform. Information is available at:
    
    http://trac.osgeo.org/gdal/wiki/DownloadingGdalBinaries
-
+ 
 For Debian-based systems:
-
+ 
    apt-get install python-gdal
-
+ 
 will usually suffice. 
 """
-
+ 
 # These tags are attached to all exterior ways. You can put any key/value pairs
 # in this dictionary. 
-
+ 
 fixed_tags = {
   'source': 'Natural Earth (http://www.naturalearthdata.com/)',
   'created_by': 'polyshp2osm'
 }  
-
+ 
 feat_dict = {}
 node_dict = {}
 non_geom = 0
 eflag = False
-
+ 
 nodes = []  #(id, lon, lat, tags)
 ways = []  #(id, node_refs, tags)
 relations = []  #(id, ways)
-
+ 
 non_polygons = ['Admin-1 aggregation', 'Admin-1 minor island', 'Admin-1 scale rank']
-
+ 
 # Here are a number of functions: These functions define tag mappings. The API
 # For these functions is that they are passed the attributes from a feature,
 # and they return a list of two-tuples which match to key/value pairs.
-
+ 
 def access(data):
     """Access restrictions."""  
     keys = {
@@ -66,7 +66,7 @@ def access(data):
         if data['pub_access'] in keys:
             return [('access', keys[data['pub_access']])]
     return None        
-
+ 
 def protection(data):
     keys = {
         'P': 'perpetuity',
@@ -77,7 +77,7 @@ def protection(data):
         if data['lev_prot'] in keys:
             return [('protected', keys[data['lev_prot']])]
     return None
-
+ 
 def owner_type(data):
     """See wiki:Key:ownership""" 
     keys = {
@@ -95,7 +95,7 @@ def owner_type(data):
     if 'owner_type' in data:
         if data['owner_type'] in keys:
             return [['ownership', keys[data['owner_type']]]]
-
+ 
 def purpose(data):
     """Based on a discussion on IRC"""
     keys = {
@@ -113,8 +113,8 @@ def purpose(data):
     if 'prim_purp' in data:
         if data['prim_purp'] in keys:
             return keys[data['prim_purp']]
-
-
+ 
+ 
 def road_map(data):
     keys = {
     #'Ferry Route': [('route','ferry')],
@@ -129,7 +129,7 @@ def road_map(data):
     if 'type' in data:
         if data['type'] in keys:
             return keys[data['type']]
-
+ 
 def city_map(data):
     population = 0
     capital = 'no'
@@ -159,7 +159,7 @@ def mountain_map(data):
         elevation = data['elevation']
     temp = [('natural', 'peak'), ('ele', elevation)]
     return temp
-
+ 
 def feature_class(data):
     global non_fcla_dict
     keys = {
@@ -297,14 +297,14 @@ def feature_class(data):
                 non_fcla_dict[data['featurecla']] += 1
             else:
                 non_fcla_dict[data['featurecla']] = 1
-
-
-
+ 
+ 
+ 
 def name_map(data):
     if 'name' in data:
         return [('name', data['name'])]
-
-
+ 
+ 
 def name_tags(data):
     """This function returns two things: a 'pretty' name to use, and
        may return a landuse of either 'cemetery' or 'forest' if the name
@@ -319,10 +319,10 @@ def name_tags(data):
         tags.append(['landuse', 'cemetery']) 
     elif "forest" in name.lower():
         tags.append(['landuse', 'forest']) 
-
+ 
     tags.append(['name', name])
     return tags
-
+ 
 def cal_date(data):
     """Return YYYY-MM-DD or YYYY formatted dates, based on 
        (m)m/(d)d/yyyy dates"""
@@ -337,19 +337,19 @@ def cal_date(data):
         print("Invalid date: %s" % date)
         eflag = True
         return None
-
+ 
 # The most important part of the code: define a set of key/value pairs
 # to iterate over to generate keys. This is a list of two-tuples: first
 # is a 'key', which is only used if the second value is a string. In
 # that case, it is a map of lowercased fielnames to OSM tag names: so
 # fee_owner maps to 'owner' in the OSM output.
-
+ 
 # if the latter is callable (has a __call__; is a function), then that
 # method is called, passing in a dict of feature attributes with
 # lowercased key names. Those functions can then return a list of
 # two-tuples to be used as tags, or nothin' to skip the tags.  
-
-
+ 
+ 
 tag_mapping = [ 
     ('fee_owner', 'owner'),
     ('cal_date', cal_date),
@@ -361,32 +361,32 @@ tag_mapping = [
     ('featurecla', feature_class),
     ('name', name_map)
 ]    
-
+ 
 # These tags are not exported, even with the source data; this should be
 # used for tags which are usually calculated in a GIS. AREA and LEN are
 # common.
-
+ 
 boring_tags = [ 'AREA', 'LEN', 'GIS_ACRES']
-
+ 
 # Namespace is used to prefix existing data attributes. If 'None', or 
 # '--no-source' is set, then source attributes are not exported, only
 # attributes in tag_mapping.
-
+ 
 namespace = "natural_earth"
 #namespace = None 
-
+ 
 # Uncomment the "DONT_RUN = False" line to get started. 
-
+ 
 #DONT_RUN = True
 DONT_RUN = False
-
+ 
 # =========== DO NOT CHANGE AFTER THIS LINE. ===========================
 # Below here is regular code, part of the file. This is not designed to
 # be modified by users.
 # ======================================================================
-
+ 
 import sys
-
+ 
 try:
     try:
         from osgeo import ogr
@@ -401,14 +401,14 @@ except ImportError:
     print("OGR Python Bindings not installed.\n%s" % gdal_install)
     sys.exit(1)
     eflag = True
-
+ 
 def close_file():
     """ Internal. Close an open file."""
     global open_file
     if not open_file.closed: 
         open_file.write("</osm>")
         open_file.close()
-
+ 
 def start_new_file():
     """ Internal. Open a new file, closing existing file if neccesary."""
     global open_file, file_counter, node_dict
@@ -419,21 +419,32 @@ def start_new_file():
     print("<?xml version='1.0' encoding='UTF-8'?>" , end = '\n', file = open_file) 
     print("<osm version='0.5'>" , end = '\n', file = open_file)  
     node_dict = {}
-
+ 
 def clean_attr(val):
     """Internal. Hacky way to make attribute XML safe."""
     val = str(val)
     val = val.replace("&", "&amp;").replace("'", "&quot;").replace("<", "&lt;").replace(">", "&gt;").strip()
     return val
 
+def check_featurecla(f):
+    """
+     Checks if featurecla field is present in the feature f.
+     If present it implies that shp data is from Natural Earth dataset
+    """
+    if 'featurecla' in f.keys():
+        return True
+    else:
+        return False
+ 
 def add_point(f):
     """Adds a point geometry to the OSM file"""
     global id_counter
     airport_metadata = None
     pt = f.GetGeometryRef()
-    if f['featurecla'] == 'Airport':
-        airport_metadata = f
-        f = None
+    if check_featurecla(f):
+        if f['featurecla'] == 'Airport':
+            airport_metadata = f
+            f = None
     node_id = add_node(id_counter, pt.GetX(0), pt.GetY(0), 'POINT', f)
     if node_id == id_counter:
         id_counter += 1
@@ -441,7 +452,7 @@ def add_point(f):
         add_way_around_node(airport_metadata)
     
     
-
+ 
 def add_relation_multipolygon(geom, f):
     """ Writes the multipolygon relation to the OSM file, returns 0 if no relation is formed"""
     global id_counter, file_counter, counter, file_name, open_file, namespace
@@ -452,7 +463,7 @@ def add_relation_multipolygon(geom, f):
         print('Error in writing relation')
         return None
     rel_ways.append(way_id)
-
+ 
     if geom.GetGeometryCount() > 1:
         for i in range(1, geom.GetGeometryCount()):
             way_id = add_way(geom.GetGeometryRef(i), f, False)
@@ -461,13 +472,14 @@ def add_relation_multipolygon(geom, f):
                 return None
             rel_ways.append(way_id)
         rel_id = id_counter
-        if f['featurecla'] in non_polygons:
-            return 0 #means no relation is there
+        if check_featurecla(f):
+            if f['featurecla'] in non_polygons:
+                return 0 #means no relation is there
         relations.append((rel_id, rel_ways))
         id_counter += 1
-
+ 
     return rel_id   #if rel_id return 0, means no relations is there
-
+ 
 def write_relation_multipolygon(relation):
     global open_file
     print("<relation id='-%s'><tag k='type' v='multipolygon' />" % relation[0] , end = '\n', file = open_file)  
@@ -475,7 +487,7 @@ def write_relation_multipolygon(relation):
     for way in relation[1][1:]:
         print('<member type="way" ref="-%s" role="inner" />' % way  , end = '\n', file = open_file)
     print("</relation>" , end = '\n', file = open_file)
-
+ 
 def write_tags(f):
     """Writes the tags associated with a way or a relation"""
     global id_counter, file_counter, counter, file_name, open_file, namespace
@@ -503,9 +515,10 @@ def write_tags(f):
     for name, value in fixed_tags.items():
         print(" <tag k='%s' v='%s' />" % (name, clean_attr(value)) , end = '\n', file = open_file)   
     if f.GetGeometryRef().GetGeometryName() == 'POLYGON' or f.GetGeometryRef().GetGeometryName() == 'MULTIPOLYGON':
-        if f['featurecla'] not in non_polygons:
-            print(" <tag k='area' v='yes' />" , end = '\n', file = open_file)  
-
+        if check_featurecla(f):
+            if f['featurecla'] not in non_polygons:
+                print(" <tag k='area' v='yes' />" , end = '\n', file = open_file)  
+ 
 def add_way(geom, f, tag_flag):
     """ Writes the way of a particular geometry to the OSM file"""
     global open_file, id_counter, ways
@@ -522,7 +535,7 @@ def add_way(geom, f, tag_flag):
         tags = None
     ways.append((way_id, node_refs, tags))
     return way_id
-
+ 
 def write_way(way):
     global open_file
     print("<way id='-%s'>" % way[0] , end = '\n', file = open_file)  
@@ -531,7 +544,7 @@ def write_way(way):
     if way[2]:
         write_tags(way[2])
     print("</way>", end = '\n', file = open_file)  
-
+ 
 def add_way_nodes(geom, f):
     """Writes the nodes of a particular way"""
     global open_file, id_counter
@@ -553,8 +566,8 @@ def add_way_nodes(geom, f):
             id_counter += 1
         ids.append(node_id)
     return ids   
-
-
+ 
+ 
 def add_node(num_id, lon, lat, geom_name, f):
     """ Writes the node to the OSM file"""
     global open_file, node_dict
@@ -569,7 +582,7 @@ def add_node(num_id, lon, lat, geom_name, f):
             nodes.append((num_id, lon, lat, None))
             node_dict[key] = num_id
     return num_id
-
+ 
 def write_node(node):
     global open_file
     if node[3] == None:
@@ -578,7 +591,7 @@ def write_node(node):
         print("<node id='-%s' visible='true' lon='%s' lat='%s' >" % (node[0], node[1], node[2]), end = '\n', file = open_file)
         write_tags(node[3]) 
         print("</node>", end = '\n', file = open_file)
-
+ 
 def add_way_around_node(f):
     """ Writes a way around a single point"""
     global id_counter, ways
@@ -586,34 +599,34 @@ def add_way_around_node(f):
     ways.append((id_counter, [nid], f))
     id_counter += 1
     
-
+ 
 open_file = None
-
+ 
 file_name = None 
-
+ 
 id_counter = 1
-
+ 
 file_counter = 0
 counter = 0
-
+ 
 geom_counter = {}
-
+ 
 class AppError(Exception): pass
-
+ 
 def run(filenames, slice_count=1, obj_count=5000000, output_location=None, no_source=False):
     """Run the converter. Requires open_file, file_name, id_counter,
     file_counter, counter to be defined in global space; not really a very good
     singleton."""
     global id_counter, file_counter, counter, file_name, open_file, namespace, non_geom, non_fcla_dict, nodes, ways, relations
     open_file = None
-
+ 
     file_name = None 
-
+ 
     id_counter = 1
-
+ 
     file_counter = 0
     counter = 0
-
+ 
     geom_counter = {}
     if output_location:
        file_name = output_location
@@ -624,7 +637,7 @@ def run(filenames, slice_count=1, obj_count=5000000, output_location=None, no_so
         
         if no_source:
             namespace=None
-
+ 
         ds = ogr.Open(filename)
         if not ds:
             raise AppError("OGR Could not open the file %s" % filename)
@@ -632,28 +645,28 @@ def run(filenames, slice_count=1, obj_count=5000000, output_location=None, no_so
         l = ds.GetLayer(0)
        
         max_objs_per_file = obj_count 
-
+ 
         extent = l.GetExtent()
         #if extent[0] < -180 or extent[0] > 180 or extent[2] < -90 or extent[2] > 90:
         #   raise AppError("Extent does not look like degrees; are you sure it is? \n(%s, %s, %s, %s)" % (extent[0], extent[2], extent[1], extent[3]))  
         slice_width = (extent[1] - extent[0]) / slice_count
-
+ 
         seen = {}
-
+ 
         print("Running %s slices with %s base filename against shapefile %s" % (
                 slice_count, file_name, filename))
-
+ 
         for i in range(slice_count): 
-
+ 
             l.ResetReading()
             l.SetSpatialFilterRect(extent[0] + slice_width * i, extent[2], extent[0] + (slice_width * (i + 1)), extent[3])
-
+ 
             #start_new_file()
             f = l.GetNextFeature()
             
             obj_counter = 0
             last_obj_split = 0
-
+ 
             while f:
                 start_id_counter = id_counter
                 if f.GetFID() in seen:
@@ -703,7 +716,7 @@ def run(filenames, slice_count=1, obj_count=5000000, output_location=None, no_so
                 counter += 1
                 f = l.GetNextFeature()
                 obj_counter += (id_counter - start_id_counter)
-
+ 
     for node in nodes:
         write_node(node)
     for way in ways:
@@ -715,7 +728,7 @@ def run(filenames, slice_count=1, obj_count=5000000, output_location=None, no_so
     nodes = []  #(id, lon, lat, tags)
     ways = []  #(id, node_refs, tags)
     relations = []  #(id, ways)
-
+ 
 if __name__ == "__main__":
     if DONT_RUN:
         print(__doc__)
@@ -743,7 +756,7 @@ if __name__ == "__main__":
         print("No shapefile name given!")
         parse.print_help()
         sys.exit(3)
-
+ 
     kw = {}
     for key in  ('slice_count', 'obj_count', 'output_location', 'no_source'):
         kw[key] = getattr(options, key)
@@ -753,7 +766,7 @@ if __name__ == "__main__":
     except AppError as E:
         print("An error occurred: \n%s" % E)
         eflag = True
-
+ 
     print() 
     print('Geometry types present: ')
     for key in geom_counter:
@@ -763,7 +776,7 @@ if __name__ == "__main__":
     for key in feat_dict:
         print(key, feat_dict[key])
     print()
-
+ 
     
     if eflag:
         print('Conversion not Successful :')
@@ -780,3 +793,4 @@ if __name__ == "__main__":
             if non_geom != 0:
                 print('Unknown geometry present in SHP file: ', non_geom)
     
+ 
