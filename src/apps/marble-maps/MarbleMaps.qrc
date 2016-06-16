@@ -40,6 +40,7 @@
         <file alias="clear.png">../../../data/android/drawable-xxxhdpi/ic_close_black_18dp.png</file>
         <file alias="busy_indicator.png">../../../data/android/drawable-xxxhdpi/busy_indicator.png</file>
         <file alias="navigation_blue.png">../../../data/android/drawable-xxxhdpi/navigation_blue.png</file>
+        <file alias="navigation_blue.svg">../../../data/svg/navigation_blue.svg</file>
         <file alias="circular_menu_backdrop.png">../../../data/android/drawable-xxxhdpi/circular_menu_backdrop.png</file>
         <file alias="ic_place.png">../../../data/android/drawable-xxxhdpi/ic_place.png</file>
         <file alias="ic_place_arrival.png">../../../data/android/drawable-xxxhdpi/ic_place_arrival.png</file>

@@ -29,10 +29,13 @@ Rectangle {
 
     Image {
         id: image
-        source: "qrc:///navigation_blue.png"
-        width: 30
-        height: 30
+        source: "qrc:///navigation_blue.svg"
+        sourceSize.width: width
+        sourceSize.height: height
+        width: 32
+        height: 32
         anchors.centerIn: parent
+        smooth: true
         transform: Rotation {
             id: rotation
             origin {
