@@ -517,11 +517,13 @@ void GraticulePlugin::renderLatitudeLines( GeoPainter *painter,
     qreal northLineLat = step * ( static_cast<int>( northLat / step ) + 1 );
     
     if ( m_currentNotation == GeoDataCoordinates::UTM ) {
-        if ( northLineLat > 84.0 )
+        if ( northLineLat > 84.0 ) {
             northLineLat = 76.0;
-	    	
-	    if ( southLineLat < -80.0 )
-	    	southLineLat = -80.0;
+        }
+
+        if ( southLineLat < -80.0 ) {
+            southLineLat = -80.0;
+        }
     }
 
     qreal itStep = southLineLat;
