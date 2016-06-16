@@ -90,7 +90,7 @@ ApplicationWindow {
                     showOtherPlaces: false
                     showScaleBar: false
                     showBackground: false
-                    positionProvider: suspended ? "" : "QtPositioning"
+                    positionProvider: suspended ? "" : "RouteSimulationPositionProviderPlugin"
                     showPositionMarker: false
 
                     onPositionAvailableChanged: {
@@ -296,10 +296,10 @@ ApplicationWindow {
 
                 PositionMarker {
                     id: positionMarker
-                    posX: navigationManager.visible ? navigationManager.snappedPositionMarkerScreenPosition.x : 0
-                    posY: navigationManager.visible ? navigationManager.snappedPositionMarkerScreenPosition.y : 0
+                    posX: navigationManager.snappedPositionMarkerScreenPosition.x
+                    posY: navigationManager.snappedPositionMarkerScreenPosition.y
                     angle: marbleMaps.angle
-                    visible: navigationManager.visible
+                    visible: true
                     radius: navigationManager.screenAccuracy
                     color: navigationManager.deviated ? "#40ff0000" : "transparent"
                     border.color: navigationManager.deviated ? "red" : "transparent"

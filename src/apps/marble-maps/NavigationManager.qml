@@ -20,18 +20,15 @@ Item {
     id: root
     property var marbleItem: null
     property var tts: null
-    property var snappedPositionMarkerScreenPosition: null
+    property var snappedPositionMarkerScreenPosition: Qt.point(0, 0)
     property bool guidanceMode: false
     property double screenAccuracy: 0
     property alias deviated: navigation.deviated
 
     onGuidanceModeChanged: {
-        if (guidanceMode && marbleItem) {
-            navigation.marbleQuickItem = marbleItem;
+        if (guidanceMode) {
             marbleItem.setZoomToMaximumLevel();
             marbleItem.centerOnCurrentPosition();
-        } else {
-            navigation.marbleQuickItem = null
         }
 
         navigation.guidanceModeEnabled = guidanceMode;
@@ -72,7 +69,7 @@ Item {
         id: speed
         color: palette.window
         textColor: palette.text
-        text: qsTr("%1 km/h".arg((navigation.marbleQuickItem ? navigation.marbleQuickItem.speed * 3.6 : 0).toFixed(0)))
+        text: qsTr("%1 km/h".arg((navigation.marbleQuickItem.speed * 3.6).toFixed(0)))
 
         anchors {
             bottom: totalDistance.top
@@ -83,6 +80,7 @@ Item {
 
     Navigation {
         id: navigation
+        marbleQuickItem: marbleItem
         soundEnabled: false
 
         onVoiceNavigationAnnouncementChanged: {
@@ -150,17 +148,11 @@ Item {
 
     function updateItem()
     {
-        if (navigation.marbleQuickItem) {
-            if (navigation.deviated){
-                root.snappedPositionMarkerScreenPosition = navigation.currentPosition();
-            } else {
-                root.snappedPositionMarkerScreenPosition = navigation.positionOnRoute();
-            }
-            root.screenAccuracy = navigation.screenAccuracy();
+        if (navigation.deviated){
+            root.snappedPositionMarkerScreenPosition = navigation.currentPosition();
+        } else {
+            root.snappedPositionMarkerScreenPosition = navigation.positionOnRoute();
         }
-        else
-        {
-            root.snappedPositionMarkerScreenPosition = null;
-        }
+        root.screenAccuracy = navigation.screenAccuracy();
     }
 }
