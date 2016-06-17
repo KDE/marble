@@ -48,6 +48,8 @@ eflag = False
 nodes = []  #(id, lon, lat, tags)
 ways = []  #(id, node_refs, tags)
 relations = []  #(id, ways)
+
+element_indices = []
  
 non_polygons = ['Admin-1 aggregation', 'Admin-1 minor island', 'Admin-1 scale rank']
  
@@ -411,7 +413,7 @@ def close_file():
  
 def start_new_file():
     """ Internal. Open a new file, closing existing file if neccesary."""
-    global open_file, file_counter, node_dict
+    global open_file, file_counter, node_dict, file_name
     file_counter += 1
     if open_file:
         close_file()
@@ -419,6 +421,26 @@ def start_new_file():
     print("<?xml version='1.0' encoding='UTF-8'?>" , end = '\n', file = open_file) 
     print("<osm version='0.5'>" , end = '\n', file = open_file)  
     node_dict = {}
+
+def write_osm_files():
+    global nodes, ways, relations, element_indices, open_file, file_counter, file_name
+    node_idx = 0
+    way_idx = 0
+    rel_idx = 0
+    for indices in element_indices:
+        start_new_file()
+        while node_idx < indices[0]:
+            write_node(nodes[node_idx])
+            node_idx += 1
+        while way_idx < indices[1]:
+            write_way(ways[way_idx])
+            way_idx += 1
+        while rel_idx < indices[2]:
+            write_relation_multipolygon(relations[rel_idx])
+            rel_idx += 1
+        close_file()
+    element_indices = []
+
  
 def clean_attr(val):
     """Internal. Hacky way to make attribute XML safe."""
@@ -628,9 +650,10 @@ def run(filenames, slice_count=1, obj_count=5000000, output_location=None, no_so
     counter = 0
  
     geom_counter = {}
+    node_dict = {}
     if output_location:
        file_name = output_location
-    start_new_file()
+    # start_new_file()
     for filename in filenames:
         non_geom = 0
         non_fcla_dict = {}
@@ -676,8 +699,10 @@ def run(filenames, slice_count=1, obj_count=5000000, output_location=None, no_so
                 
                 if (obj_counter - last_obj_split) > max_objs_per_file:
                     print("Splitting file with %s objs" % (obj_counter - last_obj_split))
-                    start_new_file()
+                    #start_new_file()
                     last_obj_split = obj_counter
+                    element_indices.append((len(nodes), len(ways), len(relations)))
+                    node_dict = {} 
                 feat_dict = f.items()
                 geom = f.GetGeometryRef()
                 geom_name = geom.GetGeometryName()
@@ -717,14 +742,17 @@ def run(filenames, slice_count=1, obj_count=5000000, output_location=None, no_so
                 f = l.GetNextFeature()
                 obj_counter += (id_counter - start_id_counter)
  
-    for node in nodes:
-        write_node(node)
-    for way in ways:
-        write_way(way)
-    for relation in relations:
-        write_relation_multipolygon(relation)
+    # for node in nodes:
+    #     write_node(node)
+    # for way in ways:
+    #     write_way(way)
+    # for relation in relations:
+    #     write_relation_multipolygon(relation)
+
+    element_indices.append((len(nodes), len(ways), len(relations))) 
+    write_osm_files()
                     
-    close_file()
+    # close_file()
     nodes = []  #(id, lon, lat, tags)
     ways = []  #(id, node_refs, tags)
     relations = []  #(id, ways)
