@@ -34,10 +34,11 @@ Item {
             left: iconBackground.right
             right: parent.right
         }
-        height: distanceUntilInstruction.height * 2
+        height: iconBackground.height
 
         Text {
             id: distanceUntilInstruction
+            font.pointSize: 24
             text: root.distance > 1000 ? "%1 km".arg((0.001 * root.distance).toFixed(1)) : "%1 m".arg(distance > 100 ? (root.distance*0.01).toFixed(0)*100 : (root.distance*0.1).toFixed(0)*10)
             anchors.centerIn: parent
         }
