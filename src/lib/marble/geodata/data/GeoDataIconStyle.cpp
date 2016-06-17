@@ -50,6 +50,24 @@ class GeoDataIconStylePrivate
         return remoteIconLoader;
     }
 
+    QSize scaledSize(const QSize &size) const
+    {
+        QSize iconSize = size;
+        // Scaling the placemark's icon based on its size, scale, and maximum icon size.
+        if ( iconSize.width()*m_scale > s_maximumIconSize.width()
+             || iconSize.height()*m_scale > s_maximumIconSize.height() ) {
+            iconSize.scale( s_maximumIconSize, Qt::KeepAspectRatio );
+        }
+        else if ( iconSize.width()*m_scale < s_minimumIconSize.width()
+                  || iconSize.height()*m_scale < s_minimumIconSize.width() ) {
+            iconSize.scale( s_maximumIconSize, Qt::KeepAspectRatio );
+        }
+        else {
+            iconSize *= m_scale;
+        }
+        return iconSize;
+    }
+
     float            m_scale;
 
     QImage           m_icon;
@@ -195,23 +213,10 @@ QImage GeoDataIconStyle::scaledIcon() const
         return icon();
     }
 
-    QSize iconSize = icon().size();
-
-    // Scaling the placemark's icon based on its size, scale, and maximum icon size.
-
-    if ( iconSize.width()*scale() > s_maximumIconSize.width()
-         || iconSize.height()*scale() > s_maximumIconSize.height() ) {
-       iconSize.scale( s_maximumIconSize, Qt::KeepAspectRatio );
-    }
-    else if ( iconSize.width()*scale() < s_minimumIconSize.width()
-              || iconSize.height()*scale() < s_minimumIconSize.width() ) {
-       iconSize.scale( s_maximumIconSize, Qt::KeepAspectRatio );
-    }
-    else {
-       iconSize *= scale();
-    }
-    if (!icon().isNull()) {
-        d->m_scaledIcon = icon().scaled( iconSize, Qt::KeepAspectRatio, Qt::SmoothTransformation ) ;
+    QImage const image = icon();
+    if (!image.isNull()) {
+        QSize iconSize = d->scaledSize(image.size());
+        d->m_scaledIcon = image.scaled( iconSize, Qt::KeepAspectRatio, Qt::SmoothTransformation ) ;
     }
     return d->m_scaledIcon;
 }
