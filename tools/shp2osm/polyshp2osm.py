@@ -119,13 +119,13 @@ def purpose(data):
  
 def road_map(data):
     keys = {
-    #'Ferry Route': [('route','ferry')],
+    'Ferry Route': [('route','ferry')],
     'Major Highway': [('highway','motorway')],
     'Beltway': [('highway','primary')],
-    #'Track': [('highway','tertiary')],
-    #'Unknown': [('highway','unclassified')],
-    #'Secondary Highway': [('highway','trunk')],
-    #'Bypass': [('highway','secondary')],
+    'Track': [('highway','tertiary')],
+    'Unknown': [('highway','unclassified')],
+    'Secondary Highway': [('highway','trunk')],
+    'Bypass': [('highway','secondary')],
     'Road': [('highway','primary')]
     }
     if 'type' in data:
@@ -144,17 +144,7 @@ def city_map(data):
         country = data['adm0name']
     temp =  [('is_in:country', country), ('capital', capital), ('population', population), ('place', 'city') ]
     return temp
-'''
-def airport_map(data):
-    global id_counter, file_counter, counter, file_name, open_file, namespace
-    wid = id_counter - 1
-    print("<way id='-%s'>" % wid, end = '\n', file = open_file) 
-    print(" <nd ref='-%s' />" % i, end = '\n', file = open_file) 
-    if geom_name == 'POLYGON':
-        print(" <nd ref='-%s' />" % ids[0], end = '\n', file = open_file) 
-    write_tags(f)
-    print("</way>" , end = '\n', file = open_file) 
-'''
+
 def mountain_map(data):
     elevation = 0
     if 'elevation' in data:
