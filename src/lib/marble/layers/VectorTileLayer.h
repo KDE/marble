@@ -60,14 +60,14 @@ class VectorTileLayer : public QObject, public LayerInterface
 
     QString runtimeTrace() const;
 
-Q_SIGNALS:
-    void tileLevelChanged(int tileLevel);
-
- public Q_SLOTS:
     bool render( GeoPainter *painter, ViewportParams *viewport,
                  const QString &renderPos = QLatin1String("NONE"),
                  GeoSceneLayer *layer = 0 );
 
+Q_SIGNALS:
+    void tileLevelChanged(int tileLevel);
+
+ public Q_SLOTS:
     void setMapTheme( const QVector<const GeoSceneVectorTileDataset *> &textures, const GeoSceneGroup *textureLayerSettings );
 
     void reset();
