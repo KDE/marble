@@ -5,35 +5,11 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   version="1.1"
-   width="100%"
-   height="100%"
-   viewBox="0 0 12 12"
    id="svg2"
-   inkscape:version="0.91 r"
-   sodipodi:docname="bus_station.16.svg">
-  <sodipodi:namedview
-     pagecolor="#dadada"
-     bordercolor="#666666"
-     borderopacity="1"
-     objecttolerance="10"
-     gridtolerance="10"
-     guidetolerance="10"
-     inkscape:pageopacity="0"
-     inkscape:pageshadow="2"
-     inkscape:window-width="1167"
-     inkscape:window-height="711"
-     id="namedview7"
-     showgrid="false"
-     inkscape:zoom="19.666667"
-     inkscape:cx="6.0000002"
-     inkscape:cy="6.0000002"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="0"
-     inkscape:current-layer="svg2" />
+   viewBox="0 0 12 12"
+   height="100%"
+   width="100%"
+   version="1.1">
   <metadata
      id="metadata9">
     <rdf:RDF>
@@ -42,30 +18,29 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <defs
      id="defs7" />
   <rect
-     style="color:#000000;display:inline;overflow:visible;visibility:visible;opacity:1;fill:#0092da;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:0.62224287;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker:none;enable-background:accumulate"
-     id="rect6363"
-     width="10.757418"
-     height="10.757418"
-     x="0.6212911"
+     ry="0.86440676"
      y="0.6212911"
-     ry="0.86440676" />
+     x="0.6212911"
+     height="10.757418"
+     width="10.757418"
+     id="rect6363"
+     style="color:#000000;display:inline;overflow:visible;visibility:visible;opacity:1;fill:#0092da;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:0.622;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker:none;enable-background:accumulate" />
   <rect
-     width="12"
-     height="12"
-     x="0"
-     y="0"
+     style="visibility:hidden;fill:none;stroke:none"
      id="canvas"
-     style="visibility:hidden;fill:none;stroke:none" />
+     y="0"
+     x="0"
+     height="12"
+     width="12" />
   <path
-     inkscape:connector-curvature="0"
-     d="m 3.533898,1.9915254 -0.8220338,0.8220339 0,6.5762705 0.5394597,0 c 0,0 0.083148,0.8220342 0.6681079,0.8220342 0.5664883,0 0.6420087,-0.8220342 0.6420087,-0.8220342 l 2.8771185,0 c 0,0 0.093993,0.8220342 0.6420086,0.8220342 0.6711644,0 0.6681081,-0.8220342 0.6681081,-0.8220342 l 0.5394598,0 0,-6.5762705 -0.822034,-0.8220339 z m 0.8220338,0.8220339 3.2881357,0 0,0.8220337 -3.2881357,0 z m -0.8220338,1.6440676 4.9322035,0 0,2.4661014 -4.9322035,0 z m 0,3.2881355 0.8220338,0 0,0.8220338 -0.8220338,0 z m 4.1101695,0 0.822034,0 0,0.8220338 -0.822034,0 z"
+     style="fill:#ffffff;fill-opacity:1;stroke:none"
      id="bus-stop-3"
-     style="fill:#ffffff;fill-opacity:1;stroke:none" />
+     d="m 3.533,1.991 -0.8220338,0.8220339 0,6.5762705 0.5394597,0 c 0,0 0.083,0.822 0.668,0.822 0.5664883,0 0.6420087,-0.8220342 0.6420087,-0.8220342 l 2.8771185,0 c 0,0 0.093,0.822 0.642,0.822 0.6711644,0 0.6681081,-0.8220342 0.6681081,-0.8220342 l 0.5394598,0 0,-6.5762705 -0.822034,-0.8220339 z m 0.822,0.822 3.2881357,0 0,0.8220337 -3.2881357,0 z m -0.8220338,1.6440676 4.9322035,0 0,2.4661014 -4.9322035,0 z m 0,3.2881355 0.8220338,0 0,0.8220338 -0.8220338,0 z m 4.1101695,0 0.822034,0 0,0.8220338 -0.822034,0 z" />
 </svg>

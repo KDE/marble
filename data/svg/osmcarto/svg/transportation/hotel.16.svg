@@ -1,44 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   version="1.1"
-   width="100%"
-   height="100%"
-   viewBox="0 0 16 16"
    id="svg2"
-   inkscape:version="0.91 r"
-   sodipodi:docname="hotel.16.svg"
-   inkscape:export-filename="/home/tackat/marble/sources/data/bitmaps/osmcarto/symbols/48/transportation/hotel.16.png"
-   inkscape:export-xdpi="270"
-   inkscape:export-ydpi="270">
-  <sodipodi:namedview
-     pagecolor="#dadada"
-     bordercolor="#666666"
-     borderopacity="1"
-     objecttolerance="10"
-     gridtolerance="10"
-     guidetolerance="10"
-     inkscape:pageopacity="0"
-     inkscape:pageshadow="2"
-     inkscape:window-width="1600"
-     inkscape:window-height="845"
-     id="namedview7"
-     showgrid="false"
-     inkscape:zoom="14.75"
-     inkscape:cx="8"
-     inkscape:cy="8"
-     inkscape:window-x="-2"
-     inkscape:window-y="-3"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="svg2" />
+   viewBox="0 0 16 16"
+   height="100%"
+   width="100%"
+   version="1.1">
   <metadata
      id="metadata8">
     <rdf:RDF>
@@ -54,20 +25,18 @@
   <defs
      id="defs6" />
   <rect
-     width="16"
-     height="16"
-     x="0"
-     y="0"
+     style="visibility:hidden;fill:none;stroke:none"
      id="canvas"
-     style="visibility:hidden;fill:none;stroke:none" />
+     y="0"
+     x="0"
+     height="16"
+     width="16" />
   <path
-     inkscape:connector-curvature="0"
-     d="M 1.625,4 C 1.25,4 1,4.25 1,4.75 l 0,7.25 1.25,0 0,-1.75 c 0,0 10.380697,0.01892 11.5,0 L 13.75,12 15,12 15,9.625 15,5.75 C 15,5.4202582 14.86199,5 14.375,5 13.88801,5 13.75,5.4202582 13.75,5.75 l 0,3.25 -11.5,0 0,-4.25 C 2.25,4.25 2,4 1.625,4 Z M 4.5,5 C 3.671573,5 3,5.671573 3,6.5 3,7.328427 3.671573,8 4.5,8 5.328427,8 6,7.328427 6,6.5 6,5.671573 5.328427,5 4.5,5 Z m 2,1 0,2 6.5,0 C 13,7 11.963825,6 11,6 Z"
+     style="fill:#0092da;fill-opacity:1;stroke:#ffffff;stroke-width:0.6;stroke-miterlimit:4;stroke-dasharray:none;stroke-linejoin:round;stroke-linecap:round"
      id="hotel-4"
-     style="fill:#0092da;fill-opacity:1;stroke:#ffffff;stroke-width:0.6;stroke-miterlimit:4;stroke-dasharray:none;stroke-linejoin:round;stroke-linecap:round" />
+     d="M 1.625,4 C 1.25,4 1,4.25 1,4.75 l 0,7.25 1.25,0 0,-1.75 c 0,0 10.38,0.018 11.5,0 L 13.75,12 15,12 15,9.625 15,5.75 C 15,5.4202582 14.86199,5 14.375,5 13.88801,5 13.75,5.4202582 13.75,5.75 l 0,3.25 -11.5,0 0,-4.25 C 2.25,4.25 2,4 1.625,4 Z M 4.5,5 C 3.671573,5 3,5.671573 3,6.5 3,7.328427 3.671573,8 4.5,8 5.328427,8 6,7.328427 6,6.5 6,5.671573 5.328427,5 4.5,5 Z m 2,1 0,2 6.5,0 C 13,7 11.963825,6 11,6 Z" />
   <path
-     inkscape:connector-curvature="0"
-     d="M 1.625,4 C 1.25,4 1,4.25 1,4.75 l 0,7.25 1.25,0 0,-1.75 c 0,0 10.380697,0.01892 11.5,0 L 13.75,12 15,12 15,9.625 15,5.75 C 15,5.4202582 14.86199,5 14.375,5 13.88801,5 13.75,5.4202582 13.75,5.75 l 0,3.25 -11.5,0 0,-4.25 C 2.25,4.25 2,4 1.625,4 Z M 4.5,5 C 3.671573,5 3,5.671573 3,6.5 3,7.328427 3.671573,8 4.5,8 5.328427,8 6,7.328427 6,6.5 6,5.671573 5.328427,5 4.5,5 Z m 2,1 0,2 6.5,0 C 13,7 11.963825,6 11,6 Z"
+     style="fill:#0092da;fill-opacity:1;stroke:none"
      id="hotel"
-     style="fill:#0092da;fill-opacity:1;stroke:none" />
+     d="M 1.625,4 C 1.25,4 1,4.25 1,4.75 l 0,7.25 1.25,0 0,-1.75 c 0,0 10.38,0.018 11.5,0 L 13.75,12 15,12 15,9.625 15,5.75 C 15,5.4202582 14.86199,5 14.375,5 13.88801,5 13.75,5.4202582 13.75,5.75 l 0,3.25 -11.5,0 0,-4.25 C 2.25,4.25 2,4 1.625,4 Z M 4.5,5 C 3.671573,5 3,5.671573 3,6.5 3,7.328427 3.671573,8 4.5,8 5.328427,8 6,7.328427 6,6.5 6,5.671573 5.328427,5 4.5,5 Z m 2,1 0,2 6.5,0 C 13,7 11.963825,6 11,6 Z" />
 </svg>

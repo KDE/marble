@@ -5,35 +5,11 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   version="1.1"
-   width="100%"
-   height="100%"
-   viewBox="0 0 16 16"
    id="svg2"
-   inkscape:version="0.91 r"
-   sodipodi:docname="shop_furniture.16.svg">
-  <sodipodi:namedview
-     pagecolor="#dadada"
-     bordercolor="#666666"
-     borderopacity="1"
-     objecttolerance="10"
-     gridtolerance="10"
-     guidetolerance="10"
-     inkscape:pageopacity="0"
-     inkscape:pageshadow="2"
-     inkscape:window-width="734"
-     inkscape:window-height="480"
-     id="namedview7"
-     showgrid="false"
-     inkscape:zoom="14.75"
-     inkscape:cx="-1.6949153"
-     inkscape:cy="8"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="0"
-     inkscape:current-layer="svg2" />
+   viewBox="0 0 16 16"
+   height="100%"
+   width="100%"
+   version="1.1">
   <metadata
      id="metadata8">
     <rdf:RDF>
@@ -49,20 +25,18 @@
   <defs
      id="defs6" />
   <rect
-     width="16"
-     height="16"
-     x="0"
-     y="0"
+     style="visibility:hidden;fill:none;stroke:none"
      id="canvas"
-     style="visibility:hidden;fill:none;stroke:none" />
+     y="0"
+     x="0"
+     height="16"
+     width="16" />
   <path
-     inkscape:connector-curvature="0"
-     d="M 4,3 C 3,3 2,4 2,5 4,5 5,6.5760463 5,8 l 6,0 C 11,6.4818344 12,5 14,5 14,4 13,3 12,3 Z M 2,6 C 1,6 1,7 1,7 1,7.5181656 1.481834,8 2,8 l 0,3 c 0,0.645252 0.423351,1 1,1 l 0.5,0 c 0,0 0,1 1,1 1,0 1,-1 1,-1 l 5,0 c 0,0 0,1 1,1 1,0 1,-1 1,-1 l 0.5,0 c 0.509491,0 1,-0.48425 1,-1 l 0,-3 c 0.494613,0 1,-0.3876224 1,-1 0,0 0,-1 -1,-1 -1,0 -2,1 -2,3 L 4,9 C 4,7 3,6 2,6 Z"
+     style="fill:#ac39ac;fill-opacity:1;stroke:#ffffff;stroke-width:0.6;stroke-miterlimit:4;stroke-dasharray:none;stroke-linejoin:round;stroke-linecap:round"
      id="furniture-3"
-     style="fill:#ac39ac;fill-opacity:1;stroke:#ffffff;stroke-width:0.6;stroke-miterlimit:4;stroke-dasharray:none;stroke-linejoin:round;stroke-linecap:round" />
+     d="M 4,3 C 3,3 2,4 2,5 4,5 5,6.5760463 5,8 l 6,0 C 11,6.4818344 12,5 14,5 14,4 13,3 12,3 Z M 2,6 C 1,6 1,7 1,7 1,7.5181656 1.481834,8 2,8 l 0,3 c 0,0.645252 0.423351,1 1,1 l 0.5,0 c 0,0 0,1 1,1 1,0 1,-1 1,-1 l 5,0 c 0,0 0,1 1,1 1,0 1,-1 1,-1 l 0.5,0 c 0.509491,0 1,-0.48425 1,-1 l 0,-3 c 0.494613,0 1,-0.3876224 1,-1 0,0 0,-1 -1,-1 -1,0 -2,1 -2,3 L 4,9 C 4,7 3,6 2,6 Z" />
   <path
-     inkscape:connector-curvature="0"
-     d="M 4,3 C 3,3 2,4 2,5 4,5 5,6.5760463 5,8 l 6,0 C 11,6.4818344 12,5 14,5 14,4 13,3 12,3 Z M 2,6 C 1,6 1,7 1,7 1,7.5181656 1.481834,8 2,8 l 0,3 c 0,0.645252 0.423351,1 1,1 l 0.5,0 c 0,0 0,1 1,1 1,0 1,-1 1,-1 l 5,0 c 0,0 0,1 1,1 1,0 1,-1 1,-1 l 0.5,0 c 0.509491,0 1,-0.48425 1,-1 l 0,-3 c 0.494613,0 1,-0.3876224 1,-1 0,0 0,-1 -1,-1 -1,0 -2,1 -2,3 L 4,9 C 4,7 3,6 2,6 Z"
+     style="fill:#ac39ac;fill-opacity:1;stroke:none"
      id="furniture"
-     style="fill:#ac39ac;fill-opacity:1;stroke:none" />
+     d="M 4,3 C 3,3 2,4 2,5 4,5 5,6.5760463 5,8 l 6,0 C 11,6.4818344 12,5 14,5 14,4 13,3 12,3 Z M 2,6 C 1,6 1,7 1,7 1,7.5181656 1.481834,8 2,8 l 0,3 c 0,0.645252 0.423351,1 1,1 l 0.5,0 c 0,0 0,1 1,1 1,0 1,-1 1,-1 l 5,0 c 0,0 0,1 1,1 1,0 1,-1 1,-1 l 0.5,0 c 0.509491,0 1,-0.48425 1,-1 l 0,-3 c 0.494613,0 1,-0.3876224 1,-1 0,0 0,-1 -1,-1 -1,0 -2,1 -2,3 L 4,9 C 4,7 3,6 2,6 Z" />
 </svg>

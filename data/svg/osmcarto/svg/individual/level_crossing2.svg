@@ -5,15 +5,11 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="100%"
-   height="100%"
-   viewBox="0 0 11 11"
-   id="svg2"
    version="1.1"
-   inkscape:version="0.91 r"
-   sodipodi:docname="level_crossing2.svg">
+   id="svg2"
+   viewBox="0 0 11 11"
+   height="100%"
+   width="100%">
   <metadata
      id="metadata10">
     <rdf:RDF>
@@ -27,34 +23,12 @@
   </metadata>
   <defs
      id="defs8" />
-  <sodipodi:namedview
-     pagecolor="#dadada"
-     bordercolor="#666666"
-     borderopacity="1"
-     objecttolerance="10"
-     gridtolerance="10"
-     guidetolerance="10"
-     inkscape:pageopacity="0"
-     inkscape:pageshadow="2"
-     inkscape:window-width="640"
-     inkscape:window-height="480"
-     id="namedview6"
-     showgrid="false"
-     inkscape:zoom="21.454545"
-     inkscape:cx="5.5"
-     inkscape:cy="5.5"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="0"
-     inkscape:current-layer="svg2" />
   <path
-     inkscape:connector-curvature="0"
-     style="fill:#ffffff"
+     id="halo"
      d="m 0.5,0.5 2,0 3,3 3,-3 2,0 0,2 -3,3 3,3 0,2 -2,0 -3,-3 -3,3 -2,0 0,-2 3,-3 -3,-3 z"
-     id="halo" />
+     style="fill:#ffffff" />
   <path
-     inkscape:connector-curvature="0"
-     style="fill:#4d4d4d"
+     id="crossing"
      d="M 1,1 1,2 4.5,5.5 1,9 1,10 2,10 5.5,6.5 9,10 10,10 10,9 6.5,5.5 10,2 10,1 9,1 5.5,4.5 2,1 Z"
-     id="crossing" />
+     style="fill:#4d4d4d" />
 </svg>

@@ -5,35 +5,11 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    id="svg2"
-   viewBox="-224 0 0 14"
-   height="16"
-   width="16"
-   version="1.1"
-   inkscape:version="0.91 r"
-   sodipodi:docname="variety_store-14.svg">
-  <sodipodi:namedview
-     pagecolor="#dadada"
-     bordercolor="#666666"
-     borderopacity="1"
-     objecttolerance="10"
-     gridtolerance="10"
-     guidetolerance="10"
-     inkscape:pageopacity="0"
-     inkscape:pageshadow="2"
-     inkscape:window-width="1600"
-     inkscape:window-height="845"
-     id="namedview7"
-     showgrid="false"
-     inkscape:zoom="16.857143"
-     inkscape:cx="7.0000001"
-     inkscape:cy="7.0000001"
-     inkscape:window-x="-2"
-     inkscape:window-y="-3"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="svg2" />
+   viewBox="0 0 16 16"
+   height="100%"
+   width="100%"
+   version="1.1">
   <defs
      id="defs3053" />
   <metadata
@@ -44,28 +20,26 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <g
-     style="font-style:normal;font-weight:normal;font-size:7.5px;line-height:125%;font-family:'Bitstream Vera Sans';letter-spacing:0px;word-spacing:0px;display:inline;fill:#ac39ac;fill-opacity:1;stroke:#ffffff;stroke-width:0.6;stroke-miterlimit:4;stroke-dasharray:none;stroke-linejoin:round;stroke-linecap:round"
+     transform="translate(1,1)"
      id="text4134-1"
-     transform="translate(1,1)">
+     style="font-style:normal;font-weight:normal;font-size:7.5px;line-height:125%;font-family:'Bitstream Vera Sans';letter-spacing:0px;word-spacing:0px;display:inline;fill:#ac39ac;fill-opacity:1;stroke:#ffffff;stroke-width:0.6;stroke-miterlimit:4;stroke-dasharray:none;stroke-linejoin:round;stroke-linecap:round">
     <path
-       inkscape:connector-curvature="0"
-       id="variety_store-0"
+       style="font-weight:bold;font-size:8.75px;fill:#ac39ac;fill-opacity:1;stroke:#ffffff;stroke-width:0.6;stroke-miterlimit:4;stroke-dasharray:none;stroke-linejoin:round;stroke-linecap:round"
        d="M 5,0 C 4,0 4,0 4,1 L 4.0097656,4 1,4 1,13 c 0,1 0,1 1,1 l 10,0 c 1,0 1,0 1,-1 L 13,4 10.039062,4 10,1 C 10,0 10,0 9,0 Z M 9,1 9,4 5,4 5,1 Z M 5,5 8,5 8,12 5,12 5,11 7,11 7,9 5,9 Z m 4,0 3,0 0,7 -3,0 0,-1 2,0 0,-2 -2,0 z M 6,6 6,8 7,8 7,6 Z m 4,0 0,2 1,0 0,-2 z m -8,5 2,0 0,2.48929 -1,0 L 3,12 2,12 Z"
-       style="font-weight:bold;font-size:8.75px;fill:#ac39ac;fill-opacity:1;stroke:#ffffff;stroke-width:0.6;stroke-miterlimit:4;stroke-dasharray:none;stroke-linejoin:round;stroke-linecap:round" />
+       id="variety_store-0" />
   </g>
   <g
-     style="font-style:normal;font-weight:normal;font-size:7.5px;line-height:125%;font-family:'Bitstream Vera Sans';letter-spacing:0px;word-spacing:0px;display:inline;fill:#ac39ac;fill-opacity:1;stroke:none"
+     transform="translate(1,1)"
      id="text4134"
-     transform="translate(1,1)">
+     style="font-style:normal;font-weight:normal;font-size:7.5px;line-height:125%;font-family:'Bitstream Vera Sans';letter-spacing:0px;word-spacing:0px;display:inline;fill:#ac39ac;fill-opacity:1;stroke:none">
     <path
-       inkscape:connector-curvature="0"
-       id="variety_store"
+       style="font-weight:bold;font-size:8.75px;fill:#ac39ac;fill-opacity:1"
        d="M 5,0 C 4,0 4,0 4,1 L 4.0097656,4 1,4 1,13 c 0,1 0,1 1,1 l 10,0 c 1,0 1,0 1,-1 L 13,4 10.039062,4 10,1 C 10,0 10,0 9,0 Z M 9,1 9,4 5,4 5,1 Z M 5,5 8,5 8,12 5,12 5,11 7,11 7,9 5,9 Z m 4,0 3,0 0,7 -3,0 0,-1 2,0 0,-2 -2,0 z M 6,6 6,8 7,8 7,6 Z m 4,0 0,2 1,0 0,-2 z m -8,5 2,0 0,2.48929 -1,0 L 3,12 2,12 Z"
-       style="font-weight:bold;font-size:8.75px;fill:#ac39ac;fill-opacity:1" />
+       id="variety_store" />
   </g>
 </svg>

@@ -5,35 +5,11 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   version="1.1"
-   width="100%"
-   height="100%"
-   viewBox="0 0 16 16"
    id="svg2"
-   inkscape:version="0.91 r"
-   sodipodi:docname="shop_mobile_phone.16.svg">
-  <sodipodi:namedview
-     pagecolor="#dadada"
-     bordercolor="#666666"
-     borderopacity="1"
-     objecttolerance="10"
-     gridtolerance="10"
-     guidetolerance="10"
-     inkscape:pageopacity="0"
-     inkscape:pageshadow="2"
-     inkscape:window-width="734"
-     inkscape:window-height="412"
-     id="namedview7"
-     showgrid="false"
-     inkscape:zoom="14.75"
-     inkscape:cx="1.0169492"
-     inkscape:cy="8"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="0"
-     inkscape:current-layer="svg2" />
+   viewBox="0 0 16 16"
+   height="100%"
+   width="100%"
+   version="1.1">
   <metadata
      id="metadata8">
     <rdf:RDF>
@@ -49,20 +25,18 @@
   <defs
      id="defs6" />
   <rect
-     width="16"
-     height="16"
-     x="0"
-     y="0"
+     style="visibility:hidden;fill:none;stroke:none"
      id="canvas"
-     style="visibility:hidden;fill:none;stroke:none" />
+     y="0"
+     x="0"
+     height="16"
+     width="16" />
   <path
-     inkscape:connector-curvature="0"
-     d="M 7,1 C 6.517164,1 6,1.3876224 6,2 L 6,3 C 4.8815,3.0818 4,3.90528 4,5 l 0,8 c 0,1.1488 0.803333,2 2,2 l 4,0 c 1.196667,0 2,-0.8512 2,-2 L 12,5 C 12,3.8512 11.196667,3 10,3 L 8,3 8,2 C 8,1.3640694 7.482836,1 7,1 Z m -2,4 6,0 0,7 -6,0 0,-7 z m 2,8 2,0 0,1 -2,0 0,-1 z"
+     style="fill:#ac39ac;fill-opacity:1;stroke:#ffffff;stroke-width:0.6;stroke-miterlimit:4;stroke-dasharray:none;stroke-linejoin:round;stroke-linecap:round"
      id="mobile-phone-7"
-     style="fill:#ac39ac;fill-opacity:1;stroke:#ffffff;stroke-width:0.6;stroke-miterlimit:4;stroke-dasharray:none;stroke-linejoin:round;stroke-linecap:round" />
+     d="M 7,1 C 6.517164,1 6,1.3876224 6,2 L 6,3 C 4.881,3.081 4,3.90528 4,5 l 0,8 c 0,1.1488 0.803333,2 2,2 l 4,0 c 1.196667,0 2,-0.8512 2,-2 L 12,5 C 12,3.8512 11.196667,3 10,3 L 8,3 8,2 C 8,1.3640694 7.482836,1 7,1 Z m -2,4 6,0 0,7 -6,0 0,-7 z m 2,8 2,0 0,1 -2,0 0,-1 z" />
   <path
-     inkscape:connector-curvature="0"
-     d="M 7,1 C 6.517164,1 6,1.3876224 6,2 L 6,3 C 4.8815,3.0818 4,3.90528 4,5 l 0,8 c 0,1.1488 0.803333,2 2,2 l 4,0 c 1.196667,0 2,-0.8512 2,-2 L 12,5 C 12,3.8512 11.196667,3 10,3 L 8,3 8,2 C 8,1.3640694 7.482836,1 7,1 Z m -2,4 6,0 0,7 -6,0 0,-7 z m 2,8 2,0 0,1 -2,0 0,-1 z"
+     style="fill:#ac39ac;fill-opacity:1"
      id="mobile-phone"
-     style="fill:#ac39ac;fill-opacity:1" />
+     d="M 7,1 C 6.517164,1 6,1.3876224 6,2 L 6,3 C 4.881,3.081 4,3.90528 4,5 l 0,8 c 0,1.1488 0.803333,2 2,2 l 4,0 c 1.196667,0 2,-0.8512 2,-2 L 12,5 C 12,3.8512 11.196667,3 10,3 L 8,3 8,2 C 8,1.3640694 7.482836,1 7,1 Z m -2,4 6,0 0,7 -6,0 0,-7 z m 2,8 2,0 0,1 -2,0 0,-1 z" />
 </svg>

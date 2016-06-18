@@ -1,41 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   version="1.1"
-   width="100%"
-   height="100%"
-   viewBox="0 0 14 14"
    id="svg2"
-   inkscape:version="0.91 r"
-   sodipodi:docname="post_office-14.svg">
-  <sodipodi:namedview
-     pagecolor="#dadada"
-     bordercolor="#666666"
-     borderopacity="1"
-     objecttolerance="10"
-     gridtolerance="10"
-     guidetolerance="10"
-     inkscape:pageopacity="0"
-     inkscape:pageshadow="2"
-     inkscape:window-width="706"
-     inkscape:window-height="480"
-     id="namedview7"
-     showgrid="false"
-     inkscape:zoom="16.857143"
-     inkscape:cx="7.0000001"
-     inkscape:cy="7.0000001"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="0"
-     inkscape:current-layer="svg2" />
+   viewBox="0 0 14 14"
+   height="100%"
+   width="100%"
+   version="1.1">
   <metadata
      id="metadata8">
     <rdf:RDF>
@@ -51,20 +25,18 @@
   <defs
      id="defs6" />
   <rect
-     width="14"
-     height="14"
-     x="0"
-     y="0"
+     style="visibility:hidden;fill:none;stroke:none"
      id="canvas"
-     style="visibility:hidden;fill:none;stroke:none" />
+     y="0"
+     x="0"
+     height="14"
+     width="14" />
   <path
-     inkscape:connector-curvature="0"
-     d="m 0.94915254,2.677966 0,0.8644068 L 7,6.9999999 l 6.050847,-3.4576271 0,-0.8644068 z m 0,2.5932203 0,6.0508477 12.10169446,0 0,-6.0508477 L 7,8.7288135 Z"
+     style="fill:#734a08;fill-opacity:1;stroke:#ffffff;stroke-width:0.6;stroke-miterlimit:4;stroke-dasharray:none;stroke-linejoin:round;stroke-linecap:round"
      id="post-office-7"
-     style="fill:#734a08;fill-opacity:1;stroke:#ffffff;stroke-width:0.6;stroke-miterlimit:4;stroke-dasharray:none;stroke-linejoin:round;stroke-linecap:round" />
+     d="m 0.949,2.677 0,0.8644068 L 7,6.9999999 l 6.050847,-3.4576271 0,-0.8644068 z m 0,2.5932203 0,6.0508477 12.10169446,0 0,-6.0508477 L 7,8.7288135 Z" />
   <path
-     inkscape:connector-curvature="0"
-     d="m 0.94915254,2.6779661 0,0.8644068 L 7,7 l 6.050847,-3.4576271 0,-0.8644068 z m 0,2.5932203 0,6.0508476 12.10169446,0 0,-6.0508476 L 7,8.7288136 Z"
+     style="fill:#734a08;fill-opacity:1;stroke:none"
      id="post-office"
-     style="fill:#734a08;fill-opacity:1;stroke:none" />
+     d="m 0.949,2.677 0,0.8644068 L 7,7 l 6.050847,-3.4576271 0,-0.8644068 z m 0,2.5932203 0,6.0508476 12.10169446,0 0,-6.0508476 L 7,8.7288136 Z" />
 </svg>
