@@ -190,7 +190,9 @@ void GeometryLayerPrivate::initializeDefaultValues()
     s_paintLayerOrder << createPaintLayerOrder("LineString", GeoDataFeature::Landmass);
 
     s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::NaturalWater);
-    s_paintLayerOrder << createPaintLayerOrder("LineString", GeoDataFeature::NaturalWater);
+    s_paintLayerOrder << createPaintLayerOrder("LineString", GeoDataFeature::NaturalWater, "outline");
+    s_paintLayerOrder << createPaintLayerOrder("LineString", GeoDataFeature::NaturalWater, "inline");
+    s_paintLayerOrder << createPaintLayerOrder("LineString", GeoDataFeature::NaturalWater, "label");
 
 
     s_paintLayerOrder << createPaintLayerOrder("LineString", GeoDataFeature::NaturalReef, "outline");
