@@ -59,7 +59,7 @@ class GeometryLayerPrivate
 public:
     typedef QList<GeoDataPlacemark const *> OsmQueue;
 
-    explicit GeometryLayerPrivate( const QAbstractItemModel *model );
+    explicit GeometryLayerPrivate(const QAbstractItemModel *model, const StyleBuilder *styleBuilder);
 
     void createGraphicsItems( const GeoDataObject *object );
     void createGraphicsItemFromGeometry( const GeoDataGeometry *object, const GeoDataPlacemark *placemark, bool avoidOsmDuplicates );
@@ -67,24 +67,23 @@ public:
     void removeGraphicsItems( const GeoDataFeature *feature );
 
     const QAbstractItemModel *const m_model;
+    const StyleBuilder *const m_styleBuilder;
     GeoGraphicsScene m_scene;
     QString m_runtimeTrace;
     QList<ScreenOverlayGraphicsItem*> m_items;
 
     QMap<qint64,OsmQueue> m_osmWayItems;
     QMap<qint64,OsmQueue> m_osmRelationItems;
-
-    StyleBuilder::Ptr m_styleBuilder;
 };
 
-GeometryLayerPrivate::GeometryLayerPrivate( const QAbstractItemModel *model )
-    : m_model( model ),
-      m_styleBuilder(new StyleBuilder)
+GeometryLayerPrivate::GeometryLayerPrivate(const QAbstractItemModel *model, const StyleBuilder *styleBuilder) :
+    m_model(model),
+    m_styleBuilder(styleBuilder)
 {
 }
 
-GeometryLayer::GeometryLayer( const QAbstractItemModel *model )
-        : d( new GeometryLayerPrivate( model ) )
+GeometryLayer::GeometryLayer(const QAbstractItemModel *model, const StyleBuilder *styleBuilder) :
+    d(new GeometryLayerPrivate(model, styleBuilder))
 {
     const GeoDataObject *object = static_cast<GeoDataObject*>( d->m_model->index( 0, 0, QModelIndex() ).internalPointer() );
     if ( object && object->parent() )

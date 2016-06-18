@@ -46,7 +46,7 @@ class GeoGraphicsItemPrivate
     GeoDataLatLonAltBox m_latLonAltBox;
     RenderContext m_renderContext;
     GeoDataStyle::ConstPtr m_style;
-    StyleBuilder::Ptr m_styleBuilder;
+    const StyleBuilder *m_styleBuilder;
 
     QStringList m_paintLayers;
 

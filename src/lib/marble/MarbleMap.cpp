@@ -63,6 +63,7 @@
 #include "MarbleDirs.h"
 #include "MarbleModel.h"
 #include "RenderPlugin.h"
+#include "StyleBuilder.h"
 #include "SunLocator.h"
 #include "TileCoordsPyramid.h"
 #include "TileCreator.h"
@@ -135,7 +136,7 @@ public:
     ViewportParams   m_viewport;
     bool             m_showFrameRate;
     bool             m_showDebugPolygons;
-
+    StyleBuilder     m_styleBuilder;
 
     LayerManager     m_layerManager;
     MarbleSplashLayer m_marbleSplashLayer;
@@ -158,9 +159,10 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model ) :
     m_viewParams(),
     m_showFrameRate( false ),
     m_showDebugPolygons( false ),
+    m_styleBuilder(),
     m_layerManager( model, parent ),
     m_customPaintLayer( parent ),
-    m_geometryLayer( model->treeModel() ),
+    m_geometryLayer(model->treeModel(), &m_styleBuilder),
     m_textureLayer( model->downloadManager(), model->pluginManager(), model->sunLocator(), model->groundOverlayModel() ),
     m_placemarkLayer( model->placemarkModel(), model->placemarkSelectionModel(), model->clock() ),
     m_vectorTileLayer( model->downloadManager(), model->pluginManager(), model->treeModel() ),

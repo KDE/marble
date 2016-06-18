@@ -11,8 +11,6 @@
 #ifndef MARBLE_STYLEBUILDER_H
 #define MARBLE_STYLEBUILDER_H
 
-#include <QSharedPointer>
-
 #include <GeoDataStyle.h>
 #include <GeoDataFeature.h>
 
@@ -30,8 +28,6 @@ public:
 class StyleBuilder
 {
 public:
-    typedef QSharedPointer<StyleBuilder> Ptr;
-
     StyleBuilder();
     ~StyleBuilder();
 

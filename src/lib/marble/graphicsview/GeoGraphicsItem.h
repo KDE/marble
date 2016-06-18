@@ -15,7 +15,6 @@
 // Marble
 #include "marble_export.h"
 #include "GeoDataStyle.h"
-#include "StyleBuilder.h"
 
 class QString;
 
@@ -26,6 +25,7 @@ class GeoDataFeature;
 class GeoDataLatLonAltBox;
 class GeoGraphicsItemPrivate;
 class GeoPainter;
+class StyleBuilder;
 class ViewportParams;
 
 class RenderContext
@@ -112,7 +112,7 @@ class MARBLE_EXPORT GeoGraphicsItem
     /**
      * Set the style for the item.
      */
-    void setStyleBuilder(const StyleBuilder::Ptr &styleBuilder );
+    void setStyleBuilder(const StyleBuilder *styleBuilder);
 
     /**
      * Set the style which will be used when

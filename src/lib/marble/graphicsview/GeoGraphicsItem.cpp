@@ -103,7 +103,7 @@ GeoDataStyle::ConstPtr GeoGraphicsItem::style() const
     return d->m_style;
 }
 
-void GeoGraphicsItem::setStyleBuilder(const StyleBuilder::Ptr &styleBuilder)
+void GeoGraphicsItem::setStyleBuilder(const StyleBuilder *styleBuilder)
 {
     d->m_styleBuilder = styleBuilder;
 }

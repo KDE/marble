@@ -26,15 +26,17 @@ namespace Marble
 {
 class GeoPainter;
 class GeoDataFeature;
-class ViewportParams;
-class GeometryLayerPrivate;
 class GeoDataPlacemark;
+class StyleBuilder;
+class ViewportParams;
+
+class GeometryLayerPrivate;
 
 class GeometryLayer : public QObject, public LayerInterface
 {
     Q_OBJECT
 public:
-    explicit GeometryLayer( const QAbstractItemModel *model );
+    explicit GeometryLayer(const QAbstractItemModel *model, const StyleBuilder *styleBuilder);
     ~GeometryLayer();
 
     virtual QStringList renderPosition() const;
