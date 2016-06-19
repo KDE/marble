@@ -706,24 +706,37 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
             }
         }
     } else if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLinearRingType) {
-        if(visualCategory == GeoDataFeature::AmenityGraveyard || visualCategory == GeoDataFeature::LanduseCemetery) {
-            bool adjustStyle = true;
-            GeoDataPolyStyle polyStyle = style->polyStyle();
-            if( osmData.containsTag("religion","jewish") ){
-                polyStyle.setTexturePath(MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_jewish.png"));
-            } else if( osmData.containsTag("religion","christian") ){
-                polyStyle.setTexturePath(MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_christian.png"));
-            } else if( osmData.containsTag("religion","INT-generic") ){
-                polyStyle.setTexturePath(MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_generic.png"));
-            } else {
-                adjustStyle = false;
-            }
-            if (adjustStyle) {
-                GeoDataStyle::Ptr newStyle(new GeoDataStyle(*style));
-                newStyle->setPolyStyle(polyStyle);
-                style = newStyle;
+        bool adjustStyle = false;
+
+        GeoDataPolyStyle polyStyle = style->polyStyle();
+        GeoDataLineStyle lineStyle = style->lineStyle();
+        if (visualCategory == GeoDataFeature::NaturalWater) {
+            if( osmData.containsTag("salt","yes") ){
+                polyStyle.setColor("#ffff80");
+                lineStyle.setPenStyle(Qt::DashLine);
+                lineStyle.setWidth(2);
+                adjustStyle = true;
             }
         }
+        if(visualCategory == GeoDataFeature::AmenityGraveyard || visualCategory == GeoDataFeature::LanduseCemetery) {
+            if( osmData.containsTag("religion","jewish") ){
+                polyStyle.setTexturePath(MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_jewish.png"));
+                adjustStyle = true;
+            } else if( osmData.containsTag("religion","christian") ){
+                polyStyle.setTexturePath(MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_christian.png"));
+                adjustStyle = true;
+            } else if( osmData.containsTag("religion","INT-generic") ){
+                polyStyle.setTexturePath(MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_generic.png"));
+                adjustStyle = true;
+            }
+        }
+        if (adjustStyle) {
+            GeoDataStyle::Ptr newStyle(new GeoDataStyle(*style));
+            newStyle->setPolyStyle(polyStyle);
+            newStyle->setLineStyle(lineStyle);
+            style = newStyle;
+        }
+
 
         QList<GeoDataFeature::GeoDataVisualCategory> categories = OsmPresetLibrary::visualCategories(osmData);
         foreach(GeoDataFeature::GeoDataVisualCategory category, categories) {

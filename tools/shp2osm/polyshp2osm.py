@@ -244,10 +244,10 @@ def feature_class(data):
     'strait': [('natural', 'water')],
     'bay': [('natural', 'water')],
     'fjord': [('natural', 'water')],
-    'sea': [('natural', 'water')],
+    'sea': [('natural', 'water')],  
     'ocean': [('natural', 'water')],
     'channel': [('natural', 'water')],
-    'Playa': [('natural', 'water')],
+    'Playa': [('natural', 'water'), ('water', 'lake'), ('salt', 'yes')],
     'Antarctic Ice Shelf': [(' glacier:type','shelf'), ('natural', 'glacier')], #Marble does not support the glacier:type tag
     'Antarctic Ice Shelf Edge': [('glacier:edge', 'calving_line')], #marble does not support this osm tag
     'Glaciated areas': [('natural', 'glacier')],
