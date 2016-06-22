@@ -121,6 +121,6 @@ if __name__ == "__main__":
     parser.add_argument('-r', '--refresh', type=int, default=-1, help='Re-download cached OSM base file if it is older than REFRESH days (-1: do not re-download)')
     parser.add_argument('-z', '--zoomLevels', type=int, nargs='+', help='zoom levels to generate', default=[13,15,17])
     args = parser.parse_args()
-    run(args.file, args.cache, args.refresh, args.directory, args.overwrite)    
+    run(args.file, args.cache, args.refresh, args.directory, args.overwrite, args.zoomLevels)
     
     
