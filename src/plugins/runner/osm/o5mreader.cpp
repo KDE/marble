@@ -122,7 +122,8 @@ O5mreaderRet o5mreader_open(O5mreader **ppReader,FILE* f) {
 	}
 	(*ppReader)->errMsg = NULL;
 	(*ppReader)->f = f;	
-	if ( fread(&byte,1,1,(*ppReader)->f) == 0 ) {
+    (*ppReader)->strPairTable = NULL;
+    if ( fread(&byte,1,1,(*ppReader)->f) == 0 ) {
 		o5mreader_setError(*ppReader,
 			O5MREADER_ERR_CODE_UNEXPECTED_END_OF_FILE,
 			NULL
