@@ -138,14 +138,6 @@ ApplicationWindow {
                         visible: !navigationManager.visible
                     }
 
-                    NavigationManager {
-                        id: navigationManager
-                        width: parent.width
-                        height: parent.height
-                        visible: false
-                        marbleItem: marbleMaps
-                    }
-
                     BoxedText {
                         id: quitHelper
                         visible: false
@@ -167,6 +159,14 @@ ApplicationWindow {
                             onTriggered: itemStack.state = ""
                         }
                     }
+                }
+
+                NavigationManager {
+                    id: navigationManager
+                    width: parent.width
+                    height: parent.height
+                    visible: false
+                    marbleItem: marbleMaps
                 }
 
                 BorderImage {
@@ -337,6 +337,8 @@ ApplicationWindow {
                 PropertyChanges { target: placemarkDialog; visible: false }
                 PropertyChanges { target: routeEditor; visible: false }
                 PropertyChanges { target: navigationManager; guidanceMode: true }
+                PropertyChanges { target: marbleMaps; anchors.bottomMargin: navigationManager.speedDistancePanelheight }
+                PropertyChanges { target: routeEditorButton; anchors.bottomMargin: navigationManager.speedDistancePanelheight + Screen.pixelDensity*4 }
                 StateChangeScript { script: itemStack.push(navigationManager); }
             },
             State {

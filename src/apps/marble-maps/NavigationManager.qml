@@ -24,6 +24,7 @@ Item {
     property bool guidanceMode: false
     property alias screenAccuracy: navigation.screenAccuracy
     property alias deviated: navigation.deviated
+    property alias speedDistancePanelheight: speedDistancePanel.height
 
     onGuidanceModeChanged: {
         if (guidanceMode) {
@@ -52,29 +53,40 @@ Item {
         distance: navigation.nextInstructionDistance;
     }
 
-    BoxedText {
-        id: totalDistance
+    Rectangle{
+        id: speedDistancePanel
         color: palette.window
-        textColor: palette.text
-        text: "%1 km".arg((0.001 * navigation.destinationDistance).toFixed(1))
-
+        height: totalDistance.height * 2
         anchors {
             bottom: parent.bottom
             left: parent.left
-            margins: 20
+            right: parent.right
         }
-    }
 
-    BoxedText {
-        id: speed
-        color: palette.window
-        textColor: palette.text
-        text: qsTr("%1 km/h".arg((navigation.marbleQuickItem.speed * 3.6).toFixed(0)))
+        BoxedText {
+            id: totalDistance
+            color: palette.window
+            textColor: palette.text
+            text: "%1 km".arg((0.001 * navigation.destinationDistance).toFixed(1))
 
-        anchors {
-            bottom: totalDistance.top
-            left: parent.left
-            margins: 20
+            anchors {
+                verticalCenter: parent.verticalCenter
+                left: parent.left
+                leftMargin: 10
+            }
+        }
+
+        BoxedText {
+            id: speed
+            color: palette.window
+            textColor: palette.text
+            text: qsTr("%1 km/h".arg((navigation.marbleQuickItem.speed * 3.6).toFixed(0)))
+
+            anchors {
+                verticalCenter: parent.verticalCenter
+                right: parent.right
+                rightMargin: 10
+            }
         }
     }
 
