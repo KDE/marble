@@ -515,6 +515,7 @@ enum SignType {NoSign, PositiveSign, NegativeSign};
 enum SphereType {PosSphere, NegSphere};
 enum UnitsType {NoUnits, WithUnits};
 enum SpacesType {NoSpaces, WithSpaces};
+enum LocaleType {CLocale, SystemLocale};
 
 //static QString
 //createDegreeString(SignType signType,
@@ -565,13 +566,18 @@ enum SpacesType {NoSpaces, WithSpaces};
 static QString
 createDegreeString(SignType signType,
                    qreal degreeValue,
+                   LocaleType locale,
                    UnitsType unitsType, SpacesType spacesType)
 {
     QString string;
 
     // add degree
     if (signType != NoSign) string.append(QLatin1Char(signType==PositiveSign?'+':'-'));
-    string.append(QString::fromLatin1("%L1").arg(degreeValue, 0, 'f', 10));
+    if (locale == CLocale) {
+        string.append(QString::number(degreeValue, 'f', 10));
+    } else {
+        string.append(QLocale::system().toString(degreeValue, 'f', 10));
+    }
     if (unitsType == WithUnits) string.append(QChar(0xb0));
 
     if (spacesType == WithSpaces) string.append(QLatin1Char(' '));
@@ -839,6 +845,8 @@ void TestGeoDataCoordinates::testFromStringD_data()
         << NoUnits << WithUnits;
     const QVector<SpacesType> spacesTypes = QVector<SpacesType>()
         << NoSpaces << WithSpaces;
+    const QVector<LocaleType> localeTypes = QVector<LocaleType>()
+        << CLocale << SystemLocale;
 
     const QVector<qreal> degreeSamples = QVector<qreal>()
         << qreal(0.0) << qreal(3.14159) << qreal(180.0);
@@ -859,6 +867,8 @@ void TestGeoDataCoordinates::testFromStringD_data()
             (latSphere==PosSphere && latSignType!=NegativeSign) ||
             (latSphere==NegSphere && latSignType==NegativeSign);
     foreach(const qreal latDegree, degreeSamples) {
+    // locale
+    foreach(const LocaleType locale, localeTypes) {
 
     // actual construction
         // Create lon & lat values
@@ -873,11 +883,13 @@ void TestGeoDataCoordinates::testFromStringD_data()
         QString string;
         string.append(createDegreeString(latSignType,
                                          latDegree,
+                                         locale,
                                          unitsType, spacesType));
         string.append(QLatin1Char(latSphere==PosSphere?'N':'S'));
         string.append(QLatin1Char(' '));
         string.append(createDegreeString(lonSignType,
                                          lonDegree,
+                                         locale,
                                          unitsType, spacesType));
         string.append(QLatin1Char(lonSphere==PosSphere?'E':'W'));
 
@@ -887,17 +899,19 @@ void TestGeoDataCoordinates::testFromStringD_data()
                 .append(QLatin1String(unitsType==WithUnits?"|units":"|no units"))
                 .append(QLatin1String("|lon:"))
                 .append(QLatin1Char(lonIsPositive?'+':'-'))
-                .append(QString::fromLatin1("%L1").arg(lonDegree, 0, 'f', 10)+QChar(0xb0))
+                .append(QString::number(lonDegree, 'f', 10)+QChar(0xb0))
                 .append(QLatin1Char(lonSphere==PosSphere?'P':'N'))
                 .append(QLatin1String("|lat:"))
                 .append(QLatin1Char(latIsPositive?'+':'-'))
-                .append(QString::fromLatin1("%L1").arg(latDegree, 0, 'f', 10)+QChar(0xb0))
+                .append(QString::number(latDegree, 'f', 10)+QChar(0xb0))
                 .append(QLatin1Char(latSphere==PosSphere?'P':'N'))
+                .append(QLatin1Char('|')).append(QLatin1Char(locale==CLocale?'C':'L'))
                 .append(QLatin1Char('|')).append(string).append(QLatin1Char('|'));
         QTest::newRow(rowTitle.toLatin1())
             << string
             << lon
             << lat;
+    }
     }
     }
     }

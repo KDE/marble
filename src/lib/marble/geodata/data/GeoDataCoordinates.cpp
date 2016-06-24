@@ -42,6 +42,12 @@ class LonLatParser
 private:
     enum DirPosition { PrefixDir, PostfixDir };
 
+    /**
+     * Parses the double value from the input string in system locale
+     * if it contains the system locale decimalpoint char,
+     * otherwise parses it in the C locale.
+     */
+    static double parseDouble(const QString& input);
     static QString createDecimalPointExp();
     static QString regExp( const QString& string );
     static void getLocaleList( QStringList& localeList, const QString& localeListString,
@@ -255,8 +261,8 @@ bool LonLatParser::parse( const QString& string )
 
         const QRegExp regex = QRegExp( numberCapExp );
         if( regex.exactMatch(input) ) {
-            m_lon = regex.cap(2).toDouble();
-            m_lat = regex.cap(1).toDouble();
+            m_lon = parseDouble(regex.cap(2));
+            m_lat = parseDouble(regex.cap(1));
 
             return true;
         }
@@ -427,6 +433,16 @@ bool LonLatParser::tryMatchFromD( const QString& input, DirPosition dirPosition 
     return true;
 }
 
+double LonLatParser::parseDouble(const QString& input)
+{
+    // Decide by decimalpoint if system locale or C locale should be tried.
+    // Otherwise if first trying with a system locale when the string is in C locale,
+    // the "." might be misinterpreted as thousands group separator and thus a wrong
+    // value yielded
+    QLocale locale = QLocale::system();
+    return input.contains(locale.decimalPoint()) ? locale.toDouble(input) : input.toDouble();
+}
+
 QString LonLatParser::createDecimalPointExp()
 {
     const QChar decimalPoint = QLocale::system().decimalPoint();
@@ -521,7 +537,7 @@ qreal LonLatParser::degreeValueFromDMS( const QRegExp& regex, int c, bool isPosH
     const bool isNegativeValue = (regex.cap( c++ ) == QLatin1String("-"));
     const uint degree = regex.cap( c++ ).toUInt();
     const uint minutes = regex.cap( c++ ).toUInt();
-    const qreal seconds = regex.cap( c ).toDouble();
+    const qreal seconds = parseDouble(regex.cap( c ));
 
     qreal result = degree + (minutes*MIN2HOUR) + (seconds*SEC2HOUR);
 
@@ -537,7 +553,7 @@ qreal LonLatParser::degreeValueFromDM( const QRegExp& regex, int c, bool isPosHe
 {
     const bool isNegativeValue = (regex.cap( c++ ) == QLatin1String("-"));
     const uint degree = regex.cap( c++ ).toUInt();
-    const qreal minutes = regex.cap( c ).toDouble();
+    const qreal minutes = parseDouble(regex.cap( c ));
 
     qreal result = degree + (minutes*MIN2HOUR);
 
@@ -551,7 +567,7 @@ qreal LonLatParser::degreeValueFromDM( const QRegExp& regex, int c, bool isPosHe
 
 qreal LonLatParser::degreeValueFromD( const QRegExp& regex, int c, bool isPosHemisphere )
 {
-    qreal result = regex.cap( c ).toDouble();
+    qreal result = parseDouble(regex.cap( c ));
 
     if (! isPosHemisphere)
         result *= -1;
