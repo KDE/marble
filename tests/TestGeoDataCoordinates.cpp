@@ -1475,9 +1475,9 @@ void TestGeoDataCoordinates::testFromLocaleString_data()
             language.name +
             QLatin1String("|") + sample.name +
             QLatin1String("|lon:") +
-            QString::fromLatin1("%L1").arg(sample.lon, 0, 'f', 10) +
+            QString::number(sample.lon, 'f', 10) +
             QLatin1String("|lat:") +
-            QString::fromLatin1("%L1").arg(sample.lat, 0, 'f', 10);
+            QString::number(sample.lat, 'f', 10);
 
         QTest::newRow(rowTitle.toLatin1())
             << language.degree
@@ -1521,8 +1521,8 @@ void TestGeoDataCoordinates::testFromLocaleString()
     QVERIFY(succeeded);
 
 // Uncomment to get the lon and lat values with more precision
-// qWarning() << "lon"<<QString::fromLatin1("%L1").arg(coords.longitude(GeoDataCoordinates::Degree), 0, 'f', 20)
-//            << "lat"<<QString::fromLatin1("%L1").arg(coords.latitude(GeoDataCoordinates::Degree), 0, 'f', 20);
+// qWarning() << "lon"<<QString::number(coords.longitude(GeoDataCoordinates::Degree), 'f', 20)
+//            << "lat"<<QString::number(coords.latitude(GeoDataCoordinates::Degree), 'f', 20);
 
     QCOMPARE(coords.longitude(GeoDataCoordinates::Degree), lon);
     QCOMPARE(coords.latitude(GeoDataCoordinates::Degree),  lat);
