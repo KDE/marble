@@ -413,6 +413,8 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         AdminLevel10,
         AdminLevel11,
 
+        BoundaryMaritime,
+
         //Custom OSM Tags
         Landmass,
         UrbanArea,

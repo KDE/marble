@@ -360,7 +360,7 @@ void GeometryLayerPrivate::initializeDefaultValues()
     s_defaultMinZoomLevels[GeoDataFeature::AdminLevel10]        = 8;
     s_defaultMinZoomLevels[GeoDataFeature::AdminLevel11]        = 8;
 
-
+    s_defaultMinZoomLevels[GeoDataFeature::BoundaryMaritime]    = 1;
     for ( int i = 0; i < GeoDataFeature::LastIndex; ++i ) {
         s_maximumZoomLevel = qMax( s_maximumZoomLevel, s_defaultMinZoomLevels[i] );
     }

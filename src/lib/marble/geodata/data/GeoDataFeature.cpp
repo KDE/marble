@@ -451,6 +451,7 @@ QString GeoDataFeature::visualCategoryName(GeoDataFeature::GeoDataVisualCategory
         s_visualCategoryNames[AdminLevel9] = "AdminLevel9";
         s_visualCategoryNames[AdminLevel10] = "AdminLevel10";
         s_visualCategoryNames[AdminLevel11] = "AdminLevel11";
+        s_visualCategoryNames[BoundaryMaritime] = "BoundaryMaritime";
         s_visualCategoryNames[LastIndex] = "LastIndex";
     }
 

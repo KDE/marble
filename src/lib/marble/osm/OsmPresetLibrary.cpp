@@ -44,6 +44,8 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "admin_level", "10" ) ]             = GeoDataFeature::AdminLevel10;
     s_visualCategories[ OsmTag( "admin_level", "11" ) ]             = GeoDataFeature::AdminLevel11;
 
+    s_visualCategories[ OsmTag( "boundary", "maritime" ) ]          = GeoDataFeature::BoundaryMaritime;
+
     s_visualCategories[ OsmTag( "amenity", "restaurant" ) ]         = GeoDataFeature::FoodRestaurant;
     s_visualCategories[ OsmTag( "amenity", "fast_food" ) ]          = GeoDataFeature::FoodFastFood;
     s_visualCategories[ OsmTag( "amenity", "pub" ) ]                = GeoDataFeature::FoodPub;

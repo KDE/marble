@@ -605,6 +605,8 @@ void StyleBuilder::Private::initializeDefaultStyles()
     s_defaultStyle[GeoDataFeature::AdminLevel10]             = StyleBuilder::Private::createStyle(1.5, 0.0, "#DF9CCF", "#DF9CCF", false, true, Qt::SolidPattern, Qt::DotLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3 );
     s_defaultStyle[GeoDataFeature::AdminLevel11]             = StyleBuilder::Private::createStyle(1.5, 0.0, "#DF9CCF", "#DF9CCF", false, true, Qt::SolidPattern, Qt::DotLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3 );
 
+    s_defaultStyle[GeoDataFeature::BoundaryMaritime]         = StyleBuilder::Private::createStyle(2.0, 0.0, "#88b3bf", "#88b3bf", false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false );
+
     s_defaultStyle[GeoDataFeature::Satellite]
         = GeoDataStyle::Ptr(new GeoDataStyle( MarbleDirs::path( "bitmaps/satellite.png" ),
               QFont( defaultFamily, defaultSize, 50, false ), defaultLabelColor ));
@@ -757,7 +759,16 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
         GeoDataLineStyle lineStyle = style->lineStyle();
         lineStyle.setCosmeticOutline(true);
 
-        if (visualCategory >= GeoDataFeature::HighwayService &&
+        if(visualCategory == GeoDataFeature::AdminLevel2){
+            if (osmData.containsTag("maritime", "yes") ) {
+                lineStyle.setColor("#88b3bf");
+                polyStyle.setColor("#88b3bf");
+                if( osmData.containsTag("marble:disputed", "yes") ){
+                    lineStyle.setPenStyle( Qt::DashLine );
+                }
+            }
+        }
+        else if (visualCategory >= GeoDataFeature::HighwayService &&
                 visualCategory <= GeoDataFeature::HighwayMotorway) {
 
             if (parameters.tileLevel >= 0 && parameters.tileLevel <= 7) {
@@ -807,7 +818,6 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
                 lineStyle.setPhysicalWidth(ok ? qBound(0.1f, width, 200.0f) : 0.0f);
             }
         }
-
         GeoDataStyle::Ptr newStyle(new GeoDataStyle(*style));
         newStyle->setPolyStyle(polyStyle);
         newStyle->setLineStyle(lineStyle);
