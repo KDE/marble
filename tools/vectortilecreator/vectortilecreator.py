@@ -25,19 +25,70 @@ from subprocess import call
 import argparse
 import urllib3
 
-def deg2num(lat_deg, lon_deg, zoom):
-    lat_rad = math.radians(lat_deg)
-    n = 2.0 ** zoom
-    xtile = int((lon_deg + 180.0) / 360.0 * n)
-    ytile = int((1.0 - math.log(math.tan(lat_rad) + (1 / math.cos(lat_rad))) / math.pi) / 2.0 * n)
-    return (xtile, ytile)
 
-def num2deg(xtile, ytile, zoom):
-    n = 2.0 ** zoom
-    lon_deg = xtile / n * 360.0 - 180.0
-    lat_rad = math.atan(math.sinh(math.pi * (1 - 2 * ytile / n)))
-    lat_deg = math.degrees(lat_rad)
-    return (lat_deg, lon_deg)
+class Tile(object):
+
+    def __init__(self, x, y, zoom):
+        self.x = x
+        self.y = y
+        self.zoom = zoom
+
+    def west(self):
+        return self.__longitude(self.x)
+
+    def east(self):
+        return self.__longitude(self.x+1)
+
+    def north(self):
+        return self.__latitude(self.y)
+
+    def south(self):
+        return self.__latitude(self.y+1)
+
+    def __longitude(self, x):
+        n = 2.0 ** self.zoom
+        return x / n * 360.0 - 180.0
+
+    def __latitude(self, y):
+        n = 2.0 ** self.zoom
+        lat_rad = math.atan(math.sinh(math.pi * (1 - 2 * y / n)))
+        return math.degrees(lat_rad)
+
+
+class Coordinate(object):
+
+    def __init__(self, lon, lat):
+        self.lon = lon
+        self.lat = lat
+
+    def tile(self, zoom):
+        lat_rad = math.radians(self.lat)
+        n = 2.0 ** zoom
+        xtile = int((self.lon + 180.0) / 360.0 * n)
+        ytile = int((1.0 - math.log(math.tan(lat_rad) + (1 / math.cos(lat_rad))) / math.pi) / 2.0 * n)
+        return Tile(xtile, ytile, zoom)
+
+
+class TileLevelRegion(object):
+
+    def __init__(self, coordinateA, coordinateB, zoom):
+        west = min(coordinateA.lon, coordinateB.lon)
+        east = max(coordinateA.lon, coordinateB.lon)
+        south = min(coordinateA.lat, coordinateB.lat)
+        north = max(coordinateA.lat, coordinateB.lat)
+        self.topLeft = Coordinate(west, north).tile(zoom)
+        self.bottomRight = Coordinate(east, south).tile(zoom)
+
+    def tileCount(self):
+        xCount = 1 + self.bottomRight.x - self.topLeft.x
+        yCount = 1 + self.bottomRight.y - self.topLeft.y
+        return xCount * yCount
+
+    def tiles(self):
+        for x in range(self.topLeft.x, self.bottomRight.x+1):
+            for y  in range(self.topLeft.y, self.bottomRight.y+1):
+                yield Tile(x, y, self.topLeft.zoom)
+
 
 def download(url, directory, refresh):
     filename = url.split('/')[-1]
@@ -78,38 +129,35 @@ def run(filenames, cache, refresh, directory, overwrite, zoomLevels):
             reader = csv.reader(csvfile, delimiter=';', quotechar='|')
             for bounds in reader:
                 filename = download(bounds[0], cache, refresh)
+                topLeft = Coordinate(float(bounds[2]), float(bounds[5]))
+                bottomRight = Coordinate(float(bounds[4]), float(bounds[3]))
                 for zoom in zoomLevels:
-                    bottomLeft = deg2num(float(bounds[3]), float(bounds[2]), zoom)
-                    topRight = deg2num(float(bounds[5]), float(bounds[4]), zoom)
-                    xDiff = topRight[0]-bottomLeft[0]
-                    yDiff = bottomLeft[1]-topRight[1]
-                    total = xDiff*yDiff
+                    bbox = TileLevelRegion(topLeft, bottomRight, zoom)
+                    total = bbox.tileCount()
                     count = 0
                     cutted = "{}/{}.{}-{}-{}-{}.osm.o5m".format(cache, filename, bounds[2], bounds[3], bounds[4], bounds[5])
                     if not os.path.exists(cutted):
                         print ("Creating cut out region {}".format(cutted))
                         call(["osmconvert", "-t={}/osmconvert_tmp-".format(cache), "--complete-ways", "--complex-ways", "--drop-version", "-b={},{},{},{}".format(bounds[2], bounds[3], bounds[4], bounds[5]), "-o={}".format(cutted), os.path.join(cache, filename)])
-                    for x in range(1+bottomLeft[0], topRight[0]+1):
-                        for y in range(1+topRight[1], bottomLeft[1]+1):
-                            count += 1
-                            tl = num2deg(x-1, y-1, zoom)
-                            br = num2deg(x, y, zoom)
-                            path = "{}/{}/{}".format(directory, zoom, x-1)
-                            target = "{}.o5m".format(y-1)
-                            filterTarget = "{}_tmp.o5m".format(y-1)
-                            if not overwrite and os.path.exists(os.path.join(path, target)):
-                                print("Skipping existing file {}\r".format(os.path.join(path, target)), end='')
+                    for tile in bbox.tiles():
+                        count += 1
+                        path = "{}/{}/{}".format(directory, zoom, tile.x)
+                        target = "{}.o5m".format(tile.y)
+                        boxString = "-b={},{},{},{}".format(tile.west(), tile.south(), tile.east(), tile.north())
+                        filterTarget = "{}_tmp.o5m".format(tile.y)
+                        if not overwrite and os.path.exists(os.path.join(path, target)):
+                            print("Skipping existing file {}\r".format(os.path.join(path, target)), end='')
+                        else:
+                            call(["mkdir", "-p", path])
+                            print ("{} level {}: {}/{} {}\r".format(bounds[1], zoom, count, total, os.path.join(path, target)), end='')
+                            filterLevel = "levels/{}.level".format(zoom)
+                            if os.path.exists(filterLevel):
+                                call(["osmconvert", "-t={}/osmconvert_tmp-".format(cache), "--complete-ways", "--complex-ways", "--drop-version", boxString, cutted, "-o={}".format(os.path.join(path, filterTarget))])
+                                call(["osmfilter", "--parameter-file={}".format(filterLevel), os.path.join(path, filterTarget), "-o={}".format(os.path.join(path, target))])
+                                os.remove(os.path.join(path, filterTarget))
                             else:
-                                call(["mkdir", "-p", path])
-                                print ("{} level {}: {}/{} {}\r".format(bounds[1], zoom, count, total, os.path.join(path, target)), end='')
-                                filterLevel = "levels/{}.level".format(zoom)
-                                if os.path.exists(filterLevel):
-                                    call(["osmconvert", "-t={}/osmconvert_tmp-".format(cache), "--complete-ways", "--complex-ways", "--drop-version", "-b={},{},{},{}".format(tl[1],br[0],br[1],tl[0]), cutted, "-o={}".format(os.path.join(path, filterTarget))])
-                                    call(["osmfilter", "--parameter-file={}".format(filterLevel), os.path.join(path, filterTarget), "-o={}".format(os.path.join(path, target))])
-                                    os.remove(os.path.join(path, filterTarget))
-                                else:
-                                    call(["osmconvert", "-t={}/osmconvert_tmp-".format(cache), "--complete-ways", "--complex-ways", "--drop-version", "-b={},{},{},{}".format(tl[1],br[0],br[1],tl[0]), cutted, "-o={}".format(os.path.join(path, target))])
-                                call(["chmod", "644", os.path.join(path, target)])
+                                call(["osmconvert", "-t={}/osmconvert_tmp-".format(cache), "--complete-ways", "--complex-ways", "--drop-version", boxString, cutted, "-o={}".format(os.path.join(path, target))])
+                            call(["chmod", "644", os.path.join(path, target)])
 
 
 if __name__ == "__main__":
