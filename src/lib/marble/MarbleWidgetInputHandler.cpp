@@ -118,7 +118,7 @@ bool MarbleWidgetInputHandler::handleKeyPress(QKeyEvent *event)
             break;
         }
     }
-    return false;
+    return MarbleDefaultInputHandler::handleKeyPress(event);
 }
 
 AbstractSelectionRubber *MarbleWidgetInputHandler::selectionRubber()

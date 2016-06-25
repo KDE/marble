@@ -137,6 +137,8 @@ class MARBLE_EXPORT MarbleDefaultInputHandler  : public MarbleInputHandler
     QTimer* toolTipTimer();
     QPoint toolTipPosition();
 
+    virtual bool handleKeyPress(QKeyEvent *e);
+
  private Q_SLOTS:
     virtual void installPluginEventFilter( RenderPlugin *renderPlugin ) = 0;
     virtual void showLmbMenu( int, int ) = 0;
@@ -152,7 +154,6 @@ class MARBLE_EXPORT MarbleDefaultInputHandler  : public MarbleInputHandler
     virtual bool layersEventFilter(QObject *, QEvent *) = 0;
 
     virtual bool handleTouch(QTouchEvent *e);
-    virtual bool handleKeyPress(QKeyEvent *e);
     virtual bool handleDoubleClick(QMouseEvent *e);
     virtual bool handleWheel(QWheelEvent *e);
     virtual bool handleGesture(QGestureEvent *e);
