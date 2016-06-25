@@ -363,7 +363,7 @@ void OsmParser::read( const QFileInfo &content, const QString &areaName )
     QSet<QString> keys = QSet<QString>::fromList( waysByName.keys() );
     foreach( const QString & key, keys ) {
         QList<QList<Way> > merged = merge( waysByName.values( key ) );
-        foreach( const QList<Way> ways, merged ) {
+        foreach( const QList<Way> & ways, merged ) {
             Q_ASSERT( !ways.isEmpty() );
             OsmPlacemark placemark = ways.first();
             ways.first().setPosition( m_coordinates, placemark );

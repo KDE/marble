@@ -225,7 +225,7 @@ void GeoGraphicsScene::applyHighlight( const QVector< GeoDataPlacemark* > &selec
 void GeoGraphicsScene::removeItem( const GeoDataFeature* feature )
 {
     QList<TileId> keys = d->m_features.values( feature );
-    foreach( TileId key, keys ) {
+    foreach( const TileId& key, keys ) {
         QList< GeoGraphicsItem* >& tileList = d->m_items[key];
         foreach( GeoGraphicsItem* item, tileList ) {
             if( item->feature() == feature ) {

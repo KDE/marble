@@ -354,7 +354,7 @@ void BookmarkSyncManager::Private::clearCache()
                 QStringList() << "*.kml",
                 QDir::NoFilter, QDir::Name );
     if( !fileInfoList.isEmpty() ) {
-        foreach ( QFileInfo fileInfo, fileInfoList ) {
+        foreach ( const QFileInfo& fileInfo, fileInfoList ) {
             QFile file( fileInfo.absoluteFilePath() );
             bool removed = file.remove();
             if( !removed ) {
