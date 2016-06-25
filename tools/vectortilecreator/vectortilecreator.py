@@ -90,6 +90,30 @@ class TileLevelRegion(object):
                 yield Tile(x, y, self.topLeft.zoom)
 
 
+class InputProvider(object):
+
+    def __init__(self, cacheDirectory, inputFile, refresh):
+        self._cacheDirectory = cacheDirectory
+        self.__inputFile = download(inputFile, cacheDirectory, refresh)
+
+    def file(self, tile):
+        return self.__zoomOut(tile, tile.zoom - 2)
+
+    def __zoomOut(self, tile, zoom):
+        if zoom < 0:
+            return self.__inputFile
+
+        coordinate = Coordinate(tile.west(), tile.north())
+        baseZoom = max(0, zoom)
+        baseTile = coordinate.tile(baseZoom)
+        cutted = "{}/{}_{}_{}_{}.o5m".format(self._cacheDirectory, tile.zoom, baseTile.zoom, baseTile.x, baseTile.y)
+        if not os.path.exists(cutted):
+            print ("Creating cut out region {}\r".format(cutted), end='')
+            inputFile = self.__zoomOut(tile, zoom - 2)
+            call(["osmconvert", "-t={}/osmconvert_tmp-".format(self._cacheDirectory), "--complete-ways", "--complex-ways", "--drop-version", "-b={},{},{},{}".format(baseTile.west(), baseTile.south(), baseTile.east(), baseTile.north()), "-o={}".format(cutted), os.path.join(self._cacheDirectory, inputFile)])
+        return cutted
+
+
 def download(url, directory, refresh):
     filename = url.split('/')[-1]
     path = os.path.join(directory, filename)
@@ -128,17 +152,13 @@ def run(filenames, cache, refresh, directory, overwrite, zoomLevels):
         with open(csvfilename, 'r') as csvfile:
             reader = csv.reader(csvfile, delimiter=';', quotechar='|')
             for bounds in reader:
-                filename = download(bounds[0], cache, refresh)
+                inputProvider = InputProvider(cache, bounds[0], refresh)
                 topLeft = Coordinate(float(bounds[2]), float(bounds[5]))
                 bottomRight = Coordinate(float(bounds[4]), float(bounds[3]))
                 for zoom in zoomLevels:
                     bbox = TileLevelRegion(topLeft, bottomRight, zoom)
                     total = bbox.tileCount()
                     count = 0
-                    cutted = "{}/{}.{}-{}-{}-{}.osm.o5m".format(cache, filename, bounds[2], bounds[3], bounds[4], bounds[5])
-                    if not os.path.exists(cutted):
-                        print ("Creating cut out region {}".format(cutted))
-                        call(["osmconvert", "-t={}/osmconvert_tmp-".format(cache), "--complete-ways", "--complex-ways", "--drop-version", "-b={},{},{},{}".format(bounds[2], bounds[3], bounds[4], bounds[5]), "-o={}".format(cutted), os.path.join(cache, filename)])
                     for tile in bbox.tiles():
                         count += 1
                         path = "{}/{}/{}".format(directory, zoom, tile.x)
@@ -148,6 +168,7 @@ def run(filenames, cache, refresh, directory, overwrite, zoomLevels):
                         if not overwrite and os.path.exists(os.path.join(path, target)):
                             print("Skipping existing file {}\r".format(os.path.join(path, target)), end='')
                         else:
+                            cutted = inputProvider.file(tile)
                             call(["mkdir", "-p", path])
                             print ("{} level {}: {}/{} {}\r".format(bounds[1], zoom, count, total, os.path.join(path, target)), end='')
                             filterLevel = "levels/{}.level".format(zoom)
