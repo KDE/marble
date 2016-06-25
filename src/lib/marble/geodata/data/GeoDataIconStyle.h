@@ -67,6 +67,22 @@ class GEODATA_EXPORT GeoDataIconStyle : public GeoDataColorStyle
     void setHotSpot( const QPointF& hotSpot, GeoDataHotSpot::Units xunits, GeoDataHotSpot::Units yunits );
     QPointF hotSpot( GeoDataHotSpot::Units& xunits, GeoDataHotSpot::Units& yunits ) const;
 
+    /**
+     * @brief setSize Change the size of @see icon(). A null size (0, 0) is treated as a request to keep
+     * the original icon size. Otherwise the icon will be scaled to the given size. This is especially useful
+     * for vector graphics like .svg or to keep the memory footprint low when loading large images.
+     * @param size Size in pixel that @see icon() should have. When the icon was previously set by @setIcon,
+     * it is resized unless a null size is passed. Otherwise icon() will be scaled to the given size.
+     */
+    void setSize(const QSize &size);
+
+    /**
+     * @brief size Returns the size @see icon() will have if it can be loaded from @see iconPath.
+     * A null size (default) is returned to indicate that the original size of the icon is used.
+     * @return size specified by @see setSize
+     */
+    QSize size() const;
+
     void setScale( const float &scale );
     float scale() const;
 

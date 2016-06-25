@@ -17,6 +17,8 @@
 #include "GeoDataTypes.h"
 #include "GeoDataPlacemark.h"
 #include "OsmPresetLibrary.h"
+#include <QScreen>
+#include <QApplication>
 
 #include <QDebug>
 
@@ -57,27 +59,30 @@ public:
 GeoDataStyle::Ptr StyleBuilder::Private::s_defaultStyle[GeoDataFeature::LastIndex];
 bool StyleBuilder::Private::s_defaultStyleInitialized = false;
 
-GeoDataStyle::Ptr StyleBuilder::Private::createOsmPOIStyle( const QFont &font, const QString &bitmap,
+GeoDataStyle::Ptr StyleBuilder::Private::createOsmPOIStyle( const QFont &font, const QString &imagePath,
                                      const QColor &textColor, const QColor &color, const QColor &outline)
 {
     GeoDataStyle::Ptr style =  createStyle(1, 0, color, outline, true, true, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false);
-    QString const imagePath = MarbleDirs::path( "bitmaps/osmcarto/symbols/48/" + bitmap + ".png" );
-    style->setIconStyle( GeoDataIconStyle( imagePath) );
-    style->iconStyle().setScale(0.67);
+    QString const path = MarbleDirs::path( "svg/osmcarto/svg/" + imagePath + ".svg" );
+    style->setIconStyle( GeoDataIconStyle( path) );
+    auto const screen = QApplication::screens().first();
+    double const physicalSize = 6.0; // mm
+    int const pixelSize = qRound(physicalSize * screen->physicalDotsPerInch() / (IN2M * M2MM));
+    style->iconStyle().setSize(QSize(pixelSize, pixelSize));
     style->setLabelStyle( GeoDataLabelStyle( font, textColor ) );
     style->labelStyle().setAlignment(GeoDataLabelStyle::Center);
     return style;
 }
 
-GeoDataStyle::Ptr StyleBuilder::Private::createHighwayStyle( const QString &bitmap, const QColor& color, const QColor& outlineColor,
+GeoDataStyle::Ptr StyleBuilder::Private::createHighwayStyle( const QString &imagePath, const QColor& color, const QColor& outlineColor,
                                          const QFont& font, const QColor& fontColor, qreal width, qreal realWidth, Qt::PenStyle penStyle,
                                                              Qt::PenCapStyle capStyle, bool lineBackground)
 {
     GeoDataStyle::Ptr style = createStyle( width, realWidth, color, outlineColor, true, true,
                                        Qt::SolidPattern, penStyle, capStyle, lineBackground, QVector< qreal >(),
                                        font, fontColor );
-    if( !bitmap.isEmpty() ) {
-        style->setIconStyle( GeoDataIconStyle( MarbleDirs::path( "bitmaps/" + bitmap + ".png" ) ) );
+    if( !imagePath.isEmpty() ) {
+        style->setIconStyle( GeoDataIconStyle( MarbleDirs::path( "svg/osmcarto/svg/" + imagePath + ".svg" ) ) );
     }
     return style;
 }
@@ -696,8 +701,8 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
 
                 if (!season.isEmpty()) {
                     GeoDataIconStyle iconStyle = style->iconStyle();
-                    QString const bitmap = QString("bitmaps/osmcarto/symbols/48/individual/tree-29-%1.png").arg(season);
-                    iconStyle.setIconPath(MarbleDirs::path(bitmap));
+                    QString const image = QString("svg/osmcarto/svg/individual/tree-29-%1.svg").arg(season);
+                    iconStyle.setIconPath(MarbleDirs::path(image));
 
                     GeoDataStyle::Ptr newStyle(new GeoDataStyle(*style));
                     newStyle->setIconStyle(iconStyle);
