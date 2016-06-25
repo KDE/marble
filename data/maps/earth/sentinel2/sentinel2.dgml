@@ -3,7 +3,7 @@
     <document>
         <head>
             <name>Sentinel2 Satellite Map</name>
-      <license short="Contains ©Copernicus Sentinel data 2016">Source: ESA Sentinel 2 mission, Terms and Conditions: http://sedas.satapps.org/data-uses-distribution/</license>
+            <license short="Contains ©Copernicus Sentinel data 2016">Source: ESA Sentinel 2 mission, Terms and Conditions: http://sedas.satapps.org/data-uses-distribution/</license>
             <target>earth</target>
             <theme>sentinel2</theme>
             <icon pixmap="sentinel2-preview.png"/>
@@ -25,6 +25,7 @@
                     <sourcedir format="JPG"> earth/sentinel2 </sourcedir>
                     <storageLayout levelZeroColumns="1" levelZeroRows="1" maximumTileLevel="14" mode="OpenStreetMap" />
                     <projection name="Mercator" />
+                    <downloadUrl protocol="http" host="maps.kde.org" path="/earth/sentinel2/" />
                     <downloadPolicy usage="Browse" maximumConnections="20" />
                     <downloadPolicy usage="Bulk" maximumConnections="2" />
                 </texture>
