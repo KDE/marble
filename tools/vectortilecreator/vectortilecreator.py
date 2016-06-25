@@ -92,9 +92,11 @@ class TileLevelRegion(object):
 
 class InputProvider(object):
 
-    def __init__(self, cacheDirectory, inputFile, refresh):
+    def __init__(self, cacheDirectory, inputFile, refresh, overwrite):
         self._cacheDirectory = cacheDirectory
         self.__inputFile = download(inputFile, cacheDirectory, refresh)
+        self.overwrite = overwrite
+        self.__createdFiles = set()
 
     def file(self, tile):
         return self.__zoomOut(tile, tile.zoom - 2)
@@ -107,8 +109,9 @@ class InputProvider(object):
         baseZoom = max(0, zoom)
         baseTile = coordinate.tile(baseZoom)
         cutted = "{}/{}_{}_{}_{}.o5m".format(self._cacheDirectory, tile.zoom, baseTile.zoom, baseTile.x, baseTile.y)
-        if not os.path.exists(cutted):
+        if (self.overwrite and cutted not in self.__createdFiles) or not os.path.exists(cutted):
             print ("Creating cut out region {}\r".format(cutted), end='')
+            self.__createdFiles.add(cutted)
             inputFile = self.__zoomOut(tile, zoom - 2)
             call(["osmconvert", "-t={}/osmconvert_tmp-".format(self._cacheDirectory), "--complete-ways", "--complex-ways", "--drop-version", "-b={},{},{},{}".format(baseTile.west(), baseTile.south(), baseTile.east(), baseTile.north()), "-o={}".format(cutted), os.path.join(self._cacheDirectory, inputFile)])
         return cutted
@@ -152,7 +155,7 @@ def run(filenames, cache, refresh, directory, overwrite, zoomLevels):
         with open(csvfilename, 'r') as csvfile:
             reader = csv.reader(csvfile, delimiter=';', quotechar='|')
             for bounds in reader:
-                inputProvider = InputProvider(cache, bounds[0], refresh)
+                inputProvider = InputProvider(cache, bounds[0], refresh, overwrite)
                 topLeft = Coordinate(float(bounds[2]), float(bounds[5]))
                 bottomRight = Coordinate(float(bounds[4]), float(bounds[3]))
                 for zoom in zoomLevels:
