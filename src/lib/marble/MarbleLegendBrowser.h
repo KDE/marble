@@ -54,7 +54,7 @@ class MARBLE_EXPORT MarbleLegendBrowser : public MarbleWebView
 
 
  Q_SIGNALS:
-    void toggledShowProperty( QString, bool );
+    void toggledShowProperty( const QString&, bool );
     void tourLinkClicked( const QString &url );
 
  private Q_SLOTS:

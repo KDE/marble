@@ -48,12 +48,12 @@ public Q_SLOTS:
     void setDefaultFeatureId( const QString &id );
 
 Q_SIGNALS:
-    void editingChanged( QModelIndex index );
-    void edited( QModelIndex index );
+    void editingChanged( const QModelIndex& index );
+    void edited( const QModelIndex& index );
     void editableChanged( bool editable );
     void firstFlyToChanged( const QPersistentModelIndex &newFirstFlyTo );
-    void featureIdsChanged( QStringList ids );
-    void defaultFeatureIdChanged( QString id );
+    void featureIdsChanged( const QStringList& ids );
+    void defaultFeatureIdChanged( const QString& id );
 
 public:
 

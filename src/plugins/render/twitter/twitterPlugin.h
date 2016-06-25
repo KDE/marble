@@ -78,7 +78,7 @@ public Q_SLOTS:
     void slotGeoCodingReplyRecieved(QString , QString);   //completed download of image
 
 Q_SIGNALS:
-    void statusMessageForImageDownloadingProcess(QString);
+    void statusMessageForImageDownloadingProcess(const QString&);
 private:
     CacheStoragePolicy *m_storagePolicy;
     HttpDownloadManager *m_downloadManager;

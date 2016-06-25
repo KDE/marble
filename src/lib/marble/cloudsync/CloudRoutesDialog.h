@@ -33,11 +33,11 @@ public Q_SLOTS:
     void updateListDownloadProgressbar( qint64 received, qint64 total );
 
 Q_SIGNALS:
-    void downloadButtonClicked( QString timestamp );
-    void openButtonClicked( QString timestamp );
-    void deleteButtonClicked( QString timestamp );
-    void removeFromCacheButtonClicked( QString timestamp );
-    void uploadToCloudButtonClicked( QString timestamp );
+    void downloadButtonClicked( const QString& timestamp );
+    void openButtonClicked( const QString& timestamp );
+    void deleteButtonClicked( const QString& timestamp );
+    void removeFromCacheButtonClicked( const QString& timestamp );
+    void uploadToCloudButtonClicked( const QString& timestamp );
 
 private:
     class Private;

@@ -44,7 +44,7 @@ class AbstractWeatherService : public QObject
     
  Q_SIGNALS:
     void requestedDownload( const QUrl& url, const QString& type, AbstractDataPluginItem *item );
-    void createdItems( QList<AbstractDataPluginItem*> items );
+    void createdItems( const QList<AbstractDataPluginItem*>& items );
     void downloadDescriptionFileRequested( const QUrl& );
 
 protected:

@@ -305,7 +305,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
     /**
      * This signal is emitted if the settings of the RenderPlugin changed.
      */
-    void settingsChanged( QString nameId );
+    void settingsChanged( const QString& nameId );
 
     /**
      * This signal is emitted if the actions that the plugin supports change in
@@ -318,7 +318,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
      * @p dirtyRegion which is the region the view will change in. If dirtyRegion.isEmpty() returns
      * true, the whole viewport has to be repainted.
      */
-    void repaintNeeded( QRegion dirtyRegion = QRegion() );
+    void repaintNeeded( const QRegion& dirtyRegion = QRegion() );
 
  protected:
     bool eventFilter( QObject *, QEvent * );

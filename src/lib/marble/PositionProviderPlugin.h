@@ -44,8 +44,8 @@ class MARBLE_EXPORT PositionProviderPlugin : public QObject, public PositionProv
 
  Q_SIGNALS:
     void statusChanged( PositionProviderStatus status ) const;
-    void positionChanged( GeoDataCoordinates position,
-                          GeoDataAccuracy accuracy ) const;
+    void positionChanged( const GeoDataCoordinates& position,
+                          const GeoDataAccuracy& accuracy ) const;
 
  protected:
     PositionProviderPlugin();

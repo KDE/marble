@@ -170,7 +170,7 @@ namespace Marble
         void mapHeightChanged(int mapHeight);
         void showFrameRateChanged(bool showFrameRate);
         void projectionChanged(Projection projection);
-        void mapThemeIdChanged(QString mapThemeId);
+        void mapThemeIdChanged(const QString& mapThemeId);
         void showAtmosphereChanged(bool showAtmosphere);
         void showCompassChanged(bool showCompass);
         void showCloudsChanged(bool showClouds);

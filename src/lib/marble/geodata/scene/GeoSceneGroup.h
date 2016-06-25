@@ -86,7 +86,7 @@ class GeoSceneGroup : public QObject,
     QString name() const;
 
  Q_SIGNALS:
-    void valueChanged( QString, bool );
+    void valueChanged( const QString&, bool );
 
  private:
     Q_DISABLE_COPY( GeoSceneGroup )

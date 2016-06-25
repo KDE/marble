@@ -86,7 +86,7 @@ class MARBLE_EXPORT MarbleInputHandler  : public QObject
 
     //Gps coordinates
     void mouseClickScreenPosition( int, int );
-    void mouseMoveGeoPosition( QString );
+    void mouseMoveGeoPosition( const QString& );
 
     /*
      * To detect mouse click followed by mouse move

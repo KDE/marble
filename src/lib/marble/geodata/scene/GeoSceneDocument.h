@@ -68,7 +68,7 @@ class GEODATA_EXPORT GeoSceneDocument : public QObject,
     GeoSceneLegend* legend();
 
  Q_SIGNALS:
-    void valueChanged( QString, bool );
+    void valueChanged( const QString&, bool );
 
  private:
     Q_DISABLE_COPY( GeoSceneDocument )

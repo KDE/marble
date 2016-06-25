@@ -52,7 +52,7 @@ Q_SIGNALS:
      * This is emitted to indicate that the runner has finished the placemark search.
      * @param result the result of the search.
      */
-    void searchFinished( QVector<GeoDataPlacemark*> result );
+    void searchFinished( const QVector<GeoDataPlacemark*>& result );
 
 protected:
     /**

@@ -43,7 +43,7 @@ Q_SIGNALS:
      * created( or modified ) within the relation editor
      * @param relation the relation's osmData
      */
-    void relationCreated( OsmPlacemarkData relation );
+    void relationCreated( const OsmPlacemarkData &relation );
 
 private Q_SLOTS:
     void updatePolyline();

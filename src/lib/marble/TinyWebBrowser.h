@@ -45,7 +45,7 @@ class MARBLE_EXPORT TinyWebBrowser : public QWebView
     void print();
 
  Q_SIGNALS:
-    void statusMessage( QString );
+    void statusMessage( const QString& );
 
  protected:
     QWebView *createWindow( QWebPage::WebWindowType type );

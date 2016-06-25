@@ -54,7 +54,7 @@ class GEODATA_EXPORT GeoSceneProperty : public QObject,
     void setValue( bool value );
 
  Q_SIGNALS:
-    void valueChanged( QString, bool );
+    void valueChanged( const QString&, bool );
 
  private:
     // FIXME: d-pointerfy

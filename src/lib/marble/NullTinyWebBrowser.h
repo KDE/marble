@@ -37,7 +37,7 @@ class MARBLE_EXPORT TinyWebBrowser : public QWidget
     void print();
 
  Q_SIGNALS:
-    void statusMessage( QString );
+    void statusMessage( const QString& );
 };
 
 }
