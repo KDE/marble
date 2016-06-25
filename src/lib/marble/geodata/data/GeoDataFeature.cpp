@@ -228,6 +228,7 @@ QString GeoDataFeature::visualCategoryName(GeoDataFeature::GeoDataVisualCategory
         s_visualCategoryNames[NaturalBeach] = "NaturalBeach";
         s_visualCategoryNames[NaturalWetland] = "NaturalWetland";
         s_visualCategoryNames[NaturalGlacier] = "NaturalGlacier";
+        s_visualCategoryNames[NaturalIceShelf] = "NaturalIceShelf";
         s_visualCategoryNames[NaturalScrub] = "NaturalScrub";
         s_visualCategoryNames[NaturalCliff] = "NaturalCliff";
         s_visualCategoryNames[NaturalHeath] = "NaturalHeath";

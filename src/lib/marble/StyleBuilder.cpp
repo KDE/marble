@@ -538,6 +538,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
     s_defaultStyle[GeoDataFeature::NaturalBeach]             = StyleBuilder::Private::createWayStyle( "#FFF1BA", "#FFF1BA", true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/beach.png") );
     s_defaultStyle[GeoDataFeature::NaturalWetland]           = StyleBuilder::Private::createWayStyle( "#DDECEC", "#DDECEC", true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/wetland.png") );
     s_defaultStyle[GeoDataFeature::NaturalGlacier]           = StyleBuilder::Private::createWayStyle( "#DDECEC", "#DDECEC", true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/glacier.png") );
+    s_defaultStyle[GeoDataFeature::NaturalIceShelf]           = StyleBuilder::Private::createWayStyle( "#8ebebe", "#8ebebe", true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/glacier.png") );
     s_defaultStyle[GeoDataFeature::NaturalScrub]             = StyleBuilder::Private::createWayStyle( "#B5E3B5", "#B5E3B5", true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/scrub.png") );
     s_defaultStyle[GeoDataFeature::NaturalCliff]             = StyleBuilder::Private::createWayStyle( Qt::transparent, Qt::transparent, true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/cliff2.png") );
     s_defaultStyle[GeoDataFeature::NaturalHeath]             = StyleBuilder::Private::createWayStyle( "#d6d99f", QColor("#d6d99f").darker(150), true, false );

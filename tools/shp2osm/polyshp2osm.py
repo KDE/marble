@@ -248,7 +248,8 @@ def feature_class(data):
     'ocean': [('natural', 'water')],
     'channel': [('natural', 'water')],
     'Playa': [('natural', 'water'), ('water', 'lake'), ('salt', 'yes')],
-    'Antarctic Ice Shelf': [(' glacier:type','shelf'), ('natural', 'glacier')], #Marble does not support the glacier:type tag
+    #glacier:type is a proposed OSM tag - http://wiki.openstreetmap.org/wiki/Proposed_features/Glaciers_tags
+    'Antarctic Ice Shelf': [('natural', 'glacier'), ('glacier:type','shelf')], 
     'Antarctic Ice Shelf Edge': [('glacier:edge', 'calving_line')], #marble does not support this osm tag
     'Glaciated areas': [('natural', 'glacier')],
     'Admin-0 Tiny Countries': [],
@@ -630,7 +631,7 @@ def run(filenames, slice_count=1, obj_count=5000000, output_location=None, no_so
     """Run the converter. Requires open_file, file_name, id_counter,
     file_counter, counter to be defined in global space; not really a very good
     singleton."""
-    global id_counter, file_counter, counter, file_name, open_file, namespace, non_geom, non_fcla_dict, nodes, ways, relations
+    global id_counter, file_counter, counter, file_name, open_file, namespace, non_geom, non_fcla_dict, nodes, ways, relations, geom_counter
     open_file = None
  
     file_name = None 

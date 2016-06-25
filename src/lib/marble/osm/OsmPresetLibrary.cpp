@@ -231,6 +231,7 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "natural", "beach" ) ]              = GeoDataFeature::NaturalBeach;
     s_visualCategories[ OsmTag( "natural", "wetland" ) ]            = GeoDataFeature::NaturalWetland;
     s_visualCategories[ OsmTag( "natural", "glacier" ) ]            = GeoDataFeature::NaturalGlacier;
+    s_visualCategories[ OsmTag( "glacier:type", "shelf" ) ]         = GeoDataFeature::NaturalIceShelf;
     s_visualCategories[ OsmTag( "natural", "scrub" ) ]              = GeoDataFeature::NaturalScrub;
     s_visualCategories[ OsmTag( "natural", "cliff" ) ]              = GeoDataFeature::NaturalCliff;
 
@@ -636,6 +637,10 @@ GeoDataFeature::GeoDataVisualCategory OsmPresetLibrary::determineVisualCategory(
 {
     if (osmData.containsTagKey("building") && buildingValues().contains(osmData.tagValue("building")) ) {
         return GeoDataFeature::Building;
+    }
+
+    if( osmData.containsTag("natural", "glacier") && osmData.containsTag("glacier:type", "shelf") ){
+        return GeoDataFeature::NaturalIceShelf;
     }
 
     for (auto iter = osmData.tagsBegin(), end=osmData.tagsEnd(); iter != end; ++iter) {

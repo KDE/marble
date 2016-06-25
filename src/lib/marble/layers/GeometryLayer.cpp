@@ -163,6 +163,7 @@ void GeometryLayerPrivate::initializeDefaultValues()
     s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::NaturalBeach);
     s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::NaturalWetland);
     s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::NaturalGlacier);
+    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::NaturalIceShelf);
     s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::NaturalCliff);
     s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::NaturalPeak);
     s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::MilitaryDangerArea);
@@ -236,6 +237,7 @@ void GeometryLayerPrivate::initializeDefaultValues()
     s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::NaturalBeach);
     s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::NaturalWetland);
     s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::NaturalGlacier);
+    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::NaturalIceShelf);
     s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::NaturalScrub);
     s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::LeisurePark);
     s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::LeisurePlayground);
@@ -269,6 +271,7 @@ void GeometryLayerPrivate::initializeDefaultValues()
     s_defaultMinZoomLevels[GeoDataFeature::NaturalBeach]        = 10;
     s_defaultMinZoomLevels[GeoDataFeature::NaturalWetland]      = 10;
     s_defaultMinZoomLevels[GeoDataFeature::NaturalGlacier]      = 3;
+    s_defaultMinZoomLevels[GeoDataFeature::NaturalIceShelf]     = 3;
     s_defaultMinZoomLevels[GeoDataFeature::NaturalScrub]        = 10;
     s_defaultMinZoomLevels[GeoDataFeature::NaturalCliff]        = 15;
     s_defaultMinZoomLevels[GeoDataFeature::NaturalPeak]         = 11;

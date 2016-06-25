@@ -151,6 +151,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         NaturalBeach,
         NaturalWetland,
         NaturalGlacier,
+        NaturalIceShelf,
         NaturalScrub,
         NaturalCliff,
         NaturalHeath,
