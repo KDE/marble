@@ -398,7 +398,7 @@ O5mreaderIterateRet o5mreader_iterateNds(O5mreader *pReader, uint64_t *nodeId) {
 		);
 		return O5MREADER_ITERATE_RET_ERR;
 	}
-	if ( ftell(pReader->f) >= pReader->offsetNd ) {
+    if ( ftell(pReader->f) >= long(pReader->offsetNd) ) {
 		pReader->canIterateNds = 0;
 		pReader->canIterateTags = 1;
 		pReader->canIterateRefs = 0;
@@ -456,7 +456,7 @@ O5mreaderIterateRet o5mreader_iterateRefs(O5mreader *pReader, uint64_t *refId, u
 		);
 		return O5MREADER_ITERATE_RET_ERR;
 	}
-	if ( ftell(pReader->f) >= pReader->offsetRf ) {
+    if ( ftell(pReader->f) >= long(pReader->offsetRf) ) {
 		pReader->canIterateNds = 0;
 		pReader->canIterateTags = 1;
 		pReader->canIterateRefs = 0;
