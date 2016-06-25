@@ -41,7 +41,7 @@ public:
 
 
     /// Fetch a file for a cache
-    void fetchData(const QString& url, const QString &type, OpenCachingComItem *item);
+    void fetchData(const QUrl &url, const QString &type, OpenCachingComItem *item);
 
     /// home location
     const GeoDataCoordinates home() const;

@@ -69,7 +69,7 @@ TinyWebBrowser::~TinyWebBrowser()
 
 void TinyWebBrowser::setWikipediaPath( const QString& relativeUrl )
 {
-    QUrl url = relativeUrl;
+    QUrl url(relativeUrl);
     if ( url.isRelative() )
         url = QUrl( guessWikipediaDomain() ).resolved( url );
     load( url );

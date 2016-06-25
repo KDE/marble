@@ -46,41 +46,41 @@ class RemoteIconLoaderPrivate
         /**
          * Returns true if the icon for Url(=url) is available in cache
          */
-        bool isCached( const QString& url ) const;
+        bool isCached( const QUrl& url ) const;
 
         /**
          * Returns icon for the url passes in argument
          */
-        QImage cachedIcon( const QString& url ) const;
+        QImage cachedIcon( const QUrl& url ) const;
 
         /**
          * Returns true if icon is locally present on disk
          */
-        bool loadFromDiskCache( const QString& url );
+        bool loadFromDiskCache( const QUrl& url );
 
         /**
          * Starts downloading icon if it isn't present cache and 
          * could not be found locally on disk
          */
-        void initiateDownload( const QString& url );
+        void initiateDownload( const QUrl& url );
 
         /**
          * Returns a name with which downloaded icon will be saved on disk
          */
-        QString cacheFileName( const QString& url ) const;
+        QString cacheFileName( const QUrl& url ) const;
 };
 
-bool RemoteIconLoaderPrivate::isCached( const QString& url ) const
+bool RemoteIconLoaderPrivate::isCached( const QUrl& url ) const
 {
-    return m_iconCache.contains( QUrl(url) );
+    return m_iconCache.contains( url );
 }
 
-QImage RemoteIconLoaderPrivate::cachedIcon( const QString& url ) const
+QImage RemoteIconLoaderPrivate::cachedIcon( const QUrl& url ) const
 {
-    return m_iconCache.value( QUrl( url ) );
+    return m_iconCache.value( url );
 }
 
-bool RemoteIconLoaderPrivate::loadFromDiskCache( const QString& url )
+bool RemoteIconLoaderPrivate::loadFromDiskCache( const QUrl& url )
 {
     QString path = MarbleDirs::localPath().append("/cache/icons/") + cacheFileName( url );
     QImage icon = QFile::exists( path ) ? QImage( path ) : QImage();
@@ -91,19 +91,19 @@ bool RemoteIconLoaderPrivate::loadFromDiskCache( const QString& url )
     return false;
 }
 
-void RemoteIconLoaderPrivate::initiateDownload( const QString& url )
+void RemoteIconLoaderPrivate::initiateDownload( const QUrl& url )
 {
     DownloadUsage usage = DownloadBrowse;
     m_downloadManager.setDownloadEnabled(true);
     QString fileName = cacheFileName( url );
-    m_downloadManager.addJob( url, fileName, url, usage );
+    m_downloadManager.addJob(url, fileName, url.toString(), usage );
 }
 
-QString RemoteIconLoaderPrivate::cacheFileName( const QString& url ) const
+QString RemoteIconLoaderPrivate::cacheFileName( const QUrl& url ) const
 {
-    QFileInfo fileInfo = QFileInfo( url );
-    QByteArray const hash = QCryptographicHash::hash( url.toLatin1(), QCryptographicHash::Md5 ).toHex();
-    QString fileName = QString("%1.%2").arg( QString(hash) ).arg( fileInfo.suffix() );
+    const QString suffix = QFileInfo(url.path()).suffix();
+    const QByteArray hash = QCryptographicHash::hash( url.toEncoded(), QCryptographicHash::Md5 ).toHex();
+    const QString fileName = QString::fromLatin1(hash) + '.' + suffix;
     return fileName;
 }
 
@@ -121,7 +121,7 @@ RemoteIconLoader::~RemoteIconLoader()
 }
 
 
-QImage RemoteIconLoader::load( const QString& url )
+QImage RemoteIconLoader::load( const QUrl& url )
 {
     /*
      * If image has been downloaded previously then

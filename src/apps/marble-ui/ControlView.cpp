@@ -536,7 +536,7 @@ void ControlView::launchExternalMapEditor()
         qreal lon = m_marbleWidget->centerLongitude();
         int zoom = m_marbleWidget->tileZoomLevel();
         url = url.arg( lat, 0, 'f', 8 ).arg( lon, 0, 'f', 8 ).arg( zoom );
-        QDesktopServices::openUrl( url );
+        QDesktopServices::openUrl( QUrl(url) );
     }
 }
 

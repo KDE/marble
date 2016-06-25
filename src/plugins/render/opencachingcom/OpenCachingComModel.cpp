@@ -109,7 +109,7 @@ void OpenCachingComModel::parseFile( const QByteArray& file )
     addItemsToList(items);
 }
 
-void OpenCachingComModel::fetchData(const QString& url, const QString &type, OpenCachingComItem *item)
+void OpenCachingComModel::fetchData(const QUrl& url, const QString &type, OpenCachingComItem *item)
 {
     downloadItem(url, type, item);
 }

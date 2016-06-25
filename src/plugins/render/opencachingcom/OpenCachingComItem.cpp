@@ -201,7 +201,7 @@ void OpenCachingComItem::showInfoDialog()
     QString description = m_cache["description"].toString();
     if ( description.isEmpty() )
     {
-        QString url("http://www.opencaching.com/api/geocache/" + id() + "?Authorization=" + AUTHKEY);
+        QUrl url("http://www.opencaching.com/api/geocache/" + id() + "?Authorization=" + AUTHKEY);
         m_model->fetchData( url, "description_and_logs", this );
     } else {
         fillDialogTabs();

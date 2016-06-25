@@ -495,7 +495,7 @@ void MonavConfigWidgetPrivate::install()
             QFileInfo file( m_currentFile );
             QString message = QObject::tr( "Downloading %1" ).arg( file.fileName() );
             setBusy( true, message );
-            m_currentReply = m_networkAccessManager.get( QNetworkRequest( m_currentDownload ) );
+            m_currentReply = m_networkAccessManager.get( QNetworkRequest( QUrl ( m_currentDownload ) ) );
             QObject::connect( m_currentReply, SIGNAL(readyRead()),
                          m_parent, SLOT(retrieveData()) );
             QObject::connect( m_currentReply, SIGNAL(readChannelFinished()),

@@ -96,7 +96,7 @@ class GeoDataIconStylePrivate
         if(QUrl(m_iconPath).isValid() ) {
             // if image is not found on disk, check whether the icon is
             // at remote location. If yes then go for remote icon loading
-            return remoteIconLoader()->load(m_iconPath);
+            return remoteIconLoader()->load(QUrl(m_iconPath));
         }
 
         mDebug() << "Unable to open style icon at: " << path;

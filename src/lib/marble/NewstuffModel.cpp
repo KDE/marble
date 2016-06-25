@@ -379,7 +379,7 @@ void NewstuffModelPrivate::updateModel()
             bool found = false;
             for ( int j=0; j<m_items.size() && !found; ++j ) {
                 NewstuffItem &item = m_items[j];
-                if ( m_idTag == NewstuffModel::PayloadTag && item.m_payloadUrl == value ) {
+                if ( m_idTag == NewstuffModel::PayloadTag && item.m_payloadUrl.toString() == value ) {
                     item.m_registryNode = items.item( i );
                     found = true;
                 }
@@ -462,12 +462,12 @@ void NewstuffModelPrivate::readValue( const QDomNode &node, const QString &key, 
 {
     QDomNodeList matches = node.toElement().elementsByTagName( key );
     if ( matches.size() == 1 ) {
-        *target = matches.at( 0 ).toElement().text();
+        *target = T(matches.at( 0 ).toElement().text());
     } else {
         for ( int i=0; i<matches.size(); ++i ) {
             if ( matches.at( i ).attributes().contains( "lang" ) &&
                  matches.at( i ).attributes().namedItem( "lang").toAttr().value() == "en" ) {
-                *target = matches.at( i ).toElement().text();
+                *target = T(matches.at( i ).toElement().text());
                 return;
             }
         }
