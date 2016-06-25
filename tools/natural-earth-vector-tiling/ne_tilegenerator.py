@@ -116,8 +116,10 @@ if __name__ == "__main__":
 		for filename in level_info[level]:
 			print('Checking - {}'.format(filename))
 			check_existence(filename, args.in_dir)
-			if filename not in exception_names:
-				path = os.path.join(args.in_dir, filename) + '/' + filename + '.shp'				
+			if filename == 'ne_10m_parks_and_protected_lands':
+				path = os.path.join(args.in_dir, filename) + '/' + filename + '_area.shp'
+			elif filename not in exception_names:
+				path = os.path.join(args.in_dir, filename) + '/' + filename + '.shp'
 			else:
 				path = os.path.join(args.in_dir, filename) + '/' + filename + '_shp.shp'
 			abs_file_paths.append(path)
@@ -128,5 +130,3 @@ if __name__ == "__main__":
 		print('tiny_planet_{}.1.osm;Level;-180.0;-86.0;180.0;86.0'.format(level), file=f)
 		f.close()
 		vectortilecreator.run(['bound_info_{}'.format(level)], args.cache, args.refresh, args.out_dir, args.overwrite, [level])
-		
-		
