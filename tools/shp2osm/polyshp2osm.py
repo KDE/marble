@@ -270,7 +270,8 @@ def feature_class(data):
     'Country': [('marble_land', 'landmass')],
     '1st Order Admin Lines': [('boundary', 'administrative'), ('admin_level', '4')],
     'Claim': [('boundary', 'administrative'), ('admin_level', '4')],
-    'Airport': [('aeroway', 'aerodrome')]
+    'Airport': [('aeroway', 'aerodrome')],
+    'Date line': [('marble_line', 'date')]
     }
     if 'featurecla' in data:
         if data['featurecla'] in feat_dict:

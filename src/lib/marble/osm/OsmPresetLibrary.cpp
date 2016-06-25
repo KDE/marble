@@ -324,6 +324,7 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     //Custom Marble OSM Tags
     s_visualCategories[ OsmTag( "marble_land", "landmass" ) ]       = GeoDataFeature::Landmass;
     s_visualCategories[ OsmTag( "settlement", "yes" ) ]             = GeoDataFeature::UrbanArea;
+    s_visualCategories[ OsmTag( "marble_line", "date" ) ]           = GeoDataFeature::InternationalDateLine;
 
     // Default for buildings
     foreach(const QString &value, buildingValues() ) {

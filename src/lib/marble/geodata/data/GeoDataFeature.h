@@ -418,6 +418,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         //Custom OSM Tags
         Landmass,
         UrbanArea,
+        InternationalDateLine,
 
         // Important: Make sure that this is always the last
         // item and just use it to specify the array size

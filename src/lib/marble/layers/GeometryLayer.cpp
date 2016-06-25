@@ -347,6 +347,7 @@ void GeometryLayerPrivate::initializeDefaultValues()
 
     s_defaultMinZoomLevels[GeoDataFeature::Landmass]            = 0;
     s_defaultMinZoomLevels[GeoDataFeature::UrbanArea]           = 3;
+    s_defaultMinZoomLevels[GeoDataFeature::InternationalDateLine]      = 1;
 
     s_defaultMinZoomLevels[GeoDataFeature::AdminLevel1]         = 0;
     s_defaultMinZoomLevels[GeoDataFeature::AdminLevel2]         = 1;

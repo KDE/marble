@@ -440,6 +440,7 @@ QString GeoDataFeature::visualCategoryName(GeoDataFeature::GeoDataVisualCategory
         s_visualCategoryNames[Satellite] = "Satellite";
         s_visualCategoryNames[Landmass] = "Landmass";
         s_visualCategoryNames[UrbanArea] = "UrbanArea";
+        s_visualCategoryNames[InternationalDateLine] = "InternationalDateLine";
         s_visualCategoryNames[AdminLevel1] = "AdminLevel1";
         s_visualCategoryNames[AdminLevel2] = "AdminLevel2";
         s_visualCategoryNames[AdminLevel3] = "AdminLevel3";

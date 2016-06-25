@@ -592,6 +592,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
 
     s_defaultStyle[GeoDataFeature::Landmass]                 = StyleBuilder::Private::createWayStyle( "#F1EEE8", "#F1EEE8", true, true );
     s_defaultStyle[GeoDataFeature::UrbanArea]                = StyleBuilder::Private::createWayStyle( "#E6E3DD", "#E6E3DD", true, true );
+    s_defaultStyle[GeoDataFeature::InternationalDateLine]    = StyleBuilder::Private::createStyle( 1.0, 0.0, "#000000", "#000000", false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false );
 
     s_defaultStyle[GeoDataFeature::AdminLevel1]              = StyleBuilder::Private::createStyle(0.0, 0.0, "#DF9CCF", "#DF9CCF", false, true, Qt::SolidPattern, Qt::CustomDashLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3 );
     s_defaultStyle[GeoDataFeature::AdminLevel2]              = StyleBuilder::Private::createStyle(2.0, 0.0, "#DF9CCF", "#DF9CCF", false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3 );
