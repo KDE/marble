@@ -36,7 +36,7 @@ MapViewItemDelegate::MapViewItemDelegate( QListView *view ) :
 
 void MapViewItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index ) const
 {
-    QStyleOptionViewItemV4 styleOption = option;
+    QStyleOptionViewItem styleOption = option;
     initStyleOption( &styleOption, index );
     styleOption.text = QString();
     styleOption.icon = QIcon();

@@ -46,7 +46,7 @@ TourItemDelegate::TourItemDelegate( QListView* view, MarbleWidget* widget, TourW
 
 void TourItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index ) const
 {
-    QStyleOptionViewItemV4 styleOption = option;
+    QStyleOptionViewItem styleOption = option;
     styleOption.text = QString();
     QApplication::style()->drawControl(QStyle::CE_ItemViewItem, &styleOption, painter);
 

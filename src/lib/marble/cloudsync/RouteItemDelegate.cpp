@@ -24,7 +24,7 @@ RouteItemDelegate::RouteItemDelegate( QListView *view, CloudRouteModel *model ) 
 
 void RouteItemDelegate::paint( QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index ) const
 {
-    QStyleOptionViewItemV4 styleOption = option;
+    QStyleOptionViewItem styleOption = option;
     styleOption.text = QString();
     QApplication::style()->drawControl( QStyle::CE_ItemViewItem, &styleOption, painter );
     
