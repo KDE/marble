@@ -131,7 +131,7 @@ bool Upload::adjustNewstuffFile(const Package &package)
     for ( int i = 0; i < int(regions.length()); ++i ) {
         QDomNode node = regions.item( i );
         if (!node.namedItem("payload").isNull()) {
-            QUrl url = node.namedItem("payload").toElement().text();
+            QUrl url(node.namedItem("payload").toElement().text());
             QFileInfo fileInfo(url.path());
             if (fileInfo.fileName() == package.file.fileName()) {
                 QString removeFile;
