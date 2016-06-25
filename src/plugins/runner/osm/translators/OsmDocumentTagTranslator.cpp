@@ -96,7 +96,7 @@ bool OsmDocumentTagTranslator::writeMid( const GeoNode *node, GeoWriter& writer 
     }
 
     // Writing the bounds ( innerBounds and outerBounds, part of polygons )
-    foreach ( OsmBound bound, bounds ) {
+    foreach ( const OsmBound & bound, bounds ) {
         OsmWayTagWriter::writeWay( *bound.first, bound.second, writer );
     }
 
