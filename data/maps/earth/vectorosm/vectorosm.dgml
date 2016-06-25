@@ -116,7 +116,7 @@
       </group>
       <group name="Texture Layers">
         <property name="mapnik">
-          <value>true</value>
+          <value>false</value>
           <available>true</available>
         </property>
 
