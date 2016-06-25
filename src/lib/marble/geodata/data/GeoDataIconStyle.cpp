@@ -60,7 +60,7 @@ class GeoDataIconStylePrivate
         }
         else if ( iconSize.width()*m_scale < s_minimumIconSize.width()
                   || iconSize.height()*m_scale < s_minimumIconSize.width() ) {
-            iconSize.scale( s_maximumIconSize, Qt::KeepAspectRatio );
+            iconSize.scale( s_minimumIconSize, Qt::KeepAspectRatio );
         }
         else {
             iconSize *= m_scale;
