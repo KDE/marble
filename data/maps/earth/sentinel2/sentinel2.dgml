@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dgml xmlns="http://edu.kde.org/marble/dgml/2.0">
+    <document>
+        <head>
+            <name>Sentinel2 Satellite Map</name>
+      <license short="Contains ©Copernicus Sentinel data 2016">Source: ESA Sentinel 2 mission, Terms and Conditions: http://sedas.satapps.org/data-uses-distribution/</license>
+            <target>earth</target>
+            <theme>sentinel2</theme>
+            <icon pixmap="sentinel2-preview.png"/>
+            <visible>true</visible>
+            <description><![CDATA[<p>A <i>satellite map</i> based on ESA's Sentinel 2 mission.</p>]]></description>
+            <zoom>
+                <discrete> true </discrete>
+                <minimum> 900 </minimum>
+                <maximum> 3500 </maximum>
+            </zoom>
+        </head>
+        <map bgcolor="#000000">
+            <canvas/>
+            <target/>
+            <layer name="sentinel2" backend="texture" >
+                <!-- OpenStreetMap mapnik rendered tiles expire after seven days
+                     or 604800 seconds -->
+                <texture name="sentinel2" expire="604800" >
+                    <sourcedir format="JPG"> earth/sentinel2 </sourcedir>
+                    <storageLayout levelZeroColumns="1" levelZeroRows="1" maximumTileLevel="14" mode="OpenStreetMap" />
+                    <projection name="Mercator" />
+                    <downloadPolicy usage="Browse" maximumConnections="20" />
+                    <downloadPolicy usage="Bulk" maximumConnections="2" />
+                </texture>
+            </layer>
+            <layer name="standardplaces" backend="geodata">
+               <geodata name="cityplacemarks">
+                    <sourcefile format="KML">cityplacemarks.kml</sourcefile>
+                    <pick>placemark</pick>
+                </geodata>
+                <geodata name="baseplacemarks">
+                    <sourcefile format="KML">baseplacemarks.kml</sourcefile>
+                    <pick>placemark</pick>
+                </geodata>
+                <geodata name="elevplacemarks">
+                    <sourcefile format="KML">elevplacemarks.kml</sourcefile>
+                    <pick>placemark</pick>
+                </geodata>
+                <geodata name="otherplacemarks">
+                    <sourcefile
+                    format="KML">otherplacemarks.kml</sourcefile>
+                    <pick>placemark</pick>
+                </geodata>
+                <geodata name="boundaryplacemarks">
+                    <sourcefile format="KML">boundaryplacemarks</sourcefile>
+                    <pick>placemark</pick>
+                </geodata>
+            </layer>            
+        </map>
+        <settings>
+            <property name="coordinate-grid">
+                <value>true</value>
+                <available>true</available>
+            </property>
+            <property name="overviewmap">
+                <value>true</value>
+                <available>true</available>
+            </property>
+            <property name="compass">
+                <value>true</value>
+                <available>true</available>
+            </property>
+            <property name="scalebar">
+                <value>true</value>
+                <available>true</available>
+            </property>
+            <group name="Places">
+                <property name="places">
+                    <value>true</value>
+                    <available>false</available>
+                </property>
+                <property name="otherplaces">
+                    <value>false</value>
+                    <available>false</available>
+                </property>
+            </group>
+        </settings>
+        <legend>
+            <section name="coordinate-grid" checkable="true" connect="coordinate-grid" spacing="12">
+                <heading>Coordinate Grid</heading>
+            </section>
+        </legend>
+    </document>
+</dgml>

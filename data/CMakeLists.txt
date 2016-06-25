@@ -121,6 +121,11 @@ install (FILES
 maps/earth/hillshading/0/0/0.png
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/hillshading/0/0)
 
+OPTION(EXPERIMENTAL_SENTINEL2_MAP "Install an experimental satellite map theme")
+if(EXPERIMENTAL_SENTINEL2_MAP)
+    install (DIRECTORY maps/earth/sentinel2 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth)
+endif()
+
 OPTION(EXPERIMENTAL_VECTOR_TILING "Install a map theme using OSM vector tiles (experimental)")
 if(EXPERIMENTAL_VECTOR_TILING OR CMAKE_SYSTEM_NAME STREQUAL Android)
     install (DIRECTORY maps/earth/vectorosm DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth)
