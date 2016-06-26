@@ -600,9 +600,9 @@ def add_node(num_id, lon, lat, geom_name, f):
 def write_node(node):
     global open_file
     if node[3] == None:
-        print("<node id='-%s' visible='true' lon='%s' lat='%s' />" % (node[0], node[1], node[2]), end = '\n', file = open_file)   
+        print("<node id='-{}' visible='true' lon='{:.10f}' lat='{:.10f}' />".format(node[0], node[1], node[2]), end = '\n', file = open_file)   
     else:
-        print("<node id='-%s' visible='true' lon='%s' lat='%s' >" % (node[0], node[1], node[2]), end = '\n', file = open_file)
+        print("<node id='-{}' visible='true' lon='{:.10f}' lat='{:.10f}' >".format(node[0], node[1], node[2]), end = '\n', file = open_file)
         write_tags(node[3]) 
         print("</node>", end = '\n', file = open_file)
  
