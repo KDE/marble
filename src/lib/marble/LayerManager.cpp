@@ -251,7 +251,9 @@ void LayerManager::setShowRuntimeTrace( bool show )
 
 void LayerManager::addLayer(LayerInterface *layer)
 {
-    d->m_internalLayers.push_back(layer);
+    if (!d->m_internalLayers.contains(layer)) {
+        d->m_internalLayers.push_back(layer);
+    }
 }
 
 void LayerManager::removeLayer(LayerInterface *layer)
