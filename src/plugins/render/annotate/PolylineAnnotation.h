@@ -203,9 +203,7 @@ private:
     static const int mergedDim;
     static const int hoveredDim;
     static const QColor regularColor;
-    static const QColor selectedColor;
     static const QColor mergedColor;
-    static const QColor hoveredColor;
 
     const ViewportParams *m_viewport;
     bool m_regionsInitialized;

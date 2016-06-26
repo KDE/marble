@@ -37,10 +37,7 @@ const int PolylineAnnotation::selectedDim = 15;
 const int PolylineAnnotation::mergedDim = 20;
 const int PolylineAnnotation::hoveredDim = 20;
 const QColor PolylineAnnotation::regularColor = Oxygen::aluminumGray3;
-const QColor PolylineAnnotation::selectedColor = QApplication::palette().highlight().color();
 const QColor PolylineAnnotation::mergedColor = Oxygen::emeraldGreen6;
-const QColor PolylineAnnotation::hoveredColor = QApplication::palette().highlight().color();
-
 
 PolylineAnnotation::PolylineAnnotation( GeoDataPlacemark *placemark ) :
     SceneGraphicsItem( placemark ),
@@ -146,6 +143,8 @@ void PolylineAnnotation::drawNodes( GeoPainter *painter )
 
     QColor glowColor = QApplication::palette().highlightedText().color();
     glowColor.setAlpha(120);
+    auto const selectedColor = QApplication::palette().highlight().color();
+    auto const hoveredColor = selectedColor;
 
     for ( int i = 0; i < line.size(); ++i ) {
         // The order here is important, because a merged node can be at the same time selected.
