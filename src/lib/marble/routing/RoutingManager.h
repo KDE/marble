@@ -144,7 +144,7 @@ public:
     /**
      * Set color for standard route rendering
      */
-    void setRouteColorStandard( QColor color );
+    void setRouteColorStandard( const QColor& color );
 
     /**
      * Get color for standard route rendering
@@ -154,7 +154,7 @@ public:
     /**
      * Set color for highlighted route rendering
      */
-    void setRouteColorHighlighted( QColor color );
+    void setRouteColorHighlighted( const QColor& color );
 
     /**
      * Get color for highlighted route rendering
@@ -164,7 +164,7 @@ public:
     /**
      * Set color for alternative route rendering
      */
-    void setRouteColorAlternative( QColor color );
+    void setRouteColorAlternative( const QColor& color );
 
     /**
      * Get color for alternative route rendering

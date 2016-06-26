@@ -106,7 +106,7 @@ class MARBLE_EXPORT ViewportParams
 
     void setWidth(int newWidth);
     void setHeight(int newHeight);
-    void setSize(QSize newSize);
+    void setSize(const QSize& newSize);
 
     qreal centerLongitude() const;
     qreal centerLatitude() const;

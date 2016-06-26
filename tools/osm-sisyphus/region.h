@@ -33,11 +33,11 @@ public:
 
     QString country() const;
 
-    void setName(QString arg);
+    void setName(const QString& arg);
 
-    void setContinent(QString arg);
+    void setContinent(const QString& arg);
 
-    void setCountry(QString arg);
+    void setCountry(const QString& arg);
 
     QString id() const;
 

@@ -293,7 +293,7 @@ void DeclarativeDataPlugin::setCopyrightYears( const QString & copyrightYears )
     }
 }
 
-void DeclarativeDataPlugin::setDescription( const QString description )
+void DeclarativeDataPlugin::setDescription( const QString & description )
 {
     if( d->m_description != description ) {
         d->m_description = description;

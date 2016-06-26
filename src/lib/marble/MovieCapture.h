@@ -27,7 +27,7 @@ class MovieCapturePrivate;
 class MovieFormat
 {
 public:
-    explicit MovieFormat( QString type, QString name, QString extension) :
+    explicit MovieFormat( const QString &type, const QString &name, const QString &extension) :
         m_type( type ),
         m_name( name ),
         m_extension( extension )

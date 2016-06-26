@@ -93,7 +93,7 @@ QString GeoDataLink::href() const
     return d->m_href;
 }
 
-void GeoDataLink::setHref( QString href )
+void GeoDataLink::setHref( const QString& href )
 {
     d->m_href = href;
 }

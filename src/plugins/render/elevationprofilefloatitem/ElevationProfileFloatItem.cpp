@@ -504,7 +504,7 @@ bool ElevationProfileFloatItem::eventFilter( QObject *object, QEvent *e )
     return AbstractFloatItem::eventFilter(object,e);
 }
 
-void ElevationProfileFloatItem::handleDataUpdate(const GeoDataLineString &points, QList<QPointF> eleData)
+void ElevationProfileFloatItem::handleDataUpdate(const GeoDataLineString &points, const QList<QPointF> &eleData)
 {
     m_eleData = eleData;
     m_points = points;

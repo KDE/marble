@@ -18,7 +18,7 @@ namespace Marble {
     class AprsTCPIP : public AprsSource
     {
       public:
-        AprsTCPIP( QString hostName, int port );
+        AprsTCPIP( const QString& hostName, int port );
         ~AprsTCPIP();
 
         QString    sourceName() const;

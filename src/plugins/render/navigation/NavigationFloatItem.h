@@ -84,7 +84,7 @@ MARBLE_PLUGIN( NavigationFloatItem )
 
  private Q_SLOTS:
     /** Map theme was changed, adjust controls */
-    void selectTheme( QString theme );
+    void selectTheme( const QString& theme );
 
     /** Enable/disable zoom in/out buttons */
     void updateButtons( int zoomValue );

@@ -546,7 +546,7 @@ namespace Marble
         emit projectionChanged(projection);
     }
 
-    void MarbleQuickItem::setMapThemeId(QString mapThemeId)
+    void MarbleQuickItem::setMapThemeId(const QString& mapThemeId)
     {
         if (this->mapThemeId() == mapThemeId) {
             return;
@@ -753,7 +753,7 @@ namespace Marble
         return &d->m_inputHandler;
     }
 
-    void MarbleQuickItem::pinch(QPointF center, qreal scale, Qt::GestureState state)
+    void MarbleQuickItem::pinch(const QPointF& center, qreal scale, Qt::GestureState state)
     {
         d->m_inputHandler.pinch(center, scale, state);
     }

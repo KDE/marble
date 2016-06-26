@@ -46,7 +46,7 @@ GeoPainterPrivate::~GeoPainterPrivate()
 }
 
 void GeoPainterPrivate::createAnnotationLayout (  qreal x, qreal y,
-                                                  QSizeF bubbleSize,
+                                                  const QSizeF& bubbleSize,
                                                   qreal bubbleOffsetX, qreal bubbleOffsetY,
                                                   qreal xRnd, qreal yRnd,
                                                   QPainterPath& path, QRectF& rect )

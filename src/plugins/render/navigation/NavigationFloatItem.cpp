@@ -202,7 +202,7 @@ bool NavigationFloatItem::eventFilter( QObject *object, QEvent *e )
     return AbstractFloatItem::eventFilter(object, e);
 }
 
-void NavigationFloatItem::selectTheme( QString )
+void NavigationFloatItem::selectTheme( const QString& )
 {
     if ( m_marbleWidget ) {
         m_maxZoom = m_marbleWidget->maximumZoom();

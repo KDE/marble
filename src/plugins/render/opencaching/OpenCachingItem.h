@@ -73,7 +73,7 @@ private:
     static QPixmap s_icon;
 
 private Q_SLOTS:
-    void updateDescriptionLanguage( QString language );
+    void updateDescriptionLanguage( const QString& language );
 
     void nextLogEntry();                                  ///< Display next log entry.
 

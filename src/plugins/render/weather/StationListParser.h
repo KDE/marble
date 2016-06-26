@@ -36,7 +36,7 @@ public:
 
     QList<BBCStation> stationList() const;
 
-    void setPath( QString path );
+    void setPath( const QString& path );
 
 protected:
     void run();

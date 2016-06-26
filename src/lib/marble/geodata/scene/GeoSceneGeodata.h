@@ -24,20 +24,20 @@ namespace Marble
 class GEODATA_EXPORT GeoSceneGeodata : public GeoSceneAbstractDataset
 {
  public:
-    explicit GeoSceneGeodata( QString name );
+    explicit GeoSceneGeodata( const QString& name );
     virtual ~GeoSceneGeodata();
     virtual const char* nodeType() const;
 
     bool operator==( const GeoSceneGeodata &other ) const;
 
     QString property() const;
-    void setProperty( QString property );
+    void setProperty( const QString& property );
 
     QString sourceFile() const;
-    void setSourceFile( QString sourceFile );
+    void setSourceFile( const QString& sourceFile );
 
     QString colorize() const;
-    void setColorize( QString colorize );
+    void setColorize( const QString& colorize );
 
     qreal alpha() const;
     void setAlpha( const qreal &alpha );

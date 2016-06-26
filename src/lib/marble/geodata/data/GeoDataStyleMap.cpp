@@ -55,7 +55,7 @@ QString GeoDataStyleMap::lastKey() const
     return d->lastKey;
 }
 
-void GeoDataStyleMap::setLastKey( QString key )
+void GeoDataStyleMap::setLastKey( const QString& key )
 {
     d->lastKey = key;
 }

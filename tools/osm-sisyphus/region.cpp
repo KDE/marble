@@ -32,17 +32,17 @@ QString Region::country() const
     return m_country;
 }
 
-void Region::setName(QString arg)
+void Region::setName(const QString& arg)
 {
     m_name = arg;
 }
 
-void Region::setContinent(QString arg)
+void Region::setContinent(const QString& arg)
 {
     m_continent = arg;
 }
 
-void Region::setCountry(QString arg)
+void Region::setCountry(const QString& arg)
 {
     m_country = arg;
 }

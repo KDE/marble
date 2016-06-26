@@ -29,7 +29,7 @@ public:
     };
     Q_DECLARE_FLAGS(PolyNodeFlags, PolyNodeFlag)
 
-    explicit PolylineNode( QRegion region = QRegion() );
+    explicit PolylineNode( const QRegion& region = QRegion() );
     ~PolylineNode();
 
     bool isSelected() const;
@@ -41,7 +41,7 @@ public:
 
     void setFlag( PolyNodeFlag flag, bool enabled = true );
     void setFlags( PolyNodeFlags flags );
-    void setRegion( QRegion newRegion );
+    void setRegion( const QRegion& newRegion );
 
     bool containsPoint( const QPoint &eventPos ) const;
 

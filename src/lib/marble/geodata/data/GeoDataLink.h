@@ -50,7 +50,7 @@ public:
 
     QString href() const;
 
-    void setHref( QString href );
+    void setHref( const QString& href );
 
     RefreshMode refreshMode() const;
 

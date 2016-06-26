@@ -130,7 +130,7 @@ class MARBLE_EXPORT MarbleDefaultInputHandler  : public MarbleInputHandler
  protected:
     bool eventFilter( QObject *, QEvent * );
     bool handleMouseEvent(QMouseEvent *e);
-    bool handlePinch(QPointF center, qreal scaleFactor, Qt::GestureState state);
+    bool handlePinch(const QPointF &center, qreal scaleFactor, Qt::GestureState state);
 
     //FIXME - refactor (abstraction & composition)
     QPointer<AbstractDataPluginItem> lastToolTipItem();

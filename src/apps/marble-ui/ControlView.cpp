@@ -776,7 +776,7 @@ QString ControlView::externalMapEditor() const
     return m_externalEditor;
 }
 
-void ControlView::addGeoDataFile( QString filename )
+void ControlView::addGeoDataFile( const QString &filename )
 {
     QFileInfo const file( filename );
     if ( file.exists() ) {

@@ -34,7 +34,7 @@ class OpenCachingComItem : public AbstractDataPluginItem
     Q_OBJECT
 
 public:
-    OpenCachingComItem( QVariantMap cache, OpenCachingComModel *parent );
+    OpenCachingComItem( const QVariantMap& cache, OpenCachingComModel *parent );
 
     ~OpenCachingComItem();
 
@@ -62,7 +62,7 @@ private:
 
     static QString dateString(const QVariant& ms); ///< create a date string from millisecondssinceepoch in a qvariant
 
-    static const QString ratingNumberString(QVariant number); ///< "1" -> "1.0"
+    static const QString ratingNumberString(const QVariant& number); ///< "1" -> "1.0"
 
     QString formatDistance(qreal spheredistance) const; ///< nice string from a Marble::distanceSphere()
 

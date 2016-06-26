@@ -101,14 +101,14 @@ class PreviewDialog : public QDialog
 {
     Q_OBJECT
 public:
-    PreviewDialog( QWidget* parent, QString mapThemeId );
+    PreviewDialog( QWidget* parent, const QString& mapThemeId );
     virtual void closeEvent(QCloseEvent* e );
 private:
-    bool deleteTheme( QString directory );
+    bool deleteTheme( const QString& directory );
     QString m_mapThemeId;
 };
 
-PreviewDialog::PreviewDialog( QWidget* parent, QString mapThemeId ) : QDialog( parent ), m_mapThemeId( mapThemeId )
+PreviewDialog::PreviewDialog( QWidget* parent, const QString& mapThemeId ) : QDialog( parent ), m_mapThemeId( mapThemeId )
 {
     QGridLayout *layout = new QGridLayout();
     MarbleWidget *widget = new MarbleWidget();
@@ -144,7 +144,7 @@ void PreviewDialog::closeEvent(QCloseEvent* e)
     QDialog::closeEvent( e );
 }
 
-bool PreviewDialog::deleteTheme( QString directory )
+bool PreviewDialog::deleteTheme( const QString &directory )
 {
     QDir dir(directory);
     bool result = true;
@@ -557,7 +557,7 @@ void MapWizard::queryLegendImage()
     d->uiWidget.textBrowserLegend->setHtml( legendHtml );
 }
 
-QString MapWizard::createArchive( QWidget *parent, QString mapId )
+QString MapWizard::createArchive( QWidget *parent, const QString& mapId )
 {
     QStringList splitMapId( mapId.split(QLatin1Char('/')) );
     QString body = splitMapId[0];
@@ -634,7 +634,7 @@ QString MapWizard::createArchive( QWidget *parent, QString mapId )
     return QString( "%1/%2.tar.gz" ).arg( QDir::tempPath() ).arg( theme ); 
 }
 
-void MapWizard::deleteArchive( QString mapId )
+void MapWizard::deleteArchive( const QString& mapId )
 {
     QStringList splitMapId( mapId.split(QLatin1Char('/')) );
     QString theme = splitMapId[1];

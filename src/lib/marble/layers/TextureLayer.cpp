@@ -55,8 +55,8 @@ public:
     void updateTextureLayers();
     void updateTile( const TileId &tileId, const QImage &tileImage );
 
-    void addGroundOverlays( QModelIndex parent, int first, int last );
-    void removeGroundOverlays( QModelIndex parent, int first, int last );
+    void addGroundOverlays( const QModelIndex& parent, int first, int last );
+    void removeGroundOverlays( const QModelIndex& parent, int first, int last );
     void resetGroundOverlaysCache();
 
     void updateGroundOverlays();
@@ -175,7 +175,7 @@ bool TextureLayer::Private::drawOrderLessThan( const GeoDataGroundOverlay* o1, c
     return o1->drawOrder() < o2->drawOrder();
 }
 
-void TextureLayer::Private::addGroundOverlays( QModelIndex parent, int first, int last )
+void TextureLayer::Private::addGroundOverlays( const QModelIndex& parent, int first, int last )
 {
     for ( int i = first; i <= last; ++i ) {
         QModelIndex index = m_groundOverlayModel.index( i, 0, parent );
@@ -194,7 +194,7 @@ void TextureLayer::Private::addGroundOverlays( QModelIndex parent, int first, in
     m_parent->reset();
 }
 
-void TextureLayer::Private::removeGroundOverlays( QModelIndex parent, int first, int last )
+void TextureLayer::Private::removeGroundOverlays( const QModelIndex& parent, int first, int last )
 {
     for ( int i = first; i <= last; ++i ) {
         QModelIndex index = m_groundOverlayModel.index( i, 0, parent );

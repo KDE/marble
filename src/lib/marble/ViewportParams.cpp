@@ -298,7 +298,7 @@ void ViewportParams::setHeight(int newHeight)
     setSize( QSize( width(), newHeight ) );
 }
 
-void ViewportParams::setSize(QSize newSize)
+void ViewportParams::setSize(const QSize& newSize)
 {
     if ( newSize == d->m_size )
         return;

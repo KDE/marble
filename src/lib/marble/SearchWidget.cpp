@@ -37,7 +37,7 @@ public:
     GeoDataDocument        *m_document;
 
     SearchWidgetPrivate();
-    void setSearchResult( QVector<GeoDataPlacemark*> );
+    void setSearchResult( const QVector<GeoDataPlacemark*>& );
     void search( const QString &searchTerm, SearchMode searchMode );
     void clearSearch();
     void centerMapOn( const QModelIndex &index );
@@ -55,7 +55,7 @@ SearchWidgetPrivate::SearchWidgetPrivate() :
     m_document->setName( QObject::tr( "Search Results" ) );
 }
 
-void SearchWidgetPrivate::setSearchResult( QVector<GeoDataPlacemark *> locations )
+void SearchWidgetPrivate::setSearchResult( const QVector<GeoDataPlacemark *>& locations )
 {
     if( locations.isEmpty() ) {
         return;

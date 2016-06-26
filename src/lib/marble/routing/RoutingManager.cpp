@@ -603,7 +603,7 @@ QString RoutingManager::lastSavePath() const
     return d->m_lastSavePath;
 }
 
-void RoutingManager::setRouteColorStandard( QColor color )
+void RoutingManager::setRouteColorStandard( const QColor& color )
 {
     d->m_routeColorStandard = color;
 }
@@ -613,7 +613,7 @@ QColor RoutingManager::routeColorStandard() const
     return d->m_routeColorStandard;
 }
 
-void RoutingManager::setRouteColorHighlighted( QColor color )
+void RoutingManager::setRouteColorHighlighted( const QColor& color )
 {
     d->m_routeColorHighlighted = color;
 }
@@ -623,7 +623,7 @@ QColor RoutingManager::routeColorHighlighted() const
     return d->m_routeColorHighlighted;
 }
 
-void RoutingManager::setRouteColorAlternative( QColor color )
+void RoutingManager::setRouteColorAlternative( const QColor& color )
 {
     d->m_routeColorAlternative = color;
 }

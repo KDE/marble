@@ -604,7 +604,7 @@ void GeometryLayerPrivate::removeGraphicsItems( const GeoDataFeature *feature )
     }
 }
 
-void GeometryLayer::addPlacemarks( QModelIndex parent, int first, int last )
+void GeometryLayer::addPlacemarks( const QModelIndex& parent, int first, int last )
 {
     Q_ASSERT( first < d->m_model->rowCount( parent ) );
     Q_ASSERT( last < d->m_model->rowCount( parent ) );
@@ -619,7 +619,7 @@ void GeometryLayer::addPlacemarks( QModelIndex parent, int first, int last )
 
 }
 
-void GeometryLayer::removePlacemarks( QModelIndex parent, int first, int last )
+void GeometryLayer::removePlacemarks( const QModelIndex& parent, int first, int last )
 {
     Q_ASSERT( last < d->m_model->rowCount( parent ) );
     bool isRepaintNeeded = false;

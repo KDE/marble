@@ -69,7 +69,7 @@ class ControlView : public QWidget
     void moveUp();
     void moveDown();
 
-    void addGeoDataFile( QString filename );
+    void addGeoDataFile( const QString &filename );
 
     QPixmap mapScreenShot() { return m_marbleWidget->mapScreenShot(); }
     

@@ -95,7 +95,7 @@ public:
 
     void startSearch();
 
-    void updateSearchResult( QVector<GeoDataPlacemark*> placemarks );
+    void updateSearchResult( const QVector<GeoDataPlacemark*>& placemarks );
 
     void updateSearchMode();
 
@@ -335,7 +335,7 @@ void GoToDialogPrivate::startSearch()
     updateResultMessage( 0 );
 }
 
-void GoToDialogPrivate::updateSearchResult( QVector<GeoDataPlacemark*> placemarks )
+void GoToDialogPrivate::updateSearchResult( const QVector<GeoDataPlacemark*>& placemarks )
 {
     m_searchResultModel.setRootDocument( 0 );
     m_searchResult->clear();

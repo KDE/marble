@@ -50,8 +50,8 @@ public:
     QVector<const GeoDataFeature*> whichFeatureAt( const QPoint& curpos, const ViewportParams * viewport );
 
 public Q_SLOTS:
-    void addPlacemarks( QModelIndex index, int first, int last );
-    void removePlacemarks( QModelIndex index, int first, int last );
+    void addPlacemarks( const QModelIndex& index, int first, int last );
+    void removePlacemarks( const QModelIndex& index, int first, int last );
     void resetCacheData();
 
     /**

@@ -76,7 +76,7 @@ class PluginItemDelegate : public QAbstractItemDelegate
                                        Qt::AlignmentFlag alignment = Qt::AlignLeft ) const;
     static QSize nameSize( const QModelIndex& index );
     
-    static QRect alignRect( QRect object, QRect frame, int position, Qt::AlignmentFlag alignment );
+    static QRect alignRect( const QRect& object, const QRect& frame, int position, Qt::AlignmentFlag alignment );
 
     QModelIndex m_configPressedIndex;
     QModelIndex m_aboutPressedIndex;

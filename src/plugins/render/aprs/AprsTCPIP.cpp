@@ -18,7 +18,7 @@
 
 using namespace Marble;
 
-AprsTCPIP::AprsTCPIP( QString hostName, int port )
+AprsTCPIP::AprsTCPIP( const QString& hostName, int port )
     : m_hostName( hostName ),
       m_port( port ),
       m_numErrors( 0 )

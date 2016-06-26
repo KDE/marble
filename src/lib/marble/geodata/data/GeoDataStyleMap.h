@@ -53,7 +53,7 @@ class GEODATA_EXPORT GeoDataStyleMap : public GeoDataStyleSelector,
     * and add both to this map
     * @param key the last key
     */
-    void setLastKey( QString key );
+    void setLastKey( const QString& key );
     
     /**
     * @brief assignment operator

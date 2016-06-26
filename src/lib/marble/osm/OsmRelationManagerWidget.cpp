@@ -143,7 +143,7 @@ void OsmRelationManagerWidget::handleItemChange( QTreeWidgetItem *item, int colu
     update();
 }
 
-void OsmRelationManagerWidget::handleRelationContextMenuRequest( QPoint point )
+void OsmRelationManagerWidget::handleRelationContextMenuRequest( const QPoint& point )
 {
     QMenu relationEditMenu;
     relationEditMenu.addAction( tr( "Remove" ) );

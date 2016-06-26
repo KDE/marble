@@ -13,7 +13,7 @@
 namespace Marble
 {
 
-PolylineNode::PolylineNode( QRegion region ) :
+PolylineNode::PolylineNode( const QRegion& region ) :
     m_region( region  ),
     m_flags( 0 )
 {
@@ -45,7 +45,7 @@ bool PolylineNode::isMergingHighlighted() const
     return m_flags & NodeIsMergingHighlighted;
 }
 
-void PolylineNode::setRegion( QRegion newRegion )
+void PolylineNode::setRegion( const QRegion& newRegion )
 {
     m_region = newRegion;
 }

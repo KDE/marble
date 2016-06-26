@@ -94,7 +94,7 @@ protected:
     virtual void contextMenuEvent( QWidget *w, QContextMenuEvent *e );
 
  private Q_SLOTS:
-    void handleDataUpdate(const GeoDataLineString &points, QList<QPointF> eleData);
+    void handleDataUpdate(const GeoDataLineString &points, const QList<QPointF> &eleData);
     void updateVisiblePoints();
     void forceRepaint();
     void readSettings();

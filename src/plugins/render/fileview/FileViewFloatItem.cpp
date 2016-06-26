@@ -186,7 +186,7 @@ bool FileViewFloatItem::eventFilter(QObject *object, QEvent *e)
     return AbstractFloatItem::eventFilter(object, e);
 }
 
-void FileViewFloatItem::selectTheme(QString theme)
+void FileViewFloatItem::selectTheme(const QString& theme)
 {
     Q_UNUSED(theme);
     

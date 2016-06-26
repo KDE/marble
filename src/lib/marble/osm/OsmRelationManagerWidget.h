@@ -54,7 +54,7 @@ public Q_SLOTS:
     void addRelation( QAction* action );
     void handleItemChange( QTreeWidgetItem *item, int column );
     void handleDoubleClick( QTreeWidgetItem * item, int column );
-    void handleRelationContextMenuRequest( QPoint point );
+    void handleRelationContextMenuRequest( const QPoint& point );
     /**
      * @brief update updates the relations list and the suggested relations drop menu
      */

@@ -68,7 +68,7 @@ class FileViewFloatItem: public AbstractFloatItem
 
  private Q_SLOTS:
     /** Map theme was changed, adjust controls */
-    void selectTheme( QString theme );
+    void selectTheme( const QString& theme );
 
     /** Enable/disable zoom in/out buttons */
     void updateFileView();

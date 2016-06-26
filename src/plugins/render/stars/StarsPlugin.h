@@ -96,7 +96,7 @@ public:
      * @param  mag
      * (default for Radian: north pole at pi/2, southpole at -pi/2)
      */
-    DsoPoint(QString id, qreal rect, qreal decl) {
+    DsoPoint(const QString& id, qreal rect, qreal decl) {
         m_id = id;
         m_q = Quaternion::fromSpherical( rect, decl );
     }

@@ -306,7 +306,10 @@ void PlacemarkEditHeaderPrivate::selectAll()
 using namespace Marble;
 
 PlacemarkEditHeader::PlacemarkEditHeader(QWidget *parent, GeoDataCoordinates::Notation notation,
-                                         QString name, QString iconLink, QString id, const QStringList &idFilter)
+                                         const QString& name,
+                                         const QString& iconLink,
+                                         const QString& id,
+                                         const QStringList &idFilter)
     : QWidget( parent ), d(new PlacemarkEditHeaderPrivate(this))
 {
     d->init(this);

@@ -98,7 +98,7 @@ namespace Marble
         void setMapHeight(int mapHeight);
         void setShowFrameRate(bool showFrameRate);
         void setProjection(Projection projection);
-        void setMapThemeId(QString mapThemeId);
+        void setMapThemeId(const QString& mapThemeId);
         void setShowAtmosphere(bool showAtmosphere);
         void setShowCompass(bool showCompass);
         void setShowClouds(bool showClouds);
@@ -194,7 +194,7 @@ namespace Marble
 
     protected:
         QObject *getEventFilter() const;
-        void pinch(QPointF center, qreal scale, Qt::GestureState state);
+        void pinch(const QPointF& center, qreal scale, Qt::GestureState state);
 
     private Q_SLOTS:
         void resizeMap();

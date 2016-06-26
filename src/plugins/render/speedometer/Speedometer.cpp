@@ -118,7 +118,7 @@ bool Speedometer::isInitialized () const
     return m_widgetItem;
 }
 
-void Speedometer::updateLocation( GeoDataCoordinates coordinates, qreal speed )
+void Speedometer::updateLocation( const GeoDataCoordinates& coordinates, qreal speed )
 {
     Q_UNUSED( coordinates );
 

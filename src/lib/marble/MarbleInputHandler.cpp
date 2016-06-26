@@ -336,7 +336,7 @@ bool MarbleDefaultInputHandler::handleWheel(QWheelEvent *wheelevt)
     return true;
 }
 
-bool MarbleDefaultInputHandler::handlePinch(QPointF center, qreal scaleFactor, Qt::GestureState state)
+bool MarbleDefaultInputHandler::handlePinch(const QPointF &center, qreal scaleFactor, Qt::GestureState state)
 {
     qreal  destLat;
     qreal  destLon;

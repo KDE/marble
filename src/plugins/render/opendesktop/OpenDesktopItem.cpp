@@ -107,7 +107,7 @@ QUrl OpenDesktopItem::avatarUrl() const
     return m_avatarUrl;
 }
    
-void OpenDesktopItem::setAvatarUrl( const QUrl url )
+void OpenDesktopItem::setAvatarUrl( const QUrl& url )
 {
     m_avatarUrl = url;
 }
@@ -117,7 +117,7 @@ QString OpenDesktopItem::fullName() const
     return m_fullName;
 }
    
-void OpenDesktopItem::setFullName( const QString fullName )
+void OpenDesktopItem::setFullName( const QString& fullName )
 {
     m_fullName = fullName;
     updateToolTip();
@@ -128,7 +128,7 @@ QString OpenDesktopItem::location() const
     return m_location;
 }
 
-void OpenDesktopItem::setLocation( const QString location )
+void OpenDesktopItem::setLocation( const QString& location )
 {
     m_location = location;
     updateToolTip();
@@ -139,7 +139,7 @@ QString OpenDesktopItem::role() const
     return m_role;
 }
 
-void OpenDesktopItem::setRole( const QString role )
+void OpenDesktopItem::setRole( const QString& role )
 {
     m_role = role;
     updateToolTip();

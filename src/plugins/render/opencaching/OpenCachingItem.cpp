@@ -192,7 +192,7 @@ void OpenCachingItem::updateTooltip()
     }
 }
 
-void OpenCachingItem::updateDescriptionLanguage( QString language )
+void OpenCachingItem::updateDescriptionLanguage( const QString& language )
 {
     QHash<QString, OpenCachingCacheDescription> descriptions = m_cache.description();
     QString text = descriptions[language].shortDescription() + "\n\n" +

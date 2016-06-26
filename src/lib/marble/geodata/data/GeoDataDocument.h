@@ -81,7 +81,7 @@ public:
     void setDocumentRole( DocumentRole role );
 
     QString property() const;
-    void setProperty( QString property );
+    void setProperty( const QString& property );
 
     /**
      * @brief The filename of the document

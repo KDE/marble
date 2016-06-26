@@ -15,7 +15,7 @@
 
 namespace Marble
 {
-GeoSceneGeodata::GeoSceneGeodata( QString name )
+GeoSceneGeodata::GeoSceneGeodata( const QString& name )
     : GeoSceneAbstractDataset( name ),
       m_sourceFile( QString() ),
       m_alpha( 1.0 ),
@@ -46,7 +46,7 @@ QString GeoSceneGeodata::property() const
     return m_property;
 }
 
-void GeoSceneGeodata::setProperty( QString property )
+void GeoSceneGeodata::setProperty( const QString& property )
 {
     m_property = property;
 }
@@ -56,7 +56,7 @@ QString GeoSceneGeodata::sourceFile() const
     return m_sourceFile;
 }
 
-void GeoSceneGeodata::setSourceFile(QString sourceFile)
+void GeoSceneGeodata::setSourceFile(const QString& sourceFile)
 {
     m_sourceFile = sourceFile;
 }
@@ -66,7 +66,7 @@ QString GeoSceneGeodata::colorize() const
     return m_colorize;
 }
 
-void GeoSceneGeodata::setColorize( QString colorize )
+void GeoSceneGeodata::setColorize( const QString& colorize )
 {
     m_colorize = colorize;
 }

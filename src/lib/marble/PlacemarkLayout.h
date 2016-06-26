@@ -94,8 +94,8 @@ class PlacemarkLayout : public QObject
     void setShowMaria( bool show );
 
     void requestStyleReset();
-    void addPlacemarks( QModelIndex index, int first, int last );
-    void removePlacemarks( QModelIndex index, int first, int last );
+    void addPlacemarks( const QModelIndex& index, int first, int last );
+    void removePlacemarks( const QModelIndex& index, int first, int last );
     void resetCacheData();
 
  Q_SIGNALS:

@@ -72,7 +72,7 @@ public:
 
     virtual QString description() const;
 
-    void setDescription( const QString description );
+    void setDescription( const QString & description );
 
     virtual QList<Marble::PluginAuthor> pluginAuthors() const;
 

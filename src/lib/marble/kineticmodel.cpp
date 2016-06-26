@@ -93,7 +93,7 @@ QPointF KineticModel::position() const
     return d_ptr->position;
 }
 
-void KineticModel::setPosition(QPointF position)
+void KineticModel::setPosition(const QPointF& position)
 {
     setPosition( position.x(), position.y() );
 }
@@ -120,7 +120,7 @@ void KineticModel::setPosition(qreal posX, qreal posY)
     d_ptr->timestamp.start();
 }
 
-void KineticModel::jumpToPosition(QPointF position)
+void KineticModel::jumpToPosition(const QPointF& position)
 {
     jumpToPosition( position.x(), position.y() );
 }

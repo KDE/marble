@@ -54,9 +54,9 @@ public:
 
 public Q_SLOTS:
     void setDuration(int ms);
-    void setPosition(QPointF position);
+    void setPosition(const QPointF& position);
     void setPosition(qreal posX, qreal posY);
-    void jumpToPosition(QPointF position);
+    void jumpToPosition(const QPointF& position);
     void jumpToPosition(qreal posX, qreal posY);
     void setUpdateInterval(int ms);
     void stop();

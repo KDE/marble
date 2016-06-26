@@ -55,7 +55,7 @@ QList<BBCStation> StationListParser::stationList() const
     return m_list;
 }
 
-void StationListParser::setPath( QString path )
+void StationListParser::setPath( const QString& path )
 {
     m_path = path;
 }

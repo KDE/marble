@@ -394,8 +394,8 @@ QSize PluginItemDelegate::nameSize( const QModelIndex& index )
     return nameSize;
 }
 
-QRect PluginItemDelegate::alignRect( QRect object,
-                                     QRect frame,
+QRect PluginItemDelegate::alignRect( const QRect& object,
+                                     const QRect& frame,
                                      int position,
                                      Qt::AlignmentFlag alignment )
 {

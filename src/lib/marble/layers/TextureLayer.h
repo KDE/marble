@@ -135,8 +135,8 @@ public Q_SLOTS:
     Q_PRIVATE_SLOT( d, void requestDelayedRepaint() )
     Q_PRIVATE_SLOT( d, void updateTextureLayers() )
     Q_PRIVATE_SLOT( d, void updateTile( const TileId &tileId, const QImage &tileImage ) )
-    Q_PRIVATE_SLOT( d, void addGroundOverlays( QModelIndex parent, int first, int last ) )
-    Q_PRIVATE_SLOT( d, void removeGroundOverlays( QModelIndex parent, int first, int last ) )
+    Q_PRIVATE_SLOT( d, void addGroundOverlays( const QModelIndex& parent, int first, int last ) )
+    Q_PRIVATE_SLOT( d, void removeGroundOverlays( const QModelIndex& parent, int first, int last ) )
     Q_PRIVATE_SLOT( d, void resetGroundOverlaysCache() )
 
  private:

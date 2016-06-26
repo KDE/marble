@@ -113,7 +113,7 @@ bool GpsInfo::isInitialized () const
     return m_widgetItem;
 }
 
-void GpsInfo::updateLocation( GeoDataCoordinates coordinates, qreal)
+void GpsInfo::updateLocation( const GeoDataCoordinates& coordinates, qreal)
 {
     PositionTracking *tracking = marbleModel()->positionTracking();
     qreal speed = tracking->speed();

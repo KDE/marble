@@ -36,7 +36,7 @@
 namespace Marble
 {
 
-OpenCachingComItem::OpenCachingComItem( QVariantMap cache, OpenCachingComModel *parent )
+OpenCachingComItem::OpenCachingComItem( const QVariantMap& cache, OpenCachingComModel *parent )
     : AbstractDataPluginItem( parent )
      , m_ui( 0 )
      , m_model( parent )
@@ -339,7 +339,7 @@ QString OpenCachingComItem::iconName() const
     return "unknown";
 }
 
-const QString OpenCachingComItem::ratingNumberString(QVariant number)
+const QString OpenCachingComItem::ratingNumberString(const QVariant& number)
 {
     return QString::number(number.toDouble(), 'f', 1);
 }

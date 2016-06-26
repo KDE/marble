@@ -112,7 +112,7 @@ QString GeoDataDocument::property() const
     return p()->m_property;
 }
 
-void GeoDataDocument::setProperty( QString property )
+void GeoDataDocument::setProperty( const QString& property )
 {
     p()->m_property = property;
 }
