@@ -103,6 +103,10 @@ int main(int argc, char *argv[])
     parser.process(app);
 
     const QStringList args = parser.positionalArguments();
+    if (args.isEmpty()) {
+        parser.showHelp();
+        return 0;
+    }
     // input is args.at(0), output is args.at(1)
 
     QString inputFileName = args.at(0);
