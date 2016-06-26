@@ -50,7 +50,7 @@ Item {
 
         CheckBox {
             text: "Show OSM Bitmap Tiles"
-            checked: true
+            checked: marbleMaps.isPropertyEnabled("mapnik")
             onCheckedChanged: marbleMaps.setPropertyEnabled("mapnik", checked)
         }
 
