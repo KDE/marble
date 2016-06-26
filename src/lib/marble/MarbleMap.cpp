@@ -824,12 +824,7 @@ void MarbleMapPrivate::updateMapTheme()
                       m_model, SLOT(updateProperty(QString,bool)) );
 
     q->setPropertyValue( "clouds_data", m_viewParams.showClouds() );
-
     m_groundLayer.setColor( m_model->mapTheme()->map()->backgroundColor() );
-
-    if ( !m_model->mapTheme()->map()->hasTextureLayers() ) {
-        m_layerManager.addLayer( &m_groundLayer );
-    }
 
     // Check whether there is a texture layer and vectortile layer available:
     if ( m_model->mapTheme()->map()->hasTextureLayers() ) {
@@ -969,12 +964,17 @@ void MarbleMapPrivate::updateMapTheme()
 
         m_vectorTileLayer.setMapTheme( vectorTiles, vectorTileLayerSettings );
 
+        if (m_textureLayer.textureLayerCount() == 0) {
+            m_layerManager.addLayer( &m_groundLayer );
+        }
+
         if ( textureLayersOk )
             m_layerManager.addLayer( &m_textureLayer );
         if ( vectorTileLayersOk )
             m_layerManager.addLayer( &m_vectorTileLayer );
     }
     else {
+        m_layerManager.addLayer( &m_groundLayer );
         m_textureLayer.setMapTheme( QVector<const GeoSceneTextureTileDataset *>(), 0, "", "" );
         m_vectorTileLayer.setMapTheme( QVector<const GeoSceneVectorTileDataset *>(), 0 );
     }
