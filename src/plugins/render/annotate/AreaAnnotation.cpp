@@ -38,9 +38,7 @@ const int AreaAnnotation::selectedDim = 15;
 const int AreaAnnotation::mergedDim = 20;
 const int AreaAnnotation::hoveredDim = 20;
 const QColor AreaAnnotation::regularColor = Oxygen::aluminumGray3;
-const QColor AreaAnnotation::selectedColor = QApplication::palette().highlight().color();
 const QColor AreaAnnotation::mergedColor = Oxygen::emeraldGreen6;
-const QColor AreaAnnotation::hoveredColor = QApplication::palette().highlight().color();
 
 AreaAnnotation::AreaAnnotation( GeoDataPlacemark *placemark ) :
     SceneGraphicsItem( placemark ),
@@ -742,6 +740,8 @@ void AreaAnnotation::drawNodes( GeoPainter *painter )
     QColor glowColor = QApplication::palette().highlightedText().color();
     glowColor.setAlpha(120);
 
+    auto const selectedColor = QApplication::palette().highlight().color();
+    auto const hoveredColor = selectedColor;
     for ( int i = 0; i < outerRing.size(); ++i ) {
         // The order here is important, because a merged node can be at the same time selected.
         if ( m_outerNodesList.at(i).isBeingMerged() ) {
