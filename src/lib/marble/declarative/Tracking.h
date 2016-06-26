@@ -16,18 +16,16 @@
 #include <QObject>
 #include <QtQml/qqml.h>
 
-class MarbleWidget;
-
 namespace Marble {
 class AutoNavigation;
-}
+class MarbleQuickItem;
 
 class Tracking : public QObject
 {
     Q_OBJECT
     Q_ENUMS( PositionMarkerType )
 
-    Q_PROPERTY( MarbleWidget* map READ map WRITE setMap NOTIFY mapChanged )
+    Q_PROPERTY( MarbleQuickItem* map READ map WRITE setMap NOTIFY mapChanged )
     Q_PROPERTY( bool showTrack READ showTrack WRITE setShowTrack NOTIFY showTrackChanged )
     Q_PROPERTY( bool autoCenter READ autoCenter WRITE setAutoCenter NOTIFY autoCenterChanged )
     Q_PROPERTY( bool autoZoom READ autoZoom WRITE setAutoZoom NOTIFY autoZoomChanged )
@@ -59,9 +57,9 @@ public:
 
     void setPositionMarker( QObject* marker );
 
-    MarbleWidget* map();
+    MarbleQuickItem* map();
 
-    void setMap( MarbleWidget* widget );
+    void setMap( MarbleQuickItem* widget );
 
     bool hasLastKnownPosition() const;
 
@@ -127,7 +125,7 @@ private:
 
     QObject* m_positionMarker;
 
-    MarbleWidget* m_marbleWidget;
+    MarbleQuickItem* m_marbleQuickItem;
 
     bool m_hasLastKnownPosition;
 
@@ -137,6 +135,8 @@ private:
 
     PositionMarkerType m_positionMarkerType;
 };
+
+}
 
 
 #endif

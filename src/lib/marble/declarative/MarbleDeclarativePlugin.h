@@ -17,7 +17,7 @@
 #include <QQmlExtensionPlugin>
 
 /**
-  * Registers MarbleWidget, MarbleRunnerManager and MarbleThemeManager
+  * Registers MarbleQuickItem, MarbleRunnerManager and MarbleThemeManager
   * as QQml extensions for use in QML.
   */
 class MARBLE_DECLARATIVE_EXPORT MarbleDeclarativePlugin : public QQmlExtensionPlugin

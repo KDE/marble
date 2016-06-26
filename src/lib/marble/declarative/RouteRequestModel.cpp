@@ -12,7 +12,6 @@
 
 #include "routing/RoutingManager.h"
 #include "routing/RouteRequest.h"
-#include "MarbleDeclarativeWidget.h"
 #include "MarbleMap.h"
 #include "MarbleModel.h"
 #include "Routing.h"

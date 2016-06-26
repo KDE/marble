@@ -11,7 +11,7 @@
 #include "Bookmarks.h"
 
 #include "Planet.h"
-#include "MarbleDeclarativeWidget.h"
+#include "MarbleQuickItem.h"
 #include "MarbleModel.h"
 #include "MarbleMath.h"
 #include "MarblePlacemarkModel.h"
@@ -26,33 +26,35 @@
 
 #include <QSortFilterProxyModel>
 
+namespace Marble {
+
 Bookmarks::Bookmarks( QObject* parent ) : QObject( parent ),
-    m_marbleWidget( 0 ), m_proxyModel( 0 )
+    m_marbleQuickItem( 0 ), m_proxyModel( 0 )
 {
     // nothing to do
 }
 
-MarbleWidget *Bookmarks::map()
+MarbleQuickItem *Bookmarks::map()
 {
-    return m_marbleWidget;
+    return m_marbleQuickItem;
 }
 
-void Bookmarks::setMap( ::MarbleWidget* widget )
+void Bookmarks::setMap( MarbleQuickItem* item )
 {
-    m_marbleWidget = widget;
+    m_marbleQuickItem = item;
 }
 
 bool Bookmarks::isBookmark( qreal longitude, qreal latitude ) const
 {
-    if ( !m_marbleWidget || !m_marbleWidget->model()->bookmarkManager() ) {
+    if ( !m_marbleQuickItem || !m_marbleQuickItem->model()->bookmarkManager() ) {
         return false;
     }
 
-    Marble::BookmarkManager* manager = m_marbleWidget->model()->bookmarkManager();
+    Marble::BookmarkManager* manager = m_marbleQuickItem->model()->bookmarkManager();
     Marble::GeoDataDocument *bookmarks = manager->document();
     Marble::GeoDataCoordinates const compareTo( longitude, latitude, 0.0, Marble::GeoDataCoordinates::Degree );
 
-    qreal planetRadius = m_marbleWidget->model()->planet()->radius();
+    qreal planetRadius = m_marbleQuickItem->model()->planet()->radius();
     foreach( const Marble::GeoDataFolder* folder, bookmarks->folderList() ) {
         foreach( const Marble::GeoDataPlacemark * const placemark, folder->placemarkList() ) {
             if ( distanceSphere( placemark->coordinate(), compareTo ) * planetRadius < 5 ) {
@@ -66,11 +68,11 @@ bool Bookmarks::isBookmark( qreal longitude, qreal latitude ) const
 
 void Bookmarks::addBookmark( qreal longitude, qreal latitude, const QString &name, const QString &folderName )
 {
-    if ( !m_marbleWidget || !m_marbleWidget->model()->bookmarkManager() ) {
+    if ( !m_marbleQuickItem || !m_marbleQuickItem->model()->bookmarkManager() ) {
         return;
     }
 
-    Marble::BookmarkManager* manager = m_marbleWidget->model()->bookmarkManager();
+    Marble::BookmarkManager* manager = m_marbleQuickItem->model()->bookmarkManager();
     Marble::GeoDataDocument *bookmarks = manager->document();
     Marble::GeoDataContainer *target = 0;
     foreach( Marble::GeoDataFolder* const folder, bookmarks->folderList() ) {
@@ -104,15 +106,15 @@ void Bookmarks::addBookmark( qreal longitude, qreal latitude, const QString &nam
 
 void Bookmarks::removeBookmark( qreal longitude, qreal latitude )
 {
-    if ( !m_marbleWidget || !m_marbleWidget->model()->bookmarkManager() ) {
+    if ( !m_marbleQuickItem || !m_marbleQuickItem->model()->bookmarkManager() ) {
         return;
     }
 
-    Marble::BookmarkManager* manager = m_marbleWidget->model()->bookmarkManager();
+    Marble::BookmarkManager* manager = m_marbleQuickItem->model()->bookmarkManager();
     Marble::GeoDataDocument *bookmarks = manager->document();
     Marble::GeoDataCoordinates const compareTo( longitude, latitude, 0.0, Marble::GeoDataCoordinates::Degree );
 
-    qreal planetRadius = m_marbleWidget->model()->planet()->radius();
+    qreal planetRadius = m_marbleQuickItem->model()->planet()->radius();
     foreach( const Marble::GeoDataFolder* folder, bookmarks->folderList() ) {
         foreach( Marble::GeoDataPlacemark * placemark, folder->placemarkList() ) {
             if ( distanceSphere( placemark->coordinate(), compareTo ) * planetRadius < 5 ) {
@@ -125,8 +127,8 @@ void Bookmarks::removeBookmark( qreal longitude, qreal latitude )
 
 BookmarksModel *Bookmarks::model()
 {
-    if ( !m_proxyModel && m_marbleWidget && m_marbleWidget->model()->bookmarkManager() ) {
-        Marble::BookmarkManager* manager = m_marbleWidget->model()->bookmarkManager();
+    if ( !m_proxyModel && m_marbleQuickItem && m_marbleQuickItem->model()->bookmarkManager() ) {
+        Marble::BookmarkManager* manager = m_marbleQuickItem->model()->bookmarkManager();
         Marble::GeoDataTreeModel* model = new Marble::GeoDataTreeModel( this );
         model->setRootDocument( manager->document() );
 
@@ -181,6 +183,8 @@ QString BookmarksModel::name( int idx ) const
         return data( index( idx, 0 ) ).toString();
     }
     return QString();
+}
+
 }
 
 #include "moc_Bookmarks.cpp"

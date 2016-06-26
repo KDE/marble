@@ -10,7 +10,6 @@
 
 #include "Routing.h"
 
-#include "MarbleDeclarativeWidget.h"
 #include <MarbleMap.h>
 #include <MarbleModel.h>
 #include "MarbleDirs.h"

@@ -12,7 +12,6 @@ INCLUDE_DIRECTORIES(
 
 add_library( marbledeclarative SHARED
     Bookmarks.cpp
-    CloudSync.cpp
     Coordinate.cpp
     DeclarativeDataPluginModel.cpp
     DeclarativeDataPlugin.cpp
@@ -21,11 +20,9 @@ add_library( marbledeclarative SHARED
     MapThemeModel.cpp
     MarbleDeclarativeObject.cpp
     MarbleDeclarativePlugin.cpp
-    MarbleDeclarativeWidget.cpp
     MarbleQuickItem.cpp
     Placemark.cpp
     PositionSource.cpp
-    Search.cpp
     SearchBackend.cpp
     Tracking.cpp
     Routing.cpp

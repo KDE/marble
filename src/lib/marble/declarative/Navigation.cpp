@@ -11,7 +11,6 @@
 #include "Navigation.h"
 
 #include "Planet.h"
-#include "MarbleDeclarativeWidget.h"
 #include "MarbleModel.h"
 #include "MarbleQuickItem.h"
 #include "routing/RoutingManager.h"
