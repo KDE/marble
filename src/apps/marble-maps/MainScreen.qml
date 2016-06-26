@@ -121,6 +121,17 @@ ApplicationWindow {
                         routingProfile: routeEditor.routingProfile
                     }
 
+                    PositionMarker {
+                        id: positionMarker
+                        posX: navigationManager.snappedPositionMarkerScreenPosition.x
+                        posY: navigationManager.snappedPositionMarkerScreenPosition.y
+                        angle: marbleMaps.angle
+                        visible: marbleMaps.positionAvailable && marbleMaps.positionVisible
+                        radius: navigationManager.screenAccuracy
+                        color: navigationManager.deviated ? "#40ff0000" : "transparent"
+                        border.color: navigationManager.deviated ? "red" : "transparent"
+                    }
+
                     MouseArea{
                         anchors.fill: parent
                         propagateComposedEvents: true
@@ -290,17 +301,6 @@ ApplicationWindow {
                             PropertyChanges { target: routeEditorButton; iconSource: placemarkDialog.actionIconSource }
                         }
                     ]
-                }
-
-                PositionMarker {
-                    id: positionMarker
-                    posX: navigationManager.snappedPositionMarkerScreenPosition.x
-                    posY: navigationManager.snappedPositionMarkerScreenPosition.y
-                    angle: marbleMaps.angle
-                    visible: true
-                    radius: navigationManager.screenAccuracy
-                    color: navigationManager.deviated ? "#40ff0000" : "transparent"
-                    border.color: navigationManager.deviated ? "red" : "transparent"
                 }
             }
         }
