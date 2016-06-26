@@ -21,7 +21,7 @@
             <layer name="sentinel2" backend="texture" >
                 <!-- OpenStreetMap mapnik rendered tiles expire after seven days
                      or 604800 seconds -->
-                <texture name="sentinel2" expire="604800" >
+                <texture name="sentinel2" expire="43200" >
                     <sourcedir format="JPG"> earth/sentinel2 </sourcedir>
                     <storageLayout levelZeroColumns="1" levelZeroRows="1" maximumTileLevel="14" mode="OpenStreetMap" />
                     <projection name="Mercator" />
