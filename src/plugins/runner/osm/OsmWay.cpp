@@ -20,6 +20,7 @@
 
 namespace Marble {
 
+QSet<QString> OsmWay::s_areaTags;
 
 void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes) const
 {
@@ -103,12 +104,87 @@ bool OsmWay::isArea() const
 {
     for (auto iter = m_osmData.tagsBegin(), end=m_osmData.tagsEnd(); iter != end; ++iter) {
         QString const keyValue = QString("%1=%2").arg(iter.key()).arg(iter.value());
-        if (OsmPresetLibrary::isAreaTag(keyValue)) {
+        if (isAreaTag(keyValue)) {
             return true;
         }
     }
 
     return false;
+}
+
+bool OsmWay::isAreaTag(const QString &keyValue)
+{
+    if (s_areaTags.isEmpty()) {
+        // All these tags can be found updated at
+        // http://wiki.openstreetmap.org/wiki/Map_Features#Landuse
+
+        s_areaTags.insert( "landuse=forest" );
+        s_areaTags.insert( "natural=water" );
+        s_areaTags.insert( "natural=wood" );
+        s_areaTags.insert( "natural=beach" );
+        s_areaTags.insert( "natural=wetland" );
+        s_areaTags.insert( "natural=glacier" );
+        s_areaTags.insert( "natural=scrub" );
+        s_areaTags.insert( "natural=cliff" );
+        s_areaTags.insert( "area=yes" );
+        s_areaTags.insert( "waterway=riverbank" );
+
+        foreach(const QString &value, OsmPresetLibrary::buildingValues() ) {
+            s_areaTags.insert( QString("building=%1").arg(value) );
+        }
+        s_areaTags.insert( "man_made=bridge" );
+
+        s_areaTags.insert( "amenity=graveyard" );
+        s_areaTags.insert( "amenity=parking" );
+        s_areaTags.insert( "amenity=parking_space" );
+        s_areaTags.insert( "amenity=bicycle_parking" );
+        s_areaTags.insert( "amenity=college" );
+        s_areaTags.insert( "amenity=hospital" );
+        s_areaTags.insert( "amenity=school" );
+        s_areaTags.insert( "amenity=university" );
+        s_areaTags.insert( "leisure=common" );
+        s_areaTags.insert( "leisure=garden" );
+        s_areaTags.insert( "leisure=golf_course" );
+        s_areaTags.insert( "leisure=playground" );
+        s_areaTags.insert( "leisure=pitch" );
+        s_areaTags.insert( "leisure=park" );
+        s_areaTags.insert( "leisure=sports_centre" );
+        s_areaTags.insert( "leisure=stadium" );
+        s_areaTags.insert( "leisure=swimming_pool" );
+        s_areaTags.insert( "leisure=track" );
+
+        s_areaTags.insert( "military=danger_area" );
+
+        s_areaTags.insert( "landuse=allotments" );
+        s_areaTags.insert( "landuse=basin" );
+        s_areaTags.insert( "landuse=brownfield" );
+        s_areaTags.insert( "landuse=cemetery" );
+        s_areaTags.insert( "landuse=commercial" );
+        s_areaTags.insert( "landuse=construction" );
+        s_areaTags.insert( "landuse=farm" );
+        s_areaTags.insert( "landuse=farmland" );
+        s_areaTags.insert( "landuse=farmyard" );
+        s_areaTags.insert( "landuse=garages" );
+        s_areaTags.insert( "landuse=greenfield" );
+        s_areaTags.insert( "landuse=industrial" );
+        s_areaTags.insert( "landuse=landfill" );
+        s_areaTags.insert( "landuse=meadow" );
+        s_areaTags.insert( "landuse=military" );
+        s_areaTags.insert( "landuse=orchard" );
+        s_areaTags.insert( "landuse=quarry" );
+        s_areaTags.insert( "landuse=railway" );
+        s_areaTags.insert( "landuse=reservoir" );
+        s_areaTags.insert( "landuse=residential" );
+        s_areaTags.insert( "landuse=retail" );
+        s_areaTags.insert( "landuse=orchard" );
+        s_areaTags.insert( "landuse=vineyard" );
+        s_areaTags.insert( "landuse=grass" );
+
+        s_areaTags.insert( "marble_land=landmass" );
+        s_areaTags.insert( "settlement=yes" );
+    }
+
+    return s_areaTags.contains(keyValue);
 }
 
 }

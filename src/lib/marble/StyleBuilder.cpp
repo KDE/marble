@@ -20,6 +20,7 @@
 
 #include <QApplication>
 #include <QDate>
+#include <QSet>
 #include <QScreen>
 
 namespace Marble {

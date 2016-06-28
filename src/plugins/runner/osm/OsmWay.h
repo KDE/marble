@@ -15,12 +15,14 @@
 #include <osm/OsmPlacemarkData.h>
 #include <GeoDataDocument.h>
 
+#include <QSet>
 #include <QString>
 #include <QXmlStreamAttributes>
 
 namespace Marble {
 
-class OsmWay {
+class OsmWay
+{
 public:
     OsmPlacemarkData & osmData();
     void addReference(qint64 id);
@@ -33,9 +35,14 @@ public:
 private:
     bool isArea() const;
 
+    static bool isAreaTag(const QString &keyValue);
+
     OsmPlacemarkData m_osmData;
     QVector<qint64> m_references;
+
+    static QSet<QString> s_areaTags;
 };
+
 typedef QHash<qint64,OsmWay> OsmWays;
 
 }
