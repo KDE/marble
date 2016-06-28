@@ -16,8 +16,10 @@
 
 #include <QColor>
 #include <QFont>
+#include <QList>
 
 namespace Marble {
+class OsmPlacemarkData;
 
 class StyleParameters
 {
@@ -71,6 +73,8 @@ public:
 
 private:
     Q_DISABLE_COPY(StyleBuilder)
+
+    static QList<GeoDataFeature::GeoDataVisualCategory> visualCategories(const OsmPlacemarkData &osmData);
 
     class Private;
     Private * const d;
