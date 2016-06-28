@@ -652,8 +652,6 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
 
     static QSharedPointer<const GeoDataStyle> presetStyle( GeoDataVisualCategory category );
 
-    static QString visualCategoryName(GeoDataVisualCategory category);
-
  protected:
     // the d-pointer needs to be protected to be accessible from derived classes
     GeoDataFeaturePrivate* d;

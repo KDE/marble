@@ -20,6 +20,7 @@
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
 #include "OsmPlacemarkData.h"
+#include "StyleBuilder.h"
 
 #include <QVector2D>
 #include <QtCore/qmath.h>
@@ -48,7 +49,7 @@ GeoPolygonGraphicsItem::GeoPolygonGraphicsItem(const GeoDataFeature *feature, co
     }
     else
     {
-        const QString paintLayer = QString("Polygon/%1").arg(GeoDataFeature::visualCategoryName(visualCategory));
+        const QString paintLayer = QString("Polygon/%1").arg(StyleBuilder::visualCategoryName(visualCategory));
         setPaintLayers(QStringList() << paintLayer);
     }
 }
@@ -74,7 +75,7 @@ GeoPolygonGraphicsItem::GeoPolygonGraphicsItem(const GeoDataFeature *feature, co
     }
     else
     {
-        const QString paintLayer = QString("Polygon/%1").arg(GeoDataFeature::visualCategoryName(visualCategory));
+        const QString paintLayer = QString("Polygon/%1").arg(StyleBuilder::visualCategoryName(visualCategory));
         setPaintLayers(QStringList() << paintLayer);
     }
 }

@@ -13,6 +13,7 @@
 #include "GeoPainter.h"
 #include "GeoDataStyle.h"
 #include "GeoDataFeature.h"
+#include "StyleBuilder.h"
 #include "ViewportParams.h"
 
 #include <QImageReader>
@@ -26,7 +27,7 @@ GeoPhotoGraphicsItem::GeoPhotoGraphicsItem( const GeoDataFeature *feature )
     : GeoGraphicsItem( feature )
 {
     if (feature) {
-        QString const paintLayer = QString("Photo/%1").arg(GeoDataFeature::visualCategoryName(feature->visualCategory()));
+        QString const paintLayer = QString("Photo/%1").arg(StyleBuilder::visualCategoryName(feature->visualCategory()));
         setPaintLayers(QStringList() << paintLayer);
     }
 }

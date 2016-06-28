@@ -14,6 +14,7 @@
 #include "GeoDataLineString.h"
 #include "GeoDataLineStyle.h"
 #include "GeoPainter.h"
+#include "StyleBuilder.h"
 #include "ViewportParams.h"
 #include "GeoDataStyle.h"
 #include "MarbleDebug.h"
@@ -28,7 +29,7 @@ GeoLineStringGraphicsItem::GeoLineStringGraphicsItem( const GeoDataFeature *feat
         : GeoGraphicsItem( feature ),
           m_lineString( lineString )
 {
-    QString const category = GeoDataFeature::visualCategoryName(feature->visualCategory());
+    QString const category = StyleBuilder::visualCategoryName(feature->visualCategory());
     QStringList paintLayers;
     paintLayers << QString("LineString/%1/outline").arg(category);
     paintLayers << QString("LineString/%1/inline").arg(category);

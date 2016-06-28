@@ -38,7 +38,15 @@ public:
     GeoDataStyle::ConstPtr createStyle(const StyleParameters &parameters) const;
     GeoDataStyle::ConstPtr presetStyle(GeoDataFeature::GeoDataVisualCategory visualCategory) const;
 
+    /**
+     * @brief Returns the order in which the visual categories used in the theme shall be painted on the map.
+     * @return order in which the visual categories shall be painted on the map
+     */
+    QStringList renderOrder() const;
+
     void reset();
+
+    static QString visualCategoryName(GeoDataFeature::GeoDataVisualCategory category);
 
 private:
     Q_DISABLE_COPY(StyleBuilder)

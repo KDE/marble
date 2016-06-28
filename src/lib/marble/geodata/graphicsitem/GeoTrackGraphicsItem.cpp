@@ -14,6 +14,7 @@
 #include "GeoDataTrack.h"
 #include "GeoDataFeature.h"
 #include "MarbleDebug.h"
+#include "StyleBuilder.h"
 
 using namespace Marble;
 
@@ -22,7 +23,7 @@ GeoTrackGraphicsItem::GeoTrackGraphicsItem( const GeoDataFeature *feature, const
 {
     setTrack( track );
     if (feature) {
-        QString const paintLayer = QString("Track/%1").arg(GeoDataFeature::visualCategoryName(feature->visualCategory()));
+        QString const paintLayer = QString("Track/%1").arg(StyleBuilder::visualCategoryName(feature->visualCategory()));
         setPaintLayers(QStringList() << paintLayer);
     }
 }

@@ -54,6 +54,8 @@ public:
                                          const QString& texturePath = QString());
 
     void initializeDefaultStyles();
+
+    static QString createPaintLayerItem(const QString &itemType, GeoDataFeature::GeoDataVisualCategory visualCategory, const QString &subType = QString());
 };
 
 GeoDataStyle::Ptr StyleBuilder::Private::s_defaultStyle[GeoDataFeature::LastIndex];
@@ -649,6 +651,16 @@ void StyleBuilder::Private::initializeDefaultStyles()
     s_defaultStyle[GeoDataFeature::LargeNationCapital]->labelStyle().setFont( tmp );
 }
 
+QString StyleBuilder::Private::createPaintLayerItem(const QString &itemType, GeoDataFeature::GeoDataVisualCategory visualCategory, const QString &subType)
+{
+    QString const category = visualCategoryName(visualCategory);
+    if (subType.isEmpty()) {
+        return QString("%1/%2").arg(itemType).arg(category);
+    } else {
+        return QString("%1/%2/%3").arg(itemType).arg(category).arg(subType);
+    }
+}
+
 
 StyleBuilder::StyleBuilder() :
     d(new Private)
@@ -849,9 +861,424 @@ GeoDataStyle::ConstPtr StyleBuilder::presetStyle(GeoDataFeature::GeoDataVisualCa
     }
 }
 
+
+QStringList StyleBuilder::renderOrder() const
+{
+    static QStringList paintLayerOrder;
+
+    if (paintLayerOrder.isEmpty()) {
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::Landmass);
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::UrbanArea);
+        for ( int i = GeoDataFeature::LanduseAllotments; i <= GeoDataFeature::LanduseVineyard; i++ ) {
+            if ((GeoDataFeature::GeoDataVisualCategory)i != GeoDataFeature::LanduseGrass) {
+                paintLayerOrder << Private::createPaintLayerItem("Polygon", (GeoDataFeature::GeoDataVisualCategory)i);
+            }
+        }
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::NaturalBeach);
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::NaturalWetland);
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::NaturalGlacier);
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::NaturalIceShelf);
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::NaturalCliff);
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::NaturalPeak);
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::MilitaryDangerArea);
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::LeisurePark);
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::LeisurePitch);
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::LeisureSportsCentre);
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::LeisureStadium);
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::NaturalWood);
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::LanduseGrass);
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::LeisurePlayground);
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::NaturalScrub);
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::LeisureTrack);
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::TransportParking);
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::TransportParkingSpace);
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::ManmadeBridge);
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::BarrierCityWall);
+
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::AmenityGraveyard);
+
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::EducationCollege);
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::EducationSchool);
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::EducationUniversity);
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::HealthHospital);
+
+        paintLayerOrder << Private::createPaintLayerItem("LineString", GeoDataFeature::Landmass);
+
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::NaturalWater);
+        paintLayerOrder << Private::createPaintLayerItem("LineString", GeoDataFeature::NaturalWater, "outline");
+        paintLayerOrder << Private::createPaintLayerItem("LineString", GeoDataFeature::NaturalWater, "inline");
+        paintLayerOrder << Private::createPaintLayerItem("LineString", GeoDataFeature::NaturalWater, "label");
+
+
+        paintLayerOrder << Private::createPaintLayerItem("LineString", GeoDataFeature::NaturalReef, "outline");
+        paintLayerOrder << Private::createPaintLayerItem("LineString", GeoDataFeature::NaturalReef, "inline");
+        paintLayerOrder << Private::createPaintLayerItem("LineString", GeoDataFeature::NaturalReef, "label");
+
+
+        for ( int i = GeoDataFeature::HighwaySteps; i <= GeoDataFeature::HighwayMotorway; i++ ) {
+            paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataFeature::GeoDataVisualCategory)i, "outline");
+        }
+        for ( int i = GeoDataFeature::HighwaySteps; i <= GeoDataFeature::HighwayMotorway; i++ ) {
+            paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataFeature::GeoDataVisualCategory)i, "inline");
+        }
+        for ( int i = GeoDataFeature::HighwaySteps; i <= GeoDataFeature::HighwayMotorway; i++ ) {
+            paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataFeature::GeoDataVisualCategory)i, "label");
+        }
+        for ( int i = GeoDataFeature::RailwayRail; i <= GeoDataFeature::RailwayFunicular; i++ ) {
+            paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataFeature::GeoDataVisualCategory)i, "outline");
+        }
+        for ( int i = GeoDataFeature::RailwayRail; i <= GeoDataFeature::RailwayFunicular; i++ ) {
+            paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataFeature::GeoDataVisualCategory)i, "inline");
+        }
+        for ( int i = GeoDataFeature::RailwayRail; i <= GeoDataFeature::RailwayFunicular; i++ ) {
+            paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataFeature::GeoDataVisualCategory)i, "label");
+        }
+
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::TransportPlatform);
+
+        for ( int i = GeoDataFeature::AdminLevel1; i <= GeoDataFeature::AdminLevel11; i++ ) {
+            paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataFeature::GeoDataVisualCategory)i, "outline");
+        }
+        for ( int i = GeoDataFeature::AdminLevel1; i <= GeoDataFeature::AdminLevel11; i++ ) {
+            paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataFeature::GeoDataVisualCategory)i, "inline");
+        }
+        for ( int i = GeoDataFeature::AdminLevel1; i <= GeoDataFeature::AdminLevel11; i++ ) {
+            paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataFeature::GeoDataVisualCategory)i, "label");
+        }
+
+        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataFeature::AmenityGraveyard);
+        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataFeature::NaturalWood);
+        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataFeature::NaturalBeach);
+        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataFeature::NaturalWetland);
+        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataFeature::NaturalGlacier);
+        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataFeature::NaturalIceShelf);
+        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataFeature::NaturalScrub);
+        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataFeature::LeisurePark);
+        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataFeature::LeisurePlayground);
+        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataFeature::LeisurePitch);
+        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataFeature::LeisureSportsCentre);
+        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataFeature::LeisureStadium);
+        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataFeature::LeisureTrack);
+        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataFeature::TransportParking);
+        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataFeature::ManmadeBridge);
+        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataFeature::BarrierCityWall);
+        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataFeature::NaturalWater);
+        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataFeature::NaturalReef);
+        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataFeature::Landmass);
+        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataFeature::NaturalCliff);
+        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataFeature::NaturalPeak);
+        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataFeature::EducationCollege);
+        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataFeature::EducationSchool);
+        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataFeature::EducationUniversity);
+        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataFeature::HealthHospital);
+        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataFeature::MilitaryDangerArea);
+
+        paintLayerOrder << "Polygon/Building/frame";
+        paintLayerOrder << "Polygon/Building/roof";
+
+        Q_ASSERT(QSet<QString>::fromList(paintLayerOrder).size() == paintLayerOrder.size());
+    }
+
+    return paintLayerOrder;
+}
+
 void StyleBuilder::reset()
 {
     d->s_defaultStyleInitialized = false;
+}
+
+QString StyleBuilder::visualCategoryName(GeoDataFeature::GeoDataVisualCategory category)
+{
+    static QHash<GeoDataFeature::GeoDataVisualCategory, QString> visualCategoryNames;
+
+    if (visualCategoryNames.isEmpty()) {
+        visualCategoryNames[GeoDataFeature::GeoDataFeature::None] = "None";
+        visualCategoryNames[GeoDataFeature::GeoDataFeature::Default] = "Default";
+        visualCategoryNames[GeoDataFeature::GeoDataFeature::Unknown] = "Unknown";
+        visualCategoryNames[GeoDataFeature::GeoDataFeature::SmallCity] = "SmallCity";
+        visualCategoryNames[GeoDataFeature::GeoDataFeature::SmallCountyCapital] = "SmallCountyCapital";
+        visualCategoryNames[GeoDataFeature::GeoDataFeature::SmallStateCapital] = "SmallStateCapital";
+        visualCategoryNames[GeoDataFeature::GeoDataFeature::SmallNationCapital] = "SmallNationCapital";
+        visualCategoryNames[GeoDataFeature::GeoDataFeature::MediumCity] = "MediumCity";
+        visualCategoryNames[GeoDataFeature::GeoDataFeature::MediumCountyCapital] = "MediumCountyCapital";
+        visualCategoryNames[GeoDataFeature::GeoDataFeature::MediumStateCapital] = "MediumStateCapital";
+        visualCategoryNames[GeoDataFeature::GeoDataFeature::MediumNationCapital] = "MediumNationCapital";
+        visualCategoryNames[GeoDataFeature::GeoDataFeature::BigCity] = "BigCity";
+        visualCategoryNames[GeoDataFeature::GeoDataFeature::BigCountyCapital] = "BigCountyCapital";
+        visualCategoryNames[GeoDataFeature::GeoDataFeature::BigStateCapital] = "BigStateCapital";
+        visualCategoryNames[GeoDataFeature::GeoDataFeature::BigNationCapital] = "BigNationCapital";
+        visualCategoryNames[GeoDataFeature::GeoDataFeature::LargeCity] = "LargeCity";
+        visualCategoryNames[GeoDataFeature::GeoDataFeature::LargeCountyCapital] = "LargeCountyCapital";
+        visualCategoryNames[GeoDataFeature::GeoDataFeature::LargeStateCapital] = "LargeStateCapital";
+        visualCategoryNames[GeoDataFeature::GeoDataFeature::LargeNationCapital] = "LargeNationCapital";
+        visualCategoryNames[GeoDataFeature::GeoDataFeature::Nation] = "Nation";
+        visualCategoryNames[GeoDataFeature::GeoDataFeature::PlaceCity] = "PlaceCity";
+        visualCategoryNames[GeoDataFeature::GeoDataFeature::PlaceSuburb] = "PlaceSuburb";
+        visualCategoryNames[GeoDataFeature::GeoDataFeature::PlaceHamlet] = "PlaceHamlet";
+        visualCategoryNames[GeoDataFeature::GeoDataFeature::PlaceLocality] = "PlaceLocality";
+        visualCategoryNames[GeoDataFeature::GeoDataFeature::PlaceTown] = "PlaceTown";
+        visualCategoryNames[GeoDataFeature::GeoDataFeature::PlaceVillage] = "PlaceVillage";
+        visualCategoryNames[GeoDataFeature::GeoDataFeature::Mountain] = "Mountain";
+        visualCategoryNames[GeoDataFeature::GeoDataFeature::Volcano] = "Volcano";
+        visualCategoryNames[GeoDataFeature::GeoDataFeature::Mons] = "Mons";
+        visualCategoryNames[GeoDataFeature::GeoDataFeature::Valley] = "Valley";
+        visualCategoryNames[GeoDataFeature::GeoDataFeature::Continent] = "Continent";
+        visualCategoryNames[GeoDataFeature::GeoDataFeature::Ocean] = "Ocean";
+        visualCategoryNames[GeoDataFeature::GeoDataFeature::OtherTerrain] = "OtherTerrain";
+        visualCategoryNames[GeoDataFeature::GeoDataFeature::Crater] = "Crater";
+        visualCategoryNames[GeoDataFeature::GeoDataFeature::Mare] = "Mare";
+        visualCategoryNames[GeoDataFeature::GeoDataFeature::GeographicPole] = "GeographicPole";
+        visualCategoryNames[GeoDataFeature::GeoDataFeature::MagneticPole] = "MagneticPole";
+        visualCategoryNames[GeoDataFeature::GeoDataFeature::ShipWreck] = "ShipWreck";
+        visualCategoryNames[GeoDataFeature::GeoDataFeature::AirPort] = "AirPort";
+        visualCategoryNames[GeoDataFeature::GeoDataFeature::Observatory] = "Observatory";
+        visualCategoryNames[GeoDataFeature::GeoDataFeature::MilitaryDangerArea] = "MilitaryDangerArea";
+        visualCategoryNames[GeoDataFeature::GeoDataFeature::Wikipedia] = "Wikipedia";
+        visualCategoryNames[GeoDataFeature::GeoDataFeature::OsmSite] = "OsmSite";
+        visualCategoryNames[GeoDataFeature::Coordinate] = "Coordinate";
+        visualCategoryNames[GeoDataFeature::MannedLandingSite] = "MannedLandingSite";
+        visualCategoryNames[GeoDataFeature::RoboticRover] = "RoboticRover";
+        visualCategoryNames[GeoDataFeature::UnmannedSoftLandingSite] = "UnmannedSoftLandingSite";
+        visualCategoryNames[GeoDataFeature::UnmannedHardLandingSite] = "UnmannedHardLandingSite";
+        visualCategoryNames[GeoDataFeature::Folder] = "Folder";
+        visualCategoryNames[GeoDataFeature::Bookmark] = "Bookmark";
+        visualCategoryNames[GeoDataFeature::NaturalWater] = "NaturalWater";
+        visualCategoryNames[GeoDataFeature::NaturalReef] = "NaturalReef";
+        visualCategoryNames[GeoDataFeature::NaturalWood] = "NaturalWood";
+        visualCategoryNames[GeoDataFeature::NaturalBeach] = "NaturalBeach";
+        visualCategoryNames[GeoDataFeature::NaturalWetland] = "NaturalWetland";
+        visualCategoryNames[GeoDataFeature::NaturalGlacier] = "NaturalGlacier";
+        visualCategoryNames[GeoDataFeature::NaturalIceShelf] = "NaturalIceShelf";
+        visualCategoryNames[GeoDataFeature::NaturalScrub] = "NaturalScrub";
+        visualCategoryNames[GeoDataFeature::NaturalCliff] = "NaturalCliff";
+        visualCategoryNames[GeoDataFeature::NaturalHeath] = "NaturalHeath";
+        visualCategoryNames[GeoDataFeature::HighwayTrafficSignals] = "HighwayTrafficSignals";
+        visualCategoryNames[GeoDataFeature::HighwaySteps] = "HighwaySteps";
+        visualCategoryNames[GeoDataFeature::HighwayUnknown] = "HighwayUnknown";
+        visualCategoryNames[GeoDataFeature::HighwayPath] = "HighwayPath";
+        visualCategoryNames[GeoDataFeature::HighwayFootway] = "HighwayFootway";
+        visualCategoryNames[GeoDataFeature::HighwayTrack] = "HighwayTrack";
+        visualCategoryNames[GeoDataFeature::HighwayPedestrian] = "HighwayPedestrian";
+        visualCategoryNames[GeoDataFeature::HighwayCycleway] = "HighwayCycleway";
+        visualCategoryNames[GeoDataFeature::HighwayService] = "HighwayService";
+        visualCategoryNames[GeoDataFeature::HighwayRoad] = "HighwayRoad";
+        visualCategoryNames[GeoDataFeature::HighwayResidential] = "HighwayResidential";
+        visualCategoryNames[GeoDataFeature::HighwayLivingStreet] = "HighwayLivingStreet";
+        visualCategoryNames[GeoDataFeature::HighwayUnclassified] = "HighwayUnclassified";
+        visualCategoryNames[GeoDataFeature::HighwayTertiaryLink] = "HighwayTertiaryLink";
+        visualCategoryNames[GeoDataFeature::HighwayTertiary] = "HighwayTertiary";
+        visualCategoryNames[GeoDataFeature::HighwaySecondaryLink] = "HighwaySecondaryLink";
+        visualCategoryNames[GeoDataFeature::HighwaySecondary] = "HighwaySecondary";
+        visualCategoryNames[GeoDataFeature::HighwayPrimaryLink] = "HighwayPrimaryLink";
+        visualCategoryNames[GeoDataFeature::HighwayPrimary] = "HighwayPrimary";
+        visualCategoryNames[GeoDataFeature::HighwayTrunkLink] = "HighwayTrunkLink";
+        visualCategoryNames[GeoDataFeature::HighwayTrunk] = "HighwayTrunk";
+        visualCategoryNames[GeoDataFeature::HighwayMotorwayLink] = "HighwayMotorwayLink";
+        visualCategoryNames[GeoDataFeature::HighwayMotorway] = "HighwayMotorway";
+        visualCategoryNames[GeoDataFeature::Building] = "Building";
+        visualCategoryNames[GeoDataFeature::AccomodationCamping] = "AccomodationCamping";
+        visualCategoryNames[GeoDataFeature::AccomodationHostel] = "AccomodationHostel";
+        visualCategoryNames[GeoDataFeature::AccomodationHotel] = "AccomodationHotel";
+        visualCategoryNames[GeoDataFeature::AccomodationMotel] = "AccomodationMotel";
+        visualCategoryNames[GeoDataFeature::AccomodationYouthHostel] = "AccomodationYouthHostel";
+        visualCategoryNames[GeoDataFeature::AccomodationGuestHouse] = "AccomodationGuestHouse";
+        visualCategoryNames[GeoDataFeature::AmenityLibrary] = "AmenityLibrary";
+        visualCategoryNames[GeoDataFeature::EducationCollege] = "EducationCollege";
+        visualCategoryNames[GeoDataFeature::EducationSchool] = "EducationSchool";
+        visualCategoryNames[GeoDataFeature::EducationUniversity] = "EducationUniversity";
+        visualCategoryNames[GeoDataFeature::FoodBar] = "FoodBar";
+        visualCategoryNames[GeoDataFeature::FoodBiergarten] = "FoodBiergarten";
+        visualCategoryNames[GeoDataFeature::FoodCafe] = "FoodCafe";
+        visualCategoryNames[GeoDataFeature::FoodFastFood] = "FoodFastFood";
+        visualCategoryNames[GeoDataFeature::FoodPub] = "FoodPub";
+        visualCategoryNames[GeoDataFeature::FoodRestaurant] = "FoodRestaurant";
+        visualCategoryNames[GeoDataFeature::HealthDentist] = "HealthDentist";
+        visualCategoryNames[GeoDataFeature::HealthDoctors] = "HealthDoctors";
+        visualCategoryNames[GeoDataFeature::HealthHospital] = "HealthHospital";
+        visualCategoryNames[GeoDataFeature::HealthPharmacy] = "HealthPharmacy";
+        visualCategoryNames[GeoDataFeature::HealthVeterinary] = "HealthVeterinary";
+        visualCategoryNames[GeoDataFeature::MoneyAtm] = "MoneyAtm";
+        visualCategoryNames[GeoDataFeature::MoneyBank] = "MoneyBank";
+        visualCategoryNames[GeoDataFeature::AmenityArchaeologicalSite] = "AmenityArchaeologicalSite";
+        visualCategoryNames[GeoDataFeature::AmenityEmbassy] = "AmenityEmbassy";
+        visualCategoryNames[GeoDataFeature::AmenityEmergencyPhone] = "AmenityEmergencyPhone";
+        visualCategoryNames[GeoDataFeature::AmenityWaterPark] = "AmenityWaterPark";
+        visualCategoryNames[GeoDataFeature::AmenityCommunityCentre] = "AmenityCommunityCentre";
+        visualCategoryNames[GeoDataFeature::AmenityFountain] = "AmenityFountain";
+        visualCategoryNames[GeoDataFeature::AmenityNightClub] = "AmenityNightClub";
+        visualCategoryNames[GeoDataFeature::AmenityBench] = "AmenityBench";
+        visualCategoryNames[GeoDataFeature::AmenityCourtHouse] = "AmenityCourtHouse";
+        visualCategoryNames[GeoDataFeature::AmenityFireStation] = "AmenityFireStation";
+        visualCategoryNames[GeoDataFeature::AmenityHuntingStand] = "AmenityHuntingStand";
+        visualCategoryNames[GeoDataFeature::AmenityPolice] = "AmenityPolice";
+        visualCategoryNames[GeoDataFeature::AmenityPostBox] = "AmenityPostBox";
+        visualCategoryNames[GeoDataFeature::AmenityPostOffice] = "AmenityPostOffice";
+        visualCategoryNames[GeoDataFeature::AmenityPrison] = "AmenityPrison";
+        visualCategoryNames[GeoDataFeature::AmenityRecycling] = "AmenityRecycling";
+        visualCategoryNames[GeoDataFeature::AmenityTelephone] = "AmenityTelephone";
+        visualCategoryNames[GeoDataFeature::AmenityToilets] = "AmenityToilets";
+        visualCategoryNames[GeoDataFeature::AmenityTownHall] = "AmenityTownHall";
+        visualCategoryNames[GeoDataFeature::AmenityWasteBasket] = "AmenityWasteBasket";
+        visualCategoryNames[GeoDataFeature::AmenityDrinkingWater] = "AmenityDrinkingWater";
+        visualCategoryNames[GeoDataFeature::AmenityGraveyard] = "AmenityGraveyard";
+        visualCategoryNames[GeoDataFeature::BarrierCityWall] = "BarrierCityWall";
+        visualCategoryNames[GeoDataFeature::BarrierGate] = "BarrierGate";
+        visualCategoryNames[GeoDataFeature::BarrierLiftGate] = "BarrierLiftGate";
+        visualCategoryNames[GeoDataFeature::BarrierWall] = "BarrierWall";
+        visualCategoryNames[GeoDataFeature::NaturalPeak] = "NaturalPeak";
+        visualCategoryNames[GeoDataFeature::NaturalTree] = "NaturalTree";
+        visualCategoryNames[GeoDataFeature::ShopBeverages] = "ShopBeverages";
+        visualCategoryNames[GeoDataFeature::ShopHifi] = "ShopHifi";
+        visualCategoryNames[GeoDataFeature::ShopSupermarket] = "ShopSupermarket";
+        visualCategoryNames[GeoDataFeature::ShopAlcohol] = "ShopAlcohol";
+        visualCategoryNames[GeoDataFeature::ShopBakery] = "ShopBakery";
+        visualCategoryNames[GeoDataFeature::ShopButcher] = "ShopButcher";
+        visualCategoryNames[GeoDataFeature::ShopConfectionery] = "ShopConfectionery";
+        visualCategoryNames[GeoDataFeature::ShopConvenience] = "ShopConvenience";
+        visualCategoryNames[GeoDataFeature::ShopGreengrocer] = "ShopGreengrocer";
+        visualCategoryNames[GeoDataFeature::ShopSeafood] = "ShopSeafood";
+        visualCategoryNames[GeoDataFeature::ShopDepartmentStore] = "ShopDepartmentStore";
+        visualCategoryNames[GeoDataFeature::ShopKiosk] = "ShopKiosk";
+        visualCategoryNames[GeoDataFeature::ShopBag] = "ShopBag";
+        visualCategoryNames[GeoDataFeature::ShopClothes] = "ShopClothes";
+        visualCategoryNames[GeoDataFeature::ShopFashion] = "ShopFashion";
+        visualCategoryNames[GeoDataFeature::ShopJewelry] = "ShopJewelry";
+        visualCategoryNames[GeoDataFeature::ShopShoes] = "ShopShoes";
+        visualCategoryNames[GeoDataFeature::ShopVarietyStore] = "ShopVarietyStore";
+        visualCategoryNames[GeoDataFeature::ShopBeauty] = "ShopBeauty";
+        visualCategoryNames[GeoDataFeature::ShopChemist] = "ShopChemist";
+        visualCategoryNames[GeoDataFeature::ShopCosmetics] = "ShopCosmetics";
+        visualCategoryNames[GeoDataFeature::ShopHairdresser] = "ShopHairdresser";
+        visualCategoryNames[GeoDataFeature::ShopOptician] = "ShopOptician";
+        visualCategoryNames[GeoDataFeature::ShopPerfumery] = "ShopPerfumery";
+        visualCategoryNames[GeoDataFeature::ShopDoitYourself] = "ShopDoitYourself";
+        visualCategoryNames[GeoDataFeature::ShopFlorist] = "ShopFlorist";
+        visualCategoryNames[GeoDataFeature::ShopHardware] = "ShopHardware";
+        visualCategoryNames[GeoDataFeature::ShopFurniture] = "ShopFurniture";
+        visualCategoryNames[GeoDataFeature::ShopElectronics] = "ShopElectronics";
+        visualCategoryNames[GeoDataFeature::ShopMobilePhone] = "ShopMobilePhone";
+        visualCategoryNames[GeoDataFeature::ShopBicycle] = "ShopBicycle";
+        visualCategoryNames[GeoDataFeature::ShopCar] = "ShopCar";
+        visualCategoryNames[GeoDataFeature::ShopCarRepair] = "ShopCarRepair";
+        visualCategoryNames[GeoDataFeature::ShopCarParts] = "ShopCarParts";
+        visualCategoryNames[GeoDataFeature::ShopMotorcycle] = "ShopMotorcycle";
+        visualCategoryNames[GeoDataFeature::ShopOutdoor] = "ShopOutdoor";
+        visualCategoryNames[GeoDataFeature::ShopMusicalInstrument] = "ShopMusicalInstrument";
+        visualCategoryNames[GeoDataFeature::ShopPhoto] = "ShopPhoto";
+        visualCategoryNames[GeoDataFeature::ShopBook] = "ShopBook";
+        visualCategoryNames[GeoDataFeature::ShopGift] = "ShopGift";
+        visualCategoryNames[GeoDataFeature::ShopStationery] = "ShopStationery";
+        visualCategoryNames[GeoDataFeature::ShopLaundry] = "ShopLaundry";
+        visualCategoryNames[GeoDataFeature::ShopPet] = "ShopPet";
+        visualCategoryNames[GeoDataFeature::ShopToys] = "ShopToys";
+        visualCategoryNames[GeoDataFeature::ShopTravelAgency] = "ShopTravelAgency";
+        visualCategoryNames[GeoDataFeature::Shop] = "Shop";
+        visualCategoryNames[GeoDataFeature::ManmadeBridge] = "ManmadeBridge";
+        visualCategoryNames[GeoDataFeature::ManmadeLighthouse] = "ManmadeLighthouse";
+        visualCategoryNames[GeoDataFeature::ManmadePier] = "ManmadePier";
+        visualCategoryNames[GeoDataFeature::ManmadeWaterTower] = "ManmadeWaterTower";
+        visualCategoryNames[GeoDataFeature::ManmadeWindMill] = "ManmadeWindMill";
+        visualCategoryNames[GeoDataFeature::TouristAttraction] = "TouristAttraction";
+        visualCategoryNames[GeoDataFeature::TouristCastle] = "TouristCastle";
+        visualCategoryNames[GeoDataFeature::TouristCinema] = "TouristCinema";
+        visualCategoryNames[GeoDataFeature::TouristInformation] = "TouristInformation";
+        visualCategoryNames[GeoDataFeature::TouristMonument] = "TouristMonument";
+        visualCategoryNames[GeoDataFeature::TouristMuseum] = "TouristMuseum";
+        visualCategoryNames[GeoDataFeature::TouristRuin] = "TouristRuin";
+        visualCategoryNames[GeoDataFeature::TouristTheatre] = "TouristTheatre";
+        visualCategoryNames[GeoDataFeature::TouristThemePark] = "TouristThemePark";
+        visualCategoryNames[GeoDataFeature::TouristViewPoint] = "TouristViewPoint";
+        visualCategoryNames[GeoDataFeature::TouristZoo] = "TouristZoo";
+        visualCategoryNames[GeoDataFeature::TouristAlpineHut] = "TouristAlpineHut";
+        visualCategoryNames[GeoDataFeature::TransportAerodrome] = "TransportAerodrome";
+        visualCategoryNames[GeoDataFeature::TransportHelipad] = "TransportHelipad";
+        visualCategoryNames[GeoDataFeature::TransportAirportTerminal] = "TransportAirportTerminal";
+        visualCategoryNames[GeoDataFeature::TransportBusStation] = "TransportBusStation";
+        visualCategoryNames[GeoDataFeature::TransportBusStop] = "TransportBusStop";
+        visualCategoryNames[GeoDataFeature::TransportCarShare] = "TransportCarShare";
+        visualCategoryNames[GeoDataFeature::TransportFuel] = "TransportFuel";
+        visualCategoryNames[GeoDataFeature::TransportParking] = "TransportParking";
+        visualCategoryNames[GeoDataFeature::TransportParkingSpace] = "TransportParkingSpace";
+        visualCategoryNames[GeoDataFeature::TransportPlatform] = "TransportPlatform";
+        visualCategoryNames[GeoDataFeature::TransportRentalBicycle] = "TransportRentalBicycle";
+        visualCategoryNames[GeoDataFeature::TransportRentalCar] = "TransportRentalCar";
+        visualCategoryNames[GeoDataFeature::TransportTaxiRank] = "TransportTaxiRank";
+        visualCategoryNames[GeoDataFeature::TransportTrainStation] = "TransportTrainStation";
+        visualCategoryNames[GeoDataFeature::TransportTramStop] = "TransportTramStop";
+        visualCategoryNames[GeoDataFeature::TransportBicycleParking] = "TransportBicycleParking";
+        visualCategoryNames[GeoDataFeature::TransportMotorcycleParking] = "TransportMotorcycleParking";
+        visualCategoryNames[GeoDataFeature::TransportSubwayEntrance] = "TransportSubwayEntrance";
+        visualCategoryNames[GeoDataFeature::ReligionPlaceOfWorship] = "ReligionPlaceOfWorship";
+        visualCategoryNames[GeoDataFeature::ReligionBahai] = "ReligionBahai";
+        visualCategoryNames[GeoDataFeature::ReligionBuddhist] = "ReligionBuddhist";
+        visualCategoryNames[GeoDataFeature::ReligionChristian] = "ReligionChristian";
+        visualCategoryNames[GeoDataFeature::ReligionMuslim] = "ReligionMuslim";
+        visualCategoryNames[GeoDataFeature::ReligionHindu] = "ReligionHindu";
+        visualCategoryNames[GeoDataFeature::ReligionJain] = "ReligionJain";
+        visualCategoryNames[GeoDataFeature::ReligionJewish] = "ReligionJewish";
+        visualCategoryNames[GeoDataFeature::ReligionShinto] = "ReligionShinto";
+        visualCategoryNames[GeoDataFeature::ReligionSikh] = "ReligionSikh";
+        visualCategoryNames[GeoDataFeature::LeisureGolfCourse] = "LeisureGolfCourse";
+        visualCategoryNames[GeoDataFeature::LeisurePark] = "LeisurePark";
+        visualCategoryNames[GeoDataFeature::LeisurePlayground] = "LeisurePlayground";
+        visualCategoryNames[GeoDataFeature::LeisurePitch] = "LeisurePitch";
+        visualCategoryNames[GeoDataFeature::LeisureSportsCentre] = "LeisureSportsCentre";
+        visualCategoryNames[GeoDataFeature::LeisureStadium] = "LeisureStadium";
+        visualCategoryNames[GeoDataFeature::LeisureTrack] = "LeisureTrack";
+        visualCategoryNames[GeoDataFeature::LeisureSwimmingPool] = "LeisureSwimmingPool";
+        visualCategoryNames[GeoDataFeature::LanduseAllotments] = "LanduseAllotments";
+        visualCategoryNames[GeoDataFeature::LanduseBasin] = "LanduseBasin";
+        visualCategoryNames[GeoDataFeature::LanduseCemetery] = "LanduseCemetery";
+        visualCategoryNames[GeoDataFeature::LanduseCommercial] = "LanduseCommercial";
+        visualCategoryNames[GeoDataFeature::LanduseConstruction] = "LanduseConstruction";
+        visualCategoryNames[GeoDataFeature::LanduseFarmland] = "LanduseFarmland";
+        visualCategoryNames[GeoDataFeature::LanduseFarmyard] = "LanduseFarmyard";
+        visualCategoryNames[GeoDataFeature::LanduseGarages] = "LanduseGarages";
+        visualCategoryNames[GeoDataFeature::LanduseGrass] = "LanduseGrass";
+        visualCategoryNames[GeoDataFeature::LanduseIndustrial] = "LanduseIndustrial";
+        visualCategoryNames[GeoDataFeature::LanduseLandfill] = "LanduseLandfill";
+        visualCategoryNames[GeoDataFeature::LanduseMeadow] = "LanduseMeadow";
+        visualCategoryNames[GeoDataFeature::LanduseMilitary] = "LanduseMilitary";
+        visualCategoryNames[GeoDataFeature::LanduseQuarry] = "LanduseQuarry";
+        visualCategoryNames[GeoDataFeature::LanduseRailway] = "LanduseRailway";
+        visualCategoryNames[GeoDataFeature::LanduseReservoir] = "LanduseReservoir";
+        visualCategoryNames[GeoDataFeature::LanduseResidential] = "LanduseResidential";
+        visualCategoryNames[GeoDataFeature::LanduseRetail] = "LanduseRetail";
+        visualCategoryNames[GeoDataFeature::LanduseOrchard] = "LanduseOrchard";
+        visualCategoryNames[GeoDataFeature::LanduseVineyard] = "LanduseVineyard";
+        visualCategoryNames[GeoDataFeature::RailwayRail] = "RailwayRail";
+        visualCategoryNames[GeoDataFeature::RailwayNarrowGauge] = "RailwayNarrowGauge";
+        visualCategoryNames[GeoDataFeature::RailwayTram] = "RailwayTram";
+        visualCategoryNames[GeoDataFeature::RailwayLightRail] = "RailwayLightRail";
+        visualCategoryNames[GeoDataFeature::RailwayAbandoned] = "RailwayAbandoned";
+        visualCategoryNames[GeoDataFeature::RailwaySubway] = "RailwaySubway";
+        visualCategoryNames[GeoDataFeature::RailwayPreserved] = "RailwayPreserved";
+        visualCategoryNames[GeoDataFeature::RailwayMiniature] = "RailwayMiniature";
+        visualCategoryNames[GeoDataFeature::RailwayConstruction] = "RailwayConstruction";
+        visualCategoryNames[GeoDataFeature::RailwayMonorail] = "RailwayMonorail";
+        visualCategoryNames[GeoDataFeature::RailwayFunicular] = "RailwayFunicular";
+        visualCategoryNames[GeoDataFeature::PowerTower] = "PowerTower";
+        visualCategoryNames[GeoDataFeature::Satellite] = "Satellite";
+        visualCategoryNames[GeoDataFeature::Landmass] = "Landmass";
+        visualCategoryNames[GeoDataFeature::UrbanArea] = "UrbanArea";
+        visualCategoryNames[GeoDataFeature::InternationalDateLine] = "InternationalDateLine";
+        visualCategoryNames[GeoDataFeature::AdminLevel1] = "AdminLevel1";
+        visualCategoryNames[GeoDataFeature::AdminLevel2] = "AdminLevel2";
+        visualCategoryNames[GeoDataFeature::AdminLevel3] = "AdminLevel3";
+        visualCategoryNames[GeoDataFeature::AdminLevel4] = "AdminLevel4";
+        visualCategoryNames[GeoDataFeature::AdminLevel5] = "AdminLevel5";
+        visualCategoryNames[GeoDataFeature::AdminLevel6] = "AdminLevel6";
+        visualCategoryNames[GeoDataFeature::AdminLevel7] = "AdminLevel7";
+        visualCategoryNames[GeoDataFeature::AdminLevel8] = "AdminLevel8";
+        visualCategoryNames[GeoDataFeature::AdminLevel9] = "AdminLevel9";
+        visualCategoryNames[GeoDataFeature::AdminLevel10] = "AdminLevel10";
+        visualCategoryNames[GeoDataFeature::AdminLevel11] = "AdminLevel11";
+        visualCategoryNames[GeoDataFeature::BoundaryMaritime] = "BoundaryMaritime";
+        visualCategoryNames[GeoDataFeature::LastIndex] = "LastIndex";
+    }
+
+    Q_ASSERT(visualCategoryNames.contains(category));
+    return visualCategoryNames[category];
 }
 
 StyleParameters::StyleParameters(const GeoDataFeature *feature_, int tileLevel_) :

@@ -80,7 +80,6 @@ public:
 
 private:
     static void initializeDefaultValues();
-    static QString createPaintLayerOrder(const QString &itemType, GeoDataFeature::GeoDataVisualCategory visualCategory, const QString &subType = QString());
 
     static int s_defaultMinZoomLevels[GeoDataFeature::LastIndex];
     static bool s_defaultValuesInitialized;
@@ -90,7 +89,6 @@ private:
 int GeometryLayerPrivate::s_defaultMinZoomLevels[GeoDataFeature::LastIndex];
 bool GeometryLayerPrivate::s_defaultValuesInitialized = false;
 int GeometryLayerPrivate::s_maximumZoomLevel = 0;
-QStringList s_paintLayerOrder;
 
 GeometryLayerPrivate::GeometryLayerPrivate( const QAbstractItemModel *model )
     : m_model( model ),
@@ -102,16 +100,6 @@ GeometryLayerPrivate::GeometryLayerPrivate( const QAbstractItemModel *model )
 int GeometryLayerPrivate::maximumZoomLevel()
 {
     return s_maximumZoomLevel;
-}
-
-QString GeometryLayerPrivate::createPaintLayerOrder(const QString &itemType, GeoDataFeature::GeoDataVisualCategory visualCategory, const QString &subType)
-{
-    QString const category = GeoDataFeature::visualCategoryName(visualCategory);
-    if (subType.isEmpty()) {
-        return QString("%1/%2").arg(itemType).arg(category);
-    } else {
-        return QString("%1/%2/%3").arg(itemType).arg(category).arg(subType);
-    }
 }
 
 GeometryLayer::GeometryLayer( const QAbstractItemModel *model )
@@ -152,117 +140,6 @@ void GeometryLayerPrivate::initializeDefaultValues()
 
     for ( int i = 0; i < GeoDataFeature::LastIndex; i++ )
         s_defaultMinZoomLevels[i] = 15;
-
-    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::Landmass);
-    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::UrbanArea);
-    for ( int i = GeoDataFeature::LanduseAllotments; i <= GeoDataFeature::LanduseVineyard; i++ ) {
-        if ((GeoDataFeature::GeoDataVisualCategory)i != GeoDataFeature::LanduseGrass) {
-            s_paintLayerOrder << createPaintLayerOrder("Polygon", (GeoDataFeature::GeoDataVisualCategory)i);
-        }
-    }
-    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::NaturalBeach);
-    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::NaturalWetland);
-    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::NaturalGlacier);
-    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::NaturalIceShelf);
-    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::NaturalCliff);
-    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::NaturalPeak);
-    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::MilitaryDangerArea);
-    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::LeisurePark);
-    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::LeisurePitch);
-    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::LeisureSportsCentre);
-    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::LeisureStadium);
-    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::NaturalWood);
-    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::LanduseGrass);
-    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::LeisurePlayground);
-    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::NaturalScrub);
-    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::LeisureTrack);
-    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::TransportParking);
-    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::TransportParkingSpace);
-    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::ManmadeBridge);
-    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::BarrierCityWall);
-
-    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::AmenityGraveyard);
-
-    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::EducationCollege);
-    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::EducationSchool);
-    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::EducationUniversity);
-    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::HealthHospital);
-
-    s_paintLayerOrder << createPaintLayerOrder("LineString", GeoDataFeature::Landmass);
-
-    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::NaturalWater);
-    s_paintLayerOrder << createPaintLayerOrder("LineString", GeoDataFeature::NaturalWater, "outline");
-    s_paintLayerOrder << createPaintLayerOrder("LineString", GeoDataFeature::NaturalWater, "inline");
-    s_paintLayerOrder << createPaintLayerOrder("LineString", GeoDataFeature::NaturalWater, "label");
-
-
-    s_paintLayerOrder << createPaintLayerOrder("LineString", GeoDataFeature::NaturalReef, "outline");
-    s_paintLayerOrder << createPaintLayerOrder("LineString", GeoDataFeature::NaturalReef, "inline");
-    s_paintLayerOrder << createPaintLayerOrder("LineString", GeoDataFeature::NaturalReef, "label");
-
-
-    for ( int i = GeoDataFeature::HighwaySteps; i <= GeoDataFeature::HighwayMotorway; i++ ) {
-        s_paintLayerOrder << createPaintLayerOrder("LineString", (GeoDataFeature::GeoDataVisualCategory)i, "outline");
-    }
-    for ( int i = GeoDataFeature::HighwaySteps; i <= GeoDataFeature::HighwayMotorway; i++ ) {
-        s_paintLayerOrder << createPaintLayerOrder("LineString", (GeoDataFeature::GeoDataVisualCategory)i, "inline");
-    }
-    for ( int i = GeoDataFeature::HighwaySteps; i <= GeoDataFeature::HighwayMotorway; i++ ) {
-        s_paintLayerOrder << createPaintLayerOrder("LineString", (GeoDataFeature::GeoDataVisualCategory)i, "label");
-    }
-    for ( int i = GeoDataFeature::RailwayRail; i <= GeoDataFeature::RailwayFunicular; i++ ) {
-        s_paintLayerOrder << createPaintLayerOrder("LineString", (GeoDataFeature::GeoDataVisualCategory)i, "outline");
-    }
-    for ( int i = GeoDataFeature::RailwayRail; i <= GeoDataFeature::RailwayFunicular; i++ ) {
-        s_paintLayerOrder << createPaintLayerOrder("LineString", (GeoDataFeature::GeoDataVisualCategory)i, "inline");
-    }
-    for ( int i = GeoDataFeature::RailwayRail; i <= GeoDataFeature::RailwayFunicular; i++ ) {
-        s_paintLayerOrder << createPaintLayerOrder("LineString", (GeoDataFeature::GeoDataVisualCategory)i, "label");
-    }
-
-    s_paintLayerOrder << createPaintLayerOrder("Polygon", GeoDataFeature::TransportPlatform);
-
-    for ( int i = GeoDataFeature::AdminLevel1; i <= GeoDataFeature::AdminLevel11; i++ ) {
-        s_paintLayerOrder << createPaintLayerOrder("LineString", (GeoDataFeature::GeoDataVisualCategory)i, "outline");
-    }
-    for ( int i = GeoDataFeature::AdminLevel1; i <= GeoDataFeature::AdminLevel11; i++ ) {
-        s_paintLayerOrder << createPaintLayerOrder("LineString", (GeoDataFeature::GeoDataVisualCategory)i, "inline");
-    }
-    for ( int i = GeoDataFeature::AdminLevel1; i <= GeoDataFeature::AdminLevel11; i++ ) {
-        s_paintLayerOrder << createPaintLayerOrder("LineString", (GeoDataFeature::GeoDataVisualCategory)i, "label");
-    }
-
-    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::AmenityGraveyard);
-    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::NaturalWood);
-    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::NaturalBeach);
-    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::NaturalWetland);
-    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::NaturalGlacier);
-    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::NaturalIceShelf);
-    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::NaturalScrub);
-    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::LeisurePark);
-    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::LeisurePlayground);
-    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::LeisurePitch);
-    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::LeisureSportsCentre);
-    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::LeisureStadium);
-    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::LeisureTrack);
-    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::TransportParking);
-    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::ManmadeBridge);
-    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::BarrierCityWall);
-    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::NaturalWater);
-    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::NaturalReef);
-    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::Landmass);
-    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::NaturalCliff);
-    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::NaturalPeak);
-    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::EducationCollege);
-    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::EducationSchool);
-    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::EducationUniversity);
-    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::HealthHospital);
-    s_paintLayerOrder << createPaintLayerOrder("Point", GeoDataFeature::MilitaryDangerArea);
-
-    s_paintLayerOrder << "Polygon/Building/frame";
-    s_paintLayerOrder << "Polygon/Building/roof";
-
-    Q_ASSERT(QSet<QString>::fromList(s_paintLayerOrder).size() == s_paintLayerOrder.size());
 
     s_defaultMinZoomLevels[GeoDataFeature::Default]             = 1;
     s_defaultMinZoomLevels[GeoDataFeature::NaturalReef]         = 3;
@@ -398,7 +275,7 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
                 paintLayers << QString();
             }
             foreach(const auto &layer, paintLayers) {
-                if (s_paintLayerOrder.contains(layer)) {
+                if (d->m_styleBuilder->renderOrder().contains(layer)) {
                     paintedFragments[layer] << item;
                 } else {
                     defaultLayer << LayerItem(layer, item);
@@ -413,8 +290,7 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
         }
     }
 
-    QStringList paintedLayers = s_paintLayerOrder;
-    foreach(const QString &layer, paintedLayers) {
+    foreach (const QString &layer, d->m_styleBuilder->renderOrder()) {
         QList<GeoGraphicsItem*> & layerItems = paintedFragments[layer];
         qStableSort(layerItems.begin(), layerItems.end(), GeoGraphicsItem::zValueLessThan);
         foreach(auto item, layerItems) {

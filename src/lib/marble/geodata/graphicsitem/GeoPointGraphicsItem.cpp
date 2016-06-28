@@ -12,6 +12,7 @@
 
 #include "GeoPainter.h"
 #include "GeoDataFeature.h"
+#include "StyleBuilder.h"
 
 namespace Marble
 {
@@ -20,7 +21,7 @@ GeoPointGraphicsItem::GeoPointGraphicsItem( const GeoDataFeature *feature )
         : GeoGraphicsItem( feature )
 {
     if (feature) {
-        QString const paintLayer = QString("Point/%1").arg(GeoDataFeature::visualCategoryName(feature->visualCategory()));
+        QString const paintLayer = QString("Point/%1").arg(StyleBuilder::visualCategoryName(feature->visualCategory()));
         setPaintLayers(QStringList() << paintLayer);
     }
 }
