@@ -186,6 +186,7 @@ def feature_class(data):
     'Admin-1 aggregation': [('boundary', 'administrative'), ('admin_level', '4')],
     'Admin-1 minor island': [('boundary', 'administrative'), ('admin_level', '4')],
     'Admin-1 scale rank': [('boundary', 'administrative'), ('admin_level', '4')],
+    'Admin-1 region boundary': [('boundary', 'administrative'), ('admin_level', '4')],
     'Railroad': [('railway', 'rail')],
     'Railroad ferry': [('route', 'ferry')],
     'Urban area': [('settlement', 'yes')],
