@@ -39,6 +39,11 @@ public:
 
     QStringList m_queue;
 
+    QString m_announcementText;
+
+    RouteSegment m_lastSegment;
+    RouteSegment m_secondLastSegment;
+
     bool m_destinationReached;
 
     bool m_deviated;
@@ -53,7 +58,9 @@ public:
 
     QString turnTypeAudioFile( Maneuver::Direction turnType, qreal distance );
 
-    void updateInstruction( qreal distance, Maneuver::Direction turnType );
+    QString announcementText( Maneuver::Direction turnType, qreal distance );
+
+    void updateInstruction( RouteSegment segment, qreal distance, Maneuver::Direction turnType );
 
     void updateInstruction( const QString &name );
 
@@ -138,12 +145,61 @@ QString VoiceNavigationModelPrivate::turnTypeAudioFile( Maneuver::Direction turn
         return audioFile( map[turnType] );
     }
 
-    return audioFile( announce ? "KDE-Sys-List-End" : "KDE-Sys-App-Positive" );
+    return audioFile( announce ? "ListEnd" : "AppPositive" );
 }
 
-void VoiceNavigationModelPrivate::updateInstruction( qreal distance, Maneuver::Direction turnType )
+QString VoiceNavigationModelPrivate::announcementText( Maneuver::Direction turnType, qreal distance )
 {
-    //QString distanceAudio = distanceAudioFile( distance );
+    bool const announce = distance >= 75;
+    QString announcementText = QString("");
+    if (announce) {
+        announcementText = QString("In "+distanceAudioFile(distance)+" meters, ");
+    }
+    switch (turnType) {
+    case Maneuver::Continue:
+    case Maneuver::Straight:
+        announcementText += QString("Continue straight");
+        break;
+    case Maneuver::SlightRight:
+        announcementText += QString("Turn slight right");
+        break;
+    case Maneuver::SlightLeft:
+        announcementText += QString("Turn slight left");
+        break;
+    case Maneuver::Right:
+    case Maneuver::SharpRight:
+        announcementText += QString("Turn right");
+        break;
+    case Maneuver::Left:
+    case Maneuver::SharpLeft:
+        announcementText += QString("Turn left");
+        break;
+    case Maneuver::TurnAround:
+        announcementText += QString("Take a U-turn");
+        break;
+    case Maneuver::ExitLeft:
+        announcementText += QString("Exit left");
+        break;
+    case Maneuver::ExitRight:
+        announcementText += QString("Exit right");
+        break;
+    case Maneuver::RoundaboutFirstExit:
+        announcementText += QString("Take the first exit");
+        break;
+    case Maneuver::RoundaboutSecondExit:
+        announcementText += QString("Take the second exit");
+        break;
+    case Maneuver::RoundaboutThirdExit:
+        announcementText += QString("Take the third exit");
+        break;
+    default:
+        break;
+    }
+    return announcementText;
+}
+
+void VoiceNavigationModelPrivate::updateInstruction( RouteSegment segment, qreal distance, Maneuver::Direction turnType )
+{
     QString turnTypeAudio = turnTypeAudioFile( turnType, distance );
     if ( turnTypeAudio.isEmpty() ) {
         mDebug() << "Missing audio file for turn type " << turnType << " and speaker " << m_speaker;
@@ -152,7 +208,13 @@ void VoiceNavigationModelPrivate::updateInstruction( qreal distance, Maneuver::D
 
     m_queue.clear();
     m_queue << turnTypeAudio;
-    emit m_parent->instructionChanged();
+    m_announcementText = announcementText(turnType, distance);
+    if(segment.maneuver().instructionText() != m_secondLastSegment.maneuver().instructionText()){
+        emit m_parent->instructionChanged();
+    }
+    m_secondLastSegment = m_lastSegment;
+    m_lastSegment = segment;
+
 //    if ( !distanceAudio.isEmpty() ) {
 //        m_output->enqueue( audioFile( "After" ) );
 //        m_output->enqueue( distanceAudio );
@@ -164,6 +226,7 @@ void VoiceNavigationModelPrivate::updateInstruction( const QString &name )
 {
     m_queue.clear();
     m_queue << audioFile( name );
+    m_announcementText = name;
     emit m_parent->instructionChanged();
 }
 
@@ -260,11 +323,11 @@ void VoiceNavigationModel::reset()
 void VoiceNavigationModel::handleTrackingStatusChange( PositionProviderStatus status )
 {
     if ( status != PositionProviderStatusAvailable && d->m_gpsStatus == PositionProviderStatusAvailable ) {
-        d->updateInstruction( d->m_speakerEnabled ? "GpsLost" : "KDE-Sys-List-End" );
+        d->updateInstruction( d->m_speakerEnabled ? "Lost GPS Connection" : "ListEnd" );
     }
 
     if ( status == PositionProviderStatusAvailable && d->m_gpsStatus != PositionProviderStatusAvailable ) {
-        d->updateInstruction( d->m_speakerEnabled ? "GpsFound" : "KDE-Sys-App-Positive" );
+        d->updateInstruction( d->m_speakerEnabled ? "GPS Position Found" : "AppPositive" );
     }
 
     d->m_gpsStatus = status;
@@ -278,7 +341,7 @@ void VoiceNavigationModel::update(const Route &route, qreal distanceManuever, qr
 
     if ( !d->m_destinationReached && distanceTarget < 50 ) {
         d->m_destinationReached = true;
-        d->updateInstruction( d->m_speakerEnabled ? "Arrive" : "KDE-Sys-App-Positive" );
+        d->updateInstruction( d->m_speakerEnabled ? "You have arrived at your destination" : "AppPositive" );
         return;
     }
 
@@ -287,7 +350,7 @@ void VoiceNavigationModel::update(const Route &route, qreal distanceManuever, qr
     }
 
     if ( deviated && !d->m_deviated ) {
-        d->updateInstruction( d->m_speakerEnabled ? "RouteDeviated" : "KDE-Sys-List-End" );
+        d->updateInstruction( d->m_speakerEnabled ? "Deviated from the route" : "ListEnd" );
     }
     d->m_deviated = deviated;
     if ( deviated ) {
@@ -303,7 +366,7 @@ void VoiceNavigationModel::update(const Route &route, qreal distanceManuever, qr
     bool const announcement = ( d->m_lastDistance == 0 || d->m_lastDistance > 850 ) && distanceManuever <= 850;
     bool const turn = ( d->m_lastDistance == 0 || d->m_lastDistance > 75 ) && distanceManuever <= 75;
     if ( announcement || turn ) {
-        d->updateInstruction( distanceManuever, turnType );
+        d->updateInstruction( route.currentSegment(), distanceManuever, turnType );
     }
 
     d->m_lastTurnType = turnType;
@@ -312,12 +375,12 @@ void VoiceNavigationModel::update(const Route &route, qreal distanceManuever, qr
 
 QString VoiceNavigationModel::preview() const
 {
-    return d->audioFile( d->m_speakerEnabled ? "Marble" : "KDE-Sys-App-Positive" );
+    return d->audioFile( d->m_speakerEnabled ? "The Marble team wishes you a pleasant and safe journey!" : "AppPositive" );
 }
 
 QString VoiceNavigationModel::instruction() const
 {
-    return d->m_queue.isEmpty() ? QString() : d->m_queue.first();
+    return d->m_announcementText;
 }
 
 }

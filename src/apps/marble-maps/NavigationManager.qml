@@ -100,60 +100,19 @@ Item {
                 return "";
             }
 
-            var text = getCommand(voiceNavigationAnnouncement);
-            switch (text) {
-            case "KDE-Sys-List-End":
+            switch (voiceNavigationAnnouncement) {
+            case "ListEnd":
                 audioPlayer.source = "assets:/data/audio/KDE-Sys-List-End.ogg";
                 audioPlayer.stop();
                 audioPlayer.play();
                 break;
-            case "KDE-Sys-App-Positive":
+            case "AppPositive":
                 audioPlayer.source = "assets:/data/audio/KDE-Sys-App-Positive.ogg";
                 audioPlayer.stop();
                 audioPlayer.play();
                 break;
             default:
-                textToSpeechClient.readText(text);
-            }
-        }
-
-        function getCommand(command)
-        {
-            switch (command) {
-            case "Straight":
-                return qsTr("Go straight on!");
-            case "AhKeepRight":
-                return qsTr("Ahead, keep to the right!");
-            case "AhKeepLeft":
-                return qsTr("Ahead, keep to the left!");
-            case "AhRightTurn":
-                return qsTr("Ahead, turn right!");
-            case  "AhLeftTurn":
-                return qsTr("Ahead, turn left!");
-            case "AhUTurn":
-                return qsTr("Ahead, perform a U-turn!");
-            case "RbExit1":
-                return qsTr("Take the first exit!");
-            case "RbExit2":
-                return qsTr("Take the second exit!");
-            case "RbExit3":
-                return qsTr("Take the third exit!");
-            case "AhExitLeft":
-                return qsTr("Ahead, exit left!");
-            case "AhExitRight":
-                return qsTr("Ahead, exit right!");
-            case "GpsLost":
-                return qsTr("Lost GPS connection");
-            case "GpsFound":
-                return qsTr("GPS position found.");
-            case "Arrive":
-                return qsTr("You have arrived to your destination.");
-            case "RouteDeviated":
-                return qsTr("Deviated from the route.");
-            case "Marble":
-                return qsTr("The Marble team wishes you a pleasant and safe journey!")
-            default:
-                return command;
+                textToSpeechClient.readText(voiceNavigationAnnouncement);
             }
         }
     }

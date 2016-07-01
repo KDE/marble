@@ -335,11 +335,8 @@ void Navigation::update()
     emit destinationDistanceChanged();
     RouteSegment segment = routingModel->route().currentSegment();
 
-    if ( !d->m_muted && segment.maneuver().instructionText() != d->m_lastSegment.maneuver().instructionText()
-         && segment.maneuver().instructionText() != d->m_secondLastSegment.maneuver().instructionText() ) {
+    if ( !d->m_muted ) {
         d->m_voiceNavigation.update( routingModel->route(), d->m_nextInstructionDistance, d->m_destinationDistance, routingModel->deviatedFromRoute() );
-        d->m_secondLastSegment = d->m_lastSegment;
-        d->m_lastSegment = segment;
     }
     if ( segment != d->m_currentSegment ) {
         d->m_currentSegment = segment;
