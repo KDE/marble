@@ -32,6 +32,7 @@
 #include <MarbleMath.h>
 #include <GeoDataCoordinates.h>
 #include <GeoDataTypes.h>
+#include <ReverseGeocodingRunnerManager.h>
 
 namespace Marble
 {
@@ -72,7 +73,7 @@ namespace Marble
 
         void handleMouseButtonPressAndHold(const QPoint &position)
         {
-            /** @TODO: Implement */
+            m_marbleQuick->reverseGeocoding(position);
         }
 
     private Q_SLOTS:
@@ -150,7 +151,8 @@ namespace Marble
             m_inputHandler(&m_presenter, marble),
             m_placemarkDelegate(nullptr),
             m_placemarkItem(nullptr),
-            m_placemark(nullptr)
+            m_placemark(nullptr),
+            m_reverseGeocoding(&m_model)
         {
             m_currentPosition.setName(QObject::tr("Current Location"));
         }
@@ -168,6 +170,7 @@ namespace Marble
         QQmlComponent* m_placemarkDelegate;
         QQuickItem* m_placemarkItem;
         Placemark* m_placemark;
+        ReverseGeocodingRunnerManager m_reverseGeocoding;
     };
 
     MarbleQuickItem::MarbleQuickItem(QQuickItem *parent) : QQuickPaintedItem(parent)
@@ -189,6 +192,8 @@ namespace Marble
         connect(&d->m_map, SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)), this, SLOT(updatePositionVisibility()));
         connect(&d->m_map, SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)), this, SIGNAL(visibleLatLonAltBoxChanged()));
         connect(&d->m_map, SIGNAL(radiusChanged(int)), this, SIGNAL(zoomChanged()));
+        connect(&d->m_reverseGeocoding, SIGNAL(reverseGeocodingFinished(GeoDataCoordinates,GeoDataPlacemark)),
+                this, SLOT(handleReverseGeocoding(GeoDataCoordinates,GeoDataPlacemark)));
 
         setAcceptedMouseButtons(Qt::AllButtons);
         installEventFilter(&d->m_inputHandler);
@@ -269,6 +274,14 @@ namespace Marble
         if (visible) {
             d->m_placemarkItem->setProperty("xPos", QVariant::fromValue(x));
             d->m_placemarkItem->setProperty("yPos", QVariant::fromValue(y));
+        }
+    }
+
+    void MarbleQuickItem::handleReverseGeocoding(const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark)
+    {
+        if (d->m_placemark && d->m_placemark->coordinate()->coordinates() == coordinates) {
+            d->m_placemark->setGeoDataPlacemark(placemark);
+            updatePlacemarks();
         }
     }
 
@@ -411,6 +424,19 @@ namespace Marble
     QQmlComponent *MarbleQuickItem::placemarkDelegate() const
     {
         return d->m_placemarkDelegate;
+    }
+
+    void MarbleQuickItem::reverseGeocoding(const QPoint &point)
+    {
+        qreal lon, lat;
+        d->m_map.viewport()->geoCoordinates(point.x(), point.y(), lon, lat);
+        auto const coordinates = GeoDataCoordinates(lon, lat, 0.0, GeoDataCoordinates::Degree);
+        delete d->m_placemarkItem;
+        d->m_placemarkItem = nullptr;
+        delete d->m_placemark;
+        d->m_placemark = new Placemark;
+        d->m_placemark->coordinate()->setCoordinates(coordinates);
+        d->m_reverseGeocoding.reverseGeocoding(coordinates);
     }
 
     qreal MarbleQuickItem::speed() const

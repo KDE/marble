@@ -169,6 +169,7 @@ namespace Marble
 
         bool inertialGlobeRotation() const;
         QQmlComponent* placemarkDelegate() const;
+        void reverseGeocoding(const QPoint &point);
 
     Q_SIGNALS:
         void mapWidthChanged(int mapWidth);
@@ -209,6 +210,7 @@ namespace Marble
         void updatePositionVisibility();
         void updateCurrentPosition(const GeoDataCoordinates & coordinates);
         void updatePlacemarks();
+        void handleReverseGeocoding(const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark);
 
     private:
         typedef QSharedPointer<MarbleQuickItemPrivate> MarbleQuickItemPrivatePtr;
