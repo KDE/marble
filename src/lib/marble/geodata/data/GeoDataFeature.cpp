@@ -34,8 +34,6 @@
 
 namespace Marble
 {
-QFont GeoDataFeaturePrivate::s_defaultFont = QFont(QStringLiteral("Sans Serif"));
-QColor GeoDataFeaturePrivate::s_defaultLabelColor = QColor( Qt::black );
 StyleBuilder GeoDataFeaturePrivate::s_styleBuilder;
 
 GeoDataFeature::GeoDataFeature()
@@ -166,28 +164,6 @@ EnumFeatureId GeoDataFeature::featureId() const
 QSharedPointer<const GeoDataStyle> GeoDataFeature::presetStyle( GeoDataVisualCategory category )
 {
     return GeoDataFeaturePrivate::s_styleBuilder.presetStyle(category);
-}
-
-QFont GeoDataFeature::defaultFont()
-{
-    return GeoDataFeaturePrivate::s_defaultFont;
-}
-
-void GeoDataFeature::setDefaultFont( const QFont& font )
-{
-    GeoDataFeaturePrivate::s_defaultFont = font;
-    GeoDataFeaturePrivate::s_styleBuilder.reset();
-}
-
-QColor GeoDataFeature::defaultLabelColor()
-{
-    return GeoDataFeaturePrivate::s_defaultLabelColor;
-}
-
-void GeoDataFeature::setDefaultLabelColor( const QColor& color )
-{
-    GeoDataFeaturePrivate::s_defaultLabelColor = color;
-    GeoDataFeaturePrivate::s_styleBuilder.reset();
 }
 
 QString GeoDataFeature::name() const

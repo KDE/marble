@@ -991,7 +991,7 @@ void MarbleMapPrivate::updateMapTheme()
     m_placemarkLayer.setShowCraters( q->propertyValue("craters") );
     m_placemarkLayer.setShowMaria( q->propertyValue("maria") );
 
-    GeoDataFeature::setDefaultLabelColor( m_model->mapTheme()->map()->labelColor() );
+    m_styleBuilder.setDefaultLabelColor(m_model->mapTheme()->map()->labelColor());
     m_placemarkLayer.requestStyleReset();
 
     foreach( RenderPlugin *renderPlugin, m_layerManager.renderPlugins() ) {
@@ -1250,12 +1250,12 @@ void MarbleMap::setDefaultAngleUnit( AngleUnit angleUnit )
 
 QFont MarbleMap::defaultFont() const
 {
-    return GeoDataFeature::defaultFont();
+    return d->m_styleBuilder.defaultFont();
 }
 
 void MarbleMap::setDefaultFont( const QFont& font )
 {
-    GeoDataFeature::setDefaultFont( font );
+    d->m_styleBuilder.setDefaultFont(font);
     d->m_placemarkLayer.requestStyleReset();
 }
 

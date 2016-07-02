@@ -14,6 +14,9 @@
 #include <GeoDataStyle.h>
 #include <GeoDataFeature.h>
 
+#include <QColor>
+#include <QFont>
+
 namespace Marble {
 
 class StyleParameters
@@ -30,6 +33,15 @@ class StyleBuilder
 public:
     StyleBuilder();
     ~StyleBuilder();
+
+    /**
+     * Return the label font of the placemark.
+     */
+    QFont defaultFont() const;
+    void setDefaultFont( const QFont& font );
+
+    QColor defaultLabelColor() const;
+    void setDefaultLabelColor( const QColor& color );
 
     GeoDataStyle::ConstPtr createStyle(const StyleParameters &parameters) const;
     GeoDataStyle::ConstPtr presetStyle(GeoDataFeature::GeoDataVisualCategory visualCategory) const;

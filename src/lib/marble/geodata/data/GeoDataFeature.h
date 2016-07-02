@@ -15,8 +15,6 @@
 
 
 #include <QString>
-#include <QFont>
-#include <QColor>
 
 #include "GeoDataObject.h"
 
@@ -634,21 +632,12 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     // ----------------------------------------------------------------
     // The following functions are use for painting, and mostly for placemarks.
 
-    /**
-     * Return the label font of the placemark.
-     */
     static void resetDefaultStyles();
 
     /// Serialize the contents of the feature to @p stream.
     virtual void pack( QDataStream& stream ) const;
     /// Unserialize the contents of the feature from @p stream.
     virtual void unpack( QDataStream& stream );
-
-    static QFont defaultFont();
-    static void setDefaultFont( const QFont& font );
-
-    static QColor defaultLabelColor();
-    static void setDefaultLabelColor( const QColor& color );
 
     static QSharedPointer<const GeoDataStyle> presetStyle( GeoDataVisualCategory category );
 

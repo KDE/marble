@@ -17,10 +17,10 @@
 #include "GeoDataTypes.h"
 #include "GeoDataPlacemark.h"
 #include "OsmPresetLibrary.h"
-#include <QScreen>
-#include <QApplication>
 
-#include <QDebug>
+#include <QApplication>
+#include <QDate>
+#include <QScreen>
 
 namespace Marble {
 
@@ -61,10 +61,14 @@ public:
 
     int m_defaultMinZoomLevels[GeoDataFeature::LastIndex];
     int m_maximumZoomLevel;
+    QFont m_defaultFont;
+    QColor m_defaultLabelColor;
 };
 
 StyleBuilder::Private::Private() :
-    m_maximumZoomLevel(15)
+    m_maximumZoomLevel(15),
+    m_defaultFont(QStringLiteral("Sans Serif")),
+    m_defaultLabelColor(Qt::black)
 {
     for ( int i = 0; i < GeoDataFeature::LastIndex; i++ )
         m_defaultMinZoomLevels[i] = m_maximumZoomLevel;
@@ -250,7 +254,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
     }
     s_defaultStyleInitialized = true;
 
-    QString defaultFamily = GeoDataFeature::defaultFont().family();
+    QString defaultFamily = m_defaultFont.family();
 
 #ifdef Q_OS_MACX
     int defaultSize = 10;
@@ -258,7 +262,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
     int defaultSize = 8;
 #endif
 
-    QColor const defaultLabelColor = GeoDataFeature::defaultLabelColor();
+    QColor const defaultLabelColor = m_defaultLabelColor;
 
     s_defaultStyle[GeoDataFeature::None]
         = GeoDataStyle::Ptr(new GeoDataStyle( QString(),
@@ -790,6 +794,28 @@ StyleBuilder::StyleBuilder() :
 StyleBuilder::~StyleBuilder()
 {
     delete d;
+}
+
+QFont StyleBuilder::defaultFont() const
+{
+    return d->m_defaultFont;
+}
+
+void StyleBuilder::setDefaultFont( const QFont& font )
+{
+    d->m_defaultFont = font;
+    reset();
+}
+
+QColor StyleBuilder::defaultLabelColor() const
+{
+    return d->m_defaultLabelColor;
+}
+
+void StyleBuilder::setDefaultLabelColor( const QColor& color )
+{
+    d->m_defaultLabelColor = color;
+    reset();
 }
 
 GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &parameters) const

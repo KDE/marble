@@ -155,9 +155,6 @@ class GeoDataFeaturePrivate
     QAtomicInt  ref;
 
     // Static members
-    static QFont         s_defaultFont;
-    static QColor        s_defaultLabelColor;
-
     static StyleBuilder  s_styleBuilder;
 };
 
