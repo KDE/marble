@@ -150,9 +150,8 @@ QString VoiceNavigationModelPrivate::turnTypeAudioFile( Maneuver::Direction turn
 
 QString VoiceNavigationModelPrivate::announcementText( Maneuver::Direction turnType, qreal distance )
 {
-    bool const announce = distance >= 75;
     QString announcementText = QString("");
-    if (announce) {
+    if (distance >= 75) {
         announcementText = QString("In "+distanceAudioFile(distance)+" meters, ");
     }
     switch (turnType) {
