@@ -95,6 +95,18 @@ ApplicationWindow {
                     positionProvider: suspended ? "" : currentPositionProvider
                     showPositionMarker: false
 
+                    placemarkDelegate: Image {
+                        property int xPos: 0
+                        property int yPos: 0
+                        property var placemark: null
+                        x: xPos - 0.5 * width
+                        y: yPos - 0.5 * height
+                        width: 20
+                        height: 20
+                        source: "qrc:///ic_place.png"
+                        onPlacemarkChanged: placemarkDialog.placemark = placemark
+                    }
+
                     onPositionAvailableChanged: {
                         updateIndicator();
                     }
@@ -138,6 +150,7 @@ ApplicationWindow {
                         onPressed: {
                             search.focus = true;
                             mouse.accepted = false;
+                            marbleMaps.selectPlacemarkAt(mouse.x, mouse.y)
                         }
                     }
 

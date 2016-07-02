@@ -13,6 +13,7 @@
 #include <QPainter>
 #include <QPaintDevice>
 #include <QtMath>
+#include <QQmlContext>
 
 #include <MarbleModel.h>
 #include <MarbleMap.h>
@@ -30,6 +31,7 @@
 #include <RenderPlugin.h>
 #include <MarbleMath.h>
 #include <GeoDataCoordinates.h>
+#include <GeoDataTypes.h>
 
 namespace Marble
 {
@@ -66,6 +68,11 @@ namespace Marble
         void pinch(QPointF center, qreal scale, Qt::GestureState state)
         {   //TODO - this whole thing should be moved to MarbleAbstractPresenter
             (void)handlePinch(center, scale, state);
+        }
+
+        void handleMouseButtonPressAndHold(const QPoint &position)
+        {
+            /** @TODO: Implement */
         }
 
     private Q_SLOTS:
@@ -140,7 +147,10 @@ namespace Marble
             m_map(&m_model),
             m_presenter(&m_map),
             m_positionVisible(false),
-            m_inputHandler(&m_presenter, marble)
+            m_inputHandler(&m_presenter, marble),
+            m_placemarkDelegate(nullptr),
+            m_placemarkItem(nullptr),
+            m_placemark(nullptr)
         {
             m_currentPosition.setName(QObject::tr("Current Location"));
         }
@@ -155,6 +165,9 @@ namespace Marble
         Placemark m_currentPosition;
 
         MarbleQuickInputHandler m_inputHandler;
+        QQmlComponent* m_placemarkDelegate;
+        QQuickItem* m_placemarkItem;
+        Placemark* m_placemark;
     };
 
     MarbleQuickItem::MarbleQuickItem(QQuickItem *parent) : QQuickPaintedItem(parent)
@@ -210,6 +223,7 @@ namespace Marble
 
     void MarbleQuickItem::updatePositionVisibility()
     {
+        updatePlacemarks();
         bool isVisible = false;
         if ( positionAvailable() ) {
             if ( d->m_map.viewport()->viewLatLonAltBox().contains(d->m_model.positionTracking()->currentLocation()) ) {
@@ -227,6 +241,35 @@ namespace Marble
     {
         d->m_currentPosition.coordinate()->setCoordinates(coordinates);
         emit currentPositionChanged(&d->m_currentPosition);
+    }
+
+    void MarbleQuickItem::updatePlacemarks()
+    {
+        if (!d->m_placemarkDelegate || !d->m_placemark) {
+            return;
+        }
+
+        if (!d->m_placemarkItem) {
+            QQmlContext * context = new QQmlContext(qmlContext(d->m_placemarkDelegate));
+            QObject * component = d->m_placemarkDelegate->create(context);
+            d->m_placemarkItem = qobject_cast<QQuickItem*>( component );
+            if (d->m_placemarkItem) {
+                d->m_placemarkItem->setParentItem( this );
+                d->m_placemarkItem->setProperty("placemark", QVariant::fromValue(d->m_placemark));
+            } else {
+                delete component;
+                return;
+            }
+        }
+
+        qreal x = 0;
+        qreal y = 0;
+        const bool visible = d->m_map.viewport()->screenCoordinates(d->m_placemark->coordinate()->coordinates(), x, y);
+        d->m_placemarkItem->setVisible(visible);
+        if (visible) {
+            d->m_placemarkItem->setProperty("xPos", QVariant::fromValue(x));
+            d->m_placemarkItem->setProperty("yPos", QVariant::fromValue(y));
+        }
     }
 
     void MarbleQuickItem::paint(QPainter *painter)
@@ -365,6 +408,11 @@ namespace Marble
         return d->m_inputHandler.inertialEarthRotationEnabled();
     }
 
+    QQmlComponent *MarbleQuickItem::placemarkDelegate() const
+    {
+        return d->m_placemarkDelegate;
+    }
+
     qreal MarbleQuickItem::speed() const
     {
         return d->m_model.positionTracking()->speed();
@@ -471,6 +519,28 @@ namespace Marble
         d->m_presenter.centerOn(coordinates, true);
         if (d->m_presenter.zoom() < 3000) {
             d->m_presenter.setZoom(3250);
+        }
+    }
+
+    void MarbleQuickItem::selectPlacemarkAt(int x, int y)
+    {
+        auto const features = d->m_map.whichFeatureAt(QPoint(x, y));
+        foreach(auto feature, features) {
+            if (feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
+                GeoDataPlacemark const * placemark = static_cast<const GeoDataPlacemark*>(feature);
+                if (d->m_placemark && placemark->coordinate() == d->m_placemark->coordinate()->coordinates()) {
+                    delete d->m_placemark;
+                    d->m_placemark = nullptr;
+                } else {
+                    delete d->m_placemark;
+                    d->m_placemark = new Placemark;
+                    d->m_placemark->setGeoDataPlacemark(*placemark);
+                }
+                delete d->m_placemarkItem;
+                d->m_placemarkItem = nullptr;
+                updatePlacemarks();
+                return;
+            }
         }
     }
 
@@ -746,6 +816,18 @@ namespace Marble
     {
         d->m_map.setShowDebugPolygons(showDebugPolygons);
         update();
+    }
+
+    void MarbleQuickItem::setPlacemarkDelegate(QQmlComponent *placemarkDelegate)
+    {
+        if (d->m_placemarkDelegate == placemarkDelegate) {
+            return;
+        }
+
+        delete d->m_placemarkItem;
+        d->m_placemarkItem = nullptr;
+        d->m_placemarkDelegate = placemarkDelegate;
+        emit placemarkDelegateChanged(placemarkDelegate);
     }
 
     QObject *MarbleQuickItem::getEventFilter() const

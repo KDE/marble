@@ -57,6 +57,7 @@ namespace Marble
         Q_PROPERTY(qreal speed READ speed NOTIFY speedChanged)
         Q_PROPERTY(qreal angle READ angle NOTIFY angleChanged)
         Q_PROPERTY(bool inertialGlobeRotation READ inertialGlobeRotation WRITE setInertialGlobeRotation NOTIFY inertialGlobeRotationChanged)
+        Q_PROPERTY(QQmlComponent* placemarkDelegate READ placemarkDelegate WRITE setPlacemarkDelegate NOTIFY placemarkDelegateChanged)
 
     public:
         explicit MarbleQuickItem(QQuickItem *parent = 0);
@@ -86,6 +87,7 @@ namespace Marble
         void centerOn(qreal longitude, qreal latitude);
         Q_INVOKABLE void centerOnCoordinates(qreal longitude, qreal latitude);
         Q_INVOKABLE void centerOnCurrentPosition();
+        Q_INVOKABLE void selectPlacemarkAt(int x, int y);
 
         void zoomIn(FlyToMode mode = Automatic);
         void zoomOut(FlyToMode mode = Automatic);
@@ -120,6 +122,8 @@ namespace Marble
 
         Q_INVOKABLE void setShowRuntimeTrace(bool showRuntimeTrace);
         Q_INVOKABLE void setShowDebugPolygons(bool showDebugPolygons);
+
+        void setPlacemarkDelegate(QQmlComponent* placemarkDelegate);
 
     public:
         void paint(QPainter *painter);
@@ -164,6 +168,7 @@ namespace Marble
         const MarbleMap* map() const;
 
         bool inertialGlobeRotation() const;
+        QQmlComponent* placemarkDelegate() const;
 
     Q_SIGNALS:
         void mapWidthChanged(int mapWidth);
@@ -191,6 +196,7 @@ namespace Marble
         void speedChanged();
         void zoomChanged();
         void inertialGlobeRotationChanged(bool inertialGlobeRotation);
+        void placemarkDelegateChanged(QQmlComponent* placemarkDelegate);
 
     protected:
         QObject *getEventFilter() const;
@@ -202,6 +208,7 @@ namespace Marble
         void positionChanged(const GeoDataCoordinates &, GeoDataAccuracy);
         void updatePositionVisibility();
         void updateCurrentPosition(const GeoDataCoordinates & coordinates);
+        void updatePlacemarks();
 
     private:
         typedef QSharedPointer<MarbleQuickItemPrivate> MarbleQuickItemPrivatePtr;
