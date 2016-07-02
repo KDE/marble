@@ -396,7 +396,7 @@ void TextureLayer::setShowTileId( bool show )
 
 void TextureLayer::setProjection( Projection projection )
 {
-    if ( d->m_textures.isEmpty() || textureLayerCount() == 0 ) {
+    if ( d->m_textures.isEmpty() ) {
         return;
     }
 
@@ -411,7 +411,7 @@ void TextureLayer::setProjection( Projection projection )
             d->m_texmapper = new EquirectScanlineTextureMapper( &d->m_tileLoader );
             break;
         case Mercator:
-            if ( d->m_tileLoader.tileProjection() == GeoSceneTileDataset::Mercator ) {
+            if ( d->m_textures.at(0)->projection() == GeoSceneTileDataset::Mercator ) {
                 d->m_texmapper = new TileScalingTextureMapper( &d->m_tileLoader );
             } else {
                 d->m_texmapper = new MercatorScanlineTextureMapper( &d->m_tileLoader );
