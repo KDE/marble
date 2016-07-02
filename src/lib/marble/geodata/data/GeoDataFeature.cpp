@@ -442,11 +442,6 @@ void GeoDataFeature::setPopularity( qint64 popularity )
     d->m_popularity = popularity;
 }
 
-void GeoDataFeature::resetDefaultStyles()
-{
-    GeoDataFeaturePrivate::s_styleBuilder.reset();
-}
-
 void GeoDataFeature::detach()
 {
     if(d->ref.load() == 1) {

@@ -628,12 +628,6 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
      */
     void setStyleMap( const GeoDataStyleMap* map );
 
-
-    // ----------------------------------------------------------------
-    // The following functions are use for painting, and mostly for placemarks.
-
-    static void resetDefaultStyles();
-
     /// Serialize the contents of the feature to @p stream.
     virtual void pack( QDataStream& stream ) const;
     /// Unserialize the contents of the feature from @p stream.
