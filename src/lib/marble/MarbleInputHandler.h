@@ -138,11 +138,13 @@ class MARBLE_EXPORT MarbleDefaultInputHandler  : public MarbleInputHandler
     QPoint toolTipPosition();
 
     virtual bool handleKeyPress(QKeyEvent *e);
+    virtual void handleMouseButtonPressAndHold(const QPoint &position);
 
  private Q_SLOTS:
     virtual void installPluginEventFilter( RenderPlugin *renderPlugin ) = 0;
     virtual void showLmbMenu( int, int ) = 0;
     virtual void showRmbMenu( int, int ) = 0;
+    void handlePressAndHold();
 
     virtual void openItemToolTip() = 0;
     virtual void setCursor(const QCursor &) = 0;
