@@ -1,0 +1,1 @@
+http://download.geofabrik.de/europe/germany/sachsen-anhalt-latest.osm.pbf;Magdeburg;11.5212;52.0626;11.7458;52.2118
