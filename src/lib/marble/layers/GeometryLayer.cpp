@@ -301,9 +301,10 @@ void GeometryLayerPrivate::initializeDefaultValues()
     s_defaultMinZoomLevels[GeoDataFeature::HighwayMotorwayLink] = 10;
     s_defaultMinZoomLevels[GeoDataFeature::HighwayMotorway]     = 6;
 
-    //FIXME: Bad, better to expand this
+#if 0 // not needed as long as default min zoom level is 15
     for(int i = GeoDataFeature::AccomodationCamping; i <= GeoDataFeature::ReligionSikh; i++)
         s_defaultMinZoomLevels[i] = 15;
+#endif
 
     s_defaultMinZoomLevels[GeoDataFeature::AmenityGraveyard]    = 14;
     s_defaultMinZoomLevels[GeoDataFeature::AmenityFountain]     = 17;
