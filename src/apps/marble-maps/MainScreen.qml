@@ -100,9 +100,9 @@ ApplicationWindow {
                         property int yPos: 0
                         property var placemark: null
                         x: xPos - 0.5 * width
-                        y: yPos - 0.5 * height
-                        width: 20
-                        height: 20
+                        y: yPos - height
+                        width: Screen.pixelDensity*6
+                        height: width
                         source: "qrc:///ic_place.png"
                         onPlacemarkChanged: placemarkDialog.placemark = placemark
                     }
