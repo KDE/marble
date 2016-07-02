@@ -193,6 +193,7 @@ QString VoiceNavigationModelPrivate::announcementText( Maneuver::Direction turnT
         announcementText += QString("Take the third exit");
         break;
     default:
+        announcementText = QString("");
         break;
     }
     return announcementText;
