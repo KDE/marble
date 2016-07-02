@@ -98,7 +98,7 @@ bool AzimuthalEquidistantProjection::screenCoordinates( const GeoDataCoordinates
 
     qreal c = qAcos(cosC);
 
-    qreal k = c / qSin( c );
+    qreal k = cosC == 1 ? 1 : c / qSin( c );
 
     // Let (x, y) be the position on the screen of the placemark..
     x = ( qCos( phi ) * qSin( lambda - lambdaPrime ) ) * k;
