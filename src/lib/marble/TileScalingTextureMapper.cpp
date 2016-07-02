@@ -156,7 +156,7 @@ void TileScalingTextureMapper::mapTexture( GeoPainter *painter, const ViewportPa
                 const TileId stackedId = TileId( 0, tileZoomLevel, ( ( tileX % numTilesX ) + numTilesX ) % numTilesX, tileY );
                 const StackedTile *const tile = m_tileLoader->loadTile( stackedId ); // load tile here for every frame, otherwise cleanupTilehash() clears all visible tiles
 
-                const QSize size = QSize( qRound( rect.right() - rect.left() ), qRound( rect.bottom() - rect.top() ) );
+                const QSize size = QSize( qCeil( rect.right() - rect.left() ), qCeil( rect.bottom() - rect.top() ) );
                 const int cacheHash = 2 * ( size.width() % 2 ) + ( size.height() % 2 );
                 const TileId cacheId = TileId( cacheHash, stackedId.zoomLevel(), stackedId.x(), stackedId.y() );
 
