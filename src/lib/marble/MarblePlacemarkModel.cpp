@@ -62,7 +62,6 @@ MarblePlacemarkModel::MarblePlacemarkModel( QObject *parent )
     roles[CountryCodeRole] = "countryCode";
     roles[StateRole] = "state";
     roles[PopularityRole] = "popularity";
-    roles[DescriptionRole] = "description";
     roles[GeoTypeRole] = "role";
     roles[CoordinateRole] = "coordinate";
     roles[StyleRole] = "style";
