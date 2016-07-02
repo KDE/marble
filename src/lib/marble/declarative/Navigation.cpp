@@ -214,16 +214,6 @@ void Navigation::setSpeaker( const QString &speaker )
     d->m_voiceNavigation.setSpeaker( speaker );
 }
 
-bool Navigation::soundEnabled() const
-{
-    return !d->m_voiceNavigation.isSpeakerEnabled();
-}
-
-void Navigation::setSoundEnabled( bool soundEnabled )
-{
-    d->m_voiceNavigation.setSpeakerEnabled( !soundEnabled );
-}
-
 bool Navigation::deviated() const
 {
     if ( d->m_marbleQuickItem ) {

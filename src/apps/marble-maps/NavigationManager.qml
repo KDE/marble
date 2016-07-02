@@ -93,27 +93,13 @@ Item {
     Navigation {
         id: navigation
         marbleQuickItem: marbleItem
-        soundEnabled: false
 
         onVoiceNavigationAnnouncementChanged: {
             if (!parent.visible) {
                 return "";
             }
 
-            switch (voiceNavigationAnnouncement) {
-            case "ListEnd":
-                audioPlayer.source = "assets:/data/audio/KDE-Sys-List-End.ogg";
-                audioPlayer.stop();
-                audioPlayer.play();
-                break;
-            case "AppPositive":
-                audioPlayer.source = "assets:/data/audio/KDE-Sys-App-Positive.ogg";
-                audioPlayer.stop();
-                audioPlayer.play();
-                break;
-            default:
-                textToSpeechClient.readText(voiceNavigationAnnouncement);
-            }
+            textToSpeechClient.readText(voiceNavigationAnnouncement);
         }
     }
 }

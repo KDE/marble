@@ -28,7 +28,6 @@ class Navigation : public QObject
     Q_PROPERTY(Marble::MarbleQuickItem * marbleQuickItem READ marbleQuickItem WRITE setMarbleQuickItem NOTIFY marbleQuickItemChanged)
     Q_PROPERTY(bool guidanceModeEnabled READ guidanceModeEnabled WRITE setGuidanceModeEnabled NOTIFY guidanceModeEnabledChanged)
     Q_PROPERTY(bool muted READ muted WRITE setMuted NOTIFY mutedChanged)
-    Q_PROPERTY(bool soundEnabled READ soundEnabled WRITE setSoundEnabled NOTIFY soundEnabledChanged)
     Q_PROPERTY(QString speaker READ speaker WRITE setSpeaker NOTIFY speakerChanged)
     Q_PROPERTY(QString nextInstructionText READ nextInstructionText NOTIFY nextInstructionTextChanged)
     Q_PROPERTY(QString nextRoad READ nextRoad NOTIFY nextRoadChanged)
@@ -68,10 +67,6 @@ public:
     QString speaker() const;
 
     void setSpeaker( const QString &speaker );
-
-    bool soundEnabled() const;
-
-    void setSoundEnabled( bool soundEnabled );
 
     bool deviated() const;
 
