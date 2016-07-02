@@ -382,26 +382,89 @@ void FileLoaderPrivate::createFilterProperties( GeoDataContainer *container )
             else if ( placemark->role() == "K" ) placemark->setVisualCategory( GeoDataPlacemark::Continent );
             else if ( placemark->role() == "O" ) placemark->setVisualCategory( GeoDataPlacemark::Ocean );
             else if ( placemark->role() == "S" ) placemark->setVisualCategory( GeoDataPlacemark::Nation );
-            else
-                if (  placemark->role()=="PPL"
+            else if ( placemark->role()=="PPL"
                    || placemark->role()=="PPLF"
                    || placemark->role()=="PPLG"
                    || placemark->role()=="PPLL"
                    || placemark->role()=="PPLQ"
                    || placemark->role()=="PPLR"
                    || placemark->role()=="PPLS"
-                   || placemark->role()=="PPLW" ) placemark->setVisualCategory(
-                        ( GeoDataPlacemark::GeoDataVisualCategory )( GeoDataPlacemark::SmallCity
-                                                                       + (( 20- ( 2*placemark->zoomLevel()) ) / 4 * 4 ) ) );
-            else if ( placemark->role() == "PPLA" ) placemark->setVisualCategory(
-                    ( GeoDataPlacemark::GeoDataVisualCategory )( GeoDataPlacemark::SmallStateCapital
-                                                                   + (( 20- ( 2*placemark->zoomLevel()) ) / 4 * 4 ) ) );
-            else if ( placemark->role()=="PPLC" ) placemark->setVisualCategory(
-                    ( GeoDataPlacemark::GeoDataVisualCategory )( GeoDataPlacemark::SmallNationCapital
-                                                                   + (( 20- ( 2*placemark->zoomLevel()) ) / 4 * 4 ) ) );
-            else if ( placemark->role()=="PPLA2" || placemark->role()=="PPLA3" ) placemark->setVisualCategory(
-                    ( GeoDataPlacemark::GeoDataVisualCategory )( GeoDataPlacemark::SmallCountyCapital
-                                                                   + (( 20- ( 2*placemark->zoomLevel()) ) / 4 * 4 ) ) );
+                   || placemark->role()=="PPLW" ) {
+                switch (placemark->zoomLevel()) {
+                case 3:
+                case 4:
+                    placemark->setVisualCategory(GeoDataPlacemark::LargeCity);
+                    break;
+                case 5:
+                case 6:
+                    placemark->setVisualCategory(GeoDataPlacemark::BigCity);
+                    break;
+                case 7:
+                case 8:
+                    placemark->setVisualCategory(GeoDataPlacemark::MediumCity);
+                    break;
+                default:
+                    placemark->setVisualCategory(GeoDataPlacemark::SmallCity);
+                    break;
+                }
+            }
+            else if (placemark->role() == "PPLA") {
+                switch (placemark->zoomLevel()) {
+                case 3:
+                case 4:
+                    placemark->setVisualCategory(GeoDataPlacemark::LargeStateCapital);
+                    break;
+                case 5:
+                case 6:
+                    placemark->setVisualCategory(GeoDataPlacemark::BigStateCapital);
+                    break;
+                case 7:
+                case 8:
+                    placemark->setVisualCategory(GeoDataPlacemark::MediumStateCapital);
+                    break;
+                default:
+                    placemark->setVisualCategory(GeoDataPlacemark::SmallStateCapital);
+                    break;
+                }
+            }
+            else if (placemark->role()=="PPLC") {
+                switch (placemark->zoomLevel()) {
+                case 3:
+                case 4:
+                    placemark->setVisualCategory(GeoDataPlacemark::LargeNationCapital);
+                    break;
+                case 5:
+                case 6:
+                    placemark->setVisualCategory(GeoDataPlacemark::BigNationCapital);
+                    break;
+                case 7:
+                case 8:
+                    placemark->setVisualCategory(GeoDataPlacemark::MediumNationCapital);
+                    break;
+                default:
+                    placemark->setVisualCategory(GeoDataPlacemark::SmallNationCapital);
+                    break;
+                }
+            }
+            else if (placemark->role()=="PPLA2" || placemark->role()=="PPLA3") {
+                switch (placemark->zoomLevel()) {
+                case 3:
+                case 4:
+                    placemark->setVisualCategory(GeoDataPlacemark::LargeCountyCapital);
+                    break;
+                case 5:
+                case 6:
+                    placemark->setVisualCategory(GeoDataPlacemark::BigCountyCapital);
+                    break;
+                case 7:
+                case 8:
+                    placemark->setVisualCategory(GeoDataPlacemark::MediumCountyCapital);
+                    break;
+                default:
+                    placemark->setVisualCategory(GeoDataPlacemark::SmallCountyCapital);
+                    break;
+                }
+            }
             else if ( placemark->role()==" " && !hasPopularity && placemark->visualCategory() == GeoDataPlacemark::Unknown ) {
                 placemark->setVisualCategory( GeoDataPlacemark::Unknown ); // default location
                 placemark->setZoomLevel(0);
