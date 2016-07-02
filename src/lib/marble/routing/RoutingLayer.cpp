@@ -312,34 +312,35 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
         return;
     }
 
-    Q_ASSERT( m_routingModel->rowCount() == m_routingModel->route().size() );
-    m_instructionRegions.clear();
-    for ( int i = 0; i < m_routingModel->rowCount(); ++i ) {
-        QModelIndex index = m_routingModel->index( i, 0 );
-        GeoDataCoordinates pos = index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoDataCoordinates>();
+    if( m_routingModel->rowCount() == m_routingModel->route().size() ) {
+        m_instructionRegions.clear();
+        for ( int i = 0; i < m_routingModel->rowCount(); ++i ) {
+            QModelIndex index = m_routingModel->index( i, 0 );
+            GeoDataCoordinates pos = index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoDataCoordinates>();
 
-        painter->setBrush( QBrush( m_marbleWidget->model()->routingManager()->routeColorAlternative() ) );
-        if ( m_selectionModel && m_selectionModel->selection().contains( index ) ) {
-            const RouteSegment &segment = m_routingModel->route().at( i );
-            const GeoDataLineString currentRoutePoints = segment.path();
+            painter->setBrush( QBrush( m_marbleWidget->model()->routingManager()->routeColorAlternative() ) );
+            if ( m_selectionModel && m_selectionModel->selection().contains( index ) ) {
+                const RouteSegment &segment = m_routingModel->route().at( i );
+                const GeoDataLineString currentRoutePoints = segment.path();
 
-            QPen activeRouteSegmentPen( m_marbleWidget->model()->routingManager()->routeColorHighlighted() );
+                QPen activeRouteSegmentPen( m_marbleWidget->model()->routingManager()->routeColorHighlighted() );
 
-            activeRouteSegmentPen.setWidth( 6 );
-            if ( m_marbleWidget->model()->routingManager()->state() == RoutingManager::Downloading ) {
-                activeRouteSegmentPen.setStyle( Qt::DotLine );
+                activeRouteSegmentPen.setWidth( 6 );
+                if ( m_marbleWidget->model()->routingManager()->state() == RoutingManager::Downloading ) {
+                    activeRouteSegmentPen.setStyle( Qt::DotLine );
+                }
+                painter->setPen( activeRouteSegmentPen );
+                painter->drawPolyline( currentRoutePoints );
+
+                painter->setPen( standardRoutePen );
+                painter->setBrush( QBrush( alphaAdjusted( Oxygen::hotOrange4, 200 ) ) );
             }
-            painter->setPen( activeRouteSegmentPen );
-            painter->drawPolyline( currentRoutePoints );
+            painter->drawEllipse( pos, 6, 6 );
 
-            painter->setPen( standardRoutePen );
-            painter->setBrush( QBrush( alphaAdjusted( Oxygen::hotOrange4, 200 ) ) );
-        }
-        painter->drawEllipse( pos, 6, 6 );
-
-        if ( m_isInteractive ) {
-            QRegion region = painter->regionFromEllipse( pos, 12, 12 );
-            m_instructionRegions.push_front( ModelRegion( index, region ) );
+            if ( m_isInteractive ) {
+                QRegion region = painter->regionFromEllipse( pos, 12, 12 );
+                m_instructionRegions.push_front( ModelRegion( index, region ) );
+            }
         }
     }
 
