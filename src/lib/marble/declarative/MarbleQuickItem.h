@@ -125,6 +125,9 @@ namespace Marble
 
         void setPlacemarkDelegate(QQmlComponent* placemarkDelegate);
 
+        Q_INVOKABLE void loadSettings();
+        Q_INVOKABLE void writeSettings();
+
     public:
         void paint(QPainter *painter);
 

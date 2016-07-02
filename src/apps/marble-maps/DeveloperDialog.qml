@@ -13,6 +13,8 @@ import QtQuick.Controls 1.3
 import QtQuick.Window 2.2
 import QtQuick.Layouts 1.1
 
+import org.kde.edu.marble 0.20
+
 Item {
     id: root
     height: column.height + Screen.pixelDensity * 4
@@ -20,6 +22,17 @@ Item {
     SystemPalette {
         id: palette
         colorGroup: SystemPalette.Active
+    }
+
+    Settings {
+        id: settings
+
+        Component.onDestruction: {
+            settings.setValue("Developer", "positionProvider", marbleMaps.currentPositionProvider)
+            settings.setValue("Developer", "textureTiles", marbleMaps.isPropertyEnabled("mapnik") ? "true" : "false")
+            settings.setValue("Developer", "runtimeTrace", runtimeTrace.checked ? "true" : "false")
+            settings.setValue("Developer", "debugPolygons", debugPolygons.checked ? "true" : "false")
+        }
     }
 
     Rectangle {
@@ -45,22 +58,27 @@ Item {
 
         CheckBox {
             text: "Simulate GPS Position near Route"
+            checked: settings.value("Developer", "positionProvider") === "RouteSimulationPositionProviderPlugin"
             onCheckedChanged: marbleMaps.currentPositionProvider = checked ? "RouteSimulationPositionProviderPlugin" : "QtPositioning"
         }
 
         CheckBox {
             text: "Show OSM Bitmap Tiles"
-            checked: marbleMaps.isPropertyEnabled("mapnik")
+            checked: settings.value("Developer", "textureTiles") === "true"
             onCheckedChanged: marbleMaps.setPropertyEnabled("mapnik", checked)
         }
 
         CheckBox {
+            id: runtimeTrace
             text: "Show Render Performance"
+            checked: settings.value("Developer", "runtimeTrace") === "true"
             onCheckedChanged: marbleMaps.setShowRuntimeTrace(checked)
         }
 
         CheckBox {
+            id: debugPolygons
             text: "Render in Debug Mode"
+            checked: settings.value("Developer", "debugPolygons") === "true"
             onCheckedChanged: marbleMaps.setShowDebugPolygons(checked)
         }
 

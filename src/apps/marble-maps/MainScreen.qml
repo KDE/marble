@@ -120,6 +120,9 @@ ApplicationWindow {
                         updateIndicator();
                     }
 
+                    Component.onCompleted: marbleMaps.loadSettings()
+                    Component.onDestruction: marbleMaps.writeSettings()
+
                     function updateIndicator() {
                         if ( !positionVisible && positionAvailable ) {
                             zoomToPositionButton.updateIndicator();

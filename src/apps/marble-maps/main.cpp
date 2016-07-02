@@ -22,6 +22,9 @@ using namespace Marble;
 int main(int argc, char ** argv)
 {
     QApplication app(argc, argv);
+    app.setApplicationName( "Marble Maps" );
+    app.setOrganizationName( "KDE" );
+    app.setOrganizationDomain( "kde.org" );
 
 #ifdef Q_OS_ANDROID
     MarbleGlobal::Profiles profiles = MarbleGlobal::SmallScreen | MarbleGlobal::HighResolution;

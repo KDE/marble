@@ -14,6 +14,7 @@
 #include <QPaintDevice>
 #include <QtMath>
 #include <QQmlContext>
+#include <QSettings>
 
 #include <MarbleModel.h>
 #include <MarbleMap.h>
@@ -854,6 +855,30 @@ namespace Marble
         d->m_placemarkItem = nullptr;
         d->m_placemarkDelegate = placemarkDelegate;
         emit placemarkDelegateChanged(placemarkDelegate);
+    }
+
+    void MarbleQuickItem::loadSettings()
+    {
+        QSettings settings;
+        settings.beginGroup("MarbleQuickItem");
+        double lon = settings.value("centerLon", QVariant(0.0)).toDouble();
+        double lat = settings.value("centerLat", QVariant(0.0)).toDouble();
+        centerOn(lon, lat);
+        int const zoom = settings.value("zoom", QVariant(0)).toInt();
+        if (zoom > 0) {
+            setZoom(zoom);
+        }
+        settings.endGroup();
+    }
+
+    void MarbleQuickItem::writeSettings()
+    {
+        QSettings settings;
+        settings.beginGroup("MarbleQuickItem");
+        settings.setValue("centerLon", QVariant(d->m_map.centerLongitude()));
+        settings.setValue("centerLat", QVariant(d->m_map.centerLatitude()));
+        settings.setValue("zoom", QVariant(zoom()));
+        settings.endGroup();
     }
 
     QObject *MarbleQuickItem::getEventFilter() const
