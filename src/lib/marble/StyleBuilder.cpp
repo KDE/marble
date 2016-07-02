@@ -27,6 +27,8 @@ namespace Marble {
 class StyleBuilder::Private
 {
 public:
+    Private();
+
     static bool s_defaultStyleInitialized;
     static GeoDataStyle::Ptr s_defaultStyle[GeoDataFeature::LastIndex];
 
@@ -56,7 +58,124 @@ public:
     void initializeDefaultStyles();
 
     static QString createPaintLayerItem(const QString &itemType, GeoDataFeature::GeoDataVisualCategory visualCategory, const QString &subType = QString());
+
+    int m_defaultMinZoomLevels[GeoDataFeature::LastIndex];
+    int m_maximumZoomLevel;
 };
+
+StyleBuilder::Private::Private() :
+    m_maximumZoomLevel(15)
+{
+    for ( int i = 0; i < GeoDataFeature::LastIndex; i++ )
+        m_defaultMinZoomLevels[i] = m_maximumZoomLevel;
+
+    m_defaultMinZoomLevels[GeoDataFeature::Default]             = 1;
+    m_defaultMinZoomLevels[GeoDataFeature::NaturalReef]         = 3;
+    m_defaultMinZoomLevels[GeoDataFeature::NaturalWater]        = 3;
+    m_defaultMinZoomLevels[GeoDataFeature::NaturalWood]         = 8;
+    m_defaultMinZoomLevels[GeoDataFeature::NaturalBeach]        = 10;
+    m_defaultMinZoomLevels[GeoDataFeature::NaturalWetland]      = 10;
+    m_defaultMinZoomLevels[GeoDataFeature::NaturalGlacier]      = 3;
+    m_defaultMinZoomLevels[GeoDataFeature::NaturalIceShelf]     = 3;
+    m_defaultMinZoomLevels[GeoDataFeature::NaturalScrub]        = 10;
+    m_defaultMinZoomLevels[GeoDataFeature::NaturalCliff]        = 15;
+    m_defaultMinZoomLevels[GeoDataFeature::NaturalPeak]         = 11;
+    m_defaultMinZoomLevels[GeoDataFeature::BarrierCityWall]     = 15;
+    m_defaultMinZoomLevels[GeoDataFeature::Building]            = 15;
+
+    m_defaultMinZoomLevels[GeoDataFeature::ManmadeBridge]       = 15;
+
+        // OpenStreetMap highways
+    m_defaultMinZoomLevels[GeoDataFeature::HighwaySteps]        = 15;
+    m_defaultMinZoomLevels[GeoDataFeature::HighwayUnknown]      = 13;
+    m_defaultMinZoomLevels[GeoDataFeature::HighwayPath]         = 13;
+    m_defaultMinZoomLevels[GeoDataFeature::HighwayTrack]        = 13;
+    m_defaultMinZoomLevels[GeoDataFeature::HighwayPedestrian]   = 13;
+    m_defaultMinZoomLevels[GeoDataFeature::HighwayFootway]      = 13;
+    m_defaultMinZoomLevels[GeoDataFeature::HighwayCycleway]     = 13;
+    m_defaultMinZoomLevels[GeoDataFeature::HighwayService]      = 13;
+    m_defaultMinZoomLevels[GeoDataFeature::HighwayRoad]         = 13;
+    m_defaultMinZoomLevels[GeoDataFeature::HighwayTertiaryLink] = 10;
+    m_defaultMinZoomLevels[GeoDataFeature::HighwayTertiary]     = 10;
+    m_defaultMinZoomLevels[GeoDataFeature::HighwaySecondaryLink]= 10;
+    m_defaultMinZoomLevels[GeoDataFeature::HighwaySecondary]    = 9;
+    m_defaultMinZoomLevels[GeoDataFeature::HighwayPrimaryLink]  = 10;
+    m_defaultMinZoomLevels[GeoDataFeature::HighwayPrimary]      = 8;
+    m_defaultMinZoomLevels[GeoDataFeature::HighwayTrunkLink]    = 10;
+    m_defaultMinZoomLevels[GeoDataFeature::HighwayTrunk]        = 7;
+    m_defaultMinZoomLevels[GeoDataFeature::HighwayMotorwayLink] = 10;
+    m_defaultMinZoomLevels[GeoDataFeature::HighwayMotorway]     = 6;
+
+#if 0 // not needed as long as default min zoom level is 15
+    for(int i = GeoDataFeature::AccomodationCamping; i <= GeoDataFeature::ReligionSikh; i++)
+        s_defaultMinZoomLevels[i] = 15;
+#endif
+
+    m_defaultMinZoomLevels[GeoDataFeature::AmenityGraveyard]    = 14;
+    m_defaultMinZoomLevels[GeoDataFeature::AmenityFountain]     = 17;
+
+    m_defaultMinZoomLevels[GeoDataFeature::MilitaryDangerArea]  = 11;
+
+    m_defaultMinZoomLevels[GeoDataFeature::LeisurePark]         = 11;
+    m_defaultMinZoomLevels[GeoDataFeature::LeisurePlayground]   = 11;
+    m_defaultMinZoomLevels[GeoDataFeature::LanduseAllotments]   = 11;
+    m_defaultMinZoomLevels[GeoDataFeature::LanduseBasin]        = 11;
+    m_defaultMinZoomLevels[GeoDataFeature::LanduseCemetery]     = 11;
+    m_defaultMinZoomLevels[GeoDataFeature::LanduseCommercial]   = 11;
+    m_defaultMinZoomLevels[GeoDataFeature::LanduseConstruction] = 11;
+    m_defaultMinZoomLevels[GeoDataFeature::LanduseFarmland]     = 11;
+    m_defaultMinZoomLevels[GeoDataFeature::LanduseFarmyard]     = 11;
+    m_defaultMinZoomLevels[GeoDataFeature::LanduseGarages]      = 11;
+    m_defaultMinZoomLevels[GeoDataFeature::LanduseGrass]        = 11;
+    m_defaultMinZoomLevels[GeoDataFeature::LanduseIndustrial]   = 11;
+    m_defaultMinZoomLevels[GeoDataFeature::LanduseLandfill]     = 11;
+    m_defaultMinZoomLevels[GeoDataFeature::LanduseMeadow]       = 11;
+    m_defaultMinZoomLevels[GeoDataFeature::LanduseMilitary]     = 11;
+    m_defaultMinZoomLevels[GeoDataFeature::LanduseQuarry]       = 11;
+    m_defaultMinZoomLevels[GeoDataFeature::LanduseRailway]      = 11;
+    m_defaultMinZoomLevels[GeoDataFeature::LanduseReservoir]    = 11;
+    m_defaultMinZoomLevels[GeoDataFeature::LanduseResidential]  = 11;
+    m_defaultMinZoomLevels[GeoDataFeature::LanduseRetail]       = 11;
+    m_defaultMinZoomLevels[GeoDataFeature::LanduseOrchard]      = 14;
+    m_defaultMinZoomLevels[GeoDataFeature::LanduseVineyard]     = 14;
+
+    m_defaultMinZoomLevels[GeoDataFeature::RailwayRail]         = 6;
+    m_defaultMinZoomLevels[GeoDataFeature::RailwayNarrowGauge]  = 6;
+    m_defaultMinZoomLevels[GeoDataFeature::RailwayTram]         = 14;
+    m_defaultMinZoomLevels[GeoDataFeature::RailwayLightRail]    = 12;
+    m_defaultMinZoomLevels[GeoDataFeature::RailwayAbandoned]    = 10;
+    m_defaultMinZoomLevels[GeoDataFeature::RailwaySubway]       = 13;
+    m_defaultMinZoomLevels[GeoDataFeature::RailwayPreserved]    = 13;
+    m_defaultMinZoomLevels[GeoDataFeature::RailwayMiniature]    = 13;
+    m_defaultMinZoomLevels[GeoDataFeature::RailwayConstruction] = 10;
+    m_defaultMinZoomLevels[GeoDataFeature::RailwayMonorail]     = 12;
+    m_defaultMinZoomLevels[GeoDataFeature::RailwayFunicular]    = 13;
+    m_defaultMinZoomLevels[GeoDataFeature::TransportPlatform]   = 16;
+
+    m_defaultMinZoomLevels[GeoDataFeature::Satellite]           = 0;
+
+    m_defaultMinZoomLevels[GeoDataFeature::Landmass]            = 0;
+    m_defaultMinZoomLevels[GeoDataFeature::UrbanArea]           = 3;
+    m_defaultMinZoomLevels[GeoDataFeature::InternationalDateLine]      = 1;
+
+    m_defaultMinZoomLevels[GeoDataFeature::AdminLevel1]         = 0;
+    m_defaultMinZoomLevels[GeoDataFeature::AdminLevel2]         = 1;
+    m_defaultMinZoomLevels[GeoDataFeature::AdminLevel3]         = 1;
+    m_defaultMinZoomLevels[GeoDataFeature::AdminLevel4]         = 2;
+    m_defaultMinZoomLevels[GeoDataFeature::AdminLevel5]         = 4;
+    m_defaultMinZoomLevels[GeoDataFeature::AdminLevel6]         = 5;
+    m_defaultMinZoomLevels[GeoDataFeature::AdminLevel7]         = 5;
+    m_defaultMinZoomLevels[GeoDataFeature::AdminLevel8]         = 7;
+    m_defaultMinZoomLevels[GeoDataFeature::AdminLevel9]         = 7;
+    m_defaultMinZoomLevels[GeoDataFeature::AdminLevel10]        = 8;
+    m_defaultMinZoomLevels[GeoDataFeature::AdminLevel11]        = 8;
+
+    m_defaultMinZoomLevels[GeoDataFeature::BoundaryMaritime]    = 1;
+
+    for (int i = 0; i < GeoDataFeature::LastIndex; ++i) {
+        m_maximumZoomLevel = qMax(m_maximumZoomLevel, m_defaultMinZoomLevels[i]);
+    }
+}
 
 GeoDataStyle::Ptr StyleBuilder::Private::s_defaultStyle[GeoDataFeature::LastIndex];
 bool StyleBuilder::Private::s_defaultStyleInitialized = false;
@@ -985,6 +1104,16 @@ QStringList StyleBuilder::renderOrder() const
 void StyleBuilder::reset()
 {
     d->s_defaultStyleInitialized = false;
+}
+
+int StyleBuilder::minimumZoomLevel(GeoDataFeature::GeoDataVisualCategory category) const
+{
+    return d->m_defaultMinZoomLevels[category];
+}
+
+int StyleBuilder::maximumZoomLevel() const
+{
+    return d->m_maximumZoomLevel;
 }
 
 QString StyleBuilder::visualCategoryName(GeoDataFeature::GeoDataVisualCategory category)

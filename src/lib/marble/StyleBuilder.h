@@ -46,6 +46,19 @@ public:
 
     void reset();
 
+    /**
+     * @brief Returns the zoom level from which on the given visual category will be visible.
+     * @param category the visual category for which the minimum zoom level shall be returned
+     * @return zoom level from which on the given visual category will be visible
+     */
+    int minimumZoomLevel(GeoDataFeature::GeoDataVisualCategory category) const;
+
+    /**
+     * @brief Returns the maximum zoom level in the theme.
+     * @return maximum zoom level in the theme
+     */
+    int maximumZoomLevel() const;
+
     static QString visualCategoryName(GeoDataFeature::GeoDataVisualCategory category);
 
 private:
