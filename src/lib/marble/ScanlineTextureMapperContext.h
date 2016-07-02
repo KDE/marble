@@ -85,16 +85,12 @@ private:
 
     const StackedTile *m_tile;
 
-    int m_deltaLevel;
-
     // Coordinate transformations:
 
     // Position of the tile in global Texture Coordinates
     // ( with origin in upper left corner, measured in pixel) 
     int          m_tilePosX;
     int          m_tilePosY;
-    int m_vTileStartX;
-    int m_vTileStartY;
 
     // Converts global texture coordinates 
     // ( with origin in center, measured in pixel) 
