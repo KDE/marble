@@ -194,7 +194,8 @@ QImage GeoDataIconStyle::icon() const
         return d->m_icon;
     }
     else if ( !d->m_iconPath.isEmpty() ) {
-        return d->loadIcon(resolvePath(d->m_iconPath), d->m_size);
+        d->m_icon = d->loadIcon(resolvePath(d->m_iconPath), d->m_size);
+        return d->m_icon;
     }
     else
         return QImage();
