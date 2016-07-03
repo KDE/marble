@@ -22,6 +22,8 @@
 #include <QRectF>
 #include <QString>
 
+#include <GeoDataStyle.h>
+
 namespace Marble
 {
 
@@ -40,7 +42,7 @@ class VisiblePlacemark : public QObject
  Q_OBJECT
 
  public:
-    explicit VisiblePlacemark( const GeoDataPlacemark *placemark );
+    explicit VisiblePlacemark(const GeoDataPlacemark *placemark, const GeoDataStyle::ConstPtr &style);
 
     /**
      * Returns the index of the place mark model which
@@ -99,6 +101,10 @@ class VisiblePlacemark : public QObject
         Selected
     };
 
+    void setStyle(const GeoDataStyle::ConstPtr &style);
+
+    GeoDataStyle::ConstPtr style() const;
+
 Q_SIGNALS:
     void updateNeeded();
 
@@ -118,6 +124,7 @@ private Q_SLOTS:
     QRectF      m_labelRect;      // bounding box of label
 
     mutable QPixmap     m_symbolPixmap; // cached value
+    GeoDataStyle::ConstPtr m_style;
 };
 
 }

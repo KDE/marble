@@ -38,6 +38,7 @@ class GeoSceneLayer;
 class MarbleClock;
 class ViewportParams;
 class VisiblePlacemark;
+class StyleBuilder;
 
 class PlacemarkLayer : public QObject, public LayerInterface
 {
@@ -47,6 +48,7 @@ class PlacemarkLayer : public QObject, public LayerInterface
     PlacemarkLayer( QAbstractItemModel *placemarkModel,
                     QItemSelectionModel *selectionModel,
                     MarbleClock *clock,
+                    const StyleBuilder *styleBuilder,
                     QObject *parent = 0 );
     ~PlacemarkLayer();
 

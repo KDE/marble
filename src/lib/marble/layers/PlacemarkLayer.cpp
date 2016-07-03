@@ -28,12 +28,12 @@ using namespace Marble;
 
 bool PlacemarkLayer::m_useXWorkaround = false;
 
-PlacemarkLayer::PlacemarkLayer( QAbstractItemModel *placemarkModel,
+PlacemarkLayer::PlacemarkLayer(QAbstractItemModel *placemarkModel,
                                 QItemSelectionModel *selectionModel,
-                                MarbleClock *clock,
+                                MarbleClock *clock, const StyleBuilder *styleBuilder,
                                 QObject *parent ) :
     QObject( parent ),
-    m_layout( placemarkModel, selectionModel, clock )
+    m_layout( placemarkModel, selectionModel, clock, styleBuilder )
 {
     m_useXWorkaround = testXBug();
     mDebug() << "Use workaround: " << ( m_useXWorkaround ? "1" : "0" );

@@ -164,7 +164,7 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model ) :
     m_customPaintLayer( parent ),
     m_geometryLayer(model->treeModel(), &m_styleBuilder),
     m_textureLayer( model->downloadManager(), model->pluginManager(), model->sunLocator(), model->groundOverlayModel() ),
-    m_placemarkLayer( model->placemarkModel(), model->placemarkSelectionModel(), model->clock() ),
+    m_placemarkLayer( model->placemarkModel(), model->placemarkSelectionModel(), model->clock(), &m_styleBuilder ),
     m_vectorTileLayer( model->downloadManager(), model->pluginManager(), model->treeModel() ),
     m_isLockedToSubSolarPoint( false ),
     m_isSubSolarPointIconVisible( false )

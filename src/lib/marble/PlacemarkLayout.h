@@ -44,6 +44,7 @@ class PlacemarkPainter;
 class TileId;
 class VisiblePlacemark;
 class ViewportParams;
+class StyleBuilder;
 
 /**
  * Layouts the place marks with a passed QPainter.
@@ -62,6 +63,7 @@ class PlacemarkLayout : public QObject
     PlacemarkLayout( QAbstractItemModel  *placemarkModel,
                      QItemSelectionModel *selectionModel,
                      MarbleClock *clock,
+                     const StyleBuilder* styleBuilder,
                      QObject *parent = 0 );
 
     /**
@@ -160,6 +162,7 @@ class PlacemarkLayout : public QObject
 
     int     m_maxLabelHeight;
     bool    m_styleResetRequested;
+    const StyleBuilder* m_styleBuilder;
 };
 
 }

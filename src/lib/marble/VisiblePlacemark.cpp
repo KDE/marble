@@ -24,11 +24,11 @@
 
 using namespace Marble;
 
-VisiblePlacemark::VisiblePlacemark( const GeoDataPlacemark *placemark )
+VisiblePlacemark::VisiblePlacemark( const GeoDataPlacemark *placemark, const GeoDataStyle::ConstPtr &style )
     : m_placemark( placemark ),
-      m_selected( false )
+      m_selected( false ),
+      m_style(style)
 {
-    GeoDataStyle::ConstPtr style = m_placemark->style();
     const RemoteIconLoader *remoteLoader = style->iconStyle().remoteIconLoader();
     QObject::connect( remoteLoader, SIGNAL(iconReady()),
                      this, SLOT(setSymbolPixmap()) );
@@ -65,11 +65,11 @@ const QPoint& VisiblePlacemark::symbolPosition() const
 
 const QPointF VisiblePlacemark::hotSpot() const
 {
-    const QSize iconSize = m_placemark->style()->iconStyle().scaledIcon().size();
+    const QSize iconSize = m_style->iconStyle().scaledIcon().size();
 
     GeoDataHotSpot::Units xunits;
     GeoDataHotSpot::Units yunits;
-    QPointF pixelHotSpot = m_placemark->style()->iconStyle().hotSpot( xunits, yunits );
+    QPointF pixelHotSpot = m_style->iconStyle().hotSpot( xunits, yunits );
 
     switch ( xunits ) {
     case GeoDataHotSpot::Fraction:
@@ -110,10 +110,8 @@ const QPixmap& VisiblePlacemark::labelPixmap() const
 
 void VisiblePlacemark::setSymbolPixmap()
 {
-    GeoDataStyle::ConstPtr style = m_placemark->style();
-    if ( style ) {
-
-        m_symbolPixmap = QPixmap::fromImage( style->iconStyle().scaledIcon() );
+    if (m_style) {
+        m_symbolPixmap = QPixmap::fromImage(m_style->iconStyle().scaledIcon() );
         emit updateNeeded();
     }
     else {
@@ -131,30 +129,40 @@ void VisiblePlacemark::setLabelRect( const QRectF& labelRect )
     m_labelRect = labelRect;
 }
 
+void VisiblePlacemark::setStyle(const GeoDataStyle::ConstPtr &style)
+{
+    m_style = style;
+    drawLabelPixmap();
+    setSymbolPixmap();
+}
+
+GeoDataStyle::ConstPtr VisiblePlacemark::style() const
+{
+    return m_style;
+}
+
 void VisiblePlacemark::drawLabelPixmap()
 {
-    GeoDataStyle::ConstPtr style = m_placemark->style();
-
     QString labelName = m_placemark->displayName();
-    if ( labelName.isEmpty() || style->labelStyle().color() == QColor(Qt::transparent) ) {
+    if ( labelName.isEmpty() || m_style->labelStyle().color() == QColor(Qt::transparent) ) {
         m_labelPixmap = QPixmap();
         return;
     }
 
-    QFont  labelFont  = style->labelStyle().scaledFont();
-    QColor labelColor = style->labelStyle().color();
+    QFont  labelFont  = m_style->labelStyle().scaledFont();
+    QColor labelColor = m_style->labelStyle().color();
 
     LabelStyle labelStyle = Normal;
     if ( m_selected ) {
         labelStyle = Selected;
-    } else if ( style->labelStyle().glow() ) {
+    } else if ( m_style->labelStyle().glow() ) {
         labelStyle = Glow;
     }
 
     int textHeight = QFontMetrics( labelFont ).height();
 
     int textWidth;
-    if ( style->labelStyle().glow() ) {
+    if ( m_style->labelStyle().glow() ) {
         labelFont.setWeight( 75 ); // Needed to calculate the correct pixmap size;
         textWidth = ( QFontMetrics( labelFont ).width( labelName )
             + qRound( 2 * s_labelOutlineWidth ) );

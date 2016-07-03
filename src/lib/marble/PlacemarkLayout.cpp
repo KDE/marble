@@ -38,6 +38,7 @@
 #include "TileCoordsPyramid.h"
 #include "VisiblePlacemark.h"
 #include "MathHelper.h"
+#include <StyleBuilder.h>
 
 namespace
 {   //Helper function that checks for available room for the label
@@ -154,6 +155,7 @@ QSet<GeoDataFeature::GeoDataVisualCategory> acceptedVisualCategories()
 PlacemarkLayout::PlacemarkLayout( QAbstractItemModel  *placemarkModel,
                                   QItemSelectionModel *selectionModel,
                                   MarbleClock *clock,
+                                  const StyleBuilder *styleBuilder,
                                   QObject* parent )
     : QObject( parent ),
       m_placemarkModel(placemarkModel),
@@ -168,7 +170,8 @@ PlacemarkLayout::PlacemarkLayout( QAbstractItemModel  *placemarkModel,
       m_showCraters( false ),
       m_showMaria( false ),
       m_maxLabelHeight(maxLabelHeight()),
-      m_styleResetRequested( true )
+      m_styleResetRequested( true ),
+      m_styleBuilder(styleBuilder)
 {
     Q_ASSERT(m_placemarkModel);
 
@@ -549,11 +552,25 @@ QString PlacemarkLayout::runtimeTrace() const
 
 bool PlacemarkLayout::layoutPlacemark( const GeoDataPlacemark *placemark, qreal x, qreal y, bool selected )
 {
+    // Find the corresponding visible placemark
+    VisiblePlacemark *mark = m_visiblePlacemarks.value( placemark );
+    if ( !mark ) {
+        // If there is no visible placemark yet for this index,
+        // create a new one...
+        StyleParameters parameters;
+        // @todo: Set / adjust to tile level
+        parameters.feature = placemark;
+
+        mark = new VisiblePlacemark(placemark, m_styleBuilder->createStyle(parameters));
+        m_visiblePlacemarks.insert( placemark, mark );
+        connect( mark, SIGNAL(updateNeeded()), this, SIGNAL(repaintNeeded()) );
+    }
+    GeoDataStyle::ConstPtr style = mark->style();
+
     // Choose Section
 
     // Find out whether the area around the placemark is covered already.
     // If there's not enough space free don't add a VisiblePlacemark here.
-    GeoDataStyle::ConstPtr style = placemark->style();
 
     QRectF labelRect;
     if( !placemark->displayName().isEmpty() ) {
@@ -561,16 +578,6 @@ bool PlacemarkLayout::layoutPlacemark( const GeoDataPlacemark *placemark, qreal 
         if ( labelRect.isNull() ) {
             return false;
         }
-    }
-
-    // Find the corresponding visible placemark
-    VisiblePlacemark *mark = m_visiblePlacemarks.value( placemark );
-    if ( !mark ) {
-        // If there is no visible placemark yet for this index,
-        // create a new one...
-        mark = new VisiblePlacemark( placemark );
-        m_visiblePlacemarks.insert( placemark, mark );
-        connect( mark, SIGNAL(updateNeeded()), this, SIGNAL(repaintNeeded()) );
     }
 
     // Finally save the label position on the map.
