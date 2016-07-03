@@ -633,8 +633,6 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     /// Unserialize the contents of the feature from @p stream.
     virtual void unpack( QDataStream& stream );
 
-    static QSharedPointer<const GeoDataStyle> presetStyle( GeoDataVisualCategory category );
-
  protected:
     // the d-pointer needs to be protected to be accessible from derived classes
     GeoDataFeaturePrivate* d;

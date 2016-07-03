@@ -15,6 +15,7 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
 #include "OsmPlacemarkData.h"
+#include "StyleBuilder.h"
 
 #include <QMap>
 
@@ -467,8 +468,11 @@ void OsmPresetLibrary::initializeAdditionalOsmTags()
 
 GeoDataStyle::ConstPtr OsmPresetLibrary::presetStyle( const OsmTag &tag )
 {
-  GeoDataFeature::GeoDataVisualCategory category = osmVisualCategory( tag.first + "=" + tag.second );
-  return GeoDataFeature::presetStyle( category );
+    static const StyleBuilder styleBuilder;
+
+    const GeoDataFeature::GeoDataVisualCategory category = osmVisualCategory(tag.first + "=" + tag.second);
+
+    return styleBuilder.presetStyle(category);
 }
 
 bool OsmPresetLibrary::hasVisualCategory ( const OsmTag &tag )

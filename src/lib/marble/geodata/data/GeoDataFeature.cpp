@@ -160,12 +160,6 @@ EnumFeatureId GeoDataFeature::featureId() const
     return d->featureId();
 }
 
-
-QSharedPointer<const GeoDataStyle> GeoDataFeature::presetStyle( GeoDataVisualCategory category )
-{
-    return GeoDataFeaturePrivate::s_styleBuilder.presetStyle(category);
-}
-
 QString GeoDataFeature::name() const
 {
     return d->m_name;
