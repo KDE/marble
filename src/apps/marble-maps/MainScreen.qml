@@ -104,7 +104,9 @@ ApplicationWindow {
                         width: Screen.pixelDensity*6
                         height: width
                         source: "qrc:///ic_place.png"
-                        onPlacemarkChanged: placemarkDialog.placemark = placemark
+                        onPlacemarkChanged: {
+                            placemarkDialog.placemark = placemark
+                        }
                     }
 
                     onPositionAvailableChanged: {

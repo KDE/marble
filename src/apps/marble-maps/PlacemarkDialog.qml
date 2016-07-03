@@ -28,6 +28,12 @@ Item {
         itemStack.state = "routing"
     }
 
+    onPlacemarkChanged: {
+        if (placemark) {
+            itemStack.state = "place"
+        }
+    }
+
     SystemPalette {
         id: palette
         colorGroup: SystemPalette.Active

@@ -55,7 +55,6 @@ Item {
                 routingManager.addSearchResultAsPlacemark(backend.selectedPlacemark);
             }
             placemarkDialog.placemark = backend.selectedPlacemark;
-            itemStack.state = "place"
         }
 
         MouseArea{
