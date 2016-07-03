@@ -905,13 +905,16 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
         }
 
 
-        QList<GeoDataFeature::GeoDataVisualCategory> categories = visualCategories(osmData);
-        foreach(GeoDataFeature::GeoDataVisualCategory category, categories) {
-            const GeoDataStyle::ConstPtr categoryStyle = GeoDataFeature::presetStyle(category);
-            if (!categoryStyle->iconStyle().iconPath().isEmpty()) {
-                GeoDataStyle::Ptr newStyle(new GeoDataStyle(*style));
-                newStyle->setIconStyle(categoryStyle->iconStyle());
-                style = newStyle;
+        if (style->iconStyle().iconPath().isEmpty()) {
+            QList<GeoDataFeature::GeoDataVisualCategory> categories = visualCategories(osmData);
+            foreach(GeoDataFeature::GeoDataVisualCategory category, categories) {
+                const GeoDataStyle::ConstPtr categoryStyle = GeoDataFeature::presetStyle(category);
+                if (!categoryStyle->iconStyle().icon().isNull()) {
+                    GeoDataStyle::Ptr newStyle(new GeoDataStyle(*style));
+                    newStyle->setIconStyle(categoryStyle->iconStyle());
+                    style = newStyle;
+                    break;
+                }
             }
         }
     } else if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType) {
