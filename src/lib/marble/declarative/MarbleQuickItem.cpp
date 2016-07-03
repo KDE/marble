@@ -34,6 +34,7 @@
 #include <GeoDataCoordinates.h>
 #include <GeoDataTypes.h>
 #include <ReverseGeocodingRunnerManager.h>
+#include <routing/RoutingManager.h>
 
 namespace Marble
 {
@@ -869,6 +870,7 @@ namespace Marble
             setZoom(zoom);
         }
         settings.endGroup();
+        d->m_model.routingManager()->readSettings();
     }
 
     void MarbleQuickItem::writeSettings()
@@ -879,6 +881,7 @@ namespace Marble
         settings.setValue("centerLat", QVariant(d->m_map.centerLatitude()));
         settings.setValue("zoom", QVariant(zoom()));
         settings.endGroup();
+        d->m_model.routingManager()->writeSettings();
     }
 
     QObject *MarbleQuickItem::getEventFilter() const
