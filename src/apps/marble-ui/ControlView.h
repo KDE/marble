@@ -101,9 +101,10 @@ class ControlView : public QWidget
 
     /**
      * Opens the passed Geo URI
+     * @return true if uri could be parsed and opened
      * @see Marble::GeoUriParser for details
      */
-    void openGeoUri( const QString& geoUriString );
+    bool openGeoUri( const QString& geoUriString );
 
     static QActionGroup* createViewSizeActionGroup( QObject* parent );
 
@@ -133,6 +134,15 @@ Q_SIGNALS:
 
 protected:
     void closeEvent( QCloseEvent *event );
+    /**
+     * @brief Reimplementation of the dragEnterEvent() function in QWidget.
+     */
+    void dragEnterEvent(QDragEnterEvent *event);
+
+    /**
+     * @brief Reimplementation of the dropEvent() function in QWidget.
+     */
+    void dropEvent(QDropEvent *event);
 
 private Q_SLOTS:
     void showSearch();

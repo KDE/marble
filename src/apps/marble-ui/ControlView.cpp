@@ -36,6 +36,7 @@
 #include <QShortcut>
 #include <QMenu>
 #include <QToolBar>
+#include <QMimeData>
 
 #ifdef MARBLE_DBUS
 #include <QDBusConnection>
@@ -121,6 +122,8 @@ ControlView::ControlView( QWidget *parent )
     connect( bookmarkSyncManager, SIGNAL(mergeConflict(MergeItem*)), this, SLOT(showConflictDialog(MergeItem*)) );
     connect( bookmarkSyncManager, SIGNAL(syncComplete()), m_conflictDialog, SLOT(stopAutoResolve()) );
     connect( m_conflictDialog, SIGNAL(resolveConflict(MergeItem*)), bookmarkSyncManager, SLOT(resolveConflict(MergeItem*)) );
+
+    setAcceptDrops(true);
 }
 
 ControlView::~ControlView()
@@ -251,10 +254,11 @@ void ControlView::printMapScreenShot( QPointer<QPrintDialog> printDialog)
 #endif
 }
 
-void ControlView::openGeoUri( const QString& geoUriString )
+bool ControlView::openGeoUri( const QString& geoUriString )
 {
     GeoUriParser uriParser( geoUriString );
-    if ( uriParser.parse() ) {
+    const bool success = uriParser.parse();
+    if ( success ) {
         if ( uriParser.planet().id() != marbleModel()->planet()->id() ) {
             MapThemeManager *manager = mapThemeManager();
             foreach( const QString& planetName, manager->mapThemeIds()) {
@@ -270,6 +274,7 @@ void ControlView::openGeoUri( const QString& geoUriString )
             m_marbleWidget->setDistance( uriParser.coordinates().altitude() * METER2KM );
         }
     }
+    return success;
 }
 
 QActionGroup *ControlView::createViewSizeActionGroup( QObject* parent )
@@ -900,6 +905,78 @@ void ControlView::closeEvent( QCloseEvent *event )
         event->accept();
     } else {
         event->ignore();
+    }
+}
+
+void ControlView::dragEnterEvent(QDragEnterEvent *event)
+{
+    bool success = false;
+
+    const QMimeData *mimeData = event->mimeData();
+
+    GeoUriParser uriParser;
+
+    // prefer urls
+    if (mimeData->hasUrls()) {
+        // be generous and take the first usable url
+        foreach(const QUrl& url, mimeData->urls()) {
+            uriParser.setGeoUri(url.url());
+            success = uriParser.parse();
+            if (success) {
+                break;
+            }
+        }
+    }
+
+    // fall back to own string parsing
+    if (!success && mimeData->hasText()) {
+        const QString text = mimeData->text();
+        // first try human readable coordinates
+        GeoDataCoordinates::fromString(text, success);
+        // next geo uri
+        if (!success) {
+            uriParser.setGeoUri(text);
+            success = uriParser.parse();
+        }
+    }
+
+    if (success) {
+        event->acceptProposedAction();
+    }
+}
+
+void ControlView::dropEvent(QDropEvent *event)
+{
+    bool success = false;
+
+    const QMimeData *mimeData = event->mimeData();
+
+    // prefer urls
+    if (mimeData->hasUrls()) {
+        // be generous and take the first usable url
+        foreach(const QUrl& url, mimeData->urls()) {
+            success = openGeoUri(url.url());
+            if (success) {
+                break;
+            }
+        }
+    }
+
+    // fall back to own string parsing
+    if (!success && mimeData->hasText()) {
+        const QString text = mimeData->text();
+        // first try human readable coordinates
+        const GeoDataCoordinates coordinates = GeoDataCoordinates::fromString(text, success);
+        if (success) {
+            const qreal longitude = coordinates.longitude(GeoDataCoordinates::Degree);
+            const qreal latitude = coordinates.latitude(GeoDataCoordinates::Degree);
+            m_marbleWidget->centerOn(longitude, latitude);
+        } else {
+            success = openGeoUri(text);
+        }
+    }
+    if (success) {
+        event->acceptProposedAction();
     }
 }
 
