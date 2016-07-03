@@ -14,10 +14,13 @@
 #include "Coordinate.h"
 
 #include "GeoDataPlacemark.h"
+#include "GeoDataFeature.h"
 
 #include <QObject>
 #include <QAbstractListModel>
 #include <QQmlComponent>
+
+namespace Marble {
 
 /**
   * Wraps a GeoDataPlacemark for QML access
@@ -28,6 +31,7 @@ class Placemark : public QObject
 
     Q_PROPERTY( Coordinate* coordinate READ coordinate NOTIFY coordinateChanged )
     Q_PROPERTY( QString name WRITE setName READ name NOTIFY nameChanged )
+    Q_PROPERTY( QString description READ description NOTIFY descriptionChanged )
     Q_PROPERTY( QString address READ address NOTIFY addressChanged )
 
 public:
@@ -41,6 +45,7 @@ public:
     Coordinate* coordinate();
 
     QString name() const;
+    QString description() const;
     QString address() const;
 
 public Q_SLOTS:
@@ -50,14 +55,22 @@ Q_SIGNALS:
     void coordinateChanged();
 
     void nameChanged();
+    void descriptionChanged();
     void addressChanged();
 
 private:
+    QString categoryName(GeoDataFeature::GeoDataVisualCategory category) const;
+    void addTagValue(const QString &key) const;
+    void addTagDescription(const QString &key, const QString &value, const QString &description) const;
+
     Marble::GeoDataPlacemark m_placemark;
     Coordinate m_coordinate;
     mutable QString m_address; // mutable to allow lazy calculation in the getter
+    mutable QString m_description;
 };
 
-QML_DECLARE_TYPE( Placemark )
+}
+
+QML_DECLARE_TYPE( Marble::Placemark )
 
 #endif // MARBLE_DECLARATIVE_PLACEMARK_H

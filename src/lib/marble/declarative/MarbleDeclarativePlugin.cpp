@@ -44,7 +44,7 @@ void MarbleDeclarativePlugin::registerTypes( const char *uri )
 
     //@uri org.kde.edu.marble
     qmlRegisterType<Coordinate>( uri, 0, 20, "Coordinate" );
-    qmlRegisterType<Placemark>( uri, 0, 20, "Placemark" );
+    qmlRegisterType<Marble::Placemark>( uri, 0, 20, "Placemark" );
     qmlRegisterType<Marble::PositionSource>( uri, 0, 20, "PositionSource" );
     qmlRegisterType<Marble::Bookmarks>( uri, 0, 20, "Bookmarks" );
     qmlRegisterType<Marble::Tracking>( uri, 0, 20, "Tracking" );

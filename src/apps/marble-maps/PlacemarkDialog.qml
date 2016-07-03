@@ -53,7 +53,7 @@ Item {
             right: actionsLayout.left
             margins: Screen.pixelDensity * 2
         }
-        height: nameLabel.height + (addressLabel.text == "" ? 0 : addressLabel.height)
+        height: nameLabel.height + (descriptionLabel.text == "" ? 0 : descriptionLabel.height) + (addressLabel.text == "" ? 0 : addressLabel.height)
 
         Text {
             id: nameLabel
@@ -63,6 +63,16 @@ Item {
             elide: Text.ElideRight
             maximumLineCount: 2
             font.pointSize: 20
+        }
+
+        Text {
+            id: descriptionLabel
+            width: parent.width
+            text: placemark === null ? "" : placemark.description
+            wrapMode: Text.WordWrap
+            elide: Text.ElideRight
+            maximumLineCount: 4
+            font.pointSize: 14
         }
 
         Text {
