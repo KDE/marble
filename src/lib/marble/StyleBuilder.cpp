@@ -904,10 +904,10 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
             style = newStyle;
         }
 
-
         if (style->iconStyle().iconPath().isEmpty()) {
-            QList<GeoDataFeature::GeoDataVisualCategory> categories = visualCategories(osmData);
-            foreach(GeoDataFeature::GeoDataVisualCategory category, categories) {
+            for (auto iter = osmData.tagsBegin(), end = osmData.tagsEnd(); iter != end; ++iter) {
+                const QString keyValue = QString("%1=%2").arg(iter.key()).arg(iter.value());
+                const GeoDataFeature::GeoDataVisualCategory category = OsmPresetLibrary::osmVisualCategory(keyValue);
                 const GeoDataStyle::ConstPtr categoryStyle = presetStyle(category);
                 if (!categoryStyle->iconStyle().icon().isNull()) {
                     GeoDataStyle::Ptr newStyle(new GeoDataStyle(*style));
@@ -1445,19 +1445,6 @@ StyleParameters::StyleParameters(const GeoDataFeature *feature_, int tileLevel_)
     tileLevel(tileLevel_)
 {
     // nothing to do
-}
-
-QList<GeoDataFeature::GeoDataVisualCategory> StyleBuilder::visualCategories(const OsmPlacemarkData &osmData)
-{
-    QList<GeoDataFeature::GeoDataVisualCategory> categories;
-    for (auto iter = osmData.tagsBegin(), end=osmData.tagsEnd(); iter != end; ++iter) {
-        const QString keyValue = QString("%1=%2").arg(iter.key()).arg(iter.value());
-        GeoDataFeature::GeoDataVisualCategory category = OsmPresetLibrary::osmVisualCategory(keyValue);
-        if (category != GeoDataFeature::None) {
-            categories << category;
-        }
-    }
-    return categories;
 }
 
 }

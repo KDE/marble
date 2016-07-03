@@ -74,8 +74,6 @@ public:
 private:
     Q_DISABLE_COPY(StyleBuilder)
 
-    static QList<GeoDataFeature::GeoDataVisualCategory> visualCategories(const OsmPlacemarkData &osmData);
-
     class Private;
     Private * const d;
 };
