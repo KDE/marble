@@ -436,7 +436,7 @@ namespace Marble
         delete d->m_placemarkItem;
         d->m_placemarkItem = nullptr;
         delete d->m_placemark;
-        d->m_placemark = new Placemark;
+        d->m_placemark = new Placemark(this);
         d->m_placemark->coordinate()->setCoordinates(coordinates);
         d->m_reverseGeocoding.reverseGeocoding(coordinates);
     }
@@ -557,11 +557,11 @@ namespace Marble
             if (feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
                 GeoDataPlacemark const * placemark = static_cast<const GeoDataPlacemark*>(feature);
                 if (d->m_placemark && placemark->coordinate() == d->m_placemark->coordinate()->coordinates()) {
-                    delete d->m_placemark;
+                    d->m_placemark->deleteLater();
                     d->m_placemark = nullptr;
                 } else {
-                    delete d->m_placemark;
-                    d->m_placemark = new Placemark;
+                    d->m_placemark->deleteLater();
+                    d->m_placemark = new Placemark(this);
                     d->m_placemark->setGeoDataPlacemark(*placemark);
                 }
                 delete d->m_placemarkItem;
