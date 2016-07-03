@@ -327,7 +327,7 @@ void TestGeoDataCoordinates::testOperatorAssignment()
  */
 void TestGeoDataCoordinates::testDetail()
 {
-    const int detailnumber = 15;
+    const quint8 detailnumber = 15;
 
     GeoDataCoordinates coordinates1;
     coordinates1.setDetail(detailnumber);

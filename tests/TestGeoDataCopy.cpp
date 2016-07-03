@@ -50,7 +50,7 @@ class TestGeoDataCopy : public QObject
 {
     Q_OBJECT
     private:
-        void testCoordinate( GeoDataCoordinates coord, qreal alt, int detail, QString coordtest );
+        void testCoordinate(GeoDataCoordinates coord, qreal alt, quint8 detail, QString coordtest );
     private Q_SLOTS:
         void initTestCase();
         // misc.:
@@ -87,7 +87,7 @@ class TestGeoDataCopy : public QObject
         GeoDataPoint point3;
 };
 
-void TestGeoDataCopy::testCoordinate( GeoDataCoordinates coord, qreal alt, int detail, QString coordtest )
+void TestGeoDataCopy::testCoordinate( GeoDataCoordinates coord, qreal alt, quint8 detail, QString coordtest )
 {
     QCOMPARE(coord.altitude(), alt);
     QCOMPARE(coord.detail(), detail);
@@ -156,8 +156,8 @@ void TestGeoDataCopy::copyPoint()
     
     point = GeoDataPoint( GeoDataCoordinates(13.7107, 51.0235, 123.4, GeoDataCoordinates::Degree, 17) );
     point.setExtrude(false);
-    QCOMPARE(other.coordinates().detail(), 2);
-    QCOMPARE(point.coordinates().detail(), 17);
+    QCOMPARE(other.coordinates().detail(), quint8(2));
+    QCOMPARE(point.coordinates().detail(), quint8(17));
     QCOMPARE(other.extrude(), true);
     QCOMPARE(point.extrude(), false);
 }
