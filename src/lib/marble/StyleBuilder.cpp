@@ -907,7 +907,7 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
                 const QString keyValue = QString("%1=%2").arg(iter.key()).arg(iter.value());
                 const GeoDataFeature::GeoDataVisualCategory category = OsmPresetLibrary::osmVisualCategory(keyValue);
                 const GeoDataStyle::ConstPtr categoryStyle = presetStyle(category);
-                if (!categoryStyle->iconStyle().icon().isNull()) {
+                if (category != GeoDataFeature::None && !categoryStyle->iconStyle().icon().isNull()) {
                     GeoDataStyle::Ptr newStyle(new GeoDataStyle(*style));
                     newStyle->setIconStyle(categoryStyle->iconStyle());
                     style = newStyle;
