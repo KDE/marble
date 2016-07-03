@@ -155,7 +155,7 @@ class GeoDataFeaturePrivate
     QAtomicInt  ref;
 
     // Static members
-    static StyleBuilder  s_styleBuilder;
+    static const QSharedPointer<const GeoDataStyle> s_defaultStyle;
 };
 
 } // namespace Marble

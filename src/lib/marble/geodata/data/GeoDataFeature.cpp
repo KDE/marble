@@ -30,11 +30,11 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataRegion.h"
 #include "GeoDataCamera.h"
-#include "StyleBuilder.h"
 
 namespace Marble
 {
-StyleBuilder GeoDataFeaturePrivate::s_styleBuilder;
+
+const QSharedPointer<const GeoDataStyle> GeoDataFeaturePrivate::s_defaultStyle(new GeoDataStyle);
 
 GeoDataFeature::GeoDataFeature()
     : d( new GeoDataFeaturePrivate() )
@@ -342,7 +342,8 @@ GeoDataStyle::ConstPtr GeoDataFeature::style() const
     if (d->m_style) {
         return d->m_style;
     }
-    return d->s_styleBuilder.createStyle(StyleParameters(this));
+
+    return GeoDataFeaturePrivate::s_defaultStyle;
 }
 
 GeoDataStyle::ConstPtr GeoDataFeature::customStyle() const
