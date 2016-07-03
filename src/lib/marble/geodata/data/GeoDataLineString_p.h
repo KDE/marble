@@ -87,7 +87,7 @@ class GeoDataLineStringPrivate : public GeoDataGeometryPrivate
                        const GeoDataCoordinates & currentCoords,
                        int recursionCounter ) const;
 
-    int levelForResolution(qreal resolution) const;
+    quint8 levelForResolution(qreal resolution) const;
     qreal resolutionForLevel(int level) const;
     void optimize(GeoDataLineString& lineString) const;
 
@@ -101,7 +101,9 @@ class GeoDataLineStringPrivate : public GeoDataGeometryPrivate
                                             // been calculated. Saves performance. 
     TessellationFlags           m_tessellationFlags;
     mutable qreal  m_previousResolution;
-    mutable qreal  m_level;};
+    mutable quint8 m_level;
+
+};
 
 } // namespace Marble
 

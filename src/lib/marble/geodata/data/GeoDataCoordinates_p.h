@@ -206,7 +206,7 @@ class GeoDataCoordinatesPrivate
     qreal      m_lon;
     qreal      m_lat;
     qreal      m_altitude;     // in meters above sea level
-    int        m_detail;
+    quint8     m_detail;
     QAtomicInt ref;
 
     /* UTM Ellipsoid model constants (actual values here are for WGS84) */

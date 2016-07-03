@@ -132,7 +132,7 @@ GeoDataCoordinates GeoDataLineStringPrivate::findDateLine( const GeoDataCoordina
     return findDateLine( previousCoords, interpolatedCoords, recursionCounter );
 }
 
-int GeoDataLineStringPrivate::levelForResolution(qreal resolution) const {
+quint8 GeoDataLineStringPrivate::levelForResolution(qreal resolution) const {
     if (m_previousResolution == resolution) return m_level;
 
     m_previousResolution = resolution;
@@ -227,10 +227,10 @@ void GeoDataLineStringPrivate::optimize (GeoDataLineString& lineString) const
     if (lineString.size() < 2) return;
 
     // Calculate the least non-zero detail-level by checking the bounding box
-    int startLevel = levelForResolution( ( lineString.latLonAltBox().width() + lineString.latLonAltBox().height() ) / 2 );
+    quint8 startLevel = levelForResolution( ( lineString.latLonAltBox().width() + lineString.latLonAltBox().height() ) / 2 );
 
-    int currentLevel = startLevel;
-    int maxLevel = startLevel;
+    quint8 currentLevel = startLevel;
+    quint8 maxLevel = startLevel;
     GeoDataCoordinates currentCoords;
     lineString.first().setDetail(startLevel);
 

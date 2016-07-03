@@ -1285,15 +1285,15 @@ qreal GeoDataCoordinates::utmNorthing() const{
     return GeoDataCoordinatesPrivate::lonLatToNorthing(d->m_lon, d->m_lat);
 }
 
-int GeoDataCoordinates::detail() const
+quint8 GeoDataCoordinates::detail() const
 {
     return d->m_detail;
 }
 
-void GeoDataCoordinates::setDetail( const int det )
+void GeoDataCoordinates::setDetail(quint8 detail)
 {
     detach();
-    d->m_detail = det;
+    d->m_detail = detail;
 }
 
 GeoDataCoordinates GeoDataCoordinates::rotateAround( const GeoDataCoordinates &axis, qreal angle, Unit unit ) const

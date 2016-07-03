@@ -255,13 +255,13 @@ class GEODATA_EXPORT GeoDataCoordinates
     * @brief return the detail flag
     * detail range: 0 for most important points, 5 for least important
     */
-    int detail() const;
+    quint8 detail() const;
 
     /**
     * @brief set the detail flag
     * @param det detail
     */
-    void setDetail( const int detail );
+    void setDetail(quint8 detail);
 
     /**
      * @brief Rotates one coordinate around another.
