@@ -1,4 +1,5 @@
 SET ( geodata_data_SRCS
+        geodata/data/LonLatParser.cpp
         geodata/data/GeoDataRegion.cpp
         geodata/data/GeoDataUpdate.cpp
         geodata/data/GeoDataViewVolume.cpp
