@@ -908,7 +908,7 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
         if (style->iconStyle().iconPath().isEmpty()) {
             QList<GeoDataFeature::GeoDataVisualCategory> categories = visualCategories(osmData);
             foreach(GeoDataFeature::GeoDataVisualCategory category, categories) {
-                const GeoDataStyle::ConstPtr categoryStyle = GeoDataFeature::presetStyle(category);
+                const GeoDataStyle::ConstPtr categoryStyle = presetStyle(category);
                 if (!categoryStyle->iconStyle().icon().isNull()) {
                     GeoDataStyle::Ptr newStyle(new GeoDataStyle(*style));
                     newStyle->setIconStyle(categoryStyle->iconStyle());
