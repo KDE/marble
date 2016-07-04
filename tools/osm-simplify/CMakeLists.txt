@@ -5,7 +5,6 @@ PROJECT (${TARGET})
 
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Widgets REQUIRED)
-find_package(Qt5Declarative REQUIRED)
 find_package(Qt5Gui REQUIRED)
 
 include_directories(
