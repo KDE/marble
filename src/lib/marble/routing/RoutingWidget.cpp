@@ -99,6 +99,7 @@ public:
     int m_iconSize;
     int m_collapse_width;
     bool m_playing;
+    QString m_planetId;
 
     QToolBar *m_toolBar;
 
@@ -158,6 +159,7 @@ RoutingWidgetPrivate::RoutingWidgetPrivate( RoutingWidget *parent, MarbleWidget 
         m_iconSize( 16 ),
         m_collapse_width( 0 ),
         m_playing( false ),
+        m_planetId(marbleWidget->model()->planetId()),
         m_toolBar( 0 ),
         m_openRouteButton( 0 ),
         m_saveRouteButton( 0 ),
@@ -394,6 +396,9 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
         d->m_ui.directionsListView->setWindowTitle( tr( "Directions - Marble" ) );
 #endif // Q_WS_MAEMO_5
     }
+
+    connect( marbleWidget->model(), SIGNAL(themeChanged(QString)),
+             this, SLOT(handlePlanetChange()) );
 }
 
 RoutingWidget::~RoutingWidget()
@@ -1009,6 +1014,18 @@ void RoutingWidget::seekTourToStart()
     d->m_playback->seek( 0 );
     d->m_playButton->setIcon( QIcon( ":/marble/playback-play.png" ) );
     d->m_playing = false;
+}
+
+void RoutingWidget::handlePlanetChange()
+{
+    const QString newPlanetId = d->m_widget->model()->planetId();
+
+    if (newPlanetId == d->m_planetId) {
+        return;
+    }
+
+    d->m_planetId = newPlanetId;
+    d->m_routingManager->clearRoute();
 }
 
 } // namespace Marble

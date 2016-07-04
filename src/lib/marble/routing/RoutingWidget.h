@@ -148,6 +148,8 @@ private Q_SLOTS:
 
     void toggleRoutePlay();
 
+    void handlePlanetChange();
+
 protected:
     bool eventFilter( QObject *o, QEvent *e );
     void resizeEvent(QResizeEvent *e);
