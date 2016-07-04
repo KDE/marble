@@ -69,7 +69,8 @@ MainWindow::MainWindow( const QString& marbleDataPath, QWidget *parent )
     setAutoSaveSettings();
 
     connect( marbleWidget(), SIGNAL(themeChanged(QString)),
-            this, SLOT(setMapTitle()));
+            this, SLOT(updateWindowTitle()));
+    updateWindowTitle();
 }
 
 MainWindow::~MainWindow()
@@ -88,12 +89,10 @@ MarbleWidget* MainWindow::marbleWidget() const
     return m_part->controlView()->marbleWidget();
 }
 
-void MainWindow::setMapTitle()
+void MainWindow::updateWindowTitle()
 {
     GeoSceneDocument *mapTheme = marbleWidget()->mapTheme();
-    if ( mapTheme ) {
-        setWindowTitle(i18n("Marble Virtual Globe") + " - " + mapTheme->head()->name());
-    }
+    setWindowTitle(mapTheme ? mapTheme->head()->name() : QString());
 }
 
 void MainWindow::changeViewSize( QAction* action )

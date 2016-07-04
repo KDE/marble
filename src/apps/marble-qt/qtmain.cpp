@@ -50,6 +50,7 @@ int main(int argc, char *argv[])
     QTranslator  translator;
     translator.load( "marble-" + lang, MarbleDirs::path(QString("lang") ) );
     app.installTranslator(&translator);
+    app.setApplicationDisplayName(MainWindow::tr("Marble - Virtual Globe"));
 
     // For non static builds on mac and win
     // we need to be sure we can find the qt image

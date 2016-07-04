@@ -82,7 +82,7 @@ private Q_SLOTS:
 
     void  changeRecordingState();
 
-    void  updateApplicationTitle(const QString&);
+    void  updateWindowTitle();
 
     // File Menu
     void  openFile();

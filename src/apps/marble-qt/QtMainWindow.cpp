@@ -183,7 +183,6 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
 
     m_controlView = new ControlView( this );
 
-    setWindowTitle( tr("Marble - Virtual Globe") );
     setWindowIcon( QIcon(":/icons/marble.png") );
     setCentralWidget( m_controlView );
 
@@ -213,10 +212,11 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
     connect( m_controlView->marbleWidget(), SIGNAL(themeChanged(QString)),
              this, SLOT(updateMapEditButtonVisibility(QString)) );
     connect(m_controlView->marbleModel(), SIGNAL(themeChanged(QString)),
-            this, SLOT(updateApplicationTitle(QString)));
+            this, SLOT(updateWindowTitle()));
     connect( m_controlView, SIGNAL(showMapWizard()), this, SLOT(showMapWizard()) );
     connect( m_controlView, SIGNAL(mapThemeDeleted()), this, SLOT(fallBackToDefaultTheme()) );
 
+    updateWindowTitle();
     setUpdatesEnabled( true );
 
     m_position =  QCoreApplication::translate( "Marble", NOT_AVAILABLE );
@@ -1613,12 +1613,10 @@ void MainWindow::changeRecordingState()
     m_stopRecordingAction->setEnabled( !m_stopRecordingAction->isEnabled() );
 }
 
-void MainWindow::updateApplicationTitle(const QString&)
+void MainWindow::updateWindowTitle()
 {
     GeoSceneDocument *theme = m_controlView->marbleModel()->mapTheme();
-    if (theme) {
-        setWindowTitle(tr("Marble Virtual Globe") + " - " + theme->head()->name());
-    }
+    setWindowTitle(theme ? theme->head()->name() : QString());
 }
 
 void MainWindow::showMapWizard()
