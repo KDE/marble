@@ -32,49 +32,49 @@ BaseClipper::BaseClipper() :
 
 
 
-QPolygonF *BaseClipper::lineString2Qpolygon(const GeoDataLineString& lineString)
+QPolygonF BaseClipper::lineString2Qpolygon(const GeoDataLineString& lineString)
 {
-    QPolygonF* polygon = new QPolygonF();
+    QPolygonF polygon;
     foreach (const GeoDataCoordinates& coord, lineString) {
         // Need to flip the Y axis(latitude)
         QPointF point(coord.longitude(), -coord.latitude());
-        polygon->append(point);
+        polygon.append(point);
     }
 
     return polygon;
 }
 
-QPolygonF *BaseClipper::linearRing2Qpolygon(const GeoDataLinearRing& linearRing)
+QPolygonF BaseClipper::linearRing2Qpolygon(const GeoDataLinearRing& linearRing)
 {
-    QPolygonF* polygon = new QPolygonF();
+    QPolygonF polygon;
     foreach (const GeoDataCoordinates& coord, linearRing) {
         // Need to flip the Y axis(latitude)
         QPointF point(coord.longitude(), -coord.latitude());
-        polygon->append(point);
+        polygon.append(point);
     }
 
     return polygon;
 }
 
-GeoDataLineString *BaseClipper::qPolygon2lineString(const QPolygonF& polygon)
+GeoDataLineString BaseClipper::qPolygon2lineString(const QPolygonF& polygon)
 {
-    GeoDataLineString* lineString = new GeoDataLineString();
+    GeoDataLineString lineString;
     foreach (const QPointF& point, polygon) {
         // Flipping back the Y axis
         GeoDataCoordinates coord(point.x(), -point.y());
-        lineString->append(coord);
+        lineString.append(coord);
     }
 
     return lineString;
 }
 
-GeoDataLinearRing *BaseClipper::qPolygon2linearRing(const QPolygonF& polygon)
+GeoDataLinearRing BaseClipper::qPolygon2linearRing(const QPolygonF& polygon)
 {
-    GeoDataLinearRing* linearRing = new GeoDataLinearRing();
+    GeoDataLinearRing linearRing;
     foreach (const QPointF& point, polygon) {
         // Flipping back the Y axis
         GeoDataCoordinates coord(point.x(), -point.y());
-        linearRing->append(coord);
+        linearRing.append(coord);
     }
 
     return linearRing;
