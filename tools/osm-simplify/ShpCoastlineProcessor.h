@@ -8,20 +8,19 @@
 // Copyright 2016      David Kolozsvari <freedawson@gmail.com>
 //
 
-#ifndef LINESTRINGHANDLER_H
-#define LINESTRINGHANDLER_H
-
-#include <QList>
+#ifndef COASTLINEFILTER_H
+#define COASTLINEFILTER_H
 
 #include "PlacemarkFilter.h"
 
-class LineStringProcessor : public PlacemarkFilter
+class ShpCoastlineProcessor : public PlacemarkFilter
 {
 public:
-    LineStringProcessor(GeoDataDocument* document);
+    ShpCoastlineProcessor(GeoDataDocument* document);
 
     virtual void process();
 
+    GeoDataDocument* cutToTiles(unsigned int zoomLevel, unsigned int tileX, unsigned int tileY);
 };
 
-#endif // LINESTRINGHANDLER_H
+#endif // COASTLINEFILTER_H

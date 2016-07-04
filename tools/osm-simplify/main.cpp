@@ -8,18 +8,22 @@
 // Copyright 2016      David Kolozsvari <freedawson@gmail.com>
 //
 
-#include "OsmParser.h"
 #include "GeoWriter.h"
+#include "MarbleModel.h"
+#include "ParsingRunnerManager.h"
 
-#include <QCoreApplication>
+#include <QApplication>
 #include <QCommandLineParser>
 #include <QDebug>
 #include <QFileInfo>
 #include <QTime>
+#include <QDir>
+#include <QString>
 
 #include <QMessageLogContext>
 
 #include "LineStringProcessor.h"
+#include "ShpCoastlineProcessor.h"
 
 using namespace Marble;
 
@@ -41,17 +45,17 @@ void debugOutput( QtMsgType type, const QMessageLogContext &context, const QStri
         break;
     case QtInfoMsg:
         if ( debugLevel < Mute ) {
-            qDebug() << "Debug: " << context.file << ":" << context.line << " " << msg;
+            qInfo() << "Info: " << context.file << ":" << context.line << " " << msg;
         }
         break;
     case QtWarningMsg:
         if ( debugLevel < Mute ) {
-            qDebug() << "Info: " << context.file << ":" << context.line << " " << msg;
+            qDebug() << "Warning: " << context.file << ":" << context.line << " " << msg;
         }
         break;
     case QtCriticalMsg:
         if ( debugLevel < Mute ) {
-            qDebug() << "Warning: " << context.file << ":" << context.line << " " << msg;
+            qDebug() << "Critical: " << context.file << ":" << context.line << " " << msg;
         }
         break;
     case QtFatalMsg:
@@ -69,17 +73,16 @@ void usage()
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication app(argc, argv);
+    QApplication app(argc, argv);
 
-    QCoreApplication::setApplicationName("osm-simplify");
-    QCoreApplication::setApplicationVersion("0.1");
+    QApplication::setApplicationName("osm-simplify");
+    QApplication::setApplicationVersion("0.1");
 
     QCommandLineParser parser;
     parser.setApplicationDescription("A tool for Marble, which is used to reduce the details of osm maps.");
     parser.addHelpOption();
     parser.addVersionOption();
-    parser.addPositionalArgument("input.osm", "The input .osm file.");
-    parser.addPositionalArgument("output.osm", "The output .osm file.");
+    parser.addPositionalArgument("input", "The input .osm or .shp file.");
 
     parser.addOptions({
                           {
@@ -93,10 +96,16 @@ int main(int argc, char *argv[])
                           },
 
                           {
-                              {"ns", "no-streets-smaller-than"},
-                              QCoreApplication::translate("main", "eliminates streets which have realsize smaller than <real number>"),
-                              QCoreApplication::translate("main", "real number")
+                              {"c", "cut-to-tiles"},
+                              QCoreApplication::translate("main", "Cuts into tiles based on the zoom level passed by <number>"),
+                              QCoreApplication::translate("main", "number")
                           },
+
+                          {
+                              {"o", "output"},
+                              QCoreApplication::translate("main", "Generates an output .osmfile based on other flags. This won't work together with the cut-to-tiles flag."),
+                              QCoreApplication::translate("main", "output_file.osm")
+                          }
                       });
 
     // Process the actual command line arguments given by the user
@@ -110,11 +119,10 @@ int main(int argc, char *argv[])
     // input is args.at(0), output is args.at(1)
 
     QString inputFileName = args.at(0);
-    QString outputFileName = args.at(1);
-
     bool debug = parser.isSet("debug");
     bool mute = parser.isSet("mute");
-    QString smallStreetLimit = parser.value("no-streets-smaller-than"); // just an example
+    unsigned int zoomLevel = parser.value("cut-to-tiles").toInt();
+    QString outputFileName = parser.value("output");
 
     if(debug) {
         debugLevel = Debug;
@@ -132,36 +140,49 @@ int main(int argc, char *argv[])
         return 2;
     }
 
-    GeoDataDocument* osmMap;
-    if ( file.suffix() == "osm") {
+    MarbleModel model;
+    ParsingRunnerManager manager(model.pluginManager());
+    GeoDataDocument* map = manager.openFile(inputFileName, DocumentRole::MapDocument);
 
-        QString error;
-        osmMap = OsmParser::parse(inputFileName, error);
+    if(file.suffix() == "shp" && parser.isSet("cut-to-tiles")) {
+        ShpCoastlineProcessor processor(map);
 
-        if(!error.isEmpty()) {
-            qDebug() << error;
-            return 3;
+        processor.process();
+
+        unsigned int N = pow(2, zoomLevel);
+
+        for(unsigned int x = 0; x < N; ++x) {
+            for(unsigned int y = 0; y < N; ++y) {
+                GeoDataDocument* tile = processor.cutToTiles(zoomLevel, x, y);
+
+                GeoWriter writer;
+                writer.setDocumentType("0.6");
+
+                QFile outputFile( QString("%1/%2/%3.osm").arg(zoomLevel).arg(x).arg(y) );
+
+                QDir dir;
+                if(!dir.exists(QString::number(zoomLevel))) {
+                    dir.mkdir(QString::number(zoomLevel));
+                }
+                if(!dir.exists(QString("%1/%2").arg(zoomLevel).arg(x))) {
+                    dir.mkdir(QString("%1/%2").arg(zoomLevel).arg(x));
+                }
+
+                outputFile.open( QIODevice::WriteOnly );
+                if ( !writer.write( &outputFile, tile ) ) {
+                    qDebug() << "Could not write the file " << outputFileName;
+                    return 4;
+                }
+
+                qInfo() << tile->name() << " done";
+
+                delete tile;
+            }
         }
     } else {
-        qDebug() << "Unsupported file format: " << inputFileName;
-        return 5;
+        // future functionality
     }
 
-    LineStringProcessor processor(osmMap);
-
-    processor.process();
-
-    GeoWriter writer;
-    writer.setDocumentType("0.6");
-
-    QFile outputFile( outputFileName );
-    outputFile.open( QIODevice::WriteOnly );
-    if ( !writer.write( &outputFile, osmMap ) ) {
-        qDebug() << "Could not write the file " << outputFileName;
-        return 4;
-    }
-
-    qInfo() << "Done.";
 
     return 0;
 }

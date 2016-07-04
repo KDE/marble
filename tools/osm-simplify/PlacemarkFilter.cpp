@@ -1,19 +1,20 @@
+//
+// This file is part of the Marble Virtual Globe.
+//
+// This program is free software licensed under the GNU LGPL. You can
+// find a copy of this license in LICENSE.txt in the top directory of
+// the source code.
+//
+// Copyright 2016      David Kolozsvari <freedawson@gmail.com>
+//
+
 #include "PlacemarkFilter.h"
 
 #include "GeoDataPlacemark.h"
 
-PlacemarkFilter::PlacemarkFilter(GeoDataDocument *document, const char *type) :
+PlacemarkFilter::PlacemarkFilter(GeoDataDocument *document) :
     BaseFilter(document, GeoDataTypes::GeoDataPlacemarkType)
 {
-    QList<GeoDataObject*> toRemove;
-    foreach (GeoDataObject* placemark, m_objects) {
-        if( static_cast<GeoDataPlacemark*>(placemark)->geometry()->nodeType() != type) {
-            toRemove.append(placemark);
-        }
-    }
-
-    foreach (GeoDataObject* placemark, toRemove) {
-        m_objects.removeOne(placemark);
-    }
+    qDebug() << "Placemark count:" << m_objects.size();
 }
 
