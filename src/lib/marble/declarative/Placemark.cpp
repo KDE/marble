@@ -200,7 +200,6 @@ QString Placemark::categoryName(GeoDataFeature::GeoDataVisualCategory category) 
     case GeoDataFeature::AirPort: return tr("Air Port");
     case GeoDataFeature::Observatory: return tr("Observatory");
     case GeoDataFeature::MilitaryDangerArea: return tr("Military Danger Area");
-    case GeoDataFeature::Wikipedia: return tr("Wikipedia");
     case GeoDataFeature::OsmSite: return tr("OSM Site");
     case GeoDataFeature::Coordinate: return tr("Coordinate");
     case GeoDataFeature::Folder: return tr("Folder");

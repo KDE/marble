@@ -421,10 +421,6 @@ void StyleBuilder::Private::initializeDefaultStyles()
         = GeoDataStyle::Ptr(new GeoDataStyle( MarbleDirs::path( "bitmaps/observatory.png" ),
               QFont( defaultFamily, defaultSize, 50, false ), defaultLabelColor ));
 
-    m_defaultStyle[GeoDataFeature::Wikipedia]
-        = GeoDataStyle::Ptr(new GeoDataStyle( MarbleDirs::path( "bitmaps/wikipedia.png" ),
-              QFont( defaultFamily, defaultSize, 50, false ), defaultLabelColor ));
-
     m_defaultStyle[GeoDataFeature::OsmSite]
         = GeoDataStyle::Ptr(new GeoDataStyle( MarbleDirs::path( "bitmaps/osm.png" ),
               QFont( defaultFamily, defaultSize, 50, false ), defaultLabelColor ));
@@ -1190,7 +1186,6 @@ QString StyleBuilder::visualCategoryName(GeoDataFeature::GeoDataVisualCategory c
         visualCategoryNames[GeoDataFeature::GeoDataFeature::AirPort] = "AirPort";
         visualCategoryNames[GeoDataFeature::GeoDataFeature::Observatory] = "Observatory";
         visualCategoryNames[GeoDataFeature::GeoDataFeature::MilitaryDangerArea] = "MilitaryDangerArea";
-        visualCategoryNames[GeoDataFeature::GeoDataFeature::Wikipedia] = "Wikipedia";
         visualCategoryNames[GeoDataFeature::GeoDataFeature::OsmSite] = "OsmSite";
         visualCategoryNames[GeoDataFeature::Coordinate] = "Coordinate";
         visualCategoryNames[GeoDataFeature::MannedLandingSite] = "MannedLandingSite";

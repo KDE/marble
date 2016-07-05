@@ -130,7 +130,6 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         MilitaryDangerArea,
 
         // Runners
-        Wikipedia,
         OsmSite,
         Coordinate,
 
