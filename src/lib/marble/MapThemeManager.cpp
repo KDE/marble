@@ -21,7 +21,6 @@
 #include <QScopedPointer>
 #include <QString>
 #include <QStringList>
-#include <QTimer>
 #include <QStandardItemModel>
 
 // Local dir

@@ -17,8 +17,6 @@
 #include "GeoDataLookAt.h"
 #include "TourPlayback.h"
 
-#include <QTimer>
-
 namespace Marble
 {
 

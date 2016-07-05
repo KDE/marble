@@ -12,8 +12,6 @@
 
 #include "RouteSimulationPositionProviderPlugin.h"
 
-#include <QTimer>
-
 #include "MarbleMath.h"
 #include "MarbleModel.h"
 #include "routing/Route.h"

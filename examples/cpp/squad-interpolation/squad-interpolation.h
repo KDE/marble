@@ -19,7 +19,6 @@
 #include <marble/LayerInterface.h>
 
 #include <QTime>
-#include <QTimer>
 #include <QApplication>
 #include <QKeyEvent>
 

@@ -22,7 +22,6 @@
 // Qt
 #include <QAbstractItemModel>
 #include <QTime>
-#include <QTimer>
 #include <QItemSelectionModel>
 #include <QSizePolicy>
 #include <QRegion>

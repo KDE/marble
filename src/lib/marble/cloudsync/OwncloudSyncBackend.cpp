@@ -35,7 +35,6 @@
 #include <QScriptEngine>
 #include <QFileInfo>
 #include <QBuffer>
-#include <QTimer>
 #include <QDir>
 
 namespace Marble

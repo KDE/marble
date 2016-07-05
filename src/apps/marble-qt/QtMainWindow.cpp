@@ -19,7 +19,6 @@
 #include <QSettings>
 #include <QUrl>
 #include <QCloseEvent>
-#include <QTimer>
 #include <QVariant>
 #include <QVector>
 #include <QAction>

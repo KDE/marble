@@ -15,6 +15,7 @@
 
 #include <QProcess>
 #include <QMessageBox>
+#include <QTimer>
 
 namespace Marble
 {

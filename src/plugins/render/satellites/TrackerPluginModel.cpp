@@ -20,8 +20,6 @@
 #include "MarbleModel.h"
 #include "TrackerPluginItem.h"
 
-#include <QTimer>
-
 namespace Marble
 {
 

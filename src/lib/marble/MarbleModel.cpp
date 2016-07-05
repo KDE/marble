@@ -20,7 +20,6 @@
 #include <QAtomicInt>
 #include <QPointer>
 #include <QTime>
-#include <QTimer>
 #include <QAbstractItemModel>
 #include <QSet>
 #include <QItemSelectionModel>

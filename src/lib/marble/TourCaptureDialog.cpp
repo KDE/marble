@@ -14,6 +14,7 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QApplication>
+#include <QTimer>
 
 #include "MarbleWidget.h"
 #include "MovieCapture.h"

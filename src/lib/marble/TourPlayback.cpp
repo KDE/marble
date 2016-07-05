@@ -10,7 +10,6 @@
 
 #include "TourPlayback.h"
 
-#include <QTimer>
 #include <QList>
 #include <QSlider>
 #include <qurl.h>

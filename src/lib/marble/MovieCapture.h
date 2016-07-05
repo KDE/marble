@@ -12,7 +12,6 @@
 #define MOVIECAPTURE_H
 
 #include <QObject>
-#include <QTimer>
 #include <QDir>
 
 #include "marble_export.h"

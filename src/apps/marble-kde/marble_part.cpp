@@ -18,7 +18,6 @@
 #include <QDir>
 #include <QPointer>
 #include <QStringList>
-#include <QTimer>
 #include <QClipboard>
 #include <QLabel>
 #include <QFontMetrics>

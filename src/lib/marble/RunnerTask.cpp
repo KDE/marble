@@ -22,8 +22,6 @@
 #include "RoutingRunnerManager.h"
 #include "routing/RouteRequest.h"
 
-#include <QTimer>
-
 namespace Marble
 {
 

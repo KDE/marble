@@ -15,7 +15,6 @@
 
 #include <QColor>
 #include <QPixmap>
-#include <QTimer>
 #include <QAction>
 #include <QMutexLocker>
 #include <QTcpSocket>
