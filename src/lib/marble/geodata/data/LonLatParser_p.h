@@ -18,7 +18,7 @@
 
 #include <QStringList>
 
-class QRegExp;
+class QRegularExpressionMatch;
 
 namespace Marble
 {
@@ -36,7 +36,6 @@ private:
      */
     static double parseDouble(const QString& input);
     static QString createDecimalPointExp();
-    static QString regExp(const QString& string);
     static void getLocaleList(QStringList& localeList, const QString& localeListString,
                               const QLatin1String& placeholder, const QString& separator);
     static bool isDirection(const QString& input, const QString& direction);
@@ -54,14 +53,14 @@ private:
      * function template for the function calculating the degree value from
      * the captured texts with the degree, the minutes, the seconds and the signedness
      * (or less, depending on what the function actually expects)
-     * @param regex the regexp to take the texts from
+     * @param regexMatch the regexp match to take the texts from
      * @param c the index in the list of captured texts of @p regex to start with
      * @param isPosHemisphere if the texts of the degree value are relative to the pos hemisphere
      * @return the calculated degree value
      */
-    static qreal degreeValueFromDMS(const QRegExp& regex, int c, bool isPosHemisphere);
-    static qreal degreeValueFromDM(const QRegExp& regex, int c, bool isPosHemisphere);
-    static qreal degreeValueFromD(const QRegExp& regex, int c, bool isPosHemisphere);
+    static qreal degreeValueFromDMS(const QRegularExpressionMatch& regexMatch, int c, bool isPosHemisphere);
+    static qreal degreeValueFromDM(const QRegularExpressionMatch& regexMatch, int c, bool isPosHemisphere);
+    static qreal degreeValueFromD(const QRegularExpressionMatch& regexMatch, int c, bool isPosHemisphere);
 
 public:
     LonLatParser();

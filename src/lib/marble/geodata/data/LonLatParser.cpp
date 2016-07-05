@@ -20,7 +20,7 @@
 #include "MarbleDebug.h"
 
 #include <QLocale>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QSet>
 
 
@@ -77,7 +77,7 @@ void LonLatParser::initAll()
         }
 
         // okay to add '|' also for last, separates from firstLetters
-        fullNamesExp += regExp(dir) + QLatin1Char('|');
+        fullNamesExp += QRegularExpression::escape(dir) + QLatin1Char('|');
     }
 
     // Sets "(north|east|south|west|[nesw])" in en, as translated names match untranslated ones
@@ -92,27 +92,27 @@ void LonLatParser::initAll()
     getLocaleList(m_secondsLocale, GeoDataCoordinates::tr("*", "Seconds symbol terms, see http://techbase.kde.org/Projects/Marble/GeoDataCoordinatesTranslation"),
                   placeholder, separator);
 
-    // Used unicode regexp expressions:
-    // x00B0: ° DEGREE SIGN
-    // x00BA: º MASCULINE ORDINAL INDICATOR (found used as degree sign)
-    // x2032: ′ PRIME (minutes)
-    // x00B4: ´ ACUTE ACCENT (found as minutes sign)
-    // x02CA: ˊ MODIFIER LETTER ACUTE ACCENT
-    // x2019: ’ RIGHT SINGLE QUOTATION MARK
-    // x2033: ″ DOUBLE PRIME (seconds)
-    // x201D: ” RIGHT DOUBLE QUOTATION MARK
+    // Used unicode chars:
+    // u00B0: ° DEGREE SIGN
+    // u00BA: º MASCULINE ORDINAL INDICATOR (found used as degree sign)
+    // u2032: ′ PRIME (minutes)
+    // u00B4: ´ ACUTE ACCENT (found as minutes sign)
+    // u02CA: ˊ MODIFIER LETTER ACUTE ACCENT
+    // u2019: ’ RIGHT SINGLE QUOTATION MARK
+    // u2033: ″ DOUBLE PRIME (seconds)
+    // u201D: ” RIGHT DOUBLE QUOTATION MARK
 
-    m_degreeExp = QStringLiteral("\\x00B0|\\x00BA");
+    m_degreeExp = QStringLiteral("\u00B0|\u00BA");
     foreach(const QString& symbol, m_degreeLocale) {
-        m_degreeExp += QLatin1Char('|') + regExp(symbol);
+        m_degreeExp += QLatin1Char('|') + QRegularExpression::escape(symbol);
     }
-    m_minutesExp = QStringLiteral("'|\\x2032|\\x00B4|\\x20C2|\\x2019");
+    m_minutesExp = QStringLiteral("'|\u2032|\u00B4|\u20C2|\u2019");
     foreach(const QString& symbol, m_minutesLocale) {
-        m_minutesExp += QLatin1Char('|') + regExp(symbol);
+        m_minutesExp += QLatin1Char('|') + QRegularExpression::escape(symbol);
     }
-    m_secondsExp = QStringLiteral("\"|\\x2033|\\x201D|''|\\x2032\\x2032|\\x00B4\\x00B4|\\x20C2\\x20C2|\\x2019\\x2019");
+    m_secondsExp = QStringLiteral("\"|\u2033|\u201D|''|\u2032\u2032|\u00B4\u00B4|\u20C2\u20C2|\u2019\u2019");
     foreach(const QString& symbol, m_secondsLocale) {
-        m_secondsExp += QLatin1Char('|') + regExp(symbol);
+        m_secondsExp += QLatin1Char('|') + QRegularExpression::escape(symbol);
     }
 }
 
@@ -123,14 +123,17 @@ bool LonLatParser::parse(const QString& string)
     // #1: Just two numbers, no directions, e.g. 74.2245 -32.2434 (assumes lat lon)
     {
         const QString numberCapExp = QStringLiteral(
+            "\\A(?:"
             "([-+]?\\d{1,3}%1?\\d*(?:[eE][+-]?\\d+)?)(?:,|;|\\s)\\s*"
             "([-+]?\\d{1,3}%1?\\d*(?:[eE][+-]?\\d+)?)"
+            ")\\z"
             ).arg(m_decimalPointExp);
 
-        const QRegExp regex = QRegExp(numberCapExp);
-        if (regex.exactMatch(input)) {
-            m_lon = parseDouble(regex.cap(2));
-            m_lat = parseDouble(regex.cap(1));
+        const QRegularExpression regex(numberCapExp);
+        QRegularExpressionMatch match = regex.match(input);
+        if (match.hasMatch()) {
+            m_lon = parseDouble(match.captured(2));
+            m_lat = parseDouble(match.captured(1));
 
             return true;
         }
@@ -170,17 +173,21 @@ bool LonLatParser::tryMatchFromDms(const QString& input, DirPosition dirPosition
 {
     // direction as postfix
     const QString postfixCapExp = QStringLiteral(
+        "\\A(?:"
         "([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2})(?:%4|\\s)\\s*"
         "(\\d{1,2}%1?\\d*)(?:%5)?\\s*%2[,;]?\\s*"
         "([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2})(?:%4|\\s)\\s*"
-        "(\\d{1,2}%1?\\d*)(?:%5)?\\s*%2");
+        "(\\d{1,2}%1?\\d*)(?:%5)?\\s*%2"
+        ")\\z");
 
     // direction as prefix
     const QString prefixCapExp = QStringLiteral(
+        "\\A(?:"
         "%2\\s*([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2})(?:%4|\\s)\\s*"
         "(\\d{1,2}%1?\\d*)(?:%5)?\\s*(?:,|;|\\s)\\s*"
         "%2\\s*([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2})(?:%4|\\s)\\s*"
-        "(\\d{1,2}%1?\\d*)(?:%5)?");
+        "(\\d{1,2}%1?\\d*)(?:%5)?"
+        ")\\z");
 
     const QString &expTemplate = (dirPosition == PostfixDir) ? postfixCapExp
                                                              : prefixCapExp;
@@ -188,16 +195,17 @@ bool LonLatParser::tryMatchFromDms(const QString& input, DirPosition dirPosition
     const QString numberCapExp = expTemplate.arg(m_decimalPointExp, m_dirCapExp,
                                                  m_degreeExp, m_minutesExp, m_secondsExp);
 
-    const QRegExp regex = QRegExp(numberCapExp);
-    if (!regex.exactMatch(input)) {
+    const QRegularExpression regex(numberCapExp);
+    QRegularExpressionMatch match = regex.match(input);
+    if (!match.hasMatch()) {
         return false;
     }
 
     bool isDir1LonDir;
     bool isLonDirPosHemisphere;
     bool isLatDirPosHemisphere;
-    const QString dir1 = regex.cap(dirPosition == PostfixDir ? 5 : 1);
-    const QString dir2 = regex.cap(dirPosition == PostfixDir ? 10 : 6);
+    const QString dir1 = match.captured(dirPosition == PostfixDir ? 5 : 1);
+    const QString dir2 = match.captured(dirPosition == PostfixDir ? 10 : 6);
     if (!isCorrectDirections(dir1, dir2, isDir1LonDir,
                              isLonDirPosHemisphere, isLatDirPosHemisphere)) {
         return false;
@@ -205,9 +213,9 @@ bool LonLatParser::tryMatchFromDms(const QString& input, DirPosition dirPosition
 
     const int valueStartIndex1 = (dirPosition == PostfixDir ? 1 : 2);
     const int valueStartIndex2 = (dirPosition == PostfixDir ? 6 : 7);
-    m_lon = degreeValueFromDMS(regex, isDir1LonDir ? valueStartIndex1 : valueStartIndex2,
+    m_lon = degreeValueFromDMS(match, isDir1LonDir ? valueStartIndex1 : valueStartIndex2,
                                isLonDirPosHemisphere);
-    m_lat = degreeValueFromDMS(regex, isDir1LonDir ? valueStartIndex2 : valueStartIndex1,
+    m_lat = degreeValueFromDMS(match, isDir1LonDir ? valueStartIndex2 : valueStartIndex1,
                                isLatDirPosHemisphere);
 
     return true;
@@ -218,29 +226,34 @@ bool LonLatParser::tryMatchFromDm(const QString& input, DirPosition dirPosition)
 {
     // direction as postfix
     const QString postfixCapExp = QStringLiteral(
+        "\\A(?:"
         "([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2}%1?\\d*)(?:%4)?\\s*%2[,;]?\\s*"
-        "([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2}%1?\\d*)(?:%4)?\\s*%2");
+        "([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2}%1?\\d*)(?:%4)?\\s*%2"
+        ")\\z");
 
     // direction as prefix
     const QString prefixCapExp = QStringLiteral(
+        "\\A(?:"
         "%2\\s*([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2}%1?\\d*)(?:%4)?\\s*(?:,|;|\\s)\\s*"
-        "%2\\s*([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2}%1?\\d*)(?:%4)?");
+        "%2\\s*([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2}%1?\\d*)(?:%4)?"
+        ")\\z");
 
     const QString& expTemplate = (dirPosition == PostfixDir) ? postfixCapExp
                                                              : prefixCapExp;
 
     const QString numberCapExp = expTemplate.arg(m_decimalPointExp, m_dirCapExp,
                                                   m_degreeExp, m_minutesExp);
-    const QRegExp regex = QRegExp(numberCapExp);
-    if (!regex.exactMatch(input)) {
+    const QRegularExpression regex(numberCapExp);
+    QRegularExpressionMatch match = regex.match(input);
+    if (!match.hasMatch()) {
         return false;
     }
 
     bool isDir1LonDir;
     bool isLonDirPosHemisphere;
     bool isLatDirPosHemisphere;
-    const QString dir1 = regex.cap(dirPosition == PostfixDir ? 4 : 1);
-    const QString dir2 = regex.cap(dirPosition == PostfixDir ? 8 : 5);
+    const QString dir1 = match.captured(dirPosition == PostfixDir ? 4 : 1);
+    const QString dir2 = match.captured(dirPosition == PostfixDir ? 8 : 5);
     if (!isCorrectDirections(dir1, dir2, isDir1LonDir,
                              isLonDirPosHemisphere, isLatDirPosHemisphere)) {
         return false;
@@ -248,9 +261,9 @@ bool LonLatParser::tryMatchFromDm(const QString& input, DirPosition dirPosition)
 
     const int valueStartIndex1 = (dirPosition == PostfixDir ? 1 : 2);
     const int valueStartIndex2 = (dirPosition == PostfixDir ? 5 : 6);
-    m_lon = degreeValueFromDM(regex, isDir1LonDir ? valueStartIndex1 : valueStartIndex2,
+    m_lon = degreeValueFromDM(match, isDir1LonDir ? valueStartIndex1 : valueStartIndex2,
                               isLonDirPosHemisphere);
-    m_lat = degreeValueFromDM(regex, isDir1LonDir ? valueStartIndex2 : valueStartIndex1,
+    m_lat = degreeValueFromDM(match, isDir1LonDir ? valueStartIndex2 : valueStartIndex1,
                               isLatDirPosHemisphere);
 
     return true;
@@ -261,28 +274,36 @@ bool LonLatParser::tryMatchFromD(const QString& input, DirPosition dirPosition)
 {
     // direction as postfix, e.g. 74.2245 N 32.2434 W
     const QString postfixCapExp = QStringLiteral(
+        "\\A(?:"
         "([-+]?\\d{1,3}%1?\\d*)(?:%3)?(?:\\s*)%2(?:,|;|\\s)\\s*"
-        "([-+]?\\d{1,3}%1?\\d*)(?:%3)?(?:\\s*)%2");
+        "([-+]?\\d{1,3}%1?\\d*)(?:%3)?(?:\\s*)%2"
+        ")\\z");
 
     // direction as prefix, e.g. N 74.2245 W 32.2434
     const QString prefixCapExp = QStringLiteral(
+        "\\A(?:"
         "%2\\s*([-+]?\\d{1,3}%1?\\d*)(?:%3)?\\s*(?:,|;|\\s)\\s*"
-        "%2\\s*([-+]?\\d{1,3}%1?\\d*)(?:%3)?");
+        "%2\\s*([-+]?\\d{1,3}%1?\\d*)(?:%3)?"
+        ")\\z");
 
     const QString& expTemplate = (dirPosition == PostfixDir) ? postfixCapExp
                                                              : prefixCapExp;
 
     const QString numberCapExp = expTemplate.arg(m_decimalPointExp, m_dirCapExp, m_degreeExp);
-    const QRegExp regex = QRegExp(numberCapExp);
-    if (!regex.exactMatch(input)) {
+    const QRegularExpression regex(numberCapExp);
+// qWarning() << regex.isValid() << regex.errorString() << regex.pattern();
+    QRegularExpressionMatch match = regex.match(input);
+    if (!match.hasMatch()) {
+//         qWarning() << "LonLatParser::tryMatchFromD -> no match";
         return false;
     }
+//     qWarning() << "LonLatParser::tryMatchFromD -> match" << match;
 
     bool isDir1LonDir;
     bool isLonDirPosHemisphere;
     bool isLatDirPosHemisphere;
-    const QString dir1 = regex.cap(dirPosition == PostfixDir ? 2 : 1);
-    const QString dir2 = regex.cap(dirPosition == PostfixDir ? 4 : 3);
+    const QString dir1 = match.captured(dirPosition == PostfixDir ? 2 : 1);
+    const QString dir2 = match.captured(dirPosition == PostfixDir ? 4 : 3);
     if (!isCorrectDirections(dir1, dir2, isDir1LonDir,
                              isLonDirPosHemisphere, isLatDirPosHemisphere)) {
         return false;
@@ -290,9 +311,9 @@ bool LonLatParser::tryMatchFromD(const QString& input, DirPosition dirPosition)
 
     const int valueStartIndex1 = (dirPosition == PostfixDir ? 1 : 2);
     const int valueStartIndex2 = (dirPosition == PostfixDir ? 3 : 4);
-    m_lon = degreeValueFromD(regex, isDir1LonDir ? valueStartIndex1 : valueStartIndex2,
+    m_lon = degreeValueFromD(match, isDir1LonDir ? valueStartIndex1 : valueStartIndex2,
                              isLonDirPosHemisphere);
-    m_lat = degreeValueFromD(regex, isDir1LonDir ? valueStartIndex2 : valueStartIndex1,
+    m_lat = degreeValueFromD(match, isDir1LonDir ? valueStartIndex2 : valueStartIndex1,
                              isLatDirPosHemisphere);
 
     return true;
@@ -314,24 +335,6 @@ QString LonLatParser::createDecimalPointExp()
 
     return (decimalPoint == QLatin1Char('.')) ? QStringLiteral("\\.") :
         QStringLiteral("[.") + decimalPoint + QLatin1Char(']');
-}
-
-QString LonLatParser::regExp(const QString& string)
-{
-    QString result;
-    for (int i = 0; i < string.length(); ++i) {
-        const QChar c = string.at(i);
-        if ((QLatin1Char('a') <= c) && (c <= QLatin1Char('z'))) {
-            result += c;
-        } else if (c.isSpace()) {
-            result += QStringLiteral("\\s");
-        } else if (c == QLatin1Char('.')) {
-            result += QStringLiteral("\\.");
-        } else {
-            result += QStringLiteral("\\x%1").arg(c.unicode(), 4, 16, QLatin1Char('0'));
-        }
-    }
-    return result;
 }
 
 void LonLatParser::getLocaleList(QStringList& localeList, const QString& localeListString,
@@ -397,12 +400,12 @@ bool LonLatParser::isLatDirection(const QString& input,
 }
 
 
-qreal LonLatParser::degreeValueFromDMS(const QRegExp& regex, int c, bool isPosHemisphere)
+qreal LonLatParser::degreeValueFromDMS(const QRegularExpressionMatch& regexMatch, int c, bool isPosHemisphere)
 {
-    const bool isNegativeValue = (regex.cap(c++) == QLatin1String("-"));
-    const uint degree = regex.cap(c++).toUInt();
-    const uint minutes = regex.cap(c++).toUInt();
-    const qreal seconds = parseDouble(regex.cap(c));
+    const bool isNegativeValue = (regexMatch.captured(c++) == QLatin1String("-"));
+    const uint degree = regexMatch.captured(c++).toUInt();
+    const uint minutes = regexMatch.captured(c++).toUInt();
+    const qreal seconds = parseDouble(regexMatch.captured(c));
 
     qreal result = degree + (minutes * MIN2HOUR) + (seconds * SEC2HOUR);
 
@@ -416,11 +419,11 @@ qreal LonLatParser::degreeValueFromDMS(const QRegExp& regex, int c, bool isPosHe
     return result;
 }
 
-qreal LonLatParser::degreeValueFromDM(const QRegExp& regex, int c, bool isPosHemisphere)
+qreal LonLatParser::degreeValueFromDM(const QRegularExpressionMatch& regexMatch, int c, bool isPosHemisphere)
 {
-    const bool isNegativeValue = (regex.cap(c++) == QLatin1String("-"));
-    const uint degree = regex.cap(c++).toUInt();
-    const qreal minutes = parseDouble(regex.cap(c));
+    const bool isNegativeValue = (regexMatch.captured(c++) == QLatin1String("-"));
+    const uint degree = regexMatch.captured(c++).toUInt();
+    const qreal minutes = parseDouble(regexMatch.captured(c));
 
     qreal result = degree + (minutes * MIN2HOUR);
 
@@ -434,9 +437,9 @@ qreal LonLatParser::degreeValueFromDM(const QRegExp& regex, int c, bool isPosHem
     return result;
 }
 
-qreal LonLatParser::degreeValueFromD(const QRegExp& regex, int c, bool isPosHemisphere)
+qreal LonLatParser::degreeValueFromD(const QRegularExpressionMatch& regexMatch, int c, bool isPosHemisphere)
 {
-    qreal result = parseDouble(regex.cap(c));
+    qreal result = parseDouble(regexMatch.captured(c));
 
     if (! isPosHemisphere) {
         result *= -1;
