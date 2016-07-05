@@ -26,9 +26,11 @@ if(ECM_FOUND)
 endif()
 macro_optional_find_package(KF5 QUIET COMPONENTS KIO)
 if(KF5_FOUND)
-  install(FILES marble_part_kml.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+# install again once part is fixed to load and show the passed file
+#   install(FILES marble_part_kml.desktop DESTINATION ${SERVICES_INSTALL_DIR})
   install(FILES marble_thumbnail_kml.desktop DESTINATION ${SERVICES_INSTALL_DIR})
   install(PROGRAMS marble_kmz.desktop DESTINATION ${APPS_INSTALL_DIR})
-  install(FILES marble_part_kmz.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+# install again once part is fixed to load and show the passed file
+#   install(FILES marble_part_kmz.desktop DESTINATION ${SERVICES_INSTALL_DIR})
   install(FILES marble_thumbnail_kmz.desktop DESTINATION ${SERVICES_INSTALL_DIR})
 endif()
