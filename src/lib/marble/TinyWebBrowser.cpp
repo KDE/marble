@@ -16,7 +16,6 @@
 // Qt
 #include <QFileInfo>
 #include <QPointer>
-#include <QRegExp>
 #include <QAction>
 #include <QDesktopServices>
 #include <QPainter>

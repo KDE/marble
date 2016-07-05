@@ -22,7 +22,6 @@
 #include <QFile>
 #include <QDataStream>
 #include <QStringList>
-#include <QRegExp>
 #include <QVariant>
 #include <QTime>
 
