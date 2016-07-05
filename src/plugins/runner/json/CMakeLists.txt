@@ -25,6 +25,7 @@ if(ECM_FOUND)
 endif()
 macro_optional_find_package(KF5 QUIET COMPONENTS KIO)
 if(KF5_FOUND)
-  install(FILES marble_part_geojson.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+# install again once part is fixed to load and show the passed file
+#   install(FILES marble_part_geojson.desktop DESTINATION ${SERVICES_INSTALL_DIR})
   install(FILES marble_thumbnail_geojson.desktop DESTINATION ${SERVICES_INSTALL_DIR})
 endif()
