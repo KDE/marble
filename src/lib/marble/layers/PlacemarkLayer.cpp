@@ -12,7 +12,6 @@
 
 #include "PlacemarkLayer.h"
 
-#include <QModelIndex>
 #include <QPoint>
 #include <QPainter>
 

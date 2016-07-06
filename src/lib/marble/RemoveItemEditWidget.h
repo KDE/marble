@@ -12,10 +12,10 @@
 #define REMOVEITEMEDITWIDGET_H
 
 #include <QWidget>
-#include <QModelIndex>
 
 class QToolButton;
 class QComboBox;
+class QModelIndex;
 
 namespace Marble
 {

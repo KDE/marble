@@ -12,7 +12,6 @@
 #ifndef MARBLE_SEARCHINPUTWIDGET_H
 #define MARBLE_SEARCHINPUTWIDGET_H
 
-#include <QModelIndex>
 #include <QSortFilterProxyModel>
 
 #include "MarbleLineEdit.h"
@@ -20,7 +19,9 @@
 #include "marble_export.h"
 
 class QAbstractItemModel;
+
 class QCompleter;
+class QModelIndex;
 
 namespace Marble {
 

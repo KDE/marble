@@ -16,8 +16,9 @@
 #include "RoutingManager.h"
 #include "marble_export.h"
 
-#include <QModelIndex>
 #include <QWidget>
+
+class QModelIndex;
 
 namespace Marble
 {

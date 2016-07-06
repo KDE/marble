@@ -17,9 +17,7 @@
 #ifndef MARBLE_PLACEMARKLAYOUT_H
 #define MARBLE_PLACEMARKLAYOUT_H
 
-
 #include <QHash>
-#include <QModelIndex>
 #include <QRect>
 #include <QSet>
 #include <QVector>
@@ -31,6 +29,7 @@
 class QAbstractItemModel;
 class QItemSelectionModel;
 class QPoint;
+class QModelIndex;
 
 
 namespace Marble

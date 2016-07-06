@@ -14,7 +14,7 @@
 #define SOUNDCUEEDITWIDGET_H
 
 #include <QWidget>
-#include <QModelIndex>
+#include <QPersistentModelIndex>
 
 class QLineEdit;
 class QToolButton;

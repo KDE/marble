@@ -14,7 +14,7 @@
 #define TOURCONTROLEDITWIDGET_H
 
 #include <QWidget>
-#include <QModelIndex>
+#include <QPersistentModelIndex>
 
 class QRadioButton;
 class QToolButton;

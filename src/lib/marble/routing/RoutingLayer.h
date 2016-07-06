@@ -14,11 +14,11 @@
 #include "GeoDataCoordinates.h"
 #include "LayerInterface.h"
 
-#include <QModelIndex>
 #include <QRect>
 #include <QItemSelection>
 
 class QAbstractProxyModel;
+class QModelIndex;
 
 namespace Marble
 {
