@@ -16,7 +16,6 @@
 // Qt
 #include <QBrush>
 #include <QModelIndex>
-#include <QFile>
 #include <QList>
 #include <QItemSelectionModel>
 

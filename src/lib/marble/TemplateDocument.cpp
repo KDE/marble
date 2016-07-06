@@ -12,7 +12,7 @@
 
 #include <QMap>
 #include <QString>
-#include <QDir>
+#include <QFile>
 #include <QRegExp>
 
 #include "MarbleDebug.h"

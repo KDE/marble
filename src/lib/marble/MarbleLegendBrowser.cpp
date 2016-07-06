@@ -19,7 +19,6 @@
 #include <QDesktopServices>
 #include <QEvent>
 #include <QFile>
-#include <QFileInfo>
 #include <QMouseEvent>
 #include <QPainter>
 #include <QTextFrame>

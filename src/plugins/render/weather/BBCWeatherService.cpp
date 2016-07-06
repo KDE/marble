@@ -25,7 +25,6 @@
 #include "MarbleGlobal.h"
 
 // Qt
-#include <QFile>
 #include <QTime>
 #include <QUrl>
 

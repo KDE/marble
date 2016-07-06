@@ -19,7 +19,6 @@
 #include "MarbleModel.h"
 #include "PositionTracking.h"
 
-#include <QFile>
 #include <QDataStream>
 #include <QVariant>
 #include <QTime>

@@ -11,9 +11,6 @@
 #include "GeoDataOverlay.h"
 #include "GeoDataDocument.h"
 
-#include <QFileInfo>
-#include <QDir>
-
 namespace Marble {
 
 class GeoDataOverlayPrivate

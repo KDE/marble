@@ -11,7 +11,6 @@
 
 #include "FileManager.h"
 
-#include <QDir>
 #include <QFileInfo>
 #include <QTime>
 #include <QMessageBox>

@@ -20,7 +20,6 @@
 #include <QDebug>
 #include <QDir>
 #include <QDirIterator>
-#include <QFileInfo>
 #include <QPointer>
 #include <QStack>
 #include <QDialog>

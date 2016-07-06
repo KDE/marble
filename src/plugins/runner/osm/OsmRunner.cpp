@@ -13,8 +13,6 @@
 #include "OsmParser.h"
 #include "MarbleDebug.h"
 
-#include <QFile>
-
 namespace Marble
 {
 

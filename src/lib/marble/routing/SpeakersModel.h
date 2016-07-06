@@ -14,7 +14,6 @@
 #include "marble_export.h"
 
 #include <QAbstractListModel>
-#include <QFileInfo>
 
 namespace Marble
 {

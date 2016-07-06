@@ -19,7 +19,6 @@
 #include <MarbleGlobal.h>
 
 #include <QApplication>
-#include <QFile>
 #include <QDir>
 #include <QLocale>
 #include <QSettings>

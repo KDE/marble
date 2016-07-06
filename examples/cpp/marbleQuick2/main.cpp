@@ -10,7 +10,6 @@
 
 #include <QApplication>
 #include <QtQuick/QQuickView>
-#include <QFileInfo>
 
 #include <marble/declarative/MarbleQuickItem.h>
 #include <marble/MarbleMap.h>

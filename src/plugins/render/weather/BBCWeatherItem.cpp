@@ -17,7 +17,6 @@
 #include "MarbleDebug.h"
 
 // Qt
-#include <QFile>
 #include <QTime>
 #include <QUrl>
 

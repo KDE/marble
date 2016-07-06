@@ -36,7 +36,6 @@
 
 #include <QDebug>
 #include <QVector>
-#include <QFileInfo>
 #include <QFile>
 #include <QDataStream>
 #include <QApplication>

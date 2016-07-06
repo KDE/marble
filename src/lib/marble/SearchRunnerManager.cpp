@@ -33,7 +33,6 @@
 #include <QVector>
 #include <QThreadPool>
 #include <QTimer>
-#include <QFileInfo>
 #include <QMutex>
 
 namespace Marble

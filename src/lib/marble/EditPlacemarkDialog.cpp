@@ -15,7 +15,6 @@
 #include "ui_ElevationWidget.h"
 
 // Qt
-#include <QFileDialog>
 #include <QMessageBox>
 #include <QFileInfo>
 #include <QColorDialog>

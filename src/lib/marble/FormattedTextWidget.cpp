@@ -16,7 +16,6 @@
 //Qt
 #include <QFileDialog>
 #include <QMessageBox>
-#include <QFileInfo>
 #include <QColorDialog>
 #include <QCheckBox>
 #include <QToolBar>

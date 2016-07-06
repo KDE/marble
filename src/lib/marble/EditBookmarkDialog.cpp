@@ -28,7 +28,7 @@
 #include "ReverseGeocodingRunnerManager.h"
 
 #include <QPointer>
-#include <QFileDialog>
+
 namespace Marble {
 
 class EditBookmarkDialogPrivate {

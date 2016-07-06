@@ -17,7 +17,6 @@
 #include "PositionTracking.h"
 
 #include <QAbstractListModel>
-#include <QFileInfo>
 
 namespace Marble
 {

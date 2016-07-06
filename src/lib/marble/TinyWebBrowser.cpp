@@ -14,7 +14,6 @@
 #include "TinyWebBrowser.h"
 
 // Qt
-#include <QFileInfo>
 #include <QPointer>
 #include <QAction>
 #include <QDesktopServices>
