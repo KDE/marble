@@ -19,6 +19,7 @@
 #include "OsmPresetLibrary.h"
 
 #include <QApplication>
+#include <QFont>
 #include <QDate>
 #include <QSet>
 #include <QScreen>

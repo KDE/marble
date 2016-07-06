@@ -15,7 +15,6 @@
 #include <QPointF>
 #include <QSizeF>
 #include <QPen>
-#include <QFont>
 
 #include "RenderPlugin.h"
 #include "FrameGraphicsItem.h"
@@ -26,6 +25,7 @@ class QContextMenuEvent;
 class QHelpEvent;
 class QMenu;
 class QWidget;
+class QFont;
 
 namespace Marble
 {

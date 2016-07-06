@@ -13,12 +13,11 @@
 #ifndef MARBLE_GEODATALABELSTYLE_H
 #define MARBLE_GEODATALABELSTYLE_H
 
-
-#include <QFont>
-
 #include "GeoDataColorStyle.h"
 
 #include "geodata_export.h"
+
+class QFont;
 
 namespace Marble
 {

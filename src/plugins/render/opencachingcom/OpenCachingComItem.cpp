@@ -21,7 +21,6 @@
 #include "ui_CacheDetailsDialog.h"
 #include "OpenCachingComModel.h"
 
-#include <QFontMetrics>
 #include <QPixmap>
 #include <QAction>
 #include <QDialog>

@@ -12,8 +12,6 @@
 #ifndef MARBLE_GEODATALINESTYLE_H
 #define MARBLE_GEODATALINESTYLE_H
 
-
-#include <QFont>
 #include <QVector>
 
 #include "GeoDataColorStyle.h"

@@ -12,9 +12,6 @@
 #ifndef MARBLE_GEODATAPOLYSTYLE_H
 #define MARBLE_GEODATAPOLYSTYLE_H
 
-
-#include <QFont>
-
 #include "GeoDataColorStyle.h"
 
 #include "geodata_export.h"

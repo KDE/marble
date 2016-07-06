@@ -15,9 +15,7 @@
 #include "AbstractDataPluginItem.h"
 #include "TinyWebBrowser.h"
 #include "MarbleWidget.h"
- 
-class QFont;
- 
+
 namespace Marble
 {
 

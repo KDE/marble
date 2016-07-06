@@ -21,7 +21,6 @@
 #include <QCheckBox>
 #include <QToolBar>
 #include <QTextEdit>
-#include <QFontComboBox>
 #include <QPushButton>
 #include <QLineEdit>
 #include <QVBoxLayout>

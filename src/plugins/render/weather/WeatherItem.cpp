@@ -33,7 +33,7 @@
 #include <QAction>
 #include <QBrush>
 #include <QIcon>
-#include <QFontMetrics>
+#include <QFont>
 #include <QPushButton>
 #include <QSvgRenderer>
 

@@ -14,8 +14,7 @@
 #include <GeoDataStyle.h>
 #include <GeoDataFeature.h>
 
-#include <QFont>
-
+class QFont;
 class QColor;
 
 namespace Marble {
