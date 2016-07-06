@@ -27,7 +27,6 @@
 #include "layers/PopupLayer.h"
 
 // Qt
-#include <QCoreApplication>
 #include <QDate>
 #include <QHash>
 #include <QString>

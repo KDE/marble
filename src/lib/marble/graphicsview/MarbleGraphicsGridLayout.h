@@ -15,9 +15,6 @@
 #include "AbstractMarbleGraphicsLayout.h"
 #include "marble_export.h"
 
-// Qt
-#include <QCoreApplication>
-
 namespace Marble
 {
 

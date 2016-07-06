@@ -37,7 +37,6 @@
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataCoordinates.h"
 
-#include <QCoreApplication>
 #include <QPointF>
 #include <QString>
 #include <QStringList>
