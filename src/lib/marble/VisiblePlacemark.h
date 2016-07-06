@@ -20,7 +20,6 @@
 #include <QPixmap>
 #include <QPoint>
 #include <QRectF>
-#include <QString>
 
 #include <GeoDataStyle.h>
 

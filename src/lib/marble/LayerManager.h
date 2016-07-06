@@ -17,10 +17,10 @@
 // Qt
 #include <QList>
 #include <QObject>
-#include <QString>
 #include <QRegion>
 
 class QPoint;
+class QString;
 
 namespace Marble
 {

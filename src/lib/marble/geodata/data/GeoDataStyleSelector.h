@@ -13,9 +13,6 @@
 #ifndef MARBLE_GEODATASTYLESELECTOR_H
 #define MARBLE_GEODATASTYLESELECTOR_H
 
-
-#include <QString>
-
 #include "GeoDataObject.h"
 
 #include "geodata_export.h"

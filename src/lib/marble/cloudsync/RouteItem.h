@@ -13,7 +13,8 @@
 
 #include <QUrl>
 #include <QIcon>
-#include <QString>
+
+class QString;
 
 namespace Marble {
 

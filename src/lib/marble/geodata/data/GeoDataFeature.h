@@ -13,9 +13,6 @@
 #ifndef MARBLE_GEODATAFEATURE_H
 #define MARBLE_GEODATAFEATURE_H
 
-
-#include <QString>
-
 #include "GeoDataObject.h"
 
 #include "geodata_export.h"

@@ -11,8 +11,6 @@
 #ifndef GEODATANETWORKLINKCONTROL_H
 #define GEODATANETWORKLINKCONTROL_H
 
-#include <QString>
-
 #include "GeoDataContainer.h"
 #include "GeoDataUpdate.h"
 #include "GeoDataAbstractView.h"

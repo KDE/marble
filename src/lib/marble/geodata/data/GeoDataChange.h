@@ -11,8 +11,6 @@
 #ifndef GEODATACHANGE_H
 #define GEODATACHANGE_H
 
-#include <QString>
-
 #include "GeoDataContainer.h"
 #include "marble_export.h"
 

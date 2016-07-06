@@ -13,6 +13,8 @@
 
 #include "GeoDataTourPrimitive.h"
 
+#include <QString>
+
 namespace Marble
 {
 

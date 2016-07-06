@@ -14,7 +14,6 @@
 #define MARBLE_MARBLEINPUTHANDLER_H
 
 #include <QObject>
-#include <QString>
 #include <QRect>
 
 #include "marble_export.h"
@@ -29,6 +28,7 @@ class QGestureEvent;
 class QRubberBand;
 class QCursor;
 class QTimer;
+class QString;
 
 namespace Marble
 {

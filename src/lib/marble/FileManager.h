@@ -15,7 +15,8 @@
 #include "GeoDataDocument.h"
 
 #include <QObject>
-#include <QString>
+
+class QString;
 
 namespace Marble
 {

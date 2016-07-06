@@ -11,7 +11,6 @@
 #ifndef MARBLE_GEODATAGEOMETRYPRIVATE_H
 #define MARBLE_GEODATAGEOMETRYPRIVATE_H
 
-#include <QString>
 #include <QAtomicInt>
 
 #include "GeoDataGeometry.h"

@@ -16,7 +16,6 @@
 
 #include <QByteArray>
 #include <QObject>
-#include <QString>
 #include <QUrl>
 #include <QNetworkReply>
 
@@ -25,6 +24,7 @@
 #include "marble_export.h"
 
 class QNetworkAccessManager;
+class QString;
 
 namespace Marble
 {

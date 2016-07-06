@@ -18,7 +18,6 @@
 
 
 #include <QObject>
-#include <QString>
 #include <QColor>
 
 //FIXME: This class shouldn't be exposed but is needed by the worldclock plasmoid

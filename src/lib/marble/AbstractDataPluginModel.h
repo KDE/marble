@@ -14,13 +14,14 @@
 #include <QObject>
 #include <QList>
 #include <QHash>
-#include <QString>
 
 #include "marble_export.h"
 
 class QPoint;
 class QUrl;
 class QAbstractItemModel;
+class QString;
+class QStringList;
 
 namespace Marble
 {

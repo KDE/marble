@@ -11,8 +11,6 @@
 #ifndef GEODATATIMEPRIMITIVEPRIVATE_H
 #define GEODATATIMEPRIMITIVEPRIVATE_H
 
-#include <QString>
-
 #include "GeoDataTypes.h"
 
 namespace Marble

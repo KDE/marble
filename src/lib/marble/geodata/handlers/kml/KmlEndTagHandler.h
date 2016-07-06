@@ -11,7 +11,6 @@
 #ifndef KmlEndTagHandler_h
 #define KmlEndTagHandler_h
 
-#include <QString>
 #include "GeoTagHandler.h"
 
 namespace Marble

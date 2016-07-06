@@ -12,12 +12,12 @@
 #ifndef MARBLE_TILEID_H
 #define MARBLE_TILEID_H
 
-#include <QString>
-
 #include "marble_export.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataLatLonBox.h"
 #include "GeoSceneTextureTileDataset.h"
+
+class QString;
 
 namespace Marble
 {

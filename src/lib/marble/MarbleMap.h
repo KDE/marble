@@ -27,13 +27,13 @@
 #include "RenderState.h"
 
 // Qt
-#include <QString>
 #include <QObject>
 #include <QRegion>
 
 class QAbstractItemModel;
 class QItemSelectionModel;
 class QFont;
+class QString;
 
 namespace Marble
 {

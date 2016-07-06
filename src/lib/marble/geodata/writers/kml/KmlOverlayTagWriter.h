@@ -14,7 +14,7 @@
 #include "GeoTagWriter.h"
 #include "KmlFeatureTagWriter.h"
 
-#include <QString>
+class QString;
 
 namespace Marble
 {

@@ -11,8 +11,6 @@
 #ifndef GEODATADELETE_H
 #define GEODATADELETE_H
 
-#include <QString>
-
 #include "GeoDataContainer.h"
 #include "marble_export.h"
 

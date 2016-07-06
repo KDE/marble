@@ -23,12 +23,13 @@
 #define MARBLE_GEOSCENESETTINGS_H
 
 #include <QObject>
-#include <QString>
 #include <QVector>
 
 #include <geodata_export.h>
 
 #include "GeoDocument.h"
+
+class QString;
 
 namespace Marble
 {

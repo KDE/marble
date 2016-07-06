@@ -16,7 +16,6 @@
 #include <QPointF>
 #include <QSizeF>
 #include <QRectF>
-#include <QString>
 
 class QEvent;
 class QObject;

@@ -12,8 +12,6 @@
 #ifndef MARBLE_GEODATAEXTENDEDDATA_H
 #define MARBLE_GEODATAEXTENDEDDATA_H
 
-#include <QString>
-
 #include "GeoDataObject.h"
 #include "GeoDataData.h"
 

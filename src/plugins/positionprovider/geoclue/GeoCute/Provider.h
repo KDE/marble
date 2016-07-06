@@ -12,11 +12,10 @@
 #define GEOCUTE_PROVIDER_H
 
 #include <QObject>
-#include <QString>
 
 #include "Status.h"
 
-
+class QString;
 
 namespace GeoCute
 {

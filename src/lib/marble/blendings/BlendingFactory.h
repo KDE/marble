@@ -17,7 +17,8 @@
 #define MARBLE_BLENDING_FACTORY_H
 
 #include <QHash>
-#include <QString>
+
+class QString;
 
 namespace Marble
 {

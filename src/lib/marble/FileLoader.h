@@ -14,7 +14,8 @@
 #include "GeoDataStyle.h"
 
 #include <QThread>
-#include <QString>
+
+class QString;
 
 namespace Marble
 {

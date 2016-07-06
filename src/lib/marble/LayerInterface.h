@@ -15,7 +15,8 @@
 #include "marble_export.h"
 #include "RenderState.h"
 
-#include <QStringList>
+class QStringList;
+class QString;
 
 namespace Marble {
 

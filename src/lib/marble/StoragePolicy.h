@@ -14,10 +14,9 @@
 
 
 #include <QObject>
-#include <QString>
-
 
 class QByteArray;
+class QString;
 
 namespace Marble
 {

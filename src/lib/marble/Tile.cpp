@@ -21,8 +21,6 @@
 
 #include <limits>
 
-#include <QString>
-
 namespace Marble
 {
 

@@ -13,9 +13,10 @@
 #define MARBLE_BOOKMARKMANAGER_H
 
 #include <QObject>
-#include <QString>
 #include <QVector>
 #include "MarbleGlobal.h"
+
+class QString;
 
 namespace Marble
 {

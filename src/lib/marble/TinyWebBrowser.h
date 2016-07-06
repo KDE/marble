@@ -14,12 +14,13 @@
 
 // Qt
 #include <QByteArray>
-#include <QString>
 #include <QUrl>
 #include <QWebView>
 
 // Marble
 #include "marble_export.h"
+
+class QString;
 
 namespace Marble
 {

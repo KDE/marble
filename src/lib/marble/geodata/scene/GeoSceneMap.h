@@ -22,7 +22,6 @@
 #ifndef MARBLE_GEOSCENEMAP_H
 #define MARBLE_GEOSCENEMAP_H
 
-#include <QString>
 #include <QVector>
 
 #include <geodata_export.h>
@@ -30,6 +29,7 @@
 #include "GeoDocument.h"
 
 class QColor;
+class QString;
 
 namespace Marble
 {

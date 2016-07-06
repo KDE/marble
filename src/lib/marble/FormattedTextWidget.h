@@ -17,7 +17,8 @@
 
 //Qt
 #include <QWidget>
-#include <QString>
+
+class QString;
 
 namespace Marble {
 

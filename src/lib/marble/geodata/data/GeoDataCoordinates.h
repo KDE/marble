@@ -18,7 +18,6 @@
 #include <QCoreApplication>
 #include <QMetaType>
 #include <QVector>
-#include <QString>
 
 #include <cmath>
 
@@ -29,6 +28,8 @@
 
 #include "geodata_export.h"
 #include "MarbleGlobal.h"
+
+class QString;
 
 namespace Marble
 {

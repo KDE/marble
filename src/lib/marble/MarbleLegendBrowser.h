@@ -17,9 +17,6 @@
 #ifndef MARBLE_MARBLELEGENDBROWSER_H
 #define MARBLE_MARBLELEGENDBROWSER_H
 
-
-#include <QString>
-
 #ifdef MARBLE_NO_WEBKITWIDGETS
 #include "NullMarbleWebView.h"
 #else
@@ -30,6 +27,7 @@
 
 class QEvent;
 class QUrl;
+class QString;
 
 namespace Marble
 {
