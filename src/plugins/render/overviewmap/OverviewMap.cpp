@@ -17,7 +17,6 @@
 #include <QPainter>
 #include <QFileDialog>
 #include <QHBoxLayout>
-#include <QSvgRenderer>
 #include <QColorDialog>
 
 #include "MarbleDirs.h"

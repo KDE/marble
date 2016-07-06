@@ -30,7 +30,6 @@
 #include <QIcon>
 #include <QPainter>
 #include <QPixmap>
-#include <QSvgRenderer>
 
 #include <QUrlQuery>
 

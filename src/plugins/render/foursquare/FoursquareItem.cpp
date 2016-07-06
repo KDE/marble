@@ -13,7 +13,6 @@
 #include "ViewportParams.h"
 
 #include <QFontMetrics>
-#include <QSvgRenderer>
  
 namespace Marble
 {
