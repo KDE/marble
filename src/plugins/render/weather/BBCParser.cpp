@@ -18,7 +18,6 @@
 #include "MarbleDebug.h"
 
 // Qt
-#include <QByteArray>
 #include <QDateTime>
 #include <QFile>
 #include <QMutexLocker>

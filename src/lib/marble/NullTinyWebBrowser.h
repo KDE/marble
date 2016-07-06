@@ -12,7 +12,6 @@
 #define NULLTINYWEBBROWSER_H
 
 // Qt
-#include <QByteArray>
 #include <QUrl>
 #include <QWidget>
 
@@ -20,6 +19,7 @@
 #include "marble_export.h"
 
 class QString;
+class QByteArray;
 
 namespace Marble
 {

@@ -13,7 +13,6 @@
 #define MARBLE_TINYWEBBROWSER_H
 
 // Qt
-#include <QByteArray>
 #include <QUrl>
 #include <QWebView>
 
