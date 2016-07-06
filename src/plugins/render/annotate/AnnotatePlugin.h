@@ -23,9 +23,6 @@
 #include <QSortFilterProxyModel>
 
 
-class QNetworkAccessManager;
-class QNetworkReply;
-
 namespace Marble
 {
 

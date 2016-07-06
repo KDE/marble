@@ -23,7 +23,6 @@
 #include <QVector>
 #include <QUrl>
 #include <QTimer>
-#include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QDomDocument>
 

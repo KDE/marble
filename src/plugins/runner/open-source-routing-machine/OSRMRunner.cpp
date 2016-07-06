@@ -24,7 +24,6 @@
 #include <QUrl>
 #include <QTime>
 #include <QTimer>
-#include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QScriptValue>
 #include <QScriptEngine>

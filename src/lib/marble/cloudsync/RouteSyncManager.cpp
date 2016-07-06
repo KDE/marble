@@ -28,10 +28,7 @@
 #include <QPointer>
 #include <QScriptValue>
 #include <QScriptEngine>
-#include <QNetworkReply>
 #include <QTemporaryFile>
-#include <QNetworkRequest>
-#include <QNetworkAccessManager>
 
 namespace Marble
 {

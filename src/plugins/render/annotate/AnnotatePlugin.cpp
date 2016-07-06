@@ -16,9 +16,6 @@
 // Qt
 #include <QFileDialog>
 #include <QAction>
-#include <QNetworkAccessManager>
-#include <QNetworkReply>
-#include <QNetworkRequest>
 #include <QMessageBox>
 #include <QtAlgorithms>
 #include <QColor>

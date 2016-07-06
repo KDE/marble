@@ -17,8 +17,6 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 
-class QNetworkAccessManager;
-
 namespace Marble
 {
 

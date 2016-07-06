@@ -29,6 +29,7 @@
 #include <QScriptEngine>
 #include <QTemporaryFile>
 #include <QNetworkAccessManager>
+#include <QNetworkReply>
 #include <QTimer>
 
 namespace Marble {

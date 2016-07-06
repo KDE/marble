@@ -16,7 +16,6 @@
 #include "GeoDataPlacemark.h"
 
 #include <QObject>
-#include <QNetworkReply>
 
 namespace Marble {
 
