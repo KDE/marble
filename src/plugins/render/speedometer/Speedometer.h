@@ -15,8 +15,6 @@
 #ifndef MARBLESpeedometer_H
 #define MARBLESpeedometer_H
 
-#include <QHash>
-
 #include "AbstractFloatItem.h"
 
 #include "ui_Speedometer.h"

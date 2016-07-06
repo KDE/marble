@@ -15,7 +15,6 @@
 
 #include <QDataStream>
 #include <QSize>
-#include <QHash>
 
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"

@@ -12,7 +12,6 @@
 #define MARBLE_TRACKERPLUGINMODEL_H
 
 #include <QObject>
-#include <QHash>
 
 class QUrl;
 

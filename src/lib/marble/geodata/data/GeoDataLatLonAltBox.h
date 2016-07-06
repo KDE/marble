@@ -22,8 +22,6 @@
 
 #include "GeoDataLatLonBox.h"
 
-#include <QHash>
-
 namespace Marble
 {
 

@@ -11,7 +11,6 @@
 #include "Planet.h"
 
 #include <QString>
-#include <QHash>
 
 #include "PlanetFactory.h"
 #include "MarbleDebug.h"

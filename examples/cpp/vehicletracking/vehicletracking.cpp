@@ -13,7 +13,6 @@
 #include <QApplication>
 #include <QThread>
 #include <QTimer>
-#include <QHash>
 #include <qmath.h>
 #include <QDebug>
 #include <QVBoxLayout>

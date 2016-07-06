@@ -19,7 +19,6 @@
 #include <QMetaType>
 #include <QVector>
 #include <QString>
-#include <QHash>
 
 #include <cmath>
 

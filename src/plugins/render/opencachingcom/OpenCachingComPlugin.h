@@ -15,7 +15,6 @@
 #include "RenderPlugin.h"
 #include "RenderPluginInterface.h"
 
-#include <QHash>
 #include <QIcon>
 #include <QAbstractButton>
 

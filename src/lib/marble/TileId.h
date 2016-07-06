@@ -12,7 +12,6 @@
 #ifndef MARBLE_TILEID_H
 #define MARBLE_TILEID_H
 
-#include <QHash>
 #include <QString>
 
 #include "marble_export.h"

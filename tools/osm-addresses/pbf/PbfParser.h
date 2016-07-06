@@ -20,7 +20,6 @@
 #include "../OsmParser.h"
 
 #include <QString>
-#include <QHash>
 #include <QSet>
 #include <QFile>
 #include <QDataStream>
