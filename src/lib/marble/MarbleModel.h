@@ -33,7 +33,6 @@
 #include <QList>
 #include <QObject>
 #include <QString>
-#include <QVector>
 
 #include "MarbleGlobal.h"
 #include "GeoDataCoordinates.h"

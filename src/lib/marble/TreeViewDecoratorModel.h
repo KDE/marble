@@ -14,7 +14,6 @@
 
 #include <QSortFilterProxyModel>
 #include <QWidget>
-#include <QVector>
 
 namespace Marble
 {

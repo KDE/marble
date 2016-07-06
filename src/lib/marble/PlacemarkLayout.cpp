@@ -15,7 +15,6 @@
 #include <QAbstractItemModel>
 #include <QList>
 #include <QPoint>
-#include <QVector>
 #include <QVectorIterator>
 #include <QFont>
 #include <QFontMetrics>

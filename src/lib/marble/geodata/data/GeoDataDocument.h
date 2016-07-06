@@ -26,7 +26,6 @@
 
 #include <QHash>
 #include <QMetaType>
-#include <QVector>
 
 #include "geodata_export.h"
 

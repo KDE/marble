@@ -27,9 +27,6 @@
 #include "osm/OsmObjectManager.h"
 
 
-//Qt
-#include <QVector>
-
 namespace Marble
 {
 

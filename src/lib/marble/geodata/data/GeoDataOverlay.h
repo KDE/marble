@@ -15,7 +15,6 @@
 #include "geodata_export.h"
 #include "GeoDataFeature.h"
 
-#include <QVector>
 #include <QColor>
 #include <QImage>
 

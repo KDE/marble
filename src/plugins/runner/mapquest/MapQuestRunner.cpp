@@ -20,7 +20,6 @@
 #include "routing/RouteRequest.h"
 
 #include <QString>
-#include <QVector>
 #include <QUrl>
 #include <QTime>
 #include <QTimer>

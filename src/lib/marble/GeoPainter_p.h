@@ -11,8 +11,6 @@
 #ifndef MARBLE_GEOPAINTERPRIVATE_H
 #define MARBLE_GEOPAINTERPRIVATE_H
 
-#include <QVector>
-
 #include "MarbleGlobal.h"
 //#include "GeoPainter.h"
 

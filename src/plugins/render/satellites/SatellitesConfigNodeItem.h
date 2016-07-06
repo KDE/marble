@@ -12,6 +12,7 @@
 #define MARBLE_SATELLITESCONFIGNODEITEM_H
 
 #include "SatellitesConfigAbstractItem.h"
+#include <QVector>
 
 namespace Marble
 {

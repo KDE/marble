@@ -18,7 +18,6 @@
 #include "HttpDownloadManager.h"
 
 #include <QString>
-#include <QVector>
 #include <QUrl>
 #include <QTimer>
 #include <QNetworkAccessManager>
