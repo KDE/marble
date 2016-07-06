@@ -16,7 +16,6 @@
 #include <QPainter>
 #include <QMouseEvent>
 #include <QPixmapCache>
-#include <QPainterPath>
 
 namespace Marble
 {

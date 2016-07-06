@@ -24,13 +24,13 @@
 #include <QIcon>
 #include <QRect>
 #include <QVector>
-#include <QPainterPath>
 #include <QPolygonF>
 
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataCoordinates.h"
 #include "marble_export.h"
 
+class QPainterPath;
 class QString;
 
 namespace Marble

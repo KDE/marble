@@ -20,7 +20,6 @@
  */
 
 #include <QSize>
-#include <QPainterPath>
 
 #include "GeoDataLatLonAltBox.h"
 
@@ -29,6 +28,7 @@
 #include "marble_export.h"
 
 class QPolygonF;
+class QPainterPath;
 
 namespace Marble
 {
