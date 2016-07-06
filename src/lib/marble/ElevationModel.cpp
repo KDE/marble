@@ -24,6 +24,7 @@
 #include "PluginManager.h"
 
 #include <QLabel>
+#include <QCache>
 #include <qmath.h>
 
 namespace Marble

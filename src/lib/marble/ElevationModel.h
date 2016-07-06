@@ -16,7 +16,6 @@
 #include "marble_export.h"
 
 #include <QObject>
-#include <QCache>
 #include <QImage>
 
 namespace Marble
