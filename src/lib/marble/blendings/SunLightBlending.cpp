@@ -22,6 +22,7 @@
 #include "MarbleGlobal.h"
 
 #include <QImage>
+#include <QColor>
 
 #include <cmath>
 

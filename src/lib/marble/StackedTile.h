@@ -16,7 +16,6 @@
 
 #include <QSharedPointer>
 #include <QVector>
-#include <QColor>
 #include <QImage>
 
 #include "Tile.h"

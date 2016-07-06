@@ -17,7 +17,6 @@
 
 #include <QObject>
 #include <QList>
-#include <QColor>
 
 namespace Marble
 {

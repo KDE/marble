@@ -26,6 +26,8 @@
 #include "GeoSceneFilter.h"
 #include "DgmlAuxillaryDictionary.h"
 
+#include <QColor>
+
 namespace Marble
 {
 

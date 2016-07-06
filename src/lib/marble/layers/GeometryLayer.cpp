@@ -50,7 +50,6 @@
 #include <qmath.h>
 #include <QAbstractItemModel>
 #include <QModelIndex>
-#include <QColor>
 
 namespace Marble
 {

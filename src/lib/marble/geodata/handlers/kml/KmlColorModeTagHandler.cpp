@@ -21,8 +21,6 @@
 
 #include "KmlColorModeTagHandler.h"
 
-#include <QColor>
-
 #include "MarbleDebug.h"
 #include "KmlElementDictionary.h"
 #include "GeoDataColorStyle.h"

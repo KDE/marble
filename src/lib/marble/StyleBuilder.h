@@ -14,8 +14,9 @@
 #include <GeoDataStyle.h>
 #include <GeoDataFeature.h>
 
-#include <QColor>
 #include <QFont>
+
+class QColor;
 
 namespace Marble {
 class OsmPlacemarkData;
