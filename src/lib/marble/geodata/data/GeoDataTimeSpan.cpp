@@ -16,6 +16,7 @@
 
 // Qt
 #include <QDataStream>
+#include <QDateTime>
 
 // GeoData
 #include "GeoDataTypes.h"

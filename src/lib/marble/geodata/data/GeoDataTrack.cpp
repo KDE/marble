@@ -17,10 +17,11 @@
 #include "Quaternion.h"
 
 #include "GeoDataLineString.h"
+#include "GeoDataExtendedData.h"
 
 #include <QMap>
+#include <QDateTime>
 #include <QLinkedList>
-#include "GeoDataExtendedData.h"
 
 namespace Marble {
 

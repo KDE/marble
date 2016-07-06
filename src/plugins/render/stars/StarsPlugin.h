@@ -24,7 +24,6 @@
 #include "Quaternion.h"
 #include "DialogConfigurationInterface.h"
 
-class QDateTime;
 class QMenu;
 class SolarSystem;
 

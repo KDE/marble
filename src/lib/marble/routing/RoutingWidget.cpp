@@ -40,7 +40,6 @@
 #include "MarbleMath.h"
 #include "Planet.h"
 
-#include <QTime>
 #include <QTimer>
 #include <QSortFilterProxyModel>
 #include <QComboBox>

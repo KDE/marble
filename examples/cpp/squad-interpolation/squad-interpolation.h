@@ -18,7 +18,6 @@
 #include <GeoDataLineString.h>
 #include <marble/LayerInterface.h>
 
-#include <QTime>
 #include <QApplication>
 #include <QKeyEvent>
 

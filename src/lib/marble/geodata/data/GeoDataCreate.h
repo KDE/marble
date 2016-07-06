@@ -12,7 +12,6 @@
 #define GEODATACREATE_H
 
 #include <QString>
-#include <QDateTime>
 
 #include "GeoDataContainer.h"
 #include "marble_export.h"

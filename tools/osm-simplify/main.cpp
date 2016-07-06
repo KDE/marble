@@ -16,7 +16,6 @@
 #include <QCommandLineParser>
 #include <QDebug>
 #include <QFileInfo>
-#include <QTime>
 #include <QDir>
 #include <QString>
 

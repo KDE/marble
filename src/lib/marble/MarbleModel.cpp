@@ -19,7 +19,6 @@
 
 #include <QAtomicInt>
 #include <QPointer>
-#include <QTime>
 #include <QAbstractItemModel>
 #include <QItemSelectionModel>
 #include <QSortFilterProxyModel>

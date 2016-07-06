@@ -12,6 +12,8 @@
 
 #include "PositionProviderPlugin.h"
 
+#include <QDateTime>
+
 class QUdpSocket;
 
 namespace Marble

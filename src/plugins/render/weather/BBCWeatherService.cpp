@@ -25,7 +25,6 @@
 #include "MarbleGlobal.h"
 
 // Qt
-#include <QTime>
 #include <QUrl>
 
 using namespace Marble;

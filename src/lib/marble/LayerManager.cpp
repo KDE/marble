@@ -26,6 +26,8 @@
 #include "LayerInterface.h"
 #include "RenderState.h"
 
+#include <QTime>
+
 namespace Marble
 {
 

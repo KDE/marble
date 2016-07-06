@@ -12,12 +12,13 @@
 #define GEODATANETWORKLINKCONTROL_H
 
 #include <QString>
-#include <QDateTime>
 
 #include "GeoDataContainer.h"
 #include "GeoDataUpdate.h"
 #include "GeoDataAbstractView.h"
 #include "marble_export.h"
+
+class QDateTime;
 
 namespace Marble
 {

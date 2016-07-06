@@ -12,7 +12,6 @@
 
 #include <QBuffer>
 #include <QDataStream>
-#include <QDateTime>
 #include <QFile>
 #include <QThread>
 

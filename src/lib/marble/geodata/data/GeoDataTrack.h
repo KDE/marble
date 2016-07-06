@@ -14,8 +14,9 @@
 #include "GeoDataCoordinates.h"
 #include "GeoDataGeometry.h"
 
-#include <QDateTime>
 #include <QList>
+
+class QDateTime;
 
 namespace Marble {
 

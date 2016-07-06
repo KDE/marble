@@ -15,6 +15,8 @@
 #include "GeoDataFlyTo.h"
 #include "GeoDataCoordinates.h"
 
+#include <QDateTime>
+
 namespace Marble
 {
 class PlaybackFlyToItem : public PlaybackItem

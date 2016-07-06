@@ -27,6 +27,8 @@
 #include "KmlOsmPlacemarkDataTagWriter.h"
 #include "OsmPlacemarkData.h"
 
+#include <QDateTime>
+
 namespace Marble
 {
 

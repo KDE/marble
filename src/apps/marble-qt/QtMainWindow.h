@@ -16,7 +16,6 @@
 
 
 #include <QMainWindow>
-#include <QDateTime>
 #include <QVariantMap>
 #include "ControlView.h"
 

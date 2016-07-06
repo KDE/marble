@@ -19,6 +19,8 @@
 #include "KmlElementDictionary.h"
 #include "KmlObjectTagWriter.h"
 
+#include <QDateTime>
+
 namespace Marble
 {
 

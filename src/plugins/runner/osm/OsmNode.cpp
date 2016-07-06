@@ -16,7 +16,6 @@
 #include <GeoDataStyle.h>
 #include <GeoDataIconStyle.h>
 #include <MarbleDirs.h>
-#include <QDate>
 
 namespace Marble {
 

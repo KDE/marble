@@ -29,7 +29,6 @@
 
 #include "marble_export.h"
 
-#include <QDateTime>
 #include <QObject>
 #include <QString>
 
@@ -39,6 +38,7 @@
 class QItemSelectionModel;
 class QAbstractItemModel;
 class QTextDocument;
+class QDateTime;
 
 namespace Marble
 {

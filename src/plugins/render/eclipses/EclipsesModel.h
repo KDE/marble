@@ -12,7 +12,6 @@
 #define MARBLE_ECLIPSESMODEL_H
 
 #include <QAbstractItemModel>
-#include <QDateTime>
 
 #include "GeoDataCoordinates.h"
 #include "MarbleModel.h"

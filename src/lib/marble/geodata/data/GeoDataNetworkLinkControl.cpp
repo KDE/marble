@@ -13,6 +13,8 @@
 #include "GeoDataCamera.h"
 #include "GeoDataLookAt.h"
 
+#include <QDateTime>
+
 namespace Marble
 {
 

@@ -24,6 +24,8 @@
 
 #include "src/lib/astro/solarsystem.h"
 
+#include <QDateTime>
+
 #include <cmath>
 // M_PI is sometimes defined in <cmath>
 #ifndef M_PI 

@@ -25,7 +25,6 @@
 #include <GeoDataTreeModel.h>
 #include <GeoDataTypes.h>
 // Qt
-#include <QTimer>
 #include <QPainter>
 
 static const int timeoutTime = 5000; // in msec

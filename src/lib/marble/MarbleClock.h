@@ -15,7 +15,8 @@
 #include "geodata_export.h"
 
 #include <QObject>
-#include <QDateTime>
+
+class QDateTime;
 
 namespace Marble
 {

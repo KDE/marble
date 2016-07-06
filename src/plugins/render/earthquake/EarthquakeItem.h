@@ -14,7 +14,7 @@
 
 #include "AbstractDataPluginItem.h"
 
-#include <QDate>
+#include <QDateTime>
 #include <QFont>
 
 namespace Marble

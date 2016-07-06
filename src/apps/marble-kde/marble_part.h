@@ -16,7 +16,6 @@
 
 #include <kparts/readonlypart.h>
 #include <QHash>
-#include <QDateTime>
 #include "MarbleGlobal.h"
 #include "cloudsync/CloudSyncManager.h"
 #include <krecentfilesaction.h>

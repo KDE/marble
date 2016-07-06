@@ -24,7 +24,6 @@
 #include <QDir>
 #include <QUrl>
 #include <QFile>
-#include <QTimer>
 #include <QPointer>
 #include <QScriptValue>
 #include <QScriptEngine>

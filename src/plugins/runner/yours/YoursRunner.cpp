@@ -21,7 +21,6 @@
 #include <QString>
 #include <QVector>
 #include <QUrl>
-#include <QTime>
 #include <QNetworkReply>
 #include <QDomDocument>
 #include <QBuffer>

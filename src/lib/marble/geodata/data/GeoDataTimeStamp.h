@@ -12,12 +12,13 @@
 #define MARBLE_GEODATATIMESTAMP_H
 
 #include <QString>
-#include <QDateTime>
 
 #include "GeoDataObject.h"
 #include "GeoDataTimePrimitive.h"
 
 #include "geodata_export.h"
+
+class QDateTime;
 
 namespace Marble
 {

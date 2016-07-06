@@ -26,7 +26,6 @@
 
 #include <QProcess>
 #include <QDirIterator>
-#include <QTimer>
 #include <QLocalSocket>
 #include <QThread>
 #include <QTextStream>

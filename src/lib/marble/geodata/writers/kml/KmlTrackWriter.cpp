@@ -16,6 +16,8 @@
 #include "KmlElementDictionary.h"
 #include "KmlObjectTagWriter.h"
 
+#include <QDateTime>
+
 using namespace Marble;
 
 static GeoTagWriterRegistrar s_writerPoint( GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataTrackType,
