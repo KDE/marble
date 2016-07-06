@@ -12,7 +12,6 @@
 #include "FileViewWidget.h"
 
 // Qt
-#include <QSortFilterProxyModel>
 #include <QFileDialog>
 #include <QMenu>
 #include <QAction>

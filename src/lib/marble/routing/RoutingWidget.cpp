@@ -41,7 +41,6 @@
 #include "Planet.h"
 
 #include <QTimer>
-#include <QSortFilterProxyModel>
 #include <QComboBox>
 #include <QPainter>
 #include <QFileDialog>

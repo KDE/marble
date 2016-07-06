@@ -20,8 +20,8 @@
 #include <QHash>
 #include <QRect>
 #include <QSet>
+#include <QMap>
 #include <QVector>
-#include <QSortFilterProxyModel>
 
 #include "GeoDataFeature.h"
 #include <GeoDataStyle.h>
