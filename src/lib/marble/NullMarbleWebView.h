@@ -12,9 +12,10 @@
 #define NULLMARBLEWEBVIEW_H
 
 #include <QWidget>
-#include <QUrl>
 
 #include "marble_export.h"
+
+class QUrl;
 
 class MARBLE_EXPORT MarbleWebView : public QWidget
 {

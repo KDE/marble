@@ -96,7 +96,7 @@ QWebView *TinyWebBrowser::createWindow( QWebPage::WebWindowType type )
     return view;
 }
 
-void TinyWebBrowser::openExternalLink( QUrl url )
+void TinyWebBrowser::openExternalLink( const QUrl& url )
 {
     QDesktopServices::openUrl( url );
 }

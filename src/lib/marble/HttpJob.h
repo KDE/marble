@@ -15,7 +15,6 @@
 #define MARBLE_HTTPJOB_H
 
 #include <QObject>
-#include <QUrl>
 #include <QNetworkReply>
 
 #include "MarbleGlobal.h"
@@ -25,6 +24,7 @@
 class QNetworkAccessManager;
 class QString;
 class QByteArray;
+class QUrl;
 
 namespace Marble
 {

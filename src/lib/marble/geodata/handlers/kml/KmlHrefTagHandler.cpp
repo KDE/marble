@@ -21,8 +21,6 @@
 
 #include "KmlHrefTagHandler.h"
 
-#include <QUrl>
-
 #include "MarbleDebug.h"
 #include "KmlElementDictionary.h"
 #include "GeoDataIconStyle.h"

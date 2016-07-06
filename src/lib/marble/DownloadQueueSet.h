@@ -21,9 +21,10 @@
 #include <QObject>
 #include <QSet>
 #include <QStack>
-#include <QUrl>
 
 #include "DownloadPolicy.h"
+
+class QUrl;
 
 namespace Marble
 {

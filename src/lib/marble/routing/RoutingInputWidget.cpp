@@ -34,7 +34,6 @@
 #include "GoToDialog.h"
 
 #include <QTimer>
-#include <QUrl>
 #include <QHBoxLayout>
 #include <QIcon>
 #include <QPushButton>

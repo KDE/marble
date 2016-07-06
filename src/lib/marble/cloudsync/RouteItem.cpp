@@ -10,6 +10,8 @@
 
 #include "RouteItem.h"
 
+#include <QUrl>
+
 namespace Marble {
 
 class Q_DECL_HIDDEN RouteItem::Private {

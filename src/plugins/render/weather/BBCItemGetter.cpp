@@ -16,7 +16,6 @@
 
 // Qt
 #include <QMutexLocker>
-#include <QUrl>
 
 using namespace Marble;
 

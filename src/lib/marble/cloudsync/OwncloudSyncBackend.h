@@ -16,9 +16,10 @@
 
 #include <QObject>
 #include <QDir>
-#include <QUrl>
 #include <QVector>
 #include <QNetworkReply>
+
+class QUrl;
 
 namespace Marble {
 

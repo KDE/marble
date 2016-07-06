@@ -24,6 +24,7 @@
 #include <QFileInfo>
 #include <QMetaType>
 #include <QImage>
+#include <QUrl>
 
 #include "GeoSceneTextureTileDataset.h"
 #include "GeoSceneTileDataset.h"

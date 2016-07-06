@@ -17,6 +17,8 @@
 #include "DgmlElementDictionary.h"
 #include "ServerLayout.h"
 
+#include <QUrl>
+
 namespace Marble
 {
 

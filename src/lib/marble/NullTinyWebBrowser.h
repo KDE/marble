@@ -12,7 +12,6 @@
 #define NULLTINYWEBBROWSER_H
 
 // Qt
-#include <QUrl>
 #include <QWidget>
 
 // Marble

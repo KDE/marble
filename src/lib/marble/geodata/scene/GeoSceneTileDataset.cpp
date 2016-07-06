@@ -22,6 +22,7 @@
 #include "TileId.h"
 
 #include <QImage>
+#include <QUrl>
 
 namespace Marble
 {

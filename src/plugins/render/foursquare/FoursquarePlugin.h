@@ -12,7 +12,6 @@
 #define FOURSQUAREPLUGIN_H
 
 #include "AbstractDataPlugin.h"
-#include <QUrl>
 
 namespace Marble {
 
