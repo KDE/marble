@@ -15,7 +15,6 @@
 #include <QCursor>
 #include <QMouseEvent>
 #include <QPainter>
-#include <QPixmap>
 #include <QFileDialog>
 #include <QHBoxLayout>
 #include <QSvgRenderer>

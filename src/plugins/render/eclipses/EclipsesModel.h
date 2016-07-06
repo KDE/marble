@@ -13,7 +13,6 @@
 
 #include <QAbstractItemModel>
 #include <QDateTime>
-#include <QPixmap>
 
 #include "GeoDataCoordinates.h"
 #include "MarbleModel.h"

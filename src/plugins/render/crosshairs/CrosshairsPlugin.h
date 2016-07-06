@@ -17,7 +17,7 @@
 #define MARBLE_CROSSHAIRSPLUGIN_H
 
 #include <QObject>
-#include <QImageReader>
+#include <QPixmap>
 
 
 #include "RenderPlugin.h"

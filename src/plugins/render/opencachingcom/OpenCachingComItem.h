@@ -14,8 +14,6 @@
 #include "AbstractDataPluginItem.h"
 // #include "OpenCachingComCache.h"
 
-#include <QDate>
-#include <QPixmap>
 #include <QVariant>
 
 class QAction;

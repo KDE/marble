@@ -15,7 +15,6 @@
 #include <qmath.h>
 #include <QContextMenuEvent>
 #include <QRect>
-#include <QPixmap>
 #include <QToolButton>
 #include <QSlider>
 #include <QWidget>

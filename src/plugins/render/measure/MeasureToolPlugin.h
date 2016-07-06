@@ -27,6 +27,7 @@
 #include <QFont>
 #include <QPen>
 #include <QAction>
+#include <QPixmap>
 
 namespace Marble
 {

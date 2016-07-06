@@ -19,9 +19,9 @@
 
 #include <QRect>
 #include <QColor>
-#include <QPixmap>
 #include <QPushButton>
 #include <QSvgRenderer>
+#include <QImageReader>
 
 
 namespace Marble

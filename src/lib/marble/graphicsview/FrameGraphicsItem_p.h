@@ -17,7 +17,6 @@
 // Qt
 #include<QDebug>
 #include<QBrush>
-#include<QPixmapCache>
 
 namespace Marble
 {

@@ -20,7 +20,6 @@
 #include "ViewportParams.h"
 #include "MarbleGlobal.h"
 
-#include <QPixmap>
 #include <QWidget>
 #include <QRect>
 #include <QPointF>

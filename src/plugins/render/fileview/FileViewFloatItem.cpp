@@ -18,7 +18,6 @@
 #include <QListView>
 #include <QListWidget>
 #include <QMenu>
-#include <QPixmap>
 #include <QSlider>
 #include <QMouseEvent>
 

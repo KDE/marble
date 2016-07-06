@@ -14,19 +14,17 @@
 
 #include "marble_export.h"
 
-#include <QSize>
-#include <QRegion>
-
 // Marble
 #include "MarbleGlobal.h"
 #include "ClipPainter.h"
 
-
+#include <QSizeF>
 class QImage;
 class QPaintDevice;
 class QPolygonF;
 class QRect;
 class QRectF;
+class QRegion;
 class QString;
 
 

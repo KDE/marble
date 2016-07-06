@@ -18,7 +18,6 @@
 #include <QModelIndex>
 #include <QFile>
 #include <QList>
-#include <QPixmap>
 #include <QItemSelectionModel>
 
 // Marble

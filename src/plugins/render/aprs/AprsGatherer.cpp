@@ -10,8 +10,6 @@
 
 #include "AprsGatherer.h"
 
-#include <QPixmap>
-
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
 

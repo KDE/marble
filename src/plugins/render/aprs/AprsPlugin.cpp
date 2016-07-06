@@ -14,7 +14,6 @@
 #include "MarbleDebug.h"
 
 #include <QColor>
-#include <QPixmap>
 #include <QAction>
 #include <QMutexLocker>
 #include <QTcpSocket>

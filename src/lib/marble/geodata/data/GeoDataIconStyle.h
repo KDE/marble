@@ -14,12 +14,12 @@
 #define MARBLE_GEODATAICONSTYLE_H
 
 
-#include <QPixmap>
-
 #include "GeoDataColorStyle.h"
 #include "GeoDataHotSpot.h"
 
 #include "geodata_export.h"
+
+#include <QSize>
 
 namespace Marble
 {

@@ -19,19 +19,17 @@
 
 
 #include <QWidget>
-#include <QPixmap>
 #include <QPointer>
 
 #include "MarbleWidget.h"
 
-class QSplitter;
 class QPrintDialog;
 class QTextDocument;
 class QMainWindow;
 class QDockWidget;
-class QMenu;
 class QPrinter;
 class QActionGroup;
+class QPixmap;
 
 namespace Marble
 {

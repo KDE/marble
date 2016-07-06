@@ -19,7 +19,6 @@
 #include <QRect>
 #include <QColor>
 #include <QPainter>
-#include <QPixmap>
 #include <QPushButton>
 #include <QSvgRenderer>
 

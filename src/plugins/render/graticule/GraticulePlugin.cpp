@@ -27,7 +27,6 @@
 #include <QLabel>
 #include <QRect>
 #include <QColor>
-#include <QPixmap>
 #include <QSvgRenderer>
 #include <QBrush>
 #include <QColorDialog>

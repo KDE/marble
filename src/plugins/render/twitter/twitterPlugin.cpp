@@ -11,8 +11,6 @@
 #include "twitterPlugin.h"
 
 #include <QColor>
-#include <QPixmap>
-#include <QRadialGradient>
 #include <QSize>
 #include <QRegExp>
 

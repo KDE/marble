@@ -13,7 +13,6 @@
 
 #include <QFontMetrics>
 #include <QPainter>
-#include <QPixmap>
 #include <QSvgRenderer>
 
 namespace Marble

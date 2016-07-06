@@ -15,9 +15,6 @@
 #include <QAction>
 #include <QIcon>
 #include <QPainter>
-#include <QPixmap>
-#include <QMouseEvent>
-#include <QWebView>
 
 // Marble
 #include "MarbleDebug.h"

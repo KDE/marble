@@ -37,6 +37,7 @@
 #include <QMenu>
 #include <QToolBar>
 #include <QMimeData>
+#include <QPixmap>
 
 #ifdef MARBLE_DBUS
 #include <QDBusConnection>

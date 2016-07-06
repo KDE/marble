@@ -13,7 +13,6 @@
 #include "ViewportParams.h"
 
 #include <QFontMetrics>
-#include <QPixmap>
 
 #include "ui_OpenCachingCacheDialog.h"
 

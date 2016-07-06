@@ -22,19 +22,18 @@
  */
 
 
-#include <QSize>
-#include <QString>
-#include <QObject>
-#include <QFont>
-#include <QPixmap>
-
 #include "marble_export.h"
 #include "GeoDataCoordinates.h"       // In geodata/data/
 #include "RenderState.h"
 
 // Qt
+#include <QString>
+#include <QObject>
+#include <QRegion>
+
 class QAbstractItemModel;
 class QItemSelectionModel;
+class QFont;
 
 namespace Marble
 {

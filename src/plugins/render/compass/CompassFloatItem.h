@@ -12,6 +12,7 @@
 #define COMPASS_FLOAT_ITEM_H
 
 #include <QObject>
+#include <QPixmap>
 
 #include "AbstractFloatItem.h"
 #include "DialogConfigurationInterface.h"

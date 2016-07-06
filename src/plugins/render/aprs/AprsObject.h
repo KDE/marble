@@ -13,6 +13,7 @@
 
 #include <QObject>
 #include <QString>
+#include <QPixmap>
 
 #include "GeoAprsCoordinates.h"
 #include "GeoPainter.h"

@@ -14,7 +14,6 @@
 // Qt
 #include <QTime>
 #include <QImage>
-#include <QPixmap>
 #include <QString>
 #include <QVector>
 #include <QVariant>
