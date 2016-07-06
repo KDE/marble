@@ -52,6 +52,7 @@ PlacemarkPositionProviderPluginTest::PlacemarkPositionProviderPluginTest() :
     m_minTime( QDate( 2000, 1, 1 ), QTime( 0, 0 ) ),
     m_maxTime( QDate( 2000, 1, 2 ), QTime( 23, 59 ) )
 {
+    qRegisterMetaType<GeoDataCoordinates>( "GeoDataCoordinates" );
     qRegisterMetaType<GeoDataAccuracy>( "GeoDataAccuracy" );
     qRegisterMetaType<PositionProviderStatus>( "PositionProviderStatus" );
 
