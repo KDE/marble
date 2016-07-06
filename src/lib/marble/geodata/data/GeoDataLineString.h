@@ -13,7 +13,6 @@
 #ifndef MARBLE_GEODATALINESTRING_H
 #define MARBLE_GEODATALINESTRING_H
 
-#include <QFlags>
 #include <QVector>
 #include <QMetaType>
 
