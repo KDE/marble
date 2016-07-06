@@ -15,7 +15,6 @@
 #include <QCloseEvent>
 #include <QLayout>
 #include <QSplitter>
-#include <QStringListModel>
 #include <QPrintDialog>
 #include <QPrintPreviewDialog>
 #include <QPrinter>
