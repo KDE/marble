@@ -10,7 +10,6 @@
 
 #include "SqlWriter.h"
 
-#include <QVariant>
 #include <QDebug>
 #include <QSqlDatabase>
 #include <QSqlQuery>

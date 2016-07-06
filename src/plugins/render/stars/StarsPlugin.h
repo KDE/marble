@@ -16,7 +16,6 @@
 #define MARBLESTARSPLUGIN_H
 
 #include <QVector>
-#include <QVariant>
 #include <QHash>
 #include <QBrush>
 
@@ -25,6 +24,8 @@
 #include "DialogConfigurationInterface.h"
 
 class QMenu;
+class QVariant;
+
 class SolarSystem;
 
 namespace Ui

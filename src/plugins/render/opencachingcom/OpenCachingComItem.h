@@ -14,7 +14,7 @@
 #include "AbstractDataPluginItem.h"
 // #include "OpenCachingComCache.h"
 
-#include <QVariant>
+#include <QVariantMap>
 
 class QAction;
 

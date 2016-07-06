@@ -38,7 +38,6 @@
 #include <QDebug>
 #include <QFileInfo>
 #include <QDir>
-#include <QVariant>
 #include <QTemporaryFile>
 #include <QProcess>
 

@@ -13,8 +13,6 @@
 // Copyright 2012      Illya Kovalevskyy  <illya.kovalevskyy@gmail.com>
 //
 
-#include <QVariant>
-#include <QModelIndex>
 #include <QSortFilterProxyModel>
 
 #ifndef MARBLE_CELESTIALSORTFILTERPROXYMODEL_H

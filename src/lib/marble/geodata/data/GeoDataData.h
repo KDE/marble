@@ -11,11 +11,11 @@
 #ifndef MARBLE_GEODATADATA_H
 #define MARBLE_GEODATADATA_H
 
-#include <QVariant>
-
 #include "GeoDataObject.h"
 
 #include "geodata_export.h"
+
+class QVariant;
 
 namespace Marble
 {

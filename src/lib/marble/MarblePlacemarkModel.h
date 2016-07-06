@@ -19,7 +19,6 @@
 
 #include <QAbstractListModel>
 #include <QModelIndex>
-#include <QVariant>
 
 #include "marble_export.h"
 

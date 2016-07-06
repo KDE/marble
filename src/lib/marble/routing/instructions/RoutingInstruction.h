@@ -17,7 +17,6 @@
 
 #include <QTextStream>
 #include <QVector>
-#include <QVariant>
 
 namespace Marble
 {

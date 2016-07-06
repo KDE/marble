@@ -11,11 +11,12 @@
 #ifndef MARBLE_SATELLITESMODEL_H
 #define MARBLE_SATELLITESMODEL_H
 
-#include <QVariant>
 #include <QStringList>
 #include <QVector>
 
 #include "TrackerPluginModel.h"
+
+class QVariant;
 
 namespace Marble {
 

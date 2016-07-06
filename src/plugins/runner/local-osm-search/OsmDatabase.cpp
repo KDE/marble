@@ -20,7 +20,6 @@
 #include "PositionTracking.h"
 
 #include <QDataStream>
-#include <QVariant>
 #include <QTime>
 
 #include <QSqlDatabase>

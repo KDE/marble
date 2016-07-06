@@ -11,7 +11,6 @@
 #include "logger.h"
 
 #include <QDebug>
-#include <QVariant>
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QSqlError>

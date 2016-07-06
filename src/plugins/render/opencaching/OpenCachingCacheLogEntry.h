@@ -14,7 +14,8 @@
 #include <QString>
 #include <QDateTime>
 #include <QHash>
-#include <QVariant>
+
+class QVariant;
 
 namespace Marble
 {

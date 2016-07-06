@@ -15,7 +15,6 @@
 #include <QTime>
 #include <QVector>
 #include <QVariant>
-#include <QVariantList>
 #include <QStringList>
 #include <QDir>
 

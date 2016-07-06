@@ -22,6 +22,8 @@
 #include "GeoDataPoint.h"
 #include "osm/OsmPlacemarkData.h"
 
+#include <QVariant>
+
 namespace Marble
 {
 namespace kml

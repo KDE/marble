@@ -14,10 +14,10 @@
 #include "GeoDataPlacemark.h"
 
 #include <QLabel>
-#include <QVariant>
 #include <QPushButton>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
+#include <QVariant>
 
 namespace Marble {
 

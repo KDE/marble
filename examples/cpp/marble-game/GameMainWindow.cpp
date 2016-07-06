@@ -23,7 +23,6 @@
 #include <QDebug>
 #include <QString>
 #include <QVector>
-#include <QVariantList>
 #include <QVBoxLayout>
 #include <QQuickView>
 #include <QQuickItem>

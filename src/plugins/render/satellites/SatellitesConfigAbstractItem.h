@@ -12,7 +12,8 @@
 #define MARBLE_SATELLITESCONFIGABSTRACTITEM_H
 
 #include <QHash>
-#include <QVariant>
+
+class QVariant;
 
 namespace Marble
 {

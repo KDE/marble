@@ -11,9 +11,6 @@
 // Self
 #include "osm/OsmPlacemarkData.h"
 
-// Qt
-#include <QVariant>
-
 // Marble
 #include "GeoDataPlacemark.h"
 #include "GeoDataExtendedData.h"
