@@ -14,12 +14,11 @@
 #ifndef MARBLE_GEODATACOLORSTYLE_H
 #define MARBLE_GEODATACOLORSTYLE_H
 
-
-#include <QColor>
-
 #include "GeoDataObject.h"
 
 #include "geodata_export.h"
+
+class QColor;
 
 namespace Marble
 {

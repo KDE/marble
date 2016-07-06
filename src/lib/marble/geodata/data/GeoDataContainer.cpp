@@ -27,6 +27,7 @@
 #include "GeoDataScreenOverlay.h"
 #include "GeoDataTour.h"
 
+#include <QDataStream>
 
 namespace Marble
 {

@@ -15,9 +15,7 @@
 #define MARBLE_GEODATAPLACEMARK_H
 
 
-#include <QChar>
 #include <QDateTime>
-#include <QXmlStreamWriter>
 
 #include "GeoDataPoint.h"
 #include "GeoDataLineString.h"
@@ -28,6 +26,8 @@
 #include "GeoDataFeature.h"
 
 #include "geodata_export.h"
+
+class QXmlStreamWriter;
 
 namespace Marble
 {

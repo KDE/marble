@@ -15,6 +15,7 @@
 #include "GeoDataPlacemark.h"
 #include "OsmPlacemarkData.h"
 
+#include <QPolygonF>
 #include <QDebug>
 
 ShpCoastlineProcessor::ShpCoastlineProcessor(GeoDataDocument* document) :

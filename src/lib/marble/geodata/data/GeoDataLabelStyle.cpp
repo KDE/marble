@@ -12,6 +12,7 @@
 #include "GeoDataLabelStyle.h"
 
 #include <QFont>
+#include <QColor>
 #include <QDataStream>
 
 #include "GeoDataTypes.h"

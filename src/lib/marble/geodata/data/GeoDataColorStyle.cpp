@@ -15,6 +15,7 @@
 
 #include <cstdlib>
 #include <QDataStream>
+#include <QColor>
 
 namespace Marble
 {

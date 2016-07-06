@@ -11,6 +11,9 @@
 #include "GeoDataItemIcon.h"
 #include "GeoDataTypes.h"
 
+#include <QString>
+#include <QImage>
+
 namespace Marble
 {
 

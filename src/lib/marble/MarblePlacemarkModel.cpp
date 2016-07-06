@@ -16,6 +16,7 @@
 
 // Qt
 #include <QTime>
+#include <QImage>
 
 // Marble
 #include "MarbleDebug.h"

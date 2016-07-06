@@ -12,6 +12,8 @@
 #include "GeoDataTypes.h"
 #include "MarbleDirs.h"
 
+#include <QDataStream>
+
 namespace Marble
 {
 

@@ -11,10 +11,11 @@
 #ifndef GEODATAITEMICON_H
 #define GEODATAITEMICON_H
 
-#include <QImage>
 #include <QFlags>
 
 #include "GeoDataObject.h"
+
+class QImage;
 
 namespace Marble
 {
