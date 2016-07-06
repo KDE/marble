@@ -22,7 +22,6 @@
 
 #include <QString>
 #include <QImage>
-#include <QPen>
 #include <QBrush>
 
 namespace Marble

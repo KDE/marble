@@ -27,7 +27,6 @@
 
 #include <QDialog>
 #include <QColor>
-#include <QPen>
 #include <QPushButton>
 #include <QCheckBox>
 #include <QTextDocument>
