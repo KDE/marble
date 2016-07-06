@@ -18,7 +18,6 @@
 
 // Qt
 #include <QList>
-#include <QSet>
 #include <QPainter>
 #include <QPixmap>
 #include <QMouseEvent>

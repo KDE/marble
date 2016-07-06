@@ -21,7 +21,6 @@
 
 #include <QObject>
 #include <QFileInfo>
-#include <QMap>
 #include <QHash>
 #include <QList>
 #include <QPair>

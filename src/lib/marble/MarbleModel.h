@@ -30,7 +30,6 @@
 #include "marble_export.h"
 
 #include <QDateTime>
-#include <QList>
 #include <QObject>
 #include <QString>
 

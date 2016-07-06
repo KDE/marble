@@ -19,7 +19,6 @@
 #include "ui_MarbleCloudSyncSettingsWidget.h"
 
 // Qt
-#include <QList>
 #include <QSettings>
 #include <QNetworkProxy>
 #include <QApplication>

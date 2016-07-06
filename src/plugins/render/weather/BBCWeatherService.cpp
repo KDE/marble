@@ -26,7 +26,6 @@
 
 // Qt
 #include <QFile>
-#include <QList>
 #include <QTime>
 #include <QUrl>
 

@@ -14,6 +14,7 @@
 #include "AbstractWeatherService.h"
 
 #include <QStringList>
+#include <QList>
 
 namespace Marble
 {

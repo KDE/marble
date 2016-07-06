@@ -22,8 +22,6 @@
 #include "GeoDataPolygon.h"
 
 #include <QFileInfo>
-#include <QMap>
-#include <QList>
 #include <QPair>
 #include <QXmlDefaultHandler>
 

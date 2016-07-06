@@ -14,7 +14,6 @@
 #include "marble_export.h"
 
 #include <QPointF>
-#include <QList>
 #include <QSizeF>
 #include <QRectF>
 #include <QString>

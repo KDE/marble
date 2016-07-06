@@ -9,7 +9,6 @@
 //
 
 #include <QTest>
-#include <QList>
 #include <QDebug>
 #include "GeoDataDocument.h"
 #include "GeoDataFolder.h"

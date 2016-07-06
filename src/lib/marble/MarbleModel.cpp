@@ -21,7 +21,6 @@
 #include <QPointer>
 #include <QTime>
 #include <QAbstractItemModel>
-#include <QSet>
 #include <QItemSelectionModel>
 #include <QSortFilterProxyModel>
 #include <QTextDocument>

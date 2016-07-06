@@ -23,7 +23,6 @@
 #include <QTreeWidget>
 #include <QMenu>
 #include <QLineEdit>
-#include <QList>
 
 namespace Marble
 {

@@ -15,9 +15,6 @@
 #include "ScreenGraphicsItem.h"
 #include "marble_export.h"
 
-// Qt
-#include <QList>
-
 class QWidget;
 
 namespace Marble

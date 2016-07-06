@@ -15,7 +15,6 @@
 #include "GeoDataCoordinates.h"
 #include "OsmPlacemark.h"
 
-#include <QList>
 #include <QString>
 
 namespace Marble {

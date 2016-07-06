@@ -13,7 +13,6 @@
 
 // Qt
 #include <QObject>
-#include <QList>
 
 // Marble
 #include <marble_export.h>

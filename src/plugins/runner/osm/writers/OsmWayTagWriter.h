@@ -11,8 +11,6 @@
 #ifndef MARBLE_OSMWAYTAGWRITER_H
 #define MARBLE_OSMWAYTAGWRITER_H
 
-#include <QMap>
-
 namespace Marble
 {
 

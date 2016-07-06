@@ -13,7 +13,6 @@
 
 #include "Writer.h"
 
-#include <QMap>
 #include <QPair>
 #include <QSqlQuery>
 

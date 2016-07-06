@@ -11,9 +11,6 @@
 #ifndef MARBLE_OSMTAGTAGWRITER_H
 #define MARBLE_OSMTAGTAGWRITER_H
 
-// Qt
-#include <QMap>
-
 // Marble
 #include "GeoTagWriter.h"
 

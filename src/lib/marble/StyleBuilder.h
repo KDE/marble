@@ -16,7 +16,6 @@
 
 #include <QColor>
 #include <QFont>
-#include <QList>
 
 namespace Marble {
 class OsmPlacemarkData;

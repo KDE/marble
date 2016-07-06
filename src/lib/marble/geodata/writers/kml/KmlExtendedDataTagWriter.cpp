@@ -19,7 +19,6 @@
 #include "GeoDataSchemaData.h"
 
 #include <QHash>
-#include <QList>
 
 namespace Marble
 {

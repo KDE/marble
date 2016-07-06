@@ -24,7 +24,6 @@
 #include "RoutingManager.h"
 #include "Maneuver.h"
 
-#include <QMap>
 #include <QAbstractItemModel>
 #include <QIcon>
 #include <QItemSelectionModel>

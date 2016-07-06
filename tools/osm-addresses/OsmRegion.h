@@ -13,7 +13,6 @@
 
 #include "GeoDataPolygon.h"
 
-#include <QList>
 #include <QString>
 
 namespace Marble

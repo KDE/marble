@@ -13,7 +13,6 @@
 #include "CountryByShape.h"
 
 // Qt
-#include <QList>
 #include <QVector>
 #include <QTime>
 #include <QVariant>

@@ -13,7 +13,6 @@
 #include "GeoDataTypes.h"
 #include "MarbleDebug.h"
 
-#include <QMap>
 #include <QLinkedList>
 
 namespace Marble {
