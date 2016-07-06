@@ -13,7 +13,6 @@
 #ifndef POSITION_MARKER_H
 #define POSITION_MARKER_H
 
-#include <QObject>
 #include <QHash>
 #include <QVector>
 #include <QColor>

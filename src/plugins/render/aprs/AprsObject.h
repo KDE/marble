@@ -11,7 +11,6 @@
 #ifndef APRSOBJECT_H
 #define APRSOBJECT_H
 
-#include <QObject>
 #include <QString>
 #include <QPixmap>
 

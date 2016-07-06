@@ -11,7 +11,6 @@
 #ifndef APRSPLUGIN_H
 #define APRSPLUGIN_H
 
-#include <QObject>
 #include <QMutex>
 #include <QDialog>
 

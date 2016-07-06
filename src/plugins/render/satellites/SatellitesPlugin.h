@@ -17,8 +17,6 @@
 #include "DialogConfigurationInterface.h"
 #include "SatellitesModel.h"
 
-#include <QObject>
-
 namespace Marble
 {
 

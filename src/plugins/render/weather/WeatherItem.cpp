@@ -30,7 +30,6 @@
 #include <QCoreApplication>
 #include <QDate>
 #include <QHash>
-#include <QObject>
 #include <QString>
 #include <QAction>
 #include <QBrush>

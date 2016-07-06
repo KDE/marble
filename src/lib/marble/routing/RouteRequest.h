@@ -15,7 +15,7 @@
 #include "GeoDataCoordinates.h"
 #include "RoutingProfile.h"
 
-#include <QFlags>
+#include <QObject>
 
 namespace Marble
 {

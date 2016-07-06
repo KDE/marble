@@ -15,7 +15,6 @@
 
 #include <QCoreApplication>
 #include <QDebug>
-#include <QObject>
 
 #include <TileCreator.h>
 

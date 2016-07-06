@@ -15,7 +15,6 @@
 #ifndef MARBLEGPSINFO_H
 #define MARBLEGPSINFO_H
 
-#include <QObject>
 #include <QHash>
 
 #include "AbstractFloatItem.h"

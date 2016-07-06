@@ -23,7 +23,6 @@
 #include "MarbleWidget.h"
 #include "MarbleWidgetPopupMenu.h"
 
-#include <QObject>
 #include <QFont>
 #include <QPen>
 #include <QAction>

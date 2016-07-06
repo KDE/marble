@@ -16,7 +16,6 @@
 #define MARBLEGRATICULEPLUGIN_H
 
 #include <QMap>
-#include <QObject>
 #include <QVector>
 #include <QHash>
 #include <QPen>

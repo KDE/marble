@@ -14,7 +14,6 @@
 #include "AbstractFloatItem.h"
 
 #include <QMutex>
-#include <QObject>
 #include <QTimer>
 
 namespace Marble

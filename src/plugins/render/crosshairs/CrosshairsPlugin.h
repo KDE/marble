@@ -16,7 +16,6 @@
 #ifndef MARBLE_CROSSHAIRSPLUGIN_H
 #define MARBLE_CROSSHAIRSPLUGIN_H
 
-#include <QObject>
 #include <QPixmap>
 
 

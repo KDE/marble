@@ -21,7 +21,6 @@
 #include "GeoDataLineString.h"
 #include "GeoDataPolygon.h"
 
-#include <QObject>
 #include <QFileInfo>
 #include <QMap>
 #include <QList>

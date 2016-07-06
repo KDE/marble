@@ -12,7 +12,6 @@
 #ifndef NAVIGATION_FLOAT_ITEM_H
 #define NAVIGATION_FLOAT_ITEM_H
 
-#include <QObject>
 #include <QMenu>
 
 #include "MarbleGlobal.h"

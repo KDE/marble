@@ -15,8 +15,6 @@
 #ifndef MARBLETESTPLUGIN_H
 #define MARBLETESTPLUGIN_H
 
-#include <QObject>
-
 #include "RenderPlugin.h"
 
 namespace Marble

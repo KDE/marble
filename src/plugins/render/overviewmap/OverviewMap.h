@@ -11,7 +11,6 @@
 #ifndef MARBLEOVERVIEWMAP_H
 #define MARBLEOVERVIEWMAP_H
 
-#include <QObject>
 #include <QHash>
 #include <QColor>
 #include <QPixmap>

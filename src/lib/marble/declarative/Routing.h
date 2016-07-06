@@ -11,7 +11,6 @@
 #ifndef MARBLE_DECLARATIVE_ROUTING_H
 #define MARBLE_DECLARATIVE_ROUTING_H
 
-#include <QObject>
 #include <QtQml/qqml.h>
 #include <QQuickPaintedItem>
 #include <Coordinate.h>

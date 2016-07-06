@@ -14,7 +14,6 @@
 #include "RenderPlugin.h"
 #include "DialogConfigurationInterface.h"
 
-#include <QtCore/QObject>
 #include <QMenu>
 #include <QActionGroup>
 

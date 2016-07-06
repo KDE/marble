@@ -21,7 +21,6 @@
  * @author Torsten Rahn <rahn@kde.org>
  */
 
-#include <QObject> // for QObject::tr()
 #include <QString>
 #include <QIcon>
 #include <QRect>

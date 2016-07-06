@@ -11,7 +11,6 @@
 #ifndef COMPASS_FLOAT_ITEM_H
 #define COMPASS_FLOAT_ITEM_H
 
-#include <QObject>
 #include <QPixmap>
 
 #include "AbstractFloatItem.h"

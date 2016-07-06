@@ -11,8 +11,6 @@
 #ifndef GEOCUTE_POSITIONPROVIDER_H
 #define GEOCUTE_POSITIONPROVIDER_H
 
-#include <QObject>
-
 #include "Provider.h"
 #include "Position.h"
 

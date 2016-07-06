@@ -12,7 +12,6 @@
 
 #include "../../lib/marble/LatLonEdit.h"
 
-#include <QObject>
 #include <QString>
 #include <QtPlugin>
 #include <QWidget>

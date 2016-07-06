@@ -12,8 +12,6 @@
 #ifndef MARBLELICENSE_H
 #define MARBLELICENSE_H
 
-#include <QObject>
-
 #include "AbstractFloatItem.h"
 
 class QLabel;

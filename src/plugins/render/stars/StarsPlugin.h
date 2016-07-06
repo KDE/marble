@@ -15,7 +15,6 @@
 #ifndef MARBLESTARSPLUGIN_H
 #define MARBLESTARSPLUGIN_H
 
-#include <QObject>
 #include <QVector>
 #include <QVariant>
 #include <QHash>

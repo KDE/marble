@@ -13,7 +13,7 @@
 #ifndef ELEVATIONPROFILECONTEXTMENU_H
 #define ELEVATIONPROFILECONTEXTMENU_H
 
-#include <QtCore/QObject>
+#include <QObject>
 #include <QtCore/QSignalMapper>
 #include <QMenu>
 

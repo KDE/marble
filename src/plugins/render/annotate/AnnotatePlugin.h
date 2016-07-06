@@ -19,7 +19,6 @@
 #include "GeoDataGroundOverlay.h"
 #include "GroundOverlayFrame.h"
 
-#include <QObject>
 #include <QMenu>
 #include <QSortFilterProxyModel>
 
