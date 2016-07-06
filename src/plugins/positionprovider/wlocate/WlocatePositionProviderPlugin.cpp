@@ -12,6 +12,7 @@
 
 #include <QFutureWatcher>
 #include <QtConcurrentRun>
+#include <QDateTime>
 
 #ifndef ENV_LINUX
 #define ENV_LINUX
