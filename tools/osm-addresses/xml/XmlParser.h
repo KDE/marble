@@ -22,7 +22,6 @@
 #include "GeoDataPolygon.h"
 
 #include <QFileInfo>
-#include <QPair>
 #include <QXmlDefaultHandler>
 
 namespace Marble
