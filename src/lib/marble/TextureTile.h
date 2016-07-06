@@ -26,8 +26,6 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 #include "Tile.h"
 #include "TileId.h"
 
-class QImage;
-
 namespace Marble
 {
 class Blending;

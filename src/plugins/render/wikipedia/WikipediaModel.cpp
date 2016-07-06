@@ -28,7 +28,6 @@
 #include <QUrl>
 #include <QString>
 #include <QIcon>
-#include <QImage>
 #include <QPainter>
 #include <QPixmap>
 #include <QSvgRenderer>

@@ -11,7 +11,6 @@
 #ifndef GEODATALISTSTYLE_H
 #define GEODATALISTSTYLE_H
 
-#include <QImage>
 #include <QFlags>
 #include <QVector>
 

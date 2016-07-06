@@ -26,7 +26,6 @@
 
 #include <QSize>
 
-class QImage;
 class QRegion;
 class QRect;
 

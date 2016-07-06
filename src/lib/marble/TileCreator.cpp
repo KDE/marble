@@ -20,7 +20,6 @@
 #include <QVector>
 #include <QApplication>
 #include <QImage>
-#include <QImageReader>
 #include <QPainter>
 
 #include "MarbleGlobal.h"

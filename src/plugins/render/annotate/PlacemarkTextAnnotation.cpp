@@ -16,7 +16,6 @@
 // Qt
 #include <QApplication>
 #include <QPalette>
-#include <QImage>
 #include <QDebug>
 
 // Marble

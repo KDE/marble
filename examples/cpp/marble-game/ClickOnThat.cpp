@@ -17,7 +17,6 @@
 #include <QVariant>
 #include <QVariantList>
 #include <QStringList>
-#include <QImage>
 #include <QDir>
 
 // Marble

@@ -16,8 +16,6 @@
 #include "StyleBuilder.h"
 #include "ViewportParams.h"
 
-#include <QImageReader>
-
 #include <QDebug>
 
 namespace Marble

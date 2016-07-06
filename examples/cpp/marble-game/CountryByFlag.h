@@ -18,7 +18,6 @@
 #include <marble_export.h>
 
 class QString;
-class QImage;
 
 namespace Marble
 {
