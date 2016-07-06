@@ -11,7 +11,6 @@
 #ifndef MARBLE_SATELLITESCONFIGABSTRACTITEM_H
 #define MARBLE_SATELLITESCONFIGABSTRACTITEM_H
 
-#include <QStringList>
 #include <QHash>
 #include <QVariant>
 

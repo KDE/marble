@@ -13,7 +13,6 @@
 #include "MarbleNavigator.h"
 
 #include <QtAlgorithms>
-#include <QStringListModel>
 
 #include "MarbleDebug.h"
 

@@ -13,7 +13,6 @@
 #include "TileId.h"
 
 #include <QDebug>
-#include <QStringList>
 
 namespace Marble
 {

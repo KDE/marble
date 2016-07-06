@@ -15,7 +15,6 @@
 #include "region.h"
 
 #include <QObject>
-#include <QStringList>
 #include <QVector>
 
 struct PendingJob {

@@ -16,13 +16,14 @@
 #define MARBLE_GEOSCENETILEDATASET_H
 
 #include <QList>
-#include <QStringList>
 #include <QUrl>
 #include <QVector>
 #include <QSize>
 
 #include "GeoSceneAbstractDataset.h"
 #include "MarbleGlobal.h"
+
+class QStringList;
 
 /**
  * @short Tiled dataset stored in a layer. TextureTile and VectorTile layes inherit from this class.

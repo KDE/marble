@@ -14,7 +14,6 @@
 #include <QFile>
 #include <QDebug>
 #include <QCoreApplication>
-#include <QStringList>
 #include <QFileInfo>
 #include <QDataStream>
 

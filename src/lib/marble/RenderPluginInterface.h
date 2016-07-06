@@ -12,10 +12,10 @@
 #ifndef MARBLE_RENDERPLUGININTERFACE_H
 #define MARBLE_RENDERPLUGININTERFACE_H
 
-#include <QStringList>
-
 #include "PluginInterface.h"
 #include "LayerInterface.h"
+
+class QStringList;
 
 namespace Marble
 {

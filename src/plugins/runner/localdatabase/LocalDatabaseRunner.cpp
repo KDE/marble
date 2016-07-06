@@ -19,7 +19,6 @@
 
 #include "MarbleDebug.h"
 #include <QString>
-#include <QStringList>
 #include <QVector>
 
 #include <QtDebug>

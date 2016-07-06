@@ -12,7 +12,6 @@
 #define STATIONLISTPARSER_H
 
 // Qt
-#include <QStringList>
 #include <QList>
 #include <QThread>
 #include <QXmlStreamReader>

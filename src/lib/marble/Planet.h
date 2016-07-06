@@ -14,8 +14,9 @@
 
 #include "marble_export.h"
 
-#include <QStringList>
 #include <QColor>
+
+class QStringList;
 
 namespace Marble
 {

@@ -14,13 +14,13 @@
 #define MARBLE_MAPTHEMEMANAGER_H
 
 #include <QObject>
-#include <QStringList>
 
 #include "marble_export.h"
 
 class QStandardItem;
 class QStandardItemModel;
 class QString;
+class QStringList;
 
 namespace Marble
 {

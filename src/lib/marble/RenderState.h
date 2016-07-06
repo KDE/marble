@@ -14,7 +14,6 @@
 #include "marble_export.h"
 #include "MarbleGlobal.h"
 
-#include <QStringList>
 #include <QDebug>
 
 namespace Marble {
