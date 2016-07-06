@@ -13,8 +13,9 @@
 
 #include "PositionProviderPlugin.h"
 
-#include <libgpsmm.h>
+#include <QDateTime>
 
+#include <libgpsmm.h>
 
 
 namespace Marble
