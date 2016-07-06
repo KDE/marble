@@ -28,7 +28,6 @@
 #include <QPointer>
 #include <QScriptValue>
 #include <QScriptEngine>
-#include <QTemporaryFile>
 
 namespace Marble
 {

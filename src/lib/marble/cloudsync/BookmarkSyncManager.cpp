@@ -27,7 +27,6 @@
 #include <QBuffer>
 #include <QScriptValue>
 #include <QScriptEngine>
-#include <QTemporaryFile>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QTimer>

@@ -11,7 +11,6 @@
 #include "MarbleDebug.h"
 #include <MarbleZipReader.h>
 
-#include <QTemporaryFile>
 #include <QDir>
 #include <QUuid>
 

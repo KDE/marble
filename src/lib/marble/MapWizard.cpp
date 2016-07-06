@@ -40,7 +40,6 @@
 #include <QProcess>
 #include <QSharedPointer>
 #include <QTimer>
-#include <QTemporaryFile>
 #include <QPixmap>
 #include <QMessageBox>
 #include <QFileDialog>
