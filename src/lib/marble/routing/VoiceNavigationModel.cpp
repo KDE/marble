@@ -33,6 +33,8 @@ public:
 
     qreal m_lastDistance;
 
+    qreal m_lastDistanceTraversed;
+
     Maneuver::Direction m_lastTurnType;
 
     GeoDataCoordinates m_lastTurnPoint;
@@ -72,6 +74,7 @@ VoiceNavigationModelPrivate::VoiceNavigationModelPrivate( VoiceNavigationModel* 
     m_speakerEnabled( true ),
     m_gpsStatus( PositionProviderStatusUnavailable ),
     m_lastDistance( 0.0 ),
+    m_lastDistanceTraversed( 0.0 ),
     m_lastTurnType( Maneuver::Unknown ),
     m_destinationReached( false ),
     m_deviated( false )
@@ -82,6 +85,7 @@ VoiceNavigationModelPrivate::VoiceNavigationModelPrivate( VoiceNavigationModel* 
 void VoiceNavigationModelPrivate::reset()
 {
     m_lastDistance = 0.0;
+    m_lastDistanceTraversed = 0.0;
 }
 
 QString VoiceNavigationModelPrivate::audioFile( const QString &name ) const
@@ -219,7 +223,7 @@ void VoiceNavigationModelPrivate::updateInstruction( RouteSegment segment, qreal
 //        m_output->enqueue( audioFile( "After" ) );
 //        m_output->enqueue( distanceAudio );
 //        m_output->enqueue( audioFile( "Meters" ) );
-    //    }
+//    }
 }
 
 void VoiceNavigationModelPrivate::updateInstruction( const QString &name )
@@ -363,7 +367,10 @@ void VoiceNavigationModel::update(const Route &route, qreal distanceManuever, qr
         d->reset();
     }
 
-    bool const announcement = ( d->m_lastDistance == 0 || d->m_lastDistance > 850 ) && distanceManuever <= 850;
+    qreal const distanceTraversed = route.currentSegment().distance() - distanceManuever;
+    bool const minDistanceTraversed = d->m_lastDistanceTraversed < 40 && distanceTraversed >= 40;
+    bool const announcementAfterTurn = minDistanceTraversed && distanceManuever >= 75;
+    bool const announcement = ( d->m_lastDistance > 850 || announcementAfterTurn ) && distanceManuever <= 850;
     bool const turn = ( d->m_lastDistance == 0 || d->m_lastDistance > 75 ) && distanceManuever <= 75;
     if ( announcement || turn ) {
         d->updateInstruction( route.currentSegment(), distanceManuever, turnType );
@@ -371,6 +378,7 @@ void VoiceNavigationModel::update(const Route &route, qreal distanceManuever, qr
 
     d->m_lastTurnType = turnType;
     d->m_lastDistance = distanceManuever;
+    d->m_lastDistanceTraversed = distanceTraversed;
 }
 
 QString VoiceNavigationModel::preview() const
