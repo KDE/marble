@@ -12,6 +12,9 @@
 
 #include "GpsdThread.h"
 #include "MarbleDebug.h"
+
+#include <QIcon>
+
 #include <cmath>
 
 using namespace Marble;
