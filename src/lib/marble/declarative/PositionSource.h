@@ -14,7 +14,6 @@
 #include "Coordinate.h"
 
 #include <QObject>
-#include <QtQml/qqml.h>
 
 namespace Marble {
 

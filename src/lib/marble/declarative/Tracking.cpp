@@ -17,8 +17,6 @@
 #include "ViewportParams.h"
 #include "AutoNavigation.h"
 
-#include <QQuickItem>
-
 namespace Marble {
 
 Tracking::Tracking( QObject* parent) : QObject( parent ),

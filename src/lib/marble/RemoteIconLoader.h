@@ -15,6 +15,8 @@
 
 class QString;
 class QByteArray;
+class QImage;
+class QUrl;
 
 namespace Marble
 {

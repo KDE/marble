@@ -14,6 +14,7 @@
 #include <QStyleOptionButton>
 #include <QPainter>
 #include <QApplication>
+#include <QListView>
 
 #include "TourItemDelegate.h"
 #include "MarblePlacemarkModel.h"

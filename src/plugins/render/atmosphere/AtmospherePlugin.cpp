@@ -21,6 +21,8 @@
 #include "ViewportParams.h"
 #include "MarbleModel.h"
 
+#include <QIcon>
+
 namespace Marble
 {
 

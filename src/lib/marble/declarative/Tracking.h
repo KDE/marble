@@ -14,7 +14,6 @@
 #include "PositionSource.h"
 
 #include <QObject>
-#include <QtQml/qqml.h>
 
 namespace Marble {
 class AutoNavigation;

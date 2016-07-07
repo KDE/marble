@@ -13,6 +13,7 @@
 
 #include <QCoreApplication>
 #include <QStringList>
+#include <QTextStream>
 
 #include <cmath>
 

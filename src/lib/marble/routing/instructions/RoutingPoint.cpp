@@ -10,6 +10,8 @@
 
 #include "RoutingPoint.h"
 
+#include <QTextStream>
+
 #include <cmath>
 
 namespace Marble

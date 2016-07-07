@@ -12,14 +12,13 @@
 #ifndef MARBLE_CLIPPAINTER_H
 #define MARBLE_CLIPPAINTER_H
 
-
-#include <QPointF>
 #include <QPainter>
 #include "marble_export.h"
 #include "MarbleGlobal.h"
 
 class QPaintDevice;
 class QPolygonF;
+class QPointF;
 
 namespace Marble
 {

@@ -15,6 +15,7 @@
 #include <QUrl>
 #include <QTimer>
 #include <QPointF>
+#include <QRectF>
 #include <QtAlgorithms>
 #include <QVariant>
 #include <QAbstractListModel>

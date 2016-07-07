@@ -16,8 +16,9 @@
 #ifndef MAPVIEWITEMDELEGATE_H
 #define MAPVIEWITEMDELEGATE_H
 
-#include <QListView>
 #include <QStyledItemDelegate>
+
+class QListView;
 
 namespace Marble
 {

@@ -12,9 +12,7 @@
 #define MARBLE_DECLARATIVE_NAVIGATION_H
 
 #include <QObject>
-#include <QtQml/qqml.h>
-
-class QAbstractItemModel;
+#include <QtQml>
 
 namespace Marble {
 

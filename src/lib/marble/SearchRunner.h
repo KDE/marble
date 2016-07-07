@@ -12,11 +12,11 @@
 #ifndef MARBLE_SEARCHRUNNER_H
 #define MARBLE_SEARCHRUNNER_H
 
-#include <QObject>
 #include "marble_export.h"
 
 #include "GeoDataDocument.h"
 
+#include <QObject>
 #include <QVector>
 
 namespace Marble

@@ -17,6 +17,7 @@
 
 #include "MarbleDebug.h"
 #include <QRegion>
+#include <QPainterPath>
 
 // Marble
 #include "GeoDataLineString.h"

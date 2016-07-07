@@ -15,30 +15,13 @@
 #include "marble_export.h"
 
 #include <QWidget>
-#include <QStyledItemDelegate>
-#include <QListView>
-#include "GeoDataCoordinates.h"
 
-class QItemSelection;
 class QModelIndex;
-class QDoubleSpinBox;
-class QRadioButton;
-class QLineEdit;
-class QToolButton;
-class QLabel;
 
 namespace Marble
 {
 
-class FileManager;
-class GeoDataPlacemark;
-class GeoDataLatLonBox;
-class GeoDataTreeModel;
 class GeoDataFeature;
-class GeoDataFlyTo;
-class GeoDataTourControl;
-class GeoDataWait;
-class GeoDataSoundCue;
 class GeoDataContainer;
 class MarbleWidget;
 

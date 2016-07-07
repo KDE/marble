@@ -14,7 +14,6 @@
 #define MARBLE_MARBLEINPUTHANDLER_H
 
 #include <QObject>
-#include <QRect>
 
 #include "marble_export.h"
 #include "GeoDataCoordinates.h"
@@ -29,6 +28,7 @@ class QRubberBand;
 class QCursor;
 class QTimer;
 class QString;
+class QRect;
 
 namespace Marble
 {

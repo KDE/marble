@@ -16,18 +16,12 @@
 
 #include "LayerInterface.h"
 #include <QObject>
-#include <QRunnable>
 
 #include "MarbleGlobal.h"
 #include "MarbleModel.h"
 #include "GeoDataDocument.h"
 #include "GeoDataLatLonAltBox.h"
 #include "TileId.h"
-
-#include <QSize>
-
-class QRegion;
-class QRect;
 
 namespace Marble
 {

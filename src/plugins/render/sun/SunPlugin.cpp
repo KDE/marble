@@ -17,6 +17,8 @@
 #include "GeoPainter.h"
 #include "SunLocator.h"
 
+#include <QIcon>
+
 namespace Marble
 {
 

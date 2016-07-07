@@ -27,6 +27,7 @@
 #include "GeoDataTrack.h"
 #include "GeoDataModel.h"
 #include <QString>
+#include <QXmlStreamWriter>
 
 namespace Marble
 {

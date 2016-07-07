@@ -22,7 +22,7 @@
 
 #include <QString>
 #include <QImage>
-#include <QBrush>
+#include <QColor>
 
 namespace Marble
 {

@@ -11,9 +11,7 @@
 #include "TourPlayback.h"
 
 #include <QList>
-#include <QSlider>
-#include <qurl.h>
-#include <QtCore/qnamespace.h>
+#include <QUrl>
 #include <QPointer>
 
 #include "MarbleDebug.h"

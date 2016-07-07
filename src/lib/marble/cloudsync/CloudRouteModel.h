@@ -16,8 +16,9 @@
 #include "marble_export.h"
 
 #include <QModelIndex>
-#include <QNetworkReply>
 #include <QAbstractListModel>
+
+class QNetworkReply;
 
 namespace Marble
 {

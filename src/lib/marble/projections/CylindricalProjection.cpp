@@ -21,6 +21,8 @@
 #include "GeoDataCoordinates.h"
 #include "ViewportParams.h"
 
+#include <QPainterPath>
+
 // Maximum amount of nodes that are created automatically between actual nodes.
 static const int maxTessellationNodes = 200;
 

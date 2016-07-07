@@ -17,6 +17,8 @@
 #include "MarbleModel.h"
 #include "MarbleDebug.h"
 
+#include <QIcon>
+
 using namespace Marble;
 
 PlacemarkPositionProviderPlugin::PlacemarkPositionProviderPlugin( MarbleModel *marbleModel )

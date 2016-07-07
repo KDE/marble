@@ -9,6 +9,7 @@
 #include <QApplication>
 #include <QAbstractTextDocumentLayout>
 #include <QPainter>
+#include <QListView>
 
 namespace Marble {
 

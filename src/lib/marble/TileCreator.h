@@ -12,13 +12,13 @@
 #ifndef MARBLE_TILECREATOR_H
 #define MARBLE_TILECREATOR_H
 
-
 #include <QString>
 #include <QThread>
-#include <QSize>
-#include <QImage>
 
 #include "marble_export.h"
+
+class QSize;
+class QImage;
 
 namespace Marble
 {

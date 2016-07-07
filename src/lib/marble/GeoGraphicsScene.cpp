@@ -23,7 +23,9 @@
 #include "TileId.h"
 #include "TileCoordsPyramid.h"
 #include "MarbleDebug.h"
+
 #include <QMap>
+#include <QRect>
 
 namespace Marble
 {

@@ -14,7 +14,7 @@
 
 #include <cmath>
 
-#include <QtCore/qmath.h>
+#include <qmath.h>
 #include <QRunnable>
 
 #include "MarbleGlobal.h"

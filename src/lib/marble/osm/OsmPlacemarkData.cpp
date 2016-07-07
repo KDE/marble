@@ -15,6 +15,8 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataExtendedData.h"
 
+#include <QXmlStreamAttributes>
+
 namespace Marble
 {
 

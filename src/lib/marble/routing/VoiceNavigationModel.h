@@ -16,7 +16,7 @@
 #include "Maneuver.h"
 #include "PositionTracking.h"
 
-#include <QAbstractListModel>
+#include <QObject>
 
 namespace Marble
 {

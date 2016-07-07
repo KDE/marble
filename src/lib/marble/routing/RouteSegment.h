@@ -15,7 +15,7 @@
 #include "GeoDataLineString.h"
 #include "GeoDataLatLonBox.h"
 
-#include <Qt>
+#include <QtGlobal>
 
 namespace Marble
 {

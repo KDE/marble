@@ -26,7 +26,6 @@
 #define MARBLE_STACKEDTILELOADER_H
 
 #include <QObject>
-#include <QSize>
 
 #include "GeoSceneTileDataset.h"
 #include "TileId.h"
@@ -34,6 +33,7 @@
 
 class QImage;
 class QString;
+class QSize;
 
 namespace Marble
 {

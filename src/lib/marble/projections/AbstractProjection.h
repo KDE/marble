@@ -21,16 +21,16 @@
  * @author Torsten Rahn <rahn@kde.org>
  */
 
-#include <QIcon>
-#include <QRect>
 #include <QVector>
-#include <QPolygonF>
 
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataCoordinates.h"
 #include "marble_export.h"
 
+class QIcon;
 class QPainterPath;
+class QPolygonF;
+class QRect;
 class QString;
 
 namespace Marble

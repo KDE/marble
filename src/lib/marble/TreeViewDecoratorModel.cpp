@@ -17,6 +17,8 @@
 #include "GeoDataTour.h"
 #include "MarblePlacemarkModel.h"
 
+#include <QImage>
+
 namespace Marble
 {
 

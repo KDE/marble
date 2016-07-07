@@ -14,7 +14,7 @@
 
 #include "MarbleMath.h"
 
-#include <QtGui/QPolygonF>
+#include <QPolygonF>
 #include <QDebug>
 
 BaseClipper::BaseClipper() :

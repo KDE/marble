@@ -14,7 +14,8 @@
 #define TOURITEMDELEGATE_H
 
 #include <QStyledItemDelegate>
-#include <QListView>
+
+class QListView;
 
 namespace Marble
 {

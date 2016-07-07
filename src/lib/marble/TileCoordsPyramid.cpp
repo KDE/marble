@@ -13,6 +13,8 @@
 
 #include "TileCoordsPyramid.h"
 
+#include <QRect>
+
 #include <algorithm>
 
 namespace Marble

@@ -14,6 +14,8 @@
 
 #include "RenderPlugin.h"
 
+#include <QPixmap>
+
 namespace Marble
 {
 

@@ -15,9 +15,9 @@
 #include "marble_export.h"
 
 #include <QObject>
-#include <QPoint>
 
 class QAction;
+class QPoint;
 
 namespace Marble
 {

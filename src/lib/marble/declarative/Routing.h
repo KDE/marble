@@ -11,14 +11,12 @@
 #ifndef MARBLE_DECLARATIVE_ROUTING_H
 #define MARBLE_DECLARATIVE_ROUTING_H
 
-#include <QtQml/qqml.h>
 #include <QQuickPaintedItem>
+
 #include <Coordinate.h>
 #include <Placemark.h>
 #include <routing/RoutingModel.h>
 #include <RouteRequestModel.h>
-
-class QAbstractItemModel;
 
 namespace Marble {
 

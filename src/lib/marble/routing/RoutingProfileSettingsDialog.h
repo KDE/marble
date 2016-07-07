@@ -16,7 +16,6 @@
 
 #include "RoutingRunnerPlugin.h"
 
-class QModelIndex;
 class QStandardItemModel;
 class QHBoxLayout;
 class Ui_RoutingProfileSettingsDialog;

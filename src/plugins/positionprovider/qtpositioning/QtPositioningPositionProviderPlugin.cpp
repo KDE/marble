@@ -15,6 +15,7 @@
 #include <QGeoPositionInfo>
 #include <QGeoCoordinate>
 #include <QTimer>
+#include <QIcon>
 
 namespace Marble {
 

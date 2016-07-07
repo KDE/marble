@@ -20,7 +20,7 @@
 #include "MarbleDirs.h"
 
 // Qt
-#include <QtCore/qmath.h>
+#include <qmath.h>
 
 
 namespace Marble

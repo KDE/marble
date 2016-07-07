@@ -12,6 +12,8 @@
 
 #include "SearchRunnerPlugin.h"
 
+#include <QIcon>
+
 namespace Marble
 {
 

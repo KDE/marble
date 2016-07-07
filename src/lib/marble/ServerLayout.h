@@ -11,9 +11,8 @@
 #ifndef MARBLE_SERVERLAYOUT_H
 #define MARBLE_SERVERLAYOUT_H
 
-#include <QString>
-
 class QUrl;
+class QString;
 
 namespace Marble
 {

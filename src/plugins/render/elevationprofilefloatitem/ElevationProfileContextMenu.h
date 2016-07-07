@@ -14,7 +14,7 @@
 #define ELEVATIONPROFILECONTEXTMENU_H
 
 #include <QObject>
-#include <QtCore/QSignalMapper>
+#include <QSignalMapper>
 #include <QMenu>
 
 

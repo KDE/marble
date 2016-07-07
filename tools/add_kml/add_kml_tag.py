@@ -217,7 +217,7 @@ SOURCE="""/*
 
 #include "KmltemplateTagHandler.h"
 
-#include <QtCore/QDebug>
+#include <QDebug>
 
 #include "KmlElementDictionary.h"
 

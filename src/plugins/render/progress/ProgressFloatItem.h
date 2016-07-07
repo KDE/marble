@@ -15,6 +15,7 @@
 
 #include <QMutex>
 #include <QTimer>
+#include <QIcon>
 
 namespace Marble
 {

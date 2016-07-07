@@ -15,6 +15,7 @@
 #include "MarbleLocale.h"
 
 #include <QString>
+#include <QVariant>
 
 namespace Marble
 {

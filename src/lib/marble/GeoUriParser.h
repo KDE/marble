@@ -11,8 +11,6 @@
 #ifndef MARBLE_GEOURIPARSER_H
 #define MARBLE_GEOURIPARSER_H
 
-
-#include <QChar>
 #include "Planet.h"
 #include "GeoDataCoordinates.h"
 #include "marble_export.h"

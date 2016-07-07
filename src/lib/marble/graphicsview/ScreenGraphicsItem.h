@@ -18,8 +18,6 @@
 // Qt
 #include <QList>
 
-class QPoint;
-
 namespace Marble
 {
 

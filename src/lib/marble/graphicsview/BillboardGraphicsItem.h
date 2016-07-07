@@ -15,9 +15,10 @@
 #include "marble_export.h"
 
 #include <QList>
-#include <QPointF>
 
 #include "GeoDataCoordinates.h"
+
+class QPointF;
 
 namespace Marble
 {

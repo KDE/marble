@@ -15,12 +15,13 @@
 #include <QHash>
 #include <QMetaType>
 #include <QString>
-#include <QXmlStreamAttributes>
 
 // Marble
 #include "GeoDataCoordinates.h"
 #include <marble_export.h>
 #include "GeoDocument.h"
+
+class QXmlStreamAttributes;
 
 namespace Marble
 {

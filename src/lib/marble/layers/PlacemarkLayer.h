@@ -22,7 +22,6 @@
 #include "LayerInterface.h"
 
 #include <QVector>
-#include <QColor>
 
 #include "PlacemarkLayout.h"
 

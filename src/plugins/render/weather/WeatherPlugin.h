@@ -16,8 +16,7 @@
 
 // Qt
 #include <QHash>
-
-class QIcon;
+#include <QIcon>
 
 namespace Ui
 {

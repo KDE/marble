@@ -17,8 +17,7 @@
 #include "GeoDataFeature.h"
 
 #include <QObject>
-#include <QAbstractListModel>
-#include <QQmlComponent>
+#include <QtQml>
 
 namespace Marble {
 

@@ -12,10 +12,11 @@
 #define MARBLE_OSMRELATIONMANAGERWIDGET_H
 
 #include <QWidget>
-#include <QTreeWidgetItem>
 
 #include "MarbleGlobal.h"
 #include "marble_export.h"
+
+class QTreeWidgetItem;
 
 namespace Marble
 {

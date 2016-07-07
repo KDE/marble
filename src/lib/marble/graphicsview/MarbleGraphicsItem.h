@@ -13,13 +13,12 @@
 
 #include "marble_export.h"
 
-#include <QPointF>
-#include <QSizeF>
-#include <QRectF>
-
 class QEvent;
 class QObject;
 class QPainter;
+class QRectF;
+class QSizeF;
+class QPointF;
 
 namespace Marble
 {

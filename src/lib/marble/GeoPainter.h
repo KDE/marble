@@ -21,9 +21,6 @@
 #include <QSizeF>
 class QImage;
 class QPaintDevice;
-class QPolygonF;
-class QRect;
-class QRectF;
 class QRegion;
 class QString;
 

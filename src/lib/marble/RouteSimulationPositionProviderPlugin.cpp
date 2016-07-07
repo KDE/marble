@@ -18,6 +18,8 @@
 #include "routing/RoutingManager.h"
 #include "routing/RoutingModel.h"
 
+#include <QIcon>
+
 namespace Marble
 {
 

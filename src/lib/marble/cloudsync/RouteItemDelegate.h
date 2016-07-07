@@ -3,9 +3,9 @@
 
 #include "CloudRouteModel.h"
 
-#include <QListView>
-#include <MarbleWidget.h>
 #include <QStyledItemDelegate>
+
+class QListView;
 
 namespace Marble {
 

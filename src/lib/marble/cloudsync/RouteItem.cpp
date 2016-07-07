@@ -11,6 +11,7 @@
 #include "RouteItem.h"
 
 #include <QUrl>
+#include <QIcon>
 
 namespace Marble {
 

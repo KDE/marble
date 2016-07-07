@@ -15,8 +15,6 @@
 #include "CloudRouteModel.h"
 
 #include <QDialog>
-#include <QListView>
-#include <QStyledItemDelegate>
 
 namespace Marble {
 

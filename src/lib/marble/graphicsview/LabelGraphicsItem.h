@@ -15,6 +15,8 @@
 #include "FrameGraphicsItem.h"
 #include "marble_export.h"
 
+#include <QSize>
+
 class QImage;
 class QIcon;
 

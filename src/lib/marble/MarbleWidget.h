@@ -20,7 +20,6 @@
  * @author Inge Wallin  <inge@lysator.liu.se>
  */
 
-#include <QPixmap>
 #include <QWidget>
 
 #include "GeoDataCoordinates.h"
@@ -30,9 +29,8 @@
 #include "RenderState.h"
 
 // Qt
-class QAbstractItemModel;
-class QItemSelectionModel;
 class QSettings;
+class QPixmap;
 
 namespace Marble
 {

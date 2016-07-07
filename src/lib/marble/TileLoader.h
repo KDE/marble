@@ -21,8 +21,6 @@
 #define MARBLE_TILELOADER_H
 
 #include <QObject>
-#include <QString>
-#include <QImage>
 
 #include "TileId.h"
 #include "GeoDataContainer.h"
@@ -32,6 +30,7 @@
 class QByteArray;
 class QImage;
 class QUrl;
+class QString;
 
 namespace Marble
 {

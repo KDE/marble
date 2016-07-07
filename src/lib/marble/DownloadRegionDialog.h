@@ -20,9 +20,6 @@
 #include "TileCoordsPyramid.h"
 #include "marble_export.h"
 
-class QHideEvent;
-class QShowEvent;
-
 namespace Marble
 {
 class GeoDataLatLonAltBox;

@@ -19,7 +19,6 @@
 
 class QPoint;
 class QUrl;
-class QAbstractItemModel;
 class QString;
 class QStringList;
 

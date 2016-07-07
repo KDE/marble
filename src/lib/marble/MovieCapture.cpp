@@ -17,6 +17,7 @@
 #include <QMessageBox>
 #include <QTimer>
 #include <QTime>
+#include <QFile>
 
 namespace Marble
 {

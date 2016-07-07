@@ -15,9 +15,9 @@
 #include "GenericScanlineTextureMapper.h"
 
 // Qt
-#include <QtCore/qmath.h>
-#include <QtCore/QRunnable>
-#include <QtGui/QImage>
+#include <qmath.h>
+#include <QRunnable>
+#include <QImage>
 
 // Marble
 #include "GeoPainter.h"

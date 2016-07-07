@@ -19,9 +19,9 @@
 
 #include <QObject>
 #include <QVector>
-#include <QString>
 
 class QAbstractItemModel;
+class QString;
 
 namespace Marble
 {

@@ -13,8 +13,8 @@
 #ifndef MARBLEABSTRACTPRESENTER_H
 #define MARBLEABSTRACTPRESENTER_H
 
-#include <QSharedPointer>
 #include <QList>
+
 #include "GeoDataLookAt.h"
 #include "GeoDataLatLonBox.h"
 #include "MarblePhysics.h"

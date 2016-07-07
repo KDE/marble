@@ -12,7 +12,7 @@
 #define MARBLE_DECLARATIVE_SETTINGS_H
 
 #include <QObject>
-#include <QSettings>
+#include <QVariant>
 
 class Settings : public QObject
 {

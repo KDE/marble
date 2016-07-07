@@ -10,7 +10,9 @@
 
 #include "FoursquarePlugin.h"
 #include "FoursquareModel.h"
+
 #include <QSettings>
+#include <QIcon>
 
 namespace Marble {
 

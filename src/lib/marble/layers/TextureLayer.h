@@ -17,12 +17,9 @@
 #include "MarbleGlobal.h"
 #include "GeoSceneTileDataset.h"
 
-#include <QSize>
-
 class QAbstractItemModel;
 class QImage;
-class QRegion;
-class QRect;
+class QSize;
 
 namespace Marble
 {

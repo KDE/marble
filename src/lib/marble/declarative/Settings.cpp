@@ -11,6 +11,7 @@
 #include "Settings.h"
 
 #include <QApplication>
+#include <QSettings>
 
 Settings::Settings() :
     m_organizationName( QApplication::organizationName() ),

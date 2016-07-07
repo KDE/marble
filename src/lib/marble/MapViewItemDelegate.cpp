@@ -17,7 +17,7 @@
 #include "MapViewItemDelegate.h"
 
 //Qt
-#include <QStyledItemDelegate>
+#include <QListView>
 #include <QModelIndex>
 #include <QTextDocument>
 #include <QPainter>

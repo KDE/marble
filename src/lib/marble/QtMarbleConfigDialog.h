@@ -12,7 +12,6 @@
 #define MARBLE_QTMARBLECONFIGDIALOG_H
 
 #include <QDialog>
-#include <QLocale>
 
 #include "marble_export.h"
 #include "MarbleGlobal.h"

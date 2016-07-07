@@ -16,7 +16,7 @@
 
 #include <QObject>
 #include <QString>
-#include <Qt>
+#include <QRegion>
 
 #include "RenderPluginInterface.h"
 #include "marble_export.h"

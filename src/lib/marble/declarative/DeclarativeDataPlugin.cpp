@@ -22,6 +22,7 @@
 #include <QMetaProperty>
 #include <QScriptValue>
 #include <QScriptValueIterator>
+#include <QIcon>
 
 using namespace Marble;
 

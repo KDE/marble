@@ -11,8 +11,6 @@
 
 #include "ElevationProfileMarker.h"
 
-#include <QRect>
-
 #include "MarbleLocale.h"
 #include "MarbleModel.h"
 #include "GeoDataDocument.h"
@@ -21,6 +19,9 @@
 #include "GeoDataTreeModel.h"
 #include "ViewportParams.h"
 #include "MarbleGraphicsGridLayout.h"
+
+#include <QRect>
+#include <QIcon>
 
 namespace Marble
 {

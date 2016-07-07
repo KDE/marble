@@ -15,11 +15,11 @@
 #include "GeoDataDocument.h"
 
 #include <QObject>
-#include <QDir>
 #include <QVector>
 #include <QNetworkReply>
 
 class QUrl;
+class QDir;
 
 namespace Marble {
 

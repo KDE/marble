@@ -42,6 +42,7 @@
 #include <QTextDocument>
 #include <QAbstractTextDocumentLayout>
 #include <QStyledItemDelegate>
+#include <QDateTime>
 
 using namespace Marble;
 // Ui

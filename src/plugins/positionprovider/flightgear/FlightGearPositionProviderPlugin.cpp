@@ -14,6 +14,7 @@
 #include <math.h>
 
 #include <QUdpSocket>
+#include <QIcon>
 
 using namespace Marble;
 /* TRANSLATOR Marble::FlightGearPositionProviderPlugin */

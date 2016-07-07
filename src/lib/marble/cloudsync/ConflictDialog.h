@@ -15,7 +15,9 @@
 #include "marble_export.h"
 
 #include <QDialog>
-#include <QDialogButtonBox>
+
+class QDialogButtonBox;
+class QAbstractButton;
 
 namespace Marble {
 

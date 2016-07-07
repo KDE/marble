@@ -18,6 +18,8 @@
 
 #include "MarbleDebug.h"
 
+#include <QIcon>
+
 using namespace Marble;
 
 

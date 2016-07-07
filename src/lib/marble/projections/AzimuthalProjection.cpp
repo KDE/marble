@@ -19,6 +19,8 @@
 #include "GeoDataCoordinates.h"
 #include "ViewportParams.h"
 
+#include <QPainterPath>
+
 namespace Marble {
 
 qreal AzimuthalProjection::maxValidLat() const

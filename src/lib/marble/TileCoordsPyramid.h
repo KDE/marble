@@ -14,8 +14,10 @@
 #ifndef MARBLE_TILECOORDSPYRAMID_H
 #define MARBLE_TILECOORDSPYRAMID_H
 
-#include <QRect>
+#include <QtGlobal>
 #include "marble_export.h"
+
+class QRect;
 
 namespace Marble
 {

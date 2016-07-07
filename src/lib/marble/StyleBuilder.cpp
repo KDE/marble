@@ -20,6 +20,7 @@
 
 #include <QApplication>
 #include <QFont>
+#include <QImage>
 #include <QDate>
 #include <QSet>
 #include <QScreen>

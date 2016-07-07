@@ -25,6 +25,8 @@
 #include "MarbleGlobal.h"
 #include "AzimuthalProjection_p.h"
 
+#include <QIcon>
+
 #define SAFE_DISTANCE
 
 namespace Marble

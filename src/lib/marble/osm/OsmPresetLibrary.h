@@ -13,7 +13,6 @@
 
 #include <QMap>
 #include <QPair>
-#include <QIcon>
 
 #include "GeoDataFeature.h"
 #include <GeoDataStyle.h>

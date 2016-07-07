@@ -11,6 +11,8 @@
 #include "PostalCodePlugin.h"
 #include "PostalCodeModel.h"
 
+#include <QIcon>
+
 using namespace Marble;
 
 PostalCodePlugin::PostalCodePlugin()

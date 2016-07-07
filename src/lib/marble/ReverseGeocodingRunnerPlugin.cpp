@@ -12,6 +12,8 @@
 
 #include "ReverseGeocodingRunnerPlugin.h"
 
+#include <QIcon>
+
 namespace Marble
 {
 

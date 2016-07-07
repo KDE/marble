@@ -13,7 +13,7 @@
 
 #include "GeoDataCoordinates.h"
 #include <QObject>
-#include <QtQml/qqml.h>
+#include <QtQml>
 
 /**
   * Represents a coordinate with the properties of a name and coordinates

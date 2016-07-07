@@ -18,9 +18,10 @@
 #include <QObject> // for QObject::tr()
 #include <QString>
 #include <QtPlugin>
-#include <QIcon>
 
 #include "marble_export.h"
+
+class QIcon;
 
 namespace Marble
 {

@@ -13,8 +13,12 @@
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 
+#include <QIcon>
+#include <QUrl>
 #include <QSet>
 #include <QVector>
+#include <QNetworkRequest>
+#include <QNetworkReply>
 #include <QScriptValue>
 #include <QScriptEngine>
 #include <QScriptValueIterator>

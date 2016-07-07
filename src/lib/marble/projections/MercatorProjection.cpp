@@ -22,6 +22,8 @@
 #include "GeoDataPoint.h"
 #include "MarbleMath.h"
 
+#include <QIcon>
+
 using namespace Marble;
 
 MercatorProjection::MercatorProjection()

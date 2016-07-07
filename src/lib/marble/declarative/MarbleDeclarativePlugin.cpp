@@ -34,7 +34,6 @@
 #include "SearchBackend.h"
 #include "MarbleQuickItem.h"
 
-#include <QtQml/qqml.h>
 #include <QQmlEngine>
 #include <QQmlContext>
 

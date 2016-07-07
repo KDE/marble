@@ -12,10 +12,12 @@
 #define MARBLE_ROUTINGMODEL_H
 
 #include "marble_export.h"
-#include <QAbstractListModel>
-#include <QIODevice>
 
 #include "GeoDataCoordinates.h"
+
+#include <QAbstractListModel>
+
+class QIODevice;
 
 /**
   * A QAbstractItemModel that contains a list of routing instructions.

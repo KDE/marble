@@ -19,8 +19,6 @@
 
 #include "GeoDataDocument.h"
 
-class QAbstractItemModel;
-
 namespace Marble
 {
 

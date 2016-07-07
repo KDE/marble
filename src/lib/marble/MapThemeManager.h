@@ -17,7 +17,6 @@
 
 #include "marble_export.h"
 
-class QStandardItem;
 class QStandardItemModel;
 class QString;
 class QStringList;

@@ -20,7 +20,6 @@
 class QAbstractItemModel;
 class QModelIndex;
 class QPoint;
-class QColor;
 
 namespace Marble
 {

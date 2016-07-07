@@ -16,7 +16,6 @@
 #ifndef MARBLE_MERGEDLAYERDECORATOR_H
 #define MARBLE_MERGEDLAYERDECORATOR_H
 
-#include <QSize>
 #include <QVector>
 #include <QList>
 
@@ -25,6 +24,7 @@
 
 class QImage;
 class QString;
+class QSize;
 
 namespace Marble
 {

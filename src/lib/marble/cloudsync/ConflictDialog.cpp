@@ -14,6 +14,7 @@
 #include "GeoDataPlacemark.h"
 
 #include <QLabel>
+#include <QDialogButtonBox>
 #include <QPushButton>
 #include <QHBoxLayout>
 #include <QVBoxLayout>

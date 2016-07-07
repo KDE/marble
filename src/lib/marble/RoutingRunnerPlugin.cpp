@@ -12,6 +12,8 @@
 
 #include "RoutingRunnerPlugin.h"
 
+#include <QIcon>
+
 namespace Marble
 {
 

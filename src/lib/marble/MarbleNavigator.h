@@ -29,8 +29,6 @@
  * @author Inge Wallin  <inge@lysator.liu.se>
  */
 
-class QResizeEvent;
-
 namespace Marble
 {
 

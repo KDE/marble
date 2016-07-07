@@ -15,9 +15,8 @@
 #include "LayerInterface.h"
 
 #include <QRect>
-#include <QItemSelection>
 
-class QAbstractProxyModel;
+class QItemSelectionModel;
 class QModelIndex;
 
 namespace Marble

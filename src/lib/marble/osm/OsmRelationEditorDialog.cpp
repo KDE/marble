@@ -24,6 +24,8 @@
 #include <QHBoxLayout>
 #include <QMessageBox>
 #include <QLabel>
+#include <QLineEdit>
+#include <QDialogButtonBox>
 
 namespace Marble {
 

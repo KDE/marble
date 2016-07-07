@@ -12,6 +12,8 @@
 
 #include "ParseRunnerPlugin.h"
 
+#include <QIcon>
+
 namespace Marble
 {
 

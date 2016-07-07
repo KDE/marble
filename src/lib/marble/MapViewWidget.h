@@ -21,8 +21,6 @@
 // Qt
 #include <QWidget>
 
-class QStandardItemModel;
-
 namespace Marble
 {
 

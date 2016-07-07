@@ -23,7 +23,7 @@
 #include "StyleBuilder.h"
 
 #include <QVector2D>
-#include <QtCore/qmath.h>
+#include <qmath.h>
 
 namespace Marble
 {

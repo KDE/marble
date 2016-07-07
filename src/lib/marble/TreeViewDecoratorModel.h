@@ -10,10 +10,7 @@
 #ifndef TREEVIEWDECORATORMODEL_H
 #define TREEVIEWDECORATORMODEL_H
 
-#include "GeoDataTreeModel.h"
-
 #include <QSortFilterProxyModel>
-#include <QWidget>
 
 namespace Marble
 {

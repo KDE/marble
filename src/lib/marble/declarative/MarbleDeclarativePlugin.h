@@ -12,7 +12,6 @@
 #define MARBLE_DECLARATIVE_PLUGIN_H
 
 #include "marble_declarative_export.h"
-#include "qglobal.h"
 
 #include <QQmlExtensionPlugin>
 
