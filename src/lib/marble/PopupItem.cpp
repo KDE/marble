@@ -27,13 +27,7 @@
 #include <QPrintDialog>
 #include <QMouseEvent>
 #include <QApplication>
-#include <QVBoxLayout>
-#include <QLabel>
-#include <QPushButton>
 #include <QPixmapCache>
-#include <QMenu>
-#include <QKeyEvent>
-#include <QClipboard>
 #include <qdrawutil.h>
 #include <QPainter>
 

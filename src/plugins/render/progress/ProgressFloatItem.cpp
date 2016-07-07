@@ -20,7 +20,6 @@
 
 #include <QRect>
 #include <QColor>
-#include <QMutexLocker>
 #include <QPaintDevice>
 #include <QPainter>
 

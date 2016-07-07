@@ -14,7 +14,6 @@
 #include "MarbleWidget.h"
 
 #include <QStandardItemModel>
-#include <QDialog>
 #include "MarbleModel.h"
 #include "PluginManager.h"
 #include "RoutingRunnerPlugin.h"

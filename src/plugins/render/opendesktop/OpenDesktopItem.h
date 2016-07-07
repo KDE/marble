@@ -11,10 +11,11 @@
 #ifndef OPENDESKTOPITEM_H
 #define OPENDESKTOPITEM_H
  
-#include <QAction>
 #include "AbstractDataPluginItem.h"
 #include "TinyWebBrowser.h"
 #include "MarbleWidget.h"
+
+class QAction;
 
 namespace Marble
 {

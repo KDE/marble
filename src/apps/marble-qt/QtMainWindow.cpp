@@ -36,11 +36,7 @@
 #include <QPrintDialog>
 #include <QPrinter>
 #include <QDialogButtonBox>
-#include <QHBoxLayout>
-#include <QScrollArea>
 #include <QClipboard>
-#include <QShortcut>
-#include <QDockWidget>
 #include <QNetworkProxy>
 
 #include "EditBookmarkDialog.h"

@@ -14,12 +14,12 @@
 #include <QThread>
 #include <QMap>
 #include <QString>
-#include <QAbstractSocket>
-#include <QMutex>
-#include <QIODevice>
 
 #include "AprsSource.h"
 #include "AprsObject.h"
+
+class QIODevice;
+class QMutex;
 
 namespace Marble {
         

@@ -14,9 +14,6 @@
 #include "GeoDataLookAt_p.h"
 #include "MarbleDebug.h"
 
-//Qt
-#include <QDataStream>
-
 namespace Marble
 {
 

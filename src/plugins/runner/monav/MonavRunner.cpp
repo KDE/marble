@@ -21,7 +21,6 @@
 #include "GeoDataExtendedData.h"
 #include "GeoDataPlacemark.h"
 
-#include <QProcess>
 #include <QTime>
 #include <QLocalSocket>
 

@@ -13,7 +13,6 @@
 
 // Qt
 #include <QAction>
-#include <QIcon>
 #include <QPainter>
 
 // Marble

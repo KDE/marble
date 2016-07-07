@@ -13,8 +13,6 @@
 #include "GeoDataTypes.h"
 #include "MarbleDebug.h"
 
-#include <QLinkedList>
-
 namespace Marble {
 
 class GeoDataSimpleArrayDataPrivate

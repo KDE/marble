@@ -13,8 +13,6 @@
 #include "ui_AddLinkDialog.h"
 
 // Qt
-#include <QLineEdit>
-#include <QCloseEvent>
 #include <QMessageBox>
 #include <QPushButton>
 #include <QDebug>

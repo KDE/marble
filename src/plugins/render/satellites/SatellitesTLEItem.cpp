@@ -24,13 +24,9 @@
 #include <QFile>
 #include <QDateTime>
 #include <QAction>
-#include <QLabel>
-#include <QVBoxLayout>
 #include <QColor>
 
 #include <cmath>
-#include <QDialog>
-#include <QCheckBox>
 
 namespace Marble {
 

@@ -27,7 +27,6 @@
 
 #include <QFile>
 #include <QTextFrame>
-#include <QTabWidget>
 #include <QTextStream>
 #include <QPixmap>
 

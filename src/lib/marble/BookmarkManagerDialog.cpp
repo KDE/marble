@@ -37,7 +37,6 @@
 #include <QSortFilterProxyModel>
 #include <QFileDialog>
 #include <QMessageBox>
-#include <QItemSelectionModel>
 
 namespace Marble {
 

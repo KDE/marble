@@ -13,9 +13,7 @@
 #include <QFile>
 #include <QDir>
 #include <QLocale>
-#include <QSettings>
 #include <QTranslator>
-#include <QProcessEnvironment>
 
 #include "QtMainWindow.h"
 

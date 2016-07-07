@@ -20,7 +20,6 @@
 #include <QPainter>
 #include <QPrintDialog>
 #include <QPrinter>
-#include <QTextFrame>
 
 // Marble
 #include "MarbleGlobal.h"

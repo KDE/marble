@@ -12,7 +12,6 @@
 #include <QLabel>
 #include <QHBoxLayout>
 #include <QComboBox>
-#include <QLineEdit>
 
 #include "RemoveItemEditWidget.h"
 #include "MarbleWidget.h"

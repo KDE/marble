@@ -13,6 +13,8 @@
 #include "MarbleModel.h"
 #include "Coordinate.h"
 
+#include <QCompleter>
+
 using namespace Marble;
 
 

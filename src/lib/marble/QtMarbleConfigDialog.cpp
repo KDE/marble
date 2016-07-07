@@ -23,7 +23,6 @@
 #include <QNetworkProxy>
 #include <QApplication>
 #include <QDialogButtonBox>
-#include <QStandardItem>
 #include <QTabWidget>
 #include <QVBoxLayout>
 #include <QWidget>

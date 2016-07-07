@@ -20,7 +20,6 @@
 #include "GeoSceneHead.h"
 #include "GeoSceneLicense.h"
 
-#include <QMessageBox>
 #include <QCommonStyle>
 #include <QContextMenuEvent>
 #include <QPainter>

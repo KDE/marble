@@ -20,10 +20,6 @@
 #include <QFile>
 #include <QMouseEvent>
 #include <QPainter>
-#include <QTextFrame>
-#include <QScrollBar>
-#include <QStyle>
-#include <QStyleOptionButton>
 #include <QRegExp>
 
 #ifndef MARBLE_NO_WEBKITWIDGETS

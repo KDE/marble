@@ -11,6 +11,8 @@
 #include "OpenCachingComPlugin.h"
 #include "OpenCachingComModel.h"
 
+#include <QIcon>
+
 namespace Marble {
 
 OpenCachingComPlugin::OpenCachingComPlugin()

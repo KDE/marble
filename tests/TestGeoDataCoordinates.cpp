@@ -15,7 +15,6 @@
 #include "GeoDataCoordinates.h"
 #include "TestUtils.h"
 
-#include <QApplication>
 #include <QLocale>
 #include <QDebug>
 #include <QTranslator>

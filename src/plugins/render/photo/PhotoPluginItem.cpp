@@ -38,7 +38,6 @@
 #include <QFile>
 #include <QHash>
 #include <QUrl>
-#include <QMouseEvent>
 #include <QPixmap>
 
 using namespace Marble;

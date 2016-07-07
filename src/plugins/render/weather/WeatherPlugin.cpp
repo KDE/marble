@@ -22,7 +22,6 @@
 #include "MarbleDebug.h"
 
 // Qt
-#include <QComboBox>
 #include <QDialog>
 #include <QIcon>
 #include <QPushButton>

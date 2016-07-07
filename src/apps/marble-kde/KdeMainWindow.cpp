@@ -13,8 +13,6 @@
 #include "KdeMainWindow.h"
 
 // Qt
-#include <QProgressBar>
-#include <QToolBar>
 #include <QAction>
 #include <QActionGroup>
 #include <QCoreApplication>

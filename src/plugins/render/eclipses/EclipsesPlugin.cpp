@@ -24,9 +24,8 @@
 #include "ui_EclipsesConfigDialog.h"
 #include "ui_EclipsesReminderDialog.h"
 
+#include <QMenu>
 #include <QPushButton>
-#include <QTreeWidget>
-#include <QTreeWidgetItem>
 
 namespace Marble
 {

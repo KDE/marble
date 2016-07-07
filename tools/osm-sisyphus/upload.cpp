@@ -18,7 +18,6 @@
 #include <QDir>
 #include <QTemporaryFile>
 #include <QUrl>
-#include <QDomDocument>
 
 Upload::Upload(QObject *parent) :
     QObject(parent), m_uploadFiles(true)

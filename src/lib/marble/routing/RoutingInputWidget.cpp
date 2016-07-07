@@ -38,9 +38,7 @@
 #include <QIcon>
 #include <QPushButton>
 #include <QMenu>
-#include <QToolButton>
 #include <QKeyEvent>
-#include <QDomDocument>
 #include <QPainter>
 
 namespace Marble

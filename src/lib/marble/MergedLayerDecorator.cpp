@@ -33,7 +33,6 @@
 
 #include "GeoDataCoordinates.h"
 
-#include <QMutexLocker>
 #include <QPointer>
 #include <QPainter>
 

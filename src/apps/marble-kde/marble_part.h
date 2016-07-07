@@ -30,9 +30,7 @@ class KConfigDialog;
 class KToolBar;
 
 class QLabel;
-class QPrinter;
 class QProgressBar;
-class QStandardItemModel;
 
 namespace KParts
 {

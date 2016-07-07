@@ -46,22 +46,12 @@
 #include <QDir>
 #include <QModelIndex>
 #include <QMessageBox>
-#include <QStyledItemDelegate>
-#include <QAbstractTextDocumentLayout>
 #include <QPainter>
-#include <QListView>
-#include <QApplication>
-#include <QLabel>
-#include <QDoubleSpinBox>
-#include <QRadioButton>
-#include <QHBoxLayout>
 #include <QToolButton>
-#include <QLineEdit>
-#include <QProcess>
-#include <QProgressBar>
-#include <QToolBar>
 #include <QMenu>
 #include <QUrl>
+#include <QKeyEvent>
+#include <QCloseEvent>
 
 namespace Marble
 {

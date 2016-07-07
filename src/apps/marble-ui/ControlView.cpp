@@ -14,7 +14,6 @@
 
 #include <QCloseEvent>
 #include <QLayout>
-#include <QSplitter>
 #include <QPrintDialog>
 #include <QPrintPreviewDialog>
 #include <QPrinter>
@@ -33,7 +32,6 @@
 #include <QMainWindow>
 #include <QDockWidget>
 #include <QShortcut>
-#include <QMenu>
 #include <QToolBar>
 #include <QMimeData>
 #include <QPixmap>

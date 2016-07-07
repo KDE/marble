@@ -20,7 +20,6 @@
 
 // Qt
 #include <QPushButton>
-#include <QLabel>
 
 using namespace Marble;
 /* TRANSLATOR Marble::WikipediaPlugin */

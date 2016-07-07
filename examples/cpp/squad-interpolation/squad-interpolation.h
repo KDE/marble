@@ -19,7 +19,6 @@
 #include <marble/LayerInterface.h>
 
 #include <QApplication>
-#include <QKeyEvent>
 
 namespace Marble {
 

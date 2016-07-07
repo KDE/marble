@@ -19,9 +19,6 @@
 #include <QVector>
 #include <QNetworkRequest>
 #include <QNetworkReply>
-#include <QScriptValue>
-#include <QScriptEngine>
-#include <QScriptValueIterator>
 #include <QNetworkAccessManager>
 
 namespace Marble {

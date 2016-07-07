@@ -12,9 +12,7 @@
 #define MARBLE_SATELLITESCONFIGDIALOG_H
 
 #include <QDialog>
-#include <QTreeView>
-#include <QListWidget>
-#include <QListWidgetItem>
+#include <QMap>
 
 namespace Ui {
     class SatellitesConfigDialog;

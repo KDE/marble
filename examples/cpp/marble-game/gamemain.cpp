@@ -21,9 +21,7 @@
 #include <QApplication>
 #include <QDir>
 #include <QLocale>
-#include <QSettings>
 #include <QTranslator>
-#include <QProcessEnvironment>
 #include <QDebug>
 
 using namespace Marble;

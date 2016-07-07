@@ -13,8 +13,6 @@
 #include "NewBookmarkFolderDialog.h"
 #include "MarbleDebug.h"
 
-#include <QLineEdit>
-
 namespace Marble {
 
 NewBookmarkFolderDialog::NewBookmarkFolderDialog( QWidget *parent )

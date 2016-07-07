@@ -16,7 +16,6 @@
 #include <QRect>
 
 #include <QPainterPath>
-#include <QPainterPathStroker>
 #include <QRegion>
 
 #include "MarbleDebug.h"

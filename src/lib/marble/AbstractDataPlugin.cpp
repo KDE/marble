@@ -21,14 +21,11 @@
 #include "MarbleDebug.h"
 
 // Qt
-#include <QEvent>
 #include <QTimer>
-#include <QMouseEvent>
 #include <QRegion>
 #include <QQmlComponent>
 #include <QQmlContext>
 #include <QQuickItem>
-#include <QGraphicsItem>
 
 namespace Marble
 {

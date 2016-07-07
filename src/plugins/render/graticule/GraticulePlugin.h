@@ -20,7 +20,6 @@
 #include <QPen>
 #include <QIcon>
 #include <QColorDialog>
-#include <QAbstractButton>
 
 
 #include "DialogConfigurationInterface.h"

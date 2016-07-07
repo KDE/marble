@@ -20,10 +20,7 @@
 #include <cmath>
 
 // Qt
-#include <QAbstractItemModel>
 #include <QTime>
-#include <QItemSelectionModel>
-#include <QSizePolicy>
 #include <QRegion>
 
 // Marble

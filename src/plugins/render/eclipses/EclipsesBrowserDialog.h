@@ -12,9 +12,6 @@
 #define MARBLE_ECLIPSESBROWSERDIALOG_H
 
 #include <QDialog>
-#include <QTreeView>
-#include <QListWidget>
-#include <QListWidgetItem>
 
 namespace Ui {
     class EclipsesBrowserDialog;

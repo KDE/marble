@@ -14,7 +14,6 @@
 #include <QFile>
 #include <QTextStream>
 #include <QDebug>
-#include <QProcess>
 #include <QDomDocument>
 
 JobManager::JobManager(QObject *parent) :

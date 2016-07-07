@@ -16,9 +16,6 @@
 // Qt
 #include <QWidget>
 #include <QTreeWidget>
-#include <QPushButton>
-#include <QIcon>
-#include <QBitmap>
 #include <QDebug>
 
 // Marble

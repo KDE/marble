@@ -16,7 +16,6 @@
 #include <QApplication>
 #include <QFileDialog>
 #include <QListView>
-#include <QListWidget>
 #include <QMenu>
 #include <QSlider>
 #include <QMouseEvent>

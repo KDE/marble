@@ -16,7 +16,8 @@
 #include <QHash>
 #include <QVector>
 #include <QColor>
-#include <QAbstractButton>
+#include <QPolygon>
+#include <QPixmap>
 
 #include "DialogConfigurationInterface.h"
 #include "RenderPlugin.h"

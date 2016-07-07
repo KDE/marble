@@ -25,7 +25,6 @@
 #include <QPrintDialog>
 #include <QProgressBar>
 #include <QStandardItemModel>
-#include <QShortcut>
 #include <QNetworkProxy>
 #include <QDomDocument>
 #include <QDomNodeList>

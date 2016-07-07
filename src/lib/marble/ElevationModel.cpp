@@ -23,8 +23,8 @@
 #include "TileId.h"
 #include "PluginManager.h"
 
-#include <QLabel>
 #include <QCache>
+#include <QImage>
 #include <qmath.h>
 
 namespace Marble

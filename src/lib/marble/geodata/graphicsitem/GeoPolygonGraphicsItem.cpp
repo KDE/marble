@@ -22,7 +22,6 @@
 #include "OsmPlacemarkData.h"
 #include "StyleBuilder.h"
 
-#include <QVector2D>
 #include <qmath.h>
 
 namespace Marble

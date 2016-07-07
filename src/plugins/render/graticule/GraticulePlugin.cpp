@@ -24,7 +24,6 @@
 
 // Qt
 #include <QPushButton>
-#include <QLabel>
 #include <QRect>
 #include <QColor>
 #include <QBrush>

@@ -9,7 +9,7 @@
 //
 
 #include <QApplication>
-#include <QtQuick/QQuickView>
+#include <QQuickView>
 
 #include <marble/declarative/MarbleQuickItem.h>
 #include <marble/MarbleMap.h>

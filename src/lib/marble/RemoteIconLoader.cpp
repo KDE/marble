@@ -9,7 +9,6 @@
 //
 
 // Qt
-#include <QtNetwork>
 #include <QDebug>
 #include <QString>
 #include <QHash>

@@ -18,7 +18,6 @@
 #include <QFile>
 #include <QProcess>
 #include <QSignalMapper>
-#include <QComboBox>
 #include <QPushButton>
 #include <QShowEvent>
 #include <QSortFilterProxyModel>

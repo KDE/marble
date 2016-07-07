@@ -27,9 +27,7 @@
 // Qt
 #include <QUrl>
 #include <QString>
-#include <QIcon>
 #include <QPainter>
-#include <QPixmap>
 
 #include <QUrlQuery>
 

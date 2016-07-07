@@ -11,7 +11,6 @@
 #ifndef APRSPLUGIN_H
 #define APRSPLUGIN_H
 
-#include <QMutex>
 #include <QDialog>
 
 #include "RenderPlugin.h"
@@ -21,6 +20,8 @@
 #include "GeoDataLatLonAltBox.h"
 
 #include "ui_AprsConfigWidget.h"
+
+class QMutex;
 
 namespace Ui
 {

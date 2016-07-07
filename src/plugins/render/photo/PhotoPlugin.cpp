@@ -22,7 +22,6 @@
 
 // Qt
 #include <QPushButton>
-#include <QLabel>
 #include <QStringList>
 
 using namespace Marble;

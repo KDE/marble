@@ -24,7 +24,6 @@
 #include <QStandardItemModel>
 #include <QApplication>
 #include <QPainter>
-#include <QStandardItem>
 
 using namespace Marble;
 /* TRANSLATOR Marble::PluginItemDelegate */

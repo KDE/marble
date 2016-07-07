@@ -19,11 +19,6 @@
 #include <QFileInfo>
 #include <QColorDialog>
 #include <QCheckBox>
-#include <QToolBar>
-#include <QTextEdit>
-#include <QPushButton>
-#include <QLineEdit>
-#include <QVBoxLayout>
 
 // Marble
 #include "GeoDataStyle.h"

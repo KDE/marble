@@ -14,6 +14,8 @@
 #include "ViewportParams.h"
 #include "layers/PopupLayer.h"
 
+#include <QAction>
+
 using namespace Marble;
 
 OpenDesktopItem::OpenDesktopItem(QObject *parent):

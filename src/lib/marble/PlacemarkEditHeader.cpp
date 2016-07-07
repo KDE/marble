@@ -13,9 +13,6 @@
 
 #include <QWidget>
 #include <QFileDialog>
-#include <QLineEdit>
-#include <QLabel>
-#include <QComboBox>
 #include "MarbleDebug.h"
 
 #include "MarbleGlobal.h"

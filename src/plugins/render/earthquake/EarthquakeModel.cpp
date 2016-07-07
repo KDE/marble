@@ -20,7 +20,6 @@
 #include <QDebug>
 #include <QString>
 #include <QUrl>
-#include <QMessageBox>
 #include <QScriptEngine>
 #include <QScriptValue>
 #include <QScriptValueIterator>

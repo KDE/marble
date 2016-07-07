@@ -39,7 +39,6 @@
 #include <QFile>
 #include <QDataStream>
 #include <QApplication>
-#include <QTreeView>
  
 #include <MarbleWidget.h>
 #include <MarbleModel.h>

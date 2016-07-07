@@ -15,7 +15,6 @@
 #include <QDebug>
 #include <QHelpEvent>
 #include <QRect>
-#include <QApplication>
 #include <QPainter>
 #include <QPushButton>
 #include <QMenu>

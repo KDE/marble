@@ -24,7 +24,6 @@ class QMouseEvent;
 class QTouchEvent;
 class QWheelEvent;
 class QGestureEvent;
-class QRubberBand;
 class QCursor;
 class QTimer;
 class QString;

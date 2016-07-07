@@ -39,9 +39,6 @@
 #include <QPainter>
 #include <QToolBar>
 #include <QToolButton>
-#include <QTextDocument>
-#include <QAbstractTextDocumentLayout>
-#include <QStyledItemDelegate>
 #include <QDateTime>
 
 using namespace Marble;

@@ -14,8 +14,7 @@
 #include "RenderPlugin.h"
 #include "DialogConfigurationInterface.h"
 
-#include <QMenu>
-#include <QActionGroup>
+class QMenu;
 
 namespace Ui {
     class EclipsesConfigDialog;

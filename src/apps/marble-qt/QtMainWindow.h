@@ -23,7 +23,6 @@ class QActionGroup;
 class QAction;
 class QLabel;
 class QMenu;
-class QPrinter;
 class QProgressBar;
 
 namespace Marble

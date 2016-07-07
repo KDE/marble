@@ -14,15 +14,12 @@
 #include "MarbleWidget.h"
 
 #include <qmath.h>
-#include <QAbstractItemModel>
 #include <QHash>
 #include <QSettings>
 #include <QTime>
-#include <QItemSelectionModel>
 #include <QPaintEvent>
 #include <QPaintEngine>
 #include <QRegion>
-#include <QSizePolicy>
 #include <QNetworkProxy>
 #include <QMetaMethod>
 #include "DataMigration.h"

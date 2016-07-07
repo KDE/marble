@@ -10,7 +10,6 @@
 
 #include "SatellitesConfigDialog.h"
 
-#include <QPushButton>
 #include <QMessageBox>
 #include <QInputDialog>
 #include <QFileDialog>

@@ -18,8 +18,6 @@
 
 #include <QHash>
 
-class QIcon;
-
 namespace Ui
 {
     class PhotoConfigWidget;

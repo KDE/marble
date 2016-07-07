@@ -13,12 +13,13 @@
 
 #include <QObject>
 #include <QSortFilterProxyModel>
-#include <QCompleter>
 
 #include "MarbleQuickItem.h"
 #include "SearchRunnerManager.h"
 #include "MarblePlacemarkModel.h"
 #include "Placemark.h"
+
+class QCompleter;
 
 namespace Marble
 {

@@ -15,7 +15,6 @@
 // Qt
 #include <QRect>
 #include <QColor>
-#include <QPixmap>
 #include <QSvgRenderer>
 
 // Marble

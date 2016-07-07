@@ -21,7 +21,6 @@
 
 #include <QMap>
 #include <QDateTime>
-#include <QLinkedList>
 
 namespace Marble {
 

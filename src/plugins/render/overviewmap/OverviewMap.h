@@ -14,7 +14,6 @@
 #include <QHash>
 #include <QColor>
 #include <QPixmap>
-#include <QAbstractButton>
 #include <QSvgWidget>
 #include <QSvgRenderer>
 

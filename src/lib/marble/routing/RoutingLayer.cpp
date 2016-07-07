@@ -27,8 +27,7 @@
 #include <QAbstractItemModel>
 #include <QIcon>
 #include <QItemSelectionModel>
-#include <QKeyEvent>
-#include <QMenu>
+#include <QAction>
 #include <QMouseEvent>
 #include <QPixmap>
 #include <QFileDialog>

@@ -16,9 +16,6 @@
 // Qt
 #include <QWidget>
 #include <QTreeWidget>
-#include <QPushButton>
-#include <QIcon>
-#include <QMessageBox>
 #include <QMenu>
 #include <QDebug>
 

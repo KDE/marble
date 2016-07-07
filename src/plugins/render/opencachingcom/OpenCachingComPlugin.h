@@ -15,9 +15,6 @@
 #include "RenderPlugin.h"
 #include "RenderPluginInterface.h"
 
-#include <QIcon>
-#include <QAbstractButton>
-
 namespace Ui
 {
 //     class OpenCachingConfigWidget;

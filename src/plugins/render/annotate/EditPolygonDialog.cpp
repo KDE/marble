@@ -15,7 +15,6 @@
 // Qt
 #include <QColorDialog>
 #include <QMessageBox>
-#include <QVBoxLayout>
 
 // Marble
 #include "GeoDataStyle.h"

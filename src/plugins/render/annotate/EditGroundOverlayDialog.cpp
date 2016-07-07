@@ -16,7 +16,6 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QPushButton>
-#include <QVBoxLayout>
 
 //Marble
 #include "FormattedTextWidget.h"

@@ -13,6 +13,8 @@
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
 
+#include <QMutex>
+
 using namespace Marble;
 
 AprsGatherer::AprsGatherer( AprsSource *from,

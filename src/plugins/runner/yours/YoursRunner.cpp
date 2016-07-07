@@ -22,7 +22,6 @@
 #include <QVector>
 #include <QUrl>
 #include <QNetworkReply>
-#include <QDomDocument>
 #include <QBuffer>
 #include <QTimer>
 

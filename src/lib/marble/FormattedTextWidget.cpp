@@ -15,13 +15,8 @@
 
 //Qt
 #include <QFileDialog>
-#include <QMessageBox>
 #include <QColorDialog>
-#include <QCheckBox>
-#include <QToolBar>
-#include <QTextEdit>
 #include <QFontComboBox>
-#include <QPushButton>
 #include <QLineEdit>
 
 //Marble

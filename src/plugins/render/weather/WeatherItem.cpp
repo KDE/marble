@@ -31,7 +31,6 @@
 #include <QHash>
 #include <QString>
 #include <QAction>
-#include <QBrush>
 #include <QIcon>
 #include <QFont>
 #include <QPushButton>

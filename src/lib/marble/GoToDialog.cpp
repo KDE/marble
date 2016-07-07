@@ -26,7 +26,6 @@
 
 #include <QAbstractListModel>
 #include <QTimer>
-#include <QPushButton>
 #include <QPainter>
 
 namespace Marble
