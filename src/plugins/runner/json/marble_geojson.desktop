@@ -100,3 +100,4 @@ MimeType=application/vnd.geo+json;
 Icon=marble
 Terminal=false
 Categories=Qt;KDE;Education;Geography;
+NoDisplay=true
