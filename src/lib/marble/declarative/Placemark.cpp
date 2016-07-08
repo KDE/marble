@@ -34,6 +34,9 @@ void Placemark::setGeoDataPlacemark( const Marble::GeoDataPlacemark &placemark )
     emit nameChanged();
     emit descriptionChanged();
     emit addressChanged();
+    if (m_placemark.visualCategory() == GeoDataFeature::TransportFuel) {
+        emit fuelDetailsChanged();
+    }
 }
 
 Marble::GeoDataPlacemark Placemark::placemark() const
@@ -62,19 +65,19 @@ QString Placemark::description() const
             if (category >= GeoDataFeature::FoodBar && category <= GeoDataFeature::FoodRestaurant) {
                 addTagValue("brand");
                 addTagValue("cuisine");
-                addTagDescription("self_service", "yes", "Self Service");
-                addTagDescription("takeaway", "yes", "Take Away");
-                addTagDescription("outdoor_seating", "yes", "Outdoor Seating");
-                addTagDescription("ice_cream", "yes", "Ice Cream");
-                addTagDescription("smoking", "dedicated", "Smoking (dedicated)");
-                addTagDescription("smoking", "yes", "Smoking allowed");
-                addTagDescription("smoking", "separated", "Smoking (separated)");
-                addTagDescription("smoking", "isolated", "Smoking (isolated)");
-                addTagDescription("smoking", "no", "No smoking");
-                addTagDescription("smoking", "outside", "Smoking (outside)");
-                addTagDescription("smoking:outside", "yes", "Smoking (outside)");
-                addTagDescription("smoking:outside", "separated", "Smoking (outside separated)");
-                addTagDescription("smoking:outside", "no", "No smoking outside");
+                addTagDescription(m_description, "self_service", "yes", "Self Service");
+                addTagDescription(m_description, "takeaway", "yes", "Take Away");
+                addTagDescription(m_description, "outdoor_seating", "yes", "Outdoor Seating");
+                addTagDescription(m_description, "ice_cream", "yes", "Ice Cream");
+                addTagDescription(m_description, "smoking", "dedicated", "Smoking (dedicated)");
+                addTagDescription(m_description, "smoking", "yes", "Smoking allowed");
+                addTagDescription(m_description, "smoking", "separated", "Smoking (separated)");
+                addTagDescription(m_description, "smoking", "isolated", "Smoking (isolated)");
+                addTagDescription(m_description, "smoking", "no", "No smoking");
+                addTagDescription(m_description, "smoking", "outside", "Smoking (outside)");
+                addTagDescription(m_description, "smoking:outside", "yes", "Smoking (outside)");
+                addTagDescription(m_description, "smoking:outside", "separated", "Smoking (outside separated)");
+                addTagDescription(m_description, "smoking:outside", "no", "No smoking outside");
             } else if (category >= GeoDataFeature::ShopBeverages && category <= GeoDataFeature::Shop) {
                 addTagValue("operator");
             } else if (category == GeoDataFeature::TransportBusStop) {
@@ -87,12 +90,6 @@ QString Placemark::description() const
             } else if (category == GeoDataFeature::TransportFuel) {
                 addTagValue("brand");
                 addTagValue("operator");
-                addTagDescription("fuel:diesel", "yes", tr("Diesel"));
-                addTagDescription("fuel:octane_91", "yes", tr("Octane 91"));
-                addTagDescription("fuel:octane_95", "yes", tr("Octane 95"));
-                addTagDescription("fuel:octane_98", "yes", tr("Octane 98"));
-                addTagDescription("fuel:e10", "yes", tr("E10"));
-                addTagDescription("fuel:lpg", "yes", tr("LPG"));
             } else if (category == GeoDataFeature::NaturalTree) {
                 addTagValue("species:en");
                 addTagValue("genus:en");
@@ -117,6 +114,20 @@ QString Placemark::address() const
     }
 
     return m_address;
+}
+
+QString Placemark::fuelDetails() const
+{
+    if (m_fuelDetails.isEmpty() && m_placemark.visualCategory() == GeoDataFeature::TransportFuel) {
+        addTagDescription(m_fuelDetails, "fuel:diesel", "yes", tr("Diesel"));
+        addTagDescription(m_fuelDetails, "fuel:octane_91", "yes", tr("Octane 91"));
+        addTagDescription(m_fuelDetails, "fuel:octane_95", "yes", tr("Octane 95"));
+        addTagDescription(m_fuelDetails, "fuel:octane_98", "yes", tr("Octane 98"));
+        addTagDescription(m_fuelDetails, "fuel:e10", "yes", tr("E10"));
+        addTagDescription(m_fuelDetails, "fuel:lpg", "yes", tr("LPG"));
+
+    }
+    return m_fuelDetails;
 }
 
 void Placemark::setName(const QString & name)
@@ -323,7 +334,7 @@ QString Placemark::categoryName(GeoDataFeature::GeoDataVisualCategory category) 
     case GeoDataFeature::TransportBusStation: return tr("Bus Station");
     case GeoDataFeature::TransportBusStop: return tr("Bus Stop");
     case GeoDataFeature::TransportCarShare: return tr("Car Sharing");
-    case GeoDataFeature::TransportFuel: return tr("Fuel");
+    case GeoDataFeature::TransportFuel: return tr("Gas Station");
     case GeoDataFeature::TransportParking: return tr("Parking");
     case GeoDataFeature::TransportParkingSpace: return tr("Parking Space");
     case GeoDataFeature::TransportPlatform: return tr("Platform");
@@ -428,11 +439,14 @@ void Placemark::addTagValue(const QString &key) const
     }
 }
 
-void Placemark::addTagDescription(const QString &key, const QString &value, const QString &description) const
+void Placemark::addTagDescription(QString &target, const QString &key, const QString &value, const QString &description) const
 {
     auto const & osmData = m_placemark.osmData();
     if (osmData.containsTag(key, value)) {
-        m_description += " - " + description;
+        if (!target.isEmpty()) {
+            target += " · ";
+        }
+        target += description;
     }
 }
 

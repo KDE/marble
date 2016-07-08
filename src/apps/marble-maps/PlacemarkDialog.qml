@@ -21,7 +21,7 @@ Item {
     property var placemark: null
     property string actionIconSource: viaGroup.current === addDestinationButton ? routeEditor.currentProfileIcon : "qrc:///add.png"
 
-    height: placemark === null ? 0 : Screen.pixelDensity * 4 + Math.max(infoLayout.height, actionsLayout.height)
+    height: placemark === null ? 0 : Screen.pixelDensity * 6 + Math.max(infoLayout.height, actionsLayout.height)
 
     function addToRoute() {
         viaGroup.current.execute()
@@ -46,50 +46,47 @@ Item {
 
     Column {
         id: infoLayout
-        clip: true
         anchors {
-            top: parent.top
+            bottom: parent.bottom
             left: parent.left
             right: actionsLayout.left
             margins: Screen.pixelDensity * 2
         }
-        height: nameLabel.height + (descriptionLabel.text == "" ? 0 : descriptionLabel.height) + (addressLabel.text == "" ? 0 : addressLabel.height)
 
-        Text {
+        IconText {
             id: nameLabel
             width: parent.width
             text: placemark === null ? "" : placemark.name
-            wrapMode: Text.WordWrap
-            elide: Text.ElideRight
             maximumLineCount: 2
             font.pointSize: 20
         }
 
-        Text {
+        IconText {
             id: descriptionLabel
             width: parent.width
             text: placemark === null ? "" : placemark.description
-            wrapMode: Text.WordWrap
-            elide: Text.ElideRight
             maximumLineCount: 4
-            font.pointSize: 14
         }
 
-        Text {
+        IconText {
             id: addressLabel
             width: parent.width
             text: placemark === null ? "" : placemark.address
-            wrapMode: Text.WordWrap
-            elide: Text.ElideRight
             maximumLineCount: 4
-            font.pointSize: 14
+        }
+
+        IconText {
+            id: fuelLabel
+            width: parent.width
+            visible: placemark !== null && placemark.fuelDetails !== ""
+            text: placemark === null ? "" : placemark.fuelDetails
+            icon: "qrc:/material/gas_station.svg"
         }
     }
 
     Column {
         id: actionsLayout
         width: rowLayout.width
-        height: spacer.height + rowLayout.height
         spacing: Screen.pixelDensity * 2
         anchors {
             right: parent.right

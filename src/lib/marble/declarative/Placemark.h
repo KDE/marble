@@ -32,6 +32,7 @@ class Placemark : public QObject
     Q_PROPERTY( QString name WRITE setName READ name NOTIFY nameChanged )
     Q_PROPERTY( QString description READ description NOTIFY descriptionChanged )
     Q_PROPERTY( QString address READ address NOTIFY addressChanged )
+    Q_PROPERTY( QString fuelDetails READ fuelDetails NOTIFY fuelDetailsChanged)
 
 public:
     /** Constructor */
@@ -46,6 +47,7 @@ public:
     QString name() const;
     QString description() const;
     QString address() const;
+    QString fuelDetails() const;
 
 public Q_SLOTS:
     void setName(const QString &name);
@@ -56,11 +58,12 @@ Q_SIGNALS:
     void nameChanged();
     void descriptionChanged();
     void addressChanged();
+    void fuelDetailsChanged();
 
 private:
     QString categoryName(GeoDataFeature::GeoDataVisualCategory category) const;
     void addTagValue(const QString &key) const;
-    void addTagDescription(const QString &key, const QString &value, const QString &description) const;
+    void addTagDescription(QString &target, const QString &key, const QString &value, const QString &description) const;
     QString addressFromExtendedData() const;
     QString addressFromOsmData() const;
     QString formatStreet(const QString &street, const QString &houseNumber) const;
@@ -69,10 +72,11 @@ private:
     Coordinate m_coordinate;
     mutable QString m_address; // mutable to allow lazy calculation in the getter
     mutable QString m_description;
+    mutable QString m_fuelDetails;
 };
 
 }
 
-QML_DECLARE_TYPE( Marble::Placemark )
+QML_DECLARE_TYPE(Marble::Placemark)
 
 #endif // MARBLE_DECLARATIVE_PLACEMARK_H

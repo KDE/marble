@@ -7,6 +7,7 @@
         <file>SearchField.qml</file>
         <file>Search.qml</file>
         <file>CircularButton.qml</file>
+        <file>IconText.qml</file>
         <file>PositionButton.qml</file>
         <file>BoxedText.qml</file>
         <file>ImageButton.qml</file>
@@ -48,6 +49,7 @@
         <file alias="ic_place_unknown.png">../../../data/android/drawable-xxxhdpi/ic_place_unknown.png</file>
         <file alias="ic_place_via.png">../../../data/android/drawable-xxxhdpi/ic_place_via.png</file>
         <file alias="add.png">../../../data/android/drawable-xxxhdpi/ic_add_black_48dp.png</file>
+        <file alias="material/gas_station.svg">material-icons/ic_local_gas_station_48px.svg</file>
         <file>RouteProfileRadioButton.qml</file>
         <file>ScrollBar.qml</file>
     </qresource>

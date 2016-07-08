@@ -182,6 +182,8 @@ namespace Marble
     MarbleQuickItem::MarbleQuickItem(QQuickItem *parent) : QQuickPaintedItem(parent)
       ,d(new MarbleQuickItemPrivate(this))
     {
+        qRegisterMetaType<Placemark*>("Placemark*");
+
         foreach (AbstractFloatItem *item, d->m_map.floatItems()) {
             if (item->nameId() == "license") {
                 item->setPosition(QPointF(5.0, -10.0));
