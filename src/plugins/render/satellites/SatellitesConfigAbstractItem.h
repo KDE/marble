@@ -12,6 +12,7 @@
 #define MARBLE_SATELLITESCONFIGABSTRACTITEM_H
 
 #include <QHash>
+#include <QString>
 
 class QVariant;
 
