@@ -155,7 +155,6 @@ ApplicationWindow {
                         onPressed: {
                             search.focus = true;
                             mouse.accepted = false;
-                            marbleMaps.selectPlacemarkAt(mouse.x, mouse.y)
                         }
                     }
 

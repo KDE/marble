@@ -79,7 +79,11 @@ namespace Marble
         }
 
     private Q_SLOTS:
-        void showLmbMenu(int, int) {}
+        void showLmbMenu(int x, int y)
+        {
+            m_marbleQuick->selectPlacemarkAt(x, y);
+        }
+
         void showRmbMenu(int, int) {}
         void openItemToolTip() {}
         void setCursor(const QCursor &cursor)
@@ -569,6 +573,14 @@ namespace Marble
                 updatePlacemarks();
                 return;
             }
+        }
+
+        if (d->m_placemark) {
+            d->m_placemark->deleteLater();
+            d->m_placemark = nullptr;
+            delete d->m_placemarkItem;
+            d->m_placemarkItem = nullptr;
+            updatePlacemarks();
         }
     }
 
