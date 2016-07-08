@@ -53,13 +53,13 @@ void GeoLineStringGraphicsItem::paint(GeoPainter* painter, const ViewportParams*
     int const tileLevel = qLn( viewport->radius() * 4 / 256 ) / qLn( 2.0 );
     setRenderContext(RenderContext(tileLevel));
 
-    if (layer.endsWith("/outline")) {
+    if (layer.endsWith(QLatin1String("/outline"))) {
         if (painter->mapQuality() == HighQuality || painter->mapQuality() == PrintQuality) {
             paintOutline(painter, viewport);
         }
-    } else if (layer.endsWith("/label")) {
+    } else if (layer.endsWith(QLatin1String("/label"))) {
         paintLabel(painter, viewport);
-    } else if (layer.endsWith("/inline")) {
+    } else if (layer.endsWith(QLatin1String("/inline"))) {
         paintInline(painter, viewport);
     } else {
         painter->drawPolyline(*m_lineString);

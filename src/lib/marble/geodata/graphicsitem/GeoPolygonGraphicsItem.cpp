@@ -292,9 +292,9 @@ const GeoDataLatLonAltBox& GeoPolygonGraphicsItem::latLonAltBox() const
 }
 
 void GeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportParams* viewport, const QString &layer ) {
-    if (layer.endsWith("/frame")) {
+    if (layer.endsWith(QLatin1String("/frame"))) {
         paintFrame(painter, viewport);
-    } else if (layer.endsWith("/roof")) {
+    } else if (layer.endsWith(QLatin1String("/roof"))) {
         paintRoof(painter, viewport);
     } else if (m_buildingHeight == 0.0) {
         painter->save();
