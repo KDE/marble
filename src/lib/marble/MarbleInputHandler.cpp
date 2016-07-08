@@ -362,6 +362,8 @@ bool MarbleDefaultInputHandler::handlePinch(const QPointF &center, qreal scaleFa
         break;
     case Qt::GestureStarted:
         marblePresenter->setViewContext(Animation);
+        d->m_pressAndHoldTimer.stop();
+        d->m_lmbTimer.stop();
         d->m_midPressed = false;
         d->m_leftPressed = false;
         d->m_startingRadius = marblePresenter->radius();
