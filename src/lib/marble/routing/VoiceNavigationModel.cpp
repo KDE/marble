@@ -213,17 +213,17 @@ void VoiceNavigationModelPrivate::updateInstruction( RouteSegment segment, qreal
     m_queue.clear();
     m_queue << turnTypeAudio;
     m_announcementText = announcementText(turnType, distance);
+    qreal nextSegmentDistance = segment.nextRouteSegment().distance();
+    Maneuver::Direction nextSegmentDirection = segment.nextRouteSegment().nextRouteSegment().maneuver().direction();
+    if (m_announcementText != QString("") && distance < 75 && nextSegmentDistance != 0 && nextSegmentDistance < 75){
+        QString nextSegmentAnnouncementText = announcementText(nextSegmentDirection, nextSegmentDistance);
+        m_announcementText += nextSegmentAnnouncementText != QString("") ? QString(", then ") + nextSegmentAnnouncementText : QString("");
+    }
     if(segment.maneuver().instructionText() != m_secondLastSegment.maneuver().instructionText()){
         emit m_parent->instructionChanged();
     }
     m_secondLastSegment = m_lastSegment;
     m_lastSegment = segment;
-
-//    if ( !distanceAudio.isEmpty() ) {
-//        m_output->enqueue( audioFile( "After" ) );
-//        m_output->enqueue( distanceAudio );
-//        m_output->enqueue( audioFile( "Meters" ) );
-//    }
 }
 
 void VoiceNavigationModelPrivate::updateInstruction( const QString &name )
