@@ -94,8 +94,12 @@ void MarbleAboutDialogPrivate::loadPageContents( int idx )
         browser->setHtml( QObject::tr("<b>Active Development Team of Marble</b>")+
         QObject::tr("<p>Torsten Rahn <a href=\"mailto:rahn@kde.org\">rahn@kde.org</a><br />"
            "<i>Developer and Original Author</i></p>")+
+        QObject::tr("<p>Dennis Nienh&uuml;ser <a href=\"mailto:nienhueser@kde.org\">nienhueser@kde.org</a><br />"
+           "<i>Routing, Navigation, Mobile</i></p>")+
         QObject::tr("<p>Bernhard Beschow <a href=\"mailto:bbeschow@cs.tu-berlin.de\">bbeschow@cs.tu-berlin.de</a><br />"
            "<i>WMS Support, Mobile, Performance</i></p>")+
+        QObject::tr("<p>Friedrich W. H. Kossebau, <a href=\"mailto:kossebau@kde.org\">kossebau@kde.org</a><br />"
+           "<i>Plasma Integration, Bugfixes</i></p>")+
         QObject::tr("<p>Thibaut Gridel <a href=\"mailto:tgridel@free.fr\">tgridel@free.fr</a><br />"
            "<i>Geodata</i></p>")+
         QObject::tr("<p>Jens-Michael Hoffmann <a href=\"mailto:jensmh@gmx.de\">jensmh@gmx.de</a><br />"
@@ -108,12 +112,8 @@ void MarbleAboutDialogPrivate::loadPageContents( int idx )
            "<i>Online Services Support</i></p>")+
         QObject::tr("<p>Guillaume Martres, <a href=\"mailto:smarter@ubuntu.com\">smarter@ubuntu.com</a><br />"
            "<i>Satellites</i></p>")+
-        QObject::tr("<p>Friedrich W. H. Kossebau, <a href=\"mailto:kossebau@kde.org\">kossebau@kde.org</a><br />"
-           "<i>Plasma Integration, Bugfixes</i></p>")+
         QObject::tr("<p>Ren&#xE9; K&#xFC;ttner, <a href=\"mailto:rene@bitkanal.net\">rene@bitkanal.net</a><br />"
            "<i>Planetary Satellites</i></p>")+
-        QObject::tr("<p>Dennis Nienh&uuml;ser <a href=\"mailto:nienhueser@kde.org\">nienhueser@kde.org</a><br />"
-           "<i>Routing, Navigation, Mobile</i></p>")+
         QObject::tr("<p>Niko Sams <a href=\"mailto:niko.sams@gmail.com\">niko.sams@gmail.com</a><br />"
            "<i>Routing, Elevation Profile</i></p>")+
         QObject::tr("<p>Patrick Spendrin <a href=\"pspendrin@gmail.com\">pspendrin@gmail.com</a><br />"
@@ -146,6 +146,12 @@ void MarbleAboutDialogPrivate::loadPageContents( int idx )
         QObject::tr("<b>ESA - Summer of Code in Space</b>")+
         QObject::tr("<p> The Marble Team would like to thank its members who participated "
            "in ESA SoCiS for their successful work on Marble:</p>")+
+        QObject::tr("<p><b>2016</b></p>")+
+        QObject::tr("<p>Judit Bartha, <a href=\"mailto:bartha.m.judit@gmail.com\"> bartha.m.judit@gmail.com </a><br />"
+                                                                 "<i>Project: Improving Marble's Satellite maps using Sentinel-2 mission data</i></p>")+
+        QObject::tr("<p><b>2015</b></p>")+
+        QObject::tr("<p>Ana Badescu, <a href=\"mailto:anabee.emacs@gmail.com\"> anabee.emacs@gmail.com </a><br />"
+                                                                 "<i>Project: Integrate data provided by the Sentinel missions</i></p>")+
         QObject::tr("<p><b>2014</b></p>")+
         QObject::tr("<p>G&#xE1;bor P&#xE9;terffy, <a href=\"mailto:peterffy95@gmail.com\"> peterffy95@gmail.com </a><br />"
                                                                  "<i>Project: Panoramic Picture Support for celestial bodies in Marble   </i></p>")+
@@ -183,9 +189,22 @@ void MarbleAboutDialogPrivate::loadPageContents( int idx )
         QObject::tr( "Daniel Marth <a href=\"mailto:danielmarth@gmx.at\">danielmarth@gmx.at</a><br />" ) +
         QObject::tr( "Cezar Mocan <a href=\"mailto:mocancezar@gmail.com\">mocancezar@gmail.com</a><br />" ) +
         QObject::tr( "Furkan &Uuml;z&uuml;mc&uuml; <a href=\"mailto:furkanuzumcu@gmail.com\">furkanuzumcu@gmail.com</a></p>" ) +
+
         QObject::tr("<b>Google Summer of Code</b>")+
         QObject::tr("<p> The Marble Team would like to thank its members who participated "
            "in the Google Summer of Code for their successful work on Marble:</p>")+
+        QObject::tr( "<p><b>2016</b></p>" ) +
+        QObject::tr( "<p>Dávid Kolozsvári <a href=\"freedawson@gmail.com\">freedawson@gmail.com</a><br />"
+           "<i>Project: Fluent graphics across every tile level in Marble's OSM vector map</i></p>" ) +
+        QObject::tr( "<p>Akshat Tandon <a href=\"akshat.tandon@research.iiit.ac.in\">akshat.tandon@research.iiit.ac.in</a><br />"
+           "<i>Project: Support for medium and low tile levels in the OSM Vector Map of Marble</i></p>" ) +
+        QObject::tr( "<p><b>2015</b></p>" ) +
+        QObject::tr( "<p>Dávid Kolozsvári <a href=\"freedawson@gmail.com\">freedawson@gmail.com</a><br />"
+           "<i>Project: Improve Marble's OSM vector rendering support</i></p>" ) +
+        QObject::tr( "<p>Gábor Péterffy <a href=\"gabor.peterffy@gmail.com\">gabor.peterffy@gmail.com</a><br />"
+           "<i>Project: Porting Marble to Android platform</i></p>" ) +
+        QObject::tr( "<p>Marius Valeriu Stanciu <a href=\"stanciumarius94@gmail.com\">stanciumarius94@gmail.com</a><br />"
+           "<i>Project: Offering OpenStreetMap support and improving Edit Mode for Marble</i></p>" ) +
         QObject::tr( "<p><b>2014</b></p>" ) +
         QObject::tr( "<p>Abhinav Gangwar <a href=\"abhgang@gmail.com\">abhgang@gmail.com</a><br />"
            "<i>Project: Marble Game</i></p>" ) +
