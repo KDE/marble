@@ -1,3 +1,5 @@
+cmake_minimum_required(VERSION 2.8.12)
+
 project(marble)
 
 ####################################################
@@ -94,7 +96,6 @@ if(QTONLY)
   unset(QTONLY)
 endif()
 
-cmake_minimum_required(VERSION 2.8.12)
 set(MARBLEWIDGET marblewidget-qt5)
 
 SET(CMAKE_AUTOMOC TRUE)
