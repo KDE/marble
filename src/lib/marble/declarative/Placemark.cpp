@@ -130,6 +130,31 @@ QString Placemark::fuelDetails() const
     return m_fuelDetails;
 }
 
+QString Placemark::website() const
+{
+    if (!m_website.isEmpty()) {
+        return m_website;
+    }
+    foreach(const QString &tag, QStringList() << "website" << "contact:website" << "facebook" << "contact:facebook" << "url") {
+        m_website = m_placemark.osmData().tagValue(tag);
+        if (!m_website.isEmpty()) {
+            return m_website;
+        }
+    }
+
+    return m_website;
+}
+
+QString Placemark::wikipedia() const
+{
+    if (!m_wikipedia.isEmpty()) {
+        return m_wikipedia;
+    }
+
+    m_wikipedia = m_placemark.osmData().tagValue("wikipedia");
+    return m_wikipedia;
+}
+
 void Placemark::setName(const QString & name)
 {
     if (m_placemark.name() == name) {

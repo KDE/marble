@@ -54,7 +54,6 @@ Item {
         }
 
         IconText {
-            id: nameLabel
             width: parent.width
             text: placemark === null ? "" : placemark.name
             maximumLineCount: 2
@@ -62,21 +61,34 @@ Item {
         }
 
         IconText {
-            id: descriptionLabel
             width: parent.width
             text: placemark === null ? "" : placemark.description
             maximumLineCount: 4
         }
 
         IconText {
-            id: addressLabel
             width: parent.width
             text: placemark === null ? "" : placemark.address
             maximumLineCount: 4
         }
 
         IconText {
-            id: fuelLabel
+            width: parent.width
+            visible: placemark !== null && placemark.website !== ""
+            text: placemark === null ? "" : "<a href=\"" + placemark.website + "\">" + placemark.website + "</a>"
+            icon: "qrc:/material/browser.svg"
+            maximumLineCount: 4
+        }
+
+        IconText {
+            width: parent.width
+            visible: placemark !== null && placemark.wikipedia !== ""
+            text: placemark === null ? "" : "<a href=\"" + placemark.wikipedia + "\">Wikipedia</a>"
+            icon: "qrc:/material/browser.svg"
+            maximumLineCount: 4
+        }
+
+        IconText {
             width: parent.width
             visible: placemark !== null && placemark.fuelDetails !== ""
             text: placemark === null ? "" : placemark.fuelDetails

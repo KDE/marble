@@ -32,6 +32,8 @@ class Placemark : public QObject
     Q_PROPERTY( QString name WRITE setName READ name NOTIFY nameChanged )
     Q_PROPERTY( QString description READ description NOTIFY descriptionChanged )
     Q_PROPERTY( QString address READ address NOTIFY addressChanged )
+    Q_PROPERTY( QString website READ website NOTIFY websiteChanged)
+    Q_PROPERTY( QString wikipedia READ wikipedia NOTIFY wikipediaChanged)
     Q_PROPERTY( QString fuelDetails READ fuelDetails NOTIFY fuelDetailsChanged)
 
 public:
@@ -47,6 +49,8 @@ public:
     QString name() const;
     QString description() const;
     QString address() const;
+    QString website() const;
+    QString wikipedia() const;
     QString fuelDetails() const;
 
 public Q_SLOTS:
@@ -58,6 +62,8 @@ Q_SIGNALS:
     void nameChanged();
     void descriptionChanged();
     void addressChanged();
+    void websiteChanged();
+    void wikipediaChanged();
     void fuelDetailsChanged();
 
 private:
@@ -73,6 +79,8 @@ private:
     mutable QString m_address; // mutable to allow lazy calculation in the getter
     mutable QString m_description;
     mutable QString m_fuelDetails;
+    mutable QString m_website;
+    mutable QString m_wikipedia;
 };
 
 }
