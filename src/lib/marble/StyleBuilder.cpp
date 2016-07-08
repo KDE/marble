@@ -971,7 +971,7 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
                 lineStyle.setWidth(parameters.tileLevel <= 3 ? 1 : 2);
                 lineStyle.setPhysicalWidth(0.0);
             } else {
-                QString const widthValue = osmData.tagValue("width").replace(" meters", QString()).replace(" m", QString());
+                QString const widthValue = osmData.tagValue("width").remove(QStringLiteral(" meters")).remove(QStringLiteral(" m"));
                 bool ok;
                 float const width = widthValue.toFloat(&ok);
                 lineStyle.setPhysicalWidth(ok ? qBound(0.1f, width, 200.0f) : 0.0f);

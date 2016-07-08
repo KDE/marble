@@ -225,7 +225,7 @@ double GeoPolygonGraphicsItem::extractBuildingHeight(const GeoDataFeature *featu
 
         if (placemark->osmData().containsTagKey("height")) {
             /** @todo Also parse non-SI units, see https://wiki.openstreetmap.org/wiki/Key:height#Height_of_buildings */
-            QString const heightValue = placemark->osmData().tagValue("height").replace(" meters", QString()).replace(" m", QString());
+            QString const heightValue = placemark->osmData().tagValue("height").remove(QStringLiteral(" meters")).remove(QStringLiteral(" m"));
             bool extracted = false;
             double extractedHeight = heightValue.toDouble(&extracted);
             if (extracted) {
