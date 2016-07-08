@@ -1,0 +1,55 @@
+//
+// This file is part of the Marble Virtual Globe.
+//
+// This program is free software licensed under the GNU LGPL. You can
+// find a copy of this license in LICENSE.txt in the top directory of
+// the source code.
+//
+// Copyright 2016      Dennis Nienhüser <nienhueser@kde.org>
+//
+
+import QtQuick 2.3
+import QtQuick.Window 2.2
+
+import org.kde.edu.marble 0.20
+
+Item {
+    id: root
+    height: text === "" ? 0 : Math.max(icon.height, text.height)
+
+    property alias text: text.text
+    property alias icon: icon.source
+    property alias font: text.font
+    property alias maximumLineCount: text.maximumLineCount
+
+    signal clicked()
+
+    Image {
+        id: icon
+        sourceSize.height: Screen.pixelDensity * 3
+        fillMode: Image.PreserveAspectFit
+    }
+
+    Text {
+        id: text
+        anchors.left: icon.right
+        anchors.leftMargin: Screen.pixelDensity * 1
+        anchors.verticalCenter: icon.verticalCenter
+        font.pointSize: 14
+        wrapMode: Text.WordWrap
+        elide: Text.ElideRight
+
+        onLinkActivated: Qt.openUrlExternally(link)
+
+        MouseArea {
+            anchors.fill: parent
+            acceptedButtons: Qt.NoButton
+            cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
+        }
+    }
+
+    MouseArea {
+        anchors.fill: parent
+        onClicked: root.clicked()
+    }
+}
