@@ -277,21 +277,18 @@ void AutoNavigation::Private::adjustZoom( const GeoDataCoordinates &currentPosit
     qreal distance = greatCircleDistance *  radius;
 
     if( speed != 0 ) {
-        //time(in minutes) remaining to reach the border of the map
-        qreal  remainingTime = ( distance / speed ) * SEC2MIN;
+        // time (in seconds) remaining to reach the border of the map
+        qreal  remainingTime = distance / speed;
 
-        //tolerance time limits( in minutes ) before auto zooming
-        qreal thresholdLow = 1.0;
-        qreal thresholdHigh = 12.0 * thresholdLow;
+        // tolerance time limits (in seconds) before auto zooming
+        qreal thresholdLow = 15;
+        qreal thresholdHigh = 120;
 
         m_selfInteraction = true;
         if ( remainingTime < thresholdLow ) {
             emit m_parent->zoomOut( Instant );
         }
-        else if ( remainingTime < thresholdHigh ) {
-            /* zoom level optimal, nothing to do */
-        }
-        else {
+        else if ( remainingTime > thresholdHigh ) {
             emit m_parent->zoomIn( Instant );
         }
         m_selfInteraction = false;
