@@ -11,6 +11,7 @@
 #include "SatellitesModel.h"
 
 #include "MarbleDebug.h"
+#include "MarbleDirs.h"
 #include "SatellitesMSCItem.h"
 #include "SatellitesTLEItem.h"
 
@@ -197,6 +198,8 @@ void SatellitesModel::parseCatalog( const QString &id,
         // use special icon for moons
         if( category == "Moons" ) {
             style->iconStyle().setIconPath( ":/icons/moon.png" );
+        } else {
+            style->iconStyle().setIconPath(MarbleDirs::path("bitmaps/satellite.png"));
         }
 
         item->placemark()->setStyle( style );
@@ -250,6 +253,7 @@ void SatellitesModel::parseTLE( const QString &id,
         style->lineStyle().setPenStyle( Qt::SolidLine );
         style->lineStyle().setColor( nextColor() );
         style->labelStyle().setGlow( true );
+        style->iconStyle().setIconPath(MarbleDirs::path("bitmaps/satellite.png"));
         item->placemark()->setStyle( style );
         addItem( item );
     }
