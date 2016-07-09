@@ -19,8 +19,7 @@ add_subdirectory( maptheme-previewimage )
 add_subdirectory( mapreproject )
 add_subdirectory( speaker-files )
 add_subdirectory( stars )
-# tempoary disabling, until missing CMakeLists.txt is committed
-# add_subdirectory( sentineltile )
+add_subdirectory( sentineltile )
 
 find_package(Protobuf)
 find_package(ZLIB)
