@@ -103,7 +103,7 @@ public:
      * Returns the coordinates of all the points in the map, sorted by their
      * time value
      */
-    QList<GeoDataCoordinates> coordinatesList() const;
+    QVector<GeoDataCoordinates> coordinatesList() const;
 
     /**
      * Returns the time value of all the points in the map, in chronological

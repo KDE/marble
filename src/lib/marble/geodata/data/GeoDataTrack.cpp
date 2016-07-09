@@ -52,7 +52,7 @@ public:
     bool m_lineStringNeedsUpdate;
 
     QList<QDateTime> m_when;
-    QList<GeoDataCoordinates> m_coordinates;
+    QVector<GeoDataCoordinates> m_coordinates;
 
     GeoDataExtendedData m_extendedData;
 
@@ -128,7 +128,7 @@ QDateTime GeoDataTrack::lastWhen() const
     return p()->m_when.last();
 }
 
-QList<GeoDataCoordinates> GeoDataTrack::coordinatesList() const
+QVector<GeoDataCoordinates> GeoDataTrack::coordinatesList() const
 {
     return p()->m_coordinates;
 }

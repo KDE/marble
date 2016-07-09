@@ -79,7 +79,7 @@ void MarbleRunnerManagerTest::initTestCase()
     m_time = 30000;
     m_name = "Berlin";
 
-    qRegisterMetaType<QList<GeoDataCoordinates> >( "QList<GeoDataCoordinates>" );
+    qRegisterMetaType<QVector<GeoDataCoordinates> >( "QVector<GeoDataCoordinates>" );
 
     m_coords.setLatitude(52.50160, GeoDataCoordinates::Degree );
     m_coords.setLongitude(13.40233, GeoDataCoordinates::Degree );
@@ -245,9 +245,9 @@ void MarbleRunnerManagerTest::testSyncRouting()
 
 void MarbleRunnerManagerTest::testAsyncRouting_data()
 {
-    QTest::addColumn<QList<GeoDataCoordinates> >( "coordinatesList" );
+    QTest::addColumn<QVector<GeoDataCoordinates> >( "coordinatesList" );
 
-    addRow() << ( QList<GeoDataCoordinates>() << m_coords << m_coords2 );
+    addRow() << ( QVector<GeoDataCoordinates>() << m_coords << m_coords2 );
 }
 
 void MarbleRunnerManagerTest::testAsyncRouting()
@@ -262,7 +262,7 @@ void MarbleRunnerManagerTest::testAsyncRouting()
     connect( &m_runnerManager, SIGNAL(routingFinished()),
              &loop, SLOT(quit()), Qt::QueuedConnection );
 
-    QFETCH( QList<GeoDataCoordinates>, coordinatesList );
+    QFETCH( QVector<GeoDataCoordinates>, coordinatesList );
     RouteRequest request;
     foreach( const GeoDataCoordinates &coordinates, coordinatesList ) {
         request.append( coordinates );

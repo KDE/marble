@@ -172,10 +172,10 @@ qreal ElevationModel::height( qreal lon, qreal lat ) const
     return ret;
 }
 
-QList<GeoDataCoordinates> ElevationModel::heightProfile( qreal fromLon, qreal fromLat, qreal toLon, qreal toLat ) const
+QVector<GeoDataCoordinates> ElevationModel::heightProfile( qreal fromLon, qreal fromLat, qreal toLon, qreal toLat ) const
 {
     if ( !d->m_textureLayer ) {
-        return QList<GeoDataCoordinates>();
+        return QVector<GeoDataCoordinates>();
     }
 
     const int tileZoomLevel = TileLoader::maximumTileLevel( *( d->m_textureLayer ) );
@@ -193,7 +193,7 @@ QList<GeoDataCoordinates> ElevationModel::heightProfile( qreal fromLon, qreal fr
     //mDebug() << "fromLon" << fromLon << "fromLat" << fromLat;
     //mDebug() << "diff lon" << ( fromLon - toLon ) << "diff lat" << ( fromLat - toLat );
     //mDebug() << "dirLon" << QString::number(dirLon) << "dirLat" << QString::number(dirLat) << "k" << k;
-    QList<GeoDataCoordinates> ret;
+    QVector<GeoDataCoordinates> ret;
     while ( lat*dirLat <= toLat*dirLat && lon*dirLon <= toLon * dirLon ) {
         //mDebug() << lat << lon;
         qreal h = height( lon, lat );

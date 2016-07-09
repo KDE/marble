@@ -104,7 +104,8 @@ void GroundOverlayFrame::paint(GeoPainter *painter, const ViewportParams *viewpo
     if ( placemark()->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
         GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( placemark()->geometry() );
         GeoDataLinearRing &ring = polygon->outerBoundary();
-        QList<GeoDataCoordinates> coordinateList;
+        QVector<GeoDataCoordinates> coordinateList;
+        coordinateList.reserve(8);
 
         coordinateList.append( ring.at( NorthWest ) );
         coordinateList.append( ring.at( SouthWest ) );

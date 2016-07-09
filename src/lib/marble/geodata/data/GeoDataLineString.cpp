@@ -391,7 +391,7 @@ void GeoDataLineString::append ( const GeoDataCoordinates& value )
     d->m_vector.append( value );
 }
 
-void GeoDataLineString::append(const QList<GeoDataCoordinates>& values)
+void GeoDataLineString::append(const QVector<GeoDataCoordinates>& values)
 {
     GeoDataGeometry::detach();
     GeoDataLineStringPrivate* d = p();
@@ -400,10 +400,7 @@ void GeoDataLineString::append(const QList<GeoDataCoordinates>& values)
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
 
-    d->m_vector.reserve(d->m_vector.size() + values.size());
-    foreach (const GeoDataCoordinates &coordinates, values) {
-        d->m_vector.append(coordinates);
-    }
+    d->m_vector.append(values);
 }
 
 GeoDataLineString& GeoDataLineString::operator << ( const GeoDataCoordinates& value )

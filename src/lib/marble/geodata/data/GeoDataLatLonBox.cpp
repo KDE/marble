@@ -549,7 +549,8 @@ GeoDataLatLonBox GeoDataLatLonBox::united( const GeoDataLatLonBox& other ) const
 
 GeoDataLatLonBox GeoDataLatLonBox::toCircumscribedRectangle() const
 {
-    QList<GeoDataCoordinates> coordinates;
+    QVector<GeoDataCoordinates> coordinates;
+    coordinates.reserve(4);
 
     coordinates.append( GeoDataCoordinates( west(), north() ) );
     coordinates.append( GeoDataCoordinates( west(), south() ) );
