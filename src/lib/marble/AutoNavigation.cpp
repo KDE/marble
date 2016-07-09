@@ -264,13 +264,9 @@ GeoDataCoordinates AutoNavigation::Private::findIntersection( qreal currentX, qr
 
 void AutoNavigation::Private::adjustZoom( const GeoDataCoordinates &currentPosition, qreal speed )
 {
-    const qreal lon = currentPosition.longitude( GeoDataCoordinates::Degree );
-    const qreal lat = currentPosition.latitude( GeoDataCoordinates::Degree );
-
     qreal currentX = 0;
     qreal currentY = 0;
-
-    if( !m_viewport->screenCoordinates( lon, lat, currentX, currentY ) ) {
+    if( !m_viewport->screenCoordinates(currentPosition, currentX, currentY ) ) {
         return;
     }
 
