@@ -155,7 +155,9 @@ QStringList MapThemeManager::mapThemeIds() const
         d->m_isInitialized = true;
     }
 
-    for( int i = 0; i < d->m_mapThemeModel.rowCount(); ++i ) {
+    const int mapThemeIdCount = d->m_mapThemeModel.rowCount();
+    result.reserve(mapThemeIdCount);
+    for (int i = 0; i < mapThemeIdCount; ++i) {
         const QString id = d->m_mapThemeModel.data( d->m_mapThemeModel.index( i, 0 ), Qt::UserRole + 1 ).toString();
         result << id;
     }

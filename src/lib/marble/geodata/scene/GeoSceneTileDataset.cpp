@@ -309,6 +309,8 @@ void GeoSceneTileDataset::addDownloadPolicy( const DownloadUsage usage, const in
 QStringList GeoSceneTileDataset::hostNames() const
 {
     QStringList result;
+    result.reserve(m_downloadUrls.size());
+
     QVector<QUrl>::const_iterator pos = m_downloadUrls.constBegin();
     QVector<QUrl>::const_iterator const end = m_downloadUrls.constEnd();
     for (; pos != end; ++pos )

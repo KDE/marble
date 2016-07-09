@@ -60,12 +60,14 @@ GeoNode* DgmlBrushTagHandler::parse(GeoParser& parser) const
          || parentItem.represents( dgmlTag_Geodata ) ) {
         GeoSceneGeodata *geodata = parentItem.nodeAs<GeoSceneGeodata>();
         geodata->setBrush( brush );
-        QList<QColor> colorList;
         if ( !colorMap.isEmpty() ) {
-            QStringList colorString = colorMap.split(',');
-            for ( int i = 0; i < colorString.size(); ++i ) {
-                colorList.append( QColor( colorString[i] ) );
-           }
+            const QStringList colorString = colorMap.split(',');
+
+            QList<QColor> colorList;
+            colorList.reserve(colorString.size());
+            foreach(const QString& colorName, colorString) {
+                colorList.append(QColor(colorName));
+            }
             geodata->setColors( colorList );
         }
         geodata->setAlpha( alpha );

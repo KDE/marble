@@ -81,6 +81,7 @@ class ScreenGraphicsItemPrivate : public MarbleGraphicsItemPrivate
         QPointF relativePosition = positivePosition();
 
         QList<QPointF> absolutePositions;
+        absolutePositions.reserve(parentPositions.size());
         foreach( const QPointF &point, parentPositions ) {
             absolutePositions.append( point + relativePosition );
         }

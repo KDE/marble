@@ -54,6 +54,7 @@ class Q_DECL_HIDDEN BillboardGraphicsItem::Private : public MarbleGraphicsItemPr
         // Don't display items if they are on the far side of the globe.
         if (globeHidesPoint) return;
 
+        m_positions.reserve(pointRepeatNumber);
         for ( int i = 0; i < pointRepeatNumber; ++i ) {
             // handle vertical alignment
             qint32 topY = ( viewport->height() - m_size.height() ) / 2;
@@ -110,6 +111,8 @@ QList<QPointF> BillboardGraphicsItem::positions() const
 QList<QRectF> BillboardGraphicsItem::boundingRects() const
 {
     QList<QRectF> rects;
+    rects.reserve(p()->m_positions.size());
+
     QSizeF const size = p()->m_size;
     foreach(const QPointF &point, p()->m_positions) {
         rects << QRectF(point, size);

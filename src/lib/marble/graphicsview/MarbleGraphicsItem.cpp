@@ -117,9 +117,12 @@ bool MarbleGraphicsItem::contains( const QPointF& point ) const
 
 QList<QRectF> MarbleGraphicsItemPrivate::boundingRects() const
 {
-    QList<QRectF> list;
+    const QList<QPointF> positions = this->positions();
 
-    foreach( const QPointF &point, positions() ) {
+    QList<QRectF> list;
+    list.reserve(positions.count());
+
+    foreach (const QPointF &point, positions) {
         QRectF rect( point, m_size );
         if( rect.x() < 0 )
             rect.setLeft( 0 );

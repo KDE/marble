@@ -41,6 +41,7 @@ public:
 
     void equalizeWhenSize()
     {
+        m_when.reserve(m_coordinates.size());
         while ( m_when.size() < m_coordinates.size() ) {
             //fill coordinates without time information with null QDateTime
             m_when.append( QDateTime() );
@@ -291,9 +292,7 @@ const GeoDataLineString *GeoDataTrack::lineString() const
 {
     if ( p()->m_lineStringNeedsUpdate ) {
         p()->m_lineString = GeoDataLineString();
-        foreach ( const GeoDataCoordinates &coordinates, coordinatesList() ) {
-            p()->m_lineString.append( coordinates );
-        }
+        p()->m_lineString.append( coordinatesList() );
         p()->m_lineStringNeedsUpdate = false;
     }
     return &p()->m_lineString;

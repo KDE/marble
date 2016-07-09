@@ -33,7 +33,10 @@ class GeoDataMultiTrackPrivate : public GeoDataGeometryPrivate
     GeoDataMultiTrackPrivate& operator=( const GeoDataMultiTrackPrivate &other)
     {
         GeoDataGeometryPrivate::operator=( other );
+
         qDeleteAll( m_vector );
+
+        m_vector.reserve(other.m_vector.size());
         foreach( GeoDataTrack *track, other.m_vector ) {
             m_vector.append( new GeoDataTrack( *track ) );
         }

@@ -232,6 +232,7 @@ void TextureLayer::Private::updateGroundOverlays()
 
 void TextureLayer::Private::addCustomTextures()
 {
+    m_textures.reserve(m_textures.size() + m_customTextures.size());
     foreach (GeoSceneTextureTileDataset *t, m_customTextures)
     {
         m_textures.append(t);

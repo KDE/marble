@@ -393,6 +393,7 @@ void CylindricalProjectionPrivate::translatePolygons( const QVector<QPolygonF *>
                                                       qreal xOffset )
 {
     // mDebug() << "Translation: " << xOffset;
+    translatedPolygons.reserve(polygons.size());
 
     QVector<QPolygonF *>::const_iterator itPolygon = polygons.constBegin();
     QVector<QPolygonF *>::const_iterator itEnd = polygons.constEnd();

@@ -305,6 +305,7 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId )
 {
     const QVector<const GeoSceneTextureTileDataset *> textureLayers = d->findRelevantTextureLayers( stackedTileId );
     QVector<QSharedPointer<TextureTile> > tiles;
+    tiles.reserve(textureLayers.size());
 
     foreach ( const GeoSceneTextureTileDataset *layer, textureLayers ) {
         const TileId tileId( layer->sourceDir(), stackedTileId.zoomLevel(),

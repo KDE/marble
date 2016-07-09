@@ -201,10 +201,12 @@ void GeoDataPolygon::unpack( QDataStream& stream )
 
     p()->m_tessellationFlags = (TessellationFlags)(tessellationFlags);
 
+    QVector<GeoDataLinearRing> &inner = p()->inner;
+    inner.reserve(inner.size() + size);
     for(qint32 i = 0; i < size; i++ ) {
         GeoDataLinearRing linearRing;
         linearRing.unpack( stream );
-        p()->inner.append( linearRing );
+        inner.append(linearRing);
     }
 }
 

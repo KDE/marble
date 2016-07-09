@@ -285,6 +285,12 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry
 
 
 /*!
+    \brief Appends a given geodesic position as new nodes to the LineString.
+*/
+    void append(const QList<GeoDataCoordinates>& values);
+
+
+/*!
     \brief Appends a given geodesic position as a new node to the LineString.
 */
     GeoDataLineString& operator << ( const GeoDataCoordinates& value );

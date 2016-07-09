@@ -391,6 +391,21 @@ void GeoDataLineString::append ( const GeoDataCoordinates& value )
     d->m_vector.append( value );
 }
 
+void GeoDataLineString::append(const QList<GeoDataCoordinates>& values)
+{
+    GeoDataGeometry::detach();
+    GeoDataLineStringPrivate* d = p();
+    delete d->m_rangeCorrected;
+    d->m_rangeCorrected = 0;
+    d->m_dirtyRange = true;
+    d->m_dirtyBox = true;
+
+    d->m_vector.reserve(d->m_vector.size() + values.size());
+    foreach (const GeoDataCoordinates &coordinates, values) {
+        d->m_vector.append(coordinates);
+    }
+}
+
 GeoDataLineString& GeoDataLineString::operator << ( const GeoDataCoordinates& value )
 {
     GeoDataGeometry::detach();
@@ -415,6 +430,7 @@ GeoDataLineString& GeoDataLineString::operator << ( const GeoDataLineString& val
     QVector<GeoDataCoordinates>::const_iterator itCoords = value.constBegin();
     QVector<GeoDataCoordinates>::const_iterator itEnd = value.constEnd();
 
+    d->m_vector.reserve(d->m_vector.size() + value.size());
     for( ; itCoords != itEnd; ++itCoords ) {
         d->m_vector.append( *itCoords );
     }
@@ -841,6 +857,8 @@ void GeoDataLineString::unpack( QDataStream& stream )
     stream >> tessellationFlags;
 
     p()->m_tessellationFlags = (TessellationFlags)(tessellationFlags);
+
+    p()->m_vector.reserve(p()->m_vector.size() + size);
 
     for(qint32 i = 0; i < size; i++ ) {
         GeoDataCoordinates coord;

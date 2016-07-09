@@ -357,6 +357,7 @@ void GeoPolygonGraphicsItem::paintRoof( GeoPainter* painter, const ViewportParam
             }
         }
         if ( drawAccurate3D) {
+            buildingRoof.reserve(outlinePolygon->size());
             foreach(const QPointF &point, *outlinePolygon) {
                 buildingRoof << point + buildingOffset(point, viewport);
             }
@@ -365,6 +366,7 @@ void GeoPolygonGraphicsItem::paintRoof( GeoPainter* painter, const ViewportParam
 
                 foreach(QPolygonF* innerPolygon, innerPolygons) {
                     QPolygonF buildingInner;
+                    buildingInner.reserve(innerPolygon->size());
                     foreach(const QPointF &point, *innerPolygon) {
                         buildingInner << point + buildingOffset(point, viewport);
                     }
@@ -440,6 +442,7 @@ void GeoPolygonGraphicsItem::paintRoof( GeoPainter* painter, const ViewportParam
             QRectF const boundingRect = polygon->boundingRect();
             if ( drawAccurate3D) {
                 QPolygonF buildingRoof;
+                buildingRoof.reserve(polygon->size());
                 foreach(const QPointF &point, *polygon) {
                     buildingRoof << point + buildingOffset(point, viewport);
                 }
@@ -533,6 +536,7 @@ void GeoPolygonGraphicsItem::screenPolygons(const ViewportParams *viewport, cons
         viewport->screenCoordinates(innerBoundary, innerPolygonsPerBoundary);
 
         outlines << innerPolygonsPerBoundary;
+        innerPolygons.reserve(innerPolygons.size() + innerPolygonsPerBoundary.size());
         foreach( QPolygonF* innerPolygonPerBoundary, innerPolygonsPerBoundary ) {
             innerPolygons << innerPolygonPerBoundary;
         }

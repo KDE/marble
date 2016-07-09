@@ -98,6 +98,7 @@ int GeoDataMultiTrack::size() const
 QVector<GeoDataTrack> GeoDataMultiTrack::vector() const
 {
     QVector<GeoDataTrack> results;
+    results.reserve(p()->m_vector.size());
 
     QVector<GeoDataTrack*>::const_iterator it = p()->m_vector.constBegin();
     QVector<GeoDataTrack*>::const_iterator end = p()->m_vector.constEnd();

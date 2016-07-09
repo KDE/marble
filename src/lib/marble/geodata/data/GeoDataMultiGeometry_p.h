@@ -43,6 +43,9 @@ class GeoDataMultiGeometryPrivate : public GeoDataGeometryPrivate
         GeoDataGeometryPrivate::operator=( other );
 
         qDeleteAll( m_vector );
+
+        m_vector.reserve(other.m_vector.size());
+
         foreach( GeoDataGeometry *geometry, other.m_vector ) {
             GeoDataGeometry *newGeometry;
 
@@ -66,6 +69,8 @@ class GeoDataMultiGeometryPrivate : public GeoDataGeometryPrivate
                 newGeometry = new GeoDataPolygon( *geometry );
             } else if ( geometry->nodeType() == GeoDataTypes::GeoDataLinearRingType ) {
                 newGeometry = new GeoDataLinearRing( *geometry );
+            } else {
+                qFatal("Unexpected type '%s'", geometry->nodeType() );
             }
 
             m_vector.append( newGeometry );
