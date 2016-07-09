@@ -40,7 +40,7 @@ Item {
 
     Rectangle {
         anchors.fill: parent
-        color: palette.base
+        color: palette.window
     }
 
     Item {
