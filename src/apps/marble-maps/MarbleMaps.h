@@ -20,21 +20,29 @@ class MarbleMaps : public MarbleQuickItem
     Q_OBJECT
 
     Q_PROPERTY( bool suspended READ isSuspended NOTIFY isSuspendedChanged )
+    Q_PROPERTY(bool keepScreenOn READ keepScreenOn WRITE setKeepScreenOn NOTIFY keepScreenOnChanged)
 
 public:
     explicit MarbleMaps(QQuickItem *parent = 0);
 
     bool isSuspended() const;
 
+    bool keepScreenOn() const;
+
+public Q_SLOTS:
+    void setKeepScreenOn(bool keepScreenOn);
+
 Q_SIGNALS:
     void isSuspendedChanged(bool isSuspended);
+
+    void keepScreenOnChanged(bool keepScreenOn);
 
 private Q_SLOTS:
     void handleApplicationStateChange(Qt::ApplicationState state);
 
 private:
     bool m_suspended;
-
+    bool m_keepScreenOn;
 };
 
 }

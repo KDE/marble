@@ -93,6 +93,7 @@ ApplicationWindow {
                     showScaleBar: false
                     showBackground: false
                     positionProvider: suspended ? "" : currentPositionProvider
+                    keepScreenOn: !suspended && itemStack.state === "navigation"
                     showPositionMarker: false
 
                     placemarkDelegate: Image {
