@@ -12,7 +12,6 @@
 import QtQuick 2.3
 import QtQuick.Controls 1.3
 import QtQuick.Window 2.2
-import QtMultimedia 5.4
 
 import org.kde.edu.marble 0.20
 
@@ -35,13 +34,6 @@ Item {
         navigation.guidanceModeEnabled = guidanceMode;
     }
 
-    Audio {
-        id: audioPlayer
-        autoPlay: false
-        autoLoad: false
-        source: "assets://data/audio/KDE-Sys-List-End.ogg";
-    }
-
     NavigationInfoBar {
         id: infoBar
         anchors {
@@ -51,6 +43,19 @@ Item {
         }
         instructionIcon: navigation.nextInstructionImage.replace("qrc:/", "qrc:///");
         distance: navigation.nextInstructionDistance;
+    }
+
+    CircularButton {
+        id: muteButton
+
+        property bool muted: false
+
+        anchors.right: infoBar.right
+        anchors.rightMargin: Screen.pixelDensity * 3
+        anchors.top: infoBar.bottom
+        anchors.topMargin: Screen.pixelDensity * 3
+        iconSource: muted ? "qrc:///material/volume-off.svg" : "qrc:///material/volume-on.svg"
+        onClicked: muted = !muted
     }
 
     Rectangle{
@@ -95,11 +100,9 @@ Item {
         marbleQuickItem: marbleItem
 
         onVoiceNavigationAnnouncementChanged: {
-            if (!parent.visible) {
-                return "";
+            if (root.guidanceMode && !muteButton.muted) {
+                textToSpeechClient.readText(voiceNavigationAnnouncement);
             }
-
-            textToSpeechClient.readText(voiceNavigationAnnouncement);
         }
     }
 }

@@ -27,11 +27,6 @@
         <file alias="gps_not_fixed.png">../../../data/android/drawable-xxxhdpi/gps_not_fixed.png</file>
         <file alias="backdrop.png">../../../data/android/drawable-xxxhdpi/backdrop.png</file>
         <file alias="border_shadow.png">../../../data/android/drawable-xxxhdpi/border_shadow.png</file>
-        <file alias="directions.png">../../../data/android/drawable-xxxhdpi/ic_directions_black_48dp.png</file>
-        <file alias="navigation.png">../../../data/android/drawable-xxxhdpi/navigation.png</file>
-        <file alias="car.png">../../../data/android/drawable-xxxhdpi/car.png</file>
-        <file alias="bike.png">../../../data/android/drawable-xxxhdpi/bike.png</file>
-        <file alias="walk.png">../../../data/android/drawable-xxxhdpi/walk.png</file>
         <file alias="map.png">../../../data/android/drawable-xxxhdpi/map.png</file>
         <file alias="waypoint.png">../../../data/android/drawable-xxxhdpi/waypoint.png</file>
         <file alias="up.png">../../../data/android/drawable-xxxhdpi/up.png</file>
@@ -51,6 +46,13 @@
         <file alias="add.png">../../../data/android/drawable-xxxhdpi/ic_add_black_48dp.png</file>
         <file alias="material/gas_station.svg">material-icons/ic_local_gas_station_48px.svg</file>
         <file alias="material/browser.svg">material-icons/ic_open_in_browser_48px.svg</file>
+        <file alias="material/volume-off.svg">material-icons/ic_volume_off_48px.svg</file>
+        <file alias="material/volume-on.svg">material-icons/ic_volume_up_48px.svg</file>
+        <file alias="material/directions.svg">material-icons/ic_directions_48px.svg</file>
+        <file alias="material/directions-bike.svg">material-icons/ic_directions_bike_48px.svg</file>
+        <file alias="material/directions-car.svg">material-icons/ic_directions_car_48px.svg</file>
+        <file alias="material/directions-walk.svg">material-icons/ic_directions_walk_48px.svg</file>
+        <file alias="material/navigation.svg">material-icons/ic_navigation_48px.svg</file>
         <file>RouteProfileRadioButton.qml</file>
         <file>ScrollBar.qml</file>
     </qresource>

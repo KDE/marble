@@ -52,7 +52,7 @@ Item {
                 verticalCenter: button.verticalCenter
             }
             fillMode: Image.PreserveAspectFit
-            width: 0.6 * root.diameter
+            sourceSize.width: 0.6 * root.diameter
         }
 
         MouseArea {

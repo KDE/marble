@@ -34,9 +34,13 @@ MarbleMaps::MarbleMaps(QQuickItem *parent) :
     }
 
 #ifdef Q_OS_ANDROID
-    // If a file is passed, open it. Possible file types are registered in package/AndroidManifest.xml
     QAndroidJniObject const activity = QtAndroid::androidActivity();
     if (activity.isValid()) {
+        // Control music volume
+        int const STREAM_MUSIC = 3;
+        activity.callMethod<void>("setVolumeControlStream", "(I)V", STREAM_MUSIC);
+
+        // If a file is passed, open it. Possible file types are registered in package/AndroidManifest.xml
         QAndroidJniObject const intent = activity.callObjectMethod("getIntent", "()Landroid/content/Intent;");
         if (intent.isValid()) {
             QAndroidJniObject const data = intent.callObjectMethod("getData", "()Landroid/net/Uri;");

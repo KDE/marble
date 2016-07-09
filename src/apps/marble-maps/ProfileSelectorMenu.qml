@@ -18,7 +18,7 @@ Item {
     id: root
 
     property string selectedProfile: qsTr("Car (fastest)")
-    property string profileIcon: "qrc:///car.png"
+    property string profileIcon: "qrc:///material/directions-car.svg"
     height: rowLayout.height
     width: rowLayout.width
 
@@ -36,17 +36,17 @@ Item {
             checked: true
             exclusiveGroup: profileGroup
             property string profile: qsTr("Car (fastest)")
-            imageSource: "qrc:///car.png"
+            imageSource: "qrc:///material/directions-car.svg"
         }
         RouteProfileRadioButton {
             exclusiveGroup: profileGroup
             property string profile: qsTr("Bicycle")
-            imageSource: "qrc:///bike.png"
+            imageSource: "qrc:///material/directions-bike.svg"
         }
         RouteProfileRadioButton {
             exclusiveGroup: profileGroup
             property string profile: qsTr("Pedestrian")
-            imageSource: "qrc:///walk.png"
+            imageSource: "qrc:///material/directions-walk.svg"
         }
     }
 }

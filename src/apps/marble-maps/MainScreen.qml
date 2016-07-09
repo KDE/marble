@@ -299,19 +299,19 @@ ApplicationWindow {
                         itemStack.state = "routing"
                     }
                 }
-                iconSource: "qrc:///directions.png";
+                iconSource: "qrc:///material/directions.svg";
 
                 states: [
                     State {
                         name: ""
                         AnchorChanges { target: routeEditorButton; anchors.bottom: parent.bottom; anchors.verticalCenter: undefined; }
-                        PropertyChanges { target: routeEditorButton; iconSource: "qrc:///directions.png"; }
+                        PropertyChanges { target: routeEditorButton; iconSource: "qrc:///material/directions.svg"; }
                     },
                     State {
                         name: "routingAction"
                         when: itemStack.state == "routing"
                         AnchorChanges { target: routeEditorButton; anchors.bottom: undefined; anchors.verticalCenter: dialogContainer.top; }
-                        PropertyChanges { target: routeEditorButton; iconSource: "qrc:///navigation.png"; }
+                        PropertyChanges { target: routeEditorButton; iconSource: "qrc:///material/navigation.svg"; }
                     },
                     State {
                         name: "placeAction"
