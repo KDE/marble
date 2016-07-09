@@ -25,8 +25,6 @@ public:
 
     bool m_speakerEnabled;
 
-    PositionProviderStatus m_gpsStatus;
-
     QMap<Maneuver::Direction, QString> m_turnTypeMap;
 
     QMap<Maneuver::Direction, QString> m_announceMap;
@@ -72,7 +70,6 @@ public:
 VoiceNavigationModelPrivate::VoiceNavigationModelPrivate( VoiceNavigationModel* parent ) :
     m_parent( parent ),
     m_speakerEnabled( true ),
-    m_gpsStatus( PositionProviderStatusUnavailable ),
     m_lastDistance( 0.0 ),
     m_lastDistanceTraversed( 0.0 ),
     m_lastTurnType( Maneuver::Unknown ),
@@ -322,19 +319,6 @@ void VoiceNavigationModel::setSpeakerEnabled( bool enabled )
 void VoiceNavigationModel::reset()
 {
     d->reset();
-}
-
-void VoiceNavigationModel::handleTrackingStatusChange( PositionProviderStatus status )
-{
-    if ( status != PositionProviderStatusAvailable && d->m_gpsStatus == PositionProviderStatusAvailable ) {
-        d->updateInstruction( d->m_speakerEnabled ? "Lost GPS Connection" : "ListEnd" );
-    }
-
-    if ( status == PositionProviderStatusAvailable && d->m_gpsStatus != PositionProviderStatusAvailable ) {
-        d->updateInstruction( d->m_speakerEnabled ? "GPS Position Found" : "AppPositive" );
-    }
-
-    d->m_gpsStatus = status;
 }
 
 void VoiceNavigationModel::update(const Route &route, qreal distanceManuever, qreal distanceTarget, bool deviated )

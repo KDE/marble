@@ -276,8 +276,6 @@ void Navigation::setMarbleQuickItem(MarbleQuickItem *marbleQuickItem)
 
         disconnect( d->m_marbleQuickItem, SIGNAL(visibleLatLonAltBoxChanged()),
                  d->m_autoNavigation, SLOT(inhibitAutoAdjustments()) );
-        disconnect( d->model()->positionTracking(), SIGNAL(statusChanged(PositionProviderStatus)),
-                 &d->m_voiceNavigation, SLOT(handleTrackingStatusChange(PositionProviderStatus)) );
     }
 
     d->m_marbleQuickItem = marbleQuickItem;
@@ -299,8 +297,6 @@ void Navigation::setMarbleQuickItem(MarbleQuickItem *marbleQuickItem)
 
         connect( d->m_marbleQuickItem, SIGNAL(visibleLatLonAltBoxChanged()),
                  d->m_autoNavigation, SLOT(inhibitAutoAdjustments()) );
-        connect( d->model()->positionTracking(), SIGNAL(statusChanged(PositionProviderStatus)),
-                 &d->m_voiceNavigation, SLOT(handleTrackingStatusChange(PositionProviderStatus)) );
 
         connect( d->m_marbleQuickItem, SIGNAL(visibleLatLonAltBoxChanged()),
                  this, SLOT(updateScreenPosition()) );
