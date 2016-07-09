@@ -65,6 +65,7 @@ private Q_SLOTS:
 private:
     GeoDataCoordinates addNoise(const Marble::GeoDataCoordinates &,const Marble::GeoDataAccuracy &) const;
     qreal addNoise(qreal bearing) const;
+    void changeStatus(PositionProviderStatus status);
 
     MarbleModel *const m_marbleModel;
     int m_currentIndex;
