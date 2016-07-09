@@ -35,6 +35,8 @@
 #include <GeoDataTypes.h>
 #include <ReverseGeocodingRunnerManager.h>
 #include <routing/RoutingManager.h>
+#include <routing/RoutingModel.h>
+#include <routing/Route.h>
 
 namespace Marble
 {
@@ -455,7 +457,14 @@ namespace Marble
 
     qreal MarbleQuickItem::angle() const
     {
-        return d->m_model.positionTracking()->direction();
+        bool routeExists = d->m_model.routingManager()->routingModel()->route().distance() != 0;
+        bool onRoute = !d->m_model.routingManager()->routingModel()->deviatedFromRoute();
+        if ( routeExists && onRoute) {
+            GeoDataCoordinates curPoint = d->m_model.positionTracking()->positionProviderPlugin()->position();
+            return d->m_model.routingManager()->routingModel()->route().currentSegment().projectedDirection(curPoint);
+        } else {
+            return d->m_model.positionTracking()->direction();
+        }
     }
 
     bool MarbleQuickItem::positionAvailable() const

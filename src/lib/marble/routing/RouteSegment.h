@@ -51,6 +51,8 @@ public:
 
     qreal minimalDistanceTo( const GeoDataCoordinates &point ) const;
 
+    qreal projectedDirection(const GeoDataCoordinates &point) const;
+
     bool operator==( const RouteSegment &other ) const;
 
     bool operator!=( const RouteSegment &other ) const;

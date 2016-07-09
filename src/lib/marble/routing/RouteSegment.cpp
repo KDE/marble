@@ -171,6 +171,7 @@ qreal RouteSegment::distanceTo( const GeoDataCoordinates &point, GeoDataCoordina
     } else {
         interpolated = projected( point, m_path[minIndex-1], m_path[minIndex] );
     }
+
     return minDistance;
 }
 
@@ -192,6 +193,29 @@ qreal RouteSegment::minimalDistanceTo( const GeoDataCoordinates &point ) const
     qreal distSouth = distancePointToLine( point, southhWest, southEast );
     qreal distWest = distancePointToLine( point, northWest, southhWest );
     return qMin( qMin( distNorth, distEast ), qMin( distWest, distSouth ) );
+}
+
+qreal RouteSegment::projectedDirection(const GeoDataCoordinates &point) const
+{
+    if (m_path.size() < 2){
+        return 0;
+    }
+
+    qreal minDistance = -1.0;
+    int minIndex = 0;
+    for ( int i=1; i<m_path.size(); ++i ) {
+        qreal const distance = distancePointToLine( point, m_path[i-1], m_path[i] );
+        if ( minDistance < 0.0 || distance < minDistance ) {
+            minDistance = distance;
+            minIndex = i;
+        }
+    }
+
+    if ( minIndex == 0 ) {
+        return m_path[0].bearing( m_path[1], GeoDataCoordinates::Degree, GeoDataCoordinates::FinalBearing );
+    } else {
+        return m_path[minIndex-1].bearing( m_path[minIndex], GeoDataCoordinates::Degree, GeoDataCoordinates::FinalBearing );
+    }
 }
 
 bool RouteSegment::operator ==(const RouteSegment &other) const
