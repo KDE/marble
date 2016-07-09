@@ -358,10 +358,12 @@ QList<AbstractDataPluginItem*> AbstractDataPluginModel::items( const ViewportPar
 QList<AbstractDataPluginItem *> AbstractDataPluginModel::whichItemAt( const QPoint& curpos )
 {
     QList<AbstractDataPluginItem *> itemsAt;
-    
+
+    const QPointF curposF(curpos);
     foreach( AbstractDataPluginItem* item, d->m_displayedItems ) {
-        if( item && item->contains( QPointF( curpos ) ) )
+        if (item && item->contains(curposF)) {
             itemsAt.append( item );
+        }
     }
     
     return itemsAt;
