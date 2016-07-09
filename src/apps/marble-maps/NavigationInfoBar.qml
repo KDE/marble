@@ -17,58 +17,74 @@ Item {
     id: root
 
     property real distance: 0
-    property alias instructionIcon: image.source
+    property real destinationDistance: 0
+    property alias instructionIcon: instructionImage.source
 
-    width: parent.width
-    height: iconBackground.height
+    function formatDistance(distance)
+    {
+        if (distance > 1000) {
+            return "%1 km".arg((0.001 * distance).toFixed(1))
+        } else if (distance > 100) {
+            return "%1 m".arg((distance*0.01).toFixed(0)*100)
+        } else {
+            return "%1 m".arg((distance*0.1).toFixed(0)*10)
+        }
+    }
 
-    SystemPalette{
+    height: instructionImage.height
+
+    SystemPalette {
         id: palette
         colorGroup: SystemPalette.Active
     }
 
     Rectangle {
-        id: textBackground
-        color: palette.window
-        anchors{
-            left: iconBackground.right
-            right: parent.right
-        }
-        height: iconBackground.height
-
-        Text {
-            id: distanceUntilInstruction
-            font.pointSize: 24
-            text: root.distance > 1000 ? "%1 km".arg((0.001 * root.distance).toFixed(1)) : "%1 m".arg(distance > 100 ? (root.distance*0.01).toFixed(0)*100 : (root.distance*0.1).toFixed(0)*10)
-            anchors.centerIn: parent
-        }
+        anchors.fill: parent
+        color: palette.base
     }
 
-    Rectangle {
-        anchors{
-            left: parent.left
-            right: textBackground.left
-            top: textBackground.top
-            bottom: textBackground.bottom
-        }
-
-        color: palette.window
-    }
-
-    Rectangle {
-        id: iconBackground
-        color: palette.window
-        width: Screen.pixelDensity * 12.5
-        height: width
-        radius: 0.1 * width
+    Item {
+        id: nextInstructionItem
+        anchors.verticalCenter: parent.verticalCenter
 
         Image {
-            id: image
-            anchors.centerIn: parent
-            width: parent.width * 0.8
+            id: instructionImage
+            anchors.verticalCenter: parent.verticalCenter
+            width: Screen.pixelDensity * 15
             height: width
             sourceSize.height: height
             sourceSize.width: width
+        }
+
+        Text {
+            id: distanceUntilInstruction
+            anchors.left: instructionImage.right
+            anchors.verticalCenter: parent.verticalCenter
+            font.pointSize: 24
+            text: root.formatDistance(root.distance)
+        }
+    }
+
+    Item {
+        id: targetItem
+        anchors.right: parent.right
+        anchors.verticalCenter: parent.verticalCenter
+
+        Text {
+            id: targetText
+            anchors.right: targetImage.left
+            anchors.verticalCenter: parent.verticalCenter
+            font.pointSize: 16
+            text: root.formatDistance(root.destinationDistance)
+        }
+
+        Image {
+            id: targetImage
+            anchors.right: parent.right
+            anchors.verticalCenter: parent.verticalCenter
+            width: Screen.pixelDensity * 10
+            height: width
+            source: "qrc:///ic_place_arrival.png"
         }
     }
 }

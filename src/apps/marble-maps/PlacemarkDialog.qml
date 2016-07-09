@@ -32,9 +32,7 @@ Item {
     }
 
     onPlacemarkChanged: {
-        if (placemark) {
-            itemStack.state = "place"
-        }
+        itemStack.state = placemark ? "place" : ""
     }
 
     SystemPalette {

@@ -260,7 +260,7 @@ ApplicationWindow {
                 id: zoomToPositionButton
                 anchors {
                     right: parent.right
-                    rightMargin: 0.005 * root.width
+                    rightMargin: Screen.pixelDensity * 1
                     bottom: routeEditorButton.top
                     bottomMargin: 10
                 }
@@ -286,8 +286,7 @@ ApplicationWindow {
                     bottom: dialogContainer.height > 0 ? undefined : parent.bottom
                     verticalCenter: dialogContainer.height > 0 ? dialogContainer.top : undefined
                     horizontalCenter: zoomToPositionButton.horizontalCenter
-                    margins: 0.01 * root.width
-                    bottomMargin: 25
+                    bottomMargin: Screen.pixelDensity * 4
                 }
 
                 onClicked: {
@@ -355,8 +354,6 @@ ApplicationWindow {
                 PropertyChanges { target: placemarkDialog; visible: false }
                 PropertyChanges { target: routeEditor; visible: false }
                 PropertyChanges { target: navigationManager; guidanceMode: true }
-                PropertyChanges { target: marbleMaps; anchors.bottomMargin: navigationManager.speedDistancePanelheight }
-                PropertyChanges { target: routeEditorButton; anchors.bottomMargin: navigationManager.speedDistancePanelheight + Screen.pixelDensity*4 }
                 StateChangeScript { script: itemStack.push(navigationManager); }
             },
             State {

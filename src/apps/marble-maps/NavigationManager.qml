@@ -23,7 +23,6 @@ Item {
     property bool guidanceMode: false
     property alias screenAccuracy: navigation.screenAccuracy
     property alias deviated: navigation.deviated
-    property alias speedDistancePanelheight: speedDistancePanel.height
 
     onGuidanceModeChanged: {
         if (guidanceMode) {
@@ -32,6 +31,13 @@ Item {
         }
 
         navigation.guidanceModeEnabled = guidanceMode;
+    }
+
+    BorderImage {
+        anchors.fill: infoBar
+        anchors.margins: -14
+        border { top: 14; left: 14; right: 14; bottom: 14 }
+        source: "qrc:///border_shadow.png"
     }
 
     NavigationInfoBar {
@@ -43,6 +49,7 @@ Item {
         }
         instructionIcon: navigation.nextInstructionImage.replace("qrc:/", "qrc:///");
         distance: navigation.nextInstructionDistance;
+        destinationDistance: navigation.destinationDistance
     }
 
     CircularButton {
@@ -53,46 +60,9 @@ Item {
         anchors.right: infoBar.right
         anchors.rightMargin: Screen.pixelDensity * 3
         anchors.top: infoBar.bottom
-        anchors.topMargin: Screen.pixelDensity * 3
+        anchors.topMargin: Screen.pixelDensity * 5
         iconSource: muted ? "qrc:///material/volume-off.svg" : "qrc:///material/volume-on.svg"
         onClicked: muted = !muted
-    }
-
-    Rectangle{
-        id: speedDistancePanel
-        color: palette.window
-        height: totalDistance.height * 2
-        anchors {
-            bottom: parent.bottom
-            left: parent.left
-            right: parent.right
-        }
-
-        BoxedText {
-            id: totalDistance
-            color: palette.window
-            textColor: palette.text
-            text: "%1 km".arg((0.001 * navigation.destinationDistance).toFixed(1))
-
-            anchors {
-                verticalCenter: parent.verticalCenter
-                left: parent.left
-                leftMargin: 10
-            }
-        }
-
-        BoxedText {
-            id: speed
-            color: palette.window
-            textColor: palette.text
-            text: qsTr("%1 km/h".arg((navigation.marbleQuickItem.speed * 3.6).toFixed(0)))
-
-            anchors {
-                verticalCenter: parent.verticalCenter
-                right: parent.right
-                rightMargin: 10
-            }
-        }
     }
 
     Navigation {
