@@ -55,7 +55,12 @@ ApplicationWindow {
             id: mapItem
 
             PinchArea {
-                anchors.fill: parent
+                anchors {
+                    top: parent.top
+                    left: parent.left
+                    right: parent.right
+                    bottom: dialogContainer.top
+                }
                 enabled: true
 
                 onPinchStarted: marbleMaps.handlePinchStarted(pinch.center)
@@ -67,12 +72,7 @@ ApplicationWindow {
 
                     property string currentPositionProvider: "QtPositioning"
 
-                    anchors {
-                        top: parent.top
-                        left: parent.left
-                        right: parent.right
-                        bottom: dialogContainer.top
-                    }
+                    anchors.fill: parent
 
                     visible: true
                     focus: true
@@ -197,129 +197,129 @@ ApplicationWindow {
                     visible: false
                     marbleItem: marbleMaps
                 }
+            }
 
-                BorderImage {
-                    anchors.fill: dialogContainer
-                    anchors.margins: -14
-                    border { top: 14; left: 14; right: 14; bottom: 14 }
-                    source: "qrc:///border_shadow.png"
+            BorderImage {
+                anchors.fill: dialogContainer
+                anchors.margins: -14
+                border { top: 14; left: 14; right: 14; bottom: 14 }
+                source: "qrc:///border_shadow.png"
+            }
+
+            Item {
+                id: dialogContainer
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    bottom: parent.bottom
                 }
+                height: routeEditor.visible ? routeEditor.height : (placemarkDialog.visible ? placemarkDialog.height : 0)
 
-                Item {
-                    id: dialogContainer
+                RouteEditor {
+                    id: routeEditor
                     anchors {
                         left: parent.left
                         right: parent.right
                         bottom: parent.bottom
                     }
-                    height: routeEditor.visible ? routeEditor.height : (placemarkDialog.visible ? placemarkDialog.height : 0)
-
-                    RouteEditor {
-                        id: routeEditor
-                        anchors {
-                            left: parent.left
-                            right: parent.right
-                            bottom: parent.bottom
-                        }
-                        visible: false
-                    }
-
-                    PlacemarkDialog {
-                        id: placemarkDialog
-                        anchors {
-                            left: parent.left
-                            right: parent.right
-                            bottom: parent.bottom
-                        }
-                    }
-
-                    DeveloperDialog {
-                        id: developerDialog
-                        visible: false
-                        anchors {
-                            left: parent.left
-                            right: parent.right
-                            bottom: parent.bottom
-                        }
-                    }
+                    visible: false
                 }
 
-                BoxedText {
-                    id: distanceIndicator
-                    text: "%1 km".arg(zoomToPositionButton.distance < 10 ? zoomToPositionButton.distance.toFixed(1) : zoomToPositionButton.distance.toFixed(0))
+                PlacemarkDialog {
+                    id: placemarkDialog
                     anchors {
-                        bottom: zoomToPositionButton.top
-                        horizontalCenter: zoomToPositionButton.horizontalCenter
-                    }
-
-                    visible: marbleMaps.positionAvailable && !marbleMaps.positionVisible
-                }
-
-                PositionButton {
-                    id: zoomToPositionButton
-                    anchors {
+                        left: parent.left
                         right: parent.right
-                        rightMargin: 0.005 * root.width
-                        bottom: routeEditorButton.top
-                        bottomMargin: 10
+                        bottom: parent.bottom
                     }
-
-                    iconSource: marbleMaps.positionAvailable ? "qrc:///gps_fixed.png" : "qrc:///gps_not_fixed.png"
-
-                    onClicked: marbleMaps.centerOnCurrentPosition()
-
-                    property real distance: 0
-
-                    function updateIndicator() {
-                        var point = marbleMaps.mapFromItem(zoomToPositionButton, diameter * 0.5, diameter * 0.5);
-                        distance = 0.001 * marbleMaps.distanceFromPointToCurrentLocation(point);
-                        angle = marbleMaps.angleFromPointToCurrentLocation(point);
-                    }
-
-                    showDirection: marbleMaps.positionAvailable && !marbleMaps.positionVisible
                 }
 
-                CircularButton {
-                    id: routeEditorButton
+                DeveloperDialog {
+                    id: developerDialog
+                    visible: false
                     anchors {
-                        bottom: dialogContainer.height > 0 ? undefined : parent.bottom
-                        verticalCenter: dialogContainer.height > 0 ? dialogContainer.top : undefined
-                        horizontalCenter: zoomToPositionButton.horizontalCenter
-                        margins: 0.01 * root.width
-                        bottomMargin: 25
+                        left: parent.left
+                        right: parent.right
+                        bottom: parent.bottom
                     }
-
-                    onClicked: {
-                        if (itemStack.state === "routing") {
-                            itemStack.state = "navigation"
-                        } else if (itemStack.state === "place") {
-                            placemarkDialog.addToRoute()
-                        } else {
-                            itemStack.state = "routing"
-                        }
-                    }
-                    iconSource: "qrc:///directions.png";
-
-                    states: [
-                        State {
-                            name: ""
-                            AnchorChanges { target: routeEditorButton; anchors.bottom: parent.bottom; anchors.verticalCenter: undefined; }
-                            PropertyChanges { target: routeEditorButton; iconSource: "qrc:///directions.png"; }
-                        },
-                        State {
-                            name: "routingAction"
-                            when: itemStack.state == "routing"
-                            AnchorChanges { target: routeEditorButton; anchors.bottom: undefined; anchors.verticalCenter: dialogContainer.top; }
-                            PropertyChanges { target: routeEditorButton; iconSource: "qrc:///navigation.png"; }
-                        },
-                        State {
-                            name: "placeAction"
-                            when: itemStack.state == "place"
-                            AnchorChanges { target: routeEditorButton; anchors.bottom: undefined; anchors.verticalCenter: dialogContainer.top; }
-                            PropertyChanges { target: routeEditorButton; iconSource: placemarkDialog.actionIconSource }
-                        }
-                    ]
                 }
+            }
+
+            BoxedText {
+                id: distanceIndicator
+                text: "%1 km".arg(zoomToPositionButton.distance < 10 ? zoomToPositionButton.distance.toFixed(1) : zoomToPositionButton.distance.toFixed(0))
+                anchors {
+                    bottom: zoomToPositionButton.top
+                    horizontalCenter: zoomToPositionButton.horizontalCenter
+                }
+
+                visible: marbleMaps.positionAvailable && !marbleMaps.positionVisible
+            }
+
+            PositionButton {
+                id: zoomToPositionButton
+                anchors {
+                    right: parent.right
+                    rightMargin: 0.005 * root.width
+                    bottom: routeEditorButton.top
+                    bottomMargin: 10
+                }
+
+                iconSource: marbleMaps.positionAvailable ? "qrc:///gps_fixed.png" : "qrc:///gps_not_fixed.png"
+
+                onClicked: marbleMaps.centerOnCurrentPosition()
+
+                property real distance: 0
+
+                function updateIndicator() {
+                    var point = marbleMaps.mapFromItem(zoomToPositionButton, diameter * 0.5, diameter * 0.5);
+                    distance = 0.001 * marbleMaps.distanceFromPointToCurrentLocation(point);
+                    angle = marbleMaps.angleFromPointToCurrentLocation(point);
+                }
+
+                showDirection: marbleMaps.positionAvailable && !marbleMaps.positionVisible
+            }
+
+            CircularButton {
+                id: routeEditorButton
+                anchors {
+                    bottom: dialogContainer.height > 0 ? undefined : parent.bottom
+                    verticalCenter: dialogContainer.height > 0 ? dialogContainer.top : undefined
+                    horizontalCenter: zoomToPositionButton.horizontalCenter
+                    margins: 0.01 * root.width
+                    bottomMargin: 25
+                }
+
+                onClicked: {
+                    if (itemStack.state === "routing") {
+                        itemStack.state = "navigation"
+                    } else if (itemStack.state === "place") {
+                        placemarkDialog.addToRoute()
+                    } else {
+                        itemStack.state = "routing"
+                    }
+                }
+                iconSource: "qrc:///directions.png";
+
+                states: [
+                    State {
+                        name: ""
+                        AnchorChanges { target: routeEditorButton; anchors.bottom: parent.bottom; anchors.verticalCenter: undefined; }
+                        PropertyChanges { target: routeEditorButton; iconSource: "qrc:///directions.png"; }
+                    },
+                    State {
+                        name: "routingAction"
+                        when: itemStack.state == "routing"
+                        AnchorChanges { target: routeEditorButton; anchors.bottom: undefined; anchors.verticalCenter: dialogContainer.top; }
+                        PropertyChanges { target: routeEditorButton; iconSource: "qrc:///navigation.png"; }
+                    },
+                    State {
+                        name: "placeAction"
+                        when: itemStack.state == "place"
+                        AnchorChanges { target: routeEditorButton; anchors.bottom: undefined; anchors.verticalCenter: dialogContainer.top; }
+                        PropertyChanges { target: routeEditorButton; iconSource: placemarkDialog.actionIconSource }
+                    }
+                ]
             }
         }
 
