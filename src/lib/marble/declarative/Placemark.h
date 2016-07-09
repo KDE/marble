@@ -28,7 +28,6 @@ class Placemark : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY( Coordinate* coordinate READ coordinate NOTIFY coordinateChanged )
     Q_PROPERTY( QString name WRITE setName READ name NOTIFY nameChanged )
     Q_PROPERTY( QString description READ description NOTIFY descriptionChanged )
     Q_PROPERTY( QString address READ address NOTIFY addressChanged )
@@ -42,9 +41,7 @@ public:
 
     void setGeoDataPlacemark( const Marble::GeoDataPlacemark &placemark );
 
-    Marble::GeoDataPlacemark placemark() const;
-
-    Coordinate* coordinate();
+    Marble::GeoDataPlacemark & placemark();
 
     QString name() const;
     QString description() const;
@@ -57,9 +54,9 @@ public Q_SLOTS:
     void setName(const QString &name);
 
 Q_SIGNALS:
-    void coordinateChanged();
 
     void nameChanged();
+    void coordinatesChanged();
     void descriptionChanged();
     void addressChanged();
     void websiteChanged();
@@ -75,7 +72,6 @@ private:
     QString formatStreet(const QString &street, const QString &houseNumber) const;
 
     Marble::GeoDataPlacemark m_placemark;
-    Coordinate m_coordinate;
     mutable QString m_address; // mutable to allow lazy calculation in the getter
     mutable QString m_description;
     mutable QString m_fuelDetails;

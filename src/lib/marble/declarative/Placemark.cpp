@@ -28,9 +28,8 @@ Placemark::Placemark(QObject *parent ) :
 void Placemark::setGeoDataPlacemark( const Marble::GeoDataPlacemark &placemark )
 {
     m_placemark = placemark;
-    m_coordinate.setCoordinates( placemark.coordinate() );
     m_address = QString();
-    emit coordinateChanged();
+    emit coordinatesChanged();
     emit nameChanged();
     emit descriptionChanged();
     emit addressChanged();
@@ -39,14 +38,9 @@ void Placemark::setGeoDataPlacemark( const Marble::GeoDataPlacemark &placemark )
     }
 }
 
-Marble::GeoDataPlacemark Placemark::placemark() const
+Marble::GeoDataPlacemark & Placemark::placemark()
 {
     return m_placemark;
-}
-
-Coordinate *Placemark::coordinate()
-{
-    return &m_coordinate;
 }
 
 QString Placemark::name() const

@@ -178,7 +178,7 @@ int Routing::addSearchResultPlacemark(Placemark *placemark)
 {
     if ( d->m_marbleMap ) {
         for (int i = 0; i < d->m_searchResultItems.size(); i++) {
-            if (d->m_searchResultPlacemarks[i]->coordinate()->coordinates() == placemark->coordinate()->coordinates()) {
+            if (d->m_searchResultPlacemarks[i]->placemark().coordinate() == placemark->placemark().coordinate()) {
                 return i;
             }
         }
@@ -231,8 +231,8 @@ void Routing::updateSearchResultPlacemarks()
     for (int i = 0; i < d->m_searchResultItems.keys().size() && i < d->m_searchResultPlacemarks.size(); i++) {
         qreal x = 0;
         qreal y = 0;
-        const qreal lon = d->m_searchResultPlacemarks[i]->coordinate()->longitude();
-        const qreal lat = d->m_searchResultPlacemarks[i]->coordinate()->latitude();
+        const qreal lon = d->m_searchResultPlacemarks[i]->placemark().coordinate().longitude();
+        const qreal lat = d->m_searchResultPlacemarks[i]->placemark().coordinate().latitude();
         const bool visible = d->m_marbleMap->viewport()->screenCoordinates(lon * DEG2RAD, lat * DEG2RAD, x, y);
 
         QQuickItem * item = d->m_searchResultItems[i];
@@ -355,7 +355,7 @@ void Routing::addViaAtIndex(int index, qreal lon, qreal lat)
 
 void Routing::addViaByPlacemark(Placemark *placemark)
 {
-    if ( d->m_marbleMap ) {
+    if (d->m_marbleMap && placemark) {
         Marble::RouteRequest * request = d->m_marbleMap->model()->routingManager()->routeRequest();
         request->addVia(placemark->placemark());
         updateRoute();
@@ -364,7 +364,7 @@ void Routing::addViaByPlacemark(Placemark *placemark)
 
 void Routing::addViaByPlacemarkAtIndex(int index, Placemark *placemark)
 {
-    if ( d->m_marbleMap ) {
+    if (d->m_marbleMap && placemark) {
         Marble::RouteRequest * request = d->m_marbleMap->model()->routingManager()->routeRequest();
         request->insert(index, placemark->placemark());
         updateRoute();

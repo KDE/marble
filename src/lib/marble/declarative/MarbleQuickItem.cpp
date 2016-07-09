@@ -154,6 +154,7 @@ namespace Marble
             m_map(&m_model),
             m_presenter(&m_map),
             m_positionVisible(false),
+            m_currentPosition(marble),
             m_inputHandler(&m_presenter, marble),
             m_placemarkDelegate(nullptr),
             m_placemarkItem(nullptr),
@@ -252,7 +253,7 @@ namespace Marble
 
     void MarbleQuickItem::updateCurrentPosition(const GeoDataCoordinates &coordinates)
     {
-        d->m_currentPosition.coordinate()->setCoordinates(coordinates);
+        d->m_currentPosition.placemark().setCoordinate(coordinates);
         emit currentPositionChanged(&d->m_currentPosition);
     }
 
@@ -277,7 +278,7 @@ namespace Marble
 
         qreal x = 0;
         qreal y = 0;
-        const bool visible = d->m_map.viewport()->screenCoordinates(d->m_placemark->coordinate()->coordinates(), x, y);
+        const bool visible = d->m_map.viewport()->screenCoordinates(d->m_placemark->placemark().coordinate(), x, y);
         d->m_placemarkItem->setVisible(visible);
         if (visible) {
             d->m_placemarkItem->setProperty("xPos", QVariant::fromValue(x));
@@ -287,7 +288,7 @@ namespace Marble
 
     void MarbleQuickItem::handleReverseGeocoding(const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark)
     {
-        if (d->m_placemark && d->m_placemark->coordinate()->coordinates() == coordinates) {
+        if (d->m_placemark && d->m_placemark->placemark().coordinate() == coordinates) {
             d->m_placemark->setGeoDataPlacemark(placemark);
             updatePlacemarks();
         }
@@ -443,7 +444,7 @@ namespace Marble
         d->m_placemarkItem = nullptr;
         delete d->m_placemark;
         d->m_placemark = new Placemark(this);
-        d->m_placemark->coordinate()->setCoordinates(coordinates);
+        d->m_placemark->placemark().setCoordinate(coordinates);
         d->m_reverseGeocoding.reverseGeocoding(coordinates);
     }
 
@@ -562,7 +563,7 @@ namespace Marble
         foreach(auto feature, features) {
             if (feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
                 GeoDataPlacemark const * placemark = static_cast<const GeoDataPlacemark*>(feature);
-                if (d->m_placemark && placemark->coordinate() == d->m_placemark->coordinate()->coordinates()) {
+                if (d->m_placemark && placemark->coordinate() == d->m_placemark->placemark().coordinate()) {
                     d->m_placemark->deleteLater();
                     d->m_placemark = nullptr;
                 } else {
