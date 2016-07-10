@@ -14,8 +14,8 @@
 // License along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 
-#ifndef PLASMARUNNER_H
-#define PLASMARUNNER_H
+#ifndef MARBLE_PLASMARUNNER_H
+#define MARBLE_PLASMARUNNER_H
 
 // Plasma
 #include <KRunner/AbstractRunner>
@@ -34,8 +34,8 @@ public:
     PlasmaRunner(QObject *parent, const QVariantList &args);
 
 public: // Plasma::AbstractRunner API
-    void match(Plasma::RunnerContext &context);
-    void run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match);
+    void match(Plasma::RunnerContext &context) override;
+    void run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match) override;
 
 private:
     void collectMatches(QList<Plasma::QueryMatch> &matches,
