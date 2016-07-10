@@ -24,7 +24,6 @@
 #include "GeoDataStyle.h"
 #include "GeoDataSnippet.h"
 #include "MarbleDirs.h"
-#include "StyleBuilder.h"
 
 namespace Marble
 {
