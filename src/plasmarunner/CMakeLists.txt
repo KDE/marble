@@ -8,7 +8,7 @@ if(ECM_FOUND)
   include(KDECMakeSettings)
 endif()
 include(FeatureSummary)
-macro_optional_find_package(KF5 QUIET COMPONENTS Config Runner Service I18n)
+macro_optional_find_package(KF5 QUIET COMPONENTS Runner I18n)
 
 if (NOT KF5_FOUND)       
   return()
@@ -22,9 +22,7 @@ set(plasmaRunner_SRCS
 add_library(plasma_runner_marble MODULE ${plasmaRunner_SRCS})
 target_link_libraries(plasma_runner_marble
   ${MARBLEWIDGET}
-  KF5::ConfigCore
   KF5::Runner
-  KF5::Service
   KF5::I18n
 )
 
