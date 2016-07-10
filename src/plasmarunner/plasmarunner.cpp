@@ -156,9 +156,9 @@ void PlasmaRunner::run(const Plasma::RunnerContext &context, const Plasma::Query
 
     const QVariantList data = match.data().toList();
 
+    // pass in C locale, should be always understood
     const QString latLon =
-        QString::fromUtf8("%L1").arg(data.at(1).toReal()) +
-        QString::fromUtf8(" %L1").arg(data.at(0).toReal());
+        QString::number(data.at(1).toReal()) + QLatin1Char(' ') + QString::number(data.at(0).toReal());
 
     const QString distance = data.at(2).toString();
 
