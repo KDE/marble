@@ -13,5 +13,4 @@ include_directories(
 set( ${TARGET}_SRC sentineltile.cpp tileprocessor.cpp )
 add_executable( ${TARGET} ${${TARGET}_SRC} )
 
-target_link_libraries( ${TARGET} )
 target_link_libraries( ${TARGET}  Qt5::Core Qt5::Widgets )
