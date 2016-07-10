@@ -19,7 +19,7 @@ import org.kde.edu.marble 0.20
 Item {
     id: root
 
-    property string selectedProfile: qsTr("Car (fastest)")
+    property string selectedProfile: carProfileButton.profile
     property string profileIcon: "qrc:///material/directions-car.svg"
     height: rowLayout.height
     width: rowLayout.width
@@ -42,7 +42,8 @@ Item {
         }
 
         RouteProfileRadioButton {
-            checked: settings.value("Routing", "profile") === profile
+            id: carProfileButton
+            checked: settings.value("Routing", "profile", profile) === profile
             exclusiveGroup: profileGroup
             property string profile: qsTr("Car (fastest)")
             imageSource: "qrc:///material/directions-car.svg"
