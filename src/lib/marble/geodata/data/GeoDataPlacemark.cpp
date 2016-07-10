@@ -302,8 +302,8 @@ QString GeoDataPlacemark::displayName() const
         foreach (const QString &uiLanguage, uiLanguages) {
             QString const language = uiLanguage.toLocal8Bit().constData();
             for (auto tagIter = data.tagsBegin(), end = data.tagsEnd(); tagIter != end; ++tagIter) {
-                if (tagIter.key().startsWith("name:")) {
-                    QString const tagLanguage = tagIter.key().mid(5);
+                if (tagIter.key().startsWith(QLatin1String("name:"))) {
+                    QStringRef const tagLanguage = tagIter.key().midRef(5);
                     if (tagLanguage == language) {
                         return tagIter.value();
                     }
