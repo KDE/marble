@@ -65,7 +65,7 @@ Item {
         CheckBox {
             text: "Show OSM Bitmap Tiles"
             checked: settings.value("Developer", "textureTiles") === "true"
-            onCheckedChanged: marbleMaps.setPropertyEnabled("mapnik", checked)
+            onCheckedChanged: marbleMaps.setMapThemeId(checked ? "earth/openstreetmap/openstreetmap.dgml" : "earth/vectorosm/vectorosm.dgml")
         }
 
         CheckBox {
