@@ -29,8 +29,7 @@
 #include <QProcess>
 
 
-// TODO: fix catalog name to "plasma_runner_marble"
-#define TRANSLATION_DOMAIN "plasma_runner_marblerunner"
+#define TRANSLATION_DOMAIN "plasma_runner_marble"
 
 namespace Marble
 {
