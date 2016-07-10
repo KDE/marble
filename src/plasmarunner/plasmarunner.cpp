@@ -28,21 +28,18 @@
 // Qt
 #include <QProcess>
 
+
+// TODO: fix catalog name to "plasma_runner_marble"
+#define TRANSLATION_DOMAIN "plasma_runner_marblerunner"
+
 namespace Marble
 {
 
 static const int minContainsMatchLength = 3;
 
-
 PlasmaRunner::PlasmaRunner(QObject *parent, const QVariantList &args)
   : AbstractRunner(parent, args)
 {
-    KLocalizedString::setApplicationDomain("marble");
-    KLocalizedString::setApplicationDomain("marble_qt");
-    // load catalog manually, as it does not (yet) match the name of the plugin lib
-    // TODO: fix catalog name after branching of 1.4
-    KLocalizedString::setApplicationDomain("plasma_runner_marblerunner");
-
     setIgnoredTypes(Plasma::RunnerContext::NetworkLocation |
                     Plasma::RunnerContext::FileSystem |
                     Plasma::RunnerContext::Help);
