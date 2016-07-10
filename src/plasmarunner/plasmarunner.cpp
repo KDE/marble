@@ -22,9 +22,11 @@
 #include <BookmarkManager.h>
 #include <GeoDataTreeModel.h>
 
-// KDE
-#include <KProcess>
+// KF5
 #include <KLocalizedString>
+
+// Qt
+#include <QProcess>
 
 namespace Marble
 {
@@ -167,7 +169,7 @@ void PlasmaRunner::run(const Plasma::RunnerContext &context, const Plasma::Query
         << distance
         << QLatin1String( "--map" )
         << QLatin1String( "earth/openstreetmap/openstreetmap.dgml" );
-    KProcess::startDetached( QLatin1String("marble"), parameters );
+    QProcess::startDetached( QLatin1String("marble"), parameters );
 }
 
 }
