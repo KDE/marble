@@ -48,9 +48,9 @@ PlasmaRunner::PlasmaRunner(QObject *parent, const QVariantList &args)
                     Plasma::RunnerContext::Help);
 
     QList<Plasma::RunnerSyntax> syntaxes;
-    syntaxes << Plasma::RunnerSyntax(QLatin1String(":q:"),
+    syntaxes << Plasma::RunnerSyntax(QStringLiteral(":q:"),
                                      i18n("Shows the coordinates :q: in OpenStreetMap with Marble."));
-    syntaxes << Plasma::RunnerSyntax(QLatin1String(":q:"),
+    syntaxes << Plasma::RunnerSyntax(QStringLiteral(":q:"),
                                      i18n("Shows the geo bookmark containing :q: in OpenStreetMap with Marble."));
     setSyntaxes(syntaxes);
 }
@@ -72,7 +72,7 @@ void PlasmaRunner::match(Plasma::RunnerContext &context)
             << QVariant(0.1); // TODO: make this distance value configurable
 
         Plasma::QueryMatch match(this);
-        match.setIcon(QIcon::fromTheme(QLatin1String("marble")));
+        match.setIcon(QIcon::fromTheme(QStringLiteral("marble")));
         match.setText(i18n("Show the coordinates %1 in OpenStreetMap with Marble", query));
         match.setData(coordinatesData);
         match.setId(query);
@@ -85,7 +85,7 @@ void PlasmaRunner::match(Plasma::RunnerContext &context)
     // TODO: BookmarkManager does not yet listen to updates, also does not sync between processes :(
     // So for now always load on demand, even if expensive possibly
     BookmarkManager bookmarkManager(new GeoDataTreeModel);
-    bookmarkManager.loadFile( QLatin1String("bookmarks/bookmarks.kml") );
+    bookmarkManager.loadFile( QStringLiteral("bookmarks/bookmarks.kml") );
 
     foreach (GeoDataFolder* folder, bookmarkManager.folders()) {
         collectMatches(matches, query, folder);
@@ -137,7 +137,7 @@ void PlasmaRunner::collectMatches(QList<Plasma::QueryMatch> &matches,
                 << QVariant(placemark->lookAt()->range()*METER2KM);
 
             Plasma::QueryMatch match(this);
-            match.setIcon(QIcon::fromTheme(QLatin1String("marble")));
+            match.setIcon(QIcon::fromTheme(QStringLiteral("marble")));
             match.setText(placemark->name());
             match.setSubtext(i18n("Show in OpenStreetMap with Marble"));
             match.setData(coordinatesData);
@@ -163,13 +163,13 @@ void PlasmaRunner::run(const Plasma::RunnerContext &context, const Plasma::Query
     const QString distance = data.at(2).toString();
 
     const QStringList parameters = QStringList()
-        << QLatin1String( "--latlon" )
+        << QStringLiteral( "--latlon" )
         << latLon
-        << QLatin1String( "--distance" )
+        << QStringLiteral( "--distance" )
         << distance
-        << QLatin1String( "--map" )
-        << QLatin1String( "earth/openstreetmap/openstreetmap.dgml" );
-    QProcess::startDetached( QLatin1String("marble"), parameters );
+        << QStringLiteral( "--map" )
+        << QStringLiteral( "earth/openstreetmap/openstreetmap.dgml" );
+    QProcess::startDetached( QStringLiteral("marble"), parameters );
 }
 
 }
