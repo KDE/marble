@@ -16,7 +16,7 @@
 class ShpCoastlineProcessor : public PlacemarkFilter
 {
 public:
-    ShpCoastlineProcessor(GeoDataDocument* document);
+    explicit ShpCoastlineProcessor(GeoDataDocument* document);
 
     virtual void process();
 

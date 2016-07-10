@@ -34,7 +34,7 @@ public:
     bool operator==(const RenderContext &other) const;
     bool operator!=(const RenderContext &other) const;
 
-    RenderContext(int tileLevel=-1);
+    explicit RenderContext(int tileLevel = -1);
     int tileLevel() const;
 
 private:

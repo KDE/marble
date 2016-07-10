@@ -16,7 +16,7 @@
 class PlacemarkFilter : public BaseFilter
 {
 public:
-    PlacemarkFilter(GeoDataDocument* document);
+    explicit PlacemarkFilter(GeoDataDocument* document);
 };
 
 #endif // PLACEMARKHANDLER_H
