@@ -33,6 +33,13 @@ Item {
         navigation.guidanceModeEnabled = guidanceMode;
     }
 
+    Settings {
+        id: settings
+        Component.onDestruction: {
+            settings.setValue("Navigation", "muted", muteButton.muted)
+        }
+    }
+
     BorderImage {
         anchors.fill: infoBar
         anchors.margins: -14
@@ -55,7 +62,7 @@ Item {
     CircularButton {
         id: muteButton
 
-        property bool muted: false
+        property bool muted: settings.value("Navigation", "muted") === "true"
 
         anchors.right: infoBar.right
         anchors.rightMargin: Screen.pixelDensity * 3

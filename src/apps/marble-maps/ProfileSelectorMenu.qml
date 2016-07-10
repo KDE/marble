@@ -14,6 +14,8 @@ import QtQuick.Controls 1.3
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.2
 
+import org.kde.edu.marble 0.20
+
 Item {
     id: root
 
@@ -21,6 +23,13 @@ Item {
     property string profileIcon: "qrc:///material/directions-car.svg"
     height: rowLayout.height
     width: rowLayout.width
+
+    Settings {
+        id: settings
+        Component.onDestruction: {
+            settings.setValue("Routing", "profile", root.selectedProfile)
+        }
+    }
 
     RowLayout {
         id: rowLayout
@@ -33,17 +42,19 @@ Item {
         }
 
         RouteProfileRadioButton {
-            checked: true
+            checked: settings.value("Routing", "profile") === profile
             exclusiveGroup: profileGroup
             property string profile: qsTr("Car (fastest)")
             imageSource: "qrc:///material/directions-car.svg"
         }
         RouteProfileRadioButton {
+            checked: settings.value("Routing", "profile") === profile
             exclusiveGroup: profileGroup
             property string profile: qsTr("Bicycle")
             imageSource: "qrc:///material/directions-bike.svg"
         }
         RouteProfileRadioButton {
+            checked: settings.value("Routing", "profile") === profile
             exclusiveGroup: profileGroup
             property string profile: qsTr("Pedestrian")
             imageSource: "qrc:///material/directions-walk.svg"
