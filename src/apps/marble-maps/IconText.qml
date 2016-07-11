@@ -28,13 +28,13 @@ Item {
         id: icon
         sourceSize.height: Screen.pixelDensity * 3
         fillMode: Image.PreserveAspectFit
+        anchors.verticalCenter: text.verticalCenter
     }
 
     Text {
         id: text
         anchors.left: icon.right
         anchors.leftMargin: Screen.pixelDensity * 1
-        anchors.verticalCenter: icon.verticalCenter
         font.pointSize: 14
         wrapMode: Text.WordWrap
         elide: Text.ElideRight
