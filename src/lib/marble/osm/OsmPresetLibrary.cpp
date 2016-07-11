@@ -470,7 +470,7 @@ GeoDataStyle::ConstPtr OsmPresetLibrary::presetStyle( const OsmTag &tag )
 {
     static const StyleBuilder styleBuilder;
 
-    const GeoDataFeature::GeoDataVisualCategory category = osmVisualCategory(tag.first + "=" + tag.second);
+    const GeoDataFeature::GeoDataVisualCategory category = osmVisualCategory(tag.first + '=' + tag.second);
 
     return styleBuilder.presetStyle(category);
 }

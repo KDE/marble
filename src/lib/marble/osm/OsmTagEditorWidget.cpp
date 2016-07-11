@@ -80,7 +80,7 @@ QString OsmTagEditorWidget::suitableTag()
         const QTreeWidgetItem *item = d->m_currentTagsList->topLevelItem( index );
         OsmTagEditorWidgetPrivate::OsmTag tag( item->text( 0 ), item->text( 1 ) );
         if ( OsmPresetLibrary::hasVisualCategory( tag ) ) {
-            return tag.first + "=" + tag.second;
+            return tag.first + '=' + tag.second;
         }
     }
 
