@@ -75,20 +75,23 @@ void TileProcessor::process() {
 void TileProcessor::colorForFile(const QString& filePath){
     ++progress;
 
+//    int tileCountBathymetry = pow(2, m_tileLevel);
     int tileCount = pow(2, m_tileLevel);
 
-    int x = m_mask.width() * (filePath.section('/', -2, -2).toDouble()/ (double)tileCount);
+    int xTile = filePath.section('/', -2, -2).toUInt();
+    int yTile = filePath.section('/', -1).section(".",0, 0).toUInt();
+    int x = m_bathymetry.width() * xTile / (double)tileCount;
 
-    int ypos = filePath.section('/', -1).section(".",0, 0).toDouble();
+    qreal lat_rad = atan(sinh(M_PI * (1 - 2 * yTile / (double)tileCount)));
+    int y = (int)(m_bathymetry.height() * (-lat_rad + M_PI/2) / M_PI);
 
-    qreal lat_rad = atan(sinh(M_PI * (1 - 2 * ypos / (double)tileCount)));
-    qreal yreal = m_mask.height() * (-lat_rad + M_PI/2) / M_PI;
+    int maskValueTopLeft = qRed(m_mask.pixel(2*x, 2*y));
+    int maskValueTopRight = qRed(m_mask.pixel(2*x + 1, 2*y));
+    int maskValueBottomLeft = qRed(m_mask.pixel(2*x, 2*y + 1));
+    int maskValueBottomRight = qRed(m_mask.pixel(2*x + 1, 2*y + 1));
 
-    int y = (int)yreal;
-
-    int maskValue = qRed(m_mask.pixel(x, y));
-
-    if (maskValue != 0) { // for all areas which are not black
+    if (maskValueTopLeft != 0 || maskValueTopRight != 0
+            || maskValueBottomLeft != 0 || maskValueBottomRight != 0 ) { // for all areas which are not black
         QColor bathymetryColor = QColor(m_bathymetry.pixel(x, y));
 
         QImage tile(256, 256, QImage::Format_RGB32);
@@ -101,9 +104,23 @@ void TileProcessor::colorForFile(const QString& filePath){
 
         QPainter painter;
         painter.begin(&tile);
-        qreal opacity = 1.0 - (double)(maskValue)/255.0;
+        qreal opacity;
+        opacity = 1.0 - (double)(maskValueTopLeft)/255.0;
         painter.setOpacity(opacity);
-        painter.drawImage(0, 0, origTile);
+        painter.drawImage(QRect(0, 0, 128, 128), origTile,
+                          QRect(0, 0, 128, 128));
+        opacity = 1.0 - (double)(maskValueTopRight)/255.0;
+        painter.setOpacity(opacity);
+        painter.drawImage(QRect(128, 0, 128, 128), origTile,
+                          QRect(128, 0, 128, 128));
+        opacity = 1.0 - (double)(maskValueBottomLeft)/255.0;
+        painter.setOpacity(opacity);
+        painter.drawImage(QRect(0, 128, 128, 128), origTile,
+                          QRect(0, 128, 128, 128));
+        opacity = 1.0 - (double)(maskValueBottomRight)/255.0;
+        painter.setOpacity(opacity);
+        painter.drawImage(QRect(128, 128, 128, 128), origTile,
+                          QRect(128, 128, 128, 128));
         painter.end();
 
         QString modFilePath = filePath;
@@ -112,7 +129,7 @@ void TileProcessor::colorForFile(const QString& filePath){
         tile.save(modFilePath, "JPG", 85);
         if (opacity > 0.0) {
             qDebug() << progress << filePath.section('/', -2, -2) << filePath.section('/', -1).section(".",0, 0);
-            qDebug() << maskValue << modFilePath;
+            qDebug() << maskValueTopLeft << modFilePath;
         }
     }
     else {
