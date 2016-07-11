@@ -43,6 +43,11 @@ int main(int argc, char** argv) {
     // Add the document to MarbleWidget's tree model
     mapWidget->model()->treeModel()->addDocument( document );
 
+    // Ensure we see our the image on start
+    mapWidget->model()->setHome(box.center(), 1500);
+    mapWidget->goHome();
+
+    // Finally show the Marble widget
     mapWidget->show();
 
     return app.exec();

@@ -132,6 +132,9 @@ int main(int argc, char** argv)
 
     // Finish widget creation.
     mapWidget->setMapThemeId("earth/bluemarble/bluemarble.dgml");
+    // Ensure we see our rendered feature on start
+    mapWidget->model()->setHome(8.4, 48.0, 1800);
+    mapWidget->goHome();
     mapWidget->show();
 
     // Update each second to give the clock second resolution
