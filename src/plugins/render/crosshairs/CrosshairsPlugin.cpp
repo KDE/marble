@@ -210,13 +210,10 @@ bool CrosshairsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
     Q_UNUSED( renderPos )
     Q_UNUSED( layer )
 
-    const int width = 21;
-    const int height = 21;
-
     if ( m_crosshairs.isNull() ) {
         if( QImageReader::imageFormat( m_theme ) == "svg" ) {
             painter->setRenderHint( QPainter::Antialiasing, true );
-            m_crosshairs = QPixmap( QSize( width, height ) );
+            m_crosshairs = QPixmap( QSize( 21, 21 ) );
             m_crosshairs.fill( Qt::transparent );
 
             QPainter mapPainter( &m_crosshairs );
@@ -226,6 +223,9 @@ bool CrosshairsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
             m_crosshairs.load( m_theme );
         }
     }
+
+    const int width = m_crosshairs.width();
+    const int height = m_crosshairs.height();
 
     GeoDataCoordinates const focusPoint = viewport->focusPoint();
     GeoDataCoordinates const centerPoint = GeoDataCoordinates( viewport->centerLongitude(), viewport->centerLatitude() );
