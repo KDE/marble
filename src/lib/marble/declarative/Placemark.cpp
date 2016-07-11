@@ -33,6 +33,9 @@ void Placemark::setGeoDataPlacemark( const Marble::GeoDataPlacemark &placemark )
     emit nameChanged();
     emit descriptionChanged();
     emit addressChanged();
+    emit websiteChanged();
+    emit wikipediaChanged();
+    emit openingHoursChanged();
     if (m_placemark.visualCategory() == GeoDataFeature::TransportFuel) {
         emit fuelDetailsChanged();
     }
@@ -147,6 +150,16 @@ QString Placemark::wikipedia() const
 
     m_wikipedia = m_placemark.osmData().tagValue("wikipedia");
     return m_wikipedia;
+}
+
+QString Placemark::openingHours() const
+{
+    if (!m_openingHours.isEmpty()) {
+        return m_openingHours;
+    }
+
+    m_openingHours = m_placemark.osmData().tagValue("opening_hours");
+    return m_openingHours;
 }
 
 void Placemark::setName(const QString & name)

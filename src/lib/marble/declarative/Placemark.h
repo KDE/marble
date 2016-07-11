@@ -34,6 +34,7 @@ class Placemark : public QObject
     Q_PROPERTY( QString website READ website NOTIFY websiteChanged)
     Q_PROPERTY( QString wikipedia READ wikipedia NOTIFY wikipediaChanged)
     Q_PROPERTY( QString fuelDetails READ fuelDetails NOTIFY fuelDetailsChanged)
+    Q_PROPERTY( QString openingHours READ openingHours NOTIFY openingHoursChanged)
 
 public:
     /** Constructor */
@@ -49,12 +50,12 @@ public:
     QString website() const;
     QString wikipedia() const;
     QString fuelDetails() const;
+    QString openingHours() const;
 
 public Q_SLOTS:
     void setName(const QString &name);
 
 Q_SIGNALS:
-
     void nameChanged();
     void coordinatesChanged();
     void descriptionChanged();
@@ -62,6 +63,7 @@ Q_SIGNALS:
     void websiteChanged();
     void wikipediaChanged();
     void fuelDetailsChanged();
+    void openingHoursChanged();
 
 private:
     QString categoryName(GeoDataFeature::GeoDataVisualCategory category) const;
@@ -77,6 +79,7 @@ private:
     mutable QString m_fuelDetails;
     mutable QString m_website;
     mutable QString m_wikipedia;
+    mutable QString m_openingHours;
 };
 
 }

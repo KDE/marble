@@ -95,6 +95,13 @@ Item {
             text: placemark === null ? "" : placemark.fuelDetails
             icon: "qrc:/material/gas_station.svg"
         }
+
+        IconText {
+            width: parent.width
+            visible: placemark !== null && placemark.openingHours !== ""
+            text: placemark === null ? "" : placemark.openingHours
+            icon: "qrc:/material/access_time.svg"
+        }
     }
 
     function ensureRouteHasDeparture() {
