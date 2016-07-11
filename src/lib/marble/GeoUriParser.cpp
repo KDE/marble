@@ -104,7 +104,7 @@ bool GeoUriParser::parse()
             return true;
         }
     }
-    if ( m_geoUri.startsWith("worldwind://goto/") ) {
+    if ( m_geoUri.startsWith(QLatin1String("worldwind://goto/")) ) {
         m_geoUri = m_geoUri.replace("goto/", "goto/?");
         QUrl worldwindUrl( m_geoUri );
 
