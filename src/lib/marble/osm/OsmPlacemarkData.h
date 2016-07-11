@@ -182,7 +182,7 @@ public:
     static QString osmHashKey();
 
     /**
-     * @brief isNull returns false if the the osmData is loaded from a source
+     * @brief isNull returns false if the osmData is loaded from a source
      * or true if its just default constructed
      */
     bool isNull() const;
