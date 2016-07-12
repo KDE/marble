@@ -420,7 +420,7 @@ void MeasureToolPlugin::drawSegments( GeoPainter* painter )
     }
 
     if (m_paintMode == Polygon && m_measureLineString.size() > 2) {
-        GeoDataLinearRing measureRing = m_measureLineString;
+        GeoDataLinearRing measureRing(m_measureLineString);
 
         if (m_showPolygonArea || m_showPerimeter) {
             painter->setPen( Qt::NoPen );

@@ -56,7 +56,7 @@ void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes) const
             linearRing->append(node.coordinates());
         }
 
-        *linearRing = linearRing->optimized();
+        *linearRing = GeoDataLinearRing(linearRing->optimized());
     } else {
         GeoDataLineString* lineString = new GeoDataLineString;
         placemark->setGeometry(lineString);

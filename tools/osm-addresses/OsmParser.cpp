@@ -478,12 +478,12 @@ void OsmParser::importMultipolygon( const Relation &relation )
         }
 
         GeoDataPolygon polygon;
-        polygon.setOuterBoundary( string );
+        polygon.setOuterBoundary(GeoDataLinearRing(string));
         Q_ASSERT( polygon.outerBoundary().size() > 0 );
 
         foreach( const GeoDataLineString & hole, inner ) {
             if ( contains<GeoDataLinearRing, GeoDataLineString>( polygon.outerBoundary(), hole ) ) {
-                polygon.appendInnerBoundary( hole );
+                polygon.appendInnerBoundary(GeoDataLinearRing(hole));
             }
         }
 

@@ -78,7 +78,7 @@ class GEODATA_EXPORT GeoDataLinearRing : public GeoDataLineString
 /*!
     \brief Creates a LinearRing from an existing geometry object.
 */
-    GeoDataLinearRing( const GeoDataGeometry &other );
+    explicit GeoDataLinearRing(const GeoDataGeometry &other);
 
     
 /*!
