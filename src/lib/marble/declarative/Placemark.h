@@ -31,10 +31,11 @@ class Placemark : public QObject
     Q_PROPERTY( QString name WRITE setName READ name NOTIFY nameChanged )
     Q_PROPERTY( QString description READ description NOTIFY descriptionChanged )
     Q_PROPERTY( QString address READ address NOTIFY addressChanged )
-    Q_PROPERTY( QString website READ website NOTIFY websiteChanged)
-    Q_PROPERTY( QString wikipedia READ wikipedia NOTIFY wikipediaChanged)
-    Q_PROPERTY( QString fuelDetails READ fuelDetails NOTIFY fuelDetailsChanged)
-    Q_PROPERTY( QString openingHours READ openingHours NOTIFY openingHoursChanged)
+    Q_PROPERTY( QString website READ website NOTIFY websiteChanged )
+    Q_PROPERTY( QString wikipedia READ wikipedia NOTIFY wikipediaChanged )
+    Q_PROPERTY( QString fuelDetails READ fuelDetails NOTIFY fuelDetailsChanged )
+    Q_PROPERTY( QString openingHours READ openingHours NOTIFY openingHoursChanged )
+    Q_PROPERTY( QString coordinates READ coordinates NOTIFY coordinatesChanged )
 
 public:
     /** Constructor */
@@ -51,6 +52,7 @@ public:
     QString wikipedia() const;
     QString fuelDetails() const;
     QString openingHours() const;
+    QString coordinates() const;
 
 public Q_SLOTS:
     void setName(const QString &name);

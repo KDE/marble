@@ -77,6 +77,7 @@ Item {
 
         IconText {
             width: parent.width
+            visible: !condensed
             text: placemark === null ? "" : placemark.address
             maximumLineCount: 4
         }
@@ -109,6 +110,13 @@ Item {
             visible: placemark !== null && placemark.openingHours !== ""
             text: placemark === null ? "" : placemark.openingHours
             icon: "qrc:/material/access_time.svg"
+        }
+
+        IconText {
+            width: parent.width
+            visible: !condensed
+            text: placemark === null ? "" : placemark.coordinates
+            icon: "qrc:/material/place.svg"
         }
     }
 
