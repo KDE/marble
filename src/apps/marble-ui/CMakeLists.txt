@@ -22,8 +22,13 @@ target_link_libraries (
         Qt5::PrintSupport
     LINK_PRIVATE
         Qt5::Network
-        Qt5::DBus
 )
+if (NOT MARBLE_NO_DBUS)
+    target_link_libraries( marbleui
+        LINK_PRIVATE
+            Qt5::DBus
+    )
+endif ()
 
 if(WIN32)
   # TODO: PUBLIC or can be PRIVATE?

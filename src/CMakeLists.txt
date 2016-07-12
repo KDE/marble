@@ -3,9 +3,9 @@ if(MSVC)
   add_definitions(-D_USE_MATH_DEFINES=1)
 endif(MSVC)
 
-if(BUILD_WITH_DBUS)
-add_definitions(-DMARBLE_DBUS)
-endif(BUILD_WITH_DBUS)
+if(NOT MARBLE_NO_DBUS)
+  add_definitions(-DMARBLE_DBUS)
+endif()
 
 if( Qt5Quick_FOUND )
   OPTION(IGNORE_CMAKE_INSTALL_PREFIX_FOR_DECLARATIVE_PLUGINS "Install Marble Qt Declarative plugins to QT_IMPORTS_DIR even if that is out of the CMAKE_INSTALL_PREFIX")

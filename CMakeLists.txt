@@ -49,6 +49,15 @@ include( MarbleMacros )
 # if this option is set, srtm.jpg will not be installed but the generated tiles instead
 option(MOBILE "Create a Marble version optimized for handheld devices")
 
+####################################################
+# Build a D-Bus interface for the Marble widget
+# This is disabled by default for all win32, apple and Android
+if(WIN32 OR APPLE OR CMAKE_SYSTEM_NAME STREQUAL Android)
+    option(BUILD_WITH_DBUS "Build the D-Bus interface for the Marble widget" OFF)
+else()
+    option(BUILD_WITH_DBUS "Build the D-Bus interface for the Marble widget" ON)
+endif()
+
 #######################################################
 # Specific options for building for different platforms
 
@@ -67,7 +76,6 @@ if(CMAKE_SYSTEM_NAME STREQUAL Android)
 else()
    find_package(Qt5WebKit)
    find_package(Qt5WebKitWidgets)
-   find_package(Qt5DBus REQUIRED)
 
    if ( NOT Qt5WebKitWidgets_FOUND )
      set ( MARBLE_NO_WEBKITWIDGETS TRUE )
@@ -85,6 +93,15 @@ find_package(Qt5Sql REQUIRED)
 find_package(Qt5Concurrent REQUIRED)
 find_package(Qt5Quick REQUIRED)
 find_package(Qt5PrintSupport REQUIRED)
+
+if (BUILD_WITH_DBUS)
+  find_package(Qt5DBus)
+  if (NOT Qt5DBus_FOUND)
+    set(MARBLE_NO_DBUS TRUE)
+  endif()
+else()
+  set(MARBLE_NO_DBUS TRUE)
+endif()
 
 if(QTONLY)
   # Forward the old QTONLY=TRUE option to the new WITH_KDE=FALSE
@@ -104,15 +121,6 @@ SET(CMAKE_AUTOMOC TRUE)
 if( WIN32 )
     add_definitions( -D_USE_MATH_DEFINES )
 endif( WIN32 )
-
-####################################################
-# Build a D-Bus interface for marble
-# This is disabled by default for all win32, apple and Qt-Only builds
-if(WIN32 OR APPLE OR CMAKE_SYSTEM_NAME STREQUAL Android)
-    option(BUILD_WITH_DBUS "Build the D-Bus interface for the Marble widget" OFF)
-else()
-    option(BUILD_WITH_DBUS "Build the D-Bus interface for the Marble widget" ON)
-endif()
 
 ####################################################
 # build unit tests

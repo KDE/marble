@@ -295,7 +295,7 @@ else()
         )
 endif()
 
-if (NOT QT_NO_DBUS AND NOT CMAKE_SYSTEM_NAME STREQUAL Android)
+if (NOT MARBLE_NO_DBUS)
     LIST(APPEND marblewidget_SRCS
         MarbleDBusInterface.cpp
         )
@@ -389,7 +389,7 @@ if (NOT MARBLE_NO_WEBKITWIDGETS)
             Qt5::WebKitWidgets
     )
 endif ()
-if (NOT QT_NO_DBUS AND NOT CMAKE_SYSTEM_NAME STREQUAL Android)
+if (NOT MARBLE_NO_DBUS)
     TARGET_LINK_LIBRARIES (${MARBLEWIDGET}
         LINK_PRIVATE
             Qt5::DBus
