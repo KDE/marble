@@ -19,6 +19,7 @@ Item {
     id: root
 
     property var placemark: null
+    property bool condensed: true
     property string actionIconSource: routeEditor.currentProfileIcon
 
     height: placemark === null ? 0 : Screen.pixelDensity * 6 + infoLayout.height
@@ -64,7 +65,14 @@ Item {
         IconText {
             width: parent.width
             text: placemark === null ? "" : placemark.description
-            maximumLineCount: 4
+            maximumLineCount: condensed ? 4 : undefined
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    condensed = !condensed
+                }
+            }
         }
 
         IconText {

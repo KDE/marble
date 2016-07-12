@@ -34,6 +34,7 @@ Item {
     Text {
         id: text
         anchors.left: icon.right
+        anchors.right: parent.right
         anchors.leftMargin: Screen.pixelDensity * 1
         font.pointSize: 14
         wrapMode: Text.WordWrap
