@@ -333,8 +333,16 @@ void GeoPainter::drawEllipse ( const GeoDataCoordinates & centerPosition,
         if ( visible ) {
             // Draw all the x-repeat-instances of the point on the screen
             for( int it = 0; it < pointRepeatNum; ++it ) {
-                QPainter::drawEllipse(  d->m_x[it] - width / 2.0,
-                                        y - height / 2.0, width, height  );
+                // Have to compensate truncate rounding of conversion from real to int
+                // for all of rx, ry, rw, rh (given int-based method called).
+                // (and the 0.5 base-offset for the middle of center pixel). E.g. should
+                // x=5, w=3   -> rx = 4, rw = 3
+                // x=5, w=3.5 -> rx = 4, rw = 3
+                // x=5, w=4   -> rx = 3, rw = 4
+                // x=5, w=5   -> rx = 3, rw = 5
+                QPainter::drawEllipse(d->m_x[it] - static_cast<int>(width / 2.0),
+                                      y - static_cast<int>(height / 2.0),
+                                      width, height);
             }
         }
     }
@@ -403,11 +411,11 @@ QRegion GeoPainter::regionFromEllipse ( const GeoDataCoordinates & centerPositio
         if ( visible ) {
             // Draw all the x-repeat-instances of the point on the screen
             for( int it = 0; it < pointRepeatNum; ++it ) {
-                regions += QRegion( d->m_x[it] - width / 2.0,
-                                    y - height / 2.0,
-                                    width + strokeWidth,
-                                    height + strokeWidth,
-                                    QRegion::Ellipse );
+                regions += QRegion(d->m_x[it] - static_cast<int>((width + strokeWidth) / 2.0),
+                                   y - static_cast<int>((height + strokeWidth) / 2.0),
+                                   width + strokeWidth,
+                                   height + strokeWidth,
+                                   QRegion::Ellipse );
             }
         }
         return regions;
@@ -845,7 +853,9 @@ void GeoPainter::drawRect ( const GeoDataCoordinates & centerCoordinates,
         if ( visible ) {
             // Draw all the x-repeat-instances of the point on the screen
             for( int it = 0; it < pointRepeatNum; ++it ) {
-                QPainter::drawRect( d->m_x[it] - ( width / 2.0 ), y - ( height / 2.0 ), width, height );
+                QPainter::drawRect(d->m_x[it] - static_cast<int>(width / 2.0),
+                                   y - static_cast<int>(height / 2.0),
+                                   width, height );
             }
         }
     }
@@ -874,8 +884,8 @@ QRegion GeoPainter::regionFromRect ( const GeoDataCoordinates & centerCoordinate
         if ( visible ) {
             // Draw all the x-repeat-instances of the point on the screen
             for( int it = 0; it < pointRepeatNum; ++it ) {
-                regions += QRegion( d->m_x[it] - ( ( width + strokeWidth ) / 2.0 ),
-                                    y - ( ( height + strokeWidth ) / 2.0 ),
+                regions += QRegion( d->m_x[it] - static_cast<int>((width + strokeWidth) / 2.0),
+                                    y - static_cast<int>((height + strokeWidth) / 2.0),
                                     width + strokeWidth,
                                     height + strokeWidth );
             }
