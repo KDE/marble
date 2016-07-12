@@ -181,7 +181,7 @@ private:
     QList< QList<Way> > merge( const QList<Way> &ways ) const;
 
     template<class T, class S>
-    bool contains( const T &outer, const T &inner ) const {
+    bool contains( const T &outer, const S &inner ) const {
         for ( int i = 0; i < inner.size(); ++i ) {
             if ( !outer.contains( inner[i] ) ) {
                 bool onBorder = false;
