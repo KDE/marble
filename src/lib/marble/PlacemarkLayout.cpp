@@ -572,8 +572,10 @@ bool PlacemarkLayout::layoutPlacemark( const GeoDataPlacemark *placemark, qreal 
     // If there's not enough space free don't add a VisiblePlacemark here.
 
     QRectF labelRect;
-    if( !placemark->displayName().isEmpty() ) {
-        labelRect = roomForLabel( style, x, y, placemark->name() );
+
+    const QString labelText = placemark->displayName();
+    if (!labelText.isEmpty()) {
+        labelRect = roomForLabel(style, x, y, labelText);
         if ( labelRect.isNull() ) {
             return false;
         }
