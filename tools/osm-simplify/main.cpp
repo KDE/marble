@@ -23,6 +23,7 @@
 
 #include "LineStringProcessor.h"
 #include "ShpCoastlineProcessor.h"
+#include "NodeReducer.h"
 
 using namespace Marble;
 
@@ -96,7 +97,18 @@ int main(int argc, char *argv[])
 
                           {
                               {"c", "cut-to-tiles"},
-                              QCoreApplication::translate("main", "Cuts into tiles based on the zoom level passed by <number>"),
+                              QCoreApplication::translate("main", "Cuts into tiles based on the zoom level passed using -z."),
+                              //QCoreApplication::translate("main", "number")
+                          },
+
+                          {
+                              {"n", "node-reduce"},
+                              QCoreApplication::translate("main", "Reduces the number of nodes for a given way based on zoom level"),
+                          }, 
+
+                          {
+                              {"z", "zoom-level"},
+                              QCoreApplication::translate("main", "Zoom level according to which OSM information has to be processed."),
                               QCoreApplication::translate("main", "number")
                           },
 
@@ -120,8 +132,17 @@ int main(int argc, char *argv[])
     QString inputFileName = args.at(0);
     bool debug = parser.isSet("debug");
     bool mute = parser.isSet("mute");
-    unsigned int zoomLevel = parser.value("cut-to-tiles").toInt();
-    QString outputFileName = parser.value("output");
+    unsigned int zoomLevel = parser.value("zoom-level").toInt();
+    qDebug()<<"Zoom level is "<<zoomLevel<<endl;
+
+    QString outputFileName;
+    if(parser.isSet("output")){
+        outputFileName = parser.value("output");
+    }
+    else{
+        outputFileName = "s_" + inputFileName;
+    }
+    qDebug()<<"Output file name is "<<outputFileName<<endl;
 
     if(debug) {
         debugLevel = Debug;
@@ -178,8 +199,27 @@ int main(int argc, char *argv[])
                 delete tile;
             }
         }
-    } else {
-        // future functionality
+    } else if(parser.isSet("node-reduce")) {
+        qDebug()<<"Entered Node reduce"<<endl;
+        qDebug()<<"Finished Processing"<<endl;
+        if(!parser.isSet("zoom-level")){
+            qDebug()<<" Zoom level not set"<<endl;
+        }
+        else{
+            NodeReducer reducer(map, zoomLevel);
+            reducer.process();
+            QFile outputFile(outputFileName);
+            GeoWriter writer;
+            writer.setDocumentType("0.6");
+            
+            outputFile.open( QIODevice::WriteOnly );
+            if ( !writer.write( &outputFile, map ) ) {
+                qDebug() << "Could not write the file " << outputFileName;
+                return 4;
+            }   
+
+        }
+        
     }
 
 

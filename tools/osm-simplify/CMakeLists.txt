@@ -25,6 +25,7 @@ BaseFilter.cpp
   PlacemarkFilter.cpp
     ShpCoastlineProcessor.cpp
     LineStringProcessor.cpp
+    NodeReducer.cpp
 )
 
 add_definitions( -DMAKE_MARBLE_LIB )
