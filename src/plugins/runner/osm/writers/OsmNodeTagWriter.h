@@ -11,6 +11,8 @@
 #ifndef MARBLE_OSMNODETAGWRITER_H
 #define MARBLE_OSMNODETAGWRITER_H
 
+#include <QList>
+
 namespace Marble
 {
 class GeoDataLineString;
@@ -23,7 +25,9 @@ class OsmNodeTagWriter
 {
 
 public:
-    static void writeAllNodes( const OsmPlacemarkData& osmData, GeoWriter& writer );
+    static void writeAllNodes(const QList<OsmPlacemarkData> &osmData, GeoWriter& writer );
+
+private:
     static void writeNode( const GeoDataCoordinates& coordinates,
                            const OsmPlacemarkData& osmData, GeoWriter& writer );
 };

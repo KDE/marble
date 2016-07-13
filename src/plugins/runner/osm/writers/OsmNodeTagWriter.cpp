@@ -43,14 +43,29 @@ void OsmNodeTagWriter::writeNode( const GeoDataCoordinates& coordinates, const O
     writer.writeEndElement();
 }
 
-void OsmNodeTagWriter::writeAllNodes( const OsmPlacemarkData& osmData, GeoWriter& writer )
+void OsmNodeTagWriter::writeAllNodes( const QList<OsmPlacemarkData>& values, GeoWriter& writer )
 {
-    QHash< GeoDataCoordinates, OsmPlacemarkData >::const_iterator it = osmData.nodeReferencesBegin();
-    QHash< GeoDataCoordinates, OsmPlacemarkData >::const_iterator end = osmData.nodeReferencesEnd();
+    typedef QPair<GeoDataCoordinates, OsmPlacemarkData> Coordinate;
+    QVector<Coordinate> nodes;
+
+    foreach(const OsmPlacemarkData &osmData, values) {
+        QHash< GeoDataCoordinates, OsmPlacemarkData >::const_iterator it = osmData.nodeReferencesBegin();
+        QHash< GeoDataCoordinates, OsmPlacemarkData >::const_iterator end = osmData.nodeReferencesEnd();
+        for (; it != end; ++it) {
+            nodes.push_back(Coordinate(it.key(), it.value()));
+        }
+    }
+
+    // Sort by id ascending since some external tools rely on that
+    qSort(nodes.begin(), nodes.end(), [] (const Coordinate &a, const Coordinate &b) { return a.second.id() < b.second.id(); });
 
     // Writing all the component nodes
-    for ( ; it != end; ++it ) {
-        writeNode( it.key(), it.value(), writer );
+    qint64 lastId = 0;
+    foreach(const auto &node, nodes) {
+        if (node.second.id() != lastId) {
+            writeNode(node.first, node.second, writer);
+            lastId = node.second.id();
+        } // else duplicate/shared node
     }
 }
 

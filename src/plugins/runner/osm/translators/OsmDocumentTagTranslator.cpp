@@ -42,6 +42,7 @@ bool OsmDocumentTagTranslator::writeMid( const GeoNode *node, GeoWriter& writer 
     // Creating separate lists, to improve efficiency
     QList<const GeoDataObject*> polylines, polygons;
     QList<OsmBound> bounds;
+    QList<OsmPlacemarkData> nodes;
 
     // Writing all the component nodes ( points, nodes of polylines, nodes of polygons )
     foreach ( GeoDataFeature* feature, document->featureList() ) {
@@ -57,12 +58,13 @@ bool OsmDocumentTagTranslator::writeMid( const GeoNode *node, GeoWriter& writer 
         const OsmPlacemarkData osmData = placemark->osmData();
 
         if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPointType ) {
+            nodes << osmData;
             writeElement( placemark, writer );
         }
         else if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType ||
                   placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLinearRingType ) {
             // Writing all the lineString nodes directly from the hash, as order is irrelevant
-            OsmNodeTagWriter::writeAllNodes( osmData, writer );
+            nodes << osmData;
             polylines.append( placemark );
         }
         else if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
@@ -72,20 +74,21 @@ bool OsmDocumentTagTranslator::writeMid( const GeoNode *node, GeoWriter& writer 
             // Writing all the outerRing's nodes
             const GeoDataLinearRing &outerRing = polygon->outerBoundary();
             const OsmPlacemarkData outerRingOsmData = osmData.memberReference( index );
-            OsmNodeTagWriter::writeAllNodes( outerRingOsmData, writer );
+            nodes << outerRingOsmData;
             bounds.append( OsmBound( &outerRing, outerRingOsmData ) );
 
             // Writing all nodes for each innerRing
             foreach ( const GeoDataLinearRing &innerRing, polygon->innerBoundaries() ) {
                 ++index;
                 const OsmPlacemarkData innerRingOsmData = osmData.memberReference( index );
-                OsmNodeTagWriter::writeAllNodes( innerRingOsmData, writer );
+                nodes << innerRingOsmData;
                 bounds.append( OsmBound( &innerRing, innerRingOsmData ) );
             }
             polygons.append( placemark );
         }
     }
 
+    OsmNodeTagWriter::writeAllNodes(nodes, writer);
 
     // Writing the ways
     foreach ( const GeoDataObject* polyline, polylines ) {

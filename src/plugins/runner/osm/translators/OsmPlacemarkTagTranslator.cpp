@@ -44,12 +44,7 @@ bool OsmPlacemarkTagTranslator::writeMid( const GeoNode *node, GeoWriter& writer
     const GeoDataPlacemark *placemark = static_cast<const GeoDataPlacemark*>( node );
     const OsmPlacemarkData &osmData = placemark->osmData();
 
-    if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPointType ) {
-        const GeoDataPoint* point = static_cast<const GeoDataPoint*>( placemark->geometry() );
-        const GeoDataCoordinates& coordinates = point->coordinates();
-        OsmNodeTagWriter::writeNode( coordinates, osmData, writer );
-    }
-    else if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType ) {
+    if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType ) {
         const GeoDataLineString* lineString = static_cast<const GeoDataLineString*>( placemark->geometry() );
         OsmWayTagWriter::writeWay( *lineString, osmData, writer );
     }
