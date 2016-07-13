@@ -62,8 +62,8 @@ QString Placemark::description() const
         auto const category = m_placemark.visualCategory();
         m_description = categoryName(category);
         if (category >= GeoDataFeature::FoodBar && category <= GeoDataFeature::FoodRestaurant) {
-            addTagValue("brand");
-            addTagValue("cuisine");
+            addTagValue(m_description, "brand");
+            addTagValue(m_description, "cuisine");
             addTagDescription(m_description, "self_service", "yes", "Self Service");
             addTagDescription(m_description, "takeaway", "yes", "Take Away");
             addTagDescription(m_description, "outdoor_seating", "yes", "Outdoor Seating");
@@ -78,21 +78,21 @@ QString Placemark::description() const
             addTagDescription(m_description, "smoking:outside", "separated", "Smoking (outside separated)");
             addTagDescription(m_description, "smoking:outside", "no", "No smoking outside");
         } else if (category >= GeoDataFeature::ShopBeverages && category <= GeoDataFeature::Shop) {
-            addTagValue("operator");
+            addTagValue(m_description, "operator");
         } else if (category == GeoDataFeature::TransportBusStop) {
-            addTagValue("network");
-            addTagValue("operator");
-            addTagValue("ref");
+            addTagValue(m_description, "network");
+            addTagValue(m_description, "operator");
+            addTagValue(m_description, "ref");
         } else if (category == GeoDataFeature::TransportCarShare) {
-            addTagValue("network");
-            addTagValue("operator");
+            addTagValue(m_description, "network");
+            addTagValue(m_description, "operator");
         } else if (category == GeoDataFeature::TransportFuel) {
-            addTagValue("brand");
-            addTagValue("operator");
+            addTagValue(m_description, "brand");
+            addTagValue(m_description, "operator");
         } else if (category == GeoDataFeature::NaturalTree) {
-            addTagValue("species:en");
-            addTagValue("genus:en");
-            addTagValue("leaf_type");
+            addTagValue(m_description, "species:en");
+            addTagValue(m_description, "genus:en");
+            addTagValue(m_description, "leaf_type");
         }
     }
 
@@ -152,7 +152,7 @@ QString Placemark::openingHours() const
         return m_openingHours;
     }
 
-    m_openingHours = m_placemark.osmData().tagValue("opening_hours");
+    addTagValue(m_openingHours, "opening_hours");
     return m_openingHours;
 }
 
@@ -461,13 +461,13 @@ QString Placemark::categoryName(GeoDataFeature::GeoDataVisualCategory category) 
     return QString();
 }
 
-void Placemark::addTagValue(const QString &key) const
+void Placemark::addTagValue(QString &target, const QString &key) const
 {
     auto const & osmData = m_placemark.osmData();
-    QString value = osmData.tagValue(key);
-    if (!value.isEmpty()) {
-        m_description += " - " + value.replace(';', ", ");
-    }
+    QString const value = osmData.tagValue(key);
+    QString description = value;
+    description.replace(';', " · ");
+    addTagDescription(target, key, value, description);
 }
 
 void Placemark::addTagDescription(QString &target, const QString &key, const QString &value, const QString &description) const
