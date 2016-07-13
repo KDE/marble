@@ -585,8 +585,8 @@ bool PlacemarkLayout::layoutPlacemark( const GeoDataPlacemark *placemark, qreal 
     if( mark->selected() != selected ) {
         mark->setSelected( selected );
     }
-    mark->setSymbolPosition( QPoint( x - qRound( hotSpot.x() ),
-                                     y - qRound( hotSpot.y() ) ) );
+    mark->setSymbolPosition(QPoint(qRound(x - hotSpot.x()),
+                                   qRound(y - hotSpot.y())));
     mark->setLabelRect( labelRect );
 
     if ( !labelRect.isEmpty() ) {
