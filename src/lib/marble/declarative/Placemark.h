@@ -71,7 +71,6 @@ private:
     QString categoryName(GeoDataFeature::GeoDataVisualCategory category) const;
     void addTagValue(const QString &key) const;
     void addTagDescription(QString &target, const QString &key, const QString &value, const QString &description) const;
-    QString addressFromExtendedData() const;
     QString addressFromOsmData() const;
     QString formatStreet(const QString &street, const QString &houseNumber) const;
 

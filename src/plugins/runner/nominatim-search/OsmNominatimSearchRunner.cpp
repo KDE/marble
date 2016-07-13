@@ -17,7 +17,7 @@
 #include "GeoDataExtendedData.h"
 #include "HttpDownloadManager.h"
 #include "osm/OsmPresetLibrary.h"
-
+#include "osm/OsmPlacemarkData.h"
 
 #include <QString>
 #include <QVector>
@@ -122,6 +122,8 @@ void OsmNominatimRunner::handleResult( QNetworkReply* reply )
         QString key = attributes.namedItem("class").nodeValue();
         QString value = attributes.namedItem("type").nodeValue();
 
+        OsmPlacemarkData data;
+
         GeoDataExtendedData placemarkData = extractChildren(place);
         placemarkData.addValue( GeoDataData( "class", key ) );
         placemarkData.addValue( GeoDataData( "type", value ) );
@@ -145,6 +147,9 @@ void OsmNominatimRunner::handleResult( QNetworkReply* reply )
             administrative = place.firstChildElement("region").text();
             if( administrative.isEmpty() ) {
                 administrative = place.firstChildElement("state").text();
+                data.addTag("addr:state", administrative);
+            } else {
+                data.addTag("district", administrative);
             }
         }
 
@@ -169,12 +174,14 @@ void OsmNominatimRunner::handleResult( QNetworkReply* reply )
                     placemarkName += ", ";
                 }
                 placemarkName += road;
+                data.addTag("addr:street", road);
             }
             if (!city.isEmpty() && !placemarkName.contains(",") && city != placemarkName) {
                 if( !placemarkName.isEmpty() ) {
                     placemarkName += ", ";
                 }
                 placemarkName += city;
+                data.addTag("addr:city", city);
             }
             if (!administrative.isEmpty()&& !placemarkName.contains(",") && administrative != placemarkName) {
                 if( !placemarkName.isEmpty() ) {
@@ -187,6 +194,7 @@ void OsmNominatimRunner::handleResult( QNetworkReply* reply )
                     placemarkName += ", ";
                 }
                 placemarkName += country;
+                data.addTag("addr:country", country);
             }
             if (placemarkName.isEmpty()) {
                 placemarkName = desc;
@@ -198,6 +206,7 @@ void OsmNominatimRunner::handleResult( QNetworkReply* reply )
             GeoDataFeature::GeoDataVisualCategory category = OsmPresetLibrary::osmVisualCategory( key + '=' + value );
             placemark->setVisualCategory( category );
             placemark->setExtendedData(placemarkData);
+            placemark->setOsmData(data);
             placemarks << placemark;
         }
     }

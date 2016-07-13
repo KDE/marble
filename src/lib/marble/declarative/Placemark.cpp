@@ -59,44 +59,40 @@ QString Placemark::name() const
 QString Placemark::description() const
 {
     if (m_description.isEmpty()) {
-        m_description = m_placemark.description();
-
-        if (m_description.isEmpty()) {
-            auto const category = m_placemark.visualCategory();
-            m_description = categoryName(category);
-            if (category >= GeoDataFeature::FoodBar && category <= GeoDataFeature::FoodRestaurant) {
-                addTagValue("brand");
-                addTagValue("cuisine");
-                addTagDescription(m_description, "self_service", "yes", "Self Service");
-                addTagDescription(m_description, "takeaway", "yes", "Take Away");
-                addTagDescription(m_description, "outdoor_seating", "yes", "Outdoor Seating");
-                addTagDescription(m_description, "ice_cream", "yes", "Ice Cream");
-                addTagDescription(m_description, "smoking", "dedicated", "Smoking (dedicated)");
-                addTagDescription(m_description, "smoking", "yes", "Smoking allowed");
-                addTagDescription(m_description, "smoking", "separated", "Smoking (separated)");
-                addTagDescription(m_description, "smoking", "isolated", "Smoking (isolated)");
-                addTagDescription(m_description, "smoking", "no", "No smoking");
-                addTagDescription(m_description, "smoking", "outside", "Smoking (outside)");
-                addTagDescription(m_description, "smoking:outside", "yes", "Smoking (outside)");
-                addTagDescription(m_description, "smoking:outside", "separated", "Smoking (outside separated)");
-                addTagDescription(m_description, "smoking:outside", "no", "No smoking outside");
-            } else if (category >= GeoDataFeature::ShopBeverages && category <= GeoDataFeature::Shop) {
-                addTagValue("operator");
-            } else if (category == GeoDataFeature::TransportBusStop) {
-                addTagValue("network");
-                addTagValue("operator");
-                addTagValue("ref");
-            } else if (category == GeoDataFeature::TransportCarShare) {
-                addTagValue("network");
-                addTagValue("operator");
-            } else if (category == GeoDataFeature::TransportFuel) {
-                addTagValue("brand");
-                addTagValue("operator");
-            } else if (category == GeoDataFeature::NaturalTree) {
-                addTagValue("species:en");
-                addTagValue("genus:en");
-                addTagValue("leaf_type");
-            }
+        auto const category = m_placemark.visualCategory();
+        m_description = categoryName(category);
+        if (category >= GeoDataFeature::FoodBar && category <= GeoDataFeature::FoodRestaurant) {
+            addTagValue("brand");
+            addTagValue("cuisine");
+            addTagDescription(m_description, "self_service", "yes", "Self Service");
+            addTagDescription(m_description, "takeaway", "yes", "Take Away");
+            addTagDescription(m_description, "outdoor_seating", "yes", "Outdoor Seating");
+            addTagDescription(m_description, "ice_cream", "yes", "Ice Cream");
+            addTagDescription(m_description, "smoking", "dedicated", "Smoking (dedicated)");
+            addTagDescription(m_description, "smoking", "yes", "Smoking allowed");
+            addTagDescription(m_description, "smoking", "separated", "Smoking (separated)");
+            addTagDescription(m_description, "smoking", "isolated", "Smoking (isolated)");
+            addTagDescription(m_description, "smoking", "no", "No smoking");
+            addTagDescription(m_description, "smoking", "outside", "Smoking (outside)");
+            addTagDescription(m_description, "smoking:outside", "yes", "Smoking (outside)");
+            addTagDescription(m_description, "smoking:outside", "separated", "Smoking (outside separated)");
+            addTagDescription(m_description, "smoking:outside", "no", "No smoking outside");
+        } else if (category >= GeoDataFeature::ShopBeverages && category <= GeoDataFeature::Shop) {
+            addTagValue("operator");
+        } else if (category == GeoDataFeature::TransportBusStop) {
+            addTagValue("network");
+            addTagValue("operator");
+            addTagValue("ref");
+        } else if (category == GeoDataFeature::TransportCarShare) {
+            addTagValue("network");
+            addTagValue("operator");
+        } else if (category == GeoDataFeature::TransportFuel) {
+            addTagValue("brand");
+            addTagValue("operator");
+        } else if (category == GeoDataFeature::NaturalTree) {
+            addTagValue("species:en");
+            addTagValue("genus:en");
+            addTagValue("leaf_type");
         }
     }
 
@@ -106,15 +102,8 @@ QString Placemark::description() const
 QString Placemark::address() const
 {
     if (m_address.isEmpty()) {
-        m_address = addressFromExtendedData();
-        if (m_address.isEmpty()) {
-            m_address = addressFromOsmData();
-        }
-        if (m_address.isEmpty()) {
-            m_address = m_placemark.address();
-        }
+        m_address = addressFromOsmData();
     }
-
     return m_address;
 }
 
@@ -490,49 +479,6 @@ void Placemark::addTagDescription(QString &target, const QString &key, const QSt
         }
         target += description;
     }
-}
-
-QString Placemark::addressFromExtendedData() const
-{
-#ifdef HAVE_QT5_POSITIONING
-        QGeoAddress address;
-        Marble::GeoDataExtendedData data = m_placemark.extendedData();
-        address.setCountry(data.value("country").value().toString());
-        address.setState(data.value("state").value().toString());
-        address.setCounty(data.value("county").value().toString());
-
-        QString city = data.value("city").value().toString();
-        if (city.isEmpty()) {
-            city = data.value("town").value().toString();
-        }
-        if (city.isEmpty()) {
-            city = data.value("village").value().toString();
-        }
-        if (city.isEmpty()) {
-            city = data.value("hamlet").value().toString();
-        }
-        address.setCity(city);
-        address.setDistrict(data.value("district").value().toString());
-        address.setPostalCode(data.value("postcode").value().toString());
-
-        if (data.value("class").value().toString() != "highway") {
-            // Do not set the street for streets itself -- the placemark will have the street name included already
-
-            // Unfortunately QGeoAddress cannot handle house number / street name ordering via its API,
-            // so we have to fall back to our own translations
-            QString const street = data.value("road").value().toString();
-            QString const houseNumber = data.value("house_number").value().toString();
-            address.setStreet(formatStreet(street, houseNumber));
-        }
-
-        // @todo FIXME Unfortunately QGeoAddress docs claim it wants a three-letter country code that neither OSM nor QLocale provide
-        // address.setCountryCode(QLocale::system().name());
-        // address.setCountryCode(data.value("country_code").value().toString());
-
-        return address.text().replace("<br/>", ", ");
-#else
-    return QString();
-#endif
 }
 
 QString Placemark::addressFromOsmData() const
