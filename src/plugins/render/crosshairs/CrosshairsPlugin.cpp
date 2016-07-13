@@ -227,19 +227,24 @@ bool CrosshairsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
     const int width = m_crosshairs.width();
     const int height = m_crosshairs.height();
 
+    int posX;
+    int posY;
+
     GeoDataCoordinates const focusPoint = viewport->focusPoint();
     GeoDataCoordinates const centerPoint = GeoDataCoordinates( viewport->centerLongitude(), viewport->centerLatitude() );
     if ( focusPoint == centerPoint ) {
         // Focus point is in the middle of the screen. Special casing this avoids jittering.
-        int centerX = viewport->size().width() / 2;
-        int centerY = viewport->size().height() / 2;
-        painter->drawPixmap( QPoint ( centerX - width / 2, centerY - height / 2 ), m_crosshairs );
+        const QSize viewPortSize = viewport->size();
+        posX = (viewPortSize.width() - width) / 2;
+        posY = (viewPortSize.height() - height) / 2;
     } else {
         qreal centerX = 0.0;
         qreal centerY = 0.0;
         viewport->screenCoordinates( focusPoint, centerX, centerY );
-        painter->drawPixmap( QPoint ( centerX - width / 2, centerY - height / 2 ), m_crosshairs );
+        posX = qRound(centerX - width / 2.0);
+        posY = qRound(centerY - height / 2.0);
     }
+    painter->drawPixmap(posX, posY, m_crosshairs );
 
     return true;
 }
