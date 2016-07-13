@@ -668,14 +668,15 @@ QRectF PlacemarkLayout::roomForLabel( const GeoDataStyle::ConstPtr &style,
     }
     else if (style->labelStyle().alignment() == GeoDataLabelStyle::Right)
     {
+        const int symbolWidth = style->iconStyle().icon().width();
+        const qreal startY = y - textHeight/2;
+        const qreal xPos = x + symbolWidth / 2 + 1;
+
         // Check up to seven vertical positions (center, +3, -3 from center)
         for(int i=0; i<7; ++i)
         {
-            const int symbolWidth = style->iconStyle().icon().width();
-            const qreal startY = y - textHeight/2;
             const qreal increase = (i/2) * (textHeight + 1); //intentional integer arithmetics
             const qreal direction = (i%2 == 0 ? 1 : -1);
-            const qreal xPos = x + symbolWidth / 2 + 1;
             const qreal yPos = startY + increase*direction;
 
             const QRectF labelRect = QRectF(xPos, yPos, textWidth, textHeight);
