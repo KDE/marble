@@ -30,8 +30,8 @@ namespace Marble
 
 void OsmNodeTagWriter::writeNode( const GeoDataCoordinates& coordinates, const OsmPlacemarkData& osmData, GeoWriter& writer )
 {
-    QString lat = QString::number( coordinates.latitude( GeoDataCoordinates::Degree ), 'f', 10 );
-    QString lon = QString::number( coordinates.longitude( GeoDataCoordinates::Degree ), 'f', 10 );
+    QString lat = QString::number( coordinates.latitude( GeoDataCoordinates::Degree ), 'f', 7 );
+    QString lon = QString::number( coordinates.longitude( GeoDataCoordinates::Degree ), 'f', 7 );
 
     writer.writeStartElement( osm::osmTag_node );
 
