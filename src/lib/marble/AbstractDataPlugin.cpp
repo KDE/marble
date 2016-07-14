@@ -238,7 +238,7 @@ void AbstractDataPlugin::handleViewportChange( const ViewportParams *viewport )
 
         // Make sure we have a valid bounding rect for collision detection
         item->setProjection( viewport );
-        item->setSize( QSizeF( declarativeItem->boundingRect().size() ) );
+        item->setSize(QSizeF(declarativeItem->width(), declarativeItem->height()));
 
         int shiftX( 0 ), shiftY( 0 );
         switch( declarativeItem->transformOrigin() ) {
