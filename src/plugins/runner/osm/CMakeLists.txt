@@ -17,8 +17,6 @@ set( osm_writers_SRCS
    )
 set( osm_translators_SRCS
         translators/OsmDocumentTagTranslator.cpp
-        translators/OsmPlacemarkTagTranslator.cpp
-        translators/OsmFeatureTagTranslator.cpp
    )
 
 set( osm_SRCS

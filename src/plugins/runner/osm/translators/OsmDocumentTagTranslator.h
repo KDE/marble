@@ -12,7 +12,6 @@
 #define MARBLE_OSMDOCUMENTTAGTRANSLATOR_H
 
 #include "GeoTagWriter.h"
-#include "OsmFeatureTagTranslator.h"
 
 namespace Marble
 {
@@ -33,17 +32,10 @@ namespace Marble
 class GeoDataLineString;
 class OsmPlacemarkData;
 
-class OsmDocumentTagTranslator : public OsmFeatureTagTranslator
+class OsmDocumentTagTranslator : public GeoTagWriter
 {
 public:
-  OsmDocumentTagTranslator();
-
-protected:
-    virtual bool writeMid( const GeoNode *node, GeoWriter& writer ) const;
-
-private:
-  typedef QPair<const GeoDataLineString*, OsmPlacemarkData > OsmBound;
-
+  bool write( const GeoNode *node, GeoWriter& writer ) const;
 };
 
 }
