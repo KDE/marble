@@ -30,6 +30,8 @@ public:
 
     const RouteSegment & at( int index ) const;
 
+    int indexOf(const RouteSegment &segment) const;
+
     int size() const;
 
     const GeoDataLineString & path() const;

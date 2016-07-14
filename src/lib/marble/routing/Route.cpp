@@ -63,6 +63,11 @@ const RouteSegment & Route::at( int index ) const
     return m_segments[index];
 }
 
+int Route::indexOf(const RouteSegment &segment) const
+{
+    return m_segments.indexOf(segment);
+}
+
 const GeoDataLineString & Route::path() const
 {
     return m_path;

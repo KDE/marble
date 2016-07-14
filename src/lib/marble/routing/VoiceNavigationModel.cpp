@@ -19,6 +19,18 @@ namespace Marble
 class VoiceNavigationModelPrivate
 {
 public:
+
+    struct Announcement
+    {
+        bool announcementDone;
+        bool turnInstructionDone;
+
+        Announcement(){
+            announcementDone = false;
+            turnInstructionDone = false;
+        }
+    };
+
     VoiceNavigationModel* m_parent;
 
     QString m_speaker;
@@ -33,6 +45,8 @@ public:
 
     qreal m_lastDistanceTraversed;
 
+    GeoDataLineString m_lastRoutePath;
+
     Maneuver::Direction m_lastTurnType;
 
     GeoDataCoordinates m_lastTurnPoint;
@@ -41,12 +55,11 @@ public:
 
     QString m_announcementText;
 
-    RouteSegment m_lastSegment;
-    RouteSegment m_secondLastSegment;
-
     bool m_destinationReached;
 
     bool m_deviated;
+
+    QVector<Announcement> m_announcementList;
 
     explicit VoiceNavigationModelPrivate( VoiceNavigationModel* parent );
 
@@ -216,11 +229,7 @@ void VoiceNavigationModelPrivate::updateInstruction( RouteSegment segment, qreal
         QString nextSegmentAnnouncementText = announcementText(nextSegmentDirection, nextSegmentDistance);
         m_announcementText += nextSegmentAnnouncementText != QString("") ? QString(", then ") + nextSegmentAnnouncementText : QString("");
     }
-    if(segment.maneuver().instructionText() != m_secondLastSegment.maneuver().instructionText()){
-        emit m_parent->instructionChanged();
-    }
-    m_secondLastSegment = m_lastSegment;
-    m_lastSegment = segment;
+    emit m_parent->instructionChanged();
 }
 
 void VoiceNavigationModelPrivate::updateInstruction( const QString &name )
@@ -323,6 +332,12 @@ void VoiceNavigationModel::reset()
 
 void VoiceNavigationModel::update(const Route &route, qreal distanceManuever, qreal distanceTarget, bool deviated )
 {
+    if (d->m_lastRoutePath != route.path()){
+        d->m_announcementList.clear();
+        d->m_announcementList.resize(route.size());
+        d->m_lastRoutePath = route.path();
+    }
+
     if ( d->m_destinationReached && distanceTarget < 250 ) {
         return;
     }
@@ -351,13 +366,26 @@ void VoiceNavigationModel::update(const Route &route, qreal distanceManuever, qr
         d->reset();
     }
 
+    int index = route.indexOf(route.currentSegment());
+
     qreal const distanceTraversed = route.currentSegment().distance() - distanceManuever;
     bool const minDistanceTraversed = d->m_lastDistanceTraversed < 40 && distanceTraversed >= 40;
     bool const announcementAfterTurn = minDistanceTraversed && distanceManuever >= 75;
     bool const announcement = ( d->m_lastDistance > 850 || announcementAfterTurn ) && distanceManuever <= 850;
     bool const turn = ( d->m_lastDistance == 0 || d->m_lastDistance > 75 ) && distanceManuever <= 75;
-    if ( announcement || turn ) {
+
+    bool const announcementDone = d->m_announcementList[index].announcementDone;
+    bool const turnInstructionDone = d->m_announcementList[index].turnInstructionDone;
+
+    if ( ( announcement && !announcementDone ) || ( turn && !turnInstructionDone ) ) {
         d->updateInstruction( route.currentSegment(), distanceManuever, turnType );
+        VoiceNavigationModelPrivate::Announcement & curAnnouncement = d->m_announcementList[index];
+        if (announcement){
+            curAnnouncement.announcementDone = true;
+        }
+        if (turn){
+            curAnnouncement.turnInstructionDone = true;
+        }
     }
 
     d->m_lastTurnType = turnType;
