@@ -45,16 +45,9 @@ bool OsmDocumentTagTranslator::writeMid( const GeoNode *node, GeoWriter& writer 
     QList<OsmPlacemarkData> nodes;
 
     // Writing all the component nodes ( points, nodes of polylines, nodes of polygons )
-    foreach ( GeoDataFeature* feature, document->featureList() ) {
-
-        if ( feature->nodeType() != GeoDataTypes::GeoDataPlacemarkType ) {
-            continue;
-        }
-        GeoDataPlacemark* placemark = static_cast<GeoDataPlacemark*>( feature );
-
+    foreach ( GeoDataPlacemark* placemark, document->placemarkList() ) {
         // If the placemark's osmData is not complete, it is initialized by the OsmObjectManager
         OsmObjectManager::initializeOsmData( placemark );
-
         const OsmPlacemarkData osmData = placemark->osmData();
 
         if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPointType ) {
