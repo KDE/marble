@@ -25,6 +25,7 @@ BaseFilter.cpp
   PlacemarkFilter.cpp
     ShpCoastlineProcessor.cpp
     LineStringProcessor.cpp
+    TinyPlanetProcessor.cpp
     NodeReducer.cpp
 )
 

@@ -61,11 +61,11 @@ private:
                                 QVector<QPolygonF> & clippedPolyObjects,
                                 const QPointF& corner,
                                 const QPointF& point,
-                                bool isClosed ) const;
+                                bool isClosed );
     inline void clipOnceEdge(   QPolygonF & clippedPolyObject,
                                 QVector<QPolygonF> & clippedPolyObjects,
                                 const QPointF& point,
-                                bool isClosed ) const;
+                                bool isClosed );
 
     static inline qreal _m( const QPointF & start, const QPointF & end );
 

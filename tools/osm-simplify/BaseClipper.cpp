@@ -110,14 +110,14 @@ qreal BaseClipper::_m( const QPointF & start, const QPointF & end )
 {
     qreal  divisor = end.x() - start.x();
 
-    // Had to add mre zeros, because what is acceptable in screen coordinates
+    // Had to add more zeros, because what is acceptable in screen coordinates
     // could be meters on 10 meters in geographic coordinates.
     if ( std::fabs( divisor ) < 0.00000000000000001 ) {
         divisor = 0.00000000000000001 * (divisor < 0 ? -1 : 1);
     }
 
     return ( end.y() - start.y() )
-         / divisor;
+            / divisor;
 }
 
 
@@ -224,6 +224,7 @@ void BaseClipper::clipPolyObject ( const QPolygonF & polygon,
                 // sector that is located off screen to another one that
                 // is located off screen. In this situation the line
                 // can get clipped once, twice, or not at all.
+
                 clipMultiple( clippedPolyObject, clippedPolyObjects, isClosed );
             }
 
@@ -234,9 +235,6 @@ void BaseClipper::clipPolyObject ( const QPolygonF & polygon,
         if ( m_currentSector == 4 ) {
 
             clippedPolyObject << m_currentPoint;
-#ifdef MARBLE_DEBUG
-            ++(m_debugNodeCount);
-#endif
         }
 
         m_previousPoint = m_currentPoint;
@@ -748,11 +746,8 @@ void BaseClipper::clipOnceCorner( QPolygonF & clippedPolyObject,
                                   QVector<QPolygonF> & clippedPolyObjects,
                                   const QPointF& corner,
                                   const QPointF& point,
-                                  bool isClosed ) const
+                                  bool isClosed )
 {
-    Q_UNUSED( clippedPolyObjects )
-    Q_UNUSED( isClosed )
-
     if ( m_currentSector == 4) {
         // Appearing
         clippedPolyObject << corner;
@@ -767,7 +762,7 @@ void BaseClipper::clipOnceCorner( QPolygonF & clippedPolyObject,
 void BaseClipper::clipOnceEdge( QPolygonF & clippedPolyObject,
                                 QVector<QPolygonF> & clippedPolyObjects,
                                 const QPointF& point,
-                                bool isClosed ) const
+                                bool isClosed )
 {
     if ( m_currentSector == 4) {
         // Appearing
@@ -779,8 +774,10 @@ void BaseClipper::clipOnceEdge( QPolygonF & clippedPolyObject,
     else {
         // Disappearing
         clippedPolyObject << point;
+
         if ( !isClosed ) {
             clippedPolyObjects << clippedPolyObject;
+            clippedPolyObject = QPolygonF();
         }
     }
 }
