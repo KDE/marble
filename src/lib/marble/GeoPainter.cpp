@@ -899,7 +899,7 @@ QRegion GeoPainter::regionFromRect ( const GeoDataCoordinates & centerCoordinate
 }
 
 
-void GeoPainter::drawRoundRect ( const GeoDataCoordinates &centerPosition,
+void GeoPainter::drawRoundedRect(const GeoDataCoordinates &centerPosition,
                                  int width, int height,
                                  int xRnd, int yRnd )
 {
@@ -913,7 +913,7 @@ void GeoPainter::drawRoundRect ( const GeoDataCoordinates &centerPosition,
         if ( visible ) {
             // Draw all the x-repeat-instances of the point on the screen
             for( int it = 0; it < pointRepeatNum; ++it ) {
-                QPainter::drawRoundRect( d->m_x[it] - ( width / 2 ), y - ( height / 2 ), width, height, xRnd, yRnd );
+                QPainter::drawRoundedRect(d->m_x[it] - ( width / 2 ), y - ( height / 2 ), width, height, xRnd, yRnd);
             }
         }
 }

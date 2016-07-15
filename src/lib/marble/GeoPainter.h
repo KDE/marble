@@ -128,7 +128,7 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     chosen for the painter is used to paint the background of the bubble
 
     The optional parameters which describe the layout of the bubble are
-    similar to those used by QPainter::drawRoundRect().
+    similar to those used by QPainter::drawRoundedRect().
     Unlike in QPainter the rounded corners are not specified in percentage
     but in pixels to provide for optimal aesthetics.
     By choosing a positive or negative bubbleOffset it's possible to
@@ -441,7 +441,7 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
 
     \see GeoDataCoordinates
 */
-    void drawRoundRect ( const GeoDataCoordinates & centerPosition,
+    void drawRoundedRect(const GeoDataCoordinates &centerPosition,
                          int width, int height,
                          int xRnd = 25, int yRnd = 25 );
 

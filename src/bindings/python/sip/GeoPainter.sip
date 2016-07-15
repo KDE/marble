@@ -46,7 +46,7 @@ public:
     QRegion                 regionFromPolygon (const Marble::GeoDataLinearRing& linearRing, Qt::FillRule fillRule, qreal strokeWidth = 3) const;
     QRegion                 regionFromRect (const Marble::GeoDataCoordinates& centerPosition, qreal width, qreal height, bool isGeoProjected = 0, qreal strokeWidth = 3) const;
                             GeoPainter (QPaintDevice* paintDevice, const Marble::ViewportParams* viewportParams, Marble::MapQuality mapQuality = NormalQuality);
-    void                    drawRoundRect (const Marble::GeoDataCoordinates& centerPosition, int width, int height, int xRnd = 25, int yRnd = 25);
+    void                    drawRoundedRect(const Marble::GeoDataCoordinates& centerPosition, int width, int height, int xRnd = 25, int yRnd = 25);
 };
 // GeoPainter
 

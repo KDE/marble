@@ -150,7 +150,7 @@ bool TestPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QS
     brush.setStyle( Qt::DiagCrossPattern );
     painter->setBrush( brush );
 
-    painter->drawRoundRect( moscow, 40, 40 ); 
+    painter->drawRoundedRect(moscow, 40, 40);
 
     // Example: draw earth orbit
 
