@@ -792,7 +792,7 @@ void GeoPainter::drawPolygon ( const GeoDataPolygon & polygon,
 
         if (innerBoundariesOnScreen) {
             // Cut the outer polygons to the viewport
-            QVector<QPointF> viewportPolygon = QPolygonF(QRectF(0, 0, d->m_viewport->width(), d->m_viewport->width()));
+            QVector<QPointF> viewportPolygon = QPolygonF(QRectF(0, 0, d->m_viewport->width(), d->m_viewport->height()));
             foreach(QPolygonF* outerPolygon, outerPolygons) {
                 *outerPolygon = outerPolygon->intersected(QPolygonF(viewportPolygon));
             }
