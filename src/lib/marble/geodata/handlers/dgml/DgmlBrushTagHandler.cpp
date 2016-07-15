@@ -50,7 +50,12 @@ GeoNode* DgmlBrushTagHandler::parse(GeoParser& parser) const
 
     if ( !color.isEmpty() && QColor( color ).isValid() ) {
         QColor brushColor( color );
-        brushColor.setAlphaF( alpha );
+        if (color.contains("transparent")) {
+            brushColor.setAlphaF( 0.0 );
+        }
+        else {
+            brushColor.setAlphaF( alpha );
+        }
         brush.setColor( brushColor );
     }
 
