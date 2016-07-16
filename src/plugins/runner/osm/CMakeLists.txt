@@ -17,7 +17,6 @@ set( osm_writers_SRCS
    )
 set( osm_translators_SRCS
         translators/OsmDocumentTagTranslator.cpp
-        translators/O5mWriter.cpp
    )
 
 set( osm_SRCS

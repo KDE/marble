@@ -36,7 +36,7 @@ int main(int argc, char** argv)
         return 1;
     }
 
-    QString outputFilename = "output.o5m";
+    QString outputFilename = "output.kml";
     int outputIndex = app.arguments().indexOf("-o");
     if ( outputIndex > 0 && outputIndex + 1 < argc )
         outputFilename = app.arguments().at( outputIndex + 1 );
@@ -55,7 +55,5 @@ int main(int argc, char** argv)
         return 3;
     }
 
-    GeoWriter writer;
-    writer.setDocumentType("o5m");
-    writer.write(&output, dynamic_cast<GeoDataFeature*>(document));
+    GeoWriter().write(&output, dynamic_cast<GeoDataFeature*>(document));
 }
