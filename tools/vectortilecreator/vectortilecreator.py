@@ -177,7 +177,7 @@ def run(filenames, cache, refresh, directory, overwrite, zoomLevels):
                             filterLevel = "levels/{}.level".format(zoom)
                             if os.path.exists(filterLevel):
                                 call(["osmconvert", "-t={}/osmconvert_tmp-".format(cache), "--complete-ways", "--complex-ways", "--drop-version", boxString, cutted, "-o={}".format(os.path.join(cache, filterTarget))])
-                                call(["osmfilter", "--parameter-file={}".format(filterLevel), os.path.join(path, filterTarget), "-o={}".format(os.path.join(path, target))])
+                                call(["osmfilter", "--parameter-file={}".format(filterLevel), os.path.join(cache, filterTarget), "-o={}".format(os.path.join(path, target))])
                                 os.remove(os.path.join(cache, filterTarget))
                             else:
                                 call(["osmconvert", "-t={}/osmconvert_tmp-".format(cache), "--complete-ways", "--complex-ways", "--drop-version", boxString, cutted, "-o={}".format(os.path.join(path, target))])
