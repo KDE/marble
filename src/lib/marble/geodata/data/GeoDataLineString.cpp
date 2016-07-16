@@ -522,6 +522,17 @@ void GeoDataLineString::setTessellationFlags( TessellationFlags f )
     p()->m_tessellationFlags = f;
 }
 
+void GeoDataLineString::reverse()
+{
+    GeoDataGeometry::detach();
+    GeoDataLineStringPrivate* d = p();
+    delete d->m_rangeCorrected;
+    d->m_rangeCorrected = 0;
+    d->m_dirtyRange = true;
+    d->m_dirtyBox = true;
+    std::reverse(begin(), end());
+}
+
 GeoDataLineString GeoDataLineString::toNormalized() const
 {
     GeoDataLineString normalizedLineString;

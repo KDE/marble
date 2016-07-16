@@ -26,6 +26,7 @@
 #include "ShpCoastlineProcessor.h"
 #include "TinyPlanetProcessor.h"
 #include "NodeReducer.h"
+#include "WayConcatenator.h"
 
 using namespace Marble;
 
@@ -130,6 +131,22 @@ int main(int argc, char *argv[])
                               {"z", "zoom-level"},
                               QCoreApplication::translate("main", "Zoom level according to which OSM information has to be processed."),
                               QCoreApplication::translate("main", "number")
+                          },
+
+                          {
+                              {"t", "tags-filter"},
+                              QCoreApplication::translate("main", "Tag key-value pairs which are to be be considered"),
+                              QCoreApplication::translate("main", "k1=v1,k2=v2...")
+                          },
+
+                          {
+                              {"and", "tags-and"},
+                              QCoreApplication::translate("main", "For a feature to be considered for processing it must contain all the specified using tags-filter"),
+                          },
+
+                          {
+                              {"w", "concat-ways"},
+                              QCoreApplication::translate("main", "Concatenates the ways which are specified using tags-filter"),
                           },
 
                           {
@@ -389,8 +406,37 @@ int main(int argc, char *argv[])
             }
 
         }
-    } else {
+    } else if(parser.isSet("tags-filter") && parser.isSet("concat-ways")){
+
+
+        //Parses the tags given at command line and makes a Hash of key-value pairs
+        qDebug()<<" Parsed tf value: "<<parser.value("tags-filter")<<endl;
+        QStringList tagsList = parser.value("tags-filter").split(',');
+        //Filters and considers only those placemarks which have all the key-value pairs given at command line 
+
+        WayConcatenator concatenator(map, tagsList, parser.isSet("tags-and"));
+        concatenator.process();
+
+        qDebug()<<"Concatenation done, writing results to the file";
+
+        QFile outputFile(outputName);
+        GeoWriter writer;
+        writer.setDocumentType("0.6");
+        
+        outputFile.open( QIODevice::WriteOnly );
+        if ( !writer.write( &outputFile, map ) ) {
+            qDebug() << "Could not write the file " << outputName;
+            return 4;
+        }else{
+            qDebug()<<"File written";
+        }
+
+
     }
+    else {
+    }
+
+    delete map;
 
 
     return 0;

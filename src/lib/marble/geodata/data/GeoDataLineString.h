@@ -136,6 +136,10 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry
 */
     void setTessellationFlags( TessellationFlags f );
 
+/*!
+    \brief Reverses the LineString.
+*/
+     void reverse();
 
 /*!
     \brief Returns the smallest latLonAltBox that contains the LineString.

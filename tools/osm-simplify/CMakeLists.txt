@@ -27,6 +27,9 @@ BaseFilter.cpp
     LineStringProcessor.cpp
     TinyPlanetProcessor.cpp
     NodeReducer.cpp
+    TagsFilter.cpp
+    	WayConcatenator.cpp
+WayChunk.cpp
 )
 
 add_definitions( -DMAKE_MARBLE_LIB )

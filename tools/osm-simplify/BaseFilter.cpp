@@ -29,3 +29,13 @@ BaseFilter::~BaseFilter()
 {
 
 }
+
+QList<GeoDataObject*>::const_iterator BaseFilter::objectsBegin() const
+{
+  return m_objects.begin();
+}
+
+QList<GeoDataObject*>::const_iterator BaseFilter::objectsEnd() const
+{
+  return m_objects.end();
+}

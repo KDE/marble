@@ -28,6 +28,9 @@ public:
 
     virtual void process() = 0;
 
+    QList<GeoDataObject*>::const_iterator objectsBegin() const;
+    QList<GeoDataObject*>::const_iterator objectsEnd() const;
+
 protected:
     GeoDataDocument* m_document;
     QList<GeoDataObject*> m_objects;
