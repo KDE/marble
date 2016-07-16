@@ -741,14 +741,14 @@ void StyleBuilder::Private::initializeDefaultStyles()
     // Fonts for areas ...
     tmp = m_defaultStyle[GeoDataFeature::Continent]->labelStyle().font();
     tmp.setLetterSpacing( QFont::AbsoluteSpacing, 2 );
-    tmp.setCapitalization( QFont::SmallCaps );
+    tmp.setCapitalization( QFont::AllUppercase );
     tmp.setBold( true );
     m_defaultStyle[GeoDataFeature::Continent]->labelStyle().setFont( tmp );
 
     // Fonts for areas ...
     tmp = m_defaultStyle[GeoDataFeature::Mare]->labelStyle().font();
     tmp.setLetterSpacing( QFont::AbsoluteSpacing, 2 );
-    tmp.setCapitalization( QFont::SmallCaps );
+    tmp.setCapitalization( QFont::AllUppercase );
     tmp.setBold( true );
     m_defaultStyle[GeoDataFeature::Mare]->labelStyle().setFont( tmp );
 
