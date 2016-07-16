@@ -21,9 +21,9 @@ import argparse
 import urllib3
 import zipfile
 sys.path.append('../shp2osm')
-sys.path.append('../vectortilecreator')
 import polyshp2osm
-import vectortilecreator
+from subprocess import call
+
 
 def unzip_file(filename, in_dir):
 	print(in_dir)
@@ -124,9 +124,13 @@ if __name__ == "__main__":
 				path = os.path.join(args.in_dir, filename) + '/' + filename + '_shp.shp'
 			abs_file_paths.append(path)
 		print('Level has following SHP datasets: ', abs_file_paths)
-		polyshp2osm.run(abs_file_paths, 1, 5000000, 'tiny_planet_{}'.format(level))
-		print('Tiny planetosm for Level = {} complete.'.format(level))
+		tinyPlanet = 'tiny_planet_{}'.format(level)
+		if args.overwrite or not os.path.exists(tinyPlanet):
+		    polyshp2osm.run(abs_file_paths, 1, 5000000, tinyPlanet)		
+		    print('Tiny planetosm for Level = {} complete.'.format(level))
 		f = open('bound_info_{}'.format(level), "w")
 		print('tiny_planet_{}.1.osm;Level;-180.0;-86.0;180.0;86.0'.format(level), file=f)
 		f.close()
-		vectortilecreator.run(['bound_info_{}'.format(level)], args.cache, args.refresh, args.out_dir, args.overwrite, [level])
+		#vectortilecreator.run(['bound_info_{}'.format(level)], args.cache, args.refresh, args.out_dir, args.overwrite, [level])
+		call(["osm-simplify", "-c", "-z", str(level), "-o", args.out_dir, '{}.1.osm'.format(tinyPlanet)])
+		

@@ -29,6 +29,10 @@ GeoWriter::GeoWriter()
 bool GeoWriter::write(QIODevice* device, const GeoNode *feature)
 {
     setDevice( device );
+    if (m_documentType == "o5m") {
+        return writeElement(feature);
+    }
+
     setAutoFormatting( true );
     writeStartDocument();
 
