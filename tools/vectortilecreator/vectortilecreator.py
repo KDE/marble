@@ -113,7 +113,7 @@ class InputProvider(object):
             print ("Creating cut out region {}\r".format(cutted), end='')
             self.__createdFiles.add(cutted)
             inputFile = self.__zoomOut(tile, zoom - 2)
-            call(["osmconvert", "-t={}/osmconvert_tmp-".format(self._cacheDirectory), "--complete-ways", "--complex-ways", "--drop-version", "-b={},{},{},{}".format(baseTile.west(), baseTile.south(), baseTile.east(), baseTile.north()), "-o={}".format(cutted), os.path.join(self._cacheDirectory, inputFile)])
+            call(["osmconvert", "-t={}/osmconvert_tmp-".format(self._cacheDirectory), "--complete-ways", "--complex-ways", "--drop-version", "-b={},{},{},{}".format(baseTile.west(), baseTile.south(), baseTile.east(), baseTile.north()), "-o={}".format(cutted), inputFile])
         return cutted
 
 
@@ -176,9 +176,9 @@ def run(filenames, cache, refresh, directory, overwrite, zoomLevels):
                             print ("{} level {}: {}/{} {}\r".format(bounds[1], zoom, count, total, os.path.join(path, target)), end='')
                             filterLevel = "levels/{}.level".format(zoom)
                             if os.path.exists(filterLevel):
-                                call(["osmconvert", "-t={}/osmconvert_tmp-".format(cache), "--complete-ways", "--complex-ways", "--drop-version", boxString, cutted, "-o={}".format(os.path.join(path, filterTarget))])
+                                call(["osmconvert", "-t={}/osmconvert_tmp-".format(cache), "--complete-ways", "--complex-ways", "--drop-version", boxString, cutted, "-o={}".format(os.path.join(cache, filterTarget))])
                                 call(["osmfilter", "--parameter-file={}".format(filterLevel), os.path.join(path, filterTarget), "-o={}".format(os.path.join(path, target))])
-                                os.remove(os.path.join(path, filterTarget))
+                                os.remove(os.path.join(cache, filterTarget))
                             else:
                                 call(["osmconvert", "-t={}/osmconvert_tmp-".format(cache), "--complete-ways", "--complex-ways", "--drop-version", boxString, cutted, "-o={}".format(os.path.join(path, target))])
                             call(["chmod", "644", os.path.join(path, target)])
