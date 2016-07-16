@@ -24,7 +24,7 @@ import time
 from subprocess import call
 import argparse
 import urllib3
-
+import hashlib
 
 class Tile(object):
 
@@ -98,6 +98,10 @@ class InputProvider(object):
         self.overwrite = overwrite
         self.__createdFiles = set()
 
+        md5 = hashlib.md5()
+        md5.update(self.__inputFile.encode('utf-8'))
+        self.__inputDigest = md5.hexdigest()[0:7]
+
     def file(self, tile):
         return self.__zoomOut(tile, tile.zoom - 2)
 
@@ -108,9 +112,9 @@ class InputProvider(object):
         coordinate = Coordinate(tile.west(), tile.north())
         baseZoom = max(0, zoom)
         baseTile = coordinate.tile(baseZoom)
-        cutted = "{}/{}_{}_{}_{}.o5m".format(self._cacheDirectory, tile.zoom, baseTile.zoom, baseTile.x, baseTile.y)
+        cutted = "{}/{}_{}_{}_{}.o5m".format(self._cacheDirectory, self.__inputDigest, baseTile.zoom, baseTile.x, baseTile.y)
         if (self.overwrite and cutted not in self.__createdFiles) or not os.path.exists(cutted):
-            print ("Creating cut out region {}\r".format(cutted), end='')
+            print ("Creating cut out region {}{}\r".format(cutted, ' ' * 10), end='')
             self.__createdFiles.add(cutted)
             inputFile = self.__zoomOut(tile, zoom - 2)
             call(["osmconvert", "-t={}/osmconvert_tmp-".format(self._cacheDirectory), "--complete-ways", "--complex-ways", "--drop-version", "-b={},{},{},{}".format(baseTile.west(), baseTile.south(), baseTile.east(), baseTile.north()), "-o={}".format(cutted), inputFile])
@@ -125,10 +129,10 @@ def download(url, directory, refresh):
             aDay = 60 * 60 * 24
             age = (time.time() - os.path.getmtime(path)) / aDay
             if age < refresh:
-                return filename
+                return path
             # else download again
         else:
-            return filename
+            return path
     http = urllib3.PoolManager()
     r = http.request('GET', url, preload_content=False)
     chunk_size = 8192
@@ -148,7 +152,7 @@ def download(url, directory, refresh):
     out.close()
     print ("Done")
 
-    return filename
+    return path
 
 def run(filenames, cache, refresh, directory, overwrite, zoomLevels):
     for csvfilename in filenames:
