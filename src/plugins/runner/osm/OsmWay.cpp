@@ -25,6 +25,8 @@ QSet<QString> OsmWay::s_areaTags;
 void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes) const
 {
     bool const shouldRender =
+        !m_osmData.containsTagKey("area:highway") &&
+        !m_osmData.containsTag("boundary", "protected_area") &&
         !m_osmData.containsTag("boundary", "postal_code") &&
         !m_osmData.containsTagKey("closed:highway") &&
         !m_osmData.containsTagKey("abandoned:highway") &&
