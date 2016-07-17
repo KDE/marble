@@ -93,6 +93,7 @@ QSet<GeoDataFeature::GeoDataVisualCategory> acceptedVisualCategories()
         << GeoDataFeature::GeographicPole
         << GeoDataFeature::MagneticPole
         << GeoDataFeature::ShipWreck
+        << GeoDataFeature::LeisureMarina
         << GeoDataFeature::AirPort
         << GeoDataFeature::Observatory
         << GeoDataFeature::AccomodationCamping

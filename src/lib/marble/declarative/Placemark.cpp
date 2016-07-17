@@ -389,6 +389,7 @@ QString Placemark::categoryName(GeoDataFeature::GeoDataVisualCategory category) 
     case GeoDataFeature::ReligionShinto: return tr("Shinto");
     case GeoDataFeature::ReligionSikh: return tr("Sikh");
     case GeoDataFeature::LeisureGolfCourse: return tr("Golf Course");
+    case GeoDataFeature::LeisureMarina: return tr("Marina");
     case GeoDataFeature::LeisurePark: return tr("Park");
     case GeoDataFeature::LeisurePlayground: return tr("Playground");
     case GeoDataFeature::LeisurePitch: return tr("Pitch");

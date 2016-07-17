@@ -271,6 +271,7 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "leisure", "common" ) ]             = GeoDataFeature::LanduseGrass;
     s_visualCategories[ OsmTag( "leisure", "garden" ) ]             = GeoDataFeature::LanduseGrass;
     s_visualCategories[ OsmTag( "leisure", "golf_course" ) ]        = GeoDataFeature::LeisureGolfCourse;
+    s_visualCategories[ OsmTag( "leisure", "marina" ) ]             = GeoDataFeature::LeisureMarina;
     s_visualCategories[ OsmTag( "leisure", "park" ) ]               = GeoDataFeature::LeisurePark;
     s_visualCategories[ OsmTag( "leisure", "playground" ) ]         = GeoDataFeature::LeisurePlayground;
     s_visualCategories[ OsmTag( "leisure", "pitch" ) ]              = GeoDataFeature::LeisurePitch;

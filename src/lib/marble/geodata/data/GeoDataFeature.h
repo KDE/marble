@@ -350,6 +350,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
 
         // OpenStreetMap category Leisure
         LeisureGolfCourse,
+        LeisureMarina,
         LeisurePark,
         LeisurePlayground,
         LeisurePitch,

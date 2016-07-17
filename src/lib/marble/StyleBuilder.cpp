@@ -124,6 +124,7 @@ StyleBuilder::Private::Private() :
 
     m_defaultMinZoomLevels[GeoDataFeature::MilitaryDangerArea]  = 11;
 
+    m_defaultMinZoomLevels[GeoDataFeature::LeisureMarina]       = 13;
     m_defaultMinZoomLevels[GeoDataFeature::LeisurePark]         = 11;
     m_defaultMinZoomLevels[GeoDataFeature::LeisurePlayground]   = 11;
     m_defaultMinZoomLevels[GeoDataFeature::LanduseAllotments]   = 11;
@@ -668,6 +669,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataFeature::NaturalHeath]             = StyleBuilder::Private::createWayStyle( "#d6d99f", QColor("#d6d99f").darker(150), true, false );
 
     m_defaultStyle[GeoDataFeature::LeisureGolfCourse]        = StyleBuilder::Private::createWayStyle( QColor("#b5e3b5"), QColor("#b5e3b5").darker(150), true, true );
+    m_defaultStyle[GeoDataFeature::LeisureMarina]            = StyleBuilder::Private::createOsmPOIStyle( osmFont, QString(), QColor("#95abd5"), QColor("#aec8d1"), QColor("#95abd5").darker(150) );
     m_defaultStyle[GeoDataFeature::LeisurePark]              = StyleBuilder::Private::createWayStyle( QColor("#c8facc"), QColor("#c8facc").darker(150), true, true );
     m_defaultStyle[GeoDataFeature::LeisurePlayground]        = StyleBuilder::Private::createOsmPOIStyle( osmFont, "amenity/playground.16", amenityColor, "#CCFFF1", "#BDFFED" );
     m_defaultStyle[GeoDataFeature::LeisurePitch]             = StyleBuilder::Private::createWayStyle( "#8ad3af", QColor("#8ad3af").darker(150), true, true );
@@ -1060,6 +1062,7 @@ QStringList StyleBuilder::renderOrder() const
         paintLayerOrder << Private::createPaintLayerItem("LineString", GeoDataFeature::NaturalReef, "outline");
         paintLayerOrder << Private::createPaintLayerItem("LineString", GeoDataFeature::NaturalReef, "inline");
         paintLayerOrder << Private::createPaintLayerItem("LineString", GeoDataFeature::NaturalReef, "label");
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::LeisureMarina);
 
 
         for ( int i = GeoDataFeature::HighwaySteps; i <= GeoDataFeature::HighwayMotorway; i++ ) {
@@ -1100,6 +1103,7 @@ QStringList StyleBuilder::renderOrder() const
         paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataFeature::NaturalGlacier);
         paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataFeature::NaturalIceShelf);
         paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataFeature::NaturalScrub);
+        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataFeature::LeisureMarina);
         paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataFeature::LeisurePark);
         paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataFeature::LeisurePlayground);
         paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataFeature::LeisurePitch);
@@ -1377,6 +1381,7 @@ QString StyleBuilder::visualCategoryName(GeoDataFeature::GeoDataVisualCategory c
         visualCategoryNames[GeoDataFeature::ReligionShinto] = "ReligionShinto";
         visualCategoryNames[GeoDataFeature::ReligionSikh] = "ReligionSikh";
         visualCategoryNames[GeoDataFeature::LeisureGolfCourse] = "LeisureGolfCourse";
+        visualCategoryNames[GeoDataFeature::LeisureMarina] = "LeisureMarina";
         visualCategoryNames[GeoDataFeature::LeisurePark] = "LeisurePark";
         visualCategoryNames[GeoDataFeature::LeisurePlayground] = "LeisurePlayground";
         visualCategoryNames[GeoDataFeature::LeisurePitch] = "LeisurePitch";

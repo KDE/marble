@@ -25,9 +25,10 @@ QSet<QString> OsmWay::s_areaTags;
 void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes) const
 {
     bool const shouldRender =
-        !m_osmData.containsTagKey("area:highway") &&
-        !m_osmData.containsTag("boundary", "protected_area") &&
+        !m_osmData.containsTagKey("area:highway") &&              // Not supported yet
+        !m_osmData.containsTag("boundary", "protected_area") &&   // Not relevant for the default map
         !m_osmData.containsTag("boundary", "postal_code") &&
+        !m_osmData.containsTag("boundary", "aerial_views") &&     // Created by OSM editor(s) application for digitalization
         !m_osmData.containsTagKey("closed:highway") &&
         !m_osmData.containsTagKey("abandoned:highway") &&
         !m_osmData.containsTagKey("abandoned:natural") &&
@@ -148,6 +149,7 @@ bool OsmWay::isAreaTag(const QString &keyValue)
         s_areaTags.insert( "leisure=common" );
         s_areaTags.insert( "leisure=garden" );
         s_areaTags.insert( "leisure=golf_course" );
+        s_areaTags.insert( "leisure=marina" );
         s_areaTags.insert( "leisure=playground" );
         s_areaTags.insert( "leisure=pitch" );
         s_areaTags.insert( "leisure=park" );
