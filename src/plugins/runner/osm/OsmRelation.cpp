@@ -54,6 +54,8 @@ void OsmRelation::create(GeoDataDocument *document, const OsmWays &ways, const O
         return;
     }
 
+    bool shouldRender = true;
+
     QStringList const outerRoles = QStringList() << "outer" << "";
     QSet<qint64> outerWays;
     QList<GeoDataLinearRing> outer = rings(outerRoles, ways, nodes, outerWays);
@@ -71,6 +73,9 @@ void OsmRelation::create(GeoDataDocument *document, const OsmWays &ways, const O
         auto iterator = outerWays.begin();
         GeoDataFeature::GeoDataVisualCategory const firstCategory =
                 OsmPresetLibrary::determineVisualCategory(ways[*iterator].osmData());
+        if (ways[*iterator].osmData().containsTagKey("area:highway")) {
+            shouldRender = false;
+        }
         for( ; iterator != outerWays.end(); ++iterator ) {
             GeoDataFeature::GeoDataVisualCategory const category =
                     OsmPresetLibrary::determineVisualCategory(ways[*iterator].osmData());
@@ -101,6 +106,7 @@ void OsmRelation::create(GeoDataDocument *document, const OsmWays &ways, const O
     placemark->setOsmData(m_osmData);
     placemark->setVisualCategory(outerCategory);
     placemark->setStyle( GeoDataStyle::Ptr() );
+    placemark->setVisible(shouldRender);
 
     GeoDataPolygon* polygon = new GeoDataPolygon;
     polygon->setOuterBoundary(outer[0]);
