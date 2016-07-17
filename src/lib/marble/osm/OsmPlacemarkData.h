@@ -188,6 +188,11 @@ public:
     bool isNull() const;
 
     /**
+     * @brief isEmpty returns true if no attribute other than the id has been set
+     */
+    bool isEmpty() const;
+
+    /**
      * @brief fromParserAttributes is a convenience function that parses all osm-related
      * arguments of a tag
      * @return an OsmPlacemarkData object containing all the necessary data

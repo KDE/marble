@@ -278,6 +278,21 @@ bool OsmPlacemarkData::isNull() const
     return !m_id;
 }
 
+bool OsmPlacemarkData::isEmpty() const
+{
+    return m_tags.isEmpty() &&
+            m_nodeReferences.isEmpty() &&
+            m_memberReferences.isEmpty() &&
+            m_relationReferences.isEmpty() &&
+            m_version.isEmpty() &&
+            m_changeset.isEmpty() &&
+            m_uid.isEmpty() &&
+            m_visible.isEmpty() &&
+            m_user.isEmpty() &&
+            m_timestamp.isEmpty() &&
+            m_action.isEmpty();
+}
+
 OsmPlacemarkData OsmPlacemarkData::fromParserAttributes( const QXmlStreamAttributes &attributes )
 {
     OsmPlacemarkData osmData;

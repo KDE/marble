@@ -32,7 +32,7 @@ public:
 
     const OsmPlacemarkData & osmData() const;
 
-    void create(GeoDataDocument* document, const OsmWays &ways, const OsmNodes &nodes, QSet<qint64> &usedWays) const;
+    void create(GeoDataDocument* document, const OsmWays &ways, const OsmNodes &nodes, QSet<qint64> &usedNodes, QSet<qint64> &usedWays) const;
 
 private:
     struct OsmMember
@@ -44,7 +44,7 @@ private:
         OsmMember();
     };
 
-    QList<GeoDataLinearRing> rings(const QStringList &roles, const OsmWays &ways, const OsmNodes &nodes, QSet<qint64> &usedWays) const;
+    QList<GeoDataLinearRing> rings(const QStringList &roles, const OsmWays &ways, const OsmNodes &nodes, QSet<qint64> &usedNodes, QSet<qint64> &usedWays) const;
 
     OsmPlacemarkData m_osmData;
     QVector<OsmMember> m_members;

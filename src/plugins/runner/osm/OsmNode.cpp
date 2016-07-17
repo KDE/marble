@@ -34,14 +34,14 @@ void OsmNode::setCoordinates(const GeoDataCoordinates &coordinates)
 void OsmNode::create(GeoDataDocument *document) const
 {
     GeoDataFeature::GeoDataVisualCategory const category = OsmPresetLibrary::determineVisualCategory(m_osmData);
-    if (category == GeoDataFeature::None ||
-       (category >= GeoDataFeature::HighwaySteps && category <= GeoDataFeature::HighwayMotorway)) {
-        return;
-    }
 
     GeoDataPlacemark* placemark = new GeoDataPlacemark;
     placemark->setOsmData(m_osmData);
     placemark->setCoordinate(m_coordinates);
+
+    if (category == GeoDataFeature::None) {
+        placemark->setVisible(false);
+    }
 
     if ((category == GeoDataFeature::TransportCarShare || category == GeoDataFeature::MoneyAtm)
             && m_osmData.containsTagKey("operator")) {

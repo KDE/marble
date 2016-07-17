@@ -22,7 +22,7 @@ namespace Marble {
 
 QSet<QString> OsmWay::s_areaTags;
 
-void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes) const
+void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes, QSet<qint64> &usedNodes) const
 {
     bool const shouldRender =
         !m_osmData.containsTagKey("area:highway") &&              // Not supported yet
@@ -57,6 +57,7 @@ void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes) const
             OsmNode const & node = nodeIter.value();
             placemark->osmData().addNodeReference(node.coordinates(), node.osmData());
             linearRing->append(node.coordinates());
+            usedNodes << nodeId;
         }
 
         *linearRing = GeoDataLinearRing(linearRing->optimized());
@@ -74,6 +75,7 @@ void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes) const
             OsmNode const & node = nodeIter.value();
             placemark->osmData().addNodeReference(node.coordinates(), node.osmData());
             lineString->append(node.coordinates());
+            usedNodes << nodeId;
         }
 
         *lineString = lineString->optimized();

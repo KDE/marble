@@ -48,7 +48,7 @@ void OsmRelation::addMember(qint64 reference, const QString &role, const QString
     m_members << member;
 }
 
-void OsmRelation::create(GeoDataDocument *document, const OsmWays &ways, const OsmNodes &nodes, QSet<qint64> &usedWays) const
+void OsmRelation::create(GeoDataDocument *document, const OsmWays &ways, const OsmNodes &nodes, QSet<qint64> &usedNodes, QSet<qint64> &usedWays) const
 {
     if (!m_osmData.containsTag("type", "multipolygon")) {
         return;
@@ -58,7 +58,8 @@ void OsmRelation::create(GeoDataDocument *document, const OsmWays &ways, const O
 
     QStringList const outerRoles = QStringList() << "outer" << "";
     QSet<qint64> outerWays;
-    QList<GeoDataLinearRing> outer = rings(outerRoles, ways, nodes, outerWays);
+    QSet<qint64> outerNodes;
+    QList<GeoDataLinearRing> outer = rings(outerRoles, ways, nodes, outerNodes, outerWays);
     if (outer.isEmpty()) {
         return;
     } else if (outer.size() > 1) {
@@ -115,7 +116,7 @@ void OsmRelation::create(GeoDataDocument *document, const OsmWays &ways, const O
 
     QStringList const innerRoles = QStringList() << "inner";
     QSet<qint64> innerWays;
-    QList<GeoDataLinearRing> inner = rings(innerRoles, ways, nodes, innerWays);
+    QList<GeoDataLinearRing> inner = rings(innerRoles, ways, nodes, usedNodes, innerWays);
     foreach(qint64 wayId, innerWays) {
         Q_ASSERT(ways.contains(wayId));
         if (OsmPresetLibrary::determineVisualCategory(ways[wayId].osmData()) == GeoDataFeature::None) {
@@ -129,14 +130,16 @@ void OsmRelation::create(GeoDataDocument *document, const OsmWays &ways, const O
         polygon->appendInnerBoundary(ring);
     }
     placemark->setGeometry(polygon);
+    usedNodes |= outerNodes;
 
     OsmObjectManager::registerId( m_osmData.id() );
     document->append(placemark);
 }
 
-QList<GeoDataLinearRing> OsmRelation::rings(const QStringList &roles, const OsmWays &ways, const OsmNodes &nodes, QSet<qint64> &usedWays) const
+QList<GeoDataLinearRing> OsmRelation::rings(const QStringList &roles, const OsmWays &ways, const OsmNodes &nodes, QSet<qint64> &usedNodes, QSet<qint64> &usedWays) const
 {
     QSet<qint64> currentWays;
+    QSet<qint64> currentNodes;
     QList<qint64> roleMembers;
     foreach(const OsmMember &member, m_members) {
         if (roles.contains(member.role)) {
@@ -193,6 +196,7 @@ QList<GeoDataLinearRing> OsmRelation::rings(const QStringList &roles, const OsmW
                             }
                             if ( id != lastReference ) {
                                 ring << nodes[id].coordinates();
+                                currentNodes << id;
                             }
                         }
                         lastReference = isReversed ? nextWay.references().first()
@@ -217,6 +221,7 @@ QList<GeoDataLinearRing> OsmRelation::rings(const QStringList &roles, const OsmW
     }
 
     usedWays |= currentWays;
+    usedNodes |= currentNodes;
     return result;
 }
 
