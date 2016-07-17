@@ -284,7 +284,7 @@ int RoutingModel::rightNeighbor( const GeoDataCoordinates &position, RouteReques
     return route->size()-1;
 }
 
-void RoutingModel::updatePosition( GeoDataCoordinates location, qreal /*speed*/ )
+void RoutingModel::updatePosition( GeoDataCoordinates location, qreal speed )
 {
     d->m_route.setPosition( location );
 
@@ -297,7 +297,7 @@ void RoutingModel::updatePosition( GeoDataCoordinates location, qreal /*speed*/ 
     if ( d->m_positionTracking && d->m_positionTracking->accuracy().vertical > 0.0 ) {
         deviation = qMax<qreal>( d->m_positionTracking->accuracy().vertical, d->m_positionTracking->accuracy().horizontal );
     }
-    qreal const threshold = deviation + 100.0;
+    qreal const threshold = deviation + qBound(10.0, speed*10.0, 150.0);
 
     RoutingModelPrivate::RouteDeviation const deviated = distance < threshold ? RoutingModelPrivate::OnRoute : RoutingModelPrivate::OffRoute;
     if ( d->m_deviation != deviated ) {
