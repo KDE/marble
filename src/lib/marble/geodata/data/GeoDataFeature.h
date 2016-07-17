@@ -189,6 +189,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
 
         // OpenStreetMap category Amenity
         AmenityLibrary,
+        AmenityKindergarten,
 
         // OpenStreetMap category Education
         EducationCollege,

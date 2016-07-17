@@ -475,6 +475,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataFeature::AccomodationYouthHostel]  = StyleBuilder::Private::createOsmPOIStyle( osmFont, "transportation/hostel.16", transportationColor );
     m_defaultStyle[GeoDataFeature::AccomodationGuestHouse]   = StyleBuilder::Private::createOsmPOIStyle( osmFont, "transportation/guest_house.16", transportationColor );
     m_defaultStyle[GeoDataFeature::AmenityLibrary]           = StyleBuilder::Private::createOsmPOIStyle( osmFont, "amenity/library.20", amenityColor );
+    m_defaultStyle[GeoDataFeature::AmenityKindergarten]      = StyleBuilder::Private::createOsmPOIStyle( osmFont, QString(), amenityColor, educationalAreasAndHospital, amenityColor );
     m_defaultStyle[GeoDataFeature::EducationCollege]         = StyleBuilder::Private::createOsmPOIStyle( osmFont, QString(), amenityColor, educationalAreasAndHospital, amenityColor );
     m_defaultStyle[GeoDataFeature::EducationSchool]          = StyleBuilder::Private::createOsmPOIStyle( osmFont, QString(), amenityColor, educationalAreasAndHospital, amenityColor );
     m_defaultStyle[GeoDataFeature::EducationUniversity]      = StyleBuilder::Private::createOsmPOIStyle( osmFont, QString(), amenityColor, educationalAreasAndHospital, amenityColor );
@@ -1042,6 +1043,7 @@ QStringList StyleBuilder::renderOrder() const
 
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::AmenityGraveyard);
 
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::AmenityKindergarten);
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::EducationCollege);
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::EducationSchool);
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::EducationUniversity);
@@ -1112,6 +1114,7 @@ QStringList StyleBuilder::renderOrder() const
         paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataFeature::Landmass);
         paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataFeature::NaturalCliff);
         paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataFeature::NaturalPeak);
+        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataFeature::AmenityKindergarten);
         paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataFeature::EducationCollege);
         paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataFeature::EducationSchool);
         paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataFeature::EducationUniversity);
@@ -1237,6 +1240,7 @@ QString StyleBuilder::visualCategoryName(GeoDataFeature::GeoDataVisualCategory c
         visualCategoryNames[GeoDataFeature::AccomodationYouthHostel] = "AccomodationYouthHostel";
         visualCategoryNames[GeoDataFeature::AccomodationGuestHouse] = "AccomodationGuestHouse";
         visualCategoryNames[GeoDataFeature::AmenityLibrary] = "AmenityLibrary";
+        visualCategoryNames[GeoDataFeature::AmenityKindergarten] = "AmenityKindergarten";
         visualCategoryNames[GeoDataFeature::EducationCollege] = "EducationCollege";
         visualCategoryNames[GeoDataFeature::EducationSchool] = "EducationSchool";
         visualCategoryNames[GeoDataFeature::EducationUniversity] = "EducationUniversity";

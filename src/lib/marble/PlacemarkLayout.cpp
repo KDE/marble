@@ -101,6 +101,7 @@ QSet<GeoDataFeature::GeoDataVisualCategory> acceptedVisualCategories()
         << GeoDataFeature::AccomodationMotel
         << GeoDataFeature::AccomodationYouthHostel
         << GeoDataFeature::AmenityLibrary
+        << GeoDataFeature::AmenityKindergarten
         << GeoDataFeature::EducationCollege
         << GeoDataFeature::EducationSchool
         << GeoDataFeature::EducationUniversity

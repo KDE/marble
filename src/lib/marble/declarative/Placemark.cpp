@@ -252,6 +252,7 @@ QString Placemark::categoryName(GeoDataFeature::GeoDataVisualCategory category) 
     case GeoDataFeature::AccomodationYouthHostel: return tr("Youth Hostel");
     case GeoDataFeature::AccomodationGuestHouse: return tr("Guest House");
     case GeoDataFeature::AmenityLibrary: return tr("Library");
+    case GeoDataFeature::AmenityKindergarten: return tr("Kindergarten");
     case GeoDataFeature::EducationCollege: return tr("College");
     case GeoDataFeature::EducationSchool: return tr("School");
     case GeoDataFeature::EducationUniversity: return tr("University");

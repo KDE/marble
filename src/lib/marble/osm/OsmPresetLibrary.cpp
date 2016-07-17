@@ -55,6 +55,8 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "amenity", "school" ) ]             = GeoDataFeature::EducationSchool;
     s_visualCategories[ OsmTag( "amenity", "college" ) ]            = GeoDataFeature::EducationCollege;
     s_visualCategories[ OsmTag( "amenity", "library" ) ]            = GeoDataFeature::AmenityLibrary;
+    s_visualCategories[ OsmTag( "amenity", "kindergarten" ) ]       = GeoDataFeature::AmenityKindergarten;
+    s_visualCategories[ OsmTag( "amenity", "childcare" ) ]          = GeoDataFeature::AmenityKindergarten;
     s_visualCategories[ OsmTag( "amenity", "university" ) ]         = GeoDataFeature::EducationUniversity;
     s_visualCategories[ OsmTag( "amenity", "bus_station" ) ]        = GeoDataFeature::TransportBusStation;
     s_visualCategories[ OsmTag( "amenity", "car_sharing" ) ]        = GeoDataFeature::TransportCarShare;

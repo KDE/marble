@@ -140,6 +140,7 @@ bool OsmWay::isAreaTag(const QString &keyValue)
         s_areaTags.insert( "amenity=bicycle_parking" );
         s_areaTags.insert( "amenity=college" );
         s_areaTags.insert( "amenity=hospital" );
+        s_areaTags.insert( "amenity=kindergarten" );
         s_areaTags.insert( "amenity=school" );
         s_areaTags.insert( "amenity=university" );
         s_areaTags.insert( "leisure=common" );
