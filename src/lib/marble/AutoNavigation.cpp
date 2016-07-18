@@ -19,6 +19,9 @@
 #include "MarbleMath.h"
 #include "ViewportParams.h"
 #include "MarbleGlobal.h"
+#include "RoutingManager.h"
+#include "RoutingModel.h"
+#include "Route.h"
 
 #include <QWidget>
 #include <QRect>
@@ -37,9 +40,9 @@ public:
     const ViewportParams *const m_viewport;
     const PositionTracking *const m_tracking;
     AutoNavigation::CenterMode m_recenterMode;
-    bool                 m_adjustZoom;
-    QTimer               m_lastWidgetInteraction;
-    bool                 m_selfInteraction;
+    bool m_adjustZoom;
+    QTimer m_lastWidgetInteraction;
+    bool m_selfInteraction;
 
     /** Constructor */
     Private( MarbleModel *model, const ViewportParams *viewport, AutoNavigation *parent );
@@ -298,7 +301,14 @@ void AutoNavigation::Private::adjustZoom( const GeoDataCoordinates &currentPosit
 void AutoNavigation::Private::centerOn( const GeoDataCoordinates &position )
 {
     m_selfInteraction = true;
-    emit m_parent->centerOn( position, false );
+    RoutingManager const * routingManager = m_model->routingManager();
+    RoutingModel const * routingModel = routingManager->routingModel();
+    if (!routingManager->guidanceModeEnabled() || routingModel->deviatedFromRoute()){
+        emit m_parent->centerOn( position, false );
+    } else {
+        GeoDataCoordinates positionOnRoute = routingModel->route().positionOnRoute();
+        emit m_parent->centerOn( positionOnRoute, false );
+    }
     m_selfInteraction = false;
 }
 
