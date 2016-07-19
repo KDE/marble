@@ -115,7 +115,7 @@ def purpose(data):
     if 'prim_purp' in data:
         if data['prim_purp'] in keys:
             return keys[data['prim_purp']]
- 
+
  
 def road_map(data):
     keys = {
@@ -273,7 +273,8 @@ def feature_class(data):
     '1st Order Admin Lines': [('boundary', 'administrative'), ('admin_level', '4')],
     'Claim': [('boundary', 'administrative'), ('admin_level', '4')],
     'Airport': [('aeroway', 'aerodrome')],
-    'Date line': [('marble_line', 'date')]
+    'Date line': [('marble_line', 'date')],
+    'Bathymetry': [('marble:feature', 'bathymetry'), ('depth', data['depth'])]
     }
     if 'featurecla' in data:
         if data['featurecla'] in feat_dict:

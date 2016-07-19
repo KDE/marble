@@ -445,6 +445,7 @@ QString Placemark::categoryName(GeoDataFeature::GeoDataVisualCategory category) 
     case GeoDataFeature::Landmass: return tr("Land Mass");
     case GeoDataFeature::UrbanArea: return tr("Urban Area");
     case GeoDataFeature::InternationalDateLine: return tr("International Date Line");
+    case GeoDataFeature::Bathymetry: return tr("Bathymetry");
     case GeoDataFeature::Valley: return tr("Valley");
     case GeoDataFeature::OtherTerrain: return tr("Terrain");
     case GeoDataFeature::Crater: return tr("Crater");

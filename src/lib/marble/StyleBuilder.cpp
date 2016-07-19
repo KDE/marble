@@ -166,6 +166,8 @@ StyleBuilder::Private::Private() :
     m_defaultMinZoomLevels[GeoDataFeature::Landmass]            = 0;
     m_defaultMinZoomLevels[GeoDataFeature::UrbanArea]           = 3;
     m_defaultMinZoomLevels[GeoDataFeature::InternationalDateLine]      = 1;
+    m_defaultMinZoomLevels[GeoDataFeature::Bathymetry]          = 1;
+
 
     m_defaultMinZoomLevels[GeoDataFeature::AdminLevel1]         = 0;
     m_defaultMinZoomLevels[GeoDataFeature::AdminLevel2]         = 1;
@@ -720,6 +722,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataFeature::Landmass]                 = StyleBuilder::Private::createWayStyle( "#F1EEE8", "#F1EEE8", true, true );
     m_defaultStyle[GeoDataFeature::UrbanArea]                = StyleBuilder::Private::createWayStyle( "#E6E3DD", "#E6E3DD", true, true );
     m_defaultStyle[GeoDataFeature::InternationalDateLine]    = StyleBuilder::Private::createStyle( 1.0, 0.0, "#000000", "#000000", false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false );
+    m_defaultStyle[GeoDataFeature::Bathymetry]               = StyleBuilder::Private::createWayStyle( "#a5c9c9", "#a5c9c9", true, true );
 
     m_defaultStyle[GeoDataFeature::AdminLevel1]              = StyleBuilder::Private::createStyle(0.0, 0.0, "#DF9CCF", "#DF9CCF", false, true, Qt::SolidPattern, Qt::CustomDashLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3 );
     m_defaultStyle[GeoDataFeature::AdminLevel2]              = StyleBuilder::Private::createStyle(2.0, 0.0, "#DF9CCF", "#DF9CCF", false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3 );
@@ -884,7 +887,13 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
                 adjustStyle = true;
             }
         }
-        if(visualCategory == GeoDataFeature::AmenityGraveyard || visualCategory == GeoDataFeature::LanduseCemetery) {
+        else if (visualCategory == GeoDataFeature::Bathymetry) {
+            if( osmData.containsTagKey("depth") ){
+                // Style according to depth
+
+            }
+        }
+        else if(visualCategory == GeoDataFeature::AmenityGraveyard || visualCategory == GeoDataFeature::LanduseCemetery) {
             if( osmData.containsTag("religion","jewish") ){
                 polyStyle.setTexturePath(MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_jewish.png"));
                 adjustStyle = true;
@@ -1022,6 +1031,7 @@ QStringList StyleBuilder::renderOrder() const
                 paintLayerOrder << Private::createPaintLayerItem("Polygon", (GeoDataFeature::GeoDataVisualCategory)i);
             }
         }
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::Bathymetry);
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::NaturalBeach);
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::NaturalWetland);
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::NaturalGlacier);
@@ -1095,7 +1105,7 @@ QStringList StyleBuilder::renderOrder() const
         for ( int i = GeoDataFeature::AdminLevel1; i <= GeoDataFeature::AdminLevel11; i++ ) {
             paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataFeature::GeoDataVisualCategory)i, "label");
         }
-
+        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataFeature::Bathymetry);
         paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataFeature::AmenityGraveyard);
         paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataFeature::NaturalWood);
         paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataFeature::NaturalBeach);
@@ -1425,6 +1435,7 @@ QString StyleBuilder::visualCategoryName(GeoDataFeature::GeoDataVisualCategory c
         visualCategoryNames[GeoDataFeature::Landmass] = "Landmass";
         visualCategoryNames[GeoDataFeature::UrbanArea] = "UrbanArea";
         visualCategoryNames[GeoDataFeature::InternationalDateLine] = "InternationalDateLine";
+        visualCategoryNames[GeoDataFeature::Bathymetry] = "Bathymetry";
         visualCategoryNames[GeoDataFeature::AdminLevel1] = "AdminLevel1";
         visualCategoryNames[GeoDataFeature::AdminLevel2] = "AdminLevel2";
         visualCategoryNames[GeoDataFeature::AdminLevel3] = "AdminLevel3";

@@ -329,6 +329,7 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "marble_land", "landmass" ) ]       = GeoDataFeature::Landmass;
     s_visualCategories[ OsmTag( "settlement", "yes" ) ]             = GeoDataFeature::UrbanArea;
     s_visualCategories[ OsmTag( "marble_line", "date" ) ]           = GeoDataFeature::InternationalDateLine;
+    s_visualCategories[ OsmTag( "marble:feature", "bathymetry" ) ]  = GeoDataFeature::Bathymetry;
 
     // Default for buildings
     foreach(const QString &value, buildingValues() ) {
