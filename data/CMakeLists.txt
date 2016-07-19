@@ -121,7 +121,7 @@ install (FILES
 maps/earth/hillshading/0/0/0.png
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/hillshading/0/0)
 
-OPTION(EXPERIMENTAL_SENTINEL2_MAP "Install an experimental satellite map theme")
+OPTION(EXPERIMENTAL_SENTINEL2_MAP "Install an experimental satellite map theme" ON)
 if(EXPERIMENTAL_SENTINEL2_MAP)
     install (DIRECTORY maps/earth/sentinel2 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth)
 endif()
