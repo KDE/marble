@@ -126,7 +126,7 @@ if(EXPERIMENTAL_SENTINEL2_MAP)
     install (DIRECTORY maps/earth/sentinel2 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth)
 endif()
 
-OPTION(EXPERIMENTAL_VECTOR_TILING "Install a map theme using OSM vector tiles (experimental)")
+OPTION(EXPERIMENTAL_VECTOR_TILING "Install a map theme using OSM vector tiles (experimental)" ON)
 if(EXPERIMENTAL_VECTOR_TILING OR CMAKE_SYSTEM_NAME STREQUAL Android)
     install (DIRECTORY maps/earth/vectorosm DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth)
 endif()
