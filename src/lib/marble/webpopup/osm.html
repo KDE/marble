@@ -1,0 +1,56 @@
+<html>
+<head>
+<title>Place information</title>
+%!{bootstrap}%
+<link rel="stylesheet" media="screen" href="qrc:/marble/webpopup/placesscreen.css">
+<link rel="stylesheet" media="print, embossed" href="qrc:/marble/webpopup/placesprint.css"></head>
+<style>
+.flag {
+  background-image:url('file://%amenity%');
+}
+</style>
+<body>
+<div class="osmname"><h1>%name%</h1></div>
+
+<h2 class="osmamenity">%amenity%</h2>
+
+<h3 class="osmcuisine">%cuisine%</h3> 
+
+<p class="openinghours">Opening Hours: %openinghours%</p>
+
+<table>
+<tr class="blue">
+  <td colspan="2">Contact</td>
+</tr>
+<tr>
+  <td>Address:</td><td>%street% %housenumber% <br> %postcode% %city%</td>
+</tr>
+<tr>
+  <td>Phone:</td><td>%phone%</td>
+</tr>
+<tr>
+  <td>Website:</td><td>%website% m</td>
+</tr>
+</table>
+
+<br>
+
+<table>
+<tr class="blue">
+  <td colspan="2">Popular Facilities</td>
+</tr>
+<tr>
+  <td>Wheelchair access</td><td>%wheelchair%</td>
+</tr>
+<tr>
+  <td>Internet</td><td>%internetaccess%</td>
+</tr>
+<tr>
+  <td>Smoking</td><td>%smoking%</td>
+</tr>
+</table>
+<hr>
+
+<p>Copyright: <a href="http://www.openstreetmap.org/copyright">© OpenStreetMap Contributors</a></p>
+</body>
+</html>
