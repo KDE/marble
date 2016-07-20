@@ -183,6 +183,4 @@ QHash< QString, QVariant > MapQuestPlugin::templateSettings( RoutingProfilesMode
 
 }
 
-Q_EXPORT_PLUGIN2( MapQuestPlugin, Marble::MapQuestPlugin )
-
 #include "MapQuestPlugin.moc" // needed for Q_OBJECT here in source

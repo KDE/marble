@@ -62,6 +62,4 @@ SearchRunner* LatLonPlugin::newRunner() const
 
 }
 
-Q_EXPORT_PLUGIN2( LatLonPlugin, Marble::LatLonPlugin )
-
 #include "moc_LatLonPlugin.cpp"

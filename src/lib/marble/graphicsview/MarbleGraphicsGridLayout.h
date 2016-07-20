@@ -15,6 +15,8 @@
 #include "AbstractMarbleGraphicsLayout.h"
 #include "marble_export.h"
 
+#include <Qt> // for Qt::Alignment
+
 namespace Marble
 {
 

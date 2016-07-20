@@ -13,6 +13,8 @@
 
 #include "marble_export.h"
 
+#include <QObject>
+
 namespace Marble {
 
 class CloudSyncManager;

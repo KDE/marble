@@ -82,6 +82,4 @@ QWidget *LatLonEditPlugin::createWidget(QWidget *parent)
     return new Marble::LatLonEdit(parent);
 }
 
-Q_EXPORT_PLUGIN2(LatLonEditPlugin, LatLonEditPlugin)
-
 #include "moc_LatLonEditPlugin.cpp"

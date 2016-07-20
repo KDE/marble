@@ -15,6 +15,8 @@
 #include "marble_export.h"
 #include "ScreenGraphicsItem.h"
 
+#include <Qt> // for Qt::PenStyle
+
 class QBrush;
 class QPainterPath;
 

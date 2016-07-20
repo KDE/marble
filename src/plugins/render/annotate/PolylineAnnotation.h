@@ -12,6 +12,7 @@
 #define POLYLINEANNOTATION_H
 
 #include <QColor>
+#include <QPointer>
 
 #include "SceneGraphicsItem.h"
 #include "GeoDataCoordinates.h"

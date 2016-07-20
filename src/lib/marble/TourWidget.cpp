@@ -52,6 +52,7 @@
 #include <QUrl>
 #include <QKeyEvent>
 #include <QCloseEvent>
+#include <QPointer>
 
 namespace Marble
 {

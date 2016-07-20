@@ -17,6 +17,7 @@
 #include <QWidget>
 #include <QTreeWidget>
 #include <QMenu>
+#include <QPointer>
 #include <QDebug>
 
 // Marble

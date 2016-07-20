@@ -32,6 +32,4 @@ MarbleAbstractRunner* TravelingSalesmanPlugin::newRunner() const
 
 }
 
-Q_EXPORT_PLUGIN2( TravelingSalesmanPlugin, Marble::TravelingSalesmanPlugin )
-
 #include "moc_TravelingSalesmanPlugin.cpp"

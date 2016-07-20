@@ -159,6 +159,4 @@ QHash< QString, QVariant > OpenRouteServicePlugin::templateSettings( RoutingProf
 
 }
 
-Q_EXPORT_PLUGIN2( OpenRouteServicePlugin, Marble::OpenRouteServicePlugin )
-
 #include "OpenRouteServicePlugin.moc" // needed for Q_OBJECT here in source

@@ -191,9 +191,4 @@ QString GpsdPositionProviderPlugin::error() const
     return m_thread->error();
 }
 
-
-Q_EXPORT_PLUGIN2( GpsdPositionProviderPlugin, Marble::GpsdPositionProviderPlugin )
-
-
-
 #include "moc_GpsdPositionProviderPlugin.cpp"

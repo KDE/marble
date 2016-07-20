@@ -15,6 +15,7 @@
 #include <QFileDialog>
 #include <QMenu>
 #include <QAction>
+#include <QPointer>
 
 // Marble
 #include "GeoDataContainer.h"

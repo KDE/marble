@@ -77,6 +77,4 @@ bool GosmorePlugin::canWork() const
 
 }
 
-Q_EXPORT_PLUGIN2( GosmoreReverseGeocodingPlugin, Marble::GosmorePlugin )
-
 #include "moc_GosmoreReverseGeocodingPlugin.cpp"

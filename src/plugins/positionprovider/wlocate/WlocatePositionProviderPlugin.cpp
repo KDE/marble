@@ -197,6 +197,4 @@ void WlocatePositionProviderPlugin::handleWlocateResult()
 
 } // namespace Marble
 
-Q_EXPORT_PLUGIN2( Marble::WlocatePositionProviderPlugin, Marble::WlocatePositionProviderPlugin )
-
 #include "moc_WlocatePositionProviderPlugin.cpp"

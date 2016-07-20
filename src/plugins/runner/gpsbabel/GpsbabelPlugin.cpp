@@ -67,6 +67,4 @@ ParsingRunner* GpsbabelPlugin::newRunner() const
 
 }
 
-Q_EXPORT_PLUGIN2( GpsbabelPlugin, Marble::GpsbabelPlugin )
-
 #include "moc_GpsbabelPlugin.cpp"

@@ -66,6 +66,4 @@ ReverseGeocodingRunner* NominatimPlugin::newRunner() const
 
 }
 
-Q_EXPORT_PLUGIN2( NominatimReverseGeocodingPlugin, Marble::NominatimPlugin )
-
 #include "moc_NominatimReverseGeocodingPlugin.cpp"

@@ -62,6 +62,4 @@ SearchRunner* OpenLocationCodeSearchPlugin::newRunner() const
 
 }
 
-Q_EXPORT_PLUGIN2( OpenLocationCodeSearchPlugin, Marble::OpenLocationCodeSearchPlugin )
-
 #include "moc_OpenLocationCodeSearchPlugin.cpp"

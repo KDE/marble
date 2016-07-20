@@ -67,7 +67,5 @@ ParsingRunner* JsonPlugin::newRunner() const
 
 }
 
-Q_EXPORT_PLUGIN2( JsonPlugin, Marble::JsonPlugin )
-
 #include "moc_JsonPlugin.cpp"
 

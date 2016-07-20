@@ -18,6 +18,7 @@
 #include <QColorDialog>
 #include <QFontComboBox>
 #include <QLineEdit>
+#include <QPointer>
 
 //Marble
 #include "MarbleWidget.h"

@@ -500,7 +500,5 @@ void EclipsesPlugin::showEclipseFromMenu( QAction *action )
 
 } // namespace Marble
 
-Q_EXPORT_PLUGIN2( EclipsesPlugin, Marble::EclipsesPlugin )
-
 #include "moc_EclipsesPlugin.cpp"
 

@@ -503,7 +503,5 @@ void SatellitesPlugin::addBuiltInDataSources()
 
 } // namespace Marble
 
-Q_EXPORT_PLUGIN2( SatellitesPlugin, Marble::SatellitesPlugin )
-
 #include "moc_SatellitesPlugin.cpp"
 

@@ -92,6 +92,4 @@ QString MarbleNavigatorPlugin::includeFile() const
     return "MarbleNavigator.h";
 }
 
-Q_EXPORT_PLUGIN2(MarbleNavigatorPlugin, MarbleNavigatorPlugin)
-
 #include "moc_MarbleNavigatorPlugin.cpp"

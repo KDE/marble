@@ -725,6 +725,4 @@ void ElevationProfileFloatItem::switchDataSource(ElevationProfileDataSource* sou
 
 }
 
-Q_EXPORT_PLUGIN2(ElevationProfileFloatItem, Marble::ElevationProfileFloatItem)
-
 #include "moc_ElevationProfileFloatItem.cpp"

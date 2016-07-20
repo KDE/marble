@@ -143,6 +143,4 @@ bool CycleStreetsPlugin::supportsTemplate( RoutingProfilesModel::ProfileTemplate
 
 }
 
-Q_EXPORT_PLUGIN2( CycleStreetsPlugin, Marble::CycleStreetsPlugin )
-
 #include "CycleStreetsPlugin.moc" // needed for Q_OBJECT here in source

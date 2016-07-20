@@ -96,6 +96,4 @@ QString MarbleWidgetPlugin::includeFile() const
     return "MarbleWidget.h";
 }
 
-Q_EXPORT_PLUGIN2(MarbleWidgetPlugin, MarbleWidgetPlugin)
-
 #include "moc_MarbleWidgetPlugin.cpp"

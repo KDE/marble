@@ -209,6 +209,4 @@ void QtPositioningPositionProviderPlugin::update()
 
 } // namespace Marble
 
-Q_EXPORT_PLUGIN2( Marble::QtPositioningPositionProviderPlugin, Marble::QtPositioningPositionProviderPlugin )
-
 #include "moc_QtPositioningPositionProviderPlugin.cpp"

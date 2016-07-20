@@ -14,6 +14,7 @@
 #include "Writer.h"
 
 #include <QPair>
+#include <QHash>
 #include <QSqlQuery>
 
 namespace Marble
