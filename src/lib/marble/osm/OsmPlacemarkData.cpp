@@ -287,10 +287,8 @@ bool OsmPlacemarkData::isEmpty() const
             m_version.isEmpty() &&
             m_changeset.isEmpty() &&
             m_uid.isEmpty() &&
-            m_visible.isEmpty() &&
             m_user.isEmpty() &&
-            m_timestamp.isEmpty() &&
-            m_action.isEmpty();
+            m_timestamp.isEmpty();
 }
 
 OsmPlacemarkData OsmPlacemarkData::fromParserAttributes( const QXmlStreamAttributes &attributes )
