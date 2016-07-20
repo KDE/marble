@@ -68,6 +68,4 @@ ParsingRunner* KmlPlugin::newRunner() const
 
 }
 
-Q_EXPORT_PLUGIN2( KmlPlugin, Marble::KmlPlugin )
-
 #include "moc_KmlPlugin.cpp"

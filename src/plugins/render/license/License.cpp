@@ -241,6 +241,4 @@ void License::contextMenuEvent( QWidget *w, QContextMenuEvent *e )
 
 }
 
-Q_EXPORT_PLUGIN2( License, Marble::License )
-
 #include "moc_License.cpp"

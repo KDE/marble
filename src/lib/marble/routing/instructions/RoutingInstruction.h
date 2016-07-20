@@ -16,6 +16,7 @@
 #include "marble_export.h"
 
 #include <QVector>
+#include <QMetaType>
 
 class QTextStream;
 

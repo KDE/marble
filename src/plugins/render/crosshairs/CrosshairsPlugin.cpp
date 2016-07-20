@@ -251,6 +251,4 @@ bool CrosshairsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
 }
 
-Q_EXPORT_PLUGIN2( CrosshairsPlugin, Marble::CrosshairsPlugin )
-
 #include "moc_CrosshairsPlugin.cpp"

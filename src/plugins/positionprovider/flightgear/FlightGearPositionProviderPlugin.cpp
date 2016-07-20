@@ -228,6 +228,4 @@ QString FlightGearPositionProviderPlugin::error() const
     return QString();
 }
 
-Q_EXPORT_PLUGIN2( FlightGearPositionProviderPlugin, Marble::FlightGearPositionProviderPlugin )
-
 #include "moc_FlightGearPositionProviderPlugin.cpp"

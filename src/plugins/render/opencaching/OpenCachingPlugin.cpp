@@ -186,6 +186,4 @@ void OpenCachingPlugin::validateDifficultyRange()
 
 }
 
-Q_EXPORT_PLUGIN2( OpenCachingPlugin, Marble::OpenCachingPlugin )
-
 #include "moc_OpenCachingPlugin.cpp"

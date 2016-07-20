@@ -15,6 +15,7 @@
 #include "marble_export.h"
 
 #include <QVector>
+#include <QString>
 
 namespace Marble
 {

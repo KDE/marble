@@ -63,6 +63,4 @@ SearchRunner* GeoUriPlugin::newRunner() const
 
 }
 
-Q_EXPORT_PLUGIN2( GeoUriPlugin, Marble::GeoUriPlugin )
-
 #include "moc_GeoUriPlugin.cpp"

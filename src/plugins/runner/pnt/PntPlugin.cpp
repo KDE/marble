@@ -66,6 +66,4 @@ ParsingRunner* PntPlugin::newRunner() const
 
 }
 
-Q_EXPORT_PLUGIN2( PntPlugin, Marble::PntPlugin )
-
 #include "moc_PntPlugin.cpp"

@@ -17,6 +17,8 @@
 #include "GeoDataLatLonBox.h"
 #include "GeoSceneTextureTileDataset.h"
 
+#include <QHash>
+
 class QString;
 
 namespace Marble

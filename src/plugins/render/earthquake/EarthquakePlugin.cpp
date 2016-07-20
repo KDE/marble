@@ -218,6 +218,4 @@ void EarthquakePlugin::validateDateRange()
 
 }
 
-Q_EXPORT_PLUGIN2( EarthquakePlugin, Marble::EarthquakePlugin )
-
 #include "moc_EarthquakePlugin.cpp"

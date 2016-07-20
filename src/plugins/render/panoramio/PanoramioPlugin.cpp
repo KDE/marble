@@ -84,6 +84,4 @@ bool PanoramioPlugin::eventFilter(QObject *object, QEvent *event)
     return AbstractDataPlugin::eventFilter( object, event );
 }
 
-Q_EXPORT_PLUGIN2(PanoramioPlugin, Marble::PanoramioPlugin)
-
 #include "moc_PanoramioPlugin.cpp"

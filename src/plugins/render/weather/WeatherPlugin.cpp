@@ -316,6 +316,4 @@ void WeatherPlugin::favoriteItemsChanged( const QStringList& favoriteItems )
     updateSettings();
 }
 
-Q_EXPORT_PLUGIN2(WeatherPlugin, Marble::WeatherPlugin)
-
 #include "moc_WeatherPlugin.cpp"

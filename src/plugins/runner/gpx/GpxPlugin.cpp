@@ -66,6 +66,4 @@ ParsingRunner* GpxPlugin::newRunner() const
 
 }
 
-Q_EXPORT_PLUGIN2( GpxPlugin, Marble::GpxPlugin )
-
 #include "moc_GpxPlugin.cpp"

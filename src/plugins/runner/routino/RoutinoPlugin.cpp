@@ -171,6 +171,4 @@ bool RoutinoPlugin::canWork() const
 
 }
 
-Q_EXPORT_PLUGIN2( RoutinoPlugin, Marble::RoutinoPlugin )
-
 #include "moc_RoutinoPlugin.cpp"

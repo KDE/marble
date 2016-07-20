@@ -345,6 +345,4 @@ void NavigationFloatItem::setSettings( const QHash<QString, QVariant> &settings 
     }
 }
 
-Q_EXPORT_PLUGIN2( NavigationFloatItem, Marble::NavigationFloatItem )
-
 #include "moc_NavigationFloatItem.cpp"

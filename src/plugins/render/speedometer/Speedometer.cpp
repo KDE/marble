@@ -151,6 +151,4 @@ void Speedometer::updateLocation( const GeoDataCoordinates& coordinates, qreal s
 
 }
 
-Q_EXPORT_PLUGIN2( Speedometer, Marble::Speedometer )
-
 #include "moc_Speedometer.cpp"

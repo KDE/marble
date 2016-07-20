@@ -15,6 +15,7 @@
 #include <QPainter>
 #include <QApplication>
 #include <QListView>
+#include <QPointer>
 
 #include "TourItemDelegate.h"
 #include "MarblePlacemarkModel.h"

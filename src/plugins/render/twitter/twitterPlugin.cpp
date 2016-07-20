@@ -159,8 +159,4 @@ mDebug()<<"::::::::::::::::::::twitter count has value == " << localCountOfTwitt
         privateFlagForRenderingTwitts = 1;//1 means unblock
 }
 
-
-
-Q_EXPORT_PLUGIN2(twitterPlugin, Marble::twitterPlugin)
-
  #include "moc_twitterPlugin.cpp"

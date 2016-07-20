@@ -11,6 +11,8 @@
 #include "GeoDataUpdate.h"
 #include "GeoDataTypes.h"
 
+#include <QString>
+
 namespace Marble
 {
 

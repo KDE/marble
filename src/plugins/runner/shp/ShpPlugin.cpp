@@ -66,6 +66,4 @@ ParsingRunner* ShpPlugin::newRunner() const
 
 }
 
-Q_EXPORT_PLUGIN2( ShpPlugin, Marble::ShpPlugin )
-
 #include "moc_ShpPlugin.cpp"

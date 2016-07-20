@@ -242,8 +242,5 @@ void FileViewFloatItem::removeFile()
     // close selected file
     reinterpret_cast<FileViewModel*>(m_fileView->model())->closeFile();
 }
-	 
-
-Q_EXPORT_PLUGIN2(FileViewFloatItem, FileViewFloatItem)
 
 #include "moc_FileViewFloatItem.cpp"

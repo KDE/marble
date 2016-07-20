@@ -104,6 +104,4 @@ bool FITemplateFloatItem::renderFloatItem( GeoPainter     *painter,
 
 }
 
-Q_EXPORT_PLUGIN2(FITemplateFloatItem, Marble::FITemplateFloatItem )
-
 #include "moc_FITemplateFloatItem.cpp"

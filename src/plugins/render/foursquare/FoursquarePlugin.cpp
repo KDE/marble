@@ -99,6 +99,5 @@ bool FoursquarePlugin::storeAccessToken(const QString& tokenUrl)
 
 }
 
-Q_EXPORT_PLUGIN2(FoursquarePlugin, Marble::FoursquarePlugin)
 #include "moc_FoursquarePlugin.cpp"
 

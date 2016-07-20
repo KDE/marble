@@ -536,6 +536,4 @@ void OverviewMap::useMapSuggestion( int index )
 
 }
 
-Q_EXPORT_PLUGIN2( OverviewMap, Marble::OverviewMap )
-
 #include "moc_OverviewMap.cpp"
