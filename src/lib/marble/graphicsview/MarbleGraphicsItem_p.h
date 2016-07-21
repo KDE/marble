@@ -69,9 +69,9 @@ class MarbleGraphicsItemPrivate
         m_children.remove( child );
     }
 
-    virtual QList<QPointF> positions() const = 0;
+    virtual QVector<QPointF> positions() const = 0;
 
-    virtual QList<QPointF> absolutePositions() const = 0;
+    virtual QVector<QPointF> absolutePositions() const = 0;
 
     /**
      * @brief Used to get the set of screen bounding rects

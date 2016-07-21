@@ -75,7 +75,7 @@ class ClipPainterPrivate
                                 bool isClosed ) const;
 
 
-    void labelPosition( const QPolygonF & polygon, QVector<QPointF>& labelNodes, 
+    void labelPosition(const QPolygonF& polygon, QVector<QPointF>& labelNodes,
                                 LabelPositionFlags labelPositionFlags);
 
     bool pointAllowsLabel( const QPointF& point );
@@ -236,8 +236,8 @@ void ClipPainter::drawPolyline( const QPolygonF & polygon )
     }
 }
 
-void ClipPainter::drawPolyline( const QPolygonF & polygon, QVector<QPointF>& labelNodes,
-                                LabelPositionFlags positionFlags)
+void ClipPainter::drawPolyline(const QPolygonF & polygon, QVector<QPointF>& labelNodes,
+                               LabelPositionFlags positionFlags)
 {
     if ( d->m_doClip ) {
         d->initClipRect();
@@ -288,8 +288,8 @@ void ClipPainter::drawPolyline( const QPolygonF & polygon, QVector<QPointF>& lab
     }
 }
 
-void ClipPainterPrivate::labelPosition( const QPolygonF & polygon, QVector<QPointF>& labelNodes, 
-                                        LabelPositionFlags labelPositionFlags)
+void ClipPainterPrivate::labelPosition(const QPolygonF & polygon, QVector<QPointF>& labelNodes,
+                                       LabelPositionFlags labelPositionFlags)
 {
     bool currentAllowsLabel = false;
 

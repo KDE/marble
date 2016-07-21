@@ -117,7 +117,7 @@ bool MarbleGraphicsItem::contains( const QPointF& point ) const
 
 QList<QRectF> MarbleGraphicsItemPrivate::boundingRects() const
 {
-    const QList<QPointF> positions = this->positions();
+    const QVector<QPointF> positions = this->positions();
 
     QList<QRectF> list;
     list.reserve(positions.count());
@@ -237,7 +237,7 @@ bool MarbleGraphicsItem::eventFilter( QObject *object, QEvent *e )
     QMouseEvent *event = static_cast<QMouseEvent*> (e);
     
     if( !p()->m_children.isEmpty() ) {
-        QList<QPointF> absolutePositions = p()->absolutePositions();
+        const QVector<QPointF> absolutePositions = p()->absolutePositions();
         
         foreach( const QPointF& absolutePosition, absolutePositions ) {
             QPoint shiftedPos = event->pos() - absolutePosition.toPoint();

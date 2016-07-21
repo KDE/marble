@@ -28,12 +28,12 @@ class Q_DECL_HIDDEN BillboardGraphicsItem::Private : public MarbleGraphicsItemPr
     {
     }
 
-    QList<QPointF> positions() const
+    QVector<QPointF> positions() const override
     {
         return m_positions;
     }
 
-    QList<QPointF> absolutePositions() const
+    QVector<QPointF> absolutePositions() const override
     {
         return m_positions;
     }
@@ -85,7 +85,7 @@ class Q_DECL_HIDDEN BillboardGraphicsItem::Private : public MarbleGraphicsItemPr
     }
 
     GeoDataCoordinates m_coordinates;
-    QList<QPointF> m_positions;
+    QVector<QPointF> m_positions;
 };
 
 BillboardGraphicsItem::BillboardGraphicsItem()
@@ -103,7 +103,7 @@ void BillboardGraphicsItem::setCoordinate( const GeoDataCoordinates &coordinates
     p()->m_coordinates = coordinates;
 }
 
-QList<QPointF> BillboardGraphicsItem::positions() const
+QVector<QPointF> BillboardGraphicsItem::positions() const
 {
     return p()->positions();
 }

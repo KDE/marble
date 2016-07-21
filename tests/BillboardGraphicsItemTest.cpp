@@ -46,7 +46,7 @@ void BillboardGraphicsItemTest::defaultConstructorValues()
     // BillboardGraphicsItem
     QCOMPARE( item.coordinate(), GeoDataCoordinates() );
     QCOMPARE( item.alignment(), Qt::AlignHCenter | Qt::AlignVCenter );
-    QCOMPARE( item.positions(), QList<QPointF>() );
+    QCOMPARE( item.positions(), QVector<QPointF>() );
     QCOMPARE( item.boundingRects(), QList<QRectF>() );
 }
 
@@ -62,7 +62,7 @@ void BillboardGraphicsItemTest::paintEvent()
     frameItem.setSize( QSizeF( 11.2, 11.3 ) );
     topLayout->addItem( &frameItem, 0, 0 );
 
-    QCOMPARE( item.positions(), QList<QPointF>() );
+    QCOMPARE( item.positions(), QVector<QPointF>() );
     QCOMPARE( item.size(), QSizeF() );
 
     QImage paintDevice( 100, 100, QImage::Format_ARGB32_Premultiplied );

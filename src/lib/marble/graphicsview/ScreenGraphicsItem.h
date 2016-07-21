@@ -79,7 +79,7 @@ class MARBLE_EXPORT ScreenGraphicsItem : public MarbleGraphicsItem
      * Positive x-coordinates are counted left-aligned from the left border of the map.
      * Positive y-coordinates are counted top-aligned from the top border of the map.
      */
-    QList<QPointF> absolutePositions() const;
+    QVector<QPointF> absolutePositions() const;
 
     /**
      * Returns the flags of the item.

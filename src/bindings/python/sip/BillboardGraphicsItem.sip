@@ -29,7 +29,7 @@ public:
                             BillboardGraphicsItem ();
     Marble::GeoDataCoordinates  coordinate () const;
     void                    setCoordinate (const Marble::GeoDataCoordinates& coordinates);
-    QList<QPointF>          positions () const;
+    QVector<QPointF>        positions () const;
     QList<QRectF>           boundingRects () const;
     Qt::Alignment           alignment () const;
     void                    setAlignment (Qt::Alignment alignment);

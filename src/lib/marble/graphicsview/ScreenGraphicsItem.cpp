@@ -51,7 +51,7 @@ QPointF ScreenGraphicsItem::positivePosition() const
     return p()->positivePosition();
 }
 
-QList<QPointF> ScreenGraphicsItem::absolutePositions() const
+QVector<QPointF> ScreenGraphicsItem::absolutePositions() const
 {
     return p()->absolutePositions();
 }

@@ -49,7 +49,7 @@ class MARBLE_EXPORT BillboardGraphicsItem : public MarbleGraphicsItem
      * an unbound number of elements, including zero, depending on the item's visibility,
      * the projection and zoom level.
      */
-    QList<QPointF> positions() const;
+    QVector<QPointF> positions() const;
 
     /**
      * @brief Returns the absolute screen bounding boxes of the item.

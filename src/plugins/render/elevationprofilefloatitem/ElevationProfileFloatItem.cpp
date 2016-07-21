@@ -504,7 +504,7 @@ bool ElevationProfileFloatItem::eventFilter( QObject *object, QEvent *e )
     return AbstractFloatItem::eventFilter(object,e);
 }
 
-void ElevationProfileFloatItem::handleDataUpdate(const GeoDataLineString &points, const QList<QPointF> &eleData)
+void ElevationProfileFloatItem::handleDataUpdate(const GeoDataLineString &points, const QVector<QPointF> &eleData)
 {
     m_eleData = eleData;
     m_points = points;
@@ -571,7 +571,7 @@ void ElevationProfileFloatItem::updateVisiblePoints()
     return;
 }
 
-void ElevationProfileFloatItem::calculateStatistics( const QList<QPointF> &eleData )
+void ElevationProfileFloatItem::calculateStatistics(const QVector<QPointF> &eleData)
 {
     // This basically calculates the important peaks of the moving average filtered elevation and
     // calculates the elevation data based on this points.
@@ -717,9 +717,9 @@ void ElevationProfileFloatItem::switchToTrackDataSource(int index)
 
 void ElevationProfileFloatItem::switchDataSource(ElevationProfileDataSource* source)
 {
-    disconnect(m_activeDataSource, SIGNAL(dataUpdated(GeoDataLineString,QList<QPointF>)),0,0);
+    disconnect(m_activeDataSource, SIGNAL(dataUpdated(GeoDataLineString,QVector<QPointF>)),0,0);
     m_activeDataSource = source;
-    connect(m_activeDataSource, SIGNAL(dataUpdated(GeoDataLineString,QList<QPointF>)), this, SLOT(handleDataUpdate(GeoDataLineString,QList<QPointF>)));
+    connect(m_activeDataSource, SIGNAL(dataUpdated(GeoDataLineString,QVector<QPointF>)), this, SLOT(handleDataUpdate(GeoDataLineString,QVector<QPointF>)));
     m_activeDataSource->requestUpdate();
 }
 

@@ -94,10 +94,10 @@ bool WidgetGraphicsItem::eventFilter( QObject *object, QEvent *e )
         // Mouse events are forwarded to the underlying widget
         QMouseEvent *event = static_cast<QMouseEvent*> ( e );
 
-        QList<QPointF> widgetPositions = absolutePositions();
+        const QVector<QPointF> widgetPositions = absolutePositions();
         QRectF widgetItemRect;
         QPoint shiftedPos;
-        QList<QPointF>::iterator it = widgetPositions.begin();
+        QVector<QPointF>::ConstIterator it = widgetPositions.begin();
         bool foundRightPosition = false;
         for(; !foundRightPosition && it != widgetPositions.end(); ++it ) {
             widgetItemRect = QRectF( *it, size() );

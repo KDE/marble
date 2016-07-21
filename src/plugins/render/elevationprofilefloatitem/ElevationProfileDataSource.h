@@ -50,10 +50,10 @@ public Q_SLOTS:
 
 Q_SIGNALS:
     void sourceCountChanged();
-    void dataUpdated( const GeoDataLineString &points, const QList<QPointF> &elevationData );
+    void dataUpdated(const GeoDataLineString &points, const QVector<QPointF> &elevationData);
 
 protected:
-    QList<QPointF> calculateElevationData(const GeoDataLineString &lineString) const;
+    QVector<QPointF> calculateElevationData(const GeoDataLineString &lineString) const;
     virtual qreal getElevation(const GeoDataCoordinates &coordinates) const = 0;
 };
 
