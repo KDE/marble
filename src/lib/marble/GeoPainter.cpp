@@ -663,7 +663,6 @@ QRegion GeoPainter::regionFromPolyline ( const GeoDataLineString & lineString,
         return QRegion();
     }
 
-    QList<QRegion> regions;
     QPainterPath painterPath;
 
     QVector<QPolygonF*> polygons;
