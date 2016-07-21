@@ -109,10 +109,10 @@ QString MovieCapture::destination() const
     return d->destinationFile;
 }
 
-QList<MovieFormat> MovieCapture::availableFormats()
+QVector<MovieFormat> MovieCapture::availableFormats()
 {
     Q_D(MovieCapture);
-    static QList<MovieFormat> availableFormats;
+    static QVector<MovieFormat> availableFormats;
     if ( availableFormats.isEmpty() && checkToolsAvailability() ) {
         QProcess encoder(this);
         foreach ( const MovieFormat &format, m_supportedFormats ) {
