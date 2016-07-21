@@ -109,7 +109,7 @@ public:
      * Returns the time value of all the points in the map, in chronological
      * order.
      */
-    QList<QDateTime> whenList() const;
+    QVector<QDateTime> whenList() const;
 
     /**
      * If interpolate() is true, return the coordinates interpolated from the

@@ -34,7 +34,7 @@ public:
     QDateTime               firstWhen () const;
     QDateTime               lastWhen () const;
     QList<Marble::GeoDataCoordinates>  coordinatesList () const;
-    QList<QDateTime>        whenList () const;
+    QVector<QDateTime>      whenList () const;
     Marble::GeoDataCoordinates  coordinatesAt (const QDateTime& when) const;
     Marble::GeoDataCoordinates  coordinatesAt (int index) const;
     void                    addPoint (const QDateTime& when, const Marble::GeoDataCoordinates& coord);
