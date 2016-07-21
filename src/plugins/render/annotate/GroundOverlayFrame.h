@@ -74,8 +74,8 @@ private:
     bool               m_editStatusChangeNeeded;
     qreal              m_previousRotation;
 
-    QList<QImage>      m_resizeIcons;
-    QList<QImage>      m_rotateIcons;
+    QVector<QImage>    m_resizeIcons;
+    QVector<QImage>    m_rotateIcons;
 
     const ViewportParams *m_viewport;
 };

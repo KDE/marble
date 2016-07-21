@@ -39,6 +39,7 @@ GroundOverlayFrame::GroundOverlayFrame( GeoDataPlacemark *placemark,
     m_previousRotation( 0.0 ),
     m_viewport( 0 )
 {
+    m_resizeIcons.reserve(16);
     // NorthWest
     m_resizeIcons.append( QImage( MarbleDirs::systemPath() + "/bitmaps/editarrows/arrow-diagonal-topleft.png" ) );
     m_resizeIcons.append( QImage( MarbleDirs::systemPath() + "/bitmaps/editarrows/arrow-diagonal-topleft-active.png" ) );
@@ -65,6 +66,7 @@ GroundOverlayFrame::GroundOverlayFrame( GeoDataPlacemark *placemark,
     m_resizeIcons.append( QImage( MarbleDirs::systemPath() + "/bitmaps/editarrows/arrow-horizontal-active.png" ) );
 
 
+    m_rotateIcons.reserve(16);
     // NorthWest
     m_rotateIcons.append( QImage( MarbleDirs::systemPath() + "/bitmaps/editarrows/arrow-rotation-topleft.png" ) );
     m_rotateIcons.append( QImage( MarbleDirs::systemPath() + "/bitmaps/editarrows/arrow-rotation-topleft-active.png" ) );
