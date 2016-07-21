@@ -123,9 +123,9 @@ QString EclipsesPlugin::copyrightYears() const
     return "2013";
 }
 
-QList<PluginAuthor> EclipsesPlugin::pluginAuthors() const
+QVector<PluginAuthor> EclipsesPlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( "Rene Kuettner", "rene@bitkanal.net" )
             << PluginAuthor( "Gerhard Holtkamp", "" );
 }

@@ -184,9 +184,9 @@ QString AnnotatePlugin::copyrightYears() const
     return "2009, 2013";
 }
 
-QList<PluginAuthor> AnnotatePlugin::pluginAuthors() const
+QVector<PluginAuthor> AnnotatePlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( "Andrew Manson", "<g.real.ate@gmail.com>" )
             << PluginAuthor( "Thibaut Gridel", "<tgridel@free.fr>" )
             << PluginAuthor( "Calin Cruceru", "<crucerucalincristian@gmail.com>" );

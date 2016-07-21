@@ -54,7 +54,7 @@ class WikipediaPlugin : public AbstractDataPlugin, public DialogConfigurationInt
 
     QString description() const;
 
-    QList<PluginAuthor> pluginAuthors() const;
+    QVector<PluginAuthor> pluginAuthors() const override;
 
     QString aboutDataText() const;
 

@@ -39,7 +39,7 @@ class GpsdPositionProviderPlugin: public PositionProviderPlugin
     virtual QString version() const;
     virtual QString description() const;
     virtual QString copyrightYears() const;
-    virtual QList<PluginAuthor> pluginAuthors() const;
+    QVector<PluginAuthor> pluginAuthors() const override;
     virtual QIcon icon() const;
     virtual void initialize();
     virtual bool isInitialized() const;

@@ -48,7 +48,7 @@ public:
     QString version() const;
     QString description() const;
     QString copyrightYears() const;
-    QList<PluginAuthor> pluginAuthors() const;
+    QVector<PluginAuthor> pluginAuthors() const override;
     QString aboutDataText() const;
     QIcon icon() const;
     RenderType renderType() const;

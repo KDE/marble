@@ -49,9 +49,9 @@ QString LatLonPlugin::copyrightYears() const
     return "2010";
 }
 
-QList<PluginAuthor> LatLonPlugin::pluginAuthors() const
+QVector<PluginAuthor> LatLonPlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "nienhueser@kde.org" );
 }
 

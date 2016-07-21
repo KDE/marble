@@ -74,7 +74,7 @@ public:
 
     void setDescription( const QString & description );
 
-    virtual QList<Marble::PluginAuthor> pluginAuthors() const;
+    virtual QVector<Marble::PluginAuthor> pluginAuthors() const;
 
     void setAuthors( const QStringList & pluginAuthors );
 

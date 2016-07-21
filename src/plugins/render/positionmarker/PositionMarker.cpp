@@ -109,9 +109,9 @@ QString PositionMarker::copyrightYears() const
     return "2009, 2010";
 }
 
-QList<PluginAuthor> PositionMarker::pluginAuthors() const
+QVector<PluginAuthor> PositionMarker::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( "Andrew Manson", "g.real.ate@gmail.com" )
             << PluginAuthor( "Eckhart Woerner", "ewoerner@kde.org" )
             << PluginAuthor( "Thibaut Gridel", "tgridel@free.fr" )

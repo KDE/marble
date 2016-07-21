@@ -55,7 +55,7 @@ class WeatherPlugin : public AbstractDataPlugin, public DialogConfigurationInter
 
     QString copyrightYears() const;
 
-    QList<PluginAuthor> pluginAuthors() const;
+    QVector<PluginAuthor> pluginAuthors() const override;
 
     QString aboutDataText() const;
 

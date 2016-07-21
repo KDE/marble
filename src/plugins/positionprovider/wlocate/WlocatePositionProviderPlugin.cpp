@@ -90,9 +90,9 @@ QString WlocatePositionProviderPlugin::copyrightYears() const
     return "2012";
 }
 
-QList<PluginAuthor> WlocatePositionProviderPlugin::pluginAuthors() const
+QVector<PluginAuthor> WlocatePositionProviderPlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "nienhueser@kde.org" );
 }
 

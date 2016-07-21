@@ -95,9 +95,9 @@ QString AtmospherePlugin::copyrightYears() const
     return "2006-2012";
 }
 
-QList<PluginAuthor> AtmospherePlugin::pluginAuthors() const
+QVector<PluginAuthor> AtmospherePlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( "Torsten Rahn", "tackat@kde.org" )
             << PluginAuthor( "Inge Wallin", "ingwa@kde.org" )
             << PluginAuthor( "Jens-Michael Hoffmann", "jmho@c-xx.com" )

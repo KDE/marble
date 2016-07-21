@@ -37,7 +37,7 @@ public:
 
     QString copyrightYears() const override;
 
-    QList<PluginAuthor> pluginAuthors() const override;
+    QVector<PluginAuthor> pluginAuthors() const override;
 
     SearchRunner* newRunner() const override;
 };

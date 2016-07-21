@@ -475,9 +475,9 @@ QString RoutingPlugin::copyrightYears() const
     return "2010";
 }
 
-QList<PluginAuthor> RoutingPlugin::pluginAuthors() const
+QVector<PluginAuthor> RoutingPlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( "Siddharth Srivastava", "akssps011@gmail.com" )
             << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "nienhueser@kde.org" );
 }

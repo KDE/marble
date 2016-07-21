@@ -112,9 +112,9 @@ QString ProgressFloatItem::copyrightYears() const
     return "2010, 2011";
 }
 
-QList<PluginAuthor> ProgressFloatItem::pluginAuthors() const
+QVector<PluginAuthor> ProgressFloatItem::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "nienhueser@kde.org" )
             << PluginAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de" );
 }

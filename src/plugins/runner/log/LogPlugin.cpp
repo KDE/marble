@@ -43,9 +43,9 @@ QString LogfilePlugin::copyrightYears() const
     return "2012";
 }
 
-QList<PluginAuthor> LogfilePlugin::pluginAuthors() const
+QVector<PluginAuthor> LogfilePlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de" );
 }
 

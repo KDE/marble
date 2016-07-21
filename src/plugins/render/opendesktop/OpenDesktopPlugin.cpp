@@ -71,9 +71,9 @@ QString OpenDesktopPlugin::copyrightYears() const
     return "2010";
 }
 
-QList<PluginAuthor> OpenDesktopPlugin::pluginAuthors() const
+QVector<PluginAuthor> OpenDesktopPlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( QString::fromUtf8( "Utku Aydin" ), "utkuaydin34@gmail.com" );
 }
 

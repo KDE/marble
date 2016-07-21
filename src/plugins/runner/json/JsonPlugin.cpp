@@ -44,9 +44,9 @@ QString JsonPlugin::copyrightYears() const
     return "2012";
 }
 
-QList<PluginAuthor> JsonPlugin::pluginAuthors() const
+QVector<PluginAuthor> JsonPlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( "Ander Pijoan", "ander.pijoan@deusto.es" );
 }
 

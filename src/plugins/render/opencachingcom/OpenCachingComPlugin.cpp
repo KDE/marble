@@ -77,9 +77,9 @@ QString OpenCachingComPlugin::copyrightYears() const
     return QString( "2012" );
 }
 
-QList<PluginAuthor> OpenCachingComPlugin::pluginAuthors() const
+QVector<PluginAuthor> OpenCachingComPlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
         << PluginAuthor( "Anders Lund", "anders@alweb.dk" );
 }
 

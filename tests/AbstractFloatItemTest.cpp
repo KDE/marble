@@ -36,7 +36,7 @@ class NullFloatItem : public AbstractFloatItem
     QString description() const { return "A null float item just for testing."; }
     QIcon icon() const { return QIcon(); }
     QString copyrightYears() const { return "2013"; }
-    QList<PluginAuthor> pluginAuthors() const { return QList<PluginAuthor>() << PluginAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de" ); }
+    QVector<PluginAuthor> pluginAuthors() const { return QVector<PluginAuthor>() << PluginAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de" ); }
     void initialize() {}
     bool isInitialized() const { return true; }
     QStringList backendTypes() const { return QStringList() << "null"; }

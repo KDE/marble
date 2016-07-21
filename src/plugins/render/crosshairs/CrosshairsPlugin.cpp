@@ -104,9 +104,9 @@ QString CrosshairsPlugin::copyrightYears() const
     return "2009, 2010";
 }
 
-QList<PluginAuthor> CrosshairsPlugin::pluginAuthors() const
+QVector<PluginAuthor> CrosshairsPlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( "Cezar Mocan", "cezarmocan@gmail.com" )
             << PluginAuthor( "Torsten Rahn", "tackat@kde.org" );
 }

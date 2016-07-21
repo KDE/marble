@@ -52,9 +52,9 @@ QString HostipPlugin::copyrightYears() const
     return "2010";
 }
 
-QList<PluginAuthor> HostipPlugin::pluginAuthors() const
+QVector<PluginAuthor> HostipPlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "nienhueser@kde.org" );
 }
 

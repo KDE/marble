@@ -55,7 +55,7 @@ class Speedometer : public AbstractFloatItem
 
     QString description() const;
 
-    QList<PluginAuthor> pluginAuthors() const;
+    QVector<PluginAuthor> pluginAuthors() const override;
 
     QString copyrightYears() const;
 

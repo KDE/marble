@@ -104,9 +104,9 @@ QString OverviewMap::copyrightYears() const
     return "2008";
 }
 
-QList<PluginAuthor> OverviewMap::pluginAuthors() const
+QVector<PluginAuthor> OverviewMap::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( "Torsten Rahn", "tackat@kde.org" );
 }
 

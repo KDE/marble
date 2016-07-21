@@ -52,7 +52,7 @@ class OpenDesktopPlugin : public AbstractDataPlugin, public DialogConfigurationI
 
     QString copyrightYears() const;
 
-    QList<PluginAuthor> pluginAuthors() const;
+    QVector<PluginAuthor> pluginAuthors() const override;
 
     QIcon icon() const;
 

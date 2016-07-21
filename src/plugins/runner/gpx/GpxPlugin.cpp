@@ -43,9 +43,9 @@ QString GpxPlugin::copyrightYears() const
     return "2011";
 }
 
-QList<PluginAuthor> GpxPlugin::pluginAuthors() const
+QVector<PluginAuthor> GpxPlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( "Thibaut Gridel", "tgridel@free.fr" );
 }
 

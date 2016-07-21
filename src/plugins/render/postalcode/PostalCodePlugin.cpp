@@ -58,9 +58,9 @@ QString PostalCodePlugin::copyrightYears() const
     return "2011";
 }
 
-QList<PluginAuthor> PostalCodePlugin::pluginAuthors() const
+QVector<PluginAuthor> PostalCodePlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( "Valery Kharitonov", "kharvd@gmail.com" );
 }
 

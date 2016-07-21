@@ -79,9 +79,9 @@ QString SunPlugin::copyrightYears() const
     return "2011";
 }
 
-QList<PluginAuthor> SunPlugin::pluginAuthors() const
+QVector<PluginAuthor> SunPlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( "Torsten Rahn", "tackat@kde.org" )
             << PluginAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de")
             << PluginAuthor( "Harshit Jain", "hjain.itbhu@gmail.com" );

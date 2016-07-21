@@ -98,9 +98,9 @@ QString PhotoPlugin::copyrightYears() const
     return "2009, 2012";
 }
 
-QList<PluginAuthor> PhotoPlugin::pluginAuthors() const
+QVector<PluginAuthor> PhotoPlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( "Bastian Holst", "bastianholst@gmx.de" )
             << PluginAuthor( "Mohammed Nafees", "nafees.technocool@gmail.com" );
 }

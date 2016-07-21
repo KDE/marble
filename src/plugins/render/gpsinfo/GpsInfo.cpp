@@ -77,9 +77,9 @@ QString GpsInfo::copyrightYears() const
     return "2011";
 }
 
-QList<PluginAuthor> GpsInfo::pluginAuthors() const
+QVector<PluginAuthor> GpsInfo::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( "Thibaut Gridel", "tgridel@free.fr" );
 }
 

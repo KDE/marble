@@ -271,9 +271,9 @@ QString MonavPlugin::copyrightYears() const
     return "2010";
 }
 
-QList<PluginAuthor> MonavPlugin::pluginAuthors() const
+QVector<PluginAuthor> MonavPlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "nienhueser@kde.org" );
 }
 

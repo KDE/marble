@@ -100,9 +100,9 @@ QString MapScaleFloatItem::copyrightYears() const
     return "2008, 2010, 2012";
 }
 
-QList<PluginAuthor> MapScaleFloatItem::pluginAuthors() const
+QVector<PluginAuthor> MapScaleFloatItem::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( "Torsten Rahn", "tackat@kde.org", tr( "Original Developer" ) )
             << PluginAuthor( "Khanh-Nhan Nguyen", "khanh.nhan@wpi.edu" )
             << PluginAuthor( "Illya Kovalevskyy", "illya.kovalevskyy@gmail.com" );

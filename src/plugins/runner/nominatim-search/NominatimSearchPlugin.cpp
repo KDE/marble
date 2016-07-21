@@ -52,9 +52,9 @@ QString NominatimPlugin::copyrightYears() const
     return "2010, 2012";
 }
 
-QList<PluginAuthor> NominatimPlugin::pluginAuthors() const
+QVector<PluginAuthor> NominatimPlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "nienhueser@kde.org" )
             << PluginAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de" );
 }

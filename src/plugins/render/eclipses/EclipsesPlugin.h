@@ -62,7 +62,7 @@ public:
     QString version() const;
     QString description() const;
     QString copyrightYears() const;
-    QList<PluginAuthor> pluginAuthors() const;
+    QVector<PluginAuthor> pluginAuthors() const override;
     QIcon icon() const;
     RenderPlugin::RenderType renderType() const;
     QList<QActionGroup*>* actionGroups() const;

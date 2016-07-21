@@ -79,7 +79,7 @@ class GraticulePlugin : public RenderPlugin, public DialogConfigurationInterface
 
     QString copyrightYears() const;
 
-    QList<PluginAuthor> pluginAuthors() const;
+    QVector<PluginAuthor> pluginAuthors() const override;
 
     QIcon icon () const;
 

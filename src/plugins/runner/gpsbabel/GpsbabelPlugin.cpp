@@ -43,9 +43,9 @@ QString GpsbabelPlugin::copyrightYears() const
     return "2013";
 }
 
-QList<PluginAuthor> GpsbabelPlugin::pluginAuthors() const
+QVector<PluginAuthor> GpsbabelPlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( "Mohammed Nafees", "nafees.technocool@gmail.com" );
 }
 

@@ -57,9 +57,9 @@ QString RouteSimulationPositionProviderPlugin::copyrightYears() const
     return "2011, 2012";
 }
 
-QList<PluginAuthor> RouteSimulationPositionProviderPlugin::pluginAuthors() const
+QVector<PluginAuthor> RouteSimulationPositionProviderPlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( "Konrad Enzensberger", "e.konrad@mpegcode.com" )
             << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "nienhueser@kde.org" )
             << PluginAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de" );

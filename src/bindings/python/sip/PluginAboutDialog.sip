@@ -39,7 +39,7 @@ public:
     void                    setDataText (const QString& data);
     void                    setLicense (Marble::PluginAboutDialog::LicenseKey license);
     void                    setLicenseAgreementText (const QString& license);
-    void                    setAuthors (const QList<Marble::PluginAuthor>& authors);
+    void                    setAuthors (const QVector<Marble::PluginAuthor>& authors);
     void                    setIcon (const QIcon& icon);
 };
 };

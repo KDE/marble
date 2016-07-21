@@ -127,9 +127,9 @@ QString ElevationProfileFloatItem::copyrightYears() const
     return "2011, 2012, 2013";
 }
 
-QList<PluginAuthor> ElevationProfileFloatItem::pluginAuthors() const
+QVector<PluginAuthor> ElevationProfileFloatItem::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( QString::fromUtf8 ( "Florian Eßer" ), "f.esser@rwth-aachen.de" )
             << PluginAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de" )
             << PluginAuthor( "Roman Karlstetter", "roman.karlstetter@googlemail.com" );

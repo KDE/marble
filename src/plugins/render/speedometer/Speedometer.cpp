@@ -81,9 +81,9 @@ QString Speedometer::copyrightYears() const
     return "2011";
 }
 
-QList<PluginAuthor> Speedometer::pluginAuthors() const
+QVector<PluginAuthor> Speedometer::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de" );
 }
 

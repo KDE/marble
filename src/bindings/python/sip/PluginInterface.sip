@@ -58,7 +58,7 @@ public:
 %End
     virtual QString         version () const=0;
     virtual QString         copyrightYears () const=0;
-    virtual QList<Marble::PluginAuthor>  pluginAuthors () const=0;
+    virtual QVector<Marble::PluginAuthor>  pluginAuthors () const=0;
     virtual QString         aboutDataText () const;
 };
 // PluginInterface

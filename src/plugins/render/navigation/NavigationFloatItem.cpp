@@ -98,9 +98,9 @@ QString NavigationFloatItem::copyrightYears() const
     return "2008, 2010, 2013";
 }
 
-QList<PluginAuthor> NavigationFloatItem::pluginAuthors() const
+QVector<PluginAuthor> NavigationFloatItem::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "nienhueser@kde.org" )
             << PluginAuthor( "Bastian Holst", "bastianholst@gmx.de" )
             << PluginAuthor( "Mohammed Nafees", "nafees.technocool@gmail.com" );

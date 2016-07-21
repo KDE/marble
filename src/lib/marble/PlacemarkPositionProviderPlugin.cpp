@@ -63,9 +63,9 @@ QString PlacemarkPositionProviderPlugin::copyrightYears() const
     return "2011, 2012";
 }
 
-QList<PluginAuthor> PlacemarkPositionProviderPlugin::pluginAuthors() const
+QVector<PluginAuthor> PlacemarkPositionProviderPlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( "Guillaume Martres", "smarter@ubuntu.com" )
             << PluginAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de" );
 }

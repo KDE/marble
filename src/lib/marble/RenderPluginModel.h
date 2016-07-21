@@ -61,7 +61,7 @@ public:
      */
     void setRenderPlugins( const QList<RenderPlugin *> &renderPlugins );
 
-    QList<PluginAuthor> pluginAuthors( const QModelIndex &index ) const;
+    QVector<PluginAuthor> pluginAuthors( const QModelIndex &index ) const;
 
     DialogConfigurationInterface *pluginDialogConfigurationInterface( const QModelIndex &index );
 

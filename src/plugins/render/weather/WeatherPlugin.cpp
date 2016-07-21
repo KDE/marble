@@ -104,9 +104,9 @@ QString WeatherPlugin::copyrightYears() const
     return "2009, 2011";
 }
 
-QList<PluginAuthor> WeatherPlugin::pluginAuthors() const
+QVector<PluginAuthor> WeatherPlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( "Bastian Holst", "bastianholst@gmx.de" )
             << PluginAuthor( "Valery Kharitonov", "kharvd@gmail.com" );
 }

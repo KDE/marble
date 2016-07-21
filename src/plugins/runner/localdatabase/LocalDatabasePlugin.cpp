@@ -49,9 +49,9 @@ QString LocalDatabasePlugin::copyrightYears() const
     return "2010";
 }
 
-QList<PluginAuthor> LocalDatabasePlugin::pluginAuthors() const
+QVector<PluginAuthor> LocalDatabasePlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "nienhueser@kde.org" );
 }
 

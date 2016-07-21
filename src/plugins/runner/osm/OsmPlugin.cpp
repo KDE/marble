@@ -43,9 +43,9 @@ QString OsmPlugin::copyrightYears() const
     return "2011, 2016";
 }
 
-QList<PluginAuthor> OsmPlugin::pluginAuthors() const
+QVector<PluginAuthor> OsmPlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( "Thibaut Gridel", "tgridel@free.fr" )
             << PluginAuthor( "Dennis Nienhüser", "nienhueser@kde.org" );
 }

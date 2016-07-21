@@ -70,9 +70,9 @@ QString LocalOsmSearchPlugin::copyrightYears() const
     return "2011";
 }
 
-QList<PluginAuthor> LocalOsmSearchPlugin::pluginAuthors() const
+QVector<PluginAuthor> LocalOsmSearchPlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "nienhueser@kde.org" );
 }
 

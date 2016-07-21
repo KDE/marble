@@ -64,9 +64,9 @@ QString PanoramioPlugin::copyrightYears() const
     return "2009, 2014";
 }
 
-QList<PluginAuthor> PanoramioPlugin::pluginAuthors() const
+QVector<PluginAuthor> PanoramioPlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>() << PluginAuthor( "Bastian Holst", "bastianholst@gmx.de" );
+    return QVector<PluginAuthor>() << PluginAuthor( "Bastian Holst", "bastianholst@gmx.de" );
 }
 
 bool PanoramioPlugin::eventFilter(QObject *object, QEvent *event)

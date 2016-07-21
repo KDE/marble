@@ -84,9 +84,9 @@ QString EarthquakePlugin::copyrightYears() const
     return "2010, 2011";
 }
 
-QList<PluginAuthor> EarthquakePlugin::pluginAuthors() const
+QVector<PluginAuthor> EarthquakePlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( QString::fromUtf8( "Utku Aydın" ), "utkuaydin34@gmail.com" )
             << PluginAuthor( QString::fromUtf8( "Daniel Marth" ), "danielmarth@gmx.at" );
 }

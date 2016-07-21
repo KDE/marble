@@ -57,7 +57,7 @@ class ElevationProfileMarker : public RenderPlugin
 
     QString copyrightYears() const;
 
-    QList<PluginAuthor> pluginAuthors() const;
+    QVector<PluginAuthor> pluginAuthors() const override;
 
     QIcon icon() const;
 

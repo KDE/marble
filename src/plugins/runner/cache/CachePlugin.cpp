@@ -43,9 +43,9 @@ QString CachePlugin::copyrightYears() const
     return "2011";
 }
 
-QList<PluginAuthor> CachePlugin::pluginAuthors() const
+QVector<PluginAuthor> CachePlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( "Thibaut Gridel", "tgridel@free.fr" );
 }
 

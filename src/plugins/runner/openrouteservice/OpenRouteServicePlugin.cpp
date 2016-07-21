@@ -54,9 +54,9 @@ QString OpenRouteServicePlugin::copyrightYears() const
     return "2010";
 }
 
-QList<PluginAuthor> OpenRouteServicePlugin::pluginAuthors() const
+QVector<PluginAuthor> OpenRouteServicePlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "nienhueser@kde.org" );
 }
 

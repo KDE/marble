@@ -72,9 +72,9 @@ QString QtPositioningPositionProviderPlugin::copyrightYears() const
     return "2011";
 }
 
-QList<PluginAuthor> QtPositioningPositionProviderPlugin::pluginAuthors() const
+QVector<PluginAuthor> QtPositioningPositionProviderPlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( "Daniel Marth", "danielmarth@gmx.at" );
 }
 

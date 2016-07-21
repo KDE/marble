@@ -44,9 +44,9 @@ QString KmlPlugin::copyrightYears() const
     return "2011, 2013, 2015";
 }
 
-QList<PluginAuthor> KmlPlugin::pluginAuthors() const
+QVector<PluginAuthor> KmlPlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( "Thibaut Gridel", "tgridel@free.fr" )
             << PluginAuthor( "Dennis Nienhüser", "nienhueser@kde.org" );
 }

@@ -61,9 +61,9 @@ QString FlightGearPositionProviderPlugin::copyrightYears() const
     return "2012";
 }
 
-QList<PluginAuthor> FlightGearPositionProviderPlugin::pluginAuthors() const
+QVector<PluginAuthor> FlightGearPositionProviderPlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( QString::fromUtf8( "Ralf Habacker" ), "ralf.habacker@freenet.de" );
 
 }

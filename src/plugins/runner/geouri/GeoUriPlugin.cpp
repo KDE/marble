@@ -50,9 +50,9 @@ QString GeoUriPlugin::copyrightYears() const
     return QStringLiteral("2016");
 }
 
-QList<PluginAuthor> GeoUriPlugin::pluginAuthors() const
+QVector<PluginAuthor> GeoUriPlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor(QStringLiteral("Friedrich W. H. Kossebau"), QStringLiteral("kossebau@kde.org"));
 }
 

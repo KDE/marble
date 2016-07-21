@@ -75,7 +75,7 @@ void PluginAboutDialog::setAboutText( const QString& about )
     d->u_dialog.m_pMarbleAboutBrowser->setText( about );
 }
 
-void PluginAboutDialog::setAuthors( const QList<PluginAuthor>& authors )
+void PluginAboutDialog::setAuthors(const QVector<PluginAuthor>& authors)
 {
     QString string;
     foreach ( const PluginAuthor& author, authors ) {

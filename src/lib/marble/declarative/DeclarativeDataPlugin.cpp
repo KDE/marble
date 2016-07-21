@@ -36,7 +36,7 @@ public:
     QString m_guiString;
     QString m_copyrightYears;
     QString m_description;
-    QList<Marble::PluginAuthor> m_authors;
+    QVector<Marble::PluginAuthor> m_authors;
     QString m_aboutText;
     bool m_isInitialized;
     QList<AbstractDataPluginItem *> m_items;
@@ -230,7 +230,7 @@ QString DeclarativeDataPlugin::copyrightYears() const
     return d->m_copyrightYears;
 }
 
-QList<PluginAuthor> DeclarativeDataPlugin::pluginAuthors() const
+QVector<PluginAuthor> DeclarativeDataPlugin::pluginAuthors() const
 {
     return d->m_authors;
 }

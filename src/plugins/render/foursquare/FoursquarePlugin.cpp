@@ -65,9 +65,9 @@ QString FoursquarePlugin::copyrightYears() const
     return "2012";
 }
 
-QList<PluginAuthor> FoursquarePlugin::pluginAuthors() const
+QVector<PluginAuthor> FoursquarePlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "nienhueser@kde.org" )
             << PluginAuthor( QString::fromUtf8( "Utku Aydın" ), "utkuaydin34@gmail.com" );
 }

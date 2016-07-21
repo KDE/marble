@@ -45,7 +45,7 @@ public:
     QString version() const;
     QString description() const;
     QString copyrightYears() const;
-    QList<PluginAuthor> pluginAuthors() const;
+    QVector<PluginAuthor> pluginAuthors() const override;
     QIcon icon () const;
     void initialize ();
     bool isInitialized () const;

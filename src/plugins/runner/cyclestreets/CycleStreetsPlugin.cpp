@@ -118,9 +118,9 @@ QString CycleStreetsPlugin::copyrightYears() const
     return "2013";
 }
 
-QList<PluginAuthor> CycleStreetsPlugin::pluginAuthors() const
+QVector<PluginAuthor> CycleStreetsPlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( QString::fromUtf8( "Mihail Ivchenko" ), "ematirov@gmail.com" );
 }
 

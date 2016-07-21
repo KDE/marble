@@ -54,9 +54,9 @@ QString MapQuestPlugin::copyrightYears() const
     return "2012";
 }
 
-QList<PluginAuthor> MapQuestPlugin::pluginAuthors() const
+QVector<PluginAuthor> MapQuestPlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "nienhueser@kde.org" );
 }
 

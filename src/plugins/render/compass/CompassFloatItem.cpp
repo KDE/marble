@@ -87,9 +87,9 @@ QString CompassFloatItem::copyrightYears() const
     return "2009, 2010";
 }
 
-QList<PluginAuthor> CompassFloatItem::pluginAuthors() const
+QVector<PluginAuthor> CompassFloatItem::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "nienhueser@kde.org" )
             << PluginAuthor( "Torsten Rahn", "tackat@kde.org" );
 }

@@ -99,9 +99,9 @@ QString ElevationProfileMarker::copyrightYears() const
     return "2011, 2012";
 }
 
-QList<PluginAuthor> ElevationProfileMarker::pluginAuthors() const
+QVector<PluginAuthor> ElevationProfileMarker::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de" )
             << PluginAuthor( QString::fromUtf8 ( "Florian Eßer" ), "f.esser@rwth-aachen.de" );
 }

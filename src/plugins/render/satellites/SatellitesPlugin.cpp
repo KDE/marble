@@ -112,9 +112,9 @@ QString SatellitesPlugin::copyrightYears() const
     return "2012";
 }
 
-QList<PluginAuthor> SatellitesPlugin::pluginAuthors() const
+QVector<PluginAuthor> SatellitesPlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( "Guillaume Martres", "smarter@ubuntu.com" )
             << PluginAuthor( "Rene Kuettner", "rene@bitkanal.net" )
             << PluginAuthor( "Gerhard Holtkamp", "" );

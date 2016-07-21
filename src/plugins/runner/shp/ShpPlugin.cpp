@@ -43,9 +43,9 @@ QString ShpPlugin::copyrightYears() const
     return "2011";
 }
 
-QList<PluginAuthor> ShpPlugin::pluginAuthors() const
+QVector<PluginAuthor> ShpPlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( "Thibaut Gridel", "tgridel@free.fr" );
 }
 

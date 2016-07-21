@@ -50,9 +50,9 @@ QString GpsdPositionProviderPlugin::copyrightYears() const
     return "2009";
 }
 
-QList<PluginAuthor> GpsdPositionProviderPlugin::pluginAuthors() const
+QVector<PluginAuthor> GpsdPositionProviderPlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( QString::fromUtf8( "Eckhart Wörner" ), "ewoerner@kde.org" );
 
 }

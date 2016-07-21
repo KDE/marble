@@ -97,9 +97,9 @@ QString WikipediaPlugin::copyrightYears() const
     return "2009";
 }
 
-QList<PluginAuthor> WikipediaPlugin::pluginAuthors() const
+QVector<PluginAuthor> WikipediaPlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( "Bastian Holst", "bastianholst@gmx.de" );
 }
 

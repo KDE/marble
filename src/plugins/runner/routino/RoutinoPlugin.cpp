@@ -54,9 +54,9 @@ QString RoutinoPlugin::copyrightYears() const
     return "2010";
 }
 
-QList<PluginAuthor> RoutinoPlugin::pluginAuthors() const
+QVector<PluginAuthor> RoutinoPlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "nienhueser@kde.org" );
 }
 

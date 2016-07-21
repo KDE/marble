@@ -43,9 +43,9 @@ QString PntPlugin::copyrightYears() const
     return "2011";
 }
 
-QList<PluginAuthor> PntPlugin::pluginAuthors() const
+QVector<PluginAuthor> PntPlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( "Thibaut Gridel", "tgridel@free.fr" );
 }
 

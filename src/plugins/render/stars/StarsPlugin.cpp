@@ -136,9 +136,9 @@ QString StarsPlugin::copyrightYears() const
     return "2008-2012";
 }
 
-QList<PluginAuthor> StarsPlugin::pluginAuthors() const
+QVector<PluginAuthor> StarsPlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
            << PluginAuthor( "Torsten Rahn", "tackat@kde.org" )
            << PluginAuthor( "Rene Kuettner", "rene@bitkanal.net" )
            << PluginAuthor( "Timothy Lanzi", "trlanzi@gmail.com" );

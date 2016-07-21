@@ -43,9 +43,9 @@ QString Pn2Plugin::copyrightYears() const
     return "2012";
 }
 
-QList<PluginAuthor> Pn2Plugin::pluginAuthors() const
+QVector<PluginAuthor> Pn2Plugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( "Cezar Mocan", "mocancezar@gmail.com" );
 }
 

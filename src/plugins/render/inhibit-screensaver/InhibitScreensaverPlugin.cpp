@@ -111,9 +111,9 @@ QString InhibitScreensaverPlugin::copyrightYears() const
     return "2010";
 }
 
-QList<PluginAuthor> InhibitScreensaverPlugin::pluginAuthors() const
+QVector<PluginAuthor> InhibitScreensaverPlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
+    return QVector<PluginAuthor>()
             << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "nienhueser@kde.org" );
 }
 
