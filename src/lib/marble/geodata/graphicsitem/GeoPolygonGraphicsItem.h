@@ -50,7 +50,7 @@ private:
     QPointF buildingOffset(const QPointF &point, const ViewportParams *viewport, bool* isCameraAboveBuilding=0) const;
     static double extractBuildingHeight(const GeoDataFeature *feature);
     static QString extractBuildingLabel(const GeoDataFeature *feature);
-    static QList<NamedEntry> extractNamedEntries(const GeoDataFeature *feature);
+    static QVector<NamedEntry> extractNamedEntries(const GeoDataFeature *feature);
     static void screenPolygons(const ViewportParams *viewport, const GeoDataPolygon* polygon, QVector<QPolygonF*> &polygons,  QVector<QPolygonF*> &outlines);
     QPen configurePainter(GeoPainter* painter, const ViewportParams *viewport, bool isBuildingFrame);
     static bool isBuilding(GeoDataFeature::GeoDataVisualCategory visualCategory);
@@ -68,7 +68,7 @@ private:
     QColor m_cachedTextureColor;
     QImage m_cachedTexture;
 
-    QList<NamedEntry> m_entries;
+    const QVector<NamedEntry> m_entries;
 };
 
 }

@@ -259,9 +259,9 @@ QString GeoPolygonGraphicsItem::extractBuildingLabel(const GeoDataFeature *featu
     return QString();
 }
 
-QList<GeoPolygonGraphicsItem::NamedEntry> GeoPolygonGraphicsItem::extractNamedEntries(const GeoDataFeature *feature)
+QVector<GeoPolygonGraphicsItem::NamedEntry> GeoPolygonGraphicsItem::extractNamedEntries(const GeoDataFeature *feature)
 {
-    QList<NamedEntry> entries;
+    QVector<NamedEntry> entries;
 
     if (isBuilding(feature->visualCategory()) && feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
         const GeoDataPlacemark *placemark = static_cast<const GeoDataPlacemark *>(feature);
