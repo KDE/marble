@@ -51,8 +51,8 @@ class GEODATA_EXPORT GeoSceneGeodata : public GeoSceneAbstractDataset
     int renderOrder() const;
     void setRenderOrder( int renderOrder );
 
-    QList<QColor> colors() const;
-    void setColors( const QList<QColor> &colors );
+    QVector<QColor> colors() const;
+    void setColors(const QVector<QColor> &colors);
 
  private:
     QString m_property;
@@ -62,7 +62,7 @@ class GEODATA_EXPORT GeoSceneGeodata : public GeoSceneAbstractDataset
     QPen    m_pen;
     QBrush  m_brush;
     int m_renderOrder;
-    QList<QColor> m_colors;
+    QVector<QColor> m_colors;
 };
 
 }

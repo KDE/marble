@@ -821,7 +821,7 @@ void MarbleModelPrivate::assignFillColors( const QString &filePath ) {
 
                         QPen pen = data->pen();
                         QBrush brush = data->brush();
-                        QList<QColor> colors = data->colors();
+                        const QVector<QColor> colors = data->colors();
                         GeoDataLineStyle lineStyle( pen.color() );
                         lineStyle.setPenStyle( pen.style() );
                         lineStyle.setWidth( pen.width() );
