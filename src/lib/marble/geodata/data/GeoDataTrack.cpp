@@ -51,12 +51,12 @@ public:
     GeoDataLineString m_lineString;
     bool m_lineStringNeedsUpdate;
 
+    bool m_interpolate;
+
     QVector<QDateTime> m_when;
     QVector<GeoDataCoordinates> m_coordinates;
 
     GeoDataExtendedData m_extendedData;
-
-    bool m_interpolate;
 };
 
 GeoDataTrack::GeoDataTrack() :

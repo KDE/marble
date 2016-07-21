@@ -37,8 +37,8 @@ class AbstractWorkerThreadPrivate
         m_parent->wait( 1000 );
     }
 
-    bool m_running;
     QMutex m_runningMutex;
+    bool m_running;
     bool m_end;
 
     AbstractWorkerThread *m_parent;
