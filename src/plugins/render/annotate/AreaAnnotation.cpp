@@ -278,8 +278,8 @@ void AreaAnnotation::deleteAllSelectedNodes()
     // If it proves inefficient, try something different.
     GeoDataLinearRing initialOuterRing = polygon->outerBoundary();
     QVector<GeoDataLinearRing> initialInnerRings = polygon->innerBoundaries();
-    QList<PolylineNode> initialOuterNodes = m_outerNodesList;
-    QList< QList<PolylineNode> > initialInnerNodes = m_innerNodesList;
+    const QVector<PolylineNode> initialOuterNodes = m_outerNodesList;
+    const QVector< QVector<PolylineNode> > initialInnerNodes = m_innerNodesList;
 
     for ( int i = 0; i < outerRing.size(); ++i ) {
         if ( m_outerNodesList.at(i).isSelected() ) {
@@ -351,8 +351,8 @@ void AreaAnnotation::deleteClickedNode()
     // If it proves inefficient, try something different.
     GeoDataLinearRing initialOuterRing = polygon->outerBoundary();
     QVector<GeoDataLinearRing> initialInnerRings = polygon->innerBoundaries();
-    QList<PolylineNode> initialOuterNodes = m_outerNodesList;
-    QList< QList<PolylineNode> > initialInnerNodes = m_innerNodesList;
+    const QVector<PolylineNode> initialOuterNodes = m_outerNodesList;
+    const QVector< QVector<PolylineNode> > initialInnerNodes = m_innerNodesList;
 
     int i = m_clickedNodeIndexes.first;
     int j = m_clickedNodeIndexes.second;
@@ -587,7 +587,7 @@ void AreaAnnotation::dealWithStateChange( SceneGraphicsItem::ActionState previou
         GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( placemark()->geometry() );
         QVector<GeoDataLinearRing> &innerBounds = polygon->innerBoundaries();
 
-        m_innerNodesList.append( QList<PolylineNode>() );
+        m_innerNodesList.append(QVector<PolylineNode>());
         innerBounds.append( GeoDataLinearRing( Tessellate ) );
     } else if ( state() == SceneGraphicsItem::MergingNodes ) {
         m_firstMergedNode = QPair<int, int>( -1, -1 );
@@ -643,7 +643,8 @@ void AreaAnnotation::setupRegionsLists( GeoPainter *painter )
     foreach ( const GeoDataLinearRing &innerRing, innerRings ) {
         QVector<GeoDataCoordinates>::ConstIterator itBegin = innerRing.constBegin();
         QVector<GeoDataCoordinates>::ConstIterator itEnd = innerRing.constEnd();
-        QList<PolylineNode> innerNodes;
+        QVector<PolylineNode> innerNodes;
+        innerNodes.reserve(innerRing.size());
 
         for ( ; itBegin != itEnd; ++itBegin ) {
             const PolylineNode newNode = PolylineNode( painter->regionFromEllipse( *itBegin, regularDim, regularDim ) );
@@ -681,8 +682,9 @@ void AreaAnnotation::updateRegions( GeoPainter *painter )
         }
 
         m_innerVirtualNodes.clear();
+        m_innerVirtualNodes.reserve(innerRings.size());
         for ( int i = 0; i < innerRings.size(); ++i ) {
-            m_innerVirtualNodes.append( QList<PolylineNode>() );
+            m_innerVirtualNodes.append(QVector<PolylineNode>());
             const QRegion firstRegion( painter->regionFromEllipse( innerRings.at(i).first().interpolate(
                                              innerRings.at(i).last(), 0.5 ), hoveredDim, hoveredDim ) );
             m_innerVirtualNodes[i].append( PolylineNode( firstRegion ) );
@@ -1344,7 +1346,8 @@ bool AreaAnnotation::processAddingNodesOnPress( QMouseEvent *mouseEvent )
 
         if ( i != -1 && j == -1 ) {
             GeoDataLinearRing newRing( Tessellate );
-            QList<PolylineNode> newList;
+            QVector<PolylineNode> newList;
+            newList.reserve(outerRing.size());
             for ( int k = i; k < i + outerRing.size(); ++k ) {
                 newRing.append( outerRing.at(k % outerRing.size()) );
 
@@ -1364,7 +1367,8 @@ bool AreaAnnotation::processAddingNodesOnPress( QMouseEvent *mouseEvent )
             Q_ASSERT( i != -1 && j != -1 );
 
             GeoDataLinearRing newRing( Tessellate );
-            QList<PolylineNode> newList;
+            QVector<PolylineNode> newList;
+            newList.reserve(innerRings.at(i).size());
             for ( int k = j; k < j + innerRings.at(i).size(); ++k ) {
                 newRing.append( innerRings.at(i).at(k % innerRings.at(i).size()) );
 

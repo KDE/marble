@@ -88,6 +88,7 @@ void PolylineAnnotation::setupRegionsLists( GeoPainter *painter )
     QVector<GeoDataCoordinates>::ConstIterator itEnd = line.constEnd();
 
     m_nodesList.clear();
+    m_nodesList.reserve(line.size());
     for ( ; itBegin != itEnd; ++itBegin ) {
         const PolylineNode newNode = PolylineNode( painter->regionFromEllipse( *itBegin, regularDim, regularDim ) );
         m_nodesList.append( newNode );

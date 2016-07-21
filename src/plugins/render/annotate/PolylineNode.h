@@ -52,4 +52,6 @@ private:
 
 }
 
+Q_DECLARE_TYPEINFO(Marble::PolylineNode, Q_MOVABLE_TYPE);
+
 #endif
