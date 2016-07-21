@@ -54,7 +54,7 @@ class MARBLE_EXPORT BillboardGraphicsItem : public MarbleGraphicsItem
     /**
      * @brief Returns the absolute screen bounding boxes of the item.
      */
-    QList<QRectF> boundingRects() const;
+    QVector<QRectF> boundingRects() const;
 
     /**
      * Returns the rect of one representation of the object that is at the given position.

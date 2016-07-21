@@ -76,7 +76,7 @@ class MarbleGraphicsItemPrivate
     /**
      * @brief Used to get the set of screen bounding rects
      */
-    QList<QRectF> boundingRects() const;
+    QVector<QRectF> boundingRects() const;
 
     virtual void setProjection( const ViewportParams *viewport ) = 0;
 

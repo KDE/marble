@@ -47,7 +47,7 @@ void BillboardGraphicsItemTest::defaultConstructorValues()
     QCOMPARE( item.coordinate(), GeoDataCoordinates() );
     QCOMPARE( item.alignment(), Qt::AlignHCenter | Qt::AlignVCenter );
     QCOMPARE( item.positions(), QVector<QPointF>() );
-    QCOMPARE( item.boundingRects(), QList<QRectF>() );
+    QCOMPARE( item.boundingRects(), QVector<QRectF>() );
 }
 
 void BillboardGraphicsItemTest::paintEvent()

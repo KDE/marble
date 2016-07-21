@@ -115,11 +115,11 @@ bool MarbleGraphicsItem::contains( const QPointF& point ) const
     return false;
 }
 
-QList<QRectF> MarbleGraphicsItemPrivate::boundingRects() const
+QVector<QRectF> MarbleGraphicsItemPrivate::boundingRects() const
 {
     const QVector<QPointF> positions = this->positions();
 
-    QList<QRectF> list;
+    QVector<QRectF> list;
     list.reserve(positions.count());
 
     foreach (const QPointF &point, positions) {
@@ -244,7 +244,7 @@ bool MarbleGraphicsItem::eventFilter( QObject *object, QEvent *e )
             
             if ( QRect( QPoint( 0, 0 ), size().toSize() ).contains( shiftedPos ) ) {
                 foreach( MarbleGraphicsItem *child, p()->m_children ) {
-                    QList<QRectF> childRects = child->d->boundingRects();
+                    const QVector<QRectF> childRects = child->d->boundingRects();
                     
                     foreach( const QRectF& childRect, childRects ) {
                         if( childRect.toRect().contains( shiftedPos ) ) {

@@ -30,7 +30,7 @@ public:
     Marble::GeoDataCoordinates  coordinate () const;
     void                    setCoordinate (const Marble::GeoDataCoordinates& coordinates);
     QVector<QPointF>        positions () const;
-    QList<QRectF>           boundingRects () const;
+    QVector<QRectF>         boundingRects () const;
     Qt::Alignment           alignment () const;
     void                    setAlignment (Qt::Alignment alignment);
     QRectF                  containsRect (const QPointF& point) const;

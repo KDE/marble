@@ -108,9 +108,9 @@ QVector<QPointF> BillboardGraphicsItem::positions() const
     return p()->positions();
 }
 
-QList<QRectF> BillboardGraphicsItem::boundingRects() const
+QVector<QRectF> BillboardGraphicsItem::boundingRects() const
 {
-    QList<QRectF> rects;
+    QVector<QRectF> rects;
     rects.reserve(p()->m_positions.size());
 
     QSizeF const size = p()->m_size;
