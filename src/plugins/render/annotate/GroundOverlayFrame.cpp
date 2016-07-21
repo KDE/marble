@@ -126,6 +126,7 @@ void GroundOverlayFrame::paint(GeoPainter *painter, const ViewportParams *viewpo
         coordinateList.append( ring.at( NorthEast ).interpolate( ring.at( SouthEast ), 0.5 ) );
         coordinateList.append( ring.at( NorthWest ).interpolate( ring.at( SouthWest ), 0.5 ) );
 
+        m_regionList.reserve(9);
         m_regionList.append( painter->regionFromEllipse( coordinateList.at( NorthWest ), 16, 16 ) );
         m_regionList.append( painter->regionFromEllipse( coordinateList.at( SouthWest ), 16, 16 ) );
         m_regionList.append( painter->regionFromEllipse( coordinateList.at( SouthEast ), 16, 16 ) );

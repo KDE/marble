@@ -238,7 +238,7 @@ private:
     QList<PolylineNode>          m_outerVirtualNodes;
     QList< QList<PolylineNode> > m_innerNodesList;
     QList< QList<PolylineNode> > m_innerVirtualNodes;
-    QList<QRegion>              m_boundariesList;
+    QVector<QRegion>             m_boundariesList;
 
     // Used in the Editing state
     enum EditingInteractingObject {

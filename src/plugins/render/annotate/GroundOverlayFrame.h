@@ -65,7 +65,7 @@ private:
     GeoDataGroundOverlay *m_overlay;
     TextureLayer         *m_textureLayer;
 
-    QList<QRegion>     m_regionList;
+    QVector<QRegion>   m_regionList;
     GeoDataCoordinates m_movedHandleGeoCoordinates;
     QPoint             m_movedHandleScreenCoordinates;
     int                m_movedHandle;

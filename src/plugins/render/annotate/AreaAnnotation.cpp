@@ -696,6 +696,7 @@ void AreaAnnotation::updateRegions( GeoPainter *painter )
 
     // Update the boundaries list.
     m_boundariesList.clear();
+    m_boundariesList.reserve(1 + innerRings.size());
 
     m_boundariesList.append( painter->regionFromPolygon( outerRing, Qt::OddEvenFill ) );
     foreach ( const GeoDataLinearRing &ring, innerRings ) {
