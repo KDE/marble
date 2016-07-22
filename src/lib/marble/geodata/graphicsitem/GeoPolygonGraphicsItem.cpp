@@ -46,6 +46,12 @@ GeoPolygonGraphicsItem::GeoPolygonGraphicsItem(const GeoDataFeature *feature, co
         paintLayers << QString("Polygon/Building/roof");
         setPaintLayers(paintLayers);
     }
+    else if (visualCategory == GeoDataFeature::Bathymetry) {
+        int elevation = extractBathymetryElevation(feature);
+        setZValue(this->zValue() + elevation);
+        const QString paintLayer = QString("Polygon/%1").arg(StyleBuilder::visualCategoryName(visualCategory));
+        setPaintLayers(QStringList() << paintLayer);
+    }
     else
     {
         const QString paintLayer = QString("Polygon/%1").arg(StyleBuilder::visualCategoryName(visualCategory));
@@ -72,11 +78,39 @@ GeoPolygonGraphicsItem::GeoPolygonGraphicsItem(const GeoDataFeature *feature, co
         paintLayers << QString("Polygon/Building/roof");
         setPaintLayers(paintLayers);
     }
+    else if (visualCategory == GeoDataFeature::Bathymetry) {
+        int elevation = extractBathymetryElevation(feature);
+        setZValue(this->zValue() + elevation);
+        const QString paintLayer = QString("Polygon/%1").arg(StyleBuilder::visualCategoryName(visualCategory));
+        setPaintLayers(QStringList() << paintLayer);
+    }
     else
     {
         const QString paintLayer = QString("Polygon/%1").arg(StyleBuilder::visualCategoryName(visualCategory));
         setPaintLayers(QStringList() << paintLayer);
     }
+}
+
+int GeoPolygonGraphicsItem::extractBathymetryElevation(const GeoDataFeature *feature)
+{
+    const GeoDataFeature::GeoDataVisualCategory visualCategory = feature->visualCategory();
+    if (visualCategory != GeoDataFeature::Bathymetry) {
+        return 0;
+    }
+
+    int elevation = 0;
+
+    if (feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
+        const GeoDataPlacemark *placemark = static_cast<const GeoDataPlacemark *>(feature);
+
+        if (placemark->osmData().containsTagKey("ele")) {
+            elevation = placemark->osmData().tagValue("ele").toInt();
+        }
+    }
+
+    return elevation;
+
+
 }
 
 bool GeoPolygonGraphicsItem::isBuilding(GeoDataFeature::GeoDataVisualCategory visualCategory)

@@ -274,7 +274,7 @@ def feature_class(data):
     'Claim': [('boundary', 'administrative'), ('admin_level', '4')],
     'Airport': [('aeroway', 'aerodrome')],
     'Date line': [('marble_line', 'date')],
-    'Bathymetry': [('marble:feature', 'bathymetry'), ('depth', data['depth'])]
+    'Bathymetry': [('marble:feature', 'bathymetry'), ('ele', data['depth'])]
     }
     if 'featurecla' in data:
         if data['featurecla'] in feat_dict:

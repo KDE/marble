@@ -242,7 +242,9 @@ void GeometryLayerPrivate::createGraphicsItemFromGeometry(const GeoDataGeometry*
 
         const GeoDataPolygon *poly = static_cast<const GeoDataPolygon*>( object );
         item = new GeoPolygonGraphicsItem( placemark, poly );
-        item->setZValue(poly->renderOrder());
+        if (item->zValue() == 0) {
+             item->setZValue(poly->renderOrder());
+        }
     }
     else if ( object->nodeType() == GeoDataTypes::GeoDataMultiGeometryType  )
     {

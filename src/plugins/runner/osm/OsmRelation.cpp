@@ -114,6 +114,16 @@ void OsmRelation::create(GeoDataDocument *document, const OsmWays &ways, const O
     // @todo: How to get the reference here?
     // placemark->osmData().addMemberReference(-1, );
 
+    if (placemark->visualCategory() == GeoDataFeature::Bathymetry) {
+        // In case of a bathymetry store elevation info since it is required during styling
+        // The ele=* tag is present in the outermost way
+        OsmPlacemarkData outerWayData = ways[*outerWays.begin()].osmData();
+        if (outerWayData.containsTagKey("ele")) {
+            QString value = outerWayData.tagValue("ele");
+            placemark->osmData().addTag("ele", value);
+        }
+    }
+
     QStringList const innerRoles = QStringList() << "inner";
     QSet<qint64> innerWays;
     QList<GeoDataLinearRing> inner = rings(innerRoles, ways, nodes, usedNodes, innerWays);
