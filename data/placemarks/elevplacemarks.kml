@@ -6,8 +6,12 @@
         <description><![CDATA[Highest peak in the Americas]]></description> 
         <CountryNameCode>AR</CountryNameCode>
         <role>H</role> 
+        <!--Sources:
+        Height: http://www.uncuyo.edu.ar/novedades/index/informe-cientifico-que-estudia-el-aconcagua-el-coloso-de-america-mide-69608-metros via https://en.wikipedia.org/wiki/Aconcagua, 22 July 2016
+        Latlon: https://en.wikipedia.org/wiki/Aconcagua, unknown origin, 22 July 2016; lots of different values on the net, TODO
+        -->
         <Point>
-            <coordinates>-70.0,-32.65,6960.0</coordinates> 
+            <coordinates>-70.011083,-32.653431,6960.8</coordinates>
         </Point> 
     </Placemark> 
     <Placemark> 
@@ -15,8 +19,12 @@
         <description><![CDATA[Highest peak in Europe]]></description> 
         <CountryNameCode>RU</CountryNameCode>
         <role>H</role> 
+        <!--Sources:
+        Height: The World Book Encyclopedia—Page 317 by World Book, Inc via https://en.wikipedia.org/wiki/Mount_Elbrus, 22 July 2016
+        Latlon: https://en.wikipedia.org/wiki/Mount_Elbrus, unknown origin, 22 July 2016; lots of different values on the net, TODO
+        -->
         <Point>
-            <coordinates>42.4364,43.3519,5642.0</coordinates> 
+            <coordinates>42.439167,43.355,5642.0</coordinates>
         </Point> 
     </Placemark> 
     <Placemark> 
@@ -24,8 +32,12 @@
         <description><![CDATA[Highest peak in Africa]]></description> 
         <CountryNameCode>KE</CountryNameCode>
         <role>H</role> 
+        <!--Sources:
+        Height: http://whc.unesco.org/en/list/403 via https://en.wikipedia.org/wiki/Mount_Kilimanjaro, 22 July 2016
+        Latlon: https://en.wikipedia.org/wiki/Mount_Kilimanjaro, unknown origin, 22 July 2016; lots of different values on the net, TODO
+        -->
         <Point>
-            <coordinates>37.35,-3.08,5895.0</coordinates> 
+            <coordinates>37.353333,-3.075833,5895.0</coordinates>
         </Point> 
     </Placemark> 
     <Placemark> 
@@ -33,8 +45,12 @@
         <description><![CDATA[Highest Mountain in Western Europe]]></description> 
         <CountryNameCode>FR</CountryNameCode>
         <role>H</role> 
+        <!--Sources:
+        Height: http://www.bfmtv.com/planete/le-mont-blanc-passe-de-4-810-metres-a-4-8087-metres-913753.html via https://en.wikipedia.org/wiki/Mont_Blanc, 22 July 2016
+        Latlon: https://en.wikipedia.org/wiki/Mont_Blanc, unknown origin, 22 July 2016; lots of different values on the net, TODO
+        -->
         <Point>
-            <coordinates>6.8643,45.8325,4807.0</coordinates> 
+            <coordinates>6.8643,45.833611,4808.73</coordinates>
         </Point> 
     </Placemark> 
     <Placemark> 
@@ -42,8 +58,12 @@
         <description><![CDATA[Highest point on earth]]></description> 
         <CountryNameCode>NP</CountryNameCode>
         <role>H</role> 
+        <!--Sources:
+        Height: http://news.bbc.co.uk/2/hi/south_asia/8608913.stm via https://en.wikipedia.org/wiki/Mount_Everest, 22 July 2016
+        Latlon: https://en.wikipedia.org/wiki/Mount_Everest, unknown origin, 22 July 2016; lots of different values on the net, TODO
+        -->
         <Point>
-            <coordinates>86.9333,27.9833,8850.0</coordinates> 
+            <coordinates>86.925278,27.988056,8848.0</coordinates>
         </Point> 
     </Placemark> 
     <Placemark> 
@@ -51,17 +71,25 @@
         <description><![CDATA[Highest mountain in mainland Australia]]></description> 
         <CountryNameCode>AU</CountryNameCode>
         <role>H</role> 
+        <!--Sources:
+        Height: http://www.australianalps.environment.gov.au/parks/kosciuszko.html via https://en.wikipedia.org/wiki/Mount_Kosciuszko, 22 July 2016
+        Latlon: http://www.gnb.nsw.gov.au/place_naming/placename_search/extract?id=KWwGjzsETR via https://en.wikipedia.org/wiki/Mount_Everest, 22 July 2016
+        -->
         <Point>
-            <coordinates>148.2667,-36.45,2229.0</coordinates> 
+            <coordinates>148.262222,-36.4575,2228.0</coordinates>
         </Point> 
     </Placemark> 
     <Placemark> 
-        <name>Mount McKinley</name> 
+        <name>Denali</name>
         <description><![CDATA[Highest mountain in North America]]></description> 
         <CountryNameCode>US</CountryNameCode>
         <role>H</role> 
+        <!--Sources:
+        Height: https://www.usgs.gov/news/new-elevation-nation%E2%80%99s-highest-peak via https://en.wikipedia.org/wiki/Denali, 22 July 2016
+        Latlon: http://geonames.usgs.gov/apex/f?p=gnispq:3:0::NO::P3_FID:1414314 via https://en.wikipedia.org/wiki/Denali, 22 July 2016
+        -->
         <Point>
-            <coordinates>-151.0074,63.0695,6194.0</coordinates> 
+            <coordinates>-151.0074,63.0695,6190.0</coordinates>
         </Point> 
     </Placemark> 
     <Placemark> 
@@ -69,8 +97,12 @@
         <description><![CDATA[Highest mountain on the greater Australian continent]]></description> 
         <CountryNameCode>ID</CountryNameCode>
         <role>H</role> 
+        <!--Sources:
+        Height: http://papuaweb.org/dlib/bk/hope1976/index.html via https://en.wikipedia.org/wiki/Puncak_Jaya, 22 July 2016
+        Latlon: https://en.wikipedia.org/wiki/Puncak_Jaya, unknown origin, 22 July 2016; lots of different values on the net, TODO
+        -->
         <Point>
-            <coordinates>137.1833,-4.0833,5030.0</coordinates> 
+            <coordinates>137.158333,-4.078889,4884.0</coordinates>
         </Point> 
     </Placemark> 
     <Placemark> 
@@ -78,8 +110,12 @@
         <description><![CDATA[Highest mountain of Antarctica]]></description> 
         <CountryNameCode>AQ</CountryNameCode>
         <role>H</role> 
+        <!--Sources:
+        Height: http://7summits.com/vinson/waypoints.php via https://en.wikipedia.org/wiki/Vinson_Massif, 22 July 2016
+        Latlon: http://7summits.com/vinson/waypoints.php via https://en.wikipedia.org/wiki/Vinson_Massif, 22 July 2016
+        -->
         <Point>
-            <coordinates>-85.6333,-78.5333,4897.0</coordinates> 
+            <coordinates>-85.617147,-78.525483,4892.0</coordinates>
         </Point> 
     </Placemark> 
     <Placemark> 
