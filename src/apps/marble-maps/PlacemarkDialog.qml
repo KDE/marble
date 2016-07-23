@@ -76,6 +76,7 @@ Item {
         IconText {
             id: name
             width: parent.width
+            visible: text.length > 0
             text: placemark === null ? "" : placemark.name
             maximumLineCount: 2
             font.pointSize: 20
@@ -83,6 +84,7 @@ Item {
 
         IconText {
             width: parent.width
+            visible: text.length > 0
             text: placemark === null ? "" : placemark.description
             maximumLineCount: condensed ? 4 : undefined
         }
@@ -139,7 +141,7 @@ Item {
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         anchors.margins: Screen.pixelDensity * 2
-        visible: root.height > 0 && !condensed
+        visible: root.height > 0
 
         property bool bookmark: false
 
