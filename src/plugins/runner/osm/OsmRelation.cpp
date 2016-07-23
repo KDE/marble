@@ -107,7 +107,7 @@ void OsmRelation::create(GeoDataDocument *document, const OsmWays &ways, const O
     placemark->setOsmData(m_osmData);
     placemark->setVisualCategory(outerCategory);
     placemark->setStyle( GeoDataStyle::Ptr() );
-    placemark->setVisible(shouldRender);
+    placemark->setVisible(shouldRender && outerCategory != GeoDataFeature::None);
 
     GeoDataPolygon* polygon = new GeoDataPolygon;
     polygon->setOuterBoundary(outer[0]);
