@@ -231,6 +231,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         AmenityPostOffice,
         AmenityPrison,
         AmenityRecycling,
+        AmenityShelter,
         AmenityTelephone,
         AmenityToilets,
         AmenityTownHall,

@@ -526,6 +526,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataFeature::AmenityPostOffice]        = StyleBuilder::Private::createOsmPOIStyle( osmFont, "amenity/post_office-14", amenityColor );
     m_defaultStyle[GeoDataFeature::AmenityPrison]            = StyleBuilder::Private::createOsmPOIStyle( osmFont, "amenity/prison.16", amenityColor );
     m_defaultStyle[GeoDataFeature::AmenityRecycling]         = StyleBuilder::Private::createOsmPOIStyle( osmFont, "amenity/recycling.16", amenityColor );
+    m_defaultStyle[GeoDataFeature::AmenityShelter]           = StyleBuilder::Private::createOsmPOIStyle( osmFont, "amenity/shelter-14", amenityColor );
     m_defaultStyle[GeoDataFeature::AmenityTelephone]         = StyleBuilder::Private::createOsmPOIStyle( osmFont, "amenity/telephone.16", amenityColor );
     m_defaultStyle[GeoDataFeature::AmenityToilets]           = StyleBuilder::Private::createOsmPOIStyle( osmFont, "amenity/toilets.16", amenityColor );
     m_defaultStyle[GeoDataFeature::AmenityTownHall]          = StyleBuilder::Private::createOsmPOIStyle( osmFont, "amenity/town_hall.16", amenityColor );
@@ -1325,6 +1326,7 @@ QString StyleBuilder::visualCategoryName(GeoDataFeature::GeoDataVisualCategory c
         visualCategoryNames[GeoDataFeature::AmenityPostOffice] = "AmenityPostOffice";
         visualCategoryNames[GeoDataFeature::AmenityPrison] = "AmenityPrison";
         visualCategoryNames[GeoDataFeature::AmenityRecycling] = "AmenityRecycling";
+        visualCategoryNames[GeoDataFeature::AmenityShelter] = "AmenityShelter";
         visualCategoryNames[GeoDataFeature::AmenityTelephone] = "AmenityTelephone";
         visualCategoryNames[GeoDataFeature::AmenityToilets] = "AmenityToilets";
         visualCategoryNames[GeoDataFeature::AmenityTownHall] = "AmenityTownHall";

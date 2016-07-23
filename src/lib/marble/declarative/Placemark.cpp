@@ -302,6 +302,7 @@ QString Placemark::categoryName(GeoDataFeature::GeoDataVisualCategory category) 
     case GeoDataFeature::AmenityPostOffice: return tr("Post Office");
     case GeoDataFeature::AmenityPrison: return tr("Prison");
     case GeoDataFeature::AmenityRecycling: return tr("Recycling");
+    case GeoDataFeature::AmenityShelter: return tr("Shelter");
     case GeoDataFeature::AmenityTelephone: return tr("Telephone");
     case GeoDataFeature::AmenityToilets: return tr("Toilets");
     case GeoDataFeature::AmenityTownHall: return tr("Town Hall");

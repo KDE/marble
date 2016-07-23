@@ -82,6 +82,7 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "amenity", "post_office" ) ]        = GeoDataFeature::AmenityPostOffice;
     s_visualCategories[ OsmTag( "amenity", "prison" ) ]             = GeoDataFeature::AmenityPrison;
     s_visualCategories[ OsmTag( "amenity", "recycling" ) ]          = GeoDataFeature::AmenityRecycling;
+    s_visualCategories[ OsmTag( "amenity", "shelter" ) ]            = GeoDataFeature::AmenityShelter;
     s_visualCategories[ OsmTag( "amenity", "telephone" ) ]          = GeoDataFeature::AmenityTelephone;
     s_visualCategories[ OsmTag( "amenity", "toilets" ) ]            = GeoDataFeature::AmenityToilets;
     s_visualCategories[ OsmTag( "amenity", "townhall" ) ]           = GeoDataFeature::AmenityTownHall;
