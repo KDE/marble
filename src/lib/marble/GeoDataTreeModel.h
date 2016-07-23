@@ -58,6 +58,8 @@ class MARBLE_EXPORT GeoDataTreeModel : public QAbstractItemModel
     QVariant headerData(int section, Qt::Orientation orientation,
                                 int role = Qt::DisplayRole) const;
 
+    QHash<int, QByteArray> roleNames() const override;
+
     QVariant data( const QModelIndex &index, int role ) const;
 
     QModelIndex index( int row, int column,

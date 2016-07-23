@@ -49,6 +49,7 @@ class Q_DECL_HIDDEN GeoDataTreeModel::Private {
     GeoDataDocument* m_rootDocument;
     bool             m_ownsRootDocument;
     QItemSelectionModel m_selectionModel;
+    QHash<int, QByteArray> m_roleNames;
 };
 
 GeoDataTreeModel::Private::Private( QAbstractItemModel *model ) :
@@ -56,7 +57,24 @@ GeoDataTreeModel::Private::Private( QAbstractItemModel *model ) :
     m_ownsRootDocument( true ),
     m_selectionModel( model )
 {
-    // nothing to do
+    m_roleNames[MarblePlacemarkModel::DescriptionRole] = "description";
+    m_roleNames[MarblePlacemarkModel::IconPathRole] = "iconPath";
+    m_roleNames[MarblePlacemarkModel::PopularityIndexRole] = "zoomLevel";
+    m_roleNames[MarblePlacemarkModel::VisualCategoryRole] = "visualCategory";
+    m_roleNames[MarblePlacemarkModel::AreaRole] = "area";
+    m_roleNames[MarblePlacemarkModel::PopulationRole] = "population";
+    m_roleNames[MarblePlacemarkModel::CountryCodeRole] = "countryCode";
+    m_roleNames[MarblePlacemarkModel::StateRole] = "state";
+    m_roleNames[MarblePlacemarkModel::PopularityRole] = "popularity";
+    m_roleNames[MarblePlacemarkModel::GeoTypeRole] = "role";
+    m_roleNames[MarblePlacemarkModel::CoordinateRole] = "coordinate";
+    m_roleNames[MarblePlacemarkModel::StyleRole] = "style";
+    m_roleNames[MarblePlacemarkModel::GmtRole] = "gmt";
+    m_roleNames[MarblePlacemarkModel::DstRole] = "dst";
+    m_roleNames[MarblePlacemarkModel::GeometryRole] = "geometry";
+    m_roleNames[MarblePlacemarkModel::ObjectPointerRole] = "objectPointer";
+    m_roleNames[MarblePlacemarkModel::LongitudeRole] = "longitude";
+    m_roleNames[MarblePlacemarkModel::LatitudeRole] = "latitude";
 }
 
 GeoDataTreeModel::Private::~Private()
@@ -84,6 +102,10 @@ GeoDataTreeModel::GeoDataTreeModel( QObject *parent )
     : QAbstractItemModel( parent ),
       d( new Private( this ) )
 {
+    auto const roleNames = QAbstractItemModel::roleNames();
+    for(auto iter = roleNames.constBegin(); iter != roleNames.constEnd(); ++iter) {
+        d->m_roleNames[iter.key()] = iter.value();
+    }
 }
 
 GeoDataTreeModel::~GeoDataTreeModel()
@@ -223,6 +245,11 @@ QVariant GeoDataTreeModel::headerData(int section, Qt::Orientation orientation,
         }
     }
     return QVariant();
+}
+
+QHash<int, QByteArray> GeoDataTreeModel::roleNames() const
+{
+    return d->m_roleNames;
 }
 
 QVariant GeoDataTreeModel::data( const QModelIndex &index, int role ) const
