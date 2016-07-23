@@ -41,7 +41,7 @@ void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes, QSet<qint6
     placemark->setOsmData(m_osmData);
     placemark->setVisualCategory(OsmPresetLibrary::determineVisualCategory(m_osmData));
     placemark->setName(m_osmData.tagValue("name"));
-    placemark->setVisible(shouldRender);
+    placemark->setVisible(shouldRender && placemark->visualCategory() != GeoDataFeature::None);
 
     if (isArea()) {
         GeoDataLinearRing* linearRing = new GeoDataLinearRing;
