@@ -549,7 +549,8 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     /**
      * Return the ExtendedData assigned to the feature.
      */
-    GeoDataExtendedData& extendedData() const;
+    GeoDataExtendedData& extendedData();
+    const GeoDataExtendedData& extendedData() const;
 
     /**
      * Sets the ExtendedData of the feature.

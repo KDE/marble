@@ -16,6 +16,7 @@
 #include "GeoDataMultiTrack.h"
 #include "GeoDataTrack.h"
 #include "GeoDataTypes.h"
+#include "osm/OsmPlacemarkData.h"
 
 namespace Marble
 {
@@ -110,6 +111,8 @@ class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
     qint64              m_population;   // population in number of inhabitants
     QString             m_state;        // State
     bool                m_isBalloonVisible;  //Visibility of balloon
+
+    static const OsmPlacemarkData s_nullOsmPlacemarkData;
 };
 
 } // namespace Marble

@@ -127,6 +127,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
 
     void setOsmData( const OsmPlacemarkData &osmData );
     bool hasOsmData() const;
+    void clearOsmData();
 
     /**
      * Set the coordinate of the placemark in @p longitude and

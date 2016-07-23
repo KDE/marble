@@ -31,6 +31,9 @@
 
 namespace Marble
 {
+
+const OsmPlacemarkData GeoDataPlacemarkPrivate::s_nullOsmPlacemarkData = OsmPlacemarkData();
+
 GeoDataPlacemark::GeoDataPlacemark()
     : GeoDataFeature( new GeoDataPlacemarkPrivate )
 {
@@ -180,8 +183,7 @@ const OsmPlacemarkData& GeoDataPlacemark::osmData() const
 {
     QVariant &placemarkVariantData = extendedData().valueRef( OsmPlacemarkData::osmHashKey() ).valueRef();
     if ( !placemarkVariantData.canConvert<OsmPlacemarkData>() ) {
-        extendedData().addValue( GeoDataData( OsmPlacemarkData::osmHashKey(), QVariant::fromValue( OsmPlacemarkData() ) ) );
-        placemarkVariantData = extendedData().valueRef( OsmPlacemarkData::osmHashKey() ).valueRef();
+        return p()->s_nullOsmPlacemarkData;
     }
 
     OsmPlacemarkData &osmData = *reinterpret_cast<OsmPlacemarkData*>( placemarkVariantData.data() );
@@ -195,13 +197,26 @@ void GeoDataPlacemark::setOsmData( const OsmPlacemarkData &osmData )
 
 OsmPlacemarkData& GeoDataPlacemark::osmData()
 {
-    return const_cast<OsmPlacemarkData&>( (static_cast<const GeoDataPlacemark*>(this) )->osmData() );
+    QVariant &placemarkVariantData = extendedData().valueRef( OsmPlacemarkData::osmHashKey() ).valueRef();
+    if ( !placemarkVariantData.canConvert<OsmPlacemarkData>() ) {
+        extendedData().addValue( GeoDataData( OsmPlacemarkData::osmHashKey(), QVariant::fromValue( OsmPlacemarkData() ) ) );
+        placemarkVariantData = extendedData().valueRef( OsmPlacemarkData::osmHashKey() ).valueRef();
+    }
+
+    OsmPlacemarkData &osmData = *reinterpret_cast<OsmPlacemarkData*>( placemarkVariantData.data() );
+    return osmData;
 }
 
 bool GeoDataPlacemark::hasOsmData() const
 {
     QVariant &placemarkVariantData = extendedData().valueRef( OsmPlacemarkData::osmHashKey() ).valueRef();
     return placemarkVariantData.canConvert<OsmPlacemarkData>();
+}
+
+void GeoDataPlacemark::clearOsmData()
+{
+    detach();
+    extendedData().removeKey(OsmPlacemarkData::osmHashKey());
 }
 
 const GeoDataLookAt *GeoDataPlacemark::lookAt() const

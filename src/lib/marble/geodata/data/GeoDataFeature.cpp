@@ -335,6 +335,11 @@ void GeoDataFeature::setTimeStamp( const GeoDataTimeStamp &timeStamp )
     d->m_timeStamp = timeStamp;
 }
 
+const GeoDataExtendedData &GeoDataFeature::extendedData() const
+{
+    return d->m_extendedData;
+}
+
 GeoDataStyle::ConstPtr GeoDataFeature::style() const
 {
     if (d->m_style) {
@@ -357,9 +362,9 @@ void GeoDataFeature::setStyle( const GeoDataStyle::Ptr &style )
     d->m_style = style;
 }
 
-GeoDataExtendedData& GeoDataFeature::extendedData() const
+GeoDataExtendedData& GeoDataFeature::extendedData()
 {
-    // FIXME: Should call detach(). Maybe don't return reference.
+    detach();
     return d->m_extendedData;
 }
 

@@ -73,6 +73,11 @@ void GeoDataExtendedData::addValue( const GeoDataData& data )
     d->hash.insert( data.name(), data );
 }
 
+void GeoDataExtendedData::removeKey(const QString &key)
+{
+    d->hash.remove(key);
+}
+
 QHash< QString, GeoDataData >::const_iterator GeoDataExtendedData::constBegin( ) const
 {
     return d->hash.constBegin();

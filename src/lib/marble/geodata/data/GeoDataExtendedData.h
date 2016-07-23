@@ -58,6 +58,8 @@ class GEODATA_EXPORT GeoDataExtendedData : public GeoDataObject
      * @brief add a data object to the GeoDataExtendedData with the @p key 
      */
     void addValue( const GeoDataData& data );
+
+    void removeKey(const QString &key);
     
     /**
       * @brief return const Begin iterator for QHash
