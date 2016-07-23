@@ -107,18 +107,32 @@ void OsmWay::addReference(qint64 id)
 
 bool OsmWay::isArea() const
 {
+    // @TODO A single OSM way can be both closed and non-closed, e.g. landuse=grass with barrier=fence.
+    // We need to create two separate ways in cases like that to support this.
+    // See also https://wiki.openstreetmap.org/wiki/Key:area
+
+    bool const isLinearFeature =
+            m_osmData.containsTag("area", "no") ||
+            m_osmData.containsTagKey("highway") ||
+            m_osmData.containsTagKey("barrier");
+    if (isLinearFeature) {
+        return false;
+    }
+
+    bool const isAreaFeature = m_osmData.containsTagKey("landuse");
+    if (isAreaFeature) {
+        return true;
+    }
+
     for (auto iter = m_osmData.tagsBegin(), end=m_osmData.tagsEnd(); iter != end; ++iter) {
-        if (iter.key() == "landuse") {
-            // landuse is not used on open ways
-            return true;
-        }
         QString const keyValue = QString("%1=%2").arg(iter.key()).arg(iter.value());
         if (isAreaTag(keyValue)) {
             return true;
         }
     }
 
-    return false;
+    bool const isImplicitlyClosed = m_references.size() > 1 && m_references.front() == m_references.last();
+    return isImplicitlyClosed;
 }
 
 bool OsmWay::isAreaTag(const QString &keyValue)
