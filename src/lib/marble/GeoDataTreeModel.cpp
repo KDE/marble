@@ -442,6 +442,11 @@ QVariant GeoDataTreeModel::data( const QModelIndex &index, int role ) const
                 return container->customStyle() ? QVariant( QBrush( container->customStyle()->listStyle().backgroundColor() )) : QVariant();
             }
         }
+    } else if (role == MarblePlacemarkModel::IconPathRole) {
+        if (object->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
+            GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(object);
+            return placemark->style()->iconStyle().iconPath();
+        }
     }
 
     return QVariant();
