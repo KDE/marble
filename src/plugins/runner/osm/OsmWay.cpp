@@ -180,6 +180,7 @@ bool OsmWay::isAreaTag(const QString &keyValue)
         s_areaTags.insert( "landuse=orchard" );
         s_areaTags.insert( "landuse=quarry" );
         s_areaTags.insert( "landuse=railway" );
+        s_areaTags.insert( "landuse=recreation_ground" );
         s_areaTags.insert( "landuse=reservoir" );
         s_areaTags.insert( "landuse=residential" );
         s_areaTags.insert( "landuse=retail" );
