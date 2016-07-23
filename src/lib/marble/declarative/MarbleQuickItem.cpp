@@ -37,6 +37,7 @@
 #include <routing/RoutingManager.h>
 #include <routing/RoutingModel.h>
 #include <routing/Route.h>
+#include <BookmarkManager.h>
 
 namespace Marble
 {
@@ -895,6 +896,8 @@ namespace Marble
         }
         settings.endGroup();
         d->m_model.routingManager()->readSettings();
+        d->m_model.bookmarkManager()->loadFile( "bookmarks/bookmarks.kml" );
+        d->m_model.bookmarkManager()->setShowBookmarks(true);
     }
 
     void MarbleQuickItem::writeSettings()
