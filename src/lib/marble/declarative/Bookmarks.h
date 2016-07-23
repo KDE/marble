@@ -62,7 +62,7 @@ public:
     Q_INVOKABLE Placemark* placemark(int index);
 
 public Q_SLOTS:
-    void addBookmark( qreal longitude, qreal latitude, const QString &name, const QString &folder );
+    void addBookmark(Placemark *placemark, const QString &folder );
     void removeBookmark( qreal longitude, qreal latitude );
     void updateBookmarkDocument();
 

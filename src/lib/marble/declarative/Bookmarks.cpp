@@ -23,6 +23,7 @@
 #include "GeoDataExtendedData.h"
 #include "GeoDataTreeModel.h"
 #include "kdescendantsproxymodel.h"
+#include "osm/OsmPlacemarkData.h"
 
 #include <QSortFilterProxyModel>
 
@@ -86,7 +87,7 @@ Placemark *Bookmarks::placemark(int row)
     return placemark;
 }
 
-void Bookmarks::addBookmark( qreal longitude, qreal latitude, const QString &name, const QString &folderName )
+void Bookmarks::addBookmark(Placemark *placemark, const QString &folderName )
 {
     if ( !m_marbleQuickItem || !m_marbleQuickItem->model()->bookmarkManager() ) {
         return;
@@ -115,13 +116,16 @@ void Bookmarks::addBookmark( qreal longitude, qreal latitude, const QString &nam
         Q_ASSERT( target );
     }
 
-    Marble::GeoDataPlacemark placemark;
-    Marble::GeoDataCoordinates coordinate( longitude, latitude, 0.0, Marble::GeoDataCoordinates::Degree );
-    placemark.setCoordinate( coordinate );
-    placemark.setName( name );
-    placemark.extendedData().addValue( Marble::GeoDataData( "isBookmark", true ) );
-
-    manager->addBookmark( target, placemark );
+    Marble::GeoDataPlacemark bookmark = placemark->placemark();
+    if (bookmark.name().isEmpty()) {
+        bookmark.setName(placemark->address());
+    }
+    if (bookmark.name().isEmpty()) {
+        bookmark.setName(bookmark.coordinate().toString(GeoDataCoordinates::Decimal).trimmed());
+    }
+    bookmark.clearOsmData();
+    bookmark.setCoordinate(bookmark.coordinate()); // replace non-point geometries with their center
+    manager->addBookmark( target, bookmark );
 }
 
 void Bookmarks::removeBookmark( qreal longitude, qreal latitude )

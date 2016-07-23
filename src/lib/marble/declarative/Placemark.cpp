@@ -53,6 +53,11 @@ Marble::GeoDataPlacemark & Placemark::placemark()
     return m_placemark;
 }
 
+const GeoDataPlacemark &Placemark::placemark() const
+{
+    return m_placemark;
+}
+
 QString Placemark::name() const
 {
     return m_placemark.name();

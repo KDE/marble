@@ -569,7 +569,10 @@ namespace Marble
 
     void MarbleQuickItem::selectPlacemarkAt(int x, int y)
     {
-        auto const features = d->m_map.whichFeatureAt(QPoint(x, y));
+        auto features = d->m_map.whichFeatureAt(QPoint(x, y));
+        if (features.empty()) {
+            features = d->m_map.whichBuildingAt(QPoint(x, y));
+        }
         QVector<GeoDataPlacemark const *> placemarks;
         foreach(auto feature, features) {
             if (feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {

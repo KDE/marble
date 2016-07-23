@@ -156,7 +156,7 @@ Item {
                 if (bookmarkButton.bookmark) {
                     bookmarks.removeBookmark(root.placemark.longitude, root.placemark.latitude)
                 } else {
-                    bookmarks.addBookmark(root.placemark.longitude, root.placemark.latitude, root.placemark.name, "Default")
+                    bookmarks.addBookmark(root.placemark, "Default")
                 }
                 bookmarkButton.bookmark = !bookmarkButton.bookmark
             }
