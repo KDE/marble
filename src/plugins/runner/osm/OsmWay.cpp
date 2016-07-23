@@ -108,6 +108,10 @@ void OsmWay::addReference(qint64 id)
 bool OsmWay::isArea() const
 {
     for (auto iter = m_osmData.tagsBegin(), end=m_osmData.tagsEnd(); iter != end; ++iter) {
+        if (iter.key() == "landuse") {
+            // landuse is not used on open ways
+            return true;
+        }
         QString const keyValue = QString("%1=%2").arg(iter.key()).arg(iter.value());
         if (isAreaTag(keyValue)) {
             return true;
@@ -123,7 +127,6 @@ bool OsmWay::isAreaTag(const QString &keyValue)
         // All these tags can be found updated at
         // http://wiki.openstreetmap.org/wiki/Map_Features#Landuse
 
-        s_areaTags.insert( "landuse=forest" );
         s_areaTags.insert( "natural=water" );
         s_areaTags.insert( "natural=wood" );
         s_areaTags.insert( "natural=beach" );
@@ -161,32 +164,6 @@ bool OsmWay::isAreaTag(const QString &keyValue)
         s_areaTags.insert( "leisure=track" );
 
         s_areaTags.insert( "military=danger_area" );
-
-        s_areaTags.insert( "landuse=allotments" );
-        s_areaTags.insert( "landuse=basin" );
-        s_areaTags.insert( "landuse=brownfield" );
-        s_areaTags.insert( "landuse=cemetery" );
-        s_areaTags.insert( "landuse=commercial" );
-        s_areaTags.insert( "landuse=construction" );
-        s_areaTags.insert( "landuse=farm" );
-        s_areaTags.insert( "landuse=farmland" );
-        s_areaTags.insert( "landuse=farmyard" );
-        s_areaTags.insert( "landuse=garages" );
-        s_areaTags.insert( "landuse=greenfield" );
-        s_areaTags.insert( "landuse=industrial" );
-        s_areaTags.insert( "landuse=landfill" );
-        s_areaTags.insert( "landuse=meadow" );
-        s_areaTags.insert( "landuse=military" );
-        s_areaTags.insert( "landuse=orchard" );
-        s_areaTags.insert( "landuse=quarry" );
-        s_areaTags.insert( "landuse=railway" );
-        s_areaTags.insert( "landuse=recreation_ground" );
-        s_areaTags.insert( "landuse=reservoir" );
-        s_areaTags.insert( "landuse=residential" );
-        s_areaTags.insert( "landuse=retail" );
-        s_areaTags.insert( "landuse=orchard" );
-        s_areaTags.insert( "landuse=vineyard" );
-        s_areaTags.insert( "landuse=grass" );
 
         s_areaTags.insert( "marble_land=landmass" );
         s_areaTags.insert( "settlement=yes" );
