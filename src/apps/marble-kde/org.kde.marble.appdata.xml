@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component type="desktop">
-  <id>marble.desktop</id>
+  <id>org.kde.marble.desktop</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LGPL</project_license>
   <name>Marble</name>
@@ -145,14 +145,14 @@
     <p xml:lang="x-test">xxStart exploring the world. View clouds and sun shadow, follow satellites and space stations and display their orbits, all updated in real-time. Travel back in time and learn about historic views of our planet using maps from past centuries. Earth is not enough? Marble also offers maps of the moon and other planets.xx</p>
     <p xml:lang="zh-TW">開始探索世界吧！檢視雲與太陽的陰影，跟著衛星與太空站顯示的軌道，所有的一切都是即時更新。時光旅行回到過去，看看過去的地圖上的旅程。地球不夠看嗎？Marble 也提供了月球與其他星球的地圖喔！</p>
   </description>
-  <url type="homepage">http://marble.kde.org/</url>
+  <url type="homepage">https://marble.kde.org/</url>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=marble</url>
-  <url type="faq">http://techbase.kde.org/Projects/Marble/FAQ</url>
-  <url type="help">http://marble.kde.org/support.php</url>
-  <url type="donation">http://www.kde.org/community/donations/</url>
+  <url type="faq">https://techbase.kde.org/Projects/Marble/FAQ</url>
+  <url type="help">https://marble.kde.org/support.php</url>
+  <url type="donation">https://www.kde.org/community/donations/</url>
   <screenshots>
     <screenshot type="default">
-      <image>http://marble.kde.org/img/gallery/marble-desktop-satellite-clouds.png</image>
+      <image>https://marble.kde.org/img/gallery/marble-desktop-satellite-clouds.png</image>
     </screenshot>
   </screenshots>
   <project_group>KDE</project_group>
