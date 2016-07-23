@@ -425,6 +425,35 @@ QVector<const GeoDataFeature*> GeometryLayer::whichFeatureAt(const QPoint &curpo
     return result;
 }
 
+QVector<const GeoDataFeature *> GeometryLayer::whichBuildingAt(const QPoint &curpos, const ViewportParams *viewport)
+{
+    QVector<const GeoDataFeature*> result;
+    qreal lon, lat;
+    if (!viewport->geoCoordinates(curpos.x(), curpos.y(), lon, lat, GeoDataCoordinates::Radian)) {
+        return result;
+    }
+    GeoDataCoordinates const coordinates = GeoDataCoordinates(lon, lat);
+
+    const int maxZoom = qMin<int>(qMax<int>(qLn(viewport->radius()*4/256)/qLn(2.0), 1), d->m_styleBuilder->maximumZoomLevel());
+    foreach ( GeoGraphicsItem * item, d->m_scene.items( viewport->viewLatLonAltBox(), maxZoom ) ) {
+        if (item->feature()->visualCategory() == GeoDataFeature::Building && item->feature()->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
+            const GeoDataPlacemark* placemark = static_cast<const GeoDataPlacemark*>(item->feature());
+            if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType) {
+                const GeoDataPolygon *polygon = static_cast<const GeoDataPolygon*>(placemark->geometry());
+                if (polygon->contains(coordinates)) {
+                    result << item->feature();
+                }
+            } else if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLinearRingType) {
+                const GeoDataLinearRing *ring = static_cast<const GeoDataLinearRing*>(placemark->geometry());
+                if (ring->contains(coordinates)) {
+                    result << item->feature();
+                }
+            }
+        }
+    }
+    return result;
+}
+
 void GeometryLayer::handleHighlight( qreal lon, qreal lat, GeoDataCoordinates::Unit unit )
 {
     GeoDataCoordinates clickedPoint( lon, lat, 0, unit );

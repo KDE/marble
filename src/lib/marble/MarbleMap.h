@@ -222,6 +222,8 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
     QVector<const GeoDataFeature *> whichFeatureAt( const QPoint& ) const;
 
+    QVector<const GeoDataFeature*> whichBuildingAt(const QPoint& curpos) const;
+
     /**
      * @brief  Return the property value by name.
      * @return The property value (usually: visibility).

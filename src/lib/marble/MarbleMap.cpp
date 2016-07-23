@@ -505,6 +505,11 @@ QVector<const GeoDataFeature*> MarbleMap::whichFeatureAt( const QPoint& curpos )
     return d->m_placemarkLayer.whichPlacemarkAt( curpos ) + d->m_geometryLayer.whichFeatureAt( curpos, viewport() );
 }
 
+QVector<const GeoDataFeature*> MarbleMap::whichBuildingAt(const QPoint& curpos) const
+{
+    return d->m_geometryLayer.whichBuildingAt(curpos, viewport());
+}
+
 void MarbleMap::reload()
 {
     d->m_textureLayer.reload();
