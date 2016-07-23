@@ -47,7 +47,7 @@ private Q_SLOTS:
     void startReverseGeocoding();
 
 private:
-    static GeoDataExtendedData extractChildren(const QDomNode &node);
+    static void extractChildren(const QDomNode &node, GeoDataPlacemark &placemark);
 
     QNetworkAccessManager m_manager;
 

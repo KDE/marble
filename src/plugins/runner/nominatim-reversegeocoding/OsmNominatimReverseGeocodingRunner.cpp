@@ -16,6 +16,7 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataExtendedData.h"
 #include "HttpDownloadManager.h"
+#include "osm/OsmPlacemarkData.h"
 
 #include <QString>
 #include <QUrl>
@@ -102,12 +103,12 @@ void OsmNominatimRunner::handleResult( QNetworkReply* reply )
     if ( places.size() == 1 ) {
         QString address = places.item( 0 ).toElement().text();
         GeoDataPlacemark placemark;
+        placemark.setVisualCategory(GeoDataFeature::Coordinate);
         placemark.setAddress( address );
         placemark.setCoordinate( m_coordinates );
 
         QDomNode details = root.firstChildElement( "addressparts" );
-        GeoDataExtendedData extendedData = extractChildren( details );
-        placemark.setExtendedData( extendedData );
+        extractChildren( details, placemark );
 
         emit reverseGeocodingFinished( m_coordinates, placemark );
     } else {
@@ -115,15 +116,35 @@ void OsmNominatimRunner::handleResult( QNetworkReply* reply )
     }
 }
 
-GeoDataExtendedData OsmNominatimRunner::extractChildren(const QDomNode &node)
+void OsmNominatimRunner::extractChildren(const QDomNode &node, GeoDataPlacemark &placemark)
 {
+    QMap<QString, QString> tagTranslator;
+    tagTranslator["house_number"] = "addr:housenumber";
+    tagTranslator["road"] = "addr:street";
+    tagTranslator["suburb"] = "addr:suburb";
+    tagTranslator["city"] = "addr:city";
+    tagTranslator["state_district"] = "addr:district";
+    tagTranslator["state"] = "addr:state";
+    tagTranslator["postcode"] = "addr:postcode";
+    tagTranslator["country_code"] = "addr:country"; // correct mapping
+    // @todo Find a proper mapping for those
+    //tagTranslator["village"] = "";
+    //tagTranslator["town"] = "";
+
     GeoDataExtendedData data;
+    OsmPlacemarkData osmData;
     QDomNodeList nodes = node.childNodes();
     for (int i=0, n=nodes.length(); i<n; ++i) {
         QDomNode child = nodes.item(i);
         data.addValue( GeoDataData( child.nodeName(), child.toElement().text() ) );
+
+        if (tagTranslator.contains(child.nodeName())) {
+            QString const key = tagTranslator[child.nodeName()];
+            osmData.addTag(key, child.toElement().text());
+        }
     }
-    return data;
+    placemark.setExtendedData(data);
+    placemark.setOsmData(osmData);
 }
 
 } // namespace Marble
