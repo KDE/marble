@@ -21,6 +21,7 @@
 #include "KmlElementDictionary.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
+#include "StyleBuilder.h"
 #include <QFile>
 
 namespace Marble
@@ -29,7 +30,8 @@ namespace Marble
 BookmarkManagerPrivate::BookmarkManagerPrivate( GeoDataTreeModel *treeModel ) :
     m_treeModel( treeModel ),
     m_bookmarkDocument( 0 ),
-    m_bookmarkFileRelativePath( "bookmarks/bookmarks.kml" )
+    m_bookmarkFileRelativePath( "bookmarks/bookmarks.kml" ),
+    m_styleBuilder(nullptr)
 {
     resetBookmarkDocument();
 }
@@ -134,6 +136,14 @@ void BookmarkManager::addBookmark( GeoDataContainer *container, const GeoDataPla
     GeoDataPlacemark *bookmark = new GeoDataPlacemark( placemark );
     bookmark->setVisualCategory( GeoDataDocument::Bookmark );
     bookmark->setZoomLevel( 1 );
+    if (bookmark->name().isEmpty()) {
+        bookmark->setName(bookmark->coordinate().toString(GeoDataCoordinates::Decimal).trimmed());
+    }
+    if (d->m_styleBuilder && bookmark->style()->iconStyle().iconPath().isEmpty()) {
+        StyleParameters style;
+        style.feature = bookmark;
+        bookmark->setStyle(GeoDataStyle::Ptr(new GeoDataStyle(*d->m_styleBuilder->createStyle(style))));
+    }
     d->m_treeModel->addFeature( container, bookmark );
 
     updateBookmarkFile();
@@ -227,6 +237,11 @@ void BookmarkManager::removeAllBookmarks()
 {
     d->resetBookmarkDocument();
     updateBookmarkFile();
+}
+
+void BookmarkManager::setStyleBuilder(const StyleBuilder *styleBuilder)
+{
+    d->m_styleBuilder = styleBuilder;
 }
 
 bool BookmarkManager::updateBookmarkFile()

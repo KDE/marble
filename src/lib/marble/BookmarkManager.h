@@ -27,6 +27,7 @@ namespace Marble
     class GeoDataPlacemark;
     class GeoDataFolder;
     class GeoDataTreeModel;
+    class StyleBuilder;
 /**
  * This class is responsible for loading the
  * book mark objects from the files and various
@@ -96,6 +97,8 @@ class MARBLE_EXPORT BookmarkManager : public QObject
       * @brief remove all folders and bookmarks except default folder
       */
     void removeAllBookmarks();
+
+    void setStyleBuilder(const StyleBuilder* styleBuilder);
 
 public Q_SLOTS:
     void setShowBookmarks( bool visible );

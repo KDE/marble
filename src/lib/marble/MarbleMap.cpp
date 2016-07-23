@@ -69,6 +69,7 @@
 #include "TileLoader.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
+#include "BookmarkManager.h"
 
 
 namespace Marble
@@ -179,6 +180,8 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model ) :
     m_layerManager.addLayer( &m_geometryLayer );
     m_layerManager.addLayer( &m_placemarkLayer );
     m_layerManager.addLayer( &m_customPaintLayer );
+
+    m_model->bookmarkManager()->setStyleBuilder(&m_styleBuilder);
 
     QObject::connect( m_model, SIGNAL(themeChanged(QString)),
                       parent, SLOT(updateMapTheme()) );

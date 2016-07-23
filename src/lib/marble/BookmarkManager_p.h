@@ -19,6 +19,7 @@ namespace Marble
 class GeoDataContainer;
 class GeoDataDocument;
 class GeoDataTreeModel;
+class StyleBuilder;
 
 class BookmarkManagerPrivate
 {
@@ -36,6 +37,7 @@ public:
     GeoDataDocument *m_bookmarkDocument;
 
     QString m_bookmarkFileRelativePath;
+    const StyleBuilder* m_styleBuilder;
 };
 
 }
