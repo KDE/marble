@@ -13,6 +13,7 @@
 
 #include <QObject>
 #include <QSortFilterProxyModel>
+#include <GeoDataTreeModel.h>
 
 namespace Marble {
 
@@ -43,7 +44,7 @@ class Bookmarks : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY( MarbleQuickItem* map READ map WRITE setMap NOTIFY mapChanged)
+    Q_PROPERTY( Marble::MarbleQuickItem* map READ map WRITE setMap NOTIFY mapChanged)
     Q_PROPERTY( BookmarksModel* model READ model NOTIFY modelChanged )
 
 public:
@@ -51,7 +52,7 @@ public:
 
     MarbleQuickItem* map();
 
-    void setMap(Marble::MarbleQuickItem *widget );
+    void setMap(MarbleQuickItem *widget );
 
     BookmarksModel* model();
 
@@ -59,8 +60,8 @@ public:
 
 public Q_SLOTS:
     void addBookmark( qreal longitude, qreal latitude, const QString &name, const QString &folder );
-
     void removeBookmark( qreal longitude, qreal latitude );
+    void updateBookmarkDocument();
 
 Q_SIGNALS:
     void mapChanged();
@@ -69,8 +70,8 @@ Q_SIGNALS:
 
 private:
     MarbleQuickItem* m_marbleQuickItem;
-
     BookmarksModel* m_proxyModel;
+    GeoDataTreeModel m_treeModel;
 };
 
 }

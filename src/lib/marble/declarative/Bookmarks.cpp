@@ -42,6 +42,12 @@ MarbleQuickItem *Bookmarks::map()
 void Bookmarks::setMap( MarbleQuickItem* item )
 {
     m_marbleQuickItem = item;
+    if (item) {
+        connect(item->model()->bookmarkManager(), SIGNAL(bookmarksChanged()),
+                this, SLOT(updateBookmarkDocument()));
+    }
+    updateBookmarkDocument();
+    emit modelChanged();
 }
 
 bool Bookmarks::isBookmark( qreal longitude, qreal latitude ) const
@@ -125,15 +131,19 @@ void Bookmarks::removeBookmark( qreal longitude, qreal latitude )
     }
 }
 
+void Bookmarks::updateBookmarkDocument()
+{
+    if (m_marbleQuickItem) {
+        Marble::BookmarkManager* manager = m_marbleQuickItem->model()->bookmarkManager();
+        m_treeModel.setRootDocument( manager->document() );
+    }
+}
+
 BookmarksModel *Bookmarks::model()
 {
     if ( !m_proxyModel && m_marbleQuickItem && m_marbleQuickItem->model()->bookmarkManager() ) {
-        Marble::BookmarkManager* manager = m_marbleQuickItem->model()->bookmarkManager();
-        Marble::GeoDataTreeModel* model = new Marble::GeoDataTreeModel( this );
-        model->setRootDocument( manager->document() );
-
         KDescendantsProxyModel* flattener = new KDescendantsProxyModel( this );
-        flattener->setSourceModel( model );
+        flattener->setSourceModel(&m_treeModel);
 
         m_proxyModel = new BookmarksModel( this );
         m_proxyModel->setFilterFixedString( Marble::GeoDataTypes::GeoDataPlacemarkType );
