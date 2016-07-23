@@ -53,6 +53,13 @@ Item {
         color: palette.base
     }
 
+    MouseArea {
+        anchors.fill: parent
+        onClicked: {
+            condensed = !condensed
+        }
+    }
+
     Bookmarks {
         id: bookmarks
     }
@@ -78,13 +85,6 @@ Item {
             width: parent.width
             text: placemark === null ? "" : placemark.description
             maximumLineCount: condensed ? 4 : undefined
-
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    condensed = !condensed
-                }
-            }
         }
 
         IconText {

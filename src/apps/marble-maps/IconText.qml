@@ -22,8 +22,6 @@ Item {
     property alias font: text.font
     property alias maximumLineCount: text.maximumLineCount
 
-    signal clicked()
-
     Image {
         id: icon
         sourceSize.height: Screen.pixelDensity * 3
@@ -47,10 +45,5 @@ Item {
             acceptedButtons: Qt.NoButton
             cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
         }
-    }
-
-    MouseArea {
-        anchors.fill: parent
-        onClicked: root.clicked()
     }
 }
