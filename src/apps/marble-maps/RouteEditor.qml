@@ -161,7 +161,6 @@ Item {
 
             ScrollBar {
                 id: scrollBar
-                anchors.left: waypointList.right-12
                 flickableItem: waypointList
             }
         }
