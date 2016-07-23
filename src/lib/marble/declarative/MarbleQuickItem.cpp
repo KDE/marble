@@ -570,22 +570,33 @@ namespace Marble
     void MarbleQuickItem::selectPlacemarkAt(int x, int y)
     {
         auto const features = d->m_map.whichFeatureAt(QPoint(x, y));
+        QVector<GeoDataPlacemark const *> placemarks;
         foreach(auto feature, features) {
             if (feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
-                GeoDataPlacemark const * placemark = static_cast<const GeoDataPlacemark*>(feature);
-                if (d->m_placemark && placemark->coordinate() == d->m_placemark->placemark().coordinate()) {
-                    d->m_placemark->deleteLater();
-                    d->m_placemark = nullptr;
-                } else {
-                    d->m_placemark->deleteLater();
-                    d->m_placemark = new Placemark(this);
-                    d->m_placemark->setGeoDataPlacemark(*placemark);
-                }
-                delete d->m_placemarkItem;
-                d->m_placemarkItem = nullptr;
-                updatePlacemarks();
-                return;
+                placemarks << static_cast<const GeoDataPlacemark*>(feature);
             }
+        }
+
+        // Select bookmarks only if nothing else is found
+        qSort(placemarks.begin(), placemarks.end(), [] (GeoDataPlacemark const *a, GeoDataPlacemark const *b) {
+            int const left = a->visualCategory() == GeoDataFeature::Bookmark ? -1 : a->visualCategory();
+            int const right = b->visualCategory() == GeoDataFeature::Bookmark ? -1 : b->visualCategory();
+            return left > right;
+        });
+
+        foreach(auto placemark, placemarks) {
+            if (d->m_placemark && placemark->coordinate() == d->m_placemark->placemark().coordinate()) {
+                d->m_placemark->deleteLater();
+                d->m_placemark = nullptr;
+            } else {
+                d->m_placemark->deleteLater();
+                d->m_placemark = new Placemark(this);
+                d->m_placemark->setGeoDataPlacemark(*placemark);
+            }
+            delete d->m_placemarkItem;
+            d->m_placemarkItem = nullptr;
+            updatePlacemarks();
+            return;
         }
 
         if (d->m_placemark) {

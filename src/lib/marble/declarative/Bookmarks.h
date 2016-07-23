@@ -14,6 +14,7 @@
 #include <QObject>
 #include <QSortFilterProxyModel>
 #include <GeoDataTreeModel.h>
+#include "Placemark.h"
 
 namespace Marble {
 
@@ -57,6 +58,8 @@ public:
     BookmarksModel* model();
 
     Q_INVOKABLE bool isBookmark( qreal longitude, qreal latitude ) const;
+
+    Q_INVOKABLE Placemark* placemark(int index);
 
 public Q_SLOTS:
     void addBookmark( qreal longitude, qreal latitude, const QString &name, const QString &folder );

@@ -50,22 +50,76 @@ Item {
             backend.setSelectedPlacemark(index);
             root.itemSelected();
             searchResults.visible = false;
-            searchField.focus = true;
             if (routingManager) {
                 routingManager.addSearchResultAsPlacemark(backend.selectedPlacemark);
             }
             placemarkDialog.placemark = backend.selectedPlacemark;
         }
+    }
 
-        MouseArea{
+    Rectangle {
+        id: background
+        visible: searchField.hasFocus && searchField.query === "" && bookmarks.model.count > 0
+        anchors.top: searchField.bottom
+        anchors.left: searchField.left
+        width: searchField.width
+        height: 2 * background.itemSpacing + (delegateHeight) * Math.min(4, bookmarksView.model.count)
+        color: palette.base
+
+        property int delegateHeight: 0
+        property double itemSpacing: Screen.pixelDensity * 1
+
+        ListView {
+            id: bookmarksView
             anchors.fill: parent
-            propagateComposedEvents: true
-            onPressed: {
-                searchField.focus = true;
-                mouse.accepted = false;
+            anchors.margins: background.itemSpacing
+            clip: true
+
+            model: bookmarks.model
+            delegate: Row {
+                spacing: background.itemSpacing
+
+                Image {
+                    anchors.verticalCenter: parent.verticalCenter
+                    source: iconPath.substr(0,1) === '/' ? "file://" + iconPath : iconPath
+                    width: Screen.pixelDensity * 4
+                    height: width
+                    sourceSize.width: width
+                    sourceSize.height: height
+                }
+
+                Text {
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.leftMargin: Screen.pixelDensity * 2
+                    text: display
+                    font.pointSize: 18
+                    color: palette.text
+                    elide: Text.ElideMiddle
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            bookmarksView.currentIndex = index
+                            placemarkDialog.focus = true
+                            placemarkDialog.placemark = bookmarks.placemark(index);
+                            marbleMaps.centerOn(placemarkDialog.placemark.longitude, placemarkDialog.placemark.latitude)
+                        }
+                    }
+                }
+
+                Component.onCompleted: {
+                    if( background.delegateHeight !== height ) {
+                        background.delegateHeight = height;
+                    }
+                }
             }
         }
+
+        ScrollBar {
+            flickableItem: bookmarksView
+        }
     }
+
 
     SearchBackend {
         id: backend
@@ -73,7 +127,6 @@ Item {
         onSearchResultChanged: {
             searchResults.model = model;
             searchResults.visible = true;
-            searchField.focus = true;
         }
         onSearchFinished: searchField.busy = false
     }
@@ -92,5 +145,10 @@ Item {
         onSearchRequested: backend.search(query)
         onCompletionRequested: backend.setCompletionPrefix(query)
         onCleared: searchResults.visible = false
+    }
+
+    Bookmarks {
+        id: bookmarks
+        map: root.marbleQuickItem
     }
 }

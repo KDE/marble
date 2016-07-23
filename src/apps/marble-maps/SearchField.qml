@@ -19,6 +19,7 @@ Item {
     height: field.height
 
     property alias query: field.text
+    property alias hasFocus: field.activeFocus
 
     property alias completionModel: completion.model
     property bool busy: false
@@ -100,11 +101,11 @@ Item {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    field.text = "";
-                    field.focus = true;
                     placemarkDialog.placemark = null;
                     itemStack.state = "";
                     routing.clearSearchResultPlacemarks();
+                    field.text = "";
+                    field.focus = true;
                     cleared();
                 }
             }

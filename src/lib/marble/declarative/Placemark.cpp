@@ -16,6 +16,8 @@
 #endif // HAVE_QT5_POSITIONING
 
 #include <osm/OsmPlacemarkData.h>
+#include "GeoDataStyle.h"
+#include "GeoDataIconStyle.h"
 
 namespace Marble {
 

@@ -40,7 +40,6 @@ ApplicationWindow {
         id: itemStack
 
         anchors.fill: parent
-        focus: true
 
         initialItem: mapItem
 
@@ -75,7 +74,6 @@ ApplicationWindow {
                     anchors.fill: parent
 
                     visible: true
-                    focus: true
 
                     // Theme settings.
                     projection: MarbleItem.Mercator
@@ -154,7 +152,7 @@ ApplicationWindow {
                         anchors.fill: parent
                         propagateComposedEvents: true
                         onPressed: {
-                            search.focus = true;
+                            marbleMaps.focus = true;
                             mouse.accepted = false;
                         }
                     }
@@ -232,6 +230,7 @@ ApplicationWindow {
                         right: parent.right
                         bottom: parent.bottom
                     }
+                    map: marbleMaps
                 }
 
                 DeveloperDialog {

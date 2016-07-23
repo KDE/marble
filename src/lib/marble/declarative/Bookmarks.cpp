@@ -72,6 +72,20 @@ bool Bookmarks::isBookmark( qreal longitude, qreal latitude ) const
     return false;
 }
 
+Placemark *Bookmarks::placemark(int row)
+{
+    Placemark* placemark = new Placemark;
+
+    QModelIndex index = model()->index(row, 0);
+    GeoDataObject *object = model()->data(index, MarblePlacemarkModel::ObjectPointerRole ).value<GeoDataObject*>();
+    if (object->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
+        GeoDataPlacemark *geoDataPlacemark = static_cast<GeoDataPlacemark*>(object);
+        placemark->setGeoDataPlacemark(*geoDataPlacemark);
+    }
+
+    return placemark;
+}
+
 void Bookmarks::addBookmark( qreal longitude, qreal latitude, const QString &name, const QString &folderName )
 {
     if ( !m_marbleQuickItem || !m_marbleQuickItem->model()->bookmarkManager() ) {

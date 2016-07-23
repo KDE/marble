@@ -57,7 +57,9 @@ Item {
                 anchors.verticalCenter: parent.verticalCenter
                 width: height
                 height: placemarkName.height
-                source: iconPath
+                source: iconPath.substr(0,1) === '/' ? "file://" + iconPath : iconPath
+                sourceSize.width: width
+                sourceSize.height: height
                 fillMode: Image.Pad
             }
 

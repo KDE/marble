@@ -21,6 +21,7 @@ Item {
     property var placemark: null
     property bool condensed: true
     property string actionIconSource: routeEditor.currentProfileIcon
+    property alias map: bookmarks.map
 
     height: placemark === null ? 0 : Screen.pixelDensity * 6 + infoLayout.height
 
@@ -33,7 +34,13 @@ Item {
     }
 
     onPlacemarkChanged: {
-        itemStack.state = placemark ? "place" : ""
+        if (placemark) {
+            bookmarkButton.bookmark = bookmarks.isBookmark(placemark.longitude, placemark.latitude)
+            itemStack.state = "place"
+        } else {
+            condensed = true
+            itemStack.state = ""
+        }
     }
 
     SystemPalette {
@@ -46,12 +53,16 @@ Item {
         color: palette.base
     }
 
+    Bookmarks {
+        id: bookmarks
+    }
+
     Column {
         id: infoLayout
         anchors {
-            bottom: parent.bottom
+            top: parent.top
             left: parent.left
-            right: parent.right
+            right: bookmarkButton.left
             margins: Screen.pixelDensity * 2
         }
 
@@ -120,6 +131,35 @@ Item {
             visible: text.length > 0 && (!condensed || name.text === "")
             text: placemark === null ? "" : placemark.coordinates
             icon: "qrc:/material/place.svg"
+        }
+    }
+
+    Image {
+        id: bookmarkButton
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.margins: Screen.pixelDensity * 2
+        visible: root.height > 0 && !condensed
+
+        property bool bookmark: false
+
+        width: Screen.pixelDensity * 6
+        height: width
+        sourceSize.height: height
+        sourceSize.width: width
+        source: bookmark ? "qrc:/material/star.svg" : "qrc:/material/star_border.svg"
+
+        MouseArea {
+            id: touchArea
+            anchors.fill: parent
+            onClicked: {
+                if (bookmarkButton.bookmark) {
+                    bookmarks.removeBookmark(root.placemark.longitude, root.placemark.latitude)
+                } else {
+                    bookmarks.addBookmark(root.placemark.longitude, root.placemark.latitude, root.placemark.name, "Default")
+                }
+                bookmarkButton.bookmark = !bookmarkButton.bookmark
+            }
         }
     }
 
