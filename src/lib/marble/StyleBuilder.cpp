@@ -921,6 +921,9 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
                 polyStyle.setTexturePath(MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_generic.png"));
                 adjustStyle = true;
             }
+        } else if (visualCategory == GeoDataFeature::HighwayPedestrian) {
+            polyStyle.setOutline(false);
+            adjustStyle = true;
         }
         if (adjustStyle) {
             GeoDataStyle::Ptr newStyle(new GeoDataStyle(*style));
@@ -1030,6 +1033,9 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
                     adjustStyle = true;
                 }
             }
+        } else if (visualCategory == GeoDataFeature::HighwayPedestrian) {
+            polyStyle.setOutline(false);
+            adjustStyle = true;
         }
 
         if (adjustStyle) {
@@ -1084,6 +1090,7 @@ QStringList StyleBuilder::renderOrder() const
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::LeisureStadium);
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::NaturalWood);
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::LanduseGrass);
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::HighwayPedestrian);
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::LeisurePlayground);
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::NaturalScrub);
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::LeisureTrack);
