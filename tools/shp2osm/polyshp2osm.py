@@ -116,6 +116,13 @@ def purpose(data):
         if data['prim_purp'] in keys:
             return keys[data['prim_purp']]
 
+def bathymetry_map(data):
+    elevation = 0
+    if 'depth' in data:
+        elevation = data['depth']
+    tag = [('marble:feature', 'bathymetry'), ('ele', elevation)]
+    return tag
+
  
 def road_map(data):
     keys = {
@@ -274,8 +281,9 @@ def feature_class(data):
     'Claim': [('boundary', 'administrative'), ('admin_level', '4')],
     'Airport': [('aeroway', 'aerodrome')],
     'Date line': [('marble_line', 'date')],
-    'Bathymetry': [('marble:feature', 'bathymetry'), ('ele', data['depth'])]
+    'Bathymetry': [(bathymetry_map,None)]
     }
+
     if 'featurecla' in data:
         if data['featurecla'] in feat_dict:
             feat_dict[data['featurecla']] += 1
