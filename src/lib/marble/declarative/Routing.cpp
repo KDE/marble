@@ -233,7 +233,7 @@ void Routing::updateSearchResultPlacemarks()
         qreal y = 0;
         const qreal lon = d->m_searchResultPlacemarks[i]->placemark().coordinate().longitude();
         const qreal lat = d->m_searchResultPlacemarks[i]->placemark().coordinate().latitude();
-        const bool visible = d->m_marbleMap->viewport()->screenCoordinates(lon * DEG2RAD, lat * DEG2RAD, x, y);
+        const bool visible = d->m_marbleMap->viewport()->screenCoordinates(lon, lat, x, y);
 
         QQuickItem * item = d->m_searchResultItems[i];
         if ( item ) {
