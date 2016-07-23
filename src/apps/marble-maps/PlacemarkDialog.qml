@@ -56,6 +56,7 @@ Item {
         }
 
         IconText {
+            id: name
             width: parent.width
             text: placemark === null ? "" : placemark.name
             maximumLineCount: 2
@@ -77,44 +78,46 @@ Item {
 
         IconText {
             width: parent.width
-            visible: !condensed
+            visible: text.length > 0 && (!condensed || name.text === "")
             text: placemark === null ? "" : placemark.address
             maximumLineCount: 4
         }
 
         IconText {
             width: parent.width
-            visible: placemark !== null && placemark.website !== ""
-            text: placemark === null ? "" : "<a href=\"" + placemark.website + "\">" + placemark.website + "</a>"
+            visible: url.length > 0
+            property string url: placemark === null ? "" : placemark.website
+            text: "<a href=\"" + url + "\">" + url + "</a>"
             icon: "qrc:/material/browser.svg"
             maximumLineCount: 4
         }
 
         IconText {
             width: parent.width
-            visible: placemark !== null && placemark.wikipedia !== ""
-            text: placemark === null ? "" : "<a href=\"" + placemark.wikipedia + "\">Wikipedia</a>"
+            visible: url.length > 0
+            property string url: placemark === null ? "" : placemark.wikipedia
+            text:  "<a href=\"" + url + "\">Wikipedia</a>"
             icon: "qrc:/material/browser.svg"
             maximumLineCount: 4
         }
 
         IconText {
             width: parent.width
-            visible: placemark !== null && placemark.fuelDetails !== ""
+            visible: text.length > 0
             text: placemark === null ? "" : placemark.fuelDetails
             icon: "qrc:/material/gas_station.svg"
         }
 
         IconText {
             width: parent.width
-            visible: placemark !== null && placemark.openingHours !== ""
+            visible: text.length > 0
             text: placemark === null ? "" : placemark.openingHours
             icon: "qrc:/material/access_time.svg"
         }
 
         IconText {
             width: parent.width
-            visible: !condensed
+            visible: text.length > 0 && (!condensed || name.text === "")
             text: placemark === null ? "" : placemark.coordinates
             icon: "qrc:/material/place.svg"
         }
