@@ -158,7 +158,7 @@ QString Placemark::openingHours() const
 
 QString Placemark::coordinates() const
 {
-    return m_placemark.coordinate().toString(GeoDataCoordinates::Decimal);
+    return m_placemark.coordinate().toString(GeoDataCoordinates::Decimal).trimmed();
 }
 
 void Placemark::setName(const QString & name)
