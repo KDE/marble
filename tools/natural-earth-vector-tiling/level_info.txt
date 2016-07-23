@@ -13,6 +13,8 @@ ne_110m_admin_1_states_provinces_lines
 ne_110m_admin_0_pacific_groupings
 ne_110m_rivers_lake_centerlines
 ne_110m_lakes
+ne_10m_bathymetry_K_200
+ne_10m_bathymetry_G_4000
 *5
 ne_50m_land
 ne_50m_geographic_lines
@@ -25,6 +27,8 @@ ne_50m_rivers_lake_centerlines
 ne_50m_lakes
 ne_50m_glaciated_areas
 ne_50m_antarctic_ice_shelves_lines
+ne_10m_bathymetry_K_200
+ne_10m_bathymetry_G_4000
 *7
 ne_10m_land
 ne_10m_geographic_lines
@@ -44,6 +48,8 @@ ne_10m_playas
 ne_10m_urban_areas
 ne_10m_roads
 ne_10m_airports
+ne_10m_bathymetry_K_200
+ne_10m_bathymetry_G_4000
 *9
 ne_10m_land
 ne_10m_geographic_lines
@@ -70,5 +76,5 @@ ne_10m_railroads_north_america
 ne_10m_parks_and_protected_lands
 ne_10m_airports
 ne_10m_ports
-
-
+ne_10m_bathymetry_K_200
+ne_10m_bathymetry_G_4000
