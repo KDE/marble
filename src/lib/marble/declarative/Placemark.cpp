@@ -171,6 +171,16 @@ void Placemark::setName(const QString & name)
     emit nameChanged();
 }
 
+double Placemark::longitude() const
+{
+    return m_placemark.coordinate().longitude(GeoDataCoordinates::Degree);
+}
+
+double Placemark::latitude() const
+{
+    return m_placemark.coordinate().latitude(GeoDataCoordinates::Degree);
+}
+
 QString Placemark::categoryName(GeoDataFeature::GeoDataVisualCategory category) const
 {
     switch (category) {

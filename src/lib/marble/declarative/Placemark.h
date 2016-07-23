@@ -36,6 +36,8 @@ class Placemark : public QObject
     Q_PROPERTY( QString fuelDetails READ fuelDetails NOTIFY fuelDetailsChanged )
     Q_PROPERTY( QString openingHours READ openingHours NOTIFY openingHoursChanged )
     Q_PROPERTY( QString coordinates READ coordinates NOTIFY coordinatesChanged )
+    Q_PROPERTY(double longitude READ longitude NOTIFY coordinatesChanged)
+    Q_PROPERTY(double latitude READ latitude NOTIFY coordinatesChanged)
 
 public:
     /** Constructor */
@@ -53,6 +55,8 @@ public:
     QString fuelDetails() const;
     QString openingHours() const;
     QString coordinates() const;
+    double longitude() const;
+    double latitude() const;
 
 public Q_SLOTS:
     void setName(const QString &name);
