@@ -39,6 +39,11 @@ public:
                                       const QVector< qreal >& dashPattern = QVector< qreal >(),
                                       const QFont& font = QFont(QLatin1String("Arial")), const QColor& fontColor = Qt::black,
                                       const QString& texturePath = QString());
+    static GeoDataStyle::Ptr createPOIStyle( const QFont &font, const QString &bitmap,
+                                         const QColor &textColor = Qt::black,
+                                         const QColor &color = QColor( 0xBE, 0xAD, 0xAD ),
+                                         const QColor &outline = QColor( 0xBE, 0xAD, 0xAD ).darker()
+                                         );
     static GeoDataStyle::Ptr createOsmPOIStyle( const QFont &font, const QString &bitmap,
                                          const QColor &textColor = Qt::black,
                                          const QColor &color = QColor( 0xBE, 0xAD, 0xAD ),
@@ -188,11 +193,10 @@ StyleBuilder::Private::Private() :
     }
 }
 
-GeoDataStyle::Ptr StyleBuilder::Private::createOsmPOIStyle( const QFont &font, const QString &imagePath,
+GeoDataStyle::Ptr StyleBuilder::Private::createPOIStyle( const QFont &font, const QString &path,
                                      const QColor &textColor, const QColor &color, const QColor &outline)
 {
     GeoDataStyle::Ptr style =  createStyle(1, 0, color, outline, true, true, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false);
-    QString const path = MarbleDirs::path( "svg/osmcarto/svg/" + imagePath + ".svg" );
     style->setIconStyle( GeoDataIconStyle( path) );
     auto const screen = QApplication::screens().first();
     double const physicalSize = 6.0; // mm
@@ -201,6 +205,13 @@ GeoDataStyle::Ptr StyleBuilder::Private::createOsmPOIStyle( const QFont &font, c
     style->setLabelStyle( GeoDataLabelStyle( font, textColor ) );
     style->labelStyle().setAlignment(GeoDataLabelStyle::Center);
     return style;
+}
+
+GeoDataStyle::Ptr StyleBuilder::Private::createOsmPOIStyle( const QFont &font, const QString &imagePath,
+                                     const QColor &textColor, const QColor &color, const QColor &outline)
+{
+    QString const path = MarbleDirs::path( "svg/osmcarto/svg/" + imagePath + ".svg" );
+    return createPOIStyle(font, path, textColor, color, outline);
 }
 
 GeoDataStyle::Ptr StyleBuilder::Private::createHighwayStyle( const QString &imagePath, const QColor& color, const QColor& outlineColor,
@@ -456,8 +467,9 @@ void StyleBuilder::Private::initializeDefaultStyles()
               QFont( defaultFamily, defaultSize, 50, false ), defaultLabelColor ));
 
     m_defaultStyle[GeoDataFeature::Bookmark]
-        = GeoDataStyle::Ptr(new GeoDataStyle( MarbleDirs::path( "bitmaps/bookmark.png" ),
-              QFont( defaultFamily, defaultSize, 50, false ), defaultLabelColor ));
+        = StyleBuilder::Private::createPOIStyle(QFont( defaultFamily, defaultSize, 50, false ),
+                                                MarbleDirs::path("svg/bookmark.svg"), defaultLabelColor );
+    m_defaultStyle[GeoDataFeature::Bookmark]->iconStyle().setScale(0.75);
 
     QColor const shopColor("#ac39ac");
     QColor const transportationColor("#0066ff");
