@@ -219,7 +219,7 @@ void RoutingLayerPrivate::renderPlacemarks( GeoPainter *painter )
                 painter->drawPixmap( pos, pixmap );
             }
 
-            QRegion region = painter->regionFromRect( pos, m_targetPixmap.width(), m_targetPixmap.height() );
+            const QRegion region = painter->regionFromPixmapRect(pos, m_targetPixmap.width(), m_targetPixmap.height());
             m_placemarks.push_back( ModelRegion( index, region ) );
         }
     }
@@ -380,7 +380,7 @@ void RoutingLayerPrivate::renderRequest( GeoPainter *painter )
         if ( pos.isValid() ) {
             QPixmap pixmap = m_routeRequest->pixmap( i );
             painter->drawPixmap( pos, pixmap );
-            QRegion region = painter->regionFromRect( pos, pixmap.width(), pixmap.height() );
+            const QRegion region = painter->regionFromPixmapRect(pos, pixmap.width(), pixmap.height());
             m_regions.push_front( RequestRegion( i, region ) );
         }
     }

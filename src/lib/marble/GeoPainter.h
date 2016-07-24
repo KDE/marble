@@ -221,8 +221,8 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     further influenced.
 */
     void drawText ( const GeoDataCoordinates & position, const QString & text,
-                    int xOffset = 0, int yOffset = 0,
-                    int width = 0, int height = 0,
+                    qreal xOffset = 0.0, qreal yOffset = 0.0,
+                    qreal width = 0.0, qreal height = 0.0,
                     const QTextOption & option = QTextOption() );
 
     
@@ -289,6 +289,20 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     void drawPixmap ( const GeoDataCoordinates & centerPosition,
                       const QPixmap & pixmap /*, bool isGeoProjected = false */ );
 
+/*!
+    \brief Creates a region for a rectangle for a pixmap at a given position.
+
+    A QRegion object is created that represents the area covered by
+    GeoPainter::drawPixmap(). This can be used e.g. for input event handling
+    for objects that have been painted using GeoPainter::drawPixmap().
+
+    The \a margin allows to extrude the QRegion by "margin" pixels on every side.
+
+    \see GeoDataCoordinates
+*/
+    QRegion regionFromPixmapRect(const GeoDataCoordinates &centerCoordinates,
+                                 int width, int height,
+                                 int margin = 0) const;
 
 /*!
     \brief Draws a given line string (a "polyline").
@@ -442,8 +456,8 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     \see GeoDataCoordinates
 */
     void drawRoundedRect(const GeoDataCoordinates &centerPosition,
-                         int width, int height,
-                         int xRnd = 25, int yRnd = 25 );
+                         qreal width, qreal height,
+                         qreal xRnd = 25.0, qreal yRnd = 25.0);
 
 
 
