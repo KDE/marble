@@ -12,6 +12,7 @@
 
 #include <QColor>
 #include <QPixmap>
+#include <QIcon>
 #include <QRadialGradient>
 #include "MarbleDirs.h"
 #include "GeoPainter.h"
@@ -21,6 +22,21 @@
 
 namespace Marble
 {
+
+TestPlugin::TestPlugin()
+    : RenderPlugin(nullptr)
+{
+    setEnabled(true);
+    setVisible(true);
+}
+
+TestPlugin::TestPlugin(const MarbleModel *marbleModel)
+    : RenderPlugin(marbleModel)
+{
+    setEnabled(true);
+    setVisible(true);
+}
+
 
 QStringList TestPlugin::backendTypes() const
 {
@@ -52,9 +68,25 @@ QString TestPlugin::nameId() const
     return QString( "test-plugin" );
 }
 
+QString TestPlugin::version() const
+{
+    return "1.0";
+}
+
 QString TestPlugin::description() const
 {
     return tr( "This is a simple test plugin." );
+}
+
+QString TestPlugin::copyrightYears() const
+{
+    return "2008";
+}
+
+QVector<PluginAuthor> TestPlugin::pluginAuthors() const
+{
+    return QVector<PluginAuthor>()
+            << PluginAuthor("Torsten Rahn", "tackat@kde.org");
 }
 
 QIcon TestPlugin::icon () const
@@ -74,7 +106,9 @@ bool TestPlugin::isInitialized () const
 
 bool TestPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer )
 {
-    painter->autoMapQuality();
+    Q_UNUSED(viewport);
+    Q_UNUSED(renderPos);
+    Q_UNUSED(layer);
 
     // Example: draw a straight line
 
@@ -83,7 +117,9 @@ bool TestPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QS
 
     painter->setPen( QColor( 255, 255, 255, 255 ) );
 
-    painter->drawLine( northpole1, northpole2 );
+    GeoDataLineString poleLineString;
+    poleLineString << northpole1 << northpole2;
+    painter->drawPolyline(poleLineString);
 
     // Example: draw a straight line string ("polyline")
 

@@ -33,6 +33,9 @@ class TestPlugin : public RenderPlugin
     MARBLE_PLUGIN( TestPlugin )
 
  public:
+    TestPlugin();
+    explicit TestPlugin(const MarbleModel *marbleModel);
+
     QStringList backendTypes() const;
 
     QString renderPolicy() const;
@@ -45,10 +48,15 @@ class TestPlugin : public RenderPlugin
 
     QString nameId() const;
 
+    QString version() const override;
+
     QString description() const;
 
     QIcon icon () const;
 
+    QString copyrightYears() const override;
+
+    QVector<PluginAuthor> pluginAuthors() const override;
 
     void initialize ();
 
