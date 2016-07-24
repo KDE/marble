@@ -54,9 +54,9 @@ class Filter(object):
         elif dir == '/assets/plugins':
             # Whitelisted plugins, all others are ignored
             search = ['LatLonPlugin', 'NominatimSearchPlugin', 'LocalDatabasePlugin', 'LocalOsmSearchPlugin']
-            routing = ['CycleStreetsPlugin', 'OSRMPlugin', 'OpenRouteServicePlugin', 'NominatimReverseGeocodingPlugin', 'RoutingPlugin']
+            routing = ['CycleStreetsPlugin', 'OSRMPlugin', 'OpenRouteServicePlugin', 'NominatimReverseGeocodingPlugin']
             fileFormats = ['CachePlugin', 'GpxPlugin', 'KmlPlugin', 'OsmPlugin']
-            floatItems = ['ElevationProfileFloatItem', 'ElevationProfileMarker', 'PositionMarker', 'ProgressFloatItem', 'License']
+            floatItems = ['License']
             positioning = ['QtPositioningPositionProviderPlugin']
             plugins = search + routing + fileFormats + floatItems + positioning
             whitelist = set(['lib{}.so'.format(plugin) for plugin in plugins])
