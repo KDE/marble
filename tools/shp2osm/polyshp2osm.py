@@ -426,23 +426,25 @@ def start_new_file():
 
 def write_osm_files():
     global nodes, ways, relations, element_indices, open_file, file_counter, file_name
-    node_idx = 0
-    way_idx = 0
-    rel_idx = 0
+    current = [0, 0, 0]
+    previous = [0, 0, 0]
     for indices in element_indices:
         start_new_file()
-        while node_idx < indices[0]:
-            write_node(nodes[node_idx])
-            node_idx += 1
-        while way_idx < indices[1]:
-            write_way(ways[way_idx])
-            way_idx += 1
-        while rel_idx < indices[2]:
-            write_relation_multipolygon(relations[rel_idx])
-            rel_idx += 1
+        current[0] = indices[0] - 1
+        current[1] = indices[1] - 1
+        current[2] = indices[2] - 1
+        while current[0] >= previous[0]:
+            write_node(nodes[current[0]])
+            current[0] -= 1
+        while current[1] >= previous[1]:
+            write_way(ways[current[1]])
+            current[1] -= 1
+        while current[2] >= previous[2]:
+            write_relation_multipolygon(relations[current[2]])
+            current[2] -= 1
+        previous = indices[:]
         close_file()
     element_indices = []
-
  
 def clean_attr(val):
     """Internal. Hacky way to make attribute XML safe."""
