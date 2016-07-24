@@ -80,10 +80,6 @@ StarsPlugin::StarsPlugin( const MarbleModel *marbleModel )
 StarsPlugin::~StarsPlugin()
 {
     delete m_contextMenu;
-    delete m_constellationsAction;
-    delete m_sunMoonAction;
-    delete m_planetsAction;
-    delete m_dsoAction;
 }
 
 QStringList StarsPlugin::backendTypes() const
@@ -1332,19 +1328,15 @@ void StarsPlugin::requestRepaint()
     emit repaintNeeded( QRegion() );
 }
 
-void StarsPlugin::toggleSunMoon()
+void StarsPlugin::toggleSunMoon(bool on)
 {
-    QAction *sunMoonAction = qobject_cast<QAction*>(sender());
-    sunMoonAction->setChecked(!sunMoonAction->isChecked());
-
-    const bool changed = !(m_renderSun || m_renderMoon);
-    m_renderSun = changed;
-    m_renderMoon = changed;
-    if (changed) {
+    m_renderSun = on;
+    m_renderMoon = on;
+    if (on) {
         m_viewSolarSystemLabel = true;
     }
 
-    Qt::CheckState state = changed ? Qt::Checked : Qt::Unchecked;
+    const Qt::CheckState state = on ? Qt::Checked : Qt::Unchecked;
     if ( m_configDialog ) {
         ui_configWidget->m_solarSystemListWidget->item( 0 )->setCheckState( state );
         ui_configWidget->m_solarSystemListWidget->item( 1 )->setCheckState( state );
@@ -1354,16 +1346,15 @@ void StarsPlugin::toggleSunMoon()
     requestRepaint();
 }
 
-void StarsPlugin::toggleDsos()
+void StarsPlugin::toggleDsos(bool on)
 {
-    QAction *dsosAction = qobject_cast<QAction*>(sender());
-    dsosAction->setChecked(!dsosAction->isChecked());
+    m_renderDsos = on;
+    // only enable lables if set to true
+    if (on) {
+        m_renderDsoLabels = true;
+    }
 
-    const bool changed = !(m_renderDsos || m_renderDsoLabels);
-    m_renderDsos = changed;
-    m_renderDsoLabels = changed;
-
-    Qt::CheckState state = changed ? Qt::Checked : Qt::Unchecked;
+    const Qt::CheckState state = on ? Qt::Checked : Qt::Unchecked;
     if ( m_configDialog ) {
         ui_configWidget->m_viewDsosCheckbox->setChecked(state);
         ui_configWidget->m_viewDsoLabelCheckbox->setChecked(state);
@@ -1372,16 +1363,12 @@ void StarsPlugin::toggleDsos()
     requestRepaint();
 }
 
-void StarsPlugin::toggleConstellations()
+void StarsPlugin::toggleConstellations(bool on)
 {
-    QAction *constellationsAction = qobject_cast<QAction*>(sender());
-    constellationsAction->setChecked(!constellationsAction->isChecked());
+    m_renderConstellationLines = on;
+    m_renderConstellationLabels = on;
 
-    const bool changed = !(m_renderConstellationLines || m_renderConstellationLabels);
-    m_renderConstellationLines = changed;
-    m_renderConstellationLabels = changed;
-
-    Qt::CheckState state = changed ? Qt::Checked : Qt::Unchecked;
+    const Qt::CheckState state = on ? Qt::Checked : Qt::Unchecked;
     if ( m_configDialog ) {
         ui_configWidget->m_viewConstellationLinesCheckbox->setChecked( state );
         ui_configWidget->m_viewConstellationLabelsCheckbox->setChecked( state );
@@ -1390,21 +1377,17 @@ void StarsPlugin::toggleConstellations()
     requestRepaint();
 }
 
-void StarsPlugin::togglePlanets()
+void StarsPlugin::togglePlanets(bool on)
 {
-    QAction *planetsAction = qobject_cast<QAction*>(sender());
-    planetsAction->setChecked(!planetsAction->isChecked());
+    m_renderPlanet["venus"] = on;
+    m_renderPlanet["mars"]  = on;
+    m_renderPlanet["jupiter"] = on;
+    m_renderPlanet["mercury"] = on;
+    m_renderPlanet["saturn"] = on;
+    m_renderPlanet["uranus"] = on;
+    m_renderPlanet["neptune"] = on;
 
-    const bool changed = !planetsAction->isChecked();
-    m_renderPlanet["venus"] = changed;
-    m_renderPlanet["mars"]  = changed;
-    m_renderPlanet["jupiter"] = changed;
-    m_renderPlanet["mercury"] = changed;
-    m_renderPlanet["saturn"] = changed;
-    m_renderPlanet["uranus"] = changed;
-    m_renderPlanet["neptune"] = changed;
-
-    Qt::CheckState state = changed ? Qt::Checked : Qt::Unchecked;
+    const Qt::CheckState state = on ? Qt::Checked : Qt::Unchecked;
     if ( m_configDialog ) {
         // Mercury, Venus, Mars, Jupiter, Saturn, Uranus, Neptune
         ui_configWidget->m_solarSystemListWidget->item(2)->setCheckState(state);
@@ -1418,6 +1401,13 @@ void StarsPlugin::togglePlanets()
 
     emit settingsChanged( nameId() );
     requestRepaint();
+}
+
+void StarsPlugin::executeConfigDialog()
+{
+    QDialog *dialog = configDialog();
+    Q_ASSERT( dialog );
+    dialog->exec();
 }
 
 bool StarsPlugin::eventFilter( QObject *object, QEvent *e )
@@ -1447,62 +1437,39 @@ bool StarsPlugin::eventFilter( QObject *object, QEvent *e )
                 }
             }
 
-            bool scheduleConfigAction = false;
             if (!m_contextMenu) {
                 m_contextMenu = new QMenu;
-                scheduleConfigAction = true;
-            }
+                m_constellationsAction = m_contextMenu->addAction(tr("Show &Constellations"),
+                                                                  this, SLOT(toggleConstellations(bool)));
+                m_constellationsAction->setCheckable(true);
 
-            if (!m_constellationsAction) {
-                m_constellationsAction =
-                        m_contextMenu->addAction( tr("Show &Constellations"),
-                                                  this, SLOT(toggleConstellations()) );
-            }
+                m_sunMoonAction = m_contextMenu->addAction(tr("Show &Sun and Moon"),
+                                                           this, SLOT(toggleSunMoon(bool)));
+                m_sunMoonAction->setCheckable(true);
 
-            m_constellationsAction->setCheckable( true );
-            m_constellationsAction->setChecked(
-                        m_renderConstellationLines || m_renderConstellationLabels );
+                m_planetsAction = m_contextMenu->addAction(tr("Show &Planets"),
+                                                           this, SLOT(togglePlanets(bool)));
+                m_planetsAction->setCheckable(true);
 
+                m_dsoAction = m_contextMenu->addAction(tr("Show &Deep Sky Objects"),
+                                                       this, SLOT(toggleDsos(bool)) );
+                m_dsoAction->setCheckable(true);
 
-            if (!m_sunMoonAction) {
-                m_sunMoonAction = m_contextMenu->addAction( tr("Show &Sun and Moon"),
-                                                            this, SLOT(toggleSunMoon()) );
-            }
-
-            m_sunMoonAction->setCheckable( true );
-            m_sunMoonAction->setChecked( m_renderSun || m_renderMoon || m_viewSolarSystemLabel );
-
-            if (!m_planetsAction) {
-                m_planetsAction = m_contextMenu->addAction( tr("Show &Planets"),
-                                                            this, SLOT(togglePlanets()));
-            }
-
-            m_planetsAction->setCheckable( true );
-            if (m_renderPlanet["venus"] || m_renderPlanet["mars"] ||
-                m_renderPlanet["jupiter"] || m_renderPlanet["mercury"] ||
-                m_renderPlanet["saturn"] || m_renderPlanet["uranus"] ||
-                m_renderPlanet["neptune"]) {
-                // then
-                m_planetsAction->setChecked( true );
-            } else {
-                m_planetsAction->setChecked( false );
-            }
-
-            if (!m_dsoAction) {
-                m_dsoAction = m_contextMenu->addAction( tr("Show &Deep Sky Objects"),
-                                                        this, SLOT(toggleDsos()) );
-            }
-
-            m_dsoAction->setCheckable( true );
-            m_dsoAction->setChecked( m_renderDsos || m_renderDsoLabels );
-
-            if (scheduleConfigAction) {
-                QDialog *dialog = configDialog();
-                Q_ASSERT( dialog );
                 m_contextMenu->addSeparator();
-                QAction *configAction = m_contextMenu->addAction( tr( "&Configure..." ) );
-                connect( configAction, SIGNAL(triggered()), dialog, SLOT(exec()) );
+                m_contextMenu->addAction(tr("&Configure..."),
+                                         this, SLOT(executeConfigDialog()));
             }
+
+            // update action states
+            m_constellationsAction->setChecked(m_renderConstellationLines || m_renderConstellationLabels);
+            m_sunMoonAction->setChecked(m_renderSun || m_renderMoon);
+            m_dsoAction->setChecked(m_renderDsos);
+            const bool isAnyPlanetRendered =
+                m_renderPlanet["venus"] ||   m_renderPlanet["mars"] ||
+                m_renderPlanet["jupiter"] || m_renderPlanet["mercury"] ||
+                m_renderPlanet["saturn"] ||  m_renderPlanet["uranus"] ||
+                m_renderPlanet["neptune"];
+            m_planetsAction->setChecked(isAnyPlanetRendered);
 
             m_contextMenu->exec(widget->mapToGlobal(menuEvent->pos()));
             return true;

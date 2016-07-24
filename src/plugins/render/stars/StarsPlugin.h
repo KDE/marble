@@ -176,10 +176,11 @@ protected:
 
 private Q_SLOTS:
     void requestRepaint();
-    void toggleSunMoon();
-    void togglePlanets();
-    void toggleDsos();
-    void toggleConstellations();
+    void toggleSunMoon(bool on);
+    void togglePlanets(bool on);
+    void toggleDsos(bool on);
+    void toggleConstellations(bool on);
+    void executeConfigDialog();
 
 public Q_SLOTS:
     void readSettings();
@@ -265,10 +266,10 @@ private:
 
     /* Context menu */
     QPointer<QMenu> m_contextMenu;
-    QPointer<QAction> m_constellationsAction;
-    QPointer<QAction> m_sunMoonAction;
-    QPointer<QAction> m_planetsAction;
-    QPointer<QAction> m_dsoAction;
+    QAction* m_constellationsAction;
+    QAction* m_sunMoonAction;
+    QAction* m_planetsAction;
+    QAction* m_dsoAction;
 
     bool m_doRender;
 };
