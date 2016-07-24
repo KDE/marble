@@ -558,6 +558,9 @@ void GeoPainter::drawPolyline ( const GeoDataLineString & lineString,
                 font.setPointSizeF(fontSize);
                 setFont(font);
                 int labelWidth = fontMetrics().width( labelText );
+                if (labelText.size() < 20) {
+                    labelWidth *= (20.0 / labelText.size());
+                }
 
                 QPainterPath path;
                 path.addPolygon(*itPolygon);
