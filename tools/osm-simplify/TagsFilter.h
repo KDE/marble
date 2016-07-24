@@ -27,10 +27,10 @@ public:
 	//Filters placemarks which have tags in the hash
 	TagsFilter(GeoDataDocument* document, const QStringList& tagsList, bool andFlag = false);
 	virtual void process();
-    QList<GeoDataObject*>::const_iterator rejectedObjectsBegin() const;
-    QList<GeoDataObject*>::const_iterator rejectedObjectsEnd() const;
+    QVector<GeoDataPlacemark*>::const_iterator rejectedObjectsBegin() const;
+    QVector<GeoDataPlacemark*>::const_iterator rejectedObjectsEnd() const;
 private:
-    QList<GeoDataObject*> m_rejectedObjects;
+    QVector<GeoDataPlacemark*> m_rejectedObjects;
 };
 
 }

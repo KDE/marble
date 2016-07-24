@@ -13,8 +13,8 @@
 #include "GeoDataPlacemark.h"
 
 PlacemarkFilter::PlacemarkFilter(GeoDataDocument *document) :
-    BaseFilter(document, GeoDataTypes::GeoDataPlacemarkType)
+    BaseFilter(document)
 {
-    qDebug() << "Placemark count:" << m_objects.size();
+    qDebug() << "Placemark count:" << m_placemarks.size();
 }
 

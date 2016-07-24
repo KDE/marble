@@ -27,7 +27,7 @@ public:
 private:
 	QMultiHash<qint64, WayChunk*> m_hash;
 	QVector<WayChunk*> m_chunks;
-	QList<GeoDataPlacemark> m_placemarks;
+    QVector<GeoDataPlacemark> m_wayPlacemarks;
     void createWayChunk(GeoDataPlacemark *placemark, qint64 firstId, qint64 lastId);
     WayChunk* getWayChunk(GeoDataPlacemark *placemark, qint64 matchId);
     void concatFirst(GeoDataPlacemark *placemark, WayChunk *chunk);

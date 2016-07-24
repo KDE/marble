@@ -48,8 +48,7 @@ GeoDataDocument *TinyPlanetProcessor::cutToTiles(unsigned int zoomLevel, unsigne
     BaseClipper clipper;
     clipper.initClipRect(tileBoundary);
 
-    foreach (GeoDataObject* object, m_objects) {
-        GeoDataPlacemark* placemark = static_cast<GeoDataPlacemark*>(object);
+    foreach (GeoDataPlacemark* placemark, m_placemarks) {
 
         if(tileBoundary.intersects(placemark->geometry()->latLonAltBox())) {
 

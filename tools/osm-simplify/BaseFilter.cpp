@@ -15,14 +15,11 @@
 #include "GeoDataObject.h"
 #include "GeoDataTypes.h"
 
-BaseFilter::BaseFilter(GeoDataDocument* document, const char *type) :
-    m_document(document)
+BaseFilter::BaseFilter(GeoDataDocument* document) :
+    m_document(document),
+    m_placemarks(document->placemarkList())
 {
-    foreach (GeoDataFeature* feature, m_document->featureList()) {
-        if(feature->nodeType() == type) {
-            m_objects.append(feature);
-        }
-    }
+    // nothing to do
 }
 
 BaseFilter::~BaseFilter()
@@ -30,12 +27,12 @@ BaseFilter::~BaseFilter()
 
 }
 
-QList<GeoDataObject*>::const_iterator BaseFilter::objectsBegin() const
+QVector<GeoDataPlacemark*>::const_iterator BaseFilter::objectsBegin() const
 {
-  return m_objects.begin();
+  return m_placemarks.begin();
 }
 
-QList<GeoDataObject*>::const_iterator BaseFilter::objectsEnd() const
+QVector<GeoDataPlacemark*>::const_iterator BaseFilter::objectsEnd() const
 {
-  return m_objects.end();
+  return m_placemarks.end();
 }

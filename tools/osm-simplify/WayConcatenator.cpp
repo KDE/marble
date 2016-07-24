@@ -45,9 +45,7 @@ void WayConcatenator::process()
     qint64 placemarkCount = 0;
 
     // qDebug()<<"** Number of TagFiletered placemarks "<< m_objects.size();
-    foreach (GeoDataObject *object, m_objects) {
-        GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(object);
-
+    foreach (GeoDataPlacemark* placemark, m_placemarks) {
         qDebug()<<" ";
         ++placemarkCount;
         // qDebug()<<"No."<<plcCount;
@@ -108,7 +106,7 @@ void WayConcatenator::process()
                     // qDebug()<< "Both* Both chunks found, concatenating to it";
                     if(chunk == otherChunk){
                         qDebug()<<"#### Both the chunks are same, directly adding to the list of placemarks";
-                        m_placemarks.append(*placemark);
+                        m_wayPlacemarks.append(*placemark);
                     } else {
                         concatBoth(placemark, chunk, otherChunk);
                         ++count;
@@ -137,10 +135,10 @@ void WayConcatenator::process()
 
             // if(flag){
             // 	qDebug()<<" Concat not possible";
-            // 	m_placemarks.append(*placemark);
+            // 	m_wayPlacemarks.append(*placemark);
             // }
         } else{
-            m_placemarks.append(*placemark);
+            m_wayPlacemarks.append(*placemark);
         }
     }
 
@@ -158,11 +156,10 @@ void WayConcatenator::process()
 
 void WayConcatenator::addRejectedPlacemarks()
 {
-    QList<GeoDataObject*>::const_iterator itr = rejectedObjectsBegin();
-    QList<GeoDataObject*>::const_iterator endItr = rejectedObjectsEnd();
+    QVector<GeoDataPlacemark*>::const_iterator itr = rejectedObjectsBegin();
+    QVector<GeoDataPlacemark*>::const_iterator endItr = rejectedObjectsEnd();
     for (; itr != endItr; ++itr) {
-        GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(*itr);
-        m_placemarks.append(*placemark);
+        m_wayPlacemarks << **itr;
     }
 }
 
@@ -180,7 +177,7 @@ void WayConcatenator::addWayChunks()
             chunkSet.insert(*itr);
             GeoDataPlacemark* placemark = (*itr)->merge();
             if (placemark) {
-                m_placemarks.append(*placemark);
+                m_wayPlacemarks.append(*placemark);
                 totalSize += (*itr)->size();
                 qDebug()<<"Chunk:";
                 (*itr)->printIds();
@@ -199,9 +196,9 @@ void WayConcatenator::addWayChunks()
 void WayConcatenator::modifyDocument()
 {
     m_document->clear();
-    QList<GeoDataPlacemark>::iterator itr;
-    itr = m_placemarks.begin();
-    for (; itr != m_placemarks.end(); ++itr) {
+    QVector<GeoDataPlacemark>::iterator itr;
+    itr = m_wayPlacemarks.begin();
+    for (; itr != m_wayPlacemarks.end(); ++itr) {
         GeoDataPlacemark *placemark = new GeoDataPlacemark(*itr);
         m_document->append(placemark);
     }

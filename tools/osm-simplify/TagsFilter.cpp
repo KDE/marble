@@ -24,11 +24,10 @@ TagsFilter::TagsFilter(GeoDataDocument *document, const QStringList &tagsList, b
 {
     int total=0, tagCount=0;
 	// qDebug()<<"Entered tagFilter";
-    QList<GeoDataObject*> previousObjects(m_objects);
-	m_objects.clear();
-    foreach (GeoDataObject *object, previousObjects) {
+    QVector<GeoDataPlacemark*> previousObjects(m_placemarks);
+    m_placemarks.clear();
+    foreach (GeoDataPlacemark *placemark, previousObjects) {
         ++total;
-        GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(object);
         bool flag = andFlag;
         QStringList::const_iterator itr = tagsList.begin();
         for (; itr != tagsList.end(); ++itr) {
@@ -63,10 +62,10 @@ TagsFilter::TagsFilter(GeoDataDocument *document, const QStringList &tagsList, b
         if (flag) {
             ++tagCount;
 			// qDebug()<<"Contained tag";
-			m_objects.append(object);
+            m_placemarks.append(placemark);
 			// qDebug()<<"ID "<<placemark->osmData().id();
         } else {
-            m_rejectedObjects.append(object);
+            m_rejectedObjects.append(placemark);
 		}
 
 	}
@@ -84,12 +83,12 @@ void TagsFilter::process()
 }
 
 
-QList<GeoDataObject*>::const_iterator TagsFilter::rejectedObjectsBegin() const
+QVector<GeoDataPlacemark*>::const_iterator TagsFilter::rejectedObjectsBegin() const
 {
     return m_rejectedObjects.begin();
 }
 
-QList<GeoDataObject*>::const_iterator TagsFilter::rejectedObjectsEnd() const
+QVector<GeoDataPlacemark*>::const_iterator TagsFilter::rejectedObjectsEnd() const
 {
     return m_rejectedObjects.end();
 }
