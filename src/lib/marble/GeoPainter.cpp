@@ -259,7 +259,7 @@ void GeoPainter::drawPoint (  const GeoDataCoordinates & position )
     if ( visible ) {
         // Draw all the x-repeat-instances of the point on the screen
         for( int it = 0; it < pointRepeatNum; ++it ) {
-            QPainter::drawPoint( d->m_x[it], y );
+            QPainter::drawPoint(QPointF(d->m_x[it], y));
         }
     }
 }
@@ -287,8 +287,8 @@ QRegion GeoPainter::regionFromPoint ( const GeoDataPoint & point,
 
 void GeoPainter::drawText ( const GeoDataCoordinates & position,
                             const QString & text,
-                            int xOffset, int yOffset,
-                            int width, int height,
+                            qreal xOffset, qreal yOffset,
+                            qreal width, qreal height,
                             const QTextOption & option )
 {
     // Of course in theory we could have the "isGeoProjected" parameter used
@@ -306,12 +306,14 @@ void GeoPainter::drawText ( const GeoDataCoordinates & position,
 
     if ( visible ) {
         // Draw all the x-repeat-instances of the point on the screen
+        const qreal posY = y - yOffset;
         for( int it = 0; it < pointRepeatNum; ++it ) {
-            if (width == 0 && height == 0) {
-                QPainter::drawText( d->m_x[it] + xOffset, y + yOffset,  text );
+            const qreal posX = d->m_x[it] + xOffset;
+            if (width == 0.0 && height == 0.0) {
+                QPainter::drawText(QPointF(posX, posY), text);
             }
             else {
-                QRectF boundingRect(d->m_x[it] + xOffset, y + yOffset, width, height);
+                const QRectF boundingRect(posX, posY, width, height);
                 QPainter::drawText( boundingRect, text, option );
             }
         }
@@ -332,17 +334,10 @@ void GeoPainter::drawEllipse ( const GeoDataCoordinates & centerPosition,
 
         if ( visible ) {
             // Draw all the x-repeat-instances of the point on the screen
+            const qreal rx = width / 2.0;
+            const qreal ry = height / 2.0;
             for( int it = 0; it < pointRepeatNum; ++it ) {
-                // Have to compensate truncate rounding of conversion from real to int
-                // for all of rx, ry, rw, rh (given int-based method called).
-                // (and the 0.5 base-offset for the middle of center pixel). E.g. should
-                // x=5, w=3   -> rx = 4, rw = 3
-                // x=5, w=3.5 -> rx = 4, rw = 3
-                // x=5, w=4   -> rx = 3, rw = 4
-                // x=5, w=5   -> rx = 3, rw = 5
-                QPainter::drawEllipse(d->m_x[it] - static_cast<int>(width / 2.0),
-                                      y - static_cast<int>(height / 2.0),
-                                      width, height);
+                QPainter::drawEllipse(QPointF(d->m_x[it], y), rx, ry);
             }
         }
     }
@@ -409,13 +404,19 @@ QRegion GeoPainter::regionFromEllipse ( const GeoDataCoordinates & centerPositio
         QRegion regions;
 
         if ( visible ) {
+            // only a hint, a backend could still ignore it, but we cannot know more
+            const bool antialiased = testRenderHint(QPainter::Antialiasing);
+
+            const qreal halfStrokeWidth = strokeWidth/2.0;
+            const int startY = antialiased ? (qFloor(y - halfStrokeWidth)) : (qFloor(y+0.5 - halfStrokeWidth));
+            const int endY = antialiased ? (qCeil(y + height + halfStrokeWidth)) : (qFloor(y+0.5 + height + halfStrokeWidth));
             // Draw all the x-repeat-instances of the point on the screen
             for( int it = 0; it < pointRepeatNum; ++it ) {
-                regions += QRegion(d->m_x[it] - static_cast<int>((width + strokeWidth) / 2.0),
-                                   y - static_cast<int>((height + strokeWidth) / 2.0),
-                                   width + strokeWidth,
-                                   height + strokeWidth,
-                                   QRegion::Ellipse );
+                const qreal x = d->m_x[it];
+                const int startX = antialiased ? (qFloor(x - halfStrokeWidth)) : (qFloor(x+0.5 - halfStrokeWidth));
+                const int endX = antialiased ? (qCeil(x + width + halfStrokeWidth)) : (qFloor(x+0.5 + width +  halfStrokeWidth));
+
+                regions += QRegion(startX, startY, endX - startX, endY - startY, QRegion::Ellipse);
             }
         }
         return regions;
@@ -482,8 +483,10 @@ void GeoPainter::drawImage ( const GeoDataCoordinates & centerPosition,
 
         if ( visible ) {
             // Draw all the x-repeat-instances of the point on the screen
+            const qreal posY = y - (image.height() / 2.0);
             for( int it = 0; it < pointRepeatNum; ++it ) {
-                QPainter::drawImage( d->m_x[it] - ( image.width() / 2 ), y - ( image.height() / 2 ), image );
+                const qreal posX = d->m_x[it] - (image.width() / 2.0);
+                QPainter::drawImage(QPointF(posX, posY), image);
             }
         }
 //    }
@@ -503,12 +506,43 @@ void GeoPainter::drawPixmap ( const GeoDataCoordinates & centerPosition,
 
         if ( visible ) {
             // Draw all the x-repeat-instances of the point on the screen
+            const qreal posY = y - (pixmap.height() / 2.0);
             for( int it = 0; it < pointRepeatNum; ++it ) {
-                QPainter::drawPixmap( d->m_x[it] - ( pixmap.width() / 2 ),
-                                      y - ( pixmap.height() / 2 ), pixmap );
+                const qreal posX = d->m_x[it] - (pixmap.width() / 2.0);
+                QPainter::drawPixmap(QPointF(posX, posY), pixmap);
             }
         }
 //    }
+}
+
+
+QRegion GeoPainter::regionFromPixmapRect(const GeoDataCoordinates & centerCoordinates,
+                                         int width, int height,
+                                         int margin) const
+{
+    const int fullWidth = width + 2 * margin;
+    const int fullHeight = height + 2 * margin;
+    int pointRepeatNum;
+    qreal y;
+    bool globeHidesPoint;
+
+    const bool visible = d->m_viewport->screenCoordinates(centerCoordinates,
+                                                          d->m_x, y, pointRepeatNum,
+                                                          QSizeF(fullWidth, fullHeight), globeHidesPoint);
+
+    QRegion regions;
+
+    if (visible) {
+        // cmp. GeoPainter::drawPixmap() position calculation
+        // QPainter::drawPixmap seems to qRound the passed position
+        const int posY = qRound(y - (height / 2.0)) - margin;
+        for (int it = 0; it < pointRepeatNum; ++it) {
+            const int posX = qRound(d->m_x[it] - (width / 2.0)) - margin;
+            regions += QRegion(posX, posY, width, height);
+        }
+    }
+
+    return regions;
 }
 
 
@@ -854,10 +888,10 @@ void GeoPainter::drawRect ( const GeoDataCoordinates & centerCoordinates,
 
         if ( visible ) {
             // Draw all the x-repeat-instances of the point on the screen
+            const qreal posY = y - height / 2.0;
             for( int it = 0; it < pointRepeatNum; ++it ) {
-                QPainter::drawRect(d->m_x[it] - static_cast<int>(width / 2.0),
-                                   y - static_cast<int>(height / 2.0),
-                                   width, height );
+                const qreal posX = d->m_x[it] - width / 2.0;
+                QPainter::drawRect(QRectF(posX, posY, width, height));
             }
         }
     }
@@ -884,12 +918,18 @@ QRegion GeoPainter::regionFromRect ( const GeoDataCoordinates & centerCoordinate
         QRegion regions;
 
         if ( visible ) {
+            // only a hint, a backend could still ignore it, but we cannot know more
+            const bool antialiased = testRenderHint(QPainter::Antialiasing);
+
+            const qreal halfStrokeWidth = strokeWidth/2.0;
+            const int startY = antialiased ? (qFloor(y - halfStrokeWidth)) : (qFloor(y+0.5 - halfStrokeWidth));
+            const int endY = antialiased ? (qCeil(y + height + halfStrokeWidth)) : (qFloor(y+0.5 + height + halfStrokeWidth));
             // Draw all the x-repeat-instances of the point on the screen
             for( int it = 0; it < pointRepeatNum; ++it ) {
-                regions += QRegion( d->m_x[it] - static_cast<int>((width + strokeWidth) / 2.0),
-                                    y - static_cast<int>((height + strokeWidth) / 2.0),
-                                    width + strokeWidth,
-                                    height + strokeWidth );
+                const qreal x = d->m_x[it];
+                const int startX = antialiased ? (qFloor(x - halfStrokeWidth)) : (qFloor(x+0.5 - halfStrokeWidth));
+                const int endX = antialiased ? (qCeil(x + width + halfStrokeWidth)) : (qFloor(x+0.5 + width +  halfStrokeWidth));
+                regions += QRegion(startX, startY, endX - startX, endY - startY);
             }
         }
         return regions;
@@ -902,8 +942,8 @@ QRegion GeoPainter::regionFromRect ( const GeoDataCoordinates & centerCoordinate
 
 
 void GeoPainter::drawRoundedRect(const GeoDataCoordinates &centerPosition,
-                                 int width, int height,
-                                 int xRnd, int yRnd )
+                                 qreal width, qreal height,
+                                 qreal xRnd, qreal yRnd)
 {
         int pointRepeatNum;
         qreal y;
@@ -914,8 +954,10 @@ void GeoPainter::drawRoundedRect(const GeoDataCoordinates &centerPosition,
 
         if ( visible ) {
             // Draw all the x-repeat-instances of the point on the screen
+            const qreal posY = y - height / 2.0;
             for( int it = 0; it < pointRepeatNum; ++it ) {
-                QPainter::drawRoundedRect(d->m_x[it] - ( width / 2 ), y - ( height / 2 ), width, height, xRnd, yRnd);
+                const qreal posX = d->m_x[it] - width / 2.0;
+                QPainter::drawRoundedRect(QRectF(posX, posY, width, height), xRnd, yRnd);
             }
         }
 }
