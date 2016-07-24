@@ -553,6 +553,7 @@ void MainWindow::createPluginsMenus()
             themeActions.append( (*i)->action() );
             break;
         default:
+            qDebug() << "No menu entry created for plugin with unknown render type:" << (*i)->nameId();
             break;
         }
     }
