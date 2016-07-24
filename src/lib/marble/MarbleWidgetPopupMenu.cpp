@@ -26,6 +26,7 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataSnippet.h"
 #include "GeoDataStyle.h"
+#include "GeoDataIconStyle.h"
 #include "GeoDataTypes.h"
 #include "GeoDataPhotoOverlay.h"
 #include "GeoSceneDocument.h"
@@ -41,6 +42,8 @@
 #include "BookmarkManager.h"
 #include "ReverseGeocodingRunnerManager.h"
 #include "TemplateDocument.h"
+#include "OsmPlacemarkData.h"
+#include "StyleBuilder.h"
 
 // Qt
 #include <QApplication>
@@ -57,8 +60,8 @@ namespace Marble {
 
 class Q_DECL_HIDDEN MarbleWidgetPopupMenu::Private {
 public:
-    const MarbleModel    *const m_model;
-    MarbleWidget   *const m_widget;
+    const MarbleModel *const m_model;
+    MarbleWidget *const m_widget;
 
     QVector<const GeoDataFeature*>  m_featurelist;
     QList<AbstractDataPluginItem *> m_itemList;
@@ -70,9 +73,9 @@ public:
     QAction *m_directionsFromHereAction;
     QAction *m_directionsToHereAction;
 
-    QAction  *const m_copyCoordinateAction;
+    QAction *const m_copyCoordinateAction;
 
-    QAction  *m_rmbExtensionPoint;
+    QAction *m_rmbExtensionPoint;
 
     ReverseGeocodingRunnerManager m_runnerManager;
 
@@ -90,6 +93,7 @@ public:
     GeoDataCoordinates mouseCoordinates( QAction* dataContainer ) const;
 
     static QString filterEmptyShortDescription( const QString &description );
+    void setupDialogOsm( PopupLayer *popup, const GeoDataPlacemark* placemark );
     void setupDialogSatellite( const GeoDataPlacemark *placemark );
     static void setupDialogCity( PopupLayer *popup, const GeoDataPlacemark *placemark );
     static void setupDialogNation( PopupLayer *popup, const GeoDataPlacemark *placemark );
@@ -172,6 +176,135 @@ QString MarbleWidgetPopupMenu::Private::filterEmptyShortDescription(const QStrin
     if(description.isEmpty())
         return tr("No description available.");
     return description;
+}
+
+void MarbleWidgetPopupMenu::Private::setupDialogOsm( PopupLayer *popup, const GeoDataPlacemark *placemark )
+{
+    const GeoDataCoordinates location = placemark->coordinate();
+    popup->setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
+
+    QFile descriptionFile(":/marble/webpopup/osm.html");
+    if (!descriptionFile.open(QIODevice::ReadOnly)) {
+        return;
+    }
+
+    QString description = descriptionFile.readAll();
+    OsmPlacemarkData data = placemark->osmData();
+    if (!data.containsTagKey("addr:street") && !data.containsTagKey("addr:housenumber")){
+        description = description.replace("<br> %postcode%", "%postcode%");
+    }
+    TemplateDocument doc(description);
+
+    if (data.containsTagKey("name")){
+        doc["name"] = data.tagValue("name");
+    } else {
+        doc["name"] = "";
+    }
+
+    if (data.containsTagKey("shop")){
+        QString shop = data.tagValue("shop");
+        shop[0] = shop[0].toUpper();
+        doc["amenity"] = "Shop - " + shop;
+    } else if (data.containsTagKey("amenity")){
+        QString amenity = data.tagValue("amenity");
+        amenity[0] = amenity[0].toUpper();
+        doc["amenity"] = amenity;
+    } else {
+        doc["amenityVisibility"] = "none";
+    }
+
+    if (data.containsTagKey("cuisine")){
+        QString cuisine = data.tagValue("cuisine");
+        cuisine[0] = cuisine[0].toUpper();
+        doc["cuisine"] = cuisine;
+    } else {
+        doc["cuisineVisibility"] = "none";
+    }
+
+    if (data.containsTagKey("opening_hours")){
+        doc["openinghours"] = data.tagValue("opening_hours");
+    } else {
+        doc["openinghoursVisibility"] = "none";
+    }
+
+    bool hasAddressData = false;
+    foreach(const QString &tag, QStringList() << "addr:street" << "addr:housenumber" << "addr:postcode" << "addr:city") {
+        if (data.containsTagKey(tag)){
+            hasAddressData = true;
+            break;
+        }
+    }
+
+    bool hasWebsiteData = false;
+    foreach(const QString &tag, QStringList() << "website" << "contact:website" << "facebook" << "contact:facebook" << "url") {
+        if (data.containsTagKey(tag)){
+            hasWebsiteData = true;
+            break;
+        }
+    }
+
+    bool hasPhoneData = data.containsTagKey("phone");
+
+    bool hasContactsData = hasAddressData || hasPhoneData || hasWebsiteData;
+
+    if (hasContactsData){
+        if (hasAddressData){
+            foreach (const QString tag, QStringList() << "addr:street" << "addr:housenumber" << "addr:postcode" << "addr:city") {
+                if (data.containsTagKey(tag)){
+                    doc[tag.split("addr:")[1]] = data.tagValue(tag);
+                } else {
+                    doc[tag.split("addr:")[1]] = "";
+                }
+            }
+        } else {
+            doc["addressVisibility"] = "none";
+        }
+
+        if (hasPhoneData){
+            doc["phone"] = data.tagValue("phone");
+        } else {
+            doc["phoneVisibility"] = "none";
+        }
+
+        if (hasWebsiteData){
+            foreach(const QString tag, QStringList() << "website" << "contact:website" << "facebook" << "contact:facebook" << "url") {
+                if (data.containsTagKey(tag)){
+                    doc["website"] = data.tagValue(tag);
+                    break;
+                }
+            }
+        } else {
+            doc["websiteVisibility"] = "none";
+        }
+    } else {
+        doc["contactVisibility"] = "none";
+    }
+
+    if (data.containsTagKey("wheelchair") || data.containsTagKey("internet_access") || data.containsTagKey("smoking")){
+        if (data.containsTagKey("wheelchair")){
+            doc["wheelchair"] = data.tagValue("wheelchair");
+        } else {
+            doc["wheelchairVisibility"] = "none";
+        }
+
+        if (data.containsTagKey("internet_access")){
+            doc["internetaccess"] = data.tagValue("internet_access");
+        } else {
+            doc["internetVisibility"] = "none";
+        }
+
+        if (data.containsTagKey("smoking")){
+            doc["smoking"] = data.tagValue("smoking");
+        } else {
+            doc["smokingVisibility"] = "none";
+        }
+    } else {
+        doc["facilitiesVisibility"] = "none";
+    }
+
+    const QString flagPath = m_widget->styleBuilder()->createStyle(StyleParameters(placemark))->iconStyle().iconPath();
+    doc["flag"] = flagPath;
+    popup->setContent(doc.finalText());
 }
 
 void MarbleWidgetPopupMenu::Private::setupDialogSatellite( const GeoDataPlacemark *placemark )
@@ -479,6 +612,24 @@ void MarbleWidgetPopupMenu::slotInfoDialog()
         bool isCity = false;
         bool isNation = false;
 
+        OsmPlacemarkData data = placemark->osmData();
+
+        bool hasOsmData = false;
+
+        QStringList recognizedTags;
+        recognizedTags << "name" << "amenity" << "cuisine" << "opening_hours";
+        recognizedTags << "addr:street" << "addr:housenumber" << "addr:postcode";
+        recognizedTags << "addr:city" << "phone" << "wheelchair" << "internet_access";
+        recognizedTags << "smoking" << "website" << "contact:website" << "facebook";
+        recognizedTags << "contact:facebook" << "url";
+
+        foreach(const QString &tag, recognizedTags) {
+            if (data.containsTagKey(tag)) {
+                hasOsmData = true;
+                break;
+            }
+        }
+
         if ( placemark ) {
             isSatellite = (placemark->visualCategory() == GeoDataFeature::Satellite);
             isCity = (placemark->visualCategory() >= GeoDataFeature::SmallCity &&
@@ -494,7 +645,9 @@ void MarbleWidgetPopupMenu::slotInfoDialog()
 
         popup->setSize(QSizeF(400, 400));
 
-        if (isSatellite) {
+        if (hasOsmData){
+            d->setupDialogOsm( popup, placemark );
+        } else if (isSatellite) {
             d->setupDialogSatellite( placemark );
         } else if (isCity) {
             Private::setupDialogCity( popup, placemark );

@@ -1382,6 +1382,11 @@ TextureLayer *MarbleMap::textureLayer() const
     return &d->m_textureLayer;
 }
 
+const StyleBuilder* MarbleMap::styleBuilder() const
+{
+    return &d->m_styleBuilder;
+}
+
 }
 
 #include "moc_MarbleMap.cpp"

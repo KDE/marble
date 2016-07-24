@@ -44,6 +44,7 @@
 #include "ViewportParams.h"
 #include "routing/RoutingLayer.h"
 #include "MarbleAbstractPresenter.h"
+#include "StyleBuilder.h"
 
 namespace Marble
 {
@@ -1187,6 +1188,11 @@ RoutingLayer* MarbleWidget::routingLayer()
 PopupLayer *MarbleWidget::popupLayer()
 {
     return d->m_mapInfoDialog;
+}
+
+const StyleBuilder* MarbleWidget::styleBuilder() const
+{
+    return d->m_map.styleBuilder();
 }
 
 }

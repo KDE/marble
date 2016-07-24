@@ -54,6 +54,7 @@ class AbstractFloatItem;
 class TextureLayer;
 class TileCoordsPyramid;
 class GeoSceneTextureTileDataset;
+class StyleBuilder;
 
 /**
  * @short A class that can paint a view of the earth.
@@ -419,6 +420,8 @@ class MARBLE_EXPORT MarbleMap : public QObject
     RenderStatus renderStatus() const;
 
     RenderState renderState() const;
+
+    const StyleBuilder* styleBuilder() const;
 
  public Q_SLOTS:
 

@@ -6,11 +6,56 @@
 <link rel="stylesheet" media="print, embossed" href="qrc:/marble/webpopup/placesprint.css"></head>
 <style>
 .flag {
-  background-image:url('file://%amenity%');
+  background-image:url('file://%flag%');
+}
+
+h2.osmamenity {
+  display: %amenityVisibility%
+}
+
+h3.osmcuisine {
+  display: %cuisineVisibility%
+}
+
+p.openinghours {
+  display: %openinghoursVisibility%
+}
+
+table.contact {
+  display: %contactVisibility%
+}
+
+tr.address {
+  display: %addressVisibility%
+}
+
+tr.phone {
+  display: %phoneVisibility%
+}
+
+tr.website {
+  display: %websiteVisibility%
+}
+
+table.facilities {
+  display: %facilitiesVisibility%
+}
+
+tr.wheelchair {
+  display: %wheelchairVisibility%
+}
+
+tr.internet {
+  display: %internetVisibility%
+}
+
+tr.smoking {
+  display: %smokingVisibility%
 }
 </style>
+
 <body>
-<div class="osmname"><h1>%name%</h1></div>
+<div class="flag"><h1>%name%</h1></div>
 
 <h2 class="osmamenity">%amenity%</h2>
 
@@ -18,34 +63,34 @@
 
 <p class="openinghours">Opening Hours: %openinghours%</p>
 
-<table>
+<table class="contact">
 <tr class="blue">
   <td colspan="2">Contact</td>
 </tr>
-<tr>
+<tr class="address">
   <td>Address:</td><td>%street% %housenumber% <br> %postcode% %city%</td>
 </tr>
-<tr>
+<tr class="phone">
   <td>Phone:</td><td>%phone%</td>
 </tr>
-<tr>
-  <td>Website:</td><td>%website% m</td>
+<tr class="website">
+  <td>Website:</td><td><a href="%website%">%website%</a></td>
 </tr>
 </table>
 
 <br>
 
-<table>
+<table class="facilities">
 <tr class="blue">
   <td colspan="2">Popular Facilities</td>
 </tr>
-<tr>
+<tr class="wheelchair">
   <td>Wheelchair access</td><td>%wheelchair%</td>
 </tr>
-<tr>
+<tr class="internet">
   <td>Internet</td><td>%internetaccess%</td>
 </tr>
-<tr>
+<tr class="smoking">
   <td>Smoking</td><td>%smoking%</td>
 </tr>
 </table>
