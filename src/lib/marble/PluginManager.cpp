@@ -290,6 +290,13 @@ void PluginManagerPrivate::loadPlugins()
         QDir pluginHome(MarbleDirs::localPath());
         pluginHome.mkpath(MarbleDirs::pluginLocalPath());
         pluginHome.setCurrent(MarbleDirs::pluginLocalPath());
+
+        QStringList pluginNameFilter = QStringList() << "lib*.so";
+        QStringList const existingPlugins = QDir(MarbleDirs::pluginLocalPath()).entryList(pluginNameFilter, QDir::Files);
+        foreach(const QString &existingPlugin, existingPlugins) {
+            QFile::remove(existingPlugin);
+        }
+
         foreach (const QString & file, copyList) {
             QString const target = MarbleDirs::pluginLocalPath() + '/' + file;
             if (QFileInfo(MarbleDirs::pluginSystemPath() + '/' + file).isDir()) {
