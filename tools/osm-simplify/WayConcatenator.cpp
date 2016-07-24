@@ -45,7 +45,7 @@ void WayConcatenator::process()
     qint64 placemarkCount = 0;
 
     // qDebug()<<"** Number of TagFiletered placemarks "<< m_objects.size();
-    foreach (GeoDataPlacemark* placemark, m_placemarks) {
+    foreach (GeoDataPlacemark* placemark, placemarks()) {
         qDebug()<<" ";
         ++placemarkCount;
         // qDebug()<<"No."<<plcCount;
@@ -195,12 +195,12 @@ void WayConcatenator::addWayChunks()
 
 void WayConcatenator::modifyDocument()
 {
-    m_document->clear();
+    document()->clear();
     QVector<GeoDataPlacemark>::iterator itr;
     itr = m_wayPlacemarks.begin();
     for (; itr != m_wayPlacemarks.end(); ++itr) {
         GeoDataPlacemark *placemark = new GeoDataPlacemark(*itr);
-        m_document->append(placemark);
+        document()->append(placemark);
     }
 }
 

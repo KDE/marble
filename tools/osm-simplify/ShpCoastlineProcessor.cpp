@@ -29,7 +29,7 @@ void ShpCoastlineProcessor::process()
     OsmPlacemarkData marbleLand;
     marbleLand.addTag("marble_land","landmass");
 
-    foreach (GeoDataPlacemark* placemark, m_placemarks) {
+    foreach (GeoDataPlacemark* placemark, placemarks()) {
         if(placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType) {
             placemark->setOsmData(marbleLand);
         }
@@ -57,7 +57,7 @@ GeoDataDocument *ShpCoastlineProcessor::cutToTiles(unsigned int zoomLevel, unsig
 
     tileBoundary.setBoundaries(north, south, east, west);
 
-    foreach (GeoDataPlacemark* placemark, m_placemarks) {
+    foreach (GeoDataPlacemark* placemark, placemarks()) {
 
         if(placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType) {
             GeoDataPolygon* marblePolygon = static_cast<GeoDataPolygon*>(placemark->geometry());

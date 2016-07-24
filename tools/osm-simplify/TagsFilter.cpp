@@ -24,8 +24,8 @@ TagsFilter::TagsFilter(GeoDataDocument *document, const QStringList &tagsList, b
 {
     int total=0, tagCount=0;
 	// qDebug()<<"Entered tagFilter";
-    QVector<GeoDataPlacemark*> previousObjects(m_placemarks);
-    m_placemarks.clear();
+    QVector<GeoDataPlacemark*> previousObjects(placemarks());
+    placemarks().clear();
     foreach (GeoDataPlacemark *placemark, previousObjects) {
         ++total;
         bool flag = andFlag;
@@ -62,7 +62,7 @@ TagsFilter::TagsFilter(GeoDataDocument *document, const QStringList &tagsList, b
         if (flag) {
             ++tagCount;
 			// qDebug()<<"Contained tag";
-            m_placemarks.append(placemark);
+            placemarks().append(placemark);
 			// qDebug()<<"ID "<<placemark->osmData().id();
         } else {
             m_rejectedObjects.append(placemark);

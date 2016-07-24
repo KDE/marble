@@ -19,25 +19,25 @@ LineStringProcessor::LineStringProcessor(GeoDataDocument* document) :
     PlacemarkFilter(document)
 {
     QList<GeoDataPlacemark*> toRemove;
-    foreach (GeoDataPlacemark* placemark, m_placemarks) {
+    foreach (GeoDataPlacemark* placemark, placemarks()) {
         if(placemark->geometry()->nodeType() != GeoDataTypes::GeoDataLineStringType) {
             toRemove.append(placemark);
         }
     }
 
     foreach (GeoDataPlacemark* placemark, toRemove) {
-        m_placemarks.removeOne(placemark);
+        placemarks().removeOne(placemark);
     }
 }
 
 void LineStringProcessor::process()
 {
-    qDebug() << "Polylines to process: " << m_placemarks.size();
+    qDebug() << "Polylines to process: " << placemarks().size();
 
     QList<GeoDataObject*> polylinesToDrop;
 
 
-    foreach (GeoDataPlacemark* polyline, m_placemarks) {
+    foreach (GeoDataPlacemark* polyline, placemarks()) {
         switch(polyline->visualCategory())
         {
         case GeoDataFeature::HighwayCycleway :
@@ -60,13 +60,13 @@ void LineStringProcessor::process()
     int removed = 0;
 
     foreach (GeoDataObject* polyline, polylinesToDrop) {
-        if(m_document->removeOne(static_cast<GeoDataFeature*>(polyline))) {
+        if(document()->removeOne(static_cast<GeoDataFeature*>(polyline))) {
             ++removed;
         }
     }
 
     qDebug() << "Polylines dropped: " << removed;
 
-    qDebug() << m_document->name();
+    qDebug() << document()->name();
 }
 

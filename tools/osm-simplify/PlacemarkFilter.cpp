@@ -15,6 +15,6 @@
 PlacemarkFilter::PlacemarkFilter(GeoDataDocument *document) :
     BaseFilter(document)
 {
-    qDebug() << "Placemark count:" << m_placemarks.size();
+    qDebug() << "Placemark count:" << placemarks().size();
 }
 

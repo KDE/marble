@@ -31,7 +31,13 @@ public:
     QVector<GeoDataPlacemark*>::const_iterator objectsBegin() const;
     QVector<GeoDataPlacemark*>::const_iterator objectsEnd() const;
 
-protected:
+    const QVector<GeoDataPlacemark*> & placemarks() const;
+    QVector<GeoDataPlacemark*> & placemarks();
+
+    const GeoDataDocument* document() const;
+    GeoDataDocument* document();
+
+private:
     GeoDataDocument* m_document;
     QVector<GeoDataPlacemark*> m_placemarks;
 };

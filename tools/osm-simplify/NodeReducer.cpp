@@ -28,7 +28,7 @@ NodeReducer::NodeReducer(GeoDataDocument* document, int zoomLevel) :
 
 void NodeReducer::process()
 {
-  foreach (GeoDataPlacemark* placemark, m_placemarks) {
+  foreach (GeoDataPlacemark* placemark, placemarks()) {
 
       if(placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType){
         GeoDataLineString* prevLine = static_cast<GeoDataLineString*>(placemark->geometry());
