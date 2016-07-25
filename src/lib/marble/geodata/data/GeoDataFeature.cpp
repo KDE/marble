@@ -440,6 +440,11 @@ void GeoDataFeature::setPopularity( qint64 popularity )
     d->m_popularity = popularity;
 }
 
+QString GeoDataFeature::categoryName() const
+{
+    return d->categoryName();
+}
+
 void GeoDataFeature::detach()
 {
     if(d->ref.load() == 1) {

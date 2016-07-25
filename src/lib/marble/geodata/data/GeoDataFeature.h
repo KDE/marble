@@ -629,6 +629,8 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
      */
     void setStyleMap( const GeoDataStyleMap* map );
 
+    QString categoryName() const;
+
     /// Serialize the contents of the feature to @p stream.
     virtual void pack( QDataStream& stream ) const;
     /// Unserialize the contents of the feature from @p stream.

@@ -73,7 +73,6 @@ Q_SIGNALS:
     void openingHoursChanged();
 
 private:
-    QString categoryName(GeoDataFeature::GeoDataVisualCategory category) const;
     void addTagValue(QString &target, const QString &key) const;
     void addTagDescription(QString &target, const QString &key, const QString &value, const QString &description) const;
     QString addressFromOsmData() const;
