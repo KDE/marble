@@ -1,3 +1,6 @@
+
+<<< WARNING: MOST OF THIS CONTENT IS NOT UP-TO-DATE >>>
+
 		      Marble Programmer's Manual
 		      ==========================
 
