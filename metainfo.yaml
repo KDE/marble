@@ -1,0 +1,19 @@
+# kapidox info
+description: Marble framework, a library for maps, virtual globes and world atlases
+logo: data/icons/128-apps-marble.png
+
+platforms:
+    - name: Linux
+    - name: Windows
+    - name: MacOSX
+    - name: Android
+
+public_lib: true
+public_source_dirs:
+    - src/lib/marble
+
+maintainer:
+    - rahn
+    - nienhueser
+irc: marble
+mailinglist: marble-devel
