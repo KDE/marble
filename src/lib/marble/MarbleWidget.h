@@ -61,7 +61,7 @@ class PopupLayer;
  *
  * This widget displays a view of the earth or any other globe,
  * depending on which dataset is used.  The user can navigate the
- * globe using either a control widget, e.g. the MarbleControlBox, or
+ * globe using either a control widget, e.g. the MarbleNavigator, or
  * the mouse.  The mouse and keyboard control is done through a
  * MarbleWidgetInputHandler. Only some aspects of the widget can be
  * controlled by the mouse and/or keyboard.
@@ -93,7 +93,7 @@ class PopupLayer;
  * Wikipedia to retrieve an article about it. If there is such an
  * article, you will get a mini-browser window with the article in a tab.
  *
- * @see MarbleControlBox
+ * @see MarbleNavigator
  * @see MarbleMap
  * @see MarbleModel
  */

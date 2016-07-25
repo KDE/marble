@@ -82,7 +82,6 @@ class GeoSceneTextureTileDataset;
  * cities, mountain tops or the poles.
  *
  * @see MarbleWidget
- * @see MarbleControlBox
  * @see MarbleModel
  */
 

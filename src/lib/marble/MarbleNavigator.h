@@ -44,7 +44,6 @@ class MarbleNavigatorPrivate;
  * Home position from the MarbleNavigator, though.
  *
  * @see MarbleWidget
- * @see MarbleControlBox
  */
 
 class MARBLE_EXPORT MarbleNavigator : public QWidget
