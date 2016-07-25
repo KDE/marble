@@ -196,7 +196,7 @@ class MarblePart: public KParts::ReadOnlyPart
 
   private:
     // All the functionality is provided by this widget.
-    ControlView       *m_controlView; // MarbleControlBox and MarbleWidget
+    ControlView       *m_controlView;
     SunControlWidget  *m_sunControlDialog;
     TimeControlWidget *m_timeControlDialog;
     DownloadRegionDialog *m_downloadRegionDialog;
