@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Bookmark Manager - Marble</string>
+   <string>Bookmark Manager</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>

@@ -173,7 +173,7 @@ void BookmarkManagerDialogPrivate::deleteFolder()
     if ( folder ) {
         if ( folder->size() > 0 ) {
             QString const text = QObject::tr( "The folder %1 is not empty. Removing it will delete all bookmarks it contains. Are you sure you want to delete the folder?" ).arg( folder->name() );
-            if ( QMessageBox::question( m_parent, QObject::tr("Remove Folder - Marble"), text, QMessageBox::Yes, QMessageBox::No ) != QMessageBox::Yes) {
+            if (QMessageBox::question(m_parent, BookmarkManagerDialog::tr("Remove Folder"), text, QMessageBox::Yes, QMessageBox::No) != QMessageBox::Yes) {
                 return;
             }
         }
@@ -413,14 +413,14 @@ void BookmarkManagerDialog::exportBookmarks()
         if ( !file.open( QIODevice::ReadWrite ) || !writer.write( &file, bookmarkDocument() ) ) {
             mDebug() << "Could not write the bookmarks file" << fileName;
             QString const text = tr( "Unable to save bookmarks. Please check that the file is writable." );
-            QMessageBox::warning( this, tr( "Bookmark Export - Marble" ), text );
+            QMessageBox::warning(this, tr("Bookmark Export"), text);
         }
     }
 }
 
 void BookmarkManagerDialog::importBookmarks()
 {
-    QString const file = QFileDialog::getOpenFileName( this, tr( "Import Bookmarks - Marble" ),
+    QString const file = QFileDialog::getOpenFileName(this, tr("Import Bookmarks"),
                             QDir::homePath(), tr( "KML Files (*.kml)" ) );
     if ( file.isEmpty() ) {
         return;
@@ -429,7 +429,7 @@ void BookmarkManagerDialog::importBookmarks()
     GeoDataDocument *import = BookmarkManager::openFile( file );
     if ( !import ) {
         QString const text = tr( "The file %1 cannot be opened as a KML file." ).arg( file );
-        QMessageBox::warning( this, tr( "Bookmark Import - Marble" ), text );
+        QMessageBox::warning(this, tr( "Bookmark Import"), text);
         return;
     }
 

@@ -509,7 +509,7 @@ void RoutingManager::setGuidanceModeEnabled( bool enabled )
             text += ' ' + tr( "Road construction, weather and other unforeseen variables can result in the suggested route not to be the most expedient or safest route to your destination." );
             text += ' ' + tr( "Please use common sense while navigating." ) + "</p>";
             text += "<p>" + tr( "The Marble development team wishes you a pleasant and safe journey." ) + "</p>";
-            QPointer<QMessageBox> messageBox = new QMessageBox( QMessageBox::Information, tr( "Guidance Mode - Marble" ), text, QMessageBox::Ok );
+            QPointer<QMessageBox> messageBox = new QMessageBox(QMessageBox::Information, tr("Guidance Mode"), text, QMessageBox::Ok);
             QCheckBox *showAgain = new QCheckBox( tr( "Show again" ) );
             showAgain->setChecked( true );
             showAgain->blockSignals( true ); // otherwise it'd close the dialog
