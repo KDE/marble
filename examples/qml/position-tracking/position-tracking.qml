@@ -10,7 +10,7 @@
 // using a small ghost image. The visibility of the track can be toggled.
 
 import Qt 4.7
-import org.kde.edu.marble 0.11
+import org.kde.marble 0.20
 
 Rectangle {
     id: screen

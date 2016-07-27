@@ -22,7 +22,7 @@ namespace Marble
 class FlightGearPositionProviderPlugin : public PositionProviderPlugin
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA( IID "org.kde.edu.marble.FlightGearPositionProviderPlugin" )
+    Q_PLUGIN_METADATA(IID "org.kde.marble.FlightGearPositionProviderPlugin")
     Q_INTERFACES( Marble::PositionProviderPluginInterface )
 
  public:

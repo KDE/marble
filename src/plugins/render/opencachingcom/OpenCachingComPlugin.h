@@ -29,7 +29,7 @@ namespace Marble
 class OpenCachingComPlugin : public AbstractDataPlugin
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA( IID "org.kde.edu.marble.OpenCachingComPlugin" )
+    Q_PLUGIN_METADATA(IID "org.kde.marble.OpenCachingComPlugin")
 
     Q_INTERFACES( Marble::RenderPluginInterface )
 

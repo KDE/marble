@@ -31,7 +31,7 @@ class MarbleLocale;
 class License : public AbstractFloatItem
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA( IID "org.kde.edu.marble.License" )
+    Q_PLUGIN_METADATA(IID "org.kde.marble.License")
     Q_INTERFACES( Marble::RenderPluginInterface )
     MARBLE_PLUGIN( License )
 public:

@@ -7,7 +7,7 @@
 // Copyright 2013      Dennis Nienhüser <nienhueser@kde.org>
 
 import QtQuick 1.0
-import org.kde.edu.marble 0.11
+import org.kde.marble 0.20
 
 Rectangle {
     id: screen

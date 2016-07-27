@@ -21,7 +21,7 @@
   */
 class MARBLE_DECLARATIVE_EXPORT MarbleDeclarativePlugin : public QQmlExtensionPlugin
 {
-    Q_PLUGIN_METADATA( IID "org.kde.edu.marble.MarbleDeclarativePlugin" )
+    Q_PLUGIN_METADATA(IID "org.kde.marble.MarbleDeclarativePlugin")
     Q_OBJECT
 public:
     /** Overriding QQmlExtensionPlugin to register types */

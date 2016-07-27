@@ -18,7 +18,7 @@ namespace Marble
 class ShpPlugin : public ParseRunnerPlugin
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA( IID "org.kde.edu.marble.ShpPlugin" )
+    Q_PLUGIN_METADATA(IID "org.kde.marble.ShpPlugin")
     Q_INTERFACES( Marble::ParseRunnerPlugin )
 
 public:

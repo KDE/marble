@@ -20,7 +20,7 @@ namespace Marble
 class LatLonPlugin : public SearchRunnerPlugin
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA( IID "org.kde.edu.marble.LatLonPlugin" )
+    Q_PLUGIN_METADATA(IID "org.kde.marble.LatLonPlugin")
     Q_INTERFACES( Marble::SearchRunnerPlugin )
 
 public:

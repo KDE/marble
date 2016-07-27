@@ -29,7 +29,7 @@ class MarbleWidget;
 class FileViewFloatItem: public AbstractFloatItem
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA( IID "org.kde.edu.marble.FileViewFloatItem" )
+    Q_PLUGIN_METADATA(IID "org.kde.marble.FileViewFloatItem")
     Q_INTERFACES( Marble::RenderPluginInterface )
     MARBLE_PLUGIN(FileViewFloatItem)
 

@@ -22,7 +22,7 @@ class QtPositioningPositionProviderPluginPrivate;
 class QtPositioningPositionProviderPlugin: public PositionProviderPlugin
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA( IID "org.kde.edu.marble.QtPositioningPositionProviderPlugin" )
+    Q_PLUGIN_METADATA(IID "org.kde.marble.QtPositioningPositionProviderPlugin")
     Q_INTERFACES( Marble::PositionProviderPluginInterface )
 
 public:
