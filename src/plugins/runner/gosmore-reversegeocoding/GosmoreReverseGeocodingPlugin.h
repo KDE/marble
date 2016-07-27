@@ -21,7 +21,7 @@ namespace Marble
 class GosmorePlugin : public ReverseGeocodingRunnerPlugin
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA( IID "org.kde.edu.marble.GosmoreReverseGeocodingPlugin" )
+    Q_PLUGIN_METADATA(IID "org.kde.marble.GosmoreReverseGeocodingPlugin")
     Q_INTERFACES( Marble::ReverseGeocodingRunnerPlugin )
 
 public:

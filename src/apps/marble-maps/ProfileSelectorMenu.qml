@@ -14,7 +14,7 @@ import QtQuick.Controls 1.3
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.2
 
-import org.kde.edu.marble 0.20
+import org.kde.marble 0.20
 
 Item {
     id: root

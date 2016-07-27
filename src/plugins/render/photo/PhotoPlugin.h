@@ -29,7 +29,7 @@ namespace Marble
 class PhotoPlugin : public AbstractDataPlugin, public DialogConfigurationInterface
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA( IID "org.kde.edu.marble.PhotoPlugin" )
+    Q_PLUGIN_METADATA(IID "org.kde.marble.PhotoPlugin")
     Q_INTERFACES( Marble::RenderPluginInterface )
     Q_INTERFACES( Marble::DialogConfigurationInterface )
     MARBLE_PLUGIN( PhotoPlugin )

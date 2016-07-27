@@ -10,7 +10,7 @@
 
 import QtQuick 2.3
 
-import org.kde.edu.marble 0.20
+import org.kde.marble 0.20
 
 Routing {
     id: root

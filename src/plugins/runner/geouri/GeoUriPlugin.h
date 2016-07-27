@@ -19,7 +19,7 @@ namespace Marble
 class GeoUriPlugin : public SearchRunnerPlugin
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA( IID "org.kde.edu.marble.GeoUriPlugin" )
+    Q_PLUGIN_METADATA(IID "org.kde.marble.GeoUriPlugin")
     Q_INTERFACES( Marble::SearchRunnerPlugin )
 
 public:

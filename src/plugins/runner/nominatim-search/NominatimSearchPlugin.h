@@ -21,7 +21,7 @@ namespace Marble
 class NominatimPlugin : public SearchRunnerPlugin
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA( IID "org.kde.edu.marble.NominatimSearchPlugin" )
+    Q_PLUGIN_METADATA(IID "org.kde.marble.NominatimSearchPlugin")
     Q_INTERFACES( Marble::SearchRunnerPlugin )
 
 public:
