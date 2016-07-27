@@ -24,7 +24,7 @@ public:
     explicit SatellitesConfigModel( QObject *parent = 0 );
     ~SatellitesConfigModel();
 
-    void loadSettings( QHash<QString, QVariant> settings );
+    void loadSettings(const QHash<QString, QVariant> &settings);
 
     void appendChild( SatellitesConfigAbstractItem *child );
     void clear();

@@ -563,7 +563,7 @@ bool AbstractDataPluginModel::itemExists( const QString& id ) const
     return findItem( id );
 }
 
-void AbstractDataPluginModel::setItemSettings( QHash<QString,QVariant> itemSettings )
+void AbstractDataPluginModel::setItemSettings(const QHash<QString, QVariant> &itemSettings)
 {
     d->m_itemSettings = itemSettings;
 }

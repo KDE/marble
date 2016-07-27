@@ -23,7 +23,7 @@ public:
                                        const QString &id );
     ~SatellitesConfigLeafItem();
 
-    void loadSettings( QHash<QString, QVariant> settings );
+    void loadSettings(const QHash<QString, QVariant> &settings) override;
 
     QVariant data( int column, int role ) const;
     bool setData(int column, int role, const QVariant& data);

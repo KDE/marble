@@ -27,7 +27,7 @@ SatellitesConfigNodeItem::~SatellitesConfigNodeItem()
 {
 }
 
-void SatellitesConfigNodeItem::loadSettings(QHash< QString, QVariant > settings)
+void SatellitesConfigNodeItem::loadSettings(const QHash<QString, QVariant> &settings)
 {
     foreach( SatellitesConfigAbstractItem *item, m_children ) {
         item->loadSettings( settings );

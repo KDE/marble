@@ -51,7 +51,7 @@ void SatellitesConfigAbstractItem::setParent( SatellitesConfigAbstractItem *pare
     m_parent = parent;
 }
 
-void SatellitesConfigAbstractItem::loadSettings( QHash<QString, QVariant> settings )
+void SatellitesConfigAbstractItem::loadSettings(const QHash<QString, QVariant> &settings)
 {
     Q_UNUSED( settings );
 }

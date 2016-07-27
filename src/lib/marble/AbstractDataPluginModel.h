@@ -75,7 +75,7 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
      * Sets the settings for all items before painting. This ensures that all items react on
      * changed settings.
      */
-    void setItemSettings( QHash<QString,QVariant> itemSettings );
+    void setItemSettings(const QHash<QString, QVariant> &itemSettings);
 
     virtual void setFavoriteItems( const QStringList& list );
     QStringList favoriteItems() const;

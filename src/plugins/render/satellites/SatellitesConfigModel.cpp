@@ -45,7 +45,7 @@ QStringList SatellitesConfigModel::urlList() const
             .toStringList();
 }
 
-void SatellitesConfigModel::loadSettings( QHash<QString, QVariant> settings)
+void SatellitesConfigModel::loadSettings(const QHash<QString, QVariant> &settings)
 {
     m_rootItem->loadSettings( settings );
 }
