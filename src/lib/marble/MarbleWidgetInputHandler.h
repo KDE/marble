@@ -24,7 +24,7 @@ class MarbleWidget;
 class RenderPlugin;
 class MarbleWidgetInputHandlerPrivate;
 
-class MarbleWidgetInputHandler : public MarbleDefaultInputHandler
+class MARBLE_EXPORT MarbleWidgetInputHandler : public MarbleDefaultInputHandler
 {
     Q_OBJECT
 
