@@ -28,14 +28,15 @@ class Placemark : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY( QString name WRITE setName READ name NOTIFY nameChanged )
-    Q_PROPERTY( QString description READ description NOTIFY descriptionChanged )
-    Q_PROPERTY( QString address READ address NOTIFY addressChanged )
-    Q_PROPERTY( QString website READ website NOTIFY websiteChanged )
-    Q_PROPERTY( QString wikipedia READ wikipedia NOTIFY wikipediaChanged )
-    Q_PROPERTY( QString fuelDetails READ fuelDetails NOTIFY fuelDetailsChanged )
-    Q_PROPERTY( QString openingHours READ openingHours NOTIFY openingHoursChanged )
-    Q_PROPERTY( QString coordinates READ coordinates NOTIFY coordinatesChanged )
+    Q_PROPERTY(QString name WRITE setName READ name NOTIFY nameChanged)
+    Q_PROPERTY(QString description READ description NOTIFY descriptionChanged)
+    Q_PROPERTY(QString address READ address NOTIFY addressChanged)
+    Q_PROPERTY(QString website READ website NOTIFY websiteChanged)
+    Q_PROPERTY(QString wikipedia READ wikipedia NOTIFY wikipediaChanged)
+    Q_PROPERTY(QString fuelDetails READ fuelDetails NOTIFY fuelDetailsChanged)
+    Q_PROPERTY(QString openingHours READ openingHours NOTIFY openingHoursChanged)
+    Q_PROPERTY(QString coordinates READ coordinates NOTIFY coordinatesChanged)
+    Q_PROPERTY(QString elevation READ elevation NOTIFY elevationChanged)
     Q_PROPERTY(double longitude READ longitude NOTIFY coordinatesChanged)
     Q_PROPERTY(double latitude READ latitude NOTIFY coordinatesChanged)
 
@@ -56,6 +57,7 @@ public:
     QString fuelDetails() const;
     QString openingHours() const;
     QString coordinates() const;
+    QString elevation() const;
     double longitude() const;
     double latitude() const;
 
@@ -71,6 +73,7 @@ Q_SIGNALS:
     void wikipediaChanged();
     void fuelDetailsChanged();
     void openingHoursChanged();
+    void elevationChanged();
 
 private:
     void addTagValue(QString &target, const QString &key) const;
@@ -85,6 +88,7 @@ private:
     mutable QString m_website;
     mutable QString m_wikipedia;
     mutable QString m_openingHours;
+    mutable QString m_elevation;
 };
 
 }

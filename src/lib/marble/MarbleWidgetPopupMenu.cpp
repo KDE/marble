@@ -201,22 +201,42 @@ void MarbleWidgetPopupMenu::Private::setupDialogOsm( PopupLayer *popup, const Ge
         doc["name"] = "";
     }
 
+    if (data.containsTagKey("natural")){
+        QString natural = data.tagValue("natural");
+        if (!natural.isEmpty()){
+            natural[0] = natural[0].toUpper();
+            if (natural == "Peak" && data.containsTagKey("ele")){
+                doc["details"] = natural + " - " + data.tagValue("ele") + " m";
+            } else {
+                doc["details"] = natural;
+            }
+        }
+    } else {
+        doc["detailsVisibility"] = "none";
+    }
+
     if (data.containsTagKey("shop")){
         QString shop = data.tagValue("shop");
-        shop[0] = shop[0].toUpper();
-        doc["amenity"] = "Shop - " + shop;
+        if (!shop.isEmpty()){
+            shop[0] = shop[0].toUpper();
+            doc["amenity"] = "Shop - " + shop;
+        }
     } else if (data.containsTagKey("amenity")){
         QString amenity = data.tagValue("amenity");
-        amenity[0] = amenity[0].toUpper();
-        doc["amenity"] = amenity;
+        if (!amenity.isEmpty()){
+            amenity[0] = amenity[0].toUpper();
+            doc["amenity"] = amenity;
+        }
     } else {
         doc["amenityVisibility"] = "none";
     }
 
     if (data.containsTagKey("cuisine")){
         QString cuisine = data.tagValue("cuisine");
-        cuisine[0] = cuisine[0].toUpper();
-        doc["cuisine"] = cuisine;
+        if (!cuisine.isEmpty()){
+            cuisine[0] = cuisine[0].toUpper();
+            doc["cuisine"] = cuisine;
+        }
     } else {
         doc["cuisineVisibility"] = "none";
     }
@@ -280,7 +300,9 @@ void MarbleWidgetPopupMenu::Private::setupDialogOsm( PopupLayer *popup, const Ge
         doc["contactVisibility"] = "none";
     }
 
-    if (data.containsTagKey("wheelchair") || data.containsTagKey("internet_access") || data.containsTagKey("smoking")){
+    bool hasFacilitiesData = data.containsTagKey("wheelchair") || data.containsTagKey("internet_access") || data.containsTagKey("smoking");
+
+    if (hasFacilitiesData){
         if (data.containsTagKey("wheelchair")){
             doc["wheelchair"] = data.tagValue("wheelchair");
         } else {

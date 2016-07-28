@@ -70,13 +70,6 @@ void OsmNode::create(GeoDataDocument *document) const
             default:                            placemark->setZoomLevel(10); break;
             }
         }
-    } else if (category == GeoDataFeature::NaturalPeak) {
-        placemark->setZoomLevel(11);
-        bool isInteger = false;
-        int const elevation = m_osmData.tagValue("ele").toInt(&isInteger);
-        if (isInteger) {
-            placemark->setName(QString("%1 (%2 m)").arg(placemark->name()).arg(elevation));
-        }
     }
 
     OsmObjectManager::registerId(m_osmData.id());
