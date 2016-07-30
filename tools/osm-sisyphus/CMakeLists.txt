@@ -16,7 +16,6 @@ upload.cpp
 region.cpp
 main.cpp
 )
-add_definitions( -DMAKE_MARBLE_LIB )
 add_executable( ${TARGET} ${${TARGET}_SRC} )
 
 target_link_libraries( ${TARGET} Qt5::Sql marblewidget-qt5 )

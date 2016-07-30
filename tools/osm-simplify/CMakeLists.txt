@@ -3,6 +3,10 @@ cmake_minimum_required(VERSION 2.8.12)
 SET (TARGET osm-simplify)
 PROJECT (${TARGET})
 
+if (POLICY CMP0063)
+    cmake_policy(SET CMP0063 NEW)
+endif()
+
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Widgets REQUIRED)
 find_package(Qt5Gui REQUIRED)
@@ -32,7 +36,6 @@ BaseFilter.cpp
 WayChunk.cpp
 )
 
-add_definitions( -DMAKE_MARBLE_LIB )
 add_executable( ${TARGET} ${${TARGET}_SRC} )
 
 target_link_libraries( ${TARGET} Qt5::Core marblewidget-qt5)

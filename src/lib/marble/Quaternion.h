@@ -21,6 +21,7 @@
 
 #include "marble_export.h"
 #include <cmath>
+#include <QtGlobal>
 
 namespace Marble
 {

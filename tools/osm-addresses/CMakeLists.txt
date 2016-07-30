@@ -25,7 +25,6 @@ PROTOBUF_GENERATE_CPP(PROTO_SRCS PROTO_HDRS
 pbf/fileformat.proto
 pbf/osmformat.proto
 )
-add_definitions( -DMAKE_MARBLE_LIB )
 add_executable( ${TARGET} ${${TARGET}_SRC} ${PROTO_SRCS} ${PROTO_HDRS} )
 
 target_link_libraries( ${TARGET} ${PROTOBUF_LIBRARIES} ${ZLIB_LIBRARIES} )

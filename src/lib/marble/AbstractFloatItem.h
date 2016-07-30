@@ -85,9 +85,9 @@ class MARBLE_EXPORT AbstractFloatItem : public RenderPlugin, public FrameGraphic
      * @deprecated Do not override this method since it won't be called any longer.
      *             Override one of FrameGraphicsItem's paint methods instead.
      */
-    MARBLE_DEPRECATED( bool render( GeoPainter *painter, ViewportParams *viewport,
+    MARBLE_DEPRECATED bool render( GeoPainter *painter, ViewportParams *viewport,
                  const QString& renderPos = QLatin1String("FLOAT_ITEM"),
-                 GeoSceneLayer * layer = 0 ) override );
+                 GeoSceneLayer * layer = 0 ) override;
 
     QString renderPolicy() const override;
 
@@ -96,7 +96,7 @@ class MARBLE_EXPORT AbstractFloatItem : public RenderPlugin, public FrameGraphic
      * @deprecated The return value of method is ignored. The float item's rendering position
      *             will always be "FLOAT_ITEM".
      */
-    MARBLE_DEPRECATED( QStringList renderPosition() const override );
+    MARBLE_DEPRECATED QStringList renderPosition() const override;
 
     /**
      * @brief Set visibility of the float item

@@ -32,10 +32,8 @@ add_library( marbledeclarative SHARED
     Settings.cpp
 )
 
-# needed for marble_declarative_export.h
-set_target_properties(marbledeclarative PROPERTIES
-  DEFINE_SYMBOL MAKE_MARBLE_DECLARATIVE_LIB
-)
+generate_export_header(marbledeclarative BASE_NAME marble_declarative)
+target_include_directories(marbledeclarative PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>)
 
 marble_add_project_resources(qmldir)
 

@@ -14,13 +14,15 @@
 #include <GeoDataStyle.h>
 #include <GeoDataFeature.h>
 
+#include "marble_export.h"
+
 class QFont;
 class QColor;
 
 namespace Marble {
 class OsmPlacemarkData;
 
-class StyleParameters
+class MARBLE_EXPORT StyleParameters
 {
 public:
     explicit StyleParameters(const GeoDataFeature* feature=nullptr, int tileLevel=0);
@@ -29,7 +31,7 @@ public:
     int tileLevel;
 };
 
-class StyleBuilder
+class MARBLE_EXPORT StyleBuilder
 {
 public:
     StyleBuilder();

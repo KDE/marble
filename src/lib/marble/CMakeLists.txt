@@ -361,6 +361,9 @@ qt_wrap_ui(marblewidget_SRCS ${marblewidget_UI})
 
 ADD_LIBRARY(${MARBLEWIDGET} SHARED ${marblewidget_SRCS} ${SOURCES_UI_HDRS})
 
+generate_export_header(${MARBLEWIDGET} BASE_NAME marble)
+
+
 # TODO: use PUBLIC/PRIVATE everywhere instead of LINK_PUBLIC/LINK_PRIVATE
 # once SailfishOS has cmake >= 2.8.12
 
@@ -427,11 +430,6 @@ endif()
 set_target_properties(${MARBLEWIDGET}  PROPERTIES
                                     COMPILE_FLAGS "-DKML_LAZY_IMP")
 
-# needed for marble_export.h
-set_target_properties(${MARBLEWIDGET} PROPERTIES
-  DEFINE_SYMBOL MAKE_MARBLE_LIB
-)
-
 # choose the correct target install library path
 if(WIN32)
   install(TARGETS ${MARBLEWIDGET} RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX} ARCHIVE DESTINATION lib)
@@ -457,6 +455,7 @@ else()
 endif()
 
 install( FILES
+    ${CMAKE_CURRENT_BINARY_DIR}/marble_export.h
     ${graphicsview_HDRS}
     ${marble_WebKit}
     AutoNavigation.h
@@ -578,7 +577,6 @@ install( FILES
     LayerInterface.h
     RenderState.h
     PluginAboutDialog.h
-    marble_export.h
     Planet.h
     PlanetFactory.h
     EditPlacemarkDialog.h

@@ -12,24 +12,10 @@
 #ifndef GEODATA_EXPORT_H
 #define GEODATA_EXPORT_H
 
-#include <QtGlobal>
+#include "marble_export.h"
 
-// please make sure to change MAKE_MARBLE_LIB to MAKE_GEODATA_LIB if geodata is an independent library
-#ifndef GEODATA_EXPORT
-# ifdef MAKE_MARBLE_LIB
-#  define GEODATA_EXPORT Q_DECL_EXPORT
-# else
-#  define GEODATA_EXPORT Q_DECL_IMPORT
-# endif
-#endif
-
-#ifdef __GNUC__
-#define GEODATA_DEPRECATED(func) func __attribute__ ((deprecated))
-#elif defined(_MSC_VER)
-#define GEODATA_DEPRECATED(func) __declspec(deprecated) func
-#else
-#pragma message("WARNING: You need to implement GEODATA_DEPRECATED for this compiler in geodata_export.h")
-#define GEODATA_DEPRECATED(func) func
-#endif
+// please make sure to create a real export-header if geodata becomes an independent library
+#define GEODATA_EXPORT MARBLE_EXPORT
+#define GEODATA_DEPRECATED MARBLE_DEPRECATED
 
 #endif // GEODATA_EXPORT_H

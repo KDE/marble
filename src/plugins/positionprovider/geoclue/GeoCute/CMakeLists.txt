@@ -16,5 +16,3 @@ set(GeoCute_SRCS
 )
 
 add_library(GeoCute SHARED ${GeoCute_SRCS})
-
-set_target_properties(GeoCute PROPERTIES DEFINE_SYMBOL MAKE_GEOCUTE_LIB)

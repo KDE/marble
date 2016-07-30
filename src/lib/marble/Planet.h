@@ -34,7 +34,10 @@ public:
      */
     Planet();
 
-    MARBLE_DEPRECATED( explicit Planet( const QString& id ) ); // please use PlanetFactory::construct(id) instead
+    /**
+     * @deprecated Please use PlanetFactory::construct(id) instead.
+     */
+    MARBLE_DEPRECATED explicit Planet(const QString& id);
 
     ///Copy Constructor
     Planet( const Planet& other );
@@ -97,8 +100,14 @@ public:
 
     Planet& operator=( const Planet& rhs );
 
-    MARBLE_DEPRECATED( static QString name( const QString& id ) ); // please use PlanetFactory::localizedName(id) instead
-    MARBLE_DEPRECATED( static QStringList planetList() );  // please use PlanetFactory::planetList() instead
+    /**
+     * @deprecated Please use PlanetFactory::localizedName(id) instead.
+     */
+    MARBLE_DEPRECATED static QString name(const QString& id);
+    /**
+     * @deprecated Please use PlanetFactory::planetList() instead.
+     */
+    MARBLE_DEPRECATED static QStringList planetList();
 
     bool hasAtmosphere() const;
     void setHasAtmosphere( bool enabled );

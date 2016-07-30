@@ -13,7 +13,6 @@ set( routing-instructions_SRC
         main.cpp
 )
 
-add_definitions( -DMAKE_MARBLE_LIB )
 add_executable( routing-instructions ${routing-instructions_SRC} )
 
 target_link_libraries( routing-instructions Qt5::Core )

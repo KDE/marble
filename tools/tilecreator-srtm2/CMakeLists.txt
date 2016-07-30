@@ -7,7 +7,7 @@ include_directories(
 )
 
 set( ${TARGET}_SRC main.cpp tccore.cpp )
-add_definitions( -DMAKE_MARBLE_LIB -DTILECREATOR )
+add_definitions(-DTILECREATOR)
 add_executable( ${TARGET} ${${TARGET}_SRC} )
 
 target_link_libraries( ${TARGET} marblewidget-qt5 )
