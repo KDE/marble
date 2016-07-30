@@ -320,12 +320,6 @@ qreal ViewportParams::centerLatitude() const
     return d->m_centerLatitude;
 }
 
-void ViewportParams::centerCoordinates( qreal &centerLon, qreal &centerLat ) const
-{
-    centerLon = d->m_centerLongitude;
-    centerLat = d->m_centerLatitude;
-}
-
 const GeoDataLatLonAltBox& ViewportParams::viewLatLonAltBox() const
 {
     if (d->m_dirtyBox) {

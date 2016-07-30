@@ -374,15 +374,6 @@ void AbstractDataPluginModel::parseFile( const QByteArray& file )
     Q_UNUSED( file );
 }
 
-void AbstractDataPluginModel::downloadItemData( const QUrl& url,
-                                                const QString& type,
-                                                AbstractDataPluginItem *item )
-{
-    downloadItem( url, type, item );
-    connect( item, SIGNAL(destroyed(QObject*)), this, SLOT(removeItem(QObject*)) );
-    addItemToList( item );
-}
-
 void AbstractDataPluginModel::downloadItem( const QUrl& url,
                                                 const QString& type,
                                                 AbstractDataPluginItem *item )
