@@ -141,8 +141,6 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     */
     void setCoordinate( const GeoDataCoordinates &coordinate );
 
-    GEODATA_DEPRECATED( void setCoordinate( const GeoDataPoint &point ) );
-
     /**
      * Sets the current Geometry of this Placemark. @see geometry() and the class 
      * overview for description of the geometry concept. The geometry can be set 

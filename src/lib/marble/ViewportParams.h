@@ -110,7 +110,6 @@ class MARBLE_EXPORT ViewportParams
 
     qreal centerLongitude() const;
     qreal centerLatitude() const;
-    MARBLE_DEPRECATED( void centerCoordinates( qreal &centerLon, qreal &centerLat ) const );
 
     /**
      * @brief Get the screen coordinates corresponding to geographical coordinates in the map.
