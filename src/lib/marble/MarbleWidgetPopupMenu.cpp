@@ -201,47 +201,49 @@ void MarbleWidgetPopupMenu::Private::setupDialogOsm( PopupLayer *popup, const Ge
         doc["name"] = "";
     }
 
-    if (data.containsTagKey("natural")){
+    if (data.containsTagKey("natural") && !data.tagValue("natural").isEmpty()){
         QString natural = data.tagValue("natural");
-        if (!natural.isEmpty()){
-            natural[0] = natural[0].toUpper();
-            if (natural == "Peak" && data.containsTagKey("ele")){
-                doc["details"] = natural + " - " + data.tagValue("ele") + " m";
-            } else {
-                doc["details"] = natural;
-            }
+        natural[0] = natural[0].toUpper();
+        if (natural == "Peak" && data.containsTagKey("ele") && !data.tagValue("ele").isEmpty()){
+            doc["details"] = natural + " - " + data.tagValue("ele") + " m";
+        } else {
+            doc["details"] = natural;
         }
     } else {
         doc["detailsVisibility"] = "none";
     }
 
-    if (data.containsTagKey("shop")){
+    if (data.containsTagKey("shop") && !data.tagValue("shop").isEmpty()){
         QString shop = data.tagValue("shop");
-        if (!shop.isEmpty()){
-            shop[0] = shop[0].toUpper();
+        shop[0] = shop[0].toUpper();
+        if (shop == "Clothes" && data.containsTagKey("clothes") && !data.tagValue("clothes").isEmpty()){
+            QString clothes = data.tagValue("clothes");
+            clothes[0] = clothes[0].toUpper();
+            doc["amenity"] = "Shop - " + shop + " (" + clothes + ")";
+        } else if (shop == "Clothes" && data.containsTagKey("designation") && !data.tagValue("designation").isEmpty()){
+            QString designation = data.tagValue("designation");
+            designation[0] = designation[0].toUpper();
+            doc["amenity"] = "Shop - " + shop + " (" + designation + ")";
+        } else {
             doc["amenity"] = "Shop - " + shop;
         }
-    } else if (data.containsTagKey("amenity")){
+    } else if (data.containsTagKey("amenity") && !data.tagValue("amenity").isEmpty()){
         QString amenity = data.tagValue("amenity");
-        if (!amenity.isEmpty()){
-            amenity[0] = amenity[0].toUpper();
-            doc["amenity"] = amenity;
-        }
+        amenity[0] = amenity[0].toUpper();
+        doc["amenity"] = amenity;
     } else {
         doc["amenityVisibility"] = "none";
     }
 
-    if (data.containsTagKey("cuisine")){
+    if (data.containsTagKey("cuisine") && !data.tagValue("cuisine").isEmpty()){
         QString cuisine = data.tagValue("cuisine");
-        if (!cuisine.isEmpty()){
-            cuisine[0] = cuisine[0].toUpper();
-            doc["cuisine"] = cuisine;
-        }
+        cuisine[0] = cuisine[0].toUpper();
+        doc["cuisine"] = cuisine;
     } else {
         doc["cuisineVisibility"] = "none";
     }
 
-    if (data.containsTagKey("opening_hours")){
+    if (data.containsTagKey("opening_hours") && !data.tagValue("opening_hours").isEmpty()){
         doc["openinghours"] = data.tagValue("opening_hours");
     } else {
         doc["openinghoursVisibility"] = "none";
@@ -249,7 +251,7 @@ void MarbleWidgetPopupMenu::Private::setupDialogOsm( PopupLayer *popup, const Ge
 
     bool hasAddressData = false;
     foreach(const QString &tag, QStringList() << "addr:street" << "addr:housenumber" << "addr:postcode" << "addr:city") {
-        if (data.containsTagKey(tag)){
+        if (data.containsTagKey(tag) && !data.tagValue(tag).isEmpty()){
             hasAddressData = true;
             break;
         }
@@ -257,13 +259,13 @@ void MarbleWidgetPopupMenu::Private::setupDialogOsm( PopupLayer *popup, const Ge
 
     bool hasWebsiteData = false;
     foreach(const QString &tag, QStringList() << "website" << "contact:website" << "facebook" << "contact:facebook" << "url") {
-        if (data.containsTagKey(tag)){
+        if (data.containsTagKey(tag) && !data.tagValue(tag).isEmpty()){
             hasWebsiteData = true;
             break;
         }
     }
 
-    bool hasPhoneData = data.containsTagKey("phone");
+    bool hasPhoneData = data.containsTagKey("phone") && !data.tagValue("phone").isEmpty();
 
     bool hasContactsData = hasAddressData || hasPhoneData || hasWebsiteData;
 
@@ -288,7 +290,7 @@ void MarbleWidgetPopupMenu::Private::setupDialogOsm( PopupLayer *popup, const Ge
 
         if (hasWebsiteData){
             foreach(const QString tag, QStringList() << "website" << "contact:website" << "facebook" << "contact:facebook" << "url") {
-                if (data.containsTagKey(tag)){
+                if (data.containsTagKey(tag) && !data.tagValue(tag).isEmpty()){
                     doc["website"] = data.tagValue(tag);
                     break;
                 }
@@ -300,22 +302,26 @@ void MarbleWidgetPopupMenu::Private::setupDialogOsm( PopupLayer *popup, const Ge
         doc["contactVisibility"] = "none";
     }
 
-    bool hasFacilitiesData = data.containsTagKey("wheelchair") || data.containsTagKey("internet_access") || data.containsTagKey("smoking");
+    bool hasWheelchair = data.containsTagKey("wheelchair") && !data.tagValue("wheelchair").isEmpty();
+    bool hasInternet = data.containsTagKey("internet_access") && !data.tagValue("internet_access").isEmpty();
+    bool hasSmoking = data.containsTagKey("smoking") && !data.tagValue("smoking").isEmpty();
+
+    bool hasFacilitiesData = hasWheelchair || hasInternet || hasSmoking;
 
     if (hasFacilitiesData){
-        if (data.containsTagKey("wheelchair")){
+        if (hasWheelchair){
             doc["wheelchair"] = data.tagValue("wheelchair");
         } else {
             doc["wheelchairVisibility"] = "none";
         }
 
-        if (data.containsTagKey("internet_access")){
+        if (hasInternet){
             doc["internetaccess"] = data.tagValue("internet_access");
         } else {
             doc["internetVisibility"] = "none";
         }
 
-        if (data.containsTagKey("smoking")){
+        if (hasSmoking){
             doc["smoking"] = data.tagValue("smoking");
         } else {
             doc["smokingVisibility"] = "none";
