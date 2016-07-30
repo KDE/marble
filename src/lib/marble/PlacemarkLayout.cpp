@@ -133,6 +133,7 @@ QSet<GeoDataFeature::GeoDataVisualCategory> acceptedVisualCategories()
         << GeoDataFeature::TouristZoo
         << GeoDataFeature::TransportAerodrome
         << GeoDataFeature::TransportAirportTerminal
+        << GeoDataFeature::TransportAirportGate
         << GeoDataFeature::TransportBusStation
         << GeoDataFeature::TransportBusStop
         << GeoDataFeature::TransportCarShare

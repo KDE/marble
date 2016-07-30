@@ -49,6 +49,9 @@ void OsmNode::create(GeoDataDocument *document) const
     } else {
         placemark->setName(m_osmData.tagValue("name"));
     }
+    if (placemark->name().isEmpty()) {
+        placemark->setName(m_osmData.tagValue("ref"));
+    }
     placemark->setVisualCategory(category);
     placemark->setStyle( GeoDataStyle::Ptr() );
 

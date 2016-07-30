@@ -62,6 +62,7 @@ public:
         TouristZoo,
         TransportAirport,
         TransportAirportTerminal,
+        TransportAirportGate,
         TransportBusStation,
         TransportBusStop,
         TransportCarShare,

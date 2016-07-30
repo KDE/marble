@@ -606,6 +606,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataFeature::TransportAerodrome]       = StyleBuilder::Private::createOsmPOIStyle( osmFont, "airtransport/aerodrome", airTransportColor );
     m_defaultStyle[GeoDataFeature::TransportHelipad]         = StyleBuilder::Private::createOsmPOIStyle( osmFont, "airtransport/helipad", airTransportColor );
     m_defaultStyle[GeoDataFeature::TransportAirportTerminal] = StyleBuilder::Private::createOsmPOIStyle( osmFont, QString(), airTransportColor );
+    m_defaultStyle[GeoDataFeature::TransportAirportGate]     = StyleBuilder::Private::createOsmPOIStyle( osmFont, QString(), airTransportColor );
     m_defaultStyle[GeoDataFeature::TransportBusStation]      = StyleBuilder::Private::createOsmPOIStyle( osmFont, "transportation/bus_station.16", transportationColor );
     m_defaultStyle[GeoDataFeature::TransportBusStop]         = StyleBuilder::Private::createOsmPOIStyle( osmFont, "transportation/bus_stop.12", transportationColor );
     m_defaultStyle[GeoDataFeature::TransportCarShare]        = StyleBuilder::Private::createOsmPOIStyle( osmFont, "transportation/car_share.16", transportationColor );
@@ -1412,6 +1413,7 @@ QString StyleBuilder::visualCategoryName(GeoDataFeature::GeoDataVisualCategory c
         visualCategoryNames[GeoDataFeature::TransportAerodrome] = "TransportAerodrome";
         visualCategoryNames[GeoDataFeature::TransportHelipad] = "TransportHelipad";
         visualCategoryNames[GeoDataFeature::TransportAirportTerminal] = "TransportAirportTerminal";
+        visualCategoryNames[GeoDataFeature::TransportAirportGate] = "TransportAirportGate";
         visualCategoryNames[GeoDataFeature::TransportBusStation] = "TransportBusStation";
         visualCategoryNames[GeoDataFeature::TransportBusStop] = "TransportBusStop";
         visualCategoryNames[GeoDataFeature::TransportCarShare] = "TransportCarShare";
