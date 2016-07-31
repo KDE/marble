@@ -107,7 +107,7 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
      */
     void insert( int index, GeoDataFeature *feature );
 
-    GEODATA_DEPRECATED( void insert( GeoDataFeature *other, int index ) );
+    GEODATA_DEPRECATED void insert(GeoDataFeature *other, int index);
 
     /**
     * @brief add an element

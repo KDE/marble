@@ -7,7 +7,6 @@ include_directories(
 )
 
 set( ${TARGET}_SRC kml2kml.cpp )
-add_definitions( -DMAKE_MARBLE_LIB )
 add_executable( ${TARGET} ${${TARGET}_SRC} )
 
 target_link_libraries( ${TARGET} marblewidget-qt5 )

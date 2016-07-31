@@ -39,9 +39,6 @@ if(WIN32)
 endif(WIN32)
 
 
-SET_TARGET_PROPERTIES(astro PROPERTIES
-    DEFINE_SYMBOL astro_EXPORTS            # needed for astrolib_export.h
-  )
 if(NOT CMAKE_SYSTEM_NAME STREQUAL Android)
   SET_TARGET_PROPERTIES(astro PROPERTIES
     VERSION ${GENERIC_LIB_VERSION}

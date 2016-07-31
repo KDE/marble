@@ -11,6 +11,8 @@
 #ifndef MARBLE_DBUSINTERFACE_H
 #define MARBLE_DBUSINTERFACE_H
 
+#include "marble_export.h"
+
 namespace Marble
 {
     class MarbleWidget;
@@ -23,7 +25,7 @@ namespace Marble
 
 namespace Marble {
 
-class MarbleDBusInterface : public QDBusAbstractAdaptor
+class MARBLE_EXPORT MarbleDBusInterface : public QDBusAbstractAdaptor
 {
     Q_OBJECT
     Q_CLASSINFO("D-Bus Interface", "org.kde.marble")
