@@ -46,16 +46,7 @@ SatellitesPlugin::SatellitesPlugin( const MarbleModel *marbleModel )
              m_configDialog, SLOT(setDialogActive(bool)) );
 
     setVisible( false );
-    // TODO: due to the async fetching of data sources there is some race condition
-    // on multiple calls of this method, this needs some closer look
-    // The plugin used to call here
-    // setSettings( QHash<QString, QVariant>() );
-    // to set some defaults. But this resulted in idList being garbaged with more and more
-    // duplicated entries of MSC at each app start, as the default setting would trigger
-    // some addition of ids later on, when in the meantime the setSettings() call from
-    // the plugin user on startup would set idList with the ids stored from last run.
-    // For now we just rely on the plugin user calling setSettings and have the default
-    // set then if needed.
+    setSettings(QHash<QString, QVariant>());
 
     m_showOrbitAction = new QAction( tr( "Display orbit" ), this );
     m_showOrbitAction->setCheckable( true );
@@ -283,6 +274,10 @@ void SatellitesPlugin::setSettings( const QHash<QString, QVariant> &settings )
 {
     RenderPlugin::setSettings( settings );
 
+    // reset
+    m_newDataSources.clear();
+    // TODO: cancel also all on-going downloads
+
     // add default data sources
     if( !settings.contains( "dataSources" ) ) {
         QStringList dsList;
@@ -346,6 +341,7 @@ void SatellitesPlugin::updateSettings()
         return;
     }
 
+    // TODO: cancel also all on-going downloads
     m_satModel->clear();
     
     m_configModel->clear();
