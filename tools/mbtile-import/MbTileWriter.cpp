@@ -16,13 +16,15 @@
 #include <QSqlError>
 
 #include <iostream>
+#include <iomanip>
 
 namespace Marble
 {
 
 MbTileWriter::MbTileWriter(const QString &filename, const QString &extension) :
     m_overwriteTiles(true),
-    m_reportProgress(true)
+    m_reportProgress(true),
+    m_tileCounter(0)
 {
     bool const exists = QFileInfo(filename).exists();
 
@@ -69,9 +71,14 @@ void MbTileWriter::setReportProgress(bool report)
 
 void MbTileWriter::addTile(const QFileInfo &file, qint32 x, qint32 y, qint32 z)
 {
+    ++m_tileCounter;
+
+    if (m_reportProgress) {
+        std::cout << "Tile " << std::right << std::setw(10) << m_tileCounter << ": ";
+    }
     if (!m_overwriteTiles && haveTile(x, y, z)) {
         if (m_reportProgress) {
-            std::cout << "Skipping existing " << z << '/' << x << '/' << y << '\r';
+            std::cout << " Skipping existing " << z << '/' << x << '/' << y << '\r';
             std::cout.flush();
         }
         return;

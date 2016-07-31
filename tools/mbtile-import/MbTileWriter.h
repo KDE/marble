@@ -36,6 +36,7 @@ private:
 
     bool m_overwriteTiles;
     bool m_reportProgress;
+    int m_tileCounter;
 };
 
 }
