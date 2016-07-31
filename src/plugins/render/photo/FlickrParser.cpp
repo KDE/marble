@@ -12,7 +12,6 @@
 #include "FlickrParser.h"
 
 // Marble
-#include "AbstractDataPluginItem.h"
 #include "PhotoPluginItem.h"
 
 // Qt

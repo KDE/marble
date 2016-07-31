@@ -51,7 +51,6 @@
 #include "MarbleLocale.h"
 #include "DownloadRegionDialog.h"
 #include "ViewportParams.h"
-#include "AbstractDataPlugin.h"
 #include "AbstractFloatItem.h"
 #include "MarbleModel.h"
 #include "MarbleClock.h"

@@ -13,8 +13,6 @@
 
 #include "AbstractDataPlugin.h"
 #include "DialogConfigurationInterface.h"
-#include "RenderPlugin.h"
-#include "RenderPluginInterface.h"
 
 #include <QHash>
 

@@ -18,7 +18,6 @@
 #include "MarbleDebug.h"
 #include "AbstractDataPlugin.h"
 #include "AbstractDataPluginItem.h"
-#include "AbstractFloatItem.h"
 #include "GeoPainter.h"
 #include "RenderPlugin.h"
 #include "LayerInterface.h"

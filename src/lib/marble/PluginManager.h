@@ -22,7 +22,6 @@ namespace Marble
 
 class RenderPlugin;
 class PositionProviderPlugin;
-class AbstractFloatItem;
 class PluginManagerPrivate;
 class SearchRunnerPlugin;
 class ReverseGeocodingRunnerPlugin;

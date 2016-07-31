@@ -23,7 +23,6 @@
 
 // Marble
 #include "MarbleDebug.h"
-#include "AbstractProjection.h"
 #include "EditGroundOverlayDialog.h"
 #include "EditPlacemarkDialog.h"
 #include "EditPolygonDialog.h"

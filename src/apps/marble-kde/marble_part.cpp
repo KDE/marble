@@ -48,12 +48,10 @@
 
 // Marble library classes
 #include "AbstractFloatItem.h"
-#include "AbstractDataPlugin.h"
 #include "EditBookmarkDialog.h"
 #include "BookmarkManager.h"
 #include "BookmarkManagerDialog.h"
 #include "CurrentLocationWidget.h"
-#include "DialogConfigurationInterface.h"
 #include "DownloadRegionDialog.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataFolder.h"

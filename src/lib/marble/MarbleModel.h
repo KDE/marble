@@ -43,8 +43,6 @@ class QDateTime;
 namespace Marble
 {
 
-class AbstractDataPlugin;
-class AbstractDataPluginItem;
 class GeoDataPlacemark;
 class GeoPainter;
 class MeasureTool;

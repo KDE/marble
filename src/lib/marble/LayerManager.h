@@ -30,7 +30,6 @@ class AbstractDataPluginItem;
 class GeoPainter;
 class ViewportParams;
 class RenderPlugin;
-class AbstractDataPlugin;
 class LayerInterface;
 
 /**

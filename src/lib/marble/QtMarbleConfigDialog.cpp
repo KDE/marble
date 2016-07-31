@@ -31,7 +31,6 @@
 
 // Marble
 #include "MarbleGlobal.h"
-#include "DialogConfigurationInterface.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "MarblePluginSettingsWidget.h"

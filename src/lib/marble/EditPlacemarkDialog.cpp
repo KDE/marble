@@ -25,7 +25,6 @@
 #include "GeoDataPlacemark.h"
 #include "MarbleWidget.h"
 #include "MarbleLocale.h"
-#include "AddLinkDialog.h"
 #include "FormattedTextWidget.h"
 #include "osm/OsmTagEditorWidget.h"
 #include "osm/OsmPlacemarkData.h"

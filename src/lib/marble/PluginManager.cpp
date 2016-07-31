@@ -23,7 +23,6 @@
 #include "MarbleDebug.h"
 #include "RenderPlugin.h"
 #include "PositionProviderPlugin.h"
-#include "AbstractFloatItem.h"
 #include "ParseRunnerPlugin.h"
 #include "ReverseGeocodingRunnerPlugin.h"
 #include "RoutingRunnerPlugin.h"

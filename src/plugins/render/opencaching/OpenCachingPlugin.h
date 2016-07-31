@@ -12,8 +12,6 @@
 #define OPENCACHINGPLUGIN_H
 
 #include "AbstractDataPlugin.h"
-#include "RenderPlugin.h"
-#include "RenderPluginInterface.h"
 
 #include <QHash>
 

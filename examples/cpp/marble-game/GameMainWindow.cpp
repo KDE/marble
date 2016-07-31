@@ -39,7 +39,6 @@
 #include <GeoDataTreeModel.h>
 #include <RenderPlugin.h>
 #include <MarblePlacemarkModel.h>
-#include <AbstractFloatItem.h>
 
 #include <GeoDataDocument.h>
 #include <GeoDataPlacemark.h>

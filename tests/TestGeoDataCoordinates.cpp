@@ -11,7 +11,6 @@
 
 #include "MarbleGlobal.h"
 #include "MarbleWidget.h"
-#include "AbstractFloatItem.h"
 #include "GeoDataCoordinates.h"
 #include "TestUtils.h"
 

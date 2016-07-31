@@ -12,8 +12,6 @@
 #define OPENCACHINGCOMPLUGIN_H
 
 #include "AbstractDataPlugin.h"
-#include "RenderPlugin.h"
-#include "RenderPluginInterface.h"
 
 namespace Ui
 {

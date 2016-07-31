@@ -16,7 +16,7 @@
 #include <QQuickPaintedItem>
 #include "GeoDataPlacemark.h"
 #include "MarbleGlobal.h"
-#include "PositionProviderPlugin.h"
+#include "PositionProviderPluginInterface.h"
 #include "MarbleMap.h"
 #include "Placemark.h"
 
