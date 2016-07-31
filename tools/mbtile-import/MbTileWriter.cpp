@@ -80,7 +80,7 @@ void MbTileWriter::addTile(const QFileInfo &file, qint32 x, qint32 y, qint32 z)
     }
 
     ++m_tileCounter;
-    if (m_reportProgress) {
+    if (m_reportProgress && m_tileCounter % 500 == 0) {
         std::cout << "Tile " << std::right << std::setw(10) << m_tileCounter << ": ";
         std::cout << "Adding " << z << '/' << x << '/' << y << '\r';
         std::cout.flush();
