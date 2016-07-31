@@ -71,11 +71,6 @@ void MbTileWriter::setReportProgress(bool report)
 
 void MbTileWriter::addTile(const QFileInfo &file, qint32 x, qint32 y, qint32 z)
 {
-    ++m_tileCounter;
-
-    if (m_reportProgress) {
-        std::cout << "Tile " << std::right << std::setw(10) << m_tileCounter << ": ";
-    }
     if (!m_overwriteTiles && haveTile(x, y, z)) {
         if (m_reportProgress) {
             std::cout << " Skipping existing " << z << '/' << x << '/' << y << '\r';
@@ -84,9 +79,16 @@ void MbTileWriter::addTile(const QFileInfo &file, qint32 x, qint32 y, qint32 z)
         return;
     }
 
+    ++m_tileCounter;
     if (m_reportProgress) {
+        std::cout << "Tile " << std::right << std::setw(10) << m_tileCounter << ": ";
         std::cout << "Adding " << z << '/' << x << '/' << y << '\r';
         std::cout.flush();
+    }
+
+    if (m_tileCounter % 10000 == 0) {
+        execQuery("END TRANSACTION");
+        execQuery("BEGIN TRANSACTION");
     }
 
     QFile tileContent(file.absoluteFilePath());
