@@ -296,11 +296,7 @@ void KDescendantsProxyModel::setSourceModel(QAbstractItemModel *_sourceModel)
 
     resetInternalData();
     if (_sourceModel && _sourceModel->hasChildren()) {
-        Q_ASSERT(_sourceModel->rowCount() > 0);
-        d->m_pendingParents.append(QModelIndex());
-        d->m_relayouting = true;
-        d->scheduleProcessPendingParents();
-        d->m_relayouting = false;
+        d->synchronousMappingRefresh();
     }
 
     endResetModel();
