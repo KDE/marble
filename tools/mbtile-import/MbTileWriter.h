@@ -25,6 +25,7 @@ public:
 
     void setOverwriteTiles(bool overwrite);
     void setReportProgress(bool report);
+    void setCommitInterval(int interval);
 
     void addTile(const QFileInfo &file, qint32 x, qint32 y, qint32 z);
 
@@ -37,6 +38,7 @@ private:
     bool m_overwriteTiles;
     bool m_reportProgress;
     int m_tileCounter;
+    int m_commitInterval;
 };
 
 }

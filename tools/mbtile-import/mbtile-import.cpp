@@ -74,6 +74,7 @@ int main(int argc, char** argv)
                           {{"o", "overwrite"}, "Overwrite existing tiles in the database"},
                           {{"q", "quiet"}, "No progress report to stdout"},
                           {{"t", "tilelevels"}, "Restrict tile levels to <tilelevels>", "tilelevels", "0-20"},
+                          {{"i", "interval"}, "Commit each <interval> tiles (0: single transaction)", "interval", "10000"},
                       });
 
     if (!parser.parse(QCoreApplication::arguments())) {
@@ -120,6 +121,7 @@ int main(int argc, char** argv)
     MbTileWriter tileWriter(mbTilesFile);
     tileWriter.setOverwriteTiles(parser.isSet("overwrite"));
     tileWriter.setReportProgress(!parser.isSet("quiet"));
+    tileWriter.setCommitInterval(parser.value("interval").toInt());
 
     importTiles(tileDirectory, tileWriter, tileLevelRange);
     return 0;

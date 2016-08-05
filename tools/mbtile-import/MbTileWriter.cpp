@@ -24,7 +24,8 @@ namespace Marble
 MbTileWriter::MbTileWriter(const QString &filename, const QString &extension) :
     m_overwriteTiles(true),
     m_reportProgress(true),
-    m_tileCounter(0)
+    m_tileCounter(0),
+    m_commitInterval(10000)
 {
     bool const exists = QFileInfo(filename).exists();
 
@@ -69,6 +70,11 @@ void MbTileWriter::setReportProgress(bool report)
     m_reportProgress = report;
 }
 
+void MbTileWriter::setCommitInterval(int interval)
+{
+    m_commitInterval = interval;
+}
+
 void MbTileWriter::addTile(const QFileInfo &file, qint32 x, qint32 y, qint32 z)
 {
     if (!m_overwriteTiles && haveTile(x, y, z)) {
@@ -86,7 +92,7 @@ void MbTileWriter::addTile(const QFileInfo &file, qint32 x, qint32 y, qint32 z)
         std::cout.flush();
     }
 
-    if (m_tileCounter % 10000 == 0) {
+    if (m_commitInterval > 0 && m_tileCounter % m_commitInterval == 0) {
         execQuery("END TRANSACTION");
         execQuery("BEGIN TRANSACTION");
     }
