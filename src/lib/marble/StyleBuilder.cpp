@@ -374,6 +374,10 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataFeature::PlaceTown]->labelStyle().setAlignment( GeoDataLabelStyle::Center );
     m_defaultStyle[GeoDataFeature::PlaceVillage] = GeoDataStyle::Ptr(new GeoDataStyle( QString(), QFont( defaultFamily, (int)(defaultSize * 2.0 ), 75, false ), QColor( "#505050" ) ));
     m_defaultStyle[GeoDataFeature::PlaceVillage]->labelStyle().setAlignment( GeoDataLabelStyle::Center );
+    for (int i=GeoDataFeature::PlaceCity; i<=GeoDataFeature::PlaceVillage; ++i) {
+        m_defaultStyle[GeoDataFeature::GeoDataVisualCategory(i)]->polyStyle().setFill(false);
+        m_defaultStyle[GeoDataFeature::GeoDataVisualCategory(i)]->polyStyle().setOutline(false);
+    }
 
     m_defaultStyle[GeoDataFeature::Mountain]
         = GeoDataStyle::Ptr(new GeoDataStyle( MarbleDirs::path( "bitmaps/mountain_1.png" ),
