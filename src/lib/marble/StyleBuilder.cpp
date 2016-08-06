@@ -636,6 +636,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataFeature::HighwayTrafficSignals]    = StyleBuilder::Private::createOsmPOIStyle( osmFont, "individual/traffic_light" );
 
     m_defaultStyle[GeoDataFeature::PowerTower]               = StyleBuilder::Private::createOsmPOIStyle( osmFont, "individual/power_tower", QColor( "#888888" ) );
+    m_defaultStyle[GeoDataFeature::PowerTower]->iconStyle().setScale(0.6);
 
     m_defaultStyle[GeoDataFeature::BarrierCityWall]          = StyleBuilder::Private::createStyle( 6.0, 3.0, "#787878", "transparent", true, false, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector< qreal >(), QFont(), "transparent" );
     m_defaultStyle[GeoDataFeature::BarrierGate]              = StyleBuilder::Private::createOsmPOIStyle( osmFont, "individual/gate" );
