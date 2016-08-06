@@ -8,7 +8,7 @@
 // Copyright 2016      David Kolozsvari <freedawson@gmail.com>
 //
 
-#include "GeoWriter.h"
+#include "GeoDataDocumentWriter.h"
 #include "MarbleModel.h"
 #include "ParsingRunnerManager.h"
 
@@ -228,14 +228,11 @@ int main(int argc, char *argv[])
             for(unsigned int y = 0; y < N; ++y) {
                 GeoDataDocument* tile = processor.cutToTiles(zoomLevel, x, y);
 
-                GeoWriter writer;
-                writer.setDocumentType("0.6");
-
-                QFile outputFile;
+                QString outputFile;
                 if(parser.isSet("output")) {
-                    outputFile.setFileName( QString("%1/%2/%3/%4.osm").arg(outputName).arg(zoomLevel).arg(x).arg(y) );
+                    outputFile = QString("%1/%2/%3/%4.osm").arg(outputName).arg(zoomLevel).arg(x).arg(y);
                 } else {
-                    outputFile.setFileName( QString("%1/%2/%3.osm").arg(zoomLevel).arg(x).arg(y) );
+                    outputFile = QString("%1/%2/%3.osm").arg(zoomLevel).arg(x).arg(y);
                 }
 
                 QDir dir;
@@ -260,8 +257,7 @@ int main(int argc, char *argv[])
                     }
                 }
 
-                outputFile.open( QIODevice::WriteOnly );
-                if ( !writer.write( &outputFile, tile ) ) {
+                if (!GeoDataDocumentWriter::write(outputFile, *tile)) {
                     qDebug() << "Could not write the file " << outputName;
                     return 4;
                 }
@@ -287,14 +283,11 @@ int main(int argc, char *argv[])
 
                 GeoDataDocument* tile = mergeDocuments(tile1, tile2);
 
-                GeoWriter writer;
-                writer.setDocumentType("0.6");
-
-                QFile outputFile;
+                QString outputFile;
                 if(parser.isSet("output")) {
-                    outputFile.setFileName( QString("%1/%2/%3/%4.osm").arg(outputName).arg(zoomLevel).arg(x).arg(y) );
+                    outputFile = QString("%1/%2/%3/%4.osm").arg(outputName).arg(zoomLevel).arg(x).arg(y);
                 } else {
-                    outputFile.setFileName( QString("%1/%2/%3.osm").arg(zoomLevel).arg(x).arg(y) );
+                    outputFile = QString("%1/%2/%3.osm").arg(zoomLevel).arg(x).arg(y);
                 }
 
                 QDir dir;
@@ -319,8 +312,7 @@ int main(int argc, char *argv[])
                     }
                 }
 
-                outputFile.open( QIODevice::WriteOnly );
-                if ( !writer.write( &outputFile, tile ) ) {
+                if (!GeoDataDocumentWriter::write(outputFile, *tile)) {
                     qDebug() << "Could not write the file " << outputName;
                     return 4;
                 }
@@ -343,14 +335,11 @@ int main(int argc, char *argv[])
             for(unsigned int y = 0; y < N; ++y) {
                 GeoDataDocument* tile = processor.cutToTiles(zoomLevel, x, y);
 
-                GeoWriter writer;
-                writer.setDocumentType("0.6");
-
-                QFile outputFile;
+                QString outputFile;
                 if(parser.isSet("output")) {
-                    outputFile.setFileName( QString("%1/%2/%3/%4.osm").arg(outputName).arg(zoomLevel).arg(x).arg(y) );
+                    outputFile = QString("%1/%2/%3/%4.osm").arg(outputName).arg(zoomLevel).arg(x).arg(y);
                 } else {
-                    outputFile.setFileName( QString("%1/%2/%3.osm").arg(zoomLevel).arg(x).arg(y) );
+                    outputFile = QString("%1/%2/%3.osm").arg(zoomLevel).arg(x).arg(y);
                 }
 
                 QDir dir;
@@ -375,8 +364,7 @@ int main(int argc, char *argv[])
                     }
                 }
 
-                outputFile.open( QIODevice::WriteOnly );
-                if ( !writer.write( &outputFile, tile ) ) {
+                if (!GeoDataDocumentWriter::write(outputFile, *tile)) {
                     qDebug() << "Could not write the file " << outputName;
                     return 4;
                 }
@@ -395,12 +383,7 @@ int main(int argc, char *argv[])
         else{
             NodeReducer reducer(map, zoomLevel);
             reducer.process();
-            QFile outputFile(outputName);
-            GeoWriter writer;
-            writer.setDocumentType("0.6");
-
-            outputFile.open( QIODevice::WriteOnly );
-            if ( !writer.write( &outputFile, map ) ) {
+            if (!GeoDataDocumentWriter::write(outputName, *map)) {
                 qDebug() << "Could not write the file " << outputName;
                 return 4;
             }
@@ -418,13 +401,8 @@ int main(int argc, char *argv[])
         concatenator.process();
 
         qDebug()<<"Concatenation done, writing results to the file";
-
-        QFile outputFile(outputName);
-        GeoWriter writer;
-        writer.setDocumentType("0.6");
         
-        outputFile.open( QIODevice::WriteOnly );
-        if ( !writer.write( &outputFile, map ) ) {
+        if (!GeoDataDocumentWriter::write(outputName, *map)) {
             qDebug() << "Could not write the file " << outputName;
             return 4;
         }else{

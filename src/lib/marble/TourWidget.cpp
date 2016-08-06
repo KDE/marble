@@ -27,7 +27,7 @@
 #include "GeoDataTourControl.h"
 #include "GeoDataSoundCue.h"
 #include "GeoDataAnimatedUpdate.h"
-#include "GeoWriter.h"
+#include "GeoDataDocumentWriter.h"
 #include "KmlElementDictionary.h"
 #include "MarbleModel.h"
 #include "MarblePlacemarkModel.h"
@@ -835,24 +835,17 @@ void TourWidgetPrivate::saveTourAs()
 
 bool TourWidgetPrivate::saveTourAs(const QString &filename)
 {
-    if ( !filename.isEmpty() )
-    {
-        QFile file( filename );
-        if ( file.open( QIODevice::WriteOnly ) ) {
-            GeoWriter writer;
-            writer.setDocumentType( kml::kmlTag_nameSpaceOgc22 );
-            if ( writer.write( &file, m_document ) ) {
-                file.close();
-                m_tourUi.m_actionSaveTour->setEnabled( false );
-                m_isChanged = false;
-                GeoDataDocument* document = m_document;
-                if ( !document->fileName().isNull() ) {
-                    m_widget->model()->removeGeoData( document->fileName() );
-                }
-                m_widget->model()->addGeoDataFile( filename );
-                m_document->setFileName( filename );
-                return true;
+    if ( !filename.isEmpty() ) {
+        if (GeoDataDocumentWriter::write(filename, *m_document)) {
+            m_tourUi.m_actionSaveTour->setEnabled( false );
+            m_isChanged = false;
+            GeoDataDocument* document = m_document;
+            if ( !document->fileName().isNull() ) {
+                m_widget->model()->removeGeoData( document->fileName() );
             }
+            m_widget->model()->addGeoDataFile( filename );
+            m_document->setFileName( filename );
+            return true;
         }
     }
     return false;

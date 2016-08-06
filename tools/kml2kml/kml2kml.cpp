@@ -14,7 +14,7 @@
 #include <MarbleWidget.h>
 #include <ParsingRunnerManager.h>
 #include <PluginManager.h>
-#include <GeoWriter.h>
+#include <GeoDataDocumentWriter.h>
 
 #include <QApplication>
 #include <QFile>
@@ -48,12 +48,5 @@ int main(int argc, char** argv)
         return 2;
     }
 
-
-    QFile output(outputFilename);
-    if (!output.open(QIODevice::WriteOnly)) {
-        qDebug() << "Unable to write to " << output.fileName();
-        return 3;
-    }
-
-    GeoWriter().write(&output, dynamic_cast<GeoDataFeature*>(document));
+    GeoDataDocumentWriter::write(outputFilename, *document);
 }

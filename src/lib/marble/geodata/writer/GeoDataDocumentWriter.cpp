@@ -42,7 +42,7 @@ bool GeoDataDocumentWriter::write(QIODevice *device, const GeoDataDocument &docu
     }
 }
 
-bool GeoDataDocumentWriter::write(QString &filename, const GeoDataDocument &document, const QString &documentIdentifier)
+bool GeoDataDocumentWriter::write(const QString &filename, const GeoDataDocument &document, const QString &documentIdentifier)
 {
     QFile file(filename);
     if (!file.open(QIODevice::WriteOnly)) {

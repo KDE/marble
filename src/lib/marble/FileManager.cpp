@@ -23,7 +23,7 @@
 #include "GeoDataDocument.h"
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataStyle.h"
-#include "GeoWriter.h"
+#include "GeoDataDocumentWriter.h"
 #include <KmlElementDictionary.h>
 
 
@@ -143,16 +143,9 @@ void FileManagerPrivate::closeFile( const QString& key )
 
 void FileManager::saveFile( const QString &fileName, const GeoDataDocument *document )
 {
-    GeoWriter writer;
-    writer.setDocumentType( kml::kmlTag_nameSpaceOgc22 );
-
-    QFile file( fileName );
-    if ( !file.open( QIODevice::WriteOnly | QIODevice::Truncate ) ) {
-        return;
+    if (document) {
+        GeoDataDocumentWriter::write(fileName, *document, kml::kmlTag_nameSpaceOgc22);
     }
-
-    writer.write( &file, document );
-    file.close();
 }
 
 void FileManager::closeFile( const GeoDataDocument *document )

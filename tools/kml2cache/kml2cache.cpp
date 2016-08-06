@@ -18,7 +18,6 @@
 #include <GeoDataFolder.h>
 #include <GeoDataPlacemark.h>
 #include <GeoDataExtendedData.h>
-#include <GeoWriter.h>
 
 #include <QApplication>
 #include <QDebug>

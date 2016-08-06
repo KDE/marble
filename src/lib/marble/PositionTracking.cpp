@@ -21,7 +21,7 @@
 #include "GeoDataTrack.h"
 #include "GeoDataTreeModel.h"
 #include "GeoDataTypes.h"
-#include "GeoWriter.h"
+#include "GeoDataDocumentWriter.h"
 #include "KmlElementDictionary.h"
 #include "FileManager.h"
 #include "MarbleMath.h"
@@ -259,10 +259,6 @@ bool PositionTracking::saveTrack( const QString& fileName )
         return false;
     }
 
-    GeoWriter writer;
-    //FIXME: a better way to do this?
-    writer.setDocumentType( kml::kmlTag_nameSpaceOgc22 );
-
     GeoDataDocument *document = new GeoDataDocument;
     QFileInfo fileInfo( fileName );
     QString name = fileInfo.baseName();
@@ -277,10 +273,7 @@ bool PositionTracking::saveTrack( const QString& fileName )
     track->setName( "Track " + name );
     document->append( track );
 
-    QFile file( fileName );
-    file.open( QIODevice::WriteOnly );
-    bool const result = writer.write( &file, document );
-    file.close();
+    bool const result = GeoDataDocumentWriter::write(fileName, *document);
     delete document;
     return result;
 }

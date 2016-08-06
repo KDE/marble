@@ -17,7 +17,7 @@
 #include "GeoDataFolder.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataTreeModel.h"
-#include "GeoWriter.h"
+#include "GeoDataDocumentWriter.h"
 #include "KmlElementDictionary.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
@@ -249,11 +249,7 @@ bool BookmarkManager::updateBookmarkFile()
     QString absoluteLocalFilePath = MarbleDirs::localPath() + '/' + d->m_bookmarkFileRelativePath ;
 
     if ( ! d->m_bookmarkFileRelativePath.isNull() ) {
-        GeoWriter writer;
-        writer.setDocumentType( kml::kmlTag_nameSpaceOgc22 );
-
         QFile file( absoluteLocalFilePath );
-
         if ( !file.exists() ) {
             // Extracting directory of file : for bookmarks it will be MarbleDirs::localPath()+/bookmarks/
             QFileInfo fileInfo( absoluteLocalFilePath );
@@ -264,9 +260,7 @@ bool BookmarkManager::updateBookmarkFile()
             directory.mkpath( directoryPath );
         }
 
-        file.open( QIODevice::WriteOnly );
-
-        if ( !writer.write( &file, d->m_bookmarkDocument ) ) {
+        if (!GeoDataDocumentWriter::write(absoluteLocalFilePath, *d->m_bookmarkDocument)) {
             mDebug() << "Could not write the bookmarks file" << absoluteLocalFilePath;
             file.close();
             return false;

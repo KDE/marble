@@ -46,7 +46,7 @@ public:
      * Use an empty string (default) to determine it automatically
      * @return True if writing is successful, false otherwise
      */
-    static bool write(QString &filename, const GeoDataDocument &document, const QString &documentIdentifier = QString());
+    static bool write(const QString &filename, const GeoDataDocument &document, const QString &documentIdentifier = QString());
 
     /**
      * Registers a plugin as a backend for writing a certain file extension. Usually called by the MARBLE_ADD_WRITER macro.

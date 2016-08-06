@@ -24,7 +24,7 @@
 #include "GeoDataStyle.h"
 #include "GeoDataTreeModel.h"
 #include "GeoDataTypes.h"
-#include "GeoWriter.h"
+#include "GeoDataDocumentWriter.h"
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
 #include "MarbleModel.h"
@@ -406,11 +406,7 @@ void BookmarkManagerDialog::exportBookmarks()
                        QDir::homePath(), tr( "KML files (*.kml)" ) );
 
     if ( !fileName.isEmpty() ) {
-        QFile file( fileName );
-        GeoWriter writer;
-        writer.setDocumentType( kml::kmlTag_nameSpaceOgc22 );
-
-        if ( !file.open( QIODevice::ReadWrite ) || !writer.write( &file, bookmarkDocument() ) ) {
+        if (!GeoDataDocumentWriter::write(fileName, *bookmarkDocument())) {
             mDebug() << "Could not write the bookmarks file" << fileName;
             QString const text = tr( "Unable to save bookmarks. Please check that the file is writable." );
             QMessageBox::warning(this, tr("Bookmark Export"), text);

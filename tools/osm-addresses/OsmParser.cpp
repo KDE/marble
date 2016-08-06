@@ -22,7 +22,7 @@
 #include "GeoDataStyleMap.h"
 #include "GeoDataLineStyle.h"
 #include "GeoDataFeature.h"
-#include "geodata/writer/GeoWriter.h"
+#include "geodata/writer/GeoDataDocumentWriter.h"
 #include "geodata/data/GeoDataExtendedData.h"
 #include <geodata/handlers/kml/KmlElementDictionary.h>
 
@@ -745,18 +745,9 @@ void OsmParser::writeKml( const QString &area, const QString &version, const QSt
     document->addStyleMap( styleMap );
 //    }
 
-    GeoWriter writer;
-    writer.setDocumentType( kml::kmlTag_nameSpaceOgc22 );
-
-    QFile file( filename );
-    if ( !file.open( QIODevice::WriteOnly | QIODevice::Truncate ) ) {
-        qCritical() << "Cannot write to " << file.fileName();
+    if (!GeoDataDocumentWriter::write(filename, *document)) {
+        qCritical() << "Can not write to " << filename;
     }
-
-    if ( !writer.write( &file, document ) ) {
-        qCritical() << "Can not write to " << file.fileName();
-    }
-    file.close();
 }
 
 Coordinate::Coordinate(float lon_, float lat_) : lon(lon_), lat(lat_)
