@@ -91,8 +91,14 @@ Item {
 
         IconText {
             width: parent.width
-            visible: placemark != null && placemark.elevation != ""
+            visible: placemark !== null && placemark.elevation !== ""
             text: placemark === null ? "" : ("Elevation : " + placemark.elevation + " m")
+        }
+
+        IconText {
+            width: parent.width
+            visible: text.length > 0
+            text: placemark === null ? "" : placemark.amenity
         }
 
         IconText {
