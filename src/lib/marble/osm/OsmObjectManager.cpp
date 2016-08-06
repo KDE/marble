@@ -33,10 +33,6 @@ void OsmObjectManager::initializeOsmData( GeoDataPlacemark* placemark )
         osmData.setVisible( "true" );
     }
 
-    if ( !placemark->name().isEmpty() ) {
-        osmData.addTag( "name", placemark->name() );
-    }
-
     // Assigning osmData to each of the line's nodes ( if they don't already have data )
     if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType ) {
         const GeoDataLineString* lineString = static_cast<GeoDataLineString*>( placemark->geometry() );
