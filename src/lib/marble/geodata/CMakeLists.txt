@@ -472,6 +472,8 @@ SET ( geodata_parser_SRCS
 SET( geodata_writer_SRCS
         geodata/writer/GeoTagWriter.cpp
         geodata/writer/GeoWriter.cpp
+        geodata/writer/GeoWriterBackend.cpp
+        geodata/writer/GeoDataDocumentWriter.cpp
    )
 
 SET( geodata_SRCS

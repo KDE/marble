@@ -84,6 +84,7 @@ public:
 
 private:
     friend class GeoTagWriter;
+    friend class GeoDataDocumentWriter;
     bool writeElement( const GeoNode* object );
 
 private:
