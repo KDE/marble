@@ -36,6 +36,7 @@ namespace Marble
         Q_PROPERTY(int mapWidth READ mapWidth WRITE setMapWidth NOTIFY mapWidthChanged)
         Q_PROPERTY(int mapHeight READ mapHeight WRITE setMapHeight NOTIFY mapHeightChanged)
         Q_PROPERTY(int zoom READ zoom WRITE setZoom NOTIFY zoomChanged)
+        Q_PROPERTY(int radius READ radius WRITE setRadius NOTIFY radiusChanged)
         Q_PROPERTY(bool showFrameRate READ showFrameRate WRITE setShowFrameRate NOTIFY showFrameRateChanged)
         Q_PROPERTY(Projection projection READ projection WRITE setProjection NOTIFY projectionChanged)
         Q_PROPERTY(QString mapThemeId READ mapThemeId WRITE setMapThemeId NOTIFY mapThemeIdChanged)
@@ -76,11 +77,13 @@ namespace Marble
 
         MarbleInputHandler *inputHandler();
         int zoom() const;
+        int radius() const;
 
     public Q_SLOTS:
         void goHome();
         void setZoom(int zoom, FlyToMode mode = Instant);
         Q_INVOKABLE void setZoomToMaximumLevel();
+        void setRadius(int radius);
         void centerOn(const GeoDataPlacemark& placemark, bool animated = false);
         void centerOn(const GeoDataLatLonBox& box, bool animated = false);
         void centerOn(const GeoDataCoordinates& coordinate);
@@ -199,6 +202,7 @@ namespace Marble
         void angleChanged();
         void speedChanged();
         void zoomChanged();
+        void radiusChanged(int radius);
         void inertialGlobeRotationChanged(bool inertialGlobeRotation);
         void placemarkDelegateChanged(QQmlComponent* placemarkDelegate);
 

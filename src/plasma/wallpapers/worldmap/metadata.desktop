@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=World Map
+Type=Service
+Icon=marble
+
+X-KDE-ServiceTypes=Plasma/Wallpaper
+X-KDE-PluginInfo-Author=Friedrich W. H. Kossebau
+X-KDE-PluginInfo-Email=kossebau@kde.org
+X-KDE-PluginInfo-License=LGPL
+X-KDE-PluginInfo-Name=org.kde.plasma.worldmap
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=https://marble.kde.org/
+X-Plasma-MainScript=ui/main.qml

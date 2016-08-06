@@ -203,6 +203,7 @@ namespace Marble
         connect(this, SIGNAL(heightChanged()), this, SLOT(resizeMap()));
         connect(&d->m_map, SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)), this, SLOT(updatePositionVisibility()));
         connect(&d->m_map, SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)), this, SIGNAL(visibleLatLonAltBoxChanged()));
+        connect(&d->m_map, SIGNAL(radiusChanged(int)), this, SIGNAL(radiusChanged(int)));
         connect(&d->m_map, SIGNAL(radiusChanged(int)), this, SIGNAL(zoomChanged()));
         connect(&d->m_reverseGeocoding, SIGNAL(reverseGeocodingFinished(GeoDataCoordinates,GeoDataPlacemark)),
                 this, SLOT(handleReverseGeocoding(GeoDataCoordinates,GeoDataPlacemark)));
@@ -516,6 +517,11 @@ namespace Marble
         qreal y;
         d->m_map.viewport()->screenCoordinates(coordinate->coordinates(), x, y);
         return QPointF(x, y);
+    }
+
+    void MarbleQuickItem::setRadius(int radius)
+    {
+        d->m_map.setRadius(radius);
     }
 
     void MarbleQuickItem::setZoom(int newZoom, FlyToMode mode)
@@ -938,6 +944,11 @@ namespace Marble
     MarbleInputHandler *MarbleQuickItem::inputHandler()
     {
         return &d->m_inputHandler;
+    }
+
+    int MarbleQuickItem::radius() const
+    {
+        return d->m_map.radius();
     }
 
     int MarbleQuickItem::zoom() const

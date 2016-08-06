@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+      http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
+  <kcfgfile name=""/>
+
+  <group name="General">
+    <entry name="projection" type="Enum">
+        <choices>
+          <choice name="Equirectangular" />
+          <choice name="Mercator" />
+        </choices>
+        <default>Equirectangular</default>
+    </entry>
+
+    <entry name="showDate" type="Bool">
+      <default>false</default>
+    </entry>
+
+    <!-- TODO: readd later
+    <entry name="rotation" type="int">
+        <default>-20</default>
+    </entry>
+
+    <entry name="centerSun" type="Bool">
+      <default>false</default>
+    </entry>
+
+    <entry name="customTimeZone" type="Bool">
+      <default>false</default>
+    </entry>
+
+    <entry name="timeZoneList" type="StringList">
+        <default></default>
+    </entry>
+    -->
+  </group>
+</kcfg>
+
