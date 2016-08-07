@@ -9,7 +9,7 @@ include_directories(
 set( ${TARGET}_SRC squad-interpolation.cpp)
 add_executable( ${TARGET} ${${TARGET}_SRC} )
 
-target_link_libraries( ${TARGET} ${MARBLEWIDGET} )
+target_link_libraries(${TARGET} marblewidget)
 
 install( TARGETS ${TARGET} RUNTIME DESTINATION ${MARBLE_EXAMPLES_INSTALL_DIR}/${TARGET} )
 install( FILES ${${TARGET}_SRC} DESTINATION ${MARBLE_EXAMPLES_INSTALL_DIR}/${TARGET} )

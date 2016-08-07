@@ -24,8 +24,10 @@ add_executable( ${TARGET} ${${TARGET}_SRCS} )
 
 target_link_libraries(
     ${TARGET}
-    ${MARBLEWIDGET}
-    marbleui)
+    marblewidget
+    marbleui
+    Qt5::Quick
+)
 
 install( TARGETS ${TARGET} RUNTIME DESTINATION ${MARBLE_EXAMPLES_INSTALL_DIR}/${TARGET} )
 install( FILES ${${TARGET}_SRCS} DESTINATION ${MARBLE_EXAMPLES_INSTALL_DIR}/${TARGET} )

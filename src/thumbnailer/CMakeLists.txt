@@ -18,7 +18,7 @@ set(marblethumbnail_SRCS
 )
 add_library(marblethumbnail MODULE ${marblethumbnail_SRCS})
 target_link_libraries(marblethumbnail
-  ${MARBLEWIDGET}
+  marblewidget
   KF5::KIOWidgets
 )
 install(TARGETS marblethumbnail  DESTINATION ${PLUGIN_INSTALL_DIR})

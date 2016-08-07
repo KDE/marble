@@ -23,7 +23,9 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../marble-ui)
 kconfig_add_kcfg_files(marblepart_SRCS settings.kcfgc)
 add_library(marble_part ${marblepart_SRCS})
 set_target_properties(marble_part PROPERTIES PREFIX "${CMAKE_SHARED_LIBRARY_PREFIX}")
-target_link_libraries(marble_part marbleui ${MARBLEWIDGET}
+target_link_libraries(marble_part
+    marbleui
+    marblewidget
     KF5::NewStuff
     KF5::Parts
     KF5::CoreAddons
@@ -52,7 +54,7 @@ add_executable (marble ${marble_kde_SRCS})
 target_link_libraries (
     marble
     marbleui
-    ${MARBLEWIDGET}
+    marblewidget
     astro
     KF5::NewStuff
     KF5::Parts

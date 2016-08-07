@@ -11,8 +11,11 @@ set( ${TARGET}_SRC main.cpp)
 qt5_add_resources(marble_QRCS marbleQuick2.qrc)
 add_executable( ${TARGET} ${${TARGET}_SRC} ${marble_QRCS} )
 
-target_link_libraries( ${TARGET} ${OpenCV_LIBRARIES} )
-target_link_libraries( ${TARGET} ${MARBLEWIDGET} marbledeclarative )
+target_link_libraries( ${TARGET}
+    ${OpenCV_LIBRARIES}
+    marblewidget
+    marbledeclarative
+)
 
 add_custom_command(TARGET ${TARGET} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different
                        ${CMAKE_CURRENT_SOURCE_DIR}/main.qml

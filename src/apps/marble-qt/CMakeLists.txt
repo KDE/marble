@@ -29,7 +29,7 @@ Qt5::Widgets
 Qt5::PrintSupport
 Qt5::Network
 marbleui
-${MARBLEWIDGET}
+marblewidget
 astro)
 
 if(WIN32)

@@ -120,8 +120,6 @@ if(QTONLY)
   unset(QTONLY)
 endif()
 
-set(MARBLEWIDGET marblewidget-qt5)
-
 SET(CMAKE_AUTOMOC TRUE)
 
 # Use M_PI under Windows

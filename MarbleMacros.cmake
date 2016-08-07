@@ -37,7 +37,7 @@ macro( marble_add_plugin _target_name )
 set( _src ${ARGN} )
 add_library( ${_target_name} MODULE ${_src} )
 target_link_libraries( ${_target_name} ${${_target_name}_LIBS}
-                                       ${MARBLEWIDGET} )
+                                       marblewidget )
 install( TARGETS ${_target_name} DESTINATION ${MARBLE_PLUGIN_INSTALL_PATH} )
 
 set_target_properties( ${_target_name} PROPERTIES 
@@ -57,7 +57,7 @@ qt_add_resources( _src ../../../apps/marble-ui/marble.qrc )
 
 add_library( ${_target_name} MODULE ${_src} )
 target_link_libraries( ${_target_name} ${${_target_name}_LIBS}
-                                       ${MARBLEWIDGET} )
+                                       marblewidget )
 install( TARGETS ${_target_name} DESTINATION ${QT_PLUGINS_DIR}/designer )
 
 set_target_properties( ${_target_name} PROPERTIES 
@@ -84,8 +84,10 @@ macro( marble_add_test TEST_NAME )
         set( ${TEST_NAME}_SRCS ${CMAKE_CURRENT_BINARY_DIR}/${TEST_NAME}.moc ${${TEST_NAME}_SRCS} )
 
         add_executable( ${TEST_NAME} ${${TEST_NAME}_SRCS} )
-        target_link_libraries( ${TEST_NAME} ${MARBLEWIDGET} )
-        target_link_libraries( ${TEST_NAME} Qt5::Test )
+        target_link_libraries(${TEST_NAME}
+            marblewidget
+            Qt5::Test
+        )
 
         set_target_properties( ${TEST_NAME} PROPERTIES 
                                COMPILE_FLAGS "-DDATA_PATH=\"\\\"${DATA_PATH}\\\"\" -DPLUGIN_PATH=\"\\\"${PLUGIN_PATH}\\\"\"" )

@@ -17,7 +17,7 @@ add_library (marbleui STATIC ${marble_SRCS})
 target_link_libraries (
     marbleui
     LINK_PUBLIC
-        ${MARBLEWIDGET}
+        marblewidget
         Qt5::Widgets
         Qt5::PrintSupport
     LINK_PRIVATE
