@@ -38,6 +38,7 @@ class Placemark : public QObject
     Q_PROPERTY(QString coordinates READ coordinates NOTIFY coordinatesChanged)
     Q_PROPERTY(QString elevation READ elevation NOTIFY elevationChanged)
     Q_PROPERTY(QString amenity READ amenity NOTIFY amenityChanged)
+    Q_PROPERTY(QString shop READ shop NOTIFY shopChanged)
     Q_PROPERTY(double longitude READ longitude NOTIFY coordinatesChanged)
     Q_PROPERTY(double latitude READ latitude NOTIFY coordinatesChanged)
 
@@ -60,6 +61,7 @@ public:
     QString coordinates() const;
     QString elevation() const;
     QString amenity() const;
+    QString shop() const;
     double longitude() const;
     double latitude() const;
 
@@ -77,6 +79,7 @@ Q_SIGNALS:
     void openingHoursChanged();
     void elevationChanged();
     void amenityChanged();
+    void shopChanged();
 
 private:
     void addTagValue(QString &target, const QString &key) const;
@@ -93,6 +96,7 @@ private:
     mutable QString m_openingHours;
     mutable QString m_elevation;
     mutable QString m_amenity;
+    mutable QString m_shop;
 };
 
 }

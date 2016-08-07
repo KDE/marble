@@ -103,6 +103,12 @@ Item {
 
         IconText {
             width: parent.width
+            visible: text.length > 0
+            text: placemark === null ? "" : placemark.shop
+        }
+
+        IconText {
+            width: parent.width
             visible: text.length > 0 && (!condensed || name.text === "")
             text: placemark === null ? "" : placemark.address
             maximumLineCount: 4

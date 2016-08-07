@@ -38,6 +38,7 @@ void Placemark::setGeoDataPlacemark( const Marble::GeoDataPlacemark &placemark )
     m_openingHours = QString();
     m_elevation = QString();
     m_amenity = QString();
+    m_shop = QString();
     emit coordinatesChanged();
     emit nameChanged();
     emit descriptionChanged();
@@ -47,6 +48,7 @@ void Placemark::setGeoDataPlacemark( const Marble::GeoDataPlacemark &placemark )
     emit openingHoursChanged();
     emit elevationChanged();
     emit amenityChanged();
+    emit shopChanged();
     if (m_placemark.visualCategory() == GeoDataFeature::TransportFuel) {
         emit fuelDetailsChanged();
     }
@@ -195,27 +197,40 @@ QString Placemark::amenity() const
 
     OsmPlacemarkData data = m_placemark.osmData();
 
-    if (data.containsTagKey("shop") && !data.tagValue("shop").isEmpty()){
-        QString shop = data.tagValue("shop");
-        shop[0] = shop[0].toUpper();
-        if (shop == "Clothes" && data.containsTagKey("clothes") && !data.tagValue("clothes").isEmpty()){
-            QString clothes = data.tagValue("clothes");
-            clothes[0] = clothes[0].toUpper();
-            m_amenity = "Shop : " + shop + " (" + clothes + ")";
-        } else if (shop == "Clothes" && data.containsTagKey("designation") && !data.tagValue("designation").isEmpty()){
-            QString designation = data.tagValue("designation");
-            designation[0] = designation[0].toUpper();
-            m_amenity = "Shop : " + shop + " (" + designation + ")";
-        } else {
-            m_amenity = "Shop : " + shop;
-        }
-    } else if (data.containsTagKey("amenity") && !data.tagValue("amenity").isEmpty()){
+    if (data.containsTagKey("amenity") && !data.tagValue("amenity").isEmpty()){
         QString amenity = data.tagValue("amenity");
         amenity[0] = amenity[0].toUpper();
         m_amenity = amenity;
     }
 
     return m_amenity;
+}
+
+QString Placemark::shop() const
+{
+    if (!m_shop.isEmpty()){
+        return m_shop;
+    }
+
+    OsmPlacemarkData data = m_placemark.osmData();
+
+    if (data.containsTagKey("shop") && !data.tagValue("shop").isEmpty()){
+        QString shop = data.tagValue("shop");
+        shop[0] = shop[0].toUpper();
+        if (shop == "Clothes" && data.containsTagKey("clothes") && !data.tagValue("clothes").isEmpty()){
+            QString clothes = data.tagValue("clothes");
+            clothes[0] = clothes[0].toUpper();
+            m_shop = "Shop : " + shop + " (" + clothes + ")";
+        } else if (shop == "Clothes" && data.containsTagKey("designation") && !data.tagValue("designation").isEmpty()){
+            QString designation = data.tagValue("designation");
+            designation[0] = designation[0].toUpper();
+            m_shop = "Shop : " + shop + " (" + designation + ")";
+        } else {
+            m_shop = "Shop : " + shop;
+        }
+    }
+
+    return m_shop;
 }
 
 void Placemark::setName(const QString & name)
