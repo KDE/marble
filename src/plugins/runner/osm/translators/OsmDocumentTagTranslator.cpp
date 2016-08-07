@@ -26,6 +26,9 @@
 #include "osm/OsmPlacemarkData.h"
 #include "osm/OsmObjectManager.h"
 #include "OsmRelationTagWriter.h"
+#include "OsmConverter.h"
+
+#include <QDebug>
 
 namespace Marble
 {
@@ -39,55 +42,12 @@ bool OsmDocumentTagTranslator::write( const GeoNode *node, GeoWriter& writer ) c
 {
     const GeoDataDocument *document = static_cast<const GeoDataDocument*>(node);
 
-    // Creating separate lists, to improve efficiency
-    typedef QPair<const GeoDataPolygon*, OsmPlacemarkData > OsmPolygon;
-    typedef QPair<const GeoDataLineString*, OsmPlacemarkData > OsmLineString;
-    QList<OsmPlacemarkData> nodes;
-    QList<OsmLineString> ways;
-    QList<OsmPolygon> polygons;
+    OsmConverter converter;
+    converter.read(document);
+    OsmNodeTagWriter::writeAllNodes(converter.nodes(), writer);
 
-    // Writing all the component nodes ( points, nodes of polylines, nodes of polygons )
-    foreach (GeoDataPlacemark* placemark, document->placemarkList()) {
-        // If the placemark's osmData is not complete, it is initialized by the OsmObjectManager
-        OsmObjectManager::initializeOsmData( placemark );
-        const OsmPlacemarkData osmData = placemark->osmData();
-
-        if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPointType ) {
-            nodes << osmData;
-        } else if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType ) {
-            const GeoDataLineString* lineString = static_cast<const GeoDataLineString*>( placemark->geometry() );
-            nodes << osmData;
-            ways << OsmLineString(lineString, osmData);
-        } else if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLinearRingType ) {
-            const GeoDataLinearRing* linearRing = static_cast<const GeoDataLinearRing*>( placemark->geometry() );
-            nodes << osmData;
-            ways << OsmLineString(linearRing, osmData);
-        } else if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
-            const GeoDataPolygon *polygon = static_cast<const GeoDataPolygon*>( placemark->geometry() );
-            int index = -1;
-
-            // Writing all the outerRing's nodes
-            const GeoDataLinearRing &outerRing = polygon->outerBoundary();
-            const OsmPlacemarkData outerRingOsmData = osmData.memberReference( index );
-            nodes << outerRingOsmData;
-            ways << OsmLineString(&outerRing, outerRingOsmData);
-
-            // Writing all nodes for each innerRing
-            foreach ( const GeoDataLinearRing &innerRing, polygon->innerBoundaries() ) {
-                ++index;
-                const OsmPlacemarkData innerRingOsmData = osmData.memberReference( index );
-                nodes << innerRingOsmData;
-                ways << OsmLineString(&innerRing, innerRingOsmData);
-            }
-            polygons.append(OsmPolygon(polygon, osmData));
-        }
-    }
-
-    OsmNodeTagWriter::writeAllNodes(nodes, writer);
-
-    qSort(ways.begin(), ways.end(), [] (const OsmLineString &a, const OsmLineString &b) { return a.second.id() < b.second.id(); });
     qint64 lastId = 0;
-    foreach(const OsmLineString &way, ways) {
+    foreach(const auto &way, converter.ways()) {
         if (way.second.id() != lastId) {
             OsmWayTagWriter::writeWay(*way.first, way.second, writer);
             lastId = way.second.id();
@@ -95,8 +55,7 @@ bool OsmDocumentTagTranslator::write( const GeoNode *node, GeoWriter& writer ) c
     }
 
     // Writing polygons
-    qSort(polygons.begin(), polygons.end(), [] (const OsmPolygon &a, const OsmPolygon &b) { return a.second.id() < b.second.id(); });
-    foreach (const OsmPolygon& polygon, polygons) {
+    foreach (const auto& polygon, converter.polygons()) {
         OsmRelationTagWriter::writeMultipolygon(*polygon.first, polygon.second, writer );
     }
 

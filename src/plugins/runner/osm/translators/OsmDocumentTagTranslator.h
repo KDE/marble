@@ -13,6 +13,8 @@
 
 #include "GeoTagWriter.h"
 
+#include <GeoDataCoordinates.h>
+
 namespace Marble
 {
 /**
@@ -29,8 +31,6 @@ namespace Marble
      See http://wiki.openstreetmap.org/wiki/OSM_XML#Contents
 
 */
-class GeoDataLineString;
-class OsmPlacemarkData;
 
 class OsmDocumentTagTranslator : public GeoTagWriter
 {

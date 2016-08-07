@@ -48,7 +48,7 @@ void OsmRelation::addMember(qint64 reference, const QString &role, const QString
     m_members << member;
 }
 
-void OsmRelation::create(GeoDataDocument *document, const OsmWays &ways, const OsmNodes &nodes, QSet<qint64> &usedNodes, QSet<qint64> &usedWays) const
+void OsmRelation::create(GeoDataDocument *document, OsmWays &ways, const OsmNodes &nodes, QSet<qint64> &usedNodes, QSet<qint64> &usedWays) const
 {
     if (!m_osmData.containsTag("type", "multipolygon")) {
         return;
@@ -67,7 +67,8 @@ void OsmRelation::create(GeoDataDocument *document, const OsmWays &ways, const O
         mDebug() << "Polygons with " << outer.size() << " ways are not yet supported";
         return;
     }
-    GeoDataFeature::GeoDataVisualCategory outerCategory = OsmPresetLibrary::determineVisualCategory(m_osmData);
+    OsmPlacemarkData osmData = m_osmData;
+    GeoDataFeature::GeoDataVisualCategory outerCategory = OsmPresetLibrary::determineVisualCategory(osmData);
     if (outerCategory == GeoDataFeature::None) {
         // Try to determine the visual category from the relation members
         bool categoriesAreSame = true;
@@ -96,23 +97,24 @@ void OsmRelation::create(GeoDataDocument *document, const OsmWays &ways, const O
             // Schedule way for removal: It's a non-styled way only used to create the outer boundary in this polygon
             usedWays << wayId;
         } // else we keep it
+        foreach(qint64 nodeId, ways[wayId].references()) {
+            ways[wayId].osmData().addNodeReference(nodes[nodeId].coordinates(), nodes[nodeId].osmData());
+        }
     }
 
-    if (m_osmData.containsTag("historic", "castle") && m_osmData.containsTag("castle_type", "kremlin")) {
+    if (osmData.containsTag("historic", "castle") && osmData.containsTag("castle_type", "kremlin")) {
         outerCategory = GeoDataFeature::None;
     }
 
     GeoDataPlacemark* placemark = new GeoDataPlacemark;
-    placemark->setName(m_osmData.tagValue("name"));
-    placemark->setOsmData(m_osmData);
+    placemark->setName(osmData.tagValue("name"));
     placemark->setVisualCategory(outerCategory);
     placemark->setStyle( GeoDataStyle::Ptr() );
     placemark->setVisible(shouldRender && outerCategory != GeoDataFeature::None);
 
     GeoDataPolygon* polygon = new GeoDataPolygon;
     polygon->setOuterBoundary(outer[0]);
-    // @todo: How to get the reference here?
-    // placemark->osmData().addMemberReference(-1, );
+    osmData.addMemberReference(-1, ways[*outerWays.begin()].osmData());
 
     if (placemark->visualCategory() == GeoDataFeature::Bathymetry) {
         // In case of a bathymetry store elevation info since it is required during styling
@@ -127,22 +129,27 @@ void OsmRelation::create(GeoDataDocument *document, const OsmWays &ways, const O
     QStringList const innerRoles = QStringList() << "inner";
     QSet<qint64> innerWays;
     QList<GeoDataLinearRing> inner = rings(innerRoles, ways, nodes, usedNodes, innerWays);
+    int index = 0;
     foreach(qint64 wayId, innerWays) {
         Q_ASSERT(ways.contains(wayId));
         if (OsmPresetLibrary::determineVisualCategory(ways[wayId].osmData()) == GeoDataFeature::None) {
             // Schedule way for removal: It's a non-styled way only used to create the inner boundary in this polygon
             usedWays << wayId;
         }
+        foreach(qint64 nodeId, ways[wayId].references()) {
+            ways[wayId].osmData().addNodeReference(nodes[nodeId].coordinates(), nodes[nodeId].osmData());
+        }
+        osmData.addMemberReference(index, ways[wayId].osmData());
+        ++index;
     }
     foreach(const GeoDataLinearRing &ring, inner) {
-        // @todo: How to get the reference here?
-        // placemark->osmData().addMemberReference(polygon->innerBoundaries().size(), );
         polygon->appendInnerBoundary(ring);
     }
     placemark->setGeometry(polygon);
+    placemark->setOsmData(osmData);
     usedNodes |= outerNodes;
 
-    OsmObjectManager::registerId( m_osmData.id() );
+    OsmObjectManager::registerId( osmData.id() );
     document->append(placemark);
 }
 

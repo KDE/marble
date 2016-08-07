@@ -23,47 +23,32 @@
 #include "osm/OsmPlacemarkData.h"
 #include "osm/OsmObjectManager.h"
 
-
 namespace Marble
 {
 
 
-void OsmNodeTagWriter::writeNode( const GeoDataCoordinates& coordinates, const OsmPlacemarkData& osmData, GeoWriter& writer )
+void OsmNodeTagWriter::writeNode( const OsmConverter::Node &node, GeoWriter& writer )
 {
-    QString lat = QString::number( coordinates.latitude( GeoDataCoordinates::Degree ), 'f', 7 );
-    QString lon = QString::number( coordinates.longitude( GeoDataCoordinates::Degree ), 'f', 7 );
+    QString lat = QString::number( node.first.latitude( GeoDataCoordinates::Degree ), 'f', 7 );
+    QString lon = QString::number( node.first.longitude( GeoDataCoordinates::Degree ), 'f', 7 );
 
     writer.writeStartElement( osm::osmTag_node );
 
     writer.writeAttribute( "lat", lat );
     writer.writeAttribute( "lon", lon );
-    OsmObjectAttributeWriter::writeAttributes( osmData, writer );
-    OsmTagTagWriter::writeTags( osmData, writer );
+    OsmObjectAttributeWriter::writeAttributes( node.second, writer );
+    OsmTagTagWriter::writeTags(node.second, writer);
 
     writer.writeEndElement();
 }
 
-void OsmNodeTagWriter::writeAllNodes( const QList<OsmPlacemarkData>& values, GeoWriter& writer )
+void OsmNodeTagWriter::writeAllNodes( const OsmConverter::Nodes& nodes, GeoWriter& writer )
 {
-    typedef QPair<GeoDataCoordinates, OsmPlacemarkData> Coordinate;
-    QVector<Coordinate> nodes;
-
-    foreach(const OsmPlacemarkData &osmData, values) {
-        QHash< GeoDataCoordinates, OsmPlacemarkData >::const_iterator it = osmData.nodeReferencesBegin();
-        QHash< GeoDataCoordinates, OsmPlacemarkData >::const_iterator end = osmData.nodeReferencesEnd();
-        for (; it != end; ++it) {
-            nodes.push_back(Coordinate(it.key(), it.value()));
-        }
-    }
-
-    // Sort by id ascending since some external tools rely on that
-    qSort(nodes.begin(), nodes.end(), [] (const Coordinate &a, const Coordinate &b) { return a.second.id() < b.second.id(); });
-
     // Writing all the component nodes
     qint64 lastId = 0;
     foreach(const auto &node, nodes) {
         if (node.second.id() != lastId) {
-            writeNode(node.first, node.second, writer);
+            writeNode(node, writer);
             lastId = node.second.id();
         } // else duplicate/shared node
     }

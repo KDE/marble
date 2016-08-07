@@ -32,7 +32,7 @@ public:
 
     const OsmPlacemarkData & osmData() const;
 
-    void create(GeoDataDocument* document, const OsmWays &ways, const OsmNodes &nodes, QSet<qint64> &usedNodes, QSet<qint64> &usedWays) const;
+    void create(GeoDataDocument* document, OsmWays &ways, const OsmNodes &nodes, QSet<qint64> &usedNodes, QSet<qint64> &usedWays) const;
 
 private:
     struct OsmMember

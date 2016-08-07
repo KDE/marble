@@ -21,8 +21,8 @@ namespace Marble
 
 void OsmTagTagWriter::writeTags( const OsmPlacemarkData& osmData, GeoWriter &writer )
 {
-    QHash<QString, QString>::const_iterator it = osmData.tagsBegin();
-    QHash<QString, QString>::const_iterator end = osmData.tagsEnd();
+    auto it = osmData.tagsBegin();
+    auto end = osmData.tagsEnd();
 
     for ( ; it != end; ++it ) {
         writer.writeStartElement( osm::osmTag_tag );
