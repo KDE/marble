@@ -237,7 +237,7 @@ void O5mWriter::writeTags(const OsmPlacemarkData &osmData, StringTable &stringTa
 
 void O5mWriter::writeStringPair(const StringPair &pair, StringTable &stringTable, QDataStream &stream) const
 {
-    auto const iter = stringTable.find(pair);
+    auto const iter = stringTable.constFind(pair);
     if (iter == stringTable.cend()) {
         QByteArray data;
         data.push_back(char(0x00));
