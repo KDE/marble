@@ -6,8 +6,8 @@ INCLUDE_DIRECTORIES(
 )
 
 if(NOT CMAKE_SYSTEM_NAME STREQUAL Android)
-    SET(GENERIC_LIB_VERSION "0.17.20")
-    SET(GENERIC_LIB_SOVERSION "1")
+    set(ASTRO_LIB_VERSION "0.17.20")
+    set(ASTRO_LIB_SOVERSION "1")
 endif()
 
 ADD_DEFINITIONS(-O3)
@@ -41,10 +41,18 @@ endif(WIN32)
 
 if(NOT CMAKE_SYSTEM_NAME STREQUAL Android)
   SET_TARGET_PROPERTIES(astro PROPERTIES
-    VERSION ${GENERIC_LIB_VERSION}
-    SOVERSION ${GENERIC_LIB_SOVERSION}
+    VERSION ${ASTRO_LIB_VERSION}
+    SOVERSION ${ASTRO_LIB_SOVERSION}
   )
 endif()
+
+set_target_properties(astro PROPERTIES
+    EXPORT_NAME "Astro"
+)
+
+target_include_directories(astro
+    INTERFACE "$<INSTALL_INTERFACE:${INCLUDE_INSTALL_DIR}>"
+)
 
 # choose the correct target install library path
 if(WIN32)
@@ -52,10 +60,19 @@ if(WIN32)
 elseif(APPLE)
   INSTALL(TARGETS astro LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/Marble.app/Contents/MacOS/lib)
 else()
-  INSTALL(TARGETS astro LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
+  install(TARGETS astro
+    EXPORT AstroTargets
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+  )
 endif()
 
-########### install files ###############
+########### install headers & cmake config files ###############
+
+if (WIN32 OR APPLE)
+    # TODO: find how to install & deploy library, headers and config files as bundle for development
+    return()
+endif()
+
 
  INSTALL(FILES
     astrolib.h
@@ -66,5 +83,35 @@ endif()
     solarsystem.h
     ${CMAKE_CURRENT_BINARY_DIR}/astrolib_export.h
 
-    DESTINATION ${CMAKE_INSTALL_PREFIX}/include/astro
+    DESTINATION ${INCLUDE_INSTALL_DIR}/astro
+)
+
+########### CMake Config files ###############
+
+include(CMakePackageConfigHelpers)
+
+set(ASTRO_CMAKECONFIGNAME Astro)
+set(ASTRO_INSTALL_CMAKECONFIGDIR ${CMAKE_INSTALL_LIBDIR}/cmake/${ASTRO_CMAKECONFIGNAME})
+
+configure_package_config_file(AstroConfig.cmake.in
+    ${CMAKE_CURRENT_BINARY_DIR}/${ASTRO_CMAKECONFIGNAME}Config.cmake
+    INSTALL_DESTINATION ${ASTRO_INSTALL_CMAKECONFIGDIR}
+)
+
+write_basic_package_version_file(${CMAKE_CURRENT_BINARY_DIR}/${ASTRO_CMAKECONFIGNAME}ConfigVersion.cmake
+    VERSION ${ASTRO_LIB_VERSION}
+    COMPATIBILITY SameMajorVersion
+)
+
+install(FILES
+    ${CMAKE_CURRENT_BINARY_DIR}/${ASTRO_CMAKECONFIGNAME}Config.cmake
+    ${CMAKE_CURRENT_BINARY_DIR}/${ASTRO_CMAKECONFIGNAME}ConfigVersion.cmake
+
+    DESTINATION ${ASTRO_INSTALL_CMAKECONFIGDIR}
+)
+
+install(
+    EXPORT AstroTargets
+    FILE ${ASTRO_CMAKECONFIGNAME}Targets.cmake
+    DESTINATION ${ASTRO_INSTALL_CMAKECONFIGDIR}
 )

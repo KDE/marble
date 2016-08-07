@@ -7,6 +7,8 @@ marble_set_package_properties( Phonon PROPERTIES TYPE OPTIONAL PURPOSE "Support 
 if(PHONON_FOUND)
     set(HAVE_PHONON TRUE)
 endif()
+CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/config-phonon.h.cmake
+               ${CMAKE_CURRENT_BINARY_DIR}/config-phonon.h)
 
 INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}
@@ -35,10 +37,8 @@ INCLUDE(graphicsview/CMakeLists.txt)
 INCLUDE(layers/CMakeLists.txt)
 INCLUDE(osm/CMakeLists.txt)
 
-if(NOT CMAKE_SYSTEM_NAME STREQUAL Android)
-set(GENERIC_LIB_VERSION "0.24.80")
-set(GENERIC_LIB_SOVERSION "25")
-endif()
+set(MARBLE_LIB_VERSION "0.24.80")
+set(MARBLE_ABI_VERSION "25")
 
 ########### next target ###############
 
@@ -423,12 +423,19 @@ endif(WIN32)
 
 if(NOT CMAKE_SYSTEM_NAME STREQUAL Android)
   set_target_properties(${MARBLEWIDGET}  PROPERTIES
-                                    VERSION ${GENERIC_LIB_VERSION}
-                                    SOVERSION ${GENERIC_LIB_SOVERSION})
+    VERSION ${MARBLE_LIB_VERSION}
+    SOVERSION ${MARBLE_ABI_VERSION}
+  )
 endif()
 
 set_target_properties(${MARBLEWIDGET}  PROPERTIES
-                                    COMPILE_FLAGS "-DKML_LAZY_IMP")
+    EXPORT_NAME "Marble"
+    COMPILE_FLAGS "-DKML_LAZY_IMP"
+)
+
+target_include_directories(${MARBLEWIDGET}
+    INTERFACE "$<INSTALL_INTERFACE:${INCLUDE_INSTALL_DIR}>"
+)
 
 # choose the correct target install library path
 if(WIN32)
@@ -436,11 +443,18 @@ if(WIN32)
 elseif(APPLE)
   install(TARGETS ${MARBLEWIDGET} LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/Marble.app/Contents/MacOS/lib)
 else()
-  install(TARGETS ${MARBLEWIDGET} LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
+  install(TARGETS ${MARBLEWIDGET}
+    EXPORT MarbleTargets
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
 endif()
 
 
-########### install files ###############
+########### install headers & cmake config files ###############
+
+if (WIN32 OR APPLE)
+    # TODO: find how to install & deploy library, headers and config files as bundle for development
+    return()
+endif()
 
 if (MARBLE_NO_WEBKITWIDGETS)
     set(marble_WebKit
@@ -603,8 +617,36 @@ install( FILES
     routing/RoutingModel.h
     routing/RoutingProfile.h
 
-    DESTINATION ${CMAKE_INSTALL_PREFIX}/include/marble
+    DESTINATION ${INCLUDE_INSTALL_DIR}/marble
 )
 
-CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/config-phonon.h.cmake
-               ${CMAKE_CURRENT_BINARY_DIR}/config-phonon.h)
+
+########### CMake Config files ###############
+
+include(CMakePackageConfigHelpers)
+
+set(MARBLE_CMAKECONFIGNAME Marble)
+set(MARBLE_INSTALL_CMAKECONFIGDIR ${CMAKE_INSTALL_LIBDIR}/cmake/${MARBLE_CMAKECONFIGNAME})
+
+configure_package_config_file(MarbleConfig.cmake.in
+    ${CMAKE_CURRENT_BINARY_DIR}/${MARBLE_CMAKECONFIGNAME}Config.cmake
+    INSTALL_DESTINATION ${MARBLE_INSTALL_CMAKECONFIGDIR}
+)
+
+write_basic_package_version_file(${CMAKE_CURRENT_BINARY_DIR}/${MARBLE_CMAKECONFIGNAME}ConfigVersion.cmake
+    VERSION ${MARBLE_LIB_VERSION}
+    COMPATIBILITY SameMajorVersion
+)
+
+install(FILES
+    ${CMAKE_CURRENT_BINARY_DIR}/${MARBLE_CMAKECONFIGNAME}Config.cmake
+    ${CMAKE_CURRENT_BINARY_DIR}/${MARBLE_CMAKECONFIGNAME}ConfigVersion.cmake
+
+    DESTINATION ${MARBLE_INSTALL_CMAKECONFIGDIR}
+)
+
+install(
+    EXPORT MarbleTargets
+    FILE ${MARBLE_CMAKECONFIGNAME}Targets.cmake
+    DESTINATION ${MARBLE_INSTALL_CMAKECONFIGDIR}
+)
