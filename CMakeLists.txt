@@ -161,7 +161,6 @@ endif()
 if(WIN32)
     set(data_dir data)
     set(plugin_dir plugins)
-    set(CMAKE_MODULES_INSTALL_PATH ${CMAKE_ROOT}/Modules)
 elseif(APPLE)
     # needed for finding bundle path in e.g. katlasdir.h
     FIND_LIBRARY(APP_SERVICES_LIBRARY ApplicationServices )
@@ -182,7 +181,6 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL Android)
 else() # Linux / bsd etc...
       set(data_dir ${CMAKE_INSTALL_FULL_DATAROOTDIR}/marble/data)
       set(plugin_dir ${CMAKE_INSTALL_FULL_LIBDIR}/marble/plugins)
-      set(CMAKE_MODULES_INSTALL_PATH ${CMAKE_INSTALL_FULL_DATAROOTDIR}/marble/cmake)
 endif()
 
 if(NOT ICON_INSTALL_DIR)
@@ -307,19 +305,6 @@ endif()
 ####################################################
 # Install extra files
 install(FILES LICENSE.txt DESTINATION ${MARBLE_DATA_INSTALL_PATH})
-
-####################################################
-# Install CMake module
-
-CONFIGURE_FILE(
-    ${CMAKE_CURRENT_SOURCE_DIR}/FindMarble.cmake.in
-    ${CMAKE_CURRENT_BINARY_DIR}/FindMarble.cmake
-)
-
-if( CMAKE_MODULES_INSTALL_PATH AND NOT WIN32 )
-  install( FILES ${CMAKE_CURRENT_BINARY_DIR}/FindMarble.cmake
-           DESTINATION ${CMAKE_MODULES_INSTALL_PATH}  )
-endif()
 
 ############################################################
 # Uninstall stuff
