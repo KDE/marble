@@ -119,7 +119,7 @@ bool Job::download()
     } else {
         qDebug() << "Failed to download " << url;
         QFile::remove(osmFile().absoluteFilePath());
-        changeStatus(Error, "Error downloading .osm.pbf file: " + wget.readAllStandardError());
+        changeStatus(Error, QLatin1String("Error downloading .osm.pbf file: ") + wget.readAllStandardError());
         return false;
     }
 }
@@ -168,7 +168,7 @@ bool Job::monav()
         qDebug() << "Processed osm file for monav";
     } else {
         qDebug() << "monav exiting with status " << monav.exitCode();
-        changeStatus(Error, "Routing map conversion failed: " + monav.readAllStandardError());
+        changeStatus(Error, QLatin1String("Routing map conversion failed: ") + monav.readAllStandardError());
         return false;
     }
 
@@ -235,7 +235,7 @@ bool Job::search()
         return true;
     } else {
         qDebug() << "osm-addresses exiting with status " << osmAddresses.exitCode();
-        changeStatus(Error, "Error creating search database: " + osmAddresses.readAllStandardError());
+        changeStatus(Error, QLatin1String("Error creating search database: ") + osmAddresses.readAllStandardError());
         return false;
     }
 }
@@ -253,7 +253,7 @@ bool Job::package()
         qDebug() << "Packaged tar file";
         return true;
     } else {
-        changeStatus(Error, "Packaging failed: " + tar.readAllStandardError());
+        changeStatus(Error, QLatin1String("Packaging failed: ") + tar.readAllStandardError());
         return false;
     }
 }

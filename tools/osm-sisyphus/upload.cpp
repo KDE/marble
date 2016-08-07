@@ -64,7 +64,7 @@ bool Upload::upload(const Package &package)
     ssh.waitForFinished(1000 * 60 * 10); // wait up to 10 minutes for mkdir to complete
     if (ssh.exitStatus() != QProcess::NormalExit || ssh.exitCode() != 0) {
         qDebug() << "Failed to create remote directory " << remoteDir;
-        changeStatus( package, "error", "Failed to create remote directory: " + ssh.readAllStandardError());
+        changeStatus(package, "error", QLatin1String("Failed to create remote directory: ") + ssh.readAllStandardError());
         return false;
     }
 
@@ -77,7 +77,7 @@ bool Upload::upload(const Package &package)
     scp.waitForFinished(1000 * 60 * 60 * 12); // wait up to 12 hours for upload to complete
     if (scp.exitStatus() != QProcess::NormalExit || scp.exitCode() != 0) {
         qDebug() << "Failed to upload " << target;
-        changeStatus( package, "error", "Failed to upload file: " + scp.readAllStandardError());
+        changeStatus(package, "error", QLatin1String("Failed to upload file: ") + scp.readAllStandardError());
         return false;
     }
 
@@ -105,7 +105,7 @@ bool Upload::adjustNewstuffFile(const Package &package)
         wget.waitForFinished(1000 * 60 * 60 * 12); // wait up to 12 hours for download to complete
         if (wget.exitStatus() != QProcess::NormalExit || wget.exitCode() != 0) {
             qDebug() << "Failed to download newstuff file from filesmaster.kde.org";
-            changeStatus( package, "error", "Failed to sync newstuff file: " + wget.readAllStandardError());
+            changeStatus( package, "error", QLatin1String("Failed to sync newstuff file: ") + wget.readAllStandardError());
             return false;
         }
 
