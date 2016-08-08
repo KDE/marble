@@ -15,7 +15,6 @@
 #include <QObject>
 
 // Marble
-#include <marble_export.h>
 #include <GeoDataCoordinates.h>
 
 namespace Marble
@@ -23,7 +22,7 @@ namespace Marble
 class CountryByShapePrivate;
 class MarbleWidget;
 
-class MARBLE_EXPORT CountryByShape : public QObject
+class CountryByShape : public QObject
 {
     Q_OBJECT
 public:

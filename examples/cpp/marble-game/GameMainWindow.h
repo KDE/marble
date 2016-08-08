@@ -14,8 +14,6 @@
 
 #include <GeoDataCoordinates.h>
 
-#include <marble_export.h>
-
 #include <QMainWindow>
 
 namespace Marble
@@ -24,7 +22,7 @@ namespace Marble
 class Private;
 class MarbleWidget;
 
-class MARBLE_EXPORT MainWindow: public QMainWindow
+class MainWindow: public QMainWindow
 {
     Q_OBJECT
 public:
