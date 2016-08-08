@@ -118,6 +118,7 @@ StyleBuilder::Private::Private() :
     m_defaultMinZoomLevels[GeoDataFeature::HighwayTrunk]        = 7;
     m_defaultMinZoomLevels[GeoDataFeature::HighwayMotorwayLink] = 10;
     m_defaultMinZoomLevels[GeoDataFeature::HighwayMotorway]     = 6;
+    m_defaultMinZoomLevels[GeoDataFeature::TransportAirportRunway] = 15;
 
 #if 0 // not needed as long as default min zoom level is 15
     for(int i = GeoDataFeature::AccomodationCamping; i <= GeoDataFeature::ReligionSikh; i++)
@@ -669,6 +670,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataFeature::HighwayTrunkLink]         = StyleBuilder::Private::createHighwayStyle( "highway_trunk", "#f9b29c", "#c84e2f", QFont(QStringLiteral("Arial")), "000000", 9.0, 6 );
     m_defaultStyle[GeoDataFeature::HighwayMotorway]          = StyleBuilder::Private::createHighwayStyle( "highway_motorway", "#e892a2", "#dc2a67", QFont(QStringLiteral("Arial")), "000000", 9.0, 10 );
     m_defaultStyle[GeoDataFeature::HighwayMotorwayLink]      = StyleBuilder::Private::createHighwayStyle( "highway_motorway", "#e892a2", "#dc2a67", QFont(QStringLiteral("Arial")), "000000", 9.0, 10 );
+    m_defaultStyle[GeoDataFeature::TransportAirportRunway]   = StyleBuilder::Private::createHighwayStyle( "", "#bbbbcc", "#bbbbcc", QFont(QStringLiteral("Arial")), "000000", 0, 1 );
 
     m_defaultStyle[GeoDataFeature::NaturalWater]             = StyleBuilder::Private::createStyle( 4, 0, waterColor, waterColor, true, true,
                                                                                                    Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false, QVector< qreal >(),
@@ -1419,6 +1421,7 @@ QString StyleBuilder::visualCategoryName(GeoDataFeature::GeoDataVisualCategory c
         visualCategoryNames[GeoDataFeature::TransportHelipad] = "TransportHelipad";
         visualCategoryNames[GeoDataFeature::TransportAirportTerminal] = "TransportAirportTerminal";
         visualCategoryNames[GeoDataFeature::TransportAirportGate] = "TransportAirportGate";
+        visualCategoryNames[GeoDataFeature::TransportAirportRunway] = "TransportAirportRunway";
         visualCategoryNames[GeoDataFeature::TransportBusStation] = "TransportBusStation";
         visualCategoryNames[GeoDataFeature::TransportBusStop] = "TransportBusStop";
         visualCategoryNames[GeoDataFeature::TransportCarShare] = "TransportCarShare";
