@@ -16,6 +16,11 @@ target_link_libraries( ${TARGET}
     marbledeclarative
 )
 
+# TODO: marbledeclarative is a private lib currently, not a plugin, and headers are not installed
+# so do not install this example for now
+return()
+
+
 add_custom_command(TARGET ${TARGET} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different
                        ${CMAKE_CURRENT_SOURCE_DIR}/main.qml
                        ${CMAKE_CURRENT_BINARY_DIR}
