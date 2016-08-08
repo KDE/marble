@@ -25,7 +25,7 @@ ecm_create_qm_loader(plasmaRunner_SRCS marble_qt)
 
 add_library(plasma_runner_marble MODULE ${plasmaRunner_SRCS})
 target_link_libraries(plasma_runner_marble
-  ${MARBLEWIDGET}
+  marblewidget
   KF5::Runner
   KF5::I18n
 )

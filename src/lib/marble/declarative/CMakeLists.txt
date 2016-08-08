@@ -42,8 +42,8 @@ marble_add_project_resources(qmldir)
 
 target_link_libraries( marbledeclarative
     LINK_PUBLIC
+        marblewidget
         Qt5::Quick
-        ${MARBLEWIDGET}
     LINK_PRIVATE
         Qt5::Script
 )

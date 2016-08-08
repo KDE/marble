@@ -7,8 +7,6 @@ INCLUDE_DIRECTORIES(
  ${Qt5Designer_INCLUDE_DIRS}
 )
 
-#target_link_libraries( ${MARBLEWIDGET} )
-
 set( latloneditplugin_SRCS LatLonEditPlugin.cpp )
 
 marble_add_designer_plugin( LatLonEditPlugin ${latloneditplugin_SRCS} )

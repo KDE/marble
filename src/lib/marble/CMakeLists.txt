@@ -359,22 +359,22 @@ qt_add_resources(marblewidget_SRCS libmarble.qrc ../../apps/marble-ui/marble.qrc
 
 qt_wrap_ui(marblewidget_SRCS ${marblewidget_UI})
 
-ADD_LIBRARY(${MARBLEWIDGET} SHARED ${marblewidget_SRCS} ${SOURCES_UI_HDRS})
+add_library(marblewidget SHARED ${marblewidget_SRCS} ${SOURCES_UI_HDRS})
 
-generate_export_header(${MARBLEWIDGET} BASE_NAME marble)
+generate_export_header(marblewidget BASE_NAME marble)
 
 
 # TODO: use PUBLIC/PRIVATE everywhere instead of LINK_PUBLIC/LINK_PRIVATE
 # once SailfishOS has cmake >= 2.8.12
 
 # link with libastro
-TARGET_LINK_LIBRARIES (${MARBLEWIDGET} LINK_PRIVATE astro)
+target_link_libraries(marblewidget LINK_PRIVATE astro)
 
 # link against zlib
-TARGET_LINK_LIBRARIES (${MARBLEWIDGET} LINK_PRIVATE ${ZLIB_LIBRARIES})
+target_link_libraries(marblewidget LINK_PRIVATE ${ZLIB_LIBRARIES})
 
 # link with release version of Qt libs
-TARGET_LINK_LIBRARIES (${MARBLEWIDGET}
+target_link_libraries(marblewidget
     LINK_PUBLIC
         Qt5::Xml
         Qt5::Gui
@@ -387,19 +387,19 @@ TARGET_LINK_LIBRARIES (${MARBLEWIDGET}
         Qt5::Concurrent
 )
 if (NOT MARBLE_NO_WEBKITWIDGETS)
-    TARGET_LINK_LIBRARIES (${MARBLEWIDGET}
+    target_link_libraries(marblewidget
         LINK_PUBLIC
             Qt5::WebKitWidgets
     )
 endif ()
 if (NOT MARBLE_NO_DBUS)
-    TARGET_LINK_LIBRARIES (${MARBLEWIDGET}
+    target_link_libraries(marblewidget
         LINK_PRIVATE
             Qt5::DBus
     )
 endif ()
 if (PHONON_FOUND)
-    TARGET_LINK_LIBRARIES (${MARBLEWIDGET}
+    target_link_libraries(marblewidget
         LINK_PRIVATE
             ${PHONON_LIBS}
     )
@@ -408,42 +408,43 @@ endif()
 if (APPLE)
   # TODO: PUBLIC or can be PRIVATE?
   #defined in top level makefile
-  TARGET_LINK_LIBRARIES(${MARBLEWIDGET} LINK_PUBLIC ${MAC_EXTRA_LIBS} )
+  target_link_libraries(marblewidget LINK_PUBLIC ${MAC_EXTRA_LIBS} )
 endif (APPLE)
 
 # TODO: still supported?
 if (CMAKE_SYSTEM_NAME MATCHES "SunOS")
-  TARGET_LINK_LIBRARIES(${MARBLEWIDGET} LINK_PUBLIC m)
+  target_link_libraries(marblewidget LINK_PUBLIC m)
 endif (CMAKE_SYSTEM_NAME MATCHES "SunOS")
 
 if(WIN32)
   # TODO: PUBLIC or can be PRIVATE?
-  TARGET_LINK_LIBRARIES(${MARBLEWIDGET} LINK_PUBLIC ws2_32 imm32 winmm)
+  target_link_libraries(marblewidget LINK_PUBLIC ws2_32 imm32 winmm)
 endif(WIN32)
 
 if(NOT CMAKE_SYSTEM_NAME STREQUAL Android)
-  set_target_properties(${MARBLEWIDGET}  PROPERTIES
+  set_target_properties(marblewidget  PROPERTIES
     VERSION ${MARBLE_LIB_VERSION}
     SOVERSION ${MARBLE_ABI_VERSION}
   )
 endif()
 
-set_target_properties(${MARBLEWIDGET}  PROPERTIES
+set_target_properties(marblewidget  PROPERTIES
     EXPORT_NAME "Marble"
+    OUTPUT_NAME marblewidget-qt5
     COMPILE_FLAGS "-DKML_LAZY_IMP"
 )
 
-target_include_directories(${MARBLEWIDGET}
+target_include_directories(marblewidget
     INTERFACE "$<INSTALL_INTERFACE:${INCLUDE_INSTALL_DIR}>"
 )
 
 # choose the correct target install library path
 if(WIN32)
-  install(TARGETS ${MARBLEWIDGET} RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX} ARCHIVE DESTINATION lib)
+  install(TARGETS marblewidget RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX} ARCHIVE DESTINATION lib)
 elseif(APPLE)
-  install(TARGETS ${MARBLEWIDGET} LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/Marble.app/Contents/MacOS/lib)
+  install(TARGETS marblewidget LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/Marble.app/Contents/MacOS/lib)
 else()
-  install(TARGETS ${MARBLEWIDGET}
+  install(TARGETS marblewidget
     EXPORT MarbleTargets
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
 endif()

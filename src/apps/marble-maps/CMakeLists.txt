@@ -13,7 +13,7 @@ if (CMAKE_SYSTEM_NAME STREQUAL Android)
     # while not directly linked, need to be listed here to have deployqt pick up those libs
     target_link_libraries (
         ${TARGET}
-        ${MARBLEWIDGET}
+        marblewidget
         astro
         Qt5::Concurrent
         Qt5::Xml
