@@ -7,6 +7,9 @@ if(NOT MARBLE_NO_DBUS)
   add_definitions(-DMARBLE_DBUS)
 endif()
 
+# disabled for now:
+# no public Marble QML plugins are installed, libmarbledeclarative is only a shared lib
+if (FALSE)
 if( Qt5Quick_FOUND )
   OPTION(IGNORE_CMAKE_INSTALL_PREFIX_FOR_DECLARATIVE_PLUGINS "Install Marble Qt Declarative plugins to QT_IMPORTS_DIR even if that is out of the CMAKE_INSTALL_PREFIX")
   IF(QT_IMPORTS_DIR)
@@ -36,6 +39,7 @@ if( Qt5Quick_FOUND )
     ENDIF()
   ENDIF()
 ENDIF()
+endif()
 
 macro_optional_find_package(ZLIB QUIET)
 marble_set_package_properties(ZLIB PROPERTIES DESCRIPTION "general-purpose lossless data-compression library")
