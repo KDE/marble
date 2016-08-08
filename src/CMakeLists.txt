@@ -75,8 +75,5 @@ if(APPLE)
   add_subdirectory( mac )
 endif(APPLE)
 
-# FIXME ktimezonewidget.h is gone
-#add_subdirectory( plasmoid )
-
 add_subdirectory( plasmarunner )
 add_subdirectory( thumbnailer )
