@@ -11,6 +11,9 @@ platforms:
 public_lib: true
 public_source_dirs:
     - src/lib/marble
+libraries:
+    - cmake: Marble
+cmakename: Marble
 
 maintainer:
     - rahn
