@@ -14,15 +14,12 @@
 // Qt
 #include <QObject>
 
-// Marble
-#include <marble_export.h>
-
 namespace Marble
 {
 class CountryByFlagPrivate;
 class MarbleWidget;
 
-class MARBLE_EXPORT CountryByFlag : public QObject
+class CountryByFlag : public QObject
 {
     Q_OBJECT;
 public:
