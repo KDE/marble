@@ -1,5 +1,12 @@
 [Desktop Entry]
 Name=World Map
+Name[ca]=Mapa mundial
+Name[ca@valencia]=Mapa mundial
+Name[es]=Mapa mundial
+Name[nl]=Wereldkaart
+Name[sv]=Världskarta
+Name[uk]=Карта світу
+Name[x-test]=xxWorld Mapxx
 Type=Service
 Icon=marble
 
