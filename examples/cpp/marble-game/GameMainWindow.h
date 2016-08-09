@@ -12,7 +12,7 @@
 #ifndef MARBLE_GAMEMAINWINDOW_H
 #define MARBLE_GAMEMAINWINDOW_H
 
-#include <GeoDataCoordinates.h>
+#include <marble/GeoDataCoordinates.h>
 
 #include <QMainWindow>
 

@@ -1,27 +1,30 @@
-CMAKE_MINIMUM_REQUIRED (VERSION 2.6)
-SET (TARGET marble-game)
-PROJECT (${TARGET})
+cmake_minimum_required(VERSION 2.8.12)
 
-FIND_PACKAGE (Qt5Core REQUIRED)
-FIND_PACKAGE (Qt5Gui REQUIRED)
-FIND_PACKAGE (Qt5Widgets REQUIRED)
-FIND_PACKAGE (Marble REQUIRED)
+project(marble-game)
 
-INCLUDE_DIRECTORIES (
-${Qt5Core_INCLUDE_DIRS}
-${Qt5Gui_INCLUDE_DIRS}
-${Qt5Widgets_INCLUDE_DIRS}
-${MARBLE_INCLUDE_DIR}
-)
+find_package(Qt5Widgets REQUIRED)
+find_package(Qt5Quick REQUIRED)
+find_package(Marble REQUIRED)
 
-SET (LIBS ${MARBLE_LIBRARIES} ${Qt5Core_LIBRARIES} ${Qt5Gui_Widgets} ${Qt5Widgets_LIBRARIES})
+set(CMAKE_AUTOMOC TRUE)
 
-ADD_EXECUTABLE (
-    ${TARGET}
+set(marble-game_SRCS
     gamemain.cpp
     GameMainWindow.cpp
     CountryByShape.cpp
     CountryByFlag.cpp
-    ClickOnThat.cpp)
+    ClickOnThat.cpp
+)
 
-TARGET_LINK_LIBRARIES (${TARGET} ${LIBS})
+# TODO: qrc refers to lots of flags in marble sources
+# needs a custom variant of the qrc file (-> configure_file) and reading the flags via alias
+qt5_add_resources(marble-game_SRCS marbleGame.qrc)
+qt5_wrap_ui(marble-game_SRCS game.ui)
+
+add_executable(marble-game ${marble-game_SRCS})
+
+target_link_libraries(marble-game
+    Marble
+    Qt5::Widgets
+    Qt5::Quick
+)

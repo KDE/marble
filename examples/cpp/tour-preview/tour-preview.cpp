@@ -15,18 +15,18 @@
 
 #include <marble/MarbleWidget.h>
 #include <marble/MarbleMath.h>
-#include <GeoDataCoordinates.h>
-#include <GeoDataLineString.h>
+#include <marble/GeoDataCoordinates.h>
+#include <marble/GeoDataLineString.h>
 #include <marble/RenderPlugin.h>
 #include <marble/MarbleModel.h>
-#include <marble/routing/Route.h>
-#include <marble/routing/RoutingManager.h>
-#include <marble/routing/RoutingModel.h>
+#include <marble/Route.h>
+#include <marble/RoutingManager.h>
+#include <marble/RoutingModel.h>
 #include <marble/TourPlayback.h>
-#include <marble/geodata/data/GeoDataTour.h>
-#include <marble/geodata/data/GeoDataPlaylist.h>
-#include <marble/geodata/data/GeoDataFlyTo.h>
-#include <marble/geodata/data/GeoDataLookAt.h>
+#include <marble/GeoDataTour.h>
+#include <marble/GeoDataPlaylist.h>
+#include <marble/GeoDataFlyTo.h>
+#include <marble/GeoDataLookAt.h>
 
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>

@@ -1,0 +1,11 @@
+cmake_minimum_required(VERSION 2.8.12)
+
+project(vehicletracking)
+
+find_package(Qt5Widgets REQUIRED)
+find_package(Marble REQUIRED)
+
+set(CMAKE_AUTOMOC TRUE)
+
+add_executable(vehicletracking  vehicletracking.cpp)
+target_link_libraries(vehicletracking  Marble Qt5::Widgets)

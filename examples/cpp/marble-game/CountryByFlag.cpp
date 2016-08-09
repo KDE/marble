@@ -20,17 +20,16 @@
 #include <QVariantList>
 
 // Marble
-#include <MarbleWidget.h>
-#include <MarbleModel.h>
-#include <GeoDataTreeModel.h>
-#include <MarbleDirs.h>
-#include <MarbleDebug.h>
-#include <MarblePlacemarkModel.h>
+#include <marble/MarbleWidget.h>
+#include <marble/MarbleModel.h>
+#include <marble/GeoDataTreeModel.h>
+#include <marble/MarbleDirs.h>
+#include <marble/MarbleDebug.h>
+#include <marble/MarblePlacemarkModel.h>
 
-#include <GeoDataDocument.h>
-#include <GeoDataPlacemark.h>
-
-#include <GeoDataTypes.h>
+#include <marble/GeoDataDocument.h>
+#include <marble/GeoDataPlacemark.h>
+#include <marble/GeoDataTypes.h>
 
 namespace Marble
 {

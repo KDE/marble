@@ -12,11 +12,10 @@
 
 #include "GameMainWindow.h"
 
-#include <MapThemeManager.h>
-#include <MarbleDirs.h>
-#include <MarbleDebug.h>
-#include <MarbleLocale.h>
-#include <MarbleGlobal.h>
+#include <marble/MarbleDirs.h>
+#include <marble/MarbleDebug.h>
+#include <marble/MarbleLocale.h>
+#include <marble/MarbleGlobal.h>
 
 #include <QApplication>
 #include <QDir>

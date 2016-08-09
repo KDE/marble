@@ -1,18 +1,9 @@
-CMAKE_MINIMUM_REQUIRED (VERSION 2.6)
-SET (TARGET kml-inspector)
-PROJECT (${TARGET})
+cmake_minimum_required(VERSION 2.8.12)
 
-FIND_PACKAGE (Qt5Core REQUIRED)
-FIND_PACKAGE (Qt5Widgets REQUIRED)
-FIND_PACKAGE (Marble REQUIRED)
+project(kml-inspector)
 
-INCLUDE_DIRECTORIES (
-${Qt5Core_INCLUDE_DIRS}
-${Qt5Widgets_INCLUDE_DIRS}
-${MARBLE_INCLUDE_DIR}
-)
+find_package(Qt5Widgets REQUIRED)
+find_package(Marble REQUIRED)
 
-SET (LIBS ${MARBLE_LIBRARIES} ${Qt5Core_LIBRARIES} ${Qt5Widgets_LIBRARIES})
-
-ADD_EXECUTABLE (${TARGET} main.cpp)
-TARGET_LINK_LIBRARIES (${TARGET} ${LIBS})
+add_executable(kml-inspector  main.cpp)
+target_link_libraries(kml-inspector  Marble Qt5::Widgets)

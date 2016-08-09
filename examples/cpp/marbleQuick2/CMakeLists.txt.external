@@ -1,20 +1,10 @@
-CMAKE_MINIMUM_REQUIRED (VERSION 2.8.11)
-SET (TARGET marbleQuick)
-PROJECT (${TARGET})
+cmake_minimum_required(VERSION 2.8.12)
 
-FIND_PACKAGE(Qt5Core REQUIRED)
-FIND_PACKAGE(Qt5Widgets REQUIRED)
-FIND_PACKAGE(Qt5Quick REQUIRED)
-FIND_PACKAGE (Marble REQUIRED)
+project(marbleQuick)
 
-INCLUDE_DIRECTORIES (
-${MARBLE_INCLUDE_DIR}
-${Qt5Core_INCLUDE_DIRS}
-${Qt5Widgets_INCLUDE_DIRS}
-${Qt5Quick_INCLUDE_DIRS}
-)
+find_package(Qt5Widgets REQUIRED)
+find_package(Qt5Quick REQUIRED)
+find_package(Marble REQUIRED)
 
-SET (LIBS ${LIBS} ${MARBLE_LIBRARIES} ${Qt5Core_INCLUDE_DIRS} ${Qt5Widgets_LIBRARIES} ${Qt5Quick_LIBRARIES})
-
-ADD_EXECUTABLE (${TARGET} main.cpp)
-TARGET_LINK_LIBRARIES (${TARGET} ${LIBS})
+add_executable(marbleQuick  main.cpp)
+target_link_libraries(marbleQuick  Marble Qt5::Widgets Qt5::Quick)

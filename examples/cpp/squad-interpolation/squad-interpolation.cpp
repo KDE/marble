@@ -10,16 +10,16 @@
 
 #include "squad-interpolation.h"
 
-#include <MarbleWidget.h>
-#include <MarbleGlobal.h>
-#include <GeoDataDocument.h>
-#include <GeoDataPlacemark.h>
-#include <GeoDataLineString.h>
-#include <GeoDataTreeModel.h>
-#include <MarblePlacemarkModel.h>
-#include <GeoDataTypes.h>
-#include <MarbleMath.h>
-#include <ViewportParams.h>
+#include <marble/MarbleWidget.h>
+#include <marble/MarbleGlobal.h>
+#include <marble/GeoDataDocument.h>
+#include <marble/GeoDataPlacemark.h>
+#include <marble/GeoDataLineString.h>
+#include <marble/GeoDataTreeModel.h>
+#include <marble/MarblePlacemarkModel.h>
+#include <marble/GeoDataTypes.h>
+#include <marble/MarbleMath.h>
+#include <marble/ViewportParams.h>
 
 #include <QApplication>
 #include <QTimer>
