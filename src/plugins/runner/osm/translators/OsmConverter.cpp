@@ -66,7 +66,7 @@ void OsmConverter::read(const GeoDataDocument *document)
             const GeoDataLinearRing &outerRing = polygon->outerBoundary();
             const OsmPlacemarkData outerRingOsmData = osmData.memberReference( index );
             foreach(const GeoDataCoordinates &coordinates, outerRing) {
-                m_nodes << OsmConverter::Node(coordinates, osmData.nodeReference(coordinates));
+                m_nodes << OsmConverter::Node(coordinates, outerRingOsmData.nodeReference(coordinates));
             }
             m_ways << OsmConverter::Way(&outerRing, outerRingOsmData);
 
@@ -75,7 +75,7 @@ void OsmConverter::read(const GeoDataDocument *document)
                 ++index;
                 const OsmPlacemarkData innerRingOsmData = osmData.memberReference( index );
                 foreach(const GeoDataCoordinates &coordinates, innerRing) {
-                    m_nodes << OsmConverter::Node(coordinates, osmData.nodeReference(coordinates));
+                    m_nodes << OsmConverter::Node(coordinates, innerRingOsmData.nodeReference(coordinates));
                 }
                 m_ways << OsmConverter::Way(&innerRing, innerRingOsmData);
             }
