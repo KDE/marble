@@ -50,6 +50,20 @@ void OsmObjectManager::initializeOsmData( GeoDataPlacemark* placemark )
         }
     }
 
+    // Assigning osmData to each of the line's nodes ( if they don't already have data )
+    if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLinearRingType ) {
+        const GeoDataLinearRing* lineString = static_cast<GeoDataLinearRing*>( placemark->geometry() );
+        for (auto it =lineString->constBegin(), end = lineString->constEnd(); it != end; ++it ) {
+            if ( !osmData.containsNodeReference( *it ) ) {
+                OsmPlacemarkData osmNdData;
+                osmNdData.setId( --m_minId );
+                osmNdData.setAction( "modify" );
+                osmNdData.setVisible( "false" );
+                osmData.addNodeReference( *it, osmNdData );
+            }
+        }
+    }
+
     // Assigning osmData to each of the polygons boundaries, and to each of the
     // nodes that are part of those boundaries ( if they don't already have data )
     if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
