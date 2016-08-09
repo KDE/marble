@@ -19,10 +19,10 @@
 
 #include <marble/MarbleWidget.h>
 #include <marble/MarbleGlobal.h>
-#include <GeoDataDocument.h>
-#include <GeoDataPlacemark.h>
-#include <GeoDataLineString.h>
-#include <GeoDataTreeModel.h>
+#include <marble/GeoDataDocument.h>
+#include <marble/GeoDataPlacemark.h>
+#include <marble/GeoDataLineString.h>
+#include <marble/GeoDataTreeModel.h>
 #include <marble/MarbleModel.h>
 
 

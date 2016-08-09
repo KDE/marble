@@ -15,11 +15,8 @@ make
 You can also use a local Marble version like this:
 
 cd hello-marble
-cmake -DCMAKE_MODULE_PATH=~/marble/export/share/apps/cmake/modules \
-      -DCMAKE_INCLUDE_PATH=~/marble/export/include \
-      -DCMAKE_LIBRARY_PATH=~/marble/export/lib \
-      .
+cmake -DCMAKE_PREFIX_PATH=~/marble/export .
 make
-./hello-world
+./hello-marble
 
 In the second example Marble is assumed to be installed to ~/marble/export.

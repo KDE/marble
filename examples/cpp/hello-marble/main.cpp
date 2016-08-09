@@ -9,6 +9,7 @@
 //
 
 #include <QApplication>
+
 #include <marble/MarbleWidget.h>
 
 using namespace Marble;

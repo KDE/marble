@@ -507,6 +507,7 @@ install( FILES
     TileLevelRangeWidget.h
     QtMarbleConfigDialog.h
     global.h
+    MarbleMath.h
     MarbleColors.h
     MarbleGlobal.h
     MarbleLocale.h
@@ -566,6 +567,7 @@ install( FILES
     geodata/data/Serializable.h
     geodata/geodata_export.h
     geodata/parser/GeoDocument.h
+    geodata/parser/GeoDataTypes.h
     geodata/writer/GeoWriter.h
     routing/RoutingWidget.h
     routing/RoutingManager.h

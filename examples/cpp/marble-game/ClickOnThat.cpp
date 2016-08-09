@@ -19,20 +19,20 @@
 #include <QDir>
 
 // Marble
-#include <MarbleWidget.h>
-#include <MarbleMap.h>
-#include <MarbleModel.h>
-#include <GeoDataTreeModel.h>
-#include <MarbleDirs.h>
-#include <MarblePlacemarkModel.h>
+#include <marble/MarbleWidget.h>
+#include <marble/MarbleMap.h>
+#include <marble/MarbleModel.h>
+#include <marble/GeoDataTreeModel.h>
+#include <marble/MarbleDirs.h>
+#include <marble/MarblePlacemarkModel.h>
 
-#include <GeoDataDocument.h>
-#include <GeoDataPlacemark.h>
-#include <GeoDataStyle.h>
-#include <GeoDataStyleMap.h>
-#include <GeoDataIconStyle.h>
+#include <marble/GeoDataDocument.h>
+#include <marble/GeoDataPlacemark.h>
+#include <marble/GeoDataStyle.h>
+#include <marble/GeoDataStyleMap.h>
+#include <marble/GeoDataIconStyle.h>
 
-#include <GeoDataTypes.h>
+#include <marble/GeoDataTypes.h>
 
 namespace Marble
 {

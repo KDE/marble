@@ -15,7 +15,7 @@
 #include <QObject>
 
 // Marble
-#include <GeoDataCoordinates.h>
+#include <marble/GeoDataCoordinates.h>
 
 namespace Marble
 {

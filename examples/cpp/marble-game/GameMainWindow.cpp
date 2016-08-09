@@ -32,24 +32,24 @@
 #include <QFileInfo>
 
 // Marble
-#include <MarbleDirs.h>
-#include <MarbleWidget.h>
-#include <MarbleMap.h>
-#include <MarbleModel.h>
-#include <GeoDataTreeModel.h>
-#include <RenderPlugin.h>
-#include <MarblePlacemarkModel.h>
+#include <marble/MarbleDirs.h>
+#include <marble/MarbleWidget.h>
+#include <marble/MarbleMap.h>
+#include <marble/MarbleModel.h>
+#include <marble/GeoDataTreeModel.h>
+#include <marble/RenderPlugin.h>
+#include <marble/MarblePlacemarkModel.h>
 
-#include <GeoDataDocument.h>
-#include <GeoDataPlacemark.h>
-#include <GeoDataGeometry.h>
-#include <GeoDataMultiGeometry.h>
-#include <GeoDataPoint.h>
-#include <GeoDataCoordinates.h>
-#include <GeoDataPolygon.h>
-#include <GeoDataLinearRing.h>
-#include <GeoDataLatLonAltBox.h>
-#include <GeoDataTypes.h>
+#include <marble/GeoDataDocument.h>
+#include <marble/GeoDataPlacemark.h>
+#include <marble/GeoDataGeometry.h>
+#include <marble/GeoDataMultiGeometry.h>
+#include <marble/GeoDataPoint.h>
+#include <marble/GeoDataCoordinates.h>
+#include <marble/GeoDataPolygon.h>
+#include <marble/GeoDataLinearRing.h>
+#include <marble/GeoDataLatLonAltBox.h>
+#include <marble/GeoDataTypes.h>
 
 namespace Marble {
 

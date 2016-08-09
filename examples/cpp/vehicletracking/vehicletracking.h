@@ -13,8 +13,8 @@
 
 class QTimer;
 
-#include <GeoDataCoordinates.h>
-#include <GeoDataPlacemark.h>
+#include <marble/GeoDataCoordinates.h>
+#include <marble/GeoDataPlacemark.h>
 
 #include <QWidget>
 #include <QObject>

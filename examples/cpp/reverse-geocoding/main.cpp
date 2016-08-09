@@ -14,7 +14,7 @@
 #include <marble/MarbleWidget.h>
 #include <marble/MarbleModel.h>
 #include <marble/ReverseGeocodingRunnerManager.h>
-#include <GeoDataPlacemark.h>
+#include <marble/GeoDataPlacemark.h>
 
 using namespace Marble;
 
