@@ -17,6 +17,7 @@
 
 import QtQuick 2.1
 
+import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 import org.kde.marble.private.plasma 0.20
@@ -26,6 +27,7 @@ MarbleItem {
 
     readonly property int centerMode: wallpaper.configuration.centerMode
     readonly property double fixedLongitude: wallpaper.configuration.fixedLongitude
+    readonly property double locationLongitude: geolocationDataSource.data.longitude
 
     enabled: false // do not handle input
 
@@ -63,15 +65,24 @@ MarbleItem {
     function handleCenterModeChange() {
         if (centerMode === 0) {
             marbleMap.setLockToSubSolarPoint(true);
-        } else {
+        } else if (centerMode === 1)  {
             marbleMap.setLockToSubSolarPoint(false);
             marbleMap.centerOn(fixedLongitude, 0.0);
+        } else {
+            marbleMap.setLockToSubSolarPoint(false);
+            marbleMap.centerOn(locationLongitude, 0.0);
         }
     }
 
     onFixedLongitudeChanged: {
         if (centerMode === 1) {
             marbleMap.centerOn(fixedLongitude, 0.0);
+        }
+    }
+
+    onLocationLongitudeChanged: {
+        if (centerMode === 2) {
+            marbleMap.centerOn(locationLongitude, 0.0);
         }
     }
 
@@ -85,5 +96,12 @@ MarbleItem {
         marbleMap.setShowOtherPlaces(false);
 
         handleCenterModeChange();
+    }
+
+    PlasmaCore.DataSource {
+        id: geolocationDataSource
+        engine: "geolocation"
+        connectedSources: (marbleItem.centerMode === 2) ? ["location"] : []
+        interval: 10 * 60 * 1000 // every 30 minutes, might be still too large for users on the ISS :P
     }
 }

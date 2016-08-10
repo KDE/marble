@@ -18,6 +18,7 @@
         <choices>
           <choice name="Daylight" />
           <choice name="Longitude" />
+          <choice name="Position" />
         </choices>
         <default>Daylight</default>
     </entry>

@@ -72,7 +72,8 @@ ColumnLayout {
             Layout.column: 1
             model: [
                 i18n("Daylight"),
-                i18n("Longitude")
+                i18n("Longitude"),
+                i18n("Location")
             ]
             onCurrentIndexChanged: {
                 cfg_centerMode = currentIndex;

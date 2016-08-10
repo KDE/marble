@@ -79,7 +79,8 @@ ColumnLayout {
             id: centerModeComboBox
             model: [
                 i18nd("plasma_wallpaper_org.kde.plasma.worldmap", "Daylight"),
-                i18nd("plasma_wallpaper_org.kde.plasma.worldmap", "Longitude")
+                i18nd("plasma_wallpaper_org.kde.plasma.worldmap", "Longitude"),
+                i18nd("plasma_wallpaper_org.kde.plasma.worldmap", "Location")
             ]
             onCurrentIndexChanged: {
                 cfg_centerMode = currentIndex;

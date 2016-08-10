@@ -28,17 +28,20 @@ import org.kde.marble.private.plasma 0.20
 Item {
     id: root
 
-    readonly property date currentDateTime: dataSource.data.Local ? dataSource.data.Local.DateTime : new Date()
-
-    Plasmoid.toolTipMainText: Qt.formatTime(currentDateTime)
-    Plasmoid.toolTipSubText: Qt.formatDate(currentDateTime, Qt.locale().dateFormat(Locale.LongFormat))
+    readonly property date currentDateTime: timeDataSource.data.Local ? timeDataSource.data.Local.DateTime : new Date()
 
     PlasmaCore.DataSource {
-        id: dataSource
+        id: timeDataSource
         engine: "time"
         connectedSources: ["Local"]
         interval: 60000
         intervalAlignment: PlasmaCore.Types.AlignToMinute
+    }
+    PlasmaCore.DataSource {
+        id: geolocationDataSource
+        engine: "geolocation"
+        connectedSources: (marbleItem.centerMode === 2) ? ["location"] : []
+        interval: 10 * 60 * 1000 // every 30 minutes, might be still too large for users on the ISS :P
     }
 
     Plasmoid.preferredRepresentation: Plasmoid.fullRepresentation
@@ -48,6 +51,7 @@ Item {
 
         readonly property int centerMode: plasmoid.configuration.centerMode
         readonly property double fixedLongitude: plasmoid.configuration.fixedLongitude
+        readonly property double locationLongitude: geolocationDataSource.data.longitude
 
         enabled: false // do not handle input
         Layout.minimumWidth: units.gridUnit * 20
@@ -88,15 +92,24 @@ Item {
         function handleCenterModeChange() {
             if (centerMode === 0) {
                 marbleMap.setLockToSubSolarPoint(true);
-            } else {
+            } else if (centerMode === 1) {
                 marbleMap.setLockToSubSolarPoint(false);
                 marbleMap.centerOn(fixedLongitude, 0.0);
+            } else {
+                marbleMap.setLockToSubSolarPoint(false);
+                marbleMap.centerOn(locationLongitude, 0.0);
             }
         }
 
         onFixedLongitudeChanged: {
             if (centerMode === 1) {
                 marbleMap.centerOn(fixedLongitude, 0.0);
+            }
+        }
+
+        onLocationLongitudeChanged: {
+            if (centerMode === 2) {
+                marbleMap.centerOn(locationLongitude, 0.0);
             }
         }
 
