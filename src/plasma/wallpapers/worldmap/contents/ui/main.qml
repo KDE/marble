@@ -67,6 +67,7 @@ MarbleItem {
 
         // will depend on wallpaper.configuration.centerSun
         marbleMap.setLockToSubSolarPoint(true);
+        marbleMap.setCenterLatitude(0);
         marbleMap.setSubSolarPointIconVisible(true);
     }
 }

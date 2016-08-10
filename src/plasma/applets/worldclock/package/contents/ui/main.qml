@@ -92,6 +92,7 @@ Item {
 
             // will depend on plasmoid.configuration.centerSun
             marbleMap.setLockToSubSolarPoint(true);
+            marbleMap.setCenterLatitude(0);
             marbleMap.setSubSolarPointIconVisible(true);
         }
 
