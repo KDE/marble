@@ -25,7 +25,7 @@ MarbleItem {
     id: marbleItem
 
     readonly property int centerMode: wallpaper.configuration.centerMode
-    readonly property double centerLongitude: wallpaper.configuration.centerLongitude
+    readonly property double fixedLongitude: wallpaper.configuration.fixedLongitude
 
     enabled: false // do not handle input
 
@@ -65,13 +65,13 @@ MarbleItem {
             marbleMap.setLockToSubSolarPoint(true);
         } else {
             marbleMap.setLockToSubSolarPoint(false);
-            marbleMap.centerOn(centerLongitude, 0.0);
+            marbleMap.centerOn(fixedLongitude, 0.0);
         }
     }
 
-    onCenterLongitudeChanged: {
+    onFixedLongitudeChanged: {
         if (centerMode === 1) {
-            marbleMap.centerOn(centerLongitude, 0.0);
+            marbleMap.centerOn(fixedLongitude, 0.0);
         }
     }
 

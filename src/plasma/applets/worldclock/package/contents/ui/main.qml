@@ -47,7 +47,7 @@ Item {
         id: marbleItem
 
         readonly property int centerMode: plasmoid.configuration.centerMode
-        readonly property double centerLongitude: plasmoid.configuration.centerLongitude
+        readonly property double fixedLongitude: plasmoid.configuration.fixedLongitude
 
         enabled: false // do not handle input
         Layout.minimumWidth: units.gridUnit * 20
@@ -90,13 +90,13 @@ Item {
                 marbleMap.setLockToSubSolarPoint(true);
             } else {
                 marbleMap.setLockToSubSolarPoint(false);
-                marbleMap.centerOn(centerLongitude, 0.0);
+                marbleMap.centerOn(fixedLongitude, 0.0);
             }
         }
 
-        onCenterLongitudeChanged: {
+        onFixedLongitudeChanged: {
             if (centerMode === 1) {
-                marbleMap.centerOn(centerLongitude, 0.0);
+                marbleMap.centerOn(fixedLongitude, 0.0);
             }
         }
 

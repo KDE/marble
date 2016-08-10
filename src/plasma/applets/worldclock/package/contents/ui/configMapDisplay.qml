@@ -24,7 +24,7 @@ ColumnLayout {
 
     property int cfg_projection: plasmoid.configuration.projection // Enum needs manual set/get for now
     property int cfg_centerMode: plasmoid.configuration.centerMode // Enum needs manual set/get for now
-    property alias cfg_centerLongitude: longitudeSpinBox.value
+    property alias cfg_fixedLongitude: longitudeSpinBox.value
     property alias cfg_showDate: showDateCheckBox.checked
 
     GridLayout {

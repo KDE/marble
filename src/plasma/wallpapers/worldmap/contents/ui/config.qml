@@ -27,7 +27,7 @@ ColumnLayout {
     id: root
     property int cfg_projection: wallpaper.configuration.projection // Enum needs manual set/get for now
     property int cfg_centerMode: wallpaper.configuration.centerMode // Enum needs manual set/get for now
-    property alias cfg_centerLongitude: longitudeSpinBox.value
+    property alias cfg_fixedLongitude: longitudeSpinBox.value
 
     RowLayout {
         spacing: units.largeSpacing / 2

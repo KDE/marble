@@ -22,7 +22,7 @@
         <default>Daylight</default>
     </entry>
 
-    <entry name="centerLongitude" type="double">
+    <entry name="fixedLongitude" type="double">
         <default>0</default>
     </entry>
   </group>
