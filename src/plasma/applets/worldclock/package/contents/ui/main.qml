@@ -46,6 +46,9 @@ Item {
     Plasmoid.fullRepresentation: MarbleItem {
         id: marbleItem
 
+        readonly property int centerMode: plasmoid.configuration.centerMode
+        readonly property double centerLongitude: plasmoid.configuration.centerLongitude
+
         enabled: false // do not handle input
         Layout.minimumWidth: units.gridUnit * 20
         Layout.minimumHeight: units.gridUnit * 10
@@ -81,6 +84,22 @@ Item {
         showScaleBar: false
         // TODO: showCredit: false
 
+        onCenterModeChanged: handleCenterModeChange()
+        function handleCenterModeChange() {
+            if (centerMode === 0) {
+                marbleMap.setLockToSubSolarPoint(true);
+            } else {
+                marbleMap.setLockToSubSolarPoint(false);
+                marbleMap.centerOn(centerLongitude, 0.0);
+            }
+        }
+
+        onCenterLongitudeChanged: {
+            if (centerMode === 1) {
+                marbleMap.centerOn(centerLongitude, 0.0);
+            }
+        }
+
         Component.onCompleted: {
             marbleMap.setShowSunShading(true);
             marbleMap.setShowCityLights(true);
@@ -90,10 +109,7 @@ Item {
             marbleMap.setShowCities(false);
             marbleMap.setShowTerrain(false);
 
-            // will depend on plasmoid.configuration.centerSun
-            marbleMap.setLockToSubSolarPoint(true);
-            marbleMap.setCenterLatitude(0);
-            marbleMap.setSubSolarPointIconVisible(true);
+            handleCenterModeChange();
         }
 
         ColumnLayout {

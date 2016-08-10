@@ -13,6 +13,18 @@
         </choices>
         <default>Equirectangular</default>
     </entry>
+
+    <entry name="centerMode" type="Enum">
+        <choices>
+          <choice name="Daylight" />
+          <choice name="Longitude" />
+        </choices>
+        <default>Daylight</default>
+    </entry>
+
+    <entry name="centerLongitude" type="double">
+        <default>0</default>
+    </entry>
   </group>
 
 </kcfg>

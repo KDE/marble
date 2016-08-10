@@ -25,7 +25,9 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 
 ColumnLayout {
     id: root
-    property int cfg_projection: plasmoid.configuration.projection // Enum needs manual set/get for now
+    property int cfg_projection: wallpaper.configuration.projection // Enum needs manual set/get for now
+    property int cfg_centerMode: wallpaper.configuration.centerMode // Enum needs manual set/get for now
+    property alias cfg_centerLongitude: longitudeSpinBox.value
 
     RowLayout {
         spacing: units.largeSpacing / 2
@@ -55,8 +57,60 @@ ColumnLayout {
                 cfg_projection = currentIndex;
             }
             Component.onCompleted: {
-                currentIndex = plasmoid.configuration.projection;
+                currentIndex = wallpaper.configuration.projection;
             }
+        }
+    }
+    RowLayout {
+        spacing: units.largeSpacing / 2
+
+        QtControls.Label {
+            Layout.minimumWidth: width
+            Layout.maximumWidth: width
+            width: formAlignment - units.largeSpacing
+            horizontalAlignment: Text.AlignRight
+            anchors {
+                verticalCenter: centerModeComboBox.verticalCenter
+            }
+            text: i18nd("plasma_wallpaper_org.kde.plasma.worldmap", "Center on:")
+        }
+
+        QtControls.ComboBox {
+            id: centerModeComboBox
+            model: [
+                i18nd("plasma_wallpaper_org.kde.plasma.worldmap", "Daylight"),
+                i18nd("plasma_wallpaper_org.kde.plasma.worldmap", "Longitude")
+            ]
+            onCurrentIndexChanged: {
+                cfg_centerMode = currentIndex;
+            }
+            Component.onCompleted: {
+                currentIndex = wallpaper.configuration.centerMode;
+            }
+        }
+
+    }
+    RowLayout {
+        spacing: units.largeSpacing / 2
+
+         QtControls.Label {
+            Layout.minimumWidth: width
+            Layout.maximumWidth: width
+            width: formAlignment - units.largeSpacing
+            horizontalAlignment: Text.AlignRight
+            anchors {
+                verticalCenter: longitudeSpinBox.verticalCenter
+            }
+            enabled: (cfg_centerMode === 1)
+            text: i18nd("plasma_wallpaper_org.kde.plasma.worldmap", "Longitude:")
+        }
+
+        QtControls.SpinBox {
+            enabled: (cfg_centerMode === 1)
+            id: longitudeSpinBox
+            maximumValue: 180.0
+            minimumValue: -180.0
+            decimals: 5
         }
     }
 

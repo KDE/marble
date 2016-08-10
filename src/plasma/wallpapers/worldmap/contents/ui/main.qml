@@ -24,6 +24,9 @@ import org.kde.marble.private.plasma 0.20
 MarbleItem {
     id: marbleItem
 
+    readonly property int centerMode: wallpaper.configuration.centerMode
+    readonly property double centerLongitude: wallpaper.configuration.centerLongitude
+
     enabled: false // do not handle input
 
     radius: {
@@ -56,6 +59,22 @@ MarbleItem {
     showOverviewMap: false
     showScaleBar: false
 
+    onCenterModeChanged: handleCenterModeChange()
+    function handleCenterModeChange() {
+        if (centerMode === 0) {
+            marbleMap.setLockToSubSolarPoint(true);
+        } else {
+            marbleMap.setLockToSubSolarPoint(false);
+            marbleMap.centerOn(centerLongitude, 0.0);
+        }
+    }
+
+    onCenterLongitudeChanged: {
+        if (centerMode === 1) {
+            marbleMap.centerOn(centerLongitude, 0.0);
+        }
+    }
+
     Component.onCompleted: {
         marbleMap.setShowSunShading(true);
         marbleMap.setShowCityLights(true);
@@ -65,9 +84,6 @@ MarbleItem {
         marbleMap.setShowTerrain(false);
         marbleMap.setShowOtherPlaces(false);
 
-        // will depend on wallpaper.configuration.centerSun
-        marbleMap.setLockToSubSolarPoint(true);
-        marbleMap.setCenterLatitude(0);
-        marbleMap.setSubSolarPointIconVisible(true);
+        handleCenterModeChange();
     }
 }
