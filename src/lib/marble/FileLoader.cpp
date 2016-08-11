@@ -255,6 +255,7 @@ void FileLoaderPrivate::createFilterProperties( GeoDataContainer *container )
             Q_ASSERT( dynamic_cast<GeoDataPlacemark*>( *i ) );
 
             GeoDataPlacemark* placemark = static_cast<GeoDataPlacemark*>( *i );
+            const QString placemarkRole = placemark->role();
             Q_ASSERT( placemark->geometry() );
 
             bool hasPopularity = false;
@@ -267,7 +268,9 @@ void FileLoaderPrivate::createFilterProperties( GeoDataContainer *container )
             }
 
             // Mountain (H), Volcano (V), Shipwreck (W)
-            if ( placemark->role() == "H" || placemark->role() == "V" || placemark->role() == "W" )
+            if (placemarkRole == QLatin1String("H") ||
+                placemarkRole == QLatin1String("V") ||
+                placemarkRole == QLatin1String("W"))
             {
                 qreal altitude = placemark->coordinate().altitude();
                 if ( altitude != 0.0 )
@@ -278,7 +281,9 @@ void FileLoaderPrivate::createFilterProperties( GeoDataContainer *container )
                 }
             }
             // Continent (K), Ocean (O), Nation (S)
-            else if ( placemark->role() == "K" || placemark->role() == "O" || placemark->role() == "S" )
+            else if (placemarkRole == QLatin1String("K") ||
+                     placemarkRole == QLatin1String("O") ||
+                     placemarkRole == QLatin1String("S"))
             {
                 qreal area = placemark->area();
                 if ( area >= 0.0 )
@@ -290,54 +295,57 @@ void FileLoaderPrivate::createFilterProperties( GeoDataContainer *container )
                 }
             }
             // Pole (P)
-            else if ( placemark->role() == "P" )
+            else if (placemarkRole == QLatin1String("P") )
             {
                 placemark->setPopularity( 1000000000 );
                 placemark->setZoomLevel( 1 );
             }
             // Magnetic Pole (M)
-            else if ( placemark->role() == "M" )
+            else if (placemarkRole == QLatin1String("M"))
             {
                 placemark->setPopularity( 10000000 );
                 placemark->setZoomLevel( 3 );
             }
             // MannedLandingSite (h)
-            else if ( placemark->role() == "h" )
+            else if (placemarkRole == QLatin1String("h"))
             {
                 placemark->setPopularity( 1000000000 );
                 placemark->setZoomLevel( 1 );
             }
             // RoboticRover (r)
-            else if ( placemark->role() == "r" )
+            else if (placemarkRole == QLatin1String("r"))
             {
                 placemark->setPopularity( 10000000 );
                 placemark->setZoomLevel( 2 );
             }
             // UnmannedSoftLandingSite (u)
-            else if ( placemark->role() == "u" )
+            else if (placemarkRole == QLatin1String("u"))
             {
                 placemark->setPopularity( 1000000 );
                 placemark->setZoomLevel( 3 );
             }
             // UnmannedSoftLandingSite (i)
-            else if ( placemark->role() == "i" )
+            else if (placemarkRole == QLatin1String("i"))
             {
                 placemark->setPopularity( 1000000 );
                 placemark->setZoomLevel( 3 );
             }
             // Space Terrain: Craters, Maria, Montes, Valleys, etc.
-            else if (    placemark->role() == "m" || placemark->role() == "v"
-                         || placemark->role() == "o" || placemark->role() == "c"
-                         || placemark->role() == "a" )
+            else if (placemarkRole == QLatin1String("m") ||
+                     placemarkRole == QLatin1String("v") ||
+                     placemarkRole == QLatin1String("o") ||
+                     placemarkRole == QLatin1String("c") ||
+                     placemarkRole == QLatin1String("a"))
             {
                 qint64 diameter = placemark->population();
                 if ( diameter >= 0 )
                 {
                     hasPopularity = true;
                     placemark->setPopularity( diameter );
-                    if ( placemark->role() == "c" ) {
+                    if (placemarkRole == QLatin1String("c")) {
                         placemark->setZoomLevel( spacePopIdx( diameter ) );
-                        if ( placemark->name() == "Tycho" || placemark->name() == "Copernicus" ) {
+                        if (placemark->name() == QLatin1String("Tycho") ||
+                            placemark->name() == QLatin1String("Copernicus")) {
                             placemark->setZoomLevel( 1 );
                         }
                     }
@@ -345,7 +353,7 @@ void FileLoaderPrivate::createFilterProperties( GeoDataContainer *container )
                         placemark->setZoomLevel( spacePopIdx( diameter ) );
                     }
 
-                    if ( placemark->role() == "a" && diameter == 0 ) {
+                    if (placemarkRole == QLatin1String("a") && diameter == 0) {
                         placemark->setPopularity( 1000000000 );
                         placemark->setZoomLevel( 1 );
                     }
@@ -364,31 +372,31 @@ void FileLoaderPrivate::createFilterProperties( GeoDataContainer *container )
 
             //  Then we set the visual category:
 
-            if ( placemark->role() == "H" )      placemark->setVisualCategory( GeoDataPlacemark::Mountain );
-            else if ( placemark->role() == "V" ) placemark->setVisualCategory( GeoDataPlacemark::Volcano );
+            if (placemarkRole == QLatin1String("H"))      placemark->setVisualCategory( GeoDataPlacemark::Mountain );
+            else if (placemarkRole == QLatin1String("V")) placemark->setVisualCategory( GeoDataPlacemark::Volcano );
 
-            else if ( placemark->role() == "m" ) placemark->setVisualCategory( GeoDataPlacemark::Mons );
-            else if ( placemark->role() == "v" ) placemark->setVisualCategory( GeoDataPlacemark::Valley );
-            else if ( placemark->role() == "o" ) placemark->setVisualCategory( GeoDataPlacemark::OtherTerrain );
-            else if ( placemark->role() == "c" ) placemark->setVisualCategory( GeoDataPlacemark::Crater );
-            else if ( placemark->role() == "a" ) placemark->setVisualCategory( GeoDataPlacemark::Mare );
+            else if (placemarkRole == QLatin1String("m")) placemark->setVisualCategory( GeoDataPlacemark::Mons );
+            else if (placemarkRole == QLatin1String("v")) placemark->setVisualCategory( GeoDataPlacemark::Valley );
+            else if (placemarkRole == QLatin1String("o")) placemark->setVisualCategory( GeoDataPlacemark::OtherTerrain );
+            else if (placemarkRole == QLatin1String("c")) placemark->setVisualCategory( GeoDataPlacemark::Crater );
+            else if (placemarkRole == QLatin1String("a")) placemark->setVisualCategory( GeoDataPlacemark::Mare );
 
-            else if ( placemark->role() == "P" ) placemark->setVisualCategory( GeoDataPlacemark::GeographicPole );
-            else if ( placemark->role() == "M" ) placemark->setVisualCategory( GeoDataPlacemark::MagneticPole );
-            else if ( placemark->role() == "W" ) placemark->setVisualCategory( GeoDataPlacemark::ShipWreck );
-            else if ( placemark->role() == "F" ) placemark->setVisualCategory( GeoDataPlacemark::AirPort );
-            else if ( placemark->role() == "A" ) placemark->setVisualCategory( GeoDataPlacemark::Observatory );
-            else if ( placemark->role() == "K" ) placemark->setVisualCategory( GeoDataPlacemark::Continent );
-            else if ( placemark->role() == "O" ) placemark->setVisualCategory( GeoDataPlacemark::Ocean );
-            else if ( placemark->role() == "S" ) placemark->setVisualCategory( GeoDataPlacemark::Nation );
-            else if ( placemark->role()=="PPL"
-                   || placemark->role()=="PPLF"
-                   || placemark->role()=="PPLG"
-                   || placemark->role()=="PPLL"
-                   || placemark->role()=="PPLQ"
-                   || placemark->role()=="PPLR"
-                   || placemark->role()=="PPLS"
-                   || placemark->role()=="PPLW" ) {
+            else if (placemarkRole == QLatin1String("P")) placemark->setVisualCategory( GeoDataPlacemark::GeographicPole );
+            else if (placemarkRole == QLatin1String("M")) placemark->setVisualCategory( GeoDataPlacemark::MagneticPole );
+            else if (placemarkRole == QLatin1String("W")) placemark->setVisualCategory( GeoDataPlacemark::ShipWreck );
+            else if (placemarkRole == QLatin1String("F")) placemark->setVisualCategory( GeoDataPlacemark::AirPort );
+            else if (placemarkRole == QLatin1String("A")) placemark->setVisualCategory( GeoDataPlacemark::Observatory );
+            else if (placemarkRole == QLatin1String("K")) placemark->setVisualCategory( GeoDataPlacemark::Continent );
+            else if (placemarkRole == QLatin1String("O")) placemark->setVisualCategory( GeoDataPlacemark::Ocean );
+            else if (placemarkRole == QLatin1String("S")) placemark->setVisualCategory( GeoDataPlacemark::Nation );
+            else if (placemarkRole == QLatin1String("PPL") ||
+                     placemarkRole == QLatin1String("PPLF") ||
+                     placemarkRole == QLatin1String("PPLG") ||
+                     placemarkRole == QLatin1String("PPLL") ||
+                     placemarkRole == QLatin1String("PPLQ") ||
+                     placemarkRole == QLatin1String("PPLR") ||
+                     placemarkRole == QLatin1String("PPLS") ||
+                     placemarkRole == QLatin1String("PPLW")) {
                 switch (placemark->zoomLevel()) {
                 case 3:
                 case 4:
@@ -407,7 +415,7 @@ void FileLoaderPrivate::createFilterProperties( GeoDataContainer *container )
                     break;
                 }
             }
-            else if (placemark->role() == "PPLA") {
+            else if (placemarkRole == QLatin1String("PPLA")) {
                 switch (placemark->zoomLevel()) {
                 case 3:
                 case 4:
@@ -426,7 +434,7 @@ void FileLoaderPrivate::createFilterProperties( GeoDataContainer *container )
                     break;
                 }
             }
-            else if (placemark->role()=="PPLC") {
+            else if (placemarkRole == QLatin1String("PPLC")) {
                 switch (placemark->zoomLevel()) {
                 case 3:
                 case 4:
@@ -445,7 +453,8 @@ void FileLoaderPrivate::createFilterProperties( GeoDataContainer *container )
                     break;
                 }
             }
-            else if (placemark->role()=="PPLA2" || placemark->role()=="PPLA3") {
+            else if (placemarkRole == QLatin1String("PPLA2") ||
+                     placemarkRole == QLatin1String("PPLA3")) {
                 switch (placemark->zoomLevel()) {
                 case 3:
                 case 4:
@@ -464,20 +473,28 @@ void FileLoaderPrivate::createFilterProperties( GeoDataContainer *container )
                     break;
                 }
             }
-            else if ( placemark->role()==" " && !hasPopularity && placemark->visualCategory() == GeoDataPlacemark::Unknown ) {
+            else if (placemarkRole == QLatin1String(" ") && !hasPopularity && placemark->visualCategory() == GeoDataPlacemark::Unknown) {
                 placemark->setVisualCategory( GeoDataPlacemark::Unknown ); // default location
                 placemark->setZoomLevel(0);
             }
-            else if ( placemark->role() == "h" ) placemark->setVisualCategory( GeoDataPlacemark::MannedLandingSite );
-            else if ( placemark->role() == "r" ) placemark->setVisualCategory( GeoDataPlacemark::RoboticRover );
-            else if ( placemark->role() == "u" ) placemark->setVisualCategory( GeoDataPlacemark::UnmannedSoftLandingSite );
-            else if ( placemark->role() == "i" ) placemark->setVisualCategory( GeoDataPlacemark::UnmannedHardLandingSite );
+            else if (placemarkRole == QLatin1String("h")) {
+                placemark->setVisualCategory( GeoDataPlacemark::MannedLandingSite );
+            }
+            else if (placemarkRole == QLatin1String("r")) {
+                placemark->setVisualCategory( GeoDataPlacemark::RoboticRover );
+            }
+            else if (placemarkRole == QLatin1String("u")) {
+                placemark->setVisualCategory( GeoDataPlacemark::UnmannedSoftLandingSite );
+            }
+            else if (placemarkRole == QLatin1String("i")) {
+                placemark->setVisualCategory( GeoDataPlacemark::UnmannedHardLandingSite );
+            }
 
-            if ( placemark->role() == "W" && placemark->zoomLevel() < 4 )
+            if (placemarkRole == QLatin1String("W") && placemark->zoomLevel() < 4)
                 placemark->setZoomLevel( 4 );
-            if ( placemark->role() == "O" )
+            if (placemarkRole == QLatin1String("O"))
                 placemark->setZoomLevel( 2 );
-            if ( placemark->role() == "K" )
+            if (placemarkRole == QLatin1String("K"))
                 placemark->setZoomLevel( 0 );
             if ( !placemark->isVisible() ) {
                 placemark->setZoomLevel( 18 );
