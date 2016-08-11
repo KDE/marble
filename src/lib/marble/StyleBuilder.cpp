@@ -205,6 +205,8 @@ GeoDataStyle::Ptr StyleBuilder::Private::createPOIStyle( const QFont &font, cons
     style->iconStyle().setSize(QSize(pixelSize, pixelSize));
     style->setLabelStyle( GeoDataLabelStyle( font, textColor ) );
     style->labelStyle().setAlignment(GeoDataLabelStyle::Center);
+    style->polyStyle().setFill(false);
+    style->polyStyle().setOutline(false);
     return style;
 }
 
