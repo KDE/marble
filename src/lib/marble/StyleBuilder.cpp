@@ -969,8 +969,9 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
                 }
             }
         }
-        else if (visualCategory >= GeoDataFeature::HighwayService &&
-                visualCategory <= GeoDataFeature::HighwayMotorway) {
+        else if ((visualCategory >= GeoDataFeature::HighwayService &&
+                visualCategory <= GeoDataFeature::HighwayMotorway) ||
+                visualCategory == GeoDataFeature::TransportAirportRunway) {
 
             if (parameters.tileLevel >= 0 && parameters.tileLevel <= 7) {
                 /** @todo: Dummy implementation for dynamic style changes based on tile level, replace with sane values */
