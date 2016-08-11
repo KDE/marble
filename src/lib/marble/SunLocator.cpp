@@ -46,6 +46,7 @@ public:
     SunLocatorPrivate( const MarbleClock *clock, const Planet *planet )
         : m_lon( 0.0 ),
           m_lat( 0.0 ),
+          m_twilightZone( 0.0 ),
           m_clock( clock ),
           m_planet( planet )
     {
@@ -53,6 +54,8 @@ public:
 
     qreal m_lon;
     qreal m_lat;
+
+    qreal m_twilightZone;
 
     const MarbleClock *const m_clock;
     const Planet *m_planet;
@@ -63,6 +66,7 @@ SunLocator::SunLocator( const MarbleClock *clock, const Planet *planet )
   : QObject(),
     d( new SunLocatorPrivate( clock, planet ))
 {
+    updateTwilightZone();
 }
 
 SunLocator::~SunLocator()
@@ -94,6 +98,21 @@ void SunLocator::updatePosition()
     d->m_lat = lat * DEG2RAD;
 }
 
+void SunLocator::updateTwilightZone()
+{
+    const QString planetId = d->m_planet->id();
+
+    if (planetId == QLatin1String("earth") || planetId == QLatin1String("venus")) {
+        d->m_twilightZone = 0.1; // this equals 18 deg astronomical twilight.
+    }
+    else if (planetId == QLatin1String("mars")) {
+        d->m_twilightZone = 0.05;
+    }
+    else {
+        d->m_twilightZone = 0.0;
+    }
+
+}
 
 qreal SunLocator::shading(qreal lon, qreal a, qreal c) const
 {
@@ -110,23 +129,13 @@ qreal SunLocator::shading(qreal lon, qreal a, qreal c) const
       theta = 2*asin(sqrt(h))
     */
 
-    qreal twilightZone = 0.0;
-
-    QString planetId = d->m_planet->id();
-    if ( planetId == "earth" || planetId == "venus") {
-        twilightZone = 0.1; // this equals 18 deg astronomical twilight.
-    }
-    else if ( planetId == "mars" ) {
-        twilightZone = 0.05;
-    }
-
     qreal brightness;
-    if ( h <= 0.5 - twilightZone / 2.0 )
+    if ( h <= 0.5 - d->m_twilightZone / 2.0 )
         brightness = 1.0;
-    else if ( h >= 0.5 + twilightZone / 2.0 )
+    else if ( h >= 0.5 + d->m_twilightZone / 2.0 )
         brightness = 0.0;
     else
-        brightness = ( 0.5 + twilightZone/2.0 - h ) / twilightZone;
+        brightness = ( 0.5 + d->m_twilightZone/2.0 - h ) / d->m_twilightZone;
 
     return brightness;
 }
@@ -202,6 +211,7 @@ void SunLocator::setPlanet( const Planet *planet )
 
     mDebug() << "SunLocator::setPlanet(Planet*)";
     d->m_planet = planet;
+    updateTwilightZone();
     updatePosition();
 
     // Initially there might be no planet set.

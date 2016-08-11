@@ -54,6 +54,7 @@ class MARBLE_EXPORT SunLocator : public QObject
 
  private:
     void updatePosition();
+    void updateTwilightZone();
 
     SunLocatorPrivate * const d;
 
