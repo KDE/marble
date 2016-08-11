@@ -64,6 +64,7 @@ public:
         TransportAirportTerminal,
         TransportAirportGate,
         TransportAirportRunway,
+        TransportAirportTaxiway,
         TransportBusStation,
         TransportBusStop,
         TransportCarShare,

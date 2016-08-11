@@ -323,6 +323,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         TransportAirportTerminal,
         TransportAirportGate,
         TransportAirportRunway,
+        TransportAirportTaxiway,
         TransportBusStation,
         TransportBusStop,
         TransportCarShare,

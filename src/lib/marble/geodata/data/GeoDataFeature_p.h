@@ -319,6 +319,7 @@ class GeoDataFeaturePrivate
         case GeoDataFeature::TransportHelipad: return tr("Helipad");
         case GeoDataFeature::TransportAirportGate: return tr("Airport Gate");
         case GeoDataFeature::TransportAirportRunway: return tr("Airport Runway");
+        case GeoDataFeature::TransportAirportTaxiway: return tr("Airport Taxiway");
         case GeoDataFeature::TransportAirportTerminal: return tr("Airport Terminal");
         case GeoDataFeature::TransportBusStation: return tr("Bus Station");
         case GeoDataFeature::TransportBusStop: return tr("Bus Stop");

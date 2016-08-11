@@ -304,6 +304,7 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     s_visualCategories[ OsmTag( "aeroway", "helipad" ) ]            = GeoDataFeature::TransportHelipad;
     s_visualCategories[ OsmTag( "aeroway", "gate" ) ]               = GeoDataFeature::TransportAirportGate;
     s_visualCategories[ OsmTag( "aeroway", "runway" ) ]             = GeoDataFeature::TransportAirportRunway;
+    s_visualCategories[ OsmTag( "aeroway", "taxiway" ) ]            = GeoDataFeature::TransportAirportTaxiway;
     s_visualCategories[ OsmTag( "transport", "airpor_terminal" ) ]  = GeoDataFeature::TransportAirportTerminal;
     s_visualCategories[ OsmTag( "transport", "bus_station" ) ]      = GeoDataFeature::TransportBusStation;
     s_visualCategories[ OsmTag( "highway", "bus_stop" ) ]           = GeoDataFeature::TransportBusStop;
