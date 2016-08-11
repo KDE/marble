@@ -490,19 +490,25 @@ void FileLoaderPrivate::createFilterProperties( GeoDataContainer *container )
                 placemark->setVisualCategory( GeoDataPlacemark::UnmannedHardLandingSite );
             }
 
-            if (placemarkRole == QLatin1String("W") && placemark->zoomLevel() < 4)
-                placemark->setZoomLevel( 4 );
-            if (placemarkRole == QLatin1String("O"))
-                placemark->setZoomLevel( 2 );
-            if (placemarkRole == QLatin1String("K"))
-                placemark->setZoomLevel( 0 );
-            if ( !placemark->isVisible() ) {
+            // At last fine-tune zoomlevel:
+            if (!placemark->isVisible()) {
                 placemark->setZoomLevel( 18 );
             }
             // Workaround: Emulate missing "setVisible" serialization by allowing for population
             // values smaller than -1 which are considered invisible.
-            if ( placemark->population() < -1 ) {
+            else if (placemark->population() < -1) {
                 placemark->setZoomLevel( 18 );
+            }
+            else if (placemarkRole == QLatin1String("W")) {
+                if (placemark->zoomLevel() < 4) {
+                    placemark->setZoomLevel( 4 );
+                }
+            }
+            else if (placemarkRole == QLatin1String("O")) {
+                placemark->setZoomLevel( 2 );
+            }
+            else if (placemarkRole == QLatin1String("K")) {
+                placemark->setZoomLevel( 0 );
             }
         } else {
             qWarning() << Q_FUNC_INFO << "Unknown feature" << (*i)->nodeType() << ". Skipping.";
