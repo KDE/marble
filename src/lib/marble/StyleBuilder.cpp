@@ -981,12 +981,19 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
                 lineStyle.setPhysicalWidth(0.0);
                 lineStyle.setWidth(4.0);
             } else {
-                bool const isOneWay = osmData.containsTag("oneway", "yes") || osmData.containsTag("oneway", "-1");
-                int const lanes = isOneWay ? 1 : 2; // also for motorway which implicitly is one way, but has two lanes and each direction has its own highway
-                double const laneWidth = 3.0;
-                double const margins = visualCategory == GeoDataFeature::HighwayMotorway ? 2.0 : (isOneWay ? 1.0 : 0.0);
-                double const physicalWidth = margins + lanes * laneWidth;
-                lineStyle.setPhysicalWidth(physicalWidth);
+                if (osmData.containsTagKey("width")) {
+                    QString const widthValue = osmData.tagValue("width").remove(QStringLiteral(" meters")).remove(QStringLiteral(" m"));
+                    bool ok;
+                    float const width = widthValue.toFloat(&ok);
+                    lineStyle.setPhysicalWidth(ok ? qBound(0.1f, width, 200.0f) : 0.0f);
+                } else {
+                    bool const isOneWay = osmData.containsTag("oneway", "yes") || osmData.containsTag("oneway", "-1");
+                    int const lanes = isOneWay ? 1 : 2; // also for motorway which implicitly is one way, but has two lanes and each direction has its own highway
+                    double const laneWidth = 3.0;
+                    double const margins = visualCategory == GeoDataFeature::HighwayMotorway ? 2.0 : (isOneWay ? 1.0 : 0.0);
+                    double const physicalWidth = margins + lanes * laneWidth;
+                    lineStyle.setPhysicalWidth(physicalWidth);
+                }
             }
 
             QString const accessValue = osmData.tagValue("access");
