@@ -87,8 +87,14 @@ public:
     GeoDataCoordinates findHorizon( const GeoDataCoordinates & previousCoords,
                                     const GeoDataCoordinates & currentCoords,
                                     const ViewportParams *viewport,
-                                    TessellationFlags f = 0,
-                                    int recursionCounter = 0 ) const;
+                                    TessellationFlags f = 0) const;
+
+    GeoDataCoordinates doFindHorizon(const GeoDataCoordinates & previousCoords,
+                                     const GeoDataCoordinates & currentCoords,
+                                     const ViewportParams *viewport,
+                                     TessellationFlags f,
+                                     bool currentHide,
+                                     int recursionCounter) const;
 
     bool globeHidesPoint( const GeoDataCoordinates &coordinates,
                           const ViewportParams *viewport ) const;

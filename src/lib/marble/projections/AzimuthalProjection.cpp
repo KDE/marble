@@ -566,11 +566,21 @@ void AzimuthalProjectionPrivate::horizonToPolygon( const ViewportParams *viewpor
 GeoDataCoordinates AzimuthalProjectionPrivate::findHorizon( const GeoDataCoordinates & previousCoords,
                                                     const GeoDataCoordinates & currentCoords,
                                                     const ViewportParams *viewport,
-                                                    TessellationFlags f,
-                                                    int recursionCounter ) const
+                                                    TessellationFlags f) const
 {
     bool currentHide = globeHidesPoint( currentCoords, viewport ) ;
 
+    return doFindHorizon(previousCoords, currentCoords, viewport, f, currentHide, 0);
+}
+
+
+GeoDataCoordinates AzimuthalProjectionPrivate::doFindHorizon( const GeoDataCoordinates & previousCoords,
+                                                    const GeoDataCoordinates & currentCoords,
+                                                    const ViewportParams *viewport,
+                                                    TessellationFlags f,
+                                                    bool currentHide,
+                                                    int recursionCounter ) const
+{
     if ( recursionCounter > 20 ) {
         return currentHide ? previousCoords : currentCoords;
     }
@@ -638,10 +648,10 @@ GeoDataCoordinates AzimuthalProjectionPrivate::findHorizon( const GeoDataCoordin
     bool horizonHide = globeHidesPoint( horizonCoords, viewport );
 
     if ( horizonHide != currentHide ) {
-        return findHorizon( horizonCoords, currentCoords, viewport, f, recursionCounter );
+        return doFindHorizon(horizonCoords, currentCoords, viewport, f, currentHide, recursionCounter);
     }
 
-    return findHorizon( previousCoords, horizonCoords, viewport, f, recursionCounter );
+    return doFindHorizon(previousCoords, horizonCoords, viewport, f, horizonHide, recursionCounter);
 }
 
 
