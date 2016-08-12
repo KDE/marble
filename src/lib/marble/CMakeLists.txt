@@ -421,16 +421,11 @@ if(WIN32)
   target_link_libraries(marblewidget LINK_PUBLIC ws2_32 imm32 winmm)
 endif(WIN32)
 
-if(NOT CMAKE_SYSTEM_NAME STREQUAL Android)
-  set_target_properties(marblewidget  PROPERTIES
-    VERSION ${MARBLE_LIB_VERSION}
-    SOVERSION ${MARBLE_ABI_VERSION}
-  )
-endif()
-
 set_target_properties(marblewidget  PROPERTIES
     EXPORT_NAME "Marble"
     OUTPUT_NAME marblewidget-qt5
+    VERSION ${MARBLE_LIB_VERSION}
+    SOVERSION ${MARBLE_ABI_VERSION}
     COMPILE_FLAGS "-DKML_LAZY_IMP"
 )
 
