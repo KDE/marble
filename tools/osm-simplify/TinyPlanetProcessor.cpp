@@ -68,7 +68,10 @@ GeoDataDocument *TinyPlanetProcessor::cutToTiles(unsigned int zoomLevel, unsigne
 
                 clipper.clipPolyObject(outerBoundary, clippedPolygons, true);
 
+                qDebug() << "Size(s) after:";
                 foreach(const QPolygonF& polygon, clippedPolygons) {
+
+                    qDebug() << polygon.size();
 
                     GeoDataLinearRing outerBoundary = BaseClipper::qPolygon2linearRing(polygon);
                     GeoDataPolygon* newMarblePolygon = new GeoDataPolygon();
@@ -93,7 +96,11 @@ GeoDataDocument *TinyPlanetProcessor::cutToTiles(unsigned int zoomLevel, unsigne
 
                 clipper.clipPolyObject(way, clippedPolygons, false);
 
+                qDebug() << "Size  before:" << way.size();
+                qDebug() << "Size(s) after:";
                 foreach(const QPolygonF& polygon, clippedPolygons) {
+
+                    qDebug() << polygon.size();
 
                     GeoDataLineString* newMarbleWay = new GeoDataLineString(BaseClipper::qPolygon2lineString(polygon));
 
@@ -123,7 +130,10 @@ GeoDataDocument *TinyPlanetProcessor::cutToTiles(unsigned int zoomLevel, unsigne
                     // If we cut a closed way to pieces, the results shouldn't be closed ways too
                     clipper.clipPolyObject(closedWay, clippedPolygons, false);
 
+                    qDebug() << "Size(s) after:";
                     foreach(const QPolygonF& polygon, clippedPolygons) {
+
+                        qDebug() << polygon.size();
 
                         // When a linearRing is cut to pieces, the resulting geometries will be lineStrings
                         GeoDataLineString* newMarbleWay = new GeoDataLineString(BaseClipper::qPolygon2lineString(polygon));

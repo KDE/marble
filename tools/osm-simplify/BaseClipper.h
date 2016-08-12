@@ -14,6 +14,7 @@
 #define BASECLIPPER_H
 
 #include <QPointF>
+#include <QPolygonF>
 
 #include "GeoDataLinearRing.h"
 #include "GeoDataLatLonBox.h"
@@ -43,26 +44,28 @@ public:
 
 private:
 
-    inline int sector( const QPointF & point ) const;
+    int sector( const QPointF & point ) const;
+    int borderSector( const QPointF & point ) const;
+    bool isCornerPoint (const QPointF & point) const;
 
-    inline QPointF clipTop( qreal m, const QPointF & point ) const;
-    inline QPointF clipLeft( qreal m, const QPointF & point ) const;
-    inline QPointF clipBottom( qreal m, const QPointF & point ) const;
-    inline QPointF clipRight( qreal m, const QPointF & point ) const;
+    QPointF clipTop( qreal m, const QPointF & point ) const;
+    QPointF clipLeft( qreal m, const QPointF & point ) const;
+    QPointF clipBottom( qreal m, const QPointF & point ) const;
+    QPointF clipRight( qreal m, const QPointF & point ) const;
 
 
-    inline void clipMultiple( QPolygonF & clippedPolyObject,
+    void clipMultiple( QPolygonF & clippedPolyObject,
                               QVector<QPolygonF> & clippedPolyObjects,
                               bool isClosed );
-    inline void clipOnce( QPolygonF & clippedPolyObject,
+    void clipOnce( QPolygonF & clippedPolyObject,
                               QVector<QPolygonF> & clippedPolyObjects,
                               bool isClosed );
-    inline void clipOnceCorner( QPolygonF & clippedPolyObject,
+    void clipOnceCorner( QPolygonF & clippedPolyObject,
                                 QVector<QPolygonF> & clippedPolyObjects,
                                 const QPointF& corner,
                                 const QPointF& point,
                                 bool isClosed );
-    inline void clipOnceEdge(   QPolygonF & clippedPolyObject,
+    void clipOnceEdge(   QPolygonF & clippedPolyObject,
                                 QVector<QPolygonF> & clippedPolyObjects,
                                 const QPointF& point,
                                 bool isClosed );
@@ -75,11 +78,20 @@ private:
     qreal  m_top;
     qreal  m_bottom;
 
+    QPointF m_topLeft;
+    QPointF m_topRight;
+    QPointF m_bottomRight;
+    QPointF m_bottomLeft;
+
+    QPolygonF m_viewport;
+
     int     m_currentSector;
     int     m_previousSector;
 
     QPointF    m_currentPoint;
     QPointF    m_previousPoint;
+
+    bool m_clippedTwice;
 };
 
 #endif // BASECLIPPER_H
