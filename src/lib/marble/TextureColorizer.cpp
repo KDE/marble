@@ -38,33 +38,30 @@
 namespace Marble
 {
 
+// 4 uchar long queue
 class EmbossFifo
 {
 public:
     EmbossFifo()
-        : x1( 0 )
-        , x2( 0 )
-        , x3( 0 )
-        , x4( 0 )
+        : data( 0 )
     {}
 
-    inline uchar head() const { return x1; }
-
-    inline EmbossFifo &operator<<( uchar value )
+    inline uchar head() const
     {
-        x1 = x2;
-        x2 = x3;
-        x3 = x4;
-        x4 = value;
+        // return least significant byte as head of queue
+        return data & 0x000000FF;
+    }
 
-        return *this;
+    inline void enqueue(uchar value)
+    {
+        // drop current head by shifting by one byte
+        // and append new value as most significant byte to queue
+        data = ((data >> 8) & 0x00FFFFFF) | (value << 24);
     }
 
 private:
-    uchar  x1;
-    uchar  x2;
-    uchar  x3;
-    uchar  x4;
+    // 4 byte long queue
+    quint32 data;
 };
 
 
@@ -291,7 +288,7 @@ void TextureColorizer::colorize( QImage *origimg, const ViewportParams *viewport
                 uchar&  grey = *readData; // qBlue(*data);
 
                 if ( m_showRelief ) {
-                    emboss << grey;
+                    emboss.enqueue(grey);
                     bump = ( emboss.head() + 8 - grey );
                     if ( bump  < 0 )  bump = 0;
                     if ( bump  > 15 ) bump = 15;
@@ -333,7 +330,7 @@ void TextureColorizer::colorize( QImage *origimg, const ViewportParams *viewport
                 uchar& grey = *readData; // qBlue(*data);
 
                 if ( m_showRelief ) {
-                    emboss << grey;
+                    emboss.enqueue(grey);
                     bump = ( emboss.head() + 16 - grey ) >> 1;
                     if ( bump > 15 ) bump = 15;
                     if ( bump < 0 )  bump = 0;
