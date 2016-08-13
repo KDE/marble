@@ -147,6 +147,13 @@ int main(int argc, char *argv[])
                               {"o", "output"},
                               QCoreApplication::translate("main", "Generates an output .osmfile based on other flags. If the cut-to-tiles flag is set, then this needs to be a directory."),
                               QCoreApplication::translate("main", "output_file.osm")
+                          },
+
+                          {
+                              {"e", "extension"},
+                              QCoreApplication::translate("main", "Output file type: osm (default), o5m or kml"),
+                              QCoreApplication::translate("main", "osm"),
+                              "osm"
                           }
                       });
 
@@ -162,6 +169,7 @@ int main(int argc, char *argv[])
 
     QString inputFileName = args.at(0);
     QString mergeFileName = parser.value("merge");
+    QString const extension = parser.value("extension");
     bool debug = parser.isSet("debug");
     bool silent = parser.isSet("silent");
     unsigned int zoomLevel = parser.value("zoom-level").toInt();
@@ -224,9 +232,9 @@ int main(int argc, char *argv[])
 
                 QString outputFile;
                 if(parser.isSet("output")) {
-                    outputFile = QString("%1/%2/%3/%4.osm").arg(outputName).arg(zoomLevel).arg(x).arg(y);
+                    outputFile = QString("%1/%2/%3/%4.%5").arg(outputName).arg(zoomLevel).arg(x).arg(y).arg(extension);
                 } else {
-                    outputFile = QString("%1/%2/%3.osm").arg(zoomLevel).arg(x).arg(y);
+                    outputFile = QString("%1/%2/%3.%4").arg(zoomLevel).arg(x).arg(y).arg(extension);
                 }
 
                 QDir dir;
@@ -279,9 +287,9 @@ int main(int argc, char *argv[])
 
                 QString outputFile;
                 if(parser.isSet("output")) {
-                    outputFile = QString("%1/%2/%3/%4.osm").arg(outputName).arg(zoomLevel).arg(x).arg(y);
+                    outputFile = QString("%1/%2/%3/%4.%5").arg(outputName).arg(zoomLevel).arg(x).arg(y).arg(extension);
                 } else {
-                    outputFile = QString("%1/%2/%3.osm").arg(zoomLevel).arg(x).arg(y);
+                    outputFile = QString("%1/%2/%3.%4").arg(zoomLevel).arg(x).arg(y).arg(extension);
                 }
 
                 QDir dir;
@@ -331,9 +339,9 @@ int main(int argc, char *argv[])
 
                 QString outputFile;
                 if(parser.isSet("output")) {
-                    outputFile = QString("%1/%2/%3/%4.osm").arg(outputName).arg(zoomLevel).arg(x).arg(y);
+                    outputFile = QString("%1/%2/%3/%4.%5").arg(outputName).arg(zoomLevel).arg(x).arg(y).arg(extension);
                 } else {
-                    outputFile = QString("%1/%2/%3.osm").arg(zoomLevel).arg(x).arg(y);
+                    outputFile = QString("%1/%2/%3.%4").arg(zoomLevel).arg(x).arg(y).arg(extension);
                 }
 
                 QDir dir;
