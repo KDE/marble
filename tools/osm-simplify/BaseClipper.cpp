@@ -20,13 +20,7 @@
 
 class LinkedPoint {
 public:
-    LinkedPoint(const QPointF& point) : m_point(point),
-        m_isEntering(false), m_isLeaving(false),
-        m_nextBasePolygonPoint(nullptr), m_nextClipPolygonPoint(nullptr),
-        m_processed(false)
-    {}
-
-    LinkedPoint(const QPointF& point, bool isEntering, bool isLeaving) : m_point(point),
+    explicit LinkedPoint(const QPointF& point, bool isEntering=false, bool isLeaving=false) : m_point(point),
         m_isEntering(isEntering), m_isLeaving(isLeaving),
         m_nextBasePolygonPoint(nullptr), m_nextClipPolygonPoint(nullptr),
         m_processed(false)
