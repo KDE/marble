@@ -69,12 +69,6 @@ void debugOutput( QtMsgType type, const QMessageLogContext &context, const QStri
     }
 }
 
-void usage()
-{
-    qDebug() << "Usage: osm-simplify [options] input.osm output.osm";
-    qDebug() << "\t--no-streets-smaller-than %f - eliminates streets which have realsize smaller than %f";
-}
-
 GeoDataDocument* mergeDocuments(GeoDataDocument* map1, GeoDataDocument* map2)
 {
     GeoDataDocument* mergedMap = new GeoDataDocument(*map1);
