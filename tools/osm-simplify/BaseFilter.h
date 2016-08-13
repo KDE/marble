@@ -23,7 +23,7 @@ using namespace Marble;
 class BaseFilter
 {
 public:
-    BaseFilter(GeoDataDocument* document);
+    explicit BaseFilter(GeoDataDocument* document);
     virtual ~BaseFilter();
 
     virtual void process() = 0;

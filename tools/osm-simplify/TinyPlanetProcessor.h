@@ -16,7 +16,7 @@
 class TinyPlanetProcessor : public PlacemarkFilter
 {
 public:
-    TinyPlanetProcessor(GeoDataDocument* document);
+    explicit TinyPlanetProcessor(GeoDataDocument* document);
 
     virtual void process();
 
