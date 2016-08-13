@@ -49,8 +49,8 @@ public:
                                          const QColor &color = QColor( 0xBE, 0xAD, 0xAD ),
                                          const QColor &outline = QColor( 0xBE, 0xAD, 0xAD ).darker()
                                          );
-    static GeoDataStyle::Ptr createHighwayStyle( const QString &bitmap, const QColor& color, const QColor& outlineColor,
-                                             const QFont& font = QFont(QLatin1String("Arial")), const QColor& fontColor = Qt::black,
+    static GeoDataStyle::Ptr createHighwayStyle( const QColor& color, const QColor& outlineColor, const QFont& font = QFont(QLatin1String("Arial")),
+                                             const QColor& fontColor = Qt::black,
                                              qreal width = 1, qreal realWidth = 0.0,
                                              Qt::PenStyle penStyle = Qt::SolidLine,
                                              Qt::PenCapStyle capStyle = Qt::RoundCap,
@@ -218,17 +218,11 @@ GeoDataStyle::Ptr StyleBuilder::Private::createOsmPOIStyle( const QFont &font, c
     return createPOIStyle(font, path, textColor, color, outline);
 }
 
-GeoDataStyle::Ptr StyleBuilder::Private::createHighwayStyle( const QString &imagePath, const QColor& color, const QColor& outlineColor,
-                                         const QFont& font, const QColor& fontColor, qreal width, qreal realWidth, Qt::PenStyle penStyle,
+GeoDataStyle::Ptr StyleBuilder::Private::createHighwayStyle( const QColor& color, const QColor& outlineColor, const QFont& font,
+                                                             const QColor& fontColor, qreal width, qreal realWidth, Qt::PenStyle penStyle,
                                                              Qt::PenCapStyle capStyle, bool lineBackground)
 {
-    GeoDataStyle::Ptr style = createStyle( width, realWidth, color, outlineColor, true, true,
-                                       Qt::SolidPattern, penStyle, capStyle, lineBackground, QVector< qreal >(),
-                                       font, fontColor );
-    if( !imagePath.isEmpty() ) {
-        style->setIconStyle( GeoDataIconStyle( MarbleDirs::path( "svg/osmcarto/svg/" + imagePath + ".svg" ) ) );
-    }
-    return style;
+    return createStyle( width, realWidth, color, outlineColor, true, true, Qt::SolidPattern, penStyle, capStyle, lineBackground, QVector< qreal >(), font, fontColor );
 }
 
 GeoDataStyle::Ptr StyleBuilder::Private::createWayStyle( const QColor& color, const QColor& outlineColor,
@@ -652,29 +646,29 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataFeature::BarrierWall]              = StyleBuilder::Private::createStyle( 2.0, 0.0, "#787878", "transparent", true, false, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector< qreal >(), QFont(), "transparent" );
 
     m_defaultStyle[GeoDataFeature::HighwaySteps]             = StyleBuilder::Private::createStyle(0.0, 2.0, "#fa8072", QColor(Qt::white), true, true, Qt::SolidPattern, Qt::CustomDashLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3 );
-    m_defaultStyle[GeoDataFeature::HighwayUnknown]           = StyleBuilder::Private::createHighwayStyle( "highway_unknown", "#ddd", "#bbb", QFont(QStringLiteral("Arial")), "000000", 0.0, 1.0);
-    m_defaultStyle[GeoDataFeature::HighwayPath]              = StyleBuilder::Private::createHighwayStyle( "highway_path", "#dddde8", "#999", QFont(QStringLiteral("Arial")), "000000", 0.0, 1.0, Qt::DotLine, Qt::SquareCap, true);
-    m_defaultStyle[GeoDataFeature::HighwayTrack]             = StyleBuilder::Private::createHighwayStyle( "highway_track", "#996600", QColor(Qt::white), QFont(QStringLiteral("Arial")), "000000", 1.0, 1.0, Qt::DashLine, Qt::SquareCap, true );
-    m_defaultStyle[GeoDataFeature::HighwayPedestrian]        = StyleBuilder::Private::createHighwayStyle( "highway_pedestrian", "#dddde8", "#999", QFont(QStringLiteral("Arial")), "000000", 0.0, 2.0);
-    m_defaultStyle[GeoDataFeature::HighwayFootway]           = StyleBuilder::Private::createHighwayStyle( "highway_footway", "#fa8072", QColor(Qt::white), QFont(QStringLiteral("Arial")), "000000", 0.0, 2.0, Qt::DotLine, Qt::SquareCap, true);
-    m_defaultStyle[GeoDataFeature::HighwayCycleway]          = StyleBuilder::Private::createHighwayStyle( "highway_cycleway", QColor(Qt::blue), QColor(Qt::white), QFont(QStringLiteral("Arial")), "000000", 0.0, 2.0, Qt::DotLine, Qt::SquareCap, true);
-    m_defaultStyle[GeoDataFeature::HighwayService]           = StyleBuilder::Private::createHighwayStyle( "highway_service", "#ffffff", "#bbb", QFont(QStringLiteral("Arial")), "000000", 1.0, 6 );
-    m_defaultStyle[GeoDataFeature::HighwayResidential]       = StyleBuilder::Private::createHighwayStyle( "highway_residential", "#ffffff", "#bbb", QFont(QStringLiteral("Arial")), "000000", 3, 6 );
-    m_defaultStyle[GeoDataFeature::HighwayLivingStreet]      = StyleBuilder::Private::createHighwayStyle( "highway_living_street", "#ffffff", "#bbb", QFont(QStringLiteral("Arial")), "000000", 3, 6 );
-    m_defaultStyle[GeoDataFeature::HighwayRoad]              = StyleBuilder::Private::createHighwayStyle( "highway_road", "#ddd", "#bbb", QFont(QStringLiteral("Arial")), "000000", 3, 6 );
-    m_defaultStyle[GeoDataFeature::HighwayUnclassified]      = StyleBuilder::Private::createHighwayStyle( "highway_unclassified", "#ffffff", "#bbb", QFont(QStringLiteral("Arial")), "000000", 3, 6 );
-    m_defaultStyle[GeoDataFeature::HighwayTertiary]          = StyleBuilder::Private::createHighwayStyle( "highway_tertiary", "#ffffff", "#8f8f8f", QFont(QStringLiteral("Arial")), "000000", 6.0, 6 );
-    m_defaultStyle[GeoDataFeature::HighwayTertiaryLink]      = StyleBuilder::Private::createHighwayStyle( "highway_tertiary", "#ffffff", "#8f8f8f", QFont(QStringLiteral("Arial")), "000000", 6.0, 6 );
-    m_defaultStyle[GeoDataFeature::HighwaySecondary]         = StyleBuilder::Private::createHighwayStyle( "highway_secondary", "#f7fabf", "#707d05", QFont(QStringLiteral("Arial")), "000000", 6.0, 6 );
-    m_defaultStyle[GeoDataFeature::HighwaySecondaryLink]     = StyleBuilder::Private::createHighwayStyle( "highway_secondary", "#f7fabf", "#707d05", QFont(QStringLiteral("Arial")), "000000", 6.0, 6 );
-    m_defaultStyle[GeoDataFeature::HighwayPrimary]           = StyleBuilder::Private::createHighwayStyle( "highway_primary", "#fcd6a4", "#a06b00", QFont(QStringLiteral("Arial")), "000000", 9.0, 6 );
-    m_defaultStyle[GeoDataFeature::HighwayPrimaryLink]       = StyleBuilder::Private::createHighwayStyle( "highway_primary", "#fcd6a4", "#a06b00", QFont(QStringLiteral("Arial")), "000000", 6.0, 6 );
-    m_defaultStyle[GeoDataFeature::HighwayTrunk]             = StyleBuilder::Private::createHighwayStyle( "highway_trunk", "#f9b29c", "#c84e2f", QFont(QStringLiteral("Arial")), "000000", 9.0, 6 );
-    m_defaultStyle[GeoDataFeature::HighwayTrunkLink]         = StyleBuilder::Private::createHighwayStyle( "highway_trunk", "#f9b29c", "#c84e2f", QFont(QStringLiteral("Arial")), "000000", 9.0, 6 );
-    m_defaultStyle[GeoDataFeature::HighwayMotorway]          = StyleBuilder::Private::createHighwayStyle( "highway_motorway", "#e892a2", "#dc2a67", QFont(QStringLiteral("Arial")), "000000", 9.0, 10 );
-    m_defaultStyle[GeoDataFeature::HighwayMotorwayLink]      = StyleBuilder::Private::createHighwayStyle( "highway_motorway", "#e892a2", "#dc2a67", QFont(QStringLiteral("Arial")), "000000", 9.0, 10 );
-    m_defaultStyle[GeoDataFeature::TransportAirportRunway]   = StyleBuilder::Private::createHighwayStyle( "", "#bbbbcc", "#bbbbcc", QFont(QStringLiteral("Arial")), "000000", 0, 1 );
-    m_defaultStyle[GeoDataFeature::TransportAirportTaxiway]  = StyleBuilder::Private::createHighwayStyle( "", "#bbbbcc", "#bbbbcc", QFont(QStringLiteral("Arial")), "000000", 0, 1 );
+    m_defaultStyle[GeoDataFeature::HighwayUnknown]           = StyleBuilder::Private::createHighwayStyle( "#dddddd", "#bbbbbb", QFont(QStringLiteral("Arial")), "000000", 0, 1);
+    m_defaultStyle[GeoDataFeature::HighwayPath]              = StyleBuilder::Private::createHighwayStyle( "#dddde8", "#999999", QFont(QStringLiteral("Arial")), "000000", 0, 1, Qt::DotLine, Qt::SquareCap, true);
+    m_defaultStyle[GeoDataFeature::HighwayTrack]             = StyleBuilder::Private::createHighwayStyle( "#996600", QColor(Qt::white), QFont(QStringLiteral("Arial")), "000000", 1, 1, Qt::DashLine, Qt::SquareCap, true);
+    m_defaultStyle[GeoDataFeature::HighwayPedestrian]        = StyleBuilder::Private::createHighwayStyle( "#dddde8", "#999999", QFont(QStringLiteral("Arial")), "000000", 0, 2);
+    m_defaultStyle[GeoDataFeature::HighwayFootway]           = StyleBuilder::Private::createHighwayStyle( "#fa8072", QColor(Qt::white), QFont(QStringLiteral("Arial")), "000000", 0, 2, Qt::DotLine, Qt::SquareCap, true);
+    m_defaultStyle[GeoDataFeature::HighwayCycleway]          = StyleBuilder::Private::createHighwayStyle( QColor(Qt::blue), QColor(Qt::white), QFont(QStringLiteral("Arial")), "000000", 0, 2, Qt::DotLine, Qt::SquareCap, true);
+    m_defaultStyle[GeoDataFeature::HighwayService]           = StyleBuilder::Private::createHighwayStyle( "#ffffff", "#bbbbbb", QFont(QStringLiteral("Arial")), "000000", 1, 6 );
+    m_defaultStyle[GeoDataFeature::HighwayResidential]       = StyleBuilder::Private::createHighwayStyle( "#ffffff", "#bbbbbb", QFont(QStringLiteral("Arial")), "000000", 3, 6 );
+    m_defaultStyle[GeoDataFeature::HighwayLivingStreet]      = StyleBuilder::Private::createHighwayStyle( "#ffffff", "#bbbbbb", QFont(QStringLiteral("Arial")), "000000", 3, 6 );
+    m_defaultStyle[GeoDataFeature::HighwayRoad]              = StyleBuilder::Private::createHighwayStyle( "#dddddd", "#bbbbbb", QFont(QStringLiteral("Arial")), "000000", 3, 6 );
+    m_defaultStyle[GeoDataFeature::HighwayUnclassified]      = StyleBuilder::Private::createHighwayStyle( "#ffffff", "#bbbbbb", QFont(QStringLiteral("Arial")), "000000", 3, 6 );
+    m_defaultStyle[GeoDataFeature::HighwayTertiary]          = StyleBuilder::Private::createHighwayStyle( "#ffffff", "#8f8f8f", QFont(QStringLiteral("Arial")), "000000", 6, 6 );
+    m_defaultStyle[GeoDataFeature::HighwayTertiaryLink]      = StyleBuilder::Private::createHighwayStyle( "#ffffff", "#8f8f8f", QFont(QStringLiteral("Arial")), "000000", 6, 6 );
+    m_defaultStyle[GeoDataFeature::HighwaySecondary]         = StyleBuilder::Private::createHighwayStyle( "#f7fabf", "#707d05", QFont(QStringLiteral("Arial")), "000000", 6, 6 );
+    m_defaultStyle[GeoDataFeature::HighwaySecondaryLink]     = StyleBuilder::Private::createHighwayStyle( "#f7fabf", "#707d05", QFont(QStringLiteral("Arial")), "000000", 6, 6 );
+    m_defaultStyle[GeoDataFeature::HighwayPrimary]           = StyleBuilder::Private::createHighwayStyle( "#fcd6a4", "#a06b00", QFont(QStringLiteral("Arial")), "000000", 9, 6 );
+    m_defaultStyle[GeoDataFeature::HighwayPrimaryLink]       = StyleBuilder::Private::createHighwayStyle( "#fcd6a4", "#a06b00", QFont(QStringLiteral("Arial")), "000000", 6, 6 );
+    m_defaultStyle[GeoDataFeature::HighwayTrunk]             = StyleBuilder::Private::createHighwayStyle( "#f9b29c", "#c84e2f", QFont(QStringLiteral("Arial")), "000000", 9, 6 );
+    m_defaultStyle[GeoDataFeature::HighwayTrunkLink]         = StyleBuilder::Private::createHighwayStyle( "#f9b29c", "#c84e2f", QFont(QStringLiteral("Arial")), "000000", 9, 6 );
+    m_defaultStyle[GeoDataFeature::HighwayMotorway]          = StyleBuilder::Private::createHighwayStyle( "#e892a2", "#dc2a67", QFont(QStringLiteral("Arial")), "000000", 9, 10 );
+    m_defaultStyle[GeoDataFeature::HighwayMotorwayLink]      = StyleBuilder::Private::createHighwayStyle( "#e892a2", "#dc2a67", QFont(QStringLiteral("Arial")), "000000", 9, 10 );
+    m_defaultStyle[GeoDataFeature::TransportAirportRunway]   = StyleBuilder::Private::createHighwayStyle( "#bbbbcc", "#bbbbcc", QFont(QStringLiteral("Arial")), "000000", 0, 1 );
+    m_defaultStyle[GeoDataFeature::TransportAirportTaxiway]  = StyleBuilder::Private::createHighwayStyle( "#bbbbcc", "#bbbbcc", QFont(QStringLiteral("Arial")), "000000", 0, 1 );
 
     m_defaultStyle[GeoDataFeature::NaturalWater]             = StyleBuilder::Private::createStyle( 4, 0, waterColor, waterColor, true, true,
                                                                                                    Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false, QVector< qreal >(),
