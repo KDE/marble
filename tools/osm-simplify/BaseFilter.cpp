@@ -27,16 +27,6 @@ BaseFilter::~BaseFilter()
 
 }
 
-QVector<GeoDataPlacemark*>::const_iterator BaseFilter::objectsBegin() const
-{
-  return m_placemarks.begin();
-}
-
-QVector<GeoDataPlacemark*>::const_iterator BaseFilter::objectsEnd() const
-{
-    return m_placemarks.end();
-}
-
 const QVector<GeoDataPlacemark *> &BaseFilter::placemarks() const
 {
     return m_placemarks;

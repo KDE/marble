@@ -28,9 +28,6 @@ public:
 
     virtual void process() = 0;
 
-    QVector<GeoDataPlacemark*>::const_iterator objectsBegin() const;
-    QVector<GeoDataPlacemark*>::const_iterator objectsEnd() const;
-
     const QVector<GeoDataPlacemark*> & placemarks() const;
     QVector<GeoDataPlacemark*> & placemarks();
 
