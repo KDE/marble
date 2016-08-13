@@ -107,15 +107,7 @@ GeoDataDocument *TinyPlanetProcessor::cutToTiles(unsigned int zoomLevel, unsigne
                     GeoDataPlacemark* newPlacemark = new GeoDataPlacemark();
                     newPlacemark->setGeometry(newMarbleWay);
                     newPlacemark->setVisualCategory(placemark->visualCategory());
-
-                    OsmPlacemarkData osmData;
-                    auto it = placemark->osmData().tagsBegin();
-                    auto itEnd = placemark->osmData().tagsEnd();
-                    while(it != itEnd) {
-                        osmData.addTag(it.key(), it.value());
-                        ++it;
-                    }
-                    newPlacemark->setOsmData(osmData);
+                    copyTags(*placemark, *newPlacemark);
 
                     tile->append(newPlacemark);
                 }
@@ -141,15 +133,7 @@ GeoDataDocument *TinyPlanetProcessor::cutToTiles(unsigned int zoomLevel, unsigne
                         GeoDataPlacemark* newPlacemark = new GeoDataPlacemark();
                         newPlacemark->setGeometry(newMarbleWay);
                         newPlacemark->setVisualCategory(placemark->visualCategory());
-
-                        OsmPlacemarkData osmData;
-                        auto it = placemark->osmData().tagsBegin();
-                        auto itEnd = placemark->osmData().tagsEnd();
-                        while(it != itEnd) {
-                            osmData.addTag(it.key(), it.value());
-                            ++it;
-                        }
-                        newPlacemark->setOsmData(osmData);
+                        copyTags(*placemark, *newPlacemark);
 
                         tile->append(newPlacemark);
                     }
@@ -162,4 +146,13 @@ GeoDataDocument *TinyPlanetProcessor::cutToTiles(unsigned int zoomLevel, unsigne
 
 
     return tile;
+}
+
+void TinyPlanetProcessor::copyTags(const GeoDataPlacemark &source, GeoDataPlacemark &target) const
+{
+    auto const originalPlacemarkData = source.osmData();
+    OsmPlacemarkData & osmData = target.osmData();
+    for (auto iter=originalPlacemarkData.tagsBegin(), end=originalPlacemarkData.tagsEnd(); iter != end; ++iter) {
+        osmData.addTag(iter.key(), iter.value());
+    }
 }

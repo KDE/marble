@@ -21,6 +21,9 @@ public:
     virtual void process();
 
     GeoDataDocument* cutToTiles(unsigned int zoomLevel, unsigned int tileX, unsigned int tileY);
+
+private:
+    void copyTags(const GeoDataPlacemark &source, GeoDataPlacemark &target) const;
 };
 
 #endif // TINYPLANETPROCESSOR_H
