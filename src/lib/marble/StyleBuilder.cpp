@@ -1428,6 +1428,7 @@ QString StyleBuilder::visualCategoryName(GeoDataFeature::GeoDataVisualCategory c
         visualCategoryNames[GeoDataFeature::TransportAirportTerminal] = "TransportAirportTerminal";
         visualCategoryNames[GeoDataFeature::TransportAirportGate] = "TransportAirportGate";
         visualCategoryNames[GeoDataFeature::TransportAirportRunway] = "TransportAirportRunway";
+        visualCategoryNames[GeoDataFeature::TransportAirportTaxiway] = "TransportAirportTaxiway";
         visualCategoryNames[GeoDataFeature::TransportBusStation] = "TransportBusStation";
         visualCategoryNames[GeoDataFeature::TransportBusStop] = "TransportBusStop";
         visualCategoryNames[GeoDataFeature::TransportCarShare] = "TransportCarShare";
