@@ -29,8 +29,6 @@ void OsmObjectManager::initializeOsmData( GeoDataPlacemark* placemark )
         // The "--m_minId" assignments mean: assigning an id lower( by 1 ) than the current lowest,
         // and updating the current lowest id.
         osmData.setId( --m_minId );
-        osmData.setAction( "modify" );
-        osmData.setVisible( "true" );
     }
 
     // Assigning osmData to each of the line's nodes ( if they don't already have data )
@@ -43,8 +41,6 @@ void OsmObjectManager::initializeOsmData( GeoDataPlacemark* placemark )
             if ( !osmData.containsNodeReference( *it ) ) {
                 OsmPlacemarkData osmNdData;
                 osmNdData.setId( --m_minId );
-                osmNdData.setAction( "modify" );
-                osmNdData.setVisible( "false" );
                 osmData.addNodeReference( *it, osmNdData );
             }
         }
@@ -57,8 +53,6 @@ void OsmObjectManager::initializeOsmData( GeoDataPlacemark* placemark )
             if ( !osmData.containsNodeReference( *it ) ) {
                 OsmPlacemarkData osmNdData;
                 osmNdData.setId( --m_minId );
-                osmNdData.setAction( "modify" );
-                osmNdData.setVisible( "false" );
                 osmData.addNodeReference( *it, osmNdData );
             }
         }
@@ -78,8 +72,6 @@ void OsmObjectManager::initializeOsmData( GeoDataPlacemark* placemark )
         if ( !osmData.containsMemberReference( index ) ) {
             OsmPlacemarkData outerBoundaryData;
             outerBoundaryData.setId( --m_minId );
-            outerBoundaryData.setAction( "modify" );
-            outerBoundaryData.setVisible( "false" );
             osmData.addMemberReference( index, outerBoundaryData );
         }
 
@@ -92,8 +84,6 @@ void OsmObjectManager::initializeOsmData( GeoDataPlacemark* placemark )
             if ( !osmData.memberReference( index ).containsNodeReference( *it ) ) {
                 OsmPlacemarkData osmNodeData;
                 osmNodeData.setId( --m_minId );
-                osmNodeData.setAction( "modify" );
-                osmNodeData.setVisible( "false" );
                 outerBoundaryData.addNodeReference( *it, osmNodeData );
             }
         }
@@ -104,8 +94,6 @@ void OsmObjectManager::initializeOsmData( GeoDataPlacemark* placemark )
             if ( !osmData.containsMemberReference( index ) ) {
                 OsmPlacemarkData innerRingData;
                 innerRingData.setId( --m_minId );
-                innerRingData.setAction( "modify" );
-                innerRingData.setVisible( "false" );
                 osmData.addMemberReference( index, innerRingData );
             }
 
@@ -118,8 +106,6 @@ void OsmObjectManager::initializeOsmData( GeoDataPlacemark* placemark )
                 if ( !osmData.memberReference( index ).containsNodeReference( *it ) ) {
                     OsmPlacemarkData osmNodeData;
                     osmNodeData.setId( --m_minId );
-                    osmNodeData.setAction( "modify" );
-                    osmNodeData.setVisible( "false" );
                     innerRingData.addNodeReference( *it , osmNodeData );
                 }
             }
