@@ -290,8 +290,11 @@ void TextureColorizer::colorize( QImage *origimg, const ViewportParams *viewport
                 if ( m_showRelief ) {
                     emboss.enqueue(grey);
                     bump = ( emboss.head() + 8 - grey );
-                    if ( bump  < 0 )  bump = 0;
-                    if ( bump  > 15 ) bump = 15;
+                    if (bump < 0) {
+                        bump = 0;
+                    } else if (bump > 15) {
+                        bump = 15;
+                    }
                 }
                 setPixel( coastData, writeData, bump, grey );
             }
@@ -332,8 +335,11 @@ void TextureColorizer::colorize( QImage *origimg, const ViewportParams *viewport
                 if ( m_showRelief ) {
                     emboss.enqueue(grey);
                     bump = ( emboss.head() + 16 - grey ) >> 1;
-                    if ( bump > 15 ) bump = 15;
-                    if ( bump < 0 )  bump = 0;
+                    if (bump < 0) {
+                        bump = 0;
+                    } else if (bump > 15) {
+                        bump = 15;
+                    }
                 }
                 setPixel( coastData, writeData, bump, grey );
             }
