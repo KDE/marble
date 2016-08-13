@@ -94,68 +94,18 @@ int main(int argc, char *argv[])
     parser.addPositionalArgument("input", "The input .osm or .shp file.");
 
     parser.addOptions({
-                          {
-                              {"d","debug"},
-                              QCoreApplication::translate("main", "Debug output in the terminal.")
-                          },
-
-                          {
-                              {"s","silent"},
-                              QCoreApplication::translate("main", "Don't output to terminal.")
-                          },
-
-                          {
-                              {"m","merge"},
-                              QCoreApplication::translate("main", "Merge the main document with the file <file_to_merge_with>. This works together with the -c flag."),
-                              QCoreApplication::translate("main", "file_to_merge_with")
-                          },
-
-                          {
-                              {"c", "cut-to-tiles"},
-                              QCoreApplication::translate("main", "Cuts into tiles based on the zoom level passed using -z."),
-                          },
-
-                          {
-                              {"n", "node-reduce"},
-                              QCoreApplication::translate("main", "Reduces the number of nodes for a given way based on zoom level"),
-
-                          },
-
-                          {
-                              {"z", "zoom-level"},
-                              QCoreApplication::translate("main", "Zoom level according to which OSM information has to be processed."),
-                              QCoreApplication::translate("main", "number")
-                          },
-
-                          {
-                              {"t", "tags-filter"},
-                              QCoreApplication::translate("main", "Tag key-value pairs which are to be be considered"),
-                              QCoreApplication::translate("main", "k1=v1,k2=v2...")
-                          },
-
-                          {
-                              {"and", "tags-and"},
-                              QCoreApplication::translate("main", "For a feature to be considered for processing it must contain all the specified using tags-filter"),
-                          },
-
-                          {
-                              {"w", "concat-ways"},
-                              QCoreApplication::translate("main", "Concatenates the ways which are specified using tags-filter"),
-                          },
-
-                          {
-                              {"o", "output"},
-                              QCoreApplication::translate("main", "Generates an output .osmfile based on other flags. If the cut-to-tiles flag is set, then this needs to be a directory."),
-                              QCoreApplication::translate("main", "output_file.osm")
-                          },
-
-                          {
-                              {"e", "extension"},
-                              QCoreApplication::translate("main", "Output file type: osm (default), o5m or kml"),
-                              QCoreApplication::translate("main", "osm"),
-                              "osm"
-                          }
-                      });
+      {{"d","debug"}, "Debug output in the terminal."},
+      {{"s","silent"}, "Don't output to terminal."},
+      {{"m","merge"}, "Merge the main document with the file <file_to_merge_with>. This works together with the -c flag.", "file_to_merge_with"},
+      {{"c", "cut-to-tiles"}, "Cuts into tiles based on the zoom level passed using -z."},
+      {{"n", "node-reduce"}, "Reduces the number of nodes for a given way based on zoom level"},
+      {{"z", "zoom-level"}, "Zoom level according to which OSM information has to be processed.", "number"},
+      {{"t", "tags-filter"}, "Tag key-value pairs which are to be be considered", "k1=v1,k2=v2..."},
+      {{"and", "tags-and"}, "For a feature to be considered for processing it must contain all the specified using tags-filter"},
+      {{"w", "concat-ways"}, "Concatenates the ways which are specified using tags-filter"},
+      {{"o", "output"}, "Generates an output .osmfile based on other flags. If the cut-to-tiles flag is set, then this needs to be a directory.", "output_file.osm"},
+      {{"e", "extension"}, "Output file type: osm (default), o5m or kml", "file extension", "osm"}
+    });
 
     // Process the actual command line arguments given by the user
     parser.process(app);
