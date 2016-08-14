@@ -19,6 +19,7 @@
 #include "OsmPlacemarkData.h"
 #include "GeoDataExtendedData.h"
 #include "GeoDataData.h"
+#include "StyleBuilder.h"
 
 // Qt
 #include <QTreeWidget>
@@ -96,6 +97,8 @@ void OsmTagEditorWidgetPrivate::populatePresetTagsList()
 
 QTreeWidgetItem *OsmTagEditorWidgetPrivate::tagWidgetItem( const OsmTag &tag ) const
 {
+    static const StyleBuilder styleBuilder;
+
     QStringList itemText;
 
     itemText << tag.first;
@@ -104,7 +107,8 @@ QTreeWidgetItem *OsmTagEditorWidgetPrivate::tagWidgetItem( const OsmTag &tag ) c
     QTreeWidgetItem *tagItem = new QTreeWidgetItem( itemText );
 
     // Getting the icon preset for the tag ( if there's one available )
-    GeoDataStyle::ConstPtr style = OsmPresetLibrary::presetStyle( tag );
+    const GeoDataFeature::GeoDataVisualCategory category = OsmPresetLibrary::osmVisualCategory(tag);
+    GeoDataStyle::ConstPtr style = styleBuilder.presetStyle(category);
     QPixmap iconPixmap = QPixmap::fromImage( style->iconStyle().icon() );
     tagItem->setIcon( 1, QIcon( iconPixmap ) );
 

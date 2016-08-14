@@ -15,7 +15,6 @@
 #include <QPair>
 
 #include "GeoDataFeature.h"
-#include <GeoDataStyle.h>
 #include "marble_export.h"
 
 namespace Marble
@@ -31,11 +30,6 @@ class MARBLE_EXPORT OsmPresetLibrary
 
 public:
     typedef QPair<QString, QString> OsmTag;
-
-    /**
-     * @brief corespondingIcon returns the icon that is associated with a visual category
-     */
-    static GeoDataStyle::ConstPtr presetStyle( const OsmTag &tag );
 
     /**
      * @brief  Convenience categorization of placemarks for Osm key=value pairs

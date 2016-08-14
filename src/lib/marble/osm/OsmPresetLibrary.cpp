@@ -15,9 +15,6 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
 #include "OsmPlacemarkData.h"
-#include "StyleBuilder.h"
-
-#include <QMap>
 
 namespace Marble
 {
@@ -473,15 +470,6 @@ void OsmPresetLibrary::initializeAdditionalOsmTags()
     s_additionalOsmTags << OsmTag( "addr:country", "" );
     s_additionalOsmTags << OsmTag( "access", "private" );
     s_additionalOsmTags << OsmTag( "access", "permissive" );
-}
-
-GeoDataStyle::ConstPtr OsmPresetLibrary::presetStyle( const OsmTag &tag )
-{
-    static const StyleBuilder styleBuilder;
-
-    const GeoDataFeature::GeoDataVisualCategory category = osmVisualCategory(tag);
-
-    return styleBuilder.presetStyle(category);
 }
 
 GeoDataFeature::GeoDataVisualCategory OsmPresetLibrary::osmVisualCategory(const OsmTag &tag)
