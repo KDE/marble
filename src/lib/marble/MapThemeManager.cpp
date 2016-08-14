@@ -385,15 +385,15 @@ QList<QStandardItem *> MapThemeManager::Private::createMapThemeRow( QString cons
     QIcon mapThemeIcon =  QIcon( themeIconPixmap );
 
     QString name = mapTheme->head()->name();
-    QString description = mapTheme->head()->description();
+    const QByteArray description = mapTheme->head()->description().toUtf8();
 
     QStandardItem *item = new QStandardItem( name );
-    item->setData( QCoreApplication::translate("DGML", name.toUtf8() ), Qt::DisplayRole );
+    item->setData(QCoreApplication::translate("DGML", name.toUtf8().constData()), Qt::DisplayRole);
     item->setData( mapThemeIcon, Qt::DecorationRole );
     item->setData( QString( "<span style=\" max-width: 150 px;\"> "
-                            + QCoreApplication::translate("DGML", description.toUtf8() ) + " </span>" ), Qt::ToolTipRole );
+                            + QCoreApplication::translate("DGML", description.constData()) + " </span>"), Qt::ToolTipRole );
     item->setData( mapThemeID, Qt::UserRole + 1 );
-    item->setData( QCoreApplication::translate("DGML", description.toUtf8() ), Qt::UserRole + 2 );
+    item->setData(QCoreApplication::translate("DGML", description.constData()), Qt::UserRole + 2);
 
     itemList << item;
 

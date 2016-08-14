@@ -905,7 +905,7 @@ void TestGeoDataCoordinates::testFromStringD_data()
                 .append(QLatin1Char(latSphere==PosSphere?'P':'N'))
                 .append(QLatin1Char('|')).append(QLatin1Char(locale==CLocale?'C':'L'))
                 .append(QLatin1Char('|')).append(string).append(QLatin1Char('|'));
-        QTest::newRow(rowTitle.toLatin1())
+        QTest::newRow(rowTitle.toLatin1().constData())
             << string
             << lon
             << lat;
@@ -1480,7 +1480,7 @@ void TestGeoDataCoordinates::testFromLocaleString_data()
             QLatin1String("|lat:") +
             QString::number(sample.lat, 'f', 10);
 
-        QTest::newRow(rowTitle.toLatin1())
+        QTest::newRow(rowTitle.toLatin1().constData())
             << language.degree
             << language.minutes
             << language.seconds

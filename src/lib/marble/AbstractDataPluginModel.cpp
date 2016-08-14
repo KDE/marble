@@ -228,7 +228,7 @@ QVariant FavoritesModel::data( const QModelIndex &index, int role ) const
             if ( item->initialized() && item->isFavorite() ) {
                 if ( count == row ) {
                     QString const roleName = roleNames().value( role );
-                    return item->property( roleName.toLatin1() );
+                    return item->property(roleName.toLatin1().constData());
                 }
                 ++count;
             }

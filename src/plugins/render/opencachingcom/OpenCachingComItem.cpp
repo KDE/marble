@@ -94,7 +94,7 @@ void OpenCachingComItem::showInfoDialog()
 
     // basic details
     QString details = "<table><tr><td colspan=\"2\" valign=\"middle\">"
-        + tr(m_cache["type"].toString().toUtf8())
+        + tr(m_cache["type"].toString().toUtf8().constData())
         + "<br/>" + id() + "<br/>" + coordinate().toString() + "</td></tr>"
         + "<tr><td align=\"right\">" + tr("Size:") + " </td><td>" + ratingNumberString(m_cache["size"]) + "</td></tr>"
         + "<tr><td align=\"right\">" + tr("Difficulty:") + " </td><td>" + ratingNumberString(m_cache["difficulty"]) + "</td></tr>"
@@ -116,7 +116,7 @@ void OpenCachingComItem::showInfoDialog()
             {
                 strTags += ", ";
             }
-            strTags += tr(tags[i].toUtf8());
+            strTags += tr(tags[i].toUtf8().constData());
         }
         m_cache["strTags"] = strTags;
     }
@@ -252,7 +252,7 @@ void OpenCachingComItem::updateTooltip()
         html += "<tr><td colspan=\"2\"><table cellpadding=\"3\"><tr><td><img src=\":/" + iconName() + "\"></td>"
             + "<td valign=\"middle\"><big><strong>" + m_cache["name"].toString() + "</strong></big></td></tr></table></td></tr>"
             + "<tr><td align=\"left\">"
-            + tr(m_cache["type"].toString().toUtf8())
+            + tr(m_cache["type"].toString().toUtf8().constData())
             + "<br/>" + tr( "by <em>" ) + m_cache["hidden_by"].toMap()["name"].toString() + "</em>"
             + "<br/>" + coordinate().lonToString()
             + "<br/>" + coordinate().latToString()

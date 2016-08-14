@@ -251,7 +251,7 @@ void MarbleLegendBrowser::translateHtml( QString & html )
     QStringList::const_iterator i = words.constBegin();
     QStringList::const_iterator const end = words.constEnd();
     for (; i != end; ++i )
-        html.replace( *i, QCoreApplication::translate("Legends", (*i).toUtf8() ) );
+        html.replace(*i, QCoreApplication::translate("Legends", (*i).toUtf8().constData()));
 }
 
 void MarbleLegendBrowser::reverseSupportCheckboxes(QString &html)

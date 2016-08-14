@@ -65,7 +65,7 @@ void TestGeoDataWriter::initTestCase()
 
         // Open the files and verify
         QVERIFY( file.open( QIODevice::ReadOnly ) );
-        QVERIFY2( parser->read( &file ), filename.toLatin1() );
+        QVERIFY2(parser->read(&file), filename.toLatin1().constData());
 
         parsers.insert( filename, parserPointer );
         m_testFiles << filename;

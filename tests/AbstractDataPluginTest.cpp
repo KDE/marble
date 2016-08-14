@@ -42,7 +42,7 @@ void AbstractDataPluginTest::initialize_data()
         if ( !dataPlugin )
             continue;
 
-        QTest::newRow( plugin->nameId().toLatin1() ) << dataPlugin;
+        QTest::newRow(plugin->nameId().toLatin1().constData()) << dataPlugin;
     }
 }
 

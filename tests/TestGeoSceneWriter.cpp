@@ -92,7 +92,7 @@ void TestGeoSceneWriter::initTestCase()
             QVERIFY( file.open( QIODevice::ReadOnly ) );
 
             //Parser and verify
-            QVERIFY2( parser->read( &file ), filename.toLatin1() );
+            QVERIFY2(parser->read(&file), filename.toLatin1().constData());
 
             parsers.insert( dataDir.filePath(filename), parserPointer );
 
@@ -109,7 +109,7 @@ void TestGeoSceneWriter::saveFile_data()
     QMap<QString, QSharedPointer<GeoSceneParser> >::iterator itpoint = parsers.begin();
     QMap<QString, QSharedPointer<GeoSceneParser> >::iterator const endpoint = parsers.end();
     for (; itpoint != endpoint; ++itpoint ) {
-        QTest::newRow( itpoint.key().toLocal8Bit() ) << itpoint.value();
+        QTest::newRow(itpoint.key().toLatin1().constData()) << itpoint.value();
     }
 }
 
@@ -136,7 +136,7 @@ void TestGeoSceneWriter::saveAndLoad_data()
     QMap<QString, QSharedPointer<GeoSceneParser> >::iterator itpoint = parsers.begin();
     QMap<QString, QSharedPointer<GeoSceneParser> >::iterator const endpoint = parsers.end();
     for (; itpoint != endpoint; ++itpoint ) {
-        QTest::newRow( itpoint.key().toLocal8Bit() ) << itpoint.value();
+        QTest::newRow(itpoint.key().toLatin1().constData()) << itpoint.value();
     }
 }
 
@@ -168,7 +168,7 @@ void TestGeoSceneWriter::saveAndCompare_data()
     QMap<QString, QSharedPointer<GeoSceneParser> >::iterator itpoint = parsers.begin();
     QMap<QString, QSharedPointer<GeoSceneParser> >::iterator const endpoint = parsers.end();
     for (; itpoint != endpoint; ++itpoint ) {
-        QTest::newRow( itpoint.key().toLocal8Bit() ) << itpoint.value() << itpoint.key();
+        QTest::newRow(itpoint.key().toLatin1().constData()) << itpoint.value() << itpoint.key();
     }
 }
 

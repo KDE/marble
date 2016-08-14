@@ -100,7 +100,8 @@ void AbstractFloatItemTest::newInstance_data()
     QTest::addColumn<const AbstractFloatItem *>( "factory" );
 
     foreach ( const AbstractFloatItem *factory, m_factories ) {
-        QTest::newRow( factory->nameId().toLatin1() ) << factory;
+        QTest::newRow(factory->nameId().toLatin1().constData())
+            << factory;
     }
 }
 
@@ -121,7 +122,8 @@ void AbstractFloatItemTest::setSettings_data()
     QTest::addColumn<const AbstractFloatItem *>( "factory" );
 
     foreach ( const AbstractFloatItem *factory, m_factories ) {
-        QTest::newRow( factory->nameId().toLatin1() ) << factory;
+        QTest::newRow(factory->nameId().toLatin1().constData())
+            << factory;
     }
 }
 
@@ -156,7 +158,8 @@ void AbstractFloatItemTest::setPosition_data()
     QTest::addColumn<const AbstractFloatItem *>( "factory" );
 
     foreach ( const AbstractFloatItem *factory, m_factories ) {
-        QTest::newRow( factory->nameId().toLatin1() ) << factory;
+        QTest::newRow(factory->nameId().toLatin1().constData())
+            << factory;
     }
 }
 

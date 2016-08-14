@@ -213,7 +213,7 @@ void AbstractDataPlugin::handleViewportChange( const ViewportParams *viewport )
             context->setContextObject( item );
             QList<QByteArray> const dynamicProperties = item->dynamicPropertyNames();
             foreach( const QByteArray &property, dynamicProperties ) {
-                context->setContextProperty( property, item->property( property ) );
+                context->setContextProperty(property, item->property(property.constData()));
             }
 
             QObject* component = d->m_delegate->create( context );

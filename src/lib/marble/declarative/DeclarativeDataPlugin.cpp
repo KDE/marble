@@ -74,7 +74,7 @@ void DeclarativeDataPluginPrivate::parseChunk( DeclarativeDataPluginItem *item, 
     } else if( key == "alt" || key == "altitude" ) {
         coordinates.setAltitude( value.toDouble() );
     } else {
-        item->setProperty( key.toLatin1(), value );
+        item->setProperty(key.toLatin1().constData(), value);
     }
 }
 

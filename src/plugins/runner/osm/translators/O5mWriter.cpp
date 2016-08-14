@@ -85,7 +85,7 @@ void O5mWriter::writeNodes(const OsmConverter::Nodes &nodes, QDataStream &stream
         writeTags(osmData, stringTable, bufferStream);
 
         writeUnsigned(buffer.size(), stream);
-        stream.writeRawData(buffer.data(), buffer.size());
+        stream.writeRawData(buffer.data().constData(), buffer.size());
 
         lastId = osmData.id();
         lastLon = lon;
@@ -127,12 +127,12 @@ void O5mWriter::writeWays(const OsmConverter::Ways &ways, QDataStream &stream) c
         QDataStream referencesStream(&referencesBuffer);
         writeReferences(*way.first, lastReferenceId, osmData, referencesStream);
         writeUnsigned(referencesBuffer.size(), bufferStream);
-        bufferStream.writeRawData(referencesBuffer.data(), referencesBuffer.size());
+        bufferStream.writeRawData(referencesBuffer.data().constData(), referencesBuffer.size());
 
         writeTags(osmData, stringTable, bufferStream);
 
         writeUnsigned(buffer.size(), stream);
-        stream.writeRawData(buffer.data(), buffer.size());
+        stream.writeRawData(buffer.data().constData(), buffer.size());
     }
 }
 
@@ -169,12 +169,12 @@ void O5mWriter::writePolygons(const OsmConverter::Polygons &polygons, QDataStrea
         QDataStream referencesStream(&referencesBuffer);
         writeRelationMembers(*polygon.first, lastReferenceId, osmData, stringTable, referencesStream);
         writeUnsigned(referencesBuffer.size(), bufferStream);
-        bufferStream.writeRawData(referencesBuffer.data(), referencesBuffer.size());
+        bufferStream.writeRawData(referencesBuffer.data().constData(), referencesBuffer.size());
 
         writeTags(osmData, stringTable, bufferStream);
 
         writeUnsigned(buffer.size(), stream);
-        stream.writeRawData(buffer.data(), buffer.size());
+        stream.writeRawData(buffer.data().constData(), buffer.size());
     }
 }
 
@@ -247,7 +247,7 @@ void O5mWriter::writeStringPair(const StringPair &pair, StringTable &stringTable
             data.push_back(pair.second.toUtf8());
         }
         data.push_back(char(0x00));
-        stream.writeRawData(data, data.size());
+        stream.writeRawData(data.constData(), data.size());
         stringTable.insert(pair, stringTable.size());
     } else {
         auto const reference = stringTable.size() - iter.value();

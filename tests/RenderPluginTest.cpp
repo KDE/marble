@@ -59,7 +59,8 @@ void RenderPluginTest::newInstance_data()
     QTest::addColumn<const RenderPlugin *>( "factory" );
 
     foreach ( const RenderPlugin *factory, m_model.pluginManager()->renderPlugins() ) {
-        QTest::newRow( factory->nameId().toLatin1() ) << factory;
+        QTest::newRow(factory->nameId().toLatin1().constData())
+            << factory;
     }
 }
 
@@ -85,7 +86,8 @@ void RenderPluginTest::initialize_data()
     QTest::addColumn<const RenderPlugin *>( "factory" );
 
     foreach ( const RenderPlugin *plugin, m_model.pluginManager()->renderPlugins() ) {
-        QTest::newRow( plugin->nameId().toLatin1() ) << plugin;
+        QTest::newRow(plugin->nameId().toLatin1().constData())
+            << plugin;
     }
 }
 
@@ -106,7 +108,8 @@ void RenderPluginTest::setVisible_data()
     QTest::addColumn<const RenderPlugin *>( "factory" );
 
     foreach ( const RenderPlugin *factory, m_model.pluginManager()->renderPlugins() ) {
-        QTest::newRow( factory->nameId().toLatin1() ) << factory;
+        QTest::newRow(factory->nameId().toLatin1().constData())
+            << factory;
     }
 }
 
@@ -140,7 +143,8 @@ void RenderPluginTest::setEnabled_data()
     QTest::addColumn<const RenderPlugin *>( "factory" );
 
     foreach ( const RenderPlugin *factory, m_model.pluginManager()->renderPlugins() ) {
-        QTest::newRow( factory->nameId().toLatin1() ) << factory;
+        QTest::newRow(factory->nameId().toLatin1().constData())
+            << factory;
     }
 }
 
@@ -174,7 +178,8 @@ void RenderPluginTest::setSettingsVisible_data()
     QTest::addColumn<const RenderPlugin *>( "factory" );
 
     foreach ( const RenderPlugin *factory, m_model.pluginManager()->renderPlugins() ) {
-        QTest::newRow( factory->nameId().toLatin1() ) << factory;
+        QTest::newRow(factory->nameId().toLatin1().constData())
+            << factory;
     }
 }
 
@@ -215,7 +220,8 @@ void RenderPluginTest::setSettingsEnabled_data()
     QTest::addColumn<const RenderPlugin *>( "factory" );
 
     foreach ( const RenderPlugin *factory, m_model.pluginManager()->renderPlugins() ) {
-        QTest::newRow( factory->nameId().toLatin1() ) << factory;
+        QTest::newRow(factory->nameId().toLatin1().constData())
+            << factory;
     }
 }
 
@@ -267,7 +273,9 @@ void RenderPluginTest::setSettingsAllEqual_data()
         QHash<QString, QVariant>::const_iterator const endpoint = settings.end();
         for (; itpoint != endpoint; ++itpoint ) {
             const QString testName = QString( "%1 %2" ).arg( plugin->nameId() ).arg( itpoint.key() );
-            QTest::newRow( testName.toLatin1() ) << result->settings().value( itpoint.key() ) << expected->settings().value( itpoint.key() );
+            QTest::newRow(testName.toLatin1().constData())
+                << result->settings().value(itpoint.key())
+                << expected->settings().value(itpoint.key());
         }
     }
 }
@@ -298,7 +306,9 @@ void RenderPluginTest::restoreDefaultSettings_data()
         QHash<QString, QVariant>::const_iterator const endpoint = settings.end();
         for (; itpoint != endpoint; ++itpoint ) {
             const QString testName = QString( "%1 %2" ).arg( plugin->nameId() ).arg( itpoint.key() );
-            QTest::newRow( testName.toLatin1() ) << result->settings().value( itpoint.key() ) << expected->settings().value( itpoint.key() );
+            QTest::newRow(testName.toLatin1().constData())
+                << result->settings().value(itpoint.key())
+                << expected->settings().value(itpoint.key());
         }
     }
 }
