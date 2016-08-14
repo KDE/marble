@@ -20,7 +20,6 @@ namespace Marble
 {
 
 QMap<OsmPresetLibrary::OsmTag, GeoDataFeature::GeoDataVisualCategory> OsmPresetLibrary::s_visualCategories;
-QList<OsmPresetLibrary::OsmTag> OsmPresetLibrary::s_additionalOsmTags;
 
 void OsmPresetLibrary::initializeOsmVisualCategories()
 {
@@ -339,139 +338,6 @@ void OsmPresetLibrary::initializeOsmVisualCategories()
     }
 }
 
-void OsmPresetLibrary::initializeAdditionalOsmTags()
-{
-    // Only initialize the list once
-    if( !s_additionalOsmTags.isEmpty() ) {
-        return;
-    }
-
-    // Recommended for nodes
-    s_additionalOsmTags << OsmTag( "power", "pole" );
-    s_additionalOsmTags << OsmTag( "power", "generator" );
-    s_additionalOsmTags << OsmTag( "barrier", "fence" );
-    s_additionalOsmTags << OsmTag( "barrier", "wall" );
-    s_additionalOsmTags << OsmTag( "barrier", "gate" );
-
-
-
-    // Recommended for ways
-    s_additionalOsmTags << OsmTag( "lanes", "" );
-    s_additionalOsmTags << OsmTag( "maxspeed", "" );
-    s_additionalOsmTags << OsmTag( "maxheight", "" );
-    s_additionalOsmTags << OsmTag( "maxweight", "" );
-    s_additionalOsmTags << OsmTag( "oneway", "yes" );
-    s_additionalOsmTags << OsmTag( "service", "driveway" );
-    s_additionalOsmTags << OsmTag( "service", "parking_aisle" );
-    s_additionalOsmTags << OsmTag( "service", "alley" );
-    s_additionalOsmTags << OsmTag( "tunnel", "yes" );
-    s_additionalOsmTags << OsmTag( "abutters", "commercial" );
-    s_additionalOsmTags << OsmTag( "abutters", "industrial" );
-    s_additionalOsmTags << OsmTag( "abutters", "mixed" );
-    s_additionalOsmTags << OsmTag( "abutters", "residential" );
-
-
-
-    // Recommended for areas
-    s_additionalOsmTags << OsmTag( "surface", "unpaved" );
-    s_additionalOsmTags << OsmTag( "surface", "paved" );
-    s_additionalOsmTags << OsmTag( "surface", "gravel" );
-    s_additionalOsmTags << OsmTag( "surface", "dirt" );
-    s_additionalOsmTags << OsmTag( "surface", "grass" );
-
-
-    // Relations
-    s_additionalOsmTags << OsmTag( "type", "route" );
-    s_additionalOsmTags << OsmTag( "type", "route_master" );
-    s_additionalOsmTags << OsmTag( "type", "public_transport" );
-    s_additionalOsmTags << OsmTag( "type", "destination_sign" );
-    s_additionalOsmTags << OsmTag( "type", "waterway" );
-    s_additionalOsmTags << OsmTag( "type", "enforcement" );
-
-
-
-    // Relations: route
-    s_additionalOsmTags << OsmTag( "route", "road" );
-    s_additionalOsmTags << OsmTag( "route", "bicycle" );
-    s_additionalOsmTags << OsmTag( "route", "foot" );
-    s_additionalOsmTags << OsmTag( "route", "hiking" );
-    s_additionalOsmTags << OsmTag( "route", "bus" );
-    s_additionalOsmTags << OsmTag( "route", "trolleybus" );
-    s_additionalOsmTags << OsmTag( "route", "ferry" );
-    s_additionalOsmTags << OsmTag( "route", "detour" );
-    s_additionalOsmTags << OsmTag( "route", "train" );
-    s_additionalOsmTags << OsmTag( "route", "tram" );
-    s_additionalOsmTags << OsmTag( "route", "mtb" );
-    s_additionalOsmTags << OsmTag( "route", "horse" );
-    s_additionalOsmTags << OsmTag( "route", "ski" );
-    s_additionalOsmTags << OsmTag( "roundtrip", "yes" );
-    s_additionalOsmTags << OsmTag( "network", "" );
-    s_additionalOsmTags << OsmTag( "ref", "" );
-    s_additionalOsmTags << OsmTag( "operator", "" );
-
-
-
-    // Relations: route_master
-    s_additionalOsmTags << OsmTag( "route_master", "train" );
-    s_additionalOsmTags << OsmTag( "route_master", "subway" );
-    s_additionalOsmTags << OsmTag( "route_master", "monorail" );
-    s_additionalOsmTags << OsmTag( "route_master", "tram" );
-    s_additionalOsmTags << OsmTag( "route_master", "bus" );
-    s_additionalOsmTags << OsmTag( "route_master", "trolleybus" );
-    s_additionalOsmTags << OsmTag( "route_master", "ferry" );
-    s_additionalOsmTags << OsmTag( "route_master", "bicycle" );
-
-
-
-    // Relations: public_transport
-    s_additionalOsmTags << OsmTag( "public_transport", "stop_area" );
-    s_additionalOsmTags << OsmTag( "public_transport", "stop_area_group" );
-
-
-
-    // Relations: waterway
-    s_additionalOsmTags << OsmTag( "waterway", "river" );
-    s_additionalOsmTags << OsmTag( "waterway", "stream" );
-    s_additionalOsmTags << OsmTag( "waterway", "canal" );
-    s_additionalOsmTags << OsmTag( "waterway", "drain" );
-    s_additionalOsmTags << OsmTag( "waterway", "ditch" );
-
-
-
-    // Relations: enforcement
-    s_additionalOsmTags << OsmTag( "enforcement", "maxheight" );
-    s_additionalOsmTags << OsmTag( "enforcement", "maxweight" );
-    s_additionalOsmTags << OsmTag( "enforcement", "maxspeed" );
-    s_additionalOsmTags << OsmTag( "enforcement", "mindistance" );
-    s_additionalOsmTags << OsmTag( "enforcement", "traffic_signals" );
-    s_additionalOsmTags << OsmTag( "enforcement", "check" );
-    s_additionalOsmTags << OsmTag( "enforcement", "access" );
-    s_additionalOsmTags << OsmTag( "enforcement", "toll" );
-
-
-
-    // Others
-    s_additionalOsmTags << OsmTag( "height", "" );
-    s_additionalOsmTags << OsmTag( "rooms", "" );
-    s_additionalOsmTags << OsmTag( "beds", "" );
-    s_additionalOsmTags << OsmTag( "wheelchair", "" );
-    s_additionalOsmTags << OsmTag( "website", "" );
-    s_additionalOsmTags << OsmTag( "email", "" );
-    s_additionalOsmTags << OsmTag( "fee", "" );
-    s_additionalOsmTags << OsmTag( "destination", "" );
-    s_additionalOsmTags << OsmTag( "indoor", "yes" );
-
-
-
-    // Recommended for all
-    s_additionalOsmTags << OsmTag( "addr:street", "" );
-    s_additionalOsmTags << OsmTag( "addr:housenumber", "" );
-    s_additionalOsmTags << OsmTag( "addr:postcode", "" );
-    s_additionalOsmTags << OsmTag( "addr:country", "" );
-    s_additionalOsmTags << OsmTag( "access", "private" );
-    s_additionalOsmTags << OsmTag( "access", "permissive" );
-}
-
 GeoDataFeature::GeoDataVisualCategory OsmPresetLibrary::osmVisualCategory(const OsmTag &tag)
 {
     initializeOsmVisualCategories();
@@ -489,18 +355,6 @@ QMap<OsmPresetLibrary::OsmTag, GeoDataFeature::GeoDataVisualCategory>::const_ite
 {
     initializeOsmVisualCategories();
     return s_visualCategories.constEnd();
-}
-
-QList<OsmPresetLibrary::OsmTag>::const_iterator OsmPresetLibrary::additionalTagsBegin()
-{
-    initializeAdditionalOsmTags();
-    return s_additionalOsmTags.constBegin();
-}
-
-QList<OsmPresetLibrary::OsmTag>::const_iterator OsmPresetLibrary::additionalTagsEnd()
-{
-    initializeAdditionalOsmTags();
-    return s_additionalOsmTags.constEnd();
 }
 
 QStringList OsmPresetLibrary::shopValues()

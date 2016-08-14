@@ -42,12 +42,6 @@ public:
     static QMap<OsmTag, GeoDataFeature::GeoDataVisualCategory>::const_iterator begin();
     static QMap<OsmTag, GeoDataFeature::GeoDataVisualCategory>::const_iterator end();
 
-    /**
-     * @brief additionalTagsBegin and end provide an stl style iterator for the additional tags map
-     */
-    static QList<OsmTag>::const_iterator additionalTagsBegin();
-    static QList<OsmTag>::const_iterator additionalTagsEnd();
-
     static QStringList shopValues();
     static QStringList buildingValues();
 
@@ -55,17 +49,11 @@ public:
 
 private:
     static void initializeOsmVisualCategories();
-    static void initializeAdditionalOsmTags();
 
     /**
      * @brief s_visualCategories contains osm tag mappings to GeoDataVisualCategories
      */
     static QMap<OsmTag, GeoDataFeature::GeoDataVisualCategory> s_visualCategories;
-
-    /**
-     * @brief s_additionalOsmTags is a list of useful, popular osm tags that currently don't have a visual category associated with them
-     */
-    static QList<OsmTag> s_additionalOsmTags;
 };
 
 

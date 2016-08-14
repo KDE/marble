@@ -117,6 +117,8 @@ QTreeWidgetItem *OsmTagEditorWidgetPrivate::tagWidgetItem( const OsmTag &tag ) c
 
 QList<OsmTagEditorWidgetPrivate::OsmTag> OsmTagEditorWidgetPrivate::recommendedTags() const
 {
+    static QVector<OsmTag> additionalOsmTags = createAdditionalOsmTags();
+
     QList<OsmTag> recommendedTags;
 
     QStringList filter = generateTagFilter();
@@ -130,12 +132,9 @@ QList<OsmTagEditorWidgetPrivate::OsmTag> OsmTagEditorWidgetPrivate::recommendedT
         }
     }
 
-    QList<OsmTag>::const_iterator additionalIt = OsmPresetLibrary::additionalTagsBegin();
-    QList<OsmTag>::const_iterator additionalEnd = OsmPresetLibrary::additionalTagsEnd();
-
-    for ( ; additionalIt != additionalEnd; ++additionalIt ) {
-        if ( filter.contains( additionalIt->first ) ) {
-            recommendedTags += *additionalIt;
+    foreach (const auto additionalOsmTag, additionalOsmTags) {
+        if (filter.contains(additionalOsmTag.first)) {
+            recommendedTags += additionalOsmTag;
         }
     }
 
@@ -364,6 +363,119 @@ void OsmTagEditorWidgetPrivate::addPattern( QStringList &filter, const OsmPlacem
             filter << key;
         }
     }
+}
+
+QVector<OsmTagEditorWidgetPrivate::OsmTag> OsmTagEditorWidgetPrivate::createAdditionalOsmTags()
+{
+    const QVector<OsmTag> additionalOsmTags = QVector<OsmTag>()
+
+        // Recommended for nodes
+        << OsmTag("power", "pole")
+        << OsmTag("power", "generator")
+        << OsmTag("barrier", "fence")
+        << OsmTag("barrier", "wall")
+        << OsmTag("barrier", "gate")
+
+        // Recommended for ways
+        << OsmTag("lanes", "")
+        << OsmTag("maxspeed", "")
+        << OsmTag("maxheight", "")
+        << OsmTag("maxweight", "")
+        << OsmTag("oneway", "yes")
+        << OsmTag("service", "driveway")
+        << OsmTag("service", "parking_aisle")
+        << OsmTag("service", "alley")
+        << OsmTag("tunnel", "yes")
+        << OsmTag("abutters", "commercial")
+        << OsmTag("abutters", "industrial")
+        << OsmTag("abutters", "mixed")
+        << OsmTag("abutters", "residential")
+
+        // Recommended for areas
+        << OsmTag("surface", "unpaved")
+        << OsmTag("surface", "paved")
+        << OsmTag("surface", "gravel")
+        << OsmTag("surface", "dirt")
+        << OsmTag("surface", "grass")
+
+        // Relations
+        << OsmTag("type", "route")
+        << OsmTag("type", "route_master")
+        << OsmTag("type", "public_transport")
+        << OsmTag("type", "destination_sign")
+        << OsmTag("type", "waterway")
+        << OsmTag("type", "enforcement")
+
+        // Relations: route
+        << OsmTag("route", "road")
+        << OsmTag("route", "bicycle")
+        << OsmTag("route", "foot")
+        << OsmTag("route", "hiking")
+        << OsmTag("route", "bus")
+        << OsmTag("route", "trolleybus")
+        << OsmTag("route", "ferry")
+        << OsmTag("route", "detour")
+        << OsmTag("route", "train")
+        << OsmTag("route", "tram")
+        << OsmTag("route", "mtb")
+        << OsmTag("route", "horse")
+        << OsmTag("route", "ski")
+        << OsmTag("roundtrip", "yes")
+        << OsmTag("network", "")
+        << OsmTag("ref", "")
+        << OsmTag("operator", "")
+
+        // Relations: route_master
+        << OsmTag("route_master", "train")
+        << OsmTag("route_master", "subway")
+        << OsmTag("route_master", "monorail")
+        << OsmTag("route_master", "tram")
+        << OsmTag("route_master", "bus")
+        << OsmTag("route_master", "trolleybus")
+        << OsmTag("route_master", "ferry")
+        << OsmTag("route_master", "bicycle")
+
+        // Relations: public_transport
+        << OsmTag("public_transport", "stop_area")
+        << OsmTag("public_transport", "stop_area_group")
+
+        // Relations: waterway
+        << OsmTag("waterway", "river")
+        << OsmTag("waterway", "stream")
+        << OsmTag("waterway", "canal")
+        << OsmTag("waterway", "drain")
+        << OsmTag("waterway", "ditch")
+
+        // Relations: enforcement
+        << OsmTag("enforcement", "maxheight")
+        << OsmTag("enforcement", "maxweight")
+        << OsmTag("enforcement", "maxspeed")
+        << OsmTag("enforcement", "mindistance")
+        << OsmTag("enforcement", "traffic_signals")
+        << OsmTag("enforcement", "check")
+        << OsmTag("enforcement", "access")
+        << OsmTag("enforcement", "toll")
+
+        // Others
+        << OsmTag("height", "")
+        << OsmTag("rooms", "")
+        << OsmTag("beds", "")
+        << OsmTag("wheelchair", "")
+        << OsmTag("website", "")
+        << OsmTag("email", "")
+        << OsmTag("fee", "")
+        << OsmTag("destination", "")
+        << OsmTag("indoor", "yes")
+
+        // Recommended for all
+        << OsmTag("addr:street", "")
+        << OsmTag("addr:housenumber", "")
+        << OsmTag("addr:postcode", "")
+        << OsmTag("addr:country", "")
+        << OsmTag("access", "private")
+        << OsmTag("access", "permissive");
+
+    return additionalOsmTags;
 }
 
 }

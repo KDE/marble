@@ -56,6 +56,11 @@ private:
      */
     void addPattern( QStringList &filter, const OsmPlacemarkData &osmData, const QStringList &pattern ) const;
 
+    /**
+     * @brief returns a list of useful, popular osm tags that currently don't have a visual category associated with them
+     */
+    static QVector<OsmTag> createAdditionalOsmTags();
+
     GeoDataPlacemark *m_placemark;
     static const QString m_customTagAdderText;
 };
