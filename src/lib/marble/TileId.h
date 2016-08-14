@@ -41,7 +41,7 @@ class MARBLE_EXPORT TileId
     bool operator<( TileId const& rhs ) const;
 
     GeoDataLatLonBox toLatLonBox( const GeoSceneTileDataset *textureLayer ) const;
-    static TileId fromCoordinates( const GeoDataCoordinates& coords, int popularity );
+    static TileId fromCoordinates( const GeoDataCoordinates& coords, int zoomLevel );
 
  private:
     uint m_mapThemeIdHash;
