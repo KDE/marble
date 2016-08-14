@@ -26,13 +26,14 @@ set( ${TARGET}_SRC
 main.cpp
 BaseClipper.cpp
 BaseFilter.cpp
-  PlacemarkFilter.cpp
-    ShpCoastlineProcessor.cpp
-    LineStringProcessor.cpp
-    TinyPlanetProcessor.cpp
-    NodeReducer.cpp
-    TagsFilter.cpp
-    	WayConcatenator.cpp
+PlacemarkFilter.cpp
+ShpCoastlineProcessor.cpp
+LineStringProcessor.cpp
+TinyPlanetProcessor.cpp
+NodeReducer.cpp
+TagsFilter.cpp
+TileIterator.cpp
+WayConcatenator.cpp
 WayChunk.cpp
 )
 

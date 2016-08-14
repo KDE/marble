@@ -27,6 +27,7 @@
 #include "TinyPlanetProcessor.h"
 #include "NodeReducer.h"
 #include "WayConcatenator.h"
+#include "TileIterator.h"
 
 using namespace Marble;
 
@@ -133,7 +134,6 @@ int main(int argc, char *argv[])
 
     QString inputFileName = args.at(0);
     QString mergeFileName = parser.value("merge");
-    QString const extension = parser.value("extension");
     bool debug = parser.isSet("debug");
     bool silent = parser.isSet("silent");
     unsigned int zoomLevel = parser.value("zoom-level").toInt();
@@ -186,53 +186,52 @@ int main(int argc, char *argv[])
     if(file.suffix() == "shp" && parser.isSet("cut-to-tiles")) {
         ShpCoastlineProcessor processor(map);
         processor.process();
-        unsigned int N = pow(2, zoomLevel);
-        for(unsigned int x = 0; x < N; ++x) {
-            for(unsigned int y = 0; y < N; ++y) {
-                GeoDataDocument* tile = processor.cutToTiles(zoomLevel, x, y);
-                if (!writeTile(parser, outputName, tile, x, y, zoomLevel)) {
-                    return 4;
-                }
-                qInfo() << tile->name() << " done";
-                delete tile;
+        GeoDataLatLonBox world(85.0, -85.0, 180.0, -180.0, GeoDataCoordinates::Degree);
+        //TileIterator iter(map->latLonAltBox(), zoomLevel);
+        TileIterator iter(world, zoomLevel);
+        foreach(auto const &tileId, iter) {
+            GeoDataDocument* tile = processor.cutToTiles(zoomLevel, tileId.x(), tileId.y());
+            if (!writeTile(parser, outputName, tile, tileId.x(), tileId.y(), zoomLevel)) {
+                return 4;
             }
+            qInfo() << tile->name() << " done";
+            delete tile;
         }
     } else if (file.suffix() == "osm" && parser.isSet("cut-to-tiles") && parser.isSet("merge")) {
         TinyPlanetProcessor processor(map);
         processor.process();
         ShpCoastlineProcessor shpProcessor(mergeMap);
         shpProcessor.process();
-        unsigned int N = pow(2, zoomLevel);
-        for(unsigned int x = 0; x < N; ++x) {
-            for(unsigned int y = 0; y < N; ++y) {
-                GeoDataDocument* tile1 = processor.cutToTiles(zoomLevel, x, y);
-                GeoDataDocument* tile2 = shpProcessor.cutToTiles(zoomLevel, x, y);
-                GeoDataDocument* tile = mergeDocuments(tile1, tile2);
-                if (!writeTile(parser, outputName, tile, x, y, zoomLevel)) {
-                    return 4;
-                }
-                qInfo() << tile->name() << " done";
-                delete tile1;
-                delete tile2;
-                delete tile;
+        GeoDataLatLonBox world(85.0, -85.0, 180.0, -180.0, GeoDataCoordinates::Degree);
+        //TileIterator iter(map->latLonAltBox(), zoomLevel);
+        TileIterator iter(world, zoomLevel);
+        foreach(auto const &tileId, iter) {
+            GeoDataDocument* tile1 = processor.cutToTiles(zoomLevel, tileId.x(), tileId.y());
+            GeoDataDocument* tile2 = shpProcessor.cutToTiles(zoomLevel, tileId.x(), tileId.y());
+            GeoDataDocument* tile = mergeDocuments(tile1, tile2);
+            if (!writeTile(parser, outputName, tile, tileId.x(), tileId.y(), zoomLevel)) {
+                return 4;
             }
+            qInfo() << tile->name() << " done";
+            delete tile1;
+            delete tile2;
+            delete tile;
         }
     } else if (file.suffix() == "osm" && parser.isSet("cut-to-tiles")) {
         TinyPlanetProcessor processor(map);
 
         processor.process();
 
-        unsigned int N = pow(2, zoomLevel);
-
-        for(unsigned int x = 0; x < N; ++x) {
-            for(unsigned int y = 0; y < N; ++y) {
-                GeoDataDocument* tile = processor.cutToTiles(zoomLevel, x, y);
-                if (!writeTile(parser, outputName, tile, x, y, zoomLevel)) {
-                    return 4;
-                }
-                qInfo() << tile->name() << " done";
-                delete tile;
+        GeoDataLatLonBox world(85.0, -85.0, 180.0, -180.0, GeoDataCoordinates::Degree);
+        //TileIterator iter(map->latLonAltBox(), zoomLevel);
+        TileIterator iter(world, zoomLevel);
+        foreach(auto const &tileId, iter) {
+            GeoDataDocument* tile = processor.cutToTiles(zoomLevel, tileId.x(), tileId.y());
+            if (!writeTile(parser, outputName, tile, tileId.x(), tileId.y(), zoomLevel)) {
+                return 4;
             }
+            qInfo() << tile->name() << " done";
+            delete tile;
         }
     } else if(parser.isSet("node-reduce")) {
         qDebug()<<"Entered Node reduce"<<endl;
