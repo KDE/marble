@@ -134,6 +134,8 @@ bool DatabaseQuery::isPointOfInterest( const QString &category )
         pois["airport"] = OsmPlacemark::TransportAirportTerminal;
         pois[QObject::tr( "airport runway" ).toLower()] = OsmPlacemark::TransportAirportRunway;
         pois["airport runway"] = OsmPlacemark::TransportAirportRunway;
+        pois[QObject::tr( "airport apron" ).toLower()] = OsmPlacemark::TransportAirportApron;
+        pois["airport apron"] = OsmPlacemark::TransportAirportApron;
         pois[QObject::tr( "airport taxiway" ).toLower()] = OsmPlacemark::TransportAirportTaxiway;
         pois["airport taxiway"] = OsmPlacemark::TransportAirportTaxiway;
         pois[QObject::tr( "bus station" ).toLower()] = OsmPlacemark::TransportBusStation;

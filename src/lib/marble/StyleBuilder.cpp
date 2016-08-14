@@ -127,6 +127,7 @@ StyleBuilder::Private::Private() :
     m_defaultMinZoomLevels[GeoDataFeature::HighwayMotorway]     = 6;
     m_defaultMinZoomLevels[GeoDataFeature::TransportAirportRunway] = 15;
     m_defaultMinZoomLevels[GeoDataFeature::TransportAirportTaxiway] = 15;
+    m_defaultMinZoomLevels[GeoDataFeature::TransportAirportApron] = 15;
 
 #if 0 // not needed as long as default min zoom level is 15
     for(int i = GeoDataFeature::AccomodationCamping; i <= GeoDataFeature::ReligionSikh; i++)
@@ -689,6 +690,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataFeature::HighwayMotorwayLink]      = StyleBuilder::Private::createHighwayStyle( "#e892a2", "#dc2a67", QFont(QStringLiteral("Arial")), "000000", 9, 10 );
     m_defaultStyle[GeoDataFeature::TransportAirportRunway]   = StyleBuilder::Private::createHighwayStyle( "#bbbbcc", "#bbbbcc", QFont(QStringLiteral("Arial")), "000000", 0, 1 );
     m_defaultStyle[GeoDataFeature::TransportAirportTaxiway]  = StyleBuilder::Private::createHighwayStyle( "#bbbbcc", "#bbbbcc", QFont(QStringLiteral("Arial")), "000000", 0, 1 );
+    m_defaultStyle[GeoDataFeature::TransportAirportApron]    = StyleBuilder::Private::createWayStyle( "#e9d1ff", Qt::transparent, true, false );
 
     m_defaultStyle[GeoDataFeature::NaturalWater]             = StyleBuilder::Private::createStyle( 4, 0, waterColor, waterColor, true, true,
                                                                                                    Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false, QVector< qreal >(),
@@ -704,7 +706,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataFeature::NaturalBeach]             = StyleBuilder::Private::createWayStyle( "#FFF1BA", "#FFF1BA", true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/beach.png") );
     m_defaultStyle[GeoDataFeature::NaturalWetland]           = StyleBuilder::Private::createWayStyle( "#DDECEC", "#DDECEC", true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/wetland.png") );
     m_defaultStyle[GeoDataFeature::NaturalGlacier]           = StyleBuilder::Private::createWayStyle( "#DDECEC", "#DDECEC", true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/glacier.png") );
-    m_defaultStyle[GeoDataFeature::NaturalIceShelf]           = StyleBuilder::Private::createWayStyle( "#8ebebe", "#8ebebe", true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/glacier.png") );
+    m_defaultStyle[GeoDataFeature::NaturalIceShelf]          = StyleBuilder::Private::createWayStyle( "#8ebebe", "#8ebebe", true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/glacier.png") );
     m_defaultStyle[GeoDataFeature::NaturalScrub]             = StyleBuilder::Private::createWayStyle( "#B5E3B5", "#B5E3B5", true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/scrub.png") );
     m_defaultStyle[GeoDataFeature::NaturalCliff]             = StyleBuilder::Private::createWayStyle( Qt::transparent, Qt::transparent, true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/cliff2.png") );
     m_defaultStyle[GeoDataFeature::NaturalHeath]             = StyleBuilder::Private::createWayStyle( "#d6d99f", QColor("#d6d99f").darker(150), true, false );
@@ -1154,6 +1156,7 @@ QStringList StyleBuilder::renderOrder() const
         paintLayerOrder << Private::createPaintLayerItem("LineString", GeoDataFeature::NaturalReef, "label");
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::LeisureMarina);
 
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataFeature::TransportAirportApron);
 
         for ( int i = GeoDataFeature::HighwaySteps; i <= GeoDataFeature::HighwayMotorway; i++ ) {
             paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataFeature::GeoDataVisualCategory)i, "outline");
@@ -1449,6 +1452,7 @@ QString StyleBuilder::visualCategoryName(GeoDataFeature::GeoDataVisualCategory c
         visualCategoryNames[GeoDataFeature::TransportAirportGate] = "TransportAirportGate";
         visualCategoryNames[GeoDataFeature::TransportAirportRunway] = "TransportAirportRunway";
         visualCategoryNames[GeoDataFeature::TransportAirportTaxiway] = "TransportAirportTaxiway";
+        visualCategoryNames[GeoDataFeature::TransportAirportApron] = "TransportAirportApron";
         visualCategoryNames[GeoDataFeature::TransportBusStation] = "TransportBusStation";
         visualCategoryNames[GeoDataFeature::TransportBusStop] = "TransportBusStop";
         visualCategoryNames[GeoDataFeature::TransportCarShare] = "TransportCarShare";
