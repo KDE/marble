@@ -39,16 +39,23 @@ public:
                                       const QVector< qreal >& dashPattern = QVector< qreal >(),
                                       const QFont& font = QFont(QLatin1String("Arial")), const QColor& fontColor = Qt::black,
                                       const QString& texturePath = QString());
-    static GeoDataStyle::Ptr createPOIStyle( const QFont &font, const QString &bitmap,
+    static GeoDataStyle::Ptr createPOIStyle(const QFont &font, const QString &bitmap,
                                          const QColor &textColor = Qt::black,
                                          const QColor &color = QColor( 0xBE, 0xAD, 0xAD ),
-                                         const QColor &outline = QColor( 0xBE, 0xAD, 0xAD ).darker()
-                                         );
-    static GeoDataStyle::Ptr createOsmPOIStyle( const QFont &font, const QString &bitmap,
+                                         const QColor &outline = QColor( 0xBE, 0xAD, 0xAD ).darker(),
+                                         bool fill=true, bool renderOutline=true);
+    static GeoDataStyle::Ptr createOsmPOIStyle(const QFont &font, const QString &bitmap,
                                          const QColor &textColor = Qt::black,
                                          const QColor &color = QColor( 0xBE, 0xAD, 0xAD ),
-                                         const QColor &outline = QColor( 0xBE, 0xAD, 0xAD ).darker()
-                                         );
+                                         const QColor &outline = QColor( 0xBE, 0xAD, 0xAD ).darker());
+    static GeoDataStyle::Ptr createOsmPOIRingStyle(const QFont &font, const QString &bitmap,
+                                         const QColor &textColor = Qt::black,
+                                         const QColor &color = QColor( 0xBE, 0xAD, 0xAD ),
+                                         const QColor &outline = QColor( 0xBE, 0xAD, 0xAD ).darker());
+    static GeoDataStyle::Ptr createOsmPOIAreaStyle(const QFont &font, const QString &bitmap,
+                                         const QColor &textColor = Qt::black,
+                                         const QColor &color = QColor( 0xBE, 0xAD, 0xAD ),
+                                         const QColor &outline = QColor( 0xBE, 0xAD, 0xAD ).darker());
     static GeoDataStyle::Ptr createHighwayStyle( const QColor& color, const QColor& outlineColor, const QFont& font = QFont(QLatin1String("Arial")),
                                              const QColor& fontColor = Qt::black,
                                              qreal width = 1, qreal realWidth = 0.0,
@@ -195,10 +202,10 @@ StyleBuilder::Private::Private() :
     }
 }
 
-GeoDataStyle::Ptr StyleBuilder::Private::createPOIStyle( const QFont &font, const QString &path,
-                                     const QColor &textColor, const QColor &color, const QColor &outline)
+GeoDataStyle::Ptr StyleBuilder::Private::createPOIStyle(const QFont &font, const QString &path,
+                                     const QColor &textColor, const QColor &color, const QColor &outline, bool fill, bool renderOutline)
 {
-    GeoDataStyle::Ptr style =  createStyle(1, 0, color, outline, true, true, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false);
+    GeoDataStyle::Ptr style =  createStyle(1, 0, color, outline, fill, renderOutline, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false);
     style->setIconStyle( GeoDataIconStyle( path) );
     auto const screen = QApplication::screens().first();
     double const physicalSize = 6.0; // mm
@@ -206,8 +213,6 @@ GeoDataStyle::Ptr StyleBuilder::Private::createPOIStyle( const QFont &font, cons
     style->iconStyle().setSize(QSize(pixelSize, pixelSize));
     style->setLabelStyle( GeoDataLabelStyle( font, textColor ) );
     style->labelStyle().setAlignment(GeoDataLabelStyle::Center);
-    style->polyStyle().setFill(false);
-    style->polyStyle().setOutline(false);
     return style;
 }
 
@@ -215,8 +220,23 @@ GeoDataStyle::Ptr StyleBuilder::Private::createOsmPOIStyle( const QFont &font, c
                                      const QColor &textColor, const QColor &color, const QColor &outline)
 {
     QString const path = MarbleDirs::path( "svg/osmcarto/svg/" + imagePath + ".svg" );
-    return createPOIStyle(font, path, textColor, color, outline);
+    return createPOIStyle(font, path, textColor, color, outline, false, false);
 }
+
+GeoDataStyle::Ptr StyleBuilder::Private::createOsmPOIRingStyle( const QFont &font, const QString &imagePath,
+                                     const QColor &textColor, const QColor &color, const QColor &outline)
+{
+    QString const path = MarbleDirs::path( "svg/osmcarto/svg/" + imagePath + ".svg" );
+    return createPOIStyle(font, path, textColor, color, outline, false, true);
+}
+
+GeoDataStyle::Ptr StyleBuilder::Private::createOsmPOIAreaStyle( const QFont &font, const QString &imagePath,
+                                     const QColor &textColor, const QColor &color, const QColor &outline)
+{
+    QString const path = MarbleDirs::path( "svg/osmcarto/svg/" + imagePath + ".svg" );
+    return createPOIStyle(font, path, textColor, color, outline, true, false);
+}
+
 
 GeoDataStyle::Ptr StyleBuilder::Private::createHighwayStyle( const QColor& color, const QColor& outlineColor, const QFont& font,
                                                              const QColor& fontColor, qreal width, qreal realWidth, Qt::PenStyle penStyle,
@@ -485,17 +505,17 @@ void StyleBuilder::Private::initializeDefaultStyles()
 //    QColor const buildingColor(0, 255, 0, 64);
 
     QFont const osmFont( defaultFamily, 10, 50, false );
-    m_defaultStyle[GeoDataFeature::AccomodationCamping]      = StyleBuilder::Private::createOsmPOIStyle( osmFont, "transportation/camping.16", transportationColor );
+    m_defaultStyle[GeoDataFeature::AccomodationCamping]      = StyleBuilder::Private::createOsmPOIRingStyle( osmFont, "transportation/camping.16", transportationColor );
     m_defaultStyle[GeoDataFeature::AccomodationHostel]       = StyleBuilder::Private::createOsmPOIStyle( osmFont, "transportation/hostel.16", transportationColor );
     m_defaultStyle[GeoDataFeature::AccomodationHotel]        = StyleBuilder::Private::createOsmPOIStyle( osmFont, "transportation/hotel.16", transportationColor );
     m_defaultStyle[GeoDataFeature::AccomodationMotel]        = StyleBuilder::Private::createOsmPOIStyle( osmFont, "transportation/motel.16", transportationColor );
     m_defaultStyle[GeoDataFeature::AccomodationYouthHostel]  = StyleBuilder::Private::createOsmPOIStyle( osmFont, "transportation/hostel.16", transportationColor );
     m_defaultStyle[GeoDataFeature::AccomodationGuestHouse]   = StyleBuilder::Private::createOsmPOIStyle( osmFont, "transportation/guest_house.16", transportationColor );
     m_defaultStyle[GeoDataFeature::AmenityLibrary]           = StyleBuilder::Private::createOsmPOIStyle( osmFont, "amenity/library.20", amenityColor );
-    m_defaultStyle[GeoDataFeature::AmenityKindergarten]      = StyleBuilder::Private::createOsmPOIStyle( osmFont, QString(), amenityColor, educationalAreasAndHospital, amenityColor );
-    m_defaultStyle[GeoDataFeature::EducationCollege]         = StyleBuilder::Private::createOsmPOIStyle( osmFont, QString(), amenityColor, educationalAreasAndHospital, amenityColor );
-    m_defaultStyle[GeoDataFeature::EducationSchool]          = StyleBuilder::Private::createOsmPOIStyle( osmFont, QString(), amenityColor, educationalAreasAndHospital, amenityColor );
-    m_defaultStyle[GeoDataFeature::EducationUniversity]      = StyleBuilder::Private::createOsmPOIStyle( osmFont, QString(), amenityColor, educationalAreasAndHospital, amenityColor );
+    m_defaultStyle[GeoDataFeature::AmenityKindergarten]      = StyleBuilder::Private::createOsmPOIAreaStyle( osmFont, QString(), amenityColor, educationalAreasAndHospital, amenityColor );
+    m_defaultStyle[GeoDataFeature::EducationCollege]         = StyleBuilder::Private::createOsmPOIAreaStyle( osmFont, QString(), amenityColor, educationalAreasAndHospital, amenityColor );
+    m_defaultStyle[GeoDataFeature::EducationSchool]          = StyleBuilder::Private::createOsmPOIAreaStyle( osmFont, QString(), amenityColor, educationalAreasAndHospital, amenityColor );
+    m_defaultStyle[GeoDataFeature::EducationUniversity]      = StyleBuilder::Private::createOsmPOIAreaStyle( osmFont, QString(), amenityColor, educationalAreasAndHospital, amenityColor );
     m_defaultStyle[GeoDataFeature::FoodBar]                  = StyleBuilder::Private::createOsmPOIStyle( osmFont, "amenity/bar.16", amenityColor );
     m_defaultStyle[GeoDataFeature::FoodBiergarten]           = StyleBuilder::Private::createOsmPOIStyle( osmFont, "amenity/biergarten.16", amenityColor );
     m_defaultStyle[GeoDataFeature::FoodCafe]                 = StyleBuilder::Private::createOsmPOIStyle( osmFont, "amenity/cafe.16", amenityColor );
@@ -512,7 +532,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataFeature::MoneyAtm]                 = StyleBuilder::Private::createOsmPOIStyle( osmFont, "amenity/atm.16", amenityColor );
     m_defaultStyle[GeoDataFeature::MoneyBank]                = StyleBuilder::Private::createOsmPOIStyle( osmFont, "amenity/bank.16", amenityColor );
 
-    m_defaultStyle[GeoDataFeature::AmenityArchaeologicalSite] = StyleBuilder::Private::createOsmPOIStyle( osmFont, "amenity/archaeological_site.16", amenityColor, Qt::transparent );
+    m_defaultStyle[GeoDataFeature::AmenityArchaeologicalSite] = StyleBuilder::Private::createOsmPOIAreaStyle( osmFont, "amenity/archaeological_site.16", amenityColor, Qt::transparent );
     m_defaultStyle[GeoDataFeature::AmenityEmbassy]           = StyleBuilder::Private::createOsmPOIStyle( osmFont, "transportation/embassy.16", transportationColor );
     m_defaultStyle[GeoDataFeature::AmenityEmergencyPhone]    = StyleBuilder::Private::createOsmPOIStyle( osmFont, "amenity/emergency_phone.16", amenityColor );
     m_defaultStyle[GeoDataFeature::AmenityWaterPark]         = StyleBuilder::Private::createOsmPOIStyle( osmFont, "amenity/water_park.16", amenityColor );
@@ -594,26 +614,26 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataFeature::ManmadeWindMill]          = StyleBuilder::Private::createOsmPOIStyle( osmFont, "amenity/windmill.16", amenityColor );
 
     m_defaultStyle[GeoDataFeature::TouristAttraction]        = StyleBuilder::Private::createOsmPOIStyle( osmFont, "amenity/tourist_memorial.16", amenityColor );
-    m_defaultStyle[GeoDataFeature::TouristCastle]            = StyleBuilder::Private::createOsmPOIStyle( osmFont, "amenity/cinema.16", amenityColor );
+    m_defaultStyle[GeoDataFeature::TouristCastle]            = StyleBuilder::Private::createOsmPOIRingStyle( osmFont, "amenity/cinema.16", amenityColor );
     m_defaultStyle[GeoDataFeature::TouristCinema]            = StyleBuilder::Private::createOsmPOIStyle( osmFont, "amenity/cinema.16", amenityColor );
     m_defaultStyle[GeoDataFeature::TouristInformation]       = StyleBuilder::Private::createOsmPOIStyle( osmFont, "amenity/information.16", amenityColor );
     m_defaultStyle[GeoDataFeature::TouristMonument]          = StyleBuilder::Private::createOsmPOIStyle( osmFont, "amenity/monument.16", amenityColor );
     m_defaultStyle[GeoDataFeature::TouristMuseum]            = StyleBuilder::Private::createOsmPOIStyle( osmFont, "amenity/museum.16", amenityColor );
-    m_defaultStyle[GeoDataFeature::TouristRuin]              = StyleBuilder::Private::createOsmPOIStyle( osmFont, QString(), amenityColor );
+    m_defaultStyle[GeoDataFeature::TouristRuin]              = StyleBuilder::Private::createOsmPOIRingStyle( osmFont, QString(), amenityColor );
     m_defaultStyle[GeoDataFeature::TouristTheatre]           = StyleBuilder::Private::createOsmPOIStyle( osmFont, "amenity/theatre.16", amenityColor );
     m_defaultStyle[GeoDataFeature::TouristThemePark]         = StyleBuilder::Private::createOsmPOIStyle( osmFont, QString(), amenityColor );
     m_defaultStyle[GeoDataFeature::TouristViewPoint]         = StyleBuilder::Private::createOsmPOIStyle( osmFont, "amenity/viewpoint.16", amenityColor );
-    m_defaultStyle[GeoDataFeature::TouristZoo]               = StyleBuilder::Private::createOsmPOIStyle( osmFont, QString(), amenityColor, Qt::transparent );
+    m_defaultStyle[GeoDataFeature::TouristZoo]               = StyleBuilder::Private::createOsmPOIRingStyle( osmFont, QString(), amenityColor, Qt::transparent );
     m_defaultStyle[GeoDataFeature::TouristAlpineHut]         = StyleBuilder::Private::createOsmPOIStyle( osmFont, "transportation/alpinehut.16", transportationColor );
     m_defaultStyle[GeoDataFeature::TransportAerodrome]       = StyleBuilder::Private::createOsmPOIStyle( osmFont, "airtransport/aerodrome", airTransportColor );
     m_defaultStyle[GeoDataFeature::TransportHelipad]         = StyleBuilder::Private::createOsmPOIStyle( osmFont, "airtransport/helipad", airTransportColor );
-    m_defaultStyle[GeoDataFeature::TransportAirportTerminal] = StyleBuilder::Private::createOsmPOIStyle( osmFont, QString(), airTransportColor );
-    m_defaultStyle[GeoDataFeature::TransportAirportGate]     = StyleBuilder::Private::createOsmPOIStyle( osmFont, QString(), airTransportColor );
+    m_defaultStyle[GeoDataFeature::TransportAirportTerminal] = StyleBuilder::Private::createOsmPOIAreaStyle( osmFont, QString(), airTransportColor );
+    m_defaultStyle[GeoDataFeature::TransportAirportGate]     = StyleBuilder::Private::createOsmPOIAreaStyle( osmFont, QString(), airTransportColor );
     m_defaultStyle[GeoDataFeature::TransportBusStation]      = StyleBuilder::Private::createOsmPOIStyle( osmFont, "transportation/bus_station.16", transportationColor );
     m_defaultStyle[GeoDataFeature::TransportBusStop]         = StyleBuilder::Private::createOsmPOIStyle( osmFont, "transportation/bus_stop.12", transportationColor );
     m_defaultStyle[GeoDataFeature::TransportCarShare]        = StyleBuilder::Private::createOsmPOIStyle( osmFont, "transportation/car_share.16", transportationColor );
     m_defaultStyle[GeoDataFeature::TransportFuel]            = StyleBuilder::Private::createOsmPOIStyle( osmFont, "transportation/fuel.16", transportationColor );
-    m_defaultStyle[GeoDataFeature::TransportParking]         = StyleBuilder::Private::createOsmPOIStyle( osmFont, "transportation/parking", transportationColor, "#F6EEB6", QColor( "#F6EEB6" ).darker() );
+    m_defaultStyle[GeoDataFeature::TransportParking]         = StyleBuilder::Private::createOsmPOIAreaStyle( osmFont, "transportation/parking", transportationColor, "#F6EEB6", QColor( "#F6EEB6" ).darker() );
     m_defaultStyle[GeoDataFeature::TransportParkingSpace]    = StyleBuilder::Private::createWayStyle( "#F6EEB6", QColor( "#F6EEB6" ).darker(), true, true );
     m_defaultStyle[GeoDataFeature::TransportPlatform]        = StyleBuilder::Private::createWayStyle( "#bbbbbb", Qt::transparent, true, false );
     m_defaultStyle[GeoDataFeature::TransportTrainStation]    = StyleBuilder::Private::createOsmPOIStyle( osmFont, "individual/railway_station", transportationColor );
@@ -621,8 +641,8 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataFeature::TransportRentalBicycle]   = StyleBuilder::Private::createOsmPOIStyle( osmFont, "transportation/rental_bicycle.16", transportationColor );
     m_defaultStyle[GeoDataFeature::TransportRentalCar]       = StyleBuilder::Private::createOsmPOIStyle( osmFont, "transportation/rental_car.16", transportationColor );
     m_defaultStyle[GeoDataFeature::TransportTaxiRank]        = StyleBuilder::Private::createOsmPOIStyle( osmFont, "transportation/taxi.16", transportationColor );
-    m_defaultStyle[GeoDataFeature::TransportBicycleParking]  = StyleBuilder::Private::createOsmPOIStyle( osmFont, "transportation/bicycle_parking.16", transportationColor );
-    m_defaultStyle[GeoDataFeature::TransportMotorcycleParking] = StyleBuilder::Private::createOsmPOIStyle( osmFont, "transportation/motorcycle_parking.16", transportationColor );
+    m_defaultStyle[GeoDataFeature::TransportBicycleParking]  = StyleBuilder::Private::createOsmPOIAreaStyle( osmFont, "transportation/bicycle_parking.16", transportationColor );
+    m_defaultStyle[GeoDataFeature::TransportMotorcycleParking] = StyleBuilder::Private::createOsmPOIAreaStyle( osmFont, "transportation/motorcycle_parking.16", transportationColor );
     m_defaultStyle[GeoDataFeature::TransportSubwayEntrance]  = StyleBuilder::Private::createOsmPOIStyle( osmFont, "transportation/subway_entrance", transportationColor );
     m_defaultStyle[GeoDataFeature::ReligionPlaceOfWorship]   = StyleBuilder::Private::createOsmPOIStyle( osmFont, QString() /* "black/place_of_worship.16" */ );
     m_defaultStyle[GeoDataFeature::ReligionBahai]            = StyleBuilder::Private::createOsmPOIStyle( osmFont, QString() );
@@ -692,7 +712,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataFeature::LeisureGolfCourse]        = StyleBuilder::Private::createWayStyle( QColor("#b5e3b5"), QColor("#b5e3b5").darker(150), true, true );
     m_defaultStyle[GeoDataFeature::LeisureMarina]            = StyleBuilder::Private::createOsmPOIStyle( osmFont, QString(), QColor("#95abd5"), QColor("#aec8d1"), QColor("#95abd5").darker(150) );
     m_defaultStyle[GeoDataFeature::LeisurePark]              = StyleBuilder::Private::createWayStyle( QColor("#c8facc"), QColor("#c8facc").darker(150), true, true );
-    m_defaultStyle[GeoDataFeature::LeisurePlayground]        = StyleBuilder::Private::createOsmPOIStyle( osmFont, "amenity/playground.16", amenityColor, "#CCFFF1", "#BDFFED" );
+    m_defaultStyle[GeoDataFeature::LeisurePlayground]        = StyleBuilder::Private::createOsmPOIAreaStyle( osmFont, "amenity/playground.16", amenityColor, "#CCFFF1", "#BDFFED" );
     m_defaultStyle[GeoDataFeature::LeisurePitch]             = StyleBuilder::Private::createWayStyle( "#8ad3af", QColor("#8ad3af").darker(150), true, true );
     m_defaultStyle[GeoDataFeature::LeisureSportsCentre]      = StyleBuilder::Private::createWayStyle( "#33cc99", QColor("#33cc99").darker(150), true, true );
     m_defaultStyle[GeoDataFeature::LeisureStadium]           = StyleBuilder::Private::createWayStyle( "#33cc99", QColor("#33cc99").darker(150), true, true );
