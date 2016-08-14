@@ -83,40 +83,14 @@ GeoDataDocument* mergeDocuments(GeoDataDocument* map1, GeoDataDocument* map2)
 bool writeTile(const QCommandLineParser &parser, const QString &outputName, GeoDataDocument* tile, int x, int y, int zoomLevel)
 {
     QString const extension = parser.value("extension");
-    QString outputFile;
-    if(parser.isSet("output")) {
-        outputFile = QString("%1/%2/%3/%4.%5").arg(outputName).arg(zoomLevel).arg(x).arg(y).arg(extension);
-    } else {
-        outputFile = QString("%1/%2/%3.%4").arg(zoomLevel).arg(x).arg(y).arg(extension);
-    }
-
-    QDir dir;
-    if(parser.isSet("output")) {
-        if(!dir.exists(outputName)) {
-            dir.mkdir(outputName);
-        }
-
-        if(!dir.exists(QString("%1/%2").arg(outputName).arg(zoomLevel))) {
-            dir.mkdir(QString("%1/%2").arg(outputName).arg(zoomLevel));
-        }
-
-        if(!dir.exists(QString("%1/%2/%3").arg(outputName).arg(zoomLevel).arg(x))) {
-            dir.mkdir(QString("%1/%2/%3").arg(outputName).arg(zoomLevel).arg(x));
-        }
-    } else {
-        if(!dir.exists(QString::number(zoomLevel))) {
-            dir.mkdir(QString::number(zoomLevel));
-        }
-        if(!dir.exists(QString("%1/%2").arg(zoomLevel).arg(x))) {
-            dir.mkdir(QString("%1/%2").arg(zoomLevel).arg(x));
-        }
-    }
-
+    QString const baseDir = parser.isSet("output") ? QString("%1/").arg(outputName) : QString();
+    QString const outputDir = QString("%1%2/%3").arg(baseDir).arg(zoomLevel).arg(x);
+    QDir().mkpath(outputDir);
+    QString const outputFile = QString("%1/%2.%3").arg(outputDir).arg(y).arg(extension);
     if (!GeoDataDocumentWriter::write(outputFile, *tile)) {
         qDebug() << "Could not write the file " << outputName;
         return false;
     }
-
     return true;
 }
 
