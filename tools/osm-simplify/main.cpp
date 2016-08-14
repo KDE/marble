@@ -80,6 +80,46 @@ GeoDataDocument* mergeDocuments(GeoDataDocument* map1, GeoDataDocument* map2)
     return mergedMap;
 }
 
+bool writeTile(const QCommandLineParser &parser, const QString &outputName, GeoDataDocument* tile, int x, int y, int zoomLevel)
+{
+    QString const extension = parser.value("extension");
+    QString outputFile;
+    if(parser.isSet("output")) {
+        outputFile = QString("%1/%2/%3/%4.%5").arg(outputName).arg(zoomLevel).arg(x).arg(y).arg(extension);
+    } else {
+        outputFile = QString("%1/%2/%3.%4").arg(zoomLevel).arg(x).arg(y).arg(extension);
+    }
+
+    QDir dir;
+    if(parser.isSet("output")) {
+        if(!dir.exists(outputName)) {
+            dir.mkdir(outputName);
+        }
+
+        if(!dir.exists(QString("%1/%2").arg(outputName).arg(zoomLevel))) {
+            dir.mkdir(QString("%1/%2").arg(outputName).arg(zoomLevel));
+        }
+
+        if(!dir.exists(QString("%1/%2/%3").arg(outputName).arg(zoomLevel).arg(x))) {
+            dir.mkdir(QString("%1/%2/%3").arg(outputName).arg(zoomLevel).arg(x));
+        }
+    } else {
+        if(!dir.exists(QString::number(zoomLevel))) {
+            dir.mkdir(QString::number(zoomLevel));
+        }
+        if(!dir.exists(QString("%1/%2").arg(zoomLevel).arg(x))) {
+            dir.mkdir(QString("%1/%2").arg(zoomLevel).arg(x));
+        }
+    }
+
+    if (!GeoDataDocumentWriter::write(outputFile, *tile)) {
+        qDebug() << "Could not write the file " << outputName;
+        return false;
+    }
+
+    return true;
+}
+
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
@@ -171,106 +211,33 @@ int main(int argc, char *argv[])
 
     if(file.suffix() == "shp" && parser.isSet("cut-to-tiles")) {
         ShpCoastlineProcessor processor(map);
-
         processor.process();
-
         unsigned int N = pow(2, zoomLevel);
-
         for(unsigned int x = 0; x < N; ++x) {
             for(unsigned int y = 0; y < N; ++y) {
                 GeoDataDocument* tile = processor.cutToTiles(zoomLevel, x, y);
-
-                QString outputFile;
-                if(parser.isSet("output")) {
-                    outputFile = QString("%1/%2/%3/%4.%5").arg(outputName).arg(zoomLevel).arg(x).arg(y).arg(extension);
-                } else {
-                    outputFile = QString("%1/%2/%3.%4").arg(zoomLevel).arg(x).arg(y).arg(extension);
-                }
-
-                QDir dir;
-                if(parser.isSet("output")) {
-                    if(!dir.exists(outputName)) {
-                        dir.mkdir(outputName);
-                    }
-
-                    if(!dir.exists(QString("%1/%2").arg(outputName).arg(zoomLevel))) {
-                        dir.mkdir(QString("%1/%2").arg(outputName).arg(zoomLevel));
-                    }
-
-                    if(!dir.exists(QString("%1/%2/%3").arg(outputName).arg(zoomLevel).arg(x))) {
-                        dir.mkdir(QString("%1/%2/%3").arg(outputName).arg(zoomLevel).arg(x));
-                    }
-                } else {
-                    if(!dir.exists(QString::number(zoomLevel))) {
-                        dir.mkdir(QString::number(zoomLevel));
-                    }
-                    if(!dir.exists(QString("%1/%2").arg(zoomLevel).arg(x))) {
-                        dir.mkdir(QString("%1/%2").arg(zoomLevel).arg(x));
-                    }
-                }
-
-                if (!GeoDataDocumentWriter::write(outputFile, *tile)) {
-                    qDebug() << "Could not write the file " << outputName;
+                if (!writeTile(parser, outputName, tile, x, y, zoomLevel)) {
                     return 4;
                 }
-
                 qInfo() << tile->name() << " done";
-
                 delete tile;
             }
         }
     } else if (file.suffix() == "osm" && parser.isSet("cut-to-tiles") && parser.isSet("merge")) {
         TinyPlanetProcessor processor(map);
         processor.process();
-
         ShpCoastlineProcessor shpProcessor(mergeMap);
         shpProcessor.process();
-
         unsigned int N = pow(2, zoomLevel);
-
         for(unsigned int x = 0; x < N; ++x) {
             for(unsigned int y = 0; y < N; ++y) {
                 GeoDataDocument* tile1 = processor.cutToTiles(zoomLevel, x, y);
                 GeoDataDocument* tile2 = shpProcessor.cutToTiles(zoomLevel, x, y);
-
                 GeoDataDocument* tile = mergeDocuments(tile1, tile2);
-
-                QString outputFile;
-                if(parser.isSet("output")) {
-                    outputFile = QString("%1/%2/%3/%4.%5").arg(outputName).arg(zoomLevel).arg(x).arg(y).arg(extension);
-                } else {
-                    outputFile = QString("%1/%2/%3.%4").arg(zoomLevel).arg(x).arg(y).arg(extension);
-                }
-
-                QDir dir;
-                if(parser.isSet("output")) {
-                    if(!dir.exists(outputName)) {
-                        dir.mkdir(outputName);
-                    }
-
-                    if(!dir.exists(QString("%1/%2").arg(outputName).arg(zoomLevel))) {
-                        dir.mkdir(QString("%1/%2").arg(outputName).arg(zoomLevel));
-                    }
-
-                    if(!dir.exists(QString("%1/%2/%3").arg(outputName).arg(zoomLevel).arg(x))) {
-                        dir.mkdir(QString("%1/%2/%3").arg(outputName).arg(zoomLevel).arg(x));
-                    }
-                } else {
-                    if(!dir.exists(QString::number(zoomLevel))) {
-                        dir.mkdir(QString::number(zoomLevel));
-                    }
-                    if(!dir.exists(QString("%1/%2").arg(zoomLevel).arg(x))) {
-                        dir.mkdir(QString("%1/%2").arg(zoomLevel).arg(x));
-                    }
-                }
-
-                if (!GeoDataDocumentWriter::write(outputFile, *tile)) {
-                    qDebug() << "Could not write the file " << outputName;
+                if (!writeTile(parser, outputName, tile, x, y, zoomLevel)) {
                     return 4;
                 }
-
                 qInfo() << tile->name() << " done";
-
                 delete tile1;
                 delete tile2;
                 delete tile;
@@ -286,43 +253,10 @@ int main(int argc, char *argv[])
         for(unsigned int x = 0; x < N; ++x) {
             for(unsigned int y = 0; y < N; ++y) {
                 GeoDataDocument* tile = processor.cutToTiles(zoomLevel, x, y);
-
-                QString outputFile;
-                if(parser.isSet("output")) {
-                    outputFile = QString("%1/%2/%3/%4.%5").arg(outputName).arg(zoomLevel).arg(x).arg(y).arg(extension);
-                } else {
-                    outputFile = QString("%1/%2/%3.%4").arg(zoomLevel).arg(x).arg(y).arg(extension);
-                }
-
-                QDir dir;
-                if(parser.isSet("output")) {
-                    if(!dir.exists(outputName)) {
-                        dir.mkdir(outputName);
-                    }
-
-                    if(!dir.exists(QString("%1/%2").arg(outputName).arg(zoomLevel))) {
-                        dir.mkdir(QString("%1/%2").arg(outputName).arg(zoomLevel));
-                    }
-
-                    if(!dir.exists(QString("%1/%2/%3").arg(outputName).arg(zoomLevel).arg(x))) {
-                        dir.mkdir(QString("%1/%2/%3").arg(outputName).arg(zoomLevel).arg(x));
-                    }
-                } else {
-                    if(!dir.exists(QString::number(zoomLevel))) {
-                        dir.mkdir(QString::number(zoomLevel));
-                    }
-                    if(!dir.exists(QString("%1/%2").arg(zoomLevel).arg(x))) {
-                        dir.mkdir(QString("%1/%2").arg(zoomLevel).arg(x));
-                    }
-                }
-
-                if (!GeoDataDocumentWriter::write(outputFile, *tile)) {
-                    qDebug() << "Could not write the file " << outputName;
+                if (!writeTile(parser, outputName, tile, x, y, zoomLevel)) {
                     return 4;
                 }
-
                 qInfo() << tile->name() << " done";
-
                 delete tile;
             }
         }
