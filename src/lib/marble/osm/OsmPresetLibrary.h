@@ -43,12 +43,6 @@ public:
     static GeoDataFeature::GeoDataVisualCategory osmVisualCategory(const OsmTag &tag);
 
     /**
-     * @brief hasVisualCategory returns true if there is a visual category associated with
-     * @p tag
-     */
-    static bool hasVisualCategory( const OsmTag &tag );
-
-    /**
      * @brief begin and end provide an stl style iterator for the preset map
      */
     static QMap<OsmTag, GeoDataFeature::GeoDataVisualCategory>::const_iterator begin();

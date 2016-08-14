@@ -82,7 +82,7 @@ OsmTagEditorWidget::OsmTag OsmTagEditorWidget::suitableTag() const
     for (int index = 0; index < d->m_currentTagsList->topLevelItemCount(); ++index) {
         const QTreeWidgetItem *item = d->m_currentTagsList->topLevelItem( index );
         const auto tag = OsmTag(item->text(0), item->text(1));
-        if ( OsmPresetLibrary::hasVisualCategory( tag ) ) {
+        if (OsmPresetLibrary::osmVisualCategory(tag) != GeoDataFeature::None) {
             return tag;
         }
     }

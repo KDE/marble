@@ -484,12 +484,6 @@ GeoDataStyle::ConstPtr OsmPresetLibrary::presetStyle( const OsmTag &tag )
     return styleBuilder.presetStyle(category);
 }
 
-bool OsmPresetLibrary::hasVisualCategory ( const OsmTag &tag )
-{
-
-    return s_visualCategories.contains( tag );
-}
-
 GeoDataFeature::GeoDataVisualCategory OsmPresetLibrary::osmVisualCategory(const OsmTag &tag)
 {
     initializeOsmVisualCategories();
