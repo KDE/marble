@@ -584,7 +584,7 @@ GeoDataFeature::GeoDataVisualCategory OsmPresetLibrary::determineVisualCategory(
         QString const keyValue = QString("%1=%2").arg(iter.key()).arg(iter.value());
         GeoDataFeature::GeoDataVisualCategory category = osmVisualCategory(keyValue);
         if (category != GeoDataFeature::None) {
-            return osmVisualCategory(keyValue);
+            return category;
         }
     }
 
