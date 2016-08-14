@@ -63,28 +63,31 @@ OsmTagEditorWidget::~OsmTagEditorWidget()
 
 
 void OsmTagEditorWidget::update()
-{   d->m_currentTagsList->clear();
+{
+    d->m_currentTagsList->clear();
     d->m_recommendedTagsList->clear();
     d->populatePresetTagsList();
     d->populateCurrentTagsList();
+
     emit placemarkChanged( d->m_placemark );
 }
 
-QString OsmTagEditorWidget::suitableTag()
+OsmTagEditorWidget::OsmTag OsmTagEditorWidget::suitableTag() const
 {
-    /* The most suitable tag is the first tag in the list for which the OsmPresetLibrary
+    /*
+     * The most suitable tag is the first tag in the list for which the OsmPresetLibrary
      * has an assigned visual category ( a QMap entry )
      * Maybe there's a better option.
      */
-    for ( int index = 0; index < d->m_currentTagsList->topLevelItemCount(); ++index ) {
+    for (int index = 0; index < d->m_currentTagsList->topLevelItemCount(); ++index) {
         const QTreeWidgetItem *item = d->m_currentTagsList->topLevelItem( index );
-        OsmTagEditorWidgetPrivate::OsmTag tag( item->text( 0 ), item->text( 1 ) );
+        const auto tag = OsmTag(item->text(0), item->text(1));
         if ( OsmPresetLibrary::hasVisualCategory( tag ) ) {
-            return tag.first + '=' + tag.second;
+            return tag;
         }
     }
 
-    return QString();
+    return OsmTag();
 }
 
 void OsmTagEditorWidget::addSelectedTag()

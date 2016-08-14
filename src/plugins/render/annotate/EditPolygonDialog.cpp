@@ -255,8 +255,8 @@ void EditPolygonDialog::updatePolygon()
 
     // If there is not custom style initialized( default #polyline url is used ) and there is a osmTag-based style
     // available, set it
-    QString suitableTag = d->m_osmTagEditorWidget->suitableTag();
-    if ( d->m_placemark->styleUrl() == "#polygon" && !suitableTag.isEmpty() ) {
+    const OsmTagEditorWidget::OsmTag suitableTag = d->m_osmTagEditorWidget->suitableTag();
+    if (d->m_placemark->styleUrl() == "#polygon" && suitableTag != OsmTagEditorWidget::OsmTag()) {
         GeoDataFeature::GeoDataVisualCategory category = OsmPresetLibrary::osmVisualCategory( suitableTag );
         d->m_placemark->setStyle( GeoDataStyle::Ptr() ); // first clear style so style gets set by setVisualCategory()
         d->m_placemark->setVisualCategory( category );

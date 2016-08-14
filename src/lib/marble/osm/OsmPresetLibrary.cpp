@@ -479,7 +479,7 @@ GeoDataStyle::ConstPtr OsmPresetLibrary::presetStyle( const OsmTag &tag )
 {
     static const StyleBuilder styleBuilder;
 
-    const GeoDataFeature::GeoDataVisualCategory category = osmVisualCategory(tag.first + '=' + tag.second);
+    const GeoDataFeature::GeoDataVisualCategory category = osmVisualCategory(tag);
 
     return styleBuilder.presetStyle(category);
 }
@@ -490,19 +490,11 @@ bool OsmPresetLibrary::hasVisualCategory ( const OsmTag &tag )
     return s_visualCategories.contains( tag );
 }
 
-GeoDataFeature::GeoDataVisualCategory OsmPresetLibrary::osmVisualCategory( const QString &keyValue )
+GeoDataFeature::GeoDataVisualCategory OsmPresetLibrary::osmVisualCategory(const OsmTag &tag)
 {
     initializeOsmVisualCategories();
-    QStringList tokens = keyValue.split( '=' );
 
-    if ( tokens.size() != 2 ) {
-        return GeoDataFeature::None;
-    }
-
-    QString key = tokens.at( 0 );
-    QString value = tokens.at( 1 );
-
-    return s_visualCategories.value( OsmTag( key, value ) );
+    return s_visualCategories.value(tag, GeoDataFeature::None);
 }
 
 QMap<OsmPresetLibrary::OsmTag, GeoDataFeature::GeoDataVisualCategory>::const_iterator OsmPresetLibrary::begin()
@@ -581,8 +573,8 @@ GeoDataFeature::GeoDataVisualCategory OsmPresetLibrary::determineVisualCategory(
     }
 
     for (auto iter = osmData.tagsBegin(), end=osmData.tagsEnd(); iter != end; ++iter) {
-        QString const keyValue = QString("%1=%2").arg(iter.key()).arg(iter.value());
-        GeoDataFeature::GeoDataVisualCategory category = osmVisualCategory(keyValue);
+        const auto tag = OsmPresetLibrary::OsmTag(iter.key(), iter.value());
+        GeoDataFeature::GeoDataVisualCategory category = osmVisualCategory(tag);
         if (category != GeoDataFeature::None) {
             return category;
         }

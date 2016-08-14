@@ -40,7 +40,7 @@ public:
     /**
      * @brief  Convenience categorization of placemarks for Osm key=value pairs
      */
-    static GeoDataFeature::GeoDataVisualCategory osmVisualCategory(const QString &keyValue );
+    static GeoDataFeature::GeoDataVisualCategory osmVisualCategory(const OsmTag &tag);
 
     /**
      * @brief hasVisualCategory returns true if there is a visual category associated with

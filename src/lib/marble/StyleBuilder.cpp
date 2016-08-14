@@ -962,8 +962,8 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
 
         if (style->iconStyle().iconPath().isEmpty()) {
             for (auto iter = osmData.tagsBegin(), end = osmData.tagsEnd(); iter != end; ++iter) {
-                const QString keyValue = QString("%1=%2").arg(iter.key()).arg(iter.value());
-                const GeoDataFeature::GeoDataVisualCategory category = OsmPresetLibrary::osmVisualCategory(keyValue);
+                const auto tag = OsmPresetLibrary::OsmTag(iter.key(), iter.value());
+                const GeoDataFeature::GeoDataVisualCategory category = OsmPresetLibrary::osmVisualCategory(tag);
                 const GeoDataStyle::ConstPtr categoryStyle = presetStyle(category);
                 if (category != GeoDataFeature::None && !categoryStyle->iconStyle().icon().isNull()) {
                     GeoDataStyle::Ptr newStyle(new GeoDataStyle(*style));
