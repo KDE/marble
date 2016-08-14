@@ -443,6 +443,15 @@ void GeoDataFeature::setPopularity( qint64 popularity )
 QString GeoDataFeature::categoryName() const
 {
     switch (d->m_visualCategory) {
+    case Valley: return QObject::tr("Valley");
+    case OtherTerrain: return QObject::tr("Terrain");
+    case Crater: return QObject::tr("Crater");
+    case Mare: return QObject::tr("Sea");
+    case MannedLandingSite: return QObject::tr("Manned Landing Site");
+    case RoboticRover: return QObject::tr("Robotic Rover");
+    case UnmannedSoftLandingSite: return QObject::tr("Unmanned Soft Landing Site");
+    case UnmannedHardLandingSite: return QObject::tr("Unmanned Hard Landing Site");
+    case Mons: return QObject::tr("Mountain");
     case SmallCity: return QObject::tr("City");
     case SmallCountyCapital: return QObject::tr("County Capital");
     case SmallStateCapital: return QObject::tr("State Capital");
@@ -460,12 +469,6 @@ QString GeoDataFeature::categoryName() const
     case LargeStateCapital: return QObject::tr("State Capital");
     case LargeNationCapital: return QObject::tr("Nation Capital");
     case Nation: return QObject::tr("Nation");
-    case PlaceCity: return QObject::tr("City");
-    case PlaceSuburb: return QObject::tr("Suburb");
-    case PlaceHamlet: return QObject::tr("Hamlet");
-    case PlaceLocality: return QObject::tr("Locality");
-    case PlaceTown: return QObject::tr("Town");
-    case PlaceVillage: return QObject::tr("Village");
     case Mountain: return QObject::tr("Mountain");
     case Volcano: return QObject::tr("Volcano");
     case Continent: return QObject::tr("Continent");
@@ -480,6 +483,15 @@ QString GeoDataFeature::categoryName() const
     case Coordinate: return QObject::tr("Coordinate");
     case Folder: return QObject::tr("Folder");
     case Bookmark: return QObject::tr("Bookmark");
+    case Satellite: return QObject::tr("Satellite");
+
+    // OpenStreetMap categories
+    case PlaceCity: return QObject::tr("City");
+    case PlaceSuburb: return QObject::tr("Suburb");
+    case PlaceHamlet: return QObject::tr("Hamlet");
+    case PlaceLocality: return QObject::tr("Locality");
+    case PlaceTown: return QObject::tr("Town");
+    case PlaceVillage: return QObject::tr("Village");
     case NaturalWater: return QObject::tr("Water");
     case NaturalReef: return QObject::tr("Reef");
     case NaturalWood: return QObject::tr("Wood");
@@ -703,7 +715,6 @@ QString GeoDataFeature::categoryName() const
     case RailwayMonorail: return QObject::tr("Monorail");
     case RailwayFunicular: return QObject::tr("Funicular Railway");
     case PowerTower: return QObject::tr("Power Tower");
-    case Satellite: return QObject::tr("Satellite");
     case AdminLevel1: return QObject::tr("Admin Boundary (Level 1)");
     case AdminLevel2: return QObject::tr("Admin Boundary (Level 2)");
     case AdminLevel3: return QObject::tr("Admin Boundary (Level 3)");
@@ -720,15 +731,7 @@ QString GeoDataFeature::categoryName() const
     case UrbanArea: return QObject::tr("Urban Area");
     case InternationalDateLine: return QObject::tr("International Date Line");
     case Bathymetry: return QObject::tr("Bathymetry");
-    case Valley: return QObject::tr("Valley");
-    case OtherTerrain: return QObject::tr("Terrain");
-    case Crater: return QObject::tr("Crater");
-    case Mare: return QObject::tr("Sea");
-    case MannedLandingSite: return QObject::tr("Manned Landing Site");
-    case RoboticRover: return QObject::tr("Robotic Rover");
-    case UnmannedSoftLandingSite: return QObject::tr("Unmanned Soft Landing Site");
-    case UnmannedHardLandingSite: return QObject::tr("Unmanned Hard Landing Site");
-    case Mons: return QObject::tr("Mountain");
+
     case Default:
     case Unknown:
     case None:

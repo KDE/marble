@@ -69,7 +69,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     /**
      * @brief  A categorization of a placemark as defined by ...FIXME.
      * There is an additional osm tag mapping to GeoDataVisualCategory
-     * in OsmPresetLibrary.cpp
+     * in OsmPlacemarkData
      */
     enum GeoDataVisualCategory {
         None,
@@ -95,13 +95,6 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         LargeStateCapital,
         LargeNationCapital,
         Nation,
-
-        PlaceCity,
-        PlaceSuburb,
-        PlaceHamlet,
-        PlaceLocality,
-        PlaceTown,
-        PlaceVillage,
 
         // Terrain
         Mountain,
@@ -138,6 +131,19 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
 
         Folder,
         Bookmark,
+
+        Satellite,
+
+        /*
+         * Start of OpenStreetMap categories
+         */
+
+        PlaceCity,
+        PlaceSuburb,
+        PlaceHamlet,
+        PlaceLocality,
+        PlaceTown,
+        PlaceVillage,
 
         NaturalWater,
         NaturalReef,
@@ -399,8 +405,6 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
 
         // OpenStreetMap category Power
         PowerTower,
-
-        Satellite,
 
         //Admin level tags for depicting boundary
         AdminLevel1,
