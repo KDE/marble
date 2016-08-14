@@ -76,19 +76,17 @@ void GeoLineStringGraphicsItem::paintInline(GeoPainter* painter, const ViewportP
     LabelPositionFlags labelPositionFlags = NoLabel;
     QPen currentPen = configurePainter(painter, viewport, labelPositionFlags);
 
-
-    if( style()->lineStyle().cosmeticOutline() &&
-        style()->lineStyle().penStyle() == Qt::SolidLine ) {
-        if ( currentPen.widthF() > 2.5f ) {
-            currentPen.setWidthF( currentPen.widthF() - 2.0f );
+    GeoDataStyle::ConstPtr style = this->style();
+    const GeoDataLineStyle& lineStyle = style->lineStyle();
+    if (lineStyle.cosmeticOutline() && lineStyle.penStyle() == Qt::SolidLine) {
+        const float currentPenWidth = currentPen.widthF();
+        if (currentPenWidth > 2.5f) {
+            currentPen.setWidthF(currentPenWidth - 2.0f);
         }
-        currentPen.setColor( style()->polyStyle().paintedColor() );
+        currentPen.setColor(style->polyStyle().paintedColor());
         painter->setPen( currentPen );
-        painter->drawPolyline(*m_lineString);
-    } else {
-        painter->drawPolyline(*m_lineString);
     }
-    
+    painter->drawPolyline(*m_lineString);
 
     painter->restore();
 }
@@ -119,18 +117,21 @@ void GeoLineStringGraphicsItem::paintLabel(GeoPainter *painter, const ViewportPa
     QPen currentPen = configurePainter(painter, viewport, labelPositionFlags);
 
     if (!( currentPen.widthF() < 2.5f )) {
+        GeoDataStyle::ConstPtr style = this->style();
+
         QPen pen = QPen(QColor(Qt::transparent));
         pen.setWidthF(currentPen.widthF());
         painter->setPen(pen);
         // Activate the lines below to paint a label background which
         // prevents antialiasing overpainting glitches, but leads to
         // other glitches.
-        //QColor const color = style()->polyStyle().paintedColor();
+        //QColor const color = style->polyStyle().paintedColor();
         //painter->setBackground(QBrush(color));
         //painter->setBackgroundMode(Qt::OpaqueMode);
+        const GeoDataLabelStyle& labelStyle = style->labelStyle();
         painter->drawPolyline( *m_lineString, feature()->name(), FollowLine,
-                               style()->labelStyle().paintedColor(),
-                               style()->labelStyle().font());
+                               labelStyle.paintedColor(),
+                               labelStyle.font());
     }
 
     painter->restore();
@@ -139,34 +140,46 @@ void GeoLineStringGraphicsItem::paintLabel(GeoPainter *painter, const ViewportPa
 QPen GeoLineStringGraphicsItem::configurePainter(GeoPainter *painter, const ViewportParams *viewport, LabelPositionFlags &labelPositionFlags) const
 {
     QPen currentPen = painter->pen();
-    if ( !style() ) {
+    GeoDataStyle::ConstPtr style = this->style();
+    if (!style) {
         painter->setPen( QPen() );
     }
     else {
+        const GeoDataLineStyle& lineStyle = style->lineStyle();
 
-        if ( currentPen.color() != style()->lineStyle().paintedColor() )
-            currentPen.setColor( style()->lineStyle().paintedColor() );
-
-        if ( currentPen.widthF() != style()->lineStyle().width() ||
-                style()->lineStyle().physicalWidth() != 0.0 ) {
-            if ( float( viewport->radius() ) / EARTH_RADIUS * style()->lineStyle().physicalWidth() < style()->lineStyle().width() )
-                currentPen.setWidthF( style()->lineStyle().width() );
-            else
-                currentPen.setWidthF( float( viewport->radius() ) / EARTH_RADIUS * style()->lineStyle().physicalWidth() );
-        }
-        else if ( style()->lineStyle().width() != 0.0 ) {
-            currentPen.setWidthF( style()->lineStyle().width() );
+        const QColor linePaintedColor = lineStyle.paintedColor();
+        if (currentPen.color() != linePaintedColor) {
+            currentPen.setColor(linePaintedColor);
         }
 
-        if ( currentPen.capStyle() != style()->lineStyle().capStyle() )
-            currentPen.setCapStyle( style()->lineStyle().capStyle() );
+        const float lineWidth = lineStyle.width();
+        const float linePhysicalWidth = lineStyle.physicalWidth();
+        if (currentPen.widthF() != lineWidth || linePhysicalWidth != 0.0) {
+            const float scaledLinePhysicalWidth = float(viewport->radius()) / EARTH_RADIUS * linePhysicalWidth;
+            if (scaledLinePhysicalWidth < lineWidth) {
+                currentPen.setWidthF(lineWidth);
+            } else {
+                currentPen.setWidthF(scaledLinePhysicalWidth);
+            }
+        }
+        else if (lineWidth != 0.0 ) {
+            currentPen.setWidthF(lineWidth);
+        }
+
+        const Qt::PenCapStyle lineCapStyle = lineStyle.capStyle();
+        if (currentPen.capStyle() != lineCapStyle) {
+            currentPen.setCapStyle(lineCapStyle);
+        }
 
         if (painter->mapQuality() == HighQuality || painter->mapQuality() == PrintQuality) {
-            if ( currentPen.style() != style()->lineStyle().penStyle() )
-                currentPen.setStyle( style()->lineStyle().penStyle() );
+            const Qt::PenStyle linePenStyle = lineStyle.penStyle();
+            if (currentPen.style() != linePenStyle) {
+                currentPen.setStyle(linePenStyle);
+            }
 
-            if ( style()->lineStyle().penStyle() == Qt::CustomDashLine )
-                currentPen.setDashPattern( style()->lineStyle().dashPattern() );
+            if (linePenStyle == Qt::CustomDashLine) {
+                currentPen.setDashPattern(lineStyle.dashPattern());
+            }
         } else {
             currentPen.setStyle(Qt::SolidLine);
         }
@@ -181,17 +194,18 @@ QPen GeoLineStringGraphicsItem::configurePainter(GeoPainter *painter, const View
         if ( painter->pen() != currentPen )
             painter->setPen( currentPen );
 
-        if ( style()->lineStyle().background() ) {
+        if (lineStyle.background()) {
             QBrush brush = painter->background();
-            brush.setColor( style()->polyStyle().paintedColor() );
+            brush.setColor(style->polyStyle().paintedColor());
             painter->setBackground( brush );
 
             painter->setBackgroundMode( Qt::OpaqueMode );
         }
 
         // label styles
-        painter->setFont( style()->labelStyle().font() );
-        switch ( style()->labelStyle().alignment() ) {
+        const GeoDataLabelStyle& labelStyle = style->labelStyle();
+        painter->setFont(labelStyle.font() );
+        switch (labelStyle.alignment()) {
         case GeoDataLabelStyle::Corner:
         case GeoDataLabelStyle::Right:
             labelPositionFlags |= LineStart;
