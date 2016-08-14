@@ -30,6 +30,7 @@ namespace Marble
 
 class GeoDataFeaturePrivate
 {
+    Q_DECLARE_TR_FUNCTIONS(GeoDataFeature)
   public:
     GeoDataFeaturePrivate() :
         m_name(),
