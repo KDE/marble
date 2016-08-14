@@ -117,7 +117,7 @@ QTreeWidgetItem *OsmTagEditorWidgetPrivate::tagWidgetItem( const OsmTag &tag ) c
 
 QList<OsmTagEditorWidgetPrivate::OsmTag> OsmTagEditorWidgetPrivate::recommendedTags() const
 {
-    static QVector<OsmTag> additionalOsmTags = createAdditionalOsmTags();
+    static const QVector<OsmTag> additionalOsmTags = createAdditionalOsmTags();
 
     QList<OsmTag> recommendedTags;
 
