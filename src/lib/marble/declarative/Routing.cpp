@@ -136,7 +136,7 @@ void Routing::updateWaypointItems()
 
         for (int i = d->m_waypointItems.keys().size()-1; i >= d->m_routeRequestModel->rowCount(); i--) {
             QQuickItem* item = d->m_waypointItems[i];
-            item->setProperty("visible", QVariant::fromValue(false) );
+            item->setProperty("visible", QVariant(false) );
             d->m_waypointItems.erase(d->m_waypointItems.find(i));
             item->deleteLater();
         }
@@ -153,8 +153,8 @@ void Routing::updateWaypointItems()
             if ( item ) {
                 item->setVisible( visible );
                 if ( visible ) {
-                    item->setProperty("xPos", QVariant::fromValue(x));
-                    item->setProperty("yPos", QVariant::fromValue(y));
+                    item->setProperty("xPos", QVariant(x));
+                    item->setProperty("yPos", QVariant(y));
                     if (iter.key() == 0 && waypointCount() == 1) {
                         item->setProperty("type", QVariant(QStringLiteral("departure")));
                     }
@@ -223,7 +223,7 @@ void Routing::updateSearchResultPlacemarks()
 
     for (int i = d->m_searchResultItems.keys().size()-1; i >= d->m_searchResultPlacemarks.size(); i--) {
         QQuickItem* item = d->m_searchResultItems[i];
-        item->setProperty("visible", QVariant::fromValue(false) );
+        item->setProperty("visible", QVariant(false) );
         d->m_searchResultItems.erase(d->m_searchResultItems.find(i));
         item->deleteLater();
     }
@@ -239,8 +239,8 @@ void Routing::updateSearchResultPlacemarks()
         if ( item ) {
             item->setVisible( visible );
             if ( visible ) {
-                item->setProperty("xPos", QVariant::fromValue(x));
-                item->setProperty("yPos", QVariant::fromValue(y));
+                item->setProperty("xPos", QVariant(x));
+                item->setProperty("yPos", QVariant(y));
             }
         }
     }

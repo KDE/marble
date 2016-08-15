@@ -285,8 +285,8 @@ namespace Marble
         const bool visible = d->m_map.viewport()->screenCoordinates(d->m_placemark->placemark().coordinate(), x, y);
         d->m_placemarkItem->setVisible(visible);
         if (visible) {
-            d->m_placemarkItem->setProperty("xPos", QVariant::fromValue(x));
-            d->m_placemarkItem->setProperty("yPos", QVariant::fromValue(y));
+            d->m_placemarkItem->setProperty("xPos", QVariant(x));
+            d->m_placemarkItem->setProperty("yPos", QVariant(y));
         }
     }
 

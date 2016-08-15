@@ -237,7 +237,7 @@ void ClickOnThat::postQuestion( QObject *gameObject )
         d->m_correctAnswer = point->coordinates();
         if ( gameObject ) {
             QMetaObject::invokeMethod( gameObject, "clickOnThatQuestion",
-                                    Q_ARG(QVariant, QVariant::fromValue(placemark->name())) );
+                                    Q_ARG(QVariant, QVariant(placemark->name())) );
         }
     }
 }

@@ -252,8 +252,8 @@ void CountryByShape::postQuestion( QObject *gameObject )
 
     if ( gameObject ) {
         QMetaObject::invokeMethod( gameObject, "countryByShapeQuestion",
-                                   Q_ARG(QVariant, QVariant::fromValue(answerOptions)),
-                                   Q_ARG(QVariant, QVariant::fromValue(placemark->name())) );
+                                   Q_ARG(QVariant, QVariant(answerOptions)),
+                                   Q_ARG(QVariant, QVariant(placemark->name())) );
     }
 }
 

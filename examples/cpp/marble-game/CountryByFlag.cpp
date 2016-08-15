@@ -157,9 +157,9 @@ void CountryByFlag::postQuestion( QObject *gameObject )
     }
     if ( gameObject ) {
         QMetaObject::invokeMethod( gameObject, "countryByFlagQuestion",
-                                   Q_ARG(QVariant, QVariant::fromValue(answerOptions)),
-                                   Q_ARG(QVariant, QVariant::fromValue(flagPath)),
-                                   Q_ARG(QVariant, QVariant::fromValue(placemark->name())) );
+                                   Q_ARG(QVariant, QVariant(answerOptions)),
+                                   Q_ARG(QVariant, QVariant(flagPath)),
+                                   Q_ARG(QVariant, QVariant(placemark->name())) );
     }
 }
 

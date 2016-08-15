@@ -263,7 +263,7 @@ void MainWindow::displayResult(bool result )
     QObject *gameObject = d->m_view.rootObject()->findChild<QObject*>("gameOptions");
     if ( gameObject ) {
         QMetaObject::invokeMethod( gameObject, "displayResult",
-                                   Q_ARG(QVariant, QVariant::fromValue(result)) );
+                                   Q_ARG(QVariant, QVariant(result)) );
     }
 }
 
@@ -279,7 +279,7 @@ void MainWindow::resizeEvent(QResizeEvent* event)
 
     if ( root ) {
         QMetaObject::invokeMethod( root, "resizeWindow",
-                                   Q_ARG(QVariant, QVariant::fromValue(size.height()*9/10)) );
+                                   Q_ARG(QVariant, QVariant(size.height()*9/10)) );
     }
 }
 

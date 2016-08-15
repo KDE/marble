@@ -138,10 +138,10 @@ QVariant RoutingModel::data ( const QModelIndex & index, int role ) const
             return QVariant::fromValue( segment.maneuver().position() );
             break;
         case RoutingModel::LongitudeRole:
-            return QVariant::fromValue( segment.maneuver().position().longitude( GeoDataCoordinates::Degree ) );
+            return QVariant(segment.maneuver().position().longitude(GeoDataCoordinates::Degree));
             break;
         case RoutingModel::LatitudeRole:
-            return QVariant::fromValue( segment.maneuver().position().latitude( GeoDataCoordinates::Degree ) );
+            return QVariant(segment.maneuver().position().latitude(GeoDataCoordinates::Degree));
             break;
         case RoutingModel::TurnTypeIconRole:
             return segment.maneuver().directionPixmap();
