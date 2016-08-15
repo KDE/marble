@@ -25,12 +25,12 @@ QString LogfilePlugin::name() const
 
 QString LogfilePlugin::nameId() const
 {
-    return "Log";
+    return QStringLiteral("Log");
 }
 
 QString LogfilePlugin::version() const
 {
-    return "1.0";
+    return QStringLiteral("1.0");
 }
 
 QString LogfilePlugin::description() const
@@ -40,13 +40,13 @@ QString LogfilePlugin::description() const
 
 QString LogfilePlugin::copyrightYears() const
 {
-    return "2012";
+    return QStringLiteral("2012");
 }
 
 QVector<PluginAuthor> LogfilePlugin::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de" );
+            << PluginAuthor(QStringLiteral("Bernhard Beschow"), QStringLiteral("bbeschow@cs.tu-berlin.de"));
 }
 
 QString LogfilePlugin::fileFormatDescription() const
@@ -56,7 +56,7 @@ QString LogfilePlugin::fileFormatDescription() const
 
 QStringList LogfilePlugin::fileExtensions() const
 {
-    return QStringList() << "log";
+    return QStringList(QStringLiteral("log"));
 }
 
 ParsingRunner* LogfilePlugin::newRunner() const

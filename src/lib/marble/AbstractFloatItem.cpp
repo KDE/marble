@@ -120,12 +120,12 @@ void AbstractFloatItem::setFont( const QFont &font )
 
 QString AbstractFloatItem::renderPolicy() const
 {
-    return "ALWAYS";
+    return QStringLiteral("ALWAYS");
 }
 
 QStringList AbstractFloatItem::renderPosition() const
 {
-    return QStringList( "FLOAT_ITEM" );
+    return QStringList(QStringLiteral("FLOAT_ITEM"));
 }
 
 void AbstractFloatItem::setVisible( bool visible )

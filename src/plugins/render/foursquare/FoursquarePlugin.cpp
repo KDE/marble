@@ -47,12 +47,12 @@ QString FoursquarePlugin::guiString() const
 
 QString FoursquarePlugin::nameId() const
 {
-    return "foursquare";
+    return QStringLiteral("foursquare");
 }
 
 QString FoursquarePlugin::version() const
 {
-    return "1.0";
+    return QStringLiteral("1.0");
 }
 
 QString FoursquarePlugin::description() const
@@ -62,19 +62,19 @@ QString FoursquarePlugin::description() const
 
 QString FoursquarePlugin::copyrightYears() const
 {
-    return "2012";
+    return QStringLiteral("2012");
 }
 
 QVector<PluginAuthor> FoursquarePlugin::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "nienhueser@kde.org" )
-            << PluginAuthor( QString::fromUtf8( "Utku Aydın" ), "utkuaydin34@gmail.com" );
+            << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"))
+            << PluginAuthor(QStringLiteral("Utku Aydın"), QStringLiteral("utkuaydin34@gmail.com"));
 }
 
 QIcon FoursquarePlugin::icon() const
 {
-    return QIcon(":/icons/places.png");
+    return QIcon(QStringLiteral(":/icons/places.png"));
 }
 
 bool FoursquarePlugin::isAuthenticated()

@@ -25,12 +25,12 @@ QString Pn2Plugin::name() const
 
 QString Pn2Plugin::nameId() const
 {
-    return "Pn2";
+    return QStringLiteral("Pn2");
 }
 
 QString Pn2Plugin::version() const
 {
-    return "1.0";
+    return QStringLiteral("1.0");
 }
 
 QString Pn2Plugin::description() const
@@ -40,13 +40,13 @@ QString Pn2Plugin::description() const
 
 QString Pn2Plugin::copyrightYears() const
 {
-    return "2012";
+    return QStringLiteral("2012");
 }
 
 QVector<PluginAuthor> Pn2Plugin::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor( "Cezar Mocan", "mocancezar@gmail.com" );
+            << PluginAuthor(QStringLiteral("Cezar Mocan"), QStringLiteral("mocancezar@gmail.com"));
 }
 
 QString Pn2Plugin::fileFormatDescription() const
@@ -56,7 +56,7 @@ QString Pn2Plugin::fileFormatDescription() const
 
 QStringList Pn2Plugin::fileExtensions() const
 {
-    return QStringList() << "pn2";
+    return QStringList(QStringLiteral("pn2"));
 }
 
 ParsingRunner* Pn2Plugin::newRunner() const

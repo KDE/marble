@@ -442,7 +442,7 @@ RoutingPlugin::~RoutingPlugin()
 
 QStringList RoutingPlugin::backendTypes() const
 {
-    return QStringList( "routing" );
+    return QStringList(QStringLiteral("routing"));
 }
 
 QString RoutingPlugin::name() const
@@ -457,12 +457,12 @@ QString RoutingPlugin::guiString() const
 
 QString RoutingPlugin::nameId() const
 {
-    return QString( "routing" );
+    return QStringLiteral("routing");
 }
 
 QString RoutingPlugin::version() const
 {
-    return "1.0";
+    return QStringLiteral("1.0");
 }
 
 QString RoutingPlugin::description() const
@@ -472,19 +472,19 @@ QString RoutingPlugin::description() const
 
 QString RoutingPlugin::copyrightYears() const
 {
-    return "2010";
+    return QStringLiteral("2010");
 }
 
 QVector<PluginAuthor> RoutingPlugin::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor( "Siddharth Srivastava", "akssps011@gmail.com" )
-            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "nienhueser@kde.org" );
+            << PluginAuthor(QStringLiteral("Siddharth Srivastava"), QStringLiteral("akssps011@gmail.com"))
+            << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
 }
 
 QIcon RoutingPlugin::icon() const
 {
-    return QIcon(":/icons/routeplanning.png");
+    return QIcon(QStringLiteral(":/icons/routeplanning.png"));
 }
 
 void RoutingPlugin::initialize()

@@ -21,7 +21,7 @@ namespace Marble
     
 QStringList FogLayer::renderPosition() const
 {
-    return QStringList() << "ATMOSPHERE";
+    return QStringList(QStringLiteral("ATMOSPHERE"));
 }
 
 bool FogLayer::render( GeoPainter *painter,

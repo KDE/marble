@@ -40,7 +40,7 @@ QString PlacemarkPositionProviderPlugin::name() const
 
 QString PlacemarkPositionProviderPlugin::nameId() const
 {
-    return QString::fromLatin1( "Placemark" );
+    return QStringLiteral("Placemark");
 }
 
 QString PlacemarkPositionProviderPlugin::guiString() const
@@ -50,7 +50,7 @@ QString PlacemarkPositionProviderPlugin::guiString() const
 
 QString PlacemarkPositionProviderPlugin::version() const
 {
-    return "1.0";
+    return QStringLiteral("1.0");
 }
 
 QString PlacemarkPositionProviderPlugin::description() const
@@ -60,14 +60,14 @@ QString PlacemarkPositionProviderPlugin::description() const
 
 QString PlacemarkPositionProviderPlugin::copyrightYears() const
 {
-    return "2011, 2012";
+    return QStringLiteral("2011, 2012");
 }
 
 QVector<PluginAuthor> PlacemarkPositionProviderPlugin::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor( "Guillaume Martres", "smarter@ubuntu.com" )
-            << PluginAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de" );
+            << PluginAuthor(QStringLiteral("Guillaume Martres"), QStringLiteral("smarter@ubuntu.com"))
+            << PluginAuthor(QStringLiteral("Bernhard Beschow"), QStringLiteral("bbeschow@cs.tu-berlin.de"));
 }
 
 QIcon PlacemarkPositionProviderPlugin::icon() const

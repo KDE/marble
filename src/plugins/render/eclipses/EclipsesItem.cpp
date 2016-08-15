@@ -60,20 +60,20 @@ QIcon EclipsesItem::icon() const
 {
     switch( m_phase ) {
         case EclipsesItem::TotalMoon:
-            return QIcon( ":res/lunar_total.png" );
+            return QIcon(QStringLiteral(":res/lunar_total.png"));
         case EclipsesItem::PartialMoon:
-            return QIcon( ":res/lunar_partial.png" );
+            return QIcon(QStringLiteral(":res/lunar_partial.png"));
         case EclipsesItem::PenumbralMoon:
-            return QIcon( ":res/lunar_penumbra.png" );
+            return QIcon(QStringLiteral(":res/lunar_penumbra.png"));
         case EclipsesItem::PartialSun:
-            return QIcon( ":res/solar_partial.png" );
+            return QIcon(QStringLiteral(":res/solar_partial.png"));
         case EclipsesItem::NonCentralAnnularSun:
         case EclipsesItem::AnnularSun:
-            return QIcon( ":res/solar_annular.png" );
+            return QIcon(QStringLiteral(":res/solar_annular.png"));
         case EclipsesItem::AnnularTotalSun:
         case EclipsesItem::NonCentralTotalSun:
         case EclipsesItem::TotalSun:
-            return QIcon( ":res/solar_total.png" );
+            return QIcon(QStringLiteral(":res/solar_total.png"));
     }
 
     return QIcon();

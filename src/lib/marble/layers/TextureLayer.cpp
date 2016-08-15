@@ -266,7 +266,7 @@ TextureLayer::~TextureLayer()
 
 QStringList TextureLayer::renderPosition() const
 {
-    return QStringList() << "SURFACE";
+    return QStringList(QStringLiteral("SURFACE"));
 }
 
 void TextureLayer::addSeaDocument( const GeoDataDocument *seaDocument )

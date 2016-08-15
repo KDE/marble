@@ -128,11 +128,19 @@ void LayerManager::renderLayers( GeoPainter *painter, ViewportParams *viewport )
     QStringList renderPositions;
 
     if ( d->m_showBackground ) {
-        renderPositions << "STARS" << "BEHIND_TARGET";
+        renderPositions
+        << QStringLiteral("STARS")
+        << QStringLiteral("BEHIND_TARGET");
     }
 
-    renderPositions << "SURFACE" << "HOVERS_ABOVE_SURFACE" << "ATMOSPHERE"
-                    << "ORBIT" << "ALWAYS_ON_TOP" << "FLOAT_ITEM" << "USER_TOOLS";
+    renderPositions
+        << QStringLiteral("SURFACE")
+        << QStringLiteral("HOVERS_ABOVE_SURFACE")
+        << QStringLiteral("ATMOSPHERE")
+        << QStringLiteral("ORBIT")
+        << QStringLiteral("ALWAYS_ON_TOP")
+        << QStringLiteral("FLOAT_ITEM")
+        << QStringLiteral("USER_TOOLS");
 
     QStringList traceList;
     foreach( const auto& renderPosition, renderPositions ) {

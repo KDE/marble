@@ -40,17 +40,17 @@ TestPlugin::TestPlugin(const MarbleModel *marbleModel)
 
 QStringList TestPlugin::backendTypes() const
 {
-    return QStringList( "test" );
+    return QStringList(QStringLiteral("test"));
 }
 
 QString TestPlugin::renderPolicy() const
 {
-    return QString( "ALWAYS" );
+    return QStringLiteral("ALWAYS");
 }
 
 QStringList TestPlugin::renderPosition() const
 {
-    return QStringList( "ALWAYS_ON_TOP" );
+    return QStringList(QStringLiteral("ALWAYS_ON_TOP"));
 }
 
 QString TestPlugin::name() const
@@ -65,12 +65,12 @@ QString TestPlugin::guiString() const
 
 QString TestPlugin::nameId() const
 {
-    return QString( "test-plugin" );
+    return QStringLiteral("test-plugin");
 }
 
 QString TestPlugin::version() const
 {
-    return "1.0";
+    return QStringLiteral("1.0");
 }
 
 QString TestPlugin::description() const
@@ -80,13 +80,13 @@ QString TestPlugin::description() const
 
 QString TestPlugin::copyrightYears() const
 {
-    return "2008";
+    return QStringLiteral("2008");
 }
 
 QVector<PluginAuthor> TestPlugin::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor("Torsten Rahn", "tackat@kde.org");
+            << PluginAuthor(QStringLiteral("Torsten Rahn"), QStringLiteral("tackat@kde.org"));
 }
 
 QIcon TestPlugin::icon () const

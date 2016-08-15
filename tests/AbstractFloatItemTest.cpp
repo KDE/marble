@@ -30,17 +30,20 @@ class NullFloatItem : public AbstractFloatItem
         AbstractFloatItem( model )
     {}
 
-    QString name() const { return "Null Float Item"; }
-    QString nameId() const { return "null"; }
-    QString version() const { return "0.0"; }
-    QString description() const { return "A null float item just for testing."; }
+    QString name() const { return QStringLiteral("Null Float Item"); }
+    QString nameId() const { return QStringLiteral("null"); }
+    QString version() const { return QStringLiteral("0.0"); }
+    QString description() const { return QStringLiteral("A null float item just for testing."); }
     QIcon icon() const { return QIcon(); }
-    QString copyrightYears() const { return "2013"; }
-    QVector<PluginAuthor> pluginAuthors() const { return QVector<PluginAuthor>() << PluginAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de" ); }
+    QString copyrightYears() const { return QStringLiteral("2013"); }
+    QVector<PluginAuthor> pluginAuthors() const
+    {
+        return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Bernhard Beschow"), QStringLiteral("bbeschow@cs.tu-berlin.de"));
+    }
     void initialize() {}
     bool isInitialized() const { return true; }
-    QStringList backendTypes() const { return QStringList() << "null"; }
-    QString guiString() const { return "Null"; }
+    QStringList backendTypes() const { return QStringList(QStringLiteral("null")); }
+    QString guiString() const { return QStringLiteral("Null"); }
     RenderPlugin *newInstance( const MarbleModel * ) const { return 0; }
 };
 

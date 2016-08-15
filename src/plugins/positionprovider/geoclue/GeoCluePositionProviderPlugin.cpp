@@ -23,7 +23,7 @@ QString GeoCluePositionProviderPlugin::name() const
 
 QString GeoCluePositionProviderPlugin::nameId() const
 {
-    return QString::fromLatin1( "GeoClue" );
+    return QStringLiteral("GeoClue");
 }
 
 QString GeoCluePositionProviderPlugin::guiString() const

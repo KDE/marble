@@ -43,7 +43,7 @@ MyPaintLayer::MyPaintLayer ( MarbleWidget *widget ) :
 
 QStringList MyPaintLayer::renderPosition() const
 {
-    return QStringList() << "USER_TOOLS";
+    return QStringList(QStringLiteral("USER_TOOLS"));
 }
 
 bool MyPaintLayer::render ( GeoPainter *painter, ViewportParams *viewport, const QString &, GeoSceneLayer * )

@@ -34,7 +34,7 @@ QString RouteSimulationPositionProviderPlugin::name() const
 
 QString RouteSimulationPositionProviderPlugin::nameId() const
 {
-    return "RouteSimulationPositionProviderPlugin";
+    return QStringLiteral("RouteSimulationPositionProviderPlugin");
 }
 
 QString RouteSimulationPositionProviderPlugin::guiString() const
@@ -44,7 +44,7 @@ QString RouteSimulationPositionProviderPlugin::guiString() const
 
 QString RouteSimulationPositionProviderPlugin::version() const
 {
-    return "1.1";
+    return QStringLiteral("1.1");
 }
 
 QString RouteSimulationPositionProviderPlugin::description() const
@@ -54,15 +54,15 @@ QString RouteSimulationPositionProviderPlugin::description() const
 
 QString RouteSimulationPositionProviderPlugin::copyrightYears() const
 {
-    return "2011, 2012";
+    return QStringLiteral("2011, 2012");
 }
 
 QVector<PluginAuthor> RouteSimulationPositionProviderPlugin::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor( "Konrad Enzensberger", "e.konrad@mpegcode.com" )
-            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "nienhueser@kde.org" )
-            << PluginAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de" );
+            << PluginAuthor(QStringLiteral("Konrad Enzensberger"), QStringLiteral("e.konrad@mpegcode.com"))
+            << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"))
+            << PluginAuthor(QStringLiteral("Bernhard Beschow"), QStringLiteral("bbeschow@cs.tu-berlin.de"));
 }
 
 QIcon RouteSimulationPositionProviderPlugin::icon() const

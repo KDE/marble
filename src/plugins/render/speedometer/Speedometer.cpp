@@ -48,7 +48,7 @@ Speedometer::~Speedometer()
 
 QStringList Speedometer::backendTypes() const
 {
-    return QStringList( "speedometer" );
+    return QStringList(QStringLiteral("speedometer"));
 }
 
 QString Speedometer::name() const
@@ -63,12 +63,12 @@ QString Speedometer::guiString() const
 
 QString Speedometer::nameId() const
 {
-    return QString( "speedometer" );
+    return QStringLiteral("speedometer");
 }
 
 QString Speedometer::version() const
 {
-    return "1.0";
+    return QStringLiteral("1.0");
 }
 
 QString Speedometer::description() const
@@ -78,18 +78,18 @@ QString Speedometer::description() const
 
 QString Speedometer::copyrightYears() const
 {
-    return "2011";
+    return QStringLiteral("2011");
 }
 
 QVector<PluginAuthor> Speedometer::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de" );
+            << PluginAuthor(QStringLiteral("Bernhard Beschow"), QStringLiteral("bbeschow@cs.tu-berlin.de"));
 }
 
 QIcon Speedometer::icon () const
 {
-    return QIcon(":/icons/speedometer.png");
+    return QIcon(QStringLiteral(":/icons/speedometer.png"));
 }
 
 void Speedometer::initialize ()

@@ -44,7 +44,7 @@ FITemplateFloatItem::~FITemplateFloatItem ()
 
 QStringList FITemplateFloatItem::backendTypes() const
 {
-    return QStringList( "FITemplate" );
+    return QStringList(QStringLiteral("FITemplate"));
 }
 
 QString FITemplateFloatItem::name() const
@@ -59,7 +59,7 @@ QString FITemplateFloatItem::guiString() const
 
 QString FITemplateFloatItem::nameId() const
 {
-    return QString( "compass" );
+    return QStringLiteral("floatitemtemplate");
 }
 
 QString FITemplateFloatItem::description() const

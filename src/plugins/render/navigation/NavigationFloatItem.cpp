@@ -65,7 +65,7 @@ NavigationFloatItem::~NavigationFloatItem()
 
 QStringList NavigationFloatItem::backendTypes() const
 {
-    return QStringList("navigation");
+    return QStringList(QStringLiteral("navigation"));
 }
 
 QString NavigationFloatItem::name() const
@@ -80,12 +80,12 @@ QString NavigationFloatItem::guiString() const
 
 QString NavigationFloatItem::nameId() const
 {
-    return QString("navigation");
+    return QStringLiteral("navigation");
 }
 
 QString NavigationFloatItem::version() const
 {
-    return "1.0";
+    return QStringLiteral("1.0");
 }
 
 QString NavigationFloatItem::description() const
@@ -95,20 +95,20 @@ QString NavigationFloatItem::description() const
 
 QString NavigationFloatItem::copyrightYears() const
 {
-    return "2008, 2010, 2013";
+    return QStringLiteral("2008, 2010, 2013");
 }
 
 QVector<PluginAuthor> NavigationFloatItem::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "nienhueser@kde.org" )
-            << PluginAuthor( "Bastian Holst", "bastianholst@gmx.de" )
-            << PluginAuthor( "Mohammed Nafees", "nafees.technocool@gmail.com" );
+            << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"))
+            << PluginAuthor(QStringLiteral("Bastian Holst"), QStringLiteral("bastianholst@gmx.de"))
+            << PluginAuthor(QStringLiteral("Mohammed Nafees"), QStringLiteral("nafees.technocool@gmail.com"));
 }
 
 QIcon NavigationFloatItem::icon() const
 {
-    return QIcon(":/icons/navigation.png");
+    return QIcon(QStringLiteral(":/icons/navigation.png"));
 }
 
 void NavigationFloatItem::initialize()

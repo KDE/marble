@@ -66,12 +66,12 @@ QString EarthquakePlugin::guiString() const
 
 QString EarthquakePlugin::nameId() const
 {
-    return "earthquake";
+    return QStringLiteral("earthquake");
 }
 
 QString EarthquakePlugin::version() const
 {
-    return "1.0";
+    return QStringLiteral("1.0");
 }
 
 QString EarthquakePlugin::description() const
@@ -81,19 +81,19 @@ QString EarthquakePlugin::description() const
 
 QString EarthquakePlugin::copyrightYears() const
 {
-    return "2010, 2011";
+    return QStringLiteral("2010, 2011");
 }
 
 QVector<PluginAuthor> EarthquakePlugin::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor( QString::fromUtf8( "Utku Aydın" ), "utkuaydin34@gmail.com" )
-            << PluginAuthor( QString::fromUtf8( "Daniel Marth" ), "danielmarth@gmx.at" );
+            << PluginAuthor(QStringLiteral("Utku Aydın"), QStringLiteral("utkuaydin34@gmail.com"))
+            << PluginAuthor(QStringLiteral("Daniel Marth"), QStringLiteral("danielmarth@gmx.at"));
 }
 
 QIcon EarthquakePlugin::icon() const
 {
-    return QIcon(":/icons/earthquake.png");
+    return QIcon(QStringLiteral(":/icons/earthquake.png"));
 }
 
 QDialog *EarthquakePlugin::configDialog()

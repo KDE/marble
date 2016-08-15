@@ -71,7 +71,7 @@ OverviewMap::~OverviewMap()
 
 QStringList OverviewMap::backendTypes() const
 {
-    return QStringList( "overviewmap" );
+    return QStringList(QStringLiteral("overviewmap"));
 }
 
 QString OverviewMap::name() const
@@ -86,12 +86,12 @@ QString OverviewMap::guiString() const
 
 QString OverviewMap::nameId() const
 {
-    return QString( "overviewmap" );
+    return QStringLiteral("overviewmap");
 }
 
 QString OverviewMap::version() const
 {
-    return "1.0";
+    return QStringLiteral("1.0");
 }
 
 QString OverviewMap::description() const
@@ -101,18 +101,18 @@ QString OverviewMap::description() const
 
 QString OverviewMap::copyrightYears() const
 {
-    return "2008";
+    return QStringLiteral("2008");
 }
 
 QVector<PluginAuthor> OverviewMap::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor( "Torsten Rahn", "tackat@kde.org" );
+            << PluginAuthor(QStringLiteral("Torsten Rahn"), QStringLiteral("tackat@kde.org"));
 }
 
 QIcon OverviewMap::icon () const
 {
-    return QIcon(":/icons/worldmap.png");
+    return QIcon(QStringLiteral(":/icons/worldmap.png"));
 }
 
 QDialog *OverviewMap::configDialog()

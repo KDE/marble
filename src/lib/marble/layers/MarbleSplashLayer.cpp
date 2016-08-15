@@ -28,7 +28,7 @@ MarbleSplashLayer::MarbleSplashLayer()
 
 QStringList MarbleSplashLayer::renderPosition() const
 {
-    return QStringList() << "SURFACE";
+    return QStringList(QStringLiteral("SURFACE"));
 }
 
 bool MarbleSplashLayer::render( GeoPainter *painter, ViewportParams *viewport,

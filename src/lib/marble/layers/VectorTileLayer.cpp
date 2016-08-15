@@ -123,7 +123,7 @@ VectorTileLayer::~VectorTileLayer()
 
 QStringList VectorTileLayer::renderPosition() const
 {
-    return QStringList() << "SURFACE";
+    return QStringList(QStringLiteral("SURFACE"));
 }
 
 RenderState VectorTileLayer::renderState() const

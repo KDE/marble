@@ -630,7 +630,7 @@ RoutingLayer::~RoutingLayer()
 
 QStringList RoutingLayer::renderPosition() const
 {
-    return QStringList() << "HOVERS_ABOVE_SURFACE";
+    return QStringList(QStringLiteral("HOVERS_ABOVE_SURFACE"));
 }
 
 qreal RoutingLayer::zValue() const

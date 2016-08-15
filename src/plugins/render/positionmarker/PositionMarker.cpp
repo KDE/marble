@@ -66,17 +66,17 @@ PositionMarker::~PositionMarker ()
 
 QStringList PositionMarker::renderPosition() const
 {
-    return QStringList( "HOVERS_ABOVE_SURFACE" );
+    return QStringList(QStringLiteral("HOVERS_ABOVE_SURFACE"));
 }
 
 QString PositionMarker::renderPolicy() const
 {
-    return "ALWAYS";
+    return QStringLiteral("ALWAYS");
 }
 
 QStringList PositionMarker::backendTypes() const
 {
-    return QStringList( "positionmarker" );
+    return QStringList(QStringLiteral("positionmarker"));
 }
 
 QString PositionMarker::name() const
@@ -91,12 +91,12 @@ QString PositionMarker::guiString() const
 
 QString PositionMarker::nameId() const
 {
-    return QString( "positionMarker" );
+    return QStringLiteral("positionMarker");
 }
 
 QString PositionMarker::version() const
 {
-    return "1.0";
+    return QStringLiteral("1.0");
 }
 
 QString PositionMarker::description() const
@@ -106,21 +106,21 @@ QString PositionMarker::description() const
 
 QString PositionMarker::copyrightYears() const
 {
-    return "2009, 2010";
+    return QStringLiteral("2009, 2010");
 }
 
 QVector<PluginAuthor> PositionMarker::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor( "Andrew Manson", "g.real.ate@gmail.com" )
-            << PluginAuthor( "Eckhart Woerner", "ewoerner@kde.org" )
-            << PluginAuthor( "Thibaut Gridel", "tgridel@free.fr" )
-            << PluginAuthor( "Daniel Marth", "danielmarth@gmx.at" );
+            << PluginAuthor(QStringLiteral("Andrew Manson"), QStringLiteral("g.real.ate@gmail.com"))
+            << PluginAuthor(QStringLiteral("Eckhart Woerner"), QStringLiteral("ewoerner@kde.org"))
+            << PluginAuthor(QStringLiteral("Thibaut Gridel"), QStringLiteral("tgridel@free.fr"))
+            << PluginAuthor(QStringLiteral("Daniel Marth"), QStringLiteral("danielmarth@gmx.at"));
 }
 
 QIcon PositionMarker::icon() const
 {
-    return QIcon(":/icons/positionmarker.png");
+    return QIcon(QStringLiteral(":/icons/positionmarker.png"));
 }
 
 QDialog *PositionMarker::configDialog()

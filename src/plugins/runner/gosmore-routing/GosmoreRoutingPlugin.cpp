@@ -22,7 +22,7 @@ namespace Marble
 GosmorePlugin::GosmorePlugin( QObject *parent ) :
     RoutingRunnerPlugin( parent )
 {
-    setSupportedCelestialBodies( QStringList() << "earth" );
+    setSupportedCelestialBodies(QStringList(QStringLiteral("earth")));
     setCanWorkOffline( true );
 }
 
@@ -38,12 +38,12 @@ QString GosmorePlugin::guiString() const
 
 QString GosmorePlugin::nameId() const
 {
-    return "gosmore-routing";
+    return QStringLiteral("gosmore-routing");
 }
 
 QString GosmorePlugin::version() const
 {
-    return "1.0";
+    return QStringLiteral("1.0");
 }
 
 QString GosmorePlugin::description() const
@@ -53,14 +53,14 @@ QString GosmorePlugin::description() const
 
 QString GosmorePlugin::copyrightYears() const
 {
-    return "2010, 2012";
+    return QStringLiteral("2010, 2012");
 }
 
 QVector<PluginAuthor> GosmorePlugin::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "nienhueser@kde.org" )
-            << PluginAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de" );
+            << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"))
+            << PluginAuthor(QStringLiteral("Bernhard Beschow"), QStringLiteral("bbeschow@cs.tu-berlin.de"));
 }
 
 RoutingRunner *GosmorePlugin::newRunner() const

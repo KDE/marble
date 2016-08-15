@@ -17,7 +17,7 @@ namespace Marble
 YoursPlugin::YoursPlugin( QObject *parent ) :
     RoutingRunnerPlugin( parent )
 {
-    setSupportedCelestialBodies( QStringList() << "earth" );
+    setSupportedCelestialBodies(QStringList(QStringLiteral("earth")));
     setCanWorkOffline( false );
     setStatusMessage( tr ( "This service requires an Internet connection." ) );
 }
@@ -34,12 +34,12 @@ QString YoursPlugin::guiString() const
 
 QString YoursPlugin::nameId() const
 {
-    return "yours";
+    return QStringLiteral("yours");
 }
 
 QString YoursPlugin::version() const
 {
-    return "1.0";
+    return QStringLiteral("1.0");
 }
 
 QString YoursPlugin::description() const
@@ -49,13 +49,13 @@ QString YoursPlugin::description() const
 
 QString YoursPlugin::copyrightYears() const
 {
-    return "2010";
+    return QStringLiteral("2010");
 }
 
 QVector<PluginAuthor> YoursPlugin::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "nienhueser@kde.org" );
+            << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
 }
 
 RoutingRunner *YoursPlugin::newRunner() const

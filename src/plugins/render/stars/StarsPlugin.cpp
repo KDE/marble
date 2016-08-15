@@ -84,17 +84,17 @@ StarsPlugin::~StarsPlugin()
 
 QStringList StarsPlugin::backendTypes() const
 {
-    return QStringList( "stars" );
+    return QStringList(QStringLiteral("stars"));
 }
 
 QString StarsPlugin::renderPolicy() const
 {
-    return QString( "SPECIFIED_ALWAYS" );
+    return QStringLiteral("SPECIFIED_ALWAYS");
 }
 
 QStringList StarsPlugin::renderPosition() const
 {
-    return QStringList() << "STARS";
+    return QStringList(QStringLiteral("STARS"));
 }
 
 RenderPlugin::RenderType StarsPlugin::renderType() const
@@ -114,12 +114,12 @@ QString StarsPlugin::guiString() const
 
 QString StarsPlugin::nameId() const
 {
-    return QString( "stars" );
+    return QStringLiteral("stars");
 }
 
 QString StarsPlugin::version() const
 {
-    return "1.2";
+    return QStringLiteral("1.2");
 }
 
 QString StarsPlugin::description() const
@@ -129,20 +129,20 @@ QString StarsPlugin::description() const
 
 QString StarsPlugin::copyrightYears() const
 {
-    return "2008-2012";
+    return QStringLiteral("2008-2012");
 }
 
 QVector<PluginAuthor> StarsPlugin::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-           << PluginAuthor( "Torsten Rahn", "tackat@kde.org" )
-           << PluginAuthor( "Rene Kuettner", "rene@bitkanal.net" )
-           << PluginAuthor( "Timothy Lanzi", "trlanzi@gmail.com" );
+           << PluginAuthor(QStringLiteral("Torsten Rahn"), QStringLiteral("tackat@kde.org"))
+           << PluginAuthor(QStringLiteral("Rene Kuettner"), QStringLiteral("rene@bitkanal.net"))
+           << PluginAuthor(QStringLiteral("Timothy Lanzi"), QStringLiteral("trlanzi@gmail.com"));
 }
 
 QIcon StarsPlugin::icon() const
 {
-    return QIcon(":/icons/stars.png");
+    return QIcon(QStringLiteral(":/icons/stars.png"));
 }
 
 void StarsPlugin::initialize()

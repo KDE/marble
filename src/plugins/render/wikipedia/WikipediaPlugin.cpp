@@ -79,12 +79,12 @@ QString WikipediaPlugin::guiString() const
 
 QString WikipediaPlugin::nameId() const
 {
-    return "wikipedia";
+    return QStringLiteral("wikipedia");
 }
 
 QString WikipediaPlugin::version() const
 {
-    return "1.0";
+    return QStringLiteral("1.0");
 }
 
 QString WikipediaPlugin::description() const
@@ -94,13 +94,13 @@ QString WikipediaPlugin::description() const
 
 QString WikipediaPlugin::copyrightYears() const
 {
-    return "2009";
+    return QStringLiteral("2009");
 }
 
 QVector<PluginAuthor> WikipediaPlugin::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor( "Bastian Holst", "bastianholst@gmx.de" );
+            << PluginAuthor(QStringLiteral("Bastian Holst"), QStringLiteral("bastianholst@gmx.de"));
 }
 
 QString WikipediaPlugin::aboutDataText() const

@@ -19,7 +19,7 @@ namespace Marble
 OpenRouteServicePlugin::OpenRouteServicePlugin( QObject *parent ) :
     RoutingRunnerPlugin( parent )
 {
-    setSupportedCelestialBodies( QStringList() << "earth" );
+    setSupportedCelestialBodies(QStringList(QStringLiteral("earth")));
     setCanWorkOffline( false );
     setStatusMessage( tr ( "This service requires an Internet connection." ) );
 }
@@ -36,12 +36,12 @@ QString OpenRouteServicePlugin::guiString() const
 
 QString OpenRouteServicePlugin::nameId() const
 {
-    return "openrouteservice";
+    return QStringLiteral("openrouteservice");
 }
 
 QString OpenRouteServicePlugin::version() const
 {
-    return "1.0";
+    return QStringLiteral("1.0");
 }
 
 QString OpenRouteServicePlugin::description() const
@@ -51,13 +51,13 @@ QString OpenRouteServicePlugin::description() const
 
 QString OpenRouteServicePlugin::copyrightYears() const
 {
-    return "2010";
+    return QStringLiteral("2010");
 }
 
 QVector<PluginAuthor> OpenRouteServicePlugin::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "nienhueser@kde.org" );
+            << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
 }
 
 RoutingRunner *OpenRouteServicePlugin::newRunner() const

@@ -25,7 +25,7 @@ FloatItemsLayer::FloatItemsLayer(QObject *parent) :
 
 QStringList FloatItemsLayer::renderPosition() const
 {
-    return QStringList() << "FLOAT_ITEM";
+    return QStringList(QStringLiteral("FLOAT_ITEM"));
 }
 
 bool FloatItemsLayer::render(GeoPainter *painter,

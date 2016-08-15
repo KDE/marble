@@ -46,7 +46,7 @@ FileViewFloatItem::~FileViewFloatItem()
 
 QStringList FileViewFloatItem::backendTypes() const
 {
-    return QStringList("fileview");
+    return QStringList(QStringLiteral("fileview"));
 }
 
 QString FileViewFloatItem::name() const
@@ -61,7 +61,7 @@ QString FileViewFloatItem::guiString() const
 
 QString FileViewFloatItem::nameId() const
 {
-    return QString("fileview");
+    return QStringLiteral("fileview");
 }
 
 QString FileViewFloatItem::description() const

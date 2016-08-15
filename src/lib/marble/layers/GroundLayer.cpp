@@ -27,7 +27,7 @@ GroundLayer::~GroundLayer()
 
 QStringList GroundLayer::renderPosition() const
 {
-    return QStringList() << "SURFACE";
+    return QStringList(QStringLiteral("SURFACE"));
 }
 
 bool GroundLayer::render( GeoPainter *painter,

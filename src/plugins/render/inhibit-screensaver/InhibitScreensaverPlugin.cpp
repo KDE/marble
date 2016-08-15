@@ -78,7 +78,7 @@ QStringList InhibitScreensaverPlugin::backendTypes() const
 QStringList InhibitScreensaverPlugin::renderPosition() const
 {
     // We're invisible, but need to be initialized
-    return QStringList( "FLOAT_ITEM" );
+    return QStringList(QStringLiteral("FLOAT_ITEM"));
 }
 
 QString InhibitScreensaverPlugin::name() const
@@ -93,12 +93,12 @@ QString InhibitScreensaverPlugin::guiString() const
 
 QString InhibitScreensaverPlugin::nameId() const
 {
-    return QString("inhibit-screensaver");
+    return QStringLiteral("inhibit-screensaver");
 }
 
 QString InhibitScreensaverPlugin::version() const
 {
-    return "1.0";
+    return QStringLiteral("1.0");
 }
 
 QString InhibitScreensaverPlugin::description() const
@@ -108,13 +108,13 @@ QString InhibitScreensaverPlugin::description() const
 
 QString InhibitScreensaverPlugin::copyrightYears() const
 {
-    return "2010";
+    return QStringLiteral("2010");
 }
 
 QVector<PluginAuthor> InhibitScreensaverPlugin::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "nienhueser@kde.org" );
+            << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
 }
 
 QIcon InhibitScreensaverPlugin::icon() const
@@ -168,7 +168,7 @@ bool InhibitScreensaverPlugin::render( GeoPainter *, ViewportParams *, const QSt
 
 QString InhibitScreensaverPlugin::renderPolicy() const
 {
-    return "NEVER";
+    return QStringLiteral("NEVER");
 }
 
 }

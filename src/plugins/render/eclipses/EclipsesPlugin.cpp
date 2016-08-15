@@ -80,17 +80,17 @@ EclipsesPlugin::~EclipsesPlugin()
 
 QStringList EclipsesPlugin::backendTypes() const
 {
-    return QStringList( "eclipses" );
+    return QStringList(QStringLiteral("eclipses"));
 }
 
 QString EclipsesPlugin::renderPolicy() const
 {
-    return QString( "ALWAYS" );
+    return QStringLiteral("ALWAYS");
 }
 
 QStringList EclipsesPlugin::renderPosition() const
 {
-    return QStringList( "ORBIT" );
+    return QStringList(QStringLiteral("ORBIT"));
 }
 
 QString EclipsesPlugin::name() const
@@ -100,7 +100,7 @@ QString EclipsesPlugin::name() const
 
 QString EclipsesPlugin::nameId() const
 {
-    return "eclipses";
+    return QStringLiteral("eclipses");
 }
 
 QString EclipsesPlugin::guiString() const
@@ -110,7 +110,7 @@ QString EclipsesPlugin::guiString() const
 
 QString EclipsesPlugin::version() const
 {
-    return "1.0";
+    return QStringLiteral("1.0");
 }
 
 QString EclipsesPlugin::description() const
@@ -120,19 +120,19 @@ QString EclipsesPlugin::description() const
 
 QString EclipsesPlugin::copyrightYears() const
 {
-    return "2013";
+    return QStringLiteral("2013");
 }
 
 QVector<PluginAuthor> EclipsesPlugin::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor( "Rene Kuettner", "rene@bitkanal.net" )
-            << PluginAuthor( "Gerhard Holtkamp", "" );
+            << PluginAuthor(QStringLiteral("Rene Kuettner"), QStringLiteral("rene@bitkanal.net"))
+            << PluginAuthor(QStringLiteral("Gerhard Holtkamp"), QString());
 }
 
 QIcon EclipsesPlugin::icon() const
 {
-    return QIcon( ":res/eclipses.png" );
+    return QIcon(QStringLiteral(":res/eclipses.png"));
 }
 
 RenderPlugin::RenderType EclipsesPlugin::renderType() const

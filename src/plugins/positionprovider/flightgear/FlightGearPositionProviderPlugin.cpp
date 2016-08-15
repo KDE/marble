@@ -38,7 +38,7 @@ QString FlightGearPositionProviderPlugin::name() const
 
 QString FlightGearPositionProviderPlugin::nameId() const
 {
-    return QString::fromLatin1( "flightgear" );
+    return QStringLiteral("flightgear");
 }
 
 QString FlightGearPositionProviderPlugin::guiString() const
@@ -48,7 +48,7 @@ QString FlightGearPositionProviderPlugin::guiString() const
 
 QString FlightGearPositionProviderPlugin::version() const
 {
-    return "1.0";
+    return QStringLiteral("1.0");
 }
 
 QString FlightGearPositionProviderPlugin::description() const
@@ -58,13 +58,13 @@ QString FlightGearPositionProviderPlugin::description() const
 
 QString FlightGearPositionProviderPlugin::copyrightYears() const
 {
-    return "2012";
+    return QStringLiteral("2012");
 }
 
 QVector<PluginAuthor> FlightGearPositionProviderPlugin::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor( QString::fromUtf8( "Ralf Habacker" ), "ralf.habacker@freenet.de" );
+            << PluginAuthor(QStringLiteral("Ralf Habacker"), QStringLiteral("ralf.habacker@freenet.de"));
 
 }
 

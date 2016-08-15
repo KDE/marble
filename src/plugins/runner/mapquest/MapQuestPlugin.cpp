@@ -19,7 +19,7 @@ namespace Marble
 MapQuestPlugin::MapQuestPlugin( QObject *parent ) :
     RoutingRunnerPlugin( parent )
 {
-    setSupportedCelestialBodies( QStringList() << "earth" );
+    setSupportedCelestialBodies(QStringList(QStringLiteral("earth")));
     setCanWorkOffline( false );
     setStatusMessage( tr ( "This service requires an Internet connection." ) );
 }
@@ -36,12 +36,12 @@ QString MapQuestPlugin::guiString() const
 
 QString MapQuestPlugin::nameId() const
 {
-    return "mapquest";
+    return QStringLiteral("mapquest");
 }
 
 QString MapQuestPlugin::version() const
 {
-    return "1.0";
+    return QStringLiteral("1.0");
 }
 
 QString MapQuestPlugin::description() const
@@ -51,13 +51,13 @@ QString MapQuestPlugin::description() const
 
 QString MapQuestPlugin::copyrightYears() const
 {
-    return "2012";
+    return QStringLiteral("2012");
 }
 
 QVector<PluginAuthor> MapQuestPlugin::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "nienhueser@kde.org" );
+            << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
 }
 
 RoutingRunner *MapQuestPlugin::newRunner() const

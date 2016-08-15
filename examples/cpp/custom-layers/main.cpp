@@ -55,8 +55,12 @@ QStringList MyPaintLayer::renderPosition() const
 {
     // We will paint in exactly one of the following layers.
     // The current one can be changed by pressing the '+' key
-    QStringList layers = QStringList() << "SURFACE" << "HOVERS_ABOVE_SURFACE";
-    layers << "ORBIT" << "USER_TOOLS" << "STARS";
+    const QStringList layers = QStringList()
+        << QStringLiteral("SURFACE")
+        << QStringLiteral("HOVERS_ABOVE_SURFACE")
+        << QStringLiteral("ORBIT")
+        << QStringLiteral("USER_TOOLS")
+        << QStringLiteral("STARS");
 
     int index = m_index % layers.size();
     return QStringList() << layers.at(index);

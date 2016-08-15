@@ -86,12 +86,12 @@ QString WeatherPlugin::guiString() const
 
 QString WeatherPlugin::nameId() const
 {
-    return "weather";
+    return QStringLiteral("weather");
 }
 
 QString WeatherPlugin::version() const
 {
-    return "1.1";
+    return QStringLiteral("1.1");
 }
 
 QString WeatherPlugin::description() const
@@ -101,14 +101,14 @@ QString WeatherPlugin::description() const
 
 QString WeatherPlugin::copyrightYears() const
 {
-    return "2009, 2011";
+    return QStringLiteral("2009, 2011");
 }
 
 QVector<PluginAuthor> WeatherPlugin::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor( "Bastian Holst", "bastianholst@gmx.de" )
-            << PluginAuthor( "Valery Kharitonov", "kharvd@gmail.com" );
+            << PluginAuthor(QStringLiteral("Bastian Holst"), QStringLiteral("bastianholst@gmx.de"))
+            << PluginAuthor(QStringLiteral("Valery Kharitonov"), QStringLiteral("kharvd@gmail.com"));
 }
 
 QString WeatherPlugin::aboutDataText() const

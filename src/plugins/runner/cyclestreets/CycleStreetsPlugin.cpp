@@ -83,7 +83,7 @@ QHash<QString, QVariant> CycleStreetsConfigWidget::settings() const
 CycleStreetsPlugin::CycleStreetsPlugin( QObject *parent ) :
     RoutingRunnerPlugin( parent )
 {
-    setSupportedCelestialBodies( QStringList() << "earth" );
+    setSupportedCelestialBodies(QStringList(QStringLiteral("earth")));
     setCanWorkOffline( false );
     setStatusMessage( tr ( "This service requires an Internet connection." ) );
 }
@@ -100,12 +100,12 @@ QString CycleStreetsPlugin::guiString() const
 
 QString CycleStreetsPlugin::nameId() const
 {
-    return "cyclestreets";
+    return QStringLiteral("cyclestreets");
 }
 
 QString CycleStreetsPlugin::version() const
 {
-    return "1.0";
+    return QStringLiteral("1.0");
 }
 
 QString CycleStreetsPlugin::description() const
@@ -115,13 +115,13 @@ QString CycleStreetsPlugin::description() const
 
 QString CycleStreetsPlugin::copyrightYears() const
 {
-    return "2013";
+    return QStringLiteral("2013");
 }
 
 QVector<PluginAuthor> CycleStreetsPlugin::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor( QString::fromUtf8( "Mihail Ivchenko" ), "ematirov@gmail.com" );
+            << PluginAuthor(QStringLiteral("Mihail Ivchenko"), QStringLiteral("ematirov@gmail.com"));
 }
 
 RoutingRunner *CycleStreetsPlugin::newRunner() const

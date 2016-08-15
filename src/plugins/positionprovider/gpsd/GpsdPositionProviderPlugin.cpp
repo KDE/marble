@@ -27,7 +27,7 @@ QString GpsdPositionProviderPlugin::name() const
 
 QString GpsdPositionProviderPlugin::nameId() const
 {
-    return QString::fromLatin1( "Gpsd" );
+    return QStringLiteral("Gpsd");
 }
 
 QString GpsdPositionProviderPlugin::guiString() const
@@ -37,7 +37,7 @@ QString GpsdPositionProviderPlugin::guiString() const
 
 QString GpsdPositionProviderPlugin::version() const
 {
-    return "1.0";
+    return QStringLiteral("1.0");
 }
 
 QString GpsdPositionProviderPlugin::description() const
@@ -47,13 +47,13 @@ QString GpsdPositionProviderPlugin::description() const
 
 QString GpsdPositionProviderPlugin::copyrightYears() const
 {
-    return "2009";
+    return QStringLiteral("2009");
 }
 
 QVector<PluginAuthor> GpsdPositionProviderPlugin::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor( QString::fromUtf8( "Eckhart Wörner" ), "ewoerner@kde.org" );
+            << PluginAuthor(QStringLiteral("Eckhart Wörner"), QStringLiteral("ewoerner@kde.org"));
 
 }
 

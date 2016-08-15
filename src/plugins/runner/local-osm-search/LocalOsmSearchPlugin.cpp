@@ -22,7 +22,7 @@ LocalOsmSearchPlugin::LocalOsmSearchPlugin( QObject *parent ) :
     SearchRunnerPlugin( parent ),
     m_databaseFiles()
 {
-    setSupportedCelestialBodies( QStringList() << "earth" );
+    setSupportedCelestialBodies(QStringList(QStringLiteral("earth")));
     setCanWorkOffline( true );
 
     QString const path = MarbleDirs::localPath() + "/maps/earth/placemarks/";
@@ -52,12 +52,12 @@ QString LocalOsmSearchPlugin::guiString() const
 
 QString LocalOsmSearchPlugin::nameId() const
 {
-    return "local-osm-search";
+    return QStringLiteral("local-osm-search");
 }
 
 QString LocalOsmSearchPlugin::version() const
 {
-    return "1.0";
+    return QStringLiteral("1.0");
 }
 
 QString LocalOsmSearchPlugin::description() const
@@ -67,13 +67,13 @@ QString LocalOsmSearchPlugin::description() const
 
 QString LocalOsmSearchPlugin::copyrightYears() const
 {
-    return "2011";
+    return QStringLiteral("2011");
 }
 
 QVector<PluginAuthor> LocalOsmSearchPlugin::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "nienhueser@kde.org" );
+            << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
 }
 
 SearchRunner* LocalOsmSearchPlugin::newRunner() const

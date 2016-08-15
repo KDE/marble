@@ -25,12 +25,12 @@ QString GpxPlugin::name() const
 
 QString GpxPlugin::nameId() const
 {
-    return "Gpx";
+    return QStringLiteral("Gpx");
 }
 
 QString GpxPlugin::version() const
 {
-    return "1.0";
+    return QStringLiteral("1.0");
 }
 
 QString GpxPlugin::description() const
@@ -40,13 +40,13 @@ QString GpxPlugin::description() const
 
 QString GpxPlugin::copyrightYears() const
 {
-    return "2011";
+    return QStringLiteral("2011");
 }
 
 QVector<PluginAuthor> GpxPlugin::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor( "Thibaut Gridel", "tgridel@free.fr" );
+            << PluginAuthor(QStringLiteral("Thibaut Gridel"), QStringLiteral("tgridel@free.fr"));
 }
 
 QString GpxPlugin::fileFormatDescription() const
@@ -56,7 +56,7 @@ QString GpxPlugin::fileFormatDescription() const
 
 QStringList GpxPlugin::fileExtensions() const
 {
-    return QStringList() << "gpx";
+    return QStringList(QStringLiteral("gpx"));
 }
 
 ParsingRunner* GpxPlugin::newRunner() const

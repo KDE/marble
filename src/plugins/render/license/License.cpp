@@ -86,7 +86,7 @@ License::~License()
 
 QStringList License::backendTypes() const
 {
-    return QStringList( "License" );
+    return QStringList(QStringLiteral("License"));
 }
 
 QString License::name() const
@@ -101,12 +101,12 @@ QString License::guiString() const
 
 QString License::nameId() const
 {
-    return QString( "license" );
+    return QStringLiteral("license");
 }
 
 QString License::version() const
 {
-    return "1.0";
+    return QStringLiteral("1.0");
 }
 
 QString License::description() const
@@ -116,19 +116,19 @@ QString License::description() const
 
 QString License::copyrightYears() const
 {
-    return "2012";
+    return QStringLiteral("2012");
 }
 
 QVector<PluginAuthor> License::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-           << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "nienhueser@kde.org" )
-           << PluginAuthor( "Illya Kovalevskyy", "illya.kovalevskyy@gmail.com" );
+           << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"))
+           << PluginAuthor(QStringLiteral("Illya Kovalevskyy"), QStringLiteral("illya.kovalevskyy@gmail.com"));
 }
 
 QIcon License::icon () const
 {
-    return QIcon(":/icons/license.png");
+    return QIcon(QStringLiteral(":/icons/license.png"));
 }
 
 void License::initialize ()

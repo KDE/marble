@@ -109,17 +109,17 @@ RenderPlugin::RenderType AprsPlugin::renderType() const
 
 QStringList AprsPlugin::backendTypes() const
 {
-    return QStringList( "aprs" );
+    return QStringList(QStringLiteral("aprs"));
 }
 
 QString AprsPlugin::renderPolicy() const
 {
-    return QString( "ALWAYS" );
+    return QStringLiteral("ALWAYS");
 }
 
 QStringList AprsPlugin::renderPosition() const
 {
-    return QStringList( "HOVERS_ABOVE_SURFACE" );
+    return QStringList(QStringLiteral("HOVERS_ABOVE_SURFACE"));
 }
 
 QString AprsPlugin::name() const
@@ -134,12 +134,12 @@ QString AprsPlugin::guiString() const
 
 QString AprsPlugin::nameId() const
 {
-    return QString( "aprs-plugin" );
+    return QStringLiteral("aprs-plugin");
 }
 
 QString AprsPlugin::version() const
 {
-    return "1.0";
+    return QStringLiteral("1.0");
 }
 
 QString AprsPlugin::description() const
@@ -149,18 +149,18 @@ QString AprsPlugin::description() const
 
 QString AprsPlugin::copyrightYears() const
 {
-    return "2009, 2010";
+    return QStringLiteral("2009, 2010");
 }
 
 QVector<PluginAuthor> AprsPlugin::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor( "Wes Hardaker", "hardaker@users.sourceforge.net" );
+            << PluginAuthor(QStringLiteral("Wes Hardaker"), QStringLiteral("hardaker@users.sourceforge.net"));
 }
 
 QIcon AprsPlugin::icon () const
 {
-    return QIcon(":/icons/aprs.png");
+    return QIcon(QStringLiteral(":/icons/aprs.png"));
 }
 
 void AprsPlugin::stopGatherers()

@@ -53,12 +53,12 @@ QString OpenDesktopPlugin::guiString() const
 
 QString OpenDesktopPlugin::nameId() const
 {
-    return "opendesktop";
+    return QStringLiteral("opendesktop");
 }
 
 QString OpenDesktopPlugin::version() const
 {
-    return "1.0";
+    return QStringLiteral("1.0");
 }
 
 QString OpenDesktopPlugin::description() const
@@ -68,18 +68,18 @@ QString OpenDesktopPlugin::description() const
 
 QString OpenDesktopPlugin::copyrightYears() const
 {
-    return "2010";
+    return QStringLiteral("2010");
 }
 
 QVector<PluginAuthor> OpenDesktopPlugin::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor( QString::fromUtf8( "Utku Aydin" ), "utkuaydin34@gmail.com" );
+            << PluginAuthor(QStringLiteral("Utku Aydin"), QStringLiteral("utkuaydin34@gmail.com"));
 }
 
 QIcon OpenDesktopPlugin::icon() const
 {
-    return QIcon(":/icons/social.png");
+    return QIcon(QStringLiteral(":/icons/social.png"));
 }
 
 QDialog *OpenDesktopPlugin::configDialog()

@@ -44,7 +44,7 @@ GpsInfo::~GpsInfo()
 
 QStringList GpsInfo::backendTypes() const
 {
-    return QStringList( "GpsInfo" );
+    return QStringList(QStringLiteral("GpsInfo"));
 }
 
 QString GpsInfo::name() const
@@ -59,12 +59,12 @@ QString GpsInfo::guiString() const
 
 QString GpsInfo::nameId() const
 {
-    return QString( "GpsInfo" );
+    return QStringLiteral("GpsInfo");
 }
 
 QString GpsInfo::version() const
 {
-    return "1.0";
+    return QStringLiteral("1.0");
 }
 
 QString GpsInfo::description() const
@@ -74,18 +74,18 @@ QString GpsInfo::description() const
 
 QString GpsInfo::copyrightYears() const
 {
-    return "2011";
+    return QStringLiteral("2011");
 }
 
 QVector<PluginAuthor> GpsInfo::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor( "Thibaut Gridel", "tgridel@free.fr" );
+            << PluginAuthor(QStringLiteral("Thibaut Gridel"), QStringLiteral("tgridel@free.fr"));
 }
 
 QIcon GpsInfo::icon () const
 {
-    return QIcon(":/icons/gps.png");
+    return QIcon(QStringLiteral(":/icons/gps.png"));
 }
 
 void GpsInfo::initialize ()

@@ -25,12 +25,12 @@ QString PntPlugin::name() const
 
 QString PntPlugin::nameId() const
 {
-    return "Pnt";
+    return QStringLiteral("Pnt");
 }
 
 QString PntPlugin::version() const
 {
-    return "1.0";
+    return QStringLiteral("1.0");
 }
 
 QString PntPlugin::description() const
@@ -40,13 +40,13 @@ QString PntPlugin::description() const
 
 QString PntPlugin::copyrightYears() const
 {
-    return "2011";
+    return QStringLiteral("2011");
 }
 
 QVector<PluginAuthor> PntPlugin::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor( "Thibaut Gridel", "tgridel@free.fr" );
+            << PluginAuthor(QStringLiteral("Thibaut Gridel"), QStringLiteral("tgridel@free.fr"));
 }
 
 QString PntPlugin::fileFormatDescription() const
@@ -56,7 +56,7 @@ QString PntPlugin::fileFormatDescription() const
 
 QStringList PntPlugin::fileExtensions() const
 {
-    return QStringList() << "pnt";
+    return QStringList(QStringLiteral("pnt"));
 }
 
 ParsingRunner* PntPlugin::newRunner() const

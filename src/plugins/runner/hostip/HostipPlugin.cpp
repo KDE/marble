@@ -18,7 +18,7 @@ namespace Marble
 HostipPlugin::HostipPlugin( QObject *parent ) :
     SearchRunnerPlugin( parent )
 {
-    setSupportedCelestialBodies( QStringList() << "earth" );
+    setSupportedCelestialBodies(QStringList(QStringLiteral("earth")));
     setCanWorkOffline( false );
 }
 
@@ -34,12 +34,12 @@ QString HostipPlugin::guiString() const
 
 QString HostipPlugin::nameId() const
 {
-    return "hostip";
+    return QStringLiteral("hostip");
 }
 
 QString HostipPlugin::version() const
 {
-    return "1.0";
+    return QStringLiteral("1.0");
 }
 
 QString HostipPlugin::description() const
@@ -49,13 +49,13 @@ QString HostipPlugin::description() const
 
 QString HostipPlugin::copyrightYears() const
 {
-    return "2010";
+    return QStringLiteral("2010");
 }
 
 QVector<PluginAuthor> HostipPlugin::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "nienhueser@kde.org" );
+            << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
 }
 
 SearchRunner* HostipPlugin::newRunner() const

@@ -109,7 +109,7 @@ GeometryLayer::~GeometryLayer()
 
 QStringList GeometryLayer::renderPosition() const
 {
-    return QStringList( "HOVERS_ABOVE_SURFACE" );
+    return QStringList(QStringLiteral("HOVERS_ABOVE_SURFACE"));
 }
 
 

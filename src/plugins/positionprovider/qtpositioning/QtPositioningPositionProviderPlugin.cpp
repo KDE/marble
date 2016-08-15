@@ -49,7 +49,7 @@ QString QtPositioningPositionProviderPlugin::name() const
 
 QString QtPositioningPositionProviderPlugin::nameId() const
 {
-    return "QtPositioning";
+    return QStringLiteral("QtPositioning");
 }
 
 QString QtPositioningPositionProviderPlugin::guiString() const
@@ -59,7 +59,7 @@ QString QtPositioningPositionProviderPlugin::guiString() const
 
 QString QtPositioningPositionProviderPlugin::version() const
 {
-    return "1.0";
+    return QStringLiteral("1.0");
 }
 
 QString QtPositioningPositionProviderPlugin::description() const
@@ -69,13 +69,13 @@ QString QtPositioningPositionProviderPlugin::description() const
 
 QString QtPositioningPositionProviderPlugin::copyrightYears() const
 {
-    return "2011";
+    return QStringLiteral("2011");
 }
 
 QVector<PluginAuthor> QtPositioningPositionProviderPlugin::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor( "Daniel Marth", "danielmarth@gmx.at" );
+            << PluginAuthor(QStringLiteral("Daniel Marth"), QStringLiteral("danielmarth@gmx.at"));
 }
 
 QIcon QtPositioningPositionProviderPlugin::icon() const

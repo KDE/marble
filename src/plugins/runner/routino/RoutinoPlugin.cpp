@@ -20,7 +20,7 @@ namespace Marble
 RoutinoPlugin::RoutinoPlugin( QObject *parent ) :
     RoutingRunnerPlugin( parent )
 {
-    setSupportedCelestialBodies( QStringList() << "earth" );
+    setSupportedCelestialBodies(QStringList(QStringLiteral("earth")));
     setCanWorkOffline( true );
 }
 
@@ -36,12 +36,12 @@ QString RoutinoPlugin::guiString() const
 
 QString RoutinoPlugin::nameId() const
 {
-    return "routino";
+    return QStringLiteral("routino");
 }
 
 QString RoutinoPlugin::version() const
 {
-    return "1.0";
+    return QStringLiteral("1.0");
 }
 
 QString RoutinoPlugin::description() const
@@ -51,13 +51,13 @@ QString RoutinoPlugin::description() const
 
 QString RoutinoPlugin::copyrightYears() const
 {
-    return "2010";
+    return QStringLiteral("2010");
 }
 
 QVector<PluginAuthor> RoutinoPlugin::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "nienhueser@kde.org" );
+            << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
 }
 
 RoutingRunner *RoutinoPlugin::newRunner() const

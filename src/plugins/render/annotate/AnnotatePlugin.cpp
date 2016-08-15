@@ -140,17 +140,17 @@ AnnotatePlugin::~AnnotatePlugin()
 
 QStringList AnnotatePlugin::backendTypes() const
 {
-    return QStringList( "annotation" );
+    return QStringList(QStringLiteral("annotation"));
 }
 
 QString AnnotatePlugin::renderPolicy() const
 {
-    return QString( "ALWAYS" );
+    return QStringLiteral("ALWAYS");
 }
 
 QStringList AnnotatePlugin::renderPosition() const
 {
-    return QStringList() << "ALWAYS_ON_TOP";
+    return QStringList(QStringLiteral("ALWAYS_ON_TOP"));
 }
 
 QString AnnotatePlugin::name() const
@@ -165,7 +165,7 @@ QString AnnotatePlugin::guiString() const
 
 QString AnnotatePlugin::nameId() const
 {
-    return QString( "annotation" );
+    return QStringLiteral("annotation");
 }
 
 QString AnnotatePlugin::description() const
@@ -175,25 +175,25 @@ QString AnnotatePlugin::description() const
 
 QString AnnotatePlugin::version() const
 {
-    return "1.0";
+    return QStringLiteral("1.0");
 }
 
 QString AnnotatePlugin::copyrightYears() const
 {
-    return "2009, 2013";
+    return QStringLiteral("2009, 2013");
 }
 
 QVector<PluginAuthor> AnnotatePlugin::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor( "Andrew Manson", "<g.real.ate@gmail.com>" )
-            << PluginAuthor( "Thibaut Gridel", "<tgridel@free.fr>" )
-            << PluginAuthor( "Calin Cruceru", "<crucerucalincristian@gmail.com>" );
+            << PluginAuthor(QStringLiteral("Andrew Manson"), QStringLiteral("g.real.ate@gmail.com"))
+            << PluginAuthor(QStringLiteral("Thibaut Gridel"), QStringLiteral("tgridel@free.fr"))
+            << PluginAuthor(QStringLiteral("Calin Cruceru"), QStringLiteral("crucerucalincristian@gmail.com"));
 }
 
 QIcon AnnotatePlugin::icon() const
 {
-    return QIcon( ":/icons/draw-placemark.png");
+    return QIcon(QStringLiteral(":/icons/draw-placemark.png"));
 }
 
 void AnnotatePlugin::initialize()

@@ -56,17 +56,17 @@ CrosshairsPlugin::~CrosshairsPlugin ()
 
 QStringList CrosshairsPlugin::backendTypes() const
 {
-    return QStringList( "crosshairs" );
+    return QStringList(QStringLiteral("crosshairs"));
 }
 
 QString CrosshairsPlugin::renderPolicy() const
 {
-    return QString( "ALWAYS" );
+    return QStringLiteral("ALWAYS");
 }
 
 QStringList CrosshairsPlugin::renderPosition() const
 {
-    return QStringList( "FLOAT_ITEM" ); // although this is not a float item we choose the position of one
+    return QStringList(QStringLiteral("FLOAT_ITEM")); // although this is not a float item we choose the position of one
 }
 
 RenderPlugin::RenderType CrosshairsPlugin::renderType() const
@@ -86,12 +86,12 @@ QString CrosshairsPlugin::guiString() const
 
 QString CrosshairsPlugin::nameId() const
 {
-    return QString( "crosshairs" );
+    return QStringLiteral("crosshairs");
 }
 
 QString CrosshairsPlugin::version() const
 {
-    return "1.0";
+    return QStringLiteral("1.0");
 }
 
 QString CrosshairsPlugin::description() const
@@ -101,19 +101,19 @@ QString CrosshairsPlugin::description() const
 
 QString CrosshairsPlugin::copyrightYears() const
 {
-    return "2009, 2010";
+    return QStringLiteral("2009, 2010");
 }
 
 QVector<PluginAuthor> CrosshairsPlugin::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor( "Cezar Mocan", "cezarmocan@gmail.com" )
-            << PluginAuthor( "Torsten Rahn", "tackat@kde.org" );
+            << PluginAuthor(QStringLiteral("Cezar Mocan"), QStringLiteral("cezarmocan@gmail.com"))
+            << PluginAuthor(QStringLiteral("Torsten Rahn"), QStringLiteral("tackat@kde.org"));
 }
 
 QIcon CrosshairsPlugin::icon () const
 {
-    return QIcon( ":/icons/crosshairs.png" );
+    return QIcon(QStringLiteral(":/icons/crosshairs.png"));
 }
 
 void CrosshairsPlugin::initialize ()

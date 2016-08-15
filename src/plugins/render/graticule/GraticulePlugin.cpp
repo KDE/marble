@@ -60,17 +60,17 @@ GraticulePlugin::GraticulePlugin( const MarbleModel *marbleModel )
 
 QStringList GraticulePlugin::backendTypes() const
 {
-    return QStringList( "graticule" );
+    return QStringList(QStringLiteral("graticule"));
 }
 
 QString GraticulePlugin::renderPolicy() const
 {
-    return QString( "ALWAYS" );
+    return QStringLiteral("ALWAYS");
 }
 
 QStringList GraticulePlugin::renderPosition() const
 {
-    return QStringList( "SURFACE" );
+    return QStringList(QStringLiteral("SURFACE"));
 }
 
 QString GraticulePlugin::name() const
@@ -85,12 +85,12 @@ QString GraticulePlugin::guiString() const
 
 QString GraticulePlugin::nameId() const
 {
-    return QString( "coordinate-grid" );
+    return QStringLiteral("coordinate-grid");
 }
 
 QString GraticulePlugin::version() const
 {
-    return "1.0";
+    return QStringLiteral("1.0");
 }
 
 QString GraticulePlugin::description() const
@@ -100,18 +100,18 @@ QString GraticulePlugin::description() const
 
 QString GraticulePlugin::copyrightYears() const
 {
-    return "2009";
+    return QStringLiteral("2009");
 }
 
 QVector<PluginAuthor> GraticulePlugin::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor( "Torsten Rahn", "tackat@kde.org" );
+            << PluginAuthor(QStringLiteral("Torsten Rahn"), QStringLiteral("tackat@kde.org"));
 }
 
 QIcon GraticulePlugin::icon () const
 {
-    return QIcon(":/icons/coordinate.png");
+    return QIcon(QStringLiteral(":/icons/coordinate.png"));
 }
 
 void GraticulePlugin::initialize ()

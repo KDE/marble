@@ -27,17 +27,17 @@ twitterPlugin::~twitterPlugin()
 
 QStringList twitterPlugin::backendTypes() const
 {
-    return QStringList("twitter");
+    return QStringList(QStringLiteral("twitter"));
 }
 
 QString twitterPlugin::renderPolicy() const
 {
-    return QString("ALWAYS");
+    return QStringLiteral("ALWAYS");
 }
 
 QStringList twitterPlugin::renderPosition() const
 {
-    return QStringList("ALWAYS_ON_TOP");
+    return QStringList(QStringLiteral("ALWAYS_ON_TOP"));
 }
 
 QString twitterPlugin::name() const
@@ -52,7 +52,7 @@ QString twitterPlugin::guiString() const
 
 QString twitterPlugin::nameId() const
 {
-    return QString("twitter");
+    return QStringLiteral("twitter");
 }
 
 QString twitterPlugin::description() const

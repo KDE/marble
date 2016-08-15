@@ -80,7 +80,7 @@ PopupLayer::~PopupLayer()
 
 QStringList PopupLayer::renderPosition() const
 {
-    return QStringList( "ALWAYS_ON_TOP" );
+    return QStringList(QStringLiteral("ALWAYS_ON_TOP"));
 }
 
 bool PopupLayer::render( GeoPainter *painter, ViewportParams *viewport,

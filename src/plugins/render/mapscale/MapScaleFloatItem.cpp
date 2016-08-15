@@ -67,7 +67,7 @@ MapScaleFloatItem::~MapScaleFloatItem()
 
 QStringList MapScaleFloatItem::backendTypes() const
 {
-    return QStringList( "mapscale" );
+    return QStringList(QStringLiteral("mapscale"));
 }
 
 QString MapScaleFloatItem::name() const
@@ -82,12 +82,12 @@ QString MapScaleFloatItem::guiString() const
 
 QString MapScaleFloatItem::nameId() const
 {
-    return QString( "scalebar" );
+    return QStringLiteral("scalebar");
 }
 
 QString MapScaleFloatItem::version() const
 {
-    return "1.1";
+    return QStringLiteral("1.1");
 }
 
 QString MapScaleFloatItem::description() const
@@ -97,20 +97,20 @@ QString MapScaleFloatItem::description() const
 
 QString MapScaleFloatItem::copyrightYears() const
 {
-    return "2008, 2010, 2012";
+    return QStringLiteral("2008, 2010, 2012");
 }
 
 QVector<PluginAuthor> MapScaleFloatItem::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor( "Torsten Rahn", "tackat@kde.org", tr( "Original Developer" ) )
-            << PluginAuthor( "Khanh-Nhan Nguyen", "khanh.nhan@wpi.edu" )
-            << PluginAuthor( "Illya Kovalevskyy", "illya.kovalevskyy@gmail.com" );
+            << PluginAuthor(QStringLiteral("Torsten Rahn"), QStringLiteral("tackat@kde.org"), tr("Original Developer"))
+            << PluginAuthor(QStringLiteral("Khanh-Nhan Nguyen"), QStringLiteral("khanh.nhan@wpi.edu"))
+            << PluginAuthor(QStringLiteral("Illya Kovalevskyy"), QStringLiteral("illya.kovalevskyy@gmail.com"));
 }
 
 QIcon MapScaleFloatItem::icon () const
 {
-    return QIcon(":/icons/scalebar.png");
+    return QIcon(QStringLiteral(":/icons/scalebar.png"));
 }
 
 

@@ -67,7 +67,7 @@ QString WlocatePositionProviderPlugin::name() const
 
 QString WlocatePositionProviderPlugin::nameId() const
 {
-    return "WlocatePositionProvider";
+    return QStringLiteral("WlocatePositionProvider");
 }
 
 QString WlocatePositionProviderPlugin::guiString() const
@@ -77,7 +77,7 @@ QString WlocatePositionProviderPlugin::guiString() const
 
 QString WlocatePositionProviderPlugin::version() const
 {
-    return "1.0";
+    return QStringLiteral("1.0");
 }
 
 QString WlocatePositionProviderPlugin::description() const
@@ -87,13 +87,13 @@ QString WlocatePositionProviderPlugin::description() const
 
 QString WlocatePositionProviderPlugin::copyrightYears() const
 {
-    return "2012";
+    return QStringLiteral("2012");
 }
 
 QVector<PluginAuthor> WlocatePositionProviderPlugin::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "nienhueser@kde.org" );
+            << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
 }
 
 QIcon WlocatePositionProviderPlugin::icon() const

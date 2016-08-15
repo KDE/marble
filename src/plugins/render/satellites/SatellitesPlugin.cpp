@@ -69,17 +69,17 @@ SatellitesPlugin::~SatellitesPlugin()
 
 QStringList SatellitesPlugin::backendTypes() const
 {
-    return QStringList( "satellites" );
+    return QStringList(QStringLiteral("satellites"));
 }
 
 QString SatellitesPlugin::renderPolicy() const
 {
-    return QString( "ALWAYS" );
+    return QStringLiteral("ALWAYS");
 }
 
 QStringList SatellitesPlugin::renderPosition() const
 {
-    return QStringList( "ORBIT" );
+    return QStringList(QStringLiteral("ORBIT"));
 }
 
 QString SatellitesPlugin::name() const
@@ -89,7 +89,7 @@ QString SatellitesPlugin::name() const
 
 QString SatellitesPlugin::nameId() const
 {
-    return "satellites";
+    return QStringLiteral("satellites");
 }
 
 QString SatellitesPlugin::guiString() const
@@ -99,7 +99,7 @@ QString SatellitesPlugin::guiString() const
 
 QString SatellitesPlugin::version() const
 {
-    return "2.0";
+    return QStringLiteral("2.0");
 }
 
 QString SatellitesPlugin::description() const
@@ -109,15 +109,15 @@ QString SatellitesPlugin::description() const
 
 QString SatellitesPlugin::copyrightYears() const
 {
-    return "2012";
+    return QStringLiteral("2012");
 }
 
 QVector<PluginAuthor> SatellitesPlugin::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor( "Guillaume Martres", "smarter@ubuntu.com" )
-            << PluginAuthor( "Rene Kuettner", "rene@bitkanal.net" )
-            << PluginAuthor( "Gerhard Holtkamp", "" );
+            << PluginAuthor(QStringLiteral("Guillaume Martres"), QStringLiteral("smarter@ubuntu.com"))
+            << PluginAuthor(QStringLiteral("Rene Kuettner"), QStringLiteral("rene@bitkanal.net"))
+            << PluginAuthor(QStringLiteral("Gerhard Holtkamp"), QString());
 }
 
 QString SatellitesPlugin::aboutDataText() const
@@ -134,7 +134,7 @@ QString SatellitesPlugin::aboutDataText() const
 
 QIcon SatellitesPlugin::icon() const
 {
-    return QIcon( ":/data/bitmaps/satellite.png" );
+    return QIcon(QStringLiteral(":/data/bitmaps/satellite.png"));
 }
 
 RenderPlugin::RenderType SatellitesPlugin::renderType() const

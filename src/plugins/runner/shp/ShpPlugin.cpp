@@ -25,12 +25,12 @@ QString ShpPlugin::name() const
 
 QString ShpPlugin::nameId() const
 {
-    return "Shp";
+    return QStringLiteral("Shp");
 }
 
 QString ShpPlugin::version() const
 {
-    return "1.0";
+    return QStringLiteral("1.0");
 }
 
 QString ShpPlugin::description() const
@@ -40,13 +40,13 @@ QString ShpPlugin::description() const
 
 QString ShpPlugin::copyrightYears() const
 {
-    return "2011";
+    return QStringLiteral("2011");
 }
 
 QVector<PluginAuthor> ShpPlugin::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor( "Thibaut Gridel", "tgridel@free.fr" );
+            << PluginAuthor(QStringLiteral("Thibaut Gridel"), QStringLiteral("tgridel@free.fr"));
 }
 
 QString ShpPlugin::fileFormatDescription() const
@@ -56,7 +56,7 @@ QString ShpPlugin::fileFormatDescription() const
 
 QStringList ShpPlugin::fileExtensions() const
 {
-    return QStringList() << "shp";
+    return QStringList(QStringLiteral("shp"));
 }
 
 ParsingRunner* ShpPlugin::newRunner() const

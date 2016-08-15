@@ -42,17 +42,17 @@ AtmospherePlugin::AtmospherePlugin( const MarbleModel *marbleModel ) :
 
 QStringList AtmospherePlugin::backendTypes() const
 {
-    return QStringList( "atmosphere" );
+    return QStringList(QStringLiteral("atmosphere"));
 }
 
 QString AtmospherePlugin::renderPolicy() const
 {
-    return QString( "SPECIFIED_ALWAYS" );
+    return QStringLiteral("SPECIFIED_ALWAYS");
 }
 
 QStringList AtmospherePlugin::renderPosition() const
 {
-    return QStringList() << "SURFACE";
+    return QStringList(QStringLiteral("SURFACE"));
 }
 
 RenderPlugin::RenderType AtmospherePlugin::renderType() const
@@ -72,12 +72,12 @@ QString AtmospherePlugin::guiString() const
 
 QString AtmospherePlugin::nameId() const
 {
-    return "atmosphere";
+    return QStringLiteral("atmosphere");
 }
 
 QString AtmospherePlugin::version() const
 {
-    return "1.0";
+    return QStringLiteral("1.0");
 }
 
 QString AtmospherePlugin::description() const
@@ -87,23 +87,23 @@ QString AtmospherePlugin::description() const
 
 QIcon AtmospherePlugin::icon() const
 {
-    return QIcon(":/icons/atmosphere.png");
+    return QIcon(QStringLiteral(":/icons/atmosphere.png"));
 }
 
 QString AtmospherePlugin::copyrightYears() const
 {
-    return "2006-2012";
+    return QStringLiteral("2006-2012");
 }
 
 QVector<PluginAuthor> AtmospherePlugin::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor( "Torsten Rahn", "tackat@kde.org" )
-            << PluginAuthor( "Inge Wallin", "ingwa@kde.org" )
-            << PluginAuthor( "Jens-Michael Hoffmann", "jmho@c-xx.com" )
-            << PluginAuthor( "Patrick Spendrin", "ps_ml@gmx.de" )
-            << PluginAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de" )
-            << PluginAuthor( "Mohammed Nafees", "nafees.technocool@gmail.com" );
+            << PluginAuthor(QStringLiteral("Torsten Rahn"), QStringLiteral("tackat@kde.org"))
+            << PluginAuthor(QStringLiteral("Inge Wallin"), QStringLiteral("ingwa@kde.org"))
+            << PluginAuthor(QStringLiteral("Jens-Michael Hoffmann"), QStringLiteral("jmho@c-xx.com"))
+            << PluginAuthor(QStringLiteral("Patrick Spendrin"), QStringLiteral("ps_ml@gmx.de"))
+            << PluginAuthor(QStringLiteral("Bernhard Beschow"), QStringLiteral("bbeschow@cs.tu-berlin.de"))
+            << PluginAuthor(QStringLiteral("Mohammed Nafees"), QStringLiteral("nafees.technocool@gmail.com"));
 }
 
 qreal AtmospherePlugin::zValue() const

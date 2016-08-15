@@ -54,7 +54,7 @@ CompassFloatItem::~CompassFloatItem ()
 
 QStringList CompassFloatItem::backendTypes() const
 {
-    return QStringList( "compass" );
+    return QStringList(QStringLiteral("compass"));
 }
 
 QString CompassFloatItem::name() const
@@ -69,12 +69,12 @@ QString CompassFloatItem::guiString() const
 
 QString CompassFloatItem::nameId() const
 {
-    return QString( "compass" );
+    return QStringLiteral("compass");
 }
 
 QString CompassFloatItem::version() const
 {
-    return "1.0";
+    return QStringLiteral("1.0");
 }
 
 QString CompassFloatItem::description() const
@@ -84,19 +84,19 @@ QString CompassFloatItem::description() const
 
 QString CompassFloatItem::copyrightYears() const
 {
-    return "2009, 2010";
+    return QStringLiteral("2009, 2010");
 }
 
 QVector<PluginAuthor> CompassFloatItem::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "nienhueser@kde.org" )
-            << PluginAuthor( "Torsten Rahn", "tackat@kde.org" );
+            << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"))
+            << PluginAuthor(QStringLiteral("Torsten Rahn"), QStringLiteral("tackat@kde.org"));
 }
 
 QIcon CompassFloatItem::icon() const
 {
-    return QIcon(":/icons/compass.png");
+    return QIcon(QStringLiteral(":/icons/compass.png"));
 }
 
 void CompassFloatItem::initialize()

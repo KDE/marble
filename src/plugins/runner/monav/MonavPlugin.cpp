@@ -221,7 +221,7 @@ MonavPlugin::MonavPlugin( QObject *parent ) :
     RoutingRunnerPlugin( parent ),
     d( new MonavPluginPrivate )
 {
-    setSupportedCelestialBodies( QStringList() << "earth" );
+    setSupportedCelestialBodies(QStringList(QStringLiteral("earth")));
     setCanWorkOffline( true );
 
     if ( d->isDaemonInstalled() ) {
@@ -253,12 +253,12 @@ QString MonavPlugin::guiString() const
 
 QString MonavPlugin::nameId() const
 {
-    return "monav";
+    return QStringLiteral("monav");
 }
 
 QString MonavPlugin::version() const
 {
-    return "1.0";
+    return QStringLiteral("1.0");
 }
 
 QString MonavPlugin::description() const
@@ -268,13 +268,13 @@ QString MonavPlugin::description() const
 
 QString MonavPlugin::copyrightYears() const
 {
-    return "2010";
+    return QStringLiteral("2010");
 }
 
 QVector<PluginAuthor> MonavPlugin::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "nienhueser@kde.org" );
+            << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
 }
 
 RoutingRunner *MonavPlugin::newRunner() const

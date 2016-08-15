@@ -79,7 +79,7 @@ ProgressFloatItem::~ProgressFloatItem ()
 
 QStringList ProgressFloatItem::backendTypes() const
 {
-    return QStringList( "progress" );
+    return QStringList(QStringLiteral("progress"));
 }
 
 QString ProgressFloatItem::name() const
@@ -94,12 +94,12 @@ QString ProgressFloatItem::guiString() const
 
 QString ProgressFloatItem::nameId() const
 {
-    return QString( "progress" );
+    return QStringLiteral("progress");
 }
 
 QString ProgressFloatItem::version() const
 {
-    return "1.0";
+    return QStringLiteral("1.0");
 }
 
 QString ProgressFloatItem::description() const
@@ -109,14 +109,14 @@ QString ProgressFloatItem::description() const
 
 QString ProgressFloatItem::copyrightYears() const
 {
-    return "2010, 2011";
+    return QStringLiteral("2010, 2011");
 }
 
 QVector<PluginAuthor> ProgressFloatItem::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "nienhueser@kde.org" )
-            << PluginAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de" );
+            << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"))
+            << PluginAuthor(QStringLiteral("Bernhard Beschow"), QStringLiteral("bbeschow@cs.tu-berlin.de"));
 }
 
 QIcon ProgressFloatItem::icon() const

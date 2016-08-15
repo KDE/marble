@@ -80,12 +80,12 @@ QString PhotoPlugin::guiString() const
 
 QString PhotoPlugin::nameId() const
 {
-    return "photo";
+    return QStringLiteral("photo");
 }
 
 QString PhotoPlugin::version() const
 {
-    return "1.0";
+    return QStringLiteral("1.0");
 }
 
 QString PhotoPlugin::description() const
@@ -95,19 +95,19 @@ QString PhotoPlugin::description() const
 
 QString PhotoPlugin::copyrightYears() const
 {
-    return "2009, 2012";
+    return QStringLiteral("2009, 2012");
 }
 
 QVector<PluginAuthor> PhotoPlugin::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor( "Bastian Holst", "bastianholst@gmx.de" )
-            << PluginAuthor( "Mohammed Nafees", "nafees.technocool@gmail.com" );
+            << PluginAuthor(QStringLiteral("Bastian Holst"), QStringLiteral("bastianholst@gmx.de"))
+            << PluginAuthor(QStringLiteral("Mohammed Nafees"), QStringLiteral("nafees.technocool@gmail.com"));
 }
 
 QIcon PhotoPlugin::icon() const
 {
-    return QIcon(":/icons/photo.png");
+    return QIcon(QStringLiteral(":/icons/photo.png"));
 }
 
 QDialog *PhotoPlugin::configDialog()

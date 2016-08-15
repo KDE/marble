@@ -31,12 +31,12 @@ QString LocalDatabasePlugin::guiString() const
 
 QString LocalDatabasePlugin::nameId() const
 {
-    return "localdatabase";
+    return QStringLiteral("localdatabase");
 }
 
 QString LocalDatabasePlugin::version() const
 {
-    return "1.0";
+    return QStringLiteral("1.0");
 }
 
 QString LocalDatabasePlugin::description() const
@@ -46,13 +46,13 @@ QString LocalDatabasePlugin::description() const
 
 QString LocalDatabasePlugin::copyrightYears() const
 {
-    return "2010";
+    return QStringLiteral("2010");
 }
 
 QVector<PluginAuthor> LocalDatabasePlugin::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "nienhueser@kde.org" );
+            << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
 }
 
 SearchRunner* LocalDatabasePlugin::newRunner() const

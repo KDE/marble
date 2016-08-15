@@ -89,7 +89,7 @@ ElevationProfileFloatItem::~ElevationProfileFloatItem()
 
 QStringList ElevationProfileFloatItem::backendTypes() const
 {
-    return QStringList( "elevationprofile" );
+    return QStringList(QStringLiteral("elevationprofile"));
 }
 
 qreal ElevationProfileFloatItem::zValue() const
@@ -109,12 +109,12 @@ QString ElevationProfileFloatItem::guiString() const
 
 QString ElevationProfileFloatItem::nameId() const
 {
-    return QString( "elevationprofile" );
+    return QStringLiteral("elevationprofile");
 }
 
 QString ElevationProfileFloatItem::version() const
 {
-    return "1.2"; // TODO: increase to 1.3 ?
+    return QStringLiteral("1.2"); // TODO: increase to 1.3 ?
 }
 
 QString ElevationProfileFloatItem::description() const
@@ -124,20 +124,20 @@ QString ElevationProfileFloatItem::description() const
 
 QString ElevationProfileFloatItem::copyrightYears() const
 {
-    return "2011, 2012, 2013";
+    return QStringLiteral("2011, 2012, 2013");
 }
 
 QVector<PluginAuthor> ElevationProfileFloatItem::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor( QString::fromUtf8 ( "Florian Eßer" ), "f.esser@rwth-aachen.de" )
-            << PluginAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de" )
-            << PluginAuthor( "Roman Karlstetter", "roman.karlstetter@googlemail.com" );
+            << PluginAuthor(QStringLiteral("Florian Eßer"),QStringLiteral("f.esser@rwth-aachen.de"))
+            << PluginAuthor(QStringLiteral("Bernhard Beschow"), QStringLiteral("bbeschow@cs.tu-berlin.de"))
+            << PluginAuthor(QStringLiteral("Roman Karlstetter"), QStringLiteral("roman.karlstetter@googlemail.com"));
 }
 
 QIcon ElevationProfileFloatItem::icon () const
 {
-    return QIcon(":/icons/elevationprofile.png");
+    return QIcon(QStringLiteral(":/icons/elevationprofile.png"));
 }
 
 void ElevationProfileFloatItem::initialize ()
