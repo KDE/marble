@@ -189,7 +189,7 @@ namespace Marble
         qRegisterMetaType<Placemark*>("Placemark*");
 
         foreach (AbstractFloatItem *item, d->m_map.floatItems()) {
-            if (item->nameId() == "license") {
+            if (item->nameId() == QLatin1String("license")) {
                 item->setPosition(QPointF(5.0, -10.0));
             } else {
                 item->hide();
@@ -393,7 +393,7 @@ namespace Marble
     {
         QList<RenderPlugin *> plugins = d->m_map.renderPlugins();
         foreach (const RenderPlugin * plugin, plugins) {
-            if (plugin->nameId() == "positionMarker") {
+            if (plugin->nameId() == QLatin1String("positionMarker")) {
                 return plugin->visible();
             }
         }
@@ -811,7 +811,7 @@ namespace Marble
 
         QList<RenderPlugin *> plugins = d->m_map.renderPlugins();
         foreach ( RenderPlugin * plugin, plugins ) {
-            if ( plugin->nameId() == "positionMarker" ) {
+            if (plugin->nameId() == QLatin1String("positionMarker")) {
                 plugin->setVisible(showPositionMarker);
                 break;
             }

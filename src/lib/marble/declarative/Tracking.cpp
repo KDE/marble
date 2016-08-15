@@ -112,7 +112,7 @@ void Tracking::updatePositionMarker()
 {
     if ( m_marbleQuickItem && m_positionMarker && m_positionMarkerType == Circle ) {
         Coordinate* position = 0;
-        bool visible = m_marbleQuickItem->model()->planetId() == "earth";
+        bool visible = (m_marbleQuickItem->model()->planetId() == QLatin1String("earth"));
         if ( m_positionSource && m_positionSource->hasPosition() ) {
             position = m_positionSource->position();
         } else if ( hasLastKnownPosition() ) {
@@ -163,7 +163,7 @@ void Tracking::setShowPositionMarkerPlugin( bool visible )
         QList<RenderPlugin*> const renderPlugins = m_marbleQuickItem->map()->renderPlugins();
         foreach( RenderPlugin* renderPlugin, renderPlugins ) {
             Q_ASSERT( renderPlugin );
-            if ( renderPlugin->nameId() == "positionMarker" ) {
+            if (renderPlugin->nameId() == QLatin1String("positionMarker")) {
                 renderPlugin->setEnabled( true );
                 renderPlugin->setVisible( visible );
             }
