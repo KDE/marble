@@ -64,7 +64,7 @@ GeoDataDocument *ShpCoastlineProcessor::cutToTiles(unsigned int zoomLevel, unsig
 
             if(tileBoundary.intersects(marblePolygon->latLonAltBox())) {
                 BaseClipper clipper;
-                clipper.initClipRect(tileBoundary);
+                clipper.initClipRect(tileBoundary, 20);
 
                 QVector<QPolygonF> clippedPolygons;
 

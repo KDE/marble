@@ -165,7 +165,7 @@ qreal BaseClipper::tileY2lat( unsigned int y, unsigned int maxTileY )
 
 
 
-void BaseClipper::initClipRect (const GeoDataLatLonBox &clippingBox)
+void BaseClipper::initClipRect (const GeoDataLatLonBox &clippingBox, int pointsToAddAtEdges)
 {
     m_left   = clippingBox.west();
     m_right  = clippingBox.east();
@@ -181,6 +181,38 @@ void BaseClipper::initClipRect (const GeoDataLatLonBox &clippingBox)
     m_topRight = QPointF(m_right, m_top);
     m_bottomRight = QPointF(m_right, m_bottom);
     m_bottomLeft = QPointF(m_left, m_bottom);
+
+    qreal x, y;
+    qreal deltaX = fabs(m_right - m_left) / (pointsToAddAtEdges + 1);
+    qreal deltaY = fabs(m_bottom - m_top) / (pointsToAddAtEdges + 1);
+
+    m_topEdge.clear();
+    x = m_left;
+    for(int i = 0; i < pointsToAddAtEdges; ++i) {
+        x += deltaX;
+        m_topEdge << QPointF(x, m_top);
+    }
+
+    m_rightEdge.clear();
+    y = m_top;
+    for(int i = 0; i < pointsToAddAtEdges; ++i) {
+        y += deltaY;
+        m_rightEdge << QPointF(m_right, y);
+    }
+
+    m_bottomEdge.clear();
+    x = m_right;
+    for(int i = 0; i < pointsToAddAtEdges; ++i) {
+        x -= deltaX;
+        m_bottomEdge << QPointF(x, m_bottom);
+    }
+
+    m_leftEdge.clear();
+    y = m_bottom;
+    for(int i = 0; i < pointsToAddAtEdges; ++i) {
+        y -= deltaY;
+        m_leftEdge << QPointF(m_left, y);
+    }
 
     m_viewport.clear();
     m_viewport << m_topLeft << m_topRight << m_bottomRight << m_bottomLeft;
@@ -321,7 +353,7 @@ void BaseClipper::clipPolyObject ( const QPolygonF & polygon,
 
     bool processingLastNode = false;
 
-    qDebug() << "\nNew polygon, size:" << polygon.size();
+    // qDebug() << "\nNew polygon, size:" << polygon.size();
 
     while ( itPoint != itEndPoint ) {
         m_currentPoint = (*itPoint);
@@ -359,7 +391,7 @@ void BaseClipper::clipPolyObject ( const QPolygonF & polygon,
 
                     if(!clippedPolyObject.isEmpty()) {
 
-                        if(isCornerPoint(clippedPolyObject.last())) {
+                        if(isCornerPoint(clippedPolyObject.last()) && clippedPolyObject.size() > 1) {
                             clippedPolyObject.removeLast();
                         }
 
@@ -389,7 +421,7 @@ void BaseClipper::clipPolyObject ( const QPolygonF & polygon,
                 clipMultiple( clippedPolyObject, clippedPolyObjects, isClosed );
 
                 if(isClosed && m_clippedTwice) {
-                    qDebug() << "Clipped twice";
+                    // qDebug() << "Clipped twice";
                     QPointF firstAddedPoint = clippedPolyObject.at(clippedPolyObject.size()-2);
                     QPointF secondAddedPoint = clippedPolyObject.last();
 
@@ -453,27 +485,39 @@ void BaseClipper::clipPolyObject ( const QPolygonF & polygon,
 
         if(!intersections.isEmpty()) {
 
-            qDebug() << "intersections count:" << intersections.size();
-            qDebug() << "intersectionsTop count:" << intersectionsTop.size();
-            qDebug() << "intersectionsRight count:" << intersectionsRight.size();
-            qDebug() << "intersectionsBottom count:" << intersectionsBottom.size();
-            qDebug() << "intersectionsLeft count:" << intersectionsLeft.size();
+//            qDebug() << "intersections count:" << intersections.size();
+//            qDebug() << "intersectionsTop count:" << intersectionsTop.size();
+//            qDebug() << "intersectionsRight count:" << intersectionsRight.size();
+//            qDebug() << "intersectionsBottom count:" << intersectionsBottom.size();
+//            qDebug() << "intersectionsLeft count:" << intersectionsLeft.size();
 
             clippedPolyObjects.clear();
             clippedPolyObject = QPolygonF();
 
+            for(const auto& point : m_topEdge) {
+                intersectionsTop << QSharedPointer<LinkedPoint>(new LinkedPoint(point));
+            }
             std::sort(intersectionsTop.begin(), intersectionsTop.end(), [](QSharedPointer<LinkedPoint>& A, QSharedPointer<LinkedPoint>& B) {
                 return A->point().x() < B->point().x();
             });
 
+            for(const auto& point : m_rightEdge) {
+                intersectionsRight << QSharedPointer<LinkedPoint>(new LinkedPoint(point));
+            }
             std::sort(intersectionsRight.begin(), intersectionsRight.end(), [](QSharedPointer<LinkedPoint>& A, QSharedPointer<LinkedPoint>& B) {
                 return A->point().y() < B->point().y();
             });
 
+            for(const auto& point : m_bottomEdge) {
+                intersectionsBottom << QSharedPointer<LinkedPoint>(new LinkedPoint(point));
+            }
             std::sort(intersectionsBottom.begin(), intersectionsBottom.end(), [](QSharedPointer<LinkedPoint>& A, QSharedPointer<LinkedPoint>& B) {
                 return B->point().x() < A->point().x();
             });
 
+            for(const auto& point : m_leftEdge) {
+                intersectionsLeft << QSharedPointer<LinkedPoint>(new LinkedPoint(point));
+            }
             std::sort(intersectionsLeft.begin(), intersectionsLeft.end(), [](QSharedPointer<LinkedPoint>& A, QSharedPointer<LinkedPoint>& B) {
                 return B->point().y() < A->point().y();
             });
@@ -533,13 +577,17 @@ void BaseClipper::clipPolyObject ( const QPolygonF & polygon,
             }
         } else {
             clippedPolyObjects.clear();
-            clippedPolyObject = QPolygonF();
             clippedPolyObject = polygon.intersected(m_viewport);
 
             if(clippedPolyObject == polygon) {
                 clippedPolyObjects << polygon;
             } else if (clippedPolyObject == m_viewport.intersected(m_viewport)) {
-                clippedPolyObjects << m_viewport;
+                clippedPolyObject = QPolygonF();
+                clippedPolyObject << m_topLeft << m_topEdge
+                                  << m_topRight << m_rightEdge
+                                  << m_bottomRight << m_bottomEdge
+                                  << m_bottomLeft << m_leftEdge;
+                clippedPolyObjects << clippedPolyObject;
             }
         }
     } else if(!clippedPolyObject.isEmpty()) {

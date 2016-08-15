@@ -36,7 +36,7 @@ public:
     static GeoDataLinearRing qPolygon2linearRing(const QPolygonF& polygon);
 
 
-    void initClipRect(const GeoDataLatLonBox& clippingBox);
+    void initClipRect(const GeoDataLatLonBox& clippingBox, int pointsToAddAtEdges);
 
     void clipPolyObject ( const QPolygonF & sourcePolygon,
                           QVector<QPolygonF> & clippedPolyObjects,
@@ -82,6 +82,11 @@ private:
     QPointF m_topRight;
     QPointF m_bottomRight;
     QPointF m_bottomLeft;
+
+    QPolygonF m_topEdge;
+    QPolygonF m_bottomEdge;
+    QPolygonF m_leftEdge;
+    QPolygonF m_rightEdge;
 
     QPolygonF m_viewport;
 

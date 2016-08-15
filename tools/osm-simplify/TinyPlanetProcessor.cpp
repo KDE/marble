@@ -46,7 +46,7 @@ GeoDataDocument *TinyPlanetProcessor::cutToTiles(unsigned int zoomLevel, unsigne
     tileBoundary.setBoundaries(north, south, east, west);
 
     BaseClipper clipper;
-    clipper.initClipRect(tileBoundary);
+    clipper.initClipRect(tileBoundary, 20);
 
     foreach (GeoDataPlacemark* placemark, placemarks()) {
 
