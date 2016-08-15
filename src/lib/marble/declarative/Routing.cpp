@@ -156,16 +156,16 @@ void Routing::updateWaypointItems()
                     item->setProperty("xPos", QVariant::fromValue(x));
                     item->setProperty("yPos", QVariant::fromValue(y));
                     if (iter.key() == 0 && waypointCount() == 1) {
-                        item->setProperty("type", QVariant::fromValue(QString("departure")));
+                        item->setProperty("type", QVariant(QStringLiteral("departure")));
                     }
                     else if (iter.key() == d->m_waypointItems.keys().size()-1) {
-                            item->setProperty("type", QVariant::fromValue(QString("destination")));
+                        item->setProperty("type", QVariant(QStringLiteral("destination")));
                     }
                     else if (iter.key() > 0) {
-                        item->setProperty("type", QVariant::fromValue(QString("waypoint")));
+                        item->setProperty("type", QVariant(QStringLiteral("waypoint")));
                     }
                     else {
-                        item->setProperty("type", QVariant::fromValue(QString("departure")));
+                        item->setProperty("type", QVariant(QStringLiteral("departure")));
                     }
                 }
             }
@@ -213,7 +213,7 @@ void Routing::updateSearchResultPlacemarks()
         if ( item ) {
             item->setParentItem( this );
             item->setProperty("index", i);
-            item->setProperty("type", QVariant::fromValue(QString("searchResult")));
+            item->setProperty("type", QVariant(QStringLiteral("searchResult")));
             item->setProperty("placemark", QVariant::fromValue(d->m_searchResultPlacemarks[i]));
             d->m_searchResultItems[i] = item;
         } else {
@@ -276,9 +276,9 @@ void Routing::setMarbleMap( MarbleMap* marbleMap )
         QList<Marble::RoutingProfile> profiles = routingManager->profilesModel()->profiles();
         if ( profiles.size() == 4 ) {
             /** @todo FIXME: Restrictive assumptions on available plugins and certain profile loading implementation */
-            d->m_profiles["Motorcar"] = profiles.at( 0 );
-            d->m_profiles["Bicycle"] = profiles.at( 2 );
-            d->m_profiles["Pedestrian"] = profiles.at( 3 );
+            d->m_profiles[QStringLiteral("Motorcar")] = profiles.at( 0 );
+            d->m_profiles[QStringLiteral("Bicycle")] = profiles.at( 2 );
+            d->m_profiles[QStringLiteral("Pedestrian")] = profiles.at( 3 );
         } else {
             qDebug() << "Unexpected size of default routing profiles: " << profiles.size();
         }

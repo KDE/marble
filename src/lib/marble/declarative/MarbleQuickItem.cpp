@@ -906,27 +906,27 @@ namespace Marble
     void MarbleQuickItem::loadSettings()
     {
         QSettings settings;
-        settings.beginGroup("MarbleQuickItem");
-        double lon = settings.value("centerLon", QVariant(0.0)).toDouble();
-        double lat = settings.value("centerLat", QVariant(0.0)).toDouble();
+        settings.beginGroup(QStringLiteral("MarbleQuickItem"));
+        double lon = settings.value(QStringLiteral("centerLon"), QVariant(0.0)).toDouble();
+        double lat = settings.value(QStringLiteral("centerLat"), QVariant(0.0)).toDouble();
         centerOn(lon, lat);
-        int const zoom = settings.value("zoom", QVariant(0)).toInt();
+        int const zoom = settings.value(QStringLiteral("zoom"), QVariant(0)).toInt();
         if (zoom > 0) {
             setZoom(zoom);
         }
         settings.endGroup();
         d->m_model.routingManager()->readSettings();
-        d->m_model.bookmarkManager()->loadFile( "bookmarks/bookmarks.kml" );
+        d->m_model.bookmarkManager()->loadFile(QStringLiteral("bookmarks/bookmarks.kml"));
         d->m_model.bookmarkManager()->setShowBookmarks(true);
     }
 
     void MarbleQuickItem::writeSettings()
     {
         QSettings settings;
-        settings.beginGroup("MarbleQuickItem");
-        settings.setValue("centerLon", QVariant(d->m_map.centerLongitude()));
-        settings.setValue("centerLat", QVariant(d->m_map.centerLatitude()));
-        settings.setValue("zoom", QVariant(zoom()));
+        settings.beginGroup(QStringLiteral("MarbleQuickItem"));
+        settings.setValue(QStringLiteral("centerLon"), QVariant(d->m_map.centerLongitude()));
+        settings.setValue(QStringLiteral("centerLat"), QVariant(d->m_map.centerLatitude()));
+        settings.setValue(QStringLiteral("zoom"), QVariant(zoom()));
         settings.endGroup();
         d->m_model.routingManager()->writeSettings();
     }

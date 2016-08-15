@@ -167,26 +167,26 @@ QString Navigation::nextRoad() const
 QString Navigation::nextInstructionImage() const
 {
     switch ( d->nextRouteSegment().maneuver().direction() ) {
-    case Maneuver::Unknown: return "";
-    case Maneuver::Continue: return "qrc:/marble/turn-continue.svg";
-    case Maneuver::Merge: return "qrc:/marble/turn-merge.svg";
-    case Maneuver::Straight: return "qrc:/marble/turn-continue.svg";
-    case Maneuver::SlightRight: return "qrc:/marble/turn-slight-right.svg";
-    case Maneuver::Right: return "qrc:/marble/turn-right.svg";
-    case Maneuver::SharpRight: return "qrc:/marble/turn-sharp-right.svg";
-    case Maneuver::TurnAround: return "qrc:/marble/turn-around.svg";
-    case Maneuver::SharpLeft: return "qrc:/marble/turn-sharp-left.svg";
-    case Maneuver::Left: return "qrc:/marble/turn-left.svg";
-    case Maneuver::SlightLeft: return "qrc:/marble/turn-slight-left.svg";
-    case Maneuver::RoundaboutFirstExit: return "qrc:/marble/turn-roundabout-first.svg";
-    case Maneuver::RoundaboutSecondExit: return "qrc:/marble/turn-roundabout-second.svg";
-    case Maneuver::RoundaboutThirdExit: return "qrc:/marble/turn-roundabout-third.svg";
-    case Maneuver::RoundaboutExit: return "qrc:/marble/turn-roundabout-far.svg";
-    case Maneuver::ExitLeft: return "qrc:/marble/turn-exit-left.svg";
-    case Maneuver::ExitRight: return "qrc:/marble/turn-exit-right.svg";
+    case Maneuver::Continue:             return QStringLiteral("qrc:/marble/turn-continue.svg");
+    case Maneuver::Merge:                return QStringLiteral("qrc:/marble/turn-merge.svg");
+    case Maneuver::Straight:             return QStringLiteral("qrc:/marble/turn-continue.svg");
+    case Maneuver::SlightRight:          return QStringLiteral("qrc:/marble/turn-slight-right.svg");
+    case Maneuver::Right:                return QStringLiteral("qrc:/marble/turn-right.svg");
+    case Maneuver::SharpRight:           return QStringLiteral("qrc:/marble/turn-sharp-right.svg");
+    case Maneuver::TurnAround:           return QStringLiteral("qrc:/marble/turn-around.svg");
+    case Maneuver::SharpLeft:            return QStringLiteral("qrc:/marble/turn-sharp-left.svg");
+    case Maneuver::Left:                 return QStringLiteral("qrc:/marble/turn-left.svg");
+    case Maneuver::SlightLeft:           return QStringLiteral("qrc:/marble/turn-slight-left.svg");
+    case Maneuver::RoundaboutFirstExit:  return QStringLiteral("qrc:/marble/turn-roundabout-first.svg");
+    case Maneuver::RoundaboutSecondExit: return QStringLiteral("qrc:/marble/turn-roundabout-second.svg");
+    case Maneuver::RoundaboutThirdExit:  return QStringLiteral("qrc:/marble/turn-roundabout-third.svg");
+    case Maneuver::RoundaboutExit:       return QStringLiteral("qrc:/marble/turn-roundabout-far.svg");
+    case Maneuver::ExitLeft:             return QStringLiteral("qrc:/marble/turn-exit-left.svg");
+    case Maneuver::ExitRight:            return QStringLiteral("qrc:/marble/turn-exit-right.svg");
+    case Maneuver::Unknown:
+    default:
+        return QString();
     }
-
-    return "";
 }
 
 qreal Navigation::nextInstructionDistance() const

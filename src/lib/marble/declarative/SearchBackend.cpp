@@ -51,7 +51,7 @@ void SearchBackend::setCompletionPrefix(const QString &prefix)
             return;
         }
 
-        m_completionModel->removePlacemarks(QString("Completion model"), 0, m_completionModel->rowCount());
+        m_completionModel->removePlacemarks(QStringLiteral("Completion model"), 0, m_completionModel->rowCount());
         m_completionContainer->clear();
         QString const lastPrefix = m_completer->completionPrefix();
         m_completer->setCompletionPrefix(prefix);

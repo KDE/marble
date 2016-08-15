@@ -60,7 +60,7 @@ public:
 int DeclarativeDataPluginPrivate::m_global_counter = 0;
 
 DeclarativeDataPluginPrivate::DeclarativeDataPluginPrivate( DeclarativeDataPlugin* parent ) :
-    q( parent ), m_planet( "earth"), m_isInitialized( false ), m_delegate( 0 ), m_counter( m_global_counter )
+    q(parent), m_planet(QStringLiteral("earth")), m_isInitialized(false), m_delegate(0), m_counter(m_global_counter)
 {
     ++m_global_counter;
 }
@@ -202,7 +202,7 @@ void DeclarativeDataPlugin::setPlanet( const QString &planet )
 
 QString DeclarativeDataPlugin::name() const
 {
-    return d->m_name.isEmpty() ? "Anonymous DeclarativeDataPlugin" : d->m_name;
+    return d->m_name.isEmpty() ? QStringLiteral("Anonymous DeclarativeDataPlugin") : d->m_name;
 }
 
 QString DeclarativeDataPlugin::guiString() const
@@ -212,12 +212,12 @@ QString DeclarativeDataPlugin::guiString() const
 
 QString DeclarativeDataPlugin::nameId() const
 {
-    return d->m_nameId.isEmpty() ? QString( "DeclarativeDataPlugin_%1" ).arg( d->m_counter ) : d->m_nameId;
+    return d->m_nameId.isEmpty() ? QStringLiteral("DeclarativeDataPlugin_%1").arg(d->m_counter) : d->m_nameId;
 }
 
 QString DeclarativeDataPlugin::version() const
 {
-    return d->m_version.isEmpty() ? "1.0" : d->m_version;
+    return d->m_version.isEmpty() ? QStringLiteral("1.0") : d->m_version;
 }
 
 QString DeclarativeDataPlugin::description() const
@@ -351,7 +351,7 @@ bool DeclarativeDataPlugin::isInitialized() const
 
 RenderState DeclarativeDataPlugin::renderState() const
 {
-    return RenderState( "Declarative Data" );
+    return RenderState(QStringLiteral("Declarative Data"));
 }
 
 void DeclarativeDataPlugin::setDeclarativeModel( const QVariant &model )

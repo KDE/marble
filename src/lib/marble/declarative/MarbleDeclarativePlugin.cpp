@@ -64,20 +64,27 @@ void MarbleDeclarativePlugin::registerTypes( const char *uri )
     qRegisterMetaType<Marble::MarblePlacemarkModel*>("MarblePlacemarkModel*");
     qmlRegisterType<Marble::MarbleQuickItem>(uri, 0, 20, "MarbleItem");
 
-    qmlRegisterUncreatableType<Marble::MarblePlacemarkModel>(uri, 1, 0, "MarblePlacemarkModel", "MarblePlacemarkModel is not instantiable");
-    qmlRegisterUncreatableType<Marble::RoutingModel>(uri, 0, 20, "RoutingModel", "RoutingModel is not instantiable");
-    qmlRegisterUncreatableType<Marble::BookmarksModel>( uri, 0, 20, "BookmarksModel", "Do not create" );
-    qmlRegisterUncreatableType<Marble::AbstractFloatItem>( uri, 0, 20, "FloatItem", "Do not create" );
-    qmlRegisterUncreatableType<Marble::RenderPlugin>( uri, 0, 20, "RenderPlugin", "Do not create" );
-    qmlRegisterUncreatableType<Marble::MarbleMap>( uri, 0, 20, "MarbleMap", "Do not create" );
+    qmlRegisterUncreatableType<Marble::MarblePlacemarkModel>(uri, 1, 0, "MarblePlacemarkModel",
+                                                             QStringLiteral("MarblePlacemarkModel is not instantiable"));
+    qmlRegisterUncreatableType<Marble::RoutingModel>(uri, 0, 20, "RoutingModel",
+                                                     QStringLiteral("RoutingModel is not instantiable"));
+    qmlRegisterUncreatableType<Marble::BookmarksModel>(uri, 0, 20, "BookmarksModel",
+                                                       QStringLiteral("Do not create"));
+    qmlRegisterUncreatableType<Marble::AbstractFloatItem>(uri, 0, 20, "FloatItem",
+                                                          QStringLiteral("Do not create"));
+    qmlRegisterUncreatableType<Marble::RenderPlugin>(uri, 0, 20, "RenderPlugin",
+                                                     QStringLiteral("Do not create"));
+    qmlRegisterUncreatableType<Marble::MarbleMap>(uri, 0, 20, "MarbleMap",
+                                                  QStringLiteral("Do not create"));
 }
 
 void MarbleDeclarativePlugin::initializeEngine( QQmlEngine *engine, const char *)
 {
-    engine->addImageProvider( "maptheme", new MapThemeImageProvider );
+    engine->addImageProvider(QStringLiteral("maptheme"), new MapThemeImageProvider );
     // Register the global Marble object. Can be used in .qml files for requests like Marble.resolvePath("some/icon.png")
-    if ( !engine->rootContext()->contextProperty( "Marble").isValid() ) {
-        engine->rootContext()->setContextProperty( "Marble", new MarbleDeclarativeObject( this ) );
+    const QString marbleObjectName = QStringLiteral("Marble");
+    if (!engine->rootContext()->contextProperty(marbleObjectName).isValid()) {
+        engine->rootContext()->setContextProperty(marbleObjectName, new MarbleDeclarativeObject(this));
     }
 }
 

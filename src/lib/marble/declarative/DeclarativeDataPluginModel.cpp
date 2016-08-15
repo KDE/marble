@@ -17,7 +17,7 @@
 using namespace Marble;
 
 DeclarativeDataPluginModel::DeclarativeDataPluginModel( const MarbleModel *marbleModel, QObject *parent )
-    : AbstractDataPluginModel( "QMLDataPluginModel", marbleModel, parent )
+    : AbstractDataPluginModel(QStringLiteral("QMLDataPluginModel"), marbleModel, parent)
 {
     // nothing to do
 }
