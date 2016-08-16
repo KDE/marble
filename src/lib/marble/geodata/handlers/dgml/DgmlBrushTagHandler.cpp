@@ -40,7 +40,7 @@ DGML_DEFINE_TAG_HANDLER(Brush)
 GeoNode* DgmlBrushTagHandler::parse(GeoParser& parser) const
 {
     // Check whether the tag is valid
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Brush));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(dgmlTag_Brush)));
 
     QString color = parser.attribute(dgmlAttr_color).trimmed();
     QString colorMap = parser.attribute(dgmlAttr_colorMap).trimmed();

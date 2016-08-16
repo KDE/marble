@@ -29,7 +29,7 @@ GPX_DEFINE_TAG_HANDLER(cmt)
 
 GeoNode* GPXcmtTagHandler::parse(GeoParser& parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(gpxTag_cmt));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(gpxTag_cmt)));
 
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(gpxTag_wpt))

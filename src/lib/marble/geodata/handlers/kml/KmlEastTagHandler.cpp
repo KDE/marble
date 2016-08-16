@@ -24,7 +24,7 @@ KML_DEFINE_TAG_HANDLER( east )
 
 GeoNode* KmleastTagHandler::parse( GeoParser& parser ) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_east ) );
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_east)));
 
     GeoStackItem parentItem = parser.parentElement();
 

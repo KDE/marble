@@ -22,7 +22,7 @@ KML_DEFINE_TAG_HANDLER_GX22( flyToMode )
 
 GeoNode* KmlflyToModeTagHandler::parse( GeoParser& parser ) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_flyToMode ) );
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_flyToMode)));
 
     QString content = parser.readElementText().trimmed();
 

@@ -26,7 +26,7 @@ KML_DEFINE_TAG_HANDLER( Region )
 
 GeoNode* KmlRegionTagHandler::parse( GeoParser& parser ) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_Region ) );
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_Region)));
 
     GeoDataRegion region;
     KmlObjectTagHandler::parseIdentifiers( parser, &region );

@@ -39,7 +39,7 @@ KML_DEFINE_TAG_HANDLER( Placemark )
 
 GeoNode* KmlPlacemarkTagHandler::parse( GeoParser& parser ) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_Placemark ) );
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_Placemark)));
 
     GeoDataPlacemark *placemark = new GeoDataPlacemark;
     KmlObjectTagHandler::parseIdentifiers( parser, placemark );

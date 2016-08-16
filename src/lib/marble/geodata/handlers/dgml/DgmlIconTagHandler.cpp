@@ -42,7 +42,7 @@ DGML_DEFINE_TAG_HANDLER(Icon)
 GeoNode* DgmlIconTagHandler::parse(GeoParser& parser) const
 {
     // Check whether the tag is valid
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Icon));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(dgmlTag_Icon)));
 
     QString pixmapRelativePath  = parser.attribute(dgmlAttr_pixmap).trimmed();
     QColor  color  = QColor( parser.attribute(dgmlAttr_color).trimmed() );

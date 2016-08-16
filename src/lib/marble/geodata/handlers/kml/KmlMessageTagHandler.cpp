@@ -22,7 +22,7 @@ KML_DEFINE_TAG_HANDLER( message )
 
 GeoNode* KmlmessageTagHandler::parse( GeoParser& parser ) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_message ) );
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_message)));
 
     GeoStackItem parentItem = parser.parentElement();
 

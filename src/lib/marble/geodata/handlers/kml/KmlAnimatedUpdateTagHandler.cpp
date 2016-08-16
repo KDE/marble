@@ -25,7 +25,7 @@ KML_DEFINE_TAG_HANDLER_GX22( AnimatedUpdate )
 
 GeoNode* KmlAnimatedUpdateTagHandler::parse( GeoParser& parser ) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_AnimatedUpdate ) );
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_AnimatedUpdate)));
 
     GeoStackItem parentItem = parser.parentElement();
 

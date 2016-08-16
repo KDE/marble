@@ -28,7 +28,7 @@ KML_DEFINE_TAG_HANDLER_GX22( MultiTrack )
 
 GeoNode* KmlMultiTrackTagHandler::parse( GeoParser& parser ) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_MultiTrack ) );
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_MultiTrack)));
 
     GeoStackItem parentItem = parser.parentElement();
 

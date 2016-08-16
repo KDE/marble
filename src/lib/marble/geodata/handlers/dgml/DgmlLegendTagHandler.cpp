@@ -37,7 +37,7 @@ DGML_DEFINE_TAG_HANDLER(Legend)
 
 GeoNode* DgmlLegendTagHandler::parse(GeoParser& parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Legend));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(dgmlTag_Legend)));
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();

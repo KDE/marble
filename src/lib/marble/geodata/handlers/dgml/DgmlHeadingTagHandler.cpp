@@ -35,7 +35,7 @@ DGML_DEFINE_TAG_HANDLER(Heading)
 GeoNode* DgmlHeadingTagHandler::parse(GeoParser& parser) const
 {
     // Check whether the tag is valid
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Heading));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(dgmlTag_Heading)));
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();

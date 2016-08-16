@@ -23,7 +23,7 @@ DGML_DEFINE_TAG_HANDLER(TileSize)
 GeoNode* DgmlTileSizeTagHandler::parse( GeoParser& parser ) const
 {
     // Check whether the tag is valid
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( dgmlTag_TileSize ));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(dgmlTag_TileSize)));
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();

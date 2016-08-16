@@ -37,7 +37,7 @@ KML_DEFINE_TAG_HANDLER( area )
 
 GeoNode* KmlareaTagHandler::parse( GeoParser& parser ) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_area ) );
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_area)));
 
     GeoStackItem parentItem = parser.parentElement();
     

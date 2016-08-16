@@ -27,7 +27,7 @@ KML_DEFINE_TAG_HANDLER( GroundOverlay )
 
 GeoNode* KmlGroundOverlayTagHandler::parse( GeoParser& parser ) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_GroundOverlay ) );
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_GroundOverlay)));
 
     GeoDataGroundOverlay *overlay = new GeoDataGroundOverlay;
     KmlObjectTagHandler::parseIdentifiers( parser, overlay );

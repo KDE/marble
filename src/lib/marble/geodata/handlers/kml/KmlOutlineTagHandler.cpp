@@ -35,7 +35,7 @@ KML_DEFINE_TAG_HANDLER( outline )
 
 GeoNode* KmloutlineTagHandler::parse( GeoParser& parser ) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_outline ) );
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_outline)));
 
     GeoStackItem parentItem = parser.parentElement();
     

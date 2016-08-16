@@ -26,7 +26,7 @@ KML_DEFINE_TAG_HANDLER( bgColor )
 
 GeoNode* KmlbgColorTagHandler::parse( GeoParser& parser ) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_bgColor ) );
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_bgColor)));
 
     GeoStackItem parentItem = parser.parentElement();
 

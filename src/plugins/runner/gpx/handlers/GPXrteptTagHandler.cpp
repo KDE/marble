@@ -37,7 +37,7 @@ GPX_DEFINE_TAG_HANDLER(rtept)
 
 GeoNode* GPXrteptTagHandler::parse(GeoParser& parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(gpxTag_rtept));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(gpxTag_rtept)));
 
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(gpxTag_rte))

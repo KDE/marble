@@ -28,7 +28,7 @@ GPX_DEFINE_TAG_HANDLER_10(urlname)
 // completes gpx 1.0 url element
 GeoNode* GPXurlnameTagHandler::parse(GeoParser& parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(gpxTag_urlname));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(gpxTag_urlname)));
 
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(gpxTag_wpt))

@@ -24,7 +24,7 @@ KML_DEFINE_TAG_HANDLER( Create )
 
 GeoNode* KmlCreateTagHandler::parse( GeoParser& parser ) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_Create ) );
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_Create)));
 
     GeoDataCreate *create = new GeoDataCreate;
     KmlObjectTagHandler::parseIdentifiers( parser, create );

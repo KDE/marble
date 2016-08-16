@@ -23,7 +23,7 @@ KML_DEFINE_TAG_HANDLER( Alias )
 
 GeoNode* KmlAliasTagHandler::parse( GeoParser& parser ) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_Alias ) );
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_Alias)));
 
     GeoDataAlias alias;
     GeoStackItem parentItem = parser.parentElement();

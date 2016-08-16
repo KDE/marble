@@ -38,7 +38,7 @@ DGML_DEFINE_TAG_HANDLER(StorageLayout)
 GeoNode* DgmlStorageLayoutTagHandler::parse(GeoParser& parser) const
 {
     // Check whether the tag is valid
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_StorageLayout));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(dgmlTag_StorageLayout)));
 
     // Attribute levelZeroColumns, default to value of the oldest tile themes
     int levelZeroColumns = 2;

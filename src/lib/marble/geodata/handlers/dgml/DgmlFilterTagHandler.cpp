@@ -42,7 +42,7 @@ DGML_DEFINE_TAG_HANDLER(Filter)
 GeoNode* DgmlFilterTagHandler::parse(GeoParser& parser) const
 {
     // Check whether the tag is valid
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Filter));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(dgmlTag_Filter)));
 
     QString name      = parser.attribute(dgmlAttr_name).trimmed();
     QString type      = parser.attribute(dgmlAttr_type).toLower().trimmed();

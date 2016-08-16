@@ -27,7 +27,7 @@ KML_DEFINE_TAG_HANDLER( SchemaData )
 
 GeoNode* KmlSchemaDataTagHandler::parse( GeoParser& parser ) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_SchemaData ) );
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_SchemaData)));
 
     GeoStackItem parentItem = parser.parentElement();
 

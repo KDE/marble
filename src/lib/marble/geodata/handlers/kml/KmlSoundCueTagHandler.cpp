@@ -24,7 +24,7 @@ KML_DEFINE_TAG_HANDLER_GX22( SoundCue )
 
 GeoNode* KmlSoundCueTagHandler::parse(GeoParser &parser) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_SoundCue ) );
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_SoundCue)));
 
     GeoStackItem parentItem = parser.parentElement();
 

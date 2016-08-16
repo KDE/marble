@@ -26,7 +26,7 @@ KML_DEFINE_TAG_HANDLER( SimpleData )
 
 GeoNode* KmlSimpleDataTagHandler::parse( GeoParser& parser ) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_SimpleData ) );
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_SimpleData)));
 
     GeoStackItem parentItem = parser.parentElement();
 

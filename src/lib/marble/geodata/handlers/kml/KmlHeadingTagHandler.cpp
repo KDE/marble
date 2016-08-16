@@ -37,7 +37,7 @@ KML_DEFINE_TAG_HANDLER( heading )
 
 GeoNode* KmlheadingTagHandler::parse( GeoParser& parser ) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_heading ) );
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_heading)));
 
     GeoStackItem parentItem = parser.parentElement();
     

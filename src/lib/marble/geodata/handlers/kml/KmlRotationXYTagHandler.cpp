@@ -24,7 +24,7 @@ KML_DEFINE_TAG_HANDLER( rotationXY )
 
 GeoNode* KmlrotationXYTagHandler::parse( GeoParser& parser ) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_rotationXY ) );
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_rotationXY)));
 
     GeoStackItem parentItem = parser.parentElement();
 

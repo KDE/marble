@@ -24,7 +24,7 @@ KML_DEFINE_TAG_HANDLER( maxFadeExtent )
 
 GeoNode* KmlmaxFadeExtentTagHandler::parse( GeoParser& parser ) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_maxFadeExtent ) );
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_maxFadeExtent)));
 
     GeoStackItem parentItem = parser.parentElement();
 

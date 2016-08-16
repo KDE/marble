@@ -32,7 +32,7 @@ GPX_DEFINE_TAG_HANDLER_11(link)
 // there are text and type properties, type being ignored for now.
 GeoNode* GPXlinkTagHandler::parse(GeoParser& parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(gpxTag_link));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(gpxTag_link)));
 
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(gpxTag_wpt))

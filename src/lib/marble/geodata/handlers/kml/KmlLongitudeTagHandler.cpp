@@ -30,7 +30,7 @@ namespace kml
 
     GeoNode *KmllongitudeTagHandler::parse( GeoParser & parser ) const
     {
-        Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_longitude ) );
+        Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_longitude)));
 
         GeoStackItem parentItem = parser.parentElement();
         if ( parentItem.is<GeoDataLookAt>() ) {

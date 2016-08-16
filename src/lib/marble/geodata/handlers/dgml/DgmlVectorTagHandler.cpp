@@ -39,7 +39,7 @@ DGML_DEFINE_TAG_HANDLER(Vector)
 GeoNode* DgmlVectorTagHandler::parse(GeoParser& parser) const
 {
     // Check whether the tag is valid
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Vector));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(dgmlTag_Vector)));
 
     QString name      = parser.attribute(dgmlAttr_name).trimmed();
     QString feature   = parser.attribute(dgmlAttr_feature).trimmed();

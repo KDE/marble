@@ -36,7 +36,7 @@ GPX_DEFINE_TAG_HANDLER(trkseg)
 
 GeoNode* GPXtrksegTagHandler::parse(GeoParser& parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(gpxTag_trkseg));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(gpxTag_trkseg)));
 
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(gpxTag_trk))

@@ -23,7 +23,7 @@ KML_DEFINE_TAG_HANDLER_GX22( Tour )
 
 GeoNode* KmlTourTagHandler::parse(GeoParser &parser) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_Tour ) );
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_Tour)));
 
     GeoStackItem parentItem = parser.parentElement();
 

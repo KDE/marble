@@ -22,7 +22,7 @@ KML_DEFINE_TAG_HANDLER( near )
 
 GeoNode* KmlnearTagHandler::parse( GeoParser& parser ) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_near ) );
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_near)));
 
     GeoStackItem parentItem = parser.parentElement();
 

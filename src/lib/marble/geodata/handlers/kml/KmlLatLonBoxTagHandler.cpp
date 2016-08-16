@@ -26,7 +26,7 @@ KML_DEFINE_TAG_HANDLER( LatLonBox )
 
 GeoNode* KmlLatLonBoxTagHandler::parse( GeoParser& parser ) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_LatLonBox ) );
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_LatLonBox)));
 
     GeoDataLatLonBox box;
     KmlObjectTagHandler::parseIdentifiers( parser, &box );

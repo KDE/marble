@@ -12,7 +12,8 @@ KML_DEFINE_TAG_HANDLER( refreshMode )
 
 GeoNode* KmlrefreshModeTagHandler::parse( GeoParser& parser ) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_refreshMode ) );
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_refreshMode)));
+
     GeoStackItem parentItem = parser.parentElement();
     QString content = parser.readElementText().trimmed();
     GeoDataLink::RefreshMode mode;

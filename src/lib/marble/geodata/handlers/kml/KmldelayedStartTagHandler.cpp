@@ -23,7 +23,7 @@ KML_DEFINE_TAG_HANDLER_GX22( delayedStart )
 
 GeoNode* KmldelayedStartTagHandler::parse(GeoParser &parser) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_delayedStart ) );
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_delayedStart)));
 
     GeoStackItem parentItem = parser.parentElement();
 

@@ -26,7 +26,7 @@ DGML_DEFINE_TAG_HANDLER(License)
 GeoNode* DgmlLicenseTagHandler::parse( GeoParser& parser ) const
 {
     // Check whether the tag is valid
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( dgmlTag_License ) );
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(dgmlTag_License)));
 
     GeoStackItem parentItem = parser.parentElement();
     if( parentItem.represents( dgmlTag_Head ) ) {

@@ -38,7 +38,7 @@ KML_DEFINE_TAG_HANDLER( Style )
 
 GeoNode* KmlStyleTagHandler::parse( GeoParser& parser ) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_Style ) );
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_Style)));
 
 
     GeoStackItem parentItem = parser.parentElement();

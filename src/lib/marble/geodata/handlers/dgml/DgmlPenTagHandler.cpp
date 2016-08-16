@@ -39,7 +39,7 @@ DGML_DEFINE_TAG_HANDLER(Pen)
 GeoNode* DgmlPenTagHandler::parse(GeoParser& parser) const
 {
     // Check whether the tag is valid
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Pen));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(dgmlTag_Pen)));
 
     QString color = parser.attribute(dgmlAttr_color).trimmed();
     QString style = parser.attribute(dgmlAttr_style).toLower().trimmed();

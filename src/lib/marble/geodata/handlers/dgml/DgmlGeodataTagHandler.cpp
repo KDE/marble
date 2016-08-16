@@ -44,7 +44,7 @@ DGML_DEFINE_TAG_HANDLER(Geodata)
 GeoNode* DgmlGeodataTagHandler::parse(GeoParser& parser) const
 {
     // Check whether the tag is valid
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Geodata));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(dgmlTag_Geodata)));
 
     const QString name = parser.attribute(dgmlAttr_name).trimmed();
 

@@ -26,7 +26,7 @@ KML_DEFINE_TAG_HANDLER( TimeSpan )
 
 GeoNode* KmlTimeSpanTagHandler::parse( GeoParser& parser ) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_TimeSpan ) );
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_TimeSpan)));
 
     GeoStackItem parentItem = parser.parentElement();
     if ( parentItem.is<GeoDataFeature>() ) {

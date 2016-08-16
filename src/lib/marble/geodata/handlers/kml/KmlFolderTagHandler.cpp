@@ -38,7 +38,7 @@ KML_DEFINE_TAG_HANDLER(Folder)
 
 GeoNode* KmlFolderTagHandler::parse(GeoParser& parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_Folder));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_Folder)));
 
     GeoStackItem parentItem = parser.parentElement();
     GeoDataFolder *folder = new GeoDataFolder;

@@ -38,7 +38,7 @@ DGML_DEFINE_TAG_HANDLER(Map)
 
 GeoNode* DgmlMapTagHandler::parse(GeoParser& parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Map));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(dgmlTag_Map)));
 
     QColor  labelColor  = parser.attribute(dgmlAttr_labelColor).trimmed();
 

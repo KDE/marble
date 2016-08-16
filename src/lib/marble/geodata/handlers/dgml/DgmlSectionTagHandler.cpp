@@ -40,7 +40,7 @@ DGML_DEFINE_TAG_HANDLER(Section)
 GeoNode* DgmlSectionTagHandler::parse(GeoParser& parser) const
 {
     // Check whether the tag is valid
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Section));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(dgmlTag_Section)));
 
     QString name      = parser.attribute(dgmlAttr_name);
     QString checkable = parser.attribute(dgmlAttr_checkable).toLower().trimmed();

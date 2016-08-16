@@ -24,7 +24,7 @@ KML_DEFINE_TAG_HANDLER( maxHeight )
 
 GeoNode* KmlmaxHeightTagHandler::parse( GeoParser& parser ) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_maxHeight ) );
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_maxHeight)));
 
     GeoStackItem parentItem = parser.parentElement();
 

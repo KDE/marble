@@ -22,7 +22,7 @@ KML_DEFINE_TAG_HANDLER( linkName )
 
 GeoNode* KmllinkNameTagHandler::parse( GeoParser& parser ) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_linkName ) );
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_linkName)));
 
     GeoStackItem parentItem = parser.parentElement();
 

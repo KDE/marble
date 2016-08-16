@@ -35,7 +35,7 @@ KML_DEFINE_TAG_HANDLER( visibility )
 
 GeoNode* KmlvisibilityTagHandler::parse( GeoParser& parser ) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_visibility ) );
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_visibility)));
 
     GeoStackItem parentItem = parser.parentElement();
     

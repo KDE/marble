@@ -37,7 +37,7 @@ KML_DEFINE_TAG_HANDLER( innerBoundaryIs )
 
 GeoNode* KmlinnerBoundaryIsTagHandler::parse( GeoParser& parser ) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_innerBoundaryIs ) );
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_innerBoundaryIs)));
 
     GeoStackItem parentItem = parser.parentElement();
 

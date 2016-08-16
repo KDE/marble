@@ -28,7 +28,7 @@ KML_DEFINE_TAG_HANDLER( Location )
 
 GeoNode* KmlLocationTagHandler::parse( GeoParser& parser ) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_Location ) );
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_Location)));
 
     GeoDataLocation location;
     KmlObjectTagHandler::parseIdentifiers( parser, &location );
