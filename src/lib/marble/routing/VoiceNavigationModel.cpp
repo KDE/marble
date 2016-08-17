@@ -225,9 +225,11 @@ void VoiceNavigationModelPrivate::updateInstruction( RouteSegment segment, qreal
     m_announcementText = announcementText(turnType, distance);
     qreal nextSegmentDistance = segment.nextRouteSegment().distance();
     Maneuver::Direction nextSegmentDirection = segment.nextRouteSegment().nextRouteSegment().maneuver().direction();
-    if (m_announcementText != QString("") && distance < 75 && nextSegmentDistance != 0 && nextSegmentDistance < 75){
+    if (!m_announcementText.isEmpty() && distance < 75 && nextSegmentDistance != 0 && nextSegmentDistance < 75) {
         QString nextSegmentAnnouncementText = announcementText(nextSegmentDirection, nextSegmentDistance);
-        m_announcementText += nextSegmentAnnouncementText != QString("") ? QString(", then ") + nextSegmentAnnouncementText : QString("");
+        if (!nextSegmentAnnouncementText.isEmpty()) {
+            m_announcementText += QStringLiteral(", then ") + nextSegmentAnnouncementText;
+        }
     }
     emit m_parent->instructionChanged();
 }
