@@ -42,7 +42,7 @@ TagsFilter::TagsFilter(GeoDataDocument *document, const QStringList &tagsList, b
                 currentValue = currentTag[1].trimmed();
             }
             bool contains;
-            if (currentValue == "*") {
+            if (currentValue == QLatin1String("*")) {
                 contains = placemark->osmData().containsTagKey(currentKey);
             } else {
                 contains = placemark->osmData().containsTag(currentKey, currentValue);

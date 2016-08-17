@@ -139,7 +139,7 @@ void FileLoader::run()
 
         QFileInfo fileinfo( d->m_filepath );
         QString path = fileinfo.path();
-        if ( path == "." ) path.clear();
+        if (path == QLatin1String(".")) path.clear();
         QString name = fileinfo.completeBaseName();
         QString suffix = fileinfo.suffix();
 

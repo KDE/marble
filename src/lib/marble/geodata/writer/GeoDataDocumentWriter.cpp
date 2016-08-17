@@ -62,9 +62,10 @@ void GeoDataDocumentWriter::registerWriter(GeoWriterBackend *writer, const QStri
 QString GeoDataDocumentWriter::determineDocumentIdentifier(const QString &filename)
 {
     QString const fileExtension = QFileInfo(filename).suffix().toLower();
-    if (fileExtension == "kml") {
+    if (fileExtension == QLatin1String("kml")) {
         return kml::kmlTag_nameSpaceOgc22;
-    } else if (fileExtension == "osm") {
+    }
+    if (fileExtension == QLatin1String("osm")) {
         return "0.6";
     }
 

@@ -37,7 +37,7 @@ void PanoramioModel::setMarbleWidget( MarbleWidget *widget )
 
 void PanoramioModel::getAdditionalItems( const GeoDataLatLonAltBox &box, qint32 number )
 {
-    if ( marbleModel()->planetId() != "earth" ) {
+    if (marbleModel()->planetId() != QLatin1String("earth")) {
         return;
     }
 

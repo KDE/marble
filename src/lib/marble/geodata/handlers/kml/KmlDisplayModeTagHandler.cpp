@@ -32,10 +32,11 @@ GeoNode* KmldisplayModeTagHandler::parse( GeoParser& parser ) const
     {
         QString mode = parser.readElementText().trimmed();
         GeoDataBalloonStyle::DisplayMode displayMode;
-        if ( mode == "default" )
+        if (mode == QLatin1String("default")) {
                 displayMode = GeoDataBalloonStyle::Default;
-        else if ( mode == "hide" )
+        } else if (mode == QLatin1String("hide")) {
                 displayMode = GeoDataBalloonStyle::Hide;
+        }
 
         parentItem.nodeAs<GeoDataBalloonStyle>()->setDisplayMode( displayMode );
     }

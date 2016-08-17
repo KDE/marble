@@ -25,7 +25,7 @@ bool SVGXmlHandler::startElement(const QString& /*nspace*/,
                                  const QString& qName,
                                  const QXmlAttributes &atts)
 {
-    if ( qName == "path" && atts.value( "id" ) == m_path ) {
+    if (qName == QLatin1String("path") && atts.value("id") == m_path) {
         QString  coordinates = atts.value( "d" );
 
         QStringList  stringlist;

@@ -28,7 +28,7 @@ GeoNode* KmlflyToViewTagHandler::parse( GeoParser& parser ) const
     if( parentItem.is<GeoDataNetworkLink>() ) {
         QString content = parser.readElementText().trimmed();
         GeoDataNetworkLink* networkLink = parentItem.nodeAs<GeoDataNetworkLink>();
-        networkLink->setFlyToView( content == QString( "1" ) );
+        networkLink->setFlyToView(content == QLatin1String("1"));
     }
 
     return 0;

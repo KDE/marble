@@ -44,7 +44,7 @@ void loadTranslations( QCoreApplication &app, QTranslator &translator )
     QString code;
 
     int index = lang.indexOf ( '_' );
-    if ( lang == "C" ) {
+    if (lang == QLatin1String("C")) {
         code = "en";
     }
     else if ( index != -1 ) {

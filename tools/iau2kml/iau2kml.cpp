@@ -110,15 +110,15 @@ int main(int argc, char *argv[])
             roleString  = splitline[18];
             description = splitline[19];
 
-            // if ( roleString == "SF" ) continue;
+            // if (roleString == QLatin1String("SF")) continue;
 
             QString marbleRoleString = QLatin1String( "o" );
 
-            if ( roleString == "AA" || roleString == "SF" ) marbleRoleString = "c";
-            if (    roleString == "ME" || roleString == "OC" 
-                 || roleString == "LC" || roleString == "SI" ) marbleRoleString = "a";
-            if ( roleString == "MO" ) marbleRoleString = "m";
-            if ( roleString == "VA" ) marbleRoleString = "v";
+            if (roleString == QLatin1String("AA") || roleString == QLatin1String("SF")) marbleRoleString = "c";
+            if (   roleString == QLatin1String("ME") || roleString == QLatin1String("OC")
+                || roleString == QLatin1String("LC") || roleString == QLatin1String("SI")) marbleRoleString = "a";
+            if (roleString == QLatin1String("MO")) marbleRoleString = "m";
+            if (roleString == QLatin1String("VA")) marbleRoleString = "v";
 
             population = (int) ( 1000.0 * popString.toFloat() );
 

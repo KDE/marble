@@ -38,7 +38,7 @@ bool GeonamesParser::read( const QByteArray& data )
         readNext();
 
         if ( isStartElement() ) {
-            if ( name() == "geonames" )
+            if (name() == QLatin1String("geonames"))
                 readGeonames();
             else
                 raiseError( QObject::tr("The file is not a valid Geonames answer.") );
@@ -66,7 +66,7 @@ void GeonamesParser::readUnknownElement()
 void GeonamesParser::readGeonames()
 {
     Q_ASSERT( isStartElement()
-              && name() == "geonames" );
+              && name() == QLatin1String("geonames"));
     
     while ( !atEnd() ) {
         readNext();
@@ -75,7 +75,7 @@ void GeonamesParser::readGeonames()
             break;
         
         if ( isStartElement() ) {
-            if ( name() == "entry" )
+            if (name() == QLatin1String("entry"))
                 readEntry();
             else
                 readUnknownElement();
@@ -86,7 +86,7 @@ void GeonamesParser::readGeonames()
 void GeonamesParser::readEntry()
 {
     Q_ASSERT( isStartElement()
-              && name() == "entry" );
+              && name() == QLatin1String("entry"));
               
     WikipediaItem *item = new WikipediaItem( m_marbleWidget, m_parent );
     m_list->append( item );
@@ -98,19 +98,19 @@ void GeonamesParser::readEntry()
             break;
             
         if ( isStartElement() ) {
-            if ( name() == "title" )
+            if ( name() == QLatin1String("title" ))
                 readTitle( item );
-            else if ( name() == "lng" )
+            else if (name() == QLatin1String("lng"))
                 readLongitude( item );
-            else if ( name() == "lat" )
+            else if (name() == QLatin1String("lat"))
                 readLatitude( item );
-            else if ( name() == "wikipediaUrl" )
+            else if (name() == QLatin1String("wikipediaUrl"))
                 readUrl( item );
-            else if ( name() == "summary" )
+            else if (name() == QLatin1String("summary"))
                 readSummary( item );
-            else if ( name() == "thumbnailImg" )
+            else if (name() == QLatin1String("thumbnailImg"))
                 readThumbnailImage( item );
-            else if ( name() == "rank" )
+            else if (name() == QLatin1String("rank"))
                 readRank( item );
             else
                 readUnknownElement();
@@ -121,7 +121,7 @@ void GeonamesParser::readEntry()
 void GeonamesParser::readTitle( WikipediaItem *item )
 {
     Q_ASSERT( isStartElement()
-              && name() == "title" );
+              && name() == QLatin1String("title"));
               
     while ( !atEnd() ) {
         readNext();
@@ -138,7 +138,7 @@ void GeonamesParser::readTitle( WikipediaItem *item )
 void GeonamesParser::readLongitude( WikipediaItem *item )
 {
     Q_ASSERT( isStartElement()
-              && name() == "lng" );
+              && name() == QLatin1String("lng"));
               
     while ( !atEnd() ) {
         readNext();
@@ -155,7 +155,7 @@ void GeonamesParser::readLongitude( WikipediaItem *item )
 void GeonamesParser::readLatitude( WikipediaItem *item )
 {
     Q_ASSERT( isStartElement()
-              && name() == "lat" );
+              && name() == QLatin1String("lat"));
               
     while ( !atEnd() ) {
         readNext();
@@ -172,7 +172,7 @@ void GeonamesParser::readLatitude( WikipediaItem *item )
 void GeonamesParser::readUrl( WikipediaItem *item )
 {
     Q_ASSERT( isStartElement()
-              && name() == "wikipediaUrl" );
+              && name() == QLatin1String("wikipediaUrl"));
               
     while ( !atEnd() ) {
         readNext();
@@ -195,7 +195,7 @@ void GeonamesParser::readUrl( WikipediaItem *item )
 void GeonamesParser::readSummary( WikipediaItem *item )
 {
     Q_ASSERT( isStartElement()
-              && name() == "summary" );
+              && name() == QLatin1String("summary"));
 
     while ( !atEnd() ) {
         readNext();
@@ -212,7 +212,7 @@ void GeonamesParser::readSummary( WikipediaItem *item )
 void GeonamesParser::readThumbnailImage( WikipediaItem *item )
 {
     Q_ASSERT( isStartElement()
-              && name() == "thumbnailImg" );
+              && name() == QLatin1String("thumbnailImg"));
              
     while ( !atEnd() ) {
         readNext();
@@ -229,7 +229,7 @@ void GeonamesParser::readThumbnailImage( WikipediaItem *item )
 void GeonamesParser::readRank( WikipediaItem *item )
 {
     Q_ASSERT( isStartElement()
-              && name() == "rank" );
+              && name() == QLatin1String("rank"));
 
     while ( !atEnd() ) {
         readNext();

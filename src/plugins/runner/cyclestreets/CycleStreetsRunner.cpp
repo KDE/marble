@@ -188,7 +188,7 @@ GeoDataDocument *CycleStreetsRunner::parse( const QByteArray &content ) const
     result->append( routePlacemark );
 
     int i;
-    for ( i = 1; i < features.count() && features.at( i ).firstChildElement().tagName() != "cs:segment"; ++i );
+    for (i = 1; i < features.count() && features.at( i ).firstChildElement().tagName() != QLatin1String("cs:segment"); ++i);
     for ( ; i < features.count(); ++i) {
         QDomElement segment = features.at( i ).toElement();
 
@@ -204,7 +204,7 @@ GeoDataDocument *CycleStreetsRunner::parse( const QByteArray &content ) const
         } else {
             instructionName = "Straight";
         }
-        if ( name != "Short un-named link" && name != "Un-named link" ){
+        if (name != QLatin1String("Short un-named link") && name != QLatin1String("Un-named link")) {
             instructionName.append( " into " + name );
         }
         instructions->setName( instructionName );

@@ -32,20 +32,13 @@ GeoNode* KmllistItemTypeTagHandler::parse( GeoParser& parser ) const
     {
         QString typeText = parser.readElementText().trimmed();
         GeoDataListStyle::ListItemType type;
-        if ( typeText == "check" )
-        {
+        if (typeText == QLatin1String("check")) {
             type = GeoDataListStyle::Check;
-        }
-        else if ( typeText == "radioFolder" )
-        {
+        } else if (typeText == QLatin1String("radioFolder")) {
             type = GeoDataListStyle::RadioFolder;
-        }
-        else if ( typeText == "checkOffOnly" )
-        {
+        } else if (typeText == QLatin1String("checkOffOnly")) {
             type = GeoDataListStyle::CheckOffOnly;
-        }
-        else if ( typeText == "checkHideChildren" )
-        {
+        } else if (typeText == QLatin1String("checkHideChildren")) {
             type = GeoDataListStyle::CheckHideChildren;
         }
         else

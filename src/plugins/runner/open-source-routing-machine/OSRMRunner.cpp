@@ -158,25 +158,25 @@ GeoDataLineString *OSRMRunner::decodePolyline( const QString &geometry )
 
 RoutingInstruction::TurnType OSRMRunner::parseTurnType( const QString &instruction )
 {   
-    if ( instruction == "1" ) {
+    if (instruction == QLatin1String("1")) {
         return RoutingInstruction::Straight;
-    } else if ( instruction == "2" ) {
+    } else if (instruction == QLatin1String("2")) {
         return RoutingInstruction::SlightRight;
-    } else if ( instruction == "3" ) {
+    } else if (instruction == QLatin1String("3")) {
         return RoutingInstruction::Right;
-    } else if ( instruction == "4" ) {
+    } else if (instruction == QLatin1String("4")) {
         return RoutingInstruction::SharpRight;
-    } else if ( instruction == "5" ) {
+    } else if (instruction == QLatin1String("5")) {
         return RoutingInstruction::TurnAround;
-    } else if ( instruction == "6" ) {
+    } else if (instruction == QLatin1String("6")) {
         return RoutingInstruction::SharpLeft;
-    } else if ( instruction == "7" ) {
+    } else if (instruction == QLatin1String("7")) {
         return RoutingInstruction::Left;
-    } else if ( instruction == "8" ) {
+    } else if (instruction == QLatin1String("8")) {
         return RoutingInstruction::SlightLeft;
-    } else if ( instruction == "10" ) {
+    } else if (instruction == QLatin1String("10")) {
         return RoutingInstruction::Continue;
-    } else if ( instruction.startsWith( QLatin1String( "11-" ) ) ) {
+    } else if (instruction.startsWith(QLatin1String("11-"))) {
         int const exit = instruction.mid( 3 ).toInt();
         switch ( exit ) {
         case 1: return RoutingInstruction::RoundaboutFirstExit; break;
@@ -184,7 +184,7 @@ RoutingInstruction::TurnType OSRMRunner::parseTurnType( const QString &instructi
         case 3: return RoutingInstruction::RoundaboutThirdExit; break;
         default: return RoutingInstruction::RoundaboutExit;
         }
-    } else if ( instruction == "12" ) {
+    } else if (instruction == QLatin1String("12")) {
         return RoutingInstruction::RoundaboutExit;
     }
 

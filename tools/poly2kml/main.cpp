@@ -68,13 +68,13 @@ void parseBoundingBox( const QFileInfo &file, const QString &name,
             QString line = stream.readLine().trimmed();
             QStringList entries = line.split( QLatin1Char( ' ' ), QString::SkipEmptyParts );
             if ( entries.size() == 1 ) {
-                if ( entries.first() == "END" && inside ) {
+                if (entries.first() == QLatin1String("END") && inside) {
                     inside = false;
                     if (!box->isEmpty()) {
                         geometry->append(box);
                         box = new GeoDataLinearRing;
                     }
-                } else if ( entries.first() == "END" && !inside ) {
+                } else if (entries.first() == QLatin1String("END") && !inside) {
                     qDebug() << "END not expected here";
                 } else if ( entries.first().startsWith( QLatin1String( "!" ) ) ) {
                     qDebug() << "Warning: Negative polygons not supported, skipping";
@@ -164,15 +164,15 @@ int main( int argc, char* argv[] )
     QString payload;
     for ( int i=1; i<argc-2; ++i ) {
         QString arg( argv[i] );
-        if ( arg == "--name" ) {
+        if (arg == QLatin1String("--name")) {
             name = argv[++i];
-        } else if ( arg == "--version" ) {
+        } else if (arg == QLatin1String("--version")) {
             version = argv[++i];
-        } else if ( arg == "--date" ) {
+        } else if (arg == QLatin1String("--date")) {
             date = argv[++i];
-        } else if ( arg == "--transport" ) {
+        } else if (arg == QLatin1String("--transport")) {
             transport = argv[++i];
-        } else if ( arg == "--payload" ) {
+        } else if (arg == QLatin1String("--payload")) {
             payload = argv[++i];
         } else {
             usage();

@@ -33,12 +33,12 @@ int main(int argc, char *argv[])
     bool uploadFiles(true);
     for (int i=1; i<argc; ++i) {
         QString const arg = argv[i];
-        if (arg == "-h" || arg == "--help") {
+        if (arg == QLatin1String("-h") || arg == QLatin1String("--help")) {
             usage(argv[0]);
             return 0;
-        } else if (arg == "-cd" || arg == "--cache-data") {
+        } else if (arg == QLatin1String("-cd") || arg == QLatin1String("--cache-data")) {
             cacheData = true;
-        } else if (arg == "-nu" || arg == "--no-uploads") {
+        } else if (arg == QLatin1String("-nu") || arg == QLatin1String("--no-uploads")) {
             uploadFiles = false;
         } else {
             arguments << arg;

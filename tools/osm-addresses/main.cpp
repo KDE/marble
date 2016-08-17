@@ -86,19 +86,19 @@ int main( int argc, char *argv[] )
     QString payload;
     for ( int i=1; i<argc-3; ++i ) {
         QString arg( argv[i] );
-        if ( arg == "-v" ) {
+        if (arg == QLatin1String("-v")) {
             debugLevel = Debug;
-        } else if ( arg == "-q" ) {
+        } else if (arg == QLatin1String("-q")) {
             debugLevel = Mute;
-        } else if ( arg == "--name" ) {
+        } else if (arg == QLatin1String("--name")) {
             name = argv[++i];
-        } else if ( arg == "--version" ) {
+        } else if (arg == QLatin1String("--version")) {
             version = argv[++i];
-        } else if ( arg == "--date" ) {
+        } else if (arg == QLatin1String("--date")) {
             date = argv[++i];
-        } else if ( arg == "--transport" ) {
+        } else if (arg == QLatin1String("--transport")) {
             transport = argv[++i];
-        } else if ( arg == "--payload" ) {
+        } else if (arg == QLatin1String("--payload")) {
             payload = argv[++i];
         } else {
             usage();

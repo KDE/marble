@@ -46,8 +46,7 @@ OpenCachingComItem::OpenCachingComItem( const QVariantMap& cache, OpenCachingCom
     setCoordinate( GeoDataCoordinates( cache["location"].toMap()["lon"].toReal(), cache["location"].toMap()["lat"].toReal(), 0.0, GeoDataCoordinates::Degree ) );
 
     // Opencaching.Com does (in effect) this, so as do we..
-    if ( m_cache["type"].toString() == "Unknown Cache" )
-    {
+    if (m_cache["type"].toString() == QLatin1String("Unknown Cache")) {
         m_cache["type"] = QString("Puzzle");
     }
 
@@ -275,8 +274,7 @@ bool OpenCachingComItem::operator<( const AbstractDataPluginItem *other ) const
 
 void OpenCachingComItem::addDownloadedFile( const QString &url, const QString &type )
 {
-    if (type == "description_and_logs")
-    {
+    if (type == QLatin1String("description_and_logs")) {
         QFile file( url );
         if (! file.open( QIODevice::ReadOnly | QIODevice::Text ) )
         {

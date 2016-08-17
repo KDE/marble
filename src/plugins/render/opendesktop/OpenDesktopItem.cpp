@@ -56,7 +56,7 @@ bool OpenDesktopItem::operator<( const AbstractDataPluginItem *other ) const
 
 void OpenDesktopItem::addDownloadedFile( const QString& url, const QString& type )
 {  
-    if( type == "avatar" ) {       
+    if (type == QLatin1String("avatar")) {
         m_pixmap.load( url );
         setSize( m_pixmap.size() );
         emit updated();

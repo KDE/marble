@@ -52,9 +52,9 @@ GeoNode* DgmlDownloadPolicyTagHandler::parse( GeoParser& parser ) const
     // Attribute usage
     DownloadUsage usage;
     const QString usageStr = parser.attribute( dgmlAttr_usage ).trimmed();
-    if ( usageStr == "Browse" )
+    if (usageStr == QLatin1String("Browse"))
         usage = DownloadBrowse;
-    else if ( usageStr == "Bulk" )
+    else if (usageStr == QLatin1String("Bulk"))
         usage = DownloadBulk;
     else {
         qCritical( "Parse error: invalid attribute downloadPolicy/@usage" );

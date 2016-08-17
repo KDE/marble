@@ -65,7 +65,7 @@ bool GeoSceneParser::isValidElement(const QString& tagName) const
 
     switch ((GeoSceneSourceType) m_source) {
     case GeoScene_DGML:
-        return (namespaceUri() == dgml::dgmlTag_nameSpace20);
+        return (namespaceUri() == QLatin1String(dgml::dgmlTag_nameSpace20));
     default:
         break;
     }

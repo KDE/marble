@@ -783,7 +783,7 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
     QString planetId = marbleModel()->planetId();
     const bool doRender = !viewport->mapCoversViewport() &&
                              ( (viewport->projection() == Spherical || viewport->projection() == VerticalPerspective) &&
-                             planetId == "earth" ); // So far displaying stars is only supported on earth.
+                             planetId == QLatin1String("earth")); // So far displaying stars is only supported on earth.
 
     if ( doRender != m_doRender ) {
         if ( doRender ) {
@@ -1149,7 +1149,7 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
             }
         }
 
-        if ( m_renderMoon && marbleModel()->planetId() == "earth" ) {
+        if ( m_renderMoon && marbleModel()->planetId() == QLatin1String("earth")) {
             // moon
             double ra=0.0;
             double decl=0.0;
@@ -1265,31 +1265,31 @@ void StarsPlugin::renderPlanet(const QString &planetId,
     int color=0;
 
     // venus, mars, jupiter, uranus, neptune, saturn
-    if (planetId == "venus") {
+    if (planetId == QLatin1String("venus")) {
         sys.getVenus(ra, decl);
         sys.getPhysVenus(diam, mag, phase);
         color = 2;
-    } else if (planetId == "mars") {
+    } else if (planetId == QLatin1String("mars")) {
         sys.getMars(ra, decl);
         sys.getPhysMars(diam, mag, phase);
         color = 5;
-    } else if (planetId == "jupiter") {
+    } else if (planetId == QLatin1String("jupiter")) {
         sys.getJupiter(ra, decl);
         sys.getPhysJupiter(diam, mag, phase);
         color = 2;
-    } else if (planetId == "mercury") {
+    } else if (planetId == QLatin1String("mercury")) {
         sys.getMercury(ra, decl);
         sys.getPhysMercury(diam, mag, phase);
         color = 3;
-    } else if (planetId == "saturn") {
+    } else if (planetId == QLatin1String("saturn")) {
         sys.getSaturn(ra, decl);
         sys.getPhysSaturn(diam, mag, phase);
         color = 3;
-    } else if (planetId == "uranus") {
+    } else if (planetId == QLatin1String("uranus")) {
         sys.getUranus(ra, decl);
         sys.getPhysUranus(diam, mag, phase);
         color = 0;
-    } else if (planetId == "neptune") {
+    } else if (planetId == QLatin1String("neptune")) {
         sys.getNeptune(ra, decl);
         sys.getPhysNeptune(diam, mag, phase);
         color = 0;

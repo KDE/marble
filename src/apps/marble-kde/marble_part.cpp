@@ -239,7 +239,7 @@ bool MarblePart::openFile()
     QStringList allFileExtensions;
     QStringList filters;
     foreach ( const ParseRunnerPlugin *plugin, pluginManager->parsingRunnerPlugins() ) {
-        if ( plugin->nameId() == "Cache" )
+        if (plugin->nameId() == QLatin1String("Cache"))
             continue;
 
         const QStringList fileExtensions = plugin->fileExtensions().replaceInStrings( QRegExp( "^" ), "*." );
@@ -485,7 +485,7 @@ void MarblePart::readSettings()
                 KConfigGroup pluginGroup = profileGroup.group( pluginName );
                 profile.pluginSettings().insert( pluginName, QHash<QString, QVariant>() );
                 foreach ( const QString& key, pluginGroup.keyList() ) {
-                    if ( key != "Enabled" ) {
+                    if (key != QLatin1String("Enabled")) {
                         profile.pluginSettings()[ pluginName ].insert( key, pluginGroup.readEntry( key ) );
                     }
                 }
@@ -796,7 +796,7 @@ void MarblePart::setupActions()
     QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
     QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
     for (; i != end; ++i ) {
-        if ( (*i)->nameId() == "crosshairs" ) {
+        if ((*i)->nameId() == QLatin1String("crosshairs")) {
             actionCollection()->addAction( "show_crosshairs", (*i)->action() );
         }
     }
@@ -870,7 +870,7 @@ void MarblePart::setupActions()
     QList<RenderPlugin *>::const_iterator it = pluginList.constBegin();
     QList<RenderPlugin *>::const_iterator const itEnd = pluginList.constEnd();
     for (; it != itEnd; ++it ) {
-        if ((*it)->nameId() != "annotation") {
+        if ((*it)->nameId() != QLatin1String("annotation")) {
             connect( (*it), SIGNAL(actionGroupsChanged()),
                      this, SLOT(createPluginMenus()) );
         }
@@ -1508,7 +1508,7 @@ void MarblePart::applyPluginState()
             KConfigGroup pluginGroup = profileGroup.group( key );
             pluginGroup.writeEntry( "Enabled", true );
             foreach ( const QString& settingKey, profile.pluginSettings()[ key ].keys() ) {
-                Q_ASSERT( settingKey != "Enabled" );
+                Q_ASSERT(settingKey != QLatin1String("Enabled"));
                 pluginGroup.writeEntry( settingKey, profile.pluginSettings()[ key ][ settingKey ] );
             }
         }
@@ -1548,7 +1548,7 @@ void MarblePart::updateSettings()
     QNetworkProxy proxy;
 
     // Make sure that no proxy is used for an empty string or the default value:
-    if ( MarbleSettings::proxyUrl().isEmpty() || MarbleSettings::proxyUrl() == "http://" ) {
+    if (MarbleSettings::proxyUrl().isEmpty() || MarbleSettings::proxyUrl() == QLatin1String("http://")) {
         proxy.setType( QNetworkProxy::NoProxy );
     } else {
         if ( MarbleSettings::proxyType() == Marble::Socks5Proxy ) {
@@ -1793,7 +1793,7 @@ void MarblePart::printMapScreenShot()
 void MarblePart::updateMapEditButtonVisibility( const QString &mapTheme )
 {
     Q_ASSERT( m_externalMapEditorAction );
-    m_externalMapEditorAction->setVisible( mapTheme == "earth/openstreetmap/openstreetmap.dgml" );
+    m_externalMapEditorAction->setVisible(mapTheme == QLatin1String("earth/openstreetmap/openstreetmap.dgml"));
 }
 
 void MarblePart::fallBackToDefaultTheme()

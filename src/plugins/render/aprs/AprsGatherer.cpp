@@ -140,12 +140,12 @@ AprsGatherer::run()
             QString callSign  = matcher.cap( 1 );
             qreal latitude = matcher.cap( 6 ).toFloat() +
                 ( matcher.cap( 7 ).toFloat()/60 );
-            if ( matcher.cap( 8 ) == "S" )
+            if (matcher.cap(8) == QLatin1String("S"))
                 latitude = - latitude;
 
             qreal longitude = matcher.cap( 10 ).toFloat() +
                 ( matcher.cap( 11 ).toFloat()/60 );
-            if ( matcher.cap( 12 ) == "W" )
+            if (matcher.cap(12) == QLatin1String("W"))
                 longitude = - longitude;
 
             addObject( callSign, latitude, longitude, canDoDirect,

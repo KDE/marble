@@ -117,7 +117,7 @@ mDebug()<<"::::::::::::::::slot"<<parsedData[0].text;
 
     connect(m_downloadManager, SIGNAL(downloadComplete(QString,QString)), this, SLOT(slotGeoCodingReplyRecieved(QString,QString)) );
     for (int counter = 0;counter < 10;counter++) {
-       if (parsedData[counter].location != "null") {
+       if (parsedData[counter].location != QLatin1String("null")) {
            parsedData[counter].location.replace(QRegExp("[?,:!/\\s]+"), "+");//remove whitespace and replace it with + for query api
             findLatLonOfStreetAddress(parsedData [ counter ].location) ;   //this will set temp
        }

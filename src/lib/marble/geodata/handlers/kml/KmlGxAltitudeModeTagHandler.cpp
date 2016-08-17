@@ -41,15 +41,15 @@ GeoNode* KmlaltitudeModeTagHandler::parse( GeoParser& parser ) const
     QString content = parser.readElementText().trimmed();
 
     AltitudeMode mode;
-    if( content == QString( "relativeToGround" ) ) {
+    if (content == QLatin1String("relativeToGround")) {
         mode = RelativeToGround;
-    } else if( content == QString( "absolute" ) ) {
+    } else if (content == QLatin1String("absolute")) {
         mode = Absolute;
-    } else if( content == QString( "relativeToSeaFloor" ) ) {
+    } else if (content == QLatin1String("relativeToSeaFloor")) {
         mode = RelativeToSeaFloor;
-    } else if( content == QString( "clampToSeaFloor" ) ) {
+    } else if (content == QLatin1String("clampToSeaFloor")) {
         mode = ClampToSeaFloor;
-    }else if( content == QString( "clampToGround" ) ) {
+    } else if (content == QLatin1String("clampToGround")) {
         mode = ClampToGround;
     } else {
         mDebug() << "Unknown altitude mode " << content << ", falling back to 'clampToGround'";

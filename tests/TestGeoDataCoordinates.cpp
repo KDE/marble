@@ -375,13 +375,13 @@ void TestGeoDataCoordinates::testIsPole()
 
     GeoDataCoordinates coordinates1;
 
-    if(pole == "false_pole") {
+    if (pole == QLatin1String("false_pole")) {
         coordinates1.set(lon, lat, alt, GeoDataCoordinates::Degree);
         QVERIFY(coordinates1.isPole() == false);
-    } else if(pole == "south_pole") {
+    } else if (pole == QLatin1String("south_pole")) {
         coordinates1.set(lon, lat, alt, GeoDataCoordinates::Degree);
         QVERIFY(coordinates1.isPole(SouthPole));
-    } else if(pole == "north_pole") {
+    } else if (pole == QLatin1String("north_pole")) {
         coordinates1.set(lon, lat, alt, GeoDataCoordinates::Degree);
         QVERIFY(coordinates1.isPole(NorthPole));
     }
@@ -482,7 +482,7 @@ void TestGeoDataCoordinates::testNormalize()
     QFETCH(qreal, lat);
     QFETCH(QString, unit);
 
-    if(unit == "degree") {
+    if (unit == QLatin1String("degree")) {
         QCOMPARE(GeoDataCoordinates::normalizeLon(lon, GeoDataCoordinates::Degree), qreal(-160));
         QCOMPARE(GeoDataCoordinates::normalizeLat(lat, GeoDataCoordinates::Degree), qreal(50));
 
@@ -492,7 +492,7 @@ void TestGeoDataCoordinates::testNormalize()
         GeoDataCoordinates::normalizeLonLat( normalized_lon, normalized_lat, GeoDataCoordinates::Degree);
         QCOMPARE(normalized_lon, qreal(20));
         QCOMPARE(normalized_lat, qreal(50));
-    } else if (unit == "radian") {
+    } else if (unit == QLatin1String("radian")) {
         // Compare up to three decimals
         qreal value = GeoDataCoordinates::normalizeLon(lon, GeoDataCoordinates::Radian);
         QCOMPARE(ceil(value * 1000) / 1000, qreal(-2.683));

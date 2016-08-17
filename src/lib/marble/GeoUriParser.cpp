@@ -80,7 +80,7 @@ bool GeoUriParser::parse()
             // this is not a bug! The '<=' was intended, otherwise we would skip that last Cgroups's data!
             for ( int i = 4; i <= geoUriRegexp.captureCount(); ++i )
             {
-                if ( geoUriRegexp.capturedTexts()[i] == "crs" ) {
+                if (geoUriRegexp.capturedTexts()[i] == QLatin1String("crs")) {
                     foreach ( const QString& str, PlanetFactory::planetList()) {
                         if ( geoUriRegexp.captureCount() < i+1 ) {
                             i = geoUriRegexp.captureCount() + 1;
@@ -92,7 +92,7 @@ bool GeoUriParser::parse()
                         }
                     }
                     ++i;
-                } else if ( geoUriRegexp.capturedTexts()[i] == "u" ) {
+                } else if (geoUriRegexp.capturedTexts()[i] == QLatin1String("u")) {
                     mDebug() << "Captured uncertainity parameter, but this is not supported by Marble (yet).";
                     ++i;
                 }

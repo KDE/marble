@@ -43,7 +43,7 @@ class TileCreatorPrivate
          m_verify( false ),
          m_source( source )
      {
-        if ( m_dem == "true" ) {
+        if (m_dem == QLatin1String("true")) {
             m_tileQuality = 70;
         } else {
             m_tileQuality = 85;
@@ -211,7 +211,7 @@ void TileCreator::cancelTileCreation()
 
 void TileCreator::run()
 {
-    if ( d->m_resume && d->m_tileFormat == "jpg" && d->m_tileQuality != 100 ) {
+    if (d->m_resume && d->m_tileFormat == QLatin1String("jpg") && d->m_tileQuality != 100) {
         qWarning() << "Resuming jpegs is only supported with tileQuality 100";
         return;
     }
@@ -320,13 +320,13 @@ void TileCreator::run()
                     return;
                 }
 
-                if ( d->m_dem == "true" ) {
+                if (d->m_dem == QLatin1String("true")) {
                     tile = tile.convertToFormat(QImage::Format_Indexed8,
                                                 grayScalePalette,
                                                 Qt::ThresholdDither);
                 }
 
-                bool  ok = tile.save( tileName, d->m_tileFormat.toLatin1().data(), d->m_tileFormat == "jpg" ? 100 : d->m_tileQuality );
+                bool  ok = tile.save(tileName, d->m_tileFormat.toLatin1().data(), d->m_tileFormat == QLatin1String("jpg") ? 100 : d->m_tileQuality);
                 if ( !ok )
                     mDebug() << "Error while writing Tile: " << tileName;
 
@@ -438,7 +438,7 @@ void TileCreator::run()
                     }
                     QImage  tile = img_topleft;
 
-                    if ( d->m_dem == "true" ) {
+                    if (d->m_dem == QLatin1String("true")) {
 
                         tile.setColorTable( grayScalePalette );
                         uchar* destLine;
@@ -510,7 +510,7 @@ void TileCreator::run()
 
                     // Saving at 100% JPEG quality to have a high-quality
                     // version to create the remaining needed tiles from.
-                    bool  ok = tile.save( newTileName, d->m_tileFormat.toLatin1().data(), d->m_tileFormat == "jpg" ? 100 : d->m_tileQuality );
+                    bool  ok = tile.save(newTileName, d->m_tileFormat.toLatin1().data(), d->m_tileFormat == QLatin1String("jpg") ? 100 : d->m_tileQuality);
                     if ( ! ok )
                         mDebug() << "Error while writing Tile: " << newTileName;
                 }
@@ -527,7 +527,7 @@ void TileCreator::run()
     }
     mDebug() << "Tile creation completed.";
 
-    if ( d->m_tileFormat == "jpg" && d->m_tileQuality != 100 ) {
+    if (d->m_tileFormat == QLatin1String("jpg") && d->m_tileQuality != 100) {
 
         // Applying correct lower JPEG compression now that we created all tiles
         int savedTilesCount = 0;

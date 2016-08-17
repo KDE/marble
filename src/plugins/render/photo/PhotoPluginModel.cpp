@@ -45,7 +45,7 @@ QUrl PhotoPluginModel::generateUrl( const QString& service,
 {
     QString url( "" );
     
-    if( service == "flickr" )
+    if (service == QLatin1String("flickr"))
         url += "https://www.flickr.com/services/rest/";
     else
         return QUrl();
@@ -72,7 +72,7 @@ void PhotoPluginModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
                                            qint32 number )
 {
     // Flickr only supports images for earth
-    if( marbleModel()->planetId() != "earth" ) {
+    if (marbleModel()->planetId() != QLatin1String("earth")) {
         return;
     }
 

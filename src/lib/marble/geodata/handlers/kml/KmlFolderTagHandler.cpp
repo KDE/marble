@@ -48,7 +48,7 @@ GeoNode* KmlFolderTagHandler::parse(GeoParser& parser) const
         parentPtr->append( folder );
 
         return folder;
-    } else if ( parentItem.qualifiedName().first == kmlTag_kml) {
+    } else if (parentItem.qualifiedName().first == QLatin1String(kmlTag_kml)) {
         GeoDataDocument* doc = geoDataDoc( parser );
         doc->append( folder );
         return folder;

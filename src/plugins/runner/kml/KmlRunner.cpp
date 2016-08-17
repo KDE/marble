@@ -37,7 +37,7 @@ GeoDataDocument *KmlRunner::parseFile(const QString &fileName, DocumentRole role
     QStringList kmzFiles;
 
     QFileInfo const kmzFile( fileName );
-    if ( kmzFile.exists() && kmzFile.suffix().toLower() == "kmz" ) {
+    if (kmzFile.exists() && kmzFile.suffix().toLower() == QLatin1String("kmz")) {
         KmzHandler kmzHandler;
         if ( kmzHandler.open( fileName, error ) ) {
             kmlFileName = kmzHandler.kmlFile();

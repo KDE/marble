@@ -81,13 +81,15 @@ bool GeoDataParser::isValidElement(const QString& tagName) const
 
     switch ((GeoDataSourceType) m_source) {
     // TODO: case GeoData_GeoRSS:
-    case GeoData_KML:
-        return (namespaceUri() == kml::kmlTag_nameSpace20 || 
-                namespaceUri() == kml::kmlTag_nameSpace21 || 
-                namespaceUri() == kml::kmlTag_nameSpace22 ||
-                namespaceUri() == kml::kmlTag_nameSpaceOgc22 ||
-                namespaceUri() == kml::kmlTag_nameSpaceGx22 ||
-                namespaceUri() == kml::kmlTag_nameSpaceMx );
+    case GeoData_KML: {
+        const QStringRef namespaceUri = this->namespaceUri();
+        return (namespaceUri == QLatin1String(kml::kmlTag_nameSpace20) ||
+                namespaceUri == QLatin1String(kml::kmlTag_nameSpace21) ||
+                namespaceUri == QLatin1String(kml::kmlTag_nameSpace22) ||
+                namespaceUri == QLatin1String(kml::kmlTag_nameSpaceOgc22) ||
+                namespaceUri == QLatin1String(kml::kmlTag_nameSpaceGx22) ||
+                namespaceUri == QLatin1String(kml::kmlTag_nameSpaceMx));
+    }
     default:
         break;
     }

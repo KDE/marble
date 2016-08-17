@@ -31,12 +31,12 @@ bool SVGXmlHandler::startElement(const QString& nspace,
     Q_UNUSED(localName)
 
     qDebug();
-    if ( qName == "g" ) {
+    if (qName == QLatin1String("g")) {
         qDebug( "Parsing Data ..." );
         m_initialized = true;
     }
 
-    if ( qName == "path" && m_initialized ) {
+    if (qName == QLatin1String("path") && m_initialized) {
         QString  coordinates = atts.value( "d" );
 
         QStringList  stringlist;

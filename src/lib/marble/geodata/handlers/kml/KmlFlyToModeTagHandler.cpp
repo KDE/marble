@@ -27,9 +27,9 @@ GeoNode* KmlflyToModeTagHandler::parse( GeoParser& parser ) const
     QString content = parser.readElementText().trimmed();
 
     GeoDataFlyTo::FlyToMode mode;
-    if( content == "smooth" ) {
+    if (content == QLatin1String("smooth")) {
         mode = GeoDataFlyTo::Smooth;
-    } else if( content == "bounce" ) {
+    } else if (content == QLatin1String("bounce")) {
         mode = GeoDataFlyTo::Bounce;
     } else {
         mDebug() << "Unknown mode " << content << ", using 'bounce' instead.";

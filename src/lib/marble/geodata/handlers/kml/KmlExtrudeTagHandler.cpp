@@ -68,11 +68,8 @@ GeoNode* KmlextrudeTagHandler::parse( GeoParser& parser ) const
     if( validParents ) {
         QString content = parser.readElementText().trimmed();
 
-        if( content == QString( "1" ) ) {
-            geometry->setExtrude( true );
-        } else {
-            geometry->setExtrude( false );
-        }
+        const bool extrude = (content == QLatin1String("1"));
+        geometry->setExtrude(extrude);
     }
 
     return 0;

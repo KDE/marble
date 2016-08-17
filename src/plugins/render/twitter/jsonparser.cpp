@@ -28,7 +28,7 @@ QList <twitterDataStructure> jsonParser::parseAllObjects(const QString &content 
 {
     QString temp = "var myJSONObject =  { \"twitter\":" + content + "}";
     int iterator = 0;//the count starts fom one
-    if (temp != "Twitter is down for database maintenance. It will return in about 30 minutes")
+    if (temp != QLatin1String("Twitter is down for database maintenance. It will return in about 30 minutes"))
     {
 	myEngine.evaluate(QString("function userName(k){return myJSONObject.twitter[k].user.name};"));
 	myEngine.evaluate(QString("function userLocation(k){return myJSONObject.twitter[k].user.location};"));

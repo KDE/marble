@@ -50,8 +50,7 @@ GeoNode* KmlDocumentTagHandler::parse(GeoParser& parser) const
 
             return document;
         }
-        else if ( parentItem.qualifiedName().first == kmlTag_kml)
-        {
+        else if (parentItem.qualifiedName().first == QLatin1String(kmlTag_kml)) {
             GeoDataDocument* doc = geoDataDoc( parser );
             KmlObjectTagHandler::parseIdentifiers( parser, doc );
             return doc;

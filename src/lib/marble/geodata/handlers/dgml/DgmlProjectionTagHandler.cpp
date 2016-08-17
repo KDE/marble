@@ -48,9 +48,9 @@ GeoNode* DgmlProjectionTagHandler::parse( GeoParser& parser ) const
     const QString nameStr = parser.attribute( dgmlAttr_name ).trimmed();
     if ( !nameStr.isEmpty() ) {
         GeoSceneTileDataset::Projection projection = GeoSceneTileDataset::Equirectangular;
-        if ( nameStr == "Equirectangular" )
+        if (nameStr == QLatin1String("Equirectangular"))
             projection = GeoSceneTileDataset::Equirectangular;
-        else if ( nameStr == "Mercator" )
+        else if (nameStr == QLatin1String("Mercator"))
             projection = GeoSceneTileDataset::Mercator;
         else
             parser.raiseWarning( QString( "Value not allowed for attribute name: %1" ).arg( nameStr ));

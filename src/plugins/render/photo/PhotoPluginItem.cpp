@@ -78,11 +78,11 @@ bool PhotoPluginItem::initialized() const
 
 void PhotoPluginItem::addDownloadedFile( const QString& url, const QString& type )
 {
-    if( type == "thumbnail" ) {
+    if (type == QLatin1String("thumbnail")) {
         m_smallImage.load( url );
         m_image.setImage( m_smallImage.scaled( QSize( 50, 50 ) ) );
     }
-    else if ( type == "info" ) {        
+    else if (type == QLatin1String("info")) {
         QFile file( url );
         if( !file.open( QIODevice::ReadOnly | QIODevice::Text ) ) {
             return;

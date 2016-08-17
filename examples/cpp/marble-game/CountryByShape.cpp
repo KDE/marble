@@ -107,7 +107,7 @@ void CountryByShape::initiateGame()
             if ( object->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
                 GeoDataDocument *doc = static_cast<GeoDataDocument*>( object );
                 QFileInfo fileInfo( doc->fileName() );
-                if ( fileInfo.fileName() == QString("boundaryplacemarks.cache") ) {
+                if (fileInfo.fileName() == QLatin1String("boundaryplacemarks.cache")) {
                     d->m_countryNames = doc;
                     break;
                 }
@@ -125,7 +125,7 @@ void CountryByShape::initiateGame()
             if ( object->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
                 GeoDataDocument *const doc = static_cast<GeoDataDocument*>( object );
                 QFileInfo fileInfo( doc->fileName() );
-                if ( fileInfo.fileName() == QString("ne_50m_admin_0_countries.pn2") ) {
+                if (fileInfo.fileName() == QLatin1String("ne_50m_admin_0_countries.pn2")) {
                     d->m_countryBoundaries = doc;
                     break;
                 }

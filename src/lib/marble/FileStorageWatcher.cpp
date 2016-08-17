@@ -108,10 +108,10 @@ void FileStorageWatcherThread::getCurrentCacheSize()
         // planet/theme/tilelevel should be deeper than 4
         if ( ( path.size() > basePathDepth + 3 ) &&
              ( path[basePathDepth + 2].toInt() >= maxBaseTileLevel ) &&
-               ( ( suffix == "jpg"
-                || suffix == "png"
-                || suffix == "gif"
-                || suffix == "svg" ) ) ) {
+             ((suffix == QLatin1String("jpg") ||
+               suffix == QLatin1String("png") ||
+               suffix == QLatin1String("gif") ||
+               suffix == QLatin1String("svg")))) {
             dataSize += file.size();
             m_filesCache.insert(file.lastModified(), file.absoluteFilePath());
         }

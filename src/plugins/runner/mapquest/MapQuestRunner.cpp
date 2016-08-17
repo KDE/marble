@@ -82,32 +82,35 @@ void MapQuestRunner::retrieveRoute( const RouteRequest *route )
         append( &url, "routeType", settings["preference"].toString() );
     }
 
-    if ( !settings["ascending"].toString().isEmpty() && !settings["descending"].toString().isEmpty() ) {
-            if ( settings["ascending"].toString() == "AVOID_UP_HILL"
-                       && settings["descending"].toString() == "AVOID_DOWN_HILL" ) {
-                append( &url, "roadGradeStrategy", "AVOID_ALL_HILLS" );
-            }
-            else if ( settings["ascending"].toString() == "FAVOR_UP_HILL"
-                         && settings["descending"].toString() == "FAVOR_DOWN_HILL" ) {
-                append( &url, "roadGradeStrategy", "FAVOR_ALL_HILLS" );
-            }
-            else if ( settings["ascending"].toString() == "DEFAULT_STRATEGY"
-                         && settings["descending"].toString() == "DEFAULT_STRATEGY" ) {
-                append( &url, "roadGradeStrategy", "DEFAULT_STRATEGY" );
-            }
-            else if ( settings["ascending"].toString() == "DEFAULT_STRATEGY" ) {
-                append( &url, "roadGradeStrategy", settings["descending"].toString() );
-            }
-            else if ( settings["descending"].toString() == "DEFAULT_STRATEGY" ) {
-                append( &url, "roadGradeStrategy", settings["ascending"].toString() );
-            }
-            else if ( settings["descending"].toString() == "AVOID_DOWN_HILL" ) {
-                append( &url, "roadGradeStrategy", settings["descending"].toString() );
-            }
-            else if ( settings["ascending"].toString() == "AVOID_UP_HILL" ) {
-                append( &url, "roadGradeStrategy", settings["ascending"].toString() );
-            }
+    const QString ascendingSetting = settings[QStringLiteral("ascending")].toString();
+    const QString descendingSetting = settings[QStringLiteral("descending")].toString();
+    if (!ascendingSetting.isEmpty() && !descendingSetting.isEmpty()) {
+        if (ascendingSetting == QLatin1String("AVOID_UP_HILL") &&
+            descendingSetting == QLatin1String("AVOID_DOWN_HILL")) {
+            append(&url, QStringLiteral("roadGradeStrategy"), QStringLiteral("AVOID_ALL_HILLS"));
         }
+        else if (ascendingSetting == QLatin1String("FAVOR_UP_HILL") &&
+                 descendingSetting == QLatin1String("FAVOR_DOWN_HILL")) {
+            append(&url, QStringLiteral("roadGradeStrategy"), QStringLiteral("FAVOR_ALL_HILLS"));
+        }
+        else if (ascendingSetting == QLatin1String("DEFAULT_STRATEGY") &&
+                 descendingSetting == QLatin1String("DEFAULT_STRATEGY")) {
+            append(&url, QStringLiteral("roadGradeStrategy"), QStringLiteral("DEFAULT_STRATEGY"));
+        }
+        else if (ascendingSetting == QLatin1String("DEFAULT_STRATEGY")) {
+            append(&url, QStringLiteral("roadGradeStrategy"), descendingSetting);
+        }
+        else if (descendingSetting == QLatin1String("DEFAULT_STRATEGY")) {
+            append(&url, QStringLiteral("roadGradeStrategy"), ascendingSetting);
+        }
+        else if (descendingSetting == QLatin1String("AVOID_DOWN_HILL")) {
+            append(&url, QStringLiteral("roadGradeStrategy"), descendingSetting);
+        }
+        else if (ascendingSetting == QLatin1String("AVOID_UP_HILL")) {
+            append(&url, QStringLiteral("roadGradeStrategy"), ascendingSetting);
+        }
+    }
+
     QUrl qurl(url);
     // FIXME: verify that this works with special characters.
     QUrlQuery urlQuery;

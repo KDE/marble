@@ -48,29 +48,20 @@ GeoNode* KmltessellateTagHandler::parse( GeoParser& parser ) const
     if( parentItem.is<GeoDataLineString>() ) {
         GeoDataLineString* lineString = parentItem.nodeAs<GeoDataLineString>();
 
-        if( content == QString( "1" ) ) {
-            lineString->setTessellate( true );
-        } else {
-            lineString->setTessellate( false );
-        }
+        const bool tesselate = (content == QLatin1String("1"));
+        lineString->setTessellate(tesselate);
 
     } else if( parentItem.is<GeoDataLinearRing>() ) {
         GeoDataLinearRing* linearRing = parentItem.nodeAs<GeoDataLinearRing>();
 
-        if( content == QString( "1" ) ) {
-            linearRing->setTessellate( true );
-        } else {
-            linearRing->setTessellate( false );
-        }
+        const bool tesselate = (content == QLatin1String("1"));
+        linearRing->setTessellate(tesselate);
 
     } else if( parentItem.is<GeoDataPolygon>() ) {
         GeoDataPolygon* polygon = parentItem.nodeAs<GeoDataPolygon>();
 
-        if( content == QString( "1" ) ) {
-            polygon->setTessellate( true );
-        } else {
-            polygon->setTessellate( false );
-        }
+        const bool tesselate = (content == QLatin1String("1"));
+        polygon->setTessellate(tesselate);
     }
 
     return 0;

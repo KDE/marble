@@ -276,7 +276,7 @@ void MapWizard::parseServerCapabilities( QNetworkReply* reply )
 
     d->format = format.text().right( format.text().length() - format.text().indexOf( '/' ) - 1 ).toLower();
 
-    if( d->format == "jpeg" ) {
+    if (d->format == QLatin1String("jpeg")) {
         d->format = "jpg";
     }
 

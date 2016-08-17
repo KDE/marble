@@ -645,7 +645,7 @@ void MarbleModel::clearPersistentTileCache()
             TileCreator *tileCreator = new TileCreator(
                                      sourceDir,
                                      installMap,
-                                     (role == "dem") ? "true" : "false" );
+                                     (role == QLatin1String("dem")) ? "true" : "false" );
             tileCreator->setTileFormat( texture->fileFormat().toLower() );
 
             QPointer<TileCreatorDialog> tileCreatorDlg = new TileCreatorDialog( tileCreator, 0 );

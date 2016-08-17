@@ -31,13 +31,17 @@ RoutingInstruction::RoutingInstruction( const RoutingWaypoint &item ) :
 
 bool RoutingInstruction::append( const RoutingWaypoint &item, int angle )
 {
-    if ( m_points.size() && m_points.last().roadType() != "roundabout" && item.roadType() == "roundabout" ) {
+    if (m_points.size() &&
+        m_points.last().roadType() != QLatin1String("roundabout") &&
+        item.roadType() == QLatin1String("roundabout")) {
         // Entering a roundabout. Merge with previous segment to avoid 'Enter the roundabout' instructions
         m_points.push_back( item );
         return true;
     }
 
-    if ( m_points.size() && m_points.last().roadType() == "roundabout" && item.roadType() != "roundabout" ) {
+    if (m_points.size() &&
+        m_points.last().roadType() == QLatin1String("roundabout") &&
+        item.roadType() != QLatin1String("roundabout")) {
         // Exiting a roundabout
         m_points.push_back( item );
         return false;
@@ -58,7 +62,7 @@ bool RoutingInstruction::append( const RoutingWaypoint &item, int angle )
 
         return angle >= 150 && angle <= 210;
     } else {
-        return item.roadType() == "roundabout" || item.roadName() == roadName();
+        return item.roadType() == QLatin1String("roundabout") || item.roadName() == roadName();
     }
 }
 
@@ -247,11 +251,11 @@ qreal RoutingInstruction::distanceToEnd() const
 
 QString RoutingInstruction::nextRoadInstruction() const
 {
-    if ( roadType() == "roundabout" ) {
+    if (roadType() == QLatin1String("roundabout")) {
         return QObject::tr( "Enter the roundabout." );
     }
 
-    if ( roadType() == "motorway_link" ) {
+    if (roadType() == QLatin1String("motorway_link")) {
         QStringList motorways = QStringList() << "motorway" << "motorway_link";
         bool const leaving = predecessor() && motorways.contains( predecessor()->roadType() );
         if ( leaving ) {

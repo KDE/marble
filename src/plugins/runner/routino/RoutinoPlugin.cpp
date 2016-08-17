@@ -95,7 +95,7 @@ public:
         }
         ui_configWidget->transport->setCurrentIndex(
             ui_configWidget->transport->findData( settings.value( "transport" ).toString() ) );
-        if ( settings.value( "method" ).toString() == "shortest" ) {
+        if (settings.value("method").toString() == QLatin1String("shortest")) {
             ui_configWidget->shortest->setChecked( true );
         } else {
             ui_configWidget->fastest->setChecked( true );

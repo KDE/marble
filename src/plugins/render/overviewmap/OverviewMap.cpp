@@ -321,10 +321,10 @@ void OverviewMap::setSettings( const QHash<QString,QVariant> &settings )
     foreach ( const QString& planet, PlanetFactory::planetList() ) {
         QString mapFile = MarbleDirs::path( QString( "svg/%1map.svg" ).arg( planet ) );
 
-        if ( planet == "moon" ) {
+        if (planet == QLatin1String("moon")) {
             mapFile = MarbleDirs::path( "svg/lunarmap.svg" );
         }
-        else if ( planet == "earth" || mapFile.isEmpty() ) {
+        else if (planet == QLatin1String("earth") || mapFile.isEmpty()) {
             mapFile = MarbleDirs::path( "svg/worldmap.svg" );
         }
 

@@ -29,12 +29,7 @@ GeoNode* KmlballoonVisibilityTagHandler::parse( GeoParser& parser ) const
 
     QString content = parser.readElementText().trimmed();
 
-    bool visible;
-    if( content == QString( "1" ) ){
-        visible = true;
-    } else {
-        visible = false;
-    }
+    const bool visible = (content == QLatin1String("1"));
 
     GeoStackItem parentItem = parser.parentElement();
 

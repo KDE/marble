@@ -57,7 +57,7 @@ void OpenRouteServiceRunner::retrieveRoute( const RouteRequest *route )
     if ( settings.contains( "preference" ) ) {
         preference = settings["preference"].toString();
     }
-    if ( preference == "Pedestrian" ) {
+    if (preference == QLatin1String("Pedestrian")) {
         unit = 'M';
     }
 
@@ -362,23 +362,23 @@ RoutingInstruction::TurnType OpenRouteServiceRunner::parseTurnType( const QStrin
         }
     }
 
-    if ( instruction == "Continue" ) {
+    if (instruction == QLatin1String("Continue")) {
         return RoutingInstruction::Straight;
-    } else if ( instruction == "half right" ) {
+    } else if (instruction == QLatin1String("half right")) {
         return RoutingInstruction::SlightRight;
-    } else if ( instruction == "right" ) {
+    } else if (instruction == QLatin1String("right")) {
         return RoutingInstruction::Right;
-    } else if ( instruction == "sharp right" ) {
+    } else if (instruction == QLatin1String("sharp right")) {
         return RoutingInstruction::SharpRight;
-    } else if ( instruction == "straight forward" ) {
+    } else if (instruction == QLatin1String("straight forward")) {
         return RoutingInstruction::Straight;
-    } else if ( instruction == "turn" ) {
+    } else if (instruction == QLatin1String("turn")) {
         return RoutingInstruction::TurnAround;
-    } else if ( instruction == "sharp left" ) {
+    } else if (instruction == QLatin1String("sharp left")) {
         return RoutingInstruction::SharpLeft;
-    } else if ( instruction == "left" ) {
+    } else if (instruction == QLatin1String("left")) {
         return RoutingInstruction::Left;
-    } else if ( instruction == "half left" ) {
+    } else if (instruction == QLatin1String("half left")) {
         return RoutingInstruction::SlightLeft;
     }
 

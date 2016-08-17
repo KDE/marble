@@ -226,24 +226,22 @@ int main(int argc, char *argv[])
 
     for ( int i = 1; i < args.count(); ++i ) {
         const QString arg = args.at(i);
-        if ( arg == "--timedemo" )
-        {
+        if (arg == QLatin1String("--timedemo")) {
             window->resize(900, 640);
             MarbleTest marbleTest( window->marbleWidget() );
             marbleTest.timeDemo();
             return 0;
         }
-        else if( arg == "--fps" ) {
+        else if (arg == QLatin1String("--fps")) {
             window->marbleControl()->marbleWidget()->setShowFrameRate( true );
         }
-        else if ( arg == "--tile-id" )
-        {
-        window->marbleControl()->marbleWidget()->setShowTileId(true);
+        else if (arg == QLatin1String("--tile-id")) {
+            window->marbleControl()->marbleWidget()->setShowTileId(true);
         }
-        else if( arg == "--runtimeTrace" ) {
+        else if (arg == QLatin1String("--runtimeTrace")) {
             window->marbleControl()->marbleWidget()->setShowRuntimeTrace( true );
         }
-        else if( arg == "--debug-polygons" ) {
+        else if (arg == QLatin1String("--debug-polygons")) {
             window->marbleControl()->marbleWidget()->setShowDebugPolygons( true );
         }
         else if ( i != dataPathIndex && QFile::exists( arg ) )

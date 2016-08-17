@@ -57,25 +57,25 @@ GeoNode* KmlSimpleFieldTagHandler::parse( GeoParser& parser ) const
 GeoDataSimpleField::SimpleFieldType KmlSimpleFieldTagHandler::resolveType( const QString& type )
 {
     GeoDataSimpleField::SimpleFieldType fieldType;
-    if ( type == QString("string") ) {
+    if (type == QLatin1String("string")) {
         fieldType = GeoDataSimpleField::String;
     }
-    else if ( type == QString("int") ) {
+    else if (type == QLatin1String("int")) {
         fieldType = GeoDataSimpleField::Int;
     }
-    else if ( type == QString("unit") ) {
+    else if (type == QLatin1String("unit")) {
         fieldType = GeoDataSimpleField::UInt;
     }
-    else if ( type == QString("short") ) {
+    else if (type == QLatin1String("short")) {
         fieldType = GeoDataSimpleField::Short;
     }
-    else if ( type == QString("ushort") ) {
+    else if (type == QLatin1String("ushort")) {
         fieldType = GeoDataSimpleField::UShort;
     }
-    else if ( type == QString("float") ) {
+    else if (type == QLatin1String("float")) {
         fieldType = GeoDataSimpleField::Float;
     }
-    else if ( type == QString("double") ) {
+    else if (type == QLatin1String("double")) {
         fieldType = GeoDataSimpleField::Double;
     }
     else {

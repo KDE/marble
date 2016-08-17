@@ -200,7 +200,7 @@ void ElevationProfileMarker::onGeoObjectAdded( GeoDataObject *object )
     if ( !document )
         return;
 
-    if ( document->name() != "Elevation Profile" )
+    if (document->name() != QLatin1String("Elevation Profile"))
         return;
 
     if ( document->size() < 1 )
@@ -217,7 +217,7 @@ void ElevationProfileMarker::onGeoObjectRemoved( GeoDataObject *object )
     if ( !document )
         return;
 
-    if ( document->name() != "Elevation Profile" )
+    if (document->name() != QLatin1String("Elevation Profile"))
         return;
 
     m_markerPlacemark = 0;

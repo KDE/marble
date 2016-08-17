@@ -44,9 +44,10 @@ void OpenDesktopModel::getAdditionalItems( const GeoDataLatLonAltBox& box, qint3
 {
     Q_UNUSED( number )
   
-    if( marbleModel()->planetId() != "earth" )
+    if (marbleModel()->planetId() != QLatin1String("earth")) {
         return;
-    
+    }
+
     GeoDataCoordinates coords = box.center();
     
     QString openDesktopUrl( "http://api.opendesktop.org/v1/person/data" );

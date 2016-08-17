@@ -30,7 +30,7 @@ GeoNode *KmlrefreshVisibilityTagHandler::parse(GeoParser & parser) const
     if( parentItem.is<GeoDataNetworkLink>() ) {
         QString content = parser.readElementText().trimmed();
         GeoDataNetworkLink* networkLink = parentItem.nodeAs<GeoDataNetworkLink>();
-        networkLink->setRefreshVisibility( content == QString( "1" ) );
+        networkLink->setRefreshVisibility(content == QLatin1String("1"));
     }
 
     return 0;

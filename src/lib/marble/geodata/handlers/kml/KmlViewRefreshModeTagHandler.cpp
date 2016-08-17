@@ -30,11 +30,11 @@ GeoNode* KmlviewRefreshModeTagHandler::parse( GeoParser& parser ) const
         QString content = parser.readElementText().trimmed();
 
         GeoDataLink::ViewRefreshMode mode = GeoDataLink::Never;
-        if( content == QString( "onStop" ) ) {
+        if (content == QLatin1String("onStop")) {
             mode = GeoDataLink::OnStop;
-        } else if( content == QString( "onRegion" ) ) {
+        } else if (content == QLatin1String("onRegion")) {
             mode = GeoDataLink::OnRegion;
-        } else if(content == QString("onRequest")) {
+        } else if (content == QLatin1String("onRequest")) {
             mode = GeoDataLink::OnRequest;
         }
 

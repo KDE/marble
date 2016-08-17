@@ -37,7 +37,7 @@ int main(int argc, char** argv)
     mapWidget->setShowScaleBar(false);
 
     foreach ( AbstractFloatItem * floatItem, mapWidget->floatItems() )
-        if ( floatItem && floatItem->nameId() == "compass" ) {
+        if (floatItem && floatItem->nameId() == QLatin1String("compass")) {
 
             // Put the compass onto the left hand side
             floatItem->setPosition( QPoint( 10, 10 ) );

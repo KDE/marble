@@ -40,7 +40,7 @@ GeoNode* KmlcolorModeTagHandler::parse( GeoParser& parser ) const
     GeoStackItem  parentItem = parser.parentElement();
     
     if ( parentItem.is<GeoDataColorStyle>() ) {
-        if ( parser.readElementText().trimmed() == QString("random") ) {
+        if (parser.readElementText().trimmed() == QLatin1String("random")) {
             parentItem.nodeAs<GeoDataColorStyle>()->setColorMode( GeoDataColorStyle::Random );
         } else {
             parentItem.nodeAs<GeoDataColorStyle>()->setColorMode( GeoDataColorStyle::Normal );

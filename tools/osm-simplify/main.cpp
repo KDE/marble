@@ -183,7 +183,7 @@ int main(int argc, char *argv[])
         mergeMap = manager.openFile(mergeFileName, DocumentRole::MapDocument, 600000);
     }
 
-    if(file.suffix() == "shp" && parser.isSet("cut-to-tiles")) {
+    if(file.suffix() == QLatin1String("shp") && parser.isSet("cut-to-tiles")) {
         ShpCoastlineProcessor processor(map);
         processor.process();
         GeoDataLatLonBox world(85.0, -85.0, 180.0, -180.0, GeoDataCoordinates::Degree);
@@ -197,7 +197,7 @@ int main(int argc, char *argv[])
             qInfo() << tile->name() << " done";
             delete tile;
         }
-    } else if (file.suffix() == "osm" && parser.isSet("cut-to-tiles") && parser.isSet("merge")) {
+    } else if (file.suffix() == QLatin1String("osm") && parser.isSet("cut-to-tiles") && parser.isSet("merge")) {
         TinyPlanetProcessor processor(map);
         processor.process();
         ShpCoastlineProcessor shpProcessor(mergeMap);
@@ -217,7 +217,7 @@ int main(int argc, char *argv[])
             delete tile2;
             delete tile;
         }
-    } else if (file.suffix() == "osm" && parser.isSet("cut-to-tiles")) {
+    } else if (file.suffix() == QLatin1String("osm") && parser.isSet("cut-to-tiles")) {
         TinyPlanetProcessor processor(map);
 
         processor.process();

@@ -188,7 +188,7 @@ void MarbleLegendBrowser::injectCheckBoxChecker()
 
 void MarbleLegendBrowser::openLinkExternally( const QUrl &url )
 {
-    if ( url.scheme() == "tour" ) {
+    if (url.scheme() == QLatin1String("tour")) {
         emit tourLinkClicked( "maps/"+url.host() + url.path() );
     } else {
         QDesktopServices::openUrl( url );

@@ -128,12 +128,12 @@ int main(int argc, char *argv[])
             QList<qreal> z;
             int numberOfStars = 0;
             for ( int i = 0; i < starIndexes.size(); ++i ) {
-                if ( starIndexes.at(i) == "-1" ) {
+                if (starIndexes.at(i) == QLatin1String("-1")) {
                     out << "                </coordinates> \n"
                         << "            </LineString> \n"
                         << "            <LineString> \n"
                         << "                <coordinates> \n";
-                } else if ( starIndexes.at(i) == "-2" ) {
+                } else if (starIndexes.at(i) == QLatin1String("-2")) {
                     out << "                </coordinates> \n"
                         << "            </LineString> \n"
                         << "        </MultiGeometry> \n"
@@ -143,7 +143,7 @@ int main(int argc, char *argv[])
                         << "        <MultiGeometry> \n"
                         << "            <LineString> \n"
                         << "                <coordinates> \n";
-                } else if ( starIndexes.at(i) == "-3" ) {
+                } else if (starIndexes.at(i) == QLatin1String("-3")) {
                     out << "                </coordinates> \n"
                         << "            </LineString> \n"
                         << "        </MultiGeometry> \n"

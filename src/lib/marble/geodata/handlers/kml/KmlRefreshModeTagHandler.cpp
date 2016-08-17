@@ -19,11 +19,11 @@ GeoNode* KmlrefreshModeTagHandler::parse( GeoParser& parser ) const
     GeoDataLink::RefreshMode mode;
 
     if ( parentItem.is<GeoDataLink>()) {
-        if( content == QString( "onChange" ) ) {
+        if (content == QLatin1String("onChange")) {
             mode = GeoDataLink::OnChange;
-        } else if( content == QString( "onExpire" ) ) {
+        } else if (content == QLatin1String("onExpire")) {
             mode = GeoDataLink::OnExpire;
-        } else if( content == QString( "onInterval" ) ) {
+        } else if (content == QLatin1String("onInterval")) {
             mode = GeoDataLink::OnInterval;
         } else {
             mode = GeoDataLink::OnChange;

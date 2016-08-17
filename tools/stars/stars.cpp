@@ -71,7 +71,7 @@ void exportToDat()
             int     colorIdx = 2; // Default White
 
             // Find Index of Table Entry with Closest B-V value (Smallest Difference)
-            if(bvString != QString("      ")) {
+            if (bvString != QLatin1String("      ")) {
                 double bvValue = bvString.toDouble();
                 double bvMinDifference = fabs(colorTable.at(0)-bvValue);
                 for (int i = 1; i < colorTable.size(); ++i) {
@@ -584,7 +584,7 @@ void exportToKml()
             int     colorIdx = 2; // Default White
 
             // Find Index of Table Entry with Closest B-V value (Smallest Difference)
-            if(bvString != QString("      ")) {
+            if (bvString != QLatin1String("      ")) {
                 double bvValue = bvString.toDouble();
                 double bvMinDifference = fabs(colorTable.at(0)-bvValue);
                 for (int i = 1; i < colorTable.size(); ++i) {
@@ -645,15 +645,15 @@ void exportToKml()
             out << "   <Placemark> \n";
 
             QString name = line.mid( 7, 3 );
-            if ( name == "Alp" ) {
+            if (name == QLatin1String("Alp")) {
                 out << "        <name>" << QString::fromUtf8( "α" ) << "</name> \n";
-            } else if ( name == "Bet" ) {
+            } else if (name == QLatin1String("Bet")) {
                 out << "        <name>" << QString::fromUtf8( "β" ) << "</name> \n";
-            } else if ( name == "Gam" ) {
+            } else if (name == QLatin1String("Gam")) {
                 out << "        <name>" << QString::fromUtf8( "γ" ) << "</name> \n";
-            } else if ( name == "Del" ) {
+            } else if (name == QLatin1String("Del")) {
                 out << "        <name>" << QString::fromUtf8( "δ" ) << "</name> \n";
-            } else if ( name == "Eps" ) {
+            } else if (name == QLatin1String("Eps")) {
                 out << "        <name>" << QString::fromUtf8( "ε" ) << "</name> \n";
             }
 

@@ -107,7 +107,7 @@ void ArrowDiscWidget::mouseReleaseEvent( QMouseEvent *mouseEvent )
 
 void ArrowDiscWidget::leaveEvent( QEvent* )
 {
-    if ( m_imagePath != "marble/navigation/navigational_arrows" ) {
+    if (m_imagePath != QLatin1String("marble/navigation/navigational_arrows")) {
         m_imagePath = "marble/navigation/navigational_arrows";
         repaint();
     }

@@ -46,16 +46,18 @@ GeoDataVec2::GeoDataVec2(const qreal &x, const qreal &y, const QString &xunits, 
 
 GeoDataVec2::Unit GeoDataVec2Private::parseUnits( const QString &value )
 {
-   if ( value == "fraction" ) {
-      return GeoDataVec2::Fraction;
-    } else if ( value == "pixels" ) {
-      return GeoDataVec2::Pixels;
-    } else if ( value == "insetPixels" ) {
-      return GeoDataVec2::InsetPixels;
-    } else {
-      mDebug() << "Warning: Unknown units value " << value << " - falling back to default 'fraction'";
-      return GeoDataVec2::Fraction;
+    if (value == QLatin1String("fraction")) {
+        return GeoDataVec2::Fraction;
     }
+    if (value == QLatin1String("pixels")) {
+        return GeoDataVec2::Pixels;
+    }
+    if (value == QLatin1String("insetPixels")) {
+        return GeoDataVec2::InsetPixels;
+    }
+
+    mDebug() << "Warning: Unknown units value " << value << " - falling back to default 'fraction'";
+    return GeoDataVec2::Fraction;
 }
 
 GeoDataVec2::GeoDataVec2( const Marble::GeoDataVec2 &other ) :

@@ -78,7 +78,7 @@ bool JsonParser::read( QIODevice* device )
 
                 // Create the different geometry types
 
-                if ( m_engine.evaluate( "fileData.features[" + count + "].geometry.type" ).toString().toUpper() == "POLYGON" ) {
+                if (m_engine.evaluate( "fileData.features[" + count + "].geometry.type" ).toString().toUpper() == QLatin1String("POLYGON")) {
 
                     // Check first that there are coordinates
                     if ( m_engine.evaluate( "fileData.features[" + count + "].geometry.coordinates" ).isArray() ) {
@@ -115,7 +115,7 @@ bool JsonParser::read( QIODevice* device )
                         geometryList.append( geom );
                     }
 
-                } else if ( m_engine.evaluate( "fileData.features[" + count + "].geometry.type" ).toString().toUpper() == "MULTIPOLYGON" ) {
+                } else if (m_engine.evaluate( "fileData.features[" + count + "].geometry.type" ).toString().toUpper() == QLatin1String("MULTIPOLYGON")) {
 
                     // Check first that there are coordinates
                     if ( m_engine.evaluate( "fileData.features[" + count + "].geometry.coordinates" ).isArray() ) {
@@ -157,7 +157,7 @@ bool JsonParser::read( QIODevice* device )
                         }
                     }
 
-                } else if ( m_engine.evaluate( "fileData.features[" + count + "].geometry.type" ).toString().toUpper() == "LINESTRING" ) {
+                } else if (m_engine.evaluate( "fileData.features[" + count + "].geometry.type" ).toString().toUpper() == QLatin1String("LINESTRING")) {
 
                     // Check first that there are coordinates
                     if ( m_engine.evaluate( "fileData.features[" + count + "].geometry.coordinates" ).isArray() ) {
@@ -177,7 +177,7 @@ bool JsonParser::read( QIODevice* device )
                         geometryList.append( geom );
                     }
 
-                } else if ( m_engine.evaluate( "fileData.features[" + count + "].geometry.type" ).toString().toUpper() == "MULTILINESTRING" ) {
+                } else if (m_engine.evaluate( "fileData.features[" + count + "].geometry.type" ).toString().toUpper() == QLatin1String("MULTILINESTRING")) {
 
                     // Check first that there are coordinates
                     if ( m_engine.evaluate( "fileData.features[" + count + "].geometry.coordinates" ).isArray() ) {
@@ -202,7 +202,7 @@ bool JsonParser::read( QIODevice* device )
                         }
                     }
 
-                } else if ( m_engine.evaluate( "fileData.features[" + count + "].geometry.type" ).toString().toUpper() == "POINT" ) {
+                } else if (m_engine.evaluate( "fileData.features[" + count + "].geometry.type" ).toString().toUpper() == QLatin1String("POINT")) {
 
                     // Check first that there are coordinates
                     if ( m_engine.evaluate( "fileData.features[" + count + "].geometry.coordinates" ).isArray() ) {
@@ -216,7 +216,7 @@ bool JsonParser::read( QIODevice* device )
 
                         geometryList.append( geom );
                     }
-                } else if ( m_engine.evaluate( "fileData.features[" + count + "].geometry.type" ).toString().toUpper() == "MULTIPOINT" ) {
+                } else if (m_engine.evaluate( "fileData.features[" + count + "].geometry.type" ).toString().toUpper() == QLatin1String("MULTIPOINT")) {
 
                     // Check first that there are coordinates
                     if ( m_engine.evaluate( "fileData.features[" + count + "].geometry.coordinates" ).isArray() ) {
@@ -257,7 +257,7 @@ bool JsonParser::read( QIODevice* device )
                         propertyIterator.next();
 
                         // If the property read, is the features name
-                        if ( propertyIterator.name() == "name" ) {
+                        if (propertyIterator.name() == QLatin1String("name")) {
                             for ( int pl = 0 ; pl < placemarkList.length() ; pl++) {
                                 placemarkList.at( pl )->setName( propertyIterator.value().toString() );
                             }

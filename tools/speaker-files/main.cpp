@@ -289,7 +289,7 @@ int process( const QDir &input, const QDir &output, const QString &xml )
         createLegalFiles( extracted, name, email );
         QFile::copy( extracted + "/Marble.ogg", nickDir + '/' + lang + '-' + simpleNick + ".ogg" );
         convertToMarbleFormat( extracted, nickDir + '/' + lang + '-' + simpleNick + ".zip" );
-        convertToTomTomFormat( extracted, nickDir, nick, simpleNick, index, gender == "male", lang );
+        convertToTomTomFormat(extracted, nickDir, nick, simpleNick, index, gender == QLatin1String("male"), lang);
         convertToNewStuffFormat( extracted, nickDir + '/' + lang + '-' + simpleNick + ".tar.gz" );
 
         xmlOut << "  <stuff category=\"marble/data/audio\">\n";

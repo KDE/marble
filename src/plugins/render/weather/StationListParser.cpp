@@ -42,7 +42,7 @@ void StationListParser::read()
         readNext();
 
         if ( isStartElement() ) {
-            if ( name() == "StationList" )
+            if (name() == QLatin1String("StationList"))
                 readStationList();
             else
                 raiseError( QObject::tr("The file is not a valid file.") );
@@ -90,7 +90,7 @@ void StationListParser::readUnknownElement()
 void StationListParser::readStationList()
 {
     Q_ASSERT( isStartElement()
-              && name() == "StationList" );
+              && name() == QLatin1String("StationList"));
               
     while( !atEnd() ) {
         readNext();
@@ -99,7 +99,7 @@ void StationListParser::readStationList()
             break;
         
         if( isStartElement() ) {
-            if( name() == "Station" )
+            if (name() == QLatin1String("Station"))
                 readStation();
             else
                 readUnknownElement();
@@ -110,7 +110,7 @@ void StationListParser::readStationList()
 void StationListParser::readStation()
 {
     Q_ASSERT( isStartElement()
-              && name() == "Station" );
+              && name() == QLatin1String("Station"));
     
     BBCStation station;
     
@@ -121,13 +121,13 @@ void StationListParser::readStation()
             break;
         
         if( isStartElement() ) {
-            if( name() == "name" )
+            if (name() == QLatin1String("name"))
                 station.setName( readCharacters() );
-            else if ( name() == "id" )
+            else if (name() == QLatin1String("id"))
                 station.setBbcId( readCharacters().toLong() );
-            else if ( name() == "priority" )
+            else if (name() == QLatin1String("priority"))
                 station.setPriority( readCharacters().toInt() );
-            else if ( name() == "Point" )
+            else if (name() == QLatin1String("Point"))
                 readPoint( &station );
             else
                 readUnknownElement();
@@ -169,7 +169,7 @@ QString StationListParser::readCharacters()
 void StationListParser::readPoint( BBCStation *station )
 {
     Q_ASSERT( isStartElement()
-              && name() == "Point" );
+              && name() == QLatin1String("Point"));
     
     while ( !atEnd() ) {
         readNext();
@@ -178,7 +178,7 @@ void StationListParser::readPoint( BBCStation *station )
             break;
         
         if ( isStartElement() ) {
-            if ( name() == "coordinates" ) {
+            if (name() == QLatin1String("coordinates")) {
                 QString coorString = readCharacters();
                 QStringList coorList = coorString.split( ',' );
                 

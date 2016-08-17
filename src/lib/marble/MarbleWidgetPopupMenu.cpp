@@ -204,7 +204,7 @@ void MarbleWidgetPopupMenu::Private::setupDialogOsm( PopupLayer *popup, const Ge
     if (data.containsTagKey("natural") && !data.tagValue("natural").isEmpty()){
         QString natural = data.tagValue("natural");
         natural[0] = natural[0].toUpper();
-        if (natural == "Peak" && data.containsTagKey("ele") && !data.tagValue("ele").isEmpty()){
+        if (natural == QLatin1String("Peak") && data.containsTagKey("ele") && !data.tagValue("ele").isEmpty()) {
             doc["details"] = natural + " - " + data.tagValue("ele") + " m";
         } else {
             doc["details"] = natural;
@@ -216,11 +216,11 @@ void MarbleWidgetPopupMenu::Private::setupDialogOsm( PopupLayer *popup, const Ge
     if (data.containsTagKey("shop") && !data.tagValue("shop").isEmpty()){
         QString shop = data.tagValue("shop");
         shop[0] = shop[0].toUpper();
-        if (shop == "Clothes" && data.containsTagKey("clothes") && !data.tagValue("clothes").isEmpty()){
+        if (shop == QLatin1String("Clothes") && data.containsTagKey("clothes") && !data.tagValue("clothes").isEmpty()) {
             QString clothes = data.tagValue("clothes");
             clothes[0] = clothes[0].toUpper();
             doc["amenity"] = "Shop - " + shop + " (" + clothes + ")";
-        } else if (shop == "Clothes" && data.containsTagKey("designation") && !data.tagValue("designation").isEmpty()){
+        } else if (shop == QLatin1String("Clothes") && data.containsTagKey("designation") && !data.tagValue("designation").isEmpty()) {
             QString designation = data.tagValue("designation");
             designation[0] = designation[0].toUpper();
             doc["amenity"] = "Shop - " + shop + " (" + designation + ")";
@@ -365,18 +365,24 @@ void MarbleWidgetPopupMenu::Private::setupDialogCity( PopupLayer *popup, const G
     doc["name"] = placemark->name();
     QString  roleString;
     const QString role = placemark->role();
-    if(role=="PPLC") {
+    if (role == QLatin1String("PPLC")) {
         roleString = tr("National Capital");
-    } else if(role=="PPL") {
+    } else if (role == QLatin1String("PPL")) {
         roleString = tr("City");
-    } else if(role=="PPLA") {
+    } else if (role == QLatin1String("PPLA")) {
         roleString = tr("State Capital");
-    } else if(role=="PPLA2") {
+    } else if (role == QLatin1String("PPLA2")) {
         roleString = tr("County Capital");
-    } else if(role=="PPLA3" || role=="PPLA4" ) {
+    } else if (role == QLatin1String("PPLA3") ||
+               role == QLatin1String("PPLA4")) {
         roleString = tr("Capital");
-    } else if(role=="PPLF" || role=="PPLG" || role=="PPLL" || role=="PPLQ" ||
-              role=="PPLR" || role=="PPLS" || role=="PPLW" ) {
+    } else if (role == QLatin1String("PPLF") ||
+               role == QLatin1String("PPLG") ||
+               role == QLatin1String("PPLL") ||
+               role == QLatin1String("PPLQ") ||
+               role == QLatin1String("PPLR") ||
+               role == QLatin1String("PPLS") ||
+               role == QLatin1String("PPLW")) {
         roleString = tr("Village");
     }
 
@@ -502,7 +508,7 @@ void MarbleWidgetPopupMenu::Private::setupDialogPhotoOverlay( PopupLayer *popup,
     doc["width"] = QString::number(200);
     doc["height"] = QString::number(100);
     QString const basePath = index->resolvePath(".");
-    QUrl const baseUrl = basePath != "." ? QUrl::fromLocalFile( basePath + "/" ) : QUrl();
+    QUrl const baseUrl = (basePath != QLatin1String(".")) ? QUrl::fromLocalFile( basePath + "/" ) : QUrl();
     popup->setContent(doc.finalText(), baseUrl );
 }
 
@@ -668,7 +674,7 @@ void MarbleWidgetPopupMenu::slotInfoDialog()
         bool isSky = false;
 
         if ( d->m_widget->model()->mapTheme() ) {
-            isSky = d->m_widget->model()->mapTheme()->head()->target() == "sky";
+            isSky = d->m_widget->model()->mapTheme()->head()->target() == QLatin1String("sky");
         }
 
         popup->setSize(QSizeF(400, 400));
@@ -711,7 +717,7 @@ void MarbleWidgetPopupMenu::slotInfoDialog()
                 content = content.replace("$[snippet]", placemark->snippet().text(), Qt::CaseInsensitive);
                 content = content.replace("$[id]", placemark->id(), Qt::CaseInsensitive);
                 QString const basePath = placemark->resolvePath(".");
-                QUrl const baseUrl = basePath != "." ? QUrl::fromLocalFile( basePath + "/" ) : QUrl();
+                QUrl const baseUrl = (basePath != QLatin1String(".")) ? QUrl::fromLocalFile( basePath + "/" ) : QUrl();
                 popup->setContent(content, baseUrl );
             }
 

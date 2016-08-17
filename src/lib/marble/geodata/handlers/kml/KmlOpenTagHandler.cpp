@@ -42,7 +42,7 @@ GeoNode* KmlopenTagHandler::parse( GeoParser& parser ) const
     
     if( parentItem.is<GeoDataFeature>() ) {
         QString open = parser.readElementText().trimmed();
-/*        if( open == QString( "1" ) )
+/*        if (open == QLatin1String("1"))
             parentItem.nodeAs<GeoDataFeature>()->setOpen( true );
         else
             parentItem.nodeAs<GeoDataFeature>()->setOpen( false );*/

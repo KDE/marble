@@ -759,7 +759,7 @@ void MarbleWidgetPrivate::updateMapTheme()
 
     m_widget->setRadius( m_widget->radius() ); // Corrects zoom range, if needed
 
-    if ( m_model.planetId() == "earth" ) {
+    if (m_model.planetId() == QLatin1String("earth")) {
         m_map.addLayer( m_routingLayer );
     }
 
@@ -830,7 +830,7 @@ void MarbleWidget::setSubSolarPointIconVisible( bool visible )
     QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
     QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
     for (; i != end; ++i ) {
-        if ( (*i)->nameId() == "sun" ) {
+        if ((*i)->nameId() == QLatin1String("sun")) {
             (*i)->setVisible( visible );
         }
     }

@@ -32,7 +32,7 @@ namespace Marble {
 GeoDataDocument *OsmParser::parse(const QString &filename, QString &error)
 {
     QFileInfo const fileInfo(filename);
-    if (fileInfo.completeSuffix() == "o5m") {
+    if (fileInfo.completeSuffix() == QLatin1String("o5m")) {
         return parseO5m(filename, error);
     } else {
         return parseXml(filename, error);
@@ -113,7 +113,7 @@ GeoDataDocument* OsmParser::parseXml(const QString &filename, QString &error)
     QFile file;
     QBuffer buffer;
     QFileInfo fileInfo(filename);
-    if (fileInfo.completeSuffix() == "osm.zip") {
+    if (fileInfo.completeSuffix() == QLatin1String("osm.zip")) {
         MarbleZipReader zipReader(filename);
         if (zipReader.fileInfoList().size() != 1) {
             int const fileNumber = zipReader.fileInfoList().size();

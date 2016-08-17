@@ -29,7 +29,7 @@ GeoNode* KmlplayModeTagHandler::parse(GeoParser &parser) const
     if (parentItem.is<GeoDataTourControl>()) {
         GeoDataTourControl *control = parentItem.nodeAs<GeoDataTourControl>();
 
-        if (parser.readElementText().trimmed().toLower() == "play") {
+        if (parser.readElementText().trimmed().toLower() == QLatin1String("play")) {
             control->setPlayMode(GeoDataTourControl::Play);
         } else {
             control->setPlayMode(GeoDataTourControl::Pause);

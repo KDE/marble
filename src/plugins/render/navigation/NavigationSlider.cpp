@@ -49,7 +49,7 @@ QPixmap NavigationSlider::pixmap( const QString &id )
 void NavigationSlider::enterEvent( QEvent * )
 {
     setSliderDown( false );
-    if ( m_handleImagePath != "marble/navigation/navigational_slider_handle_hover" ) {
+    if (m_handleImagePath != QLatin1String("marble/navigation/navigational_slider_handle_hover")) {
         m_handleImagePath = "marble/navigation/navigational_slider_handle_hover";
         repaint();
     }
@@ -71,7 +71,7 @@ void NavigationSlider::mouseMoveEvent( QMouseEvent *mouseEvent )
 void NavigationSlider::mousePressEvent( QMouseEvent * )
 {
     setSliderDown( true );
-    if ( m_handleImagePath != "marble/navigation/navigational_slider_handle_press" ) {
+    if (m_handleImagePath != QLatin1String("marble/navigation/navigational_slider_handle_press")) {
         m_handleImagePath = "marble/navigation/navigational_slider_handle_press";
         repaint();
     }
@@ -80,7 +80,7 @@ void NavigationSlider::mousePressEvent( QMouseEvent * )
 void NavigationSlider::mouseReleaseEvent( QMouseEvent * )
 {
     setSliderDown( false );
-    if ( m_handleImagePath != "marble/navigation/navigational_slider_handle_hover" ) {
+    if (m_handleImagePath != QLatin1String("marble/navigation/navigational_slider_handle_hover")) {
         m_handleImagePath = "marble/navigation/navigational_slider_handle_hover";
         repaint();
     }
@@ -89,7 +89,7 @@ void NavigationSlider::mouseReleaseEvent( QMouseEvent * )
 void NavigationSlider::leaveEvent( QEvent * )
 {
     setSliderDown( false );
-    if ( m_handleImagePath != "marble/navigation/navigational_slider_handle" ) {
+    if (m_handleImagePath != QLatin1String("marble/navigation/navigational_slider_handle")) {
         m_handleImagePath = "marble/navigation/navigational_slider_handle";
         repaint();
     }

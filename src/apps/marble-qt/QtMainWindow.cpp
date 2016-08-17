@@ -704,7 +704,7 @@ void MainWindow::createPluginMenus()
 
         // menus
         const QList<QActionGroup*> *tmp_actionGroups = (*i)->actionGroups();
-        if( (*i)->enabled() && tmp_actionGroups && (*i)->nameId() != "annotation" ) {
+        if ((*i)->enabled() && tmp_actionGroups && (*i)->nameId() != QLatin1String("annotation")) {
            foreach( QActionGroup *ag, *tmp_actionGroups ) {
                if( !ag->actions().isEmpty() ) {
                    m_pluginMenus.append( m_viewMenu->addSeparator() );
@@ -989,7 +989,7 @@ void MainWindow::openFile()
     QStringList allFileExtensions;
     QStringList filters;
     foreach ( const ParseRunnerPlugin *plugin, pluginManager->parsingRunnerPlugins() ) {
-        if ( plugin->nameId() == "Cache" )
+        if (plugin->nameId() == QLatin1String("Cache"))
             continue;
 
         const QStringList fileExtensions = plugin->fileExtensions().replaceInStrings( QRegExp( "^" ), "*." );
@@ -1285,7 +1285,7 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
                 settings.beginGroup( pluginName );
                 profile.pluginSettings().insert( pluginName, QHash<QString, QVariant>() );
                 foreach ( const QString& key, settings.childKeys() ) {
-                    if ( key != "Enabled" ) {
+                    if (key != QLatin1String("Enabled")) {
                         profile.pluginSettings()[ pluginName ].insert( key, settings.value( key ) );
                     }
                 }
@@ -1427,7 +1427,7 @@ void MainWindow::writeSettings()
              settings.beginGroup( key );
              settings.setValue( "Enabled", true );
              foreach ( const QString& settingKey, profile.pluginSettings()[ key ].keys() ) {
-                 Q_ASSERT( settingKey != "Enabled" );
+                 Q_ASSERT(settingKey != QLatin1String("Enabled"));
                  settings.setValue( settingKey, profile.pluginSettings()[ key ][ settingKey ] );
              }
              settings.endGroup();

@@ -153,7 +153,7 @@ QStringList OsmTagEditorWidgetPrivate::generateTagFilter() const
     bool condition;
     QStringList tags, tagsAux;
     QString type;
-    if ( m_placemark->extendedData().value( "osmRelation" ).value().toString() == "yes" ) {
+    if (m_placemark->extendedData().value("osmRelation").value().toString() == QLatin1String("yes")) {
         type = "Relation";
     }
     else {
@@ -199,7 +199,7 @@ QStringList OsmTagEditorWidgetPrivate::generateTagFilter() const
 
     // If the placemark is a relation, recommend type=*
     tags      = QStringList() << "type=*";
-    condition = type == "Relation";
+    condition = (type == QLatin1String("Relation"));
     if ( condition ) {
         addPattern( filter, osmData, tags );
     }
@@ -344,10 +344,10 @@ bool OsmTagEditorWidgetPrivate::containsAny( const OsmPlacemarkData &osmData, co
         QString key = tagSplit.at( 0 );
         QString value = tagSplit.at( 1 );
 
-        if ( value == "*" && osmData.containsTagKey( key ) ) {
+        if (value == QLatin1String("*") && osmData.containsTagKey(key)) {
             return true;
         }
-        else if ( value != "*" && osmData.containsTag( key, value ) ) {
+        else if (value != QLatin1String("*") && osmData.containsTag(key, value)) {
             return true;
         }
     }

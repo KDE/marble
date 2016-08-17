@@ -31,13 +31,13 @@ GeoNode* DgmlLicenseTagHandler::parse( GeoParser& parser ) const
     GeoStackItem parentItem = parser.parentElement();
     if( parentItem.represents( dgmlTag_Head ) ) {
         QString const attribution = parser.attribute(dgmlAttr_attribution).trimmed().toLower();
-        if ( attribution == "never" ) {
+        if (attribution == QLatin1String("never")) {
             parentItem.nodeAs<GeoSceneHead>()->license()->setAttribution( GeoSceneLicense::Never );
-        } else if( attribution == "opt-in" || attribution == "optin" ) {
+        } else if (attribution == QLatin1String("opt-in") || attribution == QLatin1String("optin")) {
             parentItem.nodeAs<GeoSceneHead>()->license()->setAttribution( GeoSceneLicense::OptIn );
-        } else if( attribution.isEmpty() || attribution == "opt-out" || attribution == "optout" ) {
+        } else if (attribution.isEmpty() || attribution == QLatin1String("opt-out") || attribution == QLatin1String("optout")) {
             parentItem.nodeAs<GeoSceneHead>()->license()->setAttribution( GeoSceneLicense::OptOut );
-        } else if ( attribution == "always" ) {
+        } else if (attribution == QLatin1String("always")) {
             parentItem.nodeAs<GeoSceneHead>()->license()->setAttribution( GeoSceneLicense::Always );
         } else {
             mDebug() << "Unknown license attribution value " << attribution << ", falling back to 'opt-out'.";

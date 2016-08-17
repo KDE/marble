@@ -38,7 +38,7 @@ GeoNode* KmlGroundOverlayTagHandler::parse( GeoParser& parser ) const
         parentItem.represents( kmlTag_Change ) || parentItem.represents( kmlTag_Create ) || parentItem.represents( kmlTag_Delete ) ) {
         parentItem.nodeAs<GeoDataContainer>()->append( overlay );
         return overlay;
-    } else if ( parentItem.qualifiedName().first == kmlTag_kml ) {
+    } else if (parentItem.qualifiedName().first == QLatin1String(kmlTag_kml)) {
         GeoDataDocument* doc = geoDataDoc( parser );
         doc->append( overlay );
         return overlay;

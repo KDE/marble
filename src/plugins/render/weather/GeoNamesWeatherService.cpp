@@ -44,7 +44,7 @@ GeoNamesWeatherService::~GeoNamesWeatherService()
 void GeoNamesWeatherService::getAdditionalItems( const GeoDataLatLonAltBox& box,
                                             qint32 number )
 {
-    if( marbleModel()->planetId() != "earth" ) {
+    if (marbleModel()->planetId() != QLatin1String("earth")) {
         return;
     }
 
@@ -63,7 +63,7 @@ void GeoNamesWeatherService::getAdditionalItems( const GeoDataLatLonAltBox& box,
 
 void GeoNamesWeatherService::getItem( const QString &id )
 {
-    if( marbleModel()->planetId() != "earth" ) {
+    if (marbleModel()->planetId() != QLatin1String("earth")) {
         return;
     }
 
@@ -127,7 +127,7 @@ AbstractDataPluginItem *GeoNamesWeatherService::parse( const QScriptValue &value
         WeatherData data;
 
         // Weather condition
-        if ( clouds != "n/a" && condition != "n/a" ) {
+        if (clouds != QLatin1String("n/a") && condition != QLatin1String("n/a")) {
             if ( dayConditions.contains( condition ) ) {
                 data.setCondition( dayConditions[condition] );
             } else {

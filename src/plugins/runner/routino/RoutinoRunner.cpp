@@ -245,7 +245,7 @@ void RoutinoRunner::retrieveRoute( const RouteRequest *route )
     QString transport = settings["transport"].toString();
     params << QString( "--transport=%0" ).arg( transport );
 
-    if ( settings["method"] == "shortest" ) {
+    if (settings["method"] == QLatin1String("shortest")) {
         params << "--shortest";
     } else {
         params << "--quickest";

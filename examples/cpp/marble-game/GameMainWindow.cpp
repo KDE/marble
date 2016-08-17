@@ -91,11 +91,11 @@ void Private::setupMarbleWidget()
     m_marbleWidget->setMapThemeId( "earth/political/political.dgml" );
 
     foreach ( RenderPlugin *renderPlugin, m_marbleWidget->renderPlugins() ) {
-        if ( renderPlugin->nameId() == "stars"
-            || renderPlugin->nameId() == "overviewmap"
-            || renderPlugin->nameId() == "compass"
-            || renderPlugin->nameId() == "scalebar"
-            || renderPlugin->nameId() == "navigation" )
+        if (renderPlugin->nameId() == QLatin1String("stars")
+            || renderPlugin->nameId() == QLatin1String("overviewmap")
+            || renderPlugin->nameId() == QLatin1String("compass")
+            || renderPlugin->nameId() == QLatin1String("scalebar")
+            || renderPlugin->nameId() == QLatin1String("navigation"))
         {
             renderPlugin->setVisible( false );
         }
@@ -202,7 +202,7 @@ void MainWindow::browseMapButtonClicked()
             GeoDataDocument *doc = static_cast<GeoDataDocument*>( object );
             QFileInfo fileInfo( doc->fileName() );
             QString fileName = fileInfo.fileName();
-            if ( fileName == QString("boundaryplacemarks.cache") ) {
+            if (fileName == QLatin1String("boundaryplacemarks.cache")) {
                 doc->setVisible( true );
                 d->m_marbleWidget->model()->treeModel()->updateFeature( doc );
                 d->m_marbleWidget->setHighlightEnabled( true );

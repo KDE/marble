@@ -521,13 +521,11 @@ void ControlView::launchExternalMapEditor()
         }
     }
 
-    if ( editor == "josm" )
-    {
+    if (editor == QLatin1String("josm")) {
         // JOSM, the java based editor
         synchronizeWithExternalMapEditor( editor, "--download=%1,%4,%3,%2" );
     }
-    else if ( editor == "merkaartor" )
-    {
+    else if (editor == QLatin1String("merkaartor")) {
         // Merkaartor, a Qt based editor
         QString argument = "osm://download/load_and_zoom?top=%1&right=%2&bottom=%3&left=%4";
         synchronizeWithExternalMapEditor( editor, argument );
@@ -694,7 +692,7 @@ QList<QAction*> ControlView::setupDockWidgets( QMainWindow *mainWindow )
     QList<RenderPlugin *>::const_iterator const end = renderPluginList.constEnd();
 
     for (; i != end; ++i ) {
-        if( (*i)->nameId() == "annotation" ) {
+        if ((*i)->nameId() == QLatin1String("annotation")) {
             m_annotationPlugin = *i;
             QObject::connect(m_annotationPlugin, SIGNAL(enabledChanged(bool)),
                              this, SLOT(updateAnnotationDockVisibility()));
@@ -830,7 +828,7 @@ void ControlView::updateAnnotationDock()
     if( !tmp_actionGroups->isEmpty() ) {
         bool firstToolbarFilled = false;
         foreach( QAction *action, tmp_actionGroups->first()->actions() ) {
-            if( action->objectName() == "toolbarSeparator" ) {
+            if (action->objectName() == QLatin1String("toolbarSeparator")) {
                 firstToolbarFilled = true;
             } else {
                 if( !firstToolbarFilled ) {

@@ -31,9 +31,9 @@ GeoNode* KmlgridOriginTagHandler::parse( GeoParser& parser ) const
         GeoDataImagePyramid::GridOrigin gridOrigin;
         QString gridOriginText = parser.readElementText();
 
-        if ( gridOriginText == "lowerLeft" ) {
+        if (gridOriginText == QLatin1String("lowerLeft")) {
             gridOrigin = GeoDataImagePyramid::LowerLeft;
-        } else if ( gridOriginText == "upperLeft" ) {
+        } else if (gridOriginText == QLatin1String("upperLeft")) {
             gridOrigin = GeoDataImagePyramid::UpperLeft;
         }
 

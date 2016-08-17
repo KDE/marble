@@ -152,7 +152,7 @@ void TourCaptureDialog::recordNextFrame()
         return;
     }
 
-    if( ui->startButton->text() == QString("Start") ) {
+    if (ui->startButton->text() == QLatin1String("Start")) {
         return;
     }
 

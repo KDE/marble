@@ -931,7 +931,7 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
         else if (visualCategory == GeoDataFeature::Bathymetry) {
             if (osmData.containsTagKey("ele")) {
                 QString elevation = osmData.tagValue("ele");
-                if (elevation == "4000") {
+                if (elevation == QLatin1String("4000")) {
                     polyStyle.setColor("#a5c9c9");
                     lineStyle.setColor("#a5c9c9");
                     adjustStyle = true;
@@ -1016,7 +1016,11 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
             }
 
             QString const accessValue = osmData.tagValue("access");
-            if (accessValue == "private" || accessValue == "no" || accessValue == "agricultural" || accessValue == "delivery" || accessValue == "forestry") {
+            if (accessValue == QLatin1String("private") ||
+                accessValue == QLatin1String("no") ||
+                accessValue == QLatin1String("agricultural") ||
+                accessValue == QLatin1String("delivery") ||
+                accessValue == QLatin1String("forestry")) {
                 QColor polyColor = polyStyle.color();
                 qreal hue, sat, val;
                 polyColor.getHsvF(&hue, &sat, &val);
@@ -1063,7 +1067,7 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
         if (visualCategory == GeoDataFeature::Bathymetry) {
             if (osmData.containsTagKey("ele")) {
                 QString elevation = osmData.tagValue("ele");
-                if (elevation == "4000") {
+                if (elevation == QLatin1String("4000")) {
                     polyStyle.setColor("#a5c9c9");
                     lineStyle.setColor("#a5c9c9");
                     adjustStyle = true;

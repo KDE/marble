@@ -131,7 +131,7 @@ QUrl WmsServerLayout::downloadUrl( const QUrl &prototypeUrl, const Marble::TileI
     if ( !url.hasQueryItem( "styles" ) )
         url.addQueryItem( "styles", "" );
     if ( !url.hasQueryItem( "format" ) ) {
-        if ( m_textureLayer->fileFormat().toLower() == "jpg" )
+        if (m_textureLayer->fileFormat().toLower() == QLatin1String("jpg"))
             url.addQueryItem( "format", "image/jpeg" );
         else
             url.addQueryItem( "format", "image/" + m_textureLayer->fileFormat().toLower() );

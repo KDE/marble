@@ -49,9 +49,9 @@ GeoNode* KmlaltitudeModeTagHandler::parse( GeoParser& parser ) const
     QString content = parser.readElementText().trimmed();
 
     AltitudeMode mode;
-    if( content == QString( "relativeToGround" ) ) {
+    if (content == QLatin1String("relativeToGround")) {
         mode = RelativeToGround;
-    } else if( content == QString( "absolute" ) ) {
+    } else if (content == QLatin1String("absolute")) {
         mode = Absolute;
     } else { // clampToGround is Standard
         mode = ClampToGround;

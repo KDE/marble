@@ -218,7 +218,7 @@ int main(int argc, char** argv)
     }
 
     GeoDataSchema schema = document->schema( QString("default") );
-    if ( schema.simpleField("mapcolor13").name() == QString("mapcolor13") ) {
+    if (schema.simpleField("mapcolor13").name() == QLatin1String("mapcolor13")) {
         isMapColorField = true;
     }
 

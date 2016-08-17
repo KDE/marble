@@ -134,9 +134,9 @@ void FlyToEditWidget::save()
 
     flyToElement()->setDuration(m_durationSpin->value());
 
-    if( m_modeCombo->currentText() == "Smooth" ){
+    if (m_modeCombo->currentText() == QLatin1String("Smooth")) {
         flyToElement()->setFlyToMode( GeoDataFlyTo::Smooth );
-    } else if( m_modeCombo->currentText() == "Bounce" ){
+    } else if (m_modeCombo->currentText() == QLatin1String("Bounce")) {
         flyToElement()->setFlyToMode( GeoDataFlyTo::Bounce );
     }
 

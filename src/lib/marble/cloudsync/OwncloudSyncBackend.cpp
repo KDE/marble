@@ -321,7 +321,7 @@ void OwncloudSyncBackend::checkAuthReply()
         } else {
             d->m_cloudSyncManager->setStatus( tr( "The server is not an ownCloud server" ), CloudSyncManager::Error);
         }
-    } else if ( result == "{\"message\":\"Current user is not logged in\"}" && statusCode == 401 ) {
+    } else if (result == QLatin1String("{\"message\":\"Current user is not logged in\"}") && statusCode == 401) {
         // credientials were incorrect
         d->m_cloudSyncManager->setStatus( tr( "Username or password are incorrect" ), CloudSyncManager::Error);
     } else if ( result.contains("\"status\":\"success\"") && statusCode == 200 ) {

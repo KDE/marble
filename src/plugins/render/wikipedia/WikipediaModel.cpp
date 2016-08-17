@@ -55,7 +55,7 @@ void WikipediaModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
                                          qint32 number )
 {
     // Geonames only supports wikipedia articles for earth
-    if ( marbleModel()->planetId() != "earth" ) {
+    if (marbleModel()->planetId() != QLatin1String("earth")) {
         return;
     }
         

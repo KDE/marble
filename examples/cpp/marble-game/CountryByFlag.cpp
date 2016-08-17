@@ -96,7 +96,7 @@ void CountryByFlag::initiateGame()
             if ( object->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
                 GeoDataDocument *doc = static_cast<GeoDataDocument*>( object );
                 QFileInfo fileInfo( doc->fileName() );
-                if ( fileInfo.fileName() == QString("boundaryplacemarks.cache") ) {
+                if (fileInfo.fileName() == QLatin1String("boundaryplacemarks.cache")) {
                     d->m_countryNames = doc;
                     break;
                 }
