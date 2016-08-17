@@ -38,7 +38,7 @@ void MapViewWidgetTest::setMapThemeId()
     MapViewWidget widget;
     QSignalSpy spy( &widget, SIGNAL(mapThemeIdChanged(QString)) );
 
-    widget.setMapThemeId( "" );
+    widget.setMapThemeId(QString());
 
     QCOMPARE( spy.count(), 0 );
 

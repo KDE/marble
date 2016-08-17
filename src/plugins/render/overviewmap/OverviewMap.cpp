@@ -467,7 +467,7 @@ void OverviewMap::loadPlanetMaps()
 
 void OverviewMap::loadMapSuggestions()
 {
-    QStringList paths = QDir( MarbleDirs::pluginPath( "" ) ).entryList( QStringList( "*.svg" ), QDir::Files | QDir::NoDotAndDotDot );
+    QStringList paths = QDir(MarbleDirs::pluginPath(QString())).entryList(QStringList("*.svg"), QDir::Files | QDir::NoDotAndDotDot);
     for( int i = 0; i < paths.size(); ++i ) {
         paths[i] = MarbleDirs::pluginPath( QString() ) + '/' + paths[i];
     }

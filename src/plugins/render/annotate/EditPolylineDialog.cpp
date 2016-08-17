@@ -201,7 +201,7 @@ void EditPolylineDialog::handleChangingStyle()
 {
     // The default style has been changed, thus the old style URL is no longer valid
     // The polyline is now considered to have a customStyle
-    d->m_placemark->setStyleUrl( "" );
+    d->m_placemark->setStyleUrl(QString());
 
     GeoDataStyle::Ptr newStyle(new GeoDataStyle( *d->m_placemark->style() ));
     newStyle->lineStyle().setColor( d->m_linesDialog->currentColor() );

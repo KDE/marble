@@ -404,7 +404,7 @@ bool TourItemDelegate::editAnimatedUpdate(GeoDataAnimatedUpdate *animatedUpdate,
                 placemark = new GeoDataPlacemark( *targetPlacemark );
                 animatedUpdate->update()->change()->placemarkList().insert( 0, placemark );
                 placemark->setTargetId( defaultFeatureId() );
-                placemark->setId( "" );
+                placemark->setId(QString());
             }
         }
     }

@@ -116,7 +116,7 @@ void PlacemarkEditHeaderPrivate::setIconLink(const QString &iconLink)
     if( !pixmap.isNull() ) {
         QIcon icon(pixmap);
         m_iconLink->setText(iconLink);
-        iconLinkButton->setText( "" );
+        iconLinkButton->setText(QString());
         iconLinkButton->setIcon( icon );
     }
 }

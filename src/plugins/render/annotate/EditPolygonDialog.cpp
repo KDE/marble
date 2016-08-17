@@ -228,7 +228,7 @@ void EditPolygonDialog::handleChangingStyle()
 {
 
     // The default style of the polygon has been changed, thus the old style URL is no longer valid
-    d->m_placemark->setStyleUrl( "" );
+    d->m_placemark->setStyleUrl(QString());
 
     GeoDataStyle::Ptr style(new GeoDataStyle( *d->m_placemark->style() ));
     style->lineStyle().setWidth( d->m_linesWidth->value() );

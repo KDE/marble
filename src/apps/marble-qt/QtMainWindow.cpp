@@ -1420,7 +1420,7 @@ void MainWindow::writeSettings()
          settings.setValue( "Name", profile.name() );
          foreach ( const QString& pluginName, settings.childGroups() ) {
              settings.beginGroup( pluginName );
-             settings.remove( "" ); //remove all keys
+             settings.remove(QString()); //remove all keys
              settings.endGroup();
          }
          foreach ( const QString &key, profile.pluginSettings().keys() ) {

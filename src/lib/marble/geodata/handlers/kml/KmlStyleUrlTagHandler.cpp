@@ -48,7 +48,7 @@ GeoNode* KmlstyleUrlTagHandler::parse( GeoParser& parser ) const
 
         QString key = parentItem.nodeAs<GeoDataStyleMap>()->lastKey();
         (*parentItem.nodeAs<GeoDataStyleMap>())[ key ] = content;
-        parentItem.nodeAs<GeoDataStyleMap>()->setLastKey( "" );
+        parentItem.nodeAs<GeoDataStyleMap>()->setLastKey(QString());
 
     } else if( parentItem.is<GeoDataFeature>() ) {
         QString content = parser.readElementText().trimmed();

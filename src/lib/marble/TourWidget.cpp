@@ -503,7 +503,7 @@ void TourWidgetPrivate::addChangePlacemark()
         GeoDataPlacemark *target = static_cast<GeoDataPlacemark*>( lastFeature );
         placemark = new GeoDataPlacemark( *target );
         placemark->setTargetId( m_delegate->defaultFeatureId() );
-        placemark->setId( "" );
+        placemark->setId(QString());
     } else {
         placemark = new GeoDataPlacemark;
     }

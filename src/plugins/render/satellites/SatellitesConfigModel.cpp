@@ -18,7 +18,7 @@ namespace Marble {
 
 SatellitesConfigModel::SatellitesConfigModel( QObject *parent )
     : QAbstractItemModel( parent ),
-      m_rootItem( new SatellitesConfigNodeItem( "" ) )
+      m_rootItem(new SatellitesConfigNodeItem(QString()))
 {
 }
 
