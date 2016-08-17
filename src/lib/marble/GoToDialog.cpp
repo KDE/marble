@@ -166,7 +166,7 @@ QVariant TargetModel::currentLocationData ( int role ) const
         GeoDataCoordinates currentLocation = tracking->currentLocation();
         switch( role ) {
         case Qt::DisplayRole: return tr( "Current Location: %1" ).arg( currentLocation.toString() ) ;
-        case Qt::DecorationRole: return QIcon( ":/icons/gps.png" );
+        case Qt::DecorationRole: return QIcon(QStringLiteral(":/icons/gps.png"));
         case MarblePlacemarkModel::CoordinateRole: {
             return qVariantFromValue( currentLocation );
         }
@@ -195,7 +195,7 @@ QVariant TargetModel::homeData ( int role ) const
 {
     switch( role ) {
     case Qt::DisplayRole: return tr( "Home" );
-    case Qt::DecorationRole: return QIcon( ":/icons/go-home.png" );
+    case Qt::DecorationRole: return QIcon(QStringLiteral(":/icons/go-home.png"));
     case MarblePlacemarkModel::CoordinateRole: {
         qreal lon( 0.0 ), lat( 0.0 );
         int zoom( 0 );
@@ -218,7 +218,7 @@ QVariant TargetModel::bookmarkData ( int index, int role ) const
             return QString(folder->name() + QLatin1String(" / ") + m_bookmarks[index]->name());
         }
     }
-    case Qt::DecorationRole: return QIcon( ":/icons/bookmarks.png" );
+    case Qt::DecorationRole: return QIcon(QStringLiteral(":/icons/bookmarks.png"));
     case MarblePlacemarkModel::CoordinateRole: return qVariantFromValue( m_bookmarks[index]->lookAt()->coordinates() );
     }
 

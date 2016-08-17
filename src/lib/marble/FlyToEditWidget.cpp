@@ -80,12 +80,12 @@ FlyToEditWidget::FlyToEditWidget( const QModelIndex &index, MarbleWidget* widget
     layout->addLayout( pairLayout );
 
     QToolButton* flyToPinCenter = new QToolButton;
-    flyToPinCenter->setIcon(QIcon(":/marble/places.png"));
+    flyToPinCenter->setIcon(QIcon(QStringLiteral(":/marble/places.png")));
     flyToPinCenter->setToolTip(tr("Current map center"));
     connect(flyToPinCenter, SIGNAL(clicked()), this, SLOT(updateCoordinates()));
     layout->addWidget(flyToPinCenter);
 
-    m_button->setIcon( QIcon( ":/marble/document-save.png" ) );
+    m_button->setIcon(QIcon(QStringLiteral(":/marble/document-save.png")));
     connect(m_button, SIGNAL(clicked()), this, SLOT(save()));
     layout->addWidget( m_button );
 

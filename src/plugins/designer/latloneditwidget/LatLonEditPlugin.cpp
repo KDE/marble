@@ -43,7 +43,7 @@ bool LatLonEditPlugin::isContainer() const
 
 QIcon LatLonEditPlugin::icon() const
 {
-    return QIcon(":/icons/marble.png");
+    return QIcon(QStringLiteral(":/icons/marble.png"));
 }
 
 QString LatLonEditPlugin::domXml() const

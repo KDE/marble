@@ -182,7 +182,7 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
 
     m_controlView = new ControlView( this );
 
-    setWindowIcon( QIcon(":/icons/marble.png") );
+    setWindowIcon(QIcon(QStringLiteral(":/icons/marble.png")));
     setCentralWidget( m_controlView );
 
     // Initializing config dialog
@@ -264,16 +264,16 @@ void MainWindow::initObject(const QVariantMap& cmdLineSettings)
 
 void MainWindow::createActions()
  {
-     m_openAction = new QAction( QIcon(":/icons/document-open.png"), tr( "&Open..."), this );
+     m_openAction = new QAction(QIcon(QStringLiteral(":/icons/document-open.png")), tr("&Open..."), this);
      m_openAction->setShortcut( tr( "Ctrl+O" ) );
      m_openAction->setStatusTip( tr( "Open a file for viewing on Marble"));
      connect( m_openAction, SIGNAL(triggered()),
               this, SLOT(openFile()) );
 
-     m_downloadAction = new QAction( QIcon(":/icons/get-hot-new-stuff.png"), tr("&Download Maps..."), this);
+     m_downloadAction = new QAction(QIcon(QStringLiteral(":/icons/get-hot-new-stuff.png")), tr("&Download Maps..."), this);
      connect(m_downloadAction, SIGNAL(triggered()), this, SLOT(openMapDialog()));
 
-     m_exportMapAction = new QAction( QIcon(":/icons/document-save-as.png"), tr("&Export Map..."), this);
+     m_exportMapAction = new QAction(QIcon(QStringLiteral(":/icons/document-save-as.png")), tr("&Export Map..."), this);
      m_exportMapAction->setShortcut(tr("Ctrl+S"));
      m_exportMapAction->setStatusTip(tr("Save a screenshot of the map"));
      connect(m_exportMapAction, SIGNAL(triggered()), this, SLOT(exportMapScreenShot()));
@@ -283,26 +283,26 @@ void MainWindow::createActions()
      m_downloadRegionAction->setStatusTip( tr( "Download a map region in different zoom levels for offline usage" ) );
      connect( m_downloadRegionAction, SIGNAL(triggered()), SLOT(showDownloadRegionDialog()) );
 
-     m_printAction = new QAction( QIcon(":/icons/document-print.png"), tr("&Print..."), this);
+     m_printAction = new QAction(QIcon(QStringLiteral(":/icons/document-print.png")), tr("&Print..."), this);
      m_printAction->setShortcut(tr("Ctrl+P"));
      m_printAction->setStatusTip(tr("Print a screenshot of the map"));
      connect(m_printAction, SIGNAL(triggered()), this, SLOT(printMapScreenShot()));
 
-     m_printPreviewAction = new QAction( QIcon(":/icons/document-print-preview.png"), tr("Print Previe&w ..."), this);
+     m_printPreviewAction = new QAction(QIcon(QStringLiteral(":/icons/document-print-preview.png")), tr("Print Previe&w ..."), this);
      m_printPreviewAction->setStatusTip(tr("Print a screenshot of the map"));
      connect(m_printPreviewAction, SIGNAL(triggered()), m_controlView, SLOT(printPreview()));
 
-     m_quitAction = new QAction( QIcon(":/icons/application-exit.png"), tr("&Quit"), this);
+     m_quitAction = new QAction(QIcon(QStringLiteral(":/icons/application-exit.png")), tr("&Quit"), this);
      m_quitAction->setShortcut(tr("Ctrl+Q"));
      m_quitAction->setStatusTip(tr("Quit the Application"));
      connect(m_quitAction, SIGNAL(triggered()), this, SLOT(close()));
 
-     m_copyMapAction = new QAction( QIcon(":/icons/edit-copy.png"), tr("&Copy Map"), this);
+     m_copyMapAction = new QAction(QIcon(QStringLiteral(":/icons/edit-copy.png")), tr("&Copy Map"), this);
      m_copyMapAction->setShortcut(tr("Ctrl+C"));
      m_copyMapAction->setStatusTip(tr("Copy a screenshot of the map"));
      connect(m_copyMapAction, SIGNAL(triggered()), this, SLOT(copyMap()));
 
-     m_osmEditAction = new QAction( QIcon(":/icons/edit-map.png"), tr( "&Edit Map" ), this );
+     m_osmEditAction = new QAction(QIcon(QStringLiteral(":/icons/edit-map.png")), tr("&Edit Map"), this );
      m_osmEditAction->setShortcut(tr( "Ctrl+E" ) );
      m_osmEditAction->setStatusTip(tr( "Edit the current map region in an external editor" ) );
      updateMapEditButtonVisibility( m_controlView->marbleWidget()->mapThemeId() );
@@ -311,7 +311,7 @@ void MainWindow::createActions()
      m_recordMovieAction = new QAction(tr("&Record Movie"), this);
      m_recordMovieAction->setStatusTip(tr("Records a movie of the globe"));
      m_recordMovieAction->setShortcut(QKeySequence("Ctrl+Shift+R"));
-     m_recordMovieAction->setIcon(QIcon(":/icons/animator.png"));
+     m_recordMovieAction->setIcon(QIcon(QStringLiteral(":/icons/animator.png")));
      connect(m_recordMovieAction, SIGNAL(triggered()),
              this, SLOT(showMovieCaptureDialog()));
 
@@ -322,15 +322,15 @@ void MainWindow::createActions()
      connect( m_stopRecordingAction, SIGNAL(triggered()),
              this, SLOT(stopRecording()) );
 
-     m_configDialogAction = new QAction( QIcon(":/icons/settings-configure.png"),tr("&Configure Marble"), this);
+     m_configDialogAction = new QAction(QIcon(QStringLiteral(":/icons/settings-configure.png")), tr("&Configure Marble"), this);
      m_configDialogAction->setStatusTip(tr("Show the configuration dialog"));
      connect(m_configDialogAction, SIGNAL(triggered()), this, SLOT(editSettings()));
 
-     m_copyCoordinatesAction = new QAction( QIcon(":/icons/copy-coordinates.png"), tr("C&opy Coordinates"), this);
+     m_copyCoordinatesAction = new QAction(QIcon(QStringLiteral(":/icons/copy-coordinates.png")), tr("C&opy Coordinates"), this);
      m_copyCoordinatesAction->setStatusTip(tr("Copy the center coordinates as text"));
      connect(m_copyCoordinatesAction, SIGNAL(triggered()), this, SLOT(copyCoordinates()));
 
-     m_fullScreenAction = new QAction( QIcon(":/icons/view-fullscreen.png"), tr("&Full Screen Mode"), this);
+     m_fullScreenAction = new QAction(QIcon(QStringLiteral(":/icons/view-fullscreen.png")), tr("&Full Screen Mode"), this);
      m_fullScreenAction->setShortcut(tr("Ctrl+Shift+F"));
      m_fullScreenAction->setCheckable( true );
      m_fullScreenAction->setStatusTip(tr("Full Screen Mode"));
@@ -342,21 +342,21 @@ void MainWindow::createActions()
      connect(m_statusBarAction, SIGNAL(triggered(bool)), this, SLOT(showStatusBar(bool)));
 
 
-     m_lockFloatItemsAction = new QAction( QIcon(":/icons/unlock.png"), tr("Lock Position"),this);
+     m_lockFloatItemsAction = new QAction(QIcon(QStringLiteral(":/icons/unlock.png")), tr("Lock Position"), this);
      m_lockFloatItemsAction->setCheckable( true );
      m_lockFloatItemsAction->setStatusTip(tr("Lock Position of Floating Items"));
      connect(m_lockFloatItemsAction, SIGNAL(triggered(bool)), this, SLOT(lockPosition(bool)));
 
-     m_showCloudsAction = new QAction( QIcon(":/icons/clouds.png"), tr("&Clouds"), this);
+     m_showCloudsAction = new QAction(QIcon(QStringLiteral(":/icons/clouds.png")), tr("&Clouds"), this);
      m_showCloudsAction->setCheckable( true );
      m_showCloudsAction->setStatusTip(tr("Show Real Time Cloud Cover"));
      connect(m_showCloudsAction, SIGNAL(triggered(bool)), this, SLOT(showClouds(bool)));
 
-     m_workOfflineAction = new QAction( QIcon(":/icons/user-offline.png"), tr("Work Off&line"), this);
+     m_workOfflineAction = new QAction(QIcon(QStringLiteral(":/icons/user-offline.png")), tr("Work Off&line"), this);
      m_workOfflineAction->setCheckable( true );
      connect(m_workOfflineAction, SIGNAL(triggered(bool)), this, SLOT(workOffline(bool)));
 
-     m_controlTimeAction = new QAction( QIcon(":/icons/clock.png"), tr( "&Time Control..." ), this );
+     m_controlTimeAction = new QAction(QIcon(QStringLiteral(":/icons/clock.png")), tr("&Time Control..."), this );
      m_controlTimeAction->setStatusTip( tr( "Configure Time Control " ) );
      connect( m_controlTimeAction, SIGNAL(triggered()), this, SLOT(controlTime()) );
 
@@ -364,17 +364,17 @@ void MainWindow::createActions()
      m_controlSunAction->setStatusTip( tr( "Configure Sun Control" ) );
      connect( m_controlSunAction, SIGNAL(triggered()), this, SLOT(controlSun()) );
 
-     m_reloadAction = new QAction( QIcon(":/icons/view-refresh.png"), tr("&Redisplay"), this);
+     m_reloadAction = new QAction(QIcon(QStringLiteral(":/icons/view-refresh.png")), tr("&Redisplay"), this);
      m_reloadAction->setShortcut(tr("F5"));
      m_reloadAction->setStatusTip(tr("Reload Current Map"));
      connect(m_reloadAction, SIGNAL(triggered()), this, SLOT(reload()));
 
-     m_handbookAction = new QAction( QIcon(":/icons/help-contents.png"), tr("Marble Virtual Globe &Handbook"), this);
+     m_handbookAction = new QAction(QIcon(QStringLiteral(":/icons/help-contents.png")), tr("Marble Virtual Globe &Handbook"), this);
      m_handbookAction->setShortcut(tr("F1"));
      m_handbookAction->setStatusTip(tr("Show the Handbook for Marble Virtual Globe"));
      connect(m_handbookAction, SIGNAL(triggered()), this, SLOT(handbook()));
 
-     m_whatsThisAction = new QAction( QIcon(":/icons/help-whatsthis.png"), tr("What's &This"), this);
+     m_whatsThisAction = new QAction(QIcon(QStringLiteral(":/icons/help-whatsthis.png")), tr("What's &This"), this);
      m_whatsThisAction->setShortcut(tr("Shift+F1"));
      m_whatsThisAction->setStatusTip(tr("Show a detailed explanation of the action."));
      connect(m_whatsThisAction, SIGNAL(triggered()), this, SLOT(enterWhatsThis()));
@@ -383,7 +383,7 @@ void MainWindow::createActions()
      m_forumAction->setStatusTip(tr("Visit Marble's Community Forum"));
      connect(m_forumAction, SIGNAL(triggered()), this, SLOT(openForum()));
 
-     m_aboutMarbleAction = new QAction( QIcon(":/icons/marble.png"), tr("&About Marble Virtual Globe"), this);
+     m_aboutMarbleAction = new QAction(QIcon(QStringLiteral(":/icons/marble.png")), tr("&About Marble Virtual Globe"), this);
      m_aboutMarbleAction->setStatusTip(tr("Show the application's About Box"));
      connect(m_aboutMarbleAction, SIGNAL(triggered()), this, SLOT(aboutMarble()));
 
@@ -392,12 +392,12 @@ void MainWindow::createActions()
      connect(m_aboutQtAction, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
 
      //Bookmark Actions
-     m_addBookmarkAction = new QAction( QIcon(":/icons/bookmark-new.png"), tr("&Add Bookmark"),this);
+     m_addBookmarkAction = new QAction(QIcon(QStringLiteral(":/icons/bookmark-new.png")), tr("&Add Bookmark"), this);
      m_addBookmarkAction->setShortcut(tr("Ctrl+B"));
      m_addBookmarkAction->setStatusTip(tr("Add Bookmark"));
      connect( m_addBookmarkAction, SIGNAL(triggered()), this, SLOT(openEditBookmarkDialog()) );
 
-     m_setHomeAction = new QAction( QIcon(":/icons/go-home.png"), tr( "&Set Home Location" ),this);
+     m_setHomeAction = new QAction(QIcon(QStringLiteral(":/icons/go-home.png")), tr("&Set Home Location"), this);
      m_setHomeAction->setStatusTip( tr( "&Set Home Location" ) );
      connect( m_setHomeAction, SIGNAL(triggered()), this, SLOT(setHome()) );
 
@@ -406,12 +406,12 @@ void MainWindow::createActions()
      m_toggleBookmarkDisplayAction->setCheckable( true );
      connect( m_toggleBookmarkDisplayAction, SIGNAL(triggered(bool)), this, SLOT(showBookmarks(bool)) );
 
-     m_manageBookmarksAction = new QAction( QIcon( ":/icons/bookmarks-organize.png" ), tr( "&Manage Bookmarks" ), this);
+     m_manageBookmarksAction = new QAction(QIcon(QStringLiteral(":/icons/bookmarks-organize.png")), tr("&Manage Bookmarks"), this);
      m_manageBookmarksAction->setStatusTip( tr( "Manage Bookmarks" ) );
      connect( m_manageBookmarksAction, SIGNAL(triggered()), this, SLOT(manageBookmarks()) );
      
      // Map Wizard action
-     m_mapWizardAction = new QAction( QIcon( ":/icons/create-new-map.png" ), tr("&Create a New Map..."), this );
+     m_mapWizardAction = new QAction(QIcon(QStringLiteral(":/icons/create-new-map.png")), tr("&Create a New Map..."), this);
      m_mapWizardAction->setStatusTip( tr( "A wizard guides you through the creation of your own map theme." ) );
      connect( m_mapWizardAction, SIGNAL(triggered()), SLOT(showMapWizard()) );
 
@@ -601,7 +601,7 @@ void MainWindow::createBookmarkMenu()
 
     m_bookmarkMenu->addSeparator();
 
-    m_bookmarkMenu->addAction( QIcon( ":/icons/go-home.png" ), "&Home",
+    m_bookmarkMenu->addAction( QIcon(QStringLiteral(":/icons/go-home.png")), tr("&Home"),
                                m_controlView->marbleWidget(), SLOT(goHome()) );
     createFolderList( m_bookmarkMenu, m_controlView->marbleModel()->bookmarkManager()->document() );
 }
@@ -615,7 +615,7 @@ void MainWindow::createFolderList( QMenu *bookmarksListMenu, const GeoDataContai
     }
     else {
         foreach ( const GeoDataFolder *folder, folders ) {
-            QMenu *subMenu = bookmarksListMenu->addMenu( QIcon( ":/icons/folder-bookmark.png" ), folder->name() );
+            QMenu *subMenu = bookmarksListMenu->addMenu(QIcon(QStringLiteral(":/icons/folder-bookmark.png")), folder->name());
             createFolderList( subMenu, folder );
             connect( subMenu, SIGNAL(triggered(QAction*)),
                                       this, SLOT(lookAtBookmark(QAction*)) );

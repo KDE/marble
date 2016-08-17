@@ -21,7 +21,7 @@ MarbleWebView::MarbleWebView(QWidget *parent) :
     m_copyAction(new QAction(this))
 {
     m_copyAction->setText(tr("Copy"));
-    m_copyAction->setIcon(QIcon(":/icons/edit-copy.png"));
+    m_copyAction->setIcon(QIcon(QStringLiteral(":/icons/edit-copy.png")));
     m_copyAction->setIconVisibleInMenu(true);
     m_copyAction->setToolTip(tr("Copy selected content"));
     connect(m_copyAction, SIGNAL(triggered()),

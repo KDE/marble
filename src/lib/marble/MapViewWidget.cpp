@@ -107,19 +107,19 @@ class Q_DECL_HIDDEN MapViewWidget::Private {
         m_toolBar = new QToolBar;
 
         m_globeViewButton = new QToolButton;
-        m_globeViewButton->setIcon( QIcon(":/icons/map-globe.png") );
+        m_globeViewButton->setIcon(QIcon(QStringLiteral(":/icons/map-globe.png")));
         m_globeViewButton->setToolTip( tr("Globe View") );
         m_globeViewButton->setCheckable(true);
         m_globeViewButton->setChecked(false);
 
-        m_globeViewAction = new QAction( QIcon(":/icons/map-globe.png"),
+        m_globeViewAction = new QAction(QIcon(QStringLiteral(":/icons/map-globe.png")),
                                              tr( "Spherical view" ),
                                              m_globeViewButton );
         m_globeViewAction->setCheckable( true );
         m_globeViewAction->setChecked( false );
 
         m_mercatorViewButton = new QToolButton;
-        m_mercatorViewButton->setIcon( QIcon(":/icons/map-mercator.png") );
+        m_mercatorViewButton->setIcon(QIcon(QStringLiteral(":/icons/map-mercator.png")));
         m_mercatorViewButton->setToolTip( tr("Mercator View") );
         m_mercatorViewButton->setCheckable(true);
         m_mercatorViewButton->setChecked(false);
@@ -127,43 +127,43 @@ class Q_DECL_HIDDEN MapViewWidget::Private {
 
         m_popupMenuFlat = new QMenu;
 
-        m_mercatorViewAction = new QAction( QIcon(":/icons/map-mercator.png"),
+        m_mercatorViewAction = new QAction(QIcon(QStringLiteral(":/icons/map-mercator.png")),
                                               tr("Mercator View"),
                                               m_popupMenuFlat );
         m_mercatorViewAction->setCheckable(true);
         m_mercatorViewAction->setChecked(false);
 
-        m_flatViewAction = new QAction( QIcon(":/icons/map-flat.png"),
+        m_flatViewAction = new QAction( QIcon(QStringLiteral(":/icons/map-flat.png")),
                                         tr("Flat View"),
                                         m_popupMenuFlat );
         m_flatViewAction->setCheckable(true);
         m_flatViewAction->setChecked(false);
 
-        m_gnomonicViewAction = new QAction( QIcon(":/icons/map-gnomonic.png"),
+        m_gnomonicViewAction = new QAction( QIcon(QStringLiteral(":/icons/map-gnomonic.png")),
                                             tr( "Gnomonic view" ),
                                             m_popupMenuFlat);
         m_gnomonicViewAction->setCheckable( true );
         m_gnomonicViewAction->setChecked( false );
 
-        m_stereographicViewAction = new QAction( QIcon(":/icons/map-globe.png"),
+        m_stereographicViewAction = new QAction(QIcon(QStringLiteral(":/icons/map-globe.png")),
                                             tr( "Stereographic view" ),
                                             m_popupMenuFlat);
         m_stereographicViewAction->setCheckable( true );
         m_stereographicViewAction->setChecked( false );
 
-        m_lambertAzimuthalViewAction = new QAction( QIcon(":/icons/map-globe.png"),
+        m_lambertAzimuthalViewAction = new QAction(QIcon(QStringLiteral(":/icons/map-globe.png")),
                                             tr( "Lambert Azimuthal Equal-Area view" ),
                                             m_popupMenuFlat);
         m_lambertAzimuthalViewAction->setCheckable( true );
         m_lambertAzimuthalViewAction->setChecked( false );
 
-        m_azimuthalEquidistantViewAction = new QAction( QIcon(":/icons/map-globe.png"),
+        m_azimuthalEquidistantViewAction = new QAction(QIcon(QStringLiteral(":/icons/map-globe.png")),
                                             tr( "Azimuthal Equidistant view" ),
                                             m_popupMenuFlat);
         m_azimuthalEquidistantViewAction->setCheckable( true );
         m_azimuthalEquidistantViewAction->setChecked( false );
 
-        m_verticalPerspectiveViewAction = new QAction( QIcon(":/icons/map-globe.png"),
+        m_verticalPerspectiveViewAction = new QAction(QIcon(QStringLiteral(":/icons/map-globe.png")),
                                             tr( "Perspective Globe view" ),
                                             m_popupMenuFlat);
         m_verticalPerspectiveViewAction->setCheckable( true );
@@ -642,12 +642,12 @@ void MapViewWidget::Private::showContextMenu( const QPoint& pos )
     QAction* iconSizeAction = menu.addAction( tr( "&Show Large Icons" ), q, SLOT(toggleIconSize()) );
     iconSizeAction->setCheckable( true );
     iconSizeAction->setChecked( m_mapViewUi.marbleThemeSelectView->iconSize() == QSize( 96, 96 ) );
-    QAction *favAction = menu.addAction( QIcon( ":/icons/bookmarks.png" ), tr( "&Favorite" ), q, SLOT(toggleFavorite()) );
+    QAction *favAction = menu.addAction(QIcon(QStringLiteral(":/icons/bookmarks.png")), tr("&Favorite"), q, SLOT(toggleFavorite()));
     favAction->setCheckable( true );
     favAction->setChecked( isCurrentFavorite() );
     menu.addSeparator();
 
-    menu.addAction( QIcon( ":/icons/create-new-map.png" ), tr("&Create a New Map..."), q, SIGNAL(showMapWizard()) );
+    menu.addAction(QIcon(QStringLiteral(":/icons/create-new-map.png")), tr("&Create a New Map..."), q, SIGNAL(showMapWizard()));
     if( QFileInfo( MarbleDirs::localPath() + "/maps/" + currentThemePath() ).exists() )
         menu.addAction( tr( "&Delete Map Theme" ), q, SLOT(deleteMap()) );
     menu.addAction( tr( "&Upload Map..." ), q, SIGNAL(showUploadDialog()) );

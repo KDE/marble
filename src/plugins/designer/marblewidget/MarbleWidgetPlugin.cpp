@@ -53,7 +53,7 @@ QString MarbleWidgetPlugin::group() const
 
 QIcon MarbleWidgetPlugin::icon() const
 {
-    return QIcon(":/icons/marble.png");
+    return QIcon(QStringLiteral(":/icons/marble.png"));
 }
 
 QString MarbleWidgetPlugin::toolTip() const

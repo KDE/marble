@@ -199,27 +199,27 @@ QStyleOptionButton RouteItemDelegate::button( Element element, const QStyleOptio
     switch ( element ) {
     case OpenButton:
         result.text = tr( "Open" );
-        result.icon = QIcon( ":/marble/document-open.png" );
+        result.icon = QIcon(QStringLiteral(":/marble/document-open.png"));
         result.iconSize = QSize( m_iconSize, m_iconSize );
         break;
     case DownloadButton:
         result.text = tr( "Load" );
-        result.icon = QIcon( ":/marble/dialog-ok.png" );
+        result.icon = QIcon(QStringLiteral(":/marble/dialog-ok.png"));
         result.iconSize = QSize( m_iconSize, m_iconSize );
         break;
     case RemoveFromCacheButton:
         result.text = tr( "Remove from device" );
-        result.icon = QIcon( ":/marble/edit-clear.png" );
+        result.icon = QIcon(QStringLiteral(":/marble/edit-clear.png"));
         result.iconSize = QSize( m_iconSize, m_iconSize );
         break;
     case RemoveFromCloudButton:
         result.text = tr( "Delete from cloud" );
-        result.icon = QIcon( ":/marble/edit-delete.png" );
+        result.icon = QIcon(QStringLiteral(":/marble/edit-delete.png"));
         result.iconSize = QSize( m_iconSize, m_iconSize );
         break;
     case UploadToCloudButton:
         result.text = tr( "Upload to cloud" );
-        result.icon = QIcon( ":/icons/cloud-upload.png" );
+        result.icon = QIcon(QStringLiteral(":/icons/cloud-upload.png"));
         result.iconSize = QSize( m_iconSize, m_iconSize );
         break;
     default:

@@ -877,63 +877,63 @@ void AnnotatePlugin::setupActions( MarbleWidget *widget )
     group->setExclusive( true );
 
 
-    QAction *selectItem = new QAction( QIcon(":/icons/edit-select.png"),
+    QAction *selectItem = new QAction( QIcon(QStringLiteral(":/icons/edit-select.png")),
                                        tr("Select Item"),
                                        this );
     selectItem->setCheckable( true );
     selectItem->setChecked( true );
 
-    QAction *drawPolygon = new QAction( QIcon(":/icons/draw-polygon.png"),
+    QAction *drawPolygon = new QAction( QIcon(QStringLiteral(":/icons/draw-polygon.png")),
                                         tr("Add Polygon"),
                                         this );
     connect( drawPolygon, SIGNAL(triggered()), this, SLOT(addPolygon()) );
 
-    QAction *addHole = new QAction( QIcon(":/icons/polygon-draw-hole.png"),
+    QAction *addHole = new QAction( QIcon(QStringLiteral(":/icons/polygon-draw-hole.png")),
                                     tr("Add Polygon Hole"),
                                     this );
     addHole->setCheckable( true );
     addHole->setEnabled( false );
     connect( addHole, SIGNAL(toggled(bool)), this, SLOT(setAddingPolygonHole(bool)) );
 
-    QAction *addNodes = new QAction( QIcon(":/icons/polygon-add-nodes.png"),
+    QAction *addNodes = new QAction( QIcon(QStringLiteral(":/icons/polygon-add-nodes.png")),
                                      tr("Add Nodes"),
                                      this );
     addNodes->setCheckable( true );
     addNodes->setEnabled( false );
     connect( addNodes, SIGNAL(toggled(bool)), this, SLOT(setAddingNodes(bool)) );
 
-    QAction *addTextAnnotation = new QAction( QIcon(":/icons/add-placemark.png"),
+    QAction *addTextAnnotation = new QAction( QIcon(QStringLiteral(":/icons/add-placemark.png")),
                                               tr("Add Placemark"),
                                               this );
     connect( addTextAnnotation, SIGNAL(triggered()), this, SLOT(addTextAnnotation()) );
 
-    QAction *addPath = new QAction( QIcon(":/icons/draw-path.png" ),
+    QAction *addPath = new QAction( QIcon(QStringLiteral(":/icons/draw-path.png")),
                                     tr("Add Path"),
                                     this );
     connect( addPath, SIGNAL(triggered()), this, SLOT(addPolyline()) );
 
-    QAction *addOverlay = new QAction( QIcon( ":/icons/draw-overlay.png"),
+    QAction *addOverlay = new QAction( QIcon(QStringLiteral(":/icons/draw-overlay.png")),
                                        tr("Add Ground Overlay"),
                                        this );
     connect( addOverlay, SIGNAL(triggered()), this, SLOT(addOverlay()) );
 
-    QAction *removeItem = new QAction( QIcon( ":/icons/edit-delete-shred.png"),
+    QAction *removeItem = new QAction( QIcon(QStringLiteral(":/icons/edit-delete-shred.png")),
                                        tr("Remove Item"),
                                        this );
     removeItem->setEnabled( false );
     connect( removeItem, SIGNAL(triggered()), this, SLOT(askToRemoveFocusItem()) );
 
-    QAction *loadAnnotationFile = new QAction( QIcon( ":/icons/open-for-editing.png"),
+    QAction *loadAnnotationFile = new QAction( QIcon(QStringLiteral(":/icons/open-for-editing.png")),
                                                tr("Load Annotation File" ),
                                                this );
     connect( loadAnnotationFile, SIGNAL(triggered()), this, SLOT(loadAnnotationFile()) );
 
-    QAction *saveAnnotationFile = new QAction( QIcon( ":/icons//document-save-as.png"),
+    QAction *saveAnnotationFile = new QAction( QIcon(QStringLiteral(":/icons/document-save-as.png")),
                                                tr("Save Annotation File"),
                                                this );
     connect( saveAnnotationFile, SIGNAL(triggered()), this, SLOT(saveAnnotationFile()) );
 
-    QAction *clearAnnotations = new QAction( QIcon( ":/icons/remove.png"),
+    QAction *clearAnnotations = new QAction( QIcon(QStringLiteral(":/icons/remove.png")),
                                              tr("Clear all Annotations"),
                                              this );
     connect( drawPolygon, SIGNAL(toggled(bool)), clearAnnotations, SLOT(setDisabled(bool)) );

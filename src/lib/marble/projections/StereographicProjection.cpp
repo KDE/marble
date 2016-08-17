@@ -74,7 +74,7 @@ QString StereographicProjection::description() const
 
 QIcon StereographicProjection::icon() const
 {
-    return QIcon(":/icons/map-globe.png");
+    return QIcon(QStringLiteral(":/icons/map-globe.png"));
 }
 
 qreal StereographicProjection::clippingRadius() const

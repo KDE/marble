@@ -251,7 +251,7 @@ void NavigationFloatItem::contextMenuEvent( QWidget *w, QContextMenuEvent *e )
         m_activateCurrentPositionButtonAction = new QAction( QIcon(),
                                                              tr( "Current Location Button" ),
                                                              m_contextMenu );
-        m_activateHomeButtonAction = new QAction( QIcon( ":/icons/go-home.png" ),
+        m_activateHomeButtonAction = new QAction(QIcon(QStringLiteral(":/icons/go-home.png")),
                                                              tr( "Home Button" ),
                                                              m_contextMenu );
         m_activateHomeButtonAction->setVisible( !m_showHomeButton );

@@ -49,7 +49,7 @@ TourControlEditWidget::TourControlEditWidget( const QModelIndex &index, QWidget 
         m_radio_pause->setChecked( true );
     }
 
-    m_button->setIcon( QIcon( ":/marble/document-save.png" ) );
+    m_button->setIcon(QIcon(QStringLiteral(":/marble/document-save.png")));
     connect(m_button, SIGNAL(clicked()), this, SLOT(save()));
     layout->addWidget( m_button );
 

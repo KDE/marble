@@ -95,18 +95,18 @@ void TourItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &opt
         painter->setClipRect( 0, 0, labelRect.width(), labelRect.height() );
         label.documentLayout()->draw( painter, paintContext );
         painter->restore();
-        button.icon = QIcon( ":/marble/document-edit.png" );
+        button.icon = QIcon(QStringLiteral(":/marble/document-edit.png"));
 
         QRect const buttonRect = position( EditButton, option );;
         button.rect = buttonRect;
 
-        QIcon const icon = QIcon( ":/marble/media-playback-pause.png" );
+        QIcon const icon = QIcon(QStringLiteral(":/marble/media-playback-pause.png"));
         painter->drawPixmap( iconRect, icon.pixmap( iconRect.size() ) );
 
     } else if ( object->nodeType() == GeoDataTypes::GeoDataFlyToType && !m_editingIndices.contains( index ) ) {
         GeoDataCoordinates const flyToCoords = index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoDataCoordinates>();
         label.setHtml( flyToCoords.toString() );
-        button.icon = QIcon( ":/marble/document-edit.png" );
+        button.icon = QIcon(QStringLiteral(":/marble/document-edit.png"));
 
         painter->save();
         painter->translate( labelRect.topLeft() );
@@ -117,7 +117,7 @@ void TourItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &opt
         QRect const buttonRect = position( EditButton, option );
         button.rect = buttonRect;
 
-        QIcon const icon = QIcon( ":/marble/flag.png" );
+        QIcon const icon = QIcon(QStringLiteral(":/marble/flag.png"));
         painter->drawPixmap( iconRect, icon.pixmap( iconRect.size() ) );
 
     } else if ( object->nodeType() == GeoDataTypes::GeoDataWaitType && !m_editingIndices.contains( index ) ) {
@@ -130,12 +130,12 @@ void TourItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &opt
         label.documentLayout()->draw( painter, paintContext );
         painter->restore();
 
-        button.icon = QIcon( ":/marble/document-edit.png" );
+        button.icon = QIcon(QStringLiteral(":/marble/document-edit.png"));
 
         QRect const buttonRect = position( EditButton, option );
         button.rect = buttonRect;
 
-        QIcon const icon = QIcon( ":/marble/player-time.png" );
+        QIcon const icon = QIcon(QStringLiteral(":/marble/player-time.png"));
         painter->drawPixmap( iconRect, icon.pixmap( iconRect.size() ) );
 
     } else if ( object->nodeType() == GeoDataTypes::GeoDataSoundCueType && !m_editingIndices.contains( index ) ) {
@@ -150,16 +150,16 @@ void TourItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &opt
 
         QStyleOptionButton playButton = button;
 
-        button.icon = QIcon( ":/marble/document-edit.png" );
+        button.icon = QIcon(QStringLiteral(":/marble/document-edit.png"));
         QRect const buttonRect = position( EditButton, option );
         button.rect = buttonRect;
 
-        playButton.icon = QIcon( ":/marble/playback-play.png" );
+        playButton.icon = QIcon(QStringLiteral(":/marble/playback-play.png"));
         QRect const playButtonRect = position( ActionButton, option );
         playButton.rect = playButtonRect;
         QApplication::style()->drawControl( QStyle::CE_PushButton, &playButton, painter );
 
-        QIcon const icon = QIcon( ":/marble/audio-x-generic.png" );
+        QIcon const icon = QIcon(QStringLiteral(":/marble/audio-x-generic.png"));
         painter->drawPixmap( iconRect, icon.pixmap( iconRect.size() ) );
     } else if ( object->nodeType() == GeoDataTypes::GeoDataAnimatedUpdateType && !m_editingIndices.contains( index ) ){
         GeoDataAnimatedUpdate *animUpdate = static_cast<GeoDataAnimatedUpdate*>( object );
@@ -196,7 +196,7 @@ void TourItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &opt
         label.documentLayout()->draw( painter, paintContext );
         painter->restore();
 
-        button.icon = QIcon( ":/marble/document-edit.png" );
+        button.icon = QIcon(QStringLiteral(":/marble/document-edit.png"));
         QRect const buttonRect = position( EditButton, option );
         button.rect = buttonRect;
 

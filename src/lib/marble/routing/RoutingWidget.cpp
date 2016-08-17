@@ -224,49 +224,49 @@ void RoutingWidgetPrivate::setupToolBar()
 
     m_openRouteButton = new QToolButton;
     m_openRouteButton->setToolTip( QObject::tr("Open Route") );
-    m_openRouteButton->setIcon( QIcon(":/icons/16x16/document-open.png") );
+    m_openRouteButton->setIcon(QIcon(QStringLiteral(":/icons/16x16/document-open.png")));
     m_toolBar->addWidget(m_openRouteButton);
 
     m_saveRouteButton = new QToolButton;
     m_saveRouteButton->setToolTip( QObject::tr("Save Route") );
-    m_saveRouteButton->setIcon( QIcon(":/icons/16x16/document-save.png") );
+    m_saveRouteButton->setIcon(QIcon(QStringLiteral(":/icons/16x16/document-save.png")));
     m_toolBar->addWidget(m_saveRouteButton);
 
     m_playButton = new QToolButton;
     m_playButton->setToolTip( QObject::tr("Preview Route") );
-    m_playButton->setIcon( QIcon( ":/marble/playback-play.png" ) );
+    m_playButton->setIcon(QIcon(QStringLiteral(":/marble/playback-play.png")));
     m_toolBar->addWidget(m_playButton);
 
     m_cloudSyncSeparator = m_toolBar->addSeparator();
     m_uploadToCloudAction = m_toolBar->addAction( QObject::tr("Upload to Cloud") );
     m_uploadToCloudAction->setToolTip( QObject::tr("Upload to Cloud") );
-    m_uploadToCloudAction->setIcon( QIcon(":/icons/cloud-upload.png") );
+    m_uploadToCloudAction->setIcon(QIcon(QStringLiteral(":/icons/cloud-upload.png")));
 
     m_openCloudRoutesAction = m_toolBar->addAction( QObject::tr("Manage Cloud Routes") );
     m_openCloudRoutesAction->setToolTip( QObject::tr("Manage Cloud Routes") );
-    m_openCloudRoutesAction->setIcon( QIcon(":/icons/cloud-download.png") );
+    m_openCloudRoutesAction->setIcon(QIcon(QStringLiteral(":/icons/cloud-download.png")));
 
     m_toolBar->addSeparator();
     m_addViaButton = new QToolButton;
     m_addViaButton->setToolTip( QObject::tr("Add Via") );
-    m_addViaButton->setIcon( QIcon(":/marble/list-add.png") );
+    m_addViaButton->setIcon(QIcon(QStringLiteral(":/marble/list-add.png")));
     m_toolBar->addWidget(m_addViaButton);
 
     m_reverseRouteButton = new QToolButton;
     m_reverseRouteButton->setToolTip( QObject::tr("Reverse Route") );
-    m_reverseRouteButton->setIcon( QIcon(":/marble/reverse.png") );
+    m_reverseRouteButton->setIcon(QIcon(QStringLiteral(":/marble/reverse.png")));
     m_toolBar->addWidget(m_reverseRouteButton);
 
     m_clearRouteButton = new QToolButton;
     m_clearRouteButton->setToolTip( QObject::tr("Clear Route") );
-    m_clearRouteButton->setIcon( QIcon(":/marble/edit-clear.png") );
+    m_clearRouteButton->setIcon(QIcon(QStringLiteral(":/marble/edit-clear.png")));
     m_toolBar->addWidget(m_clearRouteButton);
 
     m_toolBar->addSeparator();
 
     m_configureButton = new QToolButton;
     m_configureButton->setToolTip( QObject::tr("Settings") );
-    m_configureButton->setIcon( QIcon(":/icons/16x16/configure.png") );
+    m_configureButton->setIcon(QIcon(QStringLiteral(":/icons/16x16/configure.png")));
     m_toolBar->addWidget(m_configureButton);
 
     QObject::connect( m_openRouteButton, SIGNAL(clicked()),
@@ -867,14 +867,14 @@ void RoutingWidget::toggleRoutePlay()
 
     if( !d->m_playing ){
         d->m_playing = true;
-        d->m_playButton->setIcon( QIcon( ":/marble/playback-pause.png" ) );
+        d->m_playButton->setIcon(QIcon(QStringLiteral(":/marble/playback-pause.png")));
 
         if( d->m_playback ){
             d->m_playback->play();
         }
     } else {
         d->m_playing = false;
-        d->m_playButton->setIcon( QIcon( ":/marble/playback-play.png" ) );
+        d->m_playButton->setIcon(QIcon(QStringLiteral(":/marble/playback-play.png")));
         d->m_playback->pause();
     }
 }
@@ -993,7 +993,7 @@ void RoutingWidget::centerOn( const GeoDataCoordinates &coordinates )
 void RoutingWidget::clearTour()
 {
     d->m_playing = false;
-    d->m_playButton->setIcon( QIcon( ":/marble/playback-play.png" ) );
+    d->m_playButton->setIcon(QIcon(QStringLiteral(":/marble/playback-play.png")));
     delete d->m_playback;
     d->m_playback = 0;
     if( d->m_document ){
@@ -1009,7 +1009,7 @@ void RoutingWidget::seekTourToStart()
     Q_ASSERT( d->m_playback );
     d->m_playback->stop();
     d->m_playback->seek( 0 );
-    d->m_playButton->setIcon( QIcon( ":/marble/playback-play.png" ) );
+    d->m_playButton->setIcon(QIcon(QStringLiteral(":/marble/playback-play.png")));
     d->m_playing = false;
 }
 

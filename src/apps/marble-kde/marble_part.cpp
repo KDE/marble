@@ -751,7 +751,7 @@ void MarblePart::setupActions()
                                    m_copyCoordinatesAction );
     m_copyCoordinatesAction->setText( i18nc( "Action for copying the coordinates to the clipboard",
                                              "C&opy Coordinates" ) );
-    m_copyCoordinatesAction->setIcon( QIcon( ":/icons/copy-coordinates.png" ) );
+    m_copyCoordinatesAction->setIcon(QIcon(QStringLiteral(":/icons/copy-coordinates.png")));
     connect( m_copyCoordinatesAction, SIGNAL(triggered(bool)),
              this,                    SLOT(copyCoordinates()) );
 
@@ -777,7 +777,7 @@ void MarblePart::setupActions()
     m_mapWizardAct = new QAction( i18nc( "Action for creating new maps",
                                          "&Create a New Map..." ),
                                   this );
-    m_mapWizardAct->setIcon( QIcon( ":/icons/create-new-map.png" ) );
+    m_mapWizardAct->setIcon(QIcon(QStringLiteral(":/icons/create-new-map.png")));
     actionCollection()->addAction( "createMap", m_mapWizardAct );
     m_mapWizardAct->setStatusTip( i18nc( "Status tip",
                                          "A wizard guides you through the creation of your own map theme." ) );
@@ -806,7 +806,7 @@ void MarblePart::setupActions()
     actionCollection()->addAction( "show_clouds", m_showCloudsAction );
     m_showCloudsAction->setCheckable( true );
     m_showCloudsAction->setChecked( true );
-    m_showCloudsAction->setIcon( QIcon( ":/icons/clouds.png" ) );
+    m_showCloudsAction->setIcon(QIcon(QStringLiteral(":/icons/clouds.png")));
     m_showCloudsAction->setText( i18nc( "Action for toggling clouds", "&Clouds" ) );
     connect( m_showCloudsAction, SIGNAL(triggered(bool)),
              this,               SLOT(setShowClouds(bool)) );
@@ -823,7 +823,7 @@ void MarblePart::setupActions()
     // Action: Show Time options
     m_controlTimeAction = new QAction( this );
     actionCollection()->addAction( "control_time", m_controlTimeAction );
-    m_controlTimeAction->setIcon( QIcon( ":/icons/clock.png" ) );
+    m_controlTimeAction->setIcon(QIcon(QStringLiteral(":/icons/clock.png")));
     m_controlTimeAction->setText( i18nc( "Action for time control dialog", "&Time Control..." ) );
     connect( m_controlTimeAction, SIGNAL(triggered(bool)),
          this,               SLOT(controlTime()) );
@@ -834,7 +834,7 @@ void MarblePart::setupActions()
                                    m_lockFloatItemsAct );
     m_lockFloatItemsAct->setText( i18nc( "Action for locking float items on the map",
                                          "Lock Position" ) );
-    m_lockFloatItemsAct->setIcon( QIcon( ":/icons/unlock.png" ) );
+    m_lockFloatItemsAct->setIcon(QIcon(QStringLiteral(":/icons/unlock.png")));
     m_lockFloatItemsAct->setCheckable( true );
     m_lockFloatItemsAct->setChecked( false );
     connect( m_lockFloatItemsAct, SIGNAL(triggered(bool)),
@@ -845,7 +845,7 @@ void MarblePart::setupActions()
 
     //Toggle Action: Show sun shadow
     m_showShadow = new KToggleAction( i18n( "Show Shadow" ), this );
-    m_showShadow->setIcon( QIcon( "" ) );        // Fixme: Add Icon
+//     m_showShadow->setIcon(QIcon(QStringLiteral("")));        // Fixme: Add Icon
     actionCollection()->addAction( "sun_shadow", m_showShadow );
     m_showShadow->setCheckedState( KGuiItem( i18n( "Hide Shadow" ) ) );
     m_showShadow->setToolTip(i18n("Shows and hides the shadow of the sun"));
@@ -879,7 +879,7 @@ void MarblePart::setupActions()
     m_addBookmarkAction = new QAction( this );
     actionCollection()->addAction( "add_bookmark", m_addBookmarkAction );
     m_addBookmarkAction->setText( i18nc( "Add Bookmark", "&Add Bookmark" ) );
-    m_addBookmarkAction->setIcon( QIcon( ":/icons/bookmark-new.png" ) );
+    m_addBookmarkAction->setIcon(QIcon(QStringLiteral(":/icons/bookmark-new.png")));
     actionCollection()->setDefaultShortcut( m_addBookmarkAction, Qt::CTRL + Qt::Key_B );
     connect( m_addBookmarkAction, SIGNAL(triggered()),
              this,                SLOT(openEditBookmarkDialog()) );
@@ -903,7 +903,7 @@ void MarblePart::setupActions()
     m_manageBookmarksAction = new QAction( this );
     actionCollection()->addAction( "manage_bookmarks", m_manageBookmarksAction );
     m_manageBookmarksAction->setText( i18nc( "Manage Bookmarks", "&Manage Bookmarks" ) );
-    m_manageBookmarksAction->setIcon( QIcon( ":/icons/bookmarks-organize.png" ) );
+    m_manageBookmarksAction->setIcon(QIcon(QStringLiteral(":/icons/bookmarks-organize.png")));
     connect( m_manageBookmarksAction, SIGNAL(triggered()),
              this,                SLOT(openManageBookmarksDialog()) );
 
@@ -915,7 +915,7 @@ void MarblePart::setupActions()
     m_externalMapEditorAction = new QAction( this );
     actionCollection()->addAction( "external_editor", m_externalMapEditorAction );
     m_externalMapEditorAction->setText( i18nc( "Edit the map in an external application", "&Edit Map" ) );
-    m_externalMapEditorAction->setIcon( QIcon( ":/icons/edit-map.png" ) );
+    m_externalMapEditorAction->setIcon(QIcon(QStringLiteral(":/icons/edit-map.png")));
     actionCollection()->setDefaultShortcut( m_externalMapEditorAction, Qt::CTRL + Qt::Key_E );
     connect( m_externalMapEditorAction, SIGNAL(triggered()),
              m_controlView, SLOT(launchExternalMapEditor()) );
@@ -926,7 +926,7 @@ void MarblePart::setupActions()
      actionCollection()->addAction( "record_movie" , m_recordMovieAction );
      m_recordMovieAction->setStatusTip( i18n( "Records a movie of the globe" ) );
      actionCollection()->setDefaultShortcut( m_recordMovieAction, Qt::CTRL + Qt::SHIFT + Qt::Key_R );
-     m_recordMovieAction->setIcon( QIcon( ":/icons/animator.png" ) );
+     m_recordMovieAction->setIcon(QIcon(QStringLiteral(":/icons/animator.png")));
      connect( m_recordMovieAction, SIGNAL(triggered()),
              this, SLOT(showMovieCaptureDialog()) );
 

@@ -46,7 +46,7 @@ QString EquirectProjection::description() const
 
 QIcon EquirectProjection::icon() const
 {
-    return QIcon(":/icons/map-flat.png");
+    return QIcon(QStringLiteral(":/icons/map-flat.png"));
 }
 
 qreal EquirectProjection::maxValidLat() const

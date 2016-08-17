@@ -67,7 +67,7 @@ class WeatherItemPrivate
 
         QPushButton *button = new QPushButton();
         button->setStyleSheet( "border-style: outset;" );
-        button->setIcon( QIcon( ":/icons/bookmarks.png" ) );
+        button->setIcon(QIcon(QStringLiteral(":/icons/bookmarks.png")));
         button->setFixedSize( 22, 22 );
         button->setFlat( true );
         button->setCheckable( true );

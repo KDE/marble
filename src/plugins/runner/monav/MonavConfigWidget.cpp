@@ -613,7 +613,7 @@ void MonavConfigWidgetPrivate::updateInstalledMapsViewButtons()
     m_upgradeMapSignalMapper.removeMappings( m_parent );
     for( int i=0; i<m_mapsModel->rowCount(); ++i ) {
         {
-            QPushButton* button = new QPushButton( QIcon( ":/system-software-update.png" ), "" );
+            QPushButton* button = new QPushButton(QIcon(QStringLiteral(":/system-software-update.png")), QString());
             button->setAutoFillBackground( true );
             QModelIndex index = m_mapsModel->index( i, 3 );
             m_parent->m_installedMapsListView->setIndexWidget( index, button );
@@ -626,7 +626,7 @@ void MonavConfigWidgetPrivate::updateInstalledMapsViewButtons()
             button->setEnabled( upgradable );
         }
         {
-            QPushButton* button = new QPushButton( QIcon( ":/edit-delete.png" ), "" );
+            QPushButton* button = new QPushButton(QIcon(QStringLiteral(":/edit-delete.png")), QString());
             button->setAutoFillBackground( true );
             QModelIndex index = m_mapsModel->index( i, 4 );
             m_parent->m_installedMapsListView->setIndexWidget( index, button );

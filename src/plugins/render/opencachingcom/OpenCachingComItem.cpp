@@ -87,7 +87,7 @@ void OpenCachingComItem::showInfoDialog()
     m_ui->labelIcon->setPixmap(QPixmap(":/" + iconName() + ".png"));
     m_ui->labelHeader->setText(QString("<big><strong>" + m_cache["name"].toString() + "</strong></big>"));
 
-    m_ui->buttonWww->setIcon( QIcon( ":/internet.png" ) );
+    m_ui->buttonWww->setIcon(QIcon(QStringLiteral(":/internet.png")));
     m_ui->buttonWww->setToolTip( tr("Click to open this cache's page in a browser") );
     connect( m_ui->buttonWww, SIGNAL(clicked()), SLOT(openWww()) );
 

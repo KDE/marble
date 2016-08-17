@@ -277,17 +277,17 @@ QStyleOptionButton MapItemDelegate::button( Element element, const QStyleOptionV
     switch (element) {
     case InstallButton:
         result.text = tr( "Install" );
-        result.icon = QIcon( ":/marble/dialog-ok.png" );
+        result.icon = QIcon(QStringLiteral(":/marble/dialog-ok.png"));
         result.iconSize = QSize( m_iconSize, m_iconSize );
         break;
     case UpgradeButton:
         result.text = tr( "Update" );
-        result.icon = QIcon( ":/marble/system-software-update.png" );
+        result.icon = QIcon(QStringLiteral(":/marble/system-software-update.png"));
         result.iconSize = QSize( m_iconSize, m_iconSize );
         break;
     case OpenButton:
         result.text = tr( "Open" );
-        result.icon = QIcon( ":/marble/document-open.png" );
+        result.icon = QIcon(QStringLiteral(":/marble/document-open.png"));
         result.iconSize = QSize( m_iconSize, m_iconSize );
         break;
     case CancelButton:
@@ -295,7 +295,7 @@ QStyleOptionButton MapItemDelegate::button( Element element, const QStyleOptionV
         break;
     case RemoveButton:
         result.text = tr( "Remove" );
-        result.icon = QIcon( ":/marble/edit-delete.png" );
+        result.icon = QIcon(QStringLiteral(":/marble/edit-delete.png"));
         result.iconSize = QSize( m_iconSize, m_iconSize );
         break;
     default:

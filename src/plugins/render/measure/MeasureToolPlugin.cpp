@@ -617,7 +617,7 @@ void MeasureToolPlugin::addContextItems()
     MarbleWidgetPopupMenu *menu = m_marbleWidget->popupMenu();
 
     // Connect the inputHandler and the measure tool to the popup menu
-    m_addMeasurePointAction = new QAction( QIcon(":/icons/measure.png"), tr( "Add &Measure Point" ), this );
+    m_addMeasurePointAction = new QAction(QIcon(QStringLiteral(":/icons/measure.png")), tr("Add &Measure Point"), this);
     m_removeLastMeasurePointAction = new QAction( tr( "Remove &Last Measure Point" ), this );
     m_removeLastMeasurePointAction->setEnabled( false );
     m_removeMeasurePointsAction = new QAction( tr( "&Remove Measure Points" ), this );

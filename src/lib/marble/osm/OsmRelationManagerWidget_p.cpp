@@ -77,7 +77,7 @@ void OsmRelationManagerWidgetPrivate::populateDropMenu()
 {
     m_relationDropMenu->clear();
 
-    m_addRelation->setIcon( QIcon( ":marble/list-add.png" ) );
+    m_addRelation->setIcon(QIcon(QStringLiteral(":marble/list-add.png")));
 
     // The new relation adder
     m_relationDropMenu->addAction( QObject::tr( "New Relation" ) );

@@ -195,7 +195,7 @@ void EclipsesPlugin::initialize()
 
     m_eclipsesMenuAction = new QAction(
             tr("Browse Ecli&pses..."), m_eclipsesActionGroup );
-    m_eclipsesMenuAction->setIcon( QIcon( ":res/eclipses.png" ) );
+    m_eclipsesMenuAction->setIcon(QIcon(QStringLiteral(":res/eclipses.png")));
     m_eclipsesActionGroup->addAction( m_eclipsesMenuAction );
     connect( m_eclipsesMenuAction, SIGNAL(triggered()),
              m_browserDialog, SLOT(show()) );

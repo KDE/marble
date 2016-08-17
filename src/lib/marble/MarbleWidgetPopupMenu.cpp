@@ -109,7 +109,7 @@ MarbleWidgetPopupMenu::Private::Private( MarbleWidget *widget, const MarbleModel
     m_rmbMenu( m_widget ),
     m_directionsFromHereAction( 0 ),
     m_directionsToHereAction( 0 ),
-    m_copyCoordinateAction( new QAction( QIcon(":/icons/copy-coordinates.png"), tr("Copy Coordinates"), parent ) ),
+    m_copyCoordinateAction(new QAction(QIcon(QStringLiteral(":/icons/copy-coordinates.png")), tr("Copy Coordinates"), parent)),
     m_rmbExtensionPoint( 0 ),
     m_runnerManager( model )
 {
@@ -126,12 +126,12 @@ MarbleWidgetPopupMenu::Private::Private( MarbleWidget *widget, const MarbleModel
         int const lastIndex = qMax( 1, request->size()-1 );
         m_directionsToHereAction->setIcon( QIcon( request->pixmap( lastIndex, 16 ) ) );
     }
-    QAction* addBookmark = new QAction( QIcon(":/icons/bookmark-new.png"),
+    QAction* addBookmark = new QAction( QIcon(QStringLiteral(":/icons/bookmark-new.png")),
                                         tr( "Add &Bookmark" ), parent );
     QAction* fullscreenAction = new QAction( tr( "&Full Screen Mode" ), parent );
     fullscreenAction->setCheckable( true );
 
-    QAction* aboutDialogAction = new QAction( QIcon(":/icons/marble.png"), tr( "&About" ), parent );
+    QAction* aboutDialogAction = new QAction(QIcon(QStringLiteral(":/icons/marble.png")), tr("&About"), parent);
 
     QMenu* infoBoxMenu = createInfoBoxMenu();
 
@@ -148,7 +148,7 @@ MarbleWidgetPopupMenu::Private::Private( MarbleWidget *widget, const MarbleModel
     if ( !smallScreen ) {
         m_rmbMenu.addAction( m_copyCoordinateAction );
     }
-    m_rmbMenu.addAction( QIcon(":/icons/addressbook-details.png"), tr( "&Address Details" ), parent, SLOT(startReverseGeocoding()) );
+    m_rmbMenu.addAction(QIcon(QStringLiteral(":/icons/addressbook-details.png")), tr("&Address Details"), parent, SLOT(startReverseGeocoding()));
     m_rmbMenu.addSeparator();
     m_rmbMenu.addMenu( infoBoxMenu );
 

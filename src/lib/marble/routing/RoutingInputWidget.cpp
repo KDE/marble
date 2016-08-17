@@ -169,9 +169,9 @@ RoutingInputWidgetPrivate::RoutingInputWidgetPrivate( MarbleModel* model, int in
     m_removeButton = new QPushButton( parent );
 #ifdef Q_WS_MAEMO_5
     // maemo window background color is black, the 'X' is not visible -> use the red '-' sign
-    m_removeButton->setIcon( QIcon( ":/icons/remove.png" ) );
+    m_removeButton->setIcon(QIcon(QStringLiteral(":/icons/remove.png")));
 #else
-    m_removeButton->setIcon( QIcon( ":/marble/routing/icon-remove.png" ) );
+    m_removeButton->setIcon(QIcon(QStringLiteral(":/marble/routing/icon-remove.png")));
 #endif
     m_removeButton->setToolTip( QObject::tr( "Remove via point" ) );
     m_removeButton->setFlat( true );
@@ -194,15 +194,15 @@ void RoutingInputWidgetPrivate::createMenu( RoutingInputWidget *parent )
                        parent, SLOT(requestActivity()) );
     result->addSeparator();
 
-    m_currentLocationAction = result->addAction( QIcon( ":/icons/gps.png" ), QObject::tr( "Current &Location" ),
+    m_currentLocationAction = result->addAction( QIcon(QStringLiteral(":/icons/gps.png")), QObject::tr("Current &Location"),
                                                  parent, SLOT(setCurrentLocation()) );
     m_currentLocationAction->setEnabled( false );
 
-    m_mapInput = result->addAction( QIcon( ":/icons/crosshairs.png" ), QObject::tr( "From &Map..." ) );
+    m_mapInput = result->addAction(QIcon(QStringLiteral(":/icons/crosshairs.png")), QObject::tr("From &Map..."));
     m_mapInput->setCheckable( true );
     QObject::connect( m_mapInput, SIGNAL(triggered(bool)), parent, SLOT(setMapInputModeEnabled(bool)) );
 
-    m_bookmarkAction = result->addAction( QIcon( ":/icons/bookmarks.png" ), QObject::tr( "From &Bookmark" ) );
+    m_bookmarkAction = result->addAction(QIcon(QStringLiteral(":/icons/bookmarks.png")), QObject::tr("From &Bookmark"));
     m_bookmarkAction->setMenu( createBookmarkMenu( parent ) );
 
     m_menu = result;
@@ -211,7 +211,7 @@ void RoutingInputWidgetPrivate::createMenu( RoutingInputWidget *parent )
 QMenu* RoutingInputWidgetPrivate::createBookmarkMenu( RoutingInputWidget *parent )
 {
     QMenu* result = new QMenu( parent );
-    result->addAction( QIcon( ":/icons/go-home.png" ), QObject::tr( "&Home" ), parent, SLOT(setHomePosition()) );
+    result->addAction(QIcon(QStringLiteral(":/icons/go-home.png")), QObject::tr("&Home"), parent, SLOT(setHomePosition()));
 
     QVector<GeoDataFolder*> folders = m_marbleModel->bookmarkManager()->folders();
 
@@ -222,7 +222,7 @@ QMenu* RoutingInputWidgetPrivate::createBookmarkMenu( RoutingInputWidget *parent
         QVector<GeoDataFolder*>::const_iterator end = folders.constEnd();
 
         for (; i != end; ++i ) {
-            QMenu* menu = result->addMenu( QIcon( ":/icons/folder-bookmark.png" ), (*i)->name() );
+            QMenu* menu = result->addMenu(QIcon(QStringLiteral(":/icons/folder-bookmark.png")), (*i)->name());
             createBookmarkActions( menu, *i, parent );
         }
     }
