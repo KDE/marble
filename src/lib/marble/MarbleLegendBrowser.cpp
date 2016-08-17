@@ -258,7 +258,7 @@ void MarbleLegendBrowser::reverseSupportCheckboxes(QString &html)
 {
     const QString old = "<a href=\"checkbox:cities\"/>";
 
-    QString checked = "";
+    QString checked;
     if (d->m_checkBoxMap["cities"])
         checked = "checked";
 
@@ -397,7 +397,7 @@ void MarbleLegendBrowser::setRadioCheckedProperty( const QString& value, const Q
 #ifndef MARBLE_NO_WEBKITWIDGETS
     QWebElement box = page()->mainFrame()->findFirstElement("input[value="+value+']');
     QWebElementCollection boxes = page()->mainFrame()->findAllElements("input[name="+name+']');
-    QString currentValue="";
+    QString currentValue;
     for(int i=0; i<boxes.count(); ++i) {
         currentValue = boxes.at(i).attribute("value");
         d->m_checkBoxMap[currentValue]=false;

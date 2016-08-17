@@ -41,9 +41,9 @@ using namespace Marble;
 
 namespace
 {
-    QString runTimeMarbleDataPath = "";
+    QString runTimeMarbleDataPath;
 
-    QString runTimeMarblePluginPath = "";
+    QString runTimeMarblePluginPath;
 }
 
 MarbleDirs::MarbleDirs()

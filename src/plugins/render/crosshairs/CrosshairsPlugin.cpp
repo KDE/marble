@@ -31,7 +31,6 @@ CrosshairsPlugin::CrosshairsPlugin()
     : RenderPlugin( 0 ),
       m_svgobj( 0 ),
       m_themeIndex( 0 ),
-      m_theme( "" ),
       m_configDialog( 0 ),
       m_uiConfigWidget( 0 )
 {
@@ -42,7 +41,6 @@ CrosshairsPlugin::CrosshairsPlugin( const MarbleModel *marbleModel )
       m_isInitialized( false ),
       m_svgobj( 0 ),
       m_themeIndex( 0 ),
-      m_theme( "" ),
       m_configDialog( 0 ),
       m_uiConfigWidget( 0 )
 {

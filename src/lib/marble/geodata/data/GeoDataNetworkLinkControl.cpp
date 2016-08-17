@@ -41,11 +41,6 @@ public:
 GeoDataNetworkLinkControlPrivate::GeoDataNetworkLinkControlPrivate() :
     m_minRefreshPeriod( 0.0 ),
     m_maxSessionLength( 0.0 ),
-    m_cookie( "" ),
-    m_message( "" ),
-    m_linkName( "" ),
-    m_linkDescription( "" ),
-    m_linkSnippet( "" ),
     m_maxLines( 2 ),
     m_expires(),
     m_update(),

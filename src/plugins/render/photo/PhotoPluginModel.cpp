@@ -43,8 +43,8 @@ QUrl PhotoPluginModel::generateUrl( const QString& service,
                                     const QString& method,
                                     const QHash<QString,QString>& options )
 {
-    QString url( "" );
-    
+    QString url;
+
     if (service == QLatin1String("flickr"))
         url += "https://www.flickr.com/services/rest/";
     else
@@ -77,7 +77,7 @@ void PhotoPluginModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
     }
 
     if( box.west() <= box.east() ) {
-        QString bbox( "" );
+        QString bbox;
         bbox += QString::number( box.west()  * RAD2DEG ) + ',';
         bbox += QString::number( box.south()  * RAD2DEG ) + ',';
         bbox += QString::number( box.east() * RAD2DEG ) + ',';
@@ -93,7 +93,7 @@ void PhotoPluginModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
     }
     else {
         // Flickr api doesn't support bboxes with west > east so we have to split in two boxes
-        QString bboxWest( "" );
+        QString bboxWest;
         bboxWest += QString::number( box.west() * RAD2DEG ) + ',';
         bboxWest += QString::number( box.south()  * RAD2DEG ) + ',';
         bboxWest += QString::number( 180 ) + ',';
@@ -108,7 +108,7 @@ void PhotoPluginModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
         downloadDescriptionFile( generateUrl( "flickr", "flickr.photos.search", optionsWest ) );
         
         
-        QString bboxEast( "" );
+        QString bboxEast;
         bboxEast += QString::number( -180 ) + ',';
         bboxEast += QString::number( box.south()  * RAD2DEG ) + ',';
         bboxEast += QString::number( box.east() * RAD2DEG ) + ',';

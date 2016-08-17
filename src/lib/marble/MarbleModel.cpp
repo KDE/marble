@@ -225,7 +225,7 @@ BookmarkManager *MarbleModel::bookmarkManager()
 
 QString MarbleModel::mapThemeId() const
 {
-    QString mapThemeId = "";
+    QString mapThemeId;
 
     if (d->m_mapTheme)
         mapThemeId = d->m_mapTheme->head()->mapThemeId();

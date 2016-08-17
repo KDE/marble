@@ -30,7 +30,6 @@ public:
 GeoDataBalloonStylePrivate::GeoDataBalloonStylePrivate() :
     m_bgColor( Qt::white ),
     m_textColor( Qt::black ),
-    m_text( "" ),
     m_mode( GeoDataBalloonStyle::Default )
 {
 }

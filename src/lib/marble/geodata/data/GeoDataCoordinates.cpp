@@ -381,7 +381,7 @@ QString GeoDataCoordinates::toString( GeoDataCoordinates::Notation notation, int
             int zoneNumber = GeoDataCoordinatesPrivate::lonLatToZone(d->m_lon, d->m_lat);
 
             // Handle lack of UTM zone number in the poles
-            QString zoneString = ( zoneNumber > 0 ) ? QString::number(zoneNumber) : QString("");
+            const QString zoneString = (zoneNumber > 0) ? QString::number(zoneNumber) : QString();
 
             QString bandString = GeoDataCoordinatesPrivate::lonLatToLatitudeBand(d->m_lon, d->m_lat);
 
@@ -417,7 +417,7 @@ QString GeoDataCoordinates::lonToString( qreal lon, GeoDataCoordinates::Notation
         int zoneNumber = GeoDataCoordinatesPrivate::lonLatToZone(lonRad, 0);
 
         // Handle lack of UTM zone number in the poles
-        QString result = ( zoneNumber > 0 ) ? QString::number(zoneNumber) : QString("");
+        QString result = (zoneNumber > 0) ? QString::number(zoneNumber) : QString();
 
         if(precision > 0){
             QString eastingString = QString::number( GeoDataCoordinatesPrivate::lonLatToEasting(lonRad, 0), 'f', 2 );
