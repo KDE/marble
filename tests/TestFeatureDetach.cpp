@@ -91,10 +91,10 @@ void TestFeatureDetach::testContainer()
 
     GeoDataContainer cont2 = cont1;
     cont2.child(0)->setName("Feat2");
-    QVERIFY(cont1.child(0)->name() == "Feat1");
+    QCOMPARE(cont1.child(0)->name(), QLatin1String("Feat1"));
 
     const GeoDataContainer cont3 = cont1;
-    QVERIFY(cont3.child(0)->name() == "Feat1");
+    QCOMPARE(cont3.child(0)->name(), QLatin1String("Feat1"));
 }
 
 void TestFeatureDetach::testPlacemark()
@@ -123,10 +123,10 @@ void TestFeatureDetach::testTour()
 
     GeoDataTour tour2 = tour1;
     tour2.playlist()->setId("Playlist2");
-    QVERIFY(tour1.playlist()->id() == "Playlist1");
+    QCOMPARE(tour1.playlist()->id(), QLatin1String("Playlist1"));
 
     const GeoDataTour tour3 = tour1;
-    QVERIFY(tour3.playlist()->id() == "Playlist1");
+    QCOMPARE(tour3.playlist()->id(), QLatin1String("Playlist1"));
 }
 
 void TestFeatureDetach::testGeometryParentInPlacemark()

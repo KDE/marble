@@ -681,7 +681,7 @@ void TestGeoDataCopy::copyStyleMap()
     styleMap["poland"] = "pst3";
     styleMap.setLastKey("poland");
 
-    QVERIFY( styleMap.lastKey() == QString("poland") );
+    QCOMPARE(styleMap.lastKey(), QLatin1String("poland"));
 
     GeoDataStyleMap testMap = styleMap;
 
@@ -692,8 +692,8 @@ void TestGeoDataCopy::copyStyleMap()
     testMap.insert("Romania", "rst3");
     testMap.setLastKey("Romania");
 
-    QVERIFY( testMap.lastKey() == QString("Romania") );
-    QVERIFY( styleMap.lastKey() == QString("poland") );
+    QCOMPARE(testMap.lastKey(), QLatin1String("Romania"));
+    QCOMPARE(styleMap.lastKey(), QLatin1String("poland"));
 }
 
 }
