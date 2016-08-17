@@ -37,7 +37,6 @@ class GeoSceneMapPrivate
 {
   public:
     GeoSceneMapPrivate()
-        : m_backgroundColor( "" )
     {
     }
 
