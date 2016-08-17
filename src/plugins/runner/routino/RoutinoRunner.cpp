@@ -129,8 +129,8 @@ GeoDataLineString* RoutinoRunnerPrivate::parseRoutinoOutput( const QByteArray &c
     QStringList lines = QString::fromUtf8( content ).split( '\n' );
     mDebug() << lines.count() << "lines";
     foreach( const QString &line, lines ) {
-        if ( line.left(1) == QString('#') ) {
-             //skip comment
+        if (line.startsWith(QLatin1Char('#'))) {
+            //skip comment
             continue;
         }
         QStringList fields = line.split('\t');
