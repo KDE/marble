@@ -104,49 +104,84 @@ BaseClipper::BaseClipper() :
 
 
 
-QPolygonF BaseClipper::lineString2Qpolygon(const GeoDataLineString& lineString)
+QPolygonF BaseClipper::lineString2Qpolygon(const GeoDataLineString& lineString, bool reverseOrder)
 {
     QPolygonF polygon;
-    foreach (const GeoDataCoordinates& coord, lineString) {
-        // Need to flip the Y axis(latitude)
-        QPointF point(coord.longitude(), -coord.latitude());
-        polygon.append(point);
+    if(!reverseOrder) {
+        foreach (const GeoDataCoordinates& coord, lineString) {
+            // Need to flip the Y axis(latitude)
+            QPointF point(coord.longitude(), -coord.latitude());
+            polygon.append(point);
+        }
+    } else {
+        for(int i = lineString.size()-1; i >= 0; --i) {
+            // Need to flip the Y axis(latitude)
+            QPointF point(lineString.at(i).longitude(), -lineString.at(i).latitude());
+            polygon.append(point);
+        }
     }
 
     return polygon;
 }
 
-QPolygonF BaseClipper::linearRing2Qpolygon(const GeoDataLinearRing& linearRing)
+QPolygonF BaseClipper::linearRing2Qpolygon(const GeoDataLinearRing& linearRing, bool reverseOrder)
 {
     QPolygonF polygon;
-    foreach (const GeoDataCoordinates& coord, linearRing) {
-        // Need to flip the Y axis(latitude)
-        QPointF point(coord.longitude(), -coord.latitude());
-        polygon.append(point);
+
+    if(!reverseOrder) {
+        foreach (const GeoDataCoordinates& coord, linearRing) {
+            // Need to flip the Y axis(latitude)
+            QPointF point(coord.longitude(), -coord.latitude());
+            polygon.append(point);
+        }
+    } else {
+        for(int i = linearRing.size()-1; i >= 0; --i) {
+            // Need to flip the Y axis(latitude)
+            QPointF point(linearRing.at(i).longitude(), -linearRing.at(i).latitude());
+            polygon.append(point);
+        }
     }
 
     return polygon;
 }
 
-GeoDataLineString BaseClipper::qPolygon2lineString(const QPolygonF& polygon)
+GeoDataLineString BaseClipper::qPolygon2lineString(const QPolygonF& polygon, bool reverseOrder)
 {
     GeoDataLineString lineString;
-    foreach (const QPointF& point, polygon) {
-        // Flipping back the Y axis
-        GeoDataCoordinates coord(point.x(), -point.y());
-        lineString.append(coord);
+
+    if(!reverseOrder) {
+        foreach (const QPointF& point, polygon) {
+            // Flipping back the Y axis
+            GeoDataCoordinates coord(point.x(), -point.y());
+            lineString.append(coord);
+        }
+    } else {
+        for(int i = polygon.size()-1; i >= 0; --i) {
+            // Need to flip the Y axis(latitude)
+            GeoDataCoordinates coord(polygon.at(i).x(), -polygon.at(i).y());
+            lineString.append(coord);
+        }
     }
 
     return lineString;
 }
 
-GeoDataLinearRing BaseClipper::qPolygon2linearRing(const QPolygonF& polygon)
+GeoDataLinearRing BaseClipper::qPolygon2linearRing(const QPolygonF& polygon, bool reverseOrder)
 {
     GeoDataLinearRing linearRing;
-    foreach (const QPointF& point, polygon) {
-        // Flipping back the Y axis
-        GeoDataCoordinates coord(point.x(), -point.y());
-        linearRing.append(coord);
+
+    if(!reverseOrder) {
+        foreach (const QPointF& point, polygon) {
+            // Flipping back the Y axis
+            GeoDataCoordinates coord(point.x(), -point.y());
+            linearRing.append(coord);
+        }
+    } else {
+        for(int i = polygon.size()-1; i >= 0; --i) {
+            // Need to flip the Y axis(latitude)
+            GeoDataCoordinates coord(polygon.at(i).x(), -polygon.at(i).y());
+            linearRing.append(coord);
+        }
     }
 
     return linearRing;
@@ -579,15 +614,15 @@ void BaseClipper::clipPolyObject ( const QPolygonF & polygon,
             clippedPolyObjects.clear();
             clippedPolyObject = polygon.intersected(m_viewport);
 
-            if(clippedPolyObject == polygon) {
-                clippedPolyObjects << polygon;
-            } else if (clippedPolyObject == m_viewport.intersected(m_viewport)) {
+            if (clippedPolyObject == m_viewport.intersected(m_viewport)) {
                 clippedPolyObject = QPolygonF();
                 clippedPolyObject << m_topLeft << m_topEdge
                                   << m_topRight << m_rightEdge
                                   << m_bottomRight << m_bottomEdge
                                   << m_bottomLeft << m_leftEdge;
                 clippedPolyObjects << clippedPolyObject;
+            } else if(!clippedPolyObject.isEmpty()) {
+                clippedPolyObjects << polygon;
             }
         }
     } else if(!clippedPolyObject.isEmpty()) {

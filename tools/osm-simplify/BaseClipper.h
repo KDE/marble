@@ -29,11 +29,11 @@ public:
     static qreal tileX2lon( unsigned int x, unsigned int maxTileX );
     static qreal tileY2lat( unsigned int y, unsigned int maxTileY );
 
-    static QPolygonF lineString2Qpolygon(const GeoDataLineString &lineString);
-    static QPolygonF linearRing2Qpolygon(const GeoDataLinearRing &linearRing);
+    static QPolygonF lineString2Qpolygon(const GeoDataLineString &lineString, bool reverseOrder = false);
+    static QPolygonF linearRing2Qpolygon(const GeoDataLinearRing &linearRing, bool reverseOrder = false);
 
-    static GeoDataLineString qPolygon2lineString(const QPolygonF& polygon);
-    static GeoDataLinearRing qPolygon2linearRing(const QPolygonF& polygon);
+    static GeoDataLineString qPolygon2lineString(const QPolygonF& polygon, bool reverseOrder = false);
+    static GeoDataLinearRing qPolygon2linearRing(const QPolygonF& polygon, bool reverseOrder = false);
 
 
     void initClipRect(const GeoDataLatLonBox& clippingBox, int pointsToAddAtEdges);
