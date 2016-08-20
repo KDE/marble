@@ -83,13 +83,13 @@ LocalOsmSearchRunner::LocalOsmSearchRunner( const QStringList &databaseFiles, QO
         m_categoryMap[OsmPlacemark::TransportTaxiRank] = GeoDataFeature::TransportTaxiRank;
         m_categoryMap[OsmPlacemark::PlacesRegion] = GeoDataFeature::OsmSite;
         m_categoryMap[OsmPlacemark::PlacesCounty] = GeoDataFeature::OsmSite;
-        m_categoryMap[OsmPlacemark::PlacesCity] = GeoDataFeature::LargeCity;
-        m_categoryMap[OsmPlacemark::PlacesTown] = GeoDataFeature::MediumCity;
-        m_categoryMap[OsmPlacemark::PlacesVillage] = GeoDataFeature::SmallCity;
-        m_categoryMap[OsmPlacemark::PlacesHamlet] = GeoDataFeature::OsmSite;
+        m_categoryMap[OsmPlacemark::PlacesCity] = GeoDataFeature::PlaceCity;
+        m_categoryMap[OsmPlacemark::PlacesTown] = GeoDataFeature::PlaceTown;
+        m_categoryMap[OsmPlacemark::PlacesVillage] = GeoDataFeature::PlaceVillage;
+        m_categoryMap[OsmPlacemark::PlacesHamlet] = GeoDataFeature::PlaceHamlet;
         m_categoryMap[OsmPlacemark::PlacesIsolatedDwelling] = GeoDataFeature::OsmSite;
-        m_categoryMap[OsmPlacemark::PlacesSuburb] = GeoDataFeature::OsmSite;
-        m_categoryMap[OsmPlacemark::PlacesLocality] = GeoDataFeature::OsmSite;
+        m_categoryMap[OsmPlacemark::PlacesSuburb] = GeoDataFeature::PlaceSuburb;
+        m_categoryMap[OsmPlacemark::PlacesLocality] = GeoDataFeature::PlaceLocality;
         m_categoryMap[OsmPlacemark::PlacesIsland] = GeoDataFeature::OsmSite;
     }
 }
