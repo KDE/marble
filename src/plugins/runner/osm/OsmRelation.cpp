@@ -57,7 +57,7 @@ void OsmRelation::create(GeoDataDocument *document, OsmWays &ways, const OsmNode
     QStringList const outerRoles = QStringList() << "outer" << "";
     QSet<qint64> outerWays;
     QSet<qint64> outerNodes;
-    QList<GeoDataLinearRing> outer = rings(outerRoles, ways, nodes, outerNodes, outerWays);
+    const QList<GeoDataLinearRing> outer = rings(outerRoles, ways, nodes, outerNodes, outerWays);
     if (outer.isEmpty()) {
         return;
     } else if (outer.size() > 1) {
@@ -65,8 +65,7 @@ void OsmRelation::create(GeoDataDocument *document, OsmWays &ways, const OsmNode
         mDebug() << "Polygons with " << outer.size() << " ways are not yet supported";
         return;
     }
-    OsmPlacemarkData osmData = m_osmData;
-    GeoDataFeature::GeoDataVisualCategory outerCategory = OsmPresetLibrary::determineVisualCategory(osmData);
+    GeoDataFeature::GeoDataVisualCategory outerCategory = OsmPresetLibrary::determineVisualCategory(m_osmData);
     if (outerCategory == GeoDataFeature::None) {
         // Try to determine the visual category from the relation members
         bool categoriesAreSame = true;
@@ -97,29 +96,12 @@ void OsmRelation::create(GeoDataDocument *document, OsmWays &ways, const OsmNode
         }
     }
 
-    GeoDataPlacemark* placemark = new GeoDataPlacemark;
-    placemark->setName(osmData.tagValue("name"));
-    placemark->setVisualCategory(outerCategory);
-    placemark->setStyle( GeoDataStyle::Ptr() );
-    placemark->setVisible(outerCategory != GeoDataFeature::None);
-
-    GeoDataPolygon* polygon = new GeoDataPolygon;
-    polygon->setOuterBoundary(outer[0]);
-    osmData.addMemberReference(-1, ways[*outerWays.begin()].osmData());
-
-    if (placemark->visualCategory() == GeoDataFeature::Bathymetry) {
-        // In case of a bathymetry store elevation info since it is required during styling
-        // The ele=* tag is present in the outermost way
-        OsmPlacemarkData outerWayData = ways[*outerWays.begin()].osmData();
-        if (outerWayData.containsTagKey("ele")) {
-            QString value = outerWayData.tagValue("ele");
-            placemark->osmData().addTag("ele", value);
-        }
-    }
-
     QStringList const innerRoles = QStringList() << "inner";
     QSet<qint64> innerWays;
-    QList<GeoDataLinearRing> inner = rings(innerRoles, ways, nodes, usedNodes, innerWays);
+    const QList<GeoDataLinearRing> inner = rings(innerRoles, ways, nodes, usedNodes, innerWays);
+
+    OsmPlacemarkData osmData = m_osmData;
+    osmData.addMemberReference(-1, ways[*outerWays.begin()].osmData());
     int index = 0;
     foreach(qint64 wayId, innerWays) {
         Q_ASSERT(ways.contains(wayId));
@@ -133,9 +115,28 @@ void OsmRelation::create(GeoDataDocument *document, OsmWays &ways, const OsmNode
         osmData.addMemberReference(index, ways[wayId].osmData());
         ++index;
     }
+
+    if (outerCategory == GeoDataFeature::Bathymetry) {
+        // In case of a bathymetry store elevation info since it is required during styling
+        // The ele=* tag is present in the outermost way
+        const OsmPlacemarkData outerWayData = ways[*outerWays.begin()].osmData();
+        if (outerWayData.containsTagKey("ele")) {
+            const QString value = outerWayData.tagValue("ele");
+            osmData.addTag("ele", value);
+        }
+    }
+
+    GeoDataPolygon *polygon = new GeoDataPolygon;
+    polygon->setOuterBoundary(outer[0]);
     foreach(const GeoDataLinearRing &ring, inner) {
         polygon->appendInnerBoundary(ring);
     }
+
+    GeoDataPlacemark *placemark = new GeoDataPlacemark;
+    placemark->setName(m_osmData.tagValue("name"));
+    placemark->setVisualCategory(outerCategory);
+    placemark->setStyle( GeoDataStyle::Ptr() );
+    placemark->setVisible(outerCategory != GeoDataFeature::None);
     placemark->setGeometry(polygon);
     placemark->setOsmData(osmData);
     usedNodes |= outerNodes;
