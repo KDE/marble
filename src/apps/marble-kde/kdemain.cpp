@@ -343,7 +343,7 @@ int main ( int argc, char *argv[] )
     QCommandLineOption noHighResOption( "nohighresolution", i18n( "Do not use the interface optimized for high resolutions" ) );
     QCommandLineOption highResOption( "highresolution", i18n( "Use the interface optimized for high resolutions" ) );
     parser.addOption( (profiles & MarbleGlobal::HighResolution) ? noHighResOption : highResOption );
-    QCommandLineOption coordinatesOption("latlon", "coordinates", i18n("Show map at given lat lon <coordinates>"), "coordinates");
+    QCommandLineOption coordinatesOption("latlon", i18n("Show map at given lat lon <coordinates>"), "coordinates");
     parser.addOption( coordinatesOption );
     QCommandLineOption geoUriOption("geo-uri", i18n("Show map at given geo <uri>"), "uri");
     parser.addOption( geoUriOption );
