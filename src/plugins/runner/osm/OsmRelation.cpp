@@ -58,20 +58,25 @@ void OsmRelation::create(GeoDataDocument *document, OsmWays &ways, const OsmNode
     QSet<qint64> outerWays;
     QSet<qint64> outerNodes;
     const QList<GeoDataLinearRing> outer = rings(outerRoles, ways, nodes, outerNodes, outerWays);
+
     if (outer.isEmpty()) {
         return;
-    } else if (outer.size() > 1) {
+    }
+
+    if (outer.size() > 1) {
         /** @todo: Merge ways with common start/end, create multipolygon geometries for ones with multiple outer rings */
         mDebug() << "Polygons with " << outer.size() << " ways are not yet supported";
         return;
     }
+
     GeoDataFeature::GeoDataVisualCategory outerCategory = OsmPresetLibrary::determineVisualCategory(m_osmData);
     if (outerCategory == GeoDataFeature::None) {
         // Try to determine the visual category from the relation members
-        bool categoriesAreSame = true;
         auto iterator = outerWays.begin();
         GeoDataFeature::GeoDataVisualCategory const firstCategory =
                 OsmPresetLibrary::determineVisualCategory(ways[*iterator].osmData());
+
+        bool categoriesAreSame = true;
         for( ; iterator != outerWays.end(); ++iterator ) {
             GeoDataFeature::GeoDataVisualCategory const category =
                     OsmPresetLibrary::determineVisualCategory(ways[*iterator].osmData());
@@ -80,10 +85,12 @@ void OsmRelation::create(GeoDataDocument *document, OsmWays &ways, const OsmNode
                 break;
             }
         }
+
         if( categoriesAreSame ) {
             outerCategory = firstCategory;
         }
     }
+
     foreach(qint64 wayId, outerWays) {
         Q_ASSERT(ways.contains(wayId));
         GeoDataFeature::GeoDataVisualCategory const category = OsmPresetLibrary::determineVisualCategory(ways[wayId].osmData());
@@ -91,6 +98,7 @@ void OsmRelation::create(GeoDataDocument *document, OsmWays &ways, const OsmNode
             // Schedule way for removal: It's a non-styled way only used to create the outer boundary in this polygon
             usedWays << wayId;
         } // else we keep it
+
         foreach(qint64 nodeId, ways[wayId].references()) {
             ways[wayId].osmData().addNodeReference(nodes[nodeId].coordinates(), nodes[nodeId].osmData());
         }
