@@ -24,19 +24,6 @@ QSet<QString> OsmWay::s_areaTags;
 
 void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes, QSet<qint64> &usedNodes) const
 {
-    bool const shouldRender =
-        !m_osmData.containsTagKey("area:highway") &&              // Not supported yet
-        !m_osmData.containsTag("boundary", "protected_area") &&   // Not relevant for the default map
-        !m_osmData.containsTag("boundary", "postal_code") &&
-        !m_osmData.containsTag("boundary", "aerial_views") &&     // Created by OSM editor(s) application for digitalization
-        !m_osmData.containsTagKey("closed:highway") &&
-        !m_osmData.containsTagKey("abandoned:highway") &&
-        !m_osmData.containsTagKey("abandoned:natural") &&
-        !m_osmData.containsTagKey("abandoned:building") &&
-        !m_osmData.containsTagKey("abandoned:leisure") &&
-        !m_osmData.containsTagKey("disused:highway") &&
-        !m_osmData.containsTag("highway", "razed");
-
     GeoDataPlacemark* placemark = new GeoDataPlacemark;
     placemark->setOsmData(m_osmData);
     placemark->setVisualCategory(OsmPresetLibrary::determineVisualCategory(m_osmData));
@@ -44,7 +31,7 @@ void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes, QSet<qint6
     if (placemark->name().isEmpty() && placemark->visualCategory() >= GeoDataFeature::HighwaySteps && placemark->visualCategory() <= GeoDataFeature::HighwayMotorway) {
         placemark->setName(m_osmData.tagValue("ref"));
     }
-    placemark->setVisible(shouldRender && placemark->visualCategory() != GeoDataFeature::None);
+    placemark->setVisible(placemark->visualCategory() != GeoDataFeature::None);
 
     if (isArea()) {
         GeoDataLinearRing* linearRing = new GeoDataLinearRing;

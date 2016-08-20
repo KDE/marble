@@ -54,8 +54,6 @@ void OsmRelation::create(GeoDataDocument *document, OsmWays &ways, const OsmNode
         return;
     }
 
-    bool shouldRender = true;
-
     QStringList const outerRoles = QStringList() << "outer" << "";
     QSet<qint64> outerWays;
     QSet<qint64> outerNodes;
@@ -75,9 +73,6 @@ void OsmRelation::create(GeoDataDocument *document, OsmWays &ways, const OsmNode
         auto iterator = outerWays.begin();
         GeoDataFeature::GeoDataVisualCategory const firstCategory =
                 OsmPresetLibrary::determineVisualCategory(ways[*iterator].osmData());
-        if (ways[*iterator].osmData().containsTagKey("area:highway")) {
-            shouldRender = false;
-        }
         for( ; iterator != outerWays.end(); ++iterator ) {
             GeoDataFeature::GeoDataVisualCategory const category =
                     OsmPresetLibrary::determineVisualCategory(ways[*iterator].osmData());
@@ -102,15 +97,11 @@ void OsmRelation::create(GeoDataDocument *document, OsmWays &ways, const OsmNode
         }
     }
 
-    if (osmData.containsTag("historic", "castle") && osmData.containsTag("castle_type", "kremlin")) {
-        outerCategory = GeoDataFeature::None;
-    }
-
     GeoDataPlacemark* placemark = new GeoDataPlacemark;
     placemark->setName(osmData.tagValue("name"));
     placemark->setVisualCategory(outerCategory);
     placemark->setStyle( GeoDataStyle::Ptr() );
-    placemark->setVisible(shouldRender && outerCategory != GeoDataFeature::None);
+    placemark->setVisible(outerCategory != GeoDataFeature::None);
 
     GeoDataPolygon* polygon = new GeoDataPolygon;
     polygon->setOuterBoundary(outer[0]);

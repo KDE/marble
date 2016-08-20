@@ -400,6 +400,24 @@ QStringList OsmPresetLibrary::buildingValues()
 
 GeoDataFeature::GeoDataVisualCategory OsmPresetLibrary::determineVisualCategory(const OsmPlacemarkData &osmData)
 {
+    if (osmData.containsTagKey("area:highway") ||              // Not supported yet
+            osmData.containsTag("boundary", "protected_area") ||   // Not relevant for the default map
+            osmData.containsTag("boundary", "postal_code") ||
+            osmData.containsTag("boundary", "aerial_views") ||     // Created by OSM editor(s) application for digitalization
+            osmData.containsTagKey("closed:highway") ||
+            osmData.containsTagKey("abandoned:highway") ||
+            osmData.containsTagKey("abandoned:natural") ||
+            osmData.containsTagKey("abandoned:building") ||
+            osmData.containsTagKey("abandoned:leisure") ||
+            osmData.containsTagKey("disused:highway") ||
+            osmData.containsTag("highway", "razed")) {
+        return GeoDataFeature::None;
+    }
+
+    if (osmData.containsTag("historic", "castle") && osmData.containsTag("castle_type", "kremlin")) {
+        return GeoDataFeature::None;
+    }
+
     if (osmData.containsTagKey("building") && buildingValues().contains(osmData.tagValue("building")) ) {
         return GeoDataFeature::Building;
     }
