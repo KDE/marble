@@ -23,7 +23,8 @@ class GeoDataPolygonPrivate : public GeoDataGeometryPrivate
   public:
      explicit GeoDataPolygonPrivate( TessellationFlags f )
          : m_dirtyBox( true ),
-           m_tessellationFlags( f )
+           m_tessellationFlags(f),
+           m_renderOrder(0)
     {
     }
 
