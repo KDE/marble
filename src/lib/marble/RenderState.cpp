@@ -115,10 +115,7 @@ RenderStatus RenderState::Private::minimumStatus( RenderStatus a, RenderStatus b
 QString RenderState::Private::toString( const RenderState &state, int level ) const
 {
     QString const prefix = level > 0 ? "\n" : "";
-    QString indent;
-    for ( int i=0; i<level; ++i ) {
-        indent += "  ";
-    }
+    QString const indent(level*2, QLatin1Char(' '));
     QString status;
     switch ( state.status() ) {
     case Marble::Complete:         status = "Complete"; break;
