@@ -91,7 +91,7 @@ private:
 
 // Macros to ease registering new handlers
 #define GEODATA_DEFINE_TAG_HANDLER(Module, UpperCaseModule, Name, NameSpace) \
-    static GeoTagHandlerRegistrar s_handler##Name##NameSpace(GeoParser::QualifiedName(Module##Tag_##Name, NameSpace), \
+    static GeoTagHandlerRegistrar s_handler##Name##NameSpace(GeoParser::QualifiedName(QLatin1String(Module##Tag_##Name), QLatin1String(NameSpace)), \
                                                              new UpperCaseModule##Name##TagHandler());
 
 }
