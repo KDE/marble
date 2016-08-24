@@ -292,7 +292,7 @@ QString MarbleLegendBrowser::generateSectionsHtml()
         // Well is like a block of data with rounded corners
         customLegendString += "<div class=\"well well-small well-legend\">";
 
-
+        const QString heading = QCoreApplication::translate("DGML", section->heading().toUtf8().constData());
         QString checkBoxString;
         if (section->checkable()) {
             // If it's needed to make a checkbox here, we will
@@ -308,7 +308,7 @@ QString MarbleLegendBrowser::generateSectionsHtml()
                         "<input type=\"radio\" "
                         "onchange=\"Marble.setRadioCheckedProperty(this.value, this.name ,this.checked);\" " +
                         checked + " value=\"" + section->connectTo() + "\" name=\"" + section->radio() + "\" /><span>"
-                        + section->heading() +
+                        + heading +
                         "</span></label>";
 
             } else {
@@ -316,14 +316,14 @@ QString MarbleLegendBrowser::generateSectionsHtml()
                         "<label class=\"section-head\">"
                         "<input type=\"checkbox\" "
                         "onchange=\"Marble.setCheckedProperty(this.name, this.checked);\" "+checked+" name=\"" + section->connectTo() + "\" /><span>"
-                        + section->heading() +
+                        + heading +
                         "</span></label>";
 
             }
             customLegendString += checkBoxString;
 
         } else {
-            customLegendString += "<h4 class=\"section-head\">"+section->heading()+"</h4>";
+            customLegendString += "<h4 class=\"section-head\">" + heading + "</h4>";
         }
 
         foreach (const GeoSceneItem *item, section->items()) {
@@ -362,11 +362,12 @@ QString MarbleLegendBrowser::generateSectionsHtml()
                 styleDiv = "width: " + QString::number(pixmapWidth) + "px; height: " +
                         QString::number(pixmapHeight) + "px; background-color: " + color.name() + ';';
             }
+            const QString text = QCoreApplication::translate("DGML", item->text().toUtf8().constData());
             QString html = ""
                     "<div class=\"legend-entry\">"
                     "  <label>" + checkBoxString +
                     "    <img class=\"image-pic\" src=\"" + src + "\" style=\"" + styleDiv + "\"/>"
-                    "    <span class=\"notation\">" + item->text() + "</span>"
+                    "    <span class=\"notation\">" + text + "</span>"
                     "  </label>"
                     "</div>";
             customLegendString += html;
