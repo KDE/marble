@@ -62,7 +62,7 @@ void OpenDesktopModel::parseFile( const QByteArray& file )
 {
     QScriptValue data;
     QScriptEngine engine;
-    data = engine.evaluate( '(' + QString(file) + ')' );
+    data = engine.evaluate(QLatin1Char('(') + QString(file) + QLatin1Char(')'));
     
     // Parse if any result exists
     if ( data.property( "data" ).isArray() )

@@ -130,7 +130,7 @@ QVector<RouteItem> RouteSyncManager::cachedRouteList() const
     QVector<RouteItem> routeList;
     QStringList cachedRoutes = d->m_cacheDir.entryList( QStringList() << "*.kml", QDir::Files );
     foreach ( const QString &routeFilename, cachedRoutes ) {
-        QFile file( d->m_cacheDir.absolutePath() + '/' + routeFilename );
+        QFile file(d->m_cacheDir.absolutePath() + QLatin1Char('/') + routeFilename);
         file.open( QFile::ReadOnly );
 
         GeoDataParser parser( GeoData_KML );

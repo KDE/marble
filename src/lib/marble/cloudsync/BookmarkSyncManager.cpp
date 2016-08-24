@@ -278,7 +278,7 @@ void BookmarkSyncManager::startBookmarkSync()
 
 QUrl BookmarkSyncManager::Private::endpointUrl( const QString &endpoint ) const
 {
-    return QUrl( QString( "%0/%1" ).arg( m_cloudSyncManager->apiUrl().toString() ).arg( endpoint ) );
+    return QUrl(m_cloudSyncManager->apiUrl().toString() + QLatin1Char('/') + endpoint);
 }
 
 void BookmarkSyncManager::Private::uploadBookmarks()

@@ -57,10 +57,7 @@ QUrl PhotoPluginModel::generateUrl( const QString& service,
     QHash<QString,QString>::const_iterator it = options.constBegin();
     QHash<QString,QString>::const_iterator const end = options.constEnd();
     for (; it != end; ++it ) {
-        url += '&';
-        url += it.key();
-        url += '=';
-        url += it.value();
+        url += QLatin1Char('&') + it.key() + QLatin1Char('=') + it.value();
     }
     
     return QUrl( url );
@@ -75,11 +72,11 @@ void PhotoPluginModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
     }
 
     if( box.west() <= box.east() ) {
-        QString bbox;
-        bbox += QString::number( box.west()  * RAD2DEG ) + ',';
-        bbox += QString::number( box.south()  * RAD2DEG ) + ',';
-        bbox += QString::number( box.east() * RAD2DEG ) + ',';
-        bbox += QString::number( box.north() * RAD2DEG );
+        const QString bbox =
+            QString::number(box.west() * RAD2DEG) + QLatin1Char(',') +
+            QString::number(box.south() * RAD2DEG) + QLatin1Char(',') +
+            QString::number(box.east() * RAD2DEG) + QLatin1Char(',') +
+            QString::number(box.north() * RAD2DEG);
     
         QHash<QString,QString> options;
         options.insert( "per_page", QString::number( number ) );
@@ -91,11 +88,11 @@ void PhotoPluginModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
     }
     else {
         // Flickr api doesn't support bboxes with west > east so we have to split in two boxes
-        QString bboxWest;
-        bboxWest += QString::number( box.west() * RAD2DEG ) + ',';
-        bboxWest += QString::number( box.south()  * RAD2DEG ) + ',';
-        bboxWest += QString::number( 180 ) + ',';
-        bboxWest += QString::number( box.north() * RAD2DEG );
+        const QString bboxWest =
+            QString::number(box.west() * RAD2DEG) + QLatin1Char(',') +
+            QString::number(box.south() * RAD2DEG) + QLatin1Char(',') +
+            QString::number(180 ) + QLatin1Char(',') +
+            QString::number(box.north() * RAD2DEG);
         
         QHash<QString,QString> optionsWest;
         optionsWest.insert( "per_page", QString::number( number/2 ) );
@@ -106,12 +103,12 @@ void PhotoPluginModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
         downloadDescriptionFile( generateUrl( "flickr", "flickr.photos.search", optionsWest ) );
         
         
-        QString bboxEast;
-        bboxEast += QString::number( -180 ) + ',';
-        bboxEast += QString::number( box.south()  * RAD2DEG ) + ',';
-        bboxEast += QString::number( box.east() * RAD2DEG ) + ',';
-        bboxEast += QString::number( box.north() * RAD2DEG );
-        
+        const QString bboxEast =
+            QString::number(-180) +QLatin1Char( ',') +
+            QString::number(box.south() * RAD2DEG) + QLatin1Char(',') +
+            QString::number(box.east() * RAD2DEG) + QLatin1Char(',') +
+            QString::number(box.north() * RAD2DEG);
+
         QHash<QString,QString> optionsEast;
         optionsEast.insert( "per_page", QString::number( number/2 ) );
         optionsEast.insert( "bbox",     bboxEast );

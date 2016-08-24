@@ -282,7 +282,7 @@ int process( const QDir &input, const QDir &output, const QString &xml )
         qDebug() << "Name: " << name;
 
         QString const simpleNick = QString( nick ).replace( QLatin1Char(' '), QLatin1Char('-') );
-        QString const nickDir = output.filePath( "files.kde.org" ) + '/' + simpleNick;
+        QString const nickDir = output.filePath("files.kde.org") + QLatin1Char('/') + simpleNick;
         QDir::root().mkdir( nickDir );
         extract( zip, extracted );
         normalize( extracted );

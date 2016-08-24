@@ -308,7 +308,7 @@ void CurrentLocationWidgetPrivate::receiveGpsCoordinates( const GeoDataCoordinat
     const QString distanceString = QString( "%1 %2" ).arg( length, 0, 'f', 1, QChar(' ') ).arg( distanceUnitString );
 
     html = html.arg( position.lonToString() ).arg( position.latToString() );
-    html = html.arg( altitudeString ).arg( speedString + ' ' + unitString );
+    html = html.arg(altitudeString).arg(speedString + QLatin1Char(' ') + unitString);
     html = html.arg( distanceString );
     m_currentLocationUi.locationLabel->setText( html );
     m_currentLocationUi.showTrackCheckBox->setEnabled( true );

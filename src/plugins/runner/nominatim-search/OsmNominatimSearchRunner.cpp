@@ -158,7 +158,7 @@ void OsmNominatimRunner::handleResult( QNetworkReply* reply )
         QString description;
         for (int i=0; i<place.childNodes().size(); ++i) {
             QDomElement item = place.childNodes().at(i).toElement();
-            description += item.nodeName() + ':' + item.text() + '\n';
+            description += item.nodeName() + QLatin1Char(':') + item.text() + QLatin1Char('\n');
         }
         description += QLatin1String("Category: ") + key + QLatin1Char('/') + value;
 

@@ -152,7 +152,7 @@ void DataMigration::moveFiles( const QString& source, const QString& target )
             else {
                 // Add child directories to the stack
                 foreach( const QString& childDir, childDirs ) {
-                    dirs.push( sourceDirPath + '/' + childDir );
+                    dirs.push(sourceDirPath + QLatin1Char('/') + childDir);
                     progressSliceSizeStack.push( childSliceSize );
                 }
 
@@ -168,9 +168,7 @@ void DataMigration::moveFiles( const QString& source, const QString& target )
                         return;
                     }
 
-                    QString sourceFilePath = sourceDirPath;
-                    sourceFilePath += '/';
-                    sourceFilePath += file;
+                    const QString sourceFilePath = sourceDirPath + QLatin1Char('/') + file;
 
                     if( !sourceFilePath.startsWith( sourcePath ) ) {
                         continue;

@@ -461,7 +461,7 @@ void MarbleModelPrivate::addHighlightStyle(GeoDataDocument* doc)
             || highlightPenColor.isValid() )
         {
             GeoDataStyleMap styleMap = doc->styleMap("default-map");
-            styleMap.insert( "highlight", QString("#").append(highlightStyle->id()) );
+            styleMap.insert("highlight", QLatin1Char('#') + highlightStyle->id());
             doc->addStyle( highlightStyle );
             doc->addStyleMap( styleMap );
         }
@@ -474,7 +474,7 @@ void MarbleModelPrivate::assignNewStyle( const QString &filePath, const GeoDataS
     Q_ASSERT( doc );
     GeoDataStyleMap styleMap;
     styleMap.setId("default-map");
-    styleMap.insert( "normal", QString("#").append(style->id()) );
+    styleMap.insert("normal", QLatin1Char('#') + style->id());
     doc->addStyleMap( styleMap );
     doc->addStyle( style );
 
@@ -490,7 +490,7 @@ void MarbleModelPrivate::assignNewStyle( const QString &filePath, const GeoDataS
                 if ( placemark->geometry()->nodeType() != GeoDataTypes::GeoDataTrackType &&
                     placemark->geometry()->nodeType() != GeoDataTypes::GeoDataPointType )
                 {
-                    placemark->setStyleUrl( QString("#").append( styleMap.id() ) );
+                    placemark->setStyleUrl(QLatin1Char('#') + styleMap.id());
                 }
             }
         }
@@ -867,7 +867,7 @@ void MarbleModelPrivate::assignFillColors( const QString &filePath ) {
                             style->setId( "default" );
                             GeoDataStyleMap styleMap;
                             styleMap.setId("default-map");
-                            styleMap.insert( "normal", QString("#").append(style->id()) );
+                            styleMap.insert("normal", QLatin1Char('#') + style->id());
                             doc->addStyle( style );
                             doc->addStyleMap( styleMap );
 
@@ -881,7 +881,7 @@ void MarbleModelPrivate::assignFillColors( const QString &filePath ) {
                                     if ( placemark->geometry()->nodeType() != GeoDataTypes::GeoDataTrackType &&
                                         placemark->geometry()->nodeType() != GeoDataTypes::GeoDataPointType )
                                     {
-                                            placemark->setStyleUrl( QString("#").append( styleMap.id() ) );
+                                        placemark->setStyleUrl(QLatin1Char('#') + styleMap.id());
                                     }
                                 }
                             }

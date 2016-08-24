@@ -102,7 +102,7 @@ QString RemoteIconLoaderPrivate::cacheFileName( const QUrl& url ) const
 {
     const QString suffix = QFileInfo(url.path()).suffix();
     const QByteArray hash = QCryptographicHash::hash( url.toEncoded(), QCryptographicHash::Md5 ).toHex();
-    const QString fileName = QString::fromLatin1(hash) + '.' + suffix;
+    const QString fileName = QString::fromLatin1(hash) + QLatin1Char('.') + suffix;
     return fileName;
 }
 

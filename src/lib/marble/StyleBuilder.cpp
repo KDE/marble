@@ -822,9 +822,9 @@ QString StyleBuilder::Private::createPaintLayerItem(const QString &itemType, Geo
 {
     QString const category = visualCategoryName(visualCategory);
     if (subType.isEmpty()) {
-        return QString("%1/%2").arg(itemType).arg(category);
+        return itemType + QLatin1Char('/') + category;
     } else {
-        return QString("%1/%2/%3").arg(itemType).arg(category).arg(subType);
+        return itemType + QLatin1Char('/') + category + QLatin1Char('/') + subType;
     }
 }
 

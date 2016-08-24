@@ -105,11 +105,11 @@ void parseBoundingBox( const QFileInfo &file, const QString &name,
 
     GeoDataStyleMap styleMap;
     styleMap.setId("map-border");
-    styleMap.insert("normal", QString("#").append(style->id()));
+    styleMap.insert("normal", QLatin1Char('#') + style->id());
     document->addStyleMap(styleMap);
     document->addStyle(style);
 
-    placemark->setStyleUrl(QString("#").append(styleMap.id()));
+    placemark->setStyleUrl(QLatin1Char('#') + styleMap.id());
 
     placemark->setName( name );
     if ( !version.isEmpty() ) {

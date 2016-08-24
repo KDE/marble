@@ -169,7 +169,7 @@ QString DiscCache::keyToFileName( const QString &key ) const
     QString fileName( key );
     fileName.replace( '/', '_' );
 
-    return m_CacheDirectory + '/' + fileName;
+    return m_CacheDirectory + QLatin1Char('/') + fileName;
 }
 
 void DiscCache::cleanup()

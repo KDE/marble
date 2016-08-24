@@ -58,13 +58,13 @@ static void dumpParentStack( const QString& name, int size, bool close )
 
     QString result;
     for ( int i = 0; i < depth; ++i )
-        result += ' ';
+        result += QLatin1Char(' ');
 
     if ( close ) {
         depth--;
         result += QLatin1String("</");
     } else
-        result += '<';
+        result += QLatin1Char('<');
 
     result += name + QLatin1String("> stack size ") + QString::number(size);
     fprintf( stderr, "%s\n", qPrintable( result ));

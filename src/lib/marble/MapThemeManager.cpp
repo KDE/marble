@@ -216,7 +216,7 @@ bool MapThemeManager::Private::deleteDirectory( const QString& directory )
 
 GeoSceneDocument* MapThemeManager::Private::loadMapThemeFile( const QString& mapThemeStringID )
 {
-    const QString mapThemePath = mapDirName + '/' + mapThemeStringID;
+    const QString mapThemePath = mapDirName + QLatin1Char('/') + mapThemeStringID;
     const QString dgmlPath = MarbleDirs::path( mapThemePath );
 
     // Check whether file exists
@@ -252,8 +252,8 @@ GeoSceneDocument* MapThemeManager::Private::loadMapThemeFile( const QString& map
 QStringList MapThemeManager::Private::pathsToWatch()
 {
     QStringList result;
-    const QString localMapPathName = MarbleDirs::localPath() + '/' + mapDirName;
-    const QString systemMapPathName = MarbleDirs::systemPath() + '/' + mapDirName;
+    const QString localMapPathName = MarbleDirs::localPath() + QLatin1Char('/') + mapDirName;
+    const QString systemMapPathName = MarbleDirs::systemPath() + QLatin1Char('/') + mapDirName;
 
     if( !QDir().exists( localMapPathName ) ) {
         QDir().mkpath( localMapPathName );
@@ -268,7 +268,7 @@ QStringList MapThemeManager::Private::pathsToWatch()
 
 QStringList MapThemeManager::Private::findMapThemes( const QString& basePath )
 {
-    const QString mapPathName = basePath + '/' + mapDirName;
+    const QString mapPathName = basePath + QLatin1Char('/') + mapDirName;
 
     QDir paths = QDir( mapPathName );
 
@@ -279,14 +279,14 @@ QStringList MapThemeManager::Private::findMapThemes( const QString& basePath )
     QStringList mapDirs;
 
     for ( int planet = 0; planet < mapPaths.size(); ++planet ) {
-        QDir themeDir = QDir( mapPathName + '/' + mapPaths.at( planet ) );
+        QDir themeDir = QDir(mapPathName + QLatin1Char('/') + mapPaths.at(planet));
         QStringList themeMapPaths = themeDir.entryList(
                                      QStringList( "*" ),
                                      QDir::AllDirs |
                                      QDir::NoSymLinks |
                                      QDir::NoDotAndDotDot );
         for ( int theme = 0; theme < themeMapPaths.size(); ++theme ) {
-            mapDirs << mapPathName + '/' + mapPaths.at( planet ) + '/'
+            mapDirs << mapPathName + QLatin1Char('/') + mapPaths.at(planet) + QLatin1Char('/')
                 + themeMapPaths.at( theme );
         }
     }
@@ -294,7 +294,7 @@ QStringList MapThemeManager::Private::findMapThemes( const QString& basePath )
     QStringList mapFiles;
     QStringListIterator it( mapDirs );
     while ( it.hasNext() ) {
-        QString themeDir = it.next() + '/';
+        QString themeDir = it.next() + QLatin1Char('/');
         QString themeDirName = QDir( themeDir ).path().section( '/', -2, -1 );
         QStringList tmp = QDir( themeDir ).entryList( QStringList( "*.dgml" ),
                                                       QDir::Files | QDir::NoSymLinks );
@@ -302,7 +302,7 @@ QStringList MapThemeManager::Private::findMapThemes( const QString& basePath )
             QStringListIterator k( tmp );
             while ( k.hasNext() ) {
                 QString themeXml = k.next();
-                mapFiles << themeDirName + '/' + themeXml;
+                mapFiles << themeDirName + QLatin1Char('/') + themeXml;
             }
         }
     }
@@ -358,10 +358,9 @@ QList<QStandardItem *> MapThemeManager::Private::createMapThemeRow( QString cons
     }
 
     QPixmap themeIconPixmap;
-    QString relativePath;
 
-    relativePath = mapDirName + '/'
-        + mapTheme->head()->target() + '/' + mapTheme->head()->theme() + '/'
+    QString relativePath = mapDirName + QLatin1Char('/')
+        + mapTheme->head()->target() + QLatin1Char('/') + mapTheme->head()->theme() + QLatin1Char('/')
         + mapTheme->head()->icon()->pixmap();
     themeIconPixmap.load( MarbleDirs::path( relativePath ) );
 
@@ -507,7 +506,7 @@ void MapThemeManager::Private::addMapThemePaths( const QString& mapPathName, QSt
                                                  | QDir::NoDotAndDotDot );
     QStringListIterator itOrb( orbDirNames );
     while ( itOrb.hasNext() ) {
-        QString orbPathName = mapPathName + '/' + itOrb.next();
+        const QString orbPathName = mapPathName + QLatin1Char('/') + itOrb.next();
         result << orbPathName;
 
         QDir orbPath( orbPathName );
@@ -517,7 +516,7 @@ void MapThemeManager::Private::addMapThemePaths( const QString& mapPathName, QSt
                                                        | QDir::NoDotAndDotDot );
         QStringListIterator itThemeDir( themeDirNames );
         while ( itThemeDir.hasNext() ) {
-            QString themePathName = orbPathName + '/' + itThemeDir.next();
+            const QString themePathName = orbPathName + QLatin1Char('/') + itThemeDir.next();
             result << themePathName;
 
             QDir themePath( themePathName );
@@ -526,7 +525,7 @@ void MapThemeManager::Private::addMapThemePaths( const QString& mapPathName, QSt
                                                               | QDir::NoSymLinks );
             QStringListIterator itThemeFile( themeFileNames );
             while ( itThemeFile.hasNext() ) {
-                QString themeFilePathName = themePathName + '/' + itThemeFile.next();
+                const QString themeFilePathName = themePathName + QLatin1Char('/') + itThemeFile.next();
                 result << themeFilePathName;
             }
         }

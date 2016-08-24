@@ -40,18 +40,16 @@ bool KmlPointTagWriter::write( const GeoNode *node,
     writer.writeOptionalElement( kml::kmlTag_extrude, QString::number( point->extrude() ), "0" );
     writer.writeStartElement("coordinates");
 
-    QString coordinateString;
-
     //FIXME: this should be using the GeoDataCoordinates::toString but currently
     // it is not including the altitude and is adding an extra space after commas
 
-    coordinateString += QString::number( point->coordinates().longitude( GeoDataCoordinates::Degree ), 'f', 10 );
-    coordinateString += ',' ;
-    coordinateString += QString::number( point->coordinates().latitude( GeoDataCoordinates::Degree ) , 'f', 10 );
+    QString coordinateString =
+        QString::number(point->coordinates().longitude(GeoDataCoordinates::Degree), 'f', 10) +
+        QLatin1Char(',') +
+        QString::number(point->coordinates().latitude(GeoDataCoordinates::Degree) , 'f', 10);
 
     if( point->coordinates().altitude() ) {
-        coordinateString += ',';
-        coordinateString += QString::number( point->coordinates().altitude() , 'f' , 10);
+        coordinateString += QLatin1Char(',') + QString::number( point->coordinates().altitude() , 'f' , 10);
     }
 
     writer.writeCharacters( coordinateString );

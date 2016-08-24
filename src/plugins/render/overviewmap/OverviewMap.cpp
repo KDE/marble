@@ -470,7 +470,7 @@ void OverviewMap::loadMapSuggestions()
 {
     QStringList paths = QDir(MarbleDirs::pluginPath(QString())).entryList(QStringList("*.svg"), QDir::Files | QDir::NoDotAndDotDot);
     for( int i = 0; i < paths.size(); ++i ) {
-        paths[i] = MarbleDirs::pluginPath( QString() ) + '/' + paths[i];
+        paths[i] = MarbleDirs::pluginPath(QString()) + QLatin1Char('/') + paths[i];
     }
     paths << MarbleDirs::path( "svg/worldmap.svg" ) << MarbleDirs::path( "svg/lunarmap.svg" );
     ui_configWidget->m_tableWidget->setRowCount( paths.size() );

@@ -42,14 +42,14 @@ FileStoragePolicy::~FileStoragePolicy()
 
 bool FileStoragePolicy::fileExists( const QString &fileName ) const
 {
-    const QString fullName( m_dataDirectory + '/' + fileName );
+    const QString fullName = m_dataDirectory + QLatin1Char('/') + fileName;
     return QFile::exists( fullName );
 }
 
 bool FileStoragePolicy::updateFile( const QString &fileName, const QByteArray &data )
 {
     QFileInfo const dirInfo( fileName );
-    QString const fullName = dirInfo.isAbsolute() ? fileName : m_dataDirectory + '/' + fileName;
+    QString const fullName = dirInfo.isAbsolute() ? fileName : m_dataDirectory + QLatin1Char('/') + fileName;
 
     // Create directory if it doesn't exist yet...
     QFileInfo info( fullName );

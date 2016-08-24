@@ -164,12 +164,12 @@ PositionTracking::PositionTracking( GeoDataTreeModel *model )
 
     GeoDataStyleMap styleMap;
     styleMap.setId("map-track");
-    styleMap.insert("normal", QString("#").append(style->id()));
+    styleMap.insert("normal", QLatin1Char('#') + style->id());
     d->m_document.addStyleMap(styleMap);
     d->m_document.addStyle(style);
     d->m_document.append( d->m_currentTrackPlacemark );
 
-    d->m_currentTrackPlacemark->setStyleUrl(QString("#").append(styleMap.id()));
+    d->m_currentTrackPlacemark->setStyleUrl(QLatin1Char('#') + styleMap.id());
 
     d->m_treeModel->addDocument( &d->m_document );
 }

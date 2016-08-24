@@ -352,9 +352,9 @@ QString RoutingInstruction::totalDurationRemaining() const
 QString RoutingInstruction::instructionText() const
 {
     QString text = nextRoadInstruction();
-    text += ' ' + nextDistanceInstruction();
+    text += QLatin1Char(' ') + nextDistanceInstruction();
     if ( QCoreApplication::instance()->arguments().contains( "--remaining-duration" ) ) {
-        text += ' ' + totalDurationRemaining();
+        text += QLatin1Char(' ') + totalDurationRemaining();
     }
     return text;
 }

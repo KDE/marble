@@ -171,7 +171,7 @@ TileCreator::TileCreator(const QString& sourceDir, const QString& installMap,
     // If the sourceDir starts with a '/' assume an absolute path.
     // Otherwise assume a relative marble data path
     if ( QDir::isAbsolutePath( sourceDir ) ) {
-        sourcePath = sourceDir + '/' + installMap;
+        sourcePath = sourceDir + QLatin1Char('/') + installMap;
         mDebug() << "Trying absolute path*:" << sourcePath;
     }
     else {
@@ -186,7 +186,7 @@ TileCreator::TileCreator(const QString& sourceDir, const QString& installMap,
 
     if ( d->m_targetDir.isNull() )
         d->m_targetDir = MarbleDirs::localPath() + QLatin1String("/maps/")
-            + sourcePath.section( '/', -3, -2 ) + '/';
+            + sourcePath.section(QLatin1Char('/'), -3, -2) + QLatin1Char('/');
 
     setTerminationEnabled( true );
 }
@@ -216,7 +216,7 @@ void TileCreator::run()
     }
 
     if ( !d->m_targetDir.endsWith('/') )
-        d->m_targetDir += '/';
+        d->m_targetDir += QLatin1Char('/');
 
     mDebug() << "Installing tiles to: " << d->m_targetDir;
 

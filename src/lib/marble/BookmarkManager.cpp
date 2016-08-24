@@ -246,7 +246,7 @@ void BookmarkManager::setStyleBuilder(const StyleBuilder *styleBuilder)
 
 bool BookmarkManager::updateBookmarkFile()
 {
-    QString absoluteLocalFilePath = MarbleDirs::localPath() + '/' + d->m_bookmarkFileRelativePath ;
+    const QString absoluteLocalFilePath = MarbleDirs::localPath() + QLatin1Char('/') + d->m_bookmarkFileRelativePath;
 
     if ( ! d->m_bookmarkFileRelativePath.isNull() ) {
         QFile file( absoluteLocalFilePath );

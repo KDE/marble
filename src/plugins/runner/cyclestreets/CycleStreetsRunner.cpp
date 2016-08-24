@@ -75,9 +75,9 @@ void CycleStreetsRunner::retrieveRoute( const RouteRequest *route )
     queryStrings["speed"] = settings["speed"].toString();
     GeoDataCoordinates::Unit const degree = GeoDataCoordinates::Degree;
     QString itinerarypoints;
-    itinerarypoints.append( QString::number( route->source().longitude( degree ), 'f', 6 ) + ',' + QString::number( route->source().latitude( degree ), 'f', 6 ) );
+    itinerarypoints.append(QString::number(route->source().longitude(degree), 'f', 6) + QLatin1Char(',') + QString::number(route->source().latitude(degree), 'f', 6));
     for ( int i=1; i<route->size(); ++i ) {
-        itinerarypoints.append( '|' +  QString::number( route->at( i ).longitude( degree ), 'f', 6 ) + ',' + QString::number( route->at( i ).latitude( degree ), 'f', 6 ) );
+        itinerarypoints.append(QLatin1Char('|') +  QString::number(route->at(i).longitude(degree), 'f', 6) + QLatin1Char(',') + QString::number(route->at(i).latitude(degree), 'f', 6));
     }
     queryStrings["itinerarypoints"] = itinerarypoints;
 

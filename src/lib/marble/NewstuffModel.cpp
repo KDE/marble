@@ -883,7 +883,7 @@ void NewstuffModelPrivate::updateRegistry(const QStringList &files)
 
         foreach( const QString &file, files ) {
             QDomNode fileNode = node.appendChild( m_registryDocument.createElement( "installedfile" ) );
-            fileNode.appendChild( m_registryDocument.createTextNode( m_targetDirectory + '/' + file ) );
+            fileNode.appendChild(m_registryDocument.createTextNode(m_targetDirectory + QLatin1Char('/') + file));
         }
 
         saveRegistry();

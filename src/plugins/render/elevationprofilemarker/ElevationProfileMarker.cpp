@@ -160,7 +160,7 @@ bool ElevationProfileMarker::render( GeoPainter* painter, ViewportParams* viewpo
 
             QString intervalStr;
             intervalStr.setNum( m_currentPosition.altitude() * displayScale, 'f', 1 );
-            intervalStr += ' ' + unitString;
+            intervalStr += QLatin1Char(' ') + unitString;
             m_markerText.setText( intervalStr );
         }
     }

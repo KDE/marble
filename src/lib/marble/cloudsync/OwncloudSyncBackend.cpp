@@ -420,13 +420,13 @@ void OwncloudSyncBackend::saveDownloadedRoute()
 
 QUrl OwncloudSyncBackend::endpointUrl( const QString &endpoint ) const
 {
-    QString endpointUrl = QString( "%0/%1" ).arg( d->m_cloudSyncManager->apiUrl().toString() ).arg( endpoint );
+    const QString endpointUrl = d->m_cloudSyncManager->apiUrl().toString() + QLatin1Char('/') + endpoint;
     return QUrl( endpointUrl );
 }
 
 QUrl OwncloudSyncBackend::endpointUrl( const QString &endpoint, const QString &parameter ) const
 {
-    QString endpointUrl = QString( "%0/%1/%2" ).arg( d->m_cloudSyncManager->apiUrl().toString() ).arg( endpoint ).arg( parameter );
+    const QString endpointUrl = d->m_cloudSyncManager->apiUrl().toString() + QLatin1Char('/') + endpoint + QLatin1Char('/') + parameter;
     return QUrl( endpointUrl );
 }
 

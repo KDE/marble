@@ -115,7 +115,7 @@ bool OsmWay::isArea() const
     }
 
     for (auto iter = m_osmData.tagsBegin(), end=m_osmData.tagsEnd(); iter != end; ++iter) {
-        QString const keyValue = QString("%1=%2").arg(iter.key()).arg(iter.value());
+        QString const keyValue = iter.key() + QLatin1Char('=') + iter.value();
         if (isAreaTag(keyValue)) {
             return true;
         }

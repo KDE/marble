@@ -110,10 +110,10 @@ void LocalOsmSearchRunner::search( const QString &searchTerm, const GeoDataLatLo
         GeoDataPlacemark* hit = new GeoDataPlacemark;
         hit->setName( placemark.name() );
         if ( placemark.category() == OsmPlacemark::Address && !placemark.houseNumber().isEmpty() ) {
-            hit->setName( hit->name() + ' ' + placemark.houseNumber() );
+            hit->setName(hit->name() + QLatin1Char(' ') + placemark.houseNumber());
         }
         if ( !placemark.additionalInformation().isEmpty() ) {
-            hit->setName( hit->name() + '(' + placemark.additionalInformation() + ')' );
+            hit->setName(hit->name() + QLatin1Char('(') + placemark.additionalInformation() + QLatin1Char(')'));
         }
         if ( placemark.category() != OsmPlacemark::UnknownCategory ) {
             hit->setVisualCategory( m_categoryMap[placemark.category()] );

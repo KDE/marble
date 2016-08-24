@@ -204,7 +204,7 @@ QHash<QString, QVariant> StarsPlugin::settings() const
 
     QStringList planetState;
     foreach (const QString &key, m_renderPlanet.keys())
-        planetState.append(key+QChar(':')+QString::number((int)m_renderPlanet[key]));
+        planetState += key + QLatin1Char(':') + QString::number((int)m_renderPlanet[key]);
     settings["renderPlanet"] = planetState.join(QChar('|'));
 
     settings["renderEcliptic"] = m_renderEcliptic;

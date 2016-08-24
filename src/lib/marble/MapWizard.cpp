@@ -811,7 +811,7 @@ GeoSceneDocument* MapWizard::createDocument()
         QString image = d->uiWidget.lineEditSource->text();
         d->format = image.right( image.length() - image.lastIndexOf( '.' ) - 1 ).toLower();
         texture->setFileFormat( d->format.toUpper() );
-        texture->setInstallMap( document->head()->theme() + '.' + d->format );
+        texture->setInstallMap(document->head()->theme() + QLatin1Char('.') + d->format);
         texture->setServerLayout( new MarbleServerLayout( texture ) );
         texture->setProjection( GeoSceneTileDataset::Equirectangular );
         int imageWidth = QImage( image ).width();

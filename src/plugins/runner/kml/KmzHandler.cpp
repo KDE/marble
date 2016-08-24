@@ -33,7 +33,7 @@ bool KmzHandler::open(const QString &kmz, QString &error)
         return false;
     }
 
-    m_kmzPath = filename + '/';
+    m_kmzPath = filename + QLatin1Char('/');
     if (!zip.extractAll( m_kmzPath ))
     {
         error = QString("Failed to extract kmz file contents to %1").arg(m_kmzPath);
@@ -45,7 +45,7 @@ bool KmzHandler::open(const QString &kmz, QString &error)
         //if (!fileInfo.isFile) {
         //    continue;
         //}
-        QString file = filename + '/' + fileInfo.filePath;
+        QString file = filename + QLatin1Char('/') + fileInfo.filePath;
         m_kmzFiles << fileInfo.filePath;
         if (file.endsWith(".kml", Qt::CaseInsensitive)) {
             if ( !m_kmlFile.isEmpty() ) {

@@ -297,12 +297,12 @@ void PluginManagerPrivate::loadPlugins()
         }
 
         foreach (const QString & file, copyList) {
-            QString const target = MarbleDirs::pluginLocalPath() + '/' + file;
-            if (QFileInfo(MarbleDirs::pluginSystemPath() + '/' + file).isDir()) {
+            QString const target = MarbleDirs::pluginLocalPath() + QLatin1Char('/') + file;
+            if (QFileInfo(MarbleDirs::pluginSystemPath() + QLatin1Char('/') + file).isDir()) {
                 pluginHome.mkpath(target);
             }
             else {
-                QFile temporaryFile(MarbleDirs::pluginSystemPath() + '/' + file);
+                QFile temporaryFile(MarbleDirs::pluginSystemPath() + QLatin1Char('/') + file);
                 temporaryFile.copy(target);
                 QFileInfo targetFile(target);
                 d->m_pluginPaths << targetFile.canonicalFilePath();

@@ -103,7 +103,7 @@ void OsmTagEditorWidget::addSelectedTag()
     QString value = selectedTag->text( 1 );
 
     // If the value is <value>, the user has to type a value for that particular key
-    if ( value == QString( "<%1>" ).arg( tr( "value" ) ) ) {
+    if (value == QLatin1Char('<') + tr("value") + QLatin1Char('>')) {
         int lastIndex = d->m_currentTagsList->topLevelItemCount() - 1;
         QTreeWidgetItem *adderItem = d->m_currentTagsList->topLevelItem( lastIndex );
         adderItem->setText( 0, key );

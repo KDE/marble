@@ -54,7 +54,7 @@ GeoNode* GPXgpxTagHandler::parse(GeoParser& parser) const
 
     GeoDataStyleMap styleMap;
     styleMap.setId("map-track");
-    styleMap.insert("normal", QString("#").append(style->id()));
+    styleMap.insert("normal", QLatin1Char('#') + style->id());
     doc->addStyleMap(styleMap);
     doc->addStyle(style);
 
@@ -70,7 +70,7 @@ GeoNode* GPXgpxTagHandler::parse(GeoParser& parser) const
 
     GeoDataStyleMap routeStyleMap;
     routeStyleMap.setId("map-route");
-    routeStyleMap.insert("normal", QString("#").append(routestyle->id()));
+    routeStyleMap.insert("normal", QLatin1Char('#') + routestyle->id());
     doc->addStyleMap(routeStyleMap);
     doc->addStyle(routestyle);
 
@@ -88,7 +88,7 @@ GeoNode* GPXgpxTagHandler::parse(GeoParser& parser) const
 
     GeoDataStyleMap waypointStyleMap;
     waypointStyleMap.setId("map-waypoint");
-    waypointStyleMap.insert("normal", QString("#").append(waypointStyle->id()));
+    waypointStyleMap.insert("normal", QLatin1Char('#') + waypointStyle->id());
     doc->addStyleMap(waypointStyleMap);
     doc->addStyle(waypointStyle);
 

@@ -182,13 +182,13 @@ void ClickOnThat::initiateGame()
 
         GeoDataStyleMap styleMap;
         styleMap.setId("default-map");
-        styleMap.insert( "normal", QString("#").append( pinStyle->id()) );
+        styleMap.insert("normal", QLatin1Char('#') + pinStyle->id());
 
         d->m_selectPinDocument->addStyle( pinStyle );
         d->m_selectPinDocument->addStyleMap( styleMap );
 
         d->m_selectPinDocument->append( pinPlacemark );
-        pinPlacemark->setStyleUrl( QString("#").append(styleMap.id()) );
+        pinPlacemark->setStyleUrl(QLatin1Char('#') + styleMap.id());
         d->m_selectPinDocument->setVisible( false );
 
         // Add this document to treeModel

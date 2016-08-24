@@ -621,7 +621,7 @@ bool OsmParser::shouldSave( ElementType /*type*/, const QString &key, const QStr
 
 void OsmParser::setCategory( Element &element, const QString &key, const QString &value )
 {
-    QString const term = key + '/' + value;
+    QString const term = key + QLatin1Char('/') + value;
     if ( m_categoryMap.contains( term ) ) {
         if ( element.category != OsmPlacemark::UnknownCategory ) {
             qDebug() << "Overwriting category " << element.category << " with " << m_categoryMap[term] << " for " << element.name;
@@ -731,10 +731,10 @@ void OsmParser::writeKml( const QString &area, const QString &version, const QSt
 
     GeoDataStyleMap styleMap;
     styleMap.setId( color.name().replace( '#', 'f' ) );
-    styleMap.insert( "normal", QString( "#" ).append( style->id() ) );
+    styleMap.insert("normal", QLatin1Char('#') + style->id());
     document->addStyle( style );
 
-    placemark->setStyleUrl( QString( "#" ).append( styleMap.id() ) );
+    placemark->setStyleUrl(QLatin1Char('#') + styleMap.id());
 
     //placemark->setGeometry( new GeoDataLinearRing( region.region.geometry().outerBoundary() ) );
     GeoDataMultiGeometry *geometry = new GeoDataMultiGeometry;

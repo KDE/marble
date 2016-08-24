@@ -102,8 +102,7 @@ int main(int argc, char *argv[])
             while ( !supportstream.atEnd() ) {
                 const QString supportrawline = supportstream.readLine();
                 const QStringList supportsplitline = supportrawline.split('\t');
-                if(supportsplitline[0] == (country + '.' +statecode))
-                {
+                if (supportsplitline[0] == (country + QLatin1Char('.') +statecode)) {
                     state = supportsplitline[1];
                     break;
                 }

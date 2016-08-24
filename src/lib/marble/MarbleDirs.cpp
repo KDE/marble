@@ -54,8 +54,8 @@ MarbleDirs::MarbleDirs()
 
 QString MarbleDirs::path( const QString& relativePath )
 { 
-    QString  localpath = localPath() + '/' + relativePath;	// local path
-    QString  systempath  = systemPath() + '/' + relativePath;	// system path
+    QString  localpath = localPath() + QLatin1Char('/') + relativePath;	// local path
+    QString  systempath  = systemPath() + QLatin1Char('/') + relativePath;	// system path
 
 
     QString fullpath = systempath;
@@ -68,8 +68,8 @@ QString MarbleDirs::path( const QString& relativePath )
 
 QString MarbleDirs::pluginPath( const QString& relativePath )
 { 
-    QString  localpath = pluginLocalPath() + QDir::separator() + relativePath;    // local path
-    QString  systempath  = pluginSystemPath() + QDir::separator() + relativePath; // system path
+    const QString localpath = pluginLocalPath() + QDir::separator() + relativePath;    // local path
+    const QString systempath  = pluginSystemPath() + QDir::separator() + relativePath; // system path
 
 
     QString fullpath = systempath;
@@ -82,8 +82,8 @@ QString MarbleDirs::pluginPath( const QString& relativePath )
 
 QStringList MarbleDirs::entryList( const QString& relativePath, QDir::Filters filters )
 {
-    QStringList filesLocal = QDir( MarbleDirs::localPath() + '/' + relativePath ).entryList(filters);
-    QStringList filesSystem = QDir( MarbleDirs::systemPath() + '/' + relativePath ).entryList(filters);
+    QStringList filesLocal = QDir(MarbleDirs::localPath() + QLatin1Char('/') + relativePath).entryList(filters);
+    QStringList filesSystem = QDir(MarbleDirs::systemPath() + QLatin1Char('/') + relativePath).entryList(filters);
     QStringList allFiles( filesLocal );
     allFiles << filesSystem;
 
@@ -101,8 +101,8 @@ QStringList MarbleDirs::entryList( const QString& relativePath, QDir::Filters fi
 
 QStringList MarbleDirs::pluginEntryList( const QString& relativePath, QDir::Filters filters )
 {
-    QStringList filesLocal = QDir( MarbleDirs::pluginLocalPath() + '/' + relativePath ).entryList(filters);
-    QStringList filesSystem = QDir( MarbleDirs::pluginSystemPath() + '/' + relativePath ).entryList(filters);
+    QStringList filesLocal = QDir(MarbleDirs::pluginLocalPath() + QLatin1Char('/') + relativePath).entryList(filters);
+    QStringList filesSystem = QDir(MarbleDirs::pluginSystemPath() + QLatin1Char('/') + relativePath).entryList(filters);
     QStringList allFiles( filesLocal );
     allFiles << filesSystem;
 

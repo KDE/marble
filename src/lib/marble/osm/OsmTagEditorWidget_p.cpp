@@ -102,7 +102,7 @@ QTreeWidgetItem *OsmTagEditorWidgetPrivate::tagWidgetItem( const OsmTag &tag ) c
     QStringList itemText;
 
     itemText << tag.first;
-    itemText << ( tag.second.isEmpty() ? QString( "<%1>" ).arg( QObject::tr( "value" ) ) : tag.second );
+    itemText << (tag.second.isEmpty() ? QLatin1Char('<') + QObject::tr("value") + QLatin1Char('>') : tag.second);
 
     QTreeWidgetItem *tagItem = new QTreeWidgetItem( itemText );
 

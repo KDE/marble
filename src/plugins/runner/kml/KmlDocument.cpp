@@ -39,7 +39,7 @@ void KmlDocument::removeDirectoryRecursively( const QString &path )
 {
     QStringList const subdirs = QDir( path ).entryList( QDir::Dirs | QDir::NoSymLinks | QDir::NoDotAndDotDot );
     foreach( const QString &subdir, subdirs ) {
-        removeDirectoryRecursively( path + '/' + subdir );
+        removeDirectoryRecursively(path + QLatin1Char('/') + subdir);
     }
     QDir::root().rmdir( path );
 }

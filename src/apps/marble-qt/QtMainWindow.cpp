@@ -995,13 +995,13 @@ void MainWindow::openFile()
             continue;
 
         const QStringList fileExtensions = plugin->fileExtensions().replaceInStrings( QRegExp( "^" ), "*." );
-        const QString filter = QString( "%1 (%2)" ).arg( plugin->fileFormatDescription() ).arg( fileExtensions.join( " " ) );
+        const QString filter = plugin->fileFormatDescription() + QLatin1String(" (") + fileExtensions.join(QLatin1Char(' ')) + QLatin1Char(')');
         filters << filter;
         allFileExtensions << fileExtensions;
     }
 
     allFileExtensions.sort();  // sort since file extensions are visible under Windows
-    const QString allFileTypes = QString( "%1 (%2)" ).arg( tr( "All Supported Files" ) ).arg( allFileExtensions.join( " " ) );
+    const QString allFileTypes = tr("All Supported Files") + QLatin1String(" (") + allFileExtensions.join(QLatin1Char(' ')) + QLatin1Char(')');
 
     filters.sort();
     filters.prepend( allFileTypes );

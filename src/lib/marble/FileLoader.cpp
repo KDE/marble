@@ -53,7 +53,7 @@ public:
     {
         if( m_style ) {
             m_styleMap->setId("default-map");
-            m_styleMap->insert("normal", QString("#").append(m_style->id()));
+            m_styleMap->insert("normal", QLatin1Char('#') + m_style->id());
         }
     }
 
@@ -146,11 +146,11 @@ void FileLoader::run()
         // determine source, cache names
         if ( fileinfo.isAbsolute() ) {
             // We got an _absolute_ path now: e.g. "/patrick.kml"
-            defaultSourceName   = path + '/' + name + '.' + suffix;
+            defaultSourceName = path + QLatin1Char('/') + name + QLatin1Char('.') + suffix;
         }
         else if ( d->m_filepath.contains( '/' ) ) {
             // _relative_ path: "maps/mars/viking/patrick.kml"
-            defaultSourceName   = MarbleDirs::path( path + '/' + name + '.' + suffix );
+            defaultSourceName = MarbleDirs::path(path + QLatin1Char('/') + name + QLatin1Char('.') + suffix);
             if ( !QFile::exists( defaultSourceName ) ) {
                 defaultSourceName = MarbleDirs::path(path + QLatin1Char('/') + name + QLatin1String(".cache"));
             }
@@ -264,7 +264,7 @@ void FileLoaderPrivate::createFilterProperties( GeoDataContainer *container )
                 placemark->geometry()->nodeType() != GeoDataTypes::GeoDataPointType
                  && m_documentRole == MapDocument
                  && m_style ) {
-                placemark->setStyleUrl( QString("#").append( m_styleMap->id() ) );
+                placemark->setStyleUrl(QLatin1Char('#') + m_styleMap->id());
             }
 
             // Mountain (H), Volcano (V), Shipwreck (W)

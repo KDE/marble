@@ -109,7 +109,7 @@ QVector<OsmPlacemark> OsmDatabase::find( const DatabaseQuery &userQuery )
                                      QLatin1String(" AND regions.lft <= ") + regionsQuery.value( 1 ).toString() + QLatin1Char(')');
                 regionCount++;
             }
-            regionRestriction += ')';
+            regionRestriction += QLatin1Char(')');
 
             mDebug() << Q_FUNC_INFO << "region query in" << databaseFile << "with query" << regionsQueryString
                      << "took" << regionTimer.elapsed() << "ms for" << regionCount << "results";
@@ -281,7 +281,7 @@ QString OsmDatabase::formatDistance( const GeoDataCoordinates &a, const GeoDataC
         heading = QObject::tr( "north-east" );
     }
 
-    return fuzzyDistance + ' ' + heading;
+    return fuzzyDistance + QLatin1Char(' ') + heading;
 }
 
 qreal OsmDatabase::bearing( const GeoDataCoordinates &a, const GeoDataCoordinates &b )

@@ -592,7 +592,7 @@ QString WeatherData::windSpeedString( WeatherData::SpeedUnit unit ) const
     QLocale locale = QLocale::system();
     // We round to integer.
     QString string = locale.toString( floor( windSpeed( unit ) + 0.5 ) );
-    string += ' ';
+    string += QLatin1Char(' ');
     switch ( unit ) {
         case WeatherData::kph:
             string += QObject::tr("km/h");
@@ -751,7 +751,7 @@ QString WeatherData::pressureString( WeatherData::PressureUnit unit ) const
     QLocale locale = QLocale::system();
     // We round to integer.
     QString string = locale.toString( pressure( unit ), 'f', 2 );
-    string += ' ';
+    string += QLatin1Char(' ');
     switch ( unit ) {
         case WeatherData::HectoPascal:
             string += tr( "hPa" );

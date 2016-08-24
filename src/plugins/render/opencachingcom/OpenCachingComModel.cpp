@@ -65,14 +65,14 @@ void OpenCachingComModel::getAdditionalItems( const GeoDataLatLonAltBox& box, qi
     }
 
     QString url("http://www.opencaching.com/api/geocache/?Authorization=");
-    url += AUTHKEY + QString("&bbox=%1,%2,%3,%4")
+    url += AUTHKEY + QStringLiteral("&bbox=%1,%2,%3,%4")
         .arg( box.south( GeoDataCoordinates::Degree ) )
         .arg( box.west(GeoDataCoordinates::Degree ) )
         .arg( box.north(GeoDataCoordinates::Degree ) )
         .arg( box.east(GeoDataCoordinates::Degree ) );
     if(!m_previousbox.isNull())
     {
-        url += QString("&exclude_bbox=%1,%2,%3,%4")
+        url += QStringLiteral("&exclude_bbox=%1,%2,%3,%4")
             .arg( m_previousbox.south( GeoDataCoordinates::Degree ) )
             .arg( m_previousbox.west(GeoDataCoordinates::Degree ) )
             .arg( m_previousbox.north(GeoDataCoordinates::Degree ) )
@@ -92,7 +92,7 @@ void OpenCachingComModel::parseFile( const QByteArray& file )
     QScriptEngine engine;
 
     // Qt requires parentheses around json code
-    QScriptValue data = engine.evaluate( '(' + QString::fromUtf8( file ) + ')' );
+    QScriptValue data = engine.evaluate(QLatin1Char('(') + QString::fromUtf8(file) + QLatin1Char(')'));
     QVariantList caches = data.toVariant().toList();
 
 //     qDebug()<<"parsing "<<caches.size()<<" items";

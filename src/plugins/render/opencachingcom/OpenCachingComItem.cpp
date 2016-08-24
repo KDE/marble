@@ -284,7 +284,7 @@ void OpenCachingComItem::addDownloadedFile( const QString &url, const QString &t
         QScriptEngine engine;
 
         // Qt requires parentheses around json code
-        QScriptValue data = engine.evaluate( '(' + QString::fromUtf8( file.readAll() ) + ')' );
+        QScriptValue data = engine.evaluate(QLatin1Char('(') + QString::fromUtf8(file.readAll()) + QLatin1Char(')'));
         QVariantMap cache = data.toVariant().toMap();
 
         m_cache["description"] = cache["description"];

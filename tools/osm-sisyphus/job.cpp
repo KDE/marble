@@ -86,8 +86,8 @@ void Job::changeStatus(Job::Status status, const QString &message)
     case Error: statusType = "error"; break;
     }
 
-    Logger::instance().setStatus(m_region.id() + '_' + m_transport,
-                                 m_region.name() + QLatin1String( " (" ) + m_transport + ')', statusType, message);
+    Logger::instance().setStatus(m_region.id() + QLatin1Char('_') + m_transport,
+                                 m_region.name() + QLatin1String(" (") + m_transport + QLatin1Char(')'), statusType, message);
     m_statusMessage = message;
     m_status = status;
 }
@@ -182,7 +182,7 @@ bool Job::monav()
     if (subdir.exists() && subdir.isDir()) {
         QFileInfoList files = QDir(subdir.absoluteFilePath()).entryInfoList(QDir::Files);
         foreach(const QFileInfo &file, files) {
-            if (!QFile::rename(file.absoluteFilePath(), monavDir().absoluteFilePath() + '/' + file.fileName())) {
+            if (!QFile::rename(file.absoluteFilePath(), monavDir().absoluteFilePath() + QLatin1Char('/') + file.fileName())) {
                 changeStatus(Error, "Unable to move monav files to target directory.");
                 return false;
             }

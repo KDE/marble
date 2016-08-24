@@ -144,7 +144,7 @@ void MapItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &opti
         progressBarOption.minimum = 0;
         progressBarOption.maximum = 100;
         progressBarOption.progress = ( 100.0 * progress / total );
-        progressBarOption.text = QString::number( progressBarOption.progress ) + '%';
+        progressBarOption.text = QString::number(progressBarOption.progress) + QLatin1Char('%');
         progressBarOption.textVisible = true;
         QApplication::style()->drawControl(QStyle::CE_ProgressBar, &progressBarOption, painter);
 

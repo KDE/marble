@@ -76,12 +76,14 @@ void MovieCaptureDialog::loadDestinationFile()
 
     bool supported = false;
     foreach(const MovieFormat &format, formats) {
-        if (destination.endsWith('.'+format.extension()))
+        if (destination.endsWith(QLatin1Char('.') + format.extension())) {
             supported = true;
+            break;
+        }
     }
 
     if (!supported) {
-        QString formatsExtensions = '.' + formats.at( 0 ).extension();
+        QString formatsExtensions = QLatin1Char('.') + formats.at(0).extension();
         for( int i = 1; i < formats.size(); ++i )
         {
             formatsExtensions += QLatin1String(", .") + formats.at(i).extension();

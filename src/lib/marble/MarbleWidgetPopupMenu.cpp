@@ -404,7 +404,7 @@ void MarbleWidgetPopupMenu::Private::setupDialogCity( PopupLayer *popup, const G
     if(dst.startsWith('-')) {
         doc["timezone"] = dst;
     } else {
-        doc["timezone"] = '+'+dst;
+        doc["timezone"] = QLatin1Char('+') + dst;
     }
 
     const QString flagPath = MarbleDirs::path(

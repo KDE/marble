@@ -293,7 +293,7 @@ void MeasureToolPlugin::drawSegments( GeoPainter* painter )
             }
             QString bearingString = QString::fromUtf8( "%1°" ).arg( bearing, 0, 'f', 2 );
             if ( !infoString.isEmpty() ) {
-                infoString.append( "\n" );
+                infoString += QLatin1Char('\n');
             }
             infoString.append( bearingString );
         }
