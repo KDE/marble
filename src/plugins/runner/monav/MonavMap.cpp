@@ -133,12 +133,12 @@ QList<QFileInfo> MonavMap::files() const
     QList<QFileInfo> files;
     QStringList fileNames = QStringList() << "config" << "edges" << "names" << "paths" << "types";
     foreach( const QString & file, fileNames ) {
-        files << QFileInfo( m_directory, QString( "Contraction Hierarchies_" ) + file );
+        files << QFileInfo(m_directory, QLatin1String("Contraction Hierarchies_") + file);
     }
 
     fileNames = QStringList() << "config" << "grid" << "index_1" << "index_2" << "index_3";
     foreach( const QString & file, fileNames ) {
-        files << QFileInfo( m_directory, QString( "GPSGrid_" ) + file );
+        files << QFileInfo(m_directory, QLatin1String("GPSGrid_") + file);
     }
 
     files << QFileInfo( m_directory, "plugins.ini" );

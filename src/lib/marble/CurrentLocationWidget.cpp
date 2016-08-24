@@ -216,7 +216,7 @@ void CurrentLocationWidgetPrivate::adjustPositionTrackingStatus( PositionProvide
             break;
     }
 
-    html += "</p></body></html>";
+    html += QLatin1String("</p></body></html>");
     m_currentLocationUi.locationLabel->setEnabled( true );
     m_currentLocationUi.locationLabel->setText( html );
 }
@@ -259,15 +259,15 @@ void CurrentLocationWidgetPrivate::receiveGpsCoordinates( const GeoDataCoordinat
     qreal altitude = 0.0;
     qreal length = m_widget->model()->positionTracking()->length( m_widget->model()->planetRadius() );
 
-    QString html = "<html><body>";
-    html += "<table cellspacing=\"2\" cellpadding=\"2\">";
-    html += "<tr><td>Longitude</td><td><a href=\"http://edu.kde.org/marble\">%1</a></td></tr>";
-    html += "<tr><td>Latitude</td><td><a href=\"http://edu.kde.org/marble\">%2</a></td></tr>";
-    html += "<tr><td>Altitude</td><td>%3</td></tr>";
-    html += "<tr><td>Speed</td><td>%4</td></tr>";
-    html += "<tr><td>Distance</td><td>%5</td></tr>";
-    html += "</table>";
-    html += "</body></html>";
+    QString html = QLatin1String("<html><body>"
+        "<table cellspacing=\"2\" cellpadding=\"2\">"
+        "<tr><td>Longitude</td><td><a href=\"http://edu.kde.org/marble\">%1</a></td></tr>"
+        "<tr><td>Latitude</td><td><a href=\"http://edu.kde.org/marble\">%2</a></td></tr>"
+        "<tr><td>Altitude</td><td>%3</td></tr>"
+        "<tr><td>Speed</td><td>%4</td></tr>"
+        "<tr><td>Distance</td><td>%5</td></tr>"
+        "</table>"
+        "</body></html>");
 
     switch ( MarbleGlobal::getInstance()->locale()->measurementSystem() ) {
     case MarbleLocale::MetricSystem:
@@ -373,13 +373,13 @@ void CurrentLocationWidgetPrivate::saveTrack()
 {
     QString suggested = m_lastSavePath;
     QString fileName = QFileDialog::getSaveFileName(m_widget, QObject::tr("Save Track"), // krazy:exclude=qclasses
-                                                    suggested.append('/' + QDateTime::currentDateTime().toString("yyyy-MM-dd_hhmmss") + ".kml"),
+                                                    suggested.append(QLatin1Char('/') + QDateTime::currentDateTime().toString("yyyy-MM-dd_hhmmss") + QLatin1String(".kml")),
                             QObject::tr("KML File (*.kml)"));
     if ( fileName.isEmpty() ) {
         return;
     }
     if ( !fileName.endsWith(QLatin1String( ".kml" ), Qt::CaseInsensitive) ) {
-        fileName.append( ".kml" );
+        fileName += QLatin1String(".kml");
     }
     QFileInfo file( fileName );
     m_lastSavePath = file.absolutePath();

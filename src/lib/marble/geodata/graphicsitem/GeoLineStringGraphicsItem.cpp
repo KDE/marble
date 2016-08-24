@@ -31,9 +31,9 @@ GeoLineStringGraphicsItem::GeoLineStringGraphicsItem( const GeoDataFeature *feat
 {
     QString const category = StyleBuilder::visualCategoryName(feature->visualCategory());
     QStringList paintLayers;
-    paintLayers << QString("LineString/%1/outline").arg(category);
-    paintLayers << QString("LineString/%1/inline").arg(category);
-    paintLayers << QString("LineString/%1/label").arg(category);
+    paintLayers << QLatin1String("LineString/") + category + QLatin1String("/outline");
+    paintLayers << QLatin1String("LineString/") + category + QLatin1String("/inline");
+    paintLayers << QLatin1String("LineString/") + category + QLatin1String("/label");
     setPaintLayers(paintLayers);
 }
 

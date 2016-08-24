@@ -25,7 +25,7 @@ GeoPhotoGraphicsItem::GeoPhotoGraphicsItem( const GeoDataFeature *feature )
     : GeoGraphicsItem( feature )
 {
     if (feature) {
-        QString const paintLayer = QString("Photo/%1").arg(StyleBuilder::visualCategoryName(feature->visualCategory()));
+        QString const paintLayer = QLatin1String("Photo/") + StyleBuilder::visualCategoryName(feature->visualCategory());
         setPaintLayers(QStringList() << paintLayer);
     }
 }

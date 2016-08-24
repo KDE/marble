@@ -204,7 +204,7 @@ void MapScaleFloatItem::paintContent( QPainter *painter )
     }
     iRatio *= power;
     m_ratioString.setNum(iRatio);
-    m_ratioString = m_ratioString = "1 : " + m_ratioString;
+    m_ratioString = QLatin1String("1 : ") + m_ratioString;
 
     painter->setPen(   QColor( Qt::darkGray ) );
     painter->setBrush( QColor( Qt::darkGray ) );
@@ -282,8 +282,9 @@ void MapScaleFloatItem::paintContent( QPainter *painter )
         painter->setFont( font() );
 
         if ( j == 0 ) {
-            painter->drawText( 0, fontHeight, "0 " + unit );
-            lastStringEnds = QFontMetrics( font() ).width( "0 " + unit );
+            const QString text = QLatin1String("0 ") + unit;
+            painter->drawText(0, fontHeight, text);
+            lastStringEnds = QFontMetrics(font()).width(text);
             continue;
         }
 

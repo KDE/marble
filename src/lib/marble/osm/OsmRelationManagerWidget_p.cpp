@@ -88,7 +88,7 @@ void OsmRelationManagerWidgetPrivate::populateDropMenu()
 
     // Suggesting existing relations
     foreach ( const OsmPlacemarkData &relationData, m_allRelations->values() ) {
-        QString relationText = QString( "%1 (%2)" ).arg( relationData.tagValue( "name" ) ).arg( relationData.tagValue( "type" ) );
+        const QString relationText = relationData.tagValue("name") + QLatin1String(" (") + relationData.tagValue("type") + QLatin1Char(')');
 
         // Don't suggest relations the placemark is already part of
         if ( m_placemark->hasOsmData() && m_placemark->osmData().containsRelation( relationData.id() ) ) {

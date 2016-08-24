@@ -502,7 +502,7 @@ QString WeatherItem::createFromTemplate(const QString &templateHtml)
 
     if (!d->m_currentWeather.iconSource().isEmpty()) {
         html.replace("%weather_situation%",
-                     "<img src=\"file://"+d->m_currentWeather.iconSource()+"\" />");
+                     QLatin1String("<img src=\"file://") + d->m_currentWeather.iconSource() + QLatin1String("\" />"));
     } else {
         html.remove("%weather_situation%");
     }

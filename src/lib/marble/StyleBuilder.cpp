@@ -220,21 +220,21 @@ GeoDataStyle::Ptr StyleBuilder::Private::createPOIStyle(const QFont &font, const
 GeoDataStyle::Ptr StyleBuilder::Private::createOsmPOIStyle( const QFont &font, const QString &imagePath,
                                      const QColor &textColor, const QColor &color, const QColor &outline)
 {
-    QString const path = MarbleDirs::path( "svg/osmcarto/svg/" + imagePath + ".svg" );
+    QString const path = MarbleDirs::path(QLatin1String("svg/osmcarto/svg/") + imagePath + QLatin1String(".svg"));
     return createPOIStyle(font, path, textColor, color, outline, false, false);
 }
 
 GeoDataStyle::Ptr StyleBuilder::Private::createOsmPOIRingStyle( const QFont &font, const QString &imagePath,
                                      const QColor &textColor, const QColor &color, const QColor &outline)
 {
-    QString const path = MarbleDirs::path( "svg/osmcarto/svg/" + imagePath + ".svg" );
+    QString const path = MarbleDirs::path(QLatin1String("svg/osmcarto/svg/") + imagePath + QLatin1String(".svg"));
     return createPOIStyle(font, path, textColor, color, outline, false, true);
 }
 
 GeoDataStyle::Ptr StyleBuilder::Private::createOsmPOIAreaStyle( const QFont &font, const QString &imagePath,
                                      const QColor &textColor, const QColor &color, const QColor &outline)
 {
-    QString const path = MarbleDirs::path( "svg/osmcarto/svg/" + imagePath + ".svg" );
+    QString const path = MarbleDirs::path(QLatin1String("svg/osmcarto/svg/") + imagePath + QLatin1String(".svg"));
     return createPOIStyle(font, path, textColor, color, outline, true, false);
 }
 
@@ -906,7 +906,7 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
 
                 if (!season.isEmpty()) {
                     GeoDataIconStyle iconStyle = style->iconStyle();
-                    QString const image = QString("svg/osmcarto/svg/individual/tree-29-%1.svg").arg(season);
+                    QString const image = QLatin1String("svg/osmcarto/svg/individual/tree-29-") + season + QLatin1String(".svg");
                     iconStyle.setIconPath(MarbleDirs::path(image));
 
                     GeoDataStyle::Ptr newStyle(new GeoDataStyle(*style));

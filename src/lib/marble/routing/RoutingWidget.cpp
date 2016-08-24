@@ -476,7 +476,7 @@ void RoutingWidget::handleSearchResult( RoutingInputWidget *widget )
         activatePlacemark( model->index( 0, 0 ) );
     } else {
         QString const results = tr( "No placemark found" );
-        d->m_ui.resultLabel->setText( "<font color=\"red\">" + results + "</font>" );
+        d->m_ui.resultLabel->setText(QLatin1String("<font color=\"red\">") + results + QLatin1String("</font>"));
         d->m_ui.resultLabel->setVisible( true );
     }
 
@@ -593,7 +593,7 @@ void RoutingWidget::updateRouteState( RoutingManager::State state )
         d->m_ui.searchButton->setIcon( QIcon() );
         if ( d->m_routingManager->routingModel()->rowCount() == 0 ) {
             const QString results = tr( "No route found" );
-            d->m_ui.resultLabel->setText( "<font color=\"red\">" + results + "</font>" );
+            d->m_ui.resultLabel->setText(QLatin1String("<font color=\"red\">") + results + QLatin1String("</font>"));
             d->m_ui.resultLabel->setVisible( true );
         }
     }
@@ -736,7 +736,7 @@ void RoutingWidget::saveRoute()
     if ( !fileName.isEmpty() ) {
         // maemo 5 file dialog does not append the file extension
         if ( !fileName.endsWith(QLatin1String( ".kml" ), Qt::CaseInsensitive) ) {
-            fileName.append( ".kml" );
+            fileName += QLatin1String(".kml");
         }
         d->m_routingManager->setLastSavePath( QFileInfo( fileName ).absolutePath() );
         d->m_routingManager->saveRoute( fileName );
@@ -900,7 +900,8 @@ void RoutingWidget::initializeTour()
     QList<WaypointInfo> waypoints;
     double totalDistance = 0.0;
     for( int i=0; i<route.size(); ++i ){
-        waypoints << WaypointInfo( i, totalDistance, route.at(i).path().first(), route.at(i).maneuver(), QString("start ") + QString( i ) );
+        // TODO: QString( i )?
+        waypoints << WaypointInfo(i, totalDistance, route.at(i).path().first(), route.at(i).maneuver(), QLatin1String("start ") + QString(i));
         totalDistance += route.at( i ).distance();
     }
 

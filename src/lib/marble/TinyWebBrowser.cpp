@@ -38,7 +38,7 @@ static QString guessWikipediaDomain()
 {
     const QString code = MarbleLocale::languageCode();
 
-    return QString ( "http://%1.m.wikipedia.org/" ).arg ( code );
+    return QLatin1String("https://") + code + QLatin1String(".m.wikipedia.org/");
 }
 
 TinyWebBrowser::TinyWebBrowser( QWidget* parent )

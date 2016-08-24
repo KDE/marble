@@ -90,14 +90,14 @@ void ExternalEditorDialog::updateDefaultEditor( int index )
         d->m_defaultEditor = merkaartor;
         description = tr( "Merkaartor is an OpenStreetMap editor that is powerful and easy to use. It integrates well into the used workspace." );
         if ( !d->m_installedEditors[d->m_defaultEditor] ) {
-            description += " <b>" + tr( "Please ask your system administrator to install %1 on your system." ).arg( "Merkaartor") + "</b>";
+            description += QLatin1String(" <b>") + tr("Please ask your system administrator to install %1 on your system.").arg(QStringLiteral("Merkaartor")) + QLatin1String("</b>");
         }
         break;
     case 2:
         d->m_defaultEditor = josm;
         description = tr( "JOSM is a powerful OpenStreetMap editor which is more complex to use than other editors. It is built on the Java platform and therefor runs on all systems for which Java is available but does not integrate well into the workspace. A Java SE-compatible runtime is required." );
         if ( !d->m_installedEditors[d->m_defaultEditor] ) {
-            description += " <b>" + tr( "Please ask your system administrator to install %1 on your system." ).arg( "JOSM" ) + "</b>";
+            description += QLatin1String(" <b>") + tr("Please ask your system administrator to install %1 on your system.").arg(QStringLiteral("JOSM")) + QLatin1String("</b>");
         }
         break;
     default:
@@ -106,7 +106,7 @@ void ExternalEditorDialog::updateDefaultEditor( int index )
         break;
     }
 
-    screenshotLabel->setPixmap( QPixmap( ":/data/editors/" + d->m_defaultEditor + ".png" ) );
+    screenshotLabel->setPixmap(QPixmap(QLatin1String(":/data/editors/") + d->m_defaultEditor + QLatin1String(".png")));
     descriptionLabel->setText( description );
 }
 

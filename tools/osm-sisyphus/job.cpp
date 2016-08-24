@@ -134,7 +134,7 @@ bool Job::download()
 //    arguments << "--transport" << m_transport;
 //    arguments << "--payload" << targetFile().fileName();
 //    arguments << m_parameters.base().absoluteFilePath("poly/" + m_region.polyFile());
-//    arguments << monavDir().absoluteFilePath() + "/marble.kml";
+//    arguments << monavDir().absoluteFilePath() + QLatin1String("/marble.kml");
 //    QProcess poly2kml;
 //    poly2kml.start("poly2kml", arguments);
 //    poly2kml.waitForFinished(1000 * 60 * 30); // wait up to half an hour for poly2kml to convert the data
@@ -153,13 +153,13 @@ bool Job::monav()
     QString const status = QString("Generating offline routing map from %1 (%2).").arg(osmFile().fileName()).arg(Region::fileSize(osmFile()));
     changeStatus(Routing, status);
     QStringList arguments;
-    arguments << "-s=" + m_monavSettings;
-    arguments << "-i=" + osmFile().absoluteFilePath();
-    arguments << "-o=" + monavDir().absoluteFilePath();
+    arguments << QLatin1String("-s=") + m_monavSettings;
+    arguments << QLatin1String("-i=") + osmFile().absoluteFilePath();
+    arguments << QLatin1String("-o=") + monavDir().absoluteFilePath();
     arguments << "-pi=OpenStreetMap Importer" << "-pro=Contraction Hierarchies";
     arguments << "-pg=GPS Grid" << "-di";
-    arguments << "-dro=" + m_transport;
-    arguments << "--profile=" + m_profile;
+    arguments << QLatin1String("-dro=") + m_transport;
+    arguments << QLatin1String("--profile=") + m_profile;
     arguments << "-dd" /*<< "-dc"*/;
     QProcess monav;
     monav.start("monav-preprocessor", arguments);
@@ -172,13 +172,13 @@ bool Job::monav()
         return false;
     }
 
-    QFile pluginsFile(monavDir().absoluteFilePath() + "/plugins.ini");
+    QFile pluginsFile(monavDir().absoluteFilePath() + QLatin1String("/plugins.ini"));
     pluginsFile.open(QFile::WriteOnly | QFile::Truncate);
     QTextStream pluginsStream(&pluginsFile);
     pluginsStream << "[General]\nrouter=Contraction Hierarchies\nrenderer=Mapnik Renderer\ngpsLookup=GPS Grid\naddressLookup=Unicode Tournament Trie\n";
     pluginsFile.close();
 
-    QFileInfo subdir = QFileInfo(monavDir().absoluteFilePath() + "/routing_" + m_transport.toLower());
+    QFileInfo subdir = QFileInfo(monavDir().absoluteFilePath() + QLatin1String("/routing_") + m_transport.toLower());
     if (subdir.exists() && subdir.isDir()) {
         QFileInfoList files = QDir(subdir.absoluteFilePath()).entryInfoList(QDir::Files);
         foreach(const QFileInfo &file, files) {
@@ -208,7 +208,7 @@ bool Job::search()
     arguments << "--payload" << targetFile().fileName();
     arguments << osmFile().absoluteFilePath();
     arguments << searchFile().absoluteFilePath();
-    QFileInfo kmlFile(monavDir().absoluteFilePath() + "/marble.kml");
+    QFileInfo kmlFile(monavDir().absoluteFilePath() + QLatin1String("/marble.kml"));
     arguments << kmlFile.absoluteFilePath();
     QProcess osmAddresses;
     osmAddresses.start("osm-addresses", arguments);
@@ -246,7 +246,7 @@ bool Job::package()
     QStringList arguments;
     arguments << "czf" << targetFile().absoluteFilePath() << "earth/monav/" << "earth/placemarks";
     QProcess tar;
-    tar.setWorkingDirectory(m_parameters.base().absolutePath() + "/data/" + m_region.id());
+    tar.setWorkingDirectory(m_parameters.base().absolutePath() + QLatin1String("/data/") + m_region.id());
     tar.start("tar", arguments);
     tar.waitForFinished(1000 * 60 * 60); // wait up to 1 hour for tar to package things
     if (tar.exitStatus() == QProcess::NormalExit && tar.exitCode() == 0) {
@@ -291,13 +291,13 @@ bool Job::cleanup()
 QFileInfo Job::osmFile()
 {
     m_parameters.base().mkdir("download");
-    QFileInfo result(m_parameters.base(), QString("download/") + m_region.id() + ".osm.pbf");
+    QFileInfo result(m_parameters.base(), QLatin1String("download/") + m_region.id() + QLatin1String(".osm.pbf"));
     return result;
 }
 
 QFileInfo Job::monavDir()
 {
-    QString const subdir = "data/" + m_region.id() + "/earth/monav/" + m_transport.toLower() + '/' + m_region.path();
+    QString const subdir = QLatin1String("data/") + m_region.id() + QLatin1String("/earth/monav/") + m_transport.toLower() + QLatin1Char('/') + m_region.path();
     m_parameters.base().mkpath(subdir);
     QFileInfo result(m_parameters.base(), subdir);
     return result;
@@ -306,15 +306,15 @@ QFileInfo Job::monavDir()
 QFileInfo Job::targetFile()
 {
     m_parameters.base().mkdir("finished");
-    QFileInfo result(m_parameters.base(), "finished/" + m_region.id() + '_' + m_transport.toLower() + ".tar.gz");
+    QFileInfo result(m_parameters.base(), QLatin1String("finished/") + m_region.id() + QLatin1Char('_') + m_transport.toLower() + QLatin1String(".tar.gz"));
     return result;
 }
 
 QFileInfo Job::searchFile()
 {
-    QString const subdir = "data/" + m_region.id() + "/earth/placemarks/" + QFileInfo(m_region.path()).path();
+    QString const subdir = QLatin1String("data/") + m_region.id() + QLatin1String("/earth/placemarks/") + QFileInfo(m_region.path()).path();
     m_parameters.base().mkpath(subdir);
-    QFileInfo result(m_parameters.base(), subdir + '/' + m_region.id() + ".sqlite");
+    QFileInfo result(m_parameters.base(), subdir + QLatin1Char('/') + m_region.id() + QLatin1String(".sqlite"));
     return result;
 }
 

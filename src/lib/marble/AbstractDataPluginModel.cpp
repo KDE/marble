@@ -126,7 +126,7 @@ AbstractDataPluginModelPrivate::AbstractDataPluginModelPrivate( const QString& n
       m_descriptionFileNumber( 0 ),
       m_itemSettings(),
       m_favoriteItemsOnly( false ),
-      m_storagePolicy( MarbleDirs::localPath() + "/cache/" + m_name + '/' ),
+      m_storagePolicy(MarbleDirs::localPath() + QLatin1String("/cache/") + m_name + QLatin1Char('/')),
       m_downloadManager( &m_storagePolicy ),
       m_favoritesModel( 0 ),
       m_hasMetaObject( false ),
@@ -535,7 +535,7 @@ QString AbstractDataPluginModelPrivate::generateFilename( const QString& id, con
 
 QString AbstractDataPluginModelPrivate::generateFilepath( const QString& id, const QString& type ) const
 {
-    return MarbleDirs::localPath() + "/cache/" + m_name + '/' + generateFilename( id, type );
+    return MarbleDirs::localPath() + QLatin1String("/cache/") + m_name + QLatin1Char('/') + generateFilename(id, type);
 }
 
 AbstractDataPluginItem *AbstractDataPluginModel::findItem( const QString& id ) const

@@ -44,9 +44,9 @@ void TemplateDocumentPrivate::processTemplateIncludes(QString &input)
     }
 
     foreach (const QString &include, includes) {
-        QFile includeFile(":/htmlfeatures/includes/"+include+".inc");
+        QFile includeFile(QLatin1String(":/htmlfeatures/includes/") + include + QLatin1String(".inc"));
         if (includeFile.open(QIODevice::ReadOnly)) {
-            input.replace("%!{" + include + "}%", includeFile.readAll());
+            input.replace(QLatin1String("%!{") + include + QLatin1String("}%"), includeFile.readAll());
         } else {
             mDebug() << "[WARNING] Can't process template include" << include;
         }

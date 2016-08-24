@@ -239,7 +239,7 @@ void ControlView::printMapScreenShot( QPointer<QPrintDialog> printDialog)
                 printDrivingInstructionsAdvice( document, text );
             }
 
-            text += "</body></html>";
+            text += QLatin1String("</body></html>");
             document.setHtml( text );
             document.print( printDialog->printer() );
 
@@ -415,21 +415,21 @@ void ControlView::printRouteSummary( QTextDocument &document, QString &text)
         summary = summary.arg(destination).arg( distance, 0, 'f', precision ).arg( unit );
         text += summary;
 
-        text += "<table cellpadding=\"2\">";
+        text += QLatin1String("<table cellpadding=\"2\">");
         QString pixmapTemplate = "marble://viaPoint-%1.png";
         for ( int i=0; i<routeRequest->size(); ++i ) {
-            text += "<tr><td>";
+            text += QLatin1String("<tr><td>");
             QPixmap pixmap = routeRequest->pixmap(i);
             QString pixmapResource = pixmapTemplate.arg( i );
             document.addResource(QTextDocument::ImageResource,
                                           QUrl( pixmapResource ), QVariant( pixmap ) );
             QString myimg = "<img src=\"%1\">";
-            text += myimg.arg( pixmapResource );
-            text += "</td><td>";
-            text += routeRequest->name( i );
-            text += "</td></tr>";
+            text += myimg.arg(pixmapResource) +
+                    QLatin1String("</td><td>");
+                    routeRequest->name(i) +
+                    QLatin1String("</td></tr>");
         }
-        text += "</table>";
+        text += QLatin1String("</table>");
     }
 #endif
 }
@@ -445,8 +445,8 @@ void ControlView::printDrivingInstructions( QTextDocument &document, QString &te
 
     GeoDataLineString total = routingModel->route().path();
 
-    text += "<table cellpadding=\"4\">";
-    text += "<tr><th>No.</th><th>Distance</th><th>Instruction</th></tr>";
+    text += QLatin1String("<table cellpadding=\"4\">"
+            "<tr><th>No.</th><th>Distance</th><th>Instruction</th></tr>");
     for ( int i=0; i<routingModel->rowCount(); ++i ) {
         QModelIndex index = routingModel->index(i, 0);
         GeoDataCoordinates coordinates = index.data( RoutingModel::CoordinateRole ).value<GeoDataCoordinates>();
@@ -459,18 +459,18 @@ void ControlView::printDrivingInstructions( QTextDocument &document, QString &te
         }
 
         if ( i%2 == 0 ) {
-            text += "<tr bgcolor=\"lightGray\"><td align=\"right\" valign=\"middle\">";
+            text += QLatin1String("<tr bgcolor=\"lightGray\"><td align=\"right\" valign=\"middle\">");
         }
         else {
-            text += "<tr><td align=\"right\" valign=\"middle\">";
+            text += QLatin1String("<tr><td align=\"right\" valign=\"middle\">");
         }
-        text += QString::number( i+1 );
-        text += "</td><td align=\"right\" valign=\"middle\">";
+        text += QString::number(i+1) +
+                QLatin1String("</td><td align=\"right\" valign=\"middle\">");
 
         qreal planetRadius = marbleModel()->planet()->radius();
-        text += QString::number( accumulator.length( planetRadius ) * METER2KM, 'f', 1 );
-        /** @todo: support localization */
-        text += " km</td><td valign=\"middle\">";
+        text += QString::number(accumulator.length(planetRadius) * METER2KM, 'f', 1) +
+                /** @todo: support localization */
+                QLatin1String(" km</td><td valign=\"middle\">");
 
         QPixmap instructionIcon = index.data( Qt::DecorationRole ).value<QPixmap>();
         if ( !instructionIcon.isNull() ) {
@@ -479,20 +479,20 @@ void ControlView::printDrivingInstructions( QTextDocument &document, QString &te
             text += QString("<img src=\"%1\">").arg(uri);
         }
 
-        text += routingModel->data( index ).toString();
-        text += "</td></tr>";
+        text += routingModel->data( index ).toString() +
+                QLatin1String("</td></tr>");
     }
-    text += "</table>";
+    text += QLatin1String("</table>");
 #endif
 }
 
 void ControlView::printDrivingInstructionsAdvice( QTextDocument &, QString &text )
 {
 #ifndef QT_NO_PRINTER
-    text += "<p>" + tr( "The Marble development team wishes you a pleasant and safe journey." ) + "</p>";
-    text += "<p>" + tr( "Caution: Driving instructions may be incomplete or inaccurate." );
-    text += ' ' + tr( "Road construction, weather and other unforeseen variables can result in this suggested route not to be the most expedient or safest route to your destination." );
-    text += ' ' + tr( "Please use common sense while navigating." ) + "</p>";
+    text += QLatin1String("<p>") + tr("The Marble development team wishes you a pleasant and safe journey.") + QLatin1String("</p>") +
+            QLatin1String("<p>") + tr("Caution: Driving instructions may be incomplete or inaccurate.") +
+            QLatin1Char(' ') + tr("Road construction, weather and other unforeseen variables can result in this suggested route not to be the most expedient or safest route to your destination.") +
+            QLatin1Char(' ') + tr("Please use common sense while navigating.") + QLatin1String("</p>");
 #endif
 }
 

@@ -42,7 +42,7 @@ GeoNode* GPXcmtTagHandler::parse(GeoParser& parser) const
             QString desc = placemark->description();
             if (!desc.isEmpty())
             {
-                desc.append("<br/>");
+                desc += QLatin1String("<br/>");
             }
             placemark->setDescription(desc.append(cmt.replace(QLatin1Char('\n'),QLatin1String("\n<br/>"))));
             placemark->setDescriptionCDATA(true);

@@ -90,7 +90,7 @@ void FileStorageWatcherThread::getCurrentCacheSize()
 {
     mDebug() << "FileStorageWatcher: Creating cache size";
     quint64 dataSize = 0;
-    QString basePath = m_dataDirectory + "/maps";
+    const QString basePath = m_dataDirectory + QLatin1String("/maps");
     QDirIterator it( basePath,
                      QDir::Files | QDir::Writable,
                      QDirIterator::Subdirectories );
@@ -186,7 +186,7 @@ FileStorageWatcher::FileStorageWatcher( const QString &dataDirectory, QObject * 
       m_dataDirectory( dataDirectory )
 {
     if ( m_dataDirectory.isEmpty() )
-        m_dataDirectory = MarbleDirs::localPath() + "/cache/";
+        m_dataDirectory = MarbleDirs::localPath() + QLatin1String("/cache/");
  
     if ( ! QDir( m_dataDirectory ).exists() ) 
         QDir::root().mkpath( m_dataDirectory );

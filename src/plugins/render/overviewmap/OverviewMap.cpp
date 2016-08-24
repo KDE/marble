@@ -319,7 +319,7 @@ void OverviewMap::setSettings( const QHash<QString,QVariant> &settings )
     m_settings.insert( "height", settings.value( "height", m_defaultSize.toSize().height() ) );
 
     foreach ( const QString& planet, PlanetFactory::planetList() ) {
-        QString mapFile = MarbleDirs::path( QString( "svg/%1map.svg" ).arg( planet ) );
+        QString mapFile = MarbleDirs::path(QLatin1String("svg/") + planet + QLatin1String("map.svg"));
 
         if (planet == QLatin1String("moon")) {
             mapFile = MarbleDirs::path( "svg/lunarmap.svg" );
@@ -328,7 +328,8 @@ void OverviewMap::setSettings( const QHash<QString,QVariant> &settings )
             mapFile = MarbleDirs::path( "svg/worldmap.svg" );
         }
 
-        m_settings.insert( "path_" + planet, settings.value( "path_" + planet, mapFile ) );
+        const QString id = QLatin1String("path_") + planet;
+        m_settings.insert(id, settings.value(id, mapFile));
     }
 
     m_settings.insert( "posColor", settings.value( "posColor", QColor( Qt::white ).name() ) );
@@ -363,7 +364,7 @@ void OverviewMap::writeSettings()
 
     QStringList const planets = PlanetFactory::planetList();
     foreach( const QString &planet, planets ) {
-        m_settings.insert( "path_" + planet, m_svgPaths[planet] );
+        m_settings.insert(QLatin1String("path_") + planet, m_svgPaths[planet]);
     }
 
     m_settings.insert( "posColor", m_posColor.name() );
@@ -375,7 +376,7 @@ void OverviewMap::updateSettings()
 {
     QStringList const planets = PlanetFactory::planetList();
     foreach( const QString &planet, planets ) {
-        m_svgPaths.insert( planet, m_settings.value( "path_" + planet, QString() ).toString() );
+        m_svgPaths.insert(planet, m_settings.value(QLatin1String("path_") + planet, QString()).toString());
     }
 
     m_posColor = QColor( m_settings.value( "posColor" ).toString() );

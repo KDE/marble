@@ -720,7 +720,7 @@ void MainWindow::createPluginMenus()
         const QList<QActionGroup*> *tmp_toolbarActionGroups = (*i)->toolbarActionGroups();
         if ( (*i)->enabled() && tmp_toolbarActionGroups ) {
             QToolBar* toolbar = new QToolBar(this);
-            toolbar->setObjectName( QString( "plugin-toolbar-%1" ).arg( (*i)->nameId() ) );
+            toolbar->setObjectName(QLatin1String("plugin-toolbar-") + (*i)->nameId());
 
             foreach( QActionGroup* ag, *tmp_toolbarActionGroups ) {
                 toolbar->addActions( ag->actions() );
@@ -910,8 +910,10 @@ void MainWindow::handbook()
 {
     const QString code = MarbleLocale::languageCode();
 
-    QUrl handbookLocation( "http://docs.kde.org/stable/" + code + "/kdeedu/marble/index.html" );
+    QUrl handbookLocation(QLatin1String("http://docs.kde.org/stable/") + code + QLatin1String("/kdeedu/marble/index.html"));
 
+    // TODO: this logic seems broken. Should that check "code.isEmpty()" instead?
+    // and how do we konw there is a doc for the code?
     if ( handbookLocation.isEmpty() )
         handbookLocation = QUrl("http://docs.kde.org/stable/en/kdeedu/marble/index.html");
 

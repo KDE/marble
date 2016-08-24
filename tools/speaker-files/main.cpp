@@ -203,9 +203,9 @@ void convertToMarbleFormat( const QString &input, const QString &output )
 void convertToTomTomFormat( const QString &input, const QString &output, const QString &nick, const QString &simpleNick, int index, bool male, const QString &lang )
 {
     QStringList arguments;
-    QString const prefix = input + "/data" + QString::number( index );
-    QString const vif = prefix + ".vif";
-    QString const chk = prefix + ".chk";
+    QString const prefix = input + QLatin1String("/data") + QString::number( index );
+    QString const vif = prefix + QLatin1String(".vif");
+    QString const chk = prefix + QLatin1String(".chk");
     arguments << "join" << QString::number( index ) << nick << vif;
     QProcess viftool;
     viftool.setWorkingDirectory( input );
@@ -228,7 +228,7 @@ void convertToTomTomFormat( const QString &input, const QString &output, const Q
     files << vif << chk;
     files << "AUTHORS.txt" << "LICENSE.txt";
     QStringList zipArguments;
-    zipArguments << "-q" << "-j" << ( output + '/' + lang + '-' + simpleNick + "-TomTom.zip" );
+    zipArguments << "-q" << "-j" << ( output + QLatin1Char('/') + lang + QLatin1Char('-') + simpleNick + QLatin1String("-TomTom.zip") );
     foreach( const QString &file, files ) {
         QString const filePath = inputDirectory.filePath( file );
         zipArguments <<  filePath;
@@ -287,10 +287,10 @@ int process( const QDir &input, const QDir &output, const QString &xml )
         extract( zip, extracted );
         normalize( extracted );
         createLegalFiles( extracted, name, email );
-        QFile::copy( extracted + "/Marble.ogg", nickDir + '/' + lang + '-' + simpleNick + ".ogg" );
-        convertToMarbleFormat( extracted, nickDir + '/' + lang + '-' + simpleNick + ".zip" );
+        QFile::copy(extracted + QLatin1String("/Marble.ogg"), nickDir + QLatin1Char('/') + lang + QLatin1Char('-') + simpleNick + QLatin1String(".ogg"));
+        convertToMarbleFormat(extracted, nickDir + QLatin1Char('/') + lang + QLatin1Char('-') + simpleNick + QLatin1String(".zip"));
         convertToTomTomFormat(extracted, nickDir, nick, simpleNick, index, gender == QLatin1String("male"), lang);
-        convertToNewStuffFormat( extracted, nickDir + '/' + lang + '-' + simpleNick + ".tar.gz" );
+        convertToNewStuffFormat(extracted, nickDir + QLatin1Char('/') + lang + QLatin1Char('-') + simpleNick + QLatin1String(".tar.gz"));
 
         xmlOut << "  <stuff category=\"marble/data/audio\">\n";
         xmlOut << "    <name lang=\"en\">" << language << " - " << nick << " (" <<  gender << ")" << "</name>\n";

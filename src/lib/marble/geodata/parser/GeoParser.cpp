@@ -62,11 +62,11 @@ static void dumpParentStack( const QString& name, int size, bool close )
 
     if ( close ) {
         depth--;
-        result += "</";
+        result += QLatin1String("</");
     } else
         result += '<';
 
-    result += name + "> stack size " + QString::number( size );
+    result += name + QLatin1String("> stack size ") + QString::number(size);
     fprintf( stderr, "%s\n", qPrintable( result ));
 }
 #endif
@@ -186,10 +186,10 @@ void GeoParser::parseDocument()
     else {
         // This is only used for debugging purposes.
         m_nodeStack.push( stackItem );
-        dumpParentStack( name().toString() + "-discarded", m_nodeStack.size(), false );
+        dumpParentStack(name().toString() + QLatin1String("-discarded"), m_nodeStack.size(), false);
 
         m_nodeStack.pop();
-        dumpParentStack( name().toString() + "-discarded", m_nodeStack.size(), true );
+        dumpParentStack(name().toString() + QLatin1String("-discarded"), m_nodeStack.size(), true);
     }
 #endif
 }

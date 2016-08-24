@@ -115,7 +115,7 @@ QString GeoSceneHead::theme() const
 
 QString GeoSceneHead::mapThemeId() const
 {
-    return d->m_target + '/' + d->m_theme + '/' + d->m_theme + ".dgml";
+    return d->m_target + QLatin1Char('/') + d->m_theme + QLatin1Char('/') + d->m_theme + QLatin1String(".dgml");
 }
 
 void GeoSceneHead::setTheme( const QString& theme )

@@ -379,14 +379,14 @@ void MarbleAboutDialogPrivate::loadPageContents( int idx )
 
 void MarbleAboutDialog::setApplicationTitle( const QString &title )
 {
-    QString const titleHtml = "<b>" + title + "</b>";
+    QString const titleHtml = QLatin1String("<b>") + title + QLatin1String("</b>");
     d->uiWidget.m_pMarbleTitleLabel->setText( titleHtml );
     QString const applicationVersion = tr( "Using Marble Library version %1" ).arg( MARBLE_VERSION_STRING );
     d->uiWidget.m_pMarbleVersionLabel->setText( applicationVersion );
     QTextBrowser* browser = d->uiWidget.m_pMarbleAboutBrowser;
     QString text;
     if( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
-        text = titleHtml + "<br />" + applicationVersion + "<br />";
+        text = titleHtml + QLatin1String("<br />") + applicationVersion + QLatin1String("<br />");
     }
     browser->setHtml( text + tr("<br />(c) 2007-%1 by the authors of Marble Virtual Globe<br /><br /><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>").arg( 2015 ) );
     QTextFrameFormat  format = browser->document()->rootFrame()->frameFormat();

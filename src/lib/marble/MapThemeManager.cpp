@@ -175,7 +175,7 @@ GeoSceneDocument* MapThemeManager::loadMapTheme( const QString& mapThemeStringID
 
 void MapThemeManager::deleteMapTheme( const QString &mapThemeId )
 {
-    QString dgmlPath = MarbleDirs::localPath() + "/maps/" + mapThemeId;
+    const QString dgmlPath = MarbleDirs::localPath() + QLatin1String("/maps/") + mapThemeId;
     QFileInfo dgmlFile(dgmlPath);
 
     QString themeDir = dgmlFile.dir().absolutePath();
@@ -385,15 +385,15 @@ QList<QStandardItem *> MapThemeManager::Private::createMapThemeRow( QString cons
     QIcon mapThemeIcon =  QIcon( themeIconPixmap );
 
     QString name = mapTheme->head()->name();
-    const QByteArray description = mapTheme->head()->description().toUtf8();
+    const QString translatedDescription = QCoreApplication::translate("DGML", mapTheme->head()->description().toUtf8().constData());
+    const QString toolTip = QLatin1String("<span style=\" max-width: 150 px;\"> ") + translatedDescription + QLatin1String(" </span>");
 
     QStandardItem *item = new QStandardItem( name );
     item->setData(QCoreApplication::translate("DGML", name.toUtf8().constData()), Qt::DisplayRole);
     item->setData( mapThemeIcon, Qt::DecorationRole );
-    item->setData( QString( "<span style=\" max-width: 150 px;\"> "
-                            + QCoreApplication::translate("DGML", description.constData()) + " </span>"), Qt::ToolTipRole );
+    item->setData(toolTip, Qt::ToolTipRole);
     item->setData( mapThemeID, Qt::UserRole + 1 );
-    item->setData(QCoreApplication::translate("DGML", description.constData()), Qt::UserRole + 2);
+    item->setData(translatedDescription, Qt::UserRole + 2);
 
     itemList << item;
 

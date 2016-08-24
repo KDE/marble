@@ -78,7 +78,7 @@ void OpenCachingComModel::getAdditionalItems( const GeoDataLatLonAltBox& box, qi
             .arg( m_previousbox.north(GeoDataCoordinates::Degree ) )
             .arg( m_previousbox.east(GeoDataCoordinates::Degree ) );
     }
-    url += "&limit=" + QString::number( number );
+    url += QLatin1String("&limit=") + QString::number(number);
     // TODO Limit to user set tags/types/difficulty - when there is a config dialog...
 
     m_previousbox = box;

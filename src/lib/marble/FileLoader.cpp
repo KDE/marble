@@ -152,14 +152,14 @@ void FileLoader::run()
             // _relative_ path: "maps/mars/viking/patrick.kml"
             defaultSourceName   = MarbleDirs::path( path + '/' + name + '.' + suffix );
             if ( !QFile::exists( defaultSourceName ) ) {
-                defaultSourceName = MarbleDirs::path( path + '/' + name + ".cache" );
+                defaultSourceName = MarbleDirs::path(path + QLatin1Char('/') + name + QLatin1String(".cache"));
             }
         }
         else {
             // _standard_ shared placemarks: "placemarks/patrick.kml"
-            defaultSourceName   = MarbleDirs::path( "placemarks/" + path + name + '.' + suffix );
+            defaultSourceName = MarbleDirs::path(QLatin1String("placemarks/") + path + name + QLatin1Char('.') + suffix);
             if ( !QFile::exists( defaultSourceName ) ) {
-                defaultSourceName = MarbleDirs::path( "placemarks/" + path + name + ".cache" );
+                defaultSourceName = MarbleDirs::path(QLatin1String("placemarks/") + path + name + QLatin1String(".cache"));
             }
         }
 

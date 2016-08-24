@@ -137,7 +137,7 @@ PreviewDialog::PreviewDialog( QWidget* parent, const QString& mapThemeId ) : QDi
 
 void PreviewDialog::closeEvent(QCloseEvent* e)
 {
-    QString dgmlPath = MarbleDirs::localPath() + "/maps/" + m_mapThemeId;
+    const QString dgmlPath = MarbleDirs::localPath() + QLatin1String("/maps/") + m_mapThemeId;
     QString directory = dgmlPath.left( dgmlPath.lastIndexOf("/") );
     this->deleteTheme( directory );
     QDialog::closeEvent( e );
@@ -292,12 +292,12 @@ void MapWizard::parseServerCapabilities( QNetworkReply* reply )
 void MapWizard::createWmsLegend( QNetworkReply* reply )
 {
     QByteArray result( reply->readAll() );
-    QDir map( QString( "%1/maps/earth/%2" ).arg( MarbleDirs::localPath() ).arg( d->mapTheme ) );
+    QDir map(MarbleDirs::localPath() + QLatin1String("/maps/earth/") + d->mapTheme);
     if( !map.exists( "legend" ) ) {
         map.mkdir( "legend" );
     }
 
-    QFile image( QString( "%1/legend/legend.png" ).arg( map.absolutePath() ) );
+    QFile image(map.absolutePath() + QLatin1String("/legend/legend.png"));
     image.open( QIODevice::ReadWrite );
     image.write( result );
     image.close();
@@ -340,7 +340,7 @@ void MapWizard::autoFillDetails()
 bool MapWizard::createFiles( const GeoSceneDocument* document )
 {
     // Create directories
-    QDir maps( MarbleDirs::localPath() + "/maps/earth/" );
+    QDir maps(MarbleDirs::localPath() + QLatin1String("/maps/earth/"));
     if( !maps.exists( document->head()->theme() ) )
     {
         maps.mkdir( document->head()->theme() );
@@ -429,9 +429,9 @@ QString MapWizard::createLegendHtml( const QString& image )
 
 void MapWizard::createLegendFile( const QString& legendHtml )
 {
-    QDir map( QString( "%1/maps/earth/%2" ).arg( MarbleDirs::localPath() ).arg( d->mapTheme ) );
-    
-    QFile html( QString( "%1/legend.html" ).arg( map.absolutePath() ) );
+    QDir map(MarbleDirs::localPath() + QLatin1String("/maps/earth/") + d->mapTheme);
+
+    QFile html(map.absolutePath() + QLatin1String("/legend.html"));
     html.open( QIODevice::ReadWrite );
     html.write( legendHtml.toLatin1().data() );
     html.close();
@@ -520,14 +520,14 @@ void MapWizard::createLevelZero( QNetworkReply* reply )
 
 void MapWizard::createLegend()
 {
-    QDir map( QString( "%1/maps/earth/%2" ).arg( MarbleDirs::localPath() ).arg( d->mapTheme ) );
+    QDir map(MarbleDirs::localPath() + QLatin1String("/maps/earth/") + d->mapTheme);
     if( !map.exists( "legend" ) ) {
         map.mkdir( "legend" );
     }
 
     QFile image;
     image.setFileName( d->uiWidget.lineEditLegend_2->text() );
-    image.copy( QString( "%1/legend/legend.png" ).arg( map.absolutePath() ) );
+    image.copy(map.absolutePath() + QLatin1String("/legend/legend.png"));
 
     const QString legendHtml = createLegendHtml();
     createLegendFile( legendHtml );
@@ -610,7 +610,7 @@ QString MapWizard::createArchive( QWidget *parent, const QString& mapId )
     }
     
     QStringList sourceImgFilters;
-    sourceImgFilters << QString( "%1.jpg" ).arg( theme ) << QString( "%1.png" ).arg( theme ) << QString( "%1.jpeg" ).arg( theme );
+    sourceImgFilters << theme + QLatin1String(".jpg") << theme + QLatin1String(".png") << theme + QLatin1String(".jpeg");
     QStringList sourceImg = themeDir.entryList( sourceImgFilters );
     if( !sourceImg.isEmpty() ) {
         tarArgs.append( QString( "%1/%2/%3" ).arg( body ).arg( theme ).arg( sourceImg[0] ) );
@@ -775,7 +775,7 @@ GeoSceneDocument* MapWizard::createDocument()
     
     GeoSceneTileDataset *texture = new GeoSceneTileDataset( "map" );
     texture->setExpire( 31536000 );
-    texture->setSourceDir( "earth/" + document->head()->theme() ); 
+    texture->setSourceDir(QLatin1String("earth/") + document->head()->theme());
     if( d->mapProviderType == MapWizardPrivate::WmsMap )
     {
         texture->setFileFormat( d->format );

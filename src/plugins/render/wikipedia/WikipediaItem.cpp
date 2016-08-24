@@ -224,20 +224,18 @@ void WikipediaItem::updateSize()
 
 void WikipediaItem::updateToolTip()
 {
-    QString toolTip;
-    toolTip += "<html><head><meta name=\"qrichtext\" content=\"1\" />";
-    toolTip += "<style type=\"text/css\">\\np, li { white-space: pre-wrap; }\\n</style></head>";
-    toolTip += "<body style=\" font-family:'Sans Serif'; font-size:9pt; font-weight:400; ";
-    toolTip += "font-style:normal;\"><p style=\" margin-top:0px; margin-bottom:0px; ";
-    toolTip += "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">";
+    QString toolTip = QLatin1String(
+        "<html><head><meta name=\"qrichtext\" content=\"1\" />"
+        "<style type=\"text/css\">\\np, li { white-space: pre-wrap; }\\n</style></head>"
+        "<body style=\" font-family:'Sans Serif'; font-size:9pt; font-weight:400; "
+        "font-style:normal;\"><p style=\" margin-top:0px; margin-bottom:0px; "
+        "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">");
     if ( summary().isEmpty() ) {
-        toolTip += "%1";
-        toolTip += "</p></body></html>\n";
-        setToolTip( toolTip.arg( name() ) );
+        toolTip += name() + QLatin1String("</p></body></html>\n");
+        setToolTip(toolTip);
     }
     else {
-        toolTip += tr( "<b>%1</b><br>%2", "Title:\nSummary" );
-        toolTip += "</p></body></html>\n";
+        toolTip += tr("<b>%1</b><br>%2", "Title:\nSummary") + QLatin1String("</p></body></html>\n");
         setToolTip( toolTip.arg( name() ).arg( summary() ) );
     }
 }

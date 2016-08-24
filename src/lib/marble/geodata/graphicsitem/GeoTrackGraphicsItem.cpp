@@ -23,7 +23,7 @@ GeoTrackGraphicsItem::GeoTrackGraphicsItem( const GeoDataFeature *feature, const
 {
     setTrack( track );
     if (feature) {
-        QString const paintLayer = QString("Track/%1").arg(StyleBuilder::visualCategoryName(feature->visualCategory()));
+        QString const paintLayer = QLatin1String("Track/") + StyleBuilder::visualCategoryName(feature->visualCategory());
         setPaintLayers(QStringList() << paintLayer);
     }
 }

@@ -94,7 +94,7 @@ void Upload::deleteFile(const QFileInfo &file)
 bool Upload::adjustNewstuffFile(const Package &package)
 {
     if (m_xml.isNull()) {
-        QTemporaryFile tempFile(QDir::tempPath() + "/monav-maps-XXXXXX.xml");
+        QTemporaryFile tempFile(QDir::tempPath() + QLatin1String("/monav-maps-XXXXXX.xml"));
         tempFile.setAutoRemove(false);
         tempFile.open();
         QString monavFilename = tempFile.fileName();
@@ -207,7 +207,7 @@ bool Upload::adjustNewstuffFile(const Package &package)
 
 bool Upload::uploadNewstuff()
 {
-    QTemporaryFile outFile(QDir::tempPath() + "/monav-maps-out-XXXXXX.xml");
+    QTemporaryFile outFile(QDir::tempPath() + QLatin1String("/monav-maps-out-XXXXXX.xml"));
     outFile.open();
     QTextStream outStream(&outFile);
     outStream << m_xml.toString(2);

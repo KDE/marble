@@ -40,7 +40,7 @@ GeoNode* GPXdescTagHandler::parse(GeoParser& parser) const
         QString desc = placemark->description();
         if (!desc.isEmpty())
         {
-            desc.append("<br/>");
+            desc += QLatin1String("<br/>");
         }
         placemark->setDescription(desc.append(parser.readElementText().trimmed().replace(QLatin1Char('\n'),QLatin1String("\n<br/>"))));
         placemark->setDescriptionCDATA(true);
@@ -52,7 +52,7 @@ GeoNode* GPXdescTagHandler::parse(GeoParser& parser) const
         QString desc = route->description();
         if (!desc.isEmpty())
         {
-            desc.append("<br/>");
+            desc += QLatin1String("<br/>");
         }
         route->setDescription(desc.append(parser.readElementText().trimmed().replace(QLatin1Char('\n'),QLatin1String("\n<br/>"))));
         route->setDescriptionCDATA(true);

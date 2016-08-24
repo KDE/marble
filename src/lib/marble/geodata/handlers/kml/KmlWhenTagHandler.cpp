@@ -64,10 +64,10 @@ GeoDataTimeStamp::TimeResolution KmlwhenTagHandler::modify(  QString& whenString
     switch( whenString.length() )
     {
     case 4:
-        whenString.append( "-01-01" );
+        whenString += QLatin1String("-01-01");
         return GeoDataTimeStamp::YearResolution;
     case 7:
-        whenString.append( "-01" );
+        whenString += QLatin1String("-01");
         return GeoDataTimeStamp::MonthResolution;
     case 10:
         return GeoDataTimeStamp::DayResolution;

@@ -49,12 +49,12 @@ GeoPolygonGraphicsItem::GeoPolygonGraphicsItem(const GeoDataFeature *feature, co
     else if (visualCategory == GeoDataFeature::Bathymetry) {
         int elevation = extractBathymetryElevation(feature);
         setZValue(this->zValue() + elevation);
-        const QString paintLayer = QString("Polygon/%1").arg(StyleBuilder::visualCategoryName(visualCategory));
+        const QString paintLayer = QLatin1String("Polygon/") + StyleBuilder::visualCategoryName(visualCategory);
         setPaintLayers(QStringList() << paintLayer);
     }
     else
     {
-        const QString paintLayer = QString("Polygon/%1").arg(StyleBuilder::visualCategoryName(visualCategory));
+        const QString paintLayer = QLatin1String("Polygon/") + StyleBuilder::visualCategoryName(visualCategory);
         setPaintLayers(QStringList() << paintLayer);
     }
 }
@@ -81,12 +81,12 @@ GeoPolygonGraphicsItem::GeoPolygonGraphicsItem(const GeoDataFeature *feature, co
     else if (visualCategory == GeoDataFeature::Bathymetry) {
         int elevation = extractBathymetryElevation(feature);
         setZValue(this->zValue() + elevation);
-        const QString paintLayer = QString("Polygon/%1").arg(StyleBuilder::visualCategoryName(visualCategory));
+        const QString paintLayer = QLatin1String("Polygon/") + StyleBuilder::visualCategoryName(visualCategory);
         setPaintLayers(QStringList() << paintLayer);
     }
     else
     {
-        const QString paintLayer = QString("Polygon/%1").arg(StyleBuilder::visualCategoryName(visualCategory));
+        const QString paintLayer = QLatin1String("Polygon/") + StyleBuilder::visualCategoryName(visualCategory);
         setPaintLayers(QStringList() << paintLayer);
     }
 }

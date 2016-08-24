@@ -228,7 +228,7 @@ void VoiceNavigationModelPrivate::updateInstruction( RouteSegment segment, qreal
     if (!m_announcementText.isEmpty() && distance < 75 && nextSegmentDistance != 0 && nextSegmentDistance < 75) {
         QString nextSegmentAnnouncementText = announcementText(nextSegmentDirection, nextSegmentDistance);
         if (!nextSegmentAnnouncementText.isEmpty()) {
-            m_announcementText += QStringLiteral(", then ") + nextSegmentAnnouncementText;
+            m_announcementText += QLatin1String(", then ") + nextSegmentAnnouncementText;
         }
     }
     emit m_parent->instructionChanged();
@@ -303,7 +303,7 @@ void VoiceNavigationModel::setSpeaker(const QString &speaker)
     if ( speaker != d->m_speaker ) {
         QFileInfo speakerDir = QFileInfo( speaker );
         if ( !speakerDir.exists() ) {
-            d->m_speaker = MarbleDirs::path( "/audio/speakers/" + speaker );
+            d->m_speaker = MarbleDirs::path(QLatin1String("/audio/speakers/") + speaker);
         } else {
             d->m_speaker = speaker;
         }

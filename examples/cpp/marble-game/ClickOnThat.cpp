@@ -248,10 +248,10 @@ void ClickOnThat::updateSelectPin(bool result, const GeoDataCoordinates &clicked
     QString iconPath = dir.absolutePath();
     if ( result ) {
         //iconPath = MarbleDirs::path("bitmaps/MapTackRoundHeadGreen.png");
-        iconPath = iconPath.append("/MapTackRoundHeadGreen.png");
+        iconPath += QLatin1String("/MapTackRoundHeadGreen.png");
     }
     else {
-        iconPath = iconPath.append("/MapTackRoundHeadRed.png");
+        iconPath += QLatin1String("/MapTackRoundHeadRed.png");
     }
 
     GeoDataStyle::Ptr style = d->m_selectPinDocument->style("answer");

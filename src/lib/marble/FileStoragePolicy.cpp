@@ -30,7 +30,7 @@ FileStoragePolicy::FileStoragePolicy( const QString &dataDirectory, QObject *par
       m_dataDirectory( dataDirectory )
 {
     if ( m_dataDirectory.isEmpty() )
-        m_dataDirectory = MarbleDirs::localPath() + "/cache/";
+        m_dataDirectory = MarbleDirs::localPath() + QLatin1String("/cache/");
 
     if ( !QDir( m_dataDirectory ).exists() ) 
         QDir::root().mkpath( m_dataDirectory );
@@ -63,7 +63,7 @@ bool FileStoragePolicy::updateFile( const QString &fileName, const QByteArray &d
     // ... and save the file content
     QFile file( fullName );
     if ( !file.open( QIODevice::WriteOnly ) ) {
-        m_errorMsg = QString( "%1: %2" ).arg( fullName ).arg( file.errorString() );
+        m_errorMsg = fullName + QLatin1String(": ") + file.errorString();
         qCritical() << "file.open" << m_errorMsg;
         return false;
     }
@@ -71,7 +71,7 @@ bool FileStoragePolicy::updateFile( const QString &fileName, const QByteArray &d
     quint64 oldSize = file.size();
 
     if ( !file.write( data ) ) {
-        m_errorMsg = QString( "%1: %2" ).arg( fullName ).arg( file.errorString() );
+        m_errorMsg = fullName + QLatin1String(": ") + file.errorString();
         qCritical() << "file.write" << m_errorMsg;
         emit sizeChanged( file.size() - oldSize );
         return false;
@@ -91,7 +91,7 @@ void FileStoragePolicy::clearCache()
         return;
     }
 
-    QString cachedMapsDirectory = m_dataDirectory + "/maps";
+    const QString cachedMapsDirectory = m_dataDirectory + QLatin1String("/maps");
 
     QDirIterator it( cachedMapsDirectory, QDir::NoDotAndDotDot | QDir::Dirs );
     mDebug() << cachedMapsDirectory;

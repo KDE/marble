@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
 
     QString      lang = QLocale::system().name().section('_', 0, 0);
     QTranslator  translator;
-    translator.load( "marble-" + lang, MarbleDirs::path(QString("lang") ) );
+    translator.load(QLatin1String("marble-") + lang, MarbleDirs::path(QStringLiteral("lang")));
     app.installTranslator(&translator);
 
     // For non static builds on mac and win
@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
 
 #ifdef Q_WS_WIN
     QApplication::addLibraryPath( QApplication::applicationDirPath()
-                                  + QDir::separator() + "plugins" );
+                                  + QDir::separator() + QLatin1String("plugins"));
 #endif
 
     QString marbleDataPath;

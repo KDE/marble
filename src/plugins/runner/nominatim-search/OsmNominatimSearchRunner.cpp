@@ -160,7 +160,7 @@ void OsmNominatimRunner::handleResult( QNetworkReply* reply )
             QDomElement item = place.childNodes().at(i).toElement();
             description += item.nodeName() + ':' + item.text() + '\n';
         }
-        description += "Category: " + key + '/' + value;
+        description += QLatin1String("Category: ") + key + QLatin1Char('/') + value;
 
         if (!lon.isEmpty() && !lat.isEmpty() && !desc.isEmpty()) {
             QString placemarkName;
@@ -171,27 +171,27 @@ void OsmNominatimRunner::handleResult( QNetworkReply* reply )
             }
             if (!road.isEmpty() && road != placemarkName ) {
                 if( !placemarkName.isEmpty() ) {
-                    placemarkName += ", ";
+                    placemarkName += QLatin1String(", ");
                 }
                 placemarkName += road;
                 data.addTag("addr:street", road);
             }
             if (!city.isEmpty() && !placemarkName.contains(",") && city != placemarkName) {
                 if( !placemarkName.isEmpty() ) {
-                    placemarkName += ", ";
+                    placemarkName += QLatin1String(", ");
                 }
                 placemarkName += city;
                 data.addTag("addr:city", city);
             }
             if (!administrative.isEmpty()&& !placemarkName.contains(",") && administrative != placemarkName) {
                 if( !placemarkName.isEmpty() ) {
-                    placemarkName += ", ";
+                    placemarkName += QLatin1String(", ");
                 }
                 placemarkName += administrative;
             }
             if (!country.isEmpty()&& !placemarkName.contains(",") && country != placemarkName) {
                 if( !placemarkName.isEmpty() ) {
-                    placemarkName += ", ";
+                    placemarkName += QLatin1String(", ");
                 }
                 placemarkName += country;
                 data.addTag("addr:country", country);

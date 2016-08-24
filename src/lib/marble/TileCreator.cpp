@@ -175,10 +175,9 @@ TileCreator::TileCreator(const QString& sourceDir, const QString& installMap,
         mDebug() << "Trying absolute path*:" << sourcePath;
     }
     else {
-        sourcePath = MarbleDirs::path( "maps/" + sourceDir
-                                    + '/' + installMap );
+        sourcePath = MarbleDirs::path(QLatin1String("maps/") + sourceDir + QLatin1Char('/') + installMap);
         mDebug() << "Trying relative path*:"
-                << "maps/" + sourceDir + '/' + installMap;
+                << QLatin1String("maps/") + sourceDir + QLatin1Char('/') + installMap;
     }
 
     mDebug() << "Creating tiles from*: " << sourcePath;
@@ -186,7 +185,7 @@ TileCreator::TileCreator(const QString& sourceDir, const QString& installMap,
     d->m_source = new TileCreatorSourceImage( sourcePath );
 
     if ( d->m_targetDir.isNull() )
-        d->m_targetDir = MarbleDirs::localPath() + "/maps/"
+        d->m_targetDir = MarbleDirs::localPath() + QLatin1String("/maps/")
             + sourcePath.section( '/', -3, -2 ) + '/';
 
     setTerminationEnabled( true );

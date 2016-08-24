@@ -42,7 +42,7 @@ using namespace Marble;
 
 static bool loadTranslation(const QString &localeDirName, QApplication &app)
 {
-    const QString subPath = QStringLiteral("locale/") + localeDirName + QStringLiteral("/LC_MESSAGES/marble_qt.qm");
+    const QString subPath = QLatin1String("locale/") + localeDirName + QLatin1String("/LC_MESSAGES/marble_qt.qm");
     const QString fullPath = QStandardPaths::locate(QStandardPaths::GenericDataLocation, subPath);
     if (fullPath.isEmpty()) {
         return false;

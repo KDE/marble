@@ -134,7 +134,7 @@ QUrl WmsServerLayout::downloadUrl( const QUrl &prototypeUrl, const Marble::TileI
         if (m_textureLayer->fileFormat().toLower() == QLatin1String("jpg"))
             url.addQueryItem( "format", "image/jpeg" );
         else
-            url.addQueryItem( "format", "image/" + m_textureLayer->fileFormat().toLower() );
+            url.addQueryItem("format", QLatin1String("image/") + m_textureLayer->fileFormat().toLower());
     }
     if ( !url.hasQueryItem( "srs" ) ) {
         url.addQueryItem( "srs", epsgCode() );

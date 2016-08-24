@@ -66,7 +66,7 @@ class Q_DECL_HIDDEN OwncloudSyncBackend::Private {
 };
 
 OwncloudSyncBackend::Private::Private( CloudSyncManager* cloudSyncManager ) :
-    m_cacheDir( MarbleDirs::localPath() + "/cloudsync/cache/routes/" ),
+    m_cacheDir(MarbleDirs::localPath() + QLatin1String("/cloudsync/cache/routes/")),
     m_network(),
     m_routeUploadReply(),
     m_routeListReply(),
@@ -248,7 +248,7 @@ QPixmap OwncloudSyncBackend::createPreview( const QString &timestamp ) const
 
     QPixmap pixmap = QPixmap::grabWidget( &mapWidget );
     QDir( d->m_cacheDir.absolutePath() ).mkpath( "preview" );
-    pixmap.save( d->m_cacheDir.absolutePath() + "/preview/" + timestamp + ".jpg" );
+    pixmap.save(d->m_cacheDir.absolutePath() + QLatin1String("/preview/") + timestamp + QLatin1String(".jpg"));
 
     return pixmap;
 }

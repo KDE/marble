@@ -626,20 +626,20 @@ void exportToKml()
             }
 
             if ( colorIdx == 0 ) {
-                styleId += " blue";
+                styleId += QLatin1String(" blue");
             } else if ( colorIdx == 1 ) {
-                styleId += " bluewhite";
+                styleId += QLatin1String(" bluewhite");
             } else if ( colorIdx == 3 ) {
-                styleId += " yellow";
+                styleId += QLatin1String(" yellow");
             } else if ( colorIdx == 4 ) {
-                styleId += " orange";
+                styleId += QLatin1String(" orange");
             } else if ( colorIdx == 5 ) {
-                styleId += " red";
+                styleId += QLatin1String(" red");
             } else if ( colorIdx == 6 ) {
-                styleId += " garnetred";
+                styleId += QLatin1String(" garnetred");
             } else {
                 // white and no color ID
-                styleId += " white";
+                styleId += QLatin1String(" white");
             }
 
             out << "   <Placemark> \n";

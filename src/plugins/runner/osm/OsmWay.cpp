@@ -142,7 +142,7 @@ bool OsmWay::isAreaTag(const QString &keyValue)
         s_areaTags.insert( "waterway=riverbank" );
 
         foreach(const QString &value, OsmPresetLibrary::buildingValues() ) {
-            s_areaTags.insert( QString("building=%1").arg(value) );
+            s_areaTags.insert(QLatin1String("building=") + value);
         }
         s_areaTags.insert( "man_made=bridge" );
 

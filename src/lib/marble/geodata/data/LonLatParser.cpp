@@ -82,7 +82,7 @@ void LonLatParser::initAll()
 
     // Sets "(north|east|south|west|[nesw])" in en, as translated names match untranslated ones
     m_dirCapExp =
-        QLatin1Char('(') + fullNamesExp + QLatin1Char('[') + simpleLetters + QStringLiteral("])");
+        QLatin1Char('(') + fullNamesExp + QLatin1Char('[') + simpleLetters + QLatin1String("])");
 
     // expressions for symbols of degree, minutes and seconds
     getLocaleList(m_degreeLocale, GeoDataCoordinates::tr("*", "Degree symbol terms, see http://techbase.kde.org/Projects/Marble/GeoDataCoordinatesTranslation"),
@@ -334,7 +334,7 @@ QString LonLatParser::createDecimalPointExp()
     const QChar decimalPoint = QLocale::system().decimalPoint();
 
     return (decimalPoint == QLatin1Char('.')) ? QStringLiteral("\\.") :
-        QStringLiteral("[.") + decimalPoint + QLatin1Char(']');
+        QLatin1String("[.") + decimalPoint + QLatin1Char(']');
 }
 
 void LonLatParser::getLocaleList(QStringList& localeList, const QString& localeListString,

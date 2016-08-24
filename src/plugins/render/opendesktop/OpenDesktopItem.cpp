@@ -70,17 +70,17 @@ void OpenDesktopItem::paint( QPainter *painter )
 
 void OpenDesktopItem::updateToolTip()
 {
-    QString toolTip;
-    toolTip += "<html><head><meta name='qrichtext' content='1' />";
-    toolTip += "<style type='text/css'>";
-    toolTip += "body { font-family:'Sans Serif'; font-size:9pt; font-weight:400; }";
-    toolTip += "np, li { white-space: pre-wrap; }";
-    toolTip += "p { margin: 0; -qt-block-indent:0; text-indent:0px }";
-    toolTip += "</style></head><body><table>";
-    toolTip += "<tr><td align='right'>Fullname:</td><td>%1</td></tr>";    
-    toolTip += "<tr><td align='right'>Location:</td><td>%2</td></tr>";    
-    toolTip += "<tr><td align='right'>Role:</td><td>%3</td></tr>";
-    toolTip += "</table></body></html>";
+    const QString toolTip = QLatin1String(
+        "<html><head><meta name='qrichtext' content='1' />"
+        "<style type='text/css'>"
+        "body { font-family:'Sans Serif'; font-size:9pt; font-weight:400; }"
+        "np, li { white-space: pre-wrap; }"
+        "p { margin: 0; -qt-block-indent:0; text-indent:0px }"
+        "</style></head><body><table>"
+        "<tr><td align='right'>Fullname:</td><td>%1</td></tr>"
+        "<tr><td align='right'>Location:</td><td>%2</td></tr>"
+        "<tr><td align='right'>Role:</td><td>%3</td></tr>"
+        "</table></body></html>");
     setToolTip( toolTip.arg( fullName() ).arg( location() ).arg( role() ) );
 }
 

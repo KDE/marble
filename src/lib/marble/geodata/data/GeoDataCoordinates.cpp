@@ -392,7 +392,7 @@ QString GeoDataCoordinates::toString( GeoDataCoordinates::Notation notation, int
         }
         else{
             coordString = lonToString( d->m_lon, notation, Radian, precision )
-                        + QString(", ")
+                        + QLatin1String(", ")
                         + latToString( d->m_lat, notation, Radian, precision );
         }
 

@@ -45,7 +45,7 @@ CloudRouteModel::Private::Private() :
     m_totalSize( -1 ),
     m_downloadedSize( 0 )
 {
-    m_cacheDir = MarbleDirs::localPath() + "/cloudsync/cache/routes/";
+    m_cacheDir = MarbleDirs::localPath() + QLatin1String("/cloudsync/cache/routes/");
 }
 
 CloudRouteModel::CloudRouteModel( QObject* parent ) :
@@ -106,7 +106,7 @@ void CloudRouteModel::setItems( const QVector<RouteItem> &items )
 
 bool CloudRouteModel::isCached( const QModelIndex &index ) const
 {
-    QFileInfo cacheDir( d->m_cacheDir + index.data( Timestamp ).toString() + ".kml"  );
+    QFileInfo cacheDir(d->m_cacheDir + index.data(Timestamp).toString() + QLatin1String(".kml"));
     return cacheDir.exists();
 }
 

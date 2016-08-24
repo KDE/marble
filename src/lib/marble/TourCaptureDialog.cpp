@@ -70,10 +70,10 @@ void TourCaptureDialog::loadDestinationFile()
         QMessageBox::warning( this, tr( "Codecs are unavailable" ), tr( "Supported codecs are not found." ) );
         return;
     }
-    QString filter = formats.first().name() + " (*."+formats.first().extension() + ')';
+    QString filter = formats.first().name() + QLatin1String(" (*.") + formats.first().extension() + QLatin1Char(')');
     for( int i = 1; i < formats.size(); i++ )
     {
-        filter.append( ";;"+formats.at( i ).name() + " (*."+formats.at( i ).extension() + ')' );
+        filter += QLatin1String(";;") + formats.at(i).name() + QLatin1String(" (*.") + formats.at(i).extension() + QLatin1Char(')');
     }
     const QString defaultFileName =
             ui->destinationEdit->text().isEmpty() ? m_defaultFileName : ui->destinationEdit->text();
@@ -96,7 +96,7 @@ void TourCaptureDialog::loadDestinationFile()
         QString formatsExtensions = '.'+formats.at( 0 ).extension();
         for( int i = 1; i < formats.size(); ++i )
         {
-            formatsExtensions.append( ", ."+formats.at( i ).extension() );
+            formatsExtensions += QLatin1String(", .") + formats.at(i).extension();
         }
         QMessageBox::warning(this, tr("Filename is not valid"),
                              tr("This file format is not supported. "

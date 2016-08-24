@@ -169,7 +169,7 @@ AbstractDataPluginItem *GeoNamesWeatherService::parse( const QScriptValue &value
         data.setPublishingTime( date );
 
         // ID
-        id = "geonames_" + id;
+        id = QLatin1String("geonames_") + id;
 
         GeoDataCoordinates coordinates( longitude, latitude, 0.0, GeoDataCoordinates::Degree );
         GeoNamesWeatherItem *item = new GeoNamesWeatherItem( this );

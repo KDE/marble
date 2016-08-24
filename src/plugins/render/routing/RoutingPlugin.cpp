@@ -114,7 +114,7 @@ RoutingPluginPrivate::RoutingPluginPrivate( RoutingPlugin *parent ) :
 
 QString RoutingPluginPrivate::richText( const QString &source )
 {
-    return QString( "<font size=\"+1\" color=\"black\">%1</font>" ).arg( source );
+    return QLatin1String("<font size=\"+1\" color=\"black\">") + source + QLatin1String("</font>");
 }
 
 QString RoutingPluginPrivate::fuzzyDistance( qreal length )

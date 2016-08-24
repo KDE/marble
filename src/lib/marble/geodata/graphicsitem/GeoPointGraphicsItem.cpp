@@ -21,7 +21,7 @@ GeoPointGraphicsItem::GeoPointGraphicsItem( const GeoDataFeature *feature )
         : GeoGraphicsItem( feature )
 {
     if (feature) {
-        QString const paintLayer = QString("Point/%1").arg(StyleBuilder::visualCategoryName(feature->visualCategory()));
+        QString const paintLayer = QLatin1String("Point/") + StyleBuilder::visualCategoryName(feature->visualCategory());
         setPaintLayers(QStringList() << paintLayer);
     }
 }

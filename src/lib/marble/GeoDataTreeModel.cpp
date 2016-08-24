@@ -267,7 +267,7 @@ QVariant GeoDataTreeModel::data( const QModelIndex &index, int role ) const
                     if ( placemark->countryCode().isEmpty() ) {
                         return QVariant( placemark->name() );
                     } else {
-                        return QVariant( QString( "%1 (%2)" ).arg( placemark->name() ).arg( placemark->countryCode() ) );
+                        return QVariant(placemark->name() + QLatin1String(" (") + placemark->countryCode() + QLatin1Char(')'));
                     }
 
                 }

@@ -477,7 +477,7 @@ void NewstuffModelPrivate::readValue( const QDomNode &node, const QString &key, 
 NewstuffModel::NewstuffModel( QObject *parent ) :
     QAbstractListModel( parent ), d( new NewstuffModelPrivate( this ) )
 {
-    setTargetDirectory( MarbleDirs::localPath() + "/maps" );
+    setTargetDirectory(MarbleDirs::localPath() + QLatin1String("/maps"));
     // no default registry file
 
     connect( &d->m_networkAccessManager, SIGNAL(finished(QNetworkReply*)),
@@ -903,7 +903,7 @@ void NewstuffModelPrivate::processQueue()
     if ( m_currentAction.second == Install ) {
         if ( !m_currentFile ) {
             QFileInfo const file = m_items.at( m_currentAction.first ).m_payloadUrl.path();
-            m_currentFile = new QTemporaryFile( QDir::tempPath() + "/marble-XXXXXX-" + file.fileName() );
+            m_currentFile = new QTemporaryFile(QDir::tempPath() + QLatin1String("/marble-XXXXXX-") + file.fileName());
         }
 
         if ( m_currentFile->open() ) {

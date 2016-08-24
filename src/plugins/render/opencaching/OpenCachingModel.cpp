@@ -148,13 +148,13 @@ void OpenCachingModel::getAdditionalItems( const GeoDataLatLonAltBox& box, const
     }
 
     // http://www.opencaching.de/doc/xml/xml11.htm
-    QString openCachingUrl( "http://www.opencaching.de/xml/ocxml11.php" );
-    openCachingUrl += "?modifiedsince=" + m_startDate.toString( "yyyyMMddhhmmss" );
-    openCachingUrl += "&cache=1&cachedesc=1&picture=0&cachelog=1&removedobject=0";
-    openCachingUrl += "&lat=" + QString::number( box.center().latitude() * RAD2DEG );
-    openCachingUrl += "&lon=" + QString::number( box.center().longitude() * RAD2DEG );
-    openCachingUrl += "&distance=" + QString::number( m_maxDistance );
-    openCachingUrl += "&charset=utf-8&cdata=0&session=0&zip=0";
+    const QString openCachingUrl(QLatin1String("http://www.opencaching.de/xml/ocxml11.php") +
+        QLatin1String("?modifiedsince=") + m_startDate.toString("yyyyMMddhhmmss") +
+        QLatin1String("&cache=1&cachedesc=1&picture=0&cachelog=1&removedobject=0") +
+        QLatin1String("&lat=") + QString::number(box.center().latitude() * RAD2DEG) +
+        QLatin1String("&lon=") + QString::number(box.center().longitude() * RAD2DEG) +
+        QLatin1String("&distance=") + QString::number(m_maxDistance) +
+        QLatin1String("&charset=utf-8&cdata=0&session=0&zip=0"));
     downloadDescriptionFile( QUrl( openCachingUrl ) );
 }
 

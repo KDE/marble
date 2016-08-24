@@ -30,7 +30,7 @@ OpenCachingItem::OpenCachingItem( const OpenCachingCache& cache, QObject *parent
     setSize( QSize( m_cache.difficulty() * 10, m_cache.difficulty() * 10 ) );
     s_font.setBold( true );
     updateTooltip();
-    setId( QString( "opencache-%1" ).arg( cache.id() ) );
+    setId(QLatin1String("opencache-") + cache.id());
     setCoordinate( GeoDataCoordinates( cache.longitude(), cache.latitude(), 0.0, GeoDataCoordinates::Degree ) );
     setTarget( "earth" );
     connect( m_action, SIGNAL(triggered()),
@@ -94,7 +94,7 @@ QDialog *OpenCachingItem::infoDialog()
         OpenCachingCacheLog log = m_cache.log();
         if( log.size() > 0 ) {
             m_ui->m_logText->setHtml( log[m_logIndex].text() );
-            m_ui->m_logCount->setText( "1 / " + QString::number( log.size() ) );
+            m_ui->m_logCount->setText(QLatin1String("1 / ") + QString::number(log.size()));
             connect( m_ui->m_nextButton, SIGNAL(clicked()),
                      this, SLOT(nextLogEntry()) );
             connect( m_ui->m_previousButton, SIGNAL(clicked()),
@@ -176,17 +176,18 @@ void OpenCachingItem::paint( GeoPainter *painter, ViewportParams *viewport,
 
 void OpenCachingItem::updateTooltip()
 {
-    QString html = "<table cellpadding=\"2\">";
+    QString html = QLatin1String("<table cellpadding=\"2\">");
     if ( m_cache.id() != 0 ) {
-        html += tr( "<tr><td align=\"right\">Cache name</td>" );
-        html += "<td>" + m_cache.cacheName() + "</td></tr>";
-        html += tr( "<tr><td align=\"right\">User name</td><td>" ) + m_cache.userName() + "</td></tr>";
+        html += tr("<tr><td align=\"right\">Cache name</td>") +
+            QLatin1String("<td>") + m_cache.cacheName() + QLatin1String("</td></tr>") +
+            tr("<tr><td align=\"right\">User name</td><td>") + m_cache.userName() + QLatin1String("</td></tr>");
         if ( !m_cache.cacheName().isEmpty() ) {
-            html += tr( "<tr><td align=\"right\">Date hidden</td><td>" ) + m_cache.dateHidden().toString( Qt::SystemLocaleShortDate ) + "</td></tr>";
+            html += tr("<tr><td align=\"right\">Date hidden</td><td>") + m_cache.dateHidden().toString(Qt::SystemLocaleShortDate) + QLatin1String("</td></tr>");
         }
-        html += tr( "<tr><td align=\"right\">Difficulty</td><td>" ) + QString::number( m_cache.difficulty() ) + "</td></tr>";
-        html += tr( "<tr><td align=\"right\">Size</td><td>" ) + m_cache.sizeString() + "</td></tr>";
-        html += "</table>";
+        html +=
+            tr("<tr><td align=\"right\">Difficulty</td><td>") + QString::number(m_cache.difficulty()) + QLatin1String("</td></tr>") +
+            tr("<tr><td align=\"right\">Size</td><td>") + m_cache.sizeString() + QLatin1String("</td></tr>") +
+            QLatin1String("</table>");
         setToolTip( html );
     }
 }
@@ -194,9 +195,9 @@ void OpenCachingItem::updateTooltip()
 void OpenCachingItem::updateDescriptionLanguage( const QString& language )
 {
     QHash<QString, OpenCachingCacheDescription> descriptions = m_cache.description();
-    QString text = descriptions[language].shortDescription() + "\n\n" +
-            descriptions[language].description() + "\n\n" +
-            descriptions[language].hint() + "\n\n";
+    const QString text = descriptions[language].shortDescription() + QLatin1String("\n\n") +
+            descriptions[language].description() + QLatin1String("\n\n") +
+            descriptions[language].hint() + QLatin1String("\n\n");
     m_ui->m_descriptionText->setHtml( text );
 }
 
@@ -206,7 +207,7 @@ void OpenCachingItem::nextLogEntry()
     if( m_logIndex + 1 < log.size() ) {
         m_logIndex++;
         m_ui->m_logText->setHtml( log[m_logIndex].text() );
-        m_ui->m_logCount->setText( QString::number( m_logIndex + 1 ) + " / " + QString::number( log.size() ) );
+        m_ui->m_logCount->setText(QString::number(m_logIndex + 1) + QLatin1String(" / ") + QString::number(log.size()));
         m_ui->m_previousButton->setEnabled( true );
         if( m_logIndex == log.size() - 1 ) {
             m_ui->m_nextButton->setEnabled( false );
@@ -220,7 +221,7 @@ void OpenCachingItem::previousLogEntry()
     if( m_logIndex - 1 >= 0 ) {
         m_logIndex--;
         m_ui->m_logText->setHtml( log[m_logIndex].text() );
-        m_ui->m_logCount->setText( QString::number( m_logIndex + 1 ) + " / " + QString::number( log.size() ) );
+        m_ui->m_logCount->setText(QString::number(m_logIndex + 1) + QLatin1String(" / ") + QString::number(log.size()));
         m_ui->m_nextButton->setEnabled( true );
         if( m_logIndex == 0 ) {
             m_ui->m_previousButton->setEnabled( false );

@@ -26,7 +26,7 @@ bool KmzHandler::open(const QString &kmz, QString &error)
     }
 
 	QString const uuid = QUuid::createUuid().toString().mid(1, 8);
-	QString const filename = QString("%1/marble-kmz-%2").arg(QDir::tempPath()).arg(uuid);
+	QString const filename = QDir::tempPath() + QLatin1String("/marble-kmz-") + uuid;
 	if (!QDir::root().mkpath(filename)) {
         error = QString("Failed to create temporary storage %1 for extracting %2").arg(filename).arg(kmz);
         mDebug() << error;

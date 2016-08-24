@@ -48,7 +48,7 @@ int main(int argc, char *argv[])
 
     QString      lang = QLocale::system().name().section('_', 0, 0);
     QTranslator  translator;
-    translator.load( "marble-" + lang, MarbleDirs::path(QString("lang") ) );
+    translator.load(QLatin1String("marble-") + lang, MarbleDirs::path(QStringLiteral("lang")));
     app.installTranslator(&translator);
     app.setApplicationDisplayName(MainWindow::tr("Marble - Virtual Globe"));
 
@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
 
 #ifdef Q_WS_WIN
     QApplication::addLibraryPath( QApplication::applicationDirPath() 
-        + QDir::separator() + "plugins" );
+        + QDir::separator() + QLatin1String("plugins"));
 #endif
 #ifdef Q_OS_MACX
     QApplication::instance()->setAttribute(Qt::AA_DontShowIconsInMenus);
@@ -76,7 +76,7 @@ int main(int argc, char *argv[])
     // lets try to set the qt plugin search path...
     if (myPath.contains(".app"))
     {
-      myPath += "/Contents/plugins";
+      myPath += QLatin1String("/Contents/plugins");
       QApplication::addLibraryPath( myPath );
       qDebug( "Added %s to plugin search path", qPrintable( myPath ) );
     }

@@ -220,13 +220,13 @@ QString Placemark::shop() const
         if (shop == "Clothes" && data.containsTagKey("clothes") && !data.tagValue("clothes").isEmpty()){
             QString clothes = data.tagValue("clothes");
             clothes[0] = clothes[0].toUpper();
-            m_shop = "Shop : " + shop + " (" + clothes + ")";
+            m_shop = QLatin1String("Shop : ") + shop + QLatin1String(" (") + clothes + QLatin1Char(')');
         } else if (shop == "Clothes" && data.containsTagKey("designation") && !data.tagValue("designation").isEmpty()){
             QString designation = data.tagValue("designation");
             designation[0] = designation[0].toUpper();
-            m_shop = "Shop : " + shop + " (" + designation + ")";
+            m_shop = QLatin1String("Shop : ") + shop + QLatin1String(" (") + designation + QLatin1Char(')');
         } else {
-            m_shop = "Shop : " + shop;
+            m_shop = QLatin1String("Shop : ") + shop;
         }
     }
 
@@ -267,7 +267,7 @@ void Placemark::addTagDescription(QString &target, const QString &key, const QSt
     auto const & osmData = m_placemark.osmData();
     if (osmData.containsTag(key, value)) {
         if (!target.isEmpty()) {
-            target += " · ";
+            target += QStringLiteral(" · "); // non-latin1
         }
         target += description;
     }

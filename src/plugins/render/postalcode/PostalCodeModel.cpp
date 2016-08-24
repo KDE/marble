@@ -90,7 +90,7 @@ void PostalCodeModel::parseFile( const QByteArray& file )
             double const longitude = iterator.value().property( "lng" ).toNumber();
             double const latitude = iterator.value().property( "lat" ).toNumber();
 
-            QString const id = "postalCode_" + countryCode + postalCode;
+            QString const id = QLatin1String("postalCode_") + countryCode + postalCode;
 
             if ( !id.isEmpty() ) {
                 QString tooltip;

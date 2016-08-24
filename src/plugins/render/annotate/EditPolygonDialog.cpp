@@ -234,7 +234,7 @@ void EditPolygonDialog::handleChangingStyle()
     style->lineStyle().setWidth( d->m_linesWidth->value() );
     // 0 corresponds to "Filled" and 1 corresponds to "Not Filled".
     style->polyStyle().setFill( !d->m_filledColor->currentIndex() );
-    style->setId( d->m_placemark->id() + "Style" );
+    style->setId(d->m_placemark->id() + QLatin1String("Style"));
 
 
     // Adjust the lines/polygon colors.

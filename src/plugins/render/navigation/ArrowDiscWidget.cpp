@@ -56,7 +56,7 @@ QPixmap ArrowDiscWidget::pixmap( const QString &id )
 {
     QPixmap result;
     if ( !QPixmapCache::find( id, result ) ) {
-        result = QPixmap( QString( ":/%1.png" ).arg( id ) );
+        result = QPixmap(QLatin1String(":/") + id + QLatin1String(".png"));
         QPixmapCache::insert( id, result );
     }
     return result;

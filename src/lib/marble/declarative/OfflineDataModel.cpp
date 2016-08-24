@@ -17,7 +17,7 @@
 OfflineDataModel::OfflineDataModel( QObject *parent ) : QSortFilterProxyModel( parent ),
     m_vehicleTypeFilter( Any )
 {
-    m_newstuffModel.setTargetDirectory( Marble::MarbleDirs::localPath() + "/maps" );
+    m_newstuffModel.setTargetDirectory(Marble::MarbleDirs::localPath() + QLatin1String("/maps"));
     m_newstuffModel.setRegistryFile( QDir::homePath() + "/.kde/share/apps/knewstuff3/marble-offline-data.knsregistry", Marble::NewstuffModel::NameTag );
     m_newstuffModel.setProvider( "http://files.kde.org/marble/newstuff/maps-monav.xml" );
 
@@ -52,7 +52,7 @@ QVariant OfflineDataModel::data(const QModelIndex &index, int role) const
         if ( data.size() > 1 ) {
             QString result = data.at( 1 );
             for ( int i=2; i<data.size(); ++i ) {
-                result += " / " + data.at( i );
+                result += QLatin1String(" / ") + data.at(i);
             }
             result.remove( QLatin1String( " (Motorcar)" ) );
             result.remove( QLatin1String( " (Pedestrian)" ) );

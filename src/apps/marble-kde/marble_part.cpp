@@ -1116,7 +1116,7 @@ void MarblePart::migrateNewstuffConfigFiles() const
     // shared between Marble KDE and Marble Qt in Marble's data path of the user.
     // This method moves an old KDE newstuff config file to the new location if the former
     // exists and the latter not.
-    QFileInfo const target( MarbleDirs::localPath() + "/newstuff/marble-map-themes.knsregistry" );
+    QFileInfo const target(MarbleDirs::localPath() + QLatin1String("/newstuff/marble-map-themes.knsregistry"));
     if ( !target.exists() ) {
         QString const source = QStandardPaths::locate( QStandardPaths::GenericDataLocation, "knewstuff3/marble.knsregistry" );
         if ( !source.isEmpty() ) {

@@ -57,14 +57,15 @@ GeoDataDocument *GpsbabelRunner::parseFile(const QString &fileName, DocumentRole
     }
 
     // Set up temporary file to hold output KML from gpsbabel executable
-    QTemporaryFile tempKmlFile( QDir::tempPath() + "/marble-gpsbabel-XXXXXX.kml" );
+    QTemporaryFile tempKmlFile(QDir::tempPath() + QLatin1String("/marble-gpsbabel-XXXXXX.kml"));
     tempKmlFile.open();
     QFile kmlFile( tempKmlFile.fileName() );
 
     // Set up gpsbabel command line
-    QString command = "gpsbabel -i " + inputFileType;
-    command += " -f " + fileName + " -o kml -F ";
-    command += tempKmlFile.fileName();
+    const QString command =
+        QLatin1String("gpsbabel -i ") + inputFileType +
+        QLatin1String(" -f ") + fileName + QLatin1String(" -o kml -F ") +
+        tempKmlFile.fileName();
 
     // Execute gpsbabel to parse the input file
     int const exitStatus = QProcess::execute( command );

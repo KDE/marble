@@ -205,7 +205,7 @@ void MarbleWidgetPopupMenu::Private::setupDialogOsm( PopupLayer *popup, const Ge
         QString natural = data.tagValue("natural");
         natural[0] = natural[0].toUpper();
         if (natural == QLatin1String("Peak") && data.containsTagKey("ele") && !data.tagValue("ele").isEmpty()) {
-            doc["details"] = natural + " - " + data.tagValue("ele") + " m";
+            doc["details"] = natural + QLatin1String(" - ") + data.tagValue("ele") + QLatin1String(" m");
         } else {
             doc["details"] = natural;
         }
@@ -219,13 +219,13 @@ void MarbleWidgetPopupMenu::Private::setupDialogOsm( PopupLayer *popup, const Ge
         if (shop == QLatin1String("Clothes") && data.containsTagKey("clothes") && !data.tagValue("clothes").isEmpty()) {
             QString clothes = data.tagValue("clothes");
             clothes[0] = clothes[0].toUpper();
-            doc["amenity"] = "Shop - " + shop + " (" + clothes + ")";
+            doc["amenity"] = QLatin1String("Shop - ") + shop + QLatin1String(" (") + clothes + QLatin1Char(')');
         } else if (shop == QLatin1String("Clothes") && data.containsTagKey("designation") && !data.tagValue("designation").isEmpty()) {
             QString designation = data.tagValue("designation");
             designation[0] = designation[0].toUpper();
-            doc["amenity"] = "Shop - " + shop + " (" + designation + ")";
+            doc["amenity"] = QLatin1String("Shop - ") + shop + QLatin1String(" (") + designation + QLatin1Char(')');
         } else {
-            doc["amenity"] = "Shop - " + shop;
+            doc["amenity"] = QLatin1String("Shop - ") + shop;
         }
     } else if (data.containsTagKey("amenity") && !data.tagValue("amenity").isEmpty()){
         QString amenity = data.tagValue("amenity");
@@ -508,7 +508,7 @@ void MarbleWidgetPopupMenu::Private::setupDialogPhotoOverlay( PopupLayer *popup,
     doc["width"] = QString::number(200);
     doc["height"] = QString::number(100);
     QString const basePath = index->resolvePath(".");
-    QUrl const baseUrl = (basePath != QLatin1String(".")) ? QUrl::fromLocalFile( basePath + "/" ) : QUrl();
+    QUrl const baseUrl = (basePath != QLatin1String(".")) ? QUrl::fromLocalFile(basePath + QLatin1Char('/')) : QUrl();
     popup->setContent(doc.finalText(), baseUrl );
 }
 
@@ -717,7 +717,7 @@ void MarbleWidgetPopupMenu::slotInfoDialog()
                 content = content.replace("$[snippet]", placemark->snippet().text(), Qt::CaseInsensitive);
                 content = content.replace("$[id]", placemark->id(), Qt::CaseInsensitive);
                 QString const basePath = placemark->resolvePath(".");
-                QUrl const baseUrl = (basePath != QLatin1String(".")) ? QUrl::fromLocalFile( basePath + "/" ) : QUrl();
+                QUrl const baseUrl = (basePath != QLatin1String(".")) ? QUrl::fromLocalFile(basePath + QLatin1Char('/')) : QUrl();
                 popup->setContent(content, baseUrl );
             }
 

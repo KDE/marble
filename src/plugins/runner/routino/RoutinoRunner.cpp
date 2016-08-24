@@ -93,7 +93,7 @@ QByteArray RoutinoRunnerPrivate::retrieveWaypoints( const QStringList &params ) 
 
     QStringList routinoParams;
     routinoParams << params;
-    routinoParams << "--dir=" + m_mapDir.absolutePath();
+    routinoParams << QLatin1String("--dir=") + m_mapDir.absolutePath();
     routinoParams << "--output-text-all";
     mDebug() << routinoParams;
     routinoProcess.start( "routino-router", routinoParams );
@@ -105,9 +105,9 @@ QByteArray RoutinoRunnerPrivate::retrieveWaypoints( const QStringList &params ) 
     if ( routinoProcess.waitForFinished(60 * 1000) ) {
         mDebug() << routinoProcess.readAll();
         mDebug() << "routino finished";
-        QFile file( routinoProcess.workingDirectory() + "/shortest-all.txt" );
+        QFile file(routinoProcess.workingDirectory() + QLatin1String("/shortest-all.txt"));
         if ( !file.exists() ) {
-            file.setFileName( routinoProcess.workingDirectory() + "/quickest-all.txt" );
+            file.setFileName(routinoProcess.workingDirectory() + QLatin1String("/quickest-all.txt"));
         }
         if ( !file.exists() ) {
             mDebug() << "Can't get results";
@@ -214,7 +214,7 @@ RoutinoRunner::RoutinoRunner( QObject *parent ) :
         d( new RoutinoRunnerPrivate )
 {
     // Check installation
-    d->m_mapDir = QDir( MarbleDirs::localPath() + "/maps/earth/routino/" );
+    d->m_mapDir = QDir(MarbleDirs::localPath() + QLatin1String("/maps/earth/routino/"));
 }
 
 RoutinoRunner::~RoutinoRunner()

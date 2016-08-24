@@ -26,7 +26,7 @@ PanoramioParser::~PanoramioParser()
 
 panoramioDataStructure PanoramioParser::parseObjectOnPosition(const QString &content, int requiredObjectPosition)
 {
-    QString temp = "var myJSONObject =" + content;
+    QString temp = QLatin1String("var myJSONObject =") + content;
     myEngine.evaluate(temp);
     myEngine.evaluate(QString("function count(){ return myJSONObject.count };"));
     myEngine.evaluate(QString("function height(x){return myJSONObject.photos[x].height};"));

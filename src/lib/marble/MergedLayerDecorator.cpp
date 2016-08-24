@@ -103,7 +103,7 @@ void MergedLayerDecorator::setTextureLayers( const QVector<const GeoSceneTexture
         d->m_levelZeroColumns = firstTexture->levelZeroColumns();
         d->m_levelZeroRows = firstTexture->levelZeroRows();
         d->m_blendingFactory.setLevelZeroLayout( d->m_levelZeroColumns, d->m_levelZeroRows );
-        d->m_themeId = "maps/" + firstTexture->sourceDir();
+        d->m_themeId = QLatin1String("maps/") + firstTexture->sourceDir();
     }
 
     d->m_textureLayers = textureLayers;

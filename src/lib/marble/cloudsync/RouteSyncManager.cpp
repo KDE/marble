@@ -54,7 +54,7 @@ RouteSyncManager::Private::Private( CloudSyncManager *cloudSyncManager ) :
     m_model( new CloudRouteModel() ),
     m_owncloudBackend( cloudSyncManager )
 {
-    m_cacheDir = QDir( MarbleDirs::localPath() + "/cloudsync/cache/routes/" );
+    m_cacheDir = QDir(MarbleDirs::localPath() + QLatin1String("/cloudsync/cache/routes/"));
 }
 
 RouteSyncManager::RouteSyncManager(CloudSyncManager *cloudSyncManager) :
@@ -113,7 +113,7 @@ QString RouteSyncManager::saveDisplayedToCache() const
     d->m_cacheDir.mkpath( d->m_cacheDir.absolutePath() );
     
     const QString timestamp = generateTimestamp();
-    const QString filename = d->m_cacheDir.absolutePath() + '/' + timestamp + ".kml";
+    const QString filename = d->m_cacheDir.absolutePath() + QLatin1Char('/') + timestamp + QLatin1String(".kml");
     d->m_routingManager->saveRoute( filename );
     return timestamp;
 }
@@ -135,7 +135,7 @@ QVector<RouteItem> RouteSyncManager::cachedRouteList() const
 
         GeoDataParser parser( GeoData_KML );
         if( !parser.read( &file ) ) {
-            mDebug() << "Could not read " + routeFilename;
+            mDebug() << QLatin1String("Could not read ") + routeFilename;
         }
 
         file.close();
@@ -146,8 +146,7 @@ QVector<RouteItem> RouteSyncManager::cachedRouteList() const
         if ( container && container->size() > 0 ) {
             GeoDataFolder *folder = container->folderList().at( 0 );
             foreach ( GeoDataPlacemark *placemark, folder->placemarkList() ) {
-                routeName.append( placemark->name() );
-                routeName.append( " - " );
+                routeName += placemark->name() + QLatin1String(" - ");
             }
         }
 

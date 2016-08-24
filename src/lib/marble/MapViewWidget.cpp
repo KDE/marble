@@ -632,7 +632,7 @@ QString MapViewWidget::Private::currentThemePath() const
 
 QString MapViewWidget::Private::favoriteKey(const QModelIndex &index) const
 {
-    return "Favorites/" + m_mapSortProxy.data(index).toString();
+    return QLatin1String("Favorites/") + m_mapSortProxy.data(index).toString();
 }
 
 void MapViewWidget::Private::showContextMenu( const QPoint& pos )
@@ -648,8 +648,9 @@ void MapViewWidget::Private::showContextMenu( const QPoint& pos )
     menu.addSeparator();
 
     menu.addAction(QIcon(QStringLiteral(":/icons/create-new-map.png")), tr("&Create a New Map..."), q, SIGNAL(showMapWizard()));
-    if( QFileInfo( MarbleDirs::localPath() + "/maps/" + currentThemePath() ).exists() )
+    if (QFileInfo(MarbleDirs::localPath() + QLatin1String("/maps/") + currentThemePath()).exists()) {
         menu.addAction( tr( "&Delete Map Theme" ), q, SLOT(deleteMap()) );
+    }
     menu.addAction( tr( "&Upload Map..." ), q, SIGNAL(showUploadDialog()) );
     menu.exec( m_mapViewUi.marbleThemeSelectView->mapToGlobal( pos ) );
 }

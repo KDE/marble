@@ -69,7 +69,7 @@ QIcon twitterPlugin::icon() const
 void twitterPlugin::initialize()
 {
     privateFlagForRenderingTwitts = 0;
-    m_storagePolicy = new CacheStoragePolicy(MarbleDirs::localPath() + "/cache/");
+    m_storagePolicy = new CacheStoragePolicy(MarbleDirs::localPath() + QLatin1String("/cache/"));
     m_downloadManager = new HttpDownloadManager(QUrl("http://twiter.com"), m_storagePolicy);
     downloadtwitter(0, 0, 0.0, 0.0, 0.0, 0.0);
      mDebug() << "twitter plugin was started";
@@ -94,7 +94,7 @@ bool twitterPlugin::render(GeoPainter *painter, ViewportParams *viewport,
 //painter->drawAnnotation(GeoDataCoordinates(0.0,0.0),"hiiiiiiiiii");            
 
 painter->drawAnnotation(twitsWithLocation[counter].location,
-				    parsedData[counter].user + " said \n"
+				    parsedData[counter].user + QLatin1String(" said \n")
 				    + parsedData[counter].text,
 				    QSize(140, 140)) ;
     } else {
@@ -139,7 +139,7 @@ mDebug()<<"::::::downloading"<<rangeFrom ;
 
 void twitterPlugin::findLatLonOfStreetAddress(QString streetAddress)
 {
-    m_downloadManager->addJob("http://maps.google.com/maps/geo?q=" + streetAddress + "&output=json&key=ABQIAAAASD_v8YRzG0tBD18730KjmRTxoHoIpYL45xcSRJH0O7cH64DuXRT7rQeRcgCLAhjkteQ8vkWAATM_JQ", streetAddress, streetAddress);
+    m_downloadManager->addJob(QLatin1String("http://maps.google.com/maps/geo?q=") + streetAddress + QLatin1String("&output=json&key=ABQIAAAASD_v8YRzG0tBD18730KjmRTxoHoIpYL45xcSRJH0O7cH64DuXRT7rQeRcgCLAhjkteQ8vkWAATM_JQ"), streetAddress, streetAddress);
     mDebug() << "twitter added Geo Coding job for " << streetAddress;
 }
 

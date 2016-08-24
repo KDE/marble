@@ -142,7 +142,7 @@ TravelingSalesmanRunner::TravelingSalesmanRunner( QObject *parent ) :
         d( new TravelingSalesmanRunnerPrivate )
 {
     // Check installation
-    QDir mapDir( MarbleDirs::localPath() + "/maps/earth/traveling-salesman/" );
+    QDir mapDir(MarbleDirs::localPath() + QLatin1String("/maps/earth/traveling-salesman/"));
     d->m_travelingsalesmanJar = QFileInfo ( mapDir, "traveling-salesman.jar" );
 }
 

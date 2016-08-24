@@ -129,35 +129,35 @@ void OpenRouteServiceRunner::handleError( QNetworkReply::NetworkError error )
 
 QString OpenRouteServiceRunner::xmlHeader()
 {
-    QString result = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
-    result += "<xls:XLS xmlns:xls=\"http://www.opengis.net/xls\" xmlns:sch=\"http://www.ascc.net/xml/schematron\" ";
-    result += "xmlns:gml=\"http://www.opengis.net/gml\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" ";
-    result += "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" ";
-    result += "xsi:schemaLocation=\"http://www.opengis.net/xls ";
-    result += "http://schemas.opengis.net/ols/1.1.0/RouteService.xsd\" version=\"1.1\" xls:lang=\"en\">\n";
-    result += "<xls:RequestHeader/>\n";
+    const QString result = QLatin1String("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+        "<xls:XLS xmlns:xls=\"http://www.opengis.net/xls\" xmlns:sch=\"http://www.ascc.net/xml/schematron\" "
+        "xmlns:gml=\"http://www.opengis.net/gml\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" "
+        "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
+        "xsi:schemaLocation=\"http://www.opengis.net/xls "
+        "http://schemas.opengis.net/ols/1.1.0/RouteService.xsd\" version=\"1.1\" xls:lang=\"en\">\n"
+        "<xls:RequestHeader/>\n");
     return result;
 }
 
 QString OpenRouteServiceRunner::requestHeader( const QString &unit, const QString &routePreference )
 {
-    QString result = "<xls:Request methodName=\"RouteRequest\" requestID=\"123456789\" version=\"1.1\">\n";
-    result += "<xls:DetermineRouteRequest distanceUnit=\"%1\">\n";
-    result += "<xls:RoutePlan>\n";
-    result += "<xls:RoutePreference>%2</xls:RoutePreference>\n";
-    result += "<xls:WayPointList>\n";
+    const QString result = QLatin1String("<xls:Request methodName=\"RouteRequest\" requestID=\"123456789\" version=\"1.1\">\n"
+        "<xls:DetermineRouteRequest distanceUnit=\"%1\">\n"
+        "<xls:RoutePlan>\n"
+        "<xls:RoutePreference>%2</xls:RoutePreference>\n"
+        "<xls:WayPointList>\n");
     return result.arg( unit ).arg( routePreference );
 }
 
 QString OpenRouteServiceRunner::requestPoint( PointType pointType, const GeoDataCoordinates &coordinates )
 {
-    QString result = "<xls:%1>\n";
-    result += "<xls:Position>\n";
-    result += "<gml:Point srsName=\"EPSG:4326\">\n";
-    result += "<gml:pos>%2 %3</gml:pos>\n";
-    result += "</gml:Point>\n";
-    result += "</xls:Position>\n";
-    result += "</xls:%1>\n";
+    QString result = QLatin1String("<xls:%1>\n"
+        "<xls:Position>\n"
+        "<gml:Point srsName=\"EPSG:4326\">\n"
+        "<gml:pos>%2 %3</gml:pos>\n"
+        "</gml:Point>\n"
+        "</xls:Position>\n"
+        "</xls:%1>\n");
 
     result = result.arg( pointType == StartPoint ? "StartPoint" : ( pointType == ViaPoint ? "ViaPoint" : "EndPoint" ) );
     result = result.arg( coordinates.longitude( GeoDataCoordinates::Degree ), 0, 'f', 14 );
@@ -167,24 +167,24 @@ QString OpenRouteServiceRunner::requestPoint( PointType pointType, const GeoData
 
 QString OpenRouteServiceRunner::requestFooter( const QHash<QString, QVariant>& settings )
 {
-    QString result = "</xls:WayPointList>\n";
+    QString result = QLatin1String("</xls:WayPointList>\n");
 
     if (settings["noMotorways"].toInt() || settings["noTollways"].toInt() ) {
-        result += "<xls:AvoidList>\n";
+        result += QLatin1String("<xls:AvoidList>\n");
         if ( settings["noTollways"].toInt() ) {
-            result += "<xls:AvoidFeature>Tollway</xls:AvoidFeature>";
+            result += QLatin1String("<xls:AvoidFeature>Tollway</xls:AvoidFeature>");
         }
         if ( settings["noMotorways"].toInt() ) {
-            result += "<xls:AvoidFeature>Highway</xls:AvoidFeature>";
+            result += QLatin1String("<xls:AvoidFeature>Highway</xls:AvoidFeature>");
         }
-        result += "</xls:AvoidList>\n";
+        result += QLatin1String("</xls:AvoidList>\n");
     }
 
-    result += "</xls:RoutePlan>\n";
-    result += "<xls:RouteInstructionsRequest provideGeometry=\"true\" />\n";
-    result += "<xls:RouteGeometryRequest/>\n";
-    result += "</xls:DetermineRouteRequest>\n";
-    result += "</xls:Request>\n";
+    result += QLatin1String("</xls:RoutePlan>\n"
+        "<xls:RouteInstructionsRequest provideGeometry=\"true\" />\n"
+        "<xls:RouteGeometryRequest/>\n"
+        "</xls:DetermineRouteRequest>\n"
+        "</xls:Request>\n");
     return result;
 }
 

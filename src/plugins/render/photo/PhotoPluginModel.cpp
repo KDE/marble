@@ -46,16 +46,14 @@ QUrl PhotoPluginModel::generateUrl( const QString& service,
     QString url;
 
     if (service == QLatin1String("flickr"))
-        url += "https://www.flickr.com/services/rest/";
+        url += QLatin1String("https://www.flickr.com/services/rest/");
     else
         return QUrl();
-    
-    url += "?method=";
-    url += method;
-    url += "&format=rest";
-    url += "&api_key=";
-    url += flickrApiKey;
-    
+
+    url += QLatin1String("?method=") + method +
+           QLatin1String("&format=rest") +
+           QLatin1String("&api_key=") + flickrApiKey;
+
     QHash<QString,QString>::const_iterator it = options.constBegin();
     QHash<QString,QString>::const_iterator const end = options.constEnd();
     for (; it != end; ++it ) {

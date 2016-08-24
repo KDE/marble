@@ -1074,7 +1074,7 @@ QList<RenderPlugin *> MarbleWidget::renderPlugins() const
 void MarbleWidget::readPluginSettings( QSettings& settings )
 {
     foreach( RenderPlugin *plugin, renderPlugins() ) {
-        settings.beginGroup( QString( "plugin_" ) + plugin->nameId() );
+        settings.beginGroup(QLatin1String("plugin_") + plugin->nameId());
 
         QHash<QString,QVariant> hash;
 
@@ -1091,7 +1091,7 @@ void MarbleWidget::readPluginSettings( QSettings& settings )
 void MarbleWidget::writePluginSettings( QSettings& settings ) const
 {
     foreach( RenderPlugin *plugin, renderPlugins() ) {
-        settings.beginGroup( QString( "plugin_" ) + plugin->nameId() );
+        settings.beginGroup(QLatin1String("plugin_") + plugin->nameId());
 
         QHash<QString,QVariant> hash = plugin->settings();
 

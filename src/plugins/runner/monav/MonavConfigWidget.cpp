@@ -487,7 +487,7 @@ void MonavConfigWidgetPrivate::install()
 {
     if ( !m_currentDownload.isEmpty() ) {
         int const index = m_currentDownload.lastIndexOf( "/");
-        QString localFile = MarbleDirs::localPath() + "/maps" + m_currentDownload.mid( index );
+        const QString localFile = MarbleDirs::localPath() + QLatin1String("/maps") + m_currentDownload.mid(index);
         m_currentFile.setFileName( localFile );
         if ( m_currentFile.open( QFile::WriteOnly ) ) {
             QFileInfo file( m_currentFile );

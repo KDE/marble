@@ -169,7 +169,7 @@ void MonavPluginPrivate::loadMaps()
     if ( m_maps.isEmpty() ) {
         QStringList const baseDirs = QStringList() << MarbleDirs::systemPath() << MarbleDirs::localPath();
         foreach ( const QString &baseDir, baseDirs ) {
-            QString base = baseDir + "/maps/earth/monav/";
+            const QString base = baseDir + QLatin1String("/maps/earth/monav/");
             loadMap( base );
             QDir::Filters filters = QDir::AllDirs | QDir::Readable | QDir::NoDotAndDotDot;
             QDirIterator::IteratorFlags flags = QDirIterator::Subdirectories | QDirIterator::FollowSymlinks;

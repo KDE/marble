@@ -28,8 +28,8 @@ class Cheeeeze : private QThread { public: using QThread::msleep; };
 QPixmap resize(const QPixmap &pixmap)
 {
     if ( QProcess::execute("convert -version") == 0 ) {
-        QString const inputFile = QDir::tempPath() + "/marble-preview.png";
-        QString const outputFile = QDir::tempPath() + "/marble-preview-scaled.png";
+        QString const inputFile = QDir::tempPath() + QLatin1String("/marble-preview.png");
+        QString const outputFile = QDir::tempPath() + QLatin1String("/marble-preview-scaled.png");
         if ( pixmap.save( inputFile )
              && QProcess::execute( "convert", QStringList() << inputFile << "-resize" << "130x130"
                                    << "-sharpen" << "1x1" << outputFile ) == 0

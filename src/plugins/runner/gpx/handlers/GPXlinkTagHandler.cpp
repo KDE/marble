@@ -53,7 +53,7 @@ GeoNode* GPXlinkTagHandler::parse(GeoParser& parser) const
         QString desc = placemark->description();
         if (!desc.isEmpty())
         {
-            desc.append("<br/>");
+            desc += QLatin1String("<br/>");
         }
 
         placemark->setDescription(desc.append(link));

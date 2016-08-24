@@ -233,7 +233,7 @@ void ElevationProfileFloatItem::paintContent( QPainter *painter )
     dashedPen.setColor( Oxygen::aluminumGray4 );
     QRect labelRect( 0, 0, m_leftGraphMargin - 1, m_fontHeight + 2 );
     lastStringEnds = m_eleGraphHeight + m_fontHeight;
-//     painter->drawText( m_leftGraphMargin + 1, m_fontHeight, "[" + m_axisY.unit() + "]" );
+//     painter->drawText(m_leftGraphMargin + 1, m_fontHeight, QLatin1Char('[') + m_axisY.unit() + QLatin1Char(']'));
     foreach ( const AxisTick &tick, m_axisY.ticks() ) {
         const int posY = m_eleGraphHeight - tick.position;
         painter->setPen( dashedPen );

@@ -76,9 +76,9 @@ MapThemeDownloadDialog::MapThemeDownloadDialog( MarbleWidget* marbleWidget ) :
 {
     d->setupUi( this );
 
-    d->m_model.setTargetDirectory( MarbleDirs::localPath() + "/maps" );
+    d->m_model.setTargetDirectory(MarbleDirs::localPath() + QLatin1String("/maps"));
     d->m_model.setProvider( "https://marble.kde.org/maps-v3.xml" );
-    d->m_model.setRegistryFile( MarbleDirs::localPath() + "/newstuff/marble-map-themes.knsregistry", Marble::NewstuffModel::NameTag );
+    d->m_model.setRegistryFile(MarbleDirs::localPath() + QLatin1String("/newstuff/marble-map-themes.knsregistry"), Marble::NewstuffModel::NameTag);
 
     d->listView->setIconSize( QSize( 130, 130 ) );
     d->listView->setAlternatingRowColors( true );

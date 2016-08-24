@@ -36,11 +36,11 @@ void TileProcessor::parseFileList(const QString& fileListUrl) {
     QStringList dirList = rootDir.entryList(QStringList(), QDir::AllDirs | QDir::NoDotAndDotDot);
 
     for (int i = 0; i < dirList.length(); ++i) {
-        QString urlPath = fileListUrl + "/" + dirList.at(i);
+        QString urlPath = fileListUrl + QLatin1Char('/') + dirList.at(i);
         QDir columnDir = QDir(urlPath);
         QStringList files = columnDir.entryList(QStringList() << "*.jpg", QDir::Files);
         for (int j = 0; j < files.length(); ++j) {
-            QString filePath = urlPath + "/" + files.at(j);
+            QString filePath = urlPath + QLatin1Char('/') + files.at(j);
             m_fileList << filePath;
         }
     }

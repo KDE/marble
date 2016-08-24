@@ -59,10 +59,10 @@ void loadTranslations( QCoreApplication &app, QTranslator &translator )
     }
 
     QString const i18nDir = "/usr/share/marble/translations";
-    QString const relativeDir = app.applicationDirPath() + "/translations";
+    QString const relativeDir = app.applicationDirPath() + QLatin1String("/translations");
     foreach( const QString &path, QStringList() << i18nDir << relativeDir << QDir::currentPath() ) {
         foreach( const QString &lang, QStringList() << lang << code ) {
-            QFileInfo translations = QFileInfo( path + "/routing-instructions_" + lang + ".qm" );
+            QFileInfo translations = QFileInfo( path + QLatin1String("/routing-instructions_") + lang + QLatin1String(".qm"));
             if ( translations.exists() && translator.load( translations.absoluteFilePath() ) ) {
                 app.installTranslator( &translator );
                 return;

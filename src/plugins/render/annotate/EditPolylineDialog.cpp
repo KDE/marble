@@ -206,7 +206,7 @@ void EditPolylineDialog::handleChangingStyle()
     GeoDataStyle::Ptr newStyle(new GeoDataStyle( *d->m_placemark->style() ));
     newStyle->lineStyle().setColor( d->m_linesDialog->currentColor() );
     newStyle->lineStyle().setWidth( d->m_linesWidth->value() );
-    newStyle->setId( d->m_placemark->id() + "Style" );
+    newStyle->setId(d->m_placemark->id() + QLatin1String("Style"));
     d->m_placemark->setStyle( newStyle );
 
     updatePolyline();

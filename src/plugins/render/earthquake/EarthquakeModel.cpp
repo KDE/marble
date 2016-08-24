@@ -60,15 +60,15 @@ void EarthquakeModel::getAdditionalItems( const GeoDataLatLonAltBox& box, qint32
         return;
     }
 
-    QString geonamesUrl( "http://ws.geonames.org/earthquakesJSON" );
-    geonamesUrl += "?north="   + QString::number( box.north() * RAD2DEG );
-    geonamesUrl += "&south="   + QString::number( box.south() * RAD2DEG );
-    geonamesUrl += "&east="    + QString::number( box.east() * RAD2DEG );
-    geonamesUrl += "&west="    + QString::number( box.west() * RAD2DEG );
-    geonamesUrl += "&date=" + m_endDate.toString( "yyyy-MM-dd" );
-    geonamesUrl += "&maxRows=" + QString::number( number );
-    geonamesUrl += "&username=marble";
-    geonamesUrl += "&formatted=true";
+    const QString geonamesUrl( QLatin1String("http://ws.geonames.org/earthquakesJSON") +
+        QLatin1String("?north=")   + QString::number(box.north() * RAD2DEG) +
+        QLatin1String("&south=")   + QString::number(box.south() * RAD2DEG) +
+        QLatin1String("&east=")    + QString::number(box.east() * RAD2DEG) +
+        QLatin1String("&west=")    + QString::number(box.west() * RAD2DEG) +
+        QLatin1String("&date=")    + m_endDate.toString("yyyy-MM-dd") +
+        QLatin1String("&maxRows=") + QString::number(number) +
+        QLatin1String("&username=marble") +
+        QLatin1String("&formatted=true"));
     downloadDescriptionFile( QUrl( geonamesUrl ) );
 }
 

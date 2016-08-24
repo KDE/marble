@@ -165,7 +165,7 @@ QHash< QString, QVariant > RoutinoPlugin::templateSettings(RoutingProfilesModel:
 
 bool RoutinoPlugin::canWork() const
 {
-    QDir mapDir = QDir( MarbleDirs::localPath() + "/maps/earth/routino/" );
+    QDir mapDir = QDir(MarbleDirs::localPath() + QLatin1String("/maps/earth/routino/"));
     return mapDir.exists();
 }
 
