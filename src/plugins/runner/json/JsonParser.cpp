@@ -15,6 +15,7 @@
 #include "osm/OsmPresetLibrary.h"
 
 #include "MarbleDebug.h"
+#include "osm/OsmPlacemarkData.h"
 
 #include <QIODevice>
 
@@ -244,7 +245,6 @@ bool JsonParser::read( QIODevice* device )
 
                     QScriptValue properties = m_engine.evaluate( "fileData.features[" + count + "].properties" );
                     QScriptValueIterator propertyIterator ( properties );
-                    GeoDataFeature::GeoDataVisualCategory category = GeoDataFeature::None;
 
                     // First create a placemark for each geometry, there could be multi geometries
                     // that are translated into more than one geometry/placemark
@@ -253,27 +253,25 @@ bool JsonParser::read( QIODevice* device )
                         placemarkList.append( placemark );
                     }
 
+                    OsmPlacemarkData osmData;
                     while ( propertyIterator.hasNext() ) {
                         propertyIterator.next();
+                        osmData.addTag(propertyIterator.name(), propertyIterator.value().toString());
+                    }
 
-                        // If the property read, is the features name
-                        if (propertyIterator.name() == QLatin1String("name")) {
-                            for ( int pl = 0 ; pl < placemarkList.length() ; pl++) {
-                                placemarkList.at( pl )->setName( propertyIterator.value().toString() );
-                            }
+                    // If the property read, is the features name
+                    if (osmData.containsTagKey(QLatin1String("name"))) {
+                        for (int pl = 0 ; pl < placemarkList.length(); ++pl) {
+                            placemarkList.at(pl)->setName(osmData.tagValue(QLatin1String("name")));
                         }
-                        // Else if the geometry still doesn't have a category, try if this
-                        // key-value properties match any OSM visual category
-                        else if ( category == GeoDataFeature::None ) {
-                            const auto tag = OsmPresetLibrary::OsmTag(propertyIterator.name().toLower(), propertyIterator.value().toString().toLower());
-                            category = OsmPresetLibrary::osmVisualCategory(tag);
+                    }
 
-                            if ( category != GeoDataFeature::None ) {
-                                // Add the visual category to all the placemarks
-                                for ( int pl = 0 ; pl < placemarkList.length() ; pl++) {
-                                    placemarkList.at( pl )->setVisualCategory( category );
-                                }
-                            }
+                    const GeoDataFeature::GeoDataVisualCategory category = OsmPresetLibrary::determineVisualCategory(osmData);
+                    if (category != GeoDataFeature::None) {
+                        // Add the visual category to all the placemarks
+                        for (int pl = 0 ; pl < placemarkList.length(); ++pl) {
+                            placemarkList.at(pl)->setVisualCategory(category);
+                            placemarkList.at(pl)->setOsmData(osmData);
                         }
                     }
                 }
