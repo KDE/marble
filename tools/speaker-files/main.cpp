@@ -269,7 +269,7 @@ int process( const QDir &input, const QDir &output, const QString &xml )
         QString const nick = query.value(3).toString();
         QString const gender = query.value(4).toString();
         QString const language = query.value(5).toString();
-        QString const lang = language.mid( 0, language.indexOf( "(" )-1 ).replace( QLatin1Char(' '), QLatin1Char('-') );
+        QString const lang = language.mid(0, language.indexOf(QLatin1Char('(')) - 1).replace(QLatin1Char(' '), QLatin1Char('-'));
         QString const description = query.value(6).toString();
         QString const token = query.value(7).toString();
         QString const date = query.value(8).toString();

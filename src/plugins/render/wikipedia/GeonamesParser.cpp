@@ -184,7 +184,7 @@ void GeonamesParser::readUrl( WikipediaItem *item )
             // Try to switch to the mobile version, geonames
             // lacks API for that unfortunately
             QString url = text().toString();
-            if ( !url.contains( "m.wikipedia.org" ) ) {
+            if (!url.contains(QLatin1String("m.wikipedia.org"))) {
                 url.replace( "wikipedia.org", "m.wikipedia.org" );
             }
             item->setUrl( QUrl::fromEncoded( url.toUtf8() ) );

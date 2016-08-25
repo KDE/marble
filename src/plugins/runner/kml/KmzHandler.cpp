@@ -47,7 +47,7 @@ bool KmzHandler::open(const QString &kmz, QString &error)
         //}
         QString file = filename + QLatin1Char('/') + fileInfo.filePath;
         m_kmzFiles << fileInfo.filePath;
-        if (file.endsWith(".kml", Qt::CaseInsensitive)) {
+        if (file.endsWith(QLatin1String(".kml"), Qt::CaseInsensitive)) {
             if ( !m_kmlFile.isEmpty() ) {
                 mDebug() << "File" << kmz << "contains more than one .kml files";
             }

@@ -143,8 +143,7 @@ QString MarbleDirs::systemPath()
     CFRelease(myMacPath);
     //do some magick so that we can still find data dir if
     //marble was not built as a bundle
-    if (myPath.contains(".app"))  //its a bundle!
-    {
+    if (myPath.contains(QLatin1String(".app"))) {  //its a bundle!
       systempath = myPath + QLatin1String("/Contents/Resources/data");
     }
 
@@ -197,8 +196,7 @@ QString MarbleDirs::pluginSystemPath()
     QString myPath(mypPathPtr);
     //do some magick so that we can still find data dir if
     //marble was not built as a bundle
-    if (myPath.contains(".app"))  //its a bundle!
-    {
+    if (myPath.contains(QLatin1String(".app"))) {  //its a bundle!
       systempath = myPath + QLatin1String("/Contents/Resources/plugins");
     }
 

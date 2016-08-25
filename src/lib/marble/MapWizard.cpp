@@ -138,7 +138,7 @@ PreviewDialog::PreviewDialog( QWidget* parent, const QString& mapThemeId ) : QDi
 void PreviewDialog::closeEvent(QCloseEvent* e)
 {
     const QString dgmlPath = MarbleDirs::localPath() + QLatin1String("/maps/") + m_mapThemeId;
-    QString directory = dgmlPath.left( dgmlPath.lastIndexOf("/") );
+    const QString directory = dgmlPath.left(dgmlPath.lastIndexOf(QLatin1Char('/')));
     this->deleteTheme( directory );
     QDialog::closeEvent( e );
 }
@@ -474,9 +474,9 @@ void MapWizard::downloadLevelZero()
         QString server = d->uiWidget.comboBoxStaticUrlServer->currentText();
         QUrl downloadUrl;
 
-        server.replace( server.indexOf( "{x}" ), 3,  QString::number( 0 ) );
-        server.replace( server.indexOf( "{y}" ), 3,  QString::number( 0 ) );
-        server.replace( server.indexOf( "{zoomLevel}" ), 11,  QString::number( 0 ) );
+        server.replace(server.indexOf(QLatin1String("{x}")), 3,  QString::number(0));
+        server.replace(server.indexOf(QLatin1String("{y}")), 3,  QString::number(0));
+        server.replace(server.indexOf(QLatin1String("{zoomLevel}")), 11,  QString::number(0));
         downloadUrl.setUrl( server );
 
         QNetworkRequest request( downloadUrl );

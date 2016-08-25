@@ -52,32 +52,34 @@ panoramioDataStructure PanoramioParser::parseObjectOnPosition(const QString &con
     QStringList date = upload_date_string.split(QLatin1Char(' '));
     if( date.size() == 3 ) {
         unsigned int day = date.at( 0 ).toUInt();
+        const QString &monthString = date.at(1);
         unsigned int month = 1;
-        if( date.at( 1 ).contains( "January" ) )
+        if (monthString.contains(QLatin1String("January"))) {
             month = 1;
-        else if ( date.at( 1 ).contains( "February" ) )
+        } else if (monthString.contains(QLatin1String("February"))) {
             month = 2;
-        else if ( date.at( 1 ).contains( "March" ) )
+        } else if (monthString.contains(QLatin1String("March"))) {
             month = 3;
-        else if ( date.at( 1 ).contains( "April" ) )
+        } else if (monthString.contains(QLatin1String("April"))) {
             month = 4;
-        else if ( date.at( 1 ).contains( "May" ) )
+        } else if (monthString.contains(QLatin1String("May"))) {
             month = 5;
-        else if ( date.at( 1 ).contains( "June" ) )
+        } else if (monthString.contains(QLatin1String("June"))) {
             month = 6;
-        else if ( date.at( 1 ).contains( "July" ) )
+        } else if (monthString.contains(QLatin1String("July"))) {
             month = 7;
-        else if ( date.at( 1 ).contains( "August" ) )
+        } else if (monthString.contains(QLatin1String("August"))) {
             month = 8;
-        else if ( date.at( 1 ).contains( "September" ) )
+        } else if (monthString.contains(QLatin1String("September"))) {
             month = 9;
-        else if ( date.at( 1 ).contains( "October" ) )
+        } else if (monthString.contains(QLatin1String("October"))) {
             month = 10;
-        else if ( date.at( 1 ).contains( "November" ) )
+        } else if (monthString.contains(QLatin1String("November"))) {
             month = 11;
-        else if ( date.at( 1 ).contains( "December" ) )
+        } else if (monthString.contains(QLatin1String("December"))) {
             month = 12;
-    
+        }
+
         unsigned int year = date.at( 2 ).toUInt();
         
         dataStorage.upload_date = QDate( year, month, day );

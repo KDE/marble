@@ -39,7 +39,7 @@ PntRunner::~PntRunner()
 GeoDataDocument *PntRunner::parseFile(const QString &fileName, DocumentRole role, QString &errorString)
 {
     QFileInfo fileinfo( fileName );
-    if( fileinfo.suffix().compare( "pnt", Qt::CaseInsensitive ) != 0 ) {
+    if (fileinfo.suffix().compare(QLatin1String("pnt"), Qt::CaseInsensitive) != 0) {
         errorString = QString("File %1 does not have a pnt suffix").arg(fileName);
         mDebug() << errorString;
         return nullptr;

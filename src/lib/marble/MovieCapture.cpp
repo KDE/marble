@@ -122,7 +122,7 @@ QVector<MovieFormat> MovieCapture::availableFormats()
             encoder.start( d->encoderExec, args );
             encoder.waitForFinished();
             QString output = encoder.readAll();
-            bool isFormatAvailable = !output.contains( "Unknown format" );
+            bool isFormatAvailable = !output.contains(QLatin1String("Unknown format"));
             if( isFormatAvailable ) {
                 availableFormats << format;
             }

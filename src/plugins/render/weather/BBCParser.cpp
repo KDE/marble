@@ -482,20 +482,21 @@ void BBCParser::readTitle( WeatherData *data )
 
                 QString dayString = regExp.cap( 1 );
                 Qt::DayOfWeek dayOfWeek = (Qt::DayOfWeek) 0;
-                if ( dayString.contains( "Monday" ) )
+                if (dayString.contains(QLatin1String("Monday"))) {
                     dayOfWeek = Qt::Monday;
-                else if ( dayString.contains( "Tuesday" ) )
+                } else if (dayString.contains(QLatin1String("Tuesday"))) {
                     dayOfWeek = Qt::Tuesday;
-                else if ( dayString.contains( "Wednesday" ) )
+                } else if (dayString.contains(QLatin1String("Wednesday"))) {
                     dayOfWeek = Qt::Wednesday;
-                else if ( dayString.contains( "Thursday" ) )
+                } else if (dayString.contains(QLatin1String("Thursday"))) {
                     dayOfWeek = Qt::Thursday;
-                else if ( dayString.contains( "Friday" ) )
+                } else if (dayString.contains(QLatin1String("Friday"))) {
                     dayOfWeek = Qt::Friday;
-                else if ( dayString.contains( "Saturday" ) )
+                } else if (dayString.contains(QLatin1String("Saturday"))) {
                     dayOfWeek = Qt::Saturday;
-                else if ( dayString.contains( "Sunday" ) )
+                } else if (dayString.contains(QLatin1String("Sunday"))) {
                     dayOfWeek = Qt::Sunday;
+                }
                 QDate date = QDate::currentDate();
                 date = date.addDays( -1 );
 

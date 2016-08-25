@@ -128,11 +128,11 @@ bool OfflineDataModel::filterAcceptsRow( int source_row, const QModelIndex &sour
     if ( QSortFilterProxyModel::filterAcceptsRow( source_row, source_parent ) ) {
         QModelIndex const index = sourceModel()->index( source_row, 0, source_parent );
         QString const data = sourceModel()->data( index, Qt::DisplayRole ).toString();
-        if ( ( m_vehicleTypeFilter & Motorcar ) && data.contains( "(Motorcar)" ) ) {
+        if ((m_vehicleTypeFilter & Motorcar) && data.contains(QLatin1String("(Motorcar)"))) {
             return true;
-        } else if ( ( m_vehicleTypeFilter & Bicycle ) && data.contains( "(Bicycle)" ) ) {
+        } else if ((m_vehicleTypeFilter & Bicycle) && data.contains(QLatin1String("(Bicycle)"))) {
             return true;
-        } else if ( ( m_vehicleTypeFilter & Pedestrian ) && data.contains( "(Pedestrian)" ) ) {
+        } else if ((m_vehicleTypeFilter & Pedestrian) && data.contains(QLatin1String("(Pedestrian)"))) {
             return true;
         }
     }

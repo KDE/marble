@@ -315,7 +315,7 @@ void OwncloudSyncBackend::checkAuthReply()
 
     if (!result.startsWith(QLatin1Char('{'))) {
         // not a JSON result
-        if ( result.contains("http://owncloud.org") ) {
+        if (result.contains(QLatin1String("http://owncloud.org"))) {
             // an owncloud login page was returned, marble app is not installed
             d->m_cloudSyncManager->setStatus( tr( "The Marble app is not installed on the ownCloud server" ), CloudSyncManager::Error);
         } else {

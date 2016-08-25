@@ -241,7 +241,8 @@ QString MarbleLegendBrowser::readHtml( const QUrl & name )
 void MarbleLegendBrowser::translateHtml( QString & html )
 {
     // must match string extraction in Messages.sh
-    QString s = html.remove( 0, html.indexOf( "<body>" ) );
+    // TODO: html.remove also changes html, is that intended?
+    QString s = html.remove(0, html.indexOf(QLatin1String("<body>")));
     QRegExp rx( "</?\\w+((\\s+\\w+(\\s*=\\s*(?:\".*\"|'.*'|[^'\">\\s]+))?)+\\s*|\\s*)/?>" );
     rx.setMinimal( true );
     s.replace( rx, "\n" );
