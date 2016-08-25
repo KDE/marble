@@ -123,8 +123,8 @@ QList<OsmTagEditorWidgetPrivate::OsmTag> OsmTagEditorWidgetPrivate::recommendedT
 
     QStringList filter = generateTagFilter();
 
-    QMap<OsmTag, GeoDataFeature::GeoDataVisualCategory>::const_iterator it = OsmPresetLibrary::begin();
-    QMap<OsmTag, GeoDataFeature::GeoDataVisualCategory>::const_iterator end = OsmPresetLibrary::end();
+    QHash<OsmTag, GeoDataFeature::GeoDataVisualCategory>::const_iterator it = OsmPresetLibrary::begin();
+    QHash<OsmTag, GeoDataFeature::GeoDataVisualCategory>::const_iterator end = OsmPresetLibrary::end();
 
     for ( ; it != end; ++it ) {
         if ( filter.contains( it.key().first ) ) {

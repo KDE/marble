@@ -11,7 +11,7 @@
 #ifndef MARBLE_OSMPRESETLIBRARY_H
 #define MARBLE_OSMPRESETLIBRARY_H
 
-#include <QMap>
+#include <QHash>
 #include <QPair>
 
 #include "GeoDataFeature.h"
@@ -39,8 +39,8 @@ public:
     /**
      * @brief begin and end provide an stl style iterator for the preset map
      */
-    static QMap<OsmTag, GeoDataFeature::GeoDataVisualCategory>::const_iterator begin();
-    static QMap<OsmTag, GeoDataFeature::GeoDataVisualCategory>::const_iterator end();
+    static QHash<OsmTag, GeoDataFeature::GeoDataVisualCategory>::const_iterator begin();
+    static QHash<OsmTag, GeoDataFeature::GeoDataVisualCategory>::const_iterator end();
 
     static QStringList shopValues();
     static QStringList buildingValues();
@@ -53,7 +53,7 @@ private:
     /**
      * @brief s_visualCategories contains osm tag mappings to GeoDataVisualCategories
      */
-    static QMap<OsmTag, GeoDataFeature::GeoDataVisualCategory> s_visualCategories;
+    static QHash<OsmTag, GeoDataFeature::GeoDataVisualCategory> s_visualCategories;
 };
 
 

@@ -19,7 +19,7 @@
 namespace Marble
 {
 
-QMap<OsmPresetLibrary::OsmTag, GeoDataFeature::GeoDataVisualCategory> OsmPresetLibrary::s_visualCategories;
+QHash<OsmPresetLibrary::OsmTag, GeoDataFeature::GeoDataVisualCategory> OsmPresetLibrary::s_visualCategories;
 
 void OsmPresetLibrary::initializeOsmVisualCategories()
 {
@@ -345,13 +345,13 @@ GeoDataFeature::GeoDataVisualCategory OsmPresetLibrary::osmVisualCategory(const 
     return s_visualCategories.value(tag, GeoDataFeature::None);
 }
 
-QMap<OsmPresetLibrary::OsmTag, GeoDataFeature::GeoDataVisualCategory>::const_iterator OsmPresetLibrary::begin()
+QHash<OsmPresetLibrary::OsmTag, GeoDataFeature::GeoDataVisualCategory>::const_iterator OsmPresetLibrary::begin()
 {
     initializeOsmVisualCategories();
     return s_visualCategories.constBegin();
 }
 
-QMap<OsmPresetLibrary::OsmTag, GeoDataFeature::GeoDataVisualCategory>::const_iterator OsmPresetLibrary::end()
+QHash<OsmPresetLibrary::OsmTag, GeoDataFeature::GeoDataVisualCategory>::const_iterator OsmPresetLibrary::end()
 {
     initializeOsmVisualCategories();
     return s_visualCategories.constEnd();
