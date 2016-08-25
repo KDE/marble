@@ -31,7 +31,7 @@ TagsFilter::TagsFilter(GeoDataDocument *document, const QStringList &tagsList, b
         bool flag = andFlag;
         QStringList::const_iterator itr = tagsList.begin();
         for (; itr != tagsList.end(); ++itr) {
-            QStringList currentTag = (*itr).split('=');
+            QStringList currentTag = (*itr).split(QLatin1Char('='));
             QString currentKey;
             QString currentValue;
             if (currentTag.size() != 2) {

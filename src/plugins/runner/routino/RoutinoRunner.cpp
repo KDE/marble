@@ -51,7 +51,7 @@ public:
 RoutinoRunnerPrivate::RoutinoRunnerPrivate()
 {
     m_parser.setLineSeparator("\n");
-    m_parser.setFieldSeparator('\t');
+    m_parser.setFieldSeparator(QLatin1Char('\t'));
     m_parser.setFieldIndex( WaypointParser::RoadName, 10 );
 }
 
@@ -126,14 +126,14 @@ GeoDataLineString* RoutinoRunnerPrivate::parseRoutinoOutput( const QByteArray &c
 {
     GeoDataLineString* routeWaypoints = new GeoDataLineString;
 
-    QStringList lines = QString::fromUtf8( content ).split( '\n' );
+    const QStringList lines = QString::fromUtf8(content).split(QLatin1Char('\n'));
     mDebug() << lines.count() << "lines";
     foreach( const QString &line, lines ) {
         if (line.startsWith(QLatin1Char('#'))) {
             //skip comment
             continue;
         }
-        QStringList fields = line.split('\t');
+        const QStringList fields = line.split(QLatin1Char('\t'));
         if ( fields.size() >= 10 ) {
             qreal lon = fields.at(1).trimmed().toDouble();
             qreal lat = fields.at(0).trimmed().toDouble();

@@ -153,7 +153,7 @@ QString PlacemarkEditHeaderPrivate::id() const
 
 QString PlacemarkEditHeaderPrivate::setId( const QString &id, bool isNew )
 {
-    QString newId = id.toLower().replace( ' ', '_' );
+    QString newId = id.toLower().replace(QLatin1Char(' '), QLatin1Char('_'));
     if( newId == m_idString && !isNew ) {
         return newId;
     }

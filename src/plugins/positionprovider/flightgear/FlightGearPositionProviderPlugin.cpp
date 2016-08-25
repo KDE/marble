@@ -93,10 +93,10 @@ bool fixBadGPRMC(QByteArray &line)
     if (!line.startsWith("$GPRMC"))
         return false;
 
-    QStringList parts = QString(line).split(',');
+    QStringList parts = QString(line).split(QLatin1Char(','));
     if (parts[9].size() == 7) {
         parts[9].remove(4,1);
-        line = parts.join(",").toLatin1();
+        line = parts.join(QLatin1Char(',')).toLatin1();
         // update crc
         int crc = 0;
         for(int i=1; i < line.size()-3; i++) {
@@ -104,7 +104,7 @@ bool fixBadGPRMC(QByteArray &line)
         }
         parts[11] = parts[11][0] + parts[11][1] +  QString::number(crc, 16).toUpper();
 
-        line = parts.join(",").toLatin1();
+        line = parts.join(QLatin1Char(',')).toLatin1();
         return true;
     }
     return false;
@@ -135,7 +135,7 @@ void FlightGearPositionProviderPlugin::parseNmeaSentence( const QString &sentenc
     GeoDataCoordinates oldPosition = m_position;
 
     if ( sentence.startsWith( QLatin1String( "$GPRMC" ) ) ) {
-        QStringList const values = sentence.split( ',' );
+        QStringList const values = sentence.split(QLatin1Char(','));
         if ( values.size() > 9 ) {
             if (values[2] == QLatin1String("A")) {
                 m_speed = values[7].toDouble() * 0.514444; // knots => m/s
@@ -150,7 +150,7 @@ void FlightGearPositionProviderPlugin::parseNmeaSentence( const QString &sentenc
             // in GPRMC and once in GPGGA. Parsing one is sufficient
         }
     } else if ( sentence.startsWith( QLatin1String( "$GPGGA" ) ) ) {
-        QStringList const values = sentence.split( ',' );
+        QStringList const values = sentence.split(QLatin1Char(','));
         if ( values.size() > 10 ) {
             if ( values[6] == 0 ) {
                 m_status = PositionProviderStatusAcquiring; // no fix

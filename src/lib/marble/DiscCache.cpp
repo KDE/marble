@@ -167,7 +167,7 @@ void DiscCache::setCacheLimit( quint64 n )
 QString DiscCache::keyToFileName( const QString &key ) const
 {
     QString fileName( key );
-    fileName.replace( '/', '_' );
+    fileName.replace(QLatin1Char('/'), QLatin1Char('_'));
 
     return m_CacheDirectory + QLatin1Char('/') + fileName;
 }

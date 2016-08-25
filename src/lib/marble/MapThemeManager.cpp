@@ -295,7 +295,7 @@ QStringList MapThemeManager::Private::findMapThemes( const QString& basePath )
     QStringListIterator it( mapDirs );
     while ( it.hasNext() ) {
         QString themeDir = it.next() + QLatin1Char('/');
-        QString themeDirName = QDir( themeDir ).path().section( '/', -2, -1 );
+        QString themeDirName = QDir(themeDir).path().section(QLatin1Char('/'), -2, -1);
         QStringList tmp = QDir( themeDir ).entryList( QStringList( "*.dgml" ),
                                                       QDir::Files | QDir::NoSymLinks );
         if ( !tmp.isEmpty() ) {
@@ -419,7 +419,7 @@ void MapThemeManager::Private::updateMapThemeModel()
     }
 
     foreach ( const QString &mapThemeId, stringlist ) {
-        QString celestialBodyId = mapThemeId.section( '/', 0, 0 );
+        const QString celestialBodyId = mapThemeId.section(QLatin1Char('/'), 0, 0);
         QString celestialBodyName = PlanetFactory::localizedName( celestialBodyId );
 
         QList<QStandardItem*> matchingItems = m_celestialList.findItems( celestialBodyId, Qt::MatchExactly, 1 );
@@ -464,7 +464,7 @@ void MapThemeManager::Private::fileChanged( const QString& path )
     // 2. if the file exists it is changed and we have to replace
     //    the item with a new one.
 
-    QString mapThemeId = path.section( '/', -3 );
+    const QString mapThemeId = path.section(QLatin1Char('/'), -3);
     mDebug() << "mapThemeId:" << mapThemeId;
     QList<QStandardItem *> matchingItems = m_mapThemeModel.findItems( mapThemeId,
                                                                           Qt::MatchFixedString

@@ -336,7 +336,7 @@ QStringList OsmTagEditorWidgetPrivate::generateTagFilter() const
 bool OsmTagEditorWidgetPrivate::containsAny( const OsmPlacemarkData &osmData, const QStringList &tags ) const
 {
     foreach ( const QString &tag, tags ) {
-        QStringList tagSplit = tag.split( '=' );
+        const QStringList tagSplit = tag.split(QLatin1Char('='));
 
         // Only "key=value" mappings should be checked
         Q_ASSERT( tagSplit.size() == 2  );
@@ -357,7 +357,7 @@ bool OsmTagEditorWidgetPrivate::containsAny( const OsmPlacemarkData &osmData, co
 void OsmTagEditorWidgetPrivate::addPattern( QStringList &filter, const OsmPlacemarkData &osmData, const QStringList &tags ) const
 {
     foreach ( const QString &tag, tags ) {
-        QStringList tagSplit = tag.split( '=' );
+        const QStringList tagSplit = tag.split(QLatin1Char('='));
         QString key = tagSplit.at( 0 );
         if ( !osmData.containsTagKey( key ) ) {
             filter << key;

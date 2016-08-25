@@ -253,7 +253,7 @@ int main(int argc, char *argv[])
 
         //Parses the tags given at command line and makes a Hash of key-value pairs
         qDebug()<<" Parsed tf value: "<<parser.value("tags-filter")<<endl;
-        QStringList tagsList = parser.value("tags-filter").split(',');
+        QStringList tagsList = parser.value("tags-filter").split(QLatin1Char(','));
         //Filters and considers only those placemarks which have all the key-value pairs given at command line 
 
         WayConcatenator concatenator(map, tagsList, parser.isSet("tags-and"));

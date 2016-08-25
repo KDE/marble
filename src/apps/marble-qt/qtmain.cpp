@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
     app.setOrganizationDomain( "kde.org" );
     // Widget translation
 
-    QString      lang = QLocale::system().name().section('_', 0, 0);
+    QString      lang = QLocale::system().name().section(QLatin1Char('_'), 0, 0);
     QTranslator  translator;
     translator.load(QLatin1String("marble-") + lang, MarbleDirs::path(QStringLiteral("lang")));
     app.installTranslator(&translator);

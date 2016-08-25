@@ -78,8 +78,8 @@ void TileProcessor::colorForFile(const QString& filePath){
 //    int tileCountBathymetry = pow(2, m_tileLevel);
     int tileCount = pow(2, m_tileLevel);
 
-    int xTile = filePath.section('/', -2, -2).toUInt();
-    int yTile = filePath.section('/', -1).section(".",0, 0).toUInt();
+    int xTile = filePath.section(QLatin1Char('/'), -2, -2).toUInt();
+    int yTile = filePath.section(QLatin1Char('/'), -1).section(QLatin1Char('.'), 0, 0).toUInt();
     int x = m_bathymetry.width() * xTile / (double)tileCount;
 
     qreal lat_rad = atan(sinh(M_PI * (1 - 2 * yTile / (double)tileCount)));
@@ -128,7 +128,7 @@ void TileProcessor::colorForFile(const QString& filePath){
 
         tile.save(modFilePath, "JPG", 85);
         if (opacity > 0.0) {
-            qDebug() << progress << filePath.section('/', -2, -2) << filePath.section('/', -1).section(".",0, 0);
+            qDebug() << progress << filePath.section(QLatin1Char('/'), -2, -2) << filePath.section(QLatin1Char('/'), -1).section(QLatin1Char('.'), 0, 0);
             qDebug() << maskValueTopLeft << modFilePath;
         }
     }

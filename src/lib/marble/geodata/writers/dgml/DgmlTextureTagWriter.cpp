@@ -55,7 +55,7 @@ bool DgmlTextureTagWriter::write(const GeoNode *node, GeoWriter& writer) const
     {
         for( int i = 0; i < texture->downloadUrls().size(); ++i )
         {
-            QString protocol = texture->downloadUrls().at(i).toString().left( texture->downloadUrls().at(i).toString().indexOf( ':' ) );
+            QString protocol = texture->downloadUrls().at(i).toString().left(texture->downloadUrls().at(i).toString().indexOf(QLatin1Char(':')));
             QString host =  QString( texture->downloadUrls().at(i).host() );
             QString path =  QString( texture->downloadUrls().at(i).path() );
             QString query = texture->downloadUrls().at(i).query(QUrl::FullyEncoded);

@@ -152,8 +152,8 @@ QVector<RouteItem> RouteSyncManager::cachedRouteList() const
 
         routeName = routeName.left( routeName.length() - 3 );
         QString timestamp = routeFilename.left( routeFilename.length() - 4 );
-        QString distance = QString('0');
-        QString duration = QString('0');
+        QString distance(QLatin1Char('0'));
+        QString duration(QLatin1Char('0'));
 
         QString previewPath = QString( "%0/preview/%1.jpg" ).arg( d->m_cacheDir.absolutePath(), timestamp );
         QIcon preview;

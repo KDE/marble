@@ -341,7 +341,7 @@ QString RoutingInstruction::totalDurationRemaining() const
     }
     if ( duration >= 60.0 ) {
         duration /= 60.0;
-        durationUnit = 'h';
+        durationUnit = QStringLiteral("h");
         precision = 1;
     }
 

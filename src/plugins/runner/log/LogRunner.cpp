@@ -53,7 +53,7 @@ GeoDataDocument *LogRunner::parseFile(const QString &fileName, DocumentRole role
     bool error = false;
     while( !stream.atEnd() || error ){
         const QString line = stream.readLine();
-        const QStringList list = line.split( ',' );
+        const QStringList list = line.split(QLatin1Char(','));
 
         if ( list.size() != 7 ) {
             mDebug() << Q_FUNC_INFO << "Aborting due to error in line" << count << ". Line was:" << line;

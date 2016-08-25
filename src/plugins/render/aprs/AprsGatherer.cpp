@@ -218,7 +218,7 @@ AprsGatherer::addObject( const QString &callSign,
 
     GeoAprsCoordinates location( longitude, latitude, m_seenFrom );
     if ( canDoDirect ) {
-        if ( !routePath.contains( QChar( '*' ) ) ) {
+        if (!routePath.contains(QLatin1Char('*'))) {
             location.addSeenFrom( GeoAprsCoordinates::Directly );
         }
     }

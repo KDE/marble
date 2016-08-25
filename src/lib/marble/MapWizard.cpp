@@ -274,7 +274,7 @@ void MapWizard::parseServerCapabilities( QNetworkReply* reply )
     QDomElement format = xml.documentElement().firstChildElement( "Capability" ).firstChildElement( "Request" )
                          .firstChildElement( "GetMap" ).firstChildElement( "Format" );
 
-    d->format = format.text().right( format.text().length() - format.text().indexOf( '/' ) - 1 ).toLower();
+    d->format = format.text().right(format.text().length() - format.text().indexOf(QLatin1Char('/')) - 1).toLower();
 
     if (d->format == QLatin1String("jpeg")) {
         d->format = "jpg";
@@ -349,7 +349,7 @@ bool MapWizard::createFiles( const GeoSceneDocument* document )
         {
             // Source image
             QFile sourceImage( d->sourceImage );
-            d->format = d->sourceImage.right( d->sourceImage.length() - d->sourceImage.lastIndexOf( '.' ) - 1 ).toLower();
+            d->format = d->sourceImage.right(d->sourceImage.length() - d->sourceImage.lastIndexOf(QLatin1Char('.')) - 1).toLower();
             sourceImage.copy( QString( "%1/%2/%2.%3" ).arg( maps.absolutePath() )
                                                       .arg( document->head()->theme() )
                                                       .arg( d->format ) );
@@ -809,7 +809,7 @@ GeoSceneDocument* MapWizard::createDocument()
     else if( d->mapProviderType == MapWizardPrivate::StaticImageMap )
     {
         QString image = d->uiWidget.lineEditSource->text();
-        d->format = image.right( image.length() - image.lastIndexOf( '.' ) - 1 ).toLower();
+        d->format = image.right(image.length() - image.lastIndexOf(QLatin1Char('.')) - 1).toLower();
         texture->setFileFormat( d->format.toUpper() );
         texture->setInstallMap(document->head()->theme() + QLatin1Char('.') + d->format);
         texture->setServerLayout( new MarbleServerLayout( texture ) );

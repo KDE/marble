@@ -318,7 +318,7 @@ QString OpenCachingComItem::dateString(const QVariant& ms)
     }
     else
     {
-        result = '-';
+        result = QStringLiteral("-");
     }
     return result;
 }
@@ -352,7 +352,7 @@ QString OpenCachingComItem::formatDistance(qreal spheredistance) const
     locale->meterToTargetUnit(distance, measurementSystem, convertedMeters, unit);
     QString unitString = locale->unitAbbreviation(unit);
 
-    return QString("%L1 %2").arg(convertedMeters, 8, 'f', 1, QChar(' '))
+    return QString("%L1 %2").arg(convertedMeters, 8, 'f', 1, QLatin1Char(' '))
                             .arg(unitString);
 }
 

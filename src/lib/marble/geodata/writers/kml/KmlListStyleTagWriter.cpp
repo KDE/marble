@@ -87,7 +87,7 @@ QString KmlListStyleTagWriter::iconStateToString( GeoDataItemIcon::ItemIconState
         stateList << "fetching2";
     }
 
-    return stateList.join(" ");
+    return stateList.join(QLatin1Char(' '));
 }
 
 }

@@ -401,7 +401,7 @@ void MarbleWidgetPopupMenu::Private::setupDialogCity( PopupLayer *popup, const G
     // There is an issue about UTC.
     // It's possible to variants (e.g.):
     // +1.0 and -1.0, but dst does not have + an the start
-    if(dst.startsWith('-')) {
+    if (dst.startsWith(QLatin1Char('-'))) {
         doc["timezone"] = dst;
     } else {
         doc["timezone"] = QLatin1Char('+') + dst;

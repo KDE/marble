@@ -58,7 +58,7 @@ int main(int argc, char *argv[])
 
         // Ignore Comment lines in header and
         // between dso entries
-        if ( line.startsWith( '#' ) )    {
+        if (line.startsWith(QLatin1Char('#'))) {
             continue;
         }
 

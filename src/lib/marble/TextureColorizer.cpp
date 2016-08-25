@@ -103,9 +103,9 @@ TextureColorizer::TextureColorizer( const QString &seafile,
 
         while ( !stream.atEnd() ) {
             stream >> evalstrg;
-            if ( !evalstrg.isEmpty() && evalstrg.contains( '=' ) ) {
-                QString  colorValue = evalstrg.left( evalstrg.indexOf( '=' ) );
-                QString  colorPosition = evalstrg.mid( evalstrg.indexOf( '=' ) + 1 );
+            if (!evalstrg.isEmpty() && evalstrg.contains(QLatin1Char('='))) {
+                QString  colorValue = evalstrg.left(evalstrg.indexOf(QLatin1Char('=')));
+                QString  colorPosition = evalstrg.mid(evalstrg.indexOf(QLatin1Char('=')) + 1);
                 gradient.setColorAt( colorPosition.toDouble(),
                                      QColor( colorValue ) );
             }

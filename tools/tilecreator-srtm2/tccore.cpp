@@ -124,8 +124,8 @@ public:
 private:
     QString hgtFileName( int lng, int lat ) const
     {
-        QChar EW( lng >= 0 ? 'E' : 'W' );
-        QChar NS( lat >= 0 ? 'N' : 'S' );
+        QChar EW(QLatin1Char(lng >= 0 ? 'E' : 'W'));
+        QChar NS(QLatin1Char(lat >= 0 ? 'N' : 'S'));
 
         QStringList dirs;
         dirs << "Africa" << "Australia" << "Eurasia" << "Silands" << "North_America" << "South_America";

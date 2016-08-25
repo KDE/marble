@@ -52,7 +52,7 @@ public:
 GosmoreRunnerPrivate::GosmoreRunnerPrivate()
 {
     m_parser.setLineSeparator("\r");
-    m_parser.setFieldSeparator(',');
+    m_parser.setFieldSeparator(QLatin1Char(','));
     m_parser.setFieldIndex( WaypointParser::RoadName, 4 );
     m_parser.addJunctionTypeMapping( "Jr", RoutingWaypoint::Roundabout );
 }
@@ -98,9 +98,9 @@ GeoDataLineString GosmoreRunnerPrivate::parseGosmoreOutput( const QByteArray &co
 {
     GeoDataLineString routeWaypoints;
 
-    QStringList lines = QString::fromLocal8Bit( content ).split( '\r' );
+    QStringList lines = QString::fromLocal8Bit( content ).split(QLatin1Char('\r'));
     foreach( const QString &line, lines ) {
-        QStringList fields = line.split(',');
+        const QStringList fields = line.split(QLatin1Char(','));
         if (fields.size() >= 5) {
             qreal lon = fields.at(1).toDouble();
             qreal lat = fields.at(0).toDouble();
@@ -115,9 +115,9 @@ GeoDataLineString GosmoreRunnerPrivate::parseGosmoreOutput( const QByteArray &co
 QVector<GeoDataPlacemark*> GosmoreRunnerPrivate::parseGosmoreInstructions( const QByteArray &content )
 {
     // Determine gosmore version
-    QStringList lines = QString::fromUtf8( content ).split( '\r' );
+    QStringList lines = QString::fromUtf8(content).split(QLatin1Char('\r'));
     if ( lines.size() > 2 ) {
-        QStringList fields = lines.at( lines.size()-2 ).split(',');
+        const QStringList fields = lines.at(lines.size()-2).split(QLatin1Char(','));
         m_parser.setFieldIndex( WaypointParser::RoadName, fields.size()-1 );
         if ( fields.size() < 5 || fields.size() > 6 ) {
             // Can happen when gosmore changes the output format, returns garbage

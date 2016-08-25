@@ -381,8 +381,8 @@ void MapViewWidget::setMapThemeId( const QString &themeId )
     if ( themeId == oldThemeId )
         return;
 
-    const QString oldCelestialBodyId = oldThemeId.section( '/', 0, 0 );
-    const QString celestialBodyId = themeId.section( '/', 0, 0 );
+    const QString oldCelestialBodyId = oldThemeId.section(QLatin1Char('/'), 0, 0);
+    const QString celestialBodyId = themeId.section(QLatin1Char('/'), 0, 0);
 
     // select celestialBodyId in GUI
     if ( celestialBodyId != oldCelestialBodyId ) {

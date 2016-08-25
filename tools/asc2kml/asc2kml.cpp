@@ -20,11 +20,11 @@
 QString escapeXml( const QString &str )
 {
     QString xml = str;
-    xml.replace('&', "&amp;");
-    xml.replace('<', "&lt;");
-    xml.replace('>', "&gt;");
-    xml.replace('\'', "&apos;");
-    xml.replace('"', "&quot;");
+    xml.replace(QLatin1Char('&'), QStringLiteral("&amp;"));
+    xml.replace(QLatin1Char('<'), QStringLiteral("&lt;"));
+    xml.replace(QLatin1Char('>'), QStringLiteral("&gt;"));
+    xml.replace(QLatin1Char('\''), QStringLiteral("&apos;"));
+    xml.replace(QLatin1Char('"'), QStringLiteral("&quot;"));
 
     return xml;
 }
@@ -86,7 +86,7 @@ int main(int argc, char *argv[])
         while ( !sourcestream.atEnd() ) {
 
             const QString rawline = sourcestream.readLine();
-            const QStringList splitline = rawline.split('\t');
+            const QStringList splitline = rawline.split(QLatin1Char('\t'));
 
             const QString name       = splitline[1];
             const QString latstring  = splitline[4];
@@ -101,7 +101,7 @@ int main(int argc, char *argv[])
             supportstream.seek(0);
             while ( !supportstream.atEnd() ) {
                 const QString supportrawline = supportstream.readLine();
-                const QStringList supportsplitline = supportrawline.split('\t');
+                const QStringList supportsplitline = supportrawline.split(QLatin1Char('\t'));
                 if (supportsplitline[0] == (country + QLatin1Char('.') +statecode)) {
                     state = supportsplitline[1];
                     break;
@@ -112,7 +112,7 @@ int main(int argc, char *argv[])
             timezonestream.readLine();
             while ( !timezonestream.atEnd() ) {
                     const QString timezonerawline = timezonestream.readLine();
-                    const QStringList timezonesplitline = timezonerawline.split('\t');
+                    const QStringList timezonesplitline = timezonerawline.split(QLatin1Char('\t'));
 
                     if( timezonesplitline[0] == timezone )
                     {

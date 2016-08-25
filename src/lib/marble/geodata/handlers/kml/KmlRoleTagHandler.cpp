@@ -44,7 +44,7 @@ GeoNode* KmlroleTagHandler::parse( GeoParser& parser ) const
     if( parentItem.is<GeoDataPlacemark>() ) {
         QString role = parser.readElementText().trimmed();
         if ( role.isEmpty() ) {
-            role = ' ';
+            role = QLatin1Char(' ');
         }        
         parentItem.nodeAs<GeoDataPlacemark>()->setRole( role );
     }

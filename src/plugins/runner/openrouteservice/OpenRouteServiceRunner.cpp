@@ -58,7 +58,7 @@ void OpenRouteServiceRunner::retrieveRoute( const RouteRequest *route )
         preference = settings["preference"].toString();
     }
     if (preference == QLatin1String("Pedestrian")) {
-        unit = 'M';
+        unit = QStringLiteral("M");
     }
 
     request += requestHeader( unit, preference );
@@ -278,7 +278,7 @@ GeoDataDocument* OpenRouteServiceRunner::parse( const QByteArray &content ) cons
         QDomNodeList waypoints = geometry.item( 0 ).toElement().elementsByTagName( "gml:pos" );
         for (int i=0 ; i < waypoints.length(); ++i ) {
             QDomNode node = waypoints.item( i );
-            QStringList content = node.toElement().text().split( ' ' );
+            const QStringList content = node.toElement().text().split(QLatin1Char(' '));
             if ( content.length() == 2 ) {
                 GeoDataCoordinates position;
                 position.setLongitude( content.at( 0 ).toDouble(), GeoDataCoordinates::Degree );
@@ -307,12 +307,12 @@ GeoDataDocument* OpenRouteServiceRunner::parse( const QByteArray &content ) cons
             QDomNodeList positions = node.elementsByTagName( "gml:pos" );
 
             if ( textNodes.size() > 0 && positions.size() > 0 ) {
-                QStringList content = positions.at( 0 ).toElement().text().split( ' ' );
+                const QStringList content = positions.at(0).toElement().text().split(QLatin1Char(' '));
                 if ( content.length() == 2 ) {
                     GeoDataLineString *lineString = new GeoDataLineString;
 
                     for( int i = 0; i < positions.count(); ++i ) {
-                         QStringList pointList = positions.at( i ).toElement().text().split( ' ' );
+                         const QStringList pointList = positions.at(i).toElement().text().split(QLatin1Char(' '));
                          GeoDataCoordinates position;
                          position.setLongitude( pointList.at( 0 ).toDouble(), GeoDataCoordinates::Degree );
                          position.setLatitude( pointList.at( 1 ).toDouble(), GeoDataCoordinates::Degree );

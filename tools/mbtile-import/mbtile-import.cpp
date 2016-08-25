@@ -42,7 +42,7 @@ void importTiles(const QString &tileDirectory, MbTileWriter &tileWriter, const Q
                 }
 
                 QString const tileId = tileInfo.absoluteFilePath().mid(strip);
-                QStringList const tileEntries = tileId.split('/');
+                QStringList const tileEntries = tileId.split(QLatin1Char('/'));
                 if (tileEntries.size() == 3) {
                     int const x = tileEntries[1].toInt(&isNumber);
                     if (isNumber && x >= 0) {
@@ -98,7 +98,7 @@ int main(int argc, char** argv)
         parser.showHelp(3);
     }
 
-    QStringList const tileLevels = parser.value("tilelevels").split('-');
+    QStringList const tileLevels = parser.value("tilelevels").split(QLatin1Char('-'));
     QPair<int, int> tileLevelRange = QPair<int, int>(0, 20);
     bool haveValidRange = false;
     if (tileLevels.size() == 2) {

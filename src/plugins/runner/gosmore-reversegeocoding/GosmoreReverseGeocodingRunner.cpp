@@ -40,7 +40,7 @@ public:
 GosmoreRunnerPrivate::GosmoreRunnerPrivate()
 {
     m_parser.setLineSeparator("\r");
-    m_parser.setFieldSeparator(',');
+    m_parser.setFieldSeparator(QLatin1Char(','));
     m_parser.setFieldIndex( WaypointParser::RoadName, 4 );
     m_parser.addJunctionTypeMapping( "Jr", RoutingWaypoint::Roundabout );
 }
@@ -100,9 +100,9 @@ void GosmoreRunner::reverseGeocoding( const GeoDataCoordinates &coordinates )
     GeoDataPlacemark placemark;
     placemark.setCoordinate( coordinates );
 
-    QStringList lines = QString::fromUtf8( output ).split( '\r' );
+    QStringList lines = QString::fromUtf8(output).split(QLatin1Char('\r'));
     if ( lines.size() > 2 ) {
-        QStringList fields = lines.at( lines.size()-2 ).split(',');
+        QStringList fields = lines.at( lines.size()-2 ).split(QLatin1Char(','));
         if ( fields.size() >= 5 ) {
             QString road = fields.last().trimmed();
             placemark.setAddress( road );

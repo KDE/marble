@@ -49,7 +49,7 @@ panoramioDataStructure PanoramioParser::parseObjectOnPosition(const QString &con
     
     // Getting the upload date of the image.
     QString upload_date_string=myEngine.evaluate(QString("upload_date(x)")).toString();
-    QStringList date = upload_date_string.split( ' ' );
+    QStringList date = upload_date_string.split(QLatin1Char(' '));
     if( date.size() == 3 ) {
         unsigned int day = date.at( 0 ).toUInt();
         unsigned int month = 1;

@@ -426,7 +426,7 @@ void NewstuffModelPrivate::uninstall( int index )
     QStringList directories;
     QStringList const files = m_items[index].installedFiles();
     foreach( const QString &file, files ) {
-        if ( file.endsWith( '/' ) ) {
+        if (file.endsWith(QLatin1Char('/'))) {
             directories << file;
         } else {
             QFile::remove( file );
@@ -607,7 +607,7 @@ QString NewstuffModel::targetDirectory() const
 void NewstuffModel::setRegistryFile( const QString &filename, IdTag idTag )
 {
     QString registryFile = filename;
-    if ( registryFile.startsWith( '~' ) && registryFile.length() > 1 ) {
+    if (registryFile.startsWith(QLatin1Char('~')) && registryFile.length() > 1) {
         registryFile = QDir::homePath() + registryFile.mid( 1 );
     }
 
@@ -821,7 +821,7 @@ void NewstuffModel::mapUninstalled()
 void NewstuffModel::contentsListed( int exitStatus )
 {
     if ( exitStatus == 0 ) {
-        QStringList const files = QString( d->m_unpackProcess->readAllStandardOutput() ).split( '\n', QString::SkipEmptyParts );
+        QStringList const files = QString(d->m_unpackProcess->readAllStandardOutput()).split(QLatin1Char('\n'), QString::SkipEmptyParts);
         d->updateRegistry(files);
 
         QObject::disconnect( d->m_unpackProcess, SIGNAL(finished(int)),

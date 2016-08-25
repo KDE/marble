@@ -66,7 +66,7 @@ GeoNode* DgmlBrushTagHandler::parse(GeoParser& parser) const
         GeoSceneGeodata *geodata = parentItem.nodeAs<GeoSceneGeodata>();
         geodata->setBrush( brush );
         if ( !colorMap.isEmpty() ) {
-            const QStringList colorString = colorMap.split(',');
+            const QStringList colorString = colorMap.split(QLatin1Char(','));
 
             QVector<QColor> colorList;
             colorList.reserve(colorString.size());

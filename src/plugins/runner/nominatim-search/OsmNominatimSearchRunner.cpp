@@ -176,20 +176,20 @@ void OsmNominatimRunner::handleResult( QNetworkReply* reply )
                 placemarkName += road;
                 data.addTag("addr:street", road);
             }
-            if (!city.isEmpty() && !placemarkName.contains(",") && city != placemarkName) {
+            if (!city.isEmpty() && !placemarkName.contains(QLatin1Char(',')) && city != placemarkName) {
                 if( !placemarkName.isEmpty() ) {
                     placemarkName += QLatin1String(", ");
                 }
                 placemarkName += city;
                 data.addTag("addr:city", city);
             }
-            if (!administrative.isEmpty()&& !placemarkName.contains(",") && administrative != placemarkName) {
+            if (!administrative.isEmpty() && !placemarkName.contains(QLatin1Char(',')) && administrative != placemarkName) {
                 if( !placemarkName.isEmpty() ) {
                     placemarkName += QLatin1String(", ");
                 }
                 placemarkName += administrative;
             }
-            if (!country.isEmpty()&& !placemarkName.contains(",") && country != placemarkName) {
+            if (!country.isEmpty() && !placemarkName.contains(QLatin1Char(',')) && country != placemarkName) {
                 if( !placemarkName.isEmpty() ) {
                     placemarkName += QLatin1String(", ");
                 }

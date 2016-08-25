@@ -213,7 +213,7 @@ TileLoader::TileStatus TileLoader::tileStatus( GeoSceneTileDataset const *tileDa
 
 void TileLoader::updateTile( QByteArray const & data, QString const & idStr )
 {
-    QStringList const components = idStr.split( ':', QString::SkipEmptyParts );
+    QStringList const components = idStr.split(QLatin1Char(':'), QString::SkipEmptyParts);
     Q_ASSERT( components.size() == 5 );
 
     QString const origin = components[0];
@@ -235,7 +235,7 @@ void TileLoader::updateTile( QByteArray const & data, QString const & idStr )
 
 void TileLoader::updateTile(const QString &fileName, const QString &idStr)
 {
-    QStringList const components = idStr.split( ':', QString::SkipEmptyParts );
+    QStringList const components = idStr.split(QLatin1Char(':'), QString::SkipEmptyParts);
     Q_ASSERT( components.size() == 5 );
 
     QString const origin = components[0];

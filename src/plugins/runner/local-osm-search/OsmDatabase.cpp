@@ -296,7 +296,7 @@ qreal OsmDatabase::bearing( const GeoDataCoordinates &a, const GeoDataCoordinate
 QString OsmDatabase::wildcardQuery( const QString &term )
 {
     QString result = term;
-    if ( term.contains( '*' ) ) {
+    if (term.contains(QLatin1Char('*'))) {
         return QLatin1String(" LIKE '") + result.replace(QLatin1Char('*'), QLatin1Char('%')) + QLatin1Char('\'');
     } else {
         return QLatin1String(" = '") + result + QLatin1Char('\'');

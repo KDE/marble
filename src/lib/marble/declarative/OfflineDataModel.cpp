@@ -48,7 +48,7 @@ QHash<int, QByteArray> OfflineDataModel::roleNames() const
 QVariant OfflineDataModel::data(const QModelIndex &index, int role) const
 {
     if ( index.isValid() && index.row() >= 0 && index.row() < rowCount() && role == Qt::DisplayRole ) {
-        QStringList const data = QSortFilterProxyModel::data( index, role ).toString().split( '/' );
+        QStringList const data = QSortFilterProxyModel::data(index, role).toString().split(QLatin1Char('/'));
         if ( data.size() > 1 ) {
             QString result = data.at( 1 );
             for ( int i=2; i<data.size(); ++i ) {
@@ -62,7 +62,7 @@ QVariant OfflineDataModel::data(const QModelIndex &index, int role) const
     }
 
     if ( index.isValid() && index.row() >= 0 && index.row() < rowCount() && role == Qt::UserRole+17 ) {
-        QStringList const data = QSortFilterProxyModel::data( index, Qt::DisplayRole ).toString().split( '/' );
+        QStringList const data = QSortFilterProxyModel::data(index, Qt::DisplayRole).toString().split(QLatin1Char('/'));
         if ( data.size() > 1 ) {
             return data.first().trimmed();
         }

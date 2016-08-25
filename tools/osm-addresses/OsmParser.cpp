@@ -727,10 +727,10 @@ void OsmParser::writeKml( const QString &area, const QString &version, const QSt
     lineStyle.setColor( color );
     lineStyle.setWidth( 4 );
     style->setLineStyle( lineStyle );
-    style->setId( color.name().replace( '#', 'f' ) );
+    style->setId(color.name().replace(QLatin1Char('#'), QLatin1Char('f')));
 
     GeoDataStyleMap styleMap;
-    styleMap.setId( color.name().replace( '#', 'f' ) );
+    styleMap.setId(color.name().replace(QLatin1Char('#'), QLatin1Char('f')));
     styleMap.insert("normal", QLatin1Char('#') + style->id());
     document->addStyle( style );
 

@@ -205,7 +205,7 @@ QHash<QString, QVariant> StarsPlugin::settings() const
     QStringList planetState;
     foreach (const QString &key, m_renderPlanet.keys())
         planetState += key + QLatin1Char(':') + QString::number((int)m_renderPlanet[key]);
-    settings["renderPlanet"] = planetState.join(QChar('|'));
+    settings["renderPlanet"] = planetState.join(QLatin1Char('|'));
 
     settings["renderEcliptic"] = m_renderEcliptic;
     settings["renderCelestialEquator"] = m_renderCelestialEquator;
@@ -238,9 +238,9 @@ void StarsPlugin::setSettings( const QHash<QString, QVariant> &settings )
 
     m_renderPlanet.clear();
     const QString renderPlanet = readSetting<QString>( settings, "renderPlanet", "" );
-    const QStringList renderStates = renderPlanet.split(QChar('|'));
+    const QStringList renderStates = renderPlanet.split(QLatin1Char('|'));
     foreach(const QString &state, renderStates) {
-        const QStringList stateList = state.split(QChar(':'));
+        const QStringList stateList = state.split(QLatin1Char(':'));
         if (stateList.size() == 2)
             m_renderPlanet[stateList[0]] = (bool)stateList[1].toInt();
     }
@@ -296,7 +296,7 @@ void StarsPlugin::prepareNames()
     QTextStream in( &names );
     while ( !in.atEnd() ) {
         QString line = in.readLine();
-        QStringList list = line.split( ';' );
+        const QStringList list = line.split(QLatin1Char(';'));
         if ( list.size() == 3 ) {
             m_nativeHash[ list.at( 0 ) ] = QCoreApplication::translate( "StarNames", list.at( 1 ).toUtf8().constData() );
             m_abbrHash[ list.at( 0 ) ] = list.at( 2 );
@@ -701,7 +701,7 @@ void StarsPlugin::loadConstellations()
 
         // Ignore Comment lines in header and
         // between constellation entries
-        if ( line.startsWith( '#' ) )    {
+        if (line.startsWith(QLatin1Char('#'))) {
             continue;
         }
 
@@ -740,7 +740,7 @@ void StarsPlugin::loadDsos()
 
         // Ignore Comment lines in header and
         // between dso entries
-        if ( line.startsWith( '#' ) )    {
+        if (line.startsWith(QLatin1Char('#'))) {
             continue;
         }
 

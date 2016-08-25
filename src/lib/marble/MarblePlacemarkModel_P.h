@@ -27,8 +27,8 @@ namespace GeoString
         QString    result;
 
         result = accentString.normalized( QString::NormalizationForm_D ).remove( combiningDiacriticalMarks );
-        result = result.replace(QChar(0x00F8),'o');
-        result = result.replace(QChar(0x0142),'l');
+        result = result.replace(QChar(0x00F8), QLatin1Char('o'));
+        result = result.replace(QChar(0x0142), QLatin1Char('l'));
         return result;
     }
 }

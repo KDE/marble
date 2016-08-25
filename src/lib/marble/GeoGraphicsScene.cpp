@@ -61,7 +61,7 @@ GeoDataStyle::Ptr GeoGraphicsScenePrivate::highlightStyle( const GeoDataDocument
 {
     // @todo Consider QUrl parsing when external styles are suppported
     QString highlightStyleId = styleMap.value("highlight");
-    highlightStyleId.remove('#');
+    highlightStyleId.remove(QLatin1Char('#'));
     if ( !highlightStyleId.isEmpty() ) {
         GeoDataStyle::Ptr highlightStyle(new GeoDataStyle( *document->style(highlightStyleId) ));
         return highlightStyle;
@@ -189,7 +189,7 @@ void GeoGraphicsScene::applyHighlight( const QVector< GeoDataPlacemark* > &selec
                         if ( parent->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
                             GeoDataDocument *doc = static_cast<GeoDataDocument*>( parent );
                             QString styleUrl = placemark->styleUrl();
-                            styleUrl.remove('#');
+                            styleUrl.remove(QLatin1Char('#'));
                             if ( !styleUrl.isEmpty() ) {
                                 GeoDataStyleMap const &styleMap = doc->styleMap( styleUrl );
                                 GeoDataStyle::Ptr style = d->highlightStyle( doc, styleMap );

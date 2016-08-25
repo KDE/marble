@@ -42,7 +42,7 @@ void HostipRunner::slotNoResults()
 
 void HostipRunner::search( const QString &searchTerm, const GeoDataLatLonBox & )
 {
-    if( !searchTerm.contains('.') ) {
+    if (!searchTerm.contains(QLatin1Char('.'))) {
         // Simple IP/hostname heuristic to avoid requests not needed:
         // String must contain at least one dot.
         slotNoResults();

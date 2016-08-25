@@ -70,7 +70,7 @@ void CycleStreetsRunner::retrieveRoute( const RouteRequest *route )
     QUrl url("http://www.cyclestreets.net/api/journey.xml");
     QMap<QString, QString> queryStrings;
     queryStrings["key"] = "cdccf13997d59e70";
-    queryStrings["useDom"] = '1';
+    queryStrings["useDom"] = QLatin1Char('1');
     queryStrings["plan"] = settings["plan"].toString();
     queryStrings["speed"] = settings["speed"].toString();
     GeoDataCoordinates::Unit const degree = GeoDataCoordinates::Degree;
@@ -160,13 +160,13 @@ GeoDataDocument *CycleStreetsRunner::parse( const QByteArray &content ) const
     QDomElement route = features.at( 0 ).toElement().firstChild().toElement();
     QDomElement lineString = route.elementsByTagName( "gml:LineString" ).at( 0 ).toElement();
     QDomElement coordinates = lineString.toElement().elementsByTagName( "gml:coordinates" ).at( 0 ).toElement();
-    QStringList coordinatesList = coordinates.text().split( ' ' );
+    QStringList coordinatesList = coordinates.text().split(QLatin1Char(' '));
 
     QStringList::iterator iter = coordinatesList.begin();
     QStringList::iterator end = coordinatesList.end();
 
     for( ; iter != end; ++iter) {
-        QStringList coordinate =  iter->split(',');
+        const QStringList coordinate =  iter->split(QLatin1Char(','));
         if ( coordinate.size() == 2 ) {
             double const lon = coordinate.at( 0 ).toDouble();
             double const lat = coordinate.at( 1 ).toDouble();
@@ -194,8 +194,8 @@ GeoDataDocument *CycleStreetsRunner::parse( const QByteArray &content ) const
 
         QString name = segment.elementsByTagName( "cs:name" ).at( 0 ).toElement().text();
         QString maneuver = segment.elementsByTagName( "cs:turn" ).at( 0 ).toElement().text();
-        QStringList points = segment.elementsByTagName( "cs:points" ).at( 0 ).toElement().text().split( ' ' );
-        QStringList const elevation = segment.elementsByTagName( "cs:elevations" ).at( 0 ).toElement().text().split( ',' );
+        QStringList points = segment.elementsByTagName( "cs:points" ).at( 0 ).toElement().text().split(QLatin1Char(' '));
+        QStringList const elevation = segment.elementsByTagName( "cs:elevations" ).at( 0 ).toElement().text().split(QLatin1Char(','));
 
         GeoDataPlacemark *instructions = new GeoDataPlacemark;
         QString instructionName;
@@ -220,7 +220,7 @@ GeoDataDocument *CycleStreetsRunner::parse( const QByteArray &content ) const
         QStringList::iterator iter = points.begin();
         QStringList::iterator end = points.end();
         for  ( int j=0; iter != end; ++iter, ++j ) {
-            QStringList coordinate = iter->split( ',' );
+            const QStringList coordinate = iter->split(QLatin1Char(','));
             if ( coordinate.size() == 2 ) {
                 double const lon = coordinate.at( 0 ).toDouble();
                 double const lat = coordinate.at( 1 ).toDouble();

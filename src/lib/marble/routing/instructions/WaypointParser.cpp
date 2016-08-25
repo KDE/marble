@@ -28,7 +28,7 @@ QString WaypointParser::readField<QString>( Field field, const QStringList &fiel
 }
 
 // The default values are suitable for older versions of gosmore (the one shipped with Ubuntu Lucid Lynx)
-WaypointParser::WaypointParser() : m_lineSeparator( '\n' ), m_fieldSeparator( ',' )
+WaypointParser::WaypointParser() : m_lineSeparator(QStringLiteral("\n")), m_fieldSeparator(QLatin1Char(','))
 {
     setFieldIndex( Latitude, 0 );
     setFieldIndex( Longitude, 1 );
@@ -63,7 +63,7 @@ RoutingWaypoints WaypointParser::parse( QTextStream &stream ) const
     QStringList lines = input.split( m_lineSeparator );
     foreach( const QString &line, lines ) {
         if ( !line.trimmed().isEmpty() &&
-             !line.trimmed().startsWith('#') &&
+             !line.trimmed().startsWith(QLatin1Char('#')) &&
              !line.startsWith( QLatin1String( "Content-Type: text/plain" ) ) ) {
             QStringList entries = line.split( m_fieldSeparator );
             if ( entries.size() >= 1 + m_fieldIndices[RoadName] ) {

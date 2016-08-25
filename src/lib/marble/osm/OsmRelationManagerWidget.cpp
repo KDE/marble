@@ -68,7 +68,7 @@ OsmRelationManagerWidget::~OsmRelationManagerWidget()
 void OsmRelationManagerWidget::addRelation( QAction *relationAction )
 {
     // The QAction::text() adds a '&' for some reason
-    QString relationText = relationAction->text().remove( '&' );
+    QString relationText = relationAction->text().remove(QLatin1Char('&'));
 
     if ( relationText == tr( "New Relation" ) ) {
         OsmPlacemarkData relationData;

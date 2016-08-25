@@ -504,8 +504,8 @@ void MergedLayerDecorator::Private::paintSunShading( QImage *tileImage, const Ti
 void MergedLayerDecorator::Private::paintTileId( QImage *tileImage, const TileId &id ) const
 {
     QString filename = QString( "%1_%2.jpg" )
-            .arg( id.x(), tileDigits, 10, QChar('0') )
-            .arg( id.y(), tileDigits, 10, QChar('0') );
+            .arg(id.x(), tileDigits, 10, QLatin1Char('0'))
+            .arg(id.y(), tileDigits, 10, QLatin1Char('0'));
 
     QPainter painter( tileImage );
 

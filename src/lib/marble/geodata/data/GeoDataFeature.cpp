@@ -260,7 +260,7 @@ void GeoDataFeature::setStyleUrl( const QString &value )
     }
 
     QString styleUrl = value;
-    styleUrl.remove('#');
+    styleUrl.remove(QLatin1Char('#'));
     GeoDataObject *object = parent();
     bool found = false;
     while ( object && !found ) {
@@ -269,7 +269,7 @@ void GeoDataFeature::setStyleUrl( const QString &value )
             GeoDataStyleMap &styleMap = doc->styleMap( styleUrl );
             if( !styleMap.value( QString( "normal" ) ).isEmpty() ) {
                 styleUrl = styleMap.value( QString( "normal" ) );
-                styleUrl.remove('#');
+                styleUrl.remove(QLatin1Char('#'));
             }
             // Not calling setStyle here because we don't want
             // re-parenting of the style

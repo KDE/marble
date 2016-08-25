@@ -94,12 +94,11 @@ int main(int argc, char *argv[])
     {
         rawline = sourcestream.readLine();
 
-        if ( !rawline.contains( QChar(' ') ) )
-        {
+        if (!rawline.contains(QLatin1Char(' '))) {
             qDebug() << "Line " << line << " does not contain a space separator.";
             continue;
         } 
-        splitline = rawline.split( QChar(' ') );
+        splitline = rawline.split(QLatin1Char(' '));
 
         lonstring = splitline[0];
         latstring = splitline[1];

@@ -180,7 +180,7 @@ void StationListParser::readPoint( BBCStation *station )
         if ( isStartElement() ) {
             if (name() == QLatin1String("coordinates")) {
                 QString coorString = readCharacters();
-                QStringList coorList = coorString.split( ',' );
+                QStringList coorList = coorString.split(QLatin1Char(','));
                 
                 if ( coorList.size() >= 2 ) {
                     GeoDataCoordinates coordinates( coorList.at( 0 ).toFloat() * DEG2RAD,

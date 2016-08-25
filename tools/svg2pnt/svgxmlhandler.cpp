@@ -41,7 +41,7 @@ bool SVGXmlHandler::startElement(const QString& nspace,
 
         QStringList  stringlist;
         coordinates.chop(2);
-        stringlist << coordinates.mid( 1 ).split( 'L' );
+        stringlist << coordinates.mid(1).split(QLatin1Char('L'));
         // The last element is the first element
         //		stringlist.removeLast();
         bool     firstheader = true;
@@ -58,8 +58,8 @@ bool SVGXmlHandler::startElement(const QString& nspace,
             // qDebug()<<str;
             float  x;
             float  y;
-            x = str.section( ',', 0, 0 ).toFloat();
-            y = str.section( ',', 1, 1 ).toFloat();
+            x = str.section(QLatin1Char(','), 0, 0).toFloat();
+            y = str.section(QLatin1Char(','), 1, 1).toFloat();
 			
             // qDebug() << "x:" << x << "y:" << y;
 			

@@ -282,7 +282,7 @@ public:
         m_plugin( plugin ),
         m_name( name )
     {
-        QStringList starlist = stars.split(" ");
+        const QStringList starlist = stars.split(QLatin1Char(' '));
         for (int i = 0; i < starlist.size(); ++i) {
             m_stars << starlist.at(i).toInt();
         }

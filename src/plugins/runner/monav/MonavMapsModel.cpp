@@ -74,7 +74,7 @@ QVariant MonavMapsModel::data ( const QModelIndex & index, int role ) const
                 return QString( "%1 MB" ).arg( 1 + m_data.at( row ).size() / 1024 / 1024 );
             case 3: {
                 QString payload = m_data.at( row ).payload();
-                payload = payload.mid( payload.lastIndexOf( "/" ) + 1 );
+                payload = payload.mid(payload.lastIndexOf(QLatin1Char('/')) + 1);
                 if ( m_remoteMaps.contains( payload ) ) {
                     QDate remote = QDate::fromString( m_remoteMaps[payload], "MM/dd/yy" );
                     QDate local = QDate::fromString( m_data.at( row ).date(), "MM/dd/yy" );

@@ -27,9 +27,9 @@ QString adjustGosmoreVersion( QTextStream &stream, WaypointParser &parser )
 {
     QString content = stream.readAll();
     if ( !QCoreApplication::instance()->arguments().contains( "--routino" ) ) {
-        QStringList lines = content.split( '\r' );
+        QStringList lines = content.split(QLatin1Char('\r'));
         if ( lines.size() > 2 ) {
-            QStringList fields = lines.at( lines.size()-2 ).split(',');
+            QStringList fields = lines.at( lines.size()-2 ).split(QLatin1Char(','));
             parser.setFieldIndex( WaypointParser::RoadType, fields.size()-3 );
             parser.setFieldIndex( WaypointParser::TotalSecondsRemaining, fields.size()-2 );
             parser.setFieldIndex( WaypointParser::RoadName, fields.size()-1 );
@@ -43,7 +43,7 @@ void loadTranslations( QCoreApplication &app, QTranslator &translator )
     const QString lang = QLocale::system().name();
     QString code;
 
-    int index = lang.indexOf ( '_' );
+    int index = lang.indexOf(QLatin1Char('_'));
     if (lang == QLatin1String("C")) {
         code = "en";
     }
@@ -51,7 +51,7 @@ void loadTranslations( QCoreApplication &app, QTranslator &translator )
         code = lang.left ( index );
     }
     else {
-        index = lang.indexOf ( '@' );
+        index = lang.indexOf(QLatin1Char('@'));
         if ( index != -1 )
             code = lang.left ( index );
         else
@@ -113,7 +113,7 @@ int main( int argc, char* argv[] )
     if ( arguments.contains( "--routino" ) )
     {
         parser.setLineSeparator( "\n" );
-        parser.setFieldSeparator( '\t' );
+        parser.setFieldSeparator(QLatin1Char('\t'));
         parser.setFieldIndex( WaypointParser::RoadName, 10 );
     }
     else

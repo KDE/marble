@@ -49,7 +49,7 @@ const int timeBetweenDownloads = 1500;
 const qreal boxComparisonFactor = 16.0;
 
 // Separator to separate the id of the item from the file type
-const char fileIdSeparator = '_';
+const QChar fileIdSeparator = QLatin1Char('_');
 
 class FavoritesModel;
 

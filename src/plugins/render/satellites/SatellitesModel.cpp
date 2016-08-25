@@ -148,7 +148,7 @@ void SatellitesModel::parseCatalog( const QString &id,
     QString line = ts.readLine();
     for( ; !line.isNull(); line = ts.readLine() ) {
 
-        if( line.trimmed().startsWith( QLatin1String( "#" ) ) ) {
+        if (line.trimmed().startsWith(QLatin1Char('#'))) {
             continue;
         }
 

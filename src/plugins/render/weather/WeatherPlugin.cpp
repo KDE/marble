@@ -311,7 +311,7 @@ void WeatherPlugin::updateItemSettings()
 
 void WeatherPlugin::favoriteItemsChanged( const QStringList& favoriteItems )
 {
-    m_settings["favoriteItems"] = favoriteItems.join( "," );
+    m_settings["favoriteItems"] = favoriteItems.join(QLatin1Char(','));
     emit settingsChanged( nameId() );
     updateSettings();
 }

@@ -143,7 +143,7 @@ void GeoSceneTileDataset::setTileLevels(const QString &tileLevels)
         return;
     }
 
-    QStringList values = tileLevels.split(',');
+    const QStringList values = tileLevels.split(QLatin1Char(','));
     foreach(const QString &value, values) {
         bool canParse(false);
         int const tileLevel = value.trimmed().toInt(&canParse);
@@ -260,8 +260,8 @@ QString GeoSceneTileDataset::relativeTileFileName( const TileId &id ) const
         relFileName = QString( "%1/%2/%3/%3_%4.%5" )
             .arg( themeStr() )
             .arg( id.zoomLevel() )
-            .arg( id.y(), tileDigits, 10, QChar('0') )
-            .arg( id.x(), tileDigits, 10, QChar('0') )
+            .arg(id.y(), tileDigits, 10, QLatin1Char('0'))
+            .arg(id.x(), tileDigits, 10, QLatin1Char('0'))
             .arg( suffix );
         break;
     case GeoSceneTileDataset::OpenStreetMap:

@@ -33,7 +33,7 @@ bool SVGXmlHandler::startElement(const QString& /*nspace*/,
 
         // This requires absolute paths and repeated L commands to
         // to be enforced in inkscape!
-        stringlist << coordinates.mid( 1 ).split( 'L' );
+        stringlist << coordinates.mid(1).split(QLatin1Char('L'));
         bool     firstheader = true;
 
         int  count = 0;
@@ -41,8 +41,8 @@ bool SVGXmlHandler::startElement(const QString& /*nspace*/,
         foreach ( const QString& str, stringlist ) {
             float  x;
             float  y;
-            x = str.section( ',', 0, 0 ).toFloat();
-            y = str.section( ',', 1, 1 ).toFloat();
+            x = str.section(QLatin1Char(','), 0, 0).toFloat();
+            y = str.section(QLatin1Char(','), 1, 1).toFloat();
 						
             short  header;
             short  lat;

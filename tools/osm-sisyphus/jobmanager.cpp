@@ -74,7 +74,7 @@ void JobManager::setRegionsFile(const QString &filename)
             region.setPbfFile(node.namedItem("pbf").toElement().text());
         }
         if (!node.namedItem("transport").isNull()) {
-            QStringList input = node.namedItem("transport").toElement().text().split(',', QString::SkipEmptyParts);
+            QStringList input = node.namedItem("transport").toElement().text().split(QLatin1Char(','), QString::SkipEmptyParts);
             foreach( const QString &value, input ) {
                 if (!region.continent().isEmpty() && !region.name().isEmpty()) {
                     PendingJob job;

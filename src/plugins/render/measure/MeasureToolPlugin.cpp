@@ -533,7 +533,7 @@ QString MeasureToolPlugin::meterToPreferredUnit(qreal meters, bool isSquare) con
         unitString.append(QChar(0xB2));
     }
 
-    return QString("%L1 %2").arg(convertedMeters, 8, 'f', 1, QChar(' '))
+    return QString("%L1 %2").arg(convertedMeters, 8, 'f', 1, QLatin1Char(' '))
                             .arg(unitString);
 }
 

@@ -258,7 +258,7 @@ void Placemark::addTagValue(QString &target, const QString &key) const
     auto const & osmData = m_placemark.osmData();
     QString const value = osmData.tagValue(key);
     QString description = value;
-    description.replace(';', " · ");
+    description.replace(QLatin1Char(';'), " · ");
     addTagDescription(target, key, value, description);
 }
 

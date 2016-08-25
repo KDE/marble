@@ -231,7 +231,7 @@ void MonavConfigWidgetPrivate::parseNewStuff( const QByteArray &data )
         QDomNodeList payloads = node.toElement().elementsByTagName( "payload" );
         if ( payloads.size() == 1 ) {
             QString payload = payloads.at( 0 ).toElement().text();
-            filename = payload.mid( 1 + payload.lastIndexOf( "/" ) );
+            filename = payload.mid(1 + payload.lastIndexOf(QLatin1Char('/')));
             item.setPayload( payload );
         }
 
@@ -486,7 +486,7 @@ void MonavConfigWidget::cancelOperation()
 void MonavConfigWidgetPrivate::install()
 {
     if ( !m_currentDownload.isEmpty() ) {
-        int const index = m_currentDownload.lastIndexOf( "/");
+        int const index = m_currentDownload.lastIndexOf(QLatin1Char('/'));
         const QString localFile = MarbleDirs::localPath() + QLatin1String("/maps") + m_currentDownload.mid(index);
         m_currentFile.setFileName( localFile );
         if ( m_currentFile.open( QFile::WriteOnly ) ) {

@@ -95,7 +95,7 @@ void FileStorageWatcherThread::getCurrentCacheSize()
                      QDir::Files | QDir::Writable,
                      QDirIterator::Subdirectories );
     
-    int basePathDepth = basePath.split('/').size();
+    const int basePathDepth = basePath.split(QLatin1Char('/')).size();
     while( it.hasNext() && !m_willQuit ) {
         it.next();
         QFileInfo file = it.fileInfo();
@@ -103,7 +103,7 @@ void FileStorageWatcherThread::getCurrentCacheSize()
         // FIXME, when vectortiling I suppose also vector tiles will have
         // to be deleted
         QString suffix = file.suffix().toLower();
-        QStringList path = file.path().split('/');
+        const QStringList path = file.path().split(QLatin1Char('/'));
 
         // planet/theme/tilelevel should be deeper than 4
         if ( ( path.size() > basePathDepth + 3 ) &&

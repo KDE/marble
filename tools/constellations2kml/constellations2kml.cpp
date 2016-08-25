@@ -105,7 +105,7 @@ int main(int argc, char *argv[])
 
             // Ignore Comment lines in header and
             // between constellation entries
-            if ( name.startsWith( '#' ) )    {
+            if (name.startsWith(QLatin1Char('#'))) {
                 continue;
             }
 
@@ -122,7 +122,7 @@ int main(int argc, char *argv[])
                 << "            <LineString> \n"
                 << "                <coordinates> \n";
 
-            starIndexes = indexList.split( ' ' );
+            starIndexes = indexList.split(QLatin1Char(' '));
             QList<qreal> x;
             QList<qreal> y;
             QList<qreal> z;
