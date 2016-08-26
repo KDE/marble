@@ -94,8 +94,8 @@ int main(int argc, char *argv[])
             if ( !rawline.startsWith(QLatin1String( "\"V\"|\"V\"|\"" ) ) ) {
                 continue;
             }
-            rawline = rawline.replace( "\"|", "|" );
-            rawline = rawline.replace( "|\"", "|" );
+            rawline.replace(QStringLiteral("\"|"), QStringLiteral("|"));
+            rawline.replace(QStringLiteral("|\""), QStringLiteral("|"));
             if (rawline.startsWith(QLatin1Char('\"')) && rawline.endsWith(QLatin1Char('\"'))) {
                 rawline = rawline.left( rawline.length() - 1 );
                 rawline = rawline.right( rawline.length() - 2 );

@@ -175,7 +175,7 @@ GeoNode* KmlcoordinatesTagHandler::parse( GeoParser& parser ) const
     if( parentItem.represents( kmlTag_Track ) ) {
         QString input = parser.readElementText().trimmed();
         if ( !kmlStrictSpecs ) {
-            input = input.replace(QRegExp(QStringLiteral("\\s*,\\s*")), QStringLiteral(","));
+            input.replace(QRegExp(QStringLiteral("\\s*,\\s*")), QStringLiteral(","));
         }
         const QStringList coordinates = input.split(QLatin1Char(' '));
 

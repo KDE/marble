@@ -191,7 +191,7 @@ void MarbleWidgetPopupMenu::Private::setupDialogOsm( PopupLayer *popup, const Ge
     QString description = descriptionFile.readAll();
     OsmPlacemarkData data = placemark->osmData();
     if (!data.containsTagKey("addr:street") && !data.containsTagKey("addr:housenumber")){
-        description = description.replace("<br> %postcode%", "%postcode%");
+        description.replace(QStringLiteral("<br> %postcode%"), QStringLiteral("%postcode%"));
     }
     TemplateDocument doc(description);
 
@@ -710,12 +710,12 @@ void MarbleWidgetPopupMenu::slotInfoDialog()
 
             QString content = placemark->style()->balloonStyle().text();
             if (content.length() > 0) {
-                content = content.replace("$[name]", placemark->name(), Qt::CaseInsensitive);
-                content = content.replace("$[description]", placemark->description(), Qt::CaseInsensitive);
-                content = content.replace("$[address]", placemark->address(), Qt::CaseInsensitive);
+                content.replace(QStringLiteral("$[name]"), placemark->name(), Qt::CaseInsensitive);
+                content.replace(QStringLiteral("$[description]"), placemark->description(), Qt::CaseInsensitive);
+                content.replace(QStringLiteral("$[address]"), placemark->address(), Qt::CaseInsensitive);
                 // @TODO: implement the line calculation, so that snippet().maxLines actually has effect.
-                content = content.replace("$[snippet]", placemark->snippet().text(), Qt::CaseInsensitive);
-                content = content.replace("$[id]", placemark->id(), Qt::CaseInsensitive);
+                content.replace(QStringLiteral("$[snippet]"), placemark->snippet().text(), Qt::CaseInsensitive);
+                content.replace(QStringLiteral("$[id]"), placemark->id(), Qt::CaseInsensitive);
                 QString const basePath = placemark->resolvePath(".");
                 QUrl const baseUrl = (basePath != QLatin1String(".")) ? QUrl::fromLocalFile(basePath + QLatin1Char('/')) : QUrl();
                 popup->setContent(content, baseUrl );
