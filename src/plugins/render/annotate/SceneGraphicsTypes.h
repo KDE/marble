@@ -21,10 +21,12 @@ namespace Marble
 
 namespace SceneGraphicsTypes
 {
-    extern const char *SceneGraphicAreaAnnotation;
-    extern const char *SceneGraphicGroundOverlay;
-    extern const char *SceneGraphicTextAnnotation;
-    extern const char *SceneGraphicPolylineAnnotation;
+
+extern const char SceneGraphicAreaAnnotation[];
+extern const char SceneGraphicGroundOverlay[];
+extern const char SceneGraphicTextAnnotation[];
+extern const char SceneGraphicPolylineAnnotation[];
+
 }
 
 }

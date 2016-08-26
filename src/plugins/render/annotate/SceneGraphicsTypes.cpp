@@ -17,10 +17,10 @@ namespace Marble
 
 namespace SceneGraphicsTypes
 {
-    const char *SceneGraphicAreaAnnotation = "SceneGraphicAreaAnnotation";
-	const char *SceneGraphicGroundOverlay = "SceneGraphicGroundOverlay";
-	const char *SceneGraphicTextAnnotation = "SceneGraphicTextAnnotation";
-    const char *SceneGraphicPolylineAnnotation = "SceneGraphicPolylineAnnotation";
+const char SceneGraphicAreaAnnotation[] = "SceneGraphicAreaAnnotation";
+const char SceneGraphicGroundOverlay[] = "SceneGraphicGroundOverlay";
+const char SceneGraphicTextAnnotation[] = "SceneGraphicTextAnnotation";
+const char SceneGraphicPolylineAnnotation[] = "SceneGraphicPolylineAnnotation";
 }
 
 }
