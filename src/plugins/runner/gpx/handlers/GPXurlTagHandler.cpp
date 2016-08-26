@@ -39,7 +39,6 @@ GeoNode* GPXurlTagHandler::parse(GeoParser& parser) const
     {
         GeoDataPlacemark* placemark = parentItem.nodeAs<GeoDataPlacemark>();
 
-        QXmlStreamAttributes attributes = parser.attributes();
         QString url = parser.readElementText().trimmed();
 
         GeoDataExtendedData extendedData = placemark->extendedData();
