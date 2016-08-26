@@ -32,37 +32,37 @@ class StyleBuilder::Private
 public:
     Private();
 
-    static GeoDataStyle::Ptr createStyle( qreal width, qreal realWidth, const QColor& color,
+    GeoDataStyle::Ptr createStyle(qreal width, qreal realWidth, const QColor& color,
                                       const QColor& outlineColor, bool fill, bool outline,
                                       Qt::BrushStyle brushStyle, Qt::PenStyle penStyle,
                                       Qt::PenCapStyle capStyle, bool lineBackground,
-                                      const QVector< qreal >& dashPattern = QVector< qreal >(),
-                                      const QFont& font = QFont(QLatin1String("Arial")), const QColor& fontColor = Qt::black,
+                                      const QVector< qreal >& dashPattern,
+                                      const QFont& font, const QColor& fontColor = Qt::black,
                                       const QString& texturePath = QString());
-    static GeoDataStyle::Ptr createPOIStyle(const QFont &font, const QString &bitmap,
+    GeoDataStyle::Ptr createPOIStyle(const QFont &font, const QString &bitmap,
                                          const QColor &textColor = Qt::black,
                                          const QColor &color = QColor( 0xBE, 0xAD, 0xAD ),
                                          const QColor &outline = QColor( 0xBE, 0xAD, 0xAD ).darker(),
                                          bool fill=true, bool renderOutline=true);
-    static GeoDataStyle::Ptr createOsmPOIStyle(const QFont &font, const QString &bitmap,
+    GeoDataStyle::Ptr createOsmPOIStyle(const QFont &font, const QString &bitmap,
                                          const QColor &textColor = Qt::black,
                                          const QColor &color = QColor( 0xBE, 0xAD, 0xAD ),
                                          const QColor &outline = QColor( 0xBE, 0xAD, 0xAD ).darker());
-    static GeoDataStyle::Ptr createOsmPOIRingStyle(const QFont &font, const QString &bitmap,
+    GeoDataStyle::Ptr createOsmPOIRingStyle(const QFont &font, const QString &bitmap,
                                          const QColor &textColor = Qt::black,
                                          const QColor &color = QColor( 0xBE, 0xAD, 0xAD ),
                                          const QColor &outline = QColor( 0xBE, 0xAD, 0xAD ).darker());
-    static GeoDataStyle::Ptr createOsmPOIAreaStyle(const QFont &font, const QString &bitmap,
+    GeoDataStyle::Ptr createOsmPOIAreaStyle(const QFont &font, const QString &bitmap,
                                          const QColor &textColor = Qt::black,
                                          const QColor &color = QColor( 0xBE, 0xAD, 0xAD ),
                                          const QColor &outline = QColor( 0xBE, 0xAD, 0xAD ).darker());
-    static GeoDataStyle::Ptr createHighwayStyle( const QColor& color, const QColor& outlineColor, const QFont& font = QFont(QLatin1String("Arial")),
+    GeoDataStyle::Ptr createHighwayStyle(const QColor& color, const QColor& outlineColor, const QFont& font,
                                              const QColor& fontColor = Qt::black,
                                              qreal width = 1, qreal realWidth = 0.0,
                                              Qt::PenStyle penStyle = Qt::SolidLine,
                                              Qt::PenCapStyle capStyle = Qt::RoundCap,
                                              bool lineBackground = false);
-    static GeoDataStyle::Ptr createWayStyle( const QColor& color, const QColor& outlineColor,
+    GeoDataStyle::Ptr createWayStyle(const QColor& color, const QColor& outlineColor,
                                          bool fill = true, bool outline = true,
                                          Qt::BrushStyle brushStyle = Qt::SolidPattern,
                                          const QString& texturePath = QString());
@@ -215,7 +215,7 @@ StyleBuilder::Private::Private() :
 GeoDataStyle::Ptr StyleBuilder::Private::createPOIStyle(const QFont &font, const QString &path,
                                      const QColor &textColor, const QColor &color, const QColor &outline, bool fill, bool renderOutline)
 {
-    GeoDataStyle::Ptr style =  createStyle(1, 0, color, outline, fill, renderOutline, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false);
+    GeoDataStyle::Ptr style =  createStyle(1, 0, color, outline, fill, renderOutline, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false, QVector<qreal>(), font);
     style->setIconStyle( GeoDataIconStyle( path) );
     auto const screen = QApplication::screens().first();
     double const physicalSize = 6.0; // mm
@@ -258,7 +258,7 @@ GeoDataStyle::Ptr StyleBuilder::Private::createHighwayStyle( const QColor& color
 GeoDataStyle::Ptr StyleBuilder::Private::createWayStyle( const QColor& color, const QColor& outlineColor,
                                      bool fill, bool outline, Qt::BrushStyle brushStyle, const QString& texturePath)
 {
-    return createStyle( 1, 0, color, outlineColor, fill, outline, brushStyle, Qt::SolidLine, Qt::RoundCap, false, QVector< qreal >(), QFont("Arial"), Qt::black, texturePath );
+    return createStyle(1, 0, color, outlineColor, fill, outline, brushStyle, Qt::SolidLine, Qt::RoundCap, false, QVector<qreal>(), m_defaultFont, Qt::black, texturePath);
 }
 
 GeoDataStyle::Ptr StyleBuilder::Private::createStyle( qreal width, qreal realWidth, const QColor& color,
@@ -619,7 +619,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
 
     m_defaultStyle[GeoDataFeature::ManmadeBridge]            = StyleBuilder::Private::createWayStyle(QColor("#b8b8b8"), Qt::transparent, true, true);
     m_defaultStyle[GeoDataFeature::ManmadeLighthouse]        = StyleBuilder::Private::createOsmPOIStyle( osmFont, "transportation/lighthouse.16", transportationColor, "#f2efe9", QColor( "#f2efe9" ).darker() );
-    m_defaultStyle[GeoDataFeature::ManmadePier]              = StyleBuilder::Private::createStyle(0.0, 3.0, "#f2efe9", "#f2efe9", true, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false );
+    m_defaultStyle[GeoDataFeature::ManmadePier]              = StyleBuilder::Private::createStyle(0.0, 3.0, "#f2efe9", "#f2efe9", true, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector<qreal>(), osmFont);
     m_defaultStyle[GeoDataFeature::ManmadeWaterTower]        = StyleBuilder::Private::createOsmPOIStyle( osmFont, "amenity/water_tower.16", amenityColor );
     m_defaultStyle[GeoDataFeature::ManmadeWindMill]          = StyleBuilder::Private::createOsmPOIStyle( osmFont, "amenity/windmill.16", amenityColor );
 
@@ -670,44 +670,44 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataFeature::PowerTower]               = StyleBuilder::Private::createOsmPOIStyle( osmFont, "individual/power_tower", QColor( "#888888" ) );
     m_defaultStyle[GeoDataFeature::PowerTower]->iconStyle().setScale(0.6);
 
-    m_defaultStyle[GeoDataFeature::BarrierCityWall]          = StyleBuilder::Private::createStyle(6.0, 3.0, "#787878", Qt::transparent, true, false, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector<qreal>(), QFont(), Qt::transparent);
+    m_defaultStyle[GeoDataFeature::BarrierCityWall]          = StyleBuilder::Private::createStyle(6.0, 3.0, "#787878", Qt::transparent, true, false, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector<qreal>(), osmFont, Qt::transparent);
     m_defaultStyle[GeoDataFeature::BarrierGate]              = StyleBuilder::Private::createOsmPOIStyle( osmFont, "individual/gate" );
     m_defaultStyle[GeoDataFeature::BarrierLiftGate]          = StyleBuilder::Private::createOsmPOIStyle( osmFont, "individual/liftgate" );
-    m_defaultStyle[GeoDataFeature::BarrierWall]              = StyleBuilder::Private::createStyle(2.0, 0.0, "#787878", Qt::transparent, true, false, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector<qreal>(), QFont(), Qt::transparent);
+    m_defaultStyle[GeoDataFeature::BarrierWall]              = StyleBuilder::Private::createStyle(2.0, 0.0, "#787878", Qt::transparent, true, false, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector<qreal>(), osmFont, Qt::transparent);
 
-    m_defaultStyle[GeoDataFeature::HighwaySteps]             = StyleBuilder::Private::createStyle(0.0, 2.0, "#fa8072", QColor(Qt::white), true, true, Qt::SolidPattern, Qt::CustomDashLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3 );
-    m_defaultStyle[GeoDataFeature::HighwayUnknown]           = StyleBuilder::Private::createHighwayStyle( "#dddddd", "#bbbbbb", QFont(QStringLiteral("Arial")), "000000", 0, 1);
-    m_defaultStyle[GeoDataFeature::HighwayPath]              = StyleBuilder::Private::createHighwayStyle( "#dddde8", "#999999", QFont(QStringLiteral("Arial")), "000000", 0, 1, Qt::DotLine, Qt::SquareCap, true);
-    m_defaultStyle[GeoDataFeature::HighwayTrack]             = StyleBuilder::Private::createHighwayStyle( "#996600", QColor(Qt::white), QFont(QStringLiteral("Arial")), "000000", 1, 1, Qt::DashLine, Qt::SquareCap, true);
-    m_defaultStyle[GeoDataFeature::HighwayPedestrian]        = StyleBuilder::Private::createHighwayStyle( "#dddde8", "#999999", QFont(QStringLiteral("Arial")), "000000", 0, 2);
-    m_defaultStyle[GeoDataFeature::HighwayFootway]           = StyleBuilder::Private::createHighwayStyle( "#fa8072", QColor(Qt::white), QFont(QStringLiteral("Arial")), "000000", 0, 2, Qt::DotLine, Qt::SquareCap, true);
-    m_defaultStyle[GeoDataFeature::HighwayCycleway]          = StyleBuilder::Private::createHighwayStyle( QColor(Qt::blue), QColor(Qt::white), QFont(QStringLiteral("Arial")), "000000", 0, 2, Qt::DotLine, Qt::SquareCap, true);
-    m_defaultStyle[GeoDataFeature::HighwayService]           = StyleBuilder::Private::createHighwayStyle( "#ffffff", "#bbbbbb", QFont(QStringLiteral("Arial")), "000000", 1, 6 );
-    m_defaultStyle[GeoDataFeature::HighwayResidential]       = StyleBuilder::Private::createHighwayStyle( "#ffffff", "#bbbbbb", QFont(QStringLiteral("Arial")), "000000", 3, 6 );
-    m_defaultStyle[GeoDataFeature::HighwayLivingStreet]      = StyleBuilder::Private::createHighwayStyle( "#ffffff", "#bbbbbb", QFont(QStringLiteral("Arial")), "000000", 3, 6 );
-    m_defaultStyle[GeoDataFeature::HighwayRoad]              = StyleBuilder::Private::createHighwayStyle( "#dddddd", "#bbbbbb", QFont(QStringLiteral("Arial")), "000000", 3, 6 );
-    m_defaultStyle[GeoDataFeature::HighwayUnclassified]      = StyleBuilder::Private::createHighwayStyle( "#ffffff", "#bbbbbb", QFont(QStringLiteral("Arial")), "000000", 3, 6 );
-    m_defaultStyle[GeoDataFeature::HighwayTertiary]          = StyleBuilder::Private::createHighwayStyle( "#ffffff", "#8f8f8f", QFont(QStringLiteral("Arial")), "000000", 6, 6 );
-    m_defaultStyle[GeoDataFeature::HighwayTertiaryLink]      = StyleBuilder::Private::createHighwayStyle( "#ffffff", "#8f8f8f", QFont(QStringLiteral("Arial")), "000000", 6, 6 );
-    m_defaultStyle[GeoDataFeature::HighwaySecondary]         = StyleBuilder::Private::createHighwayStyle( "#f7fabf", "#707d05", QFont(QStringLiteral("Arial")), "000000", 6, 6 );
-    m_defaultStyle[GeoDataFeature::HighwaySecondaryLink]     = StyleBuilder::Private::createHighwayStyle( "#f7fabf", "#707d05", QFont(QStringLiteral("Arial")), "000000", 6, 6 );
-    m_defaultStyle[GeoDataFeature::HighwayPrimary]           = StyleBuilder::Private::createHighwayStyle( "#fcd6a4", "#a06b00", QFont(QStringLiteral("Arial")), "000000", 9, 6 );
-    m_defaultStyle[GeoDataFeature::HighwayPrimaryLink]       = StyleBuilder::Private::createHighwayStyle( "#fcd6a4", "#a06b00", QFont(QStringLiteral("Arial")), "000000", 6, 6 );
-    m_defaultStyle[GeoDataFeature::HighwayTrunk]             = StyleBuilder::Private::createHighwayStyle( "#f9b29c", "#c84e2f", QFont(QStringLiteral("Arial")), "000000", 9, 6 );
-    m_defaultStyle[GeoDataFeature::HighwayTrunkLink]         = StyleBuilder::Private::createHighwayStyle( "#f9b29c", "#c84e2f", QFont(QStringLiteral("Arial")), "000000", 9, 6 );
-    m_defaultStyle[GeoDataFeature::HighwayMotorway]          = StyleBuilder::Private::createHighwayStyle( "#e892a2", "#dc2a67", QFont(QStringLiteral("Arial")), "000000", 9, 10 );
-    m_defaultStyle[GeoDataFeature::HighwayMotorwayLink]      = StyleBuilder::Private::createHighwayStyle( "#e892a2", "#dc2a67", QFont(QStringLiteral("Arial")), "000000", 9, 10 );
-    m_defaultStyle[GeoDataFeature::TransportAirportRunway]   = StyleBuilder::Private::createHighwayStyle( "#bbbbcc", "#bbbbcc", QFont(QStringLiteral("Arial")), "000000", 0, 1 );
-    m_defaultStyle[GeoDataFeature::TransportAirportTaxiway]  = StyleBuilder::Private::createHighwayStyle( "#bbbbcc", "#bbbbcc", QFont(QStringLiteral("Arial")), "000000", 0, 1 );
+    m_defaultStyle[GeoDataFeature::HighwaySteps]             = StyleBuilder::Private::createStyle(0.0, 2.0, "#fa8072", QColor(Qt::white), true, true, Qt::SolidPattern, Qt::CustomDashLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3, osmFont);
+    m_defaultStyle[GeoDataFeature::HighwayUnknown]           = StyleBuilder::Private::createHighwayStyle("#dddddd", "#bbbbbb", osmFont, "000000", 0, 1);
+    m_defaultStyle[GeoDataFeature::HighwayPath]              = StyleBuilder::Private::createHighwayStyle("#dddde8", "#999999", osmFont, "000000", 0, 1, Qt::DotLine, Qt::SquareCap, true);
+    m_defaultStyle[GeoDataFeature::HighwayTrack]             = StyleBuilder::Private::createHighwayStyle("#996600", QColor(Qt::white), osmFont, "000000", 1, 1, Qt::DashLine, Qt::SquareCap, true);
+    m_defaultStyle[GeoDataFeature::HighwayPedestrian]        = StyleBuilder::Private::createHighwayStyle("#dddde8", "#999999", osmFont, "000000", 0, 2);
+    m_defaultStyle[GeoDataFeature::HighwayFootway]           = StyleBuilder::Private::createHighwayStyle("#fa8072", QColor(Qt::white), osmFont, "000000", 0, 2, Qt::DotLine, Qt::SquareCap, true);
+    m_defaultStyle[GeoDataFeature::HighwayCycleway]          = StyleBuilder::Private::createHighwayStyle(QColor(Qt::blue), QColor(Qt::white), osmFont, "000000", 0, 2, Qt::DotLine, Qt::SquareCap, true);
+    m_defaultStyle[GeoDataFeature::HighwayService]           = StyleBuilder::Private::createHighwayStyle("#ffffff", "#bbbbbb", osmFont, "000000", 1, 6 );
+    m_defaultStyle[GeoDataFeature::HighwayResidential]       = StyleBuilder::Private::createHighwayStyle("#ffffff", "#bbbbbb", osmFont, "000000", 3, 6 );
+    m_defaultStyle[GeoDataFeature::HighwayLivingStreet]      = StyleBuilder::Private::createHighwayStyle("#ffffff", "#bbbbbb", osmFont, "000000", 3, 6 );
+    m_defaultStyle[GeoDataFeature::HighwayRoad]              = StyleBuilder::Private::createHighwayStyle("#dddddd", "#bbbbbb", osmFont, "000000", 3, 6 );
+    m_defaultStyle[GeoDataFeature::HighwayUnclassified]      = StyleBuilder::Private::createHighwayStyle("#ffffff", "#bbbbbb", osmFont, "000000", 3, 6 );
+    m_defaultStyle[GeoDataFeature::HighwayTertiary]          = StyleBuilder::Private::createHighwayStyle("#ffffff", "#8f8f8f", osmFont, "000000", 6, 6 );
+    m_defaultStyle[GeoDataFeature::HighwayTertiaryLink]      = StyleBuilder::Private::createHighwayStyle("#ffffff", "#8f8f8f", osmFont, "000000", 6, 6 );
+    m_defaultStyle[GeoDataFeature::HighwaySecondary]         = StyleBuilder::Private::createHighwayStyle("#f7fabf", "#707d05", osmFont, "000000", 6, 6 );
+    m_defaultStyle[GeoDataFeature::HighwaySecondaryLink]     = StyleBuilder::Private::createHighwayStyle("#f7fabf", "#707d05", osmFont, "000000", 6, 6 );
+    m_defaultStyle[GeoDataFeature::HighwayPrimary]           = StyleBuilder::Private::createHighwayStyle("#fcd6a4", "#a06b00", osmFont, "000000", 9, 6 );
+    m_defaultStyle[GeoDataFeature::HighwayPrimaryLink]       = StyleBuilder::Private::createHighwayStyle("#fcd6a4", "#a06b00", osmFont, "000000", 6, 6 );
+    m_defaultStyle[GeoDataFeature::HighwayTrunk]             = StyleBuilder::Private::createHighwayStyle("#f9b29c", "#c84e2f", osmFont, "000000", 9, 6 );
+    m_defaultStyle[GeoDataFeature::HighwayTrunkLink]         = StyleBuilder::Private::createHighwayStyle("#f9b29c", "#c84e2f", osmFont, "000000", 9, 6 );
+    m_defaultStyle[GeoDataFeature::HighwayMotorway]          = StyleBuilder::Private::createHighwayStyle("#e892a2", "#dc2a67", osmFont, "000000", 9, 10 );
+    m_defaultStyle[GeoDataFeature::HighwayMotorwayLink]      = StyleBuilder::Private::createHighwayStyle("#e892a2", "#dc2a67", osmFont, "000000", 9, 10 );
+    m_defaultStyle[GeoDataFeature::TransportAirportRunway]   = StyleBuilder::Private::createHighwayStyle("#bbbbcc", "#bbbbcc", osmFont, "000000", 0, 1 );
+    m_defaultStyle[GeoDataFeature::TransportAirportTaxiway]  = StyleBuilder::Private::createHighwayStyle("#bbbbcc", "#bbbbcc", osmFont, "000000", 0, 1 );
     m_defaultStyle[GeoDataFeature::TransportAirportApron]    = StyleBuilder::Private::createWayStyle( "#e9d1ff", Qt::transparent, true, false );
 
     m_defaultStyle[GeoDataFeature::NaturalWater]             = StyleBuilder::Private::createStyle( 4, 0, waterColor, waterColor, true, true,
                                                                                                    Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false, QVector< qreal >(),
-                                                                                                   QFont(QStringLiteral("Arial")), waterColor.darker(150));
+                                                                                                   osmFont, waterColor.darker(150));
 
     m_defaultStyle[GeoDataFeature::NaturalReef]              = StyleBuilder::Private::createStyle( 5.5, 0, "#36677c", "#36677c", true, true,
                                                                                                    Qt::Dense7Pattern, Qt::DotLine, Qt::RoundCap, false, QVector< qreal >(),
-                                                                                                   QFont(QStringLiteral("Arial")), waterColor.darker(150));
+                                                                                                   osmFont, waterColor.darker(150));
 
     m_defaultStyle[GeoDataFeature::AmenityGraveyard]         = StyleBuilder::Private::createWayStyle( "#AACBAF", "#AACBAF", true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_generic.png") );
 
@@ -753,40 +753,40 @@ void StyleBuilder::Private::initializeDefaultStyles()
 
     m_defaultStyle[GeoDataFeature::MilitaryDangerArea]       = StyleBuilder::Private::createWayStyle( "#FFC0CB", "#FFC0CB", true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/danger.png") );
 
-    m_defaultStyle[GeoDataFeature::RailwayRail]              = StyleBuilder::Private::createStyle( 2.0, 1.435, "#706E70", "#EEEEEE", true, true, Qt::SolidPattern, Qt::CustomDashLine, Qt::FlatCap, true, QVector< qreal >() << 2 << 3 );
-    m_defaultStyle[GeoDataFeature::RailwayNarrowGauge]       = StyleBuilder::Private::createStyle( 2.0, 1.0, "#706E70", "#EEEEEE", true, true, Qt::SolidPattern, Qt::CustomDashLine, Qt::FlatCap, true, QVector< qreal >() << 2 << 3 );
+    m_defaultStyle[GeoDataFeature::RailwayRail]              = StyleBuilder::Private::createStyle(2.0, 1.435, "#706E70", "#EEEEEE", true, true, Qt::SolidPattern, Qt::CustomDashLine, Qt::FlatCap, true, QVector< qreal >() << 2 << 3, osmFont);
+    m_defaultStyle[GeoDataFeature::RailwayNarrowGauge]       = StyleBuilder::Private::createStyle(2.0, 1.0, "#706E70", "#EEEEEE", true, true, Qt::SolidPattern, Qt::CustomDashLine, Qt::FlatCap, true, QVector< qreal >() << 2 << 3, osmFont);
     // FIXME: the tram is currently being rendered as a polygon.
-    m_defaultStyle[GeoDataFeature::RailwayTram]              = StyleBuilder::Private::createStyle( 2.0, 1.435, "#706E70", "#EEEEEE", false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false );
-    m_defaultStyle[GeoDataFeature::RailwayLightRail]         = StyleBuilder::Private::createStyle( 2.0, 1.435, "#706E70", "#EEEEEE", false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false );
-    m_defaultStyle[GeoDataFeature::RailwayAbandoned]         = StyleBuilder::Private::createStyle( 2.0, 1.435, Qt::transparent, "#706E70", false, false, Qt::SolidPattern, Qt::DotLine, Qt::FlatCap, false );
-    m_defaultStyle[GeoDataFeature::RailwaySubway]            = StyleBuilder::Private::createStyle( 2.0, 1.435, "#706E70", "#EEEEEE", false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false );
-    m_defaultStyle[GeoDataFeature::RailwayPreserved]         = StyleBuilder::Private::createStyle( 2.0, 1.435, "#EEEEEE", "#706E70", true, true, Qt::SolidPattern, Qt::DotLine, Qt::FlatCap, true );
-    m_defaultStyle[GeoDataFeature::RailwayMiniature]         = StyleBuilder::Private::createStyle( 2.0, 1.435, "#706E70", "#EEEEEE", false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false );
-    m_defaultStyle[GeoDataFeature::RailwayConstruction]      = StyleBuilder::Private::createStyle( 2.0, 1.435, "#EEEEEE", "#706E70", true, true, Qt::SolidPattern, Qt::DotLine, Qt::FlatCap, true );
-    m_defaultStyle[GeoDataFeature::RailwayMonorail]          = StyleBuilder::Private::createStyle( 2.0, 1.435, "#706E70", "#EEEEEE", false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false );
-    m_defaultStyle[GeoDataFeature::RailwayFunicular]         = StyleBuilder::Private::createStyle( 2.0, 1.435, "#706E70", "#EEEEEE", false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false );
+    m_defaultStyle[GeoDataFeature::RailwayTram]              = StyleBuilder::Private::createStyle( 2.0, 1.435, "#706E70", "#EEEEEE", false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector<qreal>(), osmFont);
+    m_defaultStyle[GeoDataFeature::RailwayLightRail]         = StyleBuilder::Private::createStyle( 2.0, 1.435, "#706E70", "#EEEEEE", false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector<qreal>(), osmFont);
+    m_defaultStyle[GeoDataFeature::RailwayAbandoned]         = StyleBuilder::Private::createStyle( 2.0, 1.435, Qt::transparent, "#706E70", false, false, Qt::SolidPattern, Qt::DotLine, Qt::FlatCap, false, QVector<qreal>(), osmFont);
+    m_defaultStyle[GeoDataFeature::RailwaySubway]            = StyleBuilder::Private::createStyle( 2.0, 1.435, "#706E70", "#EEEEEE", false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector<qreal>(), osmFont);
+    m_defaultStyle[GeoDataFeature::RailwayPreserved]         = StyleBuilder::Private::createStyle( 2.0, 1.435, "#EEEEEE", "#706E70", true, true, Qt::SolidPattern, Qt::DotLine, Qt::FlatCap, true, QVector<qreal>(), osmFont);
+    m_defaultStyle[GeoDataFeature::RailwayMiniature]         = StyleBuilder::Private::createStyle( 2.0, 1.435, "#706E70", "#EEEEEE", false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector<qreal>(), osmFont);
+    m_defaultStyle[GeoDataFeature::RailwayConstruction]      = StyleBuilder::Private::createStyle( 2.0, 1.435, "#EEEEEE", "#706E70", true, true, Qt::SolidPattern, Qt::DotLine, Qt::FlatCap, true, QVector<qreal>(), osmFont);
+    m_defaultStyle[GeoDataFeature::RailwayMonorail]          = StyleBuilder::Private::createStyle( 2.0, 1.435, "#706E70", "#EEEEEE", false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector<qreal>(), osmFont);
+    m_defaultStyle[GeoDataFeature::RailwayFunicular]         = StyleBuilder::Private::createStyle( 2.0, 1.435, "#706E70", "#EEEEEE", false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector<qreal>(), osmFont);
 
     m_defaultStyle[GeoDataFeature::Building]                 = StyleBuilder::Private::createStyle( 1, 0, buildingColor, buildingColor.darker(),
-                                                                                   true, true, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false );
+                                                                                   true, true, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false, QVector<qreal>(), osmFont);
 
     m_defaultStyle[GeoDataFeature::Landmass]                 = StyleBuilder::Private::createWayStyle( "#F1EEE8", "#F1EEE8", true, true );
     m_defaultStyle[GeoDataFeature::UrbanArea]                = StyleBuilder::Private::createWayStyle( "#E6E3DD", "#E6E3DD", true, true );
-    m_defaultStyle[GeoDataFeature::InternationalDateLine]    = StyleBuilder::Private::createStyle( 1.0, 0.0, "#000000", "#000000", false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false );
+    m_defaultStyle[GeoDataFeature::InternationalDateLine]    = StyleBuilder::Private::createStyle(1.0, 0.0, "#000000", "#000000", false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector<qreal>(), osmFont);
     m_defaultStyle[GeoDataFeature::Bathymetry]               = StyleBuilder::Private::createWayStyle( waterColor, waterColor, true, true );
 
-    m_defaultStyle[GeoDataFeature::AdminLevel1]              = StyleBuilder::Private::createStyle(0.0, 0.0, "#DF9CCF", "#DF9CCF", false, true, Qt::SolidPattern, Qt::CustomDashLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3 );
-    m_defaultStyle[GeoDataFeature::AdminLevel2]              = StyleBuilder::Private::createStyle(2.0, 0.0, "#DF9CCF", "#DF9CCF", false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3 );
-    m_defaultStyle[GeoDataFeature::AdminLevel3]              = StyleBuilder::Private::createStyle(1.8, 0.0, "#DF9CCF", "#DF9CCF", false, true, Qt::SolidPattern, Qt::DashLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3 );
-    m_defaultStyle[GeoDataFeature::AdminLevel4]              = StyleBuilder::Private::createStyle(1.5, 0.0, "#DF9CCF", "#DF9CCF", false, true, Qt::SolidPattern, Qt::DotLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3 );
-    m_defaultStyle[GeoDataFeature::AdminLevel5]              = StyleBuilder::Private::createStyle(1.25, 0.0, "#DF9CCF", "#DF9CCF", false, true, Qt::SolidPattern, Qt::DashDotDotLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3 );
-    m_defaultStyle[GeoDataFeature::AdminLevel6]              = StyleBuilder::Private::createStyle(1, 0.0, "#DF9CCF", "#DF9CCF", false, true, Qt::SolidPattern, Qt::DashDotLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3 );
-    m_defaultStyle[GeoDataFeature::AdminLevel7]              = StyleBuilder::Private::createStyle(1, 0.0, "#DF9CCF", "#DF9CCF", false, true, Qt::SolidPattern, Qt::DashLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3 );
-    m_defaultStyle[GeoDataFeature::AdminLevel8]              = StyleBuilder::Private::createStyle(1, 0.0, "#DF9CCF", "#DF9CCF", false, true, Qt::SolidPattern, Qt::DashLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3 );
-    m_defaultStyle[GeoDataFeature::AdminLevel9]              = StyleBuilder::Private::createStyle(1.5, 0.0, "#DF9CCF", "#DF9CCF", false, true, Qt::SolidPattern, Qt::DotLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3 );
-    m_defaultStyle[GeoDataFeature::AdminLevel10]             = StyleBuilder::Private::createStyle(1.5, 0.0, "#DF9CCF", "#DF9CCF", false, true, Qt::SolidPattern, Qt::DotLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3 );
-    m_defaultStyle[GeoDataFeature::AdminLevel11]             = StyleBuilder::Private::createStyle(1.5, 0.0, "#DF9CCF", "#DF9CCF", false, true, Qt::SolidPattern, Qt::DotLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3 );
+    m_defaultStyle[GeoDataFeature::AdminLevel1]              = StyleBuilder::Private::createStyle(0.0, 0.0, "#DF9CCF", "#DF9CCF", false, true, Qt::SolidPattern, Qt::CustomDashLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3, osmFont);
+    m_defaultStyle[GeoDataFeature::AdminLevel2]              = StyleBuilder::Private::createStyle(2.0, 0.0, "#DF9CCF", "#DF9CCF", false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3, osmFont);
+    m_defaultStyle[GeoDataFeature::AdminLevel3]              = StyleBuilder::Private::createStyle(1.8, 0.0, "#DF9CCF", "#DF9CCF", false, true, Qt::SolidPattern, Qt::DashLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3, osmFont);
+    m_defaultStyle[GeoDataFeature::AdminLevel4]              = StyleBuilder::Private::createStyle(1.5, 0.0, "#DF9CCF", "#DF9CCF", false, true, Qt::SolidPattern, Qt::DotLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3, osmFont);
+    m_defaultStyle[GeoDataFeature::AdminLevel5]              = StyleBuilder::Private::createStyle(1.25, 0.0, "#DF9CCF", "#DF9CCF", false, true, Qt::SolidPattern, Qt::DashDotDotLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3, osmFont);
+    m_defaultStyle[GeoDataFeature::AdminLevel6]              = StyleBuilder::Private::createStyle(1, 0.0, "#DF9CCF", "#DF9CCF", false, true, Qt::SolidPattern, Qt::DashDotLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3, osmFont);
+    m_defaultStyle[GeoDataFeature::AdminLevel7]              = StyleBuilder::Private::createStyle(1, 0.0, "#DF9CCF", "#DF9CCF", false, true, Qt::SolidPattern, Qt::DashLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3, osmFont);
+    m_defaultStyle[GeoDataFeature::AdminLevel8]              = StyleBuilder::Private::createStyle(1, 0.0, "#DF9CCF", "#DF9CCF", false, true, Qt::SolidPattern, Qt::DashLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3, osmFont);
+    m_defaultStyle[GeoDataFeature::AdminLevel9]              = StyleBuilder::Private::createStyle(1.5, 0.0, "#DF9CCF", "#DF9CCF", false, true, Qt::SolidPattern, Qt::DotLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3, osmFont);
+    m_defaultStyle[GeoDataFeature::AdminLevel10]             = StyleBuilder::Private::createStyle(1.5, 0.0, "#DF9CCF", "#DF9CCF", false, true, Qt::SolidPattern, Qt::DotLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3, osmFont);
+    m_defaultStyle[GeoDataFeature::AdminLevel11]             = StyleBuilder::Private::createStyle(1.5, 0.0, "#DF9CCF", "#DF9CCF", false, true, Qt::SolidPattern, Qt::DotLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3, osmFont);
 
-    m_defaultStyle[GeoDataFeature::BoundaryMaritime]         = StyleBuilder::Private::createStyle(2.0, 0.0, "#88b3bf", "#88b3bf", false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false );
+    m_defaultStyle[GeoDataFeature::BoundaryMaritime]         = StyleBuilder::Private::createStyle(2.0, 0.0, "#88b3bf", "#88b3bf", false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector<qreal>(), osmFont);
 
     m_defaultStyle[GeoDataFeature::Satellite]
         = GeoDataStyle::Ptr(new GeoDataStyle( MarbleDirs::path( "bitmaps/satellite.png" ),
