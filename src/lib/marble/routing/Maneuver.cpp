@@ -11,32 +11,41 @@
 #include "Maneuver.h"
 #include "MarbleDirs.h"
 
+#include <QHash>
+
 namespace Marble
 {
 
-QMap<Maneuver::Direction,QString> Maneuver::m_turnTypePixmaps;
+static QHash<Maneuver::Direction, QString> createTurnTypePixmapMap()
+{
+    QHash<Maneuver::Direction, QString> turnTypePixmaps;
+
+    turnTypePixmaps.insert(Maneuver::Unknown,              QStringLiteral(":/data/bitmaps/routing_step.png"));
+    turnTypePixmaps.insert(Maneuver::Straight,             QStringLiteral(":/data/bitmaps/turn-continue.png"));
+    turnTypePixmaps.insert(Maneuver::Continue,             QStringLiteral(":/data/bitmaps/turn-continue.png"));
+    turnTypePixmaps.insert(Maneuver::Merge,                QStringLiteral(":/data/bitmaps/turn-merge.png"));
+    turnTypePixmaps.insert(Maneuver::SlightRight,          QStringLiteral(":/data/bitmaps/turn-slight-right.png"));
+    turnTypePixmaps.insert(Maneuver::Right,                QStringLiteral(":/data/bitmaps/turn-right.png"));
+    turnTypePixmaps.insert(Maneuver::SharpRight,           QStringLiteral(":/data/bitmaps/turn-sharp-right.png"));
+    turnTypePixmaps.insert(Maneuver::TurnAround,           QStringLiteral(":/data/bitmaps/turn-around.png"));
+    turnTypePixmaps.insert(Maneuver::SharpLeft,            QStringLiteral(":/data/bitmaps/turn-sharp-left.png"));
+    turnTypePixmaps.insert(Maneuver::Left,                 QStringLiteral(":/data/bitmaps/turn-left.png"));
+    turnTypePixmaps.insert(Maneuver::SlightLeft,           QStringLiteral(":/data/bitmaps/turn-slight-left.png"));
+    turnTypePixmaps.insert(Maneuver::RoundaboutFirstExit,  QStringLiteral(":/data/bitmaps/turn-roundabout-ccw-first.png"));
+    turnTypePixmaps.insert(Maneuver::RoundaboutSecondExit, QStringLiteral(":/data/bitmaps/turn-roundabout-ccw-second.png"));
+    turnTypePixmaps.insert(Maneuver::RoundaboutThirdExit,  QStringLiteral(":/data/bitmaps/turn-roundabout-ccw-third.png"));
+    turnTypePixmaps.insert(Maneuver::RoundaboutExit,       QStringLiteral(":/data/bitmaps/turn-roundabout-ccw-far.png"));
+    turnTypePixmaps.insert(Maneuver::ExitLeft,             QStringLiteral(":/data/bitmaps/turn-exit-left.png"));
+    turnTypePixmaps.insert(Maneuver::ExitRight,            QStringLiteral(":/data/bitmaps/turn-exit-right.png"));
+
+    return turnTypePixmaps;
+}
+
 
 Maneuver::Maneuver() :
     m_direction( Unknown ),
     m_waypointIndex( -1 )
 {
-    m_turnTypePixmaps[Unknown] = ":/data/bitmaps/routing_step.png";
-    m_turnTypePixmaps[Straight] = ":/data/bitmaps/turn-continue.png";
-    m_turnTypePixmaps[Continue] = ":/data/bitmaps/turn-continue.png";
-    m_turnTypePixmaps[Merge] = ":/data/bitmaps/turn-merge.png";
-    m_turnTypePixmaps[SlightRight] = ":/data/bitmaps/turn-slight-right.png";
-    m_turnTypePixmaps[Right] = ":/data/bitmaps/turn-right.png";
-    m_turnTypePixmaps[SharpRight] = ":/data/bitmaps/turn-sharp-right.png";
-    m_turnTypePixmaps[TurnAround] = ":/data/bitmaps/turn-around.png";
-    m_turnTypePixmaps[SharpLeft] = ":/data/bitmaps/turn-sharp-left.png";
-    m_turnTypePixmaps[Left] = ":/data/bitmaps/turn-left.png";
-    m_turnTypePixmaps[SlightLeft] = ":/data/bitmaps/turn-slight-left.png";
-    m_turnTypePixmaps[RoundaboutFirstExit] = ":/data/bitmaps/turn-roundabout-ccw-first.png";
-    m_turnTypePixmaps[RoundaboutSecondExit] = ":/data/bitmaps/turn-roundabout-ccw-second.png";
-    m_turnTypePixmaps[RoundaboutThirdExit] = ":/data/bitmaps/turn-roundabout-ccw-third.png";
-    m_turnTypePixmaps[RoundaboutExit] = ":/data/bitmaps/turn-roundabout-ccw-far.png";
-    m_turnTypePixmaps[ExitLeft] = ":/data/bitmaps/turn-exit-left.png";
-    m_turnTypePixmaps[ExitRight] = ":/data/bitmaps/turn-exit-right.png";
 }
 
 Maneuver::Direction Maneuver::direction() const
@@ -46,7 +55,9 @@ Maneuver::Direction Maneuver::direction() const
 
 QString Maneuver::directionPixmap() const
 {
-    return m_turnTypePixmaps[ direction() ];
+    static const QHash<Maneuver::Direction, QString> turnTypePixmaps = createTurnTypePixmapMap();
+
+    return turnTypePixmaps.value(direction());
 }
 
 bool Maneuver::operator ==(const Maneuver &other) const

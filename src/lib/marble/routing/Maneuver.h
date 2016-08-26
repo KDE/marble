@@ -12,7 +12,6 @@
 #define MARBLE_MANEUVER_H
 
 #include <QString>
-#include <QMap>
 
 #include "GeoDataCoordinates.h"
 
@@ -87,8 +86,6 @@ private:
     QString m_instructionText;
 
     QString m_roadName;
-
-    static QMap<Direction,QString> m_turnTypePixmaps;
 };
 
 }
