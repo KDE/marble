@@ -50,12 +50,12 @@ GeoNode* GPXrteptTagHandler::parse(GeoParser& parser) const
         QStringRef tmp;
         qreal lat = 0;
         qreal lon = 0;
-        tmp = attributes.value(gpxTag_lat);
+        tmp = attributes.value(QLatin1String(gpxTag_lat));
         if ( !tmp.isEmpty() )
         {
             lat = tmp.toString().toFloat();
         }
-        tmp = attributes.value(gpxTag_lon);
+        tmp = attributes.value(QLatin1String(gpxTag_lon));
         if ( !tmp.isEmpty() )
         {
             lon = tmp.toString().toFloat();

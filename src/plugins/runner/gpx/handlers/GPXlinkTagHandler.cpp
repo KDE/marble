@@ -40,7 +40,7 @@ GeoNode* GPXlinkTagHandler::parse(GeoParser& parser) const
         GeoDataPlacemark* placemark = parentItem.nodeAs<GeoDataPlacemark>();
 
         QXmlStreamAttributes attributes = parser.attributes();
-        QString href = attributes.value("href").toString();
+        QString href = attributes.value(QLatin1String("href")).toString();
         QString text = href;
         if (parser.readNextStartElement())
         {

@@ -203,7 +203,7 @@ void GeoParser::raiseWarning( const QString& warning )
 
 QString GeoParser::attribute( const char* attributeName ) const
 {
-    return attributes().value( QString::fromLatin1( attributeName )).toString();
+    return attributes().value(QLatin1String(attributeName)).toString();
 }
 
 GeoDocument* GeoParser::releaseDocument()
