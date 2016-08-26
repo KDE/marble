@@ -17,6 +17,8 @@
 #include <GeoDataIconStyle.h>
 #include <MarbleDirs.h>
 
+#include <QXmlStreamAttributes>
+
 namespace Marble {
 
 void OsmNode::parseCoordinates(const QXmlStreamAttributes &attributes)

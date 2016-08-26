@@ -15,7 +15,8 @@
 #include <GeoDataDocument.h>
 
 #include <QString>
-#include <QXmlStreamAttributes>
+
+class QXmlStreamAttributes;
 
 namespace Marble {
 

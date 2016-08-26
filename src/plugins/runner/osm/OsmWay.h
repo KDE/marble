@@ -17,7 +17,6 @@
 
 #include <QSet>
 #include <QString>
-#include <QXmlStreamAttributes>
 
 namespace Marble {
 
