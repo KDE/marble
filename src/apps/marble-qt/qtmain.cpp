@@ -14,6 +14,7 @@
 #include <QDir>
 #include <QLocale>
 #include <QTranslator>
+#include <QStandardPaths>
 
 #include "QtMainWindow.h"
 
@@ -38,18 +39,58 @@
 
 using namespace Marble;
  
+// load translation file from normal "KDE Applications" packaging installation
+static bool loadTranslation(const QString &localeDirName, QApplication &app)
+{
+    const QString subPath = QLatin1String("locale/") + localeDirName + QLatin1String("/LC_MESSAGES/marble_qt.qm");
+    const QString fullPath = QStandardPaths::locate(QStandardPaths::GenericDataLocation, subPath);
+    if (fullPath.isEmpty()) {
+        return false;
+    }
+
+    QTranslator* translator = new QTranslator(&app);
+    if (!translator->load(fullPath)) {
+        delete translator;
+        return false;
+    }
+
+    app.installTranslator(translator);
+
+    return true;
+}
+
+// load KDE translators system based translations
+// TODO: document other possible supported translation systems, if any, and where their catalog files are
+static void loadTranslations(QApplication &app)
+{
+    // Quote from ecm_create_qm_loader created code:
+    // The way Qt translation system handles plural forms makes it necessary to
+    // have a translation file which contains only plural forms for `en`.
+    // That's why we load the `en` translation unconditionally, then load the
+    // translation for the current locale to overload it.
+    const QString en(QStringLiteral("en"));
+
+    loadTranslation(en, app);
+
+    QLocale locale = QLocale::system();
+    if (locale.name() != en) {
+        if (!loadTranslation(locale.name(), app)) {
+            loadTranslation(locale.bcp47Name(), app);
+        }
+    }
+}
+
+
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
     app.setApplicationName( "Marble Virtual Globe" );
     app.setOrganizationName( "KDE" );
     app.setOrganizationDomain( "kde.org" );
-    // Widget translation
 
-    QString      lang = QLocale::system().name().section('_', 0, 0);
-    QTranslator  translator;
-    translator.load( "marble-" + lang, MarbleDirs::path(QString("lang") ) );
-    app.installTranslator(&translator);
+    // Load Qt translation system catalog for libmarblewidget, the plugins and this app
+    loadTranslations(app);
+
     app.setApplicationDisplayName(MainWindow::tr("Marble - Virtual Globe"));
 
     // For non static builds on mac and win
