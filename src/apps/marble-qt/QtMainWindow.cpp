@@ -472,20 +472,20 @@ void MainWindow::createMenus( const QList<QAction*> &panelActions )
         m_fileMenu->addAction(m_stopRecordingAction);
 
         m_viewMenu = menuBar()->addMenu(tr("&View"));
-        m_infoBoxesMenu = new QMenu( "&Info Boxes" );
-        m_onlineServicesMenu = new QMenu( "&Online Services" );
+        m_infoBoxesMenu = new QMenu(tr("&Info Boxes"));
+        m_onlineServicesMenu = new QMenu(tr("&Online Services"));
         createPluginsMenus();
 
         m_bookmarkMenu = menuBar()->addMenu(tr("&Bookmarks"));
         createBookmarkMenu();
         connect( m_bookmarkMenu, SIGNAL(aboutToShow()), this, SLOT(createBookmarkMenu()) );
 
-        m_panelMenu = new QMenu( "&Panels" );
+        m_panelMenu = new QMenu(tr("&Panels"));
         foreach( QAction* action, panelActions ) {
             m_panelMenu->addAction( action );
         }
 
-        m_viewSizeMenu = new QMenu( "&View Size" );
+        m_viewSizeMenu = new QMenu(tr("&View Size"));
         m_viewSizeMenu->addActions( m_viewSizeActsGroup->actions() );
 
         m_settingsMenu = menuBar()->addMenu(tr("&Settings"));
