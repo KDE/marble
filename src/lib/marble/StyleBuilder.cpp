@@ -617,7 +617,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataFeature::ShopTravelAgency]         = StyleBuilder::Private::createOsmPOIStyle( osmFont, "shop/travel_agency-14", shopColor );
     m_defaultStyle[GeoDataFeature::Shop]                     = StyleBuilder::Private::createOsmPOIStyle( osmFont, "shop/shop-14", shopColor );
 
-    m_defaultStyle[GeoDataFeature::ManmadeBridge]            = StyleBuilder::Private::createWayStyle( QColor("#b8b8b8"), QColor("transparent"), true, true );
+    m_defaultStyle[GeoDataFeature::ManmadeBridge]            = StyleBuilder::Private::createWayStyle(QColor("#b8b8b8"), Qt::transparent, true, true);
     m_defaultStyle[GeoDataFeature::ManmadeLighthouse]        = StyleBuilder::Private::createOsmPOIStyle( osmFont, "transportation/lighthouse.16", transportationColor, "#f2efe9", QColor( "#f2efe9" ).darker() );
     m_defaultStyle[GeoDataFeature::ManmadePier]              = StyleBuilder::Private::createStyle(0.0, 3.0, "#f2efe9", "#f2efe9", true, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false );
     m_defaultStyle[GeoDataFeature::ManmadeWaterTower]        = StyleBuilder::Private::createOsmPOIStyle( osmFont, "amenity/water_tower.16", amenityColor );
@@ -670,10 +670,10 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataFeature::PowerTower]               = StyleBuilder::Private::createOsmPOIStyle( osmFont, "individual/power_tower", QColor( "#888888" ) );
     m_defaultStyle[GeoDataFeature::PowerTower]->iconStyle().setScale(0.6);
 
-    m_defaultStyle[GeoDataFeature::BarrierCityWall]          = StyleBuilder::Private::createStyle( 6.0, 3.0, "#787878", "transparent", true, false, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector< qreal >(), QFont(), "transparent" );
+    m_defaultStyle[GeoDataFeature::BarrierCityWall]          = StyleBuilder::Private::createStyle(6.0, 3.0, "#787878", Qt::transparent, true, false, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector<qreal>(), QFont(), Qt::transparent);
     m_defaultStyle[GeoDataFeature::BarrierGate]              = StyleBuilder::Private::createOsmPOIStyle( osmFont, "individual/gate" );
     m_defaultStyle[GeoDataFeature::BarrierLiftGate]          = StyleBuilder::Private::createOsmPOIStyle( osmFont, "individual/liftgate" );
-    m_defaultStyle[GeoDataFeature::BarrierWall]              = StyleBuilder::Private::createStyle( 2.0, 0.0, "#787878", "transparent", true, false, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector< qreal >(), QFont(), "transparent" );
+    m_defaultStyle[GeoDataFeature::BarrierWall]              = StyleBuilder::Private::createStyle(2.0, 0.0, "#787878", Qt::transparent, true, false, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector<qreal>(), QFont(), Qt::transparent);
 
     m_defaultStyle[GeoDataFeature::HighwaySteps]             = StyleBuilder::Private::createStyle(0.0, 2.0, "#fa8072", QColor(Qt::white), true, true, Qt::SolidPattern, Qt::CustomDashLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3 );
     m_defaultStyle[GeoDataFeature::HighwayUnknown]           = StyleBuilder::Private::createHighwayStyle( "#dddddd", "#bbbbbb", QFont(QStringLiteral("Arial")), "000000", 0, 1);
