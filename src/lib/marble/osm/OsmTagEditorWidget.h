@@ -12,11 +12,10 @@
 #define MARBLE_OSMTAGEDITORWIDGET_H
 
 #include <QWidget>
-
-#include "MarbleGlobal.h"
 #include "marble_export.h"
 
-#include <QPair>
+#include "MarbleGlobal.h"
+#include "OsmPlacemarkData.h"
 
 class QTreeWidgetItem;
 
@@ -32,10 +31,13 @@ class MARBLE_EXPORT OsmTagEditorWidget : public QWidget
     Q_OBJECT
 
 public:
-    typedef QPair<QString, QString> OsmTag;
-
     explicit OsmTagEditorWidget( GeoDataPlacemark *placemark, QWidget *parent = 0 );
     ~OsmTagEditorWidget();
+
+    /**
+     * @brief returns the current tag set for the placemark
+     */
+    OsmPlacemarkData placemarkData() const;
 
 public Q_SLOTS:
     void update();
@@ -43,12 +45,6 @@ public Q_SLOTS:
     void removeSelectedTag();
     void handleDoubleClick( QTreeWidgetItem *item, int column );
     void handleItemChanged( QTreeWidgetItem *item, int column );
-
-    /**
-     * @brief suitableTag returns the tag that fits best to represent the Visual Category
-     * of the placemark ( chosen from the current list of tags )
-     */
-    OsmTag suitableTag() const;
 
 Q_SIGNALS:
     void placemarkChanged( GeoDataFeature *);

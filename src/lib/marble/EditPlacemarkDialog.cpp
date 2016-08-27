@@ -340,11 +340,11 @@ void EditPlacemarkDialog::updateTextAnnotation()
         d->m_placemark->setStyle( newStyle );
     }
     else {
-        const OsmTagEditorWidget::OsmTag suitableTag = d->m_osmTagEditorWidget->suitableTag();
-        if (suitableTag != OsmTagEditorWidget::OsmTag()) {
-            GeoDataFeature::GeoDataVisualCategory category = OsmPresetLibrary::osmVisualCategory( suitableTag );
-            d->m_placemark->setVisualCategory( category );
+        const OsmPlacemarkData osmData = d->m_osmTagEditorWidget->placemarkData();
+        const GeoDataFeature::GeoDataVisualCategory category = OsmPresetLibrary::determineVisualCategory(osmData);
+        if (category != GeoDataFeature::None) {
             d->m_placemark->setStyle(GeoDataStyle::Ptr());
+            d->m_placemark->setVisualCategory( category );
         }
     }
 

@@ -72,22 +72,16 @@ void OsmTagEditorWidget::update()
     emit placemarkChanged( d->m_placemark );
 }
 
-OsmTagEditorWidget::OsmTag OsmTagEditorWidget::suitableTag() const
+OsmPlacemarkData OsmTagEditorWidget::placemarkData() const
 {
-    /*
-     * The most suitable tag is the first tag in the list for which the OsmPresetLibrary
-     * has an assigned visual category ( a QMap entry )
-     * Maybe there's a better option.
-     */
+    OsmPlacemarkData osmData;
+
     for (int index = 0; index < d->m_currentTagsList->topLevelItemCount(); ++index) {
         const QTreeWidgetItem *item = d->m_currentTagsList->topLevelItem( index );
-        const auto tag = OsmTag(item->text(0), item->text(1));
-        if (OsmPresetLibrary::osmVisualCategory(tag) != GeoDataFeature::None) {
-            return tag;
-        }
+        osmData.addTag(item->text(0), item->text(1));
     }
 
-    return OsmTag();
+    return osmData;
 }
 
 void OsmTagEditorWidget::addSelectedTag()
