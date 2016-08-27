@@ -1227,7 +1227,7 @@ void ClipPainterPrivate::debugDrawNodes( const QPolygonF & polygon )
             q->drawRect( itPoint->x() - 4, itPoint->y() - 4 , 8.0, 8.0 );
         }
         if (m_debugPolygonsLevel == 2) {
-            q->setFont(QFont("Helvetica", 7));
+            q->setFont(QFont(QStringLiteral("Sans Serif"), 7));
             q->setPen("black");
             q->drawText(itPoint->x() + 6.0, itPoint->y() + (15 - (i * 5) % 30) , QString::number(i));
         }

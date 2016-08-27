@@ -533,7 +533,7 @@ void MergedLayerDecorator::Private::paintTileId( QImage *tileImage, const TileId
     painter.drawRect( strokeWidth / 2, strokeWidth / 2,
                       tileImage->width()  - strokeWidth,
                       tileImage->height() - strokeWidth );
-    QFont testFont( "Sans", 12 );
+    QFont testFont(QStringLiteral("Sans Serif"), 12);
     QFontMetrics testFm( testFont );
     painter.setFont( testFont );
 

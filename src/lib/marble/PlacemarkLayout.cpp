@@ -270,7 +270,7 @@ QVector<const GeoDataFeature*> PlacemarkLayout::whichPlacemarkAt( const QPoint& 
 
 int PlacemarkLayout::maxLabelHeight() const
 {
-    QFont const standardFont(QStringLiteral("Arial"));
+    QFont const standardFont(QStringLiteral("Sans Serif"));
     return QFontMetrics(standardFont).height();
 }
 
