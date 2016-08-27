@@ -23,7 +23,6 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataGeometry.h"
 #include "OsmPlacemarkData.h"
-#include "OsmPresetLibrary.h"
 
 namespace Marble
 {

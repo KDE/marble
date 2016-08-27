@@ -26,9 +26,9 @@
 #include "MarbleWidget.h"
 #include "MarbleLocale.h"
 #include "FormattedTextWidget.h"
+#include "StyleBuilder.h"
 #include "osm/OsmTagEditorWidget.h"
 #include "osm/OsmPlacemarkData.h"
-#include "osm/OsmPresetLibrary.h"
 #include "osm/OsmRelationManagerWidget.h"
 
 namespace Marble {
@@ -341,7 +341,7 @@ void EditPlacemarkDialog::updateTextAnnotation()
     }
     else {
         const OsmPlacemarkData osmData = d->m_osmTagEditorWidget->placemarkData();
-        const GeoDataFeature::GeoDataVisualCategory category = OsmPresetLibrary::determineVisualCategory(osmData);
+        const GeoDataFeature::GeoDataVisualCategory category = StyleBuilder::determineVisualCategory(osmData);
         if (category != GeoDataFeature::None) {
             d->m_placemark->setStyle(GeoDataStyle::Ptr());
             d->m_placemark->setVisualCategory( category );

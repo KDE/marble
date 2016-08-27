@@ -1,6 +1,5 @@
 set( osm_HDRS
     OsmPlacemarkData.h
-    OsmPresetLibrary.h
     OsmObjectManager.h
     OsmTagEditorWidget.h
     OsmRelationEditorDialog.h
@@ -9,7 +8,6 @@ set( osm_HDRS
 
 set( osm_SRCS
     osm/OsmPlacemarkData.cpp
-    osm/OsmPresetLibrary.cpp
     osm/OsmObjectManager.cpp
     osm/OsmTagEditorWidget.cpp
     osm/OsmTagEditorWidget_p.cpp

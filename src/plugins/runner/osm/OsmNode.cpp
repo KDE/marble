@@ -10,12 +10,12 @@
 
 #include <OsmNode.h>
 
-#include "osm/OsmPresetLibrary.h"
 #include "osm/OsmObjectManager.h"
 #include <GeoDataPlacemark.h>
 #include <GeoDataStyle.h>
 #include <GeoDataIconStyle.h>
 #include <MarbleDirs.h>
+#include <StyleBuilder.h>
 
 #include <QXmlStreamAttributes>
 
@@ -35,7 +35,7 @@ void OsmNode::setCoordinates(const GeoDataCoordinates &coordinates)
 
 void OsmNode::create(GeoDataDocument *document) const
 {
-    GeoDataFeature::GeoDataVisualCategory const category = OsmPresetLibrary::determineVisualCategory(m_osmData);
+    GeoDataFeature::GeoDataVisualCategory const category = StyleBuilder::determineVisualCategory(m_osmData);
 
     if (category == GeoDataFeature::None) {
         return;

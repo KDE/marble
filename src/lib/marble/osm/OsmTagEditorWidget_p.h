@@ -12,17 +12,20 @@
 #define MARBLE_OSMTAGEDITORWIDGETPRIVATE_H
 
 #include "ui_OsmTagEditorWidget.h"
-#include "osm/OsmPresetLibrary.h"
+
+#include <QPair>
 
 namespace Marble
 {
-class OsmTagEditorWidget;
 
+class GeoDataPlacemark;
+class OsmPlacemarkData;
+class OsmTagEditorWidget;
 
 class OsmTagEditorWidgetPrivate : public Ui::OsmTagEditorWidgetPrivate
 {
 public:
-    typedef OsmPresetLibrary::OsmTag OsmTag;
+    typedef QPair<QString, QString> OsmTag;
     OsmTagEditorWidgetPrivate();
     ~OsmTagEditorWidgetPrivate();
     void populatePresetTagsList();

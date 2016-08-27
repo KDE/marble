@@ -12,9 +12,13 @@
 #define MARBLE_STYLEBUILDER_H
 
 #include <GeoDataStyle.h>
-#include <GeoDataFeature.h>
-
 #include "marble_export.h"
+
+#include <GeoDataFeature.h>
+#include <GeoDataStyle.h>
+
+#include <QHash>
+#include <QPair>
 
 class QFont;
 class QColor;
@@ -34,6 +38,8 @@ public:
 class MARBLE_EXPORT StyleBuilder
 {
 public:
+    typedef QPair<QString, QString> OsmTag;
+
     StyleBuilder();
     ~StyleBuilder();
 
@@ -71,6 +77,22 @@ public:
     int maximumZoomLevel() const;
 
     static QString visualCategoryName(GeoDataFeature::GeoDataVisualCategory category);
+
+    /**
+     * @brief  Convenience categorization of placemarks for Osm key=value pairs
+     */
+    static GeoDataFeature::GeoDataVisualCategory osmVisualCategory(const OsmTag &tag);
+
+    /**
+     * @brief begin and end provide an stl style iterator for the preset map
+     */
+    static QHash<OsmTag, GeoDataFeature::GeoDataVisualCategory>::const_iterator begin();
+    static QHash<OsmTag, GeoDataFeature::GeoDataVisualCategory>::const_iterator end();
+
+    static QStringList shopValues();
+    static QStringList buildingValues();
+
+    static GeoDataFeature::GeoDataVisualCategory determineVisualCategory(const OsmPlacemarkData &osmData);
 
 private:
     Q_DISABLE_COPY(StyleBuilder)

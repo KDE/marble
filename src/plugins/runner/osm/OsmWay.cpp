@@ -14,9 +14,9 @@
 #include <GeoDataLineStyle.h>
 #include <GeoDataPolyStyle.h>
 #include <GeoDataStyle.h>
-#include <osm/OsmPresetLibrary.h>
 #include <osm/OsmObjectManager.h>
 #include <MarbleDirs.h>
+#include <StyleBuilder.h>
 
 namespace Marble {
 
@@ -26,7 +26,7 @@ void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes, QSet<qint6
 {
     GeoDataPlacemark* placemark = new GeoDataPlacemark;
     placemark->setOsmData(m_osmData);
-    placemark->setVisualCategory(OsmPresetLibrary::determineVisualCategory(m_osmData));
+    placemark->setVisualCategory(StyleBuilder::determineVisualCategory(m_osmData));
     placemark->setName(m_osmData.tagValue("name"));
     if (placemark->name().isEmpty() && placemark->visualCategory() >= GeoDataFeature::HighwaySteps && placemark->visualCategory() <= GeoDataFeature::HighwayMotorway) {
         placemark->setName(m_osmData.tagValue("ref"));
@@ -141,7 +141,7 @@ bool OsmWay::isAreaTag(const QString &keyValue)
         s_areaTags.insert( "area=yes" );
         s_areaTags.insert( "waterway=riverbank" );
 
-        foreach(const QString &value, OsmPresetLibrary::buildingValues() ) {
+        foreach(const QString &value, StyleBuilder::buildingValues() ) {
             s_areaTags.insert(QLatin1String("building=") + value);
         }
         s_areaTags.insert( "man_made=bridge" );

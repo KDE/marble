@@ -13,7 +13,6 @@
 
 #include "OsmParser.h"
 #include "OsmElementDictionary.h"
-#include "osm/OsmPresetLibrary.h"
 #include "osm/OsmObjectManager.h"
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"

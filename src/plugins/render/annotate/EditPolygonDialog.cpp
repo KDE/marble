@@ -22,8 +22,8 @@
 #include "NodeModel.h"
 #include "NodeItemDelegate.h"
 #include "FormattedTextWidget.h"
+#include "StyleBuilder.h"
 #include "osm/OsmTagEditorWidget.h"
-#include "osm/OsmPresetLibrary.h"
 #include "osm/OsmPlacemarkData.h"
 #include "osm/OsmRelationManagerWidget.h"
 
@@ -256,7 +256,7 @@ void EditPolygonDialog::updatePolygon()
     // If there is not custom style initialized( default #polyline url is used ) and there is a osmTag-based style
     // available, set it
     const OsmPlacemarkData osmData = d->m_osmTagEditorWidget->placemarkData();
-    const GeoDataFeature::GeoDataVisualCategory category = OsmPresetLibrary::determineVisualCategory(osmData);
+    const GeoDataFeature::GeoDataVisualCategory category = StyleBuilder::determineVisualCategory(osmData);
     if (d->m_placemark->styleUrl() == QLatin1String("#polygon") && category != GeoDataFeature::None) {
         d->m_placemark->setStyle( GeoDataStyle::Ptr() ); // first clear style so style gets set by setVisualCategory()
         d->m_placemark->setVisualCategory( category );

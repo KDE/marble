@@ -11,7 +11,7 @@
 #include <OsmRelation.h>
 #include <MarbleDebug.h>
 #include <GeoDataPlacemark.h>
-#include <osm/OsmPresetLibrary.h>
+#include <StyleBuilder.h>
 #include <osm/OsmObjectManager.h>
 
 namespace Marble {
@@ -69,17 +69,17 @@ void OsmRelation::create(GeoDataDocument *document, OsmWays &ways, const OsmNode
         return;
     }
 
-    GeoDataFeature::GeoDataVisualCategory outerCategory = OsmPresetLibrary::determineVisualCategory(m_osmData);
+    GeoDataFeature::GeoDataVisualCategory outerCategory = StyleBuilder::determineVisualCategory(m_osmData);
     if (outerCategory == GeoDataFeature::None) {
         // Try to determine the visual category from the relation members
         auto iterator = outerWays.begin();
         GeoDataFeature::GeoDataVisualCategory const firstCategory =
-                OsmPresetLibrary::determineVisualCategory(ways[*iterator].osmData());
+                StyleBuilder::determineVisualCategory(ways[*iterator].osmData());
 
         bool categoriesAreSame = true;
         for( ; iterator != outerWays.end(); ++iterator ) {
             GeoDataFeature::GeoDataVisualCategory const category =
-                    OsmPresetLibrary::determineVisualCategory(ways[*iterator].osmData());
+                    StyleBuilder::determineVisualCategory(ways[*iterator].osmData());
             if( category != firstCategory ) {
                 categoriesAreSame = false;
                 break;
@@ -93,7 +93,7 @@ void OsmRelation::create(GeoDataDocument *document, OsmWays &ways, const OsmNode
 
     foreach(qint64 wayId, outerWays) {
         Q_ASSERT(ways.contains(wayId));
-        GeoDataFeature::GeoDataVisualCategory const category = OsmPresetLibrary::determineVisualCategory(ways[wayId].osmData());
+        GeoDataFeature::GeoDataVisualCategory const category = StyleBuilder::determineVisualCategory(ways[wayId].osmData());
         if (category == GeoDataFeature::None || category == outerCategory) {
             // Schedule way for removal: It's a non-styled way only used to create the outer boundary in this polygon
             usedWays << wayId;
@@ -113,7 +113,7 @@ void OsmRelation::create(GeoDataDocument *document, OsmWays &ways, const OsmNode
     int index = 0;
     foreach(qint64 wayId, innerWays) {
         Q_ASSERT(ways.contains(wayId));
-        if (OsmPresetLibrary::determineVisualCategory(ways[wayId].osmData()) == GeoDataFeature::None) {
+        if (StyleBuilder::determineVisualCategory(ways[wayId].osmData()) == GeoDataFeature::None) {
             // Schedule way for removal: It's a non-styled way only used to create the inner boundary in this polygon
             usedWays << wayId;
         }

@@ -12,9 +12,8 @@
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataPolygon.h"
-#include "osm/OsmPresetLibrary.h"
-
 #include "MarbleDebug.h"
+#include "StyleBuilder.h"
 #include "osm/OsmPlacemarkData.h"
 
 #include <QIODevice>
@@ -266,7 +265,7 @@ bool JsonParser::read( QIODevice* device )
                         }
                     }
 
-                    const GeoDataFeature::GeoDataVisualCategory category = OsmPresetLibrary::determineVisualCategory(osmData);
+                    const GeoDataFeature::GeoDataVisualCategory category = StyleBuilder::determineVisualCategory(osmData);
                     if (category != GeoDataFeature::None) {
                         // Add the visual category to all the placemarks
                         for (int pl = 0 ; pl < placemarkList.length(); ++pl) {

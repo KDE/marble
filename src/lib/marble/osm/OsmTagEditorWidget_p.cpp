@@ -68,7 +68,7 @@ void OsmTagEditorWidgetPrivate::populateCurrentTagsList()
         QHash< QString, QString>::const_iterator it = osmData.tagsBegin();
         QHash< QString, QString>::const_iterator end = osmData.tagsEnd();
         for ( ; it != end; ++it ) {
-            QTreeWidgetItem *tagItem = tagWidgetItem( OsmPresetLibrary::OsmTag( it.key(), it.value() ) );
+            QTreeWidgetItem *tagItem = tagWidgetItem(OsmTag(it.key(), it.value()));
             m_currentTagsList->addTopLevelItem( tagItem );
         }
     }
@@ -89,7 +89,7 @@ void OsmTagEditorWidgetPrivate::populateCurrentTagsList()
 void OsmTagEditorWidgetPrivate::populatePresetTagsList()
 {
     QList<OsmTag> tags = recommendedTags();
-    foreach ( const OsmPresetLibrary::OsmTag &tag, tags ) {
+    foreach (const OsmTag &tag, tags) {
         QTreeWidgetItem *tagItem = tagWidgetItem( tag );
         m_recommendedTagsList->addTopLevelItem( tagItem );
     }
@@ -107,7 +107,7 @@ QTreeWidgetItem *OsmTagEditorWidgetPrivate::tagWidgetItem( const OsmTag &tag ) c
     QTreeWidgetItem *tagItem = new QTreeWidgetItem( itemText );
 
     // Getting the icon preset for the tag ( if there's one available )
-    const GeoDataFeature::GeoDataVisualCategory category = OsmPresetLibrary::osmVisualCategory(tag);
+    const GeoDataFeature::GeoDataVisualCategory category = StyleBuilder::osmVisualCategory(tag);
     GeoDataStyle::ConstPtr style = styleBuilder.presetStyle(category);
     QPixmap iconPixmap = QPixmap::fromImage( style->iconStyle().icon() );
     tagItem->setIcon( 1, QIcon( iconPixmap ) );
@@ -123,8 +123,8 @@ QList<OsmTagEditorWidgetPrivate::OsmTag> OsmTagEditorWidgetPrivate::recommendedT
 
     QStringList filter = generateTagFilter();
 
-    QHash<OsmTag, GeoDataFeature::GeoDataVisualCategory>::const_iterator it = OsmPresetLibrary::begin();
-    QHash<OsmTag, GeoDataFeature::GeoDataVisualCategory>::const_iterator end = OsmPresetLibrary::end();
+    QHash<OsmTag, GeoDataFeature::GeoDataVisualCategory>::const_iterator it = StyleBuilder::begin();
+    QHash<OsmTag, GeoDataFeature::GeoDataVisualCategory>::const_iterator end = StyleBuilder::end();
 
     for ( ; it != end; ++it ) {
         if ( filter.contains( it.key().first ) ) {
