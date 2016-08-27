@@ -25,8 +25,6 @@ class GeoGraphicsItem;
 class GeoDataFeature;
 class GeoDataLatLonBox;
 class GeoGraphicsScenePrivate;
-class GeoDataDocument;
-class GeoDataStyleMap;
 class GeoDataPlacemark;
 
 /**
@@ -76,15 +74,6 @@ public:
      * @return Returns a list of selected Items
      */
     QList<GeoGraphicsItem*> selectedItems() const;
-
-    /**
-     * @brief Set the GeoGraphicsItem @p graphicsItem
-     * to use highlight style.
-     * @return Returns true if highlight style is
-     * successfully applied to item @p item .
-     */
-    bool setHighlightStyle( GeoGraphicsItem *item, const GeoDataDocument *document,
-                            const GeoDataStyleMap &styleMap );
 
 public Q_SLOTS:
     void applyHighlight( const QVector<GeoDataPlacemark*>& );
