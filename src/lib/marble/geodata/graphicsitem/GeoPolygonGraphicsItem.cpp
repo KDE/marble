@@ -52,7 +52,7 @@ GeoPolygonGraphicsItem::GeoPolygonGraphicsItem(const GeoDataFeature *feature, co
             setZValue(zValue() + elevation);
         }
 
-        const QString paintLayer = QLatin1String("Polygon/%1") + StyleBuilder::visualCategoryName(visualCategory);
+        const QString paintLayer = QLatin1String("Polygon/") + StyleBuilder::visualCategoryName(visualCategory);
         setPaintLayers(QStringList() << paintLayer);
     }
 }
@@ -82,7 +82,7 @@ GeoPolygonGraphicsItem::GeoPolygonGraphicsItem(const GeoDataFeature *feature, co
             setZValue(zValue() + elevation);
         }
 
-        const QString paintLayer = QLatin1String("Polygon/%1") + StyleBuilder::visualCategoryName(visualCategory);
+        const QString paintLayer = QLatin1String("Polygon/") + StyleBuilder::visualCategoryName(visualCategory);
         setPaintLayers(QStringList() << paintLayer);
     }
 }
