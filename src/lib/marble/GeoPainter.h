@@ -305,7 +305,7 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
                                  int margin = 0) const;
 
 /*!
-    \brief Draws a given line string (a "polyline").
+    \brief Draws a given line string (a "polyline") with a label.
 
     The \a lineString is drawn using the current pen. It's possible to
     provide a \a labelText for the \a lineString. The text is rendered using
@@ -316,9 +316,18 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     \see GeoDataLineString
 */
     void drawPolyline ( const GeoDataLineString & lineString,
-                        const QString& labelText = QString(),
+                        const QString& labelText,
                         LabelPositionFlags labelPositionFlags = LineCenter,
                         const QColor& labelcolor = Qt::black, const QFont& labelFont = QFont(QLatin1String("Arial")));
+
+/*!
+    \brief Draws a given line string (a "polyline").
+
+    The \a lineString is drawn using the current pen.
+
+    \see GeoDataLineString
+*/
+    void drawPolyline(const GeoDataLineString & lineString);
 
 
 /*!

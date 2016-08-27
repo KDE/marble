@@ -551,6 +551,15 @@ void GeoPainter::drawPolyline ( const GeoDataLineString & lineString,
                                 LabelPositionFlags labelPositionFlags,
                                 const QColor& labelColor,const QFont& labelFont)
 {
+    // no labels to draw?
+    // TODO: !labelColor.isValid() || labelColor.alpha() == 0 does not work,
+    // something injects invalid labelColor for city streets
+    if (labelText.isEmpty() || labelPositionFlags.testFlag(NoLabel) ||
+        labelColor == Qt::transparent) {
+        drawPolyline(lineString);
+        return;
+    }
+
     // Immediately leave this method now if:
     // - the object is not visible in the viewport or if
     // - the size of the object is below the resolution of the viewport
@@ -565,12 +574,7 @@ void GeoPainter::drawPolyline ( const GeoDataLineString & lineString,
     QVector<QPolygonF*> polygons;
     d->m_viewport->screenCoordinates( lineString, polygons );
 
-    if ( labelText.isEmpty() || labelPositionFlags.testFlag( NoLabel ) ) {
-        foreach( QPolygonF* itPolygon, polygons ) {
-            ClipPainter::drawPolyline( *itPolygon );
-        }
-    }
-    else if ( labelPositionFlags.testFlag( FollowLine ) ) {
+    if (labelPositionFlags.testFlag(FollowLine)) {
         const qreal maximumLabelFontSize = 20;
         qreal fontSize = pen().widthF() * 0.45;
         fontSize = qMin( fontSize, maximumLabelFontSize );
@@ -662,7 +666,7 @@ void GeoPainter::drawPolyline ( const GeoDataLineString & lineString,
         foreach( QPolygonF* itPolygon, polygons ) {
             labelNodes.clear();
             ClipPainter::drawPolyline( *itPolygon, labelNodes, labelPositionFlags );
-            if ( !labelNodes.isEmpty() && labelColor != Qt::transparent ) {
+            if (!labelNodes.isEmpty()) {
                 QPen const oldPen = pen();
                 setPen(labelColor);
                 foreach ( const QPointF& labelNode, labelNodes ) {
@@ -683,6 +687,28 @@ void GeoPainter::drawPolyline ( const GeoDataLineString & lineString,
         }
     }
     qDeleteAll( polygons );
+}
+
+
+void GeoPainter::drawPolyline(const GeoDataLineString& lineString)
+{
+    // Immediately leave this method now if:
+    // - the object is not visible in the viewport or if
+    // - the size of the object is below the resolution of the viewport
+    if (!d->m_viewport->viewLatLonAltBox().intersects(lineString.latLonAltBox()) ||
+        !d->m_viewport->resolves(lineString.latLonAltBox())) {
+        // mDebug() << "LineString doesn't get displayed on the viewport";
+        return;
+    }
+
+    QVector<QPolygonF*> polygons;
+    d->m_viewport->screenCoordinates(lineString, polygons);
+
+    foreach(const QPolygonF* itPolygon, polygons) {
+        ClipPainter::drawPolyline(*itPolygon);
+    }
+
+    qDeleteAll(polygons);
 }
 
 
