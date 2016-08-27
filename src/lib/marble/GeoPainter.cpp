@@ -549,7 +549,7 @@ QRegion GeoPainter::regionFromPixmapRect(const GeoDataCoordinates & centerCoordi
 void GeoPainter::drawPolyline ( const GeoDataLineString & lineString,
                                 const QString& labelText,
                                 LabelPositionFlags labelPositionFlags,
-                                const QColor& labelColor,const QFont& labelFont)
+                                const QColor& labelColor)
 {
     // no labels to draw?
     // TODO: !labelColor.isValid() || labelColor.alpha() == 0 does not work,
@@ -592,7 +592,7 @@ void GeoPainter::drawPolyline ( const GeoDataLineString & lineString,
             save();
 
             if (fontSize >= 6.0) {
-                QFont font = labelFont;
+                QFont font = this->font();
                 font.setPointSizeF(fontSize);
                 setFont(font);
                 int labelWidth = fontMetrics().width( labelText );

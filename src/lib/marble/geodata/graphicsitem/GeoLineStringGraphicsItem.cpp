@@ -129,9 +129,9 @@ void GeoLineStringGraphicsItem::paintLabel(GeoPainter *painter, const ViewportPa
         //painter->setBackground(QBrush(color));
         //painter->setBackgroundMode(Qt::OpaqueMode);
         const GeoDataLabelStyle& labelStyle = style->labelStyle();
+        painter->setFont(labelStyle.font());
         painter->drawPolyline( *m_lineString, feature()->name(), FollowLine,
-                               labelStyle.paintedColor(),
-                               labelStyle.font());
+                               labelStyle.paintedColor());
     }
 
     painter->restore();
