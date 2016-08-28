@@ -31,6 +31,9 @@ int main(int argc, char ** argv)
     app.setApplicationName( "Marble Maps" );
     app.setOrganizationName( "KDE" );
     app.setOrganizationDomain( "kde.org" );
+#if QT_VERSION >= 0x050700
+    app.setDesktopFileName(QStringLiteral("org.kde.marble.maps"));
+#endif
 
 #ifdef Q_OS_ANDROID
     MarbleGlobal::Profiles profiles = MarbleGlobal::SmallScreen | MarbleGlobal::HighResolution;
