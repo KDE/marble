@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Marble - Measure Tool Configuration</string>
+   <string>Measure Tool Configuration</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
