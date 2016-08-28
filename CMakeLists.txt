@@ -65,44 +65,54 @@ else()
     option(BUILD_WITH_DBUS "Build the D-Bus interface for the Marble widget" ON)
 endif()
 
+
 #######################################################
 # Specific options for building for different platforms
 
 if(CMAKE_SYSTEM_NAME STREQUAL Android)
    add_definitions(-DANDROID)
+endif()
 
-   # Minimum Qt version
-   set(QT_REQUIRED_VERSION 5.3.0)
 
+#######################################################
+# Find Qt dependencies
+
+# Minimum Qt version
+set(REQUIRED_QT_VERSION 5.3.0)
+
+if(CMAKE_SYSTEM_NAME STREQUAL Android)
+   # TODO: still needed with ECM toolchain?
    SET(QT_QMAKE_EXECUTABLE "$ENV{Qt5_android}/bin/qmake")
+endif()
 
-   find_package(Qt5Location REQUIRED)
-   find_package(Qt5Positioning REQUIRED)
-   find_package(Qt5Multimedia REQUIRED)
+find_package(Qt5Core ${REQUIRED_QT_VERSION} REQUIRED)
+find_package(Qt5Xml ${REQUIRED_QT_VERSION} REQUIRED)
+find_package(Qt5Network ${REQUIRED_QT_VERSION} REQUIRED)
+find_package(Qt5Test ${REQUIRED_QT_VERSION} REQUIRED)
+find_package(Qt5Script ${REQUIRED_QT_VERSION} REQUIRED)
+find_package(Qt5Widgets ${REQUIRED_QT_VERSION} REQUIRED)
+find_package(Qt5Svg ${REQUIRED_QT_VERSION} REQUIRED)
+find_package(Qt5Sql ${REQUIRED_QT_VERSION} REQUIRED)
+find_package(Qt5Concurrent ${REQUIRED_QT_VERSION} REQUIRED)
+find_package(Qt5Quick ${REQUIRED_QT_VERSION} REQUIRED)
+find_package(Qt5PrintSupport ${REQUIRED_QT_VERSION} REQUIRED)
+
+if(CMAKE_SYSTEM_NAME STREQUAL Android)
+   find_package(Qt5Location ${REQUIRED_QT_VERSION} REQUIRED)
+   find_package(Qt5Positioning ${REQUIRED_QT_VERSION} REQUIRED)
+   find_package(Qt5Multimedia ${REQUIRED_QT_VERSION} REQUIRED)
    set ( MARBLE_NO_WEBKITWIDGETS TRUE )
 else()
-   find_package(Qt5WebKit)
-   find_package(Qt5WebKitWidgets)
+   find_package(Qt5WebKit ${REQUIRED_QT_VERSION})
+   find_package(Qt5WebKitWidgets ${REQUIRED_QT_VERSION})
 
    if ( NOT Qt5WebKitWidgets_FOUND )
      set ( MARBLE_NO_WEBKITWIDGETS TRUE )
    endif()
 endif()
 
-find_package(Qt5Core REQUIRED)
-find_package(Qt5Xml REQUIRED)
-find_package(Qt5Network REQUIRED)
-find_package(Qt5Test REQUIRED)
-find_package(Qt5Script REQUIRED)
-find_package(Qt5Widgets REQUIRED)
-find_package(Qt5Svg REQUIRED)
-find_package(Qt5Sql REQUIRED)
-find_package(Qt5Concurrent REQUIRED)
-find_package(Qt5Quick REQUIRED)
-find_package(Qt5PrintSupport REQUIRED)
-
 if (BUILD_WITH_DBUS)
-  find_package(Qt5DBus)
+  find_package(Qt5DBus ${REQUIRED_QT_VERSION})
   if (NOT Qt5DBus_FOUND)
     set(MARBLE_NO_DBUS TRUE)
   endif()
