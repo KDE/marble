@@ -69,10 +69,7 @@ if(STATIC_BUILD)
     target_link_libraries(marble ${QT_PLUGINS_DIR}/imageformats/qsvg.lib)
 endif(STATIC_BUILD)
 
-if (NOT APPLE)
-    install( FILES marble.desktop DESTINATION ${APPS_INSTALL_DIR})
-endif()
-
 install(TARGETS marble ${INSTALL_TARGETS_DEFAULT_ARGS})
 install(PROGRAMS marble.desktop DESTINATION ${APPS_INSTALL_DIR})
+install(FILES marble.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
 install(FILES marble.kcfg DESTINATION ${KCFG_INSTALL_DIR})
