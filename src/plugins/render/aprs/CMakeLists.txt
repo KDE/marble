@@ -1,6 +1,6 @@
 PROJECT(AprsPlugin)
 
-macro_optional_find_package(Qt5SerialPort)
+macro_optional_find_package(Qt5SerialPort ${REQUIRED_QT_VERSION})
 marble_set_package_properties( Qt5SerialPort PROPERTIES DESCRIPTION "Provides access to hardware and virtual serial ports." )
 marble_set_package_properties( Qt5SerialPort PROPERTIES TYPE OPTIONAL PURPOSE "Reading from serial port in APRS plugin" )
 

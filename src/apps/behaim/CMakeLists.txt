@@ -6,7 +6,7 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
 if (CMAKE_SYSTEM_NAME STREQUAL Android)
     set(TARGET MarbleBehaim)
 
-    find_package(Qt5AndroidExtras)
+    find_package(Qt5AndroidExtras ${REQUIRED_QT_VERSION})
 
     add_library (${TARGET} SHARED ${marble_SRCS} ${marble_QRCS})
 

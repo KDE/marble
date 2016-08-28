@@ -1,7 +1,7 @@
 if (WITH_DESIGNER_PLUGIN)
 
   # TODO: find why this is not listed in the feature_summary (same with Qt5UiPlugin)
-  find_package(Qt5Designer QUIET)
+  find_package(Qt5Designer ${REQUIRED_QT_VERSION} QUIET)
   marble_set_package_properties( Qt5Designer PROPERTIES TYPE OPTIONAL PURPOSE "Required to build Qt Designer plugins" )
 
 if(NOT Qt5Designer_VERSION_STRING VERSION_LESS 5.5.0)
