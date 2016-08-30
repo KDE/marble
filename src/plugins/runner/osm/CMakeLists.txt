@@ -34,21 +34,25 @@ set( osm_SRCS
 
 marble_add_plugin( OsmPlugin ${osm_SRCS} ${osm_writers_SRCS} ${osm_translators_SRCS} )
 
-if(WIN32 OR APPLE)
-  # nothing to do
-else()
-  install(FILES marble_osm.desktop DESTINATION ${APPS_INSTALL_DIR})
+
+find_package(ECM QUIET)
+if(NOT ECM_FOUND)
+    return()
 endif()
 
-set(KDE_SKIP_UNINSTALL_TARGET ON CACHE BOOL "KDE uninstall target must be disabled")
-find_package(ECM QUIET)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
-if(ECM_FOUND)
-  include(KDEInstallDirs)
-endif()
+
+include(KDEInstallDirs)
+
 macro_optional_find_package(KF5 QUIET COMPONENTS KIO)
-if(KF5_FOUND)
-# install again once part is fixed to load and show the passed file
-#   install(FILES marble_part_osm.desktop DESTINATION ${SERVICES_INSTALL_DIR})
-  install(FILES marble_thumbnail_osm.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+if(NOT KF5_FOUND)
+    return()
 endif()
+
+# register marble part as handler
+# install again once part is fixed to load and show the passed file
+# install(FILES marble_part_osm.desktop DESTINATION ${KDE_INSTALL_KSERVICES5DIR})
+
+# register thumbnail plugin as handler
+install(FILES marble_thumbnail_osm.desktop DESTINATION ${KDE_INSTALL_KSERVICES5DIR})
+

@@ -271,6 +271,13 @@ if(WIN32)
 endif(WIN32)
 ####################################################
 
+
+####################################################
+# Add global ECM & KF5 settings
+set(KDE_INSTALL_DIRS_NO_DEPRECATED TRUE)
+set(KDE_SKIP_UNINSTALL_TARGET ON CACHE BOOL "KDE uninstall target must be disabled")
+
+
 ####################################################
 # Add the include directories
 
