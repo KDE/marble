@@ -149,7 +149,7 @@
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=marble</url>
   <url type="faq">https://techbase.kde.org/Projects/Marble/FAQ</url>
   <url type="help">https://marble.kde.org/support.php</url>
-  <url type="donations">http://www.kde.org/community/donations/</url>
+  <url type="donation">http://www.kde.org/community/donations/</url>
   <screenshots>
     <screenshot type="default">
       <image>https://marble.kde.org/img/gallery/marble-desktop-satellite-clouds.png</image>
