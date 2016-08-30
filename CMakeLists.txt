@@ -274,8 +274,10 @@ endif(WIN32)
 
 ####################################################
 # Add global ECM & KF5 settings
+set(REQUIRED_ECM_VERSION 1.7.0)
 set(KDE_INSTALL_DIRS_NO_DEPRECATED TRUE)
 set(KDE_SKIP_UNINSTALL_TARGET ON CACHE BOOL "KDE uninstall target must be disabled")
+set(REQUIRED_KF5_VERSION 5.7.0)
 
 
 ####################################################

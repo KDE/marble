@@ -1,4 +1,4 @@
-find_package(ECM QUIET)
+find_package(ECM ${REQUIRED_ECM_VERSION} QUIET)
 if(NOT ECM_FOUND)
     return()
 endif()
@@ -11,7 +11,7 @@ set(LIB_INSTALL_DIR ${KDE_INSTALL_LIBDIR})
 include(KDECMakeSettings)
 include(ECMInstallIcons)
 
-macro_optional_find_package(KF5 QUIET COMPONENTS Crash NewStuff Parts CoreAddons I18n)
+macro_optional_find_package(KF5 ${REQUIRED_KF5_VERSION} QUIET COMPONENTS Crash NewStuff Parts CoreAddons I18n)
 
 if(NOT KF5_FOUND)
     return()

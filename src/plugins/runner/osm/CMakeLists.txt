@@ -35,7 +35,7 @@ set( osm_SRCS
 marble_add_plugin( OsmPlugin ${osm_SRCS} ${osm_writers_SRCS} ${osm_translators_SRCS} )
 
 
-find_package(ECM QUIET)
+find_package(ECM ${REQUIRED_ECM_VERSION} QUIET)
 if(NOT ECM_FOUND)
     return()
 endif()
@@ -44,7 +44,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
 
 include(KDEInstallDirs)
 
-macro_optional_find_package(KF5 QUIET COMPONENTS KIO)
+macro_optional_find_package(KF5 ${REQUIRED_KF5_VERSION} QUIET COMPONENTS KIO)
 if(NOT KF5_FOUND)
     return()
 endif()
