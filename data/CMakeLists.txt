@@ -272,16 +272,17 @@ DESTINATION ${MARBLE_DATA_INSTALL_PATH}/audio)
 
 add_subdirectory(lang)
 
-set(KDE_SKIP_UNINSTALL_TARGET ON CACHE BOOL "KDE uninstall target must be disabled")
 find_package(ECM QUIET) # for FindSharedMimeInfo
+if(NOT ECM_FOUND)
+    return()
+endif()
+
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
-if(ECM_FOUND)
-    include(KDEInstallDirs) # for XDG_MIME_INSTALL_DIR
-    # shared-mime-info 0.40 is mandatory for generic-icon
-    set( SHARED_MIME_INFO_MINIMUM_VERSION "0.40" )
-    find_package( SharedMimeInfo QUIET )
-    IF( SharedMimeInfo_FOUND )
-        install( FILES mimetypes/geo.xml  DESTINATION ${XDG_MIME_INSTALL_DIR} )
-        update_xdg_mimetypes( ${XDG_MIME_INSTALL_DIR} )
-    ENDIF()
+include(KDEInstallDirs) # for KDE_INSTALL_MIMEDIR
+# shared-mime-info 0.40 is mandatory for generic-icon
+set( SHARED_MIME_INFO_MINIMUM_VERSION "0.40" )
+find_package( SharedMimeInfo QUIET )
+if(SharedMimeInfo_FOUND)
+    install(FILES mimetypes/geo.xml  DESTINATION ${KDE_INSTALL_MIMEDIR})
+    update_xdg_mimetypes( ${KDE_INSTALL_MIMEDIR} )
 endif()

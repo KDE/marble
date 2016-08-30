@@ -1,20 +1,24 @@
 project(MarblePlasmaRunner)
 
-set(KDE_SKIP_UNINSTALL_TARGET ON CACHE BOOL "KDE uninstall target must be disabled")
 find_package(ECM QUIET)
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
-if(ECM_FOUND)
-  include(ECMPoQmTools)
-  include(KDEInstallDirs)
-  include(KDECMakeSettings)
+if(NOT ECM_FOUND)
+    return()
 endif()
-include(FeatureSummary)
+
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
+
+include(ECMPoQmTools)
+include(KDEInstallDirs)
+# KDECMakeSettings expexts LIB_INSTALL_DIR set
+set(LIB_INSTALL_DIR ${KDE_INSTALL_LIBDIR})
+include(KDECMakeSettings)
+
 macro_optional_find_package(KF5 QUIET COMPONENTS Runner I18n)
 
-if (NOT KF5_FOUND)       
+if(NOT KF5_FOUND)
   return()
 endif()
-  
+
 set(plasmaRunner_SRCS
   main.cpp
   plasmarunner.cpp
@@ -30,5 +34,5 @@ target_link_libraries(plasma_runner_marble
   KF5::I18n
 )
 
-install(TARGETS plasma_runner_marble DESTINATION ${PLUGIN_INSTALL_DIR})
-install(FILES plasma-runner-marble.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+install(TARGETS plasma_runner_marble DESTINATION ${KDE_INSTALL_PLUGINDIR})
+install(FILES plasma-runner-marble.desktop DESTINATION ${KDE_INSTALL_KSERVICES5DIR})

@@ -10,26 +10,32 @@ set( kml_SRCS KmlDocument.cpp KmlParser.cpp KmlPlugin.cpp KmlRunner.cpp KmzHandl
 
 marble_add_plugin( KmlPlugin ${kml_SRCS} )
 
-if(WIN32 OR APPLE)
-  # nothing to do
-else()
-  install(FILES marble_kml.desktop DESTINATION ${APPS_INSTALL_DIR})
-  install(FILES marble_kmz.desktop DESTINATION ${APPS_INSTALL_DIR})
+
+find_package(ECM QUIET)
+if(NOT ECM_FOUND)
+    return()
 endif()
 
-set(KDE_SKIP_UNINSTALL_TARGET ON CACHE BOOL "KDE uninstall target must be disabled")
-find_package(ECM QUIET)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
-if(ECM_FOUND)
-  include(KDEInstallDirs)
-endif()
+
+include(KDEInstallDirs)
+
 macro_optional_find_package(KF5 QUIET COMPONENTS KIO)
-if(KF5_FOUND)
+if(NOT KF5_FOUND)
+    return()
+endif()
+
+# register marble part as handler
 # install again once part is fixed to load and show the passed file
-#   install(FILES marble_part_kml.desktop DESTINATION ${SERVICES_INSTALL_DIR})
-  install(FILES marble_thumbnail_kml.desktop DESTINATION ${SERVICES_INSTALL_DIR})
-  install(PROGRAMS marble_kmz.desktop DESTINATION ${APPS_INSTALL_DIR})
-# install again once part is fixed to load and show the passed file
-#   install(FILES marble_part_kmz.desktop DESTINATION ${SERVICES_INSTALL_DIR})
-  install(FILES marble_thumbnail_kmz.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+# install(FILES marble_part_kml.desktop DESTINATION ${KDE_INSTALL_KSERVICES5DIR})
+# install(FILES marble_part_kmz.desktop DESTINATION ${KDE_INSTALL_KSERVICES5DIR})
+
+# register thumbnail plugin as handler
+install(FILES marble_thumbnail_kml.desktop DESTINATION ${KDE_INSTALL_KSERVICES5DIR})
+install(FILES marble_thumbnail_kmz.desktop DESTINATION ${KDE_INSTALL_KSERVICES5DIR})
+
+if(NOT WIN32 AND NOT APPLE)
+    # register marble app as handler
+    install(FILES marble_kml.desktop DESTINATION ${KDE_INSTALL_APPDIR})
+    install(FILES marble_kmz.desktop DESTINATION ${KDE_INSTALL_APPDIR})
 endif()
