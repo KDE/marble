@@ -272,7 +272,7 @@ DESTINATION ${MARBLE_DATA_INSTALL_PATH}/audio)
 
 add_subdirectory(lang)
 
-find_package(ECM QUIET) # for FindSharedMimeInfo
+find_package(ECM ${REQUIRED_ECM_VERSION} QUIET) # for FindSharedMimeInfo
 if(NOT ECM_FOUND)
     return()
 endif()
