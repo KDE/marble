@@ -25,6 +25,7 @@
 #include <QFile>
 #include <QFileInfo>
 #include <QBuffer>
+#include <QSet>
 
 namespace Marble {
 
@@ -44,6 +45,8 @@ GeoDataDocument* OsmParser::parseO5m(const QString &filename, QString &error)
     O5mreaderDataset data;
     O5mreaderIterateRet outerState, innerState;
     char *key, *value;
+    // share string data on the heap at least for this file
+    QSet<QString> stringPool;
 
     OsmNodes nodes;
     OsmWays ways;
@@ -65,7 +68,9 @@ GeoDataDocument* OsmParser::parseO5m(const QString &filename, QString &error)
             node.setCoordinates(GeoDataCoordinates(data.lon*1.0e-7, data.lat*1.0e-7,
                                                    0.0, GeoDataCoordinates::Degree));
             while ((innerState = o5mreader_iterateTags(reader, &key, &value)) == O5MREADER_ITERATE_RET_NEXT) {
-                node.osmData().addTag(key, value);
+                const QString keyString = *stringPool.insert(QString::fromUtf8(key));
+                const QString valueString = *stringPool.insert(QString::fromUtf8(value));
+                node.osmData().addTag(keyString, valueString);
             }
         }
             break;
@@ -78,7 +83,9 @@ GeoDataDocument* OsmParser::parseO5m(const QString &filename, QString &error)
                 way.addReference(nodeId);
             }
             while ((innerState = o5mreader_iterateTags(reader, &key, &value)) == O5MREADER_ITERATE_RET_NEXT) {
-                way.osmData().addTag(key, value);
+                const QString keyString = *stringPool.insert(QString::fromUtf8(key));
+                const QString valueString = *stringPool.insert(QString::fromUtf8(value));
+                way.osmData().addTag(keyString, valueString);
             }
         }
             break;
@@ -90,10 +97,13 @@ GeoDataDocument* OsmParser::parseO5m(const QString &filename, QString &error)
             uint8_t type;
             uint64_t refId;
             while ((innerState = o5mreader_iterateRefs(reader, &refId, &type, &role)) == O5MREADER_ITERATE_RET_NEXT) {
-                relation.addMember(refId, role, relationTypes[type]);
+                const QString roleString = *stringPool.insert(QString::fromUtf8(role));
+                relation.addMember(refId, roleString, relationTypes[type]);
             }
             while ((innerState = o5mreader_iterateTags(reader, &key, &value)) == O5MREADER_ITERATE_RET_NEXT) {
-                relation.osmData().addTag(key, value);
+                const QString keyString = *stringPool.insert(QString::fromUtf8(key));
+                const QString valueString = *stringPool.insert(QString::fromUtf8(value));
+                relation.osmData().addTag(keyString, valueString);
             }
         }
             break;
@@ -135,6 +145,8 @@ GeoDataDocument* OsmParser::parseXml(const QString &filename, QString &error)
     OsmPlacemarkData* osmData(0);
     QString parentTag;
     qint64 parentId(0);
+    // share string data on the heap at least for this file
+    QSet<QString> stringPool;
 
     OsmNodes m_nodes;
     OsmWays m_ways;
@@ -164,8 +176,10 @@ GeoDataDocument* OsmParser::parseXml(const QString &filename, QString &error)
                 osmData = &m_relations[parentId].osmData();
             }
         } else if (tagName == osm::osmTag_tag) {
-            osmData->addTag(parser.attributes().value(QLatin1String("k")).toString(),
-                            parser.attributes().value(QLatin1String("v")).toString());
+            const QXmlStreamAttributes &attributes = parser.attributes();
+            const QString keyString = *stringPool.insert(attributes.value(QLatin1String("k")).toString());
+            const QString valueString = *stringPool.insert(attributes.value(QLatin1String("v")).toString());
+            osmData->addTag(keyString, valueString);
         } else if (tagName == osm::osmTag_nd && parentTag == osm::osmTag_way) {
             m_ways[parentId].addReference(parser.attributes().value(QLatin1String("ref")).toLongLong());
         } else if (tagName == osm::osmTag_member && parentTag == osm::osmTag_relation) {
