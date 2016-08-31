@@ -239,6 +239,8 @@ void FileLoaderPrivate::documentParsed( GeoDataDocument* doc, const QString& err
 
 void FileLoaderPrivate::createFilterProperties( GeoDataContainer *container )
 {
+    const QString styleUrl = QLatin1Char('#') + m_styleMap->id();
+
     QVector<GeoDataFeature*>::Iterator i = container->begin();
     QVector<GeoDataFeature*>::Iterator const end = container->end();
     for (; i != end; ++i ) {
@@ -264,7 +266,7 @@ void FileLoaderPrivate::createFilterProperties( GeoDataContainer *container )
                 placemark->geometry()->nodeType() != GeoDataTypes::GeoDataPointType
                  && m_documentRole == MapDocument
                  && m_style ) {
-                placemark->setStyleUrl(QLatin1Char('#') + m_styleMap->id());
+                placemark->setStyleUrl(styleUrl);
             }
 
             // Mountain (H), Volcano (V), Shipwreck (W)

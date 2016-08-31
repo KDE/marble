@@ -480,6 +480,7 @@ void MarbleModelPrivate::assignNewStyle( const QString &filePath, const GeoDataS
 
     addHighlightStyle( doc );
 
+    const QString styleUrl = QLatin1Char('#') + styleMap.id();
     QVector<GeoDataFeature*>::iterator iter = doc->begin();
     QVector<GeoDataFeature*>::iterator const end = doc->end();
 
@@ -490,7 +491,7 @@ void MarbleModelPrivate::assignNewStyle( const QString &filePath, const GeoDataS
                 if ( placemark->geometry()->nodeType() != GeoDataTypes::GeoDataTrackType &&
                     placemark->geometry()->nodeType() != GeoDataTypes::GeoDataPointType )
                 {
-                    placemark->setStyleUrl(QLatin1Char('#') + styleMap.id());
+                    placemark->setStyleUrl(styleUrl);
                 }
             }
         }
@@ -871,6 +872,7 @@ void MarbleModelPrivate::assignFillColors( const QString &filePath ) {
                             doc->addStyle( style );
                             doc->addStyleMap( styleMap );
 
+                            const QString styleUrl = QLatin1Char('#') + styleMap.id();
                             QVector<GeoDataFeature*>::iterator iter = doc->begin();
                             QVector<GeoDataFeature*>::iterator const end = doc->end();
 
@@ -881,7 +883,7 @@ void MarbleModelPrivate::assignFillColors( const QString &filePath ) {
                                     if ( placemark->geometry()->nodeType() != GeoDataTypes::GeoDataTrackType &&
                                         placemark->geometry()->nodeType() != GeoDataTypes::GeoDataPointType )
                                     {
-                                        placemark->setStyleUrl(QLatin1Char('#') + styleMap.id());
+                                        placemark->setStyleUrl(styleUrl);
                                     }
                                 }
                             }
