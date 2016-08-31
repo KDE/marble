@@ -50,11 +50,11 @@ void OsmRelation::addMember(qint64 reference, const QString &role, const QString
 
 void OsmRelation::create(GeoDataDocument *document, OsmWays &ways, const OsmNodes &nodes, QSet<qint64> &usedNodes, QSet<qint64> &usedWays) const
 {
-    if (!m_osmData.containsTag("type", "multipolygon")) {
+    if (!m_osmData.containsTag(QStringLiteral("type"), QStringLiteral("multipolygon"))) {
         return;
     }
 
-    QStringList const outerRoles = QStringList() << "outer" << "";
+    QStringList const outerRoles = QStringList() << QStringLiteral("outer") << QString();
     QSet<qint64> outerWays;
     QSet<qint64> outerNodes;
     const QList<GeoDataLinearRing> outer = rings(outerRoles, ways, nodes, outerNodes, outerWays);
@@ -104,7 +104,7 @@ void OsmRelation::create(GeoDataDocument *document, OsmWays &ways, const OsmNode
         }
     }
 
-    QStringList const innerRoles = QStringList() << "inner";
+    QStringList const innerRoles = QStringList() << QStringLiteral("inner");
     QSet<qint64> innerWays;
     const QList<GeoDataLinearRing> inner = rings(innerRoles, ways, nodes, usedNodes, innerWays);
 
@@ -128,9 +128,9 @@ void OsmRelation::create(GeoDataDocument *document, OsmWays &ways, const OsmNode
         // In case of a bathymetry store elevation info since it is required during styling
         // The ele=* tag is present in the outermost way
         const OsmPlacemarkData outerWayData = ways[*outerWays.begin()].osmData();
-        if (outerWayData.containsTagKey("ele")) {
-            const QString value = outerWayData.tagValue("ele");
-            osmData.addTag("ele", value);
+        if (outerWayData.containsTagKey(QStringLiteral("ele"))) {
+            const QString value = outerWayData.tagValue(QStringLiteral("ele"));
+            osmData.addTag(QStringLiteral("ele"), value);
         }
     }
 
@@ -141,7 +141,7 @@ void OsmRelation::create(GeoDataDocument *document, OsmWays &ways, const OsmNode
     }
 
     GeoDataPlacemark *placemark = new GeoDataPlacemark;
-    placemark->setName(m_osmData.tagValue("name"));
+    placemark->setName(m_osmData.tagValue(QStringLiteral("name")));
     placemark->setVisualCategory(outerCategory);
     placemark->setStyle( GeoDataStyle::Ptr() );
     placemark->setVisible(outerCategory != GeoDataFeature::None);

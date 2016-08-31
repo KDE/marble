@@ -27,9 +27,9 @@ void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes, QSet<qint6
     GeoDataPlacemark* placemark = new GeoDataPlacemark;
     placemark->setOsmData(m_osmData);
     placemark->setVisualCategory(StyleBuilder::determineVisualCategory(m_osmData));
-    placemark->setName(m_osmData.tagValue("name"));
+    placemark->setName(m_osmData.tagValue(QStringLiteral("name")));
     if (placemark->name().isEmpty() && placemark->visualCategory() >= GeoDataFeature::HighwaySteps && placemark->visualCategory() <= GeoDataFeature::HighwayMotorway) {
-        placemark->setName(m_osmData.tagValue("ref"));
+        placemark->setName(m_osmData.tagValue(QStringLiteral("ref")));
     }
     placemark->setVisible(placemark->visualCategory() != GeoDataFeature::None);
 
@@ -102,14 +102,14 @@ bool OsmWay::isArea() const
     // See also https://wiki.openstreetmap.org/wiki/Key:area
 
     bool const isLinearFeature =
-            m_osmData.containsTag("area", "no") ||
-            m_osmData.containsTagKey("highway") ||
-            m_osmData.containsTagKey("barrier");
+            m_osmData.containsTag(QStringLiteral("area"), QStringLiteral("no")) ||
+            m_osmData.containsTagKey(QStringLiteral("highway")) ||
+            m_osmData.containsTagKey(QStringLiteral("barrier"));
     if (isLinearFeature) {
         return false;
     }
 
-    bool const isAreaFeature = m_osmData.containsTagKey("landuse");
+    bool const isAreaFeature = m_osmData.containsTagKey(QStringLiteral("landuse"));
     if (isAreaFeature) {
         return true;
     }
@@ -131,46 +131,46 @@ bool OsmWay::isAreaTag(const QString &keyValue)
         // All these tags can be found updated at
         // http://wiki.openstreetmap.org/wiki/Map_Features#Landuse
 
-        s_areaTags.insert( "natural=water" );
-        s_areaTags.insert( "natural=wood" );
-        s_areaTags.insert( "natural=beach" );
-        s_areaTags.insert( "natural=wetland" );
-        s_areaTags.insert( "natural=glacier" );
-        s_areaTags.insert( "natural=scrub" );
-        s_areaTags.insert( "natural=cliff" );
-        s_areaTags.insert( "area=yes" );
-        s_areaTags.insert( "waterway=riverbank" );
+        s_areaTags.insert(QStringLiteral("natural=water"));
+        s_areaTags.insert(QStringLiteral("natural=wood"));
+        s_areaTags.insert(QStringLiteral("natural=beach"));
+        s_areaTags.insert(QStringLiteral("natural=wetland"));
+        s_areaTags.insert(QStringLiteral("natural=glacier"));
+        s_areaTags.insert(QStringLiteral("natural=scrub"));
+        s_areaTags.insert(QStringLiteral("natural=cliff"));
+        s_areaTags.insert(QStringLiteral("area=yes"));
+        s_areaTags.insert(QStringLiteral("waterway=riverbank"));
 
         foreach(const QString &value, StyleBuilder::buildingValues() ) {
             s_areaTags.insert(QLatin1String("building=") + value);
         }
-        s_areaTags.insert( "man_made=bridge" );
+        s_areaTags.insert(QStringLiteral("man_made=bridge"));
 
-        s_areaTags.insert( "amenity=graveyard" );
-        s_areaTags.insert( "amenity=parking" );
-        s_areaTags.insert( "amenity=parking_space" );
-        s_areaTags.insert( "amenity=bicycle_parking" );
-        s_areaTags.insert( "amenity=college" );
-        s_areaTags.insert( "amenity=hospital" );
-        s_areaTags.insert( "amenity=kindergarten" );
-        s_areaTags.insert( "amenity=school" );
-        s_areaTags.insert( "amenity=university" );
-        s_areaTags.insert( "leisure=common" );
-        s_areaTags.insert( "leisure=garden" );
-        s_areaTags.insert( "leisure=golf_course" );
-        s_areaTags.insert( "leisure=marina" );
-        s_areaTags.insert( "leisure=playground" );
-        s_areaTags.insert( "leisure=pitch" );
-        s_areaTags.insert( "leisure=park" );
-        s_areaTags.insert( "leisure=sports_centre" );
-        s_areaTags.insert( "leisure=stadium" );
-        s_areaTags.insert( "leisure=swimming_pool" );
-        s_areaTags.insert( "leisure=track" );
+        s_areaTags.insert(QStringLiteral("amenity=graveyard"));
+        s_areaTags.insert(QStringLiteral("amenity=parking"));
+        s_areaTags.insert(QStringLiteral("amenity=parking_space"));
+        s_areaTags.insert(QStringLiteral("amenity=bicycle_parking"));
+        s_areaTags.insert(QStringLiteral("amenity=college"));
+        s_areaTags.insert(QStringLiteral("amenity=hospital"));
+        s_areaTags.insert(QStringLiteral("amenity=kindergarten"));
+        s_areaTags.insert(QStringLiteral("amenity=school"));
+        s_areaTags.insert(QStringLiteral("amenity=university"));
+        s_areaTags.insert(QStringLiteral("leisure=common"));
+        s_areaTags.insert(QStringLiteral("leisure=garden"));
+        s_areaTags.insert(QStringLiteral("leisure=golf_course"));
+        s_areaTags.insert(QStringLiteral("leisure=marina"));
+        s_areaTags.insert(QStringLiteral("leisure=playground"));
+        s_areaTags.insert(QStringLiteral("leisure=pitch"));
+        s_areaTags.insert(QStringLiteral("leisure=park"));
+        s_areaTags.insert(QStringLiteral("leisure=sports_centre"));
+        s_areaTags.insert(QStringLiteral("leisure=stadium"));
+        s_areaTags.insert(QStringLiteral("leisure=swimming_pool"));
+        s_areaTags.insert(QStringLiteral("leisure=track"));
 
-        s_areaTags.insert( "military=danger_area" );
+        s_areaTags.insert(QStringLiteral("military=danger_area"));
 
-        s_areaTags.insert( "marble_land=landmass" );
-        s_areaTags.insert( "settlement=yes" );
+        s_areaTags.insert(QStringLiteral("marble_land=landmass"));
+        s_areaTags.insert(QStringLiteral("settlement=yes"));
     }
 
     return s_areaTags.contains(keyValue);

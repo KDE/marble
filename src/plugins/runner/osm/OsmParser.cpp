@@ -49,9 +49,9 @@ GeoDataDocument* OsmParser::parseO5m(const QString &filename, QString &error)
     OsmWays ways;
     OsmRelations relations;
     QHash<uint8_t, QString> relationTypes;
-    relationTypes[O5MREADER_DS_NODE] = "node";
-    relationTypes[O5MREADER_DS_WAY] = "way";
-    relationTypes[O5MREADER_DS_REL] = "relation";
+    relationTypes[O5MREADER_DS_NODE] = QStringLiteral("node");
+    relationTypes[O5MREADER_DS_WAY] = QStringLiteral("way");
+    relationTypes[O5MREADER_DS_REL] = QStringLiteral("relation");
 
     auto file = fopen(filename.toStdString().c_str(), "rb");
     o5mreader_open(&reader, file);
@@ -116,7 +116,7 @@ GeoDataDocument* OsmParser::parseXml(const QString &filename, QString &error)
         MarbleZipReader zipReader(filename);
         if (zipReader.fileInfoList().size() != 1) {
             int const fileNumber = zipReader.fileInfoList().size();
-            error = QString("Unexpected number of files (%1) in %2").arg(fileNumber).arg(filename);
+            error = QStringLiteral("Unexpected number of files (%1) in %2").arg(fileNumber).arg(filename);
             return nullptr;
         }
         QByteArray const data = zipReader.fileData(zipReader.fileInfoList().first().filePath);
@@ -126,7 +126,7 @@ GeoDataDocument* OsmParser::parseXml(const QString &filename, QString &error)
     } else {
         file.setFileName(filename);
         if (!file.open(QFile::ReadOnly)) {
-            error = QString("Cannot open file %1").arg(filename);
+            error = QStringLiteral("Cannot open file %1").arg(filename);
             return nullptr;
         }
         parser.setDevice(&file);
@@ -186,10 +186,10 @@ GeoDataDocument *OsmParser::createDocument(OsmNodes &nodes, OsmWays &ways, OsmRe
     GeoDataPolyStyle backgroundPolyStyle;
     backgroundPolyStyle.setFill( true );
     backgroundPolyStyle.setOutline( false );
-    backgroundPolyStyle.setColor("#f1eee8");
+    backgroundPolyStyle.setColor(QStringLiteral("#f1eee8"));
     GeoDataStyle::Ptr backgroundStyle(new GeoDataStyle);
     backgroundStyle->setPolyStyle( backgroundPolyStyle );
-    backgroundStyle->setId( "background" );
+    backgroundStyle->setId(QStringLiteral("background"));
     document->addStyle( backgroundStyle );
 
     QSet<qint64> usedNodes, usedWays;

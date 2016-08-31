@@ -46,20 +46,20 @@ void OsmNode::create(GeoDataDocument *document) const
     placemark->setCoordinate(m_coordinates);
 
     if ((category == GeoDataFeature::TransportCarShare || category == GeoDataFeature::MoneyAtm)
-            && m_osmData.containsTagKey("operator")) {
-        placemark->setName(m_osmData.tagValue("operator"));
+            && m_osmData.containsTagKey(QStringLiteral("operator"))) {
+        placemark->setName(m_osmData.tagValue(QStringLiteral("operator")));
     } else {
-        placemark->setName(m_osmData.tagValue("name"));
+        placemark->setName(m_osmData.tagValue(QStringLiteral("name")));
     }
     if (placemark->name().isEmpty()) {
-        placemark->setName(m_osmData.tagValue("ref"));
+        placemark->setName(m_osmData.tagValue(QStringLiteral("ref")));
     }
     placemark->setVisualCategory(category);
     placemark->setStyle( GeoDataStyle::Ptr() );
 
     placemark->setZoomLevel( 18 );
     if (category >= GeoDataFeature::PlaceCity && category <= GeoDataFeature::PlaceVillage) {
-        int const population = m_osmData.tagValue("population").toInt();
+        int const population = m_osmData.tagValue(QStringLiteral("population")).toInt();
         placemark->setPopulation(qMax(0, population));
         if (population > 0) {
             placemark->setZoomLevel(populationIndex(population));
