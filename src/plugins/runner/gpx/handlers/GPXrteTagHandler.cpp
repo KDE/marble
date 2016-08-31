@@ -48,7 +48,7 @@ GeoNode* GPXrteTagHandler::parse(GeoParser& parser) const
         doc->append(placemark);
         GeoDataLineString *linestring = new GeoDataLineString;
         placemark->setGeometry(linestring);
-        placemark->setStyleUrl("#map-route");
+        placemark->setStyleUrl(QStringLiteral("#map-route"));
 
         return placemark;
     }

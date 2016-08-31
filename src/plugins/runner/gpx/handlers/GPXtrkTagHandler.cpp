@@ -45,7 +45,7 @@ GeoNode* GPXtrkTagHandler::parse(GeoParser& parser) const
         doc->append(placemark);
         GeoDataMultiGeometry *multigeometry = new GeoDataMultiGeometry;
         placemark->setGeometry(multigeometry);
-        placemark->setStyleUrl("#map-track");
+        placemark->setStyleUrl(QStringLiteral("#map-track"));
 
         return placemark;
     }

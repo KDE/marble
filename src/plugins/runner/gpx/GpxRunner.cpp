@@ -31,7 +31,7 @@ GeoDataDocument *GpxRunner::parseFile(const QString &fileName, DocumentRole role
 {
     QFile file( fileName );
     if ( !file.exists() ) {
-        error = QString("File %1 does not exist").arg(fileName);
+        error = QStringLiteral("File %1 does not exist").arg(fileName);
         mDebug() << error;
         return nullptr;
     }

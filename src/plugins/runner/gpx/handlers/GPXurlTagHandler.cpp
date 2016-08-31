@@ -42,7 +42,7 @@ GeoNode* GPXurlTagHandler::parse(GeoParser& parser) const
         QString url = parser.readElementText().trimmed();
 
         GeoDataExtendedData extendedData = placemark->extendedData();
-        extendedData.addValue(GeoDataData("url", url));
+        extendedData.addValue(GeoDataData(QStringLiteral("url"), url));
         placemark->setExtendedData(extendedData);
     }
 

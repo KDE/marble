@@ -58,9 +58,9 @@ GeoNode* GPXwptTagHandler::parse(GeoParser& parser) const
             lon = tmp.toString().toFloat();
         }
         placemark->setCoordinate( lon, lat, 0, GeoDataCoordinates::Degree );
-        placemark->setRole("Waypoint");
+        placemark->setRole(QStringLiteral("Waypoint"));
 
-        placemark->setStyle(doc->style("waypoint"));
+        placemark->setStyle(doc->style(QStringLiteral("waypoint")));
 
         doc->append(placemark);
         return placemark;

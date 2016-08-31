@@ -47,7 +47,7 @@ GeoNode* GPXlinkTagHandler::parse(GeoParser& parser) const
             text = parser.readElementText();
         }
 
-        QString link = QString("Link: <a href=\"%1\">%2</a>")
+        const QString link = QStringLiteral("Link: <a href=\"%1\">%2</a>")
             .arg(href).arg(text);
 
         QString desc = placemark->description();
