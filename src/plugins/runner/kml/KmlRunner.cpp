@@ -51,7 +51,7 @@ GeoDataDocument *KmlRunner::parseFile(const QString &fileName, DocumentRole role
 
     QFile file( kmlFileName );
     if ( !file.exists() ) {
-        error = QString("File %1 does not exist").arg(kmlFileName);
+        error = QStringLiteral("File %1 does not exist").arg(kmlFileName);
         mDebug() << error;
         return nullptr;
     }
