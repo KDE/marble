@@ -30,7 +30,7 @@ bool CoordinatesParser::read( QIODevice *device )
         
         if( isStartElement() ) {
             if (name() == QLatin1String("rsp")) {
-                if (attributes().value("stat") == QLatin1String("ok")) {
+                if (attributes().value(QLatin1String("stat")) == QLatin1String("ok")) {
                     readRsp();
                 } else {
                     raiseError(QObject::tr("Query failed"));
@@ -104,8 +104,8 @@ void CoordinatesParser::readLocation()
     Q_ASSERT( isStartElement()
               && name() == QLatin1String("location"));
  
-    m_coordinates->setLatitude( attributes().value( "latitude" ).toString().toDouble() * DEG2RAD );
-    m_coordinates->setLongitude( attributes().value( "longitude" ).toString().toDouble() * DEG2RAD );
+    m_coordinates->setLatitude(attributes().value(QLatin1String("latitude")).toString().toDouble() * DEG2RAD);
+    m_coordinates->setLongitude(attributes().value(QLatin1String("longitude")).toString().toDouble() * DEG2RAD);
     
     while( !atEnd() ) {
         readNext();

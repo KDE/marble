@@ -23,8 +23,8 @@ namespace Marble {
 
 void OsmNode::parseCoordinates(const QXmlStreamAttributes &attributes)
 {
-    qreal const lon = attributes.value( "lon" ).toDouble();
-    qreal const lat = attributes.value( "lat" ).toDouble();
+    qreal const lon = attributes.value(QLatin1String("lon")).toDouble();
+    qreal const lat = attributes.value(QLatin1String("lat")).toDouble();
     setCoordinates(GeoDataCoordinates(lon, lat, 0, GeoDataCoordinates::Degree));
 }
 

@@ -294,14 +294,14 @@ bool OsmPlacemarkData::isEmpty() const
 OsmPlacemarkData OsmPlacemarkData::fromParserAttributes( const QXmlStreamAttributes &attributes )
 {
     OsmPlacemarkData osmData;
-    osmData.setId( attributes.value( "id" ).toLongLong() );
-    osmData.setVersion( attributes.value( "version" ).toString() );
-    osmData.setChangeset( attributes.value( "changeset" ).toString() );
-    osmData.setUser( attributes.value( "user" ).toString() );
-    osmData.setUid( attributes.value( "uid" ).toString() );
-    osmData.setVisible( attributes.value( "visible" ).toString() );
-    osmData.setTimestamp( attributes.value( "timestamp" ).toString() );
-    osmData.setAction( attributes.value( "action" ).toString() );
+    osmData.setId(attributes.value(QLatin1String("id")).toLongLong());
+    osmData.setVersion(attributes.value(QLatin1String("version")).toString());
+    osmData.setChangeset(attributes.value(QLatin1String("changeset")).toString());
+    osmData.setUser(attributes.value(QLatin1String("user")).toString());
+    osmData.setUid(attributes.value(QLatin1String("uid")).toString());
+    osmData.setVisible(attributes.value(QLatin1String("visible")).toString());
+    osmData.setTimestamp(attributes.value(QLatin1String("timestamp")).toString());
+    osmData.setAction(attributes.value(QLatin1String("action")).toString());
     return osmData;
 }
 

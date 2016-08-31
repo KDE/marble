@@ -149,7 +149,7 @@ GeoDataDocument* OsmParser::parseXml(const QString &filename, QString &error)
         QStringRef const tagName = parser.name();
         if (tagName == osm::osmTag_node || tagName == osm::osmTag_way || tagName == osm::osmTag_relation) {
             parentTag = parser.name().toString();
-            parentId = parser.attributes().value("id").toLongLong();
+            parentId = parser.attributes().value(QLatin1String("id")).toLongLong();
 
             if (tagName == osm::osmTag_node) {
                 m_nodes[parentId].osmData() = OsmPlacemarkData::fromParserAttributes(parser.attributes());
@@ -164,9 +164,10 @@ GeoDataDocument* OsmParser::parseXml(const QString &filename, QString &error)
                 osmData = &m_relations[parentId].osmData();
             }
         } else if (tagName == osm::osmTag_tag) {
-            osmData->addTag(parser.attributes().value("k").toString(), parser.attributes().value("v").toString());
+            osmData->addTag(parser.attributes().value(QLatin1String("k")).toString(),
+                            parser.attributes().value(QLatin1String("v")).toString());
         } else if (tagName == osm::osmTag_nd && parentTag == osm::osmTag_way) {
-            m_ways[parentId].addReference(parser.attributes().value("ref").toLongLong());
+            m_ways[parentId].addReference(parser.attributes().value(QLatin1String("ref")).toLongLong());
         } else if (tagName == osm::osmTag_member && parentTag == osm::osmTag_relation) {
             m_relations[parentId].parseMember(parser.attributes());
         } // other tags like osm, bounds ignored

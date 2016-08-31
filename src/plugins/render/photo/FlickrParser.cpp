@@ -37,7 +37,7 @@ bool FlickrParser::read( QByteArray data )
 
         if (isStartElement()) {
             if (name() == QLatin1String("rsp")) {
-                if (attributes().value("stat") == QLatin1String("ok")) {
+                if (attributes().value(QLatin1String("stat")) == QLatin1String("ok")) {
                     readFlickr();
                 } else {
                     raiseError(QObject::tr("Query failed"));
@@ -70,7 +70,7 @@ void FlickrParser::readFlickr()
 {
     Q_ASSERT( isStartElement()
               && name() == QLatin1String("rsp")
-              && attributes().value( "stat" ) == QLatin1String("ok"));
+              && attributes().value(QLatin1String("stat")) == QLatin1String("ok"));
               
     while( !atEnd() ) {
         readNext();
@@ -112,14 +112,14 @@ void FlickrParser::readPhoto()
     Q_ASSERT( isStartElement()
               && name() == QLatin1String("photo"));
 
-    if( attributes().hasAttribute( "id" ) ) {
+    if( attributes().hasAttribute(QLatin1String("id")) ) {
         PhotoPluginItem *item = new PhotoPluginItem( m_marbleWidget, m_parent );
-        item->setId( attributes().value( "id" ).toString() );
-        item->setServer( attributes().value( "server" ).toString() );
-        item->setFarm( attributes().value( "farm" ).toString() );
-        item->setSecret( attributes().value( "secret" ).toString() );
-        item->setOwner( attributes().value( "owner" ).toString() );
-        item->setTitle( attributes().value( "title" ).toString() );
+        item->setId( attributes().value(QLatin1String("id")).toString() );
+        item->setServer( attributes().value(QLatin1String("server")).toString() );
+        item->setFarm( attributes().value(QLatin1String("farm")).toString() );
+        item->setSecret( attributes().value(QLatin1String("secret")).toString() );
+        item->setOwner( attributes().value(QLatin1String("owner")).toString() );
+        item->setTitle( attributes().value(QLatin1String("title")).toString() );
         m_list->append( item );
     }
     
