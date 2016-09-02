@@ -466,7 +466,7 @@ void NewstuffModelPrivate::readValue( const QDomNode &node, const QString &key, 
     } else {
         for ( int i=0; i<matches.size(); ++i ) {
             if ( matches.at( i ).attributes().contains(QStringLiteral("lang")) &&
-                 matches.at( i ).attributes().namedItem( "lang").toAttr().value() == QLatin1String("en")) {
+                 matches.at( i ).attributes().namedItem(QStringLiteral("lang")).toAttr().value() == QLatin1String("en")) {
                 *target = T(matches.at( i ).toElement().text());
                 return;
             }
@@ -931,7 +931,7 @@ void NewstuffModelPrivate::processQueue()
 NewstuffItem NewstuffModelPrivate::importNode(const QDomNode &node)
 {
     NewstuffItem item;
-    item.m_category = node.attributes().namedItem( "category" ).toAttr().value();
+    item.m_category = node.attributes().namedItem(QStringLiteral("category")).toAttr().value();
     readValue<QString>( node, "name", &item.m_name );
     readValue<QString>( node, "author", &item.m_author );
     readValue<QString>( node, "licence", &item.m_license );

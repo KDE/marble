@@ -215,7 +215,7 @@ GeoDataDocument* OpenRouteServiceRunner::parse( const QByteArray &content ) cons
 
         for (int i=0 ; i < errors.length(); ++i ) {
             QDomNode node = errors.item( i );
-            QString errorMessage = node.attributes().namedItem( "message" ).nodeValue();
+            QString errorMessage = node.attributes().namedItem(QStringLiteral("message")).nodeValue();
             QRegExp regexp = QRegExp( "^(.*) Please Check your Position: (-?[0-9]+.[0-9]+) (-?[0-9]+.[0-9]+) !" );
             if ( regexp.indexIn( errorMessage ) == 0 ) {
                 if ( regexp.capturedTexts().size() == 4 ) {

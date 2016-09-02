@@ -1161,7 +1161,7 @@ void MarblePart::repairNode( QDomNode node, const QString &child )
 {
     int const size = node.namedItem( child ).toElement().text().size();
     if ( size > 1024 ) {
-        QString const theme = node.namedItem( "name" ).toElement().text();
+        QString const theme = node.namedItem(QStringLiteral("name")).toElement().text();
         mDebug() << "Removing GHNS field " << child << " of map theme " << theme << ": Size " << size << " exceeds maximum size (see bug 319542).";
         node.removeChild( node.namedItem( child ) );
     }

@@ -219,8 +219,8 @@ GeoDataDocument* MapQuestRunner::parse( const QByteArray &content ) const
     if ( shapePoints.size() == 1 ) {
         QDomNodeList geometry = shapePoints.at( 0 ).toElement().elementsByTagName( "latLng" );
         for ( int i=0; i<geometry.size(); ++i ) {
-            double const lat = geometry.item( i ).namedItem( "lat" ).toElement().text().toDouble();
-            double const lon = geometry.item( i ).namedItem( "lng" ).toElement().text().toDouble();
+            double const lat = geometry.item(i).namedItem(QStringLiteral("lat")).toElement().text().toDouble();
+            double const lon = geometry.item(i).namedItem(QStringLiteral("lng")).toElement().text().toDouble();
             GeoDataCoordinates const position( lon, lat, 0.0, GeoDataCoordinates::Degree );
             routeWaypoints->append( position );
         }

@@ -116,11 +116,11 @@ void OsmNominatimRunner::handleResult( QNetworkReply* reply )
     for (int i=0; i<places.size(); ++i) {
         QDomNode place = places.at(i);
         QDomNamedNodeMap attributes = place.attributes();
-        QString lon = attributes.namedItem("lon").nodeValue();
-        QString lat = attributes.namedItem("lat").nodeValue();
-        QString desc = attributes.namedItem("display_name").nodeValue();
-        QString key = attributes.namedItem("class").nodeValue();
-        QString value = attributes.namedItem("type").nodeValue();
+        QString lon = attributes.namedItem(QStringLiteral("lon")).nodeValue();
+        QString lat = attributes.namedItem(QStringLiteral("lat")).nodeValue();
+        QString desc = attributes.namedItem(QStringLiteral("display_name")).nodeValue();
+        QString key = attributes.namedItem(QStringLiteral("class")).nodeValue();
+        QString value = attributes.namedItem(QStringLiteral("type")).nodeValue();
 
         OsmPlacemarkData data;
 
