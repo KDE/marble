@@ -1312,11 +1312,11 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
                 visualCategory <= GeoDataFeature::HighwayMotorway) ||
                 visualCategory == GeoDataFeature::TransportAirportRunway) {
 
-            if (parameters.tileLevel >= 0 && parameters.tileLevel <= 7) {
+            if (parameters.tileLevel <= 7) {
                 /** @todo: Dummy implementation for dynamic style changes based on tile level, replace with sane values */
                 lineStyle.setPhysicalWidth(0.0);
                 lineStyle.setWidth(3.0);
-            } else if (parameters.tileLevel >= 0 && parameters.tileLevel <= 9) {
+            } else if (parameters.tileLevel <= 9) {
                 /** @todo: Dummy implementation for dynamic style changes based on tile level, replace with sane values */
                 lineStyle.setPhysicalWidth(0.0);
                 lineStyle.setWidth(4.0);
@@ -1360,8 +1360,11 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
             }
 
         } else if (visualCategory == GeoDataFeature::NaturalWater) {
-            if (parameters.tileLevel >= 0 && parameters.tileLevel <= 7) {
-                lineStyle.setWidth(parameters.tileLevel <= 3 ? 1 : 2);
+            if (parameters.tileLevel <= 3) {
+                lineStyle.setWidth(1);
+                lineStyle.setPhysicalWidth(0.0);
+            } else if (parameters.tileLevel <= 7) {
+                lineStyle.setWidth(2);
                 lineStyle.setPhysicalWidth(0.0);
             } else {
                 QString const widthValue = osmData.tagValue("width").remove(QStringLiteral(" meters")).remove(QStringLiteral(" m"));
