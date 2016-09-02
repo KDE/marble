@@ -97,42 +97,42 @@ public:
         QHash<QString, QVariant> settings = settings_;
 
         // Check if all fields are filled and fill them with default values.
-        if ( !settings.contains( "preference" ) ) {
-            settings.insert( "preference", "fastest" );
+        if (!settings.contains(QStringLiteral("preference"))) {
+            settings.insert(QStringLiteral("preference"), QStringLiteral("fastest"));
         }
-        if ( !settings.contains( "ascending" ) ) {
-            settings.insert( "ascending", "DEFAULT_STRATEGY" );
+        if (!settings.contains(QStringLiteral("ascending"))) {
+            settings.insert(QStringLiteral("ascending"), QStringLiteral("DEFAULT_STRATEGY"));
         }
-        if ( !settings.contains( "descending" ) ) {
-            settings.insert( "descending", "DEFAULT_STRATEGY" );
+        if (!settings.contains(QStringLiteral("descending"))) {
+            settings.insert(QStringLiteral("descending"), QStringLiteral("DEFAULT_STRATEGY"));
         }
-        if ( !settings.contains( "appKey" ) ) {
-            settings.insert( "appKey", "" );
+        if (!settings.contains(QStringLiteral("appKey"))) {
+            settings.insert(QStringLiteral("appKey"), QString());
         }
-        ui_configWidget->appKey->setText( settings.value( "appKey" ).toString() );
+        ui_configWidget->appKey->setText(settings.value(QStringLiteral("appKey")).toString() );
         ui_configWidget->preference->setCurrentIndex(
-                    ui_configWidget->preference->findData( settings.value( "preference" ).toString() ) );
-        ui_configWidget->noMotorways->setCheckState( static_cast<Qt::CheckState>( settings.value( "noMotorways" ).toInt() ) );
-        ui_configWidget->noTollways->setCheckState( static_cast<Qt::CheckState>( settings.value( "noTollways" ).toInt() ) );
-        ui_configWidget->noFerries->setCheckState( static_cast<Qt::CheckState>( settings.value( "noFerries" ).toInt() ) );
+                    ui_configWidget->preference->findData(settings.value(QStringLiteral("preference")).toString()));
+        ui_configWidget->noMotorways->setCheckState( static_cast<Qt::CheckState>(settings.value(QStringLiteral("noMotorways")).toInt()));
+        ui_configWidget->noTollways->setCheckState( static_cast<Qt::CheckState>(settings.value(QStringLiteral("noTollways")).toInt()));
+        ui_configWidget->noFerries->setCheckState( static_cast<Qt::CheckState>(settings.value(QStringLiteral("noFerries")).toInt()));
         ui_configWidget->ascending->setCurrentIndex(
-                    ui_configWidget->ascending->findData( settings.value( "ascending" ).toString() ) );
+                    ui_configWidget->ascending->findData(settings.value(QStringLiteral("ascending")).toString()));
         ui_configWidget->descending->setCurrentIndex(
-                    ui_configWidget->descending->findData( settings.value( "descending" ).toString() ) );
+                    ui_configWidget->descending->findData(settings.value(QStringLiteral("descending")).toString()));
     }
 
     virtual QHash<QString, QVariant> settings() const
     {
         QHash<QString,QVariant> settings;
-        settings.insert( "appKey", ui_configWidget->appKey->text() );
-        settings.insert( "preference",
+        settings.insert(QStringLiteral("appKey"), ui_configWidget->appKey->text());
+        settings.insert(QStringLiteral("preference"),
                          ui_configWidget->preference->itemData( ui_configWidget->preference->currentIndex() ) );
-        settings.insert( "noMotorways", ui_configWidget->noMotorways->checkState() );
-        settings.insert( "noTollways", ui_configWidget->noTollways->checkState() );
-        settings.insert( "noFerries", ui_configWidget->noFerries->checkState() );
-        settings.insert( "ascending",
+        settings.insert(QStringLiteral("noMotorways"), ui_configWidget->noMotorways->checkState());
+        settings.insert(QStringLiteral("noTollways"), ui_configWidget->noTollways->checkState());
+        settings.insert(QStringLiteral("noFerries"), ui_configWidget->noFerries->checkState());
+        settings.insert(QStringLiteral("ascending"),
                          ui_configWidget->ascending->itemData( ui_configWidget->ascending->currentIndex() ) );
-        settings.insert( "descending",
+        settings.insert(QStringLiteral("descending"),
                          ui_configWidget->descending->itemData( ui_configWidget->descending->currentIndex() ) );
         return settings;
     }
@@ -161,18 +161,18 @@ QHash< QString, QVariant > MapQuestPlugin::templateSettings( RoutingProfilesMode
     QHash<QString, QVariant> result;
     switch ( profileTemplate ) {
     case RoutingProfilesModel::CarFastestTemplate:
-        result["preference"] = "fastest";
+        result.insert(QStringLiteral("preference"), QStringLiteral("fastest"));
         break;
     case RoutingProfilesModel::CarShortestTemplate:
-        result["preference"] = "shortest";
+        result.insert(QStringLiteral("preference"), QStringLiteral("shortest"));
         break;
     case RoutingProfilesModel::CarEcologicalTemplate:
         break;
     case RoutingProfilesModel::BicycleTemplate:
-        result["preference"] = "bicycle";
+        result.insert(QStringLiteral("preference"), QStringLiteral("bicycle"));
         break;
     case RoutingProfilesModel::PedestrianTemplate:
-        result["preference"] = "pedestrian";
+        result.insert(QStringLiteral("preference"), QStringLiteral("pedestrian"));
         break;
     case RoutingProfilesModel::LastTemplate:
         Q_ASSERT( false );

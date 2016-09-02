@@ -128,13 +128,13 @@ QHash<QString,QVariant> EarthquakePlugin::settings() const
 {
     QHash<QString, QVariant> settings = AbstractDataPlugin::settings();
 
-    settings.insert( "numResults", m_numResults );
-    settings.insert( "minMagnitude", m_minMagnitude );
-    settings.insert( "startDate", m_startDate );
-    settings.insert( "endDate", m_endDate );
-    settings.insert( "pastDays", m_pastDays );
-    settings.insert( "timeRangeNPastDays", m_timeRangeNPastDays );
-    settings.insert( "maximumNumberOfItems", m_maximumNumberOfItems );
+    settings.insert(QStringLiteral("numResults"), m_numResults);
+    settings.insert(QStringLiteral("minMagnitude"), m_minMagnitude);
+    settings.insert(QStringLiteral("startDate"), m_startDate);
+    settings.insert(QStringLiteral("endDate"), m_endDate);
+    settings.insert(QStringLiteral("pastDays"), m_pastDays);
+    settings.insert(QStringLiteral("timeRangeNPastDays"), m_timeRangeNPastDays);
+    settings.insert(QStringLiteral("maximumNumberOfItems"), m_maximumNumberOfItems);
 
     return settings;
 }
@@ -143,13 +143,13 @@ void EarthquakePlugin::setSettings( const QHash<QString,QVariant> &settings )
 {
     AbstractDataPlugin::setSettings( settings );
 
-    m_numResults = settings.value( "numResults", 20 ).toInt();
-    m_minMagnitude = settings.value( "minMagnitude", 0.0 ).toReal();
-    m_startDate = settings.value( "startDate", QDateTime::fromString( "2006-02-04", "yyyy-MM-dd" ) ).toDateTime();
-    m_endDate = settings.value( "endDate", marbleModel()->clockDateTime() ).toDateTime();
-    m_pastDays = settings.value( "pastDays", 30 ).toInt();
-    m_timeRangeNPastDays = settings.value( "timeRangeNPastDays", true ).toBool();
-    m_maximumNumberOfItems = settings.value( "maximumNumberOfItems", m_maximumNumberOfItems ).toInt();
+    m_numResults = settings.value(QStringLiteral("numResults"), 20).toInt();
+    m_minMagnitude = settings.value(QStringLiteral("minMagnitude"), 0.0).toReal();
+    m_startDate = settings.value(QStringLiteral("startDate"), QDateTime::fromString(QStringLiteral("2006-02-04"), QStringLiteral("yyyy-MM-dd"))).toDateTime();
+    m_endDate = settings.value(QStringLiteral("endDate"), marbleModel()->clockDateTime()).toDateTime();
+    m_pastDays = settings.value(QStringLiteral("pastDays"), 30).toInt();
+    m_timeRangeNPastDays = settings.value(QStringLiteral("timeRangeNPastDays"), true).toBool();
+    m_maximumNumberOfItems = settings.value(QStringLiteral("maximumNumberOfItems"), m_maximumNumberOfItems).toInt();
     
     emit settingsChanged( nameId() );
 }

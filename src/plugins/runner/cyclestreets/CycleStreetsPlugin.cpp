@@ -58,24 +58,24 @@ void CycleStreetsConfigWidget::loadSettings( const QHash<QString, QVariant> &set
     QHash<QString, QVariant> settings = settings_;
 
     // Check if all fields are filled and fill them with default values.
-    if ( !settings.contains( "plan" ) ) {
-        settings.insert( "plan", "balanced" );
+    if (!settings.contains(QStringLiteral("plan"))) {
+        settings.insert(QStringLiteral("plan"), QStringLiteral("balanced"));
     }
-    if ( !settings.contains( "speed" ) ) {
-        settings.insert( "speed", "20" );
+    if (!settings.contains(QStringLiteral("speed"))) {
+        settings.insert(QStringLiteral("speed"), QStringLiteral("20"));
     }
     ui_configWidget->plan->setCurrentIndex(
-                ui_configWidget->plan->findData( settings.value( "plan" ) ));
+                ui_configWidget->plan->findData(settings.value(QStringLiteral("plan"))));
     ui_configWidget->speed->setCurrentIndex(
-                ui_configWidget->speed->findData( settings.value( "speed" ) ));
+                ui_configWidget->speed->findData(settings.value(QStringLiteral("speed"))));
 }
 
 QHash<QString, QVariant> CycleStreetsConfigWidget::settings() const
 {
     QHash<QString,QVariant> settings;
-    settings.insert( "plan",
+    settings.insert(QStringLiteral("plan"),
                      ui_configWidget->plan->itemData( ui_configWidget->plan->currentIndex() ) );
-    settings.insert( "speed",
+    settings.insert(QStringLiteral("speed"),
                      ui_configWidget->speed->itemData( ui_configWidget->speed->currentIndex() ) );
     return settings;
 }

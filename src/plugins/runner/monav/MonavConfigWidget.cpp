@@ -353,7 +353,7 @@ MonavConfigWidget::~MonavConfigWidget()
 
 void MonavConfigWidget::loadSettings( const QHash<QString, QVariant> &settings )
 {
-    d->m_transport = settings["transport"].toString();
+    d->m_transport = settings[QStringLiteral("transport")].toString();
     d->updateTransportPreference();
 }
 
@@ -384,7 +384,7 @@ void MonavConfigWidgetPrivate::updateTransportPreference()
 QHash<QString, QVariant> MonavConfigWidget::settings() const
 {
     QHash<QString, QVariant> settings;
-    settings["transport"] = d->m_transport;
+    settings.insert(QStringLiteral("transport"), d->m_transport);
     return settings;
 }
 

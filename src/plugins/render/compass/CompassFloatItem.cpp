@@ -205,7 +205,7 @@ QHash<QString,QVariant> CompassFloatItem::settings() const
 {
     QHash<QString, QVariant> result = AbstractFloatItem::settings();
 
-    result.insert( "theme", m_themeIndex );
+    result.insert(QStringLiteral("theme"), m_themeIndex);
 
     return result;
 }
@@ -214,7 +214,7 @@ void CompassFloatItem::setSettings( const QHash<QString,QVariant> &settings )
 {
     AbstractFloatItem::setSettings( settings );
 
-    m_themeIndex = settings.value( "theme", 0 ).toInt();
+    m_themeIndex = settings.value(QStringLiteral("theme"), 0).toInt();
 
     readSettings();
 }

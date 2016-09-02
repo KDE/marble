@@ -148,7 +148,7 @@ QHash<QString,QVariant> CrosshairsPlugin::settings() const
 {
     QHash<QString, QVariant> result = RenderPlugin::settings();
 
-    result.insert( "theme", m_themeIndex );
+    result.insert(QStringLiteral("theme"), m_themeIndex);
 
     return result;
 }
@@ -157,7 +157,7 @@ void CrosshairsPlugin::setSettings( const QHash<QString,QVariant> &settings )
 {
     RenderPlugin::setSettings( settings );
 
-    m_themeIndex = settings.value( "theme", 0 ).toInt();
+    m_themeIndex = settings.value(QStringLiteral("theme"), 0).toInt();
 
     readSettings();
 }

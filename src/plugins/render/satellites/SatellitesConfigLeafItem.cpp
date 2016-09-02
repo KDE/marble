@@ -29,7 +29,7 @@ SatellitesConfigLeafItem::~SatellitesConfigLeafItem()
 
 void SatellitesConfigLeafItem::loadSettings(const QHash<QString, QVariant> &settings)
 {
-    QStringList idList = settings.value( "idList" ).toStringList();
+    const QStringList idList = settings.value(QStringLiteral("idList")).toStringList();
     m_isChecked = idList.contains( m_id );
 }
 

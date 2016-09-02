@@ -317,13 +317,13 @@ MapViewWidget::MapViewWidget( QWidget *parent, Qt::WindowFlags f )
     connect( d->m_mapViewUi.celestialBodyComboBox, SIGNAL(activated(int)),
              this,                                 SLOT(celestialBodySelected(int)) );
 
-    d->m_settings.beginGroup( "Favorites" );
-    if( !d->m_settings.contains( "initialized" ) ) {
-        d->m_settings.setValue( "initialized", true );
+    d->m_settings.beginGroup(QStringLiteral("Favorites"));
+    if (!d->m_settings.contains(QStringLiteral("initialized"))) {
+        d->m_settings.setValue(QStringLiteral("initialized"), true);
         QDateTime currentDateTime = QDateTime::currentDateTime();
-        d->m_settings.setValue( "Atlas", currentDateTime );
-        d->m_settings.setValue( "OpenStreetMap", currentDateTime );
-        d->m_settings.setValue( "Satellite View", currentDateTime );
+        d->m_settings.setValue(QStringLiteral("Atlas"), currentDateTime);
+        d->m_settings.setValue(QStringLiteral("OpenStreetMap"), currentDateTime);
+        d->m_settings.setValue(QStringLiteral("Satellite View"), currentDateTime);
     }
     d->m_settings.endGroup();
 }
@@ -687,7 +687,7 @@ void MapViewWidget::Private::toggleIconSize()
     bool const isLarge = m_mapViewUi.marbleThemeSelectView->iconSize() == QSize( 96, 96 );
     int const size = isLarge ? 52 : 96;
     m_mapViewUi.marbleThemeSelectView->setIconSize( QSize( size, size ) );
-    m_settings.setValue("MapView/iconSize", m_mapViewUi.marbleThemeSelectView->iconSize() );
+    m_settings.setValue(QStringLiteral("MapView/iconSize"), m_mapViewUi.marbleThemeSelectView->iconSize() );
 }
 
 bool MapViewWidget::Private::isCurrentFavorite() const

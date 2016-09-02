@@ -212,7 +212,7 @@ class WeatherItemPrivate
 
     void updateFavorite()
     {
-        QStringList items = m_settings.value( "favoriteItems" ).toString()
+        QStringList items = m_settings.value(QStringLiteral("favoriteItems")).toString()
                                         .split(QLatin1Char(','), QString::SkipEmptyParts);
         bool favorite = items.contains( m_parent->id() );
 
@@ -230,25 +230,25 @@ class WeatherItemPrivate
     bool isConditionShown() const
     {
         return m_currentWeather.hasValidCondition()
-               && m_settings.value( "showCondition", showConditionDefault ).toBool();
+               && m_settings.value(QStringLiteral("showCondition"), showConditionDefault).toBool();
     }
     
     bool isTemperatureShown() const
     {
         return m_currentWeather.hasValidTemperature()
-               && m_settings.value( "showTemperature", showTemperatureDefault ).toBool();
+               && m_settings.value(QStringLiteral("showTemperature"), showTemperatureDefault).toBool();
     }
     
     bool isWindDirectionShown() const
     {
         return m_currentWeather.hasValidWindDirection()
-               && m_settings.value( "showWindDirection", showWindDirectionDefault ).toBool();
+               && m_settings.value(QStringLiteral("showWindDirection"), showWindDirectionDefault).toBool();
     }
     
     bool isWindSpeedShown() const
     {
         return m_currentWeather.hasValidWindSpeed()
-               && m_settings.value( "showWindSpeed", showWindSpeedDefault ).toBool();
+               && m_settings.value(QStringLiteral("showWindSpeed"), showWindSpeedDefault).toBool();
     }
 
     QString temperatureString() const
@@ -260,7 +260,7 @@ class WeatherItemPrivate
     WeatherData::TemperatureUnit temperatureUnit() const
     {
         WeatherData::TemperatureUnit tUnit
-                = (WeatherData::TemperatureUnit) m_settings.value( "temperatureUnit",
+                = (WeatherData::TemperatureUnit) m_settings.value(QStringLiteral("temperatureUnit"),
                                                                    WeatherData::Celsius ).toInt();
         return tUnit;
     }
@@ -272,7 +272,7 @@ class WeatherItemPrivate
 
     WeatherData::SpeedUnit speedUnit() const
     {
-        return (WeatherData::SpeedUnit) m_settings.value( "windSpeedUnit",
+        return (WeatherData::SpeedUnit) m_settings.value(QStringLiteral("windSpeedUnit"),
                                                           WeatherData::kph ).toInt();
     }
 
@@ -283,7 +283,7 @@ class WeatherItemPrivate
 
     WeatherData::PressureUnit pressureUnit() const
     {
-        return (WeatherData::PressureUnit) m_settings.value( "pressureUnit",
+        return (WeatherData::PressureUnit) m_settings.value(QStringLiteral("pressureUnit"),
                                                              WeatherData::HectoPascal ).toInt();
     }
 

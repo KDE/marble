@@ -80,8 +80,8 @@ QIcon FoursquarePlugin::icon() const
 bool FoursquarePlugin::isAuthenticated()
 {
     QSettings settings;
-    
-    return !settings.value( "access_token" ).isNull();
+
+    return !settings.value(QStringLiteral("access_token")).isNull();
 }
 
 bool FoursquarePlugin::storeAccessToken(const QString& tokenUrl)
@@ -90,7 +90,7 @@ bool FoursquarePlugin::storeAccessToken(const QString& tokenUrl)
     if( tokenUrl.startsWith( expected ) ) {
         QSettings settings;
         QString url = tokenUrl;
-        settings.setValue( "access_token", url.remove( expected ) );
+        settings.setValue(QStringLiteral("access_token"), url.remove(expected));
         return true;
     } else {
         return false;

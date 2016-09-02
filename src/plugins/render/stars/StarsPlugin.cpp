@@ -193,32 +193,32 @@ QHash<QString, QVariant> StarsPlugin::settings() const
 {
     QHash<QString, QVariant> settings = RenderPlugin::settings();
 
-    settings["nameIndex"] = m_nameIndex;
-    settings["renderStars"] = m_renderStars;
-    settings["renderConstellationLines"] = m_renderConstellationLines;
-    settings["renderConstellationLabels"] = m_renderConstellationLabels;
-    settings["renderDsos"] = m_renderDsos;
-    settings["renderDsoLabels"] = m_renderDsoLabels;
-    settings["renderSun"] = m_renderSun;
-    settings["renderMoon"] = m_renderMoon;
+    settings.insert(QStringLiteral("nameIndex"), m_nameIndex);
+    settings.insert(QStringLiteral("renderStars"), m_renderStars);
+    settings.insert(QStringLiteral("renderConstellationLines"), m_renderConstellationLines);
+    settings.insert(QStringLiteral("renderConstellationLabels"), m_renderConstellationLabels);
+    settings.insert(QStringLiteral("renderDsos"), m_renderDsos);
+    settings.insert(QStringLiteral("renderDsoLabels"), m_renderDsoLabels);
+    settings.insert(QStringLiteral("renderSun"), m_renderSun);
+    settings.insert(QStringLiteral("renderMoon"), m_renderMoon);
 
     QStringList planetState;
     foreach (const QString &key, m_renderPlanet.keys())
         planetState += key + QLatin1Char(':') + QString::number((int)m_renderPlanet[key]);
-    settings["renderPlanet"] = planetState.join(QLatin1Char('|'));
+    settings.insert(QStringLiteral("renderPlanet"), planetState.join(QLatin1Char('|')));
 
-    settings["renderEcliptic"] = m_renderEcliptic;
-    settings["renderCelestialEquator"] = m_renderCelestialEquator;
-    settings["renderCelestialPole"] = m_renderCelestialPole;
-    settings["zoomSunMoon"] = m_zoomSunMoon;
-    settings["viewSolarSystemLabel"] = m_viewSolarSystemLabel;
-    settings["magnitudeLimit"] = m_magnitudeLimit;
-    settings["constellationBrush"] = m_constellationBrush.color().rgb();
-    settings["constellationLabelBrush"] = m_constellationLabelBrush.color().rgb();
-    settings["dsoLabelBrush"] = m_dsoLabelBrush.color().rgb();
-    settings["eclipticBrush"] = m_eclipticBrush.color().rgb();
-    settings["celestialEaquatorBrush"] = m_celestialEquatorBrush.color().rgb();
-    settings["celestialPoleBrush"] = m_celestialPoleBrush.color().rgb();
+    settings.insert(QStringLiteral("renderEcliptic"), m_renderEcliptic);
+    settings.insert(QStringLiteral("renderCelestialEquator"), m_renderCelestialEquator);
+    settings.insert(QStringLiteral("renderCelestialPole"), m_renderCelestialPole);
+    settings.insert(QStringLiteral("zoomSunMoon"), m_zoomSunMoon);
+    settings.insert(QStringLiteral("viewSolarSystemLabel"), m_viewSolarSystemLabel);
+    settings.insert(QStringLiteral("magnitudeLimit"), m_magnitudeLimit);
+    settings.insert(QStringLiteral("constellationBrush"), m_constellationBrush.color().rgb());
+    settings.insert(QStringLiteral("constellationLabelBrush"), m_constellationLabelBrush.color().rgb());
+    settings.insert(QStringLiteral("dsoLabelBrush"), m_dsoLabelBrush.color().rgb());
+    settings.insert(QStringLiteral("eclipticBrush"), m_eclipticBrush.color().rgb());
+    settings.insert(QStringLiteral("celestialEaquatorBrush"), m_celestialEquatorBrush.color().rgb());
+    settings.insert(QStringLiteral("celestialPoleBrush"), m_celestialPoleBrush.color().rgb());
 
     return settings;
 }
@@ -227,17 +227,17 @@ void StarsPlugin::setSettings( const QHash<QString, QVariant> &settings )
 {
     RenderPlugin::setSettings( settings );
 
-    m_nameIndex = readSetting<int>( settings, "nameIndex", 0 );
-    m_renderStars = readSetting<bool>( settings, "renderStars", true );
-    m_renderConstellationLines = readSetting<bool>( settings, "renderConstellationLines", true );
-    m_renderConstellationLabels = readSetting<bool>( settings, "renderConstellationLabels", true );
-    m_renderDsos = readSetting<bool>( settings, "renderDsos", true );
-    m_renderDsoLabels = readSetting<bool>( settings, "renderDsoLabels", true);
-    m_renderSun = readSetting<bool>( settings, "renderSun", true );
-    m_renderMoon = readSetting<bool>( settings, "renderMoon", true );
+    m_nameIndex = readSetting<int>(settings, QStringLiteral("nameIndex"), 0);
+    m_renderStars = readSetting<bool>(settings, QStringLiteral("renderStars"), true);
+    m_renderConstellationLines = readSetting<bool>(settings, QStringLiteral("renderConstellationLines"), true);
+    m_renderConstellationLabels = readSetting<bool>(settings, QStringLiteral("renderConstellationLabels"), true);
+    m_renderDsos = readSetting<bool>(settings, QStringLiteral("renderDsos"), true);
+    m_renderDsoLabels = readSetting<bool>(settings, QStringLiteral("renderDsoLabels"), true);
+    m_renderSun = readSetting<bool>(settings, QStringLiteral("renderSun"), true);
+    m_renderMoon = readSetting<bool>(settings, QStringLiteral("renderMoon"), true);
 
     m_renderPlanet.clear();
-    const QString renderPlanet = readSetting<QString>( settings, "renderPlanet", "" );
+    const QString renderPlanet = readSetting<QString>(settings, QStringLiteral("renderPlanet"), QString());
     const QStringList renderStates = renderPlanet.split(QLatin1Char('|'));
     foreach(const QString &state, renderStates) {
         const QStringList stateList = state.split(QLatin1Char(':'));
@@ -245,19 +245,19 @@ void StarsPlugin::setSettings( const QHash<QString, QVariant> &settings )
             m_renderPlanet[stateList[0]] = (bool)stateList[1].toInt();
     }
 
-    m_renderEcliptic = readSetting<bool>( settings, "renderEcliptic", true );
-    m_renderCelestialEquator = readSetting<bool>( settings, "renderCelestialEquator", true );
-    m_renderCelestialPole = readSetting<bool>( settings, "renderCelestialPole", true );
-    m_zoomSunMoon = readSetting<bool>( settings, "zoomSunMoon", true );
-    m_viewSolarSystemLabel = readSetting<bool>( settings, "viewSolarSystemLabel", true );
-    m_magnitudeLimit = readSetting<int>( settings, "magnitudeLimit", 100 );
+    m_renderEcliptic = readSetting<bool>(settings, QStringLiteral("renderEcliptic"), true);
+    m_renderCelestialEquator = readSetting<bool>(settings, QStringLiteral("renderCelestialEquator"), true);
+    m_renderCelestialPole = readSetting<bool>(settings, QStringLiteral("renderCelestialPole"), true);
+    m_zoomSunMoon = readSetting<bool>(settings, QStringLiteral("zoomSunMoon"), true);
+    m_viewSolarSystemLabel = readSetting<bool>(settings, QStringLiteral("viewSolarSystemLabel"), true);
+    m_magnitudeLimit = readSetting<int>(settings, QStringLiteral("magnitudeLimit"), 100);
     QColor const defaultColor = Marble::Oxygen::aluminumGray5;
-    m_constellationBrush = QColor( readSetting<QRgb>( settings, "constellationBrush", defaultColor.rgb() ) );
-    m_constellationLabelBrush = QColor( readSetting<QRgb>( settings, "constellationLabelBrush", defaultColor.rgb()) );
-    m_dsoLabelBrush = QColor( readSetting<QRgb>( settings, "dsoLabelBrush", defaultColor.rgb() ) );
-    m_eclipticBrush = QColor( readSetting<QRgb>( settings, "eclipticBrush", defaultColor.rgb() ) );
-    m_celestialEquatorBrush = QColor( readSetting<QRgb>( settings, "celestialEquatorBrush", defaultColor.rgb() ) );
-    m_celestialPoleBrush = QColor( readSetting<QRgb>( settings, "celestialPoleBrush", defaultColor.rgb() ) );
+    m_constellationBrush = QColor(readSetting<QRgb>(settings, QStringLiteral("constellationBrush"), defaultColor.rgb()));
+    m_constellationLabelBrush = QColor(readSetting<QRgb>(settings, QStringLiteral("constellationLabelBrush"), defaultColor.rgb()));
+    m_dsoLabelBrush = QColor(readSetting<QRgb>(settings, QStringLiteral("dsoLabelBrush"), defaultColor.rgb()));
+    m_eclipticBrush = QColor(readSetting<QRgb>(settings, QStringLiteral("eclipticBrush"), defaultColor.rgb()));
+    m_celestialEquatorBrush = QColor(readSetting<QRgb>(settings, QStringLiteral("celestialEquatorBrush"), defaultColor.rgb()));
+    m_celestialPoleBrush = QColor(readSetting<QRgb>(settings, QStringLiteral("celestialPoleBrush"), defaultColor.rgb()));
 }
 
 QPixmap StarsPlugin::starPixmap(qreal mag, int colorId) const

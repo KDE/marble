@@ -192,7 +192,7 @@ void WikipediaItem::setIcon( const QIcon& icon )
 
 void WikipediaItem::setSettings( const QHash<QString, QVariant>& settings )
 {
-    const bool showThumbnail = settings.value( "showThumbnails", false ).toBool();
+    const bool showThumbnail = settings.value(QStringLiteral("showThumbnails"), false).toBool();
 
     if ( showThumbnail != m_showThumbnail ) {
         m_showThumbnail = showThumbnail;

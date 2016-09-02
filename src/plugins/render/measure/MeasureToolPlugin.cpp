@@ -168,15 +168,15 @@ QHash<QString,QVariant> MeasureToolPlugin::settings() const
 {
     QHash<QString, QVariant> settings = RenderPlugin::settings();
 
-    settings.insert( "showDistanceLabel", m_showDistanceLabel );
-    settings.insert( "showBearingLabel", m_showBearingLabel );
-    settings.insert( "showBearingChangeLabel", m_showBearingChangeLabel );
-    settings.insert( "showPolygonArea", m_showPolygonArea );
-    settings.insert( "showCircularArea", m_showCircularArea );
-    settings.insert( "showRadius", m_showRadius );
-    settings.insert( "showPerimeter", m_showPerimeter );
-    settings.insert( "showCircumference", m_showCircumference );
-    settings.insert( "paintMode", (int)m_paintMode );
+    settings.insert(QStringLiteral("showDistanceLabel"), m_showDistanceLabel);
+    settings.insert(QStringLiteral("showBearingLabel"), m_showBearingLabel);
+    settings.insert(QStringLiteral("showBearingChangeLabel"), m_showBearingChangeLabel);
+    settings.insert(QStringLiteral("showPolygonArea"), m_showPolygonArea);
+    settings.insert(QStringLiteral("showCircularArea"), m_showCircularArea);
+    settings.insert(QStringLiteral("showRadius"), m_showRadius);
+    settings.insert(QStringLiteral("showPerimeter"), m_showPerimeter);
+    settings.insert(QStringLiteral("showCircumference"), m_showCircumference);
+    settings.insert(QStringLiteral("paintMode"), (int)m_paintMode);
 
     return settings;
 }
@@ -185,15 +185,15 @@ void MeasureToolPlugin::setSettings( const QHash<QString,QVariant> &settings )
 {
     RenderPlugin::setSettings( settings );
 
-    m_showDistanceLabel = settings.value( "showDistanceLabel", true ).toBool();
-    m_showBearingLabel = settings.value( "showBearingLabel", true ).toBool();
-    m_showBearingChangeLabel = settings.value( "showBearingChangeLabel", true ).toBool();
-    m_showPolygonArea = settings.value( "showPolygonArea", false ).toBool();
-    m_showCircularArea = settings.value( "showCircularArea", true ).toBool();
-    m_showRadius = settings.value( "showRadius", true ).toBool();
-    m_showPerimeter = settings.value( "showPerimeter", true ).toBool();
-    m_showCircumference = settings.value( "showCircumference", true ).toBool();
-    m_paintMode = (PaintMode)settings.value( "paintMode", 0 ).toInt();
+    m_showDistanceLabel = settings.value(QStringLiteral("showDistanceLabel"), true).toBool();
+    m_showBearingLabel = settings.value(QStringLiteral("showBearingLabel"), true).toBool();
+    m_showBearingChangeLabel = settings.value(QStringLiteral("showBearingChangeLabel"), true).toBool();
+    m_showPolygonArea = settings.value(QStringLiteral("showPolygonArea"), false).toBool();
+    m_showCircularArea = settings.value(QStringLiteral("showCircularArea"), true).toBool();
+    m_showRadius = settings.value(QStringLiteral("showRadius"), true).toBool();
+    m_showPerimeter = settings.value(QStringLiteral("showPerimeter"), true).toBool();
+    m_showCircumference = settings.value(QStringLiteral("showCircumference"), true).toBool();
+    m_paintMode = (PaintMode)settings.value(QStringLiteral("paintMode"), 0).toInt();
 }
 
 void MeasureToolPlugin::writeSettings()

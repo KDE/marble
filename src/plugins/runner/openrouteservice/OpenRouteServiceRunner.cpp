@@ -54,8 +54,8 @@ void OpenRouteServiceRunner::retrieveRoute( const RouteRequest *route )
     QString request = xmlHeader();
     QString unit = "KM";
     QString preference = "Fastest";
-    if ( settings.contains( "preference" ) ) {
-        preference = settings["preference"].toString();
+    if (settings.contains(QStringLiteral("preference"))) {
+        preference = settings[QStringLiteral("preference")].toString();
     }
     if (preference == QLatin1String("Pedestrian")) {
         unit = QStringLiteral("M");
@@ -169,12 +169,13 @@ QString OpenRouteServiceRunner::requestFooter( const QHash<QString, QVariant>& s
 {
     QString result = QLatin1String("</xls:WayPointList>\n");
 
-    if (settings["noMotorways"].toInt() || settings["noTollways"].toInt() ) {
+    if (settings[QStringLiteral("noMotorways")].toInt() ||
+        settings[QStringLiteral("noTollways")].toInt()) {
         result += QLatin1String("<xls:AvoidList>\n");
-        if ( settings["noTollways"].toInt() ) {
+        if (settings[QStringLiteral("noTollways")].toInt()) {
             result += QLatin1String("<xls:AvoidFeature>Tollway</xls:AvoidFeature>");
         }
-        if ( settings["noMotorways"].toInt() ) {
+        if (settings[QStringLiteral("noMotorways")].toInt()) {
             result += QLatin1String("<xls:AvoidFeature>Highway</xls:AvoidFeature>");
         }
         result += QLatin1String("</xls:AvoidList>\n");

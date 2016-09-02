@@ -279,11 +279,11 @@ void SatellitesPlugin::setSettings( const QHash<QString, QVariant> &settings )
     // TODO: cancel also all on-going downloads
 
     // add default data sources
-    if( !settings.contains( "dataSources" ) ) {
+    if (!settings.contains(QStringLiteral("dataSources"))) {
         QStringList dsList;
-        dsList << "http://www.celestrak.com/NORAD/elements/visual.txt";
-        m_settings.insert( "dataSources", dsList );
-        m_settings.insert( "idList", dsList );
+        dsList << QStringLiteral("http://www.celestrak.com/NORAD/elements/visual.txt");
+        m_settings.insert(QStringLiteral("dataSources"), dsList);
+        m_settings.insert(QStringLiteral("idList"), dsList);
     }
     else {
         // HACK: KConfig can't guess the type of the settings, when we use
@@ -292,27 +292,27 @@ void SatellitesPlugin::setSettings( const QHash<QString, QVariant> &settings )
         // QVariant can handle the conversion for some types, like toDateTime()
         // but when calling toStringList() on a QVariant::String, it will
         // return a one element list
-        if( settings.value( "dataSources" ).type() == QVariant::String ) {
-            m_settings.insert( "dataSources",
-                settings.value( "dataSources" ).toString().split(QLatin1Char( ',' ) ) );
+        if (settings.value(QStringLiteral("dataSources")).type() == QVariant::String) {
+            m_settings.insert(QStringLiteral("dataSources"),
+                settings.value(QStringLiteral("dataSources")).toString().split(QLatin1Char(',')));
         }
-        if( settings.value( "idList" ).type() == QVariant::String ) {
-            m_settings.insert( "idList",
-                settings.value( "idList" ).toString().split(QLatin1Char( ',' ) ) );
+        if (settings.value(QStringLiteral("idList")).type() == QVariant::String) {
+            m_settings.insert(QStringLiteral("idList"),
+                settings.value(QStringLiteral("idList")).toString().split(QLatin1Char(',')));
         }
     }
 
     // add default user data source
-    if( !settings.contains( "userDataSources" ) ) {
+    if (!settings.contains(QStringLiteral("userDataSources"))) {
         QStringList udsList;
-        udsList << "http://files.kde.org/marble/satellites/PlanetarySatellites.msc";
-        m_settings.insert( "userDataSources", udsList );
+        udsList << QStringLiteral("http://files.kde.org/marble/satellites/PlanetarySatellites.msc");
+        m_settings.insert(QStringLiteral("userDataSources"), udsList);
         userDataSourceAdded( udsList[0] );
     }
-    else if( settings.value( "userDataSources" ).type() == QVariant::String ) {
+    else if (settings.value(QStringLiteral("userDataSources")).type() == QVariant::String) {
         // same HACK as above
-        m_settings.insert( "userDataSources",
-            settings.value( "userDataSources" ).toString().split(QLatin1Char( ',' ) ) );
+        m_settings.insert(QStringLiteral("userDataSources"),
+            settings.value(QStringLiteral("userDataSources")).toString().split(QLatin1Char(',')));
     }
 
     emit settingsChanged( nameId() );
@@ -321,16 +321,16 @@ void SatellitesPlugin::setSettings( const QHash<QString, QVariant> &settings )
 void SatellitesPlugin::readSettings()
 {
     m_configDialog->setUserDataSources(
-        m_settings.value( "userDataSources" ).toStringList() );
+        m_settings.value(QStringLiteral("userDataSources")).toStringList());
     m_configModel->loadSettings( m_settings );
     m_satModel->loadSettings( m_settings );
 }
 
 void SatellitesPlugin::writeSettings()
 {
-    m_settings.insert( "userDataSources", m_configDialog->userDataSources() );
-    m_settings.insert( "dataSources", m_configModel->urlList() );
-    m_settings.insert( "idList", m_configModel->idList() );
+    m_settings.insert(QStringLiteral("userDataSources"), m_configDialog->userDataSources());
+    m_settings.insert(QStringLiteral("dataSources"), m_configModel->urlList());
+    m_settings.insert(QStringLiteral("idList"), m_configModel->idList());
 
     emit settingsChanged( nameId() );
 }
@@ -348,8 +348,8 @@ void SatellitesPlugin::updateSettings()
     addBuiltInDataSources();
 
     // (re)load data sources
-    QStringList dsList = m_settings["dataSources"].toStringList();
-    dsList << m_settings["userDataSources"].toStringList();
+    QStringList dsList = m_settings[QStringLiteral("dataSources")].toStringList();
+    dsList << m_settings[QStringLiteral("userDataSources")].toStringList();
     dsList.removeDuplicates();
     foreach( const QString &ds, dsList ) {
         mDebug() << "Loading satellite data from:" << ds;
@@ -434,9 +434,9 @@ void SatellitesPlugin::activateDataSource( const QString &source )
     // activate the given data source (select it)
     mDebug() << "Activating Data Source:" << source;
     QStringList list = m_configModel->fullIdList().filter( source );
-    QStringList idList = m_settings["idList"].toStringList();
+    QStringList idList = m_settings[QStringLiteral("idList")].toStringList();
     idList << list;
-    m_settings.insert( "idList", idList );
+    m_settings.insert(QStringLiteral("idList"), idList);
 }
 
 void SatellitesPlugin::addBuiltInDataSources()

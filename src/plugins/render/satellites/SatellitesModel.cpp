@@ -69,7 +69,7 @@ QColor SatellitesModel::nextColor()
 
 void SatellitesModel::loadSettings( const QHash<QString, QVariant> &settings )
 {
-    QStringList idList = settings["idList"].toStringList();
+    QStringList idList = settings[QStringLiteral("idList")].toStringList();
     m_enabledIds = idList;
 
     updateVisibility();

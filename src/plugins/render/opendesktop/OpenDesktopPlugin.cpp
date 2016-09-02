@@ -107,7 +107,7 @@ QHash<QString,QVariant> OpenDesktopPlugin::settings() const
 {
     QHash<QString, QVariant> settings = AbstractDataPlugin::settings();
 
-    settings.insert( "itemsOnScreen", numberOfItems() );
+    settings.insert(QStringLiteral("itemsOnScreen"), numberOfItems());
 
     return settings;
 }
@@ -130,7 +130,7 @@ void OpenDesktopPlugin::setSettings( const QHash<QString,QVariant> &settings )
 {
     AbstractDataPlugin::setSettings( settings );
 
-    setNumberOfItems( settings.value( "itemsOnScreen", defaultItemsOnScreen ).toInt() );
+    setNumberOfItems(settings.value(QStringLiteral("itemsOnScreen"), defaultItemsOnScreen).toInt());
 
     emit settingsChanged( nameId() );
 }

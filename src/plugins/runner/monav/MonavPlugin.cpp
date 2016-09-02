@@ -292,7 +292,7 @@ QString MonavPlugin::mapDirectoryForRequest( const RouteRequest* request ) const
     d->initialize();
 
     QHash<QString, QVariant> settings = request->routingProfile().pluginSettings()[nameId()];
-    QString transport = settings["transport"].toString();
+    const QString transport = settings[QStringLiteral("transport")].toString();
 
     for ( int j=0; j<d->m_maps.size(); ++j ) {
         bool valid = true;
@@ -326,7 +326,7 @@ QStringList MonavPlugin::mapDirectoriesForRequest( const RouteRequest* request )
     QStringList result;
     d->initialize();
     QHash<QString, QVariant> settings = request->routingProfile().pluginSettings()[nameId()];
-    QString transport = settings["transport"].toString();
+    const QString transport = settings[QStringLiteral("transport")].toString();
 
     for ( int j=0; j<d->m_maps.size(); ++j ) {
         bool valid = true;

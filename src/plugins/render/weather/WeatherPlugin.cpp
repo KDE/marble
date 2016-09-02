@@ -157,10 +157,10 @@ void WeatherPlugin::setSettings( const QHash<QString,QVariant> &settings )
 {
     AbstractDataPlugin::setSettings( settings );
 
-    m_settings.insert( "showCondition", settings.value( "showCondigion", showConditionDefault ) );
-    m_settings.insert( "showTemperature", settings.value( "showTemperature", showTemperatureDefault ) );
-    m_settings.insert( "showWindDirection", settings.value( "showWindDirection", showWindDirectionDefault ) );
-    m_settings.insert( "showWindSpeed", settings.value( "showWindSpeed", showWindSpeedDefault ) );
+    m_settings.insert(QStringLiteral("showCondition"), settings.value(QStringLiteral("showCondition"), showConditionDefault));
+    m_settings.insert(QStringLiteral("showTemperature"), settings.value(QStringLiteral("showTemperature"), showTemperatureDefault));
+    m_settings.insert(QStringLiteral("showWindDirection"), settings.value(QStringLiteral("showWindDirection"), showWindDirectionDefault));
+    m_settings.insert(QStringLiteral("showWindSpeed"), settings.value(QStringLiteral("showWindSpeed"), showWindSpeedDefault));
 
     // Units
     // The default units depend on the global measure system.
@@ -173,7 +173,7 @@ void WeatherPlugin::setSettings( const QHash<QString,QVariant> &settings )
     else {
         temperatureUnit = WeatherData::Fahrenheit;
     }
-    m_settings.insert( "temperatureUnit", settings.value( "temperatureUnit", temperatureUnit ) );
+    m_settings.insert(QStringLiteral("temperatureUnit"), settings.value(QStringLiteral("temperatureUnit"), temperatureUnit));
 
     int windSpeedUnit;
     if ( locale->measurementSystem() == MarbleLocale::MetricSystem ) {
@@ -182,7 +182,7 @@ void WeatherPlugin::setSettings( const QHash<QString,QVariant> &settings )
     else {
         windSpeedUnit = WeatherData::mph;
     }
-    m_settings.insert( "windSpeedUnit", settings.value( "windSpeedUnit", windSpeedUnit ) );
+    m_settings.insert(QStringLiteral("windSpeedUnit"), settings.value(QStringLiteral("windSpeedUnit"), windSpeedUnit));
 
     int pressureUnit;
     if ( locale->measurementSystem() == MarbleLocale::MetricSystem ) {
@@ -191,7 +191,7 @@ void WeatherPlugin::setSettings( const QHash<QString,QVariant> &settings )
     else {
         pressureUnit = WeatherData::inchHg;
     }
-    m_settings.insert( "pressureUnit", settings.value( "pressureUnit", pressureUnit ) );
+    m_settings.insert(QStringLiteral("pressureUnit"), settings.value(QStringLiteral("pressureUnit"), pressureUnit));
 
     readSettings();
 
@@ -220,69 +220,69 @@ void WeatherPlugin::readSettings()
     }
     
     // Information
-    if ( m_settings.value( "showCondition" ).toBool() )
+    if (m_settings.value(QStringLiteral("showCondition")).toBool())
         ui_configWidget->m_weatherConditionBox->setCheckState( Qt::Checked );
     else
         ui_configWidget->m_weatherConditionBox->setCheckState( Qt::Unchecked );
 
-    if ( m_settings.value( "showTemperature" ).toBool() )
+    if (m_settings.value(QStringLiteral("showTemperature")).toBool())
         ui_configWidget->m_temperatureBox->setCheckState( Qt::Checked );
     else
         ui_configWidget->m_temperatureBox->setCheckState( Qt::Unchecked );
 
-    if ( m_settings.value( "showWindDirection" ).toBool() )
+    if (m_settings.value(QStringLiteral("showWindDirection")).toBool())
         ui_configWidget->m_windDirectionBox->setCheckState( Qt::Checked );
     else
         ui_configWidget->m_windDirectionBox->setCheckState( Qt::Unchecked );
 
-    if ( m_settings.value( "showWindSpeed" ).toBool() )
+    if (m_settings.value(QStringLiteral("showWindSpeed")).toBool())
         ui_configWidget->m_windSpeedBox->setCheckState( Qt::Checked );
     else
         ui_configWidget->m_windSpeedBox->setCheckState( Qt::Unchecked );
 
-    if ( m_settings.value( "onlyFavorites" ).toBool() )
+    if (m_settings.value(QStringLiteral("onlyFavorites")).toBool())
         ui_configWidget->m_onlyFavoritesBox->setCheckState( Qt::Checked );
     else
         ui_configWidget->m_onlyFavoritesBox->setCheckState( Qt::Unchecked );
 
     // Units
     ui_configWidget->m_temperatureComboBox
-        ->setCurrentIndex( m_settings.value( "temperatureUnit" ).toInt() );
+        ->setCurrentIndex(m_settings.value(QStringLiteral("temperatureUnit")).toInt());
     
     ui_configWidget->m_windSpeedComboBox
-        ->setCurrentIndex( m_settings.value( "windSpeedUnit" ).toInt() );
+        ->setCurrentIndex(m_settings.value(QStringLiteral("windSpeedUnit")).toInt());
 
     ui_configWidget->m_pressureComboBox
-        ->setCurrentIndex( m_settings.value( "pressureUnit" ).toInt() );
+        ->setCurrentIndex(m_settings.value(QStringLiteral("pressureUnit")).toInt());
 
     // Misc
     ui_configWidget->m_updateIntervalBox
-        ->setValue( m_settings.value( "updateInterval", 3 ).toInt() );
+        ->setValue(m_settings.value(QStringLiteral("updateInterval"), 3).toInt());
 }
 
 void WeatherPlugin::writeSettings()
 {
     // Information
-    m_settings.insert( "showCondition",
+    m_settings.insert(QStringLiteral("showCondition"),
                        ui_configWidget->m_weatherConditionBox->checkState() == Qt::Checked );
-    m_settings.insert( "showTemperature",
+    m_settings.insert(QStringLiteral("showTemperature"),
                        ui_configWidget->m_temperatureBox->checkState() == Qt::Checked );
-    m_settings.insert( "showWindDirection",
+    m_settings.insert(QStringLiteral("showWindDirection"),
                        ui_configWidget->m_windDirectionBox->checkState() == Qt::Checked );
-    m_settings.insert( "showWindSpeed",
+    m_settings.insert(QStringLiteral("showWindSpeed"),
                        ui_configWidget->m_windSpeedBox->checkState() == Qt::Checked );
 
     // Units
-    m_settings.insert( "temperatureUnit", ui_configWidget->m_temperatureComboBox->currentIndex() );
-    m_settings.insert( "windSpeedUnit", ui_configWidget->m_windSpeedComboBox->currentIndex() );
-    m_settings.insert( "pressureUnit", ui_configWidget->m_pressureComboBox->currentIndex() );
+    m_settings.insert(QStringLiteral("temperatureUnit"), ui_configWidget->m_temperatureComboBox->currentIndex());
+    m_settings.insert(QStringLiteral("windSpeedUnit"), ui_configWidget->m_windSpeedComboBox->currentIndex());
+    m_settings.insert(QStringLiteral("pressureUnit"), ui_configWidget->m_pressureComboBox->currentIndex());
 
     // Misc
     bool onlyFavorites = ( ui_configWidget->m_onlyFavoritesBox->checkState() == Qt::Checked );
-    m_settings.insert( "onlyFavorites", onlyFavorites );
+    m_settings.insert(QStringLiteral("onlyFavorites"), onlyFavorites);
 
     m_updateInterval = ui_configWidget->m_updateIntervalBox->value();
-    m_settings.insert( "updateInterval", m_updateInterval );
+    m_settings.insert(QStringLiteral("updateInterval"), m_updateInterval);
 
     emit settingsChanged( nameId() );
     updateSettings();
@@ -291,8 +291,8 @@ void WeatherPlugin::writeSettings()
 void WeatherPlugin::updateSettings()
 {
     if ( model() ) {
-        bool favoritesOnly = m_settings.value( "onlyFavorites", false ).toBool();
-        QList<QString> favoriteItems = m_settings.value( "favoriteItems" ).toString()
+        bool favoritesOnly = m_settings.value(QStringLiteral("onlyFavorites"), false).toBool();
+        QList<QString> favoriteItems = m_settings.value(QStringLiteral("favoriteItems")).toString()
                 .split(QLatin1Char(','), QString::SkipEmptyParts);
 
         model()->setFavoriteItems( favoriteItems );
@@ -311,7 +311,7 @@ void WeatherPlugin::updateItemSettings()
 
 void WeatherPlugin::favoriteItemsChanged( const QStringList& favoriteItems )
 {
-    m_settings["favoriteItems"] = favoriteItems.join(QLatin1Char(','));
+    m_settings[QStringLiteral("favoriteItems")] = favoriteItems.join(QLatin1Char(','));
     emit settingsChanged( nameId() );
     updateSettings();
 }

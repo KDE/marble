@@ -330,14 +330,14 @@ void NavigationFloatItem::centerOnCurrentLocation()
 QHash<QString,QVariant> NavigationFloatItem::settings() const
 {
     QHash<QString, QVariant> settings = AbstractFloatItem::settings();
-    settings.insert( "showHomeButton", m_showHomeButton );
+    settings.insert(QStringLiteral("showHomeButton"), m_showHomeButton);
     return settings;
 }
 
 void NavigationFloatItem::setSettings( const QHash<QString, QVariant> &settings )
 {
     AbstractFloatItem::setSettings( settings );
-    m_showHomeButton = settings.value( "showHomeButton", true ).toBool();
+    m_showHomeButton = settings.value(QStringLiteral("showHomeButton"), true).toBool();
     if ( m_showHomeButton ) {
         activateHomeButton();
     } else {

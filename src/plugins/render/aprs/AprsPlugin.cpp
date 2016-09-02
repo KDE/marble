@@ -356,18 +356,18 @@ QHash<QString,QVariant> AprsPlugin::settings() const
 {
     QHash<QString, QVariant> result = RenderPlugin::settings();
 
-    result.insert( "useInternet", m_useInternet );
-    result.insert( "useTTY", m_useTty );
-    result.insert( "useFile", m_useFile );
-    result.insert( "APRSHost", m_aprsHost );
-    result.insert( "APRSPort", m_aprsPort );
-    result.insert( "TNCTTY", m_tncTty );
-    result.insert( "FileName", m_aprsFile );
-    result.insert( "TCPIPDump", m_dumpTcpIp );
-    result.insert( "TTYDump", m_dumpTty );
-    result.insert( "FileDump", m_dumpFile );
-    result.insert( "fadeTime", m_fadeTime );
-    result.insert( "hideTime", m_hideTime );
+    result.insert(QStringLiteral("useInternet"), m_useInternet);
+    result.insert(QStringLiteral("useTTY"), m_useTty);
+    result.insert(QStringLiteral("useFile"), m_useFile);
+    result.insert(QStringLiteral("APRSHost"), m_aprsHost);
+    result.insert(QStringLiteral("APRSPort"), m_aprsPort);
+    result.insert(QStringLiteral("TNCTTY"), m_tncTty);
+    result.insert(QStringLiteral("FileName"), m_aprsFile);
+    result.insert(QStringLiteral("TCPIPDump"), m_dumpTcpIp);
+    result.insert(QStringLiteral("TTYDump"), m_dumpTty);
+    result.insert(QStringLiteral("FileDump"), m_dumpFile);
+    result.insert(QStringLiteral("fadeTime"), m_fadeTime);
+    result.insert(QStringLiteral("hideTime"), m_hideTime);
 
     return result;
 }
@@ -376,21 +376,21 @@ void AprsPlugin::setSettings( const QHash<QString,QVariant> &settings )
 {
     RenderPlugin::setSettings( settings );
 
-    m_useInternet =  settings.value( "useInternet", true ).toBool();
-    m_useTty = settings.value( "useTTY", false ).toBool();
-    m_useFile = settings.value( "useFile", false ).toBool();
+    m_useInternet =  settings.value(QStringLiteral("useInternet"), true).toBool();
+    m_useTty = settings.value(QStringLiteral("useTTY"), false).toBool();
+    m_useFile = settings.value(QStringLiteral("useFile"), false).toBool();
 
-    m_aprsHost = settings.value( "APRSHost", "rotate.aprs.net" ).toString();
-    m_aprsPort = settings.value( "APRSPort", 10253 ).toInt();
-    m_tncTty = settings.value( "TNCTTY", "/dev/ttyUSB0" ).toString();
-    m_aprsFile = settings.value( "FileName", "" ).toString();
+    m_aprsHost = settings.value(QStringLiteral("APRSHost"), QStringLiteral("rotate.aprs.net")).toString();
+    m_aprsPort = settings.value(QStringLiteral("APRSPort"), 10253).toInt();
+    m_tncTty = settings.value(QStringLiteral("TNCTTY"), QStringLiteral("/dev/ttyUSB0")).toString();
+    m_aprsFile = settings.value(QStringLiteral("FileName"), QString()).toString();
 
-    m_dumpTcpIp = settings.value( "TCPIPDump", false ).toBool();
-    m_dumpTty = settings.value( "TTYDump", false ).toBool();
-    m_dumpFile = settings.value( "FileDump", false ).toBool();
+    m_dumpTcpIp = settings.value(QStringLiteral("TCPIPDump"), false).toBool();
+    m_dumpTty = settings.value(QStringLiteral("TTYDump"), false).toBool();
+    m_dumpFile = settings.value(QStringLiteral("FileDump"), false).toBool();
 
-    m_fadeTime = settings.value( "fadeTime", 10 ).toInt();
-    m_hideTime = settings.value( "hideTime", 45 ).toInt();
+    m_fadeTime = settings.value(QStringLiteral("fadeTime"), 10).toInt();
+    m_hideTime = settings.value(QStringLiteral("hideTime"), 45).toInt();
 
     readSettings();
     emit settingsChanged( nameId() );

@@ -364,44 +364,44 @@ void EclipsesPlugin::setSettings( const QHash<QString, QVariant> &settings )
 void EclipsesPlugin::readSettings()
 {
     m_configWidget->checkBoxEnableLunarEclipses->setChecked(
-            m_settings.value( "enableLunarEclipses", false ).toBool() );
+            m_settings.value(QStringLiteral("enableLunarEclipses"), false).toBool());
     m_configWidget->checkBoxShowMaximum->setChecked(
-            m_settings.value( "showMaximum", true ).toBool() );
+            m_settings.value(QStringLiteral("showMaximum"), true).toBool());
     m_configWidget->checkBoxShowUmbra->setChecked(
-            m_settings.value( "showUmbra", true ).toBool() );
+            m_settings.value(QStringLiteral("showUmbra"), true).toBool());
     m_configWidget->checkBoxShowSouthernPenumbra->setChecked(
-            m_settings.value( "showSouthernPenumbra", true ).toBool() );
+            m_settings.value(QStringLiteral("showSouthernPenumbra"), true).toBool());
     m_configWidget->checkBoxShowNorthernPenumbra->setChecked(
-            m_settings.value( "showNorthernPenumbra", true ).toBool() );
+            m_settings.value(QStringLiteral("showNorthernPenumbra"), true).toBool());
     m_configWidget->checkBoxShowCentralLine->setChecked(
-            m_settings.value( "showCentralLine", true ).toBool() );
+            m_settings.value(QStringLiteral("showCentralLine"), true).toBool());
     m_configWidget->checkBoxShowFullPenumbra->setChecked(
-            m_settings.value( "showFullPenumbra", true ).toBool() );
+            m_settings.value(QStringLiteral("showFullPenumbra"), true).toBool());
     m_configWidget->checkBoxShow60MagPenumbra->setChecked(
-            m_settings.value( "show60MagPenumbra", false ).toBool() );
+            m_settings.value(QStringLiteral("show60MagPenumbra"), false).toBool());
     m_configWidget->checkBoxShowSunBoundaries->setChecked(
-            m_settings.value( "showSunBoundaries", true ).toBool() );
+            m_settings.value(QStringLiteral("showSunBoundaries"), true).toBool());
 }
 
 void EclipsesPlugin::writeSettings()
 {
-    m_settings.insert( "enableLunarEclipses",
+    m_settings.insert(QStringLiteral("enableLunarEclipses"),
             m_configWidget->checkBoxEnableLunarEclipses->isChecked() );
-    m_settings.insert( "showMaximum",
+    m_settings.insert(QStringLiteral("showMaximum"),
             m_configWidget->checkBoxShowMaximum->isChecked() );
-    m_settings.insert( "showUmbra",
+    m_settings.insert(QStringLiteral("showUmbra"),
             m_configWidget->checkBoxShowUmbra->isChecked() );
-    m_settings.insert( "showSouthernPenumbra",
+    m_settings.insert(QStringLiteral("showSouthernPenumbra"),
             m_configWidget->checkBoxShowSouthernPenumbra->isChecked() );
-    m_settings.insert( "showNorthernPenumbra",
+    m_settings.insert(QStringLiteral("showNorthernPenumbra"),
             m_configWidget->checkBoxShowNorthernPenumbra->isChecked() );
-    m_settings.insert( "showCentralLine",
+    m_settings.insert(QStringLiteral("showCentralLine"),
             m_configWidget->checkBoxShowCentralLine->isChecked() );
-    m_settings.insert( "showFullPenumbra",
+    m_settings.insert(QStringLiteral("showFullPenumbra"),
             m_configWidget->checkBoxShowFullPenumbra->isChecked() );
-    m_settings.insert( "show60MagPenumbra",
+    m_settings.insert(QStringLiteral("show60MagPenumbra"),
             m_configWidget->checkBoxShow60MagPenumbra->isChecked() );
-    m_settings.insert( "showSunBoundaries",
+    m_settings.insert(QStringLiteral("showSunBoundaries"),
             m_configWidget->checkBoxShowSunBoundaries->isChecked() );
 
     emit settingsChanged( nameId() );
@@ -414,9 +414,9 @@ void EclipsesPlugin::updateSettings()
     }
 
     m_browserDialog->setWithLunarEclipses(
-            m_settings.value( "enableLunarEclipses" ).toBool() );
+            m_settings.value(QStringLiteral("enableLunarEclipses")).toBool());
     if( m_model->withLunarEclipses() !=
-            m_settings.value( "enableLunarEclipses" ).toBool() ) {
+            m_settings.value(QStringLiteral("enableLunarEclipses")).toBool()) {
         updateEclipses();
     }
 }
@@ -425,7 +425,7 @@ void EclipsesPlugin::updateEclipses()
 {
     // mDebug() << "Updating eclipses....";
     const int year = marbleModel()->clock()->dateTime().date().year();
-    const bool lun = m_settings.value( "enableLunarEclipses" ).toBool();
+    const bool lun = m_settings.value(QStringLiteral("enableLunarEclipses")).toBool();
 
     if( ( m_menuYear != year ) || ( m_model->withLunarEclipses() != lun ) ) {
 

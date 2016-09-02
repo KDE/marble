@@ -90,12 +90,12 @@ public:
         QHash<QString, QVariant> settings = settings_;
 
         // Check if all fields are filled and fill them with default values.
-        if ( !settings.contains( "transport" ) ) {
-            settings.insert( "transport", "motorcar" );
+        if (!settings.contains(QStringLiteral("transport"))) {
+            settings.insert(QStringLiteral("transport"), QStringLiteral("motorcar"));
         }
         ui_configWidget->transport->setCurrentIndex(
-            ui_configWidget->transport->findData( settings.value( "transport" ).toString() ) );
-        if (settings.value("method").toString() == QLatin1String("shortest")) {
+            ui_configWidget->transport->findData(settings.value(QStringLiteral("transport")).toString()));
+        if (settings.value(QStringLiteral("method")).toString() == QLatin1String("shortest")) {
             ui_configWidget->shortest->setChecked( true );
         } else {
             ui_configWidget->fastest->setChecked( true );
@@ -105,13 +105,13 @@ public:
     virtual QHash<QString, QVariant> settings() const
     {
         QHash<QString,QVariant> settings;
-        settings.insert( "transport",
+        settings.insert(QStringLiteral("transport"),
                         ui_configWidget->transport->itemData( ui_configWidget->transport->currentIndex() ) );
 
         if ( ui_configWidget->shortest->isChecked() ) {
-            settings.insert( "method", "shortest" );
+            settings.insert(QStringLiteral("method"), QStringLiteral("shortest"));
         } else {
-            settings.insert( "method", "fastest" );
+            settings.insert(QStringLiteral("method"), QStringLiteral("fastest"));
         }
         return settings;
     }
@@ -139,22 +139,22 @@ QHash< QString, QVariant > RoutinoPlugin::templateSettings(RoutingProfilesModel:
     QHash<QString, QVariant> result;
     switch ( profileTemplate ) {
         case RoutingProfilesModel::CarFastestTemplate:
-            result["transport"] = "motorcar";
-            result["method"] = "fastest";
+            result.insert(QStringLiteral("transport"), QStringLiteral("motorcar"));
+            result.insert(QStringLiteral("method"), QStringLiteral("fastest"));
             break;
         case RoutingProfilesModel::CarShortestTemplate:
-            result["transport"] = "motorcar";
-            result["method"] = "shortest";
+            result.insert(QStringLiteral("transport"), QStringLiteral("motorcar"));
+            result.insert(QStringLiteral("method"), QStringLiteral("shortest"));
             break;
         case RoutingProfilesModel::CarEcologicalTemplate:
             break;
         case RoutingProfilesModel::BicycleTemplate:
-            result["transport"] = "bicycle";
-            result["method"] = "shortest";
+            result.insert(QStringLiteral("transport"), QStringLiteral("bicycle"));
+            result.insert(QStringLiteral("method"), QStringLiteral("shortest"));
             break;
         case RoutingProfilesModel::PedestrianTemplate:
-            result["transport"] = "foot";
-            result["method"] = "shortest";
+            result.insert(QStringLiteral("transport"), QStringLiteral("foot"));
+            result.insert(QStringLiteral("method"), QStringLiteral("shortest"));
             break;
         case RoutingProfilesModel::LastTemplate:
             Q_ASSERT( false );

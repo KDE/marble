@@ -137,8 +137,8 @@ QHash<QString,QVariant> WikipediaPlugin::settings() const
 {
     QHash<QString, QVariant> settings = AbstractDataPlugin::settings();
 
-    settings.insert( "numberOfItems", numberOfItems() );
-    settings.insert( "showThumbnails", m_showThumbnails );
+    settings.insert(QStringLiteral("numberOfItems"), numberOfItems());
+    settings.insert(QStringLiteral("showThumbnails"), m_showThumbnails);
 
     return settings;
 }
@@ -147,8 +147,8 @@ void WikipediaPlugin::setSettings( const QHash<QString,QVariant> &settings )
 {
     AbstractDataPlugin::setSettings( settings );
 
-    setNumberOfItems( qMin<int>( maximumNumberOfItems, settings.value( "numberOfItems", 15 ).toInt() ) );
-    m_showThumbnails = settings.value( "showThumbnails", true ).toBool();
+    setNumberOfItems(qMin<int>(maximumNumberOfItems, settings.value(QStringLiteral("numberOfItems"), 15).toInt()));
+    m_showThumbnails = settings.value(QStringLiteral("showThumbnails"), true).toBool();
 
     readSettings();
     emit settingsChanged( nameId() );

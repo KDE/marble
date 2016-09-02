@@ -550,9 +550,9 @@ QHash<QString,QVariant> RoutingPlugin::settings() const
 {
     QHash<QString, QVariant> result = AbstractFloatItem::settings();
 
-    result.insert( "muted", d->m_audio->isMuted() );
-    result.insert( "sound", d->m_audio->isSoundEnabled() );
-    result.insert( "speaker", d->m_audio->speaker() );
+    result.insert(QStringLiteral("muted"), d->m_audio->isMuted());
+    result.insert(QStringLiteral("sound"), d->m_audio->isSoundEnabled());
+    result.insert(QStringLiteral("speaker"), d->m_audio->speaker());
 
     return result;
 }
@@ -561,9 +561,9 @@ void RoutingPlugin::setSettings( const QHash<QString,QVariant> &settings )
 {
     AbstractFloatItem::setSettings( settings );
 
-    d->m_audio->setMuted( settings.value( "muted", false ).toBool() );
-    d->m_audio->setSoundEnabled( settings.value( "sound", true ).toBool() );
-    d->m_audio->setSpeaker( settings.value( "speaker" ).toString() );
+    d->m_audio->setMuted(settings.value(QStringLiteral("muted"), false).toBool());
+    d->m_audio->setSoundEnabled(settings.value(QStringLiteral("sound"), true).toBool());
+    d->m_audio->setSpeaker(settings.value(QStringLiteral("speaker")).toString());
 
     d->readSettings();
 }

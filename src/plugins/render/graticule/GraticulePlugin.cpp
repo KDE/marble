@@ -162,11 +162,11 @@ QHash<QString,QVariant> GraticulePlugin::settings() const
 {
     QHash<QString, QVariant> settings = RenderPlugin::settings();
 
-    settings.insert( "gridColor", m_gridCirclePen.color().name() );
-    settings.insert( "tropicsColor", m_tropicsCirclePen.color().name() );
-    settings.insert( "equatorColor", m_equatorCirclePen.color().name() );
-    settings.insert( "primarylabels", m_showPrimaryLabels );
-    settings.insert( "secondaryLabels", m_showSecondaryLabels );
+    settings.insert(QStringLiteral("gridColor"), m_gridCirclePen.color().name());
+    settings.insert(QStringLiteral("tropicsColor"), m_tropicsCirclePen.color().name());
+    settings.insert(QStringLiteral("equatorColor"), m_equatorCirclePen.color().name());
+    settings.insert(QStringLiteral("primarylabels"), m_showPrimaryLabels);
+    settings.insert(QStringLiteral("secondaryLabels"), m_showSecondaryLabels);
 
     return settings;
 }
@@ -175,11 +175,11 @@ void GraticulePlugin::setSettings( const QHash<QString,QVariant> &settings )
 {
     RenderPlugin::setSettings( settings );
 
-    const QColor gridColor = settings.value( "gridColor", QColor( Qt::white ) ).value<QColor>();
-    const QColor tropicsColor = settings.value( "tropicsColor", QColor( Qt::yellow ) ).value<QColor>();
-    const QColor equatorColor = settings.value( "equatorColor", QColor( Qt::yellow ) ).value<QColor>();
-    bool primaryLabels = settings.value( "primaryLabels", true ).toBool();
-    bool secondaryLabels = settings.value( "secondaryLabels", true ).toBool();
+    const QColor gridColor = settings.value(QStringLiteral("gridColor"), QColor(Qt::white)).value<QColor>();
+    const QColor tropicsColor = settings.value(QStringLiteral("tropicsColor"), QColor(Qt::yellow)).value<QColor>();
+    const QColor equatorColor = settings.value(QStringLiteral("equatorColor"), QColor(Qt::yellow)).value<QColor>();
+    bool primaryLabels = settings.value(QStringLiteral("primaryLabels"), true).toBool();
+    bool secondaryLabels = settings.value(QStringLiteral("secondaryLabels"), true).toBool();
 
     m_gridCirclePen.setColor( gridColor );
     m_tropicsCirclePen.setColor( tropicsColor );

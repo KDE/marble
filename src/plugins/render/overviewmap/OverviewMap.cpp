@@ -315,8 +315,8 @@ void OverviewMap::setSettings( const QHash<QString,QVariant> &settings )
 {
     AbstractFloatItem::setSettings( settings );
 
-    m_settings.insert( "width", settings.value( "width", m_defaultSize.toSize().width() ) );
-    m_settings.insert( "height", settings.value( "height", m_defaultSize.toSize().height() ) );
+    m_settings.insert(QStringLiteral("width"), settings.value(QStringLiteral("width"), m_defaultSize.toSize().width()));
+    m_settings.insert(QStringLiteral("height"), settings.value(QStringLiteral("height"), m_defaultSize.toSize().height()));
 
     foreach ( const QString& planet, PlanetFactory::planetList() ) {
         QString mapFile = MarbleDirs::path(QLatin1String("svg/") + planet + QLatin1String("map.svg"));
@@ -332,7 +332,7 @@ void OverviewMap::setSettings( const QHash<QString,QVariant> &settings )
         m_settings.insert(id, settings.value(id, mapFile));
     }
 
-    m_settings.insert( "posColor", settings.value( "posColor", QColor( Qt::white ).name() ) );
+    m_settings.insert(QStringLiteral("posColor"), settings.value(QStringLiteral("posColor"), QColor(Qt::white).name()));
 
     m_target.clear(); // FIXME: forces execution of changeBackground() in changeViewport()
 
@@ -346,10 +346,10 @@ void OverviewMap::readSettings()
         return;
     }
 
-    ui_configWidget->m_widthBox->setValue( m_settings.value( "width" ).toInt() );
-    ui_configWidget->m_heightBox->setValue( m_settings.value( "height" ).toInt() );
+    ui_configWidget->m_widthBox->setValue( m_settings.value(QStringLiteral("width")).toInt() );
+    ui_configWidget->m_heightBox->setValue( m_settings.value(QStringLiteral("height")).toInt() );
     QPalette palette = ui_configWidget->m_colorChooserButton->palette();
-    palette.setColor( QPalette::Button, QColor( m_settings.value( "posColor" ).toString() ) );
+    palette.setColor(QPalette::Button, QColor(m_settings.value(QStringLiteral("posColor")).toString()));
     ui_configWidget->m_colorChooserButton->setPalette( palette );
 }
 
@@ -359,15 +359,15 @@ void OverviewMap::writeSettings()
         return;
     }
 
-    m_settings.insert( "width", contentRect().width() );
-    m_settings.insert( "height", contentRect().height() );
+    m_settings.insert(QStringLiteral("width"), contentRect().width());
+    m_settings.insert(QStringLiteral("height"), contentRect().height());
 
     QStringList const planets = PlanetFactory::planetList();
     foreach( const QString &planet, planets ) {
         m_settings.insert(QLatin1String("path_") + planet, m_svgPaths[planet]);
     }
 
-    m_settings.insert( "posColor", m_posColor.name() );
+    m_settings.insert(QStringLiteral("posColor"), m_posColor.name());
 
     emit settingsChanged( nameId() );
 }
@@ -379,7 +379,7 @@ void OverviewMap::updateSettings()
         m_svgPaths.insert(planet, m_settings.value(QLatin1String("path_") + planet, QString()).toString());
     }
 
-    m_posColor = QColor( m_settings.value( "posColor" ).toString() );
+    m_posColor = QColor(m_settings.value(QStringLiteral("posColor")).toString());
     loadPlanetMaps();
 
     if ( !m_configDialog ) {

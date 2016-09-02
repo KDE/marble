@@ -53,8 +53,7 @@ void MapQuestRunner::retrieveRoute( const RouteRequest *route )
 
     QHash<QString, QVariant> settings = route->routingProfile().pluginSettings()["mapquest"];
 
-    if ( settings.value( "appKey" ).toString().isEmpty() )
-    {
+    if (settings.value(QStringLiteral("appKey")).toString().isEmpty()) {
         return;
     }
 
@@ -68,18 +67,18 @@ void MapQuestRunner::retrieveRoute( const RouteRequest *route )
     QString const unit = MarbleGlobal::getInstance()->locale()->measurementSystem() == MarbleLocale::MetricSystem ? "k" : "m";
     append( &url, "units", unit );
 
-    if ( settings["noMotorways"].toInt() ) {
+    if (settings[QStringLiteral("noMotorways")].toInt()) {
         append( &url, "avoids", "Limited Access" );
     }
-    if ( settings["noTollroads"].toInt() ) {
+    if (settings[QStringLiteral("noTollroads")].toInt()) {
         append( &url, "avoids", "Toll road" );
     }
-    if ( settings["noFerries"].toInt() ) {
+    if (settings[QStringLiteral("noFerries")].toInt()) {
         append( &url, "avoids", "Ferry" );
     }
 
-    if ( !settings["preference"].toString().isEmpty() ) {
-        append( &url, "routeType", settings["preference"].toString() );
+    if (!settings[QStringLiteral("preference")].toString().isEmpty()) {
+        append(&url, QStringLiteral("routeType"), settings[QStringLiteral("preference")].toString());
     }
 
     const QString ascendingSetting = settings[QStringLiteral("ascending")].toString();
@@ -114,7 +113,7 @@ void MapQuestRunner::retrieveRoute( const RouteRequest *route )
     QUrl qurl(url);
     // FIXME: verify that this works with special characters.
     QUrlQuery urlQuery;
-    urlQuery.addQueryItem( "key", settings.value( "appKey" ).toByteArray() );
+    urlQuery.addQueryItem(QStringLiteral("key"), settings.value(QStringLiteral("appKey")).toByteArray());
     qurl.setQuery(urlQuery);
     m_request.setUrl( qurl );
     m_request.setRawHeader( "User-Agent", HttpDownloadManager::userAgent( "Browser", "MapQuestRunner" ) );
