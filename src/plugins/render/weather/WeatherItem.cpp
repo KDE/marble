@@ -178,7 +178,7 @@ class WeatherItemPrivate
         if ( isWindDirectionShown() ) {
             QString windDirectionString = m_currentWeather.windDirectionString();
             QSizeF windDirectionImageSize;
-            QSvgRenderer s_windIcons( MarbleDirs::path( "weather/wind-arrows.svgz" ) );
+            QSvgRenderer s_windIcons(MarbleDirs::path(QStringLiteral("weather/wind-arrows.svgz")));
             QSizeF windDirectionSizeF = s_windIcons.boundsOnElement( windDirectionString ).size();
             double windDirectionRatio = windDirectionSizeF.width() / windDirectionSizeF.height();
             if ( windDirectionRatio >= imageSizeRatio ) {

@@ -39,7 +39,7 @@ bool MarbleSplashLayer::render( GeoPainter *painter, ViewportParams *viewport,
 
     painter->save();
 
-    QPixmap logoPixmap( MarbleDirs::path( "svg/marble-logo-inverted-72dpi.png" ) );
+    QPixmap logoPixmap(MarbleDirs::path(QStringLiteral("svg/marble-logo-inverted-72dpi.png")));
 
     if ( logoPixmap.width() > viewport->width() * 0.7
          || logoPixmap.height() > viewport->height() * 0.7 )

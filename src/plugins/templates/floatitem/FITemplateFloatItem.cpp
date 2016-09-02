@@ -33,7 +33,7 @@ FITemplateFloatItem::FITemplateFloatItem ( const QPointF &point,
       m_compass(),
       m_polarity( 0 )
 {
-    m_svgobj = new QSvgRenderer( MarbleDirs::path( "svg/compass.svg" ),
+    m_svgobj = new QSvgRenderer(MarbleDirs::path(QStringLiteral("svg/compass.svg")),
                                  this );
 }
 

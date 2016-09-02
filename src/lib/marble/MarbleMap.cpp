@@ -1010,9 +1010,9 @@ void MarbleMapPrivate::updateMapTheme()
                 }
                 //look up locations if they are empty
                 if( seafile.isEmpty() )
-                    seafile = MarbleDirs::path( "seacolors.leg" );
+                    seafile = MarbleDirs::path(QStringLiteral("seacolors.leg"));
                 if( landfile.isEmpty() )
-                    landfile = MarbleDirs::path( "landcolors.leg" );
+                    landfile = MarbleDirs::path(QStringLiteral("landcolors.leg"));
             }
         }
 

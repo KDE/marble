@@ -41,7 +41,7 @@ WeatherPlugin::WeatherPlugin()
 WeatherPlugin::WeatherPlugin( const MarbleModel *marbleModel )
     : AbstractDataPlugin( marbleModel ),
       m_updateInterval( 0 ),
-      m_icon( MarbleDirs::path( "weather/weather-clear.png" ) ),
+      m_icon(MarbleDirs::path(QStringLiteral("weather/weather-clear.png"))),
       m_configDialog( 0 ),
       ui_configWidget( 0 ),
       m_settings()

@@ -199,7 +199,7 @@ void SatellitesModel::parseCatalog( const QString &id,
         if (category == QLatin1String("Moons")) {
             style->iconStyle().setIconPath( ":/icons/moon.png" );
         } else {
-            style->iconStyle().setIconPath(MarbleDirs::path("bitmaps/satellite.png"));
+            style->iconStyle().setIconPath(MarbleDirs::path(QStringLiteral("bitmaps/satellite.png")));
         }
 
         item->placemark()->setStyle( style );
@@ -253,7 +253,7 @@ void SatellitesModel::parseTLE( const QString &id,
         style->lineStyle().setPenStyle( Qt::SolidLine );
         style->lineStyle().setColor( nextColor() );
         style->labelStyle().setGlow( true );
-        style->iconStyle().setIconPath(MarbleDirs::path("bitmaps/satellite.png"));
+        style->iconStyle().setIconPath(MarbleDirs::path(QStringLiteral("bitmaps/satellite.png")));
         item->placemark()->setStyle( style );
         addItem( item );
     }

@@ -322,10 +322,10 @@ void OverviewMap::setSettings( const QHash<QString,QVariant> &settings )
         QString mapFile = MarbleDirs::path(QLatin1String("svg/") + planet + QLatin1String("map.svg"));
 
         if (planet == QLatin1String("moon")) {
-            mapFile = MarbleDirs::path( "svg/lunarmap.svg" );
+            mapFile = MarbleDirs::path(QStringLiteral("svg/lunarmap.svg"));
         }
         else if (planet == QLatin1String("earth") || mapFile.isEmpty()) {
-            mapFile = MarbleDirs::path( "svg/worldmap.svg" );
+            mapFile = MarbleDirs::path(QStringLiteral("svg/worldmap.svg"));
         }
 
         const QString id = QLatin1String("path_") + planet;
@@ -472,7 +472,7 @@ void OverviewMap::loadMapSuggestions()
     for( int i = 0; i < paths.size(); ++i ) {
         paths[i] = MarbleDirs::pluginPath(QString()) + QLatin1Char('/') + paths[i];
     }
-    paths << MarbleDirs::path( "svg/worldmap.svg" ) << MarbleDirs::path( "svg/lunarmap.svg" );
+    paths << MarbleDirs::path(QStringLiteral("svg/worldmap.svg")) << MarbleDirs::path(QStringLiteral("svg/lunarmap.svg"));
     ui_configWidget->m_tableWidget->setRowCount( paths.size() );
     for( int i = 0; i < paths.size(); ++i ) {
         ui_configWidget->m_tableWidget->setCellWidget( i, 0, new QSvgWidget( paths[i] ) );

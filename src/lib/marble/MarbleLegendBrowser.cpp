@@ -150,7 +150,7 @@ void MarbleLegendBrowser::loadLegend()
             currentMapTheme->head()->theme() + QLatin1String("/legend.html"));
     }
     if ( legendPath.isEmpty() ) {
-        legendPath = MarbleDirs::path( "legend.html" );
+        legendPath = MarbleDirs::path(QStringLiteral("legend.html"));
     }
 
     QString finalHtml = readHtml( QUrl::fromLocalFile( legendPath ) );

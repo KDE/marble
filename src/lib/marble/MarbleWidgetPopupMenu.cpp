@@ -408,7 +408,7 @@ void MarbleWidgetPopupMenu::Private::setupDialogCity( PopupLayer *popup, const G
     }
 
     const QString flagPath = MarbleDirs::path(
-                QString("flags/flag_%1.svg").arg(placemark->countryCode().toLower()));
+                QLatin1String("flags/flag_") + placemark->countryCode().toLower() + QLatin1String(".svg"));
     doc["flag"] = flagPath;
 
     popup->setContent(doc.finalText());

@@ -288,7 +288,7 @@ QPixmap StarsPlugin::starPixmap(qreal mag, int colorId) const
 void StarsPlugin::prepareNames()
 {
 
-    QFile names( MarbleDirs::path( "stars/names.csv" ) );
+    QFile names(MarbleDirs::path(QStringLiteral("stars/names.csv")));
     if ( !names.open( QIODevice::ReadOnly ) ) {
         return;
     }
@@ -531,7 +531,7 @@ void StarsPlugin::loadStars()
     // Load star data
     m_stars.clear();
 
-    QFile starFile( MarbleDirs::path( "stars/stars.dat" ) );
+    QFile starFile(MarbleDirs::path(QStringLiteral("stars/stars.dat")));
     starFile.open( QIODevice::ReadOnly );
     QDataStream in( &starFile );
 
@@ -592,8 +592,8 @@ void StarsPlugin::loadStars()
 
     // load the Sun pixmap
     // TODO: adjust pixmap size according to distance
-    m_pixmapSun.load( MarbleDirs::path( "svg/sun.png" ) );
-    m_pixmapMoon.load( MarbleDirs::path( "svg/moon.png" ) );
+    m_pixmapSun.load(MarbleDirs::path(QStringLiteral("svg/sun.png")));
+    m_pixmapMoon.load(MarbleDirs::path(QStringLiteral("svg/moon.png")));
 
     m_starsLoaded = true;
 }
@@ -603,23 +603,23 @@ void StarsPlugin::createStarPixmaps()
     // Load star pixmaps
     QVector<QPixmap> pixBigStars;
     pixBigStars.clear();
-    pixBigStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_0_blue.png")));
-    pixBigStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_0_bluewhite.png")));
-    pixBigStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_0_white.png")));
-    pixBigStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_0_yellow.png")));
-    pixBigStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_0_orange.png")));
-    pixBigStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_0_red.png")));
-    pixBigStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_0_garnetred.png")));
+    pixBigStars.append(QPixmap(MarbleDirs::path(QStringLiteral("bitmaps/stars/star_0_blue.png"))));
+    pixBigStars.append(QPixmap(MarbleDirs::path(QStringLiteral("bitmaps/stars/star_0_bluewhite.png"))));
+    pixBigStars.append(QPixmap(MarbleDirs::path(QStringLiteral("bitmaps/stars/star_0_white.png"))));
+    pixBigStars.append(QPixmap(MarbleDirs::path(QStringLiteral("bitmaps/stars/star_0_yellow.png"))));
+    pixBigStars.append(QPixmap(MarbleDirs::path(QStringLiteral("bitmaps/stars/star_0_orange.png"))));
+    pixBigStars.append(QPixmap(MarbleDirs::path(QStringLiteral("bitmaps/stars/star_0_red.png"))));
+    pixBigStars.append(QPixmap(MarbleDirs::path(QStringLiteral("bitmaps/stars/star_0_garnetred.png"))));
 
     QVector<QPixmap> pixSmallStars;
     pixSmallStars.clear();
-    pixSmallStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_3_blue.png")));
-    pixSmallStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_3_bluewhite.png")));
-    pixSmallStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_3_white.png")));
-    pixSmallStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_3_yellow.png")));
-    pixSmallStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_3_orange.png")));
-    pixSmallStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_3_red.png")));
-    pixSmallStars.append(QPixmap(MarbleDirs::path("bitmaps/stars/star_3_garnetred.png")));
+    pixSmallStars.append(QPixmap(MarbleDirs::path(QStringLiteral("bitmaps/stars/star_3_blue.png"))));
+    pixSmallStars.append(QPixmap(MarbleDirs::path(QStringLiteral("bitmaps/stars/star_3_bluewhite.png"))));
+    pixSmallStars.append(QPixmap(MarbleDirs::path(QStringLiteral("bitmaps/stars/star_3_white.png"))));
+    pixSmallStars.append(QPixmap(MarbleDirs::path(QStringLiteral("bitmaps/stars/star_3_yellow.png"))));
+    pixSmallStars.append(QPixmap(MarbleDirs::path(QStringLiteral("bitmaps/stars/star_3_orange.png"))));
+    pixSmallStars.append(QPixmap(MarbleDirs::path(QStringLiteral("bitmaps/stars/star_3_red.png"))));
+    pixSmallStars.append(QPixmap(MarbleDirs::path(QStringLiteral("bitmaps/stars/star_3_garnetred.png"))));
 
 
     // Pre-Scale Star Pixmaps
@@ -685,7 +685,7 @@ void StarsPlugin::loadConstellations()
     // Load star data
     m_constellations.clear();
 
-    QFile constellationFile( MarbleDirs::path( "stars/constellations.dat" ) );
+    QFile constellationFile(MarbleDirs::path(QStringLiteral("stars/constellations.dat")));
     constellationFile.open( QIODevice::ReadOnly );
     QTextStream in( &constellationFile );
     QString line;
@@ -725,7 +725,7 @@ void StarsPlugin::loadDsos()
     // Load star data
     m_dsos.clear();
 
-    QFile dsoFile( MarbleDirs::path( "stars/dso.dat" ) );
+    QFile dsoFile(MarbleDirs::path(QStringLiteral("stars/dso.dat")));
     dsoFile.open( QIODevice::ReadOnly );
     QTextStream in( &dsoFile );
     QString line;
@@ -770,7 +770,7 @@ void StarsPlugin::loadDsos()
         m_dsos << dso;
     }
 
-    m_dsoImage.load( MarbleDirs::path( "stars/deepsky.png" ) );
+    m_dsoImage.load(MarbleDirs::path(QStringLiteral("stars/deepsky.png")));
     m_dsosLoaded = true;
 }
 
@@ -1114,7 +1114,7 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
             qpos.rotateAroundAxis( skyAxisMatrix );
 
             if ( qpos.v[Q_Z] <= 0 ) {
-                QPixmap glow(MarbleDirs::path( "svg/glow.png" ));
+                QPixmap glow(MarbleDirs::path(QStringLiteral("svg/glow.png")));
                 qreal deltaX  = glow.width()  / 2.;
                 qreal deltaY  = glow.height() / 2.;
                 int x = (int)(viewport->width()  / 2 + skyRadius * qpos.v[Q_X]);

@@ -61,7 +61,7 @@ void BBCWeatherService::getAdditionalItems( const GeoDataLatLonAltBox& box,
         m_parsingStarted = true;
 
         m_parser = new StationListParser( this );
-        m_parser->setPath( MarbleDirs::path( "weather/bbc-stations.xml" ) );
+        m_parser->setPath(MarbleDirs::path(QStringLiteral("weather/bbc-stations.xml")));
         connect( m_parser, SIGNAL(finished()),
                  this,     SLOT(fetchStationList()) );
         if ( m_parser->wait( 100 ) ) {

@@ -35,7 +35,7 @@ WikipediaPlugin::WikipediaPlugin()
 
 WikipediaPlugin::WikipediaPlugin( const MarbleModel *marbleModel )
     : AbstractDataPlugin( marbleModel ),
-      m_icon( MarbleDirs::path( "svg/wikipedia_shadow.svg" ) ),
+      m_icon(MarbleDirs::path(QStringLiteral("svg/wikipedia_shadow.svg"))),
       ui_configWidget( 0 ),
       m_configDialog( 0 ),
       m_showThumbnails( true )

@@ -72,7 +72,7 @@ void EditBookmarkDialogPrivate::initialize()
     bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
     m_ui.m_header->setPositionVisible(!smallScreen);
     m_ui.m_header->setIdVisible( false );
-    m_ui.m_header->setIconLink( MarbleDirs::path( "bitmaps/bookmark.png" ) );
+    m_ui.m_header->setIconLink(MarbleDirs::path(QStringLiteral("bitmaps/bookmark.png")));
     QObject::connect( m_ui.m_newFolderButton, SIGNAL(clicked()), q, SLOT(openNewFolderDialog()) );
     QObject::connect( m_ui.m_header, SIGNAL(valueChanged()), q, SLOT(updateCoordinates()) );
 

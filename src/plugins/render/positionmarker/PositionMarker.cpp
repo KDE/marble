@@ -43,7 +43,7 @@ PositionMarker::PositionMarker( const MarbleModel *marbleModel )
       m_marbleModel( marbleModel ),
       m_isInitialized( false ),
       m_useCustomCursor( false ),
-      m_defaultCursorPath( MarbleDirs::path( "svg/track_turtle.svg" ) ),
+      m_defaultCursorPath(MarbleDirs::path(QStringLiteral("svg/track_turtle.svg"))),
       m_lastBoundingBox(),
       ui_configWidget( 0 ),
       m_configDialog( 0 ),

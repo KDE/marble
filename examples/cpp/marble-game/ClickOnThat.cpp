@@ -177,7 +177,7 @@ void ClickOnThat::initiateGame()
         GeoDataStyle::Ptr pinStyle(new GeoDataStyle);
         pinStyle->setId("answer");
         GeoDataIconStyle iconStyle;
-        iconStyle.setIconPath( MarbleDirs::path("bitmaps/target.png") );
+        iconStyle.setIconPath(MarbleDirs::path(QStringLiteral("bitmaps/target.png")));
         pinStyle->setIconStyle( iconStyle );
 
         GeoDataStyleMap styleMap;
