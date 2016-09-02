@@ -52,7 +52,7 @@ public:
           m_renderOrder( renderOrder )
     {
         if( m_style ) {
-            m_styleMap->setId("default-map");
+            m_styleMap->setId(QStringLiteral("default-map"));
             m_styleMap->insert("normal", QLatin1Char('#') + m_style->id());
         }
     }

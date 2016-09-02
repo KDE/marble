@@ -449,7 +449,7 @@ void TourWidgetPrivate::addPlacemark()
     GeoDataDocument *document = new GeoDataDocument;
     if( m_document->id().isEmpty() ) {
         if( m_document->name().isEmpty() ) {
-            m_document->setId( "untitled_tour" );
+            m_document->setId(QStringLiteral("untitled_tour"));
         } else {
             m_document->setId( m_document->name().trimmed().replace( QLatin1Char(' '), QLatin1Char('_') ).toLower() );
         }
@@ -777,7 +777,7 @@ void TourWidgetPrivate::createTour()
         GeoDataDocument *document = new GeoDataDocument();
         document->setDocumentRole( UserDocument );
         document->setName( "New Tour" );
-        document->setId( "new_tour" );
+        document->setId(QStringLiteral("new_tour"));
         GeoDataTour *tour = new GeoDataTour();
         tour->setName( "New Tour" );
         GeoDataPlaylist *playlist = new GeoDataPlaylist;

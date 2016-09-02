@@ -175,13 +175,13 @@ void ClickOnThat::initiateGame()
         GeoDataPlacemark *pinPlacemark = new GeoDataPlacemark;
 
         GeoDataStyle::Ptr pinStyle(new GeoDataStyle);
-        pinStyle->setId("answer");
+        pinStyle->setId(QStringLiteral("answer"));
         GeoDataIconStyle iconStyle;
         iconStyle.setIconPath(MarbleDirs::path(QStringLiteral("bitmaps/target.png")));
         pinStyle->setIconStyle( iconStyle );
 
         GeoDataStyleMap styleMap;
-        styleMap.setId("default-map");
+        styleMap.setId(QStringLiteral("default-map"));
         styleMap.insert("normal", QLatin1Char('#') + pinStyle->id());
 
         d->m_selectPinDocument->addStyle( pinStyle );

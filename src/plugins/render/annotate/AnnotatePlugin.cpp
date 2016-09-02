@@ -97,7 +97,7 @@ AnnotatePlugin::AnnotatePlugin( const MarbleModel *model )
     polyStyle.setColor( polygonColor );
     edgeStyle.setColor( edgeColor );
     labelStyle.setColor( labelColor );
-    defaultPolygonStyle->setId( "polygon" );
+    defaultPolygonStyle->setId(QStringLiteral("polygon"));
     defaultPolygonStyle->setPolyStyle( polyStyle );
     defaultPolygonStyle->setLineStyle( edgeStyle );
     defaultPolygonStyle->setLabelStyle( labelStyle );
@@ -110,7 +110,7 @@ AnnotatePlugin::AnnotatePlugin( const MarbleModel *model )
     QColor polylineColor = Qt::white;
     lineStyle.setColor( polylineColor );
     lineStyle.setWidth( 1 );
-    defaultPolylineStyle->setId( "polyline" );
+    defaultPolylineStyle->setId(QStringLiteral("polyline"));
     defaultPolylineStyle->setLineStyle( lineStyle );
     defaultPolylineStyle->setLabelStyle( labelStyle );
     m_annotationDocument->addStyle( defaultPolylineStyle );

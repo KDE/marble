@@ -429,7 +429,7 @@ bool TourItemDelegate::editAnimatedUpdate(GeoDataAnimatedUpdate *animatedUpdate,
     }
     bool status = dialog->exec();
     if( !create ) {
-        placemark->setId("");
+        placemark->setId(QString());
     }
     return status;
 }

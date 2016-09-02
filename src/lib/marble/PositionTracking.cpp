@@ -160,10 +160,10 @@ PositionTracking::PositionTracking( GeoDataTreeModel *model )
     lineStyle.setColor( transparentRed );
     lineStyle.setWidth( 4 );
     style->setLineStyle(lineStyle);
-    style->setId("track");
+    style->setId(QStringLiteral("track"));
 
     GeoDataStyleMap styleMap;
-    styleMap.setId("map-track");
+    styleMap.setId(QStringLiteral("map-track"));
     styleMap.insert("normal", QLatin1Char('#') + style->id());
     d->m_document.addStyleMap(styleMap);
     d->m_document.addStyle(style);

@@ -887,7 +887,7 @@ void RoutingWidget::initializeTour()
         delete d->m_document;
     }
     d->m_document = new GeoDataDocument;
-    d->m_document->setId("tourdoc");
+    d->m_document->setId(QStringLiteral("tourdoc"));
     d->m_document->append( d->m_tour );
 
     d->m_tour->setPlaylist( new GeoDataPlaylist );
