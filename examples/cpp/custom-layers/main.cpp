@@ -33,7 +33,7 @@ public:
 
     // Implemented from LayerInterface
     virtual bool render( GeoPainter *painter, ViewportParams *viewport,
-       const QString& renderPos = "NONE", GeoSceneLayer * layer = 0 );
+                        const QString &renderPos, GeoSceneLayer *layer);
 
     // Overriding QObject
     virtual bool eventFilter(QObject *obj, QEvent *event);

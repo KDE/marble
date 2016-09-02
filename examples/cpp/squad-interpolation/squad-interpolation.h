@@ -33,7 +33,7 @@ public:
     // LayerInterface
     QStringList renderPosition() const;
     bool render( GeoPainter *painter, ViewportParams *viewport,
-       const QString& renderPos = "NONE", GeoSceneLayer * layer = 0 );
+                const QString &renderPos, GeoSceneLayer *layer);
     GeoDataLatLonBox center() const;
 
 private Q_SLOTS:
