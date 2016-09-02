@@ -27,7 +27,7 @@ void MyMarbleWidget::customPaint(GeoPainter* painter)
     painter->setPen(Qt::green);
     painter->drawEllipse(home, 7, 7);
     painter->setPen(Qt::black);
-    painter->drawText(home, "Hello Marble!");
+    painter->drawText(home, QStringLiteral("Hello Marble!"));
 }
 
 int main(int argc, char** argv)

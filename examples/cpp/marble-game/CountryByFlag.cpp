@@ -41,10 +41,15 @@ public:
       m_parent( 0 ),
       m_countryNames( 0 )
     {
-        m_continentsAndOceans << "Asia" << "Africa" << "North America" << "South America"
-        << "Antarctica" << "Europe" << "Australia" << "Arctic Ocean" << "Indian Ocean"
-        << "North Atlantic Ocean" << "North Pacific Ocean" << "South Pacific Ocean"
-        << "South Atlantic Ocean" << "Southern Ocean" ;
+        m_continentsAndOceans
+            << QStringLiteral("Asia") << QStringLiteral("Africa")
+            << QStringLiteral("North America") << QStringLiteral("South America")
+            << QStringLiteral("Antarctica") << QStringLiteral("Europe")
+            << QStringLiteral("Australia")
+            << QStringLiteral("Arctic Ocean") << QStringLiteral("Indian Ocean")
+            << QStringLiteral("North Atlantic Ocean") << QStringLiteral("North Pacific Ocean")
+            << QStringLiteral("South Pacific Ocean") << QStringLiteral("South Atlantic Ocean")
+            << QStringLiteral("Southern Ocean");
     }
 
     MarbleWidget *m_marbleWidget;
@@ -136,10 +141,11 @@ void CountryByFlag::postQuestion( QObject *gameObject )
         placemark = countryPlacemarks[randomIndex];
 
         if ( !d->m_continentsAndOceans.contains(placemark->name(), Qt::CaseSensitive) ) {
-            flagPath = MarbleDirs::path(QLatin1String("flags/flag_") + placemark->countryCode().toLower() + QLatin1String(".svg"));
+            const QString countryCode = placemark->countryCode().toLower();
+            flagPath = MarbleDirs::path(QLatin1String("flags/flag_") + countryCode + QLatin1String(".svg"));
             QImage flag = QFile::exists( flagPath ) ? QImage( flagPath ) : QImage();
             if ( !flag.isNull() ) {
-                flagPath = QString("%1flag_%2.svg").arg("../../../data/flags/").arg(placemark->countryCode().toLower());
+                flagPath = QLatin1String("../../../data/flags/flag_") + countryCode + QLatin1String(".svg");
                 found = true;
             }
         }

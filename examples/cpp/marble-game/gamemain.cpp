@@ -28,9 +28,9 @@ using namespace Marble;
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-    app.setApplicationName( "Marble Game" );
-    app.setOrganizationName( "KDE" );
-    app.setOrganizationDomain( "kde.org" );
+    app.setApplicationName(QStringLiteral("Marble Game"));
+    app.setOrganizationName(QStringLiteral("KDE"));
+    app.setOrganizationDomain(QStringLiteral("kde.org"));
     // Widget translation
 
     QString      lang = QLocale::system().name().section(QLatin1Char('_'), 0, 0);
@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
 
     QStringList args = QApplication::arguments();
 
-    if ( args.contains( "-h" ) || args.contains( "--help" ) ) {
+    if (args.contains(QStringLiteral("-h")) || args.contains(QStringLiteral("--help"))) {
         qWarning() << "Usage: marble [options]";
         qWarning();
         qWarning() << "general options:";

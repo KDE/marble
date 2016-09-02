@@ -73,12 +73,12 @@ bool MyPaintLayer::render ( GeoPainter *painter, ViewportParams *viewport, const
         painter->drawEllipse ( a2, 8, 8 );
         qreal x, y;
         if ( viewport->screenCoordinates ( a2, x, y ) ) {
-            painter->drawText( x+5, y, "A" );
+            painter->drawText(x+5, y, QStringLiteral("A"));
         }
         GeoDataCoordinates b1 = basePoint( m_cities[1], m_cities[2], m_cities[3] );
         painter->drawEllipse ( b1, 8, 8 );
         if ( viewport->screenCoordinates ( b1, x, y ) ) {
-            painter->drawText( x+5, y, "B" );
+            painter->drawText(x+5, y, QStringLiteral("B"));
         }
 
         QPen grapePen = Marble::Oxygen::grapeViolet4;
@@ -102,7 +102,7 @@ bool MyPaintLayer::render ( GeoPainter *painter, ViewportParams *viewport, const
     QPen greenPen = Marble::Oxygen::forestGreen4;
     greenPen.setWidth ( 3 );
     painter->setPen ( greenPen );
-    painter->drawPolyline ( m_interpolated, "Squad\nInterpolation", LineEnd );
+    painter->drawPolyline ( m_interpolated, QStringLiteral("Squad\nInterpolation"), LineEnd );
 
     // Increasing city indices with some transparency effect for readability
     QFont font = painter->font();
@@ -219,7 +219,7 @@ int main ( int argc, char** argv )
     using namespace Marble;
     QApplication app ( argc, argv );
     MarbleWidget *mapWidget = new MarbleWidget;
-    mapWidget->setWindowTitle( "Marble - Squad Interpolation" );
+    mapWidget->setWindowTitle(QStringLiteral("Marble - Squad Interpolation"));
 
     // Create and register our paint layer
     MyPaintLayer* layer = new MyPaintLayer ( mapWidget );

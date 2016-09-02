@@ -76,8 +76,8 @@ Window::Window(QWidget *parent) :
     m_marbleWidget->centerOn(Kiev);
     m_marbleWidget->setZoom(2300);
 
-    m_carFirst = new GeoDataPlacemark("Bus");
-    m_carSecond = new GeoDataPlacemark("Car");
+    m_carFirst = new GeoDataPlacemark(QStringLiteral("Bus"));
+    m_carSecond = new GeoDataPlacemark(QStringLiteral("Car"));
 
     GeoDataDocument *document = new GeoDataDocument;
 

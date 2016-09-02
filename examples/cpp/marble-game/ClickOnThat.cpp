@@ -47,10 +47,15 @@ public:
       m_countryNames( 0 ),
       m_countryBoundaries( 0 )
       {
-          m_continentsAndOceans << "Asia" << "Africa" << "North America" << "South America"
-          << "Antarctica" << "Europe" << "Australia" << "Arctic Ocean" << "Indian Ocean"
-          << "North Atlantic Ocean" << "North Pacific Ocean" << "South Pacific Ocean"
-          << "South Atlantic Ocean" << "Southern Ocean" ;
+        m_continentsAndOceans
+            << QStringLiteral("Asia") << QStringLiteral("Africa")
+            << QStringLiteral("North America") << QStringLiteral("South America")
+            << QStringLiteral("Antarctica") << QStringLiteral("Europe")
+            << QStringLiteral("Australia")
+            << QStringLiteral("Arctic Ocean") << QStringLiteral("Indian Ocean")
+            << QStringLiteral("North Atlantic Ocean") << QStringLiteral("North Pacific Ocean")
+            << QStringLiteral("South Pacific Ocean") << QStringLiteral("South Atlantic Ocean")
+            << QStringLiteral("Southern Ocean");
       }
 
     ~ClickOnThatPrivate()
@@ -254,7 +259,7 @@ void ClickOnThat::updateSelectPin(bool result, const GeoDataCoordinates &clicked
         iconPath += QLatin1String("/MapTackRoundHeadRed.png");
     }
 
-    GeoDataStyle::Ptr style = d->m_selectPinDocument->style("answer");
+    GeoDataStyle::Ptr style = d->m_selectPinDocument->style(QStringLiteral("answer"));
     style->iconStyle().setIconPath( iconPath );
     d->m_selectPinDocument->addStyle( style );
 

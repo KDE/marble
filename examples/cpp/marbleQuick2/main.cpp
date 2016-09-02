@@ -29,7 +29,7 @@ public:
 
     void componentComplete()
     {
-        QQuickItem *pinch = findChild<QQuickItem*>("pinchArea");
+        QQuickItem *pinch = findChild<QQuickItem*>(QStringLiteral("pinchArea"));
         if (pinch)
         {
             pinch->installEventFilter(getEventFilter());
@@ -69,7 +69,7 @@ public:
     {
         MarbleDeclarativePlugin plugin;
         plugin.registerTypes("org.kde.marble");
-        setSource(QUrl("qrc:/main.qml"));
+        setSource(QUrl(QStringLiteral("qrc:/main.qml")));
 
         if(status()!=QQuickView::Ready)
             qDebug("can't initialise view");
@@ -79,7 +79,7 @@ public:
         setFormat(format);
         setClearBeforeRendering(true);
         setColor(QColor(Qt::transparent));
-        setTitle("Marble in QML 2.0 demo");
+        setTitle(QStringLiteral("Marble in QML 2.0 demo"));
 
         show();
     }

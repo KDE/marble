@@ -114,7 +114,7 @@ void Private::setupGameSignals()
     if ( root ) {
         m_parent->connect( root, SIGNAL(browseMapButtonClicked()),
                            m_parent, SLOT(browseMapButtonClicked()) );
-        QObject *gameOptions = root->findChild<QObject*>("gameOptions");
+        QObject *gameOptions = root->findChild<QObject*>(QStringLiteral("gameOptions"));
 
         m_parent->connect( gameOptions, SIGNAL(nextButtonClicked()),
                            m_parent, SLOT(createQuestion()) );
@@ -156,7 +156,7 @@ MainWindow::MainWindow( const QString &marbleDataPath, QWidget *parent, Qt::Wind
     d->setupMarbleWidget();
     setCentralWidget( d->m_marbleWidget );
 
-    d->m_view.setSource( QUrl( "qrc:/Window.qml" ) );
+    d->m_view.setSource(QUrl(QStringLiteral("qrc:/Window.qml")));
 
     QWidget *leftPanel = QWidget::createWindowContainer( &d->m_view, d->dockWidgetContents );
     QVBoxLayout *layout = new QVBoxLayout( d->dockWidgetContents );
@@ -178,7 +178,7 @@ MarbleWidget *MainWindow::marbleWidget()
 
 void MainWindow::createQuestion()
 {
-    QObject *gameObject = d->m_view.rootObject()->findChild<QObject*>("gameOptions");
+    QObject *gameObject = d->m_view.rootObject()->findChild<QObject*>(QStringLiteral("gameOptions"));
     if ( gameObject ) {
         emit postQuestion( gameObject );
     }
@@ -260,7 +260,7 @@ void MainWindow::enableClickOnThatGame()
 
 void MainWindow::displayResult(bool result )
 {
-    QObject *gameObject = d->m_view.rootObject()->findChild<QObject*>("gameOptions");
+    QObject *gameObject = d->m_view.rootObject()->findChild<QObject*>(QStringLiteral("gameOptions"));
     if ( gameObject ) {
         QMetaObject::invokeMethod( gameObject, "displayResult",
                                    Q_ARG(QVariant, QVariant(result)) );
