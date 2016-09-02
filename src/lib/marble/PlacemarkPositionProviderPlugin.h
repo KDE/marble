@@ -32,25 +32,25 @@ class PlacemarkPositionProviderPlugin: public PositionProviderPlugin
  public:
     explicit PlacemarkPositionProviderPlugin( MarbleModel *marbleModel );
 
-    virtual QString name() const;
-    virtual QString nameId() const;
-    virtual QString guiString() const;
-    virtual QString version() const;
-    virtual QString description() const;
-    virtual QString copyrightYears() const;
+    QString name() const override;
+    QString nameId() const override;
+    QString guiString() const override;
+    QString version() const override;
+    QString description() const override;
+    QString copyrightYears() const override;
     QVector<PluginAuthor> pluginAuthors() const override;
-    virtual QIcon icon() const;
-    virtual void initialize();
-    virtual bool isInitialized() const;
+    QIcon icon() const override;
+    void initialize() override;
+    bool isInitialized() const override;
 
-    virtual PositionProviderPlugin *newInstance() const;
+    PositionProviderPlugin *newInstance() const override;
 
-    virtual PositionProviderStatus status() const;
-    virtual GeoDataCoordinates position() const;
-    virtual GeoDataAccuracy accuracy() const;
-    virtual qreal speed() const;
-    virtual qreal direction() const;
-    virtual QDateTime timestamp() const;
+    PositionProviderStatus status() const override;
+    GeoDataCoordinates position() const override;
+    GeoDataAccuracy accuracy() const override;
+    qreal speed() const override;
+    qreal direction() const override;
+    QDateTime timestamp() const override;
 
  private:
     MarbleModel *const m_marbleModel;

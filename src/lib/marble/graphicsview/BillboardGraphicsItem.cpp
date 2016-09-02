@@ -40,7 +40,7 @@ class Q_DECL_HIDDEN BillboardGraphicsItem::Private : public MarbleGraphicsItemPr
 
     Qt::Alignment m_alignment;
 
-    void setProjection( const ViewportParams *viewport )
+    void setProjection(const ViewportParams *viewport) override
     {
         m_positions.clear();
 
