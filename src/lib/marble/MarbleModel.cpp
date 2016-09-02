@@ -78,7 +78,7 @@ class MarbleModelPrivate
  public:
     MarbleModelPrivate()
         : m_clock(),
-          m_planet( PlanetFactory::construct( "earth" ) ),
+          m_planet(PlanetFactory::construct(QStringLiteral("earth"))),
           m_sunLocator( &m_clock, &m_planet ),
           m_pluginManager(),
           m_homePoint( -9.4, 54.8, 0.0, GeoDataCoordinates::Degree ),  // Some point that tackat defined. :-)

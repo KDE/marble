@@ -22,7 +22,7 @@ namespace Marble {
 GeoUriParser::GeoUriParser( const QString& geoUri )
     : m_geoUri( geoUri ),
       m_coordinates(),
-      m_planet( PlanetFactory::construct( "earth" ) )
+      m_planet(PlanetFactory::construct(QStringLiteral("earth")))
 {
 }
 
@@ -30,7 +30,7 @@ void GeoUriParser::setGeoUri( const QString &geoUri )
 {
     m_geoUri = geoUri;
     m_coordinates = GeoDataCoordinates();
-    m_planet = PlanetFactory::construct( "earth" );
+    m_planet = PlanetFactory::construct(QStringLiteral("earth"));
 }
 
 QString GeoUriParser::geoUri() const
