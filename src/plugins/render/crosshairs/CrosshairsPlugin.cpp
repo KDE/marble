@@ -169,19 +169,19 @@ void CrosshairsPlugin::readSettings()
         m_uiConfigWidget->m_themeList->setCurrentRow( m_themeIndex );
     }
 
-    m_theme = ":/crosshairs-darkened.png";
+    m_theme = QStringLiteral(":/crosshairs-darkened.png");
     switch( m_themeIndex ) {
     case 1:
-        m_theme = ":/crosshairs-gun1.svg";
+        m_theme = QStringLiteral(":/crosshairs-gun1.svg");
         break;
     case 2:
-        m_theme = ":/crosshairs-gun2.svg";
+        m_theme = QStringLiteral(":/crosshairs-gun2.svg");
         break;
     case 3:
-        m_theme = ":/crosshairs-circled.svg";
+        m_theme = QStringLiteral(":/crosshairs-circled.svg");
         break;
     case 4:
-        m_theme = ":/crosshairs-german.svg";
+        m_theme = QStringLiteral(":/crosshairs-german.svg");
         break;
     }
 

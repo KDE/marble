@@ -36,7 +36,7 @@ FlyToEditWidget::FlyToEditWidget( const QModelIndex &index, MarbleWidget* widget
     layout->setSpacing( 5 );
 
     QLabel* iconLabel = new QLabel;
-    iconLabel->setPixmap( QPixmap( ":/marble/flag.png" ) );
+    iconLabel->setPixmap(QPixmap(QStringLiteral(":/marble/flag.png")));
     layout->addWidget( iconLabel );
 
     QHBoxLayout *pairLayout = new QHBoxLayout;

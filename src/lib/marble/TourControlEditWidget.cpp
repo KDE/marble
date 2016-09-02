@@ -34,7 +34,7 @@ TourControlEditWidget::TourControlEditWidget( const QModelIndex &index, QWidget 
     layout->setSpacing( 5 );
 
     QLabel* iconLabel = new QLabel;
-    iconLabel->setPixmap( QPixmap( ":/marble/media-playback-pause.png" ) );
+    iconLabel->setPixmap(QPixmap(QStringLiteral(":/marble/media-playback-pause.png")));
     layout->addWidget( iconLabel );
 
     layout->addWidget( m_radio_play );

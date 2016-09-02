@@ -183,7 +183,7 @@ void MarbleWidgetPopupMenu::Private::setupDialogOsm( PopupLayer *popup, const Ge
     const GeoDataCoordinates location = placemark->coordinate();
     popup->setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
 
-    QFile descriptionFile(":/marble/webpopup/osm.html");
+    QFile descriptionFile(QStringLiteral(":/marble/webpopup/osm.html"));
     if (!descriptionFile.open(QIODevice::ReadOnly)) {
         return;
     }
@@ -354,7 +354,7 @@ void MarbleWidgetPopupMenu::Private::setupDialogCity( PopupLayer *popup, const G
     const GeoDataCoordinates location = placemark->coordinate();
     popup->setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
 
-    QFile descriptionFile(":/marble/webpopup/city.html");
+    QFile descriptionFile(QStringLiteral(":/marble/webpopup/city.html"));
     if (!descriptionFile.open(QIODevice::ReadOnly)) {
         return;
     }
@@ -419,7 +419,7 @@ void MarbleWidgetPopupMenu::Private::setupDialogNation( PopupLayer *popup, const
     const GeoDataCoordinates location = index->coordinate();
     popup->setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
 
-    QFile descriptionFile(":/marble/webpopup/nation.html");
+    QFile descriptionFile(QStringLiteral(":/marble/webpopup/nation.html"));
     if (!descriptionFile.open(QIODevice::ReadOnly)) {
         return;
     }
@@ -446,7 +446,7 @@ void MarbleWidgetPopupMenu::Private::setupDialogGeoPlaces( PopupLayer *popup, co
     const GeoDataCoordinates location = index->coordinate();
     popup->setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
 
-    QFile descriptionFile(":/marble/webpopup/geoplace.html");
+    QFile descriptionFile(QStringLiteral(":/marble/webpopup/geoplace.html"));
     if (!descriptionFile.open(QIODevice::ReadOnly)) {
         return;
     }
@@ -468,7 +468,7 @@ void MarbleWidgetPopupMenu::Private::setupDialogSkyPlaces( PopupLayer *popup, co
     const GeoDataCoordinates location = index->coordinate();
     popup->setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
 
-    QFile descriptionFile(":/marble/webpopup/skyplace.html");
+    QFile descriptionFile(QStringLiteral(":/marble/webpopup/skyplace.html"));
     if (!descriptionFile.open(QIODevice::ReadOnly)) {
         return;
     }
@@ -491,7 +491,7 @@ void MarbleWidgetPopupMenu::Private::setupDialogPhotoOverlay( PopupLayer *popup,
     const GeoDataCoordinates location = index->point().coordinates();
     popup->setCoordinates(location, Qt::AlignRight | Qt::AlignVCenter);
 
-    QFile descriptionFile(":/marble/webpopup/photooverlay.html");
+    QFile descriptionFile(QStringLiteral(":/marble/webpopup/photooverlay.html"));
 
     if ( !descriptionFile.open(QIODevice::ReadOnly) ) {
         return;

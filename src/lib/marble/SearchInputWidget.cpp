@@ -24,7 +24,7 @@ SearchInputWidget::SearchInputWidget( QWidget *parent ) :
     m_areaSearch( false )
 {
     updatePlaceholderText();
-    QPixmap const decorator = QPixmap( ":/icons/16x16/edit-find.png" );
+    QPixmap const decorator = QPixmap(QStringLiteral(":/icons/16x16/edit-find.png"));
     Q_ASSERT( !decorator.isNull() );
     setDecorator( decorator );
 

@@ -34,7 +34,7 @@ WaitEditWidget::WaitEditWidget( const QModelIndex &index, QWidget *parent ) :
     layout->setSpacing( 5 );
 
     QLabel* iconLabel = new QLabel;
-    iconLabel->setPixmap( QPixmap( ":/marble/player-time.png" ) );
+    iconLabel->setPixmap(QPixmap(QStringLiteral(":/marble/player-time.png")));
     layout->addWidget( iconLabel );
 
     QLabel *waitLabel = new QLabel;

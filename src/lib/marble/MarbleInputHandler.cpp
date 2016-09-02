@@ -181,14 +181,14 @@ MarbleDefaultInputHandler::Private::Private()
       m_midPressed(false),
       m_dragThreshold(MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ? 15 : 3)
 {
-    m_curpmtl.load( ":/marble/cursor/tl.png");
-    m_curpmtc.load( ":/marble/cursor/tc.png");
-    m_curpmtr.load( ":/marble/cursor/tr.png");
-    m_curpmcr.load( ":/marble/cursor/cr.png");
-    m_curpmcl.load( ":/marble/cursor/cl.png");
-    m_curpmbl.load( ":/marble/cursor/bl.png");
-    m_curpmbc.load( ":/marble/cursor/bc.png");
-    m_curpmbr.load( ":/marble/cursor/br.png");
+    m_curpmtl.load(QStringLiteral(":/marble/cursor/tl.png"));
+    m_curpmtc.load(QStringLiteral(":/marble/cursor/tc.png"));
+    m_curpmtr.load(QStringLiteral(":/marble/cursor/tr.png"));
+    m_curpmcr.load(QStringLiteral(":/marble/cursor/cr.png"));
+    m_curpmcl.load(QStringLiteral(":/marble/cursor/cl.png"));
+    m_curpmbl.load(QStringLiteral(":/marble/cursor/bl.png"));
+    m_curpmbc.load(QStringLiteral(":/marble/cursor/bc.png"));
+    m_curpmbr.load(QStringLiteral(":/marble/cursor/br.png"));
 
     m_arrowCur[0][0] = QCursor( m_curpmtl, 2, 2 );
     m_arrowCur[1][0] = QCursor( m_curpmtc, 10, 3 );

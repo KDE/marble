@@ -484,7 +484,7 @@ void WeatherItem::openBrowser()
         popup->setSize( QSizeF( 610, 550 ) ); // +10 pixels for the width
         popup->popup();
 
-        QFile weatherHtmlFile(":/marble/weather/weather.html");
+        QFile weatherHtmlFile(QStringLiteral(":/marble/weather/weather.html"));
         if ( !weatherHtmlFile.open(QIODevice::ReadOnly) ) {
             return;
         }

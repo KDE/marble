@@ -28,7 +28,8 @@
 
 namespace Marble {
 MapViewItemDelegate::MapViewItemDelegate( QListView *view ) :
-    m_view( view ), m_bookmarkIcon( ":/icons/bookmarks.png" )
+    m_view(view),
+    m_bookmarkIcon(QStringLiteral(":/icons/bookmarks.png"))
 {
     // nothing to do
 }

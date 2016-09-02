@@ -113,7 +113,7 @@ QIcon ElevationProfileMarker::icon() const
 
 void ElevationProfileMarker::initialize()
 {
-    m_markerIcon.setImage( QImage( ":/flag-red-mirrored.png" ) );
+    m_markerIcon.setImage(QImage(QStringLiteral(":/flag-red-mirrored.png")));
 
     MarbleGraphicsGridLayout *topLayout = new MarbleGraphicsGridLayout( 1, 2 );
     m_markerItem.setLayout( topLayout );

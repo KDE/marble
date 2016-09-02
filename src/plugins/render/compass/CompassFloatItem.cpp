@@ -225,16 +225,16 @@ void CompassFloatItem::readSettings()
         m_uiConfigWidget->m_themeList->setCurrentRow( m_themeIndex );
     }
 
-    QString theme = ":/compass.svg";
+    QString theme = QStringLiteral(":/compass.svg");
     switch( m_themeIndex ) {
     case 1:
-        theme = ":/compass-arrows.svg";
+        theme = QStringLiteral(":/compass-arrows.svg");
         break;
     case 2:
-        theme = ":/compass-atom.svg";
+        theme = QStringLiteral(":/compass-atom.svg");
         break;
     case 3:
-        theme = ":/compass-magnet.svg";
+        theme = QStringLiteral(":/compass-magnet.svg");
         break;
     }
 

@@ -82,7 +82,7 @@ void EarthquakeItem::paint( QPainter *painter )
     painter->drawEllipse( arcRect );
 
     // Draws the seismograph
-    QSvgRenderer renderer( QString( ":/seismograph.svg" ) );
+    QSvgRenderer renderer(QStringLiteral(":/seismograph.svg"));
     renderer.render( painter, QRectF( 0.0, 0.0, width, height ) );
 
     // Draws magnitude of the earthquake

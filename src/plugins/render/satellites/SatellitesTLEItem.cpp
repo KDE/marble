@@ -56,7 +56,7 @@ SatellitesTLEItem::SatellitesTLEItem( const QString &name,
 
 void SatellitesTLEItem::setDescription()
 {
-    QFile templateFile(":/marble/satellites/satellite.html");
+    QFile templateFile(QStringLiteral(":/marble/satellites/satellite.html"));
     if (!templateFile.open(QIODevice::ReadOnly)) {
         placemark()->setDescription(QObject::tr("No info available."));
         return;

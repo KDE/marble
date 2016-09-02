@@ -237,7 +237,7 @@ void FrameGraphicsItem::paint( QPainter *painter )
     {
         QPixmap shadow;
         if ( !QPixmapCache::find( "marble/frames/shadowframe.png", shadow ) ) {
-            shadow = QPixmap( ":/marble/frames/shadowframe.png" );
+            shadow = QPixmap(QStringLiteral(":/marble/frames/shadowframe.png"));
             QPixmapCache::insert( "marble/frames/shadowframe.png", shadow );
         }
         qDrawBorderPixmap( painter, QRect( QPoint( 0, 0 ), size().toSize() ),

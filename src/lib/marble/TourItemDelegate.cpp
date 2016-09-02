@@ -174,16 +174,16 @@ void TourItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &opt
             if( container->size() > 0 ) {
                 label.setHtml( tr( "Create item %1" ).arg( container->first().id() ) );
                 ok = true;
-                iconString = ":/icons/add-placemark.png";
+                iconString = QStringLiteral(":/icons/add-placemark.png");
             }
         } else if( update && update->getDelete() && update->getDelete()->size() != 0 ){
             label.setHtml( tr( "Remove item %1" ).arg( update->getDelete()->first().targetId() ) );
             ok = true;
-            iconString = ":/icons/remove.png";
+            iconString = QStringLiteral(":/icons/remove.png");
         } else if( update && update->change() && update->change()->size() != 0 ){
             label.setHtml( tr( "Change item %1" ).arg( update->change()->first().targetId() ) );
             ok = true;
-            iconString = ":/marble/document-edit.png";
+            iconString = QStringLiteral(":/marble/document-edit.png");
         }
         if( update && !ok ) {
             label.setHtml( tr( "Update items" ) );

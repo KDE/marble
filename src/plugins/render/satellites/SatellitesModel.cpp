@@ -197,7 +197,7 @@ void SatellitesModel::parseCatalog( const QString &id,
 
         // use special icon for moons
         if (category == QLatin1String("Moons")) {
-            style->iconStyle().setIconPath( ":/icons/moon.png" );
+            style->iconStyle().setIconPath(QStringLiteral(":/icons/moon.png"));
         } else {
             style->iconStyle().setIconPath(MarbleDirs::path(QStringLiteral("bitmaps/satellite.png")));
         }

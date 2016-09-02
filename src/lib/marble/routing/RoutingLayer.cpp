@@ -161,7 +161,8 @@ public:
 
 RoutingLayerPrivate::RoutingLayerPrivate( RoutingLayer *parent, MarbleWidget *widget ) :
         q( parent ), m_movingIndex( -1 ), m_marbleWidget( widget ),
-        m_targetPixmap( ":/data/bitmaps/routing_pick.png" ), m_dragStopOverRightIndex( -1 ),
+        m_targetPixmap(QStringLiteral(":/data/bitmaps/routing_pick.png")),
+        m_dragStopOverRightIndex(-1),
         m_routingModel( widget->model()->routingManager()->routingModel() ),
         m_placemarkModel( 0 ),
         m_selectionModel( 0 ),
