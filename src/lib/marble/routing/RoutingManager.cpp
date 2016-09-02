@@ -409,7 +409,7 @@ void RoutingManagerPrivate::importPlacemark( RouteSegment &outline, QVector<Rout
             maneuver.setPosition( lineString->at( 0 ) );
 
             if ( placemark->extendedData().contains( "turnType" ) ) {
-                QVariant turnType = placemark->extendedData().value( "turnType" ).value();
+                QVariant turnType = placemark->extendedData().value(QStringLiteral("turnType")).value();
                 // The enum value is converted to/from an int in the QVariant
                 // because only a limited set of data types can be serialized with QVariant's
                 // toString() method (which is used to serialize <ExtendedData>/<Data> values)
@@ -417,7 +417,7 @@ void RoutingManagerPrivate::importPlacemark( RouteSegment &outline, QVector<Rout
             }
 
             if ( placemark->extendedData().contains( "roadName" ) ) {
-                QVariant roadName = placemark->extendedData().value( "roadName" ).value();
+                QVariant roadName = placemark->extendedData().value(QStringLiteral("roadName")).value();
                 maneuver.setRoadName( roadName.toString() );
             }
 

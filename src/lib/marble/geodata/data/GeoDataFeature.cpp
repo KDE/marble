@@ -267,8 +267,9 @@ void GeoDataFeature::setStyleUrl( const QString &value )
         if( object->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
             GeoDataDocument *doc = static_cast<GeoDataDocument*> ( object );
             GeoDataStyleMap &styleMap = doc->styleMap( styleUrl );
-            if( !styleMap.value( QString( "normal" ) ).isEmpty() ) {
-                styleUrl = styleMap.value( QString( "normal" ) );
+            const QString normalStyleUrl = styleMap.value(QStringLiteral("normal"));
+            if (!normalStyleUrl.isEmpty()) {
+                styleUrl = normalStyleUrl;
                 styleUrl.remove(QLatin1Char('#'));
             }
             // Not calling setStyle here because we don't want

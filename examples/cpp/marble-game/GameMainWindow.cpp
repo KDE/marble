@@ -83,7 +83,7 @@ Private::Private(QWidget* parent) :
 
 QString Private::readMarbleDataPath() const
 {
-    return QSettings().value("MarbleWidget/marbleDataPath", "").toString();
+    return QSettings().value(QStringLiteral("MarbleWidget/marbleDataPath"), QString()).toString();
 }
 
 void Private::setupMarbleWidget()

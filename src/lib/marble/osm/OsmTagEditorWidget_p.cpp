@@ -153,7 +153,7 @@ QStringList OsmTagEditorWidgetPrivate::generateTagFilter() const
     bool condition;
     QStringList tags, tagsAux;
     QString type;
-    if (m_placemark->extendedData().value("osmRelation").value().toString() == QLatin1String("yes")) {
+    if (m_placemark->extendedData().value(QStringLiteral("osmRelation")).value().toString() == QLatin1String("yes")) {
         type = "Relation";
     }
     else {

@@ -318,7 +318,7 @@ bool RouteRequest::visited( int index ) const
     bool visited = false;
     if ( index >= 0 && index < d->m_route.size() ) {
         if ( d->m_route[index].extendedData().contains( "routingVisited" ) ) {
-            visited = d->m_route[index].extendedData().value( "routingVisited" ).value().toBool();
+            visited = d->m_route[index].extendedData().value(QStringLiteral("routingVisited")).value().toBool();
         }
     }
     return visited;

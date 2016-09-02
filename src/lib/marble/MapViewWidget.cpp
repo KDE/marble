@@ -286,7 +286,7 @@ MapViewWidget::MapViewWidget( QWidget *parent, Qt::WindowFlags f )
     }
     else {
         d->m_mapViewUi.marbleThemeSelectView->setViewMode( QListView::IconMode );
-        QSize const iconSize = d->m_settings.value( "MapView/iconSize", QSize( 90, 90 ) ).toSize();
+        QSize const iconSize = d->m_settings.value(QStringLiteral("MapView/iconSize"), QSize(90, 90)).toSize();
         d->m_mapViewUi.marbleThemeSelectView->setIconSize( iconSize );
         d->m_mapViewUi.marbleThemeSelectView->setItemDelegate( new MapViewItemDelegate( d->m_mapViewUi.marbleThemeSelectView ) );
         d->m_mapViewUi.marbleThemeSelectView->setAlternatingRowColors( true );

@@ -153,7 +153,7 @@ void OwncloudSyncBackend::uploadRoute( const QString &timestamp )
 
     // Duration part
     double duration =
-            QTime().secsTo( QTime::fromString( placemark->extendedData().value("duration").value().toString(), Qt::ISODate ) ) / 60.0;
+            QTime().secsTo(QTime::fromString(placemark->extendedData().value(QStringLiteral("duration")).value().toString(), Qt::ISODate)) / 60.0;
     mDebug() << "[Owncloud] Duration on write is" << duration;
     data.append( "Content-Disposition: form-data; name=\"duration\"" );
     data.append( "\r\n\r\n" );
@@ -163,7 +163,7 @@ void OwncloudSyncBackend::uploadRoute( const QString &timestamp )
 
     // Distance part
     double distance =
-            placemark->extendedData().value("length").value().toDouble();
+            placemark->extendedData().value(QStringLiteral("length")).value().toDouble();
     mDebug() << "[Owncloud] Distance on write is" << distance;
     data.append( "Content-Disposition: form-data; name=\"distance\"" );
     data.append( "\r\n\r\n" );

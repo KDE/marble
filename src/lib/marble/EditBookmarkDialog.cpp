@@ -192,17 +192,17 @@ void EditBookmarkDialogPrivate::retrieveGeocodeResult( const GeoDataCoordinates 
     //FIXME : Optimal logic for suggestion with distance consideration is required
 
     if( distance >= 3500 ) {
-        bookmarkName = data.value("country").value().toString() ;
+        bookmarkName = data.value(QStringLiteral("country")).value().toString();
     }
     else if( distance >= 200 ) {
-        bookmarkName = append( data.value("city").value().toString()
-                , data.value("state").value().toString() );
-        bookmarkName = append( bookmarkName, data.value("country").value().toString() ) ;
+        bookmarkName = append(data.value(QStringLiteral("city")).value().toString(),
+                              data.value(QStringLiteral("state")).value().toString());
+        bookmarkName = append(bookmarkName, data.value(QStringLiteral("country")).value().toString());
     }
     else {
-        bookmarkName = append( data.value("road").value().toString()
-            , data.value("city").value().toString());
-        bookmarkName = append( bookmarkName, data.value("country").value().toString() ) ;
+        bookmarkName = append(data.value(QStringLiteral("road")).value().toString(),
+                              data.value(QStringLiteral("city")).value().toString());
+        bookmarkName = append(bookmarkName, data.value(QStringLiteral("country")).value().toString());
     }
 
     if( bookmarkName.isEmpty() ) {

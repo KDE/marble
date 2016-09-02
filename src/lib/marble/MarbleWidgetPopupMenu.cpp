@@ -395,9 +395,9 @@ void MarbleWidgetPopupMenu::Private::setupDialogCity( PopupLayer *popup, const G
     doc["country"] = placemark->countryCode();
     doc["state"] = placemark->state();
 
-    QString dst = QString( "%1" ).arg( ( placemark->extendedData().value("gmt").value().toInt() +
-                                         placemark->extendedData().value("dst").value().toInt() ) /
-                                       ( double ) 100, 0, 'f', 1 );
+    QString dst = QStringLiteral("%1").arg((placemark->extendedData().value(QStringLiteral("gmt")).value().toInt() +
+                                            placemark->extendedData().value(QStringLiteral("dst")).value().toInt()) /
+                                            ( double ) 100, 0, 'f', 1 );
     // There is an issue about UTC.
     // It's possible to variants (e.g.):
     // +1.0 and -1.0, but dst does not have + an the start

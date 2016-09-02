@@ -145,9 +145,9 @@ QVariant MarblePlacemarkModel::data( const QModelIndex &index, int role ) const
     } else if ( role == StyleRole ) {
         return qVariantFromValue( d->m_placemarkContainer->at( index.row() )->style().data() );
     } else if ( role == GmtRole ) {
-        return qVariantFromValue( d->m_placemarkContainer->at( index.row() )->extendedData().value("gmt").value() );
+        return qVariantFromValue( d->m_placemarkContainer->at( index.row() )->extendedData().value(QStringLiteral("gmt")).value() );
     } else if ( role == DstRole ) {
-        return qVariantFromValue( d->m_placemarkContainer->at( index.row() )->extendedData().value("dst").value() );
+        return qVariantFromValue( d->m_placemarkContainer->at( index.row() )->extendedData().value(QStringLiteral("dst")).value() );
     } else if ( role == GeometryRole ) {
         return qVariantFromValue( d->m_placemarkContainer->at( index.row() )->geometry() );
     } else if ( role == ObjectPointerRole ) {
