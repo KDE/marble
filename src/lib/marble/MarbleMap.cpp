@@ -578,22 +578,22 @@ bool MarbleMap::propertyValue( const QString& name ) const
 
 bool MarbleMap::showOverviewMap() const
 {
-    return propertyValue( "overviewmap" );
+    return propertyValue(QStringLiteral("overviewmap"));
 }
 
 bool MarbleMap::showScaleBar() const
 {
-    return propertyValue( "scalebar" );
+    return propertyValue(QStringLiteral("scalebar"));
 }
 
 bool MarbleMap::showCompass() const
 {
-    return propertyValue( "compass" );
+    return propertyValue(QStringLiteral("compass"));
 }
 
 bool MarbleMap::showGrid() const
 {
-    return propertyValue( "coordinate-grid" );
+    return propertyValue(QStringLiteral("coordinate-grid"));
 }
 
 bool MarbleMap::showClouds() const
@@ -644,47 +644,47 @@ bool MarbleMap::showCrosshairs() const
 
 bool MarbleMap::showPlaces() const
 {
-    return propertyValue( "places" );
+    return propertyValue(QStringLiteral("places"));
 }
 
 bool MarbleMap::showCities() const
 {
-    return propertyValue( "cities" );
+    return propertyValue(QStringLiteral("cities"));
 }
 
 bool MarbleMap::showTerrain() const
 {
-    return propertyValue( "terrain" );
+    return propertyValue(QStringLiteral("terrain"));
 }
 
 bool MarbleMap::showOtherPlaces() const
 {
-    return propertyValue( "otherplaces" );
+    return propertyValue(QStringLiteral("otherplaces"));
 }
 
 bool MarbleMap::showRelief() const
 {
-    return propertyValue( "relief" );
+    return propertyValue(QStringLiteral("relief"));
 }
 
 bool MarbleMap::showIceLayer() const
 {
-    return propertyValue( "ice" );
+    return propertyValue(QStringLiteral("ice"));
 }
 
 bool MarbleMap::showBorders() const
 {
-    return propertyValue( "borders" );
+    return propertyValue(QStringLiteral("borders"));
 }
 
 bool MarbleMap::showRivers() const
 {
-    return propertyValue( "rivers" );
+    return propertyValue(QStringLiteral("rivers"));
 }
 
 bool MarbleMap::showLakes() const
 {
-    return propertyValue( "lakes" );
+    return propertyValue(QStringLiteral("lakes"));
 }
 
 bool MarbleMap::showFrameRate() const
@@ -881,7 +881,7 @@ void MarbleMapPrivate::updateMapTheme()
     QObject::connect( m_model->mapTheme()->settings(), SIGNAL(valueChanged(QString,bool)),
                       m_model, SLOT(updateProperty(QString,bool)) );
 
-    q->setPropertyValue( "clouds_data", m_viewParams.showClouds() );
+    q->setPropertyValue(QStringLiteral("clouds_data"), m_viewParams.showClouds());
     m_groundLayer.setColor( m_model->mapTheme()->map()->backgroundColor() );
 
     // Check whether there is a texture layer and vectortile layer available:
@@ -1043,9 +1043,9 @@ void MarbleMapPrivate::updateMapTheme()
     m_placemarkLayer.setShowCities( q->showCities() );
     m_placemarkLayer.setShowTerrain( q->showTerrain() );
     m_placemarkLayer.setShowOtherPlaces( q->showOtherPlaces() );
-    m_placemarkLayer.setShowLandingSites( q->propertyValue("landingsites") );
-    m_placemarkLayer.setShowCraters( q->propertyValue("craters") );
-    m_placemarkLayer.setShowMaria( q->propertyValue("maria") );
+    m_placemarkLayer.setShowLandingSites(q->propertyValue(QStringLiteral("landingsites")));
+    m_placemarkLayer.setShowCraters(q->propertyValue(QStringLiteral("craters")));
+    m_placemarkLayer.setShowMaria(q->propertyValue(QStringLiteral("maria")));
 
     m_styleBuilder.setDefaultLabelColor(m_model->mapTheme()->map()->labelColor());
     m_placemarkLayer.requestStyleReset();
@@ -1084,17 +1084,17 @@ void MarbleMap::setPropertyValue( const QString& name, bool value )
 
 void MarbleMap::setShowOverviewMap( bool visible )
 {
-    setPropertyValue( "overviewmap", visible );
+    setPropertyValue(QStringLiteral("overviewmap"), visible);
 }
 
 void MarbleMap::setShowScaleBar( bool visible )
 {
-    setPropertyValue( "scalebar", visible );
+    setPropertyValue(QStringLiteral("scalebar"), visible);
 }
 
 void MarbleMap::setShowCompass( bool visible )
 {
-    setPropertyValue( "compass", visible );
+    setPropertyValue(QStringLiteral("compass"), visible);
 }
 
 void MarbleMap::setShowAtmosphere( bool visible )
@@ -1124,7 +1124,7 @@ void MarbleMap::setShowClouds( bool visible )
 {
     d->m_viewParams.setShowClouds( visible );
 
-    setPropertyValue( "clouds_data", visible );
+    setPropertyValue(QStringLiteral("clouds_data"), visible);
 }
 
 void MarbleMap::setShowSunShading( bool visible )
@@ -1135,7 +1135,7 @@ void MarbleMap::setShowSunShading( bool visible )
 void MarbleMap::setShowCityLights( bool visible )
 {
     d->m_textureLayer.setShowCityLights( visible );
-    setPropertyValue( "citylights", visible );
+    setPropertyValue(QStringLiteral("citylights"), visible);
 }
 
 void MarbleMap::setLockToSubSolarPoint( bool visible )
@@ -1171,52 +1171,52 @@ void MarbleMap::setShowTileId( bool visible )
 
 void MarbleMap::setShowGrid( bool visible )
 {
-    setPropertyValue( "coordinate-grid", visible );
+    setPropertyValue(QStringLiteral("coordinate-grid"), visible);
 }
 
 void MarbleMap::setShowPlaces( bool visible )
 {
-    setPropertyValue( "places", visible );
+    setPropertyValue(QStringLiteral("places"), visible);
 }
 
 void MarbleMap::setShowCities( bool visible )
 {
-    setPropertyValue( "cities", visible );
+    setPropertyValue(QStringLiteral("cities"), visible);
 }
 
 void MarbleMap::setShowTerrain( bool visible )
 {
-    setPropertyValue( "terrain", visible );
+    setPropertyValue(QStringLiteral("terrain"), visible);
 }
 
 void MarbleMap::setShowOtherPlaces( bool visible )
 {
-    setPropertyValue( "otherplaces", visible );
+    setPropertyValue(QStringLiteral("otherplaces"), visible);
 }
 
 void MarbleMap::setShowRelief( bool visible )
 {
-    setPropertyValue( "relief", visible );
+    setPropertyValue(QStringLiteral("relief"), visible);
 }
 
 void MarbleMap::setShowIceLayer( bool visible )
 {
-    setPropertyValue( "ice", visible );
+    setPropertyValue(QStringLiteral("ice"), visible);
 }
 
 void MarbleMap::setShowBorders( bool visible )
 {
-    setPropertyValue( "borders", visible );
+    setPropertyValue(QStringLiteral("borders"), visible);
 }
 
 void MarbleMap::setShowRivers( bool visible )
 {
-    setPropertyValue( "rivers", visible );
+    setPropertyValue(QStringLiteral("rivers"), visible);
 }
 
 void MarbleMap::setShowLakes( bool visible )
 {
-    setPropertyValue( "lakes", visible );
+    setPropertyValue(QStringLiteral("lakes"), visible);
 }
 
 void MarbleMap::setShowFrameRate( bool visible )
