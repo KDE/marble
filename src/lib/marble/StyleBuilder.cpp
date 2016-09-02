@@ -1301,6 +1301,7 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
     } else if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType) {
         GeoDataPolyStyle polyStyle = style->polyStyle();
         GeoDataLineStyle lineStyle = style->lineStyle();
+        GeoDataLabelStyle labelStyle = style->labelStyle();
         lineStyle.setCosmeticOutline(true);
 
         if(visualCategory == GeoDataPlacemark::AdminLevel2){
@@ -1315,6 +1316,29 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
         else if ((visualCategory >= GeoDataPlacemark::HighwayService &&
                 visualCategory <= GeoDataPlacemark::HighwayMotorway) ||
                 visualCategory == GeoDataPlacemark::TransportAirportRunway) {
+
+            QString const accessValue = osmData.tagValue(QStringLiteral("access"));
+            if (accessValue == QLatin1String("private") ||
+                accessValue == QLatin1String("no") ||
+                accessValue == QLatin1String("agricultural") ||
+                accessValue == QLatin1String("delivery") ||
+                accessValue == QLatin1String("forestry")) {
+                QColor polyColor = polyStyle.color();
+                qreal hue, sat, val;
+                polyColor.getHsvF(&hue, &sat, &val);
+                polyColor.setHsvF(0.98, qMin(1.0, 0.2 + sat), val);
+                polyStyle.setColor(polyColor);
+                lineStyle.setColor(lineStyle.color().darker(150));
+            }
+
+            if (osmData.containsTag("tunnel", "yes") ) {
+                QColor polyColor = polyStyle.color();
+                qreal hue, sat, val;
+                polyColor.getHsvF(&hue, &sat, &val);
+                polyColor.setHsvF(hue, 0.25 * sat, 0.95 * val);
+                polyStyle.setColor(polyColor);
+                lineStyle.setColor(lineStyle.color().lighter(115));
+            }
 
             if (parameters.tileLevel <= 8) {
                 /** @todo: Dummy implementation for dynamic style changes based on tile level, replace with sane values */
@@ -1346,29 +1370,6 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
                 }
             }
 
-            QString const accessValue = osmData.tagValue(QStringLiteral("access"));
-            if (accessValue == QLatin1String("private") ||
-                accessValue == QLatin1String("no") ||
-                accessValue == QLatin1String("agricultural") ||
-                accessValue == QLatin1String("delivery") ||
-                accessValue == QLatin1String("forestry")) {
-                QColor polyColor = polyStyle.color();
-                qreal hue, sat, val;
-                polyColor.getHsvF(&hue, &sat, &val);
-                polyColor.setHsvF(0.98, qMin(1.0, 0.2 + sat), val);
-                polyStyle.setColor(polyColor);
-                lineStyle.setColor(lineStyle.color().darker(150));
-            }
-
-            if (osmData.containsTag("tunnel", "yes") ) {
-                QColor polyColor = polyStyle.color();
-                qreal hue, sat, val;
-                polyColor.getHsvF(&hue, &sat, &val);
-                polyColor.setHsvF(hue, 0.25 * sat, 0.95 * val);
-                polyStyle.setColor(polyColor);
-                lineStyle.setColor(lineStyle.color().lighter(115));
-            }
-
         } else if (visualCategory == GeoDataPlacemark::NaturalWater) {
             if (parameters.tileLevel <= 3) {
                 lineStyle.setWidth(1);
@@ -1382,16 +1383,14 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
                 float const width = widthValue.toFloat(&ok);
                 lineStyle.setPhysicalWidth(ok ? qBound(0.1f, width, 200.0f) : 0.0f);
             }
+        } else if (visualCategory == GeoDataPlacemark::HighwayTrack
+                   || (visualCategory >= GeoDataPlacemark::RailwayRail && visualCategory <= GeoDataPlacemark::RailwayFunicular)) {
+            labelStyle.setColor(QColor(Qt::transparent));
         }
         GeoDataStyle::Ptr newStyle(new GeoDataStyle(*style));
         newStyle->setPolyStyle(polyStyle);
         newStyle->setLineStyle(lineStyle);
-
-        bool const hideLabel = visualCategory == GeoDataPlacemark::HighwayTrack
-                || (visualCategory >= GeoDataPlacemark::RailwayRail && visualCategory <= GeoDataPlacemark::RailwayFunicular);
-        if (hideLabel) {
-            newStyle->labelStyle().setColor(QColor(Qt::transparent));
-        }
+        newStyle->setLabelStyle(labelStyle);
 
         style = newStyle;
     } else if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType) {
