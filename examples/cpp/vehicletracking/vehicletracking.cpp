@@ -69,7 +69,7 @@ Window::Window(QWidget *parent) :
     setLayout(layout);
 
     // Load the OpenStreetMap map
-    m_marbleWidget->setMapThemeId("earth/openstreetmap/openstreetmap.dgml");
+    m_marbleWidget->setMapThemeId(QStringLiteral("earth/openstreetmap/openstreetmap.dgml"));
     m_marbleWidget->setProjection( Mercator );
     setGeometry(80, 60, 1000, 800);
     GeoDataCoordinates Kiev(30.523333, 50.45, 0.0, GeoDataCoordinates::Degree);

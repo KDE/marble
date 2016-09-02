@@ -27,7 +27,7 @@ int main(int argc, char** argv)
     MarbleWidget *mapWidget = new MarbleWidget();
 
     // Load the Plain map
-    mapWidget->setMapThemeId("earth/plain/plain.dgml");
+    mapWidget->setMapThemeId(QStringLiteral("earth/plain/plain.dgml"));
 
     // Hide the FloatItems: OverviewMap, ScaleBar and Compass
     mapWidget->setShowOverviewMap(false);

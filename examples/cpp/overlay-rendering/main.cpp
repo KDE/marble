@@ -25,7 +25,7 @@ int main(int argc, char** argv) {
     MarbleWidget *mapWidget = new MarbleWidget();
 
     // Load the Satellite map
-    mapWidget->setMapThemeId( "earth/bluemarble/bluemarble.dgml" );
+    mapWidget->setMapThemeId(QStringLiteral("earth/bluemarble/bluemarble.dgml"));
 
     // Create a bounding box from the given corner points
     GeoDataLatLonBox box( 55, 48, 14.5, 6, GeoDataCoordinates::Degree );

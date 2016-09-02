@@ -135,7 +135,7 @@ int main(int argc, char** argv)
     mapWidget->installEventFilter(layer);
 
     // Finish widget creation.
-    mapWidget->setMapThemeId("earth/bluemarble/bluemarble.dgml");
+    mapWidget->setMapThemeId(QStringLiteral("earth/bluemarble/bluemarble.dgml"));
     // Ensure we see our rendered feature on start
     mapWidget->model()->setHome(8.4, 48.0, 1800);
     mapWidget->goHome();

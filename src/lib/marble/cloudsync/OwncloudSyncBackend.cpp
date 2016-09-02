@@ -235,7 +235,7 @@ QPixmap OwncloudSyncBackend::createPreview( const QString &timestamp ) const
     }
 
     mapWidget.setProjection( Mercator );
-    mapWidget.setMapThemeId( "earth/openstreetmap/openstreetmap.dgml" );
+    mapWidget.setMapThemeId(QStringLiteral("earth/openstreetmap/openstreetmap.dgml"));
     mapWidget.resize( 512, 512 );
 
     RoutingManager* manager = mapWidget.model()->routingManager();

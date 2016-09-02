@@ -24,7 +24,7 @@ int main(int argc, char** argv)
     MarbleWidget *mapWidget = new MarbleWidget();
 
     // Load the OpenStreetMap map
-    mapWidget->setMapThemeId("earth/bluemarble/bluemarble.dgml");
+    mapWidget->setMapThemeId(QStringLiteral("earth/bluemarble/bluemarble.dgml"));
 
     mapWidget->setProjection( Mercator );
 

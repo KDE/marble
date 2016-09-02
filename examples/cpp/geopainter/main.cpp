@@ -34,7 +34,7 @@ int main(int argc, char** argv)
 {
     QApplication app(argc,argv);
     MyMarbleWidget *mapWidget = new MyMarbleWidget;
-    mapWidget->setMapThemeId("earth/openstreetmap/openstreetmap.dgml");
+    mapWidget->setMapThemeId(QStringLiteral("earth/openstreetmap/openstreetmap.dgml"));
     mapWidget->centerOn(8.4, 49.0);
     mapWidget->show();
     return app.exec();

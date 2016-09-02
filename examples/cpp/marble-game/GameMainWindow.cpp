@@ -88,7 +88,7 @@ QString Private::readMarbleDataPath() const
 
 void Private::setupMarbleWidget()
 {
-    m_marbleWidget->setMapThemeId( "earth/political/political.dgml" );
+    m_marbleWidget->setMapThemeId(QStringLiteral( "earth/political/political.dgml"));
 
     foreach ( RenderPlugin *renderPlugin, m_marbleWidget->renderPlugins() ) {
         if (renderPlugin->nameId() == QLatin1String("stars")
@@ -186,7 +186,7 @@ void MainWindow::createQuestion()
 
 void MainWindow::browseMapButtonClicked()
 {
-    d->m_marbleWidget->setMapThemeId("earth/political/political.dgml");
+    d->m_marbleWidget->setMapThemeId(QStringLiteral("earth/political/political.dgml"));
 
     /**
      * Now display the country names which

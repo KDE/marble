@@ -22,7 +22,7 @@ int main(int argc, char** argv)
     MarbleWidget *mapWidget = new MarbleWidget();
 
     // Load the OpenStreetMap map
-    mapWidget->setMapThemeId("earth/openstreetmap/openstreetmap.dgml");
+    mapWidget->setMapThemeId(QStringLiteral("earth/openstreetmap/openstreetmap.dgml"));
 
     mapWidget->show();
 

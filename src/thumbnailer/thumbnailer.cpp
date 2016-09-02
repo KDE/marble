@@ -35,7 +35,7 @@ GeoDataThumbnailer::GeoDataThumbnailer()
   : ThumbCreator()
   , m_marbleMap()
 {
-    m_marbleMap.setMapThemeId(QLatin1String("earth/openstreetmap/openstreetmap.dgml"));
+    m_marbleMap.setMapThemeId(QStringLiteral("earth/openstreetmap/openstreetmap.dgml"));
     m_marbleMap.setProjection(Equirectangular);
     m_marbleMap.setMapQualityForViewContext( PrintQuality, Still );
     m_marbleMap.setViewContext( Still );

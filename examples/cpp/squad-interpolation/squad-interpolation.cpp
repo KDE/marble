@@ -227,7 +227,7 @@ int main ( int argc, char** argv )
     mapWidget->centerOn ( layer->center() );
 
     // Finish widget creation.
-    mapWidget->setMapThemeId( "earth/plain/plain.dgml" );
+    mapWidget->setMapThemeId(QStringLiteral("earth/plain/plain.dgml"));
     mapWidget->setShowCities( false );
     mapWidget->setShowCrosshairs( false );
     mapWidget->setShowOtherPlaces( false );
