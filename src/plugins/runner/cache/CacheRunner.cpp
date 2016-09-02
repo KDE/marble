@@ -36,7 +36,7 @@ GeoDataDocument* CacheRunner::parseFile( const QString &fileName, DocumentRole r
 {
     QFile file( fileName );
     if ( !file.exists() ) {
-        error = QString("File %1 does not exist").arg(fileName);
+        error = QStringLiteral("File %1 does not exist").arg(fileName);
         mDebug() << error;
         return nullptr;
     }
@@ -55,7 +55,7 @@ GeoDataDocument* CacheRunner::parseFile( const QString &fileName, DocumentRole r
     qint32 version;
     in >> version;
     if ( version < 015 ) {
-        error = QString("Bad cache file %1: Version %2 is too old, need 15 or later").arg(fileName).arg(version);
+        error = QStringLiteral("Bad cache file %1: Version %2 is too old, need 15 or later").arg(fileName).arg(version);
         mDebug() << error;
         return nullptr;
     }

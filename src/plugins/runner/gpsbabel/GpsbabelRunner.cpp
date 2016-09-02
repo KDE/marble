@@ -32,7 +32,7 @@ GeoDataDocument *GpsbabelRunner::parseFile(const QString &fileName, DocumentRole
 {
     // Check and see if the file exists
     if ( !QFileInfo( fileName ).exists() ) {
-        error = QString("File %1 does not exist").arg(fileName);
+        error = QStringLiteral("File %1 does not exist").arg(fileName);
         mDebug() << error;
         return nullptr;
     }
@@ -51,7 +51,7 @@ GeoDataDocument *GpsbabelRunner::parseFile(const QString &fileName, DocumentRole
     fileTypes["csv"]      = "csv";
     QString const inputFileType = fileTypes[fileSuffix];
     if ( inputFileType.isEmpty() ) {
-        error = QString("Unsupported file extension for").arg(fileName);
+        error = QStringLiteral("Unsupported file extension for").arg(fileName);
         mDebug() << error;
         return nullptr;
     }
@@ -83,7 +83,7 @@ GeoDataDocument *GpsbabelRunner::parseFile(const QString &fileName, DocumentRole
         document->setDocumentRole( role );
         return document;
     } else {
-        error = QString("Gpsbabel returned error code %1").arg(exitStatus);
+        error = QStringLiteral("Gpsbabel returned error code %1").arg(exitStatus);
         mDebug() << error;
         return nullptr;
     }

@@ -33,7 +33,7 @@ GeoDataDocument *JsonRunner::parseFile(const QString &fileName, DocumentRole rol
     // Check file exists
     QFile file( fileName );
     if ( !file.exists() ) {
-        error = QString("File %1 does not exist").arg(fileName);
+        error = QStringLiteral("File %1 does not exist").arg(fileName);
         mDebug() << error;
         return nullptr;
     }
@@ -46,7 +46,7 @@ GeoDataDocument *JsonRunner::parseFile(const QString &fileName, DocumentRole rol
 
     // Start parsing
     if ( !parser.read( &file ) ) {
-        error = QString("Could not parse GeoJSON from %1").arg(fileName);
+        error = QStringLiteral("Could not parse GeoJSON from %1").arg(fileName);
         mDebug() << error;
         return nullptr;
     }

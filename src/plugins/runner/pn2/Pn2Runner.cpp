@@ -120,14 +120,14 @@ GeoDataDocument *Pn2Runner::parseFile(const QString &fileName, DocumentRole role
 {
     QFileInfo fileinfo( fileName );
     if (fileinfo.suffix().compare(QLatin1String("pn2"), Qt::CaseInsensitive) != 0) {
-        error = QString("File %1 does not have a pn2 suffix").arg(fileName);
+        error = QStringLiteral("File %1 does not have a pn2 suffix").arg(fileName);
         mDebug() << error;
         return nullptr;
     }
 
     QFile  file( fileName );
     if ( !file.exists() ) {
-        error = QString("File %1 does not exist").arg(fileName);
+        error = QStringLiteral("File %1 does not exist").arg(fileName);
         mDebug() << error;
         return nullptr;
     }

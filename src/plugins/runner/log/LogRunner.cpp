@@ -32,7 +32,7 @@ GeoDataDocument *LogRunner::parseFile(const QString &fileName, DocumentRole role
 {
     QFile file( fileName );
     if ( !file.exists() ) {
-        errorString = QString("File %1 does not exist").arg(fileName);
+        errorString = QStringLiteral("File %1 does not exist").arg(fileName);
         mDebug() << errorString;
         return nullptr;
     }

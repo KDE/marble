@@ -40,14 +40,14 @@ GeoDataDocument *PntRunner::parseFile(const QString &fileName, DocumentRole role
 {
     QFileInfo fileinfo( fileName );
     if (fileinfo.suffix().compare(QLatin1String("pnt"), Qt::CaseInsensitive) != 0) {
-        errorString = QString("File %1 does not have a pnt suffix").arg(fileName);
+        errorString = QStringLiteral("File %1 does not have a pnt suffix").arg(fileName);
         mDebug() << errorString;
         return nullptr;
     }
 
     QFile  file( fileName );
     if ( !file.exists() ) {
-        errorString = QString("File %1 does not exist").arg(fileName);
+        errorString = QStringLiteral("File %1 does not exist").arg(fileName);
         mDebug() << errorString;
         return nullptr;
     }

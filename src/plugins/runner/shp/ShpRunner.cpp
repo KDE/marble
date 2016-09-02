@@ -38,14 +38,14 @@ GeoDataDocument *ShpRunner::parseFile(const QString &fileName, DocumentRole role
 {
     QFileInfo fileinfo( fileName );
     if (fileinfo.suffix().compare(QLatin1String("shp"), Qt::CaseInsensitive) != 0) {
-        error = QString("File %1 does not have a shp suffix").arg(fileName);
+        error = QStringLiteral("File %1 does not have a shp suffix").arg(fileName);
         mDebug() << error;
         return nullptr;
     }
 
     SHPHandle handle = SHPOpen( fileName.toStdString().c_str(), "rb" );
     if ( !handle ) {
-        error = QString("Failed to read %1").arg(fileName);
+        error = QStringLiteral("Failed to read %1").arg(fileName);
         mDebug() << error;
         return nullptr;
     }
