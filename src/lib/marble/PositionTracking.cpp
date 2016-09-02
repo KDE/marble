@@ -164,7 +164,7 @@ PositionTracking::PositionTracking( GeoDataTreeModel *model )
 
     GeoDataStyleMap styleMap;
     styleMap.setId(QStringLiteral("map-track"));
-    styleMap.insert("normal", QLatin1Char('#') + style->id());
+    styleMap.insert(QStringLiteral("normal"), QLatin1Char('#') + style->id());
     d->m_document.addStyleMap(styleMap);
     d->m_document.addStyle(style);
     d->m_document.append( d->m_currentTrackPlacemark );

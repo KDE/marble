@@ -53,7 +53,7 @@ public:
     {
         if( m_style ) {
             m_styleMap->setId(QStringLiteral("default-map"));
-            m_styleMap->insert("normal", QLatin1Char('#') + m_style->id());
+            m_styleMap->insert(QStringLiteral("normal"), QLatin1Char('#') + m_style->id());
         }
     }
 

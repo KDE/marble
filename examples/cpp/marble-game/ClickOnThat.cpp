@@ -182,7 +182,7 @@ void ClickOnThat::initiateGame()
 
         GeoDataStyleMap styleMap;
         styleMap.setId(QStringLiteral("default-map"));
-        styleMap.insert("normal", QLatin1Char('#') + pinStyle->id());
+        styleMap.insert(QStringLiteral("normal"), QLatin1Char('#') + pinStyle->id());
 
         d->m_selectPinDocument->addStyle( pinStyle );
         d->m_selectPinDocument->addStyleMap( styleMap );

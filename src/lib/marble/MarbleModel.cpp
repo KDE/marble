@@ -460,8 +460,8 @@ void MarbleModelPrivate::addHighlightStyle(GeoDataDocument* doc)
         if ( highlightBrushColor.isValid()
             || highlightPenColor.isValid() )
         {
-            GeoDataStyleMap styleMap = doc->styleMap("default-map");
-            styleMap.insert("highlight", QLatin1Char('#') + highlightStyle->id());
+            GeoDataStyleMap styleMap = doc->styleMap(QStringLiteral("default-map"));
+            styleMap.insert(QStringLiteral("highlight"), QLatin1Char('#') + highlightStyle->id());
             doc->addStyle( highlightStyle );
             doc->addStyleMap( styleMap );
         }
@@ -474,7 +474,7 @@ void MarbleModelPrivate::assignNewStyle( const QString &filePath, const GeoDataS
     Q_ASSERT( doc );
     GeoDataStyleMap styleMap;
     styleMap.setId(QStringLiteral("default-map"));
-    styleMap.insert("normal", QLatin1Char('#') + style->id());
+    styleMap.insert(QStringLiteral("normal"), QLatin1Char('#') + style->id());
     doc->addStyleMap( styleMap );
     doc->addStyle( style );
 
@@ -868,7 +868,7 @@ void MarbleModelPrivate::assignFillColors( const QString &filePath ) {
                             style->setId(QStringLiteral("default"));
                             GeoDataStyleMap styleMap;
                             styleMap.setId(QStringLiteral("default-map"));
-                            styleMap.insert("normal", QLatin1Char('#') + style->id());
+                            styleMap.insert(QStringLiteral("normal"), QLatin1Char('#') + style->id());
                             doc->addStyle( style );
                             doc->addStyleMap( styleMap );
 
