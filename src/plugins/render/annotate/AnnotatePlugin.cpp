@@ -222,7 +222,7 @@ bool AnnotatePlugin::isInitialized() const
 
 QString AnnotatePlugin::runtimeTrace() const
 {
-    return QString("Annotate Items: %1").arg( m_annotationDocument->size() );
+    return QStringLiteral("Annotate Items: %1").arg(m_annotationDocument->size());
 }
 
 const QList<QActionGroup*> *AnnotatePlugin::actionGroups() const

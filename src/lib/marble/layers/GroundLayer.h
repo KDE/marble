@@ -40,7 +40,7 @@ class GroundLayer : public LayerInterface
 
     RenderState renderState() const;
 
-    virtual QString runtimeTrace() const { return "GroundLayer"; }
+    virtual QString runtimeTrace() const { return QStringLiteral("GroundLayer"); }
 
  private:
     QColor m_color;  // Gets the color specified via DGML's <map bgcolor="">

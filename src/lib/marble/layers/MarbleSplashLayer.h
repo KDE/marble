@@ -30,7 +30,7 @@ public:
 
     RenderState renderState() const;
 
-    virtual QString runtimeTrace() const { return "SplashLayer"; }
+    virtual QString runtimeTrace() const { return QStringLiteral("SplashLayer"); }
 
 };
 

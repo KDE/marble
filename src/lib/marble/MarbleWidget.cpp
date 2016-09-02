@@ -76,7 +76,7 @@ class MarbleWidget::CustomPaintLayer : public LayerInterface
 
     RenderState renderState() const { return RenderState(QStringLiteral("Custom Widget Paint")); }
 
-    QString runtimeTrace() const { return QString( "MarbleWidget::CustomPaintLayer" ); }
+    QString runtimeTrace() const { return QStringLiteral("MarbleWidget::CustomPaintLayer"); }
 
  private:
     MarbleWidget *const m_widget;

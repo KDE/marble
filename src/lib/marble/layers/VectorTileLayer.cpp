@@ -147,7 +147,7 @@ QString VectorTileLayer::runtimeTrace() const
         tiles += mapper->cachedDocuments();
     }
     int const layers = d->m_activeTexmappers.size();
-    return QString("Vector Tiles: %1 tiles in %2 layers").arg(tiles).arg(layers);
+    return QStringLiteral("Vector Tiles: %1 tiles in %2 layers").arg(tiles).arg(layers);
 }
 
 bool VectorTileLayer::render( GeoPainter *painter, ViewportParams *viewport,

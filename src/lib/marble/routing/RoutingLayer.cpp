@@ -779,7 +779,7 @@ bool RoutingLayer::isInteractive() const
 
 QString RoutingLayer::runtimeTrace() const
 {
-    return QString("Routing Layer");
+    return QStringLiteral("Routing Layer");
 }
 
 } // namespace Marble

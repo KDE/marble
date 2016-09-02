@@ -48,7 +48,7 @@ public:
 
     RenderState renderState() const;
 
-    virtual QString runtimeTrace() const { return "PopupLayer"; }
+    virtual QString runtimeTrace() const { return QStringLiteral("PopupLayer"); }
 
     /**
      * @brief Is popup item visible

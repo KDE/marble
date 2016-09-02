@@ -29,7 +29,7 @@ public:
                          GeoSceneLayer * layer = 0 );
 
     RenderState renderState() const;
-    virtual QString runtimeTrace() const { return "FogLayer"; }
+    virtual QString runtimeTrace() const { return QStringLiteral("FogLayer"); }
 };
 
 }

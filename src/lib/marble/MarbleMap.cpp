@@ -102,7 +102,7 @@ public:
 
     RenderState renderState() const { return RenderState(QStringLiteral("Custom Map Paint")); }
 
-    virtual QString runtimeTrace() const { return "CustomPaint"; }
+    virtual QString runtimeTrace() const { return QStringLiteral("CustomPaint"); }
 
 private:
     MarbleMap *const m_map;
