@@ -1277,6 +1277,7 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
             polyStyle.setOutline(false);
             adjustStyle = true;
         }
+
         if (adjustStyle) {
             GeoDataStyle::Ptr newStyle(new GeoDataStyle(*style));
             newStyle->setPolyStyle(polyStyle);
@@ -1285,16 +1286,12 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
         }
 
         if (style->iconStyle().iconPath().isEmpty()) {
-            for (auto iter = osmData.tagsBegin(), end = osmData.tagsEnd(); iter != end; ++iter) {
-                const auto tag = OsmTag(iter.key(), iter.value());
-                const GeoDataFeature::GeoDataVisualCategory category = osmVisualCategory(tag);
-                const GeoDataStyle::ConstPtr categoryStyle = presetStyle(category);
-                if (category != GeoDataFeature::None && !categoryStyle->iconStyle().icon().isNull()) {
-                    GeoDataStyle::Ptr newStyle(new GeoDataStyle(*style));
-                    newStyle->setIconStyle(categoryStyle->iconStyle());
-                    style = newStyle;
-                    break;
-                }
+            const GeoDataFeature::GeoDataVisualCategory category = determineVisualCategory(osmData);
+            const GeoDataStyle::ConstPtr categoryStyle = presetStyle(category);
+            if (category != GeoDataFeature::None && !categoryStyle->iconStyle().icon().isNull()) {
+                GeoDataStyle::Ptr newStyle(new GeoDataStyle(*style));
+                newStyle->setIconStyle(categoryStyle->iconStyle());
+                style = newStyle;
             }
         }
     } else if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType) {
