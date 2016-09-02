@@ -465,7 +465,7 @@ void NewstuffModelPrivate::readValue( const QDomNode &node, const QString &key, 
         *target = T(matches.at( 0 ).toElement().text());
     } else {
         for ( int i=0; i<matches.size(); ++i ) {
-            if ( matches.at( i ).attributes().contains( "lang" ) &&
+            if ( matches.at( i ).attributes().contains(QStringLiteral("lang")) &&
                  matches.at( i ).attributes().namedItem( "lang").toAttr().value() == QLatin1String("en")) {
                 *target = T(matches.at( i ).toElement().text());
                 return;

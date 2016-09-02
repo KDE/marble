@@ -108,12 +108,11 @@ void RoutingInputWidgetPrivate::updateDescription()
 {
     GeoDataPlacemark const placemark = (*m_route)[m_index];
     GeoDataExtendedData const address = placemark.extendedData();
-    if ( address.contains( "road" ) && address.contains( "city" ) )
-    {
+    if (address.contains(QStringLiteral("road")) && address.contains(QStringLiteral("city"))) {
         QString const road = address.value(QStringLiteral("road")).value().toString();
         QString const city = address.value(QStringLiteral("city")).value().toString();
 
-        if ( address.contains( "house_number" ) ) {
+        if (address.contains(QStringLiteral("house_number"))) {
             QString const houseNumber = address.value(QStringLiteral("house_number")).value().toString();
             QString const name = QObject::tr("%1 %2, %3", "An address with parameters %1=house number, %2=road, %3=city");
             m_lineEdit->setText( name.arg( houseNumber ).arg( road ).arg( city ) );

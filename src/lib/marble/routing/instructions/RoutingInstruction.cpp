@@ -353,7 +353,7 @@ QString RoutingInstruction::instructionText() const
 {
     QString text = nextRoadInstruction();
     text += QLatin1Char(' ') + nextDistanceInstruction();
-    if ( QCoreApplication::instance()->arguments().contains( "--remaining-duration" ) ) {
+    if (QCoreApplication::instance()->arguments().contains(QStringLiteral("--remaining-duration"))) {
         text += QLatin1Char(' ') + totalDurationRemaining();
     }
     return text;
@@ -470,7 +470,7 @@ QTextStream& operator<<( QTextStream& stream, const RoutingInstruction &i )
         return stream;
     }
 
-    if ( QCoreApplication::instance()->arguments().contains( "--dense" ) ) {
+    if (QCoreApplication::instance()->arguments().contains(QStringLiteral("--dense"))) {
         QVector<RoutingWaypoint> points = i.points();
         int maxElement = points.size() - ( i.successor() ? 1 : 0 );
         for ( int j = 0; j < maxElement; ++j ) {
@@ -490,7 +490,7 @@ QTextStream& operator<<( QTextStream& stream, const RoutingInstruction &i )
         return stream;
     }
 
-    if ( QCoreApplication::instance()->arguments().contains( "--csv" ) ) {
+    if (QCoreApplication::instance()->arguments().contains(QStringLiteral("--csv"))) {
         stream << i.points().first().point().lat() << ',';
         stream << i.points().first().point().lon() << ',';
     } else {
@@ -509,7 +509,8 @@ QTextStream& operator<<( QTextStream& stream, const RoutingInstruction &i )
 
     stream << i.instructionText();
 
-    if ( QCoreApplication::instance()->arguments().contains( "--csv" ) && QCoreApplication::instance()->arguments().contains( "--intersection-points" ) ) {
+    if (QCoreApplication::instance()->arguments().contains(QStringLiteral("--csv")) &&
+        QCoreApplication::instance()->arguments().contains(QStringLiteral("--intersection-points"))) {
         foreach( const RoutingPoint &point, i.intersectionPoints() ) {
             stream << ',' << point.lat() << ',' << point.lon();
         }

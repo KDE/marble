@@ -469,7 +469,7 @@ void GeometryLayer::handleHighlight( qreal lon, qreal lat, GeoDataCoordinates::U
                 bool isHighlight = false;
 
                 foreach ( const GeoDataStyleMap &styleMap, doc->styleMaps() ) {
-                    if ( styleMap.contains( QString("highlight") ) ) {
+                    if (styleMap.contains(QStringLiteral("highlight"))) {
                         isHighlight = true;
                         break;
                     }
