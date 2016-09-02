@@ -122,7 +122,7 @@ QList<AbstractDataPluginItem *> LayerManager::whichItemAt( const QPoint& curpos 
 
 void LayerManager::renderLayers( GeoPainter *painter, ViewportParams *viewport )
 {
-    d->m_renderState = RenderState( "Marble" );
+    d->m_renderState = RenderState(QStringLiteral("Marble"));
     const QTime totalTime = QTime::currentTime();
 
     QStringList renderPositions;

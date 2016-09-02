@@ -106,7 +106,7 @@ qreal PopupLayer::zValue() const
 
 RenderState PopupLayer::renderState() const
 {
-    return RenderState( "Popup Window" );
+    return RenderState(QStringLiteral("Popup Window"));
 }
 
 bool PopupLayer::visible() const

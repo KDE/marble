@@ -74,7 +74,7 @@ class MarbleWidget::CustomPaintLayer : public LayerInterface
 
     virtual qreal zValue() const { return 1.0e7; }
 
-    RenderState renderState() const { return RenderState( "Custom Widget Paint" ); }
+    RenderState renderState() const { return RenderState(QStringLiteral("Custom Widget Paint")); }
 
     QString runtimeTrace() const { return QString( "MarbleWidget::CustomPaintLayer" ); }
 

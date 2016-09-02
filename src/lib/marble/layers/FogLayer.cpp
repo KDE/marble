@@ -79,7 +79,7 @@ bool FogLayer::render( GeoPainter *painter,
 
 RenderState FogLayer::renderState() const
 {
-    return RenderState( "Fog" );
+    return RenderState(QStringLiteral("Fog"));
 }
 
 }

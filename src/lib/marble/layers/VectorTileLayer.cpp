@@ -128,7 +128,7 @@ QStringList VectorTileLayer::renderPosition() const
 
 RenderState VectorTileLayer::renderState() const
 {
-    return RenderState( "Vector Tiles" );
+    return RenderState(QStringLiteral("Vector Tiles"));
 }
 
 int VectorTileLayer::tileZoomLevel() const

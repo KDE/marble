@@ -100,7 +100,7 @@ public:
 
     virtual qreal zValue() const { return 1.0e6; }
 
-    RenderState renderState() const { return RenderState( "Custom Map Paint" ); }
+    RenderState renderState() const { return RenderState(QStringLiteral("Custom Map Paint")); }
 
     virtual QString runtimeTrace() const { return "CustomPaint"; }
 
@@ -837,7 +837,7 @@ void MarbleMap::paint( GeoPainter &painter, const QRect &dirtyRect )
     d->m_layerManager.renderLayers( &painter, &d->m_viewport );
     d->m_renderState = d->m_layerManager.renderState();
     bool const parsing = d->m_model->fileManager()->pendingFiles() > 0;
-    d->m_renderState.addChild( RenderState( "Files", parsing ? WaitingForData : Complete ) );
+    d->m_renderState.addChild(RenderState(QStringLiteral("Files"), parsing ? WaitingForData : Complete));
     RenderStatus const newRenderStatus = d->m_renderState.status();
     if ( oldRenderStatus != newRenderStatus ) {
         emit renderStatusChanged( newRenderStatus );

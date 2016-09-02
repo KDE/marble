@@ -102,7 +102,7 @@ bool PlacemarkLayer::render( GeoPainter *geoPainter, ViewportParams *viewport,
 
 RenderState PlacemarkLayer::renderState() const
 {
-    return RenderState( "Placemarks" );
+    return RenderState(QStringLiteral("Placemarks"));
 }
 
 QString PlacemarkLayer::runtimeTrace() const

@@ -672,7 +672,7 @@ bool RoutingLayer::render( GeoPainter *painter, ViewportParams *viewport,
 
 RenderState RoutingLayer::renderState() const
 {
-    return RenderState( "Routing", d->m_marbleWidget->model()->routingManager()->state() == RoutingManager::Downloading ? WaitingForUpdate : Complete );
+    return RenderState(QStringLiteral("Routing"), d->m_marbleWidget->model()->routingManager()->state() == RoutingManager::Downloading ? WaitingForUpdate : Complete);
 }
 
 bool RoutingLayer::eventFilter( QObject *obj, QEvent *event )

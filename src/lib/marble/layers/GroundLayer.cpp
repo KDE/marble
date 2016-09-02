@@ -65,7 +65,7 @@ QColor GroundLayer::color() const
 
 RenderState GroundLayer::renderState() const
 {
-    return RenderState( "Ground" );
+    return RenderState(QStringLiteral("Ground"));
 }
 
 }

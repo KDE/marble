@@ -305,7 +305,7 @@ bool TextureLayer::render( GeoPainter *painter, ViewportParams *viewport,
 {
     Q_UNUSED( renderPos );
     Q_UNUSED( layer );
-    d->m_renderState = RenderState( "Texture Tiles" );
+    d->m_renderState = RenderState(QStringLiteral("Texture Tiles"));
 
     // Stop repaint timer if it is already running
     d->m_repaintTimer.stop();
