@@ -13,10 +13,14 @@
 
 #include "BaseFilter.h"
 
+namespace Marble {
+
 class PlacemarkFilter : public BaseFilter
 {
 public:
     explicit PlacemarkFilter(GeoDataDocument* document);
 };
+
+}
 
 #endif // PLACEMARKHANDLER_H

@@ -21,8 +21,7 @@
 #include "WayChunk.h"
 #include "TagsFilter.h"
 
-namespace Marble
-{
+namespace Marble {
 
 WayConcatenator::WayConcatenator(GeoDataDocument *document, const QStringList &tagsList, bool andFlag) : TagsFilter(document, tagsList, andFlag)
 {
@@ -332,7 +331,5 @@ void WayConcatenator::concatBoth(GeoDataPlacemark *placemark, WayChunk *chunk, W
     m_chunks.removeOne(otherChunk);
 
 }
-
-
 
 }

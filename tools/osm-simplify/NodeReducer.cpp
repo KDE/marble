@@ -19,6 +19,8 @@
 #include <QDebug>
 #include <QVector>
 
+namespace Marble {
+
 NodeReducer::NodeReducer(GeoDataDocument* document, int zoomLevel) :
     PlacemarkFilter(document),
     m_resolution(resolutionForLevel(zoomLevel)),
@@ -119,4 +121,6 @@ qreal NodeReducer::resolutionForLevel(int level) {
         return 0.0000005;
         break;
     }
+}
+
 }

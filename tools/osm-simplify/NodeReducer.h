@@ -15,6 +15,8 @@
 #include "GeoDataLineString.h"
 #include "MarbleMath.h"
 
+namespace Marble {
+
 class NodeReducer : public PlacemarkFilter {
 public:
     NodeReducer(GeoDataDocument* document, int zoomLevel);
@@ -53,5 +55,7 @@ private:
     qreal m_resolution;
     qint64 m_count;
 };
+
+}
 
 #endif

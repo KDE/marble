@@ -14,6 +14,8 @@
 #include "PlacemarkFilter.h"
 #include "OsmPlacemarkData.h"
 
+namespace Marble {
+
 class TinyPlanetProcessor : public PlacemarkFilter
 {
 public:
@@ -27,5 +29,7 @@ private:
     void copyTags(const GeoDataPlacemark &source, GeoDataPlacemark &target) const;
     void copyTags(const OsmPlacemarkData &originalPlacemarkData, OsmPlacemarkData& targetOsmData) const;
 };
+
+}
 
 #endif // TINYPLANETPROCESSOR_H

@@ -18,7 +18,7 @@
 #include "OsmPlacemarkData.h"
 #include "GeoDataPlacemark.h"
 
-namespace Marble{
+namespace Marble {
 
 TagsFilter::TagsFilter(GeoDataDocument *document, const QStringList &tagsList, bool andFlag ) : PlacemarkFilter(document)
 {
@@ -80,9 +80,6 @@ void TagsFilter::process()
     //does nothing
 }
 
-}
-
-
 QVector<GeoDataPlacemark*>::const_iterator TagsFilter::rejectedObjectsBegin() const
 {
     return m_rejectedObjects.begin();
@@ -91,4 +88,6 @@ QVector<GeoDataPlacemark*>::const_iterator TagsFilter::rejectedObjectsBegin() co
 QVector<GeoDataPlacemark*>::const_iterator TagsFilter::rejectedObjectsEnd() const
 {
     return m_rejectedObjects.end();
+}
+
 }

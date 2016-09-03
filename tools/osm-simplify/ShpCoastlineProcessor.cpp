@@ -18,6 +18,8 @@
 #include <QPolygonF>
 #include <QDebug>
 
+namespace Marble {
+
 ShpCoastlineProcessor::ShpCoastlineProcessor(GeoDataDocument* document) :
     PlacemarkFilter(document)
 {
@@ -98,4 +100,6 @@ GeoDataDocument *ShpCoastlineProcessor::cutToTiles(unsigned int zoomLevel, unsig
 
 
     return tile;
+}
+
 }

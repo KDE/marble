@@ -17,7 +17,7 @@
 #include <QMap>
 #include <QString>
 
-namespace Marble{
+namespace Marble {
 
 class GeoDataDocument;	
 
@@ -35,4 +35,5 @@ private:
 };
 
 }
+
 #endif

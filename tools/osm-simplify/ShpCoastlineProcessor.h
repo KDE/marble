@@ -13,6 +13,8 @@
 
 #include "PlacemarkFilter.h"
 
+namespace Marble {
+
 class ShpCoastlineProcessor : public PlacemarkFilter
 {
 public:
@@ -22,5 +24,7 @@ public:
 
     GeoDataDocument* cutToTiles(unsigned int zoomLevel, unsigned int tileX, unsigned int tileY);
 };
+
+}
 
 #endif // COASTLINEFILTER_H

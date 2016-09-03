@@ -13,6 +13,8 @@
 
 #include "PlacemarkFilter.h"
 
+namespace Marble {
+
 class LineStringProcessor : public PlacemarkFilter
 {
 public:
@@ -21,5 +23,7 @@ public:
     void process() override;
 
 };
+
+}
 
 #endif // LINESTRINGHANDLER_H

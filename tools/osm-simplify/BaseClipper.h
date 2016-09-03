@@ -19,6 +19,8 @@
 #include <QPointF>
 #include <QPolygonF>
 
+namespace Marble {
+
 class BaseClipper
 {
 public:
@@ -131,5 +133,7 @@ private:
 
     bool m_clippedTwice;
 };
+
+}
 
 #endif // BASECLIPPER_H

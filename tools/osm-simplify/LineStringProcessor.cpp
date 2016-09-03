@@ -14,6 +14,7 @@
 #include "GeoDataGeometry.h"
 #include "GeoDataLineString.h"
 
+namespace Marble {
 
 LineStringProcessor::LineStringProcessor(GeoDataDocument* document) :
     PlacemarkFilter(document)
@@ -70,3 +71,4 @@ void LineStringProcessor::process()
     qDebug() << document()->name();
 }
 
+}

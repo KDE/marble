@@ -14,8 +14,8 @@
 #include "PlacemarkFilter.h"
 #include "TagsFilter.h"
 
-namespace Marble
-{
+namespace Marble {
+
 class WayChunk;
 
 class WayConcatenator : public TagsFilter
@@ -43,5 +43,3 @@ private:
 }
 
 #endif
-
-

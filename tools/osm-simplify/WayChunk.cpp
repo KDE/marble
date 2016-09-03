@@ -19,8 +19,7 @@
 #include "GeoDataLineString.h"
 #include "OsmPlacemarkData.h"
 
-namespace Marble
-{
+namespace Marble {
 
 WayChunk::WayChunk(GeoDataPlacemark *placemark, qint64 first, qint64 last)
 {
@@ -124,6 +123,5 @@ GeoDataFeature::GeoDataVisualCategory WayChunk::visualCategory() const
 {
     return m_visualCategory;
 }
-
 
 }

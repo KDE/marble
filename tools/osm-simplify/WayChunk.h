@@ -16,8 +16,7 @@
 
 #include <QList>
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataPlacemark;
 
@@ -55,4 +54,3 @@ private:
 }
 
 #endif
-

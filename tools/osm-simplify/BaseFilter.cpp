@@ -15,6 +15,8 @@
 #include "GeoDataObject.h"
 #include "GeoDataTypes.h"
 
+namespace Marble {
+
 BaseFilter::BaseFilter(GeoDataDocument* document) :
     m_document(document),
     m_placemarks(document->placemarkList())
@@ -45,4 +47,6 @@ const GeoDataDocument *BaseFilter::document() const
 GeoDataDocument *BaseFilter::document()
 {
     return m_document;
+}
+
 }

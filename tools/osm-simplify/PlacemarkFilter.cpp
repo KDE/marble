@@ -12,9 +12,12 @@
 
 #include "GeoDataPlacemark.h"
 
+namespace Marble {
+
 PlacemarkFilter::PlacemarkFilter(GeoDataDocument *document) :
     BaseFilter(document)
 {
     qDebug() << "Placemark count:" << placemarks().size();
 }
 
+}

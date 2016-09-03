@@ -20,6 +20,8 @@
 #include <QPolygonF>
 #include <QPair>
 
+namespace Marble {
+
 TinyPlanetProcessor::TinyPlanetProcessor(GeoDataDocument* document) :
     PlacemarkFilter(document)
 {
@@ -191,4 +193,6 @@ void TinyPlanetProcessor::copyTags(const OsmPlacemarkData &originalPlacemarkData
     for (auto iter=originalPlacemarkData.tagsBegin(), end=originalPlacemarkData.tagsEnd(); iter != end; ++iter) {
         targetOsmData.addTag(iter.key(), iter.value());
     }
+}
+
 }

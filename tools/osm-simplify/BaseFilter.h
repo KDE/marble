@@ -18,7 +18,7 @@
 #include "GeoDataDocument.h"
 #include "GeoDataTypes.h"
 
-using namespace Marble;
+namespace Marble {
 
 class BaseFilter
 {
@@ -38,5 +38,7 @@ private:
     GeoDataDocument* m_document;
     QVector<GeoDataPlacemark*> m_placemarks;
 };
+
+}
 
 #endif // OBJECTHANDLER_H

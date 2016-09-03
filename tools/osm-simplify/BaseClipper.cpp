@@ -18,7 +18,7 @@
 #include <QDebug>
 #include <QSharedPointer>
 
-using namespace Marble;
+namespace Marble {
 
 class LinkedPoint {
 public:
@@ -1329,5 +1329,6 @@ void BaseClipper::clipOnce( QPolygonF & clippedPolyObject,
     default:
         break;
     }
+}
 
 }
