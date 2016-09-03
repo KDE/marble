@@ -99,7 +99,7 @@ void OsmNominatimRunner::handleResult( QNetworkReply* reply )
     }
 
     QDomElement root = xml.documentElement();
-    QDomNodeList places = root.elementsByTagName( "result" );
+    QDomNodeList places = root.elementsByTagName(QStringLiteral("result"));
     if ( places.size() == 1 ) {
         QString address = places.item( 0 ).toElement().text();
         GeoDataPlacemark placemark;
@@ -107,7 +107,7 @@ void OsmNominatimRunner::handleResult( QNetworkReply* reply )
         placemark.setAddress( address );
         placemark.setCoordinate( m_coordinates );
 
-        QDomNode details = root.firstChildElement( "addressparts" );
+        QDomNode details = root.firstChildElement(QStringLiteral("addressparts"));
         extractChildren( details, placemark );
 
         emit reverseGeocodingFinished( m_coordinates, placemark );

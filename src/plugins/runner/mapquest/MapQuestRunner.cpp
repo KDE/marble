@@ -214,9 +214,9 @@ GeoDataDocument* MapQuestRunner::parse( const QByteArray &content ) const
     routePlacemark->setName( "Route" );
 
     GeoDataLineString* routeWaypoints = new GeoDataLineString;
-    QDomNodeList shapePoints = root.elementsByTagName( "shapePoints" );
+    QDomNodeList shapePoints = root.elementsByTagName(QStringLiteral("shapePoints"));
     if ( shapePoints.size() == 1 ) {
-        QDomNodeList geometry = shapePoints.at( 0 ).toElement().elementsByTagName( "latLng" );
+        QDomNodeList geometry = shapePoints.at(0).toElement().elementsByTagName(QStringLiteral("latLng"));
         for ( int i=0; i<geometry.size(); ++i ) {
             double const lat = geometry.item(i).namedItem(QStringLiteral("lat")).toElement().text().toDouble();
             double const lon = geometry.item(i).namedItem(QStringLiteral("lng")).toElement().text().toDouble();
@@ -227,7 +227,7 @@ GeoDataDocument* MapQuestRunner::parse( const QByteArray &content ) const
     routePlacemark->setGeometry( routeWaypoints );
 
     QTime time;
-    time = time.addSecs( root.elementsByTagName( "time" ).at( 0 ).toElement().text().toInt() );
+    time = time.addSecs(root.elementsByTagName(QStringLiteral("time")).at(0).toElement().text().toInt());
     qreal length = routeWaypoints->length( EARTH_RADIUS );
     const QString name = nameString( "MQ", length, time );
     const GeoDataExtendedData data = routeData( length, time );
@@ -236,7 +236,7 @@ GeoDataDocument* MapQuestRunner::parse( const QByteArray &content ) const
     result->append( routePlacemark );
 
     QMap<int,int> mapping;
-    QDomNodeList maneuvers = root.elementsByTagName( "maneuverIndexes" );
+    QDomNodeList maneuvers = root.elementsByTagName(QStringLiteral("maneuverIndexes"));
     if ( maneuvers.size() == 1 ) {
         maneuvers = maneuvers.at( 0 ).childNodes();
         for ( int i=0; i<maneuvers.size(); ++i ) {
@@ -247,15 +247,15 @@ GeoDataDocument* MapQuestRunner::parse( const QByteArray &content ) const
         }
     }
 
-    QDomNodeList instructions = root.elementsByTagName( "maneuver" );
+    QDomNodeList instructions = root.elementsByTagName(QStringLiteral("maneuver"));
     unsigned int const lastInstruction = qMax<int>( 0, instructions.length()-1 ); // ignore the last 'Welcome to xy' instruction
     for ( unsigned int i = 0; i < lastInstruction; ++i ) {
         QDomElement node = instructions.item( i ).toElement();
 
-        QDomNodeList maneuver = node.elementsByTagName( "turnType" );
-        QDomNodeList textNodes = node.elementsByTagName( "narrative" );
-        QDomNodeList points = node.elementsByTagName( "startPoint" );
-        QDomNodeList streets = node.elementsByTagName( "streets" );
+        QDomNodeList maneuver = node.elementsByTagName(QStringLiteral("turnType"));
+        QDomNodeList textNodes = node.elementsByTagName(QStringLiteral("narrative"));
+        QDomNodeList points = node.elementsByTagName(QStringLiteral("startPoint"));
+        QDomNodeList streets = node.elementsByTagName(QStringLiteral("streets"));
 
         Q_ASSERT( mapping.contains( i ) );
         if ( textNodes.size() == 1 && maneuver.size() == 1 && points.size() == 1 && mapping.contains( i ) ) {

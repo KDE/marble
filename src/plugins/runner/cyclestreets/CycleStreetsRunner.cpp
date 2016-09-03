@@ -152,14 +152,14 @@ GeoDataDocument *CycleStreetsRunner::parse( const QByteArray &content ) const
     routePlacemark->setName( "Route" );
 
     GeoDataLineString *routeWaypoints = new GeoDataLineString;
-    QDomNodeList features = xml.elementsByTagName( "gml:featureMember" );
+    QDomNodeList features = xml.elementsByTagName(QStringLiteral("gml:featureMember"));
 
     if ( features.isEmpty() ) {
         return 0;
     }
     QDomElement route = features.at( 0 ).toElement().firstChild().toElement();
-    QDomElement lineString = route.elementsByTagName( "gml:LineString" ).at( 0 ).toElement();
-    QDomElement coordinates = lineString.toElement().elementsByTagName( "gml:coordinates" ).at( 0 ).toElement();
+    QDomElement lineString = route.elementsByTagName(QStringLiteral("gml:LineString")).at(0).toElement();
+    QDomElement coordinates = lineString.toElement().elementsByTagName(QStringLiteral("gml:coordinates")).at(0).toElement();
     QStringList coordinatesList = coordinates.text().split(QLatin1Char(' '));
 
     QStringList::iterator iter = coordinatesList.begin();
@@ -176,7 +176,7 @@ GeoDataDocument *CycleStreetsRunner::parse( const QByteArray &content ) const
     }
     routePlacemark->setGeometry( routeWaypoints );
 
-    QDomElement durationElement = route.elementsByTagName( "cs:time" ).at(0).toElement();
+    QDomElement durationElement = route.elementsByTagName(QStringLiteral("cs:time")).at(0).toElement();
     QTime duration;
     duration = duration.addSecs( durationElement.text().toInt() );
     qreal length = routeWaypoints->length( EARTH_RADIUS );
@@ -192,10 +192,10 @@ GeoDataDocument *CycleStreetsRunner::parse( const QByteArray &content ) const
     for ( ; i < features.count(); ++i) {
         QDomElement segment = features.at( i ).toElement();
 
-        QString name = segment.elementsByTagName( "cs:name" ).at( 0 ).toElement().text();
-        QString maneuver = segment.elementsByTagName( "cs:turn" ).at( 0 ).toElement().text();
-        QStringList points = segment.elementsByTagName( "cs:points" ).at( 0 ).toElement().text().split(QLatin1Char(' '));
-        QStringList const elevation = segment.elementsByTagName( "cs:elevations" ).at( 0 ).toElement().text().split(QLatin1Char(','));
+        QString name = segment.elementsByTagName(QStringLiteral("cs:name")).at(0).toElement().text();
+        QString maneuver = segment.elementsByTagName(QStringLiteral("cs:turn")).at(0).toElement().text();
+        QStringList points = segment.elementsByTagName(QStringLiteral("cs:points")).at(0).toElement().text().split(QLatin1Char(' '));
+        QStringList const elevation = segment.elementsByTagName(QStringLiteral("cs:elevations")).at(0).toElement().text().split(QLatin1Char(','));
 
         GeoDataPlacemark *instructions = new GeoDataPlacemark;
         QString instructionName;

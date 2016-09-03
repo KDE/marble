@@ -112,7 +112,7 @@ void OsmNominatimRunner::handleResult( QNetworkReply* reply )
 
     QVector<GeoDataPlacemark*> placemarks;
     QDomElement root = xml.documentElement();
-    QDomNodeList places = root.elementsByTagName("place");
+    QDomNodeList places = root.elementsByTagName(QStringLiteral("place"));
     for (int i=0; i<places.size(); ++i) {
         QDomNode place = places.at(i);
         QDomNamedNodeMap attributes = place.attributes();
@@ -129,31 +129,31 @@ void OsmNominatimRunner::handleResult( QNetworkReply* reply )
         placemarkData.addValue(GeoDataData(QStringLiteral("type"), value));
 
         QString name = place.firstChildElement(value).text();
-        QString road = place.firstChildElement("road").text();
+        QString road = place.firstChildElement(QStringLiteral("road")).text();
         placemarkData.addValue(GeoDataData(QStringLiteral("name"), name));
 
-        QString city = place.firstChildElement("city").text();
+        QString city = place.firstChildElement(QStringLiteral("city")).text();
         if( city.isEmpty() ) {
-            city = place.firstChildElement("town").text();
+            city = place.firstChildElement(QStringLiteral("town")).text();
             if( city.isEmpty() ) {
-                city = place.firstChildElement("village").text();
+                city = place.firstChildElement(QStringLiteral("village")).text();
             } if( city.isEmpty() ) {
-                city = place.firstChildElement("hamlet").text();
+                city = place.firstChildElement(QStringLiteral("hamlet")).text();
             }
         }
 
-        QString administrative = place.firstChildElement("county").text();
+        QString administrative = place.firstChildElement(QStringLiteral("county")).text();
         if( administrative.isEmpty() ) {
-            administrative = place.firstChildElement("region").text();
+            administrative = place.firstChildElement(QStringLiteral("region")).text();
             if( administrative.isEmpty() ) {
-                administrative = place.firstChildElement("state").text();
+                administrative = place.firstChildElement(QStringLiteral("state")).text();
                 data.addTag(QStringLiteral("addr:state"), administrative);
             } else {
                 data.addTag(QStringLiteral("district"), administrative);
             }
         }
 
-        QString country = place.firstChildElement("country").text();
+        QString country = place.firstChildElement(QStringLiteral("country")).text();
 
         QString description;
         for (int i=0; i<place.childNodes().size(); ++i) {

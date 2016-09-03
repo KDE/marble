@@ -207,7 +207,7 @@ GeoDataDocument* OpenRouteServiceRunner::parse( const QByteArray &content ) cons
     GeoDataDocument* result = new GeoDataDocument();
     result->setName( "OpenRouteService" );
 
-    QDomNodeList errors = root.elementsByTagName( "xls:Error" );
+    QDomNodeList errors = root.elementsByTagName(QStringLiteral("xls:Error"));
     if ( errors.size() > 0 ) {
         return 0;
         // Returning early because fallback routing providers are used now
@@ -243,9 +243,9 @@ GeoDataDocument* OpenRouteServiceRunner::parse( const QByteArray &content ) cons
     GeoDataPlacemark* routePlacemark = new GeoDataPlacemark;
     routePlacemark->setName( "Route" );
     QTime time;
-    QDomNodeList summary = root.elementsByTagName( "xls:RouteSummary" );
+    QDomNodeList summary = root.elementsByTagName(QStringLiteral("xls:RouteSummary"));
     if ( summary.size() > 0 ) {
-        QDomNodeList timeNodeList = summary.item( 0 ).toElement().elementsByTagName( "xls:TotalTime" );
+        QDomNodeList timeNodeList = summary.item(0).toElement().elementsByTagName(QStringLiteral("xls:TotalTime"));
         if ( timeNodeList.size() == 1 ) {
             QRegExp regexp = QRegExp( "^P(?:(\\d+)D)?T(?:(\\d+)H)?(?:(\\d+)M)?(\\d+)S" );
             if ( regexp.indexIn( timeNodeList.item( 0 ).toElement().text() ) == 0 ) {
@@ -274,7 +274,7 @@ GeoDataDocument* OpenRouteServiceRunner::parse( const QByteArray &content ) cons
     }
 
     GeoDataLineString* routeWaypoints = new GeoDataLineString;
-    QDomNodeList geometry = root.elementsByTagName( "xls:RouteGeometry" );
+    QDomNodeList geometry = root.elementsByTagName(QStringLiteral("xls:RouteGeometry"));
     if ( geometry.size() > 0 ) {
         QDomNodeList waypoints = geometry.item( 0 ).toElement().elementsByTagName( "gml:pos" );
         for (int i=0 ; i < waypoints.length(); ++i ) {
@@ -298,14 +298,14 @@ GeoDataDocument* OpenRouteServiceRunner::parse( const QByteArray &content ) cons
 
     result->append( routePlacemark );
 
-    QDomNodeList instructionList = root.elementsByTagName( "xls:RouteInstructionsList" );
+    QDomNodeList instructionList = root.elementsByTagName(QStringLiteral("xls:RouteInstructionsList"));
     if ( instructionList.size() > 0 ) {
-        QDomNodeList instructions = instructionList.item( 0 ).toElement().elementsByTagName( "xls:RouteInstruction" );
+        QDomNodeList instructions = instructionList.item(0).toElement().elementsByTagName(QStringLiteral("xls:RouteInstruction"));
         for (int i=0 ; i < instructions.length(); ++i ) {
             QDomElement node = instructions.item( i ).toElement();
 
-            QDomNodeList textNodes = node.elementsByTagName( "xls:Instruction" );
-            QDomNodeList positions = node.elementsByTagName( "gml:pos" );
+            QDomNodeList textNodes = node.elementsByTagName(QStringLiteral("xls:Instruction"));
+            QDomNodeList positions = node.elementsByTagName(QStringLiteral("gml:pos"));
 
             if ( textNodes.size() > 0 && positions.size() > 0 ) {
                 const QStringList content = positions.at(0).toElement().text().split(QLatin1Char(' '));

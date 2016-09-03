@@ -211,24 +211,24 @@ void MonavConfigWidgetPrivate::parseNewStuff( const QByteArray &data )
     }
 
     QDomElement root = xml.documentElement();
-    QDomNodeList items = root.elementsByTagName( "stuff" );
+    QDomNodeList items = root.elementsByTagName(QStringLiteral("stuff"));
     for (int i=0 ; i < items.length(); ++i ) {
         MonavStuffEntry item;
         QDomNode node = items.item( i );
 
-        QDomNodeList names = node.toElement().elementsByTagName( "name" );
+        QDomNodeList names = node.toElement().elementsByTagName(QStringLiteral("name"));
         if ( names.size() == 1 ) {
             item.setName( names.at( 0 ).toElement().text() );
         }
 
         QString releaseDate;
-        QDomNodeList dates = node.toElement().elementsByTagName( "releasedate" );
+        QDomNodeList dates = node.toElement().elementsByTagName(QStringLiteral("releasedate"));
         if ( dates.size() == 1 ) {
             releaseDate = dates.at( 0 ).toElement().text();
         }
 
         QString filename;
-        QDomNodeList payloads = node.toElement().elementsByTagName( "payload" );
+        QDomNodeList payloads = node.toElement().elementsByTagName(QStringLiteral("payload"));
         if ( payloads.size() == 1 ) {
             QString payload = payloads.at( 0 ).toElement().text();
             filename = payload.mid(1 + payload.lastIndexOf(QLatin1Char('/')));
