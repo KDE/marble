@@ -107,7 +107,7 @@ void GosmoreRunner::reverseGeocoding( const GeoDataCoordinates &coordinates )
             QString road = fields.last().trimmed();
             placemark.setAddress( road );
             GeoDataExtendedData extendedData;
-            extendedData.addValue( GeoDataData( "road", road ) );
+            extendedData.addValue(GeoDataData(QStringLiteral("road"), road));
             placemark.setExtendedData( extendedData );
         }
     }

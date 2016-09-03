@@ -264,12 +264,12 @@ GeoDataPlacemark EditBookmarkDialog::bookmark() const
         bookmark.setAbstractView( lookat );
     }
 
-    bookmark.extendedData().addValue( GeoDataData( "isBookmark", true ) );
+    bookmark.extendedData().addValue(GeoDataData(QStringLiteral("isBookmark"), true));
 
     if(d->m_widget != 0) {
         const QString celestialName = d->m_widget->model()->planetId();
         if (celestialName != QLatin1String("earth")) {
-            bookmark.extendedData().addValue( GeoDataData( "celestialBody", celestialName ) );
+            bookmark.extendedData().addValue(GeoDataData(QStringLiteral("celestialBody"), celestialName));
         }
     }
 

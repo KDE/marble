@@ -51,7 +51,7 @@ OsmRelationEditorDialog::OsmRelationEditorDialog( OsmPlacemarkData *relationData
     // "osmRelaation=yes" entry is added to its ExtendedData to let the widget know
     // its special relation status
     GeoDataExtendedData extendedData;
-    extendedData.addValue( GeoDataData( "osmRelation", "yes" ) );
+    extendedData.addValue(GeoDataData(QStringLiteral("osmRelation"), QStringLiteral("yes")));
     m_dummyPlacemark->setExtendedData( extendedData );
     m_dummyPlacemark->setOsmData( *m_relationData );
     OsmObjectManager::initializeOsmData( m_dummyPlacemark );

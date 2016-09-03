@@ -300,7 +300,7 @@ QString RouteRequest::name( int index ) const
 void RouteRequest::setVisited( int index, bool visited )
 {
     if ( index >= 0 && index < d->m_route.size() ) {
-        d->m_route[index].extendedData().addValue( GeoDataData( "routingVisited", visited ) );
+        d->m_route[index].extendedData().addValue(GeoDataData(QStringLiteral("routingVisited"), visited));
         QMap<PixmapElement, QPixmap>::iterator iter = d->m_pixmapCache.begin();
         while ( iter != d->m_pixmapCache.end() ) {
              if ( iter.key().index == index ) {

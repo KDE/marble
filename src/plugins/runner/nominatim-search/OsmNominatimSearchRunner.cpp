@@ -125,12 +125,12 @@ void OsmNominatimRunner::handleResult( QNetworkReply* reply )
         OsmPlacemarkData data;
 
         GeoDataExtendedData placemarkData = extractChildren(place);
-        placemarkData.addValue( GeoDataData( "class", key ) );
-        placemarkData.addValue( GeoDataData( "type", value ) );
+        placemarkData.addValue(GeoDataData(QStringLiteral("class"), key));
+        placemarkData.addValue(GeoDataData(QStringLiteral("type"), value));
 
         QString name = place.firstChildElement(value).text();
         QString road = place.firstChildElement("road").text();
-        placemarkData.addValue( GeoDataData( "name", name ) );
+        placemarkData.addValue(GeoDataData(QStringLiteral("name"), name));
 
         QString city = place.firstChildElement("city").text();
         if( city.isEmpty() ) {
