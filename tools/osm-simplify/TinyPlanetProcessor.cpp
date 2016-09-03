@@ -183,11 +183,7 @@ GeoDataDocument *TinyPlanetProcessor::cutToTiles(unsigned int zoomLevel, unsigne
 
 void TinyPlanetProcessor::copyTags(const GeoDataPlacemark &source, GeoDataPlacemark &target) const
 {
-    auto const originalPlacemarkData = source.osmData();
-    OsmPlacemarkData & osmData = target.osmData();
-    for (auto iter=originalPlacemarkData.tagsBegin(), end=originalPlacemarkData.tagsEnd(); iter != end; ++iter) {
-        osmData.addTag(iter.key(), iter.value());
-    }
+    copyTags(source.osmData(), target.osmData());
 }
 
 void TinyPlanetProcessor::copyTags(const OsmPlacemarkData &originalPlacemarkData, OsmPlacemarkData &targetOsmData) const
