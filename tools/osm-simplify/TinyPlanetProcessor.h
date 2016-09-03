@@ -19,7 +19,7 @@ class TinyPlanetProcessor : public PlacemarkFilter
 public:
     explicit TinyPlanetProcessor(GeoDataDocument* document);
 
-    virtual void process();
+    void process() override;
 
     GeoDataDocument* cutToTiles(unsigned int zoomLevel, unsigned int tileX, unsigned int tileY);
 

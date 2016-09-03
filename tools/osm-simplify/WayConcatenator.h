@@ -22,12 +22,10 @@ class WayConcatenator : public TagsFilter
 {
 public:
     WayConcatenator(GeoDataDocument *document, const QStringList &tagsList, bool andFlag = false);
-    virtual void process();
     ~WayConcatenator();
+    void process() override;
+
 private:
-    QMultiHash<qint64, WayChunk*> m_hash;
-    QVector<WayChunk*> m_chunks;
-    QVector<GeoDataPlacemark> m_wayPlacemarks;
     void createWayChunk(GeoDataPlacemark *placemark, qint64 firstId, qint64 lastId);
     WayChunk* getWayChunk(GeoDataPlacemark *placemark, qint64 matchId);
     void concatFirst(GeoDataPlacemark *placemark, WayChunk *chunk);
@@ -36,6 +34,10 @@ private:
     void addRejectedPlacemarks();
     void addWayChunks();
     void modifyDocument();
+
+    QMultiHash<qint64, WayChunk*> m_hash;
+    QVector<WayChunk*> m_chunks;
+    QVector<GeoDataPlacemark> m_wayPlacemarks;
 };
 
 }

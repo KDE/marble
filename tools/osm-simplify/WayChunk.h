@@ -11,11 +11,10 @@
 #ifndef MARBLE_WAYCHUNK_H
 #define MARBLE_WAYCHUNK_H
 
-#include <QList>
-
 #include "GeoDataFeature.h"
 #include "GeoDataLineString.h"
 
+#include <QList>
 
 namespace Marble
 {
@@ -51,7 +50,6 @@ private:
     qint64 m_first;
     qint64 m_last;
     GeoDataFeature::GeoDataVisualCategory  m_visualCategory;
-
 };
 
 }

@@ -17,7 +17,7 @@
 class NodeReducer : public PlacemarkFilter {
 public:
     NodeReducer(GeoDataDocument* document, int zoomLevel);
-    virtual void process();
+    void process() override;
 
 private:
     GeoDataLineString* reduce(GeoDataLineString* lineString);

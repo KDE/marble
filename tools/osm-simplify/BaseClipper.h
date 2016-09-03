@@ -13,13 +13,11 @@
 #ifndef BASECLIPPER_H
 #define BASECLIPPER_H
 
-#include <QPointF>
-#include <QPolygonF>
-
 #include "GeoDataLinearRing.h"
 #include "GeoDataLatLonBox.h"
 
-using namespace Marble;
+#include <QPointF>
+#include <QPolygonF>
 
 class BaseClipper
 {
@@ -34,7 +32,7 @@ public:
     {
         QPolygonF polygon;
         if(!reverseOrder) {
-            foreach (const GeoDataCoordinates& coord, lineString) {
+            foreach (const Marble::GeoDataCoordinates& coord, lineString) {
                 // Need to flip the Y axis(latitude)
                 QPointF point(coord.longitude(), -coord.latitude());
                 polygon.append(point);
@@ -58,13 +56,13 @@ public:
         if(!reverseOrder) {
             foreach (const QPointF& point, polygon) {
                 // Flipping back the Y axis
-                GeoDataCoordinates coord(point.x(), -point.y());
+                Marble::GeoDataCoordinates coord(point.x(), -point.y());
                 lineString.append(coord);
             }
         } else {
             for(int i = polygon.size()-1; i >= 0; --i) {
                 // Need to flip the Y axis(latitude)
-                GeoDataCoordinates coord(polygon.at(i).x(), -polygon.at(i).y());
+                Marble::GeoDataCoordinates coord(polygon.at(i).x(), -polygon.at(i).y());
                 lineString.append(coord);
             }
         }
@@ -72,14 +70,13 @@ public:
         return lineString;
     }
 
-    void initClipRect(const GeoDataLatLonBox& clippingBox, int pointsToAddAtEdges);
+    void initClipRect(const Marble::GeoDataLatLonBox& clippingBox, int pointsToAddAtEdges);
 
     void clipPolyObject ( const QPolygonF & sourcePolygon,
                           QVector<QPolygonF> & clippedPolyObjects,
                           bool isClosed );
 
 private:
-
     int sector( const QPointF & point ) const;
     int borderSector( const QPointF & point ) const;
     bool isCornerPoint (const QPointF & point) const;

@@ -13,9 +13,9 @@
 #define MARBLE_TAGSFILTER_H
 
 #include "PlacemarkFilter.h"
+
 #include <QMap>
 #include <QString>
-
 
 namespace Marble{
 
@@ -26,9 +26,10 @@ class TagsFilter : public PlacemarkFilter
 public:
     //Filters placemarks which have tags in the hash
     TagsFilter(GeoDataDocument* document, const QStringList& tagsList, bool andFlag = false);
-    virtual void process();
+    void process() override;
     QVector<GeoDataPlacemark*>::const_iterator rejectedObjectsBegin() const;
     QVector<GeoDataPlacemark*>::const_iterator rejectedObjectsEnd() const;
+
 private:
     QVector<GeoDataPlacemark*> m_rejectedObjects;
 };

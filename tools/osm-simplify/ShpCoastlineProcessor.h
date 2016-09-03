@@ -18,7 +18,7 @@ class ShpCoastlineProcessor : public PlacemarkFilter
 public:
     explicit ShpCoastlineProcessor(GeoDataDocument* document);
 
-    virtual void process();
+    void process() override;
 
     GeoDataDocument* cutToTiles(unsigned int zoomLevel, unsigned int tileX, unsigned int tileY);
 };

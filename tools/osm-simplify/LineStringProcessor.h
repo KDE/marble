@@ -18,7 +18,7 @@ class LineStringProcessor : public PlacemarkFilter
 public:
     explicit LineStringProcessor(GeoDataDocument* document);
 
-    virtual void process();
+    void process() override;
 
 };
 

@@ -18,6 +18,8 @@
 #include <QDebug>
 #include <QSharedPointer>
 
+using namespace Marble;
+
 class LinkedPoint {
 public:
     explicit LinkedPoint(const QPointF& point, bool isEntering=false, bool isLeaving=false) : m_point(point),
