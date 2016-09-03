@@ -1547,8 +1547,8 @@ QStringList StyleBuilder::renderOrder() const
         paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataFeature::HealthHospital);
         paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataFeature::MilitaryDangerArea);
 
-        paintLayerOrder << "Polygon/Building/frame";
-        paintLayerOrder << "Polygon/Building/roof";
+        paintLayerOrder << QStringLiteral("Polygon/Building/frame");
+        paintLayerOrder << QStringLiteral("Polygon/Building/roof");
 
         Q_ASSERT(QSet<QString>::fromList(paintLayerOrder).size() == paintLayerOrder.size());
     }

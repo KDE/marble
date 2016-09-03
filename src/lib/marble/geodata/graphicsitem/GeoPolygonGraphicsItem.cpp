@@ -42,8 +42,8 @@ GeoPolygonGraphicsItem::GeoPolygonGraphicsItem(const GeoDataFeature *feature, co
         Q_ASSERT(m_buildingHeight > 0.0);
 
         QStringList paintLayers;
-        paintLayers << QString("Polygon/Building/frame");
-        paintLayers << QString("Polygon/Building/roof");
+        paintLayers << QStringLiteral("Polygon/Building/frame")
+                    << QStringLiteral("Polygon/Building/roof");
         setPaintLayers(paintLayers);
     }
     else {
@@ -72,8 +72,8 @@ GeoPolygonGraphicsItem::GeoPolygonGraphicsItem(const GeoDataFeature *feature, co
         Q_ASSERT(m_buildingHeight > 0.0);
 
         QStringList paintLayers;
-        paintLayers << QString("Polygon/Building/frame");
-        paintLayers << QString("Polygon/Building/roof");
+        paintLayers << QStringLiteral("Polygon/Building/frame")
+                    << QStringLiteral("Polygon/Building/roof");
         setPaintLayers(paintLayers);
     }
     else {
