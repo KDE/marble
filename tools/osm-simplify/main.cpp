@@ -236,7 +236,7 @@ int main(int argc, char *argv[])
     } else if(parser.isSet("node-reduce")) {
         qDebug()<<"Entered Node reduce"<<endl;
         qDebug()<<"Finished Processing"<<endl;
-        if(!parser.isSet("zoom-level")){
+        if(!parser.isSet("zoom-level")) {
             qDebug()<<" Zoom level not set"<<endl;
         }
         else{
@@ -248,7 +248,7 @@ int main(int argc, char *argv[])
             }
 
         }
-    } else if(parser.isSet("tags-filter") && parser.isSet("concat-ways")){
+    } else if(parser.isSet("tags-filter") && parser.isSet("concat-ways")) {
 
 
         //Parses the tags given at command line and makes a Hash of key-value pairs

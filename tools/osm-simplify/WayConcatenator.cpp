@@ -104,7 +104,7 @@ void WayConcatenator::process()
 
                 if (chunk != nullptr && otherChunk != nullptr) {
                     // qDebug()<< "Both* Both chunks found, concatenating to it";
-                    if(chunk == otherChunk){
+                    if(chunk == otherChunk) {
                         qDebug()<<"#### Both the chunks are same, directly adding to the list of placemarks";
                         m_wayPlacemarks.append(*placemark);
                     } else {
@@ -133,7 +133,7 @@ void WayConcatenator::process()
 
             }
 
-            // if(flag){
+            // if(flag) {
             // 	qDebug()<<" Concat not possible";
             // 	m_wayPlacemarks.append(*placemark);
             // }
