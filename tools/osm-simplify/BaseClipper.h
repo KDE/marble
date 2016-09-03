@@ -29,12 +29,48 @@ public:
     static qreal tileX2lon( unsigned int x, unsigned int maxTileX );
     static qreal tileY2lat( unsigned int y, unsigned int maxTileY );
 
-    static QPolygonF lineString2Qpolygon(const GeoDataLineString &lineString, bool reverseOrder = false);
-    static QPolygonF linearRing2Qpolygon(const GeoDataLinearRing &linearRing, bool reverseOrder = false);
+    template<class T>
+    static QPolygonF toQPolygon(const T &lineString, bool reverseOrder = false)
+    {
+        QPolygonF polygon;
+        if(!reverseOrder) {
+            foreach (const GeoDataCoordinates& coord, lineString) {
+                // Need to flip the Y axis(latitude)
+                QPointF point(coord.longitude(), -coord.latitude());
+                polygon.append(point);
+            }
+        } else {
+            for(int i = lineString.size()-1; i >= 0; --i) {
+                // Need to flip the Y axis(latitude)
+                QPointF point(lineString.at(i).longitude(), -lineString.at(i).latitude());
+                polygon.append(point);
+            }
+        }
 
-    static GeoDataLineString qPolygon2lineString(const QPolygonF& polygon, bool reverseOrder = false);
-    static GeoDataLinearRing qPolygon2linearRing(const QPolygonF& polygon, bool reverseOrder = false);
+        return polygon;
+    }
 
+    template<class T>
+    static T toLineString(const QPolygonF& polygon, bool reverseOrder = false)
+    {
+        T lineString;
+
+        if(!reverseOrder) {
+            foreach (const QPointF& point, polygon) {
+                // Flipping back the Y axis
+                GeoDataCoordinates coord(point.x(), -point.y());
+                lineString.append(coord);
+            }
+        } else {
+            for(int i = polygon.size()-1; i >= 0; --i) {
+                // Need to flip the Y axis(latitude)
+                GeoDataCoordinates coord(polygon.at(i).x(), -polygon.at(i).y());
+                lineString.append(coord);
+            }
+        }
+
+        return lineString;
+    }
 
     void initClipRect(const GeoDataLatLonBox& clippingBox, int pointsToAddAtEdges);
 

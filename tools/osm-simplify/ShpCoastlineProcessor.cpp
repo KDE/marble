@@ -68,7 +68,7 @@ GeoDataDocument *ShpCoastlineProcessor::cutToTiles(unsigned int zoomLevel, unsig
 
                 QVector<QPolygonF> clippedPolygons;
 
-                QPolygonF outerBoundary = BaseClipper::linearRing2Qpolygon(marblePolygon->outerBoundary());
+                QPolygonF outerBoundary = BaseClipper::toQPolygon(marblePolygon->outerBoundary());
                 qDebug() << "Size before:" << outerBoundary.size();
 
                 qDebug() << "Clipping...";
@@ -80,7 +80,7 @@ GeoDataDocument *ShpCoastlineProcessor::cutToTiles(unsigned int zoomLevel, unsig
                 foreach(const QPolygonF& polygon, clippedPolygons) {
                     qDebug() << polygon.size();
 
-                    GeoDataLinearRing outerBoundary = BaseClipper::qPolygon2linearRing(polygon);
+                    GeoDataLinearRing outerBoundary = BaseClipper::toLineString<GeoDataLinearRing>(polygon);
                     GeoDataPolygon* newMarblePolygon = new GeoDataPolygon();
                     newMarblePolygon->setOuterBoundary(outerBoundary);
 

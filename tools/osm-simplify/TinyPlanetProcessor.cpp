@@ -65,7 +65,7 @@ GeoDataDocument *TinyPlanetProcessor::cutToTiles(unsigned int zoomLevel, unsigne
                 QVector<PolygonPair> newMarblePolygons;
 
                 isClockwise = marblePolygon->outerBoundary().isClockwise();
-                QPolygonF outerBoundaryPolygon = BaseClipper::linearRing2Qpolygon(marblePolygon->outerBoundary(), !isClockwise);
+                QPolygonF outerBoundaryPolygon = BaseClipper::toQPolygon(marblePolygon->outerBoundary(), !isClockwise);
 
                 QVector<QPolygonF> outerBoundaries;
                 clipper.clipPolyObject(outerBoundaryPolygon, outerBoundaries, true);
@@ -77,7 +77,7 @@ GeoDataDocument *TinyPlanetProcessor::cutToTiles(unsigned int zoomLevel, unsigne
 
                     PolygonPair newMarblePolygon = qMakePair(new GeoDataPlacemark(), polygon);
                     GeoDataPolygon* geometry = new GeoDataPolygon();
-                    geometry->setOuterBoundary(BaseClipper::qPolygon2linearRing(polygon, !isClockwise));
+                    geometry->setOuterBoundary(BaseClipper::toLineString<GeoDataLinearRing>(polygon, !isClockwise));
                     newMarblePolygon.first->setGeometry(geometry);
 
                     copyTags(*placemark, *(newMarblePolygon.first));
@@ -93,7 +93,7 @@ GeoDataDocument *TinyPlanetProcessor::cutToTiles(unsigned int zoomLevel, unsigne
                 foreach (const GeoDataLinearRing& innerBoundary, marblePolygon->innerBoundaries()) {
                     ++index;
                     isClockwise  = innerBoundary.isClockwise();
-                    QPolygonF innerBoundaryPolygon = BaseClipper::linearRing2Qpolygon(innerBoundary, !isClockwise);
+                    QPolygonF innerBoundaryPolygon = BaseClipper::toQPolygon(innerBoundary, !isClockwise);
 
                     QVector<QPolygonF> clippedPolygons;
 
@@ -104,7 +104,7 @@ GeoDataDocument *TinyPlanetProcessor::cutToTiles(unsigned int zoomLevel, unsigne
                         foreach (const PolygonPair& newMarblePolygon, newMarblePolygons) {
                             if(!polygon.intersected(newMarblePolygon.second).isEmpty()) {
                                 GeoDataPolygon* geometry = static_cast<GeoDataPolygon*>(newMarblePolygon.first->geometry());
-                                geometry->appendInnerBoundary(BaseClipper::qPolygon2linearRing(polygon, !isClockwise));
+                                geometry->appendInnerBoundary(BaseClipper::toLineString<GeoDataLinearRing>(polygon, !isClockwise));
 
                                 OsmObjectManager::initializeOsmData(newMarblePolygon.first);
 
@@ -132,7 +132,7 @@ GeoDataDocument *TinyPlanetProcessor::cutToTiles(unsigned int zoomLevel, unsigne
 
                 QVector<QPolygonF> clippedPolygons;
 
-                QPolygonF way = BaseClipper::lineString2Qpolygon(*marbleWay);
+                QPolygonF way = BaseClipper::toQPolygon(*marbleWay);
 
                 clipper.clipPolyObject(way, clippedPolygons, false);
 
@@ -142,7 +142,7 @@ GeoDataDocument *TinyPlanetProcessor::cutToTiles(unsigned int zoomLevel, unsigne
 
 //                    qDebug() << polygon.size();
 
-                    GeoDataLineString* newMarbleWay = new GeoDataLineString(BaseClipper::qPolygon2lineString(polygon));
+                    GeoDataLineString* newMarbleWay = new GeoDataLineString(BaseClipper::toLineString<GeoDataLineString>(polygon));
 
                     GeoDataPlacemark* newPlacemark = new GeoDataPlacemark();
                     newPlacemark->setGeometry(newMarbleWay);
@@ -156,7 +156,7 @@ GeoDataDocument *TinyPlanetProcessor::cutToTiles(unsigned int zoomLevel, unsigne
 
                     QVector<QPolygonF> clippedPolygons;
 
-                    QPolygonF closedWay = BaseClipper::linearRing2Qpolygon(*marbleClosedWay);
+                    QPolygonF closedWay = BaseClipper::toQPolygon(*marbleClosedWay);
 
                     clipper.clipPolyObject(closedWay, clippedPolygons, true);
 
@@ -165,7 +165,7 @@ GeoDataDocument *TinyPlanetProcessor::cutToTiles(unsigned int zoomLevel, unsigne
 
 //                        qDebug() << polygon.size();
 
-                        GeoDataLinearRing* newMarbleWay = new GeoDataLinearRing(BaseClipper::qPolygon2linearRing(polygon));
+                        GeoDataLinearRing* newMarbleWay = new GeoDataLinearRing(BaseClipper::toLineString<GeoDataLinearRing>(polygon));
 
                         GeoDataPlacemark* newPlacemark = new GeoDataPlacemark();
                         newPlacemark->setGeometry(newMarbleWay);
