@@ -717,7 +717,9 @@ void ElevationProfileFloatItem::switchToTrackDataSource(int index)
 
 void ElevationProfileFloatItem::switchDataSource(ElevationProfileDataSource* source)
 {
-    disconnect(m_activeDataSource, SIGNAL(dataUpdated(GeoDataLineString,QList<QPointF>)),0,0);
+    if (m_activeDataSource) {
+        disconnect(m_activeDataSource, SIGNAL(dataUpdated(GeoDataLineString,QList<QPointF>)),0,0);
+    }
     m_activeDataSource = source;
     connect(m_activeDataSource, SIGNAL(dataUpdated(GeoDataLineString,QList<QPointF>)), this, SLOT(handleDataUpdate(GeoDataLineString,QList<QPointF>)));
     m_activeDataSource->requestUpdate();
