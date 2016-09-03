@@ -55,16 +55,13 @@ GeoDataDocument *TinyPlanetProcessor::cutToTiles(unsigned int zoomLevel, unsigne
         if(tileBoundary.intersects(placemark->geometry()->latLonAltBox())) {
 
             if( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType) {
-
-                bool isClockwise = true;
-
                 GeoDataPolygon* marblePolygon = static_cast<GeoDataPolygon*>(placemark->geometry());
                 int index = -1;
 
                 using PolygonPair = QPair<GeoDataPlacemark*, QPolygonF>;
                 QVector<PolygonPair> newMarblePolygons;
 
-                isClockwise = marblePolygon->outerBoundary().isClockwise();
+                bool const isClockwise = marblePolygon->outerBoundary().isClockwise();
                 QPolygonF outerBoundaryPolygon = BaseClipper::toQPolygon(marblePolygon->outerBoundary(), !isClockwise);
 
                 QVector<QPolygonF> outerBoundaries;
@@ -92,7 +89,7 @@ GeoDataDocument *TinyPlanetProcessor::cutToTiles(unsigned int zoomLevel, unsigne
 
                 foreach (const GeoDataLinearRing& innerBoundary, marblePolygon->innerBoundaries()) {
                     ++index;
-                    isClockwise  = innerBoundary.isClockwise();
+                    bool const isClockwise = innerBoundary.isClockwise();
                     QPolygonF innerBoundaryPolygon = BaseClipper::toQPolygon(innerBoundary, !isClockwise);
 
                     QVector<QPolygonF> clippedPolygons;
