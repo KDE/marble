@@ -32,17 +32,17 @@ private:
         }
 
         T* reducedLine = new T;
-        QVector<GeoDataCoordinates>::iterator itCoords = lineString->begin();
-        GeoDataCoordinates currentCoords = *itCoords;
-        reducedLine->append(*itCoords);
-        ++itCoords;
-        for (; itCoords != (lineString->end() - 1); ++itCoords) {
-            if (distanceSphere( currentCoords, *itCoords ) >= m_resolution) {
-                currentCoords = *itCoords;
-                reducedLine->append(*itCoords);
+        auto iter = lineString->begin();
+        GeoDataCoordinates currentCoords = *iter;
+        reducedLine->append(*iter);
+        ++iter;
+        for (auto const end = lineString->end() - 1; iter != end; ++iter) {
+            if (distanceSphere( currentCoords, *iter ) >= m_resolution) {
+                currentCoords = *iter;
+                reducedLine->append(*iter);
             }
         }
-        reducedLine->append(*itCoords);
+        reducedLine->append(*iter);
 
         qint64 reducedSize = reducedLine->size();
         m_count += (prevSize - reducedSize);
