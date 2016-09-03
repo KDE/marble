@@ -24,16 +24,12 @@ private:
     template<class T>
     T* reduce(T* lineString)
     {
-        qint64 prevSize = lineString->size();
-
-        T* reducedLine;
+        qint64 const prevSize = lineString->size();
         if (prevSize < 2) {
-            reducedLine = new T(*lineString);
-            return reducedLine;
-        } else {
-            reducedLine = new T;
+            return new T(*lineString);
         }
 
+        T* reducedLine = new T;
         QVector<GeoDataCoordinates>::iterator itCoords = lineString->begin();
         GeoDataCoordinates currentCoords = *itCoords;
         reducedLine->append(*itCoords);
