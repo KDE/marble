@@ -72,9 +72,9 @@ ElevationProfileFloatItem::ElevationProfileFloatItem( const MarbleModel *marbleM
     setPadding( 1 );
 
     m_markerDocument.setDocumentRole( UnknownDocument );
-    m_markerDocument.setName( "Elevation Profile" );
+    m_markerDocument.setName(QStringLiteral("Elevation Profile"));
 
-    m_markerPlacemark->setName( "Elevation Marker" );
+    m_markerPlacemark->setName(QStringLiteral("Elevation Marker"));
     m_markerPlacemark->setVisible( false );
     m_markerDocument.append( m_markerPlacemark );
 

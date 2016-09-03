@@ -157,11 +157,11 @@ QVector<GeoDataPlacemark*> RoutinoRunnerPrivate::parseRoutinoInstructions( const
         GeoDataPlacemark* placemark = new GeoDataPlacemark( directions[i].instructionText() );
         GeoDataExtendedData extendedData;
         GeoDataData turnType;
-        turnType.setName( "turnType" );
+        turnType.setName(QStringLiteral("turnType"));
         turnType.setValue( qVariantFromValue<int>( int( directions[i].turnType() ) ) );
         extendedData.addValue( turnType );
         GeoDataData roadName;
-        roadName.setName( "roadName" );
+        roadName.setName(QStringLiteral("roadName"));
         roadName.setValue( directions[i].roadName() );
         extendedData.addValue( roadName );
         placemark->setExtendedData( extendedData );

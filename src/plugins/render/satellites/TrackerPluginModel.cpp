@@ -85,7 +85,7 @@ TrackerPluginModel::TrackerPluginModel( GeoDataTreeModel *treeModel )
     : d( new TrackerPluginModelPrivate( this, treeModel ) )
 {
     d->m_document->setDocumentRole( TrackingDocument );
-    d->m_document->setName("Satellites");
+    d->m_document->setName(QStringLiteral("Satellites"));
     if( d->m_enabled ) {
         d->m_treeModel->addDocument( d->m_document );
     }

@@ -139,10 +139,10 @@ PositionTracking::PositionTracking( GeoDataTreeModel *model )
        d( new PositionTrackingPrivate( model, this ) )
 {
     d->m_document.setDocumentRole( TrackingDocument );
-    d->m_document.setName("Position Tracking");
+    d->m_document.setName(QStringLiteral("Position Tracking"));
 
     // First point is current position
-    d->m_currentPositionPlacemark->setName("Current Position");
+    d->m_currentPositionPlacemark->setName(QStringLiteral("Current Position"));
     d->m_currentPositionPlacemark->setVisible(false);
     d->m_document.append( d->m_currentPositionPlacemark );
 
@@ -151,7 +151,7 @@ PositionTracking::PositionTracking( GeoDataTreeModel *model )
     d->m_trackSegments->append(d->m_currentTrack);
 
     d->m_currentTrackPlacemark->setGeometry(d->m_trackSegments);
-    d->m_currentTrackPlacemark->setName("Current Track");
+    d->m_currentTrackPlacemark->setName(QStringLiteral("Current Track"));
 
     GeoDataStyle::Ptr style(new GeoDataStyle);
     GeoDataLineStyle lineStyle;
@@ -343,7 +343,7 @@ void PositionTracking::readSettings()
     d->m_document.remove( 1 );
     delete d->m_currentTrackPlacemark;
     d->m_currentTrackPlacemark = track;
-    d->m_currentTrackPlacemark->setName("Current Track");
+    d->m_currentTrackPlacemark->setName(QStringLiteral("Current Track"));
     d->m_document.append( d->m_currentTrackPlacemark );
     d->m_currentTrackPlacemark->setStyleUrl( d->m_currentTrackPlacemark->styleUrl() );
 

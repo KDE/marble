@@ -136,11 +136,11 @@ QVector<GeoDataPlacemark*> GosmoreRunnerPrivate::parseGosmoreInstructions( const
         GeoDataPlacemark* placemark = new GeoDataPlacemark( directions[i].instructionText() );
         GeoDataExtendedData extendedData;
         GeoDataData turnType;
-        turnType.setName( "turnType" );
+        turnType.setName(QStringLiteral("turnType"));
         turnType.setValue( qVariantFromValue<int>( int( directions[i].turnType() ) ) );
         extendedData.addValue( turnType );
         GeoDataData roadName;
-        roadName.setName( "roadName" );
+        roadName.setName(QStringLiteral("roadName"));
         roadName.setValue( directions[i].roadName() );
         extendedData.addValue( roadName );
         placemark->setExtendedData( extendedData );
@@ -167,11 +167,11 @@ GeoDataDocument* GosmoreRunnerPrivate::createDocument( GeoDataLineString* routeW
 
     GeoDataDocument* result = new GeoDataDocument();
     GeoDataPlacemark* routePlacemark = new GeoDataPlacemark;
-    routePlacemark->setName( "Route" );
+    routePlacemark->setName(QStringLiteral("Route"));
     routePlacemark->setGeometry( routeWaypoints );
     result->append( routePlacemark );
 
-    QString name = "%1 %2 (Gosmore)";
+    QString name = QStringLiteral("%1 %2 (Gosmore)");
     QString unit = QLatin1String( "m" );
     qreal length = routeWaypoints->length( EARTH_RADIUS );
     if (length >= 1000) {

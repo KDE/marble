@@ -147,9 +147,9 @@ GeoDataDocument *CycleStreetsRunner::parse( const QByteArray &content ) const
         return 0;
     }
     GeoDataDocument *result = new GeoDataDocument();
-    result->setName( "CycleStreets" );
+    result->setName(QStringLiteral("CycleStreets"));
     GeoDataPlacemark *routePlacemark = new GeoDataPlacemark;
-    routePlacemark->setName( "Route" );
+    routePlacemark->setName(QStringLiteral("Route"));
 
     GeoDataLineString *routeWaypoints = new GeoDataLineString;
     QDomNodeList features = xml.elementsByTagName(QStringLiteral("gml:featureMember"));
@@ -211,7 +211,7 @@ GeoDataDocument *CycleStreetsRunner::parse( const QByteArray &content ) const
 
         GeoDataExtendedData extendedData;
         GeoDataData turnType;
-        turnType.setName( "turnType" );
+        turnType.setName(QStringLiteral("turnType"));
         turnType.setValue( maneuverType( maneuver ) );
         extendedData.addValue( turnType );
 

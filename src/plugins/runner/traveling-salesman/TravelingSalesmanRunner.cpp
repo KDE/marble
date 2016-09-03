@@ -122,7 +122,7 @@ GeoDataDocument* TravelingSalesmanRunnerPrivate::createDocument( GeoDataLineStri
 
     GeoDataDocument* result = new GeoDataDocument();
     GeoDataPlacemark* routePlacemark = new GeoDataPlacemark;
-    routePlacemark->setName( "Route" );
+    routePlacemark->setName(QStringLiteral("Route"));
     routePlacemark->setGeometry( routeWaypoints );
     result->append( routePlacemark );
 

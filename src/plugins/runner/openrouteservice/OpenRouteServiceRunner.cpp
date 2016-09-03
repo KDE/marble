@@ -205,7 +205,7 @@ GeoDataDocument* OpenRouteServiceRunner::parse( const QByteArray &content ) cons
     QDomElement root = xml.documentElement();
 
     GeoDataDocument* result = new GeoDataDocument();
-    result->setName( "OpenRouteService" );
+    result->setName(QStringLiteral("OpenRouteService"));
 
     QDomNodeList errors = root.elementsByTagName(QStringLiteral("xls:Error"));
     if ( errors.size() > 0 ) {
@@ -241,7 +241,7 @@ GeoDataDocument* OpenRouteServiceRunner::parse( const QByteArray &content ) cons
     }
 
     GeoDataPlacemark* routePlacemark = new GeoDataPlacemark;
-    routePlacemark->setName( "Route" );
+    routePlacemark->setName(QStringLiteral("Route"));
     QTime time;
     QDomNodeList summary = root.elementsByTagName(QStringLiteral("xls:RouteSummary"));
     if ( summary.size() > 0 ) {
@@ -325,14 +325,14 @@ GeoDataDocument* OpenRouteServiceRunner::parse( const QByteArray &content ) cons
                     QString const text = textNodes.item( 0 ).toElement().text().remove(QRegExp("<[^>]*>"));
                     GeoDataExtendedData extendedData;
                     GeoDataData turnTypeData;
-                    turnTypeData.setName( "turnType" );
+                    turnTypeData.setName(QStringLiteral("turnType"));
                     QString road;
                     RoutingInstruction::TurnType turnType = parseTurnType( text, &road );
                     turnTypeData.setValue( turnType );
                     extendedData.addValue( turnTypeData );
                     if ( !road.isEmpty() ) {
                         GeoDataData roadName;
-                        roadName.setName( "roadName" );
+                        roadName.setName(QStringLiteral("roadName"));
                         roadName.setValue( road );
                         extendedData.addValue( roadName );
                     }

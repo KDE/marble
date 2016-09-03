@@ -209,9 +209,9 @@ GeoDataDocument* MapQuestRunner::parse( const QByteArray &content ) const
     QDomElement root = xml.documentElement();
 
     GeoDataDocument* result = new GeoDataDocument();
-    result->setName( "MapQuest" );
+    result->setName(QStringLiteral("MapQuest"));
     GeoDataPlacemark* routePlacemark = new GeoDataPlacemark;
-    routePlacemark->setName( "Route" );
+    routePlacemark->setName(QStringLiteral("Route"));
 
     GeoDataLineString* routeWaypoints = new GeoDataLineString;
     QDomNodeList shapePoints = root.elementsByTagName(QStringLiteral("shapePoints"));
@@ -264,12 +264,12 @@ GeoDataDocument* MapQuestRunner::parse( const QByteArray &content ) const
 
             GeoDataExtendedData extendedData;
             GeoDataData turnType;
-            turnType.setName( "turnType" );
+            turnType.setName(QStringLiteral("turnType"));
             turnType.setValue( maneuverType( maneuver.at( 0 ).toElement().text().toInt() ) );
             extendedData.addValue( turnType );
             if ( streets.size() == 1 ) {
                 GeoDataData roadName;
-                roadName.setName( "roadName" );
+                roadName.setName(QStringLiteral("roadName"));
                 roadName.setValue( streets.at( 0 ).toElement().text() );
                 extendedData.addValue( roadName );
             }

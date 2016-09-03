@@ -173,11 +173,11 @@ int MonavRunnerPrivate::retrieveRoute( const Marble::RouteRequest* route, QVecto
             GeoDataPlacemark* placemark = new GeoDataPlacemark( directions[i].instructionText() );
             GeoDataExtendedData extendedData;
             GeoDataData turnType;
-            turnType.setName( "turnType" );
+            turnType.setName(QStringLiteral("turnType"));
             turnType.setValue( qVariantFromValue<int>( int( directions[i].turnType() ) ) );
             extendedData.addValue( turnType );
             GeoDataData roadName;
-            roadName.setName( "roadName" );
+            roadName.setName(QStringLiteral("roadName"));
             roadName.setValue( directions[i].roadName() );
             extendedData.addValue( roadName );
             placemark->setExtendedData( extendedData );
@@ -206,7 +206,7 @@ GeoDataDocument* MonavRunnerPrivate::createDocument( Marble::GeoDataLineString* 
 
     GeoDataDocument* result = new GeoDataDocument;
     GeoDataPlacemark* routePlacemark = new GeoDataPlacemark;
-    routePlacemark->setName( "Route" );
+    routePlacemark->setName(QStringLiteral("Route"));
     routePlacemark->setGeometry( geometry );
     routePlacemark->setExtendedData( data );
     result->append( routePlacemark );

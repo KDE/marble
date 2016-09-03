@@ -131,7 +131,7 @@ RoutingManagerPrivate::RoutingManagerPrivate( MarbleModel *model, RoutingManager
 GeoDataFolder* RoutingManagerPrivate::routeRequest() const
 {
     GeoDataFolder* result = new GeoDataFolder;
-    result->setName( "Route Request" );
+    result->setName(QStringLiteral("Route Request"));
     for ( int i=0; i<m_routeRequest.size(); ++i ) {
         GeoDataPlacemark* placemark = new GeoDataPlacemark( m_routeRequest[i] );
         result->append( placemark );
@@ -172,7 +172,7 @@ void RoutingManagerPrivate::saveRoute(const QString &filename)
     }
 
     GeoDataDocument container;
-    container.setName( "Route" );
+    container.setName(QStringLiteral("Route"));
     GeoDataFolder* request = routeRequest();
     if ( request ) {
         container.append( request );
@@ -464,17 +464,17 @@ RoutingProfile RoutingManager::defaultProfile( RoutingProfile::TransportType tra
     switch ( transportType ) {
     case RoutingProfile::Motorcar:
         tpl = RoutingProfilesModel::CarFastestTemplate;
-        profile.setName( "Motorcar" );
+        profile.setName(QStringLiteral("Motorcar"));
         profile.setTransportType( RoutingProfile::Motorcar );
         break;
     case RoutingProfile::Bicycle:
         tpl = RoutingProfilesModel::BicycleTemplate;
-        profile.setName( "Bicycle" );
+        profile.setName(QStringLiteral("Bicycle"));
         profile.setTransportType( RoutingProfile::Bicycle );
         break;
     case RoutingProfile::Pedestrian:
         tpl = RoutingProfilesModel::PedestrianTemplate;
-        profile.setName( "Pedestrian" );
+        profile.setName(QStringLiteral("Pedestrian"));
         profile.setTransportType( RoutingProfile::Pedestrian );
         break;
     }

@@ -58,7 +58,7 @@ Planet PlanetFactory::construct( const QString &id )
         planet.setTheta_0( 13.5964*DEG2RAD );
         planet.setTheta_1( 6.1385025*DEG2RAD );
         planet.setRadius( 2440000.0 );
-        planet.setName( "Mercury" );
+        planet.setName(QStringLiteral("Mercury"));
         planet.setHasAtmosphere( false );
     } else if (id == QLatin1String("venus")) {
         planet.setM_0( 50.4161*DEG2RAD );
@@ -74,7 +74,7 @@ Planet PlanetFactory::construct( const QString &id )
         planet.setTheta_0( 215.2995*DEG2RAD );
         planet.setTheta_1( -1.4813688*DEG2RAD );
         planet.setRadius( 6051800.0 );
-        planet.setName( "Venus" );
+        planet.setName(QStringLiteral("Venus"));
         planet.setHasAtmosphere( true );
         planet.setAtmosphereColor( Oxygen::sunYellow4 );
     } else if (id == QLatin1String("earth")) {
@@ -91,7 +91,7 @@ Planet PlanetFactory::construct( const QString &id )
         planet.setTheta_0( 280.1600*DEG2RAD );
         planet.setTheta_1( 360.9856235*DEG2RAD );
         planet.setRadius( 6378137.0 );
-        planet.setName( "Earth" );
+        planet.setName(QStringLiteral("Earth"));
         planet.setHasAtmosphere( true );
         planet.setAtmosphereColor( Qt::white );
     } else if (id == QLatin1String("mars")) {
@@ -108,7 +108,7 @@ Planet PlanetFactory::construct( const QString &id )
         planet.setTheta_0( 313.4803*DEG2RAD );
         planet.setTheta_1( 350.89198226*DEG2RAD );
         planet.setRadius( 3397000.0 );
-        planet.setName( "Mars" );
+        planet.setName(QStringLiteral("Mars"));
         planet.setHasAtmosphere( true );
         planet.setAtmosphereColor( Oxygen::hotOrange2 );
     } else if (id == QLatin1String("jupiter")) {
@@ -125,7 +125,7 @@ Planet PlanetFactory::construct( const QString &id )
         planet.setTheta_0( 146.0727*DEG2RAD );
         planet.setTheta_1( 870.5366420*DEG2RAD );
         planet.setRadius( 71492000.0 );
-        planet.setName( "Jupiter" );
+        planet.setName(QStringLiteral("Jupiter"));
         planet.setHasAtmosphere( true );
         planet.setAtmosphereColor( Oxygen::sunYellow2 );
     } else if (id == QLatin1String("saturn")) {
@@ -142,7 +142,7 @@ Planet PlanetFactory::construct( const QString &id )
         planet.setTheta_0( 174.3479*DEG2RAD );
         planet.setTheta_1( 810.7939024*DEG2RAD );
         planet.setRadius( 60268000.0 );
-        planet.setName( "Saturn" );
+        planet.setName(QStringLiteral("Saturn"));
         planet.setHasAtmosphere( true );
         planet.setAtmosphereColor( Oxygen::sunYellow2 );
     } else if (id == QLatin1String("uranus")) {
@@ -159,7 +159,7 @@ Planet PlanetFactory::construct( const QString &id )
         planet.setTheta_0( 17.9705*DEG2RAD );
         planet.setTheta_1( -501.1600928*DEG2RAD );
         planet.setRadius( 25559000.0 );
-        planet.setName( "Uranus" );
+        planet.setName(QStringLiteral("Uranus"));
         planet.setHasAtmosphere( true );
         planet.setAtmosphereColor( Oxygen::seaBlue4 );
     } else if (id == QLatin1String("neptune")) {
@@ -176,7 +176,7 @@ Planet PlanetFactory::construct( const QString &id )
         planet.setTheta_0( 52.3996*DEG2RAD );
         planet.setTheta_1( 536.3128492*DEG2RAD );
         planet.setRadius( 24766000.0 );
-        planet.setName( "Neptune" );
+        planet.setName(QStringLiteral("Neptune"));
         planet.setHasAtmosphere( true );
         planet.setAtmosphereColor( Oxygen::skyBlue2 );
     } else if (id == QLatin1String("pluto")) {
@@ -194,30 +194,30 @@ Planet PlanetFactory::construct( const QString &id )
         planet.setTheta_0( 56.3183*DEG2RAD );
         planet.setTheta_1( -56.3623195*DEG2RAD );
         planet.setRadius( 1151000.0 );
-        planet.setName( "Pluto" );
+        planet.setName(QStringLiteral("Pluto"));
         planet.setHasAtmosphere( false );
     } else if (id == QLatin1String("sun")) {
         mDebug() << "WARNING: Creating Planet instance" << id << "with invalid orbital elements";
         planet.setRadius( 695000000.0 );
         //FIXME: fill in with valid data
-        planet.setName( "Sun" );
+        planet.setName(QStringLiteral("Sun"));
         planet.setHasAtmosphere( true );
         planet.setAtmosphereColor( Qt::white );
     } else if (id == QLatin1String("moon")) {
         mDebug() << "WARNING: Creating Planet instance" << id << "with invalid orbital elements";
         planet.setRadius( 1738000.0 );
         //FIXME: fill in with valid data
-        planet.setName( "Moon" );
+        planet.setName(QStringLiteral("Moon"));
         planet.setHasAtmosphere( false );
     } else if (id == QLatin1String("sky")) {
         mDebug() << "WARNING: Creating Planet instance" << id << "with invalid orbital elements";
         planet.setRadius( 10000000.0 );
-        planet.setName( "Sky" );
+        planet.setName(QStringLiteral("Sky"));
         planet.setHasAtmosphere( false );
     } else {
         mDebug() << "WARNING: Creating Planet instance" << id << "with invalid orbital elements";
         planet.setRadius( 10000000.0 );
-        planet.setName( "Unknown" );
+        planet.setName(QStringLiteral("Unknown"));
         planet.setHasAtmosphere( false );
     }
 

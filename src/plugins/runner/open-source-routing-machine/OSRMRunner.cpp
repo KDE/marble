@@ -206,9 +206,9 @@ GeoDataDocument *OSRMRunner::parse( const QByteArray &input ) const
     GeoDataLineString* routeWaypoints = 0;
     if ( data.property( "route_geometry" ).isString() ) {
         result = new GeoDataDocument();
-        result->setName( "Open Source Routing Machine" );
+        result->setName(QStringLiteral("Open Source Routing Machine"));
         GeoDataPlacemark* routePlacemark = new GeoDataPlacemark;
-        routePlacemark->setName( "Route" );
+        routePlacemark->setName(QStringLiteral("Route"));
         routeWaypoints = decodePolyline( data.property( "route_geometry" ).toString() );
         routePlacemark->setGeometry( routeWaypoints );
 
@@ -248,13 +248,13 @@ GeoDataDocument *OSRMRunner::parse( const QByteArray &input ) const
                     lastWaypointIndex = waypointIndex;
                     GeoDataExtendedData extendedData;
                     GeoDataData turnTypeData;
-                    turnTypeData.setName( "turnType" );
+                    turnTypeData.setName(QStringLiteral("turnType"));
                     RoutingInstruction::TurnType turnType = parseTurnType( text );
                     turnTypeData.setValue( turnType );
                     extendedData.addValue( turnTypeData );
                     if (!road.isEmpty()) {
                         GeoDataData roadName;
-                        roadName.setName( "roadName" );
+                        roadName.setName(QStringLiteral("roadName"));
                         roadName.setValue( road );
                         extendedData.addValue( roadName );
                     }

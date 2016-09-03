@@ -776,10 +776,10 @@ void TourWidgetPrivate::createTour()
     if ( overrideModifications() ) {
         GeoDataDocument *document = new GeoDataDocument();
         document->setDocumentRole( UserDocument );
-        document->setName( "New Tour" );
+        document->setName(QStringLiteral("New Tour"));
         document->setId(QStringLiteral("new_tour"));
         GeoDataTour *tour = new GeoDataTour();
-        tour->setName( "New Tour" );
+        tour->setName(QStringLiteral("New Tour"));
         GeoDataPlaylist *playlist = new GeoDataPlaylist;
         tour->setPlaylist( playlist );
         document->append( static_cast<GeoDataFeature*>( tour ) );
