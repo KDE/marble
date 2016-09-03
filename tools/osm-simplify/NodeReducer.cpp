@@ -79,6 +79,9 @@ GeoDataLineString* NodeReducer::reduce(GeoDataLineString* lineString){
   		return reducedLine;
   	}
     reducedLine = new GeoDataLinearRing;
+  } else {
+      Q_ASSERT(false && "Unexpected GeoDataLineString subtype");
+      return;
   }
 
 
