@@ -40,7 +40,7 @@ OsmRelationEditorDialog::OsmRelationEditorDialog( OsmPlacemarkData *relationData
     QHBoxLayout *nameLayout = new QHBoxLayout();
     QLabel *nameLabel = new QLabel( tr( "Name" ), this );
     m_nameLineEdit = new QLineEdit( this );
-    m_nameLineEdit->setText( relationData->tagValue( "name" ) );
+    m_nameLineEdit->setText(relationData->tagValue(QStringLiteral("name")));
     nameLayout->addWidget( nameLabel );
     nameLayout->addWidget( m_nameLineEdit );
     layout->addLayout( nameLayout );
@@ -87,7 +87,7 @@ void OsmRelationEditorDialog::checkFields()
                               tr( "No name specified" ),
                               tr( "Please specify a name for this relation." ) );
     }
-    else if ( !m_dummyPlacemark->osmData().containsTagKey( "type" ) ) {
+    else if (!m_dummyPlacemark->osmData().containsTagKey(QStringLiteral("type"))) {
         QMessageBox::warning( this,
                               tr( "No type tag specified" ),
                               tr( "Please add a type tag for this relation." ) );

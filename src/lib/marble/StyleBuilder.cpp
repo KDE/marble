@@ -1245,7 +1245,7 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
         GeoDataPolyStyle polyStyle = style->polyStyle();
         GeoDataLineStyle lineStyle = style->lineStyle();
         if (visualCategory == GeoDataFeature::NaturalWater) {
-            if( osmData.containsTag("salt","yes") ){
+            if (osmData.containsTag(QStringLiteral("salt"), QStringLiteral("yes"))) {
                 polyStyle.setColor("#ffff80");
                 lineStyle.setPenStyle(Qt::DashLine);
                 lineStyle.setWidth(2);
@@ -1253,8 +1253,8 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
             }
         }
         else if (visualCategory == GeoDataFeature::Bathymetry) {
-            if (osmData.containsTagKey("ele")) {
-                QString elevation = osmData.tagValue("ele");
+            if (osmData.containsTagKey(QStringLiteral("ele"))) {
+                QString elevation = osmData.tagValue(QStringLiteral("ele"));
                 if (elevation == QLatin1String("4000")) {
                     polyStyle.setColor("#a5c9c9");
                     lineStyle.setColor("#a5c9c9");
@@ -1263,13 +1263,13 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
             }
         }
         else if (visualCategory == GeoDataFeature::AmenityGraveyard || visualCategory == GeoDataFeature::LanduseCemetery) {
-            if( osmData.containsTag("religion","jewish") ){
+            if (osmData.containsTag(QStringLiteral("religion"), QStringLiteral("jewish"))) {
                 polyStyle.setTexturePath(MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_jewish.png"));
                 adjustStyle = true;
-            } else if( osmData.containsTag("religion","christian") ){
+            } else if (osmData.containsTag(QStringLiteral("religion"), QStringLiteral("christian"))) {
                 polyStyle.setTexturePath(MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_christian.png"));
                 adjustStyle = true;
-            } else if( osmData.containsTag("religion","INT-generic") ){
+            } else if (osmData.containsTag(QStringLiteral("religion"), QStringLiteral("INT-generic"))) {
                 polyStyle.setTexturePath(MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_generic.png"));
                 adjustStyle = true;
             }
@@ -1300,10 +1300,10 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
         lineStyle.setCosmeticOutline(true);
 
         if(visualCategory == GeoDataFeature::AdminLevel2){
-            if (osmData.containsTag("maritime", "yes") ) {
+            if (osmData.containsTag(QStringLiteral("maritime"), QStringLiteral("yes"))) {
                 lineStyle.setColor("#88b3bf");
                 polyStyle.setColor("#88b3bf");
-                if( osmData.containsTag("marble:disputed", "yes") ){
+                if (osmData.containsTag(QStringLiteral("marble:disputed"), QStringLiteral("yes"))) {
                     lineStyle.setPenStyle( Qt::DashLine );
                 }
             }
@@ -1321,13 +1321,14 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
                 lineStyle.setPhysicalWidth(0.0);
                 lineStyle.setWidth(4.0);
             } else {
-                if (osmData.containsTagKey("width")) {
-                    QString const widthValue = osmData.tagValue("width").remove(QStringLiteral(" meters")).remove(QStringLiteral(" m"));
+                if (osmData.containsTagKey(QStringLiteral("width"))) {
+                    QString const widthValue = osmData.tagValue(QStringLiteral("width")).remove(QStringLiteral(" meters")).remove(QStringLiteral(" m"));
                     bool ok;
                     float const width = widthValue.toFloat(&ok);
                     lineStyle.setPhysicalWidth(ok ? qBound(0.1f, width, 200.0f) : 0.0f);
                 } else {
-                    bool const isOneWay = osmData.containsTag("oneway", "yes") || osmData.containsTag("oneway", "-1");
+                    bool const isOneWay = osmData.containsTag(QStringLiteral("oneway"), QStringLiteral("yes")) ||
+                                          osmData.containsTag(QStringLiteral("oneway"), QStringLiteral("-1"));
                     int const lanes = isOneWay ? 1 : 2; // also for motorway which implicitly is one way, but has two lanes and each direction has its own highway
                     double const laneWidth = 3.0;
                     double const margins = visualCategory == GeoDataFeature::HighwayMotorway ? 2.0 : (isOneWay ? 1.0 : 0.0);
@@ -1336,7 +1337,7 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
                 }
             }
 
-            QString const accessValue = osmData.tagValue("access");
+            QString const accessValue = osmData.tagValue(QStringLiteral("access"));
             if (accessValue == QLatin1String("private") ||
                 accessValue == QLatin1String("no") ||
                 accessValue == QLatin1String("agricultural") ||
@@ -1367,7 +1368,7 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
                 lineStyle.setWidth(2);
                 lineStyle.setPhysicalWidth(0.0);
             } else {
-                QString const widthValue = osmData.tagValue("width").remove(QStringLiteral(" meters")).remove(QStringLiteral(" m"));
+                QString const widthValue = osmData.tagValue(QStringLiteral("width")).remove(QStringLiteral(" meters")).remove(QStringLiteral(" m"));
                 bool ok;
                 float const width = widthValue.toFloat(&ok);
                 lineStyle.setPhysicalWidth(ok ? qBound(0.1f, width, 200.0f) : 0.0f);
@@ -1389,8 +1390,8 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
         GeoDataLineStyle lineStyle = style->lineStyle();
         bool adjustStyle = false;
         if (visualCategory == GeoDataFeature::Bathymetry) {
-            if (osmData.containsTagKey("ele")) {
-                QString elevation = osmData.tagValue("ele");
+            if (osmData.containsTagKey(QStringLiteral("ele"))) {
+                QString elevation = osmData.tagValue(QStringLiteral("ele"));
                 if (elevation == QLatin1String("4000")) {
                     polyStyle.setColor("#a5c9c9");
                     lineStyle.setColor("#a5c9c9");
@@ -1937,16 +1938,16 @@ QStringList StyleBuilder::buildingValues()
 
 GeoDataFeature::GeoDataVisualCategory StyleBuilder::determineVisualCategory(const OsmPlacemarkData &osmData)
 {
-    if (osmData.containsTagKey("area:highway") ||              // Not supported yet
+    if (osmData.containsTagKey(QStringLiteral("area:highway")) ||              // Not supported yet
             osmData.containsTag("boundary", "protected_area") ||   // Not relevant for the default map
             osmData.containsTag("boundary", "postal_code") ||
             osmData.containsTag("boundary", "aerial_views") ||     // Created by OSM editor(s) application for digitalization
-            osmData.containsTagKey("closed:highway") ||
-            osmData.containsTagKey("abandoned:highway") ||
-            osmData.containsTagKey("abandoned:natural") ||
-            osmData.containsTagKey("abandoned:building") ||
-            osmData.containsTagKey("abandoned:leisure") ||
-            osmData.containsTagKey("disused:highway") ||
+            osmData.containsTagKey(QStringLiteral("closed:highway")) ||
+            osmData.containsTagKey(QStringLiteral("abandoned:highway")) ||
+            osmData.containsTagKey(QStringLiteral("abandoned:natural")) ||
+            osmData.containsTagKey(QStringLiteral("abandoned:building")) ||
+            osmData.containsTagKey(QStringLiteral("abandoned:leisure")) ||
+            osmData.containsTagKey(QStringLiteral("disused:highway")) ||
             osmData.containsTag("highway", "razed")) {
         return GeoDataFeature::None;
     }
@@ -1955,7 +1956,8 @@ GeoDataFeature::GeoDataVisualCategory StyleBuilder::determineVisualCategory(cons
         return GeoDataFeature::None;
     }
 
-    if (osmData.containsTagKey("building") && buildingValues().contains(osmData.tagValue("building")) ) {
+    if (osmData.containsTagKey(QStringLiteral("building")) &&
+        buildingValues().contains(osmData.tagValue(QStringLiteral("building"))) ) {
         return GeoDataFeature::Building;
     }
 

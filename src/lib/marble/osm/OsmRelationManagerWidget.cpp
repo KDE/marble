@@ -80,8 +80,8 @@ void OsmRelationManagerWidget::addRelation( QAction *relationAction )
         delete relationEditor;
 
         QTreeWidgetItem *newRelationItem = new QTreeWidgetItem();
-        newRelationItem->setText( Column::Name, relationData.tagValue( "name" ) );
-        newRelationItem->setText( Column::Type, relationData.tagValue( "type" ) );
+        newRelationItem->setText(Column::Name, relationData.tagValue(QStringLiteral("name")));
+        newRelationItem->setText(Column::Type, relationData.tagValue(QStringLiteral("type")));
         newRelationItem->setData( Column::Name, Qt::UserRole, relationData.id() );
         d->m_currentRelations->addTopLevelItem( newRelationItem );
 
@@ -96,8 +96,8 @@ void OsmRelationManagerWidget::addRelation( QAction *relationAction )
         qint64 id = relationAction->data().toLongLong();
         OsmPlacemarkData relationData = d->m_allRelations->value( id );
         QTreeWidgetItem *newRelationItem = new QTreeWidgetItem();
-        newRelationItem->setText( Column::Name, relationData.tagValue( "name" ) );
-        newRelationItem->setText( Column::Type, relationData.tagValue( "type" ) );
+        newRelationItem->setText(Column::Name, relationData.tagValue(QStringLiteral("name")));
+        newRelationItem->setText(Column::Type, relationData.tagValue(QStringLiteral("type")));
         newRelationItem->setData( Column::Name, Qt::UserRole, relationData.id() );
         d->m_currentRelations->addTopLevelItem( newRelationItem );
 

@@ -60,8 +60,8 @@ void OsmRelationManagerWidgetPrivate::populateRelationsList()
             const OsmPlacemarkData &relationData = m_allRelations->value( it.key() );
 
             QTreeWidgetItem *newItem = new QTreeWidgetItem();
-            QString name = relationData.tagValue( "name" );
-            QString type = relationData.tagValue( "type" );
+            QString name = relationData.tagValue(QStringLiteral("name"));
+            QString type = relationData.tagValue(QStringLiteral("type"));
             QString role = it.value();
             newItem->setText( Column::Name, name );
             newItem->setText( Column::Type, type );

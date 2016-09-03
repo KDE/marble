@@ -99,8 +99,8 @@ int GeoPolygonGraphicsItem::extractBathymetryElevation(const GeoDataFeature *fea
     if (feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
         const GeoDataPlacemark *placemark = static_cast<const GeoDataPlacemark *>(feature);
 
-        if (placemark->osmData().containsTagKey("ele")) {
-            elevation = placemark->osmData().tagValue("ele").toInt();
+        if (placemark->osmData().containsTagKey(QStringLiteral("ele"))) {
+            elevation = placemark->osmData().tagValue(QStringLiteral("ele")).toInt();
         }
     }
 
@@ -253,17 +253,17 @@ double GeoPolygonGraphicsItem::extractBuildingHeight(const GeoDataFeature *featu
     if (feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
         const GeoDataPlacemark *placemark = static_cast<const GeoDataPlacemark *>(feature);
 
-        if (placemark->osmData().containsTagKey("height")) {
+        if (placemark->osmData().containsTagKey(QStringLiteral("height"))) {
             /** @todo Also parse non-SI units, see https://wiki.openstreetmap.org/wiki/Key:height#Height_of_buildings */
-            QString const heightValue = placemark->osmData().tagValue("height").remove(QStringLiteral(" meters")).remove(QStringLiteral(" m"));
+            QString const heightValue = placemark->osmData().tagValue(QStringLiteral("height")).remove(QStringLiteral(" meters")).remove(QStringLiteral(" m"));
             bool extracted = false;
             double extractedHeight = heightValue.toDouble(&extracted);
             if (extracted) {
                 height = extractedHeight;
             }
-        } else if (placemark->osmData().containsTagKey("building:levels")) {
-            int const levels = placemark->osmData().tagValue("building:levels").toInt();
-            int const skipLevels = placemark->osmData().tagValue("building:min_level").toInt();
+        } else if (placemark->osmData().containsTagKey(QStringLiteral("building:levels"))) {
+            int const levels = placemark->osmData().tagValue(QStringLiteral("building:levels")).toInt();
+            int const skipLevels = placemark->osmData().tagValue(QStringLiteral("building:min_level")).toInt();
             /** @todo Is 35 as an upper bound for the number of levels sane? */
             height = 3.0 * qBound(1, 1+levels-skipLevels, 35);
         }
@@ -279,10 +279,10 @@ QString GeoPolygonGraphicsItem::extractBuildingLabel(const GeoDataFeature *featu
 
         if (!placemark->name().isEmpty()) {
             return placemark->name();
-        } else if (placemark->osmData().containsTagKey("addr:housename")) {
-            return placemark->osmData().tagValue("addr:housename");
-        } else if (placemark->osmData().containsTagKey("addr:housenumber")) {
-            return placemark->osmData().tagValue("addr:housenumber");
+        } else if (placemark->osmData().containsTagKey(QStringLiteral("addr:housename"))) {
+            return placemark->osmData().tagValue(QStringLiteral("addr:housename"));
+        } else if (placemark->osmData().containsTagKey(QStringLiteral("addr:housenumber"))) {
+            return placemark->osmData().tagValue(QStringLiteral("addr:housenumber"));
         }
     }
 
@@ -298,10 +298,10 @@ QVector<GeoPolygonGraphicsItem::NamedEntry> GeoPolygonGraphicsItem::extractNamed
 
         const auto end = placemark->osmData().nodeReferencesEnd();
         for (auto iter = placemark->osmData().nodeReferencesBegin(); iter != end; ++iter) {
-            if (iter.value().containsTagKey("addr:housenumber")) {
+            if (iter.value().containsTagKey(QStringLiteral("addr:housenumber"))) {
                 NamedEntry entry;
                 entry.point = iter.key();
-                entry.label = iter.value().tagValue("addr:housenumber");
+                entry.label = iter.value().tagValue(QStringLiteral("addr:housenumber"));
                 entries.push_back(entry);
             }
         }
