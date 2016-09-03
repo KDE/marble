@@ -14,15 +14,17 @@
 #include "PlacemarkFilter.h"
 #include "GeoDataLineString.h"
 
-class NodeReducer : public PlacemarkFilter{
+class NodeReducer : public PlacemarkFilter {
 public:
-  NodeReducer(GeoDataDocument* document, int zoomLevel);
-  virtual void process();
+    NodeReducer(GeoDataDocument* document, int zoomLevel);
+    virtual void process();
+
 private:
-  GeoDataLineString* reduce(GeoDataLineString* lineString);
-  static qreal resolutionForLevel(int level); 
-  qreal m_resolution;
-  qint64 m_count;
+    GeoDataLineString* reduce(GeoDataLineString* lineString);
+    static qreal resolutionForLevel(int level);
+
+    qreal m_resolution;
+    qint64 m_count;
 };
 
 #endif

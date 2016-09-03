@@ -20,10 +20,11 @@
 #include <QVector>
 
 NodeReducer::NodeReducer(GeoDataDocument* document, int zoomLevel) :
-    PlacemarkFilter(document)
+    PlacemarkFilter(document),
+    m_resolution(resolutionForLevel(zoomLevel)),
+    m_count(0)
 {
-  m_resolution = resolutionForLevel(zoomLevel);
-  m_count = 0;
+    // nothing to do
 }
 
 void NodeReducer::process()
