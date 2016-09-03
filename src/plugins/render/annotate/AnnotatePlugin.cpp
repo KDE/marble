@@ -1232,7 +1232,7 @@ void AnnotatePlugin::displayOverlayFrame( GeoDataGroundOverlay *overlay )
     GeoDataPlacemark *rectangle_placemark = new GeoDataPlacemark;
     rectangle_placemark->setGeometry( polygon );
     rectangle_placemark->setParent( m_annotationDocument );
-    rectangle_placemark->setStyleUrl( "#polygon" );
+    rectangle_placemark->setStyleUrl(QStringLiteral("#polygon"));
 
     m_marbleWidget->model()->treeModel()->addFeature( m_annotationDocument, rectangle_placemark );
 
@@ -1332,7 +1332,7 @@ void AnnotatePlugin::addPolygon()
     m_polygonPlacemark = new GeoDataPlacemark;
     m_polygonPlacemark->setGeometry( poly );
     m_polygonPlacemark->setParent( m_annotationDocument );
-    m_polygonPlacemark->setStyleUrl( "#polygon" );
+    m_polygonPlacemark->setStyleUrl(QStringLiteral("#polygon"));
 
     m_marbleWidget->model()->treeModel()->addFeature( m_annotationDocument, m_polygonPlacemark );
 
@@ -1591,7 +1591,7 @@ void AnnotatePlugin::addPolyline()
     m_polylinePlacemark = new GeoDataPlacemark;
     m_polylinePlacemark->setGeometry( new GeoDataLineString( Tessellate ) );
     m_polylinePlacemark->setParent( m_annotationDocument );
-    m_polylinePlacemark->setStyleUrl( "#polyline" );
+    m_polylinePlacemark->setStyleUrl(QStringLiteral("#polyline"));
 
     m_marbleWidget->model()->treeModel()->addFeature( m_annotationDocument, m_polylinePlacemark );
 
