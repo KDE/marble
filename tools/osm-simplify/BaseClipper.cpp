@@ -58,17 +58,17 @@ public:
 
     inline void setNextClipPolygonPoint(const QSharedPointer<LinkedPoint>& nextPoint)
     {
-        this->m_nextClipPolygonPoint = nextPoint;
+        m_nextClipPolygonPoint = nextPoint;
     }
 
     inline void setNextBasePolygonPoint(const QSharedPointer<LinkedPoint>& nextPoint)
     {
-        this->m_nextBasePolygonPoint = nextPoint;
+        m_nextBasePolygonPoint = nextPoint;
     }
 
     inline void setProcessed(bool processed)
     {
-        this->m_processed = processed;
+        m_processed = processed;
     }
 
 private:
