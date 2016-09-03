@@ -31,10 +31,7 @@ WayConcatenator::WayConcatenator(GeoDataDocument *document, const QStringList &t
 
 WayConcatenator::~WayConcatenator()
 {
-    QVector<WayChunk*>::iterator itr = m_chunks.begin();
-    for (; itr != m_chunks.end(); ++itr) {
-        delete *itr;
-    }
+    qDeleteAll(m_chunks);
 }
 
 void WayConcatenator::process()
