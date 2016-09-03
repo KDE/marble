@@ -22,7 +22,6 @@
 
 #include <QMessageLogContext>
 
-#include "LineStringProcessor.h"
 #include "ShpCoastlineProcessor.h"
 #include "TinyPlanetProcessor.h"
 #include "NodeReducer.h"

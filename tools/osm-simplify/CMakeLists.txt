@@ -28,7 +28,6 @@ BaseClipper.cpp
 BaseFilter.cpp
 PlacemarkFilter.cpp
 ShpCoastlineProcessor.cpp
-LineStringProcessor.cpp
 TinyPlanetProcessor.cpp
 NodeReducer.cpp
 TagsFilter.cpp
