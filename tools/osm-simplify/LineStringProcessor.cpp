@@ -34,9 +34,7 @@ LineStringProcessor::LineStringProcessor(GeoDataDocument* document) :
 void LineStringProcessor::process()
 {
     qDebug() << "Polylines to process: " << placemarks().size();
-
-    QList<GeoDataObject*> polylinesToDrop;
-
+    QList<GeoDataPlacemark*> polylinesToDrop;
 
     foreach (GeoDataPlacemark* polyline, placemarks()) {
         switch(polyline->visualCategory())
@@ -59,15 +57,13 @@ void LineStringProcessor::process()
     }
 
     int removed = 0;
-
-    foreach (GeoDataObject* polyline, polylinesToDrop) {
-        if(document()->removeOne(static_cast<GeoDataFeature*>(polyline))) {
+    foreach (auto* polyline, polylinesToDrop) {
+        if(document()->removeOne(polyline)) {
             ++removed;
         }
     }
 
     qDebug() << "Polylines dropped: " << removed;
-
     qDebug() << document()->name();
 }
 
