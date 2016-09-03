@@ -13,6 +13,7 @@
 
 #include "PlacemarkFilter.h"
 #include "GeoDataLineString.h"
+#include "MarbleMath.h"
 
 class NodeReducer : public PlacemarkFilter {
 public:
@@ -20,7 +21,37 @@ public:
     void process() override;
 
 private:
-    GeoDataLineString* reduce(GeoDataLineString* lineString);
+    template<class T>
+    T* reduce(T* lineString)
+    {
+        qint64 prevSize = lineString->size();
+
+        T* reducedLine;
+        if (prevSize < 2) {
+            reducedLine = new T(*lineString);
+            return reducedLine;
+        } else {
+            reducedLine = new T;
+        }
+
+        QVector<GeoDataCoordinates>::iterator itCoords = lineString->begin();
+        GeoDataCoordinates currentCoords = *itCoords;
+        reducedLine->append(*itCoords);
+        ++itCoords;
+        for (; itCoords != (lineString->end() - 1); ++itCoords) {
+            if (distanceSphere( currentCoords, *itCoords ) >= m_resolution) {
+                currentCoords = *itCoords;
+                reducedLine->append(*itCoords);
+            }
+        }
+        reducedLine->append(*itCoords);
+
+        qint64 reducedSize = reducedLine->size();
+        m_count += (prevSize - reducedSize);
+        return reducedLine;
+        //qDebug()<<"Nodes reduced "<<(prevSize - reducedSize)<<endl;
+    }
+
     static qreal resolutionForLevel(int level);
 
     qreal m_resolution;

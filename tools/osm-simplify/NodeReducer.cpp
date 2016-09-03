@@ -39,7 +39,7 @@ void NodeReducer::process()
 
         else if(placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLinearRingType) {
             GeoDataLinearRing* prevRing = static_cast<GeoDataLinearRing*>(placemark->geometry());
-            GeoDataLinearRing* reducedRing = static_cast<GeoDataLinearRing*>(reduce(prevRing));
+            GeoDataLinearRing* reducedRing = reduce(prevRing);
             placemark->setGeometry(reducedRing);
         }
 
@@ -47,62 +47,18 @@ void NodeReducer::process()
             GeoDataPolygon* reducedPolygon = new GeoDataPolygon;
             GeoDataPolygon* prevPolygon = static_cast<GeoDataPolygon*>(placemark->geometry());
             GeoDataLinearRing* prevRing = &(prevPolygon->outerBoundary());
-            GeoDataLinearRing* reducedRing =  static_cast<GeoDataLinearRing*>(reduce(prevRing));
+            GeoDataLinearRing* reducedRing = reduce(prevRing);
             reducedPolygon->setOuterBoundary(*reducedRing);
             QVector<GeoDataLinearRing>& innerBoundaries = prevPolygon->innerBoundaries();
             for(int i = 0; i < innerBoundaries.size(); i++) {
                 prevRing = &innerBoundaries[i];
-                reducedRing = static_cast<GeoDataLinearRing*>(reduce(prevRing));
+                reducedRing = reduce(prevRing);
                 reducedPolygon->appendInnerBoundary(*reducedRing);
             }
             placemark->setGeometry(reducedPolygon);
         }
     }
     qDebug()<<"Total nodes reduced: "<<m_count<<endl;
-}
-
-GeoDataLineString* NodeReducer::reduce(GeoDataLineString* lineString)
-{
-    qint64 prevSize = lineString->size();
-
-    GeoDataLineString* reducedLine;
-    if(lineString->nodeType() == GeoDataTypes::GeoDataLineStringType) {
-        if(prevSize < 2) {
-            reducedLine = new GeoDataLineString(*lineString);
-            return reducedLine;
-        }
-        else{
-            reducedLine = new GeoDataLineString;
-        }
-    }
-    else if(lineString->nodeType() == GeoDataTypes::GeoDataLinearRingType) {
-        if(prevSize < 2) {
-            reducedLine = new GeoDataLinearRing(*lineString);
-            return reducedLine;
-        }
-        reducedLine = new GeoDataLinearRing;
-    } else {
-        Q_ASSERT(false && "Unexpected GeoDataLineString subtype");
-        return nullptr;
-    }
-
-
-    QVector<GeoDataCoordinates>::iterator itCoords = lineString->begin();
-    GeoDataCoordinates currentCoords = *itCoords;
-    reducedLine->append(*itCoords);
-    ++itCoords;
-    for(; itCoords != (lineString->end() - 1); ++itCoords) {
-        if(distanceSphere( currentCoords, *itCoords ) >= m_resolution) {
-            currentCoords = *itCoords;
-            reducedLine->append(*itCoords);
-        }
-    }
-    reducedLine->append(*itCoords);
-
-    qint64 reducedSize = reducedLine->size();
-    m_count += (prevSize - reducedSize);
-    return reducedLine;
-    //qDebug()<<"Nodes reduced "<<(prevSize - reducedSize)<<endl;
 }
 
 qreal NodeReducer::resolutionForLevel(int level) {
