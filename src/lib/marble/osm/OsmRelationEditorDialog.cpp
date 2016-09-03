@@ -74,7 +74,7 @@ OsmRelationEditorDialog::~OsmRelationEditorDialog()
 void OsmRelationEditorDialog::finish()
 {
     // Updating the relation data with the edited one
-    m_dummyPlacemark->osmData().addTag( "name", m_nameLineEdit->text() );
+    m_dummyPlacemark->osmData().addTag(QStringLiteral("name"), m_nameLineEdit->text());
     *m_relationData = m_dummyPlacemark->osmData();
     accept();
     deleteLater();

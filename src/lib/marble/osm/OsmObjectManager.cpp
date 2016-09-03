@@ -65,7 +65,7 @@ void OsmObjectManager::initializeOsmData( GeoDataPlacemark* placemark )
         const GeoDataLinearRing &outerBoundary = polygon->outerBoundary();
         int index = -1;
         if ( isNull ) {
-            osmData.addTag( "type", "multipolygon" );
+            osmData.addTag(QStringLiteral("type"), QStringLiteral("multipolygon"));
         }
 
         // Outer boundary

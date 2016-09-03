@@ -147,9 +147,9 @@ void OsmNominatimRunner::handleResult( QNetworkReply* reply )
             administrative = place.firstChildElement("region").text();
             if( administrative.isEmpty() ) {
                 administrative = place.firstChildElement("state").text();
-                data.addTag("addr:state", administrative);
+                data.addTag(QStringLiteral("addr:state"), administrative);
             } else {
-                data.addTag("district", administrative);
+                data.addTag(QStringLiteral("district"), administrative);
             }
         }
 
@@ -174,14 +174,14 @@ void OsmNominatimRunner::handleResult( QNetworkReply* reply )
                     placemarkName += QLatin1String(", ");
                 }
                 placemarkName += road;
-                data.addTag("addr:street", road);
+                data.addTag(QStringLiteral("addr:street"), road);
             }
             if (!city.isEmpty() && !placemarkName.contains(QLatin1Char(',')) && city != placemarkName) {
                 if( !placemarkName.isEmpty() ) {
                     placemarkName += QLatin1String(", ");
                 }
                 placemarkName += city;
-                data.addTag("addr:city", city);
+                data.addTag(QStringLiteral("addr:city"), city);
             }
             if (!administrative.isEmpty() && !placemarkName.contains(QLatin1Char(',')) && administrative != placemarkName) {
                 if( !placemarkName.isEmpty() ) {
@@ -194,7 +194,7 @@ void OsmNominatimRunner::handleResult( QNetworkReply* reply )
                     placemarkName += QLatin1String(", ");
                 }
                 placemarkName += country;
-                data.addTag("addr:country", country);
+                data.addTag(QStringLiteral("addr:country"), country);
             }
             if (placemarkName.isEmpty()) {
                 placemarkName = desc;
