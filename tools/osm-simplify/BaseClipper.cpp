@@ -435,11 +435,11 @@ void BaseClipper::clipPolyObject ( const QPolygonF & polygon,
 
         if(!intersections.isEmpty()) {
 
-//            qDebug() << "intersections count:" << intersections.size();
-//            qDebug() << "intersectionsTop count:" << intersectionsTop.size();
-//            qDebug() << "intersectionsRight count:" << intersectionsRight.size();
-//            qDebug() << "intersectionsBottom count:" << intersectionsBottom.size();
-//            qDebug() << "intersectionsLeft count:" << intersectionsLeft.size();
+            //            qDebug() << "intersections count:" << intersections.size();
+            //            qDebug() << "intersectionsTop count:" << intersectionsTop.size();
+            //            qDebug() << "intersectionsRight count:" << intersectionsRight.size();
+            //            qDebug() << "intersectionsBottom count:" << intersectionsBottom.size();
+            //            qDebug() << "intersectionsLeft count:" << intersectionsLeft.size();
 
             clippedPolyObjects.clear();
             clippedPolyObject = QPolygonF();
@@ -512,12 +512,12 @@ void BaseClipper::clipPolyObject ( const QPolygonF & polygon,
                         }
                         clippedPolyObject << it->point();
 
-//                        // To avoid crashes because of infinite loop.
-//                        // Needs to be investigated
-//                        if(clippedPolyObject.size() > basePolygon.size()) {
-//                            qDebug() << "Something went wrong, exiting current clipping loop...";
-//                            break;
-//                        }
+                        //                        // To avoid crashes because of infinite loop.
+                        //                        // Needs to be investigated
+                        //                        if(clippedPolyObject.size() > basePolygon.size()) {
+                        //                            qDebug() << "Something went wrong, exiting current clipping loop...";
+                        //                            break;
+                        //                        }
 
                     } while(clippedPolyObject.first() != clippedPolyObject.last());
 

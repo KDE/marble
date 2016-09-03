@@ -91,20 +91,20 @@ private:
 
 
     void clipMultiple( QPolygonF & clippedPolyObject,
-                              QVector<QPolygonF> & clippedPolyObjects,
-                              bool isClosed );
+                       QVector<QPolygonF> & clippedPolyObjects,
+                       bool isClosed );
     void clipOnce( QPolygonF & clippedPolyObject,
-                              QVector<QPolygonF> & clippedPolyObjects,
-                              bool isClosed );
+                   QVector<QPolygonF> & clippedPolyObjects,
+                   bool isClosed );
     void clipOnceCorner( QPolygonF & clippedPolyObject,
-                                QVector<QPolygonF> & clippedPolyObjects,
-                                const QPointF& corner,
-                                const QPointF& point,
-                                bool isClosed );
+                         QVector<QPolygonF> & clippedPolyObjects,
+                         const QPointF& corner,
+                         const QPointF& point,
+                         bool isClosed );
     void clipOnceEdge(   QPolygonF & clippedPolyObject,
-                                QVector<QPolygonF> & clippedPolyObjects,
-                                const QPointF& point,
-                                bool isClosed );
+                         QVector<QPolygonF> & clippedPolyObjects,
+                         const QPointF& point,
+                         bool isClosed );
 
     static inline qreal _m( const QPointF & start, const QPointF & end );
 

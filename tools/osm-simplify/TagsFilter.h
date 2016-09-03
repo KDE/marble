@@ -24,9 +24,9 @@ class GeoDataDocument;
 class TagsFilter : public PlacemarkFilter
 {
 public:
-	//Filters placemarks which have tags in the hash
-	TagsFilter(GeoDataDocument* document, const QStringList& tagsList, bool andFlag = false);
-	virtual void process();
+    //Filters placemarks which have tags in the hash
+    TagsFilter(GeoDataDocument* document, const QStringList& tagsList, bool andFlag = false);
+    virtual void process();
     QVector<GeoDataPlacemark*>::const_iterator rejectedObjectsBegin() const;
     QVector<GeoDataPlacemark*>::const_iterator rejectedObjectsEnd() const;
 private:

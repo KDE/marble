@@ -24,38 +24,38 @@ namespace Marble
 
 WayChunk::WayChunk(GeoDataPlacemark *placemark, qint64 first, qint64 last)
 {
-	m_wayList.append(placemark);
-	m_first = first;
-	m_last = last;
-	m_visualCategory = placemark->visualCategory();
+    m_wayList.append(placemark);
+    m_first = first;
+    m_last = last;
+    m_visualCategory = placemark->visualCategory();
 }
 
 WayChunk::~WayChunk()
 {
-	
+
 }
 
 qint64 WayChunk::first() const
 {
-	return m_first;
+    return m_first;
 }
 
 qint64 WayChunk::last() const
 {
-	return m_last;
+    return m_last;
 }
 
 void WayChunk::append(GeoDataPlacemark *placemark, qint64 last)
 {
-	m_wayList.append(placemark);
-	m_last = last;
+    m_wayList.append(placemark);
+    m_last = last;
 
 }
 
 void WayChunk::prepend(GeoDataPlacemark *placemark, qint64 first)
 {
-	m_wayList.prepend(placemark);
-	m_first = first;
+    m_wayList.prepend(placemark);
+    m_first = first;
 
 }
 
@@ -78,51 +78,51 @@ GeoDataPlacemark* WayChunk::merge()
         GeoDataLineString *currentLine = static_cast<GeoDataLineString*>( (*itr)->geometry() );
         currentLine->remove(0);
         (*line) << *currentLine;
-	}
-	//qDebug()<<"Merging placemark";
+    }
+    //qDebug()<<"Merging placemark";
     return placemark;
 }
 
 void WayChunk::reverse()
 {
-	std::reverse(m_wayList.begin(), m_wayList.end());
-	QList<GeoDataPlacemark*>::iterator itr = m_wayList.begin();
+    std::reverse(m_wayList.begin(), m_wayList.end());
+    QList<GeoDataPlacemark*>::iterator itr = m_wayList.begin();
     for (; itr != m_wayList.end(); ++itr) {
         GeoDataPlacemark *placemark = *itr;
         GeoDataLineString *line = static_cast<GeoDataLineString*>(placemark->geometry());
-		line->reverse();
-	}
+        line->reverse();
+    }
     qSwap(m_first, m_last);
 }
 
 qint64 WayChunk::id() const
 {
-	return m_wayList.first()->osmData().id();
+    return m_wayList.first()->osmData().id();
 }
 
 void WayChunk::printIds() const
 {
-	QList<GeoDataPlacemark*>::const_iterator itr = m_wayList.begin();
-	qDebug()<<"IDs of placemarks in chunk";
+    QList<GeoDataPlacemark*>::const_iterator itr = m_wayList.begin();
+    qDebug()<<"IDs of placemarks in chunk";
     for (; itr != m_wayList.end(); ++itr) {
-		qDebug()<<"Id :- "<<(*itr)->osmData().id();
-	}
+        qDebug()<<"Id :- "<<(*itr)->osmData().id();
+    }
 }
 
 int WayChunk::size() const
 {
-	return m_wayList.size();
+    return m_wayList.size();
 }
 
 bool WayChunk::concatPossible(GeoDataPlacemark *placemark) const
 {
-	GeoDataFeature::GeoDataVisualCategory category = placemark->visualCategory();
-    return (category == m_visualCategory);	
+    GeoDataFeature::GeoDataVisualCategory category = placemark->visualCategory();
+    return (category == m_visualCategory);
 }	
 
 GeoDataFeature::GeoDataVisualCategory WayChunk::visualCategory() const
 {
-	return m_visualCategory;
+    return m_visualCategory;
 }
 
 

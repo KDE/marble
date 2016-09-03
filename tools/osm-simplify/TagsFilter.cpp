@@ -23,7 +23,7 @@ namespace Marble{
 TagsFilter::TagsFilter(GeoDataDocument *document, const QStringList &tagsList, bool andFlag ) : PlacemarkFilter(document)
 {
     int total=0, tagCount=0;
-	// qDebug()<<"Entered tagFilter";
+    // qDebug()<<"Entered tagFilter";
     QVector<GeoDataPlacemark*> previousObjects(placemarks());
     placemarks().clear();
     foreach (GeoDataPlacemark *placemark, previousObjects) {
@@ -46,38 +46,38 @@ TagsFilter::TagsFilter(GeoDataDocument *document, const QStringList &tagsList, b
                 contains = placemark->osmData().containsTagKey(currentKey);
             } else {
                 contains = placemark->osmData().containsTag(currentKey, currentValue);
-			}
+            }
             if (!contains) {
                 if (andFlag) {
-					flag = false;
-					break;
-				}
+                    flag = false;
+                    break;
+                }
             } else {
                 if (!andFlag) {
-					flag = true;
-					break;
-				}
-			}
-		}		
+                    flag = true;
+                    break;
+                }
+            }
+        }
         if (flag) {
             ++tagCount;
-			// qDebug()<<"Contained tag";
+            // qDebug()<<"Contained tag";
             placemarks().append(placemark);
-			// qDebug()<<"ID "<<placemark->osmData().id();
+            // qDebug()<<"ID "<<placemark->osmData().id();
         } else {
             m_rejectedObjects.append(placemark);
-		}
+        }
 
-	}
-	// qDebug()<<"Done TagFiltering";
-	// qDebug()<<"Total"<<total;
-	// qDebug()<<"TagCount"<<tagcon;
-	// qDebug()<<"Is and : "<<andFlag;
+    }
+    // qDebug()<<"Done TagFiltering";
+    // qDebug()<<"Total"<<total;
+    // qDebug()<<"TagCount"<<tagcon;
+    // qDebug()<<"Is and : "<<andFlag;
 }
 
 void TagsFilter::process()
 {
-	//does nothing
+    //does nothing
 }
 
 }

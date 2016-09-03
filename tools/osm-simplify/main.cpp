@@ -109,18 +109,18 @@ int main(int argc, char *argv[])
     parser.addPositionalArgument("input", "The input .osm or .shp file.");
 
     parser.addOptions({
-      {{"d","debug"}, "Debug output in the terminal."},
-      {{"s","silent"}, "Don't output to terminal."},
-      {{"m","merge"}, "Merge the main document with the file <file_to_merge_with>. This works together with the -c flag.", "file_to_merge_with"},
-      {{"c", "cut-to-tiles"}, "Cuts into tiles based on the zoom level passed using -z."},
-      {{"n", "node-reduce"}, "Reduces the number of nodes for a given way based on zoom level"},
-      {{"z", "zoom-level"}, "Zoom level according to which OSM information has to be processed.", "number"},
-      {{"t", "tags-filter"}, "Tag key-value pairs which are to be be considered", "k1=v1,k2=v2..."},
-      {{"and", "tags-and"}, "For a feature to be considered for processing it must contain all the specified using tags-filter"},
-      {{"w", "concat-ways"}, "Concatenates the ways which are specified using tags-filter"},
-      {{"o", "output"}, "Generates an output .osmfile based on other flags. If the cut-to-tiles flag is set, then this needs to be a directory.", "output_file.osm"},
-      {{"e", "extension"}, "Output file type: osm (default), o5m or kml", "file extension", "osm"}
-    });
+                          {{"d","debug"}, "Debug output in the terminal."},
+                          {{"s","silent"}, "Don't output to terminal."},
+                          {{"m","merge"}, "Merge the main document with the file <file_to_merge_with>. This works together with the -c flag.", "file_to_merge_with"},
+                          {{"c", "cut-to-tiles"}, "Cuts into tiles based on the zoom level passed using -z."},
+                          {{"n", "node-reduce"}, "Reduces the number of nodes for a given way based on zoom level"},
+                          {{"z", "zoom-level"}, "Zoom level according to which OSM information has to be processed.", "number"},
+                          {{"t", "tags-filter"}, "Tag key-value pairs which are to be be considered", "k1=v1,k2=v2..."},
+                          {{"and", "tags-and"}, "For a feature to be considered for processing it must contain all the specified using tags-filter"},
+                          {{"w", "concat-ways"}, "Concatenates the ways which are specified using tags-filter"},
+                          {{"o", "output"}, "Generates an output .osmfile based on other flags. If the cut-to-tiles flag is set, then this needs to be a directory.", "output_file.osm"},
+                          {{"e", "extension"}, "Output file type: osm (default), o5m or kml", "file extension", "osm"}
+                      });
 
     // Process the actual command line arguments given by the user
     parser.process(app);
@@ -254,7 +254,7 @@ int main(int argc, char *argv[])
         //Parses the tags given at command line and makes a Hash of key-value pairs
         qDebug()<<" Parsed tf value: "<<parser.value("tags-filter")<<endl;
         QStringList tagsList = parser.value("tags-filter").split(QLatin1Char(','));
-        //Filters and considers only those placemarks which have all the key-value pairs given at command line 
+        //Filters and considers only those placemarks which have all the key-value pairs given at command line
 
         WayConcatenator concatenator(map, tagsList, parser.isSet("tags-and"));
         concatenator.process();

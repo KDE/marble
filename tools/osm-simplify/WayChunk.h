@@ -26,7 +26,7 @@ class WayChunk
 {
 public:
     WayChunk(GeoDataPlacemark *placemark, qint64 first, qint64 last );
-	~WayChunk();
+    ~WayChunk();
     void append(GeoDataPlacemark *placemark, qint64 last);
     void append(WayChunk *chunk);
     void prepend(GeoDataPlacemark *placemark, qint64 first);
@@ -37,20 +37,20 @@ public:
      */
     GeoDataPlacemark* merge();
 
-	qint64 first() const;
-	qint64 last() const;
-	void reverse();
+    qint64 first() const;
+    qint64 last() const;
+    void reverse();
     qint64 id() const;
-	void printIds() const;
+    void printIds() const;
     int size() const;
     bool concatPossible(GeoDataPlacemark *placemark) const;
     GeoDataFeature::GeoDataVisualCategory visualCategory() const;
 
 private:
     QList<GeoDataPlacemark*> m_wayList;
-	qint64 m_first;
-	qint64 m_last;
-	GeoDataFeature::GeoDataVisualCategory  m_visualCategory;
+    qint64 m_first;
+    qint64 m_last;
+    GeoDataFeature::GeoDataVisualCategory  m_visualCategory;
 
 };
 
