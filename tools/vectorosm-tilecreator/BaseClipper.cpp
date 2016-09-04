@@ -262,14 +262,14 @@ void BaseClipper::clipPolyObject ( const QPolygonF & polygon,
                                    QVector<QPolygonF> & clippedPolyObjects,
                                    bool isClosed )
 {
-    QList<QSharedPointer<LinkedPoint>> basePolygon;
-    QList<QSharedPointer<LinkedPoint>> clipPolygon;
-    QList<QSharedPointer<LinkedPoint>> intersections;
+    QVector<QSharedPointer<LinkedPoint>> basePolygon;
+    QVector<QSharedPointer<LinkedPoint>> clipPolygon;
+    QVector<QSharedPointer<LinkedPoint>> intersections;
 
-    QList<QSharedPointer<LinkedPoint>> intersectionsTop;
-    QList<QSharedPointer<LinkedPoint>> intersectionsRight;
-    QList<QSharedPointer<LinkedPoint>> intersectionsBottom;
-    QList<QSharedPointer<LinkedPoint>> intersectionsLeft;
+    QVector<QSharedPointer<LinkedPoint>> intersectionsTop;
+    QVector<QSharedPointer<LinkedPoint>> intersectionsRight;
+    QVector<QSharedPointer<LinkedPoint>> intersectionsBottom;
+    QVector<QSharedPointer<LinkedPoint>> intersectionsLeft;
 
     auto appendToIntersectionKind = [&](QSharedPointer<LinkedPoint>& intersection) {
         switch(borderSector(intersection->point())) {
