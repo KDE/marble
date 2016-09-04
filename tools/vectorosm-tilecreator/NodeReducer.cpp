@@ -51,11 +51,13 @@ void NodeReducer::process()
             GeoDataLinearRing* prevRing = &(prevPolygon->outerBoundary());
             GeoDataLinearRing* reducedRing = reduce(prevRing);
             reducedPolygon->setOuterBoundary(*reducedRing);
+            delete reducedRing;
             QVector<GeoDataLinearRing>& innerBoundaries = prevPolygon->innerBoundaries();
             for(int i = 0; i < innerBoundaries.size(); i++) {
                 prevRing = &innerBoundaries[i];
-                reducedRing = reduce(prevRing);
-                reducedPolygon->appendInnerBoundary(*reducedRing);
+                GeoDataLinearRing* reducedInnerRing = reduce(prevRing);
+                reducedPolygon->appendInnerBoundary(*reducedInnerRing);
+                delete reducedInnerRing;
             }
             placemark->setGeometry(reducedPolygon);
         }
