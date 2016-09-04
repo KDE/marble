@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8.12)
 
-SET (TARGET osm-simplify)
+SET (TARGET marble-vectorosm-tilecreator)
 PROJECT (${TARGET})
 
 if (POLICY CMP0063)

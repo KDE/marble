@@ -98,7 +98,7 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
-    QApplication::setApplicationName("osm-simplify");
+    QApplication::setApplicationName("marble-vectorosm-tilecreator");
     QApplication::setApplicationVersion("0.1");
 
     QCommandLineParser parser;
