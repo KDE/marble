@@ -212,17 +212,11 @@ QVector<GeoDataFolder*> GeoDataContainer::folderList() const
 QVector<GeoDataPlacemark*> GeoDataContainer::placemarkList() const
 {
     QVector<GeoDataPlacemark*> results;
-
-    QVector<GeoDataFeature*>::const_iterator it = p()->m_vector.constBegin();
-    QVector<GeoDataFeature*>::const_iterator end = p()->m_vector.constEnd();
-
-    for (; it != end; ++it) {
-        GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>( *it );
-        if ( placemark ) {
-            results.append( placemark );
+    for (auto it=p()->m_vector.constBegin(), end = p()->m_vector.constEnd(); it != end; ++it) {
+        if ((*it)->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
+            results.append(static_cast<GeoDataPlacemark*>(*it));
         }
     }
-
     return results;
 }
 
