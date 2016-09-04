@@ -24,7 +24,8 @@ namespace Marble {
 NodeReducer::NodeReducer(GeoDataDocument* document, int zoomLevel) :
     PlacemarkFilter(document),
     m_resolution(resolutionForLevel(zoomLevel)),
-    m_count(0)
+    m_removedNodes(0),
+    m_remainingNodes(0)
 {
     // nothing to do
 }
@@ -62,7 +63,9 @@ void NodeReducer::process()
             placemark->setGeometry(reducedPolygon);
         }
     }
-    qDebug()<<"Total nodes reduced: "<<m_count<<endl;
+    double const reduction = m_removedNodes / qMax(1.0, double(m_remainingNodes + m_removedNodes));
+    qDebug() << QString("Total nodes reduced: %1%").arg(QString("%1").arg(reduction * 100.0, 0, 'f', 1))
+             << "(" << m_removedNodes << "removed," << m_remainingNodes << "remaining)";
 }
 
 qreal NodeReducer::resolutionForLevel(int level) {

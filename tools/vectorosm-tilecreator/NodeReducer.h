@@ -45,7 +45,8 @@ private:
         reducedLine->append(*iter);
 
         qint64 reducedSize = reducedLine->size();
-        m_count += (prevSize - reducedSize);
+        m_removedNodes += (prevSize - reducedSize);
+        m_remainingNodes += reducedSize;
         return reducedLine;
         //qDebug()<<"Nodes reduced "<<(prevSize - reducedSize)<<endl;
     }
@@ -53,7 +54,8 @@ private:
     static qreal resolutionForLevel(int level);
 
     qreal m_resolution;
-    qint64 m_count;
+    qint64 m_removedNodes;
+    qint64 m_remainingNodes;
 };
 
 }
