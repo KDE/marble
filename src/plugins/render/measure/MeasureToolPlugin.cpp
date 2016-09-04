@@ -36,13 +36,12 @@ namespace Marble
 MeasureToolPlugin::MeasureToolPlugin( const MarbleModel *marbleModel )
     : RenderPlugin( marbleModel ),
       m_measureLineString( GeoDataLineString( Tessellate ) ),
-      m_mark(QStringLiteral(":/mark.png")),
 #ifdef Q_OS_MACX
       m_font_regular( QFont( QStringLiteral( "Sans Serif" ), 10, 50, false ) ),
 #else
       m_font_regular( QFont( QStringLiteral( "Sans Serif" ),  8, 50, false ) ),
 #endif
-      m_fontascent( QFontMetrics( m_font_regular ).ascent() ),
+      m_fontascent(-1),
       m_pen( Qt::red ),
       m_addMeasurePointAction( 0 ),
       m_removeLastMeasurePointAction( 0 ),
@@ -134,11 +133,12 @@ QIcon MeasureToolPlugin::icon () const
 
 void MeasureToolPlugin::initialize ()
 {
+     m_fontascent = QFontMetrics( m_font_regular ).ascent();
 }
 
 bool MeasureToolPlugin::isInitialized () const
 {
-    return true;
+    return m_fontascent >= 0;
 }
 
 QDialog *MeasureToolPlugin::configDialog()
@@ -537,11 +537,14 @@ QString MeasureToolPlugin::meterToPreferredUnit(qreal meters, bool isSquare) con
                             .arg(unitString);
 }
 
-void MeasureToolPlugin::drawMeasurePoints( GeoPainter *painter ) const
+void MeasureToolPlugin::drawMeasurePoints( GeoPainter *painter )
 {
     // Paint the marks.
     GeoDataLineString::const_iterator itpoint = m_measureLineString.constBegin();
     GeoDataLineString::const_iterator const endpoint = m_measureLineString.constEnd();
+    if (m_mark.isNull()) {
+        m_mark = QPixmap(QStringLiteral(":/mark.png"));
+    }
     for (; itpoint != endpoint; ++itpoint )
     {
         painter->drawPixmap( *itpoint, m_mark );

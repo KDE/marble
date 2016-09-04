@@ -35,15 +35,11 @@ SatellitesPlugin::SatellitesPlugin( const MarbleModel *marbleModel )
     : RenderPlugin( marbleModel ),
      m_satModel( 0 ),
      m_isInitialized( false ),
-     m_configDialog( new SatellitesConfigDialog() )
+     m_configDialog(nullptr)
 {
     connect( this, SIGNAL(settingsChanged(QString)), SLOT(updateSettings()) );
     connect( this, SIGNAL(enabledChanged(bool)), SLOT(enableModel(bool)) );
     connect( this, SIGNAL(visibilityChanged(bool,QString)), SLOT(visibleModel(bool)) );
-
-    connect( m_configDialog, SIGNAL(activatePluginClicked()), this, SLOT(activate()) );
-    connect( this, SIGNAL(visibilityChanged(bool,QString)),
-             m_configDialog, SLOT(setDialogActive(bool)) );
 
     setVisible( false );
     setSettings(QHash<QString, QVariant>());
@@ -152,6 +148,12 @@ void SatellitesPlugin::initialize()
         marbleModel()->clock() );
 
     m_configModel = new SatellitesConfigModel( this );
+
+    delete m_configDialog;
+    m_configDialog = new SatellitesConfigDialog();
+    connect( m_configDialog, SIGNAL(activatePluginClicked()), this, SLOT(activate()) );
+    connect( this, SIGNAL(visibilityChanged(bool,QString)),
+             m_configDialog, SLOT(setDialogActive(bool)) );
     m_configDialog->configWidget()->treeView->setModel( m_configModel );
 
     connect( m_satModel, SIGNAL(fileParsed(QString)),

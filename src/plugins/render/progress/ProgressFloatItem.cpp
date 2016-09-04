@@ -53,18 +53,6 @@ ProgressFloatItem::ProgressFloatItem( const MarbleModel *marbleModel )
     m_repaintTimer.setInterval( 1000 );
     connect( &m_repaintTimer, SIGNAL(timeout()), this, SIGNAL(repaintNeeded()) );
 
-    // The icon resembles the pie chart
-    QImage canvas( 16, 16, QImage::Format_ARGB32 );
-    canvas.fill( Qt::transparent );
-    QPainter painter( &canvas );
-    painter.setRenderHint( QPainter::Antialiasing, true );
-    painter.setPen( QColor ( Qt::black ) );
-    painter.drawEllipse( 1, 1, 14, 14 );
-    painter.setPen( Qt::NoPen );
-    painter.setBrush( QBrush( QColor( Qt::darkGray ) ) );
-    painter.drawPie( 2, 2, 12, 12, 1440, -1325 ); // 23 percent of a full circle
-    m_icon = QIcon( QPixmap::fromImage( canvas ) );
-
     // Plugin is enabled by default
     setEnabled( true );
 
@@ -140,6 +128,18 @@ void ProgressFloatItem::initialize()
         myFont.setPointSize( fontSize );
     }
     m_fontSize = fontSize - 1;
+
+    // The icon resembles the pie chart
+    QImage canvas( 16, 16, QImage::Format_ARGB32 );
+    canvas.fill( Qt::transparent );
+    QPainter painter( &canvas );
+    painter.setRenderHint( QPainter::Antialiasing, true );
+    painter.setPen( QColor ( Qt::black ) );
+    painter.drawEllipse( 1, 1, 14, 14 );
+    painter.setPen( Qt::NoPen );
+    painter.setBrush( QBrush( QColor( Qt::darkGray ) ) );
+    painter.drawPie( 2, 2, 12, 12, 1440, -1325 ); // 23 percent of a full circle
+    m_icon = QIcon( QPixmap::fromImage( canvas ) );
 
     m_isInitialized = true;
 }

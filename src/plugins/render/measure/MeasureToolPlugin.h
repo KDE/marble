@@ -82,7 +82,7 @@ class MeasureToolPlugin : public RenderPlugin, public DialogConfigurationInterfa
     bool  eventFilter( QObject *object, QEvent *event );
 
  private:
-    void  drawMeasurePoints( GeoPainter *painter ) const;
+    void  drawMeasurePoints( GeoPainter *painter );
     void  drawInfobox( GeoPainter *painter ) const;
     void  drawSegments( GeoPainter *painter );
     void  addContextItems();
@@ -107,7 +107,7 @@ class MeasureToolPlugin : public RenderPlugin, public DialogConfigurationInterfa
     GeoDataLineString m_measureLineString;
     GeoDataLatLonAltBox m_latLonAltBox;
 
-    const QPixmap m_mark;
+    QPixmap m_mark;
     QFont   m_font_regular;
     int     m_fontascent;
 

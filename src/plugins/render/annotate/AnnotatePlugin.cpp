@@ -62,12 +62,12 @@ AnnotatePlugin::AnnotatePlugin( const MarbleModel *model )
       m_isInitialized( false ),
       m_widgetInitialized( false ),
       m_marbleWidget( 0 ),
-      m_overlayRmbMenu( new QMenu( m_marbleWidget ) ),
-      m_polygonRmbMenu( new QMenu( m_marbleWidget ) ),
-      m_nodeRmbMenu( new QMenu( m_marbleWidget ) ),
-      m_textAnnotationRmbMenu( new QMenu( m_marbleWidget ) ),
-      m_polylineRmbMenu( new QMenu( m_marbleWidget ) ),
-      m_annotationDocument( new GeoDataDocument ),
+      m_overlayRmbMenu(nullptr),
+      m_polygonRmbMenu(nullptr),
+      m_nodeRmbMenu(nullptr),
+      m_textAnnotationRmbMenu(nullptr),
+      m_polylineRmbMenu(nullptr),
+      m_annotationDocument(nullptr),
       m_movedItem( 0 ),
       m_focusItem( 0 ),
       m_polylinePlacemark( 0 ),
@@ -81,40 +81,6 @@ AnnotatePlugin::AnnotatePlugin( const MarbleModel *model )
     setEnabled( true );
     setVisible( true );
     connect( this, SIGNAL(visibilityChanged(bool,QString)), SLOT(enableModel(bool)) );
-
-    m_annotationDocument->setName( tr("Annotations") );
-    m_annotationDocument->setDocumentRole( UserDocument );
-
-    // Default polygon style
-    GeoDataStyle::Ptr defaultPolygonStyle(new GeoDataStyle);
-    GeoDataPolyStyle polyStyle;
-    GeoDataLineStyle edgeStyle;
-    GeoDataLabelStyle labelStyle;
-    QColor polygonColor = QApplication::palette().highlight().color();
-    QColor edgeColor = QApplication::palette().light().color();
-    QColor labelColor = QApplication::palette().brightText().color();
-    polygonColor.setAlpha( 80 );
-    polyStyle.setColor( polygonColor );
-    edgeStyle.setColor( edgeColor );
-    labelStyle.setColor( labelColor );
-    defaultPolygonStyle->setId(QStringLiteral("polygon"));
-    defaultPolygonStyle->setPolyStyle( polyStyle );
-    defaultPolygonStyle->setLineStyle( edgeStyle );
-    defaultPolygonStyle->setLabelStyle( labelStyle );
-    m_annotationDocument->addStyle( defaultPolygonStyle );
-
-
-    // Default polyline style
-    GeoDataStyle::Ptr defaultPolylineStyle(new GeoDataStyle);
-    GeoDataLineStyle lineStyle;
-    QColor polylineColor = Qt::white;
-    lineStyle.setColor( polylineColor );
-    lineStyle.setWidth( 1 );
-    defaultPolylineStyle->setId(QStringLiteral("polyline"));
-    defaultPolylineStyle->setLineStyle( lineStyle );
-    defaultPolylineStyle->setLabelStyle( labelStyle );
-    m_annotationDocument->addStyle( defaultPolylineStyle );
-
 }
 
 AnnotatePlugin::~AnnotatePlugin()
@@ -210,6 +176,42 @@ void AnnotatePlugin::initialize()
         m_drawingPolygon = false;
         m_drawingPolyline = false;
         m_addingPlacemark = false;
+
+        delete m_annotationDocument;
+        m_annotationDocument = new GeoDataDocument;
+
+        m_annotationDocument->setName( tr("Annotations") );
+        m_annotationDocument->setDocumentRole( UserDocument );
+
+        // Default polygon style
+        GeoDataStyle::Ptr defaultPolygonStyle(new GeoDataStyle);
+        GeoDataPolyStyle polyStyle;
+        GeoDataLineStyle edgeStyle;
+        GeoDataLabelStyle labelStyle;
+        QColor polygonColor = QApplication::palette().highlight().color();
+        QColor edgeColor = QApplication::palette().light().color();
+        QColor labelColor = QApplication::palette().brightText().color();
+        polygonColor.setAlpha( 80 );
+        polyStyle.setColor( polygonColor );
+        edgeStyle.setColor( edgeColor );
+        labelStyle.setColor( labelColor );
+        defaultPolygonStyle->setId(QStringLiteral("polygon"));
+        defaultPolygonStyle->setPolyStyle( polyStyle );
+        defaultPolygonStyle->setLineStyle( edgeStyle );
+        defaultPolygonStyle->setLabelStyle( labelStyle );
+        m_annotationDocument->addStyle( defaultPolygonStyle );
+
+
+        // Default polyline style
+        GeoDataStyle::Ptr defaultPolylineStyle(new GeoDataStyle);
+        GeoDataLineStyle lineStyle;
+        QColor polylineColor = Qt::white;
+        lineStyle.setColor( polylineColor );
+        lineStyle.setWidth( 1 );
+        defaultPolylineStyle->setId(QStringLiteral("polyline"));
+        defaultPolylineStyle->setLineStyle( lineStyle );
+        defaultPolylineStyle->setLabelStyle( labelStyle );
+        m_annotationDocument->addStyle( defaultPolylineStyle );
 
         m_isInitialized = true;
     }
@@ -1031,6 +1033,9 @@ void AnnotatePlugin::addContextItems()
 
 void AnnotatePlugin::setupTextAnnotationRmbMenu()
 {
+    delete m_textAnnotationRmbMenu;
+    m_textAnnotationRmbMenu = new QMenu;
+
     QAction *cutItem = new QAction( tr( "Cut"), m_textAnnotationRmbMenu );
     m_textAnnotationRmbMenu->addAction( cutItem );
     connect( cutItem, SIGNAL(triggered()), this, SLOT(cutItem()) );
@@ -1152,6 +1157,9 @@ void AnnotatePlugin::setupGroundOverlayModel()
 
 void AnnotatePlugin::setupOverlayRmbMenu()
 {
+    delete m_overlayRmbMenu;
+    m_overlayRmbMenu = new QMenu;
+
     QAction *editOverlay = new QAction( tr( "Properties" ), m_overlayRmbMenu );
     m_overlayRmbMenu->addAction( editOverlay );
     connect( editOverlay, SIGNAL(triggered()), this, SLOT(editOverlay()) );
@@ -1274,6 +1282,9 @@ void AnnotatePlugin::clearOverlayFrames()
 
 void AnnotatePlugin::setupPolygonRmbMenu()
 {
+    delete m_polygonRmbMenu;
+    m_polygonRmbMenu = new QMenu;
+
     QAction *deselectNodes = new QAction( tr( "Deselect All Nodes" ), m_polygonRmbMenu );
     m_polygonRmbMenu->addAction( deselectNodes );
     connect( deselectNodes, SIGNAL(triggered()), this, SLOT(deselectNodes()) );
@@ -1453,6 +1464,9 @@ void AnnotatePlugin::editPolygon()
 
 void AnnotatePlugin::setupNodeRmbMenu()
 {
+    delete m_nodeRmbMenu;
+    m_nodeRmbMenu = new QMenu;
+
     QAction *selectNode = new QAction( tr( "Select Node" ), m_nodeRmbMenu );
     m_nodeRmbMenu->addAction( selectNode );
     connect( selectNode, SIGNAL(triggered()), this, SLOT(selectNode()) );
@@ -1519,6 +1533,9 @@ void AnnotatePlugin::deleteNode()
 
 void AnnotatePlugin::setupPolylineRmbMenu()
 {
+    delete m_polylineRmbMenu;
+    m_polylineRmbMenu = new QMenu;
+
     QAction *deselectNodes = new QAction( tr( "Deselect All Nodes" ), m_polylineRmbMenu );
     m_polylineRmbMenu->addAction( deselectNodes );
     connect( deselectNodes, SIGNAL(triggered()), this, SLOT(deselectNodes()) );
