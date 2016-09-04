@@ -182,7 +182,23 @@ int main(int argc, char *argv[])
         mergeMap = manager.openFile(mergeFileName, DocumentRole::MapDocument, 600000);
     }
 
-    if(file.suffix() == QLatin1String("shp") && parser.isSet("cut-to-tiles")) {
+    if (zoomLevel < 11) {
+        TinyPlanetProcessor processor(map);
+        processor.process();
+        GeoDataLatLonBox world(85.0, -85.0, 180.0, -180.0, GeoDataCoordinates::Degree);
+        TileIterator iter(world, zoomLevel);
+        foreach(auto const &tileId, iter) {
+            GeoDataDocument* tile = processor.cutToTiles(zoomLevel, tileId.x(), tileId.y());
+            NodeReducer reducer(tile, zoomLevel);
+            reducer.process();
+
+            if (!writeTile(parser, outputName, tile, tileId.x(), tileId.y(), zoomLevel)) {
+                return 4;
+            }
+            qInfo() << tile->name() << " done";
+            delete tile;
+        }
+    } else if(file.suffix() == QLatin1String("shp") && parser.isSet("cut-to-tiles")) {
         ShpCoastlineProcessor processor(map);
         processor.process();
         GeoDataLatLonBox world(85.0, -85.0, 180.0, -180.0, GeoDataCoordinates::Degree);
