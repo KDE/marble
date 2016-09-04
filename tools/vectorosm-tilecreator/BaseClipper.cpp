@@ -28,6 +28,12 @@ public:
         m_processed(false)
     {}
 
+    void clear()
+    {
+        m_nextBasePolygonPoint.clear();
+        m_nextClipPolygonPoint.clear();
+    }
+
     inline bool isEntering() const
     {
         return m_isEntering;
@@ -544,6 +550,15 @@ void BaseClipper::clipPolyObject ( const QPolygonF & polygon,
         }
     } else if(!clippedPolyObject.isEmpty()) {
         clippedPolyObjects << clippedPolyObject;
+    }
+
+    // Break shared pointer deadlocks. Needed to free memory, without it no LinkedPoint instance would be deleted
+    typedef QVector<QSharedPointer<LinkedPoint>> Container;
+    auto containers = QVector<Container*>() << &clipPolygon << &basePolygon << &intersections;
+    foreach (auto const & container, containers) {
+        foreach (auto const & element, *container) {
+            element->clear();
+        }
     }
 }
 
