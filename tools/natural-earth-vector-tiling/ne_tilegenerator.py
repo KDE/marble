@@ -21,9 +21,8 @@ import argparse
 import urllib3
 import zipfile
 sys.path.append('../shp2osm')
-sys.path.append('../vectortilecreator')
 import polyshp2osm
-import vectortilecreator
+from subprocess import call
 
 def unzip_file(filename, in_dir):
 	print(in_dir)
@@ -129,4 +128,4 @@ if __name__ == "__main__":
 		f = open('bound_info_{}'.format(level), "w")
 		print('tiny_planet_{}.1.osm;Level;-180.0;-86.0;180.0;86.0'.format(level), file=f)
 		f.close()
-		vectortilecreator.run(['bound_info_{}'.format(level)], args.cache, args.refresh, args.out_dir, args.overwrite, [level])
+		call(["marble-vectorosm-tilecreator", "-e", "o5m", "-z", str(level), "-o", args.out_dir, 'tiny_planet_{}.1.osm'.format(level)])
