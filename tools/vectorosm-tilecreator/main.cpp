@@ -96,10 +96,10 @@ bool writeTile(const QCommandLineParser &parser, const QString &outputName, GeoD
 
 int main(int argc, char *argv[])
 {
-    QApplication app(argc, argv);
+    QCoreApplication app(argc, argv);
 
-    QApplication::setApplicationName("marble-vectorosm-tilecreator");
-    QApplication::setApplicationVersion("0.1");
+    QCoreApplication::setApplicationName("marble-vectorosm-tilecreator");
+    QCoreApplication::setApplicationVersion("0.1");
 
     QCommandLineParser parser;
     parser.setApplicationDescription("A tool for Marble, which is used to reduce the details of osm maps.");
