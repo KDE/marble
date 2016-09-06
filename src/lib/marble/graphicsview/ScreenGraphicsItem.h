@@ -16,7 +16,7 @@
 #include "marble_export.h"
 
 // Qt
-#include <QList>
+#include <QVector>
 
 namespace Marble
 {
