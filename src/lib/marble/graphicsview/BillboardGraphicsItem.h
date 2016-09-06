@@ -48,11 +48,13 @@ class MARBLE_EXPORT BillboardGraphicsItem : public MarbleGraphicsItem
      * based on the viewport of the last paintEvent(). Note that the result list may contain
      * an unbound number of elements, including zero, depending on the item's visibility,
      * the projection and zoom level.
+     * @since 0.26.0
      */
     QVector<QPointF> positions() const;
 
     /**
      * @brief Returns the absolute screen bounding boxes of the item.
+     * @since 0.26.0
      */
     QVector<QRectF> boundingRects() const;
 

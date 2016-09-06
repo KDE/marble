@@ -222,6 +222,9 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
     QVector<const GeoDataFeature *> whichFeatureAt( const QPoint& ) const;
 
+    /**
+     * @since 0.26.0
+     */
     QVector<const GeoDataFeature*> whichBuildingAt(const QPoint& curpos) const;
 
     /**
@@ -420,6 +423,9 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
     RenderState renderState() const;
 
+    /**
+     * @since 0.26.0
+     */
     const StyleBuilder* styleBuilder() const;
 
  public Q_SLOTS:

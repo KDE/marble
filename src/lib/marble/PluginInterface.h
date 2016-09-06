@@ -83,6 +83,9 @@ class MARBLE_EXPORT PluginInterface
 
     virtual QString copyrightYears() const = 0;
 
+    /**
+     * @since 0.26.0
+     */
     virtual QVector<PluginAuthor> pluginAuthors() const = 0;
 
     /**

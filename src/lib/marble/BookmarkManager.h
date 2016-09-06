@@ -98,6 +98,9 @@ class MARBLE_EXPORT BookmarkManager : public QObject
       */
     void removeAllBookmarks();
 
+    /**
+     * @since 0.26.0
+     */
     void setStyleBuilder(const StyleBuilder* styleBuilder);
 
 public Q_SLOTS:

@@ -59,6 +59,9 @@ class GEODATA_EXPORT GeoDataExtendedData : public GeoDataObject
      */
     void addValue( const GeoDataData& data );
 
+    /**
+     * @since 0.26.0
+     */
     void removeKey(const QString &key);
     
     /**

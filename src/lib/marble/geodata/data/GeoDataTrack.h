@@ -108,6 +108,7 @@ public:
     /**
      * Returns the time value of all the points in the map, in chronological
      * order.
+     * @since 0.26.0
      */
     QVector<QDateTime> whenList() const;
 

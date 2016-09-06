@@ -195,7 +195,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
 
         // OpenStreetMap category Amenity
         AmenityLibrary,
-        AmenityKindergarten,
+        AmenityKindergarten, ///< @since 0.26.0
 
         // OpenStreetMap category Education
         EducationCollege,
@@ -237,7 +237,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         AmenityPostOffice,
         AmenityPrison,
         AmenityRecycling,
-        AmenityShelter,
+        AmenityShelter, ///< @since 0.26.0
         AmenityTelephone,
         AmenityToilets,
         AmenityTownHall,
@@ -327,10 +327,10 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         TransportAerodrome,
         TransportHelipad,
         TransportAirportTerminal,
-        TransportAirportGate,
-        TransportAirportRunway,
-        TransportAirportTaxiway,
-        TransportAirportApron,
+        TransportAirportGate, ///< @since 0.26.0
+        TransportAirportRunway, ///< @since 0.26.0
+        TransportAirportTaxiway, ///< @since 0.26.0
+        TransportAirportApron, ///< @since 0.26.0
         TransportBusStation,
         TransportBusStop,
         TransportCarShare,
@@ -361,7 +361,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
 
         // OpenStreetMap category Leisure
         LeisureGolfCourse,
-        LeisureMarina,
+        LeisureMarina, ///< @since 0.26.0
         LeisurePark,
         LeisurePlayground,
         LeisurePitch,
@@ -425,7 +425,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         Landmass,
         UrbanArea,
         InternationalDateLine,
-        Bathymetry,
+        Bathymetry, ///< @since 0.26.0
 
         // Important: Make sure that this is always the last
         // item and just use it to specify the array size
@@ -637,6 +637,9 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
      */
     void setStyleMap( const GeoDataStyleMap* map );
 
+    /**
+     * @since 0.26.0
+     */
     QString categoryName() const;
 
     /// Serialize the contents of the feature to @p stream.

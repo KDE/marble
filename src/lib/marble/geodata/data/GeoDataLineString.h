@@ -138,6 +138,7 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry
 
 /*!
     \brief Reverses the LineString.
+    @since 0.26.0
 */
      void reverse();
 

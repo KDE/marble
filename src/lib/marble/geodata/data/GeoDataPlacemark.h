@@ -127,6 +127,9 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
 
     void setOsmData( const OsmPlacemarkData &osmData );
     bool hasOsmData() const;
+    /**
+     * @since 0.26.0
+     */
     void clearOsmData();
 
     /**

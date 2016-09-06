@@ -248,6 +248,9 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     PopupLayer* popupLayer();
 
+    /**
+     * @since 0.26.0
+     */
     const StyleBuilder* styleBuilder() const;
 
     /**
