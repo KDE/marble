@@ -259,9 +259,11 @@ bool JsonParser::read( QIODevice* device )
                     }
 
                     // If the property read, is the features name
-                    if (osmData.containsTagKey(QStringLiteral("name"))) {
+                    const auto tagIter = osmData.findTag(QStringLiteral("name"));
+                    if (tagIter != osmData.tagsEnd()) {
+                        const QString& name = tagIter.value();
                         for (int pl = 0 ; pl < placemarkList.length(); ++pl) {
-                            placemarkList.at(pl)->setName(osmData.tagValue(QStringLiteral("name")));
+                            placemarkList.at(pl)->setName(name);
                         }
                     }
 

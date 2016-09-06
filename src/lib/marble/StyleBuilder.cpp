@@ -1253,8 +1253,9 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
             }
         }
         else if (visualCategory == GeoDataFeature::Bathymetry) {
-            if (osmData.containsTagKey(QStringLiteral("ele"))) {
-                QString elevation = osmData.tagValue(QStringLiteral("ele"));
+            auto tagIter = osmData.findTag(QStringLiteral("ele"));
+            if (tagIter != osmData.tagsEnd()) {
+                const QString& elevation = tagIter.value();
                 if (elevation == QLatin1String("4000")) {
                     polyStyle.setColor("#a5c9c9");
                     lineStyle.setColor("#a5c9c9");
@@ -1263,15 +1264,19 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
             }
         }
         else if (visualCategory == GeoDataFeature::AmenityGraveyard || visualCategory == GeoDataFeature::LanduseCemetery) {
-            if (osmData.containsTag(QStringLiteral("religion"), QStringLiteral("jewish"))) {
-                polyStyle.setTexturePath(MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_jewish.png"));
-                adjustStyle = true;
-            } else if (osmData.containsTag(QStringLiteral("religion"), QStringLiteral("christian"))) {
-                polyStyle.setTexturePath(MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_christian.png"));
-                adjustStyle = true;
-            } else if (osmData.containsTag(QStringLiteral("religion"), QStringLiteral("INT-generic"))) {
-                polyStyle.setTexturePath(MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_generic.png"));
-                adjustStyle = true;
+            auto tagIter = osmData.findTag(QStringLiteral("religion"));
+            if (tagIter != osmData.tagsEnd()) {
+                const QString& religion = tagIter.value();
+                if (religion == QLatin1String("jewish")) {
+                    polyStyle.setTexturePath(MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_jewish.png"));
+                    adjustStyle = true;
+                } else if (religion == QLatin1String("christian")) {
+                    polyStyle.setTexturePath(MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_christian.png"));
+                    adjustStyle = true;
+                } else if (religion == QLatin1String("INT-generic")) {
+                    polyStyle.setTexturePath(MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_generic.png"));
+                    adjustStyle = true;
+                }
             }
         } else if (visualCategory == GeoDataFeature::HighwayPedestrian) {
             polyStyle.setOutline(false);
@@ -1321,8 +1326,9 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
                 lineStyle.setPhysicalWidth(0.0);
                 lineStyle.setWidth(4.0);
             } else {
-                if (osmData.containsTagKey(QStringLiteral("width"))) {
-                    QString const widthValue = osmData.tagValue(QStringLiteral("width")).remove(QStringLiteral(" meters")).remove(QStringLiteral(" m"));
+                auto tagIter = osmData.findTag(QStringLiteral("width"));
+                if (tagIter != osmData.tagsEnd()) {
+                    QString const widthValue = QString(tagIter.value()).remove(QStringLiteral(" meters")).remove(QStringLiteral(" m"));
                     bool ok;
                     float const width = widthValue.toFloat(&ok);
                     lineStyle.setPhysicalWidth(ok ? qBound(0.1f, width, 200.0f) : 0.0f);
@@ -1390,8 +1396,9 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
         GeoDataLineStyle lineStyle = style->lineStyle();
         bool adjustStyle = false;
         if (visualCategory == GeoDataFeature::Bathymetry) {
-            if (osmData.containsTagKey(QStringLiteral("ele"))) {
-                QString elevation = osmData.tagValue(QStringLiteral("ele"));
+            auto tagIter = osmData.findTag(QStringLiteral("ele"));
+            if (tagIter != osmData.tagsEnd()) {
+                const QString& elevation = tagIter.value();
                 if (elevation == QLatin1String("4000")) {
                     polyStyle.setColor("#a5c9c9");
                     lineStyle.setColor("#a5c9c9");
@@ -1956,8 +1963,9 @@ GeoDataFeature::GeoDataVisualCategory StyleBuilder::determineVisualCategory(cons
         return GeoDataFeature::None;
     }
 
-    if (osmData.containsTagKey(QStringLiteral("building")) &&
-        buildingValues().contains(osmData.tagValue(QStringLiteral("building"))) ) {
+    auto tagIter = osmData.findTag(QStringLiteral("building"));
+    if (tagIter != osmData.tagsEnd() &&
+        buildingValues().contains(tagIter.value())) {
         return GeoDataFeature::Building;
     }
 

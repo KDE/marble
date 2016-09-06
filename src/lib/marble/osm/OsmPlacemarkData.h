@@ -107,6 +107,12 @@ public:
     bool containsTagKey( const QString& key ) const;
 
     /**
+     * @brief tagValue returns a pointer to the tag that has @p key as key
+     * or the end iterator if there is no such tag
+     */
+    QHash<QString, QString>::const_iterator findTag(const QString &key) const;
+
+    /**
      * @brief iterators for the tags hash.
      */
     QHash< QString, QString >::const_iterator tagsBegin() const;

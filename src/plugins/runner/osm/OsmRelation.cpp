@@ -126,10 +126,11 @@ void OsmRelation::create(GeoDataDocument *document, OsmWays &ways, const OsmNode
     if (outerCategory == GeoDataFeature::Bathymetry) {
         // In case of a bathymetry store elevation info since it is required during styling
         // The ele=* tag is present in the outermost way
-        const OsmPlacemarkData outerWayData = ways[*outerWays.begin()].osmData();
-        if (outerWayData.containsTagKey(QStringLiteral("ele"))) {
-            const QString value = outerWayData.tagValue(QStringLiteral("ele"));
-            osmData.addTag(QStringLiteral("ele"), value);
+        const QString ele = QStringLiteral("ele");
+        const OsmPlacemarkData &outerWayData = ways[*outerWays.begin()].osmData();
+        auto tagIter = outerWayData.findTag(ele);
+        if (tagIter != outerWayData.tagsEnd()) {
+            osmData.addTag(ele, tagIter.value());
         }
     }
 

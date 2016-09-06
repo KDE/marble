@@ -45,9 +45,10 @@ void OsmNode::create(GeoDataDocument *document) const
     placemark->setOsmData(m_osmData);
     placemark->setCoordinate(m_coordinates);
 
+    QHash<QString, QString>::const_iterator tagIter;
     if ((category == GeoDataFeature::TransportCarShare || category == GeoDataFeature::MoneyAtm)
-            && m_osmData.containsTagKey(QStringLiteral("operator"))) {
-        placemark->setName(m_osmData.tagValue(QStringLiteral("operator")));
+            && (tagIter = m_osmData.findTag(QStringLiteral("operator"))) != m_osmData.tagsEnd()) {
+        placemark->setName(tagIter.value());
     } else {
         placemark->setName(m_osmData.tagValue(QStringLiteral("name")));
     }

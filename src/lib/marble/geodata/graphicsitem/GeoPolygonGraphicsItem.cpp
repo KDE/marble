@@ -98,9 +98,11 @@ int GeoPolygonGraphicsItem::extractBathymetryElevation(const GeoDataFeature *fea
 
     if (feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
         const GeoDataPlacemark *placemark = static_cast<const GeoDataPlacemark *>(feature);
+        const OsmPlacemarkData &osmData = placemark->osmData();
 
-        if (placemark->osmData().containsTagKey(QStringLiteral("ele"))) {
-            elevation = placemark->osmData().tagValue(QStringLiteral("ele")).toInt();
+        const auto tagIter = osmData.findTag(QStringLiteral("ele"));
+        if (tagIter != osmData.tagsEnd()) {
+            elevation = tagIter.value().toInt();
         }
     }
 
@@ -252,18 +254,19 @@ double GeoPolygonGraphicsItem::extractBuildingHeight(const GeoDataFeature *featu
 
     if (feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
         const GeoDataPlacemark *placemark = static_cast<const GeoDataPlacemark *>(feature);
-
-        if (placemark->osmData().containsTagKey(QStringLiteral("height"))) {
+        const OsmPlacemarkData &osmData = placemark->osmData();
+        QHash<QString, QString>::const_iterator tagIter;
+        if ((tagIter = osmData.findTag(QStringLiteral("height"))) != osmData.tagsEnd()) {
             /** @todo Also parse non-SI units, see https://wiki.openstreetmap.org/wiki/Key:height#Height_of_buildings */
-            QString const heightValue = placemark->osmData().tagValue(QStringLiteral("height")).remove(QStringLiteral(" meters")).remove(QStringLiteral(" m"));
+            QString const heightValue = QString(tagIter.value()).remove(QStringLiteral(" meters")).remove(QStringLiteral(" m"));
             bool extracted = false;
             double extractedHeight = heightValue.toDouble(&extracted);
             if (extracted) {
                 height = extractedHeight;
             }
-        } else if (placemark->osmData().containsTagKey(QStringLiteral("building:levels"))) {
-            int const levels = placemark->osmData().tagValue(QStringLiteral("building:levels")).toInt();
-            int const skipLevels = placemark->osmData().tagValue(QStringLiteral("building:min_level")).toInt();
+        } else if ((tagIter = osmData.findTag(QStringLiteral("building:levels"))) != osmData.tagsEnd()) {
+            int const levels = tagIter.value().toInt();
+            int const skipLevels = osmData.tagValue(QStringLiteral("building:min_level")).toInt();
             /** @todo Is 35 as an upper bound for the number of levels sane? */
             height = 3.0 * qBound(1, 1+levels-skipLevels, 35);
         }
@@ -279,10 +282,15 @@ QString GeoPolygonGraphicsItem::extractBuildingLabel(const GeoDataFeature *featu
 
         if (!placemark->name().isEmpty()) {
             return placemark->name();
-        } else if (placemark->osmData().containsTagKey(QStringLiteral("addr:housename"))) {
-            return placemark->osmData().tagValue(QStringLiteral("addr:housename"));
-        } else if (placemark->osmData().containsTagKey(QStringLiteral("addr:housenumber"))) {
-            return placemark->osmData().tagValue(QStringLiteral("addr:housenumber"));
+        }
+        const OsmPlacemarkData &osmData = placemark->osmData();
+        auto tagIter = osmData.findTag(QStringLiteral("addr:housename"));
+        if (tagIter != osmData.tagsEnd()) {
+            return tagIter.value();
+        }
+        tagIter = osmData.findTag(QStringLiteral("addr:housenumber"));
+        if (tagIter != osmData.tagsEnd()) {
+            return tagIter.value();
         }
     }
 
@@ -298,10 +306,11 @@ QVector<GeoPolygonGraphicsItem::NamedEntry> GeoPolygonGraphicsItem::extractNamed
 
         const auto end = placemark->osmData().nodeReferencesEnd();
         for (auto iter = placemark->osmData().nodeReferencesBegin(); iter != end; ++iter) {
-            if (iter.value().containsTagKey(QStringLiteral("addr:housenumber"))) {
+            const auto tagIter = iter.value().findTag(QStringLiteral("addr:housenumber"));
+            if (tagIter != iter.value().tagsEnd()) {
                 NamedEntry entry;
                 entry.point = iter.key();
-                entry.label = iter.value().tagValue(QStringLiteral("addr:housenumber"));
+                entry.label = tagIter.value();
                 entries.push_back(entry);
             }
         }

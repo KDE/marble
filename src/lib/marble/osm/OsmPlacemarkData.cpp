@@ -137,6 +137,11 @@ bool OsmPlacemarkData::containsTagKey( const QString &key ) const
     return m_tags.contains( key );
 }
 
+QHash<QString, QString>::const_iterator OsmPlacemarkData::findTag(const QString &key) const
+{
+    return m_tags.constFind(key);
+}
+
 QHash< QString, QString >::const_iterator OsmPlacemarkData::tagsBegin() const
 {
     return m_tags.begin();
