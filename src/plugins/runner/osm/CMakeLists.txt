@@ -1,6 +1,7 @@
 PROJECT( OsmPlugin )
 
 INCLUDE_DIRECTORIES(
+ ${CMAKE_SOURCE_DIR}/src/3rdparty/o5mreader
  ${CMAKE_CURRENT_SOURCE_DIR}
  ${CMAKE_CURRENT_SOURCE_DIR}/writers
  ${CMAKE_CURRENT_SOURCE_DIR}/translators
@@ -29,7 +30,6 @@ set( osm_SRCS
   OsmWay.cpp
   OsmRelation.cpp
   OsmElementDictionary.cpp
-  o5mreader.cpp
 )
 
 marble_add_plugin( OsmPlugin ${osm_SRCS} ${osm_writers_SRCS} ${osm_translators_SRCS} )
@@ -48,6 +48,8 @@ macro_optional_find_package(KF5 ${REQUIRED_KF5_VERSION} QUIET COMPONENTS KIO)
 if(NOT KF5_FOUND)
     return()
 endif()
+
+target_link_libraries(OsmPlugin o5mreader)
 
 # register marble part as handler
 # install again once part is fixed to load and show the passed file

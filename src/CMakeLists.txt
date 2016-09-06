@@ -51,6 +51,7 @@ if(NOT ZLIB_FOUND)
   set(ZLIB_INCLUDE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/zlib" "${CMAKE_CURRENT_BINARY_DIR}/3rdparty/zlib")
 endif()
 
+add_subdirectory( 3rdparty/o5mreader )
 add_subdirectory( 3rdparty/sgp4 )
 add_subdirectory( lib/marble )
 add_subdirectory( lib/astro )
