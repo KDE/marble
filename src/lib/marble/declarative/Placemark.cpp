@@ -180,7 +180,7 @@ QString Placemark::elevation() const
         return m_elevation;
     }
 
-    OsmPlacemarkData data = m_placemark.osmData();
+    const OsmPlacemarkData& data = m_placemark.osmData();
 
     if (data.containsTagKey("ele")) {
         m_elevation = data.tagValue("ele");
@@ -195,7 +195,7 @@ QString Placemark::amenity() const
         return m_amenity;
     }
 
-    OsmPlacemarkData data = m_placemark.osmData();
+    const OsmPlacemarkData& data = m_placemark.osmData();
 
     if (data.containsTagKey("amenity") && !data.tagValue("amenity").isEmpty()){
         QString amenity = data.tagValue("amenity");
@@ -212,7 +212,7 @@ QString Placemark::shop() const
         return m_shop;
     }
 
-    OsmPlacemarkData data = m_placemark.osmData();
+    const OsmPlacemarkData& data = m_placemark.osmData();
 
     if (data.containsTagKey("shop") && !data.tagValue("shop").isEmpty()){
         QString shop = data.tagValue("shop");

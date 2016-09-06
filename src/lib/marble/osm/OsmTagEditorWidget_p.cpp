@@ -64,7 +64,7 @@ void OsmTagEditorWidgetPrivate::populateCurrentTagsList()
 
     // Other tags
     if( m_placemark->hasOsmData() ) {
-        OsmPlacemarkData osmData = m_placemark->osmData();
+        const OsmPlacemarkData& osmData = m_placemark->osmData();
         QHash< QString, QString>::const_iterator it = osmData.tagsBegin();
         QHash< QString, QString>::const_iterator end = osmData.tagsEnd();
         for ( ; it != end; ++it ) {

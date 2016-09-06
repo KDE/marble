@@ -189,7 +189,7 @@ void MarbleWidgetPopupMenu::Private::setupDialogOsm( PopupLayer *popup, const Ge
     }
 
     QString description = descriptionFile.readAll();
-    OsmPlacemarkData data = placemark->osmData();
+    const OsmPlacemarkData& data = placemark->osmData();
     if (!data.containsTagKey("addr:street") && !data.containsTagKey("addr:housenumber")){
         description.replace(QStringLiteral("<br> %postcode%"), QStringLiteral("%postcode%"));
     }
@@ -646,7 +646,7 @@ void MarbleWidgetPopupMenu::slotInfoDialog()
         bool isCity = false;
         bool isNation = false;
 
-        OsmPlacemarkData data = placemark->osmData();
+        const OsmPlacemarkData& data = placemark->osmData();
 
         bool hasOsmData = false;
 
