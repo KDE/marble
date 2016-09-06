@@ -188,6 +188,8 @@ void MarbleWidgetPopupMenu::Private::setupDialogOsm( PopupLayer *popup, const Ge
         return;
     }
 
+    const QString none = QStringLiteral("none");
+
     QString description = descriptionFile.readAll();
     const OsmPlacemarkData& data = placemark->osmData();
     if (!data.containsTagKey("addr:street") && !data.containsTagKey("addr:housenumber")){
@@ -195,139 +197,146 @@ void MarbleWidgetPopupMenu::Private::setupDialogOsm( PopupLayer *popup, const Ge
     }
     TemplateDocument doc(description);
 
-    if (data.containsTagKey("name")){
-        doc["name"] = data.tagValue("name");
-    } else {
-        doc["name"] = "";
-    }
+    doc[QStringLiteral("name")] = data.tagValue(QStringLiteral("name"));
 
-    if (data.containsTagKey("natural") && !data.tagValue("natural").isEmpty()){
-        QString natural = data.tagValue("natural");
+    QString natural = data.tagValue(QStringLiteral("natural"));
+    if (!natural.isEmpty()) {
         natural[0] = natural[0].toUpper();
-        if (natural == QLatin1String("Peak") && data.containsTagKey("ele") && !data.tagValue("ele").isEmpty()) {
-            doc["details"] = natural + QLatin1String(" - ") + data.tagValue("ele") + QLatin1String(" m");
-        } else {
-            doc["details"] = natural;
+        if (natural == QLatin1String("Peak")) {
+            QString elevation = data.tagValue(QStringLiteral("ele"));
+            if (!elevation.isEmpty()) {
+                natural = natural + QLatin1String(" - ") + elevation + QLatin1String(" m");
+            }
         }
+        doc[QStringLiteral("details")] = natural;
     } else {
-        doc["detailsVisibility"] = "none";
+        doc[QStringLiteral("detailsVisibility")] = none;
     }
 
-    if (data.containsTagKey("shop") && !data.tagValue("shop").isEmpty()){
-        QString shop = data.tagValue("shop");
+    QString amenity;
+    QString shop = data.tagValue(QStringLiteral("shop"));
+    if (!shop.isEmpty()) {
         shop[0] = shop[0].toUpper();
-        if (shop == QLatin1String("Clothes") && data.containsTagKey("clothes") && !data.tagValue("clothes").isEmpty()) {
-            QString clothes = data.tagValue("clothes");
-            clothes[0] = clothes[0].toUpper();
-            doc["amenity"] = QLatin1String("Shop - ") + shop + QLatin1String(" (") + clothes + QLatin1Char(')');
-        } else if (shop == QLatin1String("Clothes") && data.containsTagKey("designation") && !data.tagValue("designation").isEmpty()) {
-            QString designation = data.tagValue("designation");
-            designation[0] = designation[0].toUpper();
-            doc["amenity"] = QLatin1String("Shop - ") + shop + QLatin1String(" (") + designation + QLatin1Char(')');
-        } else {
-            doc["amenity"] = QLatin1String("Shop - ") + shop;
+
+        if (shop == QLatin1String("Clothes")) {
+            QString type = data.tagValue(QStringLiteral("clothes"));
+            if (type.isEmpty()) {
+                type = data.tagValue(QStringLiteral("designation"));
+            }
+            if (!type.isEmpty()) {
+                type[0] = type[0].toUpper();
+                amenity = QLatin1String("Shop - ") + shop + QLatin1String(" (") + type + QLatin1Char(')');
+            }
         }
-    } else if (data.containsTagKey("amenity") && !data.tagValue("amenity").isEmpty()){
-        QString amenity = data.tagValue("amenity");
-        amenity[0] = amenity[0].toUpper();
-        doc["amenity"] = amenity;
+        if (amenity.isEmpty()) {
+            amenity = QLatin1String("Shop - ") + shop;
+        }
     } else {
-        doc["amenityVisibility"] = "none";
+        amenity = data.tagValue(QStringLiteral("amenity"));
+        if (!amenity.isEmpty()) {
+            amenity[0] = amenity[0].toUpper();
+        }
+    }
+    if (!amenity.isEmpty()) {
+        doc[QStringLiteral("amenity")] = amenity;
+    } else {
+        doc[QStringLiteral("amenityVisibility")] = none;
     }
 
-    if (data.containsTagKey("cuisine") && !data.tagValue("cuisine").isEmpty()){
-        QString cuisine = data.tagValue("cuisine");
+    QString cuisine = data.tagValue(QStringLiteral("cuisine"));
+    if (!cuisine.isEmpty()) {
         cuisine[0] = cuisine[0].toUpper();
-        doc["cuisine"] = cuisine;
+        doc[QStringLiteral("cuisine")] = cuisine;
     } else {
-        doc["cuisineVisibility"] = "none";
+        doc[QStringLiteral("cuisineVisibility")] = none;
     }
 
-    if (data.containsTagKey("opening_hours") && !data.tagValue("opening_hours").isEmpty()){
-        doc["openinghours"] = data.tagValue("opening_hours");
+    QString openingHours = data.tagValue(QStringLiteral("opening_hours"));
+    if (!openingHours.isEmpty()) {
+        doc[QStringLiteral("openinghours")] = openingHours;
     } else {
-        doc["openinghoursVisibility"] = "none";
+        doc[QStringLiteral("openinghoursVisibility")] = none;
     }
 
-    bool hasAddressData = false;
-    foreach(const QString &tag, QStringList() << "addr:street" << "addr:housenumber" << "addr:postcode" << "addr:city") {
-        if (data.containsTagKey(tag) && !data.tagValue(tag).isEmpty()){
-            hasAddressData = true;
-            break;
+    bool hasContactsData = false;
+
+    const QStringList addressItemKeys = QStringList()
+        << QStringLiteral("street")
+        << QStringLiteral("housenumber")
+        << QStringLiteral("postcode")
+        << QStringLiteral("city");
+    bool hasAddressItem = false;
+    QStringList addressItems;
+    foreach (const QString& key, addressItemKeys) {
+        const QString item = data.tagValue(QLatin1String("addr:") + key);
+        if (!item.isEmpty()) {
+            hasAddressItem = true;
         }
+        addressItems << item;
+    }
+    if (hasAddressItem) {
+        hasContactsData = true;
+        for(int i = 0; i < addressItemKeys.size(); ++i) {
+            doc[addressItemKeys[i]] = addressItems[i];
+        }
+    } else {
+        doc[QStringLiteral("addressVisibility")] = none;
     }
 
-    bool hasWebsiteData = false;
+    QString phoneData = data.tagValue(QStringLiteral("phone"));
+    if (!phoneData.isEmpty()) {
+        hasContactsData = true;
+        doc[QStringLiteral("phone")] = phoneData;
+    } else {
+        doc[QStringLiteral("phoneVisibility")] = none;
+    }
+
+    QString websiteData;
     foreach(const QString &tag, QStringList() << "website" << "contact:website" << "facebook" << "contact:facebook" << "url") {
-        if (data.containsTagKey(tag) && !data.tagValue(tag).isEmpty()){
-            hasWebsiteData = true;
+        websiteData = data.tagValue(tag);
+        if (!websiteData.isEmpty()) {
             break;
         }
     }
-
-    bool hasPhoneData = data.containsTagKey("phone") && !data.tagValue("phone").isEmpty();
-
-    bool hasContactsData = hasAddressData || hasPhoneData || hasWebsiteData;
-
-    if (hasContactsData){
-        if (hasAddressData){
-            foreach (const QString tag, QStringList() << "addr:street" << "addr:housenumber" << "addr:postcode" << "addr:city") {
-                if (data.containsTagKey(tag)){
-                    doc[tag.split("addr:")[1]] = data.tagValue(tag);
-                } else {
-                    doc[tag.split("addr:")[1]] = "";
-                }
-            }
-        } else {
-            doc["addressVisibility"] = "none";
-        }
-
-        if (hasPhoneData){
-            doc["phone"] = data.tagValue("phone");
-        } else {
-            doc["phoneVisibility"] = "none";
-        }
-
-        if (hasWebsiteData){
-            foreach(const QString tag, QStringList() << "website" << "contact:website" << "facebook" << "contact:facebook" << "url") {
-                if (data.containsTagKey(tag) && !data.tagValue(tag).isEmpty()){
-                    doc["website"] = data.tagValue(tag);
-                    break;
-                }
-            }
-        } else {
-            doc["websiteVisibility"] = "none";
-        }
+    if (!websiteData.isEmpty()) {
+        hasContactsData = true;
+        doc[QStringLiteral("website")] = websiteData;
     } else {
-        doc["contactVisibility"] = "none";
+        doc[QStringLiteral("websiteVisibility")] = none;
     }
 
-    bool hasWheelchair = data.containsTagKey("wheelchair") && !data.tagValue("wheelchair").isEmpty();
-    bool hasInternet = data.containsTagKey("internet_access") && !data.tagValue("internet_access").isEmpty();
-    bool hasSmoking = data.containsTagKey("smoking") && !data.tagValue("smoking").isEmpty();
+    if (!hasContactsData) {
+        doc[QStringLiteral("contactVisibility")] = none;
+    }
 
-    bool hasFacilitiesData = hasWheelchair || hasInternet || hasSmoking;
+    bool hasFacilitiesData = false;
 
-    if (hasFacilitiesData){
-        if (hasWheelchair){
-            doc["wheelchair"] = data.tagValue("wheelchair");
-        } else {
-            doc["wheelchairVisibility"] = "none";
-        }
-
-        if (hasInternet){
-            doc["internetaccess"] = data.tagValue("internet_access");
-        } else {
-            doc["internetVisibility"] = "none";
-        }
-
-        if (hasSmoking){
-            doc["smoking"] = data.tagValue("smoking");
-        } else {
-            doc["smokingVisibility"] = "none";
-        }
+    const QString wheelchair = data.tagValue(QStringLiteral("wheelchair"));
+    if (!wheelchair.isEmpty()) {
+        hasFacilitiesData = true;
+        doc[QStringLiteral("wheelchair")] = wheelchair;
     } else {
-        doc["facilitiesVisibility"] = "none";
+        doc[QStringLiteral("wheelchairVisibility")] = none;
+    }
+
+    const QString internetAccess = data.tagValue(QStringLiteral("internet_access"));
+    if (!internetAccess.isEmpty()) {
+        hasFacilitiesData = true;
+        doc[QStringLiteral("internetaccess")] = internetAccess;
+    } else {
+        doc[QStringLiteral("internetVisibility")] = none;
+    }
+
+    const QString smoking = data.tagValue(QStringLiteral("smoking"));
+    if (!smoking.isEmpty()) {
+        hasFacilitiesData = true;
+        doc[QStringLiteral("smoking")] = smoking;
+    } else {
+        doc[QStringLiteral("smokingVisibility")] = none;
+    }
+
+    if (!hasFacilitiesData) {
+        doc[QStringLiteral("facilitiesVisibility")] = none;
     }
 
     const QString flagPath = m_widget->styleBuilder()->createStyle(StyleParameters(placemark))->iconStyle().iconPath();

@@ -180,11 +180,7 @@ QString Placemark::elevation() const
         return m_elevation;
     }
 
-    const OsmPlacemarkData& data = m_placemark.osmData();
-
-    if (data.containsTagKey("ele")) {
-        m_elevation = data.tagValue("ele");
-    }
+    m_elevation = m_placemark.osmData().tagValue(QStringLiteral("ele"));
 
     return m_elevation;
 }
@@ -195,12 +191,9 @@ QString Placemark::amenity() const
         return m_amenity;
     }
 
-    const OsmPlacemarkData& data = m_placemark.osmData();
-
-    if (data.containsTagKey("amenity") && !data.tagValue("amenity").isEmpty()){
-        QString amenity = data.tagValue("amenity");
-        amenity[0] = amenity[0].toUpper();
-        m_amenity = amenity;
+    m_amenity = m_placemark.osmData().tagValue(QStringLiteral("amenity"));
+    if (!m_amenity.isEmpty()) {
+        m_amenity[0] = m_amenity[0].toUpper();
     }
 
     return m_amenity;
@@ -212,20 +205,23 @@ QString Placemark::shop() const
         return m_shop;
     }
 
-    const OsmPlacemarkData& data = m_placemark.osmData();
+    const OsmPlacemarkData& osmData = m_placemark.osmData();
 
-    if (data.containsTagKey("shop") && !data.tagValue("shop").isEmpty()){
-        QString shop = data.tagValue("shop");
+    QString shop = osmData.tagValue(QStringLiteral("shop"));
+    if (!shop.isEmpty()) {
         shop[0] = shop[0].toUpper();
-        if (shop == "Clothes" && data.containsTagKey("clothes") && !data.tagValue("clothes").isEmpty()){
-            QString clothes = data.tagValue("clothes");
-            clothes[0] = clothes[0].toUpper();
-            m_shop = QLatin1String("Shop : ") + shop + QLatin1String(" (") + clothes + QLatin1Char(')');
-        } else if (shop == "Clothes" && data.containsTagKey("designation") && !data.tagValue("designation").isEmpty()){
-            QString designation = data.tagValue("designation");
-            designation[0] = designation[0].toUpper();
-            m_shop = QLatin1String("Shop : ") + shop + QLatin1String(" (") + designation + QLatin1Char(')');
-        } else {
+
+        if (shop == QLatin1String("Clothes")) {
+            QString type = osmData.tagValue(QStringLiteral("clothes"));
+            if (type.isEmpty()) {
+                type = osmData.tagValue(QStringLiteral("designation"));
+            }
+            if (!type.isEmpty()) {
+                type[0] = type[0].toUpper();
+                m_shop = QLatin1String("Shop : ") + shop + QLatin1String(" (") + type + QLatin1Char(')');
+            }
+        }
+        if (m_shop.isEmpty()) {
             m_shop = QLatin1String("Shop : ") + shop;
         }
     }
