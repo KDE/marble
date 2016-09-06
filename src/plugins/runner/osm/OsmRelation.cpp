@@ -72,14 +72,13 @@ void OsmRelation::create(GeoDataDocument *document, OsmWays &ways, const OsmNode
     GeoDataFeature::GeoDataVisualCategory outerCategory = StyleBuilder::determineVisualCategory(m_osmData);
     if (outerCategory == GeoDataFeature::None) {
         // Try to determine the visual category from the relation members
-        auto iterator = outerWays.begin();
         GeoDataFeature::GeoDataVisualCategory const firstCategory =
-                StyleBuilder::determineVisualCategory(ways[*iterator].osmData());
+                StyleBuilder::determineVisualCategory(ways[*outerWays.begin()].osmData());
 
         bool categoriesAreSame = true;
-        for( ; iterator != outerWays.end(); ++iterator ) {
+        foreach (auto wayId, outerWays) {
             GeoDataFeature::GeoDataVisualCategory const category =
-                    StyleBuilder::determineVisualCategory(ways[*iterator].osmData());
+                    StyleBuilder::determineVisualCategory(ways[wayId].osmData());
             if( category != firstCategory ) {
                 categoriesAreSame = false;
                 break;
