@@ -455,28 +455,28 @@ void BaseClipper::clipPolyObject ( const QPolygonF & polygon,
             for(const auto& point : m_topEdge) {
                 intersectionsTop << QSharedPointer<LinkedPoint>(new LinkedPoint(point));
             }
-            std::sort(intersectionsTop.begin(), intersectionsTop.end(), [](QSharedPointer<LinkedPoint>& A, QSharedPointer<LinkedPoint>& B) {
+            std::sort(intersectionsTop.begin(), intersectionsTop.end(), [](const QSharedPointer<LinkedPoint>& A, const QSharedPointer<LinkedPoint>& B) {
                 return A->point().x() < B->point().x();
             });
 
             for(const auto& point : m_rightEdge) {
                 intersectionsRight << QSharedPointer<LinkedPoint>(new LinkedPoint(point));
             }
-            std::sort(intersectionsRight.begin(), intersectionsRight.end(), [](QSharedPointer<LinkedPoint>& A, QSharedPointer<LinkedPoint>& B) {
+            std::sort(intersectionsRight.begin(), intersectionsRight.end(), [](const QSharedPointer<LinkedPoint>& A, const QSharedPointer<LinkedPoint>& B) {
                 return A->point().y() < B->point().y();
             });
 
             for(const auto& point : m_bottomEdge) {
                 intersectionsBottom << QSharedPointer<LinkedPoint>(new LinkedPoint(point));
             }
-            std::sort(intersectionsBottom.begin(), intersectionsBottom.end(), [](QSharedPointer<LinkedPoint>& A, QSharedPointer<LinkedPoint>& B) {
+            std::sort(intersectionsBottom.begin(), intersectionsBottom.end(), [](const QSharedPointer<LinkedPoint>& A, const QSharedPointer<LinkedPoint>& B) {
                 return B->point().x() < A->point().x();
             });
 
             for(const auto& point : m_leftEdge) {
                 intersectionsLeft << QSharedPointer<LinkedPoint>(new LinkedPoint(point));
             }
-            std::sort(intersectionsLeft.begin(), intersectionsLeft.end(), [](QSharedPointer<LinkedPoint>& A, QSharedPointer<LinkedPoint>& B) {
+            std::sort(intersectionsLeft.begin(), intersectionsLeft.end(), [](const QSharedPointer<LinkedPoint>& A, const QSharedPointer<LinkedPoint>& B) {
                 return B->point().y() < A->point().y();
             });
 
