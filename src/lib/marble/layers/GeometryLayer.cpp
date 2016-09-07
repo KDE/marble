@@ -273,7 +273,7 @@ void GeometryLayerPrivate::createGraphicsItemFromGeometry(const GeoDataGeometry*
         return;
     item->setStyleBuilder(m_styleBuilder);
     item->setVisible( placemark->isGloballyVisible() );
-    item->setMinZoomLevel(m_styleBuilder->minimumZoomLevel(placemark->visualCategory()));
+    item->setMinZoomLevel(m_styleBuilder->minimumZoomLevel(*placemark));
     m_scene.addItem( item );
 }
 

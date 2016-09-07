@@ -1568,9 +1568,9 @@ void StyleBuilder::reset()
     d->m_defaultStyleInitialized = false;
 }
 
-int StyleBuilder::minimumZoomLevel(GeoDataFeature::GeoDataVisualCategory category) const
+int StyleBuilder::minimumZoomLevel(const GeoDataPlacemark &placemark) const
 {
-    return d->m_defaultMinZoomLevels[category];
+    return d->m_defaultMinZoomLevels[placemark.visualCategory()];
 }
 
 int StyleBuilder::maximumZoomLevel() const

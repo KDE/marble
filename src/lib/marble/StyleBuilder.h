@@ -24,6 +24,7 @@ class QFont;
 class QColor;
 
 namespace Marble {
+class GeoDataPlacemark;
 class OsmPlacemarkData;
 
 class MARBLE_EXPORT StyleParameters
@@ -68,7 +69,7 @@ public:
      * @param category the visual category for which the minimum zoom level shall be returned
      * @return zoom level from which on the given visual category will be visible
      */
-    int minimumZoomLevel(GeoDataFeature::GeoDataVisualCategory category) const;
+    int minimumZoomLevel(const GeoDataPlacemark &placemark) const;
 
     /**
      * @brief Returns the maximum zoom level in the theme.
