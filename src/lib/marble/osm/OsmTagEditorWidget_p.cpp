@@ -99,20 +99,12 @@ void OsmTagEditorWidgetPrivate::populatePresetTagsList()
 
 QTreeWidgetItem *OsmTagEditorWidgetPrivate::tagWidgetItem( const OsmTag &tag ) const
 {
-    static const StyleBuilder styleBuilder;
-
     QStringList itemText;
 
     itemText << tag.first;
     itemText << (tag.second.isEmpty() ? QLatin1Char('<') + QObject::tr("value") + QLatin1Char('>') : tag.second);
 
     QTreeWidgetItem *tagItem = new QTreeWidgetItem( itemText );
-
-    // Getting the icon preset for the tag ( if there's one available )
-    const GeoDataPlacemark::GeoDataVisualCategory category = StyleBuilder::osmVisualCategory(tag);
-    GeoDataStyle::ConstPtr style = styleBuilder.presetStyle(category);
-    QPixmap iconPixmap = QPixmap::fromImage( style->iconStyle().icon() );
-    tagItem->setIcon( 1, QIcon( iconPixmap ) );
 
     return tagItem;
 }

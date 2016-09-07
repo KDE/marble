@@ -52,7 +52,6 @@ public:
     void setDefaultLabelColor( const QColor& color );
 
     GeoDataStyle::ConstPtr createStyle(const StyleParameters &parameters) const;
-    GeoDataStyle::ConstPtr presetStyle(GeoDataPlacemark::GeoDataVisualCategory visualCategory) const;
 
     /**
      * @brief Returns the order in which the visual categories used in the theme shall be painted on the map.
@@ -76,11 +75,6 @@ public:
     int maximumZoomLevel() const;
 
     static QString visualCategoryName(GeoDataPlacemark::GeoDataVisualCategory category);
-
-    /**
-     * @brief  Convenience categorization of placemarks for Osm key=value pairs
-     */
-    static GeoDataPlacemark::GeoDataVisualCategory osmVisualCategory(const OsmTag &tag);
 
     /**
      * @brief begin and end provide an stl style iterator for the preset map

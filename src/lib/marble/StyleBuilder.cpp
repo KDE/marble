@@ -37,6 +37,8 @@ class StyleBuilder::Private
 public:
     Private();
 
+    GeoDataStyle::ConstPtr presetStyle(GeoDataPlacemark::GeoDataVisualCategory visualCategory) const;
+
     GeoDataStyle::Ptr createStyle(qreal width, qreal realWidth, const QColor& color,
                                       const QColor& outlineColor, bool fill, bool outline,
                                       Qt::BrushStyle brushStyle, Qt::PenStyle penStyle,
@@ -1201,7 +1203,7 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
     }
 
     auto const visualCategory = placemark->visualCategory();
-    GeoDataStyle::ConstPtr style = presetStyle(visualCategory);
+    GeoDataStyle::ConstPtr style = d->presetStyle(visualCategory);
 
     OsmPlacemarkData const & osmData = placemark->osmData();
     if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPointType) {
@@ -1291,7 +1293,7 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
 
         if (style->iconStyle().iconPath().isEmpty()) {
             const GeoDataPlacemark::GeoDataVisualCategory category = determineVisualCategory(osmData);
-            const GeoDataStyle::ConstPtr categoryStyle = presetStyle(category);
+            const GeoDataStyle::ConstPtr categoryStyle = d->presetStyle(category);
             if (category != GeoDataPlacemark::None && !categoryStyle->iconStyle().icon().isNull()) {
                 GeoDataStyle::Ptr newStyle(new GeoDataStyle(*style));
                 newStyle->setIconStyle(categoryStyle->iconStyle());
@@ -1425,16 +1427,16 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
     return style;
 }
 
-GeoDataStyle::ConstPtr StyleBuilder::presetStyle(GeoDataPlacemark::GeoDataVisualCategory visualCategory) const
+GeoDataStyle::ConstPtr StyleBuilder::Private::presetStyle(GeoDataPlacemark::GeoDataVisualCategory visualCategory) const
 {
-    if (!d->m_defaultStyleInitialized) {
-        d->initializeDefaultStyles();
+    if (!m_defaultStyleInitialized) {
+        const_cast<StyleBuilder::Private *>(this)->initializeDefaultStyles(); // const cast due to lazy initialization
     }
 
-    if (visualCategory != GeoDataPlacemark::None && d->m_defaultStyle[visualCategory] ) {
-        return d->m_defaultStyle[visualCategory];
+    if (visualCategory != GeoDataPlacemark::None && m_defaultStyle[visualCategory] ) {
+        return m_defaultStyle[visualCategory];
     } else {
-        return d->m_defaultStyle[GeoDataPlacemark::Default];
+        return m_defaultStyle[GeoDataPlacemark::Default];
     }
 }
 
@@ -1886,13 +1888,6 @@ QString StyleBuilder::visualCategoryName(GeoDataPlacemark::GeoDataVisualCategory
     return visualCategoryNames[category];
 }
 
-GeoDataPlacemark::GeoDataVisualCategory StyleBuilder::osmVisualCategory(const StyleBuilder::OsmTag &tag)
-{
-    Private::initializeOsmVisualCategories();
-
-    return Private::s_visualCategories.value(tag, GeoDataPlacemark::None);
-}
-
 QHash<StyleBuilder::OsmTag, GeoDataPlacemark::GeoDataVisualCategory>::const_iterator StyleBuilder::begin()
 {
     Private::initializeOsmVisualCategories();
@@ -2029,9 +2024,11 @@ GeoDataPlacemark::GeoDataVisualCategory StyleBuilder::determineVisualCategory(co
         return GeoDataPlacemark::NaturalIceShelf;
     }
 
+    Private::initializeOsmVisualCategories();
+
     for (auto iter = osmData.tagsBegin(), end=osmData.tagsEnd(); iter != end; ++iter) {
         const auto tag = OsmTag(iter.key(), iter.value());
-        GeoDataPlacemark::GeoDataVisualCategory category = osmVisualCategory(tag);
+        GeoDataPlacemark::GeoDataVisualCategory category = Private::s_visualCategories.value(tag, GeoDataPlacemark::None);
         if (category != GeoDataPlacemark::None) {
             if (category == GeoDataPlacemark::PlaceCity && osmData.containsTag("capital", "yes")) {
                 category = GeoDataPlacemark::PlaceCityCapital;
@@ -2040,7 +2037,9 @@ GeoDataPlacemark::GeoDataVisualCategory StyleBuilder::determineVisualCategory(co
             } else if (category == GeoDataPlacemark::PlaceVillage && osmData.containsTag("capital", "yes")) {
                 category = GeoDataPlacemark::PlaceVillageCapital;
             }
+        }
 
+        if (category != GeoDataPlacemark::None) {
             return category;
         }
     }
