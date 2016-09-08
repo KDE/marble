@@ -167,6 +167,7 @@ QString MarbleDirs::systemPath()
 
     return QDir( QCoreApplication::applicationDirPath() 
 
+// TODO: QTONLY definition was removed during Qt5/KF5 port, check what code should do
 #if defined(QTONLY)
                      + QLatin1String( "/data" )
 #else
@@ -223,6 +224,7 @@ QString MarbleDirs::pluginSystemPath()
 
     return QDir( QCoreApplication::applicationDirPath() 
 
+// TODO: QTONLY definition was removed during Qt5/KF5 port, check what code should do
 #if defined(QTONLY)
                      + QLatin1String( "/plugins" )
 #else

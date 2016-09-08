@@ -6,7 +6,7 @@ set( CTEST_BINARY_DIRECTORY "@PROJECT_BINARY_DIR@" )
 set ( CTEST_COMMAND "@CMAKE_CTEST_COMMAND@ -D Nightly --verbose" )
 
 #set the command for configuring the dashboard
-set ( CTEST_CMAKE_COMMAND "@CMAKE_COMMAND@ -DQTONLY=ON" )
+set ( CTEST_CMAKE_COMMAND "@CMAKE_COMMAND@ -DWITH_KF5=FALSE" )
 
 #wipe the binary tree before running
 set ( CTEST_START_WITH_EMPTY_BINARY_DIRECTORY TRUE )
