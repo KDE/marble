@@ -20,7 +20,7 @@
 // Marble
 #include "MarbleMap.h"
 
-// KDE
+// KF
 #include <KIOWidgets/kio/thumbcreator.h>
 
 // Qt

@@ -22,7 +22,7 @@
 #include <BookmarkManager.h>
 #include <GeoDataTreeModel.h>
 
-// KF5
+// KF
 #include <KLocalizedString>
 
 // Qt

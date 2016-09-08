@@ -2,7 +2,7 @@ This file describes how to build and install Marble
 
 The most recent version of this file can be found at:
 
-http://marble.kde.org/sources.php
+https://marble.kde.org/sources.php
 
 Please refer to the online version above if possible.
 
@@ -14,9 +14,9 @@ NOTE: This file describes how to build Marble as a stand-alone
 
 
 Prerequisites for building Marble are:
- - Qt 4.7 or newer
- - cmake version 2.4 or newer
- - (optional): kdelibs from the KDE subversion repositories.
+ - Qt 5.3 or newer
+ - Cmake version 2.8.12 or newer
+ - (optional): KDE Frameworks 5.7 or newer (KF5) from the KDE repositories.
  - other dependencies are optional
 
 A checkout of Marble. You can check out Marble using GIT via the command:
@@ -27,7 +27,7 @@ git clone git://anongit.kde.org/marble ~/marble/sources
 You can build and install Marble in two different ways:
 
 1. As a Qt-only application.
-2. As a KDE application, using kdelibs and KDE based classes.
+2. As a KF5-based application, using KDE Frameworks 5 classes.
 
 Choose one of them and read below for how to do it.
 
@@ -81,10 +81,10 @@ Finally, also from the build directory, type:
 
 and start Marble either from the menu or via the command line:
 
-  marble
+  marble-qt
 
 
-2. Build Marble as a KDE application.
+2. Build Marble as a KF5-based application.
 
 2.1 Create a build directory
 

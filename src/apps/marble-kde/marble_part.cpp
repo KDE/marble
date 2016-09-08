@@ -32,7 +32,7 @@
 #include <QMenu>
 #include <QStatusBar>
 
-// KDE
+// KF
 #include <kaboutdata.h>
 #include <kactioncollection.h>
 #include <kconfigdialog.h>

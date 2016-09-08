@@ -25,8 +25,8 @@ namespace Marble
 /**
  * @short A class that manages data look-up for Marble.
  *
- * The class basically does for Marble what KStandardDirs does for KDE.
- * Given that the MarbleWidget is a Qt4-only library and given that it 
+ * The class basically does for Marble what KStandardDirs did for KDE4.
+ * Given that the MarbleWidget is a Qt5-only library and given that it
  * comes with its own model and data we need this class.
  *
  * The class needs to respect the requirements of the different plattforms,

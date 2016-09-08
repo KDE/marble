@@ -18,7 +18,7 @@
 #include <QCoreApplication>
 #include <QCloseEvent>
 
-// KDE
+// KF
 #include <klocalizedstring.h>
 #include <kactioncollection.h>
 #include <kparts/part.h>
