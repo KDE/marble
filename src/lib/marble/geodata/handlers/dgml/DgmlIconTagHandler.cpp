@@ -45,10 +45,11 @@ GeoNode* DgmlIconTagHandler::parse(GeoParser& parser) const
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Icon));
 
     QString pixmapRelativePath  = parser.attribute(dgmlAttr_pixmap).trimmed();
-    QColor  color  = QColor( parser.attribute(dgmlAttr_color).trimmed() );
 
-    if ( !color.isValid() ) 
-        color = Qt::transparent;
+    QColor color;
+    if (pixmapRelativePath.isEmpty()) {
+        color.setNamedColor(parser.attribute(dgmlAttr_color).trimmed());
+    }
 
     GeoSceneIcon *icon = 0;
 

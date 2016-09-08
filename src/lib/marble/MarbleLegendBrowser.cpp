@@ -353,12 +353,10 @@ QString MarbleLegendBrowser::generateSectionsHtml()
                 styleDiv = "width: " + QString::number(pixmapWidth) + "px; height: " +
                         QString::number(pixmapHeight) + "px;";
             }
-
-
             // NOTICE. There are some pixmaps without image, so we should
             //         create just a plain rectangle with set color
-            QColor color = item->icon()->color();
-            if ( color.isValid() ) {
+            else if (item->icon()->color().isValid()) {
+                const QColor color = item->icon()->color();
                 styleDiv = "width: " + QString::number(pixmapWidth) + "px; height: " +
                         QString::number(pixmapHeight) + "px; background-color: " + color.name() + ';';
             }
