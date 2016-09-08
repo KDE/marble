@@ -15,9 +15,6 @@
 #include "marble_export.h"
 #include "RenderPlugin.h"
 
-class QQmlComponent;
-class QQuickItem;
-
 namespace Marble
 {
     
@@ -113,17 +110,12 @@ class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin
      */
     virtual RenderType renderType() const;
 
-    void setDelegate(QQmlComponent* delegate, QQuickItem *parent );
-
     /** Convenience method to set the favorite item state on the current model */
     void setFavoriteItemsOnly( bool favoriteOnly );
 
     bool isFavoriteItemsOnly() const;
 
     QObject* favoritesModel();
-    
-public Q_SLOTS:
-    void handleViewportChange( const ViewportParams *viewport );
 
  private Q_SLOTS:
     virtual void favoriteItemsChanged( const QStringList& favoriteItems );

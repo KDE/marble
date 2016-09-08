@@ -14,9 +14,8 @@
 #define DECLARATIVEDATAPLUGIN_H
 
 #include "AbstractDataPlugin.h"
-#include "RenderPlugin.h"
-#include "RenderPluginInterface.h"
 
+#include <QQmlComponent>
 #include <QStringList>
 
 class DeclarativeDataPluginPrivate;

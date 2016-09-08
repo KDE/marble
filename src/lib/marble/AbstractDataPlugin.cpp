@@ -23,9 +23,6 @@
 // Qt
 #include <QTimer>
 #include <QRegion>
-#include <QQmlComponent>
-#include <QQmlContext>
-#include <QQuickItem>
 
 namespace Marble
 {
@@ -35,9 +32,7 @@ class AbstractDataPluginPrivate
  public:
     AbstractDataPluginPrivate()
         : m_model( 0 ),
-          m_numberOfItems( 10 ),
-          m_delegate( 0 ),
-          m_delegateParent( 0 )
+          m_numberOfItems( 10 )
     {
       m_updateTimer.setSingleShot( true );
     }
@@ -48,9 +43,6 @@ class AbstractDataPluginPrivate
     
     AbstractDataPluginModel *m_model;
     quint32 m_numberOfItems;
-    QQmlComponent* m_delegate;
-    QQuickItem* m_delegateParent;
-    QMap<AbstractDataPluginItem*,QQuickItem*> m_delegateInstances;
     QTimer m_updateTimer;
 };
 
@@ -92,20 +84,16 @@ bool AbstractDataPlugin::render( GeoPainter *painter, ViewportParams *viewport,
     Q_UNUSED( renderPos );
     Q_UNUSED( layer );
 
-    if ( d->m_delegate ) {
-        handleViewportChange( viewport );
-    } else {
-        QList<AbstractDataPluginItem*> items = d->m_model->items( viewport, numberOfItems() );
-        painter->save();
+    QList<AbstractDataPluginItem*> items = d->m_model->items( viewport, numberOfItems() );
+    painter->save();
 
-        // Paint the most important item at last
-        for( int i = items.size() - 1; i >= 0; --i ) {
-            items.at( i )->paintEvent( painter, viewport );
-        }
-
-        painter->restore();
+    // Paint the most important item at last
+    for( int i = items.size() - 1; i >= 0; --i ) {
+        items.at( i )->paintEvent( painter, viewport );
     }
-    
+
+    painter->restore();
+
     return true;
 }
 
@@ -165,15 +153,6 @@ RenderPlugin::RenderType AbstractDataPlugin::renderType() const
     return OnlineRenderType;
 }
 
-void AbstractDataPlugin::setDelegate( QQmlComponent *delegate, QQuickItem* parent )
-{
-    qDeleteAll( d->m_delegateInstances.values() );
-    d->m_delegateInstances.clear();
-
-    d->m_delegate = delegate;
-    d->m_delegateParent = parent;
-}
-
 void AbstractDataPlugin::setFavoriteItemsOnly( bool favoriteOnly )
 {
     if ( d->m_model && d->m_model->isFavoriteItemsOnly() != favoriteOnly ) {
@@ -189,103 +168,6 @@ bool AbstractDataPlugin::isFavoriteItemsOnly() const
 QObject *AbstractDataPlugin::favoritesModel()
 {
     return d->m_model ? d->m_model->favoritesModel() : 0;
-}
-
-void AbstractDataPlugin::handleViewportChange( const ViewportParams *viewport )
-{
-    QList<AbstractDataPluginItem*> orphane = d->m_delegateInstances.keys();
-    QList<AbstractDataPluginItem*> const items = d->m_model->items( viewport, numberOfItems() );
-    foreach( AbstractDataPluginItem* item, items ) {
-        qreal x, y;
-        Marble::GeoDataCoordinates const coordinates = item->coordinate();
-        bool const visible = viewport->screenCoordinates( coordinates.longitude(), coordinates.latitude(), x, y );
-
-        if ( !d->m_delegateInstances.contains( item ) ) {
-            if ( !visible ) {
-                // We don't have, but don't need it either. Shouldn't happen though as the model checks for it already.
-                continue;
-            }
-
-            // Create a new QML object instance using the delegate as the factory. The original
-            // data plugin item is set as the context object, i.e. all its properties are available
-            // to QML directly with their names
-            QQmlContext *context = new QQmlContext( qmlContext( d->m_delegate ) );
-            context->setContextObject( item );
-            QList<QByteArray> const dynamicProperties = item->dynamicPropertyNames();
-            foreach( const QByteArray &property, dynamicProperties ) {
-                context->setContextProperty(property, item->property(property.constData()));
-            }
-
-            QObject* component = d->m_delegate->create( context );
-            QQuickItem* newItem = qobject_cast<QQuickItem*>( component );
-
-            if ( newItem ) {
-                newItem->setParentItem( d->m_delegateParent );
-                d->m_delegateInstances[item] = newItem;
-            } else {
-                mDebug() << "Failed to create delegate";
-                continue;
-            }
-        } else if ( !visible ) {
-            // Previously visible but not anymore => needs to be deleted. Orphane list takes care of it later.
-            // Shouldn't happen though as the model checks for it already.
-            continue;
-        }
-
-        Q_ASSERT( visible );
-        QQuickItem* declarativeItem = d->m_delegateInstances[item];
-        Q_ASSERT( declarativeItem );
-
-        // Make sure we have a valid bounding rect for collision detection
-        item->setProjection( viewport );
-        item->setSize(QSizeF(declarativeItem->width(), declarativeItem->height()));
-
-        int shiftX( 0 ), shiftY( 0 );
-        switch( declarativeItem->transformOrigin() ) {
-        case QQuickItem::TopLeft:
-        case QQuickItem::Top:
-        case QQuickItem::TopRight:
-            break;
-        case QQuickItem::Left:
-        case QQuickItem::Center:
-        case QQuickItem::Right:
-            shiftY = declarativeItem->height() / 2;
-            break;
-        case QQuickItem::BottomLeft:
-        case QQuickItem::Bottom:
-        case QQuickItem::BottomRight:
-            shiftY = declarativeItem->height();
-            break;
-        }
-
-        switch( declarativeItem->transformOrigin() ) {
-        case QQuickItem::TopLeft:
-        case QQuickItem::Left:
-        case QQuickItem::BottomLeft:
-            break;
-        case QQuickItem::Top:
-        case QQuickItem::Center:
-        case QQuickItem::Bottom:
-            shiftX = declarativeItem->width() / 2;
-            break;
-        case QQuickItem::TopRight:
-        case QQuickItem::Right:
-        case QQuickItem::BottomRight:
-            shiftX = declarativeItem->width();
-            break;
-        }
-
-        declarativeItem->setX( x - shiftX );
-        declarativeItem->setY( y - shiftY );
-        orphane.removeOne( item );
-    }
-
-    // Cleanup
-    foreach( AbstractDataPluginItem* item, orphane ) {
-        Q_ASSERT( d->m_delegateInstances.contains( item ) );
-        delete d->m_delegateInstances[item];
-        d->m_delegateInstances.remove( item );
-    }
 }
 
 void AbstractDataPlugin::favoriteItemsChanged( const QStringList& favoriteItems )
