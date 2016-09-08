@@ -27,7 +27,7 @@ public:
 
 private:
     void createWayChunk(GeoDataPlacemark *placemark, qint64 firstId, qint64 lastId);
-    WayChunk* getWayChunk(GeoDataPlacemark *placemark, qint64 matchId);
+    WayChunk* wayChunk(GeoDataPlacemark *placemark, qint64 matchId) const;
     void concatFirst(GeoDataPlacemark *placemark, WayChunk *chunk);
     void concatLast(GeoDataPlacemark *placemark, WayChunk *chunk);
     void concatBoth(GeoDataPlacemark *placemark, WayChunk *chunk, WayChunk *otherChunk);

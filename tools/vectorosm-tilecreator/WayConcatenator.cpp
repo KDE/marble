@@ -61,7 +61,7 @@ void WayConcatenator::process()
                 ++chunkCount;
             } else if (containsFirst && !containsLast) {
                 qDebug()<<"First coord matched";
-                WayChunk *chunk = getWayChunk(placemark, firstId);
+                WayChunk *chunk = wayChunk(placemark, firstId);
                 if (chunk != nullptr) {
                     // qDebug()<< "First* Chunk found, concatenating to it";
                     concatFirst(placemark, chunk);
@@ -78,7 +78,7 @@ void WayConcatenator::process()
                 ++count;
             } else if (!containsFirst && containsLast) {
                 qDebug()<<"Last coord matched";
-                WayChunk *chunk = getWayChunk(placemark, lastId);
+                WayChunk *chunk = wayChunk(placemark, lastId);
                 if (chunk != nullptr) {
                     // qDebug()<< "Last* Chunk found, concatenating to it";
                     concatLast(placemark, chunk);
@@ -95,8 +95,8 @@ void WayConcatenator::process()
                 ++count;
             } else if (containsFirst && containsLast) {
                 qDebug()<<"Both coord matched";
-                WayChunk *chunk = getWayChunk(placemark, firstId);
-                WayChunk *otherChunk = getWayChunk(placemark, lastId);
+                WayChunk *chunk = wayChunk(placemark, firstId);
+                WayChunk *otherChunk = wayChunk(placemark, lastId);
 
                 if (chunk != nullptr && otherChunk != nullptr) {
                     // qDebug()<< "Both* Both chunks found, concatenating to it";
@@ -210,12 +210,12 @@ void WayConcatenator::createWayChunk(GeoDataPlacemark *placemark, qint64 firstId
     m_chunks.append(chunk);
 }
 
-WayChunk* WayConcatenator::getWayChunk(GeoDataPlacemark *placemark, qint64 matchId)
+WayChunk* WayConcatenator::wayChunk(GeoDataPlacemark *placemark, qint64 matchId) const
 {
     qDebug()<<"Searching for a compatible WayChunk";
     qDebug()<<"Visual category for placemark"<<StyleBuilder::visualCategoryName(placemark->visualCategory());
 
-    QHash<qint64, WayChunk*>::iterator matchItr = m_hash.find(matchId);
+    QHash<qint64, WayChunk*>::ConstIterator matchItr = m_hash.find(matchId);
     while (matchItr != m_hash.end() && matchItr.key() == matchId) {
         WayChunk *chunk = matchItr.value();
         qDebug()<<"		* Chunk ID: "<<chunk->id()<<" Visual category for chunk"<<StyleBuilder::visualCategoryName(chunk->visualCategory());
