@@ -33,7 +33,7 @@ bool DgmlItemTagWriter::write(const GeoNode *node, GeoWriter& writer) const
     writer.writeStartElement( dgml::dgmlTag_Icon );
     if( !item->icon()->pixmap().isEmpty() ) {
         writer.writeAttribute( "pixmap", item->icon()->pixmap() );
-    } else if( !item->icon()->color().name().isEmpty() ) {
+    } else if (item->icon()->color().isValid()) {
         writer.writeAttribute( "color", item->icon()->color().name() );
     }
     writer.writeEndElement();
