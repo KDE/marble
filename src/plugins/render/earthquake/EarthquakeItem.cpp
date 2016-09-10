@@ -14,6 +14,7 @@
 #include <QFontMetrics>
 #include <QPainter>
 #include <QSvgRenderer>
+#include <QLocale>
 
 namespace Marble
 {
@@ -87,7 +88,7 @@ void EarthquakeItem::paint( QPainter *painter )
 
     // Draws magnitude of the earthquake
     QFontMetrics metrics( s_font );
-    QString magnitudeText = QString::number( magnitude() );
+    const QString magnitudeText = QLocale::system().toString(m_magnitude);
     QRect magnitudeRect = metrics.boundingRect( magnitudeText );
     painter->setBrush( QBrush() );
     painter->setPen( QPen() );
@@ -122,12 +123,13 @@ void EarthquakeItem::setDepth( double depth )
 
 void EarthquakeItem::updateTooltip()
 {
+    QLocale locale = QLocale::system();
     QString html = QLatin1String("<table cellpadding=\"2\">");
     if ( m_dateTime.isValid() ) {
-        html += QLatin1String("<tr><td align=\"right\">") + tr("Date:") + QLatin1String("</td><td>") + m_dateTime.toString(Qt::SystemLocaleShortDate) + QLatin1String("</td></tr>");
+        html += QLatin1String("<tr><td align=\"right\">") + tr("Date:") + QLatin1String("</td><td>") + locale.toString(m_dateTime, QLocale::ShortFormat) + QLatin1String("</td></tr>");
     }
     html +=
-        QLatin1String("<tr><td align=\"right\">") + tr("Magnitude:") + QLatin1String("</td><td>") + QString::number(m_magnitude) + QLatin1String("</td></tr><tr><td align=\"right\">") + tr("Depth:") + QLatin1String("</td><td>") + QString::number(m_depth) + QLatin1String(" km</td></tr></table>");
+        QLatin1String("<tr><td align=\"right\">") + tr("Magnitude:") + QLatin1String("</td><td>") + locale.toString(m_magnitude) + QLatin1String("</td></tr><tr><td align=\"right\">") + tr("Depth:") + QLatin1String("</td><td>") + locale.toString(m_depth) + QLatin1String(" km</td></tr></table>");
     setToolTip( html );
 }
 
