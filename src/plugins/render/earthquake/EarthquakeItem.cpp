@@ -124,13 +124,10 @@ void EarthquakeItem::updateTooltip()
 {
     QString html = QLatin1String("<table cellpadding=\"2\">");
     if ( m_dateTime.isValid() ) {
-        html += QLatin1String("<tr><td align=\"right\">Date</td>") +
-            QLatin1String("<td>") + m_dateTime.toString(Qt::SystemLocaleShortDate) + QLatin1String("</td></tr>");
+        html += QLatin1String("<tr><td align=\"right\">") + tr("Date:") + QLatin1String("</td><td>") + m_dateTime.toString(Qt::SystemLocaleShortDate) + QLatin1String("</td></tr>");
     }
     html +=
-        QLatin1String("<tr><td align=\"right\">Magnitude</td><td>") + QString::number(m_magnitude) + QLatin1String("</td></tr>") +
-        QLatin1String("<tr><td align=\"right\">Depth</td><td>") + QString::number(m_depth) + QLatin1String(" km</td></tr>") +
-        QLatin1String("</table>");
+        QLatin1String("<tr><td align=\"right\">") + tr("Magnitude:") + QLatin1String("</td><td>") + QString::number(m_magnitude) + QLatin1String("</td></tr><tr><td align=\"right\">") + tr("Depth:") + QLatin1String("</td><td>") + QString::number(m_depth) + QLatin1String(" km</td></tr></table>");
     setToolTip( html );
 }
 
