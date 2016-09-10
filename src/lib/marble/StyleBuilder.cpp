@@ -38,34 +38,34 @@ public:
                                       Qt::PenCapStyle capStyle, bool lineBackground,
                                       const QVector< qreal >& dashPattern,
                                       const QFont& font, const QColor& fontColor = Qt::black,
-                                      const QString& texturePath = QString());
+                                      const QString& texturePath = QString()) const;
     GeoDataStyle::Ptr createPOIStyle(const QFont &font, const QString &bitmap,
                                          const QColor &textColor = Qt::black,
                                          const QColor &color = QColor( 0xBE, 0xAD, 0xAD ),
                                          const QColor &outline = QColor( 0xBE, 0xAD, 0xAD ).darker(),
-                                         bool fill=true, bool renderOutline=true);
+                                         bool fill=true, bool renderOutline=true) const;
     GeoDataStyle::Ptr createOsmPOIStyle(const QFont &font, const QString &bitmap,
                                          const QColor &textColor = Qt::black,
                                          const QColor &color = QColor( 0xBE, 0xAD, 0xAD ),
-                                         const QColor &outline = QColor( 0xBE, 0xAD, 0xAD ).darker());
+                                         const QColor &outline = QColor(0xBE, 0xAD, 0xAD).darker()) const;
     GeoDataStyle::Ptr createOsmPOIRingStyle(const QFont &font, const QString &bitmap,
                                          const QColor &textColor = Qt::black,
                                          const QColor &color = QColor( 0xBE, 0xAD, 0xAD ),
-                                         const QColor &outline = QColor( 0xBE, 0xAD, 0xAD ).darker());
+                                         const QColor &outline = QColor(0xBE, 0xAD, 0xAD).darker()) const;
     GeoDataStyle::Ptr createOsmPOIAreaStyle(const QFont &font, const QString &bitmap,
                                          const QColor &textColor = Qt::black,
                                          const QColor &color = QColor( 0xBE, 0xAD, 0xAD ),
-                                         const QColor &outline = QColor( 0xBE, 0xAD, 0xAD ).darker());
+                                         const QColor &outline = QColor(0xBE, 0xAD, 0xAD).darker()) const;
     GeoDataStyle::Ptr createHighwayStyle(const QColor& color, const QColor& outlineColor, const QFont& font,
                                              const QColor& fontColor = Qt::black,
                                              qreal width = 1, qreal realWidth = 0.0,
                                              Qt::PenStyle penStyle = Qt::SolidLine,
                                              Qt::PenCapStyle capStyle = Qt::RoundCap,
-                                             bool lineBackground = false);
+                                             bool lineBackground = false) const;
     GeoDataStyle::Ptr createWayStyle(const QColor& color, const QColor& outlineColor,
                                          bool fill = true, bool outline = true,
                                          Qt::BrushStyle brushStyle = Qt::SolidPattern,
-                                         const QString& texturePath = QString());
+                                         const QString& texturePath = QString()) const;
 
     void initializeDefaultStyles();
 
@@ -213,7 +213,7 @@ StyleBuilder::Private::Private() :
 }
 
 GeoDataStyle::Ptr StyleBuilder::Private::createPOIStyle(const QFont &font, const QString &path,
-                                     const QColor &textColor, const QColor &color, const QColor &outline, bool fill, bool renderOutline)
+                                     const QColor &textColor, const QColor &color, const QColor &outline, bool fill, bool renderOutline) const
 {
     GeoDataStyle::Ptr style =  createStyle(1, 0, color, outline, fill, renderOutline, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false, QVector<qreal>(), font);
     style->setIconStyle( GeoDataIconStyle( path) );
@@ -227,21 +227,21 @@ GeoDataStyle::Ptr StyleBuilder::Private::createPOIStyle(const QFont &font, const
 }
 
 GeoDataStyle::Ptr StyleBuilder::Private::createOsmPOIStyle( const QFont &font, const QString &imagePath,
-                                     const QColor &textColor, const QColor &color, const QColor &outline)
+                                     const QColor &textColor, const QColor &color, const QColor &outline) const
 {
     QString const path = MarbleDirs::path(QLatin1String("svg/osmcarto/svg/") + imagePath + QLatin1String(".svg"));
     return createPOIStyle(font, path, textColor, color, outline, false, false);
 }
 
 GeoDataStyle::Ptr StyleBuilder::Private::createOsmPOIRingStyle( const QFont &font, const QString &imagePath,
-                                     const QColor &textColor, const QColor &color, const QColor &outline)
+                                     const QColor &textColor, const QColor &color, const QColor &outline) const
 {
     QString const path = MarbleDirs::path(QLatin1String("svg/osmcarto/svg/") + imagePath + QLatin1String(".svg"));
     return createPOIStyle(font, path, textColor, color, outline, false, true);
 }
 
 GeoDataStyle::Ptr StyleBuilder::Private::createOsmPOIAreaStyle( const QFont &font, const QString &imagePath,
-                                     const QColor &textColor, const QColor &color, const QColor &outline)
+                                     const QColor &textColor, const QColor &color, const QColor &outline) const
 {
     QString const path = MarbleDirs::path(QLatin1String("svg/osmcarto/svg/") + imagePath + QLatin1String(".svg"));
     return createPOIStyle(font, path, textColor, color, outline, true, false);
@@ -250,13 +250,13 @@ GeoDataStyle::Ptr StyleBuilder::Private::createOsmPOIAreaStyle( const QFont &fon
 
 GeoDataStyle::Ptr StyleBuilder::Private::createHighwayStyle( const QColor& color, const QColor& outlineColor, const QFont& font,
                                                              const QColor& fontColor, qreal width, qreal realWidth, Qt::PenStyle penStyle,
-                                                             Qt::PenCapStyle capStyle, bool lineBackground)
+                                                             Qt::PenCapStyle capStyle, bool lineBackground) const
 {
     return createStyle( width, realWidth, color, outlineColor, true, true, Qt::SolidPattern, penStyle, capStyle, lineBackground, QVector< qreal >(), font, fontColor );
 }
 
 GeoDataStyle::Ptr StyleBuilder::Private::createWayStyle( const QColor& color, const QColor& outlineColor,
-                                     bool fill, bool outline, Qt::BrushStyle brushStyle, const QString& texturePath)
+                                     bool fill, bool outline, Qt::BrushStyle brushStyle, const QString& texturePath) const
 {
     return createStyle(1, 0, color, outlineColor, fill, outline, brushStyle, Qt::SolidLine, Qt::RoundCap, false, QVector<qreal>(), m_defaultFont, Qt::black, texturePath);
 }
@@ -264,7 +264,7 @@ GeoDataStyle::Ptr StyleBuilder::Private::createWayStyle( const QColor& color, co
 GeoDataStyle::Ptr StyleBuilder::Private::createStyle( qreal width, qreal realWidth, const QColor& color,
                                   const QColor& outlineColor, bool fill, bool outline, Qt::BrushStyle brushStyle, Qt::PenStyle penStyle,
                                   Qt::PenCapStyle capStyle, bool lineBackground, const QVector< qreal >& dashPattern,
-                                  const QFont& font, const QColor& fontColor, const QString& texturePath)
+                                  const QFont& font, const QColor& fontColor, const QString& texturePath) const
 {
     GeoDataStyle *style = new GeoDataStyle;
     GeoDataLineStyle lineStyle( outlineColor );
