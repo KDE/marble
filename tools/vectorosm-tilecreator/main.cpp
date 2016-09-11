@@ -112,6 +112,7 @@ int main(int argc, char *argv[])
     parser.addOptions({
                           {{"d","debug"}, "Debug output in the terminal."},
                           {{"s","silent"}, "Don't output to terminal."},
+                          {{"l","landmass"}, "Convert the given <landmass> file and reduce nodes"},
                           {{"m","merge"}, "Merge the main document with the file <file_to_merge_with>. This works together with the -c flag.", "file_to_merge_with"},
                           {{"c", "cut-to-tiles"}, "Cuts into tiles based on the zoom level passed using -z."},
                           {{"n", "node-reduce"}, "Reduces the number of nodes for a given way based on zoom level"},
@@ -184,7 +185,32 @@ int main(int argc, char *argv[])
         mergeMap = manager.openFile(mergeFileName, DocumentRole::MapDocument, 600000);
     }
 
-    if (zoomLevel < 11) {
+    if (parser.isSet("landmass")) {
+        GeoDataDocument* map = manager.openFile(parser.value("landmass"), DocumentRole::MapDocument, 600000);
+        if(map == nullptr) {
+            qWarning() << "File" << inputFileName << "couldn't be loaded.";
+            return -2;
+        }
+
+        OsmPlacemarkData marbleLand;
+        marbleLand.addTag("marble_land","landmass");
+        foreach(auto land, map->placemarkList()) {
+            if(land->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType) {
+                land->setOsmData(marbleLand);
+            }
+        }
+
+        NodeReducer reducer(map, zoomLevel);
+        reducer.process();
+
+        QString const extension = parser.value("extension");
+        QString const outputFile = QString("%1/landmass-level-%2.%3").arg(outputName).arg(zoomLevel).arg(extension);
+        if (!GeoDataDocumentWriter::write(outputFile, *map)) {
+            return 4;
+        }
+        qDebug() << "Landmass file " << outputFile << " done";
+
+    } else if (zoomLevel < 11) {
         TinyPlanetProcessor processor(map);
         processor.process();
         GeoDataLatLonBox world(85.0, -85.0, 180.0, -180.0, GeoDataCoordinates::Degree);
