@@ -1557,6 +1557,8 @@ QStringList StyleBuilder::renderOrder() const
         paintLayerOrder << QStringLiteral("Polygon/Building/frame");
         paintLayerOrder << QStringLiteral("Polygon/Building/roof");
 
+        paintLayerOrder << QStringLiteral("Photo");
+
         Q_ASSERT(QSet<QString>::fromList(paintLayerOrder).size() == paintLayerOrder.size());
     }
 
