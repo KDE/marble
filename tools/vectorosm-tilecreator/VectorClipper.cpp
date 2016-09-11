@@ -8,7 +8,7 @@
 // Copyright 2016      David Kolozsvari <freedawson@gmail.com>
 //
 
-#include "TinyPlanetProcessor.h"
+#include "VectorClipper.h"
 
 #include "BaseClipper.h"
 #include "TileId.h"
@@ -23,18 +23,18 @@
 
 namespace Marble {
 
-TinyPlanetProcessor::TinyPlanetProcessor(GeoDataDocument* document) :
+VectorClipper::VectorClipper(GeoDataDocument* document) :
     BaseFilter(document)
 {
 
 }
 
-void TinyPlanetProcessor::process()
+void VectorClipper::process()
 {
     // ?
 }
 
-GeoDataDocument *TinyPlanetProcessor::clipTo(const GeoDataLatLonBox &tileBoundary)
+GeoDataDocument *VectorClipper::clipTo(const GeoDataLatLonBox &tileBoundary)
 {
     GeoDataDocument* tile = new GeoDataDocument();
     BaseClipper clipper;
@@ -171,7 +171,7 @@ GeoDataDocument *TinyPlanetProcessor::clipTo(const GeoDataLatLonBox &tileBoundar
     return tile;
 }
 
-GeoDataDocument *TinyPlanetProcessor::clipTo(unsigned int zoomLevel, unsigned int tileX, unsigned int tileY)
+GeoDataDocument *VectorClipper::clipTo(unsigned int zoomLevel, unsigned int tileX, unsigned int tileY)
 {
     unsigned int N = pow(2, zoomLevel);
     GeoDataLatLonBox tileBoundary;
@@ -188,12 +188,12 @@ GeoDataDocument *TinyPlanetProcessor::clipTo(unsigned int zoomLevel, unsigned in
     return tile;
 }
 
-void TinyPlanetProcessor::copyTags(const GeoDataPlacemark &source, GeoDataPlacemark &target) const
+void VectorClipper::copyTags(const GeoDataPlacemark &source, GeoDataPlacemark &target) const
 {
     copyTags(source.osmData(), target.osmData());
 }
 
-void TinyPlanetProcessor::copyTags(const OsmPlacemarkData &originalPlacemarkData, OsmPlacemarkData &targetOsmData) const
+void VectorClipper::copyTags(const OsmPlacemarkData &originalPlacemarkData, OsmPlacemarkData &targetOsmData) const
 {
     for (auto iter=originalPlacemarkData.tagsBegin(), end=originalPlacemarkData.tagsEnd(); iter != end; ++iter) {
         targetOsmData.addTag(iter.key(), iter.value());

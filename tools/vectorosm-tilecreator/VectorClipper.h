@@ -18,10 +18,10 @@
 
 namespace Marble {
 
-class TinyPlanetProcessor : public BaseFilter
+class VectorClipper : public BaseFilter
 {
 public:
-    explicit TinyPlanetProcessor(GeoDataDocument* document);
+    explicit VectorClipper(GeoDataDocument* document);
 
     void process() override;
 

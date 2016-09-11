@@ -23,7 +23,7 @@
 
 #include <QMessageLogContext>
 
-#include "TinyPlanetProcessor.h"
+#include "VectorClipper.h"
 #include "NodeReducer.h"
 #include "WayConcatenator.h"
 #include "TileIterator.h"
@@ -210,7 +210,7 @@ int main(int argc, char *argv[])
         qDebug() << "Landmass file " << outputFile << " done";
 
     } else if (zoomLevel < 11) {
-        TinyPlanetProcessor processor(map);
+        VectorClipper processor(map);
         processor.process();
         GeoDataLatLonBox world(85.0, -85.0, 180.0, -180.0, GeoDataCoordinates::Degree);
         TileIterator iter(world, zoomLevel);
@@ -243,11 +243,11 @@ int main(int argc, char *argv[])
 
         TagsFilter tagsFilter(map, tags);
 
-        TinyPlanetProcessor processor(tagsFilter.accepted());
-        TinyPlanetProcessor background(mergeMap);
+        VectorClipper processor(tagsFilter.accepted());
+        VectorClipper background(mergeMap);
         GeoDataDocument* landmass = background.clipTo(tagsFilter.accepted()->latLonAltBox());
 
-        TinyPlanetProcessor landMassClipper(landmass);
+        VectorClipper landMassClipper(landmass);
 
         TileIterator iter(tagsFilter.accepted()->latLonAltBox(), zoomLevel);
         foreach(auto const &tileId, iter) {
@@ -265,7 +265,7 @@ int main(int argc, char *argv[])
             delete tile2;
         }
     } else if (file.suffix() == QLatin1String("osm") && parser.isSet("cut-to-tiles")) {
-        TinyPlanetProcessor processor(map);
+        VectorClipper processor(map);
 
         processor.process();
 

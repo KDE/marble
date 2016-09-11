@@ -26,10 +26,10 @@ set( ${TARGET}_SRC
 main.cpp
 BaseClipper.cpp
 BaseFilter.cpp
-TinyPlanetProcessor.cpp
 NodeReducer.cpp
 TagsFilter.cpp
 TileIterator.cpp
+VectorClipper.cpp
 WayConcatenator.cpp
 WayChunk.cpp
 )
