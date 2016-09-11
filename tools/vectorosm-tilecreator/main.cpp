@@ -205,13 +205,8 @@ int main(int argc, char *argv[])
                           {{"s","silent"}, "Don't output to terminal."},
                           {{"l","landmass"}, "Convert the given <landmass> file and reduce nodes"},
                           {{"m","merge"}, "Merge the main document with the file <file_to_merge_with>. This works together with the -c flag.", "file_to_merge_with"},
-                          {{"c", "cut-to-tiles"}, "Cuts into tiles based on the zoom level passed using -z."},
-                          {{"n", "node-reduce"}, "Reduces the number of nodes for a given way based on zoom level"},
                           {{"z", "zoom-level"}, "Zoom level according to which OSM information has to be processed.", "number"},
-                          {{"t", "tags-filter"}, "Tag key-value pairs which are to be be considered", "k1=v1,k2=v2..."},
-                          {{"and", "tags-and"}, "For a feature to be considered for processing it must contain all the specified using tags-filter"},
-                          {{"w", "concat-ways"}, "Concatenates the ways which are specified using tags-filter"},
-                          {{"o", "output"}, "Generates an output .osmfile based on other flags. If the cut-to-tiles flag is set, then this needs to be a directory.", "output_file.osm"},
+                          {{"o", "output"}, "Output file or directory", "output"},
                           {{"e", "extension"}, "Output file type: osm (default), o5m or kml", "file extension", "osm"}
                       });
 
@@ -324,6 +319,9 @@ int main(int argc, char *argv[])
 
         VectorClipper landMassClipper(landmass);
 
+        // @todo FIXME Assumes placemark ownership
+        //WayConcatenator concatenator(tagsFilter.accepted(), QStringList() << "highway=*", false);
+
         TileIterator iter(tagsFilter.accepted()->latLonAltBox(), zoomLevel);
         foreach(auto const &tileId, iter) {
             GeoDataDocument* tile1 = processor.clipTo(zoomLevel, tileId.x(), tileId.y());
@@ -338,60 +336,8 @@ int main(int argc, char *argv[])
             delete tile1;
             delete tile2;
         }
-    } else if (file.suffix() == QLatin1String("osm") && parser.isSet("cut-to-tiles")) {
-        VectorClipper processor(map);
-
-        GeoDataLatLonBox world(85.0, -85.0, 180.0, -180.0, GeoDataCoordinates::Degree);
-        //TileIterator iter(map->latLonAltBox(), zoomLevel);
-        TileIterator iter(world, zoomLevel);
-        foreach(auto const &tileId, iter) {
-            GeoDataDocument* tile = processor.clipTo(zoomLevel, tileId.x(), tileId.y());
-            if (!writeTile(parser, outputName, tile, tileId.x(), tileId.y(), zoomLevel)) {
-                return 4;
-            }
-            qInfo() << tile->name() << " done";
-            delete tile;
-        }
-    } else if(parser.isSet("node-reduce")) {
-        qDebug()<<"Entered Node reduce"<<endl;
-        qDebug()<<"Finished Processing"<<endl;
-        if(!parser.isSet("zoom-level")) {
-            qDebug()<<" Zoom level not set"<<endl;
-        }
-        else{
-            NodeReducer reducer(map, zoomLevel);
-            if (!GeoDataDocumentWriter::write(outputName, *map)) {
-                qDebug() << "Could not write the file " << outputName;
-                return 4;
-            }
-
-        }
-    } else if(parser.isSet("tags-filter") && parser.isSet("concat-ways")) {
-
-
-        //Parses the tags given at command line and makes a Hash of key-value pairs
-        qDebug()<<" Parsed tf value: "<<parser.value("tags-filter")<<endl;
-        QStringList tagsList = parser.value("tags-filter").split(QLatin1Char(','));
-        //Filters and considers only those placemarks which have all the key-value pairs given at command line
-
-        WayConcatenator concatenator(map, tagsList, parser.isSet("tags-and"));
-
-        qDebug()<<"Concatenation done, writing results to the file";
-        
-        if (!GeoDataDocumentWriter::write(outputName, *map)) {
-            qDebug() << "Could not write the file " << outputName;
-            return 4;
-        }else{
-            qDebug()<<"File written";
-        }
-
-
-    }
-    else {
     }
 
     delete map;
-
-
     return 0;
 }
