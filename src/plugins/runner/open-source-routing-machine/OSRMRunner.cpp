@@ -25,9 +25,9 @@
 #include <QTime>
 #include <QTimer>
 #include <QNetworkReply>
-#include <QScriptValue>
-#include <QScriptEngine>
-#include <QScriptValueIterator>
+#include <QJsonDocument>
+#include <QJsonArray>
+#include <QJsonObject>
 
 namespace Marble
 {
@@ -198,22 +198,22 @@ RoutingInstruction::TurnType OSRMRunner::parseTurnType( const QString &instructi
 
 GeoDataDocument *OSRMRunner::parse( const QByteArray &input ) const
 {
-    QScriptEngine engine;
-    // Qt requires parentheses around json code
-    QScriptValue const data = engine.evaluate(QLatin1Char('(') + QString::fromUtf8(input) + QLatin1Char(')'));
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(input);
+    QJsonObject data = jsonDoc.object();
 
     GeoDataDocument* result = 0;
     GeoDataLineString* routeWaypoints = 0;
-    if ( data.property( "route_geometry" ).isString() ) {
+    QJsonValue routeGeometryValue = data.value(QStringLiteral("route_geometry"));
+    if (routeGeometryValue.isString()) {
         result = new GeoDataDocument();
         result->setName(QStringLiteral("Open Source Routing Machine"));
         GeoDataPlacemark* routePlacemark = new GeoDataPlacemark;
         routePlacemark->setName(QStringLiteral("Route"));
-        routeWaypoints = decodePolyline( data.property( "route_geometry" ).toString() );
+        routeWaypoints = decodePolyline(routeGeometryValue.toString());
         routePlacemark->setGeometry( routeWaypoints );
 
         QTime time;
-        time = time.addSecs( data.property( "route_summary" ).property("total_time").toNumber() );
+        time = time.addSecs( data.value(QStringLiteral("route_summary")).toObject().value(QStringLiteral("total_time")).toInt());
         qreal length = routeWaypoints->length( EARTH_RADIUS );
         const QString name = nameString( "OSRM", length, time );
         const GeoDataExtendedData extendedData = routeData( length, time );
@@ -222,21 +222,23 @@ GeoDataDocument *OSRMRunner::parse( const QByteArray &input ) const
         result->append( routePlacemark );
     }
 
-    if ( result && routeWaypoints && data.property( "route_instructions" ).isArray() ) {
+    QJsonValue routeInstructionsValue = data.value(QStringLiteral("route_instructions"));
+    if (result && routeWaypoints && routeInstructionsValue.isArray()) {
         bool first = true;
-        QScriptValueIterator iterator( data.property( "route_instructions" ) );
         GeoDataPlacemark* instruction = new GeoDataPlacemark;
         int lastWaypointIndex = 0;
-        while ( iterator.hasNext() ) {
-            iterator.next();
-            QVariantList details = iterator.value().toVariant().toList();
+
+        const QJsonArray routeInstructionsArray = routeInstructionsValue.toArray();
+        for (int index = 0; index < routeInstructionsArray.size(); ++index) {
+            QVariantList details = routeInstructionsArray[index].toVariant().toList();
             if ( details.size() > 7 ) {
                 QString const text = details.at( 0 ).toString();
                 QString const road = details.at( 1 ).toString();
                 int const waypointIndex = details.at( 3 ).toInt();
 
                 if ( waypointIndex < routeWaypoints->size() ) {
-                    if ( iterator.hasNext() ) {
+                    const bool isLastInstruction = (index+1 >= routeInstructionsArray.size());
+                    if (!isLastInstruction) {
                         GeoDataLineString *lineString = new GeoDataLineString;
                         for ( int i=lastWaypointIndex; i<=waypointIndex; ++i ) {
                             lineString->append(routeWaypoints->at( i ) );
@@ -271,7 +273,7 @@ GeoDataDocument *OSRMRunner::parse( const QByteArray &input ) const
                     }
                     instruction->setExtendedData( extendedData );
 
-                    if ( !iterator.hasNext() && lastWaypointIndex > 0 ) {
+                    if (isLastInstruction && lastWaypointIndex > 0 ) {
                         GeoDataLineString *lineString = new GeoDataLineString;
                         for ( int i=lastWaypointIndex; i<waypointIndex; ++i ) {
                             lineString->append(routeWaypoints->at( i ) );
@@ -284,15 +286,17 @@ GeoDataDocument *OSRMRunner::parse( const QByteArray &input ) const
         }
     }
 
-    if ( data.property( "hint_data" ).isValid() ) {
-        QVariantList hints = data.property( "hint_data" ).property( "locations" ).toVariant().toList();
+    QJsonValue hintDataValue = data.value(QStringLiteral("hint_data"));
+    if (hintDataValue.isObject()) {
+        QJsonObject hintDataObject = hintDataValue.toObject();
+        QVariantList hints = hintDataObject.value(QStringLiteral("locations")).toVariant().toList();
         if ( hints.size() == m_cachedHints.size() ) {
             for ( int i=0; i<m_cachedHints.size(); ++i ) {
                 m_cachedHints[i].second = hints[i].toString();
             }
         }
 
-        m_hintChecksum = data.property( "hint_data" ).property( "checksum" ).toString();
+        m_hintChecksum = hintDataObject.value(QStringLiteral("checksum")).toString();
     }
 
     return result;

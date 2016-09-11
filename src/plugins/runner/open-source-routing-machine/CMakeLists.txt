@@ -7,6 +7,4 @@ INCLUDE_DIRECTORIES(
 
 set( osrm_SRCS OSRMRunner.cpp OSRMPlugin.cpp )
 
-set( OSRMPlugin_LIBS Qt5::Script )
-
 marble_add_plugin( OSRMPlugin ${osrm_SRCS} )
