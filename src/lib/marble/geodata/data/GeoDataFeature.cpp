@@ -87,62 +87,35 @@ GeoDataFeature& GeoDataFeature::operator=( const GeoDataFeature& other )
 bool GeoDataFeature::equals( const GeoDataFeature &other ) const
 {
     if ( !GeoDataObject::equals(other) ||
-         p()->m_name != other.p()->m_name ||
-         p()->m_snippet != other.p()->m_snippet ||
-         p()->m_description != other.p()->m_description ||
-         p()->m_descriptionCDATA != other.p()->m_descriptionCDATA ||
-         p()->m_address != other.p()->m_address ||
-         p()->m_phoneNumber != other.p()->m_phoneNumber ||
-         p()->m_styleUrl != other.p()->m_styleUrl ||
-         p()->m_popularity != other.p()->m_popularity ||
-         p()->m_zoomLevel != other.p()->m_zoomLevel ||
-         p()->m_visible != other.p()->m_visible ||
-         p()->m_role != other.p()->m_role ||
-         p()->m_extendedData != other.p()->m_extendedData ||
-         p()->m_timeSpan != other.p()->m_timeSpan ||
-         p()->m_timeStamp != other.p()->m_timeStamp ||
-         p()->m_region != other.p()->m_region ||
+         d->m_name != other.d->m_name ||
+         d->m_styleUrl != other.d->m_styleUrl ||
+         d->m_popularity != other.d->m_popularity ||
+         d->m_zoomLevel != other.d->m_zoomLevel ||
+         d->m_visible != other.d->m_visible ||
+         d->m_role != other.d->m_role ||
+         d->m_extendedData != other.d->m_extendedData ||
          *style() != *other.style() ) {
         return false;
     }
 
-    if ( (!p()->m_styleMap && other.p()->m_styleMap) ||
-         (p()->m_styleMap && !other.p()->m_styleMap) ) {
+    if ( (!d->m_styleMap && other.d->m_styleMap) ||
+         (d->m_styleMap && !other.d->m_styleMap) ) {
         return false;
     }
 
-    if ( (p()->m_styleMap && other.p()->m_styleMap) &&
-         (*p()->m_styleMap != *other.p()->m_styleMap) ) {
+    if ( (d->m_styleMap && other.d->m_styleMap) &&
+         (*d->m_styleMap != *other.d->m_styleMap) ) {
         return false;
     }
 
-    if ( !p()->m_abstractView && !other.p()->m_abstractView ) {
-        return true;
-    } else if ( (!p()->m_abstractView && other.p()->m_abstractView) ||
-                (p()->m_abstractView && !other.p()->m_abstractView) ) {
+    if ( (!d->m_featureExtendedData && other.d->m_featureExtendedData && other.d->m_featureExtendedData->m_abstractView) ||
+         (d->m_featureExtendedData && d->m_featureExtendedData->m_abstractView && !other.d->m_featureExtendedData) ) {
         return false;
     }
 
-    if ( p()->m_abstractView->nodeType() != other.p()->m_abstractView->nodeType() ) {
+    if ( (d->m_featureExtendedData && other.d->m_featureExtendedData) &&
+         (*d->m_featureExtendedData != *other.d->m_featureExtendedData) ) {
         return false;
-    }
-
-    if ( p()->m_abstractView->nodeType() == GeoDataTypes::GeoDataCameraType ) {
-        GeoDataCamera *thisCam = dynamic_cast<GeoDataCamera*>( p()->m_abstractView );
-        GeoDataCamera *otherCam = dynamic_cast<GeoDataCamera*>( other.p()->m_abstractView );
-        Q_ASSERT(thisCam && otherCam);
-
-        if ( *thisCam != *otherCam ) {
-            return false;
-        }
-    } else if ( p()->m_abstractView->nodeType() == GeoDataTypes::GeoDataLookAtType ) {
-        GeoDataLookAt *thisLookAt = dynamic_cast<GeoDataLookAt*>( p()->m_abstractView );
-        GeoDataLookAt *otherLookAt = dynamic_cast<GeoDataLookAt*>( other.p()->m_abstractView );
-        Q_ASSERT(thisLookAt && otherLookAt);
-
-        if ( *thisLookAt != *otherLookAt ) {
-            return false;
-        }
     }
 
     return true;
@@ -171,62 +144,94 @@ void GeoDataFeature::setName( const QString &value )
 
 GeoDataSnippet GeoDataFeature::snippet() const
 {
-    return d->m_snippet;
+    return d->featureExtendedData().m_snippet;
 }
 
 void GeoDataFeature::setSnippet( const GeoDataSnippet &snippet )
 {
     detach();
-    d->m_snippet = snippet;
+    d->featureExtendedData().m_snippet = snippet;
 }
 
 QString GeoDataFeature::address() const
 {
-    return d->m_address;
+    if (!d->m_featureExtendedData) {
+        return QString();
+    }
+
+    return d->featureExtendedData().m_address;
 }
 
 void GeoDataFeature::setAddress( const QString &value)
 {
+    if (value.isEmpty() && !d->m_featureExtendedData) {
+        return; // nothing to change
+    }
+
     detach();
-    d->m_address = value;
+    d->featureExtendedData().m_address = value;
 }
 
 QString GeoDataFeature::phoneNumber() const
 {
-    return d->m_phoneNumber;
+    if (!d->m_featureExtendedData) {
+        return QString();
+    }
+
+    return d->featureExtendedData().m_phoneNumber;
 }
 
 void GeoDataFeature::setPhoneNumber( const QString &value)
 {
+    if (value.isEmpty() && !d->m_featureExtendedData) {
+        return; // nothing to change
+    }
+
     detach();
-    d->m_phoneNumber = value;
+    d->featureExtendedData().m_phoneNumber = value;
 }
 
 QString GeoDataFeature::description() const
 {
-    return d->m_description;
+    if (!d->m_featureExtendedData) {
+        return QString();
+    }
+
+    return d->featureExtendedData().m_description;
 }
 
 void GeoDataFeature::setDescription( const QString &value)
 {
+    if (value.isEmpty() && !d->m_featureExtendedData) {
+        return; // nothing to change
+    }
+
     detach();
-    d->m_description = value;
+    d->featureExtendedData().m_description = value;
 }
 
 bool GeoDataFeature::descriptionIsCDATA() const
 {
-    return d->m_descriptionCDATA;
+    if (!d->m_featureExtendedData) {
+        return false;
+    }
+
+    return d->featureExtendedData().m_descriptionCDATA;
 }
 
 void GeoDataFeature::setDescriptionCDATA( bool cdata )
 {
     detach();
-    d->m_descriptionCDATA = cdata;
+    d->featureExtendedData().m_descriptionCDATA = cdata;
 }
 
 const GeoDataAbstractView* GeoDataFeature::abstractView() const
 {
-    return d->m_abstractView;
+    if (!d->m_featureExtendedData) {
+        return nullptr;
+    }
+
+    return d->featureExtendedData().m_abstractView;
 }
 
 GeoDataAbstractView *GeoDataFeature::abstractView()
@@ -234,13 +239,17 @@ GeoDataAbstractView *GeoDataFeature::abstractView()
     // FIXME: Calling detach() doesn't help at all because the m_abstractView
     // object isn't actually copied in the Private class as well.
     // detach();
-    return d->m_abstractView;
+    return d->featureExtendedData().m_abstractView;
 }
 
 void GeoDataFeature::setAbstractView( GeoDataAbstractView *abstractView )
 {
+    if (abstractView == nullptr && !d->m_featureExtendedData) {
+        return; // nothing to change
+    }
+
     detach();
-    d->m_abstractView = abstractView;
+    d->featureExtendedData().m_abstractView = abstractView;
 }
 
 QString GeoDataFeature::styleUrl() const
@@ -304,36 +313,36 @@ bool GeoDataFeature::isGloballyVisible() const
 
 const GeoDataTimeSpan &GeoDataFeature::timeSpan() const
 {
-    return d->m_timeSpan;
+    return d->featureExtendedData().m_timeSpan;
 }
 
 GeoDataTimeSpan &GeoDataFeature::timeSpan()
 {
     detach();
-    return d->m_timeSpan;
+    return d->featureExtendedData().m_timeSpan;
 }
 
 void GeoDataFeature::setTimeSpan( const GeoDataTimeSpan &timeSpan )
 {
     detach();
-    d->m_timeSpan = timeSpan;
+    d->featureExtendedData().m_timeSpan = timeSpan;
 }
 
 const GeoDataTimeStamp &GeoDataFeature::timeStamp() const
 {
-    return d->m_timeStamp;
+    return d->featureExtendedData().m_timeStamp;
 }
 
 GeoDataTimeStamp &GeoDataFeature::timeStamp()
 {
     detach();
-    return d->m_timeStamp;
+    return d->featureExtendedData().m_timeStamp;
 }
 
 void GeoDataFeature::setTimeStamp( const GeoDataTimeStamp &timeStamp )
 {
     detach();
-    d->m_timeStamp = timeStamp;
+    d->featureExtendedData().m_timeStamp = timeStamp;
 }
 
 const GeoDataExtendedData &GeoDataFeature::extendedData() const
@@ -378,13 +387,13 @@ void GeoDataFeature::setExtendedData( const GeoDataExtendedData& extendedData )
 GeoDataRegion& GeoDataFeature::region() const
 {
     // FIXME: Should call detach(). Maybe don't return reference.
-    return d->m_region;
+    return d->featureExtendedData().m_region;
 }
 
 void GeoDataFeature::setRegion( const GeoDataRegion& region )
 {
     detach();
-    d->m_region = region;
+    d->featureExtendedData().m_region = region;
 }
 
 GeoDataFeature::GeoDataVisualCategory GeoDataFeature::visualCategory() const
@@ -764,9 +773,9 @@ void GeoDataFeature::pack( QDataStream& stream ) const
     GeoDataObject::pack( stream );
 
     stream << d->m_name;
-    stream << d->m_address;
-    stream << d->m_phoneNumber;
-    stream << d->m_description;
+    stream << d->featureExtendedData().m_address;
+    stream << d->featureExtendedData().m_phoneNumber;
+    stream << d->featureExtendedData().m_description;
     stream << d->m_visible;
 //    stream << d->m_visualCategory;
     stream << d->m_role;
@@ -780,9 +789,9 @@ void GeoDataFeature::unpack( QDataStream& stream )
     GeoDataObject::unpack( stream );
 
     stream >> d->m_name;
-    stream >> d->m_address;
-    stream >> d->m_phoneNumber;
-    stream >> d->m_description;
+    stream >> d->featureExtendedData().m_address;
+    stream >> d->featureExtendedData().m_phoneNumber;
+    stream >> d->featureExtendedData().m_description;
     stream >> d->m_visible;
 //    stream >> (int)d->m_visualCategory;
     stream >> d->m_role;
