@@ -14,7 +14,7 @@
 #include "AbstractWeatherService.h"
 #include "WeatherData.h"
 
-class QScriptValue;
+class QJsonObject;
 
 namespace Marble
 {
@@ -34,7 +34,7 @@ class GeoNamesWeatherService : public AbstractWeatherService
     void parseFile( const QByteArray& file );
 
  private:
-    AbstractDataPluginItem* parse( const QScriptValue &value );
+    AbstractDataPluginItem* parse(const QJsonObject &weatherObservationObject);
     static void setupHashes();
 
     static QHash<QString, WeatherData::WeatherCondition> dayConditions;
