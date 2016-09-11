@@ -26,9 +26,8 @@
 #include <QDialog>
 #include <QDateTime>
 #include <QFile>
-#include <QScriptEngine>
-#include <QScriptValue>
 #include <QDesktopServices>
+#include <QJsonDocument>
 
 #include <QDebug>
 
@@ -281,11 +280,8 @@ void OpenCachingComItem::addDownloadedFile( const QString &url, const QString &t
             return;
         }
 
-        QScriptEngine engine;
-
-        // Qt requires parentheses around json code
-        QScriptValue data = engine.evaluate(QLatin1Char('(') + QString::fromUtf8(file.readAll()) + QLatin1Char(')'));
-        QVariantMap cache = data.toVariant().toMap();
+        QJsonDocument jsonDoc = QJsonDocument::fromJson(file.readAll());
+        QVariantMap cache = jsonDoc.toVariant().toMap();
 
         m_cache["description"] = cache["description"];
         m_cache["logs"] = cache["logs"];

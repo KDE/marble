@@ -19,8 +19,7 @@
 #include <QDebug>
 #include <QString>
 #include <QUrl>
-#include <QScriptEngine>
-#include <QScriptValue>
+#include <QJsonDocument>
 
 namespace Marble {
 
@@ -89,11 +88,8 @@ void OpenCachingComModel::getAdditionalItems( const GeoDataLatLonAltBox& box, qi
 
 void OpenCachingComModel::parseFile( const QByteArray& file )
 {
-    QScriptEngine engine;
-
-    // Qt requires parentheses around json code
-    QScriptValue data = engine.evaluate(QLatin1Char('(') + QString::fromUtf8(file) + QLatin1Char(')'));
-    QVariantList caches = data.toVariant().toList();
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(file);
+    QVariantList caches = jsonDoc.toVariant().toList();
 
 //     qDebug()<<"parsing "<<caches.size()<<" items";
     QList<AbstractDataPluginItem*> items;
