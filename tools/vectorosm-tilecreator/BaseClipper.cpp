@@ -117,7 +117,7 @@ qreal BaseClipper::tileX2lon( unsigned int x, unsigned int maxTileX )
 
 qreal BaseClipper::tileY2lat( unsigned int y, unsigned int maxTileY )
 {
-    return gd( M_PI - (2*M_PI * y) / maxTileY ) * (90.0 / 85.0511);
+    return gd(M_PI * (1.0 - (2.0 * y) / maxTileY));
 }
 
 
