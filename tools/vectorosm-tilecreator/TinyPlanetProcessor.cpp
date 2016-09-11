@@ -34,28 +34,15 @@ void TinyPlanetProcessor::process()
     // ?
 }
 
-GeoDataDocument *TinyPlanetProcessor::cutToTiles(unsigned int zoomLevel, unsigned int tileX, unsigned int tileY)
+GeoDataDocument *TinyPlanetProcessor::clipTo(const GeoDataLatLonBox &tileBoundary)
 {
-    unsigned int N = pow(2, zoomLevel);
-
     GeoDataDocument* tile = new GeoDataDocument();
-    QString tileName = QString("%1/%2/%3").arg(zoomLevel).arg(tileX).arg(tileY);
-    tile->setName(tileName);
-
-    GeoDataLatLonBox tileBoundary;
-    qreal north = BaseClipper::tileY2lat(tileY, N);
-    qreal south = BaseClipper::tileY2lat(tileY+1, N);
-    qreal west = BaseClipper::tileX2lon(tileX, N);
-    qreal east = BaseClipper::tileX2lon(tileX+1, N);
-
-    tileBoundary.setBoundaries(north, south, east, west);
-
     BaseClipper clipper;
     clipper.initClipRect(tileBoundary, 20);
 
     foreach (GeoDataPlacemark* placemark, placemarks()) {
 
-        if(tileBoundary.intersects(placemark->geometry()->latLonAltBox())) {
+        if(placemark && placemark->geometry() && tileBoundary.intersects(placemark->geometry()->latLonAltBox())) {
 
             if( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType) {
                 GeoDataPolygon* marblePolygon = static_cast<GeoDataPolygon*>(placemark->geometry());
@@ -175,11 +162,28 @@ GeoDataDocument *TinyPlanetProcessor::cutToTiles(unsigned int zoomLevel, unsigne
                 }
 
             } else {
-                tile->append(placemark);
+                tile->append(new GeoDataPlacemark(*placemark));
             }
         }
     }
 
+
+    return tile;
+}
+
+GeoDataDocument *TinyPlanetProcessor::cutToTiles(unsigned int zoomLevel, unsigned int tileX, unsigned int tileY)
+{
+    unsigned int N = pow(2, zoomLevel);
+    GeoDataLatLonBox tileBoundary;
+    qreal north = TileId::tileY2lat(tileY, N);
+    qreal south = TileId::tileY2lat(tileY+1, N);
+    qreal west = TileId::tileX2lon(tileX, N);
+    qreal east = TileId::tileX2lon(tileX+1, N);
+    tileBoundary.setBoundaries(north, south, east, west);
+
+    GeoDataDocument *tile = clipTo(tileBoundary);
+    QString tileName = QString("%1/%2/%3").arg(zoomLevel).arg(tileX).arg(tileY);
+    tile->setName(tileName);
 
     return tile;
 }

@@ -14,6 +14,8 @@
 #include "PlacemarkFilter.h"
 #include "OsmPlacemarkData.h"
 
+#include <GeoDataLatLonBox.h>
+
 namespace Marble {
 
 class TinyPlanetProcessor : public PlacemarkFilter
@@ -23,6 +25,7 @@ public:
 
     void process() override;
 
+    GeoDataDocument* clipTo(const GeoDataLatLonBox &box);
     GeoDataDocument* cutToTiles(unsigned int zoomLevel, unsigned int tileX, unsigned int tileY);
 
 private:
