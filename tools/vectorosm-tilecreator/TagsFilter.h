@@ -26,11 +26,16 @@ class TagsFilter : public PlacemarkFilter
 public:
     //Filters placemarks which have tags in the hash
     TagsFilter(GeoDataDocument* document, const QStringList& tagsList, bool andFlag = false);
+    ~TagsFilter();
+
     void process() override;
     QVector<GeoDataPlacemark*>::const_iterator rejectedObjectsBegin() const;
     QVector<GeoDataPlacemark*>::const_iterator rejectedObjectsEnd() const;
 
+    GeoDataDocument* accepted();
+
 private:
+    GeoDataDocument* m_accepted;
     QVector<GeoDataPlacemark*> m_rejectedObjects;
 };
 

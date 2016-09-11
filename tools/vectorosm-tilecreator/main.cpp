@@ -11,6 +11,7 @@
 #include "GeoDataDocumentWriter.h"
 #include "MarbleModel.h"
 #include "ParsingRunnerManager.h"
+#include "GeoDataPlacemark.h"
 
 #include <QApplication>
 #include <QCommandLineParser>
@@ -73,8 +74,9 @@ GeoDataDocument* mergeDocuments(GeoDataDocument* map1, GeoDataDocument* map2)
 {
     GeoDataDocument* mergedMap = new GeoDataDocument(*map1);
 
-    foreach (GeoDataFeature* feature, map2->featureList()) {
-        mergedMap->append(feature);
+    foreach (auto placemark, map2->placemarkList()) {
+        GeoDataPlacemark* land = new GeoDataPlacemark(*placemark);
+        mergedMap->append(land);
     }
 
     return mergedMap;
