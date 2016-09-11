@@ -23,7 +23,6 @@
 
 #include <QMessageLogContext>
 
-#include "ShpCoastlineProcessor.h"
 #include "TinyPlanetProcessor.h"
 #include "NodeReducer.h"
 #include "WayConcatenator.h"
@@ -264,40 +263,6 @@ int main(int argc, char *argv[])
             delete combined;
             delete tile1;
             delete tile2;
-        }
-    } else if(file.suffix() == QLatin1String("shp") && parser.isSet("cut-to-tiles")) {
-        ShpCoastlineProcessor processor(map);
-        processor.process();
-        GeoDataLatLonBox world(85.0, -85.0, 180.0, -180.0, GeoDataCoordinates::Degree);
-        //TileIterator iter(map->latLonAltBox(), zoomLevel);
-        TileIterator iter(world, zoomLevel);
-        foreach(auto const &tileId, iter) {
-            GeoDataDocument* tile = processor.cutToTiles(zoomLevel, tileId.x(), tileId.y());
-            if (!writeTile(parser, outputName, tile, tileId.x(), tileId.y(), zoomLevel)) {
-                return 4;
-            }
-            qInfo() << tile->name() << " done";
-            delete tile;
-        }
-    } else if (file.suffix() == QLatin1String("osm") && parser.isSet("cut-to-tiles") && parser.isSet("merge")) {
-        TinyPlanetProcessor processor(map);
-        processor.process();
-        ShpCoastlineProcessor shpProcessor(mergeMap);
-        shpProcessor.process();
-        GeoDataLatLonBox world(85.0, -85.0, 180.0, -180.0, GeoDataCoordinates::Degree);
-        //TileIterator iter(map->latLonAltBox(), zoomLevel);
-        TileIterator iter(world, zoomLevel);
-        foreach(auto const &tileId, iter) {
-            GeoDataDocument* tile1 = processor.cutToTiles(zoomLevel, tileId.x(), tileId.y());
-            GeoDataDocument* tile2 = shpProcessor.cutToTiles(zoomLevel, tileId.x(), tileId.y());
-            GeoDataDocument* tile = mergeDocuments(tile1, tile2);
-            if (!writeTile(parser, outputName, tile, tileId.x(), tileId.y(), zoomLevel)) {
-                return 4;
-            }
-            qInfo() << tile->name() << " done";
-            delete tile1;
-            delete tile2;
-            delete tile;
         }
     } else if (file.suffix() == QLatin1String("osm") && parser.isSet("cut-to-tiles")) {
         TinyPlanetProcessor processor(map);
