@@ -24,7 +24,7 @@
 namespace Marble {
 
 TinyPlanetProcessor::TinyPlanetProcessor(GeoDataDocument* document) :
-    PlacemarkFilter(document)
+    BaseFilter(document)
 {
 
 }

@@ -22,7 +22,7 @@
 namespace Marble {
 
 NodeReducer::NodeReducer(GeoDataDocument* document, int zoomLevel) :
-    PlacemarkFilter(document),
+    BaseFilter(document),
     m_resolution(resolutionForLevel(zoomLevel)),
     m_removedNodes(0),
     m_remainingNodes(0)

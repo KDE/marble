@@ -11,7 +11,7 @@
 #include <QString>
 #include <QStringList>
 
-#include "PlacemarkFilter.h"
+#include "BaseFilter.h"
 #include "TagsFilter.h"
 #include "GeoDataObject.h"
 #include "GeoDataDocument.h"
@@ -21,7 +21,7 @@
 namespace Marble {
 
 TagsFilter::TagsFilter(GeoDataDocument *geoDocument, const QStringList &tagsList, bool andFlag )
-    : PlacemarkFilter(geoDocument),
+    : BaseFilter(geoDocument),
       m_accepted(new GeoDataDocument)
 {
     int total=0, tagCount=0;

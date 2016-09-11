@@ -11,14 +11,14 @@
 #ifndef TINYPLANETPROCESSOR_H
 #define TINYPLANETPROCESSOR_H
 
-#include "PlacemarkFilter.h"
+#include "BaseFilter.h"
 #include "OsmPlacemarkData.h"
 
 #include <GeoDataLatLonBox.h>
 
 namespace Marble {
 
-class TinyPlanetProcessor : public PlacemarkFilter
+class TinyPlanetProcessor : public BaseFilter
 {
 public:
     explicit TinyPlanetProcessor(GeoDataDocument* document);

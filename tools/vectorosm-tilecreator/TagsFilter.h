@@ -12,7 +12,7 @@
 #ifndef MARBLE_TAGSFILTER_H
 #define MARBLE_TAGSFILTER_H
 
-#include "PlacemarkFilter.h"
+#include "BaseFilter.h"
 
 #include <QMap>
 #include <QString>
@@ -21,7 +21,7 @@ namespace Marble {
 
 class GeoDataDocument;	
 
-class TagsFilter : public PlacemarkFilter
+class TagsFilter : public BaseFilter
 {
 public:
     //Filters placemarks which have tags in the hash

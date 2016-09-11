@@ -11,7 +11,7 @@
 #ifndef MARBLE_WAYCONCATENATOR_H
 #define MARBLE_WAYCONCATENATOR_H
 
-#include "PlacemarkFilter.h"
+#include "BaseFilter.h"
 #include "TagsFilter.h"
 
 namespace Marble {

@@ -26,7 +26,6 @@ set( ${TARGET}_SRC
 main.cpp
 BaseClipper.cpp
 BaseFilter.cpp
-PlacemarkFilter.cpp
 TinyPlanetProcessor.cpp
 NodeReducer.cpp
 TagsFilter.cpp

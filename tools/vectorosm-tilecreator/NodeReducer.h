@@ -11,13 +11,13 @@
 #ifndef MARBLE_NODEREDUCER_H
 #define MARBLE_NODEREDUCER_H
 
-#include "PlacemarkFilter.h"
+#include "BaseFilter.h"
 #include "GeoDataLineString.h"
 #include "MarbleMath.h"
 
 namespace Marble {
 
-class NodeReducer : public PlacemarkFilter {
+class NodeReducer : public BaseFilter {
 public:
     NodeReducer(GeoDataDocument* document, int zoomLevel);
     void process() override;
