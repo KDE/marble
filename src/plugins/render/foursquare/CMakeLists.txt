@@ -11,7 +11,5 @@ set( my_SRCS
   FoursquareItem.cpp
  )
 
-set( FoursquarePlugin_LIBS Qt5::Script Qt5::Svg )
-
 marble_add_plugin( FoursquarePlugin ${my_SRCS} )
 
