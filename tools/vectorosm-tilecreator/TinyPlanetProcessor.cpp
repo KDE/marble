@@ -171,7 +171,7 @@ GeoDataDocument *TinyPlanetProcessor::clipTo(const GeoDataLatLonBox &tileBoundar
     return tile;
 }
 
-GeoDataDocument *TinyPlanetProcessor::cutToTiles(unsigned int zoomLevel, unsigned int tileX, unsigned int tileY)
+GeoDataDocument *TinyPlanetProcessor::clipTo(unsigned int zoomLevel, unsigned int tileX, unsigned int tileY)
 {
     unsigned int N = pow(2, zoomLevel);
     GeoDataLatLonBox tileBoundary;

@@ -215,7 +215,7 @@ int main(int argc, char *argv[])
         GeoDataLatLonBox world(85.0, -85.0, 180.0, -180.0, GeoDataCoordinates::Degree);
         TileIterator iter(world, zoomLevel);
         foreach(auto const &tileId, iter) {
-            GeoDataDocument* tile = processor.cutToTiles(zoomLevel, tileId.x(), tileId.y());
+            GeoDataDocument* tile = processor.clipTo(zoomLevel, tileId.x(), tileId.y());
             NodeReducer reducer(tile, zoomLevel);
             reducer.process();
 
@@ -251,8 +251,8 @@ int main(int argc, char *argv[])
 
         TileIterator iter(tagsFilter.accepted()->latLonAltBox(), zoomLevel);
         foreach(auto const &tileId, iter) {
-            GeoDataDocument* tile1 = processor.cutToTiles(zoomLevel, tileId.x(), tileId.y());
-            GeoDataDocument* tile2 = landMassClipper.cutToTiles(zoomLevel, tileId.x(), tileId.y());
+            GeoDataDocument* tile1 = processor.clipTo(zoomLevel, tileId.x(), tileId.y());
+            GeoDataDocument* tile2 = landMassClipper.clipTo(zoomLevel, tileId.x(), tileId.y());
             GeoDataDocument* combined = mergeDocuments(tile1, tile2);
             NodeReducer reducer(combined, zoomLevel);
             reducer.process();
@@ -273,7 +273,7 @@ int main(int argc, char *argv[])
         //TileIterator iter(map->latLonAltBox(), zoomLevel);
         TileIterator iter(world, zoomLevel);
         foreach(auto const &tileId, iter) {
-            GeoDataDocument* tile = processor.cutToTiles(zoomLevel, tileId.x(), tileId.y());
+            GeoDataDocument* tile = processor.clipTo(zoomLevel, tileId.x(), tileId.y());
             if (!writeTile(parser, outputName, tile, tileId.x(), tileId.y(), zoomLevel)) {
                 return 4;
             }

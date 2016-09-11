@@ -26,7 +26,7 @@ public:
     void process() override;
 
     GeoDataDocument* clipTo(const GeoDataLatLonBox &box);
-    GeoDataDocument* cutToTiles(unsigned int zoomLevel, unsigned int tileX, unsigned int tileY);
+    GeoDataDocument* clipTo(unsigned int zoomLevel, unsigned int tileX, unsigned int tileY);
 
 private:
     void copyTags(const GeoDataPlacemark &source, GeoDataPlacemark &target) const;
