@@ -506,7 +506,7 @@ void BaseClipper::clipPolyObject ( const QPolygonF & polygon,
                             }
                         }
                         clippedPolyObject << it->point();
-                        Q_ASSERT(clippedPolyObject.size() <= 2 * basePolygon.size());
+                        Q_ASSERT(clippedPolyObject.size() <= 20 * basePolygon.size());
 
                         //                        // To avoid crashes because of infinite loop.
                         //                        // Needs to be investigated
