@@ -29,11 +29,6 @@ VectorClipper::VectorClipper(GeoDataDocument* document) :
 
 }
 
-void VectorClipper::process()
-{
-    // ?
-}
-
 GeoDataDocument *VectorClipper::clipTo(const GeoDataLatLonBox &tileBoundary)
 {
     GeoDataDocument* tile = new GeoDataDocument();

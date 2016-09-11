@@ -23,8 +23,6 @@ class VectorClipper : public BaseFilter
 public:
     explicit VectorClipper(GeoDataDocument* document);
 
-    void process() override;
-
     GeoDataDocument* clipTo(const GeoDataLatLonBox &box);
     GeoDataDocument* clipTo(unsigned int zoomLevel, unsigned int tileX, unsigned int tileY);
 

@@ -25,16 +25,6 @@ namespace Marble {
 
 WayConcatenator::WayConcatenator(GeoDataDocument *document, const QStringList &tagsList, bool andFlag) : TagsFilter(document, tagsList, andFlag)
 {
-    // qDebug()<< "Entered WayConcatenator";
-}
-
-WayConcatenator::~WayConcatenator()
-{
-    qDeleteAll(m_chunks);
-}
-
-void WayConcatenator::process()
-{
     qint64 count = 0;
     qint64 chunkCount = 0;
     qint64 newCount = 0;
@@ -148,6 +138,11 @@ void WayConcatenator::process()
     qDebug()<<"* Chunks formed due to no match"<<newCount;
     // qDebug()<<"Total reverses required: "<<rvr;
 
+}
+
+WayConcatenator::~WayConcatenator()
+{
+    qDeleteAll(m_chunks);
 }
 
 void WayConcatenator::addRejectedPlacemarks()

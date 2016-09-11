@@ -23,7 +23,6 @@ class WayConcatenator : public TagsFilter
 public:
     WayConcatenator(GeoDataDocument *document, const QStringList &tagsList, bool andFlag = false);
     ~WayConcatenator();
-    void process() override;
 
 private:
     void createWayChunk(GeoDataPlacemark *placemark, qint64 firstId, qint64 lastId);

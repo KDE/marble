@@ -28,7 +28,6 @@ public:
     TagsFilter(GeoDataDocument* document, const QStringList& tagsList, bool andFlag = false);
     ~TagsFilter();
 
-    void process() override;
     QVector<GeoDataPlacemark*>::const_iterator rejectedObjectsBegin() const;
     QVector<GeoDataPlacemark*>::const_iterator rejectedObjectsEnd() const;
 

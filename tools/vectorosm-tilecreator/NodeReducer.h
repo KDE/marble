@@ -20,7 +20,6 @@ namespace Marble {
 class NodeReducer : public BaseFilter {
 public:
     NodeReducer(GeoDataDocument* document, int zoomLevel);
-    void process() override;
 
 private:
     template<class T>

@@ -26,8 +26,6 @@ public:
     explicit BaseFilter(GeoDataDocument* document);
     virtual ~BaseFilter();
 
-    virtual void process() = 0;
-
     const QVector<GeoDataPlacemark*> & placemarks() const;
     QVector<GeoDataPlacemark*> & placemarks();
 

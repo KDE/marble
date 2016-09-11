@@ -27,11 +27,6 @@ NodeReducer::NodeReducer(GeoDataDocument* document, int zoomLevel) :
     m_removedNodes(0),
     m_remainingNodes(0)
 {
-    // nothing to do
-}
-
-void NodeReducer::process()
-{
     foreach (GeoDataPlacemark* placemark, placemarks()) {
 
         if(placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType) {

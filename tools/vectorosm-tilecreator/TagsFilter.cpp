@@ -83,11 +83,6 @@ TagsFilter::~TagsFilter()
     qDeleteAll(m_rejectedObjects);
 }
 
-void TagsFilter::process()
-{
-    //does nothing
-}
-
 QVector<GeoDataPlacemark*>::const_iterator TagsFilter::rejectedObjectsBegin() const
 {
     return m_rejectedObjects.begin();

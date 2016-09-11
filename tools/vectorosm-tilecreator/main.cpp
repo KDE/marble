@@ -200,7 +200,6 @@ int main(int argc, char *argv[])
         }
 
         NodeReducer reducer(map, zoomLevel);
-        reducer.process();
 
         QString const extension = parser.value("extension");
         QString const outputFile = QString("%1/landmass-level-%2.%3").arg(outputName).arg(zoomLevel).arg(extension);
@@ -211,13 +210,11 @@ int main(int argc, char *argv[])
 
     } else if (zoomLevel < 11) {
         VectorClipper processor(map);
-        processor.process();
         GeoDataLatLonBox world(85.0, -85.0, 180.0, -180.0, GeoDataCoordinates::Degree);
         TileIterator iter(world, zoomLevel);
         foreach(auto const &tileId, iter) {
             GeoDataDocument* tile = processor.clipTo(zoomLevel, tileId.x(), tileId.y());
             NodeReducer reducer(tile, zoomLevel);
-            reducer.process();
 
             if (!writeTile(parser, outputName, tile, tileId.x(), tileId.y(), zoomLevel)) {
                 return 4;
@@ -255,7 +252,6 @@ int main(int argc, char *argv[])
             GeoDataDocument* tile2 = landMassClipper.clipTo(zoomLevel, tileId.x(), tileId.y());
             GeoDataDocument* combined = mergeDocuments(tile1, tile2);
             NodeReducer reducer(combined, zoomLevel);
-            reducer.process();
             if (!writeTile(parser, outputName, combined, tileId.x(), tileId.y(), zoomLevel)) {
                 return 4;
             }
@@ -266,8 +262,6 @@ int main(int argc, char *argv[])
         }
     } else if (file.suffix() == QLatin1String("osm") && parser.isSet("cut-to-tiles")) {
         VectorClipper processor(map);
-
-        processor.process();
 
         GeoDataLatLonBox world(85.0, -85.0, 180.0, -180.0, GeoDataCoordinates::Degree);
         //TileIterator iter(map->latLonAltBox(), zoomLevel);
@@ -288,7 +282,6 @@ int main(int argc, char *argv[])
         }
         else{
             NodeReducer reducer(map, zoomLevel);
-            reducer.process();
             if (!GeoDataDocumentWriter::write(outputName, *map)) {
                 qDebug() << "Could not write the file " << outputName;
                 return 4;
@@ -304,7 +297,6 @@ int main(int argc, char *argv[])
         //Filters and considers only those placemarks which have all the key-value pairs given at command line
 
         WayConcatenator concatenator(map, tagsList, parser.isSet("tags-and"));
-        concatenator.process();
 
         qDebug()<<"Concatenation done, writing results to the file";
         
