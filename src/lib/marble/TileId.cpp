@@ -103,6 +103,20 @@ unsigned int TileId::lat2tileY( qreal latitude, unsigned int maxTileY )
     return (unsigned int)floor(0.5 * (1.0 - gdInv(lat) / M_PI) * maxTileY);
 }
 
+
+qreal TileId::tileX2lon( unsigned int x, unsigned int maxTileX )
+{
+    return ( (2*M_PI * x) / maxTileX - M_PI );
+}
+
+qreal TileId::tileY2lat( unsigned int y, unsigned int maxTileY )
+{
+    return gd(M_PI * (1.0 - (2.0 * y) / maxTileY));
+}
+
+
+
+
 }
 
 #ifndef QT_NO_DEBUG_STREAM

@@ -11,6 +11,7 @@
 #include "ShpCoastlineProcessor.h"
 
 #include "BaseClipper.h"
+#include "TileId.h"
 
 #include "GeoDataPlacemark.h"
 #include "OsmPlacemarkData.h"
@@ -47,10 +48,10 @@ GeoDataDocument *ShpCoastlineProcessor::cutToTiles(unsigned int zoomLevel, unsig
     tile->setName(tileName);
 
     GeoDataLatLonBox tileBoundary;
-    qreal north = BaseClipper::tileY2lat(tileY, N);
-    qreal south = BaseClipper::tileY2lat(tileY+1, N);
-    qreal west = BaseClipper::tileX2lon(tileX, N);
-    qreal east = BaseClipper::tileX2lon(tileX+1, N);
+    qreal north = TileId::tileY2lat(tileY, N);
+    qreal south = TileId::tileY2lat(tileY+1, N);
+    qreal west = TileId::tileX2lon(tileX, N);
+    qreal east = TileId::tileX2lon(tileX+1, N);
 
     //            qDebug() << tileName;
     //            qDebug() << "west:  " << west*RAD2DEG <<  "\t east:  " << east*RAD2DEG;

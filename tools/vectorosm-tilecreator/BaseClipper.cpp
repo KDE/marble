@@ -110,19 +110,6 @@ BaseClipper::BaseClipper() :
 
 }
 
-qreal BaseClipper::tileX2lon( unsigned int x, unsigned int maxTileX )
-{
-    return ( (2*M_PI * x) / maxTileX - M_PI );
-}
-
-qreal BaseClipper::tileY2lat( unsigned int y, unsigned int maxTileY )
-{
-    return gd(M_PI * (1.0 - (2.0 * y) / maxTileY));
-}
-
-
-
-
 void BaseClipper::initClipRect (const GeoDataLatLonBox &clippingBox, int pointsToAddAtEdges)
 {
     m_left   = clippingBox.west();

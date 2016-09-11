@@ -26,9 +26,6 @@ class BaseClipper
 public:
     BaseClipper();
 
-    static qreal tileX2lon( unsigned int x, unsigned int maxTileX );
-    static qreal tileY2lat( unsigned int y, unsigned int maxTileY );
-
     template<class T>
     static QPolygonF toQPolygon(const T &lineString, bool reverseOrder = false)
     {

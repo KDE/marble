@@ -11,6 +11,7 @@
 #include "TinyPlanetProcessor.h"
 
 #include "BaseClipper.h"
+#include "TileId.h"
 
 #include "GeoDataPlacemark.h"
 #include "OsmPlacemarkData.h"
