@@ -323,11 +323,9 @@ const GeoDataLatLonAltBox& GeoPolygonGraphicsItem::latLonAltBox() const
 {
     if( m_polygon ) {
         return m_polygon->latLonAltBox();
-    } else if ( m_ring ) {
-        return m_ring->latLonAltBox();
-    } else {
-        return GeoGraphicsItem::latLonAltBox();
     }
+
+    return m_ring->latLonAltBox();
 }
 
 void GeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportParams* viewport, const QString &layer ) {

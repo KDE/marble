@@ -96,14 +96,8 @@ class MARBLE_EXPORT GeoGraphicsItem
     /**
      * Returns the bounding box covered by the item.
      */
-    virtual const GeoDataLatLonAltBox& latLonAltBox() const;
+    virtual const GeoDataLatLonAltBox &latLonAltBox() const = 0;
 
-    /**
-     * Set the box used to determine if an item is active or inactive. If an empty box is passed
-     * the item will be shown in every case.
-     */
-    void setLatLonAltBox( const GeoDataLatLonAltBox& latLonAltBox );
-    
     /**
      * Returns the style of item.
      */

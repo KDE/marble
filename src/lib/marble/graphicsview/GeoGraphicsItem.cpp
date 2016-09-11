@@ -66,16 +66,6 @@ const GeoDataFeature* GeoGraphicsItem::feature() const
     return d->m_feature;
 }
 
-const GeoDataLatLonAltBox& GeoGraphicsItem::latLonAltBox() const
-{
-    return d->m_latLonAltBox;
-}
-
-void GeoGraphicsItem::setLatLonAltBox( const GeoDataLatLonAltBox& latLonAltBox )
-{
-    d->m_latLonAltBox = latLonAltBox;
-}
-
 void GeoGraphicsItem::setHighlightStyle( const GeoDataStyle::ConstPtr &highlightStyle)
 {
     /**

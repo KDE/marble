@@ -35,6 +35,11 @@ SceneGraphicsItem::~SceneGraphicsItem()
     // nothing to do
 }
 
+const GeoDataLatLonAltBox &SceneGraphicsItem::latLonAltBox() const
+{
+    return m_placemark->geometry()->latLonAltBox();
+}
+
 SceneGraphicsItem::ActionState SceneGraphicsItem::state() const
 {
     return m_state;

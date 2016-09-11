@@ -90,6 +90,11 @@ public:
     };
 
     /**
+     * @copydoc
+     */
+    const GeoDataLatLonAltBox &latLonAltBox() const override;
+
+    /**
      * @brief Pure virtual method which is implemented by concrete scene graphic items
      * and returns true if the item contains the @p eventPos.
      */
