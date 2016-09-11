@@ -35,6 +35,8 @@ public:
     GeoDataDocument* document();
 
 private:
+    Q_DISABLE_COPY(BaseFilter)
+
     GeoDataDocument* m_document;
     QVector<GeoDataPlacemark*> m_placemarks;
 };
