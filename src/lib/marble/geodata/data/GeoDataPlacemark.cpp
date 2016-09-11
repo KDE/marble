@@ -33,6 +33,7 @@ namespace Marble
 {
 
 const OsmPlacemarkData GeoDataPlacemarkPrivate::s_nullOsmPlacemarkData = OsmPlacemarkData();
+const GeoDataPlacemarkExtendedData GeoDataPlacemarkPrivate::s_nullPlacemarkExtendedData = GeoDataPlacemarkExtendedData();
 
 GeoDataPlacemark::GeoDataPlacemark()
     : GeoDataFeature( new GeoDataPlacemarkPrivate )
@@ -72,11 +73,17 @@ GeoDataPlacemark &GeoDataPlacemark::operator=( const GeoDataPlacemark &other )
 
 bool GeoDataPlacemark::operator==( const GeoDataPlacemark& other ) const
 { 
-    if ( !equals(other) ||
-         p()->m_countrycode != other.p()->m_countrycode ||
-         p()->m_area != other.p()->m_area ||
-         p()->m_population != other.p()->m_population ||
-         p()->m_state != other.p()->m_state ) {
+    if (!equals(other) ||
+        p()->m_population != other.p()->m_population) {
+        return false;
+    }
+
+    if ((p()->m_placemarkExtendedData && !other.p()->m_placemarkExtendedData) ||
+        (!p()->m_placemarkExtendedData && other.p()->m_placemarkExtendedData)) {
+        return false;
+    }
+    if (p()->m_placemarkExtendedData && other.p()->m_placemarkExtendedData &&
+            !(*p()->m_placemarkExtendedData == *other.p()->m_placemarkExtendedData)) {
         return false;
     }
 
@@ -328,14 +335,18 @@ QString GeoDataPlacemark::displayName() const
 
 qreal GeoDataPlacemark::area() const
 {
-    return p()->m_area;
+    return p()->m_placemarkExtendedData ? p()->m_placemarkExtendedData->m_area : -1.0;
 }
 
 void GeoDataPlacemark::setArea( qreal area )
 {
+    if (area == -1.0 && !p()->m_placemarkExtendedData) {
+        return; // nothing to do
+    }
+
     detach();
     p()->m_geometry->setParent( this );
-    p()->m_area = area;
+    p()->placemarkExtendedData().m_area = area;
 }
 
 qint64 GeoDataPlacemark::population() const
@@ -352,46 +363,58 @@ void GeoDataPlacemark::setPopulation( qint64 population )
 
 const QString GeoDataPlacemark::state() const
 {
-    return p()->m_state;
+    return p()->m_placemarkExtendedData ? p()->m_placemarkExtendedData->m_state : QString();
 }
 
 void GeoDataPlacemark::setState( const QString &state )
 {
+    if (state.isEmpty() && !p()->m_placemarkExtendedData) {
+        return; // nothing to do
+    }
+
     detach();
     p()->m_geometry->setParent( this );
-    p()->m_state = state;
+    p()->placemarkExtendedData().m_state = state;
 }
 
 const QString GeoDataPlacemark::countryCode() const
 {
-    return p()->m_countrycode;
+    return p()->m_placemarkExtendedData ? p()->m_placemarkExtendedData->m_countrycode : QString();
 }
 
 void GeoDataPlacemark::setCountryCode( const QString &countrycode )
 {
+    if (countrycode.isEmpty() && !p()->m_placemarkExtendedData) {
+        return; // nothing to do
+    }
+
     detach();
     p()->m_geometry->setParent( this );
-    p()->m_countrycode = countrycode;
+    p()->placemarkExtendedData().m_countrycode = countrycode;
 }
 
 bool GeoDataPlacemark::isBalloonVisible() const
 {
-    return p()->m_isBalloonVisible;
+    return p()->m_placemarkExtendedData ? p()->m_placemarkExtendedData->m_isBalloonVisible : false;
 }
 
 void GeoDataPlacemark::setBalloonVisible( bool visible )
 {
+    if (!visible && !p()->m_placemarkExtendedData) {
+        return; // nothing to do
+    }
+
     detach();
     p()->m_geometry->setParent( this );
-    p()->m_isBalloonVisible = visible;
+    p()->placemarkExtendedData().m_isBalloonVisible = visible;
 }
 
 void GeoDataPlacemark::pack( QDataStream& stream ) const
 {
     GeoDataFeature::pack( stream );
 
-    stream << p()->m_countrycode;
-    stream << p()->m_area;
+    stream << p()->placemarkExtendedData().m_countrycode;
+    stream << p()->placemarkExtendedData().m_area;
     stream << p()->m_population;
     if ( p()->m_geometry )
     {
@@ -424,8 +447,8 @@ void GeoDataPlacemark::unpack( QDataStream& stream )
     p()->m_geometry->setParent( this );
     GeoDataFeature::unpack( stream );
 
-    stream >> p()->m_countrycode;
-    stream >> p()->m_area;
+    stream >> p()->placemarkExtendedData().m_countrycode;
+    stream >> p()->placemarkExtendedData().m_area;
     stream >> p()->m_population;
     int geometryId;
     stream >> geometryId;

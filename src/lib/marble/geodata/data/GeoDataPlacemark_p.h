@@ -21,20 +21,51 @@
 namespace Marble
 {
 
+class GeoDataPlacemarkExtendedData
+{
+public:
+    GeoDataPlacemarkExtendedData() :
+        m_area( -1.0 ),
+        m_isBalloonVisible( false )
+    {
+        // nothing to do
+    }
+    GeoDataPlacemarkExtendedData & operator=(const GeoDataPlacemarkExtendedData &other)
+    {
+        m_countrycode = other.m_countrycode;
+        m_area = other.m_area;
+        m_state = other.m_state;
+        m_isBalloonVisible = other.m_isBalloonVisible;
+        return *this;
+    }
+
+    bool operator==(const GeoDataPlacemarkExtendedData &other) const
+    {
+        return m_countrycode == other.m_countrycode &&
+                m_area == other.m_area &&
+                m_state == other.m_state;
+    }
+
+    QString             m_countrycode;  // Country code.
+    qreal               m_area;         // Area in square kilometer
+    QString             m_state;        // State
+    bool                m_isBalloonVisible;  //Visibility of balloon
+};
+
 class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
 {
   public:
     GeoDataPlacemarkPrivate()
       : m_geometry( new GeoDataPoint ),
-        m_area( -1.0 ),
         m_population( -1 ),
-        m_isBalloonVisible( false )
+        m_placemarkExtendedData(nullptr)
     {
     }
 
     virtual ~GeoDataPlacemarkPrivate()
     {
         delete m_geometry;
+        delete m_placemarkExtendedData;
     }
 
     GeoDataPlacemarkPrivate& operator=( const GeoDataPlacemarkPrivate& other )
@@ -44,6 +75,7 @@ class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
         }
 
         GeoDataFeaturePrivate::operator=( other );
+        m_population = other.m_population;
 
         GeoDataGeometry * geometry = 0;
         if ( other.m_geometry ) {
@@ -79,10 +111,11 @@ class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
         delete m_geometry;
         m_geometry = geometry;
 
-        m_countrycode = other.m_countrycode;
-        m_area = other.m_area;
-        m_population = other.m_population;
-        m_state = other.m_state;
+        delete m_placemarkExtendedData;
+        m_placemarkExtendedData = nullptr;
+        if (other.m_placemarkExtendedData) {
+            m_placemarkExtendedData = new GeoDataPlacemarkExtendedData(*other.m_placemarkExtendedData);
+        }
 
         return *this;
     }
@@ -104,15 +137,27 @@ class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
         return GeoDataPlacemarkId;
     }
 
+    GeoDataPlacemarkExtendedData & placemarkExtendedData()
+    {
+        if (!m_placemarkExtendedData) {
+            m_placemarkExtendedData = new GeoDataPlacemarkExtendedData;
+        }
+
+        return *m_placemarkExtendedData;
+    }
+
+    const GeoDataPlacemarkExtendedData & placemarkExtendedData() const
+    {
+        return m_placemarkExtendedData ? *m_placemarkExtendedData : s_nullPlacemarkExtendedData;
+    }
+
     // Data for a Placemark in addition to those in GeoDataFeature.
     GeoDataGeometry    *m_geometry;     // any GeoDataGeometry entry like locations
-    QString             m_countrycode;  // Country code.
-    qreal               m_area;         // Area in square kilometer
     qint64              m_population;   // population in number of inhabitants
-    QString             m_state;        // State
-    bool                m_isBalloonVisible;  //Visibility of balloon
+    GeoDataPlacemarkExtendedData *m_placemarkExtendedData;
 
     static const OsmPlacemarkData s_nullOsmPlacemarkData;
+    static const GeoDataPlacemarkExtendedData s_nullPlacemarkExtendedData;
 };
 
 } // namespace Marble
