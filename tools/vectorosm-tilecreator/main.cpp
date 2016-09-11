@@ -160,8 +160,13 @@ GeoDataDocument* mergeDocuments(GeoDataDocument* map1, GeoDataDocument* map2)
 {
     GeoDataDocument* mergedMap = new GeoDataDocument(*map1);
 
+    OsmPlacemarkData marbleLand;
+    marbleLand.addTag("marble_land","landmass");
     foreach (auto placemark, map2->placemarkList()) {
         GeoDataPlacemark* land = new GeoDataPlacemark(*placemark);
+        if(land->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType) {
+            land->setOsmData(marbleLand);
+        }
         mergedMap->append(land);
     }
 
