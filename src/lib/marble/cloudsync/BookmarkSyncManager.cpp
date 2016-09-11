@@ -25,8 +25,8 @@
 
 #include <QFile>
 #include <QBuffer>
-#include <QScriptValue>
-#include <QScriptEngine>
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QTimer>
@@ -707,11 +707,10 @@ void BookmarkSyncManager::Private::saveDownloadedToCache( const QByteArray &kml 
 
 void BookmarkSyncManager::Private::parseTimestamp()
 {
-    QString response = m_timestampReply->readAll();
-    QScriptEngine engine;
-    QScriptValue parsedResponse = engine.evaluate( QString( "(%0)" ).arg( response ) );
-    QString timestamp = parsedResponse.property( "data" ).toString();
-    m_cloudTimestamp = timestamp;
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(m_timestampReply->readAll());
+    QJsonValue dataValue = jsonDoc.object().value(QStringLiteral("data"));
+
+    m_cloudTimestamp = dataValue.toString();
     mDebug() << "Remote bookmark timestamp is " << m_cloudTimestamp;
     continueSynchronization();
 }
@@ -795,11 +794,10 @@ void BookmarkSyncManager::Private::completeMerge()
 
 void BookmarkSyncManager::Private::completeUpload()
 {
-    QString response = m_uploadReply->readAll();
-    QScriptEngine engine;
-    QScriptValue parsedResponse = engine.evaluate( QString( "(%0)" ).arg( response ) );
-    QString timestamp = parsedResponse.property( "data" ).toString();
-    m_cloudTimestamp = timestamp;
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(m_uploadReply->readAll());
+    QJsonValue dataValue = jsonDoc.object().value(QStringLiteral("data"));
+
+    m_cloudTimestamp = dataValue.toString();
     mDebug() << "Uploaded bookmarks to remote server. Timestamp is " << m_cloudTimestamp;
     copyLocalToCache();
     emit m_q->syncComplete();

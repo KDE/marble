@@ -381,7 +381,6 @@ target_link_libraries(marblewidget
         Qt5::Widgets
     LINK_PRIVATE
         Qt5::Svg
-        Qt5::Script
         Qt5::PrintSupport
         Qt5::Concurrent
 )

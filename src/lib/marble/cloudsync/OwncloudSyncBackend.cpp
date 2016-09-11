@@ -29,10 +29,11 @@
 #include "GeoDataExtendedData.h"
 
 #include <QNetworkAccessManager>
-#include <QScriptValueIterator>
 #include <QNetworkRequest>
 #include <QNetworkReply>
-#include <QScriptEngine>
+#include <QJsonDocument>
+#include <QJsonArray>
+#include <QJsonObject>
 #include <QFileInfo>
 #include <QBuffer>
 #include <QDir>
@@ -337,25 +338,21 @@ void OwncloudSyncBackend::cancelUpload()
 
 void OwncloudSyncBackend::prepareRouteList()
 {
-    QString result = d->m_routeListReply->readAll();
-
-    QScriptEngine engine;
-    QScriptValue response = engine.evaluate( QString( "(%0)" ).arg( result ) );
-    QScriptValue routes = response.property( "data" );
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(d->m_routeListReply->readAll());
+    QJsonValue dataValue = jsonDoc.object().value(QStringLiteral("data"));
 
     d->m_routeList.clear();
-    
-    if( routes.isArray() ) {
-        QScriptValueIterator iterator( routes );
-        
-        while( iterator.hasNext() ) {
-            iterator.next();
-            
+
+    if (dataValue.isArray()) {
+        QJsonArray dataArray = dataValue.toArray();
+        for (int index = 0; index < dataArray.size(); ++index) {
+            QJsonObject dataObject = dataArray[index].toObject();
+
             RouteItem route;
-            route.setIdentifier( iterator.value().property( "timestamp" ).toString() );
-            route.setName ( iterator.value().property( "name" ).toString() );
-            route.setDistance( iterator.value().property( "distance" ).toString() );
-            route.setDuration( iterator.value().property( "duration" ).toString() );
+            route.setIdentifier(dataObject.value(QStringLiteral("timestamp")).toString());
+            route.setName(dataObject.value(QStringLiteral("name")).toString() );
+            route.setDistance(dataObject.value(QStringLiteral("distance")).toString());
+            route.setDuration(dataObject.value(QStringLiteral("duration")).toString());
             route.setPreviewUrl( endpointUrl( d->m_routePreviewEndpoint, route.identifier() ) );
             route.setOnCloud( true );
             
