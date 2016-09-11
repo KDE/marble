@@ -12,6 +12,8 @@
 // Own
 #include "TileId.h"
 
+#include "MarbleMath.h"
+
 #include <QDebug>
 
 namespace Marble
@@ -83,6 +85,22 @@ TileId TileId::fromCoordinates(const GeoDataCoordinates &coords, int zoomLevel)
         }
     }
     return TileId(0, zoomLevel, x, y);
+}
+
+unsigned int TileId::lon2tileX( qreal lon, unsigned int maxTileX )
+{
+    return (unsigned int)floor(0.5 * (lon / M_PI + 1.0) * maxTileX);
+}
+
+unsigned int TileId::lat2tileY( qreal latitude, unsigned int maxTileY )
+{
+    // We need to calculate the tile position from the latitude
+    // projected using the Mercator projection. This requires the inverse Gudermannian
+    // function which is only defined between -85°S and 85°N. Therefore in order to
+    // prevent undefined results we need to restrict our calculation:
+    qreal maxAbsLat = 85.0 * DEG2RAD;
+    qreal lat = (qAbs(latitude) > maxAbsLat) ? latitude/qAbs(latitude) * maxAbsLat : latitude;
+    return (unsigned int)floor(0.5 * (1.0 - gdInv(lat) / M_PI) * maxTileY);
 }
 
 }

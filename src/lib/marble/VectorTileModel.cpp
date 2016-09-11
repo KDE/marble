@@ -26,7 +26,7 @@
 #include <qmath.h>
 #include <QThreadPool>
 
-using namespace Marble;
+namespace Marble {
 
 TileRunner::TileRunner( TileLoader *loader, const GeoSceneVectorTileDataset *texture, const TileId &id ) :
     m_loader( loader ),
@@ -124,10 +124,10 @@ void VectorTileModel::setViewport( const GeoDataLatLonBox &latLonBox, int radius
     // More info: http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#Subtiles
     // More info: http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#C.2FC.2B.2B
     // Sometimes the formula returns wrong huge values, x and y have to be between 0 and 2^ZoomLevel
-    unsigned int westX = qBound<unsigned int>(  0, lon2tileX( latLonBox.west(),  maxTileX ), maxTileX);
-    unsigned int northY = qBound<unsigned int>( 0, lat2tileY( latLonBox.north(), maxTileY ), maxTileY);
-    unsigned int eastX = qBound<unsigned int>(  0, lon2tileX( latLonBox.east(),  maxTileX ), maxTileX);
-    unsigned int southY = qBound<unsigned int>( 0, lat2tileY( latLonBox.south(), maxTileY ), maxTileY );
+    unsigned int westX = qBound<unsigned int>(  0, TileId::lon2tileX( latLonBox.west(),  maxTileX ), maxTileX);
+    unsigned int northY = qBound<unsigned int>( 0, TileId::lat2tileY( latLonBox.north(), maxTileY ), maxTileY);
+    unsigned int eastX = qBound<unsigned int>(  0, TileId::lon2tileX( latLonBox.east(),  maxTileX ), maxTileX);
+    unsigned int southY = qBound<unsigned int>( 0, TileId::lat2tileY( latLonBox.south(), maxTileY ), maxTileY );
 
     // Download tiles and send them to VectorTileLayer
     // When changing zoom, download everything inside the screen
@@ -235,20 +235,6 @@ void VectorTileModel::cleanupTile(GeoDataObject *object)
     }
 }
 
-unsigned int VectorTileModel::lon2tileX( qreal lon, unsigned int maxTileX )
-{
-    return (unsigned int)floor(0.5 * (lon / M_PI + 1.0) * maxTileX);
-}
-
-unsigned int VectorTileModel::lat2tileY( qreal latitude, unsigned int maxTileY )
-{
-    // We need to calculate the tile position from the latitude
-    // projected using the Mercator projection. This requires the inverse Gudermannian
-    // function which is only defined between -85°S and 85°N. Therefore in order to
-    // prevent undefined results we need to restrict our calculation:
-    qreal maxAbsLat = 85.0 * DEG2RAD;
-    qreal lat = (qAbs(latitude) > maxAbsLat) ? latitude/qAbs(latitude) * maxAbsLat : latitude;
-    return (unsigned int)floor(0.5 * (1.0 - gdInv(lat) / M_PI) * maxTileY);
 }
 
 #include "moc_VectorTileModel.cpp"

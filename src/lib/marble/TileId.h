@@ -43,6 +43,9 @@ class MARBLE_EXPORT TileId
     GeoDataLatLonBox toLatLonBox( const GeoSceneTileDataset *textureLayer ) const;
     static TileId fromCoordinates( const GeoDataCoordinates& coords, int zoomLevel );
 
+    static unsigned int lon2tileX( qreal lon, unsigned int maxTileX );
+    static unsigned int lat2tileY( qreal lat, unsigned int maxTileY );
+
  private:
     uint m_mapThemeIdHash;
     int m_zoomLevel;
