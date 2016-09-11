@@ -226,6 +226,45 @@ int main(int argc, char *argv[])
             qInfo() << tile->name() << " done";
             delete tile;
         }
+    } else if (zoomLevel == 11) {
+        QStringList tags;
+        tags << "highway=motorway" << "highway=motorway_link";
+        tags << "highway=trunk" << "highway=trunk_link";
+        tags << "highway=primary" << "highway=primary_link";
+        tags << "highway=secondary" << "highway=secondary_link";
+        tags << "leisure=nature_reserve";
+        tags << "leisure=park";
+        tags << "place=city";
+        tags << "place=town";
+        tags << "place=locality";
+        tags << "boundary=administrative";
+        tags << "boundary=political";
+        tags << "boundary=national_park";
+        tags << "boundary=protected_area";
+
+        TagsFilter tagsFilter(map, tags);
+
+        TinyPlanetProcessor processor(tagsFilter.accepted());
+        TinyPlanetProcessor background(mergeMap);
+        GeoDataDocument* landmass = background.clipTo(tagsFilter.accepted()->latLonAltBox());
+
+        TinyPlanetProcessor landMassClipper(landmass);
+
+        TileIterator iter(tagsFilter.accepted()->latLonAltBox(), zoomLevel);
+        foreach(auto const &tileId, iter) {
+            GeoDataDocument* tile1 = processor.cutToTiles(zoomLevel, tileId.x(), tileId.y());
+            GeoDataDocument* tile2 = landMassClipper.cutToTiles(zoomLevel, tileId.x(), tileId.y());
+            GeoDataDocument* combined = mergeDocuments(tile1, tile2);
+            NodeReducer reducer(combined, zoomLevel);
+            reducer.process();
+            if (!writeTile(parser, outputName, combined, tileId.x(), tileId.y(), zoomLevel)) {
+                return 4;
+            }
+            qInfo() << tile1->name() << " done";
+            delete combined;
+            delete tile1;
+            delete tile2;
+        }
     } else if(file.suffix() == QLatin1String("shp") && parser.isSet("cut-to-tiles")) {
         ShpCoastlineProcessor processor(map);
         processor.process();
