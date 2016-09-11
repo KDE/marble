@@ -69,6 +69,93 @@ void debugOutput( QtMsgType type, const QMessageLogContext &context, const QStri
     }
 }
 
+QStringList tagsFilteredIn(int zoomLevel)
+{
+    QStringList tags;
+    tags << "highway=motorway" << "highway=motorway_link";
+    tags << "highway=trunk" << "highway=trunk_link";
+    tags << "highway=primary" << "highway=primary_link";
+    tags << "highway=secondary" << "highway=secondary_link";
+
+    if (zoomLevel >= 13) {
+        tags << "highway=tertiary" << "highway=tertiary_link";
+        tags << "highway=track";
+
+        tags << "public_transport=station";
+        tags << "railway=light_rail";
+        tags << "railway=monorail";
+        tags << "railway=narrow_gauge";
+        tags << "railway=preserved";
+        tags << "railway=rail";
+        tags << "railway=subway";
+        tags << "railway=tram";
+
+        tags << "natural=scrub";
+        tags << "natural=heath";
+        tags << "natural=grassland";
+        tags << "natural=glacier";
+        tags << "natural=beach";
+        tags << "natural=coastline";
+        tags << "natural=water";
+        tags << "natural=wood";
+        tags << "leisure=stadium";
+        tags << "tourism=alpine_hut";
+
+        tags << "waterway=river";
+        tags << "waterway=stream";
+        tags << "waterway=canal";
+
+        tags << "place=suburb";
+        tags << "place=village";
+
+        tags << "natural=peak";
+    }
+
+    if (zoomLevel == 13) {
+        tags << "landuse=forest";
+        tags << "landuse=meadow";
+        tags << "landuse=farmland";
+    }
+
+    if (zoomLevel >= 15) {
+        tags << "highway=unclassified";
+        tags << "highway=residential";
+
+        tags << "landuse=*";
+
+        tags << "leisure=pitch";
+        tags << "leisure=swimming_area";
+
+        tags << "place=hamlet";
+        tags << "place=isolated_dwelling";
+
+        tags << "man_made=beacon";
+        tags << "man_made=bridge";
+        tags << "man_made=campanile";
+        tags << "man_made=chimney";
+        tags << "man_made=communications_tower";
+        tags << "man_made=cross";
+        tags << "man_made=gasometer";
+        tags << "man_made=lighthouse";
+        tags << "man_made=tower";
+        tags << "man_made=water_tower";
+        tags << "man_made=windmill";
+    }
+
+    tags << "leisure=nature_reserve";
+    tags << "leisure=park";
+
+    tags << "place=city";
+    tags << "place=town";
+    tags << "place=locality";
+
+    tags << "boundary=administrative";
+    tags << "boundary=political";
+    tags << "boundary=national_park";
+    tags << "boundary=protected_area";
+    return tags;
+}
+
 GeoDataDocument* mergeDocuments(GeoDataDocument* map1, GeoDataDocument* map2)
 {
     GeoDataDocument* mergedMap = new GeoDataDocument(*map1);
@@ -208,7 +295,7 @@ int main(int argc, char *argv[])
         }
         qDebug() << "Landmass file " << outputFile << " done";
 
-    } else if (zoomLevel < 11) {
+    } else if (zoomLevel <= 9) {
         VectorClipper processor(map);
         GeoDataLatLonBox world(85.0, -85.0, 180.0, -180.0, GeoDataCoordinates::Degree);
         TileIterator iter(world, zoomLevel);
@@ -222,22 +309,8 @@ int main(int argc, char *argv[])
             qInfo() << tile->name() << " done";
             delete tile;
         }
-    } else if (zoomLevel == 11) {
-        QStringList tags;
-        tags << "highway=motorway" << "highway=motorway_link";
-        tags << "highway=trunk" << "highway=trunk_link";
-        tags << "highway=primary" << "highway=primary_link";
-        tags << "highway=secondary" << "highway=secondary_link";
-        tags << "leisure=nature_reserve";
-        tags << "leisure=park";
-        tags << "place=city";
-        tags << "place=town";
-        tags << "place=locality";
-        tags << "boundary=administrative";
-        tags << "boundary=political";
-        tags << "boundary=national_park";
-        tags << "boundary=protected_area";
-
+    } else {
+        QStringList const tags = tagsFilteredIn(zoomLevel);
         TagsFilter tagsFilter(map, tags);
 
         VectorClipper processor(tagsFilter.accepted());
