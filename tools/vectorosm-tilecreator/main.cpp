@@ -20,6 +20,7 @@
 #include <QDir>
 #include <QString>
 #include <QElapsedTimer>
+#include <QSharedPointer>
 
 #include <QMessageLogContext>
 
@@ -156,6 +157,23 @@ QStringList tagsFilteredIn(int zoomLevel)
     return tags;
 }
 
+QSharedPointer<GeoDataDocument> open(const QString &filename, ParsingRunnerManager &manager)
+{
+    QElapsedTimer timer;
+    timer.start();
+
+    // Timeout is set to 10 min. If the file is reaaally huge, set it to something bigger.
+    GeoDataDocument* map = manager.openFile(filename, DocumentRole::MapDocument, 600000);
+    if(map == nullptr) {
+        qWarning() << "File" << filename << "couldn't be loaded.";
+    } else {
+        qint64 parsingTime = timer.elapsed();
+        qDebug() << "Opened" << filename << "after" << parsingTime << "ms";
+    }
+    QSharedPointer<GeoDataDocument> result = QSharedPointer<GeoDataDocument>(map);
+    return result;
+}
+
 GeoDataDocument* mergeDocuments(GeoDataDocument* map1, GeoDataDocument* map2)
 {
     GeoDataDocument* mergedMap = new GeoDataDocument(*map1);
@@ -221,7 +239,6 @@ int main(int argc, char *argv[])
     // input is args.at(0), output is args.at(1)
 
     QString inputFileName = args.at(0);
-    QString mergeFileName = parser.value("merge");
     bool debug = parser.isSet("debug");
     bool silent = parser.isSet("silent");
     unsigned int zoomLevel = parser.value("zoom-level").toInt();
@@ -254,26 +271,9 @@ int main(int argc, char *argv[])
     MarbleModel model;
     ParsingRunnerManager manager(model.pluginManager());
 
-    QElapsedTimer timer;
-    timer.start();
-
-    // Timeout is set to 10 min. If the file is reaaally huge, set it to something bigger.
-    GeoDataDocument* map = manager.openFile(inputFileName, DocumentRole::MapDocument, 600000);
-    if(map == nullptr) {
-        qWarning() << "File" << inputFileName << "couldn't be loaded.";
-        return -2;
-    }
-    qint64 parsingTime = timer.elapsed();
-    qDebug() << "Parsing time:" << parsingTime << "ms";
-
-    GeoDataDocument* mergeMap = nullptr;
-    if(parser.isSet("merge")) {
-        mergeMap = manager.openFile(mergeFileName, DocumentRole::MapDocument, 600000);
-    }
-
     if (parser.isSet("landmass")) {
-        GeoDataDocument* map = manager.openFile(parser.value("landmass"), DocumentRole::MapDocument, 600000);
-        if(map == nullptr) {
+        auto map = open(parser.value("landmass"), manager);
+        if(!map) {
             qWarning() << "File" << inputFileName << "couldn't be loaded.";
             return -2;
         }
@@ -286,7 +286,7 @@ int main(int argc, char *argv[])
             }
         }
 
-        NodeReducer reducer(map, zoomLevel);
+        NodeReducer reducer(map.data(), zoomLevel);
 
         QString const extension = parser.value("extension");
         QString const outputFile = QString("%1/landmass-level-%2.%3").arg(outputName).arg(zoomLevel).arg(extension);
@@ -296,7 +296,8 @@ int main(int argc, char *argv[])
         qDebug() << "Landmass file " << outputFile << " done";
 
     } else if (zoomLevel <= 9) {
-        VectorClipper processor(map);
+        auto map = open(inputFileName, manager);
+        VectorClipper processor(map.data());
         GeoDataLatLonBox world(85.0, -85.0, 180.0, -180.0, GeoDataCoordinates::Degree);
         TileIterator iter(world, zoomLevel);
         foreach(auto const &tileId, iter) {
@@ -310,13 +311,16 @@ int main(int argc, char *argv[])
             delete tile;
         }
     } else {
+        auto map = open(inputFileName, manager);
         QStringList const tags = tagsFilteredIn(zoomLevel);
-        TagsFilter tagsFilter(map, tags);
-
+        TagsFilter tagsFilter(map.data(), tags);
+        map.clear();
         VectorClipper processor(tagsFilter.accepted());
-        VectorClipper background(mergeMap);
-        GeoDataDocument* landmass = background.clipTo(tagsFilter.accepted()->latLonAltBox());
 
+        auto mergeMap = open(parser.value("merge"), manager);
+        VectorClipper background(mergeMap.data());
+        GeoDataDocument* landmass = background.clipTo(tagsFilter.accepted()->latLonAltBox());
+        mergeMap.clear();
         VectorClipper landMassClipper(landmass);
 
         // @todo FIXME Assumes placemark ownership
@@ -338,6 +342,5 @@ int main(int argc, char *argv[])
         }
     }
 
-    delete map;
     return 0;
 }
