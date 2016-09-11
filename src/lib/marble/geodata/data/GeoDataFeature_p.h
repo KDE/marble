@@ -209,6 +209,7 @@ class GeoDataFeaturePrivate
 
     virtual ~GeoDataFeaturePrivate()
     {
+        delete m_featureExtendedData;
     }
 
     virtual const char* nodeType() const
