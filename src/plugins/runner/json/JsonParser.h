@@ -13,10 +13,6 @@
 
 #include "GeoDataDocument.h"
 
-#include <QScriptEngine>
-#include <QScriptValue>
-#include <QScriptValueIterator>
-
 class QIODevice;
 
 namespace Marble {
