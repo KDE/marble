@@ -44,8 +44,6 @@ target_link_libraries( marbledeclarative
     LINK_PUBLIC
         marblewidget
         Qt5::Quick
-    LINK_PRIVATE
-        Qt5::Script
 )
 if(Qt5Positioning_FOUND)
     target_link_libraries( marbledeclarative

@@ -20,7 +20,6 @@ if (CMAKE_SYSTEM_NAME STREQUAL Android)
         Qt5::Widgets
         Qt5::PrintSupport
         Qt5::Network
-        Qt5::Script
         Qt5::Sql
         Qt5::Svg
         Qt5::Location

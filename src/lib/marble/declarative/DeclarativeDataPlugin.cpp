@@ -20,8 +20,6 @@
 #include <QAbstractListModel>
 #include <QMetaObject>
 #include <QMetaProperty>
-#include <QScriptValue>
-#include <QScriptValueIterator>
 #include <QIcon>
 
 using namespace Marble;
@@ -123,9 +121,11 @@ void DeclarativeDataPluginPrivate::parseObject( QObject *object )
     for( int i = 0; i < meta->methodCount(); ++i ) {
         if( meta->method(i).methodSignature() == "get(int)" ) {
             for( int j=0; j < count; ++j ) {
-                QScriptValue value;
-                meta->method(i).invoke( object, Qt::AutoConnection, Q_RETURN_ARG( QScriptValue , value), Q_ARG( int, j ) );
-                QObject * propertyObject = value.toQObject();
+                QVariant value;
+                meta->method(i).invoke(object, Qt::AutoConnection, Q_RETURN_ARG(QVariant, value), Q_ARG(int, j));
+
+                // TODO: does this casting to QObject work? needs testing!
+                QObject * propertyObject = value.value<QObject*>();
                 GeoDataCoordinates coordinates;
                 DeclarativeDataPluginItem * item = new DeclarativeDataPluginItem( q );
                 if ( propertyObject ) {
@@ -134,11 +134,12 @@ void DeclarativeDataPluginPrivate::parseObject( QObject *object )
                         QVariant const value = propertyObject->metaObject()->property( k ).read( propertyObject );
                         parseChunk( item, coordinates, propertyName, value );
                     }
-                } else {
-                    QScriptValueIterator it( value );
-                    while ( it.hasNext() ) {
-                        it.next();
-                        parseChunk( item, coordinates, it.name(), it.value().toVariant() );
+                } else if (value.canConvert<QVariantHash>()) {
+                    QAssociativeIterable iterable = value.value<QAssociativeIterable>();
+                    QAssociativeIterable::const_iterator it = iterable.begin();
+                    const QAssociativeIterable::const_iterator end = iterable.end();
+                    for ( ; it != end; ++it) {
+                        parseChunk(item, coordinates, it.key().toString(), it.value());
                     }
                 }
                 addItem( item, coordinates );
@@ -362,7 +363,7 @@ void DeclarativeDataPlugin::setDeclarativeModel( const QVariant &model )
     QObject* object = model.value<QObject*>();
     if( qobject_cast< QAbstractListModel* >( object ) ) {
         d->parseListModel( qobject_cast< QAbstractListModel *>( object ) );
-    } else {
+    } else if (object) {
         d->parseObject( object );
     }
 
