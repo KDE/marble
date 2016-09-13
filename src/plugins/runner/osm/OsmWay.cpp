@@ -28,7 +28,7 @@ void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes, QSet<qint6
     placemark->setOsmData(m_osmData);
     placemark->setVisualCategory(StyleBuilder::determineVisualCategory(m_osmData));
     placemark->setName(m_osmData.tagValue(QStringLiteral("name")));
-    if (placemark->name().isEmpty() && placemark->visualCategory() >= GeoDataFeature::HighwaySteps && placemark->visualCategory() <= GeoDataFeature::HighwayMotorway) {
+    if (placemark->name().isEmpty()) {
         placemark->setName(m_osmData.tagValue(QStringLiteral("ref")));
     }
     placemark->setVisible(placemark->visualCategory() != GeoDataFeature::None);
