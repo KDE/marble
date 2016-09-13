@@ -618,11 +618,8 @@ GeoDataCoordinates PlacemarkLayout::placemarkIconCoordinates( const GeoDataPlace
 {
     bool ok;
     GeoDataCoordinates coordinates = placemark->coordinate( m_clock->dateTime(), &ok );
-    if ( !ok && m_acceptedVisualCategories.contains(placemark->visualCategory()) ) {
-        ok = true;
-    }
 
-    if ( ok ) {
+    if (ok || m_acceptedVisualCategories.contains(placemark->visualCategory())) {
         return coordinates;
     }
 
