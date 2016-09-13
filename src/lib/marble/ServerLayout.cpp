@@ -12,6 +12,7 @@
 #include "ServerLayout.h"
 
 #include "GeoSceneTileDataset.h"
+#include "GeoDataLatLonBox.h"
 #include "MarbleGlobal.h"
 #include "TileId.h"
 

@@ -13,9 +13,6 @@
 #define MARBLE_TILEID_H
 
 #include "marble_export.h"
-#include "GeoDataCoordinates.h"
-#include "GeoDataLatLonBox.h"
-#include "GeoSceneTextureTileDataset.h"
 
 #include <QHash>
 
@@ -24,6 +21,8 @@ class QString;
 namespace Marble
 {
 class GeoDataCoordinates;
+class GeoSceneTileDataset;
+class GeoDataLatLonBox;
 
 class MARBLE_EXPORT TileId
 {

@@ -18,6 +18,7 @@
 #include <QMap>
 
 #include "TileId.h"
+#include "GeoDataLatLonBox.h"
 
 class QThreadPool;
 
@@ -25,7 +26,6 @@ namespace Marble
 {
 
 class GeoDataDocument;
-class GeoDataLatLonBox;
 class GeoDataTreeModel;
 class GeoSceneVectorTileDataset;
 class GeoDataObject;

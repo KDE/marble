@@ -13,6 +13,8 @@
 #include "TileId.h"
 
 #include "MarbleMath.h"
+#include "GeoDataLatLonBox.h"
+#include "GeoSceneTileDataset.h"
 
 #include <QDebug>
 
