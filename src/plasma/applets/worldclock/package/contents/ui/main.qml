@@ -51,7 +51,7 @@ Item {
 
         readonly property int centerMode: plasmoid.configuration.centerMode
         readonly property double fixedLongitude: plasmoid.configuration.fixedLongitude
-        readonly property double locationLongitude: geolocationDataSource.data.longitude
+        readonly property double locationLongitude: geolocationDataSource.data.longitude || 0
 
         enabled: false // do not handle input
         Layout.minimumWidth: units.gridUnit * 20
