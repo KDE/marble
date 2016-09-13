@@ -172,7 +172,7 @@ void OpenCachingModel::parseFile( const QByteArray& file )
             continue;
         }
         if( token == QXmlStreamReader::StartElement ) {
-            if (reader.name() == QLatin1String("cache") {
+            if (reader.name() == QLatin1String("cache")) {
                 OpenCachingCache cache = d->parseCache( reader );
                 caches[cache.id()] = cache;
             }
