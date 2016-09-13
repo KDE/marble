@@ -93,17 +93,50 @@ class MARBLE_EXPORT AbstractProjection
      */
     virtual QIcon icon() const = 0;
 
+    /**
+     * @brief Returns the maximum (northern) latitude that is mathematically defined and reasonable.
+     *
+     * Example: For many projections the value will represent +90 degrees in Radian.
+     * In the case of Mercator this value will equal +85.05113 degrees in Radian.
+     */
     virtual qreal  maxValidLat() const;
 
+    /**
+     * @brief Returns the arbitrarily chosen maximum (northern) latitude.
+     * By default this value is equal to the value defined inside maxValidLat().
+     * In general this value can only be smaller or equal to maxValidLat().
+     */
     qreal  maxLat()  const;
     void setMaxLat( qreal maxLat );
 
+    /**
+     * @brief Returns the minimum (southern) latitude that is mathematically defined and reasonable.
+     *
+     * Example: For many projections the value will represent -90 degrees in Radian.
+     * In the case of Mercator this value will equal -85.05113 degrees in Radian.
+     */
     virtual qreal  minValidLat() const;
 
+    /**
+     * @brief Returns the arbitrarily chosen minimum (southern) latitude.
+     * By default this value is equal to the value defined inside minValidLat().
+     * In general this value can only be larger or equal to minValidLat().
+     */
     qreal  minLat()  const;
     void setMinLat( qreal minLat );
 
+    /**
+     * @brief Returns whether the projection allows for wrapping in x direction (along the longitude scale).
+     *
+     * Example: Cylindrical projections allow for repeating.
+     */
     virtual bool   repeatableX() const;
+
+    /**
+     * @brief Returns whether the projection allows to navigate seamlessly "over" the pole.
+     *
+     * Example: Azimuthal projections.
+     */
     virtual bool   traversablePoles()  const;
     virtual bool   traversableDateLine()  const;
 
@@ -118,6 +151,12 @@ class MARBLE_EXPORT AbstractProjection
 
     virtual bool isOrientedNormal() const;
 
+    /**
+     * @brief Defines whether a projection is supposed to be clipped to a certain radius.
+     *
+     * Example: The Gnomonic projection is clipped to a circle of a certain clipping radius
+     * (although it's mathematically defined beyond that radius).
+     */
     virtual bool isClippedToSphere() const;
 
     virtual qreal clippingRadius() const;
@@ -205,11 +244,25 @@ class MARBLE_EXPORT AbstractProjection
                                  GeoDataCoordinates::Unit unit = GeoDataCoordinates::Degree ) const = 0;
 
 
+    /**
+     * @brief Returns a GeoDataLatLonAltBox bounding box of the given screenrect inside the given viewport.
+     */
     virtual GeoDataLatLonAltBox latLonAltBox( const QRect& screenRect,
                                               const ViewportParams *viewport ) const;
 
+    /**
+     * @brief Returns whether the projected data fully obstructs the current viewport.
+     * In this case there are no black areas visible around the actual map.
+     * This case allows for performance optimizations.
+     */
     virtual bool mapCoversViewport( const ViewportParams *viewport ) const = 0;
 
+    /**
+     * @brief Returns the shape/outline of a map projection.
+     * This call allows e.g. to draw the default background color of the map itself.
+     *
+     * Example: For an azimuthal projection a circle is returned at low zoom values.
+     */
     virtual QPainterPath mapShape( const ViewportParams *viewport ) const = 0;
 
     QRegion mapRegion( const ViewportParams *viewport ) const;
