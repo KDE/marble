@@ -88,6 +88,12 @@ void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes, QSet<qint6
     if (placemark->name().isEmpty()) {
         placemark->setName(m_osmData.tagValue(QStringLiteral("ref")));
     }
+    if (placemark->name().isEmpty()) {
+        placemark->setName(m_osmData.tagValue(QStringLiteral("addr:housename")));
+    }
+    if (placemark->name().isEmpty()) {
+        placemark->setName(m_osmData.tagValue(QStringLiteral("addr:housenumber")));
+    }
     placemark->setOsmData(osmData);
     placemark->setVisible(placemark->visualCategory() != GeoDataPlacemark::None);
 

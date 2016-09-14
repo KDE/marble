@@ -29,7 +29,6 @@ BuildingGeoPolygonGraphicsItem::BuildingGeoPolygonGraphicsItem(const GeoDataPlac
                                                                const GeoDataPolygon *polygon)
     : AbstractGeoPolygonGraphicsItem(placemark, polygon)
     , m_buildingHeight(polygon->latLonAltBox().maxAltitude() - polygon->latLonAltBox().minAltitude())
-    , m_buildingLabel(extractBuildingLabel(*placemark))
     , m_entries(extractNamedEntries(*placemark))
 {
     setZValue(this->zValue() + m_buildingHeight);
@@ -45,7 +44,6 @@ BuildingGeoPolygonGraphicsItem::BuildingGeoPolygonGraphicsItem(const GeoDataPlac
                                                                const GeoDataLinearRing* ring)
     : AbstractGeoPolygonGraphicsItem(placemark, ring)
     , m_buildingHeight(ring->latLonAltBox().maxAltitude() - ring->latLonAltBox().minAltitude())
-    , m_buildingLabel(extractBuildingLabel(*placemark))
     , m_entries(extractNamedEntries(*placemark))
 {
     setZValue(this->zValue() + m_buildingHeight);
@@ -135,27 +133,6 @@ QPointF BuildingGeoPolygonGraphicsItem::buildingOffset(const QPointF &point, con
     return QPointF(shiftX, shiftY);
 }
 
-QString BuildingGeoPolygonGraphicsItem::extractBuildingLabel(const GeoDataPlacemark &placemark)
-{
-    if (!placemark.name().isEmpty()) {
-        return placemark.name();
-    }
-
-    const OsmPlacemarkData &osmData = placemark.osmData();
-
-    auto tagIter = osmData.findTag(QStringLiteral("addr:housename"));
-    if (tagIter != osmData.tagsEnd()) {
-        return tagIter.value();
-    }
-
-    tagIter = osmData.findTag(QStringLiteral("addr:housenumber"));
-    if (tagIter != osmData.tagsEnd()) {
-        return tagIter.value();
-    }
-
-    return QString();
-}
-
 QVector<BuildingGeoPolygonGraphicsItem::NamedEntry> BuildingGeoPolygonGraphicsItem::extractNamedEntries(const GeoDataPlacemark &placemark)
 {
     QVector<NamedEntry> entries;
@@ -200,7 +177,6 @@ void BuildingGeoPolygonGraphicsItem::paintRoof(GeoPainter* painter, const Viewpo
     painter->save();
     QPen const currentPen = configurePainter(painter, viewport);
 
-    bool const hasIcon = !style()->iconStyle().iconPath().isEmpty();
     qreal maxSize(0.0);
     QPointF roofCenter;
 
@@ -214,7 +190,7 @@ void BuildingGeoPolygonGraphicsItem::paintRoof(GeoPainter* painter, const Viewpo
     foreach(QPolygonF* outlinePolygon, outlinePolygons) {
         QRectF const boundingRect = outlinePolygon->boundingRect();
         QPolygonF buildingRoof;
-        if (hasIcon || !m_buildingLabel.isEmpty() || !m_entries.isEmpty()) {
+        if (!m_entries.isEmpty()) {
             QSizeF const polygonSize = boundingRect.size();
             qreal size = polygonSize.width() * polygonSize.height();
             if (size > maxSize) {
@@ -257,25 +233,6 @@ void BuildingGeoPolygonGraphicsItem::paintRoof(GeoPainter* painter, const Viewpo
             }
             painter->drawPolygon(*outlinePolygon);
             painter->translate(-offset);
-        }
-
-        if (hasIcon && !roofCenter.isNull()) {
-            QImage const icon = style()->iconStyle().scaledIcon();
-            QPointF const iconCenter(icon.size().width()/2.0, icon.size().height()/2.0);
-            painter->drawImage(roofCenter-iconCenter, icon);
-        } else if (drawAccurate3D && !m_buildingLabel.isEmpty() && !roofCenter.isNull()) {
-            double const w2 = 0.5 * painter->fontMetrics().width(m_buildingLabel);
-            double const ascent = painter->fontMetrics().ascent();
-            double const descent = painter->fontMetrics().descent();
-            double const a2 = 0.5 * painter->fontMetrics().ascent();
-            QPointF const textPosition = roofCenter - QPointF(w2, -a2);
-            if (buildingRoof.containsPoint(textPosition + QPointF(-2, -ascent), Qt::OddEvenFill)
-                    && buildingRoof.containsPoint(textPosition + QPointF(-2, descent), Qt::OddEvenFill)
-                    && buildingRoof.containsPoint(textPosition + QPointF(2+2*w2, descent), Qt::OddEvenFill)
-                    && buildingRoof.containsPoint(textPosition + QPointF(2+2*w2, -ascent), Qt::OddEvenFill)
-                    ) {
-                painter->drawText(textPosition, m_buildingLabel);
-            }
         }
     }
 

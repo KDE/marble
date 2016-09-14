@@ -269,16 +269,20 @@ GeoDataCoordinates GeoDataPlacemark::coordinate( const QDateTime &dateTime, bool
  
     if( p()->m_geometry ) {
         // Beware: comparison between pointers, not strings.
-        if ( p()->m_geometry->nodeType() == GeoDataTypes::GeoDataPointType ) {
+        if (p()->m_geometry->nodeType() == GeoDataTypes::GeoDataPointType
+                || p()->m_geometry->nodeType() == GeoDataTypes::GeoDataPolygonType
+                || p()->m_geometry->nodeType() == GeoDataTypes::GeoDataLinearRingType) {
             hasIcon = true;
-            coord = static_cast<const GeoDataPoint *>( p()->m_geometry )->coordinates();
+            coord = p()->m_geometry->latLonAltBox().center();
         } else if ( p()->m_geometry->nodeType() == GeoDataTypes::GeoDataMultiGeometryType ) {
             const GeoDataMultiGeometry *multiGeometry = static_cast<const GeoDataMultiGeometry *>( p()->m_geometry );
 
             QVector<GeoDataGeometry*>::ConstIterator it = multiGeometry->constBegin();
             QVector<GeoDataGeometry*>::ConstIterator end = multiGeometry->constEnd();
             for ( ; it != end; ++it ) {
-                if ( (*it)->nodeType() == GeoDataTypes::GeoDataPointType ) {
+                if ((*it)->nodeType() == GeoDataTypes::GeoDataPointType
+                        || (*it)->nodeType() == GeoDataTypes::GeoDataPolygonType
+                        || (*it)->nodeType() == GeoDataTypes::GeoDataLinearRingType) {
                     hasIcon = true;
                     break;
                 }
