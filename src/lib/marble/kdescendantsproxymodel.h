@@ -17,12 +17,16 @@
     02110-1301, USA.
 */
 
-#ifndef KDESCENDANTSPROXYMODEL_P_H
-#define KDESCENDANTSPROXYMODEL_P_H
+#ifndef MARBLE_KDESCENDANTSPROXYMODEL_H
+#define MARBLE_KDESCENDANTSPROXYMODEL_H
 
 #include <QAbstractProxyModel>
 
 #include "marble_export.h"
+
+// namespace added to avoid symbol clashes with KF5::ItemModels
+namespace Marble
+{
 
 class KDescendantsProxyModelPrivate;
 
@@ -204,5 +208,7 @@ private:
 
     //@endcond
 };
+
+}
 
 #endif

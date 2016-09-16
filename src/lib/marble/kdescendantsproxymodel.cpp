@@ -27,6 +27,9 @@
 
 #include "kbihash_p.h"
 
+namespace Marble
+{
+
 typedef KHash2Map<QPersistentModelIndex, int> Mapping;
 
 class KDescendantsProxyModelPrivate
@@ -982,6 +985,8 @@ Qt::DropActions KDescendantsProxyModel::supportedDropActions() const
         return QAbstractProxyModel::supportedDropActions();
     }
     return sourceModel()->supportedDropActions();
+}
+
 }
 
 #include "moc_kdescendantsproxymodel.cpp"
