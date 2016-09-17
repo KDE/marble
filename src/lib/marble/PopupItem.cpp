@@ -27,6 +27,7 @@
 #include <QPrintDialog>
 #include <QMouseEvent>
 #include <QApplication>
+#include <QDesktopServices>
 #include <QPixmapCache>
 #include <qdrawutil.h>
 #include <QPainter>
@@ -64,6 +65,7 @@ PopupItem::PopupItem( QObject* parent ) :
     m_ui.webView->setPalette(palette);
 #ifndef MARBLE_NO_WEBKITWIDGETS
     m_ui.webView->page()->setPalette(palette);
+    m_ui.webView->page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
 #endif
     m_ui.webView->setAttribute(Qt::WA_OpaquePaintEvent, false);
     m_ui.webView->setUrl( QUrl( "about:blank" ) );
@@ -75,6 +77,7 @@ PopupItem::PopupItem( QObject* parent ) :
 #ifndef MARBLE_NO_WEBKITWIDGETS
     // Update the popupitem on changes while loading the webpage
     connect( m_ui.webView->page(), SIGNAL(repaintRequested(QRect)), this, SLOT(requestUpdate()) );
+    connect(m_ui.webView->page(), SIGNAL(linkClicked(QUrl)), this, SLOT(openUrl(QUrl)));
 #endif
 }
 
@@ -384,6 +387,11 @@ void PopupItem::goBack()
     }
     updateBackButton();
 #endif
+}
+
+void PopupItem::openUrl(const QUrl &url)
+{
+    QDesktopServices::openUrl(url);
 }
 
 QPixmap PopupItem::pixmap( const QString &imageId ) const

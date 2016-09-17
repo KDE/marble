@@ -163,6 +163,12 @@ private Q_SLOTS:
      */
     void goBack();
 
+    /**
+     * @brief Opens clicked URL in external browser.
+     * @param url URL to be opened in external browser
+     */
+    void openUrl(const QUrl &url);
+
 protected:
     void paint( QPainter *painter );
 
