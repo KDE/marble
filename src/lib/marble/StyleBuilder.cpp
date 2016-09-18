@@ -1965,12 +1965,6 @@ GeoDataFeature::GeoDataVisualCategory StyleBuilder::determineVisualCategory(cons
         return GeoDataFeature::None;
     }
 
-    auto tagIter = osmData.findTag(QStringLiteral("building"));
-    if (tagIter != osmData.tagsEnd() &&
-        buildingValues().contains(tagIter.value())) {
-        return GeoDataFeature::Building;
-    }
-
     if( osmData.containsTag("natural", "glacier") && osmData.containsTag("glacier:type", "shelf") ){
         return GeoDataFeature::NaturalIceShelf;
     }
