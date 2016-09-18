@@ -14,6 +14,7 @@
 #include "ViewportParams.h"
 #include "GeoDataTypes.h"
 #include "GeoDataPlacemark.h"
+#include "GeoDataLatLonAltBox.h"
 #include "GeoDataLinearRing.h"
 #include "GeoDataPolygon.h"
 #include "GeoDataIconStyle.h"
@@ -27,7 +28,7 @@ namespace Marble
 BuildingGeoPolygonGraphicsItem::BuildingGeoPolygonGraphicsItem(const GeoDataPlacemark *placemark,
                                                                const GeoDataPolygon *polygon)
     : AbstractGeoPolygonGraphicsItem(placemark, polygon)
-    , m_buildingHeight(extractBuildingHeight(*placemark))
+    , m_buildingHeight(polygon->latLonAltBox().maxAltitude() - polygon->latLonAltBox().minAltitude())
     , m_buildingLabel(extractBuildingLabel(*placemark))
     , m_entries(extractNamedEntries(*placemark))
 {
@@ -43,7 +44,7 @@ BuildingGeoPolygonGraphicsItem::BuildingGeoPolygonGraphicsItem(const GeoDataPlac
 BuildingGeoPolygonGraphicsItem::BuildingGeoPolygonGraphicsItem(const GeoDataPlacemark *placemark,
                                                                const GeoDataLinearRing* ring)
     : AbstractGeoPolygonGraphicsItem(placemark, ring)
-    , m_buildingHeight(extractBuildingHeight(*placemark))
+    , m_buildingHeight(ring->latLonAltBox().maxAltitude() - ring->latLonAltBox().minAltitude())
     , m_buildingLabel(extractBuildingLabel(*placemark))
     , m_entries(extractNamedEntries(*placemark))
 {
@@ -132,31 +133,6 @@ QPointF BuildingGeoPolygonGraphicsItem::buildingOffset(const QPointF &point, con
     qreal const shiftY = offsetY * cb / (cc + offsetY);
 
     return QPointF(shiftX, shiftY);
-}
-
-double BuildingGeoPolygonGraphicsItem::extractBuildingHeight(const GeoDataPlacemark &placemark)
-{
-    double height = 8.0;
-
-    const OsmPlacemarkData &osmData = placemark.osmData();
-
-    QHash<QString, QString>::const_iterator tagIter;
-    if ((tagIter = osmData.findTag(QStringLiteral("height"))) != osmData.tagsEnd()) {
-        /** @todo Also parse non-SI units, see https://wiki.openstreetmap.org/wiki/Key:height#Height_of_buildings */
-        QString const heightValue = QString(tagIter.value()).remove(QStringLiteral(" meters")).remove(QStringLiteral(" m"));
-        bool extracted = false;
-        double extractedHeight = heightValue.toDouble(&extracted);
-        if (extracted) {
-            height = extractedHeight;
-        }
-    } else if ((tagIter = osmData.findTag(QStringLiteral("building:levels"))) != osmData.tagsEnd()) {
-        int const levels = tagIter.value().toInt();
-        int const skipLevels = osmData.tagValue(QStringLiteral("building:min_level")).toInt();
-        /** @todo Is 35 as an upper bound for the number of levels sane? */
-        height = 3.0 * qBound(1, 1+levels-skipLevels, 35);
-    }
-
-    return qBound(1.0, height, 1000.0);
 }
 
 QString BuildingGeoPolygonGraphicsItem::extractBuildingLabel(const GeoDataPlacemark &placemark)
