@@ -1148,8 +1148,8 @@ void StyleBuilder::Private::initializeOsmVisualCategories()
     s_visualCategories[OsmTag("marble:feature", "bathymetry")]  = GeoDataFeature::Bathymetry;
 
     // Default for buildings
-    foreach (const QString &value, buildingValues()) {
-        s_visualCategories[OsmTag("building", value)]           = GeoDataFeature::Building;
+    foreach (const auto &tag, buildingTags()) {
+        s_visualCategories[tag]                                 = GeoDataFeature::Building;
     }
 }
 
@@ -1924,25 +1924,74 @@ QStringList StyleBuilder::shopValues()
     return osmShopValues;
 }
 
-QStringList StyleBuilder::buildingValues()
+QSet<StyleBuilder::OsmTag> StyleBuilder::buildingTags()
 {
+    static const QString building = QStringLiteral("building");
     // from https://taginfo.openstreetmap.org/keys/building#values
-    static const QStringList osmBuildingValues = QStringList()
-        << "yes" << "house" << "residential" << "garage" << "apartments"
-        << "hut" << "industrial" << "detached" << "roof" << "garages"
-        << "commercial" << "terrace" << "shed" << "school" << "retail"
-        << "farm_auxiliary" << "church" << "cathedral" << "greenhouse" << "barn"
-        << "service" << "manufacture" << "construction" << "cabin"
-        << "farm" << "warehouse" << "House" << "office"
-        << "civic" << "Residential" << "hangar" << "public" << "university"
-        << "hospital" << "chapel" << "hotel" << "train_station" << "dormitory"
-        << "kindergarten" << "stable" << "storage_tank" << "shop" << "college"
-        << "supermarket" << "factory" << "bungalow" << "tower" << "silo"
-        << "storage" << "station" << "education" << "carport" << "houseboat"
-        << "castle" << "social_facility" << "water_tower" << "container"
-        << "exhibition_hall" << "monastery" << "bunker" << "shelter";
+    static const QSet<OsmTag> osmBuildingTags = QSet<OsmTag>()
+        << OsmTag(building, "yes")
+        << OsmTag(building, "house")
+        << OsmTag(building, "residential")
+        << OsmTag(building, "garage")
+        << OsmTag(building, "apartments")
+        << OsmTag(building, "hut")
+        << OsmTag(building, "industrial")
+        << OsmTag(building, "detached")
+        << OsmTag(building, "roof")
+        << OsmTag(building, "garages")
+        << OsmTag(building, "commercial")
+        << OsmTag(building, "terrace")
+        << OsmTag(building, "shed")
+        << OsmTag(building, "school")
+        << OsmTag(building, "retail")
+        << OsmTag(building, "farm_auxiliary")
+        << OsmTag(building, "church")
+        << OsmTag(building, "cathedral")
+        << OsmTag(building, "greenhouse")
+        << OsmTag(building, "barn")
+        << OsmTag(building, "service")
+        << OsmTag(building, "manufacture")
+        << OsmTag(building, "construction")
+        << OsmTag(building, "cabin")
+        << OsmTag(building, "farm")
+        << OsmTag(building, "warehouse")
+        << OsmTag(building, "House")
+        << OsmTag(building, "office")
+        << OsmTag(building, "civic")
+        << OsmTag(building, "Residential")
+        << OsmTag(building, "hangar")
+        << OsmTag(building, "public")
+        << OsmTag(building, "university")
+        << OsmTag(building, "hospital")
+        << OsmTag(building, "chapel")
+        << OsmTag(building, "hotel")
+        << OsmTag(building, "train_station")
+        << OsmTag(building, "dormitory")
+        << OsmTag(building, "kindergarten")
+        << OsmTag(building, "stable")
+        << OsmTag(building, "storage_tank")
+        << OsmTag(building, "shop")
+        << OsmTag(building, "college")
+        << OsmTag(building, "supermarket")
+        << OsmTag(building, "factory")
+        << OsmTag(building, "bungalow")
+        << OsmTag(building, "tower")
+        << OsmTag(building, "silo")
+        << OsmTag(building, "storage")
+        << OsmTag(building, "station")
+        << OsmTag(building, "education")
+        << OsmTag(building, "carport")
+        << OsmTag(building, "houseboat")
+        << OsmTag(building, "castle")
+        << OsmTag(building, "social_facility")
+        << OsmTag(building, "water_tower")
+        << OsmTag(building, "container")
+        << OsmTag(building, "exhibition_hall")
+        << OsmTag(building, "monastery")
+        << OsmTag(building, "bunker")
+        << OsmTag(building, "shelter");
 
-    return osmBuildingValues;
+    return osmBuildingTags;
 }
 
 GeoDataFeature::GeoDataVisualCategory StyleBuilder::determineVisualCategory(const OsmPlacemarkData &osmData)

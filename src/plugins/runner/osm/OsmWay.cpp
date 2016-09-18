@@ -20,7 +20,7 @@
 
 namespace Marble {
 
-QSet<QString> OsmWay::s_areaTags;
+QSet<StyleBuilder::OsmTag> OsmWay::s_areaTags;
 
 void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes, QSet<qint64> &usedNodes) const
 {
@@ -118,8 +118,8 @@ bool OsmWay::isArea() const
     }
 
     for (auto iter = m_osmData.tagsBegin(), end=m_osmData.tagsEnd(); iter != end; ++iter) {
-        QString const keyValue = iter.key() + QLatin1Char('=') + iter.value();
-        if (isAreaTag(keyValue)) {
+        const auto tag = StyleBuilder::OsmTag(iter.key(), iter.value());
+        if (isAreaTag(tag)) {
             return true;
         }
     }
@@ -128,52 +128,52 @@ bool OsmWay::isArea() const
     return isImplicitlyClosed;
 }
 
-bool OsmWay::isAreaTag(const QString &keyValue)
+bool OsmWay::isAreaTag(const StyleBuilder::OsmTag &keyValue)
 {
     if (s_areaTags.isEmpty()) {
         // All these tags can be found updated at
         // http://wiki.openstreetmap.org/wiki/Map_Features#Landuse
 
-        s_areaTags.insert(QStringLiteral("natural=water"));
-        s_areaTags.insert(QStringLiteral("natural=wood"));
-        s_areaTags.insert(QStringLiteral("natural=beach"));
-        s_areaTags.insert(QStringLiteral("natural=wetland"));
-        s_areaTags.insert(QStringLiteral("natural=glacier"));
-        s_areaTags.insert(QStringLiteral("natural=scrub"));
-        s_areaTags.insert(QStringLiteral("natural=cliff"));
-        s_areaTags.insert(QStringLiteral("area=yes"));
-        s_areaTags.insert(QStringLiteral("waterway=riverbank"));
+        s_areaTags.insert(StyleBuilder::OsmTag(QStringLiteral("natural"), QStringLiteral("water")));
+        s_areaTags.insert(StyleBuilder::OsmTag(QStringLiteral("natural"), QStringLiteral("wood")));
+        s_areaTags.insert(StyleBuilder::OsmTag(QStringLiteral("natural"), QStringLiteral("beach")));
+        s_areaTags.insert(StyleBuilder::OsmTag(QStringLiteral("natural"), QStringLiteral("wetland")));
+        s_areaTags.insert(StyleBuilder::OsmTag(QStringLiteral("natural"), QStringLiteral("glacier")));
+        s_areaTags.insert(StyleBuilder::OsmTag(QStringLiteral("natural"), QStringLiteral("scrub")));
+        s_areaTags.insert(StyleBuilder::OsmTag(QStringLiteral("natural"), QStringLiteral("cliff")));
+        s_areaTags.insert(StyleBuilder::OsmTag(QStringLiteral("area"), QStringLiteral("yes")));
+        s_areaTags.insert(StyleBuilder::OsmTag(QStringLiteral("waterway"), QStringLiteral("riverbank")));
 
-        foreach(const QString &value, StyleBuilder::buildingValues() ) {
-            s_areaTags.insert(QLatin1String("building=") + value);
+        foreach (const auto tag, StyleBuilder::buildingTags()) {
+            s_areaTags.insert(tag);
         }
-        s_areaTags.insert(QStringLiteral("man_made=bridge"));
+        s_areaTags.insert(StyleBuilder::OsmTag(QStringLiteral("man_made"), QStringLiteral("bridge")));
 
-        s_areaTags.insert(QStringLiteral("amenity=graveyard"));
-        s_areaTags.insert(QStringLiteral("amenity=parking"));
-        s_areaTags.insert(QStringLiteral("amenity=parking_space"));
-        s_areaTags.insert(QStringLiteral("amenity=bicycle_parking"));
-        s_areaTags.insert(QStringLiteral("amenity=college"));
-        s_areaTags.insert(QStringLiteral("amenity=hospital"));
-        s_areaTags.insert(QStringLiteral("amenity=kindergarten"));
-        s_areaTags.insert(QStringLiteral("amenity=school"));
-        s_areaTags.insert(QStringLiteral("amenity=university"));
-        s_areaTags.insert(QStringLiteral("leisure=common"));
-        s_areaTags.insert(QStringLiteral("leisure=garden"));
-        s_areaTags.insert(QStringLiteral("leisure=golf_course"));
-        s_areaTags.insert(QStringLiteral("leisure=marina"));
-        s_areaTags.insert(QStringLiteral("leisure=playground"));
-        s_areaTags.insert(QStringLiteral("leisure=pitch"));
-        s_areaTags.insert(QStringLiteral("leisure=park"));
-        s_areaTags.insert(QStringLiteral("leisure=sports_centre"));
-        s_areaTags.insert(QStringLiteral("leisure=stadium"));
-        s_areaTags.insert(QStringLiteral("leisure=swimming_pool"));
-        s_areaTags.insert(QStringLiteral("leisure=track"));
+        s_areaTags.insert(StyleBuilder::OsmTag(QStringLiteral("amenity"), QStringLiteral("graveyard")));
+        s_areaTags.insert(StyleBuilder::OsmTag(QStringLiteral("amenity"), QStringLiteral("parking")));
+        s_areaTags.insert(StyleBuilder::OsmTag(QStringLiteral("amenity"), QStringLiteral("parking_space")));
+        s_areaTags.insert(StyleBuilder::OsmTag(QStringLiteral("amenity"), QStringLiteral("bicycle_parking")));
+        s_areaTags.insert(StyleBuilder::OsmTag(QStringLiteral("amenity"), QStringLiteral("college")));
+        s_areaTags.insert(StyleBuilder::OsmTag(QStringLiteral("amenity"), QStringLiteral("hospital")));
+        s_areaTags.insert(StyleBuilder::OsmTag(QStringLiteral("amenity"), QStringLiteral("kindergarten")));
+        s_areaTags.insert(StyleBuilder::OsmTag(QStringLiteral("amenity"), QStringLiteral("school")));
+        s_areaTags.insert(StyleBuilder::OsmTag(QStringLiteral("amenity"), QStringLiteral("university")));
+        s_areaTags.insert(StyleBuilder::OsmTag(QStringLiteral("leisure"), QStringLiteral("common")));
+        s_areaTags.insert(StyleBuilder::OsmTag(QStringLiteral("leisure"), QStringLiteral("garden")));
+        s_areaTags.insert(StyleBuilder::OsmTag(QStringLiteral("leisure"), QStringLiteral("golf_course")));
+        s_areaTags.insert(StyleBuilder::OsmTag(QStringLiteral("leisure"), QStringLiteral("marina")));
+        s_areaTags.insert(StyleBuilder::OsmTag(QStringLiteral("leisure"), QStringLiteral("playground")));
+        s_areaTags.insert(StyleBuilder::OsmTag(QStringLiteral("leisure"), QStringLiteral("pitch")));
+        s_areaTags.insert(StyleBuilder::OsmTag(QStringLiteral("leisure"), QStringLiteral("park")));
+        s_areaTags.insert(StyleBuilder::OsmTag(QStringLiteral("leisure"), QStringLiteral("sports_centre")));
+        s_areaTags.insert(StyleBuilder::OsmTag(QStringLiteral("leisure"), QStringLiteral("stadium")));
+        s_areaTags.insert(StyleBuilder::OsmTag(QStringLiteral("leisure"), QStringLiteral("swimming_pool")));
+        s_areaTags.insert(StyleBuilder::OsmTag(QStringLiteral("leisure"), QStringLiteral("track")));
 
-        s_areaTags.insert(QStringLiteral("military=danger_area"));
+        s_areaTags.insert(StyleBuilder::OsmTag(QStringLiteral("military"), QStringLiteral("danger_area")));
 
-        s_areaTags.insert(QStringLiteral("marble_land=landmass"));
-        s_areaTags.insert(QStringLiteral("settlement=yes"));
+        s_areaTags.insert(StyleBuilder::OsmTag(QStringLiteral("marble_land"), QStringLiteral("landmass")));
+        s_areaTags.insert(StyleBuilder::OsmTag(QStringLiteral("settlement"), QStringLiteral("yes")));
     }
 
     return s_areaTags.contains(keyValue);

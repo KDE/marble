@@ -14,6 +14,7 @@
 #include "OsmNode.h"
 #include <osm/OsmPlacemarkData.h>
 #include <GeoDataDocument.h>
+#include <StyleBuilder.h>
 
 #include <QSet>
 #include <QString>
@@ -34,12 +35,12 @@ public:
 private:
     bool isArea() const;
 
-    static bool isAreaTag(const QString &keyValue);
+    static bool isAreaTag(const StyleBuilder::OsmTag &keyValue);
 
     OsmPlacemarkData m_osmData;
     QVector<qint64> m_references;
 
-    static QSet<QString> s_areaTags;
+    static QSet<StyleBuilder::OsmTag> s_areaTags;
 };
 
 typedef QHash<qint64,OsmWay> OsmWays;

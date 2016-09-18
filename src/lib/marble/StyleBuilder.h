@@ -91,7 +91,7 @@ public:
     static QHash<OsmTag, GeoDataFeature::GeoDataVisualCategory>::const_iterator end();
 
     static QStringList shopValues();
-    static QStringList buildingValues();
+    static QSet<OsmTag> buildingTags();
 
     static GeoDataFeature::GeoDataVisualCategory determineVisualCategory(const OsmPlacemarkData &osmData);
 
