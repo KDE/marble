@@ -1989,7 +1989,9 @@ QSet<StyleBuilder::OsmTag> StyleBuilder::buildingTags()
         << OsmTag(building, "exhibition_hall")
         << OsmTag(building, "monastery")
         << OsmTag(building, "bunker")
-        << OsmTag(building, "shelter");
+        << OsmTag(building, "shelter")
+        << OsmTag("building:part", "yes")
+        << OsmTag("building:part", "antenna");
 
     return osmBuildingTags;
 }
