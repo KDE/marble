@@ -29,11 +29,6 @@ public:
     virtual void paint(GeoPainter* painter, const ViewportParams *viewport, const QString &layer);
 
 private:
-    struct NamedEntry {
-        GeoDataCoordinates point;
-        QString label;
-    };
-
     void paintFrame(GeoPainter* painter, const ViewportParams *viewport);
     void paintRoof(GeoPainter* painter, const ViewportParams *viewport);
     void configureFramePainter(GeoPainter *painter) const;
@@ -46,11 +41,9 @@ private:
     static QPointF centroid(const QPolygonF &polygon, double &area);
     static void screenPolygons(const ViewportParams *viewport, const GeoDataPolygon* polygon,
                                QVector<QPolygonF*> &polygons,  QVector<QPolygonF*> &outlines);
-    static QVector<NamedEntry> extractNamedEntries(const GeoDataPlacemark &placemark);
 
 private:
     const double m_buildingHeight;
-    const QVector<NamedEntry> m_entries;
 };
 
 }
