@@ -24,54 +24,57 @@ QSet<QString> OsmWay::s_areaTags;
 
 void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes, QSet<qint64> &usedNodes) const
 {
-    GeoDataPlacemark* placemark = new GeoDataPlacemark;
-    placemark->setOsmData(m_osmData);
+    OsmPlacemarkData osmData = m_osmData;
+    GeoDataGeometry *geometry = 0;
+
+    if (isArea()) {
+        GeoDataLinearRing linearRing;
+
+        foreach(qint64 nodeId, m_references) {
+            auto const nodeIter = nodes.constFind(nodeId);
+            if (nodeIter == nodes.constEnd()) {
+                return;
+            }
+
+            OsmNode const & node = nodeIter.value();
+            osmData.addNodeReference(node.coordinates(), node.osmData());
+            linearRing.append(node.coordinates());
+            usedNodes << nodeId;
+        }
+
+        geometry = new GeoDataLinearRing(linearRing.optimized());
+    } else {
+        GeoDataLineString lineString;
+
+        foreach(qint64 nodeId, m_references) {
+            auto const nodeIter = nodes.constFind(nodeId);
+            if (nodeIter == nodes.constEnd()) {
+                return;
+            }
+
+            OsmNode const & node = nodeIter.value();
+            osmData.addNodeReference(node.coordinates(), node.osmData());
+            lineString.append(node.coordinates());
+            usedNodes << nodeId;
+        }
+
+        geometry = new GeoDataLineString(lineString.optimized());
+    }
+
+    Q_ASSERT(geometry != nullptr);
+
+    OsmObjectManager::registerId(m_osmData.id());
+
+    GeoDataPlacemark *placemark = new GeoDataPlacemark;
+    placemark->setGeometry(geometry);
     placemark->setVisualCategory(StyleBuilder::determineVisualCategory(m_osmData));
     placemark->setName(m_osmData.tagValue(QStringLiteral("name")));
     if (placemark->name().isEmpty()) {
         placemark->setName(m_osmData.tagValue(QStringLiteral("ref")));
     }
+    placemark->setOsmData(osmData);
     placemark->setVisible(placemark->visualCategory() != GeoDataFeature::None);
 
-    if (isArea()) {
-        GeoDataLinearRing* linearRing = new GeoDataLinearRing;
-        placemark->setGeometry(linearRing);
-
-        foreach(qint64 nodeId, m_references) {
-            auto const nodeIter = nodes.constFind(nodeId);
-            if (nodeIter == nodes.constEnd()) {
-                delete placemark;
-                return;
-            }
-
-            OsmNode const & node = nodeIter.value();
-            placemark->osmData().addNodeReference(node.coordinates(), node.osmData());
-            linearRing->append(node.coordinates());
-            usedNodes << nodeId;
-        }
-
-        *linearRing = GeoDataLinearRing(linearRing->optimized());
-    } else {
-        GeoDataLineString* lineString = new GeoDataLineString;
-        placemark->setGeometry(lineString);
-
-        foreach(qint64 nodeId, m_references) {
-            auto const nodeIter = nodes.constFind(nodeId);
-            if (nodeIter == nodes.constEnd()) {
-                delete placemark;
-                return;
-            }
-
-            OsmNode const & node = nodeIter.value();
-            placemark->osmData().addNodeReference(node.coordinates(), node.osmData());
-            lineString->append(node.coordinates());
-            usedNodes << nodeId;
-        }
-
-        *lineString = lineString->optimized();
-    }
-
-    OsmObjectManager::registerId(m_osmData.id());
     document->append(placemark);
 }
 
