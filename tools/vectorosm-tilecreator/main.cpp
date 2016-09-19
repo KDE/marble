@@ -286,7 +286,7 @@ int main(int argc, char *argv[])
             }
         }
 
-        NodeReducer reducer(map.data(), zoomLevel);
+        NodeReducer reducer(map.data(), zoomLevel+1);
 
         QString const extension = parser.value("extension");
         QString const outputFile = QString("%1/landmass-level-%2.%3").arg(outputName).arg(zoomLevel).arg(extension);
@@ -302,7 +302,7 @@ int main(int argc, char *argv[])
         TileIterator iter(world, zoomLevel);
         foreach(auto const &tileId, iter) {
             GeoDataDocument* tile = processor.clipTo(zoomLevel, tileId.x(), tileId.y());
-            NodeReducer reducer(tile, zoomLevel);
+            NodeReducer reducer(tile, zoomLevel+1);
 
             if (!writeTile(parser, outputName, tile, tileId.x(), tileId.y(), zoomLevel)) {
                 return 4;
@@ -331,7 +331,7 @@ int main(int argc, char *argv[])
             GeoDataDocument* tile1 = processor.clipTo(zoomLevel, tileId.x(), tileId.y());
             GeoDataDocument* tile2 = landMassClipper.clipTo(zoomLevel, tileId.x(), tileId.y());
             GeoDataDocument* combined = mergeDocuments(tile1, tile2);
-            NodeReducer reducer(combined, zoomLevel);
+            NodeReducer reducer(combined, zoomLevel+1);
             if (!writeTile(parser, outputName, combined, tileId.x(), tileId.y(), zoomLevel)) {
                 return 4;
             }
