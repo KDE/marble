@@ -23,6 +23,7 @@ include_directories(
 )
 
 set( ${TARGET}_SRC 
+clipper/clipper.cpp
 main.cpp
 BaseClipper.cpp
 BaseFilter.cpp
