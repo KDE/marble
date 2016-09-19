@@ -22,7 +22,7 @@
         <discrete> false </discrete>
       </zoom>
     </head>
-    <map bgcolor="#dadada">
+    <map bgcolor="#b5d0d0">
         <canvas/>
         <target/>
       <layer name="openstreetmap" backend="texture">

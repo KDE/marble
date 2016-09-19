@@ -772,7 +772,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataFeature::Landmass]                 = createWayStyle("#F1EEE8", "#F1EEE8", true, true);
     m_defaultStyle[GeoDataFeature::UrbanArea]                = createWayStyle("#E6E3DD", "#E6E3DD", true, true);
     m_defaultStyle[GeoDataFeature::InternationalDateLine]    = createStyle(1.0, 0.0, "#000000", "#000000", false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector<qreal>(), osmFont);
-    m_defaultStyle[GeoDataFeature::Bathymetry]               = createWayStyle(waterColor, waterColor, true, true);
+    m_defaultStyle[GeoDataFeature::Bathymetry]               = createWayStyle("#a5c9c9", "#a5c9c9", true, true);
 
     m_defaultStyle[GeoDataFeature::AdminLevel1]              = createStyle(0.0, 0.0, "#DF9CCF", "#DF9CCF", false, true, Qt::SolidPattern, Qt::CustomDashLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3, osmFont);
     m_defaultStyle[GeoDataFeature::AdminLevel2]              = createStyle(2.0, 0.0, "#DF9CCF", "#DF9CCF", false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3, osmFont);
@@ -1257,8 +1257,8 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
             if (tagIter != osmData.tagsEnd()) {
                 const QString& elevation = tagIter.value();
                 if (elevation == QLatin1String("4000")) {
-                    polyStyle.setColor("#a5c9c9");
-                    lineStyle.setColor("#a5c9c9");
+                    polyStyle.setColor("#94c2c2");
+                    lineStyle.setColor("#94c2c2");
                     adjustStyle = true;
                 }
             }
