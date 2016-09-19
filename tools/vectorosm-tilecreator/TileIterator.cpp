@@ -50,7 +50,7 @@ TileIterator::TileIterator(const GeoDataLatLonBox &latLonBox, int zoomLevel)
     unsigned int N = pow(2, zoomLevel);
     m_bounds.setLeft(TileId::lon2tileX(west, N));
     m_bounds.setTop(TileId::lat2tileY(north, N));
-    m_bounds.setRight(TileId::lon2tileX(east, N));
+    m_bounds.setRight(qMin(N-1, TileId::lon2tileX(east, N)));
     m_bounds.setBottom(TileId::lat2tileY(south, N));
 }
 
