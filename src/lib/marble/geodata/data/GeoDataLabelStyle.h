@@ -64,7 +64,7 @@ class GEODATA_EXPORT GeoDataLabelStyle : public GeoDataColorStyle
      * @brief Set the scale of the label
      * @param  scale  the new scale
      */
-    void setScale( const float &scale );
+    void setScale(float scale);
     /**
      * @brief Return the current scale of the label
      * @return  the current scale

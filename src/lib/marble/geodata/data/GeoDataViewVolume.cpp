@@ -85,7 +85,7 @@ qreal GeoDataViewVolume::leftFov() const
     return d->m_leftFov;
 }
 
-void GeoDataViewVolume::setLeftFov( const qreal &leftFov )
+void GeoDataViewVolume::setLeftFov(qreal leftFov)
 {
     d->m_leftFov = leftFov;
 }
@@ -95,7 +95,7 @@ qreal GeoDataViewVolume::rightFov() const
     return d->m_rightFov;
 }
 
-void GeoDataViewVolume::setRightFov( const qreal &rightFov )
+void GeoDataViewVolume::setRightFov(qreal rightFov)
 {
     d->m_rightFov = rightFov;
 }
@@ -105,7 +105,7 @@ qreal GeoDataViewVolume::bottomFov() const
     return d->m_bottomFov;
 }
 
-void GeoDataViewVolume::setBottomFov( const qreal &bottomFov )
+void GeoDataViewVolume::setBottomFov(qreal bottomFov)
 {
     d->m_bottomFov = bottomFov;
 }
@@ -115,7 +115,7 @@ qreal GeoDataViewVolume::topFov() const
     return d->m_topFov;
 }
 
-void GeoDataViewVolume::setTopFov( const qreal &topFov )
+void GeoDataViewVolume::setTopFov(qreal topFov)
 {
     d->m_topFov = topFov;
 }
@@ -125,7 +125,7 @@ qreal GeoDataViewVolume::near() const
     return d->m_near;
 }
 
-void GeoDataViewVolume::setNear( const qreal &near )
+void GeoDataViewVolume::setNear(qreal near)
 {
     d->m_near = near;
 }

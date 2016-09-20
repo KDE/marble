@@ -60,7 +60,7 @@ class GEODATA_EXPORT GeoDataLineStyle : public GeoDataColorStyle
      * @brief Set the width of the line
      * @param  width  the new width
      */
-    void setWidth( const float &width );
+    void setWidth(float width);
     /**
      * @brief Return the current width of the line
      * @return the current width
@@ -71,7 +71,7 @@ class GEODATA_EXPORT GeoDataLineStyle : public GeoDataColorStyle
      * @brief Set the physical width of the line (in meters)
      * @param  width  the new width
      */
-    void setPhysicalWidth( const float &realWidth );
+    void setPhysicalWidth(float realWidth);
     /**
      * @brief Return the current physical width of the line
      * @return the current width

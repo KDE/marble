@@ -36,19 +36,19 @@ public:
 
     GeoDataVec2 overlayXY() const;
     void setOverlayXY( const GeoDataVec2 &vec2 );
-    void setOverlayXY( const qreal &x, const qreal &y, const GeoDataVec2::Unit &xunit, const GeoDataVec2::Unit &yunit );
+    void setOverlayXY(qreal x, qreal y, GeoDataVec2::Unit xunit, GeoDataVec2::Unit yunit);
 
     GeoDataVec2 screenXY() const;
     void setScreenXY( const GeoDataVec2 &vec2 );
-    void setScreenXY( const qreal &x, const qreal &y, const GeoDataVec2::Unit &xunit, const GeoDataVec2::Unit &yunit );
+    void setScreenXY(qreal x, qreal y, GeoDataVec2::Unit xunit, GeoDataVec2::Unit yunit);
 
     GeoDataVec2 rotationXY() const;
     void setRotationXY( const GeoDataVec2 &vec2 );
-    void setRotationXY( const qreal &x, const qreal &y, const GeoDataVec2::Unit &xunit, const GeoDataVec2::Unit &yunit );
+    void setRotationXY(qreal x, qreal y, GeoDataVec2::Unit xunit, GeoDataVec2::Unit yunit);
 
     GeoDataVec2 size() const;
     void setSize( const GeoDataVec2 &vec2 );
-    void setSize( const qreal &x, const qreal &y, const GeoDataVec2::Unit &xunit, const GeoDataVec2::Unit &yunit );
+    void setSize(qreal x, qreal y, GeoDataVec2::Unit xunit, GeoDataVec2::Unit yunit);
 
     qreal rotation() const;
     void setRotation( qreal rotation );

@@ -96,7 +96,7 @@ const char* GeoDataLineStyle::nodeType() const
     return d->nodeType();
 }
 
-void GeoDataLineStyle::setWidth( const float &width )
+void GeoDataLineStyle::setWidth(float width)
 {
     d->m_width = width;
 }
@@ -111,7 +111,7 @@ float GeoDataLineStyle::physicalWidth() const
     return d->m_physicalWidth;
 }
 
-void GeoDataLineStyle::setPhysicalWidth( const float& realWidth )
+void GeoDataLineStyle::setPhysicalWidth(float realWidth)
 {
     d->m_physicalWidth = realWidth;
 }

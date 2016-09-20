@@ -235,7 +235,7 @@ QSize GeoDataIconStyle::size() const
     return d->m_size;
 }
 
-void GeoDataIconStyle::setScale( const float &scale )
+void GeoDataIconStyle::setScale(float scale)
 {
     d->m_scale = scale;
 }

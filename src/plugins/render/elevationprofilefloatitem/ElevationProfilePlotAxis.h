@@ -57,8 +57,8 @@ class ElevationProfilePlotAxis : public QObject
 
   public:
     explicit ElevationProfilePlotAxis( );
-    void setRange( const qreal &minValue, const qreal &maxValue );
-    void setLength( const int &length );
+    void setRange(qreal minValue, qreal maxValue);
+    void setLength(int length);
     void setTickCount( const int min, const int max );
     void update();
     qreal minValue() const;

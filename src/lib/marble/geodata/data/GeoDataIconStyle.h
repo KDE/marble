@@ -83,7 +83,7 @@ class GEODATA_EXPORT GeoDataIconStyle : public GeoDataColorStyle
      */
     QSize size() const;
 
-    void setScale( const float &scale );
+    void setScale(float scale);
     float scale() const;
 
     int heading() const;

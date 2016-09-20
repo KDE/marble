@@ -92,7 +92,7 @@ const char* GeoDataPolyStyle::nodeType() const
     return d->nodeType();
 }
 
-void GeoDataPolyStyle::setFill( const bool &fill )
+void GeoDataPolyStyle::setFill(bool fill)
 {
     d->m_fill = fill;
 }
@@ -102,7 +102,7 @@ bool GeoDataPolyStyle::fill() const
     return d->m_fill;
 }
 
-void GeoDataPolyStyle::setOutline( const bool &outline )
+void GeoDataPolyStyle::setOutline(bool outline)
 {
     d->m_outline = outline;
 }

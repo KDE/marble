@@ -40,7 +40,7 @@ class GEODATA_EXPORT GeoSceneGeodata : public GeoSceneAbstractDataset
     void setColorize( const QString& colorize );
 
     qreal alpha() const;
-    void setAlpha( const qreal &alpha );
+    void setAlpha(qreal alpha);
 
     QPen pen() const;
     void setPen( const QPen& pen );

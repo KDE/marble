@@ -57,7 +57,7 @@ class GEODATA_EXPORT GeoDataPolyStyle : public GeoDataColorStyle
      * @brief Set whether to fill the polygon
      * @param  fill  
      */
-    void setFill( const bool &fill );
+    void setFill(bool fill);
     /**
      * @brief Return true if polygons get filled
      * @return whether to fill
@@ -68,7 +68,7 @@ class GEODATA_EXPORT GeoDataPolyStyle : public GeoDataColorStyle
      * @brief Set whether to draw the outline
      * @param  outline  
      */
-    void setOutline( const bool &outline );
+    void setOutline(bool outline);
     /**
      * @brief Return true if outlines of polygons get drawn
      * @return whether outline is drawn

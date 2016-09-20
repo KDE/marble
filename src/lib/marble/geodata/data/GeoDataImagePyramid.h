@@ -41,16 +41,16 @@ public:
     };
 
     int tileSize() const;
-    void setTileSize( const int &tileSize );
+    void setTileSize(int tileSize);
 
     int maxWidth() const;
-    void setMaxWidth( const int &maxWidth );
+    void setMaxWidth(int maxWidth);
 
     int maxHeight() const;
-    void setMaxHeight( const int &maxHeight );
+    void setMaxHeight(int maxHeight);
 
     GridOrigin gridOrigin() const;
-    void setGridOrigin( const GridOrigin &gridOrigin );
+    void setGridOrigin(GridOrigin gridOrigin);
 
 private:
     GeoDataImagePyramidPrivate* const d;

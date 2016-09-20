@@ -26,7 +26,7 @@ public:
 
     GeoDataVec2();
 
-    GeoDataVec2( const qreal &x, const qreal &y, const QString &xunit, const QString &yunit );
+    GeoDataVec2(qreal x, qreal y, const QString &xunit, const QString &yunit);
 
     GeoDataVec2( const GeoDataVec2 &other );
 

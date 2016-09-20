@@ -30,14 +30,14 @@ ElevationProfilePlotAxis::ElevationProfilePlotAxis()
     // nothing to do...
 }
 
-void ElevationProfilePlotAxis::setRange( const qreal& minValue, const qreal& maxValue )
+void ElevationProfilePlotAxis::setRange(qreal minValue, qreal maxValue)
 {
     m_minValue = minValue;
     m_maxValue = maxValue;
     update();
 }
 
-void ElevationProfilePlotAxis::setLength( const int& length )
+void ElevationProfilePlotAxis::setLength(int length)
 {
     m_pixelLength = length;
     update();

@@ -35,7 +35,7 @@ GeoDataVec2::GeoDataVec2() :
 {
 }
 
-GeoDataVec2::GeoDataVec2(const qreal &x, const qreal &y, const QString &xunits, const QString &yunits) :
+GeoDataVec2::GeoDataVec2(qreal x, qreal y, const QString &xunits, const QString &yunits) :
     d( new GeoDataVec2Private )
 {
     setX( x );

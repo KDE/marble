@@ -41,10 +41,10 @@ public:
     virtual const char* nodeType() const;
 
     qreal minRefreshPeriod() const;
-    void setMinRefreshPeriod( const qreal &minRefreshPeriod );
+    void setMinRefreshPeriod(qreal minRefreshPeriod);
 
     qreal maxSessionLength() const;
-    void setMaxSessionLength( const qreal &maxSessionLength );
+    void setMaxSessionLength(qreal maxSessionLength);
 
     QString cookie() const;
     void setCookie( const QString &cookie );
@@ -61,7 +61,7 @@ public:
     QString linkSnippet() const;
     void setLinkSnippet( const QString &linkSnippet );
     int maxLines() const;
-    void setMaxLines( const int &maxLines );
+    void setMaxLines(int maxLines);
 
     QDateTime expires() const;
     void setExpires( const QDateTime &expires );

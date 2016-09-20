@@ -151,7 +151,7 @@ qreal GeoDataNetworkLinkControl::minRefreshPeriod() const
     return d->m_minRefreshPeriod;
 }
 
-void GeoDataNetworkLinkControl::setMinRefreshPeriod( const qreal &minRefreshPeriod )
+void GeoDataNetworkLinkControl::setMinRefreshPeriod(qreal minRefreshPeriod )
 {
     d->m_minRefreshPeriod = minRefreshPeriod;
 }
@@ -161,7 +161,7 @@ qreal GeoDataNetworkLinkControl::maxSessionLength() const
     return d->m_maxSessionLength;
 }
 
-void GeoDataNetworkLinkControl::setMaxSessionLength( const qreal &maxSessionLength )
+void GeoDataNetworkLinkControl::setMaxSessionLength(qreal maxSessionLength)
 {
     d->m_maxSessionLength = maxSessionLength;
 }
@@ -221,7 +221,7 @@ int GeoDataNetworkLinkControl::maxLines() const
     return d->m_maxLines;
 }
 
-void GeoDataNetworkLinkControl::setMaxLines( const int &maxLines )
+void GeoDataNetworkLinkControl::setMaxLines(int maxLines)
 {
     d->m_maxLines = maxLines;
 }

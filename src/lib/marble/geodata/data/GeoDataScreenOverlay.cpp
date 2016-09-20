@@ -81,8 +81,7 @@ void GeoDataScreenOverlay::setOverlayXY(const GeoDataVec2 &vec2)
     d->m_overlayXY = vec2;
 }
 
-void GeoDataScreenOverlay::setOverlayXY(const qreal &x, const qreal &y, const GeoDataVec2::Unit &xunit,
-                                        const GeoDataVec2::Unit &yunit)
+void GeoDataScreenOverlay::setOverlayXY(qreal x, qreal y, GeoDataVec2::Unit xunit, GeoDataVec2::Unit yunit)
 {
     d->m_screenXY.setX(x);
     d->m_screenXY.setY(y);
@@ -100,8 +99,7 @@ void GeoDataScreenOverlay::setScreenXY(const GeoDataVec2 &vec2)
     d->m_screenXY = vec2;
 }
 
-void GeoDataScreenOverlay::setScreenXY(const qreal &x, const qreal &y, const GeoDataVec2::Unit &xunit,
-                                       const GeoDataVec2::Unit &yunit)
+void GeoDataScreenOverlay::setScreenXY(qreal x, qreal y, GeoDataVec2::Unit xunit, GeoDataVec2::Unit yunit)
 {
     d->m_screenXY.setX(x);
     d->m_screenXY.setY(y);
@@ -119,8 +117,7 @@ void GeoDataScreenOverlay::setRotationXY(const GeoDataVec2 &vec2)
     d->m_rotationXY = vec2;
 }
 
-void GeoDataScreenOverlay::setRotationXY(const qreal &x, const qreal &y, const GeoDataVec2::Unit &xunit,
-                                         const GeoDataVec2::Unit &yunit)
+void GeoDataScreenOverlay::setRotationXY(qreal x, qreal y, GeoDataVec2::Unit xunit, GeoDataVec2::Unit yunit)
 {
     d->m_rotationXY.setX(x);
     d->m_rotationXY.setY(y);
@@ -138,8 +135,7 @@ void GeoDataScreenOverlay::setSize(const GeoDataVec2 &vec2)
     d->m_size = vec2;
 }
 
-void GeoDataScreenOverlay::setSize(const qreal &x, const qreal &y, const GeoDataVec2::Unit &xunit,
-                                   const GeoDataVec2::Unit &yunit)
+void GeoDataScreenOverlay::setSize(qreal x, qreal y, GeoDataVec2::Unit xunit, GeoDataVec2::Unit yunit)
 {
     d->m_size.setX(x);
     d->m_size.setY(y);

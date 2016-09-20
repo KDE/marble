@@ -454,7 +454,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * of (lon, lat), otherwise the resulting angle will be the sum of
      * the previous position and the two offsets.
      */
-    void rotateBy( const qreal &deltaLon, const qreal &deltaLat );
+    void rotateBy(qreal deltaLon, qreal deltaLat);
 
     /**
      * @brief  Center the view on a geographical point

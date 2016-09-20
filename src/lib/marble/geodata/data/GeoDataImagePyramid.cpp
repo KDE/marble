@@ -82,7 +82,7 @@ int GeoDataImagePyramid::tileSize() const
     return d->m_tileSize;
 }
 
-void GeoDataImagePyramid::setTileSize( const int &tileSize )
+void GeoDataImagePyramid::setTileSize(int tileSize)
 {
     d->m_tileSize = tileSize;
 }
@@ -92,7 +92,7 @@ int GeoDataImagePyramid::maxWidth() const
     return d->m_maxWidth;
 }
 
-void GeoDataImagePyramid::setMaxWidth( const int &maxWidth )
+void GeoDataImagePyramid::setMaxWidth(int maxWidth)
 {
     d->m_maxWidth = maxWidth;
 }
@@ -102,7 +102,7 @@ int GeoDataImagePyramid::maxHeight() const
     return d->m_maxHeight;
 }
 
-void GeoDataImagePyramid::setMaxHeight( const int &maxHeight )
+void GeoDataImagePyramid::setMaxHeight(int maxHeight)
 {
     d->m_maxHeight = maxHeight;
 }
@@ -112,7 +112,7 @@ GeoDataImagePyramid::GridOrigin GeoDataImagePyramid::gridOrigin() const
     return d->m_gridOrigin;
 }
 
-void GeoDataImagePyramid::setGridOrigin( const GridOrigin &gridOrigin )
+void GeoDataImagePyramid::setGridOrigin(GridOrigin gridOrigin)
 {
     d->m_gridOrigin = gridOrigin;
 }

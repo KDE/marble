@@ -36,19 +36,19 @@ public:
     virtual const char* nodeType() const;
 
     qreal leftFov() const;
-    void setLeftFov( const qreal &leftFov );
+    void setLeftFov(qreal leftFov);
 
     qreal rightFov() const;
-    void setRightFov( const qreal &rightFov );
+    void setRightFov(qreal rightFov);
 
     qreal bottomFov() const;
-    void setBottomFov( const qreal &bottomFov );
+    void setBottomFov(qreal bottomFov);
 
     qreal topFov() const;
-    void setTopFov( const qreal &topFov );
+    void setTopFov(qreal topFov);
 
     qreal near() const;
-    void setNear( const qreal &near );
+    void setNear(qreal near);
 
 private:
     GeoDataViewVolumePrivate* const d;

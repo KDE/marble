@@ -76,7 +76,7 @@ QPen GeoSceneGeodata::pen() const
     return m_pen;
 }
 
-void GeoSceneGeodata::setAlpha( const qreal &alpha )
+void GeoSceneGeodata::setAlpha(qreal alpha)
 {
     m_alpha = alpha;
 }

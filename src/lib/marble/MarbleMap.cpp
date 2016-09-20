@@ -704,7 +704,7 @@ quint64 MarbleMap::volatileTileCacheLimit() const
 }
 
 
-void MarbleMap::rotateBy( const qreal& deltaLon, const qreal& deltaLat )
+void MarbleMap::rotateBy(qreal deltaLon, qreal deltaLat)
 {
     centerOn( d->m_viewport.centerLongitude() * RAD2DEG + deltaLon,
               d->m_viewport.centerLatitude()  * RAD2DEG + deltaLat );
