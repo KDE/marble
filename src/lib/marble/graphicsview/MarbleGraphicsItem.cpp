@@ -57,16 +57,20 @@ bool MarbleGraphicsItem::paintEvent( QPainter *painter, const ViewportParams *vi
     if ( ItemCoordinateCache == cacheMode()
          || DeviceCoordinateCache == cacheMode() )
     {
-        const QSize neededPixmapSize = size().toSize() + QSize( 1, 1 ); // adding a pixel for rounding errors
-        if ( p()->m_pixmap.size() != neededPixmapSize ) {
+        const qreal scale = painter->device()->devicePixelRatio();
 
-            if ( p()->m_pixmap.size() != neededPixmapSize ) {
-                if ( size().isValid() && !size().isNull() ) {
-                    p()->m_pixmap = QPixmap( neededPixmapSize );
-                }
-                else {
-                    mDebug() << "Warning: Invalid pixmap size suggested: " << d->m_size;
-                }
+        const QSize neededPixmapSize = scale * size().toSize() + QSize( 1, 1 ); // adding a pixel for rounding errors
+
+        if ( p()->m_pixmap.size() != neededPixmapSize ||  
+             p()->m_pixmap.devicePixelRatio() != scale ) {
+
+
+            if ( size().isValid() && !size().isNull() ) {
+                p()->m_pixmap = QPixmap( neededPixmapSize );
+                p()->m_pixmap.setDevicePixelRatio( scale );
+            }
+            else {
+                mDebug() << "Warning: Invalid pixmap size suggested: " << d->m_size;
             }
 
             p()->m_pixmap.fill( Qt::transparent );
