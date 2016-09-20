@@ -58,9 +58,16 @@ NodeReducer::NodeReducer(GeoDataDocument* document, int zoomLevel) :
             placemark->setGeometry(reducedPolygon);
         }
     }
-    double const reduction = m_removedNodes / qMax(1.0, double(m_remainingNodes + m_removedNodes));
-    qDebug() << QString("Total nodes reduced: %1%").arg(QString("%1").arg(reduction * 100.0, 0, 'f', 1))
-             << "(" << m_removedNodes << "removed," << m_remainingNodes << "remaining)";
+}
+
+qint64 NodeReducer::remainingNodes() const
+{
+    return m_remainingNodes;
+}
+
+qint64 NodeReducer::removedNodes() const
+{
+    return m_removedNodes;
 }
 
 qreal NodeReducer::resolutionForLevel(int level) {

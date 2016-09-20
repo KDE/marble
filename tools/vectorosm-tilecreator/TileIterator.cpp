@@ -76,6 +76,11 @@ int TileIterator::y() const
     return m_state.y();
 }
 
+int TileIterator::total() const
+{
+    return (1+m_bounds.width()) * (1+m_bounds.height());
+}
+
 TileIterator::TileIterator() :
     m_state(-1, -1)
 {

@@ -21,6 +21,9 @@ class NodeReducer : public BaseFilter {
 public:
     NodeReducer(GeoDataDocument* document, int zoomLevel);
 
+    qint64 removedNodes() const;
+    qint64 remainingNodes() const;
+
 private:
     template<class T>
     T* reduce(T* lineString)

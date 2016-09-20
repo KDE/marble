@@ -29,6 +29,8 @@
 #include "WayConcatenator.h"
 #include "TileIterator.h"
 
+#include <iostream>
+
 using namespace Marble;
 
 enum DebugLevel {
@@ -242,7 +244,6 @@ int main(int argc, char *argv[])
     bool debug = parser.isSet("debug");
     bool silent = parser.isSet("silent");
     unsigned int zoomLevel = parser.value("zoom-level").toInt();
-    qDebug()<<"Zoom level is "<<zoomLevel<<endl;
 
     QString outputName;
     if(parser.isSet("output")) {
@@ -250,7 +251,6 @@ int main(int argc, char *argv[])
     } else {
         outputName = "s_" + inputFileName;
     }
-    qDebug() << "Output file name is " << outputName << endl;
 
     if(debug) {
         debugLevel = Debug;
@@ -264,7 +264,7 @@ int main(int argc, char *argv[])
 
     QFileInfo file( inputFileName );
     if ( !file.exists() ) {
-        qDebug() << "File " << file.absoluteFilePath() << " does not exist. Exiting.";
+        qWarning() << "File " << file.absoluteFilePath() << " does not exist. Exiting.";
         return 2;
     }
 
@@ -300,14 +300,20 @@ int main(int argc, char *argv[])
         VectorClipper processor(map.data());
         GeoDataLatLonBox world(85.0, -85.0, 180.0, -180.0, GeoDataCoordinates::Degree);
         TileIterator iter(world, zoomLevel);
+        qint64 count = 0;
+        qint64 const total = iter.total();
         foreach(auto const &tileId, iter) {
+            ++count;
             GeoDataDocument* tile = processor.clipTo(zoomLevel, tileId.x(), tileId.y());
             NodeReducer reducer(tile, zoomLevel+1);
 
             if (!writeTile(parser, outputName, tile, tileId.x(), tileId.y(), zoomLevel)) {
                 return 4;
             }
-            qInfo() << tile->name() << " done";
+            double const reduction = reducer.removedNodes() / qMax(1.0, double(reducer.remainingNodes() + reducer.removedNodes()));
+            std::cout << "Tile " << count << "/" << total << " (" << tile->name().toStdString() << ") done.";
+            std::cout << " Node reduction: " << qRound(reduction * 100.0) << "%      " << '\r';
+            std::cout.flush();
             delete tile;
         }
     } else {
@@ -332,7 +338,10 @@ int main(int argc, char *argv[])
         //WayConcatenator concatenator(tagsFilter.accepted(), QStringList() << "highway=*", false);
 
         TileIterator iter(input->latLonAltBox(), zoomLevel);
+        qint64 count = 0;
+        qint64 const total = iter.total();
         foreach(auto const &tileId, iter) {
+            ++count;
             GeoDataDocument* tile1 = processor.clipTo(zoomLevel, tileId.x(), tileId.y());
             GeoDataDocument* tile2 = landMassClipper.clipTo(zoomLevel, tileId.x(), tileId.y());
             GeoDataDocument* combined = mergeDocuments(tile1, tile2);
@@ -340,7 +349,11 @@ int main(int argc, char *argv[])
             if (!writeTile(parser, outputName, combined, tileId.x(), tileId.y(), zoomLevel)) {
                 return 4;
             }
-            qInfo() << tile1->name() << " done";
+
+            double const reduction = reducer.removedNodes() / qMax(1.0, double(reducer.remainingNodes() + reducer.removedNodes()));
+            std::cout << "Tile " << count << "/" << total << " (" << combined->name().toStdString() << ") done.";
+            std::cout << " Node reduction: " << qRound(reduction * 100.0) << "%      " << '\r';
+            std::cout.flush();
             delete combined;
             delete tile1;
             delete tile2;

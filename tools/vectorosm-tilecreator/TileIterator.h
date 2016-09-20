@@ -30,6 +30,7 @@ public:
     TileIterator(const GeoDataLatLonBox &latLonBox, int zoomLevel);
     int x() const;
     int y() const;
+    int total() const;
 
 private:
     TileIterator();
