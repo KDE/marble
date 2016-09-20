@@ -46,6 +46,7 @@ private:
         }
 
         Clipper clipper;
+        clipper.PreserveCollinear(true);
         bool const isClosed = ring->isClosed();
         clipper.AddPath(tileBoundary, ptClip, true);
         clipper.AddPath(path, ptSubject, isClosed);

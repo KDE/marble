@@ -249,6 +249,7 @@ void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const Clipper
     }
 
     Clipper clipper;
+    clipper.PreserveCollinear(true);
     clipper.AddPath(tileBoundary, ptClip, true);
     clipper.AddPath(path, ptSubject, true);
     Paths paths;
