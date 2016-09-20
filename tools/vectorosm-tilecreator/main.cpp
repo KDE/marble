@@ -313,20 +313,25 @@ int main(int argc, char *argv[])
     } else {
         auto map = open(inputFileName, manager);
         QStringList const tags = tagsFilteredIn(zoomLevel);
-        TagsFilter tagsFilter(map.data(), tags);
-        map.clear();
-        VectorClipper processor(tagsFilter.accepted());
+        GeoDataDocument* input = map.data();
+        QSharedPointer<TagsFilter> tagsFilter;
+        if (zoomLevel < 17) {
+            tagsFilter = QSharedPointer<TagsFilter>(new TagsFilter(map.data(), tags));
+            input = tagsFilter->accepted();
+            map.clear();
+        }
+        VectorClipper processor(input);
 
         auto mergeMap = open(parser.value("merge"), manager);
         VectorClipper background(mergeMap.data());
-        GeoDataDocument* landmass = background.clipTo(tagsFilter.accepted()->latLonAltBox());
+        GeoDataDocument* landmass = background.clipTo(input->latLonAltBox());
         mergeMap.clear();
         VectorClipper landMassClipper(landmass);
 
         // @todo FIXME Assumes placemark ownership
         //WayConcatenator concatenator(tagsFilter.accepted(), QStringList() << "highway=*", false);
 
-        TileIterator iter(tagsFilter.accepted()->latLonAltBox(), zoomLevel);
+        TileIterator iter(input->latLonAltBox(), zoomLevel);
         foreach(auto const &tileId, iter) {
             GeoDataDocument* tile1 = processor.clipTo(zoomLevel, tileId.x(), tileId.y());
             GeoDataDocument* tile2 = landMassClipper.clipTo(zoomLevel, tileId.x(), tileId.y());
