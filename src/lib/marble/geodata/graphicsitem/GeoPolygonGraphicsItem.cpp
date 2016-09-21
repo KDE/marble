@@ -607,7 +607,8 @@ QPen GeoPolygonGraphicsItem::configurePainter(GeoPainter *painter, const Viewpor
             if ( isBuildingFrame ) {
                 painter->setBrush( style()->polyStyle().paintedColor().darker(150) );
             }
-            else if ( painter->brush().color() != style()->polyStyle().paintedColor() ) {
+            else if (painter->brush().color() != style()->polyStyle().paintedColor() ||
+                     painter->brush().style() != style()->polyStyle().brushStyle()) {
                 QImage textureImage = style()->polyStyle().textureImage();
                 if (!textureImage.isNull()) {
                     GeoDataCoordinates coords = latLonAltBox().center();
@@ -631,7 +632,8 @@ QPen GeoPolygonGraphicsItem::configurePainter(GeoPainter *painter, const Viewpor
                     painter->setBrushOrigin(QPoint(x,y));
                 }
                 else {
-                    painter->setBrush( style()->polyStyle().paintedColor() );
+                    painter->setBrush(QBrush(style()->polyStyle().paintedColor(),
+                                             style()->polyStyle().brushStyle()));
                 }
             }
         }
