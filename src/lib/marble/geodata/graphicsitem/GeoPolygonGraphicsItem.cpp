@@ -342,9 +342,10 @@ void GeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportParams* v
             painter->drawPolygon( *m_ring );
         }
 
-        bool const hasIcon = !style()->iconStyle().iconPath().isEmpty();
+        const GeoDataIconStyle& iconStyle = style()->iconStyle();
+        bool const hasIcon = !iconStyle.iconPath().isEmpty();
         if (hasIcon) {
-            QImage const icon = style()->iconStyle().scaledIcon();
+            QImage const icon = iconStyle.scaledIcon();
             painter->drawImage(latLonAltBox().center(), icon);
         }
         painter->restore();
@@ -584,56 +585,63 @@ QPen GeoPolygonGraphicsItem::configurePainter(GeoPainter *painter, const Viewpor
 {
     QPen currentPen = painter->pen();
 
-    if ( !style() ) {
+    GeoDataStyle::ConstPtr style = this->style();
+    if (!style) {
         painter->setPen( QPen() );
     }
     else {
-        if ( !style()->polyStyle().outline() || isBuildingFrame ) {
+        const GeoDataPolyStyle& polyStyle = style->polyStyle();
+
+        if (!polyStyle.outline() || isBuildingFrame) {
             currentPen.setColor( Qt::transparent );
         }
         else {
-            currentPen.setColor(style()->lineStyle().paintedColor());
-            currentPen.setWidthF(style()->lineStyle().width());
-            currentPen.setCapStyle(style()->lineStyle().capStyle());
-            currentPen.setStyle(style()->lineStyle().penStyle());
+            const GeoDataLineStyle& lineStyle = style->lineStyle();
+
+            currentPen.setColor(lineStyle.paintedColor());
+            currentPen.setWidthF(lineStyle.width());
+            currentPen.setCapStyle(lineStyle.capStyle());
+            currentPen.setStyle(lineStyle.penStyle());
         }
 
         painter->setPen(currentPen);
 
-        if ( !style()->polyStyle().fill() ) {
+        if (!polyStyle.fill()) {
             painter->setBrush(QColor(Qt::transparent));
         }
         else {
+            const QColor paintedColor = polyStyle.paintedColor();
             if ( isBuildingFrame ) {
-                painter->setBrush( style()->polyStyle().paintedColor().darker(150) );
+                painter->setBrush(paintedColor.darker(150));
             }
-            else if (painter->brush().color() != style()->polyStyle().paintedColor() ||
-                     painter->brush().style() != style()->polyStyle().brushStyle()) {
-                QImage textureImage = style()->polyStyle().textureImage();
+            else if (painter->brush().color() != paintedColor ||
+                     painter->brush().style() != polyStyle.brushStyle()) {
+                const QImage textureImage = polyStyle.textureImage();
                 if (!textureImage.isNull()) {
                     GeoDataCoordinates coords = latLonAltBox().center();
                     qreal x, y;
                     viewport->screenCoordinates(coords, x, y);
-                    if (m_cachedTexturePath != style()->polyStyle().texturePath() || m_cachedTextureColor != style()->polyStyle().paintedColor() ) {
+                    const QString texturePath = polyStyle.texturePath();
+                    if (m_cachedTexturePath != texturePath ||
+                        m_cachedTextureColor != paintedColor) {
                         if (textureImage.hasAlphaChannel()) {
                             m_cachedTexture = QImage ( textureImage.size(), QImage::Format_ARGB32_Premultiplied );
-                            m_cachedTexture.fill(style()->polyStyle().paintedColor());
+                            m_cachedTexture.fill(paintedColor);
                             QPainter imagePainter(&m_cachedTexture );
                             imagePainter.drawImage(0, 0, textureImage);
                         }
                         else {
                             m_cachedTexture = textureImage;
                         }
-                        m_cachedTexturePath = style()->polyStyle().texturePath();
-                        m_cachedTextureColor = style()->polyStyle().paintedColor();
+                        m_cachedTexturePath = texturePath;
+                        m_cachedTextureColor = paintedColor;
                     }
                     QBrush brush(m_cachedTexture);
                     painter->setBrush(brush);
                     painter->setBrushOrigin(QPoint(x,y));
                 }
                 else {
-                    painter->setBrush(QBrush(style()->polyStyle().paintedColor(),
-                                             style()->polyStyle().brushStyle()));
+                    painter->setBrush(QBrush(paintedColor, polyStyle.brushStyle()));
                 }
             }
         }
