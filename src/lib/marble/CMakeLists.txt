@@ -499,7 +499,6 @@ install( FILES
     TileCoordsPyramid.h
     TileLevelRangeWidget.h
     QtMarbleConfigDialog.h
-    global.h
     MarbleMath.h
     MarbleColors.h
     MarbleGlobal.h
