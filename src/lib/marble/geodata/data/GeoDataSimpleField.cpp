@@ -62,7 +62,7 @@ GeoDataSimpleField::SimpleFieldType GeoDataSimpleField::type() const
     return d->m_type;
 }
 
-void GeoDataSimpleField::setType( const SimpleFieldType& type )
+void GeoDataSimpleField::setType(SimpleFieldType type)
 {
     d->m_type = type;
 }

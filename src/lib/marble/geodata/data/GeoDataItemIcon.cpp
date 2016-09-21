@@ -79,7 +79,7 @@ GeoDataItemIcon::ItemIconStates GeoDataItemIcon::state() const
     return d->m_state;
 }
 
-void GeoDataItemIcon::setState( const ItemIconStates &state )
+void GeoDataItemIcon::setState(ItemIconStates state)
 {
     d->m_state = state;
 }

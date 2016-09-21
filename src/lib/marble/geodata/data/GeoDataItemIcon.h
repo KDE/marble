@@ -50,7 +50,7 @@ public:
     Q_DECLARE_FLAGS( ItemIconStates, ItemIconState )
 
     ItemIconStates state() const;
-    void setState( const ItemIconStates &state );
+    void setState(ItemIconStates state);
 
     QString iconPath() const;
     void setIconPath( const QString &path );

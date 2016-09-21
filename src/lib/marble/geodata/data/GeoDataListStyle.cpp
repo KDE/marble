@@ -95,7 +95,7 @@ GeoDataListStyle::ListItemType GeoDataListStyle::listItemType() const
     return d->m_listItemType;
 }
 
-void GeoDataListStyle::setListItemType( const ListItemType &type )
+void GeoDataListStyle::setListItemType(ListItemType type)
 {
     d->m_listItemType = type;
 }

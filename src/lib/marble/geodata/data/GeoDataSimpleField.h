@@ -54,7 +54,7 @@ public:
      * @brief Sets the value of type attribute
      * @param type  The of type attribute
      */
-    void setType( const SimpleFieldType& type );
+    void setType(SimpleFieldType type);
 
     /*
      * @brief Returns the value of name attribute of simple field

@@ -48,7 +48,7 @@ public:
     };
 
     ListItemType listItemType() const;
-    void setListItemType( const ListItemType &type );
+    void setListItemType(ListItemType type);
 
     QColor backgroundColor() const;
     void setBackgroundColor( const QColor &color );

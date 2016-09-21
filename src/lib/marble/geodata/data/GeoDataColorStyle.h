@@ -89,7 +89,7 @@ class GEODATA_EXPORT GeoDataColorStyle : public GeoDataObject
      * @brief  Set a new color mode
      * @param  colorMode  the new color mode value
      */
-    void setColorMode( const ColorMode &colorMode );
+    void setColorMode(ColorMode colorMode);
     /// Return the color mode
     ColorMode colorMode() const;
 

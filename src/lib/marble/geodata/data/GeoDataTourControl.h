@@ -32,7 +32,7 @@ public:
     const char *nodeType() const;
 
     PlayMode playMode() const;
-    void setPlayMode(const PlayMode &mode);
+    void setPlayMode(PlayMode mode);
 
 private:
     PlayMode m_playMode;

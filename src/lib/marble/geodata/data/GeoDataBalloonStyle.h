@@ -52,7 +52,7 @@ public:
     void setText( const QString &text );
 
     DisplayMode displayMode() const;
-    void setDisplayMode( const DisplayMode &mode );
+    void setDisplayMode(DisplayMode mode );
 
     virtual void pack( QDataStream& stream ) const;
 

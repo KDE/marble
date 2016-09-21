@@ -107,7 +107,7 @@ QColor GeoDataColorStyle::paintedColor() const
     return d->m_colorMode == Normal ? d->m_color : d->m_randomColor;
 }
 
-void GeoDataColorStyle::setColorMode( const ColorMode &colorMode )
+void GeoDataColorStyle::setColorMode(ColorMode colorMode)
 {
     d->m_colorMode = colorMode;
 }

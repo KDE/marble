@@ -44,7 +44,7 @@ GeoDataTourControl::PlayMode GeoDataTourControl::playMode() const
     return m_playMode;
 }
 
-void GeoDataTourControl::setPlayMode(const PlayMode &mode)
+void GeoDataTourControl::setPlayMode(PlayMode mode)
 {
     m_playMode = mode;
 }

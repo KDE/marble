@@ -110,7 +110,7 @@ GeoDataBalloonStyle::DisplayMode GeoDataBalloonStyle::displayMode() const
     return d->m_mode;
 }
 
-void GeoDataBalloonStyle::setDisplayMode( const DisplayMode &mode )
+void GeoDataBalloonStyle::setDisplayMode(DisplayMode mode)
 {
     d->m_mode = mode;
 }
