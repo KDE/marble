@@ -10,6 +10,8 @@
 
 #include "VoiceNavigationModel.h"
 
+#include "Route.h"
+
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
 

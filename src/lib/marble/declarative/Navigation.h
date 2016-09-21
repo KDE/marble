@@ -17,7 +17,6 @@
 namespace Marble {
 
 class MarbleQuickItem;
-class MarbleModel;
 class NavigationPrivate;
 
 class Navigation : public QObject

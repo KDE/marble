@@ -13,6 +13,9 @@
 
 #include "GeoDataPhotoOverlay.h"
 #include "GeoDataTypes.h"
+#include "GeoDataImagePyramid.h"
+#include "GeoDataPoint.h"
+#include "GeoDataViewVolume.h"
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"
 

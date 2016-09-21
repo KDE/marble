@@ -13,12 +13,12 @@
 
 #include "GeoTagWriter.h"
 #include "GeoDataTourControl.h"
-#include "GeoDataWait.h"
-#include "GeoDataFlyTo.h"
-#include "GeoDataSoundCue.h"
 
 namespace Marble
 {
+
+class GeoDataSoundCue;
+class GeoDataWait;
 
 class KmlPlaylistTagWriter : public GeoTagWriter
 {

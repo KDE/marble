@@ -16,9 +16,11 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataTypes.h"
 #include "GeoDataStyle.h"
+#include "GeoDataIconStyle.h"
 #include "OsmPlacemarkData.h"
 #include "GeoDataExtendedData.h"
 #include "GeoDataData.h"
+#include "GeoDataGeometry.h"
 #include "StyleBuilder.h"
 
 // Qt

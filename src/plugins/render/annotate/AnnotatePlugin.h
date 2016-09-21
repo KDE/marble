@@ -27,10 +27,8 @@ namespace Marble
 {
 
 class MarbleWidget;
-class TextureLayer;
 class GeoDataDocument;
 class GeoDataLinearRing;
-class GeoDataLineString;
 class AreaAnnotation;
 class PolylineAnnotation;
 class PlacemarkTextAnnotation;

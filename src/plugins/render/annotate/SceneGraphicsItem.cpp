@@ -15,6 +15,7 @@
 
 // Marble
 #include "GeoDataPlacemark.h"
+#include "GeoDataGeometry.h"
 
 
 namespace Marble

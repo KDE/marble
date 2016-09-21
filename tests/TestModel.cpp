@@ -13,10 +13,13 @@
 
 #include <GeoDataDocument.h>
 #include <GeoDataPlacemark.h>
+#include <GeoDataOrientation.h>
+#include <GeoDataScale.h>
 #include <MarbleDebug.h>
 #include <GeoDataFolder.h>
 #include <GeoDataModel.h>
 #include <GeoDataLink.h>
+#include <GeoDataLocation.h>
 
 #include "TestUtils.h"
 

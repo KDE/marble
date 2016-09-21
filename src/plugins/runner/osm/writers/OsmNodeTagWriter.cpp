@@ -20,6 +20,7 @@
 #include "OsmTagTagWriter.h"
 #include "GeoDataPoint.h"
 #include "GeoDataLineString.h"
+#include "GeoWriter.h"
 #include "osm/OsmPlacemarkData.h"
 #include "osm/OsmObjectManager.h"
 

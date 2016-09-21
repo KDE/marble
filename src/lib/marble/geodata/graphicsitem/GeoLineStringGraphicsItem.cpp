@@ -13,6 +13,8 @@
 #include "GeoDataFeature.h"
 #include "GeoDataLineString.h"
 #include "GeoDataLineStyle.h"
+#include "GeoDataLabelStyle.h"
+#include "GeoDataPolyStyle.h"
 #include "GeoPainter.h"
 #include "StyleBuilder.h"
 #include "ViewportParams.h"

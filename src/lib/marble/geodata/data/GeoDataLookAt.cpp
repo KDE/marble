@@ -12,6 +12,9 @@
 //own
 #include "GeoDataLookAt.h"
 #include "GeoDataLookAt_p.h"
+
+#include "GeoDataTypes.h"
+
 #include "MarbleDebug.h"
 
 namespace Marble

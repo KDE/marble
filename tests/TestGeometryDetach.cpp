@@ -13,6 +13,7 @@
 #include "GeoDataMultiTrack.h"
 #include "GeoDataPoint.h"
 #include "GeoDataPolygon.h"
+#include "GeoDataLinearRing.h"
 #include "GeoDataTrack.h"
 #include "GeoDataMultiGeometry.h"
 #include "TestUtils.h"

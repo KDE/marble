@@ -12,7 +12,6 @@
 #define GEODATATOUR_H
 
 #include "GeoDataFeature.h"
-#include "GeoDataPlaylist.h"
 #include "geodata_export.h"
 
 namespace Marble

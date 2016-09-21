@@ -11,8 +11,6 @@
 #ifndef CLOUDROUTEMODEL_H
 #define CLOUDROUTEMODEL_H
 
-#include "RouteItem.h"
-
 #include "marble_export.h"
 
 #include <QModelIndex>
@@ -22,6 +20,8 @@ class QNetworkReply;
 
 namespace Marble
 {
+
+class RouteItem;
 
 class MARBLE_EXPORT CloudRouteModel : public QAbstractListModel
 {

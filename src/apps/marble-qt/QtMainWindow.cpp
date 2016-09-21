@@ -59,6 +59,7 @@
 #include "NewBookmarkFolderDialog.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
+#include "GeoDataLookAt.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataDocument.h"
 #include "GeoDataFolder.h"
@@ -82,6 +83,7 @@
 #include "cloudsync/RouteSyncManager.h"
 #include "MovieCaptureDialog.h"
 #include "DataMigration.h"
+#include "TileCoordsPyramid.h"
 
 namespace
 {

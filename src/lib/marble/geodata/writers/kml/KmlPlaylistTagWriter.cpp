@@ -12,6 +12,8 @@
 
 #include "GeoDataPlaylist.h"
 #include "GeoDataTypes.h"
+#include "GeoDataSoundCue.h"
+#include "GeoDataWait.h"
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"
 #include "KmlObjectTagWriter.h"

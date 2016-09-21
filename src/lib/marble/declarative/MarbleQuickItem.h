@@ -14,14 +14,17 @@
 #include "marble_declarative_export.h"
 #include <QSharedPointer>
 #include <QQuickPaintedItem>
-#include "GeoDataPlacemark.h"
+#include "GeoDataAccuracy.h"
 #include "MarbleGlobal.h"
 #include "PositionProviderPluginInterface.h"
 #include "MarbleMap.h"
 #include "Placemark.h"
+#include "Coordinate.h"
 
 namespace Marble
 {
+    class GeoDataLatLonBox;
+    class GeoDataPlacemark;
     class MarbleModel;
     class MarbleInputHandler;
     class MarbleQuickItemPrivate;

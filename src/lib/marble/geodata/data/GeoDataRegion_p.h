@@ -13,7 +13,9 @@
 
 #include "GeoDataRegion.h"
 
+#include "GeoDataLatLonAltBox.h"
 #include "GeoDataTypes.h"
+#include "GeoDataLod.h"
 
 namespace Marble
 {

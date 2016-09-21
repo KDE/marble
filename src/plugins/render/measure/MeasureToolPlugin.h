@@ -18,10 +18,10 @@
 #define MARBLE_MEASURETOOLPLUGIN_H
 
 #include "DialogConfigurationInterface.h"
+#include "GeoDataLatLonAltBox.h"
 #include "GeoDataLineString.h"
 #include "RenderPlugin.h"
 #include "MarbleWidget.h"
-#include "MarbleWidgetPopupMenu.h"
 
 #include <QFont>
 #include <QPen>

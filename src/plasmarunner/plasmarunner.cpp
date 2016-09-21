@@ -18,6 +18,7 @@
 // Marble
 #include <GeoDataCoordinates.h>
 #include <GeoDataFolder.h>
+#include <GeoDataLookAt.h>
 #include <GeoDataPlacemark.h>
 #include <BookmarkManager.h>
 #include <GeoDataTreeModel.h>

@@ -16,6 +16,7 @@
 #include "GeoDataDocument.h"
 #include "GeoDataLineString.h"
 #include "GeoDataObject.h"
+#include "GeoDataMultiGeometry.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataTrack.h"
 #include "GeoDataTreeModel.h"

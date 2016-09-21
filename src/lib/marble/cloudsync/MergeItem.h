@@ -18,8 +18,6 @@
 
 namespace Marble {
 
-class GeoDataPlacemark;
-
 class MARBLE_EXPORT MergeItem : public QObject
 {
 

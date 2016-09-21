@@ -10,6 +10,7 @@
 
 #include "MarbleDirs.h"
 #include "GeoDataParser.h"
+#include "GeoDataGeometry.h"
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataTypes.h"

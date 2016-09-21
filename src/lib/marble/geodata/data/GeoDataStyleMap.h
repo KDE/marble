@@ -16,7 +16,6 @@
 #include <QString>
 #include <QMap>
 
-#include "GeoDataObject.h"
 #include "GeoDataStyleSelector.h"
 
 #include "geodata_export.h"

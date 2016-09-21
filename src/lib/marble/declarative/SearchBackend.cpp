@@ -9,6 +9,8 @@
 //
 
 #include "SearchBackend.h"
+
+#include "SearchRunnerManager.h"
 #include "MarblePlacemarkModel.h"
 #include "MarbleModel.h"
 #include "Coordinate.h"

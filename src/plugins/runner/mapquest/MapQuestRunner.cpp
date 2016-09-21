@@ -15,6 +15,8 @@
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataExtendedData.h"
+#include "GeoDataData.h"
+#include "GeoDataLineString.h"
 #include "HttpDownloadManager.h"
 #include "routing/Maneuver.h"
 #include "routing/RouteRequest.h"

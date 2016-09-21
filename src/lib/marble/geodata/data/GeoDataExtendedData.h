@@ -13,7 +13,6 @@
 #define MARBLE_GEODATAEXTENDEDDATA_H
 
 #include "GeoDataObject.h"
-#include "GeoDataData.h"
 
 #include "geodata_export.h"
 #include <QHash>
@@ -23,6 +22,7 @@ namespace Marble
 
 class GeoDataSimpleArrayData;
 class GeoDataSchemaData;
+class GeoDataData;
 
 class GeoDataExtendedDataPrivate;
 

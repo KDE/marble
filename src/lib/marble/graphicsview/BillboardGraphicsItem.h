@@ -14,12 +14,13 @@
 #include "MarbleGraphicsItem.h"
 #include "marble_export.h"
 
-#include "GeoDataCoordinates.h"
+#include <Qt>
 
 class QPointF;
 
 namespace Marble
 {
+class GeoDataCoordinates;
 
 /**
  * @brief Base class for all 2D labels (a.k.a. billboards) in 3D space.

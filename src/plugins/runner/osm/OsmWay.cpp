@@ -14,6 +14,7 @@
 #include <GeoDataLineStyle.h>
 #include <GeoDataPolyStyle.h>
 #include <GeoDataStyle.h>
+#include <GeoDataDocument.h>
 #include <osm/OsmObjectManager.h>
 #include <MarbleDirs.h>
 #include <StyleBuilder.h>

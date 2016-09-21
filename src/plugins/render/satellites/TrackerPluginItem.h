@@ -18,10 +18,7 @@ class QString;
 namespace Marble {
 
 class GeoDataPlacemark;
-class GeoPainter;
-class GeoSceneLayer;
 class TrackerPluginItemPrivate;
-class ViewportParams;
 
 /**
  * Subclass this to represent items in your TrackerPluginModel.

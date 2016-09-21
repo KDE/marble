@@ -24,6 +24,8 @@
 #include "MarbleDebug.h"
 #include "TileLoader.h"
 #include "ViewportParams.h"
+#include "RenderState.h"
+#include "GeoDataDocument.h"
 #include "GeoDataLatLonAltBox.h"
 #include "HttpDownloadManager.h"
 

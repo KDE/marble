@@ -16,6 +16,7 @@
 #include "GeoDataScale.h"
 #include "GeoDataGeometry.h"
 #include "GeoDataModel.h"
+#include "GeoDataResourceMap.h"
 #include "GeoDataParser.h"
 
 namespace Marble

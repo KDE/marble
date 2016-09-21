@@ -11,7 +11,6 @@
 #ifndef CONFLICTDIALOG_H
 #define CONFLICTDIALOG_H
 
-#include "MergeItem.h"
 #include "marble_export.h"
 
 #include <QDialog>
@@ -19,7 +18,10 @@
 class QDialogButtonBox;
 class QAbstractButton;
 
-namespace Marble {
+namespace Marble
+{
+
+class MergeItem;
 
 class MARBLE_EXPORT ConflictDialog : public QDialog
 {

@@ -28,6 +28,7 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataPolygon.h"
 #include "GeoDataMultiGeometry.h"
+#include "GeoDataLinearRing.h"
 
 #include "GeoParser.h"
 

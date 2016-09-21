@@ -13,6 +13,9 @@
 #include "BaseClipper.h"
 #include "TileId.h"
 
+#include "GeoDataTypes.h"
+#include "GeoDataLatLonAltBox.h"
+#include "GeoDataPolygon.h"
 #include "GeoDataPlacemark.h"
 #include "OsmPlacemarkData.h"
 #include "OsmObjectManager.h"

@@ -15,6 +15,7 @@
 #include "ui_WeatherConfigWidget.h"
 #include "WeatherData.h"
 #include "WeatherModel.h"
+#include "MarbleWidget.h"
 #include "MarbleDirs.h"
 #include "MarbleLocale.h"
 #include "MarbleGlobal.h"

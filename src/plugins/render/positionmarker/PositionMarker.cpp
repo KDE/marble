@@ -30,6 +30,7 @@
 #include "PositionTracking.h"
 #include "ViewportParams.h"
 #include "Planet.h"
+#include "GeoDataAccuracy.h"
 
 namespace Marble
 {

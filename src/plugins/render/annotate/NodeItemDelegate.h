@@ -16,11 +16,12 @@
 #include <QTreeView>
 
 // Marble
-#include "GeoDataPlacemark.h"
 #include "EditPolygonDialog.h"
 
 namespace Marble
 {
+
+class GeoDataPlacemark;
 
 /**
  * @brief The NodeItemDelegate class handles the NodeModel view for both the EditPolygonDialog

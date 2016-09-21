@@ -10,6 +10,7 @@
 
 #include <GeoDataParser.h>
 #include <GeoDataDocument.h>
+#include <GeoDataUpdate.h>
 #include <GeoDataTour.h>
 #include <GeoDataPlaylist.h>
 #include <GeoDataTourControl.h>

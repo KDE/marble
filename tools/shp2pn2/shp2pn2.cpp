@@ -56,7 +56,8 @@
 #include <GeoDataPolygon.h>
 #include <GeoDataPoint.h>
 #include <GeoDataGeometry.h>
- 
+#include <GeoDataMultiGeometry.h>
+
 using namespace Marble;
 
 qreal epsilon   =   1.0;

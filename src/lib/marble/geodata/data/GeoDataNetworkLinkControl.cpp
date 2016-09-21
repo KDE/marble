@@ -9,9 +9,11 @@
 //
 
 #include "GeoDataNetworkLinkControl.h"
+
 #include "GeoDataTypes.h"
 #include "GeoDataCamera.h"
 #include "GeoDataLookAt.h"
+#include "GeoDataUpdate.h"
 
 #include <QDateTime>
 

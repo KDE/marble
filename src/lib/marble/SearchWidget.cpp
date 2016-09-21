@@ -10,7 +10,10 @@
 
 #include "SearchWidget.h"
 
+#include "GeoDataPlacemark.h"
+#include "GeoDataLatLonAltBox.h"
 #include "GeoDataDocument.h"
+#include "GeoDataTreeModel.h"
 #include "SearchInputWidget.h"
 #include "MarbleWidget.h"
 #include "MarbleModel.h"

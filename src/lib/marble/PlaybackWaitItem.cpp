@@ -10,6 +10,8 @@
 
 #include "PlaybackWaitItem.h"
 
+#include "GeoDataWait.h"
+
 #include <QTimer>
 
 namespace Marble

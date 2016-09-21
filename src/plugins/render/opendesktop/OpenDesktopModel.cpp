@@ -14,6 +14,7 @@
 #include "OpenDesktopItem.h"
 #include "MarbleGlobal.h"
 #include "MarbleModel.h"
+#include "GeoDataLatLonAltBox.h"
 #include "GeoDataCoordinates.h"
 #include <QString>
 #include <QUrl>

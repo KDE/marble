@@ -17,12 +17,7 @@
 
 #include <QDateTime>
 
-#include "GeoDataPoint.h"
-#include "GeoDataLineString.h"
-#include "GeoDataLinearRing.h"
-#include "GeoDataLookAt.h"
-#include "GeoDataPolygon.h"
-#include "GeoDataMultiGeometry.h"
+#include "GeoDataCoordinates.h"
 #include "GeoDataFeature.h"
 
 #include "geodata_export.h"
@@ -34,6 +29,9 @@ namespace Marble
 
 class GeoDataPlacemarkPrivate;
 class OsmPlacemarkData;
+class GeoDataLookAt;
+class GeoDataPolygon;
+class GeoDataGeometry;
 
 /**
  * @short a class representing a point of interest on the map

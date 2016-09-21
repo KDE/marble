@@ -11,9 +11,11 @@
 #include <QList>
 #include <QHash>
 
+#include "GeoDataTypes.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataDocument.h"
 #include "GeoDataObject.h"
+#include "GeoDataLineString.h"
 #include "OsmPlacemarkData.h"
 #include "StyleBuilder.h"
 

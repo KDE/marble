@@ -15,7 +15,6 @@
 #include "ElevationProfileContextMenu.h"
 #include "ui_ElevationProfileConfigWidget.h"
 
-#include "MarbleLocale.h"
 #include "MarbleModel.h"
 #include "MarbleWidget.h"
 #include "GeoDataPlacemark.h"

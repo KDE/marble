@@ -20,7 +20,6 @@
 #include <QList>
 
 #include "GeoSceneTextureTileDataset.h"
-#include "RenderState.h"
 
 class QImage;
 class QString;
@@ -35,6 +34,7 @@ class StackedTile;
 class Tile;
 class TileId;
 class TileLoader;
+class RenderState;
 
 class MergedLayerDecorator
 {

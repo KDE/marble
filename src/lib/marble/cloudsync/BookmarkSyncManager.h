@@ -13,7 +13,6 @@
 
 #include "MergeItem.h"
 #include "marble_export.h"
-#include "GeoDataPlacemark.h"
 
 #include <QObject>
 

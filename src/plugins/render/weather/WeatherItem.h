@@ -14,7 +14,6 @@
 
 // Marble
 #include "AbstractDataPluginItem.h"
-#include "MarbleWidget.h"
 
 // Qt
 #include <QMap>
@@ -25,7 +24,8 @@ class QDate;
 
 namespace Marble
 {
-    
+
+class MarbleWidget;
 class WeatherData;
 
 class WeatherItemPrivate;

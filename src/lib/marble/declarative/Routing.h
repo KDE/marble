@@ -13,7 +13,6 @@
 
 #include <QQuickPaintedItem>
 
-#include <Coordinate.h>
 #include <Placemark.h>
 #include <routing/RoutingModel.h>
 #include <RouteRequestModel.h>

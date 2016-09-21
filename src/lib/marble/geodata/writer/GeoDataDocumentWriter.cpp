@@ -13,6 +13,7 @@
 #include "GeoWriterBackend.h"
 #include "GeoWriter.h"
 #include "GeoTagWriter.h"
+#include "GeoDataDocument.h"
 #include "KmlElementDictionary.h"
 
 #include <QFileInfo>

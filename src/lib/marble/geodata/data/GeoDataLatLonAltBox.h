@@ -16,8 +16,6 @@
 
 #include "MarbleGlobal.h"
 
-#include "GeoDataObject.h"
-
 #include "geodata_export.h"
 
 #include "GeoDataLatLonBox.h"

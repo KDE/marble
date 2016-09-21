@@ -15,6 +15,7 @@
 #include "PositionProviderPlugin.h"
 
 #include "GeoDataCoordinates.h"
+#include "GeoDataAccuracy.h"
 
 #include <QDateTime>
 

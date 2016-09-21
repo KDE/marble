@@ -18,7 +18,6 @@ namespace Marble
 {
 
 class GeoDataPlacemark;
-class OsmPlacemarkData;
 
 /**
  * @brief The OsmObjectManager class is used to assign osmData to placemarks that

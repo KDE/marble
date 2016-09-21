@@ -26,7 +26,6 @@ class QNetworkReply;
 namespace Marble {
 
 class GeoSceneDocument;
-class GeoSceneHead;
 
 class MapWizardPrivate;
 

@@ -28,7 +28,6 @@ namespace Marble
 {
 
 class DownloadPolicy;
-class DownloadQueueSet;
 class StoragePolicy;
 
 /**

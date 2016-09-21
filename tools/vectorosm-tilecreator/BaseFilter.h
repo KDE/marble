@@ -14,9 +14,7 @@
 #include <QList>
 #include <QDebug>
 
-#include "GeoDataObject.h"
 #include "GeoDataDocument.h"
-#include "GeoDataTypes.h"
 
 namespace Marble {
 

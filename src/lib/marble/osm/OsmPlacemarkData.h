@@ -26,9 +26,6 @@ class QXmlStreamAttributes;
 namespace Marble
 {
 
-class GeoDataGeometry;
-class GeoDataPlacemark;
-
 /**
  * This class is used to encapsulate the osm data fields kept within a placemark's extendedData.
  * It stores OSM server generated data: id, version, changeset, uid, visible, user, timestamp;

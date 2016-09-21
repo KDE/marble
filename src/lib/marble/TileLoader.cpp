@@ -35,6 +35,7 @@
 #include "HttpDownloadManager.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
+#include "TileId.h"
 #include "TileLoaderHelper.h"
 #include "ParseRunnerPlugin.h"
 #include "ParsingRunner.h"

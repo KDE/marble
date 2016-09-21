@@ -20,8 +20,12 @@
 
 // Marble
 #include "MarbleDebug.h"
+#include "GeoDataPlacemark.h"
 #include "GeoDataExtendedData.h"
+#include "GeoDataData.h"
+#include "GeoDataGeometry.h"
 #include "GeoDataStyle.h"       // In geodata/data/
+#include "GeoDataIconStyle.h"
 
 using namespace Marble;
 

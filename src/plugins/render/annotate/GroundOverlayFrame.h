@@ -12,11 +12,12 @@
 #define MARBLE_GROUNDOVERLAYFRAME_H
 
 #include "SceneGraphicsItem.h"
-#include "GeoDataGroundOverlay.h"
-#include "TextureLayer.h"
+#include "GeoDataCoordinates.h"
 
 namespace Marble
 {
+class TextureLayer;
+class GeoDataGroundOverlay;
 
 class GroundOverlayFrame : public SceneGraphicsItem
 {

@@ -14,12 +14,11 @@
 #include <QObject>
 
 #include "PlaybackItem.h"
-#include "GeoDataCoordinates.h"
-
-class TourPlayback;
 
 namespace Marble
 {
+class GeoDataCoordinates;
+
 class SerialTrack : public QObject
 {
     Q_OBJECT

@@ -25,6 +25,8 @@
 namespace Marble
 {
 
+class StackedTileLoader;
+
 class MercatorScanlineTextureMapper : public TextureMapperInterface
 {
  public:

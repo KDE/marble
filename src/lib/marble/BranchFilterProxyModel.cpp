@@ -12,6 +12,8 @@
 
 #include "GeoDataTypes.h"
 #include "MarblePlacemarkModel.h"
+#include "GeoDataTreeModel.h"
+#include "GeoDataObject.h"
 
 namespace Marble
 {

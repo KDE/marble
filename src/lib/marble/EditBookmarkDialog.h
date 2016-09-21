@@ -15,8 +15,6 @@
 #include <QDialog>
 
 #include "marble_export.h"
-#include "GeoDataCoordinates.h"
-#include "GeoDataPlacemark.h"
 
 /** @todo FIXME after freeze: Rename to AddBookmarkDialog*/
 
@@ -26,7 +24,8 @@ namespace Marble
 class EditBookmarkDialogPrivate;
 class BookmarkManager;
 class GeoDataFolder;
-class GeoDataLookAt;
+class GeoDataCoordinates;
+class GeoDataPlacemark;
 class MarbleWidget;
 
 class MARBLE_EXPORT EditBookmarkDialog : public QDialog

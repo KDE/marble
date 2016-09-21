@@ -12,7 +12,6 @@
 #define MARBLE_ROUTEREQUEST_H
 
 #include "marble_export.h"
-#include "GeoDataCoordinates.h"
 #include "RoutingProfile.h"
 
 #include <QObject>
@@ -20,6 +19,7 @@
 namespace Marble
 {
 
+class GeoDataCoordinates;
 class GeoDataPlacemark;
 class RouteRequestPrivate;
 

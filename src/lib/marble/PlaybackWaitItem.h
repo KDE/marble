@@ -12,11 +12,13 @@
 #define PLAYBACKWAITITEM_H
 
 #include "PlaybackItem.h"
-#include "GeoDataWait.h"
 #include <QDateTime>
 
 namespace Marble
 {
+
+class GeoDataWait;
+
 class PlaybackWaitItem : public PlaybackItem
 {
     Q_OBJECT

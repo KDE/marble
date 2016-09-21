@@ -16,6 +16,8 @@
 
 #include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
+#include "GeoDataIconStyle.h"
+#include "GeoDataLabelStyle.h"
 #include "PlacemarkLayer.h"
 
 #include <QApplication>

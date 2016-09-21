@@ -15,7 +15,6 @@
 #include "marble_export.h"
 
 #include "MarbleGlobal.h"
-#include "OsmPlacemarkData.h"
 
 class QTreeWidgetItem;
 
@@ -25,6 +24,7 @@ namespace Marble
 class OsmTagEditorWidgetPrivate;
 class GeoDataPlacemark;
 class GeoDataFeature;
+class OsmPlacemarkData;
 
 class MARBLE_EXPORT OsmTagEditorWidget : public QWidget
 {

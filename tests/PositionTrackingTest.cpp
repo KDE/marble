@@ -10,6 +10,7 @@
 
 
 #include "GeoDataTreeModel.h"
+#include "GeoDataAccuracy.h"
 #include "PositionProviderPlugin.h"
 #include "PositionTracking.h"
 #include "TestUtils.h"

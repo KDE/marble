@@ -11,6 +11,7 @@
 
 #include "SearchInputWidget.h"
 
+#include "GeoDataCoordinates.h"
 #include "MarblePlacemarkModel.h"
 
 #include <QCompleter>

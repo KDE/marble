@@ -11,12 +11,10 @@
 #ifndef MARBLE_OSMOBJECTATTRIBUTEWRITER_H
 #define MARBLE_OSMOBJECTATTRIBUTEWRITER_H
 
-#include <GeoWriter.h>
-#include <GeoDataObject.h>
-
 namespace Marble
 {
 class OsmPlacemarkData;
+class GeoWriter;
 
 class OsmObjectAttributeWriter
 {

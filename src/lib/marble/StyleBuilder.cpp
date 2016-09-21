@@ -16,7 +16,12 @@
 #include "MarbleDirs.h"
 #include "OsmPlacemarkData.h"
 #include "GeoDataTypes.h"
+#include "GeoDataGeometry.h"
 #include "GeoDataPlacemark.h"
+#include "GeoDataIconStyle.h"
+#include "GeoDataLabelStyle.h"
+#include "GeoDataLineStyle.h"
+#include "GeoDataPolyStyle.h"
 
 #include <QApplication>
 #include <QFont>

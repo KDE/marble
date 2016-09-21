@@ -11,6 +11,7 @@
 #include "OsmObjectAttributeWriter.h"
 #include "osm/OsmObjectManager.h"
 #include "osm/OsmPlacemarkData.h"
+#include "GeoWriter.h"
 
 namespace Marble {
 

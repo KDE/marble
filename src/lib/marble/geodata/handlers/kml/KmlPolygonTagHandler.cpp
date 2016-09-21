@@ -27,6 +27,7 @@
 #include "KmlObjectTagHandler.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataMultiGeometry.h"
+#include "GeoDataPolygon.h"
 
 #include "GeoParser.h"
 

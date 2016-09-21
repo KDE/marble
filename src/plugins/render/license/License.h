@@ -19,9 +19,7 @@ class QLabel;
 namespace Marble
 {
 
-class GeoDataCoordinates;
 class WidgetGraphicsItem;
-class MarbleLocale;
 
 /**
  * @short The class that displays copyright info

@@ -21,8 +21,7 @@
 
 #include <QSize>
 
-#include "GeoDataLatLonAltBox.h"
-
+#include "GeoDataCoordinates.h"
 #include "Quaternion.h"
 #include "MarbleGlobal.h"
 #include "marble_export.h"
@@ -33,6 +32,9 @@ class QPainterPath;
 namespace Marble
 {
 
+class GeoDataLatLonAltBox;
+class GeoDataLatLonBox;
+class GeoDataLineString;
 class AbstractProjection;
 class ViewportParamsPrivate;
 

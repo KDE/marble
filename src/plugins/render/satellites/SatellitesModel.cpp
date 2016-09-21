@@ -18,6 +18,9 @@
 #include "MarbleClock.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
+#include "GeoDataIconStyle.h"
+#include "GeoDataLabelStyle.h"
+#include "GeoDataLineStyle.h"
 
 #include <planetarySats.h>
 #include <sgp4io.h>

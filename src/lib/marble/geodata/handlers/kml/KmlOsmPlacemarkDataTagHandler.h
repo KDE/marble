@@ -16,9 +16,6 @@
 namespace Marble
 {
 class OsmPlacemarkData;
-class GeoDataLineString;
-class GeoDataPolygon;
-class GeoDataPlacemark;
 
 namespace kml
 {

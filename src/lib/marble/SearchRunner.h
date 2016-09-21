@@ -14,8 +14,6 @@
 
 #include "marble_export.h"
 
-#include "GeoDataDocument.h"
-
 #include <QObject>
 #include <QVector>
 
@@ -25,7 +23,6 @@ namespace Marble
 class GeoDataLatLonBox;
 class GeoDataPlacemark;
 class MarbleModel;
-class RouteRequest;
 
 class MARBLE_EXPORT SearchRunner : public QObject
 {

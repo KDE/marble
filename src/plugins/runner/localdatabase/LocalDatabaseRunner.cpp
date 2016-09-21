@@ -16,6 +16,7 @@
 #include "GeoDataFeature.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataCoordinates.h"
+#include "GeoDataLatLonAltBox.h"
 
 #include "MarbleDebug.h"
 #include <QString>

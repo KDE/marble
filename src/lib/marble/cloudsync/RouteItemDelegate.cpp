@@ -1,5 +1,7 @@
 #include "RouteItemDelegate.h"
 
+#include "CloudRouteModel.h"
+
 #ifdef MARBLE_NO_WEBKITWIDGETS
 #include <QWidget>
 #else

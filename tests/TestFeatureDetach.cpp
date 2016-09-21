@@ -11,6 +11,7 @@
 #include <QObject>
 
 #include "GeoDataContainer.h"
+#include "GeoDataPoint.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataCamera.h"
 #include "MarbleGlobal.h"

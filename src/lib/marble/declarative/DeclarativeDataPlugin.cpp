@@ -16,6 +16,8 @@
 
 #include "MarbleDebug.h"
 #include "MarbleModel.h"
+#include "RenderState.h"
+#include "GeoDataCoordinates.h"
 
 #include <QAbstractListModel>
 #include <QMetaObject>

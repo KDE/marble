@@ -13,15 +13,14 @@
 
 #include "TrackerPluginItem.h"
 
-#include "GeoDataCoordinates.h"
-#include "GeoDataTrack.h"
-
 #include <sgp4unit.h>
 
 class QColor;
+class QDateTime;
 
 namespace Marble {
 
+class GeoDataCoordinates;
 class GeoDataTrack;
 class MarbleClock;
 

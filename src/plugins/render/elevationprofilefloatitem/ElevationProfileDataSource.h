@@ -29,7 +29,6 @@ class GeoDataLineString;
 class GeoDataObject;
 class GeoDataTrack;
 class GeoDataTreeModel;
-class MarbleModel;
 class RoutingModel;
 
 class ElevationProfileDataSource : public QObject

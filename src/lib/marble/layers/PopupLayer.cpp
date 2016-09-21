@@ -19,6 +19,7 @@
 #include "PopupItem.h"
 #include "ViewportParams.h"
 #include "RenderPlugin.h"
+#include "RenderState.h"
 
 #include <QSizeF>
 

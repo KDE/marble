@@ -13,8 +13,6 @@
 
 #include "marble_export.h"
 
-#include "GeoDataCoordinates.h"
-
 #include <QAbstractListModel>
 
 class QIODevice;
@@ -32,6 +30,8 @@ class RoutingModelPrivate;
 class Route;
 class RouteRequest;
 class MarbleModel;
+class GeoDataCoordinates;
+
 class MARBLE_EXPORT RoutingModel : public QAbstractListModel
 {
     Q_OBJECT

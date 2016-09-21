@@ -19,6 +19,7 @@
 #include "GeoDataLinearRing.h"
 #include "GeoDataLineString.h"
 #include "GeoDataCoordinates.h"
+#include "GeoDataLatLonAltBox.h"
 #include "ViewportParams.h"
 
 #include <QPainterPath>

@@ -24,7 +24,6 @@
 
 #include "marble_export.h"
 #include "GeoDataCoordinates.h"       // In geodata/data/
-#include "RenderState.h"
 
 // Qt
 #include <QObject>
@@ -46,8 +45,8 @@ class MarbleModel;
 class ViewportParams;
 class GeoPainter;
 class LayerInterface;
-class Quaternion;
 class RenderPlugin;
+class RenderState;
 class AbstractDataPlugin;
 class AbstractDataPluginItem;
 class AbstractFloatItem;

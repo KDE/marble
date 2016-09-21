@@ -18,7 +18,9 @@
 
 // Marble
 #include "GeoDataPlacemark.h"
+#include "GeoDataLineString.h"
 #include "GeoDataStyle.h"
+#include "GeoDataLineStyle.h"
 #include "GeoDataTypes.h"
 #include "NodeModel.h"
 #include "FormattedTextWidget.h"

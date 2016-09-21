@@ -13,13 +13,14 @@
 
 #include "OsmNode.h"
 #include <osm/OsmPlacemarkData.h>
-#include <GeoDataDocument.h>
 #include <StyleBuilder.h>
 
 #include <QSet>
 #include <QString>
 
 namespace Marble {
+
+class GeoDataDocument;
 
 class OsmWay
 {

@@ -11,7 +11,6 @@
 
 #include "RoutingInputWidget.h"
 
-#include "MarbleLocale.h"
 #include "MarblePlacemarkModel.h"
 #include "RouteRequest.h"
 
@@ -25,8 +24,10 @@
 #include "MarbleModel.h"
 #include "MarbleWidget.h"
 #include "routing/RoutingManager.h"
+#include "GeoDataPlacemark.h"
 #include "GeoDataFolder.h"
 #include "GeoDataExtendedData.h"
+#include "GeoDataData.h"
 #include "PositionTracking.h"
 #include "ReverseGeocodingRunnerManager.h"
 #include "SearchRunnerManager.h"

@@ -64,12 +64,14 @@
 #include "RenderPlugin.h"
 #include "StyleBuilder.h"
 #include "SunLocator.h"
+#include "TileId.h"
 #include "TileCoordsPyramid.h"
 #include "TileCreator.h"
 #include "TileCreatorDialog.h"
 #include "TileLoader.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
+#include "RenderState.h"
 #include "BookmarkManager.h"
 
 

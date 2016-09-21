@@ -14,6 +14,7 @@
 #include <GeoDataPlacemark.h>
 #include <GeoDataStyle.h>
 #include <GeoDataIconStyle.h>
+#include <GeoDataDocument.h>
 #include <MarbleDirs.h>
 #include <StyleBuilder.h>
 

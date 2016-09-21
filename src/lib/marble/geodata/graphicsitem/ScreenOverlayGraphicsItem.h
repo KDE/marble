@@ -12,15 +12,15 @@
 #ifndef SCREENOVERLAYGRAPHICSITEM_H
 #define SCREENOVERLAYGRAPHICSITEM_H
 
-#include "GeoDataScreenOverlay.h"
 #include "GeoDataVec2.h"
-#include "GeoPainter.h"
 #include "ScreenGraphicsItem.h"
 #include "marble_export.h"
 
 #include <QPixmap>
 
 namespace Marble {
+
+class GeoDataScreenOverlay;
 
 class MARBLE_EXPORT ScreenOverlayGraphicsItem : public ScreenGraphicsItem
 {

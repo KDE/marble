@@ -21,7 +21,6 @@
 #include <ViewportParams.h>
 #include <GeoPainter.h>
 #include <GeoDataLookAt.h>
-#include <MarbleLocale.h>
 #include <Planet.h>
 #include <MarbleAbstractPresenter.h>
 #include <AbstractFloatItem.h>
@@ -31,6 +30,7 @@
 #include <PluginManager.h>
 #include <RenderPlugin.h>
 #include <MarbleMath.h>
+#include <GeoDataLatLonAltBox.h>
 #include <GeoDataCoordinates.h>
 #include <GeoDataTypes.h>
 #include <ReverseGeocodingRunnerManager.h>

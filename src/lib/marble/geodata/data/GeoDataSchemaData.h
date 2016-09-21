@@ -16,7 +16,6 @@
 
 // Marble
 #include "GeoDocument.h"
-#include "GeoDataSimpleData.h"
 
 #include "geodata_export.h"
 
@@ -24,6 +23,7 @@ namespace Marble
 {
 
 class GeoDataSchemaDataPrivate;
+class GeoDataSimpleData;
 
 class GEODATA_EXPORT GeoDataSchemaData : public GeoNode
 {

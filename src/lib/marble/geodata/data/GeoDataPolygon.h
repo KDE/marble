@@ -19,13 +19,13 @@
 
 #include "geodata_export.h"
 #include "GeoDataGeometry.h"
-#include "GeoDataLinearRing.h"
-#include "GeoDataLatLonAltBox.h"
 
 namespace Marble
 {
 
 class GeoDataPolygonPrivate;
+class GeoDataLinearRing;
+class GeoDataCoordinates;
 
 /*!
     \class GeoDataPolygon

@@ -11,7 +11,7 @@
 #ifndef GEODATAORIENTATION_H
 #define GEODATAORIENTATION_H
 
-#include "GeoDataGeometry.h"
+#include "GeoDataObject.h"
 #include "MarbleGlobal.h"
 
 namespace Marble {

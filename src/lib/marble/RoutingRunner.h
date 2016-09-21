@@ -14,13 +14,13 @@
 
 #include <QObject>
 #include "marble_export.h"
-#include "GeoDataExtendedData.h"
 
 class QTime;
 
 namespace Marble
 {
 
+class GeoDataExtendedData;
 class GeoDataDocument;
 class RouteRequest;
 

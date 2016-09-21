@@ -45,7 +45,6 @@ enum DocumentRole {
 };
 
 
-class GeoDataStyle;
 class GeoDataStyleMap;
 class GeoDataNetworkLinkControl;
 class GeoDataSchema;

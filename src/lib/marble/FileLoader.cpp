@@ -21,6 +21,7 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataData.h"
 #include "GeoDataExtendedData.h"
+#include "GeoDataStyle.h"
 #include "GeoDataStyleMap.h"
 #include "GeoDataPolyStyle.h"
 #include "GeoDataLineStyle.h"

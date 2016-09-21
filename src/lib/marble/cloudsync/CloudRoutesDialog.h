@@ -11,12 +11,11 @@
 #ifndef CLOUDROUTESDIALOG_H
 #define CLOUDROUTESDIALOG_H
 
-#include "MarbleWidget.h"
-#include "CloudRouteModel.h"
-
 #include <QDialog>
 
 namespace Marble {
+
+class CloudRouteModel;
 
 class CloudRoutesDialog : public QDialog
 {

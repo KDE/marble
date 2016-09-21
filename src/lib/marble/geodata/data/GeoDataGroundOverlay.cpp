@@ -9,7 +9,9 @@
 //
 
 #include "GeoDataGroundOverlay.h"
+
 #include "GeoDataTypes.h"
+#include "GeoDataLatLonQuad.h"
 
 namespace Marble {
 

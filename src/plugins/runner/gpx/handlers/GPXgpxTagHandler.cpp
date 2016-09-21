@@ -28,6 +28,9 @@
 
 #include "GeoDataDocument.h"
 #include "GeoDataStyle.h"
+#include "GeoDataIconStyle.h"
+#include "GeoDataLabelStyle.h"
+#include "GeoDataLineStyle.h"
 #include "GeoDataStyleMap.h"
 #include "GeoDataHotSpot.h"
 #include "MarbleDirs.h"

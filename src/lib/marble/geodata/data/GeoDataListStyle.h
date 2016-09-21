@@ -15,13 +15,13 @@
 
 #include "MarbleGlobal.h"
 #include "GeoDataObject.h"
-#include "GeoDataItemIcon.h"
 #include "geodata_export.h"
 
 namespace Marble
 {
 
 class GeoDataListStylePrivate;
+class GeoDataItemIcon;
 
 class GEODATA_EXPORT GeoDataListStyle : public GeoDataObject
 {

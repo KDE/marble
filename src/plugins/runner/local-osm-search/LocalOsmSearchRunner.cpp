@@ -15,6 +15,7 @@
 #include "MarbleDebug.h"
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
+#include "GeoDataPoint.h"
 
 #include <QString>
 #include <QVector>

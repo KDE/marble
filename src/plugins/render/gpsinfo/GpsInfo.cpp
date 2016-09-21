@@ -19,6 +19,7 @@
 #include "WidgetGraphicsItem.h"
 #include "MarbleGraphicsGridLayout.h"
 #include "ViewportParams.h"
+#include "GeoDataAccuracy.h"
 
 namespace Marble
 {

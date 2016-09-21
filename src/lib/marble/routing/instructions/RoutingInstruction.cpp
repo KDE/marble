@@ -9,7 +9,6 @@
 //
 
 #include "RoutingInstruction.h"
-#include "MarbleLocale.h"
 
 #include <QCoreApplication>
 #include <QStringList>

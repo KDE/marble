@@ -19,6 +19,7 @@
 #include <QRegion>
 
 #include "MarbleDebug.h"
+#include "GeoDataLatLonAltBox.h"
 #include "SphericalProjection.h"
 #include "EquirectProjection.h"
 #include "MercatorProjection.h"

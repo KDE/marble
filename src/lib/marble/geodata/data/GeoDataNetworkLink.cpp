@@ -9,7 +9,9 @@
 //
 
 #include "GeoDataNetworkLink.h"
+
 #include "GeoDataTypes.h"
+#include "GeoDataLink.h"
 
 namespace Marble {
 

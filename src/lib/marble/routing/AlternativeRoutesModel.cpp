@@ -10,9 +10,11 @@
 
 #include "AlternativeRoutesModel.h"
 
+#include "GeoDataLatLonAltBox.h"
 #include "GeoDataDocument.h"
 #include "GeoDataFolder.h"
 #include "GeoDataExtendedData.h"
+#include "GeoDataLineString.h"
 #include "GeoDataPlacemark.h"
 #include "MarbleMath.h"
 

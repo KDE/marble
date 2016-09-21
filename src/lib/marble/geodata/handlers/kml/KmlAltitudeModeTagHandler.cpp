@@ -27,6 +27,7 @@
 #include "KmlElementDictionary.h"
 
 #include "GeoDataGeometry.h"
+#include "GeoDataLatLonAltBox.h"
 #include "GeoDataGroundOverlay.h"
 #include "GeoDataPoint.h"
 #include "GeoDataPlacemark.h"

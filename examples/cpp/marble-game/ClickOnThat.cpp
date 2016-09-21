@@ -31,6 +31,10 @@
 #include <marble/GeoDataStyle.h>
 #include <marble/GeoDataStyleMap.h>
 #include <marble/GeoDataIconStyle.h>
+#include <marble/GeoDataLinearRing.h>
+#include <marble/GeoDataPoint.h>
+#include <marble/GeoDataPolygon.h>
+#include <marble/GeoDataMultiGeometry.h>
 
 #include <marble/GeoDataTypes.h>
 

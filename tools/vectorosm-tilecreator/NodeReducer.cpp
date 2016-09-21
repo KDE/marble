@@ -12,6 +12,7 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataTypes.h"
 #include "GeoDataLineString.h"
+#include "GeoDataPolygon.h"
 #include "GeoDataCoordinates.h"
 #include "MarbleMath.h"
 #include "NodeReducer.h"

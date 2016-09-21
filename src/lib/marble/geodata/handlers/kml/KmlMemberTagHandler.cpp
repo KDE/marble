@@ -11,6 +11,7 @@
 #include "KmlMemberTagHandler.h"
 
 #include "GeoDataPlacemark.h"
+#include "GeoDataLinearRing.h"
 #include "GeoDataPolygon.h"
 #include "GeoDataGeometry.h"
 #include "GeoDataTypes.h"

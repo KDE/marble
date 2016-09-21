@@ -25,6 +25,8 @@
 
 #include "KmlElementDictionary.h"
 
+#include "GeoDataLinearRing.h"
+#include "GeoDataPolygon.h"
 #include "GeoDataGeometry.h"
 #include "GeoDataPoint.h"
 #include "GeoDataPlacemark.h"

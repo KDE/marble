@@ -20,6 +20,7 @@
 #include "GeoDataData.h"
 #include "GeoDataExtendedData.h"
 #include "GeoDataPlacemark.h"
+#include "GeoDataLineString.h"
 
 #include <QTime>
 #include <QLocalSocket>

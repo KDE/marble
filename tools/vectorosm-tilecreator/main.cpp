@@ -8,10 +8,13 @@
 // Copyright 2016      David Kolozsvari <freedawson@gmail.com>
 //
 
+#include "GeoDataTypes.h"
 #include "GeoDataDocumentWriter.h"
 #include "MarbleModel.h"
 #include "ParsingRunnerManager.h"
+#include "GeoDataGeometry.h"
 #include "GeoDataPlacemark.h"
+#include "GeoDataLatLonAltBox.h"
 
 #include <QApplication>
 #include <QCommandLineParser>

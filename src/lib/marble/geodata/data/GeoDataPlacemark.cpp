@@ -19,6 +19,8 @@
 
 #include "GeoDataMultiGeometry.h"
 #include "GeoDataCoordinates.h"
+#include "GeoDataLatLonAltBox.h"
+#include "GeoDataData.h"
 #include "osm/OsmPlacemarkData.h"
 
 // Qt

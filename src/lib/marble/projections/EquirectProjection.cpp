@@ -15,6 +15,7 @@
 
 // Marble
 #include "ViewportParams.h"
+#include "GeoDataLatLonAltBox.h"
 
 #include "MarbleDebug.h"
 

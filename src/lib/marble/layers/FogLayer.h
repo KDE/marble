@@ -16,6 +16,8 @@
 
 #include "LayerInterface.h"
 
+#include <QString>
+
 namespace Marble
 {
 

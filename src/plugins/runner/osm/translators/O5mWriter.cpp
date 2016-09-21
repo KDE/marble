@@ -15,6 +15,7 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataLineString.h"
 #include "GeoDataLinearRing.h"
+#include "GeoDataPolygon.h"
 #include "GeoWriter.h"
 #include "osm/OsmPlacemarkData.h"
 

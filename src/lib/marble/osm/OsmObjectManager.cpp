@@ -13,6 +13,8 @@
 
 // Marble
 #include "GeoDataPlacemark.h"
+#include "GeoDataLinearRing.h"
+#include "GeoDataPolygon.h"
 #include "GeoDataTypes.h"
 #include "osm/OsmPlacemarkData.h"
 

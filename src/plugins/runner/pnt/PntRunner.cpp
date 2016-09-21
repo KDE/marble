@@ -12,6 +12,7 @@
 
 #include "GeoDataDocument.h"
 #include "GeoDataLineString.h"
+#include "GeoDataLinearRing.h"
 #include "GeoDataPlacemark.h"
 #include "MarbleDebug.h"
 #include "MarbleGlobal.h"

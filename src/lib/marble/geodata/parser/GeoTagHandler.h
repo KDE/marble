@@ -30,7 +30,6 @@ namespace Marble
 {
 
 class GeoNode;
-class GeoParser;
 
 /**
  * @brief A base class for XML tag handlers

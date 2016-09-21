@@ -10,6 +10,9 @@
 
 #include "WlocatePositionProviderPlugin.h"
 
+#include <GeoDataCoordinates.h>
+#include <GeoDataAccuracy.h>
+
 #include <QFutureWatcher>
 #include <QtConcurrentRun>
 #include <QDateTime>

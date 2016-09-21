@@ -11,14 +11,15 @@
 #ifndef MARBLE_GEOWRITERBACKEND_H
 #define MARBLE_GEOWRITERBACKEND_H
 
-#include "GeoDataDocument.h"
-
 #include "marble_export.h"
 
 class QIODevice;
+class QString;
 
 namespace Marble
 {
+
+class GeoDataDocument;
 
 class MARBLE_EXPORT GeoWriterBackend
 {

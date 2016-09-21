@@ -11,6 +11,9 @@
 
 #include "QtPositioningPositionProviderPlugin.h"
 
+#include "GeoDataAccuracy.h"
+#include "GeoDataCoordinates.h"
+
 #include <QGeoPositionInfoSource>
 #include <QGeoPositionInfo>
 #include <QGeoCoordinate>

@@ -25,7 +25,6 @@
 #include "GeoDataSnippet.h"
 #include "GeoDataLookAt.h"
 #include "GeoDataCamera.h"
-#include "MarbleDirs.h"
 
 namespace Marble
 {

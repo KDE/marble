@@ -23,7 +23,6 @@ namespace Marble
 
 class OsmRelationManagerWidgetPrivate;
 class GeoDataPlacemark;
-class GeoDataFeature;
 class OsmPlacemarkData;
 
 enum Column {

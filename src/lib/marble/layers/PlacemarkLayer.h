@@ -36,7 +36,6 @@ class GeoPainter;
 class GeoSceneLayer;
 class MarbleClock;
 class ViewportParams;
-class VisiblePlacemark;
 class StyleBuilder;
 
 class PlacemarkLayer : public QObject, public LayerInterface

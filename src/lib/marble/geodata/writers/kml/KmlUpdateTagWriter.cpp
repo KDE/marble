@@ -10,6 +10,9 @@
 
 #include "KmlUpdateTagWriter.h"
 #include "GeoDataUpdate.h"
+#include "GeoDataCreate.h"
+#include "GeoDataDelete.h"
+#include "GeoDataChange.h"
 #include "GeoDataTypes.h"
 #include "GeoWriter.h"
 #include "GeoDataAbstractView.h"

@@ -12,10 +12,12 @@
 #include "MarbleDebug.h"
 
 #include "GeoDataParser.h"
+#include "GeoDataMultiGeometry.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataDocument.h"
 #include "GeoDataExtendedData.h"
 #include "GeoDataData.h"
+#include "GeoDataLatLonAltBox.h"
 
 namespace Marble
 {

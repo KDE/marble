@@ -30,6 +30,7 @@
 #include "TileLoaderHelper.h"
 #include "TextureTile.h"
 #include "TileLoader.h"
+#include "RenderState.h"
 
 #include "GeoDataCoordinates.h"
 

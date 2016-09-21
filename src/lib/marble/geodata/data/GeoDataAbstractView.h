@@ -13,15 +13,14 @@
 
 #include "MarbleGlobal.h"
 #include "GeoDataObject.h"
-#include "GeoDataTimeSpan.h"
-#include "GeoDataTimeStamp.h"
-#include "GeoDataCoordinates.h"
 
 #include "geodata_export.h"
 
 namespace Marble
 {
-
+class GeoDataCoordinates;
+class GeoDataTimeSpan;
+class GeoDataTimeStamp;
 class GeoDataAbstractViewPrivate;
 
 /**

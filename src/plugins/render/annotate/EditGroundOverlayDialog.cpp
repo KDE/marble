@@ -19,6 +19,8 @@
 
 //Marble
 #include "FormattedTextWidget.h"
+#include "GeoDataGroundOverlay.h"
+#include "TextureLayer.h"
 
 namespace Marble
 {

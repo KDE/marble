@@ -16,9 +16,6 @@
 #include "OsmPlacemark.h"
 #include "OsmRegionTree.h"
 
-#include "GeoDataLineString.h"
-#include "GeoDataPolygon.h"
-
 #include <QObject>
 #include <QFileInfo>
 #include <QHash>
@@ -27,6 +24,8 @@
 
 namespace Marble
 {
+
+class GeoDataLineString;
 
 enum ElementType {
     NoType,

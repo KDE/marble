@@ -19,6 +19,7 @@
 #include "FlyToEditWidget.h"
 #include "MarbleWidget.h"
 #include "geodata/data/GeoDataFlyTo.h"
+#include "GeoDataLookAt.h"
 #include "GeoDataTypes.h"
 #include "GeoDataCamera.h"
 #include "MarblePlacemarkModel.h"

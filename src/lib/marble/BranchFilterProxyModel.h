@@ -11,12 +11,12 @@
 #ifndef BRANCHFILTERPROXYMODEL_H
 #define BRANCHFILTERPROXYMODEL_H
 
-#include "GeoDataTreeModel.h"
-
 #include <QSortFilterProxyModel>
 
 namespace Marble
 {
+
+class GeoDataTreeModel;
 
 class BranchFilterProxyModel : public QSortFilterProxyModel
 {

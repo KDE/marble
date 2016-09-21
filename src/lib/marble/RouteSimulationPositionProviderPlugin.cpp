@@ -17,6 +17,7 @@
 #include "routing/Route.h"
 #include "routing/RoutingManager.h"
 #include "routing/RoutingModel.h"
+#include "GeoDataAccuracy.h"
 
 #include <QIcon>
 

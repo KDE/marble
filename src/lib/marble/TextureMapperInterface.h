@@ -18,8 +18,6 @@ namespace Marble
 {
 
 class GeoPainter;
-class StackedTile;
-class StackedTileLoader;
 class TextureColorizer;
 class ViewportParams;
 

@@ -39,6 +39,9 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
 #include "GeoDataPolyStyle.h"
+#include "GeoDataLinearRing.h"
+#include "GeoDataPolygon.h"
+#include "GeoDataMultiGeometry.h"
 #include "MarbleDebug.h"
 
 #include <QFile>

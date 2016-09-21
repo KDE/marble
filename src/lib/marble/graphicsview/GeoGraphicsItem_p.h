@@ -15,7 +15,6 @@
 
 // Marble
 #include "GeoDataStyle.h"
-#include "ViewportParams.h"
 #include "StyleBuilder.h"
 
 namespace Marble

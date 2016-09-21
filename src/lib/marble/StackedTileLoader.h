@@ -28,7 +28,6 @@
 #include <QObject>
 
 #include "GeoSceneTextureTileDataset.h"
-#include "TileId.h"
 #include "RenderState.h"
 
 class QImage;
@@ -40,6 +39,7 @@ namespace Marble
 
 class MergedLayerDecorator;
 class StackedTile;
+class TileId;
 
 class StackedTileLoaderPrivate;
 

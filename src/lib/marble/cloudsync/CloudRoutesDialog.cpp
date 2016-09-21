@@ -11,6 +11,7 @@
 #include "CloudRoutesDialog.h"
 #include "ui_CloudRoutesDialog.h"
 
+#include "CloudRouteModel.h"
 #include "RouteItemDelegate.h"
 
 #include <QTimer>

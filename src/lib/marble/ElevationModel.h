@@ -12,7 +12,6 @@
 #ifndef MARBLE_ELEVATIONMODEL_H
 #define MARBLE_ELEVATIONMODEL_H
 
-#include "GeoDataCoordinates.h"
 #include "marble_export.h"
 
 #include <QObject>
@@ -21,6 +20,7 @@ class QImage;
 
 namespace Marble
 {
+class GeoDataCoordinates;
 
 namespace {
     unsigned int const invalidElevationData = 32768;

@@ -44,6 +44,7 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
 #include "GeoDataStyleMap.h"
+#include "GeoDataLineStyle.h"
 #include "GeoDataPolyStyle.h"
 #include "GeoDataTypes.h"
 

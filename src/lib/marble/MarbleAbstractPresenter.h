@@ -15,7 +15,6 @@
 
 #include <QList>
 
-#include "GeoDataLookAt.h"
 #include "GeoDataLatLonBox.h"
 #include "MarblePhysics.h"
 #include <marble_export.h>
@@ -24,6 +23,7 @@ namespace Marble
 {
 
 class GeoDataPlacemark;
+class GeoDataLookAt;
 class MarbleMap;
 class MarbleModel;
 class ViewportParams;

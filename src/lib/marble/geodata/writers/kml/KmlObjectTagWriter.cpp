@@ -10,6 +10,8 @@
 
 #include "KmlObjectTagWriter.h"
 
+#include "GeoWriter.h"
+
 namespace Marble {
 
 void KmlObjectTagWriter::writeIdentifiers( GeoWriter &writer, const GeoDataObject *object )

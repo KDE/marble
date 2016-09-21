@@ -12,6 +12,12 @@
 #include "GeoDataStyle.h"
 
 #include "GeoDataTypes.h"
+#include "GeoDataBalloonStyle.h"
+#include "GeoDataIconStyle.h"
+#include "GeoDataLabelStyle.h"
+#include "GeoDataLineStyle.h"
+#include "GeoDataListStyle.h"
+#include "GeoDataPolyStyle.h"
 
 namespace Marble
 {

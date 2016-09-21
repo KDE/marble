@@ -11,7 +11,12 @@
 #include "KmlModelTagWriter.h"
 
 #include "GeoDataModel.h"
+#include "GeoDataAlias.h"
 #include "GeoDataTypes.h"
+#include "GeoDataLocation.h"
+#include "GeoDataOrientation.h"
+#include "GeoDataResourceMap.h"
+#include "GeoDataScale.h"
 #include "GeoWriter.h"
 #include "KmlGroundOverlayWriter.h"
 #include "KmlLinkTagWriter.h"

@@ -13,11 +13,12 @@
 
 #include "SearchRunner.h"
 #include "GeoDataLatLonBox.h"
-#include "GeoDataPolygon.h"
 #include "MarbleDebug.h"
 
 namespace Marble
 {
+
+class GeoDataPolygon;
 
 class OpenLocationCodeSearchRunner : public SearchRunner
 {

@@ -33,7 +33,6 @@
 #include <QString>
 
 #include "MarbleGlobal.h"
-#include "GeoDataCoordinates.h"
 
 class QItemSelectionModel;
 class QAbstractItemModel;
@@ -54,8 +53,6 @@ class SunLocator;
 class TileCreator;
 class PluginManager;
 class GeoDataCoordinates;
-class GeoDataDocument;
-class GeoDataStyle;
 class GeoDataTreeModel;
 class GeoSceneDocument;
 class Planet;

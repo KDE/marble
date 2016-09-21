@@ -12,6 +12,8 @@
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataPolygon.h"
+#include "GeoDataLinearRing.h"
+#include "GeoDataPoint.h"
 #include "MarbleDebug.h"
 #include "StyleBuilder.h"
 #include "osm/OsmPlacemarkData.h"

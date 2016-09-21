@@ -11,7 +11,7 @@
 #ifndef MARBLE_ALTERNATIVEROUTESMODEL_H
 #define MARBLE_ALTERNATIVEROUTESMODEL_H
 
-#include "GeoDataLineString.h"
+#include "marble_export.h"
 
 #include <QAbstractListModel>
 
@@ -26,6 +26,7 @@ namespace Marble
 
 class RouteRequest;
 class GeoDataDocument;
+class GeoDataLineString;
 
 class MARBLE_EXPORT AlternativeRoutesModel : public QAbstractListModel
 {

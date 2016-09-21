@@ -12,6 +12,8 @@
 
 #include "PositionProviderPlugin.h"
 
+#include "GeoDataAccuracy.h"
+#include "GeoDataCoordinates.h"
 #include <QDateTime>
 
 class QUdpSocket;

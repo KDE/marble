@@ -13,9 +13,13 @@
 
 #include "GeoDataFeature_p.h"
 
+#include "GeoDataPoint.h"
+#include "GeoDataLinearRing.h"
+#include "GeoDataPolygon.h"
 #include "GeoDataMultiTrack.h"
 #include "GeoDataTrack.h"
 #include "GeoDataTypes.h"
+#include "GeoDataMultiGeometry.h"
 #include "osm/OsmPlacemarkData.h"
 
 namespace Marble

@@ -22,13 +22,12 @@
 
 #include "marble_export.h"
 
-#include "GeoDataPlacemark.h"
-
 namespace Marble
 {
 
 class GeoDataCoordinates;
-class GeoDataStyle;
+class GeoDataPlacemark;
+
 /**
  * This class represents a model of all place marks which
  * are currently available through a given PlacemarkManager.

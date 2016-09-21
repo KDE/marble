@@ -17,6 +17,7 @@
 #include "GeoDataParser.h"
 #include "GeoDataFolder.h"
 #include "GeoDataDocument.h"
+#include "GeoDataLookAt.h"
 #include "CloudSyncManager.h"
 #include "GeoDataCoordinates.h"
 #include "OwncloudSyncBackend.h"

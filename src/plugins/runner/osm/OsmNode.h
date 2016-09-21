@@ -12,13 +12,14 @@
 #define MARBLE_OSMNODE
 
 #include <osm/OsmPlacemarkData.h>
-#include <GeoDataDocument.h>
 
 #include <QString>
 
 class QXmlStreamAttributes;
 
 namespace Marble {
+
+class GeoDataDocument;
 
 class OsmNode {
 public:

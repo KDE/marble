@@ -13,6 +13,7 @@
 #include "Planet.h"
 #include "MarbleModel.h"
 #include "MarbleQuickItem.h"
+#include "routing/Route.h"
 #include "routing/RoutingManager.h"
 #include "routing/RoutingModel.h"
 #include "PositionTracking.h"
@@ -20,6 +21,7 @@
 #include "AutoNavigation.h"
 #include "routing/VoiceNavigationModel.h"
 #include "ViewportParams.h"
+#include "GeoDataAccuracy.h"
 
 namespace Marble {
 

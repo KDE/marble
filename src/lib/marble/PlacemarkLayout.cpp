@@ -21,8 +21,11 @@
 #include <QItemSelectionModel>
 #include <qmath.h>
 
+#include "GeoDataLatLonAltBox.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
+#include "GeoDataIconStyle.h"
+#include "GeoDataLabelStyle.h"
 #include "GeoDataTypes.h"
 #include "OsmPlacemarkData.h"
 

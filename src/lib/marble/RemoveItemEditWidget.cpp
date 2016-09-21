@@ -18,6 +18,8 @@
 #include "geodata/data/GeoDataAnimatedUpdate.h"
 #include "geodata/data/GeoDataFeature.h"
 #include "GeoDataTypes.h"
+#include "GeoDataUpdate.h"
+#include "GeoDataDelete.h"
 #include "MarblePlacemarkModel.h"
 
 namespace Marble {

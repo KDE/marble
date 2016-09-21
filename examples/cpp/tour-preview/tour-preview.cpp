@@ -33,6 +33,7 @@
 
 #include <QApplication>
 #include <QThread>
+#include <QDebug>
 
 #include <cstdio>
 

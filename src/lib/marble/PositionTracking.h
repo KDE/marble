@@ -22,7 +22,6 @@ namespace Marble
 {
 
 class GeoDataAccuracy;
-class GeoDataDocument;
 class GeoDataCoordinates;
 class GeoDataTreeModel;
 class PositionProviderPlugin;

@@ -12,13 +12,13 @@
 #define MARBLE_GEOLINESTRINGGRAPHICSITEM_H
 
 #include "GeoGraphicsItem.h"
+#include "MarbleGlobal.h"
 #include "marble_export.h"
 
 namespace Marble
 {
 
 class GeoDataLineString;
-class GeoDataLineStyle;
 
 class MARBLE_EXPORT GeoLineStringGraphicsItem : public GeoGraphicsItem
 {

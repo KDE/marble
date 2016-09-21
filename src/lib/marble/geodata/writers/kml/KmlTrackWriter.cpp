@@ -10,6 +10,7 @@
 
 #include "KmlTrackWriter.h"
 
+#include "GeoDataCoordinates.h"
 #include "GeoDataTrack.h"
 #include "GeoDataTypes.h"
 #include "GeoWriter.h"

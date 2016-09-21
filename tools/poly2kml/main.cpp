@@ -16,6 +16,7 @@
 #include <QDebug>
 
 #include "geodata/data/GeoDataLineString.h"
+#include "geodata/data/GeoDataLinearRing.h"
 #include "geodata/data/GeoDataDocument.h"
 #include "geodata/data/GeoDataFolder.h"
 #include "geodata/data/GeoDataPlacemark.h"

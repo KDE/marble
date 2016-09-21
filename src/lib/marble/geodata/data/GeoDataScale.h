@@ -12,7 +12,7 @@
 #ifndef GEODATASCALE_H
 #define GEODATASCALE_H
 
-#include "GeoDataGeometry.h"
+#include "GeoDataObject.h"
 #include "MarbleGlobal.h"
 
 namespace Marble {

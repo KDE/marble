@@ -15,10 +15,12 @@
 #include <QPixmap>
 
 #include "GeoAprsCoordinates.h"
-#include "GeoPainter.h"
 
 namespace Marble
 {
+
+class ViewportParams;
+class GeoPainter;
 
     class AprsObject
     {

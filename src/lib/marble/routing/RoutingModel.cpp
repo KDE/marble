@@ -17,6 +17,7 @@
 #include "PositionTracking.h"
 #include "MarbleModel.h"
 #include "MarbleGlobal.h"
+#include "GeoDataAccuracy.h"
 
 #include <QPixmap>
 

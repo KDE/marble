@@ -11,11 +11,12 @@
 #ifndef MARBLE_AUDIOOUTPUT_H
 #define MARBLE_AUDIOOUTPUT_H
 
-#include "routing/Route.h"
+#include <QObject>
 
 namespace Marble
 {
 
+class Route;
 class AudioOutputPrivate;
 
 /**

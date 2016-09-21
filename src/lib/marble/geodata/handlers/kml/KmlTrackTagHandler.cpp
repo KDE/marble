@@ -13,6 +13,7 @@
 #include "GeoDataMultiTrack.h"
 #include "GeoDataTrack.h"
 #include "GeoDataPlacemark.h"
+#include "GeoDataMultiGeometry.h"
 #include "KmlElementDictionary.h"
 #include "MarbleDebug.h"
 

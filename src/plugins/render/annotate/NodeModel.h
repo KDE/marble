@@ -11,12 +11,11 @@
 #ifndef NODEMODEL_H
 #define NODEMODEL_H
 
+#include "GeoDataCoordinates.h"
 #include <QAbstractListModel>
 
 namespace Marble
 {
-
-class GeoDataCoordinates;
 
 class NodeModel : public QAbstractListModel
 {

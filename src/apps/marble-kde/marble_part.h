@@ -17,7 +17,6 @@
 #include <kparts/readonlypart.h>
 #include <QHash>
 #include "MarbleGlobal.h"
-#include "cloudsync/CloudSyncManager.h"
 #include <krecentfilesaction.h>
 #include <QDomNode>
 
@@ -43,7 +42,6 @@ namespace Marble
 class MovieCaptureDialog;
 class ControlView;
 class DownloadRegionDialog;
-class RoutingProfilesWidget;
 class SunControlWidget;
 class TimeControlWidget;
 class GeoDataFolder;

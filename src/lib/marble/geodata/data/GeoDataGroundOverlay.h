@@ -15,11 +15,11 @@
 #include "GeoDataOverlay.h"
 #include "MarbleGlobal.h"
 #include "GeoDataLatLonBox.h"
-#include "GeoDataLatLonQuad.h"
 
 namespace Marble {
 
 class GeoDataGroundOverlayPrivate;
+class GeoDataLatLonQuad;
 
 class MARBLE_EXPORT GeoDataGroundOverlay: public GeoDataOverlay
 {

@@ -13,10 +13,14 @@
 
 // Marble
 #include "GeoDataPlacemark.h"
+#include "GeoDataGroundOverlay.h"
 #include "GeoDataTypes.h"
+#include "GeoDataLinearRing.h"
+#include "GeoDataPolygon.h"
 #include "GeoPainter.h"
 #include "ViewportParams.h"
 #include "SceneGraphicsTypes.h"
+#include "TextureLayer.h"
 #include "MarbleDirs.h"
 
 // Qt

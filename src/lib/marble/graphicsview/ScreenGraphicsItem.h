@@ -21,8 +21,6 @@
 namespace Marble
 {
 
-class ViewportParams;
-
 class ScreenGraphicsItemPrivate;
 
 class MARBLE_EXPORT ScreenGraphicsItem : public MarbleGraphicsItem

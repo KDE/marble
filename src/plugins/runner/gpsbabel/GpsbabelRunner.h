@@ -15,9 +15,6 @@
 namespace Marble
 {
 
-class MarbleModel;
-class ParsingRunnerManager;
-
 class GpsbabelRunner : public ParsingRunner
 {
     Q_OBJECT

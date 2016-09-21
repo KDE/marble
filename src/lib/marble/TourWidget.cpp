@@ -17,7 +17,10 @@
 #include "TourItemDelegate.h"
 
 #include "ui_TourWidget.h"
+#include "GeoDataPlacemark.h"
 #include "GeoDataDocument.h"
+#include "GeoDataLookAt.h"
+#include "GeoDataPlaylist.h"
 #include "GeoDataTour.h"
 #include "GeoDataTreeModel.h"
 #include "GeoDataTypes.h"
@@ -26,6 +29,10 @@
 #include "GeoDataCamera.h"
 #include "GeoDataTourControl.h"
 #include "GeoDataSoundCue.h"
+#include "GeoDataCreate.h"
+#include "GeoDataUpdate.h"
+#include "GeoDataDelete.h"
+#include "GeoDataChange.h"
 #include "GeoDataAnimatedUpdate.h"
 #include "GeoDataDocumentWriter.h"
 #include "KmlElementDictionary.h"
@@ -41,6 +48,7 @@
 #include "EditPlacemarkDialog.h"
 #include "MarbleDirs.h"
 #include "GeoDataStyle.h"
+#include "GeoDataIconStyle.h"
 
 #include <QFileDialog>
 #include <QDir>

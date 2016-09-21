@@ -15,13 +15,14 @@
 #include "OsmWay.h"
 #include <osm/OsmPlacemarkData.h>
 #include <GeoDataLinearRing.h>
-#include <GeoDataDocument.h>
 
 #include <QString>
 #include <QXmlStreamAttributes>
 #include <QSet>
 
 namespace Marble {
+
+class GeoDataDocument;
 
 class OsmRelation
 {

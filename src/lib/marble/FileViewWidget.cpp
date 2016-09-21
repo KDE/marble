@@ -18,6 +18,7 @@
 #include <QPointer>
 
 // Marble
+#include "GeoDataLatLonAltBox.h"
 #include "GeoDataContainer.h"
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"

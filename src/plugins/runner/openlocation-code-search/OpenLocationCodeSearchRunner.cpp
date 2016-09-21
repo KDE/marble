@@ -11,6 +11,8 @@
 //self
 #include "OpenLocationCodeSearchRunner.h"
 #include "GeoDataPlacemark.h"
+#include "GeoDataLinearRing.h"
+#include "GeoDataPolygon.h"
 #include "GeoDataStyle.h"
 #include "GeoDataLineStyle.h"
 #include "GeoDataPolyStyle.h"

@@ -19,6 +19,7 @@
 #include "MarbleModel.h"
 #include "MarbleDebug.h"
 #include "RenderPluginModel.h"
+#include "RenderState.h"
 
 // Qt
 #include <QAction>

@@ -10,6 +10,8 @@
 
 #include "SoundTrack.h"
 
+#include "PlaybackSoundCueItem.h"
+
 namespace Marble
 {
 

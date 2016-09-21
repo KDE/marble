@@ -13,8 +13,6 @@
 
 #include "GeoTagWriter.h"
 
-#include <GeoDataCoordinates.h>
-
 namespace Marble
 {
 /**

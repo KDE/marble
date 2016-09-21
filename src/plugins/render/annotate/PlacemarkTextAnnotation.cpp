@@ -22,6 +22,8 @@
 #include "AbstractProjection.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
+#include "GeoDataIconStyle.h"
+#include "GeoDataLabelStyle.h"
 #include "GeoPainter.h"
 #include "ViewportParams.h"
 #include "MarbleDirs.h"

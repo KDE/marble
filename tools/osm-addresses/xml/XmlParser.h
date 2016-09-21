@@ -18,9 +18,6 @@
 #include "OsmPlacemark.h"
 #include "OsmRegionTree.h"
 
-#include "GeoDataLineString.h"
-#include "GeoDataPolygon.h"
-
 #include <QFileInfo>
 #include <QXmlDefaultHandler>
 

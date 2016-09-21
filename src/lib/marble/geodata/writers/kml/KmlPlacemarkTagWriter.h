@@ -11,7 +11,6 @@
 #ifndef MARBLE_KMLPLACEMARKTAGWRITER_H
 #define MARBLE_KMLPLACEMARKTAGWRITER_H
 
-#include "GeoTagWriter.h"
 #include "KmlFeatureTagWriter.h"
 
 namespace Marble

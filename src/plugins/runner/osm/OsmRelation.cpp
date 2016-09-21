@@ -11,6 +11,8 @@
 #include <OsmRelation.h>
 #include <MarbleDebug.h>
 #include <GeoDataPlacemark.h>
+#include <GeoDataDocument.h>
+#include <GeoDataPolygon.h>
 #include <StyleBuilder.h>
 #include <osm/OsmObjectManager.h>
 

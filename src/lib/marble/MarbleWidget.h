@@ -23,10 +23,8 @@
 #include <QWidget>
 
 #include "GeoDataCoordinates.h"
-#include "GeoDataLookAt.h"
 #include "MarbleGlobal.h"             // types needed in all of marble.
 #include "marble_export.h"
-#include "RenderState.h"
 
 // Qt
 class QSettings;
@@ -41,6 +39,7 @@ class GeoDataLatLonAltBox;
 class GeoDataLatLonBox;
 class GeoDataFeature;
 class GeoDataPlacemark;
+class GeoDataLookAt;
 class GeoPainter;
 class GeoSceneDocument;
 class LayerInterface;
@@ -49,6 +48,7 @@ class MarbleWidgetPopupMenu;
 class MarbleWidgetInputHandler;
 class MarbleWidgetPrivate;
 class RenderPlugin;
+class RenderState;
 class RoutingLayer;
 class TextureLayer;
 class TileCoordsPyramid;

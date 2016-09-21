@@ -12,7 +12,6 @@
 #define MARBLE_NODEREDUCER_H
 
 #include "BaseFilter.h"
-#include "GeoDataLineString.h"
 #include "MarbleMath.h"
 
 namespace Marble {

@@ -18,7 +18,9 @@
 #include "routing/instructions/InstructionTransformation.h"
 #include "GeoDataDocument.h"
 #include "GeoDataExtendedData.h"
+#include "GeoDataData.h"
 #include "GeoDataPlacemark.h"
+#include "GeoDataLineString.h"
 
 #include <QProcess>
 #include <QMap>

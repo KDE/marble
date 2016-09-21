@@ -21,12 +21,14 @@
 #include "GeoDataParser.h"
 #include "GeoDataFolder.h"
 #include "RoutingManager.h"
+#include "RouteItem.h"
 #include "GeoDataDocument.h"
 #include "CloudRouteModel.h"
 #include "GeoDataPlacemark.h"
 #include "CloudSyncManager.h"
 #include "GeoDataTypes.h"
 #include "GeoDataExtendedData.h"
+#include "GeoDataData.h"
 
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>

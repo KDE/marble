@@ -24,7 +24,6 @@ namespace Marble {
 
 class GeoDataTrack;
 class MarbleClock;
-class GeoDataPlacemark;
 
 /**
  * An instance of SatellitesMSCItem represents an item of a Marble

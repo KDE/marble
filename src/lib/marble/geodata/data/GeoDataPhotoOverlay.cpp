@@ -11,6 +11,9 @@
 
 #include "GeoDataPhotoOverlay.h"
 #include "GeoDataTypes.h"
+#include "GeoDataPoint.h"
+#include "GeoDataImagePyramid.h"
+#include "GeoDataViewVolume.h"
 
 namespace Marble {
 

@@ -23,11 +23,11 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 #include <QImage>
 
 #include "Tile.h"
-#include "TileId.h"
 
 namespace Marble
 {
 class Blending;
+class TileId;
 
 /*!
     \class TextureTile

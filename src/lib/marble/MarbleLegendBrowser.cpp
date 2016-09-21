@@ -14,6 +14,7 @@
 
 #include "MarbleLegendBrowser.h"
 
+#include <QCoreApplication>
 #include <QUrl>
 #include <QDesktopServices>
 #include <QEvent>

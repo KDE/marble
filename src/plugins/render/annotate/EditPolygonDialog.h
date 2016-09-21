@@ -15,10 +15,14 @@
 #include <QColor>
 
 #include "MarbleGlobal.h"
-#include "GeoDataPlacemark.h"
 
 
 namespace Marble {
+
+class GeoDataPlacemark;
+class GeoDataCoordinates;
+class GeoDataFeature;
+class OsmPlacemarkData;
 
 /**
  * @brief As it name says by itself, this class is used to show a couple of

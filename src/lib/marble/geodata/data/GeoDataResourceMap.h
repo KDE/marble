@@ -11,12 +11,12 @@
 #ifndef GEODATARESOURCEMAP_H
 #define GEODATARESOURCEMAP_H
 
-#include "GeoDataAlias.h"
-#include "GeoDataObject.h"
+#include "GeoDataDocument.h"
 #include "MarbleGlobal.h"
 
 namespace Marble {
 
+class GeoDataAlias;
 class GeoDataResourceMapPrivate;
 
 class MARBLE_EXPORT GeoDataResourceMap: public GeoNode

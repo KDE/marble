@@ -14,6 +14,8 @@
 #include "GeoDataCamera.h"
 #include "GeoDataLookAt.h"
 #include "GeoDataTypes.h"
+#include "GeoDataTimeSpan.h"
+#include "GeoDataTimeStamp.h"
 
 namespace Marble {
 

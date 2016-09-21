@@ -11,7 +11,6 @@
 #ifndef MARBLE_GEODATATRACK_H
 #define MARBLE_GEODATATRACK_H
 
-#include "GeoDataCoordinates.h"
 #include "GeoDataGeometry.h"
 
 #include <QList>
@@ -23,6 +22,7 @@ namespace Marble {
 class GeoDataTrackPrivate;
 class GeoDataExtendedData;
 class GeoDataLineString;
+class GeoDataCoordinates;
 
 /**
  * @class GeoDataTrack

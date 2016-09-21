@@ -30,8 +30,6 @@
 
 namespace Marble {
 
-#include "GeoDataPoint.h"
-
 SatellitesTLEItem::SatellitesTLEItem( const QString &name,
                                       elsetrec satrec,
                                       const MarbleClock *clock )

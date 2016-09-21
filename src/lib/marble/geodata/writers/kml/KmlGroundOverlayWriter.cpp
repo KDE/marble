@@ -11,6 +11,7 @@
 
 #include "KmlGroundOverlayWriter.h"
 
+#include "GeoDataLatLonQuad.h"
 #include "GeoDataGroundOverlay.h"
 #include "GeoDataTypes.h"
 #include "GeoWriter.h"

@@ -20,13 +20,11 @@
 
 #include "geodata_export.h"
 #include "GeoDataGeometry.h"
-#include "GeoDataCoordinates.h"
-#include "GeoDataLatLonAltBox.h"
 
 
 namespace Marble
 {
-
+class GeoDataCoordinates;
 class GeoDataLineStringPrivate;
 
 /*!

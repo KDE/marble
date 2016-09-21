@@ -18,21 +18,19 @@
 #include <QObject>
 
 #include "MarbleGlobal.h"
-#include "MarbleModel.h"
-#include "GeoDataDocument.h"
-#include "GeoDataLatLonAltBox.h"
-#include "TileId.h"
 
 namespace Marble
 {
 
 class GeoPainter;
+class GeoDataDocument;
 class GeoSceneGroup;
 class GeoSceneVectorTileDataset;
+class GeoDataTreeModel;
+class PluginManager;
 class HttpDownloadManager;
-class SunLocator;
-class TileLoader;
 class ViewportParams;
+class TileId;
 
 class VectorTileLayer : public QObject, public LayerInterface
 {

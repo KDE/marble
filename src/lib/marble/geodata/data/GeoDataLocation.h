@@ -12,7 +12,7 @@
 #ifndef GEODATALOCATION_H
 #define GEODATALOCATION_H
 
-#include "GeoDataGeometry.h"
+#include "GeoDataObject.h"
 #include "GeoDataCoordinates.h"
 #include "MarbleGlobal.h"
 

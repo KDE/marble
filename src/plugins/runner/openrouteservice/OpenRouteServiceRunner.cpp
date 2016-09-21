@@ -15,6 +15,7 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataData.h"
 #include "GeoDataExtendedData.h"
+#include "GeoDataLineString.h"
 #include "routing/RouteRequest.h"
 
 #include <QString>

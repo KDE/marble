@@ -24,7 +24,6 @@ namespace Marble
 {
 
 class BBCStation;
-class MarbleModel;
 
 class BBCItemGetter : public AbstractWorkerThread
 {

@@ -16,7 +16,6 @@
 
 
 #include "GeoDataObject.h"
-#include "Serializable.h"
 #include "MarbleGlobal.h"
 
 #include "geodata_export.h"
@@ -26,12 +25,9 @@ namespace Marble
 
 class GeoDataGeometryPrivate;
 
-class GeoDataPoint;
-class GeoDataPolygon;
 class GeoDataLatLonAltBox;
 class GeoDataLineString; // LinearRing is the same!
 class GeoDataMultiGeometry;
-class GeoDataOrientation;
 
 /**
  * @short A base class for all geodata features

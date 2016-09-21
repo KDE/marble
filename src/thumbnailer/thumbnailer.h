@@ -27,8 +27,9 @@
 #include <QEventLoop>
 #include <QTimer>
 
-namespace Marble {
-class MarbleMap;
+namespace Marble
+{
+
 class GeoDataObject;
 
 

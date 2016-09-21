@@ -41,6 +41,7 @@
 #include "MarbleDBusInterface.h"
 #endif
 
+#include "GeoDataLatLonAltBox.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
 #include "GeoUriParser.h"

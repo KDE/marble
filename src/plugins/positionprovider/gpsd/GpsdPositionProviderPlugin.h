@@ -12,6 +12,8 @@
 #define GPSDPOSITIONPROVIDERPLUGIN_H
 
 #include "PositionProviderPlugin.h"
+#include "GeoDataCoordinates.h"
+#include "GeoDataAccuracy.h"
 
 #include <QDateTime>
 

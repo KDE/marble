@@ -12,7 +12,6 @@
 #define MARBLE_WAYCHUNK_H
 
 #include "GeoDataFeature.h"
-#include "GeoDataLineString.h"
 
 #include <QList>
 

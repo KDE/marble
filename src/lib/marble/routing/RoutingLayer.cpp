@@ -23,6 +23,7 @@
 #include "AlternativeRoutesModel.h"
 #include "RoutingManager.h"
 #include "Maneuver.h"
+#include "RenderState.h"
 
 #include <QAbstractItemModel>
 #include <QIcon>

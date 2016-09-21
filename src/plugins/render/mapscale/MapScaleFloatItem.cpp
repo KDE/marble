@@ -27,6 +27,7 @@
 #include "MarbleLocale.h"
 #include "MarbleModel.h"
 #include "ViewportParams.h"
+#include "GeoDataLatLonAltBox.h"
 
 namespace Marble
 {

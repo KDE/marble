@@ -11,9 +11,6 @@
 #ifndef OWNCLOUDSYNCBACKEND_H
 #define OWNCLOUDSYNCBACKEND_H
 
-#include "CloudRouteModel.h"
-#include "GeoDataDocument.h"
-
 #include <QObject>
 #include <QVector>
 #include <QNetworkReply>
@@ -24,6 +21,7 @@ class QDir;
 namespace Marble {
 
 class CloudSyncManager;
+class RouteItem;
 
 class OwncloudSyncBackend : public QObject
 {

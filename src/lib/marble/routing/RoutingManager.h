@@ -12,7 +12,6 @@
 #define MARBLE_ROUTINGMANAGER_H
 
 #include "marble_export.h"
-#include "GeoDataCoordinates.h"
 #include "RoutingProfile.h"
 
 namespace Marble
@@ -23,7 +22,6 @@ class RoutingModel;
 class RouteRequest;
 class MarbleModel;
 class GeoDataDocument;
-class GeoDataFolder;
 class AlternativeRoutesModel;
 class RoutingProfilesModel;
 

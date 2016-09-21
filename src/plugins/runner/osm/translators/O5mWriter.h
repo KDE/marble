@@ -11,15 +11,14 @@
 #ifndef MARBLE_O5MWRITER_H
 #define MARBLE_O5MWRITER_H
 
-#include "osm/OsmPlacemarkData.h"
 #include "OsmConverter.h"
 #include "GeoWriterBackend.h"
 
 namespace Marble
 {
 
-class GeoDataPlacemark;
 class GeoDataLineString;
+class OsmPlacemarkData;
 
 class O5mWriter: public GeoWriterBackend
 {

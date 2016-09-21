@@ -9,6 +9,10 @@
 //
 
 #include "GeoDataUpdate.h"
+
+#include "GeoDataCreate.h"
+#include "GeoDataDelete.h"
+#include "GeoDataChange.h"
 #include "GeoDataTypes.h"
 
 #include <QString>

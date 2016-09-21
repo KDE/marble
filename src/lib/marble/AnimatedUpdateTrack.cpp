@@ -10,6 +10,8 @@
 
 #include "AnimatedUpdateTrack.h"
 
+#include "PlaybackAnimatedUpdateItem.h"
+
 namespace Marble
 {
 

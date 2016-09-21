@@ -14,6 +14,8 @@
 
 #include "GeoDataCamera.h"
 #include "GeoDataTypes.h"
+#include "GeoDataTimeSpan.h"
+#include "GeoDataTimeStamp.h"
 #include "GeoWriter.h"
 #include "KmlGroundOverlayWriter.h"
 #include "KmlElementDictionary.h"

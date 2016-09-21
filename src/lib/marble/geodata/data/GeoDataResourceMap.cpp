@@ -9,6 +9,8 @@
 //
 
 #include "GeoDataResourceMap.h"
+
+#include "GeoDataAlias.h"
 #include "GeoDataTypes.h"
 
 namespace Marble {

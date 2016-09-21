@@ -15,6 +15,7 @@
 #include <GeoDataFolder.h>
 #include <MarbleDebug.h>
 #include <GeoDataNetworkLink.h>
+#include <GeoDataLink.h>
 
 using namespace Marble;
 

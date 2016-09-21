@@ -17,8 +17,13 @@
 #include <QMessageBox>
 
 // Marble
+#include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
+#include "GeoDataLineStyle.h"
+#include "GeoDataPolyStyle.h"
 #include "GeoDataTypes.h"
+#include "GeoDataLinearRing.h"
+#include "GeoDataPolygon.h"
 #include "NodeModel.h"
 #include "NodeItemDelegate.h"
 #include "FormattedTextWidget.h"

@@ -12,12 +12,12 @@
 #define MARBLE_OSMTAGTAGWRITER_H
 
 // Marble
-#include "GeoTagWriter.h"
 
 namespace Marble
 {
 
 class OsmPlacemarkData;
+class GeoWriter;
 
 class OsmTagTagWriter
 {

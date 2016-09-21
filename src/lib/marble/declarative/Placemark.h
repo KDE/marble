@@ -11,10 +11,7 @@
 #ifndef MARBLE_DECLARATIVE_PLACEMARK_H
 #define MARBLE_DECLARATIVE_PLACEMARK_H
 
-#include "Coordinate.h"
-
 #include "GeoDataPlacemark.h"
-#include "GeoDataFeature.h"
 
 #include <QObject>
 #include <QtQml>

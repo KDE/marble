@@ -16,6 +16,8 @@
 #include "GeoDataExtendedData.h"
 #include "GeoDataFeature.h"
 #include "GeoDataTypes.h"
+#include "GeoDataLinearRing.h"
+#include "GeoDataPolygon.h"
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"
 #include "osm/OsmPlacemarkData.h"

@@ -18,6 +18,7 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataTreeModel.h"
 #include "GeoDataDocumentWriter.h"
+#include "GeoDataIconStyle.h"
 #include "KmlElementDictionary.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"

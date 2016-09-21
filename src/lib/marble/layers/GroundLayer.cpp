@@ -12,6 +12,7 @@
 
 #include "GeoPainter.h"
 #include "ViewportParams.h"
+#include "RenderState.h"
 
 namespace Marble
 {

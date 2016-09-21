@@ -12,13 +12,14 @@
 #define PLAYBACKFLYTOITEM_H
 
 #include "PlaybackItem.h"
-#include "GeoDataFlyTo.h"
-#include "GeoDataCoordinates.h"
 
 #include <QDateTime>
 
 namespace Marble
 {
+class GeoDataCoordinates;
+class GeoDataFlyTo;
+
 class PlaybackFlyToItem : public PlaybackItem
 {
     Q_OBJECT

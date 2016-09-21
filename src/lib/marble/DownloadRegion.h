@@ -14,7 +14,6 @@
 #include <QObject>
 #include <QVector>
 
-#include "TileCoordsPyramid.h"
 #include "marble_export.h"
 
 namespace Marble
@@ -22,8 +21,8 @@ namespace Marble
 class DownloadRegionPrivate;
 class GeoDataLatLonAltBox;
 class GeoDataLineString;
+class TileCoordsPyramid;
 class MarbleModel;
-class ViewportParams;
 class TextureLayer;
 
 class MARBLE_EXPORT DownloadRegion : public QObject

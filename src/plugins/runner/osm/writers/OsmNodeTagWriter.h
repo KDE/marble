@@ -17,10 +17,7 @@
 
 namespace Marble
 {
-class GeoDataLineString;
-class GeoDataCoordinates;
 class GeoWriter;
-class OsmPlacemarkData;
 class OsmWayData;
 
 class OsmNodeTagWriter

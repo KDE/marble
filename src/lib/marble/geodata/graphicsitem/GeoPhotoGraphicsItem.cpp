@@ -12,6 +12,7 @@
 
 #include "GeoPainter.h"
 #include "GeoDataStyle.h"
+#include "GeoDataIconStyle.h"
 #include "GeoDataFeature.h"
 #include "StyleBuilder.h"
 #include "ViewportParams.h"

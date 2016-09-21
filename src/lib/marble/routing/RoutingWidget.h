@@ -11,8 +11,6 @@
 #ifndef MARBLE_ROUTINGWIDGET_H
 #define MARBLE_ROUTINGWIDGET_H
 
-#include "GeoDataCoordinates.h"
-#include "GeoDataLineString.h"
 #include "RoutingManager.h"
 #include "marble_export.h"
 
@@ -27,6 +25,7 @@ class MarbleWidget;
 class RoutingInputWidget;
 class RoutingWidgetPrivate;
 class RouteSyncManager;
+class GeoDataCoordinates;
 
 /**
   * A widget consisting of input fields for places / routing destinations,

@@ -14,6 +14,8 @@
 
 #include "GeoDataLookAt.h"
 #include "GeoDataTypes.h"
+#include "GeoDataTimeSpan.h"
+#include "GeoDataTimeStamp.h"
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"
 #include "KmlGroundOverlayWriter.h"

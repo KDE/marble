@@ -12,6 +12,7 @@
 
 #include "GeoDataTour.h"
 #include "GeoDataTypes.h"
+#include "GeoDataPlaylist.h"
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"
 

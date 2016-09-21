@@ -19,6 +19,7 @@
 #include "MarbleDebug.h"
 
 #include "GeoDataCoordinates.h"
+#include "GeoDataLatLonAltBox.h"
 #include "GeoDataLineString.h"
 #include "GeoDataLinearRing.h"
 #include "GeoDataPoint.h"

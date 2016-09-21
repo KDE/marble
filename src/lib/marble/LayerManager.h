@@ -12,8 +12,6 @@
 #ifndef MARBLE_LAYERMANAGER_H
 #define MARBLE_LAYERMANAGER_H
 
-#include "RenderState.h"
-
 // Qt
 #include <QList>
 #include <QObject>
@@ -30,6 +28,7 @@ class AbstractDataPluginItem;
 class GeoPainter;
 class ViewportParams;
 class RenderPlugin;
+class RenderState;
 class LayerInterface;
 
 /**

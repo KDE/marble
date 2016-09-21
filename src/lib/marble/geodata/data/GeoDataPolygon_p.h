@@ -14,6 +14,7 @@
 #include "GeoDataGeometry_p.h"
 
 #include "GeoDataTypes.h"
+#include "GeoDataLinearRing.h"
 
 namespace Marble
 {

@@ -14,7 +14,6 @@
 
 // Marble
 #include "GeoDataCoordinates.h"
-#include "GeoDataTypes.h"
 
 // Qt
 #include <QAtomicInt>

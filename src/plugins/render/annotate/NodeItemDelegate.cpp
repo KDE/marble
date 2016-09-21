@@ -17,8 +17,11 @@
 
 // Marble
 #include "LatLonEdit.h"
+#include "GeoDataPlacemark.h"
 #include "GeoDataTypes.h"
 #include "GeoDataLineString.h"
+#include "GeoDataLinearRing.h"
+#include "GeoDataPolygon.h"
 
 namespace  Marble
 {

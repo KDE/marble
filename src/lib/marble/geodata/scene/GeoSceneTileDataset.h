@@ -36,7 +36,6 @@ class QUrl;
 
 namespace Marble
 {
-class Blending;
 class DownloadPolicy;
 class ServerLayout;
 class TileId;

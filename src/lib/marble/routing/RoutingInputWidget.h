@@ -11,8 +11,6 @@
 #ifndef MARBLE_ROUTINGINPUTWIDGET_H
 #define MARBLE_ROUTINGINPUTWIDGET_H
 
-#include "GeoDataCoordinates.h"
-#include "GeoDataPlacemark.h"
 #include "PositionProviderPluginInterface.h"
 
 #include <QWidget>
@@ -23,6 +21,8 @@ namespace Marble
 {
 
 class RoutingInputWidgetPrivate;
+class GeoDataCoordinates;
+class GeoDataPlacemark;
 class MarbleModel;
 class MarblePlacemarkModel;
 

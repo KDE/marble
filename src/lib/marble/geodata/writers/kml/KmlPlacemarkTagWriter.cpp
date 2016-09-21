@@ -15,6 +15,7 @@
 #include "GeoDataExtendedData.h"
 #include "GeoDataTimeStamp.h"
 #include "GeoDataTypes.h"
+#include "GeoDataPolygon.h"
 #include "GeoWriter.h"
 #include "GeoDataStyle.h"
 

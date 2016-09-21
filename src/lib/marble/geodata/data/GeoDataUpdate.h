@@ -12,14 +12,14 @@
 #define GEODATAUPDATE_H
 
 #include "GeoDataObject.h"
-#include "GeoDataCreate.h"
-#include "GeoDataDelete.h"
-#include "GeoDataChange.h"
 #include "marble_export.h"
 
 namespace Marble
 {
 
+class GeoDataChange;
+class GeoDataCreate;
+class GeoDataDelete;
 class GeoDataUpdatePrivate;
 
 class MARBLE_EXPORT GeoDataUpdate : public GeoDataObject

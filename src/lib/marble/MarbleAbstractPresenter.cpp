@@ -20,7 +20,10 @@
 #include "MarbleMap.h"
 #include "MarbleModel.h"
 #include <Planet.h>
+#include "GeoDataGeometry.h"
+#include "GeoDataLatLonAltBox.h"
 #include <GeoDataPlacemark.h>
+#include <GeoDataLookAt.h>
 #include <MarbleClock.h>
 #include <MarbleDebug.h>
 

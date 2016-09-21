@@ -14,6 +14,10 @@
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataTypes.h"
+#include "GeoDataCreate.h"
+#include "GeoDataUpdate.h"
+#include "GeoDataDelete.h"
+#include "GeoDataChange.h"
 
 #include <QString>
 

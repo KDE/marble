@@ -11,7 +11,6 @@
 #ifndef MARBLE_STYLEBUILDER_H
 #define MARBLE_STYLEBUILDER_H
 
-#include <GeoDataStyle.h>
 #include "marble_export.h"
 
 #include <GeoDataFeature.h>

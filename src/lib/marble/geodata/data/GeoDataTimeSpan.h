@@ -11,15 +11,14 @@
 #ifndef MARBLE_GEODATATIMESPAN_H
 #define MARBLE_GEODATATIMESPAN_H
 
-#include "GeoDataObject.h"
 #include "GeoDataTimePrimitive.h"
-#include "GeoDataTimeStamp.h"
 
 #include "geodata_export.h"
 
 namespace Marble
 {
 
+class GeoDataTimeStamp;
 class GeoDataTimeSpanPrivate;
 
 class GEODATA_EXPORT GeoDataTimeSpan : public GeoDataTimePrimitive

@@ -13,6 +13,11 @@
 #include "GeoDataGeometry_p.h"
 
 #include "GeoDataTypes.h"
+#include "GeoDataLink.h"
+#include "GeoDataLocation.h"
+#include "GeoDataOrientation.h"
+#include "GeoDataResourceMap.h"
+#include "GeoDataScale.h"
 
 #include "stdio.h"
 

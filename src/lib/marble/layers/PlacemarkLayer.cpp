@@ -22,6 +22,7 @@
 #include "GeoDataPlacemark.h"
 #include "ViewportParams.h"
 #include "VisiblePlacemark.h"
+#include "RenderState.h"
 
 using namespace Marble;
 

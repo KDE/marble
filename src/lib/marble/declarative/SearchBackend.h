@@ -15,7 +15,6 @@
 #include <QSortFilterProxyModel>
 
 #include "MarbleQuickItem.h"
-#include "SearchRunnerManager.h"
 #include "MarblePlacemarkModel.h"
 #include "Placemark.h"
 
@@ -23,6 +22,7 @@ class QCompleter;
 
 namespace Marble
 {
+class SearchRunnerManager;
 
 class SearchBackend : public QObject
 {

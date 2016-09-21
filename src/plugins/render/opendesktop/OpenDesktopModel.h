@@ -12,11 +12,10 @@
 #define OPENDESKTOPMODEL_H
  
 #include "AbstractDataPluginModel.h"
-#include "GeoDataLatLonAltBox.h"
-#include "MarbleWidget.h"
  
 namespace Marble {
  
+class MarbleWidget;
 class MarbleModel;
  
 class OpenDesktopModel : public AbstractDataPluginModel

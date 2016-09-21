@@ -20,7 +20,6 @@
 namespace Marble
 {
 
-class GeoDataObject;
 class GeoNode;
 class GeoWriter;
 

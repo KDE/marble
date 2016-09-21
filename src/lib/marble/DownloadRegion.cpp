@@ -17,6 +17,7 @@
 #include "TextureLayer.h"
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataLineString.h"
+#include "TileCoordsPyramid.h"
 
 namespace Marble {
 

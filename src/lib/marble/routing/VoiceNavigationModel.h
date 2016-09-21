@@ -12,14 +12,13 @@
 #define MARBLE_VOICENAVIGATIONMODEL_H
 
 #include "marble_export.h"
-#include "Route.h"
-#include "Maneuver.h"
-#include "PositionTracking.h"
 
 #include <QObject>
 
 namespace Marble
 {
+
+class Route;
 
 class VoiceNavigationModelPrivate;
 

@@ -32,9 +32,7 @@ class QRect;
 namespace Marble
 {
 
-class MarbleModel;
 class MarbleAbstractPresenter;
-class MarbleWidgetPopupMenu;
 class AbstractDataPluginItem;
 class RenderPlugin;
 

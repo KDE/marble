@@ -87,6 +87,7 @@
 #include "cloudsync/BookmarkSyncManager.h"
 #include "MovieCaptureDialog.h"
 #include "cloudsync/RouteSyncManager.h"
+#include "cloudsync/CloudSyncManager.h"
 
 // Marble non-library classes
 #include "ControlView.h"

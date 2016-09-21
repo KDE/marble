@@ -16,6 +16,7 @@
 #include "GeoPainter.h"
 #include "MarbleDirs.h"
 #include "ViewportParams.h"
+#include "RenderState.h"
 
 #include <QPixmap>
 

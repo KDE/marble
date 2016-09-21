@@ -12,6 +12,8 @@
 #include "ScreenOverlayGraphicsItem.h"
 
 #include "ViewportParams.h"
+#include "GeoDataScreenOverlay.h"
+#include "GeoPainter.h"
 
 namespace Marble {
 

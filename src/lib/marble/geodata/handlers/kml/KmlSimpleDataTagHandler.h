@@ -12,7 +12,6 @@
 #define MARBLE_KMLSIMPLEDATATAGHANDLER_H
 
 #include "GeoTagHandler.h"
-#include "GeoDataSimpleData.h"
 
 namespace Marble
 {

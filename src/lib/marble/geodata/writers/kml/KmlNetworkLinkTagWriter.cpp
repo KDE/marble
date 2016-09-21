@@ -12,6 +12,7 @@
 
 #include "GeoDataNetworkLink.h"
 #include "GeoDataTypes.h"
+#include "GeoDataLink.h"
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"
 

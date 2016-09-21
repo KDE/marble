@@ -19,7 +19,6 @@
 #include "GeoDataFeature.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataGeometry.h"
-
 #include "GeoDataTypes.h"
 
 // std

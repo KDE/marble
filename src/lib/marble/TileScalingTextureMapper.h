@@ -24,6 +24,8 @@
 namespace Marble
 {
 
+class StackedTileLoader;
+
 class TileScalingTextureMapper : public QObject, public TextureMapperInterface
 {
     Q_OBJECT

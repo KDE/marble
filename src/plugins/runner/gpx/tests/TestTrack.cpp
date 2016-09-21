@@ -13,6 +13,7 @@
 
 #include "GeoDataPoint.h"
 #include "GeoDataLinearRing.h"
+#include "GeoDataMultiGeometry.h"
 #include <GeoDataParser.h>
 #include <GeoDataDocument.h>
 #include <GeoDataPlacemark.h>

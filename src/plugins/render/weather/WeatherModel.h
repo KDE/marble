@@ -14,8 +14,6 @@
 #include "AbstractDataPluginModel.h"
 
 #include "WeatherData.h"
-#include "GeoDataLatLonAltBox.h"
-#include "MarbleWidget.h"
 
 #include <QStringList>
 
@@ -27,6 +25,7 @@ namespace Marble
 
 class AbstractWeatherService;
 class GeoDataLatLonAltBox;
+class MarbleWidget;
 class MarbleModel;
     
 class WeatherModel : public AbstractDataPluginModel

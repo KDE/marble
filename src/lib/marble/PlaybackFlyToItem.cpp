@@ -13,6 +13,7 @@
 #include "GeoDataTypes.h"
 #include "GeoDataLookAt.h"
 #include "GeoDataCamera.h"
+#include "GeoDataFlyTo.h"
 #include "Quaternion.h"
 
 #include <QTimer>

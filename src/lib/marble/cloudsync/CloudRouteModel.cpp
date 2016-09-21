@@ -10,6 +10,8 @@
 
 #include "CloudRouteModel.h"
 
+#include "RouteItem.h"
+
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 

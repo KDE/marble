@@ -17,6 +17,7 @@
 #include "routing/RoutingManager.h"
 #include "routing/RouteRequest.h"
 #include "routing/RoutingProfilesModel.h"
+#include <GeoDataLatLonAltBox.h>
 #include <GeoPainter.h>
 #include <routing/Route.h>
 #include <declarative/RouteRequestModel.h>

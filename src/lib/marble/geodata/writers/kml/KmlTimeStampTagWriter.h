@@ -12,10 +12,10 @@
 #define MARBLE_KMLTIMESTAMPTAGWRITER_H
 
 #include "GeoTagWriter.h"
-#include "GeoDataTimeStamp.h"
 
 namespace Marble
 {
+class GeoDataTimeStamp;
 
 class KmlTimeStampTagWriter : public GeoTagWriter
 {

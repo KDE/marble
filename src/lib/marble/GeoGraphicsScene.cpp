@@ -12,7 +12,7 @@
 
 #include "GeoDataFeature.h"
 #include "GeoDataGroundOverlay.h"
-#include "GeoDataLatLonBox.h"
+#include "GeoDataLatLonAltBox.h"
 #include "GeoDataPhotoOverlay.h"
 #include "GeoDataStyle.h"
 #include "GeoDataStyleMap.h"

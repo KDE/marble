@@ -11,14 +11,17 @@
 #ifndef ANIMATEDUPDATETRACK_H
 #define ANIMATEDUPDATETRACK_H
 
-#include "PlaybackAnimatedUpdateItem.h"
-#include "GeoDataPlacemark.h"
-
 #include <QDateTime>
 #include <QTimer>
 
 namespace Marble
 {
+
+class GeoDataFeature;
+class GeoDataContainer;
+class GeoDataPlacemark;
+class PlaybackAnimatedUpdateItem;
+
 class AnimatedUpdateTrack : public QObject
 {
     Q_OBJECT

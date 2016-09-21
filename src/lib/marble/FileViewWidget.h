@@ -22,10 +22,8 @@ class QModelIndex;
 namespace Marble
 {
 
-class FileManager;
 class GeoDataPlacemark;
 class GeoDataLatLonBox;
-class GeoDataTreeModel;
 class MarbleWidget;
 
 class FileViewWidgetPrivate;

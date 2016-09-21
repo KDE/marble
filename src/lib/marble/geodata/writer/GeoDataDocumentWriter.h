@@ -11,8 +11,6 @@
 #ifndef MARBLE_GEODATADOCUMENTWRITER_H
 #define MARBLE_GEODATADOCUMENTWRITER_H
 
-#include "GeoDataDocument.h"
-
 #include "marble_export.h"
 
 #include <QIODevice>
@@ -22,6 +20,7 @@ namespace Marble
 {
 
 class GeoWriterBackend;
+class GeoDataDocument;
 
 /**
  * Write GeoDataDocument content to I/O devices (e.g. a file)

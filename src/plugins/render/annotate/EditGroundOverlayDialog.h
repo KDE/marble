@@ -13,11 +13,11 @@
 
 #include <QDialog>
 
-#include "GeoDataGroundOverlay.h"
-#include "TextureLayer.h"
-
 namespace Marble
 {
+class TextureLayer;
+
+class GeoDataGroundOverlay;
 
 class EditGroundOverlayDialog : public QDialog
 {

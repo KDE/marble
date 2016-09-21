@@ -20,6 +20,8 @@
 #include "GeoDataFolder.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataDocument.h"
+#include "GeoDataLatLonAltBox.h"
+#include "GeoDataGeometry.h"
 #include "GeoDataNetworkLinkControl.h"
 #include "GeoDataNetworkLink.h"
 #include "GeoDataGroundOverlay.h"

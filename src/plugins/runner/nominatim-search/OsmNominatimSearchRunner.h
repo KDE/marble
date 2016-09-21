@@ -23,6 +23,7 @@ class QDomNode;
 
 namespace Marble
 {
+class GeoDataExtendedData;
 
 class OsmNominatimRunner : public SearchRunner
 {

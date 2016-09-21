@@ -11,6 +11,7 @@
 #include "OsmParser.h"
 #include "OsmRegionTree.h"
 
+#include "GeoDataLatLonAltBox.h"
 #include "GeoDataLinearRing.h"
 #include "GeoDataLineString.h"
 #include "GeoDataPolygon.h"
@@ -23,7 +24,8 @@
 #include "GeoDataLineStyle.h"
 #include "GeoDataFeature.h"
 #include "geodata/writer/GeoDataDocumentWriter.h"
-#include "geodata/data/GeoDataExtendedData.h"
+#include <GeoDataExtendedData.h>
+#include <GeoDataData.h>
 #include <geodata/handlers/kml/KmlElementDictionary.h>
 
 #include <QDebug>

@@ -10,6 +10,8 @@
 
 #include "LayerInterface.h"
 
+#include "RenderState.h"
+
 namespace Marble
 {
 

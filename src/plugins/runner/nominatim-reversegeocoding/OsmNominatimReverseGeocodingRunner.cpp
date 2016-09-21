@@ -15,6 +15,7 @@
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataExtendedData.h"
+#include "GeoDataData.h"
 #include "HttpDownloadManager.h"
 #include "osm/OsmPlacemarkData.h"
 

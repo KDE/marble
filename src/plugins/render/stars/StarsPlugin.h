@@ -17,6 +17,8 @@
 
 #include <QVector>
 #include <QHash>
+#include <QMap>
+#include <QVariant>
 #include <QBrush>
 
 #include "RenderPlugin.h"

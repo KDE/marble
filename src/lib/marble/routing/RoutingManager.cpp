@@ -19,6 +19,7 @@
 #include "GeoWriter.h"
 #include "GeoDataDocument.h"
 #include "GeoDataExtendedData.h"
+#include "GeoDataData.h"
 #include "GeoDataFolder.h"
 #include "GeoDataParser.h"
 #include "GeoDataPlacemark.h"

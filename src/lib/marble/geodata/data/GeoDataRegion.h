@@ -13,14 +13,13 @@
 #define MARBLE_GEODATAREGION_H
 
 #include "GeoDataObject.h"
-#include "GeoDataLatLonAltBox.h"
-#include "GeoDataLod.h"
-
 
 namespace Marble
 {
 
 class GeoDataFeature;
+class GeoDataLatLonAltBox;
+class GeoDataLod;
 class GeoDataRegionPrivate;
 
 /*!

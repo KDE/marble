@@ -22,6 +22,8 @@
 
 // Marble
 #include "GeoDataStyle.h"
+#include "GeoDataIconStyle.h"
+#include "GeoDataLabelStyle.h"
 #include "GeoDataPlacemark.h"
 #include "MarbleWidget.h"
 #include "MarbleLocale.h"

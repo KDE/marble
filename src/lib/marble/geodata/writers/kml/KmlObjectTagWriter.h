@@ -11,11 +11,11 @@
 #ifndef MARBLE_KMLOBJECTTAGWRITER_H
 #define MARBLE_KMLOBJECTTAGWRITER_H
 
-#include <GeoWriter.h>
 #include <GeoDataObject.h>
 
 namespace Marble
 {
+class GeoWriter;
 
 class KmlObjectTagWriter
 {

@@ -13,6 +13,7 @@
 #include <GeoDataDocument.h>
 #include <GeoDataPlacemark.h>
 #include <GeoDataTimeSpan.h>
+#include <GeoDataTimeStamp.h>
 #include <GeoDataCamera.h>
 #include <MarbleDebug.h>
 #include <GeoDataFolder.h>

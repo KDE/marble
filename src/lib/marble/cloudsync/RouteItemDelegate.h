@@ -1,13 +1,12 @@
 #ifndef ROUTEITEMDELEGATE_H
 #define ROUTEITEMDELEGATE_H
 
-#include "CloudRouteModel.h"
-
 #include <QStyledItemDelegate>
 
 class QListView;
 
 namespace Marble {
+class CloudRouteModel;
 
 class RouteItemDelegate : public QStyledItemDelegate {
     Q_OBJECT

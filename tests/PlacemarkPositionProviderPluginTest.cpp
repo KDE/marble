@@ -10,6 +10,7 @@
 
 #include "GeoDataTrack.h"
 #include "GeoDataPlacemark.h"
+#include "GeoDataAccuracy.h"
 #include "PositionProviderPlugin.h"
 #include "PluginManager.h"
 #include "MarbleModel.h"

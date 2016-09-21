@@ -24,6 +24,7 @@
 
 namespace Marble
 {
+class StackedTileLoader;
 
 class EquirectScanlineTextureMapper : public TextureMapperInterface
 {

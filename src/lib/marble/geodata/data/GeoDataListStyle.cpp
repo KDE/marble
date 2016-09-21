@@ -10,6 +10,7 @@
 
 #include "GeoDataListStyle.h"
 #include "GeoDataTypes.h"
+#include "GeoDataItemIcon.h"
 #include "MarbleDirs.h"
 
 #include <QDataStream>

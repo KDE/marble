@@ -12,15 +12,14 @@
 #define OPENDESKTOPITEM_H
  
 #include "AbstractDataPluginItem.h"
-#include "TinyWebBrowser.h"
 #include "MarbleWidget.h"
+
+#include <QUrl>
 
 class QAction;
 
 namespace Marble
 {
-
-class TinyWebBrowser;
  
 class OpenDesktopItem : public AbstractDataPluginItem
 {

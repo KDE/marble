@@ -29,6 +29,8 @@
 #include "ViewParams.h"
 #include "ViewportParams.h"
 #include "MathHelper.h"
+#include "GeoDataLinearRing.h"
+#include "GeoDataPolygon.h"
 #include "GeoDataFeature.h"
 #include "GeoDataTypes.h"
 #include "GeoDataPlacemark.h"

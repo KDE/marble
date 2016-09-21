@@ -21,8 +21,6 @@
 
 #include "GeoDataDocument.h"
 #include "GeoDataLineString.h"
-#include "GeoGraphicsItem.h"
-#include "LabelGraphicsItem.h"
 
 namespace Ui
 {
@@ -38,7 +36,6 @@ class ElevationProfileTrackDataSource;
 class ElevationProfileRouteDataSource;
 class GeoDataPlacemark;
 class MarbleWidget;
-class RoutingModel;
 
 /**
  * @short The class that creates an interactive elvation profile.

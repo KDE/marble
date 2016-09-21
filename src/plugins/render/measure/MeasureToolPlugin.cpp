@@ -20,6 +20,7 @@
 #include "GeoDataLinearRing.h"
 #include "MarbleDebug.h"
 #include "MarbleMath.h"
+#include "MarbleWidgetPopupMenu.h"
 #include "MarbleModel.h"
 #include "MarbleLocale.h"
 #include "ViewportParams.h"

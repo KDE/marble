@@ -16,6 +16,7 @@
 #include <GeoDataPlacemark.h>
 #include <GeoDataStyle.h>
 #include <GeoDataListStyle.h>
+#include <GeoDataItemIcon.h>
 #include "TestUtils.h"
 
 using namespace Marble;

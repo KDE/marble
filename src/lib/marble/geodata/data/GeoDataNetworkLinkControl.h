@@ -12,8 +12,6 @@
 #define GEODATANETWORKLINKCONTROL_H
 
 #include "GeoDataContainer.h"
-#include "GeoDataUpdate.h"
-#include "GeoDataAbstractView.h"
 #include "marble_export.h"
 
 class QDateTime;
@@ -21,6 +19,8 @@ class QDateTime;
 namespace Marble
 {
 
+class GeoDataAbstractView;
+class GeoDataUpdate;
 class GeoDataNetworkLinkControlPrivate;
 
 class MARBLE_EXPORT GeoDataNetworkLinkControl : public GeoDataContainer

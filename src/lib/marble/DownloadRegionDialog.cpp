@@ -33,6 +33,7 @@
 #include "LatLonBoxWidget.h"
 #include "TextureLayer.h"
 #include "TileId.h"
+#include "TileCoordsPyramid.h"
 #include "TileLevelRangeWidget.h"
 #include "TileLoaderHelper.h"
 #include "routing/RoutingManager.h"

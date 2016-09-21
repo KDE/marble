@@ -12,7 +12,6 @@
 #define MARBLE_GOTODIALOG_H
 
 #include "marble_export.h"
-#include "GeoDataCoordinates.h"
 
 #include <QDialog>
 
@@ -22,6 +21,7 @@ namespace Marble
 {
 
 class GeoDataPlacemark;
+class GeoDataCoordinates;
 class GoToDialogPrivate;
 class MarbleModel;
 
