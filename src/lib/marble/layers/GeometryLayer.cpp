@@ -231,7 +231,7 @@ void GeometryLayerPrivate::createGraphicsItemFromGeometry(const GeoDataGeometry*
         }
 
         const GeoDataLinearRing *ring = static_cast<const GeoDataLinearRing*>( object );
-        item = new GeoPolygonGraphicsItem( placemark, ring );
+        item = GeoPolygonGraphicsItem::createGraphicsItem(placemark, ring);
     }
     else if ( object->nodeType() == GeoDataTypes::GeoDataPolygonType )
     {
@@ -246,7 +246,7 @@ void GeometryLayerPrivate::createGraphicsItemFromGeometry(const GeoDataGeometry*
         }
 
         const GeoDataPolygon *poly = static_cast<const GeoDataPolygon*>( object );
-        item = new GeoPolygonGraphicsItem( placemark, poly );
+        item = GeoPolygonGraphicsItem::createGraphicsItem(placemark, poly);
         if (item->zValue() == 0) {
              item->setZValue(poly->renderOrder());
         }

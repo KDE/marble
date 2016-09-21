@@ -11,16 +11,7 @@
 #ifndef MARBLE_GEOPOLYGONGRAPHICSITEM_H
 #define MARBLE_GEOPOLYGONGRAPHICSITEM_H
 
-#include "GeoGraphicsItem.h"
-#include "marble_export.h"
-
-#include "GeoDataCoordinates.h"
-#include "GeoDataFeature.h"
-
-#include <QImage>
-#include <QColor>
-
-class QPointF;
+#include "AbstractGeoPolygonGraphicsItem.h"
 
 namespace Marble
 {
@@ -28,47 +19,14 @@ namespace Marble
 class GeoDataLinearRing;
 class GeoDataPolygon;
 
-class MARBLE_EXPORT GeoPolygonGraphicsItem : public GeoGraphicsItem
+class MARBLE_EXPORT GeoPolygonGraphicsItem : public AbstractGeoPolygonGraphicsItem
 {
 public:
+    static AbstractGeoPolygonGraphicsItem* createGraphicsItem(const GeoDataFeature *feature, const GeoDataPolygon *polygon);
+    static AbstractGeoPolygonGraphicsItem* createGraphicsItem(const GeoDataFeature *feature, const GeoDataLinearRing* ring);
+
     explicit GeoPolygonGraphicsItem( const GeoDataFeature *feature, const GeoDataPolygon* polygon );
     explicit GeoPolygonGraphicsItem( const GeoDataFeature *feature, const GeoDataLinearRing* ring );
-
-    virtual const GeoDataLatLonAltBox& latLonAltBox() const;
-
-    void paint(GeoPainter* painter, const ViewportParams *viewport, const QString &layer);
-
-private:
-    struct NamedEntry {
-        GeoDataCoordinates point;
-        QString label;
-    };
-
-    void paintFrame( GeoPainter* painter, const ViewportParams *viewport );
-    void paintRoof( GeoPainter* painter, const ViewportParams *viewport );
-
-    QPointF buildingOffset(const QPointF &point, const ViewportParams *viewport, bool* isCameraAboveBuilding=0) const;
-    static int extractElevation(const GeoDataFeature &feature);
-    static double extractBuildingHeight(const GeoDataFeature *feature);
-    static QString extractBuildingLabel(const GeoDataFeature *feature);
-    static QVector<NamedEntry> extractNamedEntries(const GeoDataFeature *feature);
-    static void screenPolygons(const ViewportParams *viewport, const GeoDataPolygon* polygon, QVector<QPolygonF*> &polygons,  QVector<QPolygonF*> &outlines);
-    QPen configurePainter(GeoPainter* painter, const ViewportParams *viewport, bool isBuildingFrame);
-    void initializeBuildingPainting(const GeoPainter* painter, const ViewportParams *viewport,
-                                    bool &drawAccurate3D, bool &isCameraAboveBuilding, bool &hasInnerBoundaries,
-                                    QVector<QPolygonF*>& outlinePolygons,
-                                    QVector<QPolygonF*>& innerPolygons) const;
-    static QPointF centroid(const QPolygonF &polygon, double &area);
-
-    const GeoDataPolygon *const m_polygon;
-    const GeoDataLinearRing *const m_ring;
-    double m_buildingHeight;
-    QString m_buildingLabel;
-    QString m_cachedTexturePath;
-    QColor m_cachedTextureColor;
-    QImage m_cachedTexture;
-
-    const QVector<NamedEntry> m_entries;
 };
 
 }
