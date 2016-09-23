@@ -28,7 +28,7 @@ GeoNode* KmlgridOriginTagHandler::parse( GeoParser& parser ) const
 
     if (parentItem.represents( kmlTag_ImagePyramid ))
     {
-        GeoDataImagePyramid::GridOrigin gridOrigin;
+        GeoDataImagePyramid::GridOrigin gridOrigin = GeoDataImagePyramid::UpperLeft;
         QString gridOriginText = parser.readElementText();
 
         if (gridOriginText == QLatin1String("lowerLeft")) {

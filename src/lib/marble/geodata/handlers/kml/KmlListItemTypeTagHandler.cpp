@@ -31,7 +31,7 @@ GeoNode* KmllistItemTypeTagHandler::parse( GeoParser& parser ) const
     if ( parentItem.represents( kmlTag_ListStyle ) )
     {
         QString typeText = parser.readElementText().trimmed();
-        GeoDataListStyle::ListItemType type;
+        GeoDataListStyle::ListItemType type = GeoDataListStyle::Check;
         if (typeText == QLatin1String("check")) {
             type = GeoDataListStyle::Check;
         } else if (typeText == QLatin1String("radioFolder")) {
