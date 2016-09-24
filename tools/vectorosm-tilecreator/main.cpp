@@ -117,10 +117,17 @@ QStringList tagsFilteredIn(int zoomLevel)
         tags << "natural=peak";
     }
 
-    if (zoomLevel == 13) {
-        tags << "landuse=forest";
-        tags << "landuse=meadow";
+    if (zoomLevel <= 13) {
+        tags << "landuse=commercial";
         tags << "landuse=farmland";
+        tags << "landuse=farmyard";
+        tags << "landuse=forest";
+        tags << "landuse=industrial";
+        tags << "landuse=meadow";
+        tags << "landuse=military";
+        tags << "landuse=recreation_ground";
+        tags << "landuse=residential";
+        tags << "landuse=retail";
     }
 
     if (zoomLevel >= 15) {
