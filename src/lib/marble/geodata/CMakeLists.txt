@@ -326,7 +326,7 @@ geodata/handlers/kml/KmlRoleTagHandler.cpp
 geodata/handlers/kml/KmlRollTagHandler.cpp
 geodata/handlers/kml/KmlRotationTagHandler.cpp
 geodata/handlers/kml/KmlRotationXYTagHandler.cpp
-geodata/handlers/kml/Kml_scaleTagHandler.cpp
+geodata/handlers/kml/KmlScaleTagHandler.cpp
 geodata/handlers/kml/KmlSchemaDataTagHandler.cpp
 geodata/handlers/kml/KmlSchemaTagHandler.cpp
 geodata/handlers/kml/KmlScreenOverlayTagHandler.cpp
