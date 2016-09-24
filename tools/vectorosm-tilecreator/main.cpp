@@ -246,7 +246,11 @@ int main(int argc, char *argv[])
     QString inputFileName = args.at(0);
     bool debug = parser.isSet("debug");
     bool silent = parser.isSet("silent");
-    unsigned int zoomLevel = parser.value("zoom-level").toInt();
+    auto const levels = parser.value("zoom-level").split(',');
+    QVector<unsigned int> zoomLevels;
+    foreach(auto const &level, levels) {
+        zoomLevels << level.toInt();
+    }
 
     QString outputName;
     if(parser.isSet("output")) {
@@ -299,68 +303,68 @@ int main(int argc, char *argv[])
         }
         qDebug() << "Landmass file " << outputName << " done";
 
-    } else if (zoomLevel <= 9) {
+    } else if (!zoomLevels.isEmpty() && *zoomLevels.cbegin() <= 9) {
         auto map = open(inputFileName, manager);
         VectorClipper processor(map.data());
         GeoDataLatLonBox world(85.0, -85.0, 180.0, -180.0, GeoDataCoordinates::Degree);
-        TileIterator iter(world, zoomLevel);
-        qint64 count = 0;
-        qint64 const total = iter.total();
-        foreach(auto const &tileId, iter) {
-            ++count;
-            GeoDataDocument* tile = processor.clipTo(zoomLevel, tileId.x(), tileId.y());
-            NodeReducer reducer(tile, zoomLevel+1);
+        foreach(auto zoomLevel, zoomLevels) {
+            TileIterator iter(world, zoomLevel);
+            qint64 count = 0;
+            qint64 const total = iter.total();
+            foreach(auto const &tileId, iter) {
+                ++count;
+                GeoDataDocument* tile = processor.clipTo(zoomLevel, tileId.x(), tileId.y());
+                NodeReducer reducer(tile, zoomLevel+1);
 
-            if (!writeTile(parser, outputName, tile, tileId.x(), tileId.y(), zoomLevel)) {
-                return 4;
+                if (!writeTile(parser, outputName, tile, tileId.x(), tileId.y(), zoomLevel)) {
+                    return 4;
+                }
+                double const reduction = reducer.removedNodes() / qMax(1.0, double(reducer.remainingNodes() + reducer.removedNodes()));
+                std::cout << "Tile " << count << "/" << total << " (" << tile->name().toStdString() << ") done.";
+                std::cout << " Node reduction: " << qRound(reduction * 100.0) << "%      " << '\r';
+                std::cout.flush();
+                delete tile;
             }
-            double const reduction = reducer.removedNodes() / qMax(1.0, double(reducer.remainingNodes() + reducer.removedNodes()));
-            std::cout << "Tile " << count << "/" << total << " (" << tile->name().toStdString() << ") done.";
-            std::cout << " Node reduction: " << qRound(reduction * 100.0) << "%      " << '\r';
-            std::cout.flush();
-            delete tile;
         }
     } else {
         auto map = open(inputFileName, manager);
-        QStringList const tags = tagsFilteredIn(zoomLevel);
-        GeoDataDocument* input = map.data();
-        QSharedPointer<TagsFilter> tagsFilter;
-        if (zoomLevel < 17) {
-            tagsFilter = QSharedPointer<TagsFilter>(new TagsFilter(map.data(), tags));
-            input = tagsFilter->accepted();
-            map.clear();
-        }
-        VectorClipper processor(input);
-
         auto mergeMap = open(parser.value("merge"), manager);
-        VectorClipper background(mergeMap.data());
-        GeoDataDocument* landmass = background.clipTo(input->latLonAltBox());
-        mergeMap.clear();
-        VectorClipper landMassClipper(landmass);
+        VectorClipper landMassClipper(mergeMap.data());
 
-        // @todo FIXME Assumes placemark ownership
-        //WayConcatenator concatenator(tagsFilter.accepted(), QStringList() << "highway=*", false);
-
-        TileIterator iter(input->latLonAltBox(), zoomLevel);
-        qint64 count = 0;
-        qint64 const total = iter.total();
-        foreach(auto const &tileId, iter) {
-            ++count;
-            GeoDataDocument* tile1 = processor.clipTo(zoomLevel, tileId.x(), tileId.y());
-            GeoDataDocument* tile2 = landMassClipper.clipTo(zoomLevel, tileId.x(), tileId.y());
-            GeoDataDocument* combined = mergeDocuments(tile1, tile2);
-            NodeReducer reducer(combined, zoomLevel+1);
-            if (!writeTile(parser, outputName, combined, tileId.x(), tileId.y(), zoomLevel)) {
-                return 4;
+        foreach(auto zoomLevel, zoomLevels) {
+            QStringList const tags = tagsFilteredIn(zoomLevel);
+            GeoDataDocument* input = map.data();
+            QSharedPointer<TagsFilter> tagsFilter;
+            if (zoomLevel < 17) {
+                tagsFilter = QSharedPointer<TagsFilter>(new TagsFilter(map.data(), tags));
+                input = tagsFilter->accepted();
             }
+            VectorClipper processor(input);
 
-            double const reduction = reducer.removedNodes() / qMax(1.0, double(reducer.remainingNodes() + reducer.removedNodes()));
-            std::cout << "Tile " << count << "/" << total << " (" << combined->name().toStdString() << ") done.";
-            std::cout << " Node reduction: " << qRound(reduction * 100.0) << "%      " << '\r';
-            std::cout.flush();
-            delete combined;
-            delete tile1;
-            delete tile2;
+            // @todo FIXME Assumes placemark ownership
+            //WayConcatenator concatenator(tagsFilter.accepted(), QStringList() << "highway=*", false);
+
+            TileIterator iter(input->latLonAltBox(), zoomLevel);
+            qint64 count = 0;
+            qint64 const total = iter.total();
+            foreach(auto const &tileId, iter) {
+                ++count;
+                GeoDataDocument* tile1 = processor.clipTo(zoomLevel, tileId.x(), tileId.y());
+                GeoDataDocument* tile2 = landMassClipper.clipTo(zoomLevel, tileId.x(), tileId.y());
+                GeoDataDocument* combined = mergeDocuments(tile1, tile2);
+                NodeReducer reducer(combined, zoomLevel+1);
+                if (!writeTile(parser, outputName, combined, tileId.x(), tileId.y(), zoomLevel)) {
+                    return 4;
+                }
+
+                double const reduction = reducer.removedNodes() / qMax(1.0, double(reducer.remainingNodes() + reducer.removedNodes()));
+                std::cout << "Tile " << count << "/" << total << " (" << combined->name().toStdString() << ") done.";
+                std::cout << " Node reduction: " << qRound(reduction * 100.0) << "%      " << '\r';
+                std::cout.flush();
+                delete combined;
+                delete tile1;
+                delete tile2;
+            }
         }
     }
 
