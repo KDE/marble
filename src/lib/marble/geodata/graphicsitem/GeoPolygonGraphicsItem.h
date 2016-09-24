@@ -48,7 +48,7 @@ private:
     void paintRoof( GeoPainter* painter, const ViewportParams *viewport );
 
     QPointF buildingOffset(const QPointF &point, const ViewportParams *viewport, bool* isCameraAboveBuilding=0) const;
-    int extractBathymetryElevation(const GeoDataFeature *feature);
+    static int extractElevation(const GeoDataFeature &feature);
     static double extractBuildingHeight(const GeoDataFeature *feature);
     static QString extractBuildingLabel(const GeoDataFeature *feature);
     static QVector<NamedEntry> extractNamedEntries(const GeoDataFeature *feature);

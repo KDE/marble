@@ -51,10 +51,8 @@ GeoPolygonGraphicsItem::GeoPolygonGraphicsItem(const GeoDataFeature *feature, co
         setPaintLayers(paintLayers);
     }
     else {
-        if (visualCategory == GeoDataFeature::Bathymetry) {
-            const int elevation = extractBathymetryElevation(feature);
-            setZValue(zValue() + elevation);
-        }
+        const int elevation = extractElevation(*feature);
+        setZValue(zValue() + elevation);
 
         const QString paintLayer = QLatin1String("Polygon/") + StyleBuilder::visualCategoryName(visualCategory);
         setPaintLayers(QStringList() << paintLayer);
@@ -81,27 +79,20 @@ GeoPolygonGraphicsItem::GeoPolygonGraphicsItem(const GeoDataFeature *feature, co
         setPaintLayers(paintLayers);
     }
     else {
-        if (visualCategory == GeoDataFeature::Bathymetry) {
-            const int elevation = extractBathymetryElevation(feature);
-            setZValue(zValue() + elevation);
-        }
+        const int elevation = extractElevation(*feature);
+        setZValue(zValue() + elevation);
 
         const QString paintLayer = QLatin1String("Polygon/") + StyleBuilder::visualCategoryName(visualCategory);
         setPaintLayers(QStringList() << paintLayer);
     }
 }
 
-int GeoPolygonGraphicsItem::extractBathymetryElevation(const GeoDataFeature *feature)
+int GeoPolygonGraphicsItem::extractElevation(const GeoDataFeature &feature)
 {
-    const GeoDataFeature::GeoDataVisualCategory visualCategory = feature->visualCategory();
-    if (visualCategory != GeoDataFeature::Bathymetry) {
-        return 0;
-    }
-
     int elevation = 0;
 
-    if (feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
-        const GeoDataPlacemark *placemark = static_cast<const GeoDataPlacemark *>(feature);
+    if (feature.nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
+        const GeoDataPlacemark *placemark = static_cast<const GeoDataPlacemark *>(&feature);
         const OsmPlacemarkData &osmData = placemark->osmData();
 
         const auto tagIter = osmData.findTag(QStringLiteral("ele"));
@@ -111,8 +102,6 @@ int GeoPolygonGraphicsItem::extractBathymetryElevation(const GeoDataFeature *fea
     }
 
     return elevation;
-
-
 }
 
 bool GeoPolygonGraphicsItem::isBuilding(GeoDataFeature::GeoDataVisualCategory visualCategory)
