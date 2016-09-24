@@ -65,12 +65,6 @@ void OsmRelation::create(GeoDataDocument *document, OsmWays &ways, const OsmNode
         return;
     }
 
-    if (outer.size() > 1) {
-        /** @todo: Merge ways with common start/end, create multipolygon geometries for ones with multiple outer rings */
-        mDebug() << "Polygons with " << outer.size() << " ways are not yet supported";
-        return;
-    }
-
     GeoDataFeature::GeoDataVisualCategory outerCategory = StyleBuilder::determineVisualCategory(m_osmData);
     if (outerCategory == GeoDataFeature::None) {
         // Try to determine the visual category from the relation members
@@ -136,23 +130,34 @@ void OsmRelation::create(GeoDataDocument *document, OsmWays &ways, const OsmNode
         }
     }
 
-    GeoDataPolygon *polygon = new GeoDataPolygon;
-    polygon->setOuterBoundary(outer[0]);
-    foreach(const GeoDataLinearRing &ring, inner) {
-        polygon->appendInnerBoundary(ring);
+    bool const hasMultipleOuterRings = outer.size() > 1;
+    foreach(auto const &outerRing, outer) {
+        GeoDataPolygon *polygon = new GeoDataPolygon;
+        polygon->setOuterBoundary(outerRing);
+        foreach(const GeoDataLinearRing &innerRing, inner) {
+            if (!innerRing.isEmpty() && outerRing.contains(innerRing.first())) {
+                polygon->appendInnerBoundary(innerRing);
+            }
+        }
+
+        GeoDataPlacemark *placemark = new GeoDataPlacemark;
+        placemark->setName(m_osmData.tagValue(QStringLiteral("name")));
+        placemark->setVisualCategory(outerCategory);
+        placemark->setStyle( GeoDataStyle::Ptr() );
+        placemark->setVisible(outerCategory != GeoDataFeature::None);
+        placemark->setGeometry(polygon);
+        if (hasMultipleOuterRings) {
+            /** @TODO Use a GeoDataMultiGeometry to keep the ID? */
+            osmData.setId(0);
+            OsmObjectManager::initializeOsmData(placemark);
+        } else {
+            OsmObjectManager::registerId(osmData.id());
+        }
+        placemark->setOsmData(osmData);
+        usedNodes |= outerNodes;
+
+        document->append(placemark);
     }
-
-    GeoDataPlacemark *placemark = new GeoDataPlacemark;
-    placemark->setName(m_osmData.tagValue(QStringLiteral("name")));
-    placemark->setVisualCategory(outerCategory);
-    placemark->setStyle( GeoDataStyle::Ptr() );
-    placemark->setVisible(outerCategory != GeoDataFeature::None);
-    placemark->setGeometry(polygon);
-    placemark->setOsmData(osmData);
-    usedNodes |= outerNodes;
-
-    OsmObjectManager::registerId( osmData.id() );
-    document->append(placemark);
 }
 
 QList<GeoDataLinearRing> OsmRelation::rings(const QStringList &roles, const OsmWays &ways, const OsmNodes &nodes, QSet<qint64> &usedNodes, QSet<qint64> &usedWays) const
