@@ -25,14 +25,14 @@ public:
 
 private:
     template<class T>
-    T* reduce(T* lineString)
+    void reduce(T const * lineString, T* reducedLine)
     {
         qint64 const prevSize = lineString->size();
         if (prevSize < 2) {
-            return new T(*lineString);
+            m_remainingNodes += prevSize;
+            return;
         }
 
-        T* reducedLine = new T;
         auto iter = lineString->begin();
         GeoDataCoordinates currentCoords = *iter;
         reducedLine->append(*iter);
@@ -48,7 +48,6 @@ private:
         qint64 reducedSize = reducedLine->size();
         m_removedNodes += (prevSize - reducedSize);
         m_remainingNodes += reducedSize;
-        return reducedLine;
         //qDebug()<<"Nodes reduced "<<(prevSize - reducedSize)<<endl;
     }
 

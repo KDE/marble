@@ -16,6 +16,7 @@
 #include "GeoDataCoordinates.h"
 #include "MarbleMath.h"
 #include "NodeReducer.h"
+#include "OsmPlacemarkData.h"
 
 #include <QDebug>
 #include <QVector>
@@ -32,29 +33,31 @@ NodeReducer::NodeReducer(GeoDataDocument* document, int zoomLevel) :
 
         if(placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType) {
             GeoDataLineString* prevLine = static_cast<GeoDataLineString*>(placemark->geometry());
-            GeoDataLineString* reducedLine = reduce(prevLine);
+            GeoDataLineString* reducedLine = new GeoDataLineString;
+            reduce(prevLine, reducedLine);
             placemark->setGeometry(reducedLine);
         }
 
         else if(placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLinearRingType) {
             GeoDataLinearRing* prevRing = static_cast<GeoDataLinearRing*>(placemark->geometry());
-            GeoDataLinearRing* reducedRing = reduce(prevRing);
+            GeoDataLinearRing* reducedRing = new GeoDataLinearRing;
+            reduce(prevRing, reducedRing);
             placemark->setGeometry(reducedRing);
         }
 
         else if(placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType) {
             GeoDataPolygon* reducedPolygon = new GeoDataPolygon;
             GeoDataPolygon* prevPolygon = static_cast<GeoDataPolygon*>(placemark->geometry());
-            GeoDataLinearRing* prevRing = &(prevPolygon->outerBoundary());
-            GeoDataLinearRing* reducedRing = reduce(prevRing);
-            reducedPolygon->setOuterBoundary(*reducedRing);
-            delete reducedRing;
-            QVector<GeoDataLinearRing>& innerBoundaries = prevPolygon->innerBoundaries();
+            GeoDataLinearRing const * prevRing = &(prevPolygon->outerBoundary());
+            GeoDataLinearRing reducedRing;
+            reduce(prevRing, &reducedRing);
+            reducedPolygon->setOuterBoundary(reducedRing);
+            QVector<GeoDataLinearRing> const & innerBoundaries = prevPolygon->innerBoundaries();
             for(int i = 0; i < innerBoundaries.size(); i++) {
                 prevRing = &innerBoundaries[i];
-                GeoDataLinearRing* reducedInnerRing = reduce(prevRing);
-                reducedPolygon->appendInnerBoundary(*reducedInnerRing);
-                delete reducedInnerRing;
+                GeoDataLinearRing reducedInnerRing;
+                reduce(prevRing, &reducedInnerRing);
+                reducedPolygon->appendInnerBoundary(reducedInnerRing);
             }
             placemark->setGeometry(reducedPolygon);
         }
