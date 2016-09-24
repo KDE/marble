@@ -226,7 +226,7 @@ int main(int argc, char *argv[])
     parser.addOptions({
                           {{"d","debug"}, "Debug output in the terminal."},
                           {{"s","silent"}, "Don't output to terminal."},
-                          {{"l","landmass"}, "Convert the given <landmass> file and reduce nodes"},
+                          {{"l","landmass"}, "Convert the given <landmass> file and reduce nodes", "landmass"},
                           {{"m","merge"}, "Merge the main document with the file <file_to_merge_with>. This works together with the -c flag.", "file_to_merge_with"},
                           {{"z", "zoom-level"}, "Zoom level according to which OSM information has to be processed.", "number"},
                           {{"o", "output"}, "Output file or directory", "output"},
@@ -289,14 +289,15 @@ int main(int argc, char *argv[])
             }
         }
 
-        NodeReducer reducer(map.data(), zoomLevel+1);
+        auto region = open(inputFileName, manager);
+        VectorClipper clipper(map.data());
+        auto target = clipper.clipTo(region->latLonAltBox());
+        //NodeReducer reducer(target, zoomLevel+1);
 
-        QString const extension = parser.value("extension");
-        QString const outputFile = QString("%1/landmass-level-%2.%3").arg(outputName).arg(zoomLevel).arg(extension);
-        if (!GeoDataDocumentWriter::write(outputFile, *map)) {
+        if (!GeoDataDocumentWriter::write(outputName, *target)) {
             return 4;
         }
-        qDebug() << "Landmass file " << outputFile << " done";
+        qDebug() << "Landmass file " << outputName << " done";
 
     } else if (zoomLevel <= 9) {
         auto map = open(inputFileName, manager);
