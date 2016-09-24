@@ -277,7 +277,7 @@ int main(int argc, char *argv[])
     if (parser.isSet("landmass")) {
         auto map = open(parser.value("landmass"), manager);
         if(!map) {
-            qWarning() << "File" << inputFileName << "couldn't be loaded.";
+            qWarning() << "File" << parser.value("landmass") << "couldn't be loaded.";
             return -2;
         }
 
