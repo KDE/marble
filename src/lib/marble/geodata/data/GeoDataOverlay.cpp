@@ -12,6 +12,7 @@
 #include "GeoDataDocument.h"
 
 #include <QImage>
+#include <QColor>
 
 namespace Marble {
 
