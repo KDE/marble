@@ -5,6 +5,7 @@ ne_110m_geographic_lines
 ne_110m_land
 ne_110m_geographic_lines
 ne_110m_admin_0_boundary_lines_land
+ne_110m_populated_places
 *3
 ne_110m_land
 ne_110m_geographic_lines
@@ -15,6 +16,7 @@ ne_110m_rivers_lake_centerlines
 ne_110m_lakes
 ne_10m_bathymetry_K_200
 ne_10m_bathymetry_G_4000
+ne_110m_populated_places
 *5
 ne_50m_land
 ne_50m_geographic_lines
@@ -29,6 +31,7 @@ ne_50m_glaciated_areas
 ne_50m_antarctic_ice_shelves_lines
 ne_10m_bathymetry_K_200
 ne_10m_bathymetry_G_4000
+ne_50m_populated_places
 *7
 ne_10m_land
 ne_10m_geographic_lines
@@ -50,6 +53,7 @@ ne_10m_roads
 ne_10m_airports
 ne_10m_bathymetry_K_200
 ne_10m_bathymetry_G_4000
+ne_10m_populated_places
 *9
 ne_10m_land
 ne_10m_geographic_lines
@@ -78,3 +82,4 @@ ne_10m_airports
 ne_10m_ports
 ne_10m_bathymetry_K_200
 ne_10m_bathymetry_G_4000
+ne_10m_populated_places
