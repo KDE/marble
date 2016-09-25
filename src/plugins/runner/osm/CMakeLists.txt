@@ -33,7 +33,7 @@ set( osm_SRCS
 )
 
 marble_add_plugin( OsmPlugin ${osm_SRCS} ${osm_writers_SRCS} ${osm_translators_SRCS} )
-
+target_link_libraries(OsmPlugin o5mreader)
 
 find_package(ECM ${REQUIRED_ECM_VERSION} QUIET)
 if(NOT ECM_FOUND)
@@ -48,8 +48,6 @@ macro_optional_find_package(KF5 ${REQUIRED_KF5_VERSION} QUIET COMPONENTS KIO)
 if(NOT KF5_FOUND)
     return()
 endif()
-
-target_link_libraries(OsmPlugin o5mreader)
 
 # register marble part as handler
 # install again once part is fixed to load and show the passed file
