@@ -139,11 +139,14 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
          */
 
         PlaceCity,
+        PlaceCityCapital,
         PlaceSuburb,
         PlaceHamlet,
         PlaceLocality,
         PlaceTown,
+        PlaceTownCapital,
         PlaceVillage,
+        PlaceVillageCapital,
 
         NaturalWater,
         NaturalReef,

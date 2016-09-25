@@ -60,7 +60,7 @@ void OsmNode::create(GeoDataDocument *document) const
     placemark->setStyle( GeoDataStyle::Ptr() );
 
     placemark->setZoomLevel( 18 );
-    if (category >= GeoDataFeature::PlaceCity && category <= GeoDataFeature::PlaceVillage) {
+    if (category >= GeoDataFeature::PlaceCity && category <= GeoDataFeature::PlaceVillageCapital) {
         int const population = m_osmData.tagValue(QStringLiteral("population")).toInt();
         placemark->setPopulation(qMax(0, population));
         if (population > 0) {
@@ -68,13 +68,29 @@ void OsmNode::create(GeoDataDocument *document) const
             placemark->setPopularity(population);
         } else {
             switch (category) {
-            case GeoDataFeature::PlaceCity:     placemark->setZoomLevel(9);  break;
-            case GeoDataFeature::PlaceSuburb:   placemark->setZoomLevel(13);  break;
-            case GeoDataFeature::PlaceHamlet:   placemark->setZoomLevel(15);  break;
-            case GeoDataFeature::PlaceLocality: placemark->setZoomLevel(15);  break;
-            case GeoDataFeature::PlaceTown:     placemark->setZoomLevel(11);  break;
-            case GeoDataFeature::PlaceVillage:  placemark->setZoomLevel(13); break;
-            default:                            placemark->setZoomLevel(10); break;
+            case GeoDataFeature::PlaceCity:
+            case GeoDataFeature::PlaceCityCapital:
+                placemark->setZoomLevel(9);
+                break;
+            case GeoDataFeature::PlaceSuburb:
+                placemark->setZoomLevel(13);
+                break;
+            case GeoDataFeature::PlaceHamlet:
+                placemark->setZoomLevel(15);
+                break;
+            case GeoDataFeature::PlaceLocality:
+                placemark->setZoomLevel(15);
+                break;
+            case GeoDataFeature::PlaceTown:
+            case GeoDataFeature::PlaceTownCapital:
+                placemark->setZoomLevel(11);
+                break;
+            case GeoDataFeature::PlaceVillage:
+            case GeoDataFeature::PlaceVillageCapital:
+                placemark->setZoomLevel(13);
+                break;
+            default:
+                placemark->setZoomLevel(10); break;
             }
         }
     }

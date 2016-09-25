@@ -395,21 +395,21 @@ void StyleBuilder::Private::initializeDefaultStyles()
     // Align area labels centered
     m_defaultStyle[GeoDataFeature::Nation]->labelStyle().setAlignment( GeoDataLabelStyle::Center );
 
-    m_defaultStyle[GeoDataFeature::PlaceCity] = GeoDataStyle::Ptr(new GeoDataStyle( QString(), QFont( defaultFamily, (int)(defaultSize * 2.0 ), 75, false ), QColor( "#202020" ) ));
-    m_defaultStyle[GeoDataFeature::PlaceCity]->labelStyle().setAlignment( GeoDataLabelStyle::Center );
-    m_defaultStyle[GeoDataFeature::PlaceSuburb] = GeoDataStyle::Ptr(new GeoDataStyle( QString(), QFont( defaultFamily, (int)(defaultSize * 2.0 ), 75, false ), QColor( "#707070" ) ));
-    m_defaultStyle[GeoDataFeature::PlaceSuburb]->labelStyle().setAlignment( GeoDataLabelStyle::Center );
-    m_defaultStyle[GeoDataFeature::PlaceHamlet] = GeoDataStyle::Ptr(new GeoDataStyle( QString(), QFont( defaultFamily, (int)(defaultSize * 2.0 ), 75, false ), QColor( "#707070" ) ));
-    m_defaultStyle[GeoDataFeature::PlaceHamlet]->labelStyle().setAlignment( GeoDataLabelStyle::Center );
-    m_defaultStyle[GeoDataFeature::PlaceLocality] = GeoDataStyle::Ptr(new GeoDataStyle( QString(), QFont( defaultFamily, (int)(defaultSize * 2.0 ), 75, false ), QColor( "#707070" ) ));
-    m_defaultStyle[GeoDataFeature::PlaceLocality]->labelStyle().setAlignment( GeoDataLabelStyle::Center );
-    m_defaultStyle[GeoDataFeature::PlaceTown] = GeoDataStyle::Ptr(new GeoDataStyle( QString(), QFont( defaultFamily, (int)(defaultSize * 2.0 ), 75, false ), QColor( "#404040" ) ));
-    m_defaultStyle[GeoDataFeature::PlaceTown]->labelStyle().setAlignment( GeoDataLabelStyle::Center );
-    m_defaultStyle[GeoDataFeature::PlaceVillage] = GeoDataStyle::Ptr(new GeoDataStyle( QString(), QFont( defaultFamily, (int)(defaultSize * 2.0 ), 75, false ), QColor( "#505050" ) ));
-    m_defaultStyle[GeoDataFeature::PlaceVillage]->labelStyle().setAlignment( GeoDataLabelStyle::Center );
-    for (int i=GeoDataFeature::PlaceCity; i<=GeoDataFeature::PlaceVillage; ++i) {
+    QFont osmCityFont = QFont(defaultFamily, (int)(defaultSize * 2.0 ), 75, false);
+    m_defaultStyle[GeoDataFeature::PlaceCity] = createOsmPOIStyle(osmCityFont, "place/place-6", QColor( "#202020" ));
+    m_defaultStyle[GeoDataFeature::PlaceCityCapital] = createOsmPOIStyle(osmCityFont, "place/place-capital-6", QColor( "#202020" ));
+    m_defaultStyle[GeoDataFeature::PlaceSuburb] = createOsmPOIStyle(osmCityFont, QString(), QColor( "#707070" ));
+    m_defaultStyle[GeoDataFeature::PlaceHamlet] = createOsmPOIStyle(osmCityFont, QString(), QColor( "#707070" ));
+    m_defaultStyle[GeoDataFeature::PlaceLocality] = createOsmPOIStyle(osmCityFont, QString(), QColor( "#707070" ));
+    m_defaultStyle[GeoDataFeature::PlaceTown] = createOsmPOIStyle(osmCityFont, "place/place-6", QColor( "#404040" ));
+    m_defaultStyle[GeoDataFeature::PlaceTownCapital] = createOsmPOIStyle(osmCityFont, "place/place-capital-6", QColor( "#404040" ));
+    m_defaultStyle[GeoDataFeature::PlaceVillage] = createOsmPOIStyle(osmCityFont, "place/place-6", QColor( "#505050" ));
+    m_defaultStyle[GeoDataFeature::PlaceVillageCapital] = createOsmPOIStyle(osmCityFont, "place/place-capital-6", QColor( "#505050" ));
+    for (int i=GeoDataFeature::PlaceCity; i<=GeoDataFeature::PlaceVillageCapital; ++i) {
         m_defaultStyle[GeoDataFeature::GeoDataVisualCategory(i)]->polyStyle().setFill(false);
         m_defaultStyle[GeoDataFeature::GeoDataVisualCategory(i)]->polyStyle().setOutline(false);
+        m_defaultStyle[GeoDataFeature::GeoDataVisualCategory(i)]->labelStyle().setAlignment( GeoDataLabelStyle::Center );
+        m_defaultStyle[GeoDataFeature::GeoDataVisualCategory(i)]->iconStyle().setScale(0.25);
     }
 
     m_defaultStyle[GeoDataFeature::Mountain]
@@ -1611,11 +1611,14 @@ QString StyleBuilder::visualCategoryName(GeoDataFeature::GeoDataVisualCategory c
         visualCategoryNames[GeoDataFeature::GeoDataFeature::LargeNationCapital] = "LargeNationCapital";
         visualCategoryNames[GeoDataFeature::GeoDataFeature::Nation] = "Nation";
         visualCategoryNames[GeoDataFeature::GeoDataFeature::PlaceCity] = "PlaceCity";
+        visualCategoryNames[GeoDataFeature::GeoDataFeature::PlaceCityCapital] = "PlaceCityCapital";
         visualCategoryNames[GeoDataFeature::GeoDataFeature::PlaceSuburb] = "PlaceSuburb";
         visualCategoryNames[GeoDataFeature::GeoDataFeature::PlaceHamlet] = "PlaceHamlet";
         visualCategoryNames[GeoDataFeature::GeoDataFeature::PlaceLocality] = "PlaceLocality";
         visualCategoryNames[GeoDataFeature::GeoDataFeature::PlaceTown] = "PlaceTown";
+        visualCategoryNames[GeoDataFeature::GeoDataFeature::PlaceTownCapital] = "PlaceTownCapital";
         visualCategoryNames[GeoDataFeature::GeoDataFeature::PlaceVillage] = "PlaceVillage";
+        visualCategoryNames[GeoDataFeature::GeoDataFeature::PlaceVillageCapital] = "PlaceVillageCapital";
         visualCategoryNames[GeoDataFeature::GeoDataFeature::Mountain] = "Mountain";
         visualCategoryNames[GeoDataFeature::GeoDataFeature::Volcano] = "Volcano";
         visualCategoryNames[GeoDataFeature::GeoDataFeature::Mons] = "Mons";
@@ -2029,6 +2032,14 @@ GeoDataFeature::GeoDataVisualCategory StyleBuilder::determineVisualCategory(cons
         const auto tag = OsmTag(iter.key(), iter.value());
         GeoDataFeature::GeoDataVisualCategory category = osmVisualCategory(tag);
         if (category != GeoDataFeature::None) {
+            if (category == GeoDataFeature::PlaceCity && osmData.containsTag("capital", "yes")) {
+                category = GeoDataFeature::PlaceCityCapital;
+            } else if (category == GeoDataFeature::PlaceTown && osmData.containsTag("capital", "yes")) {
+                category = GeoDataFeature::PlaceTownCapital;
+            } else if (category == GeoDataFeature::PlaceVillage && osmData.containsTag("capital", "yes")) {
+                category = GeoDataFeature::PlaceVillageCapital;
+            }
+
             return category;
         }
     }

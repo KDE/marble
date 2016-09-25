@@ -497,11 +497,14 @@ QString GeoDataFeature::categoryName() const
 
     // OpenStreetMap categories
     case PlaceCity: return GeoDataFeaturePrivate::tr("City");
+    case PlaceCityCapital: return GeoDataFeaturePrivate::tr("City Capital");
     case PlaceSuburb: return GeoDataFeaturePrivate::tr("Suburb");
     case PlaceHamlet: return GeoDataFeaturePrivate::tr("Hamlet");
     case PlaceLocality: return GeoDataFeaturePrivate::tr("Locality");
     case PlaceTown: return GeoDataFeaturePrivate::tr("Town");
+    case PlaceTownCapital: return GeoDataFeaturePrivate::tr("Town Capital");
     case PlaceVillage: return GeoDataFeaturePrivate::tr("Village");
+    case PlaceVillageCapital: return GeoDataFeaturePrivate::tr("Village Capital");
     case NaturalWater: return GeoDataFeaturePrivate::tr("Water");
     case NaturalReef: return GeoDataFeaturePrivate::tr("Reef");
     case NaturalWood: return GeoDataFeaturePrivate::tr("Wood");
