@@ -51,6 +51,14 @@
               <downloadPolicy usage="Bulk" maximumConnections="2" />
           </vectortile>
       </layer>
+      <layer name="standardplaces" backend="geodata">
+        <geodata name="baseplacemarks">
+          <sourcefile>baseplacemarks.cache</sourcefile>
+        </geodata>
+        <geodata name="boundaryplacemarks">
+          <sourcefile>boundaryplacemarks.cache</sourcefile>
+        </geodata>
+      </layer>
     </map>
     <settings>
       <property name="coordinate-grid">
