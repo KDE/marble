@@ -1325,11 +1325,11 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
             if (parameters.tileLevel <= 7) {
                 /** @todo: Dummy implementation for dynamic style changes based on tile level, replace with sane values */
                 lineStyle.setPhysicalWidth(0.0);
-                lineStyle.setWidth(3.0);
+                lineStyle.setWidth(2.0);
             } else if (parameters.tileLevel <= 9) {
                 /** @todo: Dummy implementation for dynamic style changes based on tile level, replace with sane values */
                 lineStyle.setPhysicalWidth(0.0);
-                lineStyle.setWidth(4.0);
+                lineStyle.setWidth(3.0);
             } else {
                 auto tagIter = osmData.findTag(QStringLiteral("width"));
                 if (tagIter != osmData.tagsEnd()) {
