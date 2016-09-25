@@ -85,7 +85,7 @@ QStringList tagsFilteredIn(int zoomLevel)
 
     if (zoomLevel >= 13) {
         tags << "highway=tertiary" << "highway=tertiary_link";
-        tags << "highway=track";
+        tags << "highway=unclassified";
 
         tags << "public_transport=station";
         tags << "railway=light_rail";
@@ -131,8 +131,8 @@ QStringList tagsFilteredIn(int zoomLevel)
     }
 
     if (zoomLevel >= 15) {
-        tags << "highway=unclassified";
         tags << "highway=residential";
+        tags << "highway=track";
 
         tags << "landuse=*";
 
