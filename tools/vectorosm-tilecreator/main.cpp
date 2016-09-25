@@ -359,7 +359,7 @@ int main(int argc, char *argv[])
                 GeoDataDocument* tile1 = processor.clipTo(zoomLevel, tileId.x(), tileId.y());
                 GeoDataDocument* tile2 = landMassClipper.clipTo(zoomLevel, tileId.x(), tileId.y());
                 GeoDataDocument* combined = mergeDocuments(tile1, tile2);
-                NodeReducer reducer(combined, zoomLevel+1);
+                NodeReducer reducer(combined, zoomLevel);
                 if (!writeTile(parser, outputName, combined, tileId.x(), tileId.y(), zoomLevel)) {
                     return 4;
                 }
