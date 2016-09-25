@@ -665,8 +665,8 @@ QRectF PlacemarkLayout::roomForLabel( const GeoDataStyle::ConstPtr &style,
         }
     }
     else if ( style->labelStyle().alignment() == GeoDataLabelStyle::Center ) {
-        int const offsetY = style->iconStyle().scaledIcon().height() / 1.5;
-        QRectF  labelRect( x - textWidth / 2, offsetY + y - textHeight / 2,
+        int const offsetY = style->iconStyle().scaledIcon().height() / 2.0;
+        QRectF  labelRect( x - textWidth / 2, y - offsetY - textHeight,
                           textWidth, textHeight );
 
         if (hasRoomFor(currentsec, labelRect)) {
