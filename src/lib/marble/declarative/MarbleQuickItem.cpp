@@ -225,13 +225,13 @@ namespace Marble
     }
 
     void MarbleQuickItem::positionDataStatusChanged(PositionProviderStatus status)
-        {
-            if (status == PositionProviderStatusAvailable) {
-                emit positionAvailableChanged(true);
-            }
-            else {
-                emit positionAvailableChanged(false);
-            }
+    {
+        if (status == PositionProviderStatusAvailable) {
+            emit positionAvailableChanged(true);
+        }
+        else {
+            emit positionAvailableChanged(false);
+        }
     }
 
     void MarbleQuickItem::positionChanged(const GeoDataCoordinates &, GeoDataAccuracy)
