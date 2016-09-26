@@ -909,7 +909,11 @@ namespace Marble
         settings.beginGroup(QStringLiteral("MarbleQuickItem"));
         double lon = settings.value(QStringLiteral("centerLon"), QVariant(0.0)).toDouble();
         double lat = settings.value(QStringLiteral("centerLat"), QVariant(0.0)).toDouble();
-        centerOn(lon, lat);
+        if (lat == 0.0 && lon == 0.0) {
+            centerOnCurrentPosition();
+        } else {
+            centerOn(lon, lat);
+        }
         int const zoom = settings.value(QStringLiteral("zoom"), QVariant(0)).toInt();
         if (zoom > 0) {
             setZoom(zoom);
