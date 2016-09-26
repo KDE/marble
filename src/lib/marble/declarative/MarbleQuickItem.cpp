@@ -232,6 +232,7 @@ namespace Marble
         else {
             emit positionAvailableChanged(false);
         }
+        updatePositionVisibility();
     }
 
     void MarbleQuickItem::positionChanged(const GeoDataCoordinates &, GeoDataAccuracy)
