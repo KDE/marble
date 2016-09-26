@@ -15,6 +15,7 @@
 #include "GeoDataGeometry.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataLatLonAltBox.h"
+#include "TileId.h"
 
 #include <QApplication>
 #include <QCommandLineParser>
@@ -24,6 +25,7 @@
 #include <QString>
 #include <QElapsedTimer>
 #include <QSharedPointer>
+#include <QFileInfo>
 
 #include <QMessageLogContext>
 
@@ -171,20 +173,31 @@ QStringList tagsFilteredIn(int zoomLevel)
 
 QSharedPointer<GeoDataDocument> open(const QString &filename, ParsingRunnerManager &manager)
 {
-    QElapsedTimer timer;
-    timer.start();
-
     // Timeout is set to 10 min. If the file is reaaally huge, set it to something bigger.
     GeoDataDocument* map = manager.openFile(filename, DocumentRole::MapDocument, 600000);
     if(map == nullptr) {
         qWarning() << "File" << filename << "couldn't be loaded.";
-    } else {
-        qint64 parsingTime = timer.elapsed();
-        qDebug() << "Opened" << filename << "after" << parsingTime << "ms";
     }
     QSharedPointer<GeoDataDocument> result = QSharedPointer<GeoDataDocument>(map);
     return result;
 }
+
+class LandmassLoader
+{
+public:
+    LandmassLoader(const QString &baseDir, ParsingRunnerManager &manager, const QString &extension);
+    QSharedPointer<GeoDataDocument> load(int zoomLevel, int tileX, int tileY);
+
+private:
+    QString m_baseDir;
+    ParsingRunnerManager &m_manager;
+    QSharedPointer<GeoDataDocument> m_landmass;
+    int m_zoomLevel;
+    int m_tileX;
+    int m_tileY;
+    QString m_extension;
+};
+
 
 GeoDataDocument* mergeDocuments(GeoDataDocument* map1, GeoDataDocument* map2)
 {
@@ -211,7 +224,7 @@ bool writeTile(const QCommandLineParser &parser, const QString &outputName, GeoD
     QDir().mkpath(outputDir);
     QString const outputFile = QString("%1/%2.%3").arg(outputDir).arg(y).arg(extension);
     if (!GeoDataDocumentWriter::write(outputFile, *tile)) {
-        qDebug() << "Could not write the file " << outputName;
+        qWarning() << "Could not write the file " << outputName;
         return false;
     }
     return true;
@@ -313,8 +326,9 @@ int main(int argc, char *argv[])
         }
     } else {
         auto map = open(inputFileName, manager);
-        auto mergeMap = open(parser.value("merge"), manager);
-        VectorClipper landMassClipper(mergeMap.data());
+        LandmassLoader loader(parser.value("merge"), manager, parser.value("extension"));
+        QSharedPointer<VectorClipper> landMassClipper;
+        QSharedPointer<GeoDataDocument> mergeMap;
 
         foreach(auto zoomLevel, zoomLevels) {
             QStringList const tags = tagsFilteredIn(zoomLevel);
@@ -335,7 +349,12 @@ int main(int argc, char *argv[])
             foreach(auto const &tileId, iter) {
                 ++count;
                 GeoDataDocument* tile1 = processor.clipTo(zoomLevel, tileId.x(), tileId.y());
-                GeoDataDocument* tile2 = landMassClipper.clipTo(zoomLevel, tileId.x(), tileId.y());
+                QSharedPointer<GeoDataDocument> newMergeMap = loader.load(zoomLevel, tileId.x(), tileId.y());
+                if (newMergeMap != mergeMap) {
+                    mergeMap = newMergeMap;
+                    landMassClipper = QSharedPointer<VectorClipper>(new VectorClipper(mergeMap.data()));
+                }
+                GeoDataDocument* tile2 = landMassClipper->clipTo(zoomLevel, tileId.x(), tileId.y());
                 GeoDataDocument* combined = mergeDocuments(tile1, tile2);
                 QSharedPointer<NodeReducer> reducer = QSharedPointer<NodeReducer>(keepAllNodes ? nullptr : new NodeReducer(combined, zoomLevel));
                 if (!writeTile(parser, outputName, combined, tileId.x(), tileId.y(), zoomLevel)) {
@@ -357,4 +376,31 @@ int main(int argc, char *argv[])
     }
 
     return 0;
+}
+
+LandmassLoader::LandmassLoader(const QString &baseDir, ParsingRunnerManager &manager, QString const &extension) :
+    m_baseDir(baseDir),
+    m_manager(manager),
+    m_zoomLevel(QFileInfo(baseDir).baseName().toInt()),
+    m_tileX(-1),
+    m_tileY(-1),
+    m_extension(extension)
+{
+    // nothing to do
+}
+
+QSharedPointer<GeoDataDocument> LandmassLoader::load(int zoomLevel, int tileX, int tileY)
+{
+    int const zoomDiff = zoomLevel - m_zoomLevel;
+    int const x = tileX >> zoomDiff;
+    int const y = tileY >> zoomDiff;
+    if (x == m_tileX && y == m_tileY) {
+        return m_landmass;
+    }
+
+    m_tileX = x;
+    m_tileY = y;
+    QString const filename = QString("%1/%2/%3.%4").arg(m_baseDir).arg(x).arg(y).arg(m_extension);
+    m_landmass = open(filename, m_manager);
+    return m_landmass;
 }
