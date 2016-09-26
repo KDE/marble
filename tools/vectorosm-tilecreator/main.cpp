@@ -233,8 +233,8 @@ int main(int argc, char *argv[])
     parser.addOptions({
                           {{"d","debug"}, "Debug output in the terminal."},
                           {{"s","silent"}, "Don't output to terminal."},
-                          {{"l","landmass"}, "Convert the given <landmass> file and reduce nodes", "landmass"},
-                          {{"m","merge"}, "Merge the main document with the file <file_to_merge_with>. This works together with the -c flag.", "file_to_merge_with"},
+                          {{"k","keep-all-nodes"}, "Do not reduce nodes in line strings and rings."},
+                          {{"m","merge"}, "Merge the main document with the file <file_to_merge_with>.", "file_to_merge_with"},
                           {{"z", "zoom-level"}, "Zoom level according to which OSM information has to be processed.", "number"},
                           {{"o", "output"}, "Output file or directory", "output"},
                           {{"e", "extension"}, "Output file type: o5m (default), osm or kml", "file extension", "o5m"}
@@ -285,32 +285,8 @@ int main(int argc, char *argv[])
     MarbleModel model;
     ParsingRunnerManager manager(model.pluginManager());
 
-    if (parser.isSet("landmass")) {
-        auto map = open(parser.value("landmass"), manager);
-        if(!map) {
-            qWarning() << "File" << parser.value("landmass") << "couldn't be loaded.";
-            return -2;
-        }
-
-        OsmPlacemarkData marbleLand;
-        marbleLand.addTag("marble_land","landmass");
-        foreach(auto land, map->placemarkList()) {
-            if(land->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType) {
-                land->setOsmData(marbleLand);
-            }
-        }
-
-        auto region = open(inputFileName, manager);
-        VectorClipper clipper(map.data());
-        auto target = clipper.clipTo(region->latLonAltBox());
-        //NodeReducer reducer(target, zoomLevel+1);
-
-        if (!GeoDataDocumentWriter::write(outputName, *target)) {
-            return 4;
-        }
-        qDebug() << "Landmass file " << outputName << " done";
-
-    } else if (!zoomLevels.isEmpty() && *zoomLevels.cbegin() <= 9) {
+    bool const keepAllNodes = parser.isSet("keep-all-nodes");
+    if (!zoomLevels.isEmpty() && *zoomLevels.cbegin() <= 9) {
         auto map = open(inputFileName, manager);
         VectorClipper processor(map.data());
         GeoDataLatLonBox world(85.0, -85.0, 180.0, -180.0, GeoDataCoordinates::Degree);
@@ -321,14 +297,16 @@ int main(int argc, char *argv[])
             foreach(auto const &tileId, iter) {
                 ++count;
                 GeoDataDocument* tile = processor.clipTo(zoomLevel, tileId.x(), tileId.y());
-                NodeReducer reducer(tile, zoomLevel+1);
-
+                QSharedPointer<NodeReducer> reducer = QSharedPointer<NodeReducer>(keepAllNodes ? nullptr : new NodeReducer(tile, zoomLevel+1));
                 if (!writeTile(parser, outputName, tile, tileId.x(), tileId.y(), zoomLevel)) {
                     return 4;
                 }
-                double const reduction = reducer.removedNodes() / qMax(1.0, double(reducer.remainingNodes() + reducer.removedNodes()));
                 std::cout << "Tile " << count << "/" << total << " (" << tile->name().toStdString() << ") done.";
-                std::cout << " Node reduction: " << qRound(reduction * 100.0) << "%      " << '\r';
+                if (reducer) {
+                    double const reduction = reducer->removedNodes() / qMax(1.0, double(reducer->remainingNodes() + reducer->removedNodes()));
+                    std::cout << " Node reduction: " << qRound(reduction * 100.0) << "%";
+                }
+                std::cout << "      \r";
                 std::cout.flush();
                 delete tile;
             }
@@ -359,14 +337,17 @@ int main(int argc, char *argv[])
                 GeoDataDocument* tile1 = processor.clipTo(zoomLevel, tileId.x(), tileId.y());
                 GeoDataDocument* tile2 = landMassClipper.clipTo(zoomLevel, tileId.x(), tileId.y());
                 GeoDataDocument* combined = mergeDocuments(tile1, tile2);
-                NodeReducer reducer(combined, zoomLevel);
+                QSharedPointer<NodeReducer> reducer = QSharedPointer<NodeReducer>(keepAllNodes ? nullptr : new NodeReducer(combined, zoomLevel));
                 if (!writeTile(parser, outputName, combined, tileId.x(), tileId.y(), zoomLevel)) {
                     return 4;
                 }
 
-                double const reduction = reducer.removedNodes() / qMax(1.0, double(reducer.remainingNodes() + reducer.removedNodes()));
                 std::cout << "Tile " << count << "/" << total << " (" << combined->name().toStdString() << ") done.";
-                std::cout << " Node reduction: " << qRound(reduction * 100.0) << "%      " << '\r';
+                if (reducer) {
+                    double const reduction = reducer->removedNodes() / qMax(1.0, double(reducer->remainingNodes() + reducer->removedNodes()));
+                    std::cout << " Node reduction: " << qRound(reduction * 100.0) << "%";
+                }
+                std::cout << "      \r";
                 std::cout.flush();
                 delete combined;
                 delete tile1;
