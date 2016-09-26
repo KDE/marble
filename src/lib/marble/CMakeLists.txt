@@ -380,6 +380,7 @@ target_link_libraries(marblewidget
         Qt5::Gui
         Qt5::Widgets
         Qt5::Quick
+        Qt5::Network
     LINK_PRIVATE
         Qt5::Svg
         Qt5::Script
