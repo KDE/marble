@@ -237,7 +237,7 @@ int main(int argc, char *argv[])
                           {{"m","merge"}, "Merge the main document with the file <file_to_merge_with>. This works together with the -c flag.", "file_to_merge_with"},
                           {{"z", "zoom-level"}, "Zoom level according to which OSM information has to be processed.", "number"},
                           {{"o", "output"}, "Output file or directory", "output"},
-                          {{"e", "extension"}, "Output file type: osm (default), o5m or kml", "file extension", "osm"}
+                          {{"e", "extension"}, "Output file type: o5m (default), osm or kml", "file extension", "o5m"}
                       });
 
     // Process the actual command line arguments given by the user
