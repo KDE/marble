@@ -272,6 +272,11 @@ int main(int argc, char *argv[])
         zoomLevels << level.toInt();
     }
 
+    if (zoomLevels.isEmpty()) {
+        parser.showHelp(1);
+        return 1;
+    }
+
     QString outputName;
     if(parser.isSet("output")) {
         outputName = parser.value("output");
@@ -299,7 +304,7 @@ int main(int argc, char *argv[])
     ParsingRunnerManager manager(model.pluginManager());
 
     bool const keepAllNodes = parser.isSet("keep-all-nodes");
-    if (!zoomLevels.isEmpty() && *zoomLevels.cbegin() <= 9) {
+    if (*zoomLevels.cbegin() <= 9) {
         auto map = open(inputFileName, manager);
         VectorClipper processor(map.data());
         GeoDataLatLonBox world(85.0, -85.0, 180.0, -180.0, GeoDataCoordinates::Degree);
