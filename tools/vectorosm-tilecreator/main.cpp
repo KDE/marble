@@ -28,6 +28,7 @@
 #include <QFileInfo>
 
 #include <QMessageLogContext>
+#include <QProcess>
 
 #include "VectorClipper.h"
 #include "NodeReducer.h"
@@ -245,6 +246,7 @@ int main(int argc, char *argv[])
 
     parser.addOptions({
                           {{"d","debug"}, "Debug output in the terminal."},
+                          {{"t", "osmconvert"}, "Tile data using osmconvert."},
                           {{"s","silent"}, "Don't output to terminal."},
                           {{"k","keep-all-nodes"}, "Do not reduce nodes in line strings and rings."},
                           {{"m","merge"}, "Merge the main document with the file <file_to_merge_with>.", "file_to_merge_with"},
@@ -304,7 +306,47 @@ int main(int argc, char *argv[])
     ParsingRunnerManager manager(model.pluginManager());
 
     bool const keepAllNodes = parser.isSet("keep-all-nodes");
-    if (*zoomLevels.cbegin() <= 9) {
+    if (parser.isSet("osmconvert")) {
+        QString const extension = parser.value("extension");
+        QProcess osmconvert;
+        osmconvert.start("osmconvert", QStringList() << "--out-statistics" << inputFileName);
+        osmconvert.waitForFinished();
+        QStringList const output = QString(osmconvert.readAllStandardOutput()).split('\n');
+        GeoDataLatLonBox boundingBox;
+        foreach(QString const &line, output) {
+            if (line.startsWith("lon min:")) {
+                boundingBox.setWest(line.mid(8).toDouble(), GeoDataCoordinates::Degree);
+            } else if (line.startsWith("lon max")) {
+                boundingBox.setEast(line.mid(8).toDouble(), GeoDataCoordinates::Degree);
+            } else if (line.startsWith("lat min:")) {
+                boundingBox.setSouth(line.mid(8).toDouble(), GeoDataCoordinates::Degree);
+            } else if (line.startsWith("lat max:")) {
+                boundingBox.setNorth(line.mid(8).toDouble(), GeoDataCoordinates::Degree);
+            }
+        }
+        foreach(auto zoomLevel, zoomLevels) {
+            int const N = pow(2, zoomLevel);
+            TileIterator iter(boundingBox, zoomLevel);
+            qint64 count = 0;
+            qint64 const total = iter.total();
+            foreach(auto const &tileId, iter) {
+                ++count;
+                QString directory = QString("%1/%2/%3").arg(outputName).arg(zoomLevel).arg(tileId.x());
+                QDir().mkpath(directory);
+                QString const output = QString("-o=%1/%2.%3").arg(directory).arg(tileId.y()).arg(extension);
+                double const minLon = TileId::tileX2lon(tileId.x(), N) * RAD2DEG;
+                double const maxLon = TileId::tileX2lon(tileId.x()+1, N) * RAD2DEG;
+                double const maxLat = TileId::tileY2lat(tileId.y(), N) * RAD2DEG;
+                double const minLat = TileId::tileY2lat(tileId.y()+1, N) * RAD2DEG;
+                QString const bbox = QString("-b=%1,%2,%3,%4").arg(minLon).arg(minLat).arg(maxLon).arg(maxLat);
+                osmconvert.start("osmconvert", QStringList() << "--drop-author" << "--drop-version"
+                                 << "--complete-ways" << "--complex-ways" << bbox << output << inputFileName);
+                osmconvert.waitForFinished();
+                std::cout << "Tile " << count << "/" << total << " done.      \r";
+                std::cout.flush();
+            }
+        }
+    } else if (*zoomLevels.cbegin() <= 9) {
         auto map = open(inputFileName, manager);
         VectorClipper processor(map.data());
         GeoDataLatLonBox world(85.0, -85.0, 180.0, -180.0, GeoDataCoordinates::Degree);
