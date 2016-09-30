@@ -202,11 +202,6 @@ public:
      */
     static OsmPlacemarkData fromParserAttributes( const QXmlStreamAttributes &attributes );
 
-    /**
-     * @brief osmPlacemarkDataType used for identifying OsmPlacemarkData objects as GeoNodes
-     */
-    static const char osmPlacemarkDataType[];
-
 private:
     qint64 m_id;
     QString m_version;
