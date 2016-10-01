@@ -79,100 +79,6 @@ void debugOutput( QtMsgType type, const QMessageLogContext &context, const QStri
     }
 }
 
-QStringList tagsFilteredIn(int zoomLevel)
-{
-    QStringList tags;
-    tags << "highway=motorway" << "highway=motorway_link";
-    tags << "highway=trunk" << "highway=trunk_link";
-    tags << "highway=primary" << "highway=primary_link";
-    tags << "highway=secondary" << "highway=secondary_link";
-
-    if (zoomLevel >= 13) {
-        tags << "highway=tertiary" << "highway=tertiary_link";
-        tags << "highway=unclassified";
-
-        tags << "public_transport=station";
-        tags << "railway=light_rail";
-        tags << "railway=monorail";
-        tags << "railway=narrow_gauge";
-        tags << "railway=preserved";
-        tags << "railway=rail";
-        tags << "railway=subway";
-        tags << "railway=tram";
-
-        tags << "natural=scrub";
-        tags << "natural=heath";
-        tags << "natural=grassland";
-        tags << "natural=glacier";
-        tags << "natural=beach";
-        tags << "natural=coastline";
-        tags << "natural=water";
-        tags << "natural=wood";
-        tags << "leisure=stadium";
-        tags << "tourism=alpine_hut";
-
-        tags << "waterway=river";
-        tags << "waterway=stream";
-        tags << "waterway=canal";
-
-        tags << "place=suburb";
-        tags << "place=village";
-
-        tags << "natural=peak";
-    }
-
-    if (zoomLevel <= 13) {
-        tags << "landuse=commercial";
-        tags << "landuse=farmland";
-        tags << "landuse=farmyard";
-        tags << "landuse=forest";
-        tags << "landuse=industrial";
-        tags << "landuse=meadow";
-        tags << "landuse=military";
-        tags << "landuse=recreation_ground";
-        tags << "landuse=residential";
-        tags << "landuse=retail";
-    }
-
-    if (zoomLevel >= 15) {
-        tags << "highway=residential";
-        tags << "highway=track";
-
-        tags << "landuse=*";
-
-        tags << "leisure=pitch";
-        tags << "leisure=swimming_area";
-
-        tags << "place=hamlet";
-        tags << "place=isolated_dwelling";
-
-        tags << "man_made=beacon";
-        tags << "man_made=bridge";
-        tags << "man_made=campanile";
-        tags << "man_made=chimney";
-        tags << "man_made=communications_tower";
-        tags << "man_made=cross";
-        tags << "man_made=gasometer";
-        tags << "man_made=lighthouse";
-        tags << "man_made=tower";
-        tags << "man_made=water_tower";
-        tags << "man_made=windmill";
-    }
-
-    tags << "leisure=nature_reserve";
-    tags << "leisure=park";
-
-    tags << "place=city";
-    tags << "place=town";
-    tags << "place=locality";
-
-    tags << "boundary=administrative";
-    tags << "boundary=political";
-    tags << "boundary=national_park";
-    tags << "boundary=protected_area";
-    return tags;
-}
-
 GeoDataDocument* mergeDocuments(GeoDataDocument* map1, GeoDataDocument* map2)
 {
     GeoDataDocument* mergedMap = new GeoDataDocument(*map1);
@@ -207,6 +113,27 @@ bool writeTile(const QCommandLineParser &parser, const QString &outputName, GeoD
     return true;
 }
 
+GeoDataLatLonBox boundingBox(const QString &inputFileName)
+{
+    QProcess osmconvert;
+    osmconvert.start("osmconvert", QStringList() << "--out-statistics" << inputFileName);
+    osmconvert.waitForFinished();
+    QStringList const output = QString(osmconvert.readAllStandardOutput()).split('\n');
+    GeoDataLatLonBox boundingBox;
+    foreach(QString const &line, output) {
+        if (line.startsWith("lon min:")) {
+            boundingBox.setWest(line.mid(8).toDouble(), GeoDataCoordinates::Degree);
+        } else if (line.startsWith("lon max")) {
+            boundingBox.setEast(line.mid(8).toDouble(), GeoDataCoordinates::Degree);
+        } else if (line.startsWith("lat min:")) {
+            boundingBox.setSouth(line.mid(8).toDouble(), GeoDataCoordinates::Degree);
+        } else if (line.startsWith("lat max:")) {
+            boundingBox.setNorth(line.mid(8).toDouble(), GeoDataCoordinates::Degree);
+        }
+    }
+    return boundingBox;
+}
+
 int main(int argc, char *argv[])
 {
     QCoreApplication app(argc, argv);
@@ -221,11 +148,11 @@ int main(int argc, char *argv[])
     parser.addPositionalArgument("input", "The input .osm or .shp file.");
 
     parser.addOptions({
-                          {{"d","debug"}, "Debug output in the terminal."},
+                          {{"d", "debug"}, "Debug output in the terminal."},
                           {{"t", "osmconvert"}, "Tile data using osmconvert."},
-                          {{"s","silent"}, "Don't output to terminal."},
-                          {{"k","keep-all-nodes"}, "Do not reduce nodes in line strings and rings."},
-                          {{"m","merge"}, "Merge the main document with the file <file_to_merge_with>.", "file_to_merge_with"},
+                          {{"s", "silent"}, "Don't output to terminal."},
+                          {{"k", "keep-all-nodes"}, "Do not reduce nodes in line strings and rings."},
+                          {{"m", "merge"}, "Merge the main document with the file <file_to_merge_with>.", "file_to_merge_with"},
                           {{"z", "zoom-level"}, "Zoom level according to which OSM information has to be processed.", "number"},
                           {{"o", "output"}, "Output file or directory", "output"},
                           {{"e", "extension"}, "Output file type: o5m (default), osm or kml", "file extension", "o5m"}
@@ -284,25 +211,10 @@ int main(int argc, char *argv[])
     bool const keepAllNodes = parser.isSet("keep-all-nodes");
     if (parser.isSet("osmconvert")) {
         QString const extension = parser.value("extension");
-        QProcess osmconvert;
-        osmconvert.start("osmconvert", QStringList() << "--out-statistics" << inputFileName);
-        osmconvert.waitForFinished();
-        QStringList const output = QString(osmconvert.readAllStandardOutput()).split('\n');
-        GeoDataLatLonBox boundingBox;
-        foreach(QString const &line, output) {
-            if (line.startsWith("lon min:")) {
-                boundingBox.setWest(line.mid(8).toDouble(), GeoDataCoordinates::Degree);
-            } else if (line.startsWith("lon max")) {
-                boundingBox.setEast(line.mid(8).toDouble(), GeoDataCoordinates::Degree);
-            } else if (line.startsWith("lat min:")) {
-                boundingBox.setSouth(line.mid(8).toDouble(), GeoDataCoordinates::Degree);
-            } else if (line.startsWith("lat max:")) {
-                boundingBox.setNorth(line.mid(8).toDouble(), GeoDataCoordinates::Degree);
-            }
-        }
+        auto mapArea = boundingBox(inputFileName);
         foreach(auto zoomLevel, zoomLevels) {
             int const N = pow(2, zoomLevel);
-            TileIterator iter(boundingBox, zoomLevel);
+            TileIterator iter(mapArea, zoomLevel);
             qint64 count = 0;
             qint64 const total = iter.total();
             foreach(auto const &tileId, iter) {
@@ -315,6 +227,7 @@ int main(int argc, char *argv[])
                 double const maxLat = TileId::tileY2lat(tileId.y(), N) * RAD2DEG;
                 double const minLat = TileId::tileY2lat(tileId.y()+1, N) * RAD2DEG;
                 QString const bbox = QString("-b=%1,%2,%3,%4").arg(minLon).arg(minLat).arg(maxLon).arg(maxLat);
+                QProcess osmconvert;
                 osmconvert.start("osmconvert", QStringList() << "--drop-author" << "--drop-version"
                                  << "--complete-ways" << "--complex-ways" << bbox << output << inputFileName);
                 osmconvert.waitForFinished();
@@ -348,43 +261,31 @@ int main(int argc, char *argv[])
             }
         }
     } else {
-        auto map = TileDirectory::open(inputFileName, manager);
         TileDirectory loader(parser.value("merge"), manager, parser.value("extension"));
-        QSharedPointer<VectorClipper> landMassClipper;
-        QSharedPointer<GeoDataDocument> mergeMap;
+        TileDirectory mapTiles("tiles/10", manager, parser.value("extension"));
+        mapTiles.setFilterTags(true);
 
         foreach(auto zoomLevel, zoomLevels) {
-            QStringList const tags = tagsFilteredIn(zoomLevel);
-            GeoDataDocument* input = map.data();
-            QSharedPointer<TagsFilter> tagsFilter;
-            if (zoomLevel < 17) {
-                tagsFilter = QSharedPointer<TagsFilter>(new TagsFilter(map.data(), tags));
-                input = tagsFilter->accepted();
-            }
-            VectorClipper processor(input);
-
             // @todo FIXME Assumes placemark ownership
             //WayConcatenator concatenator(tagsFilter.accepted(), QStringList() << "highway=*", false);
 
-            TileIterator iter(input->latLonAltBox(), zoomLevel);
+            TileIterator iter(boundingBox(inputFileName), zoomLevel);
             qint64 count = 0;
             qint64 const total = iter.total();
             foreach(auto const &tileId, iter) {
                 ++count;
-                GeoDataDocument* tile1 = processor.clipTo(zoomLevel, tileId.x(), tileId.y());
-                QSharedPointer<GeoDataDocument> newMergeMap = loader.load(zoomLevel, tileId.x(), tileId.y());
-                if (newMergeMap != mergeMap) {
-                    mergeMap = newMergeMap;
-                    landMassClipper = QSharedPointer<VectorClipper>(new VectorClipper(mergeMap.data()));
-                }
-                GeoDataDocument* tile2 = landMassClipper->clipTo(zoomLevel, tileId.x(), tileId.y());
+                GeoDataDocument* tile1 = mapTiles.clip(zoomLevel, tileId.x(), tileId.y());
+                GeoDataDocument* tile2 = loader.clip(zoomLevel, tileId.x(), tileId.y());
                 GeoDataDocument* combined = mergeDocuments(tile1, tile2);
                 QSharedPointer<NodeReducer> reducer = QSharedPointer<NodeReducer>(keepAllNodes ? nullptr : new NodeReducer(combined, zoomLevel));
                 if (!writeTile(parser, outputName, combined, tileId.x(), tileId.y(), zoomLevel)) {
                     return 4;
                 }
 
-                std::cout << "Tile " << count << "/" << total << " (" << combined->name().toStdString() << ") done.";
+                std::cout << "Tile " << count << "/" << total << " (landmass ";
+                std::cout << loader.name().toStdString() << " + map ";
+                std::cout << mapTiles.name().toStdString() << " ~> ";
+                std::cout << combined->name().toStdString() << ") done.";
                 if (reducer) {
                     double const reduction = reducer->removedNodes() / qMax(1.0, double(reducer->remainingNodes() + reducer->removedNodes()));
                     std::cout << " Node reduction: " << qRound(reduction * 100.0) << "%";
