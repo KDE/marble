@@ -192,6 +192,9 @@ GeoDataDocument* mergeDocuments(GeoDataDocument* map1, GeoDataDocument* map2)
 
 bool writeTile(const QCommandLineParser &parser, const QString &outputName, GeoDataDocument* tile, int x, int y, int zoomLevel)
 {
+    if (tile->size() == 0) {
+        return true;
+    }
     QString const extension = parser.value("extension");
     QString const baseDir = parser.isSet("output") ? (outputName + QLatin1Char('/')) : QString();
     QString const outputDir = QString("%1%2/%3").arg(baseDir).arg(zoomLevel).arg(x);
