@@ -120,7 +120,7 @@ public:
      * @brief Add a style to the style storage
      * @param style  the new style
      */
-    void addStyle(const Marble::GeoDataStyle::Ptr &style );
+    void addStyle(const GeoDataStyle::Ptr &style);
 
     /**
      * @brief Add a style to the style storage
