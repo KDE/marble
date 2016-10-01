@@ -21,15 +21,25 @@ namespace Marble {
 class TileDirectory
 {
 public:
-    TileDirectory(const QString &baseDir, ParsingRunnerManager &manager, const QString &extension);
+    enum TileType
+    {
+        Landmass,
+        OpenStreetMap
+    };
+
+    TileDirectory(TileType tileType, const QString &baseDir, ParsingRunnerManager &manager, const QString &extension);
     QSharedPointer<GeoDataDocument> load(int zoomLevel, int tileX, int tileY);
-    void setFilterTags(bool filter);
+    void setInputFile(const QString &filename);
 
     TileId tileFor(int zoomLevel, int tileX, int tileY) const;
     GeoDataDocument *clip(int zoomLevel, int tileX, int tileY);
     QString name() const;
 
     static QSharedPointer<GeoDataDocument> open(const QString &filename, ParsingRunnerManager &manager);
+    GeoDataLatLonBox boundingBox(const QString &filename) const;
+    GeoDataLatLonBox boundingBox() const;
+    void setBoundingBox(const GeoDataLatLonBox &boundingBox);
+    void createTiles() const;
 
 private:
     QStringList tagsFilteredIn(int zoomLevel) const;
@@ -45,7 +55,9 @@ private:
     QString m_extension;
     QSharedPointer<VectorClipper> m_clipper;
     QSharedPointer<TagsFilter> m_tagsFilter;
-    bool m_filterTags;
+    TileType m_tileType;
+    QString m_inputFile;
+    GeoDataLatLonBox m_boundingBox;
 };
 
 }

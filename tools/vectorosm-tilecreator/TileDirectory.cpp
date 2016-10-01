@@ -9,13 +9,19 @@
 //
 
 #include "TileDirectory.h"
+#include "TileIterator.h"
+#include <GeoDataDocumentWriter.h>
 
 #include <QFileInfo>
 #include <QDebug>
+#include <QProcess>
+#include <QDir>
+
+#include <iostream>
 
 namespace Marble {
 
-TileDirectory::TileDirectory(const QString &baseDir, ParsingRunnerManager &manager, QString const &extension) :
+TileDirectory::TileDirectory(TileType tileType, const QString &baseDir, ParsingRunnerManager &manager, QString const &extension) :
     m_baseDir(baseDir),
     m_manager(manager),
     m_zoomLevel(QFileInfo(baseDir).baseName().toInt()),
@@ -23,7 +29,7 @@ TileDirectory::TileDirectory(const QString &baseDir, ParsingRunnerManager &manag
     m_tileY(-1),
     m_tagZoomLevel(-1),
     m_extension(extension),
-    m_filterTags(false)
+    m_tileType(tileType)
 {
     // nothing to do
 }
@@ -48,6 +54,11 @@ QSharedPointer<GeoDataDocument> TileDirectory::load(int zoomLevel, int tileX, in
     QString const filename = QString("%1/%2/%3.%4").arg(m_baseDir).arg(tile.x()).arg(tile.y()).arg(m_extension);
     m_landmass = open(filename, m_manager);
     return m_landmass;
+}
+
+void TileDirectory::setInputFile(const QString &filename)
+{
+    m_inputFile = filename;
 }
 
 GeoDataDocument* TileDirectory::clip(int zoomLevel, int tileX, int tileY)
@@ -175,7 +186,7 @@ QStringList TileDirectory::tagsFilteredIn(int zoomLevel) const
 void TileDirectory::setTagZoomLevel(int zoomLevel)
 {
     m_tagZoomLevel = zoomLevel;
-    if (m_filterTags) {
+    if (m_tileType == OpenStreetMap) {
         QStringList const tags = tagsFilteredIn(m_tagZoomLevel);
         if (m_tagZoomLevel < 17) {
             m_tagsFilter = QSharedPointer<TagsFilter>(new TagsFilter(m_landmass.data(), tags));
@@ -185,9 +196,89 @@ void TileDirectory::setTagZoomLevel(int zoomLevel)
     }
 }
 
-void TileDirectory::setFilterTags(bool filter)
+GeoDataLatLonBox TileDirectory::boundingBox() const
 {
-    m_filterTags = filter;
+    return m_boundingBox;
+}
+
+void TileDirectory::setBoundingBox(const GeoDataLatLonBox &boundingBox)
+{
+    m_boundingBox = boundingBox;
+}
+
+void TileDirectory::createTiles() const
+{
+    int const zoomLevel = m_tileType == OpenStreetMap ? 10 : 7;
+    QSharedPointer<GeoDataDocument> map;
+    QSharedPointer<VectorClipper> clipper;
+    TileIterator iter(m_boundingBox, zoomLevel);
+    qint64 count = 0;
+    foreach(auto const &tileId, iter) {
+        ++count;
+        QString const outputDir = QString("%1/%2").arg(m_baseDir).arg(tileId.x());
+        QString const outputFile = QString("%1/%2.%3").arg(outputDir).arg(tileId.y()).arg(m_extension);
+        if (QFileInfo(outputFile).exists()) {
+            continue;
+        }
+
+        std::cout << "Creating " << (m_tileType == OpenStreetMap ? "osm" : "landmass");
+        std::cout << " cache tile " << count << "/" << iter.total() << " (";
+        std::cout << zoomLevel << "/" << tileId.x() << "/" << tileId.y() << ")      \r";
+        std::cout.flush();
+
+        QDir().mkpath(outputDir);
+        if (m_tileType == OpenStreetMap) {
+            QString const output = QString("-o=%1").arg(outputFile);
+            int const N = pow(2, zoomLevel);
+            double const minLon = TileId::tileX2lon(tileId.x(), N) * RAD2DEG;
+            double const maxLon = TileId::tileX2lon(tileId.x()+1, N) * RAD2DEG;
+            double const maxLat = TileId::tileY2lat(tileId.y(), N) * RAD2DEG;
+            double const minLat = TileId::tileY2lat(tileId.y()+1, N) * RAD2DEG;
+            QString const bbox = QString("-b=%1,%2,%3,%4").arg(minLon).arg(minLat).arg(maxLon).arg(maxLat);
+            QProcess osmconvert;
+            osmconvert.start("osmconvert", QStringList() << "--drop-author" << "--drop-version"
+                             << "--complete-ways" << "--complex-ways" << bbox << output << m_inputFile);
+            osmconvert.waitForFinished();
+            if (osmconvert.exitCode() != 0) {
+                qWarning() << bbox;
+                qWarning() << osmconvert.readAllStandardError();
+                qWarning() << "osmconvert failed: " << osmconvert.errorString();
+            }
+        } else {
+            if (!map) {
+                map = open(m_inputFile, m_manager);
+                clipper = QSharedPointer<VectorClipper>(new VectorClipper(map.data()));
+            }
+            auto tile = clipper->clipTo(zoomLevel, tileId.x(), tileId.y());
+            if (tile->size() > 0) {
+                if (!GeoDataDocumentWriter::write(outputFile, *tile)) {
+                    qWarning() << "Failed to write tile" << outputFile;
+                }
+            }
+        }
+    }
+
+}
+
+GeoDataLatLonBox TileDirectory::boundingBox(const QString &filename) const
+{
+    QProcess osmconvert;
+    osmconvert.start("osmconvert", QStringList() << "--out-statistics" << filename);
+    osmconvert.waitForFinished();
+    QStringList const output = QString(osmconvert.readAllStandardOutput()).split('\n');
+    GeoDataLatLonBox boundingBox;
+    foreach(QString const &line, output) {
+        if (line.startsWith("lon min:")) {
+            boundingBox.setWest(line.mid(8).toDouble(), GeoDataCoordinates::Degree);
+        } else if (line.startsWith("lon max")) {
+            boundingBox.setEast(line.mid(8).toDouble(), GeoDataCoordinates::Degree);
+        } else if (line.startsWith("lat min:")) {
+            boundingBox.setSouth(line.mid(8).toDouble(), GeoDataCoordinates::Degree);
+        } else if (line.startsWith("lat max:")) {
+            boundingBox.setNorth(line.mid(8).toDouble(), GeoDataCoordinates::Degree);
+        }
+    }
+    return boundingBox;
 }
 
 }

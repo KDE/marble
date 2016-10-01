@@ -79,27 +79,6 @@ bool writeTile(GeoDataDocument* tile, const QString &outputFile)
     return true;
 }
 
-GeoDataLatLonBox boundingBox(const QString &inputFileName)
-{
-    QProcess osmconvert;
-    osmconvert.start("osmconvert", QStringList() << "--out-statistics" << inputFileName);
-    osmconvert.waitForFinished();
-    QStringList const output = QString(osmconvert.readAllStandardOutput()).split('\n');
-    GeoDataLatLonBox boundingBox;
-    foreach(QString const &line, output) {
-        if (line.startsWith("lon min:")) {
-            boundingBox.setWest(line.mid(8).toDouble(), GeoDataCoordinates::Degree);
-        } else if (line.startsWith("lon max")) {
-            boundingBox.setEast(line.mid(8).toDouble(), GeoDataCoordinates::Degree);
-        } else if (line.startsWith("lat min:")) {
-            boundingBox.setSouth(line.mid(8).toDouble(), GeoDataCoordinates::Degree);
-        } else if (line.startsWith("lat max:")) {
-            boundingBox.setNorth(line.mid(8).toDouble(), GeoDataCoordinates::Degree);
-        }
-    }
-    return boundingBox;
-}
-
 int main(int argc, char *argv[])
 {
     QCoreApplication app(argc, argv);
@@ -116,9 +95,9 @@ int main(int argc, char *argv[])
     parser.addOptions({
                           {{"t", "osmconvert"}, "Tile data using osmconvert."},
                           {"conflict-resolution", "How to deal with existing tiles: overwrite, skip or merge", "mode", "overwrite"},
-                          {{"k", "keep-all-nodes"}, "Do not reduce nodes in line strings and rings."},
-                          {{"m", "merge"}, "Merge the main document with the file <file_to_merge_with>.", "file_to_merge_with"},
-                          {{"z", "zoom-level"}, "Zoom level according to which OSM information has to be processed.", "number"},
+                          {{"c", "cache-directory"}, "Directory for temporary data.", "cache", "cache"},
+                          {{"l", "landmass"}, "File with landmass polygons (world-wide).", "filename", "landmass.shp"},
+                          {{"z", "zoom-level"}, "Zoom level according to which OSM information has to be processed.", "levels", "11,13,15,17"},
                           {{"o", "output"}, "Output file or directory", "output", QString("%1/maps/earth/vectorosm").arg(MarbleDirs::localPath())},
                           {{"e", "extension"}, "Output file type: o5m (default), osm or kml", "file extension", "o5m"}
                       });
@@ -154,39 +133,15 @@ int main(int argc, char *argv[])
     MarbleModel model;
     ParsingRunnerManager manager(model.pluginManager());
 
-    bool const keepAllNodes = parser.isSet("keep-all-nodes");
+    QString const cacheDirectory = parser.value("cache-directory");
+    QDir().mkpath(cacheDirectory);
+    if (!QFileInfo(cacheDirectory).isWritable()) {
+        qWarning() << "Cannot write to cache directory" << cacheDirectory;
+        parser.showHelp(1);
+    }
+
     bool const overwriteTiles = parser.value("conflict-resolution") == "overwrite";
-    if (parser.isSet("osmconvert")) {
-        QString const extension = parser.value("extension");
-        auto mapArea = boundingBox(inputFileName);
-        QString const outputName = parser.value("output");
-        foreach(auto zoomLevel, zoomLevels) {
-            int const N = pow(2, zoomLevel);
-            TileIterator iter(mapArea, zoomLevel);
-            qint64 count = 0;
-            qint64 const total = iter.total();
-            foreach(auto const &tileId, iter) {
-                ++count;
-                QString directory = QString("%1/%2/%3").arg(outputName).arg(zoomLevel).arg(tileId.x());
-                QString const output = QString("-o=%1/%2.%3").arg(directory).arg(tileId.y()).arg(extension);
-                if (!overwriteTiles && QFileInfo(output).exists()) {
-                    continue;
-                }
-                QDir().mkpath(directory);
-                double const minLon = TileId::tileX2lon(tileId.x(), N) * RAD2DEG;
-                double const maxLon = TileId::tileX2lon(tileId.x()+1, N) * RAD2DEG;
-                double const maxLat = TileId::tileY2lat(tileId.y(), N) * RAD2DEG;
-                double const minLat = TileId::tileY2lat(tileId.y()+1, N) * RAD2DEG;
-                QString const bbox = QString("-b=%1,%2,%3,%4").arg(minLon).arg(minLat).arg(maxLon).arg(maxLat);
-                QProcess osmconvert;
-                osmconvert.start("osmconvert", QStringList() << "--drop-author" << "--drop-version"
-                                 << "--complete-ways" << "--complex-ways" << bbox << output << inputFileName);
-                osmconvert.waitForFinished();
-                std::cout << "Tile " << count << "/" << total << " done.      \r";
-                std::cout.flush();
-            }
-        }
-    } else if (*zoomLevels.cbegin() <= 9) {
+    if (*zoomLevels.cbegin() <= 9) {
         auto map = TileDirectory::open(inputFileName, manager);
         VectorClipper processor(map.data());
         GeoDataLatLonBox world(85.0, -85.0, 180.0, -180.0, GeoDataCoordinates::Degree);
@@ -201,24 +156,29 @@ int main(int argc, char *argv[])
                     continue;
                 }
                 GeoDataDocument* tile = processor.clipTo(zoomLevel, tileId.x(), tileId.y());
-                QSharedPointer<NodeReducer> reducer = QSharedPointer<NodeReducer>(keepAllNodes ? nullptr : new NodeReducer(tile, zoomLevel+1));
+                NodeReducer nodeReducer(tile, zoomLevel+1);
                 if (!writeTile(tile, filename)) {
                     return 4;
                 }
                 std::cout << "Tile " << count << "/" << total << " (" << tile->name().toStdString() << ") done.";
-                if (reducer) {
-                    double const reduction = reducer->removedNodes() / qMax(1.0, double(reducer->remainingNodes() + reducer->removedNodes()));
-                    std::cout << " Node reduction: " << qRound(reduction * 100.0) << "%";
-                }
+                double const reduction = nodeReducer.removedNodes() / qMax(1.0, double(nodeReducer.remainingNodes() + nodeReducer.removedNodes()));
+                std::cout << " Node reduction: " << qRound(reduction * 100.0) << "%";
                 std::cout << "      \r";
                 std::cout.flush();
                 delete tile;
             }
         }
     } else {
-        TileDirectory loader(parser.value("merge"), manager, parser.value("extension"));
-        TileDirectory mapTiles("tiles/10", manager, parser.value("extension"));
-        mapTiles.setFilterTags(true);
+        TileDirectory loader(TileDirectory::Landmass, QString("%1/landmass/7").arg(cacheDirectory), manager, parser.value("extension"));
+        loader.setInputFile(parser.value("landmass"));
+        auto const boundingBox = loader.boundingBox(inputFileName);
+        loader.setBoundingBox(boundingBox);
+        loader.createTiles();
+
+        TileDirectory mapTiles(TileDirectory::OpenStreetMap, QString("%1/osm/10").arg(cacheDirectory), manager, parser.value("extension"));
+        mapTiles.setInputFile(inputFileName);
+        mapTiles.setBoundingBox(boundingBox);
+        mapTiles.createTiles();
 
         typedef QMap<QString, QVector<TileId> > Tiles;
         Tiles tiles;
@@ -228,7 +188,7 @@ int main(int argc, char *argv[])
             // @todo FIXME Assumes placemark ownership
             //WayConcatenator concatenator(tagsFilter.accepted(), QStringList() << "highway=*", false);
 
-            TileIterator iter(boundingBox(inputFileName), zoomLevel);
+            TileIterator iter(mapTiles.boundingBox(), zoomLevel);
             total += iter.total();
             foreach(auto const &tileId, iter) {
                 auto const tile = TileId(QString(), zoomLevel, tileId.x(), tileId.y());
@@ -250,7 +210,7 @@ int main(int argc, char *argv[])
                 GeoDataDocument* tile1 = mapTiles.clip(zoomLevel, tileId.x(), tileId.y());
                 GeoDataDocument* tile2 = loader.clip(zoomLevel, tileId.x(), tileId.y());
                 GeoDataDocument* combined = mergeDocuments(tile1, tile2);
-                QSharedPointer<NodeReducer> reducer = QSharedPointer<NodeReducer>(keepAllNodes ? nullptr : new NodeReducer(combined, zoomLevel));
+                NodeReducer nodeReducer(combined, zoomLevel);
                 if (!writeTile(combined, filename)) {
                     return 4;
                 }
@@ -259,10 +219,8 @@ int main(int argc, char *argv[])
                 std::cout << loader.name().toStdString() << " + map ";
                 std::cout << mapTiles.name().toStdString() << " ~> ";
                 std::cout << combined->name().toStdString() << ") done.";
-                if (reducer) {
-                    double const reduction = reducer->removedNodes() / qMax(1.0, double(reducer->remainingNodes() + reducer->removedNodes()));
-                    std::cout << " Node reduction: " << qRound(reduction * 100.0) << "%";
-                }
+                double const reduction = nodeReducer.removedNodes() / qMax(1.0, double(nodeReducer.remainingNodes() + nodeReducer.removedNodes()));
+                std::cout << " Node reduction: " << qRound(reduction * 100.0) << "%";
                 std::cout << "      \r";
                 std::cout.flush();
                 delete combined;
