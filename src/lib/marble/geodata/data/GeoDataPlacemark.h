@@ -242,8 +242,8 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     static bool placemarkLayoutOrderCompare(const GeoDataPlacemark *a, const GeoDataPlacemark* b);
 
  private:
-    GeoDataPlacemarkPrivate *p();
-    const GeoDataPlacemarkPrivate *p() const;
+    inline GeoDataPlacemarkPrivate *p();
+    inline const GeoDataPlacemarkPrivate *p() const;
 };
 
 }

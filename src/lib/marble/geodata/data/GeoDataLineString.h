@@ -385,8 +385,8 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry
     explicit GeoDataLineString(GeoDataLineStringPrivate* priv);
 
  private:
-    GeoDataLineStringPrivate *p();
-    const GeoDataLineStringPrivate *p() const;
+    inline GeoDataLineStringPrivate *p();
+    inline const GeoDataLineStringPrivate *p() const;
 };
 
 }

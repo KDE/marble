@@ -434,36 +434,36 @@ bool GeoDataLatLonBox::intersects( const GeoDataLatLonBox &other ) const
 
     // check the intersection criterion for the latitude first:
 
-           // Case 1: northern boundary of other box intersects:
-    if (   ( d->m_north >= other.north() && d->m_south <= other.north() )
+    // Case 1: northern boundary of other box intersects:
+    if (   (d->m_north >= other.d->m_north && d->m_south <= other.d->m_north)
            // Case 2: northern boundary of this box intersects:
-        || ( other.north() >= d->m_north && other.south() <= d->m_north )
+           || (other.d->m_north >= d->m_north && other.d->m_south <= d->m_north)
            // Case 3: southern boundary of other box intersects:
-        || ( d->m_north >= other.south() && d->m_south <= other.south() ) 
+           || (d->m_north >= other.d->m_south && d->m_south <= other.d->m_south)
            // Case 4: southern boundary of this box intersects:
-        || ( other.north() >= d->m_south && other.south() <= d->m_south ) ) {
+           || (other.d->m_north >= d->m_south && other.d->m_south <= d->m_south)) {
 
         if ( !crossesDateLine() ) {
             if ( !other.crossesDateLine() ) {
                 // "Normal" case: both bounding boxes don't cross the date line
-                        // Case 1: eastern boundary of other box intersects:
-                if (    ( d->m_east >= other.east() && d->m_west <= other.east() )
+                // Case 1: eastern boundary of other box intersects:
+                if (    (d->m_east >= other.d->m_east && d->m_west <= other.d->m_east)
                         // Case 2: eastern boundary of this box intersects:
-                    || ( other.east() >= d->m_east && other.west() <= d->m_east )
+                        || (other.d->m_east >= d->m_east && other.d->m_west <= d->m_east)
                         // Case 3: western boundary of other box intersects:
-                    || ( d->m_east >= other.west() && d->m_west <= other.west() ) 
+                        || (d->m_east >= other.d->m_west && d->m_west <= other.d->m_west)
                         // Case 4: western boundary of this box intersects:
-                    || ( other.east() >= d->m_west && other.west() <= d->m_west ) ) {
+                        || (other.d->m_east >= d->m_west && other.d->m_west <= d->m_west)) {
                     return true;
-                }                
+                }
             }
             else {
                 // The other bounding box crosses the date line, "this" one does not:
                 // So the date line splits the other bounding box in two parts.
 
-                if ( d->m_west <= other.east() || d->m_east >= other.west() ) {
-                        return true;
-                }                
+                if ( d->m_west <= other.d->m_east || d->m_east >= other.d->m_west) {
+                    return true;
+                }
             }
         }
         else {
@@ -474,12 +474,12 @@ bool GeoDataLatLonBox::intersects( const GeoDataLatLonBox &other ) const
             else {
                 // "This" bounding box crosses the date line, the other one does not.
                 // So the date line splits "this" bounding box in two parts.
-                // 
+                //
                 // This also covers the case where this bounding box covers the whole
                 // longitude range ( -180 <= lon <= + 180 ).
-                if ( other.west() <= d->m_east || other.east() >= d->m_west ) {
-                        return true;
-                }                
+                if ( other.d->m_west <= d->m_east || other.d->m_east >= d->m_west ) {
+                    return true;
+                }
             }
         }
     }
