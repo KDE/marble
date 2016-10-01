@@ -43,13 +43,14 @@ GeoDataDocument *VectorClipper::clipTo(const GeoDataLatLonBox &tileBoundary)
 
     GeoDataDocument* tile = new GeoDataDocument();
     auto const clip = clipPath(tileBoundary);
-    foreach (GeoDataPlacemark* placemark, placemarks()) {
-        if(placemark && placemark->geometry() && tileBoundary.intersects(placemark->geometry()->latLonAltBox())) {
-            if( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType) {
+    foreach (GeoDataPlacemark const * placemark, placemarks()) {
+        GeoDataGeometry const * const geometry = placemark ? placemark->geometry() : nullptr;
+        if(geometry && tileBoundary.intersects(geometry->latLonAltBox())) {
+            if(geometry->nodeType() == GeoDataTypes::GeoDataPolygonType) {
                 clipPolygon(placemark, clip, tile);
-            } else if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType) {
+            } else if (geometry->nodeType() == GeoDataTypes::GeoDataLineStringType) {
                 clipString<GeoDataLineString>(placemark, clip, tile);
-            } else if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLinearRingType) {
+            } else if (geometry->nodeType() == GeoDataTypes::GeoDataLinearRingType) {
                 clipString<GeoDataLinearRing>(placemark, clip, tile);
             } else {
                 tile->append(new GeoDataPlacemark(*placemark));
@@ -66,12 +67,12 @@ GeoDataDocument *VectorClipper::clipToBaseClipper(const GeoDataLatLonBox &tileBo
     BaseClipper clipper;
     clipper.initClipRect(tileBoundary, 20);
 
-    foreach (GeoDataPlacemark* placemark, placemarks()) {
+    foreach (GeoDataPlacemark const * placemark, placemarks()) {
 
         if(placemark && placemark->geometry() && tileBoundary.intersects(placemark->geometry()->latLonAltBox())) {
 
             if( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType) {
-                GeoDataPolygon* marblePolygon = static_cast<GeoDataPolygon*>(placemark->geometry());
+                GeoDataPolygon const * marblePolygon = static_cast<GeoDataPolygon const *>(placemark->geometry());
                 int index = -1;
 
                 using PolygonPair = QPair<GeoDataPlacemark*, QPolygonF>;
@@ -122,7 +123,7 @@ GeoDataDocument *VectorClipper::clipToBaseClipper(const GeoDataLatLonBox &tileBo
                                 OsmObjectManager::initializeOsmData(newMarblePolygon.first);
 
                                 OsmPlacemarkData& innerRingData = newMarblePolygon.first->osmData().memberReference(geometry->innerBoundaries().size()-1);
-                                OsmPlacemarkData& placemarkInnerRingData = placemark->osmData().memberReference(index);
+                                OsmPlacemarkData const & placemarkInnerRingData = placemark->osmData().memberReference(index);
 
                                 copyTags(placemarkInnerRingData, innerRingData);
 
@@ -141,7 +142,7 @@ GeoDataDocument *VectorClipper::clipToBaseClipper(const GeoDataLatLonBox &tileBo
                 }
 
             } else if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType) {
-                GeoDataLineString* marbleWay = static_cast<GeoDataLineString*>(placemark->geometry());
+                GeoDataLineString const * marbleWay = static_cast<GeoDataLineString const *>(placemark->geometry());
 
                 QVector<QPolygonF> clippedPolygons;
 
@@ -165,7 +166,7 @@ GeoDataDocument *VectorClipper::clipToBaseClipper(const GeoDataLatLonBox &tileBo
                 }
             } else if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLinearRingType) {
 
-                GeoDataLinearRing* marbleClosedWay = static_cast<GeoDataLinearRing*>(placemark->geometry());
+                GeoDataLinearRing const * marbleClosedWay = static_cast<GeoDataLinearRing const *>(placemark->geometry());
 
                 QVector<QPolygonF> clippedPolygons;
 

@@ -30,24 +30,25 @@ NodeReducer::NodeReducer(GeoDataDocument* document, int zoomLevel) :
     m_remainingNodes(0)
 {
     foreach (GeoDataPlacemark* placemark, placemarks()) {
+        GeoDataGeometry const * const geometry = placemark->geometry();
 
-        if(placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType) {
-            GeoDataLineString* prevLine = static_cast<GeoDataLineString*>(placemark->geometry());
+        if(geometry->nodeType() == GeoDataTypes::GeoDataLineStringType) {
+            GeoDataLineString const * prevLine = static_cast<GeoDataLineString const *>(geometry);
             GeoDataLineString* reducedLine = new GeoDataLineString;
             reduce(prevLine, reducedLine);
             placemark->setGeometry(reducedLine);
         }
 
-        else if(placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLinearRingType) {
-            GeoDataLinearRing* prevRing = static_cast<GeoDataLinearRing*>(placemark->geometry());
+        else if(geometry->nodeType() == GeoDataTypes::GeoDataLinearRingType) {
+            GeoDataLinearRing const * prevRing = static_cast<GeoDataLinearRing const *>(geometry);
             GeoDataLinearRing* reducedRing = new GeoDataLinearRing;
             reduce(prevRing, reducedRing);
             placemark->setGeometry(reducedRing);
         }
 
-        else if(placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType) {
+        else if(geometry->nodeType() == GeoDataTypes::GeoDataPolygonType) {
             GeoDataPolygon* reducedPolygon = new GeoDataPolygon;
-            GeoDataPolygon* prevPolygon = static_cast<GeoDataPolygon*>(placemark->geometry());
+            GeoDataPolygon const * prevPolygon = static_cast<GeoDataPolygon const *>(geometry);
             GeoDataLinearRing const * prevRing = &(prevPolygon->outerBoundary());
             GeoDataLinearRing reducedRing;
             reduce(prevRing, &reducedRing);
