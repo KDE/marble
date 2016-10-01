@@ -11,6 +11,7 @@
 
 #include "VectorClipper.h"
 #include "TagsFilter.h"
+#include <TileId.h>
 
 #include <QSharedPointer>
 #include <ParsingRunnerManager.h>
@@ -24,6 +25,7 @@ public:
     QSharedPointer<GeoDataDocument> load(int zoomLevel, int tileX, int tileY);
     void setFilterTags(bool filter);
 
+    TileId tileFor(int zoomLevel, int tileX, int tileY) const;
     GeoDataDocument *clip(int zoomLevel, int tileX, int tileY);
     QString name() const;
 
@@ -31,6 +33,7 @@ public:
 
 private:
     QStringList tagsFilteredIn(int zoomLevel) const;
+    void setTagZoomLevel(int zoomLevel);
 
     QString m_baseDir;
     ParsingRunnerManager &m_manager;
@@ -38,6 +41,7 @@ private:
     int m_zoomLevel;
     int m_tileX;
     int m_tileY;
+    int m_tagZoomLevel;
     QString m_extension;
     QSharedPointer<VectorClipper> m_clipper;
     QSharedPointer<TagsFilter> m_tagsFilter;

@@ -21,24 +21,31 @@ TileDirectory::TileDirectory(const QString &baseDir, ParsingRunnerManager &manag
     m_zoomLevel(QFileInfo(baseDir).baseName().toInt()),
     m_tileX(-1),
     m_tileY(-1),
+    m_tagZoomLevel(-1),
     m_extension(extension),
     m_filterTags(false)
 {
     // nothing to do
 }
 
-QSharedPointer<GeoDataDocument> TileDirectory::load(int zoomLevel, int tileX, int tileY)
+TileId TileDirectory::tileFor(int zoomLevel, int tileX, int tileY) const
 {
     int const zoomDiff = zoomLevel - m_zoomLevel;
     int const x = tileX >> zoomDiff;
     int const y = tileY >> zoomDiff;
-    if (x == m_tileX && y == m_tileY) {
+    return TileId(QString(), m_zoomLevel, x, y);
+}
+
+QSharedPointer<GeoDataDocument> TileDirectory::load(int zoomLevel, int tileX, int tileY)
+{
+    auto const tile = tileFor(zoomLevel, tileX, tileY);
+    if (tile.x() == m_tileX && tile.y() == m_tileY) {
         return m_landmass;
     }
 
-    m_tileX = x;
-    m_tileY = y;
-    QString const filename = QString("%1/%2/%3.%4").arg(m_baseDir).arg(x).arg(y).arg(m_extension);
+    m_tileX = tile.x();
+    m_tileY = tile.y();
+    QString const filename = QString("%1/%2/%3.%4").arg(m_baseDir).arg(tile.x()).arg(tile.y()).arg(m_extension);
     m_landmass = open(filename, m_manager);
     return m_landmass;
 }
@@ -47,16 +54,9 @@ GeoDataDocument* TileDirectory::clip(int zoomLevel, int tileX, int tileY)
 {
     QSharedPointer<GeoDataDocument> oldMap = m_landmass;
     load(zoomLevel, tileX, tileY);
-    if (!m_clipper || oldMap != m_landmass) {
-        GeoDataDocument* input = m_landmass.data();
-        if (m_filterTags) {
-            QStringList const tags = tagsFilteredIn(zoomLevel);
-            if (zoomLevel < 17) {
-                m_tagsFilter = QSharedPointer<TagsFilter>(new TagsFilter(m_landmass.data(), tags));
-                input = m_tagsFilter->accepted();
-            }
-        }
-
+    if (!m_clipper || oldMap != m_landmass || m_tagZoomLevel != zoomLevel) {
+        setTagZoomLevel(zoomLevel);
+        GeoDataDocument* input = m_tagsFilter ? m_tagsFilter->accepted() : m_landmass.data();
         m_clipper = QSharedPointer<VectorClipper>(new VectorClipper(input));
     }
     return m_clipper->clipTo(zoomLevel, tileX, tileY);
@@ -170,6 +170,19 @@ QStringList TileDirectory::tagsFilteredIn(int zoomLevel) const
     tags << "boundary=national_park";
     tags << "boundary=protected_area";
     return tags;
+}
+
+void TileDirectory::setTagZoomLevel(int zoomLevel)
+{
+    m_tagZoomLevel = zoomLevel;
+    if (m_filterTags) {
+        QStringList const tags = tagsFilteredIn(m_tagZoomLevel);
+        if (m_tagZoomLevel < 17) {
+            m_tagsFilter = QSharedPointer<TagsFilter>(new TagsFilter(m_landmass.data(), tags));
+        } else {
+            m_tagsFilter.clear();
+        }
+    }
 }
 
 void TileDirectory::setFilterTags(bool filter)

@@ -265,15 +265,29 @@ int main(int argc, char *argv[])
         TileDirectory mapTiles("tiles/10", manager, parser.value("extension"));
         mapTiles.setFilterTags(true);
 
+        typedef QMap<QString, QVector<TileId> > Tiles;
+        Tiles tiles;
+
+        qint64 total = 0;
         foreach(auto zoomLevel, zoomLevels) {
             // @todo FIXME Assumes placemark ownership
             //WayConcatenator concatenator(tagsFilter.accepted(), QStringList() << "highway=*", false);
 
             TileIterator iter(boundingBox(inputFileName), zoomLevel);
-            qint64 count = 0;
-            qint64 const total = iter.total();
+            total += iter.total();
             foreach(auto const &tileId, iter) {
+                auto const tile = TileId(QString(), zoomLevel, tileId.x(), tileId.y());
+                auto const mapTile = mapTiles.tileFor(zoomLevel, tileId.x(), tileId.y());
+                auto const name = QString("%1/%2/%3").arg(mapTile.zoomLevel()).arg(mapTile.x()).arg(mapTile.y());
+                tiles[name] << tile;
+            }
+        }
+
+        qint64 count = 0;
+        foreach(auto const &tileList, tiles) {
+            foreach(auto const &tileId, tileList) {
                 ++count;
+                int const zoomLevel = tileId.zoomLevel();
                 GeoDataDocument* tile1 = mapTiles.clip(zoomLevel, tileId.x(), tileId.y());
                 GeoDataDocument* tile2 = loader.clip(zoomLevel, tileId.x(), tileId.y());
                 GeoDataDocument* combined = mergeDocuments(tile1, tile2);
