@@ -16,6 +16,7 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataLatLonAltBox.h"
 #include "TileId.h"
+#include "MarbleDirs.h"
 
 #include <QApplication>
 #include <QCommandLineParser>
@@ -57,11 +58,10 @@ GeoDataDocument* mergeDocuments(GeoDataDocument* map1, GeoDataDocument* map2)
     return mergedMap;
 }
 
-QString tileFileName(const QCommandLineParser &parser, const QString &outputName, int x, int y, int zoomLevel)
+QString tileFileName(const QCommandLineParser &parser, int x, int y, int zoomLevel)
 {
     QString const extension = parser.value("extension");
-    QString const baseDir = parser.isSet("output") ? (outputName + QLatin1Char('/')) : QString();
-    QString const outputDir = QString("%1%2/%3").arg(baseDir).arg(zoomLevel).arg(x);
+    QString const outputDir = QString("%1/%2/%3").arg(parser.value("output")).arg(zoomLevel).arg(x);
     QDir().mkpath(outputDir);
     QString const outputFile = QString("%1/%2.%3").arg(outputDir).arg(y).arg(extension);
     return outputFile;
@@ -119,7 +119,7 @@ int main(int argc, char *argv[])
                           {{"k", "keep-all-nodes"}, "Do not reduce nodes in line strings and rings."},
                           {{"m", "merge"}, "Merge the main document with the file <file_to_merge_with>.", "file_to_merge_with"},
                           {{"z", "zoom-level"}, "Zoom level according to which OSM information has to be processed.", "number"},
-                          {{"o", "output"}, "Output file or directory", "output"},
+                          {{"o", "output"}, "Output file or directory", "output", QString("%1/maps/earth/vectorosm").arg(MarbleDirs::localPath())},
                           {{"e", "extension"}, "Output file type: o5m (default), osm or kml", "file extension", "o5m"}
                       });
 
@@ -145,13 +145,6 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    QString outputName;
-    if(parser.isSet("output")) {
-        outputName = parser.value("output");
-    } else {
-        outputName = "s_" + inputFileName;
-    }
-
     QFileInfo file( inputFileName );
     if ( !file.exists() ) {
         qWarning() << "File " << file.absoluteFilePath() << " does not exist. Exiting.";
@@ -166,6 +159,7 @@ int main(int argc, char *argv[])
     if (parser.isSet("osmconvert")) {
         QString const extension = parser.value("extension");
         auto mapArea = boundingBox(inputFileName);
+        QString const outputName = parser.value("output");
         foreach(auto zoomLevel, zoomLevels) {
             int const N = pow(2, zoomLevel);
             TileIterator iter(mapArea, zoomLevel);
@@ -202,7 +196,7 @@ int main(int argc, char *argv[])
             qint64 const total = iter.total();
             foreach(auto const &tileId, iter) {
                 ++count;
-                QString const filename = tileFileName(parser, outputName, tileId.x(), tileId.y(), zoomLevel);
+                QString const filename = tileFileName(parser, tileId.x(), tileId.y(), zoomLevel);
                 if (!overwriteTiles && QFileInfo(filename).exists()) {
                     continue;
                 }
@@ -249,7 +243,7 @@ int main(int argc, char *argv[])
             foreach(auto const &tileId, tileList) {
                 ++count;
                 int const zoomLevel = tileId.zoomLevel();
-                QString const filename = tileFileName(parser, outputName, tileId.x(), tileId.y(), zoomLevel);
+                QString const filename = tileFileName(parser, tileId.x(), tileId.y(), zoomLevel);
                 if (!overwriteTiles && QFileInfo(filename).exists()) {
                     continue;
                 }
