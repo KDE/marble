@@ -33,6 +33,11 @@ namespace Marble {
 GeoDataDocument *OsmParser::parse(const QString &filename, QString &error)
 {
     QFileInfo const fileInfo(filename);
+    if (!fileInfo.exists() || !fileInfo.isReadable()) {
+        error = QString("Cannot read file %1").arg(filename);
+        return 0;
+    }
+
     if (fileInfo.completeSuffix() == QLatin1String("o5m")) {
         return parseO5m(filename, error);
     } else {
