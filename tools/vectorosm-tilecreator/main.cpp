@@ -40,45 +40,6 @@
 
 using namespace Marble;
 
-enum DebugLevel {
-    Debug,
-    Info,
-    Mute
-};
-
-DebugLevel debugLevel = Info;
-
-void debugOutput( QtMsgType type, const QMessageLogContext &context, const QString &msg )
-{
-    switch ( type ) {
-    case QtDebugMsg:
-        if ( debugLevel == Debug ) {
-            qDebug() << "Debug: " << context.file << ":" << context.line << " " << msg;
-        }
-        break;
-    case QtInfoMsg:
-        if ( debugLevel < Mute ) {
-            qInfo() << "Info: " << context.file << ":" << context.line << " " << msg;
-        }
-        break;
-    case QtWarningMsg:
-        if ( debugLevel < Mute ) {
-            qDebug() << "Warning: " << context.file << ":" << context.line << " " << msg;
-        }
-        break;
-    case QtCriticalMsg:
-        if ( debugLevel < Mute ) {
-            qDebug() << "Critical: " << context.file << ":" << context.line << " " << msg;
-        }
-        break;
-    case QtFatalMsg:
-        if ( debugLevel < Mute ) {
-            qDebug() << "Fatal: " << context.file << ":" << context.line << " " << msg;
-            abort();
-        }
-    }
-}
-
 GeoDataDocument* mergeDocuments(GeoDataDocument* map1, GeoDataDocument* map2)
 {
     GeoDataDocument* mergedMap = new GeoDataDocument(*map1);
@@ -148,9 +109,7 @@ int main(int argc, char *argv[])
     parser.addPositionalArgument("input", "The input .osm or .shp file.");
 
     parser.addOptions({
-                          {{"d", "debug"}, "Debug output in the terminal."},
                           {{"t", "osmconvert"}, "Tile data using osmconvert."},
-                          {{"s", "silent"}, "Don't output to terminal."},
                           {{"k", "keep-all-nodes"}, "Do not reduce nodes in line strings and rings."},
                           {{"m", "merge"}, "Merge the main document with the file <file_to_merge_with>.", "file_to_merge_with"},
                           {{"z", "zoom-level"}, "Zoom level according to which OSM information has to be processed.", "number"},
@@ -169,8 +128,6 @@ int main(int argc, char *argv[])
     // input is args.at(0), output is args.at(1)
 
     QString inputFileName = args.at(0);
-    bool debug = parser.isSet("debug");
-    bool silent = parser.isSet("silent");
     auto const levels = parser.value("zoom-level").split(',');
     QVector<unsigned int> zoomLevels;
     foreach(auto const &level, levels) {
@@ -188,16 +145,6 @@ int main(int argc, char *argv[])
     } else {
         outputName = "s_" + inputFileName;
     }
-
-    if(debug) {
-        debugLevel = Debug;
-        qInstallMessageHandler( debugOutput );
-    }
-    if(silent) {
-        debugLevel = Mute;
-        qInstallMessageHandler( debugOutput );
-    }
-
 
     QFileInfo file( inputFileName );
     if ( !file.exists() ) {
