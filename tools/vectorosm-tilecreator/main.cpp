@@ -34,6 +34,7 @@
 #include "NodeReducer.h"
 #include "WayConcatenator.h"
 #include "TileIterator.h"
+#include "TileDirectory.h"
 
 #include <iostream>
 
@@ -171,34 +172,6 @@ QStringList tagsFilteredIn(int zoomLevel)
     tags << "boundary=protected_area";
     return tags;
 }
-
-QSharedPointer<GeoDataDocument> open(const QString &filename, ParsingRunnerManager &manager)
-{
-    // Timeout is set to 10 min. If the file is reaaally huge, set it to something bigger.
-    GeoDataDocument* map = manager.openFile(filename, DocumentRole::MapDocument, 600000);
-    if(map == nullptr) {
-        qWarning() << "File" << filename << "couldn't be loaded.";
-    }
-    QSharedPointer<GeoDataDocument> result = QSharedPointer<GeoDataDocument>(map);
-    return result;
-}
-
-class LandmassLoader
-{
-public:
-    LandmassLoader(const QString &baseDir, ParsingRunnerManager &manager, const QString &extension);
-    QSharedPointer<GeoDataDocument> load(int zoomLevel, int tileX, int tileY);
-
-private:
-    QString m_baseDir;
-    ParsingRunnerManager &m_manager;
-    QSharedPointer<GeoDataDocument> m_landmass;
-    int m_zoomLevel;
-    int m_tileX;
-    int m_tileY;
-    QString m_extension;
-};
-
 
 GeoDataDocument* mergeDocuments(GeoDataDocument* map1, GeoDataDocument* map2)
 {
@@ -347,7 +320,7 @@ int main(int argc, char *argv[])
             }
         }
     } else if (*zoomLevels.cbegin() <= 9) {
-        auto map = open(inputFileName, manager);
+        auto map = TileDirectory::open(inputFileName, manager);
         VectorClipper processor(map.data());
         GeoDataLatLonBox world(85.0, -85.0, 180.0, -180.0, GeoDataCoordinates::Degree);
         foreach(auto zoomLevel, zoomLevels) {
@@ -372,8 +345,8 @@ int main(int argc, char *argv[])
             }
         }
     } else {
-        auto map = open(inputFileName, manager);
-        LandmassLoader loader(parser.value("merge"), manager, parser.value("extension"));
+        auto map = TileDirectory::open(inputFileName, manager);
+        TileDirectory loader(parser.value("merge"), manager, parser.value("extension"));
         QSharedPointer<VectorClipper> landMassClipper;
         QSharedPointer<GeoDataDocument> mergeMap;
 
@@ -425,29 +398,3 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-LandmassLoader::LandmassLoader(const QString &baseDir, ParsingRunnerManager &manager, QString const &extension) :
-    m_baseDir(baseDir),
-    m_manager(manager),
-    m_zoomLevel(QFileInfo(baseDir).baseName().toInt()),
-    m_tileX(-1),
-    m_tileY(-1),
-    m_extension(extension)
-{
-    // nothing to do
-}
-
-QSharedPointer<GeoDataDocument> LandmassLoader::load(int zoomLevel, int tileX, int tileY)
-{
-    int const zoomDiff = zoomLevel - m_zoomLevel;
-    int const x = tileX >> zoomDiff;
-    int const y = tileY >> zoomDiff;
-    if (x == m_tileX && y == m_tileY) {
-        return m_landmass;
-    }
-
-    m_tileX = x;
-    m_tileY = y;
-    QString const filename = QString("%1/%2/%3.%4").arg(m_baseDir).arg(x).arg(y).arg(m_extension);
-    m_landmass = open(filename, m_manager);
-    return m_landmass;
-}

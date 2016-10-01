@@ -30,6 +30,7 @@ BaseFilter.cpp
 NodeReducer.cpp
 TagsFilter.cpp
 TileIterator.cpp
+TileDirectory.cpp
 VectorClipper.cpp
 WayConcatenator.cpp
 WayChunk.cpp
