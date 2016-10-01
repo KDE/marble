@@ -57,18 +57,23 @@ GeoDataDocument* mergeDocuments(GeoDataDocument* map1, GeoDataDocument* map2)
     return mergedMap;
 }
 
-bool writeTile(const QCommandLineParser &parser, const QString &outputName, GeoDataDocument* tile, int x, int y, int zoomLevel)
+QString tileFileName(const QCommandLineParser &parser, const QString &outputName, int x, int y, int zoomLevel)
 {
-    if (tile->size() == 0) {
-        return true;
-    }
     QString const extension = parser.value("extension");
     QString const baseDir = parser.isSet("output") ? (outputName + QLatin1Char('/')) : QString();
     QString const outputDir = QString("%1%2/%3").arg(baseDir).arg(zoomLevel).arg(x);
     QDir().mkpath(outputDir);
     QString const outputFile = QString("%1/%2.%3").arg(outputDir).arg(y).arg(extension);
+    return outputFile;
+}
+
+bool writeTile(GeoDataDocument* tile, const QString &outputFile)
+{
+    if (tile->size() == 0) {
+        return true;
+    }
     if (!GeoDataDocumentWriter::write(outputFile, *tile)) {
-        qWarning() << "Could not write the file " << outputName;
+        qWarning() << "Could not write the file " << outputFile;
         return false;
     }
     return true;
@@ -110,6 +115,7 @@ int main(int argc, char *argv[])
 
     parser.addOptions({
                           {{"t", "osmconvert"}, "Tile data using osmconvert."},
+                          {"conflict-resolution", "How to deal with existing tiles: overwrite, skip or merge", "mode", "overwrite"},
                           {{"k", "keep-all-nodes"}, "Do not reduce nodes in line strings and rings."},
                           {{"m", "merge"}, "Merge the main document with the file <file_to_merge_with>.", "file_to_merge_with"},
                           {{"z", "zoom-level"}, "Zoom level according to which OSM information has to be processed.", "number"},
@@ -156,6 +162,7 @@ int main(int argc, char *argv[])
     ParsingRunnerManager manager(model.pluginManager());
 
     bool const keepAllNodes = parser.isSet("keep-all-nodes");
+    bool const overwriteTiles = parser.value("conflict-resolution") == "overwrite";
     if (parser.isSet("osmconvert")) {
         QString const extension = parser.value("extension");
         auto mapArea = boundingBox(inputFileName);
@@ -167,8 +174,11 @@ int main(int argc, char *argv[])
             foreach(auto const &tileId, iter) {
                 ++count;
                 QString directory = QString("%1/%2/%3").arg(outputName).arg(zoomLevel).arg(tileId.x());
-                QDir().mkpath(directory);
                 QString const output = QString("-o=%1/%2.%3").arg(directory).arg(tileId.y()).arg(extension);
+                if (!overwriteTiles && QFileInfo(output).exists()) {
+                    continue;
+                }
+                QDir().mkpath(directory);
                 double const minLon = TileId::tileX2lon(tileId.x(), N) * RAD2DEG;
                 double const maxLon = TileId::tileX2lon(tileId.x()+1, N) * RAD2DEG;
                 double const maxLat = TileId::tileY2lat(tileId.y(), N) * RAD2DEG;
@@ -192,9 +202,13 @@ int main(int argc, char *argv[])
             qint64 const total = iter.total();
             foreach(auto const &tileId, iter) {
                 ++count;
+                QString const filename = tileFileName(parser, outputName, tileId.x(), tileId.y(), zoomLevel);
+                if (!overwriteTiles && QFileInfo(filename).exists()) {
+                    continue;
+                }
                 GeoDataDocument* tile = processor.clipTo(zoomLevel, tileId.x(), tileId.y());
                 QSharedPointer<NodeReducer> reducer = QSharedPointer<NodeReducer>(keepAllNodes ? nullptr : new NodeReducer(tile, zoomLevel+1));
-                if (!writeTile(parser, outputName, tile, tileId.x(), tileId.y(), zoomLevel)) {
+                if (!writeTile(tile, filename)) {
                     return 4;
                 }
                 std::cout << "Tile " << count << "/" << total << " (" << tile->name().toStdString() << ") done.";
@@ -235,11 +249,15 @@ int main(int argc, char *argv[])
             foreach(auto const &tileId, tileList) {
                 ++count;
                 int const zoomLevel = tileId.zoomLevel();
+                QString const filename = tileFileName(parser, outputName, tileId.x(), tileId.y(), zoomLevel);
+                if (!overwriteTiles && QFileInfo(filename).exists()) {
+                    continue;
+                }
                 GeoDataDocument* tile1 = mapTiles.clip(zoomLevel, tileId.x(), tileId.y());
                 GeoDataDocument* tile2 = loader.clip(zoomLevel, tileId.x(), tileId.y());
                 GeoDataDocument* combined = mergeDocuments(tile1, tile2);
                 QSharedPointer<NodeReducer> reducer = QSharedPointer<NodeReducer>(keepAllNodes ? nullptr : new NodeReducer(combined, zoomLevel));
-                if (!writeTile(parser, outputName, combined, tileId.x(), tileId.y(), zoomLevel)) {
+                if (!writeTile(combined, filename)) {
                     return 4;
                 }
 
