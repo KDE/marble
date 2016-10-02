@@ -27,6 +27,7 @@
 #include <QElapsedTimer>
 #include <QSharedPointer>
 #include <QFileInfo>
+#include <QUrl>
 
 #include <QMessageLogContext>
 #include <QProcess>
@@ -69,9 +70,6 @@ QString tileFileName(const QCommandLineParser &parser, int x, int y, int zoomLev
 
 bool writeTile(GeoDataDocument* tile, const QString &outputFile)
 {
-    if (tile->size() == 0) {
-        return true;
-    }
     if (!GeoDataDocumentWriter::write(outputFile, *tile)) {
         qWarning() << "Could not write the file " << outputFile;
         return false;
@@ -96,7 +94,6 @@ int main(int argc, char *argv[])
                           {{"t", "osmconvert"}, "Tile data using osmconvert."},
                           {"conflict-resolution", "How to deal with existing tiles: overwrite, skip or merge", "mode", "overwrite"},
                           {{"c", "cache-directory"}, "Directory for temporary data.", "cache", "cache"},
-                          {{"l", "landmass"}, "File with landmass polygons (world-wide).", "filename", "landmass.shp"},
                           {{"z", "zoom-level"}, "Zoom level according to which OSM information has to be processed.", "levels", "11,13,15,17"},
                           {{"o", "output"}, "Output file or directory", "output", QString("%1/maps/earth/vectorosm").arg(MarbleDirs::localPath())},
                           {{"e", "extension"}, "Output file type: o5m (default), osm or kml", "file extension", "o5m"}
@@ -124,15 +121,8 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    QFileInfo file( inputFileName );
-    if ( !file.exists() ) {
-        qWarning() << "File " << file.absoluteFilePath() << " does not exist. Exiting.";
-        return 2;
-    }
-
     MarbleModel model;
     ParsingRunnerManager manager(model.pluginManager());
-
     QString const cacheDirectory = parser.value("cache-directory");
     QDir().mkpath(cacheDirectory);
     if (!QFileInfo(cacheDirectory).isWritable()) {
@@ -169,16 +159,14 @@ int main(int argc, char *argv[])
             }
         }
     } else {
-        TileDirectory loader(TileDirectory::Landmass, QString("%1/landmass/7").arg(cacheDirectory), manager, parser.value("extension"));
-        loader.setInputFile(parser.value("landmass"));
-        auto const boundingBox = loader.boundingBox(inputFileName);
+        TileDirectory mapTiles(TileDirectory::OpenStreetMap, cacheDirectory, manager, parser.value("extension"));
+        mapTiles.setInputFile(inputFileName);
+        mapTiles.createTiles();
+        auto const boundingBox = mapTiles.boundingBox();
+
+        TileDirectory loader(TileDirectory::Landmass, cacheDirectory, manager, parser.value("extension"));
         loader.setBoundingBox(boundingBox);
         loader.createTiles();
-
-        TileDirectory mapTiles(TileDirectory::OpenStreetMap, QString("%1/osm/10").arg(cacheDirectory), manager, parser.value("extension"));
-        mapTiles.setInputFile(inputFileName);
-        mapTiles.setBoundingBox(boundingBox);
-        mapTiles.createTiles();
 
         typedef QMap<QString, QVector<TileId> > Tiles;
         Tiles tiles;
@@ -192,9 +180,11 @@ int main(int argc, char *argv[])
             total += iter.total();
             foreach(auto const &tileId, iter) {
                 auto const tile = TileId(QString(), zoomLevel, tileId.x(), tileId.y());
-                auto const mapTile = mapTiles.tileFor(zoomLevel, tileId.x(), tileId.y());
-                auto const name = QString("%1/%2/%3").arg(mapTile.zoomLevel()).arg(mapTile.x()).arg(mapTile.y());
-                tiles[name] << tile;
+                if (mapTiles.contains(tile)) {
+                    auto const mapTile = mapTiles.tileFor(zoomLevel, tileId.x(), tileId.y());
+                    auto const name = QString("%1/%2/%3").arg(mapTile.zoomLevel()).arg(mapTile.x()).arg(mapTile.y());
+                    tiles[name] << tile;
+                }
             }
         }
 

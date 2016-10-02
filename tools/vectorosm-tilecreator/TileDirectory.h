@@ -8,26 +8,55 @@
 // Copyright 2016      Dennis Nienhüser <nienhueser@kde.org>
 //
 
+#ifndef MARBLE_TILEDIRECTORY_H
+#define MARBLE_TILEDIRECTORY_H
 
 #include "VectorClipper.h"
 #include "TagsFilter.h"
 #include <TileId.h>
-
-#include <QSharedPointer>
+#include <GeoDataLinearRing.h>
 #include <ParsingRunnerManager.h>
+
+#include <QNetworkAccessManager>
+#include <QSharedPointer>
+#include <QObject>
+#include <QFile>
+
+class QNetworkReply;
 
 namespace Marble {
 
-class TileDirectory
+class Download : public QObject
 {
+    Q_OBJECT
+
 public:
+    QString target;
+    QNetworkReply* reply;
+    qint64 received;
+    qint64 total;
+
+public Q_SLOTS:
+    void updateProgress(qint64 received, qint64 total);
+
+private:
+    QFile m_file;
+};
+
+class TileDirectory : public QObject
+{
+    Q_OBJECT
+
+public:
+
     enum TileType
     {
         Landmass,
         OpenStreetMap
     };
 
-    TileDirectory(TileType tileType, const QString &baseDir, ParsingRunnerManager &manager, const QString &extension);
+    TileDirectory(TileType tileType, const QString &cacheDir, ParsingRunnerManager &manager, const QString &extension);
+
     QSharedPointer<GeoDataDocument> load(int zoomLevel, int tileX, int tileY);
     void setInputFile(const QString &filename);
 
@@ -39,12 +68,21 @@ public:
     GeoDataLatLonBox boundingBox(const QString &filename) const;
     GeoDataLatLonBox boundingBox() const;
     void setBoundingBox(const GeoDataLatLonBox &boundingBox);
+    void setBoundingPolygon(const QString &filename);
     void createTiles() const;
+    bool contains(const TileId &tile) const;
+
+private Q_SLOTS:
+    void updateProgress();
+    void handleFinishedDownload(const QString &filename, const QString &id);
 
 private:
     QStringList tagsFilteredIn(int zoomLevel) const;
     void setTagZoomLevel(int zoomLevel);
+    void download(const QString &url, const QString &target);
+    void printProgress(double progress, int barWidth=40) const;
 
+    QString m_cacheDir;
     QString m_baseDir;
     ParsingRunnerManager &m_manager;
     QSharedPointer<GeoDataDocument> m_landmass;
@@ -58,6 +96,12 @@ private:
     TileType m_tileType;
     QString m_inputFile;
     GeoDataLatLonBox m_boundingBox;
+    QVector<GeoDataLinearRing> m_boundingPolygon;
+    QNetworkAccessManager m_downloadManager;
+    QString m_landmassFile;
+    QSharedPointer<Download> m_download;
 };
 
 }
+
+#endif
