@@ -45,12 +45,15 @@ TileDirectory::TileDirectory(TileType tileType, const QString &cacheDir, Parsing
     if (m_tileType == Landmass) {
         m_zoomLevel = 7;
         m_baseDir = QString("%1/landmass/%2").arg(cacheDir).arg(m_zoomLevel);
-        m_inputFile = QString("%1/land-polygons-split-4326/land_polygons.shp").arg(cacheDir);
+        QString const landmassDir = QString("%1/land-polygons-split-4326").arg(cacheDir);
+        m_inputFile = QString("%1/land_polygons.shp").arg(landmassDir);
         auto const landmassZip = QString("%1/%2").arg(m_cacheDir).arg(m_landmassFile);
         if (!QFileInfo(landmassZip).exists()) {
             QString const url = QString("http://data.openstreetmapdata.com/%1").arg(m_landmassFile);
             download(url, landmassZip);
+        }
 
+        if (!QFileInfo(landmassDir).exists()) {
             MarbleZipReader unzip(landmassZip);
             if (!unzip.extractAll(m_cacheDir)) {
                 qWarning() << "Failed to extract" << landmassZip << "to" << m_cacheDir;
