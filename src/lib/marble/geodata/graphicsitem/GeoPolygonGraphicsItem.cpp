@@ -19,7 +19,7 @@ namespace Marble
 
 AbstractGeoPolygonGraphicsItem *GeoPolygonGraphicsItem::createGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataPolygon *polygon)
 {
-    if (placemark->visualCategory() == GeoDataFeature::Building) {
+    if (placemark->visualCategory() == GeoDataPlacemark::Building) {
         return new BuildingGeoPolygonGraphicsItem(placemark, polygon);
     }
     return new GeoPolygonGraphicsItem(placemark, polygon);
@@ -27,7 +27,7 @@ AbstractGeoPolygonGraphicsItem *GeoPolygonGraphicsItem::createGraphicsItem(const
 
 AbstractGeoPolygonGraphicsItem *GeoPolygonGraphicsItem::createGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataLinearRing *ring)
 {
-    if (placemark->visualCategory() == GeoDataFeature::Building) {
+    if (placemark->visualCategory() == GeoDataPlacemark::Building) {
         return new BuildingGeoPolygonGraphicsItem(placemark, ring);
     }
     return new GeoPolygonGraphicsItem(placemark, ring);
@@ -40,7 +40,7 @@ GeoPolygonGraphicsItem::GeoPolygonGraphicsItem(const GeoDataPlacemark *placemark
     const int elevation = extractElevation(*placemark);
     setZValue(zValue() + elevation);
 
-    const GeoDataFeature::GeoDataVisualCategory visualCategory = placemark->visualCategory();
+    const GeoDataPlacemark::GeoDataVisualCategory visualCategory = placemark->visualCategory();
     const QString paintLayer = QLatin1String("Polygon/") + StyleBuilder::visualCategoryName(visualCategory);
     setPaintLayers(QStringList(paintLayer));
 }
@@ -51,7 +51,7 @@ GeoPolygonGraphicsItem::GeoPolygonGraphicsItem(const GeoDataPlacemark *placemark
     const int elevation = extractElevation(*placemark);
     setZValue(zValue() + elevation);
 
-    const GeoDataFeature::GeoDataVisualCategory visualCategory = placemark->visualCategory();
+    const GeoDataPlacemark::GeoDataVisualCategory visualCategory = placemark->visualCategory();
     const QString paintLayer = QLatin1String("Polygon/") + StyleBuilder::visualCategoryName(visualCategory);
     setPaintLayers(QStringList(paintLayer));
 }

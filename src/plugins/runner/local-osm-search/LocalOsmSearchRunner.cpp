@@ -24,74 +24,74 @@
 namespace Marble
 {
 
-QMap<OsmPlacemark::OsmCategory, GeoDataFeature::GeoDataVisualCategory> LocalOsmSearchRunner::m_categoryMap;
+QMap<OsmPlacemark::OsmCategory, GeoDataPlacemark::GeoDataVisualCategory> LocalOsmSearchRunner::m_categoryMap;
 
 LocalOsmSearchRunner::LocalOsmSearchRunner( const QStringList &databaseFiles, QObject *parent ) :
     SearchRunner( parent ),
     m_database( databaseFiles )
 {
     if ( m_categoryMap.isEmpty() ) {
-        m_categoryMap[OsmPlacemark::UnknownCategory] = GeoDataFeature::OsmSite;
-        m_categoryMap[OsmPlacemark::Address] = GeoDataFeature::OsmSite;
-        m_categoryMap[OsmPlacemark::AccomodationCamping] = GeoDataFeature::AccomodationCamping;
-        m_categoryMap[OsmPlacemark::AccomodationHostel] = GeoDataFeature::AccomodationHostel;
-        m_categoryMap[OsmPlacemark::AccomodationHotel] = GeoDataFeature::AccomodationHotel;
-        m_categoryMap[OsmPlacemark::AccomodationMotel] = GeoDataFeature::AccomodationMotel;
-        m_categoryMap[OsmPlacemark::AccomodationYouthHostel] = GeoDataFeature::AccomodationYouthHostel;
-        m_categoryMap[OsmPlacemark::AmenityLibrary] = GeoDataFeature::AmenityLibrary;
-        m_categoryMap[OsmPlacemark::EducationCollege] = GeoDataFeature::EducationCollege;
-        m_categoryMap[OsmPlacemark::EducationSchool] = GeoDataFeature::EducationSchool;
-        m_categoryMap[OsmPlacemark::EducationUniversity] = GeoDataFeature::EducationUniversity;
-        m_categoryMap[OsmPlacemark::FoodBar] = GeoDataFeature::FoodBar;
-        m_categoryMap[OsmPlacemark::FoodBiergarten] = GeoDataFeature::FoodBiergarten;
-        m_categoryMap[OsmPlacemark::FoodCafe] = GeoDataFeature::FoodCafe;
-        m_categoryMap[OsmPlacemark::FoodFastFood] = GeoDataFeature::FoodFastFood;
-        m_categoryMap[OsmPlacemark::FoodPub] = GeoDataFeature::FoodPub;
-        m_categoryMap[OsmPlacemark::FoodRestaurant] = GeoDataFeature::FoodRestaurant;
-        m_categoryMap[OsmPlacemark::HealthDoctors] = GeoDataFeature::HealthDoctors;
-        m_categoryMap[OsmPlacemark::HealthHospital] = GeoDataFeature::HealthHospital;
-        m_categoryMap[OsmPlacemark::HealthPharmacy] = GeoDataFeature::HealthPharmacy;
-        m_categoryMap[OsmPlacemark::MoneyAtm] = GeoDataFeature::MoneyAtm;
-        m_categoryMap[OsmPlacemark::MoneyBank] = GeoDataFeature::MoneyBank;
-        m_categoryMap[OsmPlacemark::ShoppingBeverages] = GeoDataFeature::ShopBeverages;
-        m_categoryMap[OsmPlacemark::ShoppingHifi] = GeoDataFeature::ShopHifi;
-        m_categoryMap[OsmPlacemark::ShoppingSupermarket] = GeoDataFeature::ShopSupermarket;
-        m_categoryMap[OsmPlacemark::TouristAttraction] = GeoDataFeature::TouristAttraction;
-        m_categoryMap[OsmPlacemark::TouristCastle] = GeoDataFeature::TouristCastle;
-        m_categoryMap[OsmPlacemark::TouristCinema] = GeoDataFeature::TouristCinema;
-        m_categoryMap[OsmPlacemark::TouristMonument] = GeoDataFeature::TouristMonument;
-        m_categoryMap[OsmPlacemark::TouristMuseum] = GeoDataFeature::TouristMuseum;
-        m_categoryMap[OsmPlacemark::TouristRuin] = GeoDataFeature::TouristRuin;
-        m_categoryMap[OsmPlacemark::TouristTheatre] = GeoDataFeature::TouristTheatre;
-        m_categoryMap[OsmPlacemark::TouristThemePark] = GeoDataFeature::TouristThemePark;
-        m_categoryMap[OsmPlacemark::TouristViewPoint] = GeoDataFeature::TouristViewPoint;
-        m_categoryMap[OsmPlacemark::TouristZoo] = GeoDataFeature::TouristZoo;
-        m_categoryMap[OsmPlacemark::TransportAirport] = GeoDataFeature::TransportAerodrome;
-        m_categoryMap[OsmPlacemark::TransportAirportTerminal] = GeoDataFeature::TransportAirportTerminal;
-        m_categoryMap[OsmPlacemark::TransportAirportRunway] = GeoDataFeature::TransportAirportRunway;
-        m_categoryMap[OsmPlacemark::TransportAirportApron] = GeoDataFeature::TransportAirportApron;
-        m_categoryMap[OsmPlacemark::TransportAirportTaxiway] = GeoDataFeature::TransportAirportTaxiway;
-        m_categoryMap[OsmPlacemark::TransportBusStation] = GeoDataFeature::TransportBusStation;
-        m_categoryMap[OsmPlacemark::TransportBusStop] = GeoDataFeature::TransportBusStop;
-        m_categoryMap[OsmPlacemark::TransportCarShare] = GeoDataFeature::TransportCarShare;
-        m_categoryMap[OsmPlacemark::TransportFuel] = GeoDataFeature::TransportFuel;
-        m_categoryMap[OsmPlacemark::TransportParking] = GeoDataFeature::TransportParking;
-        m_categoryMap[OsmPlacemark::TransportTrainStation] = GeoDataFeature::TransportTrainStation;
-        m_categoryMap[OsmPlacemark::TransportTramStop] = GeoDataFeature::TransportTramStop;
-        m_categoryMap[OsmPlacemark::TransportRentalBicycle] = GeoDataFeature::TransportRentalBicycle;
-        m_categoryMap[OsmPlacemark::TransportRentalCar] = GeoDataFeature::TransportRentalCar;
-        m_categoryMap[OsmPlacemark::TransportSpeedCamera] = GeoDataFeature::OsmSite;
-        m_categoryMap[OsmPlacemark::TransportTaxiRank] = GeoDataFeature::TransportTaxiRank;
-        m_categoryMap[OsmPlacemark::PlacesRegion] = GeoDataFeature::OsmSite;
-        m_categoryMap[OsmPlacemark::PlacesCounty] = GeoDataFeature::OsmSite;
-        m_categoryMap[OsmPlacemark::PlacesCity] = GeoDataFeature::PlaceCity;
-        m_categoryMap[OsmPlacemark::PlacesTown] = GeoDataFeature::PlaceTown;
-        m_categoryMap[OsmPlacemark::PlacesVillage] = GeoDataFeature::PlaceVillage;
-        m_categoryMap[OsmPlacemark::PlacesHamlet] = GeoDataFeature::PlaceHamlet;
-        m_categoryMap[OsmPlacemark::PlacesIsolatedDwelling] = GeoDataFeature::OsmSite;
-        m_categoryMap[OsmPlacemark::PlacesSuburb] = GeoDataFeature::PlaceSuburb;
-        m_categoryMap[OsmPlacemark::PlacesLocality] = GeoDataFeature::PlaceLocality;
-        m_categoryMap[OsmPlacemark::PlacesIsland] = GeoDataFeature::OsmSite;
+        m_categoryMap[OsmPlacemark::UnknownCategory] = GeoDataPlacemark::OsmSite;
+        m_categoryMap[OsmPlacemark::Address] = GeoDataPlacemark::OsmSite;
+        m_categoryMap[OsmPlacemark::AccomodationCamping] = GeoDataPlacemark::AccomodationCamping;
+        m_categoryMap[OsmPlacemark::AccomodationHostel] = GeoDataPlacemark::AccomodationHostel;
+        m_categoryMap[OsmPlacemark::AccomodationHotel] = GeoDataPlacemark::AccomodationHotel;
+        m_categoryMap[OsmPlacemark::AccomodationMotel] = GeoDataPlacemark::AccomodationMotel;
+        m_categoryMap[OsmPlacemark::AccomodationYouthHostel] = GeoDataPlacemark::AccomodationYouthHostel;
+        m_categoryMap[OsmPlacemark::AmenityLibrary] = GeoDataPlacemark::AmenityLibrary;
+        m_categoryMap[OsmPlacemark::EducationCollege] = GeoDataPlacemark::EducationCollege;
+        m_categoryMap[OsmPlacemark::EducationSchool] = GeoDataPlacemark::EducationSchool;
+        m_categoryMap[OsmPlacemark::EducationUniversity] = GeoDataPlacemark::EducationUniversity;
+        m_categoryMap[OsmPlacemark::FoodBar] = GeoDataPlacemark::FoodBar;
+        m_categoryMap[OsmPlacemark::FoodBiergarten] = GeoDataPlacemark::FoodBiergarten;
+        m_categoryMap[OsmPlacemark::FoodCafe] = GeoDataPlacemark::FoodCafe;
+        m_categoryMap[OsmPlacemark::FoodFastFood] = GeoDataPlacemark::FoodFastFood;
+        m_categoryMap[OsmPlacemark::FoodPub] = GeoDataPlacemark::FoodPub;
+        m_categoryMap[OsmPlacemark::FoodRestaurant] = GeoDataPlacemark::FoodRestaurant;
+        m_categoryMap[OsmPlacemark::HealthDoctors] = GeoDataPlacemark::HealthDoctors;
+        m_categoryMap[OsmPlacemark::HealthHospital] = GeoDataPlacemark::HealthHospital;
+        m_categoryMap[OsmPlacemark::HealthPharmacy] = GeoDataPlacemark::HealthPharmacy;
+        m_categoryMap[OsmPlacemark::MoneyAtm] = GeoDataPlacemark::MoneyAtm;
+        m_categoryMap[OsmPlacemark::MoneyBank] = GeoDataPlacemark::MoneyBank;
+        m_categoryMap[OsmPlacemark::ShoppingBeverages] = GeoDataPlacemark::ShopBeverages;
+        m_categoryMap[OsmPlacemark::ShoppingHifi] = GeoDataPlacemark::ShopHifi;
+        m_categoryMap[OsmPlacemark::ShoppingSupermarket] = GeoDataPlacemark::ShopSupermarket;
+        m_categoryMap[OsmPlacemark::TouristAttraction] = GeoDataPlacemark::TouristAttraction;
+        m_categoryMap[OsmPlacemark::TouristCastle] = GeoDataPlacemark::TouristCastle;
+        m_categoryMap[OsmPlacemark::TouristCinema] = GeoDataPlacemark::TouristCinema;
+        m_categoryMap[OsmPlacemark::TouristMonument] = GeoDataPlacemark::TouristMonument;
+        m_categoryMap[OsmPlacemark::TouristMuseum] = GeoDataPlacemark::TouristMuseum;
+        m_categoryMap[OsmPlacemark::TouristRuin] = GeoDataPlacemark::TouristRuin;
+        m_categoryMap[OsmPlacemark::TouristTheatre] = GeoDataPlacemark::TouristTheatre;
+        m_categoryMap[OsmPlacemark::TouristThemePark] = GeoDataPlacemark::TouristThemePark;
+        m_categoryMap[OsmPlacemark::TouristViewPoint] = GeoDataPlacemark::TouristViewPoint;
+        m_categoryMap[OsmPlacemark::TouristZoo] = GeoDataPlacemark::TouristZoo;
+        m_categoryMap[OsmPlacemark::TransportAirport] = GeoDataPlacemark::TransportAerodrome;
+        m_categoryMap[OsmPlacemark::TransportAirportTerminal] = GeoDataPlacemark::TransportAirportTerminal;
+        m_categoryMap[OsmPlacemark::TransportAirportRunway] = GeoDataPlacemark::TransportAirportRunway;
+        m_categoryMap[OsmPlacemark::TransportAirportApron] = GeoDataPlacemark::TransportAirportApron;
+        m_categoryMap[OsmPlacemark::TransportAirportTaxiway] = GeoDataPlacemark::TransportAirportTaxiway;
+        m_categoryMap[OsmPlacemark::TransportBusStation] = GeoDataPlacemark::TransportBusStation;
+        m_categoryMap[OsmPlacemark::TransportBusStop] = GeoDataPlacemark::TransportBusStop;
+        m_categoryMap[OsmPlacemark::TransportCarShare] = GeoDataPlacemark::TransportCarShare;
+        m_categoryMap[OsmPlacemark::TransportFuel] = GeoDataPlacemark::TransportFuel;
+        m_categoryMap[OsmPlacemark::TransportParking] = GeoDataPlacemark::TransportParking;
+        m_categoryMap[OsmPlacemark::TransportTrainStation] = GeoDataPlacemark::TransportTrainStation;
+        m_categoryMap[OsmPlacemark::TransportTramStop] = GeoDataPlacemark::TransportTramStop;
+        m_categoryMap[OsmPlacemark::TransportRentalBicycle] = GeoDataPlacemark::TransportRentalBicycle;
+        m_categoryMap[OsmPlacemark::TransportRentalCar] = GeoDataPlacemark::TransportRentalCar;
+        m_categoryMap[OsmPlacemark::TransportSpeedCamera] = GeoDataPlacemark::OsmSite;
+        m_categoryMap[OsmPlacemark::TransportTaxiRank] = GeoDataPlacemark::TransportTaxiRank;
+        m_categoryMap[OsmPlacemark::PlacesRegion] = GeoDataPlacemark::OsmSite;
+        m_categoryMap[OsmPlacemark::PlacesCounty] = GeoDataPlacemark::OsmSite;
+        m_categoryMap[OsmPlacemark::PlacesCity] = GeoDataPlacemark::PlaceCity;
+        m_categoryMap[OsmPlacemark::PlacesTown] = GeoDataPlacemark::PlaceTown;
+        m_categoryMap[OsmPlacemark::PlacesVillage] = GeoDataPlacemark::PlaceVillage;
+        m_categoryMap[OsmPlacemark::PlacesHamlet] = GeoDataPlacemark::PlaceHamlet;
+        m_categoryMap[OsmPlacemark::PlacesIsolatedDwelling] = GeoDataPlacemark::OsmSite;
+        m_categoryMap[OsmPlacemark::PlacesSuburb] = GeoDataPlacemark::PlaceSuburb;
+        m_categoryMap[OsmPlacemark::PlacesLocality] = GeoDataPlacemark::PlaceLocality;
+        m_categoryMap[OsmPlacemark::PlacesIsland] = GeoDataPlacemark::OsmSite;
     }
 }
 

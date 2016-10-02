@@ -444,7 +444,7 @@ QVector<const GeoDataFeature *> GeometryLayer::whichBuildingAt(const QPoint &cur
         if (item->feature()->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
             const GeoDataPlacemark* placemark = static_cast<const GeoDataPlacemark*>(item->feature());
 
-            if (placemark->visualCategory() != GeoDataFeature::Building) {
+            if (placemark->visualCategory() != GeoDataPlacemark::Building) {
                 continue;
             }
 

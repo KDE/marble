@@ -334,9 +334,9 @@ void AnnotatePlugin::removeFocusItem()
         disableFocusActions();
 
         m_graphicsItems.removeAll( m_focusItem );
-        m_marbleWidget->model()->treeModel()->removeFeature( m_focusItem->feature() );
+        m_marbleWidget->model()->treeModel()->removeFeature( m_focusItem->placemark() );
 
-        delete m_focusItem->feature();
+        delete m_focusItem->placemark();
         delete m_focusItem;
         m_movedItem = 0;
         m_focusItem = 0;
@@ -1697,7 +1697,7 @@ void AnnotatePlugin::cutItem()
     // If there is already an item copied/cut, free its memory and replace it with this one.
     // The same applies when copying.
     if ( m_clipboardItem ) {
-        delete m_clipboardItem->feature();
+        delete m_clipboardItem->placemark();
         delete m_clipboardItem;
         m_clipboardItem = 0;
     }
@@ -1706,7 +1706,7 @@ void AnnotatePlugin::cutItem()
     m_pasteGraphicItem->setVisible( true );
 
     m_graphicsItems.removeAll( m_focusItem );
-    m_marbleWidget->model()->treeModel()->removeFeature( m_focusItem->feature() );
+    m_marbleWidget->model()->treeModel()->removeFeature( m_focusItem->placemark() );
 
     m_focusItem = 0;
 }
@@ -1714,7 +1714,7 @@ void AnnotatePlugin::cutItem()
 void AnnotatePlugin::copyItem()
 {
     if ( m_clipboardItem ) {
-        delete m_clipboardItem->feature();
+        delete m_clipboardItem->placemark();
         delete m_clipboardItem;
         m_clipboardItem = 0;
     }

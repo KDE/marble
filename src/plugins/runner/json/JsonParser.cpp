@@ -275,8 +275,8 @@ bool JsonParser::read( QIODevice* device )
                         }
                     }
 
-                    const GeoDataFeature::GeoDataVisualCategory category = StyleBuilder::determineVisualCategory(osmData);
-                    if (category != GeoDataFeature::None) {
+                    const GeoDataPlacemark::GeoDataVisualCategory category = StyleBuilder::determineVisualCategory(osmData);
+                    if (category != GeoDataPlacemark::None) {
                         // Add the visual category to all the placemarks
                         for (int pl = 0 ; pl < placemarkList.length(); ++pl) {
                             placemarkList.at(pl)->setVisualCategory(category);

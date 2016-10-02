@@ -45,7 +45,7 @@ SatellitesTLEItem::SatellitesTLEItem( const QString &name,
 
     setDescription();
 
-    placemark()->setVisualCategory( GeoDataFeature::Satellite );
+    placemark()->setVisualCategory(GeoDataPlacemark::Satellite);
     placemark()->setZoomLevel( 0 );
     placemark()->setGeometry( m_track );
 

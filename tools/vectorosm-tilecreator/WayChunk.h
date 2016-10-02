@@ -11,7 +11,7 @@
 #ifndef MARBLE_WAYCHUNK_H
 #define MARBLE_WAYCHUNK_H
 
-#include "GeoDataFeature.h"
+#include "GeoDataPlacemark.h"
 
 #include <QList>
 
@@ -41,13 +41,13 @@ public:
     void printIds() const;
     int size() const;
     bool concatPossible(GeoDataPlacemark *placemark) const;
-    GeoDataFeature::GeoDataVisualCategory visualCategory() const;
+    GeoDataPlacemark::GeoDataVisualCategory visualCategory() const;
 
 private:
     QList<GeoDataPlacemark*> m_wayList;
     qint64 m_first;
     qint64 m_last;
-    GeoDataFeature::GeoDataVisualCategory  m_visualCategory;
+    GeoDataPlacemark::GeoDataVisualCategory m_visualCategory;
 };
 
 }

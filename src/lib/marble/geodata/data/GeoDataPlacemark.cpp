@@ -166,12 +166,12 @@ bool GeoDataPlacemark::operator!=( const GeoDataPlacemark& other ) const
     return !this->operator==( other );
 }
 
-GeoDataFeature::GeoDataVisualCategory GeoDataPlacemark::visualCategory() const
+GeoDataPlacemark::GeoDataVisualCategory GeoDataPlacemark::visualCategory() const
 {
     return p()->m_visualCategory;
 }
 
-void GeoDataPlacemark::setVisualCategory(GeoDataFeature::GeoDataVisualCategory index)
+void GeoDataPlacemark::setVisualCategory(GeoDataPlacemark::GeoDataVisualCategory index)
 {
     detach();
     p()->m_visualCategory = index;

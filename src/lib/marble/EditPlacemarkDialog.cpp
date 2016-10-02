@@ -52,7 +52,7 @@ public:
     QString m_initialName;
     GeoDataCoordinates m_initialCoords;
     GeoDataStyle m_initialStyle;
-    GeoDataFeature::GeoDataVisualCategory m_initialVisualCategory;
+    GeoDataPlacemark::GeoDataVisualCategory m_initialVisualCategory;
     OsmPlacemarkData m_initialOsmData;
     QString m_styleColorTabName;
     bool m_initialIsPlacemarkVisible;
@@ -343,8 +343,8 @@ void EditPlacemarkDialog::updateTextAnnotation()
     }
     else {
         const OsmPlacemarkData osmData = d->m_osmTagEditorWidget->placemarkData();
-        const GeoDataFeature::GeoDataVisualCategory category = StyleBuilder::determineVisualCategory(osmData);
-        if (category != GeoDataFeature::None) {
+        const GeoDataPlacemark::GeoDataVisualCategory category = StyleBuilder::determineVisualCategory(osmData);
+        if (category != GeoDataPlacemark::None) {
             d->m_placemark->setStyle(GeoDataStyle::Ptr());
             d->m_placemark->setVisualCategory( category );
         }
@@ -367,7 +367,7 @@ void EditPlacemarkDialog::checkFields()
         QMessageBox::warning( this,
                               tr( "ID is invalid" ),
                               tr( "Please specify a valid ID for this placemark." ) );
-    } else if ( d->m_header->iconLink().isEmpty() && d->m_placemark->visualCategory() == GeoDataFeature::None ) {
+    } else if (d->m_header->iconLink().isEmpty() && d->m_placemark->visualCategory() == GeoDataPlacemark::None) {
         QMessageBox::warning( this,
                               tr( "No image specified" ),
                               tr( "Please specify an icon for this placemark or add a valid tag." ) );

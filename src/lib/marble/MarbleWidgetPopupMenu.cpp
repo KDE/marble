@@ -678,10 +678,10 @@ void MarbleWidgetPopupMenu::slotInfoDialog()
         }
 
         if ( placemark ) {
-            isSatellite = (placemark->visualCategory() == GeoDataFeature::Satellite);
-            isCity = (placemark->visualCategory() >= GeoDataFeature::SmallCity &&
-                      placemark->visualCategory() <= GeoDataFeature::LargeNationCapital);
-            isNation = (placemark->visualCategory() == GeoDataFeature::Nation);
+            isSatellite = (placemark->visualCategory() == GeoDataPlacemark::Satellite);
+            isCity = (placemark->visualCategory() >= GeoDataPlacemark::SmallCity &&
+                      placemark->visualCategory() <= GeoDataPlacemark::LargeNationCapital);
+            isNation = (placemark->visualCategory() == GeoDataPlacemark::Nation);
         }
 
         bool isSky = false;

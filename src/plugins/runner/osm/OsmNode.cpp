@@ -36,9 +36,9 @@ void OsmNode::setCoordinates(const GeoDataCoordinates &coordinates)
 
 void OsmNode::create(GeoDataDocument *document) const
 {
-    GeoDataFeature::GeoDataVisualCategory const category = StyleBuilder::determineVisualCategory(m_osmData);
+    GeoDataPlacemark::GeoDataVisualCategory const category = StyleBuilder::determineVisualCategory(m_osmData);
 
-    if (category == GeoDataFeature::None) {
+    if (category == GeoDataPlacemark::None) {
         return;
     }
 
@@ -47,7 +47,7 @@ void OsmNode::create(GeoDataDocument *document) const
     placemark->setCoordinate(m_coordinates);
 
     QHash<QString, QString>::const_iterator tagIter;
-    if ((category == GeoDataFeature::TransportCarShare || category == GeoDataFeature::MoneyAtm)
+    if ((category == GeoDataPlacemark::TransportCarShare || category == GeoDataPlacemark::MoneyAtm)
             && (tagIter = m_osmData.findTag(QStringLiteral("operator"))) != m_osmData.tagsEnd()) {
         placemark->setName(tagIter.value());
     } else {
@@ -60,7 +60,7 @@ void OsmNode::create(GeoDataDocument *document) const
     placemark->setStyle( GeoDataStyle::Ptr() );
 
     placemark->setZoomLevel( 18 );
-    if (category >= GeoDataFeature::PlaceCity && category <= GeoDataFeature::PlaceVillageCapital) {
+    if (category >= GeoDataPlacemark::PlaceCity && category <= GeoDataPlacemark::PlaceVillageCapital) {
         int const population = m_osmData.tagValue(QStringLiteral("population")).toInt();
         placemark->setPopulation(qMax(0, population));
         if (population > 0) {
@@ -68,25 +68,25 @@ void OsmNode::create(GeoDataDocument *document) const
             placemark->setPopularity(population);
         } else {
             switch (category) {
-            case GeoDataFeature::PlaceCity:
-            case GeoDataFeature::PlaceCityCapital:
+            case GeoDataPlacemark::PlaceCity:
+            case GeoDataPlacemark::PlaceCityCapital:
                 placemark->setZoomLevel(9);
                 break;
-            case GeoDataFeature::PlaceSuburb:
+            case GeoDataPlacemark::PlaceSuburb:
                 placemark->setZoomLevel(13);
                 break;
-            case GeoDataFeature::PlaceHamlet:
+            case GeoDataPlacemark::PlaceHamlet:
                 placemark->setZoomLevel(15);
                 break;
-            case GeoDataFeature::PlaceLocality:
+            case GeoDataPlacemark::PlaceLocality:
                 placemark->setZoomLevel(15);
                 break;
-            case GeoDataFeature::PlaceTown:
-            case GeoDataFeature::PlaceTownCapital:
+            case GeoDataPlacemark::PlaceTown:
+            case GeoDataPlacemark::PlaceTownCapital:
                 placemark->setZoomLevel(11);
                 break;
-            case GeoDataFeature::PlaceVillage:
-            case GeoDataFeature::PlaceVillageCapital:
+            case GeoDataPlacemark::PlaceVillage:
+            case GeoDataPlacemark::PlaceVillageCapital:
                 placemark->setZoomLevel(13);
                 break;
             default:

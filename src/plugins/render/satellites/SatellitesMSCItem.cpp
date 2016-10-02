@@ -48,7 +48,7 @@ SatellitesMSCItem::SatellitesMSCItem( const QString &name,
       m_missionStart( missionStart ),
       m_missionEnd( missionEnd )
 {
-    placemark()->setVisualCategory( GeoDataFeature::Satellite );
+    placemark()->setVisualCategory(GeoDataPlacemark::Satellite);
     placemark()->setZoomLevel( 0 );
     placemark()->setGeometry( m_track );
 

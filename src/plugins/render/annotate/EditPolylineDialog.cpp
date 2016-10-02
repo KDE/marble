@@ -222,8 +222,8 @@ void EditPolylineDialog::updatePolyline()
     // If there is no custom style initialized( default #polyline url is used ) and there is a osmTag-based style
     // available, set it
     const OsmPlacemarkData osmData = d->m_osmTagEditorWidget->placemarkData();
-    const GeoDataFeature::GeoDataVisualCategory category = StyleBuilder::determineVisualCategory(osmData);
-    if (d->m_placemark->styleUrl() == QLatin1String("#polyline") && category != GeoDataFeature::None) {
+    const GeoDataPlacemark::GeoDataVisualCategory category = StyleBuilder::determineVisualCategory(osmData);
+    if (d->m_placemark->styleUrl() == QLatin1String("#polyline") && category != GeoDataPlacemark::None) {
         d->m_placemark->setStyle( GeoDataStyle::Ptr() ); // first clear style so style gets set by setVisualCategory()
         d->m_placemark->setVisualCategory( category );
     }

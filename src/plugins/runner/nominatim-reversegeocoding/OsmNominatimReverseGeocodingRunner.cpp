@@ -104,7 +104,7 @@ void OsmNominatimRunner::handleResult( QNetworkReply* reply )
     if ( places.size() == 1 ) {
         QString address = places.item( 0 ).toElement().text();
         GeoDataPlacemark placemark;
-        placemark.setVisualCategory(GeoDataFeature::Coordinate);
+        placemark.setVisualCategory(GeoDataPlacemark::Coordinate);
         placemark.setAddress( address );
         placemark.setCoordinate( m_coordinates );
 

@@ -69,7 +69,7 @@ void BookmarkManagerPrivate::setVisualCategory( GeoDataContainer *container ) {
         setVisualCategory( folder );
     }
     foreach( GeoDataPlacemark* placemark, container->placemarkList() ) {
-        placemark->setVisualCategory( GeoDataFeature::Bookmark );
+        placemark->setVisualCategory(GeoDataPlacemark::Bookmark);
         placemark->setZoomLevel( 1 );
     }
 
@@ -135,7 +135,7 @@ bool BookmarkManager::loadFile( const QString &relativeFilePath )
 void BookmarkManager::addBookmark( GeoDataContainer *container, const GeoDataPlacemark &placemark )
 {
     GeoDataPlacemark *bookmark = new GeoDataPlacemark( placemark );
-    bookmark->setVisualCategory( GeoDataDocument::Bookmark );
+    bookmark->setVisualCategory(GeoDataPlacemark::Bookmark);
     bookmark->setZoomLevel( 1 );
     if (bookmark->name().isEmpty()) {
         bookmark->setName(bookmark->coordinate().toString(GeoDataCoordinates::Decimal).trimmed());

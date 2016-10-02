@@ -49,7 +49,7 @@ void Placemark::setGeoDataPlacemark( const Marble::GeoDataPlacemark &placemark )
     emit elevationChanged();
     emit amenityChanged();
     emit shopChanged();
-    if (m_placemark.visualCategory() == GeoDataFeature::TransportFuel) {
+    if (m_placemark.visualCategory() == GeoDataPlacemark::TransportFuel) {
         emit fuelDetailsChanged();
     }
 }
@@ -74,7 +74,7 @@ QString Placemark::description() const
     if (m_description.isEmpty()) {
         auto const category = m_placemark.visualCategory();
         m_description = m_placemark.categoryName();
-        if (category >= GeoDataFeature::FoodBar && category <= GeoDataFeature::FoodRestaurant) {
+        if (category >= GeoDataPlacemark::FoodBar && category <= GeoDataPlacemark::FoodRestaurant) {
             addTagValue(m_description, "brand");
             addTagValue(m_description, "cuisine");
             addTagDescription(m_description, "self_service", "yes", "Self Service");
@@ -90,19 +90,19 @@ QString Placemark::description() const
             addTagDescription(m_description, "smoking:outside", "yes", "Smoking (outside)");
             addTagDescription(m_description, "smoking:outside", "separated", "Smoking (outside separated)");
             addTagDescription(m_description, "smoking:outside", "no", "No smoking outside");
-        } else if (category >= GeoDataFeature::ShopBeverages && category <= GeoDataFeature::Shop) {
+        } else if (category >= GeoDataPlacemark::ShopBeverages && category <= GeoDataPlacemark::Shop) {
             addTagValue(m_description, "operator");
-        } else if (category == GeoDataFeature::TransportBusStop) {
+        } else if (category == GeoDataPlacemark::TransportBusStop) {
             addTagValue(m_description, "network");
             addTagValue(m_description, "operator");
             addTagValue(m_description, "ref");
-        } else if (category == GeoDataFeature::TransportCarShare) {
+        } else if (category == GeoDataPlacemark::TransportCarShare) {
             addTagValue(m_description, "network");
             addTagValue(m_description, "operator");
-        } else if (category == GeoDataFeature::TransportFuel) {
+        } else if (category == GeoDataPlacemark::TransportFuel) {
             addTagValue(m_description, "brand");
             addTagValue(m_description, "operator");
-        } else if (category == GeoDataFeature::NaturalTree) {
+        } else if (category == GeoDataPlacemark::NaturalTree) {
             addTagValue(m_description, "species:en");
             addTagValue(m_description, "genus:en");
             addTagValue(m_description, "leaf_type");
@@ -122,7 +122,7 @@ QString Placemark::address() const
 
 QString Placemark::fuelDetails() const
 {
-    if (m_fuelDetails.isEmpty() && m_placemark.visualCategory() == GeoDataFeature::TransportFuel) {
+    if (m_fuelDetails.isEmpty() && m_placemark.visualCategory() == GeoDataPlacemark::TransportFuel) {
         addTagDescription(m_fuelDetails, "fuel:diesel", "yes", tr("Diesel"));
         addTagDescription(m_fuelDetails, "fuel:octane_91", "yes", tr("Octane 91"));
         addTagDescription(m_fuelDetails, "fuel:octane_95", "yes", tr("Octane 95"));

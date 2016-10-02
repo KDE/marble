@@ -117,7 +117,7 @@ void HostipRunner::slotRequestFinished( QNetworkReply* reply )
                                  arg( m_hostInfo.addresses().first().toString() ) );
 
         placemark->setCoordinate( lon * DEG2RAD, lat * DEG2RAD );
-        placemark->setVisualCategory( GeoDataFeature::Coordinate );
+        placemark->setVisualCategory(GeoDataPlacemark::Coordinate);
         placemarks << placemark;
     }
     

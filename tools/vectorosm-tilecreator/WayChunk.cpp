@@ -115,11 +115,11 @@ int WayChunk::size() const
 
 bool WayChunk::concatPossible(GeoDataPlacemark *placemark) const
 {
-    GeoDataFeature::GeoDataVisualCategory category = placemark->visualCategory();
+    const GeoDataPlacemark::GeoDataVisualCategory category = placemark->visualCategory();
     return (category == m_visualCategory);
-}	
+}
 
-GeoDataFeature::GeoDataVisualCategory WayChunk::visualCategory() const
+GeoDataPlacemark::GeoDataVisualCategory WayChunk::visualCategory() const
 {
     return m_visualCategory;
 }

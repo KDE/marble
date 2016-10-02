@@ -13,7 +13,7 @@
 
 #include "marble_export.h"
 
-#include <GeoDataFeature.h>
+#include <GeoDataPlacemark.h>
 #include <GeoDataStyle.h>
 
 #include <QHash>
@@ -23,7 +23,6 @@ class QFont;
 class QColor;
 
 namespace Marble {
-class GeoDataPlacemark;
 class OsmPlacemarkData;
 
 class MARBLE_EXPORT StyleParameters
@@ -53,7 +52,7 @@ public:
     void setDefaultLabelColor( const QColor& color );
 
     GeoDataStyle::ConstPtr createStyle(const StyleParameters &parameters) const;
-    GeoDataStyle::ConstPtr presetStyle(GeoDataFeature::GeoDataVisualCategory visualCategory) const;
+    GeoDataStyle::ConstPtr presetStyle(GeoDataPlacemark::GeoDataVisualCategory visualCategory) const;
 
     /**
      * @brief Returns the order in which the visual categories used in the theme shall be painted on the map.
@@ -76,23 +75,23 @@ public:
      */
     int maximumZoomLevel() const;
 
-    static QString visualCategoryName(GeoDataFeature::GeoDataVisualCategory category);
+    static QString visualCategoryName(GeoDataPlacemark::GeoDataVisualCategory category);
 
     /**
      * @brief  Convenience categorization of placemarks for Osm key=value pairs
      */
-    static GeoDataFeature::GeoDataVisualCategory osmVisualCategory(const OsmTag &tag);
+    static GeoDataPlacemark::GeoDataVisualCategory osmVisualCategory(const OsmTag &tag);
 
     /**
      * @brief begin and end provide an stl style iterator for the preset map
      */
-    static QHash<OsmTag, GeoDataFeature::GeoDataVisualCategory>::const_iterator begin();
-    static QHash<OsmTag, GeoDataFeature::GeoDataVisualCategory>::const_iterator end();
+    static QHash<OsmTag, GeoDataPlacemark::GeoDataVisualCategory>::const_iterator begin();
+    static QHash<OsmTag, GeoDataPlacemark::GeoDataVisualCategory>::const_iterator end();
 
     static QStringList shopValues();
     static QSet<OsmTag> buildingTags();
 
-    static GeoDataFeature::GeoDataVisualCategory determineVisualCategory(const OsmPlacemarkData &osmData);
+    static GeoDataPlacemark::GeoDataVisualCategory determineVisualCategory(const OsmPlacemarkData &osmData);
 
 private:
     Q_DISABLE_COPY(StyleBuilder)

@@ -45,7 +45,7 @@ void GeoUriRunner::search(const QString &searchTerm, const GeoDataLatLonBox &)
         GeoDataPlacemark *placemark = new GeoDataPlacemark;
         placemark->setName(searchTerm);
         placemark->setCoordinate(coordinates);
-        placemark->setVisualCategory(GeoDataFeature::Coordinate);
+        placemark->setVisualCategory(GeoDataPlacemark::Coordinate);
         placemark->setPopularity(1000000000);
         placemark->setZoomLevel(1);
 

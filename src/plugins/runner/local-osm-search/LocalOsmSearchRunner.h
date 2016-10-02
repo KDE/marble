@@ -16,7 +16,7 @@
 
 #include "OsmDatabase.h"
 #include "OsmPlacemark.h"
-#include "GeoDataFeature.h"
+#include "GeoDataPlacemark.h"
 
 #include <QMap>
 
@@ -36,7 +36,7 @@ public:
 private:
     OsmDatabase m_database;
 
-    static QMap<OsmPlacemark::OsmCategory, GeoDataFeature::GeoDataVisualCategory> m_categoryMap;
+    static QMap<OsmPlacemark::OsmCategory, GeoDataPlacemark::GeoDataVisualCategory> m_categoryMap;
 };
 
 }

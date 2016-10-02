@@ -109,7 +109,7 @@ QTreeWidgetItem *OsmTagEditorWidgetPrivate::tagWidgetItem( const OsmTag &tag ) c
     QTreeWidgetItem *tagItem = new QTreeWidgetItem( itemText );
 
     // Getting the icon preset for the tag ( if there's one available )
-    const GeoDataFeature::GeoDataVisualCategory category = StyleBuilder::osmVisualCategory(tag);
+    const GeoDataPlacemark::GeoDataVisualCategory category = StyleBuilder::osmVisualCategory(tag);
     GeoDataStyle::ConstPtr style = styleBuilder.presetStyle(category);
     QPixmap iconPixmap = QPixmap::fromImage( style->iconStyle().icon() );
     tagItem->setIcon( 1, QIcon( iconPixmap ) );
@@ -125,8 +125,8 @@ QList<OsmTagEditorWidgetPrivate::OsmTag> OsmTagEditorWidgetPrivate::recommendedT
 
     QStringList filter = generateTagFilter();
 
-    QHash<OsmTag, GeoDataFeature::GeoDataVisualCategory>::const_iterator it = StyleBuilder::begin();
-    QHash<OsmTag, GeoDataFeature::GeoDataVisualCategory>::const_iterator end = StyleBuilder::end();
+    QHash<OsmTag, GeoDataPlacemark::GeoDataVisualCategory>::const_iterator it = StyleBuilder::begin();
+    QHash<OsmTag, GeoDataPlacemark::GeoDataVisualCategory>::const_iterator end = StyleBuilder::end();
 
     for ( ; it != end; ++it ) {
         if ( filter.contains( it.key().first ) ) {

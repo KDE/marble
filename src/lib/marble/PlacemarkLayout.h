@@ -23,7 +23,7 @@
 #include <QMap>
 #include <QVector>
 
-#include "GeoDataFeature.h"
+#include "GeoDataPlacemark.h"
 #include <GeoDataStyle.h>
 
 class QAbstractItemModel;
@@ -36,7 +36,6 @@ namespace Marble
 {
 
 class GeoDataCoordinates;
-class GeoDataPlacemark;
 class GeoPainter;
 class MarbleClock;
 class PlacemarkPainter;
@@ -146,7 +145,7 @@ class PlacemarkLayout : public QObject
     QMap<TileId, QList<const GeoDataPlacemark*> > m_placemarkCache;
     QSet<qint64> m_osmIds;
 
-    const QSet< GeoDataFeature::GeoDataVisualCategory > m_acceptedVisualCategories;
+    const QSet<GeoDataPlacemark::GeoDataVisualCategory> m_acceptedVisualCategories;
 
     // earth
     bool m_showPlaces;

@@ -589,8 +589,8 @@ namespace Marble
 
         // Select bookmarks only if nothing else is found
         qSort(placemarks.begin(), placemarks.end(), [] (GeoDataPlacemark const *a, GeoDataPlacemark const *b) {
-            int const left = a->visualCategory() == GeoDataFeature::Bookmark ? -1 : a->visualCategory();
-            int const right = b->visualCategory() == GeoDataFeature::Bookmark ? -1 : b->visualCategory();
+            int const left = a->visualCategory() == GeoDataPlacemark::Bookmark ? -1 : a->visualCategory();
+            int const right = b->visualCategory() == GeoDataPlacemark::Bookmark ? -1 : b->visualCategory();
             return left > right;
         });
 

@@ -62,99 +62,99 @@ namespace
 namespace Marble
 {
 
-QSet<GeoDataFeature::GeoDataVisualCategory> acceptedVisualCategories()
+QSet<GeoDataPlacemark::GeoDataVisualCategory> acceptedVisualCategories()
 {
-    QSet<GeoDataFeature::GeoDataVisualCategory> visualCategories;
+    QSet<GeoDataPlacemark::GeoDataVisualCategory> visualCategories;
 
     visualCategories
-        << GeoDataFeature::SmallCity
-        << GeoDataFeature::SmallCountyCapital  
-        << GeoDataFeature::SmallStateCapital   
-        << GeoDataFeature::SmallNationCapital
-        << GeoDataFeature::MediumCity
-        << GeoDataFeature::MediumCountyCapital
-        << GeoDataFeature::MediumStateCapital
-        << GeoDataFeature::MediumNationCapital
-        << GeoDataFeature::BigCity
-        << GeoDataFeature::BigCountyCapital
-        << GeoDataFeature::BigStateCapital
-        << GeoDataFeature::BigNationCapital
-        << GeoDataFeature::LargeCity
-        << GeoDataFeature::LargeCountyCapital
-        << GeoDataFeature::LargeStateCapital
-        << GeoDataFeature::LargeNationCapital
-        << GeoDataFeature::Nation
-        << GeoDataFeature::Mountain
-        << GeoDataFeature::Volcano
-        << GeoDataFeature::Mons
-        << GeoDataFeature::Valley
-        << GeoDataFeature::Continent
-        << GeoDataFeature::Ocean
-        << GeoDataFeature::OtherTerrain
-        << GeoDataFeature::Crater
-        << GeoDataFeature::Mare
-        << GeoDataFeature::GeographicPole
-        << GeoDataFeature::MagneticPole
-        << GeoDataFeature::ShipWreck
-        << GeoDataFeature::LeisureMarina
-        << GeoDataFeature::AirPort
-        << GeoDataFeature::Observatory
-        << GeoDataFeature::AccomodationCamping
-        << GeoDataFeature::AccomodationHostel
-        << GeoDataFeature::AccomodationHotel
-        << GeoDataFeature::AccomodationMotel
-        << GeoDataFeature::AccomodationYouthHostel
-        << GeoDataFeature::AmenityLibrary
-        << GeoDataFeature::AmenityKindergarten
-        << GeoDataFeature::EducationCollege
-        << GeoDataFeature::EducationSchool
-        << GeoDataFeature::EducationUniversity
-        << GeoDataFeature::FoodBar
-        << GeoDataFeature::FoodBiergarten
-        << GeoDataFeature::FoodCafe
-        << GeoDataFeature::FoodFastFood
-        << GeoDataFeature::FoodPub
-        << GeoDataFeature::FoodRestaurant
-        << GeoDataFeature::HealthDoctors
-        << GeoDataFeature::HealthHospital
-        << GeoDataFeature::HealthPharmacy
-        << GeoDataFeature::MoneyBank
-        << GeoDataFeature::NaturalPeak
-        << GeoDataFeature::ShopBeverages
-        << GeoDataFeature::ShopHifi
-        << GeoDataFeature::ShopSupermarket
-        << GeoDataFeature::TouristAlpineHut
-        << GeoDataFeature::TouristAttraction
-        << GeoDataFeature::TouristCastle
-        << GeoDataFeature::TouristCinema
-        << GeoDataFeature::TouristMonument
-        << GeoDataFeature::TouristMuseum
-        << GeoDataFeature::TouristRuin
-        << GeoDataFeature::TouristTheatre
-        << GeoDataFeature::TouristThemePark
-        << GeoDataFeature::TouristViewPoint
-        << GeoDataFeature::TouristZoo
-        << GeoDataFeature::TransportAerodrome
-        << GeoDataFeature::TransportAirportTerminal
-        << GeoDataFeature::TransportAirportGate
-        << GeoDataFeature::TransportAirportRunway
-        << GeoDataFeature::TransportAirportTaxiway
-        << GeoDataFeature::TransportAirportApron
-        << GeoDataFeature::TransportBusStation
-        << GeoDataFeature::TransportBusStop
-        << GeoDataFeature::TransportCarShare
-        << GeoDataFeature::TransportFuel
-        << GeoDataFeature::TransportParking
-        << GeoDataFeature::TransportTrainStation
-        << GeoDataFeature::ReligionPlaceOfWorship
-        << GeoDataFeature::ReligionBahai
-        << GeoDataFeature::ReligionBuddhist
-        << GeoDataFeature::ReligionChristian
-        << GeoDataFeature::ReligionHindu
-        << GeoDataFeature::ReligionJain
-        << GeoDataFeature::ReligionJewish
-        << GeoDataFeature::ReligionShinto
-        << GeoDataFeature::ReligionSikh;
+        << GeoDataPlacemark::SmallCity
+        << GeoDataPlacemark::SmallCountyCapital
+        << GeoDataPlacemark::SmallStateCapital
+        << GeoDataPlacemark::SmallNationCapital
+        << GeoDataPlacemark::MediumCity
+        << GeoDataPlacemark::MediumCountyCapital
+        << GeoDataPlacemark::MediumStateCapital
+        << GeoDataPlacemark::MediumNationCapital
+        << GeoDataPlacemark::BigCity
+        << GeoDataPlacemark::BigCountyCapital
+        << GeoDataPlacemark::BigStateCapital
+        << GeoDataPlacemark::BigNationCapital
+        << GeoDataPlacemark::LargeCity
+        << GeoDataPlacemark::LargeCountyCapital
+        << GeoDataPlacemark::LargeStateCapital
+        << GeoDataPlacemark::LargeNationCapital
+        << GeoDataPlacemark::Nation
+        << GeoDataPlacemark::Mountain
+        << GeoDataPlacemark::Volcano
+        << GeoDataPlacemark::Mons
+        << GeoDataPlacemark::Valley
+        << GeoDataPlacemark::Continent
+        << GeoDataPlacemark::Ocean
+        << GeoDataPlacemark::OtherTerrain
+        << GeoDataPlacemark::Crater
+        << GeoDataPlacemark::Mare
+        << GeoDataPlacemark::GeographicPole
+        << GeoDataPlacemark::MagneticPole
+        << GeoDataPlacemark::ShipWreck
+        << GeoDataPlacemark::LeisureMarina
+        << GeoDataPlacemark::AirPort
+        << GeoDataPlacemark::Observatory
+        << GeoDataPlacemark::AccomodationCamping
+        << GeoDataPlacemark::AccomodationHostel
+        << GeoDataPlacemark::AccomodationHotel
+        << GeoDataPlacemark::AccomodationMotel
+        << GeoDataPlacemark::AccomodationYouthHostel
+        << GeoDataPlacemark::AmenityLibrary
+        << GeoDataPlacemark::AmenityKindergarten
+        << GeoDataPlacemark::EducationCollege
+        << GeoDataPlacemark::EducationSchool
+        << GeoDataPlacemark::EducationUniversity
+        << GeoDataPlacemark::FoodBar
+        << GeoDataPlacemark::FoodBiergarten
+        << GeoDataPlacemark::FoodCafe
+        << GeoDataPlacemark::FoodFastFood
+        << GeoDataPlacemark::FoodPub
+        << GeoDataPlacemark::FoodRestaurant
+        << GeoDataPlacemark::HealthDoctors
+        << GeoDataPlacemark::HealthHospital
+        << GeoDataPlacemark::HealthPharmacy
+        << GeoDataPlacemark::MoneyBank
+        << GeoDataPlacemark::NaturalPeak
+        << GeoDataPlacemark::ShopBeverages
+        << GeoDataPlacemark::ShopHifi
+        << GeoDataPlacemark::ShopSupermarket
+        << GeoDataPlacemark::TouristAlpineHut
+        << GeoDataPlacemark::TouristAttraction
+        << GeoDataPlacemark::TouristCastle
+        << GeoDataPlacemark::TouristCinema
+        << GeoDataPlacemark::TouristMonument
+        << GeoDataPlacemark::TouristMuseum
+        << GeoDataPlacemark::TouristRuin
+        << GeoDataPlacemark::TouristTheatre
+        << GeoDataPlacemark::TouristThemePark
+        << GeoDataPlacemark::TouristViewPoint
+        << GeoDataPlacemark::TouristZoo
+        << GeoDataPlacemark::TransportAerodrome
+        << GeoDataPlacemark::TransportAirportTerminal
+        << GeoDataPlacemark::TransportAirportGate
+        << GeoDataPlacemark::TransportAirportRunway
+        << GeoDataPlacemark::TransportAirportTaxiway
+        << GeoDataPlacemark::TransportAirportApron
+        << GeoDataPlacemark::TransportBusStation
+        << GeoDataPlacemark::TransportBusStop
+        << GeoDataPlacemark::TransportCarShare
+        << GeoDataPlacemark::TransportFuel
+        << GeoDataPlacemark::TransportParking
+        << GeoDataPlacemark::TransportTrainStation
+        << GeoDataPlacemark::ReligionPlaceOfWorship
+        << GeoDataPlacemark::ReligionBahai
+        << GeoDataPlacemark::ReligionBuddhist
+        << GeoDataPlacemark::ReligionChristian
+        << GeoDataPlacemark::ReligionHindu
+        << GeoDataPlacemark::ReligionJain
+        << GeoDataPlacemark::ReligionJewish
+        << GeoDataPlacemark::ReligionShinto
+        << GeoDataPlacemark::ReligionSikh;
 
     return visualCategories;
 }
@@ -486,45 +486,45 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParam
             continue;
         }
 
-        const GeoDataFeature::GeoDataVisualCategory visualCategory = placemark->visualCategory();
+        const GeoDataPlacemark::GeoDataVisualCategory visualCategory = placemark->visualCategory();
 
         // Skip city marks if we're not showing cities.
         if ( !m_showCities
-             && visualCategory >= GeoDataFeature::SmallCity
-             && visualCategory <= GeoDataFeature::Nation )
+             && visualCategory >= GeoDataPlacemark::SmallCity
+             && visualCategory <= GeoDataPlacemark::Nation )
             continue;
 
         // Skip terrain marks if we're not showing terrain.
         if ( !m_showTerrain
-             && visualCategory >= GeoDataFeature::Mountain
-             && visualCategory <= GeoDataFeature::OtherTerrain )
+             && visualCategory >= GeoDataPlacemark::Mountain
+             && visualCategory <= GeoDataPlacemark::OtherTerrain )
             continue;
 
         // Skip other places if we're not showing other places.
         if ( !m_showOtherPlaces
-             && visualCategory >= GeoDataFeature::GeographicPole
-             && visualCategory <= GeoDataFeature::Observatory )
+             && visualCategory >= GeoDataPlacemark::GeographicPole
+             && visualCategory <= GeoDataPlacemark::Observatory )
             continue;
 
         // Skip landing sites if we're not showing landing sites.
         if ( !m_showLandingSites
-             && visualCategory >= GeoDataFeature::MannedLandingSite
-             && visualCategory <= GeoDataFeature::UnmannedHardLandingSite )
+             && visualCategory >= GeoDataPlacemark::MannedLandingSite
+             && visualCategory <= GeoDataPlacemark::UnmannedHardLandingSite )
             continue;
 
         // Skip craters if we're not showing craters.
         if ( !m_showCraters
-             && visualCategory == GeoDataFeature::Crater )
+             && visualCategory == GeoDataPlacemark::Crater )
             continue;
 
         // Skip maria if we're not showing maria.
         if ( !m_showMaria
-             && visualCategory == GeoDataFeature::Mare )
+             && visualCategory == GeoDataPlacemark::Mare )
             continue;
 
         if ( !m_showPlaces
-             && visualCategory >= GeoDataFeature::GeographicPole
-             && visualCategory <= GeoDataFeature::Observatory )
+             && visualCategory >= GeoDataPlacemark::GeographicPole
+             && visualCategory <= GeoDataPlacemark::Observatory )
             continue;
 
         // We handled selected placemarks already, so we skip them here...

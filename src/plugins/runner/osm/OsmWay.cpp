@@ -74,7 +74,7 @@ void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes, QSet<qint6
         placemark->setName(m_osmData.tagValue(QStringLiteral("ref")));
     }
     placemark->setOsmData(osmData);
-    placemark->setVisible(placemark->visualCategory() != GeoDataFeature::None);
+    placemark->setVisible(placemark->visualCategory() != GeoDataPlacemark::None);
 
     document->append(placemark);
 }

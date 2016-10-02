@@ -65,15 +65,15 @@ void OsmRelation::create(GeoDataDocument *document, OsmWays &ways, const OsmNode
         return;
     }
 
-    GeoDataFeature::GeoDataVisualCategory outerCategory = StyleBuilder::determineVisualCategory(m_osmData);
-    if (outerCategory == GeoDataFeature::None) {
+    GeoDataPlacemark::GeoDataVisualCategory outerCategory = StyleBuilder::determineVisualCategory(m_osmData);
+    if (outerCategory == GeoDataPlacemark::None) {
         // Try to determine the visual category from the relation members
-        GeoDataFeature::GeoDataVisualCategory const firstCategory =
+        GeoDataPlacemark::GeoDataVisualCategory const firstCategory =
                 StyleBuilder::determineVisualCategory(ways[*outerWays.begin()].osmData());
 
         bool categoriesAreSame = true;
         foreach (auto wayId, outerWays) {
-            GeoDataFeature::GeoDataVisualCategory const category =
+            GeoDataPlacemark::GeoDataVisualCategory const category =
                     StyleBuilder::determineVisualCategory(ways[wayId].osmData());
             if( category != firstCategory ) {
                 categoriesAreSame = false;
@@ -88,8 +88,8 @@ void OsmRelation::create(GeoDataDocument *document, OsmWays &ways, const OsmNode
 
     foreach(qint64 wayId, outerWays) {
         Q_ASSERT(ways.contains(wayId));
-        GeoDataFeature::GeoDataVisualCategory const category = StyleBuilder::determineVisualCategory(ways[wayId].osmData());
-        if (category == GeoDataFeature::None || category == outerCategory) {
+        GeoDataPlacemark::GeoDataVisualCategory const category = StyleBuilder::determineVisualCategory(ways[wayId].osmData());
+        if (category == GeoDataPlacemark::None || category == outerCategory) {
             // Schedule way for removal: It's a non-styled way only used to create the outer boundary in this polygon
             usedWays << wayId;
         } // else we keep it
@@ -108,7 +108,7 @@ void OsmRelation::create(GeoDataDocument *document, OsmWays &ways, const OsmNode
     int index = 0;
     foreach(qint64 wayId, innerWays) {
         Q_ASSERT(ways.contains(wayId));
-        if (StyleBuilder::determineVisualCategory(ways[wayId].osmData()) == GeoDataFeature::None) {
+        if (StyleBuilder::determineVisualCategory(ways[wayId].osmData()) == GeoDataPlacemark::None) {
             // Schedule way for removal: It's a non-styled way only used to create the inner boundary in this polygon
             usedWays << wayId;
         }
@@ -119,7 +119,7 @@ void OsmRelation::create(GeoDataDocument *document, OsmWays &ways, const OsmNode
         ++index;
     }
 
-    if (outerCategory == GeoDataFeature::Bathymetry) {
+    if (outerCategory == GeoDataPlacemark::Bathymetry) {
         // In case of a bathymetry store elevation info since it is required during styling
         // The ele=* tag is present in the outermost way
         const QString ele = QStringLiteral("ele");
@@ -144,7 +144,7 @@ void OsmRelation::create(GeoDataDocument *document, OsmWays &ways, const OsmNode
         placemark->setName(m_osmData.tagValue(QStringLiteral("name")));
         placemark->setVisualCategory(outerCategory);
         placemark->setStyle( GeoDataStyle::Ptr() );
-        placemark->setVisible(outerCategory != GeoDataFeature::None);
+        placemark->setVisible(outerCategory != GeoDataPlacemark::None);
         placemark->setGeometry(polygon);
         if (hasMultipleOuterRings) {
             /** @TODO Use a GeoDataMultiGeometry to keep the ID? */
