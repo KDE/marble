@@ -364,7 +364,7 @@ void TileDirectory::createTiles() const
             QProcess osmconvert;
             osmconvert.start("osmconvert", QStringList() << "--drop-author" << "--drop-version"
                              << "--complete-ways" << "--complex-ways" << bbox << output << m_inputFile);
-            osmconvert.waitForFinished();
+            osmconvert.waitForFinished(10*60*1000);
             if (osmconvert.exitCode() != 0) {
                 qWarning() << osmconvert.readAllStandardError();
                 qWarning() << "osmconvert failed: " << osmconvert.errorString();
@@ -440,7 +440,7 @@ GeoDataLatLonBox TileDirectory::boundingBox(const QString &filename) const
 {
     QProcess osmconvert;
     osmconvert.start("osmconvert", QStringList() << "--out-statistics" << filename);
-    osmconvert.waitForFinished();
+    osmconvert.waitForFinished(10*60*1000);
     QStringList const output = QString(osmconvert.readAllStandardOutput()).split('\n');
     GeoDataLatLonBox boundingBox;
     foreach(QString const &line, output) {
