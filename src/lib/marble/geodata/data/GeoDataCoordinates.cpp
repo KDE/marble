@@ -198,6 +198,11 @@ qreal GeoDataCoordinates::longitude( GeoDataCoordinates::Unit unit ) const
     }
 }
 
+qreal GeoDataCoordinates::longitude() const
+{
+    return d->m_lon;
+}
+
 qreal GeoDataCoordinates::latitude( GeoDataCoordinates::Unit unit ) const
 {
     switch ( unit )
@@ -208,6 +213,11 @@ qreal GeoDataCoordinates::latitude( GeoDataCoordinates::Unit unit ) const
     case Degree:
         return d->m_lat * RAD2DEG;
     }
+}
+
+qreal GeoDataCoordinates::latitude() const
+{
+    return d->m_lat;
 }
 
 //static

@@ -190,8 +190,8 @@ class GEODATA_EXPORT GeoDataCoordinates
     * (default for Radian: north pole at pi/2, southpole at -pi/2)
     * @return longitude
     */
-    qreal longitude( GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian )
-                                                                const;
+    qreal longitude(GeoDataCoordinates::Unit unit) const;
+    qreal longitude() const;
 
     /**
     * @brief retrieves the latitude of the GeoDataCoordinates object
@@ -200,8 +200,8 @@ class GEODATA_EXPORT GeoDataCoordinates
     * (default for Radian: north pole at pi/2, southpole at -pi/2)
     * @return latitude
     */
-    qreal latitude( GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian )
-                                                                const;
+    qreal latitude( GeoDataCoordinates::Unit unit ) const;
+    qreal latitude() const;
 
     /**
     * @brief set the longitude in a GeoDataCoordinates object
