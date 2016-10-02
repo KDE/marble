@@ -2024,6 +2024,10 @@ GeoDataFeature::GeoDataVisualCategory StyleBuilder::determineVisualCategory(cons
         return GeoDataFeature::None;
     }
 
+    if (osmData.containsTag("building", "yes")) {
+        return GeoDataFeature::Building;
+    }
+
     if (osmData.containsTag("historic", "castle") && osmData.containsTag("castle_type", "kremlin")) {
         return GeoDataFeature::None;
     }
