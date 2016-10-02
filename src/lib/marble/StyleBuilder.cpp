@@ -1322,15 +1322,19 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
                 visualCategory <= GeoDataFeature::HighwayMotorway) ||
                 visualCategory == GeoDataFeature::TransportAirportRunway) {
 
-            if (parameters.tileLevel <= 7) {
+            if (parameters.tileLevel <= 8) {
                 /** @todo: Dummy implementation for dynamic style changes based on tile level, replace with sane values */
                 lineStyle.setPhysicalWidth(0.0);
                 lineStyle.setWidth(2.0);
-            } else if (parameters.tileLevel <= 9) {
+            } else if (parameters.tileLevel <= 10) {
                 /** @todo: Dummy implementation for dynamic style changes based on tile level, replace with sane values */
                 lineStyle.setPhysicalWidth(0.0);
                 lineStyle.setWidth(3.0);
-            } else {
+            } else if (parameters.tileLevel <= 12) {
+                /** @todo: Dummy implementation for dynamic style changes based on tile level, replace with sane values */
+                lineStyle.setPhysicalWidth(0.0);
+                lineStyle.setWidth(4.0);
+            }else {
                 auto tagIter = osmData.findTag(QStringLiteral("width"));
                 if (tagIter != osmData.tagsEnd()) {
                     QString const widthValue = QString(tagIter.value()).remove(QStringLiteral(" meters")).remove(QStringLiteral(" m"));
