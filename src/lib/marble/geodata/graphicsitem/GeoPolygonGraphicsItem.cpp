@@ -40,7 +40,7 @@ GeoPolygonGraphicsItem::GeoPolygonGraphicsItem(const GeoDataFeature *feature, co
     m_entries(extractNamedEntries(feature))
 {
     const GeoDataFeature::GeoDataVisualCategory visualCategory = feature->visualCategory();
-    if (isBuilding(visualCategory))
+    if (feature->visualCategory() == GeoDataFeature::Building)
     {
         setZValue(this->zValue() + m_buildingHeight);
         Q_ASSERT(m_buildingHeight > 0.0);
@@ -68,7 +68,7 @@ GeoPolygonGraphicsItem::GeoPolygonGraphicsItem(const GeoDataFeature *feature, co
     m_entries(extractNamedEntries(feature))
 {
     const GeoDataFeature::GeoDataVisualCategory visualCategory = feature->visualCategory();
-    if (isBuilding(visualCategory))
+    if (feature->visualCategory() == GeoDataFeature::Building)
     {
         setZValue(this->zValue() + m_buildingHeight);
         Q_ASSERT(m_buildingHeight > 0.0);
@@ -104,60 +104,6 @@ int GeoPolygonGraphicsItem::extractElevation(const GeoDataFeature &feature)
     return elevation;
 }
 
-bool GeoPolygonGraphicsItem::isBuilding(GeoDataFeature::GeoDataVisualCategory visualCategory)
-{
-    switch (visualCategory) {
-    case GeoDataFeature::Building:
-        //case GeoDataFeature::AccomodationCamping:
-    case GeoDataFeature::AccomodationHostel:
-    case GeoDataFeature::AccomodationHotel:
-    case GeoDataFeature::AccomodationMotel:
-    case GeoDataFeature::AccomodationYouthHostel:
-    case GeoDataFeature::AmenityLibrary:
-    case GeoDataFeature::EducationCollege:
-    //case GeoDataFeature::EducationSchool:
-    case GeoDataFeature::EducationUniversity:
-    case GeoDataFeature::FoodBar:
-    case GeoDataFeature::FoodBiergarten:
-    case GeoDataFeature::FoodCafe:
-    case GeoDataFeature::FoodFastFood:
-    case GeoDataFeature::FoodPub:
-    case GeoDataFeature::FoodRestaurant:
-    case GeoDataFeature::HealthDoctors:
-    case GeoDataFeature::HealthHospital:
-    case GeoDataFeature::HealthPharmacy:
-    case GeoDataFeature::MoneyAtm:
-    case GeoDataFeature::MoneyBank:
-    case GeoDataFeature::ShopBeverages:
-    case GeoDataFeature::ShopHifi:
-    case GeoDataFeature::ShopSupermarket:
-        //case GeoDataFeature::TouristAttraction:
-        //case GeoDataFeature::TouristCastle:
-    case GeoDataFeature::TouristCinema:
-        //case GeoDataFeature::TouristMonument:
-    case GeoDataFeature::TouristMuseum:
-        //case GeoDataFeature::TouristRuin:
-    case GeoDataFeature::TouristTheatre:
-        //case GeoDataFeature::TouristThemePark:
-        //case GeoDataFeature::TouristViewPoint:
-        //case GeoDataFeature::TouristZoo:
-    case GeoDataFeature::ReligionPlaceOfWorship:
-    case GeoDataFeature::ReligionBahai:
-    case GeoDataFeature::ReligionBuddhist:
-    case GeoDataFeature::ReligionChristian:
-    case GeoDataFeature::ReligionHindu:
-    case GeoDataFeature::ReligionJain:
-    case GeoDataFeature::ReligionJewish:
-    case GeoDataFeature::ReligionShinto:
-    case GeoDataFeature::ReligionSikh:
-        return true;
-
-    default:
-        break;
-    }
-
-    return false;
-}
 
 void GeoPolygonGraphicsItem::initializeBuildingPainting(const GeoPainter* painter, const ViewportParams *viewport,
                                                         bool &drawAccurate3D, bool &isCameraAboveBuilding, bool &hasInnerBoundaries,
@@ -239,7 +185,7 @@ QPointF GeoPolygonGraphicsItem::buildingOffset(const QPointF &point, const Viewp
 
 double GeoPolygonGraphicsItem::extractBuildingHeight(const GeoDataFeature *feature)
 {
-    if (!isBuilding(feature->visualCategory())) {
+    if (feature->visualCategory() != GeoDataFeature::Building) {
         return 0;
     }
 
@@ -270,7 +216,7 @@ double GeoPolygonGraphicsItem::extractBuildingHeight(const GeoDataFeature *featu
 
 QString GeoPolygonGraphicsItem::extractBuildingLabel(const GeoDataFeature *feature)
 {
-    if (isBuilding(feature->visualCategory()) && feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
+    if (feature->visualCategory() == GeoDataFeature::Building && feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
         const GeoDataPlacemark *placemark = static_cast<const GeoDataPlacemark *>(feature);
 
         if (!placemark->name().isEmpty()) {
@@ -294,7 +240,7 @@ QVector<GeoPolygonGraphicsItem::NamedEntry> GeoPolygonGraphicsItem::extractNamed
 {
     QVector<NamedEntry> entries;
 
-    if (isBuilding(feature->visualCategory()) && feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
+    if (feature->visualCategory() == GeoDataFeature::Building && feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
         const GeoDataPlacemark *placemark = static_cast<const GeoDataPlacemark *>(feature);
 
         const auto end = placemark->osmData().nodeReferencesEnd();
