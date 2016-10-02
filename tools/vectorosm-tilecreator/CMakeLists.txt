@@ -20,9 +20,11 @@ include_directories(
 ../../src/lib/marble/geodata/data
 ../../src/lib/marble/geodata
 ../../src/lib/marble/
+../mbtile-import
 )
 
 set( ${TARGET}_SRC 
+../mbtile-import/MbTileWriter.cpp
 clipper/clipper.cpp
 main.cpp
 BaseClipper.cpp
@@ -38,4 +40,4 @@ WayChunk.cpp
 
 add_executable( ${TARGET} ${${TARGET}_SRC} )
 
-target_link_libraries(${TARGET} marblewidget)
+target_link_libraries(${TARGET} marblewidget Qt5::Sql)

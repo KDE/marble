@@ -77,7 +77,7 @@ void MbTileWriter::setCommitInterval(int interval)
 
 void MbTileWriter::addTile(const QFileInfo &file, qint32 x, qint32 y, qint32 z)
 {
-    if (!m_overwriteTiles && haveTile(x, y, z)) {
+    if (!m_overwriteTiles && hasTile(x, y, z)) {
         if (m_reportProgress) {
             std::cout << " Skipping existing " << z << '/' << x << '/' << y << '\r';
             std::cout.flush();
@@ -85,20 +85,25 @@ void MbTileWriter::addTile(const QFileInfo &file, qint32 x, qint32 y, qint32 z)
         return;
     }
 
-    ++m_tileCounter;
     if (m_reportProgress && m_tileCounter % 500 == 0) {
         std::cout << "Tile " << std::right << std::setw(10) << m_tileCounter << ": ";
         std::cout << "Adding " << z << '/' << x << '/' << y << '\r';
         std::cout.flush();
     }
 
+    QFile tileContent(file.absoluteFilePath());
+    tileContent.open(QFile::ReadOnly);
+    addTile(&tileContent, x, y, z);
+}
+
+void MbTileWriter::addTile(QIODevice *device, qint32 x, qint32 y, qint32 z)
+{
+    ++m_tileCounter;
     if (m_commitInterval > 0 && m_tileCounter % m_commitInterval == 0) {
         execQuery("END TRANSACTION");
         execQuery("BEGIN TRANSACTION");
     }
 
-    QFile tileContent(file.absoluteFilePath());
-    tileContent.open(QFile::ReadOnly);
     QSqlQuery query;
     query.prepare( "INSERT OR REPLACE INTO tiles"
                    " (zoom_level, tile_column, tile_row, tile_data)"
@@ -106,11 +111,11 @@ void MbTileWriter::addTile(const QFileInfo &file, qint32 x, qint32 y, qint32 z)
     query.addBindValue(z);
     query.addBindValue(x);
     query.addBindValue(y);
-    query.addBindValue(tileContent.readAll());
+    query.addBindValue(device->readAll());
     execQuery(query);
 }
 
-bool MbTileWriter::haveTile(qint32 x, qint32 y, qint32 z) const
+bool MbTileWriter::hasTile(qint32 x, qint32 y, qint32 z) const
 {
     QSqlQuery query;
     query.prepare( "SELECT EXISTS(SELECT 1 FROM tiles"

@@ -28,6 +28,7 @@
 #include <QSharedPointer>
 #include <QFileInfo>
 #include <QUrl>
+#include <QBuffer>
 
 #include <QMessageLogContext>
 #include <QProcess>
@@ -37,6 +38,7 @@
 #include "WayConcatenator.h"
 #include "TileIterator.h"
 #include "TileDirectory.h"
+#include "MbTileWriter.h"
 
 #include <iostream>
 
@@ -94,6 +96,7 @@ int main(int argc, char *argv[])
                           {{"t", "osmconvert"}, "Tile data using osmconvert."},
                           {"conflict-resolution", "How to deal with existing tiles: overwrite, skip or merge", "mode", "overwrite"},
                           {{"c", "cache-directory"}, "Directory for temporary data.", "cache", "cache"},
+                          {{"m", "mbtile"}, "Store tiles at level 15 onwards in a mbtile database.", "mbtile"},
                           {{"z", "zoom-level"}, "Zoom level according to which OSM information has to be processed.", "levels", "11,13,15,17"},
                           {{"o", "output"}, "Output file or directory", "output", QString("%1/maps/earth/vectorosm").arg(MarbleDirs::localPath())},
                           {{"e", "extension"}, "Output file type: o5m (default), osm or kml", "file extension", "o5m"}
@@ -109,6 +112,7 @@ int main(int argc, char *argv[])
     }
     // input is args.at(0), output is args.at(1)
 
+    QString const extension = parser.value("extension");
     QString inputFileName = args.at(0);
     auto const levels = parser.value("zoom-level").split(',');
     QVector<unsigned int> zoomLevels;
@@ -121,6 +125,15 @@ int main(int argc, char *argv[])
         return 1;
     }
 
+    bool const overwriteTiles = parser.value("conflict-resolution") == "overwrite";
+    QSharedPointer<MbTileWriter> mbtileWriter;
+    if (parser.isSet("mbtile")) {
+        QString const mbtile = parser.value("mbtile");
+        mbtileWriter = QSharedPointer<MbTileWriter>(new MbTileWriter(mbtile, extension));
+        mbtileWriter->setReportProgress(false);
+        mbtileWriter->setCommitInterval(500);
+    }
+
     MarbleModel model;
     ParsingRunnerManager manager(model.pluginManager());
     QString const cacheDirectory = parser.value("cache-directory");
@@ -130,7 +143,6 @@ int main(int argc, char *argv[])
         parser.showHelp(1);
     }
 
-    bool const overwriteTiles = parser.value("conflict-resolution") == "overwrite";
     if (*zoomLevels.cbegin() <= 9) {
         auto map = TileDirectory::open(inputFileName, manager);
         VectorClipper processor(map.data());
@@ -159,12 +171,12 @@ int main(int argc, char *argv[])
             }
         }
     } else {
-        TileDirectory mapTiles(TileDirectory::OpenStreetMap, cacheDirectory, manager, parser.value("extension"));
+        TileDirectory mapTiles(TileDirectory::OpenStreetMap, cacheDirectory, manager, extension);
         mapTiles.setInputFile(inputFileName);
         mapTiles.createTiles();
         auto const boundingBox = mapTiles.boundingBox();
 
-        TileDirectory loader(TileDirectory::Landmass, cacheDirectory, manager, parser.value("extension"));
+        TileDirectory loader(TileDirectory::Landmass, cacheDirectory, manager, extension);
         loader.setBoundingBox(boundingBox);
         loader.createTiles();
 
@@ -194,15 +206,30 @@ int main(int argc, char *argv[])
                 ++count;
                 int const zoomLevel = tileId.zoomLevel();
                 QString const filename = tileFileName(parser, tileId.x(), tileId.y(), zoomLevel);
-                if (!overwriteTiles && QFileInfo(filename).exists()) {
-                    continue;
+                if (!overwriteTiles) {
+                    if (zoomLevel > 13 && mbtileWriter && mbtileWriter->hasTile(tileId.x(), tileId.y(), zoomLevel)) {
+                        continue;
+                    } else if (QFileInfo(filename).exists()) {
+                        continue;
+                    }
                 }
                 GeoDataDocument* tile1 = mapTiles.clip(zoomLevel, tileId.x(), tileId.y());
                 GeoDataDocument* tile2 = loader.clip(zoomLevel, tileId.x(), tileId.y());
                 GeoDataDocument* combined = mergeDocuments(tile1, tile2);
                 NodeReducer nodeReducer(combined, zoomLevel);
-                if (!writeTile(combined, filename)) {
-                    return 4;
+                if (zoomLevel > 13 && mbtileWriter) {
+                    QBuffer buffer;
+                    buffer.open(QBuffer::ReadWrite);
+                    if (GeoDataDocumentWriter::write(&buffer, *combined, extension)) {
+                        buffer.seek(0);
+                        mbtileWriter->addTile(&buffer, tileId.x(), tileId.y(), zoomLevel);
+                    } else {
+                        qWarning() << "Could not write the tile " << combined->name();
+                    }
+                } else {
+                    if (!writeTile(combined, filename)) {
+                        return 4;
+                    }
                 }
 
                 std::cout << "Tile " << count << "/" << total << " (landmass ";

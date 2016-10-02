@@ -28,9 +28,10 @@ public:
     void setCommitInterval(int interval);
 
     void addTile(const QFileInfo &file, qint32 x, qint32 y, qint32 z);
+    void addTile(QIODevice* device, qint32 x, qint32 y, qint32 z);
+    bool hasTile(qint32 x, qint32 y, qint32 z) const;
 
 private:
-    bool haveTile(qint32 x, qint32 y, qint32 z) const;
     void execQuery(const QString &query) const;
     void execQuery(QSqlQuery &query) const;
     void setMetaData(const QString &name, const QString &value);
