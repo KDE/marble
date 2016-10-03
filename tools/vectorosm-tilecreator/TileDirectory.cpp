@@ -267,11 +267,11 @@ void TileDirectory::download(const QString &url, const QString &target)
     cout << endl;
 }
 
-void TileDirectory::printProgress(double progress, int barWidth) const
+void TileDirectory::printProgress(double progress, int barWidth)
 {
     int const position = barWidth * progress;
     cout << " [" << string(position, '=') << ">";
-    cout << string(barWidth-position, ' ') << "]  " << int(progress * 100.0) << "%";
+    cout << string(barWidth-position, ' ') << "]  " << std::right << setw(3) << int(progress * 100.0) << "%";
 }
 
 GeoDataLatLonBox TileDirectory::boundingBox() const

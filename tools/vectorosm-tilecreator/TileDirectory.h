@@ -72,6 +72,8 @@ public:
     void createTiles() const;
     bool contains(const TileId &tile) const;
 
+    static void printProgress(double progress, int barWidth=40);
+
 private Q_SLOTS:
     void updateProgress();
     void handleFinishedDownload(const QString &filename, const QString &id);
@@ -80,7 +82,6 @@ private:
     QStringList tagsFilteredIn(int zoomLevel) const;
     void setTagZoomLevel(int zoomLevel);
     void download(const QString &url, const QString &target);
-    void printProgress(double progress, int barWidth=40) const;
 
     QString m_cacheDir;
     QString m_baseDir;

@@ -235,10 +235,9 @@ int main(int argc, char *argv[])
                     }
                 }
 
-                std::cout << "Tile " << count << "/" << total << " (landmass ";
-                std::cout << loader.name().toStdString() << " + map ";
-                std::cout << mapTiles.name().toStdString() << " ~> ";
-                std::cout << combined->name().toStdString() << ") done.";
+                TileDirectory::printProgress(count / double(total));
+                std::cout << "  Tile " << count << "/" << total << " (";
+                std::cout << combined->name().toStdString() << ").";
                 double const reduction = nodeReducer.removedNodes() / qMax(1.0, double(nodeReducer.remainingNodes() + nodeReducer.removedNodes()));
                 std::cout << " Node reduction: " << qRound(reduction * 100.0) << "%";
                 std::cout << "      \r";
@@ -248,8 +247,9 @@ int main(int argc, char *argv[])
                 delete tile2;
             }
         }
+        TileDirectory::printProgress(1.0);
+        std::cout << "  Vector OSM tiles complete." << std::string(30, ' ') << std::endl;
     }
 
     return 0;
 }
-
