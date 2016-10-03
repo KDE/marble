@@ -1189,22 +1189,20 @@ void StyleBuilder::setDefaultLabelColor( const QColor& color )
 
 GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &parameters) const
 {
-    if (!parameters.placemark) {
-        Q_ASSERT(false && "Must not pass a null feature to StyleBuilder::createStyle");
+    const GeoDataPlacemark *const placemark = parameters.placemark;
+
+    if (!placemark) {
+        Q_ASSERT(false && "Must not pass a null placemark to StyleBuilder::createStyle");
         return GeoDataStyle::Ptr();
     }
 
-    if (parameters.placemark->customStyle()) {
-        return parameters.placemark->customStyle();
+    if (placemark->customStyle()) {
+        return placemark->customStyle();
     }
 
-    auto const visualCategory = parameters.placemark->visualCategory();
+    auto const visualCategory = placemark->visualCategory();
     GeoDataStyle::ConstPtr style = presetStyle(visualCategory);
-    if (parameters.placemark->nodeType() != GeoDataTypes::GeoDataPlacemarkType) {
-        return style;
-    }
 
-    GeoDataPlacemark const * placemark = static_cast<GeoDataPlacemark const *>(parameters.placemark);
     OsmPlacemarkData const & osmData = placemark->osmData();
     if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPointType) {
         if (visualCategory == GeoDataPlacemark::NaturalTree) {
