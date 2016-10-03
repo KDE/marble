@@ -42,7 +42,7 @@ void OsmConverter::read(const GeoDataDocument *document)
     foreach (GeoDataPlacemark* placemark, document->placemarkList()) {
         // If the placemark's osmData is not complete, it is initialized by the OsmObjectManager
         OsmObjectManager::initializeOsmData( placemark );
-        const OsmPlacemarkData osmData = placemark->osmData();
+        const OsmPlacemarkData & osmData = placemark->osmData();
 
         if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPointType ) {
             m_nodes << OsmConverter::Node(placemark->coordinate(), osmData);
