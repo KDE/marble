@@ -82,6 +82,17 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     bool operator!=( const GeoDataPlacemark& other ) const;
 
     /**
+     * Return the symbol index of the placemark.
+     */
+    GeoDataVisualCategory visualCategory() const;
+
+    /**
+     * Sets the symbol @p index of the placemark.
+     * @param  category  the new category to be used.
+     */
+    void setVisualCategory(GeoDataVisualCategory category);
+
+    /**
      * Return the coordinates of the placemark at time @p dateTime as a GeoDataCoordinates
      *
      * The @p dateTime parameter should be used if the placemark geometry() is a
@@ -105,9 +116,14 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     const GeoDataGeometry* geometry() const;
 
     /**
-      * @brief displays the name of a place in the locale language of the user
-      */
-     QString displayName() const;
+     * @brief displays the name of a place in the locale language of the user
+     */
+    QString displayName() const;
+
+    /**
+     * @since 0.26.0
+     */
+    QString categoryName() const;
 
     /**
      * Return the coordinates of the placemark as @p longitude,

@@ -142,7 +142,7 @@ void BookmarkManager::addBookmark( GeoDataContainer *container, const GeoDataPla
     }
     if (d->m_styleBuilder && bookmark->style()->iconStyle().iconPath().isEmpty()) {
         StyleParameters style;
-        style.feature = bookmark;
+        style.placemark = bookmark;
         bookmark->setStyle(GeoDataStyle::Ptr(new GeoDataStyle(*d->m_styleBuilder->createStyle(style))));
     }
     d->m_treeModel->addFeature( container, bookmark );

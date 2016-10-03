@@ -129,7 +129,6 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         UnmannedSoftLandingSite, // u
         UnmannedHardLandingSite, // i
 
-        Folder,
         Bookmark,
 
         Satellite,
@@ -583,16 +582,6 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     void setRegion( const GeoDataRegion& region );
 
     /**
-     * Return the symbol index of the placemark.
-     */
-    GeoDataVisualCategory visualCategory() const;
-    /**
-     * Sets the symbol @p index of the placemark.
-     * @param  category  the new category to be used.
-     */
-    void setVisualCategory( GeoDataVisualCategory category );
-
-    /**
      * Return the role of the placemark.
      *
      * FIXME: describe roles here!
@@ -639,11 +628,6 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
      * Sets the styleMap of the feature
      */
     void setStyleMap( const GeoDataStyleMap* map );
-
-    /**
-     * @since 0.26.0
-     */
-    QString categoryName() const;
 
     /// Serialize the contents of the feature to @p stream.
     virtual void pack( QDataStream& stream ) const;

@@ -58,11 +58,14 @@ public:
 
 class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
 {
+    Q_DECLARE_TR_FUNCTIONS(GeoDataPlacemark)
+
   public:
-    GeoDataPlacemarkPrivate()
-      : m_geometry( new GeoDataPoint ),
+    GeoDataPlacemarkPrivate() :
+        m_geometry(new GeoDataPoint),
         m_population( -1 ),
-        m_placemarkExtendedData(nullptr)
+        m_placemarkExtendedData(nullptr),
+        m_visualCategory(GeoDataFeature::Default)
     {
     }
 
@@ -80,6 +83,7 @@ class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
 
         GeoDataFeaturePrivate::operator=( other );
         m_population = other.m_population;
+        m_visualCategory = other.m_visualCategory;
 
         GeoDataGeometry * geometry = 0;
         if ( other.m_geometry ) {
@@ -159,6 +163,7 @@ class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
     GeoDataGeometry    *m_geometry;     // any GeoDataGeometry entry like locations
     qint64              m_population;   // population in number of inhabitants
     GeoDataPlacemarkExtendedData *m_placemarkExtendedData;
+    GeoDataFeature::GeoDataVisualCategory m_visualCategory; // the visual category
 
     static const OsmPlacemarkData s_nullOsmPlacemarkData;
     static const GeoDataPlacemarkExtendedData s_nullPlacemarkExtendedData;

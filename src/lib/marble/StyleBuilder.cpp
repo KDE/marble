@@ -499,10 +499,6 @@ void StyleBuilder::Private::initializeDefaultStyles()
         = GeoDataStyle::Ptr(new GeoDataStyle( MarbleDirs::path( "bitmaps/unmanned_hard_landing.png" ),
               QFont( defaultFamily, defaultSize, 50, false ), defaultLabelColor ));
 
-    m_defaultStyle[GeoDataFeature::Folder]
-        = GeoDataStyle::Ptr(new GeoDataStyle( MarbleDirs::path( "bitmaps/folder.png" ),
-              QFont( defaultFamily, defaultSize, 50, false ), defaultLabelColor ));
-
     m_defaultStyle[GeoDataFeature::Bookmark]
         = createPOIStyle(QFont( defaultFamily, defaultSize, 50, false ),
                                                 MarbleDirs::path("svg/bookmark.svg"), defaultLabelColor );
@@ -1193,22 +1189,22 @@ void StyleBuilder::setDefaultLabelColor( const QColor& color )
 
 GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &parameters) const
 {
-    if (!parameters.feature) {
+    if (!parameters.placemark) {
         Q_ASSERT(false && "Must not pass a null feature to StyleBuilder::createStyle");
         return GeoDataStyle::Ptr();
     }
 
-    if (parameters.feature->customStyle()) {
-        return parameters.feature->customStyle();
+    if (parameters.placemark->customStyle()) {
+        return parameters.placemark->customStyle();
     }
 
-    auto const visualCategory = parameters.feature->visualCategory();
+    auto const visualCategory = parameters.placemark->visualCategory();
     GeoDataStyle::ConstPtr style = presetStyle(visualCategory);
-    if (parameters.feature->nodeType() != GeoDataTypes::GeoDataPlacemarkType) {
+    if (parameters.placemark->nodeType() != GeoDataTypes::GeoDataPlacemarkType) {
         return style;
     }
 
-    GeoDataPlacemark const * placemark = static_cast<GeoDataPlacemark const *>(parameters.feature);
+    GeoDataPlacemark const * placemark = static_cast<GeoDataPlacemark const *>(parameters.placemark);
     OsmPlacemarkData const & osmData = placemark->osmData();
     if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPointType) {
         if (visualCategory == GeoDataFeature::NaturalTree) {
@@ -1644,7 +1640,6 @@ QString StyleBuilder::visualCategoryName(GeoDataFeature::GeoDataVisualCategory c
         visualCategoryNames[GeoDataFeature::RoboticRover] = "RoboticRover";
         visualCategoryNames[GeoDataFeature::UnmannedSoftLandingSite] = "UnmannedSoftLandingSite";
         visualCategoryNames[GeoDataFeature::UnmannedHardLandingSite] = "UnmannedHardLandingSite";
-        visualCategoryNames[GeoDataFeature::Folder] = "Folder";
         visualCategoryNames[GeoDataFeature::Bookmark] = "Bookmark";
         visualCategoryNames[GeoDataFeature::NaturalWater] = "NaturalWater";
         visualCategoryNames[GeoDataFeature::NaturalReef] = "NaturalReef";
@@ -2055,8 +2050,8 @@ GeoDataFeature::GeoDataVisualCategory StyleBuilder::determineVisualCategory(cons
     return GeoDataFeature::None;
 }
 
-StyleParameters::StyleParameters(const GeoDataFeature *feature_, int tileLevel_) :
-    feature(feature_),
+StyleParameters::StyleParameters(const GeoDataPlacemark *placemark_, int tileLevel_) :
+    placemark(placemark_),
     tileLevel(tileLevel_)
 {
     // nothing to do

@@ -441,8 +441,13 @@ QVector<const GeoDataFeature *> GeometryLayer::whichBuildingAt(const QPoint &cur
 
     const int maxZoom = qMin<int>(qMax<int>(qLn(viewport->radius()*4/256)/qLn(2.0), 1), d->m_styleBuilder->maximumZoomLevel());
     foreach ( GeoGraphicsItem * item, d->m_scene.items( viewport->viewLatLonAltBox(), maxZoom ) ) {
-        if (item->feature()->visualCategory() == GeoDataFeature::Building && item->feature()->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
+        if (item->feature()->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
             const GeoDataPlacemark* placemark = static_cast<const GeoDataPlacemark*>(item->feature());
+
+            if (placemark->visualCategory() != GeoDataFeature::Building) {
+                continue;
+            }
+
             if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType) {
                 const GeoDataPolygon *polygon = static_cast<const GeoDataPolygon*>(placemark->geometry());
                 if (polygon->contains(coordinates)) {

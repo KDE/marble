@@ -567,7 +567,7 @@ bool PlacemarkLayout::layoutPlacemark( const GeoDataPlacemark *placemark, qreal 
         // create a new one...
         StyleParameters parameters;
         // @todo: Set / adjust to tile level
-        parameters.feature = placemark;
+        parameters.placemark = placemark;
 
         mark = new VisiblePlacemark(placemark, m_styleBuilder->createStyle(parameters));
         m_visiblePlacemarks.insert( placemark, mark );

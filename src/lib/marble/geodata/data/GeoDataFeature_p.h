@@ -137,7 +137,6 @@ public:
 
 class GeoDataFeaturePrivate
 {
-    Q_DECLARE_TR_FUNCTIONS(GeoDataFeature)
   public:
     GeoDataFeaturePrivate() :
         m_name(),
@@ -145,7 +144,6 @@ class GeoDataFeaturePrivate
         m_popularity( 0 ),
         m_zoomLevel( 1 ),
         m_visible( true ),
-        m_visualCategory( GeoDataFeature::Default ),
         m_role(" "),
         m_style( 0 ),
         m_styleMap( 0 ),
@@ -161,7 +159,6 @@ class GeoDataFeaturePrivate
         m_popularity( other.m_popularity ),
         m_zoomLevel( other.m_zoomLevel ),
         m_visible( other.m_visible ),
-        m_visualCategory( other.m_visualCategory ),
         m_role( other.m_role ),
         m_style( other.m_style ),               //FIXME: both style and stylemap need to be reworked internally!!!!
         m_styleMap( other.m_styleMap ),
@@ -184,7 +181,6 @@ class GeoDataFeaturePrivate
         m_role = other.m_role;
         m_style = other.m_style;
         m_styleMap = other.m_styleMap;
-        m_visualCategory = other.m_visualCategory;
         m_extendedData = other.m_extendedData;
         delete m_featureExtendedData;
         m_featureExtendedData = nullptr;
@@ -230,7 +226,6 @@ class GeoDataFeaturePrivate
     int                 m_zoomLevel;    // Zoom Level of the feature
 
     bool        m_visible;      // True if this feature should be shown.
-    GeoDataFeature::GeoDataVisualCategory  m_visualCategory; // the visual category
 
     QString       m_role;
 

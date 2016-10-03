@@ -29,9 +29,9 @@ class OsmPlacemarkData;
 class MARBLE_EXPORT StyleParameters
 {
 public:
-    explicit StyleParameters(const GeoDataFeature* feature=nullptr, int tileLevel=0);
+    explicit StyleParameters(const GeoDataPlacemark *placemark_ = nullptr, int tileLevel = 0);
 
-    const GeoDataFeature* feature;
+    const GeoDataPlacemark *placemark;
     int tileLevel;
 };
 

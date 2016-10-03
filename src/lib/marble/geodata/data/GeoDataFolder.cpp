@@ -53,7 +53,6 @@ class GeoDataFolderPrivate : public GeoDataContainerPrivate
 GeoDataFolder::GeoDataFolder()
         : GeoDataContainer( new GeoDataFolderPrivate )
 {
-    setVisualCategory( GeoDataFeature::Folder );
 }
 
 GeoDataFolder::GeoDataFolder( const GeoDataFolder& other )
