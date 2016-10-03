@@ -133,9 +133,9 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
     QList<LayerItem> defaultLayer;
     int paintedItems = 0;
     QHash<QString, QList<GeoGraphicsItem*> > paintedFragments;
-    foreach( GeoGraphicsItem* item, items )
-    {
-        if ( item->latLonAltBox().intersects( viewport->viewLatLonAltBox() ) ) {
+    auto const viewLatLonAltBox = viewport->viewLatLonAltBox();
+    foreach( GeoGraphicsItem* item, items ) {
+        if ( item->latLonAltBox().intersects(viewLatLonAltBox) ) {
             QStringList paintLayers = item->paintLayers();
             if (paintLayers.isEmpty()) {
                 mDebug() << item << " provides no paint layers, so I force one onto it.";
