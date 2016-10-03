@@ -716,8 +716,11 @@ GeoDataLatLonBox GeoDataLatLonBox::fromLineString(  const GeoDataLineString& lin
         GeoDataCoordinates::normalizeLonLat( lon, lat );
 
         // Determining the maximum and minimum latitude
-        if ( lat > north ) north = lat;
-        if ( lat < south ) south = lat;
+        if ( lat > north ) {
+            north = lat;
+        } else if ( lat < south ) {
+            south = lat;
+        }
 
         currentSign = ( lon < 0 ) ? -1 : +1;
 

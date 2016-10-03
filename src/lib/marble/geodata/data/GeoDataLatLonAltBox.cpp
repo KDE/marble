@@ -243,9 +243,12 @@ GeoDataLatLonAltBox GeoDataLatLonAltBox::fromLineString(  const GeoDataLineStrin
         // Get coordinates and normalize them to the desired range.
         const qreal altitude = (it)->altitude();
 
-        // Determining the maximum and minimum latitude
-        if ( altitude > maxAltitude ) maxAltitude = altitude;
-        if ( altitude < minAltitude ) minAltitude = altitude;
+        // Determining the maximum and minimum altitude
+        if ( altitude > maxAltitude ) {
+            maxAltitude = altitude;
+        } else if ( altitude < minAltitude ) {
+            minAltitude = altitude;
+        }
     }
 
     temp.setMinAltitude( minAltitude );
