@@ -30,7 +30,7 @@ using namespace std;
 
 namespace Marble {
 
-TileDirectory::TileDirectory(TileType tileType, const QString &cacheDir, ParsingRunnerManager &manager, QString const &extension) :
+TileDirectory::TileDirectory(TileType tileType, const QString &cacheDir, ParsingRunnerManager &manager, QString const &extension, int maxZoomLevel) :
     m_cacheDir(cacheDir),
     m_baseDir(),
     m_manager(manager),
@@ -40,7 +40,8 @@ TileDirectory::TileDirectory(TileType tileType, const QString &cacheDir, Parsing
     m_tagZoomLevel(-1),
     m_extension(extension),
     m_tileType(tileType),
-    m_landmassFile("land-polygons-split-4326.zip")
+    m_landmassFile("land-polygons-split-4326.zip"),
+    m_maxZoomLevel(maxZoomLevel)
 {
     if (m_tileType == Landmass) {
         m_zoomLevel = 7;
@@ -124,7 +125,7 @@ GeoDataDocument* TileDirectory::clip(int zoomLevel, int tileX, int tileY)
         setTagZoomLevel(zoomLevel);
         GeoDataDocument* input = m_tagsFilter ? m_tagsFilter->accepted() : m_landmass.data();
         if (input) {
-            m_clipper = QSharedPointer<VectorClipper>(new VectorClipper(input));
+            m_clipper = QSharedPointer<VectorClipper>(new VectorClipper(input, m_maxZoomLevel));
         }
     }
     return m_clipper ? m_clipper->clipTo(zoomLevel, tileX, tileY) : nullptr;
@@ -372,7 +373,7 @@ void TileDirectory::createTiles() const
         } else {
             if (!map) {
                 map = open(m_inputFile, m_manager);
-                clipper = QSharedPointer<VectorClipper>(new VectorClipper(map.data()));
+                clipper = QSharedPointer<VectorClipper>(new VectorClipper(map.data(), m_zoomLevel));
             }
             auto tile = clipper->clipTo(m_zoomLevel, tileId.x(), tileId.y());
             if (!GeoDataDocumentWriter::write(outputFile, *tile)) {

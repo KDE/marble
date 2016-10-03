@@ -116,8 +116,11 @@ int main(int argc, char *argv[])
     QString inputFileName = args.at(0);
     auto const levels = parser.value("zoom-level").split(',');
     QVector<unsigned int> zoomLevels;
+    int maxZoomLevel = 0;
     foreach(auto const &level, levels) {
-        zoomLevels << level.toInt();
+        int const zoomLevel = level.toInt();
+        maxZoomLevel = qMax(zoomLevel, maxZoomLevel);
+        zoomLevels << zoomLevel;
     }
 
     if (zoomLevels.isEmpty()) {
@@ -145,7 +148,7 @@ int main(int argc, char *argv[])
 
     if (*zoomLevels.cbegin() <= 9) {
         auto map = TileDirectory::open(inputFileName, manager);
-        VectorClipper processor(map.data());
+        VectorClipper processor(map.data(), maxZoomLevel);
         GeoDataLatLonBox world(85.0, -85.0, 180.0, -180.0, GeoDataCoordinates::Degree);
         foreach(auto zoomLevel, zoomLevels) {
             TileIterator iter(world, zoomLevel);
@@ -171,12 +174,12 @@ int main(int argc, char *argv[])
             }
         }
     } else {
-        TileDirectory mapTiles(TileDirectory::OpenStreetMap, cacheDirectory, manager, extension);
+        TileDirectory mapTiles(TileDirectory::OpenStreetMap, cacheDirectory, manager, extension, maxZoomLevel);
         mapTiles.setInputFile(inputFileName);
         mapTiles.createTiles();
         auto const boundingBox = mapTiles.boundingBox();
 
-        TileDirectory loader(TileDirectory::Landmass, cacheDirectory, manager, extension);
+        TileDirectory loader(TileDirectory::Landmass, cacheDirectory, manager, extension, maxZoomLevel);
         loader.setBoundingBox(boundingBox);
         loader.createTiles();
 

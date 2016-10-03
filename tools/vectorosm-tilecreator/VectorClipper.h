@@ -16,6 +16,7 @@
 
 #include <GeoDataLatLonBox.h>
 #include "GeoDataPlacemark.h"
+#include <TileId.h>
 
 #include "clipper/clipper.hpp"
 
@@ -26,13 +27,14 @@ class GeoDataLinearRing;
 class VectorClipper : public BaseFilter
 {
 public:
-    explicit VectorClipper(GeoDataDocument* document);
+    VectorClipper(GeoDataDocument* document, int maxZoomLevel);
 
     GeoDataDocument* clipTo(const GeoDataLatLonBox &box);
     GeoDataDocument* clipTo(unsigned int zoomLevel, unsigned int tileX, unsigned int tileY);
 
 private:
     GeoDataDocument* clipToBaseClipper(const GeoDataLatLonBox &box);
+    QVector<GeoDataPlacemark*> potentialIntersections(const GeoDataLatLonBox &box) const;
     ClipperLib::Path clipPath(const GeoDataLatLonBox &box) const;
 
     template<class T>
@@ -77,6 +79,9 @@ private:
     void copyTags(const OsmPlacemarkData &originalPlacemarkData, OsmPlacemarkData& targetOsmData) const;
 
     static qint64 const m_scale = 10000000;
+
+    QMap<TileId, QVector<GeoDataPlacemark*> > m_items;
+    int m_maxZoomLevel;
 };
 
 }

@@ -19,6 +19,7 @@
 #include "GeoDataPlacemark.h"
 #include "OsmPlacemarkData.h"
 #include "OsmObjectManager.h"
+#include "TileCoordsPyramid.h"
 
 #include "clipper/clipper.hpp"
 
@@ -28,10 +29,24 @@
 
 namespace Marble {
 
-VectorClipper::VectorClipper(GeoDataDocument* document) :
-    BaseFilter(document)
+VectorClipper::VectorClipper(GeoDataDocument* document, int maxZoomLevel) :
+    BaseFilter(document),
+    m_maxZoomLevel(maxZoomLevel)
 {
-
+    foreach(auto placemark, placemarks()) {
+        // Select zoom level such that the placemark fits in a single tile
+        int zoomLevel;
+        qreal north, south, east, west;
+        placemark->geometry()->latLonAltBox().boundaries(north, south, east, west);
+        for (zoomLevel = maxZoomLevel; zoomLevel >= 0; --zoomLevel) {
+            if (TileId::fromCoordinates(GeoDataCoordinates(west, north), zoomLevel) ==
+                    TileId::fromCoordinates(GeoDataCoordinates(east, south), zoomLevel)) {
+                break;
+            }
+        }
+        TileId const key = TileId::fromCoordinates(GeoDataCoordinates(west, north), zoomLevel);
+        m_items[key] << placemark;
+    }
 }
 
 GeoDataDocument *VectorClipper::clipTo(const GeoDataLatLonBox &tileBoundary)
@@ -43,9 +58,9 @@ GeoDataDocument *VectorClipper::clipTo(const GeoDataLatLonBox &tileBoundary)
 
     GeoDataDocument* tile = new GeoDataDocument();
     auto const clip = clipPath(tileBoundary);
-    foreach (GeoDataPlacemark const * placemark, placemarks()) {
+    foreach (GeoDataPlacemark const * placemark, potentialIntersections(tileBoundary)) {
         GeoDataGeometry const * const geometry = placemark ? placemark->geometry() : nullptr;
-        if(geometry && tileBoundary.intersects(geometry->latLonAltBox())) {
+        if (geometry && tileBoundary.intersects(geometry->latLonAltBox())) {
             if(geometry->nodeType() == GeoDataTypes::GeoDataPolygonType) {
                 clipPolygon(placemark, clip, tile);
             } else if (geometry->nodeType() == GeoDataTypes::GeoDataLineStringType) {
@@ -196,6 +211,30 @@ GeoDataDocument *VectorClipper::clipToBaseClipper(const GeoDataLatLonBox &tileBo
 
 
     return tile;
+}
+
+QVector<GeoDataPlacemark *> VectorClipper::potentialIntersections(const GeoDataLatLonBox &box) const
+{
+    qreal north, south, east, west;
+    box.boundaries(north, south, east, west);
+    TileId const topLeft = TileId::fromCoordinates(GeoDataCoordinates(west, north), m_maxZoomLevel);
+    TileId const bottomRight = TileId::fromCoordinates(GeoDataCoordinates(east, south), m_maxZoomLevel);
+    QRect rect;
+    rect.setCoords(topLeft.x(), topLeft.y(), bottomRight.x(), bottomRight.y());
+
+    TileCoordsPyramid pyramid(0, m_maxZoomLevel);
+    pyramid.setBottomLevelCoords(rect);
+    QVector<GeoDataPlacemark *> result;
+    for (int level = pyramid.topLevel(), maxLevel = pyramid.bottomLevel(); level <= maxLevel; ++level) {
+        int x1, y1, x2, y2;
+        pyramid.coords(level).getCoords(&x1, &y1, &x2, &y2);
+        for (int x = x1; x <= x2; ++x) {
+            for (int y = y1; y <= y2; ++y) {
+                result << m_items.value(TileId(0, level, x, y));
+            }
+        }
+    }
+    return result;
 }
 
 GeoDataDocument *VectorClipper::clipTo(unsigned int zoomLevel, unsigned int tileX, unsigned int tileY)

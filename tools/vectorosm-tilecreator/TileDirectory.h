@@ -55,7 +55,7 @@ public:
         OpenStreetMap
     };
 
-    TileDirectory(TileType tileType, const QString &cacheDir, ParsingRunnerManager &manager, const QString &extension);
+    TileDirectory(TileType tileType, const QString &cacheDir, ParsingRunnerManager &manager, const QString &extension, int maxZoomLevel);
 
     QSharedPointer<GeoDataDocument> load(int zoomLevel, int tileX, int tileY);
     void setInputFile(const QString &filename);
@@ -100,6 +100,7 @@ private:
     QNetworkAccessManager m_downloadManager;
     QString m_landmassFile;
     QSharedPointer<Download> m_download;
+    int m_maxZoomLevel;
 };
 
 }
