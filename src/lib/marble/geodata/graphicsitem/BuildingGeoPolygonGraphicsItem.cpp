@@ -24,12 +24,12 @@
 namespace Marble
 {
 
-BuildingGeoPolygonGraphicsItem::BuildingGeoPolygonGraphicsItem(const GeoDataFeature *feature,
+BuildingGeoPolygonGraphicsItem::BuildingGeoPolygonGraphicsItem(const GeoDataPlacemark *placemark,
                                                                const GeoDataPolygon *polygon)
-    : AbstractGeoPolygonGraphicsItem(feature, polygon)
-    , m_buildingHeight(extractBuildingHeight(feature))
-    , m_buildingLabel(extractBuildingLabel(feature))
-    , m_entries(extractNamedEntries(feature))
+    : AbstractGeoPolygonGraphicsItem(placemark, polygon)
+    , m_buildingHeight(extractBuildingHeight(*placemark))
+    , m_buildingLabel(extractBuildingLabel(*placemark))
+    , m_entries(extractNamedEntries(*placemark))
 {
     setZValue(this->zValue() + m_buildingHeight);
     Q_ASSERT(m_buildingHeight > 0.0);
@@ -40,12 +40,12 @@ BuildingGeoPolygonGraphicsItem::BuildingGeoPolygonGraphicsItem(const GeoDataFeat
     setPaintLayers(paintLayers);
 }
 
-BuildingGeoPolygonGraphicsItem::BuildingGeoPolygonGraphicsItem(const GeoDataFeature *feature,
+BuildingGeoPolygonGraphicsItem::BuildingGeoPolygonGraphicsItem(const GeoDataPlacemark *placemark,
                                                                const GeoDataLinearRing* ring)
-    : AbstractGeoPolygonGraphicsItem(feature, ring)
-    , m_buildingHeight(extractBuildingHeight(feature))
-    , m_buildingLabel(extractBuildingLabel(feature))
-    , m_entries(extractNamedEntries(feature))
+    : AbstractGeoPolygonGraphicsItem(placemark, ring)
+    , m_buildingHeight(extractBuildingHeight(*placemark))
+    , m_buildingLabel(extractBuildingLabel(*placemark))
+    , m_entries(extractNamedEntries(*placemark))
 {
     setZValue(this->zValue() + m_buildingHeight);
     Q_ASSERT(m_buildingHeight > 0.0);
@@ -134,71 +134,64 @@ QPointF BuildingGeoPolygonGraphicsItem::buildingOffset(const QPointF &point, con
     return QPointF(shiftX, shiftY);
 }
 
-double BuildingGeoPolygonGraphicsItem::extractBuildingHeight(const GeoDataFeature *feature)
+double BuildingGeoPolygonGraphicsItem::extractBuildingHeight(const GeoDataPlacemark &placemark)
 {
     double height = 8.0;
 
-    if (feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
-        const GeoDataPlacemark *placemark = static_cast<const GeoDataPlacemark *>(feature);
-        const OsmPlacemarkData &osmData = placemark->osmData();
-        QHash<QString, QString>::const_iterator tagIter;
-        if ((tagIter = osmData.findTag(QStringLiteral("height"))) != osmData.tagsEnd()) {
-            /** @todo Also parse non-SI units, see https://wiki.openstreetmap.org/wiki/Key:height#Height_of_buildings */
-            QString const heightValue = QString(tagIter.value()).remove(QStringLiteral(" meters")).remove(QStringLiteral(" m"));
-            bool extracted = false;
-            double extractedHeight = heightValue.toDouble(&extracted);
-            if (extracted) {
-                height = extractedHeight;
-            }
-        } else if ((tagIter = osmData.findTag(QStringLiteral("building:levels"))) != osmData.tagsEnd()) {
-            int const levels = tagIter.value().toInt();
-            int const skipLevels = osmData.tagValue(QStringLiteral("building:min_level")).toInt();
-            /** @todo Is 35 as an upper bound for the number of levels sane? */
-            height = 3.0 * qBound(1, 1+levels-skipLevels, 35);
+    const OsmPlacemarkData &osmData = placemark.osmData();
+
+    QHash<QString, QString>::const_iterator tagIter;
+    if ((tagIter = osmData.findTag(QStringLiteral("height"))) != osmData.tagsEnd()) {
+        /** @todo Also parse non-SI units, see https://wiki.openstreetmap.org/wiki/Key:height#Height_of_buildings */
+        QString const heightValue = QString(tagIter.value()).remove(QStringLiteral(" meters")).remove(QStringLiteral(" m"));
+        bool extracted = false;
+        double extractedHeight = heightValue.toDouble(&extracted);
+        if (extracted) {
+            height = extractedHeight;
         }
+    } else if ((tagIter = osmData.findTag(QStringLiteral("building:levels"))) != osmData.tagsEnd()) {
+        int const levels = tagIter.value().toInt();
+        int const skipLevels = osmData.tagValue(QStringLiteral("building:min_level")).toInt();
+        /** @todo Is 35 as an upper bound for the number of levels sane? */
+        height = 3.0 * qBound(1, 1+levels-skipLevels, 35);
     }
 
     return qBound(1.0, height, 1000.0);
 }
 
-QString BuildingGeoPolygonGraphicsItem::extractBuildingLabel(const GeoDataFeature *feature)
+QString BuildingGeoPolygonGraphicsItem::extractBuildingLabel(const GeoDataPlacemark &placemark)
 {
-    if (feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
-        const GeoDataPlacemark *placemark = static_cast<const GeoDataPlacemark *>(feature);
+    if (!placemark.name().isEmpty()) {
+        return placemark.name();
+    }
 
-        if (!placemark->name().isEmpty()) {
-            return placemark->name();
-        }
-        const OsmPlacemarkData &osmData = placemark->osmData();
-        auto tagIter = osmData.findTag(QStringLiteral("addr:housename"));
-        if (tagIter != osmData.tagsEnd()) {
-            return tagIter.value();
-        }
-        tagIter = osmData.findTag(QStringLiteral("addr:housenumber"));
-        if (tagIter != osmData.tagsEnd()) {
-            return tagIter.value();
-        }
+    const OsmPlacemarkData &osmData = placemark.osmData();
+
+    auto tagIter = osmData.findTag(QStringLiteral("addr:housename"));
+    if (tagIter != osmData.tagsEnd()) {
+        return tagIter.value();
+    }
+
+    tagIter = osmData.findTag(QStringLiteral("addr:housenumber"));
+    if (tagIter != osmData.tagsEnd()) {
+        return tagIter.value();
     }
 
     return QString();
 }
 
-QVector<BuildingGeoPolygonGraphicsItem::NamedEntry> BuildingGeoPolygonGraphicsItem::extractNamedEntries(const GeoDataFeature *feature)
+QVector<BuildingGeoPolygonGraphicsItem::NamedEntry> BuildingGeoPolygonGraphicsItem::extractNamedEntries(const GeoDataPlacemark &placemark)
 {
     QVector<NamedEntry> entries;
 
-    if (feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
-        const GeoDataPlacemark *placemark = static_cast<const GeoDataPlacemark *>(feature);
-
-        const auto end = placemark->osmData().nodeReferencesEnd();
-        for (auto iter = placemark->osmData().nodeReferencesBegin(); iter != end; ++iter) {
-            const auto tagIter = iter.value().findTag(QStringLiteral("addr:housenumber"));
-            if (tagIter != iter.value().tagsEnd()) {
-                NamedEntry entry;
-                entry.point = iter.key();
-                entry.label = tagIter.value();
-                entries.push_back(entry);
-            }
+    const auto end = placemark.osmData().nodeReferencesEnd();
+    for (auto iter = placemark.osmData().nodeReferencesBegin(); iter != end; ++iter) {
+        const auto tagIter = iter.value().findTag(QStringLiteral("addr:housenumber"));
+        if (tagIter != iter.value().tagsEnd()) {
+            NamedEntry entry;
+            entry.point = iter.key();
+            entry.label = tagIter.value();
+            entries.push_back(entry);
         }
     }
 

@@ -11,46 +11,47 @@
 #include "GeoPolygonGraphicsItem.h"
 
 #include "BuildingGeoPolygonGraphicsItem.h"
+#include "GeoDataPlacemark.h"
 #include "StyleBuilder.h"
 
 namespace Marble
 {
 
-AbstractGeoPolygonGraphicsItem* GeoPolygonGraphicsItem::createGraphicsItem(const GeoDataFeature *feature, const GeoDataPolygon *polygon)
+AbstractGeoPolygonGraphicsItem *GeoPolygonGraphicsItem::createGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataPolygon *polygon)
 {
-    if (feature->visualCategory() == GeoDataFeature::Building) {
-        return new BuildingGeoPolygonGraphicsItem(feature, polygon);
+    if (placemark->visualCategory() == GeoDataFeature::Building) {
+        return new BuildingGeoPolygonGraphicsItem(placemark, polygon);
     }
-    return new GeoPolygonGraphicsItem(feature, polygon);
+    return new GeoPolygonGraphicsItem(placemark, polygon);
 }
 
-AbstractGeoPolygonGraphicsItem* GeoPolygonGraphicsItem::createGraphicsItem(const GeoDataFeature *feature, const GeoDataLinearRing *ring)
+AbstractGeoPolygonGraphicsItem *GeoPolygonGraphicsItem::createGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataLinearRing *ring)
 {
-    if (feature->visualCategory() == GeoDataFeature::Building) {
-        return new BuildingGeoPolygonGraphicsItem(feature, ring);
+    if (placemark->visualCategory() == GeoDataFeature::Building) {
+        return new BuildingGeoPolygonGraphicsItem(placemark, ring);
     }
-    return new GeoPolygonGraphicsItem(feature, ring);
+    return new GeoPolygonGraphicsItem(placemark, ring);
 }
 
 
-GeoPolygonGraphicsItem::GeoPolygonGraphicsItem(const GeoDataFeature *feature, const GeoDataPolygon *polygon) :
-    AbstractGeoPolygonGraphicsItem(feature, polygon)
+GeoPolygonGraphicsItem::GeoPolygonGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataPolygon *polygon) :
+    AbstractGeoPolygonGraphicsItem(placemark, polygon)
 {
-    const int elevation = extractElevation(*feature);
+    const int elevation = extractElevation(*placemark);
     setZValue(zValue() + elevation);
 
-    const GeoDataFeature::GeoDataVisualCategory visualCategory = feature->visualCategory();
+    const GeoDataFeature::GeoDataVisualCategory visualCategory = placemark->visualCategory();
     const QString paintLayer = QLatin1String("Polygon/") + StyleBuilder::visualCategoryName(visualCategory);
     setPaintLayers(QStringList(paintLayer));
 }
 
-GeoPolygonGraphicsItem::GeoPolygonGraphicsItem(const GeoDataFeature *feature, const GeoDataLinearRing *ring) :
-    AbstractGeoPolygonGraphicsItem(feature, ring)
+GeoPolygonGraphicsItem::GeoPolygonGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataLinearRing *ring) :
+    AbstractGeoPolygonGraphicsItem(placemark, ring)
 {
-    const int elevation = extractElevation(*feature);
+    const int elevation = extractElevation(*placemark);
     setZValue(zValue() + elevation);
 
-    const GeoDataFeature::GeoDataVisualCategory visualCategory = feature->visualCategory();
+    const GeoDataFeature::GeoDataVisualCategory visualCategory = placemark->visualCategory();
     const QString paintLayer = QLatin1String("Polygon/") + StyleBuilder::visualCategoryName(visualCategory);
     setPaintLayers(QStringList(paintLayer));
 }

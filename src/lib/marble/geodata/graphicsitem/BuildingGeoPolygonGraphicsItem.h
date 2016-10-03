@@ -22,8 +22,8 @@ namespace Marble
 class MARBLE_EXPORT BuildingGeoPolygonGraphicsItem : public AbstractGeoPolygonGraphicsItem
 {
 public:
-    explicit BuildingGeoPolygonGraphicsItem(const GeoDataFeature *feature, const GeoDataPolygon* polygon);
-    explicit BuildingGeoPolygonGraphicsItem(const GeoDataFeature *feature, const GeoDataLinearRing* ring);
+    explicit BuildingGeoPolygonGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataPolygon *polygon);
+    explicit BuildingGeoPolygonGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataLinearRing *ring);
 
 public:
     virtual void paint(GeoPainter* painter, const ViewportParams *viewport, const QString &layer);
@@ -46,9 +46,9 @@ private:
     static QPointF centroid(const QPolygonF &polygon, double &area);
     static void screenPolygons(const ViewportParams *viewport, const GeoDataPolygon* polygon,
                                QVector<QPolygonF*> &polygons,  QVector<QPolygonF*> &outlines);
-    static double extractBuildingHeight(const GeoDataFeature *feature);
-    static QString extractBuildingLabel(const GeoDataFeature *feature);
-    static QVector<NamedEntry> extractNamedEntries(const GeoDataFeature *feature);
+    static double extractBuildingHeight(const GeoDataPlacemark &placemark);
+    static QString extractBuildingLabel(const GeoDataPlacemark &placemark);
+    static QVector<NamedEntry> extractNamedEntries(const GeoDataPlacemark &placemark);
 
 private:
     const double m_buildingHeight;

@@ -14,28 +14,28 @@
 #include "GeoDataPolygon.h"
 #include "GeoPainter.h"
 #include "GeoDataLatLonAltBox.h"
-#include "ViewportParams.h"
 #include "GeoDataStyle.h"
 #include "GeoDataIconStyle.h"
 #include "GeoDataLineStyle.h"
+#include "GeoDataPlacemark.h"
 #include "GeoDataPolyStyle.h"
 #include "GeoDataTypes.h"
-#include "GeoDataPlacemark.h"
 #include "OsmPlacemarkData.h"
 #include "MarbleDebug.h"
+#include "ViewportParams.h"
 
 namespace Marble
 {
 
-AbstractGeoPolygonGraphicsItem::AbstractGeoPolygonGraphicsItem(const GeoDataFeature *feature, const GeoDataPolygon *polygon) :
-    GeoGraphicsItem(feature),
+AbstractGeoPolygonGraphicsItem::AbstractGeoPolygonGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataPolygon *polygon) :
+    GeoGraphicsItem(placemark),
     m_polygon(polygon),
     m_ring(0)
 {
 }
 
-AbstractGeoPolygonGraphicsItem::AbstractGeoPolygonGraphicsItem(const GeoDataFeature *feature, const GeoDataLinearRing *ring) :
-    GeoGraphicsItem(feature),
+AbstractGeoPolygonGraphicsItem::AbstractGeoPolygonGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataLinearRing *ring) :
+    GeoGraphicsItem(placemark),
     m_polygon(0),
     m_ring(ring)
 {
@@ -137,18 +137,15 @@ QPen AbstractGeoPolygonGraphicsItem::configurePainter(GeoPainter *painter, const
     return currentPen;
 }
 
-int AbstractGeoPolygonGraphicsItem::extractElevation(const GeoDataFeature &feature)
+int AbstractGeoPolygonGraphicsItem::extractElevation(const GeoDataPlacemark &placemark)
 {
     int elevation = 0;
 
-    if (feature.nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
-        const GeoDataPlacemark *placemark = static_cast<const GeoDataPlacemark *>(&feature);
-        const OsmPlacemarkData &osmData = placemark->osmData();
+    const OsmPlacemarkData &osmData = placemark.osmData();
 
-        const auto tagIter = osmData.findTag(QStringLiteral("ele"));
-        if (tagIter != osmData.tagsEnd()) {
-            elevation = tagIter.value().toInt();
-        }
+    const auto tagIter = osmData.findTag(QStringLiteral("ele"));
+    if (tagIter != osmData.tagsEnd()) {
+        elevation = tagIter.value().toInt();
     }
 
     return elevation;

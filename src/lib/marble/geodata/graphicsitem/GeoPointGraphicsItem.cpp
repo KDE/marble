@@ -10,7 +10,7 @@
 
 #include "GeoPointGraphicsItem.h"
 
-#include "GeoDataFeature.h"
+#include "GeoDataPlacemark.h"
 #include "GeoDataPoint.h"
 #include "GeoPainter.h"
 #include "StyleBuilder.h"
@@ -18,12 +18,12 @@
 namespace Marble
 {
 
-GeoPointGraphicsItem::GeoPointGraphicsItem(const GeoDataFeature *feature , const GeoDataPoint *point) :
-    GeoGraphicsItem(feature),
+GeoPointGraphicsItem::GeoPointGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataPoint *point) :
+    GeoGraphicsItem(placemark),
     m_point(point)
 {
-    if (feature) {
-        QString const paintLayer = QLatin1String("Point/") + StyleBuilder::visualCategoryName(feature->visualCategory());
+    if (placemark) {
+        QString const paintLayer = QLatin1String("Point/") + StyleBuilder::visualCategoryName(placemark->visualCategory());
         setPaintLayers(QStringList() << paintLayer);
     }
 }

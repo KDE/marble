@@ -11,19 +11,19 @@
 #include "GeoTrackGraphicsItem.h"
 
 #include "GeoDataLineString.h"
+#include "GeoDataPlacemark.h"
 #include "GeoDataTrack.h"
-#include "GeoDataFeature.h"
 #include "MarbleDebug.h"
 #include "StyleBuilder.h"
 
 using namespace Marble;
 
-GeoTrackGraphicsItem::GeoTrackGraphicsItem( const GeoDataFeature *feature, const GeoDataTrack *track )
-    : GeoLineStringGraphicsItem( feature, track->lineString() )
+GeoTrackGraphicsItem::GeoTrackGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataTrack *track) :
+    GeoLineStringGraphicsItem(placemark, track->lineString())
 {
     setTrack( track );
-    if (feature) {
-        QString const paintLayer = QLatin1String("Track/") + StyleBuilder::visualCategoryName(feature->visualCategory());
+    if (placemark) {
+        QString const paintLayer = QLatin1String("Track/") + StyleBuilder::visualCategoryName(placemark->visualCategory());
         setPaintLayers(QStringList() << paintLayer);
     }
 }

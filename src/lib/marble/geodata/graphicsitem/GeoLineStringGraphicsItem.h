@@ -19,11 +19,12 @@ namespace Marble
 {
 
 class GeoDataLineString;
+class GeoDataPlacemark;
 
 class MARBLE_EXPORT GeoLineStringGraphicsItem : public GeoGraphicsItem
 {
 public:
-    explicit GeoLineStringGraphicsItem( const GeoDataFeature *feature, const GeoDataLineString *lineString );
+    explicit GeoLineStringGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataLineString *lineString);
 
     void setLineString( const GeoDataLineString* lineString );
 

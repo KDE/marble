@@ -21,14 +21,14 @@ namespace Marble
 {
 
 class GeoDataLinearRing;
+class GeoDataPlacemark;
 class GeoDataPolygon;
-class GeoDataFeature;
 
 class MARBLE_EXPORT AbstractGeoPolygonGraphicsItem : public GeoGraphicsItem
 {
 protected:
-    explicit AbstractGeoPolygonGraphicsItem(const GeoDataFeature *feature, const GeoDataPolygon* polygon);
-    explicit AbstractGeoPolygonGraphicsItem(const GeoDataFeature *feature, const GeoDataLinearRing* ring);
+    explicit AbstractGeoPolygonGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataPolygon *polygon);
+    explicit AbstractGeoPolygonGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataLinearRing *ring);
 
 public:
     virtual const GeoDataLatLonAltBox& latLonAltBox() const;
@@ -41,7 +41,7 @@ protected:
     inline
     const GeoDataLinearRing *ring() const { return m_ring; }
 
-    static int extractElevation(const GeoDataFeature &feature);
+    static int extractElevation(const GeoDataPlacemark &placemark);
 
 private:
     const GeoDataPolygon *const m_polygon;

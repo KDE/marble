@@ -16,19 +16,20 @@
 namespace Marble
 {
 
+class GeoDataPlacemark;
 class GeoDataTrack;
 
 class MARBLE_EXPORT GeoTrackGraphicsItem : public GeoLineStringGraphicsItem
 {
 
 public:
-    explicit GeoTrackGraphicsItem( const GeoDataFeature *feature, const GeoDataTrack *track );
-
-    void setTrack( const GeoDataTrack *track );
+    explicit GeoTrackGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataTrack *track);
 
     virtual void paint(GeoPainter *painter, const ViewportParams *viewport, const QString &layer);
 
 private:
+    void setTrack(const GeoDataTrack *track);
+
     const GeoDataTrack *m_track;
     void update();
 };

@@ -10,10 +10,10 @@
 
 #include "GeoLineStringGraphicsItem.h"
 
-#include "GeoDataFeature.h"
 #include "GeoDataLineString.h"
 #include "GeoDataLineStyle.h"
 #include "GeoDataLabelStyle.h"
+#include "GeoDataPlacemark.h"
 #include "GeoDataPolyStyle.h"
 #include "GeoPainter.h"
 #include "StyleBuilder.h"
@@ -26,12 +26,12 @@
 namespace Marble
 {
 
-GeoLineStringGraphicsItem::GeoLineStringGraphicsItem( const GeoDataFeature *feature,
-                                                      const GeoDataLineString* lineString )
-        : GeoGraphicsItem( feature ),
-          m_lineString( lineString )
+GeoLineStringGraphicsItem::GeoLineStringGraphicsItem(const GeoDataPlacemark *placemark,
+                                                     const GeoDataLineString *lineString) :
+    GeoGraphicsItem(placemark),
+    m_lineString(lineString)
 {
-    QString const category = StyleBuilder::visualCategoryName(feature->visualCategory());
+    QString const category = StyleBuilder::visualCategoryName(placemark->visualCategory());
     QStringList paintLayers;
     paintLayers << QLatin1String("LineString/") + category + QLatin1String("/outline");
     paintLayers << QLatin1String("LineString/") + category + QLatin1String("/inline");
