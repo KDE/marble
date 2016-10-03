@@ -39,6 +39,9 @@ NodeReducer::NodeReducer(GeoDataDocument* document, int zoomLevel) :
             placemark->setGeometry(reducedLine);
         }
 
+        /*
+         * @todo FIXME distance based reduction is too simple for polygons, needs sth like Douglas-Peucker
+         *
         else if(geometry->nodeType() == GeoDataTypes::GeoDataLinearRingType) {
             GeoDataLinearRing const * prevRing = static_cast<GeoDataLinearRing const *>(geometry);
             GeoDataLinearRing* reducedRing = new GeoDataLinearRing;
@@ -62,6 +65,7 @@ NodeReducer::NodeReducer(GeoDataDocument* document, int zoomLevel) :
             }
             placemark->setGeometry(reducedPolygon);
         }
+        */
     }
 }
 
