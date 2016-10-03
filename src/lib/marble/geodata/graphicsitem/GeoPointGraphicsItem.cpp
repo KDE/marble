@@ -10,15 +10,17 @@
 
 #include "GeoPointGraphicsItem.h"
 
-#include "GeoPainter.h"
 #include "GeoDataFeature.h"
+#include "GeoDataPoint.h"
+#include "GeoPainter.h"
 #include "StyleBuilder.h"
 
 namespace Marble
 {
 
-GeoPointGraphicsItem::GeoPointGraphicsItem( const GeoDataFeature *feature )
-        : GeoGraphicsItem( feature )
+GeoPointGraphicsItem::GeoPointGraphicsItem(const GeoDataFeature *feature , const GeoDataPoint *point) :
+    GeoGraphicsItem(feature),
+    m_point(point)
 {
     if (feature) {
         QString const paintLayer = QLatin1String("Point/") + StyleBuilder::visualCategoryName(feature->visualCategory());
@@ -26,26 +28,16 @@ GeoPointGraphicsItem::GeoPointGraphicsItem( const GeoDataFeature *feature )
     }
 }
 
-void GeoPointGraphicsItem::setPoint( const GeoDataPoint& point )
-{
-    m_point = point;
-}
-
-GeoDataPoint GeoPointGraphicsItem::point() const
-{
-    return m_point;
-}
-
 void GeoPointGraphicsItem::paint(GeoPainter* painter, const ViewportParams* viewport , const QString &layer)
 {
     Q_UNUSED(viewport);
     Q_UNUSED(layer);
-    painter->drawPoint( m_point );
+    painter->drawPoint(*m_point);
 }
 
 const GeoDataLatLonAltBox& GeoPointGraphicsItem::latLonAltBox() const
 {
-    return m_point.latLonAltBox();
+    return m_point->latLonAltBox();
 }
 
 }
