@@ -35,7 +35,7 @@ NodeReducer::NodeReducer(GeoDataDocument* document, int zoomLevel) :
         if(geometry->nodeType() == GeoDataTypes::GeoDataLineStringType) {
             GeoDataLineString const * prevLine = static_cast<GeoDataLineString const *>(geometry);
             GeoDataLineString* reducedLine = new GeoDataLineString;
-            reduce(prevLine, reducedLine);
+            reduce(prevLine, placemark->osmData(), reducedLine);
             placemark->setGeometry(reducedLine);
         }
 

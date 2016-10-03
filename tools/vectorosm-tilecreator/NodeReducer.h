@@ -13,6 +13,7 @@
 
 #include "BaseFilter.h"
 #include "MarbleMath.h"
+#include "OsmPlacemarkData.h"
 
 namespace Marble {
 
@@ -25,7 +26,7 @@ public:
 
 private:
     template<class T>
-    void reduce(T const * lineString, T* reducedLine)
+    void reduce(T const * lineString, const OsmPlacemarkData &osmData, T* reducedLine)
     {
         qint64 const prevSize = lineString->size();
         if (prevSize < 2) {
@@ -38,6 +39,9 @@ private:
         reducedLine->append(*iter);
         ++iter;
         for (auto const end = lineString->end() - 1; iter != end; ++iter) {
+            if (!osmData.nodeReference(currentCoords).isEmpty()) {
+                continue; // do not remove nodes with tags
+            }
             if (distanceSphere( currentCoords, *iter ) >= m_resolution) {
                 currentCoords = *iter;
                 reducedLine->append(*iter);
