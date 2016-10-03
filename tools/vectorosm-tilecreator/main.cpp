@@ -65,13 +65,13 @@ QString tileFileName(const QCommandLineParser &parser, int x, int y, int zoomLev
 {
     QString const extension = parser.value("extension");
     QString const outputDir = QString("%1/%2/%3").arg(parser.value("output")).arg(zoomLevel).arg(x);
-    QDir().mkpath(outputDir);
     QString const outputFile = QString("%1/%2.%3").arg(outputDir).arg(y).arg(extension);
     return outputFile;
 }
 
 bool writeTile(GeoDataDocument* tile, const QString &outputFile)
 {
+    QDir().mkpath(QFileInfo(outputFile).path());
     if (!GeoDataDocumentWriter::write(outputFile, *tile)) {
         qWarning() << "Could not write the file " << outputFile;
         return false;
