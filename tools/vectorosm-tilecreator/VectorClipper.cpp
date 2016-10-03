@@ -264,19 +264,19 @@ ClipperLib::Path VectorClipper::clipPath(const GeoDataLatLonBox &box) const
     double y = box.north() * m_scale;
     double const verticalStep = (box.south() * m_scale - y) / (steps-1);
     for (int i=0; i<steps; ++i) {
-        path << IntPoint(qRound(x), qRound(y));
+        path << IntPoint(qRound64(x), qRound64(y));
         x += horizontalStep;
     }
     for (int i=0; i<steps; ++i) {
-        path << IntPoint(qRound(x), qRound(y));
+        path << IntPoint(qRound64(x), qRound64(y));
         y += verticalStep;
     }
     for (int i=0; i<steps; ++i) {
-        path << IntPoint(qRound(x), qRound(y));
+        path << IntPoint(qRound64(x), qRound64(y));
         x -= horizontalStep;
     }
     for (int i=0; i<steps; ++i) {
-        path << IntPoint(qRound(x), qRound(y));
+        path << IntPoint(qRound64(x), qRound64(y));
         y -= verticalStep;
     }
     return path;
@@ -288,7 +288,7 @@ void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const Clipper
     using namespace ClipperLib;
     Path path;
     foreach(auto const & node, polygon->outerBoundary()) {
-        path << IntPoint(node.longitude() * m_scale, node.latitude() * m_scale);
+        path << IntPoint(qRound64(node.longitude() * m_scale), qRound64(node.latitude() * m_scale));
     }
 
     Clipper clipper;
@@ -318,7 +318,7 @@ void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const Clipper
             clipper.AddPath(path, ptClip, true);
             Path innerPath;
             foreach(auto const & node, innerBoundaries.at(index)) {
-                innerPath << IntPoint(node.longitude() * m_scale, node.latitude() * m_scale);
+                innerPath << IntPoint(qRound64(node.longitude() * m_scale), qRound64(node.latitude() * m_scale));
             }
             clipper.AddPath(innerPath, ptSubject, true);
             Paths innerPaths;

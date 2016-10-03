@@ -44,7 +44,7 @@ private:
         using namespace ClipperLib;
         Path path;
         foreach(auto const & node, *ring) {
-            path << IntPoint(node.longitude() * m_scale, node.latitude() * m_scale);
+            path << IntPoint(qRound64(node.longitude() * m_scale), qRound64(node.latitude() * m_scale));
         }
 
         Clipper clipper;
@@ -78,7 +78,7 @@ private:
     void copyTags(const GeoDataPlacemark &source, GeoDataPlacemark &target) const;
     void copyTags(const OsmPlacemarkData &originalPlacemarkData, OsmPlacemarkData& targetOsmData) const;
 
-    static qint64 const m_scale = 10000000;
+    static qint64 const m_scale = 10000000000;
 
     QMap<TileId, QVector<GeoDataPlacemark*> > m_items;
     int m_maxZoomLevel;
