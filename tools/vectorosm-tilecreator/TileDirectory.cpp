@@ -342,7 +342,7 @@ void TileDirectory::createTiles() const
     foreach(auto const &tileId, iter) {
         ++count;
         QString const outputDir = QString("%1/%2").arg(m_baseDir).arg(tileId.x());
-        QString const outputFile = QString("%1/%2.%3").arg(outputDir).arg(tileId.y()).arg(m_extension);
+        QString const outputFile = QString("%1/%2.o5m").arg(outputDir).arg(tileId.y());
         if (QFileInfo(outputFile).exists()) {
             continue;
         }
