@@ -14,6 +14,7 @@
 #include "OsmNode.h"
 #include <osm/OsmPlacemarkData.h>
 #include <StyleBuilder.h>
+#include <GeoDataDocument.h>
 
 #include <QSet>
 #include <QString>
@@ -31,7 +32,7 @@ public:
     const OsmPlacemarkData & osmData() const;
     const QVector<qint64> &references() const;
 
-    void create(GeoDataDocument* document, const OsmNodes &nodes, QSet<qint64> &usedNodes) const;
+    void create(GeoDataDocument* document, DocumentRole role, const OsmNodes &nodes, QSet<qint64> &usedNodes) const;
 
 private:
     struct NamedEntry {

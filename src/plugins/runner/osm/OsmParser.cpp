@@ -30,7 +30,7 @@
 
 namespace Marble {
 
-GeoDataDocument *OsmParser::parse(const QString &filename, QString &error)
+GeoDataDocument *OsmParser::parse(const QString &filename, DocumentRole role, QString &error)
 {
     QFileInfo const fileInfo(filename);
     if (!fileInfo.exists() || !fileInfo.isReadable()) {
@@ -39,13 +39,13 @@ GeoDataDocument *OsmParser::parse(const QString &filename, QString &error)
     }
 
     if (fileInfo.completeSuffix() == QLatin1String("o5m")) {
-        return parseO5m(filename, error);
+        return parseO5m(filename, role, error);
     } else {
-        return parseXml(filename, error);
+        return parseXml(filename, role, error);
     }
 }
 
-GeoDataDocument* OsmParser::parseO5m(const QString &filename, QString &error)
+GeoDataDocument* OsmParser::parseO5m(const QString &filename, DocumentRole role, QString &error)
 {
     O5mreader* reader;
     O5mreaderDataset data;
@@ -119,10 +119,10 @@ GeoDataDocument* OsmParser::parseO5m(const QString &filename, QString &error)
     fclose(file);
     error = reader->errMsg;
     o5mreader_close(reader);
-    return createDocument(nodes, ways, relations);
+    return createDocument(role, nodes, ways, relations);
 }
 
-GeoDataDocument* OsmParser::parseXml(const QString &filename, QString &error)
+GeoDataDocument* OsmParser::parseXml(const QString &filename, DocumentRole role, QString &error)
 {
     QXmlStreamReader parser;
     QFile file;
@@ -198,10 +198,10 @@ GeoDataDocument* OsmParser::parseXml(const QString &filename, QString &error)
         return nullptr;
     }
 
-    return createDocument(m_nodes, m_ways, m_relations);
+    return createDocument(role, m_nodes, m_ways, m_relations);
 }
 
-GeoDataDocument *OsmParser::createDocument(OsmNodes &nodes, OsmWays &ways, OsmRelations &relations)
+GeoDataDocument *OsmParser::createDocument(DocumentRole role, OsmNodes &nodes, OsmWays &ways, OsmRelations &relations)
 {
     GeoDataDocument* document = new GeoDataDocument;
     GeoDataPolyStyle backgroundPolyStyle;
@@ -222,7 +222,7 @@ GeoDataDocument *OsmParser::createDocument(OsmNodes &nodes, OsmWays &ways, OsmRe
     }
 
     foreach(OsmWay const &way, ways) {
-        way.create(document, nodes, usedNodes);
+        way.create(document, role, nodes, usedNodes);
     }
 
     foreach(qint64 id, usedNodes) {

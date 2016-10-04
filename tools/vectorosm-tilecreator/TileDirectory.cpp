@@ -139,7 +139,7 @@ QString TileDirectory::name() const
 QSharedPointer<GeoDataDocument> TileDirectory::open(const QString &filename, ParsingRunnerManager &manager)
 {
     // Timeout is set to 10 min. If the file is reaaally huge, set it to something bigger.
-    GeoDataDocument* map = manager.openFile(filename, DocumentRole::MapDocument, 600000);
+    GeoDataDocument* map = manager.openFile(filename, DocumentRole::ConversionDocument, 600000);
     if(map == nullptr) {
         qWarning() << "File" << filename << "couldn't be loaded.";
     }

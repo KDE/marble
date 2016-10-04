@@ -41,7 +41,8 @@ enum DocumentRole {
     UserDocument,
     TrackingDocument,
     BookmarkDocument,
-    SearchResultDocument
+    SearchResultDocument,
+    ConversionDocument
 };
 
 
