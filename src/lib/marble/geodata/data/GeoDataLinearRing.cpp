@@ -67,8 +67,8 @@ bool GeoDataLinearRing::contains( const GeoDataCoordinates &coordinates ) const
     int j = points - 1;
 
     for ( int i=0; i<points; ++i ) {
-        GeoDataCoordinates const & one = at( i );
-        GeoDataCoordinates const & two = at( j );
+        GeoDataCoordinates const & one = operator[]( i );
+        GeoDataCoordinates const & two = operator[]( j );
 
         if ( ( one.longitude() < coordinates.longitude() && two.longitude() >= coordinates.longitude() ) ||
              ( two.longitude() < coordinates.longitude() && one.longitude() >= coordinates.longitude() ) ) {
@@ -88,9 +88,9 @@ bool GeoDataLinearRing::isClockwise() const
     int const n = size();
     qreal area = 0;
     for ( int i = 1; i < n; ++i ){
-        area += ( at( i ).longitude() - at( i - 1 ).longitude() ) * ( at( i ).latitude() + at( i - 1 ).latitude() );
+        area += ( operator[]( i ).longitude() - operator[]( i - 1 ).longitude() ) * ( operator[]( i ).latitude() + operator[]( i - 1 ).latitude() );
     }
-    area += ( at( 0 ).longitude() - at( n - 1 ).longitude() ) * ( at ( 0 ).latitude() + at( n - 1 ).latitude() );
+    area += ( operator[]( 0 ).longitude() - operator[]( n - 1 ).longitude() ) * ( operator[] ( 0 ).latitude() + operator[]( n - 1 ).latitude() );
 
     return area > 0;
 }
