@@ -98,4 +98,33 @@ GeoDataDocument *TagsFilter::accepted()
     return m_accepted;
 }
 
+void TagsFilter::removeAnnotationTags(GeoDataDocument *document)
+{
+    foreach (auto placemark, document->placemarkList()) {
+        auto & osmData = placemark->osmData();
+        removeAnnotationTags(osmData);
+        for (auto & reference: osmData.nodeReferences()) {
+            removeAnnotationTags(reference);
+        }
+        for (auto & reference: osmData.memberReferences()) {
+            removeAnnotationTags(reference);
+        }
+    }
+}
+
+void TagsFilter::removeAnnotationTags(OsmPlacemarkData &osmData)
+{
+    osmData.removeTag(QLatin1String("comment"));
+    osmData.removeTag(QLatin1String("note"));
+    osmData.removeTag(QLatin1String("note:de"));
+    osmData.removeTag(QLatin1String("fixme"));
+    osmData.removeTag(QLatin1String("todo"));
+    osmData.removeTag(QLatin1String("source"));
+    osmData.removeTag(QLatin1String("source:geometry"));
+    osmData.removeTag(QLatin1String("source:name"));
+    osmData.removeTag(QLatin1String("source:addr"));
+    osmData.removeTag(QLatin1String("source:ref"));
+    osmData.removeTag(QLatin1String("source_ref"));
+}
+
 }

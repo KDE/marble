@@ -141,6 +141,7 @@ public:
     /**
      * @brief iterators for the reference hashes.
      */
+    QHash< GeoDataCoordinates, OsmPlacemarkData > & nodeReferences();
     QHash< GeoDataCoordinates, OsmPlacemarkData >::const_iterator nodeReferencesBegin() const;
     QHash< GeoDataCoordinates, OsmPlacemarkData >::const_iterator nodeReferencesEnd() const;
 
@@ -164,6 +165,7 @@ public:
     void removeMemberReference( int key );
     bool containsMemberReference( int key ) const;
 
+    QHash< int, OsmPlacemarkData > & memberReferences();
     QHash< int, OsmPlacemarkData >::const_iterator memberReferencesBegin() const;
     QHash< int, OsmPlacemarkData >::const_iterator memberReferencesEnd() const;
 

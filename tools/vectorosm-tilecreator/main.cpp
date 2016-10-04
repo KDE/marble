@@ -217,6 +217,7 @@ int main(int argc, char *argv[])
                     }
                 }
                 GeoDataDocument* tile1 = mapTiles.clip(zoomLevel, tileId.x(), tileId.y());
+                TagsFilter::removeAnnotationTags(tile1);
                 GeoDataDocument* tile2 = loader.clip(zoomLevel, tileId.x(), tileId.y());
                 GeoDataDocument* combined = mergeDocuments(tile1, tile2);
                 NodeReducer nodeReducer(combined, zoomLevel);

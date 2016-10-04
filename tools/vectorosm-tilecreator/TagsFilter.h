@@ -13,6 +13,7 @@
 #define MARBLE_TAGSFILTER_H
 
 #include "BaseFilter.h"
+#include "OsmPlacemarkData.h"
 
 #include <QMap>
 #include <QString>
@@ -33,7 +34,11 @@ public:
 
     GeoDataDocument* accepted();
 
+    static void removeAnnotationTags(GeoDataDocument* document);
+
 private:
+    static void removeAnnotationTags(OsmPlacemarkData &osmData);
+
     GeoDataDocument* m_accepted;
     QVector<GeoDataPlacemark*> m_rejectedObjects;
 };

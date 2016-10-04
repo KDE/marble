@@ -186,6 +186,11 @@ void OsmPlacemarkData::changeNodeReference( const GeoDataCoordinates &oldKey, co
     m_nodeReferences.remove( oldKey );
 }
 
+QHash<GeoDataCoordinates, OsmPlacemarkData> &OsmPlacemarkData::nodeReferences()
+{
+    return m_nodeReferences;
+}
+
 QHash< GeoDataCoordinates, OsmPlacemarkData >::const_iterator OsmPlacemarkData::nodeReferencesBegin() const
 {
     return m_nodeReferences.begin();
@@ -235,6 +240,11 @@ void OsmPlacemarkData::removeMemberReference( int key )
 bool OsmPlacemarkData::containsMemberReference( int key ) const
 {
     return m_memberReferences.contains( key );
+}
+
+QHash<int, OsmPlacemarkData> &OsmPlacemarkData::memberReferences()
+{
+    return m_memberReferences;
 }
 
 QHash< int, OsmPlacemarkData >::const_iterator OsmPlacemarkData::memberReferencesBegin() const
