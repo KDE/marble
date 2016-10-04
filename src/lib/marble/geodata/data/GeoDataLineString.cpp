@@ -310,7 +310,7 @@ GeoDataCoordinates& GeoDataLineString::operator[]( int pos )
 
 const GeoDataCoordinates& GeoDataLineString::operator[]( int pos ) const
 {
-    return p()->m_vector[ pos ];
+    return static_cast<GeoDataLineStringPrivate*>(d)->m_vector[ pos ];
 }
 
 GeoDataCoordinates& GeoDataLineString::last()
