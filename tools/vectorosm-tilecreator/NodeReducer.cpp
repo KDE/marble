@@ -29,43 +29,40 @@ NodeReducer::NodeReducer(GeoDataDocument* document, int zoomLevel) :
     m_removedNodes(0),
     m_remainingNodes(0)
 {
+    /*
+     * @todo FIXME distance based reduction is too simple for polygons, needs sth like Douglas-Peucker
+     */
+
     foreach (GeoDataPlacemark* placemark, placemarks()) {
         GeoDataGeometry const * const geometry = placemark->geometry();
-
         if(geometry->nodeType() == GeoDataTypes::GeoDataLineStringType) {
             GeoDataLineString const * prevLine = static_cast<GeoDataLineString const *>(geometry);
             GeoDataLineString* reducedLine = new GeoDataLineString;
             reduce(prevLine, placemark->osmData(), reducedLine);
             placemark->setGeometry(reducedLine);
-        }
-
-        /*
-         * @todo FIXME distance based reduction is too simple for polygons, needs sth like Douglas-Peucker
-         *
-        else if(geometry->nodeType() == GeoDataTypes::GeoDataLinearRingType) {
-            GeoDataLinearRing const * prevRing = static_cast<GeoDataLinearRing const *>(geometry);
-            GeoDataLinearRing* reducedRing = new GeoDataLinearRing;
-            reduce(prevRing, reducedRing);
-            placemark->setGeometry(reducedRing);
-        }
-
-        else if(geometry->nodeType() == GeoDataTypes::GeoDataPolygonType) {
-            GeoDataPolygon* reducedPolygon = new GeoDataPolygon;
-            GeoDataPolygon const * prevPolygon = static_cast<GeoDataPolygon const *>(geometry);
-            GeoDataLinearRing const * prevRing = &(prevPolygon->outerBoundary());
-            GeoDataLinearRing reducedRing;
-            reduce(prevRing, &reducedRing);
-            reducedPolygon->setOuterBoundary(reducedRing);
-            QVector<GeoDataLinearRing> const & innerBoundaries = prevPolygon->innerBoundaries();
-            for(int i = 0; i < innerBoundaries.size(); i++) {
-                prevRing = &innerBoundaries[i];
-                GeoDataLinearRing reducedInnerRing;
-                reduce(prevRing, &reducedInnerRing);
-                reducedPolygon->appendInnerBoundary(reducedInnerRing);
+        } else if (zoomLevel < 17) {
+            if(geometry->nodeType() == GeoDataTypes::GeoDataLinearRingType) {
+                GeoDataLinearRing const * prevRing = static_cast<GeoDataLinearRing const *>(geometry);
+                GeoDataLinearRing* reducedRing = new GeoDataLinearRing;
+                reduce(prevRing, placemark->osmData(), reducedRing);
+                placemark->setGeometry(reducedRing);
+            } else if(geometry->nodeType() == GeoDataTypes::GeoDataPolygonType) {
+                GeoDataPolygon* reducedPolygon = new GeoDataPolygon;
+                GeoDataPolygon const * prevPolygon = static_cast<GeoDataPolygon const *>(geometry);
+                GeoDataLinearRing const * prevRing = &(prevPolygon->outerBoundary());
+                GeoDataLinearRing reducedRing;
+                reduce(prevRing, placemark->osmData(), &reducedRing);
+                reducedPolygon->setOuterBoundary(reducedRing);
+                QVector<GeoDataLinearRing> const & innerBoundaries = prevPolygon->innerBoundaries();
+                for(int i = 0; i < innerBoundaries.size(); i++) {
+                    prevRing = &innerBoundaries[i];
+                    GeoDataLinearRing reducedInnerRing;
+                    reduce(prevRing, placemark->osmData(), &reducedInnerRing);
+                    reducedPolygon->appendInnerBoundary(reducedInnerRing);
+                }
+                placemark->setGeometry(reducedPolygon);
             }
-            placemark->setGeometry(reducedPolygon);
         }
-        */
     }
 }
 
