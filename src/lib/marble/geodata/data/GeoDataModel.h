@@ -70,7 +70,7 @@ public:
     void setTargetHref(const QString &targetHref);
 
 private:
-    GeoDataModelPrivate *p() const;
+    Q_DECLARE_PRIVATE(GeoDataModel)
 };
 
 }

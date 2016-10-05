@@ -175,7 +175,8 @@ public:
     /**
      * Return the ExtendedData assigned to the feature.
      */
-    GeoDataExtendedData& extendedData() const;
+    const GeoDataExtendedData& extendedData() const;
+    GeoDataExtendedData& extendedData();
 
     /**
      * Sets the ExtendedData of the feature.
@@ -188,7 +189,7 @@ public:
     virtual void unpack( QDataStream& stream );
 
 private:
-    GeoDataTrackPrivate *p() const;
+    Q_DECLARE_PRIVATE(GeoDataTrack)
 };
 
 }

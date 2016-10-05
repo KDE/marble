@@ -88,9 +88,9 @@ class GEODATA_EXPORT GeoDataMultiGeometry : public GeoDataGeometry
     virtual void pack( QDataStream& stream ) const;
     // Unserialize the Placemark from @p stream
     virtual void unpack( QDataStream& stream );
+
  private:
-    GeoDataMultiGeometryPrivate *p();
-    const GeoDataMultiGeometryPrivate *p() const;
+    Q_DECLARE_PRIVATE(GeoDataMultiGeometry)
 };
 
 }

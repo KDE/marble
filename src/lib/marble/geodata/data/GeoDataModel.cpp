@@ -78,15 +78,18 @@ GeoDataModel &GeoDataModel::operator=( const GeoDataModel &other )
 
 bool GeoDataModel::operator==( const GeoDataModel &other ) const
 {
+    Q_D(const GeoDataModel);
+    const GeoDataModelPrivate *other_d = other.d_func();
+
     return equals(other) &&
-           p()->m_coordinates == other.p()->m_coordinates &&
-           p()->m_scale == other.p()->m_scale &&
-           p()->m_orientation == other.p()->m_orientation &&
-           p()->m_location == other.p()->m_location &&
-           p()->m_link == other.p()->m_link &&
-           p()->m_map == other.p()->m_map &&
-           p()->m_targetHref == other.p()->m_targetHref &&
-           p()->m_sourceHref == other.p()->m_sourceHref;
+           d->m_coordinates == other_d->m_coordinates &&
+           d->m_scale == other_d->m_scale &&
+           d->m_orientation == other_d->m_orientation &&
+           d->m_location == other_d->m_location &&
+           d->m_link == other_d->m_link &&
+           d->m_map == other_d->m_map &&
+           d->m_targetHref == other_d->m_targetHref &&
+           d->m_sourceHref == other_d->m_sourceHref;
 }
 
 bool GeoDataModel::operator!=( const GeoDataModel &other ) const
@@ -100,133 +103,162 @@ GeoDataModel::~GeoDataModel()
 
 const GeoDataCoordinates &GeoDataModel::coordinates() const
 {
-    return p()->m_coordinates;
+    Q_D(const GeoDataModel);
+    return d->m_coordinates;
 }
 
 GeoDataCoordinates &GeoDataModel::coordinates()
 {
-    return p()->m_coordinates;
+    detach();
+
+    Q_D(GeoDataModel);
+    return d->m_coordinates;
 }
 
 const GeoDataLocation &GeoDataModel::location() const
 {
-    return p()->m_location;
+    Q_D(const GeoDataModel);
+    return d->m_location;
 }
 
 GeoDataLocation &GeoDataModel::location()
 {
-    return p()->m_location;
+    detach();
+
+    Q_D(GeoDataModel);
+    return d->m_location;
 }
 
 void GeoDataModel::setCoordinates(const GeoDataCoordinates &coordinates)
 {
     detach();
 
-    p()->m_coordinates = coordinates;
+    Q_D(GeoDataModel);
+    d->m_coordinates = coordinates;
 }
 
 void GeoDataModel::setLocation(const GeoDataLocation &location)
 {
     detach();
 
-    p()->m_location = location;
+    Q_D(GeoDataModel);
+    d->m_location = location;
 }
 
 const GeoDataLink &GeoDataModel::link() const
 {
-    return p()->m_link;
+    Q_D(const GeoDataModel);
+    return d->m_link;
 }
 
 GeoDataLink &GeoDataModel::link()
 {
-    return p()->m_link;
+    detach();
+
+    Q_D(GeoDataModel);
+    return d->m_link;
 }
 
 void GeoDataModel::setLink( const GeoDataLink &link )
 {
     detach();
 
-    p()->m_link = link;
+    Q_D(GeoDataModel);
+    d->m_link = link;
 }
 
 const GeoDataScale &GeoDataModel::scale() const
 {
-    return p()->m_scale;
+    Q_D(const GeoDataModel);
+    return d->m_scale;
 }
 
 GeoDataScale &GeoDataModel::scale()
 {
-    return p()->m_scale;
+    detach();
+
+    Q_D(GeoDataModel);
+    return d->m_scale;
 }
 
 void GeoDataModel::setScale(const GeoDataScale &scale)
 {
     detach();
 
-    p()->m_scale=scale;
+    Q_D(GeoDataModel);
+    d->m_scale = scale;
 }
 
 const GeoDataOrientation &GeoDataModel::orientation() const
 {
-    return p()->m_orientation;
+    Q_D(const GeoDataModel);
+    return d->m_orientation;
 }
 
 GeoDataOrientation &GeoDataModel::orientation()
 {
-    return p()->m_orientation;
+    detach();
+
+    Q_D(GeoDataModel);
+    return d->m_orientation;
 }
 
 void GeoDataModel::setOrientation(const GeoDataOrientation &orientation)
 {
     detach();
 
-    p()->m_orientation=orientation;
+    Q_D(GeoDataModel);
+    d->m_orientation = orientation;
 }
 
 const GeoDataResourceMap &GeoDataModel::resourceMap() const
 {
-    return p()->m_map;
+    Q_D(const GeoDataModel);
+    return d->m_map;
 }
 
 GeoDataResourceMap &GeoDataModel::resourceMap()
 {
-    return p()->m_map;
+    detach();
+
+    Q_D(GeoDataModel);
+    return d->m_map;
 }
 
 void GeoDataModel::setResourceMap(const GeoDataResourceMap &map)
 {
     detach();
 
-    p()->m_map=map;
+    Q_D(GeoDataModel);
+    d->m_map = map;
 }
 
 QString GeoDataModel::targetHref() const
 {
-    return p()->m_map.targetHref();
+    Q_D(const GeoDataModel);
+    return d->m_map.targetHref();
 }
 
 void GeoDataModel::setTargetHref(const QString &targetHref)
 {
     detach();
 
-    p()->m_map.setTargetHref( targetHref );
+    Q_D(GeoDataModel);
+    d->m_map.setTargetHref( targetHref );
 }
 
 QString GeoDataModel::sourceHref() const
 {
-    return p()->m_map.sourceHref();
+    Q_D(const GeoDataModel);
+    return d->m_map.sourceHref();
 }
 
 void GeoDataModel::setSourceHref(const QString &sourceHref)
 {
     detach();
 
-    p()->m_map.setSourceHref( sourceHref );
-}
-
-GeoDataModelPrivate *GeoDataModel::p() const
-{
-    return static_cast<GeoDataModelPrivate *>( d );
+    Q_D(GeoDataModel);
+    d->m_map.setSourceHref( sourceHref );
 }
 
 }

@@ -76,7 +76,7 @@ class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject
     using GeoDataObject::equals;
 
  protected:
-    GeoDataGeometryPrivate *d;
+    GeoDataGeometryPrivate *d_ptr;
 };
 
 }

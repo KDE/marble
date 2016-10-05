@@ -221,8 +221,7 @@ class GEODATA_EXPORT GeoDataPolygon : public GeoDataGeometry
     void setRenderOrder(int);
 
  private:
-    GeoDataPolygonPrivate *p();
-    const GeoDataPolygonPrivate *p() const;
+    Q_DECLARE_PRIVATE(GeoDataPolygon)
 };
 
 class GEODATA_EXPORT GeoDataOuterBoundary : public GeoDataPolygon
