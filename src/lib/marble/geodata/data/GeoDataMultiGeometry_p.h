@@ -43,6 +43,7 @@ class GeoDataMultiGeometryPrivate : public GeoDataGeometryPrivate
         GeoDataGeometryPrivate::operator=( other );
 
         qDeleteAll( m_vector );
+        m_vector.clear();
 
         m_vector.reserve(other.m_vector.size());
 
