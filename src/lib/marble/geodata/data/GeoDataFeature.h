@@ -204,7 +204,8 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     /**
      * Return the region assigned to the placemark.
      */
-    GeoDataRegion& region() const;
+    const GeoDataRegion& region() const;
+    GeoDataRegion& region();
     /**
      * @brief Sets the region of the placemark.
      * @param region new value for the region
@@ -268,8 +269,8 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
 
  protected:
     // the d-pointer needs to be protected to be accessible from derived classes
-    GeoDataFeaturePrivate* d;
-    explicit GeoDataFeature( GeoDataFeaturePrivate* priv );
+    GeoDataFeaturePrivate* d_ptr;
+    explicit GeoDataFeature(GeoDataFeaturePrivate* dd);
 
     virtual void detach();
 
@@ -277,8 +278,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     using GeoDataObject::equals;
 
  private:
-    // the private d pointer accessor - use it instead of the d pointer directly
-    GeoDataFeaturePrivate* p() const;
+    Q_DECLARE_PRIVATE(GeoDataFeature)
 };
 
 }

@@ -58,7 +58,7 @@ class GEODATA_EXPORT GeoDataFolder : public GeoDataContainer
     bool operator!=( const GeoDataFolder &other ) const;
 
  private:
-    GeoDataFolderPrivate *p() const;
+    Q_DECLARE_PRIVATE(GeoDataFolder)
 };
 
 }

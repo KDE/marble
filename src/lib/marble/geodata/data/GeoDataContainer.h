@@ -174,8 +174,7 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
     using GeoDataFeature::equals;
 
  private:
-    GeoDataContainerPrivate* p();
-    const GeoDataContainerPrivate* p() const;
+    Q_DECLARE_PRIVATE(GeoDataContainer)
 };
 
 }

@@ -40,7 +40,8 @@ const GeoDataPlacemarkExtendedData GeoDataPlacemarkPrivate::s_nullPlacemarkExten
 GeoDataPlacemark::GeoDataPlacemark()
     : GeoDataFeature( new GeoDataPlacemarkPrivate )
 {
-    p()->m_geometry->setParent( this );
+    Q_D(GeoDataPlacemark);
+    d->m_geometry->setParent(this);
 }
 
 GeoDataPlacemark::GeoDataPlacemark( const GeoDataPlacemark& other )
@@ -51,14 +52,15 @@ GeoDataPlacemark::GeoDataPlacemark( const GeoDataPlacemark& other )
 //    Q_ASSERT( this == p()->m_geometry->parent() );
 
     // FIXME: fails as well when "other" is a copy where detach wasn't called
-//    Q_ASSERT( other.p()->m_geometry == 0 || &other == other.p()->m_geometry->parent() );
+//    Q_ASSERT( other_d->m_geometry == 0 || &other == other_d->m_geometry->parent() );
 }
 
 GeoDataPlacemark::GeoDataPlacemark( const QString& name )
     : GeoDataFeature( new GeoDataPlacemarkPrivate )
 {
+    Q_D(GeoDataPlacemark);
     d->m_name = name;
-    p()->m_geometry->setParent( this );
+    d->m_geometry->setParent(this);
 }
 
 GeoDataPlacemark::~GeoDataPlacemark()
@@ -75,82 +77,85 @@ GeoDataPlacemark &GeoDataPlacemark::operator=( const GeoDataPlacemark &other )
 
 bool GeoDataPlacemark::operator==( const GeoDataPlacemark& other ) const
 { 
+    Q_D(const GeoDataPlacemark);
+    const GeoDataPlacemarkPrivate* const other_d = other.d_func();
     if (!equals(other) ||
-        p()->m_population != other.p()->m_population) {
+        d->m_population != other_d->m_population) {
         return false;
     }
 
-    if ((p()->m_placemarkExtendedData && !other.p()->m_placemarkExtendedData) ||
-        (!p()->m_placemarkExtendedData && other.p()->m_placemarkExtendedData)) {
+    if ((d->m_placemarkExtendedData && !other_d->m_placemarkExtendedData) ||
+        (!d->m_placemarkExtendedData && other_d->m_placemarkExtendedData)) {
         return false;
     }
-    if (p()->m_placemarkExtendedData && other.p()->m_placemarkExtendedData &&
-            !(*p()->m_placemarkExtendedData == *other.p()->m_placemarkExtendedData)) {
+    if (d->m_placemarkExtendedData && other_d->m_placemarkExtendedData &&
+            !(*d->m_placemarkExtendedData == *other_d->m_placemarkExtendedData)) {
         return false;
     }
 
-    if ( !p()->m_geometry && !other.p()->m_geometry ) {
+    if (!d->m_geometry && !other_d->m_geometry) {
         return true;
-    } else if ( (!p()->m_geometry && other.p()->m_geometry) ||
-                (p()->m_geometry && !other.p()->m_geometry) ) {
+    }
+    if ((!d->m_geometry && other_d->m_geometry) ||
+        (d->m_geometry && !other_d->m_geometry)) {
         return false;
     }
 
-    if ( p()->m_geometry->nodeType() != other.p()->m_geometry->nodeType() ) {
+    if (d->m_geometry->nodeType() != other_d->m_geometry->nodeType()) {
         return false;
     }
 
-    if ( p()->m_geometry->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
-        GeoDataPolygon *thisPoly = dynamic_cast<GeoDataPolygon*>( p()->m_geometry );
-        GeoDataPolygon *otherPoly = dynamic_cast<GeoDataPolygon*>( other.p()->m_geometry );
+    if (d->m_geometry->nodeType() == GeoDataTypes::GeoDataPolygonType) {
+        GeoDataPolygon *thisPoly = dynamic_cast<GeoDataPolygon*>(d->m_geometry);
+        GeoDataPolygon *otherPoly = dynamic_cast<GeoDataPolygon*>(other_d->m_geometry);
         Q_ASSERT( thisPoly && otherPoly );
 
         if ( *thisPoly != *otherPoly ) {
             return false;
         }
-    } else if ( p()->m_geometry->nodeType() == GeoDataTypes::GeoDataLineStringType ) {
-        GeoDataLineString *thisLine = dynamic_cast<GeoDataLineString*>( p()->m_geometry );
-        GeoDataLineString *otherLine = dynamic_cast<GeoDataLineString*>( other.p()->m_geometry );
+    } else if (d->m_geometry->nodeType() == GeoDataTypes::GeoDataLineStringType) {
+        GeoDataLineString *thisLine = dynamic_cast<GeoDataLineString*>(d->m_geometry);
+        GeoDataLineString *otherLine = dynamic_cast<GeoDataLineString*>(other_d->m_geometry);
         Q_ASSERT( thisLine && otherLine );
 
         if ( *thisLine != *otherLine ) {
             return false;
         }
-    } else if ( p()->m_geometry->nodeType() == GeoDataTypes::GeoDataModelType ) {
-        GeoDataModel *thisModel = dynamic_cast<GeoDataModel*>( p()->m_geometry );
-        GeoDataModel *otherModel = dynamic_cast<GeoDataModel*>( other.p()->m_geometry );
+    } else if (d->m_geometry->nodeType() == GeoDataTypes::GeoDataModelType) {
+        GeoDataModel *thisModel = dynamic_cast<GeoDataModel*>(d->m_geometry);
+        GeoDataModel *otherModel = dynamic_cast<GeoDataModel*>(other_d->m_geometry);
         Q_ASSERT( thisModel && otherModel );
 
         if ( *thisModel != *otherModel ) {
             return false;
         }
-    /*} else if ( p()->m_geometry->nodeType() == GeoDataTypes::GeoDataMultiGeometryType ) {
-        GeoDataMultiGeometry *thisMG = dynamic_cast<GeoDataMultiGeometry*>( p()->m_geometry );
-        GeoDataMultiGeometry *otherMG = dynamic_cast<GeoDataMultiGeometry*>( other.p()->m_geometry );
+    /*} else if (d->m_geometry->nodeType() == GeoDataTypes::GeoDataMultiGeometryType) {
+        GeoDataMultiGeometry *thisMG = dynamic_cast<GeoDataMultiGeometry*>(d->m_geometry);
+        GeoDataMultiGeometry *otherMG = dynamic_cast<GeoDataMultiGeometry*>(other_d->m_geometry);
         Q_ASSERT( thisMG && otherMG );
 
         if ( *thisMG != *otherMG ) {
             return false;
         } */ // Does not have equality operators. I guess they need to be implemented soon.
-    } else if ( p()->m_geometry->nodeType() == GeoDataTypes::GeoDataTrackType ) {
-        GeoDataTrack *thisTrack = dynamic_cast<GeoDataTrack*>( p()->m_geometry );
-        GeoDataTrack *otherTrack = dynamic_cast<GeoDataTrack*>( other.p()->m_geometry );
+    } else if (d->m_geometry->nodeType() == GeoDataTypes::GeoDataTrackType) {
+        GeoDataTrack *thisTrack = dynamic_cast<GeoDataTrack*>(d->m_geometry);
+        GeoDataTrack *otherTrack = dynamic_cast<GeoDataTrack*>(other_d->m_geometry);
         Q_ASSERT( thisTrack && otherTrack );
 
         if ( *thisTrack != *otherTrack ) {
             return false;
         }
-    } else if ( p()->m_geometry->nodeType() == GeoDataTypes::GeoDataMultiTrackType ) {
-        GeoDataMultiTrack *thisMT = dynamic_cast<GeoDataMultiTrack*>( p()->m_geometry );
-        GeoDataMultiTrack *otherMT = dynamic_cast<GeoDataMultiTrack*>( other.p()->m_geometry );
+    } else if (d->m_geometry->nodeType() == GeoDataTypes::GeoDataMultiTrackType) {
+        GeoDataMultiTrack *thisMT = dynamic_cast<GeoDataMultiTrack*>(d->m_geometry);
+        GeoDataMultiTrack *otherMT = dynamic_cast<GeoDataMultiTrack*>(other_d->m_geometry);
         Q_ASSERT( thisMT && otherMT );
 
         if ( *thisMT != *otherMT ) {
             return false;
         }
-    } else if ( p()->m_geometry->nodeType() == GeoDataTypes::GeoDataPointType ) {
-        GeoDataPoint *thisPoint = dynamic_cast<GeoDataPoint*>( p()->m_geometry );
-        GeoDataPoint *otherPoint = dynamic_cast<GeoDataPoint*>( other.p()->m_geometry );
+    } else if (d->m_geometry->nodeType() == GeoDataTypes::GeoDataPointType) {
+        GeoDataPoint *thisPoint = dynamic_cast<GeoDataPoint*>(d->m_geometry);
+        GeoDataPoint *otherPoint = dynamic_cast<GeoDataPoint*>(other_d->m_geometry);
         Q_ASSERT( thisPoint && otherPoint );
 
         if ( *thisPoint != *otherPoint ) {
@@ -168,42 +173,39 @@ bool GeoDataPlacemark::operator!=( const GeoDataPlacemark& other ) const
 
 GeoDataPlacemark::GeoDataVisualCategory GeoDataPlacemark::visualCategory() const
 {
-    return p()->m_visualCategory;
+    Q_D(const GeoDataPlacemark);
+    return d->m_visualCategory;
 }
 
 void GeoDataPlacemark::setVisualCategory(GeoDataPlacemark::GeoDataVisualCategory index)
 {
     detach();
-    p()->m_visualCategory = index;
-}
 
-GeoDataPlacemarkPrivate* GeoDataPlacemark::p()
-{
-    return static_cast<GeoDataPlacemarkPrivate*>(d);
-}
-
-const GeoDataPlacemarkPrivate* GeoDataPlacemark::p() const
-{
-    return static_cast<GeoDataPlacemarkPrivate*>(d);
+    Q_D(GeoDataPlacemark);
+    d->m_visualCategory = index;
 }
 
 GeoDataGeometry* GeoDataPlacemark::geometry()
 {
     detach();
-    p()->m_geometry->setParent( this );
-    return p()->m_geometry;
+
+    Q_D(GeoDataPlacemark);
+    d->m_geometry->setParent(this);
+    return d->m_geometry;
 }
 
 const GeoDataGeometry* GeoDataPlacemark::geometry() const
 {
-    return p()->m_geometry;
+    Q_D(const GeoDataPlacemark);
+    return d->m_geometry;
 }
 
 const OsmPlacemarkData& GeoDataPlacemark::osmData() const
 {
+    Q_D(const GeoDataPlacemark);
     QVariant &placemarkVariantData = extendedData().valueRef( OsmPlacemarkData::osmHashKey() ).valueRef();
     if ( !placemarkVariantData.canConvert<OsmPlacemarkData>() ) {
-        return p()->s_nullOsmPlacemarkData;
+        return d->s_nullOsmPlacemarkData;
     }
 
     OsmPlacemarkData &osmData = *reinterpret_cast<OsmPlacemarkData*>( placemarkVariantData.data() );
@@ -251,12 +253,15 @@ GeoDataLookAt *GeoDataPlacemark::lookAt()
 
 bool GeoDataPlacemark::placemarkLayoutOrderCompare(const GeoDataPlacemark *left, const GeoDataPlacemark *right)
 {
-    if (left->d->m_zoomLevel != right->d->m_zoomLevel) {
-        return (left->d->m_zoomLevel < right->d->m_zoomLevel); // lower zoom level comes first
+    const GeoDataPlacemarkPrivate * const left_d = left->d_func();
+    const GeoDataPlacemarkPrivate * const right_d = right->d_func();
+
+    if (left_d->m_zoomLevel != right_d->m_zoomLevel) {
+        return (left_d->m_zoomLevel < right_d->m_zoomLevel); // lower zoom level comes first
     }
 
-    if (left->d->m_popularity != right->d->m_popularity) {
-        return left->d->m_popularity > right->d->m_popularity; // higher popularity comes first
+    if (left_d->m_popularity != right_d->m_popularity) {
+        return (left_d->m_popularity > right_d->m_popularity); // higher popularity comes first
     }
 
     return left < right; // lower pointer value comes first
@@ -264,18 +269,19 @@ bool GeoDataPlacemark::placemarkLayoutOrderCompare(const GeoDataPlacemark *left,
 
 GeoDataCoordinates GeoDataPlacemark::coordinate( const QDateTime &dateTime, bool *iconAtCoordinates ) const
 {
+    Q_D(const GeoDataPlacemark);
     bool hasIcon = false;
     GeoDataCoordinates coord;
  
-    if( p()->m_geometry ) {
+    if (d->m_geometry) {
         // Beware: comparison between pointers, not strings.
-        if (p()->m_geometry->nodeType() == GeoDataTypes::GeoDataPointType
-                || p()->m_geometry->nodeType() == GeoDataTypes::GeoDataPolygonType
-                || p()->m_geometry->nodeType() == GeoDataTypes::GeoDataLinearRingType) {
+        if (d->m_geometry->nodeType() == GeoDataTypes::GeoDataPointType
+                || d->m_geometry->nodeType() == GeoDataTypes::GeoDataPolygonType
+                || d->m_geometry->nodeType() == GeoDataTypes::GeoDataLinearRingType) {
             hasIcon = true;
-            coord = p()->m_geometry->latLonAltBox().center();
-        } else if ( p()->m_geometry->nodeType() == GeoDataTypes::GeoDataMultiGeometryType ) {
-            const GeoDataMultiGeometry *multiGeometry = static_cast<const GeoDataMultiGeometry *>( p()->m_geometry );
+            coord = d->m_geometry->latLonAltBox().center();
+        } else if (d->m_geometry->nodeType() == GeoDataTypes::GeoDataMultiGeometryType) {
+            const GeoDataMultiGeometry *multiGeometry = static_cast<const GeoDataMultiGeometry *>(d->m_geometry);
 
             QVector<GeoDataGeometry*>::ConstIterator it = multiGeometry->constBegin();
             QVector<GeoDataGeometry*>::ConstIterator end = multiGeometry->constEnd();
@@ -288,13 +294,13 @@ GeoDataCoordinates GeoDataPlacemark::coordinate( const QDateTime &dateTime, bool
                 }
             }
 
-            coord = p()->m_geometry->latLonAltBox().center();
-        } else if ( p()->m_geometry->nodeType() == GeoDataTypes::GeoDataTrackType ) {
-            const GeoDataTrack *track = static_cast<const GeoDataTrack *>( p()->m_geometry );
+            coord = d->m_geometry->latLonAltBox().center();
+        } else if (d->m_geometry->nodeType() == GeoDataTypes::GeoDataTrackType) {
+            const GeoDataTrack *track = static_cast<const GeoDataTrack *>(d->m_geometry);
             hasIcon = track->size() != 0 && track->firstWhen() <= dateTime;
             coord = track->coordinatesAt( dateTime );
         } else {
-            coord = p()->m_geometry->latLonAltBox().center();
+            coord = d->m_geometry->latLonAltBox().center();
         }
     }
 
@@ -322,9 +328,11 @@ void GeoDataPlacemark::setCoordinate( const GeoDataCoordinates &point )
 void GeoDataPlacemark::setGeometry( GeoDataGeometry *entry )
 {
     detach();
-    delete p()->m_geometry;
-    p()->m_geometry = entry;
-    p()->m_geometry->setParent( this );
+
+    Q_D(GeoDataPlacemark);
+    delete d->m_geometry;
+    d->m_geometry = entry;
+    d->m_geometry->setParent(this);
 }
 
 
@@ -350,7 +358,8 @@ QString GeoDataPlacemark::displayName() const
 
 QString GeoDataPlacemark::categoryName() const
 {
-    switch (p()->m_visualCategory) {
+    Q_D(const GeoDataPlacemark);
+    switch (d->m_visualCategory) {
     case Valley: return GeoDataPlacemarkPrivate::tr("Valley");
     case OtherTerrain: return GeoDataPlacemarkPrivate::tr("Terrain");
     case Crater: return GeoDataPlacemarkPrivate::tr("Crater");
@@ -653,91 +662,106 @@ QString GeoDataPlacemark::categoryName() const
 
 qreal GeoDataPlacemark::area() const
 {
-    return p()->m_placemarkExtendedData ? p()->m_placemarkExtendedData->m_area : -1.0;
+    Q_D(const GeoDataPlacemark);
+    return d->m_placemarkExtendedData ? d->m_placemarkExtendedData->m_area : -1.0;
 }
 
 void GeoDataPlacemark::setArea( qreal area )
 {
-    if (area == -1.0 && !p()->m_placemarkExtendedData) {
+    if (area == -1.0 && !d_func()->m_placemarkExtendedData) {
         return; // nothing to do
     }
 
     detach();
-    p()->m_geometry->setParent( this );
-    p()->placemarkExtendedData().m_area = area;
+
+    Q_D(GeoDataPlacemark);
+    d->m_geometry->setParent(this);
+    d->placemarkExtendedData().m_area = area;
 }
 
 qint64 GeoDataPlacemark::population() const
 {
-    return p()->m_population;
+    Q_D(const GeoDataPlacemark);
+    return d->m_population;
 }
 
 void GeoDataPlacemark::setPopulation( qint64 population )
 {
     detach();
-    p()->m_geometry->setParent( this );
-    p()->m_population = population;
+
+    Q_D(GeoDataPlacemark);
+    d->m_geometry->setParent(this);
+    d->m_population = population;
 }
 
 const QString GeoDataPlacemark::state() const
 {
-    return p()->m_placemarkExtendedData ? p()->m_placemarkExtendedData->m_state : QString();
+    Q_D(const GeoDataPlacemark);
+    return d->m_placemarkExtendedData ? d->m_placemarkExtendedData->m_state : QString();
 }
 
 void GeoDataPlacemark::setState( const QString &state )
 {
-    if (state.isEmpty() && !p()->m_placemarkExtendedData) {
+    if (state.isEmpty() && !d_func()->m_placemarkExtendedData) {
         return; // nothing to do
     }
 
     detach();
-    p()->m_geometry->setParent( this );
-    p()->placemarkExtendedData().m_state = state;
+
+    Q_D(GeoDataPlacemark);
+    d->m_geometry->setParent(this);
+    d->placemarkExtendedData().m_state = state;
 }
 
 const QString GeoDataPlacemark::countryCode() const
 {
-    return p()->m_placemarkExtendedData ? p()->m_placemarkExtendedData->m_countrycode : QString();
+    Q_D(const GeoDataPlacemark);
+    return d->m_placemarkExtendedData ? d->m_placemarkExtendedData->m_countrycode : QString();
 }
 
 void GeoDataPlacemark::setCountryCode( const QString &countrycode )
 {
-    if (countrycode.isEmpty() && !p()->m_placemarkExtendedData) {
+    if (countrycode.isEmpty() && !d_func()->m_placemarkExtendedData) {
         return; // nothing to do
     }
 
     detach();
-    p()->m_geometry->setParent( this );
-    p()->placemarkExtendedData().m_countrycode = countrycode;
+
+    Q_D(GeoDataPlacemark);
+    d->m_geometry->setParent(this);
+    d->placemarkExtendedData().m_countrycode = countrycode;
 }
 
 bool GeoDataPlacemark::isBalloonVisible() const
 {
-    return p()->m_placemarkExtendedData ? p()->m_placemarkExtendedData->m_isBalloonVisible : false;
+    Q_D(const GeoDataPlacemark);
+    return d->m_placemarkExtendedData ? d->m_placemarkExtendedData->m_isBalloonVisible : false;
 }
 
 void GeoDataPlacemark::setBalloonVisible( bool visible )
 {
-    if (!visible && !p()->m_placemarkExtendedData) {
+    if (!visible && !d_func()->m_placemarkExtendedData) {
         return; // nothing to do
     }
 
     detach();
-    p()->m_geometry->setParent( this );
-    p()->placemarkExtendedData().m_isBalloonVisible = visible;
+
+    Q_D(GeoDataPlacemark);
+    d->m_geometry->setParent(this);
+    d->placemarkExtendedData().m_isBalloonVisible = visible;
 }
 
 void GeoDataPlacemark::pack( QDataStream& stream ) const
 {
+    Q_D(const GeoDataPlacemark);
     GeoDataFeature::pack( stream );
 
-    stream << p()->placemarkExtendedData().m_countrycode;
-    stream << p()->placemarkExtendedData().m_area;
-    stream << p()->m_population;
-    if ( p()->m_geometry )
-    {
-        stream << p()->m_geometry->geometryId();
-        p()->m_geometry->pack( stream );
+    stream << d->placemarkExtendedData().m_countrycode;
+    stream << d->placemarkExtendedData().m_area;
+    stream << d->m_population;
+    if (d->m_geometry) {
+        stream << d->m_geometry->geometryId();
+        d->m_geometry->pack( stream );
     }
     else
     {
@@ -762,12 +786,15 @@ QXmlStreamWriter& GeoDataPlacemark::operator <<( QXmlStreamWriter& stream ) cons
 void GeoDataPlacemark::unpack( QDataStream& stream )
 {
     detach();
-    p()->m_geometry->setParent( this );
+
+    Q_D(GeoDataPlacemark);
+    // TODO: check if this should be done after the switch
+    d->m_geometry->setParent(this);
     GeoDataFeature::unpack( stream );
 
-    stream >> p()->placemarkExtendedData().m_countrycode;
-    stream >> p()->placemarkExtendedData().m_area;
-    stream >> p()->m_population;
+    stream >> d->placemarkExtendedData().m_countrycode;
+    stream >> d->placemarkExtendedData().m_area;
+    stream >> d->m_population;
     int geometryId;
     stream >> geometryId;
     switch( geometryId ) {
@@ -777,40 +804,40 @@ void GeoDataPlacemark::unpack( QDataStream& stream )
             {
             GeoDataPoint* point = new GeoDataPoint;
             point->unpack( stream );
-            delete p()->m_geometry;
-            p()->m_geometry = point;
+            delete d->m_geometry;
+            d->m_geometry = point;
             }
             break;
         case GeoDataLineStringId:
             {
             GeoDataLineString* lineString = new GeoDataLineString;
             lineString->unpack( stream );
-            delete p()->m_geometry;
-            p()->m_geometry = lineString;
+            delete d->m_geometry;
+            d->m_geometry = lineString;
             }
             break;
         case GeoDataLinearRingId:
             {
             GeoDataLinearRing* linearRing = new GeoDataLinearRing;
             linearRing->unpack( stream );
-            delete p()->m_geometry;
-            p()->m_geometry = linearRing;
+            delete d->m_geometry;
+            d->m_geometry = linearRing;
             }
             break;
         case GeoDataPolygonId:
             {
             GeoDataPolygon* polygon = new GeoDataPolygon;
             polygon->unpack( stream );
-            delete p()->m_geometry;
-            p()->m_geometry = polygon;
+            delete d->m_geometry;
+            d->m_geometry = polygon;
             }
             break;
         case GeoDataMultiGeometryId:
             {
             GeoDataMultiGeometry* multiGeometry = new GeoDataMultiGeometry;
             multiGeometry->unpack( stream );
-            delete p()->m_geometry;
-            p()->m_geometry = multiGeometry;
+            delete d->m_geometry;
+            d->m_geometry = multiGeometry;
             }
             break;
         case GeoDataModelId:

@@ -39,8 +39,7 @@ public:
     static const GeoDataTour null;
 
 private:
-    GeoDataTourPrivate *p();
-    const GeoDataTourPrivate *p() const;
+    Q_DECLARE_PRIVATE(GeoDataTour)
 
 };
 

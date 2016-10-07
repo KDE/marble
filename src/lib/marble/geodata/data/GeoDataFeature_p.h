@@ -219,6 +219,13 @@ class GeoDataFeaturePrivate
         }
         return *m_featureExtendedData;
     }
+    const GeoDataFeatureExtendedData & featureExtendedData() const
+    {
+        if (!m_featureExtendedData) {
+            m_featureExtendedData = new GeoDataFeatureExtendedData;
+        }
+        return *m_featureExtendedData;
+    }
 
     QString             m_name;         // Name of the feature. Is shown on screen
     QString             m_styleUrl;     // styleUrl     Url#tag to a document wide style
@@ -233,7 +240,7 @@ class GeoDataFeaturePrivate
     const GeoDataStyleMap* m_styleMap;
 
     GeoDataExtendedData m_extendedData;
-    GeoDataFeatureExtendedData* m_featureExtendedData;
+    mutable GeoDataFeatureExtendedData* m_featureExtendedData;
 
     QAtomicInt  ref;
 

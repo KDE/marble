@@ -196,8 +196,7 @@ public:
     virtual void unpack( QDataStream& stream );
 
 private:
-    GeoDataDocumentPrivate *p();
-    const GeoDataDocumentPrivate *p() const;
+    Q_DECLARE_PRIVATE(GeoDataDocument)
 };
 
 }

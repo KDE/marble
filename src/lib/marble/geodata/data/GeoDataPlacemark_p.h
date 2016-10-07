@@ -118,6 +118,7 @@ class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
         }
         delete m_geometry;
         m_geometry = geometry;
+        // TODO: why not set parent here to geometry?
 
         delete m_placemarkExtendedData;
         m_placemarkExtendedData = nullptr;
