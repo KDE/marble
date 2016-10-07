@@ -146,11 +146,11 @@ int MergedLayerDecorator::tileRowCount( int level ) const
     return TileLoaderHelper::levelToRow( levelZeroRows, level );
 }
 
-GeoSceneTileDataset::Projection MergedLayerDecorator::tileProjection() const
+GeoSceneAbstractTileProjection::Type MergedLayerDecorator::tileProjectionType() const
 {
     Q_ASSERT( !d->m_textureLayers.isEmpty() );
 
-    return d->m_textureLayers.at( 0 )->projection();
+    return d->m_textureLayers.at( 0 )->tileProjectionType();
 }
 
 QSize MergedLayerDecorator::tileSize() const
@@ -218,7 +218,8 @@ void MergedLayerDecorator::Private::renderGroundOverlays( QImage *tileImage, con
     /* All tiles are covering the same area. Pick one. */
     const TileId tileId = tiles.first()->id();
 
-    GeoDataLatLonBox tileLatLonBox = tileId.toLatLonBox( findRelevantTextureLayers( tileId ).first() );
+    GeoDataLatLonBox tileLatLonBox;
+    findRelevantTextureLayers(tileId).first()->tileProjection()->geoCoordinates(tileId, tileLatLonBox);
 
     /* Map the ground overlay to the image. */
     for ( int i =  0; i < m_groundOverlays.size(); ++i ) {
@@ -246,13 +247,14 @@ void MergedLayerDecorator::Private::renderGroundOverlays( QImage *tileImage, con
         const qreal rad2Pixel = global_height / M_PI;
 
         qreal latPixelPosition = rad2Pixel/2 * gdInv(tileLatLonBox.north());
+        const bool isMercatorTileProjection = (m_textureLayers.at( 0 )->tileProjectionType() ==  GeoSceneAbstractTileProjection::Mercator);
 
         for ( int y = 0; y < tileImage->height(); ++y ) {
              QRgb *scanLine = ( QRgb* ) ( tileImage->scanLine( y ) );
 
              qreal lat = 0;
 
-             if (m_textureLayers.at( 0 )->projection() ==  GeoSceneTileDataset::Mercator) {
+             if (isMercatorTileProjection) {
                   lat = gd(2 * (latPixelPosition - y) * pixel2Rad );
              }
              else {
@@ -584,10 +586,16 @@ QVector<const GeoSceneTextureTileDataset *> MergedLayerDecorator::Private::findR
         if ( !candidate->hasMaximumTileLevel() ||
              candidate->maximumTileLevel() >= stackedTileId.zoomLevel() ) {
             //check if the tile intersects with texture bounds
-            if ( candidate->latLonBox().isNull()
-                || candidate->latLonBox().intersects( stackedTileId.toLatLonBox( candidate ) ) )
-            {
-                result.append( candidate );
+            if (candidate->latLonBox().isNull()) {
+                result.append(candidate);
+            }
+            else {
+                GeoDataLatLonBox bbox;
+                candidate->tileProjection()->geoCoordinates(stackedTileId, bbox);
+
+                if (candidate->latLonBox().intersects(bbox)) {
+                    result.append( candidate );
+                }
             }
         }
     }

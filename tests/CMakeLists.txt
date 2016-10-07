@@ -109,6 +109,7 @@ marble_add_test( TestTimeSpan )
 marble_add_test( TestEquality )
 marble_add_test( TestFeatureDetach )
 marble_add_test( TestGeometryDetach )
+marble_add_test( TestTileProjection )
 
 qt_add_resources(TestGeoDataCopy_SRCS TestGeoDataCopy.qrc) # Check copy operations on CoW classes
 marble_add_test( TestGeoDataCopy ${TestGeoDataCopy_SRCS} )

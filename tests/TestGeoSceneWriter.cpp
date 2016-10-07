@@ -219,7 +219,7 @@ void TestGeoSceneWriter::writeHeadTag()
     GeoSceneTileDataset* texture = new GeoSceneTileDataset( "map" );
     texture->setSourceDir( "earth/testmap" );
     texture->setFileFormat( "png" );
-    texture->setProjection( GeoSceneTileDataset::Equirectangular );
+    texture->setTileProjection(GeoSceneAbstractTileProjection::Equirectangular);
     texture->addDownloadUrl( QUrl( "http://download.kde.org/marble/map/{x}/{y}/{zoomLevel}" ) );
     texture->addDownloadUrl( QUrl( "http://download.google.com/marble/map/{x}/{y}/{zoomLevel}" ) );
     texture->addDownloadPolicy( DownloadBrowse, 20 );

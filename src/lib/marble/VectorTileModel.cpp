@@ -115,27 +115,29 @@ void VectorTileModel::setViewport( const GeoDataLatLonBox &latLonBox, int radius
         m_deleteDocumentsLater = true;
     }
 
-    const unsigned int maxTileX = ( 1 << tileZoomLevel ) * m_layer->levelZeroColumns();
-    const unsigned int maxTileY = ( 1 << tileZoomLevel ) * m_layer->levelZeroRows();
-
     /** LOGIC FOR DOWNLOADING ALL THE TILES THAT ARE INSIDE THE SCREEN AT THE CURRENT ZOOM LEVEL **/
 
     // New tiles X and Y for moved screen coordinates
     // More info: http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#Subtiles
     // More info: http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#C.2FC.2B.2B
-    // Sometimes the formula returns wrong huge values, x and y have to be between 0 and 2^ZoomLevel
-    unsigned int westX = qBound<unsigned int>(  0, TileId::lon2tileX( latLonBox.west(),  maxTileX ), maxTileX);
-    unsigned int northY = qBound<unsigned int>( 0, TileId::lat2tileY( latLonBox.north(), maxTileY ), maxTileY);
-    unsigned int eastX = qBound<unsigned int>(  0, TileId::lon2tileX( latLonBox.east(),  maxTileX ), maxTileX);
-    unsigned int southY = qBound<unsigned int>( 0, TileId::lat2tileY( latLonBox.south(), maxTileY ), maxTileY );
+    int westX;
+    int northY;
+    int eastX;
+    int southY;
+    m_layer->tileProjection()->tileIndexes(latLonBox, tileZoomLevel, westX, northY, eastX, southY);
 
     // Download tiles and send them to VectorTileLayer
     // When changing zoom, download everything inside the screen
+    // TODO: hardcodes assumption about tiles indexing also ends at dateline
+    // TODO: what about crossing things in y direction?
     if ( !latLonBox.crossesDateLine() ) {
         queryTiles( tileZoomLevel, westX, northY, eastX, southY );
     }
     // When only moving screen, just download the new tiles
     else {
+        // TODO: maxTileX (calculation knowledge) should be a property of tileProjection or m_layer
+        const unsigned int maxTileX = (1 << tileZoomLevel) * m_layer->levelZeroColumns() - 1;
+
         queryTiles( tileZoomLevel, 0, northY, eastX, southY );
         queryTiles( tileZoomLevel, westX, northY, maxTileX, southY );
     }
@@ -197,7 +199,8 @@ void VectorTileModel::updateTile( const TileId &id, GeoDataDocument *document )
         m_deleteDocumentsLater = false;
         m_documents.clear();
     }
-    GeoDataLatLonBox const boundingBox = id.toLatLonBox(m_layer);
+    GeoDataLatLonBox boundingBox;
+    m_layer->tileProjection()->geoCoordinates(id, boundingBox);
     m_documents[id] = QSharedPointer<CacheDocument>(new CacheDocument(document, this, boundingBox));
     emit tileAdded(document);
 }

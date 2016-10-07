@@ -73,7 +73,7 @@ private:
 
 private:
     StackedTileLoader *const m_tileLoader;
-    GeoSceneTileDataset::Projection const m_textureProjection;
+    GeoSceneAbstractTileProjection::Type const m_textureProjection;
     /// size of the tiles of of the current texture layer
     QSize const m_tileSize;
 
@@ -123,9 +123,9 @@ inline qreal ScanlineTextureMapperContext::rad2PixelX( const qreal lon ) const
 inline qreal ScanlineTextureMapperContext::rad2PixelY( const qreal lat ) const
 {
     switch ( m_textureProjection ) {
-    case GeoSceneTileDataset::Equirectangular:
+    case GeoSceneAbstractTileProjection::Equirectangular:
         return -lat * m_normGlobalHeight;
-    case GeoSceneTileDataset::Mercator:
+    case GeoSceneAbstractTileProjection::Mercator:
         if ( fabs( lat ) < 1.4835 ) {
             // We develop the inverse Gudermannian into a MacLaurin Series:
             // In spite of the many elements needed to get decent 

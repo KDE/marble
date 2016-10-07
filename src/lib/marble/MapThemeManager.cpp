@@ -563,7 +563,7 @@ GeoSceneDocument *MapThemeManager::createMapThemeFromOverlay( const GeoDataPhoto
     texture->setSourceDir( sourceDir );
     texture->setFileFormat( extension );
     texture->setInstallMap( fileName );
-    texture->setProjection(GeoSceneTileDataset::Equirectangular);
+    texture->setTileProjection(GeoSceneAbstractTileProjection::Equirectangular);
 
     layer->addDataset(texture);
 

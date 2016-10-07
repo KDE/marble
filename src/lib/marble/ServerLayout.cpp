@@ -95,7 +95,8 @@ CustomServerLayout::CustomServerLayout( GeoSceneTileDataset *texture )
 
 QUrl CustomServerLayout::downloadUrl( const QUrl &prototypeUrl, const TileId &id ) const
 {
-    const GeoDataLatLonBox bbox = id.toLatLonBox( m_textureLayer );
+    GeoDataLatLonBox bbox;
+    m_textureLayer->tileProjection()->geoCoordinates(id, bbox);
 
     QString urlStr = prototypeUrl.toString( QUrl::DecodeReserved );
 
@@ -123,7 +124,8 @@ WmsServerLayout::WmsServerLayout( GeoSceneTileDataset *texture )
 
 QUrl WmsServerLayout::downloadUrl( const QUrl &prototypeUrl, const Marble::TileId &tileId ) const
 {
-    GeoDataLatLonBox box = tileId.toLatLonBox( m_textureLayer );
+    GeoDataLatLonBox box;
+    m_textureLayer->tileProjection()->geoCoordinates(tileId, box);
 
     QUrlQuery url(prototypeUrl.query());
     url.addQueryItem( "service", "WMS" );
@@ -160,10 +162,10 @@ QString WmsServerLayout::name() const
 
 QString WmsServerLayout::epsgCode() const
 {
-    switch ( m_textureLayer->projection() ) {
-        case GeoSceneTileDataset::Equirectangular:
+    switch (m_textureLayer->tileProjectionType()) {
+        case GeoSceneAbstractTileProjection::Equirectangular:
             return "EPSG:4326";
-        case GeoSceneTileDataset::Mercator:
+        case GeoSceneAbstractTileProjection::Mercator:
             return "EPSG:3785";
     }
 

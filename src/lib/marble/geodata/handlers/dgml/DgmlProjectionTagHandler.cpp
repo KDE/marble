@@ -47,15 +47,16 @@ GeoNode* DgmlProjectionTagHandler::parse( GeoParser& parser ) const
     // Attribute name, default to "Equirectangular"
     const QString nameStr = parser.attribute( dgmlAttr_name ).trimmed();
     if ( !nameStr.isEmpty() ) {
-        GeoSceneTileDataset::Projection projection = GeoSceneTileDataset::Equirectangular;
-        if (nameStr == QLatin1String("Equirectangular"))
-            projection = GeoSceneTileDataset::Equirectangular;
-        else if (nameStr == QLatin1String("Mercator"))
-            projection = GeoSceneTileDataset::Mercator;
-        else
+        GeoSceneAbstractTileProjection::Type tileProjectionType = GeoSceneAbstractTileProjection::Equirectangular;
+        if (nameStr == QLatin1String("Equirectangular")) {
+            tileProjectionType = GeoSceneAbstractTileProjection::Equirectangular;
+        } else if (nameStr == QLatin1String("Mercator")) {
+            tileProjectionType = GeoSceneAbstractTileProjection::Mercator;
+        } else {
             parser.raiseWarning( QString( "Value not allowed for attribute name: %1" ).arg( nameStr ));
+        }
 
-        parentItem.nodeAs<GeoSceneTileDataset>()->setProjection( projection );
+        parentItem.nodeAs<GeoSceneTileDataset>()->setTileProjection(tileProjectionType);
     }
     return 0;
 }

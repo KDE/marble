@@ -21,8 +21,6 @@ class QString;
 namespace Marble
 {
 class GeoDataCoordinates;
-class GeoSceneTileDataset;
-class GeoDataLatLonBox;
 
 class MARBLE_EXPORT TileId
 {
@@ -39,13 +37,7 @@ class MARBLE_EXPORT TileId
     bool operator==( TileId const& rhs ) const;
     bool operator<( TileId const& rhs ) const;
 
-    GeoDataLatLonBox toLatLonBox( const GeoSceneTileDataset *textureLayer ) const;
     static TileId fromCoordinates( const GeoDataCoordinates& coords, int zoomLevel );
-
-    static unsigned int lon2tileX( qreal lon, unsigned int maxTileX );
-    static unsigned int lat2tileY( qreal lat, unsigned int maxTileY );
-    static qreal tileX2lon( unsigned int x, unsigned int maxTileX );
-    static qreal tileY2lat( unsigned int y, unsigned int maxTileY );
 
  private:
     uint m_mapThemeIdHash;

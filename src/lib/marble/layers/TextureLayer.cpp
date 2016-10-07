@@ -412,7 +412,7 @@ void TextureLayer::setProjection( Projection projection )
             d->m_texmapper = new EquirectScanlineTextureMapper( &d->m_tileLoader );
             break;
         case Mercator:
-            if ( d->m_textures.at(0)->projection() == GeoSceneTileDataset::Mercator ) {
+            if (d->m_textures.at(0)->tileProjectionType() == GeoSceneAbstractTileProjection::Mercator) {
                 d->m_texmapper = new TileScalingTextureMapper( &d->m_tileLoader );
             } else {
                 d->m_texmapper = new MercatorScanlineTextureMapper( &d->m_tileLoader );
@@ -499,9 +499,9 @@ QSize TextureLayer::tileSize() const
     return d->m_layerDecorator.tileSize();
 }
 
-GeoSceneTileDataset::Projection TextureLayer::tileProjection() const
+GeoSceneAbstractTileProjection::Type TextureLayer::tileProjectionType() const
 {
-    return d->m_layerDecorator.tileProjection();
+    return d->m_layerDecorator.tileProjectionType();
 }
 
 int TextureLayer::tileColumnCount( int level ) const

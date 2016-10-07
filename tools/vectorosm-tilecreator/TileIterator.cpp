@@ -9,8 +9,8 @@
 //
 
 #include "TileIterator.h"
-#include "TileId.h"
-#include "VectorTileModel.h"
+
+#include "GeoSceneMercatorTileProjection.h"
 
 #include <QDebug>
 
@@ -45,13 +45,14 @@ TileIterator::const_iterator &TileIterator::operator++()
 
 TileIterator::TileIterator(const GeoDataLatLonBox &latLonBox, int zoomLevel)
 {
-    qreal north, west, south, east;
-    latLonBox.boundaries(north, south, east, west);
-    unsigned int N = pow(2, zoomLevel);
-    m_bounds.setLeft(TileId::lon2tileX(west, N));
-    m_bounds.setTop(TileId::lat2tileY(north, N));
-    m_bounds.setRight(qMin(N-1, TileId::lon2tileX(east, N)));
-    m_bounds.setBottom(TileId::lat2tileY(south, N));
+    int westX, northY, eastX, southY;
+    GeoSceneMercatorTileProjection tileProjection;
+    tileProjection.tileIndexes(latLonBox, zoomLevel, westX, northY, eastX, southY);
+
+    m_bounds.setLeft(westX);
+    m_bounds.setTop(northY);
+    m_bounds.setRight(eastX);
+    m_bounds.setBottom(southY);
 }
 
 TileIterator::const_iterator TileIterator::begin() const

@@ -356,11 +356,14 @@ void TileDirectory::createTiles() const
         QDir().mkpath(outputDir);
         if (m_tileType == OpenStreetMap) {
             QString const output = QString("-o=%1").arg(outputFile);
-            int const N = pow(2, m_zoomLevel);
-            double const minLon = TileId::tileX2lon(tileId.x(), N) * RAD2DEG;
-            double const maxLon = TileId::tileX2lon(tileId.x()+1, N) * RAD2DEG;
-            double const maxLat = TileId::tileY2lat(tileId.y(), N) * RAD2DEG;
-            double const minLat = TileId::tileY2lat(tileId.y()+1, N) * RAD2DEG;
+
+            GeoDataLatLonBox tileBoundary;
+            m_tileProjection.geoCoordinates(m_zoomLevel, tileId.x(), tileId.y(), tileBoundary);
+
+            double const minLon = tileBoundary.west(GeoDataCoordinates::Degree);
+            double const maxLon = tileBoundary.east(GeoDataCoordinates::Degree);
+            double const maxLat = tileBoundary.north(GeoDataCoordinates::Degree);
+            double const minLat = tileBoundary.south(GeoDataCoordinates::Degree);
             QString const bbox = QString("-b=%1,%2,%3,%4").arg(minLon).arg(minLat).arg(maxLon).arg(maxLat);
             QProcess osmconvert;
             osmconvert.start("osmconvert", QStringList() << "--drop-author" << "--drop-version"
@@ -387,11 +390,13 @@ void TileDirectory::createTiles() const
 
 bool TileDirectory::contains(const TileId &tile) const
 {
-    int const N = pow(2, tile.zoomLevel());
-    double const west = TileId::tileX2lon(tile.x(), N);
-    double const east = TileId::tileX2lon(tile.x()+1, N);
-    double const north = TileId::tileY2lat(tile.y(), N);
-    double const south = TileId::tileY2lat(tile.y()+1, N);
+    GeoDataLatLonBox tileBoundary;
+    m_tileProjection.geoCoordinates(m_zoomLevel, tile.x(), tile.y(), tileBoundary);
+
+    double const west = tileBoundary.west();
+    double const east = tileBoundary.east();
+    double const north = tileBoundary.north();
+    double const south = tileBoundary.south();
     QVector<GeoDataCoordinates> bounds;
     bounds << GeoDataCoordinates(west, north);
     bounds << GeoDataCoordinates(east, north);

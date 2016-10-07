@@ -14,6 +14,8 @@
 
 #include "GeoSceneTileDataset.h"
 #include "GeoSceneTypes.h"
+#include "GeoSceneEquirectTileProjection.h"
+#include "GeoSceneMercatorTileProjection.h"
 
 #include "DownloadPolicy.h"
 #include "MarbleDebug.h"
@@ -37,17 +39,20 @@ GeoSceneTileDataset::GeoSceneTileDataset( const QString& name )
       m_levelZeroRows( defaultLevelZeroRows ),
       m_minimumTileLevel(0),
       m_maximumTileLevel( -1 ),
-      m_projection( Equirectangular ),
+      m_tileProjection(new GeoSceneEquirectTileProjection()),
       m_blending(),
       m_downloadUrls(),
       m_nextUrl( m_downloadUrls.constEnd() )
 {
+    m_tileProjection->setLevelZeroColumns(m_levelZeroColumns);
+    m_tileProjection->setLevelZeroRows(m_levelZeroRows);
 }
 
 GeoSceneTileDataset::~GeoSceneTileDataset()
 {
     qDeleteAll( m_downloadPolicies );
     delete m_serverLayout;
+    delete m_tileProjection;
 }
 
 const char* GeoSceneTileDataset::nodeType() const
@@ -104,6 +109,7 @@ int GeoSceneTileDataset::levelZeroColumns() const
 void GeoSceneTileDataset::setLevelZeroColumns( const int columns )
 {
     m_levelZeroColumns = columns;
+    m_tileProjection->setLevelZeroColumns(m_levelZeroColumns);
 }
 
 int GeoSceneTileDataset::levelZeroRows() const
@@ -114,6 +120,7 @@ int GeoSceneTileDataset::levelZeroRows() const
 void GeoSceneTileDataset::setLevelZeroRows( const int rows )
 {
     m_levelZeroRows = rows;
+    m_tileProjection->setLevelZeroRows(m_levelZeroRows);
 }
 
 int GeoSceneTileDataset::maximumTileLevel() const
@@ -208,14 +215,31 @@ void GeoSceneTileDataset::setTileSize( const QSize &tileSize )
     }
 }
 
-GeoSceneTileDataset::Projection GeoSceneTileDataset::projection() const
+void GeoSceneTileDataset::setTileProjection(GeoSceneAbstractTileProjection::Type projectionType)
 {
-    return m_projection;
+    if (m_tileProjection->type() == projectionType) {
+        return;
+    }
+
+    delete m_tileProjection;
+    if (projectionType == GeoSceneAbstractTileProjection::Mercator) {
+        m_tileProjection = new GeoSceneMercatorTileProjection();
+    } else {
+        m_tileProjection = new GeoSceneEquirectTileProjection();
+    }
+
+    m_tileProjection->setLevelZeroColumns(m_levelZeroColumns);
+    m_tileProjection->setLevelZeroRows(m_levelZeroRows);
 }
 
-void GeoSceneTileDataset::setProjection( const Projection projection )
+const GeoSceneAbstractTileProjection * GeoSceneTileDataset::tileProjection() const
 {
-    m_projection = projection;
+    return m_tileProjection;
+}
+
+GeoSceneAbstractTileProjection::Type GeoSceneTileDataset::tileProjectionType() const
+{
+    return m_tileProjection->type();
 }
 
 // Even though this method changes the internal state, it may be const

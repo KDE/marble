@@ -57,7 +57,7 @@ class MergedLayerDecorator
 
     int tileRowCount( int level ) const;
 
-    GeoSceneTextureTileDataset::Projection tileProjection() const;
+    GeoSceneAbstractTileProjection::Type tileProjectionType() const;
 
     QSize tileSize() const;
 

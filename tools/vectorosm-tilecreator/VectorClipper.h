@@ -17,6 +17,7 @@
 #include <GeoDataLatLonBox.h>
 #include "GeoDataPlacemark.h"
 #include <TileId.h>
+#include <GeoSceneMercatorTileProjection.h>
 
 #include "clipper/clipper.hpp"
 
@@ -82,6 +83,7 @@ private:
 
     QMap<TileId, QVector<GeoDataPlacemark*> > m_items;
     int m_maxZoomLevel;
+    GeoSceneMercatorTileProjection m_tileProjection;
 };
 
 }

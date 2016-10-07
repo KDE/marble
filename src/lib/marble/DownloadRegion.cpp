@@ -57,10 +57,10 @@ int DownloadRegionPrivate::rad2PixelY( qreal const lat, const TextureLayer *text
     qreal const globalHeight = textureLayer->tileSize().height()
             * textureLayer->tileRowCount( m_visibleTileLevel );
     qreal const normGlobalHeight = globalHeight / M_PI;
-    switch ( textureLayer->tileProjection() ) {
-    case GeoSceneTileDataset::Equirectangular:
+    switch (textureLayer->tileProjectionType()) {
+    case GeoSceneAbstractTileProjection::Equirectangular:
         return static_cast<int>( globalHeight * 0.5 - lat * normGlobalHeight );
-    case GeoSceneTileDataset::Mercator:
+    case GeoSceneAbstractTileProjection::Mercator:
         if ( fabs( lat ) < 1.4835 )
             return static_cast<int>( globalHeight * 0.5 - gdInv( lat ) * 0.5 * normGlobalHeight );
         if ( lat >= +1.4835 )

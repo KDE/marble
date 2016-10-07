@@ -79,7 +79,7 @@ class MARBLE_EXPORT TextureLayer : public QObject, public LayerInterface
 
     QSize tileSize() const;
 
-    GeoSceneTileDataset::Projection tileProjection() const;
+    GeoSceneAbstractTileProjection::Type tileProjectionType() const;
 
     int tileColumnCount( int level ) const;
     int tileRowCount( int level ) const;

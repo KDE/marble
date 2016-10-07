@@ -89,9 +89,10 @@ bool DgmlTextureTagWriter::write(const GeoNode *node, GeoWriter& writer) const
     }
     
     writer.writeStartElement( dgml::dgmlTag_Projection );
-    if( texture->projection() == GeoSceneTileDataset::Mercator ) {
+    const GeoSceneAbstractTileProjection::Type tileProjectionType = texture->tileProjectionType();
+    if (tileProjectionType == GeoSceneAbstractTileProjection::Mercator) {
         writer.writeAttribute( "name", "Mercator" );
-    } else if ( texture->projection() == GeoSceneTileDataset::Equirectangular ) {
+    } else if (tileProjectionType == GeoSceneAbstractTileProjection::Equirectangular) {
         writer.writeAttribute( "name", "Equirectangular" );        
     }
     writer.writeEndElement();

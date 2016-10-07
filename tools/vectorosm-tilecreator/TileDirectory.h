@@ -16,6 +16,7 @@
 #include <TileId.h>
 #include <GeoDataLinearRing.h>
 #include <ParsingRunnerManager.h>
+#include <GeoSceneMercatorTileProjection.h>
 
 #include <QNetworkAccessManager>
 #include <QSharedPointer>
@@ -99,6 +100,7 @@ private:
     GeoDataLatLonBox m_boundingBox;
     QVector<GeoDataLinearRing> m_boundingPolygon;
     QNetworkAccessManager m_downloadManager;
+    GeoSceneMercatorTileProjection m_tileProjection;
     QString m_landmassFile;
     QSharedPointer<Download> m_download;
     int m_maxZoomLevel;

@@ -77,6 +77,9 @@ SET ( geodata_data_SRCS
 )
 
 SET ( geodata_scene_SRCS
+        geodata/scene/GeoSceneAbstractTileProjection.cpp
+        geodata/scene/GeoSceneMercatorTileProjection.cpp
+        geodata/scene/GeoSceneEquirectTileProjection.cpp
         geodata/scene/GeoSceneIcon.cpp
         geodata/scene/GeoSceneTileDataset.cpp
         geodata/scene/GeoSceneVectorTileDataset.cpp

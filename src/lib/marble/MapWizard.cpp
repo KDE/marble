@@ -789,7 +789,7 @@ GeoSceneDocument* MapWizard::createDocument()
         texture->setLevelZeroRows( 1 );
         texture->setLevelZeroColumns( 1 );
         texture->setServerLayout( new WmsServerLayout( texture ) );
-        texture->setProjection( GeoSceneTileDataset::Equirectangular );
+        texture->setTileProjection(GeoSceneAbstractTileProjection::Equirectangular);
     }
     
     else if( d->mapProviderType == MapWizardPrivate::StaticUrlMap )
@@ -803,7 +803,7 @@ GeoSceneDocument* MapWizard::createDocument()
         texture->setLevelZeroRows( 1 );
         texture->setLevelZeroColumns( 1 );
         texture->setServerLayout( new CustomServerLayout( texture ) );
-        texture->setProjection( GeoSceneTileDataset::Mercator );
+        texture->setTileProjection(GeoSceneAbstractTileProjection::Mercator);
     }
     
     else if( d->mapProviderType == MapWizardPrivate::StaticImageMap )
@@ -813,7 +813,7 @@ GeoSceneDocument* MapWizard::createDocument()
         texture->setFileFormat( d->format.toUpper() );
         texture->setInstallMap(document->head()->theme() + QLatin1Char('.') + d->format);
         texture->setServerLayout( new MarbleServerLayout( texture ) );
-        texture->setProjection( GeoSceneTileDataset::Equirectangular );
+        texture->setTileProjection(GeoSceneAbstractTileProjection::Equirectangular);
         int imageWidth = QImage( image ).width();
         int tileSize = c_defaultTileSize;
         
