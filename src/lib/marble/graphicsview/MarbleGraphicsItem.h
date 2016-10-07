@@ -13,6 +13,8 @@
 
 #include "marble_export.h"
 
+#include <QtGlobal>
+
 class QEvent;
 class QObject;
 class QPainter;
@@ -122,7 +124,7 @@ class MARBLE_EXPORT MarbleGraphicsItem
     virtual void setProjection(const ViewportParams *viewport );
 
  protected:
-    explicit MarbleGraphicsItem( MarbleGraphicsItemPrivate *d_ptr );
+    explicit MarbleGraphicsItem(MarbleGraphicsItemPrivate *dd);
 
     /**
      * Paints the item in item coordinates. This has to be reimplemented by the subclass
@@ -138,11 +140,11 @@ class MARBLE_EXPORT MarbleGraphicsItem
      */
     void update();
 
-    MarbleGraphicsItemPrivate * const d;
+ protected:
+    MarbleGraphicsItemPrivate * const d_ptr;
 
  private:
-    MarbleGraphicsItemPrivate* p();
-    const MarbleGraphicsItemPrivate* p() const;
+    Q_DECLARE_PRIVATE(MarbleGraphicsItem)
 };
 
 } // Namespace Marble

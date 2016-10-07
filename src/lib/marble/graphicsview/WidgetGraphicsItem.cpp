@@ -24,7 +24,9 @@
 
 using namespace Marble;
 
-WidgetGraphicsItemPrivate::WidgetGraphicsItemPrivate() :
+WidgetGraphicsItemPrivate::WidgetGraphicsItemPrivate(WidgetGraphicsItem *widgetGraphicsItem,
+                                                     MarbleGraphicsItem *parent)
+    : ScreenGraphicsItemPrivate(widgetGraphicsItem, parent),
     m_widget(0), m_marbleWidget(0), m_activeWidget( 0 )
 {
     // nothing to do
@@ -36,18 +38,19 @@ WidgetGraphicsItemPrivate::~WidgetGraphicsItemPrivate()
 }
 
 WidgetGraphicsItem::WidgetGraphicsItem( MarbleGraphicsItem *parent )
-    : ScreenGraphicsItem( parent ),
-      d( new WidgetGraphicsItemPrivate() )
+    : ScreenGraphicsItem(new WidgetGraphicsItemPrivate(this, parent))
 {
 }
-    
-WidgetGraphicsItem::~WidgetGraphicsItem() {
-    delete d;
+
+WidgetGraphicsItem::~WidgetGraphicsItem()
+{
 }
-    
-void WidgetGraphicsItem::setWidget( QWidget *widget ) {
+
+void WidgetGraphicsItem::setWidget(QWidget *widget)
+{
+    Q_D(WidgetGraphicsItem);
     d->m_widget = widget;
-    
+
     QSize size = widget->sizeHint().expandedTo( widget->size() );
     size = size.expandedTo( widget->minimumSize() );
     size = size.boundedTo( widget->maximumSize() );
@@ -55,12 +58,15 @@ void WidgetGraphicsItem::setWidget( QWidget *widget ) {
     widget->resize( size );
 }
 
-QWidget *WidgetGraphicsItem::widget() const {
+QWidget *WidgetGraphicsItem::widget() const
+{
+    Q_D(const WidgetGraphicsItem);
     return d->m_widget;
 }
 
 void WidgetGraphicsItem::paint( QPainter *painter )
 {
+    Q_D(WidgetGraphicsItem);
     if( d->m_widget == 0 )
         return;
 
@@ -70,6 +76,7 @@ void WidgetGraphicsItem::paint( QPainter *painter )
 
 bool WidgetGraphicsItem::eventFilter( QObject *object, QEvent *e )
 {
+    Q_D(WidgetGraphicsItem);
     if ( !visible() || d->m_widget == 0 ) {
         return false;
     }

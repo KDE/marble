@@ -92,13 +92,12 @@ class MARBLE_EXPORT ScreenGraphicsItem : public MarbleGraphicsItem
     void setFlags( GraphicsItemFlags flags );
 
  protected:
-    explicit ScreenGraphicsItem( ScreenGraphicsItemPrivate *d_ptr );
+    explicit ScreenGraphicsItem(ScreenGraphicsItemPrivate *dd);
 
     virtual bool eventFilter( QObject *, QEvent * );
 
  private:
-    ScreenGraphicsItemPrivate *p();
-    const ScreenGraphicsItemPrivate *p() const;
+    Q_DECLARE_PRIVATE(ScreenGraphicsItem)
 };
 
 } // Namespace Marble

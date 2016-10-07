@@ -41,7 +41,7 @@ class MarbleGraphicsItemPrivate
           m_marbleGraphicsItem( marbleGraphicsItem )
     {
         if ( m_parent ) {
-            m_parent->p()->addChild( m_marbleGraphicsItem );
+            m_parent->d_func()->addChild(m_marbleGraphicsItem);
         }
     }
 
@@ -49,7 +49,7 @@ class MarbleGraphicsItemPrivate
     {
         // Remove from parent
         if ( m_parent ) {
-            m_parent->p()->removeChild( m_marbleGraphicsItem );
+            m_parent->d_func()->removeChild(m_marbleGraphicsItem);
         }
 
         // Delete all children
@@ -84,7 +84,7 @@ class MarbleGraphicsItemPrivate
     {
         // This has to be done recursively because we need a correct size from all children.
         foreach ( MarbleGraphicsItem *item, m_children ) {
-            item->p()->updateChildPositions();
+            item->d_func()->updateChildPositions();
         }
 
         // Adjust positions

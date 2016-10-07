@@ -21,6 +21,7 @@ class QPointF;
 namespace Marble
 {
 class GeoDataCoordinates;
+class BillboardGraphicsItemPrivate;
 
 /**
  * @brief Base class for all 2D labels (a.k.a. billboards) in 3D space.
@@ -63,9 +64,7 @@ class MARBLE_EXPORT BillboardGraphicsItem : public MarbleGraphicsItem
     QRectF containsRect( const QPointF &point ) const;
 
  private:
-    class Private;
-    Private *p();
-    const Private *p() const;
+    Q_DECLARE_PRIVATE(BillboardGraphicsItem)
 };
 
 } // Marble namespace

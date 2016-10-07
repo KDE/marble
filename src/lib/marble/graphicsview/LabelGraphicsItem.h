@@ -57,8 +57,7 @@ class MARBLE_EXPORT LabelGraphicsItem : public FrameGraphicsItem
 
  private:
     Q_DISABLE_COPY( LabelGraphicsItem )
-
-    LabelGraphicsItemPrivate * const d;
+    Q_DECLARE_PRIVATE(LabelGraphicsItem)
 };
 
 } // namespace Marble

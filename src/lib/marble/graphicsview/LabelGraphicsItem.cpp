@@ -20,9 +20,9 @@
 
 using namespace Marble;
 
-LabelGraphicsItemPrivate::LabelGraphicsItemPrivate( LabelGraphicsItem *parent )
-    : m_text(),
-      m_parent( parent )
+LabelGraphicsItemPrivate::LabelGraphicsItemPrivate(LabelGraphicsItem *labelGraphicsItem,
+                                                   MarbleGraphicsItem *parent)
+    : FrameGraphicsItemPrivate(labelGraphicsItem, parent)
 {
 }
 
@@ -33,6 +33,7 @@ QFont LabelGraphicsItemPrivate::font()
 
 void LabelGraphicsItem::setContentSize( const QSizeF &contentSize )
 {
+    Q_D(LabelGraphicsItem);
     QSizeF updatedSize = contentSize;
     if ( updatedSize.isEmpty() ) {
         updatedSize.setHeight( 0 );
@@ -53,23 +54,23 @@ void LabelGraphicsItem::setContentSize( const QSizeF &contentSize )
 // ----------------------------------------------------------------
 
 LabelGraphicsItem::LabelGraphicsItem( MarbleGraphicsItem *parent )
-    : FrameGraphicsItem( parent ),
-      d( new LabelGraphicsItemPrivate( this ) )
+    : FrameGraphicsItem(new LabelGraphicsItemPrivate(this, parent))
 {
 }
 
 LabelGraphicsItem::~LabelGraphicsItem()
 {
-    delete d;
 }
 
 QString LabelGraphicsItem::text() const
 {
+    Q_D(const LabelGraphicsItem);
     return d->m_text;
 }
 
 void LabelGraphicsItem::setText( const QString& text )
 {
+    Q_D(LabelGraphicsItem);
     clear();
     d->m_text = text;
     QFontMetrics metrics( d->font() );
@@ -79,11 +80,13 @@ void LabelGraphicsItem::setText( const QString& text )
 
 QImage LabelGraphicsItem::image() const
 {
+    Q_D(const LabelGraphicsItem);
     return d->m_image;
 }
 
 void LabelGraphicsItem::setImage( const QImage& image, const QSize& size )
 {
+    Q_D(LabelGraphicsItem);
     clear();
     d->m_image = image;
     if ( size.isEmpty() ) {
@@ -96,11 +99,13 @@ void LabelGraphicsItem::setImage( const QImage& image, const QSize& size )
 
 QIcon LabelGraphicsItem::icon() const
 {
+    Q_D(const LabelGraphicsItem);
     return d->m_icon;
 }
 
 void LabelGraphicsItem::setIcon( const QIcon& icon, const QSize& size )
 {
+    Q_D(LabelGraphicsItem);
     clear();
     d->m_icon = icon;
     setContentSize( size );
@@ -108,11 +113,13 @@ void LabelGraphicsItem::setIcon( const QIcon& icon, const QSize& size )
 
 QSizeF LabelGraphicsItem::minimumSize() const
 {
+    Q_D(const LabelGraphicsItem);
     return d->m_minimumSize;
 }
 
 void LabelGraphicsItem::setMinimumSize( const QSizeF& size )
 {
+    Q_D(LabelGraphicsItem);
     const QSizeF oldContentSize = contentSize();
     d->m_minimumSize = size;
     setContentSize( oldContentSize );
@@ -120,6 +127,7 @@ void LabelGraphicsItem::setMinimumSize( const QSizeF& size )
 
 void LabelGraphicsItem::clear()
 {
+    Q_D(LabelGraphicsItem);
     d->m_text.clear();
     d->m_image = QImage();
     d->m_icon = QIcon();
@@ -128,6 +136,7 @@ void LabelGraphicsItem::clear()
 
 void LabelGraphicsItem::paintContent( QPainter *painter )
 {
+    Q_D(LabelGraphicsItem);
     painter->save();
 
     if ( !d->m_text.isNull() ) {

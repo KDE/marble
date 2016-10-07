@@ -11,6 +11,7 @@
 #ifndef MARBLE_WIDGETGRAPHICSITEMPRIVATE_H
 #define MARBLE_WIDGETGRAPHICSITEMPRIVATE_H
 
+#include "ScreenGraphicsItem_p.h"
 #include "WidgetGraphicsItem.h"
 
 class QWidget;
@@ -18,11 +19,12 @@ class QWidget;
 namespace Marble
 {
 
-class WidgetGraphicsItemPrivate
+class WidgetGraphicsItemPrivate : public ScreenGraphicsItemPrivate
 {
  public:
-    WidgetGraphicsItemPrivate();
-    
+    WidgetGraphicsItemPrivate(WidgetGraphicsItem *widgetGraphicsItem,
+                              MarbleGraphicsItem *parent);
+
     ~WidgetGraphicsItemPrivate();
     
     QWidget *m_widget;

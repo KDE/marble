@@ -19,11 +19,11 @@
 namespace Marble
 {
 
-class Q_DECL_HIDDEN BillboardGraphicsItem::Private : public MarbleGraphicsItemPrivate
+class BillboardGraphicsItemPrivate : public MarbleGraphicsItemPrivate
 {
  public:
-    Private( BillboardGraphicsItem *parent ) :
-        MarbleGraphicsItemPrivate( parent ),
+    BillboardGraphicsItemPrivate(BillboardGraphicsItem *parent)
+        : MarbleGraphicsItemPrivate(parent),
         m_alignment( Qt::AlignHCenter | Qt::AlignVCenter )
     {
     }
@@ -89,32 +89,37 @@ class Q_DECL_HIDDEN BillboardGraphicsItem::Private : public MarbleGraphicsItemPr
 };
 
 BillboardGraphicsItem::BillboardGraphicsItem()
-    : MarbleGraphicsItem( new Private( this ) )
+    : MarbleGraphicsItem(new BillboardGraphicsItemPrivate(this))
 {
 }
 
 GeoDataCoordinates BillboardGraphicsItem::coordinate() const
 {
-    return p()->m_coordinates;
+    Q_D(const BillboardGraphicsItem);
+    return d->m_coordinates;
 }
 
 void BillboardGraphicsItem::setCoordinate( const GeoDataCoordinates &coordinates )
 {
-    p()->m_coordinates = coordinates;
+    Q_D(BillboardGraphicsItem);
+    d->m_coordinates = coordinates;
 }
 
 QVector<QPointF> BillboardGraphicsItem::positions() const
 {
-    return p()->positions();
+    Q_D(const BillboardGraphicsItem);
+    return d->positions();
 }
 
 QVector<QRectF> BillboardGraphicsItem::boundingRects() const
 {
-    QVector<QRectF> rects;
-    rects.reserve(p()->m_positions.size());
+    Q_D(const BillboardGraphicsItem);
 
-    QSizeF const size = p()->m_size;
-    foreach(const QPointF &point, p()->m_positions) {
+    QVector<QRectF> rects;
+    rects.reserve(d->m_positions.size());
+
+    QSizeF const size = d->m_size;
+    foreach (const QPointF &point, d->m_positions) {
         rects << QRectF(point, size);
     }
     return rects;
@@ -132,22 +137,14 @@ QRectF BillboardGraphicsItem::containsRect( const QPointF &point ) const
 
 Qt::Alignment BillboardGraphicsItem::alignment() const
 {
-    return p()->m_alignment;
+    Q_D(const BillboardGraphicsItem);
+    return d->m_alignment;
 }
 
 void BillboardGraphicsItem::setAlignment(Qt::Alignment alignment)
 {
-    p()->m_alignment = alignment;
-}
-
-BillboardGraphicsItem::Private *BillboardGraphicsItem::p()
-{
-    return static_cast<Private *>( d );
-}
-
-const BillboardGraphicsItem::Private *BillboardGraphicsItem::p() const
-{
-    return static_cast<Private *>( d );
+    Q_D(BillboardGraphicsItem);
+    d->m_alignment = alignment;
 }
 
 } // Marble namespace

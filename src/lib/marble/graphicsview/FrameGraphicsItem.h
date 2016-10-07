@@ -183,10 +183,11 @@ class MARBLE_EXPORT FrameGraphicsItem : public ScreenGraphicsItem
      */
     virtual void paintBackground( QPainter *painter );
 
+    explicit FrameGraphicsItem(FrameGraphicsItemPrivate *dd);
+
  private:
     Q_DISABLE_COPY( FrameGraphicsItem )
-
-    FrameGraphicsItemPrivate * const d;
+    Q_DECLARE_PRIVATE(FrameGraphicsItem)
 };
 
 } // namespace Marble
