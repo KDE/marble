@@ -392,7 +392,7 @@ void TileDirectory::createTiles() const
 bool TileDirectory::contains(const TileId &tile) const
 {
     GeoDataLatLonBox tileBoundary;
-    m_tileProjection.geoCoordinates(m_zoomLevel, tile.x(), tile.y(), tileBoundary);
+    m_tileProjection.geoCoordinates(tile.zoomLevel(), tile.x(), tile.y(), tileBoundary);
 
     double const west = tileBoundary.west();
     double const east = tileBoundary.east();
