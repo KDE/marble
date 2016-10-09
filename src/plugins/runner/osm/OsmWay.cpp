@@ -24,7 +24,7 @@ namespace Marble {
 
 QSet<StyleBuilder::OsmTag> OsmWay::s_areaTags;
 
-void OsmWay::create(GeoDataDocument *document, DocumentRole role, const OsmNodes &nodes, QSet<qint64> &usedNodes) const
+void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes, QSet<qint64> &usedNodes) const
 {
     const double height = extractBuildingHeight(m_osmData);
 
@@ -102,19 +102,17 @@ void OsmWay::create(GeoDataDocument *document, DocumentRole role, const OsmNodes
 
     document->append(placemark);
 
-    if (role != ConversionDocument) {
-        QVector<NamedEntry> namedEntries = extractNamedEntries(osmData);
-        if (!namedEntries.isEmpty()) {
-            foreach (const auto &namedEntry, namedEntries) {
-                GeoDataPlacemark *entry = new GeoDataPlacemark();
-                entry->setCoordinate(namedEntry.coordinates);
-                entry->setName(namedEntry.label);
-                entry->setOsmData(namedEntry.osmData);
-                entry->setVisualCategory(visualCategory);
-                entry->setVisible(visualCategory != GeoDataPlacemark::None);
+    QVector<NamedEntry> namedEntries = extractNamedEntries(osmData);
+    if (!namedEntries.isEmpty()) {
+        foreach (const auto &namedEntry, namedEntries) {
+            GeoDataPlacemark *entry = new GeoDataPlacemark();
+            entry->setCoordinate(namedEntry.coordinates);
+            entry->setName(namedEntry.label);
+            entry->setOsmData(namedEntry.osmData);
+            entry->setVisualCategory(visualCategory);
+            entry->setVisible(visualCategory != GeoDataPlacemark::None);
 
-                document->append(entry);
-            }
+            document->append(entry);
         }
     }
 }
