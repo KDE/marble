@@ -214,7 +214,7 @@ int main(int argc, char *argv[])
         }
     } else {
         QString const region = QFileInfo(inputFileName).fileName();
-        QString const regionDir = QString("%1/%2").arg(cacheDirectory).arg(region);
+        QString const regionDir = QString("%1/%2").arg(cacheDirectory).arg(QFileInfo(inputFileName).baseName());
         TileDirectory mapTiles(TileDirectory::OpenStreetMap, regionDir, manager, extension, maxZoomLevel);
         mapTiles.setInputFile(inputFileName);
         mapTiles.createTiles();
