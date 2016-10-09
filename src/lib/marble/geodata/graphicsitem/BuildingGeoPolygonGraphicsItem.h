@@ -46,10 +46,12 @@ private:
     static QPointF centroid(const QPolygonF &polygon, double &area);
     static void screenPolygons(const ViewportParams *viewport, const GeoDataPolygon* polygon,
                                QVector<QPolygonF*> &polygons,  QVector<QPolygonF*> &outlines);
+    static QString extractBuildingLabel(const GeoDataPlacemark &placemark);
     static QVector<NamedEntry> extractNamedEntries(const GeoDataPlacemark &placemark);
 
 private:
     const double m_buildingHeight;
+    const QString m_buildingLabel;
     const QVector<NamedEntry> m_entries;
 };
 
