@@ -144,6 +144,7 @@ class MARBLE_EXPORT MarbleGraphicsItem
     MarbleGraphicsItemPrivate * const d_ptr;
 
  private:
+    Q_DISABLE_COPY(MarbleGraphicsItem)
     Q_DECLARE_PRIVATE(MarbleGraphicsItem)
 };
 
