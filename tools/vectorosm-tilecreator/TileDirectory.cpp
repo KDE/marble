@@ -64,6 +64,7 @@ TileDirectory::TileDirectory(TileType tileType, const QString &cacheDir, Parsing
         m_zoomLevel = 10;
         m_baseDir = QString("%1/osm/%2").arg(cacheDir).arg(m_zoomLevel);
     }
+    QDir().mkpath(m_baseDir);
 }
 
 TileId TileDirectory::tileFor(int zoomLevel, int tileX, int tileY) const
@@ -393,7 +394,7 @@ void TileDirectory::createTiles() const
     cout << "  " << (m_tileType == OpenStreetMap ? "osm" : "landmass") << " cache tiles complete." << endl;
 }
 
-bool TileDirectory::contains(const TileId &tile) const
+int TileDirectory::innerNodes(const TileId &tile) const
 {
     GeoDataLatLonBox tileBoundary;
     m_tileProjection.geoCoordinates(tile.zoomLevel(), tile.x(), tile.y(), tileBoundary);
@@ -408,23 +409,24 @@ bool TileDirectory::contains(const TileId &tile) const
     bounds << GeoDataCoordinates(east, south);
     bounds << GeoDataCoordinates(west, south);
 
+    int innerNodes = 0;
     if (m_boundingPolygon.isEmpty()) {
         foreach(auto const &coordinate, bounds) {
             if (m_boundingBox.contains(coordinate)) {
-                return true;
+                ++innerNodes;
             }
         }
-        return false;
+        return innerNodes;
     }
 
-    foreach(auto const &ring, m_boundingPolygon) {
-        foreach(auto const &coordinate, bounds) {
+    foreach(auto const &coordinate, bounds) {
+        foreach(auto const &ring, m_boundingPolygon) {
             if (ring.contains(coordinate)) {
-                return true;
+                ++innerNodes;
             }
         }
     }
-    return false;
+    return innerNodes;
 }
 
 void TileDirectory::updateProgress()

@@ -69,6 +69,45 @@ QString tileFileName(const QCommandLineParser &parser, int x, int y, int zoomLev
     return outputFile;
 }
 
+void writeBoundaryTile(GeoDataDocument* tile, const QString &region, const QCommandLineParser &parser, int x, int y, int zoomLevel)
+{
+    QString const extension = parser.value("extension");
+    QString const outputDir = QString("%1/boundaries/%2/%3/%4").arg(parser.value("cache-directory")).arg(region).arg(zoomLevel).arg(x);
+    QString const outputFile = QString("%1/%2.%3").arg(outputDir).arg(y).arg(extension);
+    QDir().mkpath(outputDir);
+    GeoDataDocumentWriter::write(outputFile, *tile);
+}
+
+QSharedPointer<GeoDataDocument> mergeBoundaryTiles(const QSharedPointer<GeoDataDocument> &background, ParsingRunnerManager &manager, const QCommandLineParser &parser, int x, int y, int zoomLevel)
+{
+    GeoDataDocument* mergedMap = new GeoDataDocument;
+    OsmPlacemarkData marbleLand;
+    marbleLand.addTag("marble_land","landmass");
+    foreach (auto placemark, background->placemarkList()) {
+        GeoDataPlacemark* land = new GeoDataPlacemark(*placemark);
+        if(land->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType) {
+            land->setOsmData(marbleLand);
+        }
+        mergedMap->append(land);
+    }
+
+    QString const extension = parser.value("extension");
+    QString const boundaryDir = QString("%1/boundaries").arg(parser.value("cache-directory"));
+    foreach(auto const &dir, QDir(boundaryDir).entryList(QDir::Dirs | QDir::NoDotAndDotDot)) {
+        QString const file = QString("%1/%2/%3/%4/%5.%6").arg(boundaryDir).arg(dir).arg(zoomLevel).arg(x).arg(y).arg(extension);
+        if (QFileInfo(file).exists()) {
+            auto tile = TileDirectory::open(file, manager);
+            if (tile) {
+                foreach (auto placemark, tile->placemarkList()) {
+                    mergedMap->append(new GeoDataPlacemark(*placemark));
+                }
+            }
+        }
+    }
+
+    return QSharedPointer<GeoDataDocument>(mergedMap);
+}
+
 bool writeTile(GeoDataDocument* tile, const QString &outputFile)
 {
     QDir().mkpath(QFileInfo(outputFile).path());
@@ -174,7 +213,9 @@ int main(int argc, char *argv[])
             }
         }
     } else {
-        TileDirectory mapTiles(TileDirectory::OpenStreetMap, cacheDirectory, manager, extension, maxZoomLevel);
+        QString const region = QFileInfo(inputFileName).fileName();
+        QString const regionDir = QString("%1/%2").arg(cacheDirectory).arg(region);
+        TileDirectory mapTiles(TileDirectory::OpenStreetMap, regionDir, manager, extension, maxZoomLevel);
         mapTiles.setInputFile(inputFileName);
         mapTiles.createTiles();
         auto const boundingBox = mapTiles.boundingBox();
@@ -187,6 +228,7 @@ int main(int argc, char *argv[])
         Tiles tiles;
 
         qint64 total = 0;
+        QSet<QString> boundaryTiles;
         foreach(auto zoomLevel, zoomLevels) {
             // @todo FIXME Assumes placemark ownership
             //WayConcatenator concatenator(tagsFilter.accepted(), QStringList() << "highway=*", false);
@@ -195,17 +237,21 @@ int main(int argc, char *argv[])
             total += iter.total();
             foreach(auto const &tileId, iter) {
                 auto const tile = TileId(QString(), zoomLevel, tileId.x(), tileId.y());
-                if (mapTiles.contains(tile)) {
+                int const innerNodes = mapTiles.innerNodes(tile);
+                if (innerNodes > 0) {
                     auto const mapTile = mapTiles.tileFor(zoomLevel, tileId.x(), tileId.y());
                     auto const name = QString("%1/%2/%3").arg(mapTile.zoomLevel()).arg(mapTile.x()).arg(mapTile.y());
                     tiles[name] << tile;
+                    if (innerNodes < 4) {
+                        boundaryTiles << name;
+                    }
                 }
             }
         }
 
         qint64 count = 0;
-        foreach(auto const &tileList, tiles) {
-            foreach(auto const &tileId, tileList) {
+        for (auto iter = tiles.begin(), end = tiles.end(); iter != end; ++iter) {
+            foreach(auto const &tileId, iter.value()) {
                 ++count;
                 int const zoomLevel = tileId.zoomLevel();
                 QString const filename = tileFileName(parser, tileId.x(), tileId.y(), zoomLevel);
@@ -216,11 +262,19 @@ int main(int argc, char *argv[])
                         continue;
                     }
                 }
-                GeoDataDocument* tile1 = mapTiles.clip(zoomLevel, tileId.x(), tileId.y());
-                TagsFilter::removeAnnotationTags(tile1);
-                GeoDataDocument* tile2 = loader.clip(zoomLevel, tileId.x(), tileId.y());
-                GeoDataDocument* combined = mergeDocuments(tile1, tile2);
-                NodeReducer nodeReducer(combined, zoomLevel);
+
+                typedef QSharedPointer<GeoDataDocument> GeoDocPtr;
+                GeoDocPtr tile1 = GeoDocPtr(mapTiles.clip(zoomLevel, tileId.x(), tileId.y()));
+                TagsFilter::removeAnnotationTags(tile1.data());
+                GeoDocPtr tile2 = GeoDocPtr(loader.clip(zoomLevel, tileId.x(), tileId.y()));
+                GeoDocPtr combined = GeoDocPtr(mergeDocuments(tile1.data(), tile2.data()));
+                NodeReducer nodeReducer(combined.data(), zoomLevel);
+
+                if (boundaryTiles.contains(iter.key())) {
+                    writeBoundaryTile(tile1.data(), region, parser, tileId.x(), tileId.y(), zoomLevel);
+                    combined = mergeBoundaryTiles(tile2, manager, parser, tileId.x(), tileId.y(), zoomLevel);
+                }
+
                 if (zoomLevel > 13 && mbtileWriter) {
                     QBuffer buffer;
                     buffer.open(QBuffer::ReadWrite);
@@ -231,7 +285,7 @@ int main(int argc, char *argv[])
                         qWarning() << "Could not write the tile " << combined->name();
                     }
                 } else {
-                    if (!writeTile(combined, filename)) {
+                    if (!writeTile(combined.data(), filename)) {
                         return 4;
                     }
                 }
@@ -243,9 +297,6 @@ int main(int argc, char *argv[])
                 std::cout << " Node reduction: " << qRound(reduction * 100.0) << "%";
                 std::cout << "      \r";
                 std::cout.flush();
-                delete combined;
-                delete tile1;
-                delete tile2;
             }
         }
         TileDirectory::printProgress(1.0);
