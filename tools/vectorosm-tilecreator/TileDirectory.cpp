@@ -189,7 +189,11 @@ QStringList TileDirectory::tagsFilteredIn(int zoomLevel) const
         tags << "natural=peak";
     }
 
-    if (zoomLevel <= 13) {
+    if (zoomLevel <= 11) {
+        tags << "landuse=forest";
+        tags << "landuse=military";
+        tags << "landuse=residential";
+    } else if (zoomLevel <= 13) {
         tags << "landuse=commercial";
         tags << "landuse=farmland";
         tags << "landuse=farmyard";
