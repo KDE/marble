@@ -34,18 +34,11 @@ public:
     void create(GeoDataDocument* document, const OsmNodes &nodes, QSet<qint64> &usedNodes) const;
 
 private:
-    struct NamedEntry {
-        GeoDataCoordinates coordinates;
-        QString label;
-        OsmPlacemarkData osmData;
-    };
-
     bool isArea() const;
 
     static bool isAreaTag(const StyleBuilder::OsmTag &keyValue);
 
     static double extractBuildingHeight(const OsmPlacemarkData &osmData);
-    static QVector<NamedEntry> extractNamedEntries(const OsmPlacemarkData &osmData);
 
     OsmPlacemarkData m_osmData;
     QVector<qint64> m_references;

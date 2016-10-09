@@ -29,6 +29,7 @@ BuildingGeoPolygonGraphicsItem::BuildingGeoPolygonGraphicsItem(const GeoDataPlac
                                                                const GeoDataPolygon *polygon)
     : AbstractGeoPolygonGraphicsItem(placemark, polygon)
     , m_buildingHeight(polygon->latLonAltBox().maxAltitude() - polygon->latLonAltBox().minAltitude())
+    , m_entries(extractNamedEntries(*placemark))
 {
     setZValue(this->zValue() + m_buildingHeight);
     Q_ASSERT(m_buildingHeight > 0.0);
@@ -43,6 +44,7 @@ BuildingGeoPolygonGraphicsItem::BuildingGeoPolygonGraphicsItem(const GeoDataPlac
                                                                const GeoDataLinearRing* ring)
     : AbstractGeoPolygonGraphicsItem(placemark, ring)
     , m_buildingHeight(ring->latLonAltBox().maxAltitude() - ring->latLonAltBox().minAltitude())
+    , m_entries(extractNamedEntries(*placemark))
 {
     setZValue(this->zValue() + m_buildingHeight);
     Q_ASSERT(m_buildingHeight > 0.0);
@@ -131,6 +133,24 @@ QPointF BuildingGeoPolygonGraphicsItem::buildingOffset(const QPointF &point, con
     return QPointF(shiftX, shiftY);
 }
 
+QVector<BuildingGeoPolygonGraphicsItem::NamedEntry> BuildingGeoPolygonGraphicsItem::extractNamedEntries(const GeoDataPlacemark &placemark)
+{
+    QVector<NamedEntry> entries;
+
+    const auto end = placemark.osmData().nodeReferencesEnd();
+    for (auto iter = placemark.osmData().nodeReferencesBegin(); iter != end; ++iter) {
+        const auto tagIter = iter.value().findTag(QStringLiteral("addr:housenumber"));
+        if (tagIter != iter.value().tagsEnd()) {
+            NamedEntry entry;
+            entry.point = iter.key();
+            entry.label = tagIter.value();
+            entries.push_back(entry);
+        }
+    }
+
+    return entries;
+}
+
 void BuildingGeoPolygonGraphicsItem::paint(GeoPainter* painter, const ViewportParams* viewport, const QString &layer)
 {
     if (layer.endsWith(QLatin1String("/frame"))) {
@@ -157,15 +177,30 @@ void BuildingGeoPolygonGraphicsItem::paintRoof(GeoPainter* painter, const Viewpo
     painter->save();
     QPen const currentPen = configurePainter(painter, viewport);
 
+    qreal maxSize(0.0);
+    QPointF roofCenter;
+
     if (hasInnerBoundaries) {
         painter->setPen(Qt::NoPen);
     }
 
     // first paint the area and icon (and the outline if there are no inner boundaries)
 
+    double maxArea = 0.0;
     foreach(QPolygonF* outlinePolygon, outlinePolygons) {
         QRectF const boundingRect = outlinePolygon->boundingRect();
         QPolygonF buildingRoof;
+        if (!m_entries.isEmpty()) {
+            QSizeF const polygonSize = boundingRect.size();
+            qreal size = polygonSize.width() * polygonSize.height();
+            if (size > maxSize) {
+                maxSize = size;
+                double area;
+                roofCenter = centroid(*outlinePolygon, area);
+                maxArea = qMax(area, maxArea);
+                roofCenter += buildingOffset(roofCenter, viewport);
+            }
+        }
         if ( drawAccurate3D) {
             buildingRoof.reserve(outlinePolygon->size());
             foreach(const QPointF &point, *outlinePolygon) {
@@ -201,7 +236,32 @@ void BuildingGeoPolygonGraphicsItem::paintRoof(GeoPainter* painter, const Viewpo
         }
     }
 
+    // Render additional housenumbers at building entries
+    if (!m_entries.isEmpty() && maxArea > 1600 * m_entries.size()) {
+        QBrush brush = painter->brush();
+        QColor const brushColor = brush.color();
+        QColor lighterColor = brushColor.lighter(110);
+        lighterColor.setAlphaF(0.9);
+        brush.setColor(lighterColor);
+        painter->setBrush(brush);
+        foreach(const auto &entry, m_entries) {
+            qreal x, y;
+            viewport->screenCoordinates(entry.point, x, y);
+            QPointF point(x, y);
+            point += buildingOffset(point, viewport);
+            auto const width = painter->fontMetrics().width(entry.label);
+            auto const height = painter->fontMetrics().height();
+            QRectF rectangle(point, QSizeF(qMax(1.2*width, 1.1*height), 1.2*height));
+            rectangle.moveCenter(point);
+            painter->drawRoundedRect(rectangle, 3, 3);
+            painter->drawText(rectangle, Qt::AlignCenter, entry.label);
+        }
+        brush.setColor(brushColor);
+        painter->setBrush(brush);
+    }
+
     // then paint the outlines if there are inner boundaries
+
     if (hasInnerBoundaries) {
         painter->setPen(currentPen);
         foreach(QPolygonF * polygon, outlinePolygons) {

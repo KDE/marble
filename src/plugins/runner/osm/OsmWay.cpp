@@ -10,9 +10,8 @@
 
 #include <OsmRelation.h>
 #include <MarbleDebug.h>
-#include <GeoDataLineStyle.h>
 #include <GeoDataPlacemark.h>
-#include <GeoDataPoint.h>
+#include <GeoDataLineStyle.h>
 #include <GeoDataPolyStyle.h>
 #include <GeoDataStyle.h>
 #include <GeoDataDocument.h>
@@ -82,11 +81,9 @@ void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes, QSet<qint6
 
     OsmObjectManager::registerId(m_osmData.id());
 
-    const auto visualCategory = StyleBuilder::determineVisualCategory(m_osmData);
-
     GeoDataPlacemark *placemark = new GeoDataPlacemark;
     placemark->setGeometry(geometry);
-    placemark->setVisualCategory(visualCategory);
+    placemark->setVisualCategory(StyleBuilder::determineVisualCategory(m_osmData));
     placemark->setName(m_osmData.tagValue(QStringLiteral("name")));
     if (placemark->name().isEmpty()) {
         placemark->setName(m_osmData.tagValue(QStringLiteral("ref")));
@@ -98,23 +95,9 @@ void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes, QSet<qint6
         placemark->setName(m_osmData.tagValue(QStringLiteral("addr:housenumber")));
     }
     placemark->setOsmData(osmData);
-    placemark->setVisible(visualCategory != GeoDataPlacemark::None);
+    placemark->setVisible(placemark->visualCategory() != GeoDataPlacemark::None);
 
     document->append(placemark);
-
-    QVector<NamedEntry> namedEntries = extractNamedEntries(osmData);
-    if (!namedEntries.isEmpty()) {
-        foreach (const auto &namedEntry, namedEntries) {
-            GeoDataPlacemark *entry = new GeoDataPlacemark();
-            entry->setCoordinate(namedEntry.coordinates);
-            entry->setName(namedEntry.label);
-            entry->setOsmData(namedEntry.osmData);
-            entry->setVisualCategory(visualCategory);
-            entry->setVisible(visualCategory != GeoDataPlacemark::None);
-
-            document->append(entry);
-        }
-    }
 }
 
 const QVector<qint64> &OsmWay::references() const
@@ -239,25 +222,6 @@ double OsmWay::extractBuildingHeight(const OsmPlacemarkData &osmData)
     }
 
     return qBound(1.0, height, 1000.0);
-}
-
-QVector<OsmWay::NamedEntry> OsmWay::extractNamedEntries(const OsmPlacemarkData &osmData)
-{
-    QVector<NamedEntry> entries;
-
-    const auto end = osmData.nodeReferencesEnd();
-    for (auto iter = osmData.nodeReferencesBegin(); iter != end; ++iter) {
-        const auto tagIter = iter.value().findTag(QStringLiteral("addr:housenumber"));
-        if (tagIter != iter.value().tagsEnd()) {
-            NamedEntry entry;
-            entry.coordinates = iter.key();
-            entry.label = tagIter.value();
-            entry.osmData = *iter;
-            entries.push_back(entry);
-        }
-    }
-
-    return entries;
 }
 
 }
