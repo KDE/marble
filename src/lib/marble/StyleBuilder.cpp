@@ -683,6 +683,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::HighwayPath]              = createHighwayStyle("#dddde8", "#999999", osmFont, "000000", 0, 1, Qt::DotLine, Qt::SquareCap, true);
     m_defaultStyle[GeoDataPlacemark::HighwayTrack]             = createHighwayStyle("#996600", QColor(Qt::white), osmFont, "000000", 1, 1, Qt::DashLine, Qt::SquareCap, true);
     m_defaultStyle[GeoDataPlacemark::HighwayPedestrian]        = createHighwayStyle("#dddde8", "#999999", osmFont, "000000", 0, 2);
+    m_defaultStyle[GeoDataPlacemark::HighwayPedestrian]->polyStyle().setOutline(false);
     m_defaultStyle[GeoDataPlacemark::HighwayFootway]           = createHighwayStyle("#fa8072", QColor(Qt::white), osmFont, "000000", 0, 2, Qt::DotLine, Qt::SquareCap, true);
     m_defaultStyle[GeoDataPlacemark::HighwayCycleway]          = createHighwayStyle(QColor(Qt::blue), QColor(Qt::white), osmFont, "000000", 0, 2, Qt::DotLine, Qt::SquareCap, true);
     m_defaultStyle[GeoDataPlacemark::HighwayService]           = createHighwayStyle("#ffffff", "#bbbbbb", osmFont, "000000", 1, 6);
@@ -1279,9 +1280,6 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
                     adjustStyle = true;
                 }
             }
-        } else if (visualCategory == GeoDataPlacemark::HighwayPedestrian) {
-            polyStyle.setOutline(false);
-            adjustStyle = true;
         }
 
         if (adjustStyle) {
@@ -1410,9 +1408,6 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
                     adjustStyle = true;
                 }
             }
-        } else if (visualCategory == GeoDataPlacemark::HighwayPedestrian) {
-            polyStyle.setOutline(false);
-            adjustStyle = true;
         }
 
         if (adjustStyle) {
