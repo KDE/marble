@@ -108,7 +108,9 @@ void ParsingRunnerManager::parseFile( const QString &fileName, DocumentRole role
     }
 }
 
-GeoDataDocument *ParsingRunnerManager::openFile( const QString &fileName, DocumentRole role, int timeout ) {
+GeoDataDocument *ParsingRunnerManager::openFile( const QString &fileName, DocumentRole role, int timeout )
+{
+    d->m_fileResult = nullptr;
     QEventLoop localEventLoop;
     QTimer watchdog;
     watchdog.setSingleShot(true);
