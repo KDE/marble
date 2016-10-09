@@ -25,8 +25,6 @@ QSet<StyleBuilder::OsmTag> OsmWay::s_areaTags;
 
 void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes, QSet<qint64> &usedNodes) const
 {
-    const double height = extractBuildingHeight(m_osmData);
-
     OsmPlacemarkData osmData = m_osmData;
     GeoDataGeometry *geometry = 0;
 
@@ -45,12 +43,7 @@ void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes, QSet<qint6
             usedNodes << nodeId;
         }
 
-        linearRing = GeoDataLinearRing(linearRing.optimized());
-        if (!linearRing.isEmpty() && height != 0) {
-            linearRing.first().setAltitude(height);
-        }
-
-        geometry = new GeoDataLinearRing(linearRing);
+        geometry = new GeoDataLinearRing(linearRing.optimized());
     } else {
         GeoDataLineString lineString;
 
@@ -66,18 +59,10 @@ void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes, QSet<qint6
             usedNodes << nodeId;
         }
 
-        lineString = lineString.optimized();
-        if (!lineString.isEmpty() && height != 0) {
-            lineString.first().setAltitude(height);
-        }
-
-        geometry = new GeoDataLineString(lineString);
+        geometry = new GeoDataLineString(lineString.optimized());
     }
 
     Q_ASSERT(geometry != nullptr);
-    if (height != 0) {
-        geometry->setAltitudeMode(RelativeToGround);
-    }
 
     OsmObjectManager::registerId(m_osmData.id());
 
@@ -193,29 +178,6 @@ bool OsmWay::isAreaTag(const StyleBuilder::OsmTag &keyValue)
     }
 
     return s_areaTags.contains(keyValue);
-}
-
-double OsmWay::extractBuildingHeight(const OsmPlacemarkData &osmData)
-{
-    double height = 8.0;
-
-    QHash<QString, QString>::const_iterator tagIter;
-    if ((tagIter = osmData.findTag(QStringLiteral("height"))) != osmData.tagsEnd()) {
-        /** @todo Also parse non-SI units, see https://wiki.openstreetmap.org/wiki/Key:height#Height_of_buildings */
-        QString const heightValue = QString(tagIter.value()).remove(QStringLiteral(" meters")).remove(QStringLiteral(" m"));
-        bool extracted = false;
-        double extractedHeight = heightValue.toDouble(&extracted);
-        if (extracted) {
-            height = extractedHeight;
-        }
-    } else if ((tagIter = osmData.findTag(QStringLiteral("building:levels"))) != osmData.tagsEnd()) {
-        int const levels = tagIter.value().toInt();
-        int const skipLevels = osmData.tagValue(QStringLiteral("building:min_level")).toInt();
-        /** @todo Is 35 as an upper bound for the number of levels sane? */
-        height = 3.0 * qBound(1, 1+levels-skipLevels, 35);
-    }
-
-    return qBound(1.0, height, 1000.0);
 }
 
 }
