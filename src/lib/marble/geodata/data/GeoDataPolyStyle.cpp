@@ -23,7 +23,10 @@ class GeoDataPolyStylePrivate
 {
   public:
     GeoDataPolyStylePrivate()
-     : m_fill( true ), m_outline( true ), m_brushStyle( Qt::SolidPattern )
+        : m_fill(true)
+        , m_outline(true)
+        , m_brushStyle(Qt::SolidPattern)
+        , m_colorIndex(0)
     {
     }
 
