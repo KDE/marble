@@ -12,13 +12,11 @@
 #define MARBLE_GEODATAPOINTPRIVATE_H
 
 #include "GeoDataGeometry_p.h"
-#include "GeoDataCoordinates_p.h"
 
 namespace Marble
 {
 
-class GeoDataPointPrivate : public GeoDataGeometryPrivate,
-                            public GeoDataCoordinatesPrivate
+class GeoDataPointPrivate : public GeoDataGeometryPrivate
 {
 public:
     GeoDataCoordinates m_coordinates;

@@ -406,21 +406,22 @@ class GEODATA_EXPORT GeoDataCoordinates
      * convenience function that uses the default notation
      */
     QString latToString() const;
-    
-    virtual bool operator==( const GeoDataCoordinates& ) const;
-    virtual bool operator !=( const GeoDataCoordinates& ) const;
+
+    bool operator==(const GeoDataCoordinates &other) const;
+    bool operator!=(const GeoDataCoordinates &other) const;
+
     GeoDataCoordinates& operator=( const GeoDataCoordinates &other );
 
     /** Serialize the contents of the feature to @p stream. */
-    virtual void pack( QDataStream& stream ) const;
+    void pack(QDataStream &stream) const;
     /** Unserialize the contents of the feature from @p stream. */
-    virtual void unpack( QDataStream& stream );
-
-    virtual void detach();
- protected:
-    GeoDataCoordinatesPrivate* d;
+    void unpack(QDataStream &stream);
 
  private:
+    void detach();
+
+    GeoDataCoordinatesPrivate *d;
+
     static GeoDataCoordinates::Notation s_notation;
     static const GeoDataCoordinates null;
 };
