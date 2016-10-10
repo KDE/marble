@@ -133,6 +133,7 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
     QList<LayerItem> defaultLayer;
     int paintedItems = 0;
     QHash<QString, QList<GeoGraphicsItem*> > paintedFragments;
+    QSet<QString> const knownLayers = QSet<QString>::fromList(d->m_styleBuilder->renderOrder());
     auto const viewLatLonAltBox = viewport->viewLatLonAltBox();
     foreach( GeoGraphicsItem* item, items ) {
         if ( item->latLonAltBox().intersects(viewLatLonAltBox) ) {
@@ -142,7 +143,7 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
                 paintLayers << QString();
             }
             foreach(const auto &layer, paintLayers) {
-                if (d->m_styleBuilder->renderOrder().contains(layer)) {
+                if (knownLayers.contains(layer)) {
                     paintedFragments[layer] << item;
                 } else {
                     defaultLayer << LayerItem(layer, item);
