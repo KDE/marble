@@ -1,6 +1,6 @@
 #! /bin/sh
 
-### creates marble_qt.pot: strings from qtapp, libs & plugins
+### creates marble_qt.pot: strings from marble-maps, marble-qt, libs & plugins
 
 # collect strings from DGML files
 # TODO: is there a way to make lupdate pick up the filename and line of the original string?
@@ -40,6 +40,7 @@ egrep -B1 'QCoreApplication::translate\(".*", ".*[^ ].*"\)' rc.cpp > rc.cpp.1
 mv rc.cpp.1 rc.cpp
 
 $EXTRACT_TR_STRINGS \
+    `find src/apps/marble-maps -name '*.cpp' -o -name '*.qml'` \
     src/apps/marble-qt/QtMainWindow.cpp src/apps/marble-qt/qtmain.cpp \
     src/apps/marble-ui/ControlView.cpp \
     `find src/plugins -name '*.cpp' -o -name '*.ui' | grep -v '/test/'` \
