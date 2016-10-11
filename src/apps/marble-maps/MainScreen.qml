@@ -246,7 +246,7 @@ ApplicationWindow {
 
             BoxedText {
                 id: distanceIndicator
-                text: "%1 km".arg(zoomToPositionButton.distance < 10 ? zoomToPositionButton.distance.toFixed(1) : zoomToPositionButton.distance.toFixed(0))
+                text: qsTr("%1 km").arg(zoomToPositionButton.distance < 10 ? zoomToPositionButton.distance.toFixed(1) : zoomToPositionButton.distance.toFixed(0))
                 anchors {
                     bottom: zoomToPositionButton.top
                     horizontalCenter: zoomToPositionButton.horizontalCenter

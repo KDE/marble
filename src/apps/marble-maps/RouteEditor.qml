@@ -63,7 +63,7 @@ Item {
             id: helpText
             visible: waypointList.count < 2
             color: "gray"
-            text: "Search for places to integrate them into a route."
+            text: qsTr("Search for places to integrate them into a route.")
         }
 
         ListView {
