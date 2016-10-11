@@ -93,7 +93,7 @@ Item {
         IconText {
             width: parent.width
             visible: placemark !== null && placemark.elevation !== ""
-            text: placemark === null ? "" : ("Elevation : " + placemark.elevation + " m")
+            text: placemark === null ? "" : qsTr("Elevation: %1 m").arg(placemark.elevation)
         }
 
         IconText {

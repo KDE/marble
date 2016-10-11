@@ -23,11 +23,11 @@ Item {
     function formatDistance(distance)
     {
         if (distance > 1000) {
-            return "%1 km".arg((0.001 * distance).toFixed(1))
+            return qsTr("%1 km").arg((0.001 * distance).toFixed(1))
         } else if (distance > 100) {
-            return "%1 m".arg((distance*0.01).toFixed(0)*100)
+            return qsTr("%1 m").arg((distance*0.01).toFixed(0)*100)
         } else {
-            return "%1 m".arg((distance*0.1).toFixed(0)*10)
+            return qsTr("%1 m").arg((distance*0.1).toFixed(0)*10)
         }
     }
 
