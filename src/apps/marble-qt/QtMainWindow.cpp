@@ -75,7 +75,6 @@
 #include "PluginManager.h"
 #include "MapThemeDownloadDialog.h"
 #include "MapWizard.h"
-#include "GoToDialog.h"
 #include "MarbleWidgetInputHandler.h"
 #include "Planet.h"
 #include "cloudsync/CloudSyncManager.h"
