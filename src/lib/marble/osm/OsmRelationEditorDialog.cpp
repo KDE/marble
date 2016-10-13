@@ -64,6 +64,7 @@ OsmRelationEditorDialog::OsmRelationEditorDialog( OsmPlacemarkData *relationData
 
     QObject::connect( m_buttonBox, SIGNAL( accepted() ),
                        this, SLOT( checkFields() ) );
+    connect(m_buttonBox, SIGNAL(rejected()), SLOT(reject()));
 }
 
 OsmRelationEditorDialog::~OsmRelationEditorDialog()
