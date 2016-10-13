@@ -78,7 +78,6 @@ void OsmRelationEditorDialog::finish()
     m_dummyPlacemark->osmData().addTag( "name", m_nameLineEdit->text() );
     *m_relationData = m_dummyPlacemark->osmData();
     accept();
-    deleteLater();
 }
 
 void OsmRelationEditorDialog::checkFields()

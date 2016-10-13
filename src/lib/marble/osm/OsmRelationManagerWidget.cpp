@@ -73,11 +73,11 @@ void OsmRelationManagerWidget::addRelation( QAction *relationAction )
     if ( relationText == tr( "New Relation" ) ) {
         OsmPlacemarkData relationData;
         QPointer<OsmRelationEditorDialog> relationEditor = new OsmRelationEditorDialog( &relationData );
-        if ( relationEditor->exec() == QDialog::Rejected ) {
+        const int result = relationEditor->exec();
+        delete relationEditor;
+        if (result == QDialog::Rejected) {
             return;
         }
-
-        delete relationEditor;
 
         QTreeWidgetItem *newRelationItem = new QTreeWidgetItem();
         newRelationItem->setText( Column::Name, relationData.tagValue( "name" ) );
@@ -159,10 +159,12 @@ void OsmRelationManagerWidget::handleRelationContextMenuRequest( const QPoint& p
         else if ( selectedItem->text() == tr( "Edit" ) ) {
             OsmPlacemarkData relationData = d->m_allRelations->value( id );
             QPointer<OsmRelationEditorDialog> relationEditor = new OsmRelationEditorDialog( &relationData );
-            if ( relationEditor->exec() == QDialog::Rejected ) {
+            const int result = relationEditor->exec();
+            delete relationEditor;
+            if (result == QDialog::Rejected) {
                 return;
             }
-            delete relationEditor;
+
             emit relationCreated( relationData );
             update();
         }
