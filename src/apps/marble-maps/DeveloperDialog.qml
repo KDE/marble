@@ -49,7 +49,7 @@ Item {
             margins: Screen.pixelDensity * 2
         }
 
-        spacing: Screen.pixelDensity * 2
+        spacing: Screen.pixelDensity * 1
 
         Text {
             id: text
@@ -80,11 +80,6 @@ Item {
             text: "Render in Debug Mode"
             checked: settings.value("Developer", "debugPolygons") === "true"
             onCheckedChanged: marbleMaps.setShowDebugPolygons(checked)
-        }
-
-        Button {
-            text: "Close"
-            onClicked: root.visible = false
         }
     }
 }

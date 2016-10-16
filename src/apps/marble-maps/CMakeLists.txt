@@ -7,6 +7,7 @@ if (CMAKE_SYSTEM_NAME STREQUAL Android)
     set(TARGET Marble)
 
     find_package(Qt5AndroidExtras)
+    find_package(Qt5QuickControls2)
 
     add_library (${TARGET} SHARED ${marble_SRCS} ${marble_QRCS})
 
@@ -26,6 +27,7 @@ if (CMAKE_SYSTEM_NAME STREQUAL Android)
         Qt5::Positioning
         Qt5::AndroidExtras
         Qt5::Multimedia
+        Qt5::QuickControls2
     )
 else()
     set(TARGET marble-maps)

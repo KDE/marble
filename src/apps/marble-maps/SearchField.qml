@@ -32,7 +32,7 @@ Item {
         routing.clearSearchResultPlacemarks();
         query = query.trim();
         if(query.toLowerCase() === "ok marble") {
-            developerDialog.visible = true;
+            dialogContainer.currentIndex = dialogContainer.developer;
         } else if(query !== "") {
             root.busy = true;
             searchRequested(query);
@@ -101,8 +101,8 @@ Item {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    placemarkDialog.placemark = null;
-                    itemStack.state = "";
+                    placemarkDialog.item.placemark = null;
+                    dialogContainer.currentIndex = dialogContainer.none
                     routing.clearSearchResultPlacemarks();
                     field.text = "";
                     field.focus = true;

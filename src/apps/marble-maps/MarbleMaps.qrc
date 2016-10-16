@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
+        <file>AboutDialog.qml</file>
         <file>FlatButton.qml</file>
         <file>Completion.qml</file>
         <file>MainScreen.qml</file>
@@ -14,6 +15,7 @@
         <file>WaypointImage.qml</file>
         <file>RoutingManager.qml</file>
         <file>PlacemarkDialog.qml</file>
+        <file>SettingsDialog.qml</file>
         <file>DeveloperDialog.qml</file>
         <file>ProfileSelectorMenu.qml</file>
         <file>FloatingMenuButton.qml</file>
@@ -57,6 +59,11 @@
         <file alias="material/place.svg">material-icons/ic_place_black_48px.svg</file>
         <file alias="material/star.svg">material-icons/ic_star_24px.svg</file>
         <file alias="material/star_border.svg">material-icons/ic_star_border_24px.svg</file>
+        <file alias="konqi/app-dev.png">konqi/konqi-app-dev.png</file>
+        <file alias="konqi/dev-qt.png">konqi/konqi-dev-qt.png</file>
+        <file alias="konqi/group.png">konqi/konqi-group.png</file>
+        <file alias="konqi/globe.png">konqi/konqi-globe.png</file>
+        <file alias="konqi/books.png">konqi/konqi-books.png</file>
         <file>RouteProfileRadioButton.qml</file>
         <file>ScrollBar.qml</file>
     </qresource>
