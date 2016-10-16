@@ -222,6 +222,10 @@ weather/wind-arrows.svgz
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/weather)
 
 install (FILES
+licenses/lgpl2.txt
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/licenses)
+
+install (FILES
 mwdbii/DATELINE.PNT
 mwdbii/PCOAST.PNT
 mwdbii/PDIFFBORDER.PNT
