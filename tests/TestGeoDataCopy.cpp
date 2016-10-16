@@ -52,8 +52,6 @@ class TestGeoDataCopy : public QObject
     public:
         TestGeoDataCopy();
 
-    private:
-        void testCoordinate(GeoDataCoordinates coord, qreal alt, quint8 detail, QString coordtest );
     private Q_SLOTS:
         void initTestCase();
         // misc.:
@@ -85,7 +83,6 @@ class TestGeoDataCopy : public QObject
         const GeoDataCoordinates coord1;
         const GeoDataCoordinates coord2;
         const GeoDataCoordinates coord3;
-        QStringList coordString;
 };
 
 TestGeoDataCopy::TestGeoDataCopy() :
@@ -95,37 +92,20 @@ TestGeoDataCopy::TestGeoDataCopy() :
 {
 }
 
-void TestGeoDataCopy::testCoordinate( GeoDataCoordinates coord, qreal alt, quint8 detail, QString coordtest )
-{
-    QCOMPARE(coord.altitude(), alt);
-    QCOMPARE(coord.detail(), detail);
-    QCOMPARE(coord.toString(), coordtest);
-}
-
 void TestGeoDataCopy::initTestCase()
 {
-    QLocale::setDefault(QLocale::German);
     MarbleDirs::setMarbleDataPath( DATA_PATH );
     MarbleDirs::setMarblePluginPath( PLUGIN_PATH );
-
-    coordString << QString::fromUtf8(" 13\u00B0 42' 38,5\"E,  51\u00B0 01' 24,6\"N" );
-    coordString << QString::fromUtf8(" 14\u00B0 42' 38,5\"E,  52\u00B0 01' 24,6\"N" );
-    coordString << QString::fromUtf8(" 15\u00B0 42' 38,5\"E,  53\u00B0 01' 24,6\"N" );
-
-    testCoordinate(coord1, 123.4, 2, coordString[0]);
-
-    testCoordinate(coord2, 133.4, 3, coordString[1]);
-
-    testCoordinate(coord3, 143.4, 4, coordString[2]);
 }
 
 void TestGeoDataCopy::copyCoordinates()
 {
     GeoDataCoordinates other = coord1;
-    
+
     // make sure that the coordinate contains the right values
-    testCoordinate(other, 123.4, 2, coordString[0]);
-    
+    QCOMPARE(other, coord1);
+    QCOMPARE(other.detail(), coord1.detail());
+
     QVERIFY(coord1 == other);
 }
 
@@ -137,17 +117,19 @@ void TestGeoDataCopy::copyPoint()
     point.setExtrude( true );
 
     // make sure that the coordinate contains the right values
-    testCoordinate(point.coordinates(), 123.4, 2, coordString[0]);
+    QCOMPARE(point.coordinates(), coord1);
+    QCOMPARE(point.coordinates().detail(), coord1.detail());
     QCOMPARE(point.extrude(), true);
 
     GeoDataPoint other = point;
-    
+
     // make sure that the coordinate contains the right values
-    testCoordinate(other.coordinates(), 123.4, 2, coordString[0]);
+    QCOMPARE(other.coordinates(), coord1);
+    QCOMPARE(other.coordinates().detail(), coord1.detail());
     QCOMPARE(other.extrude(), true);
-    
+
     QVERIFY(point.coordinates() == other.coordinates());
-    
+
     point = GeoDataPoint( GeoDataCoordinates(13.7107, 51.0235, 123.4, GeoDataCoordinates::Degree, 17) );
     point.setExtrude(false);
     QCOMPARE(other.coordinates().detail(), quint8(2));
@@ -160,7 +142,6 @@ void TestGeoDataCopy::copyLineString()
 {
     GeoDataLineString lineString;
     lineString.setTessellate(true);
-    
 
     lineString.append(coord1);
     lineString.append(coord2);
@@ -170,8 +151,10 @@ void TestGeoDataCopy::copyLineString()
     GeoDataLineString other = lineString;
     QVERIFY(other.size() == 3);
 
-    testCoordinate(lineString.at(0), 123.4, 2, coordString[0]);
-    testCoordinate(other.at(2), 143.4, 4, coordString[2]);
+    QCOMPARE(lineString.at(0), coord1);
+    QCOMPARE(lineString.at(0).detail(), coord1.detail());
+    QCOMPARE(other.at(2), coord3);
+    QCOMPARE(other.at(2).detail(), coord3.detail());
 
     QVERIFY(other.at(2) == coord3);
     QVERIFY(other.tessellate());
@@ -192,8 +175,10 @@ void TestGeoDataCopy::copyLinearRing()
     GeoDataLinearRing other = linearRing;
     QVERIFY(other.size() == 3);
 
-    testCoordinate(linearRing.at(0), 123.4, 2, coordString[0]);
-    testCoordinate(other.at(2), 143.4, 4, coordString[2]);
+    QCOMPARE(linearRing.at(0), coord1);
+    QCOMPARE(linearRing.at(0).detail(), coord1.detail());
+    QCOMPARE(other.at(2), coord3);
+    QCOMPARE(other.at(2).detail(), coord3.detail());
 
     QVERIFY(other.at(2) == coord3);
     QVERIFY(other.tessellate());
@@ -350,19 +335,25 @@ void TestGeoDataCopy::copyDocument()
     QCOMPARE(document.size(), 3);
     QCOMPARE(other.size(), 3);
 
-    testCoordinate(static_cast<GeoDataPlacemark*>(other.child(0))->coordinate(), 143.4, 4, coordString[2]);
-    testCoordinate(static_cast<GeoDataPlacemark*>(other.child(2))->coordinate(), 123.4, 2, coordString[0]);
+    QCOMPARE(static_cast<GeoDataPlacemark*>(other.child(0))->coordinate(), coord3);
+    QCOMPARE(static_cast<GeoDataPlacemark*>(other.child(0))->coordinate().detail(), coord3.detail());
+    QCOMPARE(static_cast<GeoDataPlacemark*>(other.child(2))->coordinate(), coord1);
+    QCOMPARE(static_cast<GeoDataPlacemark*>(other.child(2))->coordinate().detail(), coord1.detail());
 
     GeoDataFolder *otherFolder = static_cast<GeoDataFolder*>(other.child(1));
-    testCoordinate(static_cast<GeoDataPlacemark*>(otherFolder->child(0))->coordinate(), 123.4, 2, coordString[0]);
-    testCoordinate(static_cast<GeoDataPlacemark*>(otherFolder->child(1))->coordinate(), 133.4, 3, coordString[1]);
-    testCoordinate(static_cast<GeoDataPlacemark*>(otherFolder->child(2))->coordinate(), 143.4, 4, coordString[2]);
+    QCOMPARE(static_cast<GeoDataPlacemark*>(otherFolder->child(0))->coordinate(), coord1);
+    QCOMPARE(static_cast<GeoDataPlacemark*>(otherFolder->child(0))->coordinate().detail(), coord1.detail());
+    QCOMPARE(static_cast<GeoDataPlacemark*>(otherFolder->child(1))->coordinate(), coord2);
+    QCOMPARE(static_cast<GeoDataPlacemark*>(otherFolder->child(1))->coordinate().detail(), coord2.detail());
+    QCOMPARE(static_cast<GeoDataPlacemark*>(otherFolder->child(2))->coordinate(), coord3);
+    QCOMPARE(static_cast<GeoDataPlacemark*>(otherFolder->child(2))->coordinate().detail(), coord3.detail());
 
     other.append(new GeoDataPlacemark(pl1));
 
     QCOMPARE(document.size(), 3);
     QCOMPARE(other.size(), 4);
-    testCoordinate(static_cast<GeoDataPlacemark*>(other.child(3))->coordinate(), 123.4, 2, coordString[0]);
+    QCOMPARE(static_cast<GeoDataPlacemark*>(other.child(3))->coordinate(), coord1);
+    QCOMPARE(static_cast<GeoDataPlacemark*>(other.child(3))->coordinate().detail(), coord1.detail());
 }
 
 void TestGeoDataCopy::copyFolder()
@@ -390,15 +381,19 @@ void TestGeoDataCopy::copyFolder()
     QCOMPARE(other.child(1)->parent(), &other);
     QEXPECT_FAIL("", "FIXME", Continue);
     QCOMPARE(other.child(2)->parent(), &other);
-    testCoordinate(static_cast<GeoDataPlacemark*>(other.child(0))->coordinate(), 123.4, 2, coordString[0]);
-    testCoordinate(static_cast<GeoDataPlacemark*>(other.child(1))->coordinate(), 133.4, 3, coordString[1]);
-    testCoordinate(static_cast<GeoDataPlacemark*>(other.child(2))->coordinate(), 143.4, 4, coordString[2]);
+    QCOMPARE(static_cast<GeoDataPlacemark*>(other.child(0))->coordinate(), coord1);
+    QCOMPARE(static_cast<GeoDataPlacemark*>(other.child(0))->coordinate().detail(), coord1.detail());
+    QCOMPARE(static_cast<GeoDataPlacemark*>(other.child(1))->coordinate(), coord2);
+    QCOMPARE(static_cast<GeoDataPlacemark*>(other.child(1))->coordinate().detail(), coord2.detail());
+    QCOMPARE(static_cast<GeoDataPlacemark*>(other.child(2))->coordinate(), coord3);
+    QCOMPARE(static_cast<GeoDataPlacemark*>(other.child(2))->coordinate().detail(), coord3.detail());
 
     other.append(new GeoDataPlacemark(pl1));
 
     QCOMPARE(folder.size(), 3);
     QCOMPARE(other.size(), 4);
-    testCoordinate(static_cast<GeoDataPlacemark*>(other.child(3))->coordinate(), 123.4, 2, coordString[0]);
+    QCOMPARE(static_cast<GeoDataPlacemark*>(other.child(3))->coordinate(), coord1);
+    QCOMPARE(static_cast<GeoDataPlacemark*>(other.child(3))->coordinate().detail(), coord1.detail());
 }
 
 void TestGeoDataCopy::copyPlacemark()
@@ -407,7 +402,8 @@ void TestGeoDataCopy::copyPlacemark()
     point->setExtrude( true );
 
     // make sure that the coordinate contains the right values
-    testCoordinate(point->coordinates(), 123.4, 2, coordString[0]);
+    QCOMPARE(point->coordinates(), coord1);
+    QCOMPARE(point->coordinates().detail(), coord1.detail());
     QCOMPARE(point->extrude(), true);
 
     GeoDataFolder folder;
@@ -419,8 +415,10 @@ void TestGeoDataCopy::copyPlacemark()
     placemark.setId("281012");
     placemark.setParent(&folder);
 
-    testCoordinate(placemark.coordinate(), 123.4, 2, coordString[0]);
-    testCoordinate(static_cast<GeoDataPoint*>(placemark.geometry())->coordinates(), 123.4, 2, coordString[0]);
+    QCOMPARE(placemark.coordinate(), coord1);
+    QCOMPARE(placemark.coordinate().detail(), coord1.detail());
+    QCOMPARE(static_cast<GeoDataPoint*>(placemark.geometry())->coordinates(), coord1);
+    QCOMPARE(static_cast<GeoDataPoint*>(placemark.geometry())->coordinates().detail(), coord1.detail());
     QCOMPARE(placemark.area(), 12345678.0);
     QCOMPARE(placemark.population(), (qint64)123456789);
     QCOMPARE(placemark.id(), QString("281012"));
@@ -433,8 +431,10 @@ void TestGeoDataCopy::copyPlacemark()
 
         QCOMPARE(other.id(), QString());
         QCOMPARE(other.parent(), static_cast<GeoDataObject *>(0));
-        testCoordinate(other.coordinate(), 123.4, 2, coordString[0]);
-        testCoordinate(static_cast<GeoDataPoint*>(other.geometry())->coordinates(), 123.4, 2, coordString[0]);
+        QCOMPARE(other.coordinate(), coord1);
+        QCOMPARE(other.coordinate().detail(), coord1.detail());
+        QCOMPARE(static_cast<GeoDataPoint*>(other.geometry())->coordinates(), coord1);
+        QCOMPARE(static_cast<GeoDataPoint*>(other.geometry())->coordinates().detail(), coord1.detail());
         QCOMPARE(other.area(), 12345678.0);
         QCOMPARE(other.population(), (qint64)123456789);
         QCOMPARE(other.name(), QString::fromLatin1("Patrick Spendrin"));
@@ -442,8 +442,10 @@ void TestGeoDataCopy::copyPlacemark()
 
         other.setPopulation(987654321);
 
-        testCoordinate(other.coordinate(), 123.4, 2, coordString[0]);
-        testCoordinate(static_cast<GeoDataPoint*>(other.geometry())->coordinates(), 123.4, 2, coordString[0]);
+        QCOMPARE(other.coordinate(), coord1);
+        QCOMPARE(other.coordinate().detail(), coord1.detail());
+        QCOMPARE(static_cast<GeoDataPoint*>(other.geometry())->coordinates(), coord1);
+        QCOMPARE(static_cast<GeoDataPoint*>(other.geometry())->coordinates().detail(), coord1.detail());
         QCOMPARE(other.area(), 12345678.0);
         QCOMPARE(other.population(), (qint64)987654321);
         QCOMPARE(placemark.population(), (qint64)123456789);
@@ -460,8 +462,10 @@ void TestGeoDataCopy::copyPlacemark()
 
         QCOMPARE(other.id(), QString());
         QCOMPARE(other.parent(), static_cast<GeoDataObject *>(0));
-        testCoordinate(other.coordinate(), 123.4, 2, coordString[0]);
-        testCoordinate(static_cast<GeoDataPoint*>(other.geometry())->coordinates(), 123.4, 2, coordString[0]);
+        QCOMPARE(other.coordinate(), coord1);
+        QCOMPARE(other.coordinate().detail(), coord1.detail());
+        QCOMPARE(static_cast<GeoDataPoint*>(other.geometry())->coordinates(), coord1);
+        QCOMPARE(static_cast<GeoDataPoint*>(other.geometry())->coordinates().detail(), coord1.detail());
         QCOMPARE(other.area(), 12345678.0);
         QCOMPARE(other.population(), (qint64)123456789);
         QCOMPARE(other.name(), QString::fromLatin1("Patrick Spendrin"));
@@ -469,8 +473,10 @@ void TestGeoDataCopy::copyPlacemark()
 
         other.setPopulation(987654321);
 
-        testCoordinate(other.coordinate(), 123.4, 2, coordString[0]);
-        testCoordinate(static_cast<GeoDataPoint*>(other.geometry())->coordinates(), 123.4, 2, coordString[0]);
+        QCOMPARE(other.coordinate(), coord1);
+        QCOMPARE(other.coordinate().detail(), coord1.detail());
+        QCOMPARE(static_cast<GeoDataPoint*>(other.geometry())->coordinates(), coord1);
+        QCOMPARE(static_cast<GeoDataPoint*>(other.geometry())->coordinates().detail(), coord1.detail());
         QCOMPARE(other.area(), 12345678.0);
         QCOMPARE(other.population(), (qint64)987654321);
         QCOMPARE(placemark.population(), (qint64)123456789);
