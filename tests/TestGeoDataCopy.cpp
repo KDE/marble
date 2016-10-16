@@ -86,9 +86,6 @@ class TestGeoDataCopy : public QObject
         const GeoDataCoordinates coord2;
         const GeoDataCoordinates coord3;
         QStringList coordString;
-        GeoDataPoint point1;
-        GeoDataPoint point2;
-        GeoDataPoint point3;
 };
 
 TestGeoDataCopy::TestGeoDataCopy() :
@@ -120,15 +117,6 @@ void TestGeoDataCopy::initTestCase()
     testCoordinate(coord2, 133.4, 3, coordString[1]);
 
     testCoordinate(coord3, 143.4, 4, coordString[2]);
-    
-    point1.setCoordinates( GeoDataCoordinates(13.7107, 51.0235, 123.4, GeoDataCoordinates::Degree, 2) );
-    testCoordinate(point1.coordinates(), 123.4, 2, coordString[0]);
-    
-    point2.setCoordinates( GeoDataCoordinates(14.7107, 52.0235, 133.4, GeoDataCoordinates::Degree, 3) );
-    testCoordinate(point2.coordinates(), 133.4, 3, coordString[1]);
-
-    point3.setCoordinates( GeoDataCoordinates(15.7107, 53.0235, 143.4, GeoDataCoordinates::Degree, 4) );
-    testCoordinate(point3.coordinates(), 143.4, 4, coordString[2]);
 }
 
 void TestGeoDataCopy::copyCoordinates()
@@ -145,7 +133,7 @@ void TestGeoDataCopy::copyPoint()
 {
     GeoDataPoint point;
 
-    point.setCoordinates( GeoDataCoordinates(13.7107, 51.0235, 123.4, GeoDataCoordinates::Degree, 2) );
+    point.setCoordinates(coord1);
     point.setExtrude( true );
 
     // make sure that the coordinate contains the right values
@@ -343,9 +331,9 @@ void TestGeoDataCopy::copyDocument()
     GeoDataPlacemark pl2;
     GeoDataPlacemark pl3;
 
-    pl1.setCoordinate(point1.coordinates());
-    pl2.setCoordinate(point2.coordinates());
-    pl3.setCoordinate(point3.coordinates());
+    pl1.setCoordinate(coord1);
+    pl2.setCoordinate(coord2);
+    pl3.setCoordinate(coord3);
 
     GeoDataFolder *folder = new GeoDataFolder;
     folder->append(new GeoDataPlacemark(pl1));
@@ -380,9 +368,9 @@ void TestGeoDataCopy::copyDocument()
 void TestGeoDataCopy::copyFolder()
 {
     GeoDataPlacemark pl1, pl2, pl3;
-    pl1.setCoordinate(point1.coordinates());
-    pl2.setCoordinate(point2.coordinates());
-    pl3.setCoordinate(point3.coordinates());
+    pl1.setCoordinate(coord1);
+    pl2.setCoordinate(coord2);
+    pl3.setCoordinate(coord3);
 
     GeoDataFolder folder;
     folder.append(new GeoDataPlacemark(pl1));
@@ -415,7 +403,7 @@ void TestGeoDataCopy::copyFolder()
 
 void TestGeoDataCopy::copyPlacemark()
 {
-    GeoDataPoint *point = new GeoDataPoint( GeoDataCoordinates(13.7107, 51.0235, 123.4, GeoDataCoordinates::Degree, 2) );
+    GeoDataPoint *point = new GeoDataPoint(coord1);
     point->setExtrude( true );
 
     // make sure that the coordinate contains the right values
