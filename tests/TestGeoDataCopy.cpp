@@ -48,6 +48,10 @@ namespace Marble
 class TestGeoDataCopy : public QObject
 {
     Q_OBJECT
+
+    public:
+        TestGeoDataCopy();
+
     private:
         void testCoordinate(GeoDataCoordinates coord, qreal alt, quint8 detail, QString coordtest );
     private Q_SLOTS:
@@ -76,15 +80,23 @@ class TestGeoDataCopy : public QObject
         void copyLineStyle();
         void copyPolyStyle();
         void copyStyleMap();
+
     private:
+        const GeoDataCoordinates coord1;
+        const GeoDataCoordinates coord2;
+        const GeoDataCoordinates coord3;
         QStringList coordString;
-        GeoDataCoordinates coord1;
-        GeoDataCoordinates coord2;
-        GeoDataCoordinates coord3;
         GeoDataPoint point1;
         GeoDataPoint point2;
         GeoDataPoint point3;
 };
+
+TestGeoDataCopy::TestGeoDataCopy() :
+    coord1(13.7107, 51.0235, 123.4, GeoDataCoordinates::Degree, 2),
+    coord2(14.7107, 52.0235, 133.4, GeoDataCoordinates::Degree, 3),
+    coord3(15.7107, 53.0235, 143.4, GeoDataCoordinates::Degree, 4)
+{
+}
 
 void TestGeoDataCopy::testCoordinate( GeoDataCoordinates coord, qreal alt, quint8 detail, QString coordtest )
 {
@@ -103,15 +115,10 @@ void TestGeoDataCopy::initTestCase()
     coordString << QString::fromUtf8(" 14\u00B0 42' 38,5\"E,  52\u00B0 01' 24,6\"N" );
     coordString << QString::fromUtf8(" 15\u00B0 42' 38,5\"E,  53\u00B0 01' 24,6\"N" );
 
-    coord1.set(13.7107,51.0235, 123.4, GeoDataCoordinates::Degree);
-    coord1.setDetail(2);
     testCoordinate(coord1, 123.4, 2, coordString[0]);
 
-    coord2 = GeoDataCoordinates(14.7107, 52.0235, 133.4, GeoDataCoordinates::Degree, 3);
     testCoordinate(coord2, 133.4, 3, coordString[1]);
 
-    coord3.set(15.7107,53.0235, 143.4, GeoDataCoordinates::Degree);
-    coord3.setDetail(4);
     testCoordinate(coord3, 143.4, 4, coordString[2]);
     
     point1.setCoordinates( GeoDataCoordinates(13.7107, 51.0235, 123.4, GeoDataCoordinates::Degree, 2) );
