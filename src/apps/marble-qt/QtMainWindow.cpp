@@ -949,16 +949,16 @@ void MainWindow::showDateTime()
 void MainWindow::updateStatusBar()
 {
     if ( m_positionLabel )
-        m_positionLabel->setText(tr("Position:") + QLatin1Char(' ') + m_position);
+        m_positionLabel->setText(tr("Position: %1").arg(m_position));
 
     if ( m_distanceLabel )
-        m_distanceLabel->setText(tr("Altitude:") + QLatin1Char(' ') + m_distance);
+        m_distanceLabel->setText(tr("Altitude: %1").arg(m_distance));
 
     if ( m_zoomLabel )
-        m_zoomLabel->setText(tr("Zoom:") + QLatin1Char(' ') + m_zoom);
+        m_zoomLabel->setText(tr("Zoom: %1").arg(m_zoom));
 
     if ( m_clockLabel )
-        m_clockLabel->setText(tr("Time:") + QLatin1Char(' ') + m_clock);
+        m_clockLabel->setText(tr("Time: %1").arg(m_clock));
 
     switch ( m_configDialog->angleUnit() ) {
     case DMSDegree:
@@ -1026,7 +1026,7 @@ void MainWindow::setupStatusBar()
     m_positionLabel = new QLabel( );
     m_positionLabel->setIndent( 5 );
     // UTM syntax is used in the template string, as it is longer than the lon/lat one
-    QString templatePositionString = tr("Position:") + QLatin1String(" 00Z 000000.00 m E, 00000000.00 m N_");
+    QString templatePositionString = tr("Position: %1").arg(QLatin1String(" 00Z 000000.00 m E, 00000000.00 m N_"));
     int maxPositionWidth = fontMetrics().boundingRect(templatePositionString).width()
                             + 2 * m_positionLabel->margin() + 2 * m_positionLabel->indent();
     m_positionLabel->setFixedWidth( maxPositionWidth );
@@ -1034,7 +1034,7 @@ void MainWindow::setupStatusBar()
 
     m_distanceLabel = new QLabel( );
     m_distanceLabel->setIndent( 5 );
-    QString templateDistanceString = tr("Altitude:") + QLatin1String(" 00.000,0 mu");
+    QString templateDistanceString = tr("Altitude: %1").arg(QLatin1String(" 00.000,0 mu"));
     int maxDistanceWidth = fontMetrics().boundingRect(templateDistanceString).width()
                             + 2 * m_distanceLabel->margin() + 2 * m_distanceLabel->indent();
     m_distanceLabel->setFixedWidth( maxDistanceWidth );
@@ -1042,7 +1042,7 @@ void MainWindow::setupStatusBar()
 
     m_zoomLabel = new QLabel( );
     m_zoomLabel->setIndent( 5 );
-    QString templateZoomString = tr("Zoom:") + QLatin1String(" 00");
+    QString templateZoomString = tr("Zoom: %1").arg(QLatin1String(" 00"));
     int maxZoomWidth = fontMetrics().boundingRect(templateZoomString).width()
                             + 2 * m_zoomLabel->margin() + 2 * m_zoomLabel->indent();
     m_zoomLabel->setFixedWidth( maxZoomWidth );
@@ -1050,7 +1050,7 @@ void MainWindow::setupStatusBar()
 
     m_clockLabel = new QLabel( );
     m_clockLabel->setIndent( 5 );
-    QString templateDateTimeString = tr("Time:") + QLatin1Char(' ') + QLocale().toString(QDateTime::fromString( "01:01:1000", "dd:mm:yyyy"), QLocale::ShortFormat);
+    QString templateDateTimeString = tr("Time: %1").arg(QLocale().toString(QDateTime::fromString( "01:01:1000", "dd:mm:yyyy"), QLocale::ShortFormat));
     int maxDateTimeWidth = fontMetrics().boundingRect( templateDateTimeString ).width()
                             + 2 * m_clockLabel->margin() + 2 * m_clockLabel->indent();
     m_clockLabel->setFixedWidth( maxDateTimeWidth );
