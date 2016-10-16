@@ -15,7 +15,7 @@
 #define MARBLE_PLUGININTERFACE_H
 
 #include <QList>
-#include <QObject> // for QObject::tr()
+#include <QCoreApplication> // for Q_DECLARE_TR_FUNCTIONS
 #include <QString>
 #include <QtPlugin>
 
@@ -28,7 +28,9 @@ namespace Marble
 
 struct MARBLE_EXPORT PluginAuthor
 {
-    PluginAuthor( const QString &name_, const QString &email_, const QString &task_ = QObject::tr( "Developer" ) ) :
+    Q_DECLARE_TR_FUNCTIONS(PluginAuthor)
+public:
+    PluginAuthor( const QString &name_, const QString &email_, const QString &task_ = PluginAuthor::tr( "Developer" ) ) :
         name( name_ ),
         task( task_ ),
         email( email_ )

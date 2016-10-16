@@ -44,5 +44,6 @@ $EXTRACT_TR_STRINGS \
     src/apps/marble-ui/ControlView.cpp \
     `find src/plugins -name '*.cpp' -o -name '*.ui' | grep -v '/test/'` \
     `find src/lib     -name '*.cpp' -o -name '*.ui'` \
+    src/lib/marble/PluginInterface.h \
     src/lib/marble/global.h src/lib/marble/MarbleGlobal.h rc.cpp \
     -o $podir/marble_qt.pot
