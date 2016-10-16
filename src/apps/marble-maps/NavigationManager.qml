@@ -20,17 +20,16 @@ Item {
     property var marbleItem: null
     property var tts: null
     property alias snappedPositionMarkerScreenPosition: navigation.screenPosition
-    property bool guidanceMode: false
     property alias screenAccuracy: navigation.screenAccuracy
     property alias deviated: navigation.deviated
 
-    onGuidanceModeChanged: {
-        if (guidanceMode) {
+    onVisibleChanged: {
+        if (visible) {
             marbleItem.setZoomToMaximumLevel();
             marbleItem.centerOnCurrentPosition();
         }
 
-        navigation.guidanceModeEnabled = guidanceMode;
+        navigation.guidanceModeEnabled = visible;
     }
 
     Settings {
@@ -77,7 +76,7 @@ Item {
         marbleQuickItem: marbleItem
 
         onVoiceNavigationAnnouncementChanged: {
-            if (root.guidanceMode && !muteButton.muted) {
+            if (root.visible && !muteButton.muted) {
                 textToSpeechClient.readText(voiceNavigationAnnouncement);
             }
         }

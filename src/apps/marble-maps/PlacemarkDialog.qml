@@ -19,8 +19,7 @@ Item {
     id: root
 
     property var placemark: null
-    property bool condensed: true
-    property string actionIconSource: routeEditor.currentProfileIcon
+    property string actionIconSource: routeEditor.item.currentProfileIcon
     property alias map: bookmarks.map
 
     height: placemark === null ? 0 : Screen.pixelDensity * 6 +
@@ -31,16 +30,15 @@ Item {
         routing.addViaByPlacemarkAtIndex(routing.waypointCount(), placemark)
         routing.clearSearchResultPlacemarks()
         placemark = null
-        itemStack.state = "routing"
+        dialogContainer.currentIndex = dialogContainer.routing
     }
 
     onPlacemarkChanged: {
         if (placemark) {
             bookmarkButton.bookmark = bookmarks.isBookmark(placemark.longitude, placemark.latitude)
-            itemStack.state = "place"
+            dialogContainer.currentIndex = dialogContainer.place
         } else {
-            condensed = true
-            itemStack.state = ""
+            dialogContainer.currentIndex = dialogContainer.none
         }
     }
 
@@ -52,13 +50,6 @@ Item {
     Rectangle {
         anchors.fill: parent
         color: palette.base
-    }
-
-    MouseArea {
-        anchors.fill: parent
-        onClicked: {
-            condensed = !condensed
-        }
     }
 
     Bookmarks {
@@ -87,7 +78,6 @@ Item {
             width: parent.width
             visible: text.length > 0
             text: placemark === null ? "" : placemark.description
-            maximumLineCount: condensed ? 4 : undefined
         }
 
         IconText {
@@ -110,7 +100,7 @@ Item {
 
         IconText {
             width: parent.width
-            visible: text.length > 0 && (!condensed || name.text === "")
+            visible: text.length > 0
             text: placemark === null ? "" : placemark.address
             maximumLineCount: 4
         }
@@ -149,7 +139,7 @@ Item {
 
         IconText {
             width: parent.width
-            visible: text.length > 0 && (!condensed || name.text === "")
+            visible: text.length > 0
             text: placemark === null ? "" : placemark.coordinates
             icon: "qrc:/material/place.svg"
         }
@@ -158,7 +148,7 @@ Item {
     Image {
         id: bookmarkButton
         anchors.right: parent.right
-        anchors.bottom: parent.bottom
+        anchors.top: parent.top
         anchors.margins: Screen.pixelDensity * 2
         visible: root.height > 0
 

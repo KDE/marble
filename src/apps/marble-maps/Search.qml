@@ -9,7 +9,7 @@
 //
 
 import QtQuick 2.3
-import QtQuick.Controls 1.3
+import QtQuick.Controls 2.0
 import QtQuick.Window 2.2
 
 import org.kde.marble 0.20
@@ -31,9 +31,14 @@ Item {
         }
     }
 
-    SystemPalette{
+    SystemPalette {
         id: palette
         colorGroup: SystemPalette.Active
+    }
+
+    SystemPalette {
+        id: paletteDisabled
+        colorGroup: SystemPalette.Disabled
     }
 
     SearchResults {
@@ -53,73 +58,141 @@ Item {
             if (routingManager) {
                 routingManager.addSearchResultAsPlacemark(backend.selectedPlacemark);
             }
-            placemarkDialog.placemark = backend.selectedPlacemark;
+            placemarkDialog.item.placemark = backend.selectedPlacemark;
         }
     }
 
     Rectangle {
         id: background
-        visible: searchField.hasFocus && searchField.query === "" && bookmarks.model.count > 0
+        visible: searchField.hasFocus && searchField.query === ""
         anchors.top: searchField.bottom
         anchors.left: searchField.left
         width: searchField.width
-        height: 2 * background.itemSpacing + (delegateHeight) * Math.min(4, bookmarksView.model.count)
+        height: childrenRect.height + 2 * itemSpacing
         color: palette.base
 
         property int delegateHeight: 0
+
         property double itemSpacing: Screen.pixelDensity * 1
 
-        ListView {
-            id: bookmarksView
-            anchors.fill: parent
+        Column {
+            anchors.top: parent.top
+            anchors.topMargin: background.itemSpacing
+            anchors.left: parent.left
+            anchors.right: parent.right
             anchors.margins: background.itemSpacing
-            clip: true
+            spacing: background.itemSpacing
 
-            model: bookmarks.model
-            delegate: Row {
-                spacing: background.itemSpacing
+            ListView {
+                id: bookmarksView
+                anchors.left: parent.left
+                anchors.right: parent.right
+                height: background.delegateHeight * Math.min(6, model.count)
+                clip: true
+                ScrollIndicator.vertical: ScrollIndicator { }
 
-                Image {
-                    anchors.verticalCenter: parent.verticalCenter
-                    source: iconPath.substr(0,1) === '/' ? "file://" + iconPath : iconPath
-                    width: Screen.pixelDensity * 4
-                    height: width
-                    sourceSize.width: width
-                    sourceSize.height: height
-                }
+                model: bookmarks.model
+                delegate: Row {
+                    width: bookmarksView.width
+                    spacing: background.itemSpacing
 
-                Text {
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.leftMargin: Screen.pixelDensity * 2
-                    text: display
-                    font.pointSize: 18
-                    color: palette.text
-                    elide: Text.ElideMiddle
+                    Image {
+                        id: bookmarkIcon
+                        anchors.verticalCenter: parent.verticalCenter
+                        source: iconPath.substr(0,1) === '/' ? "file://" + iconPath : iconPath
+                        width: Screen.pixelDensity * 4
+                        height: width
+                        sourceSize.width: width
+                        sourceSize.height: height
+                    }
 
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: {
-                            bookmarksView.currentIndex = index
-                            placemarkDialog.focus = true
-                            placemarkDialog.placemark = bookmarks.placemark(index);
-                            marbleMaps.centerOn(placemarkDialog.placemark.longitude, placemarkDialog.placemark.latitude)
+                    Text {
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.leftMargin: Screen.pixelDensity * 2
+                        width: bookmarksView.width - bookmarksView.spacing - bookmarkIcon.width
+                        text: display
+                        font.pointSize: 18
+                        color: palette.text
+                        elide: Text.ElideMiddle
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: {
+                                bookmarksView.currentIndex = index
+                                dialogContainer.focus = true
+                                placemarkDialog.item.placemark = bookmarks.placemark(index);
+                                marbleMaps.centerOn(placemarkDialog.item.placemark.longitude, placemarkDialog.item.placemark.latitude)
+                            }
+                        }
+                    }
+
+                    onHeightChanged: {
+                        if( background.delegateHeight !== height ) {
+                            background.delegateHeight = height;
                         }
                     }
                 }
+            }
 
-                Component.onCompleted: {
-                    if( background.delegateHeight !== height ) {
-                        background.delegateHeight = height;
+            Row {
+                visible: bookmarksView.model.count === 0
+                width: parent.width
+
+                Text {
+                    anchors.bottom: parent.bottom
+                    width: 0.8 * parent.width
+                    font.pointSize: 18
+                    color: paletteDisabled.text
+                    text: qsTr("Your bookmarks will appear here.")
+                    wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+                    elide: Text.ElideRight
+                }
+
+                Image {
+                    anchors.bottom: parent.bottom
+                    width: 0.2 * parent.width
+                    fillMode: Image.PreserveAspectFit
+                    source: "qrc:/konqi/books.png"
+                }
+            }
+
+            Rectangle {
+                height: 1
+                width: parent.width
+                color: "gray"
+            }
+
+            Text {
+                font.pointSize: 18
+                color: palette.text
+                width: parent.width
+                text: qsTr("About Marble Maps…")
+                elide: Text.ElideRight
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        dialogContainer.currentIndex = dialogContainer.about
+                        dialogContainer.focus = true
                     }
                 }
             }
-        }
 
-        ScrollBar {
-            flickableItem: bookmarksView
+            /*
+            Text {
+                font.pointSize: 18
+                color: palette.text
+                text: qsTr("Settings")
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        dialogContainer.currentIndex = dialogContainer.settings
+                        dialogContainer.focus = true
+                    }
+                }
+            }
+            */
         }
     }
-
 
     SearchBackend {
         id: backend
