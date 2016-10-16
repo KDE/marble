@@ -570,7 +570,7 @@ namespace Marble
 
         d->m_presenter.centerOn(coordinates, true);
         if (d->m_presenter.zoom() < 3000) {
-            d->m_presenter.setZoom(3250);
+            d->m_presenter.setZoom(3500);
         }
     }
 
