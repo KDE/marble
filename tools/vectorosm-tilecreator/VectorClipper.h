@@ -37,6 +37,7 @@ private:
     GeoDataDocument* clipToBaseClipper(const GeoDataLatLonBox &box);
     QVector<GeoDataPlacemark*> potentialIntersections(const GeoDataLatLonBox &box) const;
     ClipperLib::Path clipPath(const GeoDataLatLonBox &box) const;
+    bool canBeArea(GeoDataPlacemark::GeoDataVisualCategory visualCategory) const;
 
     template<class T>
     void clipString(const GeoDataPlacemark *placemark, const ClipperLib::Path &tileBoundary, GeoDataDocument* document)
@@ -50,7 +51,7 @@ private:
 
         Clipper clipper;
         clipper.PreserveCollinear(true);
-        bool const isClosed = ring->isClosed();
+        bool const isClosed = ring->isClosed() && canBeArea(placemark->visualCategory());
         clipper.AddPath(tileBoundary, ptClip, true);
         clipper.AddPath(path, ptSubject, isClosed);
         PolyTree tree;
