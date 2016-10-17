@@ -281,6 +281,25 @@ ClipperLib::Path VectorClipper::clipPath(const GeoDataLatLonBox &box) const
     return path;
 }
 
+bool VectorClipper::canBeArea(GeoDataPlacemark::GeoDataVisualCategory visualCategory) const
+{
+    if (visualCategory >= GeoDataPlacemark::HighwaySteps && visualCategory <= GeoDataPlacemark::HighwayMotorway) {
+        return false;
+    }
+    if (visualCategory >= GeoDataPlacemark::RailwayRail && visualCategory <= GeoDataPlacemark::RailwayFunicular) {
+        return false;
+    }
+    if (visualCategory >= GeoDataPlacemark::AdminLevel1 && visualCategory <= GeoDataPlacemark::AdminLevel11) {
+        return false;
+    }
+
+    if (visualCategory == GeoDataPlacemark::BoundaryMaritime || visualCategory == GeoDataPlacemark::InternationalDateLine) {
+        return false;
+    }
+
+    return true;
+}
+
 void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const ClipperLib::Path &tileBoundary, GeoDataDocument *document)
 {
     const GeoDataPolygon* polygon = static_cast<const GeoDataPolygon*>(placemark->geometry());
