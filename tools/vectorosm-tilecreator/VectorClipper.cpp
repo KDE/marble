@@ -255,25 +255,29 @@ ClipperLib::Path VectorClipper::clipPath(const GeoDataLatLonBox &box) const
     Path path;
     int const steps = 20;
     double x = box.west() * m_scale;
-    double const horizontalStep = (box.east() * m_scale - x) / (steps-1);
+    double const horizontalStep = (box.east() * m_scale - x) / steps;
     double y = box.north() * m_scale;
-    double const verticalStep = (box.south() * m_scale - y) / (steps-1);
+    double const verticalStep = (box.south() * m_scale - y) / steps;
     for (int i=0; i<steps; ++i) {
         path << IntPoint(qRound64(x), qRound64(y));
         x += horizontalStep;
     }
+    path << IntPoint(qRound64(box.east() * m_scale), qRound64(box.north() * m_scale));
     for (int i=0; i<steps; ++i) {
         path << IntPoint(qRound64(x), qRound64(y));
         y += verticalStep;
     }
+    path << IntPoint(qRound64(box.east() * m_scale), qRound64(box.south() * m_scale));
     for (int i=0; i<steps; ++i) {
         path << IntPoint(qRound64(x), qRound64(y));
         x -= horizontalStep;
     }
+    path << IntPoint(qRound64(box.west() * m_scale), qRound64(box.south() * m_scale));
     for (int i=0; i<steps; ++i) {
         path << IntPoint(qRound64(x), qRound64(y));
         y -= verticalStep;
     }
+    path << IntPoint(qRound64(box.west() * m_scale), qRound64(box.north() * m_scale));
     return path;
 }
 
