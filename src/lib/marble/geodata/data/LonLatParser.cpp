@@ -49,13 +49,17 @@ void LonLatParser::initAll()
     const QLatin1String placeholder = QLatin1String("*");
     const QString separator = QStringLiteral("|");
 
-    getLocaleList(m_northLocale, GeoDataCoordinates::tr("*", "North direction terms, see http://techbase.kde.org/Projects/Marble/GeoDataCoordinatesTranslation"),
+    //: See https://techbase.kde.org/Marble/GeoDataCoordinatesTranslation#Direction_terms
+    getLocaleList(m_northLocale, GeoDataCoordinates::tr("*", "North direction terms"),
                   placeholder, separator);
-    getLocaleList(m_eastLocale, GeoDataCoordinates::tr("*", "East direction terms, see http://techbase.kde.org/Projects/Marble/GeoDataCoordinatesTranslation"),
+    //: See https://techbase.kde.org/Marble/GeoDataCoordinatesTranslation#Direction_terms
+    getLocaleList(m_eastLocale, GeoDataCoordinates::tr("*", "East direction terms"),
                   placeholder, separator);
-    getLocaleList(m_southLocale, GeoDataCoordinates::tr("*", "South direction terms, see http://techbase.kde.org/Projects/Marble/GeoDataCoordinatesTranslation"),
+    //: See https://techbase.kde.org/Marble/GeoDataCoordinatesTranslation#Direction_terms
+    getLocaleList(m_southLocale, GeoDataCoordinates::tr("*", "South direction terms"),
                   placeholder, separator);
-    getLocaleList(m_westLocale, GeoDataCoordinates::tr("*", "West direction terms, see http://techbase.kde.org/Projects/Marble/GeoDataCoordinatesTranslation"),
+    //: See https://techbase.kde.org/Marble/GeoDataCoordinatesTranslation#Direction_terms
+    getLocaleList(m_westLocale, GeoDataCoordinates::tr("*", "West direction terms"),
                   placeholder, separator);
 
     // use a set to remove duplicates
@@ -85,11 +89,14 @@ void LonLatParser::initAll()
         QLatin1Char('(') + fullNamesExp + QLatin1Char('[') + simpleLetters + QLatin1String("])");
 
     // expressions for symbols of degree, minutes and seconds
-    getLocaleList(m_degreeLocale, GeoDataCoordinates::tr("*", "Degree symbol terms, see http://techbase.kde.org/Projects/Marble/GeoDataCoordinatesTranslation"),
+    //: See https://techbase.kde.org/Marble/GeoDataCoordinatesTranslation#Coordinate_symbols
+    getLocaleList(m_degreeLocale, GeoDataCoordinates::tr("*", "Degree symbol terms"),
                   placeholder, separator);
-    getLocaleList(m_minutesLocale, GeoDataCoordinates::tr("*", "Minutes symbol terms, see http://techbase.kde.org/Projects/Marble/GeoDataCoordinatesTranslation"),
+    //: See https://techbase.kde.org/Marble/GeoDataCoordinatesTranslation#Coordinate_symbols
+    getLocaleList(m_minutesLocale, GeoDataCoordinates::tr("*", "Minutes symbol terms"),
                   placeholder, separator);
-    getLocaleList(m_secondsLocale, GeoDataCoordinates::tr("*", "Seconds symbol terms, see http://techbase.kde.org/Projects/Marble/GeoDataCoordinatesTranslation"),
+    //: See https://techbase.kde.org/Marble/GeoDataCoordinatesTranslation#Coordinate_symbols
+    getLocaleList(m_secondsLocale, GeoDataCoordinates::tr("*", "Seconds symbol terms"),
                   placeholder, separator);
 
     // Used unicode chars:
