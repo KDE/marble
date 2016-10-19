@@ -10,7 +10,7 @@ for fname in  `find data/maps -iname \*.dgml`; do
     | sed 's/\"/\\\"/g' \
     | sed 's/<!\[CDATA\[\(.*\)\]\]>/\1/' \
     | sed "s/\\([^:]*\\):\\([^:]*\\):.*<$field>\(.*\)<\/$field>.*/\
-           \/\/: file \1 line \2\n\
+           \/\/: file \1:\2\n\
            QCoreApplication::translate(\"DGML\", \"\3\");\
            /i" \
     >> rc.cpp
