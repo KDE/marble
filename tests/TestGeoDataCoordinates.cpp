@@ -984,19 +984,19 @@ QString FromStringRegExpTranslator::translate(const char* context, const char* s
     if (qstrcmp(sourceText, "*") != 0 )
         return QString();
 
-    if (qstrcmp(disambiguation, "North direction terms, see http://techbase.kde.org/Projects/Marble/GeoDataCoordinatesTranslation") == 0 )
+    if (qstrcmp(disambiguation, "North direction terms") == 0 )
         return north;
-    if (qstrcmp(disambiguation, "South direction terms, see http://techbase.kde.org/Projects/Marble/GeoDataCoordinatesTranslation") == 0 )
+    if (qstrcmp(disambiguation, "South direction terms") == 0 )
         return south;
-    if (qstrcmp(disambiguation, "East direction terms, see http://techbase.kde.org/Projects/Marble/GeoDataCoordinatesTranslation") == 0 )
+    if (qstrcmp(disambiguation, "East direction terms") == 0 )
         return east;
-    if (qstrcmp(disambiguation, "West direction terms, see http://techbase.kde.org/Projects/Marble/GeoDataCoordinatesTranslation") == 0 )
+    if (qstrcmp(disambiguation, "West direction terms") == 0 )
         return west;
-    if (qstrcmp(disambiguation, "Degree symbol terms, see http://techbase.kde.org/Projects/Marble/GeoDataCoordinatesTranslation") == 0 )
+    if (qstrcmp(disambiguation, "Degree symbol terms") == 0 )
         return degree;
-    if (qstrcmp(disambiguation, "Minutes symbol terms, see http://techbase.kde.org/Projects/Marble/GeoDataCoordinatesTranslation") == 0 )
+    if (qstrcmp(disambiguation, "Minutes symbol terms") == 0 )
         return minutes;
-    if (qstrcmp(disambiguation, "Seconds symbol terms, see http://techbase.kde.org/Projects/Marble/GeoDataCoordinatesTranslation") == 0 )
+    if (qstrcmp(disambiguation, "Seconds symbol terms") == 0 )
         return seconds;
 
     return QString();
