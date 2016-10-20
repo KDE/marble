@@ -690,7 +690,7 @@ void MarbleWidgetPopupMenu::slotInfoDialog()
             isSky = d->m_widget->model()->mapTheme()->head()->target() == QLatin1String("sky");
         }
 
-        popup->setSize(QSizeF(400, 400));
+        popup->setSize(QSizeF(420, 420));
 
         if (hasOsmData){
             d->setupDialogOsm( popup, placemark );
