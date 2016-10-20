@@ -186,7 +186,7 @@ void PhotoPluginItem::openBrowser()
     if ( m_marbleWidget ) {
         PopupLayer* popup = m_marbleWidget->popupLayer();
         popup->setCoordinates( coordinate(), Qt::AlignRight | Qt::AlignVCenter );
-        popup->setSize( QSizeF( 700, 450 ) );
+        popup->setSize(QSizeF(720, 470));
         popup->setUrl(QUrl(QLatin1String("http://m.flickr.com/photos/") + owner() + QLatin1Char('/') + id() + QLatin1Char('/')));
         popup->popup();
     } else {

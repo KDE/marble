@@ -170,7 +170,7 @@ void WikipediaItem::openBrowser( )
     if ( m_marbleWidget ) {
         PopupLayer* popup = m_marbleWidget->popupLayer();
         popup->setCoordinates( coordinate(), Qt::AlignRight | Qt::AlignVCenter );
-        popup->setSize( QSizeF( 500, 550 ) );
+        popup->setSize(QSizeF(520, 570));
         popup->setUrl( url() );
         popup->popup();
     } else {
