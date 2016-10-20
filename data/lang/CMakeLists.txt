@@ -1,50 +1,66 @@
-SET (TARGET merge_ts_po)
-PROJECT (${TARGET})
+# custom translation catalog , for creation of bundled binary packages
+# TODO: disable for builds in normal linux distri builds, to not confuse people
 
-include_directories(
- ${CMAKE_CURRENT_SOURCE_DIR}
- ${CMAKE_CURRENT_BINARY_DIR}
-)
 
-set( ${TARGET}_SRC merge_ts_po.cpp )
-add_executable( ${TARGET} ${${TARGET}_SRC} )
+# Find Qt translation tools
+find_package(Qt5LinguistTools CONFIG)
 
-target_link_libraries( ${TARGET} Qt5::Core )
+# enable target in any case
+add_custom_target(bundle_translations)
 
-# MARBLE_WRAP_PO(qmfiles pofile1 pofile2 ... )
-MACRO(MARBLE_WRAP_PO qmfiles)
-  FILE(GLOB_RECURSE all_sources RELATIVE "${CMAKE_SOURCE_DIR}/src/" "${CMAKE_SOURCE_DIR}/src/*.cpp" "${CMAKE_SOURCE_DIR}/src/*.h" "${CMAKE_SOURCE_DIR}/src/*.ui")
-  SET(tstemplate ${CMAKE_CURRENT_BINARY_DIR}/template.ts)
-  ADD_CUSTOM_COMMAND(OUTPUT ${tstemplate}
-    COMMAND ${QT_LUPDATE_EXECUTABLE}
-    ARGS ${all_sources} -ts ${tstemplate}
-    WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}/src"
-  )
-  FOREACH (pofile ${ARGN})
-    GET_FILENAME_COMPONENT(pofile ${pofile} ABSOLUTE)
-    GET_FILENAME_COMPONENT(basename ${pofile} NAME_WE)
-    SET(tsfile "${CMAKE_CURRENT_BINARY_DIR}/${basename}.ts")
-    SET(qmfile "${CMAKE_CURRENT_BINARY_DIR}/${basename}.qm")
-    ADD_CUSTOM_COMMAND(OUTPUT ${tsfile}
-      COMMAND ${CMAKE_CURRENT_BINARY_DIR}/merge_ts_po
-      ARGS ${tstemplate} ${pofile} > ${tsfile}
-      OUTPUT ${qmfile}
-      COMMAND ${QT_LRELEASE_EXECUTABLE}
-      ARGS -silent ${tsfile} -qm ${qmfile}
-      DEPENDS ${TARGET} ${tstemplate} ${pofile}
+if(NOT Qt5LinguistTools_FOUND)
+    return()
+endif()
+
+
+if(TARGET Qt5::lconvert)
+    set(lconvert_executable Qt5::lconvert)
+else()
+    # Qt < 5.3.1 does not define Qt5::lconvert
+    get_target_property(lrelease_location Qt5::lrelease LOCATION)
+    get_filename_component(lrelease_path ${lrelease_location} PATH)
+    find_program(lconvert_executable
+        NAMES lconvert-qt5 lconvert
+        PATHS ${lrelease_path}
+        NO_DEFAULT_PATH
     )
-    SET(${qmfiles} ${${qmfiles}} "${qmfile}")
-  ENDFOREACH(pofile)
-ENDMACRO(MARBLE_WRAP_PO)
+endif()
 
+function(marble_process_po_files_as_qm lang po_file)
+    # Create commands to turn po files into qm files
+    get_filename_component(po_file ${po_file} ABSOLUTE)
+    get_filename_component(filename_base ${po_file} NAME_WE)
 
-FILE(GLOB LANG_SRC "*.po")
+    # Include ${lang} in build dir because we might be called multiple times
+    # with the same ${filename_base}
+    set(build_dir ${CMAKE_CURRENT_BINARY_DIR}/locale/${lang})
+    set(ts_file ${build_dir}/${filename_base}.ts)
+    set(qm_file ${build_dir}/${filename_base}.qm)
 
-# Create our translation files.
-MARBLE_WRAP_PO(LANG_FILES ${LANG_SRC})
+    file(MAKE_DIRECTORY ${build_dir})
 
-ADD_CUSTOM_TARGET(translations ALL
-  DEPENDS ${LANG_FILES}
-)
+    # lconvert from .po to .ts, then lrelease from .ts to .qm.
+    add_custom_command(OUTPUT ${qm_file}
+        COMMAND ${lconvert_executable}
+            ARGS -i ${po_file} -o ${ts_file} -target-language ${lang}
+        COMMAND Qt5::lrelease
+            ARGS -removeidentical -nounfinished -silent ${ts_file} -qm ${qm_file}
+        DEPENDS ${po_file}
+    )
+    install(
+        FILES ${qm_file}
+        DESTINATION ${data_dir}/locale/${lang}
+        OPTIONAL # if not build, ignore it
+    )
 
-install(FILES ${LANG_FILES} DESTINATION ${MARBLE_DATA_INSTALL_PATH}/lang)
+    set(target_name translation_${lang}_${filename_base})
+    add_custom_target(${target_name} DEPENDS ${qm_file})
+    add_dependencies(bundle_translations ${target_name})
+endfunction()
+
+file(GLOB po_files "po/*/*.po")
+foreach(po_file ${po_files})
+    get_filename_component(po_dir ${po_file} DIRECTORY)
+    get_filename_component(lang ${po_dir} NAME)
+    marble_process_po_files_as_qm(${lang} ${po_file})
+endforeach()

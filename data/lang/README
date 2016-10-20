@@ -1,0 +1,60 @@
+Handling translation catalogs for app bundles
+=============================================
+
+Usage
+-----
+A package build is done as usual, just with 2 extra steps.
+
+# Provide marble sources, e.g. working copy of repo or tarball untarred
+[...]
+
+# EXTRA STEP: Add translation sources to the sources (here for stable):
+cd <toplevel_sources>
+data/lang/download-pos.sh stable
+
+# Configure build, run cmake as usual:
+cd <toplevel_build>
+cmake [...]
+
+# Build as usual
+make
+
+# EXTRA STEP: Build translations for bundle package optionally
+make bundle_translations
+
+# Install as usual
+# If bundle_translations was called before, this will also install the qm files
+make install
+
+# Package as usual
+[...]
+
+
+Challenge
+---------
+Translation catalogs are not part of the Marble source repository, instead
+are in a different repository.
+So on packaging time the catalogs need to be added to the working copy, so
+they can be processed as needed and become part of the package product.
+
+The usual KDE source packaging scripts are fetching all po files belonging to
+the repo and are storing them in the toplevel dir in a subfolder po/$lang/*.po.
+Additionally either the buildsystem has some if-po/-exists-process-and-install-po-files
+or the packaging script will inject such logic into the buildsystem.
+
+When creating binary packages, this is often done directly from a checkout of the
+sources and not from the released source tarball. So the step of fetching all po
+files has to be done here as well as making sure the processing and installation is done.
+
+Not all products are build for all platforms. So e.g. for Android only Marble Maps
+will be created (separate packaging done for Behaim app, ignored for now). Right now
+the apps only or also released as bundles (Maps, Behaim, MarbleQt) or the lib only need
+the one single marble_qt catalog. The other (ki18n) catalogs are only used on platforms
+where binary packaging is done by the distributions and also unbundled.
+
+
+So supporting translations with binary packaging needs to work independently:
+* separate script to download po files, in separate folder:
+  download-pos.sh
+* separate target name for creating the qm files:
+  bundle_translations
