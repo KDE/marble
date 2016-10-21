@@ -17,6 +17,8 @@ import org.kde.marble 0.20
 
 Item {
     id: root
+    //height: Math.max(marbleText.height, groupText.height, devText.height, attributionText.height)
+    height: Screen.pixelDensity * 2 + attributionText.height
 
     SystemPalette {
         id: palette
@@ -34,9 +36,9 @@ Item {
         anchors.fill: parent
 
         Item {
+            id: marbleItem
             Text {
                 id: marbleText
-                anchors.top: parent.top
                 anchors.bottom: parent.bottom
                 anchors.left: parent.left
                 anchors.right: marbleLogo.left
@@ -51,20 +53,20 @@ Item {
             Image {
                 id: marbleLogo
                 anchors.right: parent.right
-                anchors.top: parent.top
                 anchors.bottom: parent.bottom
                 anchors.margins: Screen.pixelDensity * 2
+                height: 0.8 * marbleText.height
 
                 fillMode: Image.PreserveAspectFit
                 source: "qrc:/konqi/globe.png"
             }
         }
         Item {
+            id: supportItem
             Text {
                 id: groupText
                 anchors.left: parent.left
                 anchors.right: groupKonqi.left
-                anchors.top: parent.top
                 anchors.bottom: parent.bottom
                 anchors.margins: Screen.pixelDensity * 1
                 anchors.leftMargin: Screen.pixelDensity * 2
@@ -77,22 +79,21 @@ Item {
             Image {
                 id: groupKonqi
                 anchors.right: parent.right
-                anchors.top: parent.top
                 anchors.bottom: parent.bottom
-                anchors.topMargin: Screen.pixelDensity * 3
                 anchors.bottomMargin: Screen.pixelDensity * 3
                 anchors.rightMargin: Screen.pixelDensity * 2
+                height: 0.8 * groupText.height
 
                 fillMode: Image.PreserveAspectFit
                 source: "qrc:/konqi/group.png"
             }
         }
         Item {
+            id: devItem
             Text {
                 id: devText
                 anchors.left: parent.left
                 anchors.right: devKonqi.left
-                anchors.top: parent.top
                 anchors.bottom: parent.bottom
                 anchors.margins: Screen.pixelDensity * 1
                 anchors.leftMargin: Screen.pixelDensity * 2
@@ -105,21 +106,19 @@ Item {
             Image {
                 id: devKonqi
                 anchors.right: parent.right
-                anchors.top: parent.top
                 anchors.bottom: parent.bottom
-                anchors.topMargin: Screen.pixelDensity * 3
                 anchors.bottomMargin: Screen.pixelDensity * 3
                 anchors.rightMargin: Screen.pixelDensity * 2
+                height: 0.8 * devText.height
 
                 fillMode: Image.PreserveAspectFit
                 source: "qrc:/konqi/app-dev.png"
             }
         }
         Item {
-
+            id: attributionItem
             Text {
                 id: attributionText
-                anchors.top: parent.top
                 anchors.left: parent.left
                 anchors.right: devQtKonqi.left
                 anchors.bottom: parent.bottom
@@ -135,11 +134,11 @@ Item {
             Image {
                 id: devQtKonqi
                 anchors.right: parent.right
-                anchors.top: parent.top
                 anchors.bottom: parent.bottom
-                anchors.topMargin: Screen.pixelDensity * 3
                 anchors.bottomMargin: Screen.pixelDensity * 3
                 anchors.rightMargin: Screen.pixelDensity * 2
+                height: 0.8 * attributionText.height
+
                 fillMode: Image.PreserveAspectFit
                 source: "qrc:/konqi/dev-qt.png"
             }

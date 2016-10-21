@@ -58,7 +58,7 @@ Item {
             if (routingManager) {
                 routingManager.addSearchResultAsPlacemark(backend.selectedPlacemark);
             }
-            placemarkDialog.item.placemark = backend.selectedPlacemark;
+            placemarkDialog.placemark = backend.selectedPlacemark;
         }
     }
 
@@ -120,8 +120,8 @@ Item {
                             onClicked: {
                                 bookmarksView.currentIndex = index
                                 dialogContainer.focus = true
-                                placemarkDialog.item.placemark = bookmarks.placemark(index);
-                                marbleMaps.centerOn(placemarkDialog.item.placemark.longitude, placemarkDialog.item.placemark.latitude)
+                                placemarkDialog.placemark = bookmarks.placemark(index);
+                                marbleMaps.centerOn(placemarkDialog.placemark.longitude, placemarkDialog.placemark.latitude)
                             }
                         }
                     }

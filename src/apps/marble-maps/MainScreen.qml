@@ -92,7 +92,7 @@ ApplicationWindow {
                     height: width
                     source: "qrc:///ic_place.png"
                     onPlacemarkChanged: {
-                        placemarkDialog.item.placemark = placemark
+                        placemarkDialog.placemark = placemark
                     }
                 }
 
@@ -122,7 +122,7 @@ ApplicationWindow {
                     id: routing
                     anchors.fill: parent
                     marbleItem: marbleMaps
-                    routingProfile: routeEditor.item.routingProfile
+                    routingProfile: routeEditor.routingProfile
                 }
 
                 PositionMarker {
@@ -256,7 +256,7 @@ ApplicationWindow {
                     navigationManager.visible = true
                 } else if (dialogContainer.currentIndex === dialogContainer.place) {
                     dialogContainer.currentIndex = dialogContainer.routing
-                    placemarkDialog.item.addToRoute()
+                    placemarkDialog.addToRoute()
                 } else {
                     dialogContainer.currentIndex = dialogContainer.routing
                     navigationManager.visible = false
@@ -277,23 +277,24 @@ ApplicationWindow {
                 State {
                     name: "placeAction"
                     when: dialogContainer.currentIndex === dialogContainer.place
-                    PropertyChanges { target: routeEditorButton; iconSource: placemarkDialog.item.actionIconSource }
+                    PropertyChanges { target: routeEditorButton; iconSource: placemarkDialog.actionIconSource }
                 }
             ]
         }
     }
 
-    TabView {
+    Item {
         id: dialogContainer
         anchors {
             left: parent.left
             right: parent.right
             bottom: parent.bottom
         }
-        tabsVisible: false
-        frameVisible: false
         visible: currentIndex >= 0
-        height: visible ? 0.33 * root.height : 0
+
+        property var contentItem: routeEditor
+
+        height: visible ? contentItem.height : 0
 
         readonly property int none: -1
         readonly property int routing: 0
@@ -302,29 +303,58 @@ ApplicationWindow {
         readonly property int settings: 3
         readonly property int developer: 4
 
-        currentIndex: none
+        property int currentIndex: none
         Keys.onBackPressed: currentIndex = none
 
-        Tab {
-            active: true
+        onCurrentIndexChanged:
+        {
+            switch (currentIndex) {
+            case none:
+            case routing: contentItem = routeEditor; break;
+            case place: contentItem = placemarkDialog; break;
+            case about: contentItem = aboutDialog; break;
+            case settings: contentItem = settingsDialog; break;
+            case developer: contentItem = developerDialog; break;
+            }
+
+        }
+
+        RouteEditor {
             id: routeEditor
-            RouteEditor {
-                anchors.fill: parent
-            }
+            visible: dialogContainer.currentIndex === dialogContainer.routing
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
         }
-
-        Tab {
-            active: true
+        PlacemarkDialog {
             id: placemarkDialog
-            PlacemarkDialog {
-                anchors.fill: parent
-                map: marbleMaps
-            }
+            visible: dialogContainer.currentIndex === dialogContainer.place
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+            map: marbleMaps
         }
-
-        Tab { AboutDialog {} }
-        Tab { active: true; SettingsDialog {} }
-        Tab { active: true; DeveloperDialog {} }
+        AboutDialog {
+            id: aboutDialog
+            visible: dialogContainer.currentIndex === dialogContainer.about
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+        }
+        SettingsDialog {
+            id: settingsDialog
+            visible: dialogContainer.currentIndex === dialogContainer.settings
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+        }
+        DeveloperDialog {
+            id: developerDialog
+            visible: dialogContainer.currentIndex === dialogContainer.developer
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+        }
     }
 
     BorderImage {

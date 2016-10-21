@@ -32,15 +32,15 @@ Item {
         id: image
         onClicked: {
             if (type == "searchResult") {
-                if (placemarkDialog.item.placemark === placemark) {
-                    placemarkDialog.item.placemark = null
+                if (placemarkDialog.placemark === placemark) {
+                    placemarkDialog.placemark = null
                     dialogContainer.currentIndex = dialogContainer.none
                 } else {
-                    placemarkDialog.item.placemark = placemark
+                    placemarkDialog.placemark = placemark
                     dialogContainer.currentIndex = dialogContainer.place
                 }
             } else {
-                routeEditor.item.currentIndex = index
+                routeEditor.currentIndex = index
                 dialogContainer.currentIndex = dialogContainer.routing
             }
         }
