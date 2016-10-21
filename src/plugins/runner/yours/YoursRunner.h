@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2010      Dennis Nienhüser <nienhueser@kde.org>
+// Copyright 2016      Piotr Wójcik <chocimier@tlen.pl>
 //
 
 

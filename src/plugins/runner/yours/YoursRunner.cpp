@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2010      Dennis Nienhüser <nienhueser@kde.org>
+// Copyright 2016      Piotr Wójcik <chocimier@tlen.pl>
 //
 
 #include "YoursRunner.h"
@@ -61,11 +62,24 @@ void YoursRunner::retrieveRoute( const RouteRequest *route )
     //QString base = "http://nroets.dev.openstreetmap.org/demo/gosmore.php";
     QString args = "?flat=%1&flon=%2&tlat=%3&tlon=%4";
     args = args.arg( fLat, 0, 'f', 6 ).arg( fLon, 0, 'f', 6 ).arg( tLat, 0, 'f', 6 ).arg( tLon, 0, 'f', 6 );
-    QString preferences = "&v=motorcar&fast=1&layer=mapnik";
+
+    QHash<QString, QVariant> settings = route->routingProfile().pluginSettings()[QStringLiteral("yours")];
+    QString transport = settings[QStringLiteral("transport")].toString();
+    QString fast;
+
+    if (settings[QStringLiteral("method")] == QLatin1String("shortest")) {
+        fast = "0";
+    } else {
+        fast = "1";
+    }
+
+    QString preferences = "&v=%1&fast=%2&layer=mapnik;";
+    preferences = preferences.arg(transport).arg(fast);
     QString request = base + args + preferences;
     // mDebug() << "GET: " << request;
 
     m_request = QNetworkRequest( QUrl( request ) );
+    m_request.setRawHeader( "X-Yours-client", "Marble" );
 
     QEventLoop eventLoop;
 
