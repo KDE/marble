@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2010      Dennis Nienhüser <nienhueser@kde.org>
+// Copyright 2016      Piotr Wójcik <chocimier@tlen.pl>
 //
 
 
@@ -42,7 +43,11 @@ public:
 
     virtual RoutingRunner *newRunner() const;
 
+    ConfigWidget* configWidget();
+
     virtual bool supportsTemplate(RoutingProfilesModel::ProfileTemplate profileTemplate) const;
+
+    QHash< QString, QVariant > templateSettings(RoutingProfilesModel::ProfileTemplate profileTemplate) const;
 };
 
 }
