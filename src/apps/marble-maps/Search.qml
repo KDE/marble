@@ -119,9 +119,9 @@ Item {
                             anchors.fill: parent
                             onClicked: {
                                 bookmarksView.currentIndex = index
-                                dialogContainer.focus = true
                                 placemarkDialog.placemark = bookmarks.placemark(index);
                                 marbleMaps.centerOn(placemarkDialog.placemark.longitude, placemarkDialog.placemark.latitude)
+                                dialogContainer.focus = true
                             }
                         }
                     }

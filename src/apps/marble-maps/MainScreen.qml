@@ -152,50 +152,6 @@ ApplicationWindow {
                     routingManager: routing
                     visible: !navigationManager.visible
                 }
-
-                BoxedText {
-                    id: quitHelper
-                    visible: false
-                    text: qsTr("Press again to close.")
-                    anchors.bottom: parent.bottom
-                    anchors.bottomMargin: Screen.pixelDensity * 5
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    onVisibleChanged: {
-                        if (visible) {
-                            quitTimer.restart()
-                        }
-                    }
-
-                    Timer {
-                        id: quitTimer
-                        interval: 3000;
-                        running: false;
-                        repeat: false
-                        onTriggered: {
-                            marbleMaps.state = ""
-                            quitHelper.visible = false
-                        }
-                    }
-                }
-
-                Keys.onBackPressed: {
-                    if (marbleMaps.state === "aboutToQuit") {
-                        event.accepted = false // we will quit
-                    } else if (navigationManager.visible) {
-                        navigationManager.visible = false
-                        event.accepted = true
-                    } else if (dialogContainer.visible) {
-                        dialogContainer.currentIndex = dialogContainer.none
-                        event.accepted = true
-                    } else if (marbleMaps.state === "") {
-                        marbleMaps.state = "aboutToQuit"
-                        quitHelper.visible = true
-                        event.accepted = true
-                    } else {
-                        marbleMaps.state = ""
-                        event.accepted = true
-                    }
-                }
             }
 
             NavigationManager {
@@ -304,7 +260,6 @@ ApplicationWindow {
         readonly property int developer: 4
 
         property int currentIndex: none
-        Keys.onBackPressed: currentIndex = none
 
         onCurrentIndexChanged:
         {
@@ -316,7 +271,6 @@ ApplicationWindow {
             case settings: contentItem = settingsDialog; break;
             case developer: contentItem = developerDialog; break;
             }
-
         }
 
         RouteEditor {
@@ -365,5 +319,45 @@ ApplicationWindow {
         source: "qrc:///border_shadow.png"
     }
 
-    Keys.onBackPressed: event.accepted = true
+    BoxedText {
+        id: quitHelper
+        visible: false
+        text: qsTr("Press again to close.")
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: Screen.pixelDensity * 5
+        anchors.horizontalCenter: parent.horizontalCenter
+        onVisibleChanged: {
+            if (visible) {
+                quitTimer.restart()
+            }
+        }
+
+        Timer {
+            id: quitTimer
+            interval: 3000;
+            running: false;
+            repeat: false
+            onTriggered: {
+                root.aboutToQuit = false
+                quitHelper.visible = false
+            }
+        }
+    }
+
+    property bool aboutToQuit: false
+
+    onClosing: {
+        if (root.aboutToQuit === true) {
+            close.accepted = true // we will quit
+            return
+        } else if (navigationManager.visible) {
+            navigationManager.visible = false
+        } else if (dialogContainer.visible) {
+            dialogContainer.currentIndex = dialogContainer.none
+        } else {
+            root.aboutToQuit = true
+            quitHelper.visible = true
+        }
+        close.accepted = false
+    }
 }
