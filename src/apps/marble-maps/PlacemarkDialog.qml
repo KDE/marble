@@ -19,7 +19,7 @@ Item {
     id: root
 
     property var placemark: null
-    property string actionIconSource: routeEditor.item.currentProfileIcon
+    property string actionIconSource: routeEditor.currentProfileIcon
     property alias map: bookmarks.map
 
     height: placemark === null ? 0 : Screen.pixelDensity * 6 +

@@ -101,7 +101,7 @@ Item {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    placemarkDialog.item.placemark = null;
+                    placemarkDialog.placemark = null;
                     dialogContainer.currentIndex = dialogContainer.none
                     routing.clearSearchResultPlacemarks();
                     field.text = "";
