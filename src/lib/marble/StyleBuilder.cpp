@@ -393,16 +393,18 @@ void StyleBuilder::Private::initializeDefaultStyles()
 
     m_defaultStyle[GeoDataPlacemark::Nation]
         = GeoDataStyle::Ptr(new GeoDataStyle( QString(),
-              QFont( defaultFamily, (int)(defaultSize * 1.2 ), 75, false ), QColor( "#404040" ) ));
+              QFont( defaultFamily, (int)(defaultSize * 1.5 ), 75, false ), QColor( "#404040" ) ));
     // Align area labels centered
     m_defaultStyle[GeoDataPlacemark::Nation]->labelStyle().setAlignment( GeoDataLabelStyle::Center );
 
-    QFont osmCityFont = QFont(defaultFamily, (int)(defaultSize * 2.0 ), 75, false);
+    QFont osmCityFont = QFont(defaultFamily, (int)(defaultSize * 1.5 ), 75, false);
     m_defaultStyle[GeoDataPlacemark::PlaceCity] = createOsmPOIStyle(osmCityFont, "place/place-6", QColor( "#202020" ));
     m_defaultStyle[GeoDataPlacemark::PlaceCityCapital] = createOsmPOIStyle(osmCityFont, "place/place-capital-6", QColor( "#202020" ));
     m_defaultStyle[GeoDataPlacemark::PlaceSuburb] = createOsmPOIStyle(osmCityFont, QString(), QColor( "#707070" ));
     m_defaultStyle[GeoDataPlacemark::PlaceHamlet] = createOsmPOIStyle(osmCityFont, QString(), QColor( "#707070" ));
-    m_defaultStyle[GeoDataPlacemark::PlaceLocality] = createOsmPOIStyle(osmCityFont, QString(), QColor( "#707070" ));
+    QFont localityFont = osmCityFont;
+    localityFont.setPointSize(defaultSize);
+    m_defaultStyle[GeoDataPlacemark::PlaceLocality] = createOsmPOIStyle(localityFont, QString(), QColor( "#707070" ));
     m_defaultStyle[GeoDataPlacemark::PlaceTown] = createOsmPOIStyle(osmCityFont, "place/place-6", QColor( "#404040" ));
     m_defaultStyle[GeoDataPlacemark::PlaceTownCapital] = createOsmPOIStyle(osmCityFont, "place/place-capital-6", QColor( "#404040" ));
     m_defaultStyle[GeoDataPlacemark::PlaceVillage] = createOsmPOIStyle(osmCityFont, "place/place-6", QColor( "#505050" ));
