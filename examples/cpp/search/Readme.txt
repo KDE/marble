@@ -1,5 +1,5 @@
 The online version of this example can be found at
-http://techbase.kde.org/Projects/Marble/Runners/Search
+https://techbase.kde.org/Marble/Runners/Search
 
 Marble uses so-called runners to calculate routes, do reverse geocoding, parse 
 files and search for placemarks (cities, addresses, points of interest, ...). 

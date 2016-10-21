@@ -10,5 +10,5 @@ work after API changes:
 - playground/base/plasma/wallpapers/marble
 - playground/office/geoshape
 
-There is this link http://techbase.kde.org/Projects/Marble/MarbleUsedBy
+There is this link https://techbase.kde.org/Marble/MarbleUsedBy
 listing also applications not hosted in KDE svn.

@@ -1,5 +1,5 @@
 The online version of this example can be found at
-http://techbase.kde.org/Projects/Marble/MarbleGeoPainter
+https://techbase.kde.org/Marble/MarbleGeoPainter
 
 In the previous tutorial you've seen how easy it is to embed a MarbleWidget 
 into a Qt application: Just create a MarbleWidget, set a map theme on it and 
