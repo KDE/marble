@@ -80,13 +80,15 @@ GeoDataDocument *ShpRunner::parseFile(const QString &fileName, DocumentRole role
         document->append( placemark );
 
         SHPObject *shape = SHPReadObject( handle, i );
-        if( nameField ) {
+        if (nameField != -1) {
             const char* info = DBFReadStringAttribute( dbfhandle, i, nameField );
+            // TODO: defaults to utf-8 encoding, but could be also something else, optionally noted in a .cpg file
             placemark->setName( info );
             mDebug() << "name " << placemark->name();
         }
-        if( noteField ) {
+        if (noteField != -1) {
             const char* note = DBFReadStringAttribute( dbfhandle, i, noteField );
+            // TODO: defaults to utf-8 encoding, see comment for name
             placemark->setDescription( note );
             mDebug() << "desc " << placemark->description();
         }
