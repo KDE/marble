@@ -1,4 +1,4 @@
-See http://techbase.kde.org/Projects/Marble/MarbleMarbleWidget for the online 
+See https://techbase.kde.org/Marble/MarbleMarbleWidget for the online
 version of this example.
 
 We'd like to display a small weather map. So we need to modify the map. And we 

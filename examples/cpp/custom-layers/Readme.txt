@@ -1,5 +1,5 @@
 The online version of this example can be found at
-http://techbase.kde.org/Projects/Marble/LayerInterface
+https://techbase.kde.org/Marble/LayerInterface
 
 The previous tutorial showed how to override the customPaint() method in 
 MarbleWidget to paint on top of the map. It is also possible to paint at 
