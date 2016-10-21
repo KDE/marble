@@ -1,5 +1,5 @@
 The online version of this example can be found at
-http://techbase.kde.org/Projects/Marble/MarbleSignalsSlots
+https://techbase.kde.org/Marble/MarbleSignalsSlots
 
 We'd like to add other widgets to our Marble window: A zoom slider and a label 
 that shows the current mouse position in geodetic coordinates: longitude and 

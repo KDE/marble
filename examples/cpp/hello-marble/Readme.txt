@@ -1,5 +1,5 @@
 The online version of this example can be found at
-http://techbase.kde.org/Projects/Marble/MarbleCPlusPlus
+https://techbase.kde.org/Marble/MarbleCPlusPlus
 
 The API of the Marble library allows for a very easy integration of a map 
 widget into your application.

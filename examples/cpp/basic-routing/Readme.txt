@@ -1,5 +1,5 @@
 The online version of this example can be found at
-http://techbase.kde.org/Projects/Marble/Routing/BasicRouting
+https://techbase.kde.org/Marble/Routing/BasicRouting
 
 The Marble library 0.13 and later (KDE 4.8, Marble 1.3) has an API to calculate 
 and manage routes. Let's start with a brief overview of the important classes 
