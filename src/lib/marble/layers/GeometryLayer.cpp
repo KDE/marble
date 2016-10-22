@@ -213,6 +213,10 @@ void GeometryLayerPrivate::createGraphicsItems( const GeoDataObject *object )
 
 void GeometryLayerPrivate::createGraphicsItemFromGeometry(const GeoDataGeometry* object, const GeoDataPlacemark *placemark , bool avoidOsmDuplicates)
 {
+    if (!placemark->isGloballyVisible()) {
+        return; // Reconsider this when visibility can be changed dynamically
+    }
+
     GeoGraphicsItem *item = 0;
     if ( object->nodeType() == GeoDataTypes::GeoDataLineStringType )
     {
@@ -285,6 +289,10 @@ void GeometryLayerPrivate::createGraphicsItemFromGeometry(const GeoDataGeometry*
 
 void GeometryLayerPrivate::createGraphicsItemFromOverlay( const GeoDataOverlay *overlay )
 {
+    if (!overlay->isGloballyVisible()) {
+        return; // Reconsider this when visibility can be changed dynamically
+    }
+
     GeoGraphicsItem* item = 0;
     if ( overlay->nodeType() == GeoDataTypes::GeoDataPhotoOverlayType ) {
         GeoDataPhotoOverlay const * photoOverlay = static_cast<GeoDataPhotoOverlay const *>( overlay );
@@ -309,7 +317,7 @@ void GeometryLayerPrivate::removeGraphicsItems( const GeoDataFeature *feature )
 
     if( feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
         GeoDataPlacemark const * placemark = static_cast<GeoDataPlacemark const *>(feature);
-        if (placemark->hasOsmData() && placemark->osmData().id() > 0) {
+        if (placemark->isGloballyVisible() && placemark->hasOsmData() && placemark->osmData().id() > 0) {
             QMap<qint64,OsmQueue>* osmItems = 0;
             if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLinearRingType) {
                 osmItems = &m_osmWayItems;
