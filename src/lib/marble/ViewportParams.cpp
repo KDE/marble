@@ -348,13 +348,13 @@ qreal ViewportParams::angularResolution() const
 
 bool ViewportParams::resolves ( const GeoDataLatLonBox &latLonBox, qreal pixel ) const
 {
-    return latLonBox.width() + latLonBox.height() > pixel * angularResolution();
+    return latLonBox.width() + latLonBox.height() > pixel * d->m_angularResolution;
 }
 
 
 bool ViewportParams::resolves ( const GeoDataLatLonAltBox &latLonAltBox, qreal pixel, qreal altitude ) const
 {
-    return    latLonAltBox.width() + latLonAltBox.height() > pixel * angularResolution()
+    return    latLonAltBox.width() + latLonAltBox.height() > pixel * d->m_angularResolution
            || latLonAltBox.maxAltitude() - latLonAltBox.minAltitude() > altitude;
 }
 
@@ -368,7 +368,7 @@ bool ViewportParams::resolves ( const GeoDataCoordinates &coord1,
     coord2.geoCoordinates( lon2, lat2 );
 
     // We take the manhattan length as an approximation for the distance
-    return ( fabs( lon2 - lon1 ) + fabs( lat2 - lat1 ) > angularResolution() );
+    return ( fabs( lon2 - lon1 ) + fabs( lat2 - lat1 ) > d->m_angularResolution );
 }
 
 
