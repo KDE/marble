@@ -340,7 +340,7 @@ O5mreaderIterateRet o5mreader_iterateTags(O5mreader *pReader, char** pKey, char*
 }
 
 O5mreaderIterateRet o5mreader_skipTags(O5mreader *pReader) {
-	int ret;	
+    int ret = O5MREADER_ITERATE_RET_DONE;
 	if ( pReader->canIterateTags ) {		
 		while ( O5MREADER_ITERATE_RET_NEXT == (ret = o5mreader_iterateTags(pReader, NULL, NULL)) );
 	}
