@@ -1995,42 +1995,44 @@ QSet<StyleBuilder::OsmTag> StyleBuilder::buildingTags()
 GeoDataPlacemark::GeoDataVisualCategory StyleBuilder::determineVisualCategory(const OsmPlacemarkData &osmData)
 {
     if (osmData.containsTagKey(QStringLiteral("area:highway")) ||              // Not supported yet
-            osmData.containsTag("boundary", "protected_area") ||   // Not relevant for the default map
-            osmData.containsTag("boundary", "postal_code") ||
-            osmData.containsTag("boundary", "aerial_views") ||     // Created by OSM editor(s) application for digitalization
+            osmData.containsTag(QStringLiteral("boundary"), QStringLiteral("protected_area")) ||   // Not relevant for the default map
+            osmData.containsTag(QStringLiteral("boundary"), QStringLiteral("postal_code")) ||
+            osmData.containsTag(QStringLiteral("boundary"), QStringLiteral("aerial_views")) ||     // Created by OSM editor(s) application for digitalization
             osmData.containsTagKey(QStringLiteral("closed:highway")) ||
             osmData.containsTagKey(QStringLiteral("abandoned:highway")) ||
             osmData.containsTagKey(QStringLiteral("abandoned:natural")) ||
             osmData.containsTagKey(QStringLiteral("abandoned:building")) ||
             osmData.containsTagKey(QStringLiteral("abandoned:leisure")) ||
             osmData.containsTagKey(QStringLiteral("disused:highway")) ||
-            osmData.containsTag("highway", "razed")) {
+            osmData.containsTag(QStringLiteral("highway"), QStringLiteral("razed"))) {
         return GeoDataPlacemark::None;
     }
 
-    if (osmData.containsTag("building", "yes")) {
+    QString const yes(QStringLiteral("yes"));
+    if (osmData.containsTag(QStringLiteral("building"), yes)) {
         return GeoDataPlacemark::Building;
     }
 
-    if (osmData.containsTag("historic", "castle") && osmData.containsTag("castle_type", "kremlin")) {
+    if (osmData.containsTag(QStringLiteral("historic"), QStringLiteral("castle")) && osmData.containsTag(QStringLiteral("castle_type"), QStringLiteral("kremlin"))) {
         return GeoDataPlacemark::None;
     }
 
-    if( osmData.containsTag("natural", "glacier") && osmData.containsTag("glacier:type", "shelf") ){
+    if( osmData.containsTag(QStringLiteral("natural"), QStringLiteral("glacier")) && osmData.containsTag(QStringLiteral("glacier:type"), QStringLiteral("shelf")) ){
         return GeoDataPlacemark::NaturalIceShelf;
     }
 
     Private::initializeOsmVisualCategories();
 
+    QString const capital(QStringLiteral("capital"));
     for (auto iter = osmData.tagsBegin(), end=osmData.tagsEnd(); iter != end; ++iter) {
         const auto tag = OsmTag(iter.key(), iter.value());
         GeoDataPlacemark::GeoDataVisualCategory category = Private::s_visualCategories.value(tag, GeoDataPlacemark::None);
         if (category != GeoDataPlacemark::None) {
-            if (category == GeoDataPlacemark::PlaceCity && osmData.containsTag("capital", "yes")) {
+            if (category == GeoDataPlacemark::PlaceCity && osmData.containsTag(capital, yes)) {
                 category = GeoDataPlacemark::PlaceCityCapital;
-            } else if (category == GeoDataPlacemark::PlaceTown && osmData.containsTag("capital", "yes")) {
+            } else if (category == GeoDataPlacemark::PlaceTown && osmData.containsTag(capital, yes)) {
                 category = GeoDataPlacemark::PlaceTownCapital;
-            } else if (category == GeoDataPlacemark::PlaceVillage && osmData.containsTag("capital", "yes")) {
+            } else if (category == GeoDataPlacemark::PlaceVillage && osmData.containsTag(capital, yes)) {
                 category = GeoDataPlacemark::PlaceVillageCapital;
             }
         }
