@@ -109,6 +109,9 @@ class MercatorProjection : public CylindricalProjection
     bool  mapCoversViewport( const ViewportParams *viewport ) const;
 
  private:
+    mutable qreal m_lastCenterLat;
+    mutable qreal m_lastCenterLatInv;
+
     Q_DISABLE_COPY( MercatorProjection )
 };
 
