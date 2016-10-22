@@ -132,7 +132,7 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
     typedef QPair<QString, GeoGraphicsItem*> LayerItem;
     QList<LayerItem> defaultLayer;
     int paintedItems = 0;
-    QHash<QString, QList<GeoGraphicsItem*> > paintedFragments;
+    QHash<QString, QVector<GeoGraphicsItem*> > paintedFragments;
     QSet<QString> const knownLayers = QSet<QString>::fromList(d->m_styleBuilder->renderOrder());
     auto const viewLatLonAltBox = viewport->viewLatLonAltBox();
     foreach( GeoGraphicsItem* item, items ) {
@@ -159,7 +159,7 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
     }
 
     foreach (const QString &layer, d->m_styleBuilder->renderOrder()) {
-        QList<GeoGraphicsItem*> & layerItems = paintedFragments[layer];
+        QVector<GeoGraphicsItem*> & layerItems = paintedFragments[layer];
         qStableSort(layerItems.begin(), layerItems.end(), GeoGraphicsItem::zValueLessThan);
         foreach(auto item, layerItems) {
             item->paint(painter, viewport, layer);
