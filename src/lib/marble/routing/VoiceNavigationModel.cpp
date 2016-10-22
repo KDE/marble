@@ -75,7 +75,7 @@ public:
 
     QString announcementText( Maneuver::Direction turnType, qreal distance );
 
-    void updateInstruction( RouteSegment segment, qreal distance, Maneuver::Direction turnType );
+    void updateInstruction(const RouteSegment &segment, qreal distance, Maneuver::Direction turnType );
 
     void updateInstruction( const QString &name );
 
@@ -214,7 +214,7 @@ QString VoiceNavigationModelPrivate::announcementText( Maneuver::Direction turnT
     return announcementText;
 }
 
-void VoiceNavigationModelPrivate::updateInstruction( RouteSegment segment, qreal distance, Maneuver::Direction turnType )
+void VoiceNavigationModelPrivate::updateInstruction( const RouteSegment & segment, qreal distance, Maneuver::Direction turnType )
 {
     QString turnTypeAudio = turnTypeAudioFile( turnType, distance );
     if ( turnTypeAudio.isEmpty() ) {
