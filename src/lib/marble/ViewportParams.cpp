@@ -94,7 +94,7 @@ ViewportParamsPrivate::ViewportParamsPrivate( Projection projection,
       m_planetAxis(),
       m_planetAxisMatrix(),
       m_radius( radius ),
-      m_angularResolution( 4 / fabs( (qreal)( m_radius ) ) ),
+      m_angularResolution(4.0 / fabs(m_radius)),
       m_size( size ),
       m_dirtyBox( true ),
       m_viewLatLonAltBox()
@@ -228,7 +228,7 @@ void ViewportParams::setRadius(int newRadius)
         d->m_dirtyBox = true;
 
         d->m_radius = newRadius;
-        d->m_angularResolution = 4 / fabs( (qreal)(d->m_radius) );
+        d->m_angularResolution = 4.0 / d->m_radius;
     }
 }
 
