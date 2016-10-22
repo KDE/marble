@@ -28,7 +28,9 @@
 using namespace Marble;
 
 MercatorProjection::MercatorProjection()
-    : CylindricalProjection()
+    : CylindricalProjection(),
+      m_lastCenterLat(200.0),
+      m_lastCenterLatInv(0.0)
 {
     setMinLat( minValidLat() );
     setMaxLat( maxValidLat() );
@@ -86,10 +88,14 @@ bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
 
     const qreal centerLon = viewport->centerLongitude();
     const qreal centerLat = viewport->centerLatitude();
+    if (centerLat != m_lastCenterLat) {
+        m_lastCenterLatInv = gdInv(centerLat);
+        m_lastCenterLat = centerLat;
+    }
 
     // Let (x, y) be the position on the screen of the placemark..
     x = ( width  / 2 + rad2Pixel * ( lon - centerLon ) );
-    y = ( height / 2 - rad2Pixel * ( gdInv( lat ) - gdInv( centerLat ) ) );
+    y = ( height / 2 - rad2Pixel * ( gdInv( lat ) - m_lastCenterLatInv ) );
 
     // Return true if the calculated point is inside the screen area,
     // otherwise return false.
