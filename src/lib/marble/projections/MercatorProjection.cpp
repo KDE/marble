@@ -71,25 +71,11 @@ bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
 {
     globeHidesPoint = false;
     qreal  lon;
-    qreal  lat;
+    qreal  originalLat;
 
-    geopoint.geoCoordinates( lon, lat );
-
-    const bool isLatValid = minLat() <= lat && lat <= maxLat();
-
-    if (!isLatValid) {
-        if ( lat > maxLat() ) {
-            GeoDataCoordinates approxCoords( geopoint );
-            approxCoords.setLatitude( maxLat() );
-            approxCoords.geoCoordinates( lon, lat );
-        }
-
-        if ( lat < minLat() ) {
-            GeoDataCoordinates approxCoords( geopoint );
-            approxCoords.setLatitude( minLat() );
-            approxCoords.geoCoordinates( lon, lat );
-        }
-    }
+    geopoint.geoCoordinates( lon, originalLat );
+    qreal const lat = qBound(minLat(), originalLat, maxLat());
+    const bool isLatValid = lat == originalLat;
 
     // Convenience variables
     int  radius = viewport->radius();
