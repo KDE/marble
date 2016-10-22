@@ -27,6 +27,8 @@
 namespace Marble
 {
 
+QPixmapCache AbstractGeoPolygonGraphicsItem::m_textureCache = QPixmapCache();
+
 AbstractGeoPolygonGraphicsItem::AbstractGeoPolygonGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataPolygon *polygon) :
     GeoGraphicsItem(placemark),
     m_polygon(polygon),
@@ -103,27 +105,11 @@ QPen AbstractGeoPolygonGraphicsItem::configurePainter(GeoPainter *painter, const
             const QColor paintedColor = polyStyle.paintedColor();
             if (painter->brush().color() != paintedColor ||
                 painter->brush().style() != polyStyle.brushStyle()) {
-                const QImage textureImage = polyStyle.textureImage();
-                if (!textureImage.isNull()) {
+                if (!polyStyle.texturePath().isEmpty() || !polyStyle.textureImage().isNull()) {
                     GeoDataCoordinates coords = latLonAltBox().center();
                     qreal x, y;
                     viewport->screenCoordinates(coords, x, y);
-                    const QString texturePath = polyStyle.texturePath();
-                    if (m_cachedTexturePath != texturePath ||
-                        m_cachedTextureColor != paintedColor) {
-                        if (textureImage.hasAlphaChannel()) {
-                            m_cachedTexture = QImage ( textureImage.size(), QImage::Format_ARGB32_Premultiplied );
-                            m_cachedTexture.fill(paintedColor);
-                            QPainter imagePainter(&m_cachedTexture );
-                            imagePainter.drawImage(0, 0, textureImage);
-                        }
-                        else {
-                            m_cachedTexture = textureImage;
-                        }
-                        m_cachedTexturePath = texturePath;
-                        m_cachedTextureColor = paintedColor;
-                    }
-                    QBrush brush(m_cachedTexture);
+                    QBrush brush(texture(polyStyle.texturePath(), polyStyle.textureImage(), paintedColor));
                     painter->setBrush(brush);
                     painter->setBrushOrigin(QPoint(x,y));
                 }
@@ -149,6 +135,27 @@ int AbstractGeoPolygonGraphicsItem::extractElevation(const GeoDataPlacemark &pla
     }
 
     return elevation;
+}
+
+QPixmap AbstractGeoPolygonGraphicsItem::texture(const QString &texturePath, const QImage &textureImage, const QColor &color)
+{
+    QString const key = QString("%1/%2").arg(color.rgba()).arg(texturePath);
+    QPixmap texture;
+    if (!m_textureCache.find(key, texture)) {
+        if (textureImage.hasAlphaChannel()) {
+            QImage image = QImage (textureImage.size(), QImage::Format_ARGB32_Premultiplied);
+            image.fill(color);
+            QPainter imagePainter(&image);
+            imagePainter.drawImage(0, 0, textureImage);
+            imagePainter.end();
+            texture = QPixmap::fromImage(image);
+        }
+        else {
+            texture = QPixmap::fromImage(textureImage);
+        }
+        m_textureCache.insert(key, texture);
+    }
+    return texture;
 }
 
 }

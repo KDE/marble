@@ -16,6 +16,7 @@
 
 #include <QImage>
 #include <QColor>
+#include <QPixmapCache>
 
 namespace Marble
 {
@@ -44,11 +45,11 @@ protected:
     static int extractElevation(const GeoDataPlacemark &placemark);
 
 private:
+    QPixmap texture(const QString &path, const QImage &textureImage, const QColor &color);
+
     const GeoDataPolygon *const m_polygon;
     const GeoDataLinearRing *const m_ring;
-    QString m_cachedTexturePath;
-    QColor m_cachedTextureColor;
-    QImage m_cachedTexture;
+    static QPixmapCache m_textureCache;
 };
 
 }
