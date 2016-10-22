@@ -300,18 +300,17 @@ bool CylindricalProjectionPrivate::lineStringToPolygon( const GeoDataLineString 
 
     bool isStraight = lineString.latLonAltBox().height() == 0 || lineString.latLonAltBox().width() == 0;
 
+    Q_Q( const CylindricalProjection );
+    bool const tesselate = lineString.tessellate();
+    bool const isClosed = lineString.isClosed();
     while ( itCoords != itEnd )
     {
         // Optimization for line strings with a big amount of nodes
         bool skipNode = (hasDetail ? itCoords->detail() > maximumDetail
-                : itCoords != itBegin && isLong && !processingLastNode &&
+                : isLong && !processingLastNode && itCoords != itBegin &&
                 !viewport->resolves( *itPreviousCoords, *itCoords ) );
 
         if ( !skipNode ) {
-
-
-            Q_Q( const CylindricalProjection );
-
             q->screenCoordinates( *itCoords, viewport, x, y );
 
             // Initializing variables that store the values of the previous iteration
@@ -324,9 +323,7 @@ bool CylindricalProjectionPrivate::lineStringToPolygon( const GeoDataLineString 
             // This if-clause contains the section that tessellates the line
             // segments of a linestring. If you are about to learn how the code of
             // this class works you can safely ignore this section for a start.
-
-            if ( lineString.tessellate() && !isStraight) {
-
+            if ( tesselate && !isStraight) {
                 mirrorCount = tessellateLineSegment( *itPreviousCoords, previousX, previousY,
                                            *itCoords, x, y,
                                            polygons, viewport,
@@ -353,13 +350,11 @@ bool CylindricalProjectionPrivate::lineStringToPolygon( const GeoDataLineString 
         }
         ++itCoords;
 
-        if ( itCoords == itEnd  && lineString.isClosed() ) {
+        if (isClosed && itCoords == itEnd) {
             itCoords = itBegin;
             processingLastNode = true;
         }
     }
-
-    GeoDataLatLonAltBox box = lineString.latLonAltBox();
 
     // Closing e.g. in the Antarctica case.
     // This code makes the assumption that
@@ -367,6 +362,7 @@ bool CylindricalProjectionPrivate::lineStringToPolygon( const GeoDataLineString 
     // - and the last node is located at 180 W
     // TODO: add a similar pattern in the crossDateLine() code.
     /*
+    GeoDataLatLonAltBox box = lineString.latLonAltBox();
     if( lineString.isClosed() && box.width() == 2*M_PI ) {
         QPolygonF *poly = polygons.last();
         if( box.containsPole( NorthPole ) ) {
