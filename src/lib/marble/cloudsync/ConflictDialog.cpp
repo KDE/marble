@@ -25,9 +25,10 @@ namespace Marble {
 ConflictDialog::ConflictDialog( QWidget *parent ) :
     QDialog( parent ),
     m_mergeItem( 0 ),
-    m_box( 0 )
+    m_box( 0 ),
+    m_resolveAction(ConflictDialog::AskUser)
 {
-    m_resolveAction = ConflictDialog::AskUser;
+    // nothing to do
 }
 
 void ConflictDialog::setMergeItem( MergeItem *item )
