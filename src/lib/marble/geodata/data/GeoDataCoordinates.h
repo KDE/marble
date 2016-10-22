@@ -157,9 +157,8 @@ class GEODATA_EXPORT GeoDataCoordinates
     * @param unit units that lon and lat get measured in
     * (default for Radian: north pole at pi/2, southpole at -pi/2)
     */
-    void geoCoordinates( qreal& lon, qreal& lat,
-                         GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian )
-                                                                const;
+    void geoCoordinates(qreal& lon, qreal& lat, GeoDataCoordinates::Unit unit) const;
+    void geoCoordinates(qreal& lon, qreal& lat) const;
 
     /**
     * @brief use this function to get the longitude, latitude and altitude
@@ -170,9 +169,8 @@ class GEODATA_EXPORT GeoDataCoordinates
     * @param unit units that lon and lat get measured in
     * (default for Radian: north pole at pi/2, southpole at -pi/2)
     */
-    void geoCoordinates( qreal& lon, qreal& lat, qreal& alt,
-                         GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian )
-                                                                const;
+    void geoCoordinates(qreal& lon, qreal& lat, qreal& alt, GeoDataCoordinates::Unit unit) const;
+    void geoCoordinates(qreal& lon, qreal& lat, qreal& alt) const;
 
     /**
     * @brief set the longitude in a GeoDataCoordinates object

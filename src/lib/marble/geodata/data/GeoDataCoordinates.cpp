@@ -179,10 +179,23 @@ void GeoDataCoordinates::geoCoordinates( qreal& lon, qreal& lat,
     }
 }
 
+void GeoDataCoordinates::geoCoordinates(qreal &lon, qreal &lat) const
+{
+    lon = d->m_lon;
+    lat = d->m_lat;
+}
+
 void GeoDataCoordinates::geoCoordinates( qreal& lon, qreal& lat, qreal& alt,
                                          GeoDataCoordinates::Unit unit ) const
 {
     geoCoordinates( lon, lat, unit );
+    alt = d->m_altitude;
+}
+
+void GeoDataCoordinates::geoCoordinates(qreal &lon, qreal &lat, qreal &alt) const
+{
+    lon = d->m_lon;
+    lat = d->m_lat;
     alt = d->m_altitude;
 }
 
