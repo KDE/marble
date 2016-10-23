@@ -18,7 +18,7 @@ import org.kde.marble 0.20
 Item {
     id: root
     //height: Math.max(marbleText.height, groupText.height, devText.height, attributionText.height)
-    height: Screen.pixelDensity * 2 + attributionText.height
+    height: Screen.pixelDensity * 2 + devText.height
 
     SystemPalette {
         id: palette
