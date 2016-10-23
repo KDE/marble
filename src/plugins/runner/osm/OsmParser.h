@@ -28,12 +28,12 @@ class GeoDataDocument;
 class OsmParser
 {
 public:
-    static GeoDataDocument* parse(const QString &filename, DocumentRole role, QString &error);
+    static GeoDataDocument* parse(const QString &filename, QString &error);
 
 private:
-    static GeoDataDocument* parseXml(const QString &filename, DocumentRole role, QString &error);
-    static GeoDataDocument* parseO5m(const QString &filename, DocumentRole role, QString &error);
-    static GeoDataDocument *createDocument(DocumentRole role, OsmNodes &nodes, OsmWays &way, OsmRelations &relations);
+    static GeoDataDocument* parseXml(const QString &filename, QString &error);
+    static GeoDataDocument* parseO5m(const QString &filename, QString &error);
+    static GeoDataDocument *createDocument(OsmNodes &nodes, OsmWays &way, OsmRelations &relations);
 };
 
 }

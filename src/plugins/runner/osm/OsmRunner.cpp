@@ -23,7 +23,7 @@ OsmRunner::OsmRunner(QObject *parent) :
 
 GeoDataDocument *OsmRunner::parseFile(const QString &fileName, DocumentRole role, QString &error)
 {
-    GeoDataDocument* document = OsmParser::parse(fileName, role, error);
+    GeoDataDocument* document = OsmParser::parse(fileName, error);
     if (document) {
         document->setDocumentRole(role);
         document->setFileName(fileName);
