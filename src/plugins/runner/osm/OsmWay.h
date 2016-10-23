@@ -39,8 +39,6 @@ private:
 
     static bool isAreaTag(const StyleBuilder::OsmTag &keyValue);
 
-    static double extractBuildingHeight(const OsmPlacemarkData &osmData);
-
     OsmPlacemarkData m_osmData;
     QVector<qint64> m_references;
 
