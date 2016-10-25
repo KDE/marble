@@ -95,66 +95,7 @@ QSet<GeoDataPlacemark::GeoDataVisualCategory> acceptedVisualCategories()
         << GeoDataPlacemark::Mare
         << GeoDataPlacemark::GeographicPole
         << GeoDataPlacemark::MagneticPole
-        << GeoDataPlacemark::ShipWreck
-        << GeoDataPlacemark::LeisureMarina
-        << GeoDataPlacemark::AirPort
-        << GeoDataPlacemark::Observatory
-        << GeoDataPlacemark::AccomodationCamping
-        << GeoDataPlacemark::AccomodationHostel
-        << GeoDataPlacemark::AccomodationHotel
-        << GeoDataPlacemark::AccomodationMotel
-        << GeoDataPlacemark::AccomodationYouthHostel
-        << GeoDataPlacemark::AmenityLibrary
-        << GeoDataPlacemark::AmenityKindergarten
-        << GeoDataPlacemark::EducationCollege
-        << GeoDataPlacemark::EducationSchool
-        << GeoDataPlacemark::EducationUniversity
-        << GeoDataPlacemark::FoodBar
-        << GeoDataPlacemark::FoodBiergarten
-        << GeoDataPlacemark::FoodCafe
-        << GeoDataPlacemark::FoodFastFood
-        << GeoDataPlacemark::FoodPub
-        << GeoDataPlacemark::FoodRestaurant
-        << GeoDataPlacemark::HealthDoctors
-        << GeoDataPlacemark::HealthHospital
-        << GeoDataPlacemark::HealthPharmacy
-        << GeoDataPlacemark::MoneyBank
-        << GeoDataPlacemark::NaturalPeak
-        << GeoDataPlacemark::ShopBeverages
-        << GeoDataPlacemark::ShopHifi
-        << GeoDataPlacemark::ShopSupermarket
-        << GeoDataPlacemark::TouristAlpineHut
-        << GeoDataPlacemark::TouristAttraction
-        << GeoDataPlacemark::TouristCastle
-        << GeoDataPlacemark::TouristCinema
-        << GeoDataPlacemark::TouristMonument
-        << GeoDataPlacemark::TouristMuseum
-        << GeoDataPlacemark::TouristRuin
-        << GeoDataPlacemark::TouristTheatre
-        << GeoDataPlacemark::TouristThemePark
-        << GeoDataPlacemark::TouristViewPoint
-        << GeoDataPlacemark::TouristZoo
-        << GeoDataPlacemark::TransportAerodrome
-        << GeoDataPlacemark::TransportAirportTerminal
-        << GeoDataPlacemark::TransportAirportGate
-        << GeoDataPlacemark::TransportAirportRunway
-        << GeoDataPlacemark::TransportAirportTaxiway
-        << GeoDataPlacemark::TransportAirportApron
-        << GeoDataPlacemark::TransportBusStation
-        << GeoDataPlacemark::TransportBusStop
-        << GeoDataPlacemark::TransportCarShare
-        << GeoDataPlacemark::TransportFuel
-        << GeoDataPlacemark::TransportParking
-        << GeoDataPlacemark::TransportTrainStation
-        << GeoDataPlacemark::ReligionPlaceOfWorship
-        << GeoDataPlacemark::ReligionBahai
-        << GeoDataPlacemark::ReligionBuddhist
-        << GeoDataPlacemark::ReligionChristian
-        << GeoDataPlacemark::ReligionHindu
-        << GeoDataPlacemark::ReligionJain
-        << GeoDataPlacemark::ReligionJewish
-        << GeoDataPlacemark::ReligionShinto
-        << GeoDataPlacemark::ReligionSikh;
+        << GeoDataPlacemark::ShipWreck;
 
     return visualCategories;
 }
