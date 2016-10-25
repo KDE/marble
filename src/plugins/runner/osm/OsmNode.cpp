@@ -59,7 +59,7 @@ void OsmNode::create(GeoDataDocument *document) const
     placemark->setVisualCategory(category);
     placemark->setStyle( GeoDataStyle::Ptr() );
 
-    placemark->setZoomLevel( 18 );
+    placemark->setZoomLevel( 11 );
     if (category >= GeoDataPlacemark::PlaceCity && category <= GeoDataPlacemark::PlaceVillageCapital) {
         int const population = m_osmData.tagValue(QStringLiteral("population")).toInt();
         placemark->setPopulation(qMax(0, population));
@@ -90,7 +90,7 @@ void OsmNode::create(GeoDataDocument *document) const
                 placemark->setZoomLevel(13);
                 break;
             default:
-                placemark->setZoomLevel(10); break;
+                placemark->setZoomLevel(11); break;
             }
         }
     }
