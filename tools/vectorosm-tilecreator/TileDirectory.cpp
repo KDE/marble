@@ -187,8 +187,6 @@ QStringList TileDirectory::tagsFilteredIn(int zoomLevel) const
 
         tags << "place=suburb";
         tags << "place=village";
-
-        tags << "natural=peak";
     }
 
     if (zoomLevel <= 11) {
@@ -232,6 +230,8 @@ QStringList TileDirectory::tagsFilteredIn(int zoomLevel) const
         tags << "man_made=water_tower";
         tags << "man_made=windmill";
     }
+
+    tags << "natural=peak";
 
     tags << "leisure=nature_reserve";
     tags << "leisure=park";
