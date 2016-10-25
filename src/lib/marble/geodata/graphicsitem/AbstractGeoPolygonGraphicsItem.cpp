@@ -24,6 +24,8 @@
 #include "MarbleDebug.h"
 #include "ViewportParams.h"
 
+#include <QtMath>
+
 namespace Marble
 {
 
@@ -67,8 +69,11 @@ void AbstractGeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportP
     const GeoDataIconStyle& iconStyle = style()->iconStyle();
     bool const hasIcon = !iconStyle.iconPath().isEmpty();
     if (hasIcon) {
-        QImage const icon = iconStyle.scaledIcon();
-        painter->drawImage(latLonAltBox().center(), icon);
+        int const tileLevel = qLn( viewport->radius() * 4 / 256 ) / qLn( 2.0 );
+        if (tileLevel >= feature()->zoomLevel()) {
+            QImage const icon = iconStyle.scaledIcon();
+            painter->drawImage(latLonAltBox().center(), icon);
+        }
     }
     painter->restore();
 }
