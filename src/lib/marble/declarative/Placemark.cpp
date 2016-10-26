@@ -155,7 +155,27 @@ QString Placemark::wikipedia() const
         return m_wikipedia;
     }
 
-    m_wikipedia = m_placemark.osmData().tagValue("wikipedia");
+    // TODO: also support "wikipedia:lang=page title" tags
+    const QString wikipedia = m_placemark.osmData().tagValue("wikipedia");
+    if (!wikipedia.isEmpty()) {
+        // full URL?
+        if (wikipedia.startsWith(QLatin1String("http://")) ||
+            wikipedia.startsWith(QLatin1String("https://"))) {
+            m_wikipedia = wikipedia;
+        } else {
+            // match "(lang:)human readable title"
+            QRegularExpression re("^(?:([a-z]{2,}):)?(.*)$");
+            QRegularExpressionMatch match = re.match(wikipedia);
+            QString lang = match.captured(1);
+            if (lang.isEmpty()) {
+                lang = QStringLiteral("en");
+            }
+            const QString title = QString::fromLatin1(QUrl::toPercentEncoding(match.captured(2)));
+
+            m_wikipedia = QLatin1String("https://") + lang + QLatin1String(".wikipedia.org/wiki/") + title;
+        }
+    }
+
     return m_wikipedia;
 }
 
