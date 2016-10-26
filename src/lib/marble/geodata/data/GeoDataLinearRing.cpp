@@ -83,6 +83,56 @@ bool GeoDataLinearRing::contains( const GeoDataCoordinates &coordinates ) const
     return inside;
 }
 
+qreal GeoDataLinearRing::area(qreal planetRadius) const
+{
+    qreal theta1 = 0.0;
+    qreal n = size();
+
+    if (n < 3) {
+        return 0.0;
+    }
+
+    for (int segmentIndex = 1; segmentIndex < n-1; ++segmentIndex) {
+        // todo FIXME one bearing call per coordinate would be enough to calculate them all
+        GeoDataCoordinates const & current = operator[](segmentIndex);
+        qreal prevBearing = current.bearing(operator[](segmentIndex-1));
+        qreal nextBearing = current.bearing(operator[](segmentIndex+1));
+        if (nextBearing < prevBearing) {
+            nextBearing += 2 * M_PI;
+        }
+
+        qreal angle = nextBearing - prevBearing;
+        theta1 += angle;
+    }
+
+    // Traversing first vertex
+    GeoDataCoordinates current = operator[](0);
+    qreal prevBearing = current.bearing(operator[](n-1));
+    qreal nextBearing = current.bearing(operator[](1));
+    if (nextBearing < prevBearing) {
+        nextBearing += 2 * M_PI;
+    }
+    qreal angle = nextBearing - prevBearing;
+    theta1 += angle;
+
+    // And the last one
+    current = operator[](n-1);
+    prevBearing = current.bearing(operator[](n-2));
+    nextBearing = current.bearing(operator[](0));
+    if (nextBearing < prevBearing) {
+        nextBearing += 2 * M_PI;
+    }
+    angle = nextBearing - prevBearing;
+    theta1 += angle;
+
+    qreal theta2 = 2 * M_PI * n - theta1;
+
+    // theta = smaller of theta1 and theta2
+    qreal theta = (theta1 < theta2) ? theta1 : theta2;
+
+    return qAbs((theta - (n-2) * M_PI) * planetRadius * planetRadius);
+}
+
 bool GeoDataLinearRing::isClockwise() const
 {
     int const n = size();

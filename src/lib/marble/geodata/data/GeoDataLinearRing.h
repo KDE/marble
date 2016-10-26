@@ -124,6 +124,12 @@ class GEODATA_EXPORT GeoDataLinearRing : public GeoDataLineString
 */
     virtual bool contains( const GeoDataCoordinates &coordinates ) const;
 
+    /*!
+     * \brief Returns the area of the linear ring
+     * \param planetRadius Radius of the underlying sphere
+     */
+    qreal area(qreal planetRadius) const;
+
 /*!
  * \brief Returns whether the orientaion of ring is coloskwise or not
  * \return Return value is true if ring is clockwise orientated

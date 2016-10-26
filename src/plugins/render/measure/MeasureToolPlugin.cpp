@@ -437,51 +437,11 @@ void MeasureToolPlugin::drawSegments( GeoPainter* painter )
         }
 
         if (m_showPolygonArea) {
-            qreal theta1 = 0.0;
-            qreal n = m_measureLineString.size();
-
-            for (int segmentIndex = 1; segmentIndex < m_measureLineString.size()-1; segmentIndex++) {
-                GeoDataCoordinates current = m_measureLineString[segmentIndex];
-                qreal prevBearing = current.bearing(m_measureLineString[segmentIndex-1]);
-                qreal nextBearing = current.bearing(m_measureLineString[segmentIndex+1]);
-                if (nextBearing < prevBearing)
-                    nextBearing += 2 * M_PI;
-
-                qreal angle = nextBearing - prevBearing;
-                theta1 += angle;
-            }
-
-            // Traversing first vertex
-            GeoDataCoordinates current = m_measureLineString[0];
-            qreal prevBearing = current.bearing(m_measureLineString[n-1]);
-            qreal nextBearing = current.bearing(m_measureLineString[1]);
-            if (nextBearing < prevBearing)
-                nextBearing += 2 * M_PI;
-            qreal angle = nextBearing - prevBearing;
-            theta1 += angle;
-
-            // And the last one
-            current = m_measureLineString[n-1];
-            prevBearing = current.bearing(m_measureLineString[n-2]);
-            nextBearing = current.bearing(m_measureLineString[0]);
-            if (nextBearing < prevBearing)
-                nextBearing += 2 * M_PI;
-            angle = nextBearing - prevBearing;
-            theta1 += angle;
-
-            qreal theta2 = 2 * M_PI * n - theta1;
-
-            // theta = smaller of theta1 and theta2
-            qreal theta = (theta1 < theta2) ? theta1 : theta2;
-
-            qreal planetRadius = marbleModel()->planet()->radius();
-            qreal S = qAbs((theta - (n-2) * M_PI) * planetRadius * planetRadius);
-            m_polygonArea = S;
-
+            m_polygonArea = measureRing.area(marbleModel()->planet()->radius());
             painter->setPen(Qt::white);
             GeoDataCoordinates textPosition = measureRing.latLonAltBox().center();
 
-            QString areaText = tr("Area:\n%1").arg(meterToPreferredUnit(S, true));
+            QString areaText = tr("Area:\n%1").arg(meterToPreferredUnit(m_polygonArea, true));
 
             QFontMetrics fontMetrics = painter->fontMetrics();
             QRect boundingRect = fontMetrics.boundingRect(QRect(), Qt::AlignCenter, areaText);
