@@ -49,7 +49,7 @@ VectorClipper::VectorClipper(GeoDataDocument* document, int maxZoomLevel) :
     }
 }
 
-GeoDataDocument *VectorClipper::clipTo(const GeoDataLatLonBox &tileBoundary)
+GeoDataDocument *VectorClipper::clipTo(const GeoDataLatLonBox &tileBoundary, bool filterSmallAreas)
 {
     bool const useBaseClipper = false;
     if (useBaseClipper) {
@@ -58,15 +58,21 @@ GeoDataDocument *VectorClipper::clipTo(const GeoDataLatLonBox &tileBoundary)
 
     GeoDataDocument* tile = new GeoDataDocument();
     auto const clip = clipPath(tileBoundary);
+    GeoDataLinearRing ring;
+    ring << GeoDataCoordinates(tileBoundary.west(), tileBoundary.north());
+    ring << GeoDataCoordinates(tileBoundary.east(), tileBoundary.north());
+    ring << GeoDataCoordinates(tileBoundary.east(), tileBoundary.south());
+    ring << GeoDataCoordinates(tileBoundary.west(), tileBoundary.south());
+    qreal const minArea = filterSmallAreas ? 0.01 * area(ring) : 0.0;
     foreach (GeoDataPlacemark const * placemark, potentialIntersections(tileBoundary)) {
         GeoDataGeometry const * const geometry = placemark ? placemark->geometry() : nullptr;
         if (geometry && tileBoundary.intersects(geometry->latLonAltBox())) {
             if(geometry->nodeType() == GeoDataTypes::GeoDataPolygonType) {
-                clipPolygon(placemark, clip, tile);
+                clipPolygon(placemark, clip, minArea, tile);
             } else if (geometry->nodeType() == GeoDataTypes::GeoDataLineStringType) {
-                clipString<GeoDataLineString>(placemark, clip, tile);
+                clipString<GeoDataLineString>(placemark, clip, minArea, tile);
             } else if (geometry->nodeType() == GeoDataTypes::GeoDataLinearRingType) {
-                clipString<GeoDataLinearRing>(placemark, clip, tile);
+                clipString<GeoDataLinearRing>(placemark, clip, minArea, tile);
             } else {
                 tile->append(new GeoDataPlacemark(*placemark));
             }
@@ -242,7 +248,8 @@ GeoDataDocument *VectorClipper::clipTo(unsigned int zoomLevel, unsigned int tile
     GeoDataLatLonBox tileBoundary;
     m_tileProjection.geoCoordinates(zoomLevel, tileX, tileY, tileBoundary);
 
-    GeoDataDocument *tile = clipTo(tileBoundary);
+    bool const filterSmallAreas = zoomLevel > 10 && zoomLevel < 17;
+    GeoDataDocument *tile = clipTo(tileBoundary, filterSmallAreas);
     QString tileName = QString("%1/%2/%3").arg(zoomLevel).arg(tileX).arg(tileY);
     tile->setName(tileName);
 
@@ -300,9 +307,32 @@ bool VectorClipper::canBeArea(GeoDataPlacemark::GeoDataVisualCategory visualCate
     return true;
 }
 
-void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const ClipperLib::Path &tileBoundary, GeoDataDocument *document)
+qreal VectorClipper::area(const GeoDataLinearRing &ring)
+{
+    auto const iter = m_areas.find(&ring);
+    if (iter != m_areas.end()) {
+        return *iter;
+    }
+    int const n = ring.size();
+    qreal area = 0;
+    if (n<3) {
+        return area;
+    }
+    for (int i = 1; i < n; ++i ){
+        area += (ring[i].longitude() - ring[i-1].longitude() ) * ( ring[i].latitude() + ring[i-1].latitude());
+    }
+    area += (ring[0].longitude() - ring[n-1].longitude() ) * (ring[0].latitude() + ring[n-1].latitude());
+    qreal const result = EARTH_RADIUS * EARTH_RADIUS * qAbs(area * 0.5);
+    m_areas.insert(&ring, result);
+    return result;
+}
+
+void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const ClipperLib::Path &tileBoundary, qreal minArea, GeoDataDocument *document)
 {
     const GeoDataPolygon* polygon = static_cast<const GeoDataPolygon*>(placemark->geometry());
+    if (minArea > 0.0 && area(polygon->outerBoundary()) < minArea) {
+        return;
+    }
     using namespace ClipperLib;
     Path path;
     foreach(auto const & node, polygon->outerBoundary()) {
