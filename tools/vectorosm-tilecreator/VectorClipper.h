@@ -16,6 +16,7 @@
 
 #include <GeoDataLatLonBox.h>
 #include "GeoDataPlacemark.h"
+#include "GeoDataLinearRing.h"
 #include <TileId.h>
 #include <GeoSceneMercatorTileProjection.h>
 
@@ -30,7 +31,7 @@ class VectorClipper : public BaseFilter
 public:
     VectorClipper(GeoDataDocument* document, int maxZoomLevel);
 
-    GeoDataDocument* clipTo(const GeoDataLatLonBox &box);
+    GeoDataDocument* clipTo(const GeoDataLatLonBox &box, bool filterSmallAreas);
     GeoDataDocument* clipTo(unsigned int zoomLevel, unsigned int tileX, unsigned int tileY);
 
 private:
@@ -38,11 +39,16 @@ private:
     QVector<GeoDataPlacemark*> potentialIntersections(const GeoDataLatLonBox &box) const;
     ClipperLib::Path clipPath(const GeoDataLatLonBox &box) const;
     bool canBeArea(GeoDataPlacemark::GeoDataVisualCategory visualCategory) const;
+    qreal area(const GeoDataLinearRing &ring);
 
     template<class T>
-    void clipString(const GeoDataPlacemark *placemark, const ClipperLib::Path &tileBoundary, GeoDataDocument* document)
+    void clipString(const GeoDataPlacemark *placemark, const ClipperLib::Path &tileBoundary, qreal minArea, GeoDataDocument* document)
     {
         const T* ring = static_cast<const T*>(placemark->geometry());
+        bool const isClosed = ring->isClosed() && canBeArea(placemark->visualCategory());
+        if (isClosed && minArea > 0.0 && area(*static_cast<const GeoDataLinearRing*>(ring)) < minArea) {
+            return;
+        }
         using namespace ClipperLib;
         Path path;
         foreach(auto const & node, *ring) {
@@ -51,7 +57,6 @@ private:
 
         Clipper clipper;
         clipper.PreserveCollinear(true);
-        bool const isClosed = ring->isClosed() && canBeArea(placemark->visualCategory());
         clipper.AddPath(tileBoundary, ptClip, true);
         clipper.AddPath(path, ptSubject, isClosed);
         PolyTree tree;
@@ -75,7 +80,7 @@ private:
         }
     }
 
-    void clipPolygon(const GeoDataPlacemark *placemark, const ClipperLib::Path &tileBoundary, GeoDataDocument* document);
+    void clipPolygon(const GeoDataPlacemark *placemark, const ClipperLib::Path &tileBoundary, qreal minArea, GeoDataDocument* document);
 
     void copyTags(const GeoDataPlacemark &source, GeoDataPlacemark &target) const;
     void copyTags(const OsmPlacemarkData &originalPlacemarkData, OsmPlacemarkData& targetOsmData) const;
@@ -85,6 +90,7 @@ private:
     QMap<TileId, QVector<GeoDataPlacemark*> > m_items;
     int m_maxZoomLevel;
     GeoSceneMercatorTileProjection m_tileProjection;
+    QHash<const GeoDataLinearRing*, qreal> m_areas;
 };
 
 }
