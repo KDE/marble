@@ -25,15 +25,11 @@ ApplicationWindow {
     width: 600
     height: 400
 
+    color: palette.window
+
     SystemPalette{
         id: palette
         colorGroup: SystemPalette.Active
-    }
-
-    Rectangle {
-        id: background
-        anchors.fill: parent
-        color: palette.window
     }
 
     Item {

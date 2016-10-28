@@ -187,6 +187,7 @@ namespace Marble
       ,d(new MarbleQuickItemPrivate(this))
     {
         setRenderTarget(QQuickPaintedItem::FramebufferObject);
+        setOpaquePainting(true);
         qRegisterMetaType<Placemark*>("Placemark*");
 
         foreach (AbstractFloatItem *item, d->m_map.floatItems()) {
