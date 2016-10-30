@@ -118,7 +118,7 @@ class ASTROLIB_EXPORT EclSolar     // Calculate Solar Eclipses
       int eb_lastyear;   // last year for which moon phases were calculated
       double eb_lasttz;  // last used timezone
       double eb_lastdlt; // last delta-t used
-      int eb_cstep;   // step width in minutes used for central eclipse output
+      double eb_cstep;   // step width in minutes used for central eclipse output
       double eb_eclmjd [GBL_ECLBUF];  // the MJD's of the middle of the eclipses
       double eb_magnitude [GBL_ECLBUF];   // magnitude of respective eclipse
       int eb_phase [GBL_ECLBUF];    // phase of the eclipse. 0 if no eclipse,
