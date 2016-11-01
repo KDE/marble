@@ -158,7 +158,6 @@ QStringList TileDirectory::tagsFilteredIn(int zoomLevel) const
 
     tags << "waterway=river";
     tags << "waterway=riverbank";
-    tags << "waterway=stream";
     tags << "waterway=canal";
 
     if (zoomLevel >= 13) {
@@ -207,6 +206,8 @@ QStringList TileDirectory::tagsFilteredIn(int zoomLevel) const
     }
 
     if (zoomLevel >= 15) {
+        tags << "waterway=stream";
+
         tags << "highway=residential";
         tags << "highway=track";
 
