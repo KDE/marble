@@ -261,30 +261,31 @@ ClipperLib::Path VectorClipper::clipPath(const GeoDataLatLonBox &box) const
     using namespace ClipperLib;
     Path path;
     int const steps = 20;
-    double x = box.west() * m_scale;
-    double const horizontalStep = (box.east() * m_scale - x) / steps;
-    double y = box.north() * m_scale;
-    double const verticalStep = (box.south() * m_scale - y) / steps;
+    qreal const scale = IntPoint::scale;
+    double x = box.west() * scale;
+    double const horizontalStep = (box.east() * scale - x) / steps;
+    double y = box.north() * scale;
+    double const verticalStep = (box.south() * scale - y) / steps;
     for (int i=0; i<steps; ++i) {
         path << IntPoint(qRound64(x), qRound64(y));
         x += horizontalStep;
     }
-    path << IntPoint(qRound64(box.east() * m_scale), qRound64(box.north() * m_scale));
+    path << IntPoint(qRound64(box.east() * scale), qRound64(box.north() * scale));
     for (int i=0; i<steps; ++i) {
         path << IntPoint(qRound64(x), qRound64(y));
         y += verticalStep;
     }
-    path << IntPoint(qRound64(box.east() * m_scale), qRound64(box.south() * m_scale));
+    path << IntPoint(qRound64(box.east() * scale), qRound64(box.south() * scale));
     for (int i=0; i<steps; ++i) {
         path << IntPoint(qRound64(x), qRound64(y));
         x -= horizontalStep;
     }
-    path << IntPoint(qRound64(box.west() * m_scale), qRound64(box.south() * m_scale));
+    path << IntPoint(qRound64(box.west() * scale), qRound64(box.south() * scale));
     for (int i=0; i<steps; ++i) {
         path << IntPoint(qRound64(x), qRound64(y));
         y -= verticalStep;
     }
-    path << IntPoint(qRound64(box.west() * m_scale), qRound64(box.north() * m_scale));
+    path << IntPoint(qRound64(box.west() * scale), qRound64(box.north() * scale));
     return path;
 }
 
@@ -336,7 +337,7 @@ void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const Clipper
     using namespace ClipperLib;
     Path path;
     foreach(auto const & node, polygon->outerBoundary()) {
-        path << IntPoint(qRound64(node.longitude() * m_scale), qRound64(node.latitude() * m_scale));
+        path << IntPoint(&node);
     }
 
     Clipper clipper;
@@ -346,27 +347,34 @@ void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const Clipper
     Paths paths;
     clipper.Execute(ctIntersection, paths);
     foreach(const auto &path, paths) {
+        GeoDataPlacemark* newPlacemark = new GeoDataPlacemark;
         GeoDataLinearRing outerRing;
+        int index = -1;
+        auto const & osmData = placemark->osmData().memberReference(index);
         foreach(const auto &point, path) {
-            outerRing << GeoDataCoordinates(double(point.X) / m_scale, double(point.Y) / m_scale);
+            GeoDataCoordinates const coordinates = point.coordinates();
+            outerRing << coordinates;
+            auto const originalOsmData = osmData.nodeReference(coordinates);
+            if (originalOsmData.id() > 0) {
+                newPlacemark->osmData().addNodeReference(coordinates, originalOsmData);
+            }
         }
 
-        GeoDataPlacemark* newPlacemark = new GeoDataPlacemark;
         GeoDataPolygon* newPolygon = new GeoDataPolygon;
         newPolygon->setOuterBoundary(outerRing);
         newPlacemark->setGeometry(newPolygon);
-        int index = -1;
         OsmObjectManager::initializeOsmData(newPlacemark);
         copyTags(*placemark, *newPlacemark);
-        copyTags(placemark->osmData().memberReference(index), newPlacemark->osmData().memberReference(index));
+        copyTags(osmData.memberReference(index), newPlacemark->osmData().memberReference(index));
 
         auto const & innerBoundaries = polygon->innerBoundaries();
         for (index = 0; index < innerBoundaries.size(); ++index) {
+            auto const & osmData = placemark->osmData().memberReference(index);
             clipper.Clear();
             clipper.AddPath(path, ptClip, true);
             Path innerPath;
             foreach(auto const & node, innerBoundaries.at(index)) {
-                innerPath << IntPoint(qRound64(node.longitude() * m_scale), qRound64(node.latitude() * m_scale));
+                innerPath << IntPoint(&node);
             }
             clipper.AddPath(innerPath, ptSubject, true);
             Paths innerPaths;
@@ -374,7 +382,12 @@ void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const Clipper
             foreach(auto const &innerPath, innerPaths) {
                 GeoDataLinearRing innerRing;
                 foreach(const auto &point, innerPath) {
-                    innerRing << GeoDataCoordinates(double(point.X) / m_scale, double(point.Y) / m_scale);
+                    GeoDataCoordinates const coordinates = point.coordinates();
+                    innerRing << coordinates;
+                    auto const originalOsmData = osmData.nodeReference(coordinates);
+                    if (originalOsmData.id() > 0) {
+                        newPlacemark->osmData().addNodeReference(coordinates, originalOsmData);
+                    }
                 }
                 newPolygon->appendInnerBoundary(innerRing);
                 OsmObjectManager::initializeOsmData(newPlacemark);

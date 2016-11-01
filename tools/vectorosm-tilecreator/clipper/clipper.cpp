@@ -48,6 +48,8 @@
 #include <ostream>
 #include <functional>
 
+#include <MarbleMath.h>
+
 namespace ClipperLib {
 
 static double const pi = 3.141592653589793238;
@@ -4617,6 +4619,28 @@ std::ostream& operator <<(std::ostream &s, const Paths &p)
   s << "\n";
   return s;
 }
+
+IntPoint::IntPoint(const Marble::GeoDataCoordinates *coordinates) :
+    X(qRound64(coordinates->longitude() * scale)),
+    Y(qRound64(coordinates->latitude() * scale)),
+    m_coordinates(coordinates)
+{
+    // nothing to do
+}
+
+Marble::GeoDataCoordinates IntPoint::coordinates() const
+{
+    using namespace Marble;
+    GeoDataCoordinates const coords = GeoDataCoordinates(double(X) / scale, double(Y) / scale);
+    if (m_coordinates) {
+        bool const clipperKeptTheNode = EARTH_RADIUS * distanceSphere(coords, *m_coordinates) < 0.001;
+        if (clipperKeptTheNode) {
+            return *m_coordinates;
+        }
+    }
+    return coords;
+}
+
 //------------------------------------------------------------------------------
 
 } //ClipperLib namespace

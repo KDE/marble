@@ -59,6 +59,8 @@
 #include <functional>
 #include <queue>
 
+#include <GeoDataCoordinates.h>
+
 namespace ClipperLib {
 
 enum ClipType { ctIntersection, ctUnion, ctDifference, ctXor };
@@ -85,11 +87,13 @@ enum PolyFillType { pftEvenOdd, pftNonZero, pftPositive, pftNegative };
 struct IntPoint {
   cInt X;
   cInt Y;
+  constexpr static qint64 const scale = 10000000000;
 #ifdef use_xyz
   cInt Z;
   IntPoint(cInt x = 0, cInt y = 0, cInt z = 0): X(x), Y(y), Z(z) {};
 #else
-  IntPoint(cInt x = 0, cInt y = 0): X(x), Y(y) {};
+  IntPoint(cInt x = 0, cInt y = 0): X(x), Y(y) {}
+  IntPoint(const Marble::GeoDataCoordinates* coordinates);
 #endif
 
   friend inline bool operator== (const IntPoint& a, const IntPoint& b)
@@ -100,6 +104,11 @@ struct IntPoint {
   {
     return a.X != b.X  || a.Y != b.Y; 
   }
+
+  Marble::GeoDataCoordinates coordinates() const;
+
+private:
+  const Marble::GeoDataCoordinates * m_coordinates = nullptr;
 };
 //------------------------------------------------------------------------------
 
