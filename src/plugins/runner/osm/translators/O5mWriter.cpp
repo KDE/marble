@@ -78,7 +78,7 @@ void O5mWriter::writeNodes(const OsmConverter::Nodes &nodes, QDataStream &stream
         qint64 idDiff = osmData.id() - lastId;
         writeSigned(idDiff, bufferStream);
         writeVersion(osmData, bufferStream);
-        GeoDataCoordinates const coordinates = node.first;
+        GeoDataCoordinates const & coordinates = node.first;
         double const lon = coordinates.longitude(GeoDataCoordinates::Degree);
         double const lat = coordinates.latitude(GeoDataCoordinates::Degree);
         writeSigned(deltaTo(lon, lastLon), bufferStream);
