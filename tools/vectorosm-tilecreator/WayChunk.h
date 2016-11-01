@@ -14,6 +14,7 @@
 #include "GeoDataPlacemark.h"
 
 #include <QList>
+#include <QSharedPointer>
 
 namespace Marble {
 
