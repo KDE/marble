@@ -84,7 +84,7 @@ QSharedPointer<GeoDataDocument> TileDirectory::load(int zoomLevel, int tileX, in
 
     m_tileX = tile.x();
     m_tileY = tile.y();
-    QString const filename = QString("%1/%2/%3.%4").arg(m_baseDir).arg(tile.x()).arg(tile.y()).arg(m_extension);
+    QString const filename = QString("%1/%2/%3.%4").arg(m_baseDir).arg(tile.x()).arg(tile.y()).arg("o5m");
     m_landmass = open(filename, m_manager);
     return m_landmass;
 }
