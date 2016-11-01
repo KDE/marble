@@ -266,6 +266,13 @@ int main(int argc, char *argv[])
                 typedef QSharedPointer<GeoDataDocument> GeoDocPtr;
                 GeoDocPtr tile1 = GeoDocPtr(mapTiles.clip(zoomLevel, tileId.x(), tileId.y()));
                 TagsFilter::removeAnnotationTags(tile1.data());
+                int originalWays = 0;
+                int mergedWays = 0;
+                if (zoomLevel < 17) {
+                    WayConcatenator concatenator(tile1.data());
+                    originalWays = concatenator.originalWays();
+                    mergedWays = concatenator.mergedWays();
+                }
                 GeoDocPtr tile2 = GeoDocPtr(loader.clip(zoomLevel, tileId.x(), tileId.y()));
                 GeoDocPtr combined = GeoDocPtr(mergeDocuments(tile1.data(), tile2.data()));
                 NodeReducer nodeReducer(combined.data(), zoomLevel);
@@ -295,6 +302,9 @@ int main(int argc, char *argv[])
                 std::cout << combined->name().toStdString() << ").";
                 double const reduction = nodeReducer.removedNodes() / qMax(1.0, double(nodeReducer.remainingNodes() + nodeReducer.removedNodes()));
                 std::cout << " Node reduction: " << qRound(reduction * 100.0) << "%";
+                if (originalWays > 0) {
+                    std::cout << " , " << originalWays << " ways merged to " << mergedWays;
+                }
                 std::cout << "      \r";
                 std::cout.flush();
             }

@@ -21,18 +21,21 @@ class GeoDataPlacemark;
 
 class WayChunk
 {
+private:
+    typedef QSharedPointer<GeoDataPlacemark> PlacemarkPtr;
+
 public:
-    WayChunk(GeoDataPlacemark *placemark, qint64 first, qint64 last );
+    WayChunk(const PlacemarkPtr &placemark, qint64 first, qint64 last );
     ~WayChunk();
-    void append(GeoDataPlacemark *placemark, qint64 last);
+    void append(const PlacemarkPtr &placemark, qint64 last);
     void append(WayChunk *chunk);
-    void prepend(GeoDataPlacemark *placemark, qint64 first);
+    void prepend(const PlacemarkPtr & placemark, qint64 first);
 
     /*
      * Creates a new placemark object by concatenating all the linsetrings which exist in the WayChunk
      * Caller has the responsibility of deleting the object.
      */
-    GeoDataPlacemark* merge();
+    PlacemarkPtr merge();
 
     qint64 first() const;
     qint64 last() const;
@@ -40,11 +43,11 @@ public:
     qint64 id() const;
     void printIds() const;
     int size() const;
-    bool concatPossible(GeoDataPlacemark *placemark) const;
+    bool concatPossible(const PlacemarkPtr &placemark) const;
     GeoDataPlacemark::GeoDataVisualCategory visualCategory() const;
 
 private:
-    QList<GeoDataPlacemark*> m_wayList;
+    QVector<PlacemarkPtr> m_wayList;
     qint64 m_first;
     qint64 m_last;
     GeoDataPlacemark::GeoDataVisualCategory m_visualCategory;

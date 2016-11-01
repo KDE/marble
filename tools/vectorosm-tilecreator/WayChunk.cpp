@@ -21,7 +21,7 @@
 
 namespace Marble {
 
-WayChunk::WayChunk(GeoDataPlacemark *placemark, qint64 first, qint64 last)
+WayChunk::WayChunk(const PlacemarkPtr &placemark, qint64 first, qint64 last)
 {
     m_wayList.append(placemark);
     m_first = first;
@@ -44,14 +44,14 @@ qint64 WayChunk::last() const
     return m_last;
 }
 
-void WayChunk::append(GeoDataPlacemark *placemark, qint64 last)
+void WayChunk::append(const PlacemarkPtr &placemark, qint64 last)
 {
     m_wayList.append(placemark);
     m_last = last;
 
 }
 
-void WayChunk::prepend(GeoDataPlacemark *placemark, qint64 first)
+void WayChunk::prepend(const PlacemarkPtr &placemark, qint64 first)
 {
     m_wayList.prepend(placemark);
     m_first = first;
@@ -64,31 +64,29 @@ void WayChunk::append(WayChunk *chunk)
     m_last = chunk->last();
 }
 
-GeoDataPlacemark* WayChunk::merge()
+WayChunk::PlacemarkPtr WayChunk::merge()
 {
     Q_ASSERT(!m_wayList.isEmpty());
 
-    GeoDataPlacemark *placemark = new GeoDataPlacemark(*(m_wayList.first()));
+    PlacemarkPtr placemark = PlacemarkPtr(new GeoDataPlacemark(*(m_wayList.first())));
     GeoDataLineString *line = static_cast<GeoDataLineString*>(placemark->geometry());
-    QList<GeoDataPlacemark*>::iterator itr = m_wayList.begin();
-    QList<GeoDataPlacemark*>::iterator itrEnd = m_wayList.end();
+    QVector<PlacemarkPtr>::iterator itr = m_wayList.begin();
+    QVector<PlacemarkPtr>::iterator itrEnd = m_wayList.end();
     ++itr;
     for (; itr != itrEnd; ++itr) {
         GeoDataLineString *currentLine = static_cast<GeoDataLineString*>( (*itr)->geometry() );
         currentLine->remove(0);
         (*line) << *currentLine;
     }
-    //qDebug()<<"Merging placemark";
     return placemark;
 }
 
 void WayChunk::reverse()
 {
     std::reverse(m_wayList.begin(), m_wayList.end());
-    QList<GeoDataPlacemark*>::iterator itr = m_wayList.begin();
+    QVector<PlacemarkPtr>::iterator itr = m_wayList.begin();
     for (; itr != m_wayList.end(); ++itr) {
-        GeoDataPlacemark *placemark = *itr;
-        GeoDataLineString *line = static_cast<GeoDataLineString*>(placemark->geometry());
+        GeoDataLineString *line = static_cast<GeoDataLineString*>((*itr)->geometry());
         line->reverse();
     }
     qSwap(m_first, m_last);
@@ -101,7 +99,7 @@ qint64 WayChunk::id() const
 
 void WayChunk::printIds() const
 {
-    QList<GeoDataPlacemark*>::const_iterator itr = m_wayList.begin();
+    QVector<PlacemarkPtr>::const_iterator itr = m_wayList.begin();
     qDebug()<<"IDs of placemarks in chunk";
     for (; itr != m_wayList.end(); ++itr) {
         qDebug()<<"Id :- "<<(*itr)->osmData().id();
@@ -113,7 +111,7 @@ int WayChunk::size() const
     return m_wayList.size();
 }
 
-bool WayChunk::concatPossible(GeoDataPlacemark *placemark) const
+bool WayChunk::concatPossible(const PlacemarkPtr &placemark) const
 {
     const GeoDataPlacemark::GeoDataVisualCategory category = placemark->visualCategory();
     return (category == m_visualCategory);
