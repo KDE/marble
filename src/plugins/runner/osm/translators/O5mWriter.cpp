@@ -256,7 +256,7 @@ void O5mWriter::writeStringPair(const StringPair &pair, StringTable &stringTable
     }
 }
 
-void O5mWriter::writeSigned(qint32 value, QDataStream &stream) const
+void O5mWriter::writeSigned(qint64 value, QDataStream &stream) const
 {
     bool const negative = value < 0;
     if (negative) {

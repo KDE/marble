@@ -40,7 +40,7 @@ private:
   void writeVersion(const OsmPlacemarkData &osmData, QDataStream &stream) const;
   void writeTags(const OsmPlacemarkData &osmData, StringTable &stringTable, QDataStream &stream) const;
   void writeStringPair(const StringPair &pair, StringTable &stringTable, QDataStream &stream) const;
-  void writeSigned(qint32 value, QDataStream &stream) const;
+  void writeSigned(qint64 value, QDataStream &stream) const;
   void writeUnsigned(quint32 value, QDataStream &stream) const;
   qint32 deltaTo(double value, double previous) const;
 };
