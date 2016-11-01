@@ -84,8 +84,12 @@ void OsmNode::create(GeoDataDocument *document) const
     case GeoDataPlacemark::NaturalPeak:
         placemark->setZoomLevel(11);
         break;
+    case GeoDataPlacemark::AmenityBench:
+    case GeoDataPlacemark::AmenityWasteBasket:
+        placemark->setZoomLevel(19);
+        break;
     default:
-        placemark->setZoomLevel(17);
+        placemark->setZoomLevel(18);
         break;
     }
 
