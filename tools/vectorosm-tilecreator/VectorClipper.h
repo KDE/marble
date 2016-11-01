@@ -19,6 +19,7 @@
 #include "GeoDataLinearRing.h"
 #include <TileId.h>
 #include <GeoSceneMercatorTileProjection.h>
+#include <OsmObjectManager.h>
 
 #include "clipper/clipper.hpp"
 
@@ -49,16 +50,17 @@ private:
         if (isClosed && minArea > 0.0 && area(*static_cast<const GeoDataLinearRing*>(ring)) < minArea) {
             return;
         }
+        auto const & osmData = placemark->osmData();
         using namespace ClipperLib;
-        Path path;
+        Path subject;
         foreach(auto const & node, *ring) {
-            path << IntPoint(qRound64(node.longitude() * m_scale), qRound64(node.latitude() * m_scale));
+            subject << IntPoint(&node);
         }
 
         Clipper clipper;
         clipper.PreserveCollinear(true);
         clipper.AddPath(tileBoundary, ptClip, true);
-        clipper.AddPath(path, ptSubject, isClosed);
+        clipper.AddPath(subject, ptSubject, isClosed);
         PolyTree tree;
         clipper.Execute(ctIntersection, tree);
         Paths paths;
@@ -68,14 +70,20 @@ private:
             OpenPathsFromPolyTree(tree, paths);
         }
         foreach(const auto &path, paths) {
-            T* ring = new T;
+            GeoDataPlacemark* newPlacemark = new GeoDataPlacemark();
+            T* newRing = new T;
             foreach(const auto &point, path) {
-                *ring << GeoDataCoordinates(double(point.X) / m_scale, double(point.Y) / m_scale);
+                GeoDataCoordinates const coordinates = point.coordinates();
+                *newRing << coordinates;
+                auto const originalOsmData = osmData.nodeReference(coordinates);
+                if (originalOsmData.id() > 0) {
+                    newPlacemark->osmData().addNodeReference(coordinates, originalOsmData);
+                }
             }
 
-            GeoDataPlacemark* newPlacemark = new GeoDataPlacemark();
-            newPlacemark->setGeometry(ring);
+            newPlacemark->setGeometry(newRing);
             copyTags(*placemark, *newPlacemark);
+            OsmObjectManager::initializeOsmData(newPlacemark);
             document->append(newPlacemark);
         }
     }
@@ -84,8 +92,6 @@ private:
 
     void copyTags(const GeoDataPlacemark &source, GeoDataPlacemark &target) const;
     void copyTags(const OsmPlacemarkData &originalPlacemarkData, OsmPlacemarkData& targetOsmData) const;
-
-    static qint64 const m_scale = 10000000000;
 
     QMap<TileId, QVector<GeoDataPlacemark*> > m_items;
     int m_maxZoomLevel;
