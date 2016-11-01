@@ -18,6 +18,7 @@
 #include "GeoDataLineString.h"
 #include "OsmPlacemarkData.h"
 #include "StyleBuilder.h"
+#include "OsmObjectManager.h"
 
 #include "WayConcatenator.h"
 #include "WayChunk.h"
@@ -25,121 +26,75 @@
 
 namespace Marble {
 
-WayConcatenator::WayConcatenator(GeoDataDocument *document, const QStringList &tagsList, bool andFlag) : TagsFilter(document, tagsList, andFlag)
+WayConcatenator::WayConcatenator(GeoDataDocument *document) :
+    BaseFilter(document),
+    m_originalWays(0),
+    m_mergedWays(0)
 {
-    qint64 count = 0;
-    qint64 chunkCount = 0;
-    qint64 newCount = 0;
-    qint64 placemarkCount = 0;
-
-    // qDebug()<<"** Number of TagFiletered placemarks "<< m_objects.size();
-    foreach (GeoDataPlacemark* placemark, placemarks()) {
-        qDebug()<<" ";
-        ++placemarkCount;
-        // qDebug()<<"No."<<plcCount;
+    typedef QSharedPointer<GeoDataPlacemark> PlacemarkPtr;
+    foreach (GeoDataPlacemark* original, placemarks()) {
+        PlacemarkPtr placemark = PlacemarkPtr(new GeoDataPlacemark(*original));
+        OsmObjectManager::initializeOsmData(placemark.data());
+        bool isWay = false;
         if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType) {
-            qDebug()<<"-- Placemark ID : "<<placemark->osmData().id()<<" visualCategory: "<<StyleBuilder::visualCategoryName(placemark->visualCategory());
-            GeoDataLineString *line = static_cast<GeoDataLineString*>(placemark->geometry());
-            qint64 firstId = placemark->osmData().nodeReference(line->first()).id();
-            qint64 lastId = placemark->osmData().nodeReference(line->last()).id();
+            OsmPlacemarkData const & osmData = placemark->osmData();
+            if (osmData.containsTagKey("highway") || osmData.containsTagKey("railway")) {
+                isWay = true;
+                ++m_originalWays;
+                GeoDataLineString *line = static_cast<GeoDataLineString*>(placemark->geometry());
+                qint64 firstId = osmData.nodeReference(line->first()).id();
+                Q_ASSERT(firstId != 0);
+                qint64 lastId = osmData.nodeReference(line->last()).id();
+                Q_ASSERT(lastId != 0);
 
-            bool containsFirst = m_hash.contains(firstId);
-            bool containsLast = m_hash.contains(lastId);
+                bool containsFirst = m_hash.contains(firstId);
+                bool containsLast = m_hash.contains(lastId);
 
-            if (!containsFirst && !containsLast) {
-                qDebug()<<"No coords matched, creating a new chunk";
-                createWayChunk(placemark, firstId, lastId);
-                ++count;
-                ++chunkCount;
-            } else if (containsFirst && !containsLast) {
-                qDebug()<<"First coord matched";
-                WayChunk *chunk = wayChunk(placemark, firstId);
-                if (chunk != nullptr) {
-                    // qDebug()<< "First* Chunk found, concatenating to it";
-                    concatFirst(placemark, chunk);
-                } else {
-                    // qDebug()<<"";
-                    qDebug()<< "First* No possible chunk found, creating a new chunk";
-                    qDebug()<<"FirstId"<<firstId;
-                    qDebug()<<"lastId"<<lastId;
-                    // qDebug()<<"";
+                if (!containsFirst && !containsLast) {
                     createWayChunk(placemark, firstId, lastId);
-                    ++chunkCount;
-                    ++newCount;
-                }
-                ++count;
-            } else if (!containsFirst && containsLast) {
-                qDebug()<<"Last coord matched";
-                WayChunk *chunk = wayChunk(placemark, lastId);
-                if (chunk != nullptr) {
-                    // qDebug()<< "Last* Chunk found, concatenating to it";
-                    concatLast(placemark, chunk);
-                } else {
-                    // qDebug()<<"";
-                    qDebug()<< "Last* No possible chunk found, creating a new chunk";
-                    qDebug()<<"FirstId"<<firstId;
-                    qDebug()<<"lastId"<<lastId;
-                    // qDebug()<<"";
-                    createWayChunk(placemark, firstId, lastId);
-                    ++chunkCount;
-                    ++newCount;
-                }
-                ++count;
-            } else if (containsFirst && containsLast) {
-                qDebug()<<"Both coord matched";
-                WayChunk *chunk = wayChunk(placemark, firstId);
-                WayChunk *otherChunk = wayChunk(placemark, lastId);
-
-                if (chunk != nullptr && otherChunk != nullptr) {
-                    // qDebug()<< "Both* Both chunks found, concatenating to it";
-                    if(chunk == otherChunk) {
-                        qDebug()<<"#### Both the chunks are same, directly adding to the list of placemarks";
-                        m_wayPlacemarks.append(*placemark);
+                } else if (containsFirst && !containsLast) {
+                    WayChunk *chunk = wayChunk(placemark, firstId);
+                    if (chunk != nullptr) {
+                        concatFirst(placemark, chunk);
                     } else {
-                        concatBoth(placemark, chunk, otherChunk);
-                        ++count;
+                        createWayChunk(placemark, firstId, lastId);
                     }
-                } else if(chunk != nullptr && otherChunk == nullptr) {
-                    // qDebug()<< "Both* First chunk found, concatenating to it";
-                    concatFirst(placemark, chunk);
-                    ++count;
-                } else if(chunk == nullptr && otherChunk != nullptr) {
-                    // qDebug()<< "Both* Last chunk found, concatenating to it";
-                    concatLast(placemark, otherChunk);
-                    ++count;
-                } else {
-                    // qDebug()<<"";
-                    qDebug()<< "Both* No possible chunk found, creating a new chunk";
-                    qDebug()<<"FirstId"<<firstId;
-                    qDebug()<<"lastId"<<lastId;
-                    // qDebug()<<"";
-                    createWayChunk(placemark, firstId, lastId);
-                    ++chunkCount;
-                    ++newCount;
-                    ++count;
+                } else if (!containsFirst && containsLast) {
+                    WayChunk *chunk = wayChunk(placemark, lastId);
+                    if (chunk != nullptr) {
+                        concatLast(placemark, chunk);
+                    } else {
+                        createWayChunk(placemark, firstId, lastId);
+                    }
+                } else if (containsFirst && containsLast) {
+                    WayChunk *chunk = wayChunk(placemark, firstId);
+                    WayChunk *otherChunk = wayChunk(placemark, lastId);
+
+                    if (chunk != nullptr && otherChunk != nullptr) {
+                        if(chunk == otherChunk) {
+                            m_wayPlacemarks.append(placemark);
+                        } else {
+                            concatBoth(placemark, chunk, otherChunk);
+                        }
+                    } else if(chunk != nullptr && otherChunk == nullptr) {
+                        concatFirst(placemark, chunk);
+                    } else if(chunk == nullptr && otherChunk != nullptr) {
+                        concatLast(placemark, otherChunk);
+                    } else {
+                        createWayChunk(placemark, firstId, lastId);
+                    }
+
                 }
-
             }
+        }
 
-            // if(flag) {
-            // 	qDebug()<<" Concat not possible";
-            // 	m_wayPlacemarks.append(*placemark);
-            // }
-        } else{
-            m_wayPlacemarks.append(*placemark);
+        if (!isWay) {
+            m_otherPlacemarks << new GeoDataPlacemark(*original);
         }
     }
 
-    addRejectedPlacemarks();
+    prepareDocument();
     addWayChunks();
-    modifyDocument();
-
-    qDebug()<<"####################################";
-    qDebug()<<"Total OSM ways concatenated: "<<count;
-    qDebug()<<"* Counted no. of chunks: "<<chunkCount;
-    qDebug()<<"* Chunks formed due to no match"<<newCount;
-    // qDebug()<<"Total reverses required: "<<rvr;
-
 }
 
 WayConcatenator::~WayConcatenator()
@@ -147,57 +102,47 @@ WayConcatenator::~WayConcatenator()
     qDeleteAll(m_chunks);
 }
 
-void WayConcatenator::addRejectedPlacemarks()
+int WayConcatenator::originalWays() const
 {
-    QVector<GeoDataPlacemark*>::const_iterator itr = rejectedObjectsBegin();
-    QVector<GeoDataPlacemark*>::const_iterator endItr = rejectedObjectsEnd();
-    for (; itr != endItr; ++itr) {
-        m_wayPlacemarks << **itr;
-    }
+    return m_originalWays;
+}
+
+int WayConcatenator::mergedWays() const
+{
+    return m_mergedWays;
 }
 
 void WayConcatenator::addWayChunks()
 {
-    qint64 totalSize = 0;
-    QSet<WayChunk*> chunkSet;
-    // QList<WayChunk*> chunkList = m_hash.values();
-    // QList<WayChunk*>::iterator cItr = chunkList.begin();
-    // qDebug()<<"* Chunk list size = "<<chunkList.size();
+    for (auto const &placemark: m_wayPlacemarks) {
+        document()->append(new GeoDataPlacemark(*placemark));
+    }
 
+    QSet<WayChunk*> chunkSet;
     QVector<WayChunk*>::iterator itr = m_chunks.begin();
     for (; itr != m_chunks.end(); ++itr) {
         if (!chunkSet.contains(*itr)) {
+            ++m_mergedWays;
             chunkSet.insert(*itr);
-            GeoDataPlacemark* placemark = (*itr)->merge();
+            PlacemarkPtr placemark = (*itr)->merge();
             if (placemark) {
-                m_wayPlacemarks.append(*placemark);
-                totalSize += (*itr)->size();
-                qDebug()<<"Chunk:";
-                (*itr)->printIds();
-                qDebug()<<"Size of this chunk"<<(*itr)->size();
-                qDebug()<<"Merged";
-                qDebug()<<" ";
-                delete placemark;
+                document()->append(new GeoDataPlacemark(*placemark));
             }
         }
     }
-    qDebug()<<"*** Total number of ways merged"<<totalSize;
-    qDebug()<<"******* m_chunks vector size"<<m_chunks.size();
-    // qDebug()<< "Entered 1";
+
+    m_chunks.clear();
 }
 
-void WayConcatenator::modifyDocument()
+void WayConcatenator::prepareDocument()
 {
     document()->clear();
-    QVector<GeoDataPlacemark>::iterator itr;
-    itr = m_wayPlacemarks.begin();
-    for (; itr != m_wayPlacemarks.end(); ++itr) {
-        GeoDataPlacemark *placemark = new GeoDataPlacemark(*itr);
+    for (auto placemark: m_otherPlacemarks) {
         document()->append(placemark);
     }
 }
 
-void WayConcatenator::createWayChunk(GeoDataPlacemark *placemark, qint64 firstId, qint64 lastId)
+void WayConcatenator::createWayChunk(const PlacemarkPtr &placemark, qint64 firstId, qint64 lastId)
 {
     WayChunk *chunk = new WayChunk(placemark, firstId, lastId);
     m_hash.insert(firstId, chunk);
@@ -207,31 +152,21 @@ void WayConcatenator::createWayChunk(GeoDataPlacemark *placemark, qint64 firstId
     m_chunks.append(chunk);
 }
 
-WayChunk* WayConcatenator::wayChunk(GeoDataPlacemark *placemark, qint64 matchId) const
+WayChunk* WayConcatenator::wayChunk(const PlacemarkPtr &placemark, qint64 matchId) const
 {
-    qDebug()<<"Searching for a compatible WayChunk";
-    qDebug()<<"Visual category for placemark"<<StyleBuilder::visualCategoryName(placemark->visualCategory());
-
     QHash<qint64, WayChunk*>::ConstIterator matchItr = m_hash.find(matchId);
     while (matchItr != m_hash.end() && matchItr.key() == matchId) {
         WayChunk *chunk = matchItr.value();
-        qDebug()<<"		* Chunk ID: "<<chunk->id()<<" Visual category for chunk"<<StyleBuilder::visualCategoryName(chunk->visualCategory());
         if (chunk->concatPossible(placemark)) {
-            qDebug()<<"Match found";
             return chunk;
         }
         ++matchItr;
     }
-    qDebug()<<"### No Chunk found, returning nullptr";
     return nullptr;
 }
 
-void WayConcatenator::concatFirst(GeoDataPlacemark *placemark, WayChunk *chunk)
+void WayConcatenator::concatFirst(const PlacemarkPtr &placemark, WayChunk *chunk)
 {
-    qDebug()<<"First coord matched";
-    qDebug()<<"Matched with: ";
-    chunk->printIds();
-
     GeoDataLineString *line = static_cast<GeoDataLineString*>(placemark->geometry());
     qint64 firstId = placemark->osmData().nodeReference(line->first()).id();
     qint64 lastId = placemark->osmData().nodeReference(line->last()).id();
@@ -244,24 +179,17 @@ void WayConcatenator::concatFirst(GeoDataPlacemark *placemark, WayChunk *chunk)
 
     if (firstId == chunk->last()) {
         //First node matches with an existing last node
-        qDebug()<<"Appended chunk";
         chunk->append(placemark, lastId);
     } else {
         //First node matches with an existing first node
         //Reverse the GeoDataLineString of the placemark
         line->reverse();
         chunk->prepend(placemark, lastId);
-        qDebug()<<"Reversed line and then prepended";
     }
-
 }
 
-void WayConcatenator::concatLast(GeoDataPlacemark *placemark, WayChunk *chunk)
+void WayConcatenator::concatLast(const PlacemarkPtr &placemark, WayChunk *chunk)
 {
-    qDebug()<<"Last coord matched";
-    qDebug()<<"Matched with: ";
-    chunk->printIds();
-
     GeoDataLineString *line = static_cast<GeoDataLineString*>(placemark->geometry());
     qint64 firstId = placemark->osmData().nodeReference(line->first()).id();
     qint64 lastId = placemark->osmData().nodeReference(line->last()).id();
@@ -273,26 +201,15 @@ void WayConcatenator::concatLast(GeoDataPlacemark *placemark, WayChunk *chunk)
     m_hash.insert(firstId, chunk);
 
     if (lastId == chunk->first()) {
-        qDebug()<<"Prepended chunk";
         chunk->prepend(placemark, firstId);
     } else {
         line->reverse();
         chunk->append(placemark, firstId);
-        qDebug()<<"Reversed line and then appended";
     }
-
 }
 
-void WayConcatenator::concatBoth(GeoDataPlacemark *placemark, WayChunk *chunk, WayChunk *otherChunk)
+void WayConcatenator::concatBoth(const PlacemarkPtr &placemark, WayChunk *chunk, WayChunk *otherChunk)
 {
-
-    qDebug()<<" Concat possible";
-    qDebug()<<"Inserting in the middle";
-    qDebug()<<"Matched first coord with: ";
-    chunk->printIds();
-    qDebug()<<"Matched last coord with";
-    otherChunk->printIds();
-
     GeoDataLineString *line = static_cast<GeoDataLineString*>(placemark->geometry());
     qint64 firstId = placemark->osmData().nodeReference(line->first()).id();
     qint64 lastId = placemark->osmData().nodeReference(line->last()).id();
@@ -310,7 +227,6 @@ void WayConcatenator::concatBoth(GeoDataPlacemark *placemark, WayChunk *chunk, W
     chunk->append(placemark, lastId);
 
     if (lastId == otherChunk->last()) {
-        qDebug()<<" otherChunk reversed";
         otherChunk->reverse();
     }
     chunk->append(otherChunk);
@@ -326,7 +242,6 @@ void WayConcatenator::concatBoth(GeoDataPlacemark *placemark, WayChunk *chunk, W
     m_hash.insert(otherChunk->last(), chunk);
 
     m_chunks.removeOne(otherChunk);
-
 }
 
 }
