@@ -38,8 +38,11 @@ WayConcatenator::WayConcatenator(GeoDataDocument *document) :
         bool isWay = false;
         if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType) {
             OsmPlacemarkData const & osmData = placemark->osmData();
-            if (osmData.containsTagKey("highway") || osmData.containsTagKey("railway")) {
-                isWay = true;
+            isWay = osmData.containsTagKey("highway") ||
+                    osmData.containsTagKey("railway") ||
+                    osmData.containsTagKey("waterway");
+            if (isWay) {
+                ;
                 ++m_originalWays;
                 GeoDataLineString *line = static_cast<GeoDataLineString*>(placemark->geometry());
                 qint64 firstId = osmData.nodeReference(line->first()).id();
