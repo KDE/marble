@@ -410,7 +410,7 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParam
         }
 
         int zoomLevel = placemark->zoomLevel();
-        if ( zoomLevel > 18 ) {
+        if ( zoomLevel > 20 ) {
             break;
         }
 
