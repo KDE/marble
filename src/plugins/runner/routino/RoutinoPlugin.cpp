@@ -75,11 +75,16 @@ public:
         ui_configWidget->setupUi( this );
         QStringList transports;
         //TODO: read from profiles.xml
-        //TODO: translate
-        transports << "foot" << "horse" << "wheelchair" << "bicycle" << "moped" << "motorbike" << "motorcar" << "goods" << "hgv" << "psv";
-        foreach ( const QString &transport, transports) {
-            ui_configWidget->transport->addItem(transport, transport);
-        }
+        ui_configWidget->transport->addItem(tr("Foot"), "foot");
+        ui_configWidget->transport->addItem(tr("Horse"), "horse");
+        ui_configWidget->transport->addItem(tr("Wheelchair"), "wheelchair");
+        ui_configWidget->transport->addItem(tr("Bicycle"), "bicycle");
+        ui_configWidget->transport->addItem(tr("Moped"), "moped");
+        ui_configWidget->transport->addItem(tr("Motorbike"), "motorbike");
+        ui_configWidget->transport->addItem(tr("Motorcar"), "motorcar");
+        ui_configWidget->transport->addItem(tr("Small lorry"), "goods");
+        ui_configWidget->transport->addItem(tr("Large lorry"), "hgv");
+        ui_configWidget->transport->addItem(tr("Public Service Vehicle"), "psv");
     }
     virtual ~RoutinoConfigWidget()
     {

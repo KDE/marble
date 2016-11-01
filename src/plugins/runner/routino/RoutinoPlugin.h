@@ -14,9 +14,6 @@
 
 #include "RoutingRunnerPlugin.h"
 
-namespace Ui {
-    class RoutinoConfigWidget;
-}
 namespace Marble
 {
 
