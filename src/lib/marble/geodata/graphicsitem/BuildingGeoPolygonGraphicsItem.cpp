@@ -16,7 +16,6 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataLinearRing.h"
 #include "GeoDataPolygon.h"
-#include "GeoDataIconStyle.h"
 #include "GeoDataPolyStyle.h"
 #include "OsmPlacemarkData.h"
 #include "GeoPainter.h"
@@ -224,7 +223,6 @@ void BuildingGeoPolygonGraphicsItem::paintRoof(GeoPainter* painter, const Viewpo
     painter->save();
     QPen const currentPen = configurePainter(painter, viewport);
 
-    bool const hasIcon = !style()->iconStyle().iconPath().isEmpty();
     qreal maxSize(0.0);
     QPointF roofCenter;
 
@@ -232,13 +230,13 @@ void BuildingGeoPolygonGraphicsItem::paintRoof(GeoPainter* painter, const Viewpo
         painter->setPen(Qt::NoPen);
     }
 
-    // first paint the area and icon (and the outline if there are no inner boundaries)
+    // first paint the area (and the outline if there are no inner boundaries)
 
     double maxArea = 0.0;
     foreach(QPolygonF* outlinePolygon, outlinePolygons) {
         QRectF const boundingRect = outlinePolygon->boundingRect();
         QPolygonF buildingRoof;
-        if (hasIcon || !m_buildingLabel.isEmpty() || !m_entries.isEmpty()) {
+        if (!m_buildingLabel.isEmpty() || !m_entries.isEmpty()) {
             QSizeF const polygonSize = boundingRect.size();
             qreal size = polygonSize.width() * polygonSize.height();
             if (size > maxSize) {
@@ -283,11 +281,7 @@ void BuildingGeoPolygonGraphicsItem::paintRoof(GeoPainter* painter, const Viewpo
             painter->translate(-offset);
         }
 
-        if (hasIcon && !roofCenter.isNull()) {
-            QImage const icon = style()->iconStyle().scaledIcon();
-            QPointF const iconCenter(icon.size().width()/2.0, icon.size().height()/2.0);
-            painter->drawImage(roofCenter-iconCenter, icon);
-        } else if (drawAccurate3D && !m_buildingLabel.isEmpty() && !roofCenter.isNull()) {
+        if (drawAccurate3D && !m_buildingLabel.isEmpty() && !roofCenter.isNull()) {
             double const w2 = 0.5 * painter->fontMetrics().width(m_buildingLabel);
             double const ascent = painter->fontMetrics().ascent();
             double const descent = painter->fontMetrics().descent();
