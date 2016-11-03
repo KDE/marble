@@ -42,51 +42,52 @@ WayConcatenator::WayConcatenator(GeoDataDocument *document) :
                     osmData.containsTagKey("railway") ||
                     osmData.containsTagKey("waterway");
             if (isWay) {
-                ;
-                ++m_originalWays;
                 GeoDataLineString *line = static_cast<GeoDataLineString*>(placemark->geometry());
                 qint64 firstId = osmData.nodeReference(line->first()).id();
                 Q_ASSERT(firstId != 0);
                 qint64 lastId = osmData.nodeReference(line->last()).id();
                 Q_ASSERT(lastId != 0);
+                if (firstId > 0 && lastId > 0) {
+                    ++m_originalWays;
+                    bool containsFirst = m_hash.contains(firstId);
+                    bool containsLast = m_hash.contains(lastId);
 
-                bool containsFirst = m_hash.contains(firstId);
-                bool containsLast = m_hash.contains(lastId);
-
-                if (!containsFirst && !containsLast) {
-                    createWayChunk(placemark, firstId, lastId);
-                } else if (containsFirst && !containsLast) {
-                    WayChunk *chunk = wayChunk(placemark, firstId);
-                    if (chunk != nullptr) {
-                        concatFirst(placemark, chunk);
-                    } else {
+                    if (!containsFirst && !containsLast) {
                         createWayChunk(placemark, firstId, lastId);
-                    }
-                } else if (!containsFirst && containsLast) {
-                    WayChunk *chunk = wayChunk(placemark, lastId);
-                    if (chunk != nullptr) {
-                        concatLast(placemark, chunk);
-                    } else {
-                        createWayChunk(placemark, firstId, lastId);
-                    }
-                } else if (containsFirst && containsLast) {
-                    WayChunk *chunk = wayChunk(placemark, firstId);
-                    WayChunk *otherChunk = wayChunk(placemark, lastId);
-
-                    if (chunk != nullptr && otherChunk != nullptr) {
-                        if(chunk == otherChunk) {
-                            m_wayPlacemarks.append(placemark);
+                    } else if (containsFirst && !containsLast) {
+                        WayChunk *chunk = wayChunk(placemark, firstId);
+                        if (chunk != nullptr) {
+                            concatFirst(placemark, chunk);
                         } else {
-                            concatBoth(placemark, chunk, otherChunk);
+                            createWayChunk(placemark, firstId, lastId);
                         }
-                    } else if(chunk != nullptr && otherChunk == nullptr) {
-                        concatFirst(placemark, chunk);
-                    } else if(chunk == nullptr && otherChunk != nullptr) {
-                        concatLast(placemark, otherChunk);
-                    } else {
-                        createWayChunk(placemark, firstId, lastId);
-                    }
+                    } else if (!containsFirst && containsLast) {
+                        WayChunk *chunk = wayChunk(placemark, lastId);
+                        if (chunk != nullptr) {
+                            concatLast(placemark, chunk);
+                        } else {
+                            createWayChunk(placemark, firstId, lastId);
+                        }
+                    } else if (containsFirst && containsLast) {
+                        WayChunk *chunk = wayChunk(placemark, firstId);
+                        WayChunk *otherChunk = wayChunk(placemark, lastId);
 
+                        if (chunk != nullptr && otherChunk != nullptr) {
+                            if(chunk == otherChunk) {
+                                m_wayPlacemarks.append(placemark);
+                            } else {
+                                concatBoth(placemark, chunk, otherChunk);
+                            }
+                        } else if(chunk != nullptr && otherChunk == nullptr) {
+                            concatFirst(placemark, chunk);
+                        } else if(chunk == nullptr && otherChunk != nullptr) {
+                            concatLast(placemark, otherChunk);
+                        } else {
+                            createWayChunk(placemark, firstId, lastId);
+                        }
+                    }
+                } else {
+                    isWay = false;
                 }
             }
         }
