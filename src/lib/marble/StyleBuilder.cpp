@@ -85,6 +85,8 @@ public:
     QColor m_defaultLabelColor;
     QFont m_defaultFont;
     GeoDataStyle::Ptr m_defaultStyle[GeoDataPlacemark::LastIndex];
+    GeoDataStyle::Ptr m_styleTreeAutumn;
+    GeoDataStyle::Ptr m_styleTreeWinter;
     bool m_defaultStyleInitialized;
 
     /**
@@ -574,6 +576,8 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::NaturalPeak]              = createOsmPOIStyle(osmFont, "individual/peak", amenityColor);
     m_defaultStyle[GeoDataPlacemark::NaturalPeak]->iconStyle().setScale(0.33);
     m_defaultStyle[GeoDataPlacemark::NaturalTree]              = createOsmPOIStyle(osmFont, "individual/tree-29", amenityColor); // tree-16 provides the official icon
+    m_styleTreeAutumn                                          = createOsmPOIStyle(osmFont, "individual/tree-29-autumn", amenityColor);
+    m_styleTreeWinter                                          = createOsmPOIStyle(osmFont, "individual/tree-29-winter", amenityColor);
 
     m_defaultStyle[GeoDataPlacemark::ShopBeverages]            = createOsmPOIStyle(osmFont, "shop/beverages-14", shopColor);
     m_defaultStyle[GeoDataPlacemark::ShopHifi]                 = createOsmPOIStyle(osmFont, "shop/hifi-14", shopColor);
@@ -1218,30 +1222,19 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
             if (qAbs(lat) > 15) {
                 /** @todo Should maybe auto-adjust to MarbleClock at some point */
                 int const month = QDate::currentDate().month();
-                QString season;
                 bool const southernHemisphere = lat < 0;
                 if (southernHemisphere) {
                     if (month >= 3 && month <= 5) {
-                        season = "autumn";
+                        style = d->m_styleTreeAutumn;
                     } else if (month >= 6 && month <= 8) {
-                        season = "winter";
+                        style = d->m_styleTreeWinter;
                     }
                 } else {
                     if (month >= 9 && month <= 11) {
-                        season = "autumn";
+                        style = d->m_styleTreeAutumn;
                     } else if (month == 12 || month == 1 || month == 2) {
-                        season = "winter";
+                        style = d->m_styleTreeWinter;
                     }
-                }
-
-                if (!season.isEmpty()) {
-                    GeoDataIconStyle iconStyle = style->iconStyle();
-                    QString const image = QLatin1String("svg/osmcarto/svg/individual/tree-29-") + season + QLatin1String(".svg");
-                    iconStyle.setIconPath(MarbleDirs::path(image));
-
-                    GeoDataStyle::Ptr newStyle(new GeoDataStyle(*style));
-                    newStyle->setIconStyle(iconStyle);
-                    style = newStyle;
                 }
             }
         }
