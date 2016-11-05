@@ -26,10 +26,12 @@ private:
     typedef QSharedPointer<GeoDataPlacemark> PlacemarkPtr;
 
 public:
+    typedef QSharedPointer<WayChunk> Ptr;
+
     WayChunk(const PlacemarkPtr &placemark, qint64 first, qint64 last );
     ~WayChunk();
     void append(const PlacemarkPtr &placemark, qint64 last);
-    void append(WayChunk *chunk);
+    void append(const Ptr &chunk);
     void prepend(const PlacemarkPtr & placemark, qint64 first);
 
     /*
