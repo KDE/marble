@@ -25,39 +25,34 @@ namespace Marble {
 
 NodeReducer::NodeReducer(GeoDataDocument* document, int zoomLevel) :
     BaseFilter(document),
-    m_resolution(resolutionForLevel(zoomLevel)),
     m_removedNodes(0),
     m_remainingNodes(0)
 {
-    /*
-     * @todo FIXME distance based reduction is too simple for polygons, needs sth like Douglas-Peucker
-     */
-
     foreach (GeoDataPlacemark* placemark, placemarks()) {
         GeoDataGeometry const * const geometry = placemark->geometry();
         if(geometry->nodeType() == GeoDataTypes::GeoDataLineStringType) {
             GeoDataLineString const * prevLine = static_cast<GeoDataLineString const *>(geometry);
             GeoDataLineString* reducedLine = new GeoDataLineString;
-            reduce(prevLine, placemark->osmData(), reducedLine);
+            reduce(*prevLine, placemark, reducedLine, zoomLevel);
             placemark->setGeometry(reducedLine);
         } else if (zoomLevel < 17) {
             if(geometry->nodeType() == GeoDataTypes::GeoDataLinearRingType) {
                 GeoDataLinearRing const * prevRing = static_cast<GeoDataLinearRing const *>(geometry);
                 GeoDataLinearRing* reducedRing = new GeoDataLinearRing;
-                reduce(prevRing, placemark->osmData(), reducedRing);
+                reduce(*prevRing, placemark, reducedRing, zoomLevel);
                 placemark->setGeometry(reducedRing);
             } else if(geometry->nodeType() == GeoDataTypes::GeoDataPolygonType) {
                 GeoDataPolygon* reducedPolygon = new GeoDataPolygon;
                 GeoDataPolygon const * prevPolygon = static_cast<GeoDataPolygon const *>(geometry);
                 GeoDataLinearRing const * prevRing = &(prevPolygon->outerBoundary());
                 GeoDataLinearRing reducedRing;
-                reduce(prevRing, placemark->osmData(), &reducedRing);
+                reduce(*prevRing, placemark, &reducedRing, zoomLevel);
                 reducedPolygon->setOuterBoundary(reducedRing);
                 QVector<GeoDataLinearRing> const & innerBoundaries = prevPolygon->innerBoundaries();
                 for(int i = 0; i < innerBoundaries.size(); i++) {
                     prevRing = &innerBoundaries[i];
                     GeoDataLinearRing reducedInnerRing;
-                    reduce(prevRing, placemark->osmData(), &reducedInnerRing);
+                    reduce(*prevRing, placemark, &reducedInnerRing, zoomLevel);
                     reducedPolygon->appendInnerBoundary(reducedInnerRing);
                 }
                 placemark->setGeometry(reducedPolygon);
@@ -71,69 +66,51 @@ qint64 NodeReducer::remainingNodes() const
     return m_remainingNodes;
 }
 
+qreal NodeReducer::epsilonForString(int detailLevel) const
+{
+    int const factor = 1 << (qAbs(detailLevel-12));
+    return detailLevel < 12 ? 60.0 * factor : 60.0 / factor;
+}
+
+qreal NodeReducer::epsilonForArea(int detailLevel) const
+{
+    int const factor = 1 << (qAbs(detailLevel-12));
+    return detailLevel < 12 ? 90.0 * factor : 90.0 / factor;
+}
+
+qreal NodeReducer::perpendicularDistance(const GeoDataCoordinates &a, const GeoDataCoordinates &b, const GeoDataCoordinates &c) const
+{
+    qreal ret;
+    qreal const y0 = a.latitude();
+    qreal const x0 = a.longitude();
+    qreal const y1 = b.latitude();
+    qreal const x1 = b.longitude();
+    qreal const y2 = c.latitude();
+    qreal const x2 = c.longitude();
+    qreal const y01 = x0 - x1;
+    qreal const x01 = y0 - y1;
+    qreal const y10 = x1 - x0;
+    qreal const x10 = y1 - y0;
+    qreal const y21 = x2 - x1;
+    qreal const x21 = y2 - y1;
+    qreal const len = (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2);
+    qreal const t = (x01 * x21 + y01 * y21) / len;
+    if ( t < 0.0 ) {
+        ret = EARTH_RADIUS * distanceSphere(a, b);
+    } else if ( t > 1.0 ) {
+        ret = EARTH_RADIUS * distanceSphere(a, c);
+    } else {
+        qreal const nom = qAbs( x21 * y10 - x10 * y21 );
+        qreal const den = sqrt( x21 * x21 + y21 * y21 );
+        ret = EARTH_RADIUS * nom / den;
+    }
+
+    return ret;
+}
+
 qint64 NodeReducer::removedNodes() const
 {
     return m_removedNodes;
-}
-
-qreal NodeReducer::resolutionForLevel(int level) {
-    switch (level) {
-    case 0:
-        return 0.0655360;
-        break;
-    case 1:
-        return 0.0327680;
-        break;
-    case 2:
-        return 0.0163840;
-        break;
-    case 3:
-        return 0.0081920;
-        break;
-    case 4:
-        return 0.0040960;
-        break;
-    case 5:
-        return 0.0020480;
-        break;
-    case 6:
-        return 0.0010240;
-        break;
-    case 7:
-        return 0.0005120;
-        break;
-    case 8:
-        return 0.0002560;
-        break;
-    case 9:
-        return 0.0001280;
-        break;
-    case 10:
-        return 0.0000640;
-        break;
-    case 11:
-        return 0.0000320;
-        break;
-    case 12:
-        return 0.0000160;
-        break;
-    case 13:
-        return 0.0000080;
-        break;
-    case 14:
-        return 0.0000040;
-        break;
-    case 15:
-        return 0.0000020;
-        break;
-    case 16:
-        return 0.0000010;
-        break;
-    default:
-    case 17:
-        return 0.0000005;
-        break;
-    }
 }
 
 }

@@ -289,7 +289,7 @@ ClipperLib::Path VectorClipper::clipPath(const GeoDataLatLonBox &box) const
     return path;
 }
 
-bool VectorClipper::canBeArea(GeoDataPlacemark::GeoDataVisualCategory visualCategory) const
+bool VectorClipper::canBeArea(GeoDataPlacemark::GeoDataVisualCategory visualCategory)
 {
     if (visualCategory >= GeoDataPlacemark::HighwaySteps && visualCategory <= GeoDataPlacemark::HighwayMotorway) {
         return false;

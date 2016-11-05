@@ -14,6 +14,7 @@
 #include "BaseFilter.h"
 #include "MarbleMath.h"
 #include "OsmPlacemarkData.h"
+#include "VectorClipper.h"
 
 namespace Marble {
 
@@ -25,39 +26,78 @@ public:
     qint64 remainingNodes() const;
 
 private:
+    qreal epsilonForString(int detailLevel) const;
+    qreal epsilonForArea(int detailLevel) const;
+    qreal perpendicularDistance(const GeoDataCoordinates &a, const GeoDataCoordinates &b, const GeoDataCoordinates &c) const;
+
     template<class T>
-    void reduce(T const * lineString, const OsmPlacemarkData &osmData, T* reducedLine)
+    void reduce(T const & lineString, const GeoDataPlacemark* placemark, T* reducedLine, int tileLevel)
     {
-        qint64 const prevSize = lineString->size();
-        if (prevSize < 2) {
-            m_remainingNodes += prevSize;
-            return;
-        }
+        bool const isArea = lineString.isClosed() && VectorClipper::canBeArea(placemark->visualCategory());
+        qreal const epsilon = isArea ? epsilonForArea(tileLevel) : epsilonForString(tileLevel);
+        *reducedLine = douglasPeucker(lineString, placemark->osmData(), epsilon);
 
-        auto iter = lineString->begin();
-        GeoDataCoordinates currentCoords = *iter;
-        reducedLine->append(*iter);
-        ++iter;
-        for (auto const end = lineString->end() - 1; iter != end; ++iter) {
-            if (!osmData.nodeReference(currentCoords).isEmpty()) {
-                continue; // do not remove nodes with tags
-            }
-            if (distanceSphere( currentCoords, *iter ) >= m_resolution) {
-                currentCoords = *iter;
-                reducedLine->append(*iter);
-            }
-        }
-        reducedLine->append(*iter);
-
+        qint64 prevSize = lineString.size();
         qint64 reducedSize = reducedLine->size();
         m_removedNodes += (prevSize - reducedSize);
         m_remainingNodes += reducedSize;
-        //qDebug()<<"Nodes reduced "<<(prevSize - reducedSize)<<endl;
     }
 
-    static qreal resolutionForLevel(int level);
+    template<class T>
+    T extract(T const & lineString, int start, int end) const
+    {
+        T result;
+        for (int i=start; i<=end; ++i) {
+            result << lineString[i];
+        }
+        return result;
+    }
 
-    qreal m_resolution;
+    template<class T>
+    T merge(T const & a, T const &b) const
+    {
+        T result = a;
+        for (int i=1, n=b.size(); i<n; ++i) {
+            result << b[i];
+        }
+        return result;
+    }
+
+    template<class T>
+    T douglasPeucker(T const & lineString, const OsmPlacemarkData &osmData, qreal epsilon) const
+    {
+        if (lineString.size() < 3) {
+            return lineString;
+        }
+
+        // @todo Keep nodes with tags
+//        if (!osmData.nodeReference(currentCoords).isEmpty()) {
+//            continue; // do not remove nodes with tags
+//        }
+
+        double maxDistance = 0.0;
+        int index = 0;
+        int const end = lineString.size()-1;
+        for (int i = 1; i<end; ++i) {
+            double const distance = perpendicularDistance(lineString[i], lineString[0], lineString[end]);
+            if (distance > maxDistance) {
+                index = i;
+                maxDistance = distance;
+            }
+        }
+
+        if (maxDistance >= epsilon) {
+            T const left = douglasPeucker(extract(lineString, 0, index), osmData, epsilon);
+            T const right = douglasPeucker(extract(lineString, index, end), osmData, epsilon);
+            return merge(left, right);
+        }
+
+        T result;
+        result << lineString[0];
+        result << lineString[end];
+        return result;
+    }
+
     qint64 m_removedNodes;
     qint64 m_remainingNodes;
 };

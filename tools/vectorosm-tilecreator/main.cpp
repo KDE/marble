@@ -273,9 +273,9 @@ int main(int argc, char *argv[])
                     originalWays = concatenator.originalWays();
                     mergedWays = concatenator.mergedWays();
                 }
+                NodeReducer nodeReducer(tile1.data(), zoomLevel);
                 GeoDocPtr tile2 = GeoDocPtr(loader.clip(zoomLevel, tileId.x(), tileId.y()));
                 GeoDocPtr combined = GeoDocPtr(mergeDocuments(tile1.data(), tile2.data()));
-                NodeReducer nodeReducer(combined.data(), zoomLevel);
 
                 if (boundaryTiles.contains(iter.key())) {
                     writeBoundaryTile(tile1.data(), region, parser, tileId.x(), tileId.y(), zoomLevel);
