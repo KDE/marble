@@ -131,30 +131,25 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
 
     typedef QPair<QString, GeoGraphicsItem*> LayerItem;
     QList<LayerItem> defaultLayer;
-    int paintedItems = 0;
     QHash<QString, QVector<GeoGraphicsItem*> > paintedFragments;
     QSet<QString> const knownLayers = QSet<QString>::fromList(d->m_styleBuilder->renderOrder());
-    auto const viewLatLonAltBox = viewport->viewLatLonAltBox();
     foreach( GeoGraphicsItem* item, items ) {
-        if ( item->latLonAltBox().intersects(viewLatLonAltBox) ) {
-            QStringList paintLayers = item->paintLayers();
-            if (paintLayers.isEmpty()) {
-                mDebug() << item << " provides no paint layers, so I force one onto it.";
-                paintLayers << QString();
-            }
-            foreach(const auto &layer, paintLayers) {
-                if (knownLayers.contains(layer)) {
-                    paintedFragments[layer] << item;
-                } else {
-                    defaultLayer << LayerItem(layer, item);
-                    static QSet<QString> missingLayers;
-                    if (!missingLayers.contains(layer)) {
-                        mDebug() << "Missing layer " << layer << ", in render order, will render it on top";
-                        missingLayers << layer;
-                    }
+        QStringList paintLayers = item->paintLayers();
+        if (paintLayers.isEmpty()) {
+            mDebug() << item << " provides no paint layers, so I force one onto it.";
+            paintLayers << QString();
+        }
+        foreach(const auto &layer, paintLayers) {
+            if (knownLayers.contains(layer)) {
+                paintedFragments[layer] << item;
+            } else {
+                defaultLayer << LayerItem(layer, item);
+                static QSet<QString> missingLayers;
+                if (!missingLayers.contains(layer)) {
+                    mDebug() << "Missing layer " << layer << ", in render order, will render it on top";
+                    missingLayers << layer;
                 }
             }
-            ++paintedItems;
         }
     }
 
@@ -174,9 +169,8 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
     }
 
     painter->restore();
-    d->m_runtimeTrace = QStringLiteral("Geometries: %1 Drawn: %2 Zoom: %3")
+    d->m_runtimeTrace = QStringLiteral("Geometries: %1 Zoom: %2")
                 .arg( items.size() )
-                .arg( paintedItems )
                 .arg( maxZoomLevel );
     return true;
 }
