@@ -30,6 +30,7 @@ main.cpp
 BaseClipper.cpp
 BaseFilter.cpp
 NodeReducer.cpp
+PeakAnalyzer.cpp
 TagsFilter.cpp
 TileIterator.cpp
 TileDirectory.cpp
