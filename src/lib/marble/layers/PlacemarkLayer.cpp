@@ -67,7 +67,8 @@ bool PlacemarkLayer::render( GeoPainter *geoPainter, ViewportParams *viewport,
     QVector<VisiblePlacemark*>::const_iterator itEnd = visiblePlacemarks.constBegin();
 
     QPainter *const painter = geoPainter;
-
+    bool const repeatableX = viewport->currentProjection()->repeatableX();
+    int const radius4 = 4 * viewport->radius();
     while ( visit != itEnd ) {
         --visit;
 
@@ -78,23 +79,21 @@ bool PlacemarkLayer::render( GeoPainter *geoPainter, ViewportParams *viewport,
 
         // when the map is such zoomed out that a given place
         // appears many times, we draw one placemark at each
-        if (viewport->currentProjection()->repeatableX() ) {
+        if (repeatableX) {
             const int symbolX = mark->symbolPosition().x();
             const int textX =   mark->labelRect().x();
 
-            for ( int i = symbolX % (4 * viewport->radius());
-                 i <= viewport->width();
-                 i += 4 * viewport->radius() )
-            {
-                labelRect.moveLeft(i - symbolX + textX );
-                symbolPos.setX( i );
+            for (int i = symbolX % radius4, width = viewport->width(); i <= width; i += radius4) {
+                labelRect.moveLeft(i - symbolX + textX);
+                symbolPos.setX(i);
 
                 painter->drawPixmap( symbolPos, mark->symbolPixmap() );
                 painter->drawPixmap( labelRect, mark->labelPixmap() );
             }
-        } else { // simple case, one draw per placemark
-            painter->drawPixmap( symbolPos, mark->symbolPixmap() );
-            painter->drawPixmap( labelRect, mark->labelPixmap() );
+        } else {
+            // simple case, one draw per placemark
+            painter->drawPixmap(symbolPos, mark->symbolPixmap());
+            painter->drawPixmap(labelRect, mark->labelPixmap());
         }
     }
 
