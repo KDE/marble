@@ -181,6 +181,9 @@ QList<GeoDataLinearRing> OsmRelation::rings(const QStringList &roles, const OsmW
     foreach(qint64 wayId, roleMembers) {
         GeoDataLinearRing ring;
         OsmWay const & way = ways[wayId];
+        if (way.references().isEmpty()) {
+            continue;
+        }
         if (way.references().first() != way.references().last()) {
             unclosedWays.append(way);
             continue;
