@@ -58,7 +58,7 @@ void WayChunk::prepend(const PlacemarkPtr &placemark, qint64 first)
 
 }
 
-void WayChunk::append(WayChunk *chunk)
+void WayChunk::append(const WayChunk::Ptr &chunk)
 {
     m_wayList << chunk->m_wayList;
     m_last = chunk->last();

@@ -13,10 +13,9 @@
 
 #include "BaseFilter.h"
 #include "TagsFilter.h"
+#include "WayChunk.h"
 
 namespace Marble {
-
-class WayChunk;
 
 class WayConcatenator: public BaseFilter
 {
@@ -25,22 +24,21 @@ private:
 
 public:
     WayConcatenator(GeoDataDocument *document);
-    ~WayConcatenator();
 
     int originalWays() const;
     int mergedWays() const;
 
 private:
     void createWayChunk(const PlacemarkPtr &placemark, qint64 firstId, qint64 lastId);
-    WayChunk* wayChunk(const PlacemarkPtr &placemark, qint64 matchId) const;
-    void concatFirst(const PlacemarkPtr &placemark, WayChunk *chunk);
-    void concatLast(const PlacemarkPtr & placemark, WayChunk *chunk);
-    void concatBoth(const PlacemarkPtr &placemark, WayChunk *chunk, WayChunk *otherChunk);
+    WayChunk::Ptr wayChunk(const PlacemarkPtr &placemark, qint64 matchId) const;
+    void concatFirst(const PlacemarkPtr &placemark, const WayChunk::Ptr &chunk);
+    void concatLast(const PlacemarkPtr & placemark, const WayChunk::Ptr &chunk);
+    void concatBoth(const PlacemarkPtr &placemark, const WayChunk::Ptr &chunk, const WayChunk::Ptr &otherChunk);
     void addWayChunks();
     void prepareDocument();
 
-    QMultiHash<qint64, WayChunk*> m_hash;
-    QVector<WayChunk*> m_chunks;
+    QMultiHash<qint64, WayChunk::Ptr> m_hash;
+    QVector<WayChunk::Ptr> m_chunks;
     QVector<PlacemarkPtr> m_wayPlacemarks;
     QVector<GeoDataPlacemark*> m_otherPlacemarks;
 
