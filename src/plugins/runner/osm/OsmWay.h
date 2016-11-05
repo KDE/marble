@@ -14,7 +14,6 @@
 #include "OsmNode.h"
 #include <osm/OsmPlacemarkData.h>
 #include <StyleBuilder.h>
-#include <GeoDataDocument.h>
 
 #include <QSet>
 #include <QString>

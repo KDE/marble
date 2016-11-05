@@ -17,7 +17,6 @@
 #include "OsmNode.h"
 #include "OsmWay.h"
 #include "OsmRelation.h"
-#include <GeoDataDocument.h>
 
 #include <QString>
 
