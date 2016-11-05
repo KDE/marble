@@ -13,6 +13,7 @@
 #include <GeoDataDocumentWriter.h>
 #include "MarbleZipReader.h"
 #include <GeoDataLatLonAltBox.h>
+#include "PeakAnalyzer.h"
 
 #include <QFileInfo>
 #include <QDebug>
@@ -86,6 +87,9 @@ QSharedPointer<GeoDataDocument> TileDirectory::load(int zoomLevel, int tileX, in
     m_tileY = tile.y();
     QString const filename = QString("%1/%2/%3.%4").arg(m_baseDir).arg(tile.x()).arg(tile.y()).arg("o5m");
     m_landmass = open(filename, m_manager);
+    if (m_landmass) {
+        PeakAnalyzer::determineZoomLevel(m_landmass->placemarkList());
+    }
     return m_landmass;
 }
 
