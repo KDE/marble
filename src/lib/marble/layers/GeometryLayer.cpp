@@ -61,6 +61,15 @@ namespace Marble
 class GeometryLayerPrivate
 {
 public:
+    struct PaintFragments {
+        // Three lists for different z values
+        // A z value of 0 is default and used by the majority of items, so sorting
+        // can be avoided for it
+        QVector<GeoGraphicsItem*> negative;
+        QVector<GeoGraphicsItem*> null;
+        QVector<GeoGraphicsItem*> positive;
+    };
+
     typedef QList<GeoDataPlacemark const *> OsmQueue;
 
     explicit GeometryLayerPrivate(const QAbstractItemModel *model, const StyleBuilder *styleBuilder);
@@ -131,7 +140,7 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
 
     typedef QPair<QString, GeoGraphicsItem*> LayerItem;
     QList<LayerItem> defaultLayer;
-    QHash<QString, QVector<GeoGraphicsItem*> > paintedFragments;
+    QHash<QString, GeometryLayerPrivate::PaintFragments> paintedFragments;
     QSet<QString> const knownLayers = QSet<QString>::fromList(d->m_styleBuilder->renderOrder());
     foreach( GeoGraphicsItem* item, items ) {
         QStringList paintLayers = item->paintLayers();
@@ -141,7 +150,15 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
         }
         foreach(const auto &layer, paintLayers) {
             if (knownLayers.contains(layer)) {
-                paintedFragments[layer] << item;
+                GeometryLayerPrivate::PaintFragments & fragments = paintedFragments[layer];
+                double const zValue = item->zValue();
+                if (zValue == 0.0) {
+                  fragments.null << item;
+                } else if (zValue < 0.0) {
+                  fragments.negative << item;
+                } else {
+                  fragments.positive << item;
+                }
             } else {
                 defaultLayer << LayerItem(layer, item);
                 static QSet<QString> missingLayers;
@@ -154,11 +171,13 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
     }
 
     foreach (const QString &layer, d->m_styleBuilder->renderOrder()) {
-        QVector<GeoGraphicsItem*> & layerItems = paintedFragments[layer];
-        qStableSort(layerItems.begin(), layerItems.end(), GeoGraphicsItem::zValueLessThan);
-        foreach(auto item, layerItems) {
-            item->paint(painter, viewport, layer);
-        }
+        GeometryLayerPrivate::PaintFragments & layerItems = paintedFragments[layer];
+        qStableSort(layerItems.negative.begin(), layerItems.negative.end(), GeoGraphicsItem::zValueLessThan);
+        // The idea here is that layerItems.null has most items and needs not to be sorted => faster
+        qStableSort(layerItems.positive.begin(), layerItems.positive.end(), GeoGraphicsItem::zValueLessThan);
+        foreach(auto item, layerItems.negative) { item->paint(painter, viewport, layer); }
+        foreach(auto item, layerItems.null) { item->paint(painter, viewport, layer); }
+        foreach(auto item, layerItems.positive) { item->paint(painter, viewport, layer); }
     }
     foreach(const auto & item, defaultLayer) {
         item.second->paint(painter, viewport, item.first);
