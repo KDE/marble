@@ -44,7 +44,9 @@ void OsmNode::create(GeoDataDocument *document) const
 
     GeoDataPlacemark* placemark = new GeoDataPlacemark;
     placemark->setOsmData(m_osmData);
-    placemark->setCoordinate(m_coordinates);
+    auto coordinates = m_coordinates;
+    coordinates.setAltitude(m_osmData.tagValue("ele").toDouble());
+    placemark->setCoordinate(coordinates);
 
     QHash<QString, QString>::const_iterator tagIter;
     if ((category == GeoDataPlacemark::TransportCarShare || category == GeoDataPlacemark::MoneyAtm)
