@@ -672,6 +672,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::ReligionSikh]             = createOsmPOIStyle(osmFont, "black/sikhist.16");
 
     m_defaultStyle[GeoDataPlacemark::HighwayTrafficSignals]    = createOsmPOIStyle(osmFont, "individual/traffic_light");
+    m_defaultStyle[GeoDataPlacemark::HighwayTrafficSignals]->iconStyle().setScale(0.75);
 
     m_defaultStyle[GeoDataPlacemark::PowerTower]               = createOsmPOIStyle(osmFont, "individual/power_tower", QColor( "#888888" ));
     m_defaultStyle[GeoDataPlacemark::PowerTower]->iconStyle().setScale(0.6);
