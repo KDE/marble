@@ -160,6 +160,8 @@ QStringList TileDirectory::tagsFilteredIn(int zoomLevel) const
     tags << "highway=primary" << "highway=primary_link";
     tags << "highway=secondary" << "highway=secondary_link";
 
+    tags << "natural=glacier";
+    tags << "natural=water";
     tags << "waterway=river";
     tags << "waterway=riverbank";
     tags << "waterway=canal";
@@ -180,11 +182,8 @@ QStringList TileDirectory::tagsFilteredIn(int zoomLevel) const
         tags << "natural=scrub";
         tags << "natural=heath";
         tags << "natural=grassland";
-        tags << "natural=glacier";
         tags << "natural=beach";
         tags << "natural=coastline";
-        tags << "natural=water";
-        tags << "natural=wood";
         tags << "leisure=stadium";
         tags << "tourism=alpine_hut";
 
@@ -237,6 +236,7 @@ QStringList TileDirectory::tagsFilteredIn(int zoomLevel) const
     }
 
     tags << "natural=peak";
+    tags << "natural=wood";
 
     tags << "leisure=nature_reserve";
     tags << "leisure=park";
