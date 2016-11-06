@@ -95,7 +95,10 @@ QSet<GeoDataPlacemark::GeoDataVisualCategory> acceptedVisualCategories()
         << GeoDataPlacemark::Mare
         << GeoDataPlacemark::GeographicPole
         << GeoDataPlacemark::MagneticPole
-        << GeoDataPlacemark::ShipWreck;
+        << GeoDataPlacemark::ShipWreck
+        << GeoDataPlacemark::PlaceSuburb
+        << GeoDataPlacemark::PlaceHamlet
+        << GeoDataPlacemark::PlaceLocality;
 
     return visualCategories;
 }
