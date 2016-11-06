@@ -6,8 +6,11 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
 if (CMAKE_SYSTEM_NAME STREQUAL Android)
     set(TARGET Marble)
 
-    find_package(Qt5AndroidExtras)
-    find_package(Qt5QuickControls2)
+    find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED
+        COMPONENTS
+            AndroidExtras
+            QuickControls2
+    )
 
     add_library (${TARGET} SHARED ${marble_SRCS} ${marble_QRCS})
 

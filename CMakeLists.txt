@@ -85,25 +85,34 @@ if(CMAKE_SYSTEM_NAME STREQUAL Android)
    SET(QT_QMAKE_EXECUTABLE "$ENV{Qt5_android}/bin/qmake")
 endif()
 
-find_package(Qt5Core ${REQUIRED_QT_VERSION} REQUIRED)
-find_package(Qt5Xml ${REQUIRED_QT_VERSION} REQUIRED)
-find_package(Qt5Network ${REQUIRED_QT_VERSION} REQUIRED)
-find_package(Qt5Test ${REQUIRED_QT_VERSION} REQUIRED)
-find_package(Qt5Widgets ${REQUIRED_QT_VERSION} REQUIRED)
-find_package(Qt5Svg ${REQUIRED_QT_VERSION} REQUIRED)
-find_package(Qt5Sql ${REQUIRED_QT_VERSION} REQUIRED)
-find_package(Qt5Concurrent ${REQUIRED_QT_VERSION} REQUIRED)
-find_package(Qt5Quick ${REQUIRED_QT_VERSION} REQUIRED)
-find_package(Qt5PrintSupport ${REQUIRED_QT_VERSION} REQUIRED)
+find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED
+    COMPONENTS
+        Core
+        Xml
+        Network
+        Test
+        Widgets
+        Svg
+        Sql
+        Concurrent
+        Quick
+        PrintSupport
+)
 
 if(CMAKE_SYSTEM_NAME STREQUAL Android)
-   find_package(Qt5Location ${REQUIRED_QT_VERSION} REQUIRED)
-   find_package(Qt5Positioning ${REQUIRED_QT_VERSION} REQUIRED)
-   find_package(Qt5Multimedia ${REQUIRED_QT_VERSION} REQUIRED)
+    find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED
+        COMPONENTS
+            Location
+            Positioning
+            Multimedia
+    )
    set ( MARBLE_NO_WEBKITWIDGETS TRUE )
 else()
-   find_package(Qt5WebKit ${REQUIRED_QT_VERSION})
-   find_package(Qt5WebKitWidgets ${REQUIRED_QT_VERSION})
+   find_package(Qt5 ${REQUIRED_QT_VERSION}
+        COMPONENTS
+            WebKit
+            WebKitWidgets
+    )
 
    if ( NOT Qt5WebKitWidgets_FOUND )
      set ( MARBLE_NO_WEBKITWIDGETS TRUE )
@@ -111,7 +120,7 @@ else()
 endif()
 
 if (BUILD_WITH_DBUS)
-  find_package(Qt5DBus ${REQUIRED_QT_VERSION})
+  find_package(Qt5 ${REQUIRED_QT_VERSION} COMPONENTS DBus)
   if (NOT Qt5DBus_FOUND)
     set(MARBLE_NO_DBUS TRUE)
   endif()

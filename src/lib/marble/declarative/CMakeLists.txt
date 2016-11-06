@@ -1,6 +1,6 @@
 PROJECT( MarbleDeclarativePlugin )
 
-macro_optional_find_package(Qt5Positioning ${REQUIRED_QT_VERSION})
+find_package(Qt5 ${REQUIRED_QT_VERSION} COMPONENTS Positioning)
 if(Qt5Positioning_FOUND)
     add_definitions(-DHAVE_QT5_POSITIONING)
 endif(Qt5Positioning_FOUND)
