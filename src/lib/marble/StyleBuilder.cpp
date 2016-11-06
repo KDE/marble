@@ -108,6 +108,15 @@ StyleBuilder::Private::Private() :
         m_defaultMinZoomLevels[i] = m_maximumZoomLevel;
 
     m_defaultMinZoomLevels[GeoDataPlacemark::Default]             = 1;
+    m_defaultMinZoomLevels[GeoDataPlacemark::PlaceCity]           = 9;
+    m_defaultMinZoomLevels[GeoDataPlacemark::PlaceCityCapital]    = 9;
+    m_defaultMinZoomLevels[GeoDataPlacemark::PlaceSuburb]         = 13;
+    m_defaultMinZoomLevels[GeoDataPlacemark::PlaceHamlet]         = 15;
+    m_defaultMinZoomLevels[GeoDataPlacemark::PlaceLocality]       = 15;
+    m_defaultMinZoomLevels[GeoDataPlacemark::PlaceTown]           = 11;
+    m_defaultMinZoomLevels[GeoDataPlacemark::PlaceTownCapital]    = 11;
+    m_defaultMinZoomLevels[GeoDataPlacemark::PlaceVillage]        = 13;
+    m_defaultMinZoomLevels[GeoDataPlacemark::PlaceVillageCapital] = 13;
     m_defaultMinZoomLevels[GeoDataPlacemark::NaturalReef]         = 3;
     m_defaultMinZoomLevels[GeoDataPlacemark::NaturalWater]        = 3;
     m_defaultMinZoomLevels[GeoDataPlacemark::NaturalWood]         = 8;
@@ -154,6 +163,8 @@ StyleBuilder::Private::Private() :
 
     m_defaultMinZoomLevels[GeoDataPlacemark::AmenityGraveyard]    = 14;
     m_defaultMinZoomLevels[GeoDataPlacemark::AmenityFountain]     = 17;
+    m_defaultMinZoomLevels[GeoDataPlacemark::AmenityBench]        = 19;
+    m_defaultMinZoomLevels[GeoDataPlacemark::AmenityWasteBasket]  = 19;
 
     m_defaultMinZoomLevels[GeoDataPlacemark::MilitaryDangerArea]  = 11;
 
