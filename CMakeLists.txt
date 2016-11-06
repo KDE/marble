@@ -77,12 +77,12 @@ endif()
 #######################################################
 # Find Qt dependencies
 
-# Minimum Qt version
-set(REQUIRED_QT_VERSION 5.3.0)
-
 if(CMAKE_SYSTEM_NAME STREQUAL Android)
+    set(REQUIRED_QT_VERSION 5.7.0)
    # TODO: still needed with ECM toolchain?
    SET(QT_QMAKE_EXECUTABLE "$ENV{Qt5_android}/bin/qmake")
+else()
+    set(REQUIRED_QT_VERSION 5.3.0)
 endif()
 
 find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED
