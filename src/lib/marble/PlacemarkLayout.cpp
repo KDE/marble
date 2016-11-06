@@ -44,14 +44,14 @@
 
 namespace
 {   //Helper function that checks for available room for the label
-    bool hasRoomFor(const QVector<Marble::VisiblePlacemark*> & placemarks, const QRectF &labelRect)
+    bool hasRoomFor(const QVector<Marble::VisiblePlacemark*> & placemarks, const QRectF &boundingBox)
     {
         // Check if there is another label or symbol that overlaps.
         QVector<Marble::VisiblePlacemark*>::const_iterator beforeItEnd = placemarks.constEnd();
         for ( QVector<Marble::VisiblePlacemark*>::ConstIterator beforeIt = placemarks.constBegin();
               beforeIt != beforeItEnd; ++beforeIt )
         {
-            if ( labelRect.intersects( (*beforeIt)->labelRect() ) ) {
+            if ( boundingBox.intersects( (*beforeIt)->boundingBox() ) ) {
                 return false;
             }
         }
@@ -517,6 +517,10 @@ bool PlacemarkLayout::layoutPlacemark( const GeoDataPlacemark *placemark, qreal 
 
     // Choose Section
 
+    QPointF hotSpot = mark->hotSpot();
+    mark->setSelected(selected);
+    mark->setSymbolPosition(QPoint(qRound(x - hotSpot.x()), qRound(y - hotSpot.y())));
+
     // Find out whether the area around the placemark is covered already.
     // If there's not enough space free don't add a VisiblePlacemark here.
 
@@ -524,36 +528,29 @@ bool PlacemarkLayout::layoutPlacemark( const GeoDataPlacemark *placemark, qreal 
 
     const QString labelText = placemark->displayName();
     if (!labelText.isEmpty()) {
-        labelRect = roomForLabel(style, x, y, labelText);
-        if ( labelRect.isNull() ) {
-            return false;
-        }
+        labelRect = roomForLabel(style, x, y, labelText, mark);
+    }
+    if (labelRect.isNull() && (mark->symbolPixmap().isNull() || !hasRoomForPixmap(y, mark))) {
+        return false;
     }
 
-    // Finally save the label position on the map.
-    QPointF hotSpot = mark->hotSpot();
-
-    if( mark->selected() != selected ) {
-        mark->setSelected( selected );
-    }
-    mark->setSymbolPosition(QPoint(qRound(x - hotSpot.x()),
-                                   qRound(y - hotSpot.y())));
     mark->setLabelRect( labelRect );
-
-    if ( !labelRect.isEmpty() ) {
-        // Add the current placemark to the matching row and its
-        // direct neighbors.
-        int idx = y / m_maxLabelHeight;
-        if ( idx - 1 >= 0 )
-            m_rowsection[ idx - 1 ].append( mark );
-        m_rowsection[ idx ].append( mark );
-        if ( idx + 1 < m_rowsection.size() )
-            m_rowsection[ idx + 1 ].append( mark );
+    // Add the current placemark to the matching row and its
+    // direct neighbors.
+    int idx = y / m_maxLabelHeight;
+    if ( idx - 1 >= 0 ) {
+        m_rowsection[ idx - 1 ].append( mark );
+    }
+    m_rowsection[ idx ].append( mark );
+    if ( idx + 1 < m_rowsection.size() ) {
+        m_rowsection[ idx + 1 ].append( mark );
     }
 
     m_paintOrder.append( mark );
-    m_labelArea += labelRect.width() * labelRect.height();
-    m_maxLabelHeight = qMax(m_maxLabelHeight, qCeil(labelRect.height()));
+    QRectF const boundingBox = mark->boundingBox();
+    Q_ASSERT(!boundingBox.isEmpty());
+    m_labelArea += boundingBox.width() * boundingBox.height();
+    m_maxLabelHeight = qMax(m_maxLabelHeight, qCeil(boundingBox.height()));
     return true;
 }
 
@@ -571,7 +568,8 @@ GeoDataCoordinates PlacemarkLayout::placemarkIconCoordinates( const GeoDataPlace
 
 QRectF PlacemarkLayout::roomForLabel( const GeoDataStyle::ConstPtr &style,
                                       const qreal x, const qreal y,
-                                      const QString &labelText ) const
+                                      const QString &labelText,
+                                      const VisiblePlacemark* placemark) const
 {
     QFont labelFont = style->labelStyle().scaledFont();
     int textHeight = QFontMetrics( labelFont ).height();
@@ -586,6 +584,7 @@ QRectF PlacemarkLayout::roomForLabel( const GeoDataStyle::ConstPtr &style,
     }
 
     const QVector<VisiblePlacemark*> currentsec = m_rowsection.at( y / m_maxLabelHeight );
+    QRectF const symbolRect = placemark->symbolRect();
 
     if ( style->labelStyle().alignment() == GeoDataLabelStyle::Corner ) {
         const int symbolWidth = style->iconStyle().scaledIcon().size().width();
@@ -598,7 +597,7 @@ QRectF PlacemarkLayout::roomForLabel( const GeoDataStyle::ConstPtr &style,
                                               y - textHeight;
             const QRectF labelRect = QRectF( xPos, yPos, textWidth, textHeight );
 
-            if (hasRoomFor(currentsec, labelRect)) {
+            if (hasRoomFor(currentsec, labelRect.united(symbolRect))) {
                 // claim the place immediately if it hasn't been used yet
                 return labelRect;
             }
@@ -606,10 +605,10 @@ QRectF PlacemarkLayout::roomForLabel( const GeoDataStyle::ConstPtr &style,
     }
     else if ( style->labelStyle().alignment() == GeoDataLabelStyle::Center ) {
         int const offsetY = style->iconStyle().scaledIcon().height() / 2.0;
-        QRectF  labelRect( x - textWidth / 2, y - offsetY - textHeight,
+        QRectF  labelRect = QRectF( x - textWidth / 2, y - offsetY - textHeight,
                           textWidth, textHeight );
 
-        if (hasRoomFor(currentsec, labelRect)) {
+        if (hasRoomFor(currentsec, labelRect.united(symbolRect))) {
             // claim the place immediately if it hasn't been used yet 
             return labelRect;
         }
@@ -629,15 +628,21 @@ QRectF PlacemarkLayout::roomForLabel( const GeoDataStyle::ConstPtr &style,
 
             const QRectF labelRect = QRectF(xPos, yPos, textWidth, textHeight);
 
-            if (hasRoomFor(currentsec, labelRect))
+            if (hasRoomFor(currentsec, labelRect.united(symbolRect)))
             {
                 return labelRect;
             }
         }
     }
 
-    return QRectF(); // At this point there is no space left
-                     // for the rectangle anymore.
+    // At this point there is no space left for the rectangle anymore.
+    return QRectF();
+}
+
+bool PlacemarkLayout::hasRoomForPixmap(const qreal y, const VisiblePlacemark *placemark) const
+{
+    const QVector<VisiblePlacemark*> currentsec = m_rowsection.at(y / m_maxLabelHeight);
+    return hasRoomFor(currentsec, placemark->symbolRect());
 }
 
 bool PlacemarkLayout::placemarksOnScreenLimit( const QSize &screenSize ) const

@@ -104,6 +104,10 @@ class VisiblePlacemark : public QObject
 
     GeoDataStyle::ConstPtr style() const;
 
+    QRectF symbolRect() const;
+
+    QRectF boundingBox() const;
+
 Q_SIGNALS:
     void updateNeeded();
 

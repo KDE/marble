@@ -56,8 +56,10 @@ bool VisiblePlacemark::selected() const
 
 void VisiblePlacemark::setSelected( bool selected )
 {
-    m_selected = selected;
-    drawLabelPixmap();
+    if (selected != m_selected) {
+        m_selected = selected;
+        drawLabelPixmap();
+    }
 }
 
 const QPoint& VisiblePlacemark::symbolPosition() const
@@ -141,6 +143,16 @@ void VisiblePlacemark::setStyle(const GeoDataStyle::ConstPtr &style)
 GeoDataStyle::ConstPtr VisiblePlacemark::style() const
 {
     return m_style;
+}
+
+QRectF VisiblePlacemark::symbolRect() const
+{
+    return QRectF(m_symbolPosition, m_symbolPixmap.size());
+}
+
+QRectF VisiblePlacemark::boundingBox() const
+{
+    return m_labelRect.isEmpty() ? symbolRect() : m_labelRect.united(symbolRect());
 }
 
 void VisiblePlacemark::drawLabelPixmap()

@@ -125,7 +125,8 @@ class PlacemarkLayout : public QObject
 
     QRectF  roomForLabel(const GeoDataStyle::ConstPtr &style,
                          const qreal x, const qreal y,
-                         const QString &labelText ) const;
+                         const QString &labelText , const VisiblePlacemark *placemark) const;
+    bool    hasRoomForPixmap(const qreal y, const VisiblePlacemark *placemark) const;
 
     bool    placemarksOnScreenLimit( const QSize &screenSize ) const;
 
