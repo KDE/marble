@@ -63,14 +63,7 @@ void OsmNode::create(GeoDataDocument *document) const
     }
     placemark->setVisualCategory(category);
     placemark->setStyle( GeoDataStyle::Ptr() );
-
-    if (m_osmData.containsTagKey(QLatin1String("marbleZoomLevel"))) {
-        int const zoomLevel = m_osmData.tagValue(QLatin1String("marbleZoomLevel")).toInt();
-        placemark->setZoomLevel(zoomLevel);
-    } else {
-        placemark->setZoomLevel(zoomLevelFor(category, 18));
-    }
-
+    placemark->setZoomLevel(zoomLevelFor(category, 18));
     placemark->setPopularity(popularityFor(category, 100));
 
     if (category >= GeoDataPlacemark::PlaceCity && category <= GeoDataPlacemark::PlaceVillageCapital) {
@@ -80,6 +73,11 @@ void OsmNode::create(GeoDataDocument *document) const
             placemark->setZoomLevel(populationIndex(population));
             placemark->setPopularity(population);
         }
+    }
+
+    if (m_osmData.containsTagKey(QLatin1String("marbleZoomLevel"))) {
+        int const zoomLevel = m_osmData.tagValue(QLatin1String("marbleZoomLevel")).toInt();
+        placemark->setZoomLevel(zoomLevel);
     }
 
     OsmObjectManager::registerId(m_osmData.id());
