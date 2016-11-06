@@ -160,10 +160,6 @@ double BuildingGeoPolygonGraphicsItem::extractBuildingHeight(const GeoDataPlacem
 
 QString BuildingGeoPolygonGraphicsItem::extractBuildingLabel(const GeoDataPlacemark &placemark)
 {
-    if (!placemark.name().isEmpty()) {
-        return placemark.name();
-    }
-
     const OsmPlacemarkData &osmData = placemark.osmData();
 
     auto tagIter = osmData.findTag(QStringLiteral("addr:housename"));
