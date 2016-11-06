@@ -524,7 +524,11 @@ bool PlacemarkLayout::layoutPlacemark( const GeoDataPlacemark *placemark, const 
         // @todo: Set / adjust to tile level
         parameters.placemark = placemark;
 
-        mark = new VisiblePlacemark(placemark, coordinates, m_styleBuilder->createStyle(parameters));
+        auto style = m_styleBuilder->createStyle(parameters);
+        if (style->iconStyle().icon().isNull()) {
+            return false;
+        }
+        mark = new VisiblePlacemark(placemark, coordinates, style);
         m_visiblePlacemarks.insert( placemark, mark );
         connect( mark, SIGNAL(updateNeeded()), this, SIGNAL(repaintNeeded()) );
     }
@@ -571,10 +575,10 @@ bool PlacemarkLayout::layoutPlacemark( const GeoDataPlacemark *placemark, const 
 
 GeoDataCoordinates PlacemarkLayout::placemarkIconCoordinates( const GeoDataPlacemark *placemark ) const
 {
-    bool ok;
-    GeoDataCoordinates coordinates = placemark->coordinate( m_clock->dateTime(), &ok );
+    bool hasIcon;
+    GeoDataCoordinates coordinates = placemark->coordinate( m_clock->dateTime(), &hasIcon);
 
-    if (ok || m_acceptedVisualCategories.contains(placemark->visualCategory())) {
+    if (hasIcon || m_acceptedVisualCategories.contains(placemark->visualCategory())) {
         return coordinates;
     }
 
