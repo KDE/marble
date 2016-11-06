@@ -189,6 +189,7 @@ QStringList TileDirectory::tagsFilteredIn(int zoomLevel) const
 
         tags << "place=suburb";
         tags << "place=village";
+        tags << "amenity=hospital";
     }
 
     if (zoomLevel <= 11) {
