@@ -75,6 +75,7 @@ bool PlacemarkLayer::render( GeoPainter *geoPainter, ViewportParams *viewport,
 
         VisiblePlacemark *const mark = *visit;
 
+        // Intentionally converting positions from floating point to pixel aligned screen grid below
         QRect labelRect( mark->labelRect().toRect() );
         QPoint symbolPos(mark->symbolPosition().toPoint());
 
