@@ -233,8 +233,17 @@ void PlacemarkLayer::renderDebug(GeoPainter *painter, ViewportParams *viewport, 
     for (auto placemark: placemarks) {
         painter->drawRect(placemark->labelRect());
         painter->drawRect(placemark->symbolRect());
-        QString const popularity = QString::number(placemark->placemark()->popularity());
-        painter->drawText(placemark->symbolRect().bottomLeft(), popularity);
+    }
+
+    auto const height = painter->fontMetrics().height();
+    painter->setPen(QPen(QColor(Qt::black)));
+    for (auto placemark: placemarks) {
+        QPoint position = placemark->symbolRect().bottomLeft().toPoint() + QPoint(0, qRound(0.8 * height));
+        auto const popularity = placemark->placemark()->popularity();
+        painter->drawText(position, QStringLiteral("p: %1").arg(popularity));
+        position -= QPoint(0, placemark->symbolRect().height() + height);
+        auto const zoomLevel = placemark->placemark()->zoomLevel();
+        painter->drawText(position, QStringLiteral("z: %1").arg(zoomLevel));
     }
 
     painter->restore();
