@@ -67,7 +67,7 @@ class VisiblePlacemark : public QObject
     /**
      * Returns the position of the place mark symbol on the map.
      */
-    const QPoint& symbolPosition() const;
+    const QPointF& symbolPosition() const;
 
     /**
      * Returns the top left corner of the place mark symbol's hot spot
@@ -77,7 +77,7 @@ class VisiblePlacemark : public QObject
     /**
      * Sets the @p position of the place mark symbol on the map.
      */
-    void setSymbolPosition( const QPoint& position );
+    void setSymbolPosition(const QPointF &position );
 
     /**
      * Returns the pixmap of the place mark name label.
@@ -121,7 +121,7 @@ private Q_SLOTS:
     const GeoDataPlacemark *m_placemark;
 
     // View stuff
-    QPoint      m_symbolPosition; // position of the placemark's symbol
+    QPointF     m_symbolPosition; // position of the placemark's symbol
     bool        m_selected;       // state of the placemark
     QPixmap     m_labelPixmap;    // the text label (most often name)
     QRectF      m_labelRect;      // bounding box of label

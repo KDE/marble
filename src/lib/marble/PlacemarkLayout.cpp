@@ -203,8 +203,7 @@ QVector<const GeoDataFeature*> PlacemarkLayout::whichPlacemarkAt( const QPoint& 
     QVector<const GeoDataFeature*> ret;
 
     foreach( VisiblePlacemark* mark, m_paintOrder ) {
-        if ( mark->labelRect().contains( curpos )
-             || QRect( mark->symbolPosition(), mark->symbolPixmap().size() ).contains( curpos ) ) {
+        if ( mark->labelRect().contains( curpos ) || mark->symbolRect().contains( curpos ) ) {
             ret.append( mark->placemark() );
         }
     }
@@ -524,7 +523,7 @@ bool PlacemarkLayout::layoutPlacemark( const GeoDataPlacemark *placemark, qreal 
 
     QPointF hotSpot = mark->hotSpot();
     mark->setSelected(selected);
-    mark->setSymbolPosition(QPoint(qRound(x - hotSpot.x()), qRound(y - hotSpot.y())));
+    mark->setSymbolPosition(QPointF(x - hotSpot.x(), y - hotSpot.y()));
 
     // Find out whether the area around the placemark is covered already.
     // If there's not enough space free don't add a VisiblePlacemark here.

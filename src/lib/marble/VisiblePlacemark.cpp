@@ -62,7 +62,7 @@ void VisiblePlacemark::setSelected( bool selected )
     }
 }
 
-const QPoint& VisiblePlacemark::symbolPosition() const
+const QPointF& VisiblePlacemark::symbolPosition() const
 {
     return m_symbolPosition;
 }
@@ -102,7 +102,7 @@ const QPointF VisiblePlacemark::hotSpot() const
     return pixelHotSpot;
 }
 
-void VisiblePlacemark::setSymbolPosition( const QPoint& position )
+void VisiblePlacemark::setSymbolPosition( const QPointF& position )
 {
     m_symbolPosition = position;
 }

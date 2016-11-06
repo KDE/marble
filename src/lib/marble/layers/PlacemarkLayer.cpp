@@ -76,7 +76,7 @@ bool PlacemarkLayer::render( GeoPainter *geoPainter, ViewportParams *viewport,
         VisiblePlacemark *const mark = *visit;
 
         QRect labelRect( mark->labelRect().toRect() );
-        QPoint symbolPos( mark->symbolPosition() );
+        QPoint symbolPos(mark->symbolPosition().toPoint());
 
         // when the map is such zoomed out that a given place
         // appears many times, we draw one placemark at each
