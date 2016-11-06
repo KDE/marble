@@ -1,15 +1,9 @@
-cmake_minimum_required(VERSION 2.8.12)
-
 SET (TARGET marble-vectorosm-tilecreator)
 PROJECT (${TARGET})
 
 if (POLICY CMP0063)
     cmake_policy(SET CMP0063 NEW)
 endif()
-
-find_package(Qt5Core REQUIRED)
-find_package(Qt5Widgets REQUIRED)
-find_package(Qt5Gui REQUIRED)
 
 include_directories(
  ${CMAKE_CURRENT_SOURCE_DIR}
