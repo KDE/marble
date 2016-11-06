@@ -30,7 +30,7 @@ public:
 
 private:
     void createWayChunk(const PlacemarkPtr &placemark, qint64 firstId, qint64 lastId);
-    WayChunk::Ptr wayChunk(const PlacemarkPtr &placemark, qint64 matchId) const;
+    WayChunk::Ptr wayChunk(const GeoDataPlacemark &placemark, qint64 matchId) const;
     void concatFirst(const PlacemarkPtr &placemark, const WayChunk::Ptr &chunk);
     void concatLast(const PlacemarkPtr & placemark, const WayChunk::Ptr &chunk);
     void concatBoth(const PlacemarkPtr &placemark, const WayChunk::Ptr &chunk, const WayChunk::Ptr &otherChunk);

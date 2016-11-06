@@ -46,7 +46,7 @@ public:
     qint64 id() const;
     void printIds() const;
     int size() const;
-    bool concatPossible(const PlacemarkPtr &placemark) const;
+    bool concatPossible(const GeoDataPlacemark &placemark) const;
 
 private:
     QVector<PlacemarkPtr> m_wayList;

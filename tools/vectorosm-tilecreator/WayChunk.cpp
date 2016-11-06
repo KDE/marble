@@ -111,9 +111,9 @@ int WayChunk::size() const
     return m_wayList.size();
 }
 
-bool WayChunk::concatPossible(const PlacemarkPtr &placemark) const
+bool WayChunk::concatPossible(const GeoDataPlacemark &placemark) const
 {
-    const GeoDataPlacemark::GeoDataVisualCategory category = placemark->visualCategory();
+    const GeoDataPlacemark::GeoDataVisualCategory category = placemark.visualCategory();
     return (category == m_visualCategory);
 }
 

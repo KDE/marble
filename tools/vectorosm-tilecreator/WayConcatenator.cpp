@@ -55,22 +55,22 @@ WayConcatenator::WayConcatenator(GeoDataDocument *document) :
                     if (!containsFirst && !containsLast) {
                         createWayChunk(placemark, firstId, lastId);
                     } else if (containsFirst && !containsLast) {
-                        auto chunk = wayChunk(placemark, firstId);
+                        auto chunk = wayChunk(*placemark, firstId);
                         if (chunk != nullptr) {
                             concatFirst(placemark, chunk);
                         } else {
                             createWayChunk(placemark, firstId, lastId);
                         }
                     } else if (!containsFirst && containsLast) {
-                        auto chunk = wayChunk(placemark, lastId);
+                        auto chunk = wayChunk(*placemark, lastId);
                         if (chunk != nullptr) {
                             concatLast(placemark, chunk);
                         } else {
                             createWayChunk(placemark, firstId, lastId);
                         }
                     } else if (containsFirst && containsLast) {
-                        auto chunk = wayChunk(placemark, firstId);
-                        auto otherChunk = wayChunk(placemark, lastId);
+                        auto chunk = wayChunk(*placemark, firstId);
+                        auto otherChunk = wayChunk(*placemark, lastId);
 
                         if (chunk != nullptr && otherChunk != nullptr) {
                             if(chunk == otherChunk) {
@@ -151,7 +151,7 @@ void WayConcatenator::createWayChunk(const PlacemarkPtr &placemark, qint64 first
     m_chunks.append(chunk);
 }
 
-WayChunk::Ptr WayConcatenator::wayChunk(const PlacemarkPtr &placemark, qint64 matchId) const
+WayChunk::Ptr WayConcatenator::wayChunk(const GeoDataPlacemark &placemark, qint64 matchId) const
 {
     QHash<qint64, WayChunk::Ptr>::ConstIterator matchItr = m_hash.find(matchId);
     while (matchItr != m_hash.end() && matchItr.key() == matchId) {
