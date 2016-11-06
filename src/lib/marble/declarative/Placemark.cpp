@@ -34,11 +34,8 @@ void Placemark::setGeoDataPlacemark( const Marble::GeoDataPlacemark &placemark )
     m_description = QString();
     m_website = QString();
     m_wikipedia = QString();
-    m_fuelDetails = QString();
     m_openingHours = QString();
     m_elevation = QString();
-    m_amenity = QString();
-    m_shop = QString();
     emit coordinatesChanged();
     emit nameChanged();
     emit descriptionChanged();
@@ -47,11 +44,6 @@ void Placemark::setGeoDataPlacemark( const Marble::GeoDataPlacemark &placemark )
     emit wikipediaChanged();
     emit openingHoursChanged();
     emit elevationChanged();
-    emit amenityChanged();
-    emit shopChanged();
-    if (m_placemark.visualCategory() == GeoDataPlacemark::TransportFuel) {
-        emit fuelDetailsChanged();
-    }
 }
 
 Marble::GeoDataPlacemark & Placemark::placemark()
@@ -92,6 +84,8 @@ QString Placemark::description() const
             addTagDescription(m_description, "smoking:outside", "no", "No smoking outside");
         } else if (category >= GeoDataPlacemark::ShopBeverages && category <= GeoDataPlacemark::Shop) {
             addTagValue(m_description, "operator");
+            addTagValue(m_description, "clothes");
+            addTagValue(m_description, "designation");
         } else if (category == GeoDataPlacemark::TransportBusStop) {
             addTagValue(m_description, "network");
             addTagValue(m_description, "operator");
@@ -102,10 +96,40 @@ QString Placemark::description() const
         } else if (category == GeoDataPlacemark::TransportFuel) {
             addTagValue(m_description, "brand");
             addTagValue(m_description, "operator");
+            addTagDescription(m_description, "fuel:diesel", "yes", tr("Diesel"));
+            addTagDescription(m_description, "fuel:octane_91", "yes", tr("Octane 91"));
+            addTagDescription(m_description, "fuel:octane_95", "yes", tr("Octane 95"));
+            addTagDescription(m_description, "fuel:octane_98", "yes", tr("Octane 98"));
+            addTagDescription(m_description, "fuel:e10", "yes", tr("E10"));
+            addTagDescription(m_description, "fuel:lpg", "yes", tr("LPG"));
         } else if (category == GeoDataPlacemark::NaturalTree) {
             addTagValue(m_description, "species:en");
             addTagValue(m_description, "genus:en");
             addTagValue(m_description, "leaf_type");
+        } else if (category == GeoDataPlacemark::AmenityRecycling) {
+            addTagDescription(m_description, QStringLiteral("recycling:batteries"), "yes", tr("Batteries"));
+            addTagDescription(m_description, QStringLiteral("recycling:clothes"), "yes", tr("Clothes"));
+            addTagDescription(m_description, QStringLiteral("recycling:glass"), "yes", tr("Glass"));
+            addTagDescription(m_description, QStringLiteral("recycling:glass_bottles"), "yes", tr("Glass bottles"));
+            addTagDescription(m_description, QStringLiteral("recycling:green_waste"), "yes", tr("Green waste"));
+            addTagDescription(m_description, QStringLiteral("recycling:garden_waste"), "yes", tr("Garden waste"));
+            addTagDescription(m_description, QStringLiteral("recycling:electrical_items"), "yes", tr("Electrical items"));
+            addTagDescription(m_description, QStringLiteral("recycling:metal"), "yes", tr("Metal"));
+            addTagDescription(m_description, QStringLiteral("recycling:mobile_phones"), "yes", tr("Mobile phones"));
+            addTagDescription(m_description, QStringLiteral("recycling:newspaper"), "yes", tr("Newspaper"));
+            addTagDescription(m_description, QStringLiteral("recycling:paint"), "yes", tr("Paint"));
+            addTagDescription(m_description, QStringLiteral("recycling:paper"), "yes", tr("Paper"));
+            addTagDescription(m_description, QStringLiteral("recycling:paper_packaging"), "yes", tr("Paper packaging"));
+            addTagDescription(m_description, QStringLiteral("recycling:PET"), "yes", tr("PET"));
+            addTagDescription(m_description, QStringLiteral("recycling:plastic"), "yes", tr("Plastic"));
+            addTagDescription(m_description, QStringLiteral("recycling:plastic_bags"), "yes", tr("Plastic bags"));
+            addTagDescription(m_description, QStringLiteral("recycling:plastic_bottles"), "yes", tr("Plastic bottles"));
+            addTagDescription(m_description, QStringLiteral("recycling:plastic_packaging"), "yes", tr("Plastic packaging"));
+            addTagDescription(m_description, QStringLiteral("recycling:polyester"), "yes", tr("Polyester"));
+            addTagDescription(m_description, QStringLiteral("recycling:tyres"), "yes", tr("Tyres"));
+            addTagDescription(m_description, QStringLiteral("recycling:waste"), "yes", tr("Waste"));
+            addTagDescription(m_description, QStringLiteral("recycling:white_goods"), "yes", tr("White goods"));
+            addTagDescription(m_description, QStringLiteral("recycling:wood"), "yes", tr("Wood"));
         }
     }
 
@@ -118,20 +142,6 @@ QString Placemark::address() const
         m_address = addressFromOsmData();
     }
     return m_address;
-}
-
-QString Placemark::fuelDetails() const
-{
-    if (m_fuelDetails.isEmpty() && m_placemark.visualCategory() == GeoDataPlacemark::TransportFuel) {
-        addTagDescription(m_fuelDetails, "fuel:diesel", "yes", tr("Diesel"));
-        addTagDescription(m_fuelDetails, "fuel:octane_91", "yes", tr("Octane 91"));
-        addTagDescription(m_fuelDetails, "fuel:octane_95", "yes", tr("Octane 95"));
-        addTagDescription(m_fuelDetails, "fuel:octane_98", "yes", tr("Octane 98"));
-        addTagDescription(m_fuelDetails, "fuel:e10", "yes", tr("E10"));
-        addTagDescription(m_fuelDetails, "fuel:lpg", "yes", tr("LPG"));
-
-    }
-    return m_fuelDetails;
 }
 
 QString Placemark::website() const
@@ -203,50 +213,6 @@ QString Placemark::elevation() const
     m_elevation = m_placemark.osmData().tagValue(QStringLiteral("ele"));
 
     return m_elevation;
-}
-
-QString Placemark::amenity() const
-{
-    if (!m_amenity.isEmpty()){
-        return m_amenity;
-    }
-
-    m_amenity = m_placemark.osmData().tagValue(QStringLiteral("amenity"));
-    if (!m_amenity.isEmpty()) {
-        m_amenity[0] = m_amenity[0].toUpper();
-    }
-
-    return m_amenity;
-}
-
-QString Placemark::shop() const
-{
-    if (!m_shop.isEmpty()){
-        return m_shop;
-    }
-
-    const OsmPlacemarkData& osmData = m_placemark.osmData();
-
-    QString shop = osmData.tagValue(QStringLiteral("shop"));
-    if (!shop.isEmpty()) {
-        shop[0] = shop[0].toUpper();
-
-        if (shop == QLatin1String("Clothes")) {
-            QString type = osmData.tagValue(QStringLiteral("clothes"));
-            if (type.isEmpty()) {
-                type = osmData.tagValue(QStringLiteral("designation"));
-            }
-            if (!type.isEmpty()) {
-                type[0] = type[0].toUpper();
-                m_shop = QLatin1String("Shop : ") + shop + QLatin1String(" (") + type + QLatin1Char(')');
-            }
-        }
-        if (m_shop.isEmpty()) {
-            m_shop = QLatin1String("Shop : ") + shop;
-        }
-    }
-
-    return m_shop;
 }
 
 void Placemark::setName(const QString & name)

@@ -89,18 +89,6 @@ Item {
         IconText {
             width: parent.width
             visible: text.length > 0
-            text: placemark === null ? "" : placemark.amenity
-        }
-
-        IconText {
-            width: parent.width
-            visible: text.length > 0
-            text: placemark === null ? "" : placemark.shop
-        }
-
-        IconText {
-            width: parent.width
-            visible: text.length > 0
             text: placemark === null ? "" : placemark.address
             maximumLineCount: 4
         }
@@ -121,13 +109,6 @@ Item {
             text:  "<a href=\"" + url + "\">Wikipedia</a>"
             icon: "qrc:/material/browser.svg"
             maximumLineCount: 4
-        }
-
-        IconText {
-            width: parent.width
-            visible: text.length > 0
-            text: placemark === null ? "" : placemark.fuelDetails
-            icon: "qrc:/material/gas_station.svg"
         }
 
         IconText {

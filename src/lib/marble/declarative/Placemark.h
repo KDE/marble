@@ -30,12 +30,9 @@ class Placemark : public QObject
     Q_PROPERTY(QString address READ address NOTIFY addressChanged)
     Q_PROPERTY(QString website READ website NOTIFY websiteChanged)
     Q_PROPERTY(QString wikipedia READ wikipedia NOTIFY wikipediaChanged)
-    Q_PROPERTY(QString fuelDetails READ fuelDetails NOTIFY fuelDetailsChanged)
     Q_PROPERTY(QString openingHours READ openingHours NOTIFY openingHoursChanged)
     Q_PROPERTY(QString coordinates READ coordinates NOTIFY coordinatesChanged)
     Q_PROPERTY(QString elevation READ elevation NOTIFY elevationChanged)
-    Q_PROPERTY(QString amenity READ amenity NOTIFY amenityChanged)
-    Q_PROPERTY(QString shop READ shop NOTIFY shopChanged)
     Q_PROPERTY(double longitude READ longitude NOTIFY coordinatesChanged)
     Q_PROPERTY(double latitude READ latitude NOTIFY coordinatesChanged)
 
@@ -53,12 +50,9 @@ public:
     QString address() const;
     QString website() const;
     QString wikipedia() const;
-    QString fuelDetails() const;
     QString openingHours() const;
     QString coordinates() const;
     QString elevation() const;
-    QString amenity() const;
-    QString shop() const;
     double longitude() const;
     double latitude() const;
 
@@ -72,11 +66,8 @@ Q_SIGNALS:
     void addressChanged();
     void websiteChanged();
     void wikipediaChanged();
-    void fuelDetailsChanged();
     void openingHoursChanged();
     void elevationChanged();
-    void amenityChanged();
-    void shopChanged();
 
 private:
     void addTagValue(QString &target, const QString &key) const;
@@ -87,13 +78,10 @@ private:
     Marble::GeoDataPlacemark m_placemark;
     mutable QString m_address; // mutable to allow lazy calculation in the getter
     mutable QString m_description;
-    mutable QString m_fuelDetails;
     mutable QString m_website;
     mutable QString m_wikipedia;
     mutable QString m_openingHours;
     mutable QString m_elevation;
-    mutable QString m_amenity;
-    mutable QString m_shop;
 };
 
 }
