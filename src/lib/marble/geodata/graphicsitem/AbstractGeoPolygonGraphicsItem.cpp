@@ -66,15 +66,6 @@ void AbstractGeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportP
         painter->drawPolygon( *m_ring );
     }
 
-    const GeoDataIconStyle& iconStyle = style()->iconStyle();
-    bool const hasIcon = !iconStyle.iconPath().isEmpty();
-    if (hasIcon) {
-        int const tileLevel = qLn( viewport->radius() * 4 / 256 ) / qLn( 2.0 );
-        if (tileLevel >= feature()->zoomLevel()) {
-            QImage const icon = iconStyle.scaledIcon();
-            painter->drawImage(latLonAltBox().center(), icon);
-        }
-    }
     painter->restore();
 }
 
