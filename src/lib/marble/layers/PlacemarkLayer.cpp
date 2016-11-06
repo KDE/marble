@@ -33,7 +33,8 @@ PlacemarkLayer::PlacemarkLayer(QAbstractItemModel *placemarkModel,
                                 MarbleClock *clock, const StyleBuilder *styleBuilder,
                                 QObject *parent ) :
     QObject( parent ),
-    m_layout( placemarkModel, selectionModel, clock, styleBuilder )
+    m_layout( placemarkModel, selectionModel, clock, styleBuilder ),
+    m_debugModeEnabled(false)
 {
     m_useXWorkaround = testXBug();
     mDebug() << "Use workaround: " << ( m_useXWorkaround ? "1" : "0" );
@@ -97,6 +98,10 @@ bool PlacemarkLayer::render( GeoPainter *geoPainter, ViewportParams *viewport,
         }
     }
 
+    if (m_debugModeEnabled) {
+        renderDebug(geoPainter, viewport, visiblePlacemarks);
+    }
+
     return true;
 }
 
@@ -113,6 +118,16 @@ QString PlacemarkLayer::runtimeTrace() const
 QVector<const GeoDataFeature *> PlacemarkLayer::whichPlacemarkAt( const QPoint &pos )
 {
     return m_layout.whichPlacemarkAt( pos );
+}
+
+bool PlacemarkLayer::isDebugModeEnabled() const
+{
+    return m_debugModeEnabled;
+}
+
+void PlacemarkLayer::setDebugModeEnabled(bool enabled)
+{
+    m_debugModeEnabled = enabled;
 }
 
 void PlacemarkLayer::setShowPlaces( bool show )
@@ -190,6 +205,37 @@ bool PlacemarkLayer::testXBug()
     }
 
     return true;
+}
+
+void PlacemarkLayer::renderDebug(GeoPainter *painter, ViewportParams *viewport, const QVector<VisiblePlacemark *> &placemarks)
+{
+    Q_UNUSED(viewport);
+    painter->save();
+    painter->setBrush(QBrush(Qt::NoBrush));
+
+    typedef QSet<VisiblePlacemark*> Placemarks;
+    Placemarks const hidden = Placemarks::fromList(m_layout.visiblePlacemarks()).subtract(Placemarks::fromList(placemarks.toList()));
+
+    painter->setPen(QPen(QColor(Qt::red)));
+    for (auto placemark: hidden) {
+        painter->drawRect(placemark->boundingBox());
+    }
+
+    painter->setPen(QPen(QColor(Qt::blue)));
+    for (auto placemark: placemarks) {
+        painter->drawRect(placemark->boundingBox());
+    }
+
+    painter->setPen(QPen(QColor(Qt::green)));
+    for (auto placemark: placemarks) {
+        painter->drawRect(placemark->labelRect());
+        painter->drawRect(placemark->symbolRect());
+        QString const popularity = QString::number(placemark->placemark()->popularity());
+        painter->drawText(placemark->symbolRect().bottomLeft(), popularity);
+    }
+
+
+    painter->restore();
 }
 
 #include "moc_PlacemarkLayer.cpp"

@@ -76,6 +76,9 @@ class PlacemarkLayer : public QObject, public LayerInterface
      */
     QVector<const GeoDataFeature *> whichPlacemarkAt( const QPoint &pos );
 
+    bool isDebugModeEnabled() const;
+    void setDebugModeEnabled(bool enabled);
+
     static bool m_useXWorkaround;  // Indicates need for an X windows workaround.
  public Q_SLOTS:
    // earth
@@ -95,9 +98,11 @@ class PlacemarkLayer : public QObject, public LayerInterface
    void repaintNeeded();
 
  private:
+    void renderDebug(GeoPainter *painter, ViewportParams *viewport, const QVector<VisiblePlacemark*> & placemarks);
     static bool testXBug();
 
     PlacemarkLayout m_layout;
+    bool m_debugModeEnabled;
 };
 
 }

@@ -1253,6 +1253,19 @@ bool MarbleMap::showDebugPolygons() const
     return d->m_showDebugPolygons;
 }
 
+void MarbleMap::setShowDebugPlacemarks( bool visible)
+{
+    if (visible != d->m_placemarkLayer.isDebugModeEnabled()) {
+        d->m_placemarkLayer.setDebugModeEnabled(visible);
+        emit repaintNeeded();
+    }
+}
+
+bool MarbleMap::showDebugPlacemarks() const
+{
+    return d->m_placemarkLayer.isDebugModeEnabled();
+}
+
 void MarbleMap::setShowBackground( bool visible )
 {
     d->m_layerManager.setShowBackground( visible );

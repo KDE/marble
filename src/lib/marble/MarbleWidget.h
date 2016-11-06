@@ -948,6 +948,15 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     bool showDebugPolygons() const;
 
     /**
+     * @brief Set whether to enter the debug mode for
+     * placemark drawing
+     * @param visible visibility of the node debug mode
+     */
+    void setShowDebugPlacemarks(bool visible);
+
+    bool showDebugPlacemarks() const;
+
+    /**
      * @brief Set the map quality for the specified view context.
      *
      * @param quality map quality for the specified view context

@@ -498,6 +498,11 @@ QString PlacemarkLayout::runtimeTrace() const
     return m_runtimeTrace;
 }
 
+QList<VisiblePlacemark *> PlacemarkLayout::visiblePlacemarks() const
+{
+    return m_visiblePlacemarks.values();
+}
+
 bool PlacemarkLayout::layoutPlacemark( const GeoDataPlacemark *placemark, qreal x, qreal y, bool selected )
 {
     // Find the corresponding visible placemark

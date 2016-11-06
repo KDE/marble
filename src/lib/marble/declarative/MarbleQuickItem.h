@@ -128,6 +128,7 @@ namespace Marble
 
         Q_INVOKABLE void setShowRuntimeTrace(bool showRuntimeTrace);
         Q_INVOKABLE void setShowDebugPolygons(bool showDebugPolygons);
+        Q_INVOKABLE void setShowDebugPlacemarks(bool showDebugPlacemarks);
 
         void setPlacemarkDelegate(QQmlComponent* placemarkDelegate);
 

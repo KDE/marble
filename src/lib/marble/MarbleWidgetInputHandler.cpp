@@ -113,6 +113,9 @@ bool MarbleWidgetInputHandler::handleKeyPress(QKeyEvent *event)
         case Qt::Key_R:
             d->m_marbleWidget->setShowRuntimeTrace(!d->m_marbleWidget->showRuntimeTrace());
             break;
+        case Qt::Key_O:
+            d->m_marbleWidget->setShowDebugPlacemarks(!d->m_marbleWidget->showDebugPlacemarks());
+            break;
         case Qt::Key_P:
             d->m_marbleWidget->setShowDebugPolygons(!d->m_marbleWidget->showDebugPolygons());
             break;

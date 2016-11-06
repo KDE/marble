@@ -649,6 +649,15 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
     bool showDebugPolygons() const;
 
+    /**
+     * @brief Set whether to enter the debug mode for
+     * placemark drawing
+     * @param visible visibility of the node debug mode
+     */
+    void setShowDebugPlacemarks(bool visible);
+
+    bool showDebugPlacemarks() const;
+
     void setShowBackground( bool visible );
 
      /**

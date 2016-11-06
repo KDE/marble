@@ -894,6 +894,12 @@ namespace Marble
         update();
     }
 
+    void MarbleQuickItem::setShowDebugPlacemarks(bool showDebugPlacemarks)
+    {
+        d->m_map.setShowDebugPlacemarks(showDebugPlacemarks);
+        update();
+    }
+
     void MarbleQuickItem::setPlacemarkDelegate(QQmlComponent *placemarkDelegate)
     {
         if (d->m_placemarkDelegate == placemarkDelegate) {

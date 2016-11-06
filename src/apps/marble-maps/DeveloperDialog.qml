@@ -79,7 +79,10 @@ Item {
             id: debugPolygons
             text: "Render in Debug Mode"
             checked: settings.value("Developer", "debugPolygons") === "true"
-            onCheckedChanged: marbleMaps.setShowDebugPolygons(checked)
+            onCheckedChanged: {
+                marbleMaps.setShowDebugPlacemarks(checked)
+                marbleMaps.setShowDebugPolygons(checked)
+            }
         }
     }
 }

@@ -81,6 +81,8 @@ class PlacemarkLayout : public QObject
 
     QString runtimeTrace() const;
 
+    QList<VisiblePlacemark *> visiblePlacemarks() const;
+
  public Q_SLOTS:
     // earth
     void setShowPlaces( bool show );
