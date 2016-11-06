@@ -47,7 +47,6 @@ public:
     void printIds() const;
     int size() const;
     bool concatPossible(const PlacemarkPtr &placemark) const;
-    GeoDataPlacemark::GeoDataVisualCategory visualCategory() const;
 
 private:
     QVector<PlacemarkPtr> m_wayList;

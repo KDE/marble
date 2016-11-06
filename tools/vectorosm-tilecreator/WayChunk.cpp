@@ -117,9 +117,4 @@ bool WayChunk::concatPossible(const PlacemarkPtr &placemark) const
     return (category == m_visualCategory);
 }
 
-GeoDataPlacemark::GeoDataVisualCategory WayChunk::visualCategory() const
-{
-    return m_visualCategory;
-}
-
 }
