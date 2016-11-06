@@ -30,6 +30,18 @@ make install
 [...]
 
 
+During development, if removing or adding a translation source file after
+cmake has been run already, the buildsystem needs to be first updated
+to pick up the removed/added files:
+
+make rebuild_cache
+
+Next, or if on of the existing translation source files has been updated,
+the translations need to be explicitely build again:
+
+make bundle_translations
+
+
 Challenge
 ---------
 Translation catalogs are not part of the Marble source repository, instead
