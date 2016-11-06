@@ -22,6 +22,7 @@
 #include <QRectF>
 
 #include <GeoDataStyle.h>
+#include <GeoDataCoordinates.h>
 
 namespace Marble
 {
@@ -41,7 +42,7 @@ class VisiblePlacemark : public QObject
  Q_OBJECT
 
  public:
-    explicit VisiblePlacemark(const GeoDataPlacemark *placemark, const GeoDataStyle::ConstPtr &style);
+    explicit VisiblePlacemark(const GeoDataPlacemark *placemark, const GeoDataCoordinates &coordinates, const GeoDataStyle::ConstPtr &style);
 
     /**
      * Returns the index of the place mark model which
@@ -82,7 +83,7 @@ class VisiblePlacemark : public QObject
     /**
      * Returns the pixmap of the place mark name label.
      */
-    const QPixmap& labelPixmap() const;
+    const QPixmap& labelPixmap();
 
     /**
      * Returns the area covered by the place mark name label on the map.
@@ -108,6 +109,8 @@ class VisiblePlacemark : public QObject
 
     QRectF boundingBox() const;
 
+    const GeoDataCoordinates & coordinates() const;
+
 Q_SIGNALS:
     void updateNeeded();
 
@@ -124,10 +127,12 @@ private Q_SLOTS:
     QPointF     m_symbolPosition; // position of the placemark's symbol
     bool        m_selected;       // state of the placemark
     QPixmap     m_labelPixmap;    // the text label (most often name)
+    bool        m_labelDirty;
     QRectF      m_labelRect;      // bounding box of label
 
     mutable QPixmap     m_symbolPixmap; // cached value
     GeoDataStyle::ConstPtr m_style;
+    GeoDataCoordinates m_coordinates;
 };
 
 }

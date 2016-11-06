@@ -20,6 +20,7 @@
 #include "GeoDataStyle.h"
 #include "GeoPainter.h"
 #include "GeoDataPlacemark.h"
+#include "GeoDataLatLonAltBox.h"
 #include "ViewportParams.h"
 #include "VisiblePlacemark.h"
 #include "RenderState.h"
@@ -210,15 +211,16 @@ bool PlacemarkLayer::testXBug()
 
 void PlacemarkLayer::renderDebug(GeoPainter *painter, ViewportParams *viewport, const QVector<VisiblePlacemark *> &placemarks)
 {
-    Q_UNUSED(viewport);
     painter->save();
     painter->setBrush(QBrush(Qt::NoBrush));
+    auto const latLonAltBox = viewport->viewLatLonAltBox();
 
     typedef QSet<VisiblePlacemark*> Placemarks;
     Placemarks const hidden = Placemarks::fromList(m_layout.visiblePlacemarks()).subtract(Placemarks::fromList(placemarks.toList()));
 
-    painter->setPen(QPen(QColor(Qt::red)));
     for (auto placemark: hidden) {
+        bool const inside = latLonAltBox.contains(placemark->coordinates());
+        painter->setPen(QPen(QColor(inside ? Qt::red : Qt::darkYellow)));
         painter->drawRect(placemark->boundingBox());
     }
 
@@ -234,7 +236,6 @@ void PlacemarkLayer::renderDebug(GeoPainter *painter, ViewportParams *viewport, 
         QString const popularity = QString::number(placemark->placemark()->popularity());
         painter->drawText(placemark->symbolRect().bottomLeft(), popularity);
     }
-
 
     painter->restore();
 }

@@ -361,6 +361,7 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParam
     // First handle the selected placemarks as they have the highest priority.
 
     const QModelIndexList selectedIndexes = m_selectionModel->selection().indexes();
+    auto const viewLatLonAltBox = viewport->viewLatLonAltBox();
 
     for ( int i = 0; i < selectedIndexes.count(); ++i ) {
         const QModelIndex index = selectedIndexes.at( i );
@@ -374,14 +375,13 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParam
         qreal x = 0;
         qreal y = 0;
 
-        if ( !viewport->viewLatLonAltBox().contains( coordinates ) ||
+        if ( !viewLatLonAltBox.contains( coordinates ) ||
              ! viewport->screenCoordinates( coordinates, x, y ))
             {
-                delete m_visiblePlacemarks.take( placemark );
                 continue;
             }
 
-        if( layoutPlacemark( placemark, x, y, true) ) {
+        if( layoutPlacemark( placemark, coordinates, x, y, true) ) {
             // Make sure not to draw more placemarks on the screen than
             // specified by placemarksOnScreenLimit().
             if ( placemarksOnScreenLimit( viewport->size() ) )
@@ -400,7 +400,6 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParam
     }
     qSort(placemarkList.begin(), placemarkList.end(), GeoDataPlacemark::placemarkLayoutOrderCompare);
 
-    auto const viewLatLonAltBox = viewport->viewLatLonAltBox();
     foreach ( const GeoDataPlacemark *placemark, placemarkList ) {
         const GeoDataCoordinates coordinates = placemarkIconCoordinates( placemark );
         if ( !coordinates.isValid() ) {
@@ -417,7 +416,6 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParam
 
         if ( !viewLatLonAltBox.contains( coordinates ) ||
              ! viewport->screenCoordinates( coordinates, x, y )) {
-                delete m_visiblePlacemarks.take( placemark );
                 continue;
             }
 
@@ -471,7 +469,7 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParam
         // we check for the selected state after all other filters
         bool isSelected = false;
         foreach ( const QModelIndex &index, selection.indexes() ) {
-            const GeoDataPlacemark *mark = dynamic_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
+            const GeoDataPlacemark *mark = static_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
             if (mark == placemark ) {
                 isSelected = true;
                 break;
@@ -480,11 +478,24 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParam
         if ( isSelected )
             continue;
 
-        if( layoutPlacemark( placemark, x, y, isSelected ) ) {
+        if( layoutPlacemark( placemark, coordinates, x, y, isSelected ) ) {
             // Make sure not to draw more placemarks on the screen than
             // specified by placemarksOnScreenLimit().
             if ( placemarksOnScreenLimit( viewport->size() ) )
                 break;
+        }
+    }
+
+    if (m_visiblePlacemarks.size() > qMax(100, 4 * m_paintOrder.size())) {
+        auto const extendedBox = viewLatLonAltBox.scaled(2.0, 2.0);
+        QVector<VisiblePlacemark*> outdated;
+        for (auto placemark: m_visiblePlacemarks) {
+            if (!extendedBox.contains(placemark->coordinates())) {
+                outdated << placemark;
+            }
+        }
+        for (auto placemark: outdated) {
+            delete m_visiblePlacemarks.take(placemark->placemark());
         }
     }
 
@@ -502,7 +513,7 @@ QList<VisiblePlacemark *> PlacemarkLayout::visiblePlacemarks() const
     return m_visiblePlacemarks.values();
 }
 
-bool PlacemarkLayout::layoutPlacemark( const GeoDataPlacemark *placemark, qreal x, qreal y, bool selected )
+bool PlacemarkLayout::layoutPlacemark( const GeoDataPlacemark *placemark, const GeoDataCoordinates &coordinates, qreal x, qreal y, bool selected )
 {
     // Find the corresponding visible placemark
     VisiblePlacemark *mark = m_visiblePlacemarks.value( placemark );
@@ -513,7 +524,7 @@ bool PlacemarkLayout::layoutPlacemark( const GeoDataPlacemark *placemark, qreal 
         // @todo: Set / adjust to tile level
         parameters.placemark = placemark;
 
-        mark = new VisiblePlacemark(placemark, m_styleBuilder->createStyle(parameters));
+        mark = new VisiblePlacemark(placemark, coordinates, m_styleBuilder->createStyle(parameters));
         m_visiblePlacemarks.insert( placemark, mark );
         connect( mark, SIGNAL(updateNeeded()), this, SIGNAL(repaintNeeded()) );
     }

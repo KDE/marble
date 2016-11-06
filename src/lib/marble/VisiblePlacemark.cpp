@@ -26,16 +26,17 @@
 
 using namespace Marble;
 
-VisiblePlacemark::VisiblePlacemark( const GeoDataPlacemark *placemark, const GeoDataStyle::ConstPtr &style )
+VisiblePlacemark::VisiblePlacemark( const GeoDataPlacemark *placemark, const GeoDataCoordinates &coordinates, const GeoDataStyle::ConstPtr &style )
     : m_placemark( placemark ),
       m_selected( false ),
-      m_style(style)
+      m_labelDirty(true),
+      m_style(style),
+      m_coordinates(coordinates)
 {
     const RemoteIconLoader *remoteLoader = style->iconStyle().remoteIconLoader();
     QObject::connect( remoteLoader, SIGNAL(iconReady()),
                      this, SLOT(setSymbolPixmap()) );
 
-    drawLabelPixmap();
     setSymbolPixmap();
 }
 
@@ -58,7 +59,7 @@ void VisiblePlacemark::setSelected( bool selected )
 {
     if (selected != m_selected) {
         m_selected = selected;
-        drawLabelPixmap();
+        m_labelDirty = true;
     }
 }
 
@@ -107,8 +108,12 @@ void VisiblePlacemark::setSymbolPosition( const QPointF& position )
     m_symbolPosition = position;
 }
 
-const QPixmap& VisiblePlacemark::labelPixmap() const
+const QPixmap& VisiblePlacemark::labelPixmap()
 {
+    if (m_labelDirty) {
+        drawLabelPixmap();
+    }
+
     return m_labelPixmap;
 }
 
@@ -136,7 +141,7 @@ void VisiblePlacemark::setLabelRect( const QRectF& labelRect )
 void VisiblePlacemark::setStyle(const GeoDataStyle::ConstPtr &style)
 {
     m_style = style;
-    drawLabelPixmap();
+    m_labelDirty = true;
     setSymbolPixmap();
 }
 
@@ -155,8 +160,14 @@ QRectF VisiblePlacemark::boundingBox() const
     return m_labelRect.isEmpty() ? symbolRect() : m_labelRect.united(symbolRect());
 }
 
+const GeoDataCoordinates &VisiblePlacemark::coordinates() const
+{
+    return m_coordinates;
+}
+
 void VisiblePlacemark::drawLabelPixmap()
 {
+    m_labelDirty = false;
     QString labelName = m_placemark->displayName();
     if ( labelName.isEmpty() || m_style->labelStyle().color() == QColor(Qt::transparent) ) {
         m_labelPixmap = QPixmap();

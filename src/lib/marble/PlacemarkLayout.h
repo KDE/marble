@@ -116,7 +116,7 @@ class PlacemarkLayout : public QObject
     void styleReset();
 
     static QSet<TileId> visibleTiles( const ViewportParams *viewport );
-    bool layoutPlacemark( const GeoDataPlacemark *placemark, qreal x, qreal y, bool selected );
+    bool layoutPlacemark(const GeoDataPlacemark *placemark, const GeoDataCoordinates &coordinates, qreal x, qreal y, bool selected );
 
     /**
      * Returns the coordinates at which an icon should be drawn for the @p placemark.
