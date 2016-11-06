@@ -69,13 +69,13 @@ qint64 NodeReducer::remainingNodes() const
 qreal NodeReducer::epsilonForString(int detailLevel) const
 {
     int const factor = 1 << (qAbs(detailLevel-12));
-    return detailLevel < 12 ? 60.0 * factor : 60.0 / factor;
+    return detailLevel < 12 ? 30.0 * factor : 30.0 / factor;
 }
 
 qreal NodeReducer::epsilonForArea(int detailLevel) const
 {
     int const factor = 1 << (qAbs(detailLevel-12));
-    return detailLevel < 12 ? 90.0 * factor : 90.0 / factor;
+    return detailLevel < 12 ? 60.0 * factor : 60.0 / factor;
 }
 
 qreal NodeReducer::perpendicularDistance(const GeoDataCoordinates &a, const GeoDataCoordinates &b, const GeoDataCoordinates &c) const
