@@ -70,12 +70,10 @@ public:
         QVector<GeoGraphicsItem*> positive;
     };
 
-    typedef QList<GeoDataPlacemark const *> OsmQueue;
-
     explicit GeometryLayerPrivate(const QAbstractItemModel *model, const StyleBuilder *styleBuilder);
 
     void createGraphicsItems( const GeoDataObject *object );
-    void createGraphicsItemFromGeometry( const GeoDataGeometry *object, const GeoDataPlacemark *placemark, bool avoidOsmDuplicates );
+    void createGraphicsItemFromGeometry(const GeoDataGeometry *object, const GeoDataPlacemark *placemark);
     void createGraphicsItemFromOverlay( const GeoDataOverlay *overlay );
     void removeGraphicsItems( const GeoDataFeature *feature );
 
@@ -84,9 +82,6 @@ public:
     GeoGraphicsScene m_scene;
     QString m_runtimeTrace;
     QList<ScreenOverlayGraphicsItem*> m_items;
-
-    QMap<qint64,OsmQueue> m_osmWayItems;
-    QMap<qint64,OsmQueue> m_osmRelationItems;
 };
 
 GeometryLayerPrivate::GeometryLayerPrivate(const QAbstractItemModel *model, const StyleBuilder *styleBuilder) :
@@ -208,7 +203,7 @@ void GeometryLayerPrivate::createGraphicsItems( const GeoDataObject *object )
 {
     if ( const GeoDataPlacemark *placemark = dynamic_cast<const GeoDataPlacemark*>( object ) )
     {
-        createGraphicsItemFromGeometry( placemark->geometry(), placemark, true );
+        createGraphicsItemFromGeometry(placemark->geometry(), placemark);
     } else if ( const GeoDataOverlay* overlay = dynamic_cast<const GeoDataOverlay*>( object ) ) {
         createGraphicsItemFromOverlay( overlay );
     }
@@ -224,7 +219,7 @@ void GeometryLayerPrivate::createGraphicsItems( const GeoDataObject *object )
     }
 }
 
-void GeometryLayerPrivate::createGraphicsItemFromGeometry(const GeoDataGeometry* object, const GeoDataPlacemark *placemark , bool avoidOsmDuplicates)
+void GeometryLayerPrivate::createGraphicsItemFromGeometry(const GeoDataGeometry* object, const GeoDataPlacemark *placemark)
 {
     if (!placemark->isGloballyVisible()) {
         return; // Reconsider this when visibility can be changed dynamically
@@ -238,31 +233,11 @@ void GeometryLayerPrivate::createGraphicsItemFromGeometry(const GeoDataGeometry*
     }
     else if ( object->nodeType() == GeoDataTypes::GeoDataLinearRingType )
     {
-        if (avoidOsmDuplicates && placemark->hasOsmData()){
-            qint64 const osmId = placemark->osmData().id();
-            if (osmId > 0) {
-                m_osmWayItems[osmId] << placemark;
-                if (m_osmWayItems[osmId].size()>1) {
-                    return;
-                }
-            }
-        }
-
         const GeoDataLinearRing *ring = static_cast<const GeoDataLinearRing*>( object );
         item = GeoPolygonGraphicsItem::createGraphicsItem(placemark, ring);
     }
     else if ( object->nodeType() == GeoDataTypes::GeoDataPolygonType )
     {
-        if (avoidOsmDuplicates && placemark->hasOsmData()){
-            qint64 const osmId = placemark->osmData().id();
-            if (osmId > 0) {
-                m_osmRelationItems[osmId] << placemark;
-                if (m_osmRelationItems[osmId].size()>1) {
-                    return;
-                }
-            }
-        }
-
         const GeoDataPolygon *poly = static_cast<const GeoDataPolygon*>( object );
         item = GeoPolygonGraphicsItem::createGraphicsItem(placemark, poly);
         if (item->zValue() == 0) {
@@ -275,7 +250,7 @@ void GeometryLayerPrivate::createGraphicsItemFromGeometry(const GeoDataGeometry*
         int rowCount = multigeo->size();
         for ( int row = 0; row < rowCount; ++row )
         {
-            createGraphicsItemFromGeometry( multigeo->child( row ), placemark, true );
+            createGraphicsItemFromGeometry(multigeo->child( row ), placemark);
         }
     }
     else if ( object->nodeType() == GeoDataTypes::GeoDataMultiTrackType  )
@@ -284,7 +259,7 @@ void GeometryLayerPrivate::createGraphicsItemFromGeometry(const GeoDataGeometry*
         int rowCount = multitrack->size();
         for ( int row = 0; row < rowCount; ++row )
         {
-            createGraphicsItemFromGeometry( multitrack->child( row ), placemark, true );
+            createGraphicsItemFromGeometry(multitrack->child( row ), placemark);
         }
     }
     else if ( object->nodeType() == GeoDataTypes::GeoDataTrackType )
@@ -329,31 +304,6 @@ void GeometryLayerPrivate::removeGraphicsItems( const GeoDataFeature *feature )
 {
 
     if( feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
-        GeoDataPlacemark const * placemark = static_cast<GeoDataPlacemark const *>(feature);
-        if (placemark->isGloballyVisible() && placemark->hasOsmData() && placemark->osmData().id() > 0) {
-            QMap<qint64,OsmQueue>* osmItems = 0;
-            if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLinearRingType) {
-                osmItems = &m_osmWayItems;
-            } else if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType) {
-                osmItems = &m_osmRelationItems;
-            }
-            if (osmItems) {
-                OsmQueue & items = (*osmItems)[placemark->osmData().id()];
-                Q_ASSERT(items.contains(placemark));
-                if (items.first() == placemark) {
-                    items.removeAt(0);
-                    m_scene.removeItem( feature ); // the item was in use
-                    if (!items.empty()) {
-                        // we need to fill in a replacement now
-                        createGraphicsItemFromGeometry(items.first()->geometry(), items.first(), false);
-                    }
-                } else {
-                    // the item was not used
-                    items.removeOne(placemark);
-                }
-                return;
-            }
-        }
         m_scene.removeItem( feature );
     }
     else if( feature->nodeType() == GeoDataTypes::GeoDataFolderType
@@ -412,8 +362,6 @@ void GeometryLayer::resetCacheData()
     d->m_scene.clear();
     qDeleteAll( d->m_items );
     d->m_items.clear();
-    d->m_osmWayItems.clear();
-    d->m_osmRelationItems.clear();
 
     const GeoDataObject *object = static_cast<GeoDataObject*>( d->m_model->index( 0, 0, QModelIndex() ).internalPointer() );
     if ( object && object->parent() )
