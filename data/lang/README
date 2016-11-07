@@ -36,8 +36,8 @@ to pick up the removed/added files:
 
 make rebuild_cache
 
-Next, or if on of the existing translation source files has been updated,
-the translations need to be explicitely build again:
+Next, or if one of the existing translation source files has been updated,
+the translations need to be explicitly build again:
 
 make bundle_translations
 
