@@ -144,8 +144,8 @@ void OsmRelation::create(GeoDataDocument *document, OsmWays &ways, const OsmNode
         placemark->setName(m_osmData.tagValue(QStringLiteral("name")));
         placemark->setVisualCategory(outerCategory);
         placemark->setStyle( GeoDataStyle::Ptr() );
-        placemark->setZoomLevel(OsmNode::zoomLevelFor(outerCategory, 17));
-        placemark->setPopularity(OsmNode::popularityFor(outerCategory, 100));
+        placemark->setZoomLevel(OsmNode::zoomLevelFor(outerCategory));
+        placemark->setPopularity(OsmNode::popularityFor(outerCategory));
         placemark->setVisible(outerCategory != GeoDataPlacemark::None);
         placemark->setGeometry(polygon);
         if (hasMultipleOuterRings) {

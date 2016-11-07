@@ -33,8 +33,8 @@ public:
 
     void create(GeoDataDocument* document) const;
 
-    static int zoomLevelFor(GeoDataPlacemark::GeoDataVisualCategory category, int defaultValue);
-    static qint64 popularityFor(GeoDataPlacemark::GeoDataVisualCategory category, qint64 defaultValue);
+    static int zoomLevelFor(GeoDataPlacemark::GeoDataVisualCategory category);
+    static qint64 popularityFor(GeoDataPlacemark::GeoDataVisualCategory category);
 
 private:
     int populationIndex(qint64 population) const;

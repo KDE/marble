@@ -63,8 +63,8 @@ void OsmNode::create(GeoDataDocument *document) const
     }
     placemark->setVisualCategory(category);
     placemark->setStyle( GeoDataStyle::Ptr() );
-    placemark->setZoomLevel(zoomLevelFor(category, 18));
-    placemark->setPopularity(popularityFor(category, 100));
+    placemark->setZoomLevel(zoomLevelFor(category));
+    placemark->setPopularity(popularityFor(category));
 
     if (category >= GeoDataPlacemark::PlaceCity && category <= GeoDataPlacemark::PlaceVillageCapital) {
         int const population = m_osmData.tagValue(QStringLiteral("population")).toInt();
@@ -99,8 +99,9 @@ int OsmNode::populationIndex(qint64 population) const
     return popidx;
 }
 
-int OsmNode::zoomLevelFor(GeoDataPlacemark::GeoDataVisualCategory category, int defaultValue)
+int OsmNode::zoomLevelFor(GeoDataPlacemark::GeoDataVisualCategory category)
 {
+    int const defaultValue = 18;
     if (m_zoomLevels.isEmpty()) {
         m_zoomLevels[GeoDataPlacemark::PlaceCityCapital] = 9;
         m_zoomLevels[GeoDataPlacemark::PlaceCity] = 9;
@@ -125,10 +126,10 @@ int OsmNode::zoomLevelFor(GeoDataPlacemark::GeoDataVisualCategory category, int 
     return m_zoomLevels.value(category, defaultValue);
 }
 
-qint64 OsmNode::popularityFor(GeoDataPlacemark::GeoDataVisualCategory category, qint64 defaultValue)
+qint64 OsmNode::popularityFor(GeoDataPlacemark::GeoDataVisualCategory category)
 {
+    qint64 const defaultValue = 100;
     if (m_popularities.isEmpty()) {
-
         QVector<GeoDataPlacemark::GeoDataVisualCategory> popularities;
         popularities << GeoDataPlacemark::PlaceCityCapital;
         popularities << GeoDataPlacemark::PlaceTownCapital;
