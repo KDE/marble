@@ -46,6 +46,8 @@ class FloatItemsLayer : public QObject, public LayerInterface
      */
     QList<AbstractFloatItem *> floatItems() const;
 
+    QString runtimeTrace() const override;
+
  Q_SIGNALS:
     /**
      * @brief Signal that a render item has been initialized

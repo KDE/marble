@@ -73,6 +73,11 @@ QList<AbstractFloatItem *> FloatItemsLayer::floatItems() const
     return m_floatItems;
 }
 
+QString FloatItemsLayer::runtimeTrace() const
+{
+    return QStringLiteral("Float Items: %1").arg(m_floatItems.size());
+}
+
 void FloatItemsLayer::updateVisibility(bool visible, const QString &nameId)
 {
     emit visibilityChanged(nameId, visible);
