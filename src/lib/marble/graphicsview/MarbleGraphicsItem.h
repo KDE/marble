@@ -32,8 +32,6 @@ class MarbleGraphicsItemPrivate;
 
 class MARBLE_EXPORT MarbleGraphicsItem
 {
-    friend class MarbleGraphicsItemPrivate;
-
  public:
     enum CacheMode {
         NoCache,
