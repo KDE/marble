@@ -29,8 +29,8 @@ Item {
 
         Component.onDestruction: {
             settings.setValue("Developer", "positionProvider", marbleMaps.currentPositionProvider)
-            settings.setValue("Developer", "textureTiles", marbleMaps.isPropertyEnabled("mapnik") ? "true" : "false")
             settings.setValue("Developer", "runtimeTrace", runtimeTrace.checked ? "true" : "false")
+            settings.setValue("Developer", "debugPlacemarks", debugPlacemarks.checked ? "true" : "false")
             settings.setValue("Developer", "debugPolygons", debugPolygons.checked ? "true" : "false")
         }
     }
@@ -51,37 +51,44 @@ Item {
 
         spacing: Screen.pixelDensity * 1
 
-        Text {
-            id: text
-            text: "Developer Settings"
-        }
+        Grid {
+            columns: 2
+            flow: Grid.TopToBottom
 
-        CheckBox {
-            text: "Simulate GPS Position near Route"
-            checked: settings.value("Developer", "positionProvider") === "RouteSimulationPositionProviderPlugin"
-            onCheckedChanged: marbleMaps.currentPositionProvider = checked ? "RouteSimulationPositionProviderPlugin" : "QtPositioning"
-        }
+            Text {
+                text: "Developer Tools"
+            }
 
-        CheckBox {
-            text: "Show OSM Bitmap Tiles"
-            checked: settings.value("Developer", "textureTiles") === "true"
-            onCheckedChanged: marbleMaps.setMapThemeId(checked ? "earth/openstreetmap/openstreetmap.dgml" : "earth/vectorosm/vectorosm.dgml")
-        }
+            CheckBox {
+                text: "GPS Simulation"
+                checked: settings.value("Developer", "positionProvider") === "RouteSimulationPositionProviderPlugin"
+                onCheckedChanged: marbleMaps.currentPositionProvider = checked ? "RouteSimulationPositionProviderPlugin" : "QtPositioning"
+            }
 
-        CheckBox {
-            id: runtimeTrace
-            text: "Show Render Performance"
-            checked: settings.value("Developer", "runtimeTrace") === "true"
-            onCheckedChanged: marbleMaps.setShowRuntimeTrace(checked)
-        }
+            CheckBox {
+                id: runtimeTrace
+                text: "Render Performance"
+                checked: settings.value("Developer", "runtimeTrace") === "true"
+                onCheckedChanged: marbleMaps.setShowRuntimeTrace(checked)
+            }
 
-        CheckBox {
-            id: debugPolygons
-            text: "Render in Debug Mode"
-            checked: settings.value("Developer", "debugPolygons") === "true"
-            onCheckedChanged: {
-                marbleMaps.setShowDebugPlacemarks(checked)
-                marbleMaps.setShowDebugPolygons(checked)
+            Text {
+                text: "Debug Rendering"
+            }
+
+            CheckBox {
+                id: debugPlacemarks
+                text: "Placemarks"
+                checked: settings.value("Developer", "debugPlacemarks") === "true"
+                onCheckedChanged: marbleMaps.setShowDebugPlacemarks(checked)
+
+            }
+
+            CheckBox {
+                id: debugPolygons
+                text: "Polygons"
+                checked: settings.value("Developer", "debugPolygons") === "true"
+                onCheckedChanged: marbleMaps.setShowDebugPolygons(checked)
             }
         }
     }
