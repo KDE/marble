@@ -363,6 +363,7 @@ void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const Clipper
         GeoDataPolygon* newPolygon = new GeoDataPolygon;
         newPolygon->setOuterBoundary(outerRing);
         newPlacemark->setGeometry(newPolygon);
+        newPlacemark->osmData().setId(osmData.id());
         OsmObjectManager::initializeOsmData(newPlacemark);
         copyTags(*placemark, *newPlacemark);
         copyTags(osmData.memberReference(index), newPlacemark->osmData().memberReference(index));

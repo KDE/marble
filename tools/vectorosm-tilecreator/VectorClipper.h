@@ -82,6 +82,7 @@ private:
             }
 
             newPlacemark->setGeometry(newRing);
+            newPlacemark->osmData().setId(placemark->osmData().id());
             copyTags(*placemark, *newPlacemark);
             OsmObjectManager::initializeOsmData(newPlacemark);
             document->append(newPlacemark);
