@@ -33,6 +33,8 @@
 namespace Marble
 {
 
+class GeoDataFolderPrivate;
+
 /**
  * @short A container that is used to arrange other GeoDataFeatures.
  *
@@ -44,9 +46,6 @@ namespace Marble
  * @see GeoDataFeature
  * @see GeoDataContainer
  */
-
-    class GeoDataFolderPrivate;
-
 class GEODATA_EXPORT GeoDataFolder : public GeoDataContainer
 {
  public:

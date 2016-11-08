@@ -21,6 +21,8 @@
 namespace Marble
 {
 
+class GeoDataMultiGeometryPrivate;
+
 /**
  * @short A class that can contain other GeoDataGeometry objects
  *
@@ -28,8 +30,6 @@ namespace Marble
  * As one can add GeoDataMultiGeometry to itself, you can make up a collection
  * of different objects to form one Placemark.
  */
-class GeoDataMultiGeometryPrivate;
-
 class GEODATA_EXPORT GeoDataMultiGeometry : public GeoDataGeometry
 {
  public:

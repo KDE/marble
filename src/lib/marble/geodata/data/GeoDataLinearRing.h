@@ -20,6 +20,8 @@
 namespace Marble
 {
 
+class GeoDataLinearRingPrivate;
+
 /*!
     \class GeoDataLinearRing
     \brief A LinearRing that allows to store a closed, contiguous set of line segments.
@@ -62,9 +64,6 @@ namespace Marble
     Some convenience methods have been added that allow to calculate the
     geodesic bounding box or the length of a LinearRing.
 */
-
-class GeoDataLinearRingPrivate;
-
 class GEODATA_EXPORT GeoDataLinearRing : public GeoDataLineString
 {
 
