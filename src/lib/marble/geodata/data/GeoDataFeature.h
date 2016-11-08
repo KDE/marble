@@ -46,9 +46,6 @@ class GeoDataSnippet;
  * @see GeoDataPlacemark
  * @see GeoDataContainer
  */
-
-// FIXME: Later also add NetworkLink and Overlay
-
 class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
 {
  public:
