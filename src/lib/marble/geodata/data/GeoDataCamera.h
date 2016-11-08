@@ -19,6 +19,8 @@ namespace Marble
 {
 class GeoDataCameraPrivate;
 
+/**
+ */
 class GEODATA_EXPORT GeoDataCamera : public GeoDataAbstractView
 {
 public:

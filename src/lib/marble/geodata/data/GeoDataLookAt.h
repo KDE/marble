@@ -20,6 +20,8 @@ namespace Marble
 {
     class GeoDataLookAtPrivate;
 
+    /**
+     */
     class GEODATA_EXPORT GeoDataLookAt : public GeoDataAbstractView
     {
     public:

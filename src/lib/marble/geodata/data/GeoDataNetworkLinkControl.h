@@ -23,6 +23,8 @@ class GeoDataAbstractView;
 class GeoDataUpdate;
 class GeoDataNetworkLinkControlPrivate;
 
+/**
+ */
 class MARBLE_EXPORT GeoDataNetworkLinkControl : public GeoDataContainer
 {
 public:

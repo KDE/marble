@@ -23,6 +23,8 @@ namespace Marble
 class GeoDataListStylePrivate;
 class GeoDataItemIcon;
 
+/**
+ */
 class GEODATA_EXPORT GeoDataListStyle : public GeoDataObject
 {
 public:

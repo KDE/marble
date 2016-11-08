@@ -20,6 +20,8 @@ namespace Marble
 
 class GeoDataBalloonStylePrivate;
 
+/**
+ */
 class GEODATA_EXPORT GeoDataBalloonStyle : public GeoDataColorStyle
 {
 public:

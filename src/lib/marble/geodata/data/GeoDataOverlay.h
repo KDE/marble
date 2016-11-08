@@ -23,6 +23,8 @@ namespace Marble
 
 class GeoDataOverlayPrivate;
 
+/**
+ */
 class GEODATA_EXPORT GeoDataOverlay: public GeoDataFeature
 {
  public:

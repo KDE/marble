@@ -22,6 +22,8 @@ namespace Marble
 
 class GeoDataTimeStampPrivate;
 
+/**
+ */
 class GEODATA_EXPORT GeoDataTimeStamp : public GeoDataTimePrimitive
 {
   public:

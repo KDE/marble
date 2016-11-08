@@ -19,6 +19,8 @@ namespace Marble {
 
 class GeoDataSimpleArrayDataPrivate;
 
+/**
+ */
 class GEODATA_EXPORT GeoDataSimpleArrayData : public GeoDataObject
 {
 

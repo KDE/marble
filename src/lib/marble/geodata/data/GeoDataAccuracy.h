@@ -19,6 +19,8 @@
 namespace Marble
 {
 
+/**
+ */
 class MARBLE_EXPORT GeoDataAccuracy
 {
  public:

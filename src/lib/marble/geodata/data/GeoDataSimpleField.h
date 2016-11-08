@@ -22,6 +22,8 @@ namespace Marble
 
 class GeoDataSimpleFieldPrivate;
 
+/**
+ */
 class GEODATA_EXPORT GeoDataSimpleField : public GeoNode
 {
 public:

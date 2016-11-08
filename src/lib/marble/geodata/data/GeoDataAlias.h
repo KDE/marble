@@ -19,6 +19,8 @@ namespace Marble {
 
 class GeoDataAliasPrivate;
 
+/**
+ */
 class MARBLE_EXPORT GeoDataAlias: public GeoNode
 {
 

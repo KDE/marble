@@ -17,6 +17,8 @@
 namespace Marble
 {
 
+/**
+ */
 class GEODATA_EXPORT GeoDataTourPrimitive : public GeoDataObject
 {
 };

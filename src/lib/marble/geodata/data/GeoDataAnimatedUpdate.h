@@ -20,6 +20,8 @@ namespace Marble {
 class GeoDataAnimatedUpdatePrivate;
 class GeoDataUpdate;
 
+/**
+ */
 class GEODATA_EXPORT GeoDataAnimatedUpdate: public GeoDataTourPrimitive
 {
 public:

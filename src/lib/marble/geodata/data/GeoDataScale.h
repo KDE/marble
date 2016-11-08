@@ -19,6 +19,8 @@ namespace Marble {
 
 class GeoDataScalePrivate;
 
+/**
+ */
 class MARBLE_EXPORT GeoDataScale: public GeoDataObject
 {
 public:

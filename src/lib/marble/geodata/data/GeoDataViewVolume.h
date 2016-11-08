@@ -19,6 +19,8 @@ namespace Marble
 
 class GeoDataViewVolumePrivate;
 
+/**
+ */
 class MARBLE_EXPORT GeoDataViewVolume : public GeoDataObject
 {
 public:

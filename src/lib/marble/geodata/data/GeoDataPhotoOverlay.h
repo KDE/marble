@@ -24,6 +24,8 @@ class GeoDataPoint;
 class GeoDataImagePyramid;
 class GeoDataViewVolume;
 
+/**
+ */
 class MARBLE_EXPORT GeoDataPhotoOverlay: public GeoDataOverlay
 {
 public:

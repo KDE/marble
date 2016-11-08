@@ -24,6 +24,8 @@ namespace Marble
 
 class GeoDataHotSpotPrivate;
 
+/**
+ */
 class GEODATA_EXPORT GeoDataHotSpot : public GeoDataObject
 {
   public:

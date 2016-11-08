@@ -19,6 +19,8 @@
 namespace Marble
 {
 
+/**
+ */
 class GEODATA_EXPORT GeoDataPlaylist : public GeoDataObject
 {
 public:

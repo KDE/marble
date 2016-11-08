@@ -19,6 +19,8 @@ namespace Marble
 
 class GeoDataCreatePrivate;
 
+/**
+ */
 class MARBLE_EXPORT GeoDataCreate : public GeoDataContainer
 {
 public:

@@ -22,6 +22,8 @@ class GeoDataCreate;
 class GeoDataDelete;
 class GeoDataUpdatePrivate;
 
+/**
+ */
 class MARBLE_EXPORT GeoDataUpdate : public GeoDataObject
 {
 public:

@@ -20,6 +20,8 @@ namespace Marble {
 
 class GeoDataLocationPrivate;
 
+/**
+ */
 class MARBLE_EXPORT GeoDataLocation: public GeoDataObject
 {
 public:

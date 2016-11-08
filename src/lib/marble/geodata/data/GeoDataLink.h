@@ -19,6 +19,8 @@ namespace Marble {
 
 class GeoDataLinkPrivate;
 
+/**
+ */
 class MARBLE_EXPORT GeoDataLink: public GeoDataObject
 {
 public:

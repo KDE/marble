@@ -18,6 +18,8 @@
 namespace Marble
 {
 
+/**
+ */
 class GEODATA_EXPORT GeoDataSoundCue : public GeoDataTourPrimitive
 {
 public:

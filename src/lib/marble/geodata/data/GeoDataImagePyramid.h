@@ -19,6 +19,8 @@ namespace Marble
 
 class GeoDataImagePyramidPrivate;
 
+/**
+ */
 class MARBLE_EXPORT GeoDataImagePyramid : public GeoDataObject
 {
 public:

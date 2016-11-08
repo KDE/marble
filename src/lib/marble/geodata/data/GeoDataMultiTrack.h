@@ -22,6 +22,8 @@ namespace Marble
 class GeoDataMultiTrackPrivate;
 class GeoDataTrack;
 
+/**
+ */
 class GEODATA_EXPORT GeoDataMultiTrack : public GeoDataGeometry
 {
 public:

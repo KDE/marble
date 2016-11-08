@@ -18,6 +18,8 @@ namespace Marble {
 
 class GeoDataOrientationPrivate;
 
+/**
+ */
 class MARBLE_EXPORT GeoDataOrientation: public GeoDataObject
 {
 public:

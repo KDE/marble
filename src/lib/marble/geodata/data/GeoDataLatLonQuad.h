@@ -19,6 +19,8 @@ namespace Marble {
 
 class GeoDataLatLonQuadPrivate;
 
+/**
+ */
 class MARBLE_EXPORT GeoDataLatLonQuad: public GeoDataObject
 {
 public:

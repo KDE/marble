@@ -26,6 +26,8 @@ class GeoDataResourceMap;
 class GeoDataScale;
 class GeoDataModelPrivate;
 
+/**
+ */
 class MARBLE_EXPORT GeoDataModel: public GeoDataGeometry
 {
 public:

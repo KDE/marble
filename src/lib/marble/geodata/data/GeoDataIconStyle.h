@@ -31,6 +31,8 @@ class RemoteIconLoader;
 static const QSize s_maximumIconSize = QSize( 100, 100 );
 static const QSize s_minimumIconSize = QSize( 10, 10 );
 
+/**
+ */
 class GEODATA_EXPORT GeoDataIconStyle : public GeoDataColorStyle
 {
   public:

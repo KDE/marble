@@ -20,6 +20,8 @@ namespace Marble {
 class GeoDataAbstractView;
 class GeoDataFlyToPrivate;
 
+/**
+ */
 class MARBLE_EXPORT GeoDataFlyTo: public GeoDataTourPrimitive
 {
 public:
