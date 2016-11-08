@@ -12,13 +12,14 @@
 #define MARBLE_GEOLINESTRINGGRAPHICSITEM_H
 
 #include "GeoGraphicsItem.h"
+#include "GeoDataCoordinates.h"
+#include "GeoDataLineString.h"
 #include "MarbleGlobal.h"
 #include "marble_export.h"
 
 namespace Marble
 {
 
-class GeoDataLineString;
 class GeoDataPlacemark;
 
 class MARBLE_EXPORT GeoLineStringGraphicsItem : public GeoGraphicsItem
@@ -27,6 +28,9 @@ public:
     explicit GeoLineStringGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataLineString *lineString);
 
     void setLineString( const GeoDataLineString* lineString );
+    const GeoDataLineString* lineString() const;
+    static GeoDataLineString merge(const QVector<const GeoDataLineString*> &lineStrings);
+    void setMergedLineString(const GeoDataLineString &sharedLineString);
 
     virtual const GeoDataLatLonAltBox& latLonAltBox() const;
 
@@ -37,8 +41,11 @@ private:
     void paintInline(GeoPainter *painter, const ViewportParams *viewport);
     void paintLabel(GeoPainter *painter, const ViewportParams *viewport);
     QPen configurePainter(GeoPainter* painter, const ViewportParams *viewport, LabelPositionFlags &labelPositionFlags) const;
+    static bool canMerge(const GeoDataCoordinates &a, const GeoDataCoordinates &b);
 
     const GeoDataLineString *m_lineString;
+    const GeoDataLineString *m_renderLineString;
+    GeoDataLineString m_mergedLineString;
 };
 
 }

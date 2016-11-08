@@ -20,6 +20,7 @@
 #include "ViewportParams.h"
 #include "GeoDataStyle.h"
 #include "MarbleDebug.h"
+#include "MarbleMath.h"
 
 #include <qmath.h>
 
@@ -29,7 +30,8 @@ namespace Marble
 GeoLineStringGraphicsItem::GeoLineStringGraphicsItem(const GeoDataPlacemark *placemark,
                                                      const GeoDataLineString *lineString) :
     GeoGraphicsItem(placemark),
-    m_lineString(lineString)
+    m_lineString(lineString),
+    m_renderLineString(lineString)
 {
     QString const category = StyleBuilder::visualCategoryName(placemark->visualCategory());
     QStringList paintLayers;
@@ -43,11 +45,75 @@ GeoLineStringGraphicsItem::GeoLineStringGraphicsItem(const GeoDataPlacemark *pla
 void GeoLineStringGraphicsItem::setLineString( const GeoDataLineString* lineString )
 {
     m_lineString = lineString;
+    m_renderLineString = lineString;
+}
+
+const GeoDataLineString *GeoLineStringGraphicsItem::lineString() const
+{
+    return m_lineString;
+}
+
+GeoDataLineString GeoLineStringGraphicsItem::merge(const QVector<const GeoDataLineString *> &lineStrings_)
+{
+    if (lineStrings_.isEmpty()) {
+        return GeoDataLineString();
+    }
+
+    Q_ASSERT(!lineStrings_.isEmpty());
+    auto lineStrings = lineStrings_;
+    GeoDataLineString result = *lineStrings.first();
+    lineStrings.pop_front();
+    for (bool matched = true; matched && !lineStrings.isEmpty();) {
+        matched = false;
+        for (auto lineString: lineStrings) {
+            if (canMerge(result.first(), lineString->first())) {
+                result.remove(0);
+                result.reverse();
+                result << *lineString;
+                lineStrings.removeOne(lineString);
+                matched = true;
+                break;
+            } else if (canMerge(result.last(), lineString->first())) {
+                result.remove(result.size()-1);
+                result << *lineString;
+                lineStrings.removeOne(lineString);
+                matched = true;
+                break;
+            } else if (canMerge(result.first(), lineString->last())) {
+                GeoDataLineString behind = result;
+                result = *lineString;
+                behind.remove(0);
+                result << behind;
+                lineStrings.removeOne(lineString);
+                matched = true;
+                break;
+            } else if (canMerge(result.last(), lineString->last())) {
+                GeoDataLineString behind = *lineString;
+                behind.reverse();
+                behind.remove(0);
+                result << behind;
+                lineStrings.removeOne(lineString);
+                matched = true;
+                break;
+            }
+        }
+
+        if (!matched) {
+            return GeoDataLineString();
+        }
+    }
+    return lineStrings.isEmpty() ? result : GeoDataLineString();
+}
+
+void GeoLineStringGraphicsItem::setMergedLineString(const GeoDataLineString &mergedLineString)
+{
+    m_mergedLineString = mergedLineString;
+    m_renderLineString = mergedLineString.isEmpty() ? m_lineString : &m_mergedLineString;
 }
 
 const GeoDataLatLonAltBox& GeoLineStringGraphicsItem::latLonAltBox() const
 {
-    return m_lineString->latLonAltBox();
+    return m_renderLineString->latLonAltBox();
 }
 
 void GeoLineStringGraphicsItem::paint(GeoPainter* painter, const ViewportParams* viewport , const QString &layer)
@@ -64,13 +130,13 @@ void GeoLineStringGraphicsItem::paint(GeoPainter* painter, const ViewportParams*
     } else if (layer.endsWith(QLatin1String("/inline"))) {
         paintInline(painter, viewport);
     } else {
-        painter->drawPolyline(*m_lineString);
+        painter->drawPolyline(*m_renderLineString);
     }
 }
 
 void GeoLineStringGraphicsItem::paintInline(GeoPainter* painter, const ViewportParams* viewport)
 {
-    if ( ( !viewport->resolves( m_lineString->latLonAltBox(), 2) ) ) {
+    if ( ( !viewport->resolves( m_renderLineString->latLonAltBox(), 2) ) ) {
         return;
     }
 
@@ -88,14 +154,14 @@ void GeoLineStringGraphicsItem::paintInline(GeoPainter* painter, const ViewportP
         currentPen.setColor(style->polyStyle().paintedColor());
         painter->setPen( currentPen );
     }
-    painter->drawPolyline(*m_lineString);
+    painter->drawPolyline(*m_renderLineString);
 
     painter->restore();
 }
 
 void GeoLineStringGraphicsItem::paintOutline(GeoPainter *painter, const ViewportParams *viewport)
 {
-    if ( ( !viewport->resolves( m_lineString->latLonAltBox(), 2) ) ) {
+    if ( ( !viewport->resolves( m_renderLineString->latLonAltBox(), 2) ) ) {
         return;
     }
 
@@ -103,14 +169,14 @@ void GeoLineStringGraphicsItem::paintOutline(GeoPainter *painter, const Viewport
     LabelPositionFlags labelPositionFlags = NoLabel;
     QPen currentPen = configurePainter(painter, viewport, labelPositionFlags);
     if (!( currentPen.widthF() < 2.5f )) {
-        painter->drawPolyline(*m_lineString);
+        painter->drawPolyline(*m_renderLineString);
     }
     painter->restore();
 }
 
 void GeoLineStringGraphicsItem::paintLabel(GeoPainter *painter, const ViewportParams *viewport)
 {
-    if ( ( !viewport->resolves( m_lineString->latLonAltBox(), 2) ) ) {
+    if ( ( !viewport->resolves( m_renderLineString->latLonAltBox(), 2) ) ) {
         return;
     }
 
@@ -132,7 +198,7 @@ void GeoLineStringGraphicsItem::paintLabel(GeoPainter *painter, const ViewportPa
         //painter->setBackgroundMode(Qt::OpaqueMode);
         const GeoDataLabelStyle& labelStyle = style->labelStyle();
         painter->setFont(labelStyle.font());
-        painter->drawPolyline( *m_lineString, feature()->name(), FollowLine,
+        painter->drawPolyline( *m_renderLineString, feature()->name(), FollowLine,
                                labelStyle.paintedColor());
     }
 
@@ -219,6 +285,11 @@ QPen GeoLineStringGraphicsItem::configurePainter(GeoPainter *painter, const View
     }
 
     return currentPen;
+}
+
+bool GeoLineStringGraphicsItem::canMerge(const GeoDataCoordinates &a, const GeoDataCoordinates &b)
+{
+    return distanceSphere(a, b) * EARTH_RADIUS < 0.1;
 }
 
 }

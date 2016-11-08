@@ -61,6 +61,8 @@ namespace Marble
 class GeometryLayerPrivate
 {
 public:
+    typedef QVector<GeoLineStringGraphicsItem*> OsmLineStringItems;
+
     struct PaintFragments {
         // Three lists for different z values
         // A z value of 0 is default and used by the majority of items, so sorting
@@ -76,12 +78,16 @@ public:
     void createGraphicsItemFromGeometry(const GeoDataGeometry *object, const GeoDataPlacemark *placemark);
     void createGraphicsItemFromOverlay( const GeoDataOverlay *overlay );
     void removeGraphicsItems( const GeoDataFeature *feature );
+    void updateTiledLineStrings(const GeoDataPlacemark *placemark, GeoLineStringGraphicsItem* lineStringItem);
+    void updateTiledLineStrings(OsmLineStringItems &lineStringItems);
 
     const QAbstractItemModel *const m_model;
     const StyleBuilder *const m_styleBuilder;
     GeoGraphicsScene m_scene;
     QString m_runtimeTrace;
     QList<ScreenOverlayGraphicsItem*> m_items;
+
+    QHash<qint64,OsmLineStringItems> m_osmLineStringItems;
 };
 
 GeometryLayerPrivate::GeometryLayerPrivate(const QAbstractItemModel *model, const StyleBuilder *styleBuilder) :
@@ -219,6 +225,43 @@ void GeometryLayerPrivate::createGraphicsItems( const GeoDataObject *object )
     }
 }
 
+void GeometryLayerPrivate::updateTiledLineStrings(const GeoDataPlacemark* placemark, GeoLineStringGraphicsItem* lineStringItem)
+{
+    if (!placemark->hasOsmData()) {
+        return;
+    }
+    qint64 const osmId = placemark->osmData().id();
+    if (osmId <= 0) {
+        return;
+    }
+    auto & lineStringItems = m_osmLineStringItems[osmId];
+    lineStringItems << lineStringItem;
+    updateTiledLineStrings(lineStringItems);
+}
+
+void GeometryLayerPrivate::updateTiledLineStrings(OsmLineStringItems &lineStringItems)
+{
+    GeoDataLineString merged;
+    if (lineStringItems.size() > 1) {
+        QVector<const GeoDataLineString*> lineStrings;
+        for (auto item: lineStringItems) {
+            lineStrings << item->lineString();
+        }
+        merged = GeoLineStringGraphicsItem::merge(lineStrings);
+    }
+
+    // If merging failed, reset all. Otherwise only the first one
+    // gets the merge result and becomes visible.
+    bool visible = true;
+    for (auto item: lineStringItems) {
+        item->setVisible(visible);
+        if (visible) {
+            item->setMergedLineString(merged);
+            visible = merged.isEmpty();
+        }
+    }
+}
+
 void GeometryLayerPrivate::createGraphicsItemFromGeometry(const GeoDataGeometry* object, const GeoDataPlacemark *placemark)
 {
     if (!placemark->isGloballyVisible()) {
@@ -229,7 +272,9 @@ void GeometryLayerPrivate::createGraphicsItemFromGeometry(const GeoDataGeometry*
     if ( object->nodeType() == GeoDataTypes::GeoDataLineStringType )
     {
         const GeoDataLineString* line = static_cast<const GeoDataLineString*>( object );
-        item = new GeoLineStringGraphicsItem( placemark, line );
+        auto lineStringItem = new GeoLineStringGraphicsItem( placemark, line );
+        item = lineStringItem;
+        updateTiledLineStrings(placemark, lineStringItem);
     }
     else if ( object->nodeType() == GeoDataTypes::GeoDataLinearRingType )
     {
@@ -270,7 +315,7 @@ void GeometryLayerPrivate::createGraphicsItemFromGeometry(const GeoDataGeometry*
     if ( !item )
         return;
     item->setStyleBuilder(m_styleBuilder);
-    item->setVisible( placemark->isGloballyVisible() );
+    item->setVisible( item->visible() && placemark->isGloballyVisible() );
     item->setMinZoomLevel(m_styleBuilder->minimumZoomLevel(*placemark));
     m_scene.addItem( item );
 }
@@ -304,6 +349,23 @@ void GeometryLayerPrivate::removeGraphicsItems( const GeoDataFeature *feature )
 {
 
     if( feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
+        GeoDataPlacemark const * placemark = static_cast<GeoDataPlacemark const *>(feature);
+        if (placemark->isGloballyVisible() &&
+                placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType &&
+                placemark->hasOsmData() &&
+                placemark->osmData().id() > 0) {
+            auto & items = m_osmLineStringItems[placemark->osmData().id()];
+            bool removed = false;
+            for (auto item: items) {
+                if (item->feature() == feature) {
+                    items.removeOne(item);
+                    removed = true;
+                    break;
+                }
+            }
+            Q_ASSERT(removed);
+            updateTiledLineStrings(items);
+        }
         m_scene.removeItem( feature );
     }
     else if( feature->nodeType() == GeoDataTypes::GeoDataFolderType
@@ -362,6 +424,7 @@ void GeometryLayer::resetCacheData()
     d->m_scene.clear();
     qDeleteAll( d->m_items );
     d->m_items.clear();
+    d->m_osmLineStringItems.clear();
 
     const GeoDataObject *object = static_cast<GeoDataObject*>( d->m_model->index( 0, 0, QModelIndex() ).internalPointer() );
     if ( object && object->parent() )
