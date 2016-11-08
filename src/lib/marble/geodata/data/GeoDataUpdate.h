@@ -12,7 +12,7 @@
 #define GEODATAUPDATE_H
 
 #include "GeoDataObject.h"
-#include "marble_export.h"
+#include "geodata_export.h"
 
 namespace Marble
 {
@@ -24,7 +24,7 @@ class GeoDataUpdatePrivate;
 
 /**
  */
-class MARBLE_EXPORT GeoDataUpdate : public GeoDataObject
+class GEODATA_EXPORT GeoDataUpdate : public GeoDataObject
 {
 public:
     GeoDataUpdate();

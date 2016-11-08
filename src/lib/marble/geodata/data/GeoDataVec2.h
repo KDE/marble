@@ -12,14 +12,15 @@
 #define GEODATAVEC2_H
 
 #include <QPointF>
+#include "geodata_export.h"
 
-#include "MarbleGlobal.h"
+class QString;
 
 namespace Marble {
 
 class GeoDataVec2Private;
 
-class MARBLE_EXPORT GeoDataVec2 : public QPointF
+class GEODATA_EXPORT GeoDataVec2 : public QPointF
 {
 public:
     enum Unit {Fraction, Pixels, InsetPixels};

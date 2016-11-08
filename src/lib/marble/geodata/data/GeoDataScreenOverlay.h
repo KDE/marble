@@ -21,7 +21,7 @@ class GeoDataScreenOverlayPrivate;
 
 /**
  */
-class MARBLE_EXPORT GeoDataScreenOverlay: public GeoDataOverlay
+class GEODATA_EXPORT GeoDataScreenOverlay: public GeoDataOverlay
 {
 public:
     GeoDataScreenOverlay();

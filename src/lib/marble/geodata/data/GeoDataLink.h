@@ -21,7 +21,7 @@ class GeoDataLinkPrivate;
 
 /**
  */
-class MARBLE_EXPORT GeoDataLink: public GeoDataObject
+class GEODATA_EXPORT GeoDataLink: public GeoDataObject
 {
 public:
     enum RefreshMode {

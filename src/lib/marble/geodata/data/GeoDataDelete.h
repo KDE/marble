@@ -12,7 +12,7 @@
 #define GEODATADELETE_H
 
 #include "GeoDataContainer.h"
-#include "marble_export.h"
+#include "geodata_export.h"
 
 namespace Marble
 {
@@ -21,7 +21,7 @@ class GeoDataDeletePrivate;
 
 /**
  */
-class MARBLE_EXPORT GeoDataDelete : public GeoDataContainer
+class GEODATA_EXPORT GeoDataDelete : public GeoDataContainer
 {
 public:
     GeoDataDelete();

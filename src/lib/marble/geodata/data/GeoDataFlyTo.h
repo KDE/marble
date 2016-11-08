@@ -22,7 +22,7 @@ class GeoDataFlyToPrivate;
 
 /**
  */
-class MARBLE_EXPORT GeoDataFlyTo: public GeoDataTourPrimitive
+class GEODATA_EXPORT GeoDataFlyTo: public GeoDataTourPrimitive
 {
 public:
     enum FlyToMode {

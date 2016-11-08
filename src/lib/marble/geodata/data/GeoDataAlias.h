@@ -21,7 +21,7 @@ class GeoDataAliasPrivate;
 
 /**
  */
-class MARBLE_EXPORT GeoDataAlias: public GeoNode
+class GEODATA_EXPORT GeoDataAlias: public GeoNode
 {
 
 public:

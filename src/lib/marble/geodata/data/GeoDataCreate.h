@@ -12,7 +12,7 @@
 #define GEODATACREATE_H
 
 #include "GeoDataContainer.h"
-#include "marble_export.h"
+#include "geodata_export.h"
 
 namespace Marble
 {
@@ -21,7 +21,7 @@ class GeoDataCreatePrivate;
 
 /**
  */
-class MARBLE_EXPORT GeoDataCreate : public GeoDataContainer
+class GEODATA_EXPORT GeoDataCreate : public GeoDataContainer
 {
 public:
     GeoDataCreate();

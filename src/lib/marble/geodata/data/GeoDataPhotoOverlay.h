@@ -15,7 +15,7 @@
 
 #include "GeoDataOverlay.h"
 #include "MarbleGlobal.h"
-#include "marble_export.h"
+#include "geodata_export.h"
 
 namespace Marble {
 
@@ -26,7 +26,7 @@ class GeoDataViewVolume;
 
 /**
  */
-class MARBLE_EXPORT GeoDataPhotoOverlay: public GeoDataOverlay
+class GEODATA_EXPORT GeoDataPhotoOverlay: public GeoDataOverlay
 {
 public:
     GeoDataPhotoOverlay();

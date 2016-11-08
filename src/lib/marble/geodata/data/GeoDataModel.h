@@ -28,7 +28,7 @@ class GeoDataModelPrivate;
 
 /**
  */
-class MARBLE_EXPORT GeoDataModel: public GeoDataGeometry
+class GEODATA_EXPORT GeoDataModel: public GeoDataGeometry
 {
 public:
     GeoDataModel();

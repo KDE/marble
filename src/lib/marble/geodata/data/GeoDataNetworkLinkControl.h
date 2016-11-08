@@ -12,7 +12,7 @@
 #define GEODATANETWORKLINKCONTROL_H
 
 #include "GeoDataContainer.h"
-#include "marble_export.h"
+#include "geodata_export.h"
 
 class QDateTime;
 
@@ -25,7 +25,7 @@ class GeoDataNetworkLinkControlPrivate;
 
 /**
  */
-class MARBLE_EXPORT GeoDataNetworkLinkControl : public GeoDataContainer
+class GEODATA_EXPORT GeoDataNetworkLinkControl : public GeoDataContainer
 {
 public:
     GeoDataNetworkLinkControl();

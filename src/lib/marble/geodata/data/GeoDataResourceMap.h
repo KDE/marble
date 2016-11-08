@@ -21,7 +21,7 @@ class GeoDataResourceMapPrivate;
 
 /**
  */
-class MARBLE_EXPORT GeoDataResourceMap: public GeoNode
+class GEODATA_EXPORT GeoDataResourceMap: public GeoNode
 {
 public:
     GeoDataResourceMap();

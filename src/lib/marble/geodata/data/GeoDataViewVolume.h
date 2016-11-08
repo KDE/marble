@@ -12,7 +12,7 @@
 #define GEODATAVIEWVOLUME_H
 
 #include "GeoDataObject.h"
-#include "marble_export.h"
+#include "geodata_export.h"
 
 namespace Marble
 {
@@ -21,7 +21,7 @@ class GeoDataViewVolumePrivate;
 
 /**
  */
-class MARBLE_EXPORT GeoDataViewVolume : public GeoDataObject
+class GEODATA_EXPORT GeoDataViewVolume : public GeoDataObject
 {
 public:
     GeoDataViewVolume();

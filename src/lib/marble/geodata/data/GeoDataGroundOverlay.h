@@ -23,7 +23,7 @@ class GeoDataLatLonQuad;
 
 /**
  */
-class MARBLE_EXPORT GeoDataGroundOverlay: public GeoDataOverlay
+class GEODATA_EXPORT GeoDataGroundOverlay: public GeoDataOverlay
 {
 public:
     GeoDataGroundOverlay();

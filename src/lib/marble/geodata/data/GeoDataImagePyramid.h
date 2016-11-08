@@ -12,7 +12,7 @@
 #define GEODATAIMAGEPYRAMID_H
 
 #include "GeoDataObject.h"
-#include "marble_export.h"
+#include "geodata_export.h"
 
 namespace Marble
 {
@@ -21,7 +21,7 @@ class GeoDataImagePyramidPrivate;
 
 /**
  */
-class MARBLE_EXPORT GeoDataImagePyramid : public GeoDataObject
+class GEODATA_EXPORT GeoDataImagePyramid : public GeoDataObject
 {
 public:
     GeoDataImagePyramid();

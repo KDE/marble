@@ -21,7 +21,7 @@ class GeoDataScalePrivate;
 
 /**
  */
-class MARBLE_EXPORT GeoDataScale: public GeoDataObject
+class GEODATA_EXPORT GeoDataScale: public GeoDataObject
 {
 public:
     GeoDataScale();

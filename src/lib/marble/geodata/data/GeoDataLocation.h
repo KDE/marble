@@ -22,7 +22,7 @@ class GeoDataLocationPrivate;
 
 /**
  */
-class MARBLE_EXPORT GeoDataLocation: public GeoDataObject
+class GEODATA_EXPORT GeoDataLocation: public GeoDataObject
 {
 public:
     GeoDataLocation();
