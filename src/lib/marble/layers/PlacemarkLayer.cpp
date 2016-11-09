@@ -293,6 +293,7 @@ bool PlacemarkLayer::testXBug()
 void PlacemarkLayer::renderDebug(GeoPainter *painter, ViewportParams *viewport, const QVector<VisiblePlacemark *> &placemarks)
 {
     painter->save();
+    painter->setFont(QFont(QStringLiteral("Sans Serif"), 7));
     painter->setBrush(QBrush(Qt::NoBrush));
     auto const latLonAltBox = viewport->viewLatLonAltBox();
 
