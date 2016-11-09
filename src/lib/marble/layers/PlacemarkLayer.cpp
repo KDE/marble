@@ -108,6 +108,7 @@ bool PlacemarkLayer::render( GeoPainter *geoPainter, ViewportParams *viewport,
                     if (i == hash.end()) {
                         fragment.count = 1;
                         fragment.pixmap = mark->symbolPixmap();
+                        fragment.symbolId = mark->symbolId();
                     }
                     else {
                         fragment = i.value();
@@ -134,6 +135,7 @@ bool PlacemarkLayer::render( GeoPainter *geoPainter, ViewportParams *viewport,
                 if (i == hash.end()) {
                     fragment.count = 1;
                     fragment.pixmap = mark->symbolPixmap();
+                    fragment.symbolId = mark->symbolId();
                 }
                 else {
                     fragment = i.value();
@@ -154,9 +156,21 @@ bool PlacemarkLayer::render( GeoPainter *geoPainter, ViewportParams *viewport,
 #ifdef BATCH_RENDERING
     for (auto& val : hash.values()) {
         if (m_debugModeEnabled) {
-//            qDebug() << "Batches" << val.count;
+//            qDebug() << "Batches" << val.symbolId << val.count;
             QPixmap debugPixmap(val.pixmap.size());
-            debugPixmap.fill((quint64)(&val));
+            QColor backgroundColor;
+            QString idStr = val.symbolId.section('/', -1);
+            if (idStr.length() > 2) {
+              idStr.remove("shop_");
+              backgroundColor = QColor(
+                          (10 * (int)(idStr[0].toLatin1()))%255,
+                          (10 * (int)(idStr[1].toLatin1()))%255,
+                          (10 * (int)(idStr[2].toLatin1()))%255 );
+            }
+            else {
+              backgroundColor = QColor((quint64)(&val.symbolId));
+            }
+            debugPixmap.fill(backgroundColor);
             QPainter pixpainter;
             pixpainter.begin(&debugPixmap);
             pixpainter.drawPixmap(0, 0, val.pixmap);

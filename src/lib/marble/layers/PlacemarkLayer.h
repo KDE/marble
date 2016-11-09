@@ -45,6 +45,7 @@ struct Fragment
     QVarLengthArray<QPainter::PixmapFragment, 16> fragments;
     int count;
     QPixmap pixmap;
+    QString symbolId;
 };
 
 class PlacemarkLayer : public QObject, public LayerInterface
