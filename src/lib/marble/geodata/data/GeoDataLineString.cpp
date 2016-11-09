@@ -281,7 +281,7 @@ int GeoDataLineString::size() const
 
 GeoDataCoordinates& GeoDataLineString::at( int pos )
 {
-    GeoDataGeometry::detach();
+    detach();
 
     Q_D(GeoDataLineString);
     d->m_dirtyRange = true;
@@ -297,7 +297,7 @@ const GeoDataCoordinates& GeoDataLineString::at( int pos ) const
 
 GeoDataCoordinates& GeoDataLineString::operator[]( int pos )
 {
-    GeoDataGeometry::detach();
+    detach();
 
     Q_D(GeoDataLineString);
     d->m_dirtyRange = true;
@@ -313,7 +313,7 @@ const GeoDataCoordinates& GeoDataLineString::operator[]( int pos ) const
 
 GeoDataCoordinates& GeoDataLineString::last()
 {
-    GeoDataGeometry::detach();
+    detach();
 
     Q_D(GeoDataLineString);
     d->m_dirtyRange = true;
@@ -323,7 +323,7 @@ GeoDataCoordinates& GeoDataLineString::last()
 
 GeoDataCoordinates& GeoDataLineString::first()
 {
-    GeoDataGeometry::detach();
+    detach();
 
     Q_D(GeoDataLineString);
     return d->m_vector.first();
@@ -343,7 +343,7 @@ const GeoDataCoordinates& GeoDataLineString::first() const
 
 QVector<GeoDataCoordinates>::Iterator GeoDataLineString::begin()
 {
-    GeoDataGeometry::detach();
+    detach();
 
     Q_D(GeoDataLineString);
     return d->m_vector.begin();
@@ -357,7 +357,7 @@ QVector<GeoDataCoordinates>::ConstIterator GeoDataLineString::begin() const
 
 QVector<GeoDataCoordinates>::Iterator GeoDataLineString::end()
 {
-    GeoDataGeometry::detach();
+    detach();
 
     Q_D(GeoDataLineString);
     return d->m_vector.end();
@@ -383,7 +383,7 @@ QVector<GeoDataCoordinates>::ConstIterator GeoDataLineString::constEnd() const
 
 void GeoDataLineString::insert( int index, const GeoDataCoordinates& value )
 {
-    GeoDataGeometry::detach();
+    detach();
 
     Q_D(GeoDataLineString);
     delete d->m_rangeCorrected;
@@ -395,7 +395,7 @@ void GeoDataLineString::insert( int index, const GeoDataCoordinates& value )
 
 void GeoDataLineString::append ( const GeoDataCoordinates& value )
 {
-    GeoDataGeometry::detach();
+    detach();
 
     Q_D(GeoDataLineString);
     delete d->m_rangeCorrected;
@@ -407,7 +407,7 @@ void GeoDataLineString::append ( const GeoDataCoordinates& value )
 
 void GeoDataLineString::append(const QVector<GeoDataCoordinates>& values)
 {
-    GeoDataGeometry::detach();
+    detach();
 
     Q_D(GeoDataLineString);
     delete d->m_rangeCorrected;
@@ -427,7 +427,7 @@ void GeoDataLineString::append(const QVector<GeoDataCoordinates>& values)
 
 GeoDataLineString& GeoDataLineString::operator << ( const GeoDataCoordinates& value )
 {
-    GeoDataGeometry::detach();
+    detach();
 
     Q_D(GeoDataLineString);
     delete d->m_rangeCorrected;
@@ -440,7 +440,7 @@ GeoDataLineString& GeoDataLineString::operator << ( const GeoDataCoordinates& va
 
 GeoDataLineString& GeoDataLineString::operator << ( const GeoDataLineString& value )
 {
-    GeoDataGeometry::detach();
+    detach();
 
     Q_D(GeoDataLineString);
     delete d->m_rangeCorrected;
@@ -492,7 +492,7 @@ bool GeoDataLineString::operator!=( const GeoDataLineString &other ) const
 
 void GeoDataLineString::clear()
 {
-    GeoDataGeometry::detach();
+    detach();
 
     Q_D(GeoDataLineString);
     delete d->m_rangeCorrected;
@@ -516,7 +516,7 @@ bool GeoDataLineString::tessellate() const
 
 void GeoDataLineString::setTessellate( bool tessellate )
 {
-    GeoDataGeometry::detach();
+    detach();
 
     Q_D(GeoDataLineString);
     // According to the KML reference the tesselation of line strings in Google Earth
@@ -541,7 +541,7 @@ TessellationFlags GeoDataLineString::tessellationFlags() const
 
 void GeoDataLineString::setTessellationFlags( TessellationFlags f )
 {
-    GeoDataGeometry::detach();
+    detach();
 
     Q_D(GeoDataLineString);
     d->m_tessellationFlags = f;
@@ -549,7 +549,7 @@ void GeoDataLineString::setTessellationFlags( TessellationFlags f )
 
 void GeoDataLineString::reverse()
 {
-    GeoDataGeometry::detach();
+    detach();
 
     Q_D(GeoDataLineString);
     delete d->m_rangeCorrected;
@@ -837,7 +837,7 @@ qreal GeoDataLineString::length( qreal planetRadius, int offset ) const
 
 QVector<GeoDataCoordinates>::Iterator GeoDataLineString::erase ( QVector<GeoDataCoordinates>::Iterator pos )
 {
-    GeoDataGeometry::detach();
+    detach();
 
     Q_D(GeoDataLineString);
     delete d->m_rangeCorrected;
@@ -850,7 +850,7 @@ QVector<GeoDataCoordinates>::Iterator GeoDataLineString::erase ( QVector<GeoData
 QVector<GeoDataCoordinates>::Iterator GeoDataLineString::erase ( QVector<GeoDataCoordinates>::Iterator begin,
                                                                  QVector<GeoDataCoordinates>::Iterator end )
 {
-    GeoDataGeometry::detach();
+    detach();
 
     Q_D(GeoDataLineString);
     delete d->m_rangeCorrected;
@@ -862,7 +862,7 @@ QVector<GeoDataCoordinates>::Iterator GeoDataLineString::erase ( QVector<GeoData
 
 void GeoDataLineString::remove ( int i )
 {
-    GeoDataGeometry::detach();
+    detach();
 
     Q_D(GeoDataLineString);
     d->m_dirtyRange = true;
@@ -907,7 +907,7 @@ void GeoDataLineString::pack( QDataStream& stream ) const
 
 void GeoDataLineString::unpack( QDataStream& stream )
 {
-    GeoDataGeometry::detach();
+    detach();
 
     Q_D(GeoDataLineString);
 
