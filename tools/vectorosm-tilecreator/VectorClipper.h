@@ -32,14 +32,14 @@ class VectorClipper : public BaseFilter
 public:
     VectorClipper(GeoDataDocument* document, int maxZoomLevel);
 
-    GeoDataDocument* clipTo(const GeoDataLatLonBox &box, bool filterSmallAreas);
     GeoDataDocument* clipTo(unsigned int zoomLevel, unsigned int tileX, unsigned int tileY);
     static bool canBeArea(GeoDataPlacemark::GeoDataVisualCategory visualCategory);
 
 private:
+    GeoDataDocument* clipTo(const GeoDataLatLonBox &box, int zoomLevel);
     GeoDataDocument* clipToBaseClipper(const GeoDataLatLonBox &box);
     QVector<GeoDataPlacemark*> potentialIntersections(const GeoDataLatLonBox &box) const;
-    ClipperLib::Path clipPath(const GeoDataLatLonBox &box) const;
+    ClipperLib::Path clipPath(const GeoDataLatLonBox &box, int zoomLevel) const;
     qreal area(const GeoDataLinearRing &ring);
 
     template<class T>

@@ -49,15 +49,16 @@ VectorClipper::VectorClipper(GeoDataDocument* document, int maxZoomLevel) :
     }
 }
 
-GeoDataDocument *VectorClipper::clipTo(const GeoDataLatLonBox &tileBoundary, bool filterSmallAreas)
+GeoDataDocument *VectorClipper::clipTo(const GeoDataLatLonBox &tileBoundary, int zoomLevel)
 {
     bool const useBaseClipper = false;
     if (useBaseClipper) {
         return clipToBaseClipper(tileBoundary);
     }
 
+    bool const filterSmallAreas = zoomLevel > 10 && zoomLevel < 17;
     GeoDataDocument* tile = new GeoDataDocument();
-    auto const clip = clipPath(tileBoundary);
+    auto const clip = clipPath(tileBoundary, zoomLevel);
     GeoDataLinearRing ring;
     ring << GeoDataCoordinates(tileBoundary.west(), tileBoundary.north());
     ring << GeoDataCoordinates(tileBoundary.east(), tileBoundary.north());
@@ -248,19 +249,18 @@ GeoDataDocument *VectorClipper::clipTo(unsigned int zoomLevel, unsigned int tile
     GeoDataLatLonBox tileBoundary;
     m_tileProjection.geoCoordinates(zoomLevel, tileX, tileY, tileBoundary);
 
-    bool const filterSmallAreas = zoomLevel > 10 && zoomLevel < 17;
-    GeoDataDocument *tile = clipTo(tileBoundary, filterSmallAreas);
+    GeoDataDocument *tile = clipTo(tileBoundary, zoomLevel);
     QString tileName = QString("%1/%2/%3").arg(zoomLevel).arg(tileX).arg(tileY);
     tile->setName(tileName);
 
     return tile;
 }
 
-ClipperLib::Path VectorClipper::clipPath(const GeoDataLatLonBox &box) const
+ClipperLib::Path VectorClipper::clipPath(const GeoDataLatLonBox &box, int zoomLevel) const
 {
     using namespace ClipperLib;
     Path path;
-    int const steps = 20;
+    int const steps = qMax(1, 22 - 2 * zoomLevel);
     qreal const scale = IntPoint::scale;
     double x = box.west() * scale;
     double const horizontalStep = (box.east() * scale - x) / steps;
