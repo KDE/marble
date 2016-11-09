@@ -70,7 +70,7 @@ QString GraticulePlugin::renderPolicy() const
 
 QStringList GraticulePlugin::renderPosition() const
 {
-    return QStringList(QStringLiteral("SURFACE"));
+    return QStringList(QStringLiteral("GRATICULE"));
 }
 
 QString GraticulePlugin::name() const

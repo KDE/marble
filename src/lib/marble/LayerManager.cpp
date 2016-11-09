@@ -136,6 +136,7 @@ void LayerManager::renderLayers( GeoPainter *painter, ViewportParams *viewport )
     renderPositions
         << QStringLiteral("SURFACE")
         << QStringLiteral("HOVERS_ABOVE_SURFACE")
+        << QStringLiteral("GRATICULE")
         << QStringLiteral("ATMOSPHERE")
         << QStringLiteral("ORBIT")
         << QStringLiteral("ALWAYS_ON_TOP")
