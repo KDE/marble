@@ -111,8 +111,8 @@ void VectorTileModel::setViewport( const GeoDataLatLonBox &latLonBox, int radius
 
     // if zoom level has changed, empty vectortile cache
     if ( tileZoomLevel != m_tileLoadLevel ) {
+        m_deleteDocumentsLater = m_tileLoadLevel >= 0;
         m_tileLoadLevel = tileZoomLevel;
-        m_deleteDocumentsLater = true;
     }
 
     /** LOGIC FOR DOWNLOADING ALL THE TILES THAT ARE INSIDE THE SCREEN AT THE CURRENT ZOOM LEVEL **/
