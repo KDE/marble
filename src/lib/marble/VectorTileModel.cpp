@@ -178,8 +178,9 @@ int VectorTileModel::cachedDocuments() const
     return m_documents.size();
 }
 
-void VectorTileModel::updateTile( const TileId &id, GeoDataDocument *document )
+void VectorTileModel::updateTile( const TileId &idWithMapThemeHash, GeoDataDocument *document )
 {
+    TileId const id(0, idWithMapThemeHash.zoomLevel(), idWithMapThemeHash.x(), idWithMapThemeHash.y());
     m_pendingDocuments.removeAll(id);
     if (!document) {
         return;
