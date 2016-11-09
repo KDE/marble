@@ -47,7 +47,18 @@ const GeoDataPlacemark* VisiblePlacemark::placemark() const
 
 const QPixmap& VisiblePlacemark::symbolPixmap() const
 {
+    if (!m_symbolId.isEmpty() && m_symbolPixmap.isNull()) {
+        if ( !m_symbolCache.find( m_symbolId, &m_symbolPixmap ) ) {
+            m_symbolPixmap = QPixmap::fromImage(m_style->iconStyle().scaledIcon());
+            m_symbolCache.insert( m_symbolId, m_symbolPixmap);
+        }
+    }
     return m_symbolPixmap;
+}
+
+const QString& VisiblePlacemark::symbolId() const
+{
+    return m_symbolId;
 }
 
 bool VisiblePlacemark::selected() const
@@ -120,7 +131,11 @@ const QPixmap& VisiblePlacemark::labelPixmap()
 void VisiblePlacemark::setSymbolPixmap()
 {
     if (m_style) {
-        m_symbolPixmap = QPixmap::fromImage(m_style->iconStyle().scaledIcon() );
+        m_symbolId = m_style->iconStyle().iconPath() + QString::number(m_style->iconStyle().scale());
+        if (m_style->iconStyle().iconPath().isEmpty()) {
+            m_symbolId.clear();
+            m_symbolPixmap = QPixmap::fromImage(m_style->iconStyle().scaledIcon());
+        }
         emit updateNeeded();
     }
     else {

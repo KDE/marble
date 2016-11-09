@@ -25,6 +25,8 @@
 #include "VisiblePlacemark.h"
 #include "RenderState.h"
 
+#define BATCH_RENDERING
+
 using namespace Marble;
 
 bool PlacemarkLayer::m_useXWorkaround = false;
@@ -69,8 +71,14 @@ bool PlacemarkLayer::render( GeoPainter *geoPainter, ViewportParams *viewport,
     QVector<VisiblePlacemark*>::const_iterator itEnd = visiblePlacemarks.constBegin();
 
     QPainter *const painter = geoPainter;
+
     bool const repeatableX = viewport->currentProjection()->repeatableX();
     int const radius4 = 4 * viewport->radius();
+
+#ifdef BATCH_RENDERING
+    QHash <QString, Fragment> hash;
+#endif
+
     while ( visit != itEnd ) {
         --visit;
 
@@ -78,7 +86,8 @@ bool PlacemarkLayer::render( GeoPainter *geoPainter, ViewportParams *viewport,
 
         // Intentionally converting positions from floating point to pixel aligned screen grid below
         QRect labelRect( mark->labelRect().toRect() );
-        QPoint symbolPos(mark->symbolPosition().toPoint());
+        QPoint symbolPos( mark->symbolPosition().toPoint());
+        struct Fragment fragment;
 
         // when the map is such zoomed out that a given place
         // appears many times, we draw one placemark at each
@@ -90,15 +99,73 @@ bool PlacemarkLayer::render( GeoPainter *geoPainter, ViewportParams *viewport,
                 labelRect.moveLeft(i - symbolX + textX);
                 symbolPos.setX(i);
 
+                if (!mark->symbolPixmap().isNull()) {
+#ifdef BATCH_RENDERING
+                    QRect symbolRect = mark->symbolPixmap().rect();
+                    QPainter::PixmapFragment pixmapFragment = QPainter::PixmapFragment::create(QPointF(symbolPos+symbolRect.center()),QRectF(symbolRect));
+
+                    QHash<QString, Fragment>::iterator i = hash.find(mark->symbolId());
+                    if (i == hash.end()) {
+                        fragment.count = 1;
+                        fragment.pixmap = mark->symbolPixmap();
+                    }
+                    else {
+                        fragment = i.value();
+                        ++fragment.count;
+                    }
+                    fragment.fragments.append(pixmapFragment);
+                    hash.insert(mark->symbolId(), fragment);
+#else
+                    painter->drawPixmap( symbolPos, mark->symbolPixmap() );
+#endif
+                }
+                if (!mark->labelPixmap().isNull()) {
+                    painter->drawPixmap( labelRect, mark->labelPixmap() );
+                }
+            }
+        } else { // simple case, one draw per placemark
+
+            if (!mark->symbolPixmap().isNull()) {
+#ifdef BATCH_RENDERING
+                QRect symbolRect = mark->symbolPixmap().rect();
+                QPainter::PixmapFragment pixmapFragment = QPainter::PixmapFragment::create(QPointF(symbolPos+symbolRect.center()),QRectF(symbolRect));
+
+                QHash<QString, Fragment>::iterator i = hash.find(mark->symbolId());
+                if (i == hash.end()) {
+                    fragment.count = 1;
+                    fragment.pixmap = mark->symbolPixmap();
+                }
+                else {
+                    fragment = i.value();
+                    ++fragment.count;
+                }
+                fragment.fragments.append(pixmapFragment);
+                hash.insert(mark->symbolId(), fragment);
+#else
                 painter->drawPixmap( symbolPos, mark->symbolPixmap() );
+#endif
+            }
+            if (!mark->labelPixmap().isNull()) {
                 painter->drawPixmap( labelRect, mark->labelPixmap() );
             }
-        } else {
-            // simple case, one draw per placemark
-            painter->drawPixmap(symbolPos, mark->symbolPixmap());
-            painter->drawPixmap(labelRect, mark->labelPixmap());
         }
     }
+
+#ifdef BATCH_RENDERING
+    for (auto& val : hash.values()) {
+        if (m_debugModeEnabled) {
+//            qDebug() << "Batches" << val.count;
+            QPixmap debugPixmap(val.pixmap.size());
+            debugPixmap.fill((quint64)(&val));
+            QPainter pixpainter;
+            pixpainter.begin(&debugPixmap);
+            pixpainter.drawPixmap(0, 0, val.pixmap);
+            pixpainter.end();
+            val.pixmap = debugPixmap;
+        }
+        painter->drawPixmapFragments(val.fragments.data(), val.count, val.pixmap);
+    }
+#endif
 
     if (m_debugModeEnabled) {
         renderDebug(geoPainter, viewport, visiblePlacemarks);
@@ -173,9 +240,9 @@ void PlacemarkLayer::requestStyleReset()
 }
 
 
-// Test if there a bug in the X server which makes 
-// text fully transparent if it gets written on 
-// QPixmaps that were initialized by filling them 
+// Test if there a bug in the X server which makes
+// text fully transparent if it gets written on
+// QPixmaps that were initialized by filling them
 // with Qt::transparent
 
 bool PlacemarkLayer::testXBug()

@@ -22,6 +22,7 @@
 #include "LayerInterface.h"
 
 #include <QVector>
+#include <QPainter>
 
 #include "PlacemarkLayout.h"
 
@@ -37,6 +38,14 @@ class GeoSceneLayer;
 class MarbleClock;
 class ViewportParams;
 class StyleBuilder;
+
+
+struct Fragment
+{
+    QVarLengthArray<QPainter::PixmapFragment, 16> fragments;
+    int count;
+    QPixmap pixmap;
+};
 
 class PlacemarkLayer : public QObject, public LayerInterface
 {

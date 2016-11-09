@@ -20,6 +20,7 @@
 #include <QPixmap>
 #include <QPoint>
 #include <QRectF>
+#include <QPixmapCache>
 
 #include <GeoDataStyle.h>
 #include <GeoDataCoordinates.h>
@@ -54,6 +55,11 @@ class VisiblePlacemark : public QObject
      * Returns the pixmap of the place mark symbol.
      */
     const QPixmap& symbolPixmap() const;
+
+    /**
+     * Returns the id for the place mark symbol.
+     */
+    const QString& symbolId() const;
 
     /**
      * Returns the state of the place mark.
@@ -130,9 +136,13 @@ private Q_SLOTS:
     bool        m_labelDirty;
     QRectF      m_labelRect;      // bounding box of label
 
-    mutable QPixmap     m_symbolPixmap; // cached value
     GeoDataStyle::ConstPtr m_style;
     GeoDataCoordinates m_coordinates;
+
+    mutable QPixmap     m_symbolPixmap;   // cached value
+    QString     m_symbolId;
+
+    QPixmapCache m_symbolCache;
 };
 
 }

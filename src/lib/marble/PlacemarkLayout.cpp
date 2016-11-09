@@ -290,7 +290,7 @@ void PlacemarkLayout::resetCacheData()
 
 QSet<TileId> PlacemarkLayout::visibleTiles( const ViewportParams *viewport )
 {
-    int zoomLevel = qLn( viewport->radius() *4 / 256 ) / qLn( 2.0 );
+    int zoomLevel = qLn( viewport->radius()/64.0 ) / qLn( 2.0 );
 
     /*
      * rely on m_placemarkCache to find the placemarks for the tiles which
