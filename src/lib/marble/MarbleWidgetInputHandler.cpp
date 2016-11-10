@@ -119,6 +119,9 @@ bool MarbleWidgetInputHandler::handleKeyPress(QKeyEvent *event)
         case Qt::Key_P:
             d->m_marbleWidget->setShowDebugPolygons(!d->m_marbleWidget->showDebugPolygons());
             break;
+        case Qt::Key_B:
+            d->m_marbleWidget->setShowDebugBatchRender(!d->m_marbleWidget->showDebugBatchRender());
+            break;
         }
     }
     return MarbleDefaultInputHandler::handleKeyPress(event);

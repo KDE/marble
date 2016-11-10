@@ -949,6 +949,15 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     /**
      * @brief Set whether to enter the debug mode for
+     * batch rendering
+     * @param visible visibility of the batch rendering
+     */
+    void setShowDebugBatchRender( bool visible);
+
+    bool showDebugBatchRender() const;
+
+    /**
+     * @brief Set whether to enter the debug mode for
      * placemark drawing
      * @param visible visibility of the node debug mode
      */

@@ -140,6 +140,7 @@ public:
     ViewportParams   m_viewport;
     bool             m_showFrameRate;
     bool             m_showDebugPolygons;
+    bool             m_showDebugBatchRender;
     StyleBuilder     m_styleBuilder;
 
     QList<RenderPlugin *> m_renderPlugins;
@@ -166,6 +167,7 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model ) :
     m_viewParams(),
     m_showFrameRate( false ),
     m_showDebugPolygons( false ),
+    m_showDebugBatchRender( false ),
     m_styleBuilder(),
     m_layerManager( parent ),
     m_customPaintLayer( parent ),
@@ -826,6 +828,7 @@ void MarbleMap::paint( GeoPainter &painter, const QRect &dirtyRect )
             painter.setDebugPolygonsLevel(2);
         }
     }
+    painter.setDebugBatchRender(d->m_showDebugBatchRender);
 
     if ( !d->m_model->mapTheme() ) {
         mDebug() << "No theme yet!";
@@ -1251,6 +1254,20 @@ void MarbleMap::setShowDebugPolygons( bool visible)
 bool MarbleMap::showDebugPolygons() const
 {
     return d->m_showDebugPolygons;
+}
+
+void MarbleMap::setShowDebugBatchRender( bool visible)
+{
+    qDebug() << Q_FUNC_INFO << visible;
+    if (visible != d->m_showDebugBatchRender) {
+        d->m_showDebugBatchRender = visible;
+        emit repaintNeeded();
+    }
+}
+
+bool MarbleMap::showDebugBatchRender() const
+{
+    return d->m_showDebugBatchRender;
 }
 
 void MarbleMap::setShowDebugPlacemarks( bool visible)

@@ -651,6 +651,16 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
     /**
      * @brief Set whether to enter the debug mode for
+     * visualizing batch rendering
+     * @param visible visibility of the batch rendering
+     */
+    void setShowDebugBatchRender( bool visible);
+
+    bool showDebugBatchRender() const;
+
+
+    /**
+     * @brief Set whether to enter the debug mode for
      * placemark drawing
      * @param visible visibility of the node debug mode
      */

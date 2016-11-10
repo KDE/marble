@@ -930,6 +930,16 @@ bool MarbleWidget::showDebugPolygons() const
     return d->m_map.showDebugPolygons();
 }
 
+void MarbleWidget::setShowDebugBatchRender( bool visible)
+{
+    d->m_map.setShowDebugBatchRender( visible );
+}
+
+bool MarbleWidget::showDebugBatchRender() const
+{
+    return d->m_map.showDebugBatchRender();
+}
+
 void MarbleWidget::setShowDebugPlacemarks( bool visible)
 {
     d->m_map.setShowDebugPlacemarks( visible );

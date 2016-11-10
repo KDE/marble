@@ -89,7 +89,10 @@ class ClipPainterPrivate
 
     qreal m_labelAreaMargin;
 
+    int m_debugPenBatchColor;
+    int m_debugBrushBatchColor;
     int m_debugPolygonsLevel;
+    bool m_debugBatchRender;
 };
 
 }
@@ -288,6 +291,61 @@ void ClipPainter::drawPolyline(const QPolygonF & polygon, QVector<QPointF>& labe
     }
 }
 
+void ClipPainter::setPen(const QColor &color) {
+    if (d->m_debugBatchRender) {
+        qDebug() << Q_FUNC_INFO;
+    }
+    setPen(QPen(color));
+}
+
+void ClipPainter::setPen(Qt::PenStyle style) {
+    if (d->m_debugBatchRender) {
+        qDebug() << Q_FUNC_INFO;
+    }
+    setPen(QPen(style));
+}
+
+void ClipPainter::setPen(const QPen & pen) {
+    if (d->m_debugBatchRender) {
+        qDebug() << Q_FUNC_INFO;
+        if (pen != QPainter::pen()) {
+            qDebug() << "--" << pen.color()  << QPainter::pen().color() ;
+            QPen newPen = pen;
+            newPen.setColor((Qt::GlobalColor)(d->m_debugPenBatchColor));
+            QPainter::setPen(newPen);
+            d->m_debugPenBatchColor++;
+            d->m_debugPenBatchColor %= 20;
+        }
+        else {
+            qDebug() << "++";
+            QPainter::setPen(pen);
+        }
+    }
+    else {
+        QPainter::setPen(pen);
+    }
+}
+
+void ClipPainter::setBrush(const QBrush & brush) {
+    if (d->m_debugBatchRender) {
+        qDebug() << Q_FUNC_INFO;
+        if (brush != QPainter::brush()) {
+            qDebug() << "--" << brush.color()  << QPainter::brush().color() ;
+            QBrush batchColor(QColor((Qt::GlobalColor)(d->m_debugBrushBatchColor)));
+            QPainter::setBrush(batchColor);
+            d->m_debugBrushBatchColor++;
+            d->m_debugBrushBatchColor %= 20;
+        }
+        else {
+            qDebug() << "++";
+            QPainter::setBrush(brush);
+        }
+    }
+    else {
+        QPainter::setBrush(brush);
+    }
+}
+
 void ClipPainterPrivate::labelPosition(const QPolygonF & polygon, QVector<QPointF>& labelNodes,
                                        LabelPositionFlags labelPositionFlags)
 {
@@ -409,7 +467,10 @@ ClipPainterPrivate::ClipPainterPrivate( ClipPainter * parent )
       m_currentPoint(QPointF()),
       m_previousPoint(QPointF()), 
       m_labelAreaMargin(10.0),
-      m_debugPolygonsLevel(0)
+      m_debugPenBatchColor(0),
+      m_debugBrushBatchColor(0),
+      m_debugPolygonsLevel(0),
+      m_debugBatchRender(false)
 {
     q = parent;
 }
@@ -1173,6 +1234,11 @@ void ClipPainterPrivate::clipOnce( QPolygonF & clippedPolyObject,
 void ClipPainter::setDebugPolygonsLevel( int level ) {
     d->m_debugPolygonsLevel = level;
 }
+
+void ClipPainter::setDebugBatchRender( bool enabled ) {
+    d->m_debugBatchRender = enabled;
+}
+
 
 void ClipPainterPrivate::debugDrawNodes( const QPolygonF & polygon )
 {
