@@ -65,6 +65,9 @@ class MARBLE_EXPORT ClipPainter : public QPainter
     void drawPolyline( const QPolygonF &, QVector<QPointF>& labelNodes, 
                        LabelPositionFlags labelPositionFlag = LineCenter );
 
+    void labelPosition(const QPolygonF & polygon, QVector<QPointF>& labelNodes,
+                       LabelPositionFlags labelPositionFlags);
+
     void setPen(const QColor &);
     void setPen(const QPen & pen);
     void setPen(Qt::PenStyle style);

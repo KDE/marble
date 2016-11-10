@@ -37,15 +37,17 @@ public:
     void paint(GeoPainter* painter, const ViewportParams *viewport, const QString &layer);
 
 private:
-    void paintOutline(GeoPainter *painter, const ViewportParams *viewport);
-    void paintInline(GeoPainter *painter, const ViewportParams *viewport);
-    void paintLabel(GeoPainter *painter, const ViewportParams *viewport);
+    void paintOutline(GeoPainter *painter, const ViewportParams *viewport, const QVector<QPolygonF*> &polygons);
+    void paintInline(GeoPainter *painter, const ViewportParams *viewport, const QVector<QPolygonF*> &polygons);
+    void paintLabel(GeoPainter *painter, const ViewportParams *viewport, const QVector<QPolygonF*> &polygons);
     QPen configurePainter(GeoPainter* painter, const ViewportParams *viewport, LabelPositionFlags &labelPositionFlags) const;
     static bool canMerge(const GeoDataCoordinates &a, const GeoDataCoordinates &b);
 
     const GeoDataLineString *m_lineString;
     const GeoDataLineString *m_renderLineString;
     GeoDataLineString m_mergedLineString;
+    QVector<QPolygonF*> m_cachedPolygons;
+    bool m_renderLabel;
 };
 
 }

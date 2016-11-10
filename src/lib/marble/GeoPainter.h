@@ -305,6 +305,20 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
                                  int margin = 0) const;
 
 /*!
+    \brief Helper method for safe and quick linestring conversion.
+
+    In general drawPolyline() should be used instead. However
+    in situations where the same linestring is supposed to be
+    drawn multiple times it's a good idea to cache the
+    screen polygons using this method.
+
+    \see GeoDataLineString
+*/
+    void polygonsFromLineString( const GeoDataLineString &lineString,
+                                       QVector<QPolygonF*> &polygons );
+
+
+/*!
     \brief Draws a given line string (a "polyline") with a label.
 
     The \a lineString is drawn using the current pen. It's possible to
@@ -321,6 +335,19 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
                         const QColor& labelcolor = Qt::black);
 
 /*!
+    \brief Draws Labels for a given set of screen polygons.
+
+    In common cases the drawPolyline overload can be used instead.
+    However in certain more complex cases this particular method
+    might be helpful for further optimization.
+*/
+
+    void drawLabelsForPolygons( const QVector<QPolygonF*> &polygons,
+                                const QString& labelText,
+                                LabelPositionFlags labelPositionFlags,
+                                const QColor& labelColor );
+
+/*!
     \brief Draws a given line string (a "polyline").
 
     The \a lineString is drawn using the current pen.
@@ -328,7 +355,6 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     \see GeoDataLineString
 */
     void drawPolyline(const GeoDataLineString & lineString);
-
 
 /*!
     \brief Creates a region for a given line string (a "polyline").

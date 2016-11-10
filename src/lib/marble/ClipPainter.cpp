@@ -291,6 +291,11 @@ void ClipPainter::drawPolyline(const QPolygonF & polygon, QVector<QPointF>& labe
     }
 }
 
+void ClipPainter::labelPosition(const QPolygonF & polygon, QVector<QPointF>& labelNodes,
+                                       LabelPositionFlags labelPositionFlags) {
+    d->labelPosition(polygon, labelNodes, labelPositionFlags);
+}
+
 void ClipPainter::setPen(const QColor &color) {
     if (d->m_debugBatchRender) {
         qDebug() << Q_FUNC_INFO;

@@ -75,24 +75,23 @@ QPen AbstractGeoPolygonGraphicsItem::configurePainter(GeoPainter *painter, const
 
     GeoDataStyle::ConstPtr style = this->style();
     if (!style) {
-        painter->setPen( QPen() );
+        painter->setPen( QPen() ); // "style-less" polygons: a 1px black solid line
     }
     else {
         const GeoDataPolyStyle& polyStyle = style->polyStyle();
 
-        if (!polyStyle.outline()) {
-            currentPen.setColor( Qt::transparent );
-        }
-        else {
+        if (polyStyle.outline()) { // polygons without outline: Qt::NoPen (not drawn)
             const GeoDataLineStyle& lineStyle = style->lineStyle();
 
             currentPen.setColor(lineStyle.paintedColor());
             currentPen.setWidthF(lineStyle.width());
             currentPen.setCapStyle(lineStyle.capStyle());
             currentPen.setStyle(lineStyle.penStyle());
-        }
 
-        painter->setPen(currentPen);
+            if (painter->pen().color() != currentPen.color()) {
+                painter->setPen(currentPen);
+            }
+        }
 
         if (!polyStyle.fill()) {
             painter->setBrush(QColor(Qt::transparent));
