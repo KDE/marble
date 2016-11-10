@@ -211,10 +211,14 @@ void BuildingGeoPolygonGraphicsItem::paint(GeoPainter* painter, const ViewportPa
         Q_ASSERT(!m_cachedOutlinePolygons.isEmpty());
         Q_ASSERT(!m_cachedInnerPolygons.isEmpty());
         updatePolygons(viewport, m_cachedOutlinePolygons, m_cachedInnerPolygons, m_hasInnerBoundaries);
-        if (m_cachedOutlinePolygons.isEmpty()) return;
+        if (m_cachedOutlinePolygons.isEmpty()) {
+            return;
+        }
         paintFrame(painter, viewport);
     } else if (layer.endsWith(QLatin1String("/roof"))) {
-        if (m_cachedOutlinePolygons.isEmpty()) return;
+        if (m_cachedOutlinePolygons.isEmpty()) {
+            return;
+        }
         paintRoof(painter, viewport);
         qDeleteAll(m_cachedOutlinePolygons);
         m_cachedOutlinePolygons.clear();
