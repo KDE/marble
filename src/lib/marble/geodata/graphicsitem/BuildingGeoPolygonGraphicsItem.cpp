@@ -20,6 +20,9 @@
 #include "OsmPlacemarkData.h"
 #include "GeoPainter.h"
 
+#include <QScreen>
+#include <QApplication>
+
 namespace Marble
 {
 
@@ -62,9 +65,13 @@ void BuildingGeoPolygonGraphicsItem::initializeBuildingPainting(const GeoPainter
     drawAccurate3D = false;
     isCameraAboveBuilding = false;
 
+    auto const screen = QApplication::screens().first();
+    double const physicalSize = 1.0; // mm
+    int const pixelSize = qRound(physicalSize * screen->physicalDotsPerInch() / (IN2M * M2MM));
+
     QPointF offsetAtCorner = buildingOffset(QPointF(0, 0), viewport, &isCameraAboveBuilding);
     qreal maxOffset = qMax( qAbs( offsetAtCorner.x() ), qAbs( offsetAtCorner.y() ) );
-    drawAccurate3D = painter->mapQuality() == HighQuality ? maxOffset > 5.0 : maxOffset > 8.0;
+    drawAccurate3D = painter->mapQuality() == HighQuality ? maxOffset > pixelSize : maxOffset > 1.5 * pixelSize;
 }
 
 void BuildingGeoPolygonGraphicsItem::updatePolygons( const ViewportParams *viewport,
