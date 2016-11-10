@@ -1522,6 +1522,9 @@ QStringList StyleBuilder::renderOrder() const
         }
 
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::TransportPlatform);
+        paintLayerOrder << Private::createPaintLayerItem("LineString", GeoDataPlacemark::TransportPlatform, "outline");
+        paintLayerOrder << Private::createPaintLayerItem("LineString", GeoDataPlacemark::TransportPlatform, "inline");
+        paintLayerOrder << Private::createPaintLayerItem("LineString", GeoDataPlacemark::TransportPlatform, "label");
 
         for ( int i = GeoDataPlacemark::AdminLevel1; i <= GeoDataPlacemark::AdminLevel11; i++ ) {
             paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataPlacemark::GeoDataVisualCategory)i, "outline");
