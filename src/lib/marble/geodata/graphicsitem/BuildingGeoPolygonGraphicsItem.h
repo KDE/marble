@@ -38,9 +38,12 @@ private:
     void paintRoof(GeoPainter* painter, const ViewportParams *viewport);
     void configureFramePainter(GeoPainter *painter) const;
     void initializeBuildingPainting(const GeoPainter* painter, const ViewportParams *viewport,
-                                    bool &drawAccurate3D, bool &isCameraAboveBuilding, bool &hasInnerBoundaries,
-                                    QVector<QPolygonF*>& outlinePolygons,
-                                    QVector<QPolygonF*>& innerPolygons) const;
+                                    bool &drawAccurate3D, bool &isCameraAboveBuilding) const;
+    void updatePolygons( const ViewportParams *viewport,
+                         QVector<QPolygonF*>& outlinePolygons,
+                         QVector<QPolygonF*>& innerPolygons,
+                         bool &hasInnerBoundaries);
+
     QPointF buildingOffset(const QPointF &point, const ViewportParams *viewport, bool* isCameraAboveBuilding = nullptr) const;
 
     static QPointF centroid(const QPolygonF &polygon, double &area);
@@ -54,6 +57,10 @@ private:
     const double m_buildingHeight;
     const QString m_buildingLabel;
     const QVector<NamedEntry> m_entries;
+    QVector<QPolygonF*> m_cachedOutlinePolygons;
+    QVector<QPolygonF*> m_cachedInnerPolygons;
+    bool m_hasInnerBoundaries;
+
 };
 
 }

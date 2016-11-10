@@ -125,8 +125,7 @@ void GeoLineStringGraphicsItem::paint(GeoPainter* painter, const ViewportParams*
     setRenderContext(RenderContext(tileLevel));
 
     if (layer.endsWith(QLatin1String("/outline"))) {
-        qDeleteAll(m_cachedPolygons);
-        m_cachedPolygons.clear();
+        Q_ASSERT(!m_cachedPolygons.isEmpty());
         painter->polygonsFromLineString(*m_renderLineString, m_cachedPolygons);
         if (m_cachedPolygons.empty()) {
             return;
@@ -148,8 +147,7 @@ void GeoLineStringGraphicsItem::paint(GeoPainter* painter, const ViewportParams*
         qDeleteAll(m_cachedPolygons);
         m_cachedPolygons.clear();
     } else {
-        qDeleteAll(m_cachedPolygons);
-        m_cachedPolygons.clear();
+        Q_ASSERT(!m_cachedPolygons.isEmpty());
         painter->polygonsFromLineString(*m_renderLineString, m_cachedPolygons);
         if (m_cachedPolygons.empty()) {
             return;
