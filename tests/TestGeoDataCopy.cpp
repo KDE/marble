@@ -369,11 +369,8 @@ void TestGeoDataCopy::copyFolder()
 
     GeoDataFolder other = folder;
     QCOMPARE(other.size(), 3);
-    QEXPECT_FAIL("", "FIXME", Continue);
     QCOMPARE(other.child(0)->parent(), &other);
-    QEXPECT_FAIL("", "FIXME", Continue);
     QCOMPARE(other.child(1)->parent(), &other);
-    QEXPECT_FAIL("", "FIXME", Continue);
     QCOMPARE(other.child(2)->parent(), &other);
     QCOMPARE(static_cast<GeoDataPlacemark*>(other.child(0))->coordinate(), coord1);
     QCOMPARE(static_cast<GeoDataPlacemark*>(other.child(1))->coordinate(), coord2);
@@ -486,9 +483,7 @@ void TestGeoDataCopy::copyPlacemark()
         const GeoDataPlacemark other2(other);
 
         QCOMPARE(placemark.geometry()->parent(), &placemark);
-        QEXPECT_FAIL("", "geometry needs to be detach()ed", Continue);
         QCOMPARE(other.geometry()->parent(), &other);
-        QEXPECT_FAIL("", "geometry needs to be detach()ed", Continue);
         QCOMPARE(other2.geometry()->parent(), &other2);
     }
 

@@ -69,6 +69,12 @@ GeoDataNetworkLink::~GeoDataNetworkLink()
     delete d;
 }
 
+GeoDataFeature * GeoDataNetworkLink::clone() const
+{
+    return new GeoDataNetworkLink(*this);
+}
+
+
 const char *GeoDataNetworkLink::nodeType() const
 {
     return GeoDataTypes::GeoDataNetworkLinkType;

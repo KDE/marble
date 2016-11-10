@@ -69,6 +69,18 @@ class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
     {
     }
 
+    GeoDataPlacemarkPrivate(const GeoDataPlacemarkPrivate& other)
+      : GeoDataFeaturePrivate(other),
+        m_geometry(cloneGeometry(other.m_geometry)),
+        m_population(other.m_population),
+        m_placemarkExtendedData(nullptr),
+        m_visualCategory(other.m_visualCategory)
+    {
+        if (other.m_placemarkExtendedData) {
+            m_placemarkExtendedData = new GeoDataPlacemarkExtendedData(*other.m_placemarkExtendedData);
+        }
+    }
+
     virtual ~GeoDataPlacemarkPrivate()
     {
         delete m_geometry;
@@ -82,58 +94,22 @@ class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
         }
 
         GeoDataFeaturePrivate::operator=( other );
+
         m_population = other.m_population;
         m_visualCategory = other.m_visualCategory;
 
-        GeoDataGeometry * geometry = 0;
-        if ( other.m_geometry ) {
-            switch( other.m_geometry->geometryId() ) {
-            case InvalidGeometryId:
-                break;
-            case GeoDataPointId:
-                geometry = new GeoDataPoint( *static_cast<const GeoDataPoint*>( other.m_geometry ) );
-                break;
-            case GeoDataLineStringId:
-                geometry = new GeoDataLineString( *static_cast<const GeoDataLineString*>( other.m_geometry ) );
-                break;
-            case GeoDataLinearRingId:
-                geometry = new GeoDataLinearRing( *static_cast<const GeoDataLinearRing*>( other.m_geometry ) );
-                break;
-            case GeoDataPolygonId:
-                geometry = new GeoDataPolygon( *static_cast<const GeoDataPolygon*>( other.m_geometry ) );
-                break;
-            case GeoDataMultiGeometryId:
-                geometry = new GeoDataMultiGeometry( *static_cast<const GeoDataMultiGeometry*>( other.m_geometry ) );
-                break;
-            case GeoDataTrackId:
-                geometry = new GeoDataTrack( *static_cast<const GeoDataTrack*>( other.m_geometry ) );
-                break;
-            case GeoDataMultiTrackId:
-                geometry = new GeoDataMultiTrack( *static_cast<const GeoDataMultiTrack*>( other.m_geometry ) );
-                break;
-            case GeoDataModelId:
-                break;
-            default: break;
-            }
-        }
         delete m_geometry;
-        m_geometry = geometry;
+        m_geometry = cloneGeometry(other.m_geometry);
         // TODO: why not set parent here to geometry?
 
         delete m_placemarkExtendedData;
-        m_placemarkExtendedData = nullptr;
         if (other.m_placemarkExtendedData) {
             m_placemarkExtendedData = new GeoDataPlacemarkExtendedData(*other.m_placemarkExtendedData);
+        } else {
+            m_placemarkExtendedData = nullptr;
         }
 
         return *this;
-    }
-
-    virtual GeoDataFeaturePrivate* copy()
-    {
-        GeoDataPlacemarkPrivate* copy = new GeoDataPlacemarkPrivate;
-        *copy = *this;
-        return copy;
     }
 
     virtual const char* nodeType() const
@@ -144,6 +120,43 @@ class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
     virtual EnumFeatureId featureId() const
     {
         return GeoDataPlacemarkId;
+    }
+
+    static GeoDataGeometry * cloneGeometry(const GeoDataGeometry * geometry)
+    {
+        GeoDataGeometry * result = nullptr;
+        if (geometry) {
+            switch (geometry->geometryId()) {
+            case InvalidGeometryId:
+                break;
+            case GeoDataPointId:
+                result = new GeoDataPoint(*static_cast<const GeoDataPoint*>(geometry));
+                break;
+            case GeoDataLineStringId:
+                result = new GeoDataLineString(*static_cast<const GeoDataLineString*>(geometry));
+                break;
+            case GeoDataLinearRingId:
+                result = new GeoDataLinearRing(*static_cast<const GeoDataLinearRing*>(geometry));
+                break;
+            case GeoDataPolygonId:
+                result = new GeoDataPolygon(*static_cast<const GeoDataPolygon*>(geometry));
+                break;
+            case GeoDataMultiGeometryId:
+                result = new GeoDataMultiGeometry(*static_cast<const GeoDataMultiGeometry*>(geometry));
+                break;
+            case GeoDataTrackId:
+                result = new GeoDataTrack(*static_cast<const GeoDataTrack*>(geometry));
+                break;
+            case GeoDataMultiTrackId:
+                result = new GeoDataMultiTrack(*static_cast<const GeoDataMultiTrack*>(geometry));
+                break;
+            case GeoDataModelId:
+                break;
+            default:
+                break;
+            }
+        }
+        return result;
     }
 
     GeoDataPlacemarkExtendedData & placemarkExtendedData()

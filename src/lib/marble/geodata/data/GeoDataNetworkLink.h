@@ -36,6 +36,8 @@ public:
 
     ~GeoDataNetworkLink();
 
+    GeoDataFeature * clone() const override;
+
     /** Provides type information for downcasting a GeoNode */
     virtual const char* nodeType() const;
 

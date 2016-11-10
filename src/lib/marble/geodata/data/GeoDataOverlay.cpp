@@ -9,77 +9,80 @@
 //
 
 #include "GeoDataOverlay.h"
-#include "GeoDataDocument.h"
+#include "GeoDataOverlay_p.h"
 
-#include <QImage>
-#include <QColor>
+#include "GeoDataDocument.h"
 
 namespace Marble {
 
-class GeoDataOverlayPrivate
-{
-public:
-    QColor m_color;
-
-    int m_drawOrder;
-
-    QImage m_image;
-
-    QString m_iconPath;
-
-    GeoDataOverlayPrivate();
-};
-
-GeoDataOverlayPrivate::GeoDataOverlayPrivate() : m_color( Qt::white ), m_drawOrder( 0 )
+GeoDataOverlay::GeoDataOverlay()
+    : GeoDataFeature(new GeoDataOverlayPrivate)
 {
     // nothing to do
 }
 
-GeoDataOverlay::GeoDataOverlay() : d( new GeoDataOverlayPrivate )
+GeoDataOverlay::GeoDataOverlay(const GeoDataOverlay &other)
+    : GeoDataFeature(other, new GeoDataOverlayPrivate(*other.d_func()))
 {
     // nothing to do
+}
+
+GeoDataOverlay::GeoDataOverlay(GeoDataOverlayPrivate *priv)
+    : GeoDataFeature(priv)
+{
+}
+
+GeoDataOverlay::GeoDataOverlay(const GeoDataOverlay& other, GeoDataOverlayPrivate *priv)
+    : GeoDataFeature(other, priv)
+{
 }
 
 GeoDataOverlay::~GeoDataOverlay()
 {
-    delete d;
-}
-
-GeoDataOverlay::GeoDataOverlay( const GeoDataOverlay &other ) :
-    GeoDataFeature( other ), d( new GeoDataOverlayPrivate( *other.d ) )
-{
-    // nothing to do
 }
 
 GeoDataOverlay &GeoDataOverlay::operator=( const GeoDataOverlay &other )
 {
-    GeoDataFeature::operator=( other );
-    *d = *other.d;
+    if (this != &other) {
+        Q_D(GeoDataOverlay);
+        *d = *other.d_func();
+    }
+
     return *this;
+}
+
+GeoDataFeature * GeoDataOverlay::clone() const
+{
+    return new GeoDataOverlay(*this);
 }
 
 QColor GeoDataOverlay::color() const
 {
+    Q_D(const GeoDataOverlay);
     return d->m_color;
 }
 
 void GeoDataOverlay::setColor( const QColor &color )
 {
+    Q_D(GeoDataOverlay);
     d->m_color = color;
 }
 
 int GeoDataOverlay::drawOrder() const
 {
+    Q_D(const GeoDataOverlay);
     return d->m_drawOrder;
 }
 
 void GeoDataOverlay::setDrawOrder( int order )
 {
+    Q_D(GeoDataOverlay);
     d->m_drawOrder = order;
 }
 
 QImage GeoDataOverlay::icon() const
 {
+    Q_D(const GeoDataOverlay);
     if ( d->m_image.isNull() && !d->m_iconPath.isEmpty() ) {
         d->m_image = QImage( absoluteIconFile() );
     }
@@ -88,32 +91,39 @@ QImage GeoDataOverlay::icon() const
 
 void GeoDataOverlay::setIcon( const QImage &icon )
 {
+    Q_D(GeoDataOverlay);
     d->m_image = icon;
 }
 
 void GeoDataOverlay::setIconFile( const QString &path )
 {
+    Q_D(GeoDataOverlay);
     d->m_iconPath = path;
     d->m_image = QImage( path );
 }
 
 QString GeoDataOverlay::iconFile() const
 {
+    Q_D(const GeoDataOverlay);
     return d->m_iconPath;
 }
 
 QString GeoDataOverlay::absoluteIconFile() const
 {
+    Q_D(const GeoDataOverlay);
     return resolvePath( d->m_iconPath );
 }
 
 bool GeoDataOverlay::equals(const GeoDataOverlay& other) const
 {
+    Q_D(const GeoDataOverlay);
+    const GeoDataOverlayPrivate* const other_d = other.d_func();
+
     return GeoDataFeature::equals(other) &&
-           d->m_drawOrder == other.d->m_drawOrder &&
-           d->m_color == other.d->m_color &&
-           d->m_iconPath == other.d->m_iconPath &&
-           d->m_image == other.d->m_image;
+           d->m_drawOrder == other_d->m_drawOrder &&
+           d->m_color == other_d->m_color &&
+           d->m_iconPath == other_d->m_iconPath &&
+           d->m_image == other_d->m_image;
 }
 
 }

@@ -68,8 +68,12 @@ public:
     GeoDataDocument( const GeoDataDocument& other );
     ~GeoDataDocument();
 
+    GeoDataDocument& operator=(const GeoDataDocument& other);
+
     bool operator==( const GeoDataDocument &other ) const;
     bool operator!=( const GeoDataDocument &other ) const;
+
+    GeoDataFeature * clone() const override;
 
     /// Provides type information for downcasting a GeoData
     virtual bool isGeoDataDocument() const { return true; }

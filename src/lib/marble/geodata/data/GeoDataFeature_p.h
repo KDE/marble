@@ -12,7 +12,6 @@
 #define MARBLE_GEODATAFEATUREPRIVATE_H
 
 #include <QString>
-#include <QAtomicInt>
 
 #include "GeoDataExtendedData.h"
 #include "GeoDataAbstractView.h"
@@ -148,8 +147,7 @@ class GeoDataFeaturePrivate
         m_style( 0 ),
         m_styleMap( 0 ),
         m_extendedData(),
-        m_featureExtendedData(nullptr),
-        ref( 0 )
+        m_featureExtendedData(nullptr)
     {
     }
 
@@ -163,8 +161,7 @@ class GeoDataFeaturePrivate
         m_style( other.m_style ),               //FIXME: both style and stylemap need to be reworked internally!!!!
         m_styleMap( other.m_styleMap ),
         m_extendedData( other.m_extendedData ),
-        m_featureExtendedData(nullptr),
-        ref( 0 )
+        m_featureExtendedData(nullptr)
     {
         if (other.m_featureExtendedData) {
             m_featureExtendedData = new GeoDataFeatureExtendedData(*other.m_featureExtendedData);
@@ -188,13 +185,6 @@ class GeoDataFeaturePrivate
             m_featureExtendedData = new GeoDataFeatureExtendedData(*other.m_featureExtendedData);
         }
         return *this;
-    }
-    
-    virtual GeoDataFeaturePrivate* copy()
-    { 
-        GeoDataFeaturePrivate* copy = new GeoDataFeaturePrivate;
-        *copy = *this;
-        return copy;
     }
 
     virtual EnumFeatureId featureId() const
@@ -241,8 +231,6 @@ class GeoDataFeaturePrivate
 
     GeoDataExtendedData m_extendedData;
     mutable GeoDataFeatureExtendedData* m_featureExtendedData;
-
-    QAtomicInt  ref;
 
     // Static members
     static const QSharedPointer<const GeoDataStyle> s_defaultStyle;

@@ -259,6 +259,10 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
      */
     void setStyleMap( const GeoDataStyleMap* map );
 
+    /// Duplicate into another equal instance
+    virtual GeoDataFeature * clone() const;
+
+
     /// Serialize the contents of the feature to @p stream.
     virtual void pack( QDataStream& stream ) const;
     /// Unserialize the contents of the feature from @p stream.
@@ -266,10 +270,9 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
 
  protected:
     // the d-pointer needs to be protected to be accessible from derived classes
-    GeoDataFeaturePrivate* d_ptr;
+    GeoDataFeaturePrivate* const d_ptr;
     explicit GeoDataFeature(GeoDataFeaturePrivate* dd);
-
-    virtual void detach();
+    GeoDataFeature(const GeoDataFeature& other, GeoDataFeaturePrivate* dd);
 
     bool equals( const GeoDataFeature &other ) const;
     using GeoDataObject::equals;

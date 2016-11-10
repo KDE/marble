@@ -43,12 +43,23 @@ GeoDataDocument::GeoDataDocument()
 }
 
 GeoDataDocument::GeoDataDocument( const GeoDataDocument& other )
-    : GeoDocument(), GeoDataContainer( other )
+    : GeoDocument(),
+      GeoDataContainer(other, new GeoDataDocumentPrivate(*other.d_func()))
 {
 }
 
 GeoDataDocument::~GeoDataDocument()
 {
+}
+
+GeoDataDocument& GeoDataDocument::operator=(const GeoDataDocument& other)
+{
+    if (this != &other) {
+        Q_D(GeoDataDocument);
+        *d = *other.d_func();
+    }
+
+    return *this;
 }
 
 bool GeoDataDocument::operator==( const GeoDataDocument &other ) const
@@ -90,6 +101,11 @@ bool GeoDataDocument::operator!=( const GeoDataDocument &other ) const
     return !this->operator==( other );
 }
 
+GeoDataFeature * GeoDataDocument::clone() const
+{
+    return new GeoDataDocument(*this);
+}
+
 DocumentRole GeoDataDocument::documentRole() const
 {
     Q_D(const GeoDataDocument);
@@ -98,8 +114,6 @@ DocumentRole GeoDataDocument::documentRole() const
 
 void GeoDataDocument::setDocumentRole( DocumentRole role )
 {
-    detach();
-
     Q_D(GeoDataDocument);
     d->m_documentRole = role;
 }
@@ -112,8 +126,6 @@ QString GeoDataDocument::property() const
 
 void GeoDataDocument::setProperty( const QString& property )
 {
-    detach();
-
     Q_D(GeoDataDocument);
     d->m_property = property;
 }
@@ -126,8 +138,6 @@ QString GeoDataDocument::fileName() const
 
 void GeoDataDocument::setFileName( const QString &value )
 {
-    detach();
-
     Q_D(GeoDataDocument);
     d->m_filename = value;
 }
@@ -140,8 +150,6 @@ QString GeoDataDocument::baseUri() const
 
 void GeoDataDocument::setBaseUri( const QString &baseUrl )
 {
-    detach();
-
     Q_D(GeoDataDocument);
     d->m_baseUri = baseUrl;
 }
@@ -154,16 +162,12 @@ GeoDataNetworkLinkControl GeoDataDocument::networkLinkControl() const
 
 void GeoDataDocument::setNetworkLinkControl( const GeoDataNetworkLinkControl &networkLinkControl )
 {
-    detach();
-
     Q_D(GeoDataDocument);
     d->m_networkLinkControl = networkLinkControl;
 }
 
 void GeoDataDocument::addStyle( const GeoDataStyle::Ptr &style )
 {
-    detach();
-
     Q_D(GeoDataDocument);
     d->m_styleHash.insert(style->id(), style);
     d->m_styleHash[style->id()]->setParent(this);
@@ -171,15 +175,12 @@ void GeoDataDocument::addStyle( const GeoDataStyle::Ptr &style )
 
 void GeoDataDocument::removeStyle( const QString& styleId )
 {
-    detach();
-
     Q_D(GeoDataDocument);
     d->m_styleHash.remove(styleId);
 }
 
 GeoDataStyle::Ptr GeoDataDocument::style( const QString& styleId )
 {
-    detach();
     /*
      * FIXME: m_styleHash always should contain at least default
      *        GeoDataStyle element
@@ -207,16 +208,12 @@ QList<GeoDataStyle::ConstPtr> GeoDataDocument::styles() const
 
 QList<GeoDataStyle::Ptr> GeoDataDocument::styles()
 {
-    detach();
-
     Q_D(GeoDataDocument);
     return d->m_styleHash.values();
 }
 
 void GeoDataDocument::addStyleMap( const GeoDataStyleMap& map )
 {
-    detach();
-
     Q_D(GeoDataDocument);
     d->m_styleMapHash.insert(map.id(), map);
     d->m_styleMapHash[map.id()].setParent(this);
@@ -224,16 +221,12 @@ void GeoDataDocument::addStyleMap( const GeoDataStyleMap& map )
 
 void GeoDataDocument::removeStyleMap( const QString& mapId )
 {
-    detach();
-
     Q_D(GeoDataDocument);
     d->m_styleMapHash.remove(mapId);
 }
 
 GeoDataStyleMap& GeoDataDocument::styleMap( const QString& styleId )
 {
-    detach();
-
     Q_D(GeoDataDocument);
     return d->m_styleMapHash[styleId];
 }
@@ -252,8 +245,6 @@ QList<GeoDataStyleMap> GeoDataDocument::styleMaps() const
 
 void GeoDataDocument::addSchema( const GeoDataSchema& schema )
 {
-    detach();
-
     Q_D(GeoDataDocument);
     d->m_schemaHash.insert(schema.id(), schema);
     d->m_schemaHash[schema.id()].setParent(this);
@@ -261,8 +252,6 @@ void GeoDataDocument::addSchema( const GeoDataSchema& schema )
 
 void GeoDataDocument::removeSchema( const QString& schemaId )
 {
-    detach();
-
     Q_D(GeoDataDocument);
     GeoDataSchema schema = d->m_schemaHash.take(schemaId);
     schema.setParent( 0 );
@@ -276,8 +265,6 @@ GeoDataSchema GeoDataDocument::schema( const QString& schemaId ) const
 
 GeoDataSchema &GeoDataDocument::schema( const QString &schemaId )
 {
-    detach();
-
     Q_D(GeoDataDocument);
     return d->m_schemaHash[schemaId];
 }
@@ -306,8 +293,6 @@ void GeoDataDocument::pack( QDataStream& stream ) const
 
 void GeoDataDocument::unpack( QDataStream& stream )
 {
-    detach();
-
     Q_D(GeoDataDocument);
     GeoDataContainer::unpack( stream );
 

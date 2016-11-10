@@ -9,56 +9,43 @@
 //
 
 #include "GeoDataGroundOverlay.h"
+#include "GeoDataGroundOverlay_p.h"
 
-#include "GeoDataTypes.h"
-#include "GeoDataLatLonQuad.h"
 
 namespace Marble {
 
-class GeoDataGroundOverlayPrivate
-{
-public:
-    double m_altitude;
-
-    AltitudeMode m_altitudeMode;
-
-    GeoDataLatLonBox m_latLonBox;
-
-    GeoDataLatLonQuad m_latLonQuad;
-
-    GeoDataGroundOverlayPrivate();
-};
-
-GeoDataGroundOverlayPrivate::GeoDataGroundOverlayPrivate() :
-    m_altitude( 0.0 ), m_altitudeMode( ClampToGround )
+GeoDataGroundOverlay::GeoDataGroundOverlay()
+  : GeoDataOverlay(new GeoDataGroundOverlayPrivate)
 {
     // nothing to do
 }
 
-GeoDataGroundOverlay::GeoDataGroundOverlay() : d( new GeoDataGroundOverlayPrivate )
-{
-    // nothing to do
-}
-
-GeoDataGroundOverlay::GeoDataGroundOverlay( const Marble::GeoDataGroundOverlay &other ) :
-    GeoDataOverlay( other ), d( new GeoDataGroundOverlayPrivate( *other.d ) )
+GeoDataGroundOverlay::GeoDataGroundOverlay(const GeoDataGroundOverlay &other)
+  : GeoDataOverlay(other, new GeoDataGroundOverlayPrivate(*other.d_func()))
 {
     // nothing to do
 }
 
 GeoDataGroundOverlay &GeoDataGroundOverlay::operator=( const GeoDataGroundOverlay &other )
 {
-    *d = *other.d;
+    if (this != &other) {
+        Q_D(GeoDataGroundOverlay);
+        *d = *other.d_func();
+    }
+
     return *this;
 }
 
 bool GeoDataGroundOverlay::operator==(const GeoDataGroundOverlay& other) const
 {
+    Q_D(const GeoDataGroundOverlay);
+    const GeoDataGroundOverlayPrivate* const other_d = other.d_func();
+
     return equals(other) &&
-           d->m_altitude == other.d->m_altitude &&
-           d->m_altitudeMode == other.d->m_altitudeMode &&
-           d->m_latLonBox == other.d->m_latLonBox &&
-           d->m_latLonQuad == other.d->m_latLonQuad;
+           d->m_altitude == other_d->m_altitude &&
+           d->m_altitudeMode == other_d->m_altitudeMode &&
+           d->m_latLonBox == other_d->m_latLonBox &&
+           d->m_latLonQuad == other_d->m_latLonQuad;
 }
 
 bool GeoDataGroundOverlay::operator!=(const GeoDataGroundOverlay& other) const
@@ -68,7 +55,11 @@ bool GeoDataGroundOverlay::operator!=(const GeoDataGroundOverlay& other) const
 
 GeoDataGroundOverlay::~GeoDataGroundOverlay()
 {
-    delete d;
+}
+
+GeoDataFeature * GeoDataGroundOverlay::clone() const
+{
+    return new GeoDataGroundOverlay(*this);
 }
 
 const char *GeoDataGroundOverlay::nodeType() const
@@ -78,46 +69,61 @@ const char *GeoDataGroundOverlay::nodeType() const
 
 double GeoDataGroundOverlay::altitude() const
 {
+    Q_D(const GeoDataGroundOverlay);
     return d->m_altitude;
 }
 
 void GeoDataGroundOverlay::setAltitude( double altitude )
 {
+    Q_D(GeoDataGroundOverlay);
     d->m_altitude = altitude;
 }
 
 AltitudeMode GeoDataGroundOverlay::altitudeMode() const
 {
+    Q_D(const GeoDataGroundOverlay);
     return d->m_altitudeMode;
 }
 
 void GeoDataGroundOverlay::setAltitudeMode( const AltitudeMode altitudeMode )
 {
+    Q_D(GeoDataGroundOverlay);
     d->m_altitudeMode = altitudeMode;
 }
 
-GeoDataLatLonBox &GeoDataGroundOverlay::latLonBox() const
+GeoDataLatLonBox &GeoDataGroundOverlay::latLonBox()
 {
+    Q_D(GeoDataGroundOverlay);
+    return d->m_latLonBox;
+}
+
+const GeoDataLatLonBox &GeoDataGroundOverlay::latLonBox() const
+{
+    Q_D(const GeoDataGroundOverlay);
     return d->m_latLonBox;
 }
 
 void GeoDataGroundOverlay::setLatLonBox( const GeoDataLatLonBox &box )
 {
+    Q_D(GeoDataGroundOverlay);
     d->m_latLonBox = box;
 }
 
 GeoDataLatLonQuad &GeoDataGroundOverlay::latLonQuad()
 {
+    Q_D(GeoDataGroundOverlay);
     return d->m_latLonQuad;
 }
 
 const GeoDataLatLonQuad &GeoDataGroundOverlay::latLonQuad() const
 {
+    Q_D(const GeoDataGroundOverlay);
     return d->m_latLonQuad;
 }
 
 void GeoDataGroundOverlay::setLatLonQuad(const GeoDataLatLonQuad& quad)
 {
+    Q_D(GeoDataGroundOverlay);
     d->m_latLonQuad = quad;
 }
 

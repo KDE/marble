@@ -32,12 +32,14 @@ public:
 
     GeoDataNetworkLinkControl( const GeoDataNetworkLinkControl &other );
 
+    ~GeoDataNetworkLinkControl();
+
     GeoDataNetworkLinkControl& operator=( const GeoDataNetworkLinkControl &other );
 
     bool operator==( const GeoDataNetworkLinkControl &other ) const;
     bool operator!=( const GeoDataNetworkLinkControl &other ) const;
 
-    ~GeoDataNetworkLinkControl();
+    GeoDataFeature * clone() const override;
 
     /** Provides type information for downcasting a GeoNode */
     virtual const char* nodeType() const;
@@ -79,7 +81,7 @@ public:
     void setAbstractView( GeoDataAbstractView *abstractView );
 
 private:
-    GeoDataNetworkLinkControlPrivate* const d;
+    Q_DECLARE_PRIVATE(GeoDataNetworkLinkControl)
 };
 
 }

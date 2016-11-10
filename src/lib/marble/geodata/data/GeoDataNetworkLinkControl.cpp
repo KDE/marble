@@ -9,111 +9,70 @@
 //
 
 #include "GeoDataNetworkLinkControl.h"
+#include "GeoDataNetworkLinkControl_p.h"
 
-#include "GeoDataTypes.h"
 #include "GeoDataCamera.h"
 #include "GeoDataLookAt.h"
-#include "GeoDataUpdate.h"
 
-#include <QDateTime>
 
 namespace Marble
 {
 
-class GeoDataNetworkLinkControlPrivate
-{
-public:
-    GeoDataNetworkLinkControlPrivate();
-
-    GeoDataNetworkLinkControlPrivate( const GeoDataNetworkLinkControlPrivate &other );
-
-    qreal m_minRefreshPeriod;
-    qreal m_maxSessionLength;
-    QString m_cookie;
-    QString m_message;
-    QString m_linkName;
-    QString m_linkDescription;
-    QString m_linkSnippet;
-    int m_maxLines;
-    QDateTime m_expires;
-    GeoDataUpdate m_update;
-    GeoDataAbstractView *m_abstractView;
-};
-
-GeoDataNetworkLinkControlPrivate::GeoDataNetworkLinkControlPrivate() :
-    m_minRefreshPeriod( 0.0 ),
-    m_maxSessionLength( 0.0 ),
-    m_maxLines( 2 ),
-    m_expires(),
-    m_update(),
-    m_abstractView( 0 )
+GeoDataNetworkLinkControl::GeoDataNetworkLinkControl()
+  : GeoDataContainer(new GeoDataNetworkLinkControlPrivate)
 {
 }
 
-GeoDataNetworkLinkControlPrivate::GeoDataNetworkLinkControlPrivate( const GeoDataNetworkLinkControlPrivate &other ) :
-    m_minRefreshPeriod( other.m_minRefreshPeriod ),
-    m_maxSessionLength( other.m_maxSessionLength ),
-    m_cookie( other.m_cookie ),
-    m_message( other.m_message ),
-    m_linkName( other.m_linkName ),
-    m_linkDescription( other.m_linkDescription ),
-    m_linkSnippet( other.m_linkSnippet ),
-    m_maxLines( other.m_maxLines ),
-    m_expires( other.m_expires ),
-    m_update( other.m_update ),
-    m_abstractView( other.m_abstractView ? other.m_abstractView->copy() : 0 )
-{
-}
-
-GeoDataNetworkLinkControl::GeoDataNetworkLinkControl() :
-    d( new GeoDataNetworkLinkControlPrivate )
-{
-}
-
-GeoDataNetworkLinkControl::GeoDataNetworkLinkControl( const Marble::GeoDataNetworkLinkControl &other ) :
-    GeoDataContainer(), d( new GeoDataNetworkLinkControlPrivate( *other.d ) )
+GeoDataNetworkLinkControl::GeoDataNetworkLinkControl(const GeoDataNetworkLinkControl &other)
+  : GeoDataContainer(other, new GeoDataNetworkLinkControlPrivate(*other.d_func()))
 {
 }
 
 GeoDataNetworkLinkControl &GeoDataNetworkLinkControl::operator=( const GeoDataNetworkLinkControl &other )
 {
-    GeoDataContainer::operator =( other );
-    *d = *other.d;
-    d->m_abstractView = other.d->m_abstractView ? other.d->m_abstractView->copy() : 0;
+    if (this != &other) {
+        Q_D(GeoDataNetworkLinkControl);
+        *d = *other.d_func();
+    }
+
     return *this;
 }
 
 
 bool GeoDataNetworkLinkControl::operator==( const GeoDataNetworkLinkControl &other ) const
 {
+    Q_D(const GeoDataNetworkLinkControl);
+    const GeoDataNetworkLinkControlPrivate* const other_d = other.d_func();
+
     if ( !GeoDataContainer::equals(other) ||
-         d->m_minRefreshPeriod != other.d->m_minRefreshPeriod ||
-         d->m_maxSessionLength != other.d->m_maxSessionLength ||
-         d->m_cookie != other.d->m_cookie ||
-         d->m_message != other.d->m_message ||
-         d->m_linkName != other.d->m_linkName ||
-         d->m_linkDescription != other.d->m_linkDescription ||
-         d->m_linkSnippet != other.d->m_linkSnippet ||
-         d->m_maxLines != other.d->m_maxLines ||
-         d->m_expires != other.d->m_expires ||
-         d->m_update != other.d->m_update ) {
+         d->m_minRefreshPeriod != other_d->m_minRefreshPeriod ||
+         d->m_maxSessionLength != other_d->m_maxSessionLength ||
+         d->m_cookie != other_d->m_cookie ||
+         d->m_message != other_d->m_message ||
+         d->m_linkName != other_d->m_linkName ||
+         d->m_linkDescription != other_d->m_linkDescription ||
+         d->m_linkSnippet != other_d->m_linkSnippet ||
+         d->m_maxLines != other_d->m_maxLines ||
+         d->m_expires != other_d->m_expires ||
+         d->m_update != other_d->m_update ) {
         return false;
     }
 
-    if ( !d->m_abstractView && !other.d->m_abstractView ) {
+    if (!d->m_abstractView && !other_d->m_abstractView) {
         return true;
-    } else if ( (!d->m_abstractView && other.d->m_abstractView) ||
-                (d->m_abstractView && !other.d->m_abstractView) ) {
+    }
+    if ((!d->m_abstractView && other_d->m_abstractView) ||
+        (d->m_abstractView && !other_d->m_abstractView)) {
         return false;
     }
 
-    if ( d->m_abstractView->nodeType() != other.d->m_abstractView->nodeType() ) {
+    if (d->m_abstractView->nodeType() != other_d->m_abstractView->nodeType()) {
         return false;
     }
 
     if ( d->m_abstractView->nodeType() == GeoDataTypes::GeoDataCameraType ) {
         GeoDataCamera *thisCam = dynamic_cast<GeoDataCamera*>( d->m_abstractView );
-        GeoDataCamera *otherCam = dynamic_cast<GeoDataCamera*>( other.d->m_abstractView );
+        GeoDataCamera *otherCam = dynamic_cast<GeoDataCamera*>(other_d->m_abstractView);
         Q_ASSERT(thisCam && otherCam);
 
         if ( *thisCam != *otherCam ) {
@@ -121,7 +80,7 @@ bool GeoDataNetworkLinkControl::operator==( const GeoDataNetworkLinkControl &oth
         }
     } else if ( d->m_abstractView->nodeType() == GeoDataTypes::GeoDataLookAtType ) {
         GeoDataLookAt *thisLookAt = dynamic_cast<GeoDataLookAt*>( d->m_abstractView );
-        GeoDataLookAt *otherLookAt = dynamic_cast<GeoDataLookAt*>( other.d->m_abstractView );
+        GeoDataLookAt *otherLookAt = dynamic_cast<GeoDataLookAt*>(other_d->m_abstractView);
         Q_ASSERT(thisLookAt && otherLookAt);
 
         if ( *thisLookAt != *otherLookAt ) {
@@ -139,127 +98,155 @@ bool GeoDataNetworkLinkControl::operator!=( const GeoDataNetworkLinkControl &oth
 
 GeoDataNetworkLinkControl::~GeoDataNetworkLinkControl()
 {
-    delete d->m_abstractView;
-    delete d;
 }
+
+GeoDataFeature * GeoDataNetworkLinkControl::clone() const
+{
+    return new GeoDataNetworkLinkControl(*this);
+}
+
 
 const char *GeoDataNetworkLinkControl::nodeType() const
 {
+    Q_D(const GeoDataNetworkLinkControl);
     return GeoDataTypes::GeoDataNetworkLinkControlType;
 }
 
 qreal GeoDataNetworkLinkControl::minRefreshPeriod() const
 {
+    Q_D(const GeoDataNetworkLinkControl);
     return d->m_minRefreshPeriod;
 }
 
 void GeoDataNetworkLinkControl::setMinRefreshPeriod(qreal minRefreshPeriod )
 {
+    Q_D(GeoDataNetworkLinkControl);
     d->m_minRefreshPeriod = minRefreshPeriod;
 }
 
 qreal GeoDataNetworkLinkControl::maxSessionLength() const
 {
+    Q_D(const GeoDataNetworkLinkControl);
     return d->m_maxSessionLength;
 }
 
 void GeoDataNetworkLinkControl::setMaxSessionLength(qreal maxSessionLength)
 {
+    Q_D(GeoDataNetworkLinkControl);
     d->m_maxSessionLength = maxSessionLength;
 }
 
 QString GeoDataNetworkLinkControl::cookie() const
 {
+    Q_D(const GeoDataNetworkLinkControl);
     return d->m_cookie;
 }
 
 void GeoDataNetworkLinkControl::setCookie( const QString &cookie )
 {
+    Q_D(GeoDataNetworkLinkControl);
     d->m_cookie = cookie;
 }
 
 QString GeoDataNetworkLinkControl::message() const
 {
+    Q_D(const GeoDataNetworkLinkControl);
     return d->m_message;
 }
 
 void GeoDataNetworkLinkControl::setMessage( const QString &message )
 {
+    Q_D(GeoDataNetworkLinkControl);
     d->m_message = message;
 }
 
 QString GeoDataNetworkLinkControl::linkName() const
 {
+    Q_D(const GeoDataNetworkLinkControl);
     return d->m_linkName;
 }
 
 void GeoDataNetworkLinkControl::setLinkName( const QString &linkName )
 {
+    Q_D(GeoDataNetworkLinkControl);
     d->m_linkName = linkName;
 }
 
 QString GeoDataNetworkLinkControl::linkDescription() const
 {
+    Q_D(const GeoDataNetworkLinkControl);
     return d->m_linkDescription;
 }
 
 void GeoDataNetworkLinkControl::setLinkDescription( const QString &linkDescription )
 {
+    Q_D(GeoDataNetworkLinkControl);
     d->m_linkDescription = linkDescription;
 }
 
 QString GeoDataNetworkLinkControl::linkSnippet() const
 {
+    Q_D(const GeoDataNetworkLinkControl);
     return d->m_linkSnippet;
 }
 
 void GeoDataNetworkLinkControl::setLinkSnippet( const QString &linkSnippet )
 {
+    Q_D(GeoDataNetworkLinkControl);
     d->m_linkSnippet = linkSnippet;
 }
 
 int GeoDataNetworkLinkControl::maxLines() const
 {
+    Q_D(const GeoDataNetworkLinkControl);
     return d->m_maxLines;
 }
 
 void GeoDataNetworkLinkControl::setMaxLines(int maxLines)
 {
+    Q_D(GeoDataNetworkLinkControl);
     d->m_maxLines = maxLines;
 }
 
 QDateTime GeoDataNetworkLinkControl::expires() const
 {
+    Q_D(const GeoDataNetworkLinkControl);
     return d->m_expires;
 }
 
 void GeoDataNetworkLinkControl::setExpires( const QDateTime &expires )
 {
+    Q_D(GeoDataNetworkLinkControl);
     d->m_expires = expires;
 }
 
 GeoDataUpdate &GeoDataNetworkLinkControl::update()
 {
+    Q_D(GeoDataNetworkLinkControl);
     return d->m_update;
 }
 
 const GeoDataUpdate& GeoDataNetworkLinkControl::update() const
 {
+    Q_D(const GeoDataNetworkLinkControl);
     return d->m_update;
 }
 
 void GeoDataNetworkLinkControl::setUpdate( const GeoDataUpdate &update )
 {
+    Q_D(GeoDataNetworkLinkControl);
     d->m_update = update;
 }
 
 GeoDataAbstractView *GeoDataNetworkLinkControl::abstractView() const
 {
+    Q_D(const GeoDataNetworkLinkControl);
     return d->m_abstractView;
 }
 
 void GeoDataNetworkLinkControl::setAbstractView( GeoDataAbstractView *abstractView )
 {
+    Q_D(GeoDataNetworkLinkControl);
     d->m_abstractView = abstractView;
     d->m_abstractView->setParent( this );
 }

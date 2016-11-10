@@ -28,18 +28,20 @@ public:
 
     GeoDataCreate( const GeoDataCreate &other );
 
+    ~GeoDataCreate();
+
     GeoDataCreate& operator=( const GeoDataCreate &other );
 
     bool operator==( const GeoDataCreate &other ) const;
     bool operator!=( const GeoDataCreate &other ) const;
 
-    ~GeoDataCreate();
+    GeoDataFeature * clone() const override;
 
     /** Provides type information for downcasting a GeoNode */
     virtual const char* nodeType() const;
 
 private:
-    GeoDataCreatePrivate* const d;
+    Q_DECLARE_PRIVATE(GeoDataCreate)
 };
 
 }

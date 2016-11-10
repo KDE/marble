@@ -30,10 +30,13 @@ public:
 
     GeoDataGroundOverlay( const GeoDataGroundOverlay &other );
 
+    ~GeoDataGroundOverlay();
+
     GeoDataGroundOverlay& operator=( const GeoDataGroundOverlay &other );
     bool operator==( const GeoDataGroundOverlay &other ) const;
     bool operator!=( const GeoDataGroundOverlay &other ) const;
-    ~GeoDataGroundOverlay();
+
+    GeoDataFeature * clone() const override;
 
     /** Provides type information for downcasting a GeoNode */
     virtual const char* nodeType() const;
@@ -46,7 +49,9 @@ public:
 
     void setAltitudeMode( const AltitudeMode altitudeMode );
 
-    GeoDataLatLonBox& latLonBox() const;
+    const GeoDataLatLonBox& latLonBox() const;
+
+    GeoDataLatLonBox& latLonBox();
 
     void setLatLonBox( const GeoDataLatLonBox &box );
 
@@ -57,7 +62,7 @@ public:
     void setLatLonQuad( const GeoDataLatLonQuad &quad );
 
 private:
-    GeoDataGroundOverlayPrivate* const d;
+    Q_DECLARE_PRIVATE(GeoDataGroundOverlay)
 };
 
 }

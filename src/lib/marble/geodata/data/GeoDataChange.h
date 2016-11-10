@@ -28,18 +28,20 @@ public:
 
     GeoDataChange( const GeoDataChange &other );
 
+    ~GeoDataChange();
+
     GeoDataChange& operator=( const GeoDataChange &other );
 
     bool operator==( const GeoDataChange &other ) const;
     bool operator!=( const GeoDataChange &other ) const;
 
-    ~GeoDataChange();
+    GeoDataFeature * clone() const override;
 
     /** Provides type information for downcasting a GeoNode */
     virtual const char* nodeType() const;
 
 private:
-    GeoDataChangePrivate* const d;
+    Q_DECLARE_PRIVATE(GeoDataChange)
 };
 
 }

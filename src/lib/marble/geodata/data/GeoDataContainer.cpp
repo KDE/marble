@@ -39,18 +39,39 @@ GeoDataContainer::GeoDataContainer()
 {
 }
 
-GeoDataContainer::GeoDataContainer( GeoDataContainerPrivate *priv )
-    : GeoDataFeature( priv )
+GeoDataContainer::GeoDataContainer(GeoDataContainerPrivate *priv)
+    : GeoDataFeature(priv)
 {
+    Q_D(GeoDataContainer);
+    d->setParent(this);
+}
+
+GeoDataContainer::GeoDataContainer(const GeoDataContainer& other, GeoDataContainerPrivate *priv)
+    : GeoDataFeature(other, priv)
+{
+    Q_D(GeoDataContainer);
+    d->setParent(this);
 }
 
 GeoDataContainer::GeoDataContainer( const GeoDataContainer& other )
-    : GeoDataFeature( other )
+    : GeoDataFeature(other, new GeoDataContainerPrivate(*other.d_func()))
 {
+    Q_D(GeoDataContainer);
+    d->setParent(this);
 }
 
 GeoDataContainer::~GeoDataContainer()
 {
+}
+
+GeoDataContainer& GeoDataContainer::operator=(const GeoDataContainer& other)
+{
+    if (this != &other) {
+        Q_D(GeoDataContainer);
+        *d = *other.d_func();
+    }
+
+    return *this;
 }
 
 bool GeoDataContainer::equals( const GeoDataContainer &other ) const
@@ -149,6 +170,11 @@ bool GeoDataContainer::equals( const GeoDataContainer &other ) const
     return thisBegin == thisEnd && otherBegin == otherEnd;
 }
 
+GeoDataFeature * GeoDataContainer::clone() const
+{
+    return new GeoDataContainer(*this);
+}
+
 GeoDataLatLonAltBox GeoDataContainer::latLonAltBox() const
 {
     Q_D(const GeoDataContainer);
@@ -228,8 +254,6 @@ QVector<GeoDataFeature*> GeoDataContainer::featureList() const
  */
 GeoDataFeature* GeoDataContainer::child( int i )
 {
-    detach();
-
     Q_D(GeoDataContainer);
     return d->m_vector.at(i);
 }
@@ -262,8 +286,6 @@ void GeoDataContainer::insert( GeoDataFeature *other, int index )
 
 void GeoDataContainer::insert( int index, GeoDataFeature *feature )
 {
-    detach();
-
     Q_D(GeoDataContainer);
     feature->setParent(this);
     d->m_vector.insert( index, feature );
@@ -271,8 +293,6 @@ void GeoDataContainer::insert( int index, GeoDataFeature *feature )
 
 void GeoDataContainer::append( GeoDataFeature *other )
 {
-    detach();
-
     Q_D(GeoDataContainer);
     other->setParent(this);
     d->m_vector.append( other );
@@ -281,24 +301,18 @@ void GeoDataContainer::append( GeoDataFeature *other )
 
 void GeoDataContainer::remove( int index )
 {
-    detach();
-
     Q_D(GeoDataContainer);
     d->m_vector.remove( index );
 }
 
 void GeoDataContainer::remove(int index, int count)
 {
-    detach();
-
     Q_D(GeoDataContainer);
     d->m_vector.remove( index, count );
 }
 
 int	GeoDataContainer::removeAll(GeoDataFeature *feature)
 {
-    detach();
-
     Q_D(GeoDataContainer);
 #if QT_VERSION >= 0x050400
     return d->m_vector.removeAll(feature);
@@ -323,32 +337,24 @@ int	GeoDataContainer::removeAll(GeoDataFeature *feature)
 
 void GeoDataContainer::removeAt(int index)
 {
-    detach();
-
     Q_D(GeoDataContainer);
     d->m_vector.removeAt( index );
 }
 
 void GeoDataContainer::removeFirst()
 {
-    detach();
-
     Q_D(GeoDataContainer);
     d->m_vector.removeFirst();
 }
 
 void GeoDataContainer::removeLast()
 {
-    detach();
-
     Q_D(GeoDataContainer);
     d->m_vector.removeLast();
 }
 
 bool GeoDataContainer::removeOne( GeoDataFeature *feature )
 {
-    detach();
-
     Q_D(GeoDataContainer);
 #if QT_VERSION >= 0x050400
     return d->m_vector.removeOne( feature );
@@ -374,8 +380,6 @@ int GeoDataContainer::size() const
 
 GeoDataFeature& GeoDataContainer::at( int pos )
 {
-    detach();
-
     Q_D(GeoDataContainer);
     return *(d->m_vector[pos]);
 }
@@ -388,8 +392,6 @@ const GeoDataFeature& GeoDataContainer::at( int pos ) const
 
 GeoDataFeature& GeoDataContainer::last()
 {
-    detach();
-
     Q_D(GeoDataContainer);
     return *(d->m_vector.last());
 }
@@ -402,8 +404,6 @@ const GeoDataFeature& GeoDataContainer::last() const
 
 GeoDataFeature& GeoDataContainer::first()
 {
-    detach();
-
     Q_D(GeoDataContainer);
     return *(d->m_vector.first());
 }
@@ -416,8 +416,6 @@ const GeoDataFeature& GeoDataContainer::first() const
 
 void GeoDataContainer::clear()
 {
-    GeoDataContainer::detach();
-
     Q_D(GeoDataContainer);
     qDeleteAll(d->m_vector);
     d->m_vector.clear();
@@ -425,16 +423,12 @@ void GeoDataContainer::clear()
 
 QVector<GeoDataFeature*>::Iterator GeoDataContainer::begin()
 {
-    detach();
-
     Q_D(GeoDataContainer);
     return d->m_vector.begin();
 }
 
 QVector<GeoDataFeature*>::Iterator GeoDataContainer::end()
 {
-    detach();
-
     Q_D(GeoDataContainer);
     return d->m_vector.end();
 }
@@ -470,8 +464,6 @@ void GeoDataContainer::pack( QDataStream& stream ) const
 
 void GeoDataContainer::unpack( QDataStream& stream )
 {
-    detach();
-
     Q_D(GeoDataContainer);
     GeoDataFeature::unpack( stream );
 

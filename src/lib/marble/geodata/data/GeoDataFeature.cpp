@@ -37,44 +37,44 @@ const QSharedPointer<const GeoDataStyle> GeoDataFeaturePrivate::s_defaultStyle(n
 GeoDataFeature::GeoDataFeature()
     : d_ptr(new GeoDataFeaturePrivate())
 {
-    d_ptr->ref.ref();
 }
 
 GeoDataFeature::GeoDataFeature( const GeoDataFeature& other )
     : GeoDataObject(),
-      d_ptr( other.d_ptr )
+      d_ptr(new GeoDataFeaturePrivate(*other.d_ptr))
 {
-    d_ptr->ref.ref();
 }
 
 GeoDataFeature::GeoDataFeature( const QString& name )
     : d_ptr(new GeoDataFeaturePrivate())
 {
-    d_ptr->ref.ref();
     d_ptr->m_name = name;
 }
 
 GeoDataFeature::GeoDataFeature(GeoDataFeaturePrivate *dd)
-    : d_ptr(dd)
+    : GeoDataObject(),
+      d_ptr(dd)
 {
-    d_ptr->ref.ref();
+}
+
+GeoDataFeature::GeoDataFeature(const GeoDataFeature& other, GeoDataFeaturePrivate *dd)
+    : GeoDataObject(),
+      d_ptr(dd)
+{
+    Q_UNUSED(other);
+    // TODO: some classes pass "other" on and thus get duplicated id, also in operator=. Align behaviour
 }
 
 GeoDataFeature::~GeoDataFeature()
 {
-    if (!d_ptr->ref.deref()) {
-        delete d_ptr;
-    }
+    delete d_ptr;
 }
 
 GeoDataFeature& GeoDataFeature::operator=( const GeoDataFeature& other )
 {
-    if (!d_ptr->ref.deref()) {
-        delete d_ptr;
+    if (this != &other) {
+        *d_ptr = *other.d_ptr;
     }
-
-    d_ptr = other.d_ptr;
-    d_ptr->ref.ref();
 
     return *this;
 }
@@ -119,6 +119,11 @@ bool GeoDataFeature::equals( const GeoDataFeature &other ) const
     return true;
 }
 
+GeoDataFeature * GeoDataFeature::clone() const
+{
+    return new GeoDataFeature(*this);
+}
+
 const char* GeoDataFeature::nodeType() const
 {
     Q_D(const GeoDataFeature);
@@ -139,8 +144,6 @@ QString GeoDataFeature::name() const
 
 void GeoDataFeature::setName( const QString &value )
 {
-    detach();
-
     Q_D(GeoDataFeature);
     d->m_name = value;
 }
@@ -153,8 +156,6 @@ GeoDataSnippet GeoDataFeature::snippet() const
 
 void GeoDataFeature::setSnippet( const GeoDataSnippet &snippet )
 {
-    detach();
-
     Q_D(GeoDataFeature);
     d->featureExtendedData().m_snippet = snippet;
 }
@@ -171,13 +172,11 @@ QString GeoDataFeature::address() const
 
 void GeoDataFeature::setAddress( const QString &value)
 {
-    if (value.isEmpty() && !d_func()->m_featureExtendedData) {
+    Q_D(GeoDataFeature);
+    if (value.isEmpty() && !d->m_featureExtendedData) {
         return; // nothing to change
     }
 
-    detach();
-
-    Q_D(GeoDataFeature);
     d->featureExtendedData().m_address = value;
 }
 
@@ -193,13 +192,11 @@ QString GeoDataFeature::phoneNumber() const
 
 void GeoDataFeature::setPhoneNumber( const QString &value)
 {
-    if (value.isEmpty() && !d_func()->m_featureExtendedData) {
+    Q_D(GeoDataFeature);
+    if (value.isEmpty() && !d->m_featureExtendedData) {
         return; // nothing to change
     }
 
-    detach();
-
-    Q_D(GeoDataFeature);
     d->featureExtendedData().m_phoneNumber = value;
 }
 
@@ -215,13 +212,11 @@ QString GeoDataFeature::description() const
 
 void GeoDataFeature::setDescription( const QString &value)
 {
-    if (value.isEmpty() && !d_func()->m_featureExtendedData) {
+    Q_D(GeoDataFeature);
+    if (value.isEmpty() && !d->m_featureExtendedData) {
         return; // nothing to change
     }
 
-    detach();
-
-    Q_D(GeoDataFeature);
     d->featureExtendedData().m_description = value;
 }
 
@@ -237,8 +232,6 @@ bool GeoDataFeature::descriptionIsCDATA() const
 
 void GeoDataFeature::setDescriptionCDATA( bool cdata )
 {
-    detach();
-
     Q_D(GeoDataFeature);
     d->featureExtendedData().m_descriptionCDATA = cdata;
 }
@@ -265,13 +258,11 @@ GeoDataAbstractView *GeoDataFeature::abstractView()
 
 void GeoDataFeature::setAbstractView( GeoDataAbstractView *abstractView )
 {
-    if (abstractView == nullptr && !d_func()->m_featureExtendedData) {
+    Q_D(GeoDataFeature);
+    if (abstractView == nullptr && !d->m_featureExtendedData) {
         return; // nothing to change
     }
 
-    detach();
-
-    Q_D(GeoDataFeature);
     d->featureExtendedData().m_abstractView = abstractView;
 }
 
@@ -283,8 +274,6 @@ QString GeoDataFeature::styleUrl() const
 
 void GeoDataFeature::setStyleUrl( const QString &value )
 {
-    detach();
-
     Q_D(GeoDataFeature);
     d->m_styleUrl = value;
 
@@ -323,8 +312,6 @@ bool GeoDataFeature::isVisible() const
 
 void GeoDataFeature::setVisible( bool value )
 {
-    detach();
-
     Q_D(GeoDataFeature);
     d->m_visible = value;
 }
@@ -348,16 +335,12 @@ const GeoDataTimeSpan &GeoDataFeature::timeSpan() const
 
 GeoDataTimeSpan &GeoDataFeature::timeSpan()
 {
-    detach();
-
     Q_D(GeoDataFeature);
     return d->featureExtendedData().m_timeSpan;
 }
 
 void GeoDataFeature::setTimeSpan( const GeoDataTimeSpan &timeSpan )
 {
-    detach();
-
     Q_D(GeoDataFeature);
     d->featureExtendedData().m_timeSpan = timeSpan;
 }
@@ -370,16 +353,12 @@ const GeoDataTimeStamp &GeoDataFeature::timeStamp() const
 
 GeoDataTimeStamp &GeoDataFeature::timeStamp()
 {
-    detach();
-
     Q_D(GeoDataFeature);
     return d->featureExtendedData().m_timeStamp;
 }
 
 void GeoDataFeature::setTimeStamp( const GeoDataTimeStamp &timeStamp )
 {
-    detach();
-
     Q_D(GeoDataFeature);
     d->featureExtendedData().m_timeStamp = timeStamp;
 }
@@ -408,8 +387,6 @@ GeoDataStyle::ConstPtr GeoDataFeature::customStyle() const
 
 void GeoDataFeature::setStyle( const GeoDataStyle::Ptr &style )
 {
-    detach();
-
     Q_D(GeoDataFeature);
     if (style)
         style->setParent( this );
@@ -418,16 +395,12 @@ void GeoDataFeature::setStyle( const GeoDataStyle::Ptr &style )
 
 GeoDataExtendedData& GeoDataFeature::extendedData()
 {
-    detach();
-
     Q_D(GeoDataFeature);
     return d->m_extendedData;
 }
 
 void GeoDataFeature::setExtendedData( const GeoDataExtendedData& extendedData )
 {
-    detach();
-
     Q_D(GeoDataFeature);
     d->m_extendedData = extendedData;
 }
@@ -440,16 +413,12 @@ const GeoDataRegion& GeoDataFeature::region() const
 
 GeoDataRegion& GeoDataFeature::region()
 {
-    detach();
-
     Q_D(GeoDataFeature);
     return d->featureExtendedData().m_region;
 }
 
 void GeoDataFeature::setRegion( const GeoDataRegion& region )
 {
-    detach();
-
     Q_D(GeoDataFeature);
     d->featureExtendedData().m_region = region;
 }
@@ -462,8 +431,6 @@ const QString GeoDataFeature::role() const
 
 void GeoDataFeature::setRole( const QString &role )
 {
-    detach();
-
     Q_D(GeoDataFeature);
     d->m_role = role;
 }
@@ -476,8 +443,6 @@ const GeoDataStyleMap* GeoDataFeature::styleMap() const
 
 void GeoDataFeature::setStyleMap( const GeoDataStyleMap* styleMap )
 {
-    detach();
-
     Q_D(GeoDataFeature);
     d->m_styleMap = styleMap;
 }
@@ -490,8 +455,6 @@ int GeoDataFeature::zoomLevel() const
 
 void GeoDataFeature::setZoomLevel( int zoomLevel )
 {
-    detach();
-
     Q_D(GeoDataFeature);
     d->m_zoomLevel = zoomLevel;
 }
@@ -504,27 +467,8 @@ qint64 GeoDataFeature::popularity() const
 
 void GeoDataFeature::setPopularity( qint64 popularity )
 {
-    detach();
-
     Q_D(GeoDataFeature);
     d->m_popularity = popularity;
-}
-
-void GeoDataFeature::detach()
-{
-    if (d_ptr->ref.load() == 1) {
-        return;
-    }
-
-    GeoDataFeaturePrivate* new_d = d_ptr->copy();
-
-    if (!d_ptr->ref.deref()) {
-        delete d_ptr;
-    }
-
-    d_ptr = new_d;
-
-    d_ptr->ref.ref();
 }
 
 void GeoDataFeature::pack( QDataStream& stream ) const
@@ -546,8 +490,6 @@ void GeoDataFeature::pack( QDataStream& stream ) const
 
 void GeoDataFeature::unpack( QDataStream& stream )
 {
-    detach();
-
     Q_D(GeoDataFeature);
     GeoDataObject::unpack( stream );
 

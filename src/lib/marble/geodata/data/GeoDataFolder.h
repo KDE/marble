@@ -53,8 +53,12 @@ class GEODATA_EXPORT GeoDataFolder : public GeoDataContainer
     GeoDataFolder( const GeoDataFolder& other );
     ~GeoDataFolder();
 
+    GeoDataFolder& operator=(const GeoDataFolder& other);
+
     bool operator==( const GeoDataFolder &other ) const;
     bool operator!=( const GeoDataFolder &other ) const;
+
+    GeoDataFeature * clone() const override;
 
  private:
     Q_DECLARE_PRIVATE(GeoDataFolder)

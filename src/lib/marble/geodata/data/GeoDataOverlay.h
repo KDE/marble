@@ -37,6 +37,8 @@ class GEODATA_EXPORT GeoDataOverlay: public GeoDataFeature
 
     GeoDataOverlay& operator=( const GeoDataOverlay &other );
 
+    GeoDataFeature * clone() const override;
+
     QColor color() const;
 
     void setColor( const QColor &color );
@@ -60,12 +62,15 @@ class GEODATA_EXPORT GeoDataOverlay: public GeoDataFeature
       */
     QString absoluteIconFile() const;
 
-private:
-    GeoDataOverlayPrivate * const d;
-
 protected:
+    explicit GeoDataOverlay(GeoDataOverlayPrivate *priv);
+    GeoDataOverlay(const GeoDataOverlay& other, GeoDataOverlayPrivate *priv);
+
     bool equals(const GeoDataOverlay &other) const;
     using GeoDataFeature::equals;
+
+ private:
+    Q_DECLARE_PRIVATE(GeoDataOverlay)
 };
 
 }

@@ -28,10 +28,13 @@ public:
 
     GeoDataScreenOverlay( const GeoDataScreenOverlay &other );
 
+    ~GeoDataScreenOverlay();
+
     GeoDataScreenOverlay& operator=( const GeoDataScreenOverlay &other );
     bool operator==( const GeoDataScreenOverlay &other ) const;
     bool operator!=( const GeoDataScreenOverlay &other ) const;
-    ~GeoDataScreenOverlay();
+
+    GeoDataFeature * clone() const override;
 
     /** Provides type information for downcasting a GeoNode */
     virtual const char* nodeType() const;
@@ -56,7 +59,7 @@ public:
     void setRotation( qreal rotation );
 
 private:
-    GeoDataScreenOverlayPrivate* const d;
+    Q_DECLARE_PRIVATE(GeoDataScreenOverlay)
 };
 
 }

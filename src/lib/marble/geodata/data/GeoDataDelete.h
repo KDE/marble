@@ -28,18 +28,20 @@ public:
 
     GeoDataDelete( const GeoDataDelete &other );
 
+    ~GeoDataDelete();
+
     GeoDataDelete& operator=( const GeoDataDelete &other );
 
     bool operator==( const GeoDataDelete &other ) const;
     bool operator!=( const GeoDataDelete &other ) const;
 
-    ~GeoDataDelete();
+    GeoDataFeature * clone() const override;
 
     /** Provides type information for downcasting a GeoNode */
     virtual const char* nodeType() const;
 
 private:
-    GeoDataDeletePrivate* const d;
+    Q_DECLARE_PRIVATE(GeoDataDelete)
 };
 
 }

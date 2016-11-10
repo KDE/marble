@@ -81,6 +81,8 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     bool operator==( const GeoDataPlacemark& other ) const;
     bool operator!=( const GeoDataPlacemark& other ) const;
 
+    GeoDataFeature * clone() const override;
+
     /**
      * @brief  A categorization of a placemark as defined by ...FIXME.
      * There is an additional osm tag mapping to GeoDataVisualCategory

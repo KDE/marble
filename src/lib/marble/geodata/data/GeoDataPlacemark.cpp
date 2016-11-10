@@ -44,15 +44,14 @@ GeoDataPlacemark::GeoDataPlacemark()
     d->m_geometry->setParent(this);
 }
 
-GeoDataPlacemark::GeoDataPlacemark( const GeoDataPlacemark& other )
-    : GeoDataFeature( other )
-{
-    // FIXME: temporary (until detach() is called) violates following invariant
-    // which could lead to crashes
-//    Q_ASSERT( this == p()->m_geometry->parent() );
 
-    // FIXME: fails as well when "other" is a copy where detach wasn't called
-//    Q_ASSERT( other_d->m_geometry == 0 || &other == other_d->m_geometry->parent() );
+GeoDataPlacemark::GeoDataPlacemark( const GeoDataPlacemark& other )
+    : GeoDataFeature(other, new GeoDataPlacemarkPrivate(*other.d_func()))
+{
+    Q_D(GeoDataPlacemark);
+    if (d->m_geometry) {
+        d->m_geometry->setParent(this);
+    }
 }
 
 GeoDataPlacemark::GeoDataPlacemark( const QString& name )
@@ -70,7 +69,13 @@ GeoDataPlacemark::~GeoDataPlacemark()
 
 GeoDataPlacemark &GeoDataPlacemark::operator=( const GeoDataPlacemark &other )
 {
-    GeoDataFeature::operator=( other );
+    if (this != &other) {
+        Q_D(GeoDataPlacemark);
+        *d = *other.d_func();
+        if (d->m_geometry) {
+            d->m_geometry->setParent(this);
+        }
+    }
 
     return *this;
 }
@@ -171,6 +176,12 @@ bool GeoDataPlacemark::operator!=( const GeoDataPlacemark& other ) const
     return !this->operator==( other );
 }
 
+GeoDataFeature * GeoDataPlacemark::clone() const
+{
+    return new GeoDataPlacemark(*this);
+}
+
+
 GeoDataPlacemark::GeoDataVisualCategory GeoDataPlacemark::visualCategory() const
 {
     Q_D(const GeoDataPlacemark);
@@ -179,18 +190,13 @@ GeoDataPlacemark::GeoDataVisualCategory GeoDataPlacemark::visualCategory() const
 
 void GeoDataPlacemark::setVisualCategory(GeoDataPlacemark::GeoDataVisualCategory index)
 {
-    detach();
-
     Q_D(GeoDataPlacemark);
     d->m_visualCategory = index;
 }
 
 GeoDataGeometry* GeoDataPlacemark::geometry()
 {
-    detach();
-
     Q_D(GeoDataPlacemark);
-    d->m_geometry->setParent(this);
     return d->m_geometry;
 }
 
@@ -237,7 +243,6 @@ bool GeoDataPlacemark::hasOsmData() const
 
 void GeoDataPlacemark::clearOsmData()
 {
-    detach();
     extendedData().removeKey(OsmPlacemarkData::osmHashKey());
 }
 
@@ -327,8 +332,6 @@ void GeoDataPlacemark::setCoordinate( const GeoDataCoordinates &point )
 
 void GeoDataPlacemark::setGeometry( GeoDataGeometry *entry )
 {
-    detach();
-
     Q_D(GeoDataPlacemark);
     delete d->m_geometry;
     d->m_geometry = entry;
@@ -672,10 +675,7 @@ void GeoDataPlacemark::setArea( qreal area )
         return; // nothing to do
     }
 
-    detach();
-
     Q_D(GeoDataPlacemark);
-    d->m_geometry->setParent(this);
     d->placemarkExtendedData().m_area = area;
 }
 
@@ -687,10 +687,7 @@ qint64 GeoDataPlacemark::population() const
 
 void GeoDataPlacemark::setPopulation( qint64 population )
 {
-    detach();
-
     Q_D(GeoDataPlacemark);
-    d->m_geometry->setParent(this);
     d->m_population = population;
 }
 
@@ -706,10 +703,7 @@ void GeoDataPlacemark::setState( const QString &state )
         return; // nothing to do
     }
 
-    detach();
-
     Q_D(GeoDataPlacemark);
-    d->m_geometry->setParent(this);
     d->placemarkExtendedData().m_state = state;
 }
 
@@ -725,10 +719,7 @@ void GeoDataPlacemark::setCountryCode( const QString &countrycode )
         return; // nothing to do
     }
 
-    detach();
-
     Q_D(GeoDataPlacemark);
-    d->m_geometry->setParent(this);
     d->placemarkExtendedData().m_countrycode = countrycode;
 }
 
@@ -744,10 +735,7 @@ void GeoDataPlacemark::setBalloonVisible( bool visible )
         return; // nothing to do
     }
 
-    detach();
-
     Q_D(GeoDataPlacemark);
-    d->m_geometry->setParent(this);
     d->placemarkExtendedData().m_isBalloonVisible = visible;
 }
 
@@ -785,11 +773,7 @@ QXmlStreamWriter& GeoDataPlacemark::operator <<( QXmlStreamWriter& stream ) cons
 
 void GeoDataPlacemark::unpack( QDataStream& stream )
 {
-    detach();
-
     Q_D(GeoDataPlacemark);
-    // TODO: check if this should be done after the switch
-    d->m_geometry->setParent(this);
     GeoDataFeature::unpack( stream );
 
     stream >> d->placemarkExtendedData().m_countrycode;
@@ -797,6 +781,7 @@ void GeoDataPlacemark::unpack( QDataStream& stream )
     stream >> d->m_population;
     int geometryId;
     stream >> geometryId;
+    GeoDataGeometry *geometry = nullptr;
     switch( geometryId ) {
         case InvalidGeometryId:
             break;
@@ -804,46 +789,46 @@ void GeoDataPlacemark::unpack( QDataStream& stream )
             {
             GeoDataPoint* point = new GeoDataPoint;
             point->unpack( stream );
-            delete d->m_geometry;
-            d->m_geometry = point;
+            geometry = point;
             }
             break;
         case GeoDataLineStringId:
             {
             GeoDataLineString* lineString = new GeoDataLineString;
             lineString->unpack( stream );
-            delete d->m_geometry;
-            d->m_geometry = lineString;
+            geometry = lineString;
             }
             break;
         case GeoDataLinearRingId:
             {
             GeoDataLinearRing* linearRing = new GeoDataLinearRing;
             linearRing->unpack( stream );
-            delete d->m_geometry;
-            d->m_geometry = linearRing;
+            geometry = linearRing;
             }
             break;
         case GeoDataPolygonId:
             {
             GeoDataPolygon* polygon = new GeoDataPolygon;
             polygon->unpack( stream );
-            delete d->m_geometry;
-            d->m_geometry = polygon;
+            geometry = polygon;
             }
             break;
         case GeoDataMultiGeometryId:
             {
             GeoDataMultiGeometry* multiGeometry = new GeoDataMultiGeometry;
             multiGeometry->unpack( stream );
-            delete d->m_geometry;
-            d->m_geometry = multiGeometry;
+            geometry = multiGeometry;
             }
             break;
         case GeoDataModelId:
             break;
         default: break;
     };
+    if (geometry) {
+       delete d->m_geometry;
+       d->m_geometry = geometry;
+       d->m_geometry->setParent(this);
+    }
 }
 
 }

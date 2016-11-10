@@ -53,6 +53,9 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
     /// Destruct the GeoDataContainer
     virtual ~GeoDataContainer();
 
+    GeoDataContainer& operator=(const GeoDataContainer& other);
+
+    GeoDataFeature * clone() const override;
 
     /**
      * @brief A convenience function that returns the LatLonAltBox of all
@@ -168,7 +171,8 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
     virtual void unpack( QDataStream& stream );
 
  protected:
-    explicit GeoDataContainer( GeoDataContainerPrivate *priv );
+    explicit GeoDataContainer(GeoDataContainerPrivate *priv);
+    GeoDataContainer(const GeoDataContainer& other, GeoDataContainerPrivate *priv);
 
     bool equals( const GeoDataContainer &other ) const;
     using GeoDataFeature::equals;

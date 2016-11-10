@@ -27,10 +27,15 @@ class GEODATA_EXPORT GeoDataTour : public GeoDataFeature
 {
 public:
     GeoDataTour();
+    GeoDataTour(const GeoDataTour& other);
     virtual ~GeoDataTour();
+
+    GeoDataTour& operator=(const GeoDataTour& other);
 
     bool operator==(const GeoDataTour &other) const;
     bool operator!=(const GeoDataTour &other) const;
+
+    GeoDataFeature * clone() const override;
 
     GeoDataPlaylist* playlist();
     const GeoDataPlaylist* playlist() const;
