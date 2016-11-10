@@ -123,14 +123,19 @@ void GeoLineStringGraphicsItem::paint(GeoPainter* painter, const ViewportParams*
     setRenderContext(RenderContext(tileLevel));
 
     if (layer.endsWith(QLatin1String("/outline"))) {
+        qDeleteAll(m_cachedPolygons);
         m_cachedPolygons.clear();
         painter->polygonsFromLineString(*m_renderLineString, m_cachedPolygons);
-        if (m_cachedPolygons.empty()) return;
+        if (m_cachedPolygons.empty()) {
+            return;
+        }
         if (painter->mapQuality() == HighQuality || painter->mapQuality() == PrintQuality) {
             paintOutline(painter, viewport, m_cachedPolygons);
         }
     } else if (layer.endsWith(QLatin1String("/inline"))) {
-        if (m_cachedPolygons.empty()) return;
+        if (m_cachedPolygons.empty()) {
+            return;
+        }
         paintInline(painter, viewport, m_cachedPolygons);
     } else if (layer.endsWith(QLatin1String("/label"))) {
         if (!m_cachedPolygons.empty()) {
@@ -139,14 +144,19 @@ void GeoLineStringGraphicsItem::paint(GeoPainter* painter, const ViewportParams*
             }
         }
         qDeleteAll(m_cachedPolygons);
+        m_cachedPolygons.clear();
     } else {
+        qDeleteAll(m_cachedPolygons);
         m_cachedPolygons.clear();
         painter->polygonsFromLineString(*m_renderLineString, m_cachedPolygons);
-        if (m_cachedPolygons.empty()) return;
+        if (m_cachedPolygons.empty()) {
+            return;
+        }
         foreach(const QPolygonF* itPolygon, m_cachedPolygons) {
             painter->drawPolyline(*itPolygon);
         }
         qDeleteAll(m_cachedPolygons);
+        m_cachedPolygons.clear();
     }
 }
 
