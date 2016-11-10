@@ -208,8 +208,8 @@ QVector<BuildingGeoPolygonGraphicsItem::NamedEntry> BuildingGeoPolygonGraphicsIt
 void BuildingGeoPolygonGraphicsItem::paint(GeoPainter* painter, const ViewportParams* viewport, const QString &layer)
 {
     if (layer.endsWith(QLatin1String("/frame"))) {
-        Q_ASSERT(!m_cachedOutlinePolygons.isEmpty());
-        Q_ASSERT(!m_cachedInnerPolygons.isEmpty());
+        Q_ASSERT(m_cachedOutlinePolygons.isEmpty());
+        Q_ASSERT(m_cachedInnerPolygons.isEmpty());
         updatePolygons(viewport, m_cachedOutlinePolygons, m_cachedInnerPolygons, m_hasInnerBoundaries);
         if (m_cachedOutlinePolygons.isEmpty()) {
             return;
