@@ -37,9 +37,9 @@ public:
     void paint(GeoPainter* painter, const ViewportParams *viewport, const QString &layer);
 
 private:
-    void paintOutline(GeoPainter *painter, const ViewportParams *viewport, const QVector<QPolygonF*> &polygons);
-    void paintInline(GeoPainter *painter, const ViewportParams *viewport, const QVector<QPolygonF*> &polygons);
-    void paintLabel(GeoPainter *painter, const ViewportParams *viewport, const QVector<QPolygonF*> &polygons);
+    void paintOutline(GeoPainter *painter, const ViewportParams *viewport);
+    void paintInline(GeoPainter *painter, const ViewportParams *viewport);
+    void paintLabel(GeoPainter *painter, const ViewportParams *viewport);
     QPen configurePainter(GeoPainter* painter, const ViewportParams *viewport, LabelPositionFlags &labelPositionFlags) const;
     static bool canMerge(const GeoDataCoordinates &a, const GeoDataCoordinates &b);
 

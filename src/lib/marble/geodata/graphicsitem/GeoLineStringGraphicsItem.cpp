@@ -132,17 +132,17 @@ void GeoLineStringGraphicsItem::paint(GeoPainter* painter, const ViewportParams*
             return;
         }
         if (painter->mapQuality() == HighQuality || painter->mapQuality() == PrintQuality) {
-            paintOutline(painter, viewport, m_cachedPolygons);
+            paintOutline(painter, viewport);
         }
     } else if (layer.endsWith(QLatin1String("/inline"))) {
         if (m_cachedPolygons.empty()) {
             return;
         }
-        paintInline(painter, viewport, m_cachedPolygons);
+        paintInline(painter, viewport);
     } else if (layer.endsWith(QLatin1String("/label"))) {
         if (!m_cachedPolygons.empty()) {
             if (m_renderLabel) {
-                paintLabel(painter, viewport, m_cachedPolygons);
+                paintLabel(painter, viewport);
             }
         }
         qDeleteAll(m_cachedPolygons);
@@ -162,7 +162,7 @@ void GeoLineStringGraphicsItem::paint(GeoPainter* painter, const ViewportParams*
     }
 }
 
-void GeoLineStringGraphicsItem::paintInline(GeoPainter* painter, const ViewportParams* viewport, const QVector<QPolygonF*> &polygons)
+void GeoLineStringGraphicsItem::paintInline(GeoPainter* painter, const ViewportParams* viewport)
 {
     if ( ( !viewport->resolves( m_renderLineString->latLonAltBox(), 2) ) ) {
         return;
@@ -182,14 +182,14 @@ void GeoLineStringGraphicsItem::paintInline(GeoPainter* painter, const ViewportP
         currentPen.setColor(style->polyStyle().paintedColor());
         painter->setPen( currentPen );
     }
-    foreach(const QPolygonF* itPolygon, polygons) {
+    foreach(const QPolygonF* itPolygon, m_cachedPolygons) {
         painter->drawPolyline(*itPolygon);
     }
 
     painter->restore();
 }
 
-void GeoLineStringGraphicsItem::paintOutline(GeoPainter *painter, const ViewportParams *viewport, const QVector<QPolygonF*> &polygons)
+void GeoLineStringGraphicsItem::paintOutline(GeoPainter *painter, const ViewportParams *viewport)
 {
     if ( ( !viewport->resolves( m_renderLineString->latLonAltBox(), 2) ) ) {
         return;
@@ -201,14 +201,14 @@ void GeoLineStringGraphicsItem::paintOutline(GeoPainter *painter, const Viewport
     m_renderLabel = !( currentPen.widthF() < 8.0f );
 
     if (!( currentPen.widthF() < 2.5f )) {
-        foreach(const QPolygonF* itPolygon, polygons) {
+        foreach(const QPolygonF* itPolygon, m_cachedPolygons) {
             painter->drawPolyline(*itPolygon);
         }
     }
     painter->restore();
 }
 
-void GeoLineStringGraphicsItem::paintLabel(GeoPainter *painter, const ViewportParams *viewport, const QVector<QPolygonF*> &polygons)
+void GeoLineStringGraphicsItem::paintLabel(GeoPainter *painter, const ViewportParams *viewport)
 {
     if ( ( !viewport->resolves( m_renderLineString->latLonAltBox(), 2) ) ) {
         return;
@@ -228,7 +228,7 @@ void GeoLineStringGraphicsItem::paintLabel(GeoPainter *painter, const ViewportPa
     //painter->setBackground(QBrush(color));
     //painter->setBackgroundMode(Qt::OpaqueMode);
 
-    painter->drawLabelsForPolygons(polygons, feature()->name(), FollowLine,
+    painter->drawLabelsForPolygons(m_cachedPolygons, feature()->name(), FollowLine,
                            labelStyle.paintedColor());
 
     painter->restore();
