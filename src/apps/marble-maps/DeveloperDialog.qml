@@ -28,10 +28,12 @@ Item {
         id: settings
 
         Component.onDestruction: {
+            settings.setValue("Developer", "inertialGlobeRotation", marbleMaps.inertialGlobeRotation)
             settings.setValue("Developer", "positionProvider", marbleMaps.currentPositionProvider)
             settings.setValue("Developer", "runtimeTrace", runtimeTrace.checked ? "true" : "false")
             settings.setValue("Developer", "debugPlacemarks", debugPlacemarks.checked ? "true" : "false")
             settings.setValue("Developer", "debugPolygons", debugPolygons.checked ? "true" : "false")
+            settings.setValue("Developer", "debugBatches", debugBatches.checked ? "true" : "false")
         }
     }
 
@@ -57,6 +59,12 @@ Item {
 
             Text {
                 text: "Developer Tools"
+            }
+
+            CheckBox {
+                text: "Inertial Rotation"
+                checked: settings.value("Developer", "inertialGlobeRotation") === "true"
+                onCheckedChanged: marbleMaps.inertialGlobeRotation = checked
             }
 
             CheckBox {
@@ -89,6 +97,13 @@ Item {
                 text: "Polygons"
                 checked: settings.value("Developer", "debugPolygons") === "true"
                 onCheckedChanged: marbleMaps.setShowDebugPolygons(checked)
+            }
+
+            CheckBox {
+                id: debugBatches
+                text: "Batches"
+                checked: settings.value("Developer", "debugBatches") === "true"
+                onCheckedChanged: marbleMaps.setShowDebugBatches(checked)
             }
         }
     }

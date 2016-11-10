@@ -900,6 +900,12 @@ namespace Marble
         update();
     }
 
+    void MarbleQuickItem::setShowDebugBatches(bool showDebugBatches)
+    {
+        d->m_map.setShowDebugBatchRender(showDebugBatches);
+        update();
+    }
+
     void MarbleQuickItem::setPlacemarkDelegate(QQmlComponent *placemarkDelegate)
     {
         if (d->m_placemarkDelegate == placemarkDelegate) {
