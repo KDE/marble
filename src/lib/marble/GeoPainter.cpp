@@ -599,6 +599,9 @@ void GeoPainter::drawLabelsForPolygons( const QVector<QPolygonF*> &polygons,
                                         LabelPositionFlags labelPositionFlags,
                                         const QColor& labelColor )
 {
+    if (labelText.isEmpty()) {
+        return;
+    }
     QPen const oldPen = pen();
 
     if (labelPositionFlags.testFlag(FollowLine)) {

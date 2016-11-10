@@ -38,7 +38,9 @@ GeoLineStringGraphicsItem::GeoLineStringGraphicsItem(const GeoDataPlacemark *pla
     QStringList paintLayers;
     paintLayers << QLatin1String("LineString/") + category + QLatin1String("/outline");
     paintLayers << QLatin1String("LineString/") + category + QLatin1String("/inline");
-    paintLayers << QLatin1String("LineString/") + category + QLatin1String("/label");
+    if (!feature()->name().isEmpty()) {
+        paintLayers << QLatin1String("LineString/") + category + QLatin1String("/label");
+    }
     setPaintLayers(paintLayers);
 }
 
