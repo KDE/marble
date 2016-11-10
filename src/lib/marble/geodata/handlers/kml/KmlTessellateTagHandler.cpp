@@ -29,7 +29,6 @@
 #include "GeoDataPolygon.h"
 #include "GeoDataGeometry.h"
 #include "GeoDataPoint.h"
-#include "GeoDataPlacemark.h"
 
 #include "GeoParser.h"
 

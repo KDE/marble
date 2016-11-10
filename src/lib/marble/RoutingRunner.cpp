@@ -9,12 +9,12 @@
 
 #include "RoutingRunner.h"
 
-#include "GeoDataPlacemark.h"
 #include "GeoDataExtendedData.h"
 #include "GeoDataData.h"
 #include "MarbleGlobal.h"
 #include "MarbleLocale.h"
 
+#include <QTime>
 #include <QString>
 #include <QVariant>
 

@@ -12,7 +12,6 @@
 
 #include "GeoDataTypes.h"
 #include "GeoDataDocument.h"
-#include "GeoDataPlacemark.h"
 #include "GeoDataLineString.h"
 #include "GeoDataLinearRing.h"
 #include "GeoDataPolygon.h"

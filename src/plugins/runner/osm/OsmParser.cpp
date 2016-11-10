@@ -15,7 +15,6 @@
 #include "OsmElementDictionary.h"
 #include "osm/OsmObjectManager.h"
 #include "GeoDataDocument.h"
-#include "GeoDataPlacemark.h"
 #include "GeoDataPoint.h"
 #include "GeoDataTypes.h"
 #include "GeoDataStyle.h"

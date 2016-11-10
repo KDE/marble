@@ -14,7 +14,6 @@
 
 #include "MarbleDebug.h"
 #include "GeoDataDocument.h"
-#include "GeoDataPlacemark.h"
 #include "PluginManager.h"
 #include "ParseRunnerPlugin.h"
 #include "RunnerTask.h"

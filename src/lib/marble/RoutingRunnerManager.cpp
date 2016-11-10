@@ -18,7 +18,6 @@
 #include "MarbleMath.h"
 #include "Planet.h"
 #include "GeoDataDocument.h"
-#include "GeoDataPlacemark.h"
 #include "PluginManager.h"
 #include "RoutingRunnerPlugin.h"
 #include "RunnerTask.h"

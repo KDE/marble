@@ -11,7 +11,6 @@
 #include "ConflictDialog.h"
 
 #include "MergeItem.h"
-#include "GeoDataPlacemark.h"
 
 #include <QLabel>
 #include <QDialogButtonBox>

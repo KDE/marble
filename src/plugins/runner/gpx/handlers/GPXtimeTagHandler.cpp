@@ -15,9 +15,10 @@
 #include "GPXElementDictionary.h"
 #include "GeoParser.h"
 #include "GeoDataDocument.h"
-#include "GeoDataPlacemark.h"
 #include "GeoDataPoint.h"
 #include "GeoDataTrack.h"
+
+#include <QDateTime>
 
 namespace Marble
 {

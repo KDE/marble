@@ -12,7 +12,6 @@
 #include "osm/OsmPlacemarkData.h"
 
 // Marble
-#include "GeoDataPlacemark.h"
 #include "GeoDataExtendedData.h"
 
 #include <QXmlStreamAttributes>

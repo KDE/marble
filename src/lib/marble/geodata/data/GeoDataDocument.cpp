@@ -24,7 +24,6 @@
 #include "GeoDataDocument_p.h"
 
 #include "GeoDataFolder.h"
-#include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
 #include "GeoDataStyleMap.h"
 #include "GeoDataNetworkLinkControl.h"

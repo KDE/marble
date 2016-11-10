@@ -15,7 +15,6 @@
 #include "GeoDataLookAt.h"
 #include "GeoParser.h"
 #include "GeoDataContainer.h"
-#include "GeoDataPlacemark.h"
 #include "GeoDataFlyTo.h"
 
 namespace Marble

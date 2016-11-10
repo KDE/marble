@@ -17,7 +17,6 @@
 #include "OsmElementDictionary.h"
 #include "GeoDataDocument.h"
 #include "GeoWriter.h"
-#include "GeoDataPlacemark.h"
 #include "GeoDataGeometry.h"
 #include "GeoDataPoint.h"
 #include "GeoDataPolygon.h"

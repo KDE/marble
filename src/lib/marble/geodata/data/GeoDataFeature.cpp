@@ -25,7 +25,6 @@
 #include "GeoDataContainer.h"
 #include "GeoDataDocument.h"
 #include "GeoDataFolder.h"
-#include "GeoDataPlacemark.h"
 #include "GeoDataRegion.h"
 #include "GeoDataCamera.h"
 
