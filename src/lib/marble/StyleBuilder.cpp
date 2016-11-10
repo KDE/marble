@@ -1495,6 +1495,10 @@ QStringList StyleBuilder::renderOrder() const
         paintLayerOrder << Private::createPaintLayerItem("LineString", GeoDataPlacemark::NaturalReef, "inline");
         paintLayerOrder << Private::createPaintLayerItem("LineString", GeoDataPlacemark::NaturalReef, "label");
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::LeisureMarina);
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::ManmadePier);
+        paintLayerOrder << Private::createPaintLayerItem("LineString", GeoDataPlacemark::ManmadePier, "outline");
+        paintLayerOrder << Private::createPaintLayerItem("LineString", GeoDataPlacemark::ManmadePier, "inline");
+        paintLayerOrder << Private::createPaintLayerItem("LineString", GeoDataPlacemark::ManmadePier, "label");
 
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::TransportAirportApron);
 
