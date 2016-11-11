@@ -68,7 +68,6 @@ Routing::Routing( QQuickItem *parent) :
     connect(d->m_routeRequestModel, SIGNAL(rowsRemoved(QModelIndex,int,int)), this, SLOT(updateWaypointItems()));
 
     emit routeRequestModelChanged(d->m_routeRequestModel);
-    update();
 }
 
 Routing::~Routing()
@@ -85,14 +84,14 @@ QSGNode * Routing::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *) {
     Marble::GeoPainter geoPainter(&paintDevice, d->m_marbleMap->viewport(), d->m_marbleMap->mapQuality());
 
     RoutingManager const * const routingManager = d->m_marbleMap->model()->routingManager();
-    GeoDataLineString const waypoints = routingManager->routingModel()->route().path();
+    GeoDataLineString const & waypoints = routingManager->routingModel()->route().path();
 
     if (waypoints.isEmpty()) {
       return 0;
     }
 
     int const dpi = qMax(paintDevice.logicalDpiX(), paintDevice.logicalDpiY());
-    qreal const width = 2.5 * MM2M * M2IN * dpi - 4;
+    qreal const width = 2.5 * MM2M * M2IN * dpi;
 
     QColor standardRouteColor = routingManager->state() == RoutingManager::Downloading ?
                                 routingManager->routeColorStandard() :

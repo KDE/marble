@@ -12,21 +12,28 @@
 import QtQuick 2.3
 import QtQuick.Window 2.2
 
-Rectangle {
+Item {
     id: root
 
     property alias angle: rotation.angle
     property int posX: 0
     property int posY: 0
+    property bool showAccuracy: true
+    property real radius: 100
 
     x: posX - width * 0.5
     y: posY - height * 0.5
 
     width: radius
     height: radius
-    color: "#40ff0000"
-    border.color: "#ff0000"
-    border.width: 2
+
+    Rectangle {
+      anchors.fill: parent
+      color: "#40ff0000"
+      border.color: "#ff0000"
+      border.width: 2
+      radius: root.radius
+    }
 
     Image {
         id: image

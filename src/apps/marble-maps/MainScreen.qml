@@ -129,8 +129,7 @@ ApplicationWindow {
                     angle: marbleMaps.angle
                     visible: marbleMaps.positionAvailable && marbleMaps.positionVisible
                     radius: navigationManager.screenAccuracy
-                    color: navigationManager.deviated ? "#40ff0000" : "transparent"
-                    border.color: navigationManager.deviated ? "red" : "transparent"
+                    showAccuracy: navigationManager.deviated
                 }
 
                 MouseArea {
