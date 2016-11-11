@@ -4641,6 +4641,11 @@ Marble::GeoDataCoordinates IntPoint::coordinates() const
     return coords;
 }
 
+bool IntPoint::isInside(const cInt &minX, const cInt &maxX, const cInt &minY, const cInt &maxY) const
+{
+    return X > minX && X < maxX && Y > minY && Y < maxY;
+}
+
 //------------------------------------------------------------------------------
 
 } //ClipperLib namespace

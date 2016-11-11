@@ -41,6 +41,8 @@ private:
     QVector<GeoDataPlacemark*> potentialIntersections(const GeoDataLatLonBox &box) const;
     ClipperLib::Path clipPath(const GeoDataLatLonBox &box, int zoomLevel) const;
     qreal area(const GeoDataLinearRing &ring);
+    void setBorderPoints(OsmPlacemarkData &osmData, const QVector<int> &borderPoints, int length) const;
+    void getBounds(const ClipperLib::Path &path, ClipperLib::cInt &minX, ClipperLib::cInt &maxX, ClipperLib::cInt &minY, ClipperLib::cInt &maxY) const;
 
     template<class T>
     void clipString(const GeoDataPlacemark *placemark, const ClipperLib::Path &tileBoundary, qreal minArea, GeoDataDocument* document)
@@ -56,6 +58,8 @@ private:
         foreach(auto const & node, *ring) {
             subject << IntPoint(&node);
         }
+        cInt minX, maxX, minY, maxY;
+        getBounds(tileBoundary, minX, maxX, minY, maxY);
 
         Clipper clipper;
         clipper.PreserveCollinear(true);
@@ -72,6 +76,8 @@ private:
         foreach(const auto &path, paths) {
             GeoDataPlacemark* newPlacemark = new GeoDataPlacemark();
             T* newRing = new T;
+            QVector<int> borderPoints;
+            int index = 0;
             foreach(const auto &point, path) {
                 GeoDataCoordinates const coordinates = point.coordinates();
                 *newRing << coordinates;
@@ -79,11 +85,16 @@ private:
                 if (originalOsmData.id() > 0) {
                     newPlacemark->osmData().addNodeReference(coordinates, originalOsmData);
                 }
+                if (isClosed && !point.isInside(minX, maxX, minY, maxY)) {
+                    borderPoints << index;
+                }
+                ++index;
             }
 
             newPlacemark->setGeometry(newRing);
             newPlacemark->osmData().setId(placemark->osmData().id());
             copyTags(*placemark, *newPlacemark);
+            setBorderPoints(newPlacemark->osmData(), borderPoints, newRing->size());
             OsmObjectManager::initializeOsmData(newPlacemark);
             document->append(newPlacemark);
         }

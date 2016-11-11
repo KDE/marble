@@ -106,6 +106,7 @@ struct IntPoint {
   }
 
   Marble::GeoDataCoordinates coordinates() const;
+  bool isInside(const cInt &minX, const cInt &maxX, const cInt &minY, const cInt &maxY) const;
 
 private:
   const Marble::GeoDataCoordinates * m_coordinates = nullptr;
