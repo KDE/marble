@@ -58,6 +58,7 @@ RoutingPrivate::RoutingPrivate(QObject *parent) :
 Routing::Routing( QQuickItem *parent) :
     QQuickPaintedItem( parent ), d( new RoutingPrivate(this) )
 {
+    setRenderTarget(QQuickPaintedItem::FramebufferObject);
     d->m_routeRequestModel->setRouting(this);
     connect(d->m_routeRequestModel, SIGNAL(rowsInserted(QModelIndex,int,int)), this, SLOT(updateWaypointItems()));
     connect(d->m_routeRequestModel, SIGNAL(rowsMoved(QModelIndex,int,int,QModelIndex,int)), this, SLOT(updateWaypointItems()));

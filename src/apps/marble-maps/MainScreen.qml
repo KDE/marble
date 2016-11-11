@@ -119,6 +119,7 @@ ApplicationWindow {
                     anchors.fill: parent
                     marbleItem: marbleMaps
                     routingProfile: routeEditor.routingProfile
+                    visible: routeEditor.visible
                 }
 
                 PositionMarker {
