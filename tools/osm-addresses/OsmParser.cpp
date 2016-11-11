@@ -16,13 +16,11 @@
 #include "GeoDataLineString.h"
 #include "GeoDataPolygon.h"
 #include "GeoDataDocument.h"
-#include "GeoDataFolder.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataMultiGeometry.h"
 #include "GeoDataStyle.h"
 #include "GeoDataStyleMap.h"
 #include "GeoDataLineStyle.h"
-#include "GeoDataFeature.h"
 #include "geodata/writer/GeoDataDocumentWriter.h"
 #include <GeoDataExtendedData.h>
 #include <GeoDataData.h>

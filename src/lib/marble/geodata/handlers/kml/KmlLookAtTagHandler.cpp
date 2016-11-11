@@ -14,7 +14,7 @@
 #include "KmlElementDictionary.h"
 #include "GeoDataLookAt.h"
 #include "GeoParser.h"
-#include "GeoDataContainer.h"
+#include "GeoDataFeature.h"
 #include "GeoDataFlyTo.h"
 
 namespace Marble

@@ -11,8 +11,6 @@
 #include "GeoDataOverlay.h"
 #include "GeoDataOverlay_p.h"
 
-#include "GeoDataDocument.h"
-
 namespace Marble {
 
 GeoDataOverlay::GeoDataOverlay()

@@ -16,7 +16,6 @@
 #include "RemoveItemEditWidget.h"
 #include "MarbleWidget.h"
 #include "geodata/data/GeoDataAnimatedUpdate.h"
-#include "geodata/data/GeoDataFeature.h"
 #include "GeoDataTypes.h"
 #include "GeoDataUpdate.h"
 #include "GeoDataDelete.h"

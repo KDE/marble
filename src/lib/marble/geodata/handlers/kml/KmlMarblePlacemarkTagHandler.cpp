@@ -29,7 +29,6 @@
 #include "GeoParser.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataContainer.h"
-#include "GeoDataDocument.h"
 
 namespace Marble
 {

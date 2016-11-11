@@ -12,7 +12,6 @@
 
 #include "TestUtils.h"
 #include <GeoDataDocument.h>
-#include <GeoDataFolder.h>
 #include <MarbleDebug.h>
 #include <GeoDataGroundOverlay.h>
 #include <GeoDataLatLonQuad.h>

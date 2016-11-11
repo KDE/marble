@@ -18,7 +18,6 @@
 #include "geodata/data/GeoDataLineString.h"
 #include "geodata/data/GeoDataLinearRing.h"
 #include "geodata/data/GeoDataDocument.h"
-#include "geodata/data/GeoDataFolder.h"
 #include "geodata/data/GeoDataPlacemark.h"
 #include "geodata/data/GeoDataMultiGeometry.h"
 #include "geodata/data/GeoDataStyle.h"

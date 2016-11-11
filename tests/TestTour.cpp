@@ -16,7 +16,6 @@
 #include <GeoDataTourControl.h>
 #include <MarbleDebug.h>
 #include <GeoDataFolder.h>
-#include <GeoDataScreenOverlay.h>
 #include <GeoDataAnimatedUpdate.h>
 
 #include <QObject>

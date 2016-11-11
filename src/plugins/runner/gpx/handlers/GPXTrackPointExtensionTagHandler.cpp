@@ -14,7 +14,6 @@
 
 #include "GPXElementDictionary.h"
 #include "GeoParser.h"
-#include "GeoDataDocument.h"
 #include "GeoDataPoint.h"
 #include "GeoDataTrack.h"
 #include "GeoDataExtendedData.h"

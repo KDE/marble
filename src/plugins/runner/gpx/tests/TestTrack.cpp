@@ -18,7 +18,6 @@
 #include <GeoDataDocument.h>
 #include <GeoDataPlacemark.h>
 #include <MarbleDebug.h>
-#include <GeoDataFolder.h>
 #include <GeoDataTrack.h>
 #include <GeoDataExtendedData.h>
 #include <GeoDataSimpleArrayData.h>

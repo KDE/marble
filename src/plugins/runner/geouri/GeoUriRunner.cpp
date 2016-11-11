@@ -9,7 +9,6 @@
 
 #include "GeoUriRunner.h"
 
-#include "GeoDataFeature.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataCoordinates.h"
 #include "GeoUriParser.h"

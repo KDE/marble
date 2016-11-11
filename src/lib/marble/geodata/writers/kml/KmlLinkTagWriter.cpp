@@ -10,7 +10,6 @@
 
 #include "KmlLinkTagWriter.h"
 
-#include "GeoDataNetworkLink.h"
 #include "GeoDataTypes.h"
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"

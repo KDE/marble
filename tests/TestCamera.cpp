@@ -11,9 +11,7 @@
 #include <QObject>
 
 #include <GeoDataDocument.h>
-#include <GeoDataTour.h>
 #include <MarbleDebug.h>
-#include <GeoDataFolder.h>
 #include <GeoDataCamera.h>
 #include "TestUtils.h"
 

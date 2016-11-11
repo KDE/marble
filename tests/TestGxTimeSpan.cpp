@@ -14,7 +14,6 @@
 #include <GeoDataTimeSpan.h>
 #include <GeoDataTimeStamp.h>
 #include <MarbleDebug.h>
-#include <GeoDataFolder.h>
 #include "TestUtils.h"
 #include <GeoDataLookAt.h>
 #include <GeoDataCamera.h>

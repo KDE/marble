@@ -14,7 +14,6 @@
 
 #include "GPXElementDictionary.h"
 #include "GeoParser.h"
-#include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
 
 // type is used in wpt, rte and trk to provide some sort of keyword, like "Geocache/traditional cache",

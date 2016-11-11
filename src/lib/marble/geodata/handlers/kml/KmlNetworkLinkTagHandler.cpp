@@ -12,7 +12,6 @@
 
 #include "GeoDataNetworkLink.h"
 #include "GeoDataContainer.h"
-#include "GeoDataFolder.h"
 #include "GeoDataDocument.h"
 #include "GeoDataParser.h"
 #include "KmlElementDictionary.h"

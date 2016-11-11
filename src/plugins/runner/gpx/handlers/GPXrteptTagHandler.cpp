@@ -26,7 +26,6 @@
 #include "GeoDataLineString.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataPlacemark.h"
-#include "GeoDataFolder.h"
 #include "GeoDataStyle.h"
 
 namespace Marble

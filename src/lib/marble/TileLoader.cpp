@@ -31,7 +31,6 @@
 #include "GeoSceneTypes.h"
 #include "GeoSceneVectorTileDataset.h"
 #include "GeoDataDocument.h"
-#include "GeoDataContainer.h"
 #include "HttpDownloadManager.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"

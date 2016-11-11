@@ -13,7 +13,6 @@
 
 #include "MarbleModel.h"
 #include "MarblePlacemarkModel.h"
-#include "GeoDataFeature.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataLatLonAltBox.h"

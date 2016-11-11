@@ -14,7 +14,6 @@
 
 #include "WayChunk.h"
 #include "GeoDataCoordinates.h"
-#include "GeoDataFeature.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataLineString.h"
 #include "OsmPlacemarkData.h"

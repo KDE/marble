@@ -51,7 +51,6 @@
 #include "GeoSceneTextureTileDataset.h"
 #include "GeoSceneZoom.h"
 #include "GeoDataDocument.h"
-#include "GeoDataPlacemark.h"
 #include "GeoDataFeature.h"
 #include "GeoDataStyle.h"
 #include "GeoDataStyleMap.h"

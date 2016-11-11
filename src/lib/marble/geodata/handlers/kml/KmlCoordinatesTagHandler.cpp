@@ -33,7 +33,6 @@
 #include "GeoDataLineString.h"
 #include "GeoDataLinearRing.h"
 #include "GeoDataMultiGeometry.h"
-#include "GeoDataPhotoOverlay.h"
 #include "GeoDataLatLonQuad.h"
 #include "GeoParser.h"
 #include "MarbleGlobal.h"

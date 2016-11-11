@@ -20,7 +20,6 @@
 #include "MarbleGlobal.h"
 #include "GeoPainter.h"
 #include "GeoDataPolygon.h"
-#include "GeoDataDocument.h"
 #include "MarbleDebug.h"
 #include "Quaternion.h"
 #include "ScanlineTextureMapperContext.h"

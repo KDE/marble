@@ -11,7 +11,7 @@
 #include "KmlSnippetTagHandler.h"
 
 #include "KmlElementDictionary.h"
-#include "GeoDataNetworkLinkControl.h"
+#include "GeoDataFeature.h"
 #include "GeoDataParser.h"
 #include "GeoDataSnippet.h"
 

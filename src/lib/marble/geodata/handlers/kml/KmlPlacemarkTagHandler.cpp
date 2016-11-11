@@ -26,7 +26,6 @@
 #include "KmlElementDictionary.h"
 #include "KmlObjectTagHandler.h"
 #include "GeoDataContainer.h"
-#include "GeoDataFolder.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataDocument.h"
 #include "GeoDataParser.h"

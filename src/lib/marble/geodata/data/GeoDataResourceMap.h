@@ -11,7 +11,7 @@
 #ifndef GEODATARESOURCEMAP_H
 #define GEODATARESOURCEMAP_H
 
-#include "GeoDataDocument.h"
+#include "GeoDocument.h"
 #include "MarbleGlobal.h"
 
 namespace Marble {

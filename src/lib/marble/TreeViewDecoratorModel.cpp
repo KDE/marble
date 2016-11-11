@@ -16,7 +16,6 @@
 #include "GeoDataStyle.h"
 #include "GeoDataListStyle.h"
 #include "GeoDataItemIcon.h"
-#include "GeoDataTour.h"
 #include "MarblePlacemarkModel.h"
 
 #include <QImage>

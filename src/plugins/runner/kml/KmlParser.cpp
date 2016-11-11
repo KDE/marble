@@ -9,7 +9,6 @@
 
 #include "KmlParser.h"
 #include "KmlElementDictionary.h"
-#include "GeoDataDocument.h"
 
 namespace Marble {
 

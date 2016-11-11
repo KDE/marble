@@ -16,7 +16,6 @@
 #include <GeoDataTimeStamp.h>
 #include <GeoDataCamera.h>
 #include <MarbleDebug.h>
-#include <GeoDataFolder.h>
 #include "TestUtils.h"
 
 using namespace Marble;

@@ -10,8 +10,6 @@
 #include "HostipRunner.h"
 
 #include "MarbleDebug.h"
-#include "GeoDataDocument.h"
-#include "GeoDataFeature.h"
 #include "GeoDataPlacemark.h"
 
 #include <QString>

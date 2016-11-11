@@ -14,7 +14,6 @@
 
 #include "GeoDataListStyle.h"
 #include "GeoDataItemIcon.h"
-#include "GeoDataContainer.h"
 #include "GeoDataParser.h"
 #include "KmlElementDictionary.h"
 

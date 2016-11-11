@@ -9,7 +9,6 @@
 
 #include "LatLonRunner.h"
 
-#include "GeoDataFeature.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataCoordinates.h"
 
