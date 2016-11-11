@@ -11,7 +11,7 @@
 #ifndef MARBLE_DECLARATIVE_ROUTING_H
 #define MARBLE_DECLARATIVE_ROUTING_H
 
-#include <QQuickPaintedItem>
+#include <QQuickItem>
 
 #include <Placemark.h>
 #include <routing/RoutingModel.h>
@@ -22,7 +22,7 @@ namespace Marble {
 class MarbleMap;
 class RoutingPrivate;
 
-class Routing : public QQuickPaintedItem
+class Routing : public QQuickItem
 {
     Q_OBJECT
     Q_PROPERTY( MarbleMap* marbleMap READ marbleMap WRITE setMarbleMap NOTIFY marbleMapChanged)
@@ -39,10 +39,6 @@ public:
 
     ~Routing();
 
-    // Implements QQuickPaintedItem interface
-    void paint(QPainter * painter);
-
-public:
     void setMarbleMap( MarbleMap* marbleMap );
 
     MarbleMap *marbleMap();
@@ -107,6 +103,9 @@ Q_SIGNALS:
 
     void routeRequestModelChanged(RouteRequestModel* routeRequestModel);
 
+protected:
+    // Implements QQuickItem interface
+    QSGNode * updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *);
 
 private Q_SLOTS:
     void updateWaypointItems();

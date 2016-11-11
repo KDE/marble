@@ -25,8 +25,10 @@
 #include <PositionTracking.h>
 
 #include <QDebug>
-#include <QPainter>
 #include <QQmlContext>
+#include <QOpenGLPaintDevice>
+#include <QSGGeometryNode>
+#include <QSGFlatColorMaterial>
 
 namespace Marble {
 
@@ -44,6 +46,7 @@ public:
     QObject * m_parent;
     QVector<Placemark *> m_searchResultPlacemarks;
     QMap<int, QQuickItem*> m_searchResultItems;
+    QVector<QPolygonF*> m_cachedPolygons;
 };
 
 RoutingPrivate::RoutingPrivate(QObject *parent) :
@@ -56,15 +59,16 @@ RoutingPrivate::RoutingPrivate(QObject *parent) :
 }
 
 Routing::Routing( QQuickItem *parent) :
-    QQuickPaintedItem( parent ), d( new RoutingPrivate(this) )
+    QQuickItem( parent ), d( new RoutingPrivate(this) )
 {
-    setRenderTarget(QQuickPaintedItem::FramebufferObject);
+    setFlag(ItemHasContents, true);
     d->m_routeRequestModel->setRouting(this);
     connect(d->m_routeRequestModel, SIGNAL(rowsInserted(QModelIndex,int,int)), this, SLOT(updateWaypointItems()));
     connect(d->m_routeRequestModel, SIGNAL(rowsMoved(QModelIndex,int,int,QModelIndex,int)), this, SLOT(updateWaypointItems()));
     connect(d->m_routeRequestModel, SIGNAL(rowsRemoved(QModelIndex,int,int)), this, SLOT(updateWaypointItems()));
 
     emit routeRequestModelChanged(d->m_routeRequestModel);
+    update();
 }
 
 Routing::~Routing()
@@ -72,37 +76,64 @@ Routing::~Routing()
     delete d;
 }
 
-void Routing::paint(QPainter *painter)
-{
+QSGNode * Routing::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *) {
     if (!d->m_marbleMap) {
-        return;
+        return 0;
     }
 
-    QPaintDevice *paintDevice = painter->device();
-    painter->end();
-    {
-        Marble::GeoPainter geoPainter(paintDevice, d->m_marbleMap->viewport(), d->m_marbleMap->mapQuality());
+    QOpenGLPaintDevice paintDevice(QSize(width(), height()));
+    Marble::GeoPainter geoPainter(&paintDevice, d->m_marbleMap->viewport(), d->m_marbleMap->mapQuality());
 
-        RoutingManager const * const routingManager = d->m_marbleMap->model()->routingManager();
-        GeoDataLineString const waypoints = routingManager->routingModel()->route().path();
+    RoutingManager const * const routingManager = d->m_marbleMap->model()->routingManager();
+    GeoDataLineString const waypoints = routingManager->routingModel()->route().path();
 
-        int const dpi = qMax(paintDevice->logicalDpiX(), paintDevice->logicalDpiY());
-        QPen standardRoutePen( routingManager->routeColorStandard().darker( 200 ) );
-        qreal const width = 2.5 * MM2M * M2IN * dpi;
-        standardRoutePen.setWidthF( width );
-        geoPainter.setPen( standardRoutePen );
-        geoPainter.drawPolyline( waypoints );
+    if (waypoints.isEmpty()) {
+      return 0;
+    }
 
-        standardRoutePen.setColor( routingManager->routeColorStandard() );
-        standardRoutePen.setWidthF( width - 4.0 );
-        if ( routingManager->state() == RoutingManager::Downloading ) {
-            standardRoutePen.setStyle( Qt::DotLine );
+    int const dpi = qMax(paintDevice.logicalDpiX(), paintDevice.logicalDpiY());
+    qreal const width = 2.5 * MM2M * M2IN * dpi - 4;
+
+    QColor standardRouteColor = routingManager->state() == RoutingManager::Downloading ?
+                                routingManager->routeColorStandard() :
+                                routingManager->routeColorStandard().darker( 200 );
+
+    geoPainter.polygonsFromLineString( waypoints, d->m_cachedPolygons);
+
+    if (!d->m_cachedPolygons.isEmpty()) {
+        delete oldNode;
+        oldNode = new QSGNode;
+        QSGFlatColorMaterial *material = new QSGFlatColorMaterial;
+        material->setColor(standardRouteColor);
+
+        foreach(const QPolygonF* itPolygon, d->m_cachedPolygons) {
+
+            int segmentCount = itPolygon->size() - 1;
+
+            QSGGeometryNode * lineNode = new QSGGeometryNode;
+
+            QSGGeometry * lineNodeGeo = new QSGGeometry(QSGGeometry::defaultAttributes_Point2D(), 2*segmentCount);
+            lineNodeGeo->setLineWidth(width);
+            lineNodeGeo->setDrawingMode(GL_LINE_STRIP);
+            lineNodeGeo->allocate(2*segmentCount);
+
+            lineNode->setGeometry(lineNodeGeo);
+            lineNode->setFlag(QSGNode::OwnsGeometry);
+            lineNode->setMaterial(material);
+            lineNode->setFlag(QSGNode::OwnsMaterial);
+
+            for(int i = 0; i < segmentCount; ++i) {
+                lineNodeGeo->vertexDataAsPoint2D()[2*i].set(itPolygon->at(i).x(), itPolygon->at(i).y());
+                lineNodeGeo->vertexDataAsPoint2D()[2*i+1].set(itPolygon->at(i+1).x(), itPolygon->at(i+1).y());
+            }
+            oldNode->appendChildNode(lineNode);
         }
-        geoPainter.setPen( standardRoutePen );
-        geoPainter.drawPolyline( waypoints );
     }
 
-    painter->begin(paintDevice);
+    qDeleteAll(d->m_cachedPolygons);
+    d->m_cachedPolygons.clear();
+
+    return oldNode;
 }
 
 QObject* Routing::waypointModel()
