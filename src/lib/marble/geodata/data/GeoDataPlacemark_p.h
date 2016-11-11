@@ -112,11 +112,6 @@ class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
         return *this;
     }
 
-    virtual const char* nodeType() const
-    {
-        return GeoDataTypes::GeoDataPlacemarkType;
-    }
-
     virtual EnumFeatureId featureId() const
     {
         return GeoDataPlacemarkId;

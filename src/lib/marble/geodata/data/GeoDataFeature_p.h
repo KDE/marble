@@ -197,11 +197,6 @@ class GeoDataFeaturePrivate
         delete m_featureExtendedData;
     }
 
-    virtual const char* nodeType() const
-    {
-        return GeoDataTypes::GeoDataFeatureType;
-    }
-
     GeoDataFeatureExtendedData & featureExtendedData()
     {
         if (!m_featureExtendedData) {

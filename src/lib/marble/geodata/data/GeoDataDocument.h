@@ -73,6 +73,8 @@ public:
     bool operator==( const GeoDataDocument &other ) const;
     bool operator!=( const GeoDataDocument &other ) const;
 
+    virtual const char* nodeType() const;
+
     GeoDataFeature * clone() const override;
 
     /// Provides type information for downcasting a GeoData

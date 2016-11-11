@@ -170,6 +170,12 @@ bool GeoDataContainer::equals( const GeoDataContainer &other ) const
     return thisBegin == thisEnd && otherBegin == otherEnd;
 }
 
+const char* GeoDataContainer::nodeType() const
+{
+    return GeoDataTypes::GeoDataContainerType;
+}
+
+
 GeoDataFeature * GeoDataContainer::clone() const
 {
     return new GeoDataContainer(*this);

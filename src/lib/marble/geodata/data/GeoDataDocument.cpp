@@ -100,6 +100,12 @@ bool GeoDataDocument::operator!=( const GeoDataDocument &other ) const
     return !this->operator==( other );
 }
 
+const char* GeoDataDocument::nodeType() const
+{
+    return GeoDataTypes::GeoDataDocumentType;
+}
+
+
 GeoDataFeature * GeoDataDocument::clone() const
 {
     return new GeoDataDocument(*this);

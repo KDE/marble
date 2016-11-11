@@ -58,6 +58,8 @@ class GEODATA_EXPORT GeoDataFolder : public GeoDataContainer
     bool operator==( const GeoDataFolder &other ) const;
     bool operator!=( const GeoDataFolder &other ) const;
 
+    virtual const char* nodeType() const;
+
     GeoDataFeature * clone() const override;
 
  private:

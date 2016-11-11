@@ -60,11 +60,6 @@ public:
         return *this;
     }
 
-    virtual const char *nodeType() const
-    {
-        return GeoDataTypes::GeoDataTourType;
-    }
-
     GeoDataPlaylist *m_playlist;
 };
 

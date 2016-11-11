@@ -176,6 +176,12 @@ bool GeoDataPlacemark::operator!=( const GeoDataPlacemark& other ) const
     return !this->operator==( other );
 }
 
+const char* GeoDataPlacemark::nodeType() const
+{
+    return GeoDataTypes::GeoDataPlacemarkType;
+}
+
+
 GeoDataFeature * GeoDataPlacemark::clone() const
 {
     return new GeoDataPlacemark(*this);

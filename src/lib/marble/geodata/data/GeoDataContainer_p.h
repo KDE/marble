@@ -52,11 +52,6 @@ class GeoDataContainerPrivate : public GeoDataFeaturePrivate
         return *this;
     }
 
-    virtual const char* nodeType() const
-    {
-        return GeoDataTypes::GeoDataContainerType;
-    }
-
     virtual EnumFeatureId featureId() const
     {
         return GeoDataFolderId;

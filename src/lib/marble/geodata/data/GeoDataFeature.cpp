@@ -125,8 +125,7 @@ GeoDataFeature * GeoDataFeature::clone() const
 
 const char* GeoDataFeature::nodeType() const
 {
-    Q_D(const GeoDataFeature);
-    return d->nodeType();
+    return GeoDataTypes::GeoDataFeatureType;
 }
 
 EnumFeatureId GeoDataFeature::featureId() const

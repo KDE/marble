@@ -43,11 +43,6 @@ class GeoDataDocumentPrivate : public GeoDataContainerPrivate
     {
     }
 
-    virtual const char* nodeType() const
-    {
-        return GeoDataTypes::GeoDataDocumentType;
-    }
-
     virtual EnumFeatureId featureId() const
     {
         return GeoDataDocumentId;

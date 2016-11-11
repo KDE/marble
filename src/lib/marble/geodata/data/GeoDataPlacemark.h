@@ -81,6 +81,8 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     bool operator==( const GeoDataPlacemark& other ) const;
     bool operator!=( const GeoDataPlacemark& other ) const;
 
+    virtual const char* nodeType() const;
+
     GeoDataFeature * clone() const override;
 
     /**

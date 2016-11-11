@@ -55,6 +55,8 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
 
     GeoDataContainer& operator=(const GeoDataContainer& other);
 
+    virtual const char* nodeType() const;
+
     GeoDataFeature * clone() const override;
 
     /**

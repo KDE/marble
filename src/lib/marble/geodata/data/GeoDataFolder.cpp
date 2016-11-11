@@ -31,11 +31,6 @@ namespace Marble
 
 class GeoDataFolderPrivate : public GeoDataContainerPrivate
 {
-  public:
-    virtual const char* nodeType() const
-    {
-        return GeoDataTypes::GeoDataFolderType;
-    }
 };
 
 
@@ -71,6 +66,11 @@ bool GeoDataFolder::operator==( const GeoDataFolder &other ) const
 bool GeoDataFolder::operator!=( const GeoDataFolder &other ) const
 {
     return !this->operator==( other );
+}
+
+const char* GeoDataFolder::nodeType() const
+{
+    return GeoDataTypes::GeoDataFolderType;
 }
 
 GeoDataFeature * GeoDataFolder::clone() const
