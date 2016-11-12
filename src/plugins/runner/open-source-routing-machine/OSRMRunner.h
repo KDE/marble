@@ -58,10 +58,6 @@ private:
     QNetworkAccessManager m_networkAccessManager;
 
     QNetworkRequest m_request;
-
-    static QVector<QPair<GeoDataCoordinates,QString> > m_cachedHints;
-
-    static QString m_hintChecksum;
 };
 
 }

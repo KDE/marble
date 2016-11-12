@@ -33,10 +33,6 @@
 namespace Marble
 {
 
-QVector<QPair<GeoDataCoordinates,QString> > OSRMRunner:: m_cachedHints;
-
-QString OSRMRunner:: m_hintChecksum;
-
 OSRMRunner::OSRMRunner( QObject *parent ) :
     RoutingRunner( parent ),
     m_networkAccessManager()
@@ -56,30 +52,19 @@ void OSRMRunner::retrieveRoute( const RouteRequest *route )
         return;
     }
 
-    QString url = "http://router.project-osrm.org/viaroute?output=json&instructions=true";
+    QString url = "http://router.project-osrm.org/route/v1/driving/";
     GeoDataCoordinates::Unit const degree = GeoDataCoordinates::Degree;
-    bool appendChecksum = false;
-    typedef QPair<GeoDataCoordinates,QString> CachePair;
-    QVector<CachePair> newChecksums;
-    QString const invalidEntry = "invalid";
     for ( int i=0; i<route->size(); ++i ) {
         GeoDataCoordinates const coordinates = route->at( i );
-        append(&url, "loc", QString::number(coordinates.latitude(degree), 'f', 6) + QLatin1Char(',') + QString::number(coordinates.longitude(degree), 'f', 6));
-        foreach( const CachePair &hint, m_cachedHints ) {
-            if ( hint.first == coordinates && hint.second != invalidEntry && m_hintChecksum != invalidEntry ) {
-                append( &url, "hint", hint.second );
-                appendChecksum = true;
-            }
+        url += QString::number(coordinates.longitude(degree), 'f', 6);
+        url += ',';
+        url += QString::number(coordinates.latitude(degree), 'f', 6);
+        if (i+1<route->size()) {
+            url += ';';
         }
-        newChecksums << CachePair( coordinates, invalidEntry );
     }
 
-    if ( appendChecksum ) {
-        append( &url, "checksum", m_hintChecksum );
-    }
-
-    m_cachedHints = newChecksums;
-    m_hintChecksum = invalidEntry;
+    url += QStringLiteral("?alternatives=false&overview=full&geometries=polyline6");
 
     m_request = QNetworkRequest( QUrl( url ) );
     m_request.setRawHeader( "User-Agent", HttpDownloadManager::userAgent( "Browser", "OSRMRunner" ) );
@@ -204,25 +189,33 @@ GeoDataDocument *OSRMRunner::parse( const QByteArray &input ) const
 
     GeoDataDocument* result = 0;
     GeoDataLineString* routeWaypoints = 0;
-    QJsonValue routeGeometryValue = data.value(QStringLiteral("route_geometry"));
-    if (routeGeometryValue.isString()) {
-        result = new GeoDataDocument();
-        result->setName(QStringLiteral("Open Source Routing Machine"));
-        GeoDataPlacemark* routePlacemark = new GeoDataPlacemark;
-        routePlacemark->setName(QStringLiteral("Route"));
-        routeWaypoints = decodePolyline(routeGeometryValue.toString());
-        routePlacemark->setGeometry( routeWaypoints );
+    QJsonValue routeGeometryValue = data.value(QStringLiteral("routes"));
+    if (routeGeometryValue.isArray()) {
+        auto routes = routeGeometryValue.toArray();
+        if (!routes.isEmpty()) {
+            auto route = routes[0].toObject();
+            auto routeGeometryValue = route.value(QStringLiteral("geometry"));
+            if (routeGeometryValue.isString()) {
+                result = new GeoDataDocument();
+                result->setName(QStringLiteral("Open Source Routing Machine"));
+                GeoDataPlacemark* routePlacemark = new GeoDataPlacemark;
+                routePlacemark->setName(QStringLiteral("Route"));
+                routeWaypoints = decodePolyline(routeGeometryValue.toString());
+                routePlacemark->setGeometry( routeWaypoints );
 
-        QTime time;
-        time = time.addSecs( data.value(QStringLiteral("route_summary")).toObject().value(QStringLiteral("total_time")).toInt());
-        qreal length = routeWaypoints->length( EARTH_RADIUS );
-        const QString name = nameString( "OSRM", length, time );
-        const GeoDataExtendedData extendedData = routeData( length, time );
-        routePlacemark->setExtendedData( extendedData );
-        result->setName( name );
-        result->append( routePlacemark );
+                auto time = QTime(0, 0, 0);
+                time = time.addSecs(qRound(route.value(QStringLiteral("duration")).toDouble()));
+                qreal length = routeWaypoints->length( EARTH_RADIUS );
+                const QString name = nameString( "OSRM", length, time );
+                const GeoDataExtendedData extendedData = routeData( length, time );
+                routePlacemark->setExtendedData( extendedData );
+                result->setName( name );
+                result->append( routePlacemark );
+            }
+        }
     }
 
+    /*
     QJsonValue routeInstructionsValue = data.value(QStringLiteral("route_instructions"));
     if (result && routeWaypoints && routeInstructionsValue.isArray()) {
         bool first = true;
@@ -286,19 +279,7 @@ GeoDataDocument *OSRMRunner::parse( const QByteArray &input ) const
             }
         }
     }
-
-    QJsonValue hintDataValue = data.value(QStringLiteral("hint_data"));
-    if (hintDataValue.isObject()) {
-        QJsonObject hintDataObject = hintDataValue.toObject();
-        QVariantList hints = hintDataObject.value(QStringLiteral("locations")).toVariant().toList();
-        if ( hints.size() == m_cachedHints.size() ) {
-            for ( int i=0; i<m_cachedHints.size(); ++i ) {
-                m_cachedHints[i].second = hints[i].toString();
-            }
-        }
-
-        m_hintChecksum = hintDataObject.value(QStringLiteral("checksum")).toString();
-    }
+    */
 
     return result;
 }
