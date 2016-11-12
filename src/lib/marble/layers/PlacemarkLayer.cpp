@@ -50,7 +50,7 @@ PlacemarkLayer::~PlacemarkLayer()
 
 QStringList PlacemarkLayer::renderPosition() const
 {
-    return QStringList(QStringLiteral("HOVERS_ABOVE_SURFACE"));
+    return QStringList(QStringLiteral("PLACEMARKS"));
 }
 
 qreal PlacemarkLayer::zValue() const
