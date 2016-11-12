@@ -123,12 +123,11 @@ VectorTileLayer::VectorTileLayer(HttpDownloadManager *downloadManager,
 
     d->m_averageScreenArea = 0;
     foreach (QScreen *screen, QGuiApplication::screens()) {
-      qDebug() << screen->availableSize().width() << screen->availableSize().height();
         d->m_averageScreenArea += screen->availableSize().width() * screen->availableSize().height();
     }
-    if (d->m_averageScreenArea < 786432) {
-        d->m_averageScreenArea = 786432;   // any screen size lower than 1024x768 is treated as 1024x768
-    }
+    d->m_averageScreenArea /= qMax(1, QGuiApplication::screens().size());
+    // any screen size lower than 1024x768 is treated as 1024x768
+    d->m_averageScreenArea = qMax(1024*768, d->m_averageScreenArea);
 }
 
 VectorTileLayer::~VectorTileLayer()
