@@ -30,8 +30,9 @@ void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes, QSet<qint6
 
     if (isArea()) {
         GeoDataLinearRing linearRing;
-
-        foreach(qint64 nodeId, m_references) {
+        bool const stripLastNode = m_references.first() == m_references.last();
+        for (int i=0, n=m_references.size() - (stripLastNode ? 1 : 0); i<n; ++i) {
+            qint64 nodeId = m_references[i];
             auto const nodeIter = nodes.constFind(nodeId);
             if (nodeIter == nodes.constEnd()) {
                 return;
