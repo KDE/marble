@@ -15,6 +15,8 @@
 
 #include <qmath.h>
 #include <QThreadPool>
+#include <QGuiApplication>
+#include <QScreen>
 
 #include "VectorTileModel.h"
 #include "GeoPainter.h"
@@ -51,6 +53,7 @@ public:
     QVector<VectorTileModel *> m_texmappers;
     QVector<VectorTileModel *> m_activeTexmappers;
     const GeoSceneGroup *m_textureLayerSettings;
+    int m_averageScreenArea;
 
     // TreeModel for displaying GeoDataDocuments
     GeoDataTreeModel *const m_treeModel;
@@ -67,6 +70,7 @@ VectorTileLayer::Private::Private(HttpDownloadManager *downloadManager,
     m_texmappers(),
     m_activeTexmappers(),
     m_textureLayerSettings( 0 ),
+    m_averageScreenArea(0),
     m_treeModel( treeModel )
 {
     m_threadPool.setMaxThreadCount( 1 );
@@ -116,6 +120,15 @@ VectorTileLayer::VectorTileLayer(HttpDownloadManager *downloadManager,
     qRegisterMetaType<GeoDataDocument*>( "GeoDataDocument*" );
 
     connect(&d->m_loader, SIGNAL(tileCompleted(TileId, GeoDataDocument*)), this, SLOT(updateTile(TileId, GeoDataDocument*)));
+
+    d->m_averageScreenArea = 0;
+    foreach (QScreen *screen, QGuiApplication::screens()) {
+      qDebug() << screen->availableSize().width() << screen->availableSize().height();
+        d->m_averageScreenArea += screen->availableSize().width() * screen->availableSize().height();
+    }
+    if (d->m_averageScreenArea < 786432) {
+        d->m_averageScreenArea = 786432;   // any screen size lower than 1024x768 is treated as 1024x768
+    }
 }
 
 VectorTileLayer::~VectorTileLayer()
@@ -162,8 +175,7 @@ bool VectorTileLayer::render( GeoPainter *painter, ViewportParams *viewport,
     int const oldLevel = tileZoomLevel();
     int level = 0;
     qreal const referenceArea = 1600.0 * 1200.0;
-    qreal const screenArea = viewport->width() * viewport->height();
-    qreal const adjustedRadius = viewport->radius() * referenceArea / screenArea;
+    qreal const adjustedRadius = viewport->radius() * referenceArea / d->m_averageScreenArea;
     foreach ( VectorTileModel *mapper, d->m_activeTexmappers ) {
         mapper->setViewport( viewport->viewLatLonAltBox(), adjustedRadius );
         level = qMax(level, mapper->tileZoomLevel());
