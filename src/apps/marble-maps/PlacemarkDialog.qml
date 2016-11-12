@@ -82,12 +82,6 @@ Item {
 
         IconText {
             width: parent.width
-            visible: placemark !== null && placemark.elevation !== ""
-            text: placemark === null ? "" : qsTr("Elevation: %1 m").arg(placemark.elevation)
-        }
-
-        IconText {
-            width: parent.width
             visible: text.length > 0
             text: placemark === null ? "" : placemark.address
             maximumLineCount: 4

@@ -35,7 +35,6 @@ void Placemark::setGeoDataPlacemark( const Marble::GeoDataPlacemark &placemark )
     m_website = QString();
     m_wikipedia = QString();
     m_openingHours = QString();
-    m_elevation = QString();
     emit coordinatesChanged();
     emit nameChanged();
     emit descriptionChanged();
@@ -43,7 +42,6 @@ void Placemark::setGeoDataPlacemark( const Marble::GeoDataPlacemark &placemark )
     emit websiteChanged();
     emit wikipediaChanged();
     emit openingHoursChanged();
-    emit elevationChanged();
 }
 
 Marble::GeoDataPlacemark & Placemark::placemark()
@@ -130,6 +128,8 @@ QString Placemark::description() const
             addTagDescription(m_description, QStringLiteral("recycling:waste"), "yes", tr("Waste"));
             addTagDescription(m_description, QStringLiteral("recycling:white_goods"), "yes", tr("White goods"));
             addTagDescription(m_description, QStringLiteral("recycling:wood"), "yes", tr("Wood"));
+        } else if (category == GeoDataPlacemark::NaturalPeak) {
+            addTagValue(m_description, QStringLiteral("ele"), tr("%1 m"));
         }
     }
 
@@ -204,17 +204,6 @@ QString Placemark::coordinates() const
     return m_placemark.coordinate().toString(GeoDataCoordinates::Decimal).trimmed();
 }
 
-QString Placemark::elevation() const
-{
-    if (!m_elevation.isEmpty()){
-        return m_elevation;
-    }
-
-    m_elevation = m_placemark.osmData().tagValue(QStringLiteral("ele"));
-
-    return m_elevation;
-}
-
 void Placemark::setName(const QString & name)
 {
     if (m_placemark.name() == name) {
@@ -235,11 +224,11 @@ double Placemark::latitude() const
     return m_placemark.coordinate().latitude(GeoDataCoordinates::Degree);
 }
 
-void Placemark::addTagValue(QString &target, const QString &key) const
+void Placemark::addTagValue(QString &target, const QString &key, const QString &format) const
 {
     auto const & osmData = m_placemark.osmData();
     QString const value = osmData.tagValue(key);
-    QString description = value;
+    QString description = format.isEmpty() ? value : format.arg(value);
     description.replace(QLatin1Char(';'), " · ");
     addTagDescription(target, key, value, description);
 }
