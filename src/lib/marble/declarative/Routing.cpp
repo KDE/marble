@@ -46,7 +46,6 @@ public:
     QObject * m_parent;
     QVector<Placemark *> m_searchResultPlacemarks;
     QMap<int, QQuickItem*> m_searchResultItems;
-    QVector<QPolygonF*> m_cachedPolygons;
 };
 
 RoutingPrivate::RoutingPrivate(QObject *parent) :
@@ -97,15 +96,16 @@ QSGNode * Routing::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *) {
                                 routingManager->routeColorStandard() :
                                 routingManager->routeColorStandard().darker( 200 );
 
-    geoPainter.polygonsFromLineString( waypoints, d->m_cachedPolygons);
+    QVector<QPolygonF*> polygons;
+    geoPainter.polygonsFromLineString( waypoints, polygons);
 
-    if (!d->m_cachedPolygons.isEmpty()) {
+    if (!polygons.isEmpty()) {
         delete oldNode;
         oldNode = new QSGNode;
         QSGFlatColorMaterial *material = new QSGFlatColorMaterial;
         material->setColor(standardRouteColor);
 
-        foreach(const QPolygonF* itPolygon, d->m_cachedPolygons) {
+        foreach(const QPolygonF* itPolygon, polygons) {
 
             int segmentCount = itPolygon->size() - 1;
 
@@ -114,6 +114,7 @@ QSGNode * Routing::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *) {
             QSGGeometry * lineNodeGeo = new QSGGeometry(QSGGeometry::defaultAttributes_Point2D(), 2*segmentCount);
             lineNodeGeo->setLineWidth(width);
             lineNodeGeo->setDrawingMode(GL_LINE_STRIP);
+            lineNodeGeo->setLineWidth(width);
             lineNodeGeo->allocate(2*segmentCount);
 
             lineNode->setGeometry(lineNodeGeo);
@@ -129,9 +130,7 @@ QSGNode * Routing::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *) {
         }
     }
 
-    qDeleteAll(d->m_cachedPolygons);
-    d->m_cachedPolygons.clear();
-
+    qDeleteAll(polygons);
     return oldNode;
 }
 
