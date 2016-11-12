@@ -54,26 +54,27 @@ ApplicationWindow {
 
                 property string currentPositionProvider: "QtPositioning"
                 property bool wlanOnly: false
+                property bool smallZoom : radius < 2 * Math.max(root.width, root.height)
 
                 anchors.fill: parent
 
                 visible: true
 
                 // Theme settings.
-                projection: MarbleItem.Mercator
+                projection: smallZoom ? MarbleItem.Spherical : MarbleItem.Mercator
                 mapThemeId: "earth/vectorosm/vectorosm.dgml"
 
                 // Visibility of layers/plugins.
                 showFrameRate: false
-                showAtmosphere: false
+                showAtmosphere: smallZoom
                 showCompass: false
                 showClouds: false
                 showCrosshairs: false
-                showGrid: false
+                showGrid: smallZoom
                 showOverviewMap: false
                 showOtherPlaces: false
                 showScaleBar: false
-                showBackground: false
+                showBackground: smallZoom
                 positionProvider: suspended ? "" : currentPositionProvider
                 keepScreenOn: !suspended && navigationManager.visible
                 showPositionMarker: false
@@ -105,7 +106,14 @@ ApplicationWindow {
                     updateIndicator();
                 }
 
-                Component.onCompleted: marbleMaps.loadSettings()
+                Component.onCompleted: {
+                    setPluginSetting("coordinate-grid", "gridColor", "#999999");
+                    setPluginSetting("coordinate-grid", "tropicsColor", "#888888");
+                    setPluginSetting("coordinate-grid", "equatorColor", "#777777");
+                    setPluginSetting("coordinate-grid", "primaryLabels", "false");
+                    setPluginSetting("coordinate-grid", "secondaryLabels", "false");
+                    marbleMaps.loadSettings()
+                }
                 Component.onDestruction: marbleMaps.writeSettings()
 
                 function updateIndicator() {

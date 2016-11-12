@@ -35,7 +35,7 @@ class Filter(object):
             return ['include']
         if dir == '/assets/data':
             # Currently not used
-            return ['mwdbii', 'weather', 'naturalearth', 'stars', 'flags']
+            return ['mwdbii', 'weather', 'naturalearth', 'flags']
         elif dir == '/assets/data/maps':
             # Other planets are not used
             return ['moon']
@@ -58,7 +58,8 @@ class Filter(object):
             fileFormats = ['CachePlugin', 'GpxPlugin', 'KmlPlugin', 'OsmPlugin']
             floatItems = ['License']
             positioning = ['QtPositioningPositionProviderPlugin']
-            plugins = search + routing + fileFormats + floatItems + positioning
+            render = ['StarsPlugin', 'GraticulePlugin']
+            plugins = search + routing + fileFormats + floatItems + positioning + render
             whitelist = set(['lib{}.so'.format(plugin) for plugin in plugins])
             masked = [item for item in files if item not in whitelist]
             if len(files) - len(masked) != len(whitelist):
