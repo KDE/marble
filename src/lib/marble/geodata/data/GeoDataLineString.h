@@ -240,6 +240,13 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry
     GeoDataCoordinates& operator[]( int pos );
 
 
+    /**
+      Returns a sub-string which contains elements from this vector, starting at position pos. If length is -1
+      (the default), all elements after pos are included; otherwise length elements (or all remaining elements if
+      there are less than length elements) are included.
+      */
+    GeoDataLineString mid(int pos, int length = -1) const;
+
 /*!
     \brief Returns a reference to the coordinates of a node at a given position.
     This method does not detach the returned coordinate object from the line string.

@@ -305,6 +305,18 @@ GeoDataCoordinates& GeoDataLineString::operator[]( int pos )
     return d->m_vector[pos];
 }
 
+GeoDataLineString GeoDataLineString::mid(int pos, int length) const
+{
+    GeoDataLineString substring;
+    auto d = substring.d_func();
+    d->m_vector = d_func()->m_vector.mid(pos, length);
+    d->m_dirtyBox = true;
+    d->m_dirtyRange = true;
+    d->m_tessellationFlags = d_func()->m_tessellationFlags;
+    d->m_extrude = d_func()->m_extrude;
+    return substring;
+}
+
 const GeoDataCoordinates& GeoDataLineString::operator[]( int pos ) const
 {
     Q_D(const GeoDataLineString);
