@@ -46,8 +46,8 @@ class Filter(object):
             # Large images from example KML tour
             return [item for item in files if item.endswith('.png') or item.endswith('.jpg')]
         elif dir == '/assets/data/placemarks':
-            # Moon placemarks
-            return ['moonlandingsites.cache', 'moonterrain.cache']
+            # Only include very basic placemarks
+            return ['moonlandingsites.cache', 'moonterrain.cache', 'elevplacemarks.cache', 'otherplacemarks.cache', 'cityplacemarks.cache']
         elif dir == '/assets/data/placemarks':
             # Large images. worldmap.svg is used by the overviewmap, bring back if that plugin should be enabled
             return ['application-x-marble.svg', 'marsmap.svg', 'marble-logo.svg', 'lunarmap.svg', 'worldmap.svg']
