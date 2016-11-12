@@ -165,7 +165,7 @@ QHash<QString,QVariant> GraticulePlugin::settings() const
     settings.insert(QStringLiteral("gridColor"), m_gridCirclePen.color().name());
     settings.insert(QStringLiteral("tropicsColor"), m_tropicsCirclePen.color().name());
     settings.insert(QStringLiteral("equatorColor"), m_equatorCirclePen.color().name());
-    settings.insert(QStringLiteral("primarylabels"), m_showPrimaryLabels);
+    settings.insert(QStringLiteral("primaryLabels"), m_showPrimaryLabels);
     settings.insert(QStringLiteral("secondaryLabels"), m_showSecondaryLabels);
 
     return settings;
