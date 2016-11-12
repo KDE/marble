@@ -31,8 +31,7 @@ Item {
         id: label
         color: "white"
         anchors {
-            horizontalCenter: background.horizontalCenter
-            verticalCenter: background.verticalCenter
+            centerIn: background
         }
     }
 }

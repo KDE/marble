@@ -164,26 +164,19 @@ void GeoLineStringGraphicsItem::paint(GeoPainter* painter, const ViewportParams*
 
 void GeoLineStringGraphicsItem::paintInline(GeoPainter* painter, const ViewportParams* viewport)
 {
+//    qDebug() << Q_FUNC_INFO;
     if ( ( !viewport->resolves( m_renderLineString->latLonAltBox(), 2) ) ) {
         return;
     }
 
     painter->save();
-    LabelPositionFlags labelPositionFlags = NoLabel;
-    QPen currentPen = configurePainter(painter, viewport, labelPositionFlags);
 
-    GeoDataStyle::ConstPtr style = this->style();
-    const GeoDataLineStyle& lineStyle = style->lineStyle();
-    if (lineStyle.cosmeticOutline() && lineStyle.penStyle() == Qt::SolidLine) {
-        const float currentPenWidth = currentPen.widthF();
-        if (currentPenWidth > 2.5f) {
-            currentPen.setWidthF(currentPenWidth - 2.0f);
-        }
-        currentPen.setColor(style->polyStyle().paintedColor());
-        painter->setPen( currentPen );
-    }
-    foreach(const QPolygonF* itPolygon, m_cachedPolygons) {
-        painter->drawPolyline(*itPolygon);
+    bool isValid = configurePainterForInline(painter, viewport);
+
+    if (isValid) {
+      foreach(const QPolygonF* itPolygon, m_cachedPolygons) {
+          painter->drawPolyline(*itPolygon);
+      }
     }
 
     painter->restore();
@@ -191,50 +184,140 @@ void GeoLineStringGraphicsItem::paintInline(GeoPainter* painter, const ViewportP
 
 void GeoLineStringGraphicsItem::paintOutline(GeoPainter *painter, const ViewportParams *viewport)
 {
+//    qDebug() << Q_FUNC_INFO;
     if ( ( !viewport->resolves( m_renderLineString->latLonAltBox(), 2) ) ) {
         return;
     }
 
     painter->save();
-    LabelPositionFlags labelPositionFlags = NoLabel;
-    QPen currentPen = configurePainter(painter, viewport, labelPositionFlags);
-    m_renderLabel = !( currentPen.widthF() < 8.0f );
 
-    if (!( currentPen.widthF() < 2.5f )) {
+    bool isValid = configurePainterForOutline(painter, viewport);
+
+    if (isValid) {
+        m_renderLabel = painter->pen().widthF() >= 8.0f;
+
         foreach(const QPolygonF* itPolygon, m_cachedPolygons) {
             painter->drawPolyline(*itPolygon);
         }
     }
+
     painter->restore();
 }
 
 void GeoLineStringGraphicsItem::paintLabel(GeoPainter *painter, const ViewportParams *viewport)
 {
+//    qDebug() << Q_FUNC_INFO;
     if ( ( !viewport->resolves( m_renderLineString->latLonAltBox(), 2) ) ) {
         return;
     }
 
     painter->save();
     LabelPositionFlags labelPositionFlags = NoLabel;
-    QPen currentPen = configurePainter(painter, viewport, labelPositionFlags);
+    bool isValid  = configurePainterForLabel(painter, viewport, labelPositionFlags);
 
-    GeoDataStyle::ConstPtr style = this->style();
-    const GeoDataLabelStyle& labelStyle = style->labelStyle();
+    if (isValid) {
+        GeoDataStyle::ConstPtr style = this->style();
 
-    // Activate the lines below to paint a label background which
-    // prevents antialiasing overpainting glitches, but leads to
-    // other glitches.
-    //QColor const color = style->polyStyle().paintedColor();
-    //painter->setBackground(QBrush(color));
-    //painter->setBackgroundMode(Qt::OpaqueMode);
+        // Activate the lines below to paint a label background which
+        // prevents antialiasing overpainting glitches, but leads to
+        // other glitches.
+        //QColor const color = style->polyStyle().paintedColor();
+        //painter->setBackground(QBrush(color));
+        //painter->setBackgroundMode(Qt::OpaqueMode);
 
-    painter->drawLabelsForPolygons(m_cachedPolygons, feature()->name(), FollowLine,
-                           labelStyle.paintedColor());
+        const GeoDataLabelStyle& labelStyle = style->labelStyle();
+        painter->drawLabelsForPolygons(m_cachedPolygons, feature()->name(), FollowLine,
+                               labelStyle.paintedColor());
+    }
 
     painter->restore();
 }
 
-QPen GeoLineStringGraphicsItem::configurePainter(GeoPainter *painter, const ViewportParams *viewport, LabelPositionFlags &labelPositionFlags) const
+bool  GeoLineStringGraphicsItem::configurePainterForOutline(GeoPainter *painter, const ViewportParams *viewport) const
+{  
+    QPen currentPen = painter->pen();
+    GeoDataStyle::ConstPtr style = this->style();
+    if (!style) {
+        painter->setPen( QPen() );
+    }
+    else {
+        const GeoDataLineStyle& lineStyle = style->lineStyle();
+
+        // To save performance we avoid making changes to the painter's pen.
+        // So we first take a copy of the actual painter pen, make changes to it
+        // and only if the resulting pen is different from the actual pen
+        // we replace the painter's pen with our new pen.
+
+        // We want to avoid the mandatory detach in QPen::setColor(),
+        // so we carefully check whether applying the setter is needed
+        const QColor linePaintedColor = lineStyle.paintedColor();
+        if (currentPen.color() != linePaintedColor) {
+            if (linePaintedColor.alpha() == 255) {
+                currentPen.setColor(linePaintedColor);
+            }
+            else {
+                if ( painter->mapQuality() != Marble::HighQuality
+                        && painter->mapQuality() != Marble::PrintQuality ) {
+                    QColor penColor = currentPen.color();
+                    penColor.setAlpha( 255 );
+                    if (currentPen.color() != penColor) {
+                        currentPen.setColor( penColor );
+                    }
+                }
+            }
+        }
+
+        const float lineWidth = lineStyle.width();
+        const float linePhysicalWidth = lineStyle.physicalWidth();
+        float newLineWidth = lineWidth;
+        if (linePhysicalWidth != 0.0) {
+          const float scaledLinePhysicalWidth = float(viewport->radius()) / EARTH_RADIUS * linePhysicalWidth;
+          newLineWidth = scaledLinePhysicalWidth > lineWidth
+                         ? scaledLinePhysicalWidth
+                         : lineWidth;
+        }
+
+        // We want to avoid the mandatory detach in QPen::setWidthF(),
+        // so we carefully check whether applying the setter is needed
+        if (currentPen.widthF() != newLineWidth && newLineWidth != 0.0) {
+          if (newLineWidth < 2.5f) {
+              return false; // Don't draw any outline and abort painter configuration early
+          }
+          currentPen.setWidthF(newLineWidth);
+        }
+
+        // No need to avoid detaches inside QPen::setCapsStyle() since Qt does that for us
+        const Qt::PenCapStyle lineCapStyle = lineStyle.capStyle();
+        currentPen.setCapStyle(lineCapStyle);
+
+        // No need to avoid detaches inside QPen::setStyle() since Qt does that for us
+        if (painter->mapQuality() == HighQuality || painter->mapQuality() == PrintQuality) {
+            const Qt::PenStyle linePenStyle = lineStyle.penStyle();
+            currentPen.setStyle(linePenStyle);
+
+            if (linePenStyle == Qt::CustomDashLine) {
+                // We want to avoid the mandatory detach in QPen::setDashPattern(),
+                // so we carefully check whether applying the setter is needed
+                if (currentPen.dashPattern() != lineStyle.dashPattern()) {
+                  currentPen.setDashPattern(lineStyle.dashPattern());
+                }
+            }
+        } else {
+            currentPen.setStyle(Qt::SolidLine);
+        }
+
+        if ( painter->pen() != currentPen ) {
+            painter->setPen( currentPen );
+        }
+//        else qDebug() << "Detach and painter change successfully Avoided!" << Q_FUNC_INFO;
+
+        // Skipping Background changes for Outline Painter
+    }
+
+    return true;
+}
+
+bool  GeoLineStringGraphicsItem::configurePainterForInline(GeoPainter *painter, const ViewportParams *viewport) const
 {
     QPen currentPen = painter->pen();
     GeoDataStyle::ConstPtr style = this->style();
@@ -244,76 +327,155 @@ QPen GeoLineStringGraphicsItem::configurePainter(GeoPainter *painter, const View
     else {
         const GeoDataLineStyle& lineStyle = style->lineStyle();
 
-        const QColor linePaintedColor = lineStyle.paintedColor();
+        // To save performance we avoid making changes to the painter's pen.
+        // So we first take a copy of the actual painter pen, make changes to it
+        // and only if the resulting pen is different from the actual pen
+        // we replace the painter's pen with our new pen.
+
+        // We want to avoid the mandatory detach in QPen::setColor(),
+        // so we carefully check whether applying the setter is needed
+
+
+        const QColor linePaintedColor = (lineStyle.cosmeticOutline() && lineStyle.penStyle() == Qt::SolidLine)
+                                        ? style->polyStyle().paintedColor()
+                                        : lineStyle.paintedColor();
         if (currentPen.color() != linePaintedColor) {
-            currentPen.setColor(linePaintedColor);
+            if (linePaintedColor.alpha() == 255) {
+                currentPen.setColor(linePaintedColor);
+            }
+            else {
+                if ( painter->mapQuality() != Marble::HighQuality
+                        && painter->mapQuality() != Marble::PrintQuality ) {
+                    QColor penColor = currentPen.color();
+                    penColor.setAlpha( 255 );
+                    if (currentPen.color() != penColor) {
+                        currentPen.setColor( penColor );
+                    }
+                }
+            }
         }
 
         const float lineWidth = lineStyle.width();
         const float linePhysicalWidth = lineStyle.physicalWidth();
-        if (currentPen.widthF() != lineWidth || linePhysicalWidth != 0.0) {
-            const float scaledLinePhysicalWidth = float(viewport->radius()) / EARTH_RADIUS * linePhysicalWidth;
-            if (scaledLinePhysicalWidth < lineWidth) {
-                currentPen.setWidthF(lineWidth);
-            } else {
-                currentPen.setWidthF(scaledLinePhysicalWidth);
+        float newLineWidth = lineWidth;
+        if (linePhysicalWidth != 0.0) {
+          const float scaledLinePhysicalWidth = float(viewport->radius()) / EARTH_RADIUS * linePhysicalWidth;
+          newLineWidth = scaledLinePhysicalWidth > lineWidth
+                         ? scaledLinePhysicalWidth
+                         : lineWidth;
+        }
+
+        if (lineStyle.cosmeticOutline() && lineStyle.penStyle() == Qt::SolidLine) {
+            if (newLineWidth > 2.5f) {
+              newLineWidth -= 2.0f;
             }
         }
-        else if (lineWidth != 0.0 ) {
-            currentPen.setWidthF(lineWidth);
+
+        // We want to avoid the mandatory detach in QPen::setWidthF(),
+        // so we carefully check whether applying the setter is needed
+        if (currentPen.widthF() != newLineWidth && newLineWidth != 0.0) {
+          if (newLineWidth < 0.5f) {
+              return false; // Don't draw any outline and abort painter configuration early
+          }
+          currentPen.setWidthF(newLineWidth);
         }
 
+        // No need to avoid detaches inside QPen::setCapsStyle() since Qt does that for us
         const Qt::PenCapStyle lineCapStyle = lineStyle.capStyle();
-        if (currentPen.capStyle() != lineCapStyle) {
-            currentPen.setCapStyle(lineCapStyle);
-        }
+        currentPen.setCapStyle(lineCapStyle);
 
+        // No need to avoid detaches inside QPen::setStyle() since Qt does that for us
         if (painter->mapQuality() == HighQuality || painter->mapQuality() == PrintQuality) {
             const Qt::PenStyle linePenStyle = lineStyle.penStyle();
-            if (currentPen.style() != linePenStyle) {
-                currentPen.setStyle(linePenStyle);
-            }
+            currentPen.setStyle(linePenStyle);
 
             if (linePenStyle == Qt::CustomDashLine) {
-                currentPen.setDashPattern(lineStyle.dashPattern());
+                // We want to avoid the mandatory detach in QPen::setDashPattern(),
+                // so we carefully check whether applying the setter is needed
+                if (currentPen.dashPattern() != lineStyle.dashPattern()) {
+                  currentPen.setDashPattern(lineStyle.dashPattern());
+                }
             }
         } else {
             currentPen.setStyle(Qt::SolidLine);
         }
 
-        if ( painter->mapQuality() != Marble::HighQuality
-                && painter->mapQuality() != Marble::PrintQuality ) {
-            QColor penColor = currentPen.color();
-            penColor.setAlpha( 255 );
-            currentPen.setColor( penColor );
-        }
-
-        if ( painter->pen() != currentPen )
+        if ( painter->pen() != currentPen ) {
             painter->setPen( currentPen );
+        }
+//        else qDebug() << "Detach and painter change successfully Avoided!" << Q_FUNC_INFO;
 
         if (lineStyle.background()) {
+//          qDebug() << "BACKGROUND";
             QBrush brush = painter->background();
             brush.setColor(style->polyStyle().paintedColor());
             painter->setBackground( brush );
 
             painter->setBackgroundMode( Qt::OpaqueMode );
         }
-
-        // label styles
-        const GeoDataLabelStyle& labelStyle = style->labelStyle();
-        painter->setFont(labelStyle.font() );
-        switch (labelStyle.alignment()) {
-        case GeoDataLabelStyle::Corner:
-        case GeoDataLabelStyle::Right:
-            labelPositionFlags |= LineStart;
-            break;
-        case GeoDataLabelStyle::Center:
-            labelPositionFlags |= LineCenter;
-            break;
-        }
     }
 
-    return currentPen;
+    return true;
+}
+
+bool GeoLineStringGraphicsItem::configurePainterForLabel(GeoPainter *painter,  const ViewportParams *viewport, LabelPositionFlags &labelPositionFlags) const
+{
+  QPen currentPen = painter->pen();
+  GeoDataStyle::ConstPtr style = this->style();
+  if (!style) {
+      painter->setPen( QPen() );
+  }
+  else {
+      const GeoDataLineStyle& lineStyle = style->lineStyle();
+
+      // To save performance we avoid making changes to the painter's pen.
+      // So we first take a copy of the actual painter pen, make changes to it
+      // and only if the resulting pen is different from the actual pen
+      // we replace the painter's pen with our new pen.
+
+      // We want to avoid the mandatory detach in QPen::setColor(),
+      // so we carefully check whether applying the setter is needed
+
+      const float lineWidth = lineStyle.width();
+      const float linePhysicalWidth = lineStyle.physicalWidth();
+      float newLineWidth = lineWidth;
+      if (linePhysicalWidth != 0.0) {
+        const float scaledLinePhysicalWidth = float(viewport->radius()) / EARTH_RADIUS * linePhysicalWidth;
+        newLineWidth = scaledLinePhysicalWidth > lineWidth
+                       ? scaledLinePhysicalWidth
+                       : lineWidth;
+      }
+
+      // We want to avoid the mandatory detach in QPen::setWidthF(),
+      // so we carefully check whether applying the setter is needed
+      if (currentPen.widthF() != newLineWidth && newLineWidth != 0.0) {
+        if (newLineWidth < 0.5f) {
+            return false; // Don't draw any outline and abort painter configuration early
+        }
+        currentPen.setWidthF(newLineWidth);
+      }
+
+
+      if ( painter->pen() != currentPen ) {
+          painter->setPen( currentPen );
+      }
+//        else qDebug() << "Detach and painter change successfully Avoided!" << Q_FUNC_INFO;
+
+      // label styles
+      const GeoDataLabelStyle& labelStyle = style->labelStyle();
+      painter->setFont(labelStyle.font() );
+      switch (labelStyle.alignment()) {
+      case GeoDataLabelStyle::Corner:
+      case GeoDataLabelStyle::Right:
+          labelPositionFlags |= LineStart;
+          break;
+      case GeoDataLabelStyle::Center:
+          labelPositionFlags |= LineCenter;
+          break;
+      }
+  }
+
+  return true;
 }
 
 bool GeoLineStringGraphicsItem::canMerge(const GeoDataCoordinates &a, const GeoDataCoordinates &b)
