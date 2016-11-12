@@ -161,8 +161,11 @@ bool VectorTileLayer::render( GeoPainter *painter, ViewportParams *viewport,
 
     int const oldLevel = tileZoomLevel();
     int level = 0;
+    qreal const referenceArea = 1600.0 * 1200.0;
+    qreal const screenArea = viewport->width() * viewport->height();
+    qreal const adjustedRadius = viewport->radius() * referenceArea / screenArea;
     foreach ( VectorTileModel *mapper, d->m_activeTexmappers ) {
-        mapper->setViewport( viewport->viewLatLonAltBox(), viewport->radius() );
+        mapper->setViewport( viewport->viewLatLonAltBox(), adjustedRadius );
         level = qMax(level, mapper->tileZoomLevel());
     }
     if (oldLevel != level) {
