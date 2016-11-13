@@ -94,6 +94,7 @@ Item {
                 model: bookmarks.model
                 delegate: Row {
                     width: bookmarksView.width
+                    height: background.itemSpacing + Math.max(bookmarkIcon.height, bookmarkText.height)
                     spacing: background.itemSpacing
 
                     Image {
@@ -107,6 +108,7 @@ Item {
                     }
 
                     Text {
+                        id: bookmarkText
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.leftMargin: Screen.pixelDensity * 2
                         width: bookmarksView.width - bookmarksView.spacing - bookmarkIcon.width
