@@ -40,10 +40,8 @@ void OsmObjectManager::initializeOsmData( GeoDataPlacemark* placemark )
         QVector<GeoDataCoordinates>::ConstIterator const end = lineString->constEnd();
 
         for ( ; it != end; ++it ) {
-            if ( !osmData.containsNodeReference( *it ) ) {
-                OsmPlacemarkData osmNdData;
-                osmNdData.setId( --m_minId );
-                osmData.addNodeReference( *it, osmNdData );
+            if (osmData.nodeReference(*it).isNull()) {
+                osmData.nodeReference(*it).setId(--m_minId);
             }
         }
     }
@@ -52,10 +50,8 @@ void OsmObjectManager::initializeOsmData( GeoDataPlacemark* placemark )
     if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLinearRingType ) {
         const GeoDataLinearRing* lineString = static_cast<GeoDataLinearRing*>( placemark->geometry() );
         for (auto it =lineString->constBegin(), end = lineString->constEnd(); it != end; ++it ) {
-            if ( !osmData.containsNodeReference( *it ) ) {
-                OsmPlacemarkData osmNdData;
-                osmNdData.setId( --m_minId );
-                osmData.addNodeReference( *it, osmNdData );
+            if (osmData.nodeReference(*it).isNull()) {
+                osmData.nodeReference(*it).setId(--m_minId);
             }
         }
     }
@@ -71,44 +67,36 @@ void OsmObjectManager::initializeOsmData( GeoDataPlacemark* placemark )
         }
 
         // Outer boundary
-        if ( !osmData.containsMemberReference( index ) ) {
-            OsmPlacemarkData outerBoundaryData;
-            outerBoundaryData.setId( --m_minId );
-            osmData.addMemberReference( index, outerBoundaryData );
+        OsmPlacemarkData &outerBoundaryData = osmData.memberReference( index );
+        if (outerBoundaryData.isNull()) {
+            outerBoundaryData.setId(--m_minId);
         }
 
         // Outer boundary nodes
-        OsmPlacemarkData &outerBoundaryData = osmData.memberReference( index );
         QVector<GeoDataCoordinates>::const_iterator it =  outerBoundary.constBegin();
         QVector<GeoDataCoordinates>::ConstIterator const end = outerBoundary.constEnd();
 
         for ( ; it != end; ++it ) {
-            if ( !osmData.memberReference( index ).containsNodeReference( *it ) ) {
-                OsmPlacemarkData osmNodeData;
-                osmNodeData.setId( --m_minId );
-                outerBoundaryData.addNodeReference( *it, osmNodeData );
+            if (outerBoundaryData.nodeReference(*it).isNull()) {
+                outerBoundaryData.nodeReference(*it).setId(--m_minId);
             }
         }
 
         // Each inner boundary
         foreach( const GeoDataLinearRing &innerRing, polygon->innerBoundaries() ) {
             ++index;
-            if ( !osmData.containsMemberReference( index ) ) {
-                OsmPlacemarkData innerRingData;
-                innerRingData.setId( --m_minId );
-                osmData.addMemberReference( index, innerRingData );
+            OsmPlacemarkData &innerRingData = osmData.memberReference( index );
+            if (innerRingData.isNull()) {
+                innerRingData.setId(--m_minId);
             }
 
             // Inner boundary nodes
-            OsmPlacemarkData &innerRingData = osmData.memberReference( index );
             QVector<GeoDataCoordinates>::const_iterator it =  innerRing.constBegin();
             QVector<GeoDataCoordinates>::ConstIterator const end = innerRing.constEnd();
 
             for ( ; it != end; ++it ) {
-                if ( !osmData.memberReference( index ).containsNodeReference( *it ) ) {
-                    OsmPlacemarkData osmNodeData;
-                    osmNodeData.setId( --m_minId );
-                    innerRingData.addNodeReference( *it , osmNodeData );
+                if (innerRingData.nodeReference(*it).isNull()) {
+                    innerRingData.nodeReference(*it).setId(--m_minId);
                 }
             }
         }
