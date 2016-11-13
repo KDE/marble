@@ -59,7 +59,7 @@ void OsmRelation::create(GeoDataDocument *document, OsmWays &ways, const OsmNode
     QStringList const outerRoles = QStringList() << QStringLiteral("outer") << QString();
     QSet<qint64> outerWays;
     QSet<qint64> outerNodes;
-    const QList<GeoDataLinearRing> outer = rings(outerRoles, ways, nodes, outerNodes, outerWays);
+    OsmRings const outer = rings(outerRoles, ways, nodes, outerNodes, outerWays);
 
     if (outer.isEmpty()) {
         return;
@@ -101,42 +101,41 @@ void OsmRelation::create(GeoDataDocument *document, OsmWays &ways, const OsmNode
 
     QStringList const innerRoles = QStringList() << QStringLiteral("inner");
     QSet<qint64> innerWays;
-    const QList<GeoDataLinearRing> inner = rings(innerRoles, ways, nodes, usedNodes, innerWays);
-
-    OsmPlacemarkData osmData = m_osmData;
-    osmData.addMemberReference(-1, ways[*outerWays.begin()].osmData());
-    int index = 0;
-    foreach(qint64 wayId, innerWays) {
-        Q_ASSERT(ways.contains(wayId));
-        if (StyleBuilder::determineVisualCategory(ways[wayId].osmData()) == GeoDataPlacemark::None) {
-            // Schedule way for removal: It's a non-styled way only used to create the inner boundary in this polygon
-            usedWays << wayId;
-        }
-        foreach(qint64 nodeId, ways[wayId].references()) {
-            ways[wayId].osmData().addNodeReference(nodes[nodeId].coordinates(), nodes[nodeId].osmData());
-        }
-        osmData.addMemberReference(index, ways[wayId].osmData());
-        ++index;
-    }
-
-    if (outerCategory == GeoDataPlacemark::Bathymetry) {
-        // In case of a bathymetry store elevation info since it is required during styling
-        // The ele=* tag is present in the outermost way
-        const QString ele = QStringLiteral("ele");
-        const OsmPlacemarkData &outerWayData = ways[*outerWays.begin()].osmData();
-        auto tagIter = outerWayData.findTag(ele);
-        if (tagIter != outerWayData.tagsEnd()) {
-            osmData.addTag(ele, tagIter.value());
-        }
-    }
+    OsmRings const inner = rings(innerRoles, ways, nodes, usedNodes, innerWays);
 
     bool const hasMultipleOuterRings = outer.size() > 1;
-    foreach(auto const &outerRing, outer) {
+    for (int i=0, n=outer.size(); i<n; ++i) {
+        auto const & outerRing = outer[i];
+
         GeoDataPolygon *polygon = new GeoDataPolygon;
-        polygon->setOuterBoundary(outerRing);
-        foreach(const GeoDataLinearRing &innerRing, inner) {
-            if (!innerRing.isEmpty() && outerRing.contains(innerRing.first())) {
-                polygon->appendInnerBoundary(innerRing);
+        polygon->setOuterBoundary(outerRing.first);
+        OsmPlacemarkData osmData = m_osmData;
+        osmData.addMemberReference(-1, outerRing.second);
+
+        int index = 0;
+        for (auto const &innerRing: inner) {
+            if (innerRing.first.isEmpty() || !outerRing.first.contains(innerRing.first.first())) {
+                // Simple check to see if this inner ring is inside the outer ring
+                continue;
+            }
+
+            if (StyleBuilder::determineVisualCategory(innerRing.second) == GeoDataPlacemark::None) {
+                // Schedule way for removal: It's a non-styled way only used to create the inner boundary in this polygon
+                usedWays << innerRing.second.id();
+            }
+            polygon->appendInnerBoundary(innerRing.first);
+            osmData.addMemberReference(index, innerRing.second);
+            ++index;
+        }
+
+        if (outerCategory == GeoDataPlacemark::Bathymetry) {
+            // In case of a bathymetry store elevation info since it is required during styling
+            // The ele=* tag is present in the outermost way
+            const QString ele = QStringLiteral("ele");
+            const OsmPlacemarkData &outerWayData = outerRing.second;
+            auto tagIter = outerWayData.findTag(ele);
+            if (tagIter != outerWayData.tagsEnd()) {
+                osmData.addTag(ele, tagIter.value());
             }
         }
 
@@ -162,7 +161,7 @@ void OsmRelation::create(GeoDataDocument *document, OsmWays &ways, const OsmNode
     }
 }
 
-QList<GeoDataLinearRing> OsmRelation::rings(const QStringList &roles, const OsmWays &ways, const OsmNodes &nodes, QSet<qint64> &usedNodes, QSet<qint64> &usedWays) const
+OsmRelation::OsmRings OsmRelation::rings(const QStringList &roles, const OsmWays &ways, const OsmNodes &nodes, QSet<qint64> &usedNodes, QSet<qint64> &usedWays) const
 {
     QSet<qint64> currentWays;
     QSet<qint64> currentNodes;
@@ -171,13 +170,13 @@ QList<GeoDataLinearRing> OsmRelation::rings(const QStringList &roles, const OsmW
         if (roles.contains(member.role)) {
             if (!ways.contains(member.reference)) {
                 // A way is missing. Return nothing.
-                return QList<GeoDataLinearRing>();
+                return OsmRings();
             }
             roleMembers << member.reference;
         }
     }
 
-    QList<GeoDataLinearRing> result;
+    OsmRings result;
     QList<OsmWay> unclosedWays;
     foreach(qint64 wayId, roleMembers) {
         GeoDataLinearRing ring;
@@ -192,13 +191,13 @@ QList<GeoDataLinearRing> OsmRelation::rings(const QStringList &roles, const OsmW
         foreach(qint64 id, way.references()) {
             if (!nodes.contains(id)) {
                 // A node is missing. Return nothing.
-                return QList<GeoDataLinearRing>();
+                return OsmRings();
             }
             ring << nodes[id].coordinates();
         }
         Q_ASSERT(ways.contains(wayId));
         currentWays << wayId;
-        result << ring;
+        result << OsmRing(ring, way.osmData());
     }
 
     if( !unclosedWays.isEmpty() ) {
@@ -221,7 +220,7 @@ QList<GeoDataLinearRing> OsmRelation::rings(const QStringList &roles, const OsmW
                             qint64 id = isReversed ? v.takeLast() : v.takeFirst();
                             if (!nodes.contains(id)) {
                                 // A node is missing. Return nothing.
-                                return QList<GeoDataLinearRing>();
+                                return OsmRings();
                             }
                             if ( id != lastReference ) {
                                 ring << nodes[id].coordinates();
@@ -242,9 +241,10 @@ QList<GeoDataLinearRing> OsmRelation::rings(const QStringList &roles, const OsmW
             }
 
             if(lastReference != firstReference) {
-                return QList<GeoDataLinearRing>();
+                return OsmRings();
             } else {
-                result << ring;
+                /** @todo Merge tags common to all rings into the new osm data? */
+                result << OsmRing(ring, OsmPlacemarkData());
             }
         }
     }
