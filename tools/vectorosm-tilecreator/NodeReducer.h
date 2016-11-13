@@ -26,15 +26,14 @@ public:
     qint64 remainingNodes() const;
 
 private:
-    qreal epsilonForString(int detailLevel) const;
-    qreal epsilonForArea(int detailLevel) const;
+    qreal epsilonFor(int detailLevel, qreal multiplier) const;
     qreal perpendicularDistance(const GeoDataCoordinates &a, const GeoDataCoordinates &b, const GeoDataCoordinates &c) const;
 
     template<class T>
     void reduce(T const & lineString, const GeoDataPlacemark* placemark, T* reducedLine, int tileLevel)
     {
         bool const isArea = lineString.isClosed() && VectorClipper::canBeArea(placemark->visualCategory());
-        qreal const epsilon = isArea ? epsilonForArea(tileLevel) : epsilonForString(tileLevel);
+        qreal const epsilon = epsilonFor(tileLevel, isArea ? 45.0 : 30.0);
         *reducedLine = douglasPeucker(lineString, placemark->osmData(), epsilon);
 
         qint64 prevSize = lineString.size();

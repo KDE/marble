@@ -29,6 +29,9 @@ NodeReducer::NodeReducer(GeoDataDocument* document, int zoomLevel) :
     m_remainingNodes(0)
 {
     foreach (GeoDataPlacemark* placemark, placemarks()) {
+        if (placemark->visualCategory() == GeoDataPlacemark::None) {
+            continue;
+        }
         GeoDataGeometry const * const geometry = placemark->geometry();
         if(geometry->nodeType() == GeoDataTypes::GeoDataLineStringType) {
             GeoDataLineString const * prevLine = static_cast<GeoDataLineString const *>(geometry);
@@ -66,19 +69,17 @@ qint64 NodeReducer::remainingNodes() const
     return m_remainingNodes;
 }
 
-qreal NodeReducer::epsilonForString(int detailLevel) const
+qreal NodeReducer::epsilonFor(int detailLevel, qreal multiplier) const
 {
     if (detailLevel >= 17) {
         return 0.25;
+    } else if (detailLevel >= 10) {
+        int const factor = 1 << (qAbs(detailLevel-12));
+        return multiplier / factor;
+    } else {
+        int const factor = 1 << (qAbs(detailLevel-12));
+        return multiplier * factor;
     }
-    int const factor = 1 << (qAbs(detailLevel-11));
-    return detailLevel < 12 ? 30.0 * factor : 30.0 / factor;
-}
-
-qreal NodeReducer::epsilonForArea(int detailLevel) const
-{
-    int const factor = 1 << (qAbs(detailLevel-11));
-    return detailLevel < 12 ? 60.0 * factor : 60.0 / factor;
 }
 
 qreal NodeReducer::perpendicularDistance(const GeoDataCoordinates &a, const GeoDataCoordinates &b, const GeoDataCoordinates &c) const
