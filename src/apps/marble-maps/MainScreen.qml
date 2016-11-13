@@ -156,6 +156,7 @@ ApplicationWindow {
                     showAccuracy: navigationManager.deviated
                     allowRadiusAnimation: !zoomDetectionTimer.running
                     allowPositionAnimation: !panningDetectionTimer.running
+                    speed: marbleMaps.speed
                 }
 
                 MouseArea {

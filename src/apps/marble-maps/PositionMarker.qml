@@ -20,6 +20,7 @@ Item {
     property real radius: 100
     property bool allowRadiusAnimation: true
     property bool allowPositionAnimation: true
+    property real speed: 0
 
     Behavior on radius {
         enabled: allowRadiusAnimation
@@ -52,14 +53,28 @@ Item {
         radius: root.radius
     }
 
+    Rectangle {
+        visible: root.speed < 0.5
+        width: Screen.pixelDensity * 4
+        height: width
+        anchors.centerIn: parent
+        radius: width/2
+        border {
+          color: "#f2f2f2"
+          width: 4
+        }
+        color: "#004a96"
+    }
+
     Image {
         id: image
-        source: "qrc:///navigation_blue.svg"
-        sourceSize.width: width
-        sourceSize.height: height
         width: Screen.pixelDensity * 6
         height: width
         anchors.centerIn: parent
+        visible: root.speed >= 0.5
+        source: "qrc:///navigation_blue.svg"
+        sourceSize.width: width
+        sourceSize.height: height
         smooth: true
         rotation: root.angle
     }
