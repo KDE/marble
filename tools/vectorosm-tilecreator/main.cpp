@@ -39,6 +39,7 @@
 #include "TileIterator.h"
 #include "TileDirectory.h"
 #include "MbTileWriter.h"
+#include "SpellChecker.h"
 
 #include <iostream>
 
@@ -136,6 +137,8 @@ int main(int argc, char *argv[])
                           {"conflict-resolution", "How to deal with existing tiles: overwrite, skip or merge", "mode", "overwrite"},
                           {{"c", "cache-directory"}, "Directory for temporary data.", "cache", "cache"},
                           {{"m", "mbtile"}, "Store tiles at level 15 onwards in a mbtile database.", "mbtile"},
+                          {{"s", "spellcheck"}, "Use this geonames.org cities file for spell-checking city names", "spellcheck"},
+                          {"verbose", "Increase amount of shell output information"},
                           {{"z", "zoom-level"}, "Zoom level according to which OSM information has to be processed.", "levels", "11,13,15,17"},
                           {{"o", "output"}, "Output file or directory", "output", QString("%1/maps/earth/vectorosm").arg(MarbleDirs::localPath())},
                           {{"e", "extension"}, "Output file type: o5m (default), osm or kml", "file extension", "o5m"}
@@ -189,6 +192,11 @@ int main(int argc, char *argv[])
         auto map = TileDirectory::open(inputFileName, manager);
         VectorClipper processor(map.data(), maxZoomLevel);
         GeoDataLatLonBox world(85.0, -85.0, 180.0, -180.0, GeoDataCoordinates::Degree);
+        if (parser.isSet("spellcheck")) {
+            SpellChecker spellChecker(parser.value("spellcheck"));
+            spellChecker.setVerbose(parser.isSet("verbose"));
+            spellChecker.correctPlaceLabels(map.data()->placemarkList());
+        }
         foreach(auto zoomLevel, zoomLevels) {
             TileIterator iter(world, zoomLevel);
             qint64 count = 0;

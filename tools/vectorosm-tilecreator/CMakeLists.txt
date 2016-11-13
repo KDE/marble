@@ -25,6 +25,7 @@ BaseClipper.cpp
 BaseFilter.cpp
 NodeReducer.cpp
 PeakAnalyzer.cpp
+SpellChecker.cpp
 TagsFilter.cpp
 TileIterator.cpp
 TileDirectory.cpp

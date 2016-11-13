@@ -27,6 +27,8 @@ from subprocess import call
 def unzip_file(filename, in_dir):
 	print(in_dir)
 	path_zip = os.path.join(in_dir, filename + '.zip')
+	if not os.path.exists(path_zip):
+		path_zip = os.path.splitext(path_zip)[0] + '.zip'
 	with zipfile.ZipFile(path_zip ,"r") as zip_ref:
 		path_dir = os.path.join(in_dir, filename)
 		os.mkdir(path_dir)
@@ -34,18 +36,20 @@ def unzip_file(filename, in_dir):
 		os.remove(path_zip)
 
 def generate_url(filename):
-	url = 'www.naturalearthdata.com/http//www.naturalearthdata.com/download/'
-	cultural_tokens = ['admin', 'populated', 'roads', 'railroads', 'airports', 'ports', 'urban', 'parks', 'time', 'cultural']
-	file_tokens = filename.split('_')
-	url += file_tokens[1] + '/'
-	data_type = 'physical'
-	for token in file_tokens:
-		if token in cultural_tokens:
-			data_type = 'cultural'
-			break
-	url += data_type + '/'
-	url += filename + '.zip'
-	return url
+        if filename == 'cities15000.txt':
+            return 'http://download.geonames.org/export/dump/cities15000.zip'
+        url = 'www.naturalearthdata.com/http//www.naturalearthdata.com/download/'
+        cultural_tokens = ['admin', 'populated', 'roads', 'railroads', 'airports', 'ports', 'urban', 'parks', 'time', 'cultural']
+        file_tokens = filename.split('_')
+        url += file_tokens[1] + '/'
+        data_type = 'physical'
+        for token in file_tokens:
+                if token in cultural_tokens:
+                        data_type = 'cultural'
+                        break
+        url += data_type + '/'
+        url += filename + '.zip'
+        return url
 
 def download(filename, in_dir):
 	url = generate_url(filename)
@@ -108,6 +112,7 @@ if __name__ == "__main__":
 	args = parser.parse_args()
 
 	exception_names = ['ne_50m_admin_1_states_provinces_lines']
+	check_existence('cities15000.txt', args.in_dir)
 
 	level_info = parse_file(args.file, args.in_dir)
 	for level in level_info:
@@ -123,9 +128,12 @@ if __name__ == "__main__":
 				path = os.path.join(args.in_dir, filename) + '/' + filename + '_shp.shp'
 			abs_file_paths.append(path)
 		print('Level has following SHP datasets: ', abs_file_paths)
-		polyshp2osm.run(abs_file_paths, 1, 5000000, 'tiny_planet_{}'.format(level))
-		print('Tiny planetosm for Level = {} complete.'.format(level))
-		f = open('bound_info_{}'.format(level), "w")
-		print('tiny_planet_{}.1.osm;Level;-180.0;-86.0;180.0;86.0'.format(level), file=f)
-		f.close()
-		call(["marble-vectorosm-tilecreator", "-e", "o5m", "-z", str(level), "-o", args.out_dir, 'tiny_planet_{}.1.osm'.format(level)])
+		target = 'tiny_planet_{}.1.osm'.format(level)
+		if args.overwrite or not os.path.exists(target):
+		    polyshp2osm.run(abs_file_paths, 1, 5000000, 'tiny_planet_{}'.format(level))
+		    print('Tiny planetosm for Level = {} complete.'.format(level))
+		    f = open('bound_info_{}'.format(level), "w")
+		    print('tiny_planet_{}.1.osm;Level;-180.0;-86.0;180.0;86.0'.format(level), file=f)
+		    f.close()
+		spellcheck = [] if level < 6 else ['-s', os.path.join(args.in_dir, 'cities15000.txt', 'cities15000.txt')]
+		call(["marble-vectorosm-tilecreator", "-e", "o5m", "-z", str(level)] + spellcheck + ["-o", args.out_dir, target])
