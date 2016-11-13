@@ -43,8 +43,8 @@ WayConcatenator::WayConcatenator(GeoDataDocument *document) :
                     osmData.containsTagKey("waterway");
             if (isWay) {
                 GeoDataLineString *line = static_cast<GeoDataLineString*>(placemark->geometry());
-                qint64 firstId = osmId(osmData.nodeReference(line->first()));
-                qint64 lastId = osmId(osmData.nodeReference(line->last()));
+                qint64 firstId = osmData.nodeReference(line->first()).oid();
+                qint64 lastId = osmData.nodeReference(line->last()).oid();
                 if (firstId > 0 && lastId > 0) {
                     ++m_originalWays;
                     bool containsFirst = m_hash.contains(firstId);
@@ -109,12 +109,6 @@ int WayConcatenator::mergedWays() const
     return m_mergedWays;
 }
 
-qint64 WayConcatenator::osmId(const OsmPlacemarkData &osmData)
-{
-    auto const value = osmData.tagValue(QStringLiteral("mx:oid")).toLong();
-    return value > 0 ? value : osmData.id();
-}
-
 void WayConcatenator::addWayChunks()
 {
     for (auto const &placemark: m_wayPlacemarks) {
@@ -171,8 +165,8 @@ WayChunk::Ptr WayConcatenator::wayChunk(const GeoDataPlacemark &placemark, qint6
 void WayConcatenator::concatFirst(const PlacemarkPtr &placemark, const WayChunk::Ptr &chunk)
 {
     GeoDataLineString *line = static_cast<GeoDataLineString*>(placemark->geometry());
-    qint64 firstId = osmId(placemark->osmData().nodeReference(line->first()));
-    qint64 lastId = osmId(placemark->osmData().nodeReference(line->last()));
+    qint64 firstId = placemark->osmData().nodeReference(line->first()).oid();
+    qint64 lastId = placemark->osmData().nodeReference(line->last()).oid();
 
     if (chunk->first() != chunk->last()) {
         int chunksRemoved = m_hash.remove(firstId, chunk);
@@ -194,8 +188,8 @@ void WayConcatenator::concatFirst(const PlacemarkPtr &placemark, const WayChunk:
 void WayConcatenator::concatLast(const PlacemarkPtr &placemark, const WayChunk::Ptr &chunk)
 {
     GeoDataLineString *line = static_cast<GeoDataLineString*>(placemark->geometry());
-    qint64 firstId = osmId(placemark->osmData().nodeReference(line->first()));
-    qint64 lastId = osmId(placemark->osmData().nodeReference(line->last()));
+    qint64 firstId = placemark->osmData().nodeReference(line->first()).oid();
+    qint64 lastId = placemark->osmData().nodeReference(line->last()).oid();
 
     if (chunk->first() != chunk->last()) {
         int chunksRemoved = m_hash.remove(lastId, chunk);
@@ -214,8 +208,8 @@ void WayConcatenator::concatLast(const PlacemarkPtr &placemark, const WayChunk::
 void WayConcatenator::concatBoth(const PlacemarkPtr &placemark, const WayChunk::Ptr &chunk, const WayChunk::Ptr &otherChunk)
 {
     GeoDataLineString *line = static_cast<GeoDataLineString*>(placemark->geometry());
-    qint64 firstId = osmId(placemark->osmData().nodeReference(line->first()));
-    qint64 lastId = osmId(placemark->osmData().nodeReference(line->last()));
+    qint64 firstId = placemark->osmData().nodeReference(line->first()).oid();
+    qint64 lastId = placemark->osmData().nodeReference(line->last()).oid();
 
     int chunksRemoved;
     if (chunk->first() != chunk->last()) {

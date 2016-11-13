@@ -54,6 +54,7 @@ public:
     OsmPlacemarkData();
 
     qint64 id() const;
+    qint64 oid() const;
     QString version() const;
     QString changeset() const;
     QString uid() const;

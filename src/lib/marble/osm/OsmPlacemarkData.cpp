@@ -32,6 +32,12 @@ qint64 OsmPlacemarkData::id() const
     return m_id;
 }
 
+qint64 OsmPlacemarkData::oid() const
+{
+    auto const value = m_tags.value(QStringLiteral("mx:oid")).toLong();
+    return value > 0 ? value : m_id;
+}
+
 QString OsmPlacemarkData::changeset() const
 {
     return m_changeset;
