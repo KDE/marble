@@ -27,6 +27,7 @@ public:
 
     int originalWays() const;
     int mergedWays() const;
+    static qint64 osmId(const OsmPlacemarkData &osmData);
 
 private:
     void createWayChunk(const PlacemarkPtr &placemark, qint64 firstId, qint64 lastId);

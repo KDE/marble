@@ -43,8 +43,6 @@ public:
     qint64 first() const;
     qint64 last() const;
     void reverse();
-    qint64 id() const;
-    void printIds() const;
     int size() const;
     bool concatPossible(const GeoDataPlacemark &placemark) const;
 

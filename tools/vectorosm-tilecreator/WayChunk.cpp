@@ -91,20 +91,6 @@ void WayChunk::reverse()
     qSwap(m_first, m_last);
 }
 
-qint64 WayChunk::id() const
-{
-    return m_wayList.first()->osmData().id();
-}
-
-void WayChunk::printIds() const
-{
-    QVector<PlacemarkPtr>::const_iterator itr = m_wayList.begin();
-    qDebug()<<"IDs of placemarks in chunk";
-    for (; itr != m_wayList.end(); ++itr) {
-        qDebug()<<"Id :- "<<(*itr)->osmData().id();
-    }
-}
-
 int WayChunk::size() const
 {
     return m_wayList.size();
