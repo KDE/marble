@@ -437,16 +437,19 @@ void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const Clipper
     foreach(const auto &path, paths) {
         GeoDataPlacemark* newPlacemark = new GeoDataPlacemark;
         GeoDataLinearRing outerRing;
+        OsmPlacemarkData const & placemarkOsmData = placemark->osmData();
+        OsmPlacemarkData & newPlacemarkOsmData = newPlacemark->osmData();
         int index = -1;
-        auto const & osmData = placemark->osmData().memberReference(index);
+        OsmPlacemarkData const & outerRingOsmData = placemarkOsmData.memberReference(index);
+        OsmPlacemarkData & newOuterRingOsmData = newPlacemarkOsmData.memberReference(index);
         QVector<int> borderPoints;
         int nodeIndex = 0;
         foreach(const auto &point, path) {
             GeoDataCoordinates const coordinates = point.coordinates();
             outerRing << coordinates;
-            auto const originalOsmData = osmData.nodeReference(coordinates);
+            auto const originalOsmData = outerRingOsmData.nodeReference(coordinates);
             if (originalOsmData.id() > 0) {
-                newPlacemark->osmData().addNodeReference(coordinates, originalOsmData);
+                newOuterRingOsmData.addNodeReference(coordinates, originalOsmData);
             }
             if (!point.isInside(minX, maxX, minY, maxY)) {
                 borderPoints << nodeIndex;
@@ -457,15 +460,15 @@ void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const Clipper
         GeoDataPolygon* newPolygon = new GeoDataPolygon;
         newPolygon->setOuterBoundary(outerRing);
         newPlacemark->setGeometry(newPolygon);
-        newPlacemark->osmData().setId(osmData.id());
-        OsmObjectManager::initializeOsmData(newPlacemark);
-        copyTags(*placemark, *newPlacemark);
-        setBorderPoints(newPlacemark->osmData(), borderPoints, outerRing.size());
-        copyTags(osmData.memberReference(index), newPlacemark->osmData().memberReference(index));
+        newPlacemarkOsmData.addTag(QStringLiteral("mx:oid"), QString::number(placemarkOsmData.id()));
+        copyTags(placemarkOsmData, newPlacemarkOsmData);
+        copyTags(outerRingOsmData, newOuterRingOsmData);
+        newOuterRingOsmData.addTag(QStringLiteral("mx:oid"), QString::number(outerRingOsmData.id()));
+        setBorderPoints(newOuterRingOsmData, borderPoints, outerRing.size());
 
         auto const & innerBoundaries = polygon->innerBoundaries();
         for (index = 0; index < innerBoundaries.size(); ++index) {
-            auto const & osmData = placemark->osmData().memberReference(index);
+            auto const & innerRingOsmData = placemarkOsmData.memberReference(index);
             clipper.Clear();
             clipper.AddPath(path, ptClip, true);
             Path innerPath;
@@ -476,15 +479,17 @@ void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const Clipper
             Paths innerPaths;
             clipper.Execute(ctIntersection, innerPaths);
             foreach(auto const &innerPath, innerPaths) {
+                int const newIndex = newPolygon->innerBoundaries().size();
+                auto & newInnerRingOsmData = newPlacemarkOsmData.memberReference(newIndex);
                 GeoDataLinearRing innerRing;
                 borderPoints.clear();
                 nodeIndex = 0;
                 foreach(const auto &point, innerPath) {
                     GeoDataCoordinates const coordinates = point.coordinates();
                     innerRing << coordinates;
-                    auto const originalOsmData = osmData.nodeReference(coordinates);
+                    auto const originalOsmData = innerRingOsmData.nodeReference(coordinates);
                     if (originalOsmData.id() > 0) {
-                        newPlacemark->osmData().addNodeReference(coordinates, originalOsmData);
+                        newInnerRingOsmData.addNodeReference(coordinates, originalOsmData);
                     }
                     if (!point.isInside(minX, maxX, minY, maxY)) {
                         borderPoints << nodeIndex;
@@ -492,13 +497,13 @@ void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const Clipper
                     ++nodeIndex;
                 }
                 newPolygon->appendInnerBoundary(innerRing);
-                OsmObjectManager::initializeOsmData(newPlacemark);
-                int const newIndex = newPolygon->innerBoundaries().size()-1;
-                copyTags(placemark->osmData().memberReference(index), newPlacemark->osmData().memberReference(newIndex));
-                setBorderPoints(newPlacemark->osmData().memberReference(newIndex), borderPoints, innerRing.size());
+                newInnerRingOsmData.addTag(QStringLiteral("mx:oid"), QString::number(innerRingOsmData.id()));
+                copyTags(innerRingOsmData, newInnerRingOsmData);
+                setBorderPoints(newInnerRingOsmData, borderPoints, innerRing.size());
             }
         }
 
+        OsmObjectManager::initializeOsmData(newPlacemark);
         document->append(newPlacemark);
     }
 }

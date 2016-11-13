@@ -92,7 +92,7 @@ private:
             }
 
             newPlacemark->setGeometry(newRing);
-            newPlacemark->osmData().setId(placemark->osmData().id());
+            newPlacemark->osmData().addTag(QStringLiteral("mx:oid"), QString::number(placemark->osmData().id()));
             copyTags(*placemark, *newPlacemark);
             setBorderPoints(newPlacemark->osmData(), borderPoints, newRing->size());
             OsmObjectManager::initializeOsmData(newPlacemark);
