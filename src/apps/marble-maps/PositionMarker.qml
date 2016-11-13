@@ -15,24 +15,41 @@ import QtQuick.Window 2.2
 Item {
     id: root
 
-    property alias angle: rotation.angle
-    property int posX: 0
-    property int posY: 0
+    property real angle: 0
     property bool showAccuracy: true
     property real radius: 100
+    property bool allowRadiusAnimation: true
+    property bool allowPositionAnimation: true
 
-    x: posX - width * 0.5
-    y: posY - height * 0.5
+    Behavior on radius {
+        enabled: allowRadiusAnimation
+        NumberAnimation { duration: 200 }
+    }
 
-    width: radius
-    height: radius
+    Behavior on angle {
+        RotationAnimation {
+          duration: 200
+          direction: RotationAnimation.Shortest
+        }
+    }
+    Behavior on x {
+        enabled: allowPositionAnimation
+        SmoothedAnimation { duration: 200 }
+    }
+    Behavior on y {
+        enabled: allowPositionAnimation
+        SmoothedAnimation { duration: 200 }
+    }
 
     Rectangle {
-      anchors.fill: parent
-      color: "#40ff0000"
-      border.color: "#ff0000"
-      border.width: 2
-      radius: root.radius
+        width: 2 * root.radius
+        height: 2 * root.radius
+        anchors.centerIn: parent
+        visible: root.showAccuracy
+        color: "#40ff0000"
+        border.color: "#ff0000"
+        border.width: 2
+        radius: root.radius
     }
 
     Image {
@@ -44,12 +61,6 @@ Item {
         height: width
         anchors.centerIn: parent
         smooth: true
-        transform: Rotation {
-            id: rotation
-            origin {
-                x: image.width * 0.5
-                y: image.height * 0.5
-            }
-        }
+        rotation: root.angle
     }
 }

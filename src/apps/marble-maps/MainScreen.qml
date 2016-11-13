@@ -100,10 +100,15 @@ ApplicationWindow {
                     updateIndicator();
                 }
                 onVisibleLatLonAltBoxChanged: {
+                    !panningDetectionTimer.restart();
                     updateIndicator();
                 }
                 onCurrentPositionChanged: {
                     updateIndicator();
+                }
+
+                onZoomChanged: {
+                    zoomDetectionTimer.restart()
                 }
 
                 Component.onCompleted: {
@@ -130,14 +135,27 @@ ApplicationWindow {
 //                    visible: hasRoute // TODO: make this work
                 }
 
+                Timer {
+                    id: zoomDetectionTimer
+                    interval: 1000
+                }
+                Timer {
+                    id: panningDetectionTimer
+                    interval: 1000
+                }
+
                 PositionMarker {
                     id: positionMarker
-                    posX: navigationManager.snappedPositionMarkerScreenPosition.x
-                    posY: navigationManager.snappedPositionMarkerScreenPosition.y
+                    x: navigationManager.snappedPositionMarkerScreenPosition.x
+                    y: navigationManager.snappedPositionMarkerScreenPosition.y
                     angle: marbleMaps.angle
-                    visible: marbleMaps.positionAvailable && marbleMaps.positionVisible
-                    radius: navigationManager.screenAccuracy
+                    visible: marbleMaps.positionAvailable
+                             && x + radius > 0 && x - radius < marbleMaps.width
+                             && y + radius > 0 && y - radius < marbleMaps.height
+                    radius: navigationManager.screenAccuracy / 2
                     showAccuracy: navigationManager.deviated
+                    allowRadiusAnimation: !zoomDetectionTimer.running
+                    allowPositionAnimation: !panningDetectionTimer.running
                 }
 
                 MouseArea {
