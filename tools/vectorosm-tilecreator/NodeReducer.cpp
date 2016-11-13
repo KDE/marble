@@ -71,13 +71,13 @@ qreal NodeReducer::epsilonForString(int detailLevel) const
     if (detailLevel >= 17) {
         return 0.25;
     }
-    int const factor = 1 << (qAbs(detailLevel-12));
+    int const factor = 1 << (qAbs(detailLevel-11));
     return detailLevel < 12 ? 30.0 * factor : 30.0 / factor;
 }
 
 qreal NodeReducer::epsilonForArea(int detailLevel) const
 {
-    int const factor = 1 << (qAbs(detailLevel-12));
+    int const factor = 1 << (qAbs(detailLevel-11));
     return detailLevel < 12 ? 60.0 * factor : 60.0 / factor;
 }
 

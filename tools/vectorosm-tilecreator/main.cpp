@@ -208,7 +208,7 @@ int main(int argc, char *argv[])
                     continue;
                 }
                 GeoDataDocument* tile = processor.clipTo(zoomLevel, tileId.x(), tileId.y());
-                NodeReducer nodeReducer(tile, zoomLevel+1);
+                NodeReducer nodeReducer(tile, zoomLevel);
                 if (!writeTile(tile, filename)) {
                     return 4;
                 }
