@@ -230,7 +230,7 @@ void GeometryLayerPrivate::updateTiledLineStrings(const GeoDataPlacemark* placem
     if (!placemark->hasOsmData()) {
         return;
     }
-    qint64 const osmId = placemark->osmData().id();
+    qint64 const osmId = placemark->osmData().oid();
     if (osmId <= 0) {
         return;
     }
@@ -353,8 +353,8 @@ void GeometryLayerPrivate::removeGraphicsItems( const GeoDataFeature *feature )
         if (placemark->isGloballyVisible() &&
                 placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType &&
                 placemark->hasOsmData() &&
-                placemark->osmData().id() > 0) {
-            auto & items = m_osmLineStringItems[placemark->osmData().id()];
+                placemark->osmData().oid() > 0) {
+            auto & items = m_osmLineStringItems[placemark->osmData().oid()];
             bool removed = false;
             for (auto item: items) {
                 if (item->feature() == feature) {
