@@ -87,7 +87,7 @@ enum PolyFillType { pftEvenOdd, pftNonZero, pftPositive, pftNegative };
 struct IntPoint {
   cInt X;
   cInt Y;
-  constexpr static qint64 const scale = 10000000000;
+  constexpr static qint64 const scale = 10000000;
 #ifdef use_xyz
   cInt Z;
   IntPoint(cInt x = 0, cInt y = 0, cInt z = 0): X(x), Y(y), Z(z) {};
