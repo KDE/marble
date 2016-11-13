@@ -4633,7 +4633,8 @@ Marble::GeoDataCoordinates IntPoint::coordinates() const
     using namespace Marble;
     GeoDataCoordinates const coords = GeoDataCoordinates(double(X) / scale, double(Y) / scale);
     if (m_coordinates) {
-        bool const clipperKeptTheNode = EARTH_RADIUS * distanceSphere(coords, *m_coordinates) < 0.001;
+        bool const clipperKeptTheNode = qRound64(m_coordinates->longitude() * scale) == X &&
+                qRound64(m_coordinates->latitude() * scale) == Y;
         if (clipperKeptTheNode) {
             return *m_coordinates;
         }
