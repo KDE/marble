@@ -115,7 +115,6 @@ QHash<TileId, QVector<GeoDataPlacemark *> > SpellChecker::parseCities(const QStr
         return placeLabels;
     }
 
-    int count;
     while (!file.atEnd()) {
         QByteArray line = file.readLine();
         auto const values = line.split('\t');
@@ -140,7 +139,6 @@ QHash<TileId, QVector<GeoDataPlacemark *> > SpellChecker::parseCities(const QStr
 
             auto const tile = TileId::fromCoordinates(coordinate, m_tileLevel);
             placeLabels[tile] << city;
-            ++count;
         }
     }
     return placeLabels;
