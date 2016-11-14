@@ -460,10 +460,14 @@ void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const Clipper
         GeoDataPolygon* newPolygon = new GeoDataPolygon;
         newPolygon->setOuterBoundary(outerRing);
         newPlacemark->setGeometry(newPolygon);
-        newPlacemarkOsmData.addTag(QStringLiteral("mx:oid"), QString::number(placemarkOsmData.id()));
+        if (placemarkOsmData.id() > 0) {
+            newPlacemarkOsmData.addTag(QStringLiteral("mx:oid"), QString::number(placemarkOsmData.id()));
+        }
         copyTags(placemarkOsmData, newPlacemarkOsmData);
         copyTags(outerRingOsmData, newOuterRingOsmData);
-        newOuterRingOsmData.addTag(QStringLiteral("mx:oid"), QString::number(outerRingOsmData.id()));
+        if (outerRingOsmData.id() > 0) {
+            newOuterRingOsmData.addTag(QStringLiteral("mx:oid"), QString::number(outerRingOsmData.id()));
+        }
         setBorderPoints(newOuterRingOsmData, borderPoints, outerRing.size());
 
         auto const & innerBoundaries = polygon->innerBoundaries();
@@ -502,7 +506,9 @@ void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const Clipper
                     ++nodeIndex;
                 }
                 newPolygon->appendInnerBoundary(innerRing);
-                newInnerRingOsmData.addTag(QStringLiteral("mx:oid"), QString::number(innerRingOsmData.id()));
+                if (innerRingOsmData.id() > 0) {
+                    newInnerRingOsmData.addTag(QStringLiteral("mx:oid"), QString::number(innerRingOsmData.id()));
+                }
                 copyTags(innerRingOsmData, newInnerRingOsmData);
                 setBorderPoints(newInnerRingOsmData, borderPoints, innerRing.size());
             }
