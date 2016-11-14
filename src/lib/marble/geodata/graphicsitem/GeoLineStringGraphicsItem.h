@@ -38,8 +38,8 @@ public:
 
 private:
     void paintOutline(GeoPainter *painter, const ViewportParams *viewport);
-    void paintInline(GeoPainter *painter, const ViewportParams *viewport);
-    void paintLabel(GeoPainter *painter, const ViewportParams *viewport);
+    void paintInline(GeoPainter *painter, const ViewportParams *viewport) const;
+    void paintLabel(GeoPainter *painter, const ViewportParams *viewport) const;
     bool configurePainterForOutline(GeoPainter* painter, const ViewportParams *viewport) const;
     bool configurePainterForInline(GeoPainter* painter, const ViewportParams *viewport) const;
     bool configurePainterForLabel(GeoPainter* painter,  const ViewportParams *viewport, LabelPositionFlags &labelPositionFlags) const;

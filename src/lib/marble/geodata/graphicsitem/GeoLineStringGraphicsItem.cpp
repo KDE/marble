@@ -162,7 +162,7 @@ void GeoLineStringGraphicsItem::paint(GeoPainter* painter, const ViewportParams*
     }
 }
 
-void GeoLineStringGraphicsItem::paintInline(GeoPainter* painter, const ViewportParams* viewport)
+void GeoLineStringGraphicsItem::paintInline(GeoPainter* painter, const ViewportParams* viewport) const
 {
 //    qDebug() << Q_FUNC_INFO;
     if ( ( !viewport->resolves( m_renderLineString->latLonAltBox(), 2) ) ) {
@@ -204,7 +204,7 @@ void GeoLineStringGraphicsItem::paintOutline(GeoPainter *painter, const Viewport
     painter->restore();
 }
 
-void GeoLineStringGraphicsItem::paintLabel(GeoPainter *painter, const ViewportParams *viewport)
+void GeoLineStringGraphicsItem::paintLabel(GeoPainter *painter, const ViewportParams *viewport) const
 {
 //    qDebug() << Q_FUNC_INFO;
     if ( ( !viewport->resolves( m_renderLineString->latLonAltBox(), 2) ) ) {

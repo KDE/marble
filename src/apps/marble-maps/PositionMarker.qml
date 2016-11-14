@@ -54,8 +54,9 @@ Item {
     }
 
     Rectangle {
-        visible: root.speed < 0.5
-        width: Screen.pixelDensity * 4
+        id: circleIndicator
+        visible: root.speed < 0.4
+        width: Screen.pixelDensity * 3.5
         height: width
         anchors.centerIn: parent
         radius: width/2
@@ -67,11 +68,11 @@ Item {
     }
 
     Image {
-        id: image
+        id: arrowIndicator
         width: Screen.pixelDensity * 6
         height: width
         anchors.centerIn: parent
-        visible: root.speed >= 0.5
+        visible: root.speed >= 0.4
         source: "qrc:///navigation_blue.svg"
         sourceSize.width: width
         sourceSize.height: height
