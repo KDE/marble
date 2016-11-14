@@ -74,6 +74,9 @@ public:
                                          Qt::BrushStyle brushStyle = Qt::SolidPattern,
                                          const QString& texturePath = QString()) const;
 
+    // Having an outline with the same color as the fill results in degraded
+    // performance and degraded display quality for no good reason
+    // Q_ASSERT( !(outline && color == outlineColor && brushStyle == Qt::SolidPattern) );
     void initializeDefaultStyles();
 
     static QString createPaintLayerItem(const QString &itemType, GeoDataPlacemark::GeoDataVisualCategory visualCategory, const QString &subType = QString());
@@ -639,7 +642,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
 
     m_defaultStyle[GeoDataPlacemark::ManmadeBridge]            = createWayStyle(QColor("#b8b8b8"), Qt::transparent, true, true);
     m_defaultStyle[GeoDataPlacemark::ManmadeLighthouse]        = createOsmPOIStyle(osmFont, "transportation/lighthouse.16", transportationColor, "#f2efe9", QColor( "#f2efe9" ).darker());
-    m_defaultStyle[GeoDataPlacemark::ManmadePier]              = createStyle(0.0, 3.0, "#f2efe9", "#f2efe9", true, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector<qreal>(), osmFont);
+    m_defaultStyle[GeoDataPlacemark::ManmadePier]              = createStyle(0.0, 3.0, "#f2efe9", "#f2efe9", true, false, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector<qreal>(), osmFont);
     m_defaultStyle[GeoDataPlacemark::ManmadeWaterTower]        = createOsmPOIStyle(osmFont, "amenity/water_tower.16", amenityColor);
     m_defaultStyle[GeoDataPlacemark::ManmadeWindMill]          = createOsmPOIStyle(osmFont, "amenity/windmill.16", amenityColor);
 
@@ -720,15 +723,15 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::HighwayTrunkLink]         = createHighwayStyle("#f9b29c", "#c84e2f", osmFont, "000000", 9, 6);
     m_defaultStyle[GeoDataPlacemark::HighwayMotorway]          = createHighwayStyle("#e892a2", "#dc2a67", osmFont, "000000", 9, 10);
     m_defaultStyle[GeoDataPlacemark::HighwayMotorwayLink]      = createHighwayStyle("#e892a2", "#dc2a67", osmFont, "000000", 9, 10);
-    m_defaultStyle[GeoDataPlacemark::TransportAirportRunway]   = createHighwayStyle("#bbbbcc", "#bbbbcc", osmFont, "000000", 0, 1);
-    m_defaultStyle[GeoDataPlacemark::TransportAirportTaxiway]  = createHighwayStyle("#bbbbcc", "#bbbbcc", osmFont, "000000", 0, 1);
+    m_defaultStyle[GeoDataPlacemark::TransportAirportRunway]   = createHighwayStyle("#bbbbcc", "#bbbbcc", osmFont, "000000", 0, 1, Qt::NoPen);
+    m_defaultStyle[GeoDataPlacemark::TransportAirportTaxiway]  = createHighwayStyle("#bbbbcc", "#bbbbcc", osmFont, "000000", 0, 1, Qt::NoPen);
     m_defaultStyle[GeoDataPlacemark::TransportAirportApron]    = createWayStyle("#e9d1ff", Qt::transparent, true, false);
 
-    m_defaultStyle[GeoDataPlacemark::NaturalWater]             = createStyle(4, 0, waterColor, waterColor, true, true,
+    m_defaultStyle[GeoDataPlacemark::NaturalWater]             = createStyle(4, 0, waterColor, waterColor, true, false,
                                                                                                    Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false, QVector< qreal >(),
                                                                                                    osmFont, waterColor.darker(150));
 
-    m_defaultStyle[GeoDataPlacemark::NaturalReef]              = createStyle(5.5, 0, "#36677c", "#36677c", true, true,
+    m_defaultStyle[GeoDataPlacemark::NaturalReef]              = createStyle(5.5, 0, "#36677c", "#36677c", true, false,
                                                                                                    Qt::Dense7Pattern, Qt::DotLine, Qt::RoundCap, false, QVector< qreal >(),
                                                                                                    osmFont, waterColor.darker(150));
 
@@ -757,19 +760,19 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::LanduseBasin]             = createWayStyle(QColor(0xB5, 0xD0, 0xD0, 0x80 ), QColor( 0xB5, 0xD0, 0xD0 ));
     m_defaultStyle[GeoDataPlacemark::LanduseCemetery]          = createWayStyle("#AACBAF", "#AACBAF", true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_generic.png"));
     m_defaultStyle[GeoDataPlacemark::LanduseCommercial]        = createWayStyle("#F2DAD9", "#D1B2B0", true, true);
-    m_defaultStyle[GeoDataPlacemark::LanduseConstruction]      = createWayStyle("#b6b592", "#b6b592", true, true);
+    m_defaultStyle[GeoDataPlacemark::LanduseConstruction]      = createWayStyle("#b6b592", "#b6b592", true, false);
     m_defaultStyle[GeoDataPlacemark::LanduseFarmland]          = createWayStyle("#EDDDC9", "#C8B69E", true, true);
     m_defaultStyle[GeoDataPlacemark::LanduseFarmyard]          = createWayStyle("#EFD6B5", "#D1B48C", true, true);
-    m_defaultStyle[GeoDataPlacemark::LanduseGarages]           = createWayStyle("#E0DDCD", "#E0DDCD", true, true);
-    m_defaultStyle[GeoDataPlacemark::LanduseGrass]             = createWayStyle("#A8C8A5", "#A8C8A5", true, true);
-    m_defaultStyle[GeoDataPlacemark::LanduseIndustrial]        = createWayStyle("#DED0D5", "#DED0D5", true, true);
-    m_defaultStyle[GeoDataPlacemark::LanduseLandfill]          = createWayStyle("#b6b592", "#b6b592", true, true);
-    m_defaultStyle[GeoDataPlacemark::LanduseMeadow]            = createWayStyle("#cdebb0", "#cdebb0", true, true);
+    m_defaultStyle[GeoDataPlacemark::LanduseGarages]           = createWayStyle("#E0DDCD", "#E0DDCD", true, false);
+    m_defaultStyle[GeoDataPlacemark::LanduseGrass]             = createWayStyle("#A8C8A5", "#A8C8A5", true, false);
+    m_defaultStyle[GeoDataPlacemark::LanduseIndustrial]        = createWayStyle("#DED0D5", "#DED0D5", true, false);
+    m_defaultStyle[GeoDataPlacemark::LanduseLandfill]          = createWayStyle("#b6b592", "#b6b592", true, false);
+    m_defaultStyle[GeoDataPlacemark::LanduseMeadow]            = createWayStyle("#cdebb0", "#cdebb0", true, false);
     m_defaultStyle[GeoDataPlacemark::LanduseMilitary]          = createWayStyle("#F3D8D2", "#F3D8D2", true, true, Qt::BDiagPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/military_red_hatch.png"));
-    m_defaultStyle[GeoDataPlacemark::LanduseQuarry]            = createWayStyle("#C4C2C2", "#C4C2C2", true, true, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/quarry.png"));
-    m_defaultStyle[GeoDataPlacemark::LanduseRailway]           = createWayStyle("#DED0D5", "#DED0D5", true, true);
-    m_defaultStyle[GeoDataPlacemark::LanduseReservoir]         = createWayStyle(waterColor, waterColor, true, true);
-    m_defaultStyle[GeoDataPlacemark::LanduseResidential]       = createWayStyle("#DCDCDC", "#DCDCDC", true, true);
+    m_defaultStyle[GeoDataPlacemark::LanduseQuarry]            = createWayStyle("#C4C2C2", "#C4C2C2", true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/quarry.png"));
+    m_defaultStyle[GeoDataPlacemark::LanduseRailway]           = createWayStyle("#DED0D5", "#DED0D5", true, false);
+    m_defaultStyle[GeoDataPlacemark::LanduseReservoir]         = createWayStyle(waterColor, waterColor, true, false);
+    m_defaultStyle[GeoDataPlacemark::LanduseResidential]       = createWayStyle("#DCDCDC", "#DCDCDC", true, false);
     m_defaultStyle[GeoDataPlacemark::LanduseRetail]            = createWayStyle("#FFD6D1", "#D99C95", true, true);
     m_defaultStyle[GeoDataPlacemark::LanduseOrchard]           = createWayStyle("#AEDFA3", "#AEDFA3", true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/orchard.png"));
     m_defaultStyle[GeoDataPlacemark::LanduseVineyard]          = createWayStyle("#AEDFA3", "#AEDFA3", true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/vineyard.png"));
@@ -792,10 +795,10 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::Building]                 = createStyle(1, 0, buildingColor, buildingColor.darker(),
                                                                                    true, true, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false, QVector<qreal>(), osmFont);
 
-    m_defaultStyle[GeoDataPlacemark::Landmass]                 = createWayStyle("#F1EEE8", "#F1EEE8", true, true);
-    m_defaultStyle[GeoDataPlacemark::UrbanArea]                = createWayStyle("#E6E3DD", "#E6E3DD", true, true);
+    m_defaultStyle[GeoDataPlacemark::Landmass]                 = createWayStyle("#F1EEE8", "#F1EEE8", true, false);
+    m_defaultStyle[GeoDataPlacemark::UrbanArea]                = createWayStyle("#E6E3DD", "#E6E3DD", true, false);
     m_defaultStyle[GeoDataPlacemark::InternationalDateLine]    = createStyle(1.0, 0.0, "#000000", "#000000", false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector<qreal>(), osmFont);
-    m_defaultStyle[GeoDataPlacemark::Bathymetry]               = createWayStyle("#a5c9c9", "#a5c9c9", true, true);
+    m_defaultStyle[GeoDataPlacemark::Bathymetry]               = createWayStyle("#a5c9c9", "#a5c9c9", true, false);
 
     m_defaultStyle[GeoDataPlacemark::AdminLevel1]              = createStyle(0.0, 0.0, "#DF9CCF", "#DF9CCF", false, true, Qt::SolidPattern, Qt::CustomDashLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3, osmFont);
     m_defaultStyle[GeoDataPlacemark::AdminLevel2]              = createStyle(2.0, 0.0, "#DF9CCF", "#DF9CCF", false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3, osmFont);
