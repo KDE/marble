@@ -87,7 +87,9 @@ void BuildingGeoPolygonGraphicsItem::updatePolygons( const ViewportParams *viewp
         if (hasInnerBoundaries) {
             screenPolygons(viewport, polygon(), innerPolygons, outlinePolygons);
         }
-        viewport->screenCoordinates(polygon()->outerBoundary(), outlinePolygons);
+        else {
+            viewport->screenCoordinates(polygon()->outerBoundary(), outlinePolygons);
+        }
     } else if (ring()) {
         viewport->screenCoordinates(*ring(), outlinePolygons);
     }

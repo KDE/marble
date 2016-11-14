@@ -269,6 +269,7 @@ bool CylindricalProjectionPrivate::lineStringToPolygon( const GeoDataLineString 
                                               QVector<QPolygonF *> &polygons ) const
 {
     const TessellationFlags f = lineString.tessellationFlags();
+    const bool noFilter = f.testFlag(PreventNodeFiltering);
 
     qreal x = 0;
     qreal y = 0;
@@ -310,7 +311,7 @@ bool CylindricalProjectionPrivate::lineStringToPolygon( const GeoDataLineString 
                 : isLong && !processingLastNode && itCoords != itBegin &&
                 !viewport->resolves( *itPreviousCoords, *itCoords ) );
 
-        if ( !skipNode ) {
+        if ( !skipNode || noFilter) {
             q->screenCoordinates( *itCoords, viewport, x, y );
 
             // Initializing variables that store the values of the previous iteration

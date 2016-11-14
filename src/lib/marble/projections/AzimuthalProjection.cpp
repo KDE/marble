@@ -22,6 +22,7 @@
 
 #include <QPainterPath>
 
+
 namespace Marble {
 
 qreal AzimuthalProjection::maxValidLat() const
@@ -334,6 +335,8 @@ bool AzimuthalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
     Q_Q( const AzimuthalProjection );
 
     const TessellationFlags f = lineString.tessellationFlags();
+    const bool noFilter = f.testFlag(PreventNodeFiltering);
+
 
     qreal x = 0;
     qreal y = 0;
@@ -393,7 +396,7 @@ bool AzimuthalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
                 : itCoords != itBegin && isLong && !processingLastNode &&
                 !viewport->resolves( *itPreviousCoords, *itCoords ) );
 
-        if ( !skipNode ) {
+        if ( !skipNode || noFilter) {
 
             q->screenCoordinates( *itCoords, viewport, x, y, globeHidesPoint );
 

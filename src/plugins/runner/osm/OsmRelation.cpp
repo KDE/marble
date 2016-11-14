@@ -197,7 +197,7 @@ OsmRelation::OsmRings OsmRelation::rings(const QStringList &roles, const OsmWays
         }
         Q_ASSERT(ways.contains(wayId));
         currentWays << wayId;
-        result << OsmRing(ring, way.osmData());
+        result << OsmRing(GeoDataLinearRing(ring.optimized()), way.osmData());
     }
 
     if( !unclosedWays.isEmpty() ) {
@@ -244,7 +244,7 @@ OsmRelation::OsmRings OsmRelation::rings(const QStringList &roles, const OsmWays
                 return OsmRings();
             } else {
                 /** @todo Merge tags common to all rings into the new osm data? */
-                result << OsmRing(ring, OsmPlacemarkData());
+                result << OsmRing(GeoDataLinearRing(ring.optimized()), OsmPlacemarkData());
             }
         }
     }

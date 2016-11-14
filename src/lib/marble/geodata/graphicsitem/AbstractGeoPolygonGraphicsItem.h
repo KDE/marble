@@ -30,6 +30,7 @@ class MARBLE_EXPORT AbstractGeoPolygonGraphicsItem : public GeoGraphicsItem
 protected:
     explicit AbstractGeoPolygonGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataPolygon *polygon);
     explicit AbstractGeoPolygonGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataLinearRing *ring);
+    ~AbstractGeoPolygonGraphicsItem();
 
 public:
     virtual const GeoDataLatLonAltBox& latLonAltBox() const;
@@ -41,6 +42,8 @@ protected:
     const GeoDataPolygon *polygon() const { return m_polygon; }
     inline
     const GeoDataLinearRing *ring() const { return m_ring; }
+    inline
+    const GeoDataLinearRing *unrolledRing() const { return m_unrolledRing; }
 
     static int extractElevation(const GeoDataPlacemark &placemark);
 
@@ -49,6 +52,7 @@ private:
 
     const GeoDataPolygon *const m_polygon;
     const GeoDataLinearRing *const m_ring;
+    GeoDataLinearRing * m_unrolledRing;
     static QPixmapCache m_textureCache;
 };
 
