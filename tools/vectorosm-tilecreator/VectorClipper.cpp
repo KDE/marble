@@ -468,11 +468,16 @@ void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const Clipper
 
         auto const & innerBoundaries = polygon->innerBoundaries();
         for (index = 0; index < innerBoundaries.size(); ++index) {
+            auto const & innerBoundary = innerBoundaries.at(index);
+            if (minArea > 0.0 && area(innerBoundary) < minArea) {
+                continue;
+            }
+
             auto const & innerRingOsmData = placemarkOsmData.memberReference(index);
             clipper.Clear();
             clipper.AddPath(path, ptClip, true);
             Path innerPath;
-            foreach(auto const & node, innerBoundaries.at(index)) {
+            foreach(auto const & node, innerBoundary) {
                 innerPath << IntPoint(&node);
             }
             clipper.AddPath(innerPath, ptSubject, true);
