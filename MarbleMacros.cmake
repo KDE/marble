@@ -40,12 +40,6 @@ target_link_libraries( ${_target_name} ${${_target_name}_LIBS}
                                        marblewidget )
 install( TARGETS ${_target_name} DESTINATION ${MARBLE_PLUGIN_INSTALL_PATH} )
 
-set_target_properties( ${_target_name} PROPERTIES 
-                       INSTALL_RPATH_USE_LINK_PATH TRUE  
-                       SKIP_BUILD_RPATH TRUE 
-                       BUILD_WITH_INSTALL_RPATH TRUE 
-                     )
-
 endmacro( marble_add_plugin _target_name )
 
 # these plugins are slightly different
@@ -59,12 +53,6 @@ add_library( ${_target_name} MODULE ${_src} )
 target_link_libraries( ${_target_name} ${${_target_name}_LIBS}
                                        marblewidget )
 install( TARGETS ${_target_name} DESTINATION ${QT_PLUGINS_DIR}/designer )
-
-set_target_properties( ${_target_name} PROPERTIES 
-                       INSTALL_RPATH_USE_LINK_PATH TRUE  
-                       SKIP_BUILD_RPATH TRUE 
-                       BUILD_WITH_INSTALL_RPATH TRUE 
-                     )
 
 endmacro( marble_add_designer_plugin _target_name )
 

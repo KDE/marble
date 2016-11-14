@@ -52,12 +52,6 @@ if(Qt5Positioning_FOUND)
     )
 endif()
 
-set_target_properties( marbledeclarative PROPERTIES
-    INSTALL_RPATH_USE_LINK_PATH TRUE
-    SKIP_BUILD_RPATH TRUE
-    BUILD_WITH_INSTALL_RPATH TRUE
-)
-
 if(WIN32)
   install(TARGETS marbledeclarative RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX} ARCHIVE DESTINATION lib)
 else()

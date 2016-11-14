@@ -35,6 +35,24 @@ if (POLICY CMP0063)
     cmake_policy(SET CMP0063 NEW)
 endif()
 
+# RPATH/RUNPATH settings
+if (UNIX)
+    # Add CMAKE_INSTALL_FULL_LIBDIR to the RPATH to be used when installing,
+    # but only if it isn't a standard system directory.
+    list(FIND CMAKE_PLATFORM_IMPLICIT_LINK_DIRECTORIES "${CMAKE_INSTALL_FULL_LIBDIR}" isSystemLibDir)
+    list(FIND CMAKE_CXX_IMPLICIT_LINK_DIRECTORIES      "${CMAKE_INSTALL_FULL_LIBDIR}" isSystemCxxLibDir)
+    list(FIND CMAKE_C_IMPLICIT_LINK_DIRECTORIES        "${CMAKE_INSTALL_FULL_LIBDIR}" isSystemCLibDir)
+    if("${isSystemLibDir}" STREQUAL "-1"  AND  "${isSystemCxxLibDir}" STREQUAL "-1"  AND  "${isSystemCLibDir}" STREQUAL "-1")
+        set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_FULL_LIBDIR}")
+    endif()
+
+    # Add directories which are in the linker search path (but outside the project)
+    # to the RPATH to be used when installing
+    set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
+    # no libs or plugins are designed to be used from the build dir, so directly link with install rpath
+    set(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE)
+endif (UNIX)
+
 ####################################################
 # Where to look first for cmake modules,
 # before ${CMAKE_ROOT}/Modules/ is checked
