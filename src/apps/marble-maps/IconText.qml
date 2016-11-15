@@ -21,6 +21,9 @@ Item {
     property alias icon: icon.source
     property alias font: text.font
     property alias maximumLineCount: text.maximumLineCount
+    property alias linkColor: text.linkColor
+
+    signal linkActivated(string link)
 
     Image {
         id: icon
@@ -38,7 +41,7 @@ Item {
         wrapMode: Text.WordWrap
         elide: Text.ElideRight
 
-        onLinkActivated: Qt.openUrlExternally(link)
+        onLinkActivated: root.linkActivated(link)
 
         MouseArea {
             anchors.fill: parent

@@ -94,6 +94,7 @@ Item {
             text: "<a href=\"" + url + "\">" + url + "</a>"
             icon: "qrc:/material/browser.svg"
             maximumLineCount: 4
+            onLinkActivated: Qt.openUrlExternally(link)
         }
 
         IconText {
@@ -103,6 +104,7 @@ Item {
             text:  "<a href=\"" + url + "\">Wikipedia</a>"
             icon: "qrc:/material/browser.svg"
             maximumLineCount: 4
+            onLinkActivated: Qt.openUrlExternally(link)
         }
 
         IconText {
@@ -115,8 +117,10 @@ Item {
         IconText {
             width: parent.width
             visible: text.length > 0
-            text: placemark === null ? "" : placemark.coordinates
+            text: placemark === null ? "" : "<a href=\"#\"#>" + placemark.coordinates + "</a>"
             icon: "qrc:/material/place.svg"
+            linkColor: palette.text
+            onLinkActivated: marbleMaps.centerOnCoordinates(placemark.longitude, placemark.latitude)
         }
     }
 
