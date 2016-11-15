@@ -74,7 +74,7 @@ qreal NodeReducer::epsilonFor(int detailLevel, qreal multiplier) const
         int const factor = 1 << (qAbs(detailLevel-12));
         return multiplier / factor;
     } else {
-        int const factor = 1 << (qAbs(detailLevel-12));
+        int const factor = 1 << (qAbs(detailLevel-10));
         return multiplier * factor;
     }
 }
