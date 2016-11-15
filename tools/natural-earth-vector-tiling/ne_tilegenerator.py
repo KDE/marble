@@ -130,7 +130,7 @@ if __name__ == "__main__":
 		print('Level has following SHP datasets: ', abs_file_paths)
 		target = 'tiny_planet_{}.1.osm'.format(level)
 		if args.overwrite or not os.path.exists(target):
-		    polyshp2osm.run(abs_file_paths, 1, 5000000, 'tiny_planet_{}'.format(level))
+		    polyshp2osm.run(abs_file_paths, 1, 5000000, 'tiny_planet_{}'.format(level), no_source=True)
 		    print('Tiny planetosm for Level = {} complete.'.format(level))
 		    f = open('bound_info_{}'.format(level), "w")
 		    print('tiny_planet_{}.1.osm;Level;-180.0;-86.0;180.0;86.0'.format(level), file=f)

@@ -34,12 +34,8 @@ will usually suffice.
  
 # These tags are attached to all exterior ways. You can put any key/value pairs
 # in this dictionary. 
- 
-fixed_tags = {
-  'source': 'Natural Earth (http://www.naturalearthdata.com/)',
-  'created_by': 'polyshp2osm'
-}  
- 
+
+fixed_tags = {}
 feat_dict = {}
 node_dict = {}
 non_geom = 0
