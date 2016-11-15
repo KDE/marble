@@ -103,9 +103,10 @@ def check_existence(filename, in_dir):
 
 if __name__ == "__main__":
 	parser = argparse.ArgumentParser(description='Generates low level tiles for Marble using Natural Earth data')
-	parser.add_argument('file', help='a file with information containing natural datasets for specific levels.')
+	parser.add_argument('-f', '--file', help='a file with information containing natural datasets for specific levels.', default='level_info.txt')
 	parser.add_argument('-i', '--in_dir', help='directory to read/process data from', default='.')
-	parser.add_argument('-o', '--out_dir', help='directory to write tiles to', default='.')
+	parser.add_argument('-z', '--zoom', help='Tile levels to process', default='')
+	parser.add_argument('-o', '--out_dir', help='directory to write tiles to', default=os.path.join(os.path.expanduser("~"), '.local', 'share', 'marble', 'maps', 'earth', 'vectorosm'))
 	parser.add_argument('-c', '--cache', help='directory to store intermediate files in', default='.')
 	parser.add_argument('-r', '--refresh', type=int, default=-1, help='Re-download cached OSM base file if it is older than REFRESH days (-1: do not re-download)')
 	parser.add_argument('-ow', '--overwrite', action='store_true', help='Create tiles even if they exist already')
@@ -116,9 +117,10 @@ if __name__ == "__main__":
 
 	level_info = parse_file(args.file, args.in_dir)
 	for level in level_info:
+		if not args.zoom or str(level) not in args.zoom:
+		    continue
 		abs_file_paths = []
 		for filename in level_info[level]:
-			print('Checking - {}'.format(filename))
 			check_existence(filename, args.in_dir)
 			if filename == 'ne_10m_parks_and_protected_lands':
 				path = os.path.join(args.in_dir, filename) + '/' + filename + '_area.shp'
@@ -127,7 +129,6 @@ if __name__ == "__main__":
 			else:
 				path = os.path.join(args.in_dir, filename) + '/' + filename + '_shp.shp'
 			abs_file_paths.append(path)
-		print('Level has following SHP datasets: ', abs_file_paths)
 		target = 'tiny_planet_{}.1.osm'.format(level)
 		if args.overwrite or not os.path.exists(target):
 		    polyshp2osm.run(abs_file_paths, 1, 5000000, 'tiny_planet_{}'.format(level), no_source=True)
