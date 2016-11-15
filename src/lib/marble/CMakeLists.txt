@@ -37,7 +37,10 @@ INCLUDE(graphicsview/CMakeLists.txt)
 INCLUDE(layers/CMakeLists.txt)
 INCLUDE(osm/CMakeLists.txt)
 
-set(MARBLE_LIB_VERSION "0.25.20")
+set(MARBLE_LIB_VERSION_MAJOR "0")
+set(MARBLE_LIB_VERSION_MINOR "25")
+set(MARBLE_LIB_VERSION_PATCH "20")
+set(MARBLE_LIB_VERSION "${MARBLE_LIB_VERSION_MAJOR}.${MARBLE_LIB_VERSION_MINOR}.${MARBLE_LIB_VERSION_PATCH}")
 set(MARBLE_ABI_VERSION "26")
 
 ########### next target ###############
@@ -645,4 +648,91 @@ install(
     EXPORT MarbleTargets
     FILE ${MARBLE_CMAKECONFIGNAME}Targets.cmake
     DESTINATION ${MARBLE_INSTALL_CMAKECONFIGDIR}
+)
+
+
+########### Qt Pri file ###############
+
+# Where the pri file is installed is defined by the following rules, with decreasing priority:
+# * MARBLE_PRI_INSTALL_USE_QT_SYS_PATHS=TRUE:
+#   pri file will be installed with the dirs of the Qt installation used
+# * MARBLE_PRI_INSTALL_DIR=some-relative-or-absolute-path
+#   if set will be used as given
+# * installation prefix = Qt installation prefix:
+#   pri file will be installed with the dirs of the Qt installation used
+# * otherwise:
+#   pri file will be installed in mkspecs/modules in the installation prefix
+
+get_target_property(PRI_LIB_NAME marblewidget OUTPUT_NAME)
+
+set(PRI_ABS_INCLUDE_INSTALL_DIR "${INCLUDE_INSTALL_DIR}")
+if(NOT IS_ABSOLUTE "${PRI_ABS_INCLUDE_INSTALL_DIR}")
+    set(PRI_ABS_INCLUDE_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/${PRI_ABS_INCLUDE_INSTALL_DIR}")
+endif()
+
+set(PRI_ABS_LIB_INSTALL_DIR "${CMAKE_INSTALL_LIBDIR}")
+if(NOT IS_ABSOLUTE "${PRI_ABS_LIB_INSTALL_DIR}")
+    set(PRI_ABS_LIB_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/${PRI_ABS_LIB_INSTALL_DIR}")
+endif()
+
+set(PRI_DEPS "xml gui widgets network")
+if (NOT MARBLE_NO_WEBKITWIDGETS)
+    set(PRI_DEPS "${PRI_DEPS} webkitwidgets")
+endif()
+
+file(GENERATE
+    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/qt_Marble.pri
+    CONTENT
+"QT.Marble.VERSION = ${MARBLE_LIB_VERSION}
+QT.Marble.MAJOR_VERSION = ${MARBLE_LIB_VERSION_MAJOR}
+QT.Marble.MINOR_VERSION = ${MARBLE_LIB_VERSION_MINOR}
+QT.Marble.PATCH_VERSION = ${MARBLE_LIB_VERSION_PATCH}
+QT.Marble.name = ${PRI_LIB_NAME}
+QT.Marble.defines =
+QT.Marble.includes = ${PRI_ABS_INCLUDE_INSTALL_DIR}
+QT.Marble.private_includes =
+QT.Marble.libs = ${PRI_ABS_LIB_INSTALL_DIR}
+QT.Marble.depends = ${PRI_DEPS}
+"
+)
+
+# detect which folder the pri file should be installed into
+get_target_property(QMAKE_EXECUTABLE Qt5::qmake LOCATION)
+
+function(query_qmake result_variable qt_variable)
+    execute_process(
+        COMMAND ${QMAKE_EXECUTABLE} -query "${qt_variable}"
+        RESULT_VARIABLE return_code
+        OUTPUT_VARIABLE output
+    )
+    if(return_code EQUAL 0)
+        string(STRIP "${output}" output)
+        file(TO_CMAKE_PATH "${output}" output_path)
+        set(${result_variable} "${output_path}" PARENT_SCOPE)
+    else()
+        message(WARNING "Failed call: ${QMAKE_EXECUTABLE} -query \"${qt_variable}\"")
+        message(FATAL_ERROR "QMake call failed: ${return_code}")
+    endif()
+endfunction()
+
+# if going to be installed into same prefix as Qt, then also use same folder
+set(IS_SHARED_INSTALL_PREFIX FALSE)
+if(NOT DEFINED MARBLE_PRI_INSTALL_USE_QT_SYS_PATHS)
+    query_qmake(qt_install_prefix_dir QT_INSTALL_PREFIX)
+    if(qt_install_prefix_dir STREQUAL "${CMAKE_INSTALL_PREFIX}")
+        set(IS_SHARED_INSTALL_PREFIX TRUE)
+    endif()
+endif()
+
+if(MARBLE_PRI_INSTALL_USE_QT_SYS_PATHS OR IS_SHARED_INSTALL_PREFIX)
+    query_qmake(qt_host_data_dir QT_HOST_DATA)
+    set(PRI_INSTALL_DIR ${qt_host_data_dir}/mkspecs/modules)
+else()
+    set(PRI_INSTALL_DIR mkspecs/modules)
+endif()
+set(MARBLE_PRI_INSTALL_DIR "${PRI_INSTALL_DIR}" CACHE PATH "The directory where the Marble pri file will be installed to.")
+
+install(FILES
+    ${CMAKE_CURRENT_BINARY_DIR}/qt_Marble.pri
+    DESTINATION  ${MARBLE_PRI_INSTALL_DIR}
 )
