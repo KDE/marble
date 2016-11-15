@@ -150,9 +150,19 @@ QString Placemark::website() const
         return m_website;
     }
     foreach(const QString &tag, QStringList() << "website" << "contact:website" << "facebook" << "contact:facebook" << "url") {
-        m_website = m_placemark.osmData().tagValue(tag);
-        if (!m_website.isEmpty()) {
-            return m_website;
+        QString const value = m_placemark.osmData().tagValue(tag);
+        if (!value.isEmpty()) {
+            QUrl url = QUrl(value);
+            if (url.isValid()) {
+                if (url.scheme().isEmpty()) {
+                    m_website = QStringLiteral("http://%1").arg(value);
+                } else {
+                    m_website = value;
+                }
+                if (!m_website.isEmpty()) {
+                    return m_website;
+                }
+            }
         }
     }
 
