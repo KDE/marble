@@ -144,11 +144,3 @@ application.
 b) Start Marble using the command line option --marbleDataPath:
 
 marble --marbleDataPath ~/marble/data
-
-
-4. Known Issues:
-
-- If you don't specify any install path using cmake then Marble will probably install under /usr/local.
-If your distribution doesn't include /usr/local/lib in your LD_LIBRARY_PATH you might need to add that directory via:
-
-  export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
