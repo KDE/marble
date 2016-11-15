@@ -436,6 +436,8 @@ void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const Clipper
     clipper.Execute(ctIntersection, paths);
     foreach(const auto &path, paths) {
         GeoDataPlacemark* newPlacemark = new GeoDataPlacemark;
+        newPlacemark->setVisible(placemark->isVisible());
+        newPlacemark->setVisualCategory(placemark->visualCategory());
         GeoDataLinearRing outerRing;
         OsmPlacemarkData const & placemarkOsmData = placemark->osmData();
         OsmPlacemarkData & newPlacemarkOsmData = newPlacemark->osmData();

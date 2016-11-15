@@ -74,7 +74,9 @@ private:
             OpenPathsFromPolyTree(tree, paths);
         }
         foreach(const auto &path, paths) {
-            GeoDataPlacemark* newPlacemark = new GeoDataPlacemark();
+            GeoDataPlacemark* newPlacemark = new GeoDataPlacemark;
+            newPlacemark->setVisible(placemark->isVisible());
+            newPlacemark->setVisualCategory(placemark->visualCategory());
             T* newRing = new T;
             QVector<int> borderPoints;
             int index = 0;
