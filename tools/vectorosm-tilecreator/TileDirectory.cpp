@@ -14,6 +14,7 @@
 #include "MarbleZipReader.h"
 #include <GeoDataLatLonAltBox.h>
 #include "PeakAnalyzer.h"
+#include "TileCoordsPyramid.h"
 
 #include <QFileInfo>
 #include <QDebug>
@@ -347,8 +348,13 @@ void TileDirectory::setBoundingPolygon(const QString &file)
 
 void TileDirectory::createTiles() const
 {
-    QSharedPointer<GeoDataDocument> map;
-    QSharedPointer<VectorClipper> clipper;
+    if (m_tileType == OpenStreetMap) {
+        createOsmTiles();
+        return;
+    }
+
+    QSharedPointer<GeoDataDocument> map = open(m_inputFile, m_manager);
+    QSharedPointer<VectorClipper> clipper = QSharedPointer<VectorClipper>(new VectorClipper(map.data(), m_zoomLevel));
     TileIterator iter(m_boundingBox, m_zoomLevel);
     qint64 count = 0;
     foreach(auto const &tileId, iter) {
@@ -360,17 +366,58 @@ void TileDirectory::createTiles() const
         }
 
         printProgress(count / double(iter.total()));
-        cout << " Creating " << (m_tileType == OpenStreetMap ? "osm" : "landmass");
-        cout << " cache tile " << count << "/" << iter.total() << " (";
+        cout << " Creating landmass cache tile " << count << "/" << iter.total() << " (";
         cout << m_zoomLevel << "/" << tileId.x() << "/" << tileId.y() << ')' << string(20, ' ') << '\r';
         cout.flush();
 
         QDir().mkpath(outputDir);
-        if (m_tileType == OpenStreetMap) {
+        auto tile = clipper->clipTo(m_zoomLevel, tileId.x(), tileId.y());
+        if (!GeoDataDocumentWriter::write(outputFile, *tile)) {
+            qWarning() << "Failed to write tile" << outputFile;
+        }
+    }
+    printProgress(1.0);
+    cout << "  landmass cache tiles complete." << string(20, ' ') << endl;
+}
+
+void TileDirectory::createOsmTiles() const
+{
+    int westX, northY, eastX, southY;
+    GeoSceneMercatorTileProjection tileProjection;
+    tileProjection.tileIndexes(m_boundingBox, m_zoomLevel, westX, northY, eastX, southY);
+    TileCoordsPyramid pyramid(0, m_zoomLevel);
+    pyramid.setBottomLevelCoords(QRect(QPoint(westX, northY), QPoint(eastX, southY)));
+
+    qint64 const maxCount = pyramid.tilesCount();
+    bool first = true;
+    for (int zoomLevel=0; zoomLevel <= m_zoomLevel; ++zoomLevel) {
+        QRect const rect = pyramid.coords(zoomLevel);
+        if (zoomLevel < m_zoomLevel && rect.width()*rect.height() < 2) {
+            continue;
+        }
+
+        TileIterator iter(m_boundingBox, zoomLevel);
+        qint64 count = 0;
+        foreach(auto const &tileId, iter) {
+            ++count;
+            QString const inputFile = first ? m_inputFile : QString("%1/osm/%2/%3/%4.o5m").
+                                              arg(m_cacheDir).arg(zoomLevel-1).arg(tileId.x()>>1).arg(tileId.y()>>1);
+            QString const outputDir = QString("%1/osm/%2/%3").arg(m_cacheDir).arg(zoomLevel).arg(tileId.x());
+            QString const outputFile = QString("%1/%2.o5m").arg(outputDir).arg(tileId.y());
+            if (QFileInfo(outputFile).exists()) {
+                continue;
+            }
+
+            printProgress(count / double(maxCount));
+            cout << " Creating osm cache tile " << count << "/" << maxCount << " (";
+            cout << zoomLevel << "/" << tileId.x() << "/" << tileId.y() << ')' << string(20, ' ') << '\r';
+            cout.flush();
+
+            QDir().mkpath(outputDir);
             QString const output = QString("-o=%1").arg(outputFile);
 
             GeoDataLatLonBox tileBoundary;
-            m_tileProjection.geoCoordinates(m_zoomLevel, tileId.x(), tileId.y(), tileBoundary);
+            m_tileProjection.geoCoordinates(zoomLevel, tileId.x(), tileId.y(), tileBoundary);
 
             double const minLon = tileBoundary.west(GeoDataCoordinates::Degree);
             double const maxLon = tileBoundary.east(GeoDataCoordinates::Degree);
@@ -379,25 +426,19 @@ void TileDirectory::createTiles() const
             QString const bbox = QString("-b=%1,%2,%3,%4").arg(minLon).arg(minLat).arg(maxLon).arg(maxLat);
             QProcess osmconvert;
             osmconvert.start("osmconvert", QStringList() << "--drop-author" << "--drop-version"
-                             << "--complete-ways" << "--complex-ways" << bbox << output << m_inputFile);
+                             << "--complete-ways" << "--complex-ways" << bbox << output << inputFile);
             osmconvert.waitForFinished(10*60*1000);
             if (osmconvert.exitCode() != 0) {
                 qWarning() << osmconvert.readAllStandardError();
                 qWarning() << "osmconvert failed: " << osmconvert.errorString();
             }
-        } else {
-            if (!map) {
-                map = open(m_inputFile, m_manager);
-                clipper = QSharedPointer<VectorClipper>(new VectorClipper(map.data(), m_zoomLevel));
-            }
-            auto tile = clipper->clipTo(m_zoomLevel, tileId.x(), tileId.y());
-            if (!GeoDataDocumentWriter::write(outputFile, *tile)) {
-                qWarning() << "Failed to write tile" << outputFile;
-            }
         }
+        first = false;
     }
+
     printProgress(1.0);
-    cout << "  " << (m_tileType == OpenStreetMap ? "osm" : "landmass") << " cache tiles complete." << endl;
+    cout << "  osm cache tiles complete." << string(20, ' ') << endl;
+
 }
 
 int TileDirectory::innerNodes(const TileId &tile) const
