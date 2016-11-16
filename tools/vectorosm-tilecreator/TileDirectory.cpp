@@ -362,7 +362,7 @@ void TileDirectory::createTiles() const
         printProgress(count / double(iter.total()));
         cout << " Creating " << (m_tileType == OpenStreetMap ? "osm" : "landmass");
         cout << " cache tile " << count << "/" << iter.total() << " (";
-        cout << m_zoomLevel << "/" << tileId.x() << "/" << tileId.y() << ")      \r";
+        cout << m_zoomLevel << "/" << tileId.x() << "/" << tileId.y() << ')' << string(20, ' ') << '\r';
         cout.flush();
 
         QDir().mkpath(outputDir);
@@ -446,7 +446,7 @@ void TileDirectory::updateProgress()
 
     cout << "  Downloading " << m_download->reply->url().fileName().toStdString();
 
-    cout << "    \r";
+    cout << string(20, ' ') << '\r';
     cout.flush();
 }
 

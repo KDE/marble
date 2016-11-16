@@ -215,7 +215,7 @@ int main(int argc, char *argv[])
                 std::cout << "Tile " << count << "/" << total << " (" << tile->name().toStdString() << ") done.";
                 double const reduction = nodeReducer.removedNodes() / qMax(1.0, double(nodeReducer.remainingNodes() + nodeReducer.removedNodes()));
                 std::cout << " Node reduction: " << qRound(reduction * 100.0) << "%";
-                std::cout << "      \r";
+                std::cout << std::string(20, ' ') << '\r';
                 std::cout.flush();
                 delete tile;
             }
@@ -313,7 +313,7 @@ int main(int argc, char *argv[])
                 if (originalWays > 0) {
                     std::cout << " , " << originalWays << " ways merged to " << mergedWays;
                 }
-                std::cout << "      \r";
+                std::cout << std::string(20, ' ') << '\r';
                 std::cout.flush();
             }
         }
