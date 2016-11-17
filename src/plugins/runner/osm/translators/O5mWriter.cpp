@@ -24,6 +24,8 @@
 namespace Marble
 {
 
+QSet<QString> O5mWriter::m_blacklistedTags;
+
 bool O5mWriter::write(QIODevice *device, const GeoDataDocument &document)
 {
     if (!device || !device->isWritable()) {
@@ -230,8 +232,20 @@ void O5mWriter::writeVersion(const OsmPlacemarkData &, QDataStream &stream) cons
 
 void O5mWriter::writeTags(const OsmPlacemarkData &osmData, StringTable &stringTable, QDataStream &stream) const
 {
+    if (m_blacklistedTags.isEmpty()) {
+        m_blacklistedTags << QStringLiteral("mx:version");
+        m_blacklistedTags << QStringLiteral("mx:changeset");
+        m_blacklistedTags << QStringLiteral("mx:uid");
+        m_blacklistedTags << QStringLiteral("mx:visible");
+        m_blacklistedTags << QStringLiteral("mx:user");
+        m_blacklistedTags << QStringLiteral("mx:timestamp");
+        m_blacklistedTags << QStringLiteral("mx:action");
+    }
+
     for (auto iter=osmData.tagsBegin(), end = osmData.tagsEnd(); iter != end; ++iter) {
-        writeStringPair(StringPair(iter.key(), iter.value()), stringTable, stream);
+        if (!m_blacklistedTags.contains(iter.key())) {
+            writeStringPair(StringPair(iter.key(), iter.value()), stringTable, stream);
+        }
     }
 }
 

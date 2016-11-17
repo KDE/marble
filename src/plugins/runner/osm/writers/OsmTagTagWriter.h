@@ -11,7 +11,7 @@
 #ifndef MARBLE_OSMTAGTAGWRITER_H
 #define MARBLE_OSMTAGTAGWRITER_H
 
-// Marble
+#include <QSet>
 
 namespace Marble
 {
@@ -27,6 +27,9 @@ public:
      * @brief writeTags writes multiple OSM <tag k="key" v="value">
      */
     static void writeTags( const OsmPlacemarkData &osmData, GeoWriter& writer );
+
+private:
+    static QSet<QString> m_blacklist;
 };
 
 }

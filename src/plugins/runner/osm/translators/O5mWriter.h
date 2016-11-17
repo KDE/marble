@@ -14,6 +14,8 @@
 #include "OsmConverter.h"
 #include "GeoWriterBackend.h"
 
+#include <QSet>
+
 namespace Marble
 {
 
@@ -43,6 +45,8 @@ private:
   void writeSigned(qint64 value, QDataStream &stream) const;
   void writeUnsigned(quint32 value, QDataStream &stream) const;
   qint32 deltaTo(double value, double previous) const;
+
+  static QSet<QString> m_blacklistedTags;
 };
 
 }

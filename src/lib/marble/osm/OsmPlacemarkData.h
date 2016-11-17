@@ -207,13 +207,6 @@ public:
 
 private:
     qint64 m_id;
-    QString m_version;
-    QString m_changeset;
-    QString m_uid;
-    QString m_visible;
-    QString m_user;
-    QString m_timestamp;
-    QString m_action;
     QHash<QString, QString> m_tags;
     static const QString osmDataKey;
 

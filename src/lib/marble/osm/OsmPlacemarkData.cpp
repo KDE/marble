@@ -40,37 +40,37 @@ qint64 OsmPlacemarkData::oid() const
 
 QString OsmPlacemarkData::changeset() const
 {
-    return m_changeset;
+    return m_tags.value(QStringLiteral("mx:changeset"));
 }
 
 QString OsmPlacemarkData::version() const
 {
-    return m_version;
+    return m_tags.value(QStringLiteral("mx:version"));
 }
 
 QString OsmPlacemarkData::uid() const
 {
-    return m_uid;
+    return m_tags.value(QStringLiteral("mx:uid"));
 }
 
 QString OsmPlacemarkData::isVisible() const
 {
-    return m_visible;
+    return m_tags.value(QStringLiteral("mx:visible"));
 }
 
 QString OsmPlacemarkData::user() const
 {
-    return m_user;
+    return m_tags.value(QStringLiteral("mx:user"));
 }
 
 QString OsmPlacemarkData::timestamp() const
 {
-    return m_timestamp;
+    return m_tags.value(QStringLiteral("mx:timestamp"));
 }
 
 QString OsmPlacemarkData::action() const
 {
-    return m_action;
+    return m_tags.value(QStringLiteral("mx:action"));
 }
 
 void OsmPlacemarkData::setId( qint64 id )
@@ -80,37 +80,37 @@ void OsmPlacemarkData::setId( qint64 id )
 
 void OsmPlacemarkData::setVersion( const QString& version )
 {
-    m_version = version;
+    m_tags[QStringLiteral("mx:version")] = version;
 }
 
 void OsmPlacemarkData::setChangeset( const QString& changeset )
 {
-    m_changeset = changeset;
+    m_tags[QStringLiteral("mx:changeset")] = changeset;
 }
 
 void OsmPlacemarkData::setUid( const QString& uid )
 {
-    m_uid = uid;
+    m_tags[QStringLiteral("mx:uid")] = uid;
 }
 
 void OsmPlacemarkData::setVisible( const QString& visible )
 {
-    m_visible = visible;
+    m_tags[QStringLiteral("mx:visible")] = visible;
 }
 
 void OsmPlacemarkData::setUser( const QString& user )
 {
-    m_user = user;
+   m_tags[QStringLiteral("mx:user")] = user;
 }
 
 void OsmPlacemarkData::setTimestamp( const QString& timestamp )
 {
-    m_timestamp = timestamp;
+    m_tags[QStringLiteral("mx:timestamp")] = timestamp;
 }
 
 void OsmPlacemarkData::setAction( const QString& action )
 {
-    m_action = action;
+    m_tags[QStringLiteral("mx:action")] = action;
 }
 
 
@@ -302,12 +302,7 @@ bool OsmPlacemarkData::isEmpty() const
     return m_tags.isEmpty() &&
             m_nodeReferences.isEmpty() &&
             m_memberReferences.isEmpty() &&
-            m_relationReferences.isEmpty() &&
-            m_version.isEmpty() &&
-            m_changeset.isEmpty() &&
-            m_uid.isEmpty() &&
-            m_user.isEmpty() &&
-            m_timestamp.isEmpty();
+            m_relationReferences.isEmpty();
 }
 
 OsmPlacemarkData OsmPlacemarkData::fromParserAttributes( const QXmlStreamAttributes &attributes )
