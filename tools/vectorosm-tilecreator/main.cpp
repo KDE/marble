@@ -244,7 +244,7 @@ int main(int argc, char *argv[])
             TileIterator iter(mapTiles.boundingBox(), zoomLevel);
             total += iter.total();
             foreach(auto const &tileId, iter) {
-                auto const tile = TileId(QString(), zoomLevel, tileId.x(), tileId.y());
+                auto const tile = TileId(0, zoomLevel, tileId.x(), tileId.y());
                 int const innerNodes = mapTiles.innerNodes(tile);
                 if (innerNodes > 0) {
                     auto const mapTile = mapTiles.tileFor(zoomLevel, tileId.x(), tileId.y());
