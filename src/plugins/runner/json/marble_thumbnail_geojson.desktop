@@ -22,6 +22,7 @@ Name[sl]=Geografski podatki GeoJSON
 Name[sv]=GeoJSON geografisk data
 Name[uk]=географічні дані GeoJSON
 Name[x-test]=xxGeoJSON Geographic Dataxx
+Name[zh_TW]=GeoJSON 地理資料
 
 X-KDE-ServiceTypes=ThumbCreator
 MimeType=application/vnd.geo+json;

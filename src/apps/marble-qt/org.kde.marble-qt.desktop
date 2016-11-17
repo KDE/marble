@@ -119,6 +119,7 @@ Comment[sv]=Navigering och kartor
 Comment[tr]=Gezinti ve Haritalar
 Comment[uk]=Навігація і карти
 Comment[x-test]=xxNavigation and Mapsxx
+Comment[zh_TW]=導覽地圖
 Icon=marble
 Terminal=false
 Categories=Qt;KDE;Education;Geoscience;Geography;Science;
