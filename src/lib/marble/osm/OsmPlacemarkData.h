@@ -182,12 +182,6 @@ public:
     QHash< qint64, QString >::const_iterator relationReferencesEnd() const;
 
     /**
-     * @brief osmData is stored within a placemark's extended data hash
-     * at an entry with osmKey
-     */
-    static QString osmHashKey();
-
-    /**
      * @brief isNull returns false if the osmData is loaded from a source
      * or true if its just default constructed
      */
@@ -208,7 +202,6 @@ public:
 private:
     qint64 m_id;
     QHash<QString, QString> m_tags;
-    static const QString osmDataKey;
 
     /**
      * @brief m_ndRefs is used to store a way's component nodes

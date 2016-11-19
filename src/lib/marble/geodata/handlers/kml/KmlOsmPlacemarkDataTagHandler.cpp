@@ -41,12 +41,11 @@ GeoNode* KmlOsmPlacemarkDataTagHandler::parse( GeoParser& parser ) const
      */
     if( parser.parentElement().is<GeoDataExtendedData>() ) {
         GeoDataExtendedData *extendedData = parser.parentElement().nodeAs<GeoDataExtendedData>();
-        GeoDataData data;
-        data.setName( OsmPlacemarkData::osmHashKey() );
-        data.setValue( QVariant::fromValue( osmData ) );
-        extendedData->addValue( data );
-        QVariant &placemarkVariantData = parser.parentElement().nodeAs<GeoDataExtendedData>()->valueRef( OsmPlacemarkData::osmHashKey() ).valueRef();
-        return reinterpret_cast<OsmPlacemarkData*>( placemarkVariantData.data() );
+        if (extendedData->parent() && extendedData->parent()->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
+            auto placemark = static_cast<GeoDataPlacemark*>(extendedData->parent());
+            placemark->setOsmData(osmData);
+            return &placemark->osmData();
+        }
     }
     /* Case 2: This is the OsmPlacemarkData of a Nd
      * <Placemark>

@@ -19,8 +19,6 @@
 namespace Marble
 {
 
-const QString OsmPlacemarkData::osmDataKey = "osm_data";
-
 OsmPlacemarkData::OsmPlacemarkData():
     m_id( 0 )
 {
@@ -285,11 +283,6 @@ QHash< qint64, QString >::const_iterator OsmPlacemarkData::relationReferencesBeg
 QHash< qint64, QString >::const_iterator OsmPlacemarkData::relationReferencesEnd() const
 {
     return m_relationReferences.constEnd();
-}
-
-QString OsmPlacemarkData::osmHashKey()
-{
-    return osmDataKey;
 }
 
 bool OsmPlacemarkData::isNull() const

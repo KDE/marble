@@ -215,41 +215,32 @@ const GeoDataGeometry* GeoDataPlacemark::geometry() const
 const OsmPlacemarkData& GeoDataPlacemark::osmData() const
 {
     Q_D(const GeoDataPlacemark);
-    QVariant &placemarkVariantData = extendedData().valueRef( OsmPlacemarkData::osmHashKey() ).valueRef();
-    if ( !placemarkVariantData.canConvert<OsmPlacemarkData>() ) {
-        return d->s_nullOsmPlacemarkData;
-    }
-
-    OsmPlacemarkData &osmData = *reinterpret_cast<OsmPlacemarkData*>( placemarkVariantData.data() );
-    return osmData;
+    return d->osmPlacemarkData();
 }
 
 void GeoDataPlacemark::setOsmData( const OsmPlacemarkData &osmData )
 {
-    extendedData().addValue( GeoDataData( OsmPlacemarkData::osmHashKey(), QVariant::fromValue( osmData ) ) );
+    Q_D(GeoDataPlacemark);
+    d->osmPlacemarkData() = osmData;
 }
 
 OsmPlacemarkData& GeoDataPlacemark::osmData()
 {
-    QVariant &placemarkVariantData = extendedData().valueRef( OsmPlacemarkData::osmHashKey() ).valueRef();
-    if ( !placemarkVariantData.canConvert<OsmPlacemarkData>() ) {
-        extendedData().addValue( GeoDataData( OsmPlacemarkData::osmHashKey(), QVariant::fromValue( OsmPlacemarkData() ) ) );
-        placemarkVariantData = extendedData().valueRef( OsmPlacemarkData::osmHashKey() ).valueRef();
-    }
-
-    OsmPlacemarkData &osmData = *reinterpret_cast<OsmPlacemarkData*>( placemarkVariantData.data() );
-    return osmData;
+    Q_D(GeoDataPlacemark);
+    return d->osmPlacemarkData();
 }
 
 bool GeoDataPlacemark::hasOsmData() const
 {
-    QVariant &placemarkVariantData = extendedData().valueRef( OsmPlacemarkData::osmHashKey() ).valueRef();
-    return placemarkVariantData.canConvert<OsmPlacemarkData>();
+    Q_D(const GeoDataPlacemark);
+    return d->m_osmPlacemarkData != nullptr;
 }
 
 void GeoDataPlacemark::clearOsmData()
 {
-    extendedData().removeKey(OsmPlacemarkData::osmHashKey());
+    Q_D(GeoDataPlacemark);
+    delete d->m_osmPlacemarkData;
+    d->m_osmPlacemarkData = nullptr;
 }
 
 const GeoDataLookAt *GeoDataPlacemark::lookAt() const

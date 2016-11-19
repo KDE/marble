@@ -65,7 +65,8 @@ class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
         m_geometry(new GeoDataPoint),
         m_population( -1 ),
         m_placemarkExtendedData(nullptr),
-        m_visualCategory(GeoDataPlacemark::Default)
+        m_visualCategory(GeoDataPlacemark::Default),
+        m_osmPlacemarkData(nullptr)
     {
     }
 
@@ -74,10 +75,14 @@ class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
         m_geometry(cloneGeometry(other.m_geometry)),
         m_population(other.m_population),
         m_placemarkExtendedData(nullptr),
-        m_visualCategory(other.m_visualCategory)
+        m_visualCategory(other.m_visualCategory),
+        m_osmPlacemarkData(nullptr)
     {
         if (other.m_placemarkExtendedData) {
             m_placemarkExtendedData = new GeoDataPlacemarkExtendedData(*other.m_placemarkExtendedData);
+        }
+        if (other.m_osmPlacemarkData) {
+            m_osmPlacemarkData = new OsmPlacemarkData(*other.m_osmPlacemarkData);
         }
     }
 
@@ -85,6 +90,7 @@ class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
     {
         delete m_geometry;
         delete m_placemarkExtendedData;
+        delete m_osmPlacemarkData;
     }
 
     GeoDataPlacemarkPrivate& operator=( const GeoDataPlacemarkPrivate& other )
@@ -107,6 +113,13 @@ class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
             m_placemarkExtendedData = new GeoDataPlacemarkExtendedData(*other.m_placemarkExtendedData);
         } else {
             m_placemarkExtendedData = nullptr;
+        }
+
+        delete m_osmPlacemarkData;
+        if (other.m_osmPlacemarkData) {
+            m_osmPlacemarkData = new OsmPlacemarkData(*other.m_osmPlacemarkData);
+        } else {
+            m_osmPlacemarkData = nullptr;
         }
 
         return *this;
@@ -168,12 +181,26 @@ class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
         return m_placemarkExtendedData ? *m_placemarkExtendedData : s_nullPlacemarkExtendedData;
     }
 
+    OsmPlacemarkData & osmPlacemarkData()
+    {
+        if (!m_osmPlacemarkData) {
+            m_osmPlacemarkData = new OsmPlacemarkData;
+        }
+        return *m_osmPlacemarkData;
+    }
+
+    const OsmPlacemarkData & osmPlacemarkData() const
+    {
+        return m_osmPlacemarkData ? *m_osmPlacemarkData : s_nullOsmPlacemarkData;
+    }
+
     // Data for a Placemark in addition to those in GeoDataFeature.
     GeoDataGeometry    *m_geometry;     // any GeoDataGeometry entry like locations
     qint64              m_population;   // population in number of inhabitants
     GeoDataPlacemarkExtendedData *m_placemarkExtendedData;
     GeoDataPlacemark::GeoDataVisualCategory m_visualCategory; // the visual category
 
+    OsmPlacemarkData* m_osmPlacemarkData;
     static const OsmPlacemarkData s_nullOsmPlacemarkData;
     static const GeoDataPlacemarkExtendedData s_nullPlacemarkExtendedData;
 };

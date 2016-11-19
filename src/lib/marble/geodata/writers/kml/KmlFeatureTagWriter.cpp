@@ -100,13 +100,12 @@ bool KmlFeatureTagWriter::write( const Marble::GeoNode *node, GeoWriter &writer 
 
     bool const result = writeMid( node, writer );
 
+    if (feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
+        KmlOsmPlacemarkDataTagWriter::write(feature, writer);
+    }
+
     if( !feature->extendedData().isEmpty() ) {
-        if ( feature->extendedData().contains( OsmPlacemarkData::osmHashKey() ) ) {
-             KmlOsmPlacemarkDataTagWriter::write( feature, writer );
-        }
-        else {
-            writeElement( &feature->extendedData(), writer );
-        }
+        writeElement( &feature->extendedData(), writer );
     }
 
     writer.writeEndElement();
