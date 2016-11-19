@@ -20,7 +20,7 @@ namespace Marble {
 
 class NodeReducer : public BaseFilter {
 public:
-    NodeReducer(GeoDataDocument* document, int zoomLevel);
+    NodeReducer(GeoDataDocument* document, const TileId &tileId);
 
     qint64 removedNodes() const;
     qint64 remainingNodes() const;

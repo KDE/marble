@@ -208,7 +208,7 @@ int main(int argc, char *argv[])
                     continue;
                 }
                 GeoDataDocument* tile = processor.clipTo(zoomLevel, tileId.x(), tileId.y());
-                NodeReducer nodeReducer(tile, zoomLevel);
+                NodeReducer nodeReducer(tile, TileId(0, zoomLevel, tileId.x(), tileId.y()));
                 if (!writeTile(tile, filename)) {
                     return 4;
                 }
@@ -281,7 +281,7 @@ int main(int argc, char *argv[])
                     originalWays = concatenator.originalWays();
                     mergedWays = concatenator.mergedWays();
                 }
-                NodeReducer nodeReducer(tile1.data(), zoomLevel);
+                NodeReducer nodeReducer(tile1.data(), tileId);
                 GeoDocPtr tile2 = GeoDocPtr(loader.clip(zoomLevel, tileId.x(), tileId.y()));
                 GeoDocPtr combined = GeoDocPtr(mergeDocuments(tile1.data(), tile2.data()));
 

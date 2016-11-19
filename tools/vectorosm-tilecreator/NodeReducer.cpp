@@ -23,11 +23,12 @@
 
 namespace Marble {
 
-NodeReducer::NodeReducer(GeoDataDocument* document, int zoomLevel) :
+NodeReducer::NodeReducer(GeoDataDocument* document, const TileId &tileId) :
     BaseFilter(document),
     m_removedNodes(0),
     m_remainingNodes(0)
 {
+    int const zoomLevel = tileId.zoomLevel();
     foreach (GeoDataPlacemark* placemark, placemarks()) {
         GeoDataGeometry const * const geometry = placemark->geometry();
         if(geometry->nodeType() == GeoDataTypes::GeoDataLineStringType) {
