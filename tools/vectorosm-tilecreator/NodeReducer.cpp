@@ -26,34 +26,41 @@ namespace Marble {
 NodeReducer::NodeReducer(GeoDataDocument* document, const TileId &tileId) :
     BaseFilter(document),
     m_removedNodes(0),
-    m_remainingNodes(0)
+    m_remainingNodes(0),
+    m_zoomLevel(tileId.zoomLevel())
 {
-    int const zoomLevel = tileId.zoomLevel();
+    GeoSceneMercatorTileProjection tileProjection;
+    GeoDataLatLonBox tileBoundary;
+    tileProjection.geoCoordinates(m_zoomLevel, tileId.x(), tileId.y(), tileBoundary);
+    tileBoundary.scale(1.0-1e-4, 1.0-1e-4);
+    tileBoundary.boundaries(m_tileBoundary[North], m_tileBoundary[South], m_tileBoundary[East], m_tileBoundary[West]);
+
     foreach (GeoDataPlacemark* placemark, placemarks()) {
         GeoDataGeometry const * const geometry = placemark->geometry();
+        auto const visualCategory = placemark->visualCategory();
         if(geometry->nodeType() == GeoDataTypes::GeoDataLineStringType) {
             GeoDataLineString const * prevLine = static_cast<GeoDataLineString const *>(geometry);
             GeoDataLineString* reducedLine = new GeoDataLineString;
-            reduce(*prevLine, placemark, reducedLine, zoomLevel);
+            reduce(*prevLine, placemark->osmData(), visualCategory, reducedLine);
             placemark->setGeometry(reducedLine);
-        } else if (zoomLevel < 17) {
+        } else if (m_zoomLevel < 17) {
             if(geometry->nodeType() == GeoDataTypes::GeoDataLinearRingType) {
                 GeoDataLinearRing const * prevRing = static_cast<GeoDataLinearRing const *>(geometry);
                 GeoDataLinearRing* reducedRing = new GeoDataLinearRing;
-                reduce(*prevRing, placemark, reducedRing, zoomLevel);
+                reduce(*prevRing, placemark->osmData(), visualCategory, reducedRing);
                 placemark->setGeometry(reducedRing);
             } else if(geometry->nodeType() == GeoDataTypes::GeoDataPolygonType) {
                 GeoDataPolygon* reducedPolygon = new GeoDataPolygon;
                 GeoDataPolygon const * prevPolygon = static_cast<GeoDataPolygon const *>(geometry);
                 GeoDataLinearRing const * prevRing = &(prevPolygon->outerBoundary());
                 GeoDataLinearRing reducedRing;
-                reduce(*prevRing, placemark, &reducedRing, zoomLevel);
+                reduce(*prevRing, placemark->osmData().memberReference(-1), visualCategory, &reducedRing);
                 reducedPolygon->setOuterBoundary(reducedRing);
                 QVector<GeoDataLinearRing> const & innerBoundaries = prevPolygon->innerBoundaries();
                 for(int i = 0; i < innerBoundaries.size(); i++) {
                     prevRing = &innerBoundaries[i];
                     GeoDataLinearRing reducedInnerRing;
-                    reduce(*prevRing, placemark, &reducedInnerRing, zoomLevel);
+                    reduce(*prevRing, placemark->osmData().memberReference(i), visualCategory, &reducedInnerRing);
                     reducedPolygon->appendInnerBoundary(reducedInnerRing);
                 }
                 placemark->setGeometry(reducedPolygon);
@@ -67,15 +74,15 @@ qint64 NodeReducer::remainingNodes() const
     return m_remainingNodes;
 }
 
-qreal NodeReducer::epsilonFor(int detailLevel, qreal multiplier) const
+qreal NodeReducer::epsilonFor(qreal multiplier) const
 {
-    if (detailLevel >= 17) {
+    if (m_zoomLevel >= 17) {
         return 0.25;
-    } else if (detailLevel >= 10) {
-        int const factor = 1 << (qAbs(detailLevel-12));
+    } else if (m_zoomLevel >= 10) {
+        int const factor = 1 << (qAbs(m_zoomLevel-12));
         return multiplier / factor;
     } else {
-        int const factor = 1 << (qAbs(detailLevel-10));
+        int const factor = 1 << (qAbs(m_zoomLevel-10));
         return multiplier * factor;
     }
 }
@@ -110,9 +117,81 @@ qreal NodeReducer::perpendicularDistance(const GeoDataCoordinates &a, const GeoD
     return ret;
 }
 
+bool NodeReducer::touchesTileBorder(const GeoDataCoordinates &coordinates) const
+{
+    return  coordinates.latitude() >= m_tileBoundary[North] ||
+            coordinates.latitude() <= m_tileBoundary[South] ||
+            coordinates.longitude() <= m_tileBoundary[West] ||
+            coordinates.longitude() >= m_tileBoundary[East];
+}
+
 qint64 NodeReducer::removedNodes() const
 {
     return m_removedNodes;
+}
+
+void NodeReducer::setBorderPoints(OsmPlacemarkData &osmData, const QVector<int> &borderPoints, int length) const
+{
+    int const n = borderPoints.size();
+    if (n == 0) {
+        return;
+    }
+
+    if (n > length) {
+        qDebug() << "Invalid border points for length" << length << ":" << borderPoints;
+        return;
+    }
+
+    typedef QPair<int, int> Segment;
+    typedef QVector<Segment> Segments;
+    Segments segments;
+    Segment currentSegment;
+    currentSegment.first = borderPoints.first();
+    currentSegment.second = currentSegment.first;
+    for (int i=1; i<n; ++i) {
+        if (currentSegment.second+1 == borderPoints[i]) {
+            // compress and continue segment
+            ++currentSegment.second;
+        } else {
+            segments << currentSegment;
+            currentSegment.first = borderPoints[i];
+            currentSegment.second = currentSegment.first;
+        }
+    }
+
+    if (segments.isEmpty() || currentSegment != segments.last()) {
+        segments << currentSegment;
+    }
+
+    if (segments.size() > 1 && segments.last().second+1 == length && segments.first().first == 0) {
+        segments.last().second = segments.first().second;
+        segments.pop_front();
+    }
+
+    int wraps = 0;
+    for (auto const &segment: segments) {
+        if (segment.first >= segment.second) {
+            ++wraps;
+        }
+        if (segment.first < 0 || segment.second < 0 || segment.first+1 > length || segment.second+1 > length) {
+            qDebug() << "Wrong border points sequence for length " << length << ":" <<  borderPoints << ", intermediate " << segments;
+            return;
+        }
+    }
+
+    if (wraps > 1) {
+        qDebug() << "Wrong border points sequence:" <<  borderPoints;
+        return;
+    }
+
+    QString value;
+    value.reserve(segments.size() * (2 + QString::number(length).size()));
+    for (auto const &segment: segments) {
+        int diff = segment.second - segment.first;
+        diff = diff > 0 ? diff : length + diff;
+        value = value % QStringLiteral(";") % QString::number(segment.first) % QStringLiteral("+") % QString::number(diff);
+    }
+    osmData.addTag(QStringLiteral("mx:bp"), value.mid(1));
 }
 
 }

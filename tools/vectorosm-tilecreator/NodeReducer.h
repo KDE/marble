@@ -26,20 +26,32 @@ public:
     qint64 remainingNodes() const;
 
 private:
-    qreal epsilonFor(int detailLevel, qreal multiplier) const;
+    qreal epsilonFor(qreal multiplier) const;
     qreal perpendicularDistance(const GeoDataCoordinates &a, const GeoDataCoordinates &b, const GeoDataCoordinates &c) const;
+    bool touchesTileBorder(const GeoDataCoordinates &coordinates) const;
+    void setBorderPoints(OsmPlacemarkData &osmData, const QVector<int> &borderPoints, int length) const;
 
     template<class T>
-    void reduce(T const & lineString, const GeoDataPlacemark* placemark, T* reducedLine, int tileLevel)
+    void reduce(T const & lineString, OsmPlacemarkData& osmData, GeoDataPlacemark::GeoDataVisualCategory visualCategory, T* reducedLine)
     {
-        bool const isArea = lineString.isClosed() && VectorClipper::canBeArea(placemark->visualCategory());
-        qreal const epsilon = epsilonFor(tileLevel, isArea ? 45.0 : 30.0);
-        *reducedLine = douglasPeucker(lineString, placemark->osmData(), epsilon);
+        bool const isArea = lineString.isClosed() && VectorClipper::canBeArea(visualCategory);
+        qreal const epsilon = epsilonFor(isArea ? 45.0 : 30.0);
+        *reducedLine = douglasPeucker(lineString, osmData, epsilon);
 
         qint64 prevSize = lineString.size();
         qint64 reducedSize = reducedLine->size();
         m_removedNodes += (prevSize - reducedSize);
         m_remainingNodes += reducedSize;
+
+        QVector<int> borderPoints;
+        int index = 0;
+        for (auto const &coordinate: *reducedLine) {
+            if (touchesTileBorder(coordinate)) {
+                borderPoints << index;
+            }
+            ++index;
+        }
+        setBorderPoints(osmData, borderPoints, reducedLine->size());
     }
 
     template<class T>
@@ -69,11 +81,6 @@ private:
             return lineString;
         }
 
-        // @todo Keep nodes with tags
-//        if (!osmData.nodeReference(currentCoords).isEmpty()) {
-//            continue; // do not remove nodes with tags
-//        }
-
         double maxDistance = 0.0;
         int index = 0;
         int const end = lineString.size()-1;
@@ -93,12 +100,27 @@ private:
 
         T result;
         result << lineString[0];
+        for (int i=1; i<end; ++i) {
+            bool const keepNode = touchesTileBorder(lineString[i]) || !osmData.nodeReference(lineString[i]).isEmpty();
+            if (keepNode) {
+                result << lineString[i];
+            }
+        }
         result << lineString[end];
         return result;
     }
 
     qint64 m_removedNodes;
     qint64 m_remainingNodes;
+
+    int m_zoomLevel;
+    double m_tileBoundary[4];
+    enum Boundary {
+        West = 0,
+        North = 1,
+        East = 2,
+        South = 3
+    };
 };
 
 }

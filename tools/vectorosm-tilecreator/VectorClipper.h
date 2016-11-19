@@ -41,7 +41,6 @@ private:
     QVector<GeoDataPlacemark*> potentialIntersections(const GeoDataLatLonBox &box) const;
     ClipperLib::Path clipPath(const GeoDataLatLonBox &box, int zoomLevel) const;
     qreal area(const GeoDataLinearRing &ring);
-    void setBorderPoints(OsmPlacemarkData &osmData, const QVector<int> &borderPoints, int length) const;
     void getBounds(const ClipperLib::Path &path, ClipperLib::cInt &minX, ClipperLib::cInt &maxX, ClipperLib::cInt &minY, ClipperLib::cInt &maxY) const;
 
     template<class T>
@@ -78,7 +77,6 @@ private:
             newPlacemark->setVisible(placemark->isVisible());
             newPlacemark->setVisualCategory(placemark->visualCategory());
             T* newRing = new T;
-            QVector<int> borderPoints;
             int index = 0;
             foreach(const auto &point, path) {
                 GeoDataCoordinates const coordinates = point.coordinates();
@@ -86,9 +84,6 @@ private:
                 auto const originalOsmData = osmData.nodeReference(coordinates);
                 if (originalOsmData.id() > 0) {
                     newPlacemark->osmData().addNodeReference(coordinates, originalOsmData);
-                }
-                if (isClosed && !point.isInside(minX, maxX, minY, maxY)) {
-                    borderPoints << index;
                 }
                 ++index;
             }
@@ -98,7 +93,6 @@ private:
                 newPlacemark->osmData().addTag(QStringLiteral("mx:oid"), QString::number(placemark->osmData().id()));
             }
             copyTags(*placemark, *newPlacemark);
-            setBorderPoints(newPlacemark->osmData(), borderPoints, newRing->size());
             OsmObjectManager::initializeOsmData(newPlacemark);
             document->append(newPlacemark);
         }
