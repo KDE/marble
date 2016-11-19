@@ -55,7 +55,7 @@ class VectorTileModel : public QObject
 public:
     explicit VectorTileModel( TileLoader *loader, const GeoSceneVectorTileDataset *layer, GeoDataTreeModel *treeModel, QThreadPool *threadPool );
 
-    void setViewport( const GeoDataLatLonBox &bbox, int radius );
+    void setViewport(const GeoDataLatLonBox &bbox);
 
     QString name() const;
 

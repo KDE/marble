@@ -69,27 +69,14 @@ VectorTileModel::VectorTileModel( TileLoader *loader, const GeoSceneVectorTileDa
     connect(treeModel, SIGNAL(removed(GeoDataObject*)), this, SLOT(cleanupTile(GeoDataObject*)) );
 }
 
-void VectorTileModel::setViewport( const GeoDataLatLonBox &latLonBox, int radius )
+void VectorTileModel::setViewport(const GeoDataLatLonBox &latLonBox)
 {
-    // choose the smaller dimension for selecting the tile level, leading to higher-resolution results
-    const int levelZeroWidth = m_layer->tileSize().width() * m_layer->levelZeroColumns();
-    const int levelZeroHight = m_layer->tileSize().height() * m_layer->levelZeroRows();
-    const int levelZeroMinDimension = qMin( levelZeroWidth, levelZeroHight );
-
-    qreal linearLevel = ( 4.0 * (qreal)( radius ) / (qreal)( levelZeroMinDimension ) );
-
-    if ( linearLevel < 1.0 )
-        linearLevel = 1.0; // Dirty fix for invalid entry linearLevel
-
-    // As our tile resolution doubles with each level we calculate
-    // the tile level from tilesize and the globe radius via log(2)
-
-    qreal tileLevelF = qLn( linearLevel ) / qLn( 2.0 );
-    int tileZoomLevel = (int)( tileLevelF * 1.00001 );
-    // snap to the sharper tile level a tiny bit earlier
-    // to work around rounding errors when the radius
-    // roughly equals the global texture width
-    m_tileZoomLevel = tileZoomLevel;
+    bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+    int const nTiles = smallScreen ? 12 : 20;
+    qreal const viewportArea = latLonBox.width() * latLonBox.height();
+    qreal const level = log((nTiles * 2.0 * M_PI * M_PI) / viewportArea) / log(4);
+    m_tileZoomLevel = qFloor(level);
+    int tileLoadLevel = m_tileZoomLevel;
 
     // Determine available tile levels in the layer and thereby
     // select the tileZoomLevel that is actually used:
@@ -102,17 +89,17 @@ void VectorTileModel::setViewport( const GeoDataLatLonBox &latLonBox, int radius
     }
     int tileLevel = tileLevels.first();
     for (int i=1, n=tileLevels.size(); i<n; ++i) {
-        if (tileLevels[i] > tileZoomLevel) {
+        if (tileLevels[i] > tileLoadLevel) {
             break;
         }
         tileLevel = tileLevels[i];
     }
-    tileZoomLevel = tileLevel;
+    tileLoadLevel = tileLevel;
 
     // if zoom level has changed, empty vectortile cache
-    if ( tileZoomLevel != m_tileLoadLevel ) {
+    if ( tileLoadLevel != m_tileLoadLevel ) {
         m_deleteDocumentsLater = m_tileLoadLevel >= 0;
-        m_tileLoadLevel = tileZoomLevel;
+        m_tileLoadLevel = tileLoadLevel;
     }
 
     /** LOGIC FOR DOWNLOADING ALL THE TILES THAT ARE INSIDE THE SCREEN AT THE CURRENT ZOOM LEVEL **/
@@ -124,22 +111,22 @@ void VectorTileModel::setViewport( const GeoDataLatLonBox &latLonBox, int radius
     int northY;
     int eastX;
     int southY;
-    m_layer->tileProjection()->tileIndexes(latLonBox, tileZoomLevel, westX, northY, eastX, southY);
+    m_layer->tileProjection()->tileIndexes(latLonBox, tileLoadLevel, westX, northY, eastX, southY);
 
     // Download tiles and send them to VectorTileLayer
     // When changing zoom, download everything inside the screen
     // TODO: hardcodes assumption about tiles indexing also ends at dateline
     // TODO: what about crossing things in y direction?
     if ( !latLonBox.crossesDateLine() ) {
-        queryTiles( tileZoomLevel, westX, northY, eastX, southY );
+        queryTiles( tileLoadLevel, westX, northY, eastX, southY );
     }
     // When only moving screen, just download the new tiles
     else {
         // TODO: maxTileX (calculation knowledge) should be a property of tileProjection or m_layer
-        const unsigned int maxTileX = (1 << tileZoomLevel) * m_layer->levelZeroColumns() - 1;
+        const unsigned int maxTileX = (1 << tileLoadLevel) * m_layer->levelZeroColumns() - 1;
 
-        queryTiles( tileZoomLevel, 0, northY, eastX, southY );
-        queryTiles( tileZoomLevel, westX, northY, maxTileX, southY );
+        queryTiles( tileLoadLevel, 0, northY, eastX, southY );
+        queryTiles( tileLoadLevel, westX, northY, maxTileX, southY );
     }
     removeTilesOutOfView(latLonBox);
 }
