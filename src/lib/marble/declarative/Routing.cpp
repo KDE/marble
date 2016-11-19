@@ -90,7 +90,7 @@ QSGNode * Routing::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *) {
     }
 
     int const dpi = qMax(paintDevice.logicalDpiX(), paintDevice.logicalDpiY());
-    qreal const width = 2.5 * MM2M * M2IN * dpi;
+    qreal const halfWidth = 0.5 * 2.5 * MM2M * M2IN * dpi;
 
     QColor standardRouteColor = routingManager->state() == RoutingManager::Downloading ?
                                 routingManager->routeColorStandard() :
@@ -102,30 +102,40 @@ QSGNode * Routing::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *) {
     if (!polygons.isEmpty()) {
         delete oldNode;
         oldNode = new QSGNode;
-        QSGFlatColorMaterial *material = new QSGFlatColorMaterial;
-        material->setColor(standardRouteColor);
-
         foreach(const QPolygonF* itPolygon, polygons) {
-
+            QPolygonF const & polygon = *itPolygon;
+            QVector<QVector2D> normals;
             int segmentCount = itPolygon->size() - 1;
+            normals.reserve(segmentCount);
+            for(int i = 0; i < segmentCount; ++i) {
+                normals << QVector2D(polygon[i+1] - polygon[i]).normalized();
+            }
+            QSGGeometryNode* lineNode = new QSGGeometryNode;
 
-            QSGGeometryNode * lineNode = new QSGGeometryNode;
+            QSGGeometry * lineNodeGeo = new QSGGeometry(QSGGeometry::defaultAttributes_Point2D(), segmentCount*4);
+            lineNodeGeo->setDrawingMode(GL_TRIANGLE_STRIP);
+            lineNodeGeo->allocate(segmentCount*4);
 
-            QSGGeometry * lineNodeGeo = new QSGGeometry(QSGGeometry::defaultAttributes_Point2D(), 2*segmentCount);
-            lineNodeGeo->setLineWidth(width);
-            lineNodeGeo->setDrawingMode(GL_LINE_STRIP);
-            lineNodeGeo->setLineWidth(width);
-            lineNodeGeo->allocate(2*segmentCount);
+            QSGFlatColorMaterial *material = new QSGFlatColorMaterial;
+            material->setColor(standardRouteColor);
 
             lineNode->setGeometry(lineNodeGeo);
             lineNode->setFlag(QSGNode::OwnsGeometry);
             lineNode->setMaterial(material);
             lineNode->setFlag(QSGNode::OwnsMaterial);
 
+            auto points = lineNodeGeo->vertexDataAsPoint2D();
+            int k = -1;
             for(int i = 0; i < segmentCount; ++i) {
-                lineNodeGeo->vertexDataAsPoint2D()[2*i].set(itPolygon->at(i).x(), itPolygon->at(i).y());
-                lineNodeGeo->vertexDataAsPoint2D()[2*i+1].set(itPolygon->at(i+1).x(), itPolygon->at(i+1).y());
+                auto const & a = polygon[i];
+                auto const & b = polygon[i+1];
+                auto const & n = normals[i];
+                points[++k].set(a.x() - halfWidth * n.y(), a.y() + halfWidth * n.x());
+                points[++k].set(a.x() + halfWidth * n.y(), a.y() - halfWidth * n.x());
+                points[++k].set(b.x() - halfWidth * n.y(), b.y() + halfWidth * n.x());
+                points[++k].set(b.x() + halfWidth * n.y(), b.y() - halfWidth * n.x());
             }
+
             oldNode->appendChildNode(lineNode);
         }
     }
