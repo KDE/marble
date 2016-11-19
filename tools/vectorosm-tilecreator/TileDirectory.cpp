@@ -353,8 +353,8 @@ void TileDirectory::createTiles() const
         return;
     }
 
-    QSharedPointer<GeoDataDocument> map = open(m_inputFile, m_manager);
-    QSharedPointer<VectorClipper> clipper = QSharedPointer<VectorClipper>(new VectorClipper(map.data(), m_zoomLevel));
+    QSharedPointer<GeoDataDocument> map;
+    QSharedPointer<VectorClipper> clipper;
     TileIterator iter(m_boundingBox, m_zoomLevel);
     qint64 count = 0;
     foreach(auto const &tileId, iter) {
@@ -371,6 +371,10 @@ void TileDirectory::createTiles() const
         cout.flush();
 
         QDir().mkpath(outputDir);
+        if (!clipper) {
+            map = open(m_inputFile, m_manager);
+            clipper = QSharedPointer<VectorClipper>(new VectorClipper(map.data(), m_zoomLevel));
+        }
         auto tile = clipper->clipTo(m_zoomLevel, tileId.x(), tileId.y());
         if (!GeoDataDocumentWriter::write(outputFile, *tile)) {
             qWarning() << "Failed to write tile" << outputFile;
