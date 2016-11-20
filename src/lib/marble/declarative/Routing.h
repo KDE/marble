@@ -28,6 +28,7 @@ class Routing : public QQuickItem
     Q_PROPERTY( MarbleMap* marbleMap READ marbleMap WRITE setMarbleMap NOTIFY marbleMapChanged)
     Q_PROPERTY( QString routingProfile READ routingProfile WRITE setRoutingProfile NOTIFY routingProfileChanged )
     Q_PROPERTY( bool hasRoute READ hasRoute NOTIFY hasRouteChanged )
+    Q_PROPERTY( bool hasWaypoints READ hasWaypoints NOTIFY hasWaypointsChanged )
     Q_PROPERTY( RoutingModel* routingModel READ routingModel NOTIFY routingModelChanged)
     Q_PROPERTY( QQmlComponent* waypointDelegate READ waypointDelegate WRITE setWaypointDelegate NOTIFY waypointDelegateChanged)
     Q_PROPERTY( RouteRequestModel* routeRequestModel READ routeRequestModel NOTIFY routeRequestModelChanged)
@@ -48,6 +49,8 @@ public:
     void setRoutingProfile( const QString & profile );
 
     bool hasRoute() const;
+
+    bool hasWaypoints() const;
 
     RoutingModel *routingModel();
 
@@ -96,6 +99,8 @@ Q_SIGNALS:
     void routingProfileChanged();
 
     void hasRouteChanged();
+
+    void hasWaypointsChanged();
 
     void routingModelChanged();
 

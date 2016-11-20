@@ -132,7 +132,7 @@ ApplicationWindow {
                     anchors.fill: parent
                     marbleItem: marbleMaps
                     routingProfile: routeEditor.routingProfile
-//                    visible: hasRoute // TODO: make this work
+                    visible: hasRoute
                 }
 
                 Timer {
@@ -183,6 +183,7 @@ ApplicationWindow {
                 height: parent.height
                 visible: false
                 marbleItem: marbleMaps
+                hasRoute: routing.hasRoute
             }
         }
 

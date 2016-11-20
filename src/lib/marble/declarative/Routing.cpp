@@ -310,6 +310,10 @@ void Routing::setMarbleMap( MarbleMap* marbleMap )
                  this, SIGNAL(hasRouteChanged()) );
         connect( routingModel(), SIGNAL(currentRouteChanged()),
                  this, SIGNAL(hasRouteChanged()) );
+        connect( routingManager, SIGNAL(stateChanged(RoutingManager::State)),
+                 this, SIGNAL(hasWaypointsChanged()) );
+        connect( routingModel(), SIGNAL(currentRouteChanged()),
+                 this, SIGNAL(hasWaypointsChanged()) );
         connect( routingModel(), SIGNAL(currentRouteChanged()),
                  this, SLOT(update()) );
         connect( d->m_marbleMap, SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)),
@@ -333,6 +337,7 @@ void Routing::setMarbleMap( MarbleMap* marbleMap )
     emit marbleMapChanged();
     emit routingProfileChanged();
     emit hasRouteChanged();
+    emit hasWaypointsChanged();
 }
 
 MarbleMap *Routing::marbleMap()
@@ -357,6 +362,11 @@ void Routing::setRoutingProfile( const QString & profile )
 }
 
 bool Routing::hasRoute() const
+{
+    return d->m_marbleMap && !d->m_marbleMap->model()->routingManager()->routingModel()->route().path().isEmpty();
+}
+
+bool Routing::hasWaypoints() const
 {
     return d->m_marbleMap && d->m_marbleMap->model()->routingManager()->routingModel()->rowCount() > 0;
 }

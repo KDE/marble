@@ -22,6 +22,7 @@ Item {
     property alias snappedPositionMarkerScreenPosition: navigation.screenPosition
     property alias screenAccuracy: navigation.screenAccuracy
     property alias deviated: navigation.deviated
+    property bool hasRoute: false
 
     onVisibleChanged: {
         if (visible) {
@@ -42,6 +43,7 @@ Item {
     BorderImage {
         anchors.fill: infoBar
         anchors.margins: -14
+        visible: infoBar.visible
         border { top: 14; left: 14; right: 14; bottom: 14 }
         source: "qrc:///border_shadow.png"
     }
@@ -53,6 +55,7 @@ Item {
             left: parent.left
             right: parent.right
         }
+        visible: root.hasRoute
         instructionIcon: navigation.nextInstructionImage.replace("qrc:/", "qrc:///");
         distance: navigation.nextInstructionDistance;
         destinationDistance: navigation.destinationDistance
@@ -60,6 +63,7 @@ Item {
 
     CircularButton {
         id: muteButton
+        visible: root.hasRoute
 
         property bool muted: settings.value("Navigation", "muted") === "true"
 
@@ -76,7 +80,7 @@ Item {
         marbleQuickItem: marbleItem
 
         onVoiceNavigationAnnouncementChanged: {
-            if (root.visible && !muteButton.muted) {
+            if (root.visible && root.hasRoute && !muteButton.muted) {
                 textToSpeechClient.readText(voiceNavigationAnnouncement);
             }
         }
