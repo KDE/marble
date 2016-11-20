@@ -66,6 +66,7 @@ QString Placemark::description() const
     if (m_description.isEmpty()) {
         auto const category = m_placemark.visualCategory();
         m_description = m_placemark.categoryName();
+
         if (category == GeoDataPlacemark::AccomodationHotel || category == GeoDataPlacemark::FoodRestaurant) {
             QString const stars = m_placemark.osmData().tagValue(QStringLiteral("stars"));
             if (!stars.isEmpty()) {
@@ -78,6 +79,7 @@ QString Placemark::description() const
                 }
             }
         }
+
         if (category >= GeoDataPlacemark::FoodBar && category <= GeoDataPlacemark::FoodRestaurant) {
             addTagValue(m_description, "brand");
             addTagValue(m_description, "cuisine");
@@ -155,6 +157,7 @@ QString Placemark::description() const
 
         addTagDescription(m_description, QStringLiteral("fee"), QStringLiteral("no"), tr("no fee"));
         addTagValue(m_description, QStringLiteral("description"));
+        addTagValue(m_description, QStringLiteral("old_name"), tr("formerly <i>%1</i>"));
     }
 
     return m_description;
