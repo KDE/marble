@@ -60,7 +60,7 @@ Item {
             spacing: Screen.pixelDensity * 2
 
             Column {
-                spacing: Screen.pixelDensity * 1
+                spacing: Screen.pixelDensity * 0.5
 
                 Text {
                     text: "Developer Tools"
@@ -87,7 +87,7 @@ Item {
             }
 
             Column {
-                spacing: Screen.pixelDensity * 1
+                spacing: Screen.pixelDensity * 0.5
 
                 Text {
                     text: "Debug Rendering"
