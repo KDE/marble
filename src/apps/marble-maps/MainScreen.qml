@@ -149,9 +149,7 @@ ApplicationWindow {
                     x: navigationManager.snappedPositionMarkerScreenPosition.x
                     y: navigationManager.snappedPositionMarkerScreenPosition.y
                     angle: marbleMaps.angle
-                    visible: marbleMaps.positionAvailable
-                             && x + radius > 0 && x - radius < marbleMaps.width
-                             && y + radius > 0 && y - radius < marbleMaps.height
+                    visible: marbleMaps.positionAvailable && marbleMaps.positionVisible
                     radius: navigationManager.screenAccuracy / 2
                     showAccuracy: navigationManager.deviated
                     allowRadiusAnimation: !zoomDetectionTimer.running

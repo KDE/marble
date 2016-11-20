@@ -247,9 +247,10 @@ namespace Marble
         updatePlacemarks();
         bool isVisible = false;
         if ( positionAvailable() ) {
-            if ( d->m_map.viewport()->viewLatLonAltBox().contains(d->m_model.positionTracking()->currentLocation()) ) {
-                isVisible = true;
-            }
+            qreal x, y;
+            bool globeHidesPoint;
+            bool const valid = d->m_map.viewport()->screenCoordinates(d->m_model.positionTracking()->currentLocation(), x, y, globeHidesPoint);
+            isVisible = valid && !globeHidesPoint;
         }
 
         if ( isVisible != d->m_positionVisible ) {
