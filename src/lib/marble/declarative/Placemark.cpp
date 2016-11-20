@@ -69,6 +69,7 @@ QString Placemark::description() const
         if (category >= GeoDataPlacemark::FoodBar && category <= GeoDataPlacemark::FoodRestaurant) {
             addTagValue(m_description, "brand");
             addTagValue(m_description, "cuisine");
+            addTagValue(m_description, "brewery");
             addTagDescription(m_description, "self_service", "yes", "Self Service");
             addTagDescription(m_description, "takeaway", "yes", "Take Away");
             addTagDescription(m_description, "outdoor_seating", "yes", "Outdoor Seating");
