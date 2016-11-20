@@ -139,7 +139,7 @@ QSGNode * Routing::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *) {
             oldNode->appendChildNode(lineNode);
         }
     } else {
-        if (oldNode->childCount() > 0) {
+        if (oldNode && oldNode->childCount() > 0) {
             delete oldNode;
             oldNode = new QSGNode;
         }
