@@ -32,13 +32,16 @@ bool KmlOsmPlacemarkDataTagWriter::write( const GeoDataFeature *feature,
         return false;
     }
     const GeoDataPlacemark *placemark = static_cast<const GeoDataPlacemark*>( feature );
+    const OsmPlacemarkData &osmData = placemark->osmData();
+    if (osmData.isNull()) {
+        return true;
+    }
 
     writer.writeStartElement( kml::kmlTag_ExtendedData );
 
     // We declare the "mx" namespace for the custom osmPlacemarkData XML schema
     writer.writeNamespace( kml::kmlTag_nameSpaceMx, "mx" );
 
-    const OsmPlacemarkData &osmData = placemark->osmData();
     KmlOsmPlacemarkDataTagWriter::writeOsmData( placemark->geometry(), osmData, writer );
 
     writer.writeEndElement();
