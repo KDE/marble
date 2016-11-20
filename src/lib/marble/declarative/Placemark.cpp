@@ -66,6 +66,18 @@ QString Placemark::description() const
     if (m_description.isEmpty()) {
         auto const category = m_placemark.visualCategory();
         m_description = m_placemark.categoryName();
+        if (category == GeoDataPlacemark::AccomodationHotel || category == GeoDataPlacemark::FoodRestaurant) {
+            QString const stars = m_placemark.osmData().tagValue(QStringLiteral("stars"));
+            if (!stars.isEmpty()) {
+                bool hasStars;
+                int const numStars = stars.mid(0, 1).toInt(&hasStars);
+                if (hasStars) {
+                    m_description += QString(' ') + QString("*").repeated(numStars) + stars.mid(1);
+                } else {
+                    addTagValue(m_description, QStringLiteral("stars"));
+                }
+            }
+        }
         if (category >= GeoDataPlacemark::FoodBar && category <= GeoDataPlacemark::FoodRestaurant) {
             addTagValue(m_description, "brand");
             addTagValue(m_description, "cuisine");
@@ -134,6 +146,9 @@ QString Placemark::description() const
         } else if (category == GeoDataPlacemark::NaturalPeak) {
             addTagValue(m_description, QStringLiteral("ele"), tr("%1 m"));
         }
+
+        addTagDescription(m_description, QStringLiteral("fee"), QStringLiteral("no"), tr("no fee"));
+        addTagValue(m_description, QStringLiteral("description"));
     }
 
     return m_description;
@@ -246,20 +261,27 @@ void Placemark::addTagValue(QString &target, const QString &key, const QString &
 {
     auto const & osmData = m_placemark.osmData();
     QString const value = osmData.tagValue(key);
-    QString description = format.isEmpty() ? value : format.arg(value);
-    description.replace(QLatin1Char(';'), " · ");
-    addTagDescription(target, key, value, description);
+    if (!value.isEmpty()) {
+        QString description = format.isEmpty() ? value : format.arg(value);
+        description.replace(QLatin1Char(';'), " · ");
+        append(target, description);
+    }
 }
 
 void Placemark::addTagDescription(QString &target, const QString &key, const QString &value, const QString &description) const
 {
     auto const & osmData = m_placemark.osmData();
     if (osmData.containsTag(key, value)) {
-        if (!target.isEmpty()) {
-            target += QStringLiteral(" · "); // non-latin1
-        }
-        target += description;
+        append(target, description);
     }
+}
+
+void Placemark::append(QString &target, const QString &value) const
+{
+    if (!target.isEmpty()) {
+        target += QStringLiteral(" · "); // non-latin1
+    }
+    target += value;
 }
 
 QString Placemark::addressFromOsmData() const

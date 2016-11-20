@@ -73,6 +73,7 @@ Q_SIGNALS:
 private:
     void addTagValue(QString &target, const QString &key, const QString &format=QString()) const;
     void addTagDescription(QString &target, const QString &key, const QString &value, const QString &description) const;
+    void append(QString &target, const QString &value) const;
     QString addressFromOsmData() const;
     QString formatStreet(const QString &street, const QString &houseNumber) const;
     void updateTags();
