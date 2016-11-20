@@ -149,6 +149,10 @@ QString Placemark::description() const
             addTagValue(m_description, QStringLiteral("ele"), tr("%1 m"));
         }
 
+        addTagDescription(m_description, "access", "no", tr("no access"));
+        addTagDescription(m_description, "access", "private", tr("private"));
+        addTagDescription(m_description, "access", "customers", tr("customers only"));
+
         addTagDescription(m_description, QStringLiteral("fee"), QStringLiteral("no"), tr("no fee"));
         addTagValue(m_description, QStringLiteral("description"));
     }
