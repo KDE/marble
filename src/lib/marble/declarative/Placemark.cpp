@@ -110,9 +110,11 @@ QString Placemark::description() const
             addTagValue(m_description, "brand");
             addTagValue(m_description, "operator");
             addTagDescription(m_description, "fuel:diesel", "yes", tr("Diesel"));
+            addTagDescription(m_description, "fuel:biodiesel", "yes", tr("Biodiesel"));
             addTagDescription(m_description, "fuel:octane_91", "yes", tr("Octane 91"));
             addTagDescription(m_description, "fuel:octane_95", "yes", tr("Octane 95"));
             addTagDescription(m_description, "fuel:octane_98", "yes", tr("Octane 98"));
+            addTagDescription(m_description, "fuel:octane_100", "yes", tr("Octane 100"));
             addTagDescription(m_description, "fuel:e10", "yes", tr("E10"));
             addTagDescription(m_description, "fuel:lpg", "yes", tr("LPG"));
         } else if (category == GeoDataPlacemark::NaturalTree) {
