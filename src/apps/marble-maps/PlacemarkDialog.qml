@@ -22,7 +22,7 @@ Item {
     property string actionIconSource: routeEditor.currentProfileIcon
     property alias map: bookmarks.map
 
-    height: placemark === null ? 0 : Screen.pixelDensity * 6 +
+    height: placemark === null ? 0 : Screen.pixelDensity * 4 +
                                  (infoLayout.height > bookmarkButton.height ? infoLayout.height : bookmarkButton.height)
 
     function addToRoute() {
