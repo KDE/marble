@@ -12,6 +12,7 @@ import QtQuick 2.3
 import QtQuick.Controls 1.3
 import QtQuick.Window 2.2
 import QtQuick.Layouts 1.1
+import QtQuick.Controls 2.0
 
 import org.kde.marble 0.20
 
@@ -21,6 +22,7 @@ Item {
     property var placemark: null
     property string actionIconSource: routeEditor.currentProfileIcon
     property alias map: bookmarks.map
+    property alias showTags: tagsView.visible
 
     height: placemark === null ? 0 : Screen.pixelDensity * 4 +
                                  (infoLayout.height > bookmarkButton.height ? infoLayout.height : bookmarkButton.height)
@@ -121,6 +123,18 @@ Item {
             icon: "qrc:/material/place.svg"
             linkColor: palette.text
             onLinkActivated: marbleMaps.centerOnCoordinates(placemark.longitude, placemark.latitude)
+        }
+
+        ListView {
+            id: tagsView
+            visible: false
+            width: parent.width
+            height: Screen.pixelDensity * 24
+            clip: true
+            model: placemark ? placemark.tags : undefined
+            delegate: IconText { width: tagsView.width; text: modelData }
+
+            ScrollBar.vertical: ScrollBar {}
         }
     }
 

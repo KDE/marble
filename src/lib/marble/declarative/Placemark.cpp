@@ -35,6 +35,7 @@ void Placemark::setGeoDataPlacemark( const Marble::GeoDataPlacemark &placemark )
     m_website = QString();
     m_wikipedia = QString();
     m_openingHours = QString();
+    updateTags();
     emit coordinatesChanged();
     emit nameChanged();
     emit descriptionChanged();
@@ -42,6 +43,7 @@ void Placemark::setGeoDataPlacemark( const Marble::GeoDataPlacemark &placemark )
     emit websiteChanged();
     emit wikipediaChanged();
     emit openingHoursChanged();
+    emit tagsChanged();
 }
 
 Marble::GeoDataPlacemark & Placemark::placemark()
@@ -234,6 +236,11 @@ double Placemark::latitude() const
     return m_placemark.coordinate().latitude(GeoDataCoordinates::Degree);
 }
 
+const QStringList &Placemark::tags() const
+{
+    return m_tags;
+}
+
 void Placemark::addTagValue(QString &target, const QString &key, const QString &format) const
 {
     auto const & osmData = m_placemark.osmData();
@@ -276,7 +283,16 @@ QString Placemark::addressFromOsmData() const
 QString Placemark::formatStreet(const QString &street, const QString &houseNumber) const
 {
     return houseNumber.isEmpty() ? street : tr("%1 %2",
-        "House number (first argument) and street name (second argument) in an address").arg(houseNumber).arg(street).trimmed();
+                                               "House number (first argument) and street name (second argument) in an address").arg(houseNumber).arg(street).trimmed();
+}
+
+void Placemark::updateTags()
+{
+    m_tags.clear();
+    QString const tag = QStringLiteral("%1 = %2");
+    for (auto iter = m_placemark.osmData().tagsBegin(), end = m_placemark.osmData().tagsEnd(); iter != end; ++iter) {
+        m_tags << tag.arg(iter.key()).arg(iter.value());
+    }
 }
 
 }

@@ -15,6 +15,7 @@
 
 #include <QObject>
 #include <QtQml>
+#include <QStringListModel>
 
 namespace Marble {
 
@@ -34,6 +35,7 @@ class Placemark : public QObject
     Q_PROPERTY(QString coordinates READ coordinates NOTIFY coordinatesChanged)
     Q_PROPERTY(double longitude READ longitude NOTIFY coordinatesChanged)
     Q_PROPERTY(double latitude READ latitude NOTIFY coordinatesChanged)
+    Q_PROPERTY(QStringList tags READ tags NOTIFY tagsChanged)
 
 public:
     /** Constructor */
@@ -53,6 +55,7 @@ public:
     QString coordinates() const;
     double longitude() const;
     double latitude() const;
+    const QStringList & tags() const;
 
 public Q_SLOTS:
     void setName(const QString &name);
@@ -65,12 +68,14 @@ Q_SIGNALS:
     void websiteChanged();
     void wikipediaChanged();
     void openingHoursChanged();
+    void tagsChanged();
 
 private:
     void addTagValue(QString &target, const QString &key, const QString &format=QString()) const;
     void addTagDescription(QString &target, const QString &key, const QString &value, const QString &description) const;
     QString addressFromOsmData() const;
     QString formatStreet(const QString &street, const QString &houseNumber) const;
+    void updateTags();
 
     Marble::GeoDataPlacemark m_placemark;
     mutable QString m_address; // mutable to allow lazy calculation in the getter
@@ -78,6 +83,7 @@ private:
     mutable QString m_website;
     mutable QString m_wikipedia;
     mutable QString m_openingHours;
+    QStringList m_tags;
 };
 
 }
