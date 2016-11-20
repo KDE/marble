@@ -112,7 +112,9 @@ void TileDirectory::setInputFile(const QString &filename)
             m_inputFile = cacheFile.absoluteFilePath();
 
             QString polyFile = QUrl(filename).fileName();
-            polyFile.remove("-latest.osm.pbf").append(".poly");
+            polyFile.replace("-latest.osm.pbf", ".poly");
+            polyFile.replace(".osm.pbf", ".poly");
+            polyFile.replace(".pbf", ".poly");
             QString poly = QString("%1/%2").arg(url.adjusted(QUrl::RemoveFilename).toString()).arg(polyFile);
             QString const polyTarget = QString("%1/%2").arg(m_cacheDir).arg(polyFile);
             if (!QFileInfo(polyTarget).exists()) {
