@@ -77,6 +77,7 @@ public:
         ui_configWidget = new Ui::OpenRouteServiceConfigWidget;
         ui_configWidget->setupUi( this );
 
+        ui_configWidget->preference->addItem( tr( "Car (recommended way)" ), "Recommended" );
         ui_configWidget->preference->addItem( tr( "Car (fastest way)" ), "Fastest" );
         ui_configWidget->preference->addItem( tr( "Car (shortest way)" ), "Shortest" );
         ui_configWidget->preference->addItem( tr( "Pedestrian (shortest way)" ), "Pedestrian" );

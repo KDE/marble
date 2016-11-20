@@ -20,6 +20,7 @@
 
 #include <QString>
 #include <QUrl>
+#include <QUrlQuery>
 #include <QTime>
 #include <QTimer>
 #include <QNetworkReply>
@@ -36,11 +37,6 @@ OpenRouteServiceRunner::OpenRouteServiceRunner( QObject *parent ) :
              this, SLOT(retrieveData(QNetworkReply*)));
 }
 
-OpenRouteServiceRunner::~OpenRouteServiceRunner()
-{
-    // nothing to do
-}
-
 void OpenRouteServiceRunner::retrieveRoute( const RouteRequest *route )
 {
     if ( route->size() < 2 ) {
@@ -49,10 +45,11 @@ void OpenRouteServiceRunner::retrieveRoute( const RouteRequest *route )
 
     GeoDataCoordinates source = route->source();
     GeoDataCoordinates destination = route->destination();
-
     QHash<QString, QVariant> settings = route->routingProfile().pluginSettings()["openrouteservice"];
 
-    QString request = xmlHeader();
+    QUrlQuery queries;
+    queries.addQueryItem("api_key", "ee0b8233adff52ce9fd6afc2a2859a28");
+
     QString unit = "KM";
     QString preference = "Fastest";
     if (settings.contains(QStringLiteral("preference"))) {
@@ -62,26 +59,38 @@ void OpenRouteServiceRunner::retrieveRoute( const RouteRequest *route )
         unit = QStringLiteral("M");
     }
 
-    request += requestHeader( unit, preference );
-    request += requestPoint( StartPoint, source );
+    queries.addQueryItem("start", formatCoordinates(source));
+    for (int i = 1; i < route->size()-1; ++i) {
+        queries.addQueryItem("via", formatCoordinates(route->at(i)));
+    }
+    queries.addQueryItem("end", formatCoordinates(destination));
 
-    if ( route->size() > 2 ) {
-        for ( int i = 1; i < route->size() - 1; ++i ) {
-            request += requestPoint( ViaPoint, route->at( i ) );
-        }
+    queries.addQueryItem("distunit", unit);
+    if (preference == "Fastest" || preference == "Shortest" || preference == "Recommended") {
+        queries.addQueryItem("routepref", "Car");
+        queries.addQueryItem("weighting", preference);
+    } else {
+        queries.addQueryItem("routepref", preference);
+        queries.addQueryItem("weighting", "Recommended");
     }
 
-    request += requestPoint( EndPoint, destination );
-    request += requestFooter( settings );
-    request += xmlFooter();
-    //mDebug() << "POST: " << request;
+    QString const motorways = settings.value("noMotorways").toInt() == 0 ? "false" : "true";
+    queries.addQueryItem("noMotorways", motorways);
+    QString const tollways = settings.value("noTollways").toInt() == 0 ? "false" : "true";
+    queries.addQueryItem("noTollways", tollways);
+    queries.addQueryItem("noUnpavedroads", "false");
+    queries.addQueryItem("noSteps", "false");
+    QString const ferries = settings.value("noFerries").toInt() == 0 ? "false" : "true";
+    queries.addQueryItem("noFerries", ferries);
+    queries.addQueryItem("instructions", "true");
+    queries.addQueryItem("lang", "en");
 
-    // Please refrain from making this URI public. To use it outside the scope
-    // of marble you need permission from the openrouteservice.org team.
-    QUrl url = QUrl( "http://openls.geog.uni-heidelberg.de/osm/routing" );
+    QUrl url = QUrl( "http://openls.geog.uni-heidelberg.de/route" );
+    // QUrlQuery strips empty value pairs, but OpenRouteService does not work without
+    QString const trailer = route->size() == 2 ? "&via=" : QString();
+    url.setQuery(queries.toString() + trailer);
+
     m_request = QNetworkRequest( url );
-    m_request.setHeader( QNetworkRequest::ContentTypeHeader, "application/xml" );
-    m_requestData = request.toLatin1();
 
     QEventLoop eventLoop;
     QTimer timer;
@@ -102,9 +111,16 @@ void OpenRouteServiceRunner::retrieveRoute( const RouteRequest *route )
 
 void OpenRouteServiceRunner::get()
 {
-    QNetworkReply *reply = m_networkAccessManager.post( m_request, m_requestData );
+    QNetworkReply *reply = m_networkAccessManager.get(m_request);
     connect( reply, SIGNAL(error(QNetworkReply::NetworkError)),
              this, SLOT(handleError(QNetworkReply::NetworkError)), Qt::DirectConnection);
+}
+
+QString OpenRouteServiceRunner::formatCoordinates(const GeoDataCoordinates &coordinates)
+{
+    return QStringLiteral("%1,%2")
+            .arg(coordinates.longitude(GeoDataCoordinates::Degree ), 0, 'f', 8)
+            .arg(coordinates.latitude(GeoDataCoordinates::Degree ), 0, 'f', 8);
 }
 
 void OpenRouteServiceRunner::retrieveData( QNetworkReply *reply )
@@ -126,73 +142,6 @@ void OpenRouteServiceRunner::retrieveData( QNetworkReply *reply )
 void OpenRouteServiceRunner::handleError( QNetworkReply::NetworkError error )
 {
     mDebug() << " Error when retrieving openrouteservice.org route: " << error;
-}
-
-QString OpenRouteServiceRunner::xmlHeader()
-{
-    const QString result = QLatin1String("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-        "<xls:XLS xmlns:xls=\"http://www.opengis.net/xls\" xmlns:sch=\"http://www.ascc.net/xml/schematron\" "
-        "xmlns:gml=\"http://www.opengis.net/gml\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" "
-        "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
-        "xsi:schemaLocation=\"http://www.opengis.net/xls "
-        "http://schemas.opengis.net/ols/1.1.0/RouteService.xsd\" version=\"1.1\" xls:lang=\"en\">\n"
-        "<xls:RequestHeader/>\n");
-    return result;
-}
-
-QString OpenRouteServiceRunner::requestHeader( const QString &unit, const QString &routePreference )
-{
-    const QString result = QLatin1String("<xls:Request methodName=\"RouteRequest\" requestID=\"123456789\" version=\"1.1\">\n"
-        "<xls:DetermineRouteRequest distanceUnit=\"%1\">\n"
-        "<xls:RoutePlan>\n"
-        "<xls:RoutePreference>%2</xls:RoutePreference>\n"
-        "<xls:WayPointList>\n");
-    return result.arg( unit ).arg( routePreference );
-}
-
-QString OpenRouteServiceRunner::requestPoint( PointType pointType, const GeoDataCoordinates &coordinates )
-{
-    QString result = QLatin1String("<xls:%1>\n"
-        "<xls:Position>\n"
-        "<gml:Point srsName=\"EPSG:4326\">\n"
-        "<gml:pos>%2 %3</gml:pos>\n"
-        "</gml:Point>\n"
-        "</xls:Position>\n"
-        "</xls:%1>\n");
-
-    result = result.arg( pointType == StartPoint ? "StartPoint" : ( pointType == ViaPoint ? "ViaPoint" : "EndPoint" ) );
-    result = result.arg( coordinates.longitude( GeoDataCoordinates::Degree ), 0, 'f', 14 );
-    result = result.arg( coordinates.latitude( GeoDataCoordinates::Degree ), 0, 'f', 14 );
-    return result;
-}
-
-QString OpenRouteServiceRunner::requestFooter( const QHash<QString, QVariant>& settings )
-{
-    QString result = QLatin1String("</xls:WayPointList>\n");
-
-    if (settings[QStringLiteral("noMotorways")].toInt() ||
-        settings[QStringLiteral("noTollways")].toInt()) {
-        result += QLatin1String("<xls:AvoidList>\n");
-        if (settings[QStringLiteral("noTollways")].toInt()) {
-            result += QLatin1String("<xls:AvoidFeature>Tollway</xls:AvoidFeature>");
-        }
-        if (settings[QStringLiteral("noMotorways")].toInt()) {
-            result += QLatin1String("<xls:AvoidFeature>Highway</xls:AvoidFeature>");
-        }
-        result += QLatin1String("</xls:AvoidList>\n");
-    }
-
-    result += QLatin1String("</xls:RoutePlan>\n"
-        "<xls:RouteInstructionsRequest provideGeometry=\"true\" />\n"
-        "<xls:RouteGeometryRequest/>\n"
-        "</xls:DetermineRouteRequest>\n"
-        "</xls:Request>\n");
-    return result;
-}
-
-QString OpenRouteServiceRunner::xmlFooter()
-{
-    return "</xls:XLS>\n";
 }
 
 GeoDataDocument* OpenRouteServiceRunner::parse( const QByteArray &content ) const
