@@ -106,6 +106,9 @@ QString Placemark::description() const
             addFirstTagValueOf(m_description, QStringList() << "brand" << "operator");
             addTagValue(m_description, "clothes");
             addTagValue(m_description, "designation");
+            if (category == GeoDataPlacemark::ShopButcher) {
+                addTagValue(m_description, "butcher");
+            }
         } else if (category == GeoDataPlacemark::TransportBusStop) {
             addTagValue(m_description, "network");
             addTagValue(m_description, "operator");
@@ -157,6 +160,25 @@ QString Placemark::description() const
             addTagDescription(m_description, QStringLiteral("recycling:wood"), "yes", tr("Wood"));
         } else if (category == GeoDataPlacemark::NaturalPeak) {
             addTagValue(m_description, QStringLiteral("ele"), tr("%1 m"));
+        } else if (category == GeoDataPlacemark::HealthDoctors) {
+            addTagDescription(m_description, QStringLiteral("healthcare"), QStringLiteral("alternative"), tr("Alternative medicine"));
+            addTagDescription(m_description, QStringLiteral("healthcare"), QStringLiteral("audiologist"), tr("Audiologist"));
+            addTagDescription(m_description, QStringLiteral("healthcare"), QStringLiteral("blood_bank"), tr("Blood bank"));
+            addTagDescription(m_description, QStringLiteral("healthcare"), QStringLiteral("blood_donation"), tr("Blood donation"));
+            addTagDescription(m_description, QStringLiteral("healthcare"), QStringLiteral("centre"), tr("Medical center"));
+            addTagDescription(m_description, QStringLiteral("healthcare"), QStringLiteral("clinic"), tr("Clinic"));
+            addTagDescription(m_description, QStringLiteral("healthcare"), QStringLiteral("dentist"), tr("Dentist"));
+            addTagDescription(m_description, QStringLiteral("healthcare"), QStringLiteral("doctor"), tr("Medical practitioner"));
+            addTagDescription(m_description, QStringLiteral("healthcare"), QStringLiteral("hospital"), tr("Hospital"));
+            addTagDescription(m_description, QStringLiteral("healthcare"), QStringLiteral("midwife"), tr("Midwife"));
+            addTagDescription(m_description, QStringLiteral("healthcare"), QStringLiteral("optometrist"), tr("Optometrist"));
+            addTagDescription(m_description, QStringLiteral("healthcare"), QStringLiteral("physiotherapist"), tr("Physiotherapist"));
+            addTagDescription(m_description, QStringLiteral("healthcare"), QStringLiteral("podiatrist"), tr("Podiatrist"));
+            addTagDescription(m_description, QStringLiteral("healthcare"), QStringLiteral("psychotherapist"), tr("Psychotherapist"));
+            addTagDescription(m_description, QStringLiteral("healthcare"), QStringLiteral("rehabilitation"), tr("Rehabilitation"));
+            addTagDescription(m_description, QStringLiteral("healthcare"), QStringLiteral("speech_therapist"), tr("Speech therapist"));
+            addTagDescription(m_description, QStringLiteral("healthcare"), QStringLiteral("audiologist"), tr("Audiologist"));
+            addTagValue(m_description, QStringLiteral("healthcare:speciality"));
         }
 
         if (category == GeoDataPlacemark::AmenityRecycling || category == GeoDataPlacemark::AmenityPostBox) {
