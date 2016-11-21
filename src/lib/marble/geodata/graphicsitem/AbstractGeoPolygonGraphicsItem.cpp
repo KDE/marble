@@ -70,19 +70,36 @@ void AbstractGeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportP
     painter->save();
     configurePainter(painter, viewport);
     if ( m_polygon ) {
-        QPen currentPen = painter->pen();
-        QBrush currentBrush = painter->brush();
-        // Draw the filling
-        painter->setPen(Qt::transparent);
-        painter->drawPolygon( *m_unrolledRing );
-        // Draw the outline
-        painter->setPen(currentPen);
-        painter->setBrush(QBrush("transparent"));
-        painter->drawPolygon( m_polygon->outerBoundary() );
+        bool innerResolved = false;
         for(auto ring : m_polygon->innerBoundaries()) {
-            painter->drawPolygon(ring);
+            if (viewport->resolves(ring.latLonAltBox(), 4)) {
+               innerResolved = true;
+               break;
+            }
         }
-        painter->setBrush(currentBrush);
+
+        if (innerResolved) {
+            QPen currentPen = painter->pen();
+            QBrush currentBrush = painter->brush();
+
+            // Draw the filling
+            painter->setPen(Qt::transparent);
+            painter->drawPolygon( *m_unrolledRing );
+
+            // Calculate and draw the outline only if it's not transparent
+            if (currentPen.color() != "transparent" && currentPen.style() != Qt::NoPen) {
+                painter->setPen(currentPen);
+                painter->setBrush(QBrush("transparent"));
+                painter->drawPolygon( m_polygon->outerBoundary() );
+                for(auto ring : m_polygon->innerBoundaries()) {
+                    painter->drawPolygon(ring);
+                }
+            }
+            painter->setBrush(currentBrush);
+        }
+        else {
+            painter->drawPolygon(m_polygon->outerBoundary());
+        }
     } else if ( m_ring ) {
         painter->drawPolygon( *m_ring );
     }
