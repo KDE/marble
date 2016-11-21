@@ -58,7 +58,7 @@ const GeoDataPlacemark &Placemark::placemark() const
 
 QString Placemark::name() const
 {
-    return m_placemark.name();
+    return m_placemark.displayName();
 }
 
 QString Placemark::description() const
@@ -277,7 +277,7 @@ QString Placemark::coordinates() const
 
 void Placemark::setName(const QString & name)
 {
-    if (m_placemark.name() == name) {
+    if (m_placemark.displayName() == name) {
         return;
     }
 
