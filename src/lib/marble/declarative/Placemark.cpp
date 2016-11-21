@@ -78,10 +78,15 @@ QString Placemark::description() const
                     addTagValue(m_description, QStringLiteral("stars"));
                 }
             }
+            addFirstTagValueOf(m_description, QStringList() << "brand" << "operator");
         }
 
         if (category >= GeoDataPlacemark::FoodBar && category <= GeoDataPlacemark::FoodRestaurant) {
-            addTagValue(m_description, "brand");
+            if (category != GeoDataPlacemark::FoodRestaurant) {
+                addFirstTagValueOf(m_description, QStringList() << "brand" << "operator");
+            } else {
+                // Do nothing, already added in stars section above
+            }
             addTagValue(m_description, "cuisine");
             addTagValue(m_description, "brewery");
             addTagDescription(m_description, "self_service", "yes", "Self Service");
@@ -98,7 +103,7 @@ QString Placemark::description() const
             addTagDescription(m_description, "smoking:outside", "separated", "Smoking (outside separated)");
             addTagDescription(m_description, "smoking:outside", "no", "No smoking outside");
         } else if (category >= GeoDataPlacemark::ShopBeverages && category <= GeoDataPlacemark::Shop) {
-            addTagValue(m_description, "operator");
+            addFirstTagValueOf(m_description, QStringList() << "brand" << "operator");
             addTagValue(m_description, "clothes");
             addTagValue(m_description, "designation");
         } else if (category == GeoDataPlacemark::TransportBusStop) {
@@ -108,9 +113,12 @@ QString Placemark::description() const
         } else if (category == GeoDataPlacemark::TransportCarShare) {
             addTagValue(m_description, "network");
             addTagValue(m_description, "operator");
+        } else if (category == GeoDataPlacemark::TransportRentalBicycle ||
+                   category == GeoDataPlacemark::TransportRentalCar) {
+            addFirstTagValueOf(m_description, QStringList() << "brand" << "operator");
+
         } else if (category == GeoDataPlacemark::TransportFuel) {
-            addTagValue(m_description, "brand");
-            addTagValue(m_description, "operator");
+            addFirstTagValueOf(m_description, QStringList() << "brand" << "operator");
             addTagDescription(m_description, "fuel:diesel", "yes", tr("Diesel"));
             addTagDescription(m_description, "fuel:biodiesel", "yes", tr("Biodiesel"));
             addTagDescription(m_description, "fuel:octane_91", "yes", tr("Octane 91"));
@@ -152,7 +160,7 @@ QString Placemark::description() const
         }
 
         if (category == GeoDataPlacemark::AmenityRecycling || category == GeoDataPlacemark::AmenityPostBox) {
-            addTagValue(m_description, QStringLiteral("collection_times"), tr("Collection times %1"));
+            addTagValue(m_description, QStringLiteral("collection_times"), tr("Collection times %1"), QStringLiteral(", "));
         }
 
         addTagDescription(m_description, "access", "no", tr("no access"));
@@ -270,14 +278,25 @@ const QStringList &Placemark::tags() const
     return m_tags;
 }
 
-void Placemark::addTagValue(QString &target, const QString &key, const QString &format) const
+bool Placemark::addTagValue(QString &target, const QString &key, const QString &format, const QString separator) const
 {
     auto const & osmData = m_placemark.osmData();
     QString const value = osmData.tagValue(key);
     if (!value.isEmpty()) {
         QString description = format.isEmpty() ? value : format.arg(value);
-        description.replace(QLatin1Char(';'), " · ");
+        description.replace(QLatin1Char(';'), separator);
         append(target, description);
+        return true;
+    }
+    return false;
+}
+
+void Placemark::addFirstTagValueOf(QString &target, const QStringList &keys) const
+{
+    for (auto const &key: keys) {
+        if (addTagValue(target, key)) {
+            return;
+        }
     }
 }
 
