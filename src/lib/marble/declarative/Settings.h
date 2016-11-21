@@ -20,6 +20,7 @@ class Settings : public QObject
 
     Q_PROPERTY( QString organizationName READ organizationName WRITE setOrganizationName )
     Q_PROPERTY( QString applicationName READ applicationName WRITE setApplicationName )
+    Q_PROPERTY( bool debugOutputEnabled READ debugOutputEnabled WRITE setDebugOutputEnabled NOTIFY debugOutputEnabledChanged)
 
 public:
     Settings();
@@ -32,14 +33,20 @@ public:
 
     void setApplicationName( const QString &application );
 
+    bool debugOutputEnabled() const;
+
 public Q_SLOTS:
     QVariant value( const QString &group, const QString &key, const QVariant &value = QVariant() ) const;
 
     void setValue( const QString &group, const QString &key, const QVariant &value );
 
+    void setDebugOutputEnabled(bool debugOutputEnabled);
+
+Q_SIGNALS:
+    void debugOutputEnabledChanged(bool debugOutputEnabled);
+
 private:
     QString m_organizationName;
-
     QString m_applicationName;
 };
 

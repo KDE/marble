@@ -9,6 +9,7 @@
 //
 
 #include "Settings.h"
+#include "MarbleDebug.h"
 
 #include <QApplication>
 #include <QSettings>
@@ -40,6 +41,11 @@ void Settings::setApplicationName( const QString &application )
     m_applicationName = application;
 }
 
+bool Settings::debugOutputEnabled() const
+{
+    return Marble::MarbleDebug::isEnabled();
+}
+
 QVariant Settings::value( const QString &group, const QString &key, const QVariant &value ) const
 {
     QSettings settings( m_organizationName, m_applicationName );
@@ -53,6 +59,16 @@ void Settings::setValue( const QString &group, const QString &key, const QVarian
     settings.beginGroup( group );
     settings.setValue( key, value );
     settings.endGroup();
+}
+
+void Settings::setDebugOutputEnabled(bool debugOutputEnabled)
+{
+    if (Marble::MarbleDebug::isEnabled() == debugOutputEnabled) {
+        return;
+    }
+
+    Marble::MarbleDebug::setEnabled(debugOutputEnabled);
+    emit debugOutputEnabledChanged(Marble::MarbleDebug::isEnabled());
 }
 
 #include "moc_Settings.cpp"

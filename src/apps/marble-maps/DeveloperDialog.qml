@@ -35,6 +35,7 @@ Item {
             settings.setValue("Developer", "debugPlacemarks", debugPlacemarks.checked ? "true" : "false")
             settings.setValue("Developer", "debugPolygons", debugPolygons.checked ? "true" : "false")
             settings.setValue("Developer", "debugBatches", debugBatches.checked ? "true" : "false")
+            settings.setValue("Developer", "debugOutput", debugOutputEnabled ? "true" : "false")
         }
     }
 
@@ -63,7 +64,7 @@ Item {
                 spacing: Screen.pixelDensity * 0.5
 
                 Text {
-                    text: "Developer Tools"
+                    text: "Tools"
                 }
 
                 CheckBox {
@@ -84,13 +85,19 @@ Item {
                     checked: settings.value("Developer", "runtimeTrace") === "true"
                     onCheckedChanged: marbleMaps.setShowRuntimeTrace(checked)
                 }
+
+                CheckBox {
+                    text: "Shell Output"
+                    checked: settings.value("Developer", "debugOutput") === "true"
+                    onCheckedChanged: settings.debugOutputEnabled = checked
+                }
             }
 
             Column {
                 spacing: Screen.pixelDensity * 0.5
 
                 Text {
-                    text: "Debug Rendering"
+                    text: "Information"
                 }
 
                 CheckBox {
