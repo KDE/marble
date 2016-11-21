@@ -151,6 +151,10 @@ QString Placemark::description() const
             addTagValue(m_description, QStringLiteral("ele"), tr("%1 m"));
         }
 
+        if (category == GeoDataPlacemark::AmenityRecycling || category == GeoDataPlacemark::AmenityPostBox) {
+            addTagValue(m_description, QStringLiteral("collection_times"), tr("Collection times %1"));
+        }
+
         addTagDescription(m_description, "access", "no", tr("no access"));
         addTagDescription(m_description, "access", "private", tr("private"));
         addTagDescription(m_description, "access", "customers", tr("customers only"));
