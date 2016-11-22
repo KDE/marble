@@ -425,6 +425,9 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     void drawPolygon ( const GeoDataPolygon & polygon,
                        Qt::FillRule fillRule = Qt::OddEvenFill );
 
+
+    QVector<QPolygonF*> createFillPolygons( const QVector<QPolygonF*> & outerPolygons,
+                                            const QVector<QPolygonF*> & innerPolygons ) const;
     
 /*!
     \brief Draws a rectangle at the given position.

@@ -42,7 +42,6 @@ private:
     void updatePolygons( const ViewportParams *viewport,
                          QVector<QPolygonF*>& outlinePolygons,
                          QVector<QPolygonF*>& innerPolygons,
-                         QVector<QPolygonF*> &fill,
                          bool &hasInnerBoundaries);
 
     QPointF buildingOffset(const QPointF &point, const ViewportParams *viewport, bool* isCameraAboveBuilding = nullptr) const;
@@ -50,8 +49,7 @@ private:
     static QPointF centroid(const QPolygonF &polygon, double &area);
     void screenPolygons(const ViewportParams *viewport, const GeoDataPolygon* polygon,
                                QVector<QPolygonF*> &polygons,
-                               QVector<QPolygonF*> &outlines,
-                               QVector<QPolygonF*> &fill
+                               QVector<QPolygonF*> &outlines
                                );
     static double extractBuildingHeight(const GeoDataPlacemark &placemark);
     static QString extractBuildingLabel(const GeoDataPlacemark &placemark);
@@ -61,9 +59,8 @@ private:
     const double m_buildingHeight;
     const QString m_buildingLabel;
     const QVector<NamedEntry> m_entries;
-    QVector<QPolygonF*> m_cachedOutlinePolygons;
+    QVector<QPolygonF*> m_cachedOuterPolygons;
     QVector<QPolygonF*> m_cachedInnerPolygons;
-    QVector<QPolygonF*> m_cachedFillPolygons;
     bool m_hasInnerBoundaries;
 
 };

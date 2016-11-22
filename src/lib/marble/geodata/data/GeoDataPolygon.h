@@ -196,14 +196,6 @@ class GEODATA_EXPORT GeoDataPolygon : public GeoDataGeometry
     void appendInnerBoundary( const GeoDataLinearRing& boundary );
 
 /*!
-    \brief Returns a linear ring that unrolls outer and inner rings into a
-           single linearring. This method is slow.
-
-    \see GeoDataLinearRing
-*/
-    GeoDataLinearRing toLinearRing() const;
-
-/*!
     \brief Returns whether the given coordinates lie within the polygon.
 
     \return <code>true</code> if the coordinates lie within the polygon

@@ -847,12 +847,8 @@ void GeoPainter::drawPolygon ( const GeoDataPolygon & polygon,
     QVector<QPolygonF*> innerPolygons;
     d->m_viewport->screenCoordinates( polygon.outerBoundary(), outerPolygons );
 
-    QPen const oldPen = pen();
+    QPen const currentPen = pen();
 
-    // When inner boundaries exist, the outline of the polygon must be painted
-    // separately to avoid connections between the outer and inner boundaries
-    // To avoid performance penalties the separate painting is only done when
-    // it's really needed. See review 105019 for details.
     bool const hasInnerBoundaries = !polygon.innerBoundaries().isEmpty();
     bool innerBoundariesOnScreen = false;
 
@@ -862,21 +858,13 @@ void GeoPainter::drawPolygon ( const GeoDataPolygon & polygon,
         const GeoDataLatLonAltBox & viewLatLonAltBox = d->m_viewport->viewLatLonAltBox();
         foreach( const GeoDataLinearRing& itInnerBoundary, innerBoundaries ) {
             if ( viewLatLonAltBox.intersects(itInnerBoundary.latLonAltBox())
-                 && d->m_viewport->resolves(itInnerBoundary.latLonAltBox()) )  {
+                 && d->m_viewport->resolves(itInnerBoundary.latLonAltBox()), 4 )  {
                 innerBoundariesOnScreen = true;
                 break;
             }
         }
 
         if (innerBoundariesOnScreen) {
-            // Cut the outer polygons to the viewport
-            QVector<QPointF> viewportPolygon = QPolygonF(QRectF(0, 0, d->m_viewport->width(), d->m_viewport->height()));
-            foreach(QPolygonF* outerPolygon, outerPolygons) {
-                *outerPolygon = outerPolygon->intersected(QPolygonF(viewportPolygon));
-            }
-
-            setPen( QPen( Qt::NoPen ) );
-
             // Create the inner screen polygons
             foreach( const GeoDataLinearRing& itInnerBoundary, innerBoundaries ) {
                 QVector<QPolygonF*> innerPolygonsPerBoundary;
@@ -887,32 +875,59 @@ void GeoPainter::drawPolygon ( const GeoDataPolygon & polygon,
                     innerPolygons << innerPolygonPerBoundary;
                 }
             }
-        }
-    }
 
-    foreach( QPolygonF* outerPolygon, outerPolygons ) {
-        if (hasInnerBoundaries && innerBoundariesOnScreen) {
-            QRegion clip(outerPolygon->toPolygon());
+            setPen(Qt::NoPen);
+            QVector<QPolygonF*> fillPolygons = createFillPolygons( outerPolygons,
+                                                                   innerPolygons );
 
-            foreach(QPolygonF* innerPolygon, innerPolygons) {
-                clip-=QRegion(innerPolygon->toPolygon());
+            foreach( const QPolygonF* fillPolygon, fillPolygons ) {
+                ClipPainter::drawPolygon(*fillPolygon, fillRule);
             }
-            ClipPainter::setClipRegion(clip);
+
+            setPen(currentPen);
+            QBrush currentBrush = brush();
+            setBrush(QBrush(Qt::transparent));
+
+            foreach( const QPolygonF* outerPolygon, outerPolygons ) {
+                ClipPainter::drawPolygon( *outerPolygon, fillRule );
+            }
+            foreach( const QPolygonF* innerPolygon, innerPolygons ) {
+                ClipPainter::drawPolygon( *innerPolygon, fillRule );
+            }
+
+            setBrush(currentBrush);
+
+            qDeleteAll(fillPolygons);
         }
-        ClipPainter::drawPolygon( *outerPolygon, fillRule );
     }
 
-    if ( hasInnerBoundaries && innerBoundariesOnScreen ) {
-        setPen( oldPen );
-        foreach( const QPolygonF* outerPolygon, outerPolygons ) {
-            ClipPainter::drawPolyline( *outerPolygon );
-        }
-        foreach( const QPolygonF* innerPolygon, innerPolygons ) {
-            ClipPainter::drawPolyline( *innerPolygon );
-        }
+    if ( !hasInnerBoundaries || !innerBoundariesOnScreen ) {
+        drawPolygon( polygon.outerBoundary(), fillRule );
     }
+
     qDeleteAll(outerPolygons);
     qDeleteAll(innerPolygons);
+}
+
+QVector<QPolygonF*> GeoPainter::createFillPolygons( const QVector<QPolygonF*> & outerPolygons,
+                                                    const QVector<QPolygonF*> & innerPolygons ) const
+{
+    QVector<QPolygonF*> fillPolygons;
+
+    foreach( const QPolygonF* outerPolygon, outerPolygons ) {
+        QPolygonF* fillPolygon = new QPolygonF;
+        *fillPolygon << *outerPolygon;
+        *fillPolygon << outerPolygon->first();
+
+        foreach( const QPolygonF* innerPolygon, innerPolygons ) {
+            *fillPolygon << *innerPolygon;
+            *fillPolygon << innerPolygon->first();
+            *fillPolygon << outerPolygon->first();
+        }
+        fillPolygons << fillPolygon;
+    }
+
+    return fillPolygons;
 }
 
 

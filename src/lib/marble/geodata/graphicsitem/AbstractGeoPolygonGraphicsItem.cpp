@@ -34,24 +34,19 @@ QPixmapCache AbstractGeoPolygonGraphicsItem::m_textureCache = QPixmapCache();
 AbstractGeoPolygonGraphicsItem::AbstractGeoPolygonGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataPolygon *polygon) :
     GeoGraphicsItem(placemark),
     m_polygon(polygon),
-    m_ring(0),
-    m_unrolledRing(0)
+    m_ring(0)
 {
-  m_unrolledRing = new GeoDataLinearRing();
-  *m_unrolledRing = polygon->toLinearRing();
 }
 
 AbstractGeoPolygonGraphicsItem::AbstractGeoPolygonGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataLinearRing *ring) :
     GeoGraphicsItem(placemark),
     m_polygon(0),
-    m_ring(ring),
-    m_unrolledRing(0)
+    m_ring(ring)
 {
 }
 
 AbstractGeoPolygonGraphicsItem::~AbstractGeoPolygonGraphicsItem()
 {
-    delete m_unrolledRing;
 }
 
 const GeoDataLatLonAltBox& AbstractGeoPolygonGraphicsItem::latLonAltBox() const
@@ -79,23 +74,7 @@ void AbstractGeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportP
         }
 
         if (innerResolved) {
-            QPen currentPen = painter->pen();
-            QBrush currentBrush = painter->brush();
-
-            // Draw the filling
-            painter->setPen(Qt::transparent);
-            painter->drawPolygon( *m_unrolledRing );
-
-            // Calculate and draw the outline only if it's not transparent
-            if (currentPen.color() != "transparent" && currentPen.style() != Qt::NoPen) {
-                painter->setPen(currentPen);
-                painter->setBrush(QBrush("transparent"));
-                painter->drawPolygon( m_polygon->outerBoundary() );
-                for(auto ring : m_polygon->innerBoundaries()) {
-                    painter->drawPolygon(ring);
-                }
-            }
-            painter->setBrush(currentBrush);
+            painter->drawPolygon(*m_polygon);
         }
         else {
             painter->drawPolygon(m_polygon->outerBoundary());

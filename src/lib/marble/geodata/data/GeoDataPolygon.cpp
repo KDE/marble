@@ -165,32 +165,6 @@ void GeoDataPolygon::appendInnerBoundary( const GeoDataLinearRing& boundary )
     d->inner.append(boundary);
 }
 
-GeoDataLinearRing GeoDataPolygon::toLinearRing() const
-{
-    Q_D(const GeoDataPolygon);
-    if (d->inner.size() == 0) {
-        return d->outer;
-    }
-
-    GeoDataLinearRing unrolledRing(d->outer);
-
-    // If there is no detail level set we need to ensure
-    // that all nodes get preserved
-    if (unrolledRing.first().detail() == 0) {
-        unrolledRing.setTessellationFlags(PreventNodeFiltering);
-    }
-    unrolledRing << unrolledRing.first();
-
-    for( int i = 0; i < d->inner.size(); ++i )
-    {
-        unrolledRing << d->inner[i];
-        unrolledRing << d->inner[i].first();
-        unrolledRing << unrolledRing.first();
-    }
-
-    return unrolledRing;
-}
-
 void GeoDataPolygon::setRenderOrder(int renderOrder)
 {
     detach();
