@@ -125,12 +125,11 @@ RoutingRunnerPlugin::ConfigWidget *OpenRouteServicePlugin::configWidget()
 
 bool OpenRouteServicePlugin::supportsTemplate( RoutingProfilesModel::ProfileTemplate profileTemplate ) const
 {
-    QSet<RoutingProfilesModel::ProfileTemplate> availableTemplates;
-        availableTemplates.insert( RoutingProfilesModel::CarFastestTemplate );
-        availableTemplates.insert( RoutingProfilesModel::CarShortestTemplate );
-        availableTemplates.insert( RoutingProfilesModel::BicycleTemplate );
-        availableTemplates.insert( RoutingProfilesModel::PedestrianTemplate );
-    return availableTemplates.contains( profileTemplate );
+    return
+        (profileTemplate == RoutingProfilesModel::CarFastestTemplate)  ||
+        (profileTemplate == RoutingProfilesModel::CarShortestTemplate) ||
+        (profileTemplate == RoutingProfilesModel::BicycleTemplate)     ||
+        (profileTemplate == RoutingProfilesModel::PedestrianTemplate);
 }
 
 QHash< QString, QVariant > OpenRouteServicePlugin::templateSettings( RoutingProfilesModel::ProfileTemplate profileTemplate ) const

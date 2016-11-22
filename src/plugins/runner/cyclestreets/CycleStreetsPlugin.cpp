@@ -136,9 +136,7 @@ RoutingRunnerPlugin::ConfigWidget *CycleStreetsPlugin::configWidget()
 
 bool CycleStreetsPlugin::supportsTemplate( RoutingProfilesModel::ProfileTemplate profileTemplate ) const
 {
-    QSet<RoutingProfilesModel::ProfileTemplate> availableTemplates;
-    availableTemplates.insert( RoutingProfilesModel::BicycleTemplate );
-    return availableTemplates.contains( profileTemplate );
+    return profileTemplate == RoutingProfilesModel::BicycleTemplate;
 }
 
 }
