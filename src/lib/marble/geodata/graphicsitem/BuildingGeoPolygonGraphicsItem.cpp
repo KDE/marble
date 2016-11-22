@@ -77,6 +77,7 @@ void BuildingGeoPolygonGraphicsItem::initializeBuildingPainting(const GeoPainter
 void BuildingGeoPolygonGraphicsItem::updatePolygons( const ViewportParams *viewport,
                                                      QVector<QPolygonF*>& outlinePolygons,
                                                      QVector<QPolygonF*>& innerPolygons,
+                                                     QVector<QPolygonF*>& fillPolygons,
                                                      bool &hasInnerBoundaries )
 {
     // Since subtracting one fully contained polygon from another results in a single
@@ -85,7 +86,7 @@ void BuildingGeoPolygonGraphicsItem::updatePolygons( const ViewportParams *viewp
     hasInnerBoundaries = polygon() ? !polygon()->innerBoundaries().isEmpty() : false;
     if (polygon()) {
         if (hasInnerBoundaries) {
-            screenPolygons(viewport, polygon(), innerPolygons, outlinePolygons);
+            screenPolygons(viewport, polygon(), innerPolygons, outlinePolygons, fillPolygons);
         }
         else {
             viewport->screenCoordinates(polygon()->outerBoundary(), outlinePolygons);
@@ -112,7 +113,7 @@ QPointF BuildingGeoPolygonGraphicsItem::centroid(const QPolygonF &polygon, doubl
     }
 
     area *= 0.5;
-    return centroid / (6.0*area);
+    return area != 0 ? centroid / (6.0*area) : polygon.boundingRect().center();
 }
 
 QPointF BuildingGeoPolygonGraphicsItem::buildingOffset(const QPointF &point, const ViewportParams *viewport, bool* isCameraAboveBuilding) const
@@ -212,7 +213,11 @@ void BuildingGeoPolygonGraphicsItem::paint(GeoPainter* painter, const ViewportPa
     if (layer.endsWith(QLatin1String("/frame"))) {
         Q_ASSERT(m_cachedOutlinePolygons.isEmpty());
         Q_ASSERT(m_cachedInnerPolygons.isEmpty());
-        updatePolygons(viewport, m_cachedOutlinePolygons, m_cachedInnerPolygons, m_hasInnerBoundaries);
+        Q_ASSERT(m_cachedFillPolygons.isEmpty());
+        updatePolygons(viewport, m_cachedOutlinePolygons,
+                                 m_cachedInnerPolygons,
+                                 m_cachedFillPolygons,
+                                 m_hasInnerBoundaries);
         if (m_cachedOutlinePolygons.isEmpty()) {
             return;
         }
@@ -223,8 +228,10 @@ void BuildingGeoPolygonGraphicsItem::paint(GeoPainter* painter, const ViewportPa
         }
         paintRoof(painter, viewport);
         qDeleteAll(m_cachedOutlinePolygons);
+        qDeleteAll(m_cachedFillPolygons);
         m_cachedOutlinePolygons.clear();
         m_cachedInnerPolygons.clear();
+        m_cachedFillPolygons.clear();
     } else {
         mDebug() << "Didn't expect to have to paint layer " << layer << ", ignoring it.";
     }
@@ -245,16 +252,17 @@ void BuildingGeoPolygonGraphicsItem::paintRoof(GeoPainter* painter, const Viewpo
     qreal maxSize(0.0);
     QPointF roofCenter;
 
-    if (m_hasInnerBoundaries) {
-        painter->setPen(Qt::NoPen);
-    }
-
     // first paint the area (and the outline if there are no inner boundaries)
 
     double maxArea = 0.0;
+
+    int outlineCount = 0;
+
     foreach(QPolygonF* outlinePolygon, m_cachedOutlinePolygons) {
         QRectF const boundingRect = outlinePolygon->boundingRect();
         QPolygonF buildingRoof;
+
+        // Label position calculation
         if (!m_buildingLabel.isEmpty() || !m_entries.isEmpty()) {
             QSizeF const polygonSize = boundingRect.size();
             qreal size = polygonSize.width() * polygonSize.height();
@@ -266,40 +274,69 @@ void BuildingGeoPolygonGraphicsItem::paintRoof(GeoPainter* painter, const Viewpo
                 roofCenter += buildingOffset(roofCenter, viewport);
             }
         }
+
         if ( drawAccurate3D) {
             buildingRoof.reserve(outlinePolygon->size());
             foreach(const QPointF &point, *outlinePolygon) {
                 buildingRoof << point + buildingOffset(point, viewport);
             }
-            if (m_hasInnerBoundaries) {
-                QRegion clip(buildingRoof.toPolygon());
 
-                foreach(QPolygonF* innerPolygon, m_cachedInnerPolygons) {
-                    QPolygonF buildingInner;
-                    buildingInner.reserve(innerPolygon->size());
-                    foreach(const QPointF &point, *innerPolygon) {
-                        buildingInner << point + buildingOffset(point, viewport);
+            if (m_hasInnerBoundaries) {
+
+                // Paint all fillPolygons once together
+                if (outlineCount == 0) {
+                    painter->setPen(Qt::NoPen);
+
+                    foreach(QPolygonF* fillPolygon, m_cachedFillPolygons) {
+                        QPolygonF buildingRoofFill;
+                        buildingRoofFill.reserve(fillPolygon->size());
+
+                        foreach(const QPointF &point, *fillPolygon) {
+                            buildingRoofFill << point + buildingOffset(point, viewport);
+                        }
+                        painter->drawPolygon( buildingRoofFill );
                     }
-                    clip-=QRegion(buildingInner.toPolygon());
+
+                    painter->setPen(currentPen);
                 }
-                painter->setClipRegion(clip);
+
+                QBrush currentBrush = painter->brush();
+                painter->setBrush(QBrush("transparent"));
+                painter->drawPolygon(buildingRoof);
+                painter->setBrush(currentBrush);
             }
-            painter->drawPolygon(buildingRoof);
+            else {
+                painter->drawPolygon(buildingRoof);
+            }
         } else {
             QPointF const offset = buildingOffset(boundingRect.center(), viewport);
             painter->translate(offset);
-            if (m_hasInnerBoundaries) {
-                QRegion clip(outlinePolygon->toPolygon());
 
-                foreach(QPolygonF* clipPolygon, m_cachedInnerPolygons) {
-                    clip-=QRegion(clipPolygon->toPolygon());
+            if (m_hasInnerBoundaries) {
+
+                // Paint all fillPolygons once together
+                if (outlineCount == 0) {
+                    painter->setPen(Qt::NoPen);
+
+                    foreach(const QPolygonF* itPolygon, m_cachedFillPolygons) {
+                        painter->drawPolygon( *itPolygon );
+                    }
+
+                    painter->setPen(currentPen);
                 }
-                painter->setClipRegion(clip);
+
+                QBrush currentBrush = painter->brush();
+                painter->setBrush(QBrush("transparent"));
+                painter->drawPolygon( *outlinePolygon );
+                painter->setBrush(currentBrush);
             }
-            painter->drawPolygon(*outlinePolygon);
+            else {
+                painter->drawPolygon( *outlinePolygon );
+            }
             painter->translate(-offset);
         }
 
+        // Draw the housenumber labels
         if (drawAccurate3D && !m_buildingLabel.isEmpty() && !roofCenter.isNull()) {
             double const w2 = 0.5 * painter->fontMetrics().width(m_buildingLabel);
             double const ascent = painter->fontMetrics().ascent();
@@ -314,6 +351,8 @@ void BuildingGeoPolygonGraphicsItem::paintRoof(GeoPainter* painter, const Viewpo
                 painter->drawText(textPosition, m_buildingLabel);
             }
         }
+
+        ++outlineCount;
     }
 
     // Render additional housenumbers at building entries
@@ -338,28 +377,6 @@ void BuildingGeoPolygonGraphicsItem::paintRoof(GeoPainter* painter, const Viewpo
         }
         brush.setColor(brushColor);
         painter->setBrush(brush);
-    }
-
-    // then paint the outlines if there are inner boundaries
-
-    if (m_hasInnerBoundaries) {
-        painter->setPen(currentPen);
-        foreach(QPolygonF * polygon, m_cachedOutlinePolygons) {
-            QRectF const boundingRect = polygon->boundingRect();
-            if ( drawAccurate3D) {
-                QPolygonF buildingRoof;
-                buildingRoof.reserve(polygon->size());
-                foreach(const QPointF &point, *polygon) {
-                    buildingRoof << point + buildingOffset(point, viewport);
-                }
-                painter->drawPolyline(buildingRoof);
-            } else {
-                QPointF const offset = buildingOffset(boundingRect.center(), viewport);
-                painter->translate(offset);
-                painter->drawPolyline(*polygon);
-                painter->translate(-offset);
-            }
-        }
     }
 
     painter->restore();
@@ -397,25 +414,15 @@ void BuildingGeoPolygonGraphicsItem::paintFrame(GeoPainter *painter, const Viewp
                 QPointF const & b = (*outlinePolygon)[i];
                 QPointF const shiftB = b + buildingOffset(b, viewport);
                 QPolygonF buildingSide = QPolygonF() << a << shiftA << shiftB << b;
-                if (m_hasInnerBoundaries) {
-                    //smoothen away our loss of antialiasing due to the QRegion Qt-bug workaround
-                    painter->setPen(QPen(painter->brush().color(), 1.5));
-                }
                 painter->drawPolygon(buildingSide);
                 a = b;
                 shiftA = shiftB;
             }
         } else {
             // don't draw the building sides - just draw the base frame instead
-            if (m_hasInnerBoundaries) {
-                QRegion clip(outlinePolygon->toPolygon());
-
-                foreach(QPolygonF* clipPolygon, m_cachedInnerPolygons) {
-                    clip-=QRegion(clipPolygon->toPolygon());
-                }
-                painter->setClipRegion(clip);
+            foreach(const QPolygonF* itPolygon, m_cachedFillPolygons) {
+                painter->drawPolygon( *itPolygon );
             }
-            painter->drawPolygon(*outlinePolygon);
         }
     }
 
@@ -423,12 +430,16 @@ void BuildingGeoPolygonGraphicsItem::paintFrame(GeoPainter *painter, const Viewp
 }
 
 void BuildingGeoPolygonGraphicsItem::screenPolygons(const ViewportParams *viewport, const GeoDataPolygon *polygon,
-                                                    QVector<QPolygonF *> &innerPolygons, QVector<QPolygonF *> &outlines)
+                                                    QVector<QPolygonF *> &innerPolygons,
+                                                    QVector<QPolygonF *> &outlines,
+                                                    QVector<QPolygonF*> &fill
+                                                    )
 {
     Q_ASSERT(polygon);
 
     QVector<QPolygonF*> outerPolygons;
     viewport->screenCoordinates( polygon->outerBoundary(), outerPolygons );
+    viewport->screenCoordinates( *unrolledRing(), fill );
 
     outlines << outerPolygons;
 
@@ -455,9 +466,7 @@ void BuildingGeoPolygonGraphicsItem::configureFramePainter(GeoPainter *painter) 
         const GeoDataPolyStyle& polyStyle = style->polyStyle();
         const QColor transparentColor(Qt::transparent);
 
-        QPen currentPen = painter->pen();
-        currentPen.setColor(transparentColor);
-        painter->setPen(currentPen);
+        painter->setPen(Qt::NoPen);
 
         if (!polyStyle.fill()) {
             painter->setBrush(transparentColor);
