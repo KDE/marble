@@ -75,7 +75,7 @@ public:
         ui_configWidget->setupUi( this );
         QStringList transports;
         //TODO: read from profiles.xml
-        ui_configWidget->transport->addItem(tr("Foot"), "foot");
+        ui_configWidget->transport->addItem(tr("Pedestrian"), "foot");
         ui_configWidget->transport->addItem(tr("Horse"), "horse");
         ui_configWidget->transport->addItem(tr("Wheelchair"), "wheelchair");
         ui_configWidget->transport->addItem(tr("Bicycle"), "bicycle");
