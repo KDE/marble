@@ -59,6 +59,7 @@
         <file alias="material/place.svg">material-icons/ic_place_black_48px.svg</file>
         <file alias="material/star.svg">material-icons/ic_star_24px.svg</file>
         <file alias="material/star_border.svg">material-icons/ic_star_border_24px.svg</file>
+        <file alias="material/label.svg">material-icons/ic_label_48px.svg</file>
         <file alias="konqi/app-dev.png">konqi/konqi-app-dev.png</file>
         <file alias="konqi/dev-qt.png">konqi/konqi-dev-qt.png</file>
         <file alias="konqi/group.png">konqi/konqi-group.png</file>

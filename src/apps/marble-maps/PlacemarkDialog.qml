@@ -129,10 +129,14 @@ Item {
             id: tagsView
             visible: false
             width: parent.width
-            height: Screen.pixelDensity * 24
+            height: Math.min(contentHeight, Screen.pixelDensity * 24)
             clip: true
             model: placemark ? placemark.tags : undefined
-            delegate: IconText { width: tagsView.width; text: modelData }
+            delegate: IconText {
+                width: tagsView.width;
+                icon: "qrc:/material/label.svg"
+                text: modelData
+            }
 
             ScrollBar.vertical: ScrollBar {}
         }
