@@ -346,7 +346,6 @@ void BuildingGeoPolygonGraphicsItem::paintRoof(GeoPainter* painter, const Viewpo
     }
 
 
-    qDebug() << m_cachedOuterPolygons.size() << outerRoofs.size();
     for (int i = 0; i < m_cachedOuterPolygons.size(); ++i) {
         QPolygonF* outerPolygon = m_cachedOuterPolygons[i];
 
