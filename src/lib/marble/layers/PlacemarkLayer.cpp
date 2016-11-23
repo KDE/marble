@@ -91,8 +91,8 @@ bool PlacemarkLayer::render( GeoPainter *geoPainter, ViewportParams *viewport,
         // when the map is such zoomed out that a given place
         // appears many times, we draw one placemark at each
         if (repeatableX) {
-            const int symbolX = mark->symbolPosition().x();
-            const int textX =   mark->labelRect().x();
+            const int symbolX = symbolPos.x();
+            const int textX =   labelRect.x();
 
             for (int i = symbolX % radius4, width = viewport->width(); i <= width; i += radius4) {
                 labelRect.moveLeft(i - symbolX + textX);
