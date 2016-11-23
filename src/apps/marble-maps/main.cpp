@@ -20,6 +20,19 @@
 
 using namespace Marble;
 
+static bool loadTranslator(const QString &fullPath, QApplication &app)
+{
+    QTranslator* translator = new QTranslator(&app);
+    if (!translator->load(fullPath)) {
+        delete translator;
+        return false;
+    }
+
+    app.installTranslator(translator);
+
+    return true;
+}
+
 static bool loadTranslation(const QString &localeDirName, QApplication &app)
 {
     // TODO: check if any translations for Qt modules have to be loaded,
@@ -37,20 +50,22 @@ static bool loadTranslation(const QString &localeDirName, QApplication &app)
     }
 #endif
 
-    QTranslator* translator = new QTranslator(&app);
-    if (!translator->load(fullPath)) {
-        delete translator;
-        return false;
-    }
-
-    app.installTranslator(translator);
-
-    return true;
+    return loadTranslator(fullPath, app);
 }
 
 // load KDE translators system based translations
 static void loadTranslations(QApplication &app)
 {
+    QSettings settings;
+    settings.beginGroup("localization");
+    bool const translationsDisabled = settings.value("translationsDisabled", QVariant(false)).toBool();
+    QString const translationFile = settings.value("translationFile").toUrl().path();
+    settings.endGroup();
+
+    if (translationsDisabled) {
+        return;
+    }
+
     // Quote from ecm_create_qm_loader created code:
     // The way Qt translation system handles plural forms makes it necessary to
     // have a translation file which contains only plural forms for `en`.
@@ -59,6 +74,10 @@ static void loadTranslations(QApplication &app)
     const QString en(QStringLiteral("en"));
 
     loadTranslation(en, app);
+
+    if (!translationFile.isEmpty() && loadTranslator(translationFile, app)) {
+        return;
+    }
 
     QLocale locale = QLocale::system();
     if (locale.name() != en) {
