@@ -346,6 +346,7 @@ void BuildingGeoPolygonGraphicsItem::paintRoof(GeoPainter* painter, const Viewpo
     }
 
 
+    qDebug() << m_cachedOuterPolygons.size() << outerRoofs.size();
     for (int i = 0; i < m_cachedOuterPolygons.size(); ++i) {
         QPolygonF* outerPolygon = m_cachedOuterPolygons[i];
 
@@ -363,10 +364,10 @@ void BuildingGeoPolygonGraphicsItem::paintRoof(GeoPainter* painter, const Viewpo
                 roofCenter += buildingOffset(roofCenter, viewport);
             }
         }
-        QPolygonF * outerRoof = outerRoofs[i];
 
         // Draw the housenumber labels
         if (drawAccurate3D && !m_buildingLabel.isEmpty() && !roofCenter.isNull()) {
+            QPolygonF * outerRoof = outerRoofs[i];
             double const w2 = 0.5 * painter->fontMetrics().width(m_buildingLabel);
             double const ascent = painter->fontMetrics().ascent();
             double const descent = painter->fontMetrics().descent();
