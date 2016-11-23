@@ -40,6 +40,8 @@ public Q_SLOTS:
 
     void setValue( const QString &group, const QString &key, const QVariant &value );
 
+    void remove(const QString &group, const QString &value);
+
     void setDebugOutputEnabled(bool debugOutputEnabled);
 
 Q_SIGNALS:

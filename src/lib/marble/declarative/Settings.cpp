@@ -61,6 +61,14 @@ void Settings::setValue( const QString &group, const QString &key, const QVarian
     settings.endGroup();
 }
 
+void Settings::remove(const QString &group, const QString &value)
+{
+    QSettings settings(m_organizationName, m_applicationName);
+    settings.beginGroup(group);
+    settings.remove(value);
+    settings.endGroup();
+}
+
 void Settings::setDebugOutputEnabled(bool debugOutputEnabled)
 {
     if (Marble::MarbleDebug::isEnabled() == debugOutputEnabled) {
