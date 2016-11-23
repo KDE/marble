@@ -177,7 +177,6 @@ QString Placemark::description() const
             addTagDescription(m_description, QStringLiteral("healthcare"), QStringLiteral("psychotherapist"), tr("Psychotherapist"));
             addTagDescription(m_description, QStringLiteral("healthcare"), QStringLiteral("rehabilitation"), tr("Rehabilitation"));
             addTagDescription(m_description, QStringLiteral("healthcare"), QStringLiteral("speech_therapist"), tr("Speech therapist"));
-            addTagDescription(m_description, QStringLiteral("healthcare"), QStringLiteral("audiologist"), tr("Audiologist"));
             addTagValue(m_description, QStringLiteral("healthcare:speciality"));
         }
 
