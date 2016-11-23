@@ -74,6 +74,9 @@ StarsPlugin::StarsPlugin( const MarbleModel *marbleModel )
       m_dsoAction(0),
       m_doRender( false )
 {
+    bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+    if (smallScreen) m_magnitudeLimit = 5;
+
     prepareNames();
 }
 
