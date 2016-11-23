@@ -9,7 +9,7 @@
 //
 
 import QtQuick 2.3
-import QtQuick.Controls 1.3
+import QtQuick.Controls 2.0
 import QtQuick.Window 2.2
 import QtQuick.Layouts 1.1
 
@@ -17,7 +17,7 @@ import org.kde.marble 0.20
 
 Item {
     id: root
-    height: column.height + Screen.pixelDensity * 4
+    height: swipeView.height + Screen.pixelDensity * 4
 
     SystemPalette {
         id: palette
@@ -44,21 +44,16 @@ Item {
         color: palette.base
     }
 
-    Column {
-        id: column
-        anchors {
-            left: parent.left
-            right: parent.right
-            top: parent.top
-            margins: Screen.pixelDensity * 2
-        }
+    SwipeView {
+        id: swipeView
+        currentIndex: pageIndicator.currentIndex
+        anchors.left: parent.left
+        anchors.right: parent.right
+        height: Math.max(toolsItem.height, infoItem.height)
 
-        spacing: Screen.pixelDensity * 1
-
-        Grid {
-            columns: 2
-            flow: Grid.TopToBottom
-            spacing: Screen.pixelDensity * 2
+        Item {
+            id: toolsItem
+            height: childrenRect.height
 
             Column {
                 spacing: Screen.pixelDensity * 0.5
@@ -66,68 +61,96 @@ Item {
                 Text {
                     text: "Tools"
                 }
+                Grid {
+                    columns: 2
+                    flow: Grid.TopToBottom
+                    spacing: Screen.pixelDensity * 2
 
-                CheckBox {
-                    text: "Inertial Rotation"
-                    checked: settings.value("Developer", "inertialGlobeRotation") === "true"
-                    onCheckedChanged: marbleMaps.inertialGlobeRotation = checked
-                }
 
-                CheckBox {
-                    text: "GPS Simulation"
-                    checked: settings.value("Developer", "positionProvider") === "RouteSimulationPositionProviderPlugin"
-                    onCheckedChanged: marbleMaps.currentPositionProvider = checked ? "RouteSimulationPositionProviderPlugin" : "QtPositioning"
-                }
+                    CheckBox {
+                        id: debugTags
+                        text: "OSM Tags"
+                        checked: settings.value("Developer", "debugTags") === "true"
+                        onCheckedChanged: placemarkDialog.showTags = checked
+                    }
 
-                CheckBox {
-                    id: runtimeTrace
-                    text: "Render Performance"
-                    checked: settings.value("Developer", "runtimeTrace") === "true"
-                    onCheckedChanged: marbleMaps.setShowRuntimeTrace(checked)
-                }
+                    CheckBox {
+                        text: "Shell Output"
+                        checked: settings.value("Developer", "debugOutput") === "true"
+                        onCheckedChanged: settings.debugOutputEnabled = checked
+                    }
 
-                CheckBox {
-                    text: "Shell Output"
-                    checked: settings.value("Developer", "debugOutput") === "true"
-                    onCheckedChanged: settings.debugOutputEnabled = checked
+                    CheckBox {
+                        text: "Inertial Rotation"
+                        checked: settings.value("Developer", "inertialGlobeRotation") === "true"
+                        onCheckedChanged: marbleMaps.inertialGlobeRotation = checked
+                    }
+
+                    CheckBox {
+                        text: "GPS Simulation"
+                        checked: settings.value("Developer", "positionProvider") === "RouteSimulationPositionProviderPlugin"
+                        onCheckedChanged: marbleMaps.currentPositionProvider = checked ? "RouteSimulationPositionProviderPlugin" : "QtPositioning"
+                    }
                 }
             }
+        }
+
+        Item {
+            id: infoItem
+            height: childrenRect.height
 
             Column {
                 spacing: Screen.pixelDensity * 0.5
 
                 Text {
-                    text: "Information"
+                    text: "Debug Rendering"
                 }
 
-                CheckBox {
-                    id: debugTags
-                    text: "OSM Tags"
-                    checked: settings.value("Developer", "debugTags") === "true"
-                    onCheckedChanged: placemarkDialog.showTags = checked
-                }
+                Grid {
+                    columns: 2
+                    flow: Grid.TopToBottom
+                    spacing: Screen.pixelDensity * 2
 
-                CheckBox {
-                    id: debugPlacemarks
-                    text: "Placemarks"
-                    checked: settings.value("Developer", "debugPlacemarks") === "true"
-                    onCheckedChanged: marbleMaps.setShowDebugPlacemarks(checked)
-                }
+                    CheckBox {
+                        id: runtimeTrace
+                        text: "Performance"
+                        checked: settings.value("Developer", "runtimeTrace") === "true"
+                        onCheckedChanged: marbleMaps.setShowRuntimeTrace(checked)
+                    }
 
-                CheckBox {
-                    id: debugPolygons
-                    text: "Polygons"
-                    checked: settings.value("Developer", "debugPolygons") === "true"
-                    onCheckedChanged: marbleMaps.setShowDebugPolygons(checked)
-                }
+                    CheckBox {
+                        id: debugBatches
+                        text: "Batches"
+                        checked: settings.value("Developer", "debugBatches") === "true"
+                        onCheckedChanged: marbleMaps.setShowDebugBatches(checked)
+                    }
 
-                CheckBox {
-                    id: debugBatches
-                    text: "Batches"
-                    checked: settings.value("Developer", "debugBatches") === "true"
-                    onCheckedChanged: marbleMaps.setShowDebugBatches(checked)
+                    CheckBox {
+                        id: debugPolygons
+                        text: "Polygons"
+                        checked: settings.value("Developer", "debugPolygons") === "true"
+                        onCheckedChanged: marbleMaps.setShowDebugPolygons(checked)
+                    }
+
+                    CheckBox {
+                        id: debugPlacemarks
+                        text: "Placemarks"
+                        checked: settings.value("Developer", "debugPlacemarks") === "true"
+                        onCheckedChanged: marbleMaps.setShowDebugPlacemarks(checked)
+                    }
                 }
             }
         }
     }
+
+    PageIndicator {
+        id: pageIndicator
+        interactive: true
+        count: swipeView.count
+        currentIndex: swipeView.currentIndex
+
+        anchors.bottom: parent.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
+    }
 }
+
