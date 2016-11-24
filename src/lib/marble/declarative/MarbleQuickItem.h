@@ -61,6 +61,7 @@ namespace Marble
         Q_PROPERTY(qreal speed READ speed NOTIFY speedChanged)
         Q_PROPERTY(qreal angle READ angle NOTIFY angleChanged)
         Q_PROPERTY(bool inertialGlobeRotation READ inertialGlobeRotation WRITE setInertialGlobeRotation NOTIFY inertialGlobeRotationChanged)
+        Q_PROPERTY(bool animationViewContext READ animationViewContext WRITE setAnimationViewContext NOTIFY animationViewContextChanged)
         Q_PROPERTY(QQmlComponent* placemarkDelegate READ placemarkDelegate WRITE setPlacemarkDelegate NOTIFY placemarkDelegateChanged)
 
     public:
@@ -120,6 +121,7 @@ namespace Marble
         void setPositionProvider(const QString & positionProvider);
 
         void setInertialGlobeRotation(bool inertialGlobeRotation);
+        void setAnimationViewContext(bool animationViewContext);
 
         void setPluginSetting(const QString &plugin, const QString &key, const QString &value);
 
@@ -179,6 +181,7 @@ namespace Marble
         const MarbleMap* map() const;
 
         bool inertialGlobeRotation() const;
+        bool animationViewContext() const;
         QQmlComponent* placemarkDelegate() const;
         void reverseGeocoding(const QPoint &point);
 
@@ -209,6 +212,7 @@ namespace Marble
         void zoomChanged();
         void radiusChanged(int radius);
         void inertialGlobeRotationChanged(bool inertialGlobeRotation);
+        void animationViewContextChanged(bool animationViewContext);
         void placemarkDelegateChanged(QQmlComponent* placemarkDelegate);
 
     protected:

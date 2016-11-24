@@ -43,7 +43,7 @@ Item {
 
         RouteProfileRadioButton {
             id: carProfileButton
-            checked: settings.value("Routing", "profile", profile) === profile
+            checked: settings.value("Routing", "profile") === "" || settings.value("Routing", "profile", profile) === profile
             exclusiveGroup: profileGroup
             property string profile: qsTr("Car (fastest)")
             imageSource: "qrc:///material/directions-car.svg"

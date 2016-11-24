@@ -34,14 +34,14 @@ Item {
             if (type == "searchResult") {
                 if (placemarkDialog.placemark === placemark) {
                     placemarkDialog.placemark = null
-                    dialogContainer.currentIndex = dialogContainer.none
+                    app.state = "none"
                 } else {
                     placemarkDialog.placemark = placemark
-                    dialogContainer.currentIndex = dialogContainer.place
+                    app.state = "place"
                 }
             } else {
-                routeEditor.currentIndex = index
-                dialogContainer.currentIndex = dialogContainer.routing
+                app.currentWaypointIndex = index
+                app.state = "route"
             }
         }
         anchors {

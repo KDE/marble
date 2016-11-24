@@ -29,10 +29,10 @@ Item {
     signal cleared()
 
     function search(query) {
-        routing.clearSearchResultPlacemarks();
+        routingManager.clearSearchResultPlacemarks();
         query = query.trim();
         if(query.toLowerCase() === "ok marble") {
-            dialogContainer.currentIndex = dialogContainer.developer;
+            app.state = "developer";
         } else if(query !== "") {
             root.busy = true;
             searchRequested(query);
@@ -101,9 +101,9 @@ Item {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    placemarkDialog.placemark = null;
-                    dialogContainer.currentIndex = dialogContainer.none
-                    routing.clearSearchResultPlacemarks();
+                    app.selectedPlacemark = null;
+                    app.state = "none"
+                    routingManager.clearSearchResultPlacemarks();
                     field.text = "";
                     field.focus = true;
                     cleared();

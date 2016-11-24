@@ -18,9 +18,8 @@ Item {
     id: root
 
     property var marbleQuickItem: null
-    property var routingManager: null
 
-    signal itemSelected()
+    signal itemSelected(var suggestedPlacemark)
     readonly property alias searchResultPlacemark: backend.selectedPlacemark
     readonly property alias searchResultsVisible: searchResults.visible
 
@@ -53,12 +52,8 @@ Item {
         visible: false
         onItemSelected: {
             backend.setSelectedPlacemark(index);
-            root.itemSelected();
+            root.itemSelected(backend.selectedPlacemark);
             searchResults.visible = false;
-            if (routingManager) {
-                routingManager.addSearchResultAsPlacemark(backend.selectedPlacemark);
-            }
-            placemarkDialog.placemark = backend.selectedPlacemark;
         }
     }
 
@@ -121,9 +116,10 @@ Item {
                             anchors.fill: parent
                             onClicked: {
                                 bookmarksView.currentIndex = index
-                                placemarkDialog.placemark = bookmarks.placemark(index);
-                                marbleMaps.centerOn(placemarkDialog.placemark.longitude, placemarkDialog.placemark.latitude)
-                                dialogContainer.focus = true
+                                app.selectedPlacemark = bookmarks.placemark(index);
+                                itemSelected(bookmarks.placemark(index))
+                                marbleMaps.centerOn(selectedPlacemark.longitude, selectedPlacemark.latitude)
+                                dialogLoader.focus = true
                             }
                         }
                     }
@@ -173,26 +169,11 @@ Item {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        dialogContainer.currentIndex = dialogContainer.about
-                        dialogContainer.focus = true
+                        app.state = "about"
+                        dialogLoader.focus = true
                     }
                 }
             }
-
-            /*
-            Text {
-                font.pointSize: 18
-                color: palette.text
-                text: qsTr("Settings")
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        dialogContainer.currentIndex = dialogContainer.settings
-                        dialogContainer.focus = true
-                    }
-                }
-            }
-            */
         }
     }
 

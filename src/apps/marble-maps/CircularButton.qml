@@ -30,7 +30,7 @@ Item {
 
         property color idleColor: root.highlight ? palette.highlight : palette.button
         property color activeColor: root.highlight ? palette.button : palette.highlight
-        color: touchHandler.pressed ? activeColor : idleColor
+        color: touchHandler.pressed && root.enabled ? activeColor : idleColor
 
         anchors {
             horizontalCenter: root.horizontalCenter
@@ -53,6 +53,7 @@ Item {
             }
             fillMode: Image.PreserveAspectFit
             sourceSize.width: 0.6 * root.diameter
+            opacity: root.enabled ? 1 : 0.5
         }
 
         MouseArea {

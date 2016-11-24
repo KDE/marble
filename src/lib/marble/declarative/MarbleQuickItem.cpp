@@ -441,6 +441,11 @@ namespace Marble
         return d->m_inputHandler.inertialEarthRotationEnabled();
     }
 
+    bool MarbleQuickItem::animationViewContext() const
+    {
+        return d->m_map.viewContext() == Animation;
+    }
+
     QQmlComponent *MarbleQuickItem::placemarkDelegate() const
     {
         return d->m_placemarkDelegate;
@@ -865,6 +870,13 @@ namespace Marble
 
         d->m_inputHandler.setInertialEarthRotationEnabled(inertialGlobeRotation);
         emit inertialGlobeRotationChanged(inertialGlobeRotation);
+    }
+
+    void MarbleQuickItem::setAnimationViewContext(bool animationViewContext)
+    {
+        d->m_map.setViewContext(animationViewContext ? Animation : Still );
+
+        emit inertialGlobeRotationChanged(animationViewContext);
     }
 
     void MarbleQuickItem::setPluginSetting(const QString &pluginId, const QString &key, const QString &value)

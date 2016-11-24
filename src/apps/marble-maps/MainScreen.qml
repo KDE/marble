@@ -18,14 +18,26 @@ import QtQuick.Window 2.2
 import org.kde.marble 0.20
 
 ApplicationWindow {
-    id: root
+    id: app
     title: qsTr("Marble Maps")
     visible: true
 
     width: 600
     height: 400
 
-    color: palette.window
+    color: "#f9f9f9" // Keep the background white while no dialog is loaded
+
+    property alias state: stateTracker.state
+
+    property var selectedPlacemark
+    property bool showOsmTags: false
+    property int currentWaypointIndex: 0
+
+    onSelectedPlacemarkChanged: {
+        if (!selectedPlacemark) {
+            app.state = "none"
+        }
+    }
 
     SystemPalette{
         id: palette
@@ -38,7 +50,7 @@ ApplicationWindow {
             top: parent.top
             left: parent.left
             right: parent.right
-            bottom: dialogContainer.top
+            bottom: dialogLoader.top
         }
 
         PinchArea {
@@ -54,7 +66,7 @@ ApplicationWindow {
 
                 property string currentPositionProvider: "QtPositioning"
                 property bool wlanOnly: false
-                property bool smallZoom : radius < 2 * Math.max(root.width, root.height)
+                property bool smallZoom : radius < 2 * Math.max(app.width, app.height)
 
                 anchors.fill: parent
 
@@ -78,18 +90,44 @@ ApplicationWindow {
                 positionProvider: suspended ? "" : currentPositionProvider
                 keepScreenOn: !suspended && navigationManager.visible
                 showPositionMarker: false
+                animationViewContext: dialogAnimation.running
 
                 placemarkDelegate: Image {
+                    id: balloon
                     property int xPos: 0
                     property int yPos: 0
+                    property real animationOffset: 0
                     property var placemark: null
                     x: xPos - 0.5 * width
-                    y: yPos - height
+                    y: yPos - height - 30 * Screen.pixelDensity * animationOffset
+                    opacity: 1.0 - animationOffset
+
+                    Connections {
+                        target: app
+                        onSelectedPlacemarkChanged:  balloonAnimation.restart()
+                    }
+
+                    NumberAnimation {
+                      id: balloonAnimation
+                      target: balloon
+                      property: "animationOffset"
+                      from: 1
+                      to: 0
+                      duration: 1000
+                      easing.type: Easing.OutBounce
+                    }
+
+
                     width: Screen.pixelDensity*6
                     height: width
                     source: "qrc:///ic_place.png"
                     onPlacemarkChanged: {
-                        placemarkDialog.placemark = placemark
+                        app.selectedPlacemark = placemark
+                        if (placemark) {
+                            app.state = "place"
+                        } else {
+                            app.state = "none"
+                        }
                     }
                 }
 
@@ -128,11 +166,26 @@ ApplicationWindow {
                 }
 
                 RoutingManager {
-                    id: routing
+                    id: routingManager
                     anchors.fill: parent
                     marbleItem: marbleMaps
-                    routingProfile: routeEditor.routingProfile
                     visible: hasRoute
+
+                    function addToRoute() {
+                        ensureRouteHasDeparture()
+                        routingManager.addViaByPlacemarkAtIndex(routingManager.waypointCount(), selectedPlacemark)
+                        routingManager.clearSearchResultPlacemarks()
+                        selectedPlacemark = null
+                        app.state = "route"
+                    }
+                    function ensureRouteHasDeparture() {
+                        if (routingManager.routeRequestModel.count === 0) {
+                            if (marbleMaps.positionAvailable) {
+                                routingManager.addViaByPlacemark(marbleMaps.currentPosition)
+                            }
+                        }
+                    }
+
                 }
 
                 Timer {
@@ -170,8 +223,15 @@ ApplicationWindow {
                     id: search
                     anchors.fill: parent
                     marbleQuickItem: marbleMaps
-                    routingManager: routing
                     visible: !navigationManager.visible
+
+                    onItemSelected: {
+                        if (routingManager) {
+                            routingManager.addSearchResultAsPlacemark(suggestedPlacemark);
+                        }
+                        app.selectedPlacemark = suggestedPlacemark;
+                        app.state = "place"
+                    }
                 }
             }
 
@@ -181,7 +241,7 @@ ApplicationWindow {
                 height: parent.height
                 visible: false
                 marbleItem: marbleMaps
-                hasRoute: routing.hasRoute
+                hasRoute: routingManager.hasRoute
             }
         }
 
@@ -205,6 +265,8 @@ ApplicationWindow {
                 bottomMargin: 10
             }
 
+            enabled: marbleMaps.positionAvailable
+
             iconSource: marbleMaps.positionAvailable ? "qrc:///gps_fixed.png" : "qrc:///gps_not_fixed.png"
 
             onClicked: marbleMaps.centerOnCurrentPosition()
@@ -222,6 +284,9 @@ ApplicationWindow {
 
         CircularButton {
             id: routeEditorButton
+
+            property string currentProfileIcon: "qrc:///material/directions-car.svg"
+
             anchors {
                 bottom: parent.bottom
                 horizontalCenter: zoomToPositionButton.horizontalCenter
@@ -229,14 +294,14 @@ ApplicationWindow {
             }
 
             onClicked: {
-                if (dialogContainer.currentIndex === dialogContainer.routing) {
-                    dialogContainer.currentIndex = dialogContainer.none
+                if (app.state === "route") {
+                    app.state = "none"
                     navigationManager.visible = true
-                } else if (dialogContainer.currentIndex === dialogContainer.place) {
-                    dialogContainer.currentIndex = dialogContainer.routing
-                    placemarkDialog.addToRoute()
+                } else if (app.state === "place") {
+                    app.state = "route"
+                    routingManager.addToRoute()
                 } else {
-                    dialogContainer.currentIndex = dialogContainer.routing
+                    app.state = "route"
                     navigationManager.visible = false
                 }
             }
@@ -249,93 +314,62 @@ ApplicationWindow {
                 },
                 State {
                     name: "routingAction"
-                    when: dialogContainer.currentIndex === dialogContainer.routing
+                    when: app.state === "route"
                     PropertyChanges { target: routeEditorButton; iconSource: "qrc:///material/navigation.svg"; }
                 },
                 State {
                     name: "placeAction"
-                    when: dialogContainer.currentIndex === dialogContainer.place
-                    PropertyChanges { target: routeEditorButton; iconSource: placemarkDialog.actionIconSource }
+                    when: app.state === "place"
+                    PropertyChanges { target: routeEditorButton; iconSource: currentProfileIcon }
                 }
             ]
         }
     }
 
-    Item {
-        id: dialogContainer
+    Loader {
+        id: dialogLoader
+
+        focus: true
+
         anchors {
             left: parent.left
             right: parent.right
-            bottom: parent.bottom
+            top: parent.bottom
+            topMargin: animatedMargin
         }
-        visible: currentIndex >= 0
 
-        property var contentItem: routeEditor
-
-        height: visible ? contentItem.height : 0
-
-        readonly property int none: -1
-        readonly property int routing: 0
-        readonly property int place: 1
-        readonly property int about: 2
-        readonly property int settings: 3
-        readonly property int developer: 4
-
-        property int currentIndex: none
-
-        onCurrentIndexChanged:
-        {
-            switch (currentIndex) {
-            case none:
-            case routing: contentItem = routeEditor; break;
-            case place: contentItem = placemarkDialog; break;
-            case about: contentItem = aboutDialog; break;
-            case settings: contentItem = settingsDialog; break;
-            case developer: contentItem = developerDialog; break;
+        property real animatedMargin: app.state === "none" ? 0 : -height
+        Behavior on animatedMargin {
+            NumberAnimation {
+                id: dialogAnimation
+                duration: 200
+                easing.type: Easing.OutQuart
             }
         }
 
-        RouteEditor {
-            id: routeEditor
-            visible: dialogContainer.currentIndex === dialogContainer.routing
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.bottom: parent.bottom
+        onLoaded: {
+          if (app.state === "place") {
+              dialogLoader.item.map = marbleMaps
+              dialogLoader.item.placemark = app.selectedPlacemark
+              dialogLoader.item.showOsmTags = app.showOsmTags
+          }
+          if (app.state === "route") {
+              item.routingManager = routingManager
+              item.routingProfile = routingManager.routingProfile
+              item.currentIndex =  Qt.binding(function() { return app.currentWaypointIndex })
+          }
         }
-        PlacemarkDialog {
-            id: placemarkDialog
-            visible: dialogContainer.currentIndex === dialogContainer.place
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.bottom: parent.bottom
-            map: marbleMaps
-        }
-        AboutDialog {
-            id: aboutDialog
-            visible: dialogContainer.currentIndex === dialogContainer.about
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.bottom: parent.bottom
-        }
-        SettingsDialog {
-            id: settingsDialog
-            visible: dialogContainer.currentIndex === dialogContainer.settings
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.bottom: parent.bottom
-        }
-        DeveloperDialog {
-            id: developerDialog
-            visible: dialogContainer.currentIndex === dialogContainer.developer
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.bottom: parent.bottom
+
+        Connections {
+          target: dialogLoader.item
+          onCurrentProfileIconChanged: routeEditorButton.currentProfileIcon = dialogLoader.item.currentProfileIcon
+          ignoreUnknownSignals: true
         }
     }
 
     BorderImage {
-        visible: dialogContainer.visible
-        anchors.fill: dialogContainer
+        visible: app.state != "none"
+        anchors.fill: dialogLoader
         anchors.margins: -14
         border { top: 14; left: 14; right: 14; bottom: 14 }
         source: "qrc:///border_shadow.png"
@@ -360,7 +394,7 @@ ApplicationWindow {
             running: false;
             repeat: false
             onTriggered: {
-                root.aboutToQuit = false
+                app.aboutToQuit = false
                 quitHelper.visible = false
             }
         }
@@ -369,17 +403,50 @@ ApplicationWindow {
     property bool aboutToQuit: false
 
     onClosing: {
-        if (root.aboutToQuit === true) {
+        if (app.aboutToQuit === true) {
             close.accepted = true // we will quit
             return
         } else if (navigationManager.visible) {
             navigationManager.visible = false
-        } else if (dialogContainer.visible) {
-            dialogContainer.currentIndex = dialogContainer.none
+        } else if (app.state !== "none") {
+            app.state = "none"
         } else {
-            root.aboutToQuit = true
+            app.aboutToQuit = true
             quitHelper.visible = true
         }
         close.accepted = false
+    }
+
+    Item {
+      id: stateTracker
+
+      state: "none"
+
+      states: [
+          State {
+              name: "none"
+              PropertyChanges { target: dialogLoader; source: "" }
+          },
+          State {
+              name: "route"
+              PropertyChanges { target: dialogLoader; source: "RouteEditor.qml" }
+          },
+          State {
+              name: "place"
+              PropertyChanges { target: dialogLoader; source: "PlacemarkDialog.qml" }
+          },
+          State {
+              name: "about"
+              PropertyChanges { target: dialogLoader; source: "AboutDialog.qml" }
+          },
+          State {
+              name: "settings"
+              PropertyChanges { target: dialogLoader; source: "SettingsDialog.qml" }
+          },
+          State {
+              name: "developer"
+              PropertyChanges { target: dialogLoader; source: "DeveloperDialog.qml" }
+          }
+      ]
     }
 }

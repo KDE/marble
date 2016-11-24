@@ -21,7 +21,8 @@ Item {
 
     property alias routingProfile: profileSelector.selectedProfile
     property alias currentProfileIcon: profileSelector.profileIcon
-    property alias currentIndex: waypointList.currentIndex
+    property int currentIndex: 0
+    property var routingManager
 
     height: visible ? Screen.pixelDensity * 4 + column.height : 0
 
@@ -75,12 +76,14 @@ Item {
 
             height: Math.min(0.4 * Screen.height, contentHeight)
             clip: true
-            model: routing.routeRequestModel
+            model: routingManager.routeRequestModel
+
+            currentIndex: root.currentIndex
 
             delegate: Rectangle {
                 width: parent.width
                 height: Screen.pixelDensity * 2 + Math.max(text.height, image.height)
-                color: touchArea.pressed || waypointList.currentIndex === index ? palette.highlight : palette.base
+                color: touchArea.pressed || root.currentIndex === index ? palette.highlight : palette.base
 
                 WaypointImage {
                     id: image
@@ -110,10 +113,10 @@ Item {
                     id: touchArea
                     anchors.fill: parent
                     onClicked: {
-                        if (index === waypointList.currentIndex) {
-                            waypointList.currentIndex =  -1
+                        if (index === root.currentIndex) {
+                            root.currentIndex =  -1
                         } else {
-                            waypointList.currentIndex =  index
+                            root.currentIndex =  index
                             marbleMaps.centerOn(longitude, latitude)
                         }
                     }
@@ -127,33 +130,33 @@ Item {
                     ImageButton {
                         id: upButton
                         anchors.verticalCenter: parent.verticalCenter
-                        visible: index > 0 && index === waypointList.currentIndex
+                        visible: index > 0 && index === root.currentIndex
                         imageSource: "qrc:///up.png"
                         onClicked: {
-                            routing.swapVias(index, index-1);
-                            waypointList.currentIndex--;
+                            routingManager.swapVias(index, index-1);
+                            root.currentIndex--;
                         }
                     }
 
                     ImageButton {
                         id: downButton
                         anchors.verticalCenter: parent.verticalCenter
-                        visible: index+1 < routing.routeRequestModel.count && index === waypointList.currentIndex
+                        visible: index+1 < routingManager.routeRequestModel.count && index === root.currentIndex
                         imageSource: "qrc:///down.png"
                         onClicked: {
-                            routing.swapVias(index, index+1);
-                            waypointList.currentIndex++;
+                            routingManager.swapVias(index, index+1);
+                            root.currentIndex++;
                         }
                     }
 
                     ImageButton {
                         id: deleteButton
                         anchors.verticalCenter: parent.verticalCenter
-                        visible: index === waypointList.currentIndex
+                        visible: index === root.currentIndex
                         imageSource: "qrc:///delete.png"
                         onClicked: {
-                            routing.removeVia(index);
-                            waypointList.currentIndex = Math.max(0, waypointList.currentIndex-1);
+                            routingManager.removeVia(index);
+                            root.currentIndex = Math.max(0, root.currentIndex-1);
                         }
                     }
                 }

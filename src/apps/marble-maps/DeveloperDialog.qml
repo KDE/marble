@@ -82,7 +82,7 @@ Item {
                             id: debugTags
                             text: "OSM Tags"
                             checked: settings.value("Developer", "debugTags") === "true"
-                            onCheckedChanged: placemarkDialog.showTags = checked
+                            onCheckedChanged: app.showOsmTags = checked
                         }
 
                         CheckBox {

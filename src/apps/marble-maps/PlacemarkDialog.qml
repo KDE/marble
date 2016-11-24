@@ -11,7 +11,6 @@
 import QtQuick 2.3
 import QtQuick.Controls 1.3
 import QtQuick.Window 2.2
-import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.0
 
 import org.kde.marble 0.20
@@ -20,27 +19,15 @@ Item {
     id: root
 
     property var placemark: null
-    property string actionIconSource: routeEditor.currentProfileIcon
-    property alias map: bookmarks.map
-    property alias showTags: tagsView.visible
+    property variant map
+    property alias showOsmTags: tagsView.visible
 
     height: placemark === null ? 0 : Screen.pixelDensity * 4 +
                                  (infoLayout.height > bookmarkButton.height ? infoLayout.height : bookmarkButton.height)
 
-    function addToRoute() {
-        ensureRouteHasDeparture()
-        routing.addViaByPlacemarkAtIndex(routing.waypointCount(), placemark)
-        routing.clearSearchResultPlacemarks()
-        placemark = null
-        dialogContainer.currentIndex = dialogContainer.routing
-    }
-
     onPlacemarkChanged: {
         if (placemark) {
             bookmarkButton.bookmark = bookmarks.isBookmark(placemark.longitude, placemark.latitude)
-            dialogContainer.currentIndex = dialogContainer.place
-        } else {
-            dialogContainer.currentIndex = dialogContainer.none
         }
     }
 
@@ -57,6 +44,9 @@ Item {
     Bookmarks {
         id: bookmarks
     }
+
+    onMapChanged: bookmarks.map = root.map
+
 
     Column {
         id: infoLayout
@@ -167,14 +157,6 @@ Item {
                     bookmarks.addBookmark(root.placemark, "Default")
                 }
                 bookmarkButton.bookmark = !bookmarkButton.bookmark
-            }
-        }
-    }
-
-    function ensureRouteHasDeparture() {
-        if (routing.routeRequestModel.count === 0) {
-            if (marbleMaps.positionAvailable) {
-                routing.addViaByPlacemark(marbleMaps.currentPosition)
             }
         }
     }
