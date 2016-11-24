@@ -67,9 +67,9 @@ public:
         // Three lists for different z values
         // A z value of 0 is default and used by the majority of items, so sorting
         // can be avoided for it
-        QVector<GeoGraphicsItem*> negative;
-        QVector<GeoGraphicsItem*> null;
-        QVector<GeoGraphicsItem*> positive;
+        QVector<GeoGraphicsItem*> negative; // subways
+        QVector<GeoGraphicsItem*> null;     // areas and roads
+        QVector<GeoGraphicsItem*> positive; // buildings
     };
 
     explicit GeometryLayerPrivate(const QAbstractItemModel *model, const StyleBuilder *styleBuilder);
@@ -153,14 +153,18 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
             if (knownLayers.contains(layer)) {
                 GeometryLayerPrivate::PaintFragments & fragments = paintedFragments[layer];
                 double const zValue = item->zValue();
+                // assign subway stations
                 if (zValue == 0.0) {
                   fragments.null << item;
+                // assign areas and streets
                 } else if (zValue < 0.0) {
                   fragments.negative << item;
+                // assign buildings
                 } else {
                   fragments.positive << item;
                 }
             } else {
+                // assign symbols
                 defaultLayer << LayerItem(layer, item);
                 static QSet<QString> missingLayers;
                 if (!missingLayers.contains(layer)) {
@@ -171,6 +175,7 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
         }
     }
 
+    // Sort each fragment by z-level and draw it
     foreach (const QString &layer, d->m_styleBuilder->renderOrder()) {
         GeometryLayerPrivate::PaintFragments & layerItems = paintedFragments[layer];
         qStableSort(layerItems.negative.begin(), layerItems.negative.end(), GeoGraphicsItem::zValueLessThan);
