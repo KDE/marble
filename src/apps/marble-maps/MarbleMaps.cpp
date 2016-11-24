@@ -81,7 +81,7 @@ void MarbleMaps::setKeepScreenOn(bool screenOn)
         QAndroidJniObject window = activity.callObjectMethod("getWindow", "()Landroid/view/Window;");
         if (window.isValid()) {
             const int FLAG_KEEP_SCREEN_ON = 128;
-            window.callObjectMethod(action, "(I)V", FLAG_KEEP_SCREEN_ON);
+            window.callMethod<void>(action, "(I)V", FLAG_KEEP_SCREEN_ON);
         }
     }});
   #else
