@@ -40,12 +40,13 @@ if [ ! -e data/lang ]; then
     exit 1
 fi
 
+shift
 
 workdir="$(mktemp -d)"
 pofile="${workdir}//marble_qt.po"
 
-if [ $# -gt 1 ] ; then
-    languages=$2
+if [ $# -gt 0 ] ; then
+    languages="${*}"
 else
     subdirs="${workdir}/subdirs"
     if [ "$has_subdirs" = true ] ; then
