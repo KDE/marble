@@ -162,7 +162,8 @@ namespace Marble
             m_placemarkDelegate(nullptr),
             m_placemarkItem(nullptr),
             m_placemark(nullptr),
-            m_reverseGeocoding(&m_model)
+            m_reverseGeocoding(&m_model),
+            m_showScaleBar(false)
         {
             m_currentPosition.setName(QObject::tr("Current Location"));
         }
@@ -181,6 +182,8 @@ namespace Marble
         QQuickItem* m_placemarkItem;
         Placemark* m_placemark;
         ReverseGeocodingRunnerManager m_reverseGeocoding;
+
+        bool m_showScaleBar;
     };
 
     MarbleQuickItem::MarbleQuickItem(QQuickItem *parent) : QQuickPaintedItem(parent)
@@ -385,7 +388,7 @@ namespace Marble
 
     bool MarbleQuickItem::showScaleBar() const
     {
-        return d->m_map.showScaleBar();
+        return d->m_showScaleBar;
     }
 
     bool MarbleQuickItem::showBackground() const
@@ -703,7 +706,6 @@ namespace Marble
         bool const showOverviewMap = d->m_map.showOverviewMap();
         bool const showOtherPlaces = d->m_map.showOtherPlaces();
         bool const showGrid = d->m_map.showGrid();
-        bool const showScaleBar = d->m_map.showScaleBar();
 
         d->m_map.setMapThemeId(mapThemeId);
 
@@ -712,7 +714,7 @@ namespace Marble
         d->m_map.setShowOverviewMap(showOverviewMap);
         d->m_map.setShowOtherPlaces(showOtherPlaces);
         d->m_map.setShowGrid(showGrid);
-        d->m_map.setShowScaleBar(showScaleBar);
+        d->m_map.setShowScaleBar(d->m_showScaleBar);
 
         emit mapThemeIdChanged(mapThemeId);
     }
@@ -789,11 +791,12 @@ namespace Marble
 
     void MarbleQuickItem::setShowScaleBar(bool showScaleBar)
     {
-        if (this->showScaleBar() == showScaleBar) {
+        if (d->m_showScaleBar == showScaleBar) {
             return;
         }
 
-        d->m_map.setShowScaleBar(showScaleBar);
+        d->m_showScaleBar = showScaleBar;
+        d->m_map.setShowScaleBar(d->m_showScaleBar);
         emit showScaleBarChanged(showScaleBar);
     }
 

@@ -56,7 +56,7 @@ class Filter(object):
             search = ['LatLonPlugin', 'NominatimSearchPlugin', 'LocalDatabasePlugin', 'LocalOsmSearchPlugin']
             routing = ['CycleStreetsPlugin', 'OpenRouteServicePlugin', 'NominatimReverseGeocodingPlugin']
             fileFormats = ['CachePlugin', 'GpxPlugin', 'KmlPlugin', 'OsmPlugin']
-            floatItems = ['License']
+            floatItems = ['License', 'MapScaleFloatItem']
             positioning = ['QtPositioningPositionProviderPlugin']
             render = ['StarsPlugin', 'GraticulePlugin']
             plugins = search + routing + fileFormats + floatItems + positioning + render
