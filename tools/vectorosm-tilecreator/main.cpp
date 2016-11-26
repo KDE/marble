@@ -254,6 +254,8 @@ int main(int argc, char *argv[])
                     if (innerNodes < 4) {
                         boundaryTiles << name;
                     }
+                } else {
+                    --total;
                 }
             }
         }
