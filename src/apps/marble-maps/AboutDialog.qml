@@ -98,7 +98,7 @@ Item {
                 anchors.leftMargin: Screen.pixelDensity * 2
 
                 wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-                text: qsTr("<h3>Development Team</h3><p>More than 200 developers have already contributed to Marble. The main developers of this app are Dennis Nienhüser, Torsten Rahn, Sanjiban Bairagya, Friedrich W. H. Kossebau, Gábor Péterffy and Mikhail Ivchenko. Contact us via <a href=\"https://mail.kde.org/mailman/listinfo/marble-devel\">marble-devel@kde.org</a>.</p>")
+                text: qsTr("<h3>Development Team</h3><p>The main developers of this app are Dennis Nienhüser, Torsten Rahn, Sanjiban Bairagya, Friedrich W. H. Kossebau, Gábor Péterffy and Mikhail Ivchenko. They are part of more than 200 developers who already contributed to the Marble project. Contact us via <a href=\"https://mail.kde.org/mailman/listinfo/marble-devel\">marble-devel@kde.org</a>.</p>")
                 onLinkActivated: Qt.openUrlExternally(link)
             }
 
@@ -126,7 +126,7 @@ Item {
 
                 wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                 width: parent.width
-                text: qsTr("<h3>Attribution</h3><p>The map uses public domain data from the <a href=\"http://www.naturalearthdata.com/\">Natural Earth</a> project. Additionally data from the <a href=\"https://www.openstreetmap.org\">OpenStreetMap</a> project is used, available under the <a href=\"http://opendatacommons.org/licenses/odbl/\">Open Database License</a>. The map style is influenced by and uses icons from <a href=\"https://github.com/gravitystorm/openstreetmap-carto\">OpenStreetMap Carto</a> (<a href=\"http://creativecommons.org/publicdomain/zero/1.0/\">CC0 Public Domain)</a>.</p>")
+                text: qsTr("<h3>Attribution</h3><p>The map is based on data from the <a href=\"https://www.openstreetmap.org\">OpenStreetMap</a> project, available under the <a href=\"http://opendatacommons.org/licenses/odbl/\">Open Database License</a>. Additionally public domain data from the <a href=\"http://www.naturalearthdata.com/\">Natural Earth</a> project is used. The map style is influenced by and uses icons from <a href=\"https://github.com/gravitystorm/openstreetmap-carto\">OpenStreetMap Carto</a> (<a href=\"http://creativecommons.org/publicdomain/zero/1.0/\">CC0 Public Domain)</a>.</p>")
                 onLinkActivated: Qt.openUrlExternally(link)
             }
 
