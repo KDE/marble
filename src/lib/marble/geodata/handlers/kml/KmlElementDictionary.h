@@ -82,6 +82,7 @@ namespace kml
     GEODATA_EXPORT extern const char kmlTag_GroundOverlay[];
     GEODATA_EXPORT extern const char kmlTag_h[];
     GEODATA_EXPORT extern const char kmlTag_heading[];
+    GEODATA_EXPORT extern const char kmlTag_height[];
     GEODATA_EXPORT extern const char kmlTag_href[];
     GEODATA_EXPORT extern const char kmlTag_hotSpot[];
     GEODATA_EXPORT extern const char kmlTag_httpQuery[];

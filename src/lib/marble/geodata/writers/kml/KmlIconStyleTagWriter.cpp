@@ -36,6 +36,14 @@ bool KmlIconStyleTagWriter::writeMid( const GeoNode *node, GeoWriter& writer ) c
         writer.writeElement( kml::kmlTag_scale, QString::number( style->scale(), 'f' ) );
     }
 
+    if (!style->size().isEmpty()) {
+        writer.writeNamespace(kml::kmlTag_nameSpaceMx, QStringLiteral("mx"));
+        writer.writeStartElement(kml::kmlTag_nameSpaceMx, kml::kmlTag_size);
+        writer.writeAttribute(kml::kmlTag_width, QString::number(style->size().width()));
+        writer.writeAttribute(kml::kmlTag_height, QString::number(style->size().height()));
+        writer.writeEndElement();
+    }
+
     if ( !style->iconPath().isEmpty() ) {
         writer.writeStartElement( kml::kmlTag_Icon );
         writer.writeStartElement( kml::kmlTag_href );

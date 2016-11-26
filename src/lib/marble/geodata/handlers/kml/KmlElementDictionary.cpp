@@ -80,6 +80,7 @@ const char kmlTag_gridOrigin[] = "gridOrigin";
 const char kmlTag_GroundOverlay[] = "GroundOverlay";
 const char kmlTag_h[] = "h";
 const char kmlTag_heading[] = "heading";
+const char kmlTag_height[] = "height";
 const char kmlTag_href[] = "href";
 const char kmlTag_hotSpot[] = "hotSpot";
 const char kmlTag_httpQuery[] = "httpQuery";

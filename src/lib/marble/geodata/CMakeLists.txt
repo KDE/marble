@@ -306,6 +306,7 @@ geodata/handlers/kml/KmlMinLodPixelsTagHandler.cpp
 geodata/handlers/kml/KmlModelTagHandler.cpp
 geodata/handlers/kml/KmlMultiGeometryTagHandler.cpp
 geodata/handlers/kml/KmlMultiTrackTagHandler.cpp
+geodata/handlers/kml/KmlMxSizeTagHandler.cpp
 geodata/handlers/kml/KmlNameTagHandler.cpp
 geodata/handlers/kml/KmlNetworkLinkTagHandler.cpp
 geodata/handlers/kml/KmlNorthTagHandler.cpp
