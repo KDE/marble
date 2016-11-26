@@ -82,7 +82,6 @@ int main(int argc, char *argv[])
             ++i;
         }
     }
-    MarbleGlobal::getInstance()->setProfiles( profiles );
 
     MarbleLocale::MeasurementSystem const measurement =
             (MarbleLocale::MeasurementSystem)QLocale::system().measurementSystem();
