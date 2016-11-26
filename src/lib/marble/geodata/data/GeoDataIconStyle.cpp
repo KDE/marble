@@ -238,6 +238,7 @@ QSize GeoDataIconStyle::size() const
 void GeoDataIconStyle::setScale(float scale)
 {
     d->m_scale = scale;
+    d->m_scaledIcon = QImage();
 }
 
 float GeoDataIconStyle::scale() const
