@@ -28,8 +28,13 @@ public:
     typedef QPair<QString, QString> Tag;
     typedef QVector<Tag> Tags;
 
+    enum FilterFlag {
+        NoFlag = 0,
+        FilterRailwayService
+    };
+
     //Filters placemarks which have tags in the hash
-    TagsFilter(GeoDataDocument* document, const Tags& tagsList);
+    TagsFilter(GeoDataDocument* document, const Tags& tagsList, FilterFlag filterFlag = NoFlag);
     ~TagsFilter();
 
     QVector<GeoDataPlacemark*>::const_iterator rejectedObjectsBegin() const;

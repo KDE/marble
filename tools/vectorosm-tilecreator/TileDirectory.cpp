@@ -267,7 +267,7 @@ void TileDirectory::setTagZoomLevel(int zoomLevel)
     if (m_tileType == OpenStreetMap) {
         if (m_tagZoomLevel < 17) {
             auto const tags = tagsFilteredIn(m_tagZoomLevel);
-            m_tagsFilter = QSharedPointer<TagsFilter>(new TagsFilter(m_landmass.data(), tags));
+            m_tagsFilter = QSharedPointer<TagsFilter>(new TagsFilter(m_landmass.data(), tags, TagsFilter::FilterRailwayService));
         } else {
             m_tagsFilter.clear();
         }

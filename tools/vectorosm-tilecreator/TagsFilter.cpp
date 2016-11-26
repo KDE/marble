@@ -20,29 +20,35 @@
 
 namespace Marble {
 
-TagsFilter::TagsFilter(GeoDataDocument *geoDocument, const Tags &tagsList)
+TagsFilter::TagsFilter(GeoDataDocument *geoDocument, const Tags &tagsList, FilterFlag filterFlag)
     : BaseFilter(geoDocument),
       m_accepted(new GeoDataDocument)
 {
-    int total=0, tagCount=0;
     QVector<GeoDataPlacemark*> previousObjects(placemarks());
     foreach (GeoDataPlacemark *placemark, previousObjects) {
-        ++total;
-        bool flag = false;
-        for (auto const &tag: tagsList) {
-            bool contains;
-            if (tag.second == QLatin1String("*")) {
-                contains = placemark->osmData().containsTagKey(tag.first);
-            } else {
-                contains = placemark->osmData().containsTag(tag.first, tag.second);
-            }
-            if (contains) {
-                flag = true;
-                break;
+        bool acceptPlacemark = false;
+        auto const & osmData = placemark->osmData();
+
+        if (filterFlag == FilterRailwayService &&
+                osmData.containsTagKey(QStringLiteral("railway")) &&
+                osmData.containsTagKey(QStringLiteral("service"))) {
+            acceptPlacemark = false;
+        } else {
+            for (auto const &tag: tagsList) {
+                bool contains;
+                if (tag.second == QLatin1String("*")) {
+                    contains = osmData.containsTagKey(tag.first);
+                } else {
+                    contains = osmData.containsTag(tag.first, tag.second);
+                }
+                if (contains) {
+                    acceptPlacemark = true;
+                    break;
+                }
             }
         }
-        if (flag) {
-            ++tagCount;
+
+        if (acceptPlacemark) {
             m_accepted->append(new GeoDataPlacemark(*placemark));
         } else {
             m_rejectedObjects.append(new GeoDataPlacemark(*placemark));
