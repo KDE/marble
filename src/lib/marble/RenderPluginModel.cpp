@@ -59,7 +59,7 @@ void RenderPluginModel::setRenderPlugins( const QList<RenderPlugin *> &renderPlu
     }
 
     d->m_renderPlugins = renderPlugins;
-    qSort( d->m_renderPlugins.begin(), d->m_renderPlugins.end(), Private::renderPluginGuiStringLessThan );
+    std::sort( d->m_renderPlugins.begin(), d->m_renderPlugins.end(), Private::renderPluginGuiStringLessThan );
 
     QStandardItem *parentItem = invisibleRootItem();
     foreach ( RenderPlugin *plugin, d->m_renderPlugins ) {

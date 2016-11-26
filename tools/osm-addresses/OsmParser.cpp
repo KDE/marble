@@ -315,7 +315,7 @@ void OsmParser::read( const QFileInfo &content, const QString &areaName )
         regions << region.region;
     }
 
-    qSort( regions.begin(), regions.end(), moreImportantAdminArea );
+    std::sort( regions.begin(), regions.end(), moreImportantAdminArea );
     OsmRegionTree regionTree( mainArea );
     regionTree.append( regions );
     Q_ASSERT( regions.isEmpty() );
@@ -396,7 +396,7 @@ void OsmParser::read( const QFileInfo &content, const QString &areaName )
         regions << region.region;
     }
 
-    qSort( regions.begin(), regions.end(), moreImportantAdminArea );
+    std::sort( regions.begin(), regions.end(), moreImportantAdminArea );
     regionTree = OsmRegionTree( mainArea );
     regionTree.append( regions );
     Q_ASSERT( regions.isEmpty() );
@@ -660,7 +660,7 @@ GeoDataLinearRing* OsmParser::convexHull() const
                                    start.lat - points[i].coordinate.lat );
     }
 
-    qSort( points.begin(), points.end(), GrahamScanHelper::directionLessThan );
+    std::sort( points.begin(), points.end(), GrahamScanHelper::directionLessThan );
     points << points.first();
 
     int m = 2;

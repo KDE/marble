@@ -250,7 +250,7 @@ void MonavConfigWidgetPrivate::parseNewStuff( const QByteArray &data )
 bool MonavConfigWidgetPrivate::fillComboBox( QStringList items, QComboBox* comboBox )
 {
     comboBox->clear();
-    qSort( items );
+    std::sort( items.begin(), items.end() );
     comboBox->addItems( items );
     return !items.isEmpty();
 }

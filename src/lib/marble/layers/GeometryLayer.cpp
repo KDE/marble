@@ -178,9 +178,9 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
     // Sort each fragment by z-level and draw it
     foreach (const QString &layer, d->m_styleBuilder->renderOrder()) {
         GeometryLayerPrivate::PaintFragments & layerItems = paintedFragments[layer];
-        qStableSort(layerItems.negative.begin(), layerItems.negative.end(), GeoGraphicsItem::zValueLessThan);
+        std::stable_sort(layerItems.negative.begin(), layerItems.negative.end(), GeoGraphicsItem::zValueLessThan);
         // The idea here is that layerItems.null has most items and needs not to be sorted => faster
-        qStableSort(layerItems.positive.begin(), layerItems.positive.end(), GeoGraphicsItem::zValueLessThan);
+        std::stable_sort(layerItems.positive.begin(), layerItems.positive.end(), GeoGraphicsItem::zValueLessThan);
         foreach(auto item, layerItems.negative) { item->paint(painter, viewport, layer); }
         foreach(auto item, layerItems.null) { item->paint(painter, viewport, layer); }
         foreach(auto item, layerItems.positive) { item->paint(painter, viewport, layer); }

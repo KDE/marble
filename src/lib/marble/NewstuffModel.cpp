@@ -433,7 +433,7 @@ void NewstuffModelPrivate::uninstall( int index )
         }
     }
 
-    qSort( directories.begin(), directories.end(), NewstuffItem::deeperThan );
+    std::sort( directories.begin(), directories.end(), NewstuffItem::deeperThan );
     foreach( const QString &dir, directories ) {
         QDir::root().rmdir( dir );
     }

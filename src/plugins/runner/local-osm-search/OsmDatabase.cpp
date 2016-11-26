@@ -197,15 +197,15 @@ QVector<OsmPlacemark> OsmDatabase::find( const DatabaseQuery &userQuery )
 
     mDebug() << "Offline OSM search query took" << timer.elapsed() << "ms for" << result.count() << "results.";
 
-    qSort( result.begin(), result.end() );
+    std::sort( result.begin(), result.end() );
     makeUnique( result );
 
     if ( userQuery.position().isValid() ) {
         const PlacemarkSmallerDistance placemarkSmallerDistance( userQuery.position() );
-        qSort( result.begin(), result.end(), placemarkSmallerDistance );
+        std::sort( result.begin(), result.end(), placemarkSmallerDistance );
     } else {
         const PlacemarkHigherScore placemarkHigherScore( &userQuery );
-        qSort( result.begin(), result.end(), placemarkHigherScore );
+        std::sort( result.begin(), result.end(), placemarkHigherScore );
     }
 
     if ( result.size() > 50 ) {

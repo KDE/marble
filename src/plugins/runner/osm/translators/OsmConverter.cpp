@@ -84,9 +84,9 @@ void OsmConverter::read(const GeoDataDocument *document)
     }
 
     // Sort by id ascending since some external tools rely on that
-    qSort(m_nodes.begin(), m_nodes.end(), [] (const Node &a, const Node &b) { return a.second.id() < b.second.id(); });
-    qSort(m_ways.begin(), m_ways.end(), [] (const Way &a, const Way &b) { return a.second.id() < b.second.id(); });
-    qSort(m_polygons.begin(), m_polygons.end(), [] (const Polygon &a, const Polygon &b) { return a.second.id() < b.second.id(); });
+    std::sort(m_nodes.begin(), m_nodes.end(), [] (const Node &a, const Node &b) { return a.second.id() < b.second.id(); });
+    std::sort(m_ways.begin(), m_ways.end(), [] (const Way &a, const Way &b) { return a.second.id() < b.second.id(); });
+    std::sort(m_polygons.begin(), m_polygons.end(), [] (const Polygon &a, const Polygon &b) { return a.second.id() < b.second.id(); });
 }
 
 const OsmConverter::Nodes &OsmConverter::nodes() const

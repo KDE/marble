@@ -162,7 +162,7 @@ void GeoSceneTileDataset::setTileLevels(const QString &tileLevels)
     }
 
     if (!m_tileLevels.isEmpty()) {
-        qSort(m_tileLevels);
+        std::sort(m_tileLevels.begin(), m_tileLevels.end());
         m_minimumTileLevel = m_tileLevels.first();
         m_maximumTileLevel = m_tileLevels.last();
     }

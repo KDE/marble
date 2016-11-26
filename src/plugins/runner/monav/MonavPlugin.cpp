@@ -179,7 +179,7 @@ void MonavPluginPrivate::loadMaps()
             }
         }
         // Prefer maps where bounding boxes are known
-        qSort( m_maps.begin(), m_maps.end(), MonavMap::areaLessThan );
+        std::sort( m_maps.begin(), m_maps.end(), MonavMap::areaLessThan );
     }
 }
 

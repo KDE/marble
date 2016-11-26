@@ -35,7 +35,7 @@ void MonavMapsModel::setInstallableVersions( const QMap<QString, QString> &remot
 MonavMapsModel::MonavMapsModel( const QVector<MonavMap> &data, QObject * parent ) :
     QAbstractTableModel( parent ), m_data( data )
 {
-    qSort( m_data.begin(), m_data.end(), &MonavMap::nameLessThan );
+    std::sort( m_data.begin(), m_data.end(), &MonavMap::nameLessThan );
 }
 
 QVariant MonavMapsModel::headerData ( int section, Qt::Orientation orientation, int role ) const

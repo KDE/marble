@@ -347,7 +347,7 @@ void AlternativeRoutesModel::newRequest( RouteRequest * )
 void AlternativeRoutesModel::addRestrainedRoutes()
 {
     Q_ASSERT( d->m_routes.isEmpty() );
-    qSort( d->m_restrainedRoutes.begin(), d->m_restrainedRoutes.end(), Private::higherScore );
+    std::sort( d->m_restrainedRoutes.begin(), d->m_restrainedRoutes.end(), Private::higherScore );
 
     foreach( GeoDataDocument* route, d->m_restrainedRoutes ) {
         if ( !d->filter( route ) ) {

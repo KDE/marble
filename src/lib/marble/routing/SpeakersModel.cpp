@@ -107,7 +107,7 @@ void SpeakersModelPrivate::fillModel()
         }
     }
 
-    qSort(m_speakers.begin(), m_speakers.end(), SpeakersModelItem::lessThan);
+    std::sort(m_speakers.begin(), m_speakers.end(), SpeakersModelItem::lessThan);
     m_parent->beginResetModel();
     m_parent->endResetModel();
     emit m_parent->countChanged();
