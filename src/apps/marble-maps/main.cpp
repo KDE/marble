@@ -87,11 +87,6 @@ int main(int argc, char ** argv)
     // Load Qt translation system catalog for libmarblewidget, the plugins and this app
     loadTranslations(app);
 
-#ifdef Q_OS_ANDROID
-    MarbleGlobal::Profiles profiles = MarbleGlobal::SmallScreen | MarbleGlobal::HighResolution;
-    MarbleGlobal::getInstance()->setProfiles( profiles );
-#endif
-
     MarbleDeclarativePlugin declarativePlugin;
     const char uri[] = "org.kde.marble";
     declarativePlugin.registerTypes(uri);

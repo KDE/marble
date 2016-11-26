@@ -394,11 +394,6 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
         d->m_ui.directionsListView->setVisible( false );
         d->m_openRouteButton->setVisible( false );
         d->m_saveRouteButton->setVisible( false );
-#ifdef Q_WS_MAEMO_5
-        d->m_ui.directionsListView->setAttribute( Qt::WA_Maemo5StackedWindow );
-        d->m_ui.directionsListView->setWindowFlags( Qt::Window );
-        d->m_ui.directionsListView->setWindowTitle( tr( "Directions - Marble" ) );
-#endif // Q_WS_MAEMO_5
     }
 
     connect( marbleWidget->model(), SIGNAL(themeChanged(QString)),

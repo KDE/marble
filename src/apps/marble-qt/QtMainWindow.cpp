@@ -640,11 +640,6 @@ void MainWindow::manageBookmarks()
 {
     MarbleModel * const model = m_controlView->marbleModel();
     QPointer<BookmarkManagerDialog> dialog = new BookmarkManagerDialog( model, this );
-#ifdef Q_WS_MAEMO_5
-    dialog->setButtonBoxVisible( false );
-    dialog->setAttribute( Qt::WA_Maemo5StackedWindow );
-    dialog->setWindowFlags( Qt::Window );
-#endif // Q_WS_MAEMO_5
     dialog->exec();
     delete dialog;
 }
