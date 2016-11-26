@@ -291,11 +291,6 @@ class  MARBLE_EXPORT MarbleGlobal
     Profiles profiles() const;
     void setProfiles( Profiles profiles );
     
-    /**
-     * Automatically detects the profile.
-     */
-    static Profiles detectProfiles();
-    
  private:
     MarbleGlobal();
 

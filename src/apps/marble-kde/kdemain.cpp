@@ -325,7 +325,7 @@ int main ( int argc, char *argv[] )
     aboutData.setupCommandLine(&parser);
 
     // Autodetect profiles
-    MarbleGlobal::Profiles profiles = MarbleGlobal::detectProfiles();
+    MarbleGlobal::Profiles profiles = MarbleGlobal::getInstance()->profiles();
 
     QCommandLineOption debugOption( "debug-info", i18n( "Enable debug output" ) );
     parser.addOption( debugOption );

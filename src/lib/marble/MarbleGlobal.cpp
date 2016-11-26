@@ -16,8 +16,13 @@ namespace Marble
 {
 
 MarbleGlobalPrivate::MarbleGlobalPrivate()
-    : m_profiles( MarbleGlobal::Default ) 
+    : m_profiles(MarbleGlobal::Default)
 {
+#ifdef Q_OS_ANDROID
+    m_profiles |= MarbleGlobal::SmallScreen;
+    m_profiles |= MarbleGlobal::HighResolution;
+#endif
+
 }
 
 MarbleGlobalPrivate::~MarbleGlobalPrivate()
@@ -51,17 +56,6 @@ MarbleGlobal::Profiles MarbleGlobal::profiles() const {
 
 void MarbleGlobal::setProfiles( MarbleGlobal::Profiles profiles ) {
     d->m_profiles = profiles;
-}
-
-MarbleGlobal::Profiles MarbleGlobal::detectProfiles() {
-    MarbleGlobal::Profiles profile = MarbleGlobal::Default;
-
-#ifdef Q_OS_ANDROID
-    profile |= MarbleGlobal::SmallScreen;
-    profile |= MarbleGlobal::HighResolution;
-#endif
-
-    return profile;
 }
 
 }

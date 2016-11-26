@@ -135,7 +135,7 @@ int main(int argc, char *argv[])
     QString coordinatesString;
     QString distanceString;
     QString geoUriString;
-    MarbleGlobal::Profiles profiles = MarbleGlobal::detectProfiles();
+    MarbleGlobal::Profiles profiles = MarbleGlobal::getInstance()->profiles();
 
     QStringList args = QApplication::arguments();
 
