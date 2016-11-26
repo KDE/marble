@@ -171,6 +171,7 @@ int main(int argc, char *argv[])
     }
 
     bool const overwriteTiles = parser.value("conflict-resolution") == "overwrite";
+    bool const mergeTiles = parser.value("conflict-resolution") == "merge";
     QSharedPointer<MbTileWriter> mbtileWriter;
     if (parser.isSet("mbtile")) {
         QString const mbtile = parser.value("mbtile");
@@ -287,7 +288,9 @@ int main(int argc, char *argv[])
 
                 if (boundaryTiles.contains(iter.key())) {
                     writeBoundaryTile(tile1.data(), region, parser, tileId.x(), tileId.y(), zoomLevel);
-                    combined = mergeBoundaryTiles(tile2, manager, parser, tileId.x(), tileId.y(), zoomLevel);
+                    if (mergeTiles) {
+                        combined = mergeBoundaryTiles(tile2, manager, parser, tileId.x(), tileId.y(), zoomLevel);
+                    }
                 }
 
                 if (zoomLevel > 13 && mbtileWriter) {
