@@ -41,14 +41,14 @@ class Filter(object):
             return ['moon']
         elif dir == '/assets/data/maps/earth':
             # Unused map themes
-            return ['srtm', 'bluemarble', 'precip-dec', 'citylights', 'plain', 'schagen1689', 'political']
+            return ['srtm', 'srtm2', 'bluemarble', 'temp-july', 'precip-july', 'temp-dec', 'precip-dec', 'citylights', 'plain', 'schagen1689', 'political', 'behaim1492', 'openstreetmap', 'clouds', 'sentinel2']
         elif dir == '/assets/data/maps/earth/openstreetmap':
             # Large images from example KML tour
             return [item for item in files if item.endswith('.png') or item.endswith('.jpg')]
         elif dir == '/assets/data/placemarks':
             # Only include very basic placemarks
             return ['moonlandingsites.cache', 'moonterrain.cache', 'elevplacemarks.cache', 'otherplacemarks.cache', 'cityplacemarks.cache']
-        elif dir == '/assets/data/placemarks':
+        elif dir == '/assets/data/svg':
             # Large images. worldmap.svg is used by the overviewmap, bring back if that plugin should be enabled
             return ['application-x-marble.svg', 'marsmap.svg', 'marble-logo.svg', 'lunarmap.svg', 'worldmap.svg']
         elif dir == '/assets/plugins':
