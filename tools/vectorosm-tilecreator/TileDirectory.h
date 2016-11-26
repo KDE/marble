@@ -84,6 +84,7 @@ private:
     TagsFilter::Tags tagsFilteredIn(int zoomLevel) const;
     void setTagZoomLevel(int zoomLevel);
     void download(const QString &url, const QString &target);
+    QString osmFileFor(const TileId &tileId) const;
 
     QString m_cacheDir;
     QString m_baseDir;

@@ -287,6 +287,12 @@ void TileDirectory::download(const QString &url, const QString &target)
     cout << endl;
 }
 
+QString TileDirectory::osmFileFor(const TileId &tileId) const
+{
+    QString const outputDir = QString("%1/osm/%2/%3").arg(m_cacheDir).arg(tileId.zoomLevel()).arg(tileId.x());
+    return QString("%1/%2.o5m").arg(outputDir).arg(tileId.y());
+}
+
 void TileDirectory::printProgress(double progress, int barWidth)
 {
     int const position = barWidth * progress;
@@ -400,7 +406,7 @@ void TileDirectory::createOsmTiles() const
     pyramid.setBottomLevelCoords(QRect(QPoint(westX, northY), QPoint(eastX, southY)));
 
     qint64 const maxCount = pyramid.tilesCount();
-    bool first = true;
+    QMap<int,QVector<TileId> > tileLevels;
     for (int zoomLevel=0; zoomLevel <= m_zoomLevel; ++zoomLevel) {
         QRect const rect = pyramid.coords(zoomLevel);
         if (zoomLevel < m_zoomLevel && rect.width()*rect.height() < 2) {
@@ -408,43 +414,67 @@ void TileDirectory::createOsmTiles() const
         }
 
         TileIterator iter(m_boundingBox, zoomLevel);
-        qint64 count = 0;
         foreach(auto const &tileId, iter) {
-            ++count;
-            QString const inputFile = first ? m_inputFile : QString("%1/osm/%2/%3/%4.o5m").
-                                              arg(m_cacheDir).arg(zoomLevel-1).arg(tileId.x()>>1).arg(tileId.y()>>1);
-            QString const outputDir = QString("%1/osm/%2/%3").arg(m_cacheDir).arg(zoomLevel).arg(tileId.x());
-            QString const outputFile = QString("%1/%2.o5m").arg(outputDir).arg(tileId.y());
-            if (QFileInfo(outputFile).exists()) {
-                continue;
-            }
-
-            printProgress(count / double(maxCount));
-            cout << " Creating osm cache tile " << count << "/" << maxCount << " (";
-            cout << zoomLevel << "/" << tileId.x() << "/" << tileId.y() << ')' << string(20, ' ') << '\r';
-            cout.flush();
-
-            QDir().mkpath(outputDir);
-            QString const output = QString("-o=%1").arg(outputFile);
-
-            GeoDataLatLonBox tileBoundary;
-            m_tileProjection.geoCoordinates(zoomLevel, tileId.x(), tileId.y(), tileBoundary);
-
-            double const minLon = tileBoundary.west(GeoDataCoordinates::Degree);
-            double const maxLon = tileBoundary.east(GeoDataCoordinates::Degree);
-            double const maxLat = tileBoundary.north(GeoDataCoordinates::Degree);
-            double const minLat = tileBoundary.south(GeoDataCoordinates::Degree);
-            QString const bbox = QString("-b=%1,%2,%3,%4").arg(minLon).arg(minLat).arg(maxLon).arg(maxLat);
-            QProcess osmconvert;
-            osmconvert.start("osmconvert", QStringList() << "--drop-author" << "--drop-version"
-                             << "--complete-ways" << "--complex-ways" << bbox << output << inputFile);
-            osmconvert.waitForFinished(10*60*1000);
-            if (osmconvert.exitCode() != 0) {
-                qWarning() << osmconvert.readAllStandardError();
-                qWarning() << "osmconvert failed: " << osmconvert.errorString();
-            }
+            tileLevels[zoomLevel] << TileId(0, zoomLevel, tileId.x(), tileId.y());
         }
-        first = false;
+    }
+
+    bool hasAllTiles = true;
+    for (auto const &tileId: tileLevels[m_zoomLevel]) {
+        auto const outputFile = osmFileFor(tileId);
+        if (!QFileInfo(outputFile).exists()) {
+            hasAllTiles = false;
+            break;
+        }
+    }
+
+    bool first = true;
+    if (!hasAllTiles) {
+        qint64 count = 0;
+        for (auto const &tiles: tileLevels) {
+            for (auto const &tileId: tiles) {
+                ++count;
+                QString const inputFile = first ? m_inputFile : QString("%1/osm/%2/%3/%4.o5m").
+                                                  arg(m_cacheDir).arg(tileId.zoomLevel()-1).arg(tileId.x()>>1).arg(tileId.y()>>1);
+                QString const outputFile = osmFileFor(tileId);
+                if (QFileInfo(outputFile).exists()) {
+                    continue;
+                }
+
+                printProgress(count / double(maxCount));
+                cout << " Creating osm cache tile " << count << "/" << maxCount << " (";
+                cout << tileId.zoomLevel() << "/" << tileId.x() << "/" << tileId.y() << ')' << string(20, ' ') << '\r';
+                cout.flush();
+
+                QDir().mkpath(QFileInfo(outputFile).absolutePath());
+                QString const output = QString("-o=%1").arg(outputFile);
+
+                GeoDataLatLonBox tileBoundary;
+                m_tileProjection.geoCoordinates(tileId.zoomLevel(), tileId.x(), tileId.y(), tileBoundary);
+
+                double const minLon = tileBoundary.west(GeoDataCoordinates::Degree);
+                double const maxLon = tileBoundary.east(GeoDataCoordinates::Degree);
+                double const maxLat = tileBoundary.north(GeoDataCoordinates::Degree);
+                double const minLat = tileBoundary.south(GeoDataCoordinates::Degree);
+                QString const bbox = QString("-b=%1,%2,%3,%4").arg(minLon).arg(minLat).arg(maxLon).arg(maxLat);
+                QProcess osmconvert;
+                osmconvert.start("osmconvert", QStringList() << "--drop-author" << "--drop-version"
+                                 << "--complete-ways" << "--complex-ways" << bbox << output << inputFile);
+                osmconvert.waitForFinished(10*60*1000);
+                if (osmconvert.exitCode() != 0) {
+                    qWarning() << osmconvert.readAllStandardError();
+                    qWarning() << "osmconvert failed: " << osmconvert.errorString();
+                }
+            }
+            first = false;
+        }
+    }
+
+    tileLevels.remove(m_zoomLevel);
+    for (auto const &tiles: tileLevels) {
+        for (auto const &tileId: tiles) {
+            QFile::remove(osmFileFor(tileId));
+        }
     }
 
     printProgress(1.0);
