@@ -20,61 +20,34 @@
 
 namespace Marble {
 
-TagsFilter::TagsFilter(GeoDataDocument *geoDocument, const QStringList &tagsList, bool andFlag )
+TagsFilter::TagsFilter(GeoDataDocument *geoDocument, const Tags &tagsList)
     : BaseFilter(geoDocument),
       m_accepted(new GeoDataDocument)
 {
     int total=0, tagCount=0;
-    // qDebug()<<"Entered tagFilter";
     QVector<GeoDataPlacemark*> previousObjects(placemarks());
     foreach (GeoDataPlacemark *placemark, previousObjects) {
         ++total;
-        bool flag = andFlag;
-        QStringList::const_iterator itr = tagsList.begin();
-        for (; itr != tagsList.end(); ++itr) {
-            QStringList currentTag = (*itr).split(QLatin1Char('='));
-            QString currentKey;
-            QString currentValue;
-            if (currentTag.size() != 2) {
-                qDebug()<< "Invalid tag : "<< currentTag<<" ,rejecting it"<<endl;
-                continue;
-            } else {
-                currentKey = currentTag[0].trimmed();
-                currentValue = currentTag[1].trimmed();
-            }
+        bool flag = false;
+        for (auto const &tag: tagsList) {
             bool contains;
-            if (currentValue == QLatin1String("*")) {
-                contains = placemark->osmData().containsTagKey(currentKey);
+            if (tag.second == QLatin1String("*")) {
+                contains = placemark->osmData().containsTagKey(tag.first);
             } else {
-                contains = placemark->osmData().containsTag(currentKey, currentValue);
+                contains = placemark->osmData().containsTag(tag.first, tag.second);
             }
-            if (!contains) {
-                if (andFlag) {
-                    flag = false;
-                    break;
-                }
-            } else {
-                if (!andFlag) {
-                    flag = true;
-                    break;
-                }
+            if (contains) {
+                flag = true;
+                break;
             }
         }
         if (flag) {
             ++tagCount;
-            // qDebug()<<"Contained tag";
             m_accepted->append(new GeoDataPlacemark(*placemark));
-            // qDebug()<<"ID "<<placemark->osmData().id();
         } else {
             m_rejectedObjects.append(new GeoDataPlacemark(*placemark));
         }
-
     }
-
-    // qDebug()<<"Done TagFiltering";
-    // qDebug()<<"Total"<<total;
-    // qDebug()<<"TagCount"<<tagCount;
-    // qDebug()<<"Is and : "<<andFlag;
 }
 
 TagsFilter::~TagsFilter()

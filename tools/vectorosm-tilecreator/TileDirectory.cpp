@@ -155,104 +155,109 @@ QSharedPointer<GeoDataDocument> TileDirectory::open(const QString &filename, Par
     return result;
 }
 
-QStringList TileDirectory::tagsFilteredIn(int zoomLevel) const
+TagsFilter::Tags TileDirectory::tagsFilteredIn(int zoomLevel) const
 {
-    QStringList tags;
-    tags << "highway=motorway" << "highway=motorway_link";
-    tags << "highway=trunk" << "highway=trunk_link";
-    tags << "highway=primary" << "highway=primary_link";
-    tags << "highway=secondary" << "highway=secondary_link";
+    TagsFilter::Tags tags;
+    tags << TagsFilter::Tag("highway", "motorway");
+    tags << TagsFilter::Tag("highway", "motorway_link");
+    tags << TagsFilter::Tag("highway", "trunk");
+    tags << TagsFilter::Tag("highway", "trunk_link");
+    tags << TagsFilter::Tag("highway", "primary");
+    tags << TagsFilter::Tag("highway", "primary_link");
+    tags << TagsFilter::Tag("highway", "secondary");
+    tags << TagsFilter::Tag("highway", "secondary_link");
 
-    tags << "natural=glacier";
-    tags << "natural=water";
-    tags << "waterway=river";
-    tags << "waterway=riverbank";
-    tags << "waterway=canal";
+    tags << TagsFilter::Tag("natural", "glacier");
+    tags << TagsFilter::Tag("natural", "water");
+    tags << TagsFilter::Tag("waterway", "river");
+    tags << TagsFilter::Tag("waterway", "riverbank");
+    tags << TagsFilter::Tag("waterway", "canal");
 
     if (zoomLevel >= 13) {
-        tags << "highway=tertiary" << "highway=tertiary_link";
-        tags << "highway=unclassified";
+        tags << TagsFilter::Tag("highway", "tertiary");
+        tags << TagsFilter::Tag("highway", "tertiary_link");
+        tags << TagsFilter::Tag("highway", "unclassified");
 
-        tags << "public_transport=station";
-        tags << "railway=light_rail";
-        tags << "railway=monorail";
-        tags << "railway=narrow_gauge";
-        tags << "railway=preserved";
-        tags << "railway=rail";
-        tags << "railway=subway";
-        tags << "railway=tram";
+        tags << TagsFilter::Tag("public_transport", "station");
+        tags << TagsFilter::Tag("railway", "light_rail");
+        tags << TagsFilter::Tag("railway", "monorail");
+        tags << TagsFilter::Tag("railway", "narrow_gauge");
+        tags << TagsFilter::Tag("railway", "preserved");
+        tags << TagsFilter::Tag("railway", "rail");
+        tags << TagsFilter::Tag("railway", "subway");
+        tags << TagsFilter::Tag("railway", "tram");
 
-        tags << "natural=scrub";
-        tags << "natural=heath";
-        tags << "natural=grassland";
-        tags << "natural=beach";
-        tags << "natural=coastline";
-        tags << "leisure=stadium";
-        tags << "tourism=alpine_hut";
+        tags << TagsFilter::Tag("natural", "scrub");
+        tags << TagsFilter::Tag("natural", "heath");
+        tags << TagsFilter::Tag("natural", "grassland");
+        tags << TagsFilter::Tag("natural", "beach");
+        tags << TagsFilter::Tag("natural", "coastline");
+        tags << TagsFilter::Tag("leisure", "stadium");
+        tags << TagsFilter::Tag("tourism", "alpine_hut");
 
-        tags << "place=suburb";
-        tags << "place=village";
-        tags << "amenity=hospital";
+        tags << TagsFilter::Tag("place", "suburb");
+        tags << TagsFilter::Tag("place", "village");
+        tags << TagsFilter::Tag("amenity", "hospital");
     }
 
     if (zoomLevel <= 11) {
-        tags << "landuse=forest";
-        tags << "landuse=military";
-        tags << "landuse=residential";
+        tags << TagsFilter::Tag("landuse", "forest");
+        tags << TagsFilter::Tag("landuse", "military");
+        tags << TagsFilter::Tag("landuse", "residential");
     } else if (zoomLevel <= 13) {
-        tags << "landuse=commercial";
-        tags << "landuse=farmland";
-        tags << "landuse=farmyard";
-        tags << "landuse=forest";
-        tags << "landuse=industrial";
-        tags << "landuse=meadow";
-        tags << "landuse=military";
-        tags << "landuse=recreation_ground";
-        tags << "landuse=residential";
-        tags << "landuse=retail";
+        tags << TagsFilter::Tag("landuse", "commercial");
+        tags << TagsFilter::Tag("landuse", "farmland");
+        tags << TagsFilter::Tag("landuse", "farmyard");
+        tags << TagsFilter::Tag("landuse", "forest");
+        tags << TagsFilter::Tag("landuse", "industrial");
+        tags << TagsFilter::Tag("landuse", "meadow");
+        tags << TagsFilter::Tag("landuse", "military");
+        tags << TagsFilter::Tag("landuse", "recreation_ground");
+        tags << TagsFilter::Tag("landuse", "residential");
+        tags << TagsFilter::Tag("landuse", "retail");
     }
 
     if (zoomLevel >= 15) {
-        tags << "waterway=stream";
+        tags << TagsFilter::Tag("waterway", "stream");
 
-        tags << "highway=residential";
-        tags << "highway=track";
+        tags << TagsFilter::Tag("highway", "residential");
+        tags << TagsFilter::Tag("highway", "track");
 
-        tags << "landuse=*";
+        tags << TagsFilter::Tag("landuse", "*");
 
-        tags << "leisure=pitch";
-        tags << "leisure=swimming_area";
+        tags << TagsFilter::Tag("leisure", "pitch");
+        tags << TagsFilter::Tag("leisure", "swimming_area");
 
-        tags << "place=hamlet";
-        tags << "place=isolated_dwelling";
+        tags << TagsFilter::Tag("place", "hamlet");
+        tags << TagsFilter::Tag("place", "isolated_dwelling");
 
-        tags << "man_made=beacon";
-        tags << "man_made=bridge";
-        tags << "man_made=campanile";
-        tags << "man_made=chimney";
-        tags << "man_made=communications_tower";
-        tags << "man_made=cross";
-        tags << "man_made=gasometer";
-        tags << "man_made=lighthouse";
-        tags << "man_made=tower";
-        tags << "man_made=water_tower";
-        tags << "man_made=windmill";
+        tags << TagsFilter::Tag("man_made", "beacon");
+        tags << TagsFilter::Tag("man_made", "bridge");
+        tags << TagsFilter::Tag("man_made", "campanile");
+        tags << TagsFilter::Tag("man_made", "chimney");
+        tags << TagsFilter::Tag("man_made", "communications_tower");
+        tags << TagsFilter::Tag("man_made", "cross");
+        tags << TagsFilter::Tag("man_made", "gasometer");
+        tags << TagsFilter::Tag("man_made", "lighthouse");
+        tags << TagsFilter::Tag("man_made", "tower");
+        tags << TagsFilter::Tag("man_made", "water_tower");
+        tags << TagsFilter::Tag("man_made", "windmill");
     }
 
-    tags << "natural=peak";
-    tags << "natural=wood";
+    tags << TagsFilter::Tag("natural", "peak");
+    tags << TagsFilter::Tag("natural", "wood");
 
-    tags << "leisure=nature_reserve";
-    tags << "leisure=park";
+    tags << TagsFilter::Tag("leisure", "nature_reserve");
+    tags << TagsFilter::Tag("leisure", "park");
 
-    tags << "place=city";
-    tags << "place=town";
-    tags << "place=locality";
+    tags << TagsFilter::Tag("place", "city");
+    tags << TagsFilter::Tag("place", "town");
+    tags << TagsFilter::Tag("place", "locality");
 
-    tags << "boundary=administrative";
-    tags << "boundary=political";
-    tags << "boundary=national_park";
-    tags << "boundary=protected_area";
+    tags << TagsFilter::Tag("boundary", "administrative");
+    tags << TagsFilter::Tag("boundary", "political");
+    tags << TagsFilter::Tag("boundary", "national_park");
+    tags << TagsFilter::Tag("boundary", "protected_area");
     return tags;
 }
 
@@ -261,7 +266,7 @@ void TileDirectory::setTagZoomLevel(int zoomLevel)
     m_tagZoomLevel = zoomLevel;
     if (m_tileType == OpenStreetMap) {
         if (m_tagZoomLevel < 17) {
-            QStringList const tags = tagsFilteredIn(m_tagZoomLevel);
+            auto const tags = tagsFilteredIn(m_tagZoomLevel);
             m_tagsFilter = QSharedPointer<TagsFilter>(new TagsFilter(m_landmass.data(), tags));
         } else {
             m_tagsFilter.clear();

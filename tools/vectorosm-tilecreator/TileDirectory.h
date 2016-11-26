@@ -81,7 +81,7 @@ private Q_SLOTS:
     void handleFinishedDownload(const QString &filename, const QString &id);
 
 private:
-    QStringList tagsFilteredIn(int zoomLevel) const;
+    TagsFilter::Tags tagsFilteredIn(int zoomLevel) const;
     void setTagZoomLevel(int zoomLevel);
     void download(const QString &url, const QString &target);
 
