@@ -173,17 +173,18 @@ TagsFilter::Tags TileDirectory::tagsFilteredIn(int zoomLevel) const
     tags << TagsFilter::Tag("waterway", "riverbank");
     tags << TagsFilter::Tag("waterway", "canal");
 
+    tags << TagsFilter::Tag("railway", "rail");
+    tags << TagsFilter::Tag("railway", "light_rail");
+    tags << TagsFilter::Tag("railway", "monorail");
+
     if (zoomLevel >= 13) {
         tags << TagsFilter::Tag("highway", "tertiary");
         tags << TagsFilter::Tag("highway", "tertiary_link");
         tags << TagsFilter::Tag("highway", "unclassified");
 
         tags << TagsFilter::Tag("public_transport", "station");
-        tags << TagsFilter::Tag("railway", "light_rail");
-        tags << TagsFilter::Tag("railway", "monorail");
         tags << TagsFilter::Tag("railway", "narrow_gauge");
         tags << TagsFilter::Tag("railway", "preserved");
-        tags << TagsFilter::Tag("railway", "rail");
         tags << TagsFilter::Tag("railway", "subway");
         tags << TagsFilter::Tag("railway", "tram");
 
