@@ -170,7 +170,6 @@ endif( BUILD_MARBLE_TESTS )
 
 ####################################################
 set (PEDANTIC FALSE CACHE BOOL "Determines if we should compile with -Wall -Werror.")
-set (ENABLE_TESTS FALSE CACHE BOOL "Build unit tests?")
 set (WITH_DESIGNER_PLUGIN TRUE CACHE BOOL "Build plugins for Qt Designer")
 add_feature_info("Qt Designer plugins" WITH_DESIGNER_PLUGIN "Marble widget support in Qt Designer. Toggle with WITH_DESIGNER_PLUGIN=YES/NO")
 
