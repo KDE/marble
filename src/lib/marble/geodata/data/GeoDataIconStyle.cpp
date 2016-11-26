@@ -70,7 +70,8 @@ class GeoDataIconStylePrivate
             iconSize *= m_scale;
         }
 
-        return iconSize;
+        return QSize(iconSize.width() - iconSize.width() % 2,
+                     iconSize.height() - iconSize.height() % 2);
     }
 
     QImage loadIcon(const QString &path, const QSize &size) const
@@ -219,10 +220,10 @@ void GeoDataIconStyle::setSize(const QSize &size)
         return;
     }
 
-    d->m_size = size;
-    if (!size.isNull() && !d->m_icon.isNull()) {
+    d->m_size = QSize(size.width() - size.width() % 2, size.height() - size.height() % 2);
+    if (!d->m_size.isNull() && !d->m_icon.isNull()) {
         // Resize existing icon that cannot be restored from an image path
-        d->m_icon = d->m_icon.scaled(size);
+        d->m_icon = d->m_icon.scaled(d->m_size);
     } else if (!d->m_iconPath.isEmpty()) {
         // Lazily reload the icons
         d->m_icon = QImage();
