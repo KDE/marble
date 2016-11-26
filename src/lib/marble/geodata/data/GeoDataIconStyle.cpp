@@ -252,12 +252,8 @@ QImage GeoDataIconStyle::scaledIcon() const
         return d->m_scaledIcon;
     }
 
-    if (d->m_scale == 1.0) {
-        return icon();
-    }
-
-    // Scale shouldn't be 0, but if it is, returning regular icon.
-    if(d->m_scale <= 0 || icon().isNull() ) {
+    // Invalid or trivial scale
+    if (d->m_scale <= 0 || d->m_scale == 1.0) {
         return icon();
     }
 

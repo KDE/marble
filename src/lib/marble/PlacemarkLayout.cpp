@@ -580,7 +580,7 @@ GeoDataCoordinates PlacemarkLayout::placemarkIconCoordinates( const GeoDataPlace
         StyleParameters parameters;
         parameters.placemark = placemark;
         auto style = m_styleBuilder->createStyle(parameters);
-        if (style->iconStyle().icon().isNull()) {
+        if (style->iconStyle().scaledIcon().isNull()) {
             return GeoDataCoordinates();
         }
     }
@@ -637,7 +637,7 @@ QRectF PlacemarkLayout::roomForLabel( const GeoDataStyle::ConstPtr &style,
     }
     else if (style->labelStyle().alignment() == GeoDataLabelStyle::Right)
     {
-        const int symbolWidth = style->iconStyle().icon().width();
+        const int symbolWidth = style->iconStyle().scaledIcon().width();
         const qreal startY = y - textHeight/2;
         const qreal xPos = x + symbolWidth / 2 + 1;
 

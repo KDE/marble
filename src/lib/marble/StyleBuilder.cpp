@@ -1311,7 +1311,7 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
         if (style->iconStyle().iconPath().isEmpty()) {
             const GeoDataPlacemark::GeoDataVisualCategory category = determineVisualCategory(osmData);
             const GeoDataStyle::ConstPtr categoryStyle = d->presetStyle(category);
-            if (category != GeoDataPlacemark::None && !categoryStyle->iconStyle().icon().isNull()) {
+            if (category != GeoDataPlacemark::None && !categoryStyle->iconStyle().scaledIcon().isNull()) {
                 GeoDataStyle::Ptr newStyle(new GeoDataStyle(*style));
                 newStyle->setIconStyle(categoryStyle->iconStyle());
                 style = newStyle;
