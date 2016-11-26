@@ -50,7 +50,6 @@ int main(int argc, char *argv[])
 
     QString marbleDataPath;
     int dataPathIndex=0;
-    MarbleGlobal::Profiles profiles = MarbleGlobal::detectProfiles();
 
     QStringList args = QApplication::arguments();
 
