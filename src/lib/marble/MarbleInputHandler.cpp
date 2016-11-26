@@ -642,7 +642,6 @@ void MarbleDefaultInputHandler::adjustCursorShape(const QPoint &mousePosition, c
         }
     }
 
-#ifndef Q_WS_MAEMO_5
     if (panViaArrowsEnabled())
     {
         setCursor(d->m_arrowCur[mouseDirection.x()+1][mouseDirection.y()+1]);
@@ -651,7 +650,6 @@ void MarbleDefaultInputHandler::adjustCursorShape(const QPoint &mousePosition, c
     {
         setCursor(d->m_arrowCur[1][1]);
     }
-#endif
 }
 
 QPoint MarbleDefaultInputHandler::mouseMovedOutside(QMouseEvent *event)

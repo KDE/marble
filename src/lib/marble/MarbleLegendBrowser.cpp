@@ -53,9 +53,6 @@ class MarbleLegendBrowserPrivate
     QMap<QString, bool>     m_checkBoxMap;
     QMap<QString, QPixmap>  m_symbolMap;
     QString                 m_currentThemeId;
-#ifdef Q_WS_MAEMO_5
-    bool m_suppressSelection;
-#endif // Q_WS_MAEMO_5
 };
 
 
@@ -67,9 +64,6 @@ MarbleLegendBrowser::MarbleLegendBrowser( QWidget *parent )
       d( new MarbleLegendBrowserPrivate )
 {
     d->m_marbleModel = 0;
-#ifdef Q_WS_MAEMO_5
-    d->m_suppressSelection = false;
-#endif // Q_WS_MAEMO_5
 
 #ifndef MARBLE_NO_WEBKITWIDGETS
     QWebFrame *frame = page()->mainFrame();
@@ -203,24 +197,6 @@ bool MarbleLegendBrowser::event( QEvent * event )
         loadLegend();
         return true;
     }
-#ifdef Q_WS_MAEMO_5
-    else if ( event->type() == QEvent::MouseButtonPress ) {
-        if ( static_cast<QMouseEvent *>( event )->button() == Qt::LeftButton ) {
-            d->m_suppressSelection = true;
-        }
-    }
-    else if ( event->type() == QEvent::MouseButtonRelease ) {
-        if ( static_cast<QMouseEvent *>( event )->button() == Qt::LeftButton ) {
-            d->m_suppressSelection = false;
-        }
-    }
-    else if ( event->type() == QEvent::MouseMove ) {
-        if ( d->m_suppressSelection ) {
-            // eat event to suppress text selection under Maemo5
-            return true;
-        }
-    }
-#endif // Q_WS_MAEMO_5
 
     return MarbleWebView::event( event );
 }

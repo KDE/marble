@@ -352,11 +352,6 @@ GoToDialog::GoToDialog( MarbleModel* marbleModel, QWidget * parent, Qt::WindowFl
     QDialog( parent, flags ),
     d( new GoToDialogPrivate( this, marbleModel ) )
 {
-#ifdef Q_WS_MAEMO_5
-        setAttribute( Qt::WA_Maemo5StackedWindow );
-        setWindowFlags( Qt::Window );
-#endif // Q_WS_MAEMO_5
-
     d->searchLineEdit->setPlaceholderText( tr( "Address or search term" ) );
 
     d->m_searchResultModel.setRootDocument( d->m_searchResult );

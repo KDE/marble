@@ -52,10 +52,6 @@ MapScaleFloatItem::MapScaleFloatItem( const MarbleModel *marbleModel )
       m_minimized(false),
       m_widthScaleFactor(2)
 {
-#ifdef Q_WS_MAEMO_5
-        setPosition( QPointF( 220.0, 10.5 ) );
-#endif // Q_WS_MAEMO_5
-
     m_minimizeAction = new QAction(tr("Minimize"), this);
     m_minimizeAction->setCheckable(true);
     m_minimizeAction->setChecked(m_minimized);
