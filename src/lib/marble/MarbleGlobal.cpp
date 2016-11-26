@@ -58,4 +58,9 @@ void MarbleGlobal::setProfiles( MarbleGlobal::Profiles profiles ) {
     d->m_profiles = profiles;
 }
 
+MarbleGlobal::Profiles MarbleGlobal::detectProfiles()
+{
+    return getInstance()->profiles();
+}
+
 }

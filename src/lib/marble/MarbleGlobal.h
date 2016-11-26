@@ -290,6 +290,9 @@ class  MARBLE_EXPORT MarbleGlobal
 
     Profiles profiles() const;
     void setProfiles( Profiles profiles );
+
+    /** @deprecated Profiles are detected automatically now. This only returns profiles() anymore */
+    MARBLE_DEPRECATED static Profiles detectProfiles();
     
  private:
     MarbleGlobal();
