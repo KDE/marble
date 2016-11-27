@@ -178,6 +178,16 @@ QString Placemark::description() const
             addTagDescription(m_description, QStringLiteral("healthcare"), QStringLiteral("rehabilitation"), tr("Rehabilitation"));
             addTagDescription(m_description, QStringLiteral("healthcare"), QStringLiteral("speech_therapist"), tr("Speech therapist"));
             addTagValue(m_description, QStringLiteral("healthcare:speciality"));
+        } else if (category == GeoDataPlacemark::AmenityBench) {
+            int const seats = m_placemark.osmData().tagValue(QStringLiteral("seats")).toInt();
+            if (seats > 0) {
+                addTagValue(m_description, QStringLiteral("seats"), tr("%1 seats", "number of seats a bench provides", seats));
+            }
+            addTagValue(m_description, QStringLiteral("material"));
+            addTagDescription(m_description, QStringLiteral("backrest"), QStringLiteral("yes"), tr("Has backrest", "A bench provides a backrest to lean against"));
+            addTagDescription(m_description, QStringLiteral("backrest"), QStringLiteral("no"), tr("No backrest", "A bench provides no backrest to lean against"));
+        } else if (category == GeoDataPlacemark::AmenityWasteBasket) {
+            addTagValue(m_description, QStringLiteral("waste"));
         }
 
         if (category == GeoDataPlacemark::AmenityRecycling || category == GeoDataPlacemark::AmenityPostBox) {
