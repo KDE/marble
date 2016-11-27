@@ -81,6 +81,19 @@ QString Placemark::description() const
             addFirstTagValueOf(m_description, QStringList() << "brand" << "operator");
         }
 
+        if ((category >= GeoDataPlacemark::AccomodationHostel &&
+                category <= GeoDataPlacemark::AccomodationGuestHouse) ||
+                category == GeoDataPlacemark::HealthHospital) {
+            int const rooms = m_placemark.osmData().tagValue(QStringLiteral("rooms")).toInt();
+            if (rooms > 0) {
+                addTagValue(m_description, QStringLiteral("rooms"), tr("%1 rooms", "number of rooms in a hotel or hospital", rooms));
+            }
+            int const beds = m_placemark.osmData().tagValue(QStringLiteral("beds")).toInt();
+            if (beds > 0) {
+                addTagValue(m_description, QStringLiteral("beds"), tr("%1 beds", "number of beds in a hotel or hospital", beds));
+            }
+        }
+
         if (category >= GeoDataPlacemark::FoodBar && category <= GeoDataPlacemark::FoodRestaurant) {
             if (category != GeoDataPlacemark::FoodRestaurant) {
                 addFirstTagValueOf(m_description, QStringList() << "brand" << "operator");
