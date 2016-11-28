@@ -45,6 +45,7 @@ namespace Marble
     class QuickItemSelectionRubber : public AbstractSelectionRubber
     { //TODO: support rubber selection in MarbleQuickItem
     public:
+        QuickItemSelectionRubber();
         void show() { m_visible = true; }
         void hide() { m_visible = false; }
         bool isVisible() const { return m_visible; }
@@ -995,4 +996,11 @@ namespace Marble
     {   //Does nothing, but can be reimplemented in a subclass
         return false;
     }
+
+    QuickItemSelectionRubber::QuickItemSelectionRubber() :
+        m_visible(false)
+    {
+        // nothing to do
+    }
+
 }
