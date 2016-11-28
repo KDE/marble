@@ -105,14 +105,12 @@ bool PlacemarkLayer::render( GeoPainter *geoPainter, ViewportParams *viewport,
                     auto iter = hash.find(mark->symbolId());
                     if (iter == hash.end()) {
                         Fragment fragment;
-                        fragment.count = 1;
                         fragment.pixmap = mark->symbolPixmap();
-                        fragment.fragments.append(pixmapFragment);
+                        fragment.fragments << pixmapFragment;
                         hash.insert(mark->symbolId(), fragment);
                     } else {
                         auto & fragment = iter.value();
-                        fragment.fragments.append(pixmapFragment);
-                        ++fragment.count;
+                        fragment.fragments << pixmapFragment;
                     }
 #else
                     painter->drawPixmap( symbolPos, mark->symbolPixmap() );
@@ -132,15 +130,13 @@ bool PlacemarkLayer::render( GeoPainter *geoPainter, ViewportParams *viewport,
                 auto iter = hash.find(mark->symbolId());
                 if (iter == hash.end()) {
                     Fragment fragment;
-                    fragment.count = 1;
                     fragment.pixmap = mark->symbolPixmap();
-                    fragment.fragments.append(pixmapFragment);
+                    fragment.fragments << pixmapFragment;
                     hash.insert(mark->symbolId(), fragment);
                 }
                 else {
                     auto & fragment = iter.value();
-                    fragment.fragments.append(pixmapFragment);
-                    ++fragment.count;
+                    fragment.fragments << pixmapFragment;
                 }
 #else
                 painter->drawPixmap( symbolPos, mark->symbolPixmap() );
@@ -176,7 +172,7 @@ bool PlacemarkLayer::render( GeoPainter *geoPainter, ViewportParams *viewport,
             pixpainter.end();
             iter.value().pixmap = debugPixmap;
         }
-        painter->drawPixmapFragments(fragment.fragments.data(), fragment.count, fragment.pixmap);
+        painter->drawPixmapFragments(fragment.fragments.data(), fragment.fragments.size(), fragment.pixmap);
     }
 #endif
 

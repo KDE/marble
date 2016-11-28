@@ -43,7 +43,6 @@ class StyleBuilder;
 struct Fragment
 {
     QVarLengthArray<QPainter::PixmapFragment, 16> fragments;
-    int count;
     QPixmap pixmap;
 };
 
