@@ -293,8 +293,6 @@ ApplicationWindow {
                 bottomMargin: Screen.pixelDensity * 4
             }
 
-            enabled: !(app.state === "route" && routingManager.routeRequestModel.count === 0 )
-
             onClicked: {
                 if (app.state === "route") {
                     app.state = "none"
