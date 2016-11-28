@@ -157,6 +157,8 @@ class Q_DECL_HIDDEN MarbleDefaultInputHandler::Private
     // The mouse pointer y position when the middle mouse button has been pressed.
     int m_midPressedY;
     int m_startingRadius;
+
+    qreal m_startingZoom;
     // The center longitude in radian when the left mouse button has been pressed.
     qreal m_leftPressedLon;
     // The center latitude in radian when the left mouse button has been pressed.
@@ -346,6 +348,7 @@ bool MarbleDefaultInputHandler::handlePinch(const QPointF &center, qreal scaleFa
 {
     qreal  destLat;
     qreal  destLon;
+
     MarbleAbstractPresenter *marblePresenter = MarbleInputHandler::d->m_marblePresenter;
 
     bool isValid = marblePresenter->map()->geoCoordinates(center.x(), center.y(),
@@ -355,6 +358,10 @@ bool MarbleDefaultInputHandler::handlePinch(const QPointF &center, qreal scaleFa
     {
         marblePresenter->map()->viewport()->setFocusPoint(GeoDataCoordinates(destLon, destLat));
     }
+
+    qreal zoom, target, newDistance;
+
+    qreal zoomDelta = scaleFactor > 1.0 ? scaleFactor : -1.0/scaleFactor;
 
     switch (state)
     {
@@ -366,17 +373,25 @@ bool MarbleDefaultInputHandler::handlePinch(const QPointF &center, qreal scaleFa
         d->m_lmbTimer.stop();
         d->m_midPressed = false;
         d->m_leftPressed = false;
-        d->m_startingRadius = marblePresenter->radius();
+        d->m_startingZoom = marblePresenter->zoom();
         break;
     case Qt::GestureUpdated:
-        marblePresenter->setRadius(marblePresenter->radius() * scaleFactor);
+        zoom = marblePresenter->zoom();
+        target = MarbleInputHandler::d->m_wheelZoomTargetDistance;
+        if (marblePresenter->animationsEnabled() && target > 0.0)
+        {
+            // Do not use intermediate (interpolated) distance values caused by animations
+            zoom = marblePresenter->zoomFromDistance(target);
+        }
+        newDistance = marblePresenter->distanceFromZoom(zoom + 13 * zoomDelta);
+        MarbleInputHandler::d->m_wheelZoomTargetDistance = newDistance;
+        marblePresenter->zoomAt(center.toPoint(), newDistance);
         break;
     case Qt::GestureFinished:
         marblePresenter->map()->viewport()->resetFocusPoint();
         marblePresenter->setViewContext(Still);
         break;
     case Qt::GestureCanceled:
-        marblePresenter->setRadius(d->m_startingRadius);
         marblePresenter->map()->viewport()->resetFocusPoint();
         marblePresenter->setViewContext(Still);
         break;
