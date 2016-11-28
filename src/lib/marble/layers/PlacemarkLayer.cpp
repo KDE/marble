@@ -107,7 +107,6 @@ bool PlacemarkLayer::render( GeoPainter *geoPainter, ViewportParams *viewport,
                     if (i == hash.end()) {
                         fragment.count = 1;
                         fragment.pixmap = mark->symbolPixmap();
-                        fragment.symbolId = mark->symbolId();
                     }
                     else {
                         fragment = i.value();
@@ -134,7 +133,6 @@ bool PlacemarkLayer::render( GeoPainter *geoPainter, ViewportParams *viewport,
                 if (i == hash.end()) {
                     fragment.count = 1;
                     fragment.pixmap = mark->symbolPixmap();
-                    fragment.symbolId = mark->symbolId();
                 }
                 else {
                     fragment = i.value();
@@ -153,12 +151,12 @@ bool PlacemarkLayer::render( GeoPainter *geoPainter, ViewportParams *viewport,
     }
 
 #ifdef BATCH_RENDERING
-    for (auto& val : hash.values()) {
+    for (auto iter = hash.begin(), end = hash.end(); iter != end; ++iter) {
+        auto const & fragment = iter.value();
         if (m_debugModeEnabled) {
-//            qDebug() << "Batches" << val.symbolId << val.count;
-            QPixmap debugPixmap(val.pixmap.size());
+            QPixmap debugPixmap(fragment.pixmap.size());
             QColor backgroundColor;
-            QString idStr = val.symbolId.section('/', -1);
+            QString idStr = iter.key().section('/', -1);
             if (idStr.length() > 2) {
               idStr.remove("shop_");
               backgroundColor = QColor(
@@ -167,16 +165,16 @@ bool PlacemarkLayer::render( GeoPainter *geoPainter, ViewportParams *viewport,
                           (10 * (int)(idStr[2].toLatin1()))%255 );
             }
             else {
-              backgroundColor = QColor((quint64)(&val.symbolId));
+              backgroundColor = QColor((quint64)(&iter.key()));
             }
             debugPixmap.fill(backgroundColor);
             QPainter pixpainter;
             pixpainter.begin(&debugPixmap);
-            pixpainter.drawPixmap(0, 0, val.pixmap);
+            pixpainter.drawPixmap(0, 0, fragment.pixmap);
             pixpainter.end();
-            val.pixmap = debugPixmap;
+            iter.value().pixmap = debugPixmap;
         }
-        painter->drawPixmapFragments(val.fragments.data(), val.count, val.pixmap);
+        painter->drawPixmapFragments(fragment.fragments.data(), fragment.count, fragment.pixmap);
     }
 #endif
 
