@@ -33,6 +33,18 @@ ApplicationWindow {
     property bool showOsmTags: false
     property int currentWaypointIndex: 0
 
+    property real animatedMargin: app.state === "none" ? 0 : -dialogLoader.height
+    property bool dialogExpanded: animatedMargin === -dialogLoader.height
+    property real mapOffset: !dialogExpanded ? animatedMargin / 2 : 0
+
+    Behavior on animatedMargin {
+        NumberAnimation {
+            id: dialogAnimation
+            duration: 200
+            easing.type: Easing.OutQuart
+        }
+    }
+
     onSelectedPlacemarkChanged: {
         if (!selectedPlacemark) {
             app.state = "none"
@@ -48,10 +60,14 @@ ApplicationWindow {
         id: mapItem
         anchors {
             top: parent.top
+            topMargin: mapOffset
             left: parent.left
             right: parent.right
-            bottom: dialogLoader.top
         }
+
+        height: !dialogExpanded
+                ? parent.height
+                : parent.height + animatedMargin
 
         PinchArea {
             anchors.fill: parent
@@ -289,8 +305,8 @@ ApplicationWindow {
 
             anchors {
                 bottom: parent.bottom
+                bottomMargin: Screen.pixelDensity * 4 - mapOffset
                 horizontalCenter: zoomToPositionButton.horizontalCenter
-                bottomMargin: Screen.pixelDensity * 4
             }
 
             onClicked: {
@@ -335,16 +351,7 @@ ApplicationWindow {
             left: parent.left
             right: parent.right
             top: parent.bottom
-            topMargin: animatedMargin
-        }
-
-        property real animatedMargin: app.state === "none" ? 0 : -height
-        Behavior on animatedMargin {
-            NumberAnimation {
-                id: dialogAnimation
-                duration: 200
-                easing.type: Easing.OutQuart
-            }
+            topMargin: app.animatedMargin
         }
 
         onLoaded: {
