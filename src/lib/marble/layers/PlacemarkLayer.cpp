@@ -86,7 +86,6 @@ bool PlacemarkLayer::render( GeoPainter *geoPainter, ViewportParams *viewport,
         // Intentionally converting positions from floating point to pixel aligned screen grid below
         QRect labelRect( mark->labelRect().toRect() );
         QPoint symbolPos( mark->symbolPosition().toPoint());
-        struct Fragment fragment;
 
         // when the map is such zoomed out that a given place
         // appears many times, we draw one placemark at each
@@ -103,17 +102,18 @@ bool PlacemarkLayer::render( GeoPainter *geoPainter, ViewportParams *viewport,
                     QRect symbolRect = mark->symbolPixmap().rect();
                     QPainter::PixmapFragment pixmapFragment = QPainter::PixmapFragment::create(QPointF(symbolPos+symbolRect.center()),QRectF(symbolRect));
 
-                    QHash<QString, Fragment>::iterator i = hash.find(mark->symbolId());
-                    if (i == hash.end()) {
+                    auto iter = hash.find(mark->symbolId());
+                    if (iter == hash.end()) {
+                        Fragment fragment;
                         fragment.count = 1;
                         fragment.pixmap = mark->symbolPixmap();
-                    }
-                    else {
-                        fragment = i.value();
+                        fragment.fragments.append(pixmapFragment);
+                        hash.insert(mark->symbolId(), fragment);
+                    } else {
+                        auto & fragment = iter.value();
+                        fragment.fragments.append(pixmapFragment);
                         ++fragment.count;
                     }
-                    fragment.fragments.append(pixmapFragment);
-                    hash.insert(mark->symbolId(), fragment);
 #else
                     painter->drawPixmap( symbolPos, mark->symbolPixmap() );
 #endif
@@ -129,17 +129,19 @@ bool PlacemarkLayer::render( GeoPainter *geoPainter, ViewportParams *viewport,
                 QRect symbolRect = mark->symbolPixmap().rect();
                 QPainter::PixmapFragment pixmapFragment = QPainter::PixmapFragment::create(QPointF(symbolPos+symbolRect.center()),QRectF(symbolRect));
 
-                QHash<QString, Fragment>::iterator i = hash.find(mark->symbolId());
-                if (i == hash.end()) {
+                auto iter = hash.find(mark->symbolId());
+                if (iter == hash.end()) {
+                    Fragment fragment;
                     fragment.count = 1;
                     fragment.pixmap = mark->symbolPixmap();
+                    fragment.fragments.append(pixmapFragment);
+                    hash.insert(mark->symbolId(), fragment);
                 }
                 else {
-                    fragment = i.value();
+                    auto & fragment = iter.value();
+                    fragment.fragments.append(pixmapFragment);
                     ++fragment.count;
                 }
-                fragment.fragments.append(pixmapFragment);
-                hash.insert(mark->symbolId(), fragment);
 #else
                 painter->drawPixmap( symbolPos, mark->symbolPixmap() );
 #endif
