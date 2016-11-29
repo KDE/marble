@@ -35,6 +35,7 @@ private:
     };
 
     void paintFrame(GeoPainter* painter, const ViewportParams *viewport);
+
     void paintRoof(GeoPainter* painter, const ViewportParams *viewport);
     void configureFramePainter(GeoPainter *painter) const;
     void initializeBuildingPainting(const GeoPainter* painter, const ViewportParams *viewport,
@@ -51,6 +52,7 @@ private:
                                QVector<QPolygonF*> &polygons,
                                QVector<QPolygonF*> &outlines
                                );
+
     static double extractBuildingHeight(const GeoDataPlacemark &placemark);
     static QString extractBuildingLabel(const GeoDataPlacemark &placemark);
     static QVector<NamedEntry> extractNamedEntries(const GeoDataPlacemark &placemark);

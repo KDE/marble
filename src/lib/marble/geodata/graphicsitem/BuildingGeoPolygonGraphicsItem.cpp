@@ -433,10 +433,9 @@ void BuildingGeoPolygonGraphicsItem::paintFrame(GeoPainter *painter, const Viewp
     initializeBuildingPainting(painter, viewport, drawAccurate3D, isCameraAboveBuilding);
 
     configureFramePainter(painter);
+
     if ( drawAccurate3D && isCameraAboveBuilding ) {
-        QVector<QPolygonF*> outlines = m_cachedOuterPolygons;
-        outlines << m_cachedInnerPolygons;
-        foreach(QPolygonF* outline, outlines) {
+        foreach(QPolygonF* outline, m_cachedOuterPolygons) {
             if (outline->isEmpty()) {
                 continue;
             }
@@ -447,8 +446,35 @@ void BuildingGeoPolygonGraphicsItem::paintFrame(GeoPainter *painter, const Viewp
             for (int i=1; i<size; ++i) {
                 QPointF const & b = (*outline)[i];
                 QPointF const shiftB = b + buildingOffset(b, viewport);
-                QPolygonF buildingSide = QPolygonF() << a << shiftA << shiftB << b;
-                painter->drawPolygon(buildingSide);
+                // perform backface culling
+                bool backface = (b.x() - a.x()) * (shiftA.y() - a.y())
+                        - (b.y() - a.y()) * (shiftA.x() - a.x()) >= 0;
+                if (!backface) {
+                    QPolygonF buildingSide = QPolygonF() << a << shiftA << shiftB << b;
+                    painter->drawPolygon(buildingSide);
+                }
+                a = b;
+                shiftA = shiftB;
+            }
+        }
+        foreach(QPolygonF* outline, m_cachedInnerPolygons) {
+            if (outline->isEmpty()) {
+                continue;
+            }
+            // draw the building sides
+            int const size = outline->size();
+            QPointF & a = (*outline)[0];
+            QPointF shiftA = a + buildingOffset(a, viewport);
+            for (int i=1; i<size; ++i) {
+                QPointF const & b = (*outline)[i];
+                QPointF const shiftB = b + buildingOffset(b, viewport);
+                // perform backface culling
+                bool backface = (b.x() - a.x()) * (shiftA.y() - a.y())
+                        - (b.y() - a.y()) * (shiftA.x() - a.x()) >= 0;
+                if (backface) {
+                    QPolygonF buildingSide = QPolygonF() << a << shiftA << shiftB << b;
+                    painter->drawPolygon(buildingSide);
+                }
                 a = b;
                 shiftA = shiftB;
             }
