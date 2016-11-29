@@ -63,6 +63,8 @@ private:
     const QVector<NamedEntry> m_entries;
     QVector<QPolygonF*> m_cachedOuterPolygons;
     QVector<QPolygonF*> m_cachedInnerPolygons;
+    QVector<QPolygonF*> m_cachedOuterRoofPolygons;
+    QVector<QPolygonF*> m_cachedInnerRoofPolygons;
     bool m_hasInnerBoundaries;
 
 };
