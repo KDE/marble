@@ -198,6 +198,8 @@ QString Placemark::description() const
         } else if (category == GeoDataPlacemark::AmenityBench) {
             int const seats = m_placemark.osmData().tagValue(QStringLiteral("seats")).toInt();
             if (seats > 0) {
+                //~ singular %n seat
+                //~ plural %n seats
                 addTagValue(m_description, QStringLiteral("seats"), tr("%1 seats", "number of seats a bench provides", seats));
             }
             addTagValue(m_description, QStringLiteral("material"));
