@@ -86,11 +86,15 @@ QString Placemark::description() const
                 category == GeoDataPlacemark::HealthHospital) {
             int const rooms = m_placemark.osmData().tagValue(QStringLiteral("rooms")).toInt();
             if (rooms > 0) {
-                addTagValue(m_description, QStringLiteral("rooms"), tr("%1 rooms", "number of rooms in a hotel or hospital", rooms));
+                //~ singular %n room
+                //~ plural %n rooms
+                addTagValue(m_description, QStringLiteral("rooms"), tr("%n rooms", 0, rooms));
             }
             int const beds = m_placemark.osmData().tagValue(QStringLiteral("beds")).toInt();
             if (beds > 0) {
-                addTagValue(m_description, QStringLiteral("beds"), tr("%1 beds", "number of beds in a hotel or hospital", beds));
+                //~ singular %n bed
+                //~ plural %n beds
+                addTagValue(m_description, QStringLiteral("beds"), tr("%n beds", 0, beds));
             }
         }
 
