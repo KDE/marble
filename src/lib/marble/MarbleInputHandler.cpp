@@ -158,7 +158,6 @@ class Q_DECL_HIDDEN MarbleDefaultInputHandler::Private
     int m_midPressedY;
     int m_startingRadius;
 
-    qreal m_startingZoom;
     // The center longitude in radian when the left mouse button has been pressed.
     qreal m_leftPressedLon;
     // The center latitude in radian when the left mouse button has been pressed.
@@ -373,7 +372,6 @@ bool MarbleDefaultInputHandler::handlePinch(const QPointF &center, qreal scaleFa
         d->m_lmbTimer.stop();
         d->m_midPressed = false;
         d->m_leftPressed = false;
-        d->m_startingZoom = marblePresenter->zoom();
         break;
     case Qt::GestureUpdated:
         zoom = marblePresenter->zoom();
