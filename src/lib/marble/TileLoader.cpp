@@ -126,10 +126,11 @@ GeoDataDocument *TileLoader::loadTileVectorData( GeoSceneVectorTileDataset const
                 return document;
             }
         }
+    } else {
+        // tile was not locally available => trigger download
+        triggerDownload( textureLayer, tileId, usage );
     }
 
-    // tile was not locally available => trigger download
-    triggerDownload( textureLayer, tileId, usage );
     return nullptr;
 }
 
