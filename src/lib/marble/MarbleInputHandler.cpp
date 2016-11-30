@@ -456,6 +456,11 @@ void MarbleDefaultInputHandler::handleMouseButtonPress(QMouseEvent *event)
 
 void MarbleDefaultInputHandler::handleLeftMouseButtonPress(QMouseEvent *event)
 {
+    // silently enable the animation context without triggering a repaint
+    MarbleInputHandler::d->m_marblePresenter->map()->blockSignals(true);
+    MarbleInputHandler::d->m_marblePresenter->setViewContext(Animation);
+    MarbleInputHandler::d->m_marblePresenter->map()->blockSignals(false);
+
     if (isMouseButtonPopupEnabled(Qt::LeftButton))
     {
         d->m_lmbTimer.start(400);
