@@ -271,17 +271,12 @@ void BuildingGeoPolygonGraphicsItem::paintRoof(GeoPainter* painter, const Viewpo
 
             painter->setPen(currentPen);
 
-            QBrush currentBrush = painter->brush();
-            painter->setBrush(QBrush(Qt::transparent));
-
             foreach( const QPolygonF* outerRoof, m_cachedOuterRoofPolygons ) {
-                painter->drawPolygon( *outerRoof );
+                painter->drawPolyline( *outerRoof );
             }
             foreach( const QPolygonF* innerRoof, m_cachedInnerRoofPolygons ) {
-                painter->drawPolygon( *innerRoof );
+                painter->drawPolyline( *innerRoof );
             }
-
-            painter->setBrush(currentBrush);
         }
         else {
             foreach( const QPolygonF* outerRoof, m_cachedOuterRoofPolygons ) {
@@ -305,19 +300,12 @@ void BuildingGeoPolygonGraphicsItem::paintRoof(GeoPainter* painter, const Viewpo
 
             painter->setPen(currentPen);
 
-            QBrush currentBrush = painter->brush();
-            painter->setBrush(QBrush(Qt::transparent));
-
             foreach( const QPolygonF* outerPolygon,  m_cachedOuterPolygons ) {
-                painter->drawPolygon( *outerPolygon );
+                painter->drawPolyline( *outerPolygon );
             }
             foreach( const QPolygonF* innerPolygon,  m_cachedInnerPolygons ) {
-                painter->drawPolygon( *innerPolygon );
+                painter->drawPolyline( *innerPolygon );
             }
-
-            painter->setBrush(currentBrush);
-
-
         }
         else {
             foreach( const QPolygonF* outerPolygon,  m_cachedOuterPolygons ) {
