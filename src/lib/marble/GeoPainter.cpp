@@ -853,7 +853,7 @@ void GeoPainter::drawPolygon ( const GeoDataPolygon & polygon,
     bool innerBoundariesOnScreen = false;
 
     if ( hasInnerBoundaries ) {
-        QVector<GeoDataLinearRing> innerBoundaries = polygon.innerBoundaries();
+        QVector<GeoDataLinearRing> const & innerBoundaries = polygon.innerBoundaries();
 
         const GeoDataLatLonAltBox & viewLatLonAltBox = d->m_viewport->viewLatLonAltBox();
         foreach( const GeoDataLinearRing& itInnerBoundary, innerBoundaries ) {
