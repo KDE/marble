@@ -56,6 +56,7 @@ ApplicationWindow {
         colorGroup: SystemPalette.Active
     }
 
+
     Item {
         id: mapItem
         anchors {
@@ -235,20 +236,7 @@ ApplicationWindow {
                     }
                 }
 
-                Search {
-                    id: search
-                    anchors.fill: parent
-                    marbleQuickItem: marbleMaps
-                    visible: !navigationManager.visible
 
-                    onItemSelected: {
-                        if (routingManager) {
-                            routingManager.addSearchResultAsPlacemark(suggestedPlacemark);
-                        }
-                        app.selectedPlacemark = suggestedPlacemark;
-                        app.state = "place"
-                    }
-                }
             }
 
             NavigationManager {
@@ -339,6 +327,21 @@ ApplicationWindow {
                     PropertyChanges { target: routeEditorButton; iconSource: currentProfileIcon }
                 }
             ]
+        }
+    }
+
+    Search {
+        id: search
+        anchors.fill: parent
+        marbleQuickItem: marbleMaps
+        visible: !navigationManager.visible
+
+        onItemSelected: {
+            if (routingManager) {
+                routingManager.addSearchResultAsPlacemark(suggestedPlacemark);
+            }
+            app.selectedPlacemark = suggestedPlacemark;
+            app.state = "place"
         }
     }
 
