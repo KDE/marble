@@ -885,17 +885,13 @@ void GeoPainter::drawPolygon ( const GeoDataPolygon & polygon,
             }
 
             setPen(currentPen);
-            QBrush currentBrush = brush();
-            setBrush(QBrush(Qt::transparent));
 
             foreach( const QPolygonF* outerPolygon, outerPolygons ) {
-                ClipPainter::drawPolygon( *outerPolygon, fillRule );
+                ClipPainter::drawPolyline( *outerPolygon );
             }
             foreach( const QPolygonF* innerPolygon, innerPolygons ) {
-                ClipPainter::drawPolygon( *innerPolygon, fillRule );
+                ClipPainter::drawPolyline( *innerPolygon );
             }
-
-            setBrush(currentBrush);
 
             qDeleteAll(fillPolygons);
         }
