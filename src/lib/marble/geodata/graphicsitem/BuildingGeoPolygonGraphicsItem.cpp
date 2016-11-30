@@ -490,7 +490,7 @@ void BuildingGeoPolygonGraphicsItem::screenPolygons(const ViewportParams *viewpo
 
     viewport->screenCoordinates( polygon->outerBoundary(), outerPolygons );
 
-    QVector<GeoDataLinearRing> innerBoundaries = polygon->innerBoundaries();
+    QVector<GeoDataLinearRing> const & innerBoundaries = polygon->innerBoundaries();
     foreach (const GeoDataLinearRing &innerBoundary, innerBoundaries) {
         QVector<QPolygonF*> innerPolygonsPerBoundary;
         viewport->screenCoordinates(innerBoundary, innerPolygonsPerBoundary);

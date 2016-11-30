@@ -66,7 +66,7 @@ void AbstractGeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportP
     configurePainter(painter, viewport);
     if ( m_polygon ) {
         bool innerResolved = false;
-        for(auto ring : m_polygon->innerBoundaries()) {
+        for(auto const & ring : m_polygon->innerBoundaries()) {
             if (viewport->resolves(ring.latLonAltBox(), 4)) {
                innerResolved = true;
                break;
