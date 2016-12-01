@@ -24,6 +24,7 @@
         <file>NavigationManager.qml</file>
         <file>PositionMarker.qml</file>
         <file>Waypoint.qml</file>
+        <file>CurrentPosition.qml</file>
         <file alias="search.png">../../../data/android/drawable-xxxhdpi/search.png</file>
         <file alias="gps_fixed.png">../../../data/android/drawable-xxxhdpi/gps_fixed.png</file>
         <file alias="gps_not_fixed.png">../../../data/android/drawable-xxxhdpi/gps_not_fixed.png</file>

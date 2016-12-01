@@ -23,6 +23,7 @@ Item {
     property alias screenAccuracy: navigation.screenAccuracy
     property alias deviated: navigation.deviated
     property bool hasRoute: false
+    property alias guidanceModeEnabled: navigation.guidanceModeEnabled
 
     onVisibleChanged: {
         if (visible) {

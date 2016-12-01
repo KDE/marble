@@ -216,8 +216,8 @@ ApplicationWindow {
 
                 PositionMarker {
                     id: positionMarker
-                    x: navigationManager.snappedPositionMarkerScreenPosition.x
-                    y: navigationManager.snappedPositionMarkerScreenPosition.y
+                    x: navigationManager.snappedPositionMarkerScreenPosition.x - positionMarker.width / 2
+                    y: navigationManager.snappedPositionMarkerScreenPosition.y - positionMarker.height / 2
                     angle: marbleMaps.angle
                     visible: marbleMaps.positionAvailable && marbleMaps.positionVisible
                     radius: navigationManager.screenAccuracy / 2
@@ -225,6 +225,11 @@ ApplicationWindow {
                     allowRadiusAnimation: !zoomDetectionTimer.running
                     allowPositionAnimation: !panningDetectionTimer.running
                     speed: marbleMaps.speed
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onPressed: app.state = "position"
+                    }
                 }
 
                 MouseArea {
@@ -297,6 +302,8 @@ ApplicationWindow {
                 horizontalCenter: zoomToPositionButton.horizontalCenter
             }
 
+            enabled: app.state !== "route" || routingManager.hasRoute
+
             onClicked: {
                 if (app.state === "route") {
                     app.state = "none"
@@ -362,11 +369,13 @@ ApplicationWindow {
               dialogLoader.item.map = marbleMaps
               dialogLoader.item.placemark = app.selectedPlacemark
               dialogLoader.item.showOsmTags = app.showOsmTags
-          }
-          if (app.state === "route") {
+          } else if (app.state === "route") {
               item.routingManager = routingManager
               item.routingProfile = routingManager.routingProfile
               item.currentIndex =  Qt.binding(function() { return app.currentWaypointIndex })
+          } else if (app.state == "position") {
+              dialogLoader.item.map = marbleMaps
+              dialogLoader.item.navigationManager = navigationManager
           }
         }
 
@@ -436,6 +445,10 @@ ApplicationWindow {
           State {
               name: "none"
               PropertyChanges { target: dialogLoader; source: "" }
+          },
+          State {
+              name: "position"
+              PropertyChanges { target: dialogLoader; source: "CurrentPosition.qml" }
           },
           State {
               name: "route"

@@ -14,6 +14,8 @@ import QtQuick.Window 2.2
 
 Item {
     id: root
+    width: arrowIndicator.width
+    height: arrowIndicator.height
 
     property real angle: 0
     property bool showAccuracy: true
