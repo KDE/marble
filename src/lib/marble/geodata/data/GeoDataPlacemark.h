@@ -198,6 +198,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
         HighwaySecondary,
         HighwayPrimaryLink,
         HighwayPrimary,
+        HighwayRaceway,
         HighwayTrunkLink,
         HighwayTrunk,
         HighwayMotorwayLink,

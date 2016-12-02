@@ -440,6 +440,7 @@ QString GeoDataPlacemark::categoryName() const
     case HighwaySecondary: return GeoDataPlacemarkPrivate::tr("Secondary Road");
     case HighwayPrimaryLink: return GeoDataPlacemarkPrivate::tr("Primary Link Road");
     case HighwayPrimary: return GeoDataPlacemarkPrivate::tr("Primary Road");
+    case HighwayRaceway: return GeoDataPlacemarkPrivate::tr("Raceway");
     case HighwayTrunkLink: return GeoDataPlacemarkPrivate::tr("Trunk Link Road");
     case HighwayTrunk: return GeoDataPlacemarkPrivate::tr("Trunk Road");
     case HighwayMotorwayLink: return GeoDataPlacemarkPrivate::tr("Motorway Link Road");

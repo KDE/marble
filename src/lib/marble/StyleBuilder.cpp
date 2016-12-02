@@ -151,6 +151,7 @@ StyleBuilder::Private::Private() :
     m_defaultMinZoomLevels[GeoDataPlacemark::HighwaySecondary]    = 9;
     m_defaultMinZoomLevels[GeoDataPlacemark::HighwayPrimaryLink]  = 10;
     m_defaultMinZoomLevels[GeoDataPlacemark::HighwayPrimary]      = 8;
+    m_defaultMinZoomLevels[GeoDataPlacemark::HighwayRaceway]      = 12;
     m_defaultMinZoomLevels[GeoDataPlacemark::HighwayTrunkLink]    = 10;
     m_defaultMinZoomLevels[GeoDataPlacemark::HighwayTrunk]        = 7;
     m_defaultMinZoomLevels[GeoDataPlacemark::HighwayMotorwayLink] = 10;
@@ -728,6 +729,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::HighwaySecondaryLink]     = createHighwayStyle("#f7fabf", "#707d05", osmFont, "000000", 6, 6);
     m_defaultStyle[GeoDataPlacemark::HighwayPrimary]           = createHighwayStyle("#fcd6a4", "#a06b00", osmFont, "000000", 9, 6);
     m_defaultStyle[GeoDataPlacemark::HighwayPrimaryLink]       = createHighwayStyle("#fcd6a4", "#a06b00", osmFont, "000000", 6, 6);
+    m_defaultStyle[GeoDataPlacemark::HighwayRaceway]           = createHighwayStyle("#ff6200", "#ff6200", osmFont, "000000", 1, 5);
     m_defaultStyle[GeoDataPlacemark::HighwayTrunk]             = createHighwayStyle("#f9b29c", "#c84e2f", osmFont, "000000", 9, 6);
     m_defaultStyle[GeoDataPlacemark::HighwayTrunkLink]         = createHighwayStyle("#f9b29c", "#c84e2f", osmFont, "000000", 9, 6);
     m_defaultStyle[GeoDataPlacemark::HighwayMotorway]          = createHighwayStyle("#e892a2", "#dc2a67", osmFont, "000000", 9, 10);
@@ -1066,6 +1068,7 @@ void StyleBuilder::Private::initializeOsmVisualCategories()
     s_visualCategories[OsmTag("highway", "trunk")]              = GeoDataPlacemark::HighwayTrunk;
     s_visualCategories[OsmTag("highway", "motorway_link")]      = GeoDataPlacemark::HighwayMotorwayLink;
     s_visualCategories[OsmTag("highway", "motorway")]           = GeoDataPlacemark::HighwayMotorway;
+    s_visualCategories[OsmTag("highway", "raceway")]            = GeoDataPlacemark::HighwayRaceway;
 
     s_visualCategories[OsmTag("natural", "water")]              = GeoDataPlacemark::NaturalWater;
     s_visualCategories[OsmTag("natural", "reef")]               = GeoDataPlacemark::NaturalReef;
@@ -1689,6 +1692,7 @@ QString StyleBuilder::visualCategoryName(GeoDataPlacemark::GeoDataVisualCategory
         visualCategoryNames[GeoDataPlacemark::HighwaySecondary] = "HighwaySecondary";
         visualCategoryNames[GeoDataPlacemark::HighwayPrimaryLink] = "HighwayPrimaryLink";
         visualCategoryNames[GeoDataPlacemark::HighwayPrimary] = "HighwayPrimary";
+        visualCategoryNames[GeoDataPlacemark::HighwayRaceway] = "HighwayRaceway";
         visualCategoryNames[GeoDataPlacemark::HighwayTrunkLink] = "HighwayTrunkLink";
         visualCategoryNames[GeoDataPlacemark::HighwayTrunk] = "HighwayTrunk";
         visualCategoryNames[GeoDataPlacemark::HighwayMotorwayLink] = "HighwayMotorwayLink";
