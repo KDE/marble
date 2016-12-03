@@ -34,11 +34,12 @@ void GeoTrackGraphicsItem::setTrack( const GeoDataTrack* track )
     update();
 }
 
-void GeoTrackGraphicsItem::paint(GeoPainter *painter, const ViewportParams *viewport , const QString &layer)
+void GeoTrackGraphicsItem::paint(GeoPainter *painter, const ViewportParams *viewport , const QString &layer, int tileZoomLevel)
 {
     Q_UNUSED(layer);
+    Q_UNUSED(tileZoomLevel);
     update();
-    GeoLineStringGraphicsItem::paint(painter, viewport, layer);
+    GeoLineStringGraphicsItem::paint(painter, viewport, layer, tileZoomLevel);
 }
 
 void GeoTrackGraphicsItem::update()

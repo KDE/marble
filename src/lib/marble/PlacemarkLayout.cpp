@@ -288,10 +288,8 @@ void PlacemarkLayout::resetCacheData()
     emit repaintNeeded();
 }
 
-QSet<TileId> PlacemarkLayout::visibleTiles( const ViewportParams *viewport )
+QSet<TileId> PlacemarkLayout::visibleTiles( const ViewportParams *viewport, int zoomLevel ) const
 {
-    int zoomLevel = qLn( viewport->radius()/64.0 ) / qLn( 2.0 );
-
     /*
      * rely on m_placemarkCache to find the placemarks for the tiles which
      * matter. The top level tiles have the more popular placemarks,
@@ -340,7 +338,7 @@ QSet<TileId> PlacemarkLayout::visibleTiles( const ViewportParams *viewport )
     return tileIdSet;
 }
 
-QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParams *viewport )
+QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParams *viewport, int tileLevel )
 {
     m_runtimeTrace.clear();
     if ( m_placemarkModel->rowCount() <= 0 )
@@ -398,7 +396,7 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParam
     const QItemSelection selection = m_selectionModel->selection();
 
     QList<const GeoDataPlacemark*> placemarkList;
-    foreach ( const TileId &tileId, visibleTiles( viewport ) ) {
+    foreach ( const TileId &tileId, visibleTiles( viewport, tileLevel ) ) {
         placemarkList += m_placemarkCache.value( tileId );
     }
     std::sort(placemarkList.begin(), placemarkList.end(), GeoDataPlacemark::placemarkLayoutOrderCompare);

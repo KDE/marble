@@ -88,11 +88,13 @@ public:
     QList<ScreenOverlayGraphicsItem*> m_items;
 
     QHash<qint64,OsmLineStringItems> m_osmLineStringItems;
+    int m_tileLevel;
 };
 
 GeometryLayerPrivate::GeometryLayerPrivate(const QAbstractItemModel *model, const StyleBuilder *styleBuilder) :
     m_model(model),
-    m_styleBuilder(styleBuilder)
+    m_styleBuilder(styleBuilder),
+    m_tileLevel(0)
 {
 }
 
@@ -136,7 +138,7 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
 
     painter->save();
 
-    const int maxZoomLevel = qMin<int>(qMax<int>(qLn(viewport->radius()*4/256)/qLn(2.0), 1), d->m_styleBuilder->maximumZoomLevel());
+    const int maxZoomLevel = qMin(d->m_tileLevel, d->m_styleBuilder->maximumZoomLevel());
     QList<GeoGraphicsItem*> items = d->m_scene.items( viewport->viewLatLonAltBox(), maxZoomLevel );
 
     typedef QPair<QString, GeoGraphicsItem*> LayerItem;
@@ -181,12 +183,12 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
         std::stable_sort(layerItems.negative.begin(), layerItems.negative.end(), GeoGraphicsItem::zValueLessThan);
         // The idea here is that layerItems.null has most items and needs not to be sorted => faster
         std::stable_sort(layerItems.positive.begin(), layerItems.positive.end(), GeoGraphicsItem::zValueLessThan);
-        foreach(auto item, layerItems.negative) { item->paint(painter, viewport, layer); }
-        foreach(auto item, layerItems.null) { item->paint(painter, viewport, layer); }
-        foreach(auto item, layerItems.positive) { item->paint(painter, viewport, layer); }
+        foreach(auto item, layerItems.negative) { item->paint(painter, viewport, layer, d->m_tileLevel); }
+        foreach(auto item, layerItems.null) { item->paint(painter, viewport, layer, d->m_tileLevel); }
+        foreach(auto item, layerItems.positive) { item->paint(painter, viewport, layer, d->m_tileLevel); }
     }
     foreach(const auto & item, defaultLayer) {
-        item.second->paint(painter, viewport, item.first);
+        item.second->paint(painter, viewport, item.first, d->m_tileLevel);
     }
 
     foreach( ScreenOverlayGraphicsItem* item, d->m_items ) {
@@ -196,7 +198,7 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
     painter->restore();
     d->m_runtimeTrace = QStringLiteral("Geometries: %1 Zoom: %2")
                 .arg( items.size() )
-                .arg( maxZoomLevel );
+                .arg( d->m_tileLevel );
     return true;
 }
 
@@ -437,9 +439,14 @@ void GeometryLayer::resetCacheData()
     emit repaintNeeded();
 }
 
+void GeometryLayer::setTileLevel(int tileLevel)
+{
+    d->m_tileLevel = tileLevel;
+}
+
 QVector<const GeoDataFeature*> GeometryLayer::whichFeatureAt(const QPoint &curpos, const ViewportParams *viewport)
 {
-    const int maxZoom = qMin<int>(qMax<int>(qLn(viewport->radius()*4/256)/qLn(2.0), 1), d->m_styleBuilder->maximumZoomLevel());
+    const int maxZoom = qMin<int>(d->m_tileLevel, d->m_styleBuilder->maximumZoomLevel());
     QVector<const GeoDataFeature*> result;
     foreach ( GeoGraphicsItem * item, d->m_scene.items( viewport->viewLatLonAltBox(), maxZoom ) ) {
         if ( item->feature()->nodeType() == GeoDataTypes::GeoDataPhotoOverlayType ) {
@@ -477,7 +484,7 @@ QVector<const GeoDataFeature *> GeometryLayer::whichBuildingAt(const QPoint &cur
     }
     GeoDataCoordinates const coordinates = GeoDataCoordinates(lon, lat);
 
-    const int maxZoom = qMin<int>(qMax<int>(qLn(viewport->radius()*4/256)/qLn(2.0), 1), d->m_styleBuilder->maximumZoomLevel());
+    const int maxZoom = qMin<int>(d->m_tileLevel, d->m_styleBuilder->maximumZoomLevel());
     foreach ( GeoGraphicsItem * item, d->m_scene.items( viewport->viewLatLonAltBox(), maxZoom ) ) {
         if (item->feature()->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
             const GeoDataPlacemark* placemark = static_cast<const GeoDataPlacemark*>(item->feature());

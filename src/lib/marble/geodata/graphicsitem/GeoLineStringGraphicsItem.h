@@ -34,7 +34,7 @@ public:
 
     virtual const GeoDataLatLonAltBox& latLonAltBox() const;
 
-    void paint(GeoPainter* painter, const ViewportParams *viewport, const QString &layer);
+    void paint(GeoPainter* painter, const ViewportParams *viewport, const QString &layer, int tileZoomLevel);
 
 private:
     void paintOutline(GeoPainter *painter, const ViewportParams *viewport);

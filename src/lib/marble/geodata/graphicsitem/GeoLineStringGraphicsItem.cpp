@@ -119,9 +119,8 @@ const GeoDataLatLonAltBox& GeoLineStringGraphicsItem::latLonAltBox() const
     return m_renderLineString->latLonAltBox();
 }
 
-void GeoLineStringGraphicsItem::paint(GeoPainter* painter, const ViewportParams* viewport , const QString &layer)
+void GeoLineStringGraphicsItem::paint(GeoPainter* painter, const ViewportParams* viewport , const QString &layer, int tileLevel)
 {
-    int const tileLevel = qLn( viewport->radius() / 64.0 ) / qLn( 2.0 );
     setRenderContext(RenderContext(tileLevel));
 
     if (layer.endsWith(QLatin1String("/outline"))) {

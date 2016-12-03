@@ -58,9 +58,10 @@ const GeoDataLatLonAltBox& AbstractGeoPolygonGraphicsItem::latLonAltBox() const
     return m_ring->latLonAltBox();
 }
 
-void AbstractGeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportParams* viewport, const QString &layer )
+void AbstractGeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportParams* viewport, const QString &layer, int tileZoomLevel)
 {
     Q_UNUSED(layer);
+    Q_UNUSED(tileZoomLevel);
 
     painter->save();
     configurePainter(painter, viewport);

@@ -51,10 +51,11 @@ PlacemarkTextAnnotation::~PlacemarkTextAnnotation()
     // nothing to do
 }
 
-void PlacemarkTextAnnotation::paint( GeoPainter *painter, const ViewportParams *viewport, const QString &layer )
+void PlacemarkTextAnnotation::paint(GeoPainter *painter, const ViewportParams *viewport, const QString &layer , int tileZoomLevel)
 {
     Q_UNUSED(layer);
     Q_UNUSED( painter );
+    Q_UNUSED(tileZoomLevel);
     m_viewport = viewport;
 
     GeoDataStyle::Ptr newStyle(new GeoDataStyle(*placemark()->style()));

@@ -72,7 +72,7 @@ class PlacemarkLayout : public QObject
     /**
      * @reimp
      */
-    QVector<VisiblePlacemark *> generateLayout( const ViewportParams *viewport );
+    QVector<VisiblePlacemark *> generateLayout(const ViewportParams *viewport , int tileLevel);
 
     /**
      * Returns a list of model indexes that are at position @p pos.
@@ -115,7 +115,7 @@ class PlacemarkLayout : public QObject
 
     void styleReset();
 
-    static QSet<TileId> visibleTiles( const ViewportParams *viewport );
+    QSet<TileId> visibleTiles( const ViewportParams *viewport, int tileLevel ) const;
     bool layoutPlacemark(const GeoDataPlacemark *placemark, const GeoDataCoordinates &coordinates, qreal x, qreal y, bool selected );
 
     /**

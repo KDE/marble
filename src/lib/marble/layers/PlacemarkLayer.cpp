@@ -36,7 +36,8 @@ PlacemarkLayer::PlacemarkLayer(QAbstractItemModel *placemarkModel,
                                 QObject *parent ) :
     QObject( parent ),
     m_layout( placemarkModel, selectionModel, clock, styleBuilder ),
-    m_debugModeEnabled(false)
+    m_debugModeEnabled(false),
+    m_tileLevel(0)
 {
     m_useXWorkaround = testXBug();
     mDebug() << "Use workaround: " << ( m_useXWorkaround ? "1" : "0" );
@@ -64,7 +65,7 @@ bool PlacemarkLayer::render( GeoPainter *geoPainter, ViewportParams *viewport,
     Q_UNUSED( renderPos )
     Q_UNUSED( layer )
 
-    QVector<VisiblePlacemark*> visiblePlacemarks = m_layout.generateLayout( viewport );
+    QVector<VisiblePlacemark*> visiblePlacemarks = m_layout.generateLayout( viewport, m_tileLevel );
     // draw placemarks less important first
     QVector<VisiblePlacemark*>::const_iterator visit = visiblePlacemarks.constEnd();
     QVector<VisiblePlacemark*>::const_iterator itEnd = visiblePlacemarks.constBegin();
@@ -246,6 +247,11 @@ void PlacemarkLayer::setShowMaria( bool show )
 void PlacemarkLayer::requestStyleReset()
 {
     m_layout.requestStyleReset();
+}
+
+void PlacemarkLayer::setTileLevel(int tileLevel)
+{
+    m_tileLevel = tileLevel;
 }
 
 

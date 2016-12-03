@@ -31,9 +31,10 @@ GeoPhotoGraphicsItem::GeoPhotoGraphicsItem( const GeoDataFeature *feature )
     }
 }
 
-void GeoPhotoGraphicsItem::paint(GeoPainter* painter, const ViewportParams* viewport , const QString &layer)
+void GeoPhotoGraphicsItem::paint(GeoPainter* painter, const ViewportParams* viewport , const QString &layer, int tileZoomLevel)
 {
     Q_UNUSED(layer);
+    Q_UNUSED(tileZoomLevel);
     /* The code below loads the image lazily (only
     * when it will actually be displayed). Once it was
     * loaded but moves out of the viewport, it is unloaded

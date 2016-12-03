@@ -58,9 +58,10 @@ PolylineAnnotation::~PolylineAnnotation()
     delete m_animation;
 }
 
-void PolylineAnnotation::paint(GeoPainter *painter, const ViewportParams *viewport , const QString &layer)
+void PolylineAnnotation::paint(GeoPainter *painter, const ViewportParams *viewport , const QString &layer, int tileZoomLevel)
 {
     Q_UNUSED(layer);
+    Q_UNUSED(tileZoomLevel);
     m_viewport = viewport;
     Q_ASSERT( placemark()->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType );
 

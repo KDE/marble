@@ -59,9 +59,10 @@ AreaAnnotation::~AreaAnnotation()
     delete m_animation;
 }
 
-void AreaAnnotation::paint(GeoPainter *painter, const ViewportParams *viewport , const QString &layer)
+void AreaAnnotation::paint(GeoPainter *painter, const ViewportParams *viewport , const QString &layer, int tileZoomLevel)
 {
     Q_UNUSED(layer);
+    Q_UNUSED(tileZoomLevel);
     m_viewport = viewport;
     Q_ASSERT( placemark()->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType );
 

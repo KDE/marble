@@ -28,10 +28,11 @@ GeoPointGraphicsItem::GeoPointGraphicsItem(const GeoDataPlacemark *placemark, co
     }
 }
 
-void GeoPointGraphicsItem::paint(GeoPainter* painter, const ViewportParams* viewport , const QString &layer)
+void GeoPointGraphicsItem::paint(GeoPainter* painter, const ViewportParams* viewport , const QString &layer, int tileLevel)
 {
     Q_UNUSED(viewport);
     Q_UNUSED(layer);
+    Q_UNUSED(tileLevel);
     painter->drawPoint(*m_point);
 }
 

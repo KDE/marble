@@ -101,6 +101,7 @@ class PlacemarkLayer : public QObject, public LayerInterface
    void setShowMaria( bool show );
 
    void requestStyleReset();
+   void setTileLevel(int tileLevel);
 
  Q_SIGNALS:
    void repaintNeeded();
@@ -111,6 +112,7 @@ class PlacemarkLayer : public QObject, public LayerInterface
 
     PlacemarkLayout m_layout;
     bool m_debugModeEnabled;
+    int m_tileLevel;
 };
 
 }

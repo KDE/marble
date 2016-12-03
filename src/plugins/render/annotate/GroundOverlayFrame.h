@@ -56,7 +56,7 @@ public:
     virtual const char *graphicType() const;
 
 protected:
-    virtual void paint( GeoPainter *painter, const ViewportParams *viewport, const QString &layer );
+    virtual void paint( GeoPainter *painter, const ViewportParams *viewport, const QString &layer, int tileZoomLevel );
     virtual bool mousePressEvent( QMouseEvent *event );
     virtual bool mouseMoveEvent( QMouseEvent *event );
     virtual bool mouseReleaseEvent( QMouseEvent *event );

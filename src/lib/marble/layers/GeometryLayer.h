@@ -56,6 +56,7 @@ public Q_SLOTS:
     void addPlacemarks( const QModelIndex& index, int first, int last );
     void removePlacemarks( const QModelIndex& index, int first, int last );
     void resetCacheData();
+    void setTileLevel(int tileLevel);
 
     /**
      * Finds all placemarks that contain the clicked point.

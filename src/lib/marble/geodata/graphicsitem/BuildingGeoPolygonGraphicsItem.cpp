@@ -207,8 +207,9 @@ QVector<BuildingGeoPolygonGraphicsItem::NamedEntry> BuildingGeoPolygonGraphicsIt
     return entries;
 }
 
-void BuildingGeoPolygonGraphicsItem::paint(GeoPainter* painter, const ViewportParams* viewport, const QString &layer)
+void BuildingGeoPolygonGraphicsItem::paint(GeoPainter* painter, const ViewportParams* viewport, const QString &layer, int tileZoomLevel)
 {
+    Q_UNUSED(tileZoomLevel);
     if (layer.endsWith(QLatin1String("/frame"))) {
         Q_ASSERT(m_cachedOuterPolygons.isEmpty());
         Q_ASSERT(m_cachedInnerPolygons.isEmpty());

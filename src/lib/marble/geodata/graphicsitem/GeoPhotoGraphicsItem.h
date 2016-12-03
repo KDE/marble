@@ -29,7 +29,7 @@ public:
 
     GeoDataPoint point() const;
 
-    virtual void paint(GeoPainter* painter, const ViewportParams *viewport, const QString &layer);
+    virtual void paint(GeoPainter* painter, const ViewportParams *viewport, const QString &layer, int tileZoomLevel);
 
     virtual const GeoDataLatLonAltBox& latLonAltBox() const;
 

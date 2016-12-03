@@ -25,7 +25,7 @@ class MARBLE_EXPORT GeoPointGraphicsItem : public GeoGraphicsItem
 public:
     explicit GeoPointGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataPoint *point);
 
-    virtual void paint(GeoPainter* painter, const ViewportParams *viewport, const QString &layer);
+    virtual void paint(GeoPainter* painter, const ViewportParams *viewport, const QString &layer, int tileLevel);
 
     virtual const GeoDataLatLonAltBox& latLonAltBox() const;
 

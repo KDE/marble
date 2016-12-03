@@ -100,9 +100,10 @@ GroundOverlayFrame::GroundOverlayFrame( GeoDataPlacemark *placemark,
     setPaintLayers(QStringList() << "GroundOverlayFrame");
 }
 
-void GroundOverlayFrame::paint(GeoPainter *painter, const ViewportParams *viewport , const QString &layer)
+void GroundOverlayFrame::paint(GeoPainter *painter, const ViewportParams *viewport , const QString &layer, int tileZoomLevel)
 {
     Q_UNUSED(layer);
+    Q_UNUSED(tileZoomLevel);
     m_viewport = viewport;
     m_regionList.clear();
 

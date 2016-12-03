@@ -25,7 +25,7 @@ public:
     explicit PlacemarkTextAnnotation( GeoDataPlacemark *placemark );
     ~PlacemarkTextAnnotation();
 
-    virtual void paint(GeoPainter *painter, const ViewportParams *viewport, const QString &layer);
+    virtual void paint(GeoPainter *painter, const ViewportParams *viewport, const QString &layer, int tileZoomLevel);
 
     virtual bool containsPoint( const QPoint &eventPos ) const;
 

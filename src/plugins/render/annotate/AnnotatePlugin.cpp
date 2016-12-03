@@ -238,14 +238,14 @@ const QList<QActionGroup*> *AnnotatePlugin::actionGroups() const
     return &m_actions;
 }
 
-bool AnnotatePlugin::render( GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer )
+bool AnnotatePlugin::render(GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer)
 {
     Q_UNUSED( renderPos );
     Q_UNUSED( layer );
 
     QListIterator<SceneGraphicsItem*> iter( m_graphicsItems );
     while ( iter.hasNext() ) {
-        iter.next()->paint( painter, viewport, "Annotation" );
+        iter.next()->paint( painter, viewport, "Annotation", -1 );
     }
 
     return true;

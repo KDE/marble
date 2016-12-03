@@ -34,7 +34,7 @@ protected:
 
 public:
     virtual const GeoDataLatLonAltBox& latLonAltBox() const;
-    virtual void paint(GeoPainter* painter, const ViewportParams *viewport, const QString &layer);
+    virtual void paint(GeoPainter* painter, const ViewportParams *viewport, const QString &layer, int tileZoomLevel);
 
 protected:
     QPen configurePainter(GeoPainter* painter, const ViewportParams *viewport);
