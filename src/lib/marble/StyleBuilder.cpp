@@ -757,7 +757,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::NaturalCliff]             = createWayStyle(Qt::transparent, Qt::transparent, true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/cliff2.png"));
     m_defaultStyle[GeoDataPlacemark::NaturalHeath]             = createWayStyle("#d6d99f", QColor("#d6d99f").darker(150), true, false);
 
-    m_defaultStyle[GeoDataPlacemark::LeisureGolfCourse]        = createWayStyle(QColor("#b5e3b5"), QColor("#b5e3b5").darker(150), true, true);
+    m_defaultStyle[GeoDataPlacemark::LeisureGolfCourse]        = createOsmPOIAreaStyle(osmFont, "leisure/golf", "#39ac39", "#b5e3b5", QColor(Qt::transparent));
     m_defaultStyle[GeoDataPlacemark::LeisureMarina]            = createOsmPOIStyle(osmFont, QString(), QColor("#95abd5"), QColor("#aec8d1"), QColor("#95abd5").darker(150));
     m_defaultStyle[GeoDataPlacemark::LeisurePark]              = createWayStyle(QColor("#c8facc"), QColor("#c8facc").darker(150), true, true);
     m_defaultStyle[GeoDataPlacemark::LeisurePlayground]        = createOsmPOIAreaStyle(osmFont, "amenity/playground.16", amenityColor, "#CCFFF1", "#BDFFED");
@@ -1468,6 +1468,7 @@ QStringList StyleBuilder::renderOrder() const
             }
         }
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::Bathymetry);
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::LeisureGolfCourse);
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::NaturalBeach);
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::NaturalWetland);
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::NaturalGlacier);
