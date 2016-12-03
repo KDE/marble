@@ -29,6 +29,7 @@
 #include <QDate>
 #include <QSet>
 #include <QScreen>
+#include <QDebug>
 
 namespace Marble {
 
