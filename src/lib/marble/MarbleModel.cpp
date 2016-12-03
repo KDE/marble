@@ -106,6 +106,7 @@ class MarbleModelPrivate
         m_placemarkProxyModel.setFilterFixedString( GeoDataTypes::GeoDataPlacemarkType );
         m_placemarkProxyModel.setFilterKeyColumn( 1 );
         m_placemarkProxyModel.setSourceModel( &m_descendantProxy );
+        m_placemarkSelectionModel.setModel(&m_placemarkProxyModel);
 
         m_groundOverlayProxyModel.setFilterFixedString( GeoDataTypes::GeoDataGroundOverlayType );
         m_groundOverlayProxyModel.setFilterKeyColumn( 1 );
