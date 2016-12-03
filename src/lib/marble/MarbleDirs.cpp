@@ -101,10 +101,11 @@ QStringList MarbleDirs::entryList( const QString& relativePath, QDir::Filters fi
 
 QStringList MarbleDirs::pluginEntryList( const QString& relativePath, QDir::Filters filters )
 {
-    QStringList filesLocal = QDir(MarbleDirs::pluginLocalPath() + QLatin1Char('/') + relativePath).entryList(filters);
-    QStringList filesSystem = QDir(MarbleDirs::pluginSystemPath() + QLatin1Char('/') + relativePath).entryList(filters);
-    QStringList allFiles( filesLocal );
-    allFiles << filesSystem;
+    QStringList allFiles = QDir(MarbleDirs::pluginLocalPath() + QLatin1Char('/') + relativePath).entryList(filters);
+    auto const pluginSystemPath = MarbleDirs::pluginSystemPath();
+    if (!pluginSystemPath.isEmpty()) {
+        allFiles << QDir(pluginSystemPath + QLatin1Char('/') + relativePath).entryList(filters);
+    }
 
     // remove duplicate entries
     allFiles.sort();
