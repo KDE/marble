@@ -49,6 +49,8 @@ public:
 
     void addSearchResult( const QVector<GeoDataPlacemark *> &result );
     void cleanupSearchTask( SearchTask *task );
+    void notifySearchResultChange();
+    void notifySearchFinished();
 
     SearchRunnerManager *const q;
     const MarbleModel *const m_marbleModel;
@@ -122,8 +124,7 @@ void SearchRunnerManager::Private::addSearchResult( const QVector<GeoDataPlacema
     }
     m_model.addPlacemarks( start, count );
     m_modelMutex.unlock();
-    emit q->searchResultChanged( &m_model );
-    emit q->searchResultChanged( m_placemarkContainer );
+    notifySearchResultChange();
 }
 
 void SearchRunnerManager::Private::cleanupSearchTask( SearchTask *task )
@@ -132,12 +133,22 @@ void SearchRunnerManager::Private::cleanupSearchTask( SearchTask *task )
     mDebug() << "removing search task" << m_searchTasks.size() << (quintptr)task;
     if ( m_searchTasks.isEmpty() ) {
         if( m_placemarkContainer.isEmpty() ) {
-            emit q->searchResultChanged( &m_model );
-            emit q->searchResultChanged( m_placemarkContainer );
+            notifySearchResultChange();
         }
-        emit q->searchFinished( m_lastSearchTerm );
-        emit q->placemarkSearchFinished();
+        notifySearchFinished();
     }
+}
+
+void SearchRunnerManager::Private::notifySearchResultChange()
+{
+    emit q->searchResultChanged(&m_model);
+    emit q->searchResultChanged(m_placemarkContainer);
+}
+
+void SearchRunnerManager::Private::notifySearchFinished()
+{
+    emit q->searchFinished(m_lastSearchTerm);
+    emit q->placemarkSearchFinished();
 }
 
 SearchRunnerManager::SearchRunnerManager( const MarbleModel *marbleModel, QObject *parent ) :
@@ -157,10 +168,8 @@ SearchRunnerManager::~SearchRunnerManager()
 void SearchRunnerManager::findPlacemarks( const QString &searchTerm, const GeoDataLatLonBox &preferred )
 {
     if ( searchTerm == d->m_lastSearchTerm && preferred == d->m_lastPreferredBox ) {
-      emit searchResultChanged( &d->m_model );
-      emit searchResultChanged( d->m_placemarkContainer );
-      emit searchFinished( searchTerm );
-      emit placemarkSearchFinished();
+      d->notifySearchResultChange();
+      d->notifySearchFinished();
       return;
     }
 
@@ -174,11 +183,10 @@ void SearchRunnerManager::findPlacemarks( const QString &searchTerm, const GeoDa
     qDeleteAll( d->m_placemarkContainer );
     d->m_placemarkContainer.clear();
     d->m_modelMutex.unlock();
-    emit searchResultChanged( &d->m_model );
+    d->notifySearchResultChange();
 
     if ( searchTerm.trimmed().isEmpty() ) {
-        emit searchFinished( searchTerm );
-        emit placemarkSearchFinished();
+        d->notifySearchFinished();
         return;
     }
 
