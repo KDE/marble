@@ -106,6 +106,7 @@ private:
     QString m_landmassFile;
     QSharedPointer<Download> m_download;
     int m_maxZoomLevel;
+    static QMap<int, TagsFilter::Tags> m_tags;
 };
 
 }

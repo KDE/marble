@@ -117,12 +117,10 @@ QList<OsmTagEditorWidgetPrivate::OsmTag> OsmTagEditorWidgetPrivate::recommendedT
 
     QStringList filter = generateTagFilter();
 
-    QHash<OsmTag, GeoDataPlacemark::GeoDataVisualCategory>::const_iterator it = StyleBuilder::begin();
-    QHash<OsmTag, GeoDataPlacemark::GeoDataVisualCategory>::const_iterator end = StyleBuilder::end();
-
-    for ( ; it != end; ++it ) {
-        if ( filter.contains( it.key().first ) ) {
-            recommendedTags += it.key();
+    auto const osmTagMapping = StyleBuilder::osmTagMapping();
+    for (auto iter=osmTagMapping.begin(), end=osmTagMapping.end() ; iter != end; ++iter) {
+        if ( filter.contains( iter.key().first ) ) {
+            recommendedTags += iter.key();
         }
     }
 

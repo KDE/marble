@@ -82,8 +82,8 @@ public:
     static QString createPaintLayerItem(const QString &itemType, GeoDataPlacemark::GeoDataVisualCategory visualCategory, const QString &subType = QString());
 
     static void initializeOsmVisualCategories();
+    static void initializeMinimumZoomLevels();
 
-    int m_defaultMinZoomLevels[GeoDataPlacemark::LastIndex];
     int m_maximumZoomLevel;
     QColor m_defaultLabelColor;
     QFont m_defaultFont;
@@ -96,9 +96,13 @@ public:
      * @brief s_visualCategories contains osm tag mappings to GeoDataVisualCategories
      */
     static QHash<OsmTag, GeoDataPlacemark::GeoDataVisualCategory> s_visualCategories;
+    static int s_defaultMinZoomLevels[GeoDataPlacemark::LastIndex];
+    static bool s_defaultMinZoomLevelsInitialized;
 };
 
 QHash<StyleBuilder::OsmTag, GeoDataPlacemark::GeoDataVisualCategory> StyleBuilder::Private::s_visualCategories;
+int StyleBuilder::Private::s_defaultMinZoomLevels[GeoDataPlacemark::LastIndex];
+bool StyleBuilder::Private::s_defaultMinZoomLevelsInitialized = false;
 
 StyleBuilder::Private::Private() :
     m_maximumZoomLevel(15),
@@ -107,133 +111,9 @@ StyleBuilder::Private::Private() :
     m_defaultStyle(),
     m_defaultStyleInitialized(false)
 {
-    for ( int i = 0; i < GeoDataPlacemark::LastIndex; i++ )
-        m_defaultMinZoomLevels[i] = m_maximumZoomLevel;
-
-    m_defaultMinZoomLevels[GeoDataPlacemark::Default]             = 1;
-    m_defaultMinZoomLevels[GeoDataPlacemark::PlaceCity]           = 9;
-    m_defaultMinZoomLevels[GeoDataPlacemark::PlaceCityCapital]    = 9;
-    m_defaultMinZoomLevels[GeoDataPlacemark::PlaceSuburb]         = 13;
-    m_defaultMinZoomLevels[GeoDataPlacemark::PlaceHamlet]         = 15;
-    m_defaultMinZoomLevels[GeoDataPlacemark::PlaceLocality]       = 15;
-    m_defaultMinZoomLevels[GeoDataPlacemark::PlaceTown]           = 11;
-    m_defaultMinZoomLevels[GeoDataPlacemark::PlaceTownCapital]    = 11;
-    m_defaultMinZoomLevels[GeoDataPlacemark::PlaceVillage]        = 13;
-    m_defaultMinZoomLevels[GeoDataPlacemark::PlaceVillageCapital] = 13;
-    m_defaultMinZoomLevels[GeoDataPlacemark::NaturalReef]         = 3;
-    m_defaultMinZoomLevels[GeoDataPlacemark::NaturalWater]        = 3;
-    m_defaultMinZoomLevels[GeoDataPlacemark::NaturalWood]         = 8;
-    m_defaultMinZoomLevels[GeoDataPlacemark::NaturalBeach]        = 10;
-    m_defaultMinZoomLevels[GeoDataPlacemark::NaturalWetland]      = 10;
-    m_defaultMinZoomLevels[GeoDataPlacemark::NaturalGlacier]      = 3;
-    m_defaultMinZoomLevels[GeoDataPlacemark::NaturalIceShelf]     = 3;
-    m_defaultMinZoomLevels[GeoDataPlacemark::NaturalScrub]        = 10;
-    m_defaultMinZoomLevels[GeoDataPlacemark::NaturalCliff]        = 15;
-    m_defaultMinZoomLevels[GeoDataPlacemark::NaturalPeak]         = 11;
-    m_defaultMinZoomLevels[GeoDataPlacemark::BarrierCityWall]     = 15;
-    m_defaultMinZoomLevels[GeoDataPlacemark::Building]            = 15;
-
-    m_defaultMinZoomLevels[GeoDataPlacemark::ManmadeBridge]       = 15;
-
-        // OpenStreetMap highways
-    m_defaultMinZoomLevels[GeoDataPlacemark::HighwaySteps]        = 15;
-    m_defaultMinZoomLevels[GeoDataPlacemark::HighwayUnknown]      = 13;
-    m_defaultMinZoomLevels[GeoDataPlacemark::HighwayPath]         = 13;
-    m_defaultMinZoomLevels[GeoDataPlacemark::HighwayTrack]        = 13;
-    m_defaultMinZoomLevels[GeoDataPlacemark::HighwayPedestrian]   = 13;
-    m_defaultMinZoomLevels[GeoDataPlacemark::HighwayFootway]      = 13;
-    m_defaultMinZoomLevels[GeoDataPlacemark::HighwayCycleway]     = 13;
-    m_defaultMinZoomLevels[GeoDataPlacemark::HighwayService]      = 13;
-    m_defaultMinZoomLevels[GeoDataPlacemark::HighwayRoad]         = 13;
-    m_defaultMinZoomLevels[GeoDataPlacemark::HighwayTertiaryLink] = 10;
-    m_defaultMinZoomLevels[GeoDataPlacemark::HighwayTertiary]     = 10;
-    m_defaultMinZoomLevels[GeoDataPlacemark::HighwaySecondaryLink]= 10;
-    m_defaultMinZoomLevels[GeoDataPlacemark::HighwaySecondary]    = 9;
-    m_defaultMinZoomLevels[GeoDataPlacemark::HighwayPrimaryLink]  = 10;
-    m_defaultMinZoomLevels[GeoDataPlacemark::HighwayPrimary]      = 8;
-    m_defaultMinZoomLevels[GeoDataPlacemark::HighwayRaceway]      = 12;
-    m_defaultMinZoomLevels[GeoDataPlacemark::HighwayTrunkLink]    = 10;
-    m_defaultMinZoomLevels[GeoDataPlacemark::HighwayTrunk]        = 7;
-    m_defaultMinZoomLevels[GeoDataPlacemark::HighwayMotorwayLink] = 10;
-    m_defaultMinZoomLevels[GeoDataPlacemark::HighwayMotorway]     = 6;
-    m_defaultMinZoomLevels[GeoDataPlacemark::TransportAirportRunway] = 15;
-    m_defaultMinZoomLevels[GeoDataPlacemark::TransportAirportTaxiway] = 15;
-    m_defaultMinZoomLevels[GeoDataPlacemark::TransportAirportApron] = 15;
-    m_defaultMinZoomLevels[GeoDataPlacemark::TransportSpeedCamera] = 17;
-
-#if 0 // not needed as long as default min zoom level is 15
-    for(int i = GeoDataPlacemark::AccomodationCamping; i <= GeoDataPlacemark::ReligionSikh; i++)
-        s_defaultMinZoomLevels[i] = 15;
-#endif
-
-    m_defaultMinZoomLevels[GeoDataPlacemark::AmenityGraveyard]    = 14;
-    m_defaultMinZoomLevels[GeoDataPlacemark::AmenityFountain]     = 17;
-    m_defaultMinZoomLevels[GeoDataPlacemark::AmenityBench]        = 19;
-    m_defaultMinZoomLevels[GeoDataPlacemark::AmenityWasteBasket]  = 19;
-
-    m_defaultMinZoomLevels[GeoDataPlacemark::MilitaryDangerArea]  = 11;
-
-    m_defaultMinZoomLevels[GeoDataPlacemark::LeisureMarina]       = 13;
-    m_defaultMinZoomLevels[GeoDataPlacemark::LeisurePark]         = 11;
-    m_defaultMinZoomLevels[GeoDataPlacemark::LeisurePlayground]   = 11;
-    m_defaultMinZoomLevels[GeoDataPlacemark::LanduseAllotments]   = 11;
-    m_defaultMinZoomLevels[GeoDataPlacemark::LanduseBasin]        = 11;
-    m_defaultMinZoomLevels[GeoDataPlacemark::LanduseCemetery]     = 11;
-    m_defaultMinZoomLevels[GeoDataPlacemark::LanduseCommercial]   = 11;
-    m_defaultMinZoomLevels[GeoDataPlacemark::LanduseConstruction] = 11;
-    m_defaultMinZoomLevels[GeoDataPlacemark::LanduseFarmland]     = 11;
-    m_defaultMinZoomLevels[GeoDataPlacemark::LanduseFarmyard]     = 11;
-    m_defaultMinZoomLevels[GeoDataPlacemark::LanduseGarages]      = 11;
-    m_defaultMinZoomLevels[GeoDataPlacemark::LanduseGrass]        = 11;
-    m_defaultMinZoomLevels[GeoDataPlacemark::LanduseIndustrial]   = 11;
-    m_defaultMinZoomLevels[GeoDataPlacemark::LanduseLandfill]     = 11;
-    m_defaultMinZoomLevels[GeoDataPlacemark::LanduseMeadow]       = 11;
-    m_defaultMinZoomLevels[GeoDataPlacemark::LanduseMilitary]     = 11;
-    m_defaultMinZoomLevels[GeoDataPlacemark::LanduseQuarry]       = 11;
-    m_defaultMinZoomLevels[GeoDataPlacemark::LanduseRailway]      = 11;
-    m_defaultMinZoomLevels[GeoDataPlacemark::LanduseReservoir]    = 11;
-    m_defaultMinZoomLevels[GeoDataPlacemark::LanduseResidential]  = 11;
-    m_defaultMinZoomLevels[GeoDataPlacemark::LanduseRetail]       = 11;
-    m_defaultMinZoomLevels[GeoDataPlacemark::LanduseOrchard]      = 14;
-    m_defaultMinZoomLevels[GeoDataPlacemark::LanduseVineyard]     = 14;
-
-    m_defaultMinZoomLevels[GeoDataPlacemark::RailwayRail]         = 6;
-    m_defaultMinZoomLevels[GeoDataPlacemark::RailwayNarrowGauge]  = 6;
-    m_defaultMinZoomLevels[GeoDataPlacemark::RailwayTram]         = 14;
-    m_defaultMinZoomLevels[GeoDataPlacemark::RailwayLightRail]    = 12;
-    m_defaultMinZoomLevels[GeoDataPlacemark::RailwayAbandoned]    = 10;
-    m_defaultMinZoomLevels[GeoDataPlacemark::RailwaySubway]       = 13;
-    m_defaultMinZoomLevels[GeoDataPlacemark::RailwayPreserved]    = 13;
-    m_defaultMinZoomLevels[GeoDataPlacemark::RailwayMiniature]    = 13;
-    m_defaultMinZoomLevels[GeoDataPlacemark::RailwayConstruction] = 10;
-    m_defaultMinZoomLevels[GeoDataPlacemark::RailwayMonorail]     = 12;
-    m_defaultMinZoomLevels[GeoDataPlacemark::RailwayFunicular]    = 13;
-    m_defaultMinZoomLevels[GeoDataPlacemark::TransportPlatform]   = 16;
-
-    m_defaultMinZoomLevels[GeoDataPlacemark::Satellite]           = 0;
-
-    m_defaultMinZoomLevels[GeoDataPlacemark::Landmass]            = 0;
-    m_defaultMinZoomLevels[GeoDataPlacemark::UrbanArea]           = 3;
-    m_defaultMinZoomLevels[GeoDataPlacemark::InternationalDateLine]      = 1;
-    m_defaultMinZoomLevels[GeoDataPlacemark::Bathymetry]          = 1;
-
-
-    m_defaultMinZoomLevels[GeoDataPlacemark::AdminLevel1]         = 0;
-    m_defaultMinZoomLevels[GeoDataPlacemark::AdminLevel2]         = 1;
-    m_defaultMinZoomLevels[GeoDataPlacemark::AdminLevel3]         = 1;
-    m_defaultMinZoomLevels[GeoDataPlacemark::AdminLevel4]         = 2;
-    m_defaultMinZoomLevels[GeoDataPlacemark::AdminLevel5]         = 4;
-    m_defaultMinZoomLevels[GeoDataPlacemark::AdminLevel6]         = 5;
-    m_defaultMinZoomLevels[GeoDataPlacemark::AdminLevel7]         = 5;
-    m_defaultMinZoomLevels[GeoDataPlacemark::AdminLevel8]         = 7;
-    m_defaultMinZoomLevels[GeoDataPlacemark::AdminLevel9]         = 7;
-    m_defaultMinZoomLevels[GeoDataPlacemark::AdminLevel10]        = 8;
-    m_defaultMinZoomLevels[GeoDataPlacemark::AdminLevel11]        = 8;
-
-    m_defaultMinZoomLevels[GeoDataPlacemark::BoundaryMaritime]    = 1;
-
+    initializeMinimumZoomLevels();
     for (int i = 0; i < GeoDataPlacemark::LastIndex; ++i) {
-        m_maximumZoomLevel = qMax(m_maximumZoomLevel, m_defaultMinZoomLevels[i]);
+        m_maximumZoomLevel = qMax(m_maximumZoomLevel, s_defaultMinZoomLevels[i]);
     }
 }
 
@@ -1194,6 +1074,262 @@ void StyleBuilder::Private::initializeOsmVisualCategories()
     }
 }
 
+void StyleBuilder::Private::initializeMinimumZoomLevels()
+{
+    if (s_defaultMinZoomLevelsInitialized) {
+        return;
+    }
+
+    s_defaultMinZoomLevelsInitialized = true;
+    for ( int i = 0; i < GeoDataPlacemark::LastIndex; i++ ) {
+        s_defaultMinZoomLevels[i] = -1;
+    }
+
+    s_defaultMinZoomLevels[GeoDataPlacemark::AdminLevel10]= 8;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AdminLevel11]= 8;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AdminLevel1] = 0;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AdminLevel2] = 1;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AdminLevel3] = 1;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AdminLevel4] = 2;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AdminLevel5] = 4;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AdminLevel6] = 5;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AdminLevel7] = 5;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AdminLevel8] = 7;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AdminLevel9] = 7;
+
+    s_defaultMinZoomLevels[GeoDataPlacemark::AmenityArchaeologicalSite]= 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AmenityBench]= 19;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AmenityFountain]     = 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AmenityGraveyard]    = 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AmenityTelephone]  = 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AmenityKindergarten]  = 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AmenityLibrary]  = 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AmenityWasteBasket]  = 19;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AmenityToilets]= 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AmenityTownHall]= 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AmenityWaterPark]  = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AmenityDrinkingWater]= 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AmenityEmbassy]= 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AmenityEmergencyPhone]= 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AmenityCommunityCentre]= 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AmenityFountain]= 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AmenityNightClub]= 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AmenityCourtHouse]= 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AmenityFireStation]= 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AmenityHuntingStand]= 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AmenityPolice]= 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AmenityPostBox]= 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AmenityPostOffice]= 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AmenityPrison]= 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AmenityRecycling]= 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AmenityShelter]= 17;
+
+    s_defaultMinZoomLevels[GeoDataPlacemark::BarrierCityWall] = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::BarrierGate]     = 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::BarrierLiftGate] = 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::BarrierWall]     = 17;
+
+    s_defaultMinZoomLevels[GeoDataPlacemark::Bathymetry]  = 1;
+
+    s_defaultMinZoomLevels[GeoDataPlacemark::BoundaryMaritime]    = 1;
+
+    s_defaultMinZoomLevels[GeoDataPlacemark::Building]    = 17;
+
+    s_defaultMinZoomLevels[GeoDataPlacemark::Default]     = 1;
+
+    s_defaultMinZoomLevels[GeoDataPlacemark::EducationCollege]  = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::EducationSchool]  = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::EducationUniversity]  = 15;
+
+    s_defaultMinZoomLevels[GeoDataPlacemark::FoodBar]  = 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::FoodBiergarten]  = 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::FoodCafe]  = 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::FoodFastFood]  = 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::FoodPub]  = 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::FoodRestaurant]  = 16;
+
+    s_defaultMinZoomLevels[GeoDataPlacemark::HealthHospital]  = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::HealthPharmacy]  = 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::HealthDentist]  = 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::HealthDoctors]  = 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::HealthVeterinary]  = 16;
+
+    s_defaultMinZoomLevels[GeoDataPlacemark::HighwayCycleway]     = 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::HighwayFootway]      = 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::HighwayLivingStreet] = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::HighwayMotorwayLink] = 10;
+    s_defaultMinZoomLevels[GeoDataPlacemark::HighwayMotorway]     = 6;
+    s_defaultMinZoomLevels[GeoDataPlacemark::HighwayPath] = 13;
+    s_defaultMinZoomLevels[GeoDataPlacemark::HighwayPedestrian]   = 13;
+    s_defaultMinZoomLevels[GeoDataPlacemark::HighwayPrimaryLink]  = 10;
+    s_defaultMinZoomLevels[GeoDataPlacemark::HighwayPrimary]      = 8;
+    s_defaultMinZoomLevels[GeoDataPlacemark::HighwayRaceway]      = 12;
+    s_defaultMinZoomLevels[GeoDataPlacemark::HighwayResidential]  = 14;
+    s_defaultMinZoomLevels[GeoDataPlacemark::HighwayRoad] = 13;
+    s_defaultMinZoomLevels[GeoDataPlacemark::HighwaySecondaryLink]= 10;
+    s_defaultMinZoomLevels[GeoDataPlacemark::HighwaySecondary]    = 9;
+    s_defaultMinZoomLevels[GeoDataPlacemark::HighwayService]      = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::HighwaySteps]= 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::HighwayTertiaryLink] = 10;
+    s_defaultMinZoomLevels[GeoDataPlacemark::HighwayTertiary]     = 10;
+    s_defaultMinZoomLevels[GeoDataPlacemark::HighwayTrack]= 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::HighwayTrunkLink]    = 10;
+    s_defaultMinZoomLevels[GeoDataPlacemark::HighwayTrunk]= 7;
+    s_defaultMinZoomLevels[GeoDataPlacemark::HighwayUnknown]      = 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::HighwayUnclassified] = 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::HighwayTrafficSignals]      = 17;
+
+    s_defaultMinZoomLevels[GeoDataPlacemark::AccomodationCamping] = 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AccomodationHostel] = 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AccomodationHotel] = 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AccomodationMotel] = 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AccomodationYouthHostel] = 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AccomodationGuestHouse] = 16;
+
+    s_defaultMinZoomLevels[GeoDataPlacemark::InternationalDateLine]      = 1;
+
+    s_defaultMinZoomLevels[GeoDataPlacemark::Landmass]    = 0;
+
+    s_defaultMinZoomLevels[GeoDataPlacemark::LanduseAllotments]   = 11;
+    s_defaultMinZoomLevels[GeoDataPlacemark::LanduseBasin]= 11;
+    s_defaultMinZoomLevels[GeoDataPlacemark::LanduseCemetery]     = 11;
+    s_defaultMinZoomLevels[GeoDataPlacemark::LanduseCommercial]   = 13;
+    s_defaultMinZoomLevels[GeoDataPlacemark::LanduseConstruction] = 11;
+    s_defaultMinZoomLevels[GeoDataPlacemark::LanduseFarmland]     = 13;
+    s_defaultMinZoomLevels[GeoDataPlacemark::LanduseFarmyard]     = 13;
+    s_defaultMinZoomLevels[GeoDataPlacemark::LanduseGarages]      = 11;
+    s_defaultMinZoomLevels[GeoDataPlacemark::LanduseGrass]= 13;
+    s_defaultMinZoomLevels[GeoDataPlacemark::LanduseIndustrial]   = 13;
+    s_defaultMinZoomLevels[GeoDataPlacemark::LanduseLandfill]     = 11;
+    s_defaultMinZoomLevels[GeoDataPlacemark::LanduseMeadow]       = 13;
+    s_defaultMinZoomLevels[GeoDataPlacemark::LanduseMilitary]     = 11;
+    s_defaultMinZoomLevels[GeoDataPlacemark::LanduseOrchard]      = 14;
+    s_defaultMinZoomLevels[GeoDataPlacemark::LanduseQuarry]       = 11;
+    s_defaultMinZoomLevels[GeoDataPlacemark::LanduseRailway]      = 11;
+    s_defaultMinZoomLevels[GeoDataPlacemark::LanduseReservoir]    = 11;
+    s_defaultMinZoomLevels[GeoDataPlacemark::LanduseResidential]  = 11;
+    s_defaultMinZoomLevels[GeoDataPlacemark::LanduseRetail]       = 13;
+    s_defaultMinZoomLevels[GeoDataPlacemark::LanduseVineyard]     = 14;
+
+    s_defaultMinZoomLevels[GeoDataPlacemark::LeisureGolfCourse]   = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::LeisureMarina]       = 13;
+    s_defaultMinZoomLevels[GeoDataPlacemark::LeisurePark] = 11;
+    s_defaultMinZoomLevels[GeoDataPlacemark::LeisurePlayground]   = 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::LeisurePitch]   = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::LeisureStadium]   = 13;
+    s_defaultMinZoomLevels[GeoDataPlacemark::LeisureSwimmingPool]   = 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::LeisureSportsCentre]   = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::LeisureTrack]   = 16;
+
+    s_defaultMinZoomLevels[GeoDataPlacemark::ManmadeBridge]       = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::ManmadeLighthouse]       = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::ManmadePier]       = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::ManmadeWaterTower]       = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::ManmadeWindMill]       = 15;
+
+    s_defaultMinZoomLevels[GeoDataPlacemark::MilitaryDangerArea]  = 11;
+
+    s_defaultMinZoomLevels[GeoDataPlacemark::MoneyAtm]    = 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::MoneyBank]    = 16;
+
+    s_defaultMinZoomLevels[GeoDataPlacemark::NaturalBeach]= 13;
+    s_defaultMinZoomLevels[GeoDataPlacemark::NaturalCliff]= 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::NaturalGlacier]      = 3;
+    s_defaultMinZoomLevels[GeoDataPlacemark::NaturalHeath]      = 13;
+    s_defaultMinZoomLevels[GeoDataPlacemark::NaturalIceShelf]     = 3;
+    s_defaultMinZoomLevels[GeoDataPlacemark::NaturalPeak] = 11;
+    s_defaultMinZoomLevels[GeoDataPlacemark::NaturalReef] = 3;
+    s_defaultMinZoomLevels[GeoDataPlacemark::NaturalScrub]= 13;
+    s_defaultMinZoomLevels[GeoDataPlacemark::NaturalTree] = 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::NaturalWater]= 3;
+    s_defaultMinZoomLevels[GeoDataPlacemark::NaturalWetland]      = 10;
+    s_defaultMinZoomLevels[GeoDataPlacemark::NaturalWood] = 8;
+
+    s_defaultMinZoomLevels[GeoDataPlacemark::PlaceCityCapital]    = 9;
+    s_defaultMinZoomLevels[GeoDataPlacemark::PlaceCity]   = 9;
+    s_defaultMinZoomLevels[GeoDataPlacemark::PlaceHamlet] = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::PlaceLocality]       = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::PlaceSuburb] = 13;
+    s_defaultMinZoomLevels[GeoDataPlacemark::PlaceTownCapital]    = 11;
+    s_defaultMinZoomLevels[GeoDataPlacemark::PlaceTown]   = 11;
+    s_defaultMinZoomLevels[GeoDataPlacemark::PlaceVillageCapital] = 13;
+    s_defaultMinZoomLevels[GeoDataPlacemark::PlaceVillage]= 13;
+
+    s_defaultMinZoomLevels[GeoDataPlacemark::PowerTower]= 18;
+
+    s_defaultMinZoomLevels[GeoDataPlacemark::RailwayAbandoned]    = 10;
+    s_defaultMinZoomLevels[GeoDataPlacemark::RailwayConstruction] = 10;
+    s_defaultMinZoomLevels[GeoDataPlacemark::RailwayFunicular]    = 13;
+    s_defaultMinZoomLevels[GeoDataPlacemark::RailwayLightRail]    = 12;
+    s_defaultMinZoomLevels[GeoDataPlacemark::RailwayMiniature]    = 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::RailwayMonorail]     = 12;
+    s_defaultMinZoomLevels[GeoDataPlacemark::RailwayNarrowGauge]  = 6;
+    s_defaultMinZoomLevels[GeoDataPlacemark::RailwayPreserved]    = 13;
+    s_defaultMinZoomLevels[GeoDataPlacemark::RailwayRail] = 6;
+    s_defaultMinZoomLevels[GeoDataPlacemark::RailwaySubway]       = 13;
+    s_defaultMinZoomLevels[GeoDataPlacemark::RailwayTram] = 14;
+
+    s_defaultMinZoomLevels[GeoDataPlacemark::Satellite]   = 0;
+
+    for (int shop=GeoDataPlacemark::ShopBeverages; shop<=GeoDataPlacemark::Shop; ++shop) {
+        s_defaultMinZoomLevels[shop] = 17;
+    }
+    s_defaultMinZoomLevels[GeoDataPlacemark::ShopSupermarket] = 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::ShopDepartmentStore] = 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::ShopDoitYourself] = 16;
+
+    s_defaultMinZoomLevels[GeoDataPlacemark::TouristAlpineHut]  = 13;
+    s_defaultMinZoomLevels[GeoDataPlacemark::TouristAttraction]  = 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::TouristCastle]  = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::TouristCinema]  = 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::TouristMuseum]  = 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::TouristRuin]  = 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::TouristTheatre]  = 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::TouristThemePark]  = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::TouristViewPoint]  = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::TouristZoo]  = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::TouristMonument]  = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::TouristInformation]  = 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::TransportAerodrome] = 9;
+    s_defaultMinZoomLevels[GeoDataPlacemark::TransportAirportApron] = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::TransportAirportRunway] = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::TransportAirportTaxiway] = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::TransportBusStation]  = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::TransportCarShare]  = 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::TransportFuel]  = 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::TransportHelipad] = 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::TransportAirportTerminal] = 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::TransportAirportGate] = 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::TransportPlatform]   = 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::TransportSpeedCamera] = 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::TransportRentalCar] = 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::TransportRentalBicycle] = 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::TransportTaxiRank]  = 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::TransportParking]  = 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::TransportBusStop]  = 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::TransportTrainStation]  = 13;
+    s_defaultMinZoomLevels[GeoDataPlacemark::TransportTramStop]  = 14;
+    s_defaultMinZoomLevels[GeoDataPlacemark::TransportParkingSpace]  = 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::TransportBicycleParking]  = 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::TransportMotorcycleParking]  = 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::TransportSubwayEntrance]  = 17;
+
+    for (int religion=GeoDataPlacemark::ReligionPlaceOfWorship; religion<=GeoDataPlacemark::ReligionSikh; ++religion) {
+        s_defaultMinZoomLevels[religion] = 17;
+    }
+
+    s_defaultMinZoomLevels[GeoDataPlacemark::UrbanArea]   = 3;
+
+    for ( int i = GeoDataPlacemark::PlaceCity; i < GeoDataPlacemark::LastIndex; i++ ) {
+        if (s_defaultMinZoomLevels[i] < 0) {
+            qDebug() << "Missing default min zoom level for GeoDataPlacemark::GeoDataVisualCategory " << i;
+            Q_ASSERT(false && "StyleBuilder::Private::initializeMinimumZoomLevels is incomplete");
+            s_defaultMinZoomLevels[i] = 15;
+        }
+    }
+
+}
+
 StyleBuilder::StyleBuilder() :
     d(new Private)
 {
@@ -1604,7 +1740,14 @@ void StyleBuilder::reset()
 
 int StyleBuilder::minimumZoomLevel(const GeoDataPlacemark &placemark) const
 {
-    return d->m_defaultMinZoomLevels[placemark.visualCategory()];
+    Q_ASSERT(Private::s_defaultMinZoomLevelsInitialized);
+    return Private::s_defaultMinZoomLevels[placemark.visualCategory()];
+}
+
+int StyleBuilder::minimumZoomLevel(const GeoDataPlacemark::GeoDataVisualCategory &visualCategory)
+{
+    Private::initializeMinimumZoomLevels();
+    return Private::s_defaultMinZoomLevels[visualCategory];
 }
 
 int StyleBuilder::maximumZoomLevel() const
@@ -1917,18 +2060,10 @@ QString StyleBuilder::visualCategoryName(GeoDataPlacemark::GeoDataVisualCategory
     return visualCategoryNames[category];
 }
 
-QHash<StyleBuilder::OsmTag, GeoDataPlacemark::GeoDataVisualCategory>::const_iterator StyleBuilder::begin()
+QHash<StyleBuilder::OsmTag, GeoDataPlacemark::GeoDataVisualCategory> StyleBuilder::osmTagMapping()
 {
     Private::initializeOsmVisualCategories();
-
-    return Private::s_visualCategories.constBegin();
-}
-
-QHash<StyleBuilder::OsmTag, GeoDataPlacemark::GeoDataVisualCategory>::const_iterator StyleBuilder::end()
-{
-    Private::initializeOsmVisualCategories();
-
-    return Private::s_visualCategories.constEnd();
+    return Private::s_visualCategories;
 }
 
 QStringList StyleBuilder::shopValues()

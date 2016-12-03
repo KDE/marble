@@ -68,6 +68,8 @@ public:
      */
     int minimumZoomLevel(const GeoDataPlacemark &placemark) const;
 
+    static int minimumZoomLevel(const GeoDataPlacemark::GeoDataVisualCategory &visualCategory);
+
     /**
      * @brief Returns the maximum zoom level in the theme.
      * @return maximum zoom level in the theme
@@ -77,10 +79,9 @@ public:
     static QString visualCategoryName(GeoDataPlacemark::GeoDataVisualCategory category);
 
     /**
-     * @brief begin and end provide an stl style iterator for the preset map
+     * @brief Mapping between osm key=value pairs and visual categories
      */
-    static QHash<OsmTag, GeoDataPlacemark::GeoDataVisualCategory>::const_iterator begin();
-    static QHash<OsmTag, GeoDataPlacemark::GeoDataVisualCategory>::const_iterator end();
+    static QHash<OsmTag, GeoDataPlacemark::GeoDataVisualCategory> osmTagMapping();
 
     static QStringList shopValues();
     static QSet<OsmTag> buildingTags();

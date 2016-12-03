@@ -23,7 +23,6 @@
 namespace Marble {
 
 QHash<GeoDataPlacemark::GeoDataVisualCategory, qint64> OsmNode::m_popularities;
-QHash<GeoDataPlacemark::GeoDataVisualCategory, int> OsmNode::m_zoomLevels;
 
 void OsmNode::parseCoordinates(const QXmlStreamAttributes &attributes)
 {
@@ -63,7 +62,7 @@ void OsmNode::create(GeoDataDocument *document) const
     }
     placemark->setVisualCategory(category);
     placemark->setStyle( GeoDataStyle::Ptr() );
-    placemark->setZoomLevel(zoomLevelFor(category));
+    placemark->setZoomLevel(StyleBuilder::minimumZoomLevel(category));
     placemark->setPopularity(popularityFor(category));
 
     if (category >= GeoDataPlacemark::PlaceCity && category <= GeoDataPlacemark::PlaceVillageCapital) {
@@ -97,33 +96,6 @@ int OsmNode::populationIndex(qint64 population) const
     else if ( population < 2500000) popidx=4;
 
     return popidx;
-}
-
-int OsmNode::zoomLevelFor(GeoDataPlacemark::GeoDataVisualCategory category)
-{
-    int const defaultValue = 18;
-    if (m_zoomLevels.isEmpty()) {
-        m_zoomLevels[GeoDataPlacemark::PlaceCityCapital] = 9;
-        m_zoomLevels[GeoDataPlacemark::PlaceCity] = 9;
-
-        m_zoomLevels[GeoDataPlacemark::PlaceTownCapital] = 11;
-        m_zoomLevels[GeoDataPlacemark::PlaceTown] = 11;
-        m_zoomLevels[GeoDataPlacemark::NaturalPeak] = 11;
-
-        m_zoomLevels[GeoDataPlacemark::PlaceSuburb] = 13;
-        m_zoomLevels[GeoDataPlacemark::PlaceVillageCapital] = 13;
-        m_zoomLevels[GeoDataPlacemark::PlaceVillage] = 13;
-
-        m_zoomLevels[GeoDataPlacemark::PlaceHamlet] = 15;
-        m_zoomLevels[GeoDataPlacemark::HealthHospital] = 15;
-        m_zoomLevels[GeoDataPlacemark::PlaceLocality] = 15;
-
-        m_zoomLevels[GeoDataPlacemark::AmenityBench] = 19;
-        m_zoomLevels[GeoDataPlacemark::AmenityWasteBasket] = 19;
-        m_zoomLevels[GeoDataPlacemark::PowerTower] = 19;
-    }
-
-    return m_zoomLevels.value(category, defaultValue);
 }
 
 qint64 OsmNode::popularityFor(GeoDataPlacemark::GeoDataVisualCategory category)

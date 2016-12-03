@@ -15,6 +15,7 @@
 #include <GeoDataLatLonAltBox.h>
 #include "PeakAnalyzer.h"
 #include "TileCoordsPyramid.h"
+#include "StyleBuilder.h"
 
 #include <QFileInfo>
 #include <QDebug>
@@ -31,6 +32,8 @@
 using namespace std;
 
 namespace Marble {
+
+QMap<int, TagsFilter::Tags> TileDirectory::m_tags;
 
 TileDirectory::TileDirectory(TileType tileType, const QString &cacheDir, ParsingRunnerManager &manager, QString const &extension, int maxZoomLevel) :
     m_cacheDir(cacheDir),
@@ -157,109 +160,32 @@ QSharedPointer<GeoDataDocument> TileDirectory::open(const QString &filename, Par
 
 TagsFilter::Tags TileDirectory::tagsFilteredIn(int zoomLevel) const
 {
-    TagsFilter::Tags tags;
-    tags << TagsFilter::Tag("highway", "motorway");
-    tags << TagsFilter::Tag("highway", "motorway_link");
-    tags << TagsFilter::Tag("highway", "trunk");
-    tags << TagsFilter::Tag("highway", "trunk_link");
-    tags << TagsFilter::Tag("highway", "primary");
-    tags << TagsFilter::Tag("highway", "primary_link");
-    tags << TagsFilter::Tag("highway", "secondary");
-    tags << TagsFilter::Tag("highway", "secondary_link");
+    if (m_tags.isEmpty()) {
+        QSet<GeoDataPlacemark::GeoDataVisualCategory> categories;
+        for (int i=GeoDataPlacemark::PlaceCity; i<GeoDataPlacemark::LastIndex; ++i) {
+            if (i != GeoDataPlacemark::NaturalWater) {
+                categories << GeoDataPlacemark::GeoDataVisualCategory(i);
+            }
+        }
 
-    tags << TagsFilter::Tag("natural", "glacier");
-    tags << TagsFilter::Tag("natural", "water");
-    tags << TagsFilter::Tag("waterway", "river");
-    tags << TagsFilter::Tag("waterway", "riverbank");
-    tags << TagsFilter::Tag("waterway", "canal");
-
-    tags << TagsFilter::Tag("railway", "rail");
-    tags << TagsFilter::Tag("railway", "light_rail");
-    tags << TagsFilter::Tag("railway", "monorail");
-
-    if (zoomLevel >= 13) {
-        tags << TagsFilter::Tag("highway", "tertiary");
-        tags << TagsFilter::Tag("highway", "tertiary_link");
-        tags << TagsFilter::Tag("highway", "unclassified");
-
-        tags << TagsFilter::Tag("public_transport", "station");
-        tags << TagsFilter::Tag("railway", "narrow_gauge");
-        tags << TagsFilter::Tag("railway", "preserved");
-        tags << TagsFilter::Tag("railway", "subway");
-        tags << TagsFilter::Tag("railway", "tram");
-
-        tags << TagsFilter::Tag("natural", "scrub");
-        tags << TagsFilter::Tag("natural", "heath");
-        tags << TagsFilter::Tag("natural", "grassland");
-        tags << TagsFilter::Tag("natural", "beach");
-        tags << TagsFilter::Tag("natural", "coastline");
-        tags << TagsFilter::Tag("leisure", "stadium");
-        tags << TagsFilter::Tag("tourism", "alpine_hut");
-
-        tags << TagsFilter::Tag("place", "suburb");
-        tags << TagsFilter::Tag("place", "village");
-        tags << TagsFilter::Tag("amenity", "hospital");
+        auto const tagMap = StyleBuilder::osmTagMapping();
+        for (auto category: categories) {
+            for (auto iter=tagMap.begin(), end=tagMap.end(); iter != end; ++iter) {
+                if (iter.value() == category) {
+                    int zoomLevel = StyleBuilder::minimumZoomLevel(category);
+                    if (zoomLevel < 17) {
+                        m_tags[zoomLevel] << iter.key();
+                    }
+                }
+            }
+        }
     }
 
-    if (zoomLevel <= 11) {
-        tags << TagsFilter::Tag("landuse", "forest");
-        tags << TagsFilter::Tag("landuse", "military");
-        tags << TagsFilter::Tag("landuse", "residential");
-    } else if (zoomLevel <= 13) {
-        tags << TagsFilter::Tag("landuse", "commercial");
-        tags << TagsFilter::Tag("landuse", "farmland");
-        tags << TagsFilter::Tag("landuse", "farmyard");
-        tags << TagsFilter::Tag("landuse", "forest");
-        tags << TagsFilter::Tag("landuse", "industrial");
-        tags << TagsFilter::Tag("landuse", "meadow");
-        tags << TagsFilter::Tag("landuse", "military");
-        tags << TagsFilter::Tag("landuse", "recreation_ground");
-        tags << TagsFilter::Tag("landuse", "residential");
-        tags << TagsFilter::Tag("landuse", "retail");
+    TagsFilter::Tags result;
+    for (auto iter = m_tags.begin(), end = m_tags.end(); iter != end && iter.key() <= zoomLevel+1; ++iter) {
+        result << iter.value();
     }
-
-    if (zoomLevel >= 15) {
-        tags << TagsFilter::Tag("waterway", "stream");
-
-        tags << TagsFilter::Tag("highway", "residential");
-        tags << TagsFilter::Tag("highway", "track");
-
-        tags << TagsFilter::Tag("landuse", "*");
-
-        tags << TagsFilter::Tag("leisure", "pitch");
-        tags << TagsFilter::Tag("leisure", "swimming_area");
-
-        tags << TagsFilter::Tag("place", "hamlet");
-        tags << TagsFilter::Tag("place", "isolated_dwelling");
-
-        tags << TagsFilter::Tag("man_made", "beacon");
-        tags << TagsFilter::Tag("man_made", "bridge");
-        tags << TagsFilter::Tag("man_made", "campanile");
-        tags << TagsFilter::Tag("man_made", "chimney");
-        tags << TagsFilter::Tag("man_made", "communications_tower");
-        tags << TagsFilter::Tag("man_made", "cross");
-        tags << TagsFilter::Tag("man_made", "gasometer");
-        tags << TagsFilter::Tag("man_made", "lighthouse");
-        tags << TagsFilter::Tag("man_made", "tower");
-        tags << TagsFilter::Tag("man_made", "water_tower");
-        tags << TagsFilter::Tag("man_made", "windmill");
-    }
-
-    tags << TagsFilter::Tag("natural", "peak");
-    tags << TagsFilter::Tag("natural", "wood");
-
-    tags << TagsFilter::Tag("leisure", "nature_reserve");
-    tags << TagsFilter::Tag("leisure", "park");
-
-    tags << TagsFilter::Tag("place", "city");
-    tags << TagsFilter::Tag("place", "town");
-    tags << TagsFilter::Tag("place", "locality");
-
-    tags << TagsFilter::Tag("boundary", "administrative");
-    tags << TagsFilter::Tag("boundary", "political");
-    tags << TagsFilter::Tag("boundary", "national_park");
-    tags << TagsFilter::Tag("boundary", "protected_area");
-    return tags;
+    return result;
 }
 
 void TileDirectory::setTagZoomLevel(int zoomLevel)
