@@ -395,6 +395,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
         LeisureStadium,
         LeisureTrack,
         LeisureSwimmingPool,
+        LeisureMinigolfCourse,
 
         LanduseAllotments,
         LanduseBasin,

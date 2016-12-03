@@ -605,6 +605,7 @@ QString GeoDataPlacemark::categoryName() const
     case LeisureStadium: return GeoDataPlacemarkPrivate::tr("Stadium");
     case LeisureTrack: return GeoDataPlacemarkPrivate::tr("Track");
     case LeisureSwimmingPool: return GeoDataPlacemarkPrivate::tr("Swimming Pool");
+    case LeisureMinigolfCourse: return GeoDataPlacemarkPrivate::tr("Miniature Golf Course");
     case LanduseAllotments: return GeoDataPlacemarkPrivate::tr("Allotments");
     case LanduseBasin: return GeoDataPlacemarkPrivate::tr("Basin");
     case LanduseCemetery: return GeoDataPlacemarkPrivate::tr("Cemetery");

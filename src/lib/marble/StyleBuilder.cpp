@@ -646,6 +646,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::NaturalHeath]             = createWayStyle("#d6d99f", QColor("#d6d99f").darker(150), true, false);
 
     m_defaultStyle[GeoDataPlacemark::LeisureGolfCourse]        = createOsmPOIAreaStyle(osmFont, "leisure/golf", "#39ac39", "#b5e3b5", QColor(Qt::transparent));
+    m_defaultStyle[GeoDataPlacemark::LeisureMinigolfCourse]    = createOsmPOIAreaStyle(osmFont, "leisure/miniature_golf", "#39ac39", "#b5e3b5", QColor(Qt::transparent));
     m_defaultStyle[GeoDataPlacemark::LeisureMarina]            = createOsmPOIStyle(osmFont, QString(), QColor("#95abd5"), QColor("#aec8d1"), QColor("#95abd5").darker(150));
     m_defaultStyle[GeoDataPlacemark::LeisurePark]              = createWayStyle(QColor("#c8facc"), QColor("#c8facc").darker(150), true, true);
     m_defaultStyle[GeoDataPlacemark::LeisurePlayground]        = createOsmPOIAreaStyle(osmFont, "amenity/playground.16", amenityColor, "#CCFFF1", "#BDFFED");
@@ -1017,6 +1018,7 @@ void StyleBuilder::Private::initializeOsmVisualCategories()
     s_visualCategories[OsmTag("leisure", "stadium")]            = GeoDataPlacemark::LeisureStadium;
     s_visualCategories[OsmTag("leisure", "track")]              = GeoDataPlacemark::LeisureTrack;
     s_visualCategories[OsmTag("leisure", "swimming_pool")]      = GeoDataPlacemark::LeisureSwimmingPool;
+    s_visualCategories[OsmTag("leisure", "miniature_golf")]     = GeoDataPlacemark::LeisureMinigolfCourse;
 
     s_visualCategories[OsmTag("railway", "rail")]               = GeoDataPlacemark::RailwayRail;
     s_visualCategories[OsmTag("railway", "narrow_gauge")]       = GeoDataPlacemark::RailwayNarrowGauge;
@@ -1222,6 +1224,7 @@ void StyleBuilder::Private::initializeMinimumZoomLevels()
     s_defaultMinZoomLevels[GeoDataPlacemark::LeisureSwimmingPool]   = 17;
     s_defaultMinZoomLevels[GeoDataPlacemark::LeisureSportsCentre]   = 15;
     s_defaultMinZoomLevels[GeoDataPlacemark::LeisureTrack]   = 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::LeisureMinigolfCourse] = 16;
 
     s_defaultMinZoomLevels[GeoDataPlacemark::ManmadeBridge]       = 15;
     s_defaultMinZoomLevels[GeoDataPlacemark::ManmadeLighthouse]       = 15;
@@ -1610,6 +1613,7 @@ QStringList StyleBuilder::renderOrder() const
         }
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::Bathymetry);
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::LeisureGolfCourse);
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::LeisureMinigolfCourse);
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::NaturalBeach);
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::NaturalWetland);
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::NaturalGlacier);
@@ -2007,6 +2011,7 @@ QString StyleBuilder::visualCategoryName(GeoDataPlacemark::GeoDataVisualCategory
         visualCategoryNames[GeoDataPlacemark::LeisureStadium] = "LeisureStadium";
         visualCategoryNames[GeoDataPlacemark::LeisureTrack] = "LeisureTrack";
         visualCategoryNames[GeoDataPlacemark::LeisureSwimmingPool] = "LeisureSwimmingPool";
+        visualCategoryNames[GeoDataPlacemark::LeisureMinigolfCourse] = "LeisureMinigolfCourse";
         visualCategoryNames[GeoDataPlacemark::LanduseAllotments] = "LanduseAllotments";
         visualCategoryNames[GeoDataPlacemark::LanduseBasin] = "LanduseBasin";
         visualCategoryNames[GeoDataPlacemark::LanduseCemetery] = "LanduseCemetery";

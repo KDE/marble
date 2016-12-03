@@ -254,6 +254,7 @@ qint64 OsmNode::popularityFor(GeoDataPlacemark::GeoDataVisualCategory category)
         popularities << GeoDataPlacemark::Shop;
 
         popularities << GeoDataPlacemark::LeisureGolfCourse;
+        popularities << GeoDataPlacemark::LeisureMinigolfCourse;
         popularities << GeoDataPlacemark::LeisurePark;
         popularities << GeoDataPlacemark::LeisurePlayground;
         popularities << GeoDataPlacemark::LeisurePitch;
