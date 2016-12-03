@@ -10,18 +10,14 @@ ENDIF(LIBGPS_FOUND)
 
 find_package(Qt5 ${REQUIRED_QT_VERSION}
     COMPONENTS
-        Location
         Positioning
 )
 marble_set_package_properties( Qt5Positioning PROPERTIES DESCRIPTION "a collection of APIs and frameworks" )
 marble_set_package_properties( Qt5Positioning PROPERTIES URL "http://qt.digia.com/" )
-marble_set_package_properties( Qt5Positioning PROPERTIES TYPE OPTIONAL PURPOSE "Required for QtLocation to work" )
-marble_set_package_properties( Qt5Location PROPERTIES DESCRIPTION "geographical support for position and map use" )
-marble_set_package_properties( Qt5Location PROPERTIES URL "http://qt.digia.com/" )
-marble_set_package_properties( Qt5Location PROPERTIES TYPE OPTIONAL PURPOSE "position information via Qt5Positioning and QtLocation" )
-IF(Qt5Location_FOUND)
+marble_set_package_properties( Qt5Positioning PROPERTIES TYPE OPTIONAL PURPOSE "position information via Qt5Positioning" )
+if(Qt5Positioning_FOUND)
    ADD_SUBDIRECTORY( qtpositioning )
-ENDIF(Qt5Location_FOUND)
+endif()
 
 
 macro_optional_find_package(libwlocate)
