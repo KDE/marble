@@ -39,6 +39,15 @@
           <downloadPolicy usage="Browse" maximumConnections="20"/>
           <downloadPolicy usage="Bulk" maximumConnections="2"/>
         </texture>
+        <texture name="humanitarian" expire="31536000">
+           <sourcedir format="PNG"> earth/humanitarian </sourcedir>
+           <tileSize width="256" height="256"/>
+           <storageLayout levelZeroColumns="1" levelZeroRows="1" maximumTileLevel="17" mode="OpenStreetMap"/>
+           <projection name="Mercator"/>
+           <downloadUrl protocol="https" host="tile-a.openstreetmap.fr" path="/hot/"/>
+           <downloadUrl protocol="https" host="tile-b.openstreetmap.fr" path="/hot/"/>
+          <blending name="AlphaBlending"/>
+         </texture>
         <texture name="hillshading" expire="31536000">
           <sourcedir format="PNG"> earth/hillshading </sourcedir>
           <tileSize width="256" height="256"/>
@@ -102,8 +111,12 @@
           <value>false</value>
           <available>false</available>
         </property>
-      </group>
-      <group name="Texture Layers">
+       </group>
+       <group name="Texture Layers">
+         <property name="humanitarian">
+           <value>false</value>
+           <available>true</available>
+         </property>
         <property name="hillshading">
           <value>false</value>
           <available>true</available>
@@ -124,6 +137,9 @@
       </section>
       <section name="hillshading" checkable="true" connect="hillshading" spacing="12">
         <heading>Hillshading</heading>
+      </section>
+      <section name="humanitarian" checkable="true" connect="humanitarian" spacing="12">
+         <heading>Humanitarian OSM Team</heading>
       </section>
       <section name="traffic" checkable="false" spacing="12">
         <heading>Transportation</heading>

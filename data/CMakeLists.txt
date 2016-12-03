@@ -119,6 +119,10 @@ DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth
 )
 
 install (FILES
+maps/earth/humanitarian/0/0/0.png
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/humanitarian/0/0)
+
+install (FILES
 maps/earth/hillshading/0/0/0.png
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/hillshading/0/0)
 
