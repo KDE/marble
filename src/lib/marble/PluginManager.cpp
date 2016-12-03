@@ -17,6 +17,7 @@
 #include <QList>
 #include <QPluginLoader>
 #include <QTime>
+#include <QMessageBox>
 
 // Local dir
 #include "MarbleDirs.h"
@@ -225,6 +226,7 @@ void PluginManagerPrivate::loadPlugins()
     Q_ASSERT( m_routingRunnerPlugins.isEmpty() );
     Q_ASSERT( m_parsingRunnerPlugins.isEmpty() );
 
+    bool foundPlugin = false;
     foreach( const QString &fileName, pluginFileNameList ) {
         QString const baseName = QFileInfo(fileName).baseName();
         if (!m_whitelist.isEmpty() && !m_whitelist.contains(baseName)) {
@@ -268,12 +270,32 @@ void PluginManagerPrivate::loadPlugins()
                 mDebug() << "Plugin failure:" << path << "is a plugin, but it does not implement the "
                         << "right interfaces or it was compiled against an old version of Marble. Ignoring it.";
                 delete loader;
+            } else {
+                foundPlugin = true;
             }
         } else {
             qWarning() << "Ignoring to load the following file since it doesn't look like a valid Marble plugin:" << path << endl
                        << "Reason:" << loader->errorString();
             delete loader;
         }
+    }
+
+    if ( !foundPlugin ) {
+#ifdef Q_OS_WIN
+        QString pluginPaths = "Plugin Path: " + MarbleDirs::marblePluginPath();
+        if ( MarbleDirs::marblePluginPath().isEmpty() )
+            pluginPaths = "";
+        pluginPaths += "System Path: " + MarbleDirs::pluginSystemPath() + "\nLocal Path: " + MarbleDirs::pluginLocalPath();
+
+        QMessageBox::warning( nullptr,
+                              "No plugins loaded",
+                              "No plugins were loaded, please check if the plugins were installed in one of the following paths:\n" + pluginPaths
+                              + "\n\nAlso check if the plugin is compiled against the right version of Marble. " +
+                              "Analyzing the debug messages inside a debugger might give more insight." );
+#else
+        qWarning() << "No plugins loaded. Please check if the plugins were installed in the correct path,"
+                   << "or if any errors occurred while loading plugins.";
+#endif
     }
 
     m_pluginsLoaded = true;
