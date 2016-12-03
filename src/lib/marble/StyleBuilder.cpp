@@ -729,7 +729,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::HighwaySecondaryLink]     = createHighwayStyle("#f7fabf", "#707d05", osmFont, "000000", 6, 6);
     m_defaultStyle[GeoDataPlacemark::HighwayPrimary]           = createHighwayStyle("#fcd6a4", "#a06b00", osmFont, "000000", 9, 6);
     m_defaultStyle[GeoDataPlacemark::HighwayPrimaryLink]       = createHighwayStyle("#fcd6a4", "#a06b00", osmFont, "000000", 6, 6);
-    m_defaultStyle[GeoDataPlacemark::HighwayRaceway]           = createHighwayStyle("#ff6200", "#ff6200", osmFont, "000000", 1, 5);
+    m_defaultStyle[GeoDataPlacemark::HighwayRaceway]           = createHighwayStyle("#ffc0cb", "#ffc0cb", osmFont, "000000", 1, 5);
     m_defaultStyle[GeoDataPlacemark::HighwayTrunk]             = createHighwayStyle("#f9b29c", "#c84e2f", osmFont, "000000", 9, 6);
     m_defaultStyle[GeoDataPlacemark::HighwayTrunkLink]         = createHighwayStyle("#f9b29c", "#c84e2f", osmFont, "000000", 9, 6);
     m_defaultStyle[GeoDataPlacemark::HighwayMotorway]          = createHighwayStyle("#e892a2", "#dc2a67", osmFont, "000000", 9, 10);
