@@ -65,6 +65,7 @@ LocalOsmSearchRunner::LocalOsmSearchRunner( const QStringList &databaseFiles, QO
         m_categoryMap[OsmPlacemark::TouristThemePark] = GeoDataPlacemark::TouristThemePark;
         m_categoryMap[OsmPlacemark::TouristViewPoint] = GeoDataPlacemark::TouristViewPoint;
         m_categoryMap[OsmPlacemark::TouristZoo] = GeoDataPlacemark::TouristZoo;
+        m_categoryMap[OsmPlacemark::HistoricMemorial] = GeoDataPlacemark::HistoricMemorial;
         m_categoryMap[OsmPlacemark::TransportAirport] = GeoDataPlacemark::TransportAerodrome;
         m_categoryMap[OsmPlacemark::TransportAirportTerminal] = GeoDataPlacemark::TransportAirportTerminal;
         m_categoryMap[OsmPlacemark::TransportAirportRunway] = GeoDataPlacemark::TransportAirportRunway;

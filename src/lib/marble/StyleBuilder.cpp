@@ -534,6 +534,8 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::ManmadeWaterTower]        = createOsmPOIStyle(osmFont, "amenity/water_tower.16", amenityColor);
     m_defaultStyle[GeoDataPlacemark::ManmadeWindMill]          = createOsmPOIStyle(osmFont, "amenity/windmill.16", amenityColor);
 
+    m_defaultStyle[GeoDataPlacemark::HistoricMemorial]         = createOsmPOIStyle(osmFont, "amenity/tourist_memorial.16", amenityColor);
+
     m_defaultStyle[GeoDataPlacemark::TouristAttraction]        = createOsmPOIStyle(osmFont, "amenity/tourist_memorial.16", amenityColor);
     m_defaultStyle[GeoDataPlacemark::TouristCastle]            = createOsmPOIRingStyle(osmFont, "amenity/cinema.16", amenityColor);
     m_defaultStyle[GeoDataPlacemark::TouristCinema]            = createOsmPOIStyle(osmFont, "amenity/cinema.16", amenityColor);
@@ -907,7 +909,7 @@ void StyleBuilder::Private::initializeOsmVisualCategories()
     s_visualCategories[OsmTag("religion", "shinto")]            = GeoDataPlacemark::ReligionShinto;
     s_visualCategories[OsmTag("religion", "sikh")]              = GeoDataPlacemark::ReligionSikh;
 
-    s_visualCategories[OsmTag("historic", "memorial")]          = GeoDataPlacemark::TouristAttraction;
+    s_visualCategories[OsmTag("historic", "memorial")]          = GeoDataPlacemark::HistoricMemorial;
     s_visualCategories[OsmTag("tourism", "attraction")]         = GeoDataPlacemark::TouristAttraction;
     s_visualCategories[OsmTag("tourism", "camp_site")]          = GeoDataPlacemark::AccomodationCamping;
     s_visualCategories[OsmTag("tourism", "hostel")]             = GeoDataPlacemark::AccomodationHostel;
@@ -1151,6 +1153,8 @@ void StyleBuilder::Private::initializeMinimumZoomLevels()
     s_defaultMinZoomLevels[GeoDataPlacemark::HealthDentist]  = 16;
     s_defaultMinZoomLevels[GeoDataPlacemark::HealthDoctors]  = 16;
     s_defaultMinZoomLevels[GeoDataPlacemark::HealthVeterinary]  = 16;
+
+    s_defaultMinZoomLevels[GeoDataPlacemark::HistoricMemorial]    = 17;
 
     s_defaultMinZoomLevels[GeoDataPlacemark::HighwayCycleway]     = 16;
     s_defaultMinZoomLevels[GeoDataPlacemark::HighwayFootway]      = 16;
@@ -1959,6 +1963,7 @@ QString StyleBuilder::visualCategoryName(GeoDataPlacemark::GeoDataVisualCategory
         visualCategoryNames[GeoDataPlacemark::TouristThemePark] = "TouristThemePark";
         visualCategoryNames[GeoDataPlacemark::TouristViewPoint] = "TouristViewPoint";
         visualCategoryNames[GeoDataPlacemark::TouristZoo] = "TouristZoo";
+        visualCategoryNames[GeoDataPlacemark::HistoricMemorial] = "HistoricMemorial";
         visualCategoryNames[GeoDataPlacemark::TouristAlpineHut] = "TouristAlpineHut";
         visualCategoryNames[GeoDataPlacemark::TransportAerodrome] = "TransportAerodrome";
         visualCategoryNames[GeoDataPlacemark::TransportHelipad] = "TransportHelipad";

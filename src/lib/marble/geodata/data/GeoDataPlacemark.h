@@ -345,6 +345,9 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
         TouristZoo,
         TouristAlpineHut,
 
+        // OpenStreetMap category Historic
+        HistoricMemorial,
+
         // OpenStreetMap category Transport
         TransportAerodrome,
         TransportHelipad,

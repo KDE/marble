@@ -171,6 +171,7 @@ qint64 OsmNode::popularityFor(GeoDataPlacemark::GeoDataVisualCategory category)
         popularities << GeoDataPlacemark::ManmadePier;
         popularities << GeoDataPlacemark::ManmadeWaterTower;
         popularities << GeoDataPlacemark::ManmadeWindMill;
+
         popularities << GeoDataPlacemark::TouristAttraction;
         popularities << GeoDataPlacemark::TouristCastle;
         popularities << GeoDataPlacemark::TouristCinema;
@@ -183,6 +184,9 @@ qint64 OsmNode::popularityFor(GeoDataPlacemark::GeoDataVisualCategory category)
         popularities << GeoDataPlacemark::TouristViewPoint;
         popularities << GeoDataPlacemark::TouristZoo;
         popularities << GeoDataPlacemark::TouristAlpineHut;
+
+        popularities << GeoDataPlacemark::HistoricMemorial;
+
         popularities << GeoDataPlacemark::TransportAerodrome;
         popularities << GeoDataPlacemark::TransportHelipad;
         popularities << GeoDataPlacemark::TransportAirportTerminal;

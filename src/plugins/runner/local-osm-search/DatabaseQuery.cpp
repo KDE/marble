@@ -162,6 +162,8 @@ bool DatabaseQuery::isPointOfInterest( const QString &category )
         pois["speed camera"] = OsmPlacemark::TransportSpeedCamera;
         pois[QObject::tr( "taxi" ).toLower()] = OsmPlacemark::TransportTaxiRank;
         pois["taxi"] = OsmPlacemark::TransportTaxiRank;
+        pois[QObject::tr( "memorial" ).toLower()] = OsmPlacemark::HistoricMemorial;
+        pois["memorial"] = OsmPlacemark::HistoricMemorial;
     }
 
     Q_ASSERT( !pois.isEmpty() );

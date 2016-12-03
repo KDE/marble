@@ -86,7 +86,8 @@ public:
         PlacesIsolatedDwelling,
         PlacesSuburb,
         PlacesLocality,
-        PlacesIsland
+        PlacesIsland,
+        HistoricMemorial
     };
 
     OsmPlacemark();
