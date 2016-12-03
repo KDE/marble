@@ -145,6 +145,7 @@ qint64 OsmNode::popularityFor(GeoDataPlacemark::GeoDataVisualCategory category)
         popularities << GeoDataPlacemark::HealthHospital;
         popularities << GeoDataPlacemark::AmenityToilets;
         popularities << GeoDataPlacemark::MoneyAtm;
+        popularities << GeoDataPlacemark::TransportSpeedCamera;
 
         popularities << GeoDataPlacemark::NaturalPeak;
 

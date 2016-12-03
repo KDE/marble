@@ -368,6 +368,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
         TransportBicycleParking,
         TransportMotorcycleParking,
         TransportSubwayEntrance,
+        TransportSpeedCamera,
 
         // OpenStreetMap category religion
         ReligionPlaceOfWorship,

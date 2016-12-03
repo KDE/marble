@@ -584,6 +584,7 @@ QString GeoDataPlacemark::categoryName() const
     case TransportBicycleParking: return GeoDataPlacemarkPrivate::tr("Bicycle Parking");
     case TransportMotorcycleParking: return GeoDataPlacemarkPrivate::tr("Motorcycle Parking");
     case TransportSubwayEntrance: return GeoDataPlacemarkPrivate::tr("Subway Entrance");
+    case TransportSpeedCamera: return GeoDataPlacemarkPrivate::tr("Speed Camera");
     case ReligionPlaceOfWorship: return GeoDataPlacemarkPrivate::tr("Place Of Worship");
     case ReligionBahai: return GeoDataPlacemarkPrivate::tr("Bahai");
     case ReligionBuddhist: return GeoDataPlacemarkPrivate::tr("Buddhist");

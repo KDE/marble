@@ -207,6 +207,9 @@ QString Placemark::description() const
             addTagDescription(m_description, QStringLiteral("backrest"), QStringLiteral("no"), tr("No backrest", "A bench provides no backrest to lean against"));
         } else if (category == GeoDataPlacemark::AmenityWasteBasket) {
             addTagValue(m_description, QStringLiteral("waste"));
+        } else if (category == GeoDataPlacemark::TransportSpeedCamera) {
+            addTagValue(m_description, QStringLiteral("maxspeed"), tr("%1 km/h"));
+            addTagValue(m_description, "ref");
         }
 
         if (category == GeoDataPlacemark::AmenityRecycling || category == GeoDataPlacemark::AmenityPostBox) {

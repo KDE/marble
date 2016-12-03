@@ -79,7 +79,7 @@ LocalOsmSearchRunner::LocalOsmSearchRunner( const QStringList &databaseFiles, QO
         m_categoryMap[OsmPlacemark::TransportTramStop] = GeoDataPlacemark::TransportTramStop;
         m_categoryMap[OsmPlacemark::TransportRentalBicycle] = GeoDataPlacemark::TransportRentalBicycle;
         m_categoryMap[OsmPlacemark::TransportRentalCar] = GeoDataPlacemark::TransportRentalCar;
-        m_categoryMap[OsmPlacemark::TransportSpeedCamera] = GeoDataPlacemark::OsmSite;
+        m_categoryMap[OsmPlacemark::TransportSpeedCamera] = GeoDataPlacemark::TransportSpeedCamera;
         m_categoryMap[OsmPlacemark::TransportTaxiRank] = GeoDataPlacemark::TransportTaxiRank;
         m_categoryMap[OsmPlacemark::PlacesRegion] = GeoDataPlacemark::OsmSite;
         m_categoryMap[OsmPlacemark::PlacesCounty] = GeoDataPlacemark::OsmSite;

@@ -159,6 +159,7 @@ StyleBuilder::Private::Private() :
     m_defaultMinZoomLevels[GeoDataPlacemark::TransportAirportRunway] = 15;
     m_defaultMinZoomLevels[GeoDataPlacemark::TransportAirportTaxiway] = 15;
     m_defaultMinZoomLevels[GeoDataPlacemark::TransportAirportApron] = 15;
+    m_defaultMinZoomLevels[GeoDataPlacemark::TransportSpeedCamera] = 17;
 
 #if 0 // not needed as long as default min zoom level is 15
     for(int i = GeoDataPlacemark::AccomodationCamping; i <= GeoDataPlacemark::ReligionSikh; i++)
@@ -737,6 +738,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::TransportAirportRunway]   = createHighwayStyle("#bbbbcc", "#bbbbcc", osmFont, "000000", 0, 1, Qt::NoPen);
     m_defaultStyle[GeoDataPlacemark::TransportAirportTaxiway]  = createHighwayStyle("#bbbbcc", "#bbbbcc", osmFont, "000000", 0, 1, Qt::NoPen);
     m_defaultStyle[GeoDataPlacemark::TransportAirportApron]    = createWayStyle("#e9d1ff", Qt::transparent, true, false);
+    m_defaultStyle[GeoDataPlacemark::TransportSpeedCamera]     = createOsmPOIStyle(osmFont, "individual/speedcamera");
 
     m_defaultStyle[GeoDataPlacemark::NaturalWater]             = createStyle(4, 0, waterColor, waterColor, true, false,
                                                                                                    Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false, QVector< qreal >(),
@@ -1168,6 +1170,7 @@ void StyleBuilder::Private::initializeOsmVisualCategories()
     s_visualCategories[OsmTag("transport", "train_station")]    = GeoDataPlacemark::TransportTrainStation;
     s_visualCategories[OsmTag("transport", "tram_stop")]        = GeoDataPlacemark::TransportTramStop;
     s_visualCategories[OsmTag("transport", "bus_stop")]         = GeoDataPlacemark::TransportBusStop;
+    s_visualCategories[OsmTag("highway", "speed_camera")]       = GeoDataPlacemark::TransportSpeedCamera;
     s_visualCategories[OsmTag("amenity", "bicycle_parking")]    = GeoDataPlacemark::TransportBicycleParking;
     s_visualCategories[OsmTag("amenity", "motorcycle_parking")] = GeoDataPlacemark::TransportMotorcycleParking;
     s_visualCategories[OsmTag("railway", "subway_entrance")]    = GeoDataPlacemark::TransportSubwayEntrance;
@@ -1580,6 +1583,7 @@ QStringList StyleBuilder::renderOrder() const
         paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataPlacemark::EducationSchool);
         paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataPlacemark::EducationUniversity);
         paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataPlacemark::HealthHospital);
+        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataPlacemark::TransportSpeedCamera);
         paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataPlacemark::MilitaryDangerArea);
 
         paintLayerOrder << QStringLiteral("Polygon/Building/frame");
@@ -1834,6 +1838,7 @@ QString StyleBuilder::visualCategoryName(GeoDataPlacemark::GeoDataVisualCategory
         visualCategoryNames[GeoDataPlacemark::TransportTaxiRank] = "TransportTaxiRank";
         visualCategoryNames[GeoDataPlacemark::TransportTrainStation] = "TransportTrainStation";
         visualCategoryNames[GeoDataPlacemark::TransportTramStop] = "TransportTramStop";
+        visualCategoryNames[GeoDataPlacemark::TransportSpeedCamera] = "TransportSpeedCamera";
         visualCategoryNames[GeoDataPlacemark::TransportBicycleParking] = "TransportBicycleParking";
         visualCategoryNames[GeoDataPlacemark::TransportMotorcycleParking] = "TransportMotorcycleParking";
         visualCategoryNames[GeoDataPlacemark::TransportSubwayEntrance] = "TransportSubwayEntrance";
