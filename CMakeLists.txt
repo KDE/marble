@@ -120,7 +120,6 @@ find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED
 if(CMAKE_SYSTEM_NAME STREQUAL Android)
     find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED
         COMPONENTS
-            Location
             Positioning
             Multimedia
     )
