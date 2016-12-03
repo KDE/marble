@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   width="100%"
+   height="100%"
+   viewBox="0 0 16 16"
+   id="svg2">
+  <metadata
+     id="metadata10">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs8" />
+  <path
+     style="fill:#0092da;fill-opacity:1;stroke:#ffffff;stroke-width:0.6;stroke-miterlimit:4;stroke-dasharray:none"
+     d="M 9,1 9,3 8,2.5 1,6 1,8 2.5,7.3496094 2.5,15 4,15 4,6.6992188 8,5 9,5.4257812 9,10 5.5,10 c 0.025314,1.65157 -0.034277,3.38952 0,5 l 5,0 c 0.01821,-2.953264 0.006,-5.9496133 0,-8.9375 L 12,6.6992188 12,15 13.5,15 13.5,7.3496094 15,8 15,6 10.5,3.75 C 10.4985,2.8314022 10.5,1.9158261 10.5,1 L 9,1 Z M 8,12 c 0,0 1,0 1,1 l 0,1 -2,0 0,-1 c 0,-1 1,-1 1,-1 z"
+     id="wilderness-hut-6" />
+  <path
+     style="fill:#0092da;fill-opacity:1;stroke:none"
+     d="M 9,1 9,3 8,2.5 1,6 1,8 2.5,7.3496094 2.5,15 4,15 4,6.6992188 8,5 9,5.4257812 9,10 5.5,10 c 0.025314,1.65157 -0.034277,3.38952 0,5 l 5,0 c 0.01821,-2.953264 0.006,-5.9496133 0,-8.9375 L 12,6.6992188 12,15 13.5,15 13.5,7.3496094 15,8 15,6 10.5,3.75 c -0.0015,-0.9185978 0,-1.8341739 0,-2.75 L 9,1 Z M 8,12 c 0,0 1,0 1,1 l 0,1 -2,0 0,-1 c 0,-1 1,-1 1,-1 z"
+     id="wilderness-hut" />
+  <rect
+     width="14"
+     height="14"
+     x="2.7627118"
+     y="-5.1694913"
+     id="canvas"
+     style="visibility:hidden;fill:none;stroke:none" />
+</svg>
