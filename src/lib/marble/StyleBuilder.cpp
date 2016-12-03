@@ -590,7 +590,9 @@ void StyleBuilder::Private::initializeDefaultStyles()
 
     m_defaultStyle[GeoDataPlacemark::BarrierCityWall]          = createStyle(6.0, 3.0, "#787878", Qt::transparent, true, false, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector<qreal>(), osmFont, Qt::transparent);
     m_defaultStyle[GeoDataPlacemark::BarrierGate]              = createOsmPOIStyle(osmFont, "individual/gate");
+    m_defaultStyle[GeoDataPlacemark::BarrierGate]->iconStyle().setScale(0.75);
     m_defaultStyle[GeoDataPlacemark::BarrierLiftGate]          = createOsmPOIStyle(osmFont, "individual/liftgate");
+    m_defaultStyle[GeoDataPlacemark::BarrierLiftGate]->iconStyle().setScale(0.75);
     m_defaultStyle[GeoDataPlacemark::BarrierWall]              = createStyle(2.0, 0.0, "#787878", Qt::transparent, true, false, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector<qreal>(), osmFont, Qt::transparent);
 
     m_defaultStyle[GeoDataPlacemark::HighwaySteps]             = createStyle(0.0, 2.0, "#fa8072", QColor(Qt::white), true, true, Qt::SolidPattern, Qt::CustomDashLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3, osmFont);
