@@ -209,7 +209,15 @@ QVector<BuildingGeoPolygonGraphicsItem::NamedEntry> BuildingGeoPolygonGraphicsIt
 
 void BuildingGeoPolygonGraphicsItem::paint(GeoPainter* painter, const ViewportParams* viewport, const QString &layer, int tileZoomLevel)
 {
-    Q_UNUSED(tileZoomLevel);
+    // Just display flat buildings for tile level 17
+    if (tileZoomLevel == 17) {
+        if (layer.endsWith(QLatin1String("/frame"))) {
+            AbstractGeoPolygonGraphicsItem::paint(painter, viewport, layer, tileZoomLevel );
+        }
+        return;
+    }
+
+    // For level 18, 19 .. render 3D buildings in perspective
     if (layer.endsWith(QLatin1String("/frame"))) {
         Q_ASSERT(m_cachedOuterPolygons.isEmpty());
         Q_ASSERT(m_cachedInnerPolygons.isEmpty());
