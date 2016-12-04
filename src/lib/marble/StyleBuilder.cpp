@@ -462,7 +462,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::AmenityPostOffice]        = createOsmPOIStyle(osmFont, "amenity/post_office-14", amenityColor);
     m_defaultStyle[GeoDataPlacemark::AmenityPrison]            = createOsmPOIStyle(osmFont, "amenity/prison.16", amenityColor);
     m_defaultStyle[GeoDataPlacemark::AmenityRecycling]         = createOsmPOIStyle(osmFont, "amenity/recycling.16", amenityColor);
-    m_defaultStyle[GeoDataPlacemark::AmenityShelter]           = createOsmPOIStyle(osmFont, "amenity/shelter-14", amenityColor);
+    m_defaultStyle[GeoDataPlacemark::AmenityShelter]           = createOsmPOIStyle(osmFont, "transportation/shelter", transportationColor);
     m_defaultStyle[GeoDataPlacemark::AmenityTelephone]         = createOsmPOIStyle(osmFont, "amenity/telephone.16", amenityColor);
     m_defaultStyle[GeoDataPlacemark::AmenityToilets]           = createOsmPOIStyle(osmFont, "amenity/toilets.16", amenityColor);
     m_defaultStyle[GeoDataPlacemark::AmenityTownHall]          = createOsmPOIStyle(osmFont, "amenity/town_hall.16", amenityColor);

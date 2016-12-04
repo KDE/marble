@@ -155,6 +155,7 @@ qint64 OsmNode::popularityFor(GeoDataPlacemark::GeoDataVisualCategory category)
         popularities << GeoDataPlacemark::AmenityNightClub;
         popularities << GeoDataPlacemark::AmenityCourtHouse;
         popularities << GeoDataPlacemark::AmenityFireStation;
+        popularities << GeoDataPlacemark::AmenityShelter;
         popularities << GeoDataPlacemark::AmenityHuntingStand;
         popularities << GeoDataPlacemark::AmenityPolice;
         popularities << GeoDataPlacemark::AmenityPostBox;
