@@ -1,0 +1,8 @@
+TEMPLATE = app
+
+CONFIG += qt
+
+QT += Marble
+
+SOURCES += \
+  main.cpp
