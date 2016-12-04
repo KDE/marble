@@ -36,3 +36,6 @@ target_link_libraries(${TARGET} marblewidget Qt5::Sql)
 
 add_executable(marble-vectorosm-tilecreator vectorosm-tilecreator.cpp)
 target_link_libraries(marble-vectorosm-tilecreator ${TARGET})
+
+add_executable(marble-vectorosm-cachetiles vectorosm-cachetiles.cpp)
+target_link_libraries(marble-vectorosm-cachetiles ${TARGET})
