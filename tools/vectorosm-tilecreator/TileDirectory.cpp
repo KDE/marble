@@ -163,9 +163,7 @@ TagsFilter::Tags TileDirectory::tagsFilteredIn(int zoomLevel) const
     if (m_tags.isEmpty()) {
         QSet<GeoDataPlacemark::GeoDataVisualCategory> categories;
         for (int i=GeoDataPlacemark::PlaceCity; i<GeoDataPlacemark::LastIndex; ++i) {
-            if (i != GeoDataPlacemark::NaturalWater) {
-                categories << GeoDataPlacemark::GeoDataVisualCategory(i);
-            }
+            categories << GeoDataPlacemark::GeoDataVisualCategory(i);
         }
 
         auto const tagMap = StyleBuilder::osmTagMapping();

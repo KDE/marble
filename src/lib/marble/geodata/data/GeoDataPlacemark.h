@@ -433,6 +433,13 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
         // OpenStreetMap category Power
         PowerTower,
 
+        // Waterways
+        WaterwayCanal,
+        WaterwayDitch,
+        WaterwayDrain,
+        WaterwayRiver,
+        WaterwayStream,
+
         //Admin level tags for depicting boundary
         AdminLevel1,
         AdminLevel2,

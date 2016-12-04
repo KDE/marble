@@ -239,7 +239,7 @@ def feature_class(data):
     'depression': [],
     'pass': [],
     'sound': [('natural', 'water')],
-    'river':  [('natural', 'water')],
+    'river':  [('waterway', 'river')],
     'generic': [('natural', 'water')], #still have to confirm what generic means exactly in marine_polygons?
     'lagoon': [('natural', 'water'), ('water', 'lagoon')], 
     'reef': [('natural', 'reef')],

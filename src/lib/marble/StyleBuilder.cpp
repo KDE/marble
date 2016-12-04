@@ -627,8 +627,15 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::TransportSpeedCamera]     = createOsmPOIStyle(osmFont, "individual/speedcamera");
 
     m_defaultStyle[GeoDataPlacemark::NaturalWater]             = createStyle(4, 0, waterColor, waterColor, true, false,
-                                                                                                   Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false, QVector< qreal >(),
-                                                                                                   osmFont, waterColor.darker(150));
+                                                                             Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false, QVector< qreal >(),
+                                                                             osmFont, waterColor.darker(150));
+    m_defaultStyle[GeoDataPlacemark::WaterwayRiver]            = createStyle(4, 0, waterColor, waterColor, true, false,
+                                                                             Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false, QVector< qreal >(),
+                                                                             osmFont, waterColor.darker(150));
+    m_defaultStyle[GeoDataPlacemark::WaterwayCanal]           = m_defaultStyle[GeoDataPlacemark::WaterwayRiver];
+    m_defaultStyle[GeoDataPlacemark::WaterwayDitch]           = m_defaultStyle[GeoDataPlacemark::WaterwayRiver];
+    m_defaultStyle[GeoDataPlacemark::WaterwayDrain]           = m_defaultStyle[GeoDataPlacemark::WaterwayRiver];
+    m_defaultStyle[GeoDataPlacemark::WaterwayStream]          = m_defaultStyle[GeoDataPlacemark::WaterwayRiver];
 
     m_defaultStyle[GeoDataPlacemark::NaturalReef]              = createStyle(5.5, 0, "#36677c", "#36677c", true, false,
                                                                                                    Qt::Dense7Pattern, Qt::DotLine, Qt::RoundCap, false, QVector< qreal >(),
@@ -963,10 +970,12 @@ void StyleBuilder::Private::initializeOsmVisualCategories()
     s_visualCategories[OsmTag("natural", "reef")]               = GeoDataPlacemark::NaturalReef;
     s_visualCategories[OsmTag("natural", "bay")]                = GeoDataPlacemark::NaturalWater;
     s_visualCategories[OsmTag("natural", "coastline")]          = GeoDataPlacemark::NaturalWater;
-    s_visualCategories[OsmTag("waterway", "stream")]            = GeoDataPlacemark::NaturalWater;
-    s_visualCategories[OsmTag("waterway", "river")]             = GeoDataPlacemark::NaturalWater;
+    s_visualCategories[OsmTag("waterway", "stream")]            = GeoDataPlacemark::WaterwayStream;
+    s_visualCategories[OsmTag("waterway", "river")]             = GeoDataPlacemark::WaterwayRiver;
     s_visualCategories[OsmTag("waterway", "riverbank")]         = GeoDataPlacemark::NaturalWater;
-    s_visualCategories[OsmTag("waterway", "canal")]             = GeoDataPlacemark::NaturalWater;
+    s_visualCategories[OsmTag("waterway", "canal")]             = GeoDataPlacemark::WaterwayCanal;
+    s_visualCategories[OsmTag("waterway", "drain")]             = GeoDataPlacemark::WaterwayDrain;
+    s_visualCategories[OsmTag("waterway", "ditch")]             = GeoDataPlacemark::WaterwayDitch;
 
     s_visualCategories[OsmTag("natural", "wood")]               = GeoDataPlacemark::NaturalWood;
     s_visualCategories[OsmTag("natural", "beach")]              = GeoDataPlacemark::NaturalBeach;
@@ -1325,6 +1334,12 @@ void StyleBuilder::Private::initializeMinimumZoomLevels()
 
     s_defaultMinZoomLevels[GeoDataPlacemark::UrbanArea]   = 3;
 
+    s_defaultMinZoomLevels[GeoDataPlacemark::WaterwayCanal] = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::WaterwayDitch] = 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::WaterwayDrain] = 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::WaterwayStream] = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::WaterwayRiver] = 3;
+
     for ( int i = GeoDataPlacemark::PlaceCity; i < GeoDataPlacemark::LastIndex; i++ ) {
         if (s_defaultMinZoomLevels[i] < 0) {
             qDebug() << "Missing default min zoom level for GeoDataPlacemark::GeoDataVisualCategory " << i;
@@ -1537,7 +1552,7 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
                 }
             }
 
-        } else if (visualCategory == GeoDataPlacemark::NaturalWater) {
+        } else if (visualCategory >= GeoDataPlacemark::WaterwayCanal && visualCategory <= GeoDataPlacemark::WaterwayRiver) {
             if (parameters.tileLevel <= 3) {
                 lineStyle.setWidth(1);
                 lineStyle.setPhysicalWidth(0.0);
@@ -1648,10 +1663,10 @@ QStringList StyleBuilder::renderOrder() const
         paintLayerOrder << Private::createPaintLayerItem("LineString", GeoDataPlacemark::Landmass);
 
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::NaturalWater);
-        paintLayerOrder << Private::createPaintLayerItem("LineString", GeoDataPlacemark::NaturalWater, "outline");
-        paintLayerOrder << Private::createPaintLayerItem("LineString", GeoDataPlacemark::NaturalWater, "inline");
-        paintLayerOrder << Private::createPaintLayerItem("LineString", GeoDataPlacemark::NaturalWater, "label");
-
+        for (int i = GeoDataPlacemark::WaterwayCanal; i <= GeoDataPlacemark::WaterwayRiver; ++i) {
+            paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataPlacemark::GeoDataVisualCategory)i, "inline");
+            paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataPlacemark::GeoDataVisualCategory)i, "label");
+        }
 
         paintLayerOrder << Private::createPaintLayerItem("LineString", GeoDataPlacemark::NaturalReef, "outline");
         paintLayerOrder << Private::createPaintLayerItem("LineString", GeoDataPlacemark::NaturalReef, "inline");
@@ -2061,6 +2076,11 @@ QString StyleBuilder::visualCategoryName(GeoDataPlacemark::GeoDataVisualCategory
         visualCategoryNames[GeoDataPlacemark::AdminLevel10] = "AdminLevel10";
         visualCategoryNames[GeoDataPlacemark::AdminLevel11] = "AdminLevel11";
         visualCategoryNames[GeoDataPlacemark::BoundaryMaritime] = "BoundaryMaritime";
+        visualCategoryNames[GeoDataPlacemark::WaterwayCanal] = "WaterwayCanal";
+        visualCategoryNames[GeoDataPlacemark::WaterwayDitch] = "WaterwayDitch";
+        visualCategoryNames[GeoDataPlacemark::WaterwayDrain] = "WaterwayDrain";
+        visualCategoryNames[GeoDataPlacemark::WaterwayStream] = "WaterwayStream";
+        visualCategoryNames[GeoDataPlacemark::WaterwayRiver] = "WaterwayRiver";
         visualCategoryNames[GeoDataPlacemark::LastIndex] = "LastIndex";
     }
 

@@ -654,6 +654,11 @@ QString GeoDataPlacemark::categoryName() const
     case UrbanArea: return GeoDataPlacemarkPrivate::tr("Urban Area");
     case InternationalDateLine: return GeoDataPlacemarkPrivate::tr("International Date Line");
     case Bathymetry: return GeoDataPlacemarkPrivate::tr("Bathymetry");
+    case WaterwayCanal: return GeoDataPlacemarkPrivate::tr("Canal");
+    case WaterwayDrain: return GeoDataPlacemarkPrivate::tr("Drain");
+    case WaterwayDitch: return GeoDataPlacemarkPrivate::tr("Ditch");
+    case WaterwayStream: return GeoDataPlacemarkPrivate::tr("Stream");
+    case WaterwayRiver: return GeoDataPlacemarkPrivate::tr("River");
 
     case Default:
     case Unknown:
