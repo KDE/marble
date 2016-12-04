@@ -335,6 +335,7 @@ bool AzimuthalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
     Q_Q( const AzimuthalProjection );
 
     const TessellationFlags f = lineString.tessellationFlags();
+    bool const tessellate = lineString.tessellate();
     const bool noFilter = f.testFlag(PreventNodeFiltering);
 
 
@@ -349,7 +350,11 @@ bool AzimuthalProjectionPrivate::lineStringToPolygon( const GeoDataLineString &l
     qreal horizonX = -1.0;
     qreal horizonY = -1.0;
 
-    polygons.append( new QPolygonF );
+    QPolygonF * polygon = new QPolygonF;
+    if (!tessellate) {
+        polygon->reserve(lineString.size());
+    }
+    polygons.append( polygon );
 
     GeoDataLineString::ConstIterator itCoords = lineString.constBegin();
     GeoDataLineString::ConstIterator itPreviousCoords = lineString.constBegin();

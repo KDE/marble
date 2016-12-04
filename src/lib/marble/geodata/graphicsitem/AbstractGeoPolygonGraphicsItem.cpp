@@ -67,6 +67,7 @@ void AbstractGeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportP
     configurePainter(painter, viewport);
     if ( m_polygon ) {
         bool innerResolved = false;
+
         for(auto const & ring : m_polygon->innerBoundaries()) {
             if (viewport->resolves(ring.latLonAltBox(), 4)) {
                innerResolved = true;
@@ -156,7 +157,7 @@ QPixmap AbstractGeoPolygonGraphicsItem::texture(const QString &texturePath, cons
     QPixmap texture;
     if (!m_textureCache.find(key, texture)) {
         if (textureImage.hasAlphaChannel()) {
-            QImage image = QImage (textureImage.size(), QImage::Format_ARGB32_Premultiplied);
+            QImage image (textureImage.size(), QImage::Format_ARGB32_Premultiplied);
             image.fill(color);
             QPainter imagePainter(&image);
             imagePainter.drawImage(0, 0, textureImage);

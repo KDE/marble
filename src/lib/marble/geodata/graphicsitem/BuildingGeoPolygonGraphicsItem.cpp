@@ -429,7 +429,9 @@ void BuildingGeoPolygonGraphicsItem::paintFrame(GeoPainter *painter, const Viewp
                 bool backface = (b.x() - a.x()) * (shiftA.y() - a.y())
                         - (b.y() - a.y()) * (shiftA.x() - a.x()) >= 0;
                 if (!backface) {
-                    QPolygonF buildingSide = QPolygonF() << a << shiftA << shiftB << b;
+                    QPolygonF buildingSide;
+                    buildingSide.reserve(4);
+                    buildingSide << a << shiftA << shiftB << b;
                     painter->drawPolygon(buildingSide);
                 }
                 a = b;
@@ -456,7 +458,9 @@ void BuildingGeoPolygonGraphicsItem::paintFrame(GeoPainter *painter, const Viewp
                 bool backface = (b.x() - a.x()) * (shiftA.y() - a.y())
                         - (b.y() - a.y()) * (shiftA.x() - a.x()) >= 0;
                 if (backface) {
-                    QPolygonF buildingSide = QPolygonF() << a << shiftA << shiftB << b;
+                    QPolygonF buildingSide;
+                    buildingSide.reserve(4);
+                    buildingSide << a << shiftA << shiftB << b;
                     painter->drawPolygon(buildingSide);
                 }
                 a = b;

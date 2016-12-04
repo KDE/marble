@@ -269,6 +269,7 @@ bool CylindricalProjectionPrivate::lineStringToPolygon( const GeoDataLineString 
                                               QVector<QPolygonF *> &polygons ) const
 {
     const TessellationFlags f = lineString.tessellationFlags();
+    bool const tessellate = lineString.tessellate();
     const bool noFilter = f.testFlag(PreventNodeFiltering);
 
     qreal x = 0;
@@ -280,7 +281,11 @@ bool CylindricalProjectionPrivate::lineStringToPolygon( const GeoDataLineString 
     int mirrorCount = 0;
     qreal distance = repeatDistance( viewport );
 
-    polygons.append( new QPolygonF );
+    QPolygonF * polygon = new QPolygonF;
+    if (!tessellate) {
+        polygon->reserve(lineString.size());
+    }
+    polygons.append( polygon );
 
     GeoDataLineString::ConstIterator itCoords = lineString.constBegin();
     GeoDataLineString::ConstIterator itPreviousCoords = lineString.constBegin();
@@ -302,7 +307,6 @@ bool CylindricalProjectionPrivate::lineStringToPolygon( const GeoDataLineString 
     bool isStraight = lineString.latLonAltBox().height() == 0 || lineString.latLonAltBox().width() == 0;
 
     Q_Q( const CylindricalProjection );
-    bool const tesselate = lineString.tessellate();
     bool const isClosed = lineString.isClosed();
     while ( itCoords != itEnd )
     {
@@ -324,7 +328,7 @@ bool CylindricalProjectionPrivate::lineStringToPolygon( const GeoDataLineString 
             // This if-clause contains the section that tessellates the line
             // segments of a linestring. If you are about to learn how the code of
             // this class works you can safely ignore this section for a start.
-            if ( tesselate && !isStraight) {
+            if ( tessellate && !isStraight) {
                 mirrorCount = tessellateLineSegment( *itPreviousCoords, previousX, previousY,
                                            *itCoords, x, y,
                                            polygons, viewport,
