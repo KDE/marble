@@ -1,4 +1,4 @@
-SET (TARGET marble-vectorosm-tilecreator)
+SET (TARGET vectorosm-toolchain)
 PROJECT (${TARGET})
 
 if (POLICY CMP0063)
@@ -17,10 +17,9 @@ include_directories(
 ../mbtile-import
 )
 
-set( ${TARGET}_SRC 
+add_library(${TARGET} STATIC
 ../mbtile-import/MbTileWriter.cpp
 clipper/clipper.cpp
-vectorosm-tilecreator.cpp
 BaseClipper.cpp
 BaseFilter.cpp
 NodeReducer.cpp
@@ -33,7 +32,7 @@ VectorClipper.cpp
 WayConcatenator.cpp
 WayChunk.cpp
 )
-
-add_executable( ${TARGET} ${${TARGET}_SRC} )
-
 target_link_libraries(${TARGET} marblewidget Qt5::Sql)
+
+add_executable(marble-vectorosm-tilecreator vectorosm-tilecreator.cpp)
+target_link_libraries(marble-vectorosm-tilecreator ${TARGET})
