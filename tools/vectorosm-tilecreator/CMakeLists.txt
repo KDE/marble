@@ -20,7 +20,7 @@ include_directories(
 set( ${TARGET}_SRC 
 ../mbtile-import/MbTileWriter.cpp
 clipper/clipper.cpp
-main.cpp
+vectorosm-tilecreator.cpp
 BaseClipper.cpp
 BaseFilter.cpp
 NodeReducer.cpp
