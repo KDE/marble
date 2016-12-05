@@ -240,6 +240,10 @@ bool  GeoLineStringGraphicsItem::configurePainterForOutline(GeoPainter *painter,
         painter->setPen( QPen() );
     }
     else {
+        if (!style->polyStyle().outline()) {
+            return false;
+        }
+
         const GeoDataLineStyle& lineStyle = style->lineStyle();
 
         // To save performance we avoid making changes to the painter's pen.
@@ -405,7 +409,6 @@ bool  GeoLineStringGraphicsItem::configurePainterForInline(GeoPainter *painter, 
 //        else qDebug() << "Detach and painter change successfully Avoided!" << Q_FUNC_INFO;
 
         if (lineStyle.background()) {
-//          qDebug() << "BACKGROUND";
             QBrush brush = painter->background();
             brush.setColor(style->polyStyle().paintedColor());
             painter->setBackground( brush );

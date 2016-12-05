@@ -119,9 +119,9 @@ StyleBuilder::Private::Private() :
 }
 
 GeoDataStyle::Ptr StyleBuilder::Private::createPOIStyle(const QFont &font, const QString &path,
-                                     const QColor &textColor, const QColor &color, const QColor &outline, bool fill, bool renderOutline) const
+                                     const QColor &textColor, const QColor &color, const QColor &outlineColor, bool fill, bool renderOutline) const
 {
-    GeoDataStyle::Ptr style =  createStyle(1, 0, color, outline, fill, renderOutline, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false, QVector<qreal>(), font);
+    GeoDataStyle::Ptr style =  createStyle(1, 0, color, outlineColor, fill, renderOutline, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false, QVector<qreal>(), font);
     style->setIconStyle( GeoDataIconStyle( path) );
     auto const screen = QApplication::screens().first();
     double const physicalSize = 6.0; // mm
@@ -133,24 +133,24 @@ GeoDataStyle::Ptr StyleBuilder::Private::createPOIStyle(const QFont &font, const
 }
 
 GeoDataStyle::Ptr StyleBuilder::Private::createOsmPOIStyle( const QFont &font, const QString &imagePath,
-                                     const QColor &textColor, const QColor &color, const QColor &outline) const
+                                     const QColor &textColor, const QColor &color, const QColor &outlineColor) const
 {
     QString const path = MarbleDirs::path(QLatin1String("svg/osmcarto/svg/") + imagePath + QLatin1String(".svg"));
-    return createPOIStyle(font, path, textColor, color, outline, false, false);
+    return createPOIStyle(font, path, textColor, color, outlineColor, false, false);
 }
 
 GeoDataStyle::Ptr StyleBuilder::Private::createOsmPOIRingStyle( const QFont &font, const QString &imagePath,
-                                     const QColor &textColor, const QColor &color, const QColor &outline) const
+                                     const QColor &textColor, const QColor &color, const QColor &outlineColor) const
 {
     QString const path = MarbleDirs::path(QLatin1String("svg/osmcarto/svg/") + imagePath + QLatin1String(".svg"));
-    return createPOIStyle(font, path, textColor, color, outline, false, true);
+    return createPOIStyle(font, path, textColor, color, outlineColor, false, true);
 }
 
 GeoDataStyle::Ptr StyleBuilder::Private::createOsmPOIAreaStyle( const QFont &font, const QString &imagePath,
-                                     const QColor &textColor, const QColor &color, const QColor &outline) const
+                                     const QColor &textColor, const QColor &color, const QColor &outlineColor) const
 {
     QString const path = MarbleDirs::path(QLatin1String("svg/osmcarto/svg/") + imagePath + QLatin1String(".svg"));
-    return createPOIStyle(font, path, textColor, color, outline, true, false);
+    return createPOIStyle(font, path, textColor, color, outlineColor, true, false);
 }
 
 
@@ -1664,6 +1664,7 @@ QStringList StyleBuilder::renderOrder() const
 
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::NaturalWater);
         for (int i = GeoDataPlacemark::WaterwayCanal; i <= GeoDataPlacemark::WaterwayRiver; ++i) {
+            paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataPlacemark::GeoDataVisualCategory)i, "outline");
             paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataPlacemark::GeoDataVisualCategory)i, "inline");
             paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataPlacemark::GeoDataVisualCategory)i, "label");
         }
@@ -1685,14 +1686,14 @@ QStringList StyleBuilder::renderOrder() const
         for ( int i = GeoDataPlacemark::HighwaySteps; i <= GeoDataPlacemark::HighwayMotorway; i++ ) {
             paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataPlacemark::GeoDataVisualCategory)i, "inline");
         }
+        for ( int i = GeoDataPlacemark::HighwaySteps; i <= GeoDataPlacemark::HighwayMotorway; i++ ) {
+            paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataPlacemark::GeoDataVisualCategory)i, "label");
+        }
         for ( int i = GeoDataPlacemark::RailwayRail; i <= GeoDataPlacemark::RailwayFunicular; i++ ) {
             paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataPlacemark::GeoDataVisualCategory)i, "outline");
         }
         for ( int i = GeoDataPlacemark::RailwayRail; i <= GeoDataPlacemark::RailwayFunicular; i++ ) {
             paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataPlacemark::GeoDataVisualCategory)i, "inline");
-        }
-        for ( int i = GeoDataPlacemark::HighwaySteps; i <= GeoDataPlacemark::HighwayMotorway; i++ ) {
-            paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataPlacemark::GeoDataVisualCategory)i, "label");
         }
         for ( int i = GeoDataPlacemark::RailwayRail; i <= GeoDataPlacemark::RailwayFunicular; i++ ) {
             paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataPlacemark::GeoDataVisualCategory)i, "label");
