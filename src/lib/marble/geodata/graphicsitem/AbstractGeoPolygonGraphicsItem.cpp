@@ -25,6 +25,7 @@
 #include "ViewportParams.h"
 
 #include <QtMath>
+#include <QImageReader>
 
 namespace Marble
 {
@@ -156,7 +157,9 @@ QPixmap AbstractGeoPolygonGraphicsItem::texture(const QString &texturePath, cons
     QString const key = QString("%1/%2").arg(color.rgba()).arg(texturePath);
     QPixmap texture;
     if (!m_textureCache.find(key, texture)) {
-        texture.load(style()->polyStyle().resolvePath(texturePath));
+        QImageReader imageReader(style()->polyStyle().resolvePath(texturePath));
+        texture = QPixmap::fromImageReader(&imageReader);
+
         if (texture.hasAlphaChannel()) {
             QPixmap pixmap (texture.size());
             pixmap.fill(color);
