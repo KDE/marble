@@ -69,6 +69,7 @@ RoutingRunner *YoursPlugin::newRunner() const
 
 class YoursConfigWidget : public RoutingRunnerPlugin::ConfigWidget
 {
+Q_OBJECT
 public:
     YoursConfigWidget()
         : RoutingRunnerPlugin::ConfigWidget()
@@ -163,4 +164,4 @@ QHash< QString, QVariant > YoursPlugin::templateSettings(RoutingProfilesModel::P
 
 }
 
-#include "moc_YoursPlugin.cpp"
+#include "YoursPlugin.moc"

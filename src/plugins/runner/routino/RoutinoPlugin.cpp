@@ -67,6 +67,7 @@ RoutingRunner *RoutinoPlugin::newRunner() const
 
 class RoutinoConfigWidget : public RoutingRunnerPlugin::ConfigWidget
 {
+Q_OBJECT
 public:
     RoutinoConfigWidget()
         : RoutingRunnerPlugin::ConfigWidget()
@@ -175,4 +176,4 @@ bool RoutinoPlugin::canWork() const
 
 }
 
-#include "moc_RoutinoPlugin.cpp"
+#include "RoutinoPlugin.moc"
