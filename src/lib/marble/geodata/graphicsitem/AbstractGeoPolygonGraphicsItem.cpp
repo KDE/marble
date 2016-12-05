@@ -123,7 +123,7 @@ QPen AbstractGeoPolygonGraphicsItem::configurePainter(GeoPainter *painter, const
                     GeoDataCoordinates coords = latLonAltBox().center();
                     qreal x, y;
                     viewport->screenCoordinates(coords, x, y);
-                    QBrush brush(texture(polyStyle.texturePath(), polyStyle.textureImage(), paintedColor));
+                    QBrush brush(texture(polyStyle.texturePath(), paintedColor));
                     painter->setBrush(brush);
                     painter->setBrushOrigin(QPoint(x,y));
                 }
@@ -151,21 +151,19 @@ int AbstractGeoPolygonGraphicsItem::extractElevation(const GeoDataPlacemark &pla
     return elevation;
 }
 
-QPixmap AbstractGeoPolygonGraphicsItem::texture(const QString &texturePath, const QImage &textureImage, const QColor &color)
+QPixmap AbstractGeoPolygonGraphicsItem::texture(const QString &texturePath, const QColor &color)
 {
     QString const key = QString("%1/%2").arg(color.rgba()).arg(texturePath);
     QPixmap texture;
     if (!m_textureCache.find(key, texture)) {
-        if (textureImage.hasAlphaChannel()) {
-            QImage image (textureImage.size(), QImage::Format_ARGB32_Premultiplied);
-            image.fill(color);
-            QPainter imagePainter(&image);
-            imagePainter.drawImage(0, 0, textureImage);
+        texture.load(style()->polyStyle().resolvePath(texturePath));
+        if (texture.hasAlphaChannel()) {
+            QPixmap pixmap (texture.size());
+            pixmap.fill(color);
+            QPainter imagePainter(&pixmap);
+            imagePainter.drawPixmap(0, 0, texture);
             imagePainter.end();
-            texture = QPixmap::fromImage(image);
-        }
-        else {
-            texture = QPixmap::fromImage(textureImage);
+            texture = pixmap;
         }
         m_textureCache.insert(key, texture);
     }

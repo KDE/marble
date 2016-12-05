@@ -46,7 +46,7 @@ protected:
     static int extractElevation(const GeoDataPlacemark &placemark);
 
 private:
-    QPixmap texture(const QString &path, const QImage &textureImage, const QColor &color);
+    QPixmap texture(const QString &path, const QColor &color);
 
     const GeoDataPolygon *const m_polygon;
     const GeoDataLinearRing *const m_ring;
