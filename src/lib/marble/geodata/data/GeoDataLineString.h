@@ -287,6 +287,10 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry
 */
     void insert( int index, const GeoDataCoordinates& value );
 
+/*!
+    \brief Attempts to allocate memory for at least \a size coordinates.
+*/
+    void reserve(int size);
 
 /*!
     \brief Appends a given geodesic position as a new node to the LineString.

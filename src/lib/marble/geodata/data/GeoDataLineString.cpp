@@ -417,6 +417,12 @@ void GeoDataLineString::append ( const GeoDataCoordinates& value )
     d->m_vector.append( value );
 }
 
+void GeoDataLineString::reserve(int size)
+{
+    Q_D(GeoDataLineString);
+    d->m_vector.reserve(size);
+}
+
 void GeoDataLineString::append(const QVector<GeoDataCoordinates>& values)
 {
     detach();
