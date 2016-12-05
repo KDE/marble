@@ -258,8 +258,8 @@ void BuildingGeoPolygonGraphicsItem::paintRoof(GeoPainter* painter, const Viewpo
         return; // do not render roof if we look inside the building
     }
 
-    painter->save();
-    QPen const currentPen = configurePainter(painter, viewport);
+    bool isValid = configurePainter(painter, viewport);
+    if (!isValid) return;
 
     qreal maxSize(0.0);
     QPointF roofCenter;
@@ -270,6 +270,8 @@ void BuildingGeoPolygonGraphicsItem::paintRoof(GeoPainter* painter, const Viewpo
 
     if ( drawAccurate3D) {
         if (m_hasInnerBoundaries) {
+
+            QPen const currentPen = painter->pen();
 
             painter->setPen(Qt::NoPen);
             QVector<QPolygonF*> fillPolygons =
@@ -300,6 +302,8 @@ void BuildingGeoPolygonGraphicsItem::paintRoof(GeoPainter* painter, const Viewpo
         painter->translate(offset);
 
         if (m_hasInnerBoundaries) {
+
+            QPen const currentPen = painter->pen();
 
             painter->setPen(Qt::NoPen);
             QVector<QPolygonF*> fillPolygons = painter->createFillPolygons( m_cachedOuterPolygons,
@@ -378,8 +382,6 @@ void BuildingGeoPolygonGraphicsItem::paintRoof(GeoPainter* painter, const Viewpo
                                      QFlags<BatchedPlacemarkRenderer::Frames>() |= BatchedPlacemarkRenderer::RoundFrame);
         }
     }
-
-    painter->restore();
 }
 
 void BuildingGeoPolygonGraphicsItem::paintFrame(GeoPainter *painter, const ViewportParams *viewport)
@@ -394,13 +396,12 @@ void BuildingGeoPolygonGraphicsItem::paintFrame(GeoPainter *painter, const Viewp
         return;
     }
 
-    painter->save();
-
     bool drawAccurate3D;
     bool isCameraAboveBuilding;
     initializeBuildingPainting(painter, viewport, drawAccurate3D, isCameraAboveBuilding);
 
-    configureFramePainter(painter);
+    bool isValid = configurePainterForFrame(painter);
+    if (!isValid) return;
 
     if ( drawAccurate3D && isCameraAboveBuilding ) {
         foreach(QPolygonF* outline, m_cachedOuterPolygons) {
@@ -470,8 +471,6 @@ void BuildingGeoPolygonGraphicsItem::paintFrame(GeoPainter *painter, const Viewp
                 painter->drawPolygon(*fillPolygon);
             }
     }
-
-    painter->restore();
 }
 
 void BuildingGeoPolygonGraphicsItem::screenPolygons(const ViewportParams *viewport, const GeoDataPolygon *polygon,
@@ -495,26 +494,33 @@ void BuildingGeoPolygonGraphicsItem::screenPolygons(const ViewportParams *viewpo
     }
 }
 
-void BuildingGeoPolygonGraphicsItem::configureFramePainter(GeoPainter *painter) const
+bool BuildingGeoPolygonGraphicsItem::configurePainterForFrame(GeoPainter *painter) const
 {
+    QPen currentPen = painter->pen();
+
     GeoDataStyle::ConstPtr style = this->style();
     if (!style) {
         painter->setPen( QPen() );
     }
     else {
         const GeoDataPolyStyle& polyStyle = style->polyStyle();
-        const QColor transparentColor(Qt::transparent);
 
-        painter->setPen(Qt::NoPen);
+        if (currentPen.style() != Qt::NoPen) {
+            painter->setPen(Qt::NoPen);
+        }
 
         if (!polyStyle.fill()) {
-            painter->setBrush(transparentColor);
+            return false;
         }
         else {
-            const QColor paintedColor = polyStyle.paintedColor();
-            painter->setBrush(paintedColor.darker(150));
+            const QColor paintedColor = polyStyle.paintedColor().darker(150);
+            if (painter->brush().color() != paintedColor) {
+                painter->setBrush(paintedColor);
+            }
         }
     }
+
+    return true;
 }
 
 }

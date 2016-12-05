@@ -37,7 +37,7 @@ private:
     void paintFrame(GeoPainter* painter, const ViewportParams *viewport);
 
     void paintRoof(GeoPainter* painter, const ViewportParams *viewport);
-    void configureFramePainter(GeoPainter *painter) const;
+    bool configurePainterForFrame(GeoPainter *painter) const;
     void initializeBuildingPainting(const GeoPainter* painter, const ViewportParams *viewport,
                                     bool &drawAccurate3D, bool &isCameraAboveBuilding) const;
     void updatePolygons( const ViewportParams *viewport,

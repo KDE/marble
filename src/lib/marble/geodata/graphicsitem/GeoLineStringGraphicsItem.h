@@ -37,12 +37,13 @@ public:
     void paint(GeoPainter* painter, const ViewportParams *viewport, const QString &layer, int tileZoomLevel);
 
 private:
-    void paintOutline(GeoPainter *painter, const ViewportParams *viewport);
-    void paintInline(GeoPainter *painter, const ViewportParams *viewport) const;
+    void paintOutline(GeoPainter *painter, const ViewportParams *viewport) const;
+    void paintInline(GeoPainter *painter, const ViewportParams *viewport);
     void paintLabel(GeoPainter *painter, const ViewportParams *viewport) const;
-    bool configurePainterForOutline(GeoPainter* painter, const ViewportParams *viewport) const;
-    bool configurePainterForInline(GeoPainter* painter, const ViewportParams *viewport) const;
+
+    bool configurePainterForLine(GeoPainter* painter, const ViewportParams *viewport, const bool isOutline = false) const;
     bool configurePainterForLabel(GeoPainter* painter,  const ViewportParams *viewport, LabelPositionFlags &labelPositionFlags) const;
+
     static bool canMerge(const GeoDataCoordinates &a, const GeoDataCoordinates &b);
 
     const GeoDataLineString *m_lineString;

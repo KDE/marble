@@ -64,7 +64,6 @@ void AbstractGeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportP
     Q_UNUSED(layer);
     Q_UNUSED(tileZoomLevel);
 
-    painter->save();
     configurePainter(painter, viewport);
     if ( m_polygon ) {
         bool innerResolved = false;
@@ -85,14 +84,11 @@ void AbstractGeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportP
     } else if ( m_ring ) {
         painter->drawPolygon( *m_ring );
     }
-
-    painter->restore();
 }
 
-QPen AbstractGeoPolygonGraphicsItem::configurePainter(GeoPainter *painter, const ViewportParams *viewport)
+bool AbstractGeoPolygonGraphicsItem::configurePainter(GeoPainter *painter, const ViewportParams *viewport)
 {
     QPen currentPen = painter->pen();
-
     GeoDataStyle::ConstPtr style = this->style();
     if (!style) {
         painter->setPen( QPen() ); // "style-less" polygons: a 1px black solid line
@@ -100,9 +96,16 @@ QPen AbstractGeoPolygonGraphicsItem::configurePainter(GeoPainter *painter, const
     else {
         const GeoDataPolyStyle& polyStyle = style->polyStyle();
 
-        if (polyStyle.outline()) { // polygons without outline: Qt::NoPen (not drawn)
+        if (polyStyle.outline()) {
             const GeoDataLineStyle& lineStyle = style->lineStyle();
 
+            // To save performance we avoid making changes to the painter's pen.
+            // So we first take a copy of the actual painter pen, make changes to it
+            // and only if the resulting pen is different from the actual pen
+            // we replace the painter's pen with our new pen.
+
+            // We want to avoid the mandatory detach in QPen::setColor(),
+            // so we carefully check whether applying the setter is needed
             currentPen.setColor(lineStyle.paintedColor());
             currentPen.setWidthF(lineStyle.width());
             currentPen.setCapStyle(lineStyle.capStyle());
@@ -112,9 +115,15 @@ QPen AbstractGeoPolygonGraphicsItem::configurePainter(GeoPainter *painter, const
                 painter->setPen(currentPen);
             }
         }
+        else {
+            // polygons without outline: Qt::NoPen (not drawn)
+            if (currentPen.style() != Qt::NoPen) {
+                painter->setPen(Qt::NoPen);
+            }
+        }
 
-        if (!polyStyle.fill()) {
-            painter->setBrush(QColor(Qt::transparent));
+        if (!polyStyle.fill()) {            
+            painter->setBrush(Qt::transparent);
         }
         else {
             const QColor paintedColor = polyStyle.paintedColor();
@@ -135,7 +144,7 @@ QPen AbstractGeoPolygonGraphicsItem::configurePainter(GeoPainter *painter, const
         }
     }
 
-    return currentPen;
+    return true;
 }
 
 int AbstractGeoPolygonGraphicsItem::extractElevation(const GeoDataPlacemark &placemark)
@@ -154,7 +163,7 @@ int AbstractGeoPolygonGraphicsItem::extractElevation(const GeoDataPlacemark &pla
 
 QPixmap AbstractGeoPolygonGraphicsItem::texture(const QString &texturePath, const QColor &color)
 {
-    QString const key = QString("%1/%2").arg(color.rgba()).arg(texturePath);
+    QString const key = QString::number(color.rgba()) + '/' + texturePath;
     QPixmap texture;
     if (!m_textureCache.find(key, texture)) {
         QImageReader imageReader(style()->polyStyle().resolvePath(texturePath));
