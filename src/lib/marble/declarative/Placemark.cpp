@@ -200,7 +200,7 @@ QString Placemark::description() const
             if (seats > 0) {
                 //~ singular %n seat
                 //~ plural %n seats
-                addTagValue(m_description, QStringLiteral("seats"), tr("%1 seats", "number of seats a bench provides", seats));
+                addTagValue(m_description, QStringLiteral("seats"), tr("%n seats", "number of seats a bench provides", seats));
             }
             addTagValue(m_description, QStringLiteral("material"));
             addTagDescription(m_description, QStringLiteral("backrest"), QStringLiteral("yes"), tr("Has backrest", "A bench provides a backrest to lean against"));
