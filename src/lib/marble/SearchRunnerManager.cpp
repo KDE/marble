@@ -179,11 +179,17 @@ void SearchRunnerManager::findPlacemarks( const QString &searchTerm, const GeoDa
     d->m_searchTasks.clear();
 
     d->m_modelMutex.lock();
-    d->m_model.removePlacemarks( "PlacemarkRunnerManager", 0, d->m_placemarkContainer.size() );
-    qDeleteAll( d->m_placemarkContainer );
-    d->m_placemarkContainer.clear();
+    bool placemarkContainerChanged = false;
+    if (!d->m_placemarkContainer.isEmpty()) {
+        d->m_model.removePlacemarks( "PlacemarkRunnerManager", 0, d->m_placemarkContainer.size() );
+        qDeleteAll( d->m_placemarkContainer );
+        d->m_placemarkContainer.clear();
+        placemarkContainerChanged = true;
+    }
     d->m_modelMutex.unlock();
-    d->notifySearchResultChange();
+    if (placemarkContainerChanged) {
+        d->notifySearchResultChange();
+    }
 
     if ( searchTerm.trimmed().isEmpty() ) {
         d->notifySearchFinished();
