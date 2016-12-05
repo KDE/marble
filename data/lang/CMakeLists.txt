@@ -53,7 +53,8 @@ function(marble_process_po_files_as_qm lang po_file)
         OPTIONAL # if not build, ignore it
     )
 
-    set(target_name translation_${lang}_${filename_base})
+    string(REPLACE "@" "AT" _lang ${lang})
+    set(target_name translation_${_lang}_${filename_base})
     add_custom_target(${target_name} DEPENDS ${qm_file})
     add_dependencies(bundle_translations ${target_name})
 endfunction()
