@@ -60,9 +60,11 @@ void OpenRouteServiceRunner::retrieveRoute( const RouteRequest *route )
     }
 
     queries.addQueryItem("start", formatCoordinates(source));
+    QStringList via;
     for (int i = 1; i < route->size()-1; ++i) {
-        queries.addQueryItem("via", formatCoordinates(route->at(i)));
+        via << formatCoordinates(route->at(i));
     }
+    queries.addQueryItem("via", via.join(' '));
     queries.addQueryItem("end", formatCoordinates(destination));
 
     queries.addQueryItem("distunit", unit);
