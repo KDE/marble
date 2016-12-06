@@ -293,11 +293,10 @@ void O5mWriter::writeSigned(qint64 value, QDataStream &stream) const
 void O5mWriter::writeUnsigned(quint32 value, QDataStream &stream) const
 {
     do {
-        quint8 word = (value >> 7 & 0x7f) != 0x00 ? (1<<7) : 0;
-        word |= value & 0x7f;
-        value >>= 7;
+        quint8 word = ((value >> 7) > 0 ? 0x80 : 0x00) | (value & 0x7f);
         stream << word;
-    } while ((value & 0x7f) != 0x0);
+        value >>= 7;
+    } while (value > 0);
 }
 
 qint32 O5mWriter::deltaTo(double value, double previous) const
