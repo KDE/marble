@@ -34,7 +34,7 @@ BuildingGeoPolygonGraphicsItem::BuildingGeoPolygonGraphicsItem(const GeoDataPlac
     , m_entries(extractNamedEntries(*placemark))
     , m_hasInnerBoundaries(false)
 {
-    setZValue(this->zValue() + m_buildingHeight);
+    setZValue(m_buildingHeight);
     Q_ASSERT(m_buildingHeight > 0.0);
 
     QStringList paintLayers;
@@ -50,7 +50,7 @@ BuildingGeoPolygonGraphicsItem::BuildingGeoPolygonGraphicsItem(const GeoDataPlac
     , m_buildingLabel(extractBuildingLabel(*placemark))
     , m_entries(extractNamedEntries(*placemark))
 {
-    setZValue(this->zValue() + m_buildingHeight);
+    setZValue(m_buildingHeight);
     Q_ASSERT(m_buildingHeight > 0.0);
 
     QStringList paintLayers;
@@ -211,11 +211,13 @@ void BuildingGeoPolygonGraphicsItem::paint(GeoPainter* painter, const ViewportPa
 {
     // Just display flat buildings for tile level 17
     if (tileZoomLevel == 17) {
+        setZValue(0.0);
         if (layer.endsWith(QLatin1String("/frame"))) {
             AbstractGeoPolygonGraphicsItem::paint(painter, viewport, layer, tileZoomLevel );
         }
         return;
     }
+    setZValue(m_buildingHeight);
 
     // For level 18, 19 .. render 3D buildings in perspective
     if (layer.endsWith(QLatin1String("/frame"))) {
