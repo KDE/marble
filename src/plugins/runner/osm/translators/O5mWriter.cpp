@@ -251,6 +251,7 @@ void O5mWriter::writeTags(const OsmPlacemarkData &osmData, StringTable &stringTa
 
 void O5mWriter::writeStringPair(const StringPair &pair, StringTable &stringTable, QDataStream &stream) const
 {
+    Q_ASSERT(stringTable.size() <= 15000);
     auto const iter = stringTable.constFind(pair);
     if (iter == stringTable.cend()) {
         QByteArray data;
@@ -262,9 +263,17 @@ void O5mWriter::writeStringPair(const StringPair &pair, StringTable &stringTable
         }
         data.push_back(char(0x00));
         stream.writeRawData(data.constData(), data.size());
-        stringTable.insert(pair, stringTable.size());
+        bool const tooLong = pair.first.size() + pair.second.size() > 250;
+        bool const tableFull = stringTable.size() > 15000;
+        if (!tooLong && !tableFull) {
+            /* When the table is full, old values could be re-used.
+             * See o5m spec. This is only relevant for large files and would
+             * need some kind of string popularity to be effective though. */
+            stringTable.insert(pair, stringTable.size());
+        }
     } else {
         auto const reference = stringTable.size() - iter.value();
+        Q_ASSERT(reference >= 0);
         writeUnsigned(reference, stream);
     }
 }
