@@ -243,6 +243,8 @@ qint64 OsmNode::popularityFor(GeoDataPlacemark::GeoDataVisualCategory category)
         popularities << GeoDataPlacemark::ShopCarParts;
         popularities << GeoDataPlacemark::ShopMotorcycle;
         popularities << GeoDataPlacemark::ShopOutdoor;
+        popularities << GeoDataPlacemark::ShopSports;
+        popularities << GeoDataPlacemark::ShopCopy;
         popularities << GeoDataPlacemark::ShopMusicalInstrument;
         popularities << GeoDataPlacemark::ShopPhoto;
         popularities << GeoDataPlacemark::ShopBook;

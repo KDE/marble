@@ -535,6 +535,8 @@ QString GeoDataPlacemark::categoryName() const
     case ShopCarParts: return GeoDataPlacemarkPrivate::tr("Car Parts");
     case ShopMotorcycle: return GeoDataPlacemarkPrivate::tr("Motorcycle");
     case ShopOutdoor: return GeoDataPlacemarkPrivate::tr("Outdoor");
+    case ShopSports: return GeoDataPlacemarkPrivate::tr("Sports");
+    case ShopCopy: return GeoDataPlacemarkPrivate::tr("Copy");
     case ShopMusicalInstrument: return GeoDataPlacemarkPrivate::tr("Musical Instrument");
     case ShopPhoto: return GeoDataPlacemarkPrivate::tr("Photo");
     case ShopBook: return GeoDataPlacemarkPrivate::tr("Book");

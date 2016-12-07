@@ -313,6 +313,8 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
         ShopCarParts,
         ShopMotorcycle,
         ShopOutdoor,
+        ShopSports,
+        ShopCopy,
         ShopMusicalInstrument,
         ShopPhoto,
         ShopBook,

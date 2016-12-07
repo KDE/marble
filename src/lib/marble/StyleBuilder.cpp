@@ -517,6 +517,8 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::ShopCarParts]             = createOsmPOIStyle(osmFont, "shop/car_parts-14", shopColor);
     m_defaultStyle[GeoDataPlacemark::ShopMotorcycle]           = createOsmPOIStyle(osmFont, "shop/motorcycle-14", shopColor);
     m_defaultStyle[GeoDataPlacemark::ShopOutdoor]              = createOsmPOIStyle(osmFont, "shop/outdoor-14", shopColor);
+    m_defaultStyle[GeoDataPlacemark::ShopSports]               = createOsmPOIStyle(osmFont, "shop/sports", shopColor);
+    m_defaultStyle[GeoDataPlacemark::ShopCopy]                 = createOsmPOIStyle(osmFont, "shop/copyshop", shopColor);
     m_defaultStyle[GeoDataPlacemark::ShopMusicalInstrument]    = createOsmPOIStyle(osmFont, "shop/musical_instrument-14", shopColor);
     m_defaultStyle[GeoDataPlacemark::ShopPhoto]                = createOsmPOIStyle(osmFont, "shop/photo-14", shopColor);
     m_defaultStyle[GeoDataPlacemark::ShopBook]                 = createOsmPOIStyle(osmFont, "shop/shop_books.16", shopColor);
@@ -885,6 +887,8 @@ void StyleBuilder::Private::initializeOsmVisualCategories()
     s_visualCategories[OsmTag("shop", "car_parts")]             = GeoDataPlacemark::ShopCarParts;
     s_visualCategories[OsmTag("shop", "motorcycle")]            = GeoDataPlacemark::ShopMotorcycle;
     s_visualCategories[OsmTag("shop", "outdoor")]               = GeoDataPlacemark::ShopOutdoor;
+    s_visualCategories[OsmTag("shop", "sports")]                = GeoDataPlacemark::ShopSports;
+    s_visualCategories[OsmTag("shop", "copy")]                = GeoDataPlacemark::ShopCopy;
     s_visualCategories[OsmTag("shop", "musical_instrument")]    = GeoDataPlacemark::ShopMusicalInstrument;
     s_visualCategories[OsmTag("shop", "photo")]                 = GeoDataPlacemark::ShopPhoto;
     s_visualCategories[OsmTag("shop", "books")]                 = GeoDataPlacemark::ShopBook;
@@ -1958,6 +1962,8 @@ QString StyleBuilder::visualCategoryName(GeoDataPlacemark::GeoDataVisualCategory
         visualCategoryNames[GeoDataPlacemark::ShopCarParts] = "ShopCarParts";
         visualCategoryNames[GeoDataPlacemark::ShopMotorcycle] = "ShopMotorcycle";
         visualCategoryNames[GeoDataPlacemark::ShopOutdoor] = "ShopOutdoor";
+        visualCategoryNames[GeoDataPlacemark::ShopSports] = "ShopSports";
+        visualCategoryNames[GeoDataPlacemark::ShopCopy] = "ShopCopy";
         visualCategoryNames[GeoDataPlacemark::ShopMusicalInstrument] = "ShopMusicalInstrument";
         visualCategoryNames[GeoDataPlacemark::ShopPhoto] = "ShopPhoto";
         visualCategoryNames[GeoDataPlacemark::ShopBook] = "ShopBook";
