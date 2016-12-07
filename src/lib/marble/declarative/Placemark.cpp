@@ -127,30 +127,24 @@ QString Placemark::description() const
                 addTagValue(m_description, "butcher");
             }
         } else if (category == GeoDataPlacemark::ShopCopy) {
-            QString const computer = m_placemark.osmData().tagValue(QStringLiteral("service:computer"));
-            QString const copy = m_placemark.osmData().tagValue(QStringLiteral("service:copy"));
-            QString const scan = m_placemark.osmData().tagValue(QStringLiteral("service:scan"));
-            QString const fax = m_placemark.osmData().tagValue(QStringLiteral("service:fax"));
-            QString const phone = m_placemark.osmData().tagValue(QStringLiteral("service:phone"));
-            QString const print = m_placemark.osmData().tagValue(QStringLiteral("service:print"));
-            QString const press = m_placemark.osmData().tagValue(QStringLiteral("service:press"));
-            QString const prepress = m_placemark.osmData().tagValue(QStringLiteral("service:prepress"));
-            addTagDescription(m_description, QStringLiteral("computer"), QStringLiteral("yes"), tr("Computers available", "A copy shop provides computers for customer use"));
-            addTagDescription(m_description, QStringLiteral("computer"), QStringLiteral("no"), tr("No computers available", "A copy shop does not provide computers for customer use"));
-            addTagDescription(m_description, QStringLiteral("copy"), QStringLiteral("yes"), tr("Photocopying service", "A copy shop provides photocopying service"));
-            addTagDescription(m_description, QStringLiteral("copy"), QStringLiteral("no"), tr("No photocopying service", "A copy shop does not provide photocopying service"));
-            addTagDescription(m_description, QStringLiteral("scan"), QStringLiteral("yes"), tr("Digital scanning", "A copy shop provides a service for scanning documents into digital files"));
-            addTagDescription(m_description, QStringLiteral("scan"), QStringLiteral("no"), tr("No digital scanning", "A copy shop does not provide a service for scanning documents into digital files"));
-            addTagDescription(m_description, QStringLiteral("fax"), QStringLiteral("yes"), tr("Fax service", "A copy shop provides a service to send documents through fax"));
-            addTagDescription(m_description, QStringLiteral("fax"), QStringLiteral("no"), tr("No fax service", "A copy shop does not provide a service to send documents through fax"));
-            addTagDescription(m_description, QStringLiteral("phone"), QStringLiteral("yes"), tr("Phone service", "A copy shop provides a paid service to make phone calls"));
-            addTagDescription(m_description, QStringLiteral("phone"), QStringLiteral("no"), tr("No phone service", "A copy shop does not provide a paid service to make phone calls"));
-            addTagDescription(m_description, QStringLiteral("print"), QStringLiteral("yes"), tr("Digital printing", "A copy shop provides services to print paper documents from digital files"));
-            addTagDescription(m_description, QStringLiteral("print"), QStringLiteral("no"), tr("No digital printing", "A copy shop does not provide services to print paper documents from digital files"));
-            addTagDescription(m_description, QStringLiteral("press"), QStringLiteral("yes"), tr("Press printing service", "A copy shop provides a professional service to print a large number of copies of a document"));
-            addTagDescription(m_description, QStringLiteral("press"), QStringLiteral("no"), tr("No press printing service", "A copy shop does not provide a professional service to print a large number of copies of a document"));
-            addTagDescription(m_description, QStringLiteral("prepress"), QStringLiteral("yes"), tr("Press printing assistance", " A copy shop provides help with preparing special printing techniques"));
-            addTagDescription(m_description, QStringLiteral("prepress"), QStringLiteral("no"), tr(" No press printing assistance", " A copy shop does not provide help with preparing special printing techniques"));
+            addTagDescription(m_description, QStringLiteral("service:computer"), QStringLiteral("yes"), tr("Computers available", "A copy shop provides computers for customer use"));
+            addTagDescription(m_description, QStringLiteral("service:computer"), QStringLiteral("no"), tr("No computers available", "A copy shop does not provide computers for customer use"));
+            addTagDescription(m_description, QStringLiteral("service:copy"), QStringLiteral("yes"), tr("Photocopying service", "A copy shop provides photocopying service"));
+            addTagDescription(m_description, QStringLiteral("service:copy"), QStringLiteral("no"), tr("No photocopying service", "A copy shop does not provide photocopying service"));
+            addTagDescription(m_description, QStringLiteral("service:scan"), QStringLiteral("yes"), tr("Digital scanning", "A copy shop provides a service for scanning documents into digital files"));
+            addTagDescription(m_description, QStringLiteral("service:scan"), QStringLiteral("no"), tr("No digital scanning", "A copy shop does not provide a service for scanning documents into digital files"));
+            addTagDescription(m_description, QStringLiteral("service:fax"), QStringLiteral("yes"), tr("Fax service", "A copy shop provides a service to send documents through fax"));
+            addTagDescription(m_description, QStringLiteral("service:fax"), QStringLiteral("no"), tr("No fax service", "A copy shop does not provide a service to send documents through fax"));
+            addTagDescription(m_description, QStringLiteral("service:phone"), QStringLiteral("yes"), tr("Phone service", "A copy shop provides a paid service to make phone calls"));
+            addTagDescription(m_description, QStringLiteral("service:phone"), QStringLiteral("no"), tr("No phone service", "A copy shop does not provide a paid service to make phone calls"));
+            addTagDescription(m_description, QStringLiteral("service:print"), QStringLiteral("yes"), tr("Digital printing", "A copy shop provides services to print paper documents from digital files"));
+            addTagDescription(m_description, QStringLiteral("service:print"), QStringLiteral("no"), tr("No digital printing", "A copy shop does not provide services to print paper documents from digital files"));
+            addTagDescription(m_description, QStringLiteral("service:press"), QStringLiteral("yes"), tr("Press printing service", "A copy shop provides a professional service to print a large number of copies of a document"));
+            addTagDescription(m_description, QStringLiteral("service:press"), QStringLiteral("no"), tr("No press printing service", "A copy shop does not provide a professional service to print a large number of copies of a document"));
+            addTagDescription(m_description, QStringLiteral("service:prepress"), QStringLiteral("yes"), tr("Press printing assistance", "A copy shop provides help with preparing special printing techniques"));
+            addTagDescription(m_description, QStringLiteral("service:prepress"), QStringLiteral("no"), tr(" No press printing assistance", "A copy shop does not provide help with preparing special printing techniques"));
+            addTagDescription(m_description, QStringLiteral("service:self"), QStringLiteral("yes"), tr("Self service", "A copy shop provides individual copy machines for self-service"));
+            addTagDescription(m_description, QStringLiteral("service:self"), QStringLiteral("no"), tr(" No self service", "A copy shop does not provide individual machines for self-service"));
         } else if (category == GeoDataPlacemark::TransportBusStop) {
             addTagValue(m_description, "network");
             addTagValue(m_description, "operator");
