@@ -14,6 +14,8 @@
 #include "MarbleGlobal.h"
 //#include "GeoPainter.h"
 
+#include "BatchedPlacemarkRenderer.h"
+
 class QPolygonF;
 class QSizeF;
 class QPainterPath;
@@ -52,6 +54,8 @@ class GeoPainterPrivate
     const ViewportParams *const m_viewport;
     const MapQuality       m_mapQuality;
     qreal             *const m_x;
+
+    BatchedPlacemarkRenderer m_batchedPlacemarkRenderer;
 
 private:
     GeoPainter* m_parent;

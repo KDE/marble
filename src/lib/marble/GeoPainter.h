@@ -17,13 +17,14 @@
 // Marble
 #include "MarbleGlobal.h"
 #include "ClipPainter.h"
+#include "BatchedPlacemarkRenderer.h"
 
 #include <QSizeF>
+
 class QImage;
 class QPaintDevice;
 class QRegion;
 class QString;
-
 
 namespace Marble
 {
@@ -497,6 +498,11 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
                          qreal width, qreal height,
                          qreal xRnd = 25.0, qreal yRnd = 25.0);
 
+
+    void addTextFragment( const QPoint& position, const QString& text,
+                          const QColor& color = Qt::black, QFlags<BatchedPlacemarkRenderer::Frames> flags = 0 );
+    void clearTextFragments();
+    void drawTextFragments();
 
 
     // Reenabling QPainter+ClipPainter methods.

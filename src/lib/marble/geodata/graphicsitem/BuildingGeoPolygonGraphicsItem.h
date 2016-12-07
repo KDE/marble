@@ -59,7 +59,7 @@ private:
 
 private:
     const double m_buildingHeight;
-    const QString m_buildingLabel;
+    const QString m_buildingText;
     const QVector<NamedEntry> m_entries;
     QVector<QPolygonF*> m_cachedOuterPolygons;
     QVector<QPolygonF*> m_cachedInnerPolygons;

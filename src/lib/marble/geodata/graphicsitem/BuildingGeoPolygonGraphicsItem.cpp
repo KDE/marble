@@ -30,7 +30,7 @@ BuildingGeoPolygonGraphicsItem::BuildingGeoPolygonGraphicsItem(const GeoDataPlac
                                                                const GeoDataPolygon *polygon)
     : AbstractGeoPolygonGraphicsItem(placemark, polygon)
     , m_buildingHeight(extractBuildingHeight(*placemark))
-    , m_buildingLabel(extractBuildingLabel(*placemark))
+    , m_buildingText(extractBuildingLabel(*placemark))
     , m_entries(extractNamedEntries(*placemark))
     , m_hasInnerBoundaries(false)
 {
@@ -47,7 +47,7 @@ BuildingGeoPolygonGraphicsItem::BuildingGeoPolygonGraphicsItem(const GeoDataPlac
                                                                const GeoDataLinearRing* ring)
     : AbstractGeoPolygonGraphicsItem(placemark, ring)
     , m_buildingHeight(extractBuildingHeight(*placemark))
-    , m_buildingLabel(extractBuildingLabel(*placemark))
+    , m_buildingText(extractBuildingLabel(*placemark))
     , m_entries(extractNamedEntries(*placemark))
 {
     setZValue(m_buildingHeight);
@@ -334,7 +334,7 @@ void BuildingGeoPolygonGraphicsItem::paintRoof(GeoPainter* painter, const Viewpo
         QRectF const boundingRect = outerPolygon->boundingRect();
 
         // Label position calculation
-        if (!m_buildingLabel.isEmpty() || !m_entries.isEmpty()) {
+        if (!m_buildingText.isEmpty() || !m_entries.isEmpty()) {
             QSizeF const polygonSize = boundingRect.size();
             qreal size = polygonSize.width() * polygonSize.height();
             if (size > maxSize) {
@@ -347,9 +347,9 @@ void BuildingGeoPolygonGraphicsItem::paintRoof(GeoPainter* painter, const Viewpo
         }
 
         // Draw the housenumber labels
-        if (drawAccurate3D && !m_buildingLabel.isEmpty() && !roofCenter.isNull() && !m_cachedOuterRoofPolygons.isEmpty()) {
+        if (drawAccurate3D && !m_buildingText.isEmpty() && !roofCenter.isNull() && !m_cachedOuterRoofPolygons.isEmpty()) {
             QPolygonF * outerRoof = m_cachedOuterRoofPolygons[i];
-            double const w2 = 0.5 * painter->fontMetrics().width(m_buildingLabel);
+            double const w2 = 0.5 * painter->fontMetrics().width(m_buildingText);
             double const ascent = painter->fontMetrics().ascent();
             double const descent = painter->fontMetrics().descent();
             double const a2 = 0.5 * painter->fontMetrics().ascent();
@@ -359,7 +359,8 @@ void BuildingGeoPolygonGraphicsItem::paintRoof(GeoPainter* painter, const Viewpo
                     && outerRoof->containsPoint(textPosition + QPointF(2+2*w2, descent), Qt::OddEvenFill)
                     && outerRoof->containsPoint(textPosition + QPointF(2+2*w2, -ascent), Qt::OddEvenFill)
                     ) {
-                painter->drawText(textPosition, m_buildingLabel);
+                painter->addTextFragment((textPosition + QPointF(0, -2-ascent)).toPoint(),
+                                         m_buildingText, painter->brush().color());
             }
         }
         ++i;
@@ -367,26 +368,15 @@ void BuildingGeoPolygonGraphicsItem::paintRoof(GeoPainter* painter, const Viewpo
 
     // Render additional housenumbers at building entries
     if (!m_entries.isEmpty() && maxArea > 1600 * m_entries.size()) {
-        QBrush brush = painter->brush();
-        QColor const brushColor = brush.color();
-        QColor lighterColor = brushColor.lighter(110);
-        lighterColor.setAlphaF(0.9);
-        brush.setColor(lighterColor);
-        painter->setBrush(brush);
         foreach(const auto &entry, m_entries) {
             qreal x, y;
             viewport->screenCoordinates(entry.point, x, y);
             QPointF point(x, y);
             point += buildingOffset(point, viewport);
-            auto const width = painter->fontMetrics().width(entry.label);
-            auto const height = painter->fontMetrics().height();
-            QRectF rectangle(point, QSizeF(qMax(1.2*width, 1.1*height), 1.2*height));
-            rectangle.moveCenter(point);
-            painter->drawRoundedRect(rectangle, 3, 3);
-            painter->drawText(rectangle, Qt::AlignCenter, entry.label);
+            painter->addTextFragment(point.toPoint(),
+                                     m_buildingText, painter->brush().color(),
+                                     QFlags<BatchedPlacemarkRenderer::Frames>() |= BatchedPlacemarkRenderer::RoundFrame);
         }
-        brush.setColor(brushColor);
-        painter->setBrush(brush);
     }
 
     painter->restore();

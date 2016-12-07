@@ -272,6 +272,7 @@ set(marblewidget_SRCS
     MarbleZip.cpp
 
     StyleBuilder.cpp
+    BatchedPlacemarkRenderer.cpp
     
     cloudsync/CloudSyncManager.cpp
     cloudsync/RouteSyncManager.cpp

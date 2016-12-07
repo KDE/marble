@@ -37,6 +37,7 @@ GeoPainterPrivate::GeoPainterPrivate( GeoPainter* q, const ViewportParams *viewp
         : m_viewport( viewport ),
         m_mapQuality( mapQuality ),
         m_x( new qreal[100] ),
+        m_batchedPlacemarkRenderer(q),
         m_parent(q)
 {
 }
@@ -1013,4 +1014,21 @@ void GeoPainter::drawRoundedRect(const GeoDataCoordinates &centerPosition,
                 QPainter::drawRoundedRect(QRectF(posX, posY, width, height), xRnd, yRnd);
             }
         }
+}
+
+
+void GeoPainter::addTextFragment( const QPoint& position, const QString& text,
+                                  const QColor& color,  QFlags<BatchedPlacemarkRenderer::Frames> flags )
+{
+    d->m_batchedPlacemarkRenderer.addTextFragment( position, text, color, flags);
+}
+
+void GeoPainter::clearTextFragments()
+{
+    d->m_batchedPlacemarkRenderer.clearTextFragments();
+}
+
+void GeoPainter::drawTextFragments()
+{
+    d->m_batchedPlacemarkRenderer.drawTextFragments();
 }
