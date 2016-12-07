@@ -98,6 +98,11 @@ QString Placemark::description() const
             }
         }
 
+        if (category == GeoDataPlacemark::TransportParking || category == GeoDataPlacemark::TransportBicycleParking || category == GeoDataPlacemark::TransportMotorcycleParking) {
+            addTagValue(m_description, QStringLiteral("capacity"), tr("%1 parking spaces"));
+            addTagValue(m_description, QStringLiteral("maxstay"), tr("Maximum parking time %1"));
+        }
+
         if (category >= GeoDataPlacemark::FoodBar && category <= GeoDataPlacemark::FoodRestaurant) {
             if (category != GeoDataPlacemark::FoodRestaurant) {
                 addFirstTagValueOf(m_description, QStringList() << "brand" << "operator");
@@ -229,6 +234,31 @@ QString Placemark::description() const
         } else if (category == GeoDataPlacemark::TransportSpeedCamera) {
             addTagValue(m_description, QStringLiteral("maxspeed"), tr("%1 km/h"));
             addTagValue(m_description, "ref");
+        } else if (category == GeoDataPlacemark::TransportParking) {
+            addTagDescription(m_description, QStringLiteral("supervised"), QStringLiteral("yes"), tr("Is supervised", "Parking spaces are supervised by guards"));
+            addTagDescription(m_description, QStringLiteral("supervised"), QStringLiteral("no"), tr("Not supervised", "Parking spaces are not supervised by guards"));
+
+            int const disabledSpaces = m_placemark.osmData().tagValue(QStringLiteral("capacity:disabled")).toInt();
+            if (disabledSpaces > 0) {
+                addTagValue(m_description, QStringLiteral("capacity:disabled"), tr("%1 disabled spaces"));
+            }
+            int const parentSpaces = m_placemark.osmData().tagValue(QStringLiteral("capacity:parent")).toInt();
+            if (parentSpaces > 0) {
+                addTagValue(m_description, QStringLiteral("capacity:parent"), tr("%1 parent and child spaces"));
+            }
+            int const electricChargers = m_placemark.osmData().tagValue(QStringLiteral("capacity:charging")).toInt();
+            if (electricChargers > 0) {
+                addTagValue(m_description, QStringLiteral("capacity:charging"), tr("%1 spaces with electric chargers"));
+            }
+        } else if (category == GeoDataPlacemark::TransportBicycleParking) {
+            addTagDescription(m_description, QStringLiteral("surveillance"), QStringLiteral("outdoor"), tr("Has outdoor surveillance", "A parking space has outdoor surveillance"));
+            addTagDescription(m_description, QStringLiteral("surveillance"), QStringLiteral("indoor"), tr("Has indoor surveillance", "A parking space has indoor surveillance"));
+            addTagDescription(m_description, QStringLiteral("surveillance"), QStringLiteral("public"), tr("Has public surveillance", "A parking space has public surveillance"));
+        }
+
+        if (category == GeoDataPlacemark::TransportBicycleParking || category == GeoDataPlacemark::TransportMotorcycleParking) {
+            addTagDescription(m_description, QStringLiteral("covered"), QStringLiteral("yes"), tr("Is covered", "A parking space is covered"));
+            addTagDescription(m_description, QStringLiteral("covered"), QStringLiteral("no"), tr("Not covered", "A parking space is not covered"));
         }
 
         if (category == GeoDataPlacemark::AmenityRecycling || category == GeoDataPlacemark::AmenityPostBox) {
