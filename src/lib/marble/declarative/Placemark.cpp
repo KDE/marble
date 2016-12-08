@@ -130,34 +130,26 @@ QString Placemark::description() const
             addTagValue(m_description, "designation");
             if (category == GeoDataPlacemark::ShopButcher) {
                 addTagValue(m_description, "butcher");
+            } else if (category == GeoDataPlacemark::ShopCopy) {
+                addTagDescription(m_description, QStringLiteral("service:computer"), QStringLiteral("yes"), tr("Computers available", "A copy shop provides computers for customer use"));
+                addTagDescription(m_description, QStringLiteral("service:computer"), QStringLiteral("no"), tr("No computers available", "A copy shop does not provide computers for customer use"));
+                addTagDescription(m_description, QStringLiteral("service:copy"), QStringLiteral("yes"), tr("Photocopying service", "A copy shop provides photocopying service"));
+                addTagDescription(m_description, QStringLiteral("service:copy"), QStringLiteral("no"), tr("No photocopying service", "A copy shop does not provide photocopying service"));
+                addTagDescription(m_description, QStringLiteral("service:scan"), QStringLiteral("yes"), tr("Digital scanning", "A copy shop provides a service for scanning documents into digital files"));
+                addTagDescription(m_description, QStringLiteral("service:scan"), QStringLiteral("no"), tr("No digital scanning", "A copy shop does not provide a service for scanning documents into digital files"));
+                addTagDescription(m_description, QStringLiteral("service:fax"), QStringLiteral("yes"), tr("Fax service", "A copy shop provides a service to send documents through fax"));
+                addTagDescription(m_description, QStringLiteral("service:fax"), QStringLiteral("no"), tr("No fax service", "A copy shop does not provide a service to send documents through fax"));
+                addTagDescription(m_description, QStringLiteral("service:phone"), QStringLiteral("yes"), tr("Phone service", "A copy shop provides a paid service to make phone calls"));
+                addTagDescription(m_description, QStringLiteral("service:phone"), QStringLiteral("no"), tr("No phone service", "A copy shop does not provide a paid service to make phone calls"));
+                addTagDescription(m_description, QStringLiteral("service:print"), QStringLiteral("yes"), tr("Digital printing", "A copy shop provides services to print paper documents from digital files"));
+                addTagDescription(m_description, QStringLiteral("service:print"), QStringLiteral("no"), tr("No digital printing", "A copy shop does not provide services to print paper documents from digital files"));
+                addTagDescription(m_description, QStringLiteral("service:press"), QStringLiteral("yes"), tr("Press printing service", "A copy shop provides a professional service to print a large number of copies of a document"));
+                addTagDescription(m_description, QStringLiteral("service:press"), QStringLiteral("no"), tr("No press printing service", "A copy shop does not provide a professional service to print a large number of copies of a document"));
+                addTagDescription(m_description, QStringLiteral("service:prepress"), QStringLiteral("yes"), tr("Press printing assistance", "A copy shop provides help with preparing special printing techniques"));
+                addTagDescription(m_description, QStringLiteral("service:prepress"), QStringLiteral("no"), tr(" No press printing assistance", "A copy shop does not provide help with preparing special printing techniques"));
+                addTagDescription(m_description, QStringLiteral("service:self"), QStringLiteral("yes"), tr("Self service", "A copy shop provides individual copy machines for self-service"));
+                addTagDescription(m_description, QStringLiteral("service:self"), QStringLiteral("no"), tr(" No self service", "A copy shop does not provide individual machines for self-service"));
             }
-        } else if (category == GeoDataPlacemark::ShopCopy) {
-            addTagDescription(m_description, QStringLiteral("service:computer"), QStringLiteral("yes"), tr("Computers available", "A copy shop provides computers for customer use"));
-            addTagDescription(m_description, QStringLiteral("service:computer"), QStringLiteral("no"), tr("No computers available", "A copy shop does not provide computers for customer use"));
-            addTagDescription(m_description, QStringLiteral("service:copy"), QStringLiteral("yes"), tr("Photocopying service", "A copy shop provides photocopying service"));
-            addTagDescription(m_description, QStringLiteral("service:copy"), QStringLiteral("no"), tr("No photocopying service", "A copy shop does not provide photocopying service"));
-            addTagDescription(m_description, QStringLiteral("service:scan"), QStringLiteral("yes"), tr("Digital scanning", "A copy shop provides a service for scanning documents into digital files"));
-            addTagDescription(m_description, QStringLiteral("service:scan"), QStringLiteral("no"), tr("No digital scanning", "A copy shop does not provide a service for scanning documents into digital files"));
-            addTagDescription(m_description, QStringLiteral("service:fax"), QStringLiteral("yes"), tr("Fax service", "A copy shop provides a service to send documents through fax"));
-            addTagDescription(m_description, QStringLiteral("service:fax"), QStringLiteral("no"), tr("No fax service", "A copy shop does not provide a service to send documents through fax"));
-            addTagDescription(m_description, QStringLiteral("service:phone"), QStringLiteral("yes"), tr("Phone service", "A copy shop provides a paid service to make phone calls"));
-            addTagDescription(m_description, QStringLiteral("service:phone"), QStringLiteral("no"), tr("No phone service", "A copy shop does not provide a paid service to make phone calls"));
-            addTagDescription(m_description, QStringLiteral("service:print"), QStringLiteral("yes"), tr("Digital printing", "A copy shop provides services to print paper documents from digital files"));
-            addTagDescription(m_description, QStringLiteral("service:print"), QStringLiteral("no"), tr("No digital printing", "A copy shop does not provide services to print paper documents from digital files"));
-            addTagDescription(m_description, QStringLiteral("service:press"), QStringLiteral("yes"), tr("Press printing service", "A copy shop provides a professional service to print a large number of copies of a document"));
-            addTagDescription(m_description, QStringLiteral("service:press"), QStringLiteral("no"), tr("No press printing service", "A copy shop does not provide a professional service to print a large number of copies of a document"));
-            addTagDescription(m_description, QStringLiteral("service:prepress"), QStringLiteral("yes"), tr("Press printing assistance", "A copy shop provides help with preparing special printing techniques"));
-            addTagDescription(m_description, QStringLiteral("service:prepress"), QStringLiteral("no"), tr(" No press printing assistance", "A copy shop does not provide help with preparing special printing techniques"));
-            addTagDescription(m_description, QStringLiteral("service:self"), QStringLiteral("yes"), tr("Self service", "A copy shop provides individual copy machines for self-service"));
-            addTagDescription(m_description, QStringLiteral("service:self"), QStringLiteral("no"), tr(" No self service", "A copy shop does not provide individual machines for self-service"));
-        } else if (category == GeoDataPlacemark::ShopArt){
-            addTagValue(m_description, "operator");
-            addTagValue(m_description, "opening_hours");
-            addTagValue(m_description, "phone");
-            addTagValue(m_description, "website");
-            addTagDescription(m_description, QStringLiteral("wheelchair"), QStringLiteral("yes"), tr("Wheelchair accessible", "This shop is fully wheelchair accessible."));
-            addTagDescription(m_description, QStringLiteral("wheelchair"), QStringLiteral("no"), tr("Not wheelchair accessible", "This shop is not wheelchair accessible."));
-            addTagDescription(m_description, QStringLiteral("wheelchair"), QStringLiteral("yes"), tr("Limited wheelchair accessibility", "Some areas of this shop are wheelchair accessible."));
         } else if (category == GeoDataPlacemark::TransportBusStop) {
             addTagValue(m_description, "network");
             addTagValue(m_description, "operator");
@@ -184,14 +176,8 @@ QString Placemark::description() const
             addTagValue(m_description, "genus:en");
             addTagValue(m_description, "leaf_type");
         } else if (category == GeoDataPlacemark::NaturalCave){
-            addTagValue(m_description, "name");
             addTagValue(m_description, "cave:ref");
-            addTagValue(m_description, "opening_hours");
-            addTagValue(m_description, "fee");
-            addTagValue(m_description, "ele");
-            addTagValue(m_description, "direction");
-            addTagValue(m_description, "access");
-            addTagValue(m_description, "barrier");
+            addTagValue(m_description, QStringLiteral("ele"), tr("%1 m"));
         } else if (category == GeoDataPlacemark::AmenityRecycling) {
             addTagDescription(m_description, QStringLiteral("recycling:batteries"), "yes", tr("Batteries"));
             addTagDescription(m_description, QStringLiteral("recycling:clothes"), "yes", tr("Clothes"));
@@ -289,6 +275,10 @@ QString Placemark::description() const
         addTagDescription(m_description, QStringLiteral("fee"), QStringLiteral("no"), tr("no fee"));
         addTagValue(m_description, QStringLiteral("description"));
         addTagValue(m_description, QStringLiteral("old_name"), tr("formerly <i>%1</i>"));
+
+        addTagDescription(m_description, QStringLiteral("wheelchair"), QStringLiteral("yes"), tr("Wheelchair accessible"));
+        addTagDescription(m_description, QStringLiteral("wheelchair"), QStringLiteral("no"), tr("Not wheelchair accessible");
+        addTagDescription(m_description, QStringLiteral("wheelchair"), QStringLiteral("limited"), tr("Limited wheelchair accessibility");
     }
 
     return m_description;
