@@ -1130,7 +1130,7 @@ void StyleBuilder::Private::initializeMinimumZoomLevels()
     s_defaultMinZoomLevels[GeoDataPlacemark::AmenityDrinkingWater]= 17;
     s_defaultMinZoomLevels[GeoDataPlacemark::AmenityEmbassy]= 15;
     s_defaultMinZoomLevels[GeoDataPlacemark::AmenityEmergencyPhone]= 17;
-    s_defaultMinZoomLevels[GeoDataPlacemark::AmenityCommunityCentre]= 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AmenityCommunityCentre]= 17;
     s_defaultMinZoomLevels[GeoDataPlacemark::AmenityFountain]= 17;
     s_defaultMinZoomLevels[GeoDataPlacemark::AmenityNightClub]= 16;
     s_defaultMinZoomLevels[GeoDataPlacemark::AmenityCourtHouse]= 16;
@@ -1168,15 +1168,15 @@ void StyleBuilder::Private::initializeMinimumZoomLevels()
     s_defaultMinZoomLevels[GeoDataPlacemark::FoodRestaurant]  = 16;
 
     s_defaultMinZoomLevels[GeoDataPlacemark::HealthHospital]  = 15;
-    s_defaultMinZoomLevels[GeoDataPlacemark::HealthPharmacy]  = 16;
-    s_defaultMinZoomLevels[GeoDataPlacemark::HealthDentist]  = 16;
-    s_defaultMinZoomLevels[GeoDataPlacemark::HealthDoctors]  = 16;
-    s_defaultMinZoomLevels[GeoDataPlacemark::HealthVeterinary]  = 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::HealthPharmacy]  = 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::HealthDentist]  = 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::HealthDoctors]  = 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::HealthVeterinary]  = 17;
 
     s_defaultMinZoomLevels[GeoDataPlacemark::HistoricMemorial]    = 17;
 
     s_defaultMinZoomLevels[GeoDataPlacemark::HighwayCycleway]     = 16;
-    s_defaultMinZoomLevels[GeoDataPlacemark::HighwayFootway]      = 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::HighwayFootway]      = 17;
     s_defaultMinZoomLevels[GeoDataPlacemark::HighwayLivingStreet] = 15;
     s_defaultMinZoomLevels[GeoDataPlacemark::HighwayMotorwayLink] = 10;
     s_defaultMinZoomLevels[GeoDataPlacemark::HighwayMotorway]     = 6;
