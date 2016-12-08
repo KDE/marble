@@ -27,6 +27,8 @@
 namespace Marble
 {
 
+quint64 GeoLineStringGraphicsItem::s_previousStyle = 0;
+
 GeoLineStringGraphicsItem::GeoLineStringGraphicsItem(const GeoDataPlacemark *placemark,
                                                      const GeoDataLineString *lineString) :
     GeoGraphicsItem(placemark),
@@ -167,7 +169,11 @@ void GeoLineStringGraphicsItem::paintInline(GeoPainter* painter, const ViewportP
         return;
     }
 
-    bool isValid = configurePainterForLine(painter, viewport, false);
+    bool isValid = true;
+    if (s_previousStyle != reinterpret_cast<quint64>(style().data())) {
+        isValid = configurePainterForLine(painter, viewport, false);
+    }
+    s_previousStyle = reinterpret_cast<quint64>(style().data());
 
     m_renderLabel = painter->pen().widthF() >= 6.0f;
 
@@ -184,7 +190,11 @@ void GeoLineStringGraphicsItem::paintOutline(GeoPainter *painter, const Viewport
         return;
     }
 
-    bool isValid = configurePainterForLine(painter, viewport, true);
+    bool isValid = true;
+    if (s_previousStyle != reinterpret_cast<quint64>(style().data())) {
+        isValid = configurePainterForLine(painter, viewport, true);
+    }
+    s_previousStyle = reinterpret_cast<quint64>(style().data());
 
     if (isValid) {
         foreach(const QPolygonF* itPolygon, m_cachedPolygons) {

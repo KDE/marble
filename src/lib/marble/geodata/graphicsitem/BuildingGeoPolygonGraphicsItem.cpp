@@ -258,7 +258,12 @@ void BuildingGeoPolygonGraphicsItem::paintRoof(GeoPainter* painter, const Viewpo
         return; // do not render roof if we look inside the building
     }
 
-    bool isValid = configurePainter(painter, viewport);
+    bool isValid = true;
+    if (s_previousStyle != reinterpret_cast<quint64>(style().data())) {
+        isValid = configurePainter(painter, viewport);
+    }
+    s_previousStyle = reinterpret_cast<quint64>(style().data());
+
     if (!isValid) return;
 
     qreal maxSize(0.0);
@@ -400,7 +405,12 @@ void BuildingGeoPolygonGraphicsItem::paintFrame(GeoPainter *painter, const Viewp
     bool isCameraAboveBuilding;
     initializeBuildingPainting(painter, viewport, drawAccurate3D, isCameraAboveBuilding);
 
-    bool isValid = configurePainterForFrame(painter);
+    bool isValid = true;
+    if (s_previousStyle != reinterpret_cast<quint64>(style().data())) {
+        isValid = configurePainterForFrame(painter);
+    }
+    s_previousStyle = reinterpret_cast<quint64>(style().data());
+
     if (!isValid) return;
 
     if ( drawAccurate3D && isCameraAboveBuilding ) {

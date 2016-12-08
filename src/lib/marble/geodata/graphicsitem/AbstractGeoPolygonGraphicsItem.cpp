@@ -30,7 +30,9 @@
 namespace Marble
 {
 
-QPixmapCache AbstractGeoPolygonGraphicsItem::m_textureCache = QPixmapCache();
+QPixmapCache AbstractGeoPolygonGraphicsItem::s_textureCache = QPixmapCache();
+
+quint64 AbstractGeoPolygonGraphicsItem::s_previousStyle = -1;
 
 AbstractGeoPolygonGraphicsItem::AbstractGeoPolygonGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataPolygon *polygon) :
     GeoGraphicsItem(placemark),
@@ -64,7 +66,14 @@ void AbstractGeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportP
     Q_UNUSED(layer);
     Q_UNUSED(tileZoomLevel);
 
-    configurePainter(painter, viewport);
+    bool isValid = true;
+    if (s_previousStyle != reinterpret_cast<quint64>(style().data())) {
+        isValid = configurePainter(painter, viewport);
+    }
+    s_previousStyle = reinterpret_cast<quint64>(style().data());
+
+    if (!isValid) return;
+
     if ( m_polygon ) {
         bool innerResolved = false;
 
@@ -165,7 +174,7 @@ QPixmap AbstractGeoPolygonGraphicsItem::texture(const QString &texturePath, cons
 {
     QString const key = QString::number(color.rgba()) + '/' + texturePath;
     QPixmap texture;
-    if (!m_textureCache.find(key, texture)) {
+    if (!s_textureCache.find(key, texture)) {
         QImageReader imageReader(style()->polyStyle().resolvePath(texturePath));
         texture = QPixmap::fromImageReader(&imageReader);
 
@@ -177,7 +186,7 @@ QPixmap AbstractGeoPolygonGraphicsItem::texture(const QString &texturePath, cons
             imagePainter.end();
             texture = pixmap;
         }
-        m_textureCache.insert(key, texture);
+        s_textureCache.insert(key, texture);
     }
     return texture;
 }

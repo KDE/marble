@@ -50,6 +50,8 @@
 #include "GeoDataTreeModel.h"
 #include <OsmPlacemarkData.h>
 #include "StyleBuilder.h"
+#include "AbstractGeoPolygonGraphicsItem.h"
+#include "GeoLineStringGraphicsItem.h"
 
 // Qt
 #include <qmath.h>
@@ -176,17 +178,19 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
             }
         }
     }
-
     // Sort each fragment by z-level and draw it
     foreach (const QString &layer, d->m_styleBuilder->renderOrder()) {
         GeometryLayerPrivate::PaintFragments & layerItems = paintedFragments[layer];
         std::stable_sort(layerItems.negative.begin(), layerItems.negative.end(), GeoGraphicsItem::zValueLessThan);
         // The idea here is that layerItems.null has most items and needs not to be sorted => faster
         std::stable_sort(layerItems.positive.begin(), layerItems.positive.end(), GeoGraphicsItem::zValueLessThan);
+        AbstractGeoPolygonGraphicsItem::s_previousStyle = -1;
+        GeoLineStringGraphicsItem::s_previousStyle = -1;
         foreach(auto item, layerItems.negative) { item->paint(painter, viewport, layer, d->m_tileLevel); }
         foreach(auto item, layerItems.null) { item->paint(painter, viewport, layer, d->m_tileLevel); }
         foreach(auto item, layerItems.positive) { item->paint(painter, viewport, layer, d->m_tileLevel); }
     }
+
     foreach(const auto & item, defaultLayer) {
         item.second->paint(painter, viewport, item.first, d->m_tileLevel);
     }

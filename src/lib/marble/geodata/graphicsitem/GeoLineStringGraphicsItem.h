@@ -36,6 +36,8 @@ public:
 
     void paint(GeoPainter* painter, const ViewportParams *viewport, const QString &layer, int tileZoomLevel);
 
+    static quint64 s_previousStyle;
+
 private:
     void paintOutline(GeoPainter *painter, const ViewportParams *viewport) const;
     void paintInline(GeoPainter *painter, const ViewportParams *viewport);

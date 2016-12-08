@@ -36,6 +36,8 @@ public:
     virtual const GeoDataLatLonAltBox& latLonAltBox() const;
     virtual void paint(GeoPainter* painter, const ViewportParams *viewport, const QString &layer, int tileZoomLevel);
 
+    static quint64 s_previousStyle;
+
 protected:
     bool configurePainter(GeoPainter* painter, const ViewportParams *viewport);
     inline
@@ -50,7 +52,7 @@ private:
 
     const GeoDataPolygon *const m_polygon;
     const GeoDataLinearRing *const m_ring;
-    static QPixmapCache m_textureCache;
+    static QPixmapCache s_textureCache;
 };
 
 }
