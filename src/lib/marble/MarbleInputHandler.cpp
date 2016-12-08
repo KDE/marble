@@ -381,7 +381,7 @@ bool MarbleDefaultInputHandler::handlePinch(const QPointF &center, qreal scaleFa
             // Do not use intermediate (interpolated) distance values caused by animations
             zoom = marblePresenter->zoomFromDistance(target);
         }
-        newDistance = marblePresenter->distanceFromZoom(zoom + 13 * zoomDelta);
+        newDistance = marblePresenter->distanceFromZoom(zoom + 20 * zoomDelta);
         MarbleInputHandler::d->m_wheelZoomTargetDistance = newDistance;
         marblePresenter->zoomAt(center.toPoint(), newDistance);
         break;
