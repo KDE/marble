@@ -852,7 +852,7 @@ void StyleBuilder::Private::initializeOsmVisualCategories()
 
     s_visualCategories[OsmTag("natural", "peak")]               = GeoDataPlacemark::NaturalPeak;
     s_visualCategories[OsmTag("natural", "tree")]               = GeoDataPlacemark::NaturalTree;
-    s_visualCategories[OsmTag("natural", "cave")]                 = GeoDataPlacemark::NaturalCave;
+    s_visualCategories[OsmTag("natural", "cave_entrance")]      = GeoDataPlacemark::NaturalCave;
 
     s_visualCategories[OsmTag("shop", "beverages")]             = GeoDataPlacemark::ShopBeverages;
     s_visualCategories[OsmTag("shop", "hifi")]                  = GeoDataPlacemark::ShopHifi;
