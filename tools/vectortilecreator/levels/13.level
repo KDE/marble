@@ -36,6 +36,7 @@ leisure=nature_reserve
 leisure=park
 leisure=stadium
 tourism=alpine_hut
+tourism=wilderness_hut
 
 --keep=
 waterway=river

@@ -257,6 +257,24 @@ QString Placemark::description() const
             addTagDescription(m_description, QStringLiteral("surveillance"), QStringLiteral("outdoor"), tr("Has outdoor surveillance", "A parking space has outdoor surveillance"));
             addTagDescription(m_description, QStringLiteral("surveillance"), QStringLiteral("indoor"), tr("Has indoor surveillance", "A parking space has indoor surveillance"));
             addTagDescription(m_description, QStringLiteral("surveillance"), QStringLiteral("public"), tr("Has public surveillance", "A parking space has public surveillance"));
+        } else if (category == GeoDataPlacemark::TouristWildernessHut) {
+            addTagDescription(m_description, QStringLiteral("shower"), QStringLiteral("yes"), tr("Has shower", "A hut provides showers inside or aside"));
+            addTagDescription(m_description, QStringLiteral("shower"), QStringLiteral("no"), tr("Has no shower", "A hut does not provide showers inside or aside"));
+            addTagDescription(m_description, QStringLiteral("mattress"), QStringLiteral("yes"), tr("Has mattress", "A hut provides mattress"));
+            addTagDescription(m_description, QStringLiteral("mattress"), QStringLiteral("no"), tr("Has no mattress", "A hut does not provide mattress"));
+            addTagDescription(m_description, QStringLiteral("drinking_water"), QStringLiteral("yes"), tr("Has water", "Water is available inside or aside"));
+            addTagDescription(m_description, QStringLiteral("drinking_water"), QStringLiteral("no"), tr("Has no water", "Water is not available inside nor aside"));
+            addTagDescription(m_description, QStringLiteral("toilets"), QStringLiteral("yes"), tr("Has toilets", "A hut provides toilets"));
+            addTagDescription(m_description, QStringLiteral("toilets"), QStringLiteral("no"), tr("Has no toilets", "A hut does not provide toilets"));
+            addTagDescription(m_description, QStringLiteral("reservation"), QStringLiteral("yes"), tr("Reservation is possible"));
+            addTagDescription(m_description, QStringLiteral("reservation"), QStringLiteral("no"), tr("There is no reservation"));
+            addTagDescription(m_description, QStringLiteral("reservation"), QStringLiteral("required"), tr("Reservation is required"));
+            addTagDescription(m_description, QStringLiteral("reservation"), QStringLiteral("recommended"), tr("Reservation is recommended", "You should make reservation"));
+            addTagDescription(m_description, QStringLiteral("reservation"), QStringLiteral("members_only"), tr("Only for members", "Reservation is only possible for members of the organisation running the hut"));
+            addTagDescription(m_description, QStringLiteral("access"), QStringLiteral("yes"), tr("Accessible by anyone", "The public has an official, legally-enshrined right of access; i.e., it's a right of way"));
+            addTagDescription(m_description, QStringLiteral("access"), QStringLiteral("private"), tr("Private", "Only with permission of the owner on an individual basis."));
+            addTagDescription(m_description, QStringLiteral("access"), QStringLiteral("permissive"), tr("Open to general traffic", "Open to general traffic but permission can be revoked by the owner"));
+            addTagDescription(m_description, QStringLiteral("access"), QStringLiteral("no"), tr("No access", "No access for the general public"));
         }
 
         if (category == GeoDataPlacemark::TransportBicycleParking || category == GeoDataPlacemark::TransportMotorcycleParking) {

@@ -551,6 +551,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::TouristViewPoint]         = createOsmPOIStyle(osmFont, "amenity/viewpoint.16", amenityColor);
     m_defaultStyle[GeoDataPlacemark::TouristZoo]               = createOsmPOIRingStyle(osmFont, QString(), amenityColor, Qt::transparent);
     m_defaultStyle[GeoDataPlacemark::TouristAlpineHut]         = createOsmPOIStyle(osmFont, "transportation/alpinehut.16", transportationColor);
+    m_defaultStyle[GeoDataPlacemark::TouristWildernessHut]     = createOsmPOIStyle(osmFont, "transportation/wilderness_hut", transportationColor);
     m_defaultStyle[GeoDataPlacemark::TransportAerodrome]       = createOsmPOIStyle(osmFont, "airtransport/aerodrome", airTransportColor);
     m_defaultStyle[GeoDataPlacemark::TransportHelipad]         = createOsmPOIStyle(osmFont, "airtransport/helipad", airTransportColor);
     m_defaultStyle[GeoDataPlacemark::TransportAirportTerminal] = createOsmPOIAreaStyle(osmFont, QString(), airTransportColor);
@@ -937,6 +938,7 @@ void StyleBuilder::Private::initializeOsmVisualCategories()
     s_visualCategories[OsmTag("tourism", "viewpoint")]          = GeoDataPlacemark::TouristViewPoint;
     s_visualCategories[OsmTag("tourism", "zoo")]                = GeoDataPlacemark::TouristZoo;
     s_visualCategories[OsmTag("tourism", "alpine_hut")]         = GeoDataPlacemark::TouristAlpineHut;
+    s_visualCategories[OsmTag("tourism", "wilderness_hut")]     = GeoDataPlacemark::TouristWildernessHut;
 
     s_visualCategories[OsmTag("barrier", "city_wall")]           = GeoDataPlacemark::BarrierCityWall;
     s_visualCategories[OsmTag("barrier", "gate")]               = GeoDataPlacemark::BarrierGate;
@@ -1302,6 +1304,7 @@ void StyleBuilder::Private::initializeMinimumZoomLevels()
     s_defaultMinZoomLevels[GeoDataPlacemark::ShopDoitYourself] = 16;
 
     s_defaultMinZoomLevels[GeoDataPlacemark::TouristAlpineHut]  = 13;
+    s_defaultMinZoomLevels[GeoDataPlacemark::TouristWildernessHut] = 13;
     s_defaultMinZoomLevels[GeoDataPlacemark::TouristAttraction]  = 17;
     s_defaultMinZoomLevels[GeoDataPlacemark::TouristCastle]  = 15;
     s_defaultMinZoomLevels[GeoDataPlacemark::TouristCinema]  = 16;
@@ -1999,6 +2002,7 @@ QString StyleBuilder::visualCategoryName(GeoDataPlacemark::GeoDataVisualCategory
         visualCategoryNames[GeoDataPlacemark::TouristZoo] = "TouristZoo";
         visualCategoryNames[GeoDataPlacemark::HistoricMemorial] = "HistoricMemorial";
         visualCategoryNames[GeoDataPlacemark::TouristAlpineHut] = "TouristAlpineHut";
+        visualCategoryNames[GeoDataPlacemark::TouristWildernessHut] = "TouristWildernessHut";
         visualCategoryNames[GeoDataPlacemark::TransportAerodrome] = "TransportAerodrome";
         visualCategoryNames[GeoDataPlacemark::TransportHelipad] = "TransportHelipad";
         visualCategoryNames[GeoDataPlacemark::TransportAirportTerminal] = "TransportAirportTerminal";

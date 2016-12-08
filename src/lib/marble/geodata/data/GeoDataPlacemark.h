@@ -348,6 +348,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
         TouristViewPoint,
         TouristZoo,
         TouristAlpineHut,
+        TouristWildernessHut,
 
         // OpenStreetMap category Historic
         HistoricMemorial,

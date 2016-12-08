@@ -185,6 +185,7 @@ qint64 OsmNode::popularityFor(GeoDataPlacemark::GeoDataVisualCategory category)
         popularities << GeoDataPlacemark::TouristViewPoint;
         popularities << GeoDataPlacemark::TouristZoo;
         popularities << GeoDataPlacemark::TouristAlpineHut;
+        popularities << GeoDataPlacemark::TouristWildernessHut;
 
         popularities << GeoDataPlacemark::HistoricMemorial;
 

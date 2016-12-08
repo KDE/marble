@@ -566,6 +566,7 @@ QString GeoDataPlacemark::categoryName() const
     case TouristViewPoint: return GeoDataPlacemarkPrivate::tr("View Point");
     case TouristZoo: return GeoDataPlacemarkPrivate::tr("Zoo");
     case TouristAlpineHut: return GeoDataPlacemarkPrivate::tr("Alpine Hut");
+    case TouristWildernessHut: return GeoDataPlacemarkPrivate::tr("Wilderness Hut");
     case HistoricMemorial: return GeoDataPlacemarkPrivate::tr("Memorial");
     case TransportAerodrome: return GeoDataPlacemarkPrivate::tr("Aerodrome");
     case TransportHelipad: return GeoDataPlacemarkPrivate::tr("Helipad");
