@@ -519,6 +519,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::ShopOutdoor]              = createOsmPOIStyle(osmFont, "shop/outdoor-14", shopColor);
     m_defaultStyle[GeoDataPlacemark::ShopSports]               = createOsmPOIStyle(osmFont, "shop/sports", shopColor);
     m_defaultStyle[GeoDataPlacemark::ShopCopy]                 = createOsmPOIStyle(osmFont, "shop/copyshop", shopColor);
+    m_defaultStyle[GeoDataPlacemark::ShopArt]                  = createOsmPOIStyle(osmFont, "shop/art", shopColor);
     m_defaultStyle[GeoDataPlacemark::ShopMusicalInstrument]    = createOsmPOIStyle(osmFont, "shop/musical_instrument-14", shopColor);
     m_defaultStyle[GeoDataPlacemark::ShopPhoto]                = createOsmPOIStyle(osmFont, "shop/photo-14", shopColor);
     m_defaultStyle[GeoDataPlacemark::ShopBook]                 = createOsmPOIStyle(osmFont, "shop/shop_books.16", shopColor);
@@ -652,6 +653,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::NaturalIceShelf]          = createWayStyle("#8ebebe", "#8ebebe", true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/glacier.png"));
     m_defaultStyle[GeoDataPlacemark::NaturalScrub]             = createWayStyle("#B5E3B5", "#B5E3B5", true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/scrub.png"));
     m_defaultStyle[GeoDataPlacemark::NaturalCliff]             = createWayStyle(Qt::transparent, Qt::transparent, true, false, Qt::SolidPattern, MarbleDirs::path("bitmaps/osmcarto/patterns/cliff2.png"));
+    m_defaultStyle[GeoDataPlacemark::NaturalCave]              = createOsmPOIStyle(osmFont, "amenities/cave", amenityColor);
     m_defaultStyle[GeoDataPlacemark::NaturalHeath]             = createWayStyle("#d6d99f", QColor("#d6d99f").darker(150), true, false);
 
     m_defaultStyle[GeoDataPlacemark::LeisureGolfCourse]        = createOsmPOIAreaStyle(osmFont, "leisure/golf", "#39ac39", "#b5e3b5", QColor(Qt::transparent));
@@ -850,6 +852,7 @@ void StyleBuilder::Private::initializeOsmVisualCategories()
 
     s_visualCategories[OsmTag("natural", "peak")]               = GeoDataPlacemark::NaturalPeak;
     s_visualCategories[OsmTag("natural", "tree")]               = GeoDataPlacemark::NaturalTree;
+    s_visualCategories[OsmTag("natural", "cave")]                 = GeoDataPlacemark::NaturalCave;
 
     s_visualCategories[OsmTag("shop", "beverages")]             = GeoDataPlacemark::ShopBeverages;
     s_visualCategories[OsmTag("shop", "hifi")]                  = GeoDataPlacemark::ShopHifi;
@@ -889,6 +892,7 @@ void StyleBuilder::Private::initializeOsmVisualCategories()
     s_visualCategories[OsmTag("shop", "outdoor")]               = GeoDataPlacemark::ShopOutdoor;
     s_visualCategories[OsmTag("shop", "sports")]                = GeoDataPlacemark::ShopSports;
     s_visualCategories[OsmTag("shop", "copy")]                = GeoDataPlacemark::ShopCopy;
+    s_visualCategories[OsmTag("shop", "art")]                   = GeoDataPlacemark::ShopArt;
     s_visualCategories[OsmTag("shop", "musical_instrument")]    = GeoDataPlacemark::ShopMusicalInstrument;
     s_visualCategories[OsmTag("shop", "photo")]                 = GeoDataPlacemark::ShopPhoto;
     s_visualCategories[OsmTag("shop", "books")]                 = GeoDataPlacemark::ShopBook;
@@ -1259,6 +1263,7 @@ void StyleBuilder::Private::initializeMinimumZoomLevels()
     s_defaultMinZoomLevels[GeoDataPlacemark::NaturalReef] = 3;
     s_defaultMinZoomLevels[GeoDataPlacemark::NaturalScrub]= 13;
     s_defaultMinZoomLevels[GeoDataPlacemark::NaturalTree] = 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::NaturalCave] = 16;
     s_defaultMinZoomLevels[GeoDataPlacemark::NaturalWater]= 3;
     s_defaultMinZoomLevels[GeoDataPlacemark::NaturalWetland]      = 10;
     s_defaultMinZoomLevels[GeoDataPlacemark::NaturalWood] = 8;
@@ -1926,6 +1931,7 @@ QString StyleBuilder::visualCategoryName(GeoDataPlacemark::GeoDataVisualCategory
         visualCategoryNames[GeoDataPlacemark::BarrierWall] = "BarrierWall";
         visualCategoryNames[GeoDataPlacemark::NaturalPeak] = "NaturalPeak";
         visualCategoryNames[GeoDataPlacemark::NaturalTree] = "NaturalTree";
+        visualCategoryNames[GeoDataPlacemark::NaturalCave] = "NaturalCave";
         visualCategoryNames[GeoDataPlacemark::ShopBeverages] = "ShopBeverages";
         visualCategoryNames[GeoDataPlacemark::ShopHifi] = "ShopHifi";
         visualCategoryNames[GeoDataPlacemark::ShopSupermarket] = "ShopSupermarket";
@@ -1964,6 +1970,7 @@ QString StyleBuilder::visualCategoryName(GeoDataPlacemark::GeoDataVisualCategory
         visualCategoryNames[GeoDataPlacemark::ShopOutdoor] = "ShopOutdoor";
         visualCategoryNames[GeoDataPlacemark::ShopSports] = "ShopSports";
         visualCategoryNames[GeoDataPlacemark::ShopCopy] = "ShopCopy";
+        visualCategoryNames[GeoDataPlacemark::ShopArt] = "ShopArt";
         visualCategoryNames[GeoDataPlacemark::ShopMusicalInstrument] = "ShopMusicalInstrument";
         visualCategoryNames[GeoDataPlacemark::ShopPhoto] = "ShopPhoto";
         visualCategoryNames[GeoDataPlacemark::ShopBook] = "ShopBook";

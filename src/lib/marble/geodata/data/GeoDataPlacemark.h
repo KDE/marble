@@ -275,6 +275,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
 
         NaturalPeak,
         NaturalTree,
+        NaturalCave,
 
         // OpenStreetMap category Shopping
         ShopBeverages,
@@ -315,6 +316,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
         ShopOutdoor,
         ShopSports,
         ShopCopy,
+        ShopArt,
         ShopMusicalInstrument,
         ShopPhoto,
         ShopBook,

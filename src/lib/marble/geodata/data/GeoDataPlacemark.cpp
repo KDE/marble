@@ -499,6 +499,7 @@ QString GeoDataPlacemark::categoryName() const
     case BarrierWall: return GeoDataPlacemarkPrivate::tr("Wall");
     case NaturalPeak: return GeoDataPlacemarkPrivate::tr("Peak");
     case NaturalTree: return GeoDataPlacemarkPrivate::tr("Tree");
+    case NaturalCave: return GeoDataPlacemarkPrivate::tr("Cave");
     case ShopBeverages: return GeoDataPlacemarkPrivate::tr("Beverages");
     case ShopHifi: return GeoDataPlacemarkPrivate::tr("Hifi");
     case ShopSupermarket: return GeoDataPlacemarkPrivate::tr("Supermarket");
@@ -537,6 +538,7 @@ QString GeoDataPlacemark::categoryName() const
     case ShopOutdoor: return GeoDataPlacemarkPrivate::tr("Outdoor");
     case ShopSports: return GeoDataPlacemarkPrivate::tr("Sports");
     case ShopCopy: return GeoDataPlacemarkPrivate::tr("Copy");
+    case ShopArt: return GeoDataPlacemarkPrivate::tr("Art");
     case ShopMusicalInstrument: return GeoDataPlacemarkPrivate::tr("Musical Instrument");
     case ShopPhoto: return GeoDataPlacemarkPrivate::tr("Photo");
     case ShopBook: return GeoDataPlacemarkPrivate::tr("Book");

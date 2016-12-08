@@ -245,6 +245,7 @@ qint64 OsmNode::popularityFor(GeoDataPlacemark::GeoDataVisualCategory category)
         popularities << GeoDataPlacemark::ShopOutdoor;
         popularities << GeoDataPlacemark::ShopSports;
         popularities << GeoDataPlacemark::ShopCopy;
+        popularities << GeoDataPlacemark::ShopArt;
         popularities << GeoDataPlacemark::ShopMusicalInstrument;
         popularities << GeoDataPlacemark::ShopPhoto;
         popularities << GeoDataPlacemark::ShopBook;
@@ -271,6 +272,7 @@ qint64 OsmNode::popularityFor(GeoDataPlacemark::GeoDataVisualCategory category)
         popularities << GeoDataPlacemark::BarrierLiftGate;
         popularities << GeoDataPlacemark::AmenityBench;
         popularities << GeoDataPlacemark::NaturalTree;
+        popularities << GeoDataPlacemark::NaturalCave;
         popularities << GeoDataPlacemark::AmenityWasteBasket;
         popularities << GeoDataPlacemark::PowerTower;
 

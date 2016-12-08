@@ -150,6 +150,14 @@ QString Placemark::description() const
             addTagDescription(m_description, QStringLiteral("service:prepress"), QStringLiteral("no"), tr(" No press printing assistance", "A copy shop does not provide help with preparing special printing techniques"));
             addTagDescription(m_description, QStringLiteral("service:self"), QStringLiteral("yes"), tr("Self service", "A copy shop provides individual copy machines for self-service"));
             addTagDescription(m_description, QStringLiteral("service:self"), QStringLiteral("no"), tr(" No self service", "A copy shop does not provide individual machines for self-service"));
+        } else if (category == GeoDataPlacemark::ShopArt){
+            addTagValue(m_description, "operator");
+            addTagValue(m_description, "opening_hours");
+            addTagValue(m_description, "phone");
+            addTagValue(m_description, "website");
+            addTagDescription(m_description, QStringLiteral("wheelchair"), QStringLiteral("yes"), tr("Wheelchair accessible", "This shop is fully wheelchair accessible."));
+            addTagDescription(m_description, QStringLiteral("wheelchair"), QStringLiteral("no"), tr("Not wheelchair accessible", "This shop is not wheelchair accessible."));
+            addTagDescription(m_description, QStringLiteral("wheelchair"), QStringLiteral("yes"), tr("Limited wheelchair accessibility", "Some areas of this shop are wheelchair accessible."));
         } else if (category == GeoDataPlacemark::TransportBusStop) {
             addTagValue(m_description, "network");
             addTagValue(m_description, "operator");
@@ -175,6 +183,15 @@ QString Placemark::description() const
             addTagValue(m_description, "species:en");
             addTagValue(m_description, "genus:en");
             addTagValue(m_description, "leaf_type");
+        } else if (category == GeoDataPlacemark::NaturalCave){
+            addTagValue(m_description, "name");
+            addTagValue(m_description, "cave:ref");
+            addTagValue(m_description, "opening_hours");
+            addTagValue(m_description, "fee");
+            addTagValue(m_description, "ele");
+            addTagValue(m_description, "direction");
+            addTagValue(m_description, "access");
+            addTagValue(m_description, "barrier");
         } else if (category == GeoDataPlacemark::AmenityRecycling) {
             addTagDescription(m_description, QStringLiteral("recycling:batteries"), "yes", tr("Batteries"));
             addTagDescription(m_description, QStringLiteral("recycling:clothes"), "yes", tr("Clothes"));
