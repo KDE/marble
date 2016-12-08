@@ -31,6 +31,8 @@ public:
     QGeoPositionInfoSource* m_source;
     PositionProviderStatus m_status;
     QTimer * m_updateChecker;
+
+    QGeoPositionInfo m_lastKnownPosition;
 };
 
 QtPositioningPositionProviderPluginPrivate::QtPositioningPositionProviderPluginPrivate() :
@@ -72,7 +74,7 @@ QString QtPositioningPositionProviderPlugin::description() const
 
 QString QtPositioningPositionProviderPlugin::copyrightYears() const
 {
-    return QStringLiteral("2011");
+    return QStringLiteral("2011-2016");
 }
 
 QVector<PluginAuthor> QtPositioningPositionProviderPlugin::pluginAuthors() const
@@ -102,7 +104,7 @@ GeoDataCoordinates QtPositioningPositionProviderPlugin::position() const
         return GeoDataCoordinates();
     }
 
-    const QGeoCoordinate p = d->m_source->lastKnownPosition().coordinate();
+    const QGeoCoordinate p = d->m_lastKnownPosition.coordinate();
     if( !p.isValid() ) {
         return GeoDataCoordinates();
     }
@@ -117,7 +119,7 @@ GeoDataAccuracy QtPositioningPositionProviderPlugin::accuracy() const
         return GeoDataAccuracy();
     }
 
-    const QGeoPositionInfo info = d->m_source->lastKnownPosition();
+    const QGeoPositionInfo info = d->m_lastKnownPosition;
     const qreal horizontal = info.attribute( QGeoPositionInfo::HorizontalAccuracy );
     const qreal vertical = info.attribute( QGeoPositionInfo::VerticalAccuracy );
     GeoDataAccuracy::Level const level = horizontal > 0 ? GeoDataAccuracy::Detailed : GeoDataAccuracy::none;
@@ -159,11 +161,11 @@ qreal QtPositioningPositionProviderPlugin::speed() const
         return 0.0;
     }
 
-    if( !d->m_source->lastKnownPosition().hasAttribute( QGeoPositionInfo::GroundSpeed ) ) {
+    if( !d->m_lastKnownPosition.hasAttribute( QGeoPositionInfo::GroundSpeed ) ) {
         return 0.0;
     }
 
-    return d->m_source->lastKnownPosition().attribute( QGeoPositionInfo::GroundSpeed );
+    return d->m_lastKnownPosition.attribute( QGeoPositionInfo::GroundSpeed );
 }
 
 qreal QtPositioningPositionProviderPlugin::direction() const
@@ -172,11 +174,11 @@ qreal QtPositioningPositionProviderPlugin::direction() const
         return 0.0;
     }
 
-    if( !d->m_source->lastKnownPosition().hasAttribute( QGeoPositionInfo::Direction ) ) {
+    if( !d->m_lastKnownPosition.hasAttribute( QGeoPositionInfo::Direction ) ) {
         return 0.0;
     }
 
-    return d->m_source->lastKnownPosition().attribute( QGeoPositionInfo::Direction );
+    return d->m_lastKnownPosition.attribute( QGeoPositionInfo::Direction );
 }
 
 QDateTime QtPositioningPositionProviderPlugin::timestamp() const
@@ -185,15 +187,19 @@ QDateTime QtPositioningPositionProviderPlugin::timestamp() const
         return QDateTime();
     }
 
-    return d->m_source->lastKnownPosition().timestamp();
+    return d->m_lastKnownPosition.timestamp();
 }
 
 void QtPositioningPositionProviderPlugin::update()
 {
+
     PositionProviderStatus newStatus = PositionProviderStatusAcquiring;
     if ( d->m_source ) {
-        if ( d->m_source->lastKnownPosition().isValid() ) {
+        QGeoPositionInfo lastKnownPosition = d->m_source->lastKnownPosition();
+
+        if ( lastKnownPosition.isValid() ) {
             newStatus = PositionProviderStatusAvailable;
+            d->m_lastKnownPosition = lastKnownPosition;
         }
         else {
             newStatus = PositionProviderStatusError;
