@@ -277,8 +277,8 @@ QString Placemark::description() const
         addTagValue(m_description, QStringLiteral("old_name"), tr("formerly <i>%1</i>"));
 
         addTagDescription(m_description, QStringLiteral("wheelchair"), QStringLiteral("yes"), tr("Wheelchair accessible"));
-        addTagDescription(m_description, QStringLiteral("wheelchair"), QStringLiteral("no"), tr("Not wheelchair accessible");
-        addTagDescription(m_description, QStringLiteral("wheelchair"), QStringLiteral("limited"), tr("Limited wheelchair accessibility");
+        addTagDescription(m_description, QStringLiteral("wheelchair"), QStringLiteral("no"), tr("Not wheelchair accessible"));
+        addTagDescription(m_description, QStringLiteral("wheelchair"), QStringLiteral("limited"), tr("Limited wheelchair accessibility"));
     }
 
     return m_description;
