@@ -277,27 +277,27 @@ QString Placemark::description() const
             addTagValue(m_description, QStringLiteral("voltage"), tr("%1 Volt"));
 
             addTagDescription(m_description, QStringLiteral("socket"), QStringLiteral("cee_blue"), tr("%1 blue CEE sockets"));
-            addTagDescription(m_description, QStringLiteral("socket"), QStringLiteral("cee_red_16a"), tr("%1 red CEE sockets with 16 A current"));
-            addTagDescription(m_description, QStringLiteral("socket"), QStringLiteral("cee_red_32a"), tr("%1 red CEE sockets with 32 A current"));
-            addTagDescription(m_description, QStringLiteral("socket"), QStringLiteral("cee_red_64a"), tr("%1 red CEE sockets with 64 A current"));
-            addTagDescription(m_description, QStringLiteral("socket"), QStringLiteral("cee_red_125a"), tr("%1 red CEE sockets with 125 A current"));
-            addTagDescription(m_description, QStringLiteral("socket"), QStringLiteral("nema_5_15"), tr("%1 sockets accepting NEMA-5-15P plugs"));
-            addTagDescription(m_description, QStringLiteral("socket"), QStringLiteral("typeb"), tr("%1 sockets accepting NEMA-5-15P plugs"));
-            addTagDescription(m_description, QStringLiteral("socket"), QStringLiteral("nema_5_20"), tr("%1 sockets accepting NEMA-5-20P plugs"));
+            addTagDescription(m_description, QStringLiteral("socket"), QStringLiteral("cee_red_16a"), tr("%1 red CEE sockets (16 A)"));
+            addTagDescription(m_description, QStringLiteral("socket"), QStringLiteral("cee_red_32a"), tr("%1 red CEE sockets (32 A)"));
+            addTagDescription(m_description, QStringLiteral("socket"), QStringLiteral("cee_red_64a"), tr("%1 red CEE sockets (64 A)"));
+            addTagDescription(m_description, QStringLiteral("socket"), QStringLiteral("cee_red_125a"), tr("%1 red CEE sockets (125 A)"));
+            addTagDescription(m_description, QStringLiteral("socket"), QStringLiteral("nema_5_15"), tr("%1 NEMA-5-15P plugs"));
+            addTagDescription(m_description, QStringLiteral("socket"), QStringLiteral("typeb"), tr("%1 NEMA-5-15P plugs"));
+            addTagDescription(m_description, QStringLiteral("socket"), QStringLiteral("nema_5_20"), tr("%1 NEMA-5-20P plugs"));
             addTagDescription(m_description, QStringLiteral("socket"), QStringLiteral("nema_14_30"), tr("%1 NEMA 14-30 sockets"));
             addTagDescription(m_description, QStringLiteral("socket"), QStringLiteral("nema_14_50"), tr("%1 NEMA 14-50 sockets"));
             addTagDescription(m_description, QStringLiteral("socket"), QStringLiteral("schuko"), tr("%1 Schuko sockets"));
             addTagDescription(m_description, QStringLiteral("socket"), QStringLiteral("bs1363"), tr("%1 BS 1363 sockets"));
-            addTagDescription(m_description, QStringLiteral("socket"), QStringLiteral("type1"), tr("%1 cables with Type 1 plugs"));
-            addTagDescription(m_description, QStringLiteral("socket"), QStringLiteral("type1_combo"), tr("%1 cables with Type 1 combo plugs"));
+            addTagDescription(m_description, QStringLiteral("socket"), QStringLiteral("type1"), tr("%1 Type 1 plugs"));
+            addTagDescription(m_description, QStringLiteral("socket"), QStringLiteral("type1_combo"), tr("%1 Type 1 combo plugs"));
             addTagDescription(m_description, QStringLiteral("socket"), QStringLiteral("type2"), tr("%1 Type 2 sockets"));
             addTagDescription(m_description, QStringLiteral("socket"), QStringLiteral("type2_combo"), tr("%1 Type 2 combo sockets"));
             addTagDescription(m_description, QStringLiteral("socket"), QStringLiteral("type3"), tr("%1 Type 3 sockets"));
-            addTagDescription(m_description, QStringLiteral("socket"), QStringLiteral("chademo"), tr("%1 cables with CHAdeMO plugs"));
-            addTagDescription(m_description, QStringLiteral("socket"), QStringLiteral("magne_charge"), tr("Obsolete"));
-            addTagDescription(m_description, QStringLiteral("socket"), QStringLiteral("tesla_standard"), tr("%1 cables with Tesla standard plugs"));
-            addTagDescription(m_description, QStringLiteral("socket"), QStringLiteral("tesla_supercharger"), tr("%1 cables with Tesla standard plugs at Supercharger station"));
-            addTagDescription(m_description, QStringLiteral("socket"), QStringLiteral("tesla_roadster"), tr("%1 cables with Tesla roadster plugs"));
+            addTagDescription(m_description, QStringLiteral("socket"), QStringLiteral("chademo"), tr("%1 CHAdeMO plugs"));
+            addTagDescription(m_description, QStringLiteral("socket"), QStringLiteral("magne_charge"), tr("%1 Magne Charge plugs"));
+            addTagDescription(m_description, QStringLiteral("socket"), QStringLiteral("tesla_standard"), tr("%1 Tesla standard plugs"));
+            addTagDescription(m_description, QStringLiteral("socket"), QStringLiteral("tesla_supercharger"), tr("%1 Tesla standard plugs (Supercharger)"));
+            addTagDescription(m_description, QStringLiteral("socket"), QStringLiteral("tesla_roadster"), tr("%1 Tesla roadster plugs"));
         }
 
         if (category == GeoDataPlacemark::TransportBicycleParking || category == GeoDataPlacemark::TransportMotorcycleParking) {
