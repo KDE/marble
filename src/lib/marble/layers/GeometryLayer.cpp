@@ -182,8 +182,10 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
     foreach (const QString &layer, d->m_styleBuilder->renderOrder()) {
         GeometryLayerPrivate::PaintFragments & layerItems = paintedFragments[layer];
         std::stable_sort(layerItems.negative.begin(), layerItems.negative.end(), GeoGraphicsItem::zValueLessThan);
+        std::stable_sort(layerItems.null.begin(), layerItems.null.end(), GeoGraphicsItem::styleLessThan);
         // The idea here is that layerItems.null has most items and needs not to be sorted => faster
         std::stable_sort(layerItems.positive.begin(), layerItems.positive.end(), GeoGraphicsItem::zValueLessThan);
+
         AbstractGeoPolygonGraphicsItem::s_previousStyle = -1;
         GeoLineStringGraphicsItem::s_previousStyle = -1;
         foreach(auto item, layerItems.negative) { item->paint(painter, viewport, layer, d->m_tileLevel); }

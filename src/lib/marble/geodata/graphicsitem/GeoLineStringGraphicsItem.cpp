@@ -292,6 +292,9 @@ bool  GeoLineStringGraphicsItem::configurePainterForLine(GeoPainter *painter, co
         // so we carefully check whether applying the setter is needed
         if (currentPen.widthF() != newLineWidth && newLineWidth != 0.0) {
           if (newLineWidth < lineDrawThreshold) {
+              if (painter->pen().style() != Qt::NoPen) {
+                  painter->setPen(Qt::NoPen);
+              }
               return false; // Don't draw any outline and abort painter configuration early
           }
           currentPen.setWidthF(newLineWidth);

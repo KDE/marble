@@ -29,6 +29,7 @@
 #include <QDate>
 #include <QSet>
 #include <QScreen>
+#include <QHash>
 #include <QDebug>
 
 namespace Marble {
@@ -93,6 +94,9 @@ public:
     GeoDataStyle::Ptr m_styleTreeWinter;
     bool m_defaultStyleInitialized;
 
+    QHash<QString, GeoDataStyle::Ptr> m_specialStyleCache;
+    int m_specialStyleCacheTileLevel;
+
     /**
      * @brief s_visualCategories contains osm tag mappings to GeoDataVisualCategories
      */
@@ -110,7 +114,8 @@ StyleBuilder::Private::Private() :
     m_defaultLabelColor(Qt::black),
     m_defaultFont(QStringLiteral("Sans Serif")),
     m_defaultStyle(),
-    m_defaultStyleInitialized(false)
+    m_defaultStyleInitialized(false),
+    m_specialStyleCacheTileLevel(-1)
 {
     initializeMinimumZoomLevels();
     for (int i = 0; i < GeoDataPlacemark::LastIndex; ++i) {
@@ -1408,6 +1413,13 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
         return placemark->customStyle();
     }
 
+    if (d->m_specialStyleCacheTileLevel != parameters.tileLevel) {
+        d->m_specialStyleCache.clear();
+        d->m_specialStyleCacheTileLevel = parameters.tileLevel;
+    }
+    QString specialStyleCacheKey;
+    bool cacheSpecialStyle = false;
+
     auto const visualCategory = placemark->visualCategory();
     GeoDataStyle::ConstPtr style = d->presetStyle(visualCategory);
 
@@ -1498,6 +1510,8 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
         GeoDataLabelStyle labelStyle = style->labelStyle();
         lineStyle.setCosmeticOutline(true);
 
+        bool adjustStyle = false;
+
         if(visualCategory == GeoDataPlacemark::AdminLevel2){
             if (osmData.containsTag(QStringLiteral("maritime"), QStringLiteral("yes"))) {
                 lineStyle.setColor("#88b3bf");
@@ -1505,48 +1519,42 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
                 if (osmData.containsTag(QStringLiteral("marble:disputed"), QStringLiteral("yes"))) {
                     lineStyle.setPenStyle( Qt::DashLine );
                 }
+                adjustStyle = true;
             }
         }
         else if ((visualCategory >= GeoDataPlacemark::HighwayService &&
                 visualCategory <= GeoDataPlacemark::HighwayMotorway) ||
                 visualCategory == GeoDataPlacemark::TransportAirportRunway) {
 
-            QString const accessValue = osmData.tagValue(QStringLiteral("access"));
-            if (accessValue == QLatin1String("private") ||
-                accessValue == QLatin1String("no") ||
-                accessValue == QLatin1String("agricultural") ||
-                accessValue == QLatin1String("delivery") ||
-                accessValue == QLatin1String("forestry")) {
-                QColor polyColor = polyStyle.color();
-                qreal hue, sat, val;
-                polyColor.getHsvF(&hue, &sat, &val);
-                polyColor.setHsvF(0.98, qMin(1.0, 0.2 + sat), val);
-                polyStyle.setColor(polyColor);
-                lineStyle.setColor(lineStyle.color().darker(150));
+
+            // Take cached Style instance if possible
+            if  (d->m_specialStyleCacheTileLevel == parameters.tileLevel)
+            {
+                specialStyleCacheKey = visualCategory;
+                if (d->m_specialStyleCache.contains(specialStyleCacheKey)) {
+                    style = d->m_specialStyleCache[specialStyleCacheKey];
+                    return style;
+                }
             }
 
-            if (osmData.containsTag("tunnel", "yes") ) {
-                QColor polyColor = polyStyle.color();
-                qreal hue, sat, val;
-                polyColor.getHsvF(&hue, &sat, &val);
-                polyColor.setHsvF(hue, 0.25 * sat, 0.95 * val);
-                polyStyle.setColor(polyColor);
-                lineStyle.setColor(lineStyle.color().lighter(115));
-            }
+            adjustStyle = true;
 
             if (parameters.tileLevel <= 8) {
                 /** @todo: Dummy implementation for dynamic style changes based on tile level, replace with sane values */
                 lineStyle.setPhysicalWidth(0.0);
                 lineStyle.setWidth(2.0);
+                cacheSpecialStyle = true;
             } else if (parameters.tileLevel <= 10) {
                 /** @todo: Dummy implementation for dynamic style changes based on tile level, replace with sane values */
                 lineStyle.setPhysicalWidth(0.0);
                 lineStyle.setWidth(3.0);
+                cacheSpecialStyle = true;
             } else if (parameters.tileLevel <= 12) {
                 /** @todo: Dummy implementation for dynamic style changes based on tile level, replace with sane values */
                 lineStyle.setPhysicalWidth(0.0);
                 lineStyle.setWidth(4.0);
-            }else {
+                cacheSpecialStyle = true;
+            } else {
                 auto tagIter = osmData.findTag(QStringLiteral("width"));
                 if (tagIter != osmData.tagsEnd()) {
                     QString const widthValue = QString(tagIter.value()).remove(QStringLiteral(" meters")).remove(QStringLiteral(" m"));
@@ -1564,13 +1572,51 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
                 }
             }
 
+            QString const accessValue = osmData.tagValue(QStringLiteral("access"));
+            if (accessValue == QLatin1String("private") ||
+                accessValue == QLatin1String("no") ||
+                accessValue == QLatin1String("agricultural") ||
+                accessValue == QLatin1String("delivery") ||
+                accessValue == QLatin1String("forestry")) {
+                QColor polyColor = polyStyle.color();
+                qreal hue, sat, val;
+                polyColor.getHsvF(&hue, &sat, &val);
+                polyColor.setHsvF(0.98, qMin(1.0, 0.2 + sat), val);
+                polyStyle.setColor(polyColor);
+                lineStyle.setColor(lineStyle.color().darker(150));
+                cacheSpecialStyle = false;
+            }
+
+            if (osmData.containsTag("tunnel", "yes") ) {
+                QColor polyColor = polyStyle.color();
+                qreal hue, sat, val;
+                polyColor.getHsvF(&hue, &sat, &val);
+                polyColor.setHsvF(hue, 0.25 * sat, 0.95 * val);
+                polyStyle.setColor(polyColor);
+                lineStyle.setColor(lineStyle.color().lighter(115));
+                cacheSpecialStyle = false;
+            }
+
         } else if (visualCategory >= GeoDataPlacemark::WaterwayCanal && visualCategory <= GeoDataPlacemark::WaterwayRiver) {
+
+            adjustStyle = true;
+
+            // Take cached Style instance if possible
+            specialStyleCacheKey = visualCategory;
+            if (d->m_specialStyleCache.contains(specialStyleCacheKey)) {
+                style = d->m_specialStyleCache[specialStyleCacheKey];
+                return style;
+            }
+
+
             if (parameters.tileLevel <= 3) {
                 lineStyle.setWidth(1);
                 lineStyle.setPhysicalWidth(0.0);
+                cacheSpecialStyle = true;
             } else if (parameters.tileLevel <= 7) {
                 lineStyle.setWidth(2);
                 lineStyle.setPhysicalWidth(0.0);
+                cacheSpecialStyle = true;
             } else {
                 QString const widthValue = osmData.tagValue(QStringLiteral("width")).remove(QStringLiteral(" meters")).remove(QStringLiteral(" m"));
                 bool ok;
@@ -1578,12 +1624,19 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
                 lineStyle.setPhysicalWidth(ok ? qBound(0.1f, width, 200.0f) : 0.0f);
             }
         }
-        GeoDataStyle::Ptr newStyle(new GeoDataStyle(*style));
-        newStyle->setPolyStyle(polyStyle);
-        newStyle->setLineStyle(lineStyle);
-        newStyle->setLabelStyle(labelStyle);
 
-        style = newStyle;
+        if (adjustStyle) {
+            GeoDataStyle::Ptr newStyle(new GeoDataStyle(*style));
+            newStyle->setPolyStyle(polyStyle);
+            newStyle->setLineStyle(lineStyle);
+            newStyle->setLabelStyle(labelStyle);
+            style = newStyle;
+            if (cacheSpecialStyle) {
+                d->m_specialStyleCache.insert(specialStyleCacheKey, newStyle);
+            }
+        }
+
+
     } else if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType) {
         GeoDataPolyStyle polyStyle = style->polyStyle();
         GeoDataLineStyle lineStyle = style->lineStyle();

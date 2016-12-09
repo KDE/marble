@@ -127,6 +127,7 @@ class MARBLE_EXPORT GeoGraphicsItem
     void setZValue( qreal z );
 
     static bool zValueLessThan(GeoGraphicsItem* one, GeoGraphicsItem* two);
+    static bool styleLessThan(GeoGraphicsItem* one, GeoGraphicsItem* two);
 
     /**
      * Paints the item using the given GeoPainter.
