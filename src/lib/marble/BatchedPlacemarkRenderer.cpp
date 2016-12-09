@@ -27,11 +27,13 @@ BatchedPlacemarkRenderer::~BatchedPlacemarkRenderer()
 }
 
 void BatchedPlacemarkRenderer::addTextFragment(  const QPoint& position, const QString& text,
-                                                 const QColor& color, QFlags<BatchedPlacemarkRenderer::Frames> flags )
+                                                 const qreal fontSize, const QColor& color,
+                                                 const QFlags<BatchedPlacemarkRenderer::Frames> & flags )
 {
     TextFragment fragment;
     fragment.text = text;
     fragment.position = position;
+    fragment.fontSize = fontSize;
     fragment.color = color;
     fragment.flags = flags;
     m_textFragments.append(fragment);
@@ -68,6 +70,9 @@ void BatchedPlacemarkRenderer::drawTextFragments()
             pixmap.fill(Qt::transparent);
             QRect labelRect(QPoint(), size);
             textPainter.begin(&pixmap);
+            QFont textFont = textPainter.font();
+            textFont.setPointSize(m_textFragments[i].fontSize);
+            textPainter.setFont(textFont);
             textPainter.setRenderHint(QPainter::Antialiasing, true);
 
             QColor const brushColor = m_textFragments[i].color;
@@ -88,7 +93,9 @@ void BatchedPlacemarkRenderer::drawTextFragments()
             textPainter.end();
             m_pixmapCache.insert(key, pixmap);
         }
-        m_painter->drawPixmap(m_textFragments[i].position, pixmap);
+         m_painter->drawPixmap(m_textFragments[i].position.x() - pixmap.width()/2,
+                              m_textFragments[i].position.y() - pixmap.height()/2,
+                              pixmap);
     }
 }
 

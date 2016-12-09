@@ -261,6 +261,12 @@ void BuildingGeoPolygonGraphicsItem::paintRoof(GeoPainter* painter, const Viewpo
     bool isValid = true;
     if (s_previousStyle != reinterpret_cast<quint64>(style().data())) {
         isValid = configurePainter(painter, viewport);
+
+        QFont font = painter->font(); // TODO: better font configuration
+        if (font.pointSize() != 10) {
+            font.setPointSize( 10 );
+            painter->setFont(font);
+        }
     }
     s_previousStyle = reinterpret_cast<quint64>(style().data());
 
@@ -368,8 +374,8 @@ void BuildingGeoPolygonGraphicsItem::paintRoof(GeoPainter* painter, const Viewpo
                     && outerRoof->containsPoint(textPosition + QPointF(2+2*w2, descent), Qt::OddEvenFill)
                     && outerRoof->containsPoint(textPosition + QPointF(2+2*w2, -ascent), Qt::OddEvenFill)
                     ) {
-                painter->addTextFragment((textPosition + QPointF(0, -2-ascent)).toPoint(),
-                                         m_buildingText, painter->brush().color());
+                painter->addTextFragment(roofCenter.toPoint(), m_buildingText,
+                                         painter->font().pointSize(), painter->brush().color());
             }
         }
         ++i;
@@ -383,7 +389,7 @@ void BuildingGeoPolygonGraphicsItem::paintRoof(GeoPainter* painter, const Viewpo
             QPointF point(x, y);
             point += buildingOffset(point, viewport);
             painter->addTextFragment(point.toPoint(),
-                                     m_buildingText, painter->brush().color(),
+                                     m_buildingText, painter->font().pointSize(), painter->brush().color(),
                                      QFlags<BatchedPlacemarkRenderer::Frames>() |= BatchedPlacemarkRenderer::RoundFrame);
         }
     }

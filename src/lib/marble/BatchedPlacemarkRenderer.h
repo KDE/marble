@@ -44,7 +44,8 @@ class MARBLE_EXPORT BatchedPlacemarkRenderer
     ~BatchedPlacemarkRenderer();
 
     void addTextFragment( const QPoint& targetPosition, const QString& text,
-                          const QColor& color, QFlags<BatchedPlacemarkRenderer::Frames> flags );
+                          const qreal fontSize, const QColor& color,
+                          const QFlags<BatchedPlacemarkRenderer::Frames> & flags );
     void clearTextFragments();
     void drawTextFragments();
 
@@ -58,6 +59,7 @@ struct TextFragment
 {
     QString text;
     QPoint position;
+    qreal fontSize;
     QColor color;
     QFlags<BatchedPlacemarkRenderer::Frames> flags;
 };

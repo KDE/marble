@@ -1018,9 +1018,10 @@ void GeoPainter::drawRoundedRect(const GeoDataCoordinates &centerPosition,
 
 
 void GeoPainter::addTextFragment( const QPoint& position, const QString& text,
-                                  const QColor& color,  QFlags<BatchedPlacemarkRenderer::Frames> flags )
+                                  const qreal fontSize , const QColor& color,
+                                  const QFlags<BatchedPlacemarkRenderer::Frames> & flags )
 {
-    d->m_batchedPlacemarkRenderer.addTextFragment( position, text, color, flags);
+    d->m_batchedPlacemarkRenderer.addTextFragment( position, text, fontSize, color, flags);
 }
 
 void GeoPainter::clearTextFragments()

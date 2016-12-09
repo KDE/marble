@@ -500,7 +500,8 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
 
 
     void addTextFragment( const QPoint& position, const QString& text,
-                          const QColor& color = Qt::black, QFlags<BatchedPlacemarkRenderer::Frames> flags = 0 );
+                          const qreal fontSize, const QColor& color = Qt::black,
+                          const QFlags<BatchedPlacemarkRenderer::Frames> & flags = 0 );
     void clearTextFragments();
     void drawTextFragments();
 
