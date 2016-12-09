@@ -493,6 +493,7 @@ QString GeoDataPlacemark::categoryName() const
     case AmenityWasteBasket: return GeoDataPlacemarkPrivate::tr("Waste Basket");
     case AmenityDrinkingWater: return GeoDataPlacemarkPrivate::tr("Drinking Water");
     case AmenityGraveyard: return GeoDataPlacemarkPrivate::tr("Graveyard");
+    case AmenityChargingStation: return GeoDataPlacemarkPrivate::tr("Charging Station");
     case BarrierCityWall: return GeoDataPlacemarkPrivate::tr("City Wall");
     case BarrierGate: return GeoDataPlacemarkPrivate::tr("Gate");
     case BarrierLiftGate: return GeoDataPlacemarkPrivate::tr("Lift Gate");

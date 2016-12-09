@@ -266,6 +266,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
         AmenityWasteBasket,
         AmenityDrinkingWater,
         AmenityGraveyard,
+        AmenityChargingStation,
 
         // OpenStreetMap category Barrier
         BarrierCityWall,

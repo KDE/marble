@@ -473,6 +473,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::AmenityTownHall]          = createOsmPOIStyle(osmFont, "amenity/town_hall.16", amenityColor);
     m_defaultStyle[GeoDataPlacemark::AmenityWasteBasket]       = createOsmPOIStyle(osmFont, "individual/waste_basket.10", amenityColor);
     m_defaultStyle[GeoDataPlacemark::AmenityWasteBasket]->iconStyle().setScale(0.75);
+    m_defaultStyle[GeoDataPlacemark::AmenityChargingStation]   = createOsmPOIStyle(osmFont, "transportation/charging_station");
 
     m_defaultStyle[GeoDataPlacemark::AmenityDrinkingWater]     = createOsmPOIStyle(osmFont, "amenity/drinking_water.16", amenityColor);
 
@@ -844,6 +845,7 @@ void StyleBuilder::Private::initializeOsmVisualCategories()
     s_visualCategories[OsmTag("amenity", "waste_basket")]       = GeoDataPlacemark::AmenityWasteBasket;
     s_visualCategories[OsmTag("amenity", "drinking_water")]     = GeoDataPlacemark::AmenityDrinkingWater;
     s_visualCategories[OsmTag("amenity", "graveyard")]          = GeoDataPlacemark::AmenityGraveyard;
+    s_visualCategories[OsmTag("amenity", "charging_station")]   = GeoDataPlacemark::AmenityChargingStation;
 
     s_visualCategories[OsmTag("amenity", "dentist")]            = GeoDataPlacemark::HealthDentist;
     s_visualCategories[OsmTag("amenity", "pharmacy")]           = GeoDataPlacemark::HealthPharmacy;
@@ -1149,6 +1151,7 @@ void StyleBuilder::Private::initializeMinimumZoomLevels()
     s_defaultMinZoomLevels[GeoDataPlacemark::AmenityPrison]= 17;
     s_defaultMinZoomLevels[GeoDataPlacemark::AmenityRecycling]= 17;
     s_defaultMinZoomLevels[GeoDataPlacemark::AmenityShelter]= 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AmenityChargingStation] = 17;
 
     s_defaultMinZoomLevels[GeoDataPlacemark::BarrierCityWall] = 15;
     s_defaultMinZoomLevels[GeoDataPlacemark::BarrierGate]     = 17;
@@ -1981,6 +1984,7 @@ QString StyleBuilder::visualCategoryName(GeoDataPlacemark::GeoDataVisualCategory
         visualCategoryNames[GeoDataPlacemark::AmenityWasteBasket] = "AmenityWasteBasket";
         visualCategoryNames[GeoDataPlacemark::AmenityDrinkingWater] = "AmenityDrinkingWater";
         visualCategoryNames[GeoDataPlacemark::AmenityGraveyard] = "AmenityGraveyard";
+        visualCategoryNames[GeoDataPlacemark::AmenityChargingStation] = "ChargingStation";
         visualCategoryNames[GeoDataPlacemark::BarrierCityWall] = "BarrierCityWall";
         visualCategoryNames[GeoDataPlacemark::BarrierGate] = "BarrierGate";
         visualCategoryNames[GeoDataPlacemark::BarrierLiftGate] = "BarrierLiftGate";
