@@ -1,17 +1,19 @@
 PROJECT(RoutingPlugin)
 
-macro_optional_find_package(Phonon)
-marble_set_package_properties( Phonon PROPERTIES DESCRIPTION "cross-platform multimedia framework that enables the use of audio and video content" )
-marble_set_package_properties( Phonon PROPERTIES URL "http://qt.digia.com/" )
-marble_set_package_properties( Phonon PROPERTIES TYPE OPTIONAL PURPOSE "Voice navigation (sound or human speakers)" )
+macro_optional_find_package(Phonon4Qt5 QUIET)
+marble_set_package_properties( Phonon4Qt5 PROPERTIES
+    DESCRIPTION "Qt-based audio library"
+    URL "https://phonon.kde.org/"
+    PURPOSE "Voice navigation (sound or human speakers)"
+    TYPE OPTIONAL
+)
 
 INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}
  ${CMAKE_CURRENT_BINARY_DIR}
- ${PHONON_INCLUDES}
 )
 
-IF( PHONON_FOUND )
+if(Phonon4Qt5_FOUND)
   set( routing_SRCS RoutingPlugin.cpp AudioOutput.cpp )
 ELSE()
   set( routing_SRCS RoutingPlugin.cpp NullAudioOutput.cpp )
@@ -21,4 +23,6 @@ qt_wrap_ui( routing_SRCS ${routing_UI} )
 qt_add_resources(routing_SRCS routing.qrc)
 
 marble_add_plugin( RoutingPlugin ${routing_SRCS} )
-target_link_libraries(RoutingPlugin ${PHONON_LIBS})
+if(Phonon4Qt5_FOUND)
+    target_link_libraries(RoutingPlugin Phonon::phonon4qt5)
+endif()
