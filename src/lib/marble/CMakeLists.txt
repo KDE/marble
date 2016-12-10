@@ -617,6 +617,8 @@ install( FILES
     routing/RoutingModel.h
     routing/RoutingProfile.h
 
+    BatchedPlacemarkRenderer.h
+
     DESTINATION ${INCLUDE_INSTALL_DIR}/marble
 )
 
