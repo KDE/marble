@@ -267,7 +267,7 @@ QString Placemark::description() const
             addTagDescription(m_description, QStringLiteral("toilets"), QStringLiteral("yes"), tr("Has toilets", "A hut provides toilets"));
             addTagDescription(m_description, QStringLiteral("toilets"), QStringLiteral("no"), tr("Has no toilets", "A hut does not provide toilets"));
             addTagDescription(m_description, QStringLiteral("reservation"), QStringLiteral("yes"), tr("Reservation is possible"));
-            addTagDescription(m_description, QStringLiteral("reservation"), QStringLiteral("no"), tr("There is no reservation"));
+            addTagDescription(m_description, QStringLiteral("reservation"), QStringLiteral("no"), tr("No reservation possible"));
             addTagDescription(m_description, QStringLiteral("reservation"), QStringLiteral("required"), tr("Reservation is required"));
             addTagDescription(m_description, QStringLiteral("reservation"), QStringLiteral("recommended"), tr("Reservation is recommended", "You should make reservation"));
             addTagDescription(m_description, QStringLiteral("reservation"), QStringLiteral("members_only"), tr("Only for members", "Reservation is only possible for members of the organisation running the hut"));
