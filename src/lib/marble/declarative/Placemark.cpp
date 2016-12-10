@@ -272,9 +272,9 @@ QString Placemark::description() const
             addTagDescription(m_description, QStringLiteral("reservation"), QStringLiteral("recommended"), tr("Reservation is recommended", "You should make reservation"));
             addTagDescription(m_description, QStringLiteral("reservation"), QStringLiteral("members_only"), tr("Only for members", "Reservation is only possible for members of the organisation running the hut"));
         } else if (category == GeoDataPlacemark::AmenityChargingStation) {
-            addTagValue(m_description, QStringLiteral("capacity"), tr("%1 Vehicles"));
-            addTagValue(m_description, QStringLiteral("amperage"), tr("%1 Amper"));
-            addTagValue(m_description, QStringLiteral("voltage"), tr("%1 Volt"));
+            addTagValue(m_description, QStringLiteral("capacity"), tr("%1 vehicles"));
+            addTagValue(m_description, QStringLiteral("amperage"), tr("%1 ampere"));
+            addTagValue(m_description, QStringLiteral("voltage"), tr("%1 volt"));
 
             addTagDescription(m_description, QStringLiteral("socket"), QStringLiteral("cee_blue"), tr("%1 blue CEE sockets"));
             addTagDescription(m_description, QStringLiteral("socket"), QStringLiteral("cee_red_16a"), tr("%1 red CEE sockets (16 A)"));
