@@ -1,10 +1,13 @@
 PROJECT(marblewidget)
 
-macro_optional_find_package(Phonon)
-marble_set_package_properties( Phonon PROPERTIES DESCRIPTION "cross-platform multimedia framework that enables the use of audio and video content" )
-marble_set_package_properties( Phonon PROPERTIES URL "http://qt.digia.com/" )
-marble_set_package_properties( Phonon PROPERTIES TYPE OPTIONAL PURPOSE "Support for playback of soundcue elements" )
-if(PHONON_FOUND)
+macro_optional_find_package(Phonon4Qt5 QUIET)
+marble_set_package_properties( Phonon4Qt5 PROPERTIES
+    DESCRIPTION "Qt-based audio library"
+    URL "https://phonon.kde.org/"
+    PURPOSE "Support for playback of soundcue elements"
+    TYPE OPTIONAL
+)
+if(Phonon4Qt5_FOUND)
     set(HAVE_PHONON TRUE)
 endif()
 CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/config-phonon.h.cmake
@@ -29,7 +32,6 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}/cloudsync
  ${CMAKE_SOURCE_DIR}/src/lib/astro
  ${ZLIB_INCLUDE_DIRS}
- ${PHONON_INCLUDES}
 )
 
 INCLUDE(geodata/CMakeLists.txt)
@@ -401,10 +403,10 @@ if (NOT MARBLE_NO_DBUS)
             Qt5::DBus
     )
 endif ()
-if (PHONON_FOUND)
+if (Phonon4Qt5_FOUND)
     target_link_libraries(marblewidget
         LINK_PRIVATE
-            ${PHONON_LIBS}
+            Phonon::phonon4qt5
     )
 endif()
 
