@@ -26,6 +26,7 @@ ne_50m_admin_0_boundary_lines_maritime_indicator
 ne_50m_admin_0_pacific_groupings
 ne_50m_rivers_lake_centerlines
 ne_50m_lakes
+ne_50m_urban_areas
 ne_50m_glaciated_areas
 ne_50m_antarctic_ice_shelves_lines
 ne_10m_bathymetry_K_200
