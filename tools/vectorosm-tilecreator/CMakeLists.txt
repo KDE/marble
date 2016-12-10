@@ -28,6 +28,7 @@ SpellChecker.cpp
 TagsFilter.cpp
 TileIterator.cpp
 TileDirectory.cpp
+TileQueue.cpp
 VectorClipper.cpp
 WayConcatenator.cpp
 WayChunk.cpp

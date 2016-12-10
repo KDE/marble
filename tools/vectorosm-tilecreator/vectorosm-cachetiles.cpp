@@ -22,6 +22,7 @@
 #include "TileId.h"
 #include "VectorClipper.h"
 #include "WayConcatenator.h"
+#include "TileQueue.h"
 
 #include <QApplication>
 #include <QBuffer>
@@ -94,6 +95,14 @@ int main(int argc, char *argv[])
         parser.showHelp();
         return 1;
     }
+
+    TileQueue tileQueue;
+    QSet<TileId> dynamicTiles;
+    tileQueue.read(dynamicTiles);
+    if (dynamicTiles.contains(centerTile)) {
+        return 0;
+    }
+
     QString const extension = QFileInfo(input[2]).completeSuffix();
     QString const mbtile = parser.value("mbtile");
     QSharedPointer<MbTileWriter> mbtileWriter = QSharedPointer<MbTileWriter>(new MbTileWriter(mbtile, extension));
@@ -146,6 +155,8 @@ int main(int argc, char *argv[])
                 qWarning() << "Could not write the tile " << combined->name();
             }
 
+            dynamicTiles << tileId;
+
             if (printProgress) {
                 TileDirectory::printProgress(qreal(count) / total);
                 std::cout << "  Tile " << count << "/" << total << " (";
@@ -155,6 +166,8 @@ int main(int argc, char *argv[])
             }
         }
     }
+
+    tileQueue.write(dynamicTiles);
 
     if (printProgress) {
         TileDirectory::printProgress(1.0);
