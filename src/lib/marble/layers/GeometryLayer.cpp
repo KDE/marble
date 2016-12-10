@@ -181,10 +181,11 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
     // Sort each fragment by z-level and draw it
     foreach (const QString &layer, d->m_styleBuilder->renderOrder()) {
         GeometryLayerPrivate::PaintFragments & layerItems = paintedFragments[layer];
-        std::stable_sort(layerItems.negative.begin(), layerItems.negative.end(), GeoGraphicsItem::zValueLessThan);
-        std::stable_sort(layerItems.null.begin(), layerItems.null.end(), GeoGraphicsItem::styleLessThan);
-        // The idea here is that layerItems.null has most items and needs not to be sorted => faster
-        std::stable_sort(layerItems.positive.begin(), layerItems.positive.end(), GeoGraphicsItem::zValueLessThan);
+        std::sort(layerItems.negative.begin(), layerItems.negative.end(), GeoGraphicsItem::zValueLessThan);
+        // The idea here is that layerItems.null has most items and does not need to be sorted by z-value
+        // since they are all equal (=0). We do sort them by style pointer though for batch rendering
+        std::sort(layerItems.null.begin(), layerItems.null.end(), GeoGraphicsItem::styleLessThan);
+        std::sort(layerItems.positive.begin(), layerItems.positive.end(), GeoGraphicsItem::zValueLessThan);
 
         AbstractGeoPolygonGraphicsItem::s_previousStyle = -1;
         GeoLineStringGraphicsItem::s_previousStyle = -1;
