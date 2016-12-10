@@ -33,7 +33,8 @@ class GeoGraphicsScenePrivate
 public:
     GeoGraphicsScene *q;
     explicit GeoGraphicsScenePrivate(GeoGraphicsScene *parent) :
-        q(parent)
+        q(parent),
+        m_dirty(true)
     {
     }
 
@@ -42,7 +43,7 @@ public:
         q->clear();
     }
 
-    QMap<TileId, QList<GeoGraphicsItem*> > m_items;
+    QMap<TileId, QList<GeoGraphicsItem*> > m_tiledItems;
     QMultiHash<const GeoDataFeature*, TileId> m_features;
 
     // Stores the items which have been clicked;
@@ -52,6 +53,11 @@ public:
 
     void selectItem( GeoGraphicsItem *item );
     void applyHighlightStyle(GeoGraphicsItem *item, const GeoDataStyle::Ptr &style );
+
+    bool m_dirty;
+    QList<GeoGraphicsItem*> m_cachedItems;
+    QDateTime m_cachedDateTime;
+    GeoDataLatLonBox m_cachedLatLonBox;
 };
 
 GeoDataStyle::Ptr GeoGraphicsScenePrivate::highlightStyle( const GeoDataDocument *document,
@@ -94,6 +100,22 @@ GeoGraphicsScene::~GeoGraphicsScene()
 
 QList< GeoGraphicsItem* > GeoGraphicsScene::items( const GeoDataLatLonBox &box, int zoomLevel ) const
 {
+    bool isEqual = GeoDataLatLonBox::fuzzyCompare( d->m_cachedLatLonBox, box, 0.05 );
+
+    if (d->m_cachedLatLonBox.isEmpty() || !isEqual) {
+        d->m_dirty = true;
+    }
+
+    // update the items cache at least every second since the last request
+    QDateTime now = QDateTime::currentDateTime();
+    if (!d->m_cachedDateTime.isValid() || d->m_cachedDateTime.msecsTo(now) > 1000) {
+        d->m_dirty = true;
+    }
+
+    if (!d->m_dirty) {
+        return d->m_cachedItems;
+    }
+
     if ( box.west() > box.east() ) {
         // Handle boxes crossing the IDL by splitting it into two separate boxes
         GeoDataLatLonBox left;
@@ -137,7 +159,7 @@ QList< GeoGraphicsItem* > GeoGraphicsScene::items( const GeoDataLatLonBox &box, 
             for ( int y = y1; y <= y2; ++y ) {
                 bool const isBorder = isBorderX || y == y1 || y == y2;
                 const TileId tileId = TileId( 0, level, x, y );
-                foreach(GeoGraphicsItem *object, d->m_items.value( tileId )) {
+                foreach(GeoGraphicsItem *object, d->m_tiledItems.value( tileId )) {
                     if (object->minZoomLevel() <= zoomLevel && object->visible()) {
                         if (!isBorder || object->latLonAltBox().intersects(box)) {
                             result.push_back(object);
@@ -148,6 +170,10 @@ QList< GeoGraphicsItem* > GeoGraphicsScene::items( const GeoDataLatLonBox &box, 
         }
     }
 
+    d->m_cachedItems = result;
+    d->m_dirty = false;
+    d->m_cachedLatLonBox = box;
+    d->m_cachedDateTime = now;
     return result;
 }
 
@@ -177,7 +203,7 @@ void GeoGraphicsScene::applyHighlight( const QVector< GeoDataPlacemark* > &selec
     foreach( const GeoDataPlacemark *placemark, selectedPlacemarks ) {
         QList<TileId> tiles = d->m_features.values( placemark );
         foreach( const TileId &tileId, tiles ) {
-            QList<GeoGraphicsItem*> clickedItems = d->m_items[tileId];
+            QList<GeoGraphicsItem*> clickedItems = d->m_tiledItems[tileId];
             foreach ( GeoGraphicsItem *item, clickedItems ) {
                 if ( item->feature() == placemark ) {
                     GeoDataObject *parent = placemark->parent();
@@ -222,9 +248,12 @@ void GeoGraphicsScene::applyHighlight( const QVector< GeoDataPlacemark* > &selec
 
 void GeoGraphicsScene::removeItem( const GeoDataFeature* feature )
 {
+    d->m_dirty = true;
+    d->m_cachedItems.clear();
+
     QList<TileId> keys = d->m_features.values( feature );
     foreach( const TileId& key, keys ) {
-        QList< GeoGraphicsItem* >& tileList = d->m_items[key];
+        QList< GeoGraphicsItem* >& tileList = d->m_tiledItems[key];
         foreach( GeoGraphicsItem* item, tileList ) {
             if( item->feature() == feature ) {
                 d->m_features.remove( feature );
@@ -238,15 +267,21 @@ void GeoGraphicsScene::removeItem( const GeoDataFeature* feature )
 
 void GeoGraphicsScene::clear()
 {
-    foreach(const QList<GeoGraphicsItem*> &list, d->m_items.values()) {
+    d->m_dirty = true;
+    d->m_cachedItems.clear();
+
+    foreach(const QList<GeoGraphicsItem*> &list, d->m_tiledItems.values()) {
         qDeleteAll(list);
     }
-    d->m_items.clear();
+    d->m_tiledItems.clear();
     d->m_features.clear();
 }
 
 void GeoGraphicsScene::addItem( GeoGraphicsItem* item )
 {
+    d->m_dirty = true;
+    d->m_cachedItems.clear();
+
     // Select zoom level so that the object fit in single tile
     int zoomLevel;
     qreal north, south, east, west;
@@ -260,7 +295,7 @@ void GeoGraphicsScene::addItem( GeoGraphicsItem* item )
 
     const TileId key = TileId::fromCoordinates( GeoDataCoordinates(west, north, 0), zoomLevel ); // same as GeoDataCoordinates(east, south, 0), see above
 
-    QList< GeoGraphicsItem* >& tileList = d->m_items[key];
+    QList< GeoGraphicsItem* >& tileList = d->m_tiledItems[key];
     QList< GeoGraphicsItem* >::iterator position = qLowerBound( tileList.begin(), tileList.end(), item, GeoGraphicsItem::zValueLessThan );
     tileList.insert( position, item );
     d->m_features.insert( item->feature(), key );
