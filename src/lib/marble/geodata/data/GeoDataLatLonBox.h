@@ -210,6 +210,16 @@ class GEODATA_EXPORT GeoDataLatLonBox : public GeoDataObject
     virtual bool isEmpty() const;
 
     /**
+     * @brief Indicates whether two bounding boxes are roughly equal.
+     *        The factor specifies the margin threshold relative to the left handside
+     *        bounding box within which both bounding boxes are considered equal.
+     * @return Return value is true if both bounding box are approximately equal.
+     */
+    static bool fuzzyCompare(const GeoDataLatLonBox& lhs,
+                             const GeoDataLatLonBox& rhs,
+                             const qreal factor = 0.01);
+
+    /**
      * @brief Resets the bounding box to its uninitialised state (and thus contains nothing).
      */
     virtual void clear();

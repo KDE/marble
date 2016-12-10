@@ -819,6 +819,66 @@ bool GeoDataLatLonBox::isEmpty() const
     return *this == empty;
 }
 
+bool GeoDataLatLonBox::fuzzyCompare(const GeoDataLatLonBox& lhs,
+                                           const GeoDataLatLonBox& rhs,
+                                           const qreal factor)
+{
+    bool equal = true;
+
+    // Check the latitude for approximate equality
+
+    double latDelta = lhs.height() * factor;
+
+    if (fabs(lhs.north() - rhs.north()) > latDelta) equal = false;
+    if (fabs(lhs.south() - rhs.south()) > latDelta) equal = false;
+
+
+    // Check the longitude for approximate equality
+
+    double lonDelta = lhs.width() * factor;
+
+    double lhsEast = lhs.east();
+    double rhsEast = rhs.east();
+
+    if (!GeoDataLatLonBox::crossesDateLine(lhsEast, rhsEast)) {
+        if (fabs(lhsEast - rhsEast) > lonDelta) equal = false;
+    }
+    else {
+        lhsEast = GeoDataCoordinates::normalizeLat( lhsEast );
+        rhsEast = GeoDataCoordinates::normalizeLat( rhsEast );
+        if (lhsEast < 0 && rhsEast > 0) {
+            lhsEast += 2 * M_PI;
+            if (fabs(lhsEast - rhsEast) > lonDelta) equal = false;
+        }
+        if (lhsEast > 0 && rhsEast < 0) {
+            rhsEast += 2 * M_PI;
+            if (fabs(lhsEast - rhsEast) > lonDelta) equal = false;
+        }
+    }
+
+    double lhsWest = lhs.west();
+    double rhsWest = rhs.west();
+
+    if (!GeoDataLatLonBox::crossesDateLine(lhsWest, rhsWest)) {
+       if (fabs(lhsWest - rhsWest) > lonDelta) equal = false;
+    }
+    else {
+        lhsWest = GeoDataCoordinates::normalizeLat( lhsWest );
+        rhsWest = GeoDataCoordinates::normalizeLat( rhsWest );
+        if (lhsWest < 0 && rhsWest > 0) {
+            lhsWest += 2 * M_PI;
+            if (fabs(lhsWest - rhsWest) > lonDelta) equal = false;
+        }
+        if (lhsWest > 0 && rhsWest < 0) {
+            rhsWest += 2 * M_PI;
+            if (fabs(lhsWest - rhsWest) > lonDelta) equal = false;
+        }
+    }
+
+    return equal;
+}
+
+
 void GeoDataLatLonBox::clear()
 {
     *this = empty;
