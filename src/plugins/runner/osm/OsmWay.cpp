@@ -78,7 +78,7 @@ void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes, QSet<qint6
     }
     placemark->setOsmData(osmData);
     placemark->setZoomLevel(StyleBuilder::minimumZoomLevel(placemark->visualCategory()));
-    placemark->setPopularity(OsmNode::popularityFor(placemark->visualCategory()));
+    placemark->setPopularity(StyleBuilder::popularity(placemark));
     placemark->setVisible(placemark->visualCategory() != GeoDataPlacemark::None);
 
     document->append(placemark);

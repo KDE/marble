@@ -103,11 +103,13 @@ public:
     static QHash<OsmTag, GeoDataPlacemark::GeoDataVisualCategory> s_visualCategories;
     static int s_defaultMinZoomLevels[GeoDataPlacemark::LastIndex];
     static bool s_defaultMinZoomLevelsInitialized;
+    static QHash<GeoDataPlacemark::GeoDataVisualCategory, qint64> s_popularities;
 };
 
 QHash<StyleBuilder::OsmTag, GeoDataPlacemark::GeoDataVisualCategory> StyleBuilder::Private::s_visualCategories;
 int StyleBuilder::Private::s_defaultMinZoomLevels[GeoDataPlacemark::LastIndex];
 bool StyleBuilder::Private::s_defaultMinZoomLevelsInitialized = false;
+QHash<GeoDataPlacemark::GeoDataVisualCategory, qint64> StyleBuilder::Private::s_popularities;
 
 StyleBuilder::Private::Private() :
     m_maximumZoomLevel(15),
@@ -1839,6 +1841,198 @@ int StyleBuilder::minimumZoomLevel(const GeoDataPlacemark::GeoDataVisualCategory
 {
     Private::initializeMinimumZoomLevels();
     return Private::s_defaultMinZoomLevels[visualCategory];
+}
+
+qint64 StyleBuilder::popularity(const GeoDataPlacemark *placemark)
+{
+    qint64 const defaultValue = 100;
+    int const offset = 10;
+    if (StyleBuilder::Private::s_popularities.isEmpty()) {
+        QVector<GeoDataPlacemark::GeoDataVisualCategory> popularities;
+        popularities << GeoDataPlacemark::PlaceCityCapital;
+        popularities << GeoDataPlacemark::PlaceTownCapital;
+        popularities << GeoDataPlacemark::PlaceCity;
+        popularities << GeoDataPlacemark::PlaceTown;
+        popularities << GeoDataPlacemark::PlaceSuburb;
+        popularities << GeoDataPlacemark::PlaceVillageCapital;
+        popularities << GeoDataPlacemark::PlaceVillage;
+        popularities << GeoDataPlacemark::PlaceHamlet;
+        popularities << GeoDataPlacemark::PlaceLocality;
+
+        popularities << GeoDataPlacemark::AmenityEmergencyPhone;
+        popularities << GeoDataPlacemark::HealthHospital;
+        popularities << GeoDataPlacemark::AmenityToilets;
+        popularities << GeoDataPlacemark::MoneyAtm;
+        popularities << GeoDataPlacemark::TransportSpeedCamera;
+
+        popularities << GeoDataPlacemark::NaturalPeak;
+
+        popularities << GeoDataPlacemark::AccomodationHotel;
+        popularities << GeoDataPlacemark::AccomodationMotel;
+        popularities << GeoDataPlacemark::AccomodationGuestHouse;
+        popularities << GeoDataPlacemark::AccomodationYouthHostel;
+        popularities << GeoDataPlacemark::AccomodationHostel;
+        popularities << GeoDataPlacemark::AccomodationCamping;
+
+        popularities << GeoDataPlacemark::HealthDentist;
+        popularities << GeoDataPlacemark::HealthDoctors;
+        popularities << GeoDataPlacemark::HealthPharmacy;
+        popularities << GeoDataPlacemark::HealthVeterinary;
+
+        popularities << GeoDataPlacemark::AmenityLibrary;
+        popularities << GeoDataPlacemark::EducationCollege;
+        popularities << GeoDataPlacemark::EducationSchool;
+        popularities << GeoDataPlacemark::EducationUniversity;
+
+        popularities << GeoDataPlacemark::FoodBar;
+        popularities << GeoDataPlacemark::FoodBiergarten;
+        popularities << GeoDataPlacemark::FoodCafe;
+        popularities << GeoDataPlacemark::FoodFastFood;
+        popularities << GeoDataPlacemark::FoodPub;
+        popularities << GeoDataPlacemark::FoodRestaurant;
+
+        popularities << GeoDataPlacemark::MoneyBank;
+
+        popularities << GeoDataPlacemark::AmenityArchaeologicalSite;
+        popularities << GeoDataPlacemark::AmenityEmbassy;
+        popularities << GeoDataPlacemark::AmenityWaterPark;
+        popularities << GeoDataPlacemark::AmenityCommunityCentre;
+        popularities << GeoDataPlacemark::AmenityFountain;
+        popularities << GeoDataPlacemark::AmenityNightClub;
+        popularities << GeoDataPlacemark::AmenityCourtHouse;
+        popularities << GeoDataPlacemark::AmenityFireStation;
+        popularities << GeoDataPlacemark::AmenityShelter;
+        popularities << GeoDataPlacemark::AmenityHuntingStand;
+        popularities << GeoDataPlacemark::AmenityPolice;
+        popularities << GeoDataPlacemark::AmenityPostBox;
+        popularities << GeoDataPlacemark::AmenityPostOffice;
+        popularities << GeoDataPlacemark::AmenityPrison;
+        popularities << GeoDataPlacemark::AmenityRecycling;
+        popularities << GeoDataPlacemark::AmenityTelephone;
+        popularities << GeoDataPlacemark::AmenityTownHall;
+        popularities << GeoDataPlacemark::AmenityDrinkingWater;
+        popularities << GeoDataPlacemark::AmenityGraveyard;
+
+        popularities << GeoDataPlacemark::ManmadeBridge;
+        popularities << GeoDataPlacemark::ManmadeLighthouse;
+        popularities << GeoDataPlacemark::ManmadePier;
+        popularities << GeoDataPlacemark::ManmadeWaterTower;
+        popularities << GeoDataPlacemark::ManmadeWindMill;
+
+        popularities << GeoDataPlacemark::TouristAttraction;
+        popularities << GeoDataPlacemark::TouristCastle;
+        popularities << GeoDataPlacemark::TouristCinema;
+        popularities << GeoDataPlacemark::TouristInformation;
+        popularities << GeoDataPlacemark::TouristMonument;
+        popularities << GeoDataPlacemark::TouristMuseum;
+        popularities << GeoDataPlacemark::TouristRuin;
+        popularities << GeoDataPlacemark::TouristTheatre;
+        popularities << GeoDataPlacemark::TouristThemePark;
+        popularities << GeoDataPlacemark::TouristViewPoint;
+        popularities << GeoDataPlacemark::TouristZoo;
+        popularities << GeoDataPlacemark::TouristAlpineHut;
+        popularities << GeoDataPlacemark::TouristWildernessHut;
+
+        popularities << GeoDataPlacemark::HistoricMemorial;
+
+        popularities << GeoDataPlacemark::TransportAerodrome;
+        popularities << GeoDataPlacemark::TransportHelipad;
+        popularities << GeoDataPlacemark::TransportAirportTerminal;
+        popularities << GeoDataPlacemark::TransportBusStation;
+        popularities << GeoDataPlacemark::TransportBusStop;
+        popularities << GeoDataPlacemark::TransportCarShare;
+        popularities << GeoDataPlacemark::TransportFuel;
+        popularities << GeoDataPlacemark::TransportParking;
+        popularities << GeoDataPlacemark::TransportParkingSpace;
+        popularities << GeoDataPlacemark::TransportPlatform;
+        popularities << GeoDataPlacemark::TransportRentalBicycle;
+        popularities << GeoDataPlacemark::TransportRentalCar;
+        popularities << GeoDataPlacemark::TransportTaxiRank;
+        popularities << GeoDataPlacemark::TransportTrainStation;
+        popularities << GeoDataPlacemark::TransportTramStop;
+        popularities << GeoDataPlacemark::TransportBicycleParking;
+        popularities << GeoDataPlacemark::TransportMotorcycleParking;
+        popularities << GeoDataPlacemark::TransportSubwayEntrance;
+
+        popularities << GeoDataPlacemark::ShopBeverages;
+        popularities << GeoDataPlacemark::ShopHifi;
+        popularities << GeoDataPlacemark::ShopSupermarket;
+        popularities << GeoDataPlacemark::ShopAlcohol;
+        popularities << GeoDataPlacemark::ShopBakery;
+        popularities << GeoDataPlacemark::ShopButcher;
+        popularities << GeoDataPlacemark::ShopConfectionery;
+        popularities << GeoDataPlacemark::ShopConvenience;
+        popularities << GeoDataPlacemark::ShopGreengrocer;
+        popularities << GeoDataPlacemark::ShopSeafood;
+        popularities << GeoDataPlacemark::ShopDepartmentStore;
+        popularities << GeoDataPlacemark::ShopKiosk;
+        popularities << GeoDataPlacemark::ShopBag;
+        popularities << GeoDataPlacemark::ShopClothes;
+        popularities << GeoDataPlacemark::ShopFashion;
+        popularities << GeoDataPlacemark::ShopJewelry;
+        popularities << GeoDataPlacemark::ShopShoes;
+        popularities << GeoDataPlacemark::ShopVarietyStore;
+        popularities << GeoDataPlacemark::ShopBeauty;
+        popularities << GeoDataPlacemark::ShopChemist;
+        popularities << GeoDataPlacemark::ShopCosmetics;
+        popularities << GeoDataPlacemark::ShopHairdresser;
+        popularities << GeoDataPlacemark::ShopOptician;
+        popularities << GeoDataPlacemark::ShopPerfumery;
+        popularities << GeoDataPlacemark::ShopDoitYourself;
+        popularities << GeoDataPlacemark::ShopFlorist;
+        popularities << GeoDataPlacemark::ShopHardware;
+        popularities << GeoDataPlacemark::ShopFurniture;
+        popularities << GeoDataPlacemark::ShopElectronics;
+        popularities << GeoDataPlacemark::ShopMobilePhone;
+        popularities << GeoDataPlacemark::ShopBicycle;
+        popularities << GeoDataPlacemark::ShopCar;
+        popularities << GeoDataPlacemark::ShopCarRepair;
+        popularities << GeoDataPlacemark::ShopCarParts;
+        popularities << GeoDataPlacemark::ShopMotorcycle;
+        popularities << GeoDataPlacemark::ShopOutdoor;
+        popularities << GeoDataPlacemark::ShopSports;
+        popularities << GeoDataPlacemark::ShopCopy;
+        popularities << GeoDataPlacemark::ShopArt;
+        popularities << GeoDataPlacemark::ShopMusicalInstrument;
+        popularities << GeoDataPlacemark::ShopPhoto;
+        popularities << GeoDataPlacemark::ShopBook;
+        popularities << GeoDataPlacemark::ShopGift;
+        popularities << GeoDataPlacemark::ShopStationery;
+        popularities << GeoDataPlacemark::ShopLaundry;
+        popularities << GeoDataPlacemark::ShopPet;
+        popularities << GeoDataPlacemark::ShopToys;
+        popularities << GeoDataPlacemark::ShopTravelAgency;
+        popularities << GeoDataPlacemark::Shop;
+
+        popularities << GeoDataPlacemark::LeisureGolfCourse;
+        popularities << GeoDataPlacemark::LeisureMinigolfCourse;
+        popularities << GeoDataPlacemark::LeisurePark;
+        popularities << GeoDataPlacemark::LeisurePlayground;
+        popularities << GeoDataPlacemark::LeisurePitch;
+        popularities << GeoDataPlacemark::LeisureSportsCentre;
+        popularities << GeoDataPlacemark::LeisureStadium;
+        popularities << GeoDataPlacemark::LeisureTrack;
+        popularities << GeoDataPlacemark::LeisureSwimmingPool;
+
+        popularities << GeoDataPlacemark::HighwayTrafficSignals;
+        popularities << GeoDataPlacemark::BarrierGate;
+        popularities << GeoDataPlacemark::BarrierLiftGate;
+        popularities << GeoDataPlacemark::AmenityBench;
+        popularities << GeoDataPlacemark::NaturalTree;
+        popularities << GeoDataPlacemark::NaturalCave;
+        popularities << GeoDataPlacemark::AmenityWasteBasket;
+        popularities << GeoDataPlacemark::PowerTower;
+
+        int value = defaultValue + offset * popularities.size();
+        for (auto popularity: popularities) {
+            StyleBuilder::Private::s_popularities[popularity] = value;
+            value -= offset;
+        }
+    }
+
+    bool const isPrivate = placemark->osmData().containsTag(QStringLiteral("access"), QStringLiteral("private"));
+    int const base = defaultValue + (isPrivate ? 0 : offset * StyleBuilder::Private::s_popularities.size());
+    return base + StyleBuilder::Private::s_popularities.value(placemark->visualCategory(), defaultValue);
 }
 
 int StyleBuilder::maximumZoomLevel() const

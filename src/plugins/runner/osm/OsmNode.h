@@ -33,14 +33,11 @@ public:
 
     void create(GeoDataDocument* document) const;
 
-    static qint64 popularityFor(GeoDataPlacemark::GeoDataVisualCategory category);
-
 private:
     int populationIndex(qint64 population) const;
 
     OsmPlacemarkData m_osmData;
     GeoDataCoordinates m_coordinates;
-    static QHash<GeoDataPlacemark::GeoDataVisualCategory, qint64> m_popularities;
 };
 
 typedef QHash<qint64,OsmNode> OsmNodes;

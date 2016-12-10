@@ -70,6 +70,8 @@ public:
 
     static int minimumZoomLevel(const GeoDataPlacemark::GeoDataVisualCategory &visualCategory);
 
+    static qint64 popularity(const GeoDataPlacemark* placemark);
+
     /**
      * @brief Returns the maximum zoom level in the theme.
      * @return maximum zoom level in the theme
