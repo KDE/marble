@@ -15,7 +15,6 @@
 #include "GeoDataCoordinates.h"
 
 #include <QGeoPositionInfoSource>
-#include <QGeoPositionInfo>
 #include <QGeoCoordinate>
 #include <QTimer>
 #include <QIcon>
@@ -142,8 +141,9 @@ void QtPositioningPositionProviderPlugin::initialize()
     d->m_source = QGeoPositionInfoSource::createDefaultSource( this );
     if( d->m_source ) {
         d->m_status = PositionProviderStatusAcquiring;
+        emit statusChanged(d->m_status);
         connect( d->m_updateChecker, SIGNAL(timeout()), this, SLOT(update()) );
-        connect( d->m_source, SIGNAL(positionUpdated(QGeoPositionInfo)), this, SLOT(update()) );
+        connect( d->m_source, SIGNAL(positionUpdated(QGeoPositionInfo)), this, SLOT(update(QGeoPositionInfo)) );
         d->m_source->setUpdateInterval( 1000 );
         d->m_source->startUpdates();
         d->m_updateChecker->start( 5000 );
@@ -192,27 +192,27 @@ QDateTime QtPositioningPositionProviderPlugin::timestamp() const
 
 void QtPositioningPositionProviderPlugin::update()
 {
-
-    PositionProviderStatus newStatus = PositionProviderStatusAcquiring;
     if ( d->m_source ) {
-        QGeoPositionInfo lastKnownPosition = d->m_source->lastKnownPosition();
+        update(d->m_source->lastKnownPosition());
+    }
+}
 
-        if ( lastKnownPosition.isValid() ) {
-            newStatus = PositionProviderStatusAvailable;
-            d->m_lastKnownPosition = lastKnownPosition;
-        }
-        else {
-            newStatus = PositionProviderStatusError;
-        }
+void QtPositioningPositionProviderPlugin::update(QGeoPositionInfo geoPositionInfo)
+{
+    PositionProviderStatus newStatus = geoPositionInfo.isValid() ?
+                PositionProviderStatusAvailable :
+                PositionProviderStatusError;
+    if (geoPositionInfo.isValid()) {
+        d->m_lastKnownPosition = geoPositionInfo;
     }
 
-    if ( newStatus != d->m_status ) {
+    if (newStatus != d->m_status) {
         d->m_status = newStatus;
-        emit statusChanged( newStatus );
+        emit statusChanged(d->m_status);
     }
 
-    if ( newStatus == PositionProviderStatusAvailable ) {
-        emit positionChanged( position(), accuracy() );
+    if (newStatus == PositionProviderStatusAvailable) {
+        emit positionChanged(position(), accuracy());
     }
 }
 

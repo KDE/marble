@@ -14,6 +14,8 @@
 
 #include "PositionProviderPlugin.h"
 
+#include <QGeoPositionInfo>
+
 namespace Marble
 {
 
@@ -55,6 +57,7 @@ public:
 private Q_SLOTS:
     /** Regular (each second) position and status update */
     void update();
+    void update(QGeoPositionInfo position);
 
 private:
     QtPositioningPositionProviderPluginPrivate* const d;
