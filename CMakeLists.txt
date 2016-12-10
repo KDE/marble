@@ -351,4 +351,4 @@ ADD_CUSTOM_TARGET(uninstall
 
 include(MarbleCPackOptions)
 
-marble_feature_summary(WHAT ALL)
+marble_feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES)
