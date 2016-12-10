@@ -126,7 +126,6 @@ set(marblewidget_SRCS
     MarbleDirs.cpp
     MarbleLocale.cpp
     MarblePhysics.cpp
-    DeferredFlag.cpp
     TileCreatorDialog.cpp
     MapThemeManager.cpp
     ViewportParams.cpp
