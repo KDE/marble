@@ -11,7 +11,7 @@
 #include "BatchedPlacemarkRenderer.h"
 #include "GeoPainter.h"
 
-#include <QDebug>
+#include <QPixmapCache>
 
 namespace Marble
 {
@@ -19,7 +19,7 @@ namespace Marble
 BatchedPlacemarkRenderer:: BatchedPlacemarkRenderer(GeoPainter * painter)
     : m_painter(painter)
 {
-    m_pixmapCache.setCacheLimit(4096);
+    // nothing to do
 }
 
 BatchedPlacemarkRenderer::~BatchedPlacemarkRenderer()
@@ -53,12 +53,11 @@ void BatchedPlacemarkRenderer::drawTextFragments()
     QFontMetrics metrics = textPainter.fontMetrics();
     textPainter.end();
 
-
     for (int i = 0; i < m_textFragments.size(); ++i)
     {
         QString key = m_textFragments[i].text + ":" + QString::number( static_cast<int>(m_textFragments[i].flags) );
 
-        if (!m_pixmapCache.find(key, &pixmap)) {
+        if (!QPixmapCache::find(key, &pixmap)) {
             bool hasRoundFrame = m_textFragments[i].flags.testFlag(RoundFrame);
 
             int width = metrics.width(m_textFragments[i].text);
@@ -91,7 +90,7 @@ void BatchedPlacemarkRenderer::drawTextFragments()
             }
 
             textPainter.end();
-            m_pixmapCache.insert(key, pixmap);
+            QPixmapCache::insert(key, pixmap);
         }
          m_painter->drawPixmap(m_textFragments[i].position.x() - pixmap.width()/2,
                               m_textFragments[i].position.y() - pixmap.height()/2,

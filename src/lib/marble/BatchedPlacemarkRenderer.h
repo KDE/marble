@@ -13,8 +13,9 @@
 
 #include "marble_export.h"
 
-#include <QPixmapCache>
-
+#include <QColor>
+#include <QPoint>
+#include <QVector>
 
 namespace Marble
 {
@@ -51,7 +52,6 @@ class MARBLE_EXPORT BatchedPlacemarkRenderer
 
 private:
     QVector<TextFragment> m_textFragments;
-    QPixmapCache m_pixmapCache;
     GeoPainter * m_painter;
 };
 

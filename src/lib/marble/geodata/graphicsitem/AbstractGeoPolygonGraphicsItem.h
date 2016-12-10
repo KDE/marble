@@ -16,7 +16,6 @@
 
 #include <QImage>
 #include <QColor>
-#include <QPixmapCache>
 
 namespace Marble
 {
@@ -52,7 +51,6 @@ private:
 
     const GeoDataPolygon *const m_polygon;
     const GeoDataLinearRing *const m_ring;
-    static QPixmapCache s_textureCache;
 };
 
 }

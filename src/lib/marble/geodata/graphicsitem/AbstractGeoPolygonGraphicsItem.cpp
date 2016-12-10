@@ -26,11 +26,10 @@
 
 #include <QtMath>
 #include <QImageReader>
+#include <QPixmapCache>
 
 namespace Marble
 {
-
-QPixmapCache AbstractGeoPolygonGraphicsItem::s_textureCache = QPixmapCache();
 
 quint64 AbstractGeoPolygonGraphicsItem::s_previousStyle = -1;
 
@@ -174,7 +173,7 @@ QPixmap AbstractGeoPolygonGraphicsItem::texture(const QString &texturePath, cons
 {
     QString const key = QString::number(color.rgba()) + '/' + texturePath;
     QPixmap texture;
-    if (!s_textureCache.find(key, texture)) {
+    if (!QPixmapCache::find(key, texture)) {
         QImageReader imageReader(style()->polyStyle().resolvePath(texturePath));
         texture = QPixmap::fromImageReader(&imageReader);
 
@@ -186,7 +185,7 @@ QPixmap AbstractGeoPolygonGraphicsItem::texture(const QString &texturePath, cons
             imagePainter.end();
             texture = pixmap;
         }
-        s_textureCache.insert(key, texture);
+        QPixmapCache::insert(key, texture);
     }
     return texture;
 }

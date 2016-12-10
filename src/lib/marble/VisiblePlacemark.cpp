@@ -23,6 +23,7 @@
 #include <QApplication>
 #include <QPainter>
 #include <QPalette>
+#include <QPixmapCache>
 
 using namespace Marble;
 
@@ -48,9 +49,9 @@ const GeoDataPlacemark* VisiblePlacemark::placemark() const
 const QPixmap& VisiblePlacemark::symbolPixmap() const
 {
     if (!m_symbolId.isEmpty() && m_symbolPixmap.isNull()) {
-        if ( !m_symbolCache.find( m_symbolId, &m_symbolPixmap ) ) {
+        if ( !QPixmapCache::find( m_symbolId, &m_symbolPixmap ) ) {
             m_symbolPixmap = QPixmap::fromImage(m_style->iconStyle().scaledIcon());
-            m_symbolCache.insert( m_symbolId, m_symbolPixmap);
+            QPixmapCache::insert( m_symbolId, m_symbolPixmap);
         }
     }
     return m_symbolPixmap;

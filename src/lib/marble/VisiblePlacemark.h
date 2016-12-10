@@ -20,7 +20,6 @@
 #include <QPixmap>
 #include <QPoint>
 #include <QRectF>
-#include <QPixmapCache>
 
 #include <GeoDataStyle.h>
 #include <GeoDataCoordinates.h>
@@ -141,8 +140,6 @@ private Q_SLOTS:
 
     mutable QPixmap     m_symbolPixmap;   // cached value
     QString     m_symbolId;
-
-    QPixmapCache m_symbolCache;
 };
 
 }
