@@ -110,6 +110,10 @@ bool OsmWay::isArea() const
     // We need to create two separate ways in cases like that to support this.
     // See also https://wiki.openstreetmap.org/wiki/Key:area
 
+    if (m_osmData.containsTag(QStringLiteral("area"), QStringLiteral("yes"))) {
+        return true;
+    }
+
     bool const isLinearFeature =
             m_osmData.containsTag(QStringLiteral("area"), QStringLiteral("no")) ||
             m_osmData.containsTagKey(QStringLiteral("highway")) ||
