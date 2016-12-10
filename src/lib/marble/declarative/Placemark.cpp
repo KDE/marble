@@ -243,15 +243,19 @@ QString Placemark::description() const
 
             int const disabledSpaces = m_placemark.osmData().tagValue(QStringLiteral("capacity:disabled")).toInt();
             if (disabledSpaces > 0) {
-                addTagValue(m_description, QStringLiteral("capacity:disabled"), tr("%1 disabled spaces"));
+                addTagValue(m_description, QStringLiteral("capacity:disabled"), tr("%1 disabled spaces", "Parking spaces"));
+            }
+            int const womenSpaces = m_placemark.osmData().tagValue(QStringLiteral("capacity:women")).toInt();
+            if (womenSpaces > 0) {
+                addTagValue(m_description, QStringLiteral("capacity:women"), tr("%1 women spaces", "Parking spaces"));
             }
             int const parentSpaces = m_placemark.osmData().tagValue(QStringLiteral("capacity:parent")).toInt();
             if (parentSpaces > 0) {
-                addTagValue(m_description, QStringLiteral("capacity:parent"), tr("%1 parent and child spaces"));
+                addTagValue(m_description, QStringLiteral("capacity:parent"), tr("%1 parent and child spaces", "Parking spaces"));
             }
             int const electricChargers = m_placemark.osmData().tagValue(QStringLiteral("capacity:charging")).toInt();
             if (electricChargers > 0) {
-                addTagValue(m_description, QStringLiteral("capacity:charging"), tr("%1 spaces with electric chargers"));
+                addTagValue(m_description, QStringLiteral("capacity:charging"), tr("%1 spaces with electric chargers", "Parking spaces"));
             }
         } else if (category == GeoDataPlacemark::TransportBicycleParking) {
             addTagDescription(m_description, QStringLiteral("surveillance"), QStringLiteral("outdoor"), tr("Has outdoor surveillance", "A parking space has outdoor surveillance"));
