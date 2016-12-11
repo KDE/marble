@@ -153,7 +153,7 @@ WayChunk::Ptr WayConcatenator::wayChunk(const GeoDataPlacemark &placemark, qint6
 {
     QHash<qint64, WayChunk::Ptr>::ConstIterator matchItr = m_hash.find(matchId);
     while (matchItr != m_hash.end() && matchItr.key() == matchId) {
-        auto chunk = matchItr.value();
+        auto const & chunk = matchItr.value();
         if (chunk->concatPossible(placemark)) {
             return chunk;
         }
