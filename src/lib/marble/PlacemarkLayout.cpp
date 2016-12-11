@@ -266,6 +266,8 @@ void PlacemarkLayout::removePlacemarks( const QModelIndex& parent, int first, in
 
         int zoomLevel = placemark->zoomLevel();
         TileId key = TileId::fromCoordinates( coordinates, zoomLevel );
+        delete m_visiblePlacemarks[placemark];
+        m_visiblePlacemarks.remove(placemark);
         m_placemarkCache[key].removeAll( placemark );
         if (placemark->hasOsmData()) {
             qint64 const osmId = placemark->osmData().id();
@@ -283,6 +285,8 @@ void PlacemarkLayout::resetCacheData()
 
     m_osmIds.clear();
     m_placemarkCache.clear();
+    qDeleteAll(m_visiblePlacemarks);
+    m_visiblePlacemarks.clear();
     requestStyleReset();
     addPlacemarks( m_placemarkModel->index( 0, 0 ), 0, rowCount );
     emit repaintNeeded();
