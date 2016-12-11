@@ -46,7 +46,7 @@
               <tileSize width="256" height="256" />
               <storageLayout levelZeroColumns="1" levelZeroRows="1" tileLevels="1,3,5,7,9,11,13,15,17" mode="OpenStreetMap" />
               <projection name="Mercator" />
-              <downloadUrl protocol="http" host="maps.kde.org" path="/earth/vectorosm/dev/" />
+              <downloadUrl protocol="http" host="maps.kde.org" path="/earth/vectorosm/v1/" />
               <downloadPolicy usage="Browse" maximumConnections="20" />
               <downloadPolicy usage="Bulk" maximumConnections="2" />
           </vectortile>
