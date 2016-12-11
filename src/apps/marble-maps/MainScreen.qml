@@ -105,7 +105,7 @@ ApplicationWindow {
                 showScaleBar: false
                 showBackground: smallZoom
                 positionProvider: suspended ? "" : currentPositionProvider
-                keepScreenOn: !suspended && navigationManager.visible
+                keepScreenOn: !suspended && navigationManager.guidanceModeEnabled
                 showPositionMarker: false
                 animationViewContext: dialogAnimation.running
 
