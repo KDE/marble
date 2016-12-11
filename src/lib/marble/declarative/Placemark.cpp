@@ -432,7 +432,7 @@ QString Placemark::wheelchairInfo() const
     addTagDescription(m_wheelchairInfo, QStringLiteral("wheelchair"), QStringLiteral("yes"), tr("Wheelchair accessible"));
     addTagDescription(m_wheelchairInfo, QStringLiteral("wheelchair"), QStringLiteral("no"), tr("Wheelchair inaccessible"));
     addTagDescription(m_wheelchairInfo, QStringLiteral("wheelchair"), QStringLiteral("limited"), tr("Limited wheelchair accessibility"));
-    addTagDescription(m_wheelchairInfo, QStringLiteral("wheelchair"), QStringLiteral("designated"), tr("Wheelchair access only"));
+    addTagDescription(m_wheelchairInfo, QStringLiteral("wheelchair"), QStringLiteral("designated"), tr("Designated wheelchair access"));
 
     // Check if there is localized description
     auto const & osmData = m_placemark.osmData();
