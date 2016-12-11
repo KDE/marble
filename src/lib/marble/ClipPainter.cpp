@@ -316,10 +316,10 @@ void ClipPainter::setPen(const QPen & pen) {
         if (pen != QPainter::pen()) {
             qDebug() << "--" << pen.color()  << QPainter::pen().color() ;
             QPen newPen = pen;
-            newPen.setColor((Qt::GlobalColor)(d->m_debugPenBatchColor));
+            newPen.setColor((Qt::GlobalColor)(d->m_debugPenBatchColor+4));
             QPainter::setPen(newPen);
             d->m_debugPenBatchColor++;
-            d->m_debugPenBatchColor %= 20;
+            d->m_debugPenBatchColor %= 14;
         }
         else {
             qDebug() << "++";
@@ -1300,6 +1300,7 @@ void ClipPainterPrivate::debugDrawNodes( const QPolygonF & polygon )
         if (m_debugPolygonsLevel == 2) {
             q->setFont(QFont(QStringLiteral("Sans Serif"), 7));
             q->setPen("black");
+            q->setBrush(Qt::transparent);
             q->drawText(itPoint->x() + 6.0, itPoint->y() + (15 - (i * 5) % 30) , QString::number(i));
         }
     }
