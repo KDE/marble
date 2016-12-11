@@ -327,6 +327,9 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
         ShopPet,
         ShopToys,
         ShopTravelAgency,
+        ShopDeli,
+        ShopTobacco,
+        ShopTea,
         Shop,
 
         ManmadeBridge,

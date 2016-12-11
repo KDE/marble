@@ -537,6 +537,9 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::ShopPet]                  = createOsmPOIStyle(osmFont, "shop/shop_pet.16", shopColor);
     m_defaultStyle[GeoDataPlacemark::ShopToys]                 = createOsmPOIStyle(osmFont, "shop/toys-14", shopColor);
     m_defaultStyle[GeoDataPlacemark::ShopTravelAgency]         = createOsmPOIStyle(osmFont, "shop/travel_agency-14", shopColor);
+    m_defaultStyle[GeoDataPlacemark::ShopDeli]                 = createOsmPOIStyle(osmFont, "shop/deli", shopColor);
+    m_defaultStyle[GeoDataPlacemark::ShopTobacco]              = createOsmPOIStyle(osmFont, "shop/tobacco", shopColor);
+    m_defaultStyle[GeoDataPlacemark::ShopTea]                  = createOsmPOIStyle(osmFont, "shop/tea", shopColor);
     m_defaultStyle[GeoDataPlacemark::Shop]                     = createOsmPOIStyle(osmFont, "shop/shop-14", shopColor);
 
     m_defaultStyle[GeoDataPlacemark::ManmadeBridge]            = createWayStyle(QColor("#b8b8b8"), Qt::transparent, true, true);
@@ -912,6 +915,9 @@ void StyleBuilder::Private::initializeOsmVisualCategories()
     s_visualCategories[OsmTag("shop", "pet")]                   = GeoDataPlacemark::ShopPet;
     s_visualCategories[OsmTag("shop", "toys")]                  = GeoDataPlacemark::ShopToys;
     s_visualCategories[OsmTag("shop", "travel_agency")]         = GeoDataPlacemark::ShopTravelAgency;
+    s_visualCategories[OsmTag("shop", "deli")]                  = GeoDataPlacemark::ShopDeli;
+    s_visualCategories[OsmTag("shop", "tobacco")]               = GeoDataPlacemark::ShopTobacco;
+    s_visualCategories[OsmTag("shop", "tea")]                   = GeoDataPlacemark::ShopTea;
 
     // Default for all other shops
     foreach (const QString &value, shopValues()) {
@@ -2002,6 +2008,9 @@ qint64 StyleBuilder::popularity(const GeoDataPlacemark *placemark)
         popularities << GeoDataPlacemark::ShopPet;
         popularities << GeoDataPlacemark::ShopToys;
         popularities << GeoDataPlacemark::ShopTravelAgency;
+        popularities << GeoDataPlacemark::ShopDeli;
+        popularities << GeoDataPlacemark::ShopTobacco;
+        popularities << GeoDataPlacemark::ShopTea;
         popularities << GeoDataPlacemark::Shop;
 
         popularities << GeoDataPlacemark::LeisureGolfCourse;
@@ -2234,6 +2243,9 @@ QString StyleBuilder::visualCategoryName(GeoDataPlacemark::GeoDataVisualCategory
         visualCategoryNames[GeoDataPlacemark::ShopPet] = "ShopPet";
         visualCategoryNames[GeoDataPlacemark::ShopToys] = "ShopToys";
         visualCategoryNames[GeoDataPlacemark::ShopTravelAgency] = "ShopTravelAgency";
+        visualCategoryNames[GeoDataPlacemark::ShopDeli] = "ShopDeli";
+        visualCategoryNames[GeoDataPlacemark::ShopTobacco] = "ShopTobacco";
+        visualCategoryNames[GeoDataPlacemark::ShopTea] = "ShopTea";
         visualCategoryNames[GeoDataPlacemark::Shop] = "Shop";
         visualCategoryNames[GeoDataPlacemark::ManmadeBridge] = "ManmadeBridge";
         visualCategoryNames[GeoDataPlacemark::ManmadeLighthouse] = "ManmadeLighthouse";
@@ -2368,8 +2380,8 @@ QStringList StyleBuilder::shopValues()
 {
     // from https://taginfo.openstreetmap.org/keys/building#values
     static const QStringList osmShopValues = QStringList()
-        << "cheese" << "chocolate" << "coffee" << "deli" << "dairy" << "farm"
-        << "pasta" << "pastry" << "tea" << "wine" << "general" << "mall"
+        << "cheese" << "chocolate" << "coffee" << "dairy" << "farm"
+        << "pasta" << "pastry" << "wine" << "general" << "mall"
         << "baby_goods" << "boutique" << "fabric" << "leather" << "tailor" << "watches"
         << "charity" << "second_hand" << "erotic" << "hearing_aids" << "herbalist" << "massage"
         << "medical_supply" << "tattoo" << "bathroom_furnishing" << "electrical" << "energy" << "furnace"
@@ -2381,7 +2393,7 @@ QStringList StyleBuilder::shopValues()
         << "frame" << "games" << "model" << "music" << "trophy" << "video"
         << "video_games" << "anime" << "ticket" << "copyshop" << "dry_cleaning" << "e-cigarette"
         << "funeral_directors" << "money_lender" << "pawnbroker" << "pyrotechnics" << "religion" << "storage_rental"
-        << "tobacco" << "weapons" << "user defined";
+        << "weapons" << "user defined";
 
     return osmShopValues;
 }

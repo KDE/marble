@@ -149,6 +149,22 @@ QString Placemark::description() const
                 addTagDescription(m_description, QStringLiteral("service:prepress"), QStringLiteral("no"), tr(" No press printing assistance", "A copy shop does not provide help with preparing special printing techniques"));
                 addTagDescription(m_description, QStringLiteral("service:self"), QStringLiteral("yes"), tr("Self service", "A copy shop provides individual copy machines for self-service"));
                 addTagDescription(m_description, QStringLiteral("service:self"), QStringLiteral("no"), tr(" No self service", "A copy shop does not provide individual machines for self-service"));
+            } else if (category == GeoDataPlacemark::ShopDeli) {
+                addTagDescription(m_description, QStringLiteral("organic"), QStringLiteral("yes"), tr("Sells organic food", "A deli that sells organic food"));
+                addTagDescription(m_description, QStringLiteral("organic"), QStringLiteral("no"), tr("Does not sell organic food", "A deli that does not sell organic food"));
+                addTagDescription(m_description, QStringLiteral("organic"), QStringLiteral("only"), tr("Only sells organic food", "A deli that only sells organic food"));
+
+                addTagDescription(m_description, QStringLiteral("diet:gluten_free"), QStringLiteral("yes"), tr("Sells gluten free food", "A deli that sells gluten free food"));
+                addTagDescription(m_description, QStringLiteral("diet:gluten_free"), QStringLiteral("no"), tr("Does not sell gluten free food", "A deli that does not sell gluten free food"));
+                addTagDescription(m_description, QStringLiteral("diet:gluten_free"), QStringLiteral("only"), tr("Only sells gluten free food", "A deli that only sells gluten free food"));
+
+                addTagDescription(m_description, QStringLiteral("diet:lactose_free"), QStringLiteral("yes"), tr("Sells lactose free food", "A deli that sells lactose free food"));
+                addTagDescription(m_description, QStringLiteral("diet:lactose_free"), QStringLiteral("no"), tr("Does not sell lactose free food", "A deli that does not sell lactose free food"));
+                addTagDescription(m_description, QStringLiteral("diet:lactose_free"), QStringLiteral("only"), tr("Only sells lactose free food", "A deli that only sells lactose free food"));
+            } else if (category == GeoDataPlacemark::ShopTobacco) {
+                addTagDescription(m_description, QStringLiteral("lottery"), QStringLiteral("yes"), tr("Sells lottery tickets", "A tobacco shop that also sells lottery tickets"));
+                addTagDescription(m_description, QStringLiteral("stamps"), QStringLiteral("yes"), tr("Sells revenue stamps", "A tobacco shop that also sells revenue stamps"));
+                addTagDescription(m_description, QStringLiteral("salt"), QStringLiteral("yes"), tr("Sells salt", "A tobacco shop that also sells salt"));
             }
         } else if (category == GeoDataPlacemark::TransportBusStop) {
             addTagValue(m_description, "network");

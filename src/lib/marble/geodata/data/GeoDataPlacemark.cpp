@@ -549,6 +549,9 @@ QString GeoDataPlacemark::categoryName() const
     case ShopPet: return GeoDataPlacemarkPrivate::tr("Pet Shop");
     case ShopToys: return GeoDataPlacemarkPrivate::tr("Toy Store");
     case ShopTravelAgency: return GeoDataPlacemarkPrivate::tr("Travel Agency");
+    case ShopDeli: return GeoDataPlacemarkPrivate::tr("Deli");
+    case ShopTobacco: return GeoDataPlacemarkPrivate::tr("Tobacco Shop");
+    case ShopTea: return GeoDataPlacemarkPrivate::tr("Tea Shop");
     case Shop: return GeoDataPlacemarkPrivate::tr("Shop");
     case ManmadeBridge: return GeoDataPlacemarkPrivate::tr("Bridge");
     case ManmadeLighthouse: return GeoDataPlacemarkPrivate::tr("Lighthouse");
