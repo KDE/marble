@@ -31,7 +31,7 @@ Item {
     function search(query) {
         routingManager.clearSearchResultPlacemarks();
         query = query.trim();
-        if(query.toLowerCase() === "ok marble") {
+        if(query.toLowerCase() === "ok marble" || query.toLowerCase() === "okdbg") {
             app.state = "developer";
         } else if(query !== "") {
             root.busy = true;
