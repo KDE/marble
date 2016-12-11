@@ -47,10 +47,13 @@ public:
     bool concatPossible(const GeoDataPlacemark &placemark) const;
 
 private:
+    bool isTunnel(const OsmPlacemarkData &osmData) const;
+
     QVector<PlacemarkPtr> m_wayList;
     qint64 m_first;
     qint64 m_last;
     GeoDataPlacemark::GeoDataVisualCategory m_visualCategory;
+    bool m_isTunnel;
 };
 
 }

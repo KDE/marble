@@ -20,12 +20,13 @@
 
 namespace Marble {
 
-WayChunk::WayChunk(const PlacemarkPtr &placemark, qint64 first, qint64 last)
+WayChunk::WayChunk(const PlacemarkPtr &placemark, qint64 first, qint64 last) :
+    m_first(first),
+    m_last(last),
+    m_visualCategory(placemark->visualCategory()),
+    m_isTunnel(isTunnel(placemark->osmData()))
 {
     m_wayList.append(placemark);
-    m_first = first;
-    m_last = last;
-    m_visualCategory = placemark->visualCategory();
 }
 
 WayChunk::~WayChunk()
@@ -99,7 +100,17 @@ int WayChunk::size() const
 bool WayChunk::concatPossible(const GeoDataPlacemark &placemark) const
 {
     const GeoDataPlacemark::GeoDataVisualCategory category = placemark.visualCategory();
-    return (category == m_visualCategory);
+    return category == m_visualCategory && isTunnel(placemark.osmData()) == m_isTunnel;
+}
+
+bool WayChunk::isTunnel(const OsmPlacemarkData &osmData) const
+{
+    if (osmData.containsTagKey(QStringLiteral("tunnel")) &&
+            !osmData.containsTag(QStringLiteral("tunnel"), QStringLiteral("no"))) {
+        return true;
+    }
+
+    return osmData.containsTag(QStringLiteral("covered"), QStringLiteral("yes"));
 }
 
 }
