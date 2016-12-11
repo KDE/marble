@@ -97,8 +97,6 @@ MergedLayerDecorator::~MergedLayerDecorator()
 
 void MergedLayerDecorator::setTextureLayers( const QVector<const GeoSceneTextureTileDataset *> &textureLayers )
 {
-    mDebug() << Q_FUNC_INFO;
-
     if ( textureLayers.count() > 0 ) {
         const GeoSceneTileDataset *const firstTexture = textureLayers.at( 0 );
         d->m_levelZeroColumns = firstTexture->levelZeroColumns();

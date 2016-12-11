@@ -219,8 +219,6 @@ RenderState StackedTileLoader::renderState() const
 
 void StackedTileLoader::clear()
 {
-    mDebug() << Q_FUNC_INFO;
-
     qDeleteAll( d->m_tilesOnDisplay );
     d->m_tilesOnDisplay.clear();
     d->m_tileCache.clear(); // clear the tile cache in physical memory

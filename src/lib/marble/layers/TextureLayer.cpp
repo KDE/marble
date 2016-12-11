@@ -447,8 +447,6 @@ void TextureLayer::setVolatileCacheLimit( quint64 kilobytes )
 
 void TextureLayer::reset()
 {
-    mDebug() << Q_FUNC_INFO;
-
     d->m_tileLoader.clear();
     setNeedsUpdate();
 }
