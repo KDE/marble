@@ -148,7 +148,7 @@ QString Placemark::description() const
                 addTagDescription(m_description, QStringLiteral("service:press"), QStringLiteral("yes"), tr("Press printing service", "A copy shop provides a professional service to print a large number of copies of a document"));
                 addTagDescription(m_description, QStringLiteral("service:press"), QStringLiteral("no"), tr("No press printing service", "A copy shop does not provide a professional service to print a large number of copies of a document"));
                 addTagDescription(m_description, QStringLiteral("service:prepress"), QStringLiteral("yes"), tr("Press printing assistance", "A copy shop provides help with preparing special printing techniques"));
-                addTagDescription(m_description, QStringLiteral("service:prepress"), QStringLiteral("no"), tr(" No press printing assistance", "A copy shop does not provide help with preparing special printing techniques"));
+                addTagDescription(m_description, QStringLiteral("service:prepress"), QStringLiteral("no"), tr("No press printing assistance", "A copy shop does not provide help with preparing special printing techniques"));
                 addTagDescription(m_description, QStringLiteral("service:self"), QStringLiteral("yes"), tr("Self service", "A copy shop provides individual copy machines for self-service"));
                 addTagDescription(m_description, QStringLiteral("service:self"), QStringLiteral("no"), tr(" No self service", "A copy shop does not provide individual machines for self-service"));
             } else if (category == GeoDataPlacemark::ShopDeli) {
