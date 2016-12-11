@@ -95,6 +95,7 @@ public:
     bool m_defaultStyleInitialized;
 
     QHash<QString, GeoDataStyle::Ptr> m_specialStyleCache;
+    QHash<GeoDataPlacemark::GeoDataVisualCategory, GeoDataStyle::Ptr> m_buildingStyles;
     int m_specialStyleCacheTileLevel;
 
     /**
@@ -715,9 +716,6 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::RailwayMonorail]          = createStyle(2.0, 1.435, "#706E70", "#EEEEEE", false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector<qreal>(), osmFont, QColor(Qt::transparent));
     m_defaultStyle[GeoDataPlacemark::RailwayFunicular]         = createStyle(2.0, 1.435, "#706E70", "#EEEEEE", false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector<qreal>(), osmFont, QColor(Qt::transparent));
 
-    m_defaultStyle[GeoDataPlacemark::Building]                 = createStyle(1, 0, buildingColor, buildingColor.darker(),
-                                                                                   true, true, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false, QVector<qreal>(), osmFont);
-
     m_defaultStyle[GeoDataPlacemark::Landmass]                 = createWayStyle("#F1EEE8", "#F1EEE8", true, false);
     m_defaultStyle[GeoDataPlacemark::UrbanArea]                = createWayStyle("#E6E3DD", "#E6E3DD", true, false);
     m_defaultStyle[GeoDataPlacemark::InternationalDateLine]    = createStyle(1.0, 0.0, "#000000", "#000000", false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector<qreal>(), osmFont);
@@ -774,6 +772,19 @@ void StyleBuilder::Private::initializeDefaultStyles()
     tmp = m_defaultStyle[GeoDataPlacemark::LargeNationCapital]->labelStyle().font();
     tmp.setUnderline( true );
     m_defaultStyle[GeoDataPlacemark::LargeNationCapital]->labelStyle().setFont( tmp );
+
+    // Buildings
+    m_defaultStyle[GeoDataPlacemark::Building] = createStyle(1, 0, buildingColor, buildingColor.darker(),
+                                                             true, true, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false, QVector<qreal>(), osmFont);
+    for (int i=0; i<GeoDataPlacemark::LastIndex; ++i) {
+        if (m_defaultStyle[i] && !m_defaultStyle[i]->iconStyle().iconPath().isEmpty()) {
+            auto const category = GeoDataPlacemark::GeoDataVisualCategory(i);
+            m_buildingStyles[category] = GeoDataStyle::Ptr(new GeoDataStyle(*m_defaultStyle[GeoDataPlacemark::Building]));
+            m_buildingStyles[category]->iconStyle() = m_defaultStyle[i]->iconStyle();
+            m_buildingStyles[category]->labelStyle() = m_defaultStyle[i]->labelStyle();
+        }
+    }
+
 }
 
 QString StyleBuilder::Private::createPaintLayerItem(const QString &itemType, GeoDataPlacemark::GeoDataVisualCategory visualCategory, const QString &subType)
@@ -1431,10 +1442,22 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
     QString specialStyleCacheKey;
     bool cacheSpecialStyle = false;
 
+    OsmPlacemarkData const & osmData = placemark->osmData();
     auto const visualCategory = placemark->visualCategory();
+    if (visualCategory == GeoDataPlacemark::Building) {
+        auto const tagMap = osmTagMapping();
+        auto const & osmData = placemark->osmData();
+        auto const buildingTag = QStringLiteral("building");
+        for (auto iter = osmData.tagsBegin(), end = osmData.tagsEnd(); iter != end; ++iter) {
+            auto const osmTag = StyleBuilder::OsmTag(iter.key(), iter.value());
+            if (iter.key() != buildingTag && tagMap.contains(osmTag)) {
+                return d->m_buildingStyles.value(tagMap.value(osmTag), d->m_defaultStyle[visualCategory]);
+            }
+        }
+    }
+
     GeoDataStyle::ConstPtr style = d->presetStyle(visualCategory);
 
-    OsmPlacemarkData const & osmData = placemark->osmData();
     if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPointType) {
         if (visualCategory == GeoDataPlacemark::NaturalTree) {
             GeoDataCoordinates const coordinates = placemark->coordinate();
