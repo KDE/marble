@@ -236,6 +236,8 @@ bool  GeoLineStringGraphicsItem::configurePainterForLine(GeoPainter *painter, co
     GeoDataStyle::ConstPtr style = this->style();
     if (!style) {
         painter->setPen( QPen() );
+        painter->setBackground(QBrush(Qt::transparent));
+        painter->setBackgroundMode(Qt::TransparentMode);
     }
     else {
         if (isOutline && !style->polyStyle().outline()) {
@@ -261,11 +263,16 @@ bool  GeoLineStringGraphicsItem::configurePainterForLine(GeoPainter *painter, co
             else {
                 if ( painter->mapQuality() != Marble::HighQuality
                         && painter->mapQuality() != Marble::PrintQuality ) {
-                    QColor penColor = currentPen.color();
-                    penColor.setAlpha( 255 );
+                    QColor penColor = linePaintedColor;
+                    if (penColor.alpha() != 0) {
+                        penColor.setAlpha( 255 );
+                    }
                     if (currentPen.color() != penColor) {
                         currentPen.setColor( penColor );
                     }
+                }
+                else {
+                    currentPen.setColor(linePaintedColor);
                 }
             }
         }
@@ -323,7 +330,8 @@ bool  GeoLineStringGraphicsItem::configurePainterForLine(GeoPainter *painter, co
         if ( painter->pen() != currentPen ) {
             painter->setPen( currentPen );
         }
-//        else qDebug() << "Detach and painter change successfully Avoided!" << Q_FUNC_INFO;
+
+        // Set the background
 
         if (!isOutline) {
           if (lineStyle.background()) {
@@ -333,6 +341,14 @@ bool  GeoLineStringGraphicsItem::configurePainterForLine(GeoPainter *painter, co
 
               painter->setBackgroundMode( Qt::OpaqueMode );
           }
+          else {
+              painter->setBackground(QBrush(Qt::transparent));
+              painter->setBackgroundMode(Qt::TransparentMode);
+          }
+        }
+        else {
+            painter->setBackground(QBrush(Qt::transparent));
+            painter->setBackgroundMode(Qt::TransparentMode);
         }
     }
 
