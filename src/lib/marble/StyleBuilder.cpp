@@ -1697,11 +1697,26 @@ QStringList StyleBuilder::renderOrder() const
     if (paintLayerOrder.isEmpty()) {
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::Landmass);
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::UrbanArea);
-        for ( int i = GeoDataPlacemark::LanduseAllotments; i <= GeoDataPlacemark::LanduseVineyard; i++ ) {
-            if ((GeoDataPlacemark::GeoDataVisualCategory)i != GeoDataPlacemark::LanduseGrass) {
-                paintLayerOrder << Private::createPaintLayerItem("Polygon", (GeoDataPlacemark::GeoDataVisualCategory)i);
-            }
-        }
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::LanduseResidential);
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::LanduseAllotments);
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::LanduseBasin);
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::LanduseCemetery);
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::LanduseCommercial);
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::LanduseConstruction);
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::LanduseFarmland);
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::LanduseFarmyard);
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::LanduseGarages);
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::LanduseIndustrial);
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::LanduseLandfill);
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::LanduseMeadow);
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::LanduseMilitary);
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::LanduseQuarry);
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::LanduseRailway);
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::LanduseReservoir);
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::LanduseRetail);
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::LanduseOrchard);
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::LanduseVineyard);
+
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::Bathymetry);
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::LeisureGolfCourse);
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::LeisureMinigolfCourse);
