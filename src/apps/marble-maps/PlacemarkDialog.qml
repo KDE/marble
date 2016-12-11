@@ -109,6 +109,13 @@ Item {
         IconText {
             width: parent.width
             visible: text.length > 0
+            text: placemark === null ? "" : placemark.wheelchairInfo
+            icon: "qrc:/material/wheelchair.svg"
+        }
+
+        IconText {
+            width: parent.width
+            visible: text.length > 0
             text: placemark === null ? "" : "<a href=\"#\"#>" + placemark.coordinates + "</a>"
             icon: "qrc:/material/place.svg"
             linkColor: palette.text

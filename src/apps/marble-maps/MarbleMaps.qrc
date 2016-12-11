@@ -57,6 +57,7 @@
         <file alias="material/directions-walk.svg">material-icons/ic_directions_walk_48px.svg</file>
         <file alias="material/navigation.svg">material-icons/ic_navigation_48px.svg</file>
         <file alias="material/access_time.svg">material-icons/ic_access_time_48px.svg</file>
+        <file alias="material/wheelchair.svg">material-icons/ic_accessible_black_48px.svg</file>
         <file alias="material/place.svg">material-icons/ic_place_black_48px.svg</file>
         <file alias="material/star.svg">material-icons/ic_star_24px.svg</file>
         <file alias="material/star_border.svg">material-icons/ic_star_border_24px.svg</file>

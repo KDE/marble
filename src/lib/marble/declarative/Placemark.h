@@ -33,6 +33,7 @@ class Placemark : public QObject
     Q_PROPERTY(QString wikipedia READ wikipedia NOTIFY wikipediaChanged)
     Q_PROPERTY(QString openingHours READ openingHours NOTIFY openingHoursChanged)
     Q_PROPERTY(QString coordinates READ coordinates NOTIFY coordinatesChanged)
+    Q_PROPERTY(QString wheelchairInfo READ wheelchairInfo NOTIFY wheelchairInfoChanged)
     Q_PROPERTY(double longitude READ longitude NOTIFY coordinatesChanged)
     Q_PROPERTY(double latitude READ latitude NOTIFY coordinatesChanged)
     Q_PROPERTY(QStringList tags READ tags NOTIFY tagsChanged)
@@ -53,6 +54,7 @@ public:
     QString wikipedia() const;
     QString openingHours() const;
     QString coordinates() const;
+    QString wheelchairInfo() const;
     double longitude() const;
     double latitude() const;
     const QStringList & tags() const;
@@ -68,6 +70,7 @@ Q_SIGNALS:
     void websiteChanged();
     void wikipediaChanged();
     void openingHoursChanged();
+    void wheelchairInfoChanged();
     void tagsChanged();
 
 private:
@@ -85,6 +88,7 @@ private:
     mutable QString m_website;
     mutable QString m_wikipedia;
     mutable QString m_openingHours;
+    mutable QString m_wheelchairInfo;
     QStringList m_tags;
 };
 

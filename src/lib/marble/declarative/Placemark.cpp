@@ -35,6 +35,7 @@ void Placemark::setGeoDataPlacemark( const Marble::GeoDataPlacemark &placemark )
     m_website = QString();
     m_wikipedia = QString();
     m_openingHours = QString();
+    m_wheelchairInfo = QString();
     updateTags();
     emit coordinatesChanged();
     emit nameChanged();
@@ -43,6 +44,7 @@ void Placemark::setGeoDataPlacemark( const Marble::GeoDataPlacemark &placemark )
     emit websiteChanged();
     emit wikipediaChanged();
     emit openingHoursChanged();
+    emit wheelchairInfoChanged();
     emit tagsChanged();
 }
 
@@ -339,10 +341,6 @@ QString Placemark::description() const
         addTagDescription(m_description, QStringLiteral("fee"), QStringLiteral("no"), tr("no fee"));
         addTagValue(m_description, QStringLiteral("description"));
         addTagValue(m_description, QStringLiteral("old_name"), tr("formerly <i>%1</i>"));
-
-        addTagDescription(m_description, QStringLiteral("wheelchair"), QStringLiteral("yes"), tr("Wheelchair accessible"));
-        addTagDescription(m_description, QStringLiteral("wheelchair"), QStringLiteral("no"), tr("Not wheelchair accessible"));
-        addTagDescription(m_description, QStringLiteral("wheelchair"), QStringLiteral("limited"), tr("Limited wheelchair accessibility"));
     }
 
     return m_description;
@@ -424,6 +422,37 @@ QString Placemark::openingHours() const
 QString Placemark::coordinates() const
 {
     return m_placemark.coordinate().toString(GeoDataCoordinates::Decimal).trimmed();
+}
+
+QString Placemark::wheelchairInfo() const
+{
+    if (!m_wheelchairInfo.isEmpty())
+        return m_wheelchairInfo;
+
+    addTagDescription(m_wheelchairInfo, QStringLiteral("wheelchair"), QStringLiteral("yes"), tr("Wheelchair accessible"));
+    addTagDescription(m_wheelchairInfo, QStringLiteral("wheelchair"), QStringLiteral("no"), tr("Wheelchair inaccessible"));
+    addTagDescription(m_wheelchairInfo, QStringLiteral("wheelchair"), QStringLiteral("limited"), tr("Limited wheelchair accessibility"));
+    addTagDescription(m_wheelchairInfo, QStringLiteral("wheelchair"), QStringLiteral("designated"), tr("Wheelchair access only"));
+
+    // Check if there is localized description
+    auto const & osmData = m_placemark.osmData();
+    QStringList const uiLanguages = QLocale::system().uiLanguages();
+    const QString tag = QLatin1String("wheelchair:description:");
+    foreach (const QString &uiLanguage, uiLanguages) {
+        for (auto tagIter = osmData.tagsBegin(), end = osmData.tagsEnd(); tagIter != end; ++tagIter) {
+            if (tagIter.key().startsWith(tag)) {
+                QStringRef const tagLanguage = tagIter.key().midRef(tag.length());
+                if (tagLanguage == uiLanguage) {
+                    append(m_wheelchairInfo, tagIter.value());
+                    return m_wheelchairInfo;
+                }
+            }
+        }
+    }
+
+    addTagValue(m_wheelchairInfo, "wheelchair:description");
+
+    return m_wheelchairInfo;
 }
 
 void Placemark::setName(const QString & name)
