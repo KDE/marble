@@ -185,7 +185,7 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
         // The idea here is that layerItems.null has most items and does not need to be sorted by z-value
         // since they are all equal (=0). We do sort them by style pointer though for batch rendering
         std::sort(layerItems.null.begin(), layerItems.null.end(), GeoGraphicsItem::styleLessThan);
-        std::sort(layerItems.positive.begin(), layerItems.positive.end(), GeoGraphicsItem::zValueLessThan);
+        std::sort(layerItems.positive.begin(), layerItems.positive.end(), GeoGraphicsItem::zValueAndStyleLessThan);
 
         AbstractGeoPolygonGraphicsItem::s_previousStyle = -1;
         GeoLineStringGraphicsItem::s_previousStyle = -1;

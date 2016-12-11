@@ -162,6 +162,16 @@ bool GeoGraphicsItem::styleLessThan(GeoGraphicsItem *one, GeoGraphicsItem *two)
     return reinterpret_cast<quint64>(one->d->m_style.data()) < reinterpret_cast<quint64>(two->d->m_style.data());
 }
 
+bool GeoGraphicsItem::zValueAndStyleLessThan(GeoGraphicsItem *one, GeoGraphicsItem *two)
+{
+    if (one->d->m_zValue == two->d->m_zValue) {
+        return reinterpret_cast<quint64>(one->d->m_style.data()) < reinterpret_cast<quint64>(two->d->m_style.data());
+    }
+
+    return one->d->m_zValue < two->d->m_zValue;
+}
+
+
 bool RenderContext::operator==(const RenderContext &other) const
 {
     return m_tileLevel == other.m_tileLevel;
