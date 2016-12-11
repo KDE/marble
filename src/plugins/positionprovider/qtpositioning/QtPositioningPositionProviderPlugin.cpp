@@ -147,6 +147,7 @@ void QtPositioningPositionProviderPlugin::initialize()
         d->m_source->setUpdateInterval( 1000 );
         d->m_source->startUpdates();
         d->m_updateChecker->start( 5000 );
+        update();
     }
 }
 
