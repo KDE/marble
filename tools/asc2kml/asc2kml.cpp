@@ -77,7 +77,7 @@ int main(int argc, char *argv[])
         // QTextStream targetstream( new QString() );
 
         targetstream << "<?xml version=\"1.0\" encoding=\"UTF-8\"?> \n"
-                     << "<kml xmlns=\"http://earth.google.com/kml/2.1\"> \n"
+                     << "<kml xmlns=\"http://www.opengis.net/kml/2.2\"> \n"
                      << "<Document> \n";
         QString  state;
         QString  gmt;
@@ -114,10 +114,10 @@ int main(int argc, char *argv[])
                     const QString timezonerawline = timezonestream.readLine();
                     const QStringList timezonesplitline = timezonerawline.split(QLatin1Char('\t'));
 
-                    if( timezonesplitline[0] == timezone )
+                    if( timezonesplitline[1] == timezone )
                     {
-                        gmt = timezonesplitline[1];
-                        dst = timezonesplitline[2];
+                        gmt = timezonesplitline[2];
+                        dst = timezonesplitline[3];
                         break;
                     }
             }

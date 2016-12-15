@@ -3,45 +3,38 @@ If you apply changes to our city database please follow these steps:
 As a translator please just edit cities.txt! If you edit the KML file directly your changes will get overwritten on the next change!
 All other steps are optional and can be done by one of our programmers:
 
-1. Compile marble/tools/asc2kml by executing "qmake-qt4 && make"
+1. Build marble with -DBUILD_MARBLE_TOOLS=ON passed to cmake
 
 2. Prepare cities.txt as follows:
 
 If you're interested only in the n cities with the highest population, you can generate a modified cities.txt like this (here n=1000):
 
-tackat@tackat-laptop:~$ sort -t"$(echo -e "\t")" -n -k 15 cities.txt | tail -n 1000 > cities_largest_1000.txt
+$ sort -t"$(echo -e "\t")" -n -k 15 cities.txt | tail -n 1000 > cities_largest_1000.txt
 
 Then use cities_largest_1000.txt instead of cities.txt.
 
 Be sure data is sorted alphabetically, otherwise there is a big perfomance hit when loading the files at startup.
 For that, run:
 
-tackat@tackat-laptop:~$ sort -t"$(echo -e "\t")" -k 2 cities.txt > cities_sorted.txt
+$ sort -t"$(echo -e "\t")" -k 2 cities.txt > cities_sorted.txt
 
-2. Execute the resulting binary:
+2. Execute the two tools:
 
-tackat@tackat-laptop:~/marble/tools/asc2kml$ ./asc2kml -o ~/marble/data/placemarks/cityplacemarks.kml ~/marble/data/placemarks/cities_sorted.txt  ~/marble/data/placemarks/statecodes.txt ~/marble/data/placemarks/timeZones.txt
-
+$ marble/tools/asc2kml/asc2kml -o ~/marble/data/placemarks/cityplacemarks.kml ~/marble/data/placemarks/cities_sorted.txt  ~/marble/data/placemarks/statecodes.txt ~/marble/data/placemarks/timeZones.txt
+$ marble/tools/kml2cache/kml2cache -i ~/marble/data/placemarks/cityplacemarks.kml -o ~/marble/data/placemarks/cityplacemarks.cache
 
 3. Create the placemark-directory in your home directory if it doesn't exist already.
 
-tackat@tackat-laptop:~$ mkdir ~/.local/share/marble/placemarks
+$ mkdir ~/.local/share/marble/placemarks
 
-4. Copy the new KML file over
+4. Copy the new KML cache file over
 
-tackat@tackat-laptop:~$ cp ~/marble/data/placemarks/cityplacemarks.kml ~/.local/share/marble/placemarks/cityplacemarks.kml
+$ cp ~/marble/data/placemarks/cityplacemarks.cache ~/.local/share/marble/placemarks/cityplacemarks.cache
 
 5. Delete the cityplacemarks cache file in the system directory:
 
-tackat@tackat-laptop:~$ sudo rm /usr/local/share/apps/marble/data/placemarks/cityplacemarks.cache
+$ sudo rm /usr/local/share/apps/marble/data/placemarks/cityplacemarks.cache
 
-6. Run Marble. Check that Marble will import the new data and generate a cache file. Look for the message:
+6. Run Marble. Check that the cache file is correctly loaded
 
-No recent Default Placemark Cache File available!
-Making cache for "cityplacemarks"
-
-7. Copy the resulting cache file over to your sources:
-
-tackat@tackat-laptop:~$ cp ~/.local/share/marble/placemarks/cityplacemarks.cache ~/marble/data/placemarks/cityplacemarks.cache
-
-8. Commit the new cityplacemarks.cache to SVN.
+7. Commit the new version of cityplacemarks.kml & cityplacemarks.cache to git
