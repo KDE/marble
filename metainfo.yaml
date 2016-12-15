@@ -13,6 +13,7 @@ public_source_dirs:
     - src/lib/marble
 libraries:
     - cmake: Marble
+      qmake: Marble
 cmakename: Marble
 
 maintainer:
