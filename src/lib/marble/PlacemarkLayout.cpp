@@ -356,153 +356,158 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParam
         return QVector<VisiblePlacemark *>();
     }
 
-    const int secnumber = viewport->height() / m_maxLabelHeight + 1;
-    m_rowsection.clear();
-    m_rowsection.resize(secnumber);
-
-    m_paintOrder.clear();
-    m_labelArea = 0;
-
-    // First handle the selected placemarks as they have the highest priority.
-
-    const QModelIndexList selectedIndexes = m_selectionModel->selection().indexes();
-    auto const viewLatLonAltBox = viewport->viewLatLonAltBox();
-
-    for ( int i = 0; i < selectedIndexes.count(); ++i ) {
-        const QModelIndex index = selectedIndexes.at( i );
-        const GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
-        const GeoDataCoordinates coordinates = placemarkIconCoordinates( placemark );
-
-        if ( !coordinates.isValid() ) {
-            continue;
-        }
-
-        qreal x = 0;
-        qreal y = 0;
-
-        if ( !viewLatLonAltBox.contains( coordinates ) ||
-             ! viewport->screenCoordinates( coordinates, x, y ))
-            {
-                continue;
-            }
-
-        if( layoutPlacemark( placemark, coordinates, x, y, true) ) {
-            // Make sure not to draw more placemarks on the screen than
-            // specified by placemarksOnScreenLimit().
-            if ( placemarksOnScreenLimit( viewport->size() ) )
-                break;
-        }
-
-    }
-
-    // Now handle all other placemarks...
-
-    const QItemSelection selection = m_selectionModel->selection();
-
     QList<const GeoDataPlacemark*> placemarkList;
-    foreach ( const TileId &tileId, visibleTiles( viewport, tileLevel ) ) {
-        placemarkList += m_placemarkCache.value( tileId );
-    }
-    std::sort(placemarkList.begin(), placemarkList.end(), GeoDataPlacemark::placemarkLayoutOrderCompare);
+    auto currentMaxLabelHeight = m_maxLabelHeight;
+    do {
+        currentMaxLabelHeight = m_maxLabelHeight;
+        const int secnumber = viewport->height() / m_maxLabelHeight + 1;
+        m_rowsection.clear();
+        m_rowsection.resize(secnumber);
 
-    foreach ( const GeoDataPlacemark *placemark, placemarkList ) {
-        const GeoDataCoordinates coordinates = placemarkIconCoordinates( placemark );
-        if ( !coordinates.isValid() ) {
-            continue;
-        }
+        m_paintOrder.clear();
+        m_labelArea = 0;
 
-        int zoomLevel = placemark->zoomLevel();
-        if ( zoomLevel > 20 ) {
-            break;
-        }
+        // First handle the selected placemarks as they have the highest priority.
 
-        qreal x = 0;
-        qreal y = 0;
+        const QModelIndexList selectedIndexes = m_selectionModel->selection().indexes();
+        auto const viewLatLonAltBox = viewport->viewLatLonAltBox();
 
-        if ( !viewLatLonAltBox.contains( coordinates ) ||
-             ! viewport->screenCoordinates( coordinates, x, y )) {
+        for ( int i = 0; i < selectedIndexes.count(); ++i ) {
+            const QModelIndex index = selectedIndexes.at( i );
+            const GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
+            const GeoDataCoordinates coordinates = placemarkIconCoordinates( placemark );
+
+            if ( !coordinates.isValid() ) {
                 continue;
             }
 
-        if ( !placemark->isGloballyVisible() ) {
-            continue;
+            qreal x = 0;
+            qreal y = 0;
+
+            if ( !viewLatLonAltBox.contains( coordinates ) ||
+                 ! viewport->screenCoordinates( coordinates, x, y ))
+                {
+                    continue;
+                }
+
+            if( layoutPlacemark( placemark, coordinates, x, y, true) ) {
+                // Make sure not to draw more placemarks on the screen than
+                // specified by placemarksOnScreenLimit().
+                if ( placemarksOnScreenLimit( viewport->size() ) )
+                    break;
+            }
+
         }
 
-        const GeoDataPlacemark::GeoDataVisualCategory visualCategory = placemark->visualCategory();
+        // Now handle all other placemarks...
 
-        // Skip city marks if we're not showing cities.
-        if ( !m_showCities
-             && visualCategory >= GeoDataPlacemark::SmallCity
-             && visualCategory <= GeoDataPlacemark::Nation )
-            continue;
+        const QItemSelection selection = m_selectionModel->selection();
 
-        // Skip terrain marks if we're not showing terrain.
-        if ( !m_showTerrain
-             && visualCategory >= GeoDataPlacemark::Mountain
-             && visualCategory <= GeoDataPlacemark::OtherTerrain )
-            continue;
+        placemarkList.clear();
+        foreach ( const TileId &tileId, visibleTiles( viewport, tileLevel ) ) {
+            placemarkList += m_placemarkCache.value( tileId );
+        }
+        std::sort(placemarkList.begin(), placemarkList.end(), GeoDataPlacemark::placemarkLayoutOrderCompare);
 
-        // Skip other places if we're not showing other places.
-        if ( !m_showOtherPlaces
-             && visualCategory >= GeoDataPlacemark::GeographicPole
-             && visualCategory <= GeoDataPlacemark::Observatory )
-            continue;
+        foreach ( const GeoDataPlacemark *placemark, placemarkList ) {
+            const GeoDataCoordinates coordinates = placemarkIconCoordinates( placemark );
+            if ( !coordinates.isValid() ) {
+                continue;
+            }
 
-        // Skip landing sites if we're not showing landing sites.
-        if ( !m_showLandingSites
-             && visualCategory >= GeoDataPlacemark::MannedLandingSite
-             && visualCategory <= GeoDataPlacemark::UnmannedHardLandingSite )
-            continue;
-
-        // Skip craters if we're not showing craters.
-        if ( !m_showCraters
-             && visualCategory == GeoDataPlacemark::Crater )
-            continue;
-
-        // Skip maria if we're not showing maria.
-        if ( !m_showMaria
-             && visualCategory == GeoDataPlacemark::Mare )
-            continue;
-
-        if ( !m_showPlaces
-             && visualCategory >= GeoDataPlacemark::GeographicPole
-             && visualCategory <= GeoDataPlacemark::Observatory )
-            continue;
-
-        // We handled selected placemarks already, so we skip them here...
-        // Assuming that only a small amount of places is selected
-        // we check for the selected state after all other filters
-        bool isSelected = false;
-        foreach ( const QModelIndex &index, selection.indexes() ) {
-            const GeoDataPlacemark *mark = static_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
-            if (mark == placemark ) {
-                isSelected = true;
+            int zoomLevel = placemark->zoomLevel();
+            if ( zoomLevel > 20 ) {
                 break;
             }
-        }
-        if ( isSelected )
-            continue;
 
-        if( layoutPlacemark( placemark, coordinates, x, y, isSelected ) ) {
-            // Make sure not to draw more placemarks on the screen than
-            // specified by placemarksOnScreenLimit().
-            if ( placemarksOnScreenLimit( viewport->size() ) )
-                break;
-        }
-    }
+            qreal x = 0;
+            qreal y = 0;
 
-    if (m_visiblePlacemarks.size() > qMax(100, 4 * m_paintOrder.size())) {
-        auto const extendedBox = viewLatLonAltBox.scaled(2.0, 2.0);
-        QVector<VisiblePlacemark*> outdated;
-        for (auto placemark: m_visiblePlacemarks) {
-            if (!extendedBox.contains(placemark->coordinates())) {
-                outdated << placemark;
+            if ( !viewLatLonAltBox.contains( coordinates ) ||
+                 ! viewport->screenCoordinates( coordinates, x, y )) {
+                    continue;
+                }
+
+            if ( !placemark->isGloballyVisible() ) {
+                continue;
+            }
+
+            const GeoDataPlacemark::GeoDataVisualCategory visualCategory = placemark->visualCategory();
+
+            // Skip city marks if we're not showing cities.
+            if ( !m_showCities
+                 && visualCategory >= GeoDataPlacemark::SmallCity
+                 && visualCategory <= GeoDataPlacemark::Nation )
+                continue;
+
+            // Skip terrain marks if we're not showing terrain.
+            if ( !m_showTerrain
+                 && visualCategory >= GeoDataPlacemark::Mountain
+                 && visualCategory <= GeoDataPlacemark::OtherTerrain )
+                continue;
+
+            // Skip other places if we're not showing other places.
+            if ( !m_showOtherPlaces
+                 && visualCategory >= GeoDataPlacemark::GeographicPole
+                 && visualCategory <= GeoDataPlacemark::Observatory )
+                continue;
+
+            // Skip landing sites if we're not showing landing sites.
+            if ( !m_showLandingSites
+                 && visualCategory >= GeoDataPlacemark::MannedLandingSite
+                 && visualCategory <= GeoDataPlacemark::UnmannedHardLandingSite )
+                continue;
+
+            // Skip craters if we're not showing craters.
+            if ( !m_showCraters
+                 && visualCategory == GeoDataPlacemark::Crater )
+                continue;
+
+            // Skip maria if we're not showing maria.
+            if ( !m_showMaria
+                 && visualCategory == GeoDataPlacemark::Mare )
+                continue;
+
+            if ( !m_showPlaces
+                 && visualCategory >= GeoDataPlacemark::GeographicPole
+                 && visualCategory <= GeoDataPlacemark::Observatory )
+                continue;
+
+            // We handled selected placemarks already, so we skip them here...
+            // Assuming that only a small amount of places is selected
+            // we check for the selected state after all other filters
+            bool isSelected = false;
+            foreach ( const QModelIndex &index, selection.indexes() ) {
+                const GeoDataPlacemark *mark = static_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
+                if (mark == placemark ) {
+                    isSelected = true;
+                    break;
+                }
+            }
+            if ( isSelected )
+                continue;
+
+            if( layoutPlacemark( placemark, coordinates, x, y, isSelected ) ) {
+                // Make sure not to draw more placemarks on the screen than
+                // specified by placemarksOnScreenLimit().
+                if ( placemarksOnScreenLimit( viewport->size() ) )
+                    break;
             }
         }
-        for (auto placemark: outdated) {
-            delete m_visiblePlacemarks.take(placemark->placemark());
+
+        if (m_visiblePlacemarks.size() > qMax(100, 4 * m_paintOrder.size())) {
+            auto const extendedBox = viewLatLonAltBox.scaled(2.0, 2.0);
+            QVector<VisiblePlacemark*> outdated;
+            for (auto placemark: m_visiblePlacemarks) {
+                if (!extendedBox.contains(placemark->coordinates())) {
+                    outdated << placemark;
+                }
+            }
+            for (auto placemark: outdated) {
+                delete m_visiblePlacemarks.take(placemark->placemark());
+            }
         }
-    }
+    } while (currentMaxLabelHeight != m_maxLabelHeight);
 
     m_runtimeTrace = QStringLiteral("Placemarks: %1 Drawn: %2").arg(placemarkList.count()).arg(m_paintOrder.size());
     return m_paintOrder;
@@ -545,16 +550,14 @@ bool PlacemarkLayout::layoutPlacemark( const GeoDataPlacemark *placemark, const 
     // Find out whether the area around the placemark is covered already.
     // If there's not enough space free don't add a VisiblePlacemark here.
 
-    QRectF labelRect;
-
     const QString labelText = placemark->displayName();
+    if (mark->symbolPixmap().isNull() || !hasRoomForPixmap(y, mark)) {
+        return false;
+    }
+    QRectF labelRect;
     if (!labelText.isEmpty()) {
         labelRect = roomForLabel(style, x, y, labelText, mark);
     }
-    if (labelRect.isNull() && (mark->symbolPixmap().isNull() || !hasRoomForPixmap(y, mark))) {
-        return false;
-    }
-
     mark->setLabelRect( labelRect );
     // Add the current placemark to the matching row and its
     // direct neighbors.
