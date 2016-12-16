@@ -91,13 +91,16 @@ QVector<GeoDataPlacemark *> SpellChecker::cityPlaces(const QVector<GeoDataPlacem
     QSet<GeoDataPlacemark::GeoDataVisualCategory> categories;
     categories << GeoDataPlacemark::PlaceCity;
     categories << GeoDataPlacemark::PlaceCityCapital;
+    categories << GeoDataPlacemark::PlaceCityNationalCapital;
     categories << GeoDataPlacemark::PlaceSuburb;
     categories << GeoDataPlacemark::PlaceHamlet;
     categories << GeoDataPlacemark::PlaceLocality;
     categories << GeoDataPlacemark::PlaceTown;
     categories << GeoDataPlacemark::PlaceTownCapital;
+    categories << GeoDataPlacemark::PlaceTownNationalCapital;
     categories << GeoDataPlacemark::PlaceVillage;
     categories << GeoDataPlacemark::PlaceVillageCapital;
+    categories << GeoDataPlacemark::PlaceVillageNationalCapital;
 
     QVector<GeoDataPlacemark*> places;
     std::copy_if(placemarks.begin(), placemarks.end(), std::back_inserter(places),

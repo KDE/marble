@@ -140,12 +140,20 @@ def city_map(data):
     capital = 'no'
     country = ''
     if data['featurecla'] == 'Admin-0 capital' or data['featurecla'] == 'Admin-1 capital' or data['featurecla'] == 'Admin-0 region capital' or data['featurecla'] == 'Admin-1 region capital':
-        capital = 'yes' 
+        capital = 'yes'
     if 'pop_max' in data:
         population = data['pop_max']
     if 'adm0name' in data:
         country = data['adm0name']
-    temp =  [('is_in:country', country), ('capital', capital), ('population', population), ('place', 'city') ]
+
+    # National capitals in OSM are recongised by tag "admin_level"="2" ( http://wiki.openstreetmap.org/wiki/Key:capital#Using_relations_for_capitals ).
+    # In Natural Earth .shp files these capitals are tagged as "Admin-0 capital".
+    if data['featurecla'] == 'Admin-0 capital':
+        admin_level = "2"
+        temp = [('is_in:country', country), ('capital', capital), ('admin_level', admin_level), ('population', population), ('place', 'city')]
+    else:
+        temp = [('is_in:country', country), ('capital', capital), ('population', population), ('place', 'city')]
+
     return temp
 
 def mountain_map(data):

@@ -158,13 +158,16 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
 
         PlaceCity,
         PlaceCityCapital,
+        PlaceCityNationalCapital,
         PlaceSuburb,
         PlaceHamlet,
         PlaceLocality,
         PlaceTown,
         PlaceTownCapital,
+        PlaceTownNationalCapital,
         PlaceVillage,
         PlaceVillageCapital,
+        PlaceVillageNationalCapital,
 
         NaturalWater,
         NaturalReef,

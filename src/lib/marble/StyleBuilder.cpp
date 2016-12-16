@@ -307,6 +307,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
     QFont osmCityFont = QFont(defaultFamily, (int)(defaultSize * 1.5 ), 75, false);
     m_defaultStyle[GeoDataPlacemark::PlaceCity] = createOsmPOIStyle(osmCityFont, "place/place-6", QColor( "#202020" ));
     m_defaultStyle[GeoDataPlacemark::PlaceCityCapital] = createOsmPOIStyle(osmCityFont, "place/place-capital-6", QColor( "#202020" ));
+    m_defaultStyle[GeoDataPlacemark::PlaceCityNationalCapital] = createOsmPOIStyle(osmCityFont, "place/place-capital-adminlevel2", QColor( "#202020" ));
     m_defaultStyle[GeoDataPlacemark::PlaceSuburb] = createOsmPOIStyle(osmCityFont, QString(), QColor( "#707070" ));
     m_defaultStyle[GeoDataPlacemark::PlaceHamlet] = createOsmPOIStyle(osmCityFont, QString(), QColor( "#707070" ));
     QFont localityFont = osmCityFont;
@@ -314,13 +315,19 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::PlaceLocality] = createOsmPOIStyle(localityFont, QString(), QColor( "#707070" ));
     m_defaultStyle[GeoDataPlacemark::PlaceTown] = createOsmPOIStyle(osmCityFont, "place/place-6", QColor( "#404040" ));
     m_defaultStyle[GeoDataPlacemark::PlaceTownCapital] = createOsmPOIStyle(osmCityFont, "place/place-capital-6", QColor( "#404040" ));
+    m_defaultStyle[GeoDataPlacemark::PlaceTownNationalCapital] = createOsmPOIStyle(osmCityFont, "place/place-capital-adminlevel2", QColor( "#404040" ));
     m_defaultStyle[GeoDataPlacemark::PlaceVillage] = createOsmPOIStyle(osmCityFont, "place/place-6", QColor( "#505050" ));
     m_defaultStyle[GeoDataPlacemark::PlaceVillageCapital] = createOsmPOIStyle(osmCityFont, "place/place-capital-6", QColor( "#505050" ));
+    m_defaultStyle[GeoDataPlacemark::PlaceVillageNationalCapital] = createOsmPOIStyle(osmCityFont, "place/place-capital-adminlevel2", QColor( "#505050" ));
     for (int i=GeoDataPlacemark::PlaceCity; i<=GeoDataPlacemark::PlaceVillageCapital; ++i) {
         m_defaultStyle[GeoDataPlacemark::GeoDataVisualCategory(i)]->polyStyle().setFill(false);
         m_defaultStyle[GeoDataPlacemark::GeoDataVisualCategory(i)]->polyStyle().setOutline(false);
         m_defaultStyle[GeoDataPlacemark::GeoDataVisualCategory(i)]->labelStyle().setAlignment( GeoDataLabelStyle::Center );
-        m_defaultStyle[GeoDataPlacemark::GeoDataVisualCategory(i)]->iconStyle().setScale(0.25);
+
+        if (i == GeoDataPlacemark::PlaceCityNationalCapital || i == GeoDataPlacemark::PlaceTownNationalCapital || i == GeoDataPlacemark::PlaceVillageNationalCapital)
+            m_defaultStyle[GeoDataPlacemark::GeoDataVisualCategory(i)]->iconStyle().setScale(0.55);
+        else
+            m_defaultStyle[GeoDataPlacemark::GeoDataVisualCategory(i)]->iconStyle().setScale(0.25);
     }
 
     m_defaultStyle[GeoDataPlacemark::Mountain]
@@ -1297,13 +1304,16 @@ void StyleBuilder::Private::initializeMinimumZoomLevels()
     s_defaultMinZoomLevels[GeoDataPlacemark::NaturalWetland]      = 10;
     s_defaultMinZoomLevels[GeoDataPlacemark::NaturalWood] = 8;
 
+    s_defaultMinZoomLevels[GeoDataPlacemark::PlaceCityNationalCapital] = 9;
     s_defaultMinZoomLevels[GeoDataPlacemark::PlaceCityCapital]    = 9;
     s_defaultMinZoomLevels[GeoDataPlacemark::PlaceCity]   = 9;
     s_defaultMinZoomLevels[GeoDataPlacemark::PlaceHamlet] = 15;
     s_defaultMinZoomLevels[GeoDataPlacemark::PlaceLocality]       = 15;
     s_defaultMinZoomLevels[GeoDataPlacemark::PlaceSuburb] = 13;
+    s_defaultMinZoomLevels[GeoDataPlacemark::PlaceTownNationalCapital] = 11;
     s_defaultMinZoomLevels[GeoDataPlacemark::PlaceTownCapital]    = 11;
     s_defaultMinZoomLevels[GeoDataPlacemark::PlaceTown]   = 11;
+    s_defaultMinZoomLevels[GeoDataPlacemark::PlaceVillageNationalCapital] = 13;
     s_defaultMinZoomLevels[GeoDataPlacemark::PlaceVillageCapital] = 13;
     s_defaultMinZoomLevels[GeoDataPlacemark::PlaceVillage]= 13;
 
@@ -1893,11 +1903,14 @@ qint64 StyleBuilder::popularity(const GeoDataPlacemark *placemark)
     int const offset = 10;
     if (StyleBuilder::Private::s_popularities.isEmpty()) {
         QVector<GeoDataPlacemark::GeoDataVisualCategory> popularities;
+        popularities << GeoDataPlacemark::PlaceCityNationalCapital;
+        popularities << GeoDataPlacemark::PlaceTownNationalCapital;
         popularities << GeoDataPlacemark::PlaceCityCapital;
         popularities << GeoDataPlacemark::PlaceTownCapital;
         popularities << GeoDataPlacemark::PlaceCity;
         popularities << GeoDataPlacemark::PlaceTown;
         popularities << GeoDataPlacemark::PlaceSuburb;
+        popularities << GeoDataPlacemark::PlaceVillageNationalCapital;
         popularities << GeoDataPlacemark::PlaceVillageCapital;
         popularities << GeoDataPlacemark::PlaceVillage;
         popularities << GeoDataPlacemark::PlaceHamlet;
@@ -2114,13 +2127,16 @@ QString StyleBuilder::visualCategoryName(GeoDataPlacemark::GeoDataVisualCategory
         visualCategoryNames[GeoDataPlacemark::GeoDataPlacemark::Nation] = "Nation";
         visualCategoryNames[GeoDataPlacemark::GeoDataPlacemark::PlaceCity] = "PlaceCity";
         visualCategoryNames[GeoDataPlacemark::GeoDataPlacemark::PlaceCityCapital] = "PlaceCityCapital";
+        visualCategoryNames[GeoDataPlacemark::GeoDataPlacemark::PlaceCityNationalCapital] = "PlaceCityNationalCapital";
         visualCategoryNames[GeoDataPlacemark::GeoDataPlacemark::PlaceSuburb] = "PlaceSuburb";
         visualCategoryNames[GeoDataPlacemark::GeoDataPlacemark::PlaceHamlet] = "PlaceHamlet";
         visualCategoryNames[GeoDataPlacemark::GeoDataPlacemark::PlaceLocality] = "PlaceLocality";
         visualCategoryNames[GeoDataPlacemark::GeoDataPlacemark::PlaceTown] = "PlaceTown";
         visualCategoryNames[GeoDataPlacemark::GeoDataPlacemark::PlaceTownCapital] = "PlaceTownCapital";
+        visualCategoryNames[GeoDataPlacemark::GeoDataPlacemark::PlaceTownNationalCapital] = "PlaceTownNationalCapital";
         visualCategoryNames[GeoDataPlacemark::GeoDataPlacemark::PlaceVillage] = "PlaceVillage";
         visualCategoryNames[GeoDataPlacemark::GeoDataPlacemark::PlaceVillageCapital] = "PlaceVillageCapital";
+        visualCategoryNames[GeoDataPlacemark::GeoDataPlacemark::PlaceVillageNationalCapital] = "PlaceVillageNationalCapital";
         visualCategoryNames[GeoDataPlacemark::GeoDataPlacemark::Mountain] = "Mountain";
         visualCategoryNames[GeoDataPlacemark::GeoDataPlacemark::Volcano] = "Volcano";
         visualCategoryNames[GeoDataPlacemark::GeoDataPlacemark::Mons] = "Mons";
@@ -2540,14 +2556,25 @@ GeoDataPlacemark::GeoDataVisualCategory StyleBuilder::determineVisualCategory(co
     Private::initializeOsmVisualCategories();
 
     QString const capital(QStringLiteral("capital"));
+    QString const admin_level(QStringLiteral("admin_level"));
+    // National capitals have admin_level=2
+    // More at http://wiki.openstreetmap.org/wiki/Key:capital#Using_relations_for_capitals
+    QString const national_level(QStringLiteral("2"));
+
     for (auto iter = osmData.tagsBegin(), end=osmData.tagsEnd(); iter != end; ++iter) {
         const auto tag = OsmTag(iter.key(), iter.value());
         GeoDataPlacemark::GeoDataVisualCategory category = Private::s_visualCategories.value(tag, GeoDataPlacemark::None);
         if (category != GeoDataPlacemark::None) {
-            if (category == GeoDataPlacemark::PlaceCity && osmData.containsTag(capital, yes)) {
+            if (category == GeoDataPlacemark::PlaceCity && osmData.containsTag(admin_level, national_level)) {
+                category = GeoDataPlacemark::PlaceCityNationalCapital;
+            } else if (category == GeoDataPlacemark::PlaceCity && osmData.containsTag(capital, yes)) {
                 category = GeoDataPlacemark::PlaceCityCapital;
+            } else if (category == GeoDataPlacemark::PlaceTown && osmData.containsTag(admin_level, national_level)) {
+                category = GeoDataPlacemark::PlaceTownNationalCapital;
             } else if (category == GeoDataPlacemark::PlaceTown && osmData.containsTag(capital, yes)) {
                 category = GeoDataPlacemark::PlaceTownCapital;
+            } else if (category == GeoDataPlacemark::PlaceVillage && osmData.containsTag(admin_level, national_level)) {
+                category = GeoDataPlacemark::PlaceVillageNationalCapital;
             } else if (category == GeoDataPlacemark::PlaceVillage && osmData.containsTag(capital, yes)) {
                 category = GeoDataPlacemark::PlaceVillageCapital;
             }

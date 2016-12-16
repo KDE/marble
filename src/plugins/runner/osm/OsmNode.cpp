@@ -62,7 +62,7 @@ void OsmNode::create(GeoDataDocument *document) const
     placemark->setZoomLevel(StyleBuilder::minimumZoomLevel(category));
     placemark->setPopularity(StyleBuilder::popularity(placemark));
 
-    if (category >= GeoDataPlacemark::PlaceCity && category <= GeoDataPlacemark::PlaceVillageCapital) {
+    if (category >= GeoDataPlacemark::PlaceCity && category <= GeoDataPlacemark::PlaceVillageNationalCapital) {
         int const population = m_osmData.tagValue(QStringLiteral("population")).toInt();
         placemark->setPopulation(qMax(0, population));
         if (population > 0) {

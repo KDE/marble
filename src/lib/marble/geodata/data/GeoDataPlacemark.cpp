@@ -404,13 +404,16 @@ QString GeoDataPlacemark::categoryName() const
     // OpenStreetMap categories
     case PlaceCity: return GeoDataPlacemarkPrivate::tr("City");
     case PlaceCityCapital: return GeoDataPlacemarkPrivate::tr("City Capital");
+    case PlaceCityNationalCapital: return GeoDataPlacemarkPrivate::tr("City National Capital");
     case PlaceSuburb: return GeoDataPlacemarkPrivate::tr("Suburb");
     case PlaceHamlet: return GeoDataPlacemarkPrivate::tr("Hamlet");
     case PlaceLocality: return GeoDataPlacemarkPrivate::tr("Locality");
     case PlaceTown: return GeoDataPlacemarkPrivate::tr("Town");
     case PlaceTownCapital: return GeoDataPlacemarkPrivate::tr("Town Capital");
+    case PlaceTownNationalCapital: return GeoDataPlacemarkPrivate::tr("Town National Capital");
     case PlaceVillage: return GeoDataPlacemarkPrivate::tr("Village");
     case PlaceVillageCapital: return GeoDataPlacemarkPrivate::tr("Village Capital");
+    case PlaceVillageNationalCapital: return GeoDataPlacemarkPrivate::tr("Village National Capital");
     case NaturalWater: return GeoDataPlacemarkPrivate::tr("Water");
     case NaturalReef: return GeoDataPlacemarkPrivate::tr("Reef");
     case NaturalWood: return GeoDataPlacemarkPrivate::tr("Wood");
