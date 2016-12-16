@@ -333,7 +333,7 @@ QString Placemark::description() const
         } else if (category == GeoDataPlacemark::AmenitySocialFacility) {
             addTagDescription(m_description, QStringLiteral("social_facility"), QStringLiteral("group_home"), tr("Group home"));
             addTagDescription(m_description, QStringLiteral("social_facility"), QStringLiteral("nursing_home"), tr("Nursing home"));
-            addTagDescription(m_description, QStringLiteral("social_facility"), QStringLiteral("assisted_living"), tr("Assisted living", "Like group home but for more independent people, e.g. who has flats"));
+            addTagDescription(m_description, QStringLiteral("social_facility"), QStringLiteral("assisted_living"), tr("Assisted living", "Like group home but for more independent people, e.g. who have flats"));
             addTagDescription(m_description, QStringLiteral("social_facility"), QStringLiteral("day_care"), tr("Nursing services on a daily basis"));
             addTagDescription(m_description, QStringLiteral("social_facility"), QStringLiteral("shelter"), tr("Shelter"));
             addTagDescription(m_description, QStringLiteral("social_facility"), QStringLiteral("ambulatory_care"), tr("Ambulatory care"));
@@ -341,7 +341,7 @@ QString Placemark::description() const
             addTagDescription(m_description, QStringLiteral("social_facility"), QStringLiteral("workshop"), tr("Employment and workshops for offenders and people with disabilities"));
             addTagDescription(m_description, QStringLiteral("social_facility"), QStringLiteral("food_bank"), tr("Pre-packaged food for free or below market price"));
             addTagDescription(m_description, QStringLiteral("social_facility"), QStringLiteral("soup_kitchen"), tr("Prepared meals for free or below market price"));
-            addTagDescription(m_description, QStringLiteral("social_facility"), QStringLiteral("dairy_kitchen"), tr("Free dairy food for certain groups of people, defined by local regulations"));
+            addTagDescription(m_description, QStringLiteral("social_facility"), QStringLiteral("dairy_kitchen"), tr("Free dairy food (subject to local regulations)"));
 
             addTagDescription(m_description, QStringLiteral("social_facility:for"), QStringLiteral("abused"), tr("For abused"));
             addTagDescription(m_description, QStringLiteral("social_facility:for"), QStringLiteral("child"), tr("For children"));
@@ -356,7 +356,7 @@ QString Placemark::description() const
             addTagDescription(m_description, QStringLiteral("social_facility:for"), QStringLiteral("senior"), tr("For elder people"));
             addTagDescription(m_description, QStringLiteral("social_facility:for"), QStringLiteral("underprivileged"), tr("For poor or disadvantaged people"));
             addTagDescription(m_description, QStringLiteral("social_facility:for"), QStringLiteral("unemployed"), tr("For unemployed"));
-            addTagDescription(m_description, QStringLiteral("social_facility:for"), QStringLiteral("victim"), tr("For victims of crimes, such as a robbery or hate"));
+            addTagDescription(m_description, QStringLiteral("social_facility:for"), QStringLiteral("victim"), tr("For victims of crimes"));
         }
 
         if (category == GeoDataPlacemark::TransportBicycleParking || category == GeoDataPlacemark::TransportMotorcycleParking) {
