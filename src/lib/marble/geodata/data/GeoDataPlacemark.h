@@ -270,6 +270,8 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
         AmenityDrinkingWater,
         AmenityGraveyard,
         AmenityChargingStation,
+        AmenityCarWash,
+        AmenitySocialFacility,
 
         // OpenStreetMap category Barrier
         BarrierCityWall,
@@ -343,6 +345,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
 
 
         // OpenStreetMap category Tourist
+        TouristArtwork,
         TouristAttraction,
         TouristCastle,
         TouristCinema,

@@ -497,6 +497,8 @@ QString GeoDataPlacemark::categoryName() const
     case AmenityDrinkingWater: return GeoDataPlacemarkPrivate::tr("Drinking Water");
     case AmenityGraveyard: return GeoDataPlacemarkPrivate::tr("Graveyard");
     case AmenityChargingStation: return GeoDataPlacemarkPrivate::tr("Charging Station");
+    case AmenityCarWash: return GeoDataPlacemarkPrivate::tr("Car Wash");
+    case AmenitySocialFacility: return GeoDataPlacemarkPrivate::tr("Social Facility");
     case BarrierCityWall: return GeoDataPlacemarkPrivate::tr("City Wall");
     case BarrierGate: return GeoDataPlacemarkPrivate::tr("Gate");
     case BarrierLiftGate: return GeoDataPlacemarkPrivate::tr("Lift Gate");
@@ -562,6 +564,7 @@ QString GeoDataPlacemark::categoryName() const
     case ManmadeWaterTower: return GeoDataPlacemarkPrivate::tr("Water Tower");
     case ManmadeWindMill: return GeoDataPlacemarkPrivate::tr("Wind Mill");
     case TouristAttraction: return GeoDataPlacemarkPrivate::tr("Tourist Attraction");
+    case TouristArtwork: return GeoDataPlacemarkPrivate::tr("Artwork");
     case TouristCastle: return GeoDataPlacemarkPrivate::tr("Castle");
     case TouristCinema: return GeoDataPlacemarkPrivate::tr("Cinema");
     case TouristInformation: return GeoDataPlacemarkPrivate::tr("Information");

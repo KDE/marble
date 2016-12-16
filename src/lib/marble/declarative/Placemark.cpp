@@ -293,6 +293,8 @@ QString Placemark::description() const
             addTagDescription(m_description, QStringLiteral("reservation"), QStringLiteral("required"), tr("Reservation is required"));
             addTagDescription(m_description, QStringLiteral("reservation"), QStringLiteral("recommended"), tr("Reservation is recommended", "You should make reservation"));
             addTagDescription(m_description, QStringLiteral("reservation"), QStringLiteral("members_only"), tr("Only for members", "Reservation is only possible for members of the organisation running the hut"));
+        } else if (category == GeoDataPlacemark::TouristArtwork) {
+            addTagValue(m_description, QStringLiteral("artist_name"), tr("By %1"));
         } else if (category == GeoDataPlacemark::AmenityChargingStation) {
             addTagValue(m_description, QStringLiteral("capacity"), tr("%1 vehicles"));
             addTagValue(m_description, QStringLiteral("amperage"), tr("%1 ampere"));
@@ -320,6 +322,41 @@ QString Placemark::description() const
             addTagDescription(m_description, QStringLiteral("socket"), QStringLiteral("tesla_standard"), tr("%1 Tesla standard plugs"));
             addTagDescription(m_description, QStringLiteral("socket"), QStringLiteral("tesla_supercharger"), tr("%1 Tesla standard plugs (Supercharger)"));
             addTagDescription(m_description, QStringLiteral("socket"), QStringLiteral("tesla_roadster"), tr("%1 Tesla roadster plugs"));
+        } else if (category == GeoDataPlacemark::AmenityCarWash) {
+            addTagValue(m_description, QStringLiteral("maxwidth"), tr("Maximum vehicle width: %1"));
+            addTagValue(m_description, QStringLiteral("maxheight"), tr("Maximum vehicle height: %1"));
+
+            addTagDescription(m_description, QStringLiteral("self_service"), QStringLiteral("yes"), tr("Self-service"));
+            addTagDescription(m_description, QStringLiteral("self_service"), QStringLiteral("no"), tr("No self-service"));
+            addTagDescription(m_description, QStringLiteral("automated"), QStringLiteral("yes"), tr("Automated"));
+            addTagDescription(m_description, QStringLiteral("automated"), QStringLiteral("no"), tr("Manual"));
+        } else if (category == GeoDataPlacemark::AmenitySocialFacility) {
+            addTagDescription(m_description, QStringLiteral("social_facility"), QStringLiteral("group_home"), tr("Group home"));
+            addTagDescription(m_description, QStringLiteral("social_facility"), QStringLiteral("nursing_home"), tr("Nursing home"));
+            addTagDescription(m_description, QStringLiteral("social_facility"), QStringLiteral("assisted_living"), tr("Assisted living", "Like group home but for more independent people, e.g. who has flats"));
+            addTagDescription(m_description, QStringLiteral("social_facility"), QStringLiteral("day_care"), tr("Nursing services on a daily basis"));
+            addTagDescription(m_description, QStringLiteral("social_facility"), QStringLiteral("shelter"), tr("Shelter"));
+            addTagDescription(m_description, QStringLiteral("social_facility"), QStringLiteral("ambulatory_care"), tr("Ambulatory care"));
+            addTagDescription(m_description, QStringLiteral("social_facility"), QStringLiteral("outreach"), tr("Social welfare services"));
+            addTagDescription(m_description, QStringLiteral("social_facility"), QStringLiteral("workshop"), tr("Employment and workshops for offenders and people with disabilities"));
+            addTagDescription(m_description, QStringLiteral("social_facility"), QStringLiteral("food_bank"), tr("Pre-packaged food for free or below market price"));
+            addTagDescription(m_description, QStringLiteral("social_facility"), QStringLiteral("soup_kitchen"), tr("Prepared meals for free or below market price"));
+            addTagDescription(m_description, QStringLiteral("social_facility"), QStringLiteral("dairy_kitchen"), tr("Free dairy food for certain groups of people, defined by local regulations"));
+
+            addTagDescription(m_description, QStringLiteral("social_facility:for"), QStringLiteral("abused"), tr("For abused"));
+            addTagDescription(m_description, QStringLiteral("social_facility:for"), QStringLiteral("child"), tr("For children"));
+            addTagDescription(m_description, QStringLiteral("social_facility:for"), QStringLiteral("disabled"), tr("For people with physical disabilities"));
+            addTagDescription(m_description, QStringLiteral("social_facility:for"), QStringLiteral("diseased"), tr("For those who suffer of a disease"));
+            addTagDescription(m_description, QStringLiteral("social_facility:for"), QStringLiteral("drug_addicted"), tr("For drug-addicted"));
+            addTagDescription(m_description, QStringLiteral("social_facility:for"), QStringLiteral("homeless"), tr("For homeless"));
+            addTagDescription(m_description, QStringLiteral("social_facility:for"), QStringLiteral("juvenile"), tr("For juvenile"));
+            addTagDescription(m_description, QStringLiteral("social_facility:for"), QStringLiteral("mental_health"), tr("For those with mental/psychological problems"));
+            addTagDescription(m_description, QStringLiteral("social_facility:for"), QStringLiteral("migrant"), tr("For migrants"));
+            addTagDescription(m_description, QStringLiteral("social_facility:for"), QStringLiteral("orphan"), tr("For orphans"));
+            addTagDescription(m_description, QStringLiteral("social_facility:for"), QStringLiteral("senior"), tr("For elder people"));
+            addTagDescription(m_description, QStringLiteral("social_facility:for"), QStringLiteral("underprivileged"), tr("For poor or disadvantaged people"));
+            addTagDescription(m_description, QStringLiteral("social_facility:for"), QStringLiteral("unemployed"), tr("For unemployed"));
+            addTagDescription(m_description, QStringLiteral("social_facility:for"), QStringLiteral("victim"), tr("For victims of crimes, such as a robbery or hate"));
         }
 
         if (category == GeoDataPlacemark::TransportBicycleParking || category == GeoDataPlacemark::TransportMotorcycleParking) {
