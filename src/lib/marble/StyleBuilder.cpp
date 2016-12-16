@@ -1185,7 +1185,7 @@ void StyleBuilder::Private::initializeMinimumZoomLevels()
     s_defaultMinZoomLevels[GeoDataPlacemark::AmenityShelter]= 17;
     s_defaultMinZoomLevels[GeoDataPlacemark::AmenityChargingStation] = 17;
     s_defaultMinZoomLevels[GeoDataPlacemark::AmenityCarWash] = 17;
-    s_defaultMinZoomLevels[GeoDataPlacemark::AmenitySocialFacility] = 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AmenitySocialFacility] = 17;
 
     s_defaultMinZoomLevels[GeoDataPlacemark::BarrierCityWall] = 15;
     s_defaultMinZoomLevels[GeoDataPlacemark::BarrierGate]     = 17;
@@ -1351,7 +1351,7 @@ void StyleBuilder::Private::initializeMinimumZoomLevels()
     s_defaultMinZoomLevels[GeoDataPlacemark::TouristAlpineHut]  = 13;
     s_defaultMinZoomLevels[GeoDataPlacemark::TouristWildernessHut] = 13;
     s_defaultMinZoomLevels[GeoDataPlacemark::TouristAttraction]  = 17;
-    s_defaultMinZoomLevels[GeoDataPlacemark::TouristArtwork] = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::TouristArtwork] = 17;
     s_defaultMinZoomLevels[GeoDataPlacemark::TouristCastle]  = 15;
     s_defaultMinZoomLevels[GeoDataPlacemark::TouristCinema]  = 16;
     s_defaultMinZoomLevels[GeoDataPlacemark::TouristMuseum]  = 16;
@@ -1360,7 +1360,7 @@ void StyleBuilder::Private::initializeMinimumZoomLevels()
     s_defaultMinZoomLevels[GeoDataPlacemark::TouristThemePark]  = 15;
     s_defaultMinZoomLevels[GeoDataPlacemark::TouristViewPoint]  = 15;
     s_defaultMinZoomLevels[GeoDataPlacemark::TouristZoo]  = 15;
-    s_defaultMinZoomLevels[GeoDataPlacemark::TouristMonument]  = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::TouristMonument]  = 16;
     s_defaultMinZoomLevels[GeoDataPlacemark::TouristInformation]  = 17;
     s_defaultMinZoomLevels[GeoDataPlacemark::TransportAerodrome] = 9;
     s_defaultMinZoomLevels[GeoDataPlacemark::TransportAirportApron] = 15;
