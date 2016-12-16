@@ -1631,7 +1631,7 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
                 cacheSpecialStyle = false;
             }
 
-        } else if (visualCategory >= GeoDataPlacemark::WaterwayCanal && visualCategory <= GeoDataPlacemark::WaterwayRiver) {
+        } else if (visualCategory >= GeoDataPlacemark::WaterwayCanal && visualCategory <= GeoDataPlacemark::WaterwayStream) {
 
             adjustStyle = true;
 
@@ -1777,7 +1777,7 @@ QStringList StyleBuilder::renderOrder() const
         paintLayerOrder << Private::createPaintLayerItem("LineString", GeoDataPlacemark::Landmass);
 
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::NaturalWater);
-        for (int i = GeoDataPlacemark::WaterwayCanal; i <= GeoDataPlacemark::WaterwayRiver; ++i) {
+        for (int i = GeoDataPlacemark::WaterwayCanal; i <= GeoDataPlacemark::WaterwayStream; ++i) {
             paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataPlacemark::GeoDataVisualCategory)i, "outline");
             paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataPlacemark::GeoDataVisualCategory)i, "inline");
             paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataPlacemark::GeoDataVisualCategory)i, "label");
