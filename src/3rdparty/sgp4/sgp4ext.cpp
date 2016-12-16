@@ -187,37 +187,6 @@ double  angle
 
 /* -----------------------------------------------------------------------------
 *
-*                           function asinh
-*
-*  this function evaluates the inverse hyperbolic sine function.
-*
-*  author        : david vallado                  719-573-2600    1 mar 2001
-*
-*  inputs          description                    range / units
-*    xval        - angle value                                  any real
-*
-*  outputs       :
-*    arcsinh     - result                                       any real
-*
-*  locals        :
-*    none.
-*
-*  coupling      :
-*    none.
-*
-* --------------------------------------------------------------------------- */
-
-double  asinh
-        (
-          double xval
-        )
-   {
-     return log( xval + sqrt( xval*xval + 1.0 ) );
-   }  // end asinh
-
-
-/* -----------------------------------------------------------------------------
-*
 *                           function newtonnu
 *
 *  this function solves keplers equation when the true anomaly is known.

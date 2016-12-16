@@ -62,11 +62,6 @@ void    newtonnu
           double& e0, double& m
         );
 
-double  asinh
-        (
-          double xval
-        );
-
 void    rv2coe
         (
           double r[3], double v[3], double mu,
