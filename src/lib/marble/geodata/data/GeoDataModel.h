@@ -40,7 +40,7 @@ public:
     bool operator==( const GeoDataModel &other ) const;
     bool operator!=( const GeoDataModel &other ) const;
 
-    ~GeoDataModel();
+    ~GeoDataModel() override;
 
     const GeoDataLink& link() const;
     GeoDataLink& link();

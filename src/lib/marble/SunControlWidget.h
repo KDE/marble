@@ -32,7 +32,7 @@ class MARBLE_EXPORT SunControlWidget : public QDialog
 	
  public:
     explicit SunControlWidget( MarbleWidget *marbleWidget, QWidget* parent = 0 );
-    virtual ~SunControlWidget();
+    ~SunControlWidget() override;
     void setSunShading( bool );
 
  private Q_SLOTS:
@@ -46,7 +46,7 @@ class MARBLE_EXPORT SunControlWidget : public QDialog
  protected:
     Q_DISABLE_COPY( SunControlWidget )
 
-    void showEvent(QShowEvent* event);
+    void showEvent(QShowEvent* event) override;
 
     Ui::SunControlWidget *m_uiWidget;
     MarbleWidget         *const m_marbleWidget;

@@ -40,7 +40,7 @@ public:
      * @param parent the QObject parent of the Scene
      */
     explicit GeoGraphicsScene( QObject *parent = 0 );
-    ~GeoGraphicsScene();
+    ~GeoGraphicsScene() override;
 
     /**
      * @brief Add an item to the GeoGraphicsScene

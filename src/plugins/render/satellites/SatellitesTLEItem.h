@@ -35,7 +35,7 @@ public:
                        elsetrec satrec,
                        const MarbleClock *clock );
 
-    void update();
+    void update() override;
 
 private:
     double m_earthSemiMajorAxis; // in km

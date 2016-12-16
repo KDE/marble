@@ -39,7 +39,7 @@ public:
      */
     explicit ReverseGeocodingRunnerManager( const MarbleModel *marbleModel, QObject *parent = 0 );
 
-    ~ReverseGeocodingRunnerManager();
+    ~ReverseGeocodingRunnerManager() override;
 
     /**
      * Find the address and other meta information for a given geoposition.

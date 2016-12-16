@@ -45,19 +45,19 @@ public:
     explicit RoutingLayer( MarbleWidget *widget, QWidget *parent = 0 );
 
     /** Destructor */
-    ~RoutingLayer();
+    ~RoutingLayer() override;
 
     /** Reimplemented from LayerInterface. We'll hover above the surface */
-    QStringList renderPosition() const;
+    QStringList renderPosition() const override;
 
     /** Reimplemented from LayerInterface. */
-    qreal zValue() const;
+    qreal zValue() const override;
 
     /** Reimplemented from LayerInterface. Paints route items and placemarks */
     bool render( GeoPainter *painter, ViewportParams *viewport,
-                 const QString &renderPos = "NONE", GeoSceneLayer *layer = 0 );
+                 const QString &renderPos = "NONE", GeoSceneLayer *layer = 0 ) override;
 
-    RenderState renderState() const;
+    RenderState renderState() const override;
 
     /**
       * Set the proxy model another QAbstractItemView uses that should share
@@ -88,7 +88,7 @@ public:
      */
     bool isInteractive() const;
 
-    QString runtimeTrace() const;
+    QString runtimeTrace() const override;
 
 Q_SIGNALS:
     /**
@@ -101,7 +101,7 @@ Q_SIGNALS:
 
 public:
     /** Overriding QWidget, used to make the layer interactive */
-    bool eventFilter( QObject *obj, QEvent *event );
+    bool eventFilter( QObject *obj, QEvent *event ) override;
 
 private Q_SLOTS:
     void removeViaPoint();

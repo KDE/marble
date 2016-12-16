@@ -45,10 +45,10 @@ public:
     bool operator==( const GeoDataLink &other ) const;
     bool operator!=( const GeoDataLink &other ) const;
 
-    ~GeoDataLink();
+    ~GeoDataLink() override;
 
     /** Provides type information for downcasting a GeoNode */
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 
     QString href() const;
 

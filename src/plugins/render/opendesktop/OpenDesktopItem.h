@@ -28,19 +28,19 @@ class OpenDesktopItem : public AbstractDataPluginItem
     public:
         explicit OpenDesktopItem(QObject *parent);
 
-        ~OpenDesktopItem();
+        ~OpenDesktopItem() override;
 
-        bool initialized() const;
+        bool initialized() const override;
 
-        void addDownloadedFile( const QString& url, const QString& type );
+        void addDownloadedFile( const QString& url, const QString& type ) override;
         
-        void paint( QPainter *painter );
+        void paint( QPainter *painter ) override;
 
-        bool operator<( const AbstractDataPluginItem *other ) const;
+        bool operator<( const AbstractDataPluginItem *other ) const override;
 
         void updateToolTip();
         
-        QAction *action();
+        QAction *action() override;
         
         QUrl profileUrl() const;
 

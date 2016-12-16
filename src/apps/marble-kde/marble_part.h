@@ -52,7 +52,7 @@ class MarblePart: public KParts::ReadOnlyPart
 
   public:
     MarblePart( QWidget *parentWidget, QObject *parent, const QVariantList& );
-    virtual ~MarblePart();
+    ~MarblePart() override;
 
     ControlView *controlView() const;
 
@@ -66,8 +66,8 @@ class MarblePart: public KParts::ReadOnlyPart
     void initializeCustomTimezone();
 
   public Q_SLOTS:
-    bool  openUrl( const QUrl &url );
-    bool  openFile();
+    bool  openUrl( const QUrl &url ) override;
+    bool  openFile() override;
     void  showPosition( const QString& position);
     void  showZoomLevel( const int );
     void  showDateTime();

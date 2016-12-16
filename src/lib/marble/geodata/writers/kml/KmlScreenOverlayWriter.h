@@ -23,7 +23,7 @@ class KmlScreenOverlayWriter : public KmlOverlayTagWriter
 {
 public:
     KmlScreenOverlayWriter();
-    bool writeMid( const GeoNode *node, GeoWriter& writer ) const;
+    bool writeMid( const GeoNode *node, GeoWriter& writer ) const override;
 
 private:
     static void writeVec2( const QString &element, const GeoDataVec2 &vec2, GeoWriter& writer );

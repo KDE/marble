@@ -38,7 +38,7 @@ class MARBLE_EXPORT TinyWebBrowser : public QWebView
 
  public:
     explicit TinyWebBrowser( QWidget* parent = 0 );
-    ~TinyWebBrowser();
+    ~TinyWebBrowser() override;
 
  public Q_SLOTS:
     void setWikipediaPath( const QString& relativeUrl );
@@ -48,7 +48,7 @@ class MARBLE_EXPORT TinyWebBrowser : public QWebView
     void statusMessage( const QString& );
 
  protected:
-    QWebView *createWindow( QWebPage::WebWindowType type );
+    QWebView *createWindow( QWebPage::WebWindowType type ) override;
 
  private Q_SLOTS:
     void openExternalLink( const QUrl& );

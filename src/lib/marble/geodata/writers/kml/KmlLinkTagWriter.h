@@ -20,7 +20,7 @@ namespace Marble
 class KmlLinkTagWriter : public GeoTagWriter
 {
 public:
-    virtual bool write( const GeoNode *node, GeoWriter& writer ) const;
+    bool write( const GeoNode *node, GeoWriter& writer ) const override;
 
     static QString refreshModeToString( GeoDataLink::RefreshMode refreshMode) ;
 

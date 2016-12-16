@@ -36,17 +36,17 @@ class GeometryLayer : public QObject, public LayerInterface
     Q_OBJECT
 public:
     explicit GeometryLayer(const QAbstractItemModel *model, const StyleBuilder *styleBuilder);
-    ~GeometryLayer();
+    ~GeometryLayer() override;
 
-    virtual QStringList renderPosition() const;
+    QStringList renderPosition() const override;
 
-    virtual bool render( GeoPainter *painter, ViewportParams *viewport,
+    bool render( GeoPainter *painter, ViewportParams *viewport,
                          const QString& renderPos = QLatin1String("NONE"),
-                         GeoSceneLayer * layer = 0 );
+                         GeoSceneLayer * layer = 0 ) override;
 
-    RenderState renderState() const;
+    RenderState renderState() const override;
 
-    virtual QString runtimeTrace() const;
+    QString runtimeTrace() const override;
 
     QVector<const GeoDataFeature*> whichFeatureAt( const QPoint& curpos, const ViewportParams * viewport );
 

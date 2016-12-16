@@ -34,35 +34,35 @@ class AzimuthalProjection : public AbstractProjection
 
     AzimuthalProjection();
 
-    virtual ~AzimuthalProjection();
+    ~AzimuthalProjection() override;
 
-    virtual bool repeatableX() const { return false; }
-    virtual qreal  maxValidLat() const;
-    virtual qreal  minValidLat() const;
+    bool repeatableX() const override { return false; }
+    qreal  maxValidLat() const override;
+    qreal  minValidLat() const override;
 
-    virtual bool traversablePoles()  const { return true; }
-    virtual bool traversableDateLine()  const { return true; }
+    bool traversablePoles()  const override { return true; }
+    bool traversableDateLine()  const override { return true; }
 
-    virtual SurfaceType surfaceType() const { return Azimuthal; }
+    SurfaceType surfaceType() const override { return Azimuthal; }
 
-    virtual PreservationType preservationType() const { return NoPreservation; }
+    PreservationType preservationType() const override { return NoPreservation; }
 
-    virtual bool isClippedToSphere() const;
+    bool isClippedToSphere() const override;
 
-    virtual qreal clippingRadius() const;
+    qreal clippingRadius() const override;
 
-    bool  mapCoversViewport( const ViewportParams *viewport ) const;
+    bool  mapCoversViewport( const ViewportParams *viewport ) const override;
 
-    virtual bool screenCoordinates( const GeoDataLineString &lineString,
+    bool screenCoordinates( const GeoDataLineString &lineString,
                             const ViewportParams *viewport,
-                            QVector<QPolygonF*> &polygons ) const;
+                            QVector<QPolygonF*> &polygons ) const override;
 
     using AbstractProjection::screenCoordinates;
 
-    virtual QPainterPath mapShape( const ViewportParams *viewport ) const;
+    QPainterPath mapShape( const ViewportParams *viewport ) const override;
 
-    virtual GeoDataLatLonAltBox latLonAltBox( const QRect& screenRect,
-                                      const ViewportParams *viewport ) const;
+    GeoDataLatLonAltBox latLonAltBox( const QRect& screenRect,
+                                      const ViewportParams *viewport ) const override;
 
  protected:
     explicit AzimuthalProjection( AzimuthalProjectionPrivate* dd );

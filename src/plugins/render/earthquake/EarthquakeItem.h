@@ -27,15 +27,15 @@ class EarthquakeItem : public AbstractDataPluginItem
 public:
     explicit EarthquakeItem( QObject *parent );
 
-    ~EarthquakeItem();
+    ~EarthquakeItem() override;
 
     // Returns true if the item is paintable
-    bool initialized() const;
+    bool initialized() const override;
 
     // Here the item gets painted
-    void paint( QPainter *painter );
+    void paint( QPainter *painter ) override;
 
-    bool operator<( const AbstractDataPluginItem *other ) const;
+    bool operator<( const AbstractDataPluginItem *other ) const override;
 
     // Magnitude whose value we use to determine circle's diameter
     double magnitude() const;

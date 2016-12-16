@@ -28,7 +28,7 @@ class MergingPolygonNodesAnimation : public QObject
 
 public:
     explicit MergingPolygonNodesAnimation( AreaAnnotation *polygon );
-    ~MergingPolygonNodesAnimation();
+    ~MergingPolygonNodesAnimation() override;
 
     enum NodesBoundary {
         InnerBoundary,

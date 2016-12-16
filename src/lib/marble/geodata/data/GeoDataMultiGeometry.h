@@ -36,9 +36,9 @@ class GEODATA_EXPORT GeoDataMultiGeometry : public GeoDataGeometry
     GeoDataMultiGeometry();
     explicit GeoDataMultiGeometry( const GeoDataGeometry& other );
 
-    virtual ~GeoDataMultiGeometry();
+    ~GeoDataMultiGeometry() override;
 
-    virtual const GeoDataLatLonAltBox& latLonAltBox() const;
+    const GeoDataLatLonAltBox& latLonAltBox() const override;
 
     int size() const;
     GeoDataGeometry& at( int pos );
@@ -85,9 +85,9 @@ class GEODATA_EXPORT GeoDataMultiGeometry : public GeoDataGeometry
                                                   QVector<GeoDataGeometry*>::Iterator end );
 
     // Serialize the Placemark to @p stream
-    virtual void pack( QDataStream& stream ) const;
+    void pack( QDataStream& stream ) const override;
     // Unserialize the Placemark from @p stream
-    virtual void unpack( QDataStream& stream );
+    void unpack( QDataStream& stream ) override;
 
  private:
     Q_DECLARE_PRIVATE(GeoDataMultiGeometry)

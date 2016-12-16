@@ -37,7 +37,7 @@ class TileRunner : public QObject, public QRunnable
 
 public:
     TileRunner( TileLoader *loader, const GeoSceneVectorTileDataset *texture, const TileId &id );
-    void run();
+    void run() override;
 
 Q_SIGNALS:
     void documentLoaded( const TileId &id, GeoDataDocument *document );

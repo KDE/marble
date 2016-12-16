@@ -32,10 +32,10 @@ public:
     bool operator==( const GeoDataOrientation &other ) const;
     bool operator!=( const GeoDataOrientation &other ) const;
 
-    ~GeoDataOrientation();
+    ~GeoDataOrientation() override;
 
     /** Provides type information for downcasting a GeoNode */
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 
     /** Returns by how much degrees the camera has been rotated about the normal.
      *  Default value= 0. Range: 0-360 degrees

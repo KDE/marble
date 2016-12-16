@@ -27,23 +27,23 @@ class GosmorePlugin : public ReverseGeocodingRunnerPlugin
 public:
     explicit GosmorePlugin( QObject *parent = 0 );
 
-    QString name() const;
+    QString name() const override;
 
-    QString guiString() const;
+    QString guiString() const override;
 
-    QString nameId() const;
+    QString nameId() const override;
 
-    QString version() const;
+    QString version() const override;
 
-    QString description() const;
+    QString description() const override;
 
-    QString copyrightYears() const;
+    QString copyrightYears() const override;
 
     QVector<PluginAuthor> pluginAuthors() const override;
 
-    virtual ReverseGeocodingRunner* newRunner() const;
+    ReverseGeocodingRunner* newRunner() const override;
 
-    virtual bool canWork() const;
+    bool canWork() const override;
 };
 
 }

@@ -34,7 +34,7 @@ class MARBLE_EXPORT ScreenGraphicsItem : public MarbleGraphicsItem
 
     explicit ScreenGraphicsItem( MarbleGraphicsItem *parent = 0 );
 
-    virtual ~ScreenGraphicsItem();
+    ~ScreenGraphicsItem() override;
 
     /**
      * @brief Set the position of the ScreenGraphicsItem
@@ -94,7 +94,7 @@ class MARBLE_EXPORT ScreenGraphicsItem : public MarbleGraphicsItem
  protected:
     explicit ScreenGraphicsItem(ScreenGraphicsItemPrivate *dd);
 
-    virtual bool eventFilter( QObject *, QEvent * );
+    bool eventFilter( QObject *, QEvent * ) override;
 
  private:
     Q_DECLARE_PRIVATE(ScreenGraphicsItem)

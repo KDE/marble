@@ -39,7 +39,7 @@ public:
     explicit RoutingRunnerPlugin( QObject* parent = 0 );
 
     /** Destructor */
-    virtual ~RoutingRunnerPlugin();
+    ~RoutingRunnerPlugin() override;
 
     /**
      * @brief Returns the string that should appear in the user interface.
@@ -69,7 +69,7 @@ public:
 
     // Overridden methods with default implementations
 
-    virtual QIcon icon() const;
+    QIcon icon() const override;
 
     /** A status message showing whether the plugin will be able to deliver results */
     QString statusMessage() const;

@@ -37,35 +37,35 @@ class SatellitesPlugin : public RenderPlugin,
 
 public:
     explicit SatellitesPlugin( const MarbleModel *marbleModel = 0 );
-    virtual ~SatellitesPlugin();
+    ~SatellitesPlugin() override;
     
-    QStringList backendTypes() const;
-    QString renderPolicy() const;
-    QStringList renderPosition() const;
-    QString name() const;
-    QString nameId() const;
-    QString guiString() const;
-    QString version() const;
-    QString description() const;
-    QString copyrightYears() const;
+    QStringList backendTypes() const override;
+    QString renderPolicy() const override;
+    QStringList renderPosition() const override;
+    QString name() const override;
+    QString nameId() const override;
+    QString guiString() const override;
+    QString version() const override;
+    QString description() const override;
+    QString copyrightYears() const override;
     QVector<PluginAuthor> pluginAuthors() const override;
-    QString aboutDataText() const;
-    QIcon icon() const;
-    RenderType renderType() const;
-    void initialize();
-    bool isInitialized() const;
+    QString aboutDataText() const override;
+    QIcon icon() const override;
+    RenderType renderType() const override;
+    void initialize() override;
+    bool isInitialized() const override;
 
     bool render( GeoPainter *painter,
                  ViewportParams *viewport,
                  const QString &renderPos,
-                 GeoSceneLayer *layer );
+                 GeoSceneLayer *layer ) override;
 
-    bool eventFilter( QObject *object, QEvent *event );
+    bool eventFilter( QObject *object, QEvent *event ) override;
 
-    QHash<QString, QVariant> settings() const;
-    void setSettings( const QHash<QString, QVariant> &settings );
+    QHash<QString, QVariant> settings() const override;
+    void setSettings( const QHash<QString, QVariant> &settings ) override;
 
-    SatellitesConfigDialog *configDialog();
+    SatellitesConfigDialog *configDialog() override;
 
 private Q_SLOTS:
     void activate();

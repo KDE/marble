@@ -41,28 +41,28 @@ class MercatorProjection : public CylindricalProjection
      */
     MercatorProjection();
 
-    virtual ~MercatorProjection();
+    ~MercatorProjection() override;
 
     /**
      * @brief Returns the user-visible name of the projection.
      */
-    QString name() const;
+    QString name() const override;
 
     /**
      * @brief Returns a short user description of the projection
      * that can be used in tooltips or dialogs.
      */
-    QString description() const;
+    QString description() const override;
 
     /**
      * @brief Returns an icon for the projection.
      */
-    QIcon icon() const;
+    QIcon icon() const override;
 
-    virtual qreal  maxValidLat() const;
-    virtual qreal  minValidLat() const;
+    qreal  maxValidLat() const override;
+    qreal  minValidLat() const override;
 
-    virtual PreservationType preservationType() const { return Conformal; }
+    PreservationType preservationType() const override { return Conformal; }
 
     /**
      * @brief Get the screen coordinates corresponding to geographical coordinates in the map.
@@ -75,13 +75,13 @@ class MercatorProjection : public CylindricalProjection
      */
     bool screenCoordinates( const GeoDataCoordinates &coordinates, 
                             const ViewportParams *params,
-                            qreal &x, qreal &y, bool &globeHidesPoint ) const;
+                            qreal &x, qreal &y, bool &globeHidesPoint ) const override;
 
     bool screenCoordinates( const GeoDataCoordinates &coordinates,
                             const ViewportParams * viewport,
                             qreal *x, qreal &y, int &pointRepeatNum,
                             const QSizeF& size,
-                            bool &globeHidesPoint ) const;
+                            bool &globeHidesPoint ) const override;
 
     using CylindricalProjection::screenCoordinates;
 
@@ -101,12 +101,12 @@ class MercatorProjection : public CylindricalProjection
     bool geoCoordinates( const int x, const int y,
                          const ViewportParams *params,
                          qreal& lon, qreal& lat,
-                         GeoDataCoordinates::Unit = GeoDataCoordinates::Degree ) const;
+                         GeoDataCoordinates::Unit = GeoDataCoordinates::Degree ) const override;
 
     GeoDataLatLonAltBox latLonAltBox( const QRect &screenRect,
-                                      const ViewportParams *viewport ) const;
+                                      const ViewportParams *viewport ) const override;
 
-    bool  mapCoversViewport( const ViewportParams *viewport ) const;
+    bool  mapCoversViewport( const ViewportParams *viewport ) const override;
 
  private:
     mutable qreal m_lastCenterLat;

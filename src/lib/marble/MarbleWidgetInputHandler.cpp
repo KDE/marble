@@ -39,11 +39,11 @@ class MarbleWidgetInputHandlerPrivate
                 m_rubberBand.hide();
             }
 
-            void show() { m_rubberBand.show(); }
-            void hide() { m_rubberBand.hide(); }
-            bool isVisible() const { return m_rubberBand.isVisible(); }
-            const QRect &geometry() const { return m_rubberBand.geometry(); }
-            void setGeometry(const QRect &geometry) { m_rubberBand.setGeometry(geometry); }
+            void show() override { m_rubberBand.show(); }
+            void hide() override { m_rubberBand.hide(); }
+            bool isVisible() const override { return m_rubberBand.isVisible(); }
+            const QRect &geometry() const override { return m_rubberBand.geometry(); }
+            void setGeometry(const QRect &geometry) override { m_rubberBand.setGeometry(geometry); }
 
         private:
             QRubberBand m_rubberBand;

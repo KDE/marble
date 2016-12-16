@@ -19,7 +19,7 @@ namespace Marble {
 class KmlDocument : public GeoDataDocument
 {
 public:
-    ~KmlDocument();
+    ~KmlDocument() override;
 
     /**
      * @brief Temporary files to delete at destruction

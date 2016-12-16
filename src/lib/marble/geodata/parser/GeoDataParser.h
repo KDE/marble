@@ -41,13 +41,13 @@ class GEODATA_EXPORT GeoDataParser : public GeoParser
 {
 public:
     explicit GeoDataParser(GeoDataSourceType source);
-    virtual ~GeoDataParser();
+    ~GeoDataParser() override;
 
 private:
-    virtual bool isValidElement(const QString& tagName) const;
-    virtual bool isValidRootElement();
+    bool isValidElement(const QString& tagName) const override;
+    bool isValidRootElement() override;
 
-    virtual GeoDocument* createDocument() const;
+    GeoDocument* createDocument() const override;
 };
 
 // Global helper function for the tag handlers

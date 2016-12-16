@@ -25,7 +25,7 @@ class GeoDataMultiTrackPrivate : public GeoDataGeometryPrivate
     {
     }
 
-    ~GeoDataMultiTrackPrivate()
+    ~GeoDataMultiTrackPrivate() override
     {
         qDeleteAll(m_vector);
     }
@@ -44,19 +44,19 @@ class GeoDataMultiTrackPrivate : public GeoDataGeometryPrivate
         return *this;
     }
 
-    virtual GeoDataGeometryPrivate* copy()
+    GeoDataGeometryPrivate* copy() override
     { 
          GeoDataMultiTrackPrivate* copy = new GeoDataMultiTrackPrivate;
         *copy = *this;
         return copy;
     }
 
-    virtual const char* nodeType() const
+    const char* nodeType() const override
     {
         return GeoDataTypes::GeoDataMultiTrackType;
     }
 
-    virtual EnumGeometryId geometryId() const
+    EnumGeometryId geometryId() const override
     {
         return GeoDataMultiTrackId;
     }

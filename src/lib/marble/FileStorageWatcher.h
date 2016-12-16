@@ -27,7 +27,7 @@ class FileStorageWatcherThread : public QObject
     public:
 	explicit FileStorageWatcherThread( const QString &dataDirectory, QObject * parent = 0 );
 	
-	~FileStorageWatcherThread();
+	~FileStorageWatcherThread() override;
     
 	quint64 cacheLimit();
 	
@@ -105,7 +105,7 @@ class FileStorageWatcher : public QThread
 	 */
 	explicit FileStorageWatcher( const QString &dataDirectory = QString(), QObject * parent = 0 );
 	
-	~FileStorageWatcher();
+	~FileStorageWatcher() override;
 	
 	/**
 	 * Returns the limit of the cache in bytes.
@@ -139,7 +139,7 @@ class FileStorageWatcher : public QThread
 	 * The function being called at starting Thread.
 	 * The thread is started by QThread::start().
 	 */
-	void run();
+	void run() override;
 	
     private:
 	Q_DISABLE_COPY( FileStorageWatcher )

@@ -38,7 +38,7 @@ public:
      */
     explicit TrackerPluginModel( GeoDataTreeModel *treeModel );
 
-    virtual ~TrackerPluginModel();
+    ~TrackerPluginModel() override;
 
     void enable( bool enabled );
 

@@ -42,14 +42,14 @@ class PhotoPluginModel : public AbstractDataPluginModel
      * the @p box surrounding the view and the @p number of files to show.
      **/
     void getAdditionalItems( const GeoDataLatLonAltBox& box,
-                             qint32 number = 10 );
+                             qint32 number = 10 ) override;
        
     /**
      * The reimplementation has to parse the @p file and should generate items. This items
      * have to be scheduled to downloadItemData or could be directly added to the list,
      * depending on if they have to download information to be shown.
      **/
-    void parseFile( const QByteArray& file );
+    void parseFile( const QByteArray& file ) override;
 
  private:
     MarbleWidget *m_marbleWidget;

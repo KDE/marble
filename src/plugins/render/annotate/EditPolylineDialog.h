@@ -28,7 +28,7 @@ public:
     EditPolylineDialog( GeoDataPlacemark *placemark,
                         const QHash<qint64, OsmPlacemarkData> *relations = 0,
                         QWidget *parent = 0 );
-    ~EditPolylineDialog();
+    ~EditPolylineDialog() override;
 
 public Q_SLOTS:
     void handleAddingNode( const GeoDataCoordinates &node );

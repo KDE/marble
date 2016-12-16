@@ -28,11 +28,11 @@ class GeoDataModelPrivate : public GeoDataGeometryPrivate
 public:
     GeoDataModelPrivate();
 
-    const char *nodeType() const { return GeoDataTypes::GeoDataModelType; }
+    const char *nodeType() const override { return GeoDataTypes::GeoDataModelType; }
 
-    GeoDataGeometryPrivate *copy() { return new GeoDataModelPrivate( *this ); }
+    GeoDataGeometryPrivate *copy() override { return new GeoDataModelPrivate( *this ); }
 
-    EnumGeometryId geometryId() const { return GeoDataModelId; }
+    EnumGeometryId geometryId() const override { return GeoDataModelId; }
 
     GeoDataCoordinates m_coordinates;
 

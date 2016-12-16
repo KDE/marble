@@ -25,10 +25,10 @@ class MonavRunner : public RoutingRunner
 public:
     explicit MonavRunner( const MonavPlugin* plugin, QObject *parent = 0 );
 
-    ~MonavRunner();
+    ~MonavRunner() override;
 
     // Overriding MarbleAbstractRunner
-    virtual void retrieveRoute( const RouteRequest *request );
+    void retrieveRoute( const RouteRequest *request ) override;
 
 #if 0
     // Overriding MarbleAbstractRunner

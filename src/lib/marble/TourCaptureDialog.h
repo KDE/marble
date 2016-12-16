@@ -31,7 +31,7 @@ class MARBLE_EXPORT TourCaptureDialog : public QDialog
 
 public:
     explicit TourCaptureDialog(MarbleWidget *widget, QWidget *parent = 0);
-    ~TourCaptureDialog();
+    ~TourCaptureDialog() override;
 
 public Q_SLOTS:
     void startRecording();

@@ -86,10 +86,10 @@ public:
     {
     }
 
-    virtual QStringList renderPosition() const { return QStringList() << "USER_TOOLS"; }
+    QStringList renderPosition() const override { return QStringList() << "USER_TOOLS"; }
 
-    virtual bool render( GeoPainter *painter, ViewportParams *viewport,
-                         const QString &renderPos, GeoSceneLayer *layer )
+    bool render( GeoPainter *painter, ViewportParams *viewport,
+                         const QString &renderPos, GeoSceneLayer *layer ) override
     {
         Q_UNUSED( viewport );
         Q_UNUSED( renderPos );
@@ -100,11 +100,11 @@ public:
         return true;
     }
 
-    virtual qreal zValue() const { return 1.0e6; }
+    qreal zValue() const override { return 1.0e6; }
 
-    RenderState renderState() const { return RenderState(QStringLiteral("Custom Map Paint")); }
+    RenderState renderState() const override { return RenderState(QStringLiteral("Custom Map Paint")); }
 
-    virtual QString runtimeTrace() const { return QStringLiteral("CustomPaint"); }
+    QString runtimeTrace() const override { return QStringLiteral("CustomPaint"); }
 
 private:
     MarbleMap *const m_map;

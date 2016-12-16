@@ -34,12 +34,12 @@ public:
     bool operator==( const GeoDataNetworkLink &other ) const;
     bool operator!=( const GeoDataNetworkLink &other ) const;
 
-    ~GeoDataNetworkLink();
+    ~GeoDataNetworkLink() override;
 
     GeoDataFeature * clone() const override;
 
     /** Provides type information for downcasting a GeoNode */
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 
     bool refreshVisibility() const;
 

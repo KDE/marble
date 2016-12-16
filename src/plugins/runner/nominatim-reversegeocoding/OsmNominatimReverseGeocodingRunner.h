@@ -33,10 +33,10 @@ class OsmNominatimRunner : public ReverseGeocodingRunner
 public:
     explicit OsmNominatimRunner(QObject *parent = 0);
 
-    ~OsmNominatimRunner();
+    ~OsmNominatimRunner() override;
 
     // Overriding MarbleAbstractRunner
-    virtual void reverseGeocoding( const GeoDataCoordinates &coordinates );
+    void reverseGeocoding( const GeoDataCoordinates &coordinates ) override;
 
 private Q_SLOTS:
     // Forward a result to the search or reverse geocoding handler

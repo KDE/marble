@@ -30,9 +30,9 @@ class FileLoader : public QThread
                    const QString& property, const GeoDataStyle::Ptr &style, DocumentRole role, int renderOrder );
         FileLoader( QObject* parent, const PluginManager *pluginManager,
                     const QString& contents, const QString& name, DocumentRole role );
-        virtual ~FileLoader();
+        ~FileLoader() override;
 
-        void run();
+        void run() override;
         bool recenter() const;
         QString path() const;
         GeoDataDocument *document();

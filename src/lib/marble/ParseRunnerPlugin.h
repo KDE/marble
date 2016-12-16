@@ -33,7 +33,7 @@ public:
     explicit ParseRunnerPlugin( QObject* parent = 0 );
 
     /** Destructor */
-    virtual ~ParseRunnerPlugin();
+    ~ParseRunnerPlugin() override;
 
     /**
       * Returns a short description of the supported file format.
@@ -56,7 +56,7 @@ public:
 
     // Overridden methods with default implementations
 
-    virtual QIcon icon() const;
+    QIcon icon() const override;
 
 private:
     class Private;

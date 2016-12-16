@@ -49,7 +49,7 @@ public:
 
     explicit RenderPluginModel( QObject *parent = 0 );
 
-    ~RenderPluginModel();
+    ~RenderPluginModel() override;
 
     /**
      * @brief Set the RenderPlugins the model should manage.

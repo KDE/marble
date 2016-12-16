@@ -33,13 +33,13 @@ class FoursquareItem : public AbstractDataPluginItem
 public:
     explicit FoursquareItem( QObject *parent=0 );
  
-    ~FoursquareItem();
+    ~FoursquareItem() override;
  
-    bool initialized() const;
+    bool initialized() const override;
  
-    void paint( QPainter* painter );
+    void paint( QPainter* painter ) override;
  
-    bool operator<( const AbstractDataPluginItem *other ) const;
+    bool operator<( const AbstractDataPluginItem *other ) const override;
  
     QString name() const;
     

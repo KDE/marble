@@ -64,7 +64,7 @@ class GEODATA_EXPORT GeoDataColorStyle : public GeoDataObject
 {
   public:
     /// Provides type information for downcasting a GeoData
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 
     /**
      * @brief  Set a new color
@@ -106,17 +106,17 @@ class GEODATA_EXPORT GeoDataColorStyle : public GeoDataObject
      * @brief Serialize the style to a stream
      * @param  stream  the stream
      */
-    virtual void pack( QDataStream& stream ) const;
+    void pack( QDataStream& stream ) const override;
     /**
      * @brief  Unserialize the style from a stream
      * @param  stream  the stream
      */
-    virtual void unpack( QDataStream& stream );
+    void unpack( QDataStream& stream ) override;
 
     GeoDataColorStyle();
     GeoDataColorStyle( const GeoDataColorStyle& other );
 
-    virtual ~GeoDataColorStyle();
+    ~GeoDataColorStyle() override;
 
   private:
     GeoDataColorStylePrivate * const d;

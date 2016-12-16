@@ -21,9 +21,9 @@ class LocalDatabaseRunner : public SearchRunner
     Q_OBJECT
 public:
     explicit LocalDatabaseRunner(QObject *parent = 0);
-    ~LocalDatabaseRunner();
+    ~LocalDatabaseRunner() override;
 
-    void search( const QString &searchTerm, const GeoDataLatLonBox &preferred );
+    void search( const QString &searchTerm, const GeoDataLatLonBox &preferred ) override;
 };
 
 }

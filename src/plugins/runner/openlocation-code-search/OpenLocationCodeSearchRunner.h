@@ -26,7 +26,7 @@ class OpenLocationCodeSearchRunner : public SearchRunner
 public:
     explicit OpenLocationCodeSearchRunner( QObject *parent = 0 );
 
-    void search( const QString &searchTerm, const GeoDataLatLonBox &preferred );
+    void search( const QString &searchTerm, const GeoDataLatLonBox &preferred ) override;
 
 private:
 

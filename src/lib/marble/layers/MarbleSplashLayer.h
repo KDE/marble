@@ -23,15 +23,15 @@ class MarbleSplashLayer : public LayerInterface
 public:
     MarbleSplashLayer();
 
-    virtual QStringList renderPosition() const;
+    QStringList renderPosition() const override;
 
-    virtual bool render( GeoPainter *painter, ViewportParams *viewport,
+    bool render( GeoPainter *painter, ViewportParams *viewport,
                          const QString &renderPos = QLatin1String("SURFACE"),
-                         GeoSceneLayer *layer = 0 );
+                         GeoSceneLayer *layer = 0 ) override;
 
-    RenderState renderState() const;
+    RenderState renderState() const override;
 
-    virtual QString runtimeTrace() const { return QStringLiteral("SplashLayer"); }
+    QString runtimeTrace() const override { return QStringLiteral("SplashLayer"); }
 
 };
 

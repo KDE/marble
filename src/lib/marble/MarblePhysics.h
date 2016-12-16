@@ -36,7 +36,7 @@ class MarblePhysics : public QObject
     /**
       * @brief Destructor
       */
-    ~MarblePhysics();
+    ~MarblePhysics() override;
 
     /**
       * @brief Initiate an animation to the target according to the given mode.

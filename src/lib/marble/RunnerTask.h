@@ -43,7 +43,7 @@ public:
     /**
      * @reimp
      */
-    void run();
+    void run() override;
 
 Q_SIGNALS:
     void finished( SearchTask *task );
@@ -65,7 +65,7 @@ public:
     /**
      * @reimp
      */
-    void run();
+    void run() override;
 
 Q_SIGNALS:
     void finished( ReverseGeocodingTask *task );
@@ -87,7 +87,7 @@ public:
     /**
      * @reimp
      */
-    void run();
+    void run() override;
 
 Q_SIGNALS:
     void finished( RoutingTask *task );
@@ -108,7 +108,7 @@ public:
     /**
      * @reimp
      */
-    void run();
+    void run() override;
 
 Q_SIGNALS:
     void parsed(GeoDataDocument* document, const QString &error);

@@ -35,10 +35,10 @@ public:
     bool operator==( const GeoDataUpdate &other ) const;
     bool operator!=( const GeoDataUpdate &other ) const;
 
-    ~GeoDataUpdate();
+    ~GeoDataUpdate() override;
 
     /** Provides type information for downcasting a GeoNode */
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 
     QString targetHref() const;
     void setTargetHref( const QString &targetHref );

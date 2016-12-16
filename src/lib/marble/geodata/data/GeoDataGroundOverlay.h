@@ -30,7 +30,7 @@ public:
 
     GeoDataGroundOverlay( const GeoDataGroundOverlay &other );
 
-    ~GeoDataGroundOverlay();
+    ~GeoDataGroundOverlay() override;
 
     GeoDataGroundOverlay& operator=( const GeoDataGroundOverlay &other );
     bool operator==( const GeoDataGroundOverlay &other ) const;
@@ -39,7 +39,7 @@ public:
     GeoDataFeature * clone() const override;
 
     /** Provides type information for downcasting a GeoNode */
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 
     double altitude() const;
 

@@ -33,7 +33,7 @@ class MainWindow : public KXmlGuiWindow
  public:
     explicit MainWindow( const QString& marbleDataPath = QString(), 
                          QWidget *parent = 0 );
-    ~MainWindow();
+    ~MainWindow() override;
 
     ControlView* marbleControl() const;
     MarbleWidget* marbleWidget() const;
@@ -43,7 +43,7 @@ class MainWindow : public KXmlGuiWindow
     void changeViewSize( QAction* );
 
  protected:
-    void closeEvent( QCloseEvent *event );
+    void closeEvent( QCloseEvent *event ) override;
 
  private:
     QSize m_savedSize;

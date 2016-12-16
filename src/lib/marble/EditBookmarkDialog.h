@@ -36,7 +36,7 @@ class MARBLE_EXPORT EditBookmarkDialog : public QDialog
     explicit EditBookmarkDialog( BookmarkManager *manager, QWidget *parent = 0 );
 
     /** Destructor */
-    ~EditBookmarkDialog();
+    ~EditBookmarkDialog() override;
 
     void setMarbleWidget( MarbleWidget* widget );
 

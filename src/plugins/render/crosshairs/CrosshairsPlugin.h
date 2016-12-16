@@ -50,43 +50,43 @@ class CrosshairsPlugin : public RenderPlugin, public DialogConfigurationInterfac
 
     explicit CrosshairsPlugin( const MarbleModel *marbleModel );
 
-    ~CrosshairsPlugin();
+    ~CrosshairsPlugin() override;
 
-    QStringList backendTypes() const;
+    QStringList backendTypes() const override;
 
-    QString renderPolicy() const;
+    QString renderPolicy() const override;
 
-    QStringList renderPosition() const;
+    QStringList renderPosition() const override;
 
-    virtual RenderType renderType() const;
+    RenderType renderType() const override;
 
-    QString name() const;
+    QString name() const override;
 
-    QString guiString() const;
+    QString guiString() const override;
 
-    QString nameId() const;
+    QString nameId() const override;
 
-    QString version() const;
+    QString version() const override;
 
-    QString description() const;
+    QString description() const override;
 
-    QString copyrightYears() const;
+    QString copyrightYears() const override;
 
     QVector<PluginAuthor> pluginAuthors() const override;
 
-    QIcon icon () const;
+    QIcon icon () const override;
 
-    void initialize ();
+    void initialize () override;
 
-    bool isInitialized () const;
+    bool isInitialized () const override;
 
-    bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 );
+    bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 ) override;
 
-    QDialog *configDialog();
+    QDialog *configDialog() override;
 
-    QHash<QString,QVariant> settings() const;
+    QHash<QString,QVariant> settings() const override;
 
-    void setSettings( const QHash<QString,QVariant> &settings );
+    void setSettings( const QHash<QString,QVariant> &settings ) override;
 
 private Q_SLOTS:
    void readSettings();

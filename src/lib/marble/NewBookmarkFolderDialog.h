@@ -26,7 +26,7 @@ class MARBLE_EXPORT NewBookmarkFolderDialog : public QDialog, private Ui::UiNewB
  public:
     explicit NewBookmarkFolderDialog( QWidget *parent = 0 );
 
-    ~NewBookmarkFolderDialog();
+    ~NewBookmarkFolderDialog() override;
 
     void setFolderName( const QString &name );
 

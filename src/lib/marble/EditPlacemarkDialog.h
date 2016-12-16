@@ -32,7 +32,7 @@ public:
     EditPlacemarkDialog( GeoDataPlacemark *placemark,
                          const QHash<qint64,OsmPlacemarkData> *relations = 0,
                          QWidget *parent = 0 );
-    ~EditPlacemarkDialog();
+    ~EditPlacemarkDialog() override;
 
     /**
      * @brief setLabelColor tells the dialog what the label color is

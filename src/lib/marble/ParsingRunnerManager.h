@@ -36,7 +36,7 @@ public:
      */
     explicit ParsingRunnerManager( const PluginManager *pluginManager, QObject *parent = 0 );
 
-    ~ParsingRunnerManager();
+    ~ParsingRunnerManager() override;
 
     /**
      * Parse the file using the runners for various formats

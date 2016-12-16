@@ -39,7 +39,7 @@ class GEODATA_EXPORT GeoSceneIcon : public GeoNode
 {
  public:
     GeoSceneIcon();
-    ~GeoSceneIcon();
+    ~GeoSceneIcon() override;
 
     QString pixmap() const;
     void setPixmap(const QString&);

@@ -34,7 +34,7 @@ class ScreenGraphicsItemPrivate : public MarbleGraphicsItemPrivate
     {
     }
 
-    virtual ~ScreenGraphicsItemPrivate()
+    ~ScreenGraphicsItemPrivate() override
     {
     }
 

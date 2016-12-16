@@ -35,7 +35,7 @@ class OpenCachingComModel : public AbstractDataPluginModel
 
 public:
     explicit OpenCachingComModel( const MarbleModel *marbleModel, QObject *parent = 0 );
-    ~OpenCachingComModel();
+    ~OpenCachingComModel() override;
 
 
     /// Fetch a file for a cache
@@ -49,14 +49,14 @@ protected:
      * Generates the download url for the description file from the web service depending on
      * the @p box surrounding the view and the @p number of files to show.
      **/
-    virtual void getAdditionalItems( const GeoDataLatLonAltBox& box,
-                                     qint32 number = numberOfItemsOnScreen );
+    void getAdditionalItems( const GeoDataLatLonAltBox& box,
+                                     qint32 number = numberOfItemsOnScreen ) override;
 
     /**
      * Parses the @p file which getAdditionalItems downloads and
      * prepares the data for usage.
      **/
-    void parseFile( const QByteArray& file );
+    void parseFile( const QByteArray& file ) override;
 
 private:
     GeoDataLatLonAltBox m_previousbox;

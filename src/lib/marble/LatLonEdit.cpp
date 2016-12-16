@@ -62,13 +62,13 @@ class DecimalInputHandler : public AbstractInputHandler
 public:
     explicit DecimalInputHandler(LatLonEditPrivate *ui) : AbstractInputHandler(ui) {}
 public: // AbstractInputHandler API
-    virtual void setupUi();
-    virtual void setupMinMax(Dimension dimension);
-    virtual void setValue(qreal value);
-    virtual void handleIntEditChange();
-    virtual void handleUIntEditChange();
-    virtual void handleFloatEditChange();
-    virtual qreal calculateValue() const;
+    void setupUi() override;
+    void setupMinMax(Dimension dimension) override;
+    void setValue(qreal value) override;
+    void handleIntEditChange() override;
+    void handleUIntEditChange() override;
+    void handleFloatEditChange() override;
+    qreal calculateValue() const override;
 };
 
 class DMSInputHandler : public AbstractInputHandler
@@ -76,13 +76,13 @@ class DMSInputHandler : public AbstractInputHandler
 public:
     explicit DMSInputHandler(LatLonEditPrivate *ui) : AbstractInputHandler(ui) {}
 public: // AbstractInputHandler API
-    virtual void setupUi();
-    virtual void setupMinMax(Dimension dimension);
-    virtual void setValue(qreal value);
-    virtual void handleIntEditChange();
-    virtual void handleUIntEditChange();
-    virtual void handleFloatEditChange();
-    virtual qreal calculateValue() const;
+    void setupUi() override;
+    void setupMinMax(Dimension dimension) override;
+    void setValue(qreal value) override;
+    void handleIntEditChange() override;
+    void handleUIntEditChange() override;
+    void handleFloatEditChange() override;
+    qreal calculateValue() const override;
 };
 
 class DMInputHandler : public AbstractInputHandler
@@ -90,14 +90,14 @@ class DMInputHandler : public AbstractInputHandler
 public:
     explicit DMInputHandler(LatLonEditPrivate *ui) : AbstractInputHandler(ui) {}
 public: // AbstractInputHandler API
-    virtual void setupUi();
-    virtual void setupMinMax(Dimension dimension);
-    virtual void setValue(qreal value);
-    virtual void handleIntEditChange();
-    virtual void handleUIntEditChange();
-    virtual void handleFloatEditChange();
+    void setupUi() override;
+    void setupMinMax(Dimension dimension) override;
+    void setValue(qreal value) override;
+    void handleIntEditChange() override;
+    void handleUIntEditChange() override;
+    void handleFloatEditChange() override;
 
-    virtual qreal calculateValue() const;
+    qreal calculateValue() const override;
 };
 
 class LatLonEditPrivate : public Ui::LatLonEditPrivate

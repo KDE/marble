@@ -26,8 +26,8 @@ class Pn2Runner : public ParsingRunner
     Q_OBJECT
 public:
     explicit Pn2Runner(QObject *parent = 0);
-    ~Pn2Runner();
-    GeoDataDocument* parseFile( const QString &fileName, DocumentRole role, QString& error );
+    ~Pn2Runner() override;
+    GeoDataDocument* parseFile( const QString &fileName, DocumentRole role, QString& error ) override;
 
 private:
     static bool errorCheckLat( qint16 lat );

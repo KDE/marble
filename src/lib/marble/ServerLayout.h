@@ -58,9 +58,9 @@ public:
     /**
      * Completes the path of the @p prototypeUrl and returns it.
      */
-    virtual QUrl downloadUrl( const QUrl &prototypeUrl, const TileId & ) const;
+    QUrl downloadUrl( const QUrl &prototypeUrl, const TileId & ) const override;
 
-    virtual QString name() const;
+    QString name() const override;
 };
 
 class OsmServerLayout : public ServerLayout
@@ -72,9 +72,9 @@ public:
      * Appends %zoomLevel/%x/%y.%suffix to the path of the @p prototypeUrl and returns
      * the result.
      */
-    virtual QUrl downloadUrl( const QUrl &prototypeUrl, const TileId & ) const;
+    QUrl downloadUrl( const QUrl &prototypeUrl, const TileId & ) const override;
 
-    virtual QString name() const;
+    QString name() const override;
 };
 
 class CustomServerLayout : public ServerLayout
@@ -88,9 +88,9 @@ public:
      *
      * Escape sequences are: {zoomLevel}, {x}, and {y}.
      */
-    virtual QUrl downloadUrl( const QUrl &prototypeUrl, const TileId &id ) const;
+    QUrl downloadUrl( const QUrl &prototypeUrl, const TileId &id ) const override;
 
-    virtual QString name() const;
+    QString name() const override;
 };
 
 class WmsServerLayout : public ServerLayout
@@ -106,9 +106,9 @@ public:
      * The following items are only added if they are not already specified in the dgml file:
      * styles, format, srs, layers.
      */
-    virtual QUrl downloadUrl( const QUrl &prototypeUrl, const Marble::TileId &tileId ) const;
+    QUrl downloadUrl( const QUrl &prototypeUrl, const Marble::TileId &tileId ) const override;
 
-    virtual QString name() const;
+    QString name() const override;
 
     QString epsgCode() const;
 };
@@ -117,9 +117,9 @@ class QuadTreeServerLayout : public ServerLayout
 {
 public:
     explicit QuadTreeServerLayout( GeoSceneTileDataset* textureLayer );
-    virtual QUrl downloadUrl( const QUrl &, const Marble::TileId & ) const;
+    QUrl downloadUrl( const QUrl &, const Marble::TileId & ) const override;
 
-    virtual QString name() const;
+    QString name() const override;
 
 private:
     static QString encodeQuadTree( const Marble::TileId & );
@@ -136,9 +136,9 @@ public:
      * TMS (TileMapService) maps take the origin for y coordinate at the bottom of the map,
      * as opposed to what Marble and OpenStreepMap (SlippyTiles) do.
      */
-    virtual QUrl downloadUrl( const QUrl &prototypeUrl, const TileId & ) const;
+    QUrl downloadUrl( const QUrl &prototypeUrl, const TileId & ) const override;
 
-    virtual QString name() const;
+    QString name() const override;
 };
 
 }

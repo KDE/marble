@@ -103,7 +103,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @param parent the parent widget
      */
     explicit MarbleModel( QObject *parent = 0 );
-    virtual ~MarbleModel();
+    ~MarbleModel() override;
 
     /**
      * @brief Return the list of Placemarks as a QAbstractItemModel *

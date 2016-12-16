@@ -42,18 +42,18 @@ public:
     explicit AlternativeRoutesModel( QObject *parent = 0 );
 
     /** Destructor */
-    ~AlternativeRoutesModel();
+    ~AlternativeRoutesModel() override;
 
     // Model querying
 
     /** Overload of QAbstractListModel */
-    int rowCount ( const QModelIndex &parent = QModelIndex() ) const;
+    int rowCount ( const QModelIndex &parent = QModelIndex() ) const override;
 
     /** Overload of QAbstractListModel */
-    QVariant headerData ( int section, Qt::Orientation orientation, int role = Qt::DisplayRole ) const;
+    QVariant headerData ( int section, Qt::Orientation orientation, int role = Qt::DisplayRole ) const override;
 
     /** Overload of QAbstractListModel */
-    QVariant data ( const QModelIndex &index, int role = Qt::DisplayRole ) const;
+    QVariant data ( const QModelIndex &index, int role = Qt::DisplayRole ) const override;
 
     GeoDataDocument* route( int index );
 

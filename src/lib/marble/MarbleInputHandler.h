@@ -42,7 +42,7 @@ class MARBLE_EXPORT MarbleInputHandler  : public QObject
 
  public:
     explicit MarbleInputHandler( MarbleAbstractPresenter* );
-    virtual ~MarbleInputHandler();
+    ~MarbleInputHandler() override;
 
     void setPositionSignalConnected( bool connected );
     bool isPositionSignalConnected() const;
@@ -122,10 +122,10 @@ class MARBLE_EXPORT MarbleDefaultInputHandler  : public MarbleInputHandler
 
  public:
     explicit MarbleDefaultInputHandler( MarbleAbstractPresenter* marblePresenter);
-    virtual ~MarbleDefaultInputHandler();
+    ~MarbleDefaultInputHandler() override;
 
  protected:
-    bool eventFilter( QObject *, QEvent * );
+    bool eventFilter( QObject *, QEvent * ) override;
     bool handleMouseEvent(QMouseEvent *e);
     bool handlePinch(const QPointF &center, qreal scaleFactor, Qt::GestureState state);
 
@@ -138,7 +138,7 @@ class MARBLE_EXPORT MarbleDefaultInputHandler  : public MarbleInputHandler
     virtual void handleMouseButtonPressAndHold(const QPoint &position);
 
  private Q_SLOTS:
-    virtual void installPluginEventFilter( RenderPlugin *renderPlugin ) = 0;
+    void installPluginEventFilter( RenderPlugin *renderPlugin ) override = 0;
     virtual void showLmbMenu( int, int ) = 0;
     virtual void showRmbMenu( int, int ) = 0;
     void handlePressAndHold();

@@ -42,7 +42,7 @@ public:
     /** @todo FIXME https://bugreports.qt-project.org/browse/QTCOMPONENTS-1206 */
     int count() const;
 
-    QHash<int, QByteArray> roleNames() const;
+    QHash<int, QByteArray> roleNames() const override;
 
     Q_INVOKABLE QString name( const QString &id ) const;
 
@@ -59,8 +59,8 @@ Q_SIGNALS:
     void mapThemeFilterChanged();
 
 protected:
-    virtual bool filterAcceptsRow(int sourceRow,
-                                  const QModelIndex &sourceParent) const;
+    bool filterAcceptsRow(int sourceRow,
+                                  const QModelIndex &sourceParent) const override;
 
 private Q_SLOTS:
     void handleChangedThemes();

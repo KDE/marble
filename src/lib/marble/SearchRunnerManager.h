@@ -42,7 +42,7 @@ public:
      */
     explicit SearchRunnerManager( const MarbleModel *marbleModel, QObject *parent = 0 );
 
-    ~SearchRunnerManager();
+    ~SearchRunnerManager() override;
 
     /**
      * Search for placemarks matching the given search term.

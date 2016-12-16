@@ -24,7 +24,7 @@ class SerialTrack : public QObject
     Q_OBJECT
 public:
     SerialTrack();
-    ~SerialTrack();
+    ~SerialTrack() override;
 
     void append( PlaybackItem* item );
     void play();

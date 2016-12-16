@@ -35,7 +35,7 @@ class MARBLE_EXPORT SunLocator : public QObject
 
  public:
     SunLocator( const MarbleClock *clock, const Planet *planet );
-    virtual ~SunLocator();
+    ~SunLocator() override;
 
     qreal shading(qreal lon, qreal a, qreal c) const;
     void  shadePixel(QRgb& pixcol, qreal shade) const;

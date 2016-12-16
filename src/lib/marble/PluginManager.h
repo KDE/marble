@@ -48,7 +48,7 @@ class MARBLE_EXPORT PluginManager : public QObject
  public:
     explicit PluginManager( QObject* parent = 0 );
 
-    ~PluginManager();
+    ~PluginManager() override;
 
     /**
      * @brief Returns all available RenderPlugins.

@@ -101,7 +101,7 @@ class PreviewDialog : public QDialog
     Q_OBJECT
 public:
     PreviewDialog( QWidget* parent, const QString& mapThemeId );
-    virtual void closeEvent(QCloseEvent* e );
+    void closeEvent(QCloseEvent* e ) override;
 private:
     bool deleteTheme( const QString& directory );
     QString m_mapThemeId;

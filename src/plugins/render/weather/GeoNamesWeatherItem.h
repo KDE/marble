@@ -22,11 +22,11 @@ class GeoNamesWeatherItem : public WeatherItem
 
  public:
     explicit GeoNamesWeatherItem( QObject *parent = 0 );
-    ~GeoNamesWeatherItem();
+    ~GeoNamesWeatherItem() override;
 
-    void addDownloadedFile( const QString& url, const QString& type );
+    void addDownloadedFile( const QString& url, const QString& type ) override;
 
-    QString service() const;
+    QString service() const override;
     QString creditHtml() const;
 };
 

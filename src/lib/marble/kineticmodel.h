@@ -45,7 +45,7 @@ class KineticModel: public QObject
 
 public:
     explicit KineticModel(QObject *parent = 0);
-    ~KineticModel();
+    ~KineticModel() override;
 
     int duration() const;
     QPointF position() const;

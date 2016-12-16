@@ -25,7 +25,7 @@ class GeoDataNetworkLinkControlPrivate : public GeoDataContainerPrivate
 public:
     GeoDataNetworkLinkControlPrivate();
     GeoDataNetworkLinkControlPrivate(const GeoDataNetworkLinkControlPrivate &other);
-    ~GeoDataNetworkLinkControlPrivate();
+    ~GeoDataNetworkLinkControlPrivate() override;
     GeoDataNetworkLinkControlPrivate& operator=(const GeoDataNetworkLinkControlPrivate &other);
 
     qreal m_minRefreshPeriod;

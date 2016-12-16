@@ -157,7 +157,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     explicit MarbleWidget( QWidget *parent = 0 );
 
-    virtual ~MarbleWidget();
+    ~MarbleWidget() override;
 
     /// @name Access to helper objects
     //@{
@@ -1103,26 +1103,26 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /**
      * @brief Reimplementation of the leaveEvent() function in QWidget.
      */
-    virtual void leaveEvent( QEvent *event );
+    void leaveEvent( QEvent *event ) override;
 
     /**
      * @brief Reimplementation of the paintEvent() function in QWidget.
      */
-    virtual void paintEvent( QPaintEvent *event );
+    void paintEvent( QPaintEvent *event ) override;
 
     /**
      * @brief Reimplementation of the resizeEvent() function in QWidget.
      */
-    virtual void resizeEvent( QResizeEvent *event );
+    void resizeEvent( QResizeEvent *event ) override;
 
-    virtual void connectNotify(const QMetaMethod &signal);
-    virtual void disconnectNotify(const QMetaMethod &signal);
+    void connectNotify(const QMetaMethod &signal) override;
+    void disconnectNotify(const QMetaMethod &signal) override;
 
     /**
       * @brief Reimplementation of the changeEvent() function in QWidget to
       * react to changes of the enabled state
       */
-    virtual void changeEvent( QEvent * event );
+    void changeEvent( QEvent * event ) override;
 
     /**
      * @brief Enables custom drawing onto the MarbleWidget straight after

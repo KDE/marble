@@ -34,7 +34,7 @@ class MARBLE_EXPORT DownloadRegion : public QObject
 
     void setMarbleModel( MarbleModel *model );
 
-    ~DownloadRegion();
+    ~DownloadRegion() override;
 
     void setTileLevelRange( int const minimumTileLevel, int const maximumTileLevel );
 

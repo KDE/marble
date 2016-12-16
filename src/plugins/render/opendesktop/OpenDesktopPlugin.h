@@ -38,32 +38,32 @@ class OpenDesktopPlugin : public AbstractDataPlugin, public DialogConfigurationI
 
     explicit OpenDesktopPlugin( const MarbleModel *marbleModel );
 
-    virtual void initialize();
+    void initialize() override;
 
-    QString name() const;
+    QString name() const override;
     
-    QString guiString() const;
+    QString guiString() const override;
 
-    QString nameId() const;
+    QString nameId() const override;
     
-    QString version() const;
+    QString version() const override;
 
-    QString description() const;
+    QString description() const override;
 
-    QString copyrightYears() const;
+    QString copyrightYears() const override;
 
     QVector<PluginAuthor> pluginAuthors() const override;
 
-    QIcon icon() const;
+    QIcon icon() const override;
 
-    QDialog *configDialog();
+    QDialog *configDialog() override;
 
-    QHash<QString,QVariant> settings() const;
+    QHash<QString,QVariant> settings() const override;
 
-    void setSettings( const QHash<QString,QVariant> &settings );
+    void setSettings( const QHash<QString,QVariant> &settings ) override;
 
 protected:
-    bool eventFilter(QObject *object, QEvent *event);
+    bool eventFilter(QObject *object, QEvent *event) override;
 
 private Q_SLOTS:
     void readSettings();

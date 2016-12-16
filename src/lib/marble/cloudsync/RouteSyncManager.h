@@ -30,7 +30,7 @@ class MARBLE_EXPORT RouteSyncManager : public QObject
     
 public:
     explicit RouteSyncManager( CloudSyncManager *cloudSyncManager );
-    ~RouteSyncManager();
+    ~RouteSyncManager() override;
 
     void setRoutingManager( RoutingManager *routingManager );
 

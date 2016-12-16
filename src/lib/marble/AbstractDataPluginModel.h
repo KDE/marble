@@ -50,7 +50,7 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
  
  public:
     explicit AbstractDataPluginModel( const QString& name, const MarbleModel *marbleModel, QObject *parent = 0 );
-    virtual ~AbstractDataPluginModel();
+    ~AbstractDataPluginModel() override;
         
     const MarbleModel *marbleModel() const;
 

@@ -47,7 +47,7 @@ class GEODATA_EXPORT GeoDataLabelStyle : public GeoDataColorStyle
      */
     GeoDataLabelStyle( const QFont &font, const QColor &color );
 
-    ~GeoDataLabelStyle();
+    ~GeoDataLabelStyle() override;
     
     /**
     * @brief assignment operator
@@ -58,7 +58,7 @@ class GEODATA_EXPORT GeoDataLabelStyle : public GeoDataColorStyle
     bool operator!=( const GeoDataLabelStyle &other ) const;
 
     /// Provides type information for downcasting a GeoData
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 
     /**
      * @brief Set the scale of the label
@@ -116,12 +116,12 @@ class GEODATA_EXPORT GeoDataLabelStyle : public GeoDataColorStyle
      * @brief  Serialize the style to a stream.
      * @param  stream  the stream
      */
-    virtual void pack( QDataStream& stream ) const;
+    void pack( QDataStream& stream ) const override;
     /**
      * @brief  Unserialize the style from a stream
      * @param  stream  the stream
      */
-    virtual void unpack( QDataStream& stream );
+    void unpack( QDataStream& stream ) override;
 
   private:
     GeoDataLabelStylePrivate * const d;

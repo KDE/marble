@@ -42,28 +42,28 @@ class EquirectProjection : public CylindricalProjection
      */
     EquirectProjection();
 
-    virtual ~EquirectProjection();
+    ~EquirectProjection() override;
 
     /**
      * @brief Returns the user-visible name of the projection.
      */
-    QString name() const;
+    QString name() const override;
 
     /**
      * @brief Returns a short user description of the projection
      * that can be used in tooltips or dialogs.
      */
-    QString description() const;
+    QString description() const override;
 
     /**
      * @brief Returns an icon for the projection.
      */
-    QIcon icon() const;
+    QIcon icon() const override;
 
-    virtual qreal  maxValidLat() const;
-    virtual qreal  minValidLat() const;
+    qreal  maxValidLat() const override;
+    qreal  minValidLat() const override;
 
-    virtual PreservationType preservationType() const { return NoPreservation; }
+    PreservationType preservationType() const override { return NoPreservation; }
 
     /**
      * @brief Get the screen coordinates corresponding to geographical coordinates in the map.
@@ -76,13 +76,13 @@ class EquirectProjection : public CylindricalProjection
      */
     bool screenCoordinates( const GeoDataCoordinates &coordinates,
                             const ViewportParams *params,
-                            qreal &x, qreal &y, bool &globeHidesPoint ) const;
+                            qreal &x, qreal &y, bool &globeHidesPoint ) const override;
 
     bool screenCoordinates( const GeoDataCoordinates &coordinates,
                             const ViewportParams *viewport,
                             qreal *x, qreal &y, int &pointRepeatNum,
                             const QSizeF& size,
-                            bool &globeHidesPoint ) const;
+                            bool &globeHidesPoint ) const override;
 
     using CylindricalProjection::screenCoordinates;
 
@@ -102,12 +102,12 @@ class EquirectProjection : public CylindricalProjection
     bool geoCoordinates( const int x, const int y,
                          const ViewportParams *params,
                          qreal& lon, qreal& lat,
-                         GeoDataCoordinates::Unit unit = GeoDataCoordinates::Degree ) const;
+                         GeoDataCoordinates::Unit unit = GeoDataCoordinates::Degree ) const override;
 
     GeoDataLatLonAltBox latLonAltBox( const QRect& screenRect,
-                                      const ViewportParams *viewport ) const;
+                                      const ViewportParams *viewport ) const override;
 
-    bool mapCoversViewport( const ViewportParams *viewport ) const;
+    bool mapCoversViewport( const ViewportParams *viewport ) const override;
 
  private:
     Q_DISABLE_COPY( EquirectProjection )

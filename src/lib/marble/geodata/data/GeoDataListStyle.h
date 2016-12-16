@@ -37,10 +37,10 @@ public:
     bool operator==( const GeoDataListStyle &other ) const;
     bool operator!=( const GeoDataListStyle &other ) const;
 
-    ~GeoDataListStyle();
+    ~GeoDataListStyle() override;
 
     /** Provides type information for downcasting a GeoNode */
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 
     enum ListItemType {
         Check,
@@ -84,9 +84,9 @@ public:
     QVector<GeoDataItemIcon*>::ConstIterator constEnd() const;
     void clear();
 
-    virtual void pack( QDataStream& stream ) const;
+    void pack( QDataStream& stream ) const override;
 
-    virtual void unpack( QDataStream& stream );
+    void unpack( QDataStream& stream ) override;
 
 private:
     friend class GeoDataItemIcon;

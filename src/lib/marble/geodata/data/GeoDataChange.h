@@ -28,7 +28,7 @@ public:
 
     GeoDataChange( const GeoDataChange &other );
 
-    ~GeoDataChange();
+    ~GeoDataChange() override;
 
     GeoDataChange& operator=( const GeoDataChange &other );
 
@@ -38,7 +38,7 @@ public:
     GeoDataFeature * clone() const override;
 
     /** Provides type information for downcasting a GeoNode */
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 
 private:
     Q_DECLARE_PRIVATE(GeoDataChange)

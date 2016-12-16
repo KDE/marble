@@ -28,7 +28,7 @@ class MarbleDeclarativeObject : public QObject
 public:
     explicit MarbleDeclarativeObject( QObject* parent = 0 );
 
-    ~MarbleDeclarativeObject();
+    ~MarbleDeclarativeObject() override;
 
     /** Returns the Marble library version */
     QString version() const;

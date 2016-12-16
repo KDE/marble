@@ -961,9 +961,9 @@ public:
     {}
 
 public: // QTranslator API
-    virtual bool isEmpty() const { return false; }
-    virtual QString translate( const char* context, const char* sourceText,
-                               const char* disambiguation = 0, int n = -1 ) const;
+    bool isEmpty() const override { return false; }
+    QString translate( const char* context, const char* sourceText,
+                               const char* disambiguation = 0, int n = -1 ) const override;
 private:
     const QString degree;
     const QString minutes;

@@ -14,9 +14,9 @@ class RouteItemDelegate : public QStyledItemDelegate {
 public:
     RouteItemDelegate( QListView *view, CloudRouteModel *model );
 
-    void paint( QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index ) const;
-    QSize sizeHint( const QStyleOptionViewItem& option, const QModelIndex& index ) const;
-    bool editorEvent(QEvent* event, QAbstractItemModel* model, const QStyleOptionViewItem& option, const QModelIndex& index);
+    void paint( QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index ) const override;
+    QSize sizeHint( const QStyleOptionViewItem& option, const QModelIndex& index ) const override;
+    bool editorEvent(QEvent* event, QAbstractItemModel* model, const QStyleOptionViewItem& option, const QModelIndex& index) override;
 
 
 Q_SIGNALS:

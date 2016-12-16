@@ -27,7 +27,7 @@ class MARBLE_EXPORT WidgetGraphicsItem : public ScreenGraphicsItem
  public:
     explicit WidgetGraphicsItem( MarbleGraphicsItem *parent = 0 );
 
-    virtual ~WidgetGraphicsItem();
+    ~WidgetGraphicsItem() override;
 
     void setWidget( QWidget *widget );
     QWidget *widget() const;
@@ -36,9 +36,9 @@ class MARBLE_EXPORT WidgetGraphicsItem : public ScreenGraphicsItem
     /**
      * Paints the item in item coordinates.
      */
-    virtual void paint( QPainter *painter );
+    void paint( QPainter *painter ) override;
 
-    virtual bool eventFilter( QObject *, QEvent * );
+    bool eventFilter( QObject *, QEvent * ) override;
 
  private:
     Q_DISABLE_COPY( WidgetGraphicsItem )

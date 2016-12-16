@@ -23,7 +23,7 @@ class GeoDataWait;
 class KmlPlaylistTagWriter : public GeoTagWriter
 {
 public:
-    virtual bool write( const GeoNode *node, GeoWriter& writer ) const;
+    bool write( const GeoNode *node, GeoWriter& writer ) const override;
 
 private:
     void writeTourPrimitive( const GeoNode *primitive, GeoWriter& writer ) const;

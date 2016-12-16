@@ -67,7 +67,7 @@ class PlacemarkLayout : public QObject
     /**
      * Destroys the place mark painter.
      */
-    ~PlacemarkLayout();
+    ~PlacemarkLayout() override;
 
     /**
      * @reimp

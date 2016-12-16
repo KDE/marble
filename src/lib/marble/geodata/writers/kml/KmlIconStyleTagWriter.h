@@ -24,8 +24,8 @@ public:
     KmlIconStyleTagWriter();
 
 protected:
-    virtual bool writeMid( const GeoNode *node, GeoWriter& writer ) const;
-    virtual bool isEmpty( const GeoNode *node ) const;
+    bool writeMid( const GeoNode *node, GeoWriter& writer ) const override;
+    bool isEmpty( const GeoNode *node ) const override;
 
 private:
     static QString unitString( GeoDataHotSpot::Units unit );

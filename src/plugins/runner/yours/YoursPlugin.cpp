@@ -81,11 +81,11 @@ public:
         ui_configWidget->transport->addItem( tr( "Bicycle" ), "bicycle" );
         ui_configWidget->transport->addItem( tr( "Motorcar" ), "motorcar" );
     }
-    virtual ~YoursConfigWidget()
+    ~YoursConfigWidget() override
     {
         delete ui_configWidget;
     }
-    virtual void loadSettings( const QHash<QString, QVariant> &settings_ )
+    void loadSettings( const QHash<QString, QVariant> &settings_ ) override
     {
         QHash<QString, QVariant> settings = settings_;
 
@@ -102,7 +102,7 @@ public:
         }
     }
 
-    virtual QHash<QString, QVariant> settings() const
+    QHash<QString, QVariant> settings() const override
     {
         QHash<QString,QVariant> settings;
         settings.insert(QStringLiteral("transport"),

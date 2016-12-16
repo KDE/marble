@@ -36,7 +36,7 @@ class MARBLE_EXPORT HttpJob: public QObject
 
  public:
     HttpJob( const QUrl & sourceUrl, const QString & destFileName, const QString &id, QNetworkAccessManager *networkAccessManager );
-    ~HttpJob();
+    ~HttpJob() override;
 
     QUrl sourceUrl() const;
     void setSourceUrl( const QUrl & );

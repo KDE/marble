@@ -23,7 +23,7 @@ namespace mx
 class KmlsizeTagHandler : public GeoTagHandler
 {
 public:
-    virtual GeoNode* parse(GeoParser&) const;
+    GeoNode* parse(GeoParser&) const override;
 };
 
 }

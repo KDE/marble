@@ -29,9 +29,9 @@ class LocalOsmSearchRunner : public SearchRunner
 public:
     explicit LocalOsmSearchRunner( const QStringList &databaseFiles, QObject *parent = 0 );
 
-    ~LocalOsmSearchRunner();
+    ~LocalOsmSearchRunner() override;
 
-    virtual void search( const QString &searchTerm, const GeoDataLatLonBox &preferred );
+    void search( const QString &searchTerm, const GeoDataLatLonBox &preferred ) override;
 
 private:
     OsmDatabase m_database;

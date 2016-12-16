@@ -40,7 +40,7 @@ class GEODATA_EXPORT GeoDataPolyStyle : public GeoDataColorStyle
      */
     explicit GeoDataPolyStyle( const QColor &color );
 
-    ~GeoDataPolyStyle();
+    ~GeoDataPolyStyle() override;
     
     /**
     * @brief assignment operator
@@ -51,7 +51,7 @@ class GEODATA_EXPORT GeoDataPolyStyle : public GeoDataColorStyle
     bool operator!=( const GeoDataPolyStyle &other ) const;
 
     /// Provides type information for downcasting a GeoNode
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 
     /**
      * @brief Set whether to fill the polygon
@@ -108,12 +108,12 @@ class GEODATA_EXPORT GeoDataPolyStyle : public GeoDataColorStyle
      * @brief  Serialize the style to a stream.
      * @param  stream  the stream
      */
-    virtual void pack( QDataStream& stream ) const;
+    void pack( QDataStream& stream ) const override;
     /**
      * @brief  Unserialize the style from a stream
      * @param  stream  the stream
      */
-    virtual void unpack( QDataStream& stream );
+    void unpack( QDataStream& stream ) override;
 
   private:
     GeoDataPolyStylePrivate * const d;

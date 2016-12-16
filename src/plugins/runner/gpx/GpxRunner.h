@@ -20,8 +20,8 @@ class GpxRunner : public ParsingRunner
     Q_OBJECT
 public:
     explicit GpxRunner(QObject *parent = 0);
-    ~GpxRunner();
-    GeoDataDocument* parseFile( const QString &fileName, DocumentRole role, QString& error );
+    ~GpxRunner() override;
+    GeoDataDocument* parseFile( const QString &fileName, DocumentRole role, QString& error ) override;
 
 };
 

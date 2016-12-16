@@ -22,7 +22,7 @@ namespace Marble
 class KmlSimpleFieldTagWriter : public GeoTagWriter
 {
 public:
-    virtual bool write( const GeoNode *node, GeoWriter& writer ) const;
+    bool write( const GeoNode *node, GeoWriter& writer ) const override;
 
 private:
     static QString resolveType( GeoDataSimpleField::SimpleFieldType type );

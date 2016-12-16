@@ -38,17 +38,17 @@ class MARBLE_EXPORT PopupLayer : public QObject, public LayerInterface
     Q_OBJECT
 public:
     explicit PopupLayer( MarbleWidget *widget, QObject* parent = 0 );
-    ~PopupLayer();
+    ~PopupLayer() override;
 
-    QStringList renderPosition() const;
+    QStringList renderPosition() const override;
     bool render( GeoPainter *painter, ViewportParams *viewport,
-                 const QString &, GeoSceneLayer * );
-    virtual bool eventFilter( QObject *, QEvent * );
-    qreal zValue() const;
+                 const QString &, GeoSceneLayer * ) override;
+    bool eventFilter( QObject *, QEvent * ) override;
+    qreal zValue() const override;
 
-    RenderState renderState() const;
+    RenderState renderState() const override;
 
-    virtual QString runtimeTrace() const { return QStringLiteral("PopupLayer"); }
+    QString runtimeTrace() const override { return QStringLiteral("PopupLayer"); }
 
     /**
      * @brief Is popup item visible

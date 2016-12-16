@@ -33,7 +33,7 @@ class MARBLE_EXPORT CurrentLocationWidget : public QWidget
 
  public:
     explicit CurrentLocationWidget( QWidget *parent = 0, Qt::WindowFlags f = 0 );
-    ~CurrentLocationWidget();
+    ~CurrentLocationWidget() override;
 
     /**
      * @brief Set a MarbleWidget associated to this widget.

@@ -57,7 +57,7 @@ class MARBLE_EXPORT HttpDownloadManager : public QObject
     /**
      * Destroys the http download manager.
      */
-    virtual ~HttpDownloadManager();
+    ~HttpDownloadManager() override;
 
     /**
      * Switches loading on/off, useful for offline mode.

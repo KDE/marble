@@ -39,35 +39,35 @@ public:
 
     explicit EarthquakePlugin( const MarbleModel *marbleModel );
 
-    virtual void initialize();
+    void initialize() override;
 
-    QString name() const;
+    QString name() const override;
 
-    QString guiString() const;
+    QString guiString() const override;
 
-    QString nameId() const;
+    QString nameId() const override;
 
-    QString version() const;
+    QString version() const override;
 
-    QString description() const;
+    QString description() const override;
 
-    QString copyrightYears() const;
+    QString copyrightYears() const override;
 
     QVector<PluginAuthor> pluginAuthors() const override;
 
-    QIcon icon() const;
+    QIcon icon() const override;
 
-    QDialog *configDialog();
+    QDialog *configDialog() override;
 
     /**
      * @return: The settings of the item.
      */
-    virtual QHash<QString,QVariant> settings() const;
+    QHash<QString,QVariant> settings() const override;
 
     /**
      * Set the settings of the item.
      */
-    virtual void setSettings( const QHash<QString,QVariant> &settings );
+    void setSettings( const QHash<QString,QVariant> &settings ) override;
 
 public Q_SLOTS:
     void readSettings();

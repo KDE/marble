@@ -38,10 +38,10 @@ public:
     bool operator==( const GeoDataFlyTo& other ) const;
     bool operator!=( const GeoDataFlyTo& other ) const;
 
-    ~GeoDataFlyTo();
+    ~GeoDataFlyTo() override;
 
     /** Provides type information for downcasting a GeoNode */
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 
     double duration() const;
 

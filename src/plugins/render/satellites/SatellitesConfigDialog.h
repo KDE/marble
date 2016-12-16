@@ -33,7 +33,7 @@ public:
     };
 
     explicit SatellitesConfigDialog( QWidget *parent = 0 );
-    ~SatellitesConfigDialog();
+    ~SatellitesConfigDialog() override;
 
     void update();
 

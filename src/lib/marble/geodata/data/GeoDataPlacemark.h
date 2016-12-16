@@ -71,7 +71,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     /**
     * Delete the placemark
     */
-    ~GeoDataPlacemark();
+    ~GeoDataPlacemark() override;
 
     GeoDataPlacemark &operator=( const GeoDataPlacemark &other );
 
@@ -81,7 +81,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     bool operator==( const GeoDataPlacemark& other ) const;
     bool operator!=( const GeoDataPlacemark& other ) const;
 
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 
     GeoDataFeature * clone() const override;
 
@@ -620,7 +620,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
      * and is deserialised using @see unpack()
      * @param stream the QDataStream to serialise object to.
      */
-    virtual void pack( QDataStream& stream ) const;
+    void pack( QDataStream& stream ) const override;
 
     /**
      * Serialise this Placemark to a XML stream writer @see QXmlStreamWriter in
@@ -639,7 +639,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
      * from @see pack()
      * @param stream the QDataStream to deserialise from.
      */
-    virtual void unpack( QDataStream& stream );
+    void unpack( QDataStream& stream ) override;
 
     /**
      * Returns GeoDataLookAt object if lookAt is setup earlier

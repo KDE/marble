@@ -56,7 +56,7 @@ class StackedTile : public Tile
 {
  public:
     explicit StackedTile( TileId const &id, QImage const &resultImage, QVector<QSharedPointer<TextureTile> > const &tiles );
-    virtual ~StackedTile();
+    ~StackedTile() override;
 
     void setUsed( bool used );
     bool used() const;

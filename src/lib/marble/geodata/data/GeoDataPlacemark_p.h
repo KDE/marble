@@ -86,7 +86,7 @@ class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
         }
     }
 
-    virtual ~GeoDataPlacemarkPrivate()
+    ~GeoDataPlacemarkPrivate() override
     {
         delete m_geometry;
         delete m_placemarkExtendedData;
@@ -125,7 +125,7 @@ class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
         return *this;
     }
 
-    virtual EnumFeatureId featureId() const
+    EnumFeatureId featureId() const override
     {
         return GeoDataPlacemarkId;
     }

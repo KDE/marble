@@ -27,7 +27,7 @@ class MARBLE_EXPORT MarbleGraphicsGridLayout : public AbstractMarbleGraphicsLayo
 {
  public:
     MarbleGraphicsGridLayout( int rows, int columns );
-    ~MarbleGraphicsGridLayout();
+    ~MarbleGraphicsGridLayout() override;
 
     void addItem( ScreenGraphicsItem *item, int row, int column );
 
@@ -35,7 +35,7 @@ class MARBLE_EXPORT MarbleGraphicsGridLayout : public AbstractMarbleGraphicsLayo
      * This updates the positions of all items in the layout.
      * Calling this will be done on every repainting, so you won't have to do it yourself.
      */
-    void updatePositions( MarbleGraphicsItem *parent );
+    void updatePositions( MarbleGraphicsItem *parent ) override;
 
     Qt::Alignment alignment() const;
 

@@ -49,7 +49,7 @@ class FileManager : public QObject
     /**
      * Destroys the file manager.
      */
-    ~FileManager();
+    ~FileManager() override;
 
     /**
      * Loads a new file into the manager.

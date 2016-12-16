@@ -31,10 +31,10 @@ public:
     GeoDataAnimatedUpdate& operator=( const GeoDataAnimatedUpdate &other );
     bool operator== (const GeoDataAnimatedUpdate &other) const;
     bool operator!= (const GeoDataAnimatedUpdate &other) const;
-    ~GeoDataAnimatedUpdate();
+    ~GeoDataAnimatedUpdate() override;
 
     /** Provides type information for downcasting a GeoNode */
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 
     double duration() const;
     void setDuration( double duration );

@@ -25,14 +25,14 @@ public:
 
     explicit DeclarativeDataPluginModel( const MarbleModel *marbleModel, QObject *parent=0 );
 
-    virtual ~DeclarativeDataPluginModel();
+    ~DeclarativeDataPluginModel() override;
 
 Q_SIGNALS:
     /** Additional items for the given bound box (in degrees) are requested */
     void dataRequest( qreal north, qreal south, qreal east, qreal west );
 
 protected:
-    void getAdditionalItems( const GeoDataLatLonAltBox& box, qint32 number = 10 );
+    void getAdditionalItems( const GeoDataLatLonAltBox& box, qint32 number = 10 ) override;
 };
 
 }

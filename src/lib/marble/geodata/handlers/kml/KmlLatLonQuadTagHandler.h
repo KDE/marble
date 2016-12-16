@@ -21,7 +21,7 @@ namespace kml
 class KmlLatLonQuadTagHandler : public GeoTagHandler
 {
  public:
-    virtual GeoNode* parse( GeoParser& ) const;
+    GeoNode* parse( GeoParser& ) const override;
 };
 
 }

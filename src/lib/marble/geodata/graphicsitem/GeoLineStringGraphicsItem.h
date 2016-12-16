@@ -32,9 +32,9 @@ public:
     static GeoDataLineString merge(const QVector<const GeoDataLineString*> &lineStrings);
     void setMergedLineString(const GeoDataLineString &sharedLineString);
 
-    virtual const GeoDataLatLonAltBox& latLonAltBox() const;
+    const GeoDataLatLonAltBox& latLonAltBox() const override;
 
-    void paint(GeoPainter* painter, const ViewportParams *viewport, const QString &layer, int tileZoomLevel);
+    void paint(GeoPainter* painter, const ViewportParams *viewport, const QString &layer, int tileZoomLevel) override;
 
     static quint64 s_previousStyle;
 

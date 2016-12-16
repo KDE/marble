@@ -37,7 +37,7 @@ class MARBLE_EXPORT GoToDialog: public QDialog
 public:
     explicit GoToDialog( MarbleModel* marbleModel, QWidget * parent = 0, Qt::WindowFlags f = 0 );
 
-    ~GoToDialog();
+    ~GoToDialog() override;
 
     /** Toggle whether routing items (source, destination and via points) are visible */
     void setShowRoutingItems( bool show );

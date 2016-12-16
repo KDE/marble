@@ -22,7 +22,7 @@ public:
   KmlPlacemarkTagWriter();
 
 protected:
-    virtual bool writeMid( const GeoNode *node, GeoWriter& writer ) const;
+    bool writeMid( const GeoNode *node, GeoWriter& writer ) const override;
 };
 
 }

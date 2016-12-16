@@ -39,9 +39,9 @@ class TargetModel : public QAbstractListModel
 public:
     TargetModel( MarbleModel* marbleModel, QObject * parent = 0 );
 
-    virtual int rowCount ( const QModelIndex & parent = QModelIndex() ) const;
+    int rowCount ( const QModelIndex & parent = QModelIndex() ) const override;
 
-    virtual QVariant data ( const QModelIndex & index, int role = Qt::DisplayRole ) const;
+    QVariant data ( const QModelIndex & index, int role = Qt::DisplayRole ) const override;
 
     void setShowRoutingItems( bool show );
 

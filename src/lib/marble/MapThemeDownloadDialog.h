@@ -26,7 +26,7 @@ class MARBLE_EXPORT MapThemeDownloadDialog : public QDialog
 
 public:
     explicit MapThemeDownloadDialog( MarbleWidget *marbleWidget );
-    ~MapThemeDownloadDialog();
+    ~MapThemeDownloadDialog() override;
 
 private:
     Q_DISABLE_COPY( MapThemeDownloadDialog )

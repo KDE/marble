@@ -28,7 +28,7 @@ class MARBLE_EXPORT FormattedTextWidget : public QWidget
 
 public:
      explicit FormattedTextWidget(QWidget *parent = 0);
-    ~FormattedTextWidget();
+    ~FormattedTextWidget() override;
 
      void setText( const QString &text );
      const QString text();

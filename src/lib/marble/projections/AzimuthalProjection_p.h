@@ -32,7 +32,7 @@ public:
 
     }
 
-    virtual ~AzimuthalProjectionPrivate() {};
+    ~AzimuthalProjectionPrivate() override {};
 
     // This method tessellates a line segment in a way that the line segment
     // follows great circles. The count parameter specifies the

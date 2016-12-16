@@ -34,19 +34,19 @@ class GeoDataPolygonPrivate : public GeoDataGeometryPrivate
     {
     }
 
-    virtual GeoDataGeometryPrivate* copy()
+    GeoDataGeometryPrivate* copy() override
     { 
          GeoDataPolygonPrivate* copy = new  GeoDataPolygonPrivate;
         *copy = *this;
         return copy;
     }
 
-    virtual const char* nodeType() const
+    const char* nodeType() const override
     {
         return GeoDataTypes::GeoDataPolygonType;
     }
 
-    virtual EnumGeometryId geometryId() const
+    EnumGeometryId geometryId() const override
     {
         return GeoDataPolygonId;
     }

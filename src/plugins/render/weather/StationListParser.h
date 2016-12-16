@@ -28,7 +28,7 @@ class StationListParser : public QThread, public QXmlStreamReader
     Q_OBJECT
 public:
     explicit StationListParser( QObject *parent );
-    ~StationListParser();
+    ~StationListParser() override;
 
     void read();
 
@@ -37,7 +37,7 @@ public:
     void setPath( const QString& path );
 
 protected:
-    void run();
+    void run() override;
 
 private:
     void readUnknownElement();

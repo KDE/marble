@@ -19,14 +19,14 @@ class AprsFile : public AprsSource
     {
       public:
         explicit AprsFile( const QString &fileName );
-        ~AprsFile();
+        ~AprsFile() override;
 
-        QString    sourceName() const;
-        QIODevice *openSocket();
+        QString    sourceName() const override;
+        QIODevice *openSocket() override;
         void       checkReadReturn( int length, QIODevice **socket,
-                                    AprsGatherer *gatherer );
+                                    AprsGatherer *gatherer ) override;
 
-        bool       canDoDirect() const;
+        bool       canDoDirect() const override;
 
       private:
         QString m_fileName;

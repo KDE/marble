@@ -47,10 +47,10 @@ class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject
     GeoDataGeometry( const GeoDataGeometry& other );
     GeoDataGeometry& operator=( const GeoDataGeometry& other );
     
-    virtual ~GeoDataGeometry();
+    ~GeoDataGeometry() override;
 
     /// Provides type information for downcasting a GeoData
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
     virtual EnumGeometryId geometryId() const;
 
     bool extrude() const;
@@ -62,9 +62,9 @@ class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject
     virtual const GeoDataLatLonAltBox& latLonAltBox() const;
 
     /// Serialize the contents of the feature to @p stream.
-    virtual void pack( QDataStream& stream ) const;
+    void pack( QDataStream& stream ) const override;
     /// Unserialize the contents of the feature from @p stream.
-    virtual void unpack( QDataStream& stream );
+    void unpack( QDataStream& stream ) override;
 
     void detach();
 

@@ -36,10 +36,10 @@ public:
 
     bool operator!=( const GeoDataAlias &other ) const;
 
-    ~GeoDataAlias();
+    ~GeoDataAlias() override;
 
     /** Provides type information for downcasting a GeoNode */
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 
     QString sourceHref() const;
 

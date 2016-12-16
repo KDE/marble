@@ -25,7 +25,7 @@ class MARBLE_EXPORT GeoTrackGraphicsItem : public GeoLineStringGraphicsItem
 public:
     explicit GeoTrackGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataTrack *track);
 
-    virtual void paint(GeoPainter *painter, const ViewportParams *viewport, const QString &layer, int tileZoomLevel);
+    void paint(GeoPainter *painter, const ViewportParams *viewport, const QString &layer, int tileZoomLevel) override;
 
 private:
     void setTrack(const GeoDataTrack *track);

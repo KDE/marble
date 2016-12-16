@@ -33,10 +33,10 @@ public:
     bool operator==( const GeoDataScale &other ) const;
     bool operator!=( const GeoDataScale &other ) const;
 
-    ~GeoDataScale();
+    ~GeoDataScale() override;
 
     /** Provides type information for downcasting a GeoNode */
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 
     double x() const;
 

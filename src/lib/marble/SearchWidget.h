@@ -29,7 +29,7 @@ public:
 
     void setMarbleWidget( MarbleWidget* widget );
 
-    ~SearchWidget();
+    ~SearchWidget() override;
 
 private:
     Q_PRIVATE_SLOT( d, void setSearchResult( const QVector<GeoDataPlacemark*>& ) )

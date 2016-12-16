@@ -38,7 +38,7 @@ public:
     explicit RouteRequest( QObject *parent = 0 );
 
     /** Destructor */
-    ~RouteRequest();
+    ~RouteRequest() override;
 
     /** The first point, or a default constructed if empty */
     GeoDataCoordinates source() const;

@@ -41,19 +41,19 @@ class VectorTileLayer : public QObject, public LayerInterface
                   const PluginManager *pluginManager,
                   GeoDataTreeModel *treeModel);
 
-    ~VectorTileLayer();
+    ~VectorTileLayer() override;
 
-    QStringList renderPosition() const;
+    QStringList renderPosition() const override;
 
-    RenderState renderState() const;
+    RenderState renderState() const override;
 
     int tileZoomLevel() const;
 
-    QString runtimeTrace() const;
+    QString runtimeTrace() const override;
 
     bool render( GeoPainter *painter, ViewportParams *viewport,
                  const QString &renderPos = QLatin1String("NONE"),
-                 GeoSceneLayer *layer = 0 );
+                 GeoSceneLayer *layer = 0 ) override;
 
 Q_SIGNALS:
     void tileLevelChanged(int tileLevel);

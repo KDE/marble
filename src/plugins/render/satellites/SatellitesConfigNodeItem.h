@@ -21,20 +21,20 @@ class SatellitesConfigNodeItem : public SatellitesConfigAbstractItem
 {
 public:
     explicit SatellitesConfigNodeItem( const QString &name );
-    ~SatellitesConfigNodeItem();
+    ~SatellitesConfigNodeItem() override;
 
     void loadSettings(const QHash<QString, QVariant> &settings) override;
 
-    QVariant data( int column, int role ) const;
-    bool setData(int column, int role, const QVariant& data);
+    QVariant data( int column, int role ) const override;
+    bool setData(int column, int role, const QVariant& data) override;
 
-    bool isLeaf() const;
-    SatellitesConfigAbstractItem *childAt( int row ) const;
-    int indexOf( const SatellitesConfigAbstractItem *child ) const;
-    int childrenCount() const;
+    bool isLeaf() const override;
+    SatellitesConfigAbstractItem *childAt( int row ) const override;
+    int indexOf( const SatellitesConfigAbstractItem *child ) const override;
+    int childrenCount() const override;
 
     void appendChild( SatellitesConfigAbstractItem *item );
-    void clear();
+    void clear() override;
 
 private:
     QVector<SatellitesConfigAbstractItem *> m_children;

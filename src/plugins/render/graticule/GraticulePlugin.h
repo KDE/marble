@@ -59,41 +59,41 @@ class GraticulePlugin : public RenderPlugin, public DialogConfigurationInterface
 
     explicit GraticulePlugin( const MarbleModel *marbleModel );
 
-    QStringList backendTypes() const;
+    QStringList backendTypes() const override;
 
-    QString renderPolicy() const;
+    QString renderPolicy() const override;
 
-    QStringList renderPosition() const;
+    QStringList renderPosition() const override;
 
-    QString name() const;
+    QString name() const override;
 
-    QString guiString() const;
+    QString guiString() const override;
 
-    QString nameId() const;
+    QString nameId() const override;
 
-    QString version() const;
+    QString version() const override;
 
-    QString description() const;
+    QString description() const override;
 
-    QString copyrightYears() const;
+    QString copyrightYears() const override;
 
     QVector<PluginAuthor> pluginAuthors() const override;
 
-    QIcon icon () const;
+    QIcon icon () const override;
 
-    QDialog *configDialog();
+    QDialog *configDialog() override;
 
-    void initialize ();
+    void initialize () override;
 
-    bool isInitialized () const;
+    bool isInitialized () const override;
 
-    virtual bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 );
+    bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 ) override;
 
-    virtual qreal zValue() const;
+    qreal zValue() const override;
 
-    virtual QHash<QString,QVariant> settings() const;
+    QHash<QString,QVariant> settings() const override;
 
-    virtual void setSettings( const QHash<QString,QVariant> &settings );
+    void setSettings( const QHash<QString,QVariant> &settings ) override;
 
 
 

@@ -36,7 +36,7 @@ public:
     void setPlanet( const QString &lcPlanet );
     void updateVisibility();
 
-    void parseFile( const QString &id, const QByteArray &file );
+    void parseFile( const QString &id, const QByteArray &file ) override;
 
 protected:
     /**

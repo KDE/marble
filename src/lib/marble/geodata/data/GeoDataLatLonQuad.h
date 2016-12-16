@@ -32,10 +32,10 @@ public:
     bool operator==( const GeoDataLatLonQuad &other ) const;
     bool operator!=( const GeoDataLatLonQuad &other ) const;
 
-    ~GeoDataLatLonQuad();
+    ~GeoDataLatLonQuad() override;
 
     /** Provides type information for downcasting a GeoNode */
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 
     qreal bottomLeftLatitude( GeoDataCoordinates::Unit unit ) const;
     qreal bottomRightLatitude( GeoDataCoordinates::Unit unit ) const;

@@ -31,7 +31,7 @@ public:
     GeoDataSimpleField( const GeoDataSimpleField& other );
     bool operator==( const GeoDataSimpleField& other ) const;
     bool operator!=( const GeoDataSimpleField& other ) const;
-    virtual ~GeoDataSimpleField();
+    ~GeoDataSimpleField() override;
 
     /*
      * @brief Enum for different values of type attribute of SimpleField
@@ -89,7 +89,7 @@ public:
     /*
      * @brief Provides information for downcasting a GeoNode
      */
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 
     /*
      * @brief Serialize SimpleField to a stream

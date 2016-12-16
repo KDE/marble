@@ -38,7 +38,7 @@ class GenericScanlineTextureMapper::RenderJob : public QRunnable
 public:
     RenderJob( StackedTileLoader *tileLoader, int tileLevel, QImage *canvasImage, const ViewportParams *viewport, MapQuality mapQuality, int yTop, int yBottom );
 
-    virtual void run();
+    void run() override;
 
 private:
     StackedTileLoader *const m_tileLoader;

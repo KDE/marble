@@ -38,7 +38,7 @@ public:
 
     explicit Routing( QQuickItem* parent = 0 );
 
-    ~Routing();
+    ~Routing() override;
 
     void setMarbleMap( MarbleMap* marbleMap );
 
@@ -110,7 +110,7 @@ Q_SIGNALS:
 
 protected:
     // Implements QQuickItem interface
-    QSGNode * updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *);
+    QSGNode * updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *) override;
 
 private Q_SLOTS:
     void updateWaypointItems();

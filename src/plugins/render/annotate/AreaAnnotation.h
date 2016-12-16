@@ -37,13 +37,13 @@ class AreaAnnotation : public SceneGraphicsItem
 public:
     explicit AreaAnnotation( GeoDataPlacemark *placemark );
 
-    ~AreaAnnotation();
+    ~AreaAnnotation() override;
 
     /**
      * @brief Paints the nodes on the screen and updates the regions which correspond
      * to each node using the given GeoPainter.
      */
-    virtual void paint( GeoPainter *painter, const ViewportParams *viewport, const QString &layer, int tileZoomLevel );
+    void paint( GeoPainter *painter, const ViewportParams *viewport, const QString &layer, int tileZoomLevel ) override;
 
     /**
      * @brief Returns true if the given QPoint is contained by the current polygon. Note
@@ -53,18 +53,18 @@ public:
      * polygon if either polygon's interior, the outer nodes or the inner nodes contain
      * it).
      */
-    virtual bool containsPoint( const QPoint &point ) const;
+    bool containsPoint( const QPoint &point ) const override;
 
     /**
      * @brief It is used so far to remove the hover effect while being in the
      * AddingPolylineNodes state (@see SceneGraphicsItem::dealWithItemChange documentation).
      */
-    virtual void dealWithItemChange( const SceneGraphicsItem *other );
+    void dealWithItemChange( const SceneGraphicsItem *other ) override;
 
     /**
      * @brief Moves the whole polygon to the destination coordinates.
      */
-    virtual void move( const GeoDataCoordinates &source, const GeoDataCoordinates &destination );
+    void move( const GeoDataCoordinates &source, const GeoDataCoordinates &destination ) override;
 
     /**
      * @brief Changes the busy state of the object according to @param enabled. It is mostly
@@ -122,7 +122,7 @@ public:
     /**
      * @brief Provides information for downcasting a SceneGraphicsItem.
      */
-    virtual const char *graphicType() const;
+    const char *graphicType() const override;
 
 protected:
     /**
@@ -130,15 +130,15 @@ protected:
      * SceneGraphicsItem::sceneEvent() (@see Template Method pattern). Each of these
      * event handlers are structured according to the state.
      */
-    virtual bool mousePressEvent( QMouseEvent *event );
-    virtual bool mouseMoveEvent( QMouseEvent *event );
-    virtual bool mouseReleaseEvent( QMouseEvent *event );
+    bool mousePressEvent( QMouseEvent *event ) override;
+    bool mouseMoveEvent( QMouseEvent *event ) override;
+    bool mouseReleaseEvent( QMouseEvent *event ) override;
 
     /**
      * @brief Protected method which applies the Polygons modifications when changing
      * states.
      */
-    virtual void dealWithStateChange( SceneGraphicsItem::ActionState previousState );
+    void dealWithStateChange( SceneGraphicsItem::ActionState previousState ) override;
 
 private:
     /**

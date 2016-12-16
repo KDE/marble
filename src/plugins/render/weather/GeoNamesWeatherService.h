@@ -25,13 +25,13 @@ class GeoNamesWeatherService : public AbstractWeatherService
 
  public:
     explicit GeoNamesWeatherService( const MarbleModel *model, QObject *parent );
-    ~GeoNamesWeatherService();
+    ~GeoNamesWeatherService() override;
 
  public Q_SLOTS:
     void getAdditionalItems( const GeoDataLatLonAltBox& box,
-                             qint32 number = 10 );
-    void getItem( const QString &id );
-    void parseFile( const QByteArray& file );
+                             qint32 number = 10 ) override;
+    void getItem( const QString &id ) override;
+    void parseFile( const QByteArray& file ) override;
 
  private:
     AbstractDataPluginItem* parse(const QJsonObject &weatherObservationObject);

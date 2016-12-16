@@ -44,7 +44,7 @@ class GeoSceneGroup : public QObject,
 
  public:
     explicit GeoSceneGroup( const QString& name );
-    ~GeoSceneGroup();
+    ~GeoSceneGroup() override;
 
     /**
      * @brief  Get the availability of a property in this group

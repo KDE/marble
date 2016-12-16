@@ -83,7 +83,7 @@ class GEODATA_EXPORT GeoDataLinearRing : public GeoDataLineString
 /*!
     \brief Destroys a LinearRing.
 */
-    virtual ~GeoDataLinearRing();
+    ~GeoDataLinearRing() override;
 
 
 /*!
@@ -99,7 +99,7 @@ class GEODATA_EXPORT GeoDataLinearRing : public GeoDataLineString
 
     \return <code>true</code> for a LinearRing.
 */
-    virtual bool isClosed() const;
+    bool isClosed() const override;
 
     
 /*!
@@ -114,7 +114,7 @@ class GEODATA_EXPORT GeoDataLinearRing : public GeoDataLineString
     This method can be used as an approximation for the circumference of a
     LinearRing.
 */
-    virtual qreal length( qreal planetRadius, int offset = 0 ) const;
+    qreal length( qreal planetRadius, int offset = 0 ) const override;
 
 /*!
     \brief Returns whether the given coordinates lie within the polygon.

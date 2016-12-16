@@ -25,7 +25,7 @@ class ArrowDiscWidget : public QWidget
     Q_OBJECT
 public:
     explicit ArrowDiscWidget( QWidget *parent = 0 );
-    ~ArrowDiscWidget();
+    ~ArrowDiscWidget() override;
 
     void setMarbleWidget( MarbleWidget *marbleWidget );
 
@@ -33,11 +33,11 @@ Q_SIGNALS:
     void repaintNeeded();
 
 protected:
-    void paintEvent( QPaintEvent * );
-    void mouseMoveEvent( QMouseEvent *mouseEvent );
-    void mousePressEvent( QMouseEvent *mouseEvent );
-    void mouseReleaseEvent( QMouseEvent *mouseEvent );
-    void leaveEvent( QEvent *event );
+    void paintEvent( QPaintEvent * ) override;
+    void mouseMoveEvent( QMouseEvent *mouseEvent ) override;
+    void mousePressEvent( QMouseEvent *mouseEvent ) override;
+    void mouseReleaseEvent( QMouseEvent *mouseEvent ) override;
+    void leaveEvent( QEvent *event ) override;
     void repaint();
 
 private Q_SLOTS:

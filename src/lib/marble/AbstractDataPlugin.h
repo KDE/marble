@@ -47,31 +47,31 @@ class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin
  public:    
     explicit AbstractDataPlugin( const MarbleModel *marbleModel );
 
-    virtual ~AbstractDataPlugin();
+    ~AbstractDataPlugin() override;
 
-    bool isInitialized() const;
+    bool isInitialized() const override;
 
     /**
      * @brief Returns the name(s) of the backend that the plugin can render
      */
-    QStringList backendTypes() const;
+    QStringList backendTypes() const override;
     
     /**
      * @brief Return how the plugin settings should be used.
      */
-    QString renderPolicy() const;
+    QString renderPolicy() const override;
     
     /**
      * @brief Preferred level in the layer stack for the rendering
      */
-    QStringList renderPosition() const;
+    QStringList renderPosition() const override;
     
     /**
      * @brief Renders the content provided by the plugin on the viewport.
      * @return @c true  Returns whether the rendering has been successful
      */
     bool render( GeoPainter *painter, ViewportParams *viewport,
-                 const QString& renderPos = QLatin1String("NONE"), GeoSceneLayer * layer = 0 );
+                 const QString& renderPos = QLatin1String("NONE"), GeoSceneLayer * layer = 0 ) override;
 
     /**
      * @return The model associated with the plugin.
@@ -108,7 +108,7 @@ class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin
      *
      * @return: The type of render plugin this is.
      */
-    virtual RenderType renderType() const;
+    RenderType renderType() const override;
 
     /** Convenience method to set the favorite item state on the current model */
     void setFavoriteItemsOnly( bool favoriteOnly );

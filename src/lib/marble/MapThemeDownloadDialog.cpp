@@ -30,11 +30,11 @@ class MapItemDelegate : public QStyledItemDelegate
 
 public:
     MapItemDelegate( QListView* view, NewstuffModel* newstuffModel, MarbleWidget* marbleWidget );
-    void paint( QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index ) const;
-    QSize sizeHint( const QStyleOptionViewItem &option, const QModelIndex &index ) const;
+    void paint( QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index ) const override;
+    QSize sizeHint( const QStyleOptionViewItem &option, const QModelIndex &index ) const override;
 
 protected:
-    bool editorEvent( QEvent *event, QAbstractItemModel *model, const QStyleOptionViewItem &option, const QModelIndex &index );
+    bool editorEvent( QEvent *event, QAbstractItemModel *model, const QStyleOptionViewItem &option, const QModelIndex &index ) override;
 
 private:
     enum Element {

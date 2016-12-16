@@ -29,7 +29,7 @@ class OwncloudSyncBackend : public QObject
     
 public:
     explicit OwncloudSyncBackend( CloudSyncManager* cloudSyncManager );
-    ~OwncloudSyncBackend();
+    ~OwncloudSyncBackend() override;
 
     /**
      * Generates an endpoint URL by appending endpoint name to API URL

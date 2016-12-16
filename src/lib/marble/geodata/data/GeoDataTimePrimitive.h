@@ -33,7 +33,7 @@ class GEODATA_EXPORT GeoDataTimePrimitive : public GeoDataObject
 {
   public:
     /// Provides type information for downcasting a GeoNode
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 
     GeoDataTimePrimitive& operator=( const GeoDataTimePrimitive& other );
 
@@ -41,17 +41,17 @@ class GEODATA_EXPORT GeoDataTimePrimitive : public GeoDataObject
      * @brief Serialize the styleselector to a stream
      * @param  stream  the stream
      */
-    virtual void pack( QDataStream& stream ) const;
+    void pack( QDataStream& stream ) const override;
 
     /**
      * @brief  Unserialize the styleselector from a stream
      * @param  stream  the stream
      */
-    virtual void unpack( QDataStream& stream );
+    void unpack( QDataStream& stream ) override;
 
     GeoDataTimePrimitive();
     GeoDataTimePrimitive( const GeoDataTimePrimitive& other );
-    ~GeoDataTimePrimitive();
+    ~GeoDataTimePrimitive() override;
 private:
     GeoDataTimePrimitivePrivate * const d;
 };

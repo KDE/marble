@@ -21,7 +21,7 @@ namespace kml
 class KmlnearTagHandler : public GeoTagHandler
 {
 public:
-    virtual GeoNode * parse( GeoParser & ) const;
+    GeoNode * parse( GeoParser & ) const override;
 };
 
 }

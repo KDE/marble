@@ -38,7 +38,7 @@ class MARBLE_EXPORT CloudSyncManager : public QObject
 
 public:
     explicit CloudSyncManager( QObject *parent = 0 );
-    ~CloudSyncManager();
+    ~CloudSyncManager() override;
 
     /**
      * Status enumeration

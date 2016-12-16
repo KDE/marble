@@ -32,10 +32,10 @@ class OSRMRunner : public RoutingRunner
 public:
     explicit OSRMRunner(QObject *parent = 0);
 
-    ~OSRMRunner();
+    ~OSRMRunner() override;
 
     // Overriding MarbleAbstractRunner
-    virtual void retrieveRoute( const RouteRequest *request );
+    void retrieveRoute( const RouteRequest *request ) override;
 
 private Q_SLOTS:
     /** Route data was retrieved via http */

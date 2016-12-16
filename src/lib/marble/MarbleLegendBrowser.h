@@ -41,10 +41,10 @@ class MARBLE_EXPORT MarbleLegendBrowser : public MarbleWebView
 
  public:
     explicit MarbleLegendBrowser( QWidget* parent );
-    ~MarbleLegendBrowser();
+    ~MarbleLegendBrowser() override;
 
     void setMarbleModel( MarbleModel *marbleModel );
-    QSize sizeHint() const;
+    QSize sizeHint() const override;
 
  public Q_SLOTS:
     void setCheckedProperty( const QString& name, bool checked );
@@ -62,7 +62,7 @@ class MARBLE_EXPORT MarbleLegendBrowser : public MarbleWebView
     void openLinkExternally( const QUrl &url );
 
  protected:
-    bool event( QEvent * event );
+    bool event( QEvent * event ) override;
     QString  readHtml( const QUrl & name );
     QString  generateSectionsHtml();
     void  translateHtml( QString & html );

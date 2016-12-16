@@ -37,7 +37,7 @@ public:
     explicit AutoNavigation( MarbleModel *model, const ViewportParams *viewport, QObject *parent = 0 );
 
     /** Destructor */
-    ~AutoNavigation();
+    ~AutoNavigation() override;
 
     /**
     * An enum type

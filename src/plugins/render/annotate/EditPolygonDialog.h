@@ -37,7 +37,7 @@ public:
     EditPolygonDialog( GeoDataPlacemark *placemark,
                        const QHash<qint64, OsmPlacemarkData> *relations = 0,
                        QWidget *parent = 0 );
-    ~EditPolygonDialog();
+    ~EditPolygonDialog() override;
 
 public Q_SLOTS:
     void handleAddingNode( const GeoDataCoordinates &node );

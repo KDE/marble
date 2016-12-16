@@ -29,10 +29,10 @@ public:
 
     const GeoDataScreenOverlay* screenOverlay() const;
 
-    void setProjection( const ViewportParams *viewport );
+    void setProjection( const ViewportParams *viewport ) override;
 
 protected:
-    virtual void paint( QPainter* painter );
+    void paint( QPainter* painter ) override;
 
 private:
     static qreal pixelValue( GeoDataVec2::Unit unit, qreal screenSize, qreal imageSize, qreal value );

@@ -29,7 +29,7 @@ class MergingPolylineNodesAnimation : public QObject
 
 public:
     explicit MergingPolylineNodesAnimation( PolylineAnnotation *polyline );
-    ~MergingPolylineNodesAnimation();
+    ~MergingPolylineNodesAnimation() override;
 
 public Q_SLOTS:
     void startAnimation();

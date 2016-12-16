@@ -30,14 +30,14 @@ class BBCWeatherService : public AbstractWeatherService
  
  public:
     explicit BBCWeatherService( const MarbleModel *model, QObject *parent );
-    ~BBCWeatherService();
+    ~BBCWeatherService() override;
 
-    void setFavoriteItems( const QStringList& favorite );
+    void setFavoriteItems( const QStringList& favorite ) override;
     
  public Q_SLOTS:
     void getAdditionalItems( const GeoDataLatLonAltBox& box,
-                             qint32 number = 10 );
-    virtual void getItem( const QString &id );
+                             qint32 number = 10 ) override;
+    void getItem( const QString &id ) override;
 
  private Q_SLOTS:
     void fetchStationList();

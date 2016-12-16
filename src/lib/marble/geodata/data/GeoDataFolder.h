@@ -51,14 +51,14 @@ class GEODATA_EXPORT GeoDataFolder : public GeoDataContainer
  public:
     GeoDataFolder();
     GeoDataFolder( const GeoDataFolder& other );
-    ~GeoDataFolder();
+    ~GeoDataFolder() override;
 
     GeoDataFolder& operator=(const GeoDataFolder& other);
 
     bool operator==( const GeoDataFolder &other ) const;
     bool operator!=( const GeoDataFolder &other ) const;
 
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 
     GeoDataFeature * clone() const override;
 

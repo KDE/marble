@@ -36,10 +36,10 @@ public:
     bool operator==( const GeoDataItemIcon &other ) const;
     bool operator!=( const GeoDataItemIcon &other ) const;
 
-    ~GeoDataItemIcon();
+    ~GeoDataItemIcon() override;
 
     /** Provides type information for downcasting a GeoNode */
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 
     enum ItemIconState {
         Open = 1 << 0,

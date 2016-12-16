@@ -39,11 +39,11 @@ class GeoDataThumbnailer : public QObject, public ThumbCreator
 
 public:
     GeoDataThumbnailer();
-    virtual ~GeoDataThumbnailer();
+    ~GeoDataThumbnailer() override;
 
 public: // ThumbCreator API
-    virtual bool create(const QString &path, int width, int height, QImage &image);
-    virtual Flags flags() const;
+    bool create(const QString &path, int width, int height, QImage &image) override;
+    Flags flags() const override;
 
 private Q_SLOTS:
     void onGeoDataObjectAdded(GeoDataObject *object);

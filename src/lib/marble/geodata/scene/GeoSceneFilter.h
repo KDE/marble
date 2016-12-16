@@ -40,7 +40,7 @@ class GeoSceneFilter : public GeoNode
 {
  public:
     explicit GeoSceneFilter( const QString& name );
-    ~GeoSceneFilter();
+    ~GeoSceneFilter() override;
 
     QString name() const;
     void setName( const QString& name );

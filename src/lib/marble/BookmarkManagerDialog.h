@@ -32,7 +32,7 @@ class MARBLE_EXPORT BookmarkManagerDialog : public QDialog, private Ui::UiBookma
     explicit BookmarkManagerDialog( MarbleModel* model, QWidget *parent = 0 );
 
     /** Destructor */
-    ~BookmarkManagerDialog();
+    ~BookmarkManagerDialog() override;
 
     void setButtonBoxVisible( bool visible );
 

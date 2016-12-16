@@ -36,10 +36,10 @@ class GEODATA_EXPORT GeoDataExtendedData : public GeoDataObject
   public:
     GeoDataExtendedData();
     GeoDataExtendedData( const GeoDataExtendedData& other );
-    virtual ~GeoDataExtendedData();
+    ~GeoDataExtendedData() override;
 
     /// Provides type information for downcasting a GeoNode
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 
     /**
      * @brief assignment operator
@@ -132,13 +132,13 @@ class GEODATA_EXPORT GeoDataExtendedData : public GeoDataObject
      * @brief Serialize the ExtendedData to a stream
      * @param  stream  the stream
      */
-    virtual void pack( QDataStream& stream ) const;
+    void pack( QDataStream& stream ) const override;
 
     /**
      * @brief  Unserialize the ExtendedData from a stream
      * @param  stream  the stream
      */
-    virtual void unpack( QDataStream& stream );
+    void unpack( QDataStream& stream ) override;
 
 private:
     GeoDataExtendedDataPrivate * const d;

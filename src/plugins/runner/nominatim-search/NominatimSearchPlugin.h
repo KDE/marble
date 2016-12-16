@@ -27,21 +27,21 @@ class NominatimPlugin : public SearchRunnerPlugin
 public:
     explicit NominatimPlugin( QObject *parent = 0 );
 
-    QString name() const;
+    QString name() const override;
 
-    QString guiString() const;
+    QString guiString() const override;
 
-    QString nameId() const;
+    QString nameId() const override;
 
-    QString version() const;
+    QString version() const override;
 
-    QString description() const;
+    QString description() const override;
 
-    QString copyrightYears() const;
+    QString copyrightYears() const override;
 
     QVector<PluginAuthor> pluginAuthors() const override;
 
-    virtual SearchRunner* newRunner() const;
+    SearchRunner* newRunner() const override;
 };
 
 }

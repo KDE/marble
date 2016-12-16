@@ -56,28 +56,28 @@ class PlacemarkLayer : public QObject, public LayerInterface
                     MarbleClock *clock,
                     const StyleBuilder *styleBuilder,
                     QObject *parent = 0 );
-    ~PlacemarkLayer();
+    ~PlacemarkLayer() override;
 
     /**
      * @reimp
      */
-    QStringList renderPosition() const;
+    QStringList renderPosition() const override;
 
     /**
      * @reimp
      */
-    qreal zValue() const;
+    qreal zValue() const override;
 
     /**
      * @reimp
      */
     bool render( GeoPainter *painter, ViewportParams *viewport,
                  const QString &renderPos = QLatin1String("NONE"),
-                 GeoSceneLayer *layer = 0 );
+                 GeoSceneLayer *layer = 0 ) override;
 
-    RenderState renderState() const;
+    RenderState renderState() const override;
 
-    virtual QString runtimeTrace() const;
+    QString runtimeTrace() const override;
 
     /**
      * Returns a list of model indexes that are at position @p pos.

@@ -40,7 +40,7 @@ class GEODATA_EXPORT GeoDataIconStyle : public GeoDataColorStyle
     GeoDataIconStyle( const GeoDataIconStyle& other );
     explicit GeoDataIconStyle( const QString& iconPath,
                                const QPointF &hotSpot = QPointF( 0.5, 0.5 ) );
-    ~GeoDataIconStyle();
+    ~GeoDataIconStyle() override;
 
     GeoDataIconStyle& operator=( const GeoDataIconStyle& other );
 
@@ -48,7 +48,7 @@ class GEODATA_EXPORT GeoDataIconStyle : public GeoDataColorStyle
     bool operator!=( const GeoDataIconStyle &other ) const;
 
     /// Provides type information for downcasting a GeoData
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 
     void setIcon( const QImage& icon );
     QImage icon() const;
@@ -96,8 +96,8 @@ class GEODATA_EXPORT GeoDataIconStyle : public GeoDataColorStyle
     /*
      * Serializable methods
      */
-    virtual void pack( QDataStream& stream ) const;
-    virtual void unpack( QDataStream& stream );
+    void pack( QDataStream& stream ) const override;
+    void unpack( QDataStream& stream ) override;
 
   private:
     GeoDataIconStylePrivate * const d;

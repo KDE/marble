@@ -20,8 +20,8 @@ class PntRunner : public ParsingRunner
     Q_OBJECT
 public:
     explicit PntRunner(QObject *parent = 0);
-    ~PntRunner();
-    GeoDataDocument* parseFile( const QString &fileName, DocumentRole role, QString& error );
+    ~PntRunner() override;
+    GeoDataDocument* parseFile( const QString &fileName, DocumentRole role, QString& error ) override;
 };
 
 }

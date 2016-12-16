@@ -40,9 +40,9 @@ class GEODATA_EXPORT GeoSceneSection : public GeoNode
 {
  public:
     explicit GeoSceneSection( const QString& name );
-    ~GeoSceneSection();
+    ~GeoSceneSection() override;
 
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 
     /**
      * @brief  Add an item to the legend section

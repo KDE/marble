@@ -68,7 +68,7 @@ class StackedTileLoader : public QObject
          *                        the tiles from a remote resource.
          */
         explicit StackedTileLoader( MergedLayerDecorator *mergedLayerDecorator, QObject *parent = 0 );
-        virtual ~StackedTileLoader();
+        ~StackedTileLoader() override;
 
         int tileColumnCount( int level ) const;
 

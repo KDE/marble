@@ -38,7 +38,7 @@ public:
     explicit OpenRouteServiceRunner(QObject *parent = 0);
 
     // Overriding MarbleAbstractRunner
-    virtual void retrieveRoute( const RouteRequest *request );
+    void retrieveRoute( const RouteRequest *request ) override;
 
 private Q_SLOTS:
     /** Route data was retrieved via http */

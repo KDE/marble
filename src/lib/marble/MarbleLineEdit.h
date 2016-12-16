@@ -38,7 +38,7 @@ public:
     explicit MarbleLineEdit( QWidget *parent = 0 );
 
     /** Destructor */
-    ~MarbleLineEdit();
+    ~MarbleLineEdit() override;
 
     void setDecorator( const QPixmap &decorator );
 
@@ -51,9 +51,9 @@ Q_SIGNALS:
     void decoratorButtonClicked();
 
 protected:
-    virtual void mouseReleaseEvent( QMouseEvent* event );
+    void mouseReleaseEvent( QMouseEvent* event ) override;
 
-    virtual void resizeEvent( QResizeEvent* event );
+    void resizeEvent( QResizeEvent* event ) override;
 
 private Q_SLOTS:
     void updateClearButtonIcon( const QString& text );

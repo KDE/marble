@@ -48,7 +48,7 @@ class MARBLE_EXPORT MovieCapture : public QObject
 public:
     enum SnapshotMethod { TimeDriven, DataDriven };
     MovieCapture(MarbleWidget *widget, QObject *parent);
-    ~MovieCapture();
+    ~MovieCapture() override;
 
     int fps() const;
     QString destination() const;

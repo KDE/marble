@@ -26,10 +26,10 @@ class GosmoreRunner : public RoutingRunner
 public:
     explicit GosmoreRunner(QObject *parent = 0);
 
-    ~GosmoreRunner();
+    ~GosmoreRunner() override;
 
     // Overriding MarbleAbstractRunner
-    virtual void retrieveRoute( const RouteRequest *request );
+    void retrieveRoute( const RouteRequest *request ) override;
 
 private:
     GosmoreRunnerPrivate* const d;

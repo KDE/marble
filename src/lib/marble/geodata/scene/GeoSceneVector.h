@@ -39,7 +39,7 @@ class GEODATA_EXPORT GeoSceneVector : public GeoSceneAbstractDataset
 {
  public:
     explicit GeoSceneVector( const QString& name );
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 
     QString sourceFile() const;
     void setSourceFile( const QString& sourceFile );

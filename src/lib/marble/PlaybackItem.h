@@ -25,7 +25,7 @@ class PlaybackItem : public QObject
 {
     Q_OBJECT
 public:
-    virtual ~PlaybackItem();
+    ~PlaybackItem() override;
     virtual void play() = 0;
     virtual void pause() = 0;
     virtual void seek( double position ) = 0;

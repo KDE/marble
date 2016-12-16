@@ -27,10 +27,10 @@ class MapQuestRunner : public RoutingRunner
 public:
     explicit MapQuestRunner(QObject *parent = 0);
 
-    ~MapQuestRunner();
+    ~MapQuestRunner() override;
 
     // Overriding MarbleAbstractRunner
-    virtual void retrieveRoute( const RouteRequest *request );
+    void retrieveRoute( const RouteRequest *request ) override;
 
 private Q_SLOTS:
     void get();

@@ -25,11 +25,11 @@ class DeclarativeDataPluginItem: public AbstractDataPluginItem
 public:
     explicit DeclarativeDataPluginItem ( QObject *parent = 0 );
 
-    ~DeclarativeDataPluginItem();
+    ~DeclarativeDataPluginItem() override;
 
-    virtual bool initialized() const;
+    bool initialized() const override;
 
-    bool operator<( const AbstractDataPluginItem *other ) const;
+    bool operator<( const AbstractDataPluginItem *other ) const override;
 };
 
 }

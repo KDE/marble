@@ -35,7 +35,7 @@ class MARBLE_EXPORT PositionTracking : public QObject
 
 public:
     explicit PositionTracking( GeoDataTreeModel* model );
-    ~PositionTracking();
+    ~PositionTracking() override;
 
     /**
       * Change the position provider to use. You can provide 0 to disable

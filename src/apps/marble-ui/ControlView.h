@@ -48,7 +48,7 @@ class ControlView : public QWidget
 
  public:
     explicit ControlView( QWidget * = 0 );
-    virtual ~ControlView();
+    ~ControlView() override;
 
     /**
       * Returns the version of the Marble applications (which differs from
@@ -131,16 +131,16 @@ Q_SIGNALS:
     void mapThemeDeleted();
 
 protected:
-    void closeEvent( QCloseEvent *event );
+    void closeEvent( QCloseEvent *event ) override;
     /**
      * @brief Reimplementation of the dragEnterEvent() function in QWidget.
      */
-    void dragEnterEvent(QDragEnterEvent *event);
+    void dragEnterEvent(QDragEnterEvent *event) override;
 
     /**
      * @brief Reimplementation of the dropEvent() function in QWidget.
      */
-    void dropEvent(QDropEvent *event);
+    void dropEvent(QDropEvent *event) override;
 
 private Q_SLOTS:
     void showSearch();

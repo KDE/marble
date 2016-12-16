@@ -36,7 +36,7 @@ public:
     explicit VoiceNavigationModel( QObject *parent = 0 );
 
     /** Destructor */
-    ~VoiceNavigationModel();
+    ~VoiceNavigationModel() override;
 
 // Initialization
     QString speaker() const;

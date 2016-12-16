@@ -33,7 +33,7 @@ public:
     explicit ReverseGeocodingRunnerPlugin( QObject* parent = 0 );
 
     /** Destructor */
-    virtual ~ReverseGeocodingRunnerPlugin();
+    ~ReverseGeocodingRunnerPlugin() override;
 
     /**
      * @brief Returns the string that should appear in the user interface.
@@ -63,7 +63,7 @@ public:
 
     // Overridden methods with default implementations
 
-    virtual QIcon icon() const;
+    QIcon icon() const override;
 
 protected:
     void setSupportedCelestialBodies( const QStringList &celestialBodies );

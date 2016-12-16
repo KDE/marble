@@ -65,7 +65,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
     };
 
     explicit RenderPlugin( const MarbleModel *marbleModel );
-    virtual ~RenderPlugin();
+    ~RenderPlugin() override;
 
     /**
      * @brief String that should be displayed in GUI
@@ -198,9 +198,9 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
      */
     virtual RenderType renderType() const;
 
-    RenderState renderState() const;
+    RenderState renderState() const override;
 
-    virtual QString runtimeTrace() const;
+    QString runtimeTrace() const override;
 
  public Q_SLOTS:
     /**
@@ -321,7 +321,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
     void repaintNeeded( const QRegion& dirtyRegion = QRegion() );
 
  protected:
-    bool eventFilter( QObject *, QEvent * );
+    bool eventFilter( QObject *, QEvent * ) override;
 
  private:
     friend class RenderPluginModel;

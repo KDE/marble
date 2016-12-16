@@ -31,7 +31,7 @@ class GEODATA_EXPORT GeoDataOverlay: public GeoDataFeature
     /** Constructor */
     GeoDataOverlay();
 
-    ~GeoDataOverlay();
+    ~GeoDataOverlay() override;
 
     GeoDataOverlay( const GeoDataOverlay &other );
 

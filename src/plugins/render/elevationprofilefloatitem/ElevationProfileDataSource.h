@@ -66,7 +66,7 @@ class ElevationProfileTrackDataSource : public ElevationProfileDataSource
 public:
     explicit ElevationProfileTrackDataSource( const GeoDataTreeModel *treeModel, QObject *parent = 0 );
 
-    virtual bool isDataAvailable() const;
+    bool isDataAvailable() const override;
 
     QStringList sourceDescriptions() const;
 
@@ -75,10 +75,10 @@ public:
     int currentSourceIndex() const;
 
 public Q_SLOTS:
-    virtual void requestUpdate();
+    void requestUpdate() override;
 
 protected:
-    virtual qreal getElevation(const GeoDataCoordinates &coordinates) const;
+    qreal getElevation(const GeoDataCoordinates &coordinates) const override;
 
 private Q_SLOTS:
     void handleObjectAdded( GeoDataObject *object );
@@ -101,13 +101,13 @@ class ElevationProfileRouteDataSource : public ElevationProfileDataSource
 public:
     ElevationProfileRouteDataSource( const RoutingModel *routingModel, const ElevationModel *elevationModel, QObject *parent = 0 );
 
-    virtual bool isDataAvailable() const;
+    bool isDataAvailable() const override;
 
 public Q_SLOTS:
-    virtual void requestUpdate();
+    void requestUpdate() override;
 
 protected:
-    virtual qreal getElevation(const GeoDataCoordinates &coordinates) const;
+    qreal getElevation(const GeoDataCoordinates &coordinates) const override;
 
 private:
     const RoutingModel *const m_routingModel;

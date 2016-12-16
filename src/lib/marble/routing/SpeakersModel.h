@@ -38,16 +38,16 @@ public:
     explicit SpeakersModel( QObject *parent = 0 );
 
     /** Destructor */
-    ~SpeakersModel();
+    ~SpeakersModel() override;
 
     /** Overload of QAbstractListModel */
-    int rowCount ( const QModelIndex &parent = QModelIndex() ) const;
+    int rowCount ( const QModelIndex &parent = QModelIndex() ) const override;
 
     /** Overload of QAbstractListModel */
-    QVariant data ( const QModelIndex &index, int role = Qt::DisplayRole ) const;
+    QVariant data ( const QModelIndex &index, int role = Qt::DisplayRole ) const override;
 
     /** Overload of QAbstractListModel */
-    QHash<int, QByteArray> roleNames() const;
+    QHash<int, QByteArray> roleNames() const override;
 
     /** @todo FIXME https://bugreports.qt-project.org/browse/QTCOMPONENTS-1206 */
     int count() const;

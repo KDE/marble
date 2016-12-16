@@ -44,9 +44,9 @@ class GEODATA_EXPORT GeoSceneLayer : public GeoNode
 {
  public:
     explicit GeoSceneLayer( const QString& name );
-    ~GeoSceneLayer();
+    ~GeoSceneLayer() override;
     
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 
     /**
      * @brief  Add a section to the legend

@@ -93,7 +93,7 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry
 /*!
     \brief Destroys a LineString.
 */
-    virtual ~GeoDataLineString();
+    ~GeoDataLineString() override;
 
 /*!
     \brief Returns whether a LineString is a closed polygon.
@@ -146,7 +146,7 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry
     \see GeoDataLatLonAltBox
 */
 
-   virtual const GeoDataLatLonAltBox& latLonAltBox() const;
+   const GeoDataLatLonAltBox& latLonAltBox() const override;
 
 /**
   * @brief Returns the length of LineString across a sphere starting from a coordinate in LineString
@@ -383,14 +383,14 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry
     \brief Serialize the LineString to a stream.
     \param stream the stream.
 */
-    virtual void pack( QDataStream& stream ) const;
+    void pack( QDataStream& stream ) const override;
 
 
 /*!
     \brief Unserialize the LineString from a stream.
     \param stream the stream.
 */
-    virtual void unpack( QDataStream& stream );
+    void unpack( QDataStream& stream ) override;
 
  protected:
     explicit GeoDataLineString(GeoDataLineStringPrivate* priv);

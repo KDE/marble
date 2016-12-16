@@ -46,9 +46,9 @@ class WeatherItem : public AbstractDataPluginItem
  public:
     explicit WeatherItem( QObject *parent = 0 );
     explicit WeatherItem( MarbleWidget* widget, QObject *parent = 0 );
-    ~WeatherItem();
+    ~WeatherItem() override;
     
-    QAction *action();
+    QAction *action() override;
 
     /**
      * Test if the item wants to request @p type again.
@@ -60,11 +60,11 @@ class WeatherItem : public AbstractDataPluginItem
      */
     virtual QString service() const = 0;
      
-    bool initialized() const;
+    bool initialized() const override;
     
-    virtual void addDownloadedFile( const QString& url, const QString& type ) = 0;
+    void addDownloadedFile( const QString& url, const QString& type ) override = 0;
                          
-    bool operator<( const AbstractDataPluginItem *other ) const;
+    bool operator<( const AbstractDataPluginItem *other ) const override;
     
     QString stationName() const;
     void setStationName( const QString& name );
@@ -84,11 +84,11 @@ class WeatherItem : public AbstractDataPluginItem
     quint8 priority() const;
     void setPriority( quint8 priority );
 
-    void setSettings( const QHash<QString, QVariant>& settings );
+    void setSettings( const QHash<QString, QVariant>& settings ) override;
 
     void setMarbleWidget( MarbleWidget *widget );
 
-    virtual QList<QAction*> actions();
+    QList<QAction*> actions() override;
 
     QString description() const;
 

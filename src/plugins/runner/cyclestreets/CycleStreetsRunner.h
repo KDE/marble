@@ -27,10 +27,10 @@ class CycleStreetsRunner : public RoutingRunner
 public:
     explicit CycleStreetsRunner(QObject *parent = 0);
 
-    ~CycleStreetsRunner();
+    ~CycleStreetsRunner() override;
 
     // Overriding MarbleAbstractRunner
-    virtual void retrieveRoute( const RouteRequest *request );
+    void retrieveRoute( const RouteRequest *request ) override;
 
 private Q_SLOTS:
     void get();

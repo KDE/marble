@@ -31,27 +31,27 @@ class FileStoragePolicy : public StoragePolicy
         /**
          * Destroys the cache storage policy.
          */
-        ~FileStoragePolicy();
+        ~FileStoragePolicy() override;
 
         /**
          * Returns whether the @p fileName exists already.
          */
-        bool fileExists( const QString &fileName ) const;
+        bool fileExists( const QString &fileName ) const override;
 
         /**
          * Updates the @p fileName with the given @p data.
          */
-        bool updateFile( const QString &fileName, const QByteArray &data );
+        bool updateFile( const QString &fileName, const QByteArray &data ) override;
 
         /**
          * Clears the cache.
          */
-	void clearCache();
+	void clearCache() override;
 
         /**
          * Returns the last error message.
          */
-        QString lastErrorMessage() const;
+        QString lastErrorMessage() const override;
 
     private:
 	Q_DISABLE_COPY( FileStoragePolicy )

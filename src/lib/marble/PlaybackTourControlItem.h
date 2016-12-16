@@ -23,11 +23,11 @@ class PlaybackTourControlItem : public PlaybackItem
 public:
     explicit PlaybackTourControlItem( const GeoDataTourControl* tourControl );
     const GeoDataTourControl* tourControl() const;
-    double duration() const;
-    void play();
-    void pause();
-    void seek( double position );
-    void stop();
+    double duration() const override;
+    void play() override;
+    void pause() override;
+    void seek( double position ) override;
+    void stop() override;
 private:
     const GeoDataTourControl* m_tourControl;
 };

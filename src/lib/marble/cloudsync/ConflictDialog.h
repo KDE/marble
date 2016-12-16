@@ -45,7 +45,7 @@ public:
     void setMergeItem( MergeItem *item );
 
 public Q_SLOTS:
-    void open();
+    void open() override;
     void stopAutoResolve();
 
 Q_SIGNALS:

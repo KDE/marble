@@ -46,9 +46,9 @@ class MARBLE_EXPORT GeoDataTreeModel : public QAbstractItemModel
     /**
      * Destroys the GeoDataModel.
      */
-    ~GeoDataTreeModel();
+    ~GeoDataTreeModel() override;
 
-    virtual bool hasChildren(const QModelIndex &parent) const override;
+    bool hasChildren(const QModelIndex &parent) const override;
 
     /**
      * Return the number of Items in the Model.

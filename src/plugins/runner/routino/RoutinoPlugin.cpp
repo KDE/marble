@@ -87,11 +87,11 @@ public:
         ui_configWidget->transport->addItem(tr("Large lorry"), "hgv");
         ui_configWidget->transport->addItem(tr("Public Service Vehicle"), "psv");
     }
-    virtual ~RoutinoConfigWidget()
+    ~RoutinoConfigWidget() override
     {
         delete ui_configWidget;
     }
-    virtual void loadSettings( const QHash<QString, QVariant> &settings_ )
+    void loadSettings( const QHash<QString, QVariant> &settings_ ) override
     {
         QHash<QString, QVariant> settings = settings_;
 
@@ -108,7 +108,7 @@ public:
         }
     }
 
-    virtual QHash<QString, QVariant> settings() const
+    QHash<QString, QVariant> settings() const override
     {
         QHash<QString,QVariant> settings;
         settings.insert(QStringLiteral("transport"),

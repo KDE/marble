@@ -32,7 +32,7 @@ class MARBLE_EXPORT  LatLonEdit : public QWidget
 public:
     explicit LatLonEdit(QWidget *parent = 0, Dimension dimension = Longitude,
                         GeoDataCoordinates::Notation notation = GeoDataCoordinates::DMS);
-    ~LatLonEdit();
+    ~LatLonEdit() override;
     qreal value() const;
     Dimension dimension() const;
     GeoDataCoordinates::Notation notation() const;

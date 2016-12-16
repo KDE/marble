@@ -30,19 +30,19 @@ class GeoDataLinearRingPrivate : public GeoDataLineStringPrivate
     {
     }
 
-    virtual GeoDataGeometryPrivate* copy()
+    GeoDataGeometryPrivate* copy() override
     { 
         GeoDataLinearRingPrivate* copy = new GeoDataLinearRingPrivate;
         *copy = *this;
         return copy;
     }
 
-    virtual const char* nodeType() const
+    const char* nodeType() const override
     {
         return GeoDataTypes::GeoDataLinearRingType;
     }
 
-    virtual EnumGeometryId geometryId() const
+    EnumGeometryId geometryId() const override
     {
         return GeoDataLinearRingId;
     }

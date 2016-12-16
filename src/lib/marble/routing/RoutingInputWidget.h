@@ -42,7 +42,7 @@ public:
     explicit RoutingInputWidget( MarbleModel* model, int index, QWidget *parent = 0 );
 
     /** Destructor */
-    ~RoutingInputWidget();
+    ~RoutingInputWidget() override;
 
     /**
       * Returns true if the user has selected a valid geo position

@@ -35,33 +35,33 @@ class ProgressFloatItem  : public AbstractFloatItem
 
  public:
     explicit ProgressFloatItem( const MarbleModel *marbleModel = 0 );
-    ~ProgressFloatItem ();
+    ~ProgressFloatItem () override;
 
-    QStringList backendTypes() const;
+    QStringList backendTypes() const override;
 
-    QString name() const;
+    QString name() const override;
 
-    QString guiString() const;
+    QString guiString() const override;
 
-    QString nameId() const;
+    QString nameId() const override;
 
-    QString version() const;
+    QString version() const override;
 
-    QString description() const;
+    QString description() const override;
 
-    QString copyrightYears() const;
+    QString copyrightYears() const override;
 
     QVector<PluginAuthor> pluginAuthors() const override;
 
-    QIcon icon () const;
+    QIcon icon () const override;
 
-    void initialize ();
+    void initialize () override;
 
-    bool isInitialized () const;
+    bool isInitialized () const override;
 
-    QPainterPath backgroundShape() const;
+    QPainterPath backgroundShape() const override;
 
-    void paintContent( QPainter *painter );
+    void paintContent( QPainter *painter ) override;
 
 private Q_SLOTS:
     void removeProgressItem();

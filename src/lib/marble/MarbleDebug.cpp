@@ -22,12 +22,12 @@ public:
         open( QIODevice::WriteOnly );
     }
 
-    qint64 readData( char * /*data*/, qint64 /*maxSize*/ )
+    qint64 readData( char * /*data*/, qint64 /*maxSize*/ ) override
     {
         return -1;
     }
 
-    qint64 writeData( const char * /*data*/, qint64 maxSize )
+    qint64 writeData( const char * /*data*/, qint64 maxSize ) override
     {
         return maxSize;
     }

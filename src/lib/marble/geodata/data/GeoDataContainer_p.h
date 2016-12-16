@@ -34,7 +34,7 @@ class GeoDataContainerPrivate : public GeoDataFeaturePrivate
         }
     }
 
-    ~GeoDataContainerPrivate()
+    ~GeoDataContainerPrivate() override
     {
         qDeleteAll( m_vector );
     }
@@ -52,7 +52,7 @@ class GeoDataContainerPrivate : public GeoDataFeaturePrivate
         return *this;
     }
 
-    virtual EnumFeatureId featureId() const
+    EnumFeatureId featureId() const override
     {
         return GeoDataFolderId;
     }

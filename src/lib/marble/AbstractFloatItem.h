@@ -49,7 +49,7 @@ class MARBLE_EXPORT AbstractFloatItem : public RenderPlugin, public FrameGraphic
     explicit AbstractFloatItem( const MarbleModel *marbleModel,
                                 const QPointF &point = QPointF( 10.0, 10.0 ),
                                 const QSizeF &size = QSizeF( 150.0, 50.0 ) );
-    virtual ~AbstractFloatItem();
+    ~AbstractFloatItem() override;
 
     QHash<QString,QVariant> settings() const override;
     void setSettings(const QHash<QString, QVariant> &settings) override;

@@ -26,7 +26,7 @@ class GeoSceneVectorTileDataset : public GeoSceneTileDataset
 
     explicit GeoSceneVectorTileDataset( const QString& name );
 
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 };
 
 }

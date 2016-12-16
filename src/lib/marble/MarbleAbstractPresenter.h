@@ -44,7 +44,7 @@ class ViewportParams;
 
     public:
         explicit MarbleAbstractPresenter(MarbleMap *map, QObject *parent = 0);
-        virtual ~MarbleAbstractPresenter();
+        ~MarbleAbstractPresenter() override;
 
         qreal moveStep() const;
         int radius() const;

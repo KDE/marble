@@ -48,38 +48,38 @@ class MeasureToolPlugin : public RenderPlugin, public DialogConfigurationInterfa
         Circular
     };
 
-    QStringList backendTypes() const;
-    QString renderPolicy() const;
-    QStringList renderPosition() const;
-    QString name() const;
-    QString guiString() const;
-    QString nameId() const;
+    QStringList backendTypes() const override;
+    QString renderPolicy() const override;
+    QStringList renderPosition() const override;
+    QString name() const override;
+    QString guiString() const override;
+    QString nameId() const override;
 
-    QString version() const;
+    QString version() const override;
 
-    QString description() const;
+    QString description() const override;
 
-    QString copyrightYears() const;
+    QString copyrightYears() const override;
 
     QVector<PluginAuthor> pluginAuthors() const override;
 
-    QIcon icon () const;
+    QIcon icon () const override;
 
-    void initialize ();
+    void initialize () override;
 
-    bool isInitialized () const;
+    bool isInitialized () const override;
 
-    bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 );
+    bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 ) override;
 
-    QDialog *configDialog();
-    QHash<QString,QVariant> settings() const;
-    void setSettings( const QHash<QString,QVariant> &settings );
+    QDialog *configDialog() override;
+    QHash<QString,QVariant> settings() const override;
+    void setSettings( const QHash<QString,QVariant> &settings ) override;
 
  Q_SIGNALS:
     void  numberOfMeasurePointsChanged( int newNumber );
 
  public Q_SLOTS:
-    bool  eventFilter( QObject *object, QEvent *event );
+    bool  eventFilter( QObject *object, QEvent *event ) override;
 
  private:
     void  drawMeasurePoints( GeoPainter *painter );

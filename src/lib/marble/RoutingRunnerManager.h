@@ -38,7 +38,7 @@ public:
      */
     explicit RoutingRunnerManager( const MarbleModel *marbleModel, QObject *parent = 0 );
 
-    ~RoutingRunnerManager();
+    ~RoutingRunnerManager() override;
 
     /**
      * Download routes traversing the stopover points in the given route request

@@ -47,8 +47,8 @@ class GEODATA_EXPORT GeoSceneTileDataset : public GeoSceneAbstractDataset
     enum StorageLayout { Marble, OpenStreetMap, TileMapService };
 
     explicit GeoSceneTileDataset( const QString& name );
-    ~GeoSceneTileDataset();
-    virtual const char* nodeType() const;
+    ~GeoSceneTileDataset() override;
+    const char* nodeType() const override;
 
     QString sourceDir() const;
     void setSourceDir( const QString& sourceDir );

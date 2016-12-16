@@ -31,9 +31,9 @@ class OsmNominatimRunner : public SearchRunner
 public:
     explicit OsmNominatimRunner(QObject *parent = 0);
 
-    ~OsmNominatimRunner();
+    ~OsmNominatimRunner() override;
 
-    void search( const QString &searchTerm, const GeoDataLatLonBox &preferred );
+    void search( const QString &searchTerm, const GeoDataLatLonBox &preferred ) override;
 
 private Q_SLOTS:
     // Forward a result to the search or reverse geocoding handler

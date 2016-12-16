@@ -34,7 +34,7 @@ enum PositionProviderStatus {
 class MARBLE_EXPORT PositionProviderPluginInterface: public PluginInterface
 {
   public:
-    virtual ~PositionProviderPluginInterface();
+    ~PositionProviderPluginInterface() override;
 
     virtual void initialize() = 0;
 

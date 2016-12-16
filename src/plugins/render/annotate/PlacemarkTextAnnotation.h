@@ -23,20 +23,20 @@ class PlacemarkTextAnnotation : public SceneGraphicsItem
 {
 public:
     explicit PlacemarkTextAnnotation( GeoDataPlacemark *placemark );
-    ~PlacemarkTextAnnotation();
+    ~PlacemarkTextAnnotation() override;
 
-    virtual void paint(GeoPainter *painter, const ViewportParams *viewport, const QString &layer, int tileZoomLevel);
+    void paint(GeoPainter *painter, const ViewportParams *viewport, const QString &layer, int tileZoomLevel) override;
 
-    virtual bool containsPoint( const QPoint &eventPos ) const;
+    bool containsPoint( const QPoint &eventPos ) const override;
 
-    virtual void dealWithItemChange( const SceneGraphicsItem *other );
+    void dealWithItemChange( const SceneGraphicsItem *other ) override;
 
-    virtual void move( const GeoDataCoordinates &source, const GeoDataCoordinates &destination );
+    void move( const GeoDataCoordinates &source, const GeoDataCoordinates &destination ) override;
 
     /**
      * @brief Provides information for downcasting a SceneGraphicsItem.
      */
-    virtual const char *graphicType() const;
+    const char *graphicType() const override;
 
     /**
      * @brief Real label color, which is being hidden when placemark has focus
@@ -44,11 +44,11 @@ public:
     QColor labelColor() const;
 
 protected:
-    virtual bool mousePressEvent( QMouseEvent *event );
-    virtual bool mouseMoveEvent( QMouseEvent *event );
-    virtual bool mouseReleaseEvent( QMouseEvent *event );
+    bool mousePressEvent( QMouseEvent *event ) override;
+    bool mouseMoveEvent( QMouseEvent *event ) override;
+    bool mouseReleaseEvent( QMouseEvent *event ) override;
 
-    virtual void dealWithStateChange( SceneGraphicsItem::ActionState previousState );
+    void dealWithStateChange( SceneGraphicsItem::ActionState previousState ) override;
 
 private:
     const ViewportParams *m_viewport;

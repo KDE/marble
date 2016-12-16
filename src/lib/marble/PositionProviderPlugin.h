@@ -27,7 +27,7 @@ class MARBLE_EXPORT PositionProviderPlugin : public QObject, public PositionProv
     Q_OBJECT
 
  public:
-    virtual ~PositionProviderPlugin();
+    ~PositionProviderPlugin() override;
 
     /**
      * @brief Returns the string that should appear in the user interface.

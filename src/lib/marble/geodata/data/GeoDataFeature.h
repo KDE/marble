@@ -55,12 +55,12 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
 
     GeoDataFeature( const GeoDataFeature& other );
 
-    virtual ~GeoDataFeature();
+    ~GeoDataFeature() override;
 
     GeoDataFeature& operator=( const GeoDataFeature& other );
 
     /// Provides type information for downcasting a GeoData
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 
     EnumFeatureId featureId() const;
 
@@ -264,9 +264,9 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
 
 
     /// Serialize the contents of the feature to @p stream.
-    virtual void pack( QDataStream& stream ) const;
+    void pack( QDataStream& stream ) const override;
     /// Unserialize the contents of the feature from @p stream.
-    virtual void unpack( QDataStream& stream );
+    void unpack( QDataStream& stream ) override;
 
  protected:
     // the d-pointer needs to be protected to be accessible from derived classes

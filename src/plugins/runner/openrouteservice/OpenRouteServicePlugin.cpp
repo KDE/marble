@@ -88,7 +88,7 @@ public:
         ui_configWidget->preference->addItem( tr( "Bicycle (preferred Cycleway/-route)" ), "BicycleTour" );
     }
 
-    virtual void loadSettings( const QHash<QString, QVariant> &settings_ )
+    void loadSettings( const QHash<QString, QVariant> &settings_ ) override
     {
         QHash<QString, QVariant> settings = settings_;
 
@@ -103,7 +103,7 @@ public:
         ui_configWidget->noFerries->setCheckState(static_cast<Qt::CheckState>(settings.value(QStringLiteral("noFerries")).toInt()));
     }
 
-    virtual QHash<QString, QVariant> settings() const
+    QHash<QString, QVariant> settings() const override
     {
         QHash<QString,QVariant> settings;
         settings.insert(QStringLiteral("preference"),

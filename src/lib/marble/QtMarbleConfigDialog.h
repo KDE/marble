@@ -32,7 +32,7 @@ class MARBLE_EXPORT QtMarbleConfigDialog : public QDialog
     public:
     explicit QtMarbleConfigDialog(MarbleWidget *marbleWidget, CloudSyncManager *syncManager = 0,
                                    QWidget *parent = 0 );
-    ~QtMarbleConfigDialog();
+    ~QtMarbleConfigDialog() override;
 
     // View Settings
     

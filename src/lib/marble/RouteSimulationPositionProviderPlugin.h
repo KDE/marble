@@ -33,7 +33,7 @@ class RouteSimulationPositionProviderPlugin: public PositionProviderPlugin
 
 public:
     explicit RouteSimulationPositionProviderPlugin( MarbleModel *marbleModel );
-    virtual ~RouteSimulationPositionProviderPlugin();
+    ~RouteSimulationPositionProviderPlugin() override;
 
     // Implementing PluginInterface
     QString name() const override;

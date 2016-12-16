@@ -26,9 +26,9 @@ class MARBLE_DECLARATIVE_EXPORT MarbleDeclarativePlugin : public QQmlExtensionPl
     Q_OBJECT
 public:
     /** Overriding QQmlExtensionPlugin to register types */
-    virtual void registerTypes( const char *uri );
+    void registerTypes( const char *uri ) override;
 
-    void initializeEngine( QQmlEngine *engine, const char *);
+    void initializeEngine( QQmlEngine *engine, const char *) override;
 };
 
 #endif

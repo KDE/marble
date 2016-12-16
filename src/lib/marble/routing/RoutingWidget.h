@@ -46,7 +46,7 @@ public:
     explicit RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent );
 
     /** Destructor */
-    ~RoutingWidget();
+    ~RoutingWidget() override;
 
     /** Show or hide the "open file..." button. Default is false (not visible) */
     void setShowDirectionsButtonVisible( bool visible );
@@ -151,8 +151,8 @@ private Q_SLOTS:
     void handlePlanetChange();
 
 protected:
-    bool eventFilter( QObject *o, QEvent *e );
-    void resizeEvent(QResizeEvent *e);
+    bool eventFilter( QObject *o, QEvent *e ) override;
+    void resizeEvent(QResizeEvent *e) override;
 
 private:
     RoutingWidgetPrivate *const d;

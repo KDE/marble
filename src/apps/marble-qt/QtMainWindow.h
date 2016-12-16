@@ -44,7 +44,7 @@ public:
     explicit MainWindow(const QString& marbleDataPath = QString(),
                         const QVariantMap& cmdLineSettings = QVariantMap(),
                         QWidget *parent=0);
-    ~MainWindow();
+    ~MainWindow() override;
 
 
     ControlView* marbleControl() {
@@ -57,7 +57,7 @@ public:
     void addGeoDataFile( const QString &fileName );
 
 protected:
-    void  closeEvent( QCloseEvent *event );
+    void  closeEvent( QCloseEvent *event ) override;
 
 private:
     void  createActions();

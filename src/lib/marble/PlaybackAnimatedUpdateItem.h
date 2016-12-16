@@ -27,11 +27,11 @@ class PlaybackAnimatedUpdateItem : public PlaybackItem
 public:
     explicit PlaybackAnimatedUpdateItem( GeoDataAnimatedUpdate *animatedUpdate );
     const GeoDataAnimatedUpdate* animatedUpdate() const;
-    double duration() const;
-    void play();
-    void pause();
-    void seek( double );
-    void stop();
+    double duration() const override;
+    void play() override;
+    void pause() override;
+    void seek( double ) override;
+    void stop() override;
     bool isApplied() const;
 
 private:

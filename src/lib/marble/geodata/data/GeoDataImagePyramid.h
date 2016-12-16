@@ -32,10 +32,10 @@ public:
     bool operator==( const GeoDataImagePyramid &other ) const;
     bool operator!=( const GeoDataImagePyramid &other ) const;
 
-    ~GeoDataImagePyramid();
+    ~GeoDataImagePyramid() override;
 
     /** Provides type information for downcasting a GeoNode */
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 
     enum GridOrigin {
         LowerLeft,

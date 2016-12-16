@@ -36,42 +36,42 @@ class WikipediaPlugin : public AbstractDataPlugin, public DialogConfigurationInt
  public:
     WikipediaPlugin();
     explicit WikipediaPlugin( const MarbleModel *marbleModel );
-    ~WikipediaPlugin();
+    ~WikipediaPlugin() override;
      
-    void initialize();
+    void initialize() override;
 
-    QString name() const;
+    QString name() const override;
     
-    QString guiString() const;
+    QString guiString() const override;
 
-    QString nameId() const;
+    QString nameId() const override;
     
-    QString version() const;
+    QString version() const override;
 
-    QString copyrightYears() const;
+    QString copyrightYears() const override;
 
-    QString description() const;
+    QString description() const override;
 
     QVector<PluginAuthor> pluginAuthors() const override;
 
-    QString aboutDataText() const;
+    QString aboutDataText() const override;
 
-    QIcon icon() const;
+    QIcon icon() const override;
 
-    QDialog *configDialog();
+    QDialog *configDialog() override;
 
     /**
      * @return: The settings of the item.
      */
-    virtual QHash<QString,QVariant> settings() const;
+    QHash<QString,QVariant> settings() const override;
 
     /**
      * Set the settings of the item.
      */
-    virtual void setSettings( const QHash<QString,QVariant> &settings );
+    void setSettings( const QHash<QString,QVariant> &settings ) override;
 
  protected:
-    bool eventFilter( QObject *object, QEvent *event );
+    bool eventFilter( QObject *object, QEvent *event ) override;
 
  private Q_SLOTS:
     void readSettings();

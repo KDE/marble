@@ -66,19 +66,19 @@ class GEODATA_EXPORT GeoDataDocument : public GeoDocument,
 public:
     GeoDataDocument();
     GeoDataDocument( const GeoDataDocument& other );
-    ~GeoDataDocument();
+    ~GeoDataDocument() override;
 
     GeoDataDocument& operator=(const GeoDataDocument& other);
 
     bool operator==( const GeoDataDocument &other ) const;
     bool operator!=( const GeoDataDocument &other ) const;
 
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 
     GeoDataFeature * clone() const override;
 
     /// Provides type information for downcasting a GeoData
-    virtual bool isGeoDataDocument() const { return true; }
+    bool isGeoDataDocument() const override { return true; }
 
     DocumentRole documentRole() const;
     void setDocumentRole( DocumentRole role );
@@ -196,9 +196,9 @@ public:
     QList<GeoDataSchema> schemas() const;
 
     // Serialize the Placemark to @p stream
-    virtual void pack( QDataStream& stream ) const;
+    void pack( QDataStream& stream ) const override;
     // Unserialize the Placemark from @p stream
-    virtual void unpack( QDataStream& stream );
+    void unpack( QDataStream& stream ) override;
 
 private:
     Q_DECLARE_PRIVATE(GeoDataDocument)

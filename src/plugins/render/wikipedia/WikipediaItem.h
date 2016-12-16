@@ -33,19 +33,19 @@ class WikipediaItem : public AbstractDataPluginItem
  public:
     WikipediaItem( MarbleWidget* widget, QObject *parent );
     
-    ~WikipediaItem();
+    ~WikipediaItem() override;
     
     QString name() const;
 
     void setName( const QString& name );
     
-    bool initialized() const;
+    bool initialized() const override;
     
-    void addDownloadedFile( const QString& url, const QString& type );
+    void addDownloadedFile( const QString& url, const QString& type ) override;
     
-    void paint( QPainter *painter );
+    void paint( QPainter *painter ) override;
                  
-    bool operator<( const AbstractDataPluginItem *other ) const;
+    bool operator<( const AbstractDataPluginItem *other ) const override;
     
     qreal longitude() const;
     
@@ -67,11 +67,11 @@ class WikipediaItem : public AbstractDataPluginItem
 
     void setSummary( const QString& summary );
     
-    QAction *action();
+    QAction *action() override;
     
     void setIcon( const QIcon& icon );
 
-    void setSettings( const QHash<QString, QVariant>& settings );
+    void setSettings( const QHash<QString, QVariant>& settings ) override;
 
     /** Set a popularity rank. Larger means more popular. Default rank is 0 */
     void setRank( double rank );

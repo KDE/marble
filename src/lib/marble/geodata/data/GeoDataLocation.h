@@ -34,10 +34,10 @@ public:
     bool operator==( const GeoDataLocation &other ) const;
     bool operator!=( const GeoDataLocation &other ) const;
 
-    ~GeoDataLocation();
+    ~GeoDataLocation() override;
 
     /** Provides type information for downcasting a GeoNode */
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 
     qreal latitude(GeoDataCoordinates::Unit) const;
 

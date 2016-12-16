@@ -39,51 +39,51 @@ class DeclarativeDataPlugin: public Marble::AbstractDataPlugin
     Q_PROPERTY( QQmlComponent* delegate READ delegate WRITE setDelegate NOTIFY delegateChanged )
 
 public:
-    Marble::RenderPlugin* newInstance( const Marble::MarbleModel *marbleModel ) const;
+    Marble::RenderPlugin* newInstance( const Marble::MarbleModel *marbleModel ) const override;
 
     explicit DeclarativeDataPlugin( const Marble::MarbleModel *marbleModel=0 );
 
-    virtual ~DeclarativeDataPlugin();
+    ~DeclarativeDataPlugin() override;
 
     QString planet() const;
 
     void setPlanet( const QString & planet );
 
-    QString name() const;
+    QString name() const override;
 
     void setName( const QString & name );
 
-    virtual QString guiString() const;
+    QString guiString() const override;
 
     void setGuiString( const QString & guiString );
 
-    virtual QString nameId() const;
+    QString nameId() const override;
 
     void setNameId( const QString & nameId );
 
-    virtual QString version() const;
+    QString version() const override;
 
     void setVersion( const QString & version );
 
-    virtual QString copyrightYears() const;
+    QString copyrightYears() const override;
 
     void setCopyrightYears( const QString & copyrightYears );
 
-    virtual QString description() const;
+    QString description() const override;
 
     void setDescription( const QString & description );
 
-    virtual QVector<Marble::PluginAuthor> pluginAuthors() const;
+    QVector<Marble::PluginAuthor> pluginAuthors() const override;
 
     void setAuthors( const QStringList & pluginAuthors );
 
     QStringList authors() const;
 
-    virtual QString aboutDataText() const;
+    QString aboutDataText() const override;
 
     void setAboutDataText( const QString & aboutDataText );
 
-    virtual QIcon icon() const;
+    QIcon icon() const override;
 
     QQmlComponent *delegate();
 
@@ -93,11 +93,11 @@ public:
 
     void setDeclarativeModel( const QVariant &model );
 
-    virtual void initialize();
+    void initialize() override;
 
-    virtual bool isInitialized() const;
+    bool isInitialized() const override;
 
-    Marble::RenderState renderState() const;
+    Marble::RenderState renderState() const override;
 
 Q_SIGNALS:
     /** Additional data for the currently visible map region is requested */

@@ -57,12 +57,12 @@ class GEODATA_EXPORT GeoDataLatLonBox : public GeoDataObject
     GeoDataLatLonBox();
     GeoDataLatLonBox( qreal north, qreal south, qreal east, qreal west, GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
     GeoDataLatLonBox( const GeoDataLatLonBox & );
-    virtual ~GeoDataLatLonBox();
+    ~GeoDataLatLonBox() override;
 
     GeoDataLatLonBox& operator=( const GeoDataLatLonBox& other );
 
     /// Provides type information for downcasting a GeoData
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 
     /**
      * @brief Get the northern boundary of the bounding box.
@@ -233,9 +233,9 @@ class GEODATA_EXPORT GeoDataLatLonBox : public GeoDataObject
     GeoDataLatLonBox& operator |=( const GeoDataLatLonBox& other) ;
 
     /// Serialize the contents of the feature to @p stream.
-    virtual void pack( QDataStream& stream ) const;
+    void pack( QDataStream& stream ) const override;
     /// Unserialize the contents of the feature from @p stream.
-    virtual void unpack( QDataStream& stream );
+    void unpack( QDataStream& stream ) override;
 
  private:
     GeoDataLatLonBoxPrivate  * const d;

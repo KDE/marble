@@ -30,12 +30,12 @@ public:
     GeoDataMultiTrack();
     explicit GeoDataMultiTrack( const GeoDataGeometry& other );
 
-    virtual ~GeoDataMultiTrack();
+    ~GeoDataMultiTrack() override;
 
     bool operator==( const GeoDataMultiTrack& other ) const;
     bool operator!=( const GeoDataMultiTrack& other ) const;
 
-    virtual const GeoDataLatLonAltBox& latLonAltBox() const;
+    const GeoDataLatLonAltBox& latLonAltBox() const override;
 
     int size() const;
     GeoDataTrack& at( int pos );
@@ -82,9 +82,9 @@ public:
                                                   QVector<GeoDataTrack*>::Iterator end );
 
     // Serialize the Placemark to @p stream
-    virtual void pack( QDataStream& stream ) const;
+    void pack( QDataStream& stream ) const override;
     // Unserialize the Placemark from @p stream
-    virtual void unpack( QDataStream& stream );
+    void unpack( QDataStream& stream ) override;
 
  private:
     Q_DECLARE_PRIVATE(GeoDataMultiTrack)

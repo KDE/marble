@@ -30,11 +30,11 @@ class CelestialSortFilterProxyModel : public QSortFilterProxyModel
 
 public:
     CelestialSortFilterProxyModel();
-    ~CelestialSortFilterProxyModel();
+    ~CelestialSortFilterProxyModel() override;
     /**
      * @brief A small trick to change names for dwarfs and moons
      */
-    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
 private:
     void setupPriorities();
@@ -42,7 +42,7 @@ private:
     void setupDwarfsList();
 
 protected:
-    bool lessThan(const QModelIndex &left, const QModelIndex &right) const;
+    bool lessThan(const QModelIndex &left, const QModelIndex &right) const override;
 
 private:
     QMap<QString, int> m_priority;

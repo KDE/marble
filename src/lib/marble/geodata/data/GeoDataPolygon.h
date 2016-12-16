@@ -96,7 +96,7 @@ class GEODATA_EXPORT GeoDataPolygon : public GeoDataGeometry
 /*!
     \brief Destroys a Polygon.
 */
-    virtual ~GeoDataPolygon();
+    ~GeoDataPolygon() override;
 
 
 /*!
@@ -151,7 +151,7 @@ class GEODATA_EXPORT GeoDataPolygon : public GeoDataGeometry
 
     \see GeoDataLatLonAltBox
 */
-    virtual const GeoDataLatLonAltBox& latLonAltBox() const;
+    const GeoDataLatLonAltBox& latLonAltBox() const override;
 
 /*!
     \brief Returns the outer boundary that is represented as a LinearRing.
@@ -208,14 +208,14 @@ class GEODATA_EXPORT GeoDataPolygon : public GeoDataGeometry
     \brief Serialize the Polygon to a stream.
     \param stream the stream.
 */
-    virtual void pack( QDataStream& stream ) const;
+    void pack( QDataStream& stream ) const override;
 
     
 /*!
     \brief Unserialize the Polygon from a stream.
     \param stream the stream.
 */
-    virtual void unpack( QDataStream& stream );
+    void unpack( QDataStream& stream ) override;
 
     int renderOrder() const;
     void setRenderOrder(int);

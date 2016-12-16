@@ -45,33 +45,33 @@ namespace Marble
 
             public:
         explicit AprsPlugin( const MarbleModel *marbleModel=0 );
-        ~AprsPlugin();
-        QStringList backendTypes() const;
-        QString renderPolicy() const;
-        QStringList renderPosition() const;
-        QString name() const;
-        QString guiString() const;
-        QString nameId() const;
+        ~AprsPlugin() override;
+        QStringList backendTypes() const override;
+        QString renderPolicy() const override;
+        QStringList renderPosition() const override;
+        QString name() const override;
+        QString guiString() const override;
+        QString nameId() const override;
 
-        QString version() const;
+        QString version() const override;
 
-        QString description() const;
+        QString description() const override;
 
-        QString copyrightYears() const;
+        QString copyrightYears() const override;
 
         QVector<PluginAuthor> pluginAuthors() const override;
 
-        QIcon icon () const;
+        QIcon icon () const override;
 
-        void initialize ();
-        bool isInitialized () const;
-        bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 );
+        void initialize () override;
+        bool isInitialized () const override;
+        bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 ) override;
 
-        QDialog *configDialog();
+        QDialog *configDialog() override;
         QAction       *action() const;
 
-        QHash<QString,QVariant> settings() const;
-        void setSettings( const QHash<QString,QVariant> &settings );
+        QHash<QString,QVariant> settings() const override;
+        void setSettings( const QHash<QString,QVariant> &settings ) override;
 
         void stopGatherers();
         void restartGatherers();
@@ -81,7 +81,7 @@ namespace Marble
         void readSettings();
         void writeSettings();
         void updateVisibility( bool visible );
-        virtual RenderType renderType() const;
+        RenderType renderType() const override;
 
       private:
 

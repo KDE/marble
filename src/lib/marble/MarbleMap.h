@@ -113,7 +113,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
      */
     explicit MarbleMap( MarbleModel *model );
 
-    virtual ~MarbleMap();
+    ~MarbleMap() override;
 
     /**
      * @brief Return the model that this view shows.

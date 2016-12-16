@@ -31,14 +31,14 @@ class MonavConfigWidget : public RoutingRunnerPlugin::ConfigWidget, private Ui::
 public:
     explicit MonavConfigWidget( MonavPlugin* plugin );
 
-    ~MonavConfigWidget();
+    ~MonavConfigWidget() override;
 
-    virtual void loadSettings( const QHash<QString, QVariant> &settings );
+    void loadSettings( const QHash<QString, QVariant> &settings ) override;
 
-    virtual QHash<QString, QVariant> settings() const;
+    QHash<QString, QVariant> settings() const override;
 
 protected:
-    virtual void showEvent ( QShowEvent * event );
+    void showEvent ( QShowEvent * event ) override;
 
 private Q_SLOTS:
     void retrieveMapList( QNetworkReply *reply );

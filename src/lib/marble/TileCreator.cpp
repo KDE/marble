@@ -76,7 +76,7 @@ public:
     {
     }
 
-    virtual QSize fullImageSize() const
+    QSize fullImageSize() const override
     {
         if ( m_sourceImage.size().width() > 21600 || m_sourceImage.height() > 10800 ) {
             qDebug("Install map too large!");
@@ -85,7 +85,7 @@ public:
         return m_sourceImage.size();
     }
 
-    virtual QImage tile(int n, int m, int maxTileLevel)
+    QImage tile(int n, int m, int maxTileLevel) override
     {
         int  mmax = TileLoaderHelper::levelToColumn( defaultLevelZeroColumns, maxTileLevel );
         int  nmax = TileLoaderHelper::levelToRow( defaultLevelZeroRows, maxTileLevel );

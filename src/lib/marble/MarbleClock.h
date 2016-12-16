@@ -30,7 +30,7 @@ class GEODATA_EXPORT MarbleClock : public QObject
  public:
     explicit MarbleClock( QObject* parent = 0 );
 
-    ~MarbleClock();
+    ~MarbleClock() override;
 
     /**
      * @brief Determine how much of the current day has elapsed

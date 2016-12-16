@@ -25,10 +25,10 @@ class RoutinoRunner : public RoutingRunner
 public:
     explicit RoutinoRunner(QObject *parent = 0);
 
-    ~RoutinoRunner();
+    ~RoutinoRunner() override;
 
     // Overriding MarbleAbstractRunner
-    virtual void retrieveRoute( const RouteRequest *request );
+    void retrieveRoute( const RouteRequest *request ) override;
 
 private:
     RoutinoRunnerPrivate* const d;

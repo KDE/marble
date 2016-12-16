@@ -30,11 +30,11 @@ class GenericScanlineTextureMapper : public TextureMapperInterface
  public:
     explicit GenericScanlineTextureMapper( StackedTileLoader *tileLoader );
 
-    virtual void mapTexture( GeoPainter *painter,
+    void mapTexture( GeoPainter *painter,
                              const ViewportParams *viewport,
                              int tileZoomLevel,
                              const QRect &dirtyRect,
-                             TextureColorizer *texColorizer );
+                             TextureColorizer *texColorizer ) override;
 
  private:
     class RenderJob;

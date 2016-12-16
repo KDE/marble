@@ -34,19 +34,19 @@ class License : public AbstractFloatItem
     MARBLE_PLUGIN( License )
 public:
     explicit License( const MarbleModel *marbleModel=0 );
-    ~License();
+    ~License() override;
 
-    QStringList backendTypes() const;
-    QString name() const;
-    QString guiString() const;
-    QString nameId() const;
-    QString version() const;
-    QString description() const;
-    QString copyrightYears() const;
+    QStringList backendTypes() const override;
+    QString name() const override;
+    QString guiString() const override;
+    QString nameId() const override;
+    QString version() const override;
+    QString description() const override;
+    QString copyrightYears() const override;
     QVector<PluginAuthor> pluginAuthors() const override;
-    QIcon icon () const;
-    void initialize ();
-    bool isInitialized () const;
+    QIcon icon () const override;
+    void initialize () override;
+    bool isInitialized () const override;
 
 private Q_SLOTS:
     void updateLicenseText();
@@ -54,8 +54,8 @@ private Q_SLOTS:
     void showAboutDialog();
 
 protected:
-    bool eventFilter(QObject *, QEvent *e);
-    void contextMenuEvent( QWidget *w, QContextMenuEvent *e );
+    bool eventFilter(QObject *, QEvent *e) override;
+    void contextMenuEvent( QWidget *w, QContextMenuEvent *e ) override;
 
 private:
     WidgetGraphicsItem* m_widgetItem;

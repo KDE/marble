@@ -28,7 +28,7 @@ public:
 
     GeoDataScreenOverlay( const GeoDataScreenOverlay &other );
 
-    ~GeoDataScreenOverlay();
+    ~GeoDataScreenOverlay() override;
 
     GeoDataScreenOverlay& operator=( const GeoDataScreenOverlay &other );
     bool operator==( const GeoDataScreenOverlay &other ) const;
@@ -37,7 +37,7 @@ public:
     GeoDataFeature * clone() const override;
 
     /** Provides type information for downcasting a GeoNode */
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 
     GeoDataVec2 overlayXY() const;
     void setOverlayXY( const GeoDataVec2 &vec2 );

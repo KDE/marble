@@ -31,7 +31,7 @@ class GEODATA_EXPORT GeoDataAbstractView : public GeoDataObject
  public:
     GeoDataAbstractView();
 
-    ~GeoDataAbstractView();
+    ~GeoDataAbstractView() override;
 
     GeoDataAbstractView( const GeoDataAbstractView &other );
 

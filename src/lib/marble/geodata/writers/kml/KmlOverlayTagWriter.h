@@ -25,7 +25,7 @@ public:
     explicit KmlOverlayTagWriter( const QString &elementName );
 
 protected:
-    virtual bool writeMid( const GeoNode *node, GeoWriter& writer ) const = 0;
+    bool writeMid( const GeoNode *node, GeoWriter& writer ) const override = 0;
 };
 
 }

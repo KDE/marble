@@ -21,9 +21,9 @@ class LogRunner : public ParsingRunner
 
 public:
     explicit LogRunner( QObject *parent = 0 );
-    ~LogRunner();
+    ~LogRunner() override;
 
-    GeoDataDocument* parseFile( const QString &fileName, DocumentRole role, QString& error );
+    GeoDataDocument* parseFile( const QString &fileName, DocumentRole role, QString& error ) override;
 };
 
 }

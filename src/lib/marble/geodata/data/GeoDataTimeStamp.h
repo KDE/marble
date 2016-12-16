@@ -36,7 +36,7 @@ class GEODATA_EXPORT GeoDataTimeStamp : public GeoDataTimePrimitive
 
     GeoDataTimeStamp();
     GeoDataTimeStamp( const GeoDataTimeStamp& other );
-    virtual ~GeoDataTimeStamp();
+    ~GeoDataTimeStamp() override;
 
     /**
     * @brief assignment operator
@@ -51,7 +51,7 @@ class GEODATA_EXPORT GeoDataTimeStamp : public GeoDataTimePrimitive
 
 
     /// Provides type information for downcasting a GeoNode
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 
     /**
     * @brief return the when time of timestamp
@@ -72,13 +72,13 @@ class GEODATA_EXPORT GeoDataTimeStamp : public GeoDataTimePrimitive
      * @brief Serialize the timestamp to a stream
      * @param  stream  the stream
      */
-    virtual void pack( QDataStream& stream ) const;
+    void pack( QDataStream& stream ) const override;
 
     /**
      * @brief  Unserialize the timestamp from a stream
      * @param  stream  the stream
      */
-    virtual void unpack( QDataStream& stream );
+    void unpack( QDataStream& stream ) override;
 
   private:
     GeoDataTimeStampPrivate * const d;

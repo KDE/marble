@@ -36,7 +36,7 @@ namespace kml
 class KmlSimpleFieldTagHandler : public GeoTagHandler
 {
 public:
-    virtual GeoNode* parse(GeoParser&) const;
+    GeoNode* parse(GeoParser&) const override;
 
 private:
     static GeoDataSimpleField::SimpleFieldType resolveType( const QString& type );

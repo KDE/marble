@@ -32,9 +32,9 @@ Q_OBJECT
 
 public:
     TourItemDelegate( QListView* view, MarbleWidget* widget, TourWidget* tour );
-    void paint( QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index ) const;
-    QSize sizeHint( const QStyleOptionViewItem &option, const QModelIndex &index ) const;
-    QWidget* createEditor ( QWidget * parent, const QStyleOptionViewItem & option, const QModelIndex & index ) const;
+    void paint( QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index ) const override;
+    QSize sizeHint( const QStyleOptionViewItem &option, const QModelIndex &index ) const override;
+    QWidget* createEditor ( QWidget * parent, const QStyleOptionViewItem & option, const QModelIndex & index ) const override;
     bool editable() const;
     void setEditable( bool editable );
     QModelIndex firstFlyTo() const;
@@ -66,7 +66,7 @@ public:
     };
 
 protected:
-    bool editorEvent( QEvent *event, QAbstractItemModel *model, const QStyleOptionViewItem &option, const QModelIndex &index );
+    bool editorEvent( QEvent *event, QAbstractItemModel *model, const QStyleOptionViewItem &option, const QModelIndex &index ) override;
 
 private Q_SLOTS:
     void closeEditor(const QModelIndex& index);

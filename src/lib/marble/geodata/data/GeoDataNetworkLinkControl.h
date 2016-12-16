@@ -32,7 +32,7 @@ public:
 
     GeoDataNetworkLinkControl( const GeoDataNetworkLinkControl &other );
 
-    ~GeoDataNetworkLinkControl();
+    ~GeoDataNetworkLinkControl() override;
 
     GeoDataNetworkLinkControl& operator=( const GeoDataNetworkLinkControl &other );
 
@@ -42,7 +42,7 @@ public:
     GeoDataFeature * clone() const override;
 
     /** Provides type information for downcasting a GeoNode */
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 
     qreal minRefreshPeriod() const;
     void setMinRefreshPeriod(qreal minRefreshPeriod);

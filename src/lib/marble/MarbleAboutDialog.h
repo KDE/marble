@@ -40,7 +40,7 @@ public:
     };
 
     explicit MarbleAboutDialog(QWidget *parent = 0);
-    ~MarbleAboutDialog();
+    ~MarbleAboutDialog() override;
 
     /**
       * Set the application title (usually name and version) to show

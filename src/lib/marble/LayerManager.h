@@ -42,7 +42,7 @@ class LayerManager : public QObject
 
  public:
     explicit LayerManager(QObject *parent = nullptr);
-    ~LayerManager();
+    ~LayerManager() override;
 
     void renderLayers( GeoPainter *painter, ViewportParams *viewport );
 

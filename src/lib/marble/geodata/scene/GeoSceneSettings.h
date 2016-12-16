@@ -49,8 +49,8 @@ class GEODATA_EXPORT GeoSceneSettings : public QObject,
 
  public:
     GeoSceneSettings();
-    virtual ~GeoSceneSettings();
-    virtual const char* nodeType() const;
+    ~GeoSceneSettings() override;
+    const char* nodeType() const override;
 
     /**
      * @brief  Get the availability of a property across groups

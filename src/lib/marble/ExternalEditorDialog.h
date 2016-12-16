@@ -29,7 +29,7 @@ class MARBLE_EXPORT ExternalEditorDialog: public QDialog, private Ui::ExternalEd
 public:
     explicit ExternalEditorDialog( QWidget * parent = 0, Qt::WindowFlags f = 0 );
 
-    ~ExternalEditorDialog();
+    ~ExternalEditorDialog() override;
 
     QString externalEditor() const;
 

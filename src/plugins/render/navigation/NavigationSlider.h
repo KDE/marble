@@ -22,18 +22,18 @@ class NavigationSlider : public QAbstractSlider
     Q_OBJECT
 public:
     explicit NavigationSlider( QWidget *parent = 0 );
-    ~NavigationSlider();
+    ~NavigationSlider() override;
 
 Q_SIGNALS:
     void repaintNeeded();
 
 protected:
-    void enterEvent( QEvent * );
-    void mouseMoveEvent( QMouseEvent * mouseEvent);
-    void mousePressEvent( QMouseEvent * );
-    void mouseReleaseEvent( QMouseEvent * );
-    void leaveEvent( QEvent * );
-    void paintEvent( QPaintEvent * );
+    void enterEvent( QEvent * ) override;
+    void mouseMoveEvent( QMouseEvent * mouseEvent) override;
+    void mousePressEvent( QMouseEvent * ) override;
+    void mouseReleaseEvent( QMouseEvent * ) override;
+    void leaveEvent( QEvent * ) override;
+    void paintEvent( QPaintEvent * ) override;
     void repaint();
 
 private:

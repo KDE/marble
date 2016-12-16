@@ -27,7 +27,7 @@ class RemoteIconLoader : public QObject
     Q_OBJECT;
 public:
     explicit RemoteIconLoader( QObject *parent = 0 );
-    ~RemoteIconLoader();
+    ~RemoteIconLoader() override;
 
     /**
         * Handles the icon request for passed url( whether icon is available

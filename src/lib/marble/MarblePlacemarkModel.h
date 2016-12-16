@@ -76,20 +76,20 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
     /**
      * Destroys the place mark model.
      */
-    ~MarblePlacemarkModel();
+    ~MarblePlacemarkModel() override;
 
     void setPlacemarkContainer( QVector<GeoDataPlacemark*> *container );
 
     /**
      * Return the number of Placemarks in the Model.
      */
-    int rowCount( const QModelIndex &parent = QModelIndex() ) const;
-    int columnCount( const QModelIndex &parent = QModelIndex() ) const;
+    int rowCount( const QModelIndex &parent = QModelIndex() ) const override;
+    int columnCount( const QModelIndex &parent = QModelIndex() ) const override;
 
     /**
      * Return the supported role names
      */
-    QHash<int, QByteArray> roleNames() const;
+    QHash<int, QByteArray> roleNames() const override;
 
     /**
      * Return the data according to the index.
@@ -97,7 +97,7 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
      * @param index  the index of the data
      * @param role   which part of the data to return.  @see Roles
      */
-    QVariant data( const QModelIndex &index, int role ) const;
+    QVariant data( const QModelIndex &index, int role ) const override;
 
     QModelIndexList approxMatch( const QModelIndex &start, int role, 
                                    const QVariant &value, int hits = 1,

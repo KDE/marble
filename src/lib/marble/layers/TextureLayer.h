@@ -43,9 +43,9 @@ class MARBLE_EXPORT TextureLayer : public QObject, public LayerInterface
                   const SunLocator *sunLocator,
                   QAbstractItemModel *groundOverlayModel );
 
-    ~TextureLayer();
+    ~TextureLayer() override;
 
-    QStringList renderPosition() const;
+    QStringList renderPosition() const override;
 
     void addSeaDocument( const GeoDataDocument *seaDocument );
 
@@ -89,13 +89,13 @@ class MARBLE_EXPORT TextureLayer : public QObject, public LayerInterface
     int preferredRadiusCeil( int radius ) const;
     int preferredRadiusFloor( int radius ) const;
 
-    RenderState renderState() const;
+    RenderState renderState() const override;
 
-    virtual QString runtimeTrace() const;
+    QString runtimeTrace() const override;
 
-    virtual bool render( GeoPainter *painter, ViewportParams *viewport,
+    bool render( GeoPainter *painter, ViewportParams *viewport,
                          const QString &renderPos = QLatin1String("NONE"),
-                         GeoSceneLayer *layer = 0 );
+                         GeoSceneLayer *layer = 0 ) override;
 
 public Q_SLOTS:
     void setShowRelief( bool show );

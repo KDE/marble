@@ -31,7 +31,7 @@ public:
     explicit AudioOutput( QObject* parent = 0 );
 
     /** Destructor */
-    ~AudioOutput();
+    ~AudioOutput() override;
 
     /**
       * Generate an audible notification (if needed) after the position on the route has changed.

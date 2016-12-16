@@ -30,7 +30,7 @@ class AbstractWeatherService : public QObject
     
  public:
     explicit AbstractWeatherService( const MarbleModel *model, QObject *parent );
-    virtual ~AbstractWeatherService();
+    ~AbstractWeatherService() override;
     void setMarbleWidget( MarbleWidget* widget );
     
  public Q_SLOTS:

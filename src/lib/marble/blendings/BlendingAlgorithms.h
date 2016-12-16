@@ -26,13 +26,13 @@ namespace Marble
 class OverpaintBlending: public Blending
 {
  public:
-    virtual void blend( QImage * const bottom, TextureTile const * const top ) const;
+    void blend( QImage * const bottom, TextureTile const * const top ) const override;
 };
 
 class IndependentChannelBlending: public Blending
 {
  public:
-    virtual void blend( QImage * const bottom, TextureTile const * const top ) const;
+    void blend( QImage * const bottom, TextureTile const * const top ) const override;
  private:
     // bottomColorIntensity: intensity of one color channel (of one pixel) of the bottom image
     // topColorIntensity: intensity of one color channel (of one pixel) of the top image
@@ -47,26 +47,26 @@ class IndependentChannelBlending: public Blending
 
 class AllanonBlending: public IndependentChannelBlending
 {
-    virtual qreal blendChannel( qreal const bottomColorIntensity,
-                                qreal const topColorIntensity ) const;
+    qreal blendChannel( qreal const bottomColorIntensity,
+                                qreal const topColorIntensity ) const override;
 };
 
 class ArcusTangentBlending: public IndependentChannelBlending
 {
-    virtual qreal blendChannel( qreal const bottomColorIntensity,
-                                qreal const topColorIntensity ) const;
+    qreal blendChannel( qreal const bottomColorIntensity,
+                                qreal const topColorIntensity ) const override;
 };
 
 class GeometricMeanBlending: public IndependentChannelBlending
 {
-    virtual qreal blendChannel( qreal const bottomColorIntensity,
-                                qreal const topColorIntensity ) const;
+    qreal blendChannel( qreal const bottomColorIntensity,
+                                qreal const topColorIntensity ) const override;
 };
 
 class LinearLightBlending: public IndependentChannelBlending
 {
-    virtual qreal blendChannel( qreal const bottomColorIntensity,
-                                qreal const topColorIntensity ) const;
+    qreal blendChannel( qreal const bottomColorIntensity,
+                                qreal const topColorIntensity ) const override;
 };
 
 class NoiseBlending: public Blending // or IndependentChannelBlending?
@@ -75,20 +75,20 @@ class NoiseBlending: public Blending // or IndependentChannelBlending?
 
 class OverlayBlending: public IndependentChannelBlending
 {
-    virtual qreal blendChannel( qreal const bottomColorIntensity,
-                                qreal const topColorIntensity ) const;
+    qreal blendChannel( qreal const bottomColorIntensity,
+                                qreal const topColorIntensity ) const override;
 };
 
 class ParallelBlending: public IndependentChannelBlending
 {
-    virtual qreal blendChannel( qreal const bottomColorIntensity,
-                                qreal const topColorIntensity ) const;
+    qreal blendChannel( qreal const bottomColorIntensity,
+                                qreal const topColorIntensity ) const override;
 };
 
 class TextureBlending: public IndependentChannelBlending
 {
-    virtual qreal blendChannel( qreal const bottomColorIntensity,
-                                qreal const topColorIntensity ) const;
+    qreal blendChannel( qreal const bottomColorIntensity,
+                                qreal const topColorIntensity ) const override;
 };
 
 
@@ -96,50 +96,50 @@ class TextureBlending: public IndependentChannelBlending
 
 class ColorBurnBlending: public IndependentChannelBlending
 {
-    virtual qreal blendChannel( qreal const bottomColorIntensity,
-                                qreal const topColorIntensity ) const;
+    qreal blendChannel( qreal const bottomColorIntensity,
+                                qreal const topColorIntensity ) const override;
 };
 
 class DarkBlending: public IndependentChannelBlending
 {
-    virtual qreal blendChannel( qreal const bottomColorIntensity,
-                                qreal const topColorIntensity ) const;
+    qreal blendChannel( qreal const bottomColorIntensity,
+                                qreal const topColorIntensity ) const override;
 };
 
 class DarkenBlending: public IndependentChannelBlending
 {
-    virtual qreal blendChannel( qreal const bottomColorIntensity,
-                                qreal const topColorIntensity ) const;
+    qreal blendChannel( qreal const bottomColorIntensity,
+                                qreal const topColorIntensity ) const override;
 };
 
 class DivideBlending: public IndependentChannelBlending
 {
-    virtual qreal blendChannel( qreal const bottomColorIntensity,
-                                qreal const topColorIntensity ) const;
+    qreal blendChannel( qreal const bottomColorIntensity,
+                                qreal const topColorIntensity ) const override;
 };
 
 class GammaDarkBlending: public IndependentChannelBlending
 {
-    virtual qreal blendChannel( qreal const bottomColorIntensity,
-                                qreal const topColorIntensity ) const;
+    qreal blendChannel( qreal const bottomColorIntensity,
+                                qreal const topColorIntensity ) const override;
 };
 
 class LinearBurnBlending: public IndependentChannelBlending
 {
-    virtual qreal blendChannel( qreal const bottomColorIntensity,
-                                qreal const topColorIntensity ) const;
+    qreal blendChannel( qreal const bottomColorIntensity,
+                                qreal const topColorIntensity ) const override;
 };
 
 class MultiplyBlending: public IndependentChannelBlending
 {
-    virtual qreal blendChannel( qreal const bottomColorIntensity,
-                                qreal const topColorIntensity ) const;
+    qreal blendChannel( qreal const bottomColorIntensity,
+                                qreal const topColorIntensity ) const override;
 };
 
 class SubtractiveBlending: public IndependentChannelBlending
 {
-    virtual qreal blendChannel( qreal const bottomColorIntensity,
-                                qreal const topColorIntensity ) const;
+    qreal blendChannel( qreal const bottomColorIntensity,
+                                qreal const topColorIntensity ) const override;
 };
 
 
@@ -147,62 +147,62 @@ class SubtractiveBlending: public IndependentChannelBlending
 
 class AdditiveBlending: public IndependentChannelBlending
 {
-    virtual qreal blendChannel( qreal const bottomColorIntensity,
-                                qreal const topColorIntensity ) const;
+    qreal blendChannel( qreal const bottomColorIntensity,
+                                qreal const topColorIntensity ) const override;
 };
 
 class ColorDodgeBlending: public IndependentChannelBlending
 {
-    virtual qreal blendChannel( qreal const bottomColorIntensity,
-                                qreal const topColorIntensity ) const;
+    qreal blendChannel( qreal const bottomColorIntensity,
+                                qreal const topColorIntensity ) const override;
 };
 
 class GammaLightBlending: public IndependentChannelBlending
 {
-    virtual qreal blendChannel( qreal const bottomColorIntensity,
-                                qreal const topColorIntensity ) const;
+    qreal blendChannel( qreal const bottomColorIntensity,
+                                qreal const topColorIntensity ) const override;
 };
 
 class HardLightBlending: public IndependentChannelBlending
 {
-    virtual qreal blendChannel( qreal const bottomColorIntensity,
-                                qreal const topColorIntensity ) const;
+    qreal blendChannel( qreal const bottomColorIntensity,
+                                qreal const topColorIntensity ) const override;
 };
 
 class LightBlending: public IndependentChannelBlending
 {
-    virtual qreal blendChannel( qreal const bottomColorIntensity,
-                                qreal const topColorIntensity ) const;
+    qreal blendChannel( qreal const bottomColorIntensity,
+                                qreal const topColorIntensity ) const override;
 };
 
 class LightenBlending: public IndependentChannelBlending
 {
-    virtual qreal blendChannel( qreal const bottomColorIntensity,
-                                qreal const topColorIntensity ) const;
+    qreal blendChannel( qreal const bottomColorIntensity,
+                                qreal const topColorIntensity ) const override;
 };
 
 class PinLightBlending: public IndependentChannelBlending
 {
-    virtual qreal blendChannel( qreal const bottomColorIntensity,
-                                qreal const topColorIntensity ) const;
+    qreal blendChannel( qreal const bottomColorIntensity,
+                                qreal const topColorIntensity ) const override;
 };
 
 class ScreenBlending: public IndependentChannelBlending
 {
-    virtual qreal blendChannel( qreal const bottomColorIntensity,
-                                qreal const topColorIntensity ) const;
+    qreal blendChannel( qreal const bottomColorIntensity,
+                                qreal const topColorIntensity ) const override;
 };
 
 class SoftLightBlending: public IndependentChannelBlending
 {
-    virtual qreal blendChannel( qreal const bottomColorIntensity,
-                                qreal const topColorIntensity ) const;
+    qreal blendChannel( qreal const bottomColorIntensity,
+                                qreal const topColorIntensity ) const override;
 };
 
 class VividLightBlending: public IndependentChannelBlending
 {
-    virtual qreal blendChannel( qreal const bottomColorIntensity,
-                                qreal const topColorIntensity ) const;
+    qreal blendChannel( qreal const bottomColorIntensity,
+                                qreal const topColorIntensity ) const override;
 };
 
 
@@ -210,32 +210,32 @@ class VividLightBlending: public IndependentChannelBlending
 
 class AdditiveSubtractiveBlending: public IndependentChannelBlending
 {
-    virtual qreal blendChannel( qreal const bottomColorIntensity,
-                                qreal const topColorIntensity ) const;
+    qreal blendChannel( qreal const bottomColorIntensity,
+                                qreal const topColorIntensity ) const override;
 };
 
 class BleachBlending: public IndependentChannelBlending
 {
-    virtual qreal blendChannel( qreal const bottomColorIntensity,
-                                qreal const topColorIntensity ) const;
+    qreal blendChannel( qreal const bottomColorIntensity,
+                                qreal const topColorIntensity ) const override;
 };
 
 class DifferenceBlending: public IndependentChannelBlending
 {
-    virtual qreal blendChannel( qreal const bottomColorIntensity,
-                                qreal const topColorIntensity ) const;
+    qreal blendChannel( qreal const bottomColorIntensity,
+                                qreal const topColorIntensity ) const override;
 };
 
 class EquivalenceBlending: public IndependentChannelBlending
 {
-    virtual qreal blendChannel( qreal const bottomColorIntensity,
-                                qreal const topColorIntensity ) const;
+    qreal blendChannel( qreal const bottomColorIntensity,
+                                qreal const topColorIntensity ) const override;
 };
 
 class HalfDifferenceBlending: public IndependentChannelBlending
 {
-    virtual qreal blendChannel( qreal const bottomColorIntensity,
-                                qreal const topColorIntensity ) const;
+    qreal blendChannel( qreal const bottomColorIntensity,
+                                qreal const topColorIntensity ) const override;
 };
 
 
@@ -244,13 +244,13 @@ class HalfDifferenceBlending: public IndependentChannelBlending
 class CloudsBlending: public Blending
 {
  public:
-    virtual void blend( QImage * const bottom, TextureTile const * const top ) const;
+    void blend( QImage * const bottom, TextureTile const * const top ) const override;
 };
 
 class GrayscaleBlending: public Blending
 {
  public:
-    virtual void blend( QImage * const bottom, TextureTile const * const top ) const;
+    void blend( QImage * const bottom, TextureTile const * const top ) const override;
 };
 
 }

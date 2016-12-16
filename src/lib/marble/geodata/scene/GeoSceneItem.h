@@ -39,9 +39,9 @@ class GEODATA_EXPORT GeoSceneItem : public GeoNode
 {
  public:
     explicit GeoSceneItem( const QString& name );
-    ~GeoSceneItem();
+    ~GeoSceneItem() override;
     
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 
     QString name() const;
 

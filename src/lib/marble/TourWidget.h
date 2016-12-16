@@ -33,13 +33,13 @@ class MARBLE_EXPORT TourWidget : public QWidget
 
 public:
     explicit TourWidget( QWidget *parent = 0, Qt::WindowFlags f = 0 );
-    ~TourWidget();
+    ~TourWidget() override;
 
     void setMarbleWidget( MarbleWidget *widget );
     bool openTour( const QString &filename );
     bool isPlaying() const;
 
-    bool eventFilter( QObject *watched, QEvent *event );
+    bool eventFilter( QObject *watched, QEvent *event ) override;
 
 public Q_SLOTS:
     void startPlaying();
@@ -72,7 +72,7 @@ private Q_SLOTS:
     void stopLooping();
 
 protected:
-    void closeEvent( QCloseEvent *event );
+    void closeEvent( QCloseEvent *event ) override;
 
 private:
     Q_PRIVATE_SLOT( d, void openFile() )

@@ -39,7 +39,7 @@ class Navigation : public QObject
 public:
     explicit Navigation( QObject* parent = 0 );
 
-    ~Navigation();
+    ~Navigation() override;
 
     bool guidanceModeEnabled() const;
 

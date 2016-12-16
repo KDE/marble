@@ -41,11 +41,11 @@ public:
 
     explicit CloudRouteModel( QObject *parent = 0 );
 
-    QVariant data( const QModelIndex& index, int role = Qt::DisplayRole ) const;
-    int rowCount( const QModelIndex& parent = QModelIndex() ) const;
+    QVariant data( const QModelIndex& index, int role = Qt::DisplayRole ) const override;
+    int rowCount( const QModelIndex& parent = QModelIndex() ) const override;
 
     /** Overload of QAbstractListModel */
-    QHash<int, QByteArray> roleNames() const;
+    QHash<int, QByteArray> roleNames() const override;
 
     /**
      * Sets the list of routes that will show up in CloudRoutesDialog.

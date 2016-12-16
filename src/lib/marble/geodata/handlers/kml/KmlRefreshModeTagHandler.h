@@ -11,7 +11,7 @@ namespace kml
 class KmlrefreshModeTagHandler : public GeoTagHandler
 {
 public:
-    virtual GeoNode* parse(GeoParser&) const;
+    GeoNode* parse(GeoParser&) const override;
 };
 
 }

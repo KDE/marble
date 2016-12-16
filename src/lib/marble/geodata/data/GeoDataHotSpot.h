@@ -34,14 +34,14 @@ class GEODATA_EXPORT GeoDataHotSpot : public GeoDataObject
     GeoDataHotSpot( const QPointF& hotSpot = QPointF( 0.5, 0.5 ),
                     Units xunits = Fraction, Units yunits = Fraction );
     GeoDataHotSpot( const GeoDataHotSpot& other );
-    ~GeoDataHotSpot();
+    ~GeoDataHotSpot() override;
 
     GeoDataHotSpot& operator=( const GeoDataHotSpot& other );
     bool operator==( const GeoDataHotSpot& other ) const;
     bool operator!=( const GeoDataHotSpot& other ) const;
 
     /// Provides type information for downcasting a GeoData
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 
     /**
     * @brief this function returns the hotspot and the units the hotspot is measured in
@@ -55,9 +55,9 @@ class GEODATA_EXPORT GeoDataHotSpot : public GeoDataObject
                      Units xunits = Fraction, Units yunits = Fraction );
 
     /// Serialize the contents of the feature to @p stream.
-    virtual void pack( QDataStream& stream ) const;
+    void pack( QDataStream& stream ) const override;
     /// Unserialize the contents of the feature from @p stream.
-    virtual void unpack( QDataStream& stream );
+    void unpack( QDataStream& stream ) override;
 
   private:
     GeoDataHotSpotPrivate *const d;

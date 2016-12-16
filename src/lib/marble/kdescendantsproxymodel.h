@@ -86,7 +86,7 @@ public:
     /**
      * Destroys the descendant entities proxy model.
      */
-    virtual ~KDescendantsProxyModel();
+    ~KDescendantsProxyModel() override;
 
     /**
      * Sets the source @p model of the proxy.
@@ -177,7 +177,7 @@ public:
     /**
     Reimplemented to match all descendants.
     */
-    virtual QModelIndexList match(const QModelIndex &start, int role, const QVariant &value,
+    QModelIndexList match(const QModelIndex &start, int role, const QVariant &value,
                                   int hits = 1, Qt::MatchFlags flags = Qt::MatchFlags(Qt::MatchStartsWith | Qt::MatchWrap)) const Q_DECL_OVERRIDE;
 
 private:

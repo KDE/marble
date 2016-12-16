@@ -41,51 +41,51 @@ class PositionMarker  : public RenderPlugin, public DialogConfigurationInterface
     MARBLE_PLUGIN( PositionMarker )
  public:
     explicit PositionMarker(const MarbleModel *marbleModel = 0 );
-    ~PositionMarker ();
+    ~PositionMarker () override;
 
-    QStringList renderPosition() const;
+    QStringList renderPosition() const override;
 
-    QString renderPolicy() const;
+    QString renderPolicy() const override;
 
-    QStringList backendTypes() const;
+    QStringList backendTypes() const override;
 
-    QString name() const;
+    QString name() const override;
 
-    QString guiString() const;
+    QString guiString() const override;
 
-    QString nameId() const;
+    QString nameId() const override;
 
-    QString version() const;
+    QString version() const override;
 
-    QString description() const;
+    QString description() const override;
 
-    QString copyrightYears() const;
+    QString copyrightYears() const override;
 
     QVector<PluginAuthor> pluginAuthors() const override;
 
-    QIcon icon () const;
+    QIcon icon () const override;
 
-    QDialog *configDialog();
+    QDialog *configDialog() override;
 
-    void initialize ();
+    void initialize () override;
 
-    bool isInitialized () const;
+    bool isInitialized () const override;
 
     bool render( GeoPainter *painter, ViewportParams *viewport,
-                 const QString& renderPos, GeoSceneLayer * layer = 0 );
+                 const QString& renderPos, GeoSceneLayer * layer = 0 ) override;
 
     // Overriding LayerInterface to paint on top of the route
-    virtual qreal zValue() const;
+    qreal zValue() const override;
 
     /**
      * @return: The settings of the item.
      */
-    virtual QHash<QString,QVariant> settings() const;
+    QHash<QString,QVariant> settings() const override;
 
     /**
      * Set the settings of the item.
      */
-    virtual void setSettings( const QHash<QString,QVariant> &settings );
+    void setSettings( const QHash<QString,QVariant> &settings ) override;
 
 
  public Q_SLOTS:

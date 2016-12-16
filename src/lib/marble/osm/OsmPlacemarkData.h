@@ -62,7 +62,7 @@ public:
     QString user() const;
     QString timestamp() const;
     QString action() const;
-    const char* nodeType() const;
+    const char* nodeType() const override;
 
     void setId( qint64 id );
     void setVersion( const QString& version );

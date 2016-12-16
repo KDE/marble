@@ -43,7 +43,7 @@ class GEODATA_EXPORT GeoDataLineStyle : public GeoDataColorStyle
      */
     explicit GeoDataLineStyle( const QColor &color );
 
-    ~GeoDataLineStyle();
+    ~GeoDataLineStyle() override;
 
     /**
     * @brief assignment operator
@@ -54,7 +54,7 @@ class GEODATA_EXPORT GeoDataLineStyle : public GeoDataColorStyle
     bool operator!=( const GeoDataLineStyle &other ) const;
 
     /// Provides type information for downcasting a GeoData
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 
     /**
      * @brief Set the width of the line
@@ -140,12 +140,12 @@ class GEODATA_EXPORT GeoDataLineStyle : public GeoDataColorStyle
      * @brief  Serialize the style to a stream.
      * @param  stream  the stream
      */
-    virtual void pack( QDataStream& stream ) const;
+    void pack( QDataStream& stream ) const override;
     /**
      * @brief  Unserialize the style from a stream
      * @param  stream  the stream
      */
-    virtual void unpack( QDataStream& stream );
+    void unpack( QDataStream& stream ) override;
 
   private:
     GeoDataLineStylePrivate * const d;

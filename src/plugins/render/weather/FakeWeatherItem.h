@@ -22,10 +22,10 @@ class FakeWeatherItem : public WeatherItem
 {
  public:
     explicit FakeWeatherItem( QObject *parent = 0 );
-    ~FakeWeatherItem();
+    ~FakeWeatherItem() override;
     
-    QString service() const;
-    void addDownloadedFile( const QString& url, const QString& type );
+    QString service() const override;
+    void addDownloadedFile( const QString& url, const QString& type ) override;
 };
 
 } // namespace Marble

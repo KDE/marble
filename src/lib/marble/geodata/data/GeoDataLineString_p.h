@@ -38,7 +38,7 @@ class GeoDataLineStringPrivate : public GeoDataGeometryPrivate
     {
     }
 
-    ~GeoDataLineStringPrivate()
+    ~GeoDataLineStringPrivate() override
     {
         delete m_rangeCorrected;
     }
@@ -55,19 +55,19 @@ class GeoDataLineStringPrivate : public GeoDataGeometryPrivate
     }
 
 
-    virtual GeoDataGeometryPrivate* copy()
+    GeoDataGeometryPrivate* copy() override
     { 
         GeoDataLineStringPrivate* copy = new GeoDataLineStringPrivate;
         *copy = *this;
         return copy;
     }
 
-    virtual const char* nodeType() const
+    const char* nodeType() const override
     {
         return GeoDataTypes::GeoDataLineStringType;
     }
 
-    virtual EnumGeometryId geometryId() const 
+    EnumGeometryId geometryId() const override 
     {
         return GeoDataLineStringId;
     }

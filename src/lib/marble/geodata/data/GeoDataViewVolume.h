@@ -32,10 +32,10 @@ public:
     bool operator==( const GeoDataViewVolume &other ) const;
     bool operator!=( const GeoDataViewVolume &other ) const;
 
-    ~GeoDataViewVolume();
+    ~GeoDataViewVolume() override;
 
     /** Provides type information for downcasting a GeoNode */
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 
     qreal leftFov() const;
     void setLeftFov(qreal leftFov);

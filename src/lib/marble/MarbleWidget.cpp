@@ -59,10 +59,10 @@ class MarbleWidget::CustomPaintLayer : public LayerInterface
     {
     }
 
-    virtual QStringList renderPosition() const { return QStringList() << "USER_TOOLS"; }
+    QStringList renderPosition() const override { return QStringList() << "USER_TOOLS"; }
 
-    virtual bool render( GeoPainter *painter, ViewportParams *viewport,
-                         const QString &renderPos, GeoSceneLayer *layer )
+    bool render( GeoPainter *painter, ViewportParams *viewport,
+                         const QString &renderPos, GeoSceneLayer *layer ) override
     {
         Q_UNUSED( viewport );
         Q_UNUSED( renderPos );
@@ -74,11 +74,11 @@ class MarbleWidget::CustomPaintLayer : public LayerInterface
         return true;
     }
 
-    virtual qreal zValue() const { return 1.0e7; }
+    qreal zValue() const override { return 1.0e7; }
 
-    RenderState renderState() const { return RenderState(QStringLiteral("Custom Widget Paint")); }
+    RenderState renderState() const override { return RenderState(QStringLiteral("Custom Widget Paint")); }
 
-    QString runtimeTrace() const { return QStringLiteral("MarbleWidget::CustomPaintLayer"); }
+    QString runtimeTrace() const override { return QStringLiteral("MarbleWidget::CustomPaintLayer"); }
 
  private:
     MarbleWidget *const m_widget;

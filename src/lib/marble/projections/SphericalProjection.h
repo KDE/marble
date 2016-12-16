@@ -44,23 +44,23 @@ class SphericalProjection : public AzimuthalProjection
      */
     SphericalProjection();
 
-    virtual ~SphericalProjection();
+    ~SphericalProjection() override;
 
     /**
      * @brief Returns the user-visible name of the projection.
      */
-    QString name() const;
+    QString name() const override;
 
     /**
      * @brief Returns a short user description of the projection
      * that can be used in tooltips or dialogs.
      */
-    QString description() const;
+    QString description() const override;
 
     /**
      * @brief Returns an icon for the projection.
      */
-    QIcon icon() const;
+    QIcon icon() const override;
 
     /**
      * @brief Get the screen coordinates corresponding to geographical coordinates in the map.
@@ -71,15 +71,15 @@ class SphericalProjection : public AzimuthalProjection
      * @return @c true  if the geographical coordinates are visible on the screen
      *         @c false if the geographical coordinates are not visible on the screen
      */
-    virtual bool screenCoordinates( const GeoDataCoordinates &coordinates,
+    bool screenCoordinates( const GeoDataCoordinates &coordinates,
                             const ViewportParams *params,
-                            qreal &x, qreal &y, bool &globeHidesPoint ) const;
+                            qreal &x, qreal &y, bool &globeHidesPoint ) const override;
 
-    virtual bool screenCoordinates( const GeoDataCoordinates &coordinates,
+    bool screenCoordinates( const GeoDataCoordinates &coordinates,
                             const ViewportParams * viewport,
                             qreal *x, qreal &y, int &pointRepeatNum,
                             const QSizeF& size,
-                            bool &globeHidesPoint ) const;
+                            bool &globeHidesPoint ) const override;
 
     using AbstractProjection::screenCoordinates;
 
@@ -95,7 +95,7 @@ class SphericalProjection : public AzimuthalProjection
     bool geoCoordinates( const int x, const int y,
                          const ViewportParams *params,
                          qreal& lon, qreal& lat,
-                         GeoDataCoordinates::Unit unit = GeoDataCoordinates::Degree ) const;
+                         GeoDataCoordinates::Unit unit = GeoDataCoordinates::Degree ) const override;
 
  protected:
     explicit SphericalProjection(SphericalProjectionPrivate *dd );

@@ -26,25 +26,25 @@ class GosmorePlugin : public RoutingRunnerPlugin
 public:
     explicit GosmorePlugin( QObject *parent = 0 );
 
-    QString name() const;
+    QString name() const override;
 
-    QString guiString() const;
+    QString guiString() const override;
 
-    QString nameId() const;
+    QString nameId() const override;
 
-    QString version() const;
+    QString version() const override;
 
-    QString description() const;
+    QString description() const override;
 
-    QString copyrightYears() const;
+    QString copyrightYears() const override;
 
     QVector<PluginAuthor> pluginAuthors() const override;
 
-    virtual RoutingRunner *newRunner() const;
+    RoutingRunner *newRunner() const override;
 
-    virtual bool supportsTemplate(RoutingProfilesModel::ProfileTemplate profileTemplate) const;
+    bool supportsTemplate(RoutingProfilesModel::ProfileTemplate profileTemplate) const override;
 
-    virtual bool canWork() const;
+    bool canWork() const override;
 };
 
 }

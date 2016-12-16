@@ -22,7 +22,7 @@ class MeasureConfigDialog : public QDialog
 
 public:
     explicit MeasureConfigDialog(QDialog *parent = 0);
-    ~MeasureConfigDialog();
+    ~MeasureConfigDialog() override;
 
     bool showBearingLabel() const;
     bool showBearingLabelChange() const;

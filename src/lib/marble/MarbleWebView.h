@@ -22,8 +22,8 @@ public:
     explicit MarbleWebView(QWidget *parent = 0);
 
 protected:
-    void contextMenuEvent(QContextMenuEvent *event);
-    void keyPressEvent(QKeyEvent *event);
+    void contextMenuEvent(QContextMenuEvent *event) override;
+    void keyPressEvent(QKeyEvent *event) override;
 
 private Q_SLOTS:
     void copySelectedText();

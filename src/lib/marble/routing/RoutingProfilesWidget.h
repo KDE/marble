@@ -27,7 +27,7 @@ class MARBLE_EXPORT RoutingProfilesWidget : public QWidget
 
  public:
     explicit RoutingProfilesWidget( MarbleModel *marbleModel );
-    ~RoutingProfilesWidget();
+    ~RoutingProfilesWidget() override;
 
     Q_PRIVATE_SLOT( d, void add() )
     Q_PRIVATE_SLOT( d, void configure() )

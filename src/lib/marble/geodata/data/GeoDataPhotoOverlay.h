@@ -33,7 +33,7 @@ public:
 
     GeoDataPhotoOverlay( const GeoDataPhotoOverlay &other );
 
-    ~GeoDataPhotoOverlay();
+    ~GeoDataPhotoOverlay() override;
 
     GeoDataPhotoOverlay& operator=( const GeoDataPhotoOverlay &other );
     bool operator==( const GeoDataPhotoOverlay &other ) const;
@@ -42,7 +42,7 @@ public:
     GeoDataFeature * clone() const override;
 
     /** Provides type information for downcasting a GeoNode */
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 
     enum Shape {
         Rectangle,

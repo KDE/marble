@@ -92,7 +92,7 @@ public:
         ui_configWidget->descending->addItem( tr( "Favor" ), "FAVOR_DOWN_HILL" );
     }
 
-    virtual void loadSettings( const QHash<QString, QVariant> &settings_ )
+    void loadSettings( const QHash<QString, QVariant> &settings_ ) override
     {
         QHash<QString, QVariant> settings = settings_;
 
@@ -121,7 +121,7 @@ public:
                     ui_configWidget->descending->findData(settings.value(QStringLiteral("descending")).toString()));
     }
 
-    virtual QHash<QString, QVariant> settings() const
+    QHash<QString, QVariant> settings() const override
     {
         QHash<QString,QVariant> settings;
         settings.insert(QStringLiteral("appKey"), ui_configWidget->appKey->text());

@@ -24,8 +24,8 @@ class CycleStreetsConfigWidget : public RoutingRunnerPlugin::ConfigWidget
 
 public:
     CycleStreetsConfigWidget();
-    virtual void loadSettings( const QHash<QString, QVariant> &settings );
-    virtual QHash<QString, QVariant> settings() const;
+    void loadSettings( const QHash<QString, QVariant> &settings ) override;
+    QHash<QString, QVariant> settings() const override;
 
 private:
     Ui::CycleStreetsConfigWidget *ui_configWidget;

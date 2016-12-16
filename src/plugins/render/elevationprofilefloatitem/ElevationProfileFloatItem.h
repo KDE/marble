@@ -54,41 +54,41 @@ class ElevationProfileFloatItem : public AbstractFloatItem, public DialogConfigu
 
  public:
     explicit ElevationProfileFloatItem( const MarbleModel *marbleModel = 0 );
-    ~ElevationProfileFloatItem();
+    ~ElevationProfileFloatItem() override;
 
-    virtual QStringList backendTypes() const;
+    QStringList backendTypes() const override;
 
-    virtual qreal zValue() const; // Overriding LayerInterface to paint on top of the route
+    qreal zValue() const override; // Overriding LayerInterface to paint on top of the route
 
-    virtual QString name() const;
+    QString name() const override;
 
-    virtual QString guiString() const;
+    QString guiString() const override;
 
-    virtual QString nameId() const;
+    QString nameId() const override;
 
-    virtual QString version() const;
+    QString version() const override;
 
-    virtual QString description() const;
+    QString description() const override;
 
-    virtual QString copyrightYears() const;
+    QString copyrightYears() const override;
 
     QVector<PluginAuthor> pluginAuthors() const override;
 
-    virtual QIcon icon() const;
+    QIcon icon() const override;
 
-    virtual void initialize();
+    void initialize() override;
 
-    virtual bool isInitialized() const;
+    bool isInitialized() const override;
 
-    virtual void setProjection( const ViewportParams *viewport );
+    void setProjection( const ViewportParams *viewport ) override;
 
-    virtual void paintContent( QPainter *painter );
+    void paintContent( QPainter *painter ) override;
 
-    QDialog *configDialog();
+    QDialog *configDialog() override;
 
 protected:
-    bool eventFilter( QObject *object, QEvent *e );
-    virtual void contextMenuEvent( QWidget *w, QContextMenuEvent *e );
+    bool eventFilter( QObject *object, QEvent *e ) override;
+    void contextMenuEvent( QWidget *w, QContextMenuEvent *e ) override;
 
  private Q_SLOTS:
     void handleDataUpdate(const GeoDataLineString &points, const QVector<QPointF> &eleData);

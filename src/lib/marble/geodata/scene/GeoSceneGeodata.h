@@ -25,8 +25,8 @@ class GEODATA_EXPORT GeoSceneGeodata : public GeoSceneAbstractDataset
 {
  public:
     explicit GeoSceneGeodata( const QString& name );
-    virtual ~GeoSceneGeodata();
-    virtual const char* nodeType() const;
+    ~GeoSceneGeodata() override;
+    const char* nodeType() const override;
 
     bool operator==( const GeoSceneGeodata &other ) const;
 

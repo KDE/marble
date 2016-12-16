@@ -41,29 +41,29 @@ class Speedometer : public AbstractFloatItem
  public:
     Speedometer();
     explicit Speedometer( const MarbleModel *marbleModel );
-    ~Speedometer();
+    ~Speedometer() override;
 
-    QStringList backendTypes() const;
+    QStringList backendTypes() const override;
 
-    QString name() const;
+    QString name() const override;
 
-    QString guiString() const;
+    QString guiString() const override;
 
-    QString nameId() const;
+    QString nameId() const override;
 
-    QString version() const;
+    QString version() const override;
 
-    QString description() const;
+    QString description() const override;
 
     QVector<PluginAuthor> pluginAuthors() const override;
 
-    QString copyrightYears() const;
+    QString copyrightYears() const override;
 
-    QIcon icon () const;
+    QIcon icon () const override;
 
-    void initialize ();
+    void initialize () override;
 
-    bool isInitialized () const;
+    bool isInitialized () const override;
 
  private Q_SLOTS:
     void updateLocation( const GeoDataCoordinates& coordinates, qreal speed );

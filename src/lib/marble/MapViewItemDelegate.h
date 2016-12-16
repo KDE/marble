@@ -33,8 +33,8 @@ class MapViewItemDelegate : public QStyledItemDelegate
 
 public:
     explicit MapViewItemDelegate( QListView* view );
-    void paint( QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index ) const;
-    QSize sizeHint( const QStyleOptionViewItem &option, const QModelIndex &index ) const;
+    void paint( QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index ) const override;
+    QSize sizeHint( const QStyleOptionViewItem &option, const QModelIndex &index ) const override;
 
 private:
     static QString text( const QModelIndex &index );

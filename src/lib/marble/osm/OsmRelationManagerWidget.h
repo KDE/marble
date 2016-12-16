@@ -44,7 +44,7 @@ public:
     explicit OsmRelationManagerWidget( GeoDataPlacemark *placemark,
                                        const QHash<qint64, OsmPlacemarkData> *relations,
                                        QWidget *parent = 0 );
-    ~OsmRelationManagerWidget();
+    ~OsmRelationManagerWidget() override;
 
 public Q_SLOTS:
     /**

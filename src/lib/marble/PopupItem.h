@@ -43,7 +43,7 @@ class PopupItem : public QObject, public BillboardGraphicsItem
     Q_OBJECT
 public:
     explicit PopupItem( QObject* parent = 0 );
-    ~PopupItem();
+    ~PopupItem() override;
 
     /**
      * @brief Print button visibility indicator
@@ -118,7 +118,7 @@ public:
      */
     void setBackgroundColor( const QColor &color );
 
-    virtual bool eventFilter( QObject *, QEvent *e );
+    bool eventFilter( QObject *, QEvent *e ) override;
 
     void clearHistory();
 
@@ -170,7 +170,7 @@ private Q_SLOTS:
     void openUrl(const QUrl &url);
 
 protected:
-    void paint( QPainter *painter );
+    void paint( QPainter *painter ) override;
 
 Q_SIGNALS:
     void repaintNeeded();

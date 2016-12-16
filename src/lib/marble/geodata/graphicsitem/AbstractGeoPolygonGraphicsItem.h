@@ -29,11 +29,11 @@ class MARBLE_EXPORT AbstractGeoPolygonGraphicsItem : public GeoGraphicsItem
 protected:
     explicit AbstractGeoPolygonGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataPolygon *polygon);
     explicit AbstractGeoPolygonGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataLinearRing *ring);
-    ~AbstractGeoPolygonGraphicsItem();
+    ~AbstractGeoPolygonGraphicsItem() override;
 
 public:
-    virtual const GeoDataLatLonAltBox& latLonAltBox() const;
-    virtual void paint(GeoPainter* painter, const ViewportParams *viewport, const QString &layer, int tileZoomLevel);
+    const GeoDataLatLonAltBox& latLonAltBox() const override;
+    void paint(GeoPainter* painter, const ViewportParams *viewport, const QString &layer, int tileZoomLevel) override;
 
     static quint64 s_previousStyle;
 

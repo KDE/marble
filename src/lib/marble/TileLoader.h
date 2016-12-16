@@ -51,7 +51,7 @@ class TileLoader: public QObject
     };
 
     explicit TileLoader(HttpDownloadManager * const, const PluginManager * );
-    ~TileLoader();
+    ~TileLoader() override;
 
     QImage loadTileImage( GeoSceneTextureTileDataset const *textureData, TileId const & tileId, DownloadUsage const );
     GeoDataDocument* loadTileVectorData( GeoSceneVectorTileDataset const *vectorData, TileId const & tileId, DownloadUsage const usage );

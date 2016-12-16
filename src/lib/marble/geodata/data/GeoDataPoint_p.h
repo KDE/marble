@@ -25,14 +25,14 @@ public:
     {
     }
 
-    virtual GeoDataGeometryPrivate* copy()
+    GeoDataGeometryPrivate* copy() override
     { 
         GeoDataPointPrivate* copy = new  GeoDataPointPrivate;
         *copy = *this;
         return copy;
     }
 
-    virtual EnumGeometryId geometryId() const
+    EnumGeometryId geometryId() const override
     {
         return GeoDataPointId;
     }

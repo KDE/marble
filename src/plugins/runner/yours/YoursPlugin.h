@@ -27,27 +27,27 @@ class YoursPlugin : public RoutingRunnerPlugin
 public:
     explicit YoursPlugin( QObject *parent = 0 );
 
-    QString name() const;
+    QString name() const override;
 
-    QString guiString() const;
+    QString guiString() const override;
 
-    QString nameId() const;
+    QString nameId() const override;
 
-    QString version() const;
+    QString version() const override;
 
-    QString description() const;
+    QString description() const override;
 
-    QString copyrightYears() const;
+    QString copyrightYears() const override;
 
     QVector<PluginAuthor> pluginAuthors() const override;
 
-    virtual RoutingRunner *newRunner() const;
+    RoutingRunner *newRunner() const override;
 
-    ConfigWidget* configWidget();
+    ConfigWidget* configWidget() override;
 
-    virtual bool supportsTemplate(RoutingProfilesModel::ProfileTemplate profileTemplate) const;
+    bool supportsTemplate(RoutingProfilesModel::ProfileTemplate profileTemplate) const override;
 
-    QHash< QString, QVariant > templateSettings(RoutingProfilesModel::ProfileTemplate profileTemplate) const;
+    QHash< QString, QVariant > templateSettings(RoutingProfilesModel::ProfileTemplate profileTemplate) const override;
 };
 
 }

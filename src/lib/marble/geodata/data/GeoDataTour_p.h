@@ -37,7 +37,7 @@ public:
         }
     }
 
-    virtual ~GeoDataTourPrivate()
+    ~GeoDataTourPrivate() override
     {
         delete m_playlist;
     }

@@ -29,25 +29,25 @@ public:
         m_timestamp()
     {}
 
-    QString name() const           { return "fake plugin"; }
-    QString guiString() const      { return "fake"; }
-    QString nameId() const         { return "fakeplugin"; }
-    QString version() const        { return "1.0"; }
-    QString description() const    { return "plugin for testing"; }
-    QIcon icon() const             { return QIcon(); }
-    QString copyrightYears() const { return "2012"; }
-    QVector<Marble::PluginAuthor> pluginAuthors() const { return QVector<Marble::PluginAuthor>(); }
-    void initialize() {}
-    bool isInitialized() const     { return true; }
+    QString name() const override           { return "fake plugin"; }
+    QString guiString() const override      { return "fake"; }
+    QString nameId() const override         { return "fakeplugin"; }
+    QString version() const override        { return "1.0"; }
+    QString description() const override    { return "plugin for testing"; }
+    QIcon icon() const override             { return QIcon(); }
+    QString copyrightYears() const override { return "2012"; }
+    QVector<Marble::PluginAuthor> pluginAuthors() const override { return QVector<Marble::PluginAuthor>(); }
+    void initialize() override {}
+    bool isInitialized() const override     { return true; }
 
-    Marble::PositionProviderStatus status() const { return m_status; }
-    Marble::GeoDataCoordinates position() const { return m_position; }
-    Marble::GeoDataAccuracy accuracy() const { return m_accuracy; }
-    qreal speed() const { return m_speed; }
-    qreal direction() const { return m_direction; }
-    QDateTime timestamp() const { return m_timestamp; }
+    Marble::PositionProviderStatus status() const override { return m_status; }
+    Marble::GeoDataCoordinates position() const override { return m_position; }
+    Marble::GeoDataAccuracy accuracy() const override { return m_accuracy; }
+    qreal speed() const override { return m_speed; }
+    qreal direction() const override { return m_direction; }
+    QDateTime timestamp() const override { return m_timestamp; }
 
-    Marble::PositionProviderPlugin *newInstance() const { return 0; }
+    Marble::PositionProviderPlugin *newInstance() const override { return 0; }
 
     void setStatus( Marble::PositionProviderStatus status );
     void setPosition( const Marble::GeoDataCoordinates &position,

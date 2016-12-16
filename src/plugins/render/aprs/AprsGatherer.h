@@ -38,7 +38,7 @@ namespace Marble {
                       QMutex *mutex,
                       QString *filter
             );
-        void run();
+        void run() override;
 
         void addObject( const QString &callSign,
                         qreal latitude, qreal longitude, bool canDoDirect,

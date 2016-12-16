@@ -26,7 +26,7 @@ public:
     void setBranchIndex( GeoDataTreeModel *sourceModel, const QModelIndex &index );
 
 protected:
-    bool filterAcceptsRow( int sourceRow, const QModelIndex &sourceParent ) const;
+    bool filterAcceptsRow( int sourceRow, const QModelIndex &sourceParent ) const override;
 
 private:
     GeoDataTreeModel *m_treeModel;

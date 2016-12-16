@@ -35,7 +35,7 @@ public:
     GeoDataSchemaData& operator=( const GeoDataSchemaData& rhs );
     bool operator==( const GeoDataSchemaData &other ) const;
     bool operator!=( const GeoDataSchemaData &other ) const;
-    ~GeoDataSchemaData();
+    ~GeoDataSchemaData() override;
 
     /*
      * @brief Returns the id for schema which defines custom data
@@ -76,7 +76,7 @@ public:
     /*
      * @brief Provides information for downcasting a GeoNode
      */
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 
     /*
      * @brief Serialize SchemaData to a stream @p stream

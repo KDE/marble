@@ -48,40 +48,40 @@ class AnnotatePlugin :  public RenderPlugin
 
 public:
     explicit AnnotatePlugin(const MarbleModel *model = 0);
-    virtual ~AnnotatePlugin();
+    ~AnnotatePlugin() override;
 
-    QStringList backendTypes() const;
+    QStringList backendTypes() const override;
 
-    QString renderPolicy() const;
+    QString renderPolicy() const override;
 
-    QStringList renderPosition() const;
+    QStringList renderPosition() const override;
 
-    QString name() const;
+    QString name() const override;
 
-    QString guiString() const;
+    QString guiString() const override;
 
-    QString nameId() const;
+    QString nameId() const override;
 
-    QString version() const;
+    QString version() const override;
 
-    QString description() const;
+    QString description() const override;
 
-    QIcon icon () const;
+    QIcon icon () const override;
 
-    QString copyrightYears() const;
+    QString copyrightYears() const override;
 
     QVector<PluginAuthor> pluginAuthors() const override;
 
-    void initialize ();
+    void initialize () override;
 
-    bool isInitialized () const;
+    bool isInitialized () const override;
 
-    virtual QString runtimeTrace() const;
+    QString runtimeTrace() const override;
 
-    virtual const QList<QActionGroup*> *actionGroups() const;
+    const QList<QActionGroup*> *actionGroups() const override;
 
     bool render( GeoPainter *painter, ViewportParams *viewport,
-                 const QString &renderPos, GeoSceneLayer *layer = 0 );
+                 const QString &renderPos, GeoSceneLayer *layer = 0 ) override;
 
 Q_SIGNALS:
     void placemarkMoved();
@@ -128,7 +128,7 @@ private Q_SLOTS:
     void addRelation( const OsmPlacemarkData &relationOsmData );
 
 protected:
-    bool eventFilter( QObject *watched, QEvent *event );
+    bool eventFilter( QObject *watched, QEvent *event ) override;
 
 private:
     void addContextItems();

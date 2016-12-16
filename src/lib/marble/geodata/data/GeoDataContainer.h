@@ -51,11 +51,11 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
     GeoDataContainer();
     GeoDataContainer( const GeoDataContainer& other );
     /// Destruct the GeoDataContainer
-    virtual ~GeoDataContainer();
+    ~GeoDataContainer() override;
 
     GeoDataContainer& operator=(const GeoDataContainer& other);
 
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 
     GeoDataFeature * clone() const override;
 
@@ -165,12 +165,12 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
      * @brief  Serialize the container to a stream.
      * @param  stream  the stream
      */
-    virtual void pack( QDataStream& stream ) const;
+    void pack( QDataStream& stream ) const override;
     /**
      * @brief  Unserialize the container from a stream
      * @param  stream  the stream
      */
-    virtual void unpack( QDataStream& stream );
+    void unpack( QDataStream& stream ) override;
 
  protected:
     explicit GeoDataContainer(GeoDataContainerPrivate *priv);

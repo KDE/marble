@@ -29,7 +29,7 @@ class GEODATA_EXPORT GeoDataTimeSpan : public GeoDataTimePrimitive
 
     GeoDataTimeSpan();
     GeoDataTimeSpan( const GeoDataTimeSpan& other );
-    ~GeoDataTimeSpan();
+    ~GeoDataTimeSpan() override;
 
     /**
     * @brief assignment operator
@@ -43,7 +43,7 @@ class GEODATA_EXPORT GeoDataTimeSpan : public GeoDataTimePrimitive
     bool operator!=( const GeoDataTimeSpan& other ) const;
 
     /// Provides type information for downcasting a GeoNode
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 
     /**
     * @brief return the beginning instant of a timespan
@@ -78,13 +78,13 @@ class GEODATA_EXPORT GeoDataTimeSpan : public GeoDataTimePrimitive
      * @brief Serialize the timespan to a stream
      * @param  stream  the stream
      */
-    virtual void pack( QDataStream& stream ) const;
+    void pack( QDataStream& stream ) const override;
 
     /**
      * @brief  Unserialize the timespan from a stream
      * @param  stream  the stream
      */
-    virtual void unpack( QDataStream& stream );
+    void unpack( QDataStream& stream ) override;
 
   private:
     GeoDataTimeSpanPrivate * const d;

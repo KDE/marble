@@ -27,8 +27,8 @@ public:
     explicit MapThemeSortFilterProxyModel(QObject *parent = 0);
 
 protected:
-    bool lessThan( const QModelIndex &left, const QModelIndex &right ) const;
-    bool filterAcceptsRow( int sourceRow, const QModelIndex &sourceParent ) const;
+    bool lessThan( const QModelIndex &left, const QModelIndex &right ) const override;
+    bool filterAcceptsRow( int sourceRow, const QModelIndex &sourceParent ) const override;
 
 private:
     static bool isFavorite( const QModelIndex& index );

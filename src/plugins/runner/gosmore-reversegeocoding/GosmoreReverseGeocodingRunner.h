@@ -25,10 +25,10 @@ class GosmoreRunner : public ReverseGeocodingRunner
 public:
     explicit GosmoreRunner(QObject *parent = 0);
 
-    ~GosmoreRunner();
+    ~GosmoreRunner() override;
 
     // Overriding MarbleAbstractRunner
-    virtual void reverseGeocoding( const GeoDataCoordinates &coordinates );
+    void reverseGeocoding( const GeoDataCoordinates &coordinates ) override;
 
 private:
     GosmoreRunnerPrivate* const d;

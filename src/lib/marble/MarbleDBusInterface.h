@@ -39,7 +39,7 @@ class MARBLE_EXPORT MarbleDBusInterface : public QDBusAbstractAdaptor
 
 public:
     explicit MarbleDBusInterface(MarbleWidget* widget);
-    ~MarbleDBusInterface();
+    ~MarbleDBusInterface() override;
 
     QString mapTheme() const;
     QStringList mapThemes() const;

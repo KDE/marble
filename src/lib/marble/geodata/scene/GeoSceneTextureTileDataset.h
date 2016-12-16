@@ -27,7 +27,7 @@ class GeoSceneTextureTileDataset : public GeoSceneTileDataset
 
     explicit GeoSceneTextureTileDataset( const QString& name );
 
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 
     /**
      * @brief set bounds for the texture. Tiles outside of these bounds won't be searched in this texture.

@@ -30,12 +30,12 @@ class PluginItemDelegate : public QAbstractItemDelegate
 
  public:
     explicit PluginItemDelegate( QAbstractItemView *view, QObject * parent = 0 );
-    ~PluginItemDelegate();
+    ~PluginItemDelegate() override;
     
     void paint( QPainter *painter,
                 const QStyleOptionViewItem& option,
-                const QModelIndex& index ) const;
-    QSize sizeHint( const QStyleOptionViewItem& option, const QModelIndex & index ) const;
+                const QModelIndex& index ) const override;
+    QSize sizeHint( const QStyleOptionViewItem& option, const QModelIndex & index ) const override;
 
     void setAboutIcon( const QIcon& icon );
     void setConfigIcon( const QIcon& icon );
@@ -57,7 +57,7 @@ class PluginItemDelegate : public QAbstractItemDelegate
     bool editorEvent( QEvent *event,
                       QAbstractItemModel *model,
                       const QStyleOptionViewItem &option,
-                      const QModelIndex &index );
+                      const QModelIndex &index ) override;
 
  private:
     enum ButtonType {

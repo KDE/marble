@@ -39,9 +39,9 @@ public:
     /** @todo FIXME https://bugreports.qt-project.org/browse/QTCOMPONENTS-1206 */
     int count() const;
 
-    QHash<int, QByteArray> roleNames() const;
+    QHash<int, QByteArray> roleNames() const override;
 
-    virtual QVariant data ( const QModelIndex & index, int role = Qt::DisplayRole ) const;
+    QVariant data ( const QModelIndex & index, int role = Qt::DisplayRole ) const override;
 
 public Q_SLOTS:
     void setVehicleTypeFilter( VehicleTypes filter );
@@ -64,7 +64,7 @@ Q_SIGNALS:
     void uninstallationFinished( int newstuffindex );
 
 protected:
-    virtual bool filterAcceptsRow( int source_row, const QModelIndex &source_parent ) const;
+    bool filterAcceptsRow( int source_row, const QModelIndex &source_parent ) const override;
 
 private Q_SLOTS:
     void handleInstallationProgress( int index, qreal progress );

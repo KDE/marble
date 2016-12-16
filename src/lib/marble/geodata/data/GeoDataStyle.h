@@ -69,10 +69,10 @@ class GEODATA_EXPORT GeoDataStyle : public GeoDataStyleSelector
      */
     GeoDataStyle( const QString& iconPath,
                   const QFont &font, const QColor &color  );
-    ~GeoDataStyle();
+    ~GeoDataStyle() override;
 
     /// Provides type information for downcasting a GeoNode
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 
     /// set the icon style
     void setIconStyle( const GeoDataIconStyle& style );
@@ -118,12 +118,12 @@ class GEODATA_EXPORT GeoDataStyle : public GeoDataStyleSelector
      * @brief Serialize the style to a stream
      * @param  stream  the stream
      */
-    virtual void pack( QDataStream& stream ) const;
+    void pack( QDataStream& stream ) const override;
     /**
      * @brief  Unserialize the style from a stream
      * @param  stream  the stream
      */
-    virtual void unpack( QDataStream& stream );
+    void unpack( QDataStream& stream ) override;
 
   private:
     GeoDataStylePrivate * const d;

@@ -24,7 +24,7 @@ class KmlColorStyleTagWriter: public GeoTagWriter
 public:
     explicit KmlColorStyleTagWriter( const QString &elementName );
 
-    bool write( const GeoNode *node, GeoWriter& writer ) const;
+    bool write( const GeoNode *node, GeoWriter& writer ) const override;
 
     static QString formatColor( const QColor &color );
 

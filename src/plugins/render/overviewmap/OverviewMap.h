@@ -45,45 +45,45 @@ class OverviewMap : public AbstractFloatItem, public DialogConfigurationInterfac
  public:
     OverviewMap();
     explicit OverviewMap( const MarbleModel *marbleModel );
-    ~OverviewMap();
+    ~OverviewMap() override;
 
-    QStringList backendTypes() const;
+    QStringList backendTypes() const override;
 
-    QString name() const;
+    QString name() const override;
 
-    QString guiString() const;
+    QString guiString() const override;
 
-    QString nameId() const;
+    QString nameId() const override;
 
-    QString version() const;
+    QString version() const override;
 
-    QString description() const;
+    QString description() const override;
 
-    QString copyrightYears() const;
+    QString copyrightYears() const override;
 
     QVector<PluginAuthor> pluginAuthors() const override;
 
-    QIcon icon () const;
+    QIcon icon () const override;
 
-    QDialog *configDialog();
+    QDialog *configDialog() override;
 
-    void initialize ();
+    void initialize () override;
 
-    bool isInitialized () const;
+    bool isInitialized () const override;
 
-    void setProjection( const ViewportParams *viewport );
+    void setProjection( const ViewportParams *viewport ) override;
 
-    void paintContent( QPainter *painter );
+    void paintContent( QPainter *painter ) override;
 
     /**
      * @return: The settings of the item.
      */
-    virtual QHash<QString,QVariant> settings() const;
+    QHash<QString,QVariant> settings() const override;
 
     /**
      * Set the settings of the item.
      */
-    virtual void setSettings( const QHash<QString,QVariant> &settings );
+    void setSettings( const QHash<QString,QVariant> &settings ) override;
 
  public Q_SLOTS:
     void readSettings();
@@ -91,7 +91,7 @@ class OverviewMap : public AbstractFloatItem, public DialogConfigurationInterfac
     void updateSettings();
 
  protected:
-    bool eventFilter( QObject *object, QEvent *e );
+    bool eventFilter( QObject *object, QEvent *e ) override;
 
  private:
     void changeBackground( const QString& target );

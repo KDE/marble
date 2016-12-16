@@ -184,9 +184,9 @@ public:
      */
     void setExtendedData( const GeoDataExtendedData& extendedData );
 
-    virtual const GeoDataLatLonAltBox& latLonAltBox() const;
-    virtual void pack( QDataStream& stream ) const;
-    virtual void unpack( QDataStream& stream );
+    const GeoDataLatLonAltBox& latLonAltBox() const override;
+    void pack( QDataStream& stream ) const override;
+    void unpack( QDataStream& stream ) override;
 
 private:
     Q_DECLARE_PRIVATE(GeoDataTrack)

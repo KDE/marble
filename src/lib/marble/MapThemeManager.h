@@ -50,7 +50,7 @@ class MARBLE_EXPORT MapThemeManager : public QObject
 
  public:
     explicit MapThemeManager(QObject *parent = 0);
-    ~MapThemeManager();
+    ~MapThemeManager() override;
 
     /**
      * @brief Returns a list of all locally available map theme IDs

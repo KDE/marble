@@ -77,7 +77,7 @@ class DownloadQueueSet: public QObject
  public:
     explicit DownloadQueueSet( QObject * const parent = 0 );
     explicit DownloadQueueSet( const DownloadPolicy& policy, QObject * const parent = 0 );
-    ~DownloadQueueSet();
+    ~DownloadQueueSet() override;
 
     DownloadPolicy downloadPolicy() const;
     void setDownloadPolicy( const DownloadPolicy& );

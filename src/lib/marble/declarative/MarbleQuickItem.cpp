@@ -46,11 +46,11 @@ namespace Marble
     { //TODO: support rubber selection in MarbleQuickItem
     public:
         QuickItemSelectionRubber();
-        void show() { m_visible = true; }
-        void hide() { m_visible = false; }
-        bool isVisible() const { return m_visible; }
-        const QRect &geometry() const { return m_geometry; }
-        void setGeometry(const QRect &/*geometry*/) {}
+        void show() override { m_visible = true; }
+        void hide() override { m_visible = false; }
+        bool isVisible() const override { return m_visible; }
+        const QRect &geometry() const override { return m_geometry; }
+        void setGeometry(const QRect &/*geometry*/) override {}
     private:
         QRect m_geometry;
         bool m_visible;
@@ -67,7 +67,7 @@ namespace Marble
             setInertialEarthRotationEnabled(false); //Disabled by default, it's buggy. TODO - fix
         }
 
-        bool acceptMouse()
+        bool acceptMouse() override
         {
             return true;
         }
@@ -77,37 +77,37 @@ namespace Marble
             (void)handlePinch(center, scale, state);
         }
 
-        void handleMouseButtonPressAndHold(const QPoint &position)
+        void handleMouseButtonPressAndHold(const QPoint &position) override
         {
             m_marbleQuick->reverseGeocoding(position);
         }
 
     private Q_SLOTS:
-        void showLmbMenu(int x, int y)
+        void showLmbMenu(int x, int y) override
         {
             m_marbleQuick->selectPlacemarkAt(x, y);
         }
 
-        void showRmbMenu(int, int) {}
-        void openItemToolTip() {}
-        void setCursor(const QCursor &cursor)
+        void showRmbMenu(int, int) override {}
+        void openItemToolTip() override {}
+        void setCursor(const QCursor &cursor) override
         {
             m_marbleQuick->setCursor(cursor);
         }
 
     private Q_SLOTS:
-        void installPluginEventFilter(RenderPlugin *) {}
+        void installPluginEventFilter(RenderPlugin *) override {}
 
     private:
-        bool layersEventFilter(QObject *o, QEvent *e)
+        bool layersEventFilter(QObject *o, QEvent *e) override
         {
             return m_marbleQuick->layersEventFilter(o, e);
         }
 
         //empty - don't check. It would be invalid with quick items
-        void checkReleasedMove(QMouseEvent *) {}
+        void checkReleasedMove(QMouseEvent *) override {}
 
-        bool handleTouch(QTouchEvent *event)
+        bool handleTouch(QTouchEvent *event) override
         {
             if (event->touchPoints().count() > 1)
             {   //not handling multi-touch at all, let PinchArea or MultiPointTouchArea take care of it
@@ -139,7 +139,7 @@ namespace Marble
             return false;
         }
 
-        AbstractSelectionRubber *selectionRubber()
+        AbstractSelectionRubber *selectionRubber() override
         {
             return &m_selectionRubber;
         }

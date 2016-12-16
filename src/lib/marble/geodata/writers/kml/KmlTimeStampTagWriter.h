@@ -20,7 +20,7 @@ class GeoDataTimeStamp;
 class KmlTimeStampTagWriter : public GeoTagWriter
 {
 public:
-    virtual bool write( const GeoNode *node, GeoWriter& writer ) const;
+    bool write( const GeoNode *node, GeoWriter& writer ) const override;
 
     static QString toString( const GeoDataTimeStamp &timestamp );
 };

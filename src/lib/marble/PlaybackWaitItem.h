@@ -25,11 +25,11 @@ class PlaybackWaitItem : public PlaybackItem
 public:
     explicit PlaybackWaitItem( const GeoDataWait* wait );
     const GeoDataWait* wait() const;
-    double duration() const;
-    void play();
-    void pause();
-    void seek( double position );
-    void stop();
+    double duration() const override;
+    void play() override;
+    void pause() override;
+    void seek( double position ) override;
+    void stop() override;
 
 private Q_SLOTS:
     void playNext();

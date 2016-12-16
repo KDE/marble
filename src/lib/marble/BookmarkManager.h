@@ -42,7 +42,7 @@ class MARBLE_EXPORT BookmarkManager : public QObject
 
     explicit BookmarkManager( GeoDataTreeModel *treeModel, QObject *parent = 0 );
 
-    ~BookmarkManager();
+    ~BookmarkManager() override;
 
     /**
       * @brief load bookmark file as GeoDataDocument and return true

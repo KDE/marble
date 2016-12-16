@@ -21,7 +21,7 @@ namespace Marble
 class KmlTimeSpanWriter : public GeoTagWriter
 {
 public:
-    virtual bool write( const GeoNode *node, GeoWriter& writer ) const;
+    bool write( const GeoNode *node, GeoWriter& writer ) const override;
 
 };
 

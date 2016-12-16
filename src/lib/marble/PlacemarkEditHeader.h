@@ -33,7 +33,7 @@ public:
                         const QString& iconLink = QString(),
                         const QString& id = QString(),
                         const QStringList &idFilter = QStringList() );
-    ~PlacemarkEditHeader();
+    ~PlacemarkEditHeader() override;
     QString name() const;
     QString iconLink() const;
     qreal latitude() const;

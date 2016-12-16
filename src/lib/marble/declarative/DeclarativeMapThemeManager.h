@@ -20,7 +20,7 @@ class MapThemeImageProvider : public QQuickImageProvider
 public:
     MapThemeImageProvider();
 
-    QPixmap requestPixmap( const QString &id, QSize *size, const QSize &requestedSize );
+    QPixmap requestPixmap( const QString &id, QSize *size, const QSize &requestedSize ) override;
 
 private:
     /** @todo FIXME It is a bit ugly to keep a separate object that loads all themes again

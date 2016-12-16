@@ -24,7 +24,7 @@ class KmlFeatureTagWriter: public GeoTagWriter
 public:
     explicit KmlFeatureTagWriter( const QString &elementName );
 
-    bool write( const GeoNode *node, GeoWriter& writer ) const;
+    bool write( const GeoNode *node, GeoWriter& writer ) const override;
 
 protected:
     virtual bool writeMid( const GeoNode *node, GeoWriter& writer ) const = 0;

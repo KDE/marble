@@ -26,10 +26,10 @@ public Q_SLOTS:
 
 public:
     explicit TreeViewDecoratorModel( QObject *parent = 0 );
-    QVariant data( const QModelIndex & proxyIndex, int role = Qt::DisplayRole ) const;
+    QVariant data( const QModelIndex & proxyIndex, int role = Qt::DisplayRole ) const override;
 
 protected:
-    bool filterAcceptsRow( int sourceRow, const QModelIndex &sourceParent ) const;
+    bool filterAcceptsRow( int sourceRow, const QModelIndex &sourceParent ) const override;
 
 private:
     QList<QPersistentModelIndex> m_expandedRows;

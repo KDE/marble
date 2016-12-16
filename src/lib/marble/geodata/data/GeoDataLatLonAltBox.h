@@ -61,13 +61,13 @@ class GEODATA_EXPORT GeoDataLatLonAltBox : public GeoDataLatLonBox
      */
     explicit GeoDataLatLonAltBox( const GeoDataCoordinates & coordinates );
     
-    virtual ~GeoDataLatLonAltBox();
+    ~GeoDataLatLonAltBox() override;
 
     GeoDataLatLonAltBox& operator=( const GeoDataLatLonAltBox& other );
     GeoDataLatLonAltBox& operator=( const GeoDataCoordinates& other );
 
     /// Provides type information for downcasting a GeoData
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 
     /**
      * @brief qHash, for using GeoDataLatLonAltBox in a QCache as Key
@@ -97,7 +97,7 @@ class GEODATA_EXPORT GeoDataLatLonAltBox : public GeoDataLatLonBox
     AltitudeMode altitudeMode() const;
     void setAltitudeMode( const AltitudeMode altitudeMode );
 
-    virtual bool contains( const GeoDataCoordinates & ) const;
+    bool contains( const GeoDataCoordinates & ) const override;
     bool     contains( const GeoDataLatLonAltBox & ) const;
 
     /**
@@ -116,29 +116,29 @@ class GEODATA_EXPORT GeoDataLatLonAltBox : public GeoDataLatLonBox
     /**
      * @brief Creates a text string of the bounding box
      */
-    virtual QString toString( GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian ) const;
+    QString toString( GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian ) const override;
 
     /**
      * @brief Indicates whether the bounding box only contains a single 2D point ("singularity").
      * @return Return value is true if the height and the width of the bounding box equal zero.
      */
-    bool isNull() const;
+    bool isNull() const override;
 
     /**
      * @brief Resets the bounding box to its uninitialised state (and thus contains nothing).
      */
-    virtual void clear();
+    void clear() override;
 
     /**
      * @brief returns the center of this box
      * @return a coordinate, body-center of the box
      */
-    virtual GeoDataCoordinates center() const;
+    GeoDataCoordinates center() const override;
 
     /// Serialize the contents of the feature to @p stream.
-    virtual void pack( QDataStream& stream ) const;
+    void pack( QDataStream& stream ) const override;
     /// Unserialize the contents of the feature from @p stream.
-    virtual void unpack( QDataStream& stream );
+    void unpack( QDataStream& stream ) override;
 
  private:
     GeoDataLatLonAltBoxPrivate  * const d;

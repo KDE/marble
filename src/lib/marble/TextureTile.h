@@ -58,7 +58,7 @@ class TextureTile : public Tile
 {
  public:
     TextureTile(TileId const & tileId, QImage const & image, const Blending * blending );
-    ~TextureTile();
+    ~TextureTile() override;
 
 /*!
     \brief Returns the QImage that describes the look of the Tile

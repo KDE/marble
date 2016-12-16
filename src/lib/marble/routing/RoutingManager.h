@@ -45,7 +45,7 @@ public:
     explicit RoutingManager( MarbleModel *marbleModel, QObject *parent = 0 );
 
     /** Destructor */
-    ~RoutingManager();
+    ~RoutingManager() override;
 
     /**
       * Provides access to the model which contains all possible routing profiles

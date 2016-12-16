@@ -35,31 +35,31 @@ public:
 
     explicit MonavPlugin( QObject *parent = 0 );
 
-    QString name() const;
+    QString name() const override;
 
-    QString guiString() const;
+    QString guiString() const override;
 
-    QString nameId() const;
+    QString nameId() const override;
 
-    QString version() const;
+    QString version() const override;
 
-    QString description() const;
+    QString description() const override;
 
-    QString copyrightYears() const;
+    QString copyrightYears() const override;
 
     QVector<PluginAuthor> pluginAuthors() const override;
 
-    ~MonavPlugin();
+    ~MonavPlugin() override;
 
-    virtual RoutingRunner *newRunner() const;
+    RoutingRunner *newRunner() const override;
 
-    virtual bool supportsTemplate(RoutingProfilesModel::ProfileTemplate profileTemplate) const;
+    bool supportsTemplate(RoutingProfilesModel::ProfileTemplate profileTemplate) const override;
 
-    virtual QHash< QString, QVariant > templateSettings( RoutingProfilesModel::ProfileTemplate profileTemplate ) const;
+    QHash< QString, QVariant > templateSettings( RoutingProfilesModel::ProfileTemplate profileTemplate ) const override;
 
-    virtual ConfigWidget *configWidget();
+    ConfigWidget *configWidget() override;
 
-    virtual bool canWork() const;
+    bool canWork() const override;
 
     QString mapDirectoryForRequest( const RouteRequest* request ) const;
 

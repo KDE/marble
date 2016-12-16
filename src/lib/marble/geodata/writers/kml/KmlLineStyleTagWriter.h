@@ -22,9 +22,9 @@ public:
     KmlLineStyleTagWriter();
 
 protected:
-    virtual bool writeMid( const GeoNode *node, GeoWriter& writer ) const;
+    bool writeMid( const GeoNode *node, GeoWriter& writer ) const override;
 
-    virtual bool isEmpty( const GeoNode *node ) const;
+    bool isEmpty( const GeoNode *node ) const override;
 };
 
 }

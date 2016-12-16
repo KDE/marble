@@ -28,7 +28,7 @@ class GEODATA_EXPORT GeoDataTour : public GeoDataFeature
 public:
     GeoDataTour();
     GeoDataTour(const GeoDataTour& other);
-    virtual ~GeoDataTour();
+    ~GeoDataTour() override;
 
     GeoDataTour& operator=(const GeoDataTour& other);
 
@@ -41,7 +41,7 @@ public:
     const GeoDataPlaylist* playlist() const;
     void setPlaylist(GeoDataPlaylist* playlist);
 
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 
     static const GeoDataTour null;
 

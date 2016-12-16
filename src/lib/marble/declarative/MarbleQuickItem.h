@@ -139,12 +139,12 @@ namespace Marble
         Q_INVOKABLE void writeSettings();
 
     public:
-        void paint(QPainter *painter);
+        void paint(QPainter *painter) override;
 
     // QQmlParserStatus interface
     public:
-        void classBegin();
-        void componentComplete();
+        void classBegin() override;
+        void componentComplete() override;
 
     public:
         virtual bool layersEventFilter(QObject *o, QEvent *e);

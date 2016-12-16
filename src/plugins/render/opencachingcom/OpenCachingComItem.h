@@ -34,17 +34,17 @@ class OpenCachingComItem : public AbstractDataPluginItem
 public:
     OpenCachingComItem( const QVariantMap& cache, OpenCachingComModel *parent );
 
-    ~OpenCachingComItem();
+    ~OpenCachingComItem() override;
 
-    bool initialized() const;
+    bool initialized() const override;
 
-    void paint( QPainter *painter );
+    void paint( QPainter *painter ) override;
 
-    QAction *action();
+    QAction *action() override;
 
-    bool operator<( const AbstractDataPluginItem *other ) const;
+    bool operator<( const AbstractDataPluginItem *other ) const override;
 
-    void addDownloadedFile( const QString &url, const QString &type );
+    void addDownloadedFile( const QString &url, const QString &type ) override;
 
 public Q_SLOTS:
     void showInfoDialog();

@@ -29,9 +29,9 @@ public:
 
     GeoDataPoint point() const;
 
-    virtual void paint(GeoPainter* painter, const ViewportParams *viewport, const QString &layer, int tileZoomLevel);
+    void paint(GeoPainter* painter, const ViewportParams *viewport, const QString &layer, int tileZoomLevel) override;
 
-    virtual const GeoDataLatLonAltBox& latLonAltBox() const;
+    const GeoDataLatLonAltBox& latLonAltBox() const override;
 
 protected:
     GeoDataPoint m_point;

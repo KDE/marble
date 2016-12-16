@@ -23,7 +23,7 @@ class EarthquakeModel : public AbstractDataPluginModel
 
 public:
     explicit EarthquakeModel( const MarbleModel *marbleModel, QObject *parent = 0 );
-    ~EarthquakeModel();
+    ~EarthquakeModel() override;
 
     void setMinMagnitude( double minMagnitude );
     void setStartDate( const QDateTime& startDate );
@@ -34,14 +34,14 @@ protected:
      * Generates the download url for the description file from the web service depending on
      * the @p box surrounding the view and the @p number of files to show.
      **/
-    virtual void getAdditionalItems( const GeoDataLatLonAltBox& box,
-                                     qint32 number = 10 );
+    void getAdditionalItems( const GeoDataLatLonAltBox& box,
+                                     qint32 number = 10 ) override;
 
     /**
      * Parses the @p file which getAdditionalItems downloads and
      * prepares the data for usage.
      **/
-    void parseFile( const QByteArray& file );
+    void parseFile( const QByteArray& file ) override;
 
 private:
     double m_minMagnitude;

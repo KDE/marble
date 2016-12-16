@@ -26,7 +26,7 @@ public:
     explicit BuildingGeoPolygonGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataLinearRing *ring);
 
 public:
-    virtual void paint(GeoPainter* painter, const ViewportParams *viewport, const QString &layer, int tileZoomLevel);
+    void paint(GeoPainter* painter, const ViewportParams *viewport, const QString &layer, int tileZoomLevel) override;
 
 private:
     struct NamedEntry {

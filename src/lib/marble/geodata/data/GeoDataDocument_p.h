@@ -43,7 +43,7 @@ class GeoDataDocumentPrivate : public GeoDataContainerPrivate
     {
     }
 
-    virtual EnumFeatureId featureId() const
+    EnumFeatureId featureId() const override
     {
         return GeoDataDocumentId;
     }

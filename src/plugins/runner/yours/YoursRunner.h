@@ -28,10 +28,10 @@ class YoursRunner : public RoutingRunner
 public:
     explicit YoursRunner( QObject *parent = 0 );
 
-    ~YoursRunner();
+    ~YoursRunner() override;
 
     // Overriding MarbleAbstractRunner
-    virtual void retrieveRoute( const RouteRequest *request );
+    void retrieveRoute( const RouteRequest *request ) override;
 
 private Q_SLOTS:
     /** Route data was retrieved via http */

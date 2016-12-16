@@ -35,7 +35,7 @@ public:
     explicit EclipsesBrowserDialog( const MarbleModel *model,
                                     QWidget *parent = 0 );
 
-    ~EclipsesBrowserDialog();
+    ~EclipsesBrowserDialog() override;
 
     /**
      * @brief Set the year
@@ -91,7 +91,7 @@ protected Q_SLOTS:
      *
      * @see buttonShowClicked
      */
-    void accept();
+    void accept() override;
 
     /**
      * @brief Update the list of eclipses for the given year

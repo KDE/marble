@@ -55,7 +55,7 @@ public:
     explicit RoutingInputLineEdit( QWidget *parent = 0 );
 
 protected:
-    virtual void keyPressEvent(QKeyEvent *);
+    void keyPressEvent(QKeyEvent *) override;
 };
 
 class RoutingInputWidgetPrivate

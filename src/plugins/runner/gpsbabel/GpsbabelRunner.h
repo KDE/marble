@@ -22,7 +22,7 @@ class GpsbabelRunner : public ParsingRunner
 public:
     explicit GpsbabelRunner( QObject *parent = 0 );
 
-    GeoDataDocument* parseFile( const QString &fileName, DocumentRole role, QString& error );
+    GeoDataDocument* parseFile( const QString &fileName, DocumentRole role, QString& error ) override;
 
 };
 

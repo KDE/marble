@@ -33,7 +33,7 @@ class GeoDataMultiGeometryPrivate : public GeoDataGeometryPrivate
     {
     }
 
-    ~GeoDataMultiGeometryPrivate()
+    ~GeoDataMultiGeometryPrivate() override
     {
         qDeleteAll(m_vector);
     }
@@ -79,19 +79,19 @@ class GeoDataMultiGeometryPrivate : public GeoDataGeometryPrivate
         return *this;
     }
 
-    virtual GeoDataGeometryPrivate* copy()
+    GeoDataGeometryPrivate* copy() override
     { 
         GeoDataMultiGeometryPrivate* copy = new GeoDataMultiGeometryPrivate;
         *copy = *this;
         return copy;
     }
 
-    virtual const char* nodeType() const
+    const char* nodeType() const override
     {
         return GeoDataTypes::GeoDataMultiGeometryType;
     }
 
-    virtual EnumGeometryId geometryId() const
+    EnumGeometryId geometryId() const override
     {
         return GeoDataMultiGeometryId;
     }

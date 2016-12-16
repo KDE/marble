@@ -33,7 +33,7 @@ namespace Marble
 class OutlinedStyle : public QCommonStyle {
 public:
     void drawItemText( QPainter *painter, const QRect &rect, int alignment, const QPalette &palette,
-                       bool enabled, const QString& text, QPalette::ColorRole textRole ) const {
+                       bool enabled, const QString& text, QPalette::ColorRole textRole ) const override {
         Q_UNUSED( alignment );
         Q_UNUSED( enabled );
 

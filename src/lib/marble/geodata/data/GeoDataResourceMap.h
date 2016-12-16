@@ -33,10 +33,10 @@ public:
     bool operator==( const GeoDataResourceMap &other ) const;
     bool operator!=( const GeoDataResourceMap &other ) const;
 
-    ~GeoDataResourceMap();
+    ~GeoDataResourceMap() override;
 
     /** Provides type information for downcasting a GeoNode */
-    virtual const char* nodeType() const;
+    const char* nodeType() const override;
 
     const GeoDataAlias& alias() const;
 

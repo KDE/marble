@@ -68,7 +68,7 @@ class MARBLE_EXPORT TileCreator : public QThread
      */
     TileCreator( TileCreatorSource *source, const QString& dem, const QString& targetDir );
 
-    virtual ~TileCreator();
+    ~TileCreator() override;
 
     void cancelTileCreation();
 
@@ -82,7 +82,7 @@ class MARBLE_EXPORT TileCreator : public QThread
     bool verifyExactResult() const;
 
  protected:
-    virtual void run();
+    void run() override;
 
  Q_SIGNALS:
     void  progress( int value );

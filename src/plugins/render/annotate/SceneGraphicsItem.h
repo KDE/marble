@@ -33,7 +33,7 @@ class SceneGraphicsItem : public GeoGraphicsItem
 {
 public:
     explicit SceneGraphicsItem( GeoDataPlacemark *placemark );
-    ~SceneGraphicsItem();
+    ~SceneGraphicsItem() override;
 
     enum ActionState {
         // General action states

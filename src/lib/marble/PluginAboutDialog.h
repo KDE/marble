@@ -43,7 +43,7 @@ class MARBLE_EXPORT PluginAboutDialog : public QDialog
     };
 
     explicit PluginAboutDialog( QWidget *parent = 0 );
-    virtual ~PluginAboutDialog();
+    ~PluginAboutDialog() override;
 
     /**
      * Sets the name of the plugin.
