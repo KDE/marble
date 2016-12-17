@@ -68,9 +68,9 @@ private:
     T merge(T const & a, T const &b) const
     {
         T result = a;
-        for (int i=1, n=b.size(); i<n; ++i) {
-            result << b[i];
-        }
+        int const index = a.size();
+        result << b;
+        result.remove(index);
         return result;
     }
 
