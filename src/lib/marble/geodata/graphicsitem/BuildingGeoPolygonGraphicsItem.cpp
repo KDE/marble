@@ -301,6 +301,7 @@ void BuildingGeoPolygonGraphicsItem::paintRoof(GeoPainter* painter, const Viewpo
             foreach( const QPolygonF* innerRoof, m_cachedInnerRoofPolygons ) {
                 painter->drawPolyline( *innerRoof );
             }
+            qDeleteAll(fillPolygons);
         }
         else {
             foreach( const QPolygonF* outerRoof, m_cachedOuterRoofPolygons ) {
@@ -332,6 +333,7 @@ void BuildingGeoPolygonGraphicsItem::paintRoof(GeoPainter* painter, const Viewpo
             foreach( const QPolygonF* innerPolygon,  m_cachedInnerPolygons ) {
                 painter->drawPolyline( *innerPolygon );
             }
+            qDeleteAll(fillPolygons);
         }
         else {
             foreach( const QPolygonF* outerPolygon,  m_cachedOuterPolygons ) {
