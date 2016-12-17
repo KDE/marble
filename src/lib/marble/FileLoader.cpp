@@ -457,7 +457,8 @@ void FileLoaderPrivate::createFilterProperties( GeoDataContainer *container )
                 }
             }
             else if (placemarkRole == QLatin1String("PPLA2") ||
-                     placemarkRole == QLatin1String("PPLA3")) {
+                     placemarkRole == QLatin1String("PPLA3") ||
+                     placemarkRole == QLatin1String("PPLA4")) {
                 switch (placemark->zoomLevel()) {
                 case 3:
                 case 4:
