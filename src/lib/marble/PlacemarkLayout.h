@@ -83,6 +83,8 @@ class PlacemarkLayout : public QObject
 
     QList<VisiblePlacemark *> visiblePlacemarks() const;
 
+    bool hasPlacemarkAt(const QPoint &pos);
+
  public Q_SLOTS:
     // earth
     void setShowPlaces( bool show );
@@ -164,6 +166,7 @@ class PlacemarkLayout : public QObject
     int     m_maxLabelHeight;
     bool    m_styleResetRequested;
     const StyleBuilder* m_styleBuilder;
+    VisiblePlacemark* m_lastPlacemarkAt;
 };
 
 }

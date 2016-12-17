@@ -142,6 +142,11 @@ void GeoGraphicsItem::setRenderContext(const RenderContext &renderContext)
     }
 }
 
+bool GeoGraphicsItem::contains(const QPoint &, const ViewportParams *) const
+{
+    return false;
+}
+
 int GeoGraphicsItem::minZoomLevel() const
 {
     return d->m_minZoomLevel;

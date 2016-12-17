@@ -219,12 +219,12 @@ class MARBLE_EXPORT MarbleMap : public QObject
      */
     qreal centerLatitude() const;
 
-    QVector<const GeoDataFeature *> whichFeatureAt( const QPoint& ) const;
-
     /**
      * @since 0.26.0
      */
-    QVector<const GeoDataFeature*> whichBuildingAt(const QPoint& curpos) const;
+    bool hasFeatureAt(const QPoint&) const;
+
+    QVector<const GeoDataFeature *> whichFeatureAt( const QPoint& ) const;
 
     /**
      * @brief  Return the property value by name.

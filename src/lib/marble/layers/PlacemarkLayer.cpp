@@ -199,6 +199,11 @@ QVector<const GeoDataFeature *> PlacemarkLayer::whichPlacemarkAt( const QPoint &
     return m_layout.whichPlacemarkAt( pos );
 }
 
+bool PlacemarkLayer::hasPlacemarkAt(const QPoint &pos)
+{
+    return m_layout.hasPlacemarkAt(pos);
+}
+
 bool PlacemarkLayer::isDebugModeEnabled() const
 {
     return m_debugModeEnabled;

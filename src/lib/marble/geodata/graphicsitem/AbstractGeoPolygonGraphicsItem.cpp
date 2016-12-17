@@ -94,6 +94,26 @@ void AbstractGeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportP
     }
 }
 
+bool AbstractGeoPolygonGraphicsItem::contains(const QPoint &screenPosition, const ViewportParams *viewport) const
+{
+    auto const visualCategory = static_cast<const GeoDataPlacemark*>(feature())->visualCategory();
+    if (visualCategory == GeoDataPlacemark::Landmass ||
+            visualCategory == GeoDataPlacemark::UrbanArea ||
+            (visualCategory >= GeoDataPlacemark::LanduseAllotments && visualCategory <= GeoDataPlacemark::LanduseVineyard)) {
+        return false;
+    }
+
+    double lon, lat;
+    viewport->geoCoordinates(screenPosition.x(), screenPosition.y(), lon, lat, GeoDataCoordinates::Radian);
+    auto const coordinates = GeoDataCoordinates(lon, lat);
+    if (m_polygon) {
+        return m_polygon->contains(coordinates);
+    } else if (m_ring) {
+        return m_ring->contains(coordinates);
+    }
+    return false;
+}
+
 bool AbstractGeoPolygonGraphicsItem::configurePainter(GeoPainter *painter, const ViewportParams *viewport)
 {
     QPen currentPen = painter->pen();

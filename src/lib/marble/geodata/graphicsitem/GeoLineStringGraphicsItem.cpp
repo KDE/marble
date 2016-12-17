@@ -146,8 +146,6 @@ void GeoLineStringGraphicsItem::paint(GeoPainter* painter, const ViewportParams*
                 paintLabel(painter, viewport);
             }
         }
-        qDeleteAll(m_cachedPolygons);
-        m_cachedPolygons.clear();
     } else {
         qDeleteAll(m_cachedPolygons);
         m_cachedPolygons.clear();
@@ -158,9 +156,17 @@ void GeoLineStringGraphicsItem::paint(GeoPainter* painter, const ViewportParams*
         foreach(const QPolygonF* itPolygon, m_cachedPolygons) {
             painter->drawPolyline(*itPolygon);
         }
-        qDeleteAll(m_cachedPolygons);
-        m_cachedPolygons.clear();
     }
+}
+
+bool GeoLineStringGraphicsItem::contains(const QPoint &screenPosition, const ViewportParams *) const
+{
+    for (auto polygon: m_cachedPolygons) {
+        if (polygon->containsPoint(screenPosition, Qt::OddEvenFill)) {
+            return true;
+        }
+    }
+    return false;
 }
 
 void GeoLineStringGraphicsItem::paintInline(GeoPainter* painter, const ViewportParams* viewport)

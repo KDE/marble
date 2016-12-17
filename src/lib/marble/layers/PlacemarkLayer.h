@@ -84,6 +84,8 @@ class PlacemarkLayer : public QObject, public LayerInterface
      */
     QVector<const GeoDataFeature *> whichPlacemarkAt( const QPoint &pos );
 
+    bool hasPlacemarkAt(const QPoint &pos);
+
     bool isDebugModeEnabled() const;
     void setDebugModeEnabled(bool enabled);
 

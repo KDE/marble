@@ -640,9 +640,7 @@ void MarbleDefaultInputHandler::adjustCursorShape(const QPoint &mousePosition, c
         d->m_toolTipPosition = mousePosition;
     }
 
-    if ((MarbleInputHandler::d->m_marblePresenter->map()->whichFeatureAt(mousePosition).size() == 0)
-         && (!dataAction ))
-    {
+    if (!dataAction && !MarbleInputHandler::d->m_marblePresenter->map()->hasFeatureAt(mousePosition)) {
         if (!d->m_leftPressed)
         {
             d->m_arrowCur [1][1] = QCursor(Qt::OpenHandCursor);
@@ -770,7 +768,7 @@ bool MarbleDefaultInputHandler::handleMouseEvent(QMouseEvent *event)
     QPoint mousePosition(event->x(), event->y());
 
     if (isMouseAboveMap || selectionRubber()->isVisible()
-         || MarbleInputHandler::d->m_marblePresenter->map()->whichFeatureAt( mousePosition ).size() != 0)
+         || MarbleInputHandler::d->m_marblePresenter->map()->hasFeatureAt(mousePosition))
     {
         if (event->type() == QEvent::MouseButtonPress)
         {

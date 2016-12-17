@@ -123,7 +123,8 @@ PlacemarkLayout::PlacemarkLayout( QAbstractItemModel  *placemarkModel,
       m_showMaria( false ),
       m_maxLabelHeight(maxLabelHeight()),
       m_styleResetRequested( true ),
-      m_styleBuilder(styleBuilder)
+      m_styleBuilder(styleBuilder),
+      m_lastPlacemarkAt(nullptr)
 {
     Q_ASSERT(m_placemarkModel);
 
@@ -190,6 +191,7 @@ void PlacemarkLayout::requestStyleReset()
 void PlacemarkLayout::styleReset()
 {
     m_paintOrder.clear();
+    m_lastPlacemarkAt = nullptr;
     m_labelArea = 0;
     qDeleteAll( m_visiblePlacemarks );
     m_visiblePlacemarks.clear();
@@ -365,6 +367,7 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParam
         m_rowsection.resize(secnumber);
 
         m_paintOrder.clear();
+        m_lastPlacemarkAt = nullptr;
         m_labelArea = 0;
 
         // First handle the selected placemarks as they have the highest priority.
@@ -521,6 +524,27 @@ QString PlacemarkLayout::runtimeTrace() const
 QList<VisiblePlacemark *> PlacemarkLayout::visiblePlacemarks() const
 {
     return m_visiblePlacemarks.values();
+}
+
+bool PlacemarkLayout::hasPlacemarkAt(const QPoint &pos)
+{
+    if ( m_styleResetRequested ) {
+        styleReset();
+    }
+
+    if (m_lastPlacemarkAt &&
+            (m_lastPlacemarkAt->labelRect().contains(pos) || m_lastPlacemarkAt->symbolRect().contains(pos))) {
+        return true;
+    }
+
+    foreach(VisiblePlacemark* mark, m_paintOrder) {
+        if (mark->labelRect().contains(pos) || mark->symbolRect().contains(pos)) {
+            m_lastPlacemarkAt = mark;
+            return true;
+        }
+    }
+
+    return false;
 }
 
 bool PlacemarkLayout::layoutPlacemark( const GeoDataPlacemark *placemark, const GeoDataCoordinates &coordinates, qreal x, qreal y, bool selected )

@@ -23,6 +23,7 @@ namespace Marble
 
 class GeoDataFeature;
 class GeoDataLatLonAltBox;
+class GeoDataCoordinates;
 class GeoGraphicsItemPrivate;
 class GeoPainter;
 class StyleBuilder;
@@ -147,6 +148,14 @@ class MARBLE_EXPORT GeoGraphicsItem
     void setPaintLayers(const QStringList &paintLayers);
 
     void setRenderContext(const RenderContext &renderContext);
+
+    /**
+     * @brief contains Returns true if the item contains the given coordinates
+     * @param coordinates
+     * @param screenPosition
+     * @return
+     */
+    virtual bool contains(const QPoint &screenPosition, const ViewportParams *viewport) const;
 
  protected:
     GeoGraphicsItemPrivate *const d;

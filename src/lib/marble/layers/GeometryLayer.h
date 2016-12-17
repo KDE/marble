@@ -48,9 +48,9 @@ public:
 
     QString runtimeTrace() const override;
 
-    QVector<const GeoDataFeature*> whichFeatureAt( const QPoint& curpos, const ViewportParams * viewport );
+    bool hasFeatureAt(const QPoint& curpos, const ViewportParams * viewport);
 
-    QVector<const GeoDataFeature*> whichBuildingAt(const QPoint& curpos, const ViewportParams * viewport);
+    QVector<const GeoDataFeature*> whichFeatureAt( const QPoint& curpos, const ViewportParams * viewport );
 
 public Q_SLOTS:
     void addPlacemarks( const QModelIndex& index, int first, int last );

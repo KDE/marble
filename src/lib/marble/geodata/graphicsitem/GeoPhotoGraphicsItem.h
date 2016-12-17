@@ -33,6 +33,8 @@ public:
 
     const GeoDataLatLonAltBox& latLonAltBox() const override;
 
+    bool contains(const QPoint &point, const ViewportParams *viewport) const override;
+
 protected:
     GeoDataPoint m_point;
 

@@ -35,6 +35,7 @@ public:
     const GeoDataLatLonAltBox& latLonAltBox() const override;
 
     void paint(GeoPainter* painter, const ViewportParams *viewport, const QString &layer, int tileZoomLevel) override;
+    bool contains(const QPoint &screenPosition, const ViewportParams *viewport) const override;
 
     static quint64 s_previousStyle;
 

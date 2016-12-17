@@ -53,6 +53,8 @@ private:
                                QVector<QPolygonF*> &outlines
                                );
 
+    bool contains(const QPoint &screenPosition, const ViewportParams *viewport) const override;
+
     static double extractBuildingHeight(const GeoDataPlacemark &placemark);
     static QString extractBuildingLabel(const GeoDataPlacemark &placemark);
     static QVector<NamedEntry> extractNamedEntries(const GeoDataPlacemark &placemark);

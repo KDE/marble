@@ -475,6 +475,11 @@ qreal MarbleMap::centerLatitude() const
     return centerLat * RAD2DEG;
 }
 
+bool MarbleMap::hasFeatureAt(const QPoint &position) const
+{
+    return d->m_placemarkLayer.hasPlacemarkAt(position) || d->m_geometryLayer.hasFeatureAt(position, viewport());
+}
+
 qreal MarbleMap::centerLongitude() const
 {
     // Calculate translation of center point
@@ -510,11 +515,6 @@ bool MarbleMap::discreteZoom() const
 QVector<const GeoDataFeature*> MarbleMap::whichFeatureAt( const QPoint& curpos ) const
 {
     return d->m_placemarkLayer.whichPlacemarkAt( curpos ) + d->m_geometryLayer.whichFeatureAt( curpos, viewport() );
-}
-
-QVector<const GeoDataFeature*> MarbleMap::whichBuildingAt(const QPoint& curpos) const
-{
-    return d->m_geometryLayer.whichBuildingAt(curpos, viewport());
 }
 
 void MarbleMap::reload()

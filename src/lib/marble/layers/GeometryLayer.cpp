@@ -91,12 +91,24 @@ public:
 
     QHash<qint64,OsmLineStringItems> m_osmLineStringItems;
     int m_tileLevel;
+    GeoGraphicsItem* m_lastFeatureAt;
+
+    bool m_dirty;
+    int m_cachedItemCount;
+    QHash<QString, GeometryLayerPrivate::PaintFragments> m_cachedPaintFragments;
+    typedef QPair<QString, GeoGraphicsItem*> LayerItem;
+    QList<LayerItem> m_cachedDefaultLayer;
+    QDateTime m_cachedDateTime;
+    GeoDataLatLonBox m_cachedLatLonBox;
 };
 
 GeometryLayerPrivate::GeometryLayerPrivate(const QAbstractItemModel *model, const StyleBuilder *styleBuilder) :
     m_model(model),
     m_styleBuilder(styleBuilder),
-    m_tileLevel(0)
+    m_tileLevel(0),
+    m_lastFeatureAt(nullptr),
+    m_dirty(true),
+    m_cachedItemCount(0)
 {
 }
 
@@ -140,53 +152,74 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
 
     painter->save();
 
-    const int maxZoomLevel = qMin(d->m_tileLevel, d->m_styleBuilder->maximumZoomLevel());
-    QList<GeoGraphicsItem*> items = d->m_scene.items( viewport->viewLatLonAltBox(), maxZoomLevel );
+    auto const & box = viewport->viewLatLonAltBox();
+    bool isEqual = GeoDataLatLonBox::fuzzyCompare( d->m_cachedLatLonBox, box, 0.05 );
 
-    typedef QPair<QString, GeoGraphicsItem*> LayerItem;
-    QList<LayerItem> defaultLayer;
-    QHash<QString, GeometryLayerPrivate::PaintFragments> paintedFragments;
-    QSet<QString> const knownLayers = QSet<QString>::fromList(d->m_styleBuilder->renderOrder());
-    foreach( GeoGraphicsItem* item, items ) {
-        QStringList paintLayers = item->paintLayers();
-        if (paintLayers.isEmpty()) {
-            mDebug() << item << " provides no paint layers, so I force one onto it.";
-            paintLayers << QString();
-        }
-        foreach(const auto &layer, paintLayers) {
-            if (knownLayers.contains(layer)) {
-                GeometryLayerPrivate::PaintFragments & fragments = paintedFragments[layer];
-                double const zValue = item->zValue();
-                // assign subway stations
-                if (zValue == 0.0) {
-                  fragments.null << item;
-                // assign areas and streets
-                } else if (zValue < 0.0) {
-                  fragments.negative << item;
-                // assign buildings
+    if (d->m_cachedLatLonBox.isEmpty() || !isEqual) {
+        d->m_dirty = true;
+    }
+
+    // update the items cache at least every second since the last request
+    auto const now = QDateTime::currentDateTime();
+    if (!d->m_cachedDateTime.isValid() || d->m_cachedDateTime.msecsTo(now) > 1000) {
+        d->m_dirty = true;
+    }
+
+    const int maxZoomLevel = qMin(d->m_tileLevel, d->m_styleBuilder->maximumZoomLevel());
+    if (d->m_dirty) {
+        d->m_dirty = false;
+        auto const items = d->m_scene.items(box, maxZoomLevel);;
+        d->m_cachedLatLonBox = box;
+        d->m_cachedDateTime = now;
+
+        d->m_cachedItemCount = items.size();
+        d->m_cachedDefaultLayer.clear();
+        d->m_cachedPaintFragments.clear();
+        QSet<QString> const knownLayers = QSet<QString>::fromList(d->m_styleBuilder->renderOrder());
+        foreach( GeoGraphicsItem* item, items ) {
+            QStringList paintLayers = item->paintLayers();
+            if (paintLayers.isEmpty()) {
+                mDebug() << item << " provides no paint layers, so I force one onto it.";
+                paintLayers << QString();
+            }
+            foreach(const auto &layer, paintLayers) {
+                if (knownLayers.contains(layer)) {
+                    GeometryLayerPrivate::PaintFragments & fragments = d->m_cachedPaintFragments[layer];
+                    double const zValue = item->zValue();
+                    // assign subway stations
+                    if (zValue == 0.0) {
+                      fragments.null << item;
+                    // assign areas and streets
+                    } else if (zValue < 0.0) {
+                      fragments.negative << item;
+                    // assign buildings
+                    } else {
+                      fragments.positive << item;
+                    }
                 } else {
-                  fragments.positive << item;
-                }
-            } else {
-                // assign symbols
-                defaultLayer << LayerItem(layer, item);
-                static QSet<QString> missingLayers;
-                if (!missingLayers.contains(layer)) {
-                    mDebug() << "Missing layer " << layer << ", in render order, will render it on top";
-                    missingLayers << layer;
+                    // assign symbols
+                    d->m_cachedDefaultLayer << GeometryLayerPrivate::LayerItem(layer, item);
+                    static QSet<QString> missingLayers;
+                    if (!missingLayers.contains(layer)) {
+                        mDebug() << "Missing layer " << layer << ", in render order, will render it on top";
+                        missingLayers << layer;
+                    }
                 }
             }
         }
+        // Sort each fragment by z-level
+        foreach (const QString &layer, d->m_styleBuilder->renderOrder()) {
+            GeometryLayerPrivate::PaintFragments & layerItems = d->m_cachedPaintFragments[layer];
+            std::sort(layerItems.negative.begin(), layerItems.negative.end(), GeoGraphicsItem::zValueLessThan);
+            // The idea here is that layerItems.null has most items and does not need to be sorted by z-value
+            // since they are all equal (=0). We do sort them by style pointer though for batch rendering
+            std::sort(layerItems.null.begin(), layerItems.null.end(), GeoGraphicsItem::styleLessThan);
+            std::sort(layerItems.positive.begin(), layerItems.positive.end(), GeoGraphicsItem::zValueAndStyleLessThan);
+        }
     }
-    // Sort each fragment by z-level and draw it
-    foreach (const QString &layer, d->m_styleBuilder->renderOrder()) {
-        GeometryLayerPrivate::PaintFragments & layerItems = paintedFragments[layer];
-        std::sort(layerItems.negative.begin(), layerItems.negative.end(), GeoGraphicsItem::zValueLessThan);
-        // The idea here is that layerItems.null has most items and does not need to be sorted by z-value
-        // since they are all equal (=0). We do sort them by style pointer though for batch rendering
-        std::sort(layerItems.null.begin(), layerItems.null.end(), GeoGraphicsItem::styleLessThan);
-        std::sort(layerItems.positive.begin(), layerItems.positive.end(), GeoGraphicsItem::zValueAndStyleLessThan);
 
+    foreach (const QString &layer, d->m_styleBuilder->renderOrder()) {
+        GeometryLayerPrivate::PaintFragments & layerItems = d->m_cachedPaintFragments[layer];
         AbstractGeoPolygonGraphicsItem::s_previousStyle = -1;
         GeoLineStringGraphicsItem::s_previousStyle = -1;
         foreach(auto item, layerItems.negative) { item->paint(painter, viewport, layer, d->m_tileLevel); }
@@ -194,7 +227,7 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
         foreach(auto item, layerItems.positive) { item->paint(painter, viewport, layer, d->m_tileLevel); }
     }
 
-    foreach(const auto & item, defaultLayer) {
+    foreach(const auto & item, d->m_cachedDefaultLayer) {
         item.second->paint(painter, viewport, item.first, d->m_tileLevel);
     }
 
@@ -207,7 +240,7 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
 
     painter->restore();
     d->m_runtimeTrace = QStringLiteral("Geometries: %1 Zoom: %2")
-                .arg( items.size() )
+                .arg( d->m_cachedItemCount )
                 .arg( d->m_tileLevel );
     return true;
 }
@@ -222,8 +255,42 @@ QString GeometryLayer::runtimeTrace() const
     return d->m_runtimeTrace;
 }
 
+bool GeometryLayer::hasFeatureAt(const QPoint &curpos, const ViewportParams *viewport)
+{
+    if (d->m_lastFeatureAt && d->m_lastFeatureAt->contains(curpos, viewport)) {
+        return true;
+    }
+
+    auto const renderOrder = d->m_styleBuilder->renderOrder();
+    for (int i=renderOrder.size()-1; i>=0; --i) {
+        GeometryLayerPrivate::PaintFragments & layerItems = d->m_cachedPaintFragments[renderOrder[i]];
+        for (auto item: layerItems.positive) {
+            if (item->contains(curpos, viewport)) {
+                d->m_lastFeatureAt = item;
+                return true;
+            }
+        }
+        for (auto item: layerItems.null) {
+            if (item->contains(curpos, viewport)) {
+                d->m_lastFeatureAt = item;
+                return true;
+            }
+        }
+        for (auto item: layerItems.negative) {
+            if (item->contains(curpos, viewport)) {
+                d->m_lastFeatureAt = item;
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
 void GeometryLayerPrivate::createGraphicsItems( const GeoDataObject *object )
 {
+    m_lastFeatureAt = nullptr;
+    m_dirty = true;
     if ( const GeoDataPlacemark *placemark = dynamic_cast<const GeoDataPlacemark*>( object ) )
     {
         createGraphicsItemFromGeometry(placemark->geometry(), placemark);
@@ -364,7 +431,8 @@ void GeometryLayerPrivate::createGraphicsItemFromOverlay( const GeoDataOverlay *
 
 void GeometryLayerPrivate::removeGraphicsItems( const GeoDataFeature *feature )
 {
-
+    m_lastFeatureAt = nullptr;
+    m_dirty = true;
     if( feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
         GeoDataPlacemark const * placemark = static_cast<GeoDataPlacemark const *>(feature);
         if (placemark->isGloballyVisible() &&
@@ -438,6 +506,8 @@ void GeometryLayer::removePlacemarks( const QModelIndex& parent, int first, int 
 
 void GeometryLayer::resetCacheData()
 {
+    d->m_lastFeatureAt = nullptr;
+    d->m_dirty = true;
     d->m_scene.clear();
     qDeleteAll( d->m_items );
     d->m_items.clear();
@@ -456,66 +526,27 @@ void GeometryLayer::setTileLevel(int tileLevel)
 
 QVector<const GeoDataFeature*> GeometryLayer::whichFeatureAt(const QPoint &curpos, const ViewportParams *viewport)
 {
-    const int maxZoom = qMin<int>(d->m_tileLevel, d->m_styleBuilder->maximumZoomLevel());
     QVector<const GeoDataFeature*> result;
-    foreach ( GeoGraphicsItem * item, d->m_scene.items( viewport->viewLatLonAltBox(), maxZoom ) ) {
-        if ( item->feature()->nodeType() == GeoDataTypes::GeoDataPhotoOverlayType ) {
-            GeoPhotoGraphicsItem* photoItem = dynamic_cast<GeoPhotoGraphicsItem*>( item );
-            qreal x(0.0), y( 0.0 );
-            viewport->screenCoordinates( photoItem->point().coordinates(), x, y );
-
-            if ( photoItem->style() != 0 &&
-                 !photoItem->style()->iconStyle().icon().isNull() ) {
-
-                int halfIconWidth = photoItem->style()->iconStyle().icon().size().width() / 2;
-                int halfIconHeight = photoItem->style()->iconStyle().icon().size().height() / 2;
-
-                if ( x - halfIconWidth < curpos.x() &&
-                     curpos.x() < x + halfIconWidth &&
-                     y - halfIconHeight / 2 < curpos.y() &&
-                     curpos.y() < y + halfIconHeight / 2 ) {
-                    result.push_back( item->feature() );
-                }
-            } else if ( curpos.x() == x && curpos.y() == y ) {
-                result.push_back( item->feature() );
+    auto const renderOrder = d->m_styleBuilder->renderOrder();
+    for (int i=renderOrder.size()-1; i>=0; --i) {
+        GeometryLayerPrivate::PaintFragments & layerItems = d->m_cachedPaintFragments[renderOrder[i]];
+        for (auto item: layerItems.positive) {
+            if (item->contains(curpos, viewport)) {
+                result << item->feature();
+            }
+        }
+        for (auto item: layerItems.null) {
+            if (item->contains(curpos, viewport)) {
+                result << item->feature();
+            }
+        }
+        for (auto item: layerItems.negative) {
+            if (item->contains(curpos, viewport)) {
+                result << item->feature();
             }
         }
     }
 
-    return result;
-}
-
-QVector<const GeoDataFeature *> GeometryLayer::whichBuildingAt(const QPoint &curpos, const ViewportParams *viewport)
-{
-    QVector<const GeoDataFeature*> result;
-    qreal lon, lat;
-    if (!viewport->geoCoordinates(curpos.x(), curpos.y(), lon, lat, GeoDataCoordinates::Radian)) {
-        return result;
-    }
-    GeoDataCoordinates const coordinates = GeoDataCoordinates(lon, lat);
-
-    const int maxZoom = qMin<int>(d->m_tileLevel, d->m_styleBuilder->maximumZoomLevel());
-    foreach ( GeoGraphicsItem * item, d->m_scene.items( viewport->viewLatLonAltBox(), maxZoom ) ) {
-        if (item->feature()->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
-            const GeoDataPlacemark* placemark = static_cast<const GeoDataPlacemark*>(item->feature());
-
-            if (placemark->visualCategory() != GeoDataPlacemark::Building) {
-                continue;
-            }
-
-            if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType) {
-                const GeoDataPolygon *polygon = static_cast<const GeoDataPolygon*>(placemark->geometry());
-                if (polygon->contains(coordinates)) {
-                    result << item->feature();
-                }
-            } else if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLinearRingType) {
-                const GeoDataLinearRing *ring = static_cast<const GeoDataLinearRing*>(placemark->geometry());
-                if (ring->contains(coordinates)) {
-                    result << item->feature();
-                }
-            }
-        }
-    }
     return result;
 }
 

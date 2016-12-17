@@ -221,10 +221,13 @@ void BuildingGeoPolygonGraphicsItem::paint(GeoPainter* painter, const ViewportPa
 
     // For level 18, 19 .. render 3D buildings in perspective
     if (layer.endsWith(QLatin1String("/frame"))) {
-        Q_ASSERT(m_cachedOuterPolygons.isEmpty());
-        Q_ASSERT(m_cachedInnerPolygons.isEmpty());
-        Q_ASSERT(m_cachedOuterRoofPolygons.isEmpty());
-        Q_ASSERT(m_cachedInnerRoofPolygons.isEmpty());
+        qDeleteAll(m_cachedOuterPolygons);
+        qDeleteAll(m_cachedOuterRoofPolygons);
+        qDeleteAll(m_cachedInnerRoofPolygons);
+        m_cachedOuterPolygons.clear();
+        m_cachedInnerPolygons.clear();
+        m_cachedOuterRoofPolygons.clear();
+        m_cachedInnerRoofPolygons.clear();
         updatePolygons(viewport, m_cachedOuterPolygons,
                                  m_cachedInnerPolygons,
                                  m_hasInnerBoundaries);
@@ -237,13 +240,6 @@ void BuildingGeoPolygonGraphicsItem::paint(GeoPainter* painter, const ViewportPa
             return;
         }
         paintRoof(painter, viewport);
-        qDeleteAll(m_cachedOuterPolygons);
-        qDeleteAll(m_cachedOuterRoofPolygons);
-        qDeleteAll(m_cachedInnerRoofPolygons);
-        m_cachedOuterPolygons.clear();
-        m_cachedInnerPolygons.clear();
-        m_cachedOuterRoofPolygons.clear();
-        m_cachedInnerRoofPolygons.clear();
     } else {
         mDebug() << "Didn't expect to have to paint layer " << layer << ", ignoring it.";
     }
@@ -511,6 +507,32 @@ void BuildingGeoPolygonGraphicsItem::screenPolygons(const ViewportParams *viewpo
             innerPolygons << innerPolygonPerBoundary;
         }
     }
+}
+
+bool BuildingGeoPolygonGraphicsItem::contains(const QPoint &screenPosition, const ViewportParams *) const
+{
+    QPointF const point = screenPosition;
+    for (auto polygon: m_cachedOuterRoofPolygons) {
+        if (polygon->containsPoint(point, Qt::OddEvenFill)) {
+            for (auto polygon: m_cachedInnerRoofPolygons) {
+                if (polygon->containsPoint(point, Qt::OddEvenFill)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+    for (auto polygon: m_cachedOuterPolygons) {
+        if (polygon->containsPoint(point, Qt::OddEvenFill)) {
+            for (auto polygon: m_cachedInnerPolygons) {
+                if (polygon->containsPoint(point, Qt::OddEvenFill)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+    return false;
 }
 
 bool BuildingGeoPolygonGraphicsItem::configurePainterForFrame(GeoPainter *painter) const
