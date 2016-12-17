@@ -575,14 +575,19 @@ bool PlacemarkLayout::layoutPlacemark( const GeoDataPlacemark *placemark, const 
     // If there's not enough space free don't add a VisiblePlacemark here.
 
     const QString labelText = placemark->displayName();
-    if (mark->symbolPixmap().isNull() || !hasRoomForPixmap(y, mark)) {
-        return false;
-    }
     QRectF labelRect;
     if (!labelText.isEmpty()) {
         labelRect = roomForLabel(style, x, y, labelText, mark);
     }
+    if (labelRect.isEmpty() && mark->symbolPixmap().isNull()) {
+        return false;
+    }
+    if (!mark->symbolPixmap().isNull() && !hasRoomForPixmap(y, mark)) {
+        return false;
+    }
+
     mark->setLabelRect( labelRect );
+
     // Add the current placemark to the matching row and its
     // direct neighbors.
     int idx = y / m_maxLabelHeight;
