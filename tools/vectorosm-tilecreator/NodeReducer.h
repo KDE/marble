@@ -82,7 +82,7 @@ private:
         }
 
         double maxDistance = 0.0;
-        int index = 0;
+        int index = 1;
         int const end = lineString.size()-1;
         for (int i = 1; i<end; ++i) {
             double const distance = perpendicularDistance(lineString[i], lineString[0], lineString[end]);
