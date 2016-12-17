@@ -301,6 +301,9 @@ GeoDataCoordinates GeoDataPlacemark::coordinate( const QDateTime &dateTime, bool
             const GeoDataTrack *track = static_cast<const GeoDataTrack *>(d->m_geometry);
             hasIcon = track->size() != 0 && track->firstWhen() <= dateTime;
             coord = track->coordinatesAt( dateTime );
+        } else if (d->m_geometry->nodeType() == GeoDataTypes::GeoDataLineStringType) {
+            GeoDataLineString const *lineString = static_cast<const GeoDataLineString *>(d->m_geometry);
+            coord = lineString->isEmpty() ? GeoDataCoordinates() : lineString->at(lineString->size() / 2);
         } else {
             coord = d->m_geometry->latLonAltBox().center();
         }
