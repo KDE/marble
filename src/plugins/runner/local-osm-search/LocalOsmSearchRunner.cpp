@@ -56,11 +56,11 @@ LocalOsmSearchRunner::LocalOsmSearchRunner( const QStringList &databaseFiles, QO
         m_categoryMap[OsmPlacemark::ShoppingHifi] = GeoDataPlacemark::ShopHifi;
         m_categoryMap[OsmPlacemark::ShoppingSupermarket] = GeoDataPlacemark::ShopSupermarket;
         m_categoryMap[OsmPlacemark::TouristAttraction] = GeoDataPlacemark::TouristAttraction;
-        m_categoryMap[OsmPlacemark::TouristCastle] = GeoDataPlacemark::TouristCastle;
+        m_categoryMap[OsmPlacemark::TouristCastle] = GeoDataPlacemark::HistoricCastle;
         m_categoryMap[OsmPlacemark::TouristCinema] = GeoDataPlacemark::TouristCinema;
-        m_categoryMap[OsmPlacemark::TouristMonument] = GeoDataPlacemark::TouristMonument;
+        m_categoryMap[OsmPlacemark::TouristMonument] = GeoDataPlacemark::HistoricMonument;
         m_categoryMap[OsmPlacemark::TouristMuseum] = GeoDataPlacemark::TouristMuseum;
-        m_categoryMap[OsmPlacemark::TouristRuin] = GeoDataPlacemark::TouristRuin;
+        m_categoryMap[OsmPlacemark::TouristRuin] = GeoDataPlacemark::HistoricRuins;
         m_categoryMap[OsmPlacemark::TouristTheatre] = GeoDataPlacemark::TouristTheatre;
         m_categoryMap[OsmPlacemark::TouristThemePark] = GeoDataPlacemark::TouristThemePark;
         m_categoryMap[OsmPlacemark::TouristViewPoint] = GeoDataPlacemark::TouristViewPoint;

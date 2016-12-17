@@ -473,7 +473,7 @@ QString GeoDataPlacemark::categoryName() const
     case HealthVeterinary: return GeoDataPlacemarkPrivate::tr("Veterinary");
     case MoneyAtm: return GeoDataPlacemarkPrivate::tr("ATM");
     case MoneyBank: return GeoDataPlacemarkPrivate::tr("Bank");
-    case AmenityArchaeologicalSite: return GeoDataPlacemarkPrivate::tr("Archaeological Site");
+    case HistoricArchaeologicalSite: return GeoDataPlacemarkPrivate::tr("Archaeological Site");
     case AmenityEmbassy: return GeoDataPlacemarkPrivate::tr("Embassy");
     case AmenityEmergencyPhone: return GeoDataPlacemarkPrivate::tr("Emergency Phone");
     case AmenityWaterPark: return GeoDataPlacemarkPrivate::tr("Water Park");
@@ -565,12 +565,12 @@ QString GeoDataPlacemark::categoryName() const
     case ManmadeWindMill: return GeoDataPlacemarkPrivate::tr("Wind Mill");
     case TouristAttraction: return GeoDataPlacemarkPrivate::tr("Tourist Attraction");
     case TouristArtwork: return GeoDataPlacemarkPrivate::tr("Artwork");
-    case TouristCastle: return GeoDataPlacemarkPrivate::tr("Castle");
+    case HistoricCastle: return GeoDataPlacemarkPrivate::tr("Castle");
     case TouristCinema: return GeoDataPlacemarkPrivate::tr("Cinema");
     case TouristInformation: return GeoDataPlacemarkPrivate::tr("Information");
-    case TouristMonument: return GeoDataPlacemarkPrivate::tr("Monument");
+    case HistoricMonument: return GeoDataPlacemarkPrivate::tr("Monument");
     case TouristMuseum: return GeoDataPlacemarkPrivate::tr("Museum");
-    case TouristRuin: return GeoDataPlacemarkPrivate::tr("Ruin");
+    case HistoricRuins: return GeoDataPlacemarkPrivate::tr("Ruin");
     case TouristTheatre: return GeoDataPlacemarkPrivate::tr("Theatre");
     case TouristThemePark: return GeoDataPlacemarkPrivate::tr("Theme Park");
     case TouristViewPoint: return GeoDataPlacemarkPrivate::tr("View Point");

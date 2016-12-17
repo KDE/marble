@@ -461,7 +461,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::MoneyAtm]                 = createOsmPOIStyle(osmFont, "amenity/atm.16", amenityColor);
     m_defaultStyle[GeoDataPlacemark::MoneyBank]                = createOsmPOIStyle(osmFont, "amenity/bank.16", amenityColor);
 
-    m_defaultStyle[GeoDataPlacemark::AmenityArchaeologicalSite] = createOsmPOIAreaStyle(osmFont, "amenity/archaeological_site.16", amenityColor, Qt::transparent);
+    m_defaultStyle[GeoDataPlacemark::HistoricArchaeologicalSite] = createOsmPOIAreaStyle(osmFont, "amenity/archaeological_site.16", amenityColor, Qt::transparent);
     m_defaultStyle[GeoDataPlacemark::AmenityEmbassy]           = createOsmPOIStyle(osmFont, "transportation/embassy.16", transportationColor);
     m_defaultStyle[GeoDataPlacemark::AmenityEmergencyPhone]    = createOsmPOIStyle(osmFont, "amenity/emergency_phone.16", amenityColor);
     m_defaultStyle[GeoDataPlacemark::AmenityWaterPark]         = createOsmPOIStyle(osmFont, "amenity/water_park.16", amenityColor);
@@ -558,16 +558,16 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::ManmadeWaterTower]        = createOsmPOIStyle(osmFont, "amenity/water_tower.16", amenityColor);
     m_defaultStyle[GeoDataPlacemark::ManmadeWindMill]          = createOsmPOIStyle(osmFont, "amenity/windmill.16", amenityColor);
 
+    m_defaultStyle[GeoDataPlacemark::HistoricCastle]           = createOsmPOIRingStyle(osmFont, "amenity/cinema.16", amenityColor);
     m_defaultStyle[GeoDataPlacemark::HistoricMemorial]         = createOsmPOIStyle(osmFont, "amenity/tourist_memorial.16", amenityColor);
+    m_defaultStyle[GeoDataPlacemark::HistoricMonument]         = createOsmPOIStyle(osmFont, "amenity/monument.16", amenityColor);
+    m_defaultStyle[GeoDataPlacemark::HistoricRuins]             = createOsmPOIRingStyle(osmFont, QString(), amenityColor);
 
     m_defaultStyle[GeoDataPlacemark::TouristAttraction]        = createOsmPOIStyle(osmFont, "amenity/tourist_memorial.16", amenityColor);
     m_defaultStyle[GeoDataPlacemark::TouristArtwork]           = createOsmPOIStyle(osmFont, "amenity/artwork", amenityColor);
-    m_defaultStyle[GeoDataPlacemark::TouristCastle]            = createOsmPOIRingStyle(osmFont, "amenity/cinema.16", amenityColor);
     m_defaultStyle[GeoDataPlacemark::TouristCinema]            = createOsmPOIStyle(osmFont, "amenity/cinema.16", amenityColor);
     m_defaultStyle[GeoDataPlacemark::TouristInformation]       = createOsmPOIStyle(osmFont, "amenity/information.16", amenityColor);
-    m_defaultStyle[GeoDataPlacemark::TouristMonument]          = createOsmPOIStyle(osmFont, "amenity/monument.16", amenityColor);
     m_defaultStyle[GeoDataPlacemark::TouristMuseum]            = createOsmPOIStyle(osmFont, "amenity/museum.16", amenityColor);
-    m_defaultStyle[GeoDataPlacemark::TouristRuin]              = createOsmPOIRingStyle(osmFont, QString(), amenityColor);
     m_defaultStyle[GeoDataPlacemark::TouristTheatre]           = createOsmPOIStyle(osmFont, "amenity/theatre.16", amenityColor);
     m_defaultStyle[GeoDataPlacemark::TouristThemePark]         = createOsmPOIStyle(osmFont, QString(), amenityColor);
     m_defaultStyle[GeoDataPlacemark::TouristViewPoint]         = createOsmPOIStyle(osmFont, "amenity/viewpoint.16", amenityColor);
@@ -848,7 +848,7 @@ void StyleBuilder::Private::initializeOsmVisualCategories()
     s_visualCategories[OsmTag("amenity", "atm")]                = GeoDataPlacemark::MoneyAtm;
     s_visualCategories[OsmTag("amenity", "bank")]               = GeoDataPlacemark::MoneyBank;
 
-    s_visualCategories[OsmTag("historic", "archaeological_site")] = GeoDataPlacemark::AmenityArchaeologicalSite;
+    s_visualCategories[OsmTag("historic", "archaeological_site")] = GeoDataPlacemark::HistoricArchaeologicalSite;
     s_visualCategories[OsmTag("amenity", "embassy")]            = GeoDataPlacemark::AmenityEmbassy;
     s_visualCategories[OsmTag("emergency", "phone")]            = GeoDataPlacemark::AmenityEmergencyPhone;
     s_visualCategories[OsmTag("leisure", "water_park")]         = GeoDataPlacemark::AmenityWaterPark;
@@ -984,10 +984,10 @@ void StyleBuilder::Private::initializeOsmVisualCategories()
     s_visualCategories[OsmTag("barrier", "lift_gate")]           = GeoDataPlacemark::BarrierLiftGate;
     s_visualCategories[OsmTag("barrier", "wall")]               = GeoDataPlacemark::BarrierWall;
 
-    s_visualCategories[OsmTag("historic", "castle")]            = GeoDataPlacemark::TouristCastle;
-    s_visualCategories[OsmTag("historic", "fort")]              = GeoDataPlacemark::TouristCastle;
-    s_visualCategories[OsmTag("historic", "monument")]          = GeoDataPlacemark::TouristMonument;
-    s_visualCategories[OsmTag("historic", "ruins")]             = GeoDataPlacemark::TouristRuin;
+    s_visualCategories[OsmTag("historic", "castle")]            = GeoDataPlacemark::HistoricCastle;
+    s_visualCategories[OsmTag("historic", "fort")]              = GeoDataPlacemark::HistoricCastle;
+    s_visualCategories[OsmTag("historic", "monument")]          = GeoDataPlacemark::HistoricMonument;
+    s_visualCategories[OsmTag("historic", "ruins")]             = GeoDataPlacemark::HistoricRuins;
 
     s_visualCategories[OsmTag("highway", "traffic_signals")]    = GeoDataPlacemark::HighwayTrafficSignals;
 
@@ -1157,7 +1157,7 @@ void StyleBuilder::Private::initializeMinimumZoomLevels()
     s_defaultMinZoomLevels[GeoDataPlacemark::AdminLevel8] = 7;
     s_defaultMinZoomLevels[GeoDataPlacemark::AdminLevel9] = 7;
 
-    s_defaultMinZoomLevels[GeoDataPlacemark::AmenityArchaeologicalSite]= 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::HistoricArchaeologicalSite]= 16;
     s_defaultMinZoomLevels[GeoDataPlacemark::AmenityBench]= 19;
     s_defaultMinZoomLevels[GeoDataPlacemark::AmenityFountain]     = 17;
     s_defaultMinZoomLevels[GeoDataPlacemark::AmenityGraveyard]    = 16;
@@ -1352,15 +1352,15 @@ void StyleBuilder::Private::initializeMinimumZoomLevels()
     s_defaultMinZoomLevels[GeoDataPlacemark::TouristWildernessHut] = 13;
     s_defaultMinZoomLevels[GeoDataPlacemark::TouristAttraction]  = 17;
     s_defaultMinZoomLevels[GeoDataPlacemark::TouristArtwork] = 17;
-    s_defaultMinZoomLevels[GeoDataPlacemark::TouristCastle]  = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::HistoricCastle]  = 15;
     s_defaultMinZoomLevels[GeoDataPlacemark::TouristCinema]  = 16;
     s_defaultMinZoomLevels[GeoDataPlacemark::TouristMuseum]  = 16;
-    s_defaultMinZoomLevels[GeoDataPlacemark::TouristRuin]  = 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::HistoricRuins]  = 16;
     s_defaultMinZoomLevels[GeoDataPlacemark::TouristTheatre]  = 16;
     s_defaultMinZoomLevels[GeoDataPlacemark::TouristThemePark]  = 15;
     s_defaultMinZoomLevels[GeoDataPlacemark::TouristViewPoint]  = 15;
     s_defaultMinZoomLevels[GeoDataPlacemark::TouristZoo]  = 15;
-    s_defaultMinZoomLevels[GeoDataPlacemark::TouristMonument]  = 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::HistoricMonument]  = 16;
     s_defaultMinZoomLevels[GeoDataPlacemark::TouristInformation]  = 17;
     s_defaultMinZoomLevels[GeoDataPlacemark::TransportAerodrome] = 9;
     s_defaultMinZoomLevels[GeoDataPlacemark::TransportAirportApron] = 15;
@@ -1959,7 +1959,7 @@ qint64 StyleBuilder::popularity(const GeoDataPlacemark *placemark)
 
         popularities << GeoDataPlacemark::MoneyBank;
 
-        popularities << GeoDataPlacemark::AmenityArchaeologicalSite;
+        popularities << GeoDataPlacemark::HistoricArchaeologicalSite;
         popularities << GeoDataPlacemark::AmenityCarWash;
         popularities << GeoDataPlacemark::AmenityEmbassy;
         popularities << GeoDataPlacemark::AmenityWaterPark;
@@ -1989,12 +1989,12 @@ qint64 StyleBuilder::popularity(const GeoDataPlacemark *placemark)
 
         popularities << GeoDataPlacemark::TouristAttraction;
         popularities << GeoDataPlacemark::TouristArtwork;
-        popularities << GeoDataPlacemark::TouristCastle;
+        popularities << GeoDataPlacemark::HistoricCastle;
         popularities << GeoDataPlacemark::TouristCinema;
         popularities << GeoDataPlacemark::TouristInformation;
-        popularities << GeoDataPlacemark::TouristMonument;
+        popularities << GeoDataPlacemark::HistoricMonument;
         popularities << GeoDataPlacemark::TouristMuseum;
-        popularities << GeoDataPlacemark::TouristRuin;
+        popularities << GeoDataPlacemark::HistoricRuins;
         popularities << GeoDataPlacemark::TouristTheatre;
         popularities << GeoDataPlacemark::TouristThemePark;
         popularities << GeoDataPlacemark::TouristViewPoint;
@@ -2230,7 +2230,6 @@ QString StyleBuilder::visualCategoryName(GeoDataPlacemark::GeoDataVisualCategory
         visualCategoryNames[GeoDataPlacemark::HealthVeterinary] = "HealthVeterinary";
         visualCategoryNames[GeoDataPlacemark::MoneyAtm] = "MoneyAtm";
         visualCategoryNames[GeoDataPlacemark::MoneyBank] = "MoneyBank";
-        visualCategoryNames[GeoDataPlacemark::AmenityArchaeologicalSite] = "AmenityArchaeologicalSite";
         visualCategoryNames[GeoDataPlacemark::AmenityEmbassy] = "AmenityEmbassy";
         visualCategoryNames[GeoDataPlacemark::AmenityEmergencyPhone] = "AmenityEmergencyPhone";
         visualCategoryNames[GeoDataPlacemark::AmenityWaterPark] = "AmenityWaterPark";
@@ -2322,17 +2321,18 @@ QString StyleBuilder::visualCategoryName(GeoDataPlacemark::GeoDataVisualCategory
         visualCategoryNames[GeoDataPlacemark::ManmadeWindMill] = "ManmadeWindMill";
         visualCategoryNames[GeoDataPlacemark::TouristAttraction] = "TouristAttraction";
         visualCategoryNames[GeoDataPlacemark::TouristArtwork] = "TouristArtwork";
-        visualCategoryNames[GeoDataPlacemark::TouristCastle] = "TouristCastle";
+        visualCategoryNames[GeoDataPlacemark::HistoricArchaeologicalSite] = "HistoricArchaeologicalSite";
+        visualCategoryNames[GeoDataPlacemark::HistoricCastle] = "HistoricCastle";
+        visualCategoryNames[GeoDataPlacemark::HistoricMemorial] = "HistoricMemorial";
+        visualCategoryNames[GeoDataPlacemark::HistoricMonument] = "HistoricMonument";
         visualCategoryNames[GeoDataPlacemark::TouristCinema] = "TouristCinema";
         visualCategoryNames[GeoDataPlacemark::TouristInformation] = "TouristInformation";
-        visualCategoryNames[GeoDataPlacemark::TouristMonument] = "TouristMonument";
         visualCategoryNames[GeoDataPlacemark::TouristMuseum] = "TouristMuseum";
-        visualCategoryNames[GeoDataPlacemark::TouristRuin] = "TouristRuin";
+        visualCategoryNames[GeoDataPlacemark::HistoricRuins] = "TouristRuin";
         visualCategoryNames[GeoDataPlacemark::TouristTheatre] = "TouristTheatre";
         visualCategoryNames[GeoDataPlacemark::TouristThemePark] = "TouristThemePark";
         visualCategoryNames[GeoDataPlacemark::TouristViewPoint] = "TouristViewPoint";
         visualCategoryNames[GeoDataPlacemark::TouristZoo] = "TouristZoo";
-        visualCategoryNames[GeoDataPlacemark::HistoricMemorial] = "HistoricMemorial";
         visualCategoryNames[GeoDataPlacemark::TouristAlpineHut] = "TouristAlpineHut";
         visualCategoryNames[GeoDataPlacemark::TouristWildernessHut] = "TouristWildernessHut";
         visualCategoryNames[GeoDataPlacemark::TransportAerodrome] = "TransportAerodrome";
