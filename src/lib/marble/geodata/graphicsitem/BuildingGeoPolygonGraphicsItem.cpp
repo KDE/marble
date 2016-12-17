@@ -486,6 +486,7 @@ void BuildingGeoPolygonGraphicsItem::paintFrame(GeoPainter *painter, const Viewp
             foreach( QPolygonF* fillPolygon, fillPolygons ) {
                 painter->drawPolygon(*fillPolygon);
             }
+            qDeleteAll(fillPolygons);
     }
 }
 
