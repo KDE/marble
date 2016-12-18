@@ -46,10 +46,6 @@ add_subdirectory( wikipedia )
 add_subdirectory( weather )
 endif()
 
-# FIXME: The inhibit-screensaver plugin stresses the term render plugin a bit far.
-# It should be moved to a new plugin type later.
-add_subdirectory( inhibit-screensaver )
-
 find_package( Perl )
 marble_set_package_properties( Perl PROPERTIES URL "http://www.perl.org" )
 marble_set_package_properties( Perl PROPERTIES TYPE OPTIONAL PURPOSE "generation of sources in the APRS plugin" )
