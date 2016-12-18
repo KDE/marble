@@ -1098,6 +1098,7 @@ void StyleBuilder::Private::initializeOsmVisualCategories()
     s_visualCategories[OsmTag("railway", "funicular")]          = GeoDataPlacemark::RailwayFunicular;
     s_visualCategories[OsmTag("railway", "platform")]           = GeoDataPlacemark::TransportPlatform;
     s_visualCategories[OsmTag("railway", "station")]            = GeoDataPlacemark::TransportTrainStation;
+    s_visualCategories[OsmTag("public_transport", "station")]   = GeoDataPlacemark::TransportTrainStation;
     s_visualCategories[OsmTag("railway", "halt")]               = GeoDataPlacemark::TransportTrainStation;
 
     s_visualCategories[OsmTag("route", "hiking")]               = GeoDataPlacemark::RouteHiking;
