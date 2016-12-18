@@ -490,8 +490,9 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::AmenityDrinkingWater]     = createOsmPOIStyle(osmFont, "amenity/drinking_water.16", amenityColor);
 
     m_defaultStyle[GeoDataPlacemark::NaturalPeak]              = createOsmPOIStyle(osmFont, "individual/peak", amenityColor);
-    m_defaultStyle[GeoDataPlacemark::NaturalVolcano]           = createOsmPOIStyle(osmFont, "individual/volcano", amenityColor);
     m_defaultStyle[GeoDataPlacemark::NaturalPeak]->iconStyle().setScale(0.33);
+    m_defaultStyle[GeoDataPlacemark::NaturalVolcano]           = createOsmPOIStyle(osmFont, "individual/volcano", amenityColor);
+    m_defaultStyle[GeoDataPlacemark::NaturalVolcano]->iconStyle().setScale(0.33);
     m_defaultStyle[GeoDataPlacemark::NaturalTree]              = createOsmPOIStyle(osmFont, "individual/tree-29", amenityColor); // tree-16 provides the official icon
     m_styleTreeAutumn                                          = createOsmPOIStyle(osmFont, "individual/tree-29-autumn", amenityColor);
     m_styleTreeWinter                                          = createOsmPOIStyle(osmFont, "individual/tree-29-winter", amenityColor);
