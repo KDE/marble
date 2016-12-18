@@ -280,6 +280,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
         BarrierWall,
 
         NaturalPeak,
+        NaturalVolcano,
         NaturalTree,
         NaturalCave,
 

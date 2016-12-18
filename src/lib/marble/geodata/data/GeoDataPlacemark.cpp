@@ -506,6 +506,7 @@ QString GeoDataPlacemark::categoryName() const
     case BarrierGate: return GeoDataPlacemarkPrivate::tr("Gate");
     case BarrierLiftGate: return GeoDataPlacemarkPrivate::tr("Lift Gate");
     case BarrierWall: return GeoDataPlacemarkPrivate::tr("Wall");
+    case NaturalVolcano: return GeoDataPlacemarkPrivate::tr("Volcano");
     case NaturalPeak: return GeoDataPlacemarkPrivate::tr("Peak");
     case NaturalTree: return GeoDataPlacemarkPrivate::tr("Tree");
     case NaturalCave: return GeoDataPlacemarkPrivate::tr("Cave Entrance");

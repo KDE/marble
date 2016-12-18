@@ -490,6 +490,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::AmenityDrinkingWater]     = createOsmPOIStyle(osmFont, "amenity/drinking_water.16", amenityColor);
 
     m_defaultStyle[GeoDataPlacemark::NaturalPeak]              = createOsmPOIStyle(osmFont, "individual/peak", amenityColor);
+    m_defaultStyle[GeoDataPlacemark::NaturalVolcano]           = createOsmPOIStyle(osmFont, "individual/volcano", amenityColor);
     m_defaultStyle[GeoDataPlacemark::NaturalPeak]->iconStyle().setScale(0.33);
     m_defaultStyle[GeoDataPlacemark::NaturalTree]              = createOsmPOIStyle(osmFont, "individual/tree-29", amenityColor); // tree-16 provides the official icon
     m_styleTreeAutumn                                          = createOsmPOIStyle(osmFont, "individual/tree-29-autumn", amenityColor);
@@ -887,6 +888,7 @@ void StyleBuilder::Private::initializeOsmVisualCategories()
     s_visualCategories[OsmTag("amenity", "place_of_worship")]   = GeoDataPlacemark::ReligionPlaceOfWorship;
 
     s_visualCategories[OsmTag("natural", "peak")]               = GeoDataPlacemark::NaturalPeak;
+    s_visualCategories[OsmTag("natural", "volcano")]            = GeoDataPlacemark::NaturalVolcano;
     s_visualCategories[OsmTag("natural", "tree")]               = GeoDataPlacemark::NaturalTree;
     s_visualCategories[OsmTag("natural", "cave_entrance")]      = GeoDataPlacemark::NaturalCave;
 
@@ -1303,6 +1305,7 @@ void StyleBuilder::Private::initializeMinimumZoomLevels()
     s_defaultMinZoomLevels[GeoDataPlacemark::NaturalGlacier]      = 3;
     s_defaultMinZoomLevels[GeoDataPlacemark::NaturalHeath]      = 13;
     s_defaultMinZoomLevels[GeoDataPlacemark::NaturalIceShelf]     = 3;
+    s_defaultMinZoomLevels[GeoDataPlacemark::NaturalVolcano]      = 13;
     s_defaultMinZoomLevels[GeoDataPlacemark::NaturalPeak] = 11;
     s_defaultMinZoomLevels[GeoDataPlacemark::NaturalReef] = 3;
     s_defaultMinZoomLevels[GeoDataPlacemark::NaturalScrub]= 13;
@@ -1766,6 +1769,7 @@ QStringList StyleBuilder::renderOrder() const
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::NaturalWetland);
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::NaturalGlacier);
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::NaturalIceShelf);
+        paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::NaturalVolcano);
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::NaturalCliff);
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::NaturalPeak);
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::MilitaryDangerArea);
@@ -1932,6 +1936,7 @@ qint64 StyleBuilder::popularity(const GeoDataPlacemark *placemark)
         popularities << GeoDataPlacemark::TransportSpeedCamera;
 
         popularities << GeoDataPlacemark::NaturalPeak;
+        popularities << GeoDataPlacemark::NaturalVolcano;
 
         popularities << GeoDataPlacemark::AccomodationHotel;
         popularities << GeoDataPlacemark::AccomodationMotel;
@@ -2259,6 +2264,7 @@ QString StyleBuilder::visualCategoryName(GeoDataPlacemark::GeoDataVisualCategory
         visualCategoryNames[GeoDataPlacemark::BarrierGate] = "BarrierGate";
         visualCategoryNames[GeoDataPlacemark::BarrierLiftGate] = "BarrierLiftGate";
         visualCategoryNames[GeoDataPlacemark::BarrierWall] = "BarrierWall";
+        visualCategoryNames[GeoDataPlacemark::NaturalVolcano] = "NaturalVolcano";
         visualCategoryNames[GeoDataPlacemark::NaturalPeak] = "NaturalPeak";
         visualCategoryNames[GeoDataPlacemark::NaturalTree] = "NaturalTree";
         visualCategoryNames[GeoDataPlacemark::NaturalCave] = "NaturalCave";
