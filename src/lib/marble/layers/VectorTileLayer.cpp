@@ -197,6 +197,7 @@ void VectorTileLayer::setMapTheme( const QVector<const GeoSceneVectorTileDataset
     }
 
     d->updateTextureLayers();
+    emit tileLevelChanged(tileZoomLevel());
 }
 
 }
