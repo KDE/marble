@@ -156,7 +156,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
          * Start of OpenStreetMap categories
          */
 
-        PlaceCity,
+        PlaceCity, // please keep order (used in for loops)
         PlaceCityCapital,
         PlaceCityNationalCapital,
         PlaceSuburb,
@@ -167,7 +167,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
         PlaceTownNationalCapital,
         PlaceVillage,
         PlaceVillageCapital,
-        PlaceVillageNationalCapital,
+        PlaceVillageNationalCapital, // please keep order (used in for loops)
 
         NaturalWater,
         NaturalReef,
@@ -183,7 +183,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
         HighwayTrafficSignals,
 
         // OpenStreetMap highways
-        HighwaySteps,
+        HighwaySteps, // please keep order (used in for loops)
         HighwayUnknown,
         HighwayPath,
         HighwayFootway,
@@ -205,7 +205,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
         HighwayTrunkLink,
         HighwayTrunk,
         HighwayMotorwayLink,
-        HighwayMotorway,
+        HighwayMotorway, // please keep order (used in for loops)
 
         //OSM building
         Building,
@@ -217,10 +217,6 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
         AccomodationMotel,
         AccomodationYouthHostel,
         AccomodationGuestHouse,
-
-        // OpenStreetMap category Amenity
-        AmenityLibrary,
-        AmenityKindergarten, ///< @since 0.26.0
 
         // OpenStreetMap category Education
         EducationCollege,
@@ -246,11 +242,13 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
         MoneyAtm,
         MoneyBank,
 
-        HistoricArchaeologicalSite,
+        // OpenStreetMap category Amenity
+        AmenityLibrary,
+        AmenityKindergarten, ///< @since 0.26.0
         AmenityEmbassy,
         AmenityEmergencyPhone,
-        AmenityWaterPark,
         AmenityCommunityCentre,
+        AmenityCinema,
         AmenityFountain,
         AmenityNightClub,
         AmenityBench,
@@ -264,6 +262,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
         AmenityRecycling,
         AmenityShelter, ///< @since 0.26.0
         AmenityTelephone,
+        AmenityTheatre,
         AmenityToilets,
         AmenityTownHall,
         AmenityWasteBasket,
@@ -285,7 +284,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
         NaturalCave,
 
         // OpenStreetMap category Shopping
-        ShopBeverages,
+        ShopBeverages, // please keep order (used in for loops)
         ShopHifi,
         ShopSupermarket,
         ShopAlcohol,
@@ -336,7 +335,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
         ShopDeli,
         ShopTobacco,
         ShopTea,
-        Shop,
+        Shop, // please keep order (used in for loops)
 
         ManmadeBridge,
         ManmadeLighthouse,
@@ -344,25 +343,23 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
         ManmadeWaterTower,
         ManmadeWindMill,
 
-
         // OpenStreetMap category Tourist
-        TouristArtwork,
-        TouristAttraction,
-        HistoricCastle,
-        TouristCinema,
-        TouristInformation,
-        HistoricMonument,
-        TouristMuseum,
-        HistoricRuins,
-        TouristTheatre,
-        TouristThemePark,
-        TouristViewPoint,
-        TouristZoo,
-        TouristAlpineHut,
-        TouristWildernessHut,
+        TourismArtwork,
+        TourismAttraction,
+        TourismInformation,
+        TourismMuseum,
+        TourismThemePark,
+        TourismViewPoint,
+        TourismZoo,
+        TourismAlpineHut,
+        TourismWildernessHut,
 
         // OpenStreetMap category Historic
+        HistoricArchaeologicalSite,
+        HistoricCastle,
         HistoricMemorial,
+        HistoricMonument,
+        HistoricRuins,
 
         // OpenStreetMap category Transport
         TransportAerodrome,
@@ -404,6 +401,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
         // OpenStreetMap category Leisure
         LeisureGolfCourse,
         LeisureMarina, ///< @since 0.26.0
+        LeisureWaterPark,
         LeisurePark,
         LeisurePlayground,
         LeisurePitch,
@@ -434,7 +432,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
         LanduseOrchard,
         LanduseVineyard,
 
-        RailwayRail,
+        RailwayRail, // please keep order (used in for loops)
         RailwayNarrowGauge,
         RailwayTram,
         RailwayLightRail,
@@ -444,7 +442,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
         RailwayMiniature,
         RailwayConstruction,
         RailwayMonorail,
-        RailwayFunicular,
+        RailwayFunicular, // please keep order (used in for loops)
 
         // Routes
         RouteHiking,
@@ -453,14 +451,14 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
         PowerTower,
 
         // Waterways
-        WaterwayCanal,
+        WaterwayCanal, // please keep order (used in for loops)
         WaterwayDitch,
         WaterwayDrain,
         WaterwayRiver,
-        WaterwayStream,
+        WaterwayStream, // please keep order (used in for loops)
 
         //Admin level tags for depicting boundary
-        AdminLevel1,
+        AdminLevel1, // please keep order (used in for loops)
         AdminLevel2,
         AdminLevel3,
         AdminLevel4,
@@ -470,7 +468,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
         AdminLevel8,
         AdminLevel9,
         AdminLevel10,
-        AdminLevel11,
+        AdminLevel11, // please keep order (used in for loops)
 
         BoundaryMaritime,
 

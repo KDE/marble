@@ -287,7 +287,7 @@ QString Placemark::description() const
             addTagDescription(m_description, QStringLiteral("surveillance"), QStringLiteral("outdoor"), tr("Has outdoor surveillance", "A parking space has outdoor surveillance"));
             addTagDescription(m_description, QStringLiteral("surveillance"), QStringLiteral("indoor"), tr("Has indoor surveillance", "A parking space has indoor surveillance"));
             addTagDescription(m_description, QStringLiteral("surveillance"), QStringLiteral("public"), tr("Has public surveillance", "A parking space has public surveillance"));
-        } else if (category == GeoDataPlacemark::TouristWildernessHut) {
+        } else if (category == GeoDataPlacemark::TourismWildernessHut) {
             addTagDescription(m_description, QStringLiteral("shower"), QStringLiteral("yes"), tr("Has shower", "A hut provides showers inside or aside"));
             addTagDescription(m_description, QStringLiteral("shower"), QStringLiteral("no"), tr("Has no shower", "A hut does not provide showers inside or aside"));
             addTagDescription(m_description, QStringLiteral("mattress"), QStringLiteral("yes"), tr("Has mattress", "A hut provides mattress"));
@@ -301,7 +301,7 @@ QString Placemark::description() const
             addTagDescription(m_description, QStringLiteral("reservation"), QStringLiteral("required"), tr("Reservation is required"));
             addTagDescription(m_description, QStringLiteral("reservation"), QStringLiteral("recommended"), tr("Reservation is recommended", "You should make reservation"));
             addTagDescription(m_description, QStringLiteral("reservation"), QStringLiteral("members_only"), tr("Only for members", "Reservation is only possible for members of the organisation running the hut"));
-        } else if (category == GeoDataPlacemark::TouristArtwork) {
+        } else if (category == GeoDataPlacemark::TourismArtwork) {
             addTagValue(m_description, QStringLiteral("artist_name"), tr("By %1"));
         } else if (category == GeoDataPlacemark::AmenityChargingStation) {
             addTagValue(m_description, QStringLiteral("capacity"), tr("%1 vehicles"));
