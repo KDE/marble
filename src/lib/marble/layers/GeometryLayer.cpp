@@ -221,8 +221,8 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
 
     foreach (const QString &layer, d->m_styleBuilder->renderOrder()) {
         GeometryLayerPrivate::PaintFragments & layerItems = d->m_cachedPaintFragments[layer];
-        AbstractGeoPolygonGraphicsItem::s_previousStyle = -1;
-        GeoLineStringGraphicsItem::s_previousStyle = -1;
+        AbstractGeoPolygonGraphicsItem::s_previousStyle = 0;
+        GeoLineStringGraphicsItem::s_previousStyle = 0;
         foreach(auto item, layerItems.negative) { item->paint(painter, viewport, layer, d->m_tileLevel); }
         foreach(auto item, layerItems.null) { item->paint(painter, viewport, layer, d->m_tileLevel); }
         foreach(auto item, layerItems.positive) { item->paint(painter, viewport, layer, d->m_tileLevel); }
