@@ -728,6 +728,8 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::RailwayMonorail]          = createStyle(2.0, 1.435, "#706E70", "#EEEEEE", false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector<qreal>(), osmFont, QColor(Qt::transparent));
     m_defaultStyle[GeoDataPlacemark::RailwayFunicular]         = createStyle(2.0, 1.435, "#706E70", "#EEEEEE", false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector<qreal>(), osmFont, QColor(Qt::transparent));
 
+    m_defaultStyle[GeoDataPlacemark::RouteHiking]              = createHighwayStyle("#ffc0cb", "#ffc0cb", osmFont, "000000", 1, 5);
+
     m_defaultStyle[GeoDataPlacemark::Landmass]                 = createWayStyle("#F1EEE8", "#F1EEE8", true, false);
     m_defaultStyle[GeoDataPlacemark::UrbanArea]                = createWayStyle("#E6E3DD", "#E6E3DD", true, false);
     m_defaultStyle[GeoDataPlacemark::InternationalDateLine]    = createStyle(1.0, 0.0, "#000000", "#000000", false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector<qreal>(), osmFont);
@@ -1098,6 +1100,8 @@ void StyleBuilder::Private::initializeOsmVisualCategories()
     s_visualCategories[OsmTag("railway", "station")]            = GeoDataPlacemark::TransportTrainStation;
     s_visualCategories[OsmTag("railway", "halt")]               = GeoDataPlacemark::TransportTrainStation;
 
+    s_visualCategories[OsmTag("route", "hiking")]               = GeoDataPlacemark::RouteHiking;
+
     s_visualCategories[OsmTag("power", "tower")]                = GeoDataPlacemark::PowerTower;
 
     s_visualCategories[OsmTag("aeroway", "aerodrome")]          = GeoDataPlacemark::TransportAerodrome;
@@ -1342,6 +1346,8 @@ void StyleBuilder::Private::initializeMinimumZoomLevels()
     s_defaultMinZoomLevels[GeoDataPlacemark::RailwayRail] = 6;
     s_defaultMinZoomLevels[GeoDataPlacemark::RailwaySubway]       = 13;
     s_defaultMinZoomLevels[GeoDataPlacemark::RailwayTram] = 14;
+
+    s_defaultMinZoomLevels[GeoDataPlacemark::RouteHiking] = 15;
 
     s_defaultMinZoomLevels[GeoDataPlacemark::Satellite]   = 0;
 
@@ -1837,6 +1843,10 @@ QStringList StyleBuilder::renderOrder() const
         for ( int i = GeoDataPlacemark::RailwayRail; i <= GeoDataPlacemark::RailwayFunicular; i++ ) {
             paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataPlacemark::GeoDataVisualCategory)i, "label");
         }
+
+        paintLayerOrder << Private::createPaintLayerItem("LineString", GeoDataPlacemark::RouteHiking, "outline");
+        paintLayerOrder << Private::createPaintLayerItem("LineString", GeoDataPlacemark::RouteHiking, "inline");
+        paintLayerOrder << Private::createPaintLayerItem("LineString", GeoDataPlacemark::RouteHiking, "label");
 
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::TransportPlatform);
         paintLayerOrder << Private::createPaintLayerItem("LineString", GeoDataPlacemark::TransportPlatform, "outline");
@@ -2416,6 +2426,7 @@ QString StyleBuilder::visualCategoryName(GeoDataPlacemark::GeoDataVisualCategory
         visualCategoryNames[GeoDataPlacemark::RailwayConstruction] = "RailwayConstruction";
         visualCategoryNames[GeoDataPlacemark::RailwayMonorail] = "RailwayMonorail";
         visualCategoryNames[GeoDataPlacemark::RailwayFunicular] = "RailwayFunicular";
+        visualCategoryNames[GeoDataPlacemark::RouteHiking] = "RouteHiking";
         visualCategoryNames[GeoDataPlacemark::PowerTower] = "PowerTower";
         visualCategoryNames[GeoDataPlacemark::Satellite] = "Satellite";
         visualCategoryNames[GeoDataPlacemark::Landmass] = "Landmass";

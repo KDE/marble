@@ -446,6 +446,9 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
         RailwayMonorail,
         RailwayFunicular,
 
+        // Routes
+        RouteHiking,
+
         // OpenStreetMap category Power
         PowerTower,
 

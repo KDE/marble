@@ -52,10 +52,16 @@ void OsmRelation::addMember(qint64 reference, const QString &role, const QString
 
 void OsmRelation::create(GeoDataDocument *document, OsmWays &ways, const OsmNodes &nodes, QSet<qint64> &usedNodes, QSet<qint64> &usedWays) const
 {
-    if (!m_osmData.containsTag(QStringLiteral("type"), QStringLiteral("multipolygon"))) {
-        return;
+    if (m_osmData.containsTag(QStringLiteral("type"), QStringLiteral("multipolygon"))) {
+        createMultipolygon(document, ways, nodes, usedNodes, usedWays);
+    } else if (m_osmData.containsTag(QStringLiteral("type"), QStringLiteral("route")) &&
+               m_osmData.containsTag(QStringLiteral("route"), QStringLiteral("hiking"))) {
+        createHikingRoute(document, ways, nodes, usedNodes, usedWays);
     }
+}
 
+void OsmRelation::createMultipolygon(GeoDataDocument *document, OsmWays &ways, const OsmNodes &nodes, QSet<qint64> &usedNodes, QSet<qint64> &usedWays) const
+{
     QStringList const outerRoles = QStringList() << QStringLiteral("outer") << QString();
     QSet<qint64> outerWays;
     QSet<qint64> outerNodes;
@@ -158,6 +164,57 @@ void OsmRelation::create(GeoDataDocument *document, OsmWays &ways, const OsmNode
 
         document->append(placemark);
     }
+}
+
+void OsmRelation::createHikingRoute(GeoDataDocument *document, OsmWays &ways, const OsmNodes &nodes, QSet<qint64> &usedNodes, QSet<qint64> &usedWays) const
+{
+    GeoDataLineString* lineString = new GeoDataLineString;
+    OsmPlacemarkData osmData;
+    for (auto iter=m_osmData.tagsBegin(), end=m_osmData.tagsEnd(); iter != end; ++iter) {
+        osmData.addTag(iter.key(), iter.value());
+    }
+
+    foreach(const OsmMember &member, m_members) {
+        if (member.role.isEmpty() || member.role == QStringLiteral("route")) {
+            if (!ways.contains(member.reference)) {
+                // A way is missing. Return nothing.
+                return;
+            }
+
+            OsmWay & way = ways[member.reference];
+            if (way.references().isEmpty()) {
+                continue;
+            }
+            usedWays << member.reference;
+
+            foreach(qint64 nodeId, way.references()) {
+                auto const nodeIter = nodes.constFind(nodeId);
+                if (nodeIter == nodes.constEnd()) {
+                    return;
+                }
+
+                OsmNode const & node = nodeIter.value();
+                osmData.addNodeReference(node.coordinates(), node.osmData());
+                lineString->append(node.coordinates());
+                usedNodes << nodeId;
+            }
+        }
+    }
+
+    GeoDataPlacemark *placemark = new GeoDataPlacemark;
+    placemark->setGeometry(lineString);
+    placemark->setVisualCategory(StyleBuilder::determineVisualCategory(osmData));
+    placemark->setName(osmData.tagValue(QStringLiteral("name")));
+    if (placemark->name().isEmpty()) {
+        placemark->setName(osmData.tagValue(QStringLiteral("ref")));
+    }
+    placemark->setOsmData(osmData);
+    OsmObjectManager::registerId(osmData.id());
+    placemark->setZoomLevel(StyleBuilder::minimumZoomLevel(placemark->visualCategory()));
+    placemark->setPopularity(StyleBuilder::popularity(placemark));
+    placemark->setVisible(placemark->visualCategory() != GeoDataPlacemark::None);
+
+    document->append(placemark);
 }
 
 OsmRelation::OsmRings OsmRelation::rings(const QStringList &roles, const OsmWays &ways, const OsmNodes &nodes, QSet<qint64> &usedNodes, QSet<qint64> &usedWays) const
