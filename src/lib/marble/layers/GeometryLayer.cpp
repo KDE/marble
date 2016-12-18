@@ -88,7 +88,7 @@ public:
     const StyleBuilder *const m_styleBuilder;
     GeoGraphicsScene m_scene;
     QString m_runtimeTrace;
-    QList<ScreenOverlayGraphicsItem*> m_items;
+    QList<ScreenOverlayGraphicsItem*> m_screenOverlays;
 
     QHash<qint64,OsmLineStringItems> m_osmLineStringItems;
     int m_tileLevel;
@@ -235,7 +235,7 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
     painter->drawTextFragments();
     painter->clearTextFragments();
 
-    foreach( ScreenOverlayGraphicsItem* item, d->m_items ) {
+    foreach( ScreenOverlayGraphicsItem* item, d->m_screenOverlays ) {
         item->paintEvent( painter, viewport );
     }
 
@@ -430,7 +430,7 @@ void GeometryLayerPrivate::createGraphicsItemFromOverlay( const GeoDataOverlay *
     } else if ( overlay->nodeType() == GeoDataTypes::GeoDataScreenOverlayType ) {
         GeoDataScreenOverlay const * screenOverlay = static_cast<GeoDataScreenOverlay const *>( overlay );
         ScreenOverlayGraphicsItem *screenItem = new ScreenOverlayGraphicsItem ( screenOverlay );
-        m_items.push_back( screenItem );
+        m_screenOverlays.push_back( screenItem );
     }
 
     if ( item ) {
@@ -471,9 +471,9 @@ void GeometryLayerPrivate::removeGraphicsItems( const GeoDataFeature *feature )
         }
     }
     else if( feature->nodeType() == GeoDataTypes::GeoDataScreenOverlayType ) {
-        foreach( ScreenOverlayGraphicsItem  *item, m_items ) {
+        foreach( ScreenOverlayGraphicsItem  *item, m_screenOverlays ) {
             if( item->screenOverlay() == feature ) {
-                m_items.removeAll( item );
+                m_screenOverlays.removeAll( item );
             }
         }
     }
@@ -518,8 +518,8 @@ void GeometryLayer::resetCacheData()
 {
     d->clearCache();
     d->m_scene.clear();
-    qDeleteAll( d->m_items );
-    d->m_items.clear();
+    qDeleteAll( d->m_screenOverlays );
+    d->m_screenOverlays.clear();
     d->m_osmLineStringItems.clear();
 
     const GeoDataObject *object = static_cast<GeoDataObject*>( d->m_model->index( 0, 0, QModelIndex() ).internalPointer() );
