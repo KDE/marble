@@ -82,6 +82,7 @@ public:
     void removeGraphicsItems( const GeoDataFeature *feature );
     void updateTiledLineStrings(const GeoDataPlacemark *placemark, GeoLineStringGraphicsItem* lineStringItem);
     void updateTiledLineStrings(OsmLineStringItems &lineStringItems);
+    void clearCache();
 
     const QAbstractItemModel *const m_model;
     const StyleBuilder *const m_styleBuilder;
@@ -289,8 +290,7 @@ bool GeometryLayer::hasFeatureAt(const QPoint &curpos, const ViewportParams *vie
 
 void GeometryLayerPrivate::createGraphicsItems( const GeoDataObject *object )
 {
-    m_lastFeatureAt = nullptr;
-    m_dirty = true;
+    clearCache();
     if ( const GeoDataPlacemark *placemark = dynamic_cast<const GeoDataPlacemark*>( object ) )
     {
         createGraphicsItemFromGeometry(placemark->geometry(), placemark);
@@ -344,6 +344,17 @@ void GeometryLayerPrivate::updateTiledLineStrings(OsmLineStringItems &lineString
             visible = merged.isEmpty();
         }
     }
+}
+
+void GeometryLayerPrivate::clearCache()
+{
+    m_lastFeatureAt = nullptr;
+    m_dirty = true;
+    m_cachedDateTime = QDateTime();
+    m_cachedItemCount = 0;
+    m_cachedPaintFragments.clear();
+    m_cachedDefaultLayer.clear();
+    m_cachedLatLonBox = GeoDataLatLonBox();
 }
 
 void GeometryLayerPrivate::createGraphicsItemFromGeometry(const GeoDataGeometry* object, const GeoDataPlacemark *placemark)
@@ -431,8 +442,7 @@ void GeometryLayerPrivate::createGraphicsItemFromOverlay( const GeoDataOverlay *
 
 void GeometryLayerPrivate::removeGraphicsItems( const GeoDataFeature *feature )
 {
-    m_lastFeatureAt = nullptr;
-    m_dirty = true;
+    clearCache();
     if( feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
         GeoDataPlacemark const * placemark = static_cast<GeoDataPlacemark const *>(feature);
         if (placemark->isGloballyVisible() &&
@@ -506,8 +516,7 @@ void GeometryLayer::removePlacemarks( const QModelIndex& parent, int first, int 
 
 void GeometryLayer::resetCacheData()
 {
-    d->m_lastFeatureAt = nullptr;
-    d->m_dirty = true;
+    d->clearCache();
     d->m_scene.clear();
     qDeleteAll( d->m_items );
     d->m_items.clear();
