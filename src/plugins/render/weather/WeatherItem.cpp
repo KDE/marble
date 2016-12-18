@@ -292,7 +292,7 @@ class WeatherItemPrivate
     WeatherData m_currentWeather;
     QMap<QDate, WeatherData> m_forecastWeather;
 
-    int m_priority;
+    quint8 m_priority;
     QAction m_browserAction;
     QAction m_favoriteAction;
     WeatherItem *m_parent;
