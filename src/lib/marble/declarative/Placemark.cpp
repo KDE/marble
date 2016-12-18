@@ -222,12 +222,12 @@ QString Placemark::description() const
             addTagDescription(m_description, QStringLiteral("recycling:wood"), "yes", tr("Wood"));
         } else if (category == GeoDataPlacemark::NaturalVolcano) {
             addTagValue(m_description, QStringLiteral("ele"), tr("%1 m"));
-            addTagDescription(m_description, QStringLiteral("volcano:status"), QStringLiteral("active"), tr("Active volcano", "This volcano is active, it is erupting."));
-            addTagDescription(m_description, QStringLiteral("volcano:status"), QStringLiteral("dormant"), tr("Dormant volcano", "This volcano is dormant, it will erupt at some point in the future."));
-            addTagDescription(m_description, QStringLiteral("volcano:status"), QStringLiteral("extinct"), tr("Extinct volcano", "This volcano is considered extinct, it has not erupted within the last 10000 years and likely never will again."));
-            addTagDescription(m_description, QStringLiteral("volcano:type"), QStringLiteral("stratovolcano"), tr("Stratovolcano", "This is a stratovolcano."));
-            addTagDescription(m_description, QStringLiteral("volcano:type"), QStringLiteral("shield"), tr("Shield volcano", "This is a shield volcano."));
-            addTagDescription(m_description, QStringLiteral("volcano:type"), QStringLiteral("scoria"), tr("Scoria cone", "This is a scoria cone volcano."));
+            addTagDescription(m_description, QStringLiteral("volcano:status"), QStringLiteral("active"), tr("Active", "An active volcano"));
+            addTagDescription(m_description, QStringLiteral("volcano:status"), QStringLiteral("dormant"), tr("Dormant", "A dormant volcano that will erupt at some point in the future."));
+            addTagDescription(m_description, QStringLiteral("volcano:status"), QStringLiteral("extinct"), tr("Extinct", "A volcano considered extinct, it has not erupted within the last 10000 years and likely never will again."));
+            addTagDescription(m_description, QStringLiteral("volcano:type"), QStringLiteral("stratovolcano"), tr("Stratovolcano"));
+            addTagDescription(m_description, QStringLiteral("volcano:type"), QStringLiteral("shield"), tr("Shield volcano"));
+            addTagDescription(m_description, QStringLiteral("volcano:type"), QStringLiteral("scoria"), tr("Scoria cone", "A scoria cone volcano."));
         } else if (category == GeoDataPlacemark::NaturalPeak) {
             addTagValue(m_description, QStringLiteral("ele"), tr("%1 m"));
         } else if (category == GeoDataPlacemark::HealthDoctors) {
