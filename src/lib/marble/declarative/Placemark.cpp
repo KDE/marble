@@ -386,6 +386,19 @@ QString Placemark::description() const
         addTagDescription(m_description, QStringLiteral("fee"), QStringLiteral("no"), tr("no fee"));
         addTagValue(m_description, QStringLiteral("description"));
         addTagValue(m_description, QStringLiteral("old_name"), tr("formerly <i>%1</i>"));
+
+        const int level = m_placemark.osmData().tagValue(QStringLiteral("level")).toInt();
+        if (level > 2) {
+            addTagValue(m_description, QStringLiteral("level"), tr("Floor %1", "Positive floor level", level));
+        } else if (level < -2) {
+            addTagValue(m_description, QStringLiteral("level"), tr("Basement %1", "Negative floor level", level));
+        } else {
+            addTagDescription(m_description, QStringLiteral("level"), QStringLiteral("2"), tr("Floor 2", "Floor level 2, two levels above ground level"));
+            addTagDescription(m_description, QStringLiteral("level"), QStringLiteral("1"), tr("Floor 1", "Floor level 1, one level above ground level"));
+            addTagDescription(m_description, QStringLiteral("level"), QStringLiteral("0"), tr("Ground floor", "Floor level 0"));
+            addTagDescription(m_description, QStringLiteral("level"), QStringLiteral("-1"), tr("Basement 1", "Floor level -1, one level below ground level"));
+            addTagDescription(m_description, QStringLiteral("level"), QStringLiteral("-2"), tr("Basement 2", "Floor level -2, two levels below ground level"));
+        }
     }
 
     return m_description;
