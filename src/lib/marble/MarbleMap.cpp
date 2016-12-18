@@ -1036,7 +1036,7 @@ void MarbleMapPrivate::updateMapTheme()
 
         if ( textureLayersOk )
             m_layerManager.addLayer( &m_textureLayer );
-        if ( vectorTileLayersOk )
+        if ( vectorTileLayersOk && !vectorTiles.isEmpty() )
             m_layerManager.addLayer( &m_vectorTileLayer );
     }
     else {
