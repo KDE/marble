@@ -190,13 +190,18 @@ void PlacemarkLayout::requestStyleReset()
 
 void PlacemarkLayout::styleReset()
 {
+    clearCache();
+    m_maxLabelHeight = maxLabelHeight();
+    m_styleResetRequested = false;
+}
+
+void PlacemarkLayout::clearCache()
+{
     m_paintOrder.clear();
     m_lastPlacemarkAt = nullptr;
     m_labelArea = 0;
     qDeleteAll( m_visiblePlacemarks );
     m_visiblePlacemarks.clear();
-    m_maxLabelHeight = maxLabelHeight();
-    m_styleResetRequested = false;
 }
 
 QVector<const GeoDataFeature*> PlacemarkLayout::whichPlacemarkAt( const QPoint& curpos )
@@ -347,14 +352,17 @@ QSet<TileId> PlacemarkLayout::visibleTiles( const ViewportParams *viewport, int 
 QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParams *viewport, int tileLevel )
 {
     m_runtimeTrace.clear();
-    if ( m_placemarkModel->rowCount() <= 0 )
+    if ( m_placemarkModel->rowCount() <= 0 ) {
+        clearCache();
         return QVector<VisiblePlacemark *>();
+    }
 
     if ( m_styleResetRequested ) {
         styleReset();
     }
 
     if ( m_maxLabelHeight == 0 ) {
+        clearCache();
         return QVector<VisiblePlacemark *>();
     }
 

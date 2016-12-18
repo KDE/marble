@@ -116,6 +116,7 @@ class PlacemarkLayout : public QObject
     int maxLabelHeight() const;
 
     void styleReset();
+    void clearCache();
 
     QSet<TileId> visibleTiles( const ViewportParams *viewport, int tileLevel ) const;
     bool layoutPlacemark(const GeoDataPlacemark *placemark, const GeoDataCoordinates &coordinates, qreal x, qreal y, bool selected );
