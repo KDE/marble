@@ -84,7 +84,7 @@ class MARBLE_EXPORT TextureLayer : public QObject, public LayerInterface
     int tileColumnCount( int level ) const;
     int tileRowCount( int level ) const;
 
-    qint64 volatileCacheLimit() const;
+    quint64 volatileCacheLimit() const;
 
     int preferredRadiusCeil( int radius ) const;
     int preferredRadiusFloor( int radius ) const;

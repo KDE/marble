@@ -512,7 +512,7 @@ int TextureLayer::tileRowCount( int level ) const
     return d->m_layerDecorator.tileRowCount( level );
 }
 
-qint64 TextureLayer::volatileCacheLimit() const
+quint64 TextureLayer::volatileCacheLimit() const
 {
     return d->m_tileLoader.volatileCacheLimit();
 }
