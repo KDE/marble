@@ -455,6 +455,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
         WaterwayDitch,
         WaterwayDrain,
         WaterwayRiver,
+        WaterwayWeir,
         WaterwayStream, // please keep order (used in for loops)
 
         //Admin level tags for depicting boundary

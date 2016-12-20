@@ -664,6 +664,9 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::WaterwayDitch]           = m_defaultStyle[GeoDataPlacemark::WaterwayRiver];
     m_defaultStyle[GeoDataPlacemark::WaterwayDrain]           = m_defaultStyle[GeoDataPlacemark::WaterwayRiver];
     m_defaultStyle[GeoDataPlacemark::WaterwayStream]          = m_defaultStyle[GeoDataPlacemark::WaterwayRiver];
+    m_defaultStyle[GeoDataPlacemark::WaterwayWeir]            = createStyle(4, 0, "#ffffff", "#87939b", true, false,
+                                                                            Qt::SolidPattern, Qt::DotLine, Qt::RoundCap, true, QVector< qreal >(),
+                                                                            osmFont, waterColor.darker(150));
 
     m_defaultStyle[GeoDataPlacemark::NaturalReef]              = createStyle(5.5, 0, "#36677c", "#36677c", true, false,
                                                                                                    Qt::Dense7Pattern, Qt::DotLine, Qt::RoundCap, false, QVector< qreal >(),
@@ -1036,6 +1039,7 @@ void StyleBuilder::Private::initializeOsmVisualCategories()
     s_visualCategories[OsmTag("waterway", "drain")]             = GeoDataPlacemark::WaterwayDrain;
     s_visualCategories[OsmTag("waterway", "river")]             = GeoDataPlacemark::WaterwayRiver;
     s_visualCategories[OsmTag("waterway", "riverbank")]         = GeoDataPlacemark::NaturalWater;
+    s_visualCategories[OsmTag("waterway", "weir")]              = GeoDataPlacemark::WaterwayWeir;
     s_visualCategories[OsmTag("waterway", "stream")]            = GeoDataPlacemark::WaterwayStream;
 
     s_visualCategories[OsmTag("natural", "beach")]              = GeoDataPlacemark::NaturalBeach;
@@ -1418,6 +1422,7 @@ void StyleBuilder::Private::initializeMinimumZoomLevels()
     s_defaultMinZoomLevels[GeoDataPlacemark::WaterwayDrain] = 17;
     s_defaultMinZoomLevels[GeoDataPlacemark::WaterwayStream] = 15;
     s_defaultMinZoomLevels[GeoDataPlacemark::WaterwayRiver] = 3;
+    s_defaultMinZoomLevels[GeoDataPlacemark::WaterwayWeir] = 17;
 
     for ( int i = GeoDataPlacemark::PlaceCity; i < GeoDataPlacemark::LastIndex; i++ ) {
         if (s_defaultMinZoomLevels[i] < 0) {
@@ -1818,6 +1823,7 @@ QStringList StyleBuilder::renderOrder() const
         paintLayerOrder << Private::createPaintLayerItem("LineString", GeoDataPlacemark::Landmass);
 
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::NaturalWater);
+        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataPlacemark::WaterwayWeir);
         for (int i = GeoDataPlacemark::WaterwayCanal; i <= GeoDataPlacemark::WaterwayStream; ++i) {
             paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataPlacemark::GeoDataVisualCategory)i, "outline");
             paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataPlacemark::GeoDataVisualCategory)i, "inline");
@@ -2461,6 +2467,7 @@ QString StyleBuilder::visualCategoryName(GeoDataPlacemark::GeoDataVisualCategory
         visualCategoryNames[GeoDataPlacemark::WaterwayDrain] = "WaterwayDrain";
         visualCategoryNames[GeoDataPlacemark::WaterwayStream] = "WaterwayStream";
         visualCategoryNames[GeoDataPlacemark::WaterwayRiver] = "WaterwayRiver";
+        visualCategoryNames[GeoDataPlacemark::WaterwayWeir] = "WaterwayWeir";
         visualCategoryNames[GeoDataPlacemark::LastIndex] = "LastIndex";
     }
 

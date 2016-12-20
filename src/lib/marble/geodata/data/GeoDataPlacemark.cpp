@@ -679,6 +679,7 @@ QString GeoDataPlacemark::categoryName() const
     case WaterwayDitch: return GeoDataPlacemarkPrivate::tr("Ditch");
     case WaterwayStream: return GeoDataPlacemarkPrivate::tr("Stream");
     case WaterwayRiver: return GeoDataPlacemarkPrivate::tr("River");
+    case WaterwayWeir: return GeoDataPlacemarkPrivate::tr("Weir");
 
     case Default:
     case Unknown:
