@@ -281,6 +281,8 @@ void TileDirectory::setBoundingPolygon(const QString &file)
         for (int i=1, n=m_boundingPolygon.size(); i<n; ++i) {
             m_boundingBox |= GeoDataLatLonBox::fromLineString(m_boundingPolygon[i]);
         }
+    } else {
+        m_boundingBox = boundingBox(m_inputFile);
     }
 }
 
