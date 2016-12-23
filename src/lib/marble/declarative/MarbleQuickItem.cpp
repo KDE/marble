@@ -957,6 +957,11 @@ namespace Marble
         d->m_model.routingManager()->writeSettings();
     }
 
+    void MarbleQuickItem::reloadTiles()
+    {
+        d->m_map.reload();
+    }
+
     QObject *MarbleQuickItem::getEventFilter() const
     {   //We would want to install the same event filter for abstract layer QuickItems such as PinchArea
         return &d->m_inputHandler;

@@ -126,7 +126,7 @@ Item {
                     }
 
                     Grid {
-                        columns: 2
+                        columns: 3
                         flow: Grid.TopToBottom
                         rowSpacing: Screen.pixelDensity * 0.5
                         columnSpacing: Screen.pixelDensity * 2
@@ -157,6 +157,11 @@ Item {
                             text: "Placemarks"
                             checked: settings.value("Developer", "debugPlacemarks") === "true"
                             onCheckedChanged: marbleMaps.setShowDebugPlacemarks(checked)
+                        }
+
+                        Button {
+                            text: "Reload Tiles"
+                            onClicked: marbleMaps.reloadTiles()
                         }
                     }
                 }

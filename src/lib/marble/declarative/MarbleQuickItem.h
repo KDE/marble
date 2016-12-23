@@ -138,6 +138,8 @@ namespace Marble
         Q_INVOKABLE void loadSettings();
         Q_INVOKABLE void writeSettings();
 
+        Q_INVOKABLE void reloadTiles();
+
     public:
         void paint(QPainter *painter) override;
 
