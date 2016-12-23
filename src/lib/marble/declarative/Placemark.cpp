@@ -517,27 +517,27 @@ QString Placemark::wheelchairInfo() const
 
 QString Placemark::wifiAvailable() const
 {
-    if (!m_wifiAvailable.isEmpty())
+    if (!m_wifiAvailable.isEmpty()) {
         return m_wifiAvailable;
-
-    const auto& osmData = m_placemark.osmData();
-
-    addTagDescription(m_wifiAvailable, QStringLiteral("internet_access"), QStringLiteral("no"), tr("No public internet", "This location does not provide public internet"));
-
-    addTagDescription(m_wifiAvailable, QStringLiteral("internet_access"), QStringLiteral("yes"), tr("Some public internet", "This location provides an unknown type of public internet."));
-
-    if (osmData.containsTag(QStringLiteral("internet_access:fee"), QStringLiteral("yes"))) {
-        addTagDescription(m_wifiAvailable, QStringLiteral("internet_access"), QStringLiteral("wlan"), tr("Charged public wifi available", "Public wireless internet is available here for a fee."));
-    } else if (osmData.containsTag(QStringLiteral("internet_access:fee"), QStringLiteral("no"))) {
-        addTagDescription(m_wifiAvailable, QStringLiteral("internet_access"), QStringLiteral("wlan"), tr("Free public wifi available", "Public wireless internet is available here for no cost."));
-    } else {
-        addTagDescription(m_wifiAvailable, QStringLiteral("internet_access"), QStringLiteral("wlan"), tr("Public wifi available", "Public wireless internet is available here."));
     }
 
-    addTagDescription(m_wifiAvailable, QStringLiteral("wifi"), QStringLiteral("no"), tr("No public wifi", "Public wifi is not available here."));
-    addTagDescription(m_wifiAvailable, QStringLiteral("wifi"), QStringLiteral("yes"), tr("Public wifi available", "Public wireless internet is available here."));
-    addTagDescription(m_wifiAvailable, QStringLiteral("wifi"), QStringLiteral("free"), tr("Free public wifi available", "Public wireless internet is available here for no cost."));
-    addTagDescription(m_wifiAvailable, QStringLiteral("wifi"), QStringLiteral("free_for_customers"), tr("Public wifi free for customers", "Public wireless internet is available here for customers for no cost."));
+    const auto& osmData = m_placemark.osmData();
+    addTagDescription(m_wifiAvailable, QStringLiteral("internet_access"), QStringLiteral("no"), tr("No public Internet access", "This location does not provide public Internet access"));
+    addTagDescription(m_wifiAvailable, QStringLiteral("internet_access"), QStringLiteral("yes"), tr("Public Internet access available", "This location provides an unknown type of public Internet access."));
+
+    if (osmData.containsTag(QStringLiteral("internet_access:fee"), QStringLiteral("yes"))) {
+        addTagDescription(m_wifiAvailable, QStringLiteral("internet_access"), QStringLiteral("wlan"), tr("Charged public wifi available", "Public wireless Internet access is available here for a fee."));
+    } else if (osmData.containsTag(QStringLiteral("internet_access:fee"), QStringLiteral("no"))) {
+        addTagDescription(m_wifiAvailable, QStringLiteral("internet_access"), QStringLiteral("wlan"), tr("Free public wifi available", "Public wireless Internet access is available here for no cost."));
+    } else {
+        addTagDescription(m_wifiAvailable, QStringLiteral("internet_access"), QStringLiteral("wlan"), tr("Public wifi available", "Public wireless Internet access is available here."));
+    }
+
+    if (m_wifiAvailable.isEmpty()) {
+        addTagDescription(m_wifiAvailable, QStringLiteral("wifi"), QStringLiteral("no"), tr("No public wifi", "Public wifi is not available here."));
+        addTagDescription(m_wifiAvailable, QStringLiteral("wifi"), QStringLiteral("yes"), tr("Public wifi available", "Public wireless Internet is available here."));
+        addTagDescription(m_wifiAvailable, QStringLiteral("wifi"), QStringLiteral("free"), tr("Free public wifi available", "Public wireless Internet is available here for no cost."));
+    }
 
     return m_wifiAvailable;
 }
