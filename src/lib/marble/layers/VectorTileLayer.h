@@ -55,6 +55,8 @@ class VectorTileLayer : public QObject, public LayerInterface
                  const QString &renderPos = QLatin1String("NONE"),
                  GeoSceneLayer *layer = 0 ) override;
 
+    void reload();
+
 Q_SIGNALS:
     void tileLevelChanged(int tileLevel);
 

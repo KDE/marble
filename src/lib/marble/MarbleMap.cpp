@@ -520,6 +520,7 @@ QVector<const GeoDataFeature*> MarbleMap::whichFeatureAt( const QPoint& curpos )
 void MarbleMap::reload()
 {
     d->m_textureLayer.reload();
+    d->m_vectorTileLayer.reload();
 }
 
 void MarbleMap::downloadRegion( QVector<TileCoordsPyramid> const & pyramid )

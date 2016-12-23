@@ -65,6 +65,8 @@ public:
 
     int cachedDocuments() const;
 
+    void reload();
+
 public Q_SLOTS:
     void updateTile( const TileId &id, GeoDataDocument *document );
 

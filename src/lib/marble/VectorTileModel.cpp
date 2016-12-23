@@ -165,6 +165,13 @@ int VectorTileModel::cachedDocuments() const
     return m_documents.size();
 }
 
+void VectorTileModel::reload()
+{
+    for (auto const &tile: m_documents.keys()) {
+        m_loader->downloadTile(m_layer, tile, DownloadBrowse);
+    }
+}
+
 void VectorTileModel::updateTile( const TileId &idWithMapThemeHash, GeoDataDocument *document )
 {
     TileId const id(0, idWithMapThemeHash.zoomLevel(), idWithMapThemeHash.x(), idWithMapThemeHash.y());

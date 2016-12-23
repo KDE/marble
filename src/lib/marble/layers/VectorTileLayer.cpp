@@ -172,6 +172,13 @@ bool VectorTileLayer::render( GeoPainter *painter, ViewportParams *viewport,
     return true;
 }
 
+void VectorTileLayer::reload()
+{
+    for (auto mapper: d->m_activeTexmappers) {
+        mapper->reload();
+    }
+}
+
 void VectorTileLayer::reset()
 {
     foreach ( VectorTileModel *mapper, d->m_texmappers ) {
