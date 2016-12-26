@@ -180,7 +180,7 @@ GeoDataDocument* OsmParser::parseXml(const QString &filename, QString &error)
                 m_relations[parentId].osmData() = OsmPlacemarkData::fromParserAttributes(parser.attributes());
                 osmData = &m_relations[parentId].osmData();
             }
-        } else if (tagName == osm::osmTag_tag) {
+        } else if (osmData && tagName == osm::osmTag_tag) {
             const QXmlStreamAttributes &attributes = parser.attributes();
             const QString keyString = *stringPool.insert(attributes.value(QLatin1String("k")).toString());
             const QString valueString = *stringPool.insert(attributes.value(QLatin1String("v")).toString());
