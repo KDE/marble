@@ -278,8 +278,6 @@ QString GeoSceneTileDataset::relativeTileFileName( const TileId &id ) const
     QString relFileName;
 
     switch ( m_storageLayoutMode ) {
-    default:
-        mDebug() << Q_FUNC_INFO << "Invalid storage layout mode! Falling back to default.";
     case GeoSceneTileDataset::Marble:
         relFileName = QString( "%1/%2/%3/%3_%4.%5" )
             .arg( themeStr() )
