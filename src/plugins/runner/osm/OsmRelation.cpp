@@ -178,6 +178,7 @@ void OsmRelation::createHikingRoute(GeoDataDocument *document, OsmWays &ways, co
         if (member.role.isEmpty() || member.role == QStringLiteral("route")) {
             if (!ways.contains(member.reference)) {
                 // A way is missing. Return nothing.
+                delete lineString;
                 return;
             }
 
@@ -190,6 +191,7 @@ void OsmRelation::createHikingRoute(GeoDataDocument *document, OsmWays &ways, co
             foreach(qint64 nodeId, way.references()) {
                 auto const nodeIter = nodes.constFind(nodeId);
                 if (nodeIter == nodes.constEnd()) {
+                    delete lineString;
                     return;
                 }
 
