@@ -26,24 +26,25 @@
 #include <qmath.h>
 #include <QThreadPool>
 
-namespace Marble {
+namespace Marble
+{
 
-TileRunner::TileRunner( TileLoader *loader, const GeoSceneVectorTileDataset *texture, const TileId &id ) :
-    m_loader( loader ),
-    m_texture( texture ),
-    m_id( id )
+TileRunner::TileRunner(TileLoader *loader, const GeoSceneVectorTileDataset *tileDataset, const TileId &id) :
+    m_loader(loader),
+    m_tileDataset(tileDataset),
+    m_id(id)
 {
 }
 
 void TileRunner::run()
 {
-    GeoDataDocument *const document = m_loader->loadTileVectorData( m_texture, m_id, DownloadBrowse );
+    GeoDataDocument *const document = m_loader->loadTileVectorData(m_tileDataset, m_id, DownloadBrowse);
 
-    emit documentLoaded( m_id, document );
+    emit documentLoaded(m_id, document);
 }
 
 VectorTileModel::CacheDocument::CacheDocument(GeoDataDocument *doc, VectorTileModel *vectorTileModel, const GeoDataLatLonBox &boundingBox) :
-    m_document( doc ),
+    m_document(doc),
     m_vectorTileModel(vectorTileModel),
     m_boundingBox(boundingBox)
 {
@@ -55,18 +56,18 @@ VectorTileModel::CacheDocument::~CacheDocument()
     m_vectorTileModel->removeTile(m_document);
 }
 
-VectorTileModel::VectorTileModel( TileLoader *loader, const GeoSceneVectorTileDataset *layer, GeoDataTreeModel *treeModel, QThreadPool *threadPool ) :
-    m_loader( loader ),
-    m_layer( layer ),
-    m_treeModel( treeModel ),
-    m_threadPool( threadPool ),
-    m_tileLoadLevel( -1 ),
+VectorTileModel::VectorTileModel(TileLoader *loader, const GeoSceneVectorTileDataset *layer, GeoDataTreeModel *treeModel, QThreadPool *threadPool) :
+    m_loader(loader),
+    m_layer(layer),
+    m_treeModel(treeModel),
+    m_threadPool(threadPool),
+    m_tileLoadLevel(-1),
     m_tileZoomLevel(-1),
     m_deleteDocumentsLater(false)
 {
-    connect(this, SIGNAL(tileAdded(GeoDataDocument*)), treeModel, SLOT(addDocument(GeoDataDocument*)) );
-    connect(this, SIGNAL(tileRemoved(GeoDataDocument*)), treeModel, SLOT(removeDocument(GeoDataDocument*)) );
-    connect(treeModel, SIGNAL(removed(GeoDataObject*)), this, SLOT(cleanupTile(GeoDataObject*)) );
+    connect(this, SIGNAL(tileAdded(GeoDataDocument*)), treeModel, SLOT(addDocument(GeoDataDocument*)));
+    connect(this, SIGNAL(tileRemoved(GeoDataDocument*)), treeModel, SLOT(removeDocument(GeoDataDocument*)));
+    connect(treeModel, SIGNAL(removed(GeoDataObject*)), this, SLOT(cleanupTile(GeoDataObject*)));
 }
 
 void VectorTileModel::setViewport(const GeoDataLatLonBox &latLonBox)
@@ -88,7 +89,7 @@ void VectorTileModel::setViewport(const GeoDataLatLonBox &latLonBox)
         return;
     }
     int tileLevel = tileLevels.first();
-    for (int i=1, n=tileLevels.size(); i<n; ++i) {
+    for (int i = 1, n = tileLevels.size(); i < n; ++i) {
         if (tileLevels[i] > tileLoadLevel) {
             break;
         }
@@ -97,7 +98,7 @@ void VectorTileModel::setViewport(const GeoDataLatLonBox &latLonBox)
     tileLoadLevel = tileLevel;
 
     // if zoom level has changed, empty vectortile cache
-    if ( tileLoadLevel != m_tileLoadLevel ) {
+    if (tileLoadLevel != m_tileLoadLevel) {
         m_deleteDocumentsLater = m_tileLoadLevel >= 0;
         m_tileLoadLevel = tileLoadLevel;
     }
@@ -117,16 +118,16 @@ void VectorTileModel::setViewport(const GeoDataLatLonBox &latLonBox)
     // When changing zoom, download everything inside the screen
     // TODO: hardcodes assumption about tiles indexing also ends at dateline
     // TODO: what about crossing things in y direction?
-    if ( !latLonBox.crossesDateLine() ) {
-        queryTiles( tileLoadLevel, westX, northY, eastX, southY );
+    if (!latLonBox.crossesDateLine()) {
+        queryTiles(tileLoadLevel, westX, northY, eastX, southY);
     }
     // When only moving screen, just download the new tiles
     else {
         // TODO: maxTileX (calculation knowledge) should be a property of tileProjection or m_layer
-        const unsigned int maxTileX = (1 << tileLoadLevel) * m_layer->levelZeroColumns() - 1;
+        const int maxTileX = (1 << tileLoadLevel) * m_layer->levelZeroColumns() - 1;
 
-        queryTiles( tileLoadLevel, 0, northY, eastX, southY );
-        queryTiles( tileLoadLevel, westX, northY, maxTileX, southY );
+        queryTiles(tileLoadLevel, 0, northY, eastX, southY);
+        queryTiles(tileLoadLevel, westX, northY, maxTileX, southY);
     }
     removeTilesOutOfView(latLonBox);
 }
@@ -138,8 +139,7 @@ void VectorTileModel::removeTilesOutOfView(const GeoDataLatLonBox &boundingBox)
         bool const isOutOfView = !extendedViewport.intersects(iter.value()->m_boundingBox);
         if (isOutOfView) {
             iter = m_documents.erase(iter);
-        }
-        else {
+        } else {
             ++iter;
         }
     }
@@ -167,12 +167,12 @@ int VectorTileModel::cachedDocuments() const
 
 void VectorTileModel::reload()
 {
-    for (auto const &tile: m_documents.keys()) {
+    for (auto const &tile : m_documents.keys()) {
         m_loader->downloadTile(m_layer, tile, DownloadBrowse);
     }
 }
 
-void VectorTileModel::updateTile( const TileId &idWithMapThemeHash, GeoDataDocument *document )
+void VectorTileModel::updateTile(const TileId &idWithMapThemeHash, GeoDataDocument *document)
 {
     TileId const id(0, idWithMapThemeHash.zoomLevel(), idWithMapThemeHash.x(), idWithMapThemeHash.y());
     m_pendingDocuments.removeAll(id);
@@ -180,7 +180,7 @@ void VectorTileModel::updateTile( const TileId &idWithMapThemeHash, GeoDataDocum
         return;
     }
 
-    if ( m_tileLoadLevel != id.zoomLevel() ) {
+    if (m_tileLoadLevel != id.zoomLevel()) {
         delete document;
         return;
     }
@@ -205,19 +205,18 @@ void VectorTileModel::clear()
     m_documents.clear();
 }
 
-void VectorTileModel::queryTiles( int tileZoomLevel,
-                                   unsigned int minTileX, unsigned int minTileY, unsigned int maxTileX, unsigned int maxTileY )
+void VectorTileModel::queryTiles(int tileZoomLevel, int minTileX, int minTileY, int maxTileX, int maxTileY)
 {
     // Download all the tiles inside the given indexes
-    for ( unsigned int x = minTileX; x <= maxTileX; ++x ) {
-        for ( unsigned int y = minTileY; y <= maxTileY; ++y ) {
-           const TileId tileId = TileId( 0, tileZoomLevel, x, y );
-           if ( !m_documents.contains( tileId ) && !m_pendingDocuments.contains( tileId ) ) {
-               m_pendingDocuments << tileId;
-               TileRunner *job = new TileRunner( m_loader, m_layer, tileId );
-               connect( job, SIGNAL(documentLoaded(TileId,GeoDataDocument*)), this, SLOT(updateTile(TileId,GeoDataDocument*)) );
-               m_threadPool->start( job );
-           }
+    for (int x = minTileX; x <= maxTileX; ++x) {
+        for (int y = minTileY; y <= maxTileY; ++y) {
+            const TileId tileId = TileId(0, tileZoomLevel, x, y);
+            if (!m_documents.contains(tileId) && !m_pendingDocuments.contains(tileId)) {
+                m_pendingDocuments << tileId;
+                TileRunner *job = new TileRunner(m_loader, m_layer, tileId);
+                connect(job, SIGNAL(documentLoaded(TileId, GeoDataDocument*)), this, SLOT(updateTile(TileId, GeoDataDocument*)));
+                m_threadPool->start(job);
+            }
         }
     }
 }

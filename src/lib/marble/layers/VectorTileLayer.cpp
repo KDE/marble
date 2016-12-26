@@ -43,14 +43,14 @@ public:
     ~Private();
 
     void updateTile(const TileId &tileId, GeoDataDocument* document);
-    void updateTextureLayers();
+    void updateLayerSettings();
 
 public:
     VectorTileLayer  *const m_parent;
     TileLoader m_loader;
-    QVector<VectorTileModel *> m_texmappers;
-    QVector<VectorTileModel *> m_activeTexmappers;
-    const GeoSceneGroup *m_textureLayerSettings;
+    QVector<VectorTileModel *> m_tileModels;
+    QVector<VectorTileModel *> m_activeTileModels;
+    const GeoSceneGroup *m_layerSettings;
 
     // TreeModel for displaying GeoDataDocuments
     GeoDataTreeModel *const m_treeModel;
@@ -62,58 +62,56 @@ VectorTileLayer::Private::Private(HttpDownloadManager *downloadManager,
                                   const PluginManager *pluginManager,
                                   VectorTileLayer *parent,
                                   GeoDataTreeModel *treeModel) :
-    m_parent( parent ),
-    m_loader( downloadManager, pluginManager ),
-    m_texmappers(),
-    m_activeTexmappers(),
-    m_textureLayerSettings( 0 ),
-    m_treeModel( treeModel )
+    m_parent(parent),
+    m_loader(downloadManager, pluginManager),
+    m_tileModels(),
+    m_activeTileModels(),
+    m_layerSettings(0),
+    m_treeModel(treeModel)
 {
-    m_threadPool.setMaxThreadCount( 1 );
+    m_threadPool.setMaxThreadCount(1);
 }
 
 VectorTileLayer::Private::~Private()
 {
-    qDeleteAll( m_activeTexmappers );
+    qDeleteAll(m_activeTileModels);
 }
 
 void VectorTileLayer::Private::updateTile(const TileId &tileId, GeoDataDocument* document)
 {
-    foreach ( VectorTileModel *mapper, m_activeTexmappers ) {
+    foreach (VectorTileModel *mapper, m_activeTileModels) {
         mapper->updateTile(tileId, document);
     }
 }
 
-void VectorTileLayer::Private::updateTextureLayers()
+void VectorTileLayer::Private::updateLayerSettings()
 {
-    m_activeTexmappers.clear();
+    m_activeTileModels.clear();
 
-    foreach ( VectorTileModel *candidate, m_texmappers ) {
-        // Check if the GeoSceneTileDataset is a TextureTile or VectorTile.
-        // Only VectorTiles have to be used.
+    foreach (VectorTileModel *candidate, m_tileModels) {
         bool enabled = true;
-        if ( m_textureLayerSettings ) {
-            const bool propertyExists = m_textureLayerSettings->propertyValue( candidate->name(), enabled );
-            enabled |= !propertyExists; // if property doesn't exist, enable texture nevertheless
+        if (m_layerSettings) {
+            const bool propertyExists = m_layerSettings->propertyValue(candidate->name(), enabled);
+            enabled |= !propertyExists; // if property doesn't exist, enable layer nevertheless
         }
-        if ( enabled ) {
-            m_activeTexmappers.append( candidate );
-            mDebug() << "enabling texture" << candidate->name();
+        if (enabled) {
+            m_activeTileModels.append(candidate);
+            mDebug() << "enabling vector layer" << candidate->name();
         } else {
             candidate->clear();
-            mDebug() << "disabling texture" << candidate->name();
+            mDebug() << "disabling vector layer" << candidate->name();
         }
     }
 }
 
 VectorTileLayer::VectorTileLayer(HttpDownloadManager *downloadManager,
                                  const PluginManager *pluginManager,
-                                 GeoDataTreeModel *treeModel )
+                                 GeoDataTreeModel *treeModel)
     : QObject()
-    , d( new Private( downloadManager, pluginManager, this, treeModel ) )
+    , d(new Private(downloadManager, pluginManager, this, treeModel))
 {
-    qRegisterMetaType<TileId>( "TileId" );
-    qRegisterMetaType<GeoDataDocument*>( "GeoDataDocument*" );
+    qRegisterMetaType<TileId>("TileId");
+    qRegisterMetaType<GeoDataDocument*>("GeoDataDocument*");
 
     connect(&d->m_loader, SIGNAL(tileCompleted(TileId, GeoDataDocument*)), this, SLOT(updateTile(TileId, GeoDataDocument*)));
 }
@@ -136,7 +134,7 @@ RenderState VectorTileLayer::renderState() const
 int VectorTileLayer::tileZoomLevel() const
 {
     int level = 0;
-    foreach(const auto *mapper, d->m_activeTexmappers ) {
+    foreach (const auto *mapper, d->m_activeTileModels) {
         level = qMax(level, mapper->tileZoomLevel());
     }
     return level;
@@ -145,23 +143,23 @@ int VectorTileLayer::tileZoomLevel() const
 QString VectorTileLayer::runtimeTrace() const
 {
     int tiles = 0;
-    foreach(const auto *mapper, d->m_activeTexmappers ) {
+    foreach (const auto *mapper, d->m_activeTileModels) {
         tiles += mapper->cachedDocuments();
     }
-    int const layers = d->m_activeTexmappers.size();
+    int const layers = d->m_activeTileModels.size();
     return QStringLiteral("Vector Tiles: %1 tiles in %2 layers").arg(tiles).arg(layers);
 }
 
-bool VectorTileLayer::render( GeoPainter *painter, ViewportParams *viewport,
-                              const QString &renderPos, GeoSceneLayer *layer )
+bool VectorTileLayer::render(GeoPainter *painter, ViewportParams *viewport,
+                             const QString &renderPos, GeoSceneLayer *layer)
 {
-    Q_UNUSED( painter );
-    Q_UNUSED( renderPos );
-    Q_UNUSED( layer );
+    Q_UNUSED(painter);
+    Q_UNUSED(renderPos);
+    Q_UNUSED(layer);
 
     int const oldLevel = tileZoomLevel();
     int level = 0;
-    foreach ( VectorTileModel *mapper, d->m_activeTexmappers ) {
+    foreach (VectorTileModel *mapper, d->m_activeTileModels) {
         mapper->setViewport(viewport->viewLatLonAltBox());
         level = qMax(level, mapper->tileZoomLevel());
     }
@@ -174,36 +172,36 @@ bool VectorTileLayer::render( GeoPainter *painter, ViewportParams *viewport,
 
 void VectorTileLayer::reload()
 {
-    for (auto mapper: d->m_activeTexmappers) {
+    for (auto mapper : d->m_activeTileModels) {
         mapper->reload();
     }
 }
 
 void VectorTileLayer::reset()
 {
-    foreach ( VectorTileModel *mapper, d->m_texmappers ) {
+    foreach (VectorTileModel *mapper, d->m_tileModels) {
         mapper->clear();
     }
 }
 
-void VectorTileLayer::setMapTheme( const QVector<const GeoSceneVectorTileDataset *> &textures, const GeoSceneGroup *textureLayerSettings )
+void VectorTileLayer::setMapTheme(const QVector<const GeoSceneVectorTileDataset *> &textures, const GeoSceneGroup *textureLayerSettings)
 {
-    qDeleteAll( d->m_texmappers );
-    d->m_texmappers.clear();
-    d->m_activeTexmappers.clear();
+    qDeleteAll(d->m_tileModels);
+    d->m_tileModels.clear();
+    d->m_activeTileModels.clear();
 
-    foreach ( const GeoSceneVectorTileDataset *layer, textures ) {
-        d->m_texmappers << new VectorTileModel( &d->m_loader, layer, d->m_treeModel, &d->m_threadPool );
+    foreach (const GeoSceneVectorTileDataset *layer, textures) {
+        d->m_tileModels << new VectorTileModel(&d->m_loader, layer, d->m_treeModel, &d->m_threadPool);
     }
 
-    d->m_textureLayerSettings = textureLayerSettings;
+    d->m_layerSettings = textureLayerSettings;
 
-    if ( d->m_textureLayerSettings ) {
-        connect( d->m_textureLayerSettings, SIGNAL(valueChanged(QString,bool)),
-                 this,                      SLOT(updateTextureLayers()) );
+    if (d->m_layerSettings) {
+        connect(d->m_layerSettings, SIGNAL(valueChanged(QString, bool)),
+                this,                      SLOT(updateLayerSettings()));
     }
 
-    d->updateTextureLayers();
+    d->updateLayerSettings();
     emit tileLevelChanged(tileZoomLevel());
 }
 

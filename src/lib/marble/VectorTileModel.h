@@ -44,7 +44,7 @@ Q_SIGNALS:
 
 private:
     TileLoader *const m_loader;
-    const GeoSceneVectorTileDataset *const m_texture;
+    const GeoSceneVectorTileDataset *const m_tileDataset;
     const TileId m_id;
 };
 
@@ -82,7 +82,7 @@ private Q_SLOTS:
 
 private:
     void removeTilesOutOfView(const GeoDataLatLonBox &boundingBox);
-    void queryTiles( int tileZoomLevel, unsigned int minX, unsigned int minY, unsigned int maxX, unsigned int maxY );
+    void queryTiles(int tileZoomLevel, int minX, int minY, int maxX, int maxY );
 
 private:
     struct CacheDocument

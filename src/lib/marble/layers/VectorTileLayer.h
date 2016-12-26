@@ -36,10 +36,10 @@ class VectorTileLayer : public QObject, public LayerInterface
 {
     Q_OBJECT
 
- public:
-    VectorTileLayer( HttpDownloadManager *downloadManager,
-                  const PluginManager *pluginManager,
-                  GeoDataTreeModel *treeModel);
+public:
+    VectorTileLayer(HttpDownloadManager *downloadManager,
+                    const PluginManager *pluginManager,
+                    GeoDataTreeModel *treeModel);
 
     ~VectorTileLayer() override;
 
@@ -51,26 +51,26 @@ class VectorTileLayer : public QObject, public LayerInterface
 
     QString runtimeTrace() const override;
 
-    bool render( GeoPainter *painter, ViewportParams *viewport,
-                 const QString &renderPos = QLatin1String("NONE"),
-                 GeoSceneLayer *layer = 0 ) override;
+    bool render(GeoPainter *painter, ViewportParams *viewport,
+                const QString &renderPos = QLatin1String("NONE"),
+                GeoSceneLayer *layer = 0) override;
 
     void reload();
 
 Q_SIGNALS:
     void tileLevelChanged(int tileLevel);
 
- public Q_SLOTS:
-    void setMapTheme( const QVector<const GeoSceneVectorTileDataset *> &textures, const GeoSceneGroup *textureLayerSettings );
+public Q_SLOTS:
+    void setMapTheme(const QVector<const GeoSceneVectorTileDataset *> &textures, const GeoSceneGroup *textureLayerSettings);
 
     void reset();
 
- private:
-    Q_PRIVATE_SLOT( d, void updateTextureLayers() )
-    Q_PRIVATE_SLOT( d, void updateTile(const TileId &tileId, GeoDataDocument* document) )
+private:
+    Q_PRIVATE_SLOT(d, void updateLayerSettings())
+    Q_PRIVATE_SLOT(d, void updateTile(const TileId &tileId, GeoDataDocument* document))
 
 
- private:
+private:
     class Private;
     Private *const d;
 
