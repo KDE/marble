@@ -601,7 +601,9 @@ namespace Marble
                 d->m_placemark->deleteLater();
                 d->m_placemark = nullptr;
             } else {
-                d->m_placemark->deleteLater();
+                if (d->m_placemark) {
+                    d->m_placemark->deleteLater();
+                }
                 d->m_placemark = new Placemark(this);
                 d->m_placemark->setGeoDataPlacemark(*placemark);
             }
