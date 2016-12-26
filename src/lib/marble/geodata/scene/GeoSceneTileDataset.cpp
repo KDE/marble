@@ -252,16 +252,16 @@ QUrl GeoSceneTileDataset::downloadUrl( const TileId &id ) const
         mDebug() << "No download URL specified for tiles stored in "
                  << m_sourceDir << ", falling back to " << defaultUrl.toString();
         return m_serverLayout->downloadUrl(defaultUrl, id);
+    } else if (m_downloadUrls.size() == 1) {
+        return m_serverLayout->downloadUrl(*m_nextUrl, id);
+    } else {
+        if (m_nextUrl == m_downloadUrls.constEnd()) {
+            m_nextUrl = m_downloadUrls.constBegin();
+        }
+        const QUrl url = m_serverLayout->downloadUrl(*m_nextUrl, id);
+        ++m_nextUrl;
+        return url;
     }
-
-    if ( m_nextUrl == m_downloadUrls.constEnd() )
-        m_nextUrl = m_downloadUrls.constBegin();
-
-    const QUrl url = m_serverLayout->downloadUrl( *m_nextUrl, id );
-
-    ++m_nextUrl;
-
-    return url;
 }
 
 void GeoSceneTileDataset::addDownloadUrl( const QUrl & url )
