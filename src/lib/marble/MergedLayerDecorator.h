@@ -19,7 +19,7 @@
 #include <QVector>
 #include <QList>
 
-#include "GeoSceneTextureTileDataset.h"
+#include "MarbleGlobal.h"
 
 class QImage;
 class QString;
@@ -29,6 +29,8 @@ namespace Marble
 {
 
 class GeoDataGroundOverlay;
+class GeoSceneAbstractTileProjection;
+class GeoSceneTextureTileDataset;
 class SunLocator;
 class StackedTile;
 class Tile;
@@ -57,7 +59,7 @@ class MergedLayerDecorator
 
     int tileRowCount( int level ) const;
 
-    GeoSceneAbstractTileProjection::Type tileProjectionType() const;
+    const GeoSceneAbstractTileProjection *tileProjection() const;
 
     QSize tileSize() const;
 

@@ -27,7 +27,6 @@
 
 #include <QObject>
 
-#include "GeoSceneTextureTileDataset.h"
 #include "RenderState.h"
 
 class QImage;
@@ -37,6 +36,7 @@ class QSize;
 namespace Marble
 {
 
+class GeoSceneAbstractTileProjection;
 class MergedLayerDecorator;
 class StackedTile;
 class TileId;
@@ -74,7 +74,7 @@ class StackedTileLoader : public QObject
 
         int tileRowCount( int level ) const;
 
-        GeoSceneAbstractTileProjection::Type tileProjectionType() const;
+        const GeoSceneAbstractTileProjection *tileProjection() const;
 
         QSize tileSize() const;
 

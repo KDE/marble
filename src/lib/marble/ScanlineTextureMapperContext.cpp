@@ -11,8 +11,7 @@
 
 #include "ScanlineTextureMapperContext.h"
 
-#include <QImage>
-
+#include "GeoSceneAbstractTileProjection.h"
 #include "MarbleDebug.h"
 #include "StackedTile.h"
 #include "StackedTileLoader.h"
@@ -20,11 +19,13 @@
 #include "ViewParams.h"
 #include "ViewportParams.h"
 
+#include <QImage>
+
 using namespace Marble;
 
 ScanlineTextureMapperContext::ScanlineTextureMapperContext( StackedTileLoader * const tileLoader, int tileLevel )
     : m_tileLoader( tileLoader ),
-      m_textureProjection(tileLoader->tileProjectionType()),  // cache texture projection
+      m_textureProjection(tileLoader->tileProjection()->type()),  // cache texture projection
       m_tileSize( tileLoader->tileSize() ),  // cache tile size
       m_tileLevel( tileLevel ),
       m_globalWidth( m_tileSize.width() * m_tileLoader->tileColumnCount( m_tileLevel ) ),

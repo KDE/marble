@@ -144,11 +144,11 @@ int MergedLayerDecorator::tileRowCount( int level ) const
     return TileLoaderHelper::levelToRow( levelZeroRows, level );
 }
 
-GeoSceneAbstractTileProjection::Type MergedLayerDecorator::tileProjectionType() const
+const GeoSceneAbstractTileProjection *MergedLayerDecorator::tileProjection() const
 {
     Q_ASSERT( !d->m_textureLayers.isEmpty() );
 
-    return d->m_textureLayers.at( 0 )->tileProjectionType();
+    return d->m_textureLayers.at(0)->tileProjection();
 }
 
 QSize MergedLayerDecorator::tileSize() const

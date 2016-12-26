@@ -15,7 +15,6 @@
 #include <QObject>
 
 #include "MarbleGlobal.h"
-#include "GeoSceneTileDataset.h"
 
 class QAbstractItemModel;
 class QImage;
@@ -27,9 +26,11 @@ namespace Marble
 class GeoPainter;
 class GeoDataDocument;
 class GeoSceneGroup;
+class GeoSceneAbstractTileProjection;
 class GeoSceneTextureTileDataset;
 class HttpDownloadManager;
 class SunLocator;
+class TileId;
 class ViewportParams;
 class PluginManager;
 
@@ -79,7 +80,7 @@ class MARBLE_EXPORT TextureLayer : public QObject, public LayerInterface
 
     QSize tileSize() const;
 
-    GeoSceneAbstractTileProjection::Type tileProjectionType() const;
+    const GeoSceneAbstractTileProjection *tileProjection() const;
 
     int tileColumnCount( int level ) const;
     int tileRowCount( int level ) const;

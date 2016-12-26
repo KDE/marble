@@ -25,6 +25,7 @@
 #include "GeoDataGroundOverlay.h"
 #include "GeoPainter.h"
 #include "GeoSceneGroup.h"
+#include "GeoSceneTextureTileDataset.h"
 #include "GeoSceneTypes.h"
 #include "MergedLayerDecorator.h"
 #include "MarbleDebug.h"
@@ -497,9 +498,9 @@ QSize TextureLayer::tileSize() const
     return d->m_layerDecorator.tileSize();
 }
 
-GeoSceneAbstractTileProjection::Type TextureLayer::tileProjectionType() const
+const GeoSceneAbstractTileProjection *TextureLayer::tileProjection() const
 {
-    return d->m_layerDecorator.tileProjectionType();
+    return d->m_layerDecorator.tileProjection();
 }
 
 int TextureLayer::tileColumnCount( int level ) const

@@ -17,6 +17,7 @@
 #include "TextureLayer.h"
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataLineString.h"
+#include "GeoSceneAbstractTileProjection.h"
 #include "TileCoordsPyramid.h"
 
 namespace Marble {
@@ -57,7 +58,7 @@ int DownloadRegionPrivate::rad2PixelY( qreal const lat, const TextureLayer *text
     qreal const globalHeight = textureLayer->tileSize().height()
             * textureLayer->tileRowCount( m_visibleTileLevel );
     qreal const normGlobalHeight = globalHeight / M_PI;
-    switch (textureLayer->tileProjectionType()) {
+    switch (textureLayer->tileProjection()->type()) {
     case GeoSceneAbstractTileProjection::Equirectangular:
         return static_cast<int>( globalHeight * 0.5 - lat * normGlobalHeight );
     case GeoSceneAbstractTileProjection::Mercator:

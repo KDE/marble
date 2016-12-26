@@ -77,9 +77,9 @@ int StackedTileLoader::tileRowCount( int level ) const
     return d->m_layerDecorator->tileRowCount( level );
 }
 
-GeoSceneAbstractTileProjection::Type StackedTileLoader::tileProjectionType() const
+const GeoSceneAbstractTileProjection *StackedTileLoader::tileProjection() const
 {
-    return d->m_layerDecorator->tileProjectionType();
+    return d->m_layerDecorator->tileProjection();
 }
 
 QSize StackedTileLoader::tileSize() const
