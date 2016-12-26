@@ -569,10 +569,14 @@ void LatLonEdit::setNotation(GeoDataCoordinates::Notation notation)
         break;
     }
 
-    d->m_notation = notation;
-    d->m_inputHandler->setupUi();
-    d->m_inputHandler->setupMinMax(d->m_dimension);
-    d->m_inputHandler->setValue(d->m_value);
+    if (d->m_inputHandler) {
+        d->m_notation = notation;
+        d->m_inputHandler->setupUi();
+        d->m_inputHandler->setupMinMax(d->m_dimension);
+        d->m_inputHandler->setValue(d->m_value);
+    } else {
+        Q_ASSERT(false && "Support for this notation has not been implemented yet");
+    }
 }
 
 void LatLonEdit::checkFloatValueOverflow()
