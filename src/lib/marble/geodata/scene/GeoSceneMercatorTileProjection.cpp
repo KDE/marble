@@ -136,18 +136,19 @@ qreal latFromTileY(unsigned int y, unsigned int tileCount)
 }
 
 
-void GeoSceneMercatorTileProjection::tileIndexes(const GeoDataLatLonBox& latLonBox, int zoomLevel,
-                                                 int& westX, int& northY, int& eastX, int& southY) const
+QRect GeoSceneMercatorTileProjection::tileIndexes(const GeoDataLatLonBox &latLonBox, int zoomLevel) const
 {
     const unsigned int xTileCount = (1 << zoomLevel) * levelZeroColumns();
 
-    westX =   eastBoundTileXFromLon(latLonBox.west(),  xTileCount);
-    eastX =   westBoundTileXFromLon(latLonBox.east(),  xTileCount);
+    const int westX =   eastBoundTileXFromLon(latLonBox.west(),  xTileCount);
+    const int eastX =   westBoundTileXFromLon(latLonBox.east(),  xTileCount);
 
     const unsigned int yTileCount = (1 << zoomLevel) * levelZeroRows();
 
-    northY = southBoundTileYFromLat(latLonBox.north(), yTileCount);
-    southY = northBoundTileYFromLat(latLonBox.south(), yTileCount);
+    const int northY = southBoundTileYFromLat(latLonBox.north(), yTileCount);
+    const int southY = northBoundTileYFromLat(latLonBox.south(), yTileCount);
+
+    return QRect(QPoint(westX, northY), QPoint(eastX, southY));
 }
 
 void GeoSceneMercatorTileProjection::geoCoordinates(int zoomLevel,
@@ -159,24 +160,6 @@ void GeoSceneMercatorTileProjection::geoCoordinates(int zoomLevel,
 
     const unsigned int yTileCount = (1 << zoomLevel) * levelZeroRows();
     northernTileEdgeLat = latFromTileY(y, yTileCount);
-}
-
-
-void GeoSceneMercatorTileProjection::geoCoordinates(int zoomLevel,
-                                                    int x, int y,
-                                                    GeoDataLatLonBox& latLonBox) const
-{
-    const unsigned int xTileCount = (1 << zoomLevel) * levelZeroColumns();
-
-    const qreal west = lonFromTileX(x,     xTileCount);
-    const qreal east = lonFromTileX(x + 1, xTileCount);
-
-    const unsigned int yTileCount = (1 << zoomLevel) * levelZeroRows();
-
-    const qreal north = latFromTileY(y,     yTileCount);
-    const qreal south = latFromTileY(y + 1, yTileCount);
-
-    latLonBox.setBoundaries(north, south, east, west);
 }
 
 }

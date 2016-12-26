@@ -212,19 +212,14 @@ void TileProjectionTest::testTileIndexesEquirect()
 
     GeoDataLatLonBox latLonBox(northLat, southLat, eastLon, westLon);
 
-    GeoSceneEquirectTileProjection projection;
+    const GeoSceneEquirectTileProjection projection;
 
-    int tileXWest;
-    int tileYNorth;
-    int tileXEast;
-    int tileYSouth;
+    const QRect rect = projection.tileIndexes(latLonBox, zoomLevel);
 
-    projection.tileIndexes(latLonBox, zoomLevel, tileXWest, tileYNorth, tileXEast, tileYSouth);
-
-    QCOMPARE(tileXWest, expectedTileXWest);
-    QCOMPARE(tileYNorth, expectedTileYNorth);
-    QCOMPARE(tileXEast, expectedTileXEast);
-    QCOMPARE(tileYSouth, expectedTileYSouth);
+    QCOMPARE(rect.left(), expectedTileXWest);
+    QCOMPARE(rect.top(), expectedTileYNorth);
+    QCOMPARE(rect.right(), expectedTileXEast);
+    QCOMPARE(rect.bottom(), expectedTileYSouth);
 }
 
 
@@ -359,19 +354,14 @@ void TileProjectionTest::testTileIndexesMercator()
 
     GeoDataLatLonBox latLonBox(northLat, southLat, eastLon, westLon);
 
-    GeoSceneMercatorTileProjection projection;
+    const GeoSceneMercatorTileProjection projection;
 
-    int tileXWest;
-    int tileYNorth;
-    int tileXEast;
-    int tileYSouth;
+    const QRect rect = projection.tileIndexes(latLonBox, zoomLevel);
 
-    projection.tileIndexes(latLonBox, zoomLevel, tileXWest, tileYNorth, tileXEast, tileYSouth);
-
-    QCOMPARE(tileXWest, expectedTileXWest);
-    QCOMPARE(tileYNorth, expectedTileYNorth);
-    QCOMPARE(tileXEast, expectedTileXEast);
-    QCOMPARE(tileYSouth, expectedTileYSouth);
+    QCOMPARE(rect.left(), expectedTileXWest);
+    QCOMPARE(rect.top(), expectedTileYNorth);
+    QCOMPARE(rect.right(), expectedTileXEast);
+    QCOMPARE(rect.bottom(), expectedTileYSouth);
 }
 
 
@@ -433,9 +423,7 @@ void TileProjectionTest::testGeoCoordinatesEquirect()
     QCOMPARE(northernTileEdgeLat, expectedNorthernTileEdgeLat);
 
     // method variants with GeoDataLatLonBox
-    GeoDataLatLonBox latLonBox;
-
-    projection.geoCoordinates(zoomLevel, tileX, tileY, latLonBox);
+    const GeoDataLatLonBox latLonBox = projection.geoCoordinates(zoomLevel, tileX, tileY);
 
     QCOMPARE(latLonBox.west(), expectedWesternTileEdgeLon);
     QCOMPARE(latLonBox.north(), expectedNorthernTileEdgeLat);
@@ -443,9 +431,7 @@ void TileProjectionTest::testGeoCoordinatesEquirect()
     QCOMPARE(latLonBox.south(), expectedSouthernTileEdgeLat);
 
     TileId tileId(QStringLiteral("testmap"), zoomLevel, tileX, tileY);
-    GeoDataLatLonBox latLonBox2;
-
-    projection.geoCoordinates(tileId, latLonBox2);
+    const GeoDataLatLonBox latLonBox2 = projection.geoCoordinates(tileId);
 
     QCOMPARE(latLonBox2.west(), expectedWesternTileEdgeLon);
     QCOMPARE(latLonBox2.north(), expectedNorthernTileEdgeLat);
@@ -513,9 +499,7 @@ void TileProjectionTest::testGeoCoordinatesMercator()
     QFUZZYCOMPARE(northernTileEdgeLat, expectedNorthernTileEdgeLat, 0.00001);
 
     // method variants with GeoDataLatLonBox
-    GeoDataLatLonBox latLonBox;
-
-    projection.geoCoordinates(zoomLevel, tileX, tileY, latLonBox);
+    const GeoDataLatLonBox latLonBox = projection.geoCoordinates(zoomLevel, tileX, tileY);
 
     QCOMPARE(latLonBox.west(), expectedWesternTileEdgeLon);
     QFUZZYCOMPARE(latLonBox.north(), expectedNorthernTileEdgeLat, 0.00001);
@@ -523,9 +507,7 @@ void TileProjectionTest::testGeoCoordinatesMercator()
     QFUZZYCOMPARE(latLonBox.south(), expectedSouthernTileEdgeLat, 0.00001);
 
     TileId tileId(QStringLiteral("testmap"), zoomLevel, tileX, tileY);
-    GeoDataLatLonBox latLonBox2;
-
-    projection.geoCoordinates(tileId, latLonBox2);
+    const GeoDataLatLonBox latLonBox2 = projection.geoCoordinates(tileId);
 
     QCOMPARE(latLonBox2.west(), expectedWesternTileEdgeLon);
     QFUZZYCOMPARE(latLonBox2.north(), expectedNorthernTileEdgeLat, 0.00001);

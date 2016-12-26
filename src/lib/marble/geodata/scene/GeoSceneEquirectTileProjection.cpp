@@ -114,18 +114,19 @@ unsigned int northBoundTileYFromLat(qreal lat, unsigned int tileCount)
 }
 
 
-void GeoSceneEquirectTileProjection::tileIndexes(const GeoDataLatLonBox& latLonBox, int zoomLevel,
-                                                 int& westX, int& northY, int& eastX, int& southY) const
+QRect GeoSceneEquirectTileProjection::tileIndexes(const GeoDataLatLonBox &latLonBox, int zoomLevel) const
 {
     const unsigned int xTileCount = (1 << zoomLevel) * levelZeroColumns();
 
-    westX =   eastBoundTileXFromLon(latLonBox.west(),  xTileCount);
-    eastX =   westBoundTileXFromLon(latLonBox.east(),  xTileCount);
+    const int westX =   eastBoundTileXFromLon(latLonBox.west(),  xTileCount);
+    const int eastX =   westBoundTileXFromLon(latLonBox.east(),  xTileCount);
 
     const unsigned int yTileCount = (1 << zoomLevel) * levelZeroRows();
 
-    northY = southBoundTileYFromLat(latLonBox.north(), yTileCount);
-    southY = northBoundTileYFromLat(latLonBox.south(), yTileCount);
+    const int northY = southBoundTileYFromLat(latLonBox.north(), yTileCount);
+    const int southY = northBoundTileYFromLat(latLonBox.south(), yTileCount);
+
+    return QRect(QPoint(westX, northY), QPoint(eastX, southY));
 }
 
 void GeoSceneEquirectTileProjection::geoCoordinates(int zoomLevel,
@@ -139,23 +140,6 @@ void GeoSceneEquirectTileProjection::geoCoordinates(int zoomLevel,
     radius = (1 << zoomLevel) * levelZeroRows() / 2.0;
 
     northernTileEdgeLat = (radius - y) / radius *  M_PI / 2.0;
-}
-
-void GeoSceneEquirectTileProjection::geoCoordinates(int zoomLevel,
-                                                    int x, int y,
-                                                    GeoDataLatLonBox& latLonBox) const
-{
-    qreal radius = (1 << zoomLevel) * levelZeroColumns() / 2.0;
-
-    qreal lonLeft   = (x - radius ) / radius * M_PI;
-    qreal lonRight  = (x - radius + 1 ) / radius * M_PI;
-
-    radius = (1 << zoomLevel) * levelZeroRows() / 2.0;
-
-    qreal latTop = (radius - y) / radius *  M_PI / 2.0;
-    qreal latBottom = (radius - y - 1) / radius *  M_PI / 2.0;
-
-    latLonBox.setBoundaries(latTop, latBottom, lonRight, lonLeft);
 }
 
 }

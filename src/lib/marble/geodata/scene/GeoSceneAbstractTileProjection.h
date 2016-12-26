@@ -23,8 +23,8 @@
 #define MARBLE_GEOSCENEABSTRACTTILEPROJECTION_H
 
 #include "geodata_export.h"
-#include <TileId.h>
 
+#include <QRect>
 #include <QScopedPointer>
 
 namespace Marble
@@ -33,6 +33,7 @@ namespace Marble
 class GeoSceneAbstractTileProjectionPrivate;
 
 class GeoDataLatLonBox;
+class TileId;
 
 /**
  * @short A base class for projections between tile indizes and geo coordinates in Marble.
@@ -87,13 +88,10 @@ public:
      *
      * @param latLonBox the geo coordinates of the requested tiles
      * @param zoomLevel the zoomlevel of the requested tiles
-     * @param westX     the x index of the tiles covering the western boundary is returned through this parameter
-     * @param northY    the y index of the tiles covering the northern boundary is returned through this parameter
-     * @param eastX     the x index of the tiles covering the eastern boundary is returned through this parameter
-     * @param southY    the y index of the tiles covering the southern boundary is returned through this parameter
+     *
+     * @return range of tile indexes covering given geographical box at given zoom level
      */
-     virtual void tileIndexes(const GeoDataLatLonBox& latLonBox, int zoomLevel,
-                              int& westX, int& northY, int& eastX, int& southY) const = 0;
+     virtual QRect tileIndexes(const GeoDataLatLonBox &latLonBox, int zoomLevel) const = 0;
 
     /**
      * @brief Get the north-west geo coordinates corresponding to a tile.
@@ -116,24 +114,20 @@ public:
      * @param zoomLevel the zoomlevel of the tile
      * @param x         the x index of the tile
      * @param y         the y index of the tile
-     * @param latLonBox the boundary geo coordinates are set to this GeoDataLatLonBox
+     *
+     * @return geographic bounding box covered by the given tile
      */
-    virtual void geoCoordinates(int zoomLevel,
-                                int x, int y,
-                                GeoDataLatLonBox& latLonBox) const = 0;
+    GeoDataLatLonBox geoCoordinates(int zoomLevel, int x, int y) const;
 
     /**
      * @brief Get the boundary geo coordinates corresponding to a tile.
      * If @p tildId  has values out-of-bounds, the behaviour is undefined.
      *
      * @param tileId    the id of the tile
-     * @param latLonBox the boundary geo coordinates are set to this GeoDataLatLonBox
+     *
+     * @return geographic bounding box covered by the given tile
      */
-    void geoCoordinates(const TileId& tileId,
-                        GeoDataLatLonBox& latLonBox) const
-    {
-        geoCoordinates(tileId.zoomLevel(), tileId.x(), tileId.y(), latLonBox);
-    }
+    GeoDataLatLonBox geoCoordinates(const TileId &tileId) const;
 
  private:
      Q_DISABLE_COPY(GeoSceneAbstractTileProjection)

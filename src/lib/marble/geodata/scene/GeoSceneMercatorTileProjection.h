@@ -61,8 +61,7 @@ public:
     /**
      * @copydoc
      */
-    void tileIndexes(const GeoDataLatLonBox& latLonBox, int zoomLevel,
-                     int& westX, int& northY, int& eastX, int& southY) const override;
+    QRect tileIndexes(const GeoDataLatLonBox &latLonBox, int zoomLevel) const override;
 
     /**
      * @copydoc
@@ -70,13 +69,6 @@ public:
     void geoCoordinates(int zoomLevel,
                         int x, int y,
                         qreal& westernTileEdgeLon, qreal& northernTileEdgeLat) const override;
-
-    /**
-     * @copydoc
-     */
-    void geoCoordinates(int zoomLevel,
-                        int x, int y,
-                        GeoDataLatLonBox& latLonBox) const override;
 
     using GeoSceneAbstractTileProjection::geoCoordinates;
 

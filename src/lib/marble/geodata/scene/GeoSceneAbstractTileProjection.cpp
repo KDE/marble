@@ -21,6 +21,9 @@
 
 #include "GeoSceneAbstractTileProjection.h"
 
+#include "GeoDataLatLonBox.h"
+#include <TileId.h>
+
 namespace Marble
 {
 
@@ -67,6 +70,21 @@ int GeoSceneAbstractTileProjection::levelZeroRows() const
 void GeoSceneAbstractTileProjection::setLevelZeroRows(int levelZeroRows)
 {
     d_ptr->levelZeroRows = levelZeroRows;
+}
+
+GeoDataLatLonBox GeoSceneAbstractTileProjection::geoCoordinates(int zoomLevel, int x, int y) const
+{
+    qreal west, north, east, south;
+
+    geoCoordinates(zoomLevel, x, y, west, north);
+    geoCoordinates(zoomLevel, x + 1, y + 1, east, south);
+
+    return GeoDataLatLonBox(north, south, east, west);
+}
+
+GeoDataLatLonBox GeoSceneAbstractTileProjection::geoCoordinates(const TileId &tileId) const
+{
+    return geoCoordinates(tileId.zoomLevel(), tileId.x(), tileId.y());
 }
 
 }

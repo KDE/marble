@@ -247,8 +247,7 @@ QVector<GeoDataPlacemark *> VectorClipper::potentialIntersections(const GeoDataL
 
 GeoDataDocument *VectorClipper::clipTo(unsigned int zoomLevel, unsigned int tileX, unsigned int tileY)
 {
-    GeoDataLatLonBox tileBoundary;
-    m_tileProjection.geoCoordinates(zoomLevel, tileX, tileY, tileBoundary);
+    const GeoDataLatLonBox tileBoundary = m_tileProjection.geoCoordinates(zoomLevel, tileX, tileY);
 
     GeoDataDocument *tile = clipTo(tileBoundary, zoomLevel);
     QString tileName = QString("%1/%2/%3").arg(zoomLevel).arg(tileX).arg(tileY);

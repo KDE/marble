@@ -326,11 +326,10 @@ void TileDirectory::createTiles() const
 
 void TileDirectory::createOsmTiles() const
 {
-    int westX, northY, eastX, southY;
-    GeoSceneMercatorTileProjection tileProjection;
-    tileProjection.tileIndexes(m_boundingBox, m_zoomLevel, westX, northY, eastX, southY);
+    const GeoSceneMercatorTileProjection tileProjection;
+    const QRect rect = tileProjection.tileIndexes(m_boundingBox, m_zoomLevel);
     TileCoordsPyramid pyramid(0, m_zoomLevel);
-    pyramid.setBottomLevelCoords(QRect(QPoint(westX, northY), QPoint(eastX, southY)));
+    pyramid.setBottomLevelCoords(rect);
 
     qint64 const maxCount = pyramid.tilesCount();
     QMap<int,QVector<TileId> > tileLevels;
@@ -376,8 +375,7 @@ void TileDirectory::createOsmTiles() const
                 QDir().mkpath(QFileInfo(outputFile).absolutePath());
                 QString const output = QString("-o=%1").arg(outputFile);
 
-                GeoDataLatLonBox tileBoundary;
-                m_tileProjection.geoCoordinates(tileId.zoomLevel(), tileId.x(), tileId.y(), tileBoundary);
+                const GeoDataLatLonBox tileBoundary = m_tileProjection.geoCoordinates(tileId.zoomLevel(), tileId.x(), tileId.y());
 
                 double const minLon = tileBoundary.west(GeoDataCoordinates::Degree);
                 double const maxLon = tileBoundary.east(GeoDataCoordinates::Degree);
@@ -411,8 +409,7 @@ void TileDirectory::createOsmTiles() const
 
 int TileDirectory::innerNodes(const TileId &tile) const
 {
-    GeoDataLatLonBox tileBoundary;
-    m_tileProjection.geoCoordinates(tile.zoomLevel(), tile.x(), tile.y(), tileBoundary);
+    const GeoDataLatLonBox tileBoundary = m_tileProjection.geoCoordinates(tile.zoomLevel(), tile.x(), tile.y());
 
     double const west = tileBoundary.west();
     double const east = tileBoundary.east();

@@ -29,9 +29,8 @@ NodeReducer::NodeReducer(GeoDataDocument* document, const TileId &tileId) :
     m_remainingNodes(0),
     m_zoomLevel(tileId.zoomLevel())
 {
-    GeoSceneMercatorTileProjection tileProjection;
-    GeoDataLatLonBox tileBoundary;
-    tileProjection.geoCoordinates(m_zoomLevel, tileId.x(), tileId.y(), tileBoundary);
+    const GeoSceneMercatorTileProjection tileProjection;
+    GeoDataLatLonBox tileBoundary = tileProjection.geoCoordinates(m_zoomLevel, tileId.x(), tileId.y());
     tileBoundary.scale(1.0-1e-4, 1.0-1e-4);
     tileBoundary.boundaries(m_tileBoundary[North], m_tileBoundary[South], m_tileBoundary[East], m_tileBoundary[West]);
 

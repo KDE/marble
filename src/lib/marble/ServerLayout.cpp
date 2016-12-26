@@ -95,8 +95,7 @@ CustomServerLayout::CustomServerLayout( GeoSceneTileDataset *texture )
 
 QUrl CustomServerLayout::downloadUrl( const QUrl &prototypeUrl, const TileId &id ) const
 {
-    GeoDataLatLonBox bbox;
-    m_textureLayer->tileProjection()->geoCoordinates(id, bbox);
+    const GeoDataLatLonBox bbox = m_textureLayer->tileProjection()->geoCoordinates(id);
 
     QString urlStr = prototypeUrl.toString( QUrl::DecodeReserved );
 
@@ -124,8 +123,7 @@ WmsServerLayout::WmsServerLayout( GeoSceneTileDataset *texture )
 
 QUrl WmsServerLayout::downloadUrl( const QUrl &prototypeUrl, const Marble::TileId &tileId ) const
 {
-    GeoDataLatLonBox box;
-    m_textureLayer->tileProjection()->geoCoordinates(tileId, box);
+    const GeoDataLatLonBox box = m_textureLayer->tileProjection()->geoCoordinates(tileId);
 
     QUrlQuery url(prototypeUrl.query());
     url.addQueryItem( "service", "WMS" );

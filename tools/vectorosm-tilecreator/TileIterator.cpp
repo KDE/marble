@@ -45,14 +45,9 @@ TileIterator::const_iterator &TileIterator::operator++()
 
 TileIterator::TileIterator(const GeoDataLatLonBox &latLonBox, int zoomLevel)
 {
-    int westX, northY, eastX, southY;
-    GeoSceneMercatorTileProjection tileProjection;
-    tileProjection.tileIndexes(latLonBox, zoomLevel, westX, northY, eastX, southY);
+    const GeoSceneMercatorTileProjection tileProjection;
 
-    m_bounds.setLeft(westX);
-    m_bounds.setTop(northY);
-    m_bounds.setRight(eastX);
-    m_bounds.setBottom(southY);
+    m_bounds = tileProjection.tileIndexes(latLonBox, zoomLevel);
 }
 
 TileIterator::const_iterator TileIterator::begin() const

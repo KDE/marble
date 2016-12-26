@@ -108,26 +108,22 @@ void VectorTileModel::setViewport(const GeoDataLatLonBox &latLonBox)
     // New tiles X and Y for moved screen coordinates
     // More info: http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#Subtiles
     // More info: http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#C.2FC.2B.2B
-    int westX;
-    int northY;
-    int eastX;
-    int southY;
-    m_layer->tileProjection()->tileIndexes(latLonBox, tileLoadLevel, westX, northY, eastX, southY);
+    const QRect rect = m_layer->tileProjection()->tileIndexes(latLonBox, tileLoadLevel);
 
     // Download tiles and send them to VectorTileLayer
     // When changing zoom, download everything inside the screen
     // TODO: hardcodes assumption about tiles indexing also ends at dateline
     // TODO: what about crossing things in y direction?
     if (!latLonBox.crossesDateLine()) {
-        queryTiles(tileLoadLevel, westX, northY, eastX, southY);
+        queryTiles(tileLoadLevel, rect);
     }
     // When only moving screen, just download the new tiles
     else {
         // TODO: maxTileX (calculation knowledge) should be a property of tileProjection or m_layer
         const int maxTileX = (1 << tileLoadLevel) * m_layer->levelZeroColumns() - 1;
 
-        queryTiles(tileLoadLevel, 0, northY, eastX, southY);
-        queryTiles(tileLoadLevel, westX, northY, maxTileX, southY);
+        queryTiles(tileLoadLevel, QRect(QPoint(0, rect.top()), rect.bottomRight()));
+        queryTiles(tileLoadLevel, QRect(rect.topLeft(), QPoint(maxTileX, rect.bottom())));
     }
     removeTilesOutOfView(latLonBox);
 }
@@ -194,8 +190,7 @@ void VectorTileModel::updateTile(const TileId &idWithMapThemeHash, GeoDataDocume
         m_deleteDocumentsLater = false;
         m_documents.clear();
     }
-    GeoDataLatLonBox boundingBox;
-    m_layer->tileProjection()->geoCoordinates(id, boundingBox);
+    const GeoDataLatLonBox boundingBox = m_layer->tileProjection()->geoCoordinates(id);
     m_documents[id] = QSharedPointer<CacheDocument>(new CacheDocument(document, this, boundingBox));
     emit tileAdded(document);
 }
@@ -205,11 +200,11 @@ void VectorTileModel::clear()
     m_documents.clear();
 }
 
-void VectorTileModel::queryTiles(int tileZoomLevel, int minTileX, int minTileY, int maxTileX, int maxTileY)
+void VectorTileModel::queryTiles(int tileZoomLevel, const QRect &rect)
 {
     // Download all the tiles inside the given indexes
-    for (int x = minTileX; x <= maxTileX; ++x) {
-        for (int y = minTileY; y <= maxTileY; ++y) {
+    for (int x = rect.left(); x <= rect.right(); ++x) {
+        for (int y = rect.top(); y <= rect.bottom(); ++y) {
             const TileId tileId = TileId(0, tileZoomLevel, x, y);
             if (!m_documents.contains(tileId) && !m_pendingDocuments.contains(tileId)) {
                 m_pendingDocuments << tileId;

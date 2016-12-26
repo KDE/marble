@@ -216,8 +216,7 @@ void MergedLayerDecorator::Private::renderGroundOverlays( QImage *tileImage, con
     /* All tiles are covering the same area. Pick one. */
     const TileId tileId = tiles.first()->id();
 
-    GeoDataLatLonBox tileLatLonBox;
-    findRelevantTextureLayers(tileId).first()->tileProjection()->geoCoordinates(tileId, tileLatLonBox);
+    const GeoDataLatLonBox tileLatLonBox = findRelevantTextureLayers(tileId).first()->tileProjection()->geoCoordinates(tileId);
 
     /* Map the ground overlay to the image. */
     for ( int i =  0; i < m_groundOverlays.size(); ++i ) {
@@ -588,8 +587,7 @@ QVector<const GeoSceneTextureTileDataset *> MergedLayerDecorator::Private::findR
                 result.append(candidate);
             }
             else {
-                GeoDataLatLonBox bbox;
-                candidate->tileProjection()->geoCoordinates(stackedTileId, bbox);
+                const GeoDataLatLonBox bbox = candidate->tileProjection()->geoCoordinates(stackedTileId);
 
                 if (candidate->latLonBox().intersects(bbox)) {
                     result.append( candidate );

@@ -82,7 +82,7 @@ private Q_SLOTS:
 
 private:
     void removeTilesOutOfView(const GeoDataLatLonBox &boundingBox);
-    void queryTiles(int tileZoomLevel, int minX, int minY, int maxX, int maxY );
+    void queryTiles(int tileZoomLevel, const QRect &rect);
 
 private:
     struct CacheDocument
