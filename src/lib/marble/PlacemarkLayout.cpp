@@ -367,7 +367,7 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParam
     }
 
     QList<const GeoDataPlacemark*> placemarkList;
-    auto currentMaxLabelHeight = m_maxLabelHeight;
+    int currentMaxLabelHeight;
     do {
         currentMaxLabelHeight = m_maxLabelHeight;
         const int secnumber = viewport->height() / m_maxLabelHeight + 1;
