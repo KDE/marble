@@ -26,7 +26,6 @@
 #include <QString>
 #include <QElapsedTimer>
 #include <QSharedPointer>
-#include <QFileInfo>
 #include <QUrl>
 #include <QBuffer>
 

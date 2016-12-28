@@ -26,7 +26,6 @@
 #include "GeoDataPolyStyle.h"
 #include "GeoDataLineStyle.h"
 #include "GeoDataPolygon.h"
-#include "GeoDataStyle.h"
 #include "GeoDataTypes.h"
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"

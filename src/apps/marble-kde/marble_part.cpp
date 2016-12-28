@@ -228,7 +228,7 @@ bool MarblePart::openUrl( const QUrl &url )
     }
 
     KMessageBox::error( widget(),
-        i18n( "Sorry, unable to open '%1'. The file is not accessible." ).arg( fileInfo.fileName() ),
+        i18n( "Sorry, unable to open '%1'. The file is not accessible.", fileInfo.fileName() ),
         i18n( "File not accessible" ) );
     return false;
 }

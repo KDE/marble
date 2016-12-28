@@ -36,7 +36,7 @@ static bool loadTranslator(const QString &fullPath, QApplication &app)
 static bool loadTranslation(const QString &localeDirName, QApplication &app)
 {
     // TODO: check if any translations for Qt modules have to be loaded,
-    // as they need to be explicitely loaded as well by the Qt-using app
+    // as they need to be explicitly loaded as well by the Qt-using app
 
 #ifdef Q_OS_ANDROID
     // load translation file from bundled packaging installation
