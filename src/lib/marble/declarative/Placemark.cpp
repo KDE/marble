@@ -367,6 +367,8 @@ QString Placemark::description() const
             addTagDescription(m_description, QStringLiteral("social_facility:for"), QStringLiteral("underprivileged"), tr("For poor or disadvantaged people"));
             addTagDescription(m_description, QStringLiteral("social_facility:for"), QStringLiteral("unemployed"), tr("For unemployed"));
             addTagDescription(m_description, QStringLiteral("social_facility:for"), QStringLiteral("victim"), tr("For victims of crimes"));
+        } else if (category == GeoDataPlacemark::HistoricMemorial) {
+            addTagValue(m_description, QStringLiteral("inscription"), tr("Inscription: %1"));
         }
 
         if (category == GeoDataPlacemark::TransportBicycleParking || category == GeoDataPlacemark::TransportMotorcycleParking) {
