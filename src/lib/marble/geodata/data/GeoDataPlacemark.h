@@ -458,6 +458,11 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
         WaterwayWeir,
         WaterwayStream, // please keep order (used in for loops)
 
+        CrossingSignals, // pedestrian vs highway crossing with traffic signals
+        CrossingIsland, // pedestrian vs highway crossing with a traffic island
+        CrossingZebra, // pedestrian vs highway zebra crossing
+        CrossingRailway, // pedestrian or highway vs railway crossing
+
         //Admin level tags for depicting boundary
         AdminLevel1, // please keep order (used in for loops)
         AdminLevel2,

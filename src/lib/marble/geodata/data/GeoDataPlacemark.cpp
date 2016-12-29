@@ -680,6 +680,10 @@ QString GeoDataPlacemark::categoryName() const
     case WaterwayStream: return GeoDataPlacemarkPrivate::tr("Stream");
     case WaterwayRiver: return GeoDataPlacemarkPrivate::tr("River");
     case WaterwayWeir: return GeoDataPlacemarkPrivate::tr("Weir");
+    case CrossingSignals: return GeoDataPlacemarkPrivate::tr("Crosswalk");
+    case CrossingIsland: return GeoDataPlacemarkPrivate::tr("Crosswalk");
+    case CrossingZebra: return GeoDataPlacemarkPrivate::tr("Crosswalk");
+    case CrossingRailway: return GeoDataPlacemarkPrivate::tr("Railway Crossing");
 
     case Default:
     case Unknown:

@@ -668,6 +668,15 @@ void StyleBuilder::Private::initializeDefaultStyles()
                                                                             Qt::SolidPattern, Qt::DotLine, Qt::RoundCap, true, QVector< qreal >(),
                                                                             osmFont, waterColor.darker(150));
 
+    m_defaultStyle[GeoDataPlacemark::CrossingIsland]          = createOsmPOIStyle(osmFont, "transportation/zebra_crossing", transportationColor);
+    m_defaultStyle[GeoDataPlacemark::CrossingIsland]->iconStyle().setScale(0.75);
+    m_defaultStyle[GeoDataPlacemark::CrossingRailway]         = createOsmPOIStyle(osmFont, "transportation/railway_crossing", transportationColor);
+    m_defaultStyle[GeoDataPlacemark::CrossingRailway]->iconStyle().setScale(0.5);
+    m_defaultStyle[GeoDataPlacemark::CrossingSignals]         = createOsmPOIStyle(osmFont, "transportation/traffic_light_crossing", transportationColor);
+    m_defaultStyle[GeoDataPlacemark::CrossingSignals]->iconStyle().setScale(0.75);
+    m_defaultStyle[GeoDataPlacemark::CrossingZebra]           = createOsmPOIStyle(osmFont, "transportation/zebra_crossing", transportationColor);
+    m_defaultStyle[GeoDataPlacemark::CrossingZebra]->iconStyle().setScale(0.75);
+
     m_defaultStyle[GeoDataPlacemark::NaturalReef]              = createStyle(5.5, 0, "#36677c", "#36677c", true, false,
                                                                                                    Qt::Dense7Pattern, Qt::DotLine, Qt::RoundCap, false, QVector< qreal >(),
                                                                                                    osmFont, waterColor.darker(150));
@@ -1424,6 +1433,11 @@ void StyleBuilder::Private::initializeMinimumZoomLevels()
     s_defaultMinZoomLevels[GeoDataPlacemark::WaterwayRiver] = 3;
     s_defaultMinZoomLevels[GeoDataPlacemark::WaterwayWeir] = 17;
 
+    s_defaultMinZoomLevels[GeoDataPlacemark::CrossingIsland] = 18;
+    s_defaultMinZoomLevels[GeoDataPlacemark::CrossingRailway] = 18;
+    s_defaultMinZoomLevels[GeoDataPlacemark::CrossingSignals] = 18;
+    s_defaultMinZoomLevels[GeoDataPlacemark::CrossingZebra] = 18;
+
     for ( int i = GeoDataPlacemark::PlaceCity; i < GeoDataPlacemark::LastIndex; i++ ) {
         if (s_defaultMinZoomLevels[i] < 0) {
             qDebug() << "Missing default min zoom level for GeoDataPlacemark::GeoDataVisualCategory " << i;
@@ -2119,7 +2133,12 @@ qint64 StyleBuilder::popularity(const GeoDataPlacemark *placemark)
         popularities << GeoDataPlacemark::LeisureTrack;
         popularities << GeoDataPlacemark::LeisureSwimmingPool;
 
+        popularities << GeoDataPlacemark::CrossingIsland;
+        popularities << GeoDataPlacemark::CrossingRailway;
+        popularities << GeoDataPlacemark::CrossingSignals;
+        popularities << GeoDataPlacemark::CrossingZebra;
         popularities << GeoDataPlacemark::HighwayTrafficSignals;
+
         popularities << GeoDataPlacemark::BarrierGate;
         popularities << GeoDataPlacemark::BarrierLiftGate;
         popularities << GeoDataPlacemark::AmenityBench;
@@ -2468,6 +2487,10 @@ QString StyleBuilder::visualCategoryName(GeoDataPlacemark::GeoDataVisualCategory
         visualCategoryNames[GeoDataPlacemark::WaterwayStream] = "WaterwayStream";
         visualCategoryNames[GeoDataPlacemark::WaterwayRiver] = "WaterwayRiver";
         visualCategoryNames[GeoDataPlacemark::WaterwayWeir] = "WaterwayWeir";
+        visualCategoryNames[GeoDataPlacemark::CrossingIsland] = "CrossingIsland";
+        visualCategoryNames[GeoDataPlacemark::CrossingRailway] = "CrossingRailway";
+        visualCategoryNames[GeoDataPlacemark::CrossingSignals] = "CrossingSignals";
+        visualCategoryNames[GeoDataPlacemark::CrossingZebra] = "CrossingZebra";
         visualCategoryNames[GeoDataPlacemark::LastIndex] = "LastIndex";
     }
 
@@ -2602,6 +2625,29 @@ GeoDataPlacemark::GeoDataVisualCategory StyleBuilder::determineVisualCategory(co
 
     if( osmData.containsTag(QStringLiteral("natural"), QStringLiteral("glacier")) && osmData.containsTag(QStringLiteral("glacier:type"), QStringLiteral("shelf")) ){
         return GeoDataPlacemark::NaturalIceShelf;
+    }
+
+    if (osmData.containsTag(QStringLiteral("highway"), QStringLiteral("crossing"))) {
+        QStringList const crossings = osmData.tagValue(QStringLiteral("crossing")).split(';');
+        QString const crossingRef = osmData.tagValue(QStringLiteral("crossing_ref"));
+        if (crossingRef == QStringLiteral("zebra") ||
+                crossingRef == QStringLiteral("tiger") ||
+                crossings.contains(QStringLiteral("zebra")) ||
+                crossings.contains(QStringLiteral("tiger"))) {
+            return GeoDataPlacemark::CrossingZebra;
+        } else if (crossingRef == QStringLiteral("toucan") ||
+                   crossingRef == QStringLiteral("pelican") ||
+                   crossings.contains(QStringLiteral("traffic_signals")) ||
+                   crossings.contains(QStringLiteral("toucan")) ||
+                   crossings.contains(QStringLiteral("pelican"))) {
+            return GeoDataPlacemark::CrossingSignals;
+        } else if (crossings.contains(QStringLiteral("island"))) {
+            return GeoDataPlacemark::CrossingIsland;
+        }
+    }
+    if (osmData.containsTag(QStringLiteral("railway"), QStringLiteral("crossing")) ||
+            osmData.containsTag(QStringLiteral("railway"), QStringLiteral("level_crossing"))) {
+        return GeoDataPlacemark::CrossingRailway;
     }
 
     Private::initializeOsmVisualCategories();
