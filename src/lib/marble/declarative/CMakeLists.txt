@@ -13,9 +13,6 @@ INCLUDE_DIRECTORIES(
 add_library( marbledeclarative SHARED
     Bookmarks.cpp
     Coordinate.cpp
-    DeclarativeDataPluginModel.cpp
-    DeclarativeDataPlugin.cpp
-    DeclarativeDataPluginItem.cpp
     DeclarativeMapThemeManager.cpp
     MapThemeModel.cpp
     MarbleDeclarativeObject.cpp

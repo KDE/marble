@@ -30,7 +30,6 @@
 #include "AbstractFloatItem.h"
 #include "RenderPlugin.h"
 #include "MarblePlacemarkModel.h"
-#include "DeclarativeDataPlugin.h"
 #include "SearchBackend.h"
 #include "MarbleQuickItem.h"
 
@@ -58,7 +57,6 @@ void MarbleDeclarativePlugin::registerTypes( const char *uri )
     qmlRegisterType<Marble::NewstuffModel>( uri, 0, 20, "NewstuffModel" );
     qmlRegisterType<OfflineDataModel>( uri, 0, 20, "OfflineDataModel" );
     qmlRegisterType<MapThemeModel>( uri, 0, 20, "MapThemeModel" );
-    qmlRegisterType<DeclarativeDataPlugin>( uri, 0, 20, "DataLayer" );
 
     qmlRegisterType<Marble::SearchBackend>(uri, 0, 20, "SearchBackend");
     qRegisterMetaType<Marble::MarblePlacemarkModel*>("MarblePlacemarkModel*");
