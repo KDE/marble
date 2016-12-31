@@ -41,18 +41,17 @@ class MARBLE_EXPORT BatchedPlacemarkRenderer
 
     Q_DECLARE_FLAGS(Frames, Frame)
 
-    BatchedPlacemarkRenderer(GeoPainter * painter);
+    BatchedPlacemarkRenderer();
     ~BatchedPlacemarkRenderer();
 
     void addTextFragment( const QPoint& targetPosition, const QString& text,
                           const qreal fontSize, const QColor& color,
                           const QFlags<BatchedPlacemarkRenderer::Frames> & flags );
     void clearTextFragments();
-    void drawTextFragments();
+    void drawTextFragments(GeoPainter *painter);
 
 private:
     QVector<TextFragment> m_textFragments;
-    GeoPainter * m_painter;
 };
 
 struct TextFragment

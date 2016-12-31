@@ -16,8 +16,8 @@
 namespace Marble
 {
 
-BatchedPlacemarkRenderer:: BatchedPlacemarkRenderer(GeoPainter * painter)
-    : m_painter(painter)
+BatchedPlacemarkRenderer:: BatchedPlacemarkRenderer() :
+    m_textFragments()
 {
     // nothing to do
 }
@@ -44,7 +44,7 @@ void BatchedPlacemarkRenderer::clearTextFragments()
     m_textFragments.clear();
 }
 
-void BatchedPlacemarkRenderer::drawTextFragments()
+void BatchedPlacemarkRenderer::drawTextFragments(GeoPainter *painter)
 {
     QPixmap pixmap(10,10);
     QPainter textPainter;
@@ -92,7 +92,7 @@ void BatchedPlacemarkRenderer::drawTextFragments()
             textPainter.end();
             QPixmapCache::insert(key, pixmap);
         }
-         m_painter->drawPixmap(m_textFragments[i].position.x() - pixmap.width()/2,
+        painter->drawPixmap(m_textFragments[i].position.x() - pixmap.width()/2,
                               m_textFragments[i].position.y() - pixmap.height()/2,
                               pixmap);
     }

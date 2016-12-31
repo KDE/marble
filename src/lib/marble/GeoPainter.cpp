@@ -37,7 +37,7 @@ GeoPainterPrivate::GeoPainterPrivate( GeoPainter* q, const ViewportParams *viewp
         : m_viewport( viewport ),
         m_mapQuality( mapQuality ),
         m_x( new qreal[100] ),
-        m_batchedPlacemarkRenderer(q),
+        m_batchedPlacemarkRenderer(),
         m_parent(q)
 {
 }
@@ -1031,5 +1031,5 @@ void GeoPainter::clearTextFragments()
 
 void GeoPainter::drawTextFragments()
 {
-    d->m_batchedPlacemarkRenderer.drawTextFragments();
+    d->m_batchedPlacemarkRenderer.drawTextFragments(this);
 }
