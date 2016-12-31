@@ -649,6 +649,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::HighwayTrunkLink]         = createHighwayStyle("#f9b29c", "#c84e2f", osmFont, "000000", 9, 6);
     m_defaultStyle[GeoDataPlacemark::HighwayMotorway]          = createHighwayStyle("#e892a2", "#dc2a67", osmFont, "000000", 9, 10);
     m_defaultStyle[GeoDataPlacemark::HighwayMotorwayLink]      = createHighwayStyle("#e892a2", "#dc2a67", osmFont, "000000", 9, 10);
+    m_defaultStyle[GeoDataPlacemark::HighwayCorridor]          = createHighwayStyle("#ffffff", "#bbbbbb", osmFont, "000000", 1, 3);
     m_defaultStyle[GeoDataPlacemark::TransportAirportRunway]   = createHighwayStyle("#bbbbcc", "#bbbbcc", osmFont, "000000", 0, 1, Qt::NoPen);
     m_defaultStyle[GeoDataPlacemark::TransportAirportTaxiway]  = createHighwayStyle("#bbbbcc", "#bbbbcc", osmFont, "000000", 0, 1, Qt::NoPen);
     m_defaultStyle[GeoDataPlacemark::TransportAirportApron]    = createWayStyle("#e9d1ff", Qt::transparent, true, false);
@@ -1037,6 +1038,7 @@ void StyleBuilder::Private::initializeOsmVisualCategories()
     s_visualCategories[OsmTag("highway", "trunk_link")]         = GeoDataPlacemark::HighwayTrunkLink;
     s_visualCategories[OsmTag("highway", "unclassified")]       = GeoDataPlacemark::HighwayUnclassified;
     s_visualCategories[OsmTag("highway", "unknown")]            = GeoDataPlacemark::HighwayUnknown;
+    s_visualCategories[OsmTag("highway", "corridor")]           = GeoDataPlacemark::HighwayCorridor;
 
     s_visualCategories[OsmTag("natural", "bay")]                = GeoDataPlacemark::NaturalWater;
     s_visualCategories[OsmTag("natural", "coastline")]          = GeoDataPlacemark::NaturalWater;
@@ -1274,6 +1276,7 @@ void StyleBuilder::Private::initializeMinimumZoomLevels()
     s_defaultMinZoomLevels[GeoDataPlacemark::HighwayUnknown]      = 16;
     s_defaultMinZoomLevels[GeoDataPlacemark::HighwayUnclassified] = 16;
     s_defaultMinZoomLevels[GeoDataPlacemark::HighwayTrafficSignals]      = 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::HighwayCorridor]     = 18;
 
     s_defaultMinZoomLevels[GeoDataPlacemark::AccomodationCamping] = 16;
     s_defaultMinZoomLevels[GeoDataPlacemark::AccomodationHostel] = 16;
@@ -2257,6 +2260,7 @@ QString StyleBuilder::visualCategoryName(GeoDataPlacemark::GeoDataVisualCategory
         visualCategoryNames[GeoDataPlacemark::HighwayTrunk] = "HighwayTrunk";
         visualCategoryNames[GeoDataPlacemark::HighwayMotorwayLink] = "HighwayMotorwayLink";
         visualCategoryNames[GeoDataPlacemark::HighwayMotorway] = "HighwayMotorway";
+        visualCategoryNames[GeoDataPlacemark::HighwayCorridor] = "HighwayCorridor";
         visualCategoryNames[GeoDataPlacemark::Building] = "Building";
         visualCategoryNames[GeoDataPlacemark::AccomodationCamping] = "AccomodationCamping";
         visualCategoryNames[GeoDataPlacemark::AccomodationHostel] = "AccomodationHostel";

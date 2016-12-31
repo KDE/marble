@@ -189,6 +189,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
         HighwayFootway,
         HighwayTrack,
         HighwayPedestrian,
+        HighwayCorridor,
         HighwayCycleway,
         HighwayService,
         HighwayRoad,
