@@ -31,7 +31,7 @@
 namespace Marble
 {
 
-quint64 AbstractGeoPolygonGraphicsItem::s_previousStyle = -1;
+const void *AbstractGeoPolygonGraphicsItem::s_previousStyle = 0;
 
 AbstractGeoPolygonGraphicsItem::AbstractGeoPolygonGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataPolygon *polygon) :
     GeoGraphicsItem(placemark),
@@ -66,10 +66,10 @@ void AbstractGeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportP
     Q_UNUSED(tileZoomLevel);
 
     bool isValid = true;
-    if (s_previousStyle != reinterpret_cast<quint64>(style().data())) {
+    if (s_previousStyle != style().data()) {
         isValid = configurePainter(painter, viewport);
     }
-    s_previousStyle = reinterpret_cast<quint64>(style().data());
+    s_previousStyle = style().data();
 
     if (!isValid) return;
 

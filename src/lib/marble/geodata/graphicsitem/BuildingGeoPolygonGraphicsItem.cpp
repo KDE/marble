@@ -255,7 +255,7 @@ void BuildingGeoPolygonGraphicsItem::paintRoof(GeoPainter* painter, const Viewpo
     }
 
     bool isValid = true;
-    if (s_previousStyle != reinterpret_cast<quint64>(style().data())) {
+    if (s_previousStyle != style().data()) {
         isValid = configurePainter(painter, viewport);
 
         QFont font = painter->font(); // TODO: better font configuration
@@ -264,7 +264,7 @@ void BuildingGeoPolygonGraphicsItem::paintRoof(GeoPainter* painter, const Viewpo
             painter->setFont(font);
         }
     }
-    s_previousStyle = reinterpret_cast<quint64>(style().data());
+    s_previousStyle = style().data();
 
     if (!isValid) return;
 
@@ -410,10 +410,10 @@ void BuildingGeoPolygonGraphicsItem::paintFrame(GeoPainter *painter, const Viewp
     initializeBuildingPainting(painter, viewport, drawAccurate3D, isCameraAboveBuilding);
 
     bool isValid = true;
-    if (s_previousStyle != reinterpret_cast<quint64>(style().data())) {
+    if (s_previousStyle != style().data()) {
         isValid = configurePainterForFrame(painter);
     }
-    s_previousStyle = reinterpret_cast<quint64>(style().data());
+    s_previousStyle = style().data();
 
     if (!isValid) return;
 
