@@ -44,7 +44,7 @@ void BatchedPlacemarkRenderer::clearTextFragments()
     m_textFragments.clear();
 }
 
-void BatchedPlacemarkRenderer::drawTextFragments(GeoPainter *painter)
+void BatchedPlacemarkRenderer::drawTextFragments(GeoPainter *painter) const
 {
     QPixmap pixmap(10,10);
     QPainter textPainter;

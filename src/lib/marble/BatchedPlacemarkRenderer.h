@@ -48,7 +48,7 @@ class MARBLE_EXPORT BatchedPlacemarkRenderer
                           const qreal fontSize, const QColor& color,
                           const QFlags<BatchedPlacemarkRenderer::Frames> & flags );
     void clearTextFragments();
-    void drawTextFragments(GeoPainter *painter);
+    void drawTextFragments(GeoPainter *painter) const;
 
 private:
     QVector<TextFragment> m_textFragments;
