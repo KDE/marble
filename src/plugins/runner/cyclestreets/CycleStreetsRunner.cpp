@@ -69,7 +69,7 @@ void CycleStreetsRunner::retrieveRoute( const RouteRequest *route )
 
     QHash<QString, QVariant> settings = route->routingProfile().pluginSettings()[QStringLiteral("cyclestreets")];
 
-    QUrl url("http://www.cyclestreets.net/api/journey.xml");
+    QUrl url("https://www.cyclestreets.net/api/journey.xml");
     QMap<QString, QString> queryStrings;
     queryStrings["key"] = "cdccf13997d59e70";
     queryStrings["useDom"] = QLatin1Char('1');
