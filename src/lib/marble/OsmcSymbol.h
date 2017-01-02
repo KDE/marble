@@ -19,11 +19,11 @@
 class OsmcSymbol
 {
 public:
-    OsmcSymbol(const QString &tag, const int side = 20);
+    explicit OsmcSymbol(const QString &tag, int size = 20);
     ~OsmcSymbol();
 
-    QImage icon();
-    QColor wayColor();
+    QImage icon() const;
+    QColor wayColor() const;
 
 private:
     bool parseTag(const QString &tag);
@@ -46,7 +46,7 @@ private:
     QStringList m_foregroundTypes;
     QStringList m_precoloredForegroundTypes;
 
-    int m_side;
+    int const m_side;
     int m_wayWidth;
 };
 
