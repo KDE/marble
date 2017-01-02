@@ -40,7 +40,6 @@ CycleStreetsConfigWidget::CycleStreetsConfigWidget()
     ui_configWidget->plan->addItem( tr( "balanced" ), "balanced" );
     ui_configWidget->plan->addItem( tr( "fastest" ), "fastest" );
     ui_configWidget->plan->addItem( tr( "quietest" ), "quietest" );
-    ui_configWidget->plan->addItem( tr( "shortest" ), "shortest" );
 
     if ( MarbleGlobal::getInstance()->locale()->measurementSystem() == MarbleLocale::MetricSystem ) {
         ui_configWidget->speed->addItem( tr( "slow (16 km/h)" ), "16" );
