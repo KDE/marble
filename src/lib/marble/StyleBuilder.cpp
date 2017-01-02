@@ -15,6 +15,7 @@
 
 #include "MarbleDirs.h"
 #include "OsmPlacemarkData.h"
+#include "OsmcSymbol.h"
 #include "GeoDataTypes.h"
 #include "GeoDataGeometry.h"
 #include "GeoDataPlacemark.h"
@@ -1604,6 +1605,7 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
         GeoDataPolyStyle polyStyle = style->polyStyle();
         GeoDataLineStyle lineStyle = style->lineStyle();
         GeoDataLabelStyle labelStyle = style->labelStyle();
+        GeoDataIconStyle iconStyle = style->iconStyle();
         lineStyle.setCosmeticOutline(true);
 
         bool adjustStyle = false;
@@ -1719,6 +1721,14 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
                 float const width = widthValue.toFloat(&ok);
                 lineStyle.setPhysicalWidth(ok ? qBound(0.1f, width, 200.0f) : 0.0f);
             }
+        } else if (visualCategory == GeoDataPlacemark::RouteHiking && osmData.containsTagKey(QStringLiteral("osmc:symbol"))) {
+            adjustStyle = true;
+
+            QString const osmcSymbolValue = osmData.tagValue(QStringLiteral("osmc:symbol"));
+            OsmcSymbol symbol = OsmcSymbol(osmcSymbolValue);
+
+            lineStyle.setColor(symbol.wayColor());
+            iconStyle.setIcon(symbol.icon());
         }
 
         if (adjustStyle) {
@@ -1726,6 +1736,7 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
             newStyle->setPolyStyle(polyStyle);
             newStyle->setLineStyle(lineStyle);
             newStyle->setLabelStyle(labelStyle);
+            newStyle->setIconStyle(iconStyle);
             style = newStyle;
             if (cacheSpecialStyle) {
                 d->m_specialStyleCache.insert(specialStyleCacheKey, newStyle);

@@ -272,6 +272,8 @@ set(marblewidget_SRCS
     NewstuffModel.cpp
     MarbleZip.cpp
 
+    OsmcSymbol.cpp
+
     StyleBuilder.cpp
     BatchedPlacemarkRenderer.cpp
     
@@ -617,6 +619,8 @@ install( FILES
     routing/RoutingManager.h
     routing/RoutingModel.h
     routing/RoutingProfile.h
+
+    OsmcSymbol.h
 
     BatchedPlacemarkRenderer.h
 

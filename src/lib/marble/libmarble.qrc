@@ -104,4 +104,38 @@
         <file alias="files/bootstrap.min.css">htmlfeatures/bootstrap.min.css</file>
         <file alias="includes/bootstrap.inc">htmlfeatures/bootstrap.inc</file>
     </qresource>
+    <qresource prefix="/osmc-symbols">
+        <file alias="dot.svg">../../../data/svg/osmc-symbols/dot.svg</file>
+        <file alias="bowl.svg">../../../data/svg/osmc-symbols/bowl.svg</file>
+        <file alias="circle.svg">../../../data/svg/osmc-symbols/circle.svg</file>
+        <file alias="bar.svg">../../../data/svg/osmc-symbols/bar.svg</file>
+        <file alias="stripe.svg">../../../data/svg/osmc-symbols/stripe.svg</file>
+        <file alias="x.svg">../../../data/svg/osmc-symbols/x.svg</file>
+        <file alias="backslash.svg">../../../data/svg/osmc-symbols/backslash.svg</file>
+        <file alias="slash.svg">../../../data/svg/osmc-symbols/slash.svg</file>
+        <file alias="triangle.svg">../../../data/svg/osmc-symbols/triangle.svg</file>
+        <file alias="triangle_turned.svg">../../../data/svg/osmc-symbols/triangle_turned.svg</file>
+        <file alias="triangle_line.svg">../../../data/svg/osmc-symbols/triangle_line.svg</file>
+        <file alias="diamond.svg">../../../data/svg/osmc-symbols/diamond.svg</file>
+        <file alias="rectangle.svg">../../../data/svg/osmc-symbols/rectangle.svg</file>
+        <file alias="rectangle_line.svg">../../../data/svg/osmc-symbols/rectangle_line.svg</file>
+        <file alias="pointer.svg">../../../data/svg/osmc-symbols/pointer.svg</file>
+        <file alias="fork.svg">../../../data/svg/osmc-symbols/fork.svg</file>
+        <file alias="arch.svg">../../../data/svg/osmc-symbols/arch.svg</file>
+        <file alias="turned_T.svg">../../../data/svg/osmc-symbols/turned_T.svg</file>
+        <file alias="L.svg">../../../data/svg/osmc-symbols/L.svg</file>
+        <file alias="lower.svg">../../../data/svg/osmc-symbols/lower.svg</file>
+        <file alias="corner.svg">../../../data/svg/osmc-symbols/corner.svg</file>
+        <file alias="drop_line.svg">../../../data/svg/osmc-symbols/drop_line.svg</file>
+        <file alias="wolfshook.svg">../../../data/svg/osmc-symbols/wolfshook.svg</file>
+        <file alias="ammonit.svg">../../../data/svg/osmc-symbols/3rdparty/ammonit.svg</file>
+        <file alias="bridleway.svg">../../../data/svg/osmc-symbols/3rdparty/bridleway.svg</file>
+        <file alias="heart.svg">../../../data/svg/osmc-symbols/3rdparty/heart.svg</file>
+        <file alias="hiker.svg">../../../data/svg/osmc-symbols/3rdparty/hiker.svg</file>
+        <file alias="horse.svg">../../../data/svg/osmc-symbols/3rdparty/horse.svg</file>
+        <file alias="mine.svg">../../../data/svg/osmc-symbols/3rdparty/mine.svg</file>
+        <file alias="shell_modern.svg">../../../data/svg/osmc-symbols/3rdparty/shell_modern.svg</file>
+        <file alias="shell.svg">../../../data/svg/osmc-symbols/3rdparty/shell.svg</file>
+        <file alias="tower.svg">../../../data/svg/osmc-symbols/3rdparty/tower.svg</file>
+    </qresource>
 </RCC>
