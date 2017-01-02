@@ -74,7 +74,15 @@ void CycleStreetsRunner::retrieveRoute( const RouteRequest *route )
     queryStrings["key"] = "cdccf13997d59e70";
     queryStrings["useDom"] = QLatin1Char('1');
     queryStrings["plan"] = settings[QStringLiteral("plan")].toString();
+    if (queryStrings["plan"].isEmpty()) {
+        mDebug() << Q_FUNC_INFO << "Missing a value for 'plan' in the settings, falling back to 'balanced'";
+        queryStrings["plan"] = QStringLiteral("balanced");
+    }
     queryStrings["speed"] = settings[QStringLiteral("speed")].toString();
+    if (queryStrings["speed"].isEmpty()) {
+        mDebug() << Q_FUNC_INFO << "Missing a value for 'speed' in the settings, falling back to '20'";
+        queryStrings["speed"] = QStringLiteral("20");
+    }
     GeoDataCoordinates::Unit const degree = GeoDataCoordinates::Degree;
     QString itinerarypoints;
     itinerarypoints.append(QString::number(route->source().longitude(degree), 'f', 6) + QLatin1Char(',') + QString::number(route->source().latitude(degree), 'f', 6));
