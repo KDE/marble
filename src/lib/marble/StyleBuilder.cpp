@@ -1722,13 +1722,20 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
                 lineStyle.setPhysicalWidth(ok ? qBound(0.1f, width, 200.0f) : 0.0f);
             }
         } else if (visualCategory == GeoDataPlacemark::RouteHiking && osmData.containsTagKey(QStringLiteral("osmc:symbol"))) {
-            adjustStyle = true;
-
             QString const osmcSymbolValue = osmData.tagValue(QStringLiteral("osmc:symbol"));
-            OsmcSymbol symbol = OsmcSymbol(osmcSymbolValue);
-
-            lineStyle.setColor(symbol.wayColor());
-            iconStyle.setIcon(symbol.icon());
+            if (!osmcSymbolValue.isEmpty()) {
+                // Take cached Style instance if possible
+                specialStyleCacheKey = osmcSymbolValue;
+                if (d->m_specialStyleCache.contains(specialStyleCacheKey)) {
+                    style = d->m_specialStyleCache[specialStyleCacheKey];
+                    return style;
+                }
+                cacheSpecialStyle = true;
+                adjustStyle = true;
+                OsmcSymbol symbol = OsmcSymbol(osmcSymbolValue);
+                lineStyle.setColor(symbol.wayColor());
+                iconStyle.setIcon(symbol.icon());
+            }
         }
 
         if (adjustStyle) {
