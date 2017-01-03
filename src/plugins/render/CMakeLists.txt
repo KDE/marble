@@ -25,6 +25,7 @@ add_subdirectory( positionmarker )
 add_subdirectory( atmosphere )
 add_subdirectory( stars )
 add_subdirectory( sun )
+add_subdirectory( notes )
 
 # Display online information
 add_subdirectory( earthquake )
