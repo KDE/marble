@@ -13,6 +13,7 @@
 
 #include <QList>
 #include <QPainterPath>
+#include <QPixmapCache>
 #include <QRegion>
 #include <qmath.h>
 
@@ -37,7 +38,6 @@ GeoPainterPrivate::GeoPainterPrivate( GeoPainter* q, const ViewportParams *viewp
         : m_viewport( viewport ),
         m_mapQuality( mapQuality ),
         m_x( new qreal[100] ),
-        m_batchedPlacemarkRenderer(),
         m_parent(q)
 {
 }
@@ -1017,19 +1017,58 @@ void GeoPainter::drawRoundedRect(const GeoDataCoordinates &centerPosition,
 }
 
 
-void GeoPainter::addTextFragment( const QPoint& position, const QString& text,
-                                  const qreal fontSize , const QColor& color,
-                                  const QFlags<BatchedPlacemarkRenderer::Frames> & flags )
+void GeoPainter::drawTextFragment(const QPoint &position, const QString &text,
+                                  const qreal fontSize, const QColor &color,
+                                  const Frames &flags)
 {
-    d->m_batchedPlacemarkRenderer.addTextFragment( position, text, fontSize, color, flags);
-}
+    const QString key = text + ":" + QString::number(static_cast<int>(flags));
 
-void GeoPainter::clearTextFragments()
-{
-    d->m_batchedPlacemarkRenderer.clearTextFragments();
-}
+    QPixmap pixmap;
 
-void GeoPainter::drawTextFragments()
-{
-    d->m_batchedPlacemarkRenderer.drawTextFragments(this);
+    if (!QPixmapCache::find(key, &pixmap)) {
+        const bool hasRoundFrame = flags.testFlag(RoundFrame);
+
+        QPixmap pixmap(10,10);
+        QPainter textPainter;
+
+        textPainter.begin(&pixmap);
+        const QFontMetrics metrics = textPainter.fontMetrics();
+        textPainter.end();
+
+        const int width = metrics.width(text);
+        const int height = metrics.height();
+        const QSize size = hasRoundFrame
+                              ? QSize(qMax(1.2*width, 1.1*height), 1.2*height)
+                              : QSize(width, height);
+        pixmap = QPixmap(size);
+        pixmap.fill(Qt::transparent);
+        const QRect labelRect(QPoint(), size);
+        textPainter.begin(&pixmap);
+        QFont textFont = textPainter.font();
+        textFont.setPointSize(fontSize);
+        textPainter.setFont(textFont);
+        textPainter.setRenderHint(QPainter::Antialiasing, true);
+
+        const QColor brushColor = color;
+        if (hasRoundFrame) {
+            QColor lighterColor = brushColor.lighter(110);
+            lighterColor.setAlphaF(0.9);
+            textPainter.setBrush(lighterColor);
+            textPainter.drawRoundedRect(labelRect, 3, 3);
+        }
+
+        textPainter.setBrush(brushColor);
+        textPainter.drawText(labelRect, Qt::AlignHCenter , text);
+
+        if (hasRoundFrame) {
+            textPainter.setBrush(brushColor);
+        }
+
+        textPainter.end();
+        QPixmapCache::insert(key, pixmap);
+    }
+
+    QPainter::drawPixmap(position.x() - pixmap.width()/2,
+                          position.y() - pixmap.height()/2,
+                          pixmap);
 }

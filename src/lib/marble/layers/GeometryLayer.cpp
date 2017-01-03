@@ -233,9 +233,6 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
         item.second->paint(painter, viewport, item.first, d->m_tileLevel);
     }
 
-    painter->drawTextFragments();
-    painter->clearTextFragments();
-
     foreach( ScreenOverlayGraphicsItem* item, d->m_screenOverlays ) {
         item->paintEvent( painter, viewport );
     }

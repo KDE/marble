@@ -17,7 +17,6 @@
 // Marble
 #include "MarbleGlobal.h"
 #include "ClipPainter.h"
-#include "BatchedPlacemarkRenderer.h"
 
 #include <QSizeF>
 
@@ -94,7 +93,13 @@ class GeoDataPolygon;
 class MARBLE_EXPORT GeoPainter : public ClipPainter
 {
  public:
-     
+    enum Frame {
+        NoOptions = 0x0,
+        RoundFrame = 0x1
+    };
+
+    Q_DECLARE_FLAGS(Frames, Frame)
+
 /*!
     \brief Creates a new geo painter.
 
@@ -499,11 +504,9 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
                          qreal xRnd = 25.0, qreal yRnd = 25.0);
 
 
-    void addTextFragment( const QPoint& position, const QString& text,
-                          const qreal fontSize, const QColor& color = Qt::black,
-                          const QFlags<BatchedPlacemarkRenderer::Frames> & flags = 0 );
-    void clearTextFragments();
-    void drawTextFragments();
+    void drawTextFragment(const QPoint &position, const QString &text,
+                          const qreal fontSize, const QColor &color = Qt::black,
+                          const Frames &flags = 0);
 
 
     // Reenabling QPainter+ClipPainter methods.

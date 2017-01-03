@@ -371,7 +371,7 @@ void BuildingGeoPolygonGraphicsItem::paintRoof(GeoPainter* painter, const Viewpo
                     && outerRoof->containsPoint(textPosition + QPointF(2+2*w2, descent), Qt::OddEvenFill)
                     && outerRoof->containsPoint(textPosition + QPointF(2+2*w2, -ascent), Qt::OddEvenFill)
                     ) {
-                painter->addTextFragment(roofCenter.toPoint(), m_buildingText,
+                painter->drawTextFragment(roofCenter.toPoint(), m_buildingText,
                                          painter->font().pointSize(), painter->brush().color());
             }
         }
@@ -384,9 +384,9 @@ void BuildingGeoPolygonGraphicsItem::paintRoof(GeoPainter* painter, const Viewpo
             viewport->screenCoordinates(entry.point, x, y);
             QPointF point(x, y);
             point += buildingOffset(point, viewport);
-            painter->addTextFragment(point.toPoint(),
+            painter->drawTextFragment(point.toPoint(),
                                      m_buildingText, painter->font().pointSize(), painter->brush().color(),
-                                     QFlags<BatchedPlacemarkRenderer::Frames>() |= BatchedPlacemarkRenderer::RoundFrame);
+                                     GeoPainter::RoundFrame);
         }
     }
 }

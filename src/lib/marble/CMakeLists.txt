@@ -275,7 +275,6 @@ set(marblewidget_SRCS
     OsmcSymbol.cpp
 
     StyleBuilder.cpp
-    BatchedPlacemarkRenderer.cpp
     
     cloudsync/CloudSyncManager.cpp
     cloudsync/RouteSyncManager.cpp
@@ -621,8 +620,6 @@ install( FILES
     routing/RoutingProfile.h
 
     OsmcSymbol.h
-
-    BatchedPlacemarkRenderer.h
 
     DESTINATION ${INCLUDE_INSTALL_DIR}/marble
 )
