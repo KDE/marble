@@ -910,6 +910,7 @@ QVector<QPolygonF*> GeoPainter::createFillPolygons( const QVector<QPolygonF*> & 
                                                     const QVector<QPolygonF*> & innerPolygons ) const
 {
     QVector<QPolygonF*> fillPolygons;
+    fillPolygons.reserve(outerPolygons.size());
 
     foreach( const QPolygonF* outerPolygon, outerPolygons ) {
         QPolygonF* fillPolygon = new QPolygonF;
@@ -921,6 +922,7 @@ QVector<QPolygonF*> GeoPainter::createFillPolygons( const QVector<QPolygonF*> & 
             *fillPolygon << innerPolygon->first();
             *fillPolygon << outerPolygon->first();
         }
+
         fillPolygons << fillPolygon;
     }
 
