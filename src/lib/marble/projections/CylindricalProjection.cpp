@@ -418,10 +418,10 @@ void CylindricalProjectionPrivate::repeatPolygons( const ViewportParams *viewpor
     qreal y = 0;
 
     // Choose a latitude that is inside the viewport.
-    qreal centerLatitude = viewport->viewLatLonAltBox().center().latitude();
-    
-    GeoDataCoordinates westCoords( -M_PI, centerLatitude );
-    GeoDataCoordinates eastCoords( +M_PI, centerLatitude );
+    const qreal centerLatitude = viewport->viewLatLonAltBox().center().latitude();
+
+    const GeoDataCoordinates westCoords(-M_PI, centerLatitude);
+    const GeoDataCoordinates eastCoords(+M_PI, centerLatitude);
 
     q->screenCoordinates( westCoords, viewport, xWest, y );
     q->screenCoordinates( eastCoords, viewport, xEast, y );
@@ -431,26 +431,18 @@ void CylindricalProjectionPrivate::repeatPolygons( const ViewportParams *viewpor
         return;
     }
 
-    qreal repeatXInterval = xEast - xWest;
+    const qreal repeatXInterval = xEast - xWest;
 
-    qreal repeatsLeft  = 0;
-    qreal repeatsRight = 0;
-
-    if ( xWest > 0 ) {
-        repeatsLeft = (int)( xWest / repeatXInterval ) + 1;
-    }
-    if ( xEast < viewport->width() ) {
-        repeatsRight = (int)( ( viewport->width() - xEast ) / repeatXInterval ) + 1;
-    }
+    const qreal repeatsLeft  = (xWest > 0)                 ? (int)(xWest / repeatXInterval)                       + 1 : 0;
+    const qreal repeatsRight = (xEast < viewport->width()) ? (int)((viewport->width() - xEast) / repeatXInterval) + 1 : 0;
 
     QVector<QPolygonF *> repeatedPolygons;
     QVector<QPolygonF *> translatedPolygons;
 
-    qreal xOffset = 0;
     qreal it = repeatsLeft;
-    
+
     while ( it > 0 ) {
-        xOffset = -it * repeatXInterval;
+        const qreal xOffset = -it * repeatXInterval;
         translatePolygons( polygons, translatedPolygons, xOffset );
         repeatedPolygons << translatedPolygons;
         translatedPolygons.clear();
@@ -462,7 +454,7 @@ void CylindricalProjectionPrivate::repeatPolygons( const ViewportParams *viewpor
     it = 1;
 
     while ( it <= repeatsRight ) {
-        xOffset = +it * repeatXInterval;
+        const qreal xOffset = +it * repeatXInterval;
         translatePolygons( polygons, translatedPolygons, xOffset );
         repeatedPolygons << translatedPolygons;
         translatedPolygons.clear();
