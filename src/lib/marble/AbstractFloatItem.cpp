@@ -169,7 +169,7 @@ bool AbstractFloatItem::eventFilter( QObject *object, QEvent *e )
 
     if( e->type() == QEvent::ContextMenu )
     {
-        QWidget *widget = dynamic_cast<QWidget *>( object );
+        QWidget *widget = qobject_cast<QWidget *>( object );
         QContextMenuEvent *menuEvent = dynamic_cast<QContextMenuEvent *> ( e );
         if( widget != NULL && menuEvent != NULL && contains( menuEvent->pos() ) )
         {
