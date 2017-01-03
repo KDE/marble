@@ -414,7 +414,7 @@ void BuildingGeoPolygonGraphicsItem::paintFrame(GeoPainter *painter, const Viewp
     if (!isValid) return;
 
     if ( drawAccurate3D && isCameraAboveBuilding ) {
-        foreach(QPolygonF* outline, m_cachedOuterPolygons) {
+        foreach (const QPolygonF *outline, m_cachedOuterPolygons) {
             if (outline->isEmpty()) {
                 continue;
             }
@@ -422,7 +422,7 @@ void BuildingGeoPolygonGraphicsItem::paintFrame(GeoPainter *painter, const Viewp
             int const size = outline->size();
             QPolygonF * outerRoof = new QPolygonF;
             outerRoof->reserve(outline->size());
-            QPointF & a = (*outline)[0];
+            QPointF a = (*outline)[0];
             QPointF shiftA = a + buildingOffset(a, viewport);
             outerRoof->append(shiftA);
             for (int i=1; i<size; ++i) {
@@ -443,7 +443,7 @@ void BuildingGeoPolygonGraphicsItem::paintFrame(GeoPainter *painter, const Viewp
             }
             m_cachedOuterRoofPolygons.append(outerRoof);
         }
-        foreach(QPolygonF* outline, m_cachedInnerPolygons) {
+        foreach (const QPolygonF *outline, m_cachedInnerPolygons) {
             if (outline->isEmpty()) {
                 continue;
             }
@@ -451,7 +451,7 @@ void BuildingGeoPolygonGraphicsItem::paintFrame(GeoPainter *painter, const Viewp
             int const size = outline->size();
             QPolygonF * innerRoof = new QPolygonF;
             innerRoof->reserve(outline->size());
-            QPointF & a = (*outline)[0];
+            QPointF a = (*outline)[0];
             QPointF shiftA = a + buildingOffset(a, viewport);
             innerRoof->append(shiftA);
             for (int i=1; i<size; ++i) {
