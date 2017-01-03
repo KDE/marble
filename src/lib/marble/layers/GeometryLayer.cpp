@@ -289,8 +289,8 @@ bool GeometryLayer::hasFeatureAt(const QPoint &curpos, const ViewportParams *vie
 void GeometryLayerPrivate::createGraphicsItems( const GeoDataObject *object )
 {
     clearCache();
-    if ( const GeoDataPlacemark *placemark = dynamic_cast<const GeoDataPlacemark*>( object ) )
-    {
+    if (object->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
+        auto placemark = static_cast<const GeoDataPlacemark*>(object);
         createGraphicsItemFromGeometry(placemark->geometry(), placemark);
     } else if ( const GeoDataOverlay* overlay = dynamic_cast<const GeoDataOverlay*>( object ) ) {
         createGraphicsItemFromOverlay( overlay );
