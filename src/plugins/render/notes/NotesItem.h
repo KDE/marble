@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2016      Spencer Brown <spencerbrown991@gmail.com>
+// Copyright 2017      Spencer Brown <spencerbrown991@gmail.com>
 //
 
 #ifndef NOTESITEM_H
@@ -21,20 +21,18 @@ class NotesItem : public AbstractDataPluginItem
 {
     Q_OBJECT
 
- public:
-    explicit NotesItem( QObject *parent );
+public:
+    explicit NotesItem(QObject *parent);
 
     ~NotesItem() override;
 
     bool initialized() const override;
 
-    void paint( QPainter *painter ) override;
+    void paint(QPainter *painter) override;
 
-    bool operator<( const AbstractDataPluginItem *other ) const override;
+    bool operator<(const AbstractDataPluginItem *other) const override;
 
 private:
-    static const QFont s_font;
-    static const int s_labelOutlineWidth;
     QPixmap m_pixmap;
 };
 

@@ -2,7 +2,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2016      Spencer Brown <spencerbrown991@gmail.com>
+// Copyright 2017      Spencer Brown <spencerbrown991@gmail.com>
 //
 
 #include "NotesItem.h"
@@ -13,15 +13,12 @@
 
 using namespace Marble;
 
-const QFont NotesItem::s_font = QFont( QStringLiteral( "Sans Serif" ), 10, QFont::Bold );
-const int NotesItem::s_labelOutlineWidth = 5;
-
-NotesItem::NotesItem( QObject *parent )
-    : AbstractDataPluginItem( parent ),
+NotesItem::NotesItem(QObject *parent)
+    : AbstractDataPluginItem(parent),
       m_pixmap(MarbleDirs::path("bitmaps/waypoint.png"))
 {
-    setSize( QSize( 3, 3 ) );
-    setCacheMode( ItemCoordinateCache );
+    setSize(m_pixmap.size());
+    setCacheMode(ItemCoordinateCache);
 }
 
 NotesItem::~NotesItem()
@@ -33,12 +30,12 @@ bool NotesItem::initialized() const
     return !id().isEmpty();
 }
 
-bool NotesItem::operator<( const AbstractDataPluginItem *other ) const
+bool NotesItem::operator<(const AbstractDataPluginItem *other) const
 {
     return this->id() < other->id();
 }
 
-void NotesItem::paint( QPainter *painter )
+void NotesItem::paint(QPainter *painter)
 {
     painter->drawPixmap(0, 0, m_pixmap);
 }

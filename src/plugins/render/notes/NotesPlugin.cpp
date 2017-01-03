@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2016      Spencer Brown <spencerbrown991@gmail.com>
+// Copyright 2017      Spencer Brown <spencerbrown991@gmail.com>
 //
 
 #include "NotesPlugin.h"
@@ -16,31 +16,31 @@
 using namespace Marble;
 
 NotesPlugin::NotesPlugin()
-    : AbstractDataPlugin( 0 )
+    : AbstractDataPlugin(0)
 {
 }
 
-NotesPlugin::NotesPlugin( const MarbleModel *marbleModel )
-    : AbstractDataPlugin( marbleModel )
+NotesPlugin::NotesPlugin(const MarbleModel *marbleModel)
+    : AbstractDataPlugin(marbleModel)
 {
-    setEnabled( true );
-    setVisible( false );
+    setEnabled(true);
+    setVisible(false);
 }
 
 void NotesPlugin::initialize()
 {
-    setModel( new NotesModel( marbleModel(), this ) );
-    setNumberOfItems( 20 );
+    setModel(new NotesModel(marbleModel(), this));
+    setNumberOfItems(20);
 }
 
 QString NotesPlugin::name() const
 {
-    return tr( "Notes Plugin" );
+    return tr("Notes Plugin");
 }
 
 QString NotesPlugin::guiString() const
 {
-    return tr( "Notes" );
+    return tr("Notes");
 }
 
 QString NotesPlugin::nameId() const
@@ -55,18 +55,18 @@ QString NotesPlugin::version() const
 
 QString NotesPlugin::copyrightYears() const
 {
-    return QStringLiteral("2016");
+    return QStringLiteral("2017");
 }
 
 QVector<PluginAuthor> NotesPlugin::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor(QStringLiteral("Spencer Brown"), QStringLiteral("spencerbrown991@gmail.com"));
+           << PluginAuthor(QStringLiteral("Spencer Brown"), QStringLiteral("spencerbrown991@gmail.com"));
 }
 
 QString NotesPlugin::description() const
 {
-    return tr( "Show placemarks for Open Street Map notes." );
+    return tr("Show OpenStreetMap Notes.");
 }
 
 QIcon NotesPlugin::icon() const

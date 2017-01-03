@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2016      Spencer Brown <spencerbrown991@gmail.com>
+// Copyright 2017      Spencer Brown <spencerbrown991@gmail.com>
 //
 
 #ifndef NOTESMODEL_H
@@ -13,19 +13,20 @@
 
 #include "AbstractDataPluginModel.h"
 
-namespace Marble {
+namespace Marble
+{
 
-    class NotesModel : public AbstractDataPluginModel
-    {
-        Q_OBJECT
+class NotesModel : public AbstractDataPluginModel
+{
+    Q_OBJECT
 
-    public:
-        explicit NotesModel( const MarbleModel *marbleModel, QObject *parent = 0 );
+public:
+    explicit NotesModel(const MarbleModel *marbleModel, QObject *parent = 0);
 
-    protected:
-        void getAdditionalItems( const GeoDataLatLonAltBox& box, qint32 number = 100 ) override;
-        void parseFile( const QByteArray& file ) override;
-    };
+protected:
+    void getAdditionalItems(const GeoDataLatLonAltBox& box, qint32 number = 10) override;
+    void parseFile(const QByteArray& file) override;
+};
 }
 
 #endif
