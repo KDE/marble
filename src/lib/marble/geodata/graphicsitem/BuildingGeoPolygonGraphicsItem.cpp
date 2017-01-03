@@ -212,7 +212,7 @@ void BuildingGeoPolygonGraphicsItem::paint(GeoPainter* painter, const ViewportPa
     // Just display flat buildings for tile level 17
     if (tileZoomLevel == 17) {
         setZValue(0.0);
-        if (layer.endsWith(QLatin1String("/frame"))) {
+        if (layer.endsWith(QLatin1String("/roof"))) {
             AbstractGeoPolygonGraphicsItem::paint(painter, viewport, layer, tileZoomLevel );
         }
         return;
