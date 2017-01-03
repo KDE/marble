@@ -268,11 +268,7 @@ void BuildingGeoPolygonGraphicsItem::paintRoof(GeoPainter* painter, const Viewpo
 
     if (!isValid) return;
 
-    qreal maxSize(0.0);
-
     // first paint the area (and the outline if there are no inner boundaries)
-
-    double maxArea = 0.0;
 
     if ( drawAccurate3D) {
         if (m_hasInnerBoundaries) {
@@ -339,6 +335,9 @@ void BuildingGeoPolygonGraphicsItem::paintRoof(GeoPainter* painter, const Viewpo
 
     }
 
+
+    qreal maxSize(0.0);
+    double maxArea = 0.0;
 
     for (int i = 0; i < m_cachedOuterPolygons.size(); ++i) {
         const QPolygonF *outerPolygon = m_cachedOuterPolygons[i];
