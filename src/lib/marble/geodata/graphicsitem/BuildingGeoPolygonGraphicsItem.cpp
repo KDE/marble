@@ -269,7 +269,6 @@ void BuildingGeoPolygonGraphicsItem::paintRoof(GeoPainter* painter, const Viewpo
     if (!isValid) return;
 
     qreal maxSize(0.0);
-    QPointF roofCenter;
 
     // first paint the area (and the outline if there are no inner boundaries)
 
@@ -342,9 +341,10 @@ void BuildingGeoPolygonGraphicsItem::paintRoof(GeoPainter* painter, const Viewpo
 
 
     for (int i = 0; i < m_cachedOuterPolygons.size(); ++i) {
-        QPolygonF* outerPolygon = m_cachedOuterPolygons[i];
-
+        const QPolygonF *outerPolygon = m_cachedOuterPolygons[i];
         QRectF const boundingRect = outerPolygon->boundingRect();
+
+        QPointF roofCenter;
 
         // Label position calculation
         if (!m_buildingText.isEmpty() || !m_entries.isEmpty()) {
