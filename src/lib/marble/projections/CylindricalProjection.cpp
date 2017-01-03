@@ -433,32 +433,25 @@ void CylindricalProjectionPrivate::repeatPolygons( const ViewportParams *viewpor
 
     const qreal repeatXInterval = xEast - xWest;
 
-    const qreal repeatsLeft  = (xWest > 0)                 ? (int)(xWest / repeatXInterval)                       + 1 : 0;
+    const qreal repeatsLeft  = (xWest > 0                ) ? (int)(xWest                       / repeatXInterval) + 1 : 0;
     const qreal repeatsRight = (xEast < viewport->width()) ? (int)((viewport->width() - xEast) / repeatXInterval) + 1 : 0;
 
     QVector<QPolygonF *> repeatedPolygons;
-    QVector<QPolygonF *> translatedPolygons;
 
-    qreal it = repeatsLeft;
-
-    while ( it > 0 ) {
+    for (qreal it = repeatsLeft; it > 0; --it) {
         const qreal xOffset = -it * repeatXInterval;
+        QVector<QPolygonF *> translatedPolygons;
         translatePolygons( polygons, translatedPolygons, xOffset );
         repeatedPolygons << translatedPolygons;
-        translatedPolygons.clear();
-        --it;
     }
 
     repeatedPolygons << polygons;
 
-    it = 1;
-
-    while ( it <= repeatsRight ) {
+    for (qreal it = 1; it <= repeatsRight; ++it) {
         const qreal xOffset = +it * repeatXInterval;
+        QVector<QPolygonF *> translatedPolygons;
         translatePolygons( polygons, translatedPolygons, xOffset );
         repeatedPolygons << translatedPolygons;
-        translatedPolygons.clear();
-        ++it;
     }
 
     polygons = repeatedPolygons;
