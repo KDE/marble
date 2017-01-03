@@ -40,7 +40,7 @@ private:
     QMultiHash<qint64, WayChunk::Ptr> m_hash;
     QVector<WayChunk::Ptr> m_chunks;
     QVector<PlacemarkPtr> m_wayPlacemarks;
-    QVector<GeoDataPlacemark*> m_otherPlacemarks;
+    QVector<GeoDataFeature*> m_otherPlacemarks;
 
     int m_originalWays;
     int m_mergedWays;

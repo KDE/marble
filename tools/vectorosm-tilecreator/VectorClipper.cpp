@@ -76,7 +76,7 @@ GeoDataDocument *VectorClipper::clipTo(const GeoDataLatLonBox &tileBoundary, int
             } else if (geometry->nodeType() == GeoDataTypes::GeoDataLinearRingType) {
                 clipString<GeoDataLinearRing>(placemark, clip, minArea, tile);
             } else {
-                tile->append(new GeoDataPlacemark(*placemark));
+                tile->append(placemark->clone());
             }
         }
     }
@@ -212,7 +212,7 @@ GeoDataDocument *VectorClipper::clipToBaseClipper(const GeoDataLatLonBox &tileBo
                 }
 
             } else {
-                tile->append(new GeoDataPlacemark(*placemark));
+                tile->append(placemark->clone());
             }
         }
     }

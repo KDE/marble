@@ -37,8 +37,8 @@ public:
     TagsFilter(GeoDataDocument* document, const Tags& tagsList, FilterFlag filterFlag = NoFlag);
     ~TagsFilter();
 
-    QVector<GeoDataPlacemark*>::const_iterator rejectedObjectsBegin() const;
-    QVector<GeoDataPlacemark*>::const_iterator rejectedObjectsEnd() const;
+    QVector<GeoDataFeature*>::const_iterator rejectedObjectsBegin() const;
+    QVector<GeoDataFeature*>::const_iterator rejectedObjectsEnd() const;
 
     GeoDataDocument* accepted();
 
@@ -48,7 +48,7 @@ private:
     static void removeAnnotationTags(OsmPlacemarkData &osmData);
 
     GeoDataDocument* m_accepted;
-    QVector<GeoDataPlacemark*> m_rejectedObjects;
+    QVector<GeoDataFeature*> m_rejectedObjects;
 };
 
 }

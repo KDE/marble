@@ -49,9 +49,9 @@ TagsFilter::TagsFilter(GeoDataDocument *geoDocument, const Tags &tagsList, Filte
         }
 
         if (acceptPlacemark) {
-            m_accepted->append(new GeoDataPlacemark(*placemark));
+            m_accepted->append(placemark->clone());
         } else {
-            m_rejectedObjects.append(new GeoDataPlacemark(*placemark));
+            m_rejectedObjects.append(placemark->clone());
         }
     }
 }
@@ -62,12 +62,12 @@ TagsFilter::~TagsFilter()
     qDeleteAll(m_rejectedObjects);
 }
 
-QVector<GeoDataPlacemark*>::const_iterator TagsFilter::rejectedObjectsBegin() const
+QVector<GeoDataFeature*>::const_iterator TagsFilter::rejectedObjectsBegin() const
 {
     return m_rejectedObjects.begin();
 }
 
-QVector<GeoDataPlacemark*>::const_iterator TagsFilter::rejectedObjectsEnd() const
+QVector<GeoDataFeature*>::const_iterator TagsFilter::rejectedObjectsEnd() const
 {
     return m_rejectedObjects.end();
 }

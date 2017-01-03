@@ -99,7 +99,7 @@ QSharedPointer<GeoDataDocument> mergeBoundaryTiles(const QSharedPointer<GeoDataD
             auto tile = TileDirectory::open(file, manager);
             if (tile) {
                 foreach (auto placemark, tile->placemarkList()) {
-                    mergedMap->append(new GeoDataPlacemark(*placemark));
+                    mergedMap->append(placemark->clone());
                 }
             }
         }

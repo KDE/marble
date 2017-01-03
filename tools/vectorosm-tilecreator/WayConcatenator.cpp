@@ -33,10 +33,10 @@ WayConcatenator::WayConcatenator(GeoDataDocument *document) :
 {
     typedef QSharedPointer<GeoDataPlacemark> PlacemarkPtr;
     foreach (GeoDataPlacemark* original, placemarks()) {
-        PlacemarkPtr placemark = PlacemarkPtr(new GeoDataPlacemark(*original));
-        OsmObjectManager::initializeOsmData(placemark.data());
         bool isWay = false;
-        if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType) {
+        if (original->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType) {
+            PlacemarkPtr placemark = PlacemarkPtr(new GeoDataPlacemark(*original));
+            OsmObjectManager::initializeOsmData(placemark.data());
             OsmPlacemarkData const & osmData = placemark->osmData();
             isWay = osmData.containsTagKey("highway") ||
                     osmData.containsTagKey("railway") ||
@@ -91,7 +91,7 @@ WayConcatenator::WayConcatenator(GeoDataDocument *document) :
         }
 
         if (!isWay) {
-            m_otherPlacemarks << new GeoDataPlacemark(*original);
+            m_otherPlacemarks << original->clone();
         }
     }
 
@@ -112,7 +112,7 @@ int WayConcatenator::mergedWays() const
 void WayConcatenator::addWayChunks()
 {
     for (auto const &placemark: m_wayPlacemarks) {
-        document()->append(new GeoDataPlacemark(*placemark));
+        document()->append(placemark->clone());
     }
 
     QSet<WayChunk::Ptr> chunkSet;
@@ -123,7 +123,7 @@ void WayConcatenator::addWayChunks()
             chunkSet.insert(*itr);
             PlacemarkPtr placemark = (*itr)->merge();
             if (placemark) {
-                document()->append(new GeoDataPlacemark(*placemark));
+                document()->append(placemark->clone());
             }
         }
     }
