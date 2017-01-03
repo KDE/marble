@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2013      Mihail Ivchenko <ematirov@gmail.com>
+// Copyright 2017      Sergey Popov <sergobot@protonmail.com>
 //
 
 #include "CycleStreetsRunner.h"
@@ -23,7 +24,9 @@
 #include <QUrl>
 #include <QTimer>
 #include <QNetworkReply>
-#include <QDomDocument>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
 
 #include <QUrlQuery>
 
@@ -69,10 +72,10 @@ void CycleStreetsRunner::retrieveRoute( const RouteRequest *route )
 
     QHash<QString, QVariant> settings = route->routingProfile().pluginSettings()[QStringLiteral("cyclestreets")];
 
-    QUrl url("https://www.cyclestreets.net/api/journey.xml");
+    QUrl url("https://www.cyclestreets.net/api/journey.json");
     QMap<QString, QString> queryStrings;
     queryStrings["key"] = "cdccf13997d59e70";
-    queryStrings["useDom"] = QLatin1Char('1');
+    queryStrings["reporterrors"] = QLatin1Char('1');
     queryStrings["plan"] = settings[QStringLiteral("plan")].toString();
     if (queryStrings["plan"].isEmpty()) {
         mDebug() << Q_FUNC_INFO << "Missing a value for 'plan' in the settings, falling back to 'balanced'";
@@ -151,26 +154,34 @@ int CycleStreetsRunner::maneuverType(QString& cycleStreetsName) const
 
 GeoDataDocument *CycleStreetsRunner::parse( const QByteArray &content ) const
 {
-    QDomDocument xml;
-    if ( !xml.setContent( content ) ) {
-        mDebug() << "Cannot parse xml file with routing instructions.";
-        return 0;
+    QJsonParseError error;
+    QJsonDocument json = QJsonDocument::fromJson(content, &error);
+
+    if ( json.isEmpty() ) {
+        mDebug() << "Cannot parse json file with routing instructions: " << error.errorString();
+        return Q_NULLPTR;
     }
+
+    // Check if CycleStreets has found any error
+    if ( !json.object()["error"].isNull() ) {
+        mDebug() << "CycleStreets reported an error: " << json.object()["error"].toString();
+        return Q_NULLPTR;
+    }
+
     GeoDataDocument *result = new GeoDataDocument();
     result->setName(QStringLiteral("CycleStreets"));
     GeoDataPlacemark *routePlacemark = new GeoDataPlacemark;
     routePlacemark->setName(QStringLiteral("Route"));
 
     GeoDataLineString *routeWaypoints = new GeoDataLineString;
-    QDomNodeList features = xml.elementsByTagName(QStringLiteral("gml:featureMember"));
+    QJsonArray features = json.object()["marker"].toArray();
 
     if ( features.isEmpty() ) {
-        return 0;
+        return Q_NULLPTR ;
     }
-    QDomElement route = features.at( 0 ).toElement().firstChild().toElement();
-    QDomElement lineString = route.elementsByTagName(QStringLiteral("gml:LineString")).at(0).toElement();
-    QDomElement coordinates = lineString.toElement().elementsByTagName(QStringLiteral("gml:coordinates")).at(0).toElement();
-    QStringList coordinatesList = coordinates.text().split(QLatin1Char(' '));
+    QJsonObject route = features.first().toObject()["@attributes"].toObject();
+    QJsonValue coordinates = route["coordinates"];
+    QStringList coordinatesList = coordinates.toString().split(QLatin1Char(' '));
 
     QStringList::iterator iter = coordinatesList.begin();
     QStringList::iterator end = coordinatesList.end();
@@ -186,9 +197,8 @@ GeoDataDocument *CycleStreetsRunner::parse( const QByteArray &content ) const
     }
     routePlacemark->setGeometry( routeWaypoints );
 
-    QDomElement durationElement = route.elementsByTagName(QStringLiteral("cs:time")).at(0).toElement();
     QTime duration;
-    duration = duration.addSecs( durationElement.text().toInt() );
+    duration = duration.addSecs( route["time"].toInt() );
     qreal length = routeWaypoints->length( EARTH_RADIUS );
 
     const QString name = nameString( "CS", length, duration );
@@ -197,15 +207,13 @@ GeoDataDocument *CycleStreetsRunner::parse( const QByteArray &content ) const
     result->setName( name );
     result->append( routePlacemark );
 
-    int i;
-    for (i = 1; i < features.count() && features.at( i ).firstChildElement().tagName() != QLatin1String("cs:segment"); ++i);
-    for ( ; i < features.count(); ++i) {
-        QDomElement segment = features.at( i ).toElement();
+    for (int i = 1; i < features.count(); ++i) {
+        QJsonObject segment = features.at( i ).toObject()["@attributes"].toObject();
 
-        QString name = segment.elementsByTagName(QStringLiteral("cs:name")).at(0).toElement().text();
-        QString maneuver = segment.elementsByTagName(QStringLiteral("cs:turn")).at(0).toElement().text();
-        QStringList points = segment.elementsByTagName(QStringLiteral("cs:points")).at(0).toElement().text().split(QLatin1Char(' '));
-        QStringList const elevation = segment.elementsByTagName(QStringLiteral("cs:elevations")).at(0).toElement().text().split(QLatin1Char(','));
+        QString name = segment["name"].toString();
+        QString maneuver = segment["turn"].toString();
+        QStringList points = segment["points"].toString().split(QLatin1Char(' '));
+        QStringList const elevation = segment["elevations"].toString().split(QLatin1Char(','));
 
         GeoDataPlacemark *instructions = new GeoDataPlacemark;
         QString instructionName;
