@@ -376,7 +376,6 @@ void BuildingGeoPolygonGraphicsItem::paintRoof(GeoPainter* painter, const Viewpo
                                          painter->font().pointSize(), painter->brush().color());
             }
         }
-        ++i;
     }
 
     // Render additional housenumbers at building entries
