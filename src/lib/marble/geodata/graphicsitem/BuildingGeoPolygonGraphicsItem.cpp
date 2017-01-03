@@ -222,6 +222,7 @@ void BuildingGeoPolygonGraphicsItem::paint(GeoPainter* painter, const ViewportPa
     // For level 18, 19 .. render 3D buildings in perspective
     if (layer.endsWith(QLatin1String("/frame"))) {
         qDeleteAll(m_cachedOuterPolygons);
+        qDeleteAll(m_cachedInnerPolygons);
         qDeleteAll(m_cachedOuterRoofPolygons);
         qDeleteAll(m_cachedInnerRoofPolygons);
         m_cachedOuterPolygons.clear();
