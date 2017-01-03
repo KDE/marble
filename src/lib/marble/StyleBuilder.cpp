@@ -77,6 +77,8 @@ public:
                                          Qt::BrushStyle brushStyle = Qt::SolidPattern,
                                          const QString& texturePath = QString()) const;
 
+    GeoDataStyle::ConstPtr createRelationStyle(const StyleParameters &parameters);
+
     // Having an outline with the same color as the fill results in degraded
     // performance and degraded display quality for no good reason
     // Q_ASSERT( !(outline && color == outlineColor && brushStyle == Qt::SolidPattern) );
@@ -174,6 +176,43 @@ GeoDataStyle::Ptr StyleBuilder::Private::createWayStyle( const QColor& color, co
                                      bool fill, bool outline, Qt::BrushStyle brushStyle, const QString& texturePath) const
 {
     return createStyle(1, 0, color, outlineColor, fill, outline, brushStyle, Qt::SolidLine, Qt::RoundCap, false, QVector<qreal>(), m_defaultFont, Qt::black, texturePath);
+}
+
+GeoDataStyle::ConstPtr StyleBuilder::Private::createRelationStyle(const StyleParameters &parameters)
+{
+    Q_ASSERT(parameters.relation);
+    const GeoDataPlacemark *const placemark = parameters.placemark;
+    auto const visualCategory = placemark->visualCategory();
+    if (visualCategory >= GeoDataPlacemark::HighwaySteps &&
+            visualCategory <= GeoDataPlacemark::HighwayMotorway) {
+        if (parameters.relation->relationType() == GeoDataRelation::RouteHiking) {
+            QString const osmcSymbolValue = parameters.relation->osmData().tagValue(QStringLiteral("osmc:symbol"));
+            auto const colorValue = parameters.relation->osmData().tagValue(QStringLiteral("colour"));
+            QString const color = QColor::isValidColor(colorValue) ? colorValue : QStringLiteral("salmon");
+            // Take cached Style instance if possible
+            QString const cacheKey = QStringLiteral("/route/hiking/%1").arg(osmcSymbolValue.isEmpty() ? color : osmcSymbolValue);
+            if (m_specialStyleCache.contains(cacheKey)) {
+                return m_specialStyleCache[cacheKey];
+            }
+
+            auto style = presetStyle(visualCategory);
+            auto lineStyle = style->lineStyle();
+            auto iconStyle = style->iconStyle();
+            GeoDataStyle::Ptr newStyle(new GeoDataStyle(*style));
+            if (!osmcSymbolValue.isEmpty()) {
+                OsmcSymbol symbol = OsmcSymbol(osmcSymbolValue);
+                lineStyle.setColor(symbol.wayColor());
+                iconStyle.setIcon(symbol.icon());
+            } else {
+                lineStyle.setColor(QColor(color));
+            }
+            newStyle->setLineStyle(lineStyle);
+            newStyle->setIconStyle(iconStyle);
+            style = newStyle;
+            m_specialStyleCache.insert(cacheKey, newStyle);
+        }
+    }
+    return GeoDataStyle::ConstPtr();
 }
 
 GeoDataStyle::Ptr StyleBuilder::Private::createStyle( qreal width, qreal realWidth, const QColor& color,
@@ -742,8 +781,6 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::RailwayMonorail]          = createStyle(2.0, 1.435, "#706E70", "#EEEEEE", false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector<qreal>(), osmFont, QColor(Qt::transparent));
     m_defaultStyle[GeoDataPlacemark::RailwayFunicular]         = createStyle(2.0, 1.435, "#706E70", "#EEEEEE", false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector<qreal>(), osmFont, QColor(Qt::transparent));
 
-    m_defaultStyle[GeoDataPlacemark::RouteHiking]              = createHighwayStyle("#ffc0cb", "#ffc0cb", osmFont, "000000", 1, 5);
-
     m_defaultStyle[GeoDataPlacemark::Landmass]                 = createWayStyle("#F1EEE8", "#F1EEE8", true, false);
     m_defaultStyle[GeoDataPlacemark::UrbanArea]                = createWayStyle("#E6E3DD", "#E6E3DD", true, false);
     m_defaultStyle[GeoDataPlacemark::InternationalDateLine]    = createStyle(1.0, 0.0, "#000000", "#000000", false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector<qreal>(), osmFont);
@@ -1126,8 +1163,6 @@ void StyleBuilder::Private::initializeOsmVisualCategories()
     s_visualCategories[OsmTag("railway", "subway")]             = GeoDataPlacemark::RailwaySubway;
     s_visualCategories[OsmTag("railway", "tram")]               = GeoDataPlacemark::RailwayTram;
 
-    s_visualCategories[OsmTag("route", "hiking")]               = GeoDataPlacemark::RouteHiking;
-
     s_visualCategories[OsmTag("power", "tower")]                = GeoDataPlacemark::PowerTower;
 
     s_visualCategories[OsmTag("aeroway", "aerodrome")]          = GeoDataPlacemark::TransportAerodrome;
@@ -1375,8 +1410,6 @@ void StyleBuilder::Private::initializeMinimumZoomLevels()
     s_defaultMinZoomLevels[GeoDataPlacemark::RailwaySubway]       = 13;
     s_defaultMinZoomLevels[GeoDataPlacemark::RailwayTram] = 14;
 
-    s_defaultMinZoomLevels[GeoDataPlacemark::RouteHiking] = 15;
-
     s_defaultMinZoomLevels[GeoDataPlacemark::Satellite]   = 0;
 
     for (int shop=GeoDataPlacemark::ShopBeverages; shop<=GeoDataPlacemark::Shop; ++shop) {
@@ -1496,6 +1529,13 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
 
     if (placemark->customStyle()) {
         return placemark->customStyle();
+    }
+
+    if (parameters.relation) {
+        auto style = d->createRelationStyle(parameters);
+        if (style) {
+            return style;
+        }
     }
 
     if (d->m_specialStyleCacheTileLevel != parameters.tileLevel) {
@@ -1623,8 +1663,6 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
         else if ((visualCategory >= GeoDataPlacemark::HighwayService &&
                 visualCategory <= GeoDataPlacemark::HighwayMotorway) ||
                 visualCategory == GeoDataPlacemark::TransportAirportRunway) {
-
-
             // Take cached Style instance if possible
             if  (d->m_specialStyleCacheTileLevel == parameters.tileLevel)
             {
@@ -1720,21 +1758,6 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
                 bool ok;
                 float const width = widthValue.toFloat(&ok);
                 lineStyle.setPhysicalWidth(ok ? qBound(0.1f, width, 200.0f) : 0.0f);
-            }
-        } else if (visualCategory == GeoDataPlacemark::RouteHiking && osmData.containsTagKey(QStringLiteral("osmc:symbol"))) {
-            QString const osmcSymbolValue = osmData.tagValue(QStringLiteral("osmc:symbol"));
-            if (!osmcSymbolValue.isEmpty()) {
-                // Take cached Style instance if possible
-                specialStyleCacheKey = osmcSymbolValue;
-                if (d->m_specialStyleCache.contains(specialStyleCacheKey)) {
-                    style = d->m_specialStyleCache[specialStyleCacheKey];
-                    return style;
-                }
-                cacheSpecialStyle = true;
-                adjustStyle = true;
-                OsmcSymbol symbol = OsmcSymbol(osmcSymbolValue);
-                lineStyle.setColor(symbol.wayColor());
-                iconStyle.setIcon(symbol.icon());
             }
         }
 
@@ -1895,10 +1918,6 @@ QStringList StyleBuilder::renderOrder() const
         for ( int i = GeoDataPlacemark::RailwayRail; i <= GeoDataPlacemark::RailwayFunicular; i++ ) {
             paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataPlacemark::GeoDataVisualCategory)i, "label");
         }
-
-        paintLayerOrder << Private::createPaintLayerItem("LineString", GeoDataPlacemark::RouteHiking, "outline");
-        paintLayerOrder << Private::createPaintLayerItem("LineString", GeoDataPlacemark::RouteHiking, "inline");
-        paintLayerOrder << Private::createPaintLayerItem("LineString", GeoDataPlacemark::RouteHiking, "label");
 
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::TransportPlatform);
         paintLayerOrder << Private::createPaintLayerItem("LineString", GeoDataPlacemark::TransportPlatform, "outline");
@@ -2484,7 +2503,6 @@ QString StyleBuilder::visualCategoryName(GeoDataPlacemark::GeoDataVisualCategory
         visualCategoryNames[GeoDataPlacemark::RailwayConstruction] = "RailwayConstruction";
         visualCategoryNames[GeoDataPlacemark::RailwayMonorail] = "RailwayMonorail";
         visualCategoryNames[GeoDataPlacemark::RailwayFunicular] = "RailwayFunicular";
-        visualCategoryNames[GeoDataPlacemark::RouteHiking] = "RouteHiking";
         visualCategoryNames[GeoDataPlacemark::PowerTower] = "PowerTower";
         visualCategoryNames[GeoDataPlacemark::Satellite] = "Satellite";
         visualCategoryNames[GeoDataPlacemark::Landmass] = "Landmass";
@@ -2709,7 +2727,8 @@ GeoDataPlacemark::GeoDataVisualCategory StyleBuilder::determineVisualCategory(co
 
 StyleParameters::StyleParameters(const GeoDataPlacemark *placemark_, int tileLevel_) :
     placemark(placemark_),
-    tileLevel(tileLevel_)
+    tileLevel(tileLevel_),
+    relation(nullptr)
 {
     // nothing to do
 }

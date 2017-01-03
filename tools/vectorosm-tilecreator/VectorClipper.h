@@ -22,10 +22,13 @@
 #include <OsmObjectManager.h>
 
 #include "clipper/clipper.hpp"
+#include <QMap>
+#include <QSet>
 
 namespace Marble {
 
 class GeoDataLinearRing;
+class GeoDataRelation;
 
 class VectorClipper : public BaseFilter
 {
@@ -44,7 +47,8 @@ private:
     void getBounds(const ClipperLib::Path &path, ClipperLib::cInt &minX, ClipperLib::cInt &maxX, ClipperLib::cInt &minY, ClipperLib::cInt &maxY) const;
 
     template<class T>
-    void clipString(const GeoDataPlacemark *placemark, const ClipperLib::Path &tileBoundary, qreal minArea, GeoDataDocument* document)
+    void clipString(const GeoDataPlacemark *placemark, const ClipperLib::Path &tileBoundary, qreal minArea,
+                    GeoDataDocument* document, QSet<qint64> &osmIds)
     {
         const T* ring = static_cast<const T*>(placemark->geometry());
         bool const isClosed = ring->isClosed() && canBeArea(placemark->visualCategory());
@@ -95,10 +99,12 @@ private:
             copyTags(*placemark, *newPlacemark);
             OsmObjectManager::initializeOsmData(newPlacemark);
             document->append(newPlacemark);
+            osmIds << placemark->osmData().id();
         }
     }
 
-    void clipPolygon(const GeoDataPlacemark *placemark, const ClipperLib::Path &tileBoundary, qreal minArea, GeoDataDocument* document);
+    void clipPolygon(const GeoDataPlacemark *placemark, const ClipperLib::Path &tileBoundary, qreal minArea,
+                     GeoDataDocument* document, QSet<qint64> &osmIds);
 
     void copyTags(const GeoDataPlacemark &source, GeoDataPlacemark &target) const;
     void copyTags(const OsmPlacemarkData &originalPlacemarkData, OsmPlacemarkData& targetOsmData) const;
@@ -107,6 +113,7 @@ private:
     int m_maxZoomLevel;
     GeoSceneMercatorTileProjection m_tileProjection;
     QHash<const GeoDataLinearRing*, qreal> m_areas;
+    QSet<GeoDataRelation*> m_relations;
 };
 
 }

@@ -78,6 +78,7 @@ GEODATA_EXPORT extern const char GeoDataPointType[];
 GEODATA_EXPORT extern const char GeoDataPolygonType[];
 GEODATA_EXPORT extern const char GeoDataPolyStyleType[];
 GEODATA_EXPORT extern const char GeoDataRegionType[];
+GEODATA_EXPORT extern const char GeoDataRelationType[];
 GEODATA_EXPORT extern const char GeoDataResourceMapType[];
 GEODATA_EXPORT extern const char GeoDataSchemaType[];
 GEODATA_EXPORT extern const char GeoDataSchemaDataType[];

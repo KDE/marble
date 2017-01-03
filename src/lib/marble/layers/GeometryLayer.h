@@ -26,6 +26,7 @@ namespace Marble
 class GeoPainter;
 class GeoDataFeature;
 class GeoDataPlacemark;
+class GeoDataRelation;
 class StyleBuilder;
 class ViewportParams;
 

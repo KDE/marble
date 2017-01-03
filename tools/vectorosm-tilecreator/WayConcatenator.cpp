@@ -10,6 +10,7 @@
 
 #include <QList>
 #include <QHash>
+#include <QSet>
 
 #include "GeoDataTypes.h"
 #include "GeoDataPlacemark.h"
@@ -32,66 +33,71 @@ WayConcatenator::WayConcatenator(GeoDataDocument *document) :
     m_mergedWays(0)
 {
     typedef QSharedPointer<GeoDataPlacemark> PlacemarkPtr;
-    foreach (GeoDataPlacemark* original, placemarks()) {
-        bool isWay = false;
-        if (original->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType) {
-            PlacemarkPtr placemark = PlacemarkPtr(new GeoDataPlacemark(*original));
-            OsmObjectManager::initializeOsmData(placemark.data());
-            OsmPlacemarkData const & osmData = placemark->osmData();
-            isWay = osmData.containsTagKey("highway") ||
-                    osmData.containsTagKey("railway") ||
-                    osmData.containsTagKey("waterway");
-            if (isWay) {
-                GeoDataLineString *line = static_cast<GeoDataLineString*>(placemark->geometry());
-                qint64 firstId = osmData.nodeReference(line->first()).oid();
-                qint64 lastId = osmData.nodeReference(line->last()).oid();
-                if (firstId > 0 && lastId > 0) {
-                    ++m_originalWays;
-                    bool containsFirst = m_hash.contains(firstId);
-                    bool containsLast = m_hash.contains(lastId);
+    foreach (GeoDataFeature *feature, document->featureList()) {
+        if (feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
+            GeoDataPlacemark* original = static_cast<GeoDataPlacemark*>(feature);
+            bool isWay = false;
+            if (original->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType) {
+                PlacemarkPtr placemark = PlacemarkPtr(new GeoDataPlacemark(*original));
+                OsmObjectManager::initializeOsmData(placemark.data());
+                OsmPlacemarkData const & osmData = placemark->osmData();
+                isWay = osmData.containsTagKey("highway") ||
+                        osmData.containsTagKey("railway") ||
+                        osmData.containsTagKey("waterway");
+                if (isWay) {
+                    GeoDataLineString *line = static_cast<GeoDataLineString*>(placemark->geometry());
+                    qint64 firstId = osmData.nodeReference(line->first()).oid();
+                    qint64 lastId = osmData.nodeReference(line->last()).oid();
+                    if (firstId > 0 && lastId > 0) {
+                        ++m_originalWays;
+                        bool containsFirst = m_hash.contains(firstId);
+                        bool containsLast = m_hash.contains(lastId);
 
-                    if (!containsFirst && !containsLast) {
-                        createWayChunk(placemark, firstId, lastId);
-                    } else if (containsFirst && !containsLast) {
-                        auto chunk = wayChunk(*placemark, firstId);
-                        if (chunk != nullptr) {
-                            concatFirst(placemark, chunk);
-                        } else {
+                        if (!containsFirst && !containsLast) {
                             createWayChunk(placemark, firstId, lastId);
-                        }
-                    } else if (!containsFirst && containsLast) {
-                        auto chunk = wayChunk(*placemark, lastId);
-                        if (chunk != nullptr) {
-                            concatLast(placemark, chunk);
-                        } else {
-                            createWayChunk(placemark, firstId, lastId);
-                        }
-                    } else if (containsFirst && containsLast) {
-                        auto chunk = wayChunk(*placemark, firstId);
-                        auto otherChunk = wayChunk(*placemark, lastId);
-
-                        if (chunk != nullptr && otherChunk != nullptr) {
-                            if(chunk == otherChunk) {
-                                m_wayPlacemarks.append(placemark);
+                        } else if (containsFirst && !containsLast) {
+                            auto chunk = wayChunk(*placemark, firstId);
+                            if (chunk != nullptr) {
+                                concatFirst(placemark, chunk);
                             } else {
-                                concatBoth(placemark, chunk, otherChunk);
+                                createWayChunk(placemark, firstId, lastId);
                             }
-                        } else if(chunk != nullptr && otherChunk == nullptr) {
-                            concatFirst(placemark, chunk);
-                        } else if(chunk == nullptr && otherChunk != nullptr) {
-                            concatLast(placemark, otherChunk);
-                        } else {
-                            createWayChunk(placemark, firstId, lastId);
+                        } else if (!containsFirst && containsLast) {
+                            auto chunk = wayChunk(*placemark, lastId);
+                            if (chunk != nullptr) {
+                                concatLast(placemark, chunk);
+                            } else {
+                                createWayChunk(placemark, firstId, lastId);
+                            }
+                        } else if (containsFirst && containsLast) {
+                            auto chunk = wayChunk(*placemark, firstId);
+                            auto otherChunk = wayChunk(*placemark, lastId);
+
+                            if (chunk != nullptr && otherChunk != nullptr) {
+                                if(chunk == otherChunk) {
+                                    m_wayPlacemarks.append(placemark);
+                                } else {
+                                    concatBoth(placemark, chunk, otherChunk);
+                                }
+                            } else if(chunk != nullptr && otherChunk == nullptr) {
+                                concatFirst(placemark, chunk);
+                            } else if(chunk == nullptr && otherChunk != nullptr) {
+                                concatLast(placemark, otherChunk);
+                            } else {
+                                createWayChunk(placemark, firstId, lastId);
+                            }
                         }
+                    } else {
+                        isWay = false;
                     }
-                } else {
-                    isWay = false;
                 }
             }
-        }
 
-        if (!isWay) {
-            m_otherPlacemarks << original->clone();
+            if (!isWay) {
+                m_otherPlacemarks << feature->clone();
+            }
+        } else {
+            m_otherPlacemarks << feature->clone();
         }
     }
 

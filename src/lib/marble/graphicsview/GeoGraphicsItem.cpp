@@ -89,7 +89,13 @@ GeoDataStyle::ConstPtr GeoGraphicsItem::style() const
     if (!d->m_style) {
         if (d->m_feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
             const GeoDataPlacemark *placemark = static_cast<const GeoDataPlacemark*>(d->m_feature);
-            auto const styling = StyleParameters(placemark, d->m_renderContext.tileLevel());
+            auto styling = StyleParameters(placemark, d->m_renderContext.tileLevel());
+            for (auto relation: d->m_relations) {
+                if (relation->isVisible()) {
+                    styling.relation = relation;
+                    break;
+                }
+            }
             d->m_style = d->m_styleBuilder->createStyle(styling);
         } else {
             d->m_style = d->m_feature->style();
@@ -145,6 +151,18 @@ void GeoGraphicsItem::setRenderContext(const RenderContext &renderContext)
 bool GeoGraphicsItem::contains(const QPoint &, const ViewportParams *) const
 {
     return false;
+}
+
+void GeoGraphicsItem::addRelation(const GeoDataRelation *relation)
+{
+    d->m_relations << relation;
+    d->m_style = GeoDataStyle::ConstPtr();
+}
+
+void GeoGraphicsItem::removeRelation(const GeoDataRelation *relation)
+{
+    d->m_relations.remove(relation);
+    d->m_style = GeoDataStyle::ConstPtr();
 }
 
 int GeoGraphicsItem::minZoomLevel() const

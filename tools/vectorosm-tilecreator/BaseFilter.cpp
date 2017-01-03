@@ -18,8 +18,7 @@
 namespace Marble {
 
 BaseFilter::BaseFilter(GeoDataDocument* document) :
-    m_document(document),
-    m_placemarks(document->placemarkList())
+    m_document(document)
 {
     // nothing to do
 }
@@ -27,16 +26,6 @@ BaseFilter::BaseFilter(GeoDataDocument* document) :
 BaseFilter::~BaseFilter()
 {
 
-}
-
-const QVector<GeoDataPlacemark *> &BaseFilter::placemarks() const
-{
-    return m_placemarks;
-}
-
-QVector<GeoDataPlacemark *> &BaseFilter::placemarks()
-{
-    return m_placemarks;
 }
 
 const GeoDataDocument *BaseFilter::document() const

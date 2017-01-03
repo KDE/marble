@@ -28,6 +28,7 @@ class GeoGraphicsItemPrivate;
 class GeoPainter;
 class StyleBuilder;
 class ViewportParams;
+class GeoDataRelation;
 
 class RenderContext
 {
@@ -156,6 +157,10 @@ class MARBLE_EXPORT GeoGraphicsItem
      * @return
      */
     virtual bool contains(const QPoint &screenPosition, const ViewportParams *viewport) const;
+
+    void addRelation(const GeoDataRelation *relation);
+
+    void removeRelation(const GeoDataRelation *relation);
 
  protected:
     GeoGraphicsItemPrivate *const d;

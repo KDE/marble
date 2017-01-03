@@ -26,6 +26,7 @@ class GeoDataFeature;
 class GeoDataLatLonBox;
 class GeoGraphicsScenePrivate;
 class GeoDataPlacemark;
+class GeoDataRelation;
 
 /**
  * @short This is the home of all GeoGraphicsItems to be shown on the map.
@@ -48,11 +49,15 @@ public:
      */
     void addItem( GeoGraphicsItem *item );
 
+    void addRelation(const GeoDataRelation* relation);
+
     /**
      * @brief Remove all concerned items from the GeoGraphicsScene
      * Removes all items which are associated with @p object from the GeoGraphicsScene
      */
     void removeItem( const GeoDataFeature *feature );
+
+    void removeRelation(const GeoDataRelation* relation);
 
     /**
      * @brief Remove all items from the GeoGraphicsScene

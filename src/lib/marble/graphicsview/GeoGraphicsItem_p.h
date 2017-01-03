@@ -17,6 +17,8 @@
 #include "GeoDataStyle.h"
 #include "StyleBuilder.h"
 
+#include <QSet>
+
 namespace Marble
 {
 
@@ -27,6 +29,7 @@ class GeoGraphicsItemPrivate
         : m_zValue( 0 ),
           m_minZoomLevel( 0 ),
           m_feature( feature ),
+          m_styleBuilder(nullptr),
           m_highlighted( false )
     {
     }
@@ -43,6 +46,7 @@ class GeoGraphicsItemPrivate
     RenderContext m_renderContext;
     GeoDataStyle::ConstPtr m_style;
     const StyleBuilder *m_styleBuilder;
+    QSet<const GeoDataRelation*> m_relations;
 
     QStringList m_paintLayers;
 

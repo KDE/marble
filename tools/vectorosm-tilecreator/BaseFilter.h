@@ -11,9 +11,6 @@
 #ifndef OBJECTHANDLER_H
 #define OBJECTHANDLER_H
 
-#include <QList>
-#include <QDebug>
-
 #include "GeoDataDocument.h"
 
 namespace Marble {
@@ -24,9 +21,6 @@ public:
     explicit BaseFilter(GeoDataDocument* document);
     virtual ~BaseFilter();
 
-    const QVector<GeoDataPlacemark*> & placemarks() const;
-    QVector<GeoDataPlacemark*> & placemarks();
-
     const GeoDataDocument* document() const;
     GeoDataDocument* document();
 
@@ -34,7 +28,6 @@ private:
     Q_DISABLE_COPY(BaseFilter)
 
     GeoDataDocument* m_document;
-    QVector<GeoDataPlacemark*> m_placemarks;
 };
 
 }

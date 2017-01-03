@@ -23,7 +23,7 @@ namespace Marble {
 
 QSet<StyleBuilder::OsmTag> OsmWay::s_areaTags;
 
-void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes, QSet<qint64> &usedNodes) const
+GeoDataPlacemark *OsmWay::create(const OsmNodes &nodes, QSet<qint64> &usedNodes) const
 {
     OsmPlacemarkData osmData = m_osmData;
     GeoDataGeometry *geometry = 0;
@@ -36,7 +36,7 @@ void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes, QSet<qint6
             qint64 nodeId = m_references[i];
             auto const nodeIter = nodes.constFind(nodeId);
             if (nodeIter == nodes.constEnd()) {
-                return;
+                return nullptr;
             }
 
             OsmNode const & node = nodeIter.value();
@@ -53,7 +53,7 @@ void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes, QSet<qint6
         foreach(qint64 nodeId, m_references) {
             auto const nodeIter = nodes.constFind(nodeId);
             if (nodeIter == nodes.constEnd()) {
-                return;
+                return nullptr;
             }
 
             OsmNode const & node = nodeIter.value();
@@ -81,7 +81,7 @@ void OsmWay::create(GeoDataDocument *document, const OsmNodes &nodes, QSet<qint6
     placemark->setPopularity(StyleBuilder::popularity(placemark));
     placemark->setVisible(placemark->visualCategory() != GeoDataPlacemark::None);
 
-    document->append(placemark);
+    return placemark;
 }
 
 const QVector<qint64> &OsmWay::references() const

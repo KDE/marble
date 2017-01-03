@@ -14,6 +14,8 @@
 #include "GeoDataDocument.h"
 #include "GeoDataLineString.h"
 #include "GeoDataLinearRing.h"
+#include "GeoDataPlacemark.h"
+#include "GeoDataRelation.h"
 #include "GeoDataPolygon.h"
 #include "GeoWriter.h"
 #include "osm/OsmPlacemarkData.h"
@@ -39,7 +41,7 @@ bool O5mWriter::write(QIODevice *device, const GeoDataDocument &document)
     writeHeader(stream);
     writeNodes(converter.nodes(), stream);
     writeWays(converter.ways(), stream);
-    writePolygons(converter.polygons(), stream);
+    writeRelations(converter.relations(), stream);
     writeTrailer(stream);
 
     return true;
@@ -138,9 +140,9 @@ void O5mWriter::writeWays(const OsmConverter::Ways &ways, QDataStream &stream) c
     }
 }
 
-void O5mWriter::writePolygons(const OsmConverter::Polygons &polygons, QDataStream &stream) const
+void O5mWriter::writeRelations(const OsmConverter::Relations &relations, QDataStream &stream) const
 {
-    if (polygons.empty()) {
+    if (relations.empty()) {
         return;
     }
 
@@ -149,13 +151,13 @@ void O5mWriter::writePolygons(const OsmConverter::Polygons &polygons, QDataStrea
     qint64 lastId = 0;
     qint64 lastReferenceId = 0;
 
-    foreach(const auto & polygon, polygons) {
-        if (polygon.second.id() == lastId) {
+    foreach(const auto & relation, relations) {
+        if (relation.second.id() == lastId) {
             continue;
         }
 
         stream << qint8(0x12); // relation start indicator
-        OsmPlacemarkData const & osmData = polygon.second;
+        OsmPlacemarkData const & osmData = relation.second;
 
         QBuffer buffer;
         buffer.open(QIODevice::WriteOnly);
@@ -169,7 +171,17 @@ void O5mWriter::writePolygons(const OsmConverter::Polygons &polygons, QDataStrea
         QBuffer referencesBuffer;
         referencesBuffer.open(QIODevice::WriteOnly);
         QDataStream referencesStream(&referencesBuffer);
-        writeRelationMembers(*polygon.first, lastReferenceId, osmData, stringTable, referencesStream);
+        if (relation.first->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
+            auto placemark = static_cast<const GeoDataPlacemark*>(relation.first);
+            Q_ASSERT(placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType);
+            auto polygon = static_cast<const GeoDataPolygon*>(placemark->geometry());
+            writeMultipolygonMembers(*polygon, lastReferenceId, osmData, stringTable, referencesStream);
+        } else if (relation.first->nodeType() == GeoDataTypes::GeoDataRelationType) {
+            auto placemark = static_cast<const GeoDataRelation*>(relation.first);
+            writeRelationMembers(placemark, lastReferenceId, osmData, stringTable, referencesStream);
+        } else {
+            Q_ASSERT(false);
+        }
         writeUnsigned(referencesBuffer.size(), bufferStream);
         bufferStream.writeRawData(referencesBuffer.data().constData(), referencesBuffer.size());
 
@@ -185,7 +197,7 @@ void O5mWriter::writeTrailer(QDataStream &stream) const
     stream << qint8(0xfe); // o5m file end indicator
 }
 
-void O5mWriter::writeRelationMembers(const GeoDataPolygon &polygon, qint64 &lastId, const OsmPlacemarkData &osmData, StringTable &stringTable, QDataStream &stream) const
+void O5mWriter::writeMultipolygonMembers(const GeoDataPolygon &polygon, qint64 &lastId, const OsmPlacemarkData &osmData, StringTable &stringTable, QDataStream &stream) const
 {
     qint64 id = osmData.memberReference(-1).id();
     qint64 idDiff = id - lastId;
@@ -197,6 +209,19 @@ void O5mWriter::writeRelationMembers(const GeoDataPolygon &polygon, qint64 &last
         qint64 idDiff = id - lastId;
         writeSigned(idDiff, stream);
         writeStringPair(StringPair("1inner", QString()), stringTable, stream); // type=way, role=inner
+        lastId = id;
+    }
+}
+
+void O5mWriter::writeRelationMembers(const GeoDataRelation *relation, qint64 &lastId, const OsmPlacemarkData &osmData, O5mWriter::StringTable &stringTable, QDataStream &stream) const
+{
+    Q_UNUSED(relation);
+    for (auto iter = osmData.relationReferencesBegin(), end = osmData.relationReferencesEnd(); iter != end; ++iter) {
+        qint64 id = iter.key();
+        qint64 idDiff = id - lastId;
+        writeSigned(idDiff, stream);
+        auto const key = QString("1%1").arg(iter.value());
+        writeStringPair(StringPair(key, QString()), stringTable, stream); // type=way, role=...
         lastId = id;
     }
 }

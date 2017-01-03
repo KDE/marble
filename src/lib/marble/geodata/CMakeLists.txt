@@ -49,6 +49,7 @@ SET ( geodata_data_SRCS
         geodata/data/GeoDataLabelStyle.cpp
         geodata/data/GeoDataTimeSpan.cpp
         geodata/data/GeoDataMultiGeometry.cpp
+        geodata/data/GeoDataRelation.cpp
         geodata/data/GeoDataSimpleArrayData.cpp
         geodata/data/GeoDataObject.cpp
         geodata/data/GeoDataLatLonQuad.cpp

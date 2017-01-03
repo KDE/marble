@@ -52,6 +52,7 @@
 #include "StyleBuilder.h"
 #include "AbstractGeoPolygonGraphicsItem.h"
 #include "GeoLineStringGraphicsItem.h"
+#include "GeoDataRelation.h"
 
 // Qt
 #include <qmath.h>
@@ -299,6 +300,8 @@ void GeometryLayerPrivate::createGraphicsItems(const GeoDataObject *object)
     if (object->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
         auto placemark = static_cast<const GeoDataPlacemark*>(object);
         createGraphicsItemFromGeometry(placemark->geometry(), placemark);
+    } else if (object->nodeType() == GeoDataTypes::GeoDataRelationType) {
+        m_scene.addRelation(static_cast<const GeoDataRelation*>(object));
     } else if (const GeoDataOverlay* overlay = dynamic_cast<const GeoDataOverlay*>(object)) {
         createGraphicsItemFromOverlay(overlay);
     }
@@ -453,6 +456,8 @@ void GeometryLayerPrivate::removeGraphicsItems(const GeoDataFeature *feature)
             updateTiledLineStrings(items);
         }
         m_scene.removeItem(feature);
+    } else if (feature->nodeType() == GeoDataTypes::GeoDataRelationType) {
+        m_scene.removeRelation(static_cast<const GeoDataRelation*>(feature));
     } else if (feature->nodeType() == GeoDataTypes::GeoDataFolderType
                || feature->nodeType() == GeoDataTypes::GeoDataDocumentType) {
         const GeoDataContainer *container = static_cast<const GeoDataContainer*>(feature);

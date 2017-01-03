@@ -20,6 +20,7 @@ namespace Marble
 {
 
 class GeoDataLineString;
+class GeoDataRelation;
 class OsmPlacemarkData;
 
 class O5mWriter: public GeoWriterBackend
@@ -34,10 +35,11 @@ private:
   void writeHeader(QDataStream& stream) const;
   void writeNodes(const OsmConverter::Nodes &nodes, QDataStream& stream) const;
   void writeWays(const OsmConverter::Ways &ways, QDataStream& stream) const;
-  void writePolygons(const OsmConverter::Polygons &polygons, QDataStream& stream) const;
+  void writeRelations(const OsmConverter::Relations &relations, QDataStream& stream) const;
   void writeTrailer(QDataStream& stream) const;
 
-  void writeRelationMembers(const GeoDataPolygon &polygon, qint64 &lastId, const OsmPlacemarkData &osmData, StringTable &stringTable, QDataStream &stream) const;
+  void writeMultipolygonMembers(const GeoDataPolygon &polygon, qint64 &lastId, const OsmPlacemarkData &osmData, StringTable &stringTable, QDataStream &stream) const;
+  void writeRelationMembers(const GeoDataRelation *relation, qint64 &lastId, const OsmPlacemarkData &osmData, StringTable &stringTable, QDataStream &stream) const;
   void writeReferences(const GeoDataLineString &lineString, qint64 &lastId, const OsmPlacemarkData &osmData, QDataStream &stream) const;
   void writeVersion(const OsmPlacemarkData &osmData, QDataStream &stream) const;
   void writeTags(const OsmPlacemarkData &osmData, StringTable &stringTable, QDataStream &stream) const;

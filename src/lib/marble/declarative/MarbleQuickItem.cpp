@@ -38,6 +38,9 @@
 #include <routing/RoutingModel.h>
 #include <routing/Route.h>
 #include <BookmarkManager.h>
+#include "GeoDataRelation.h"
+#include "osm/OsmPlacemarkData.h"
+#include "GeoDataDocument.h"
 
 namespace Marble
 {
@@ -606,6 +609,18 @@ namespace Marble
                 }
                 d->m_placemark = new Placemark(this);
                 d->m_placemark->setGeoDataPlacemark(*placemark);
+                if (placemark->parent() && placemark->parent()->nodeType() == GeoDataTypes::GeoDataDocumentType) {
+                    auto const document = static_cast<const GeoDataDocument*>(placemark->parent());
+                    for (auto feature: document->featureList()) {
+                        if (feature->nodeType() == GeoDataTypes::GeoDataRelationType) {
+                            auto const relation = static_cast<const GeoDataRelation*>(feature);
+                            if (relation->memberIds().contains(placemark->osmData().oid())) {
+                                // @TODO Can be used to present relations to the user, e.g.
+                                // selecting a hiking route for highlighting
+                            }
+                        }
+                    }
+                }
             }
             delete d->m_placemarkItem;
             d->m_placemarkItem = nullptr;

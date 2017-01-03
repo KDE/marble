@@ -214,14 +214,19 @@ GeoDataDocument *OsmParser::createDocument(OsmNodes &nodes, OsmWays &ways, OsmRe
 
     QSet<qint64> usedNodes, usedWays;
     foreach(OsmRelation const &relation, relations) {
-        relation.create(document, ways, nodes, usedNodes, usedWays);
+        relation.createMultipolygon(document, ways, nodes, usedNodes, usedWays);
     }
     foreach(qint64 id, usedWays) {
         ways.remove(id);
     }
 
-    foreach(OsmWay const &way, ways) {
-        way.create(document, nodes, usedNodes);
+    QHash<qint64, GeoDataPlacemark*> wayPlacemarks;
+    for (auto iter=ways.constBegin(), end=ways.constEnd(); iter != end; ++iter) {
+        auto placemark = iter.value().create(nodes, usedNodes);
+        if (placemark) {
+            document->append(placemark);
+            wayPlacemarks[placemark->osmData().oid()] = placemark;
+        }
     }
 
     foreach(qint64 id, usedNodes) {
@@ -232,6 +237,10 @@ GeoDataDocument *OsmParser::createDocument(OsmNodes &nodes, OsmWays &ways, OsmRe
 
     foreach(OsmNode const &node, nodes) {
         node.create(document);
+    }
+
+    foreach(OsmRelation const &relation, relations) {
+        relation.createRoute(document, wayPlacemarks);
     }
 
     return document;

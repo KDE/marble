@@ -15,6 +15,7 @@
 
 #include <GeoDataPlacemark.h>
 #include <GeoDataStyle.h>
+#include <GeoDataRelation.h>
 
 #include <QHash>
 #include <QPair>
@@ -32,6 +33,7 @@ public:
 
     const GeoDataPlacemark *placemark;
     int tileLevel;
+    const GeoDataRelation *relation;
 };
 
 class MARBLE_EXPORT StyleBuilder

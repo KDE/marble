@@ -17,6 +17,7 @@
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataPolygon.h"
 #include "GeoDataPlacemark.h"
+#include "GeoDataRelation.h"
 #include "OsmPlacemarkData.h"
 #include "OsmObjectManager.h"
 #include "TileCoordsPyramid.h"
@@ -34,19 +35,26 @@ VectorClipper::VectorClipper(GeoDataDocument* document, int maxZoomLevel) :
     BaseFilter(document),
     m_maxZoomLevel(maxZoomLevel)
 {
-    foreach(auto placemark, placemarks()) {
-        // Select zoom level such that the placemark fits in a single tile
-        int zoomLevel;
-        qreal north, south, east, west;
-        placemark->geometry()->latLonAltBox().boundaries(north, south, east, west);
-        for (zoomLevel = maxZoomLevel; zoomLevel >= 0; --zoomLevel) {
-            if (TileId::fromCoordinates(GeoDataCoordinates(west, north), zoomLevel) ==
-                    TileId::fromCoordinates(GeoDataCoordinates(east, south), zoomLevel)) {
-                break;
+    for (auto feature: document->featureList()) {
+        if (feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
+            GeoDataPlacemark* placemark = static_cast<GeoDataPlacemark*>(feature);
+            // Select zoom level such that the placemark fits in a single tile
+            int zoomLevel;
+            qreal north, south, east, west;
+            placemark->geometry()->latLonAltBox().boundaries(north, south, east, west);
+            for (zoomLevel = maxZoomLevel; zoomLevel >= 0; --zoomLevel) {
+                if (TileId::fromCoordinates(GeoDataCoordinates(west, north), zoomLevel) ==
+                        TileId::fromCoordinates(GeoDataCoordinates(east, south), zoomLevel)) {
+                    break;
+                }
             }
+            TileId const key = TileId::fromCoordinates(GeoDataCoordinates(west, north), zoomLevel);
+            m_items[key] << placemark;
+        } else if (feature->nodeType() == GeoDataTypes::GeoDataRelationType) {
+            m_relations << static_cast<GeoDataRelation*>(feature);
+        } else {
+            Q_ASSERT(false && "only placemark variants are supported so far");
         }
-        TileId const key = TileId::fromCoordinates(GeoDataCoordinates(west, north), zoomLevel);
-        m_items[key] << placemark;
     }
 }
 
@@ -66,21 +74,36 @@ GeoDataDocument *VectorClipper::clipTo(const GeoDataLatLonBox &tileBoundary, int
     ring << GeoDataCoordinates(tileBoundary.east(), tileBoundary.south());
     ring << GeoDataCoordinates(tileBoundary.west(), tileBoundary.south());
     qreal const minArea = filterSmallAreas ? 0.01 * area(ring) : 0.0;
+    QSet<qint64> osmIds;
     foreach (GeoDataPlacemark const * placemark, potentialIntersections(tileBoundary)) {
         GeoDataGeometry const * const geometry = placemark ? placemark->geometry() : nullptr;
         if (geometry && tileBoundary.intersects(geometry->latLonAltBox())) {
             if(geometry->nodeType() == GeoDataTypes::GeoDataPolygonType) {
-                clipPolygon(placemark, clip, minArea, tile);
+                clipPolygon(placemark, clip, minArea, tile, osmIds);
             } else if (geometry->nodeType() == GeoDataTypes::GeoDataLineStringType) {
-                clipString<GeoDataLineString>(placemark, clip, minArea, tile);
+                clipString<GeoDataLineString>(placemark, clip, minArea, tile, osmIds);
             } else if (geometry->nodeType() == GeoDataTypes::GeoDataLinearRingType) {
-                clipString<GeoDataLinearRing>(placemark, clip, minArea, tile);
+                clipString<GeoDataLinearRing>(placemark, clip, minArea, tile, osmIds);
             } else {
                 tile->append(placemark->clone());
+                osmIds << placemark->osmData().id();
             }
         }
     }
 
+    for (auto relation: m_relations) {
+        bool const hasMember =
+#if QT_VERSION >= 0x050600 // intersects was introduced in Qt 5.6.
+        relation->memberIds().intersects(osmIds);
+#else
+        !relation->memberIds().intersect(osmIds).isEmpty();
+#endif
+        if (hasMember) {
+            GeoDataRelation* multi = new GeoDataRelation;
+            multi->osmData() = relation->osmData();
+            tile->append(multi);
+        }
+    }
     return tile;
 }
 
@@ -90,7 +113,7 @@ GeoDataDocument *VectorClipper::clipToBaseClipper(const GeoDataLatLonBox &tileBo
     BaseClipper clipper;
     clipper.initClipRect(tileBoundary, 20);
 
-    foreach (GeoDataPlacemark const * placemark, placemarks()) {
+    foreach (GeoDataPlacemark const * placemark, document()->placemarkList()) {
 
         if(placemark && placemark->geometry() && tileBoundary.intersects(placemark->geometry()->latLonAltBox())) {
 
@@ -349,7 +372,8 @@ void VectorClipper::getBounds(const ClipperLib::Path &path, ClipperLib::cInt &mi
     }
 }
 
-void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const ClipperLib::Path &tileBoundary, qreal minArea, GeoDataDocument *document)
+void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const ClipperLib::Path &tileBoundary, qreal minArea,
+                                GeoDataDocument *document, QSet<qint64> &osmIds)
 {
     const GeoDataPolygon* polygon = static_cast<const GeoDataPolygon*>(placemark->geometry());
     if (minArea > 0.0 && area(polygon->outerBoundary()) < minArea) {
@@ -443,6 +467,7 @@ void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const Clipper
 
         OsmObjectManager::initializeOsmData(newPlacemark);
         document->append(newPlacemark);
+        osmIds << placemark->osmData().id();
     }
 }
 

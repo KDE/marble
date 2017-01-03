@@ -17,6 +17,7 @@
 #include "GeoDataDocument.h"
 #include "OsmPlacemarkData.h"
 #include "GeoDataPlacemark.h"
+#include "GeoDataTypes.h"
 
 namespace Marble {
 
@@ -24,34 +25,39 @@ TagsFilter::TagsFilter(GeoDataDocument *geoDocument, const Tags &tagsList, Filte
     : BaseFilter(geoDocument),
       m_accepted(new GeoDataDocument)
 {
-    QVector<GeoDataPlacemark*> previousObjects(placemarks());
-    foreach (GeoDataPlacemark *placemark, previousObjects) {
-        bool acceptPlacemark = false;
-        auto const & osmData = placemark->osmData();
+    foreach (GeoDataFeature *feature, document()->featureList()) {
+        if (feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
+            GeoDataPlacemark* placemark = static_cast<GeoDataPlacemark*>(feature);
+            bool acceptPlacemark = false;
+            auto const & osmData = placemark->osmData();
 
-        if (filterFlag == FilterRailwayService &&
-                osmData.containsTagKey(QStringLiteral("railway")) &&
-                osmData.containsTagKey(QStringLiteral("service"))) {
-            acceptPlacemark = false;
-        } else {
-            for (auto const &tag: tagsList) {
-                bool contains;
-                if (tag.second == QLatin1String("*")) {
-                    contains = osmData.containsTagKey(tag.first);
-                } else {
-                    contains = osmData.containsTag(tag.first, tag.second);
-                }
-                if (contains) {
-                    acceptPlacemark = true;
-                    break;
+            if (filterFlag == FilterRailwayService &&
+                    osmData.containsTagKey(QStringLiteral("railway")) &&
+                    osmData.containsTagKey(QStringLiteral("service"))) {
+                acceptPlacemark = false;
+            } else {
+                for (auto const &tag: tagsList) {
+                    bool contains;
+                    if (tag.second == QLatin1String("*")) {
+                        contains = osmData.containsTagKey(tag.first);
+                    } else {
+                        contains = osmData.containsTag(tag.first, tag.second);
+                    }
+                    if (contains) {
+                        acceptPlacemark = true;
+                        break;
+                    }
                 }
             }
-        }
 
-        if (acceptPlacemark) {
-            m_accepted->append(placemark->clone());
-        } else {
-            m_rejectedObjects.append(placemark->clone());
+            if (acceptPlacemark) {
+                m_accepted->append(placemark->clone());
+            } else {
+                m_rejectedObjects.append(placemark->clone());
+            }
+        }
+        else {
+            m_accepted->append(feature->clone());
         }
     }
 }

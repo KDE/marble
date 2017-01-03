@@ -69,6 +69,7 @@ const char GeoDataPointType[] = "GeoDataPoint";
 const char GeoDataPolygonType[] = "GeoDataPolygon";
 const char GeoDataPolyStyleType[] = "GeoDataPolyStyle";
 const char GeoDataRegionType[] = "GeoDataRegion";
+const char GeoDataRelationType[] = "GeoDataRelationType";
 const char GeoDataResourceMapType[] = "GeoDataResourceMap";
 const char GeoDataSchemaType[] = "GeoDataSchema";
 const char GeoDataSchemaDataType[] = "GeoDataSchemaData";

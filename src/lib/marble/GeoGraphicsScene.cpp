@@ -17,6 +17,7 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataDocument.h"
 #include "GeoDataTypes.h"
+#include "GeoDataRelation.h"
 #include "GeoGraphicsItem.h"
 #include "TileId.h"
 #include "TileCoordsPyramid.h"
@@ -44,6 +45,7 @@ public:
 
     QMap<TileId, QList<GeoGraphicsItem*> > m_tiledItems;
     QMultiHash<const GeoDataFeature*, TileId> m_features;
+    QSet<const GeoDataRelation*> m_relations;
 
     // Stores the items which have been clicked;
     QList<GeoGraphicsItem*> m_selectedItems;
@@ -52,6 +54,7 @@ public:
 
     void selectItem( GeoGraphicsItem *item );
     void applyHighlightStyle(GeoGraphicsItem *item, const GeoDataStyle::Ptr &style );
+    void addRelation(const GeoDataRelation* relation);
 };
 
 GeoDataStyle::Ptr GeoGraphicsScenePrivate::highlightStyle( const GeoDataDocument *document,
@@ -78,6 +81,21 @@ void GeoGraphicsScenePrivate::applyHighlightStyle(GeoGraphicsItem* item, const G
 {
     item->setHighlightStyle( highlightStyle );
     item->setHighlighted( true );
+}
+
+void GeoGraphicsScenePrivate::addRelation(const GeoDataRelation *relation)
+{
+    auto const members = relation->members();
+    for (auto const &items: m_tiledItems) {
+        for (auto const & item: items) {
+            if (item->feature()->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
+                auto placemark = static_cast<const GeoDataPlacemark*>(item->feature());
+                if (members.contains(placemark)) {
+                    item->addRelation(relation);
+                }
+            }
+        }
+    }
 }
 
 GeoGraphicsScene::GeoGraphicsScene( QObject* parent ):
@@ -236,6 +254,11 @@ void GeoGraphicsScene::removeItem( const GeoDataFeature* feature )
     }
 }
 
+void GeoGraphicsScene::removeRelation(const GeoDataRelation *relation)
+{
+    d->m_relations.remove(relation);
+}
+
 void GeoGraphicsScene::clear()
 {
     foreach(const QList<GeoGraphicsItem*> &list, d->m_tiledItems.values()) {
@@ -243,6 +266,7 @@ void GeoGraphicsScene::clear()
     }
     d->m_tiledItems.clear();
     d->m_features.clear();
+    d->m_relations.clear();
 }
 
 void GeoGraphicsScene::addItem( GeoGraphicsItem* item )
@@ -264,6 +288,15 @@ void GeoGraphicsScene::addItem( GeoGraphicsItem* item )
     QList< GeoGraphicsItem* >::iterator position = qLowerBound( tileList.begin(), tileList.end(), item, GeoGraphicsItem::zValueLessThan );
     tileList.insert( position, item );
     d->m_features.insert( item->feature(), key );
+    for (auto relation: d->m_relations) {
+        d->addRelation(relation);
+    }
+}
+
+void GeoGraphicsScene::addRelation(const GeoDataRelation *relation)
+{
+    d->m_relations << relation;
+    d->addRelation(relation);
 }
 
 }

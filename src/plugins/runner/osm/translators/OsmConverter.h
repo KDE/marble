@@ -19,6 +19,7 @@ namespace Marble
 class GeoDataLineString;
 class GeoDataDocument;
 class GeoDataPolygon;
+class GeoDataFeature;
 class OsmPlacemarkData;
 
 class OsmConverter
@@ -27,23 +28,23 @@ public:
     typedef QPair<QString, QString> Tag;
     typedef QPair<GeoDataCoordinates, OsmPlacemarkData > Node;
     typedef QPair<const GeoDataLineString*, OsmPlacemarkData > Way;
-    typedef QPair<const GeoDataPolygon*, OsmPlacemarkData > Polygon;
+    typedef QPair<const GeoDataFeature*, OsmPlacemarkData > Relation;
 
     typedef QVector<Node> Nodes;
     typedef QVector<Tag> Tags;
     typedef QVector<Way> Ways;
-    typedef QVector<Polygon> Polygons;
+    typedef QVector<Relation> Relations;
 
     void read(const GeoDataDocument* document);
 
     const Nodes & nodes() const;
     const Ways & ways() const;
-    const Polygons & polygons() const;
+    const Relations &relations() const;
 
 private:
     Nodes m_nodes;
     Ways m_ways;
-    Polygons m_polygons;
+    Relations m_relations;
 };
 
 }

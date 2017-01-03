@@ -657,7 +657,6 @@ QString GeoDataPlacemark::categoryName() const
     case RailwayConstruction: return GeoDataPlacemarkPrivate::tr("Railway Construction");
     case RailwayMonorail: return GeoDataPlacemarkPrivate::tr("Monorail");
     case RailwayFunicular: return GeoDataPlacemarkPrivate::tr("Funicular Railway");
-    case RouteHiking: return GeoDataPlacemarkPrivate::tr("Hiking Route");
     case PowerTower: return GeoDataPlacemarkPrivate::tr("Power Tower");
     case AdminLevel1: return GeoDataPlacemarkPrivate::tr("Admin Boundary (Level 1)");
     case AdminLevel2: return GeoDataPlacemarkPrivate::tr("Admin Boundary (Level 2)");

@@ -30,10 +30,10 @@ public:
     OsmPlacemarkData & osmData();
     void parseMember(const QXmlStreamAttributes &attributes);
     void addMember(qint64 reference, const QString &role, const QString &type);
+    void createMultipolygon(GeoDataDocument* document, OsmWays &ways, const OsmNodes &nodes, QSet<qint64> &usedNodes, QSet<qint64> &usedWays) const;
+    void createRoute(GeoDataDocument* document, const QHash<qint64, GeoDataPlacemark*> wayPlacemarks) const;
 
     const OsmPlacemarkData & osmData() const;
-
-    void create(GeoDataDocument* document, OsmWays &ways, const OsmNodes &nodes, QSet<qint64> &usedNodes, QSet<qint64> &usedWays) const;
 
 private:
     typedef QPair<GeoDataLinearRing, OsmPlacemarkData> OsmRing;
@@ -47,9 +47,6 @@ private:
 
         OsmMember();
     };
-
-    void createMultipolygon(GeoDataDocument* document, OsmWays &ways, const OsmNodes &nodes, QSet<qint64> &usedNodes, QSet<qint64> &usedWays) const;
-    void createHikingRoute(GeoDataDocument* document, OsmWays &ways, const OsmNodes &nodes, QSet<qint64> &usedNodes, QSet<qint64> &usedWays) const;
 
     OsmRings rings(const QStringList &roles, const OsmWays &ways, const OsmNodes &nodes, QSet<qint64> &usedNodes, QSet<qint64> &usedWays) const;
 
