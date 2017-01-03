@@ -340,26 +340,24 @@ void BuildingGeoPolygonGraphicsItem::paintRoof(GeoPainter* painter, const Viewpo
     double maxArea = 0.0;
 
     for (int i = 0; i < m_cachedOuterRoofPolygons.size(); ++i) {
-        const QPolygonF *outerPolygon = m_cachedOuterRoofPolygons[i];
-        QRectF const boundingRect = outerPolygon->boundingRect();
+        const QPolygonF *outerRoof = m_cachedOuterRoofPolygons[i];
 
         QPointF roofCenter;
 
         // Label position calculation
         if (!m_buildingText.isEmpty() || !m_entries.isEmpty()) {
-            QSizeF const polygonSize = boundingRect.size();
+            QSizeF const polygonSize = outerRoof->boundingRect().size();
             qreal size = polygonSize.width() * polygonSize.height();
             if (size > maxSize) {
                 maxSize = size;
                 double area;
-                roofCenter = centroid(*outerPolygon, area);
+                roofCenter = centroid(*outerRoof, area);
                 maxArea = qMax(area, maxArea);
             }
         }
 
         // Draw the housenumber labels
-        if (drawAccurate3D && !m_buildingText.isEmpty() && !roofCenter.isNull() && !m_cachedOuterRoofPolygons.isEmpty()) {
-            QPolygonF * outerRoof = m_cachedOuterRoofPolygons[i];
+        if (drawAccurate3D && !m_buildingText.isEmpty() && !roofCenter.isNull()) {
             double const w2 = 0.5 * painter->fontMetrics().width(m_buildingText);
             double const ascent = painter->fontMetrics().ascent();
             double const descent = painter->fontMetrics().descent();
