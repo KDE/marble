@@ -76,10 +76,10 @@ public:
 
     explicit GeometryLayerPrivate(const QAbstractItemModel *model, const StyleBuilder *styleBuilder);
 
-    void createGraphicsItems( const GeoDataObject *object );
+    void createGraphicsItems(const GeoDataObject *object);
     void createGraphicsItemFromGeometry(const GeoDataGeometry *object, const GeoDataPlacemark *placemark);
-    void createGraphicsItemFromOverlay( const GeoDataOverlay *overlay );
-    void removeGraphicsItems( const GeoDataFeature *feature );
+    void createGraphicsItemFromOverlay(const GeoDataOverlay *overlay);
+    void removeGraphicsItems(const GeoDataFeature *feature);
     void updateTiledLineStrings(const GeoDataPlacemark *placemark, GeoLineStringGraphicsItem* lineStringItem);
     void updateTiledLineStrings(OsmLineStringItems &lineStringItems);
     void clearCache();
@@ -90,7 +90,7 @@ public:
     QString m_runtimeTrace;
     QList<ScreenOverlayGraphicsItem*> m_screenOverlays;
 
-    QHash<qint64,OsmLineStringItems> m_osmLineStringItems;
+    QHash<qint64, OsmLineStringItems> m_osmLineStringItems;
     int m_tileLevel;
     GeoGraphicsItem* m_lastFeatureAt;
 
@@ -116,22 +116,23 @@ GeometryLayerPrivate::GeometryLayerPrivate(const QAbstractItemModel *model, cons
 GeometryLayer::GeometryLayer(const QAbstractItemModel *model, const StyleBuilder *styleBuilder) :
     d(new GeometryLayerPrivate(model, styleBuilder))
 {
-    const GeoDataObject *object = static_cast<GeoDataObject*>( d->m_model->index( 0, 0, QModelIndex() ).internalPointer() );
-    if ( object && object->parent() )
-        d->createGraphicsItems( object->parent() );
+    const GeoDataObject *object = static_cast<GeoDataObject*>(d->m_model->index(0, 0, QModelIndex()).internalPointer());
+    if (object && object->parent()) {
+        d->createGraphicsItems(object->parent());
+    }
 
-    connect( model, SIGNAL(dataChanged(QModelIndex,QModelIndex)),
-             this, SLOT(resetCacheData()) );
-    connect( model, SIGNAL(rowsInserted(QModelIndex,int,int)),
-             this, SLOT(addPlacemarks(QModelIndex,int,int)) );
-    connect( model, SIGNAL(rowsAboutToBeRemoved(QModelIndex,int,int)),
-             this, SLOT(removePlacemarks(QModelIndex,int,int)) );
-    connect( model, SIGNAL(modelReset()),
-             this, SLOT(resetCacheData()) );
-    connect( this, SIGNAL(highlightedPlacemarksChanged(QVector<GeoDataPlacemark*>)),
-             &d->m_scene, SLOT(applyHighlight(QVector<GeoDataPlacemark*>)) );
-    connect( &d->m_scene, SIGNAL(repaintNeeded()),
-             this, SIGNAL(repaintNeeded()) );
+    connect(model, SIGNAL(dataChanged(QModelIndex, QModelIndex)),
+            this, SLOT(resetCacheData()));
+    connect(model, SIGNAL(rowsInserted(QModelIndex, int, int)),
+            this, SLOT(addPlacemarks(QModelIndex, int, int)));
+    connect(model, SIGNAL(rowsAboutToBeRemoved(QModelIndex, int, int)),
+            this, SLOT(removePlacemarks(QModelIndex, int, int)));
+    connect(model, SIGNAL(modelReset()),
+            this, SLOT(resetCacheData()));
+    connect(this, SIGNAL(highlightedPlacemarksChanged(QVector<GeoDataPlacemark*>)),
+            &d->m_scene, SLOT(applyHighlight(QVector<GeoDataPlacemark*>)));
+    connect(&d->m_scene, SIGNAL(repaintNeeded()),
+            this, SIGNAL(repaintNeeded()));
 }
 
 GeometryLayer::~GeometryLayer()
@@ -145,16 +146,16 @@ QStringList GeometryLayer::renderPosition() const
 }
 
 
-bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
-                            const QString& renderPos, GeoSceneLayer * layer )
+bool GeometryLayer::render(GeoPainter *painter, ViewportParams *viewport,
+                           const QString& renderPos, GeoSceneLayer * layer)
 {
-    Q_UNUSED( renderPos )
-    Q_UNUSED( layer )
+    Q_UNUSED(renderPos)
+    Q_UNUSED(layer)
 
     painter->save();
 
     auto const & box = viewport->viewLatLonAltBox();
-    bool isEqual = GeoDataLatLonBox::fuzzyCompare( d->m_cachedLatLonBox, box, 0.05 );
+    bool isEqual = GeoDataLatLonBox::fuzzyCompare(d->m_cachedLatLonBox, box, 0.05);
 
     if (d->m_cachedLatLonBox.isEmpty() || !isEqual) {
         d->m_dirty = true;
@@ -178,25 +179,25 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
         d->m_cachedDefaultLayer.clear();
         d->m_cachedPaintFragments.clear();
         QSet<QString> const knownLayers = QSet<QString>::fromList(d->m_styleBuilder->renderOrder());
-        foreach( GeoGraphicsItem* item, items ) {
+        foreach (GeoGraphicsItem* item, items) {
             QStringList paintLayers = item->paintLayers();
             if (paintLayers.isEmpty()) {
                 mDebug() << item << " provides no paint layers, so I force one onto it.";
                 paintLayers << QString();
             }
-            foreach(const auto &layer, paintLayers) {
+            foreach (const auto &layer, paintLayers) {
                 if (knownLayers.contains(layer)) {
                     GeometryLayerPrivate::PaintFragments & fragments = d->m_cachedPaintFragments[layer];
                     double const zValue = item->zValue();
                     // assign subway stations
                     if (zValue == 0.0) {
-                      fragments.null << item;
-                    // assign areas and streets
+                        fragments.null << item;
+                        // assign areas and streets
                     } else if (zValue < 0.0) {
-                      fragments.negative << item;
-                    // assign buildings
+                        fragments.negative << item;
+                        // assign buildings
                     } else {
-                      fragments.positive << item;
+                        fragments.positive << item;
                     }
                 } else {
                     // assign symbols
@@ -224,23 +225,29 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
         GeometryLayerPrivate::PaintFragments & layerItems = d->m_cachedPaintFragments[layer];
         AbstractGeoPolygonGraphicsItem::s_previousStyle = 0;
         GeoLineStringGraphicsItem::s_previousStyle = 0;
-        foreach(auto item, layerItems.negative) { item->paint(painter, viewport, layer, d->m_tileLevel); }
-        foreach(auto item, layerItems.null) { item->paint(painter, viewport, layer, d->m_tileLevel); }
-        foreach(auto item, layerItems.positive) { item->paint(painter, viewport, layer, d->m_tileLevel); }
+        foreach (auto item, layerItems.negative) {
+            item->paint(painter, viewport, layer, d->m_tileLevel);
+        }
+        foreach (auto item, layerItems.null) {
+            item->paint(painter, viewport, layer, d->m_tileLevel);
+        }
+        foreach (auto item, layerItems.positive) {
+            item->paint(painter, viewport, layer, d->m_tileLevel);
+        }
     }
 
-    foreach(const auto & item, d->m_cachedDefaultLayer) {
+    foreach (const auto & item, d->m_cachedDefaultLayer) {
         item.second->paint(painter, viewport, item.first, d->m_tileLevel);
     }
 
-    foreach( ScreenOverlayGraphicsItem* item, d->m_screenOverlays ) {
-        item->paintEvent( painter, viewport );
+    foreach (ScreenOverlayGraphicsItem* item, d->m_screenOverlays) {
+        item->paintEvent(painter, viewport);
     }
 
     painter->restore();
     d->m_runtimeTrace = QStringLiteral("Geometries: %1 Zoom: %2")
-                .arg( d->m_cachedItemCount )
-                .arg( d->m_tileLevel );
+                        .arg(d->m_cachedItemCount)
+                        .arg(d->m_tileLevel);
     return true;
 }
 
@@ -261,21 +268,21 @@ bool GeometryLayer::hasFeatureAt(const QPoint &curpos, const ViewportParams *vie
     }
 
     auto const renderOrder = d->m_styleBuilder->renderOrder();
-    for (int i=renderOrder.size()-1; i>=0; --i) {
+    for (int i = renderOrder.size() - 1; i >= 0; --i) {
         GeometryLayerPrivate::PaintFragments & layerItems = d->m_cachedPaintFragments[renderOrder[i]];
-        for (auto item: layerItems.positive) {
+        for (auto item : layerItems.positive) {
             if (item->contains(curpos, viewport)) {
                 d->m_lastFeatureAt = item;
                 return true;
             }
         }
-        for (auto item: layerItems.null) {
+        for (auto item : layerItems.null) {
             if (item->contains(curpos, viewport)) {
                 d->m_lastFeatureAt = item;
                 return true;
             }
         }
-        for (auto item: layerItems.negative) {
+        for (auto item : layerItems.negative) {
             if (item->contains(curpos, viewport)) {
                 d->m_lastFeatureAt = item;
                 return true;
@@ -286,23 +293,21 @@ bool GeometryLayer::hasFeatureAt(const QPoint &curpos, const ViewportParams *vie
     return false;
 }
 
-void GeometryLayerPrivate::createGraphicsItems( const GeoDataObject *object )
+void GeometryLayerPrivate::createGraphicsItems(const GeoDataObject *object)
 {
     clearCache();
     if (object->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
         auto placemark = static_cast<const GeoDataPlacemark*>(object);
         createGraphicsItemFromGeometry(placemark->geometry(), placemark);
-    } else if ( const GeoDataOverlay* overlay = dynamic_cast<const GeoDataOverlay*>( object ) ) {
-        createGraphicsItemFromOverlay( overlay );
+    } else if (const GeoDataOverlay* overlay = dynamic_cast<const GeoDataOverlay*>(object)) {
+        createGraphicsItemFromOverlay(overlay);
     }
 
     // parse all child objects of the container
-    if ( const GeoDataContainer *container = dynamic_cast<const GeoDataContainer*>( object ) )
-    {
+    if (const GeoDataContainer *container = dynamic_cast<const GeoDataContainer*>(object)) {
         int rowCount = container->size();
-        for ( int row = 0; row < rowCount; ++row )
-        {
-            createGraphicsItems( container->child( row ) );
+        for (int row = 0; row < rowCount; ++row) {
+            createGraphicsItems(container->child(row));
         }
     }
 }
@@ -326,7 +331,7 @@ void GeometryLayerPrivate::updateTiledLineStrings(OsmLineStringItems &lineString
     GeoDataLineString merged;
     if (lineStringItems.size() > 1) {
         QVector<const GeoDataLineString*> lineStrings;
-        for (auto item: lineStringItems) {
+        for (auto item : lineStringItems) {
             lineStrings << item->lineString();
         }
         merged = GeoLineStringGraphicsItem::merge(lineStrings);
@@ -335,7 +340,7 @@ void GeometryLayerPrivate::updateTiledLineStrings(OsmLineStringItems &lineString
     // If merging failed, reset all. Otherwise only the first one
     // gets the merge result and becomes visible.
     bool visible = true;
-    for (auto item: lineStringItems) {
+    for (auto item : lineStringItems) {
         item->setVisible(visible);
         if (visible) {
             item->setMergedLineString(merged);
@@ -362,94 +367,82 @@ void GeometryLayerPrivate::createGraphicsItemFromGeometry(const GeoDataGeometry*
     }
 
     GeoGraphicsItem *item = 0;
-    if ( object->nodeType() == GeoDataTypes::GeoDataLineStringType )
-    {
-        const GeoDataLineString* line = static_cast<const GeoDataLineString*>( object );
-        auto lineStringItem = new GeoLineStringGraphicsItem( placemark, line );
+    if (object->nodeType() == GeoDataTypes::GeoDataLineStringType) {
+        const GeoDataLineString* line = static_cast<const GeoDataLineString*>(object);
+        auto lineStringItem = new GeoLineStringGraphicsItem(placemark, line);
         item = lineStringItem;
         updateTiledLineStrings(placemark, lineStringItem);
-    }
-    else if ( object->nodeType() == GeoDataTypes::GeoDataLinearRingType )
-    {
-        const GeoDataLinearRing *ring = static_cast<const GeoDataLinearRing*>( object );
+    } else if (object->nodeType() == GeoDataTypes::GeoDataLinearRingType) {
+        const GeoDataLinearRing *ring = static_cast<const GeoDataLinearRing*>(object);
         item = GeoPolygonGraphicsItem::createGraphicsItem(placemark, ring);
-    }
-    else if ( object->nodeType() == GeoDataTypes::GeoDataPolygonType )
-    {
-        const GeoDataPolygon *poly = static_cast<const GeoDataPolygon*>( object );
+    } else if (object->nodeType() == GeoDataTypes::GeoDataPolygonType) {
+        const GeoDataPolygon *poly = static_cast<const GeoDataPolygon*>(object);
         item = GeoPolygonGraphicsItem::createGraphicsItem(placemark, poly);
         if (item->zValue() == 0) {
-             item->setZValue(poly->renderOrder());
+            item->setZValue(poly->renderOrder());
         }
-    }
-    else if ( object->nodeType() == GeoDataTypes::GeoDataMultiGeometryType  )
-    {
-        const GeoDataMultiGeometry *multigeo = static_cast<const GeoDataMultiGeometry*>( object );
+    } else if (object->nodeType() == GeoDataTypes::GeoDataMultiGeometryType) {
+        const GeoDataMultiGeometry *multigeo = static_cast<const GeoDataMultiGeometry*>(object);
         int rowCount = multigeo->size();
-        for ( int row = 0; row < rowCount; ++row )
-        {
-            createGraphicsItemFromGeometry(multigeo->child( row ), placemark);
+        for (int row = 0; row < rowCount; ++row) {
+            createGraphicsItemFromGeometry(multigeo->child(row), placemark);
         }
-    }
-    else if ( object->nodeType() == GeoDataTypes::GeoDataMultiTrackType  )
-    {
-        const GeoDataMultiTrack *multitrack = static_cast<const GeoDataMultiTrack*>( object );
+    } else if (object->nodeType() == GeoDataTypes::GeoDataMultiTrackType) {
+        const GeoDataMultiTrack *multitrack = static_cast<const GeoDataMultiTrack*>(object);
         int rowCount = multitrack->size();
-        for ( int row = 0; row < rowCount; ++row )
-        {
-            createGraphicsItemFromGeometry(multitrack->child( row ), placemark);
+        for (int row = 0; row < rowCount; ++row) {
+            createGraphicsItemFromGeometry(multitrack->child(row), placemark);
         }
+    } else if (object->nodeType() == GeoDataTypes::GeoDataTrackType) {
+        const GeoDataTrack *track = static_cast<const GeoDataTrack*>(object);
+        item = new GeoTrackGraphicsItem(placemark, track);
     }
-    else if ( object->nodeType() == GeoDataTypes::GeoDataTrackType )
-    {
-        const GeoDataTrack *track = static_cast<const GeoDataTrack*>( object );
-        item = new GeoTrackGraphicsItem( placemark, track );
-    }
-    if ( !item )
+    if (!item) {
         return;
+    }
     item->setStyleBuilder(m_styleBuilder);
-    item->setVisible( item->visible() && placemark->isGloballyVisible() );
+    item->setVisible(item->visible() && placemark->isGloballyVisible());
     item->setMinZoomLevel(m_styleBuilder->minimumZoomLevel(*placemark));
-    m_scene.addItem( item );
+    m_scene.addItem(item);
 }
 
-void GeometryLayerPrivate::createGraphicsItemFromOverlay( const GeoDataOverlay *overlay )
+void GeometryLayerPrivate::createGraphicsItemFromOverlay(const GeoDataOverlay *overlay)
 {
     if (!overlay->isGloballyVisible()) {
         return; // Reconsider this when visibility can be changed dynamically
     }
 
     GeoGraphicsItem* item = 0;
-    if ( overlay->nodeType() == GeoDataTypes::GeoDataPhotoOverlayType ) {
-        GeoDataPhotoOverlay const * photoOverlay = static_cast<GeoDataPhotoOverlay const *>( overlay );
-        GeoPhotoGraphicsItem *photoItem = new GeoPhotoGraphicsItem( overlay );
-        photoItem->setPoint( photoOverlay->point() );
+    if (overlay->nodeType() == GeoDataTypes::GeoDataPhotoOverlayType) {
+        GeoDataPhotoOverlay const * photoOverlay = static_cast<GeoDataPhotoOverlay const *>(overlay);
+        GeoPhotoGraphicsItem *photoItem = new GeoPhotoGraphicsItem(overlay);
+        photoItem->setPoint(photoOverlay->point());
         item = photoItem;
-    } else if ( overlay->nodeType() == GeoDataTypes::GeoDataScreenOverlayType ) {
-        GeoDataScreenOverlay const * screenOverlay = static_cast<GeoDataScreenOverlay const *>( overlay );
-        ScreenOverlayGraphicsItem *screenItem = new ScreenOverlayGraphicsItem ( screenOverlay );
-        m_screenOverlays.push_back( screenItem );
+    } else if (overlay->nodeType() == GeoDataTypes::GeoDataScreenOverlayType) {
+        GeoDataScreenOverlay const * screenOverlay = static_cast<GeoDataScreenOverlay const *>(overlay);
+        ScreenOverlayGraphicsItem *screenItem = new ScreenOverlayGraphicsItem(screenOverlay);
+        m_screenOverlays.push_back(screenItem);
     }
 
-    if ( item ) {
+    if (item) {
         item->setStyleBuilder(m_styleBuilder);
-        item->setVisible( overlay->isGloballyVisible() );
-        m_scene.addItem( item );
+        item->setVisible(overlay->isGloballyVisible());
+        m_scene.addItem(item);
     }
 }
 
-void GeometryLayerPrivate::removeGraphicsItems( const GeoDataFeature *feature )
+void GeometryLayerPrivate::removeGraphicsItems(const GeoDataFeature *feature)
 {
     clearCache();
-    if( feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
+    if (feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
         GeoDataPlacemark const * placemark = static_cast<GeoDataPlacemark const *>(feature);
         if (placemark->isGloballyVisible() &&
-                placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType &&
-                placemark->hasOsmData() &&
-                placemark->osmData().oid() > 0) {
+            placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType &&
+            placemark->hasOsmData() &&
+            placemark->osmData().oid() > 0) {
             auto & items = m_osmLineStringItems[placemark->osmData().oid()];
             bool removed = false;
-            for (auto item: items) {
+            for (auto item : items) {
                 if (item->feature() == feature) {
                     items.removeOne(item);
                     removed = true;
@@ -459,54 +452,52 @@ void GeometryLayerPrivate::removeGraphicsItems( const GeoDataFeature *feature )
             Q_ASSERT(removed);
             updateTiledLineStrings(items);
         }
-        m_scene.removeItem( feature );
-    }
-    else if( feature->nodeType() == GeoDataTypes::GeoDataFolderType
-             || feature->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
-        const GeoDataContainer *container = static_cast<const GeoDataContainer*>( feature );
-        foreach( const GeoDataFeature *child, container->featureList() ) {
-            removeGraphicsItems( child );
+        m_scene.removeItem(feature);
+    } else if (feature->nodeType() == GeoDataTypes::GeoDataFolderType
+               || feature->nodeType() == GeoDataTypes::GeoDataDocumentType) {
+        const GeoDataContainer *container = static_cast<const GeoDataContainer*>(feature);
+        foreach (const GeoDataFeature *child, container->featureList()) {
+            removeGraphicsItems(child);
         }
-    }
-    else if( feature->nodeType() == GeoDataTypes::GeoDataScreenOverlayType ) {
-        foreach( ScreenOverlayGraphicsItem  *item, m_screenOverlays ) {
-            if( item->screenOverlay() == feature ) {
-                m_screenOverlays.removeAll( item );
+    } else if (feature->nodeType() == GeoDataTypes::GeoDataScreenOverlayType) {
+        foreach (ScreenOverlayGraphicsItem  *item, m_screenOverlays) {
+            if (item->screenOverlay() == feature) {
+                m_screenOverlays.removeAll(item);
             }
         }
     }
 }
 
-void GeometryLayer::addPlacemarks( const QModelIndex& parent, int first, int last )
+void GeometryLayer::addPlacemarks(const QModelIndex& parent, int first, int last)
 {
-    Q_ASSERT( first < d->m_model->rowCount( parent ) );
-    Q_ASSERT( last < d->m_model->rowCount( parent ) );
-    for( int i=first; i<=last; ++i ) {
-        QModelIndex index = d->m_model->index( i, 0, parent );
-        Q_ASSERT( index.isValid() );
-        const GeoDataObject *object = qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) );
-        Q_ASSERT( object );
-        d->createGraphicsItems( object );
+    Q_ASSERT(first < d->m_model->rowCount(parent));
+    Q_ASSERT(last < d->m_model->rowCount(parent));
+    for (int i = first; i <= last; ++i) {
+        QModelIndex index = d->m_model->index(i, 0, parent);
+        Q_ASSERT(index.isValid());
+        const GeoDataObject *object = qvariant_cast<GeoDataObject*>(index.data(MarblePlacemarkModel::ObjectPointerRole));
+        Q_ASSERT(object);
+        d->createGraphicsItems(object);
     }
     emit repaintNeeded();
 
 }
 
-void GeometryLayer::removePlacemarks( const QModelIndex& parent, int first, int last )
+void GeometryLayer::removePlacemarks(const QModelIndex& parent, int first, int last)
 {
-    Q_ASSERT( last < d->m_model->rowCount( parent ) );
+    Q_ASSERT(last < d->m_model->rowCount(parent));
     bool isRepaintNeeded = false;
-    for( int i=first; i<=last; ++i ) {
-        QModelIndex index = d->m_model->index( i, 0, parent );
-        Q_ASSERT( index.isValid() );
-        const GeoDataObject *object = qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) );
-        const GeoDataFeature *feature = dynamic_cast<const GeoDataFeature*>( object );
-        if( feature != 0 ) {
-            d->removeGraphicsItems( feature );
+    for (int i = first; i <= last; ++i) {
+        QModelIndex index = d->m_model->index(i, 0, parent);
+        Q_ASSERT(index.isValid());
+        const GeoDataObject *object = qvariant_cast<GeoDataObject*>(index.data(MarblePlacemarkModel::ObjectPointerRole));
+        const GeoDataFeature *feature = dynamic_cast<const GeoDataFeature*>(object);
+        if (feature != 0) {
+            d->removeGraphicsItems(feature);
             isRepaintNeeded = true;
         }
     }
-    if( isRepaintNeeded ) {
+    if (isRepaintNeeded) {
         emit repaintNeeded();
     }
 
@@ -516,13 +507,14 @@ void GeometryLayer::resetCacheData()
 {
     d->clearCache();
     d->m_scene.clear();
-    qDeleteAll( d->m_screenOverlays );
+    qDeleteAll(d->m_screenOverlays);
     d->m_screenOverlays.clear();
     d->m_osmLineStringItems.clear();
 
-    const GeoDataObject *object = static_cast<GeoDataObject*>( d->m_model->index( 0, 0, QModelIndex() ).internalPointer() );
-    if ( object && object->parent() )
-        d->createGraphicsItems( object->parent() );
+    const GeoDataObject *object = static_cast<GeoDataObject*>(d->m_model->index(0, 0, QModelIndex()).internalPointer());
+    if (object && object->parent()) {
+        d->createGraphicsItems(object->parent());
+    }
     emit repaintNeeded();
 }
 
@@ -535,19 +527,19 @@ QVector<const GeoDataFeature*> GeometryLayer::whichFeatureAt(const QPoint &curpo
 {
     QVector<const GeoDataFeature*> result;
     auto const renderOrder = d->m_styleBuilder->renderOrder();
-    for (int i=renderOrder.size()-1; i>=0; --i) {
+    for (int i = renderOrder.size() - 1; i >= 0; --i) {
         GeometryLayerPrivate::PaintFragments & layerItems = d->m_cachedPaintFragments[renderOrder[i]];
-        for (auto item: layerItems.positive) {
+        for (auto item : layerItems.positive) {
             if (item->contains(curpos, viewport)) {
                 result << item->feature();
             }
         }
-        for (auto item: layerItems.null) {
+        for (auto item : layerItems.null) {
             if (item->contains(curpos, viewport)) {
                 result << item->feature();
             }
         }
-        for (auto item: layerItems.negative) {
+        for (auto item : layerItems.negative) {
             if (item->contains(curpos, viewport)) {
                 result << item->feature();
             }
@@ -557,92 +549,88 @@ QVector<const GeoDataFeature*> GeometryLayer::whichFeatureAt(const QPoint &curpo
     return result;
 }
 
-void GeometryLayer::handleHighlight( qreal lon, qreal lat, GeoDataCoordinates::Unit unit )
+void GeometryLayer::handleHighlight(qreal lon, qreal lat, GeoDataCoordinates::Unit unit)
 {
-    GeoDataCoordinates clickedPoint( lon, lat, 0, unit );
+    GeoDataCoordinates clickedPoint(lon, lat, 0, unit);
     QVector<GeoDataPlacemark*> selectedPlacemarks;
 
-    for ( int i = 0; i < d->m_model->rowCount(); ++i ) {
-        QVariant const data = d->m_model->data ( d->m_model->index ( i, 0 ), MarblePlacemarkModel::ObjectPointerRole );
-        GeoDataObject *object = qvariant_cast<GeoDataObject*> ( data );
-        Q_ASSERT ( object );
-        if ( object->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
-            Q_ASSERT( dynamic_cast<const GeoDataDocument *>( object ) != 0 );
-            GeoDataDocument* doc = static_cast<GeoDataDocument*> ( object );
-                bool isHighlight = false;
+    for (int i = 0; i < d->m_model->rowCount(); ++i) {
+        QVariant const data = d->m_model->data(d->m_model->index(i, 0), MarblePlacemarkModel::ObjectPointerRole);
+        GeoDataObject *object = qvariant_cast<GeoDataObject*> (data);
+        Q_ASSERT(object);
+        if (object->nodeType() == GeoDataTypes::GeoDataDocumentType) {
+            Q_ASSERT(dynamic_cast<const GeoDataDocument *>(object) != 0);
+            GeoDataDocument* doc = static_cast<GeoDataDocument*>(object);
+            bool isHighlight = false;
 
-                foreach ( const GeoDataStyleMap &styleMap, doc->styleMaps() ) {
-                    if (styleMap.contains(QStringLiteral("highlight"))) {
-                        isHighlight = true;
-                        break;
-                    }
+            foreach (const GeoDataStyleMap &styleMap, doc->styleMaps()) {
+                if (styleMap.contains(QStringLiteral("highlight"))) {
+                    isHighlight = true;
+                    break;
                 }
+            }
 
-                /*
-                 * If a document doesn't specify any highlight
-                 * styleId in its style maps then there is no need
-                 * to further check that document for placemarks
-                 * which have been clicked because we won't
-                 * highlight them.
-                 */
-                if ( isHighlight ) {
-                    QVector<GeoDataFeature*>::Iterator iter = doc->begin();
-                    QVector<GeoDataFeature*>::Iterator const end = doc->end();
+            /*
+             * If a document doesn't specify any highlight
+             * styleId in its style maps then there is no need
+             * to further check that document for placemarks
+             * which have been clicked because we won't
+             * highlight them.
+             */
+            if (isHighlight) {
+                QVector<GeoDataFeature*>::Iterator iter = doc->begin();
+                QVector<GeoDataFeature*>::Iterator const end = doc->end();
 
-                    for ( ; iter != end; ++iter ) {
-                        if ( (*iter)->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
-                            GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( *iter );
-                            GeoDataPolygon *polygon = dynamic_cast<GeoDataPolygon*>( placemark->geometry() );
-                            GeoDataLineString *lineString = dynamic_cast<GeoDataLineString*>( placemark->geometry() );
-                            GeoDataMultiGeometry *multiGeometry = dynamic_cast<GeoDataMultiGeometry*>(placemark->geometry() );
-                            if ( polygon &&
-                                polygon->contains( clickedPoint ) )
-                            {
-                                selectedPlacemarks.push_back( placemark );
+                for (; iter != end; ++iter) {
+                    if ((*iter)->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
+                        GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(*iter);
+                        GeoDataPolygon *polygon = dynamic_cast<GeoDataPolygon*>(placemark->geometry());
+                        GeoDataLineString *lineString = dynamic_cast<GeoDataLineString*>(placemark->geometry());
+                        GeoDataMultiGeometry *multiGeometry = dynamic_cast<GeoDataMultiGeometry*>(placemark->geometry());
+                        if (polygon &&
+                            polygon->contains(clickedPoint)) {
+                            selectedPlacemarks.push_back(placemark);
+                        }
+
+                        if (lineString &&
+                            lineString->nodeType() == GeoDataTypes::GeoDataLinearRingType) {
+                            GeoDataLinearRing *linearRing = static_cast<GeoDataLinearRing*>(lineString);
+                            if (linearRing->contains(clickedPoint)) {
+                                selectedPlacemarks.push_back(placemark);
                             }
+                        }
 
-                            if ( lineString &&
-                                lineString->nodeType() == GeoDataTypes::GeoDataLinearRingType )
-                            {
-                                GeoDataLinearRing *linearRing = static_cast<GeoDataLinearRing*>( lineString );
-                                if ( linearRing->contains( clickedPoint ) ) {
-                                    selectedPlacemarks.push_back( placemark );
+                        if (multiGeometry) {
+                            QVector<GeoDataGeometry*>::Iterator multiIter = multiGeometry->begin();
+                            QVector<GeoDataGeometry*>::Iterator const multiEnd = multiGeometry->end();
+
+                            for (; multiIter != multiEnd; ++multiIter) {
+                                GeoDataPolygon *poly = dynamic_cast<GeoDataPolygon*>(*multiIter);
+                                GeoDataLineString *linestring = dynamic_cast<GeoDataLineString*>(*multiIter);
+
+                                if (poly &&
+                                    poly->contains(clickedPoint)) {
+                                    selectedPlacemarks.push_back(placemark);
+                                    break;
                                 }
-                            }
 
-                            if ( multiGeometry ) {
-                                QVector<GeoDataGeometry*>::Iterator multiIter = multiGeometry->begin();
-                                QVector<GeoDataGeometry*>::Iterator const multiEnd = multiGeometry->end();
-
-                                for ( ; multiIter != multiEnd; ++multiIter ) {
-                                    GeoDataPolygon *poly = dynamic_cast<GeoDataPolygon*>( *multiIter );
-                                    GeoDataLineString *linestring = dynamic_cast<GeoDataLineString*>( *multiIter );
-
-                                    if ( poly &&
-                                        poly->contains( clickedPoint ) )
-                                    {
-                                        selectedPlacemarks.push_back( placemark );
+                                if (linestring &&
+                                    linestring->nodeType() == GeoDataTypes::GeoDataLinearRingType) {
+                                    GeoDataLinearRing *linearRing = static_cast<GeoDataLinearRing*>(linestring);
+                                    if (linearRing->contains(clickedPoint)) {
+                                        selectedPlacemarks.push_back(placemark);
                                         break;
-                                    }
-
-                                    if ( linestring &&
-                                        linestring->nodeType() == GeoDataTypes::GeoDataLinearRingType )
-                                    {
-                                        GeoDataLinearRing *linearRing = static_cast<GeoDataLinearRing*>( linestring );
-                                        if ( linearRing->contains( clickedPoint ) ) {
-                                            selectedPlacemarks.push_back( placemark );
-                                            break;
-                                        }
                                     }
                                 }
                             }
                         }
                     }
                 }
+            }
         }
     }
 
-    emit highlightedPlacemarksChanged( selectedPlacemarks );
+    emit highlightedPlacemarksChanged(selectedPlacemarks);
 }
 
 }
