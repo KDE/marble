@@ -43,8 +43,9 @@ public:
         q->clear();
     }
 
-    QMap<TileId, QList<GeoGraphicsItem*> > m_tiledItems;
-    QMultiHash<const GeoDataFeature*, TileId> m_features;
+    typedef QHash<const GeoDataFeature*,GeoGraphicsItem*> FeatureItemMap;
+    QMap<TileId, FeatureItemMap> m_tiledItems;
+    QHash<const GeoDataFeature*, TileId> m_features;
     QSet<const GeoDataRelation*> m_relations;
 
     // Stores the items which have been clicked;
@@ -85,14 +86,14 @@ void GeoGraphicsScenePrivate::applyHighlightStyle(GeoGraphicsItem* item, const G
 
 void GeoGraphicsScenePrivate::addRelation(const GeoDataRelation *relation)
 {
-    auto const members = relation->members();
-    for (auto const &items: m_tiledItems) {
-        for (auto const & item: items) {
-            if (item->feature()->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
-                auto placemark = static_cast<const GeoDataPlacemark*>(item->feature());
-                if (members.contains(placemark)) {
-                    item->addRelation(relation);
-                }
+    for (auto member: relation->members()) {
+        auto tileIter = m_features.find(member);
+        if (tileIter != m_features.end()) {
+            auto & tileList = m_tiledItems[*tileIter];
+            auto iter = tileList.find(member);
+            if (iter != tileList.end()) {
+                auto item = iter.value();
+                item->addRelation(relation);
             }
         }
     }
@@ -193,40 +194,40 @@ void GeoGraphicsScene::applyHighlight( const QVector< GeoDataPlacemark* > &selec
      * items to use highlight style
      */
     foreach( const GeoDataPlacemark *placemark, selectedPlacemarks ) {
-        QList<TileId> tiles = d->m_features.values( placemark );
-        foreach( const TileId &tileId, tiles ) {
-            QList<GeoGraphicsItem*> clickedItems = d->m_tiledItems[tileId];
-            foreach ( GeoGraphicsItem *item, clickedItems ) {
-                if ( item->feature() == placemark ) {
-                    GeoDataObject *parent = placemark->parent();
-                    if ( parent ) {
-                        if ( parent->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
-                            GeoDataDocument *doc = static_cast<GeoDataDocument*>( parent );
-                            QString styleUrl = placemark->styleUrl();
-                            styleUrl.remove(QLatin1Char('#'));
-                            if ( !styleUrl.isEmpty() ) {
-                                GeoDataStyleMap const &styleMap = doc->styleMap( styleUrl );
-                                GeoDataStyle::Ptr style = d->highlightStyle( doc, styleMap );
-                                if ( style ) {
-                                    d->selectItem( item );
-                                    d->applyHighlightStyle( item, style );
-                                }
+        auto tileIter = d->m_features.find(placemark);
+        if (tileIter != d->m_features.end()) {
+            auto const & clickedItems = d->m_tiledItems[*tileIter];
+            auto iter = clickedItems.find(placemark);
+            if (iter != clickedItems.end()) {
+                GeoDataObject *parent = placemark->parent();
+                if ( parent ) {
+                    auto item = *iter;
+                    if ( parent->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
+                        GeoDataDocument *doc = static_cast<GeoDataDocument*>( parent );
+                        QString styleUrl = placemark->styleUrl();
+                        styleUrl.remove(QLatin1Char('#'));
+                        if ( !styleUrl.isEmpty() ) {
+                            GeoDataStyleMap const &styleMap = doc->styleMap( styleUrl );
+                            GeoDataStyle::Ptr style = d->highlightStyle( doc, styleMap );
+                            if ( style ) {
+                                d->selectItem( item );
+                                d->applyHighlightStyle( item, style );
                             }
+                        }
 
-                            /**
+                        /**
                             * If a placemark is using an inline style instead of a shared
                             * style ( e.g in case when theme file specifies the colorMap
                             * attribute ) then highlight it if any of the style maps have a
                             * highlight styleId
                             */
-                            else {
-                                foreach ( const GeoDataStyleMap &styleMap, doc->styleMaps() ) {
-                                    GeoDataStyle::Ptr style = d->highlightStyle( doc, styleMap );
-                                    if ( style ) {
-                                        d->selectItem( item );
-                                        d->applyHighlightStyle( item, style );
-                                        break;
-                                    }
+                        else {
+                            foreach ( const GeoDataStyleMap &styleMap, doc->styleMaps() ) {
+                                GeoDataStyle::Ptr style = d->highlightStyle( doc, styleMap );
+                                if ( style ) {
+                                    d->selectItem( item );
+                                    d->applyHighlightStyle( item, style );
+                                    break;
                                 }
                             }
                         }
@@ -240,16 +241,15 @@ void GeoGraphicsScene::applyHighlight( const QVector< GeoDataPlacemark* > &selec
 
 void GeoGraphicsScene::removeItem( const GeoDataFeature* feature )
 {
-    QList<TileId> keys = d->m_features.values( feature );
-    foreach( const TileId& key, keys ) {
-        QList< GeoGraphicsItem* >& tileList = d->m_tiledItems[key];
-        foreach( GeoGraphicsItem* item, tileList ) {
-            if( item->feature() == feature ) {
-                d->m_features.remove( feature );
-                tileList.removeAll( item );
-                delete item;
-                break;
-            }
+    auto tileIter = d->m_features.find(feature);
+    if (tileIter != d->m_features.end()) {
+        auto & tileList = d->m_tiledItems[*tileIter];
+        auto iter = tileList.find(feature);
+        if (iter != tileList.end()) {
+            auto item = iter.value();
+            d->m_features.erase(tileIter);
+            tileList.erase(iter);
+            delete item;
         }
     }
 }
@@ -261,8 +261,8 @@ void GeoGraphicsScene::removeRelation(const GeoDataRelation *relation)
 
 void GeoGraphicsScene::clear()
 {
-    foreach(const QList<GeoGraphicsItem*> &list, d->m_tiledItems.values()) {
-        qDeleteAll(list);
+    foreach(auto const &list, d->m_tiledItems.values()) {
+        qDeleteAll(list.values());
     }
     d->m_tiledItems.clear();
     d->m_features.clear();
@@ -284,9 +284,8 @@ void GeoGraphicsScene::addItem( GeoGraphicsItem* item )
 
     const TileId key = TileId::fromCoordinates( GeoDataCoordinates(west, north, 0), zoomLevel ); // same as GeoDataCoordinates(east, south, 0), see above
 
-    QList< GeoGraphicsItem* >& tileList = d->m_tiledItems[key];
-    QList< GeoGraphicsItem* >::iterator position = qLowerBound( tileList.begin(), tileList.end(), item, GeoGraphicsItem::zValueLessThan );
-    tileList.insert( position, item );
+    auto & tileList = d->m_tiledItems[key];
+    tileList.insert( item->feature(), item );
     d->m_features.insert( item->feature(), key );
     for (auto relation: d->m_relations) {
         d->addRelation(relation);
