@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2016      David Kolozsvari <freedawson@gmail.com>
+// Copyright 2016      Dennis Nienhüser <nienhueser@kde.org>
 //
 
 #include "GeoDataTypes.h"
