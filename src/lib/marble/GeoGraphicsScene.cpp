@@ -55,7 +55,6 @@ public:
 
     void selectItem( GeoGraphicsItem *item );
     void applyHighlightStyle(GeoGraphicsItem *item, const GeoDataStyle::Ptr &style );
-    void addRelation(const GeoDataRelation* relation);
 };
 
 GeoDataStyle::Ptr GeoGraphicsScenePrivate::highlightStyle( const GeoDataDocument *document,
@@ -82,21 +81,6 @@ void GeoGraphicsScenePrivate::applyHighlightStyle(GeoGraphicsItem* item, const G
 {
     item->setHighlightStyle( highlightStyle );
     item->setHighlighted( true );
-}
-
-void GeoGraphicsScenePrivate::addRelation(const GeoDataRelation *relation)
-{
-    for (auto member: relation->members()) {
-        auto tileIter = m_features.find(member);
-        if (tileIter != m_features.end()) {
-            auto & tileList = m_tiledItems[*tileIter];
-            auto iter = tileList.find(member);
-            if (iter != tileList.end()) {
-                auto item = iter.value();
-                item->addRelation(relation);
-            }
-        }
-    }
 }
 
 GeoGraphicsScene::GeoGraphicsScene( QObject* parent ):
@@ -285,17 +269,33 @@ void GeoGraphicsScene::addItem( GeoGraphicsItem* item )
     const TileId key = TileId::fromCoordinates( GeoDataCoordinates(west, north, 0), zoomLevel ); // same as GeoDataCoordinates(east, south, 0), see above
 
     auto & tileList = d->m_tiledItems[key];
-    tileList.insert( item->feature(), item );
-    d->m_features.insert( item->feature(), key );
+    auto feature = item->feature();
+    tileList.insert(feature, item);
+    d->m_features.insert(feature, key );
     for (auto relation: d->m_relations) {
-        d->addRelation(relation);
+        for (auto member: relation->members()) {
+            if (member == feature) {
+                item->addRelation(relation);
+                break;
+            }
+        }
     }
 }
 
 void GeoGraphicsScene::addRelation(const GeoDataRelation *relation)
 {
     d->m_relations << relation;
-    d->addRelation(relation);
+    for (auto member: relation->members()) {
+        auto tileIter = d->m_features.find(member);
+        if (tileIter != d->m_features.end()) {
+            auto & tileList = d->m_tiledItems[*tileIter];
+            auto iter = tileList.find(member);
+            if (iter != tileList.end()) {
+                auto item = iter.value();
+                item->addRelation(relation);
+            }
+        }
+    }
 }
 
 }
