@@ -156,13 +156,17 @@ bool GeoGraphicsItem::contains(const QPoint &, const ViewportParams *) const
 void GeoGraphicsItem::addRelation(const GeoDataRelation *relation)
 {
     d->m_relations << relation;
-    d->m_style = GeoDataStyle::ConstPtr();
+    if (relation->isVisible()) {
+        d->m_style = GeoDataStyle::ConstPtr();
+    }
 }
 
 void GeoGraphicsItem::removeRelation(const GeoDataRelation *relation)
 {
     d->m_relations.remove(relation);
-    d->m_style = GeoDataStyle::ConstPtr();
+    if (relation->isVisible()) {
+        d->m_style = GeoDataStyle::ConstPtr();
+    }
 }
 
 int GeoGraphicsItem::minZoomLevel() const
