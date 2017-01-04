@@ -8,7 +8,6 @@
 // Copyright 2016      Akshat Tandon <akshat.tandon@research.iiit.ac.in>
 //
 
-#include "BaseClipper.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataTypes.h"
 #include "GeoDataLineString.h"

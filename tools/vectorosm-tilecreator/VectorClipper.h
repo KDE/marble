@@ -40,7 +40,6 @@ public:
 
 private:
     GeoDataDocument* clipTo(const GeoDataLatLonBox &box, int zoomLevel);
-    GeoDataDocument* clipToBaseClipper(const GeoDataLatLonBox &box);
     QVector<GeoDataPlacemark*> potentialIntersections(const GeoDataLatLonBox &box) const;
     ClipperLib::Path clipPath(const GeoDataLatLonBox &box, int zoomLevel) const;
     qreal area(const GeoDataLinearRing &ring);
