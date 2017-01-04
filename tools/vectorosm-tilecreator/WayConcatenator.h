@@ -11,13 +11,12 @@
 #ifndef MARBLE_WAYCONCATENATOR_H
 #define MARBLE_WAYCONCATENATOR_H
 
-#include "BaseFilter.h"
 #include "TagsFilter.h"
 #include "WayChunk.h"
 
 namespace Marble {
 
-class WayConcatenator: public BaseFilter
+class WayConcatenator
 {
 private:
     typedef QSharedPointer<GeoDataPlacemark> PlacemarkPtr;
@@ -34,8 +33,7 @@ private:
     void concatFirst(const PlacemarkPtr &placemark, const WayChunk::Ptr &chunk);
     void concatLast(const PlacemarkPtr & placemark, const WayChunk::Ptr &chunk);
     void concatBoth(const PlacemarkPtr &placemark, const WayChunk::Ptr &chunk, const WayChunk::Ptr &otherChunk);
-    void addWayChunks();
-    void prepareDocument();
+    void addWayChunks(GeoDataDocument *document);
 
     QMultiHash<qint64, WayChunk::Ptr> m_hash;
     QVector<WayChunk::Ptr> m_chunks;

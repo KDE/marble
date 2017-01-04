@@ -31,7 +31,6 @@
 namespace Marble {
 
 VectorClipper::VectorClipper(GeoDataDocument* document, int maxZoomLevel) :
-    BaseFilter(document),
     m_maxZoomLevel(maxZoomLevel)
 {
     for (auto feature: document->featureList()) {

@@ -11,7 +11,6 @@
 #ifndef TINYPLANETPROCESSOR_H
 #define TINYPLANETPROCESSOR_H
 
-#include "BaseFilter.h"
 #include "OsmPlacemarkData.h"
 
 #include <GeoDataLatLonBox.h>
@@ -20,6 +19,7 @@
 #include <TileId.h>
 #include <GeoSceneMercatorTileProjection.h>
 #include <OsmObjectManager.h>
+#include "GeoDataDocument.h"
 
 #include "clipper/clipper.hpp"
 #include <QMap>
@@ -30,7 +30,7 @@ namespace Marble {
 class GeoDataLinearRing;
 class GeoDataRelation;
 
-class VectorClipper : public BaseFilter
+class VectorClipper
 {
 public:
     VectorClipper(GeoDataDocument* document, int maxZoomLevel);

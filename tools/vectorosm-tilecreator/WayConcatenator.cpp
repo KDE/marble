@@ -28,7 +28,6 @@
 namespace Marble {
 
 WayConcatenator::WayConcatenator(GeoDataDocument *document) :
-    BaseFilter(document),
     m_originalWays(0),
     m_mergedWays(0)
 {
@@ -101,8 +100,11 @@ WayConcatenator::WayConcatenator(GeoDataDocument *document) :
         }
     }
 
-    prepareDocument();
-    addWayChunks();
+    document->clear();
+    for (auto placemark: m_otherPlacemarks) {
+        document->append(placemark);
+    }
+    addWayChunks(document);
 }
 
 int WayConcatenator::originalWays() const
@@ -115,10 +117,10 @@ int WayConcatenator::mergedWays() const
     return m_mergedWays;
 }
 
-void WayConcatenator::addWayChunks()
+void WayConcatenator::addWayChunks(GeoDataDocument *document)
 {
     for (auto const &placemark: m_wayPlacemarks) {
-        document()->append(placemark->clone());
+        document->append(placemark->clone());
     }
 
     QSet<WayChunk::Ptr> chunkSet;
@@ -129,20 +131,12 @@ void WayConcatenator::addWayChunks()
             chunkSet.insert(*itr);
             PlacemarkPtr placemark = (*itr)->merge();
             if (placemark) {
-                document()->append(placemark->clone());
+                document->append(placemark->clone());
             }
         }
     }
 
     m_chunks.clear();
-}
-
-void WayConcatenator::prepareDocument()
-{
-    document()->clear();
-    for (auto placemark: m_otherPlacemarks) {
-        document()->append(placemark);
-    }
 }
 
 void WayConcatenator::createWayChunk(const PlacemarkPtr &placemark, qint64 firstId, qint64 lastId)

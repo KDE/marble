@@ -23,7 +23,6 @@
 namespace Marble {
 
 NodeReducer::NodeReducer(GeoDataDocument* document, const TileId &tileId) :
-    BaseFilter(document),
     m_removedNodes(0),
     m_remainingNodes(0),
     m_zoomLevel(tileId.zoomLevel())

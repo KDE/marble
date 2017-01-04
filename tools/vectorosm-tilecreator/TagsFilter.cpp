@@ -11,7 +11,6 @@
 #include <QString>
 #include <QStringList>
 
-#include "BaseFilter.h"
 #include "TagsFilter.h"
 #include "GeoDataObject.h"
 #include "GeoDataDocument.h"
@@ -21,11 +20,10 @@
 
 namespace Marble {
 
-TagsFilter::TagsFilter(GeoDataDocument *geoDocument, const Tags &tagsList, FilterFlag filterFlag)
-    : BaseFilter(geoDocument),
-      m_accepted(new GeoDataDocument)
+TagsFilter::TagsFilter(GeoDataDocument *document, const Tags &tagsList, FilterFlag filterFlag)
+    : m_accepted(new GeoDataDocument)
 {
-    foreach (GeoDataFeature *feature, document()->featureList()) {
+    foreach (GeoDataFeature *feature, document->featureList()) {
         if (feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
             GeoDataPlacemark* placemark = static_cast<GeoDataPlacemark*>(feature);
             bool acceptPlacemark = false;

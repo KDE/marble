@@ -11,14 +11,13 @@
 #ifndef MARBLE_NODEREDUCER_H
 #define MARBLE_NODEREDUCER_H
 
-#include "BaseFilter.h"
 #include "MarbleMath.h"
 #include "OsmPlacemarkData.h"
 #include "VectorClipper.h"
 
 namespace Marble {
 
-class NodeReducer : public BaseFilter {
+class NodeReducer {
 public:
     NodeReducer(GeoDataDocument* document, const TileId &tileId);
 

@@ -12,7 +12,6 @@
 #ifndef MARBLE_TAGSFILTER_H
 #define MARBLE_TAGSFILTER_H
 
-#include "BaseFilter.h"
 #include "OsmPlacemarkData.h"
 
 #include <QMap>
@@ -20,9 +19,10 @@
 
 namespace Marble {
 
-class GeoDataDocument;	
+class GeoDataDocument;
+class GeoDataFeature;
 
-class TagsFilter : public BaseFilter
+class TagsFilter
 {
 public:
     typedef QPair<QString, QString> Tag;
