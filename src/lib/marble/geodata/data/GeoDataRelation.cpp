@@ -22,7 +22,11 @@ class GeoDataRelationPrivate
 public:
     QSet<const GeoDataFeature*> m_features;
     OsmPlacemarkData m_osmData;
+
+    static QHash<QString, GeoDataRelation::RelationType> s_relationTypes;
 };
+
+QHash<QString, GeoDataRelation::RelationType> GeoDataRelationPrivate::s_relationTypes;
 
 GeoDataRelation::GeoDataRelation() :
     GeoDataFeature(),
@@ -62,10 +66,11 @@ GeoDataFeature *GeoDataRelation::clone() const
     return new GeoDataRelation(*this);
 }
 
-void GeoDataRelation::add(const GeoDataFeature *placemark)
+void GeoDataRelation::addMember(const GeoDataFeature *feature, qint64 id, const QString &role)
 {
     Q_D(GeoDataRelation);
-    d->m_features << placemark;
+    d->m_features << feature;
+    d->m_osmData.addRelation(id, role);
 }
 
 QSet<const GeoDataFeature *> GeoDataRelation::members() const
@@ -88,11 +93,28 @@ const OsmPlacemarkData &GeoDataRelation::osmData() const
 
 GeoDataRelation::RelationType GeoDataRelation::relationType() const
 {
+    if (GeoDataRelationPrivate::s_relationTypes.isEmpty()) {
+        auto &map = GeoDataRelationPrivate::s_relationTypes;
+        map["road"] = RouteRoad;
+        map["detour"] = RouteDetour;
+        map["ferry"] = RouteFerry;
+        map["train"] = RouteTrain;
+        map["tram"] = RouteTram;
+        map["bus"] = RouteBus;
+        map["trolleybus"] = RouteTrolleyBus;
+        map["bicycle"] = RouteBicycle;
+        map["mtb"] = RouteMountainbike;
+        map["foot"] = RouteFoot;
+        map["hiking"] = GeoDataRelation::RouteHiking;
+        map["horse"] = RouteHorse;
+        map["inline_skates"] = RouteInlineSkates;
+        map["ski"] = RouteSki;
+    }
+
     Q_D(const GeoDataRelation);
     if (d->m_osmData.containsTag(QStringLiteral("type"), QStringLiteral("route"))) {
-        if (d->m_osmData.containsTag(QStringLiteral("route"), QStringLiteral("hiking"))) {
-            return RouteHiking;
-        }
+        auto const route = d->m_osmData.tagValue(QStringLiteral("route"));
+        return GeoDataRelationPrivate::s_relationTypes.value(route, UnknownType);
     }
 
     return UnknownType;

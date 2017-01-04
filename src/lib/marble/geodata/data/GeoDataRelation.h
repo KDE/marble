@@ -24,7 +24,20 @@ class GEODATA_EXPORT GeoDataRelation: public GeoDataFeature
 public:
     enum RelationType {
         UnknownType,
-        RouteHiking
+        RouteRoad,
+        RouteDetour,
+        RouteFerry,
+        RouteTrain,
+        RouteTram,
+        RouteBus,
+        RouteTrolleyBus,
+        RouteBicycle,
+        RouteMountainbike,
+        RouteFoot,
+        RouteHiking,
+        RouteHorse,
+        RouteInlineSkates,
+        RouteSki
     };
 
     GeoDataRelation();
@@ -34,7 +47,7 @@ public:
     const char* nodeType() const override;
     GeoDataFeature * clone() const override;
 
-    void add(const GeoDataFeature* placemark);
+    void addMember(const GeoDataFeature* feature, qint64 id, const QString &role);
     QSet<const GeoDataFeature*> members() const;
 
     OsmPlacemarkData &osmData();

@@ -164,14 +164,18 @@ void OsmRelation::createMultipolygon(GeoDataDocument *document, OsmWays &ways, c
 
 void OsmRelation::createRoute(GeoDataDocument *document, const QHash<qint64, GeoDataPlacemark*> wayPlacemarks) const
 {
-    if (!(m_osmData.containsTag(QStringLiteral("type"), QStringLiteral("route")) &&
-            m_osmData.containsTag(QStringLiteral("route"), QStringLiteral("hiking")))) {
+    if (!(m_osmData.containsTag(QStringLiteral("type"), QStringLiteral("route")))) {
         return;
     }
 
     OsmPlacemarkData osmData = m_osmData;
-
     GeoDataRelation *relation = new GeoDataRelation;
+
+    relation->setName(osmData.tagValue(QStringLiteral("name")));
+    if (relation->name().isEmpty()) {
+        relation->setName(osmData.tagValue(QStringLiteral("ref")));
+    }
+    relation->osmData() = osmData;
 
     foreach(const OsmMember &member, m_members) {
         if (member.role.isEmpty() || member.role == QStringLiteral("route")) {
@@ -181,8 +185,7 @@ void OsmRelation::createRoute(GeoDataDocument *document, const QHash<qint64, Geo
             }
 
             auto wayPlacemark = wayPlacemarks[member.reference];
-            relation->add(wayPlacemark);
-            osmData.addRelation(member.reference, member.role);
+            relation->addMember(wayPlacemark, member.reference, member.role);
         }
     }
 
@@ -191,11 +194,6 @@ void OsmRelation::createRoute(GeoDataDocument *document, const QHash<qint64, Geo
         return;
     }
 
-    relation->setName(osmData.tagValue(QStringLiteral("name")));
-    if (relation->name().isEmpty()) {
-        relation->setName(osmData.tagValue(QStringLiteral("ref")));
-    }
-    relation->osmData() = osmData;
     OsmObjectManager::registerId(osmData.id());
     relation->setVisible(false);
     document->append(relation);

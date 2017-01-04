@@ -185,12 +185,11 @@ GeoDataStyle::ConstPtr StyleBuilder::Private::createRelationStyle(const StylePar
     auto const visualCategory = placemark->visualCategory();
     if (visualCategory >= GeoDataPlacemark::HighwaySteps &&
             visualCategory <= GeoDataPlacemark::HighwayMotorway) {
-        if (parameters.relation->relationType() == GeoDataRelation::RouteHiking) {
+        if (parameters.relation->relationType() == GeoDataRelation::RouteHiking &&
+                parameters.relation->osmData().containsTagKey(QStringLiteral("osmc:symbol"))) {
             QString const osmcSymbolValue = parameters.relation->osmData().tagValue(QStringLiteral("osmc:symbol"));
-            auto const colorValue = parameters.relation->osmData().tagValue(QStringLiteral("colour"));
-            QString const color = QColor::isValidColor(colorValue) ? colorValue : QStringLiteral("salmon");
             // Take cached Style instance if possible
-            QString const cacheKey = QStringLiteral("/route/hiking/%1").arg(osmcSymbolValue.isEmpty() ? color : osmcSymbolValue);
+            QString const cacheKey = QStringLiteral("/route/hiking/%1").arg(osmcSymbolValue);
             if (m_specialStyleCache.contains(cacheKey)) {
                 return m_specialStyleCache[cacheKey];
             }
@@ -199,17 +198,34 @@ GeoDataStyle::ConstPtr StyleBuilder::Private::createRelationStyle(const StylePar
             auto lineStyle = style->lineStyle();
             auto iconStyle = style->iconStyle();
             GeoDataStyle::Ptr newStyle(new GeoDataStyle(*style));
-            if (!osmcSymbolValue.isEmpty()) {
-                OsmcSymbol symbol = OsmcSymbol(osmcSymbolValue);
-                lineStyle.setColor(symbol.wayColor());
-                iconStyle.setIcon(symbol.icon());
-            } else {
-                lineStyle.setColor(QColor(color));
-            }
+            OsmcSymbol symbol = OsmcSymbol(osmcSymbolValue);
+            lineStyle.setColor(symbol.wayColor());
+            iconStyle.setIcon(symbol.icon());
             newStyle->setLineStyle(lineStyle);
             newStyle->setIconStyle(iconStyle);
             style = newStyle;
             m_specialStyleCache.insert(cacheKey, newStyle);
+            return style;
+        }
+
+        if (parameters.relation->relationType() >= GeoDataRelation::RouteBus &&
+                           parameters.relation->relationType() <= GeoDataRelation::RouteInlineSkates) {
+            auto const colorValue = parameters.relation->osmData().tagValue(QStringLiteral("colour"));
+            QString const color = QColor::isValidColor(colorValue) ? colorValue : QStringLiteral("salmon");
+            // Take cached Style instance if possible
+            QString const cacheKey = QStringLiteral("/route/hiking/%1").arg(color);
+            if (m_specialStyleCache.contains(cacheKey)) {
+                return m_specialStyleCache[cacheKey];
+            }
+
+            auto style = presetStyle(visualCategory);
+            auto lineStyle = style->lineStyle();
+            GeoDataStyle::Ptr newStyle(new GeoDataStyle(*style));
+            lineStyle.setColor(QColor(color));
+            newStyle->setLineStyle(lineStyle);
+            style = newStyle;
+            m_specialStyleCache.insert(cacheKey, newStyle);
+            return style;
         }
     }
     return GeoDataStyle::ConstPtr();
