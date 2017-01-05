@@ -98,9 +98,10 @@ the expression like this:
 
 Another common case for this is logical expressions for if statements:
 
-   if ( very_long_sub_expression
-        && another_very_long_sub_expression )
-      doSomething();
+    if (very_long_sub_expression
+        && another_very_long_sub_expression) {
+        doSomething();
+    }
 
 See also below for how to handle braces in this case.
 
