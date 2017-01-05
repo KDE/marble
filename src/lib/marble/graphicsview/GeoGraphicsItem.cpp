@@ -153,20 +153,10 @@ bool GeoGraphicsItem::contains(const QPoint &, const ViewportParams *) const
     return false;
 }
 
-void GeoGraphicsItem::addRelation(const GeoDataRelation *relation)
+void GeoGraphicsItem::setRelations(const QSet<const GeoDataRelation*> &relations)
 {
-    d->m_relations << relation;
-    if (relation->isVisible()) {
-        d->m_style = GeoDataStyle::ConstPtr();
-    }
-}
-
-void GeoGraphicsItem::removeRelation(const GeoDataRelation *relation)
-{
-    d->m_relations.remove(relation);
-    if (relation->isVisible()) {
-        d->m_style = GeoDataStyle::ConstPtr();
-    }
+    d->m_relations = relations;
+    d->m_style = GeoDataStyle::ConstPtr();
 }
 
 int GeoGraphicsItem::minZoomLevel() const

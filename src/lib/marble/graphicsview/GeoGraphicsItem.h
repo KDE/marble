@@ -158,9 +158,7 @@ class MARBLE_EXPORT GeoGraphicsItem
      */
     virtual bool contains(const QPoint &screenPosition, const ViewportParams *viewport) const;
 
-    void addRelation(const GeoDataRelation *relation);
-
-    void removeRelation(const GeoDataRelation *relation);
+    void setRelations(const QSet<const GeoDataRelation *> &relations);
 
  protected:
     GeoGraphicsItemPrivate *const d;

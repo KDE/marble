@@ -65,6 +65,8 @@ class GeometryLayerPrivate
 {
 public:
     typedef QVector<GeoLineStringGraphicsItem*> OsmLineStringItems;
+    typedef QSet<const GeoDataRelation *> Relations;
+    typedef QHash<const GeoDataFeature *, Relations> FeatureRelationHash;
 
     struct PaintFragments {
         // Three lists for different z values
@@ -78,7 +80,8 @@ public:
     explicit GeometryLayerPrivate(const QAbstractItemModel *model, const StyleBuilder *styleBuilder);
 
     void createGraphicsItems(const GeoDataObject *object);
-    void createGraphicsItemFromGeometry(const GeoDataGeometry *object, const GeoDataPlacemark *placemark);
+    void createGraphicsItems(const GeoDataObject *object, FeatureRelationHash &relations);
+    void createGraphicsItemFromGeometry(const GeoDataGeometry *object, const GeoDataPlacemark *placemark, const Relations &relations);
     void createGraphicsItemFromOverlay(const GeoDataOverlay *overlay);
     void removeGraphicsItems(const GeoDataFeature *feature);
     void updateTiledLineStrings(const GeoDataPlacemark *placemark, GeoLineStringGraphicsItem* lineStringItem);
@@ -112,6 +115,12 @@ GeometryLayerPrivate::GeometryLayerPrivate(const QAbstractItemModel *model, cons
     m_dirty(true),
     m_cachedItemCount(0)
 {
+}
+
+void GeometryLayerPrivate::createGraphicsItems(const GeoDataObject *object)
+{
+    FeatureRelationHash noRelations;
+    createGraphicsItems(object, noRelations);
 }
 
 GeometryLayer::GeometryLayer(const QAbstractItemModel *model, const StyleBuilder *styleBuilder) :
@@ -294,14 +303,23 @@ bool GeometryLayer::hasFeatureAt(const QPoint &curpos, const ViewportParams *vie
     return false;
 }
 
-void GeometryLayerPrivate::createGraphicsItems(const GeoDataObject *object)
+void GeometryLayerPrivate::createGraphicsItems(const GeoDataObject *object, FeatureRelationHash &relations)
 {
     clearCache();
+    if (object->nodeType() == GeoDataTypes::GeoDataDocumentType) {
+        auto document = static_cast<const GeoDataDocument*>(object);
+        for (auto feature: document->featureList()) {
+            if (feature->nodeType() == GeoDataTypes::GeoDataRelationType) {
+                auto relation = static_cast<GeoDataRelation*>(feature);
+                for (auto member: relation->members()) {
+                    relations[member] << relation;
+                }
+            }
+        }
+    }
     if (object->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
         auto placemark = static_cast<const GeoDataPlacemark*>(object);
-        createGraphicsItemFromGeometry(placemark->geometry(), placemark);
-    } else if (object->nodeType() == GeoDataTypes::GeoDataRelationType) {
-        m_scene.addRelation(static_cast<const GeoDataRelation*>(object));
+        createGraphicsItemFromGeometry(placemark->geometry(), placemark, relations.value(placemark));
     } else if (const GeoDataOverlay* overlay = dynamic_cast<const GeoDataOverlay*>(object)) {
         createGraphicsItemFromOverlay(overlay);
     }
@@ -310,7 +328,7 @@ void GeometryLayerPrivate::createGraphicsItems(const GeoDataObject *object)
     if (const GeoDataContainer *container = dynamic_cast<const GeoDataContainer*>(object)) {
         int rowCount = container->size();
         for (int row = 0; row < rowCount; ++row) {
-            createGraphicsItems(container->child(row));
+            createGraphicsItems(container->child(row), relations);
         }
     }
 }
@@ -363,7 +381,7 @@ void GeometryLayerPrivate::clearCache()
     m_cachedLatLonBox = GeoDataLatLonBox();
 }
 
-void GeometryLayerPrivate::createGraphicsItemFromGeometry(const GeoDataGeometry* object, const GeoDataPlacemark *placemark)
+void GeometryLayerPrivate::createGraphicsItemFromGeometry(const GeoDataGeometry* object, const GeoDataPlacemark *placemark, const Relations &relations)
 {
     if (!placemark->isGloballyVisible()) {
         return; // Reconsider this when visibility can be changed dynamically
@@ -388,13 +406,13 @@ void GeometryLayerPrivate::createGraphicsItemFromGeometry(const GeoDataGeometry*
         const GeoDataMultiGeometry *multigeo = static_cast<const GeoDataMultiGeometry*>(object);
         int rowCount = multigeo->size();
         for (int row = 0; row < rowCount; ++row) {
-            createGraphicsItemFromGeometry(multigeo->child(row), placemark);
+            createGraphicsItemFromGeometry(multigeo->child(row), placemark, relations);
         }
     } else if (object->nodeType() == GeoDataTypes::GeoDataMultiTrackType) {
         const GeoDataMultiTrack *multitrack = static_cast<const GeoDataMultiTrack*>(object);
         int rowCount = multitrack->size();
         for (int row = 0; row < rowCount; ++row) {
-            createGraphicsItemFromGeometry(multitrack->child(row), placemark);
+            createGraphicsItemFromGeometry(multitrack->child(row), placemark, relations);
         }
     } else if (object->nodeType() == GeoDataTypes::GeoDataTrackType) {
         const GeoDataTrack *track = static_cast<const GeoDataTrack*>(object);
@@ -403,6 +421,7 @@ void GeometryLayerPrivate::createGraphicsItemFromGeometry(const GeoDataGeometry*
     if (!item) {
         return;
     }
+    item->setRelations(relations);
     item->setStyleBuilder(m_styleBuilder);
     item->setVisible(item->visible() && placemark->isGloballyVisible());
     item->setMinZoomLevel(m_styleBuilder->minimumZoomLevel(*placemark));
@@ -456,8 +475,6 @@ void GeometryLayerPrivate::removeGraphicsItems(const GeoDataFeature *feature)
             updateTiledLineStrings(items);
         }
         m_scene.removeItem(feature);
-    } else if (feature->nodeType() == GeoDataTypes::GeoDataRelationType) {
-        m_scene.removeRelation(static_cast<const GeoDataRelation*>(feature));
     } else if (feature->nodeType() == GeoDataTypes::GeoDataFolderType
                || feature->nodeType() == GeoDataTypes::GeoDataDocumentType) {
         const GeoDataContainer *container = static_cast<const GeoDataContainer*>(feature);

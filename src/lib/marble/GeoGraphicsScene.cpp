@@ -17,7 +17,6 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataDocument.h"
 #include "GeoDataTypes.h"
-#include "GeoDataRelation.h"
 #include "GeoGraphicsItem.h"
 #include "TileId.h"
 #include "TileCoordsPyramid.h"
@@ -46,7 +45,6 @@ public:
     typedef QHash<const GeoDataFeature*,GeoGraphicsItem*> FeatureItemMap;
     QMap<TileId, FeatureItemMap> m_tiledItems;
     QHash<const GeoDataFeature*, TileId> m_features;
-    QSet<const GeoDataRelation*> m_relations;
 
     // Stores the items which have been clicked;
     QList<GeoGraphicsItem*> m_selectedItems;
@@ -238,11 +236,6 @@ void GeoGraphicsScene::removeItem( const GeoDataFeature* feature )
     }
 }
 
-void GeoGraphicsScene::removeRelation(const GeoDataRelation *relation)
-{
-    d->m_relations.remove(relation);
-}
-
 void GeoGraphicsScene::clear()
 {
     foreach(auto const &list, d->m_tiledItems.values()) {
@@ -250,7 +243,6 @@ void GeoGraphicsScene::clear()
     }
     d->m_tiledItems.clear();
     d->m_features.clear();
-    d->m_relations.clear();
 }
 
 void GeoGraphicsScene::addItem( GeoGraphicsItem* item )
@@ -272,30 +264,6 @@ void GeoGraphicsScene::addItem( GeoGraphicsItem* item )
     auto feature = item->feature();
     tileList.insert(feature, item);
     d->m_features.insert(feature, key );
-    for (auto relation: d->m_relations) {
-        for (auto member: relation->members()) {
-            if (member == feature) {
-                item->addRelation(relation);
-                break;
-            }
-        }
-    }
-}
-
-void GeoGraphicsScene::addRelation(const GeoDataRelation *relation)
-{
-    d->m_relations << relation;
-    for (auto member: relation->members()) {
-        auto tileIter = d->m_features.find(member);
-        if (tileIter != d->m_features.end()) {
-            auto & tileList = d->m_tiledItems[*tileIter];
-            auto iter = tileList.find(member);
-            if (iter != tileList.end()) {
-                auto item = iter.value();
-                item->addRelation(relation);
-            }
-        }
-    }
 }
 
 }
