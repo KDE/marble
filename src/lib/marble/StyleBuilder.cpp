@@ -655,6 +655,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::TransportTramStop]->iconStyle().setScale(0.33);
     m_defaultStyle[GeoDataPlacemark::TransportRentalBicycle]   = createOsmPOIStyle(osmFont, "transportation/rental_bicycle.16", transportationColor);
     m_defaultStyle[GeoDataPlacemark::TransportRentalCar]       = createOsmPOIStyle(osmFont, "transportation/rental_car.16", transportationColor);
+    m_defaultStyle[GeoDataPlacemark::TransportRentalSki]       = createOsmPOIStyle(osmFont, "transportation/rental_ski.16", transportationColor);
     m_defaultStyle[GeoDataPlacemark::TransportTaxiRank]        = createOsmPOIStyle(osmFont, "transportation/taxi.16", transportationColor);
     m_defaultStyle[GeoDataPlacemark::TransportSubwayEntrance]  = createOsmPOIStyle(osmFont, "transportation/subway_entrance", transportationColor);
     m_defaultStyle[GeoDataPlacemark::ReligionPlaceOfWorship]   = createOsmPOIStyle(osmFont, QString() /* "black/place_of_worship.16" */);
@@ -1204,7 +1205,11 @@ void StyleBuilder::Private::initializeOsmVisualCategories()
 
     s_visualCategories[OsmTag("amenity", "bicycle_parking")]    = GeoDataPlacemark::TransportBicycleParking;
     s_visualCategories[OsmTag("amenity", "bicycle_rental")]     = GeoDataPlacemark::TransportRentalBicycle;
+    s_visualCategories[OsmTag("rental", "bicycle")]             = GeoDataPlacemark::TransportRentalBicycle;
     s_visualCategories[OsmTag("amenity", "car_rental")]         = GeoDataPlacemark::TransportRentalCar;
+    s_visualCategories[OsmTag("rental", "car")]                 = GeoDataPlacemark::TransportRentalCar;
+    s_visualCategories[OsmTag("amenity", "ski_rental")]         = GeoDataPlacemark::TransportRentalSki;
+    s_visualCategories[OsmTag("rental", "ski")]                 = GeoDataPlacemark::TransportRentalSki;
     s_visualCategories[OsmTag("amenity", "motorcycle_parking")] = GeoDataPlacemark::TransportMotorcycleParking;
     s_visualCategories[OsmTag("amenity", "taxi")]               = GeoDataPlacemark::TransportTaxiRank;
     s_visualCategories[OsmTag("highway", "bus_stop")]           = GeoDataPlacemark::TransportBusStop;
@@ -1489,6 +1494,7 @@ void StyleBuilder::Private::initializeMinimumZoomLevels()
     s_defaultMinZoomLevels[GeoDataPlacemark::TransportSpeedCamera] = 16;
     s_defaultMinZoomLevels[GeoDataPlacemark::TransportRentalCar] = 16;
     s_defaultMinZoomLevels[GeoDataPlacemark::TransportRentalBicycle] = 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::TransportRentalSki] = 17;
     s_defaultMinZoomLevels[GeoDataPlacemark::TransportTaxiRank]  = 16;
     s_defaultMinZoomLevels[GeoDataPlacemark::TransportParking]  = 16;
     s_defaultMinZoomLevels[GeoDataPlacemark::TransportBusStop]  = 16;
@@ -2164,6 +2170,7 @@ qint64 StyleBuilder::popularity(const GeoDataPlacemark *placemark)
         popularities << GeoDataPlacemark::TransportPlatform;
         popularities << GeoDataPlacemark::TransportRentalBicycle;
         popularities << GeoDataPlacemark::TransportRentalCar;
+        popularities << GeoDataPlacemark::TransportRentalSki;
         popularities << GeoDataPlacemark::TransportTaxiRank;
         popularities << GeoDataPlacemark::TransportTrainStation;
         popularities << GeoDataPlacemark::TransportTramStop;
@@ -2506,6 +2513,7 @@ QString StyleBuilder::visualCategoryName(GeoDataPlacemark::GeoDataVisualCategory
         visualCategoryNames[GeoDataPlacemark::TransportPlatform] = "TransportPlatform";
         visualCategoryNames[GeoDataPlacemark::TransportRentalBicycle] = "TransportRentalBicycle";
         visualCategoryNames[GeoDataPlacemark::TransportRentalCar] = "TransportRentalCar";
+        visualCategoryNames[GeoDataPlacemark::TransportRentalSki] = "TransportRentalSki";
         visualCategoryNames[GeoDataPlacemark::TransportTaxiRank] = "TransportTaxiRank";
         visualCategoryNames[GeoDataPlacemark::TransportTrainStation] = "TransportTrainStation";
         visualCategoryNames[GeoDataPlacemark::TransportTramStop] = "TransportTramStop";

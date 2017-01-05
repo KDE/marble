@@ -379,6 +379,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
         TransportPlatform,
         TransportRentalBicycle,
         TransportRentalCar,
+        TransportRentalSki,
         TransportTaxiRank,
         TransportTrainStation,
         TransportTramStop,

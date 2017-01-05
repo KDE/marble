@@ -597,8 +597,9 @@ QString GeoDataPlacemark::categoryName() const
     case TransportParking: return GeoDataPlacemarkPrivate::tr("Parking");
     case TransportParkingSpace: return GeoDataPlacemarkPrivate::tr("Parking Space");
     case TransportPlatform: return GeoDataPlacemarkPrivate::tr("Platform");
-    case TransportRentalBicycle: return GeoDataPlacemarkPrivate::tr("Rental Bicycle");
-    case TransportRentalCar: return GeoDataPlacemarkPrivate::tr("Rental Car");
+    case TransportRentalBicycle: return GeoDataPlacemarkPrivate::tr("Bicycle Rental");
+    case TransportRentalCar: return GeoDataPlacemarkPrivate::tr("Car Rental");
+    case TransportRentalSki: return GeoDataPlacemarkPrivate::tr("Ski Rental");
     case TransportTaxiRank: return GeoDataPlacemarkPrivate::tr("Taxi Rank");
     case TransportTrainStation: return GeoDataPlacemarkPrivate::tr("Train Station");
     case TransportTramStop: return GeoDataPlacemarkPrivate::tr("Tram Stop");

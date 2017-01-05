@@ -178,7 +178,8 @@ QString Placemark::description() const
             addTagValue(m_description, "network");
             addTagValue(m_description, "operator");
         } else if (category == GeoDataPlacemark::TransportRentalBicycle ||
-                   category == GeoDataPlacemark::TransportRentalCar) {
+                   category == GeoDataPlacemark::TransportRentalCar ||
+                   category == GeoDataPlacemark::TransportRentalSki) {
             addFirstTagValueOf(m_description, QStringList() << "brand" << "operator");
 
         } else if (category == GeoDataPlacemark::TransportFuel) {
