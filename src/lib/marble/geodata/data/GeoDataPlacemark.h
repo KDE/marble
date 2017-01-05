@@ -448,6 +448,20 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
         // OpenStreetMap category Power
         PowerTower,
 
+        // OpenStreetMap category Aerialway
+        AerialwayCableCar, // please keep order (used in for loops)
+        AerialwayGondola,
+        AerialwayChairLift,
+        AerialwayMixedLift,
+        AerialwayDragLift,
+        AerialwayTBar,
+        AerialwayJBar,
+        AerialwayPlatter,
+        AerialwayRopeTow,
+        AerialwayMagicCarpet,
+        AerialwayZipLine,
+        AerialwayGoods, // please keep order (used in for loops)
+
         // Waterways
         WaterwayCanal, // please keep order (used in for loops)
         WaterwayDitch,

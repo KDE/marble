@@ -802,6 +802,19 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::InternationalDateLine]    = createStyle(1.0, 0.0, "#000000", "#000000", false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector<qreal>(), osmFont);
     m_defaultStyle[GeoDataPlacemark::Bathymetry]               = createWayStyle("#a5c9c9", "#a5c9c9", true, false);
 
+    m_defaultStyle[GeoDataPlacemark::AerialwayCableCar]        = createWayStyle("#dddddd", "#bbbbbb", false, true);
+    m_defaultStyle[GeoDataPlacemark::AerialwayGondola]         = createWayStyle("#dddddd", "#bbbbbb", false, true);
+    m_defaultStyle[GeoDataPlacemark::AerialwayChairLift]       = createWayStyle("#dddddd", "#bbbbbb", false, true);
+    m_defaultStyle[GeoDataPlacemark::AerialwayMixedLift]       = createWayStyle("#dddddd", "#bbbbbb", false, true);
+    m_defaultStyle[GeoDataPlacemark::AerialwayDragLift]        = createWayStyle("#dddddd", "#bbbbbb", false, true);
+    m_defaultStyle[GeoDataPlacemark::AerialwayTBar]            = createWayStyle("#dddddd", "#bbbbbb", false, true);
+    m_defaultStyle[GeoDataPlacemark::AerialwayJBar]            = createWayStyle("#dddddd", "#bbbbbb", false, true);
+    m_defaultStyle[GeoDataPlacemark::AerialwayPlatter]         = createWayStyle("#dddddd", "#bbbbbb", false, true);
+    m_defaultStyle[GeoDataPlacemark::AerialwayRopeTow]         = createWayStyle("#dddddd", "#bbbbbb", false, true);
+    m_defaultStyle[GeoDataPlacemark::AerialwayMagicCarpet]     = createWayStyle("#dddddd", "#bbbbbb", false, true);
+    m_defaultStyle[GeoDataPlacemark::AerialwayZipLine]         = createWayStyle("#dddddd", "#bbbbbb", false, true);
+    m_defaultStyle[GeoDataPlacemark::AerialwayGoods]           = createWayStyle("#dddddd", "#bbbbbb", false, true);
+
     m_defaultStyle[GeoDataPlacemark::AdminLevel1]              = createStyle(0.0, 0.0, "#DF9CCF", "#DF9CCF", false, true, Qt::SolidPattern, Qt::CustomDashLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3, osmFont);
     m_defaultStyle[GeoDataPlacemark::AdminLevel2]              = createStyle(2.0, 0.0, "#DF9CCF", "#DF9CCF", false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3, osmFont);
     m_defaultStyle[GeoDataPlacemark::AdminLevel3]              = createStyle(1.8, 0.0, "#DF9CCF", "#DF9CCF", false, true, Qt::SolidPattern, Qt::DashLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3, osmFont);
@@ -1207,6 +1220,19 @@ void StyleBuilder::Private::initializeOsmVisualCategories()
     s_visualCategories[OsmTag("place", "town")]                 = GeoDataPlacemark::PlaceTown;
     s_visualCategories[OsmTag("place", "village")]              = GeoDataPlacemark::PlaceVillage;
 
+    s_visualCategories[OsmTag("aerialway", "cable_car")]        = GeoDataPlacemark::AerialwayCableCar;
+    s_visualCategories[OsmTag("aerialway", "gondola")]          = GeoDataPlacemark::AerialwayGondola;
+    s_visualCategories[OsmTag("aerialway", "chair_lift")]       = GeoDataPlacemark::AerialwayChairLift;
+    s_visualCategories[OsmTag("aerialway", "mixed_lift")]       = GeoDataPlacemark::AerialwayMixedLift;
+    s_visualCategories[OsmTag("aerialway", "drag_lift")]        = GeoDataPlacemark::AerialwayDragLift;
+    s_visualCategories[OsmTag("aerialway", "t-bar")]            = GeoDataPlacemark::AerialwayTBar;
+    s_visualCategories[OsmTag("aerialway", "j-bar")]            = GeoDataPlacemark::AerialwayJBar;
+    s_visualCategories[OsmTag("aerialway", "platter")]          = GeoDataPlacemark::AerialwayPlatter;
+    s_visualCategories[OsmTag("aerialway", "rope_tow")]         = GeoDataPlacemark::AerialwayRopeTow;
+    s_visualCategories[OsmTag("aerialway", "magic_carpet")]     = GeoDataPlacemark::AerialwayMagicCarpet;
+    s_visualCategories[OsmTag("aerialway", "zip_line")]         = GeoDataPlacemark::AerialwayZipLine;
+    s_visualCategories[OsmTag("aerialway", "goods")]            = GeoDataPlacemark::AerialwayGoods;
+
     //Custom Marble OSM Tags
     s_visualCategories[OsmTag("marble_land", "landmass")]       = GeoDataPlacemark::Landmass;
     s_visualCategories[OsmTag("settlement", "yes")]             = GeoDataPlacemark::UrbanArea;
@@ -1490,6 +1516,19 @@ void StyleBuilder::Private::initializeMinimumZoomLevels()
     s_defaultMinZoomLevels[GeoDataPlacemark::CrossingRailway] = 18;
     s_defaultMinZoomLevels[GeoDataPlacemark::CrossingSignals] = 18;
     s_defaultMinZoomLevels[GeoDataPlacemark::CrossingZebra] = 18;
+
+    s_defaultMinZoomLevels[GeoDataPlacemark::AerialwayCableCar] = 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AerialwayGondola] = 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AerialwayChairLift] = 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AerialwayMixedLift] = 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AerialwayDragLift] = 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AerialwayTBar] = 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AerialwayJBar] = 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AerialwayPlatter] = 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AerialwayRopeTow] = 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AerialwayMagicCarpet] = 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AerialwayZipLine] = 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AerialwayGoods] = 17;
 
     for ( int i = GeoDataPlacemark::PlaceCity; i < GeoDataPlacemark::LastIndex; i++ ) {
         if (s_defaultMinZoomLevels[i] < 0) {
@@ -1899,6 +1938,12 @@ QStringList StyleBuilder::renderOrder() const
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::NaturalWater);
         paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataPlacemark::WaterwayWeir);
         for (int i = GeoDataPlacemark::WaterwayCanal; i <= GeoDataPlacemark::WaterwayStream; ++i) {
+            paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataPlacemark::GeoDataVisualCategory)i, "outline");
+            paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataPlacemark::GeoDataVisualCategory)i, "inline");
+            paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataPlacemark::GeoDataVisualCategory)i, "label");
+        }
+
+        for ( int i = GeoDataPlacemark::AerialwayCableCar; i <= GeoDataPlacemark::AerialwayGoods; ++i ) {
             paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataPlacemark::GeoDataVisualCategory)i, "outline");
             paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataPlacemark::GeoDataVisualCategory)i, "inline");
             paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataPlacemark::GeoDataVisualCategory)i, "label");
@@ -2520,6 +2565,18 @@ QString StyleBuilder::visualCategoryName(GeoDataPlacemark::GeoDataVisualCategory
         visualCategoryNames[GeoDataPlacemark::RailwayMonorail] = "RailwayMonorail";
         visualCategoryNames[GeoDataPlacemark::RailwayFunicular] = "RailwayFunicular";
         visualCategoryNames[GeoDataPlacemark::PowerTower] = "PowerTower";
+        visualCategoryNames[GeoDataPlacemark::AerialwayCableCar] = "AerialwayCableCar";
+        visualCategoryNames[GeoDataPlacemark::AerialwayGondola] = "AerialwayGondola";
+        visualCategoryNames[GeoDataPlacemark::AerialwayChairLift] = "AerialwayChairLift";
+        visualCategoryNames[GeoDataPlacemark::AerialwayMixedLift] = "AerialwayMixedLift";
+        visualCategoryNames[GeoDataPlacemark::AerialwayDragLift] = "AerialwayDragLift";
+        visualCategoryNames[GeoDataPlacemark::AerialwayTBar] = "AerialwayTBar";
+        visualCategoryNames[GeoDataPlacemark::AerialwayJBar] = "AerialwayJBar";
+        visualCategoryNames[GeoDataPlacemark::AerialwayPlatter] = "AerialwayPlatter";
+        visualCategoryNames[GeoDataPlacemark::AerialwayRopeTow] = "AerialwayRopeTow";
+        visualCategoryNames[GeoDataPlacemark::AerialwayMagicCarpet] = "AerialwayMagicCarpet";
+        visualCategoryNames[GeoDataPlacemark::AerialwayZipLine] = "AerialwayZipLine";
+        visualCategoryNames[GeoDataPlacemark::AerialwayGoods] = "AerialwayGoods";
         visualCategoryNames[GeoDataPlacemark::Satellite] = "Satellite";
         visualCategoryNames[GeoDataPlacemark::Landmass] = "Landmass";
         visualCategoryNames[GeoDataPlacemark::UrbanArea] = "UrbanArea";

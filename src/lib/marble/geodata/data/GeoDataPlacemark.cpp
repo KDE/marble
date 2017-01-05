@@ -658,6 +658,18 @@ QString GeoDataPlacemark::categoryName() const
     case RailwayMonorail: return GeoDataPlacemarkPrivate::tr("Monorail");
     case RailwayFunicular: return GeoDataPlacemarkPrivate::tr("Funicular Railway");
     case PowerTower: return GeoDataPlacemarkPrivate::tr("Power Tower");
+    case AerialwayCableCar: return GeoDataPlacemarkPrivate::tr("Cable Car");
+    case AerialwayGondola: return GeoDataPlacemarkPrivate::tr("Gondola");
+    case AerialwayChairLift: return GeoDataPlacemarkPrivate::tr("Chair Lift");
+    case AerialwayMixedLift: return GeoDataPlacemarkPrivate::tr("Mixed Lift");
+    case AerialwayDragLift: return GeoDataPlacemarkPrivate::tr("Drag Lift");
+    case AerialwayTBar: return GeoDataPlacemarkPrivate::tr("T-Bar");
+    case AerialwayJBar: return GeoDataPlacemarkPrivate::tr("J-Bar");
+    case AerialwayPlatter: return GeoDataPlacemarkPrivate::tr("Platter");
+    case AerialwayRopeTow: return GeoDataPlacemarkPrivate::tr("Rope Tow");
+    case AerialwayMagicCarpet: return GeoDataPlacemarkPrivate::tr("Magic Carpet");
+    case AerialwayZipLine: return GeoDataPlacemarkPrivate::tr("Zip Line");
+    case AerialwayGoods: return GeoDataPlacemarkPrivate::tr("Goods");
     case AdminLevel1: return GeoDataPlacemarkPrivate::tr("Admin Boundary (Level 1)");
     case AdminLevel2: return GeoDataPlacemarkPrivate::tr("Admin Boundary (Level 2)");
     case AdminLevel3: return GeoDataPlacemarkPrivate::tr("Admin Boundary (Level 3)");

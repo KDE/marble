@@ -369,6 +369,18 @@ QString Placemark::description() const
             addTagDescription(m_description, QStringLiteral("social_facility:for"), QStringLiteral("victim"), tr("For victims of crimes"));
         } else if (category == GeoDataPlacemark::HistoricMemorial) {
             addTagValue(m_description, QStringLiteral("inscription"), tr("Inscription: %1"));
+        } else if (category >= GeoDataPlacemark::AerialwayCableCar && category <= GeoDataPlacemark::AerialwayGoods) {
+            addTagValue(m_description, QStringLiteral("occupancy"), tr("%1 places per carriage"));
+            addTagValue(m_description, QStringLiteral("capacity"), tr("%1 people per hour"));
+            addTagValue(m_description, QStringLiteral("duration"), tr("%1 minutes"));
+
+            addTagDescription(m_description, QStringLiteral("bubble"), QStringLiteral("yes"), tr("Has weather protection", "A carriage is protected from the weather"));
+            addTagDescription(m_description, QStringLiteral("bubble"), QStringLiteral("no"), tr("No weather protection", "A carriage is not protected from the weather"));
+            addTagDescription(m_description, QStringLiteral("heating"), QStringLiteral("yes"), tr("Is heated", "A carriage is heated"));
+            addTagDescription(m_description, QStringLiteral("heating"), QStringLiteral("no"), tr("Not heated", "A carriage is not heated"));
+            addTagDescription(m_description, QStringLiteral("bicycle"), QStringLiteral("yes"), tr("Bicycle transportation possible", "Bicycles can be transported"));
+            addTagDescription(m_description, QStringLiteral("bicycle"), QStringLiteral("summer"), tr("Bicycle transportation only in summer", "Bicycles can only be transported in summer"));
+            addTagDescription(m_description, QStringLiteral("bicycle"), QStringLiteral("no"), tr("Bicycle transportation impossible", "Bicyles cannot be transported"));
         }
 
         if (category == GeoDataPlacemark::TransportBicycleParking || category == GeoDataPlacemark::TransportMotorcycleParking) {
