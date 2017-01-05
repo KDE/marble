@@ -480,6 +480,7 @@ QString GeoDataPlacemark::categoryName() const
     case HistoricArchaeologicalSite: return GeoDataPlacemarkPrivate::tr("Archaeological Site");
     case AmenityEmbassy: return GeoDataPlacemarkPrivate::tr("Embassy");
     case AmenityEmergencyPhone: return GeoDataPlacemarkPrivate::tr("Emergency Phone");
+    case AmenityMountainRescue: return GeoDataPlacemarkPrivate::tr("Mountain Rescue");
     case LeisureWaterPark: return GeoDataPlacemarkPrivate::tr("Water Park");
     case AmenityCommunityCentre: return GeoDataPlacemarkPrivate::tr("Community Centre");
     case AmenityFountain: return GeoDataPlacemarkPrivate::tr("Fountain");

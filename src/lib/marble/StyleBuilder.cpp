@@ -520,6 +520,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::HistoricArchaeologicalSite] = createOsmPOIAreaStyle(osmFont, "amenity/archaeological_site.16", amenityColor, Qt::transparent);
     m_defaultStyle[GeoDataPlacemark::AmenityEmbassy]           = createOsmPOIStyle(osmFont, "transportation/embassy.16", transportationColor);
     m_defaultStyle[GeoDataPlacemark::AmenityEmergencyPhone]    = createOsmPOIStyle(osmFont, "amenity/emergency_phone.16", amenityColor);
+    m_defaultStyle[GeoDataPlacemark::AmenityMountainRescue]    = createOsmPOIStyle(osmFont, "amenity/mountain_rescue.16", amenityColor);
     m_defaultStyle[GeoDataPlacemark::LeisureWaterPark]         = createOsmPOIStyle(osmFont, "amenity/water_park.16", amenityColor);
     m_defaultStyle[GeoDataPlacemark::AmenityCommunityCentre]   = createOsmPOIStyle(osmFont, "amenity/community_centre-14", amenityColor);
     m_defaultStyle[GeoDataPlacemark::AmenityFountain]          = createOsmPOIStyle(osmFont, "amenity/fountain-14", QColor("#7989de"), waterColor, waterColor.darker(150));
@@ -970,7 +971,7 @@ void StyleBuilder::Private::initializeOsmVisualCategories()
     s_visualCategories[OsmTag("amenity", "townhall")]           = GeoDataPlacemark::AmenityTownHall;
     s_visualCategories[OsmTag("amenity", "waste_basket")]       = GeoDataPlacemark::AmenityWasteBasket;
     s_visualCategories[OsmTag("emergency", "phone")]            = GeoDataPlacemark::AmenityEmergencyPhone;
-
+    s_visualCategories[OsmTag("amenity", "mountain_rescue")]    = GeoDataPlacemark::AmenityMountainRescue;
     s_visualCategories[OsmTag("amenity", "dentist")]            = GeoDataPlacemark::HealthDentist;
     s_visualCategories[OsmTag("amenity", "doctors")]            = GeoDataPlacemark::HealthDoctors;
     s_visualCategories[OsmTag("amenity", "hospital")]           = GeoDataPlacemark::HealthHospital;
@@ -1287,6 +1288,7 @@ void StyleBuilder::Private::initializeMinimumZoomLevels()
     s_defaultMinZoomLevels[GeoDataPlacemark::AmenityDrinkingWater]= 17;
     s_defaultMinZoomLevels[GeoDataPlacemark::AmenityEmbassy]= 15;
     s_defaultMinZoomLevels[GeoDataPlacemark::AmenityEmergencyPhone]= 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AmenityMountainRescue]= 16;
     s_defaultMinZoomLevels[GeoDataPlacemark::AmenityCommunityCentre]= 17;
     s_defaultMinZoomLevels[GeoDataPlacemark::AmenityFountain]= 17;
     s_defaultMinZoomLevels[GeoDataPlacemark::AmenityNightClub]= 16;
@@ -2079,6 +2081,7 @@ qint64 StyleBuilder::popularity(const GeoDataPlacemark *placemark)
         popularities << GeoDataPlacemark::PlaceLocality;
 
         popularities << GeoDataPlacemark::AmenityEmergencyPhone;
+        popularities << GeoDataPlacemark::AmenityMountainRescue;
         popularities << GeoDataPlacemark::HealthHospital;
         popularities << GeoDataPlacemark::AmenityToilets;
         popularities << GeoDataPlacemark::MoneyAtm;
@@ -2393,6 +2396,7 @@ QString StyleBuilder::visualCategoryName(GeoDataPlacemark::GeoDataVisualCategory
         visualCategoryNames[GeoDataPlacemark::MoneyBank] = "MoneyBank";
         visualCategoryNames[GeoDataPlacemark::AmenityEmbassy] = "AmenityEmbassy";
         visualCategoryNames[GeoDataPlacemark::AmenityEmergencyPhone] = "AmenityEmergencyPhone";
+        visualCategoryNames[GeoDataPlacemark::AmenityMountainRescue] = "AmenityMountainRescue";
         visualCategoryNames[GeoDataPlacemark::LeisureWaterPark] = "LeisureWaterPark";
         visualCategoryNames[GeoDataPlacemark::AmenityCommunityCentre] = "AmenityCommunityCentre";
         visualCategoryNames[GeoDataPlacemark::AmenityFountain] = "AmenityFountain";

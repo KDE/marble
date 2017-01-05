@@ -248,6 +248,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
         AmenityKindergarten, ///< @since 0.26.0
         AmenityEmbassy,
         AmenityEmergencyPhone,
+        AmenityMountainRescue,
         AmenityCommunityCentre,
         AmenityCinema,
         AmenityFountain,
