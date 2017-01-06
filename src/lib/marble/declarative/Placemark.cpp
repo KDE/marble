@@ -198,7 +198,6 @@ QString Placemark::description() const
             addTagValue(m_description, "leaf_type");
         } else if (category == GeoDataPlacemark::NaturalCave){
             addTagValue(m_description, "cave:ref");
-            addTagValue(m_description, QStringLiteral("ele"), tr("%1 m"));
         } else if (category == GeoDataPlacemark::AmenityRecycling) {
             addTagDescription(m_description, QStringLiteral("recycling:batteries"), "yes", tr("Batteries"));
             addTagDescription(m_description, QStringLiteral("recycling:clothes"), "yes", tr("Clothes"));
@@ -224,15 +223,12 @@ QString Placemark::description() const
             addTagDescription(m_description, QStringLiteral("recycling:white_goods"), "yes", tr("White goods"));
             addTagDescription(m_description, QStringLiteral("recycling:wood"), "yes", tr("Wood"));
         } else if (category == GeoDataPlacemark::NaturalVolcano) {
-            addTagValue(m_description, QStringLiteral("ele"), tr("%1 m"));
             addTagDescription(m_description, QStringLiteral("volcano:status"), QStringLiteral("active"), tr("Active", "An active volcano"));
             addTagDescription(m_description, QStringLiteral("volcano:status"), QStringLiteral("dormant"), tr("Dormant", "A dormant volcano that will erupt at some point in the future."));
             addTagDescription(m_description, QStringLiteral("volcano:status"), QStringLiteral("extinct"), tr("Extinct", "A volcano considered extinct, it has not erupted within the last 10000 years and likely never will again."));
             addTagDescription(m_description, QStringLiteral("volcano:type"), QStringLiteral("stratovolcano"), tr("Stratovolcano"));
             addTagDescription(m_description, QStringLiteral("volcano:type"), QStringLiteral("shield"), tr("Shield volcano"));
             addTagDescription(m_description, QStringLiteral("volcano:type"), QStringLiteral("scoria"), tr("Scoria cone", "A scoria cone volcano."));
-        } else if (category == GeoDataPlacemark::NaturalPeak) {
-            addTagValue(m_description, QStringLiteral("ele"), tr("%1 m"));
         } else if (category == GeoDataPlacemark::HealthDoctors) {
             addTagDescription(m_description, QStringLiteral("healthcare"), QStringLiteral("alternative"), tr("Alternative medicine"));
             addTagDescription(m_description, QStringLiteral("healthcare"), QStringLiteral("audiologist"), tr("Audiologist"));
@@ -403,6 +399,8 @@ QString Placemark::description() const
             addTagDescription(m_description, "aerialway:summer:access", "both", tr("Entry and exit during summer", "Entry and exit station of an aerialway during summer"));
             addTagDescription(m_description, "aerialway:summer:access", "no", tr("No entry or exit during summer", "Transit only station of an aerialway during summer"));
         }
+
+        addTagValue(m_description, QStringLiteral("ele"), tr("Elevation: %1 m"));
 
         addTagDescription(m_description, "access", "customers", tr("Customers only"));
         addTagDescription(m_description, QStringLiteral("access"), QStringLiteral("yes"), tr("Accessible by anyone", "The public has an official, legally-enshrined right of access; i.e., it's a right of way"));
