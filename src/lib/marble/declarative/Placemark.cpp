@@ -393,6 +393,17 @@ QString Placemark::description() const
             addTagValue(m_description, QStringLiteral("collection_times"), tr("Collection times %1"), QStringLiteral(", "));
         }
 
+        if (category == GeoDataPlacemark::AerialwayStation) {
+            addTagDescription(m_description, "aerialway:access", "entry", tr("Entry", "Entry station of an aerialway"));
+            addTagDescription(m_description, "aerialway:access", "exit", tr("Exit", "Exit station of an aerialway"));
+            addTagDescription(m_description, "aerialway:access", "both", tr("Entry and exit", "Entry and exit station of an aerialway"));
+            addTagDescription(m_description, "aerialway:access", "no", tr("No entry or exit", "Transit only station of an aerialway"));
+            addTagDescription(m_description, "aerialway:summer:access", "entry", tr("Entry during summer", "Entry station of an aerialway during summer"));
+            addTagDescription(m_description, "aerialway:summer:access", "exit", tr("Exit during summer", "Exit station of an aerialway during summer"));
+            addTagDescription(m_description, "aerialway:summer:access", "both", tr("Entry and exit during summer", "Entry and exit station of an aerialway during summer"));
+            addTagDescription(m_description, "aerialway:summer:access", "no", tr("No entry or exit during summer", "Transit only station of an aerialway during summer"));
+        }
+
         addTagDescription(m_description, "access", "customers", tr("Customers only"));
         addTagDescription(m_description, QStringLiteral("access"), QStringLiteral("yes"), tr("Accessible by anyone", "The public has an official, legally-enshrined right of access; i.e., it's a right of way"));
         addTagDescription(m_description, QStringLiteral("access"), QStringLiteral("private"), tr("Private", "Only with permission of the owner on an individual basis."));

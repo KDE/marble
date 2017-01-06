@@ -804,6 +804,8 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::InternationalDateLine]    = createStyle(1.0, 0.0, "#000000", "#000000", false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector<qreal>(), osmFont);
     m_defaultStyle[GeoDataPlacemark::Bathymetry]               = createWayStyle("#a5c9c9", "#a5c9c9", true, false);
 
+    m_defaultStyle[GeoDataPlacemark::AerialwayStation]         = createOsmPOIStyle(osmFont, "individual/railway_station", transportationColor);
+    m_defaultStyle[GeoDataPlacemark::AerialwayStation]->iconStyle().setScale(0.33);
     m_defaultStyle[GeoDataPlacemark::AerialwayPylon]           = createOsmPOIStyle(osmFont, "individual/pylon", QColor( "#dddddd" ));
     m_defaultStyle[GeoDataPlacemark::AerialwayPylon]->iconStyle().setScale(0.33);
     m_defaultStyle[GeoDataPlacemark::AerialwayCableCar]        = createWayStyle("#dddddd", "#bbbbbb", false, true);
@@ -1228,6 +1230,7 @@ void StyleBuilder::Private::initializeOsmVisualCategories()
     s_visualCategories[OsmTag("place", "town")]                 = GeoDataPlacemark::PlaceTown;
     s_visualCategories[OsmTag("place", "village")]              = GeoDataPlacemark::PlaceVillage;
 
+    s_visualCategories[OsmTag("aerialway", "station")]          = GeoDataPlacemark::AerialwayStation;
     s_visualCategories[OsmTag("aerialway", "pylon")]            = GeoDataPlacemark::AerialwayPylon;
     s_visualCategories[OsmTag("aerialway", "cable_car")]        = GeoDataPlacemark::AerialwayCableCar;
     s_visualCategories[OsmTag("aerialway", "gondola")]          = GeoDataPlacemark::AerialwayGondola;
@@ -1528,6 +1531,8 @@ void StyleBuilder::Private::initializeMinimumZoomLevels()
     s_defaultMinZoomLevels[GeoDataPlacemark::CrossingSignals] = 18;
     s_defaultMinZoomLevels[GeoDataPlacemark::CrossingZebra] = 18;
 
+
+    s_defaultMinZoomLevels[GeoDataPlacemark::AerialwayStation]= 15;
     s_defaultMinZoomLevels[GeoDataPlacemark::AerialwayPylon]= 16;
     s_defaultMinZoomLevels[GeoDataPlacemark::AerialwayCableCar] = 15;
     s_defaultMinZoomLevels[GeoDataPlacemark::AerialwayGondola] = 15;
@@ -2184,6 +2189,7 @@ qint64 StyleBuilder::popularity(const GeoDataPlacemark *placemark)
         popularities << GeoDataPlacemark::TransportBicycleParking;
         popularities << GeoDataPlacemark::TransportMotorcycleParking;
         popularities << GeoDataPlacemark::TransportSubwayEntrance;
+        popularities << GeoDataPlacemark::AerialwayStation;
 
         popularities << GeoDataPlacemark::ShopBeverages;
         popularities << GeoDataPlacemark::ShopHifi;
@@ -2582,6 +2588,7 @@ QString StyleBuilder::visualCategoryName(GeoDataPlacemark::GeoDataVisualCategory
         visualCategoryNames[GeoDataPlacemark::RailwayMonorail] = "RailwayMonorail";
         visualCategoryNames[GeoDataPlacemark::RailwayFunicular] = "RailwayFunicular";
         visualCategoryNames[GeoDataPlacemark::PowerTower] = "PowerTower";
+        visualCategoryNames[GeoDataPlacemark::AerialwayStation] = "AerialwayStation";
         visualCategoryNames[GeoDataPlacemark::AerialwayPylon] = "AerialwayPylon";
         visualCategoryNames[GeoDataPlacemark::AerialwayCableCar] = "AerialwayCableCar";
         visualCategoryNames[GeoDataPlacemark::AerialwayGondola] = "AerialwayGondola";

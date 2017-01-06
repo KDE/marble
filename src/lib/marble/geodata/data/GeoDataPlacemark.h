@@ -451,8 +451,10 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
         PowerTower,
 
         // OpenStreetMap category Aerialway
+        AerialwayStation,
         AerialwayPylon, // node only
-        AerialwayCableCar, // please keep order (used in for loops)
+        // below please keep order (used in for loops)
+        AerialwayCableCar,
         AerialwayGondola,
         AerialwayChairLift,
         AerialwayMixedLift,
