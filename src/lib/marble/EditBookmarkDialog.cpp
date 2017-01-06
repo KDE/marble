@@ -45,7 +45,7 @@ public:
 
     EditBookmarkDialogPrivate( EditBookmarkDialog* q, BookmarkManager *bookmarkManager );
 
-    void initComboBox( const GeoDataContainer* const container );
+    void initComboBox(const GeoDataContainer* const container , int level=0);
 
     void initialize();
 
@@ -83,15 +83,16 @@ void EditBookmarkDialogPrivate::initialize()
     initComboBox( m_bookmarkManager->document() );
 }
 
-void EditBookmarkDialogPrivate::initComboBox( const GeoDataContainer* const container )
+void EditBookmarkDialogPrivate::initComboBox( const GeoDataContainer* const container, int level )
 {
     m_bookmarkManager->ensureDefaultFolder();
     foreach( GeoDataFolder *folder, container->folderList() ) {
         QVariant folderVariant;
         folderVariant.setValue(folder);
-        m_ui.m_folders->addItem( folder->name(), folderVariant );
+        QString name = QString(' ').repeated(4*level) + folder->name();
+        m_ui.m_folders->addItem( name, folderVariant );
         if( !folder->folderList().isEmpty() ) {
-            initComboBox( folder );
+            initComboBox( folder, level+1 );
         }
     }
 }
