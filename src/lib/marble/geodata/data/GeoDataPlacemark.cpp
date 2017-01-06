@@ -660,6 +660,7 @@ QString GeoDataPlacemark::categoryName() const
     case RailwayMonorail: return GeoDataPlacemarkPrivate::tr("Monorail");
     case RailwayFunicular: return GeoDataPlacemarkPrivate::tr("Funicular Railway");
     case PowerTower: return GeoDataPlacemarkPrivate::tr("Power Tower");
+    case AerialwayPylon: return GeoDataPlacemarkPrivate::tr("Pylon", "A pylon supporting the aerialway cable e.g. on a ski lift");
     case AerialwayCableCar: return GeoDataPlacemarkPrivate::tr("Cable Car");
     case AerialwayGondola: return GeoDataPlacemarkPrivate::tr("Gondola");
     case AerialwayChairLift: return GeoDataPlacemarkPrivate::tr("Chair Lift");
