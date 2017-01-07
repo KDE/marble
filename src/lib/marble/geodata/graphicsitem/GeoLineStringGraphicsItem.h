@@ -17,6 +17,8 @@
 #include "MarbleGlobal.h"
 #include "marble_export.h"
 
+#include <QRegion>
+
 namespace Marble
 {
 
@@ -54,6 +56,8 @@ private:
     GeoDataLineString m_mergedLineString;
     QVector<QPolygonF*> m_cachedPolygons;
     bool m_renderLabel;
+    qreal m_penWidth;
+    mutable QRegion m_cachedRegion;
 };
 
 }

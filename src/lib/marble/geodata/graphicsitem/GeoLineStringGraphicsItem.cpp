@@ -23,6 +23,7 @@
 #include "MarbleMath.h"
 
 #include <qmath.h>
+#include <QPainterPathStroker>
 
 namespace Marble
 {
@@ -34,7 +35,8 @@ GeoLineStringGraphicsItem::GeoLineStringGraphicsItem(const GeoDataPlacemark *pla
     GeoGraphicsItem(placemark),
     m_lineString(lineString),
     m_renderLineString(lineString),
-    m_renderLabel(false)
+    m_renderLabel(false),
+    m_penWidth(0.0)
 {
     QString const category = StyleBuilder::visualCategoryName(placemark->visualCategory());
     QStringList paintLayers;
@@ -128,6 +130,7 @@ void GeoLineStringGraphicsItem::paint(GeoPainter* painter, const ViewportParams*
     if (layer.endsWith(QLatin1String("/outline"))) {
         qDeleteAll(m_cachedPolygons);
         m_cachedPolygons.clear();
+        m_cachedRegion = QRegion();
         painter->polygonsFromLineString(*m_renderLineString, m_cachedPolygons);
         if (m_cachedPolygons.empty()) {
             return;
@@ -149,6 +152,7 @@ void GeoLineStringGraphicsItem::paint(GeoPainter* painter, const ViewportParams*
     } else {
         qDeleteAll(m_cachedPolygons);
         m_cachedPolygons.clear();
+        m_cachedRegion = QRegion();
         painter->polygonsFromLineString(*m_renderLineString, m_cachedPolygons);
         if (m_cachedPolygons.empty()) {
             return;
@@ -161,12 +165,22 @@ void GeoLineStringGraphicsItem::paint(GeoPainter* painter, const ViewportParams*
 
 bool GeoLineStringGraphicsItem::contains(const QPoint &screenPosition, const ViewportParams *) const
 {
-    for (auto polygon: m_cachedPolygons) {
-        if (polygon->containsPoint(screenPosition, Qt::OddEvenFill)) {
-            return true;
-        }
+    if (m_penWidth <= 0.0) {
+        return false;
     }
-    return false;
+
+    if (m_cachedRegion.isNull()) {
+        QPainterPath painterPath;
+        for (auto polygon: m_cachedPolygons) {
+            painterPath.addPolygon(*polygon);
+        }
+        QPainterPathStroker stroker;
+        qreal const margin = 6.0;
+        stroker.setWidth(m_penWidth + margin);
+        QPainterPath strokePath = stroker.createStroke(painterPath);
+        m_cachedRegion = QRegion(strokePath.toFillPolygon().toPolygon(), Qt::WindingFill);
+    }
+    return m_cachedRegion.contains(screenPosition);
 }
 
 void GeoLineStringGraphicsItem::paintInline(GeoPainter* painter, const ViewportParams* viewport)
@@ -184,6 +198,7 @@ void GeoLineStringGraphicsItem::paintInline(GeoPainter* painter, const ViewportP
     m_renderLabel = painter->pen().widthF() >= 6.0f;
 
     if (isValid) {
+      m_penWidth = painter->pen().widthF();
       foreach(const QPolygonF* itPolygon, m_cachedPolygons) {
           painter->drawPolyline(*itPolygon);
       }
