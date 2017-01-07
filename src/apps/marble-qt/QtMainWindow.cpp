@@ -603,7 +603,7 @@ void MainWindow::createFolderList( QMenu *bookmarksListMenu, const GeoDataContai
 {
     QVector<GeoDataFolder*> folders = container->folderList();
 
-    if ( folders.size() == 1 ) {
+    if ( folders.size() == 1 && folders.first()->name() == tr("Default")) {
         createBookmarksListMenu( bookmarksListMenu, folders.first() );
     }
     else {
