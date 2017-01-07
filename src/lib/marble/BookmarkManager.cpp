@@ -161,7 +161,7 @@ void BookmarkManager::removeBookmark( GeoDataPlacemark *bookmark )
     updateBookmarkFile();
 }
 
-GeoDataPlacemark* BookmarkManager::bookmarkAt( GeoDataContainer *container, GeoDataCoordinates &coordinate )
+GeoDataPlacemark* BookmarkManager::bookmarkAt(GeoDataContainer *container, const GeoDataCoordinates &coordinate)
 {
     foreach ( GeoDataFolder *folder, container->folderList() ) {
         GeoDataPlacemark *placemark = bookmarkAt(folder, coordinate);
