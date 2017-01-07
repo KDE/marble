@@ -428,86 +428,90 @@ void BookmarkManagerDialog::importBookmarks()
         QMessageBox::warning(this, tr( "Bookmark Import"), text);
         return;
     }
+    GeoDataDocument *current = bookmarkDocument();
 
-    GeoDataDocument* current = bookmarkDocument();
-
-    bool replaceAll = false;
     bool skipAll = false;
-    foreach( GeoDataFolder* newFolder, import->folderList() ) {
+    bool replaceAll = false;
+    importBookmarksRecursively(import, current, skipAll, replaceAll);
+
+    d->selectFolder();
+}
+
+void BookmarkManagerDialog::importBookmarksRecursively( GeoDataContainer *source, GeoDataContainer *destination, bool &replaceAll, bool &skipAll )
+{
+    foreach( GeoDataFolder *newFolder, source->folderList() ) {
+        GeoDataFolder *existingFolder = d->m_manager->addNewBookmarkFolder(destination, newFolder->name());
+        importBookmarksRecursively(newFolder, existingFolder, skipAll, replaceAll);
         foreach( GeoDataPlacemark* newPlacemark, newFolder->placemarkList() ) {
             bool added = skipAll;
-            foreach( GeoDataFolder* existingFolder, current->folderList() ) {
-                for( int i=0; i<existingFolder->size() && !added; ++i ) {
-                    GeoDataPlacemark* existingPlacemark = dynamic_cast<GeoDataPlacemark*>( existingFolder->child( i ) );
-                    if ( existingPlacemark && existingPlacemark->coordinate() == newPlacemark->coordinate() ) {
 
-                        if ( skipAll ) {
-                            continue;
-                        }
-
-                        // Avoid message boxes for equal bookmarks, just skip them
-                        if ( existingPlacemark->name() == newPlacemark->name() &&
-                             existingPlacemark->description() == newPlacemark->description() ) {
-                            added = true;
-                            continue;
-                        }
-
-                        QPointer<QMessageBox> messageBox = new QMessageBox( this );
-                        QString const intro = tr( "The file contains a bookmark that already exists among your Bookmarks." );
-                        QString const newBookmark = tr( "Imported bookmark" );
-                        QString const existingBookmark = tr( "Existing bookmark" );
-                        QString const question = tr( "Do you want to replace the existing bookmark with the imported one?" );
-                        QString html = QLatin1String("<p>%1</p><table><tr><td>%2</td><td><b>%3 / %4</b></td></tr>"
-                                                     "<tr><td>%5</td><td><b>%6 / %7</b></td></tr></table><p>%8</p>");
-                        html = html.arg( intro ).arg( existingBookmark ).arg( existingFolder->name() );
-                        html = html.arg( existingPlacemark->name() ).arg( newBookmark ).arg( newFolder->name() );
-                        html = html.arg( newPlacemark->name() ).arg( question );
-                        messageBox->setText( html );
-
-                        QAbstractButton *replaceButton    = messageBox->addButton(tr( "Replace" ),     QMessageBox::ActionRole );
-                        QAbstractButton *replaceAllButton = messageBox->addButton(tr( "Replace All" ), QMessageBox::ActionRole );
-                        QAbstractButton *skipButton       = messageBox->addButton(tr( "Skip" ),        QMessageBox::ActionRole );
-                        QAbstractButton *skipAllButton    = messageBox->addButton(tr( "Skip All" ),    QMessageBox::ActionRole );
-                                                            messageBox->addButton(tr( "Cancel" ),      QMessageBox::RejectRole );
-                        messageBox->setIcon( QMessageBox::Question );
-
-                        if ( !replaceAll ) {
-                            messageBox->exec();
-                        }
-                        if ( messageBox->clickedButton() == replaceAllButton ) {
-                            replaceAll = true;
-                        } else if ( messageBox->clickedButton() == skipAllButton ) {
-                            skipAll = true;
-                            added = true;
-                        } else if ( messageBox->clickedButton() == skipButton ) {
-                            added = true;
-                            delete messageBox;
-                            continue;
-                        } else if ( messageBox->clickedButton() != replaceButton ) {
-                            delete messageBox;
-                            return;
-                        }
-
-                        if ( messageBox->clickedButton() == replaceButton || replaceAll ) {
-                            d->m_manager->removeBookmark( existingPlacemark );
-                            d->m_manager->addBookmark( newFolder, *newPlacemark );
-                            mDebug() << "Placemark " << newPlacemark->name() << " replaces " << existingPlacemark->name();
-                            added = true;
-                            delete messageBox;
-                            break;
-                        }
-                        delete messageBox;
-                    }
+            GeoDataCoordinates newCoordinate = newPlacemark->coordinate();
+            GeoDataPlacemark *existingPlacemark = d->m_manager->containsCoordinate( d->m_manager->document(), newCoordinate );
+            if ( existingPlacemark ) {
+                if ( skipAll ) {
+                    continue;
                 }
+
+                // Avoid message boxes for equal bookmarks, just skip them
+                if ( existingPlacemark->name() == newPlacemark->name() &&
+                    existingPlacemark->description() == newPlacemark->description() ) {
+                    added = true;
+                    continue;
+                }
+
+                QPointer<QMessageBox> messageBox = new QMessageBox( this );
+                QString const intro = tr( "The file contains a bookmark that already exists among your Bookmarks." );
+                QString const newBookmark = tr( "Imported bookmark" );
+                QString const existingBookmark = tr( "Existing bookmark" );
+                QString const question = tr( "Do you want to replace the existing bookmark with the imported one?" );
+                QString html = QLatin1String("<p>%1</p><table><tr><td>%2</td><td><b>%3 / %4</b></td></tr>"
+                                                "<tr><td>%5</td><td><b>%6 / %7</b></td></tr></table><p>%8</p>");
+                html = html.arg( intro ).arg( existingBookmark ).arg( existingFolder->name() );
+                html = html.arg( existingPlacemark->name() ).arg( newBookmark ).arg( newFolder->name() );
+                html = html.arg( newPlacemark->name() ).arg( question );
+                messageBox->setText( html );
+
+                QAbstractButton *replaceButton    = messageBox->addButton(tr( "Replace" ),     QMessageBox::ActionRole );
+                QAbstractButton *replaceAllButton = messageBox->addButton(tr( "Replace All" ), QMessageBox::ActionRole );
+                QAbstractButton *skipButton       = messageBox->addButton(tr( "Skip" ),        QMessageBox::ActionRole );
+                QAbstractButton *skipAllButton    = messageBox->addButton(tr( "Skip All" ),    QMessageBox::ActionRole );
+                                                    messageBox->addButton(tr( "Cancel" ),      QMessageBox::RejectRole );
+                messageBox->setIcon( QMessageBox::Question );
+
+                if ( !replaceAll ) {
+                    messageBox->exec();
+                }
+                if ( messageBox->clickedButton() == replaceAllButton ) {
+                    replaceAll = true;
+                } else if ( messageBox->clickedButton() == skipAllButton ) {
+                    skipAll = true;
+                    added = true;
+                } else if ( messageBox->clickedButton() == skipButton ) {
+                    added = true;
+                    delete messageBox;
+                    continue;
+                } else if ( messageBox->clickedButton() != replaceButton ) {
+                    delete messageBox;
+                    return;
+                }
+
+                if ( messageBox->clickedButton() == replaceButton || replaceAll ) {
+                    d->m_manager->removeBookmark( existingPlacemark );
+                    d->m_manager->addBookmark( existingFolder, *newPlacemark );
+
+                    mDebug() << "Placemark " << newPlacemark->name() << " replaces " << existingPlacemark->name();
+                    added = true;
+                    delete messageBox;
+                    break;
+                }
+                delete messageBox;
             }
 
             if ( !added ) {
-                d->m_manager->addBookmark( newFolder, *newPlacemark );
+                d->m_manager->addBookmark( existingFolder, *newPlacemark );
             }
         }
     }
-
-    d->selectFolder();
 }
 
 GeoDataDocument* BookmarkManagerDialog::bookmarkDocument()

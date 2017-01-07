@@ -131,7 +131,6 @@ bool BookmarkManager::loadFile( const QString &relativeFilePath )
     return true;
 }
 
-
 void BookmarkManager::addBookmark( GeoDataContainer *container, const GeoDataPlacemark &placemark )
 {
     GeoDataPlacemark *bookmark = new GeoDataPlacemark( placemark );
@@ -162,6 +161,22 @@ void BookmarkManager::removeBookmark( GeoDataPlacemark *bookmark )
     updateBookmarkFile();
 }
 
+GeoDataPlacemark* BookmarkManager::containsCoordinate( GeoDataContainer *container, GeoDataCoordinates &coordinate )
+{
+    foreach ( GeoDataFolder *folder, container->folderList() ) {
+        GeoDataPlacemark *placemark = containsCoordinate(folder, coordinate);
+        if ( placemark )
+            return placemark;
+    }
+
+    foreach ( GeoDataPlacemark *placemark, container->placemarkList() ) {
+        if ( placemark->coordinate() == coordinate )
+            return placemark;
+    }
+
+    return Q_NULLPTR;
+}
+
 GeoDataDocument * BookmarkManager::document()
 {
     return d->m_bookmarkDocument;
@@ -188,12 +203,12 @@ QVector<GeoDataFolder*> BookmarkManager::folders() const
     return d->m_bookmarkDocument->folderList();
 }
 
-void BookmarkManager::addNewBookmarkFolder( GeoDataContainer *container, const QString &name )
+GeoDataFolder* BookmarkManager::addNewBookmarkFolder( GeoDataContainer *container, const QString &name )
 {
     //If name is empty string
     if ( name.isEmpty() ) {
         mDebug() << "Folder with empty name is not acceptable, please give it another name" ;
-        return;
+        return Q_NULLPTR;
     }
 
     //If folder with same name already exist
@@ -204,7 +219,7 @@ void BookmarkManager::addNewBookmarkFolder( GeoDataContainer *container, const Q
     for ( ; i != end; ++i ) {
         if ( name == ( *i )->name() ) {
             mDebug() << "Folder with same name already exist, please give it another name";
-            return;
+            return *i;
         }
     }
 
@@ -213,6 +228,8 @@ void BookmarkManager::addNewBookmarkFolder( GeoDataContainer *container, const Q
 
     d->m_treeModel->addFeature( container, bookmarkFolder );
     updateBookmarkFile();
+
+    return bookmarkFolder;
 }
 
 void BookmarkManager::renameBookmarkFolder( GeoDataFolder *folder, const QString &name )
