@@ -72,7 +72,7 @@ class MARBLE_EXPORT BookmarkManager : public QObject
       * @brief checks all the bookmarks in container recursively and returns
       * pointer to the one having the same coordinate as the provided
       */
-    GeoDataPlacemark* containsCoordinate(GeoDataContainer *container, GeoDataCoordinates &coordinate);
+    GeoDataPlacemark* bookmarkAt(GeoDataContainer *container, GeoDataCoordinates &coordinate);
 
     GeoDataDocument * document();
     const GeoDataDocument * document() const;

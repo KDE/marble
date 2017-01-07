@@ -45,11 +45,6 @@ private Q_SLOTS:
     void importBookmarks();
 
 private:
-    void importBookmarksRecursively( GeoDataContainer *source, GeoDataContainer *destination,
-                                     bool &replaceAll, bool &skipAll );
-
-    GeoDataDocument* bookmarkDocument();
-
     Q_PRIVATE_SLOT( d, void updateButtonState() )
 
     Q_PRIVATE_SLOT( d, void addNewFolder() )
