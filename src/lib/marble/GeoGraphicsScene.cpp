@@ -44,7 +44,7 @@ public:
 
     typedef QHash<const GeoDataFeature*,GeoGraphicsItem*> FeatureItemMap;
     QMap<TileId, FeatureItemMap> m_tiledItems;
-    QHash<const GeoDataFeature*, TileId> m_features;
+    QMultiHash<const GeoDataFeature*, TileId> m_features; // multi hash because multi track and multi geometry insert multiple items
 
     // Stores the items which have been clicked;
     QList<GeoGraphicsItem*> m_selectedItems;
@@ -176,8 +176,7 @@ void GeoGraphicsScene::applyHighlight( const QVector< GeoDataPlacemark* > &selec
      * items to use highlight style
      */
     foreach( const GeoDataPlacemark *placemark, selectedPlacemarks ) {
-        auto tileIter = d->m_features.find(placemark);
-        if (tileIter != d->m_features.end()) {
+        for (auto tileIter = d->m_features.find(placemark); tileIter != d->m_features.end(); ++tileIter) {
             auto const & clickedItems = d->m_tiledItems[*tileIter];
             auto iter = clickedItems.find(placemark);
             if (iter != clickedItems.end()) {
@@ -223,15 +222,16 @@ void GeoGraphicsScene::applyHighlight( const QVector< GeoDataPlacemark* > &selec
 
 void GeoGraphicsScene::removeItem( const GeoDataFeature* feature )
 {
-    auto tileIter = d->m_features.find(feature);
-    if (tileIter != d->m_features.end()) {
+    for (auto tileIter = d->m_features.find(feature), end = d->m_features.end(); tileIter != end;) {
         auto & tileList = d->m_tiledItems[*tileIter];
         auto iter = tileList.find(feature);
         if (iter != tileList.end()) {
             auto item = iter.value();
-            d->m_features.erase(tileIter);
+            tileIter = d->m_features.erase(tileIter);
             tileList.erase(iter);
             delete item;
+        } else {
+            ++tileIter;
         }
     }
 }
