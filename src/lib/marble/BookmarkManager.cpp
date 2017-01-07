@@ -247,7 +247,7 @@ void BookmarkManager::removeBookmarkFolder( GeoDataFolder *folder )
 void BookmarkManager::ensureDefaultFolder()
 {
     if ( d->m_bookmarkDocument->size() == 0 ) {
-        addNewBookmarkFolder( d->m_bookmarkDocument, "Default" );
+        addNewBookmarkFolder( d->m_bookmarkDocument, tr("Default") );
     }
 }
 
