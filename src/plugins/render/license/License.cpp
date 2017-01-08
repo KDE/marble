@@ -136,7 +136,9 @@ void License::initialize ()
     delete m_widgetItem;
     m_widgetItem = new WidgetGraphicsItem( this );
     m_label = new QLabel;
-    m_label->setStyle( new OutlinedStyle );
+    auto style = new OutlinedStyle;
+    style->setParent(this);
+    m_label->setStyle( style );
     m_label->setSizePolicy( QSizePolicy::Preferred, QSizePolicy::Fixed );
     m_widgetItem->setWidget( m_label );
 
