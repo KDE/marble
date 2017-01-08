@@ -98,8 +98,8 @@ GeoDataAccuracy RouteSimulationPositionProviderPlugin::accuracy() const
     return result;
 }
 
-RouteSimulationPositionProviderPlugin::RouteSimulationPositionProviderPlugin( MarbleModel *marbleModel ) :
-    PositionProviderPlugin(),
+RouteSimulationPositionProviderPlugin::RouteSimulationPositionProviderPlugin(MarbleModel *marbleModel , QObject *parent) :
+    PositionProviderPlugin(parent),
     m_marbleModel( marbleModel ),
     m_currentIndex( -2 ),
     m_status( PositionProviderStatusUnavailable ),

@@ -209,8 +209,8 @@ MarbleModel::MarbleModel( QObject *parent )
     connect(&d->m_clock,   SIGNAL(timeChanged()),
             &d->m_sunLocator, SLOT(update()) );
 
-    d->m_pluginManager.addPositionProviderPlugin( new PlacemarkPositionProviderPlugin( this ) );
-    d->m_pluginManager.addPositionProviderPlugin( new RouteSimulationPositionProviderPlugin( this ) );
+    d->m_pluginManager.addPositionProviderPlugin(new PlacemarkPositionProviderPlugin(this, this));
+    d->m_pluginManager.addPositionProviderPlugin(new RouteSimulationPositionProviderPlugin(this, this));
 }
 
 MarbleModel::~MarbleModel()

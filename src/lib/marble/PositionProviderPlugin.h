@@ -48,7 +48,7 @@ class MARBLE_EXPORT PositionProviderPlugin : public QObject, public PositionProv
                           const GeoDataAccuracy& accuracy ) const;
 
  protected:
-    PositionProviderPlugin();
+    PositionProviderPlugin(QObject* parent=0);
 
  private:
     Q_DISABLE_COPY( PositionProviderPlugin )

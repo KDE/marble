@@ -21,8 +21,9 @@ public:
     }
 };
 
-PositionProviderPlugin::PositionProviderPlugin()
-    : d( new PositionProviderPluginPrivate() )
+PositionProviderPlugin::PositionProviderPlugin(QObject *parent)
+    : QObject(parent),
+      d( new PositionProviderPluginPrivate() )
 {
 }
 

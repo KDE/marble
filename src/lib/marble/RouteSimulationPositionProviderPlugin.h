@@ -32,7 +32,7 @@ class RouteSimulationPositionProviderPlugin: public PositionProviderPlugin
     Q_INTERFACES( Marble::PositionProviderPluginInterface )
 
 public:
-    explicit RouteSimulationPositionProviderPlugin( MarbleModel *marbleModel );
+    explicit RouteSimulationPositionProviderPlugin(MarbleModel *marbleModel, QObject* parent=nullptr);
     ~RouteSimulationPositionProviderPlugin() override;
 
     // Implementing PluginInterface

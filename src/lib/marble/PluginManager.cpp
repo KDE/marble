@@ -36,8 +36,9 @@ namespace Marble
 class PluginManagerPrivate
 {
  public:
-    PluginManagerPrivate()
-            : m_pluginsLoaded(false)
+    PluginManagerPrivate(PluginManager* parent)
+            : m_pluginsLoaded(false),
+              m_parent(parent)
     {
     }
 
@@ -52,6 +53,7 @@ class PluginManagerPrivate
     QList<const ReverseGeocodingRunnerPlugin *> m_reverseGeocodingRunnerPlugins;
     QList<RoutingRunnerPlugin *> m_routingRunnerPlugins;
     QList<const ParseRunnerPlugin *> m_parsingRunnerPlugins;
+    PluginManager* m_parent;
     static QStringList m_blacklist;
     static QStringList m_whitelist;
 
@@ -69,7 +71,7 @@ PluginManagerPrivate::~PluginManagerPrivate()
 }
 
 PluginManager::PluginManager( QObject *parent ) : QObject( parent ),
-    d( new PluginManagerPrivate() )
+    d( new PluginManagerPrivate(this) )
 {
     //Checking assets:/plugins for uninstalled plugins
 #ifdef Q_OS_ANDROID
@@ -248,7 +250,7 @@ void PluginManagerPrivate::loadPlugins()
             continue;
         }
 #endif
-        QPluginLoader* loader = new QPluginLoader( path );
+        QPluginLoader* loader = new QPluginLoader( path, m_parent );
 
         QObject * obj = loader->instance();
 

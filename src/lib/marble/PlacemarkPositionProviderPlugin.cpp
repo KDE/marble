@@ -21,8 +21,8 @@
 
 using namespace Marble;
 
-PlacemarkPositionProviderPlugin::PlacemarkPositionProviderPlugin( MarbleModel *marbleModel )
-    : PositionProviderPlugin(),
+PlacemarkPositionProviderPlugin::PlacemarkPositionProviderPlugin( MarbleModel *marbleModel, QObject* parent )
+    : PositionProviderPlugin(parent),
       m_marbleModel( marbleModel ),
       m_placemark( 0 ),
       m_speed( 0 ),

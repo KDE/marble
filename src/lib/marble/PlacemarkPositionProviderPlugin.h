@@ -31,7 +31,7 @@ class PlacemarkPositionProviderPlugin: public PositionProviderPlugin
     Q_INTERFACES( Marble::PositionProviderPluginInterface )
 
  public:
-    explicit PlacemarkPositionProviderPlugin( MarbleModel *marbleModel );
+    explicit PlacemarkPositionProviderPlugin( MarbleModel *marbleModel, QObject* parent=nullptr );
 
     QString name() const override;
     QString nameId() const override;
