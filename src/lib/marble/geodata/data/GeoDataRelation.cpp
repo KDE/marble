@@ -22,6 +22,7 @@ class GeoDataRelationPrivate
 public:
     QSet<const GeoDataFeature*> m_features;
     OsmPlacemarkData m_osmData;
+    QSet<qint64> m_memberIds;
 
     static QHash<QString, GeoDataRelation::RelationType> s_relationTypes;
 };
@@ -71,6 +72,7 @@ void GeoDataRelation::addMember(const GeoDataFeature *feature, qint64 id, const 
     Q_D(GeoDataRelation);
     d->m_features << feature;
     d->m_osmData.addRelation(id, role);
+    d->m_memberIds << id;
 }
 
 QSet<const GeoDataFeature *> GeoDataRelation::members() const
@@ -122,16 +124,8 @@ GeoDataRelation::RelationType GeoDataRelation::relationType() const
 
 QSet<qint64> GeoDataRelation::memberIds() const
 {
-    QSet<qint64> result;
     Q_D(const GeoDataRelation);
-    for (auto const &member : d->m_features) {
-        if (member->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
-            result << static_cast<const GeoDataPlacemark*>(member)->osmData().oid();
-        } else if (member->nodeType() == GeoDataTypes::GeoDataRelationType) {
-            result << static_cast<const GeoDataRelation*>(member)->osmData().oid();
-        }
-    }
-    return result;
+    return d->m_memberIds;
 }
 
 }
