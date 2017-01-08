@@ -92,17 +92,16 @@ bool GeoDataCoordinates::isValid() const
  */
 void GeoDataCoordinates::detach()
 {    
-    if(d->ref.load() == 1) {
-        delete d->m_q;
-        d->m_q = 0;
+    delete d->m_q;
+    d->m_q = 0;
 
+    if(d->ref.load() == 1) {
         return;
     }
 
     GeoDataCoordinatesPrivate *new_d = new GeoDataCoordinatesPrivate( *d );
 
     if (!d->ref.deref()) {
-        delete d->m_q;
         delete d;
     }
 
