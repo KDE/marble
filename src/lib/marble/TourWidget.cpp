@@ -70,6 +70,7 @@ class TourWidgetPrivate
 
 public:
     explicit TourWidgetPrivate( TourWidget *parent );
+    ~TourWidgetPrivate();
     GeoDataFeature *getPlaylistFeature() const;
     void updateRootIndex();
 
@@ -189,6 +190,11 @@ TourWidgetPrivate::TourWidgetPrivate( TourWidget *parent )
 
 }
 
+TourWidgetPrivate::~TourWidgetPrivate()
+{
+    delete m_delegate;
+}
+
 TourWidget::TourWidget( QWidget *parent, Qt::WindowFlags flags )
     : QWidget( parent, flags ),
       d( new TourWidgetPrivate( this ) )
@@ -267,6 +273,7 @@ bool TourWidget::eventFilter( QObject *watched, QEvent *event )
 void TourWidget::setMarbleWidget( MarbleWidget *widget )
 {
     d->m_widget = widget;
+    delete d->m_delegate;
     d->m_delegate = new TourItemDelegate( d->m_tourUi.m_listView, d->m_widget, this );
     connect( d->m_delegate, SIGNAL(edited(QModelIndex)), this, SLOT(updateDuration()) );
     connect( d->m_delegate, SIGNAL(edited(QModelIndex)), &d->m_playback, SLOT(updateTracks()) );
