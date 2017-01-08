@@ -101,8 +101,10 @@ void GeoDataCoordinates::detach()
 
     GeoDataCoordinatesPrivate *new_d = new GeoDataCoordinatesPrivate( *d );
 
-    if (!d->ref.deref())
+    if (!d->ref.deref()) {
+        delete d->m_q;
         delete d;
+    }
 
     d = new_d;
     d->ref.ref();
