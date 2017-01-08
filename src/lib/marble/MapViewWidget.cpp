@@ -131,7 +131,7 @@ class Q_DECL_HIDDEN MapViewWidget::Private {
         m_mercatorViewButton->setChecked(false);
         m_mercatorViewButton->setPopupMode(QToolButton::MenuButtonPopup);
 
-        m_popupMenuFlat = new QMenu;
+        m_popupMenuFlat = new QMenu(q);
 
         m_mercatorViewAction = new QAction(QIcon(QStringLiteral(":/icons/map-mercator.png")),
                                               tr("Mercator View"),

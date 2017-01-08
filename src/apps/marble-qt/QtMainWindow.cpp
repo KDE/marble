@@ -464,20 +464,20 @@ void MainWindow::createMenus( const QList<QAction*> &panelActions )
         m_fileMenu->addAction(m_stopRecordingAction);
 
         m_viewMenu = menuBar()->addMenu(tr("&View"));
-        m_infoBoxesMenu = new QMenu(tr("&Info Boxes"));
-        m_onlineServicesMenu = new QMenu(tr("&Online Services"));
+        m_infoBoxesMenu = new QMenu(tr("&Info Boxes"), this);
+        m_onlineServicesMenu = new QMenu(tr("&Online Services"), this);
         createPluginsMenus();
 
         m_bookmarkMenu = menuBar()->addMenu(tr("&Bookmarks"));
         createBookmarkMenu();
         connect( m_bookmarkMenu, SIGNAL(aboutToShow()), this, SLOT(createBookmarkMenu()) );
 
-        m_panelMenu = new QMenu(tr("&Panels"));
+        m_panelMenu = new QMenu(tr("&Panels"), this);
         foreach( QAction* action, panelActions ) {
             m_panelMenu->addAction( action );
         }
 
-        m_viewSizeMenu = new QMenu(tr("&View Size"));
+        m_viewSizeMenu = new QMenu(tr("&View Size"), this);
         m_viewSizeMenu->addActions( m_viewSizeActsGroup->actions() );
 
         m_settingsMenu = menuBar()->addMenu(tr("&Settings"));
@@ -1010,7 +1010,7 @@ void MainWindow::setupStatusBar()
 
     statusBar()->addAction( m_toggleTileLevelAction );
 
-    QMenu *angleDisplayUnitMenu = new QMenu( );
+    QMenu *angleDisplayUnitMenu = new QMenu(this);
     angleDisplayUnitMenu->addActions( m_angleDisplayUnitActionGroup->actions() );
     QAction *angleDisplayUnitMenuAction = new QAction( tr("&Angle Display Unit"), statusBar() );
     angleDisplayUnitMenuAction->setMenu( angleDisplayUnitMenu );

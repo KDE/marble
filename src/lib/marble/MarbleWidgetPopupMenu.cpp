@@ -87,7 +87,7 @@ public:
 
 public:
     Private( MarbleWidget *widget, const MarbleModel *model, MarbleWidgetPopupMenu* parent );
-    QMenu* createInfoBoxMenu();
+    QMenu* createInfoBoxMenu(QWidget *parent);
 
     /**
       * Returns the geo coordinates of the mouse pointer at the last right button menu.
@@ -137,7 +137,7 @@ MarbleWidgetPopupMenu::Private::Private( MarbleWidget *widget, const MarbleModel
 
     QAction* aboutDialogAction = new QAction(QIcon(QStringLiteral(":/icons/marble.png")), tr("&About"), parent);
 
-    QMenu* infoBoxMenu = createInfoBoxMenu();
+    QMenu* infoBoxMenu = createInfoBoxMenu(m_widget);
 
     const bool smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
 
@@ -538,9 +538,9 @@ MarbleWidgetPopupMenu::~MarbleWidgetPopupMenu()
     delete d;
 }
 
-QMenu* MarbleWidgetPopupMenu::Private::createInfoBoxMenu()
+QMenu* MarbleWidgetPopupMenu::Private::createInfoBoxMenu(QWidget* parent)
 {
-    QMenu* menu = new QMenu( tr( "&Info Boxes" ) );
+    QMenu* menu = new QMenu(tr("&Info Boxes"), parent);
     QList<AbstractFloatItem *> floatItemList = m_widget->floatItems();
 
     QList<AbstractFloatItem *>::const_iterator iter = floatItemList.constBegin();
