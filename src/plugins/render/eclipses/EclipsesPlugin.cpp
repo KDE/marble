@@ -73,6 +73,7 @@ EclipsesPlugin::~EclipsesPlugin()
         delete m_eclipsesActionGroup;
         delete m_eclipsesListMenu;
         delete m_configDialog;
+        delete m_configWidget;
         delete m_browserDialog;
         delete m_reminderDialog;
     }
@@ -159,7 +160,9 @@ void EclipsesPlugin::initialize()
     }
 
     // initialize dialogs
+    delete m_configDialog;
     m_configDialog = new QDialog();
+    delete m_configWidget;
     m_configWidget = new Ui::EclipsesConfigDialog();
     m_configWidget->setupUi( m_configDialog );
 
