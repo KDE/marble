@@ -38,6 +38,7 @@ namespace Marble
 class Q_DECL_HIDDEN RouteSyncManager::Private {
 public:
     Private( CloudSyncManager *cloudSyncManager );
+    ~Private();
 
     bool m_routeSyncEnabled;
     CloudSyncManager *m_cloudSyncManager;
@@ -57,6 +58,11 @@ RouteSyncManager::Private::Private( CloudSyncManager *cloudSyncManager ) :
     m_owncloudBackend( cloudSyncManager )
 {
     m_cacheDir = QDir(MarbleDirs::localPath() + QLatin1String("/cloudsync/cache/routes/"));
+}
+
+RouteSyncManager::Private::~Private()
+{
+    delete m_model;
 }
 
 RouteSyncManager::RouteSyncManager(CloudSyncManager *cloudSyncManager) :
