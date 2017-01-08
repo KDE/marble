@@ -50,7 +50,7 @@ GeoDataPlacemark *OsmWay::create(const OsmNodes &nodes, QSet<qint64> &usedNodes)
         GeoDataLineString lineString;
         lineString.reserve(m_references.size());
 
-        foreach(qint64 nodeId, m_references) {
+        for(auto nodeId: m_references) {
             auto const nodeIter = nodes.constFind(nodeId);
             if (nodeIter == nodes.constEnd()) {
                 return nullptr;
@@ -154,7 +154,7 @@ bool OsmWay::isAreaTag(const StyleBuilder::OsmTag &keyValue)
         s_areaTags.insert(StyleBuilder::OsmTag(QStringLiteral("area"), QStringLiteral("yes")));
         s_areaTags.insert(StyleBuilder::OsmTag(QStringLiteral("waterway"), QStringLiteral("riverbank")));
 
-        foreach (const auto tag, StyleBuilder::buildingTags()) {
+        for (auto const & tag: StyleBuilder::buildingTags()) {
             s_areaTags.insert(tag);
         }
         s_areaTags.insert(StyleBuilder::OsmTag(QStringLiteral("man_made"), QStringLiteral("bridge")));

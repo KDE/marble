@@ -74,7 +74,7 @@ void OsmRelation::createMultipolygon(GeoDataDocument *document, OsmWays &ways, c
                 StyleBuilder::determineVisualCategory(ways[*outerWays.begin()].osmData());
 
         bool categoriesAreSame = true;
-        foreach (auto wayId, outerWays) {
+        for (auto wayId: outerWays) {
             GeoDataPlacemark::GeoDataVisualCategory const category =
                     StyleBuilder::determineVisualCategory(ways[wayId].osmData());
             if( category != firstCategory ) {
@@ -88,7 +88,7 @@ void OsmRelation::createMultipolygon(GeoDataDocument *document, OsmWays &ways, c
         }
     }
 
-    foreach(qint64 wayId, outerWays) {
+    for (auto wayId: outerWays) {
         Q_ASSERT(ways.contains(wayId));
         GeoDataPlacemark::GeoDataVisualCategory const category = StyleBuilder::determineVisualCategory(ways[wayId].osmData());
         if (category == GeoDataPlacemark::None || category == outerCategory) {
@@ -96,7 +96,7 @@ void OsmRelation::createMultipolygon(GeoDataDocument *document, OsmWays &ways, c
             usedWays << wayId;
         } // else we keep it
 
-        foreach(qint64 nodeId, ways[wayId].references()) {
+        for(auto nodeId: ways[wayId].references()) {
             ways[wayId].osmData().addNodeReference(nodes[nodeId].coordinates(), nodes[nodeId].osmData());
         }
     }
@@ -177,7 +177,7 @@ void OsmRelation::createRelation(GeoDataDocument *document, const QHash<qint64, 
     }
     relation->osmData() = osmData;
 
-    foreach(const OsmMember &member, m_members) {
+    for (auto const &member: m_members) {
         auto const iter = placemarks.find(member.reference);
         if (iter != placemarks.constEnd()) {
             relation->addMember(*iter, member.reference, member.role);
@@ -199,7 +199,7 @@ OsmRelation::OsmRings OsmRelation::rings(const QStringList &roles, const OsmWays
     QSet<qint64> currentWays;
     QSet<qint64> currentNodes;
     QList<qint64> roleMembers;
-    foreach(const OsmMember &member, m_members) {
+    for (auto const &member: m_members) {
         if (roles.contains(member.role)) {
             if (!ways.contains(member.reference)) {
                 // A way is missing. Return nothing.
@@ -211,7 +211,7 @@ OsmRelation::OsmRings OsmRelation::rings(const QStringList &roles, const OsmWays
 
     OsmRings result;
     QList<OsmWay> unclosedWays;
-    foreach(qint64 wayId, roleMembers) {
+    for(auto wayId: roleMembers) {
         GeoDataLinearRing ring;
         OsmWay const & way = ways[wayId];
         if (way.references().isEmpty()) {
@@ -221,7 +221,7 @@ OsmRelation::OsmRings OsmRelation::rings(const QStringList &roles, const OsmWays
             unclosedWays.append(way);
             continue;
         }
-        foreach(qint64 id, way.references()) {
+        for(auto id: way.references()) {
             if (!nodes.contains(id)) {
                 // A node is missing. Return nothing.
                 return OsmRings();

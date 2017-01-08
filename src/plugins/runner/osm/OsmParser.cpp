@@ -213,10 +213,10 @@ GeoDataDocument *OsmParser::createDocument(OsmNodes &nodes, OsmWays &ways, OsmRe
     document->addStyle( backgroundStyle );
 
     QSet<qint64> usedNodes, usedWays;
-    foreach(OsmRelation const &relation, relations) {
+    for(auto const &relation: relations) {
         relation.createMultipolygon(document, ways, nodes, usedNodes, usedWays);
     }
-    foreach(qint64 id, usedWays) {
+    for(auto id: usedWays) {
         ways.remove(id);
     }
 
@@ -229,13 +229,13 @@ GeoDataDocument *OsmParser::createDocument(OsmNodes &nodes, OsmWays &ways, OsmRe
         }
     }
 
-    foreach(qint64 id, usedNodes) {
+    for(auto id: usedNodes) {
         if (nodes[id].osmData().isEmpty()) {
             nodes.remove(id);
         }
     }
 
-    foreach(OsmNode const &node, nodes) {
+    for(auto const &node: nodes) {
         auto placemark = node.create();
         if (placemark) {
             document->append(placemark);
@@ -243,7 +243,7 @@ GeoDataDocument *OsmParser::createDocument(OsmNodes &nodes, OsmWays &ways, OsmRe
         }
     }
 
-    foreach(OsmRelation const &relation, relations) {
+    for(auto const &relation: relations) {
         relation.createRelation(document, placemarks);
     }
 

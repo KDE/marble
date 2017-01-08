@@ -47,14 +47,14 @@ bool OsmDocumentTagTranslator::write( const GeoNode *node, GeoWriter& writer ) c
     OsmNodeTagWriter::writeAllNodes(converter.nodes(), writer);
 
     qint64 lastId = 0;
-    foreach(const auto &way, converter.ways()) {
+    for (auto const &way: converter.ways()) {
         if (way.second.id() != lastId) {
             OsmWayTagWriter::writeWay(*way.first, way.second, writer);
             lastId = way.second.id();
         }
     }
 
-    foreach (const auto& relation, converter.relations()) {
+    for (auto const & relation: converter.relations()) {
         if (relation.first->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
             auto placemark = static_cast<const GeoDataPlacemark*>(relation.first);
             Q_ASSERT(placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType);

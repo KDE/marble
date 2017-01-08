@@ -47,7 +47,7 @@ void OsmNodeTagWriter::writeAllNodes( const OsmConverter::Nodes& nodes, GeoWrite
 {
     // Writing all the component nodes
     qint64 lastId = 0;
-    foreach(const auto &node, nodes) {
+    for(auto const &node: nodes) {
         if (node.second.id() != lastId) {
             writeNode(node, writer);
             lastId = node.second.id();

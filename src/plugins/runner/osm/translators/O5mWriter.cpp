@@ -66,7 +66,7 @@ void O5mWriter::writeNodes(const OsmConverter::Nodes &nodes, QDataStream &stream
     double lastLon = 0.0;
     double lastLat = 0.0;
 
-    foreach(const auto & node, nodes) {
+    for(auto const & node: nodes) {
         if (node.second.id() == lastId) {
             continue;
         }
@@ -108,7 +108,7 @@ void O5mWriter::writeWays(const OsmConverter::Ways &ways, QDataStream &stream) c
     qint64 lastId = 0;
     qint64 lastReferenceId = 0;
 
-    foreach(const auto & way, ways) {
+    for (auto const & way: ways) {
         Q_ASSERT(way.first);
         if (way.second.id() == lastId) {
             continue;
@@ -151,7 +151,7 @@ void O5mWriter::writeRelations(const OsmConverter::Relations &relations, QDataSt
     qint64 lastId = 0;
     qint64 lastReferenceId = 0;
 
-    foreach(const auto & relation, relations) {
+    for (auto const & relation: relations) {
         if (relation.second.id() == lastId) {
             continue;
         }
