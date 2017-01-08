@@ -17,8 +17,8 @@
 // DEALINGS IN THE SOFTWARE.
 
 
-#ifndef __O5MREADER__H__
-#define __O5MREADER__H__
+#ifndef O5MREADER_H
+#define O5MREADER_H
 
 #include <stdint.h>
 #include <stdio.h>
@@ -119,4 +119,4 @@ O5mreaderIterateRet o5mreader_iterateRefs(O5mreader *pReader, uint64_t *refId, u
 }
 #endif
 
-#endif //__O5MREADER__H__
+#endif // O5MREADER_H
