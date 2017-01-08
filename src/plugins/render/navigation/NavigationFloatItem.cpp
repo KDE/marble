@@ -53,13 +53,6 @@ NavigationFloatItem::NavigationFloatItem( const MarbleModel *marbleModel )
 
 NavigationFloatItem::~NavigationFloatItem()
 {
-    QPixmapCache::remove( "marble/navigation/navigational_backdrop_top" );
-    QPixmapCache::remove( "marble/navigation/navigational_backdrop_center" );
-    QPixmapCache::remove( "marble/navigation/navigational_backdrop_bottom" );
-    QPixmapCache::remove( "marble/navigation/navigational_currentlocation" );
-    QPixmapCache::remove( "marble/navigation/navigational_currentlocation_hover" );
-    QPixmapCache::remove( "marble/navigation/navigational_currentlocation_pressed" );
-
     delete m_navigationWidget;
 }
 
