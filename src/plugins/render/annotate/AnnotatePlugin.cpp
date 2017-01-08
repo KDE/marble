@@ -106,6 +106,7 @@ AnnotatePlugin::~AnnotatePlugin()
     // delete m_networkAccessManager;
 
     delete m_clipboardItem;
+    qDeleteAll(m_actions);
 
     disconnect( this, SIGNAL(mouseMoveGeoPosition(QString)), m_marbleWidget, SIGNAL(mouseMoveGeoPosition(QString)) );
 }
