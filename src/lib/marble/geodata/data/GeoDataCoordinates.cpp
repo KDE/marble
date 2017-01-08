@@ -790,8 +790,7 @@ GeoDataCoordinates GeoDataCoordinates::moveByBearing( qreal bearing, qreal dista
 const Quaternion& GeoDataCoordinates::quaternion() const
 {
     if (d->m_q == 0) {
-        d->m_q = new Quaternion();
-        *d->m_q = Quaternion::fromSpherical( d->m_lon , d->m_lat );
+        d->m_q = new Quaternion(Quaternion::fromSpherical( d->m_lon , d->m_lat ));
     }
     return *d->m_q;
 }
