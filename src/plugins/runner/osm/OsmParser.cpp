@@ -244,7 +244,7 @@ GeoDataDocument *OsmParser::createDocument(OsmNodes &nodes, OsmWays &ways, OsmRe
     }
 
     foreach(OsmRelation const &relation, relations) {
-        relation.createRoute(document, placemarks);
+        relation.createRelation(document, placemarks);
     }
 
     return document;
