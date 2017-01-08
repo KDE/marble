@@ -70,6 +70,7 @@ void GeoTagHandler::unregisterHandler(const GeoParser::QualifiedName& qName)
     TagHash* hash = tagHandlerHash();
 
     Q_ASSERT(hash->contains(qName));
+    delete hash->value(qName);
     hash->remove(qName);
     Q_ASSERT(!hash->contains(qName));
 }

@@ -45,6 +45,15 @@ void GeoTagWriter::registerWriter(const QualifiedName& name,
     Q_ASSERT( tagHash->contains( name ) );
 }
 
+void GeoTagWriter::unregisterWriter(const GeoTagWriter::QualifiedName &qName)
+{
+    auto hash = tagWriterHash();
+    Q_ASSERT(hash->contains(qName));
+    delete hash->value(qName);
+    hash->remove(qName);
+    Q_ASSERT(!hash->contains(qName));
+}
+
 GeoTagWriter::TagHash* GeoTagWriter::tagWriterHash()
 {
     static TagHash s_tagWriterHash;

@@ -13,8 +13,9 @@
 
 #include "marble_export.h"
 
+#include <QString>
+
 class QIODevice;
-class QString;
 
 namespace Marble
 {
@@ -42,6 +43,11 @@ class MARBLE_EXPORT GeoWriterBackendRegistrar
 {
 public:
     GeoWriterBackendRegistrar(GeoWriterBackend* writer, const QString &fileExtension);
+    ~GeoWriterBackendRegistrar();
+
+private:
+    GeoWriterBackend* m_writer;
+    QString m_fileExtension;
 };
 
 #define MARBLE_ADD_WRITER(Class, fileExtension) \

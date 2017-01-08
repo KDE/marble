@@ -19,9 +19,16 @@ GeoWriterBackend::~GeoWriterBackend()
     // does nothing
 }
 
-GeoWriterBackendRegistrar::GeoWriterBackendRegistrar(GeoWriterBackend *writer, const QString &fileExtension)
+GeoWriterBackendRegistrar::GeoWriterBackendRegistrar(GeoWriterBackend *writer, const QString &fileExtension) :
+    m_writer(writer),
+    m_fileExtension(fileExtension)
 {
     GeoDataDocumentWriter::registerWriter(writer, fileExtension);
+}
+
+GeoWriterBackendRegistrar::~GeoWriterBackendRegistrar()
+{
+    GeoDataDocumentWriter::unregisterWriter(m_writer, m_fileExtension);
 }
 
 }

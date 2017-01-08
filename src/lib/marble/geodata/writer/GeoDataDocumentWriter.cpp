@@ -60,6 +60,13 @@ void GeoDataDocumentWriter::registerWriter(GeoWriterBackend *writer, const QStri
     s_backends << QPair<QString, GeoWriterBackend*>(fileExtension, writer);
 }
 
+void GeoDataDocumentWriter::unregisterWriter(GeoWriterBackend *writer, const QString &fileExtension)
+{
+    auto pair = QPair<QString, GeoWriterBackend*>(fileExtension, writer);
+    s_backends.remove(pair);
+    delete writer;
+}
+
 QString GeoDataDocumentWriter::determineDocumentIdentifier(const QString &filename)
 {
     QString const fileExtension = QFileInfo(filename).suffix().toLower();

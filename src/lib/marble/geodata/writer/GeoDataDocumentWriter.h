@@ -53,6 +53,7 @@ public:
      * @param fileExtension File extension to associate the backend with
      */
     static void registerWriter(GeoWriterBackend* writer, const QString &fileExtension);
+    static void unregisterWriter(GeoWriterBackend* writer, const QString &fileExtension);
 
 private:
     static QString determineDocumentIdentifier(const QString &filename);
