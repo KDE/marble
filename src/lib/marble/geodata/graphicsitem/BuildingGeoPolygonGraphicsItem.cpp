@@ -513,8 +513,13 @@ void BuildingGeoPolygonGraphicsItem::screenPolygons(const ViewportParams *viewpo
     }
 }
 
-bool BuildingGeoPolygonGraphicsItem::contains(const QPoint &screenPosition, const ViewportParams *) const
+bool BuildingGeoPolygonGraphicsItem::contains(const QPoint &screenPosition, const ViewportParams *viewport) const
 {
+    if (m_cachedOuterPolygons.isEmpty()) {
+        // Level 17
+        return AbstractGeoPolygonGraphicsItem::contains(screenPosition, viewport);
+    }
+
     QPointF const point = screenPosition;
     for (auto polygon: m_cachedOuterRoofPolygons) {
         if (polygon->containsPoint(point, Qt::OddEvenFill)) {
