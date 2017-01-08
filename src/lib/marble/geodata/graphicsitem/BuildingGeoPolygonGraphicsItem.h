@@ -24,6 +24,7 @@ class MARBLE_EXPORT BuildingGeoPolygonGraphicsItem : public AbstractGeoPolygonGr
 public:
     explicit BuildingGeoPolygonGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataPolygon *polygon);
     explicit BuildingGeoPolygonGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataLinearRing *ring);
+    ~BuildingGeoPolygonGraphicsItem() override;
 
 public:
     void paint(GeoPainter* painter, const ViewportParams *viewport, const QString &layer, int tileZoomLevel) override;

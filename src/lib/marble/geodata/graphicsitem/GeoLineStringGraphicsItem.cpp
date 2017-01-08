@@ -48,6 +48,11 @@ GeoLineStringGraphicsItem::GeoLineStringGraphicsItem(const GeoDataPlacemark *pla
     setPaintLayers(paintLayers);
 }
 
+GeoLineStringGraphicsItem::~GeoLineStringGraphicsItem()
+{
+    qDeleteAll(m_cachedPolygons);
+}
+
 
 void GeoLineStringGraphicsItem::setLineString( const GeoDataLineString* lineString )
 {

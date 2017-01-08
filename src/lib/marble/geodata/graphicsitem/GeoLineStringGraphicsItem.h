@@ -28,6 +28,7 @@ class MARBLE_EXPORT GeoLineStringGraphicsItem : public GeoGraphicsItem
 {
 public:
     explicit GeoLineStringGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataLineString *lineString);
+    ~GeoLineStringGraphicsItem() override;
 
     void setLineString( const GeoDataLineString* lineString );
     const GeoDataLineString* lineString() const;

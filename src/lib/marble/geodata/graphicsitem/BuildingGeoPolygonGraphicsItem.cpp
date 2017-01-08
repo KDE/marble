@@ -59,6 +59,14 @@ BuildingGeoPolygonGraphicsItem::BuildingGeoPolygonGraphicsItem(const GeoDataPlac
     setPaintLayers(paintLayers);
 }
 
+BuildingGeoPolygonGraphicsItem::~BuildingGeoPolygonGraphicsItem()
+{
+    qDeleteAll(m_cachedOuterPolygons);
+    qDeleteAll(m_cachedInnerPolygons);
+    qDeleteAll(m_cachedOuterRoofPolygons);
+    qDeleteAll(m_cachedInnerRoofPolygons);
+}
+
 void BuildingGeoPolygonGraphicsItem::initializeBuildingPainting(const GeoPainter* painter, const ViewportParams *viewport,
                                                                 bool &drawAccurate3D, bool &isCameraAboveBuilding ) const
 {
