@@ -304,6 +304,7 @@ AlternativeRoutesModel::AlternativeRoutesModel( QObject *parent ) :
 
 AlternativeRoutesModel::~AlternativeRoutesModel()
 {
+    clear();
     delete d;
 }
 

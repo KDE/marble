@@ -237,7 +237,7 @@ void RoutingManagerPrivate::loadRoute(const QString &filename)
         if ( route ) {
             loaded = true;
             m_alternativeRoutesModel.clear();
-            m_alternativeRoutesModel.addRoute( route, AlternativeRoutesModel::Instant );
+            m_alternativeRoutesModel.addRoute( new GeoDataDocument(*route), AlternativeRoutesModel::Instant );
             m_alternativeRoutesModel.setCurrentRoute( 0 );
             m_state = RoutingManager::Retrieved;
             emit q->stateChanged( m_state );
@@ -247,7 +247,9 @@ void RoutingManagerPrivate::loadRoute(const QString &filename)
         }
     }
 
-    if ( !loaded ) {
+    if (loaded) {
+        delete doc; // == container
+    } else {
         mDebug() << "File " << filename << " is not a valid Marble route .kml file";
         if ( container ) {
             m_treeModel->addDocument( container );
