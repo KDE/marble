@@ -313,6 +313,9 @@ void TileDirectory::createTiles() const
         QDir().mkpath(outputDir);
         if (!clipper) {
             map = open(m_inputFile, m_manager);
+            if (!map) {
+                qCritical() << "Failed to open " << m_inputFile << ". This can happen when Marble was compiled without shapelib (libshp), when the system has too little memory (RAM + swap need to be at least 8G), or when the download of the landmass data file failed.";
+            }
             clipper = QSharedPointer<VectorClipper>(new VectorClipper(map.data(), m_zoomLevel));
         }
         auto tile = clipper->clipTo(m_zoomLevel, tileId.x(), tileId.y());
