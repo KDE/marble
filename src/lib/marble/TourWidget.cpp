@@ -143,7 +143,7 @@ TourWidgetPrivate::TourWidgetPrivate( TourWidget *parent )
     m_addPrimitiveButton->setToolTip( QObject::tr( "Add FlyTo" ) );
     m_addPrimitiveButton->setPopupMode( QToolButton::MenuButtonPopup );
 
-    QMenu *addPrimitiveMenu = new QMenu;
+    QMenu *addPrimitiveMenu = new QMenu(q);
 
     m_actionAddFlyTo = new QAction(QIcon(QStringLiteral(":/marble/flag.png")), QObject::tr("Add FlyTo"), addPrimitiveMenu);
     addPrimitiveMenu->addAction( m_actionAddFlyTo );
