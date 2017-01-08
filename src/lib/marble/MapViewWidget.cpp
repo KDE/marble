@@ -67,10 +67,16 @@ class Q_DECL_HIDDEN MapViewWidget::Private {
           m_lambertAzimuthalViewAction( 0 ),
           m_azimuthalEquidistantViewAction( 0 ),
           m_verticalPerspectiveViewAction( 0 ),
-          m_globeViewAction( 0 )
+          m_globeViewAction( 0 ),
+          m_mapViewDelegate(nullptr)
     {
         m_mapSortProxy.setDynamicSortFilter( true );
         m_celestialListProxy.setDynamicSortFilter( true );
+    }
+
+    ~Private()
+    {
+        delete m_mapViewDelegate;
     }
 
     void applyExtendedLayout()
@@ -259,6 +265,7 @@ class Q_DECL_HIDDEN MapViewWidget::Private {
     QAction *m_azimuthalEquidistantViewAction;
     QAction *m_verticalPerspectiveViewAction;
     QAction *m_globeViewAction;
+    MapViewItemDelegate* m_mapViewDelegate;
 };
 
 MapViewWidget::MapViewWidget( QWidget *parent, Qt::WindowFlags f )
@@ -288,7 +295,9 @@ MapViewWidget::MapViewWidget( QWidget *parent, Qt::WindowFlags f )
         d->m_mapViewUi.marbleThemeSelectView->setViewMode( QListView::IconMode );
         QSize const iconSize = d->m_settings.value(QStringLiteral("MapView/iconSize"), QSize(90, 90)).toSize();
         d->m_mapViewUi.marbleThemeSelectView->setIconSize( iconSize );
-        d->m_mapViewUi.marbleThemeSelectView->setItemDelegate( new MapViewItemDelegate( d->m_mapViewUi.marbleThemeSelectView ) );
+        delete d->m_mapViewDelegate;
+        d->m_mapViewDelegate = new MapViewItemDelegate(d->m_mapViewUi.marbleThemeSelectView);
+        d->m_mapViewUi.marbleThemeSelectView->setItemDelegate(d->m_mapViewDelegate);
         d->m_mapViewUi.marbleThemeSelectView->setAlternatingRowColors( true );
         d->m_mapViewUi.marbleThemeSelectView->setFlow( QListView::LeftToRight );
         d->m_mapViewUi.marbleThemeSelectView->setWrapping( true );
