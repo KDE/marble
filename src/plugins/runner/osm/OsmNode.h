@@ -31,7 +31,7 @@ public:
     const GeoDataCoordinates & coordinates() const;
     const OsmPlacemarkData & osmData() const;
 
-    void create(GeoDataDocument* document) const;
+    GeoDataPlacemark* create() const;
 
 private:
     int populationIndex(qint64 population) const;

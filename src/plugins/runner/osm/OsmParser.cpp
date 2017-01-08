@@ -220,12 +220,12 @@ GeoDataDocument *OsmParser::createDocument(OsmNodes &nodes, OsmWays &ways, OsmRe
         ways.remove(id);
     }
 
-    QHash<qint64, GeoDataPlacemark*> wayPlacemarks;
+    QHash<qint64, GeoDataPlacemark*> placemarks;
     for (auto iter=ways.constBegin(), end=ways.constEnd(); iter != end; ++iter) {
         auto placemark = iter.value().create(nodes, usedNodes);
         if (placemark) {
             document->append(placemark);
-            wayPlacemarks[placemark->osmData().oid()] = placemark;
+            placemarks[placemark->osmData().oid()] = placemark;
         }
     }
 
@@ -236,11 +236,15 @@ GeoDataDocument *OsmParser::createDocument(OsmNodes &nodes, OsmWays &ways, OsmRe
     }
 
     foreach(OsmNode const &node, nodes) {
-        node.create(document);
+        auto placemark = node.create();
+        if (placemark) {
+            document->append(placemark);
+            placemarks[placemark->osmData().oid()] = placemark;
+        }
     }
 
     foreach(OsmRelation const &relation, relations) {
-        relation.createRoute(document, wayPlacemarks);
+        relation.createRoute(document, placemarks);
     }
 
     return document;

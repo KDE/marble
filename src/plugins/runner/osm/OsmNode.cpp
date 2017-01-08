@@ -34,12 +34,12 @@ void OsmNode::setCoordinates(const GeoDataCoordinates &coordinates)
     m_coordinates = coordinates;
 }
 
-void OsmNode::create(GeoDataDocument *document) const
+GeoDataPlacemark *OsmNode::create() const
 {
     GeoDataPlacemark::GeoDataVisualCategory const category = StyleBuilder::determineVisualCategory(m_osmData);
 
     if (category == GeoDataPlacemark::None) {
-        return;
+        return nullptr;
     }
 
     GeoDataPlacemark* placemark = new GeoDataPlacemark;
@@ -77,7 +77,7 @@ void OsmNode::create(GeoDataDocument *document) const
     }
 
     OsmObjectManager::registerId(m_osmData.id());
-    document->append(placemark);
+    return placemark;
 }
 
 int OsmNode::populationIndex(qint64 population) const

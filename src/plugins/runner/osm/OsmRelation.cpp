@@ -162,7 +162,7 @@ void OsmRelation::createMultipolygon(GeoDataDocument *document, OsmWays &ways, c
     }
 }
 
-void OsmRelation::createRoute(GeoDataDocument *document, const QHash<qint64, GeoDataPlacemark*> wayPlacemarks) const
+void OsmRelation::createRoute(GeoDataDocument *document, const QHash<qint64, GeoDataPlacemark*> placemarks) const
 {
     if (!(m_osmData.containsTag(QStringLiteral("type"), QStringLiteral("route")))) {
         return;
@@ -178,14 +178,9 @@ void OsmRelation::createRoute(GeoDataDocument *document, const QHash<qint64, Geo
     relation->osmData() = osmData;
 
     foreach(const OsmMember &member, m_members) {
-        if (member.role.isEmpty() || member.role == QStringLiteral("route")) {
-            if (!wayPlacemarks.contains(member.reference)) {
-                // A way is missing.
-                continue;
-            }
-
-            auto wayPlacemark = wayPlacemarks[member.reference];
-            relation->addMember(wayPlacemark, member.reference, member.role);
+        auto const iter = placemarks.find(member.reference);
+        if (iter != placemarks.constEnd()) {
+            relation->addMember(*iter, member.reference, member.role);
         }
     }
 
