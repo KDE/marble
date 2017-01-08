@@ -76,6 +76,7 @@ EclipsesPlugin::~EclipsesPlugin()
         delete m_configWidget;
         delete m_browserDialog;
         delete m_reminderDialog;
+        delete m_reminderWidget;
     }
 }
 
@@ -183,7 +184,9 @@ void EclipsesPlugin::initialize()
     connect( m_browserDialog, SIGNAL(buttonSettingsClicked()),
              m_configDialog, SLOT(show()) );
 
+    delete m_reminderDialog;
     m_reminderDialog = new QDialog();
+    delete m_reminderWidget;
     m_reminderWidget = new Ui::EclipsesReminderDialog();
     m_reminderWidget->setupUi( m_reminderDialog );
 
