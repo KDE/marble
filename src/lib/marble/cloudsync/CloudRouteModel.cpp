@@ -68,6 +68,11 @@ CloudRouteModel::CloudRouteModel( QObject* parent ) :
     d->m_roleNames = roles;
 }
 
+CloudRouteModel::~CloudRouteModel()
+{
+    delete d;
+}
+
 QVariant CloudRouteModel::data( const QModelIndex& index, int role ) const
 {
     if ( index.isValid() && index.row() >= 0 && index.row() < d->m_items.size() ) {

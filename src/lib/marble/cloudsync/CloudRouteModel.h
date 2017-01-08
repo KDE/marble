@@ -40,6 +40,7 @@ public:
     };
 
     explicit CloudRouteModel( QObject *parent = 0 );
+    ~CloudRouteModel();
 
     QVariant data( const QModelIndex& index, int role = Qt::DisplayRole ) const override;
     int rowCount( const QModelIndex& parent = QModelIndex() ) const override;
