@@ -55,19 +55,19 @@ class BillboardGraphicsItemPrivate : public MarbleGraphicsItemPrivate
         if (globeHidesPoint) return;
 
         m_positions.reserve(pointRepeatNumber);
-        for ( int i = 0; i < pointRepeatNumber; ++i ) {
-            // handle vertical alignment
-            qint32 topY = ( viewport->height() - m_size.height() ) / 2;
-            if ( m_alignment & Qt::AlignTop ) {
-                topY = y - m_size.height();
-            }
-            else if ( m_alignment & Qt::AlignVCenter ) {
-                topY = y - ( m_size.height() / 2 );
-            }
-            else if ( m_alignment & Qt::AlignBottom ) {
-                topY = y;
-            }
+        // handle vertical alignment
+        qint32 topY = ( viewport->height() - m_size.height() ) / 2;
+        if ( m_alignment & Qt::AlignTop ) {
+            topY = y - m_size.height();
+        }
+        else if ( m_alignment & Qt::AlignVCenter ) {
+            topY = y - ( m_size.height() / 2 );
+        }
+        else if ( m_alignment & Qt::AlignBottom ) {
+            topY = y;
+        }
 
+        for ( int i = 0; i < pointRepeatNumber; ++i ) {
             // handle horizontal alignment
             qint32 leftX = ( viewport->width() - m_size.width() ) / 2;
             if ( m_alignment & Qt::AlignLeft ) {
