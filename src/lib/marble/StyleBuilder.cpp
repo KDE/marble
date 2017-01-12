@@ -100,6 +100,7 @@ public:
     QHash<QString, GeoDataStyle::Ptr> m_specialStyleCache;
     QHash<GeoDataPlacemark::GeoDataVisualCategory, GeoDataStyle::Ptr> m_buildingStyles;
     int m_specialStyleCacheTileLevel;
+    QSet<QLocale::Country> m_oceanianCountries;
 
     /**
      * @brief s_visualCategories contains osm tag mappings to GeoDataVisualCategories
@@ -121,7 +122,15 @@ StyleBuilder::Private::Private() :
     m_defaultFont(QStringLiteral("Sans Serif")),
     m_defaultStyle(),
     m_defaultStyleInitialized(false),
-    m_specialStyleCacheTileLevel(-1)
+    m_specialStyleCacheTileLevel(-1),
+    m_oceanianCountries({ QLocale::Australia, QLocale::NewZealand, QLocale::Fiji,
+                          QLocale::PapuaNewGuinea, QLocale::NewCaledonia, QLocale::SolomonIslands,
+                          QLocale::Samoa, QLocale::Vanuatu, QLocale::Guam,
+                          QLocale::FrenchPolynesia, QLocale::Tonga, QLocale::Palau,
+                          QLocale::Kiribati, QLocale::CookIslands, QLocale::Micronesia,
+                          QLocale::MarshallIslands, QLocale::TuvaluCountry, QLocale::NauruCountry,
+                          QLocale::AmericanSamoa, QLocale::Niue, QLocale::Pitcairn,
+                          QLocale::WallisAndFutunaIslands, QLocale::NorfolkIsland, QLocale::OutlyingOceania })
 {
     initializeMinimumZoomLevels();
     for (int i = 0; i < GeoDataPlacemark::LastIndex; ++i) {
@@ -821,6 +830,17 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::AerialwayZipLine]         = createWayStyle("#dddddd", "#bbbbbb", false, true);
     m_defaultStyle[GeoDataPlacemark::AerialwayGoods]           = createWayStyle("#dddddd", "#bbbbbb", false, true);
 
+    m_defaultStyle[GeoDataPlacemark::PisteDownhill]            = createStyle(9, 10, "#dddddd", "#bbbbbb", true, true, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false, QVector< qreal >(), osmFont, (QColor)Qt::transparent);
+    m_defaultStyle[GeoDataPlacemark::PisteNordic]              = m_defaultStyle[GeoDataPlacemark::PisteDownhill];
+    m_defaultStyle[GeoDataPlacemark::PisteSkitour]             = m_defaultStyle[GeoDataPlacemark::PisteDownhill];
+    m_defaultStyle[GeoDataPlacemark::PisteSled]                = m_defaultStyle[GeoDataPlacemark::PisteDownhill];
+    m_defaultStyle[GeoDataPlacemark::PisteHike]                = m_defaultStyle[GeoDataPlacemark::PisteDownhill];
+    m_defaultStyle[GeoDataPlacemark::PisteSleigh]              = m_defaultStyle[GeoDataPlacemark::PisteDownhill];
+    m_defaultStyle[GeoDataPlacemark::PisteIceSkate]            = m_defaultStyle[GeoDataPlacemark::PisteDownhill];
+    m_defaultStyle[GeoDataPlacemark::PisteSnowPark]            = m_defaultStyle[GeoDataPlacemark::PisteDownhill];
+    m_defaultStyle[GeoDataPlacemark::PistePlayground]          = m_defaultStyle[GeoDataPlacemark::PisteDownhill];
+    m_defaultStyle[GeoDataPlacemark::PisteSkiJump]             = m_defaultStyle[GeoDataPlacemark::PisteDownhill]; 
+
     m_defaultStyle[GeoDataPlacemark::AdminLevel1]              = createStyle(0.0, 0.0, "#DF9CCF", "#DF9CCF", false, true, Qt::SolidPattern, Qt::CustomDashLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3, osmFont);
     m_defaultStyle[GeoDataPlacemark::AdminLevel2]              = createStyle(2.0, 0.0, "#DF9CCF", "#DF9CCF", false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3, osmFont);
     m_defaultStyle[GeoDataPlacemark::AdminLevel3]              = createStyle(1.8, 0.0, "#DF9CCF", "#DF9CCF", false, true, Qt::SolidPattern, Qt::DashLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3, osmFont);
@@ -1208,6 +1228,17 @@ void StyleBuilder::Private::initializeOsmVisualCategories()
     s_visualCategories[OsmTag("aeroway", "taxiway")]            = GeoDataPlacemark::TransportAirportTaxiway;
     s_visualCategories[OsmTag("aeroway", "terminal")]           = GeoDataPlacemark::TransportAirportTerminal;
 
+    s_visualCategories[OsmTag("piste:type", "downhill")]             = GeoDataPlacemark::PisteDownhill;
+    s_visualCategories[OsmTag("piste:type", "nordic")]               = GeoDataPlacemark::PisteNordic;
+    s_visualCategories[OsmTag("piste:type", "skitour")]              = GeoDataPlacemark::PisteSkitour;
+    s_visualCategories[OsmTag("piste:type", "sled")]                 = GeoDataPlacemark::PisteSled;
+    s_visualCategories[OsmTag("piste:type", "hike")]                 = GeoDataPlacemark::PisteHike;
+    s_visualCategories[OsmTag("piste:type", "sleigh")]               = GeoDataPlacemark::PisteSleigh;
+    s_visualCategories[OsmTag("piste:type", "ice_skate")]            = GeoDataPlacemark::PisteIceSkate;
+    s_visualCategories[OsmTag("piste:type", "snow_park")]            = GeoDataPlacemark::PisteSnowPark;
+    s_visualCategories[OsmTag("piste:type", "playground")]           = GeoDataPlacemark::PistePlayground;
+    s_visualCategories[OsmTag("piste:type", "ski_jump")]            = GeoDataPlacemark::PisteSkiJump;
+ 
     s_visualCategories[OsmTag("amenity", "bicycle_parking")]    = GeoDataPlacemark::TransportBicycleParking;
     s_visualCategories[OsmTag("amenity", "bicycle_rental")]     = GeoDataPlacemark::TransportRentalBicycle;
     s_visualCategories[OsmTag("rental", "bicycle")]             = GeoDataPlacemark::TransportRentalBicycle;
@@ -1531,6 +1562,16 @@ void StyleBuilder::Private::initializeMinimumZoomLevels()
     s_defaultMinZoomLevels[GeoDataPlacemark::CrossingSignals] = 18;
     s_defaultMinZoomLevels[GeoDataPlacemark::CrossingZebra] = 18;
 
+    s_defaultMinZoomLevels[GeoDataPlacemark::PisteDownhill] = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::PisteNordic] = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::PisteSkitour] = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::PisteSled] = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::PisteHike] = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::PisteSleigh] = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::PisteIceSkate] = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::PisteSnowPark] = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::PistePlayground] = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::PisteSkiJump] = 15;
 
     s_defaultMinZoomLevels[GeoDataPlacemark::AerialwayStation]= 15;
     s_defaultMinZoomLevels[GeoDataPlacemark::AerialwayPylon]= 16;
@@ -1831,6 +1872,89 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
                 float const width = widthValue.toFloat(&ok);
                 lineStyle.setPhysicalWidth(ok ? qBound(0.1f, width, 200.0f) : 0.0f);
             }
+        } else if (visualCategory >= GeoDataPlacemark::PisteDownhill && visualCategory <= GeoDataPlacemark::PisteSkiJump) {
+            adjustStyle = true;
+
+            // Take cached Style instance if possible
+            specialStyleCacheKey = visualCategory;
+            if (d->m_specialStyleCache.contains(specialStyleCacheKey)) {
+                style = d->m_specialStyleCache[specialStyleCacheKey];
+                return style;
+            }
+
+
+            if (parameters.tileLevel <= 15) {
+                lineStyle.setWidth(1);
+                lineStyle.setPhysicalWidth(0.0);
+                cacheSpecialStyle = true;
+            } else if (parameters.tileLevel <= 17) {
+                lineStyle.setWidth(2);
+                lineStyle.setPhysicalWidth(0.0);
+                cacheSpecialStyle = true;
+            } else {
+                lineStyle.setWidth(3);
+                lineStyle.setPhysicalWidth(0.0);
+            }
+
+            auto green = Qt::darkGreen;
+            auto red = Qt::darkRed;
+            auto black = Qt::black;
+            auto yellow = Qt::yellow;
+            auto blue = Qt::darkBlue;
+            auto orange = QColor(255, 165, 0);
+            auto fallBack = Qt::lightGray;
+            auto country = QLocale::system().country();
+            if (country == QLocale::Japan) {
+                if (osmData.containsTag("piste:difficulty", "easy")) {
+                    lineStyle.setColor(green);
+                } else if (osmData.containsTag("piste:difficulty", "intermediate")) {
+                    lineStyle.setColor(red);
+                } else if (osmData.containsTag("piste:difficulty", "advanced")) {
+                    lineStyle.setColor(black);
+                } else {
+                    lineStyle.setColor(fallBack);
+                }
+            } else if (country == QLocale::UnitedStates || 
+                       country == QLocale::UnitedStatesMinorOutlyingIslands ||
+                       country == QLocale::Canada ||
+                       d->m_oceanianCountries.contains(country)) {
+                if (osmData.containsTag("piste:difficulty", "easy")) {
+                    lineStyle.setColor(green);
+                } else if (osmData.containsTag("piste:difficulty", "intermediate")) {
+                    lineStyle.setColor(blue);
+                } else if (osmData.containsTag("piste:difficulty", "advanced") ||
+                           osmData.containsTag("piste:difficulty", "expert")) {
+                    lineStyle.setColor(black);
+                } else {
+                    lineStyle.setColor(fallBack);
+                }
+            // fallback on Europe
+            } else {
+                if (osmData.containsTag("piste:difficulty", "novice")) {
+                    lineStyle.setColor(green);
+                } else if (osmData.containsTag("piste:difficulty", "easy")) {
+                    lineStyle.setColor(blue);
+                } else if (osmData.containsTag("piste:difficulty", "intermediate")) {
+                    lineStyle.setColor(red);
+                } else if (osmData.containsTag("piste:difficulty", "advanced")) {
+                    lineStyle.setColor(black);
+                } else if (osmData.containsTag("piste:difficulty", "expert")) {
+                    // scandinavian countries have different colors then the rest of Europe
+                    if (country == QLocale::Denmark ||
+                        country == QLocale::Norway ||
+                        country == QLocale::Sweden) {
+                        lineStyle.setColor(black);
+                    } else {
+                        lineStyle.setColor(orange);
+                    }
+                } else if (osmData.containsTag("piste:difficulty", "freeride")) {
+                    lineStyle.setColor(yellow);
+                } else {
+                    lineStyle.setColor(fallBack);
+                }
+            }
+
+            polyStyle.setColor(lineStyle.color());
         }
 
         if (adjustStyle) {
@@ -1950,6 +2074,10 @@ QStringList StyleBuilder::renderOrder() const
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::HealthHospital);
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::LeisureSwimmingPool);
 
+        for (int i = GeoDataPlacemark::PisteDownhill; i <= GeoDataPlacemark::PisteSkiJump; ++i) {
+            paintLayerOrder << Private::createPaintLayerItem("Polygon", (GeoDataPlacemark::GeoDataVisualCategory)i);
+        }
+
         paintLayerOrder << Private::createPaintLayerItem("LineString", GeoDataPlacemark::Landmass);
 
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::NaturalWater);
@@ -1963,6 +2091,13 @@ QStringList StyleBuilder::renderOrder() const
         for ( int i = GeoDataPlacemark::AerialwayCableCar; i <= GeoDataPlacemark::AerialwayGoods; ++i ) {
             paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataPlacemark::GeoDataVisualCategory)i, "outline");
             paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataPlacemark::GeoDataVisualCategory)i, "inline");
+        }
+        for ( int i = GeoDataPlacemark::PisteDownhill; i <= GeoDataPlacemark::PisteSkiJump; ++i ) {
+            paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataPlacemark::GeoDataVisualCategory)i, "outline");
+            paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataPlacemark::GeoDataVisualCategory)i, "inline");
+        }
+        // Aerialway labels should be drawn above the piste, that's why here and not above
+        for ( int i = GeoDataPlacemark::AerialwayCableCar; i <= GeoDataPlacemark::AerialwayGoods; ++i ) {
             paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataPlacemark::GeoDataVisualCategory)i, "label");
         }
 
@@ -2602,6 +2737,16 @@ QString StyleBuilder::visualCategoryName(GeoDataPlacemark::GeoDataVisualCategory
         visualCategoryNames[GeoDataPlacemark::AerialwayMagicCarpet] = "AerialwayMagicCarpet";
         visualCategoryNames[GeoDataPlacemark::AerialwayZipLine] = "AerialwayZipLine";
         visualCategoryNames[GeoDataPlacemark::AerialwayGoods] = "AerialwayGoods";
+        visualCategoryNames[GeoDataPlacemark::PisteDownhill] = "PisteDownhill";
+        visualCategoryNames[GeoDataPlacemark::PisteNordic] = "PisteNordic";
+        visualCategoryNames[GeoDataPlacemark::PisteSkitour] = "PisteSkitour";
+        visualCategoryNames[GeoDataPlacemark::PisteSled] = "PisteSled";
+        visualCategoryNames[GeoDataPlacemark::PisteHike] = "PisteHike";
+        visualCategoryNames[GeoDataPlacemark::PisteSleigh] = "PisteSleigh";
+        visualCategoryNames[GeoDataPlacemark::PisteIceSkate] = "PisteIceSkate";
+        visualCategoryNames[GeoDataPlacemark::PisteSnowPark] = "PisteSnowPark";
+        visualCategoryNames[GeoDataPlacemark::PistePlayground] = "PistePlayground";
+        visualCategoryNames[GeoDataPlacemark::PisteSkiJump] = "PisteSkiJump";
         visualCategoryNames[GeoDataPlacemark::Satellite] = "Satellite";
         visualCategoryNames[GeoDataPlacemark::Landmass] = "Landmass";
         visualCategoryNames[GeoDataPlacemark::UrbanArea] = "UrbanArea";
@@ -2738,6 +2883,7 @@ QSet<StyleBuilder::OsmTag> StyleBuilder::buildingTags()
 
 GeoDataPlacemark::GeoDataVisualCategory StyleBuilder::determineVisualCategory(const OsmPlacemarkData &osmData)
 {
+    QString const yes(QStringLiteral("yes"));
     if (osmData.containsTagKey(QStringLiteral("area:highway")) ||              // Not supported yet
             osmData.containsTag(QStringLiteral("boundary"), QStringLiteral("protected_area")) ||   // Not relevant for the default map
             osmData.containsTag(QStringLiteral("boundary"), QStringLiteral("postal_code")) ||
@@ -2748,11 +2894,11 @@ GeoDataPlacemark::GeoDataVisualCategory StyleBuilder::determineVisualCategory(co
             osmData.containsTagKey(QStringLiteral("abandoned:building")) ||
             osmData.containsTagKey(QStringLiteral("abandoned:leisure")) ||
             osmData.containsTagKey(QStringLiteral("disused:highway")) ||
-            osmData.containsTag(QStringLiteral("highway"), QStringLiteral("razed"))) {
+            osmData.containsTag(QStringLiteral("highway"), QStringLiteral("razed")) ||
+            osmData.containsTag(QStringLiteral("piste:abandoned"), yes)) {
         return GeoDataPlacemark::None;
     }
 
-    QString const yes(QStringLiteral("yes"));
     if (osmData.containsTag(QStringLiteral("building"), yes)) {
         return GeoDataPlacemark::Building;
     }

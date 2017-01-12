@@ -467,6 +467,18 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
         AerialwayZipLine,
         AerialwayGoods, // please keep order (used in for loops)
 
+        // OpenStreetMap category Piste
+        PisteDownhill,
+        PisteNordic,
+        PisteSkitour,
+        PisteSled,
+        PisteHike,
+        PisteSleigh,
+        PisteIceSkate,
+        PisteSnowPark,
+        PistePlayground,
+        PisteSkiJump,
+
         // Waterways
         WaterwayCanal, // please keep order (used in for loops)
         WaterwayDitch,

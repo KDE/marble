@@ -378,6 +378,18 @@ QString Placemark::description() const
             addTagDescription(m_description, QStringLiteral("bicycle"), QStringLiteral("yes"), tr("Bicycle transportation possible", "Bicycles can be transported"));
             addTagDescription(m_description, QStringLiteral("bicycle"), QStringLiteral("summer"), tr("Bicycle transportation only in summer", "Bicycles can only be transported in summer"));
             addTagDescription(m_description, QStringLiteral("bicycle"), QStringLiteral("no"), tr("Bicycle transportation impossible", "Bicyles cannot be transported"));
+        } else if (category >= GeoDataPlacemark::PisteDownhill && category <= GeoDataPlacemark::PisteSkiJump) {
+            addTagValue(m_description, QStringLiteral("lit"), tr("Is lit at night"));
+            addTagValue(m_description, QStringLiteral("piste:lit"), tr("Lit in winter"));
+            addTagValue(m_description, QStringLiteral("gladed"), tr("Is gladed"));
+            addTagValue(m_description, QStringLiteral("patrolled"), tr("Is not patrolled"));
+
+            addTagDescription(m_description, QStringLiteral("piste:grooming"), QStringLiteral("classic"), tr("Classic downhill piste", "A piste that goes downhill"));
+            addTagDescription(m_description, QStringLiteral("piste:grooming"), QStringLiteral("mogul"), tr("A mogul piste", "A piste with a lot of small hips you can jump over"));
+            addTagDescription(m_description, QStringLiteral("piste:grooming"), QStringLiteral("skating"), tr("A piste for skaters", "A piste with space for skiers and other vehicles"));
+            addTagDescription(m_description, QStringLiteral("piste:grooming"), QStringLiteral("classic;skating"), tr("A downhil piste for skaters", "A piste for skaters and riders for downhill adventures"));
+            addTagDescription(m_description, QStringLiteral("piste:grooming"), QStringLiteral("scooter"), tr("Small piste groomed by a snowscooter", "A piste groomed by a snowscooter"));
+            addTagDescription(m_description, QStringLiteral("piste:grooming"), QStringLiteral("backcountry"), tr("Unmarked piste", "An unmarked piste made by skiers skiing off-piste"));
         }
 
         if (category == GeoDataPlacemark::TransportBicycleParking || category == GeoDataPlacemark::TransportMotorcycleParking) {

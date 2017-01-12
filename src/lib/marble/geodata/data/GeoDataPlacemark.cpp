@@ -674,6 +674,16 @@ QString GeoDataPlacemark::categoryName() const
     case AerialwayMagicCarpet: return GeoDataPlacemarkPrivate::tr("Magic Carpet");
     case AerialwayZipLine: return GeoDataPlacemarkPrivate::tr("Zip Line");
     case AerialwayGoods: return GeoDataPlacemarkPrivate::tr("Goods");
+    case PisteDownhill: return GeoDataPlacemarkPrivate::tr("Downhill Piste");
+    case PisteNordic: return GeoDataPlacemarkPrivate::tr("Nordic Piste");
+    case PisteSkitour: return GeoDataPlacemarkPrivate::tr("Skitour");
+    case PisteSled: return GeoDataPlacemarkPrivate::tr("Sled Piste");
+    case PisteHike: return GeoDataPlacemarkPrivate::tr("Winter Hike");
+    case PisteSleigh: return GeoDataPlacemarkPrivate::tr("Sleigh Piste");
+    case PisteIceSkate: return GeoDataPlacemarkPrivate::tr("Ice Skate");
+    case PisteSnowPark: return GeoDataPlacemarkPrivate::tr("Snow Park");
+    case PistePlayground: return GeoDataPlacemarkPrivate::tr("Ski Playground");
+    case PisteSkiJump: return GeoDataPlacemarkPrivate::tr("Ski Jump");
     case AdminLevel1: return GeoDataPlacemarkPrivate::tr("Admin Boundary (Level 1)");
     case AdminLevel2: return GeoDataPlacemarkPrivate::tr("Admin Boundary (Level 2)");
     case AdminLevel3: return GeoDataPlacemarkPrivate::tr("Admin Boundary (Level 3)");
