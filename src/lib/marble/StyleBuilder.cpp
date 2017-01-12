@@ -128,12 +128,14 @@ StyleBuilder::Private::Private() :
                         QLocale::Samoa, QLocale::Vanuatu, QLocale::Guam,
                         QLocale::FrenchPolynesia, QLocale::Tonga, QLocale::Palau,
                         QLocale::Kiribati, QLocale::CookIslands, QLocale::Micronesia,
-                        QLocale::MarshallIslands, QLocale::TuvaluCountry, QLocale::NauruCountry,
+                        QLocale::MarshallIslands, QLocale::NauruCountry,
                         QLocale::AmericanSamoa, QLocale::Niue, QLocale::Pitcairn,
                         QLocale::WallisAndFutunaIslands, QLocale::NorfolkIsland})
 {
 #if QT_VERSION >= 0x050700
-    m_oceanianCountries << QLocale::OutlyingOceania;
+    m_oceanianCountries << QLocale::TuvaluCountry << QLocale::OutlyingOceania;
+#else
+    m_oceanianCountries << QLocale::Tuvalu;
 #endif
     initializeMinimumZoomLevels();
     for (int i = 0; i < GeoDataPlacemark::LastIndex; ++i) {
