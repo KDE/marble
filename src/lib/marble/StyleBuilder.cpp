@@ -123,15 +123,18 @@ StyleBuilder::Private::Private() :
     m_defaultStyle(),
     m_defaultStyleInitialized(false),
     m_specialStyleCacheTileLevel(-1),
-    m_oceanianCountries({ QLocale::Australia, QLocale::NewZealand, QLocale::Fiji,
-                          QLocale::PapuaNewGuinea, QLocale::NewCaledonia, QLocale::SolomonIslands,
-                          QLocale::Samoa, QLocale::Vanuatu, QLocale::Guam,
-                          QLocale::FrenchPolynesia, QLocale::Tonga, QLocale::Palau,
-                          QLocale::Kiribati, QLocale::CookIslands, QLocale::Micronesia,
-                          QLocale::MarshallIslands, QLocale::TuvaluCountry, QLocale::NauruCountry,
-                          QLocale::AmericanSamoa, QLocale::Niue, QLocale::Pitcairn,
-                          QLocale::WallisAndFutunaIslands, QLocale::NorfolkIsland, QLocale::OutlyingOceania })
+    m_oceanianCountries({QLocale::Australia, QLocale::NewZealand, QLocale::Fiji,
+                        QLocale::PapuaNewGuinea, QLocale::NewCaledonia, QLocale::SolomonIslands,
+                        QLocale::Samoa, QLocale::Vanuatu, QLocale::Guam,
+                        QLocale::FrenchPolynesia, QLocale::Tonga, QLocale::Palau,
+                        QLocale::Kiribati, QLocale::CookIslands, QLocale::Micronesia,
+                        QLocale::MarshallIslands, QLocale::TuvaluCountry, QLocale::NauruCountry,
+                        QLocale::AmericanSamoa, QLocale::Niue, QLocale::Pitcairn,
+                        QLocale::WallisAndFutunaIslands, QLocale::NorfolkIsland})
 {
+#if QT_VERSION >= 0x050700
+    m_oceanianCountries << QLocale::OutlyingOceania;
+#endif
     initializeMinimumZoomLevels();
     for (int i = 0; i < GeoDataPlacemark::LastIndex; ++i) {
         m_maximumZoomLevel = qMax(m_maximumZoomLevel, s_defaultMinZoomLevels[i]);
