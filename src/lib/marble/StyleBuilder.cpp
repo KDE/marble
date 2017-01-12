@@ -1876,25 +1876,24 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
             adjustStyle = true;
 
             // Take cached Style instance if possible
-            specialStyleCacheKey = visualCategory;
+            auto const difficulty = osmData.tagValue("piste:difficulty");
+            specialStyleCacheKey = QStringLiteral("piste/%1/%2").arg(visualCategory).arg(difficulty);
             if (d->m_specialStyleCache.contains(specialStyleCacheKey)) {
                 style = d->m_specialStyleCache[specialStyleCacheKey];
                 return style;
             }
 
-
             if (parameters.tileLevel <= 15) {
                 lineStyle.setWidth(1);
                 lineStyle.setPhysicalWidth(0.0);
-                cacheSpecialStyle = true;
             } else if (parameters.tileLevel <= 17) {
                 lineStyle.setWidth(2);
                 lineStyle.setPhysicalWidth(0.0);
-                cacheSpecialStyle = true;
             } else {
                 lineStyle.setWidth(3);
                 lineStyle.setPhysicalWidth(0.0);
             }
+            cacheSpecialStyle = true;
 
             auto green = Qt::darkGreen;
             auto red = Qt::darkRed;
@@ -1905,11 +1904,11 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
             auto fallBack = Qt::lightGray;
             auto country = QLocale::system().country();
             if (country == QLocale::Japan) {
-                if (osmData.containsTag("piste:difficulty", "easy")) {
+                if (difficulty == "easy") {
                     lineStyle.setColor(green);
-                } else if (osmData.containsTag("piste:difficulty", "intermediate")) {
+                } else if (difficulty == "intermediate") {
                     lineStyle.setColor(red);
-                } else if (osmData.containsTag("piste:difficulty", "advanced")) {
+                } else if (difficulty == "advanced") {
                     lineStyle.setColor(black);
                 } else {
                     lineStyle.setColor(fallBack);
@@ -1918,27 +1917,26 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
                        country == QLocale::UnitedStatesMinorOutlyingIslands ||
                        country == QLocale::Canada ||
                        d->m_oceanianCountries.contains(country)) {
-                if (osmData.containsTag("piste:difficulty", "easy")) {
+                if (difficulty == "easy") {
                     lineStyle.setColor(green);
-                } else if (osmData.containsTag("piste:difficulty", "intermediate")) {
+                } else if (difficulty == "intermediate") {
                     lineStyle.setColor(blue);
-                } else if (osmData.containsTag("piste:difficulty", "advanced") ||
-                           osmData.containsTag("piste:difficulty", "expert")) {
+                } else if (difficulty == "advanced" || difficulty == "expert") {
                     lineStyle.setColor(black);
                 } else {
                     lineStyle.setColor(fallBack);
                 }
             // fallback on Europe
             } else {
-                if (osmData.containsTag("piste:difficulty", "novice")) {
+                if (difficulty == "novice") {
                     lineStyle.setColor(green);
-                } else if (osmData.containsTag("piste:difficulty", "easy")) {
+                } else if (difficulty == "easy") {
                     lineStyle.setColor(blue);
-                } else if (osmData.containsTag("piste:difficulty", "intermediate")) {
+                } else if (difficulty == "intermediate") {
                     lineStyle.setColor(red);
-                } else if (osmData.containsTag("piste:difficulty", "advanced")) {
+                } else if (difficulty == "advanced") {
                     lineStyle.setColor(black);
-                } else if (osmData.containsTag("piste:difficulty", "expert")) {
+                } else if (difficulty == "expert") {
                     // scandinavian countries have different colors then the rest of Europe
                     if (country == QLocale::Denmark ||
                         country == QLocale::Norway ||
@@ -1947,7 +1945,7 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
                     } else {
                         lineStyle.setColor(orange);
                     }
-                } else if (osmData.containsTag("piste:difficulty", "freeride")) {
+                } else if (difficulty == "freeride") {
                     lineStyle.setColor(yellow);
                 } else {
                     lineStyle.setColor(fallBack);
