@@ -78,6 +78,8 @@ public:
                                          const QString& texturePath = QString()) const;
 
     GeoDataStyle::ConstPtr createRelationStyle(const StyleParameters &parameters);
+    GeoDataStyle::ConstPtr createPlacemarkStyle(const StyleParameters &parameters);
+    GeoDataStyle::ConstPtr adjustPisteStyle(const StyleParameters &parameters, GeoDataStyle::ConstPtr &style);
 
     // Having an outline with the same color as the fill results in degraded
     // performance and degraded display quality for no good reason
@@ -97,9 +99,8 @@ public:
     GeoDataStyle::Ptr m_styleTreeWinter;
     bool m_defaultStyleInitialized;
 
-    QHash<QString, GeoDataStyle::Ptr> m_specialStyleCache;
+    QHash<QString, GeoDataStyle::Ptr> m_styleCache;
     QHash<GeoDataPlacemark::GeoDataVisualCategory, GeoDataStyle::Ptr> m_buildingStyles;
-    int m_specialStyleCacheTileLevel;
     QSet<QLocale::Country> m_oceanianCountries;
 
     /**
@@ -122,7 +123,6 @@ StyleBuilder::Private::Private() :
     m_defaultFont(QStringLiteral("Sans Serif")),
     m_defaultStyle(),
     m_defaultStyleInitialized(false),
-    m_specialStyleCacheTileLevel(-1),
     m_oceanianCountries({QLocale::Australia, QLocale::NewZealand, QLocale::Fiji,
                         QLocale::PapuaNewGuinea, QLocale::NewCaledonia, QLocale::SolomonIslands,
                         QLocale::Samoa, QLocale::Vanuatu, QLocale::Guam,
@@ -204,8 +204,8 @@ GeoDataStyle::ConstPtr StyleBuilder::Private::createRelationStyle(const StylePar
             QString const osmcSymbolValue = parameters.relation->osmData().tagValue(QStringLiteral("osmc:symbol"));
             // Take cached Style instance if possible
             QString const cacheKey = QStringLiteral("/route/hiking/%1").arg(osmcSymbolValue);
-            if (m_specialStyleCache.contains(cacheKey)) {
-                return m_specialStyleCache[cacheKey];
+            if (m_styleCache.contains(cacheKey)) {
+                return m_styleCache[cacheKey];
             }
 
             auto style = presetStyle(visualCategory);
@@ -218,7 +218,7 @@ GeoDataStyle::ConstPtr StyleBuilder::Private::createRelationStyle(const StylePar
             newStyle->setLineStyle(lineStyle);
             newStyle->setIconStyle(iconStyle);
             style = newStyle;
-            m_specialStyleCache.insert(cacheKey, newStyle);
+            m_styleCache.insert(cacheKey, newStyle);
             return style;
         }
 
@@ -228,8 +228,8 @@ GeoDataStyle::ConstPtr StyleBuilder::Private::createRelationStyle(const StylePar
             QString const color = QColor::isValidColor(colorValue) ? colorValue : QStringLiteral("salmon");
             // Take cached Style instance if possible
             QString const cacheKey = QStringLiteral("/route/hiking/%1").arg(color);
-            if (m_specialStyleCache.contains(cacheKey)) {
-                return m_specialStyleCache[cacheKey];
+            if (m_styleCache.contains(cacheKey)) {
+                return m_styleCache[cacheKey];
             }
 
             auto style = presetStyle(visualCategory);
@@ -238,11 +238,354 @@ GeoDataStyle::ConstPtr StyleBuilder::Private::createRelationStyle(const StylePar
             lineStyle.setColor(QColor(color));
             newStyle->setLineStyle(lineStyle);
             style = newStyle;
-            m_specialStyleCache.insert(cacheKey, newStyle);
+            m_styleCache.insert(cacheKey, newStyle);
             return style;
         }
     }
     return GeoDataStyle::ConstPtr();
+}
+
+GeoDataStyle::ConstPtr StyleBuilder::Private::createPlacemarkStyle(const StyleParameters &parameters)
+{
+    const GeoDataPlacemark *const placemark = parameters.placemark;
+    QString styleCacheKey;
+
+    OsmPlacemarkData const & osmData = placemark->osmData();
+    auto const visualCategory = placemark->visualCategory();
+    if (visualCategory == GeoDataPlacemark::Building) {
+        auto const tagMap = osmTagMapping();
+        auto const & osmData = placemark->osmData();
+        auto const buildingTag = QStringLiteral("building");
+        for (auto iter = osmData.tagsBegin(), end = osmData.tagsEnd(); iter != end; ++iter) {
+            auto const osmTag = StyleBuilder::OsmTag(iter.key(), iter.value());
+            if (iter.key() != buildingTag && tagMap.contains(osmTag)) {
+                return m_buildingStyles.value(tagMap.value(osmTag), m_defaultStyle[visualCategory]);
+            }
+        }
+    }
+
+    GeoDataStyle::ConstPtr style = presetStyle(visualCategory);
+
+    if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPointType) {
+        if (visualCategory == GeoDataPlacemark::NaturalTree) {
+            GeoDataCoordinates const coordinates = placemark->coordinate();
+            qreal const lat = coordinates.latitude(GeoDataCoordinates::Degree);
+            if (qAbs(lat) > 15) {
+                /** @todo Should maybe auto-adjust to MarbleClock at some point */
+                int const month = QDate::currentDate().month();
+                bool const southernHemisphere = lat < 0;
+                if (southernHemisphere) {
+                    if (month >= 3 && month <= 5) {
+                        style = m_styleTreeAutumn;
+                    } else if (month >= 6 && month <= 8) {
+                        style = m_styleTreeWinter;
+                    }
+                } else {
+                    if (month >= 9 && month <= 11) {
+                        style = m_styleTreeAutumn;
+                    } else if (month == 12 || month == 1 || month == 2) {
+                        style = m_styleTreeWinter;
+                    }
+                }
+            }
+        }
+    } else if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLinearRingType) {
+        bool adjustStyle = false;
+
+        GeoDataPolyStyle polyStyle = style->polyStyle();
+        GeoDataLineStyle lineStyle = style->lineStyle();
+        if (visualCategory == GeoDataPlacemark::NaturalWater) {
+            if (osmData.containsTag(QStringLiteral("salt"), QStringLiteral("yes"))) {
+                polyStyle.setColor("#ffff80");
+                lineStyle.setPenStyle(Qt::DashLine);
+                lineStyle.setWidth(2);
+                adjustStyle = true;
+            }
+        }
+        else if (visualCategory == GeoDataPlacemark::Bathymetry) {
+            auto tagIter = osmData.findTag(QStringLiteral("ele"));
+            if (tagIter != osmData.tagsEnd()) {
+                const QString& elevation = tagIter.value();
+                if (elevation == QLatin1String("4000")) {
+                    polyStyle.setColor("#94c2c2");
+                    lineStyle.setColor("#94c2c2");
+                    adjustStyle = true;
+                }
+            }
+        }
+        else if (visualCategory == GeoDataPlacemark::AmenityGraveyard || visualCategory == GeoDataPlacemark::LanduseCemetery) {
+            auto tagIter = osmData.findTag(QStringLiteral("religion"));
+            if (tagIter != osmData.tagsEnd()) {
+                const QString& religion = tagIter.value();
+                if (religion == QLatin1String("jewish")) {
+                    polyStyle.setTexturePath(MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_jewish.png"));
+                    adjustStyle = true;
+                } else if (religion == QLatin1String("christian")) {
+                    polyStyle.setTexturePath(MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_christian.png"));
+                    adjustStyle = true;
+                } else if (religion == QLatin1String("INT-generic")) {
+                    polyStyle.setTexturePath(MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_generic.png"));
+                    adjustStyle = true;
+                }
+            }
+        } else if (visualCategory >= GeoDataPlacemark::PisteDownhill && visualCategory <= GeoDataPlacemark::PisteSkiJump) {
+            return adjustPisteStyle(parameters, style);
+        }
+
+        if (adjustStyle) {
+            GeoDataStyle::Ptr newStyle(new GeoDataStyle(*style));
+            newStyle->setPolyStyle(polyStyle);
+            newStyle->setLineStyle(lineStyle);
+            style = newStyle;
+        }
+
+        if (style->iconStyle().iconPath().isEmpty()) {
+            const GeoDataPlacemark::GeoDataVisualCategory category = determineVisualCategory(osmData);
+            const GeoDataStyle::ConstPtr categoryStyle = presetStyle(category);
+            if (category != GeoDataPlacemark::None && !categoryStyle->iconStyle().scaledIcon().isNull()) {
+                GeoDataStyle::Ptr newStyle(new GeoDataStyle(*style));
+                newStyle->setIconStyle(categoryStyle->iconStyle());
+                style = newStyle;
+            }
+        }
+    } else if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType) {
+        GeoDataPolyStyle polyStyle = style->polyStyle();
+        GeoDataLineStyle lineStyle = style->lineStyle();
+        GeoDataLabelStyle labelStyle = style->labelStyle();
+        GeoDataIconStyle iconStyle = style->iconStyle();
+        lineStyle.setCosmeticOutline(true);
+
+        bool adjustStyle = false;
+
+        if(visualCategory == GeoDataPlacemark::AdminLevel2){
+            if (osmData.containsTag(QStringLiteral("maritime"), QStringLiteral("yes"))) {
+                lineStyle.setColor("#88b3bf");
+                polyStyle.setColor("#88b3bf");
+                if (osmData.containsTag(QStringLiteral("marble:disputed"), QStringLiteral("yes"))) {
+                    lineStyle.setPenStyle( Qt::DashLine );
+                }
+                adjustStyle = true;
+            }
+        }
+        else if ((visualCategory >= GeoDataPlacemark::HighwayService &&
+                visualCategory <= GeoDataPlacemark::HighwayMotorway) ||
+                visualCategory == GeoDataPlacemark::TransportAirportRunway) {
+            // Take cached Style instance if possible
+            styleCacheKey = QStringLiteral("%1/%2").arg(parameters.tileLevel).arg(visualCategory);
+            if (m_styleCache.contains(styleCacheKey)) {
+                style = m_styleCache[styleCacheKey];
+                return style;
+            }
+
+            adjustStyle = true;
+
+            if (parameters.tileLevel <= 8) {
+                /** @todo: Dummy implementation for dynamic style changes based on tile level, replace with sane values */
+                lineStyle.setPhysicalWidth(0.0);
+                lineStyle.setWidth(2.0);
+                styleCacheKey = QStringLiteral("%1/%2").arg(parameters.tileLevel).arg(visualCategory);
+            } else if (parameters.tileLevel <= 10) {
+                /** @todo: Dummy implementation for dynamic style changes based on tile level, replace with sane values */
+                lineStyle.setPhysicalWidth(0.0);
+                lineStyle.setWidth(3.0);
+                styleCacheKey = QStringLiteral("%1/%2").arg(parameters.tileLevel).arg(visualCategory);
+            } else if (parameters.tileLevel <= 12) {
+                /** @todo: Dummy implementation for dynamic style changes based on tile level, replace with sane values */
+                lineStyle.setPhysicalWidth(0.0);
+                lineStyle.setWidth(4.0);
+                styleCacheKey = QStringLiteral("%1/%2").arg(parameters.tileLevel).arg(visualCategory);
+            } else {
+                auto tagIter = osmData.findTag(QStringLiteral("width"));
+                if (tagIter != osmData.tagsEnd()) {
+                    QString const widthValue = QString(tagIter.value()).remove(QStringLiteral(" meters")).remove(QStringLiteral(" m"));
+                    bool ok;
+                    float const width = widthValue.toFloat(&ok);
+                    lineStyle.setPhysicalWidth(ok ? qBound(0.1f, width, 200.0f) : 0.0f);
+                } else {
+                    bool const isOneWay = osmData.containsTag(QStringLiteral("oneway"), QStringLiteral("yes")) ||
+                                          osmData.containsTag(QStringLiteral("oneway"), QStringLiteral("-1"));
+                    int const lanes = isOneWay ? 1 : 2; // also for motorway which implicitly is one way, but has two lanes and each direction has its own highway
+                    double const laneWidth = 3.0;
+                    double const margins = visualCategory == GeoDataPlacemark::HighwayMotorway ? 2.0 : (isOneWay ? 1.0 : 0.0);
+                    double const physicalWidth = margins + lanes * laneWidth;
+                    lineStyle.setPhysicalWidth(physicalWidth);
+                }
+            }
+
+            QString const accessValue = osmData.tagValue(QStringLiteral("access"));
+            if (accessValue == QLatin1String("private") ||
+                accessValue == QLatin1String("no") ||
+                accessValue == QLatin1String("agricultural") ||
+                accessValue == QLatin1String("delivery") ||
+                accessValue == QLatin1String("forestry")) {
+                QColor polyColor = polyStyle.color();
+                qreal hue, sat, val;
+                polyColor.getHsvF(&hue, &sat, &val);
+                polyColor.setHsvF(0.98, qMin(1.0, 0.2 + sat), val);
+                polyStyle.setColor(polyColor);
+                lineStyle.setColor(lineStyle.color().darker(150));
+            }
+
+            if (osmData.containsTag("tunnel", "yes") ) {
+                QColor polyColor = polyStyle.color();
+                qreal hue, sat, val;
+                polyColor.getHsvF(&hue, &sat, &val);
+                polyColor.setHsvF(hue, 0.25 * sat, 0.95 * val);
+                polyStyle.setColor(polyColor);
+                lineStyle.setColor(lineStyle.color().lighter(115));
+            }
+
+        } else if (visualCategory >= GeoDataPlacemark::WaterwayCanal && visualCategory <= GeoDataPlacemark::WaterwayStream) {
+
+            adjustStyle = true;
+
+            // Take cached Style instance if possible
+            styleCacheKey = QStringLiteral("%1/%2").arg(parameters.tileLevel).arg(visualCategory);
+            if (m_styleCache.contains(styleCacheKey)) {
+                style = m_styleCache[styleCacheKey];
+                return style;
+            }
+
+
+            if (parameters.tileLevel <= 3) {
+                lineStyle.setWidth(1);
+                lineStyle.setPhysicalWidth(0.0);
+                styleCacheKey = QStringLiteral("%1/%2").arg(parameters.tileLevel).arg(visualCategory);
+            } else if (parameters.tileLevel <= 7) {
+                lineStyle.setWidth(2);
+                lineStyle.setPhysicalWidth(0.0);
+                styleCacheKey = QStringLiteral("%1/%2").arg(parameters.tileLevel).arg(visualCategory);
+            } else {
+                QString const widthValue = osmData.tagValue(QStringLiteral("width")).remove(QStringLiteral(" meters")).remove(QStringLiteral(" m"));
+                bool ok;
+                float const width = widthValue.toFloat(&ok);
+                lineStyle.setPhysicalWidth(ok ? qBound(0.1f, width, 200.0f) : 0.0f);
+            }
+        } else if (visualCategory >= GeoDataPlacemark::PisteDownhill && visualCategory <= GeoDataPlacemark::PisteSkiJump) {
+            return adjustPisteStyle(parameters, style);
+        }
+
+        if (adjustStyle) {
+            GeoDataStyle::Ptr newStyle(new GeoDataStyle(*style));
+            newStyle->setPolyStyle(polyStyle);
+            newStyle->setLineStyle(lineStyle);
+            newStyle->setLabelStyle(labelStyle);
+            newStyle->setIconStyle(iconStyle);
+            style = newStyle;
+            if (!styleCacheKey.isEmpty()) {
+                m_styleCache.insert(styleCacheKey, newStyle);
+            }
+        }
+
+
+    } else if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType) {
+        GeoDataPolyStyle polyStyle = style->polyStyle();
+        GeoDataLineStyle lineStyle = style->lineStyle();
+        bool adjustStyle = false;
+        if (visualCategory == GeoDataPlacemark::Bathymetry) {
+            auto tagIter = osmData.findTag(QStringLiteral("ele"));
+            if (tagIter != osmData.tagsEnd()) {
+                const QString& elevation = tagIter.value();
+                if (elevation == QLatin1String("4000")) {
+                    polyStyle.setColor("#a5c9c9");
+                    lineStyle.setColor("#a5c9c9");
+                    adjustStyle = true;
+                }
+            }
+        } else if (visualCategory >= GeoDataPlacemark::PisteDownhill && visualCategory <= GeoDataPlacemark::PisteSkiJump) {
+            return adjustPisteStyle(parameters, style);
+        }
+
+        if (adjustStyle) {
+            GeoDataStyle::Ptr newStyle(new GeoDataStyle(*style));
+            newStyle->setPolyStyle(polyStyle);
+            newStyle->setLineStyle(lineStyle);
+            style = newStyle;
+        }
+
+    }
+
+    return style;
+}
+
+GeoDataStyle::ConstPtr StyleBuilder::Private::adjustPisteStyle(const StyleParameters &parameters, GeoDataStyle::ConstPtr &style)
+{
+    // Take cached Style instance if possible
+    auto const & osmData = parameters.placemark->osmData();
+    auto const visualCategory = parameters.placemark->visualCategory();
+    auto const difficulty = osmData.tagValue("piste:difficulty");
+    QString styleCacheKey = QStringLiteral("piste/%1/%2").arg(visualCategory).arg(difficulty);
+    if (m_styleCache.contains(styleCacheKey)) {
+        return m_styleCache[styleCacheKey];
+    }
+
+    GeoDataLineStyle lineStyle = style->lineStyle();
+
+    auto green = QColor("#006600");;
+    auto red = QColor("#cc0000");
+    auto black = QColor("#151515");
+    auto yellow = Qt::yellow;
+    auto blue = QColor("#000099");
+    auto orange = QColor(255, 165, 0);
+    auto fallBack = Qt::lightGray;
+    auto country = QLocale::system().country();
+    if (country == QLocale::Japan) {
+        if (difficulty == "easy") {
+            lineStyle.setColor(green);
+        } else if (difficulty == "intermediate") {
+            lineStyle.setColor(red);
+        } else if (difficulty == "advanced") {
+            lineStyle.setColor(black);
+        } else {
+            lineStyle.setColor(fallBack);
+        }
+    } else if (country == QLocale::UnitedStates ||
+               country == QLocale::UnitedStatesMinorOutlyingIslands ||
+               country == QLocale::Canada ||
+               m_oceanianCountries.contains(country)) {
+        if (difficulty == "easy") {
+            lineStyle.setColor(green);
+        } else if (difficulty == "intermediate") {
+            lineStyle.setColor(blue);
+        } else if (difficulty == "advanced" || difficulty == "expert") {
+            lineStyle.setColor(black);
+        } else {
+            lineStyle.setColor(fallBack);
+        }
+    // fallback on Europe
+    } else {
+        if (difficulty == "novice") {
+            lineStyle.setColor(green);
+        } else if (difficulty == "easy") {
+            lineStyle.setColor(blue);
+        } else if (difficulty == "intermediate") {
+            lineStyle.setColor(red);
+        } else if (difficulty == "advanced") {
+            lineStyle.setColor(black);
+        } else if (difficulty == "expert") {
+            // scandinavian countries have different colors then the rest of Europe
+            if (country == QLocale::Denmark ||
+                country == QLocale::Norway ||
+                country == QLocale::Sweden) {
+                lineStyle.setColor(black);
+            } else {
+                lineStyle.setColor(orange);
+            }
+        } else if (difficulty == "freeride") {
+            lineStyle.setColor(yellow);
+        } else {
+            lineStyle.setColor(fallBack);
+        }
+    }
+
+    GeoDataPolyStyle polyStyle = style->polyStyle();
+    polyStyle.setColor(lineStyle.color());
+    GeoDataStyle::Ptr newStyle(new GeoDataStyle(*style));
+    newStyle->setPolyStyle(polyStyle);
+    newStyle->setLineStyle(lineStyle);
+    style = newStyle;
+    m_styleCache.insert(styleCacheKey, newStyle);
+    return style;
 }
 
 GeoDataStyle::Ptr StyleBuilder::Private::createStyle( qreal width, qreal realWidth, const QColor& color,
@@ -835,7 +1178,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::AerialwayZipLine]         = createWayStyle("#dddddd", "#bbbbbb", false, true);
     m_defaultStyle[GeoDataPlacemark::AerialwayGoods]           = createWayStyle("#dddddd", "#bbbbbb", false, true);
 
-    m_defaultStyle[GeoDataPlacemark::PisteDownhill]            = createStyle(9, 10, "#dddddd", "#bbbbbb", true, true, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false, QVector< qreal >(), osmFont, (QColor)Qt::transparent);
+    m_defaultStyle[GeoDataPlacemark::PisteDownhill]            = createStyle(9, 0.0, "#dddddd", Qt::transparent, true, false, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false, QVector< qreal >(), osmFont, Qt::transparent);
     m_defaultStyle[GeoDataPlacemark::PisteNordic]              = m_defaultStyle[GeoDataPlacemark::PisteDownhill];
     m_defaultStyle[GeoDataPlacemark::PisteSkitour]             = m_defaultStyle[GeoDataPlacemark::PisteDownhill];
     m_defaultStyle[GeoDataPlacemark::PisteSled]                = m_defaultStyle[GeoDataPlacemark::PisteDownhill];
@@ -1233,16 +1576,16 @@ void StyleBuilder::Private::initializeOsmVisualCategories()
     s_visualCategories[OsmTag("aeroway", "taxiway")]            = GeoDataPlacemark::TransportAirportTaxiway;
     s_visualCategories[OsmTag("aeroway", "terminal")]           = GeoDataPlacemark::TransportAirportTerminal;
 
-    s_visualCategories[OsmTag("piste:type", "downhill")]             = GeoDataPlacemark::PisteDownhill;
-    s_visualCategories[OsmTag("piste:type", "nordic")]               = GeoDataPlacemark::PisteNordic;
-    s_visualCategories[OsmTag("piste:type", "skitour")]              = GeoDataPlacemark::PisteSkitour;
-    s_visualCategories[OsmTag("piste:type", "sled")]                 = GeoDataPlacemark::PisteSled;
-    s_visualCategories[OsmTag("piste:type", "hike")]                 = GeoDataPlacemark::PisteHike;
-    s_visualCategories[OsmTag("piste:type", "sleigh")]               = GeoDataPlacemark::PisteSleigh;
-    s_visualCategories[OsmTag("piste:type", "ice_skate")]            = GeoDataPlacemark::PisteIceSkate;
-    s_visualCategories[OsmTag("piste:type", "snow_park")]            = GeoDataPlacemark::PisteSnowPark;
-    s_visualCategories[OsmTag("piste:type", "playground")]           = GeoDataPlacemark::PistePlayground;
-    s_visualCategories[OsmTag("piste:type", "ski_jump")]            = GeoDataPlacemark::PisteSkiJump;
+    s_visualCategories[OsmTag("piste:type", "downhill")]        = GeoDataPlacemark::PisteDownhill;
+    s_visualCategories[OsmTag("piste:type", "nordic")]          = GeoDataPlacemark::PisteNordic;
+    s_visualCategories[OsmTag("piste:type", "skitour")]         = GeoDataPlacemark::PisteSkitour;
+    s_visualCategories[OsmTag("piste:type", "sled")]            = GeoDataPlacemark::PisteSled;
+    s_visualCategories[OsmTag("piste:type", "hike")]            = GeoDataPlacemark::PisteHike;
+    s_visualCategories[OsmTag("piste:type", "sleigh")]          = GeoDataPlacemark::PisteSleigh;
+    s_visualCategories[OsmTag("piste:type", "ice_skate")]       = GeoDataPlacemark::PisteIceSkate;
+    s_visualCategories[OsmTag("piste:type", "snow_park")]       = GeoDataPlacemark::PisteSnowPark;
+    s_visualCategories[OsmTag("piste:type", "playground")]      = GeoDataPlacemark::PistePlayground;
+    s_visualCategories[OsmTag("piste:type", "ski_jump")]        = GeoDataPlacemark::PisteSkiJump;
  
     s_visualCategories[OsmTag("amenity", "bicycle_parking")]    = GeoDataPlacemark::TransportBicycleParking;
     s_visualCategories[OsmTag("amenity", "bicycle_rental")]     = GeoDataPlacemark::TransportRentalBicycle;
@@ -1656,349 +1999,7 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters &paramete
         }
     }
 
-    if (d->m_specialStyleCacheTileLevel != parameters.tileLevel) {
-        d->m_specialStyleCache.clear();
-        d->m_specialStyleCacheTileLevel = parameters.tileLevel;
-    }
-    QString specialStyleCacheKey;
-    bool cacheSpecialStyle = false;
-
-    OsmPlacemarkData const & osmData = placemark->osmData();
-    auto const visualCategory = placemark->visualCategory();
-    if (visualCategory == GeoDataPlacemark::Building) {
-        auto const tagMap = osmTagMapping();
-        auto const & osmData = placemark->osmData();
-        auto const buildingTag = QStringLiteral("building");
-        for (auto iter = osmData.tagsBegin(), end = osmData.tagsEnd(); iter != end; ++iter) {
-            auto const osmTag = StyleBuilder::OsmTag(iter.key(), iter.value());
-            if (iter.key() != buildingTag && tagMap.contains(osmTag)) {
-                return d->m_buildingStyles.value(tagMap.value(osmTag), d->m_defaultStyle[visualCategory]);
-            }
-        }
-    }
-
-    GeoDataStyle::ConstPtr style = d->presetStyle(visualCategory);
-
-    if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPointType) {
-        if (visualCategory == GeoDataPlacemark::NaturalTree) {
-            GeoDataCoordinates const coordinates = placemark->coordinate();
-            qreal const lat = coordinates.latitude(GeoDataCoordinates::Degree);
-            if (qAbs(lat) > 15) {
-                /** @todo Should maybe auto-adjust to MarbleClock at some point */
-                int const month = QDate::currentDate().month();
-                bool const southernHemisphere = lat < 0;
-                if (southernHemisphere) {
-                    if (month >= 3 && month <= 5) {
-                        style = d->m_styleTreeAutumn;
-                    } else if (month >= 6 && month <= 8) {
-                        style = d->m_styleTreeWinter;
-                    }
-                } else {
-                    if (month >= 9 && month <= 11) {
-                        style = d->m_styleTreeAutumn;
-                    } else if (month == 12 || month == 1 || month == 2) {
-                        style = d->m_styleTreeWinter;
-                    }
-                }
-            }
-        }
-    } else if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLinearRingType) {
-        bool adjustStyle = false;
-
-        GeoDataPolyStyle polyStyle = style->polyStyle();
-        GeoDataLineStyle lineStyle = style->lineStyle();
-        if (visualCategory == GeoDataPlacemark::NaturalWater) {
-            if (osmData.containsTag(QStringLiteral("salt"), QStringLiteral("yes"))) {
-                polyStyle.setColor("#ffff80");
-                lineStyle.setPenStyle(Qt::DashLine);
-                lineStyle.setWidth(2);
-                adjustStyle = true;
-            }
-        }
-        else if (visualCategory == GeoDataPlacemark::Bathymetry) {
-            auto tagIter = osmData.findTag(QStringLiteral("ele"));
-            if (tagIter != osmData.tagsEnd()) {
-                const QString& elevation = tagIter.value();
-                if (elevation == QLatin1String("4000")) {
-                    polyStyle.setColor("#94c2c2");
-                    lineStyle.setColor("#94c2c2");
-                    adjustStyle = true;
-                }
-            }
-        }
-        else if (visualCategory == GeoDataPlacemark::AmenityGraveyard || visualCategory == GeoDataPlacemark::LanduseCemetery) {
-            auto tagIter = osmData.findTag(QStringLiteral("religion"));
-            if (tagIter != osmData.tagsEnd()) {
-                const QString& religion = tagIter.value();
-                if (religion == QLatin1String("jewish")) {
-                    polyStyle.setTexturePath(MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_jewish.png"));
-                    adjustStyle = true;
-                } else if (religion == QLatin1String("christian")) {
-                    polyStyle.setTexturePath(MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_christian.png"));
-                    adjustStyle = true;
-                } else if (religion == QLatin1String("INT-generic")) {
-                    polyStyle.setTexturePath(MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_generic.png"));
-                    adjustStyle = true;
-                }
-            }
-        }
-
-        if (adjustStyle) {
-            GeoDataStyle::Ptr newStyle(new GeoDataStyle(*style));
-            newStyle->setPolyStyle(polyStyle);
-            newStyle->setLineStyle(lineStyle);
-            style = newStyle;
-        }
-
-        if (style->iconStyle().iconPath().isEmpty()) {
-            const GeoDataPlacemark::GeoDataVisualCategory category = determineVisualCategory(osmData);
-            const GeoDataStyle::ConstPtr categoryStyle = d->presetStyle(category);
-            if (category != GeoDataPlacemark::None && !categoryStyle->iconStyle().scaledIcon().isNull()) {
-                GeoDataStyle::Ptr newStyle(new GeoDataStyle(*style));
-                newStyle->setIconStyle(categoryStyle->iconStyle());
-                style = newStyle;
-            }
-        }
-    } else if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType) {
-        GeoDataPolyStyle polyStyle = style->polyStyle();
-        GeoDataLineStyle lineStyle = style->lineStyle();
-        GeoDataLabelStyle labelStyle = style->labelStyle();
-        GeoDataIconStyle iconStyle = style->iconStyle();
-        lineStyle.setCosmeticOutline(true);
-
-        bool adjustStyle = false;
-
-        if(visualCategory == GeoDataPlacemark::AdminLevel2){
-            if (osmData.containsTag(QStringLiteral("maritime"), QStringLiteral("yes"))) {
-                lineStyle.setColor("#88b3bf");
-                polyStyle.setColor("#88b3bf");
-                if (osmData.containsTag(QStringLiteral("marble:disputed"), QStringLiteral("yes"))) {
-                    lineStyle.setPenStyle( Qt::DashLine );
-                }
-                adjustStyle = true;
-            }
-        }
-        else if ((visualCategory >= GeoDataPlacemark::HighwayService &&
-                visualCategory <= GeoDataPlacemark::HighwayMotorway) ||
-                visualCategory == GeoDataPlacemark::TransportAirportRunway) {
-            // Take cached Style instance if possible
-            if  (d->m_specialStyleCacheTileLevel == parameters.tileLevel)
-            {
-                specialStyleCacheKey = visualCategory;
-                if (d->m_specialStyleCache.contains(specialStyleCacheKey)) {
-                    style = d->m_specialStyleCache[specialStyleCacheKey];
-                    return style;
-                }
-            }
-
-            adjustStyle = true;
-
-            if (parameters.tileLevel <= 8) {
-                /** @todo: Dummy implementation for dynamic style changes based on tile level, replace with sane values */
-                lineStyle.setPhysicalWidth(0.0);
-                lineStyle.setWidth(2.0);
-                cacheSpecialStyle = true;
-            } else if (parameters.tileLevel <= 10) {
-                /** @todo: Dummy implementation for dynamic style changes based on tile level, replace with sane values */
-                lineStyle.setPhysicalWidth(0.0);
-                lineStyle.setWidth(3.0);
-                cacheSpecialStyle = true;
-            } else if (parameters.tileLevel <= 12) {
-                /** @todo: Dummy implementation for dynamic style changes based on tile level, replace with sane values */
-                lineStyle.setPhysicalWidth(0.0);
-                lineStyle.setWidth(4.0);
-                cacheSpecialStyle = true;
-            } else {
-                auto tagIter = osmData.findTag(QStringLiteral("width"));
-                if (tagIter != osmData.tagsEnd()) {
-                    QString const widthValue = QString(tagIter.value()).remove(QStringLiteral(" meters")).remove(QStringLiteral(" m"));
-                    bool ok;
-                    float const width = widthValue.toFloat(&ok);
-                    lineStyle.setPhysicalWidth(ok ? qBound(0.1f, width, 200.0f) : 0.0f);
-                } else {
-                    bool const isOneWay = osmData.containsTag(QStringLiteral("oneway"), QStringLiteral("yes")) ||
-                                          osmData.containsTag(QStringLiteral("oneway"), QStringLiteral("-1"));
-                    int const lanes = isOneWay ? 1 : 2; // also for motorway which implicitly is one way, but has two lanes and each direction has its own highway
-                    double const laneWidth = 3.0;
-                    double const margins = visualCategory == GeoDataPlacemark::HighwayMotorway ? 2.0 : (isOneWay ? 1.0 : 0.0);
-                    double const physicalWidth = margins + lanes * laneWidth;
-                    lineStyle.setPhysicalWidth(physicalWidth);
-                }
-            }
-
-            QString const accessValue = osmData.tagValue(QStringLiteral("access"));
-            if (accessValue == QLatin1String("private") ||
-                accessValue == QLatin1String("no") ||
-                accessValue == QLatin1String("agricultural") ||
-                accessValue == QLatin1String("delivery") ||
-                accessValue == QLatin1String("forestry")) {
-                QColor polyColor = polyStyle.color();
-                qreal hue, sat, val;
-                polyColor.getHsvF(&hue, &sat, &val);
-                polyColor.setHsvF(0.98, qMin(1.0, 0.2 + sat), val);
-                polyStyle.setColor(polyColor);
-                lineStyle.setColor(lineStyle.color().darker(150));
-                cacheSpecialStyle = false;
-            }
-
-            if (osmData.containsTag("tunnel", "yes") ) {
-                QColor polyColor = polyStyle.color();
-                qreal hue, sat, val;
-                polyColor.getHsvF(&hue, &sat, &val);
-                polyColor.setHsvF(hue, 0.25 * sat, 0.95 * val);
-                polyStyle.setColor(polyColor);
-                lineStyle.setColor(lineStyle.color().lighter(115));
-                cacheSpecialStyle = false;
-            }
-
-        } else if (visualCategory >= GeoDataPlacemark::WaterwayCanal && visualCategory <= GeoDataPlacemark::WaterwayStream) {
-
-            adjustStyle = true;
-
-            // Take cached Style instance if possible
-            specialStyleCacheKey = visualCategory;
-            if (d->m_specialStyleCache.contains(specialStyleCacheKey)) {
-                style = d->m_specialStyleCache[specialStyleCacheKey];
-                return style;
-            }
-
-
-            if (parameters.tileLevel <= 3) {
-                lineStyle.setWidth(1);
-                lineStyle.setPhysicalWidth(0.0);
-                cacheSpecialStyle = true;
-            } else if (parameters.tileLevel <= 7) {
-                lineStyle.setWidth(2);
-                lineStyle.setPhysicalWidth(0.0);
-                cacheSpecialStyle = true;
-            } else {
-                QString const widthValue = osmData.tagValue(QStringLiteral("width")).remove(QStringLiteral(" meters")).remove(QStringLiteral(" m"));
-                bool ok;
-                float const width = widthValue.toFloat(&ok);
-                lineStyle.setPhysicalWidth(ok ? qBound(0.1f, width, 200.0f) : 0.0f);
-            }
-        } else if (visualCategory >= GeoDataPlacemark::PisteDownhill && visualCategory <= GeoDataPlacemark::PisteSkiJump) {
-            adjustStyle = true;
-
-            // Take cached Style instance if possible
-            auto const difficulty = osmData.tagValue("piste:difficulty");
-            specialStyleCacheKey = QStringLiteral("piste/%1/%2").arg(visualCategory).arg(difficulty);
-            if (d->m_specialStyleCache.contains(specialStyleCacheKey)) {
-                style = d->m_specialStyleCache[specialStyleCacheKey];
-                return style;
-            }
-
-            if (parameters.tileLevel <= 15) {
-                lineStyle.setWidth(1);
-                lineStyle.setPhysicalWidth(0.0);
-            } else if (parameters.tileLevel <= 17) {
-                lineStyle.setWidth(2);
-                lineStyle.setPhysicalWidth(0.0);
-            } else {
-                lineStyle.setWidth(3);
-                lineStyle.setPhysicalWidth(0.0);
-            }
-            cacheSpecialStyle = true;
-
-            auto green = Qt::darkGreen;
-            auto red = Qt::darkRed;
-            auto black = Qt::black;
-            auto yellow = Qt::yellow;
-            auto blue = Qt::darkBlue;
-            auto orange = QColor(255, 165, 0);
-            auto fallBack = Qt::lightGray;
-            auto country = QLocale::system().country();
-            if (country == QLocale::Japan) {
-                if (difficulty == "easy") {
-                    lineStyle.setColor(green);
-                } else if (difficulty == "intermediate") {
-                    lineStyle.setColor(red);
-                } else if (difficulty == "advanced") {
-                    lineStyle.setColor(black);
-                } else {
-                    lineStyle.setColor(fallBack);
-                }
-            } else if (country == QLocale::UnitedStates || 
-                       country == QLocale::UnitedStatesMinorOutlyingIslands ||
-                       country == QLocale::Canada ||
-                       d->m_oceanianCountries.contains(country)) {
-                if (difficulty == "easy") {
-                    lineStyle.setColor(green);
-                } else if (difficulty == "intermediate") {
-                    lineStyle.setColor(blue);
-                } else if (difficulty == "advanced" || difficulty == "expert") {
-                    lineStyle.setColor(black);
-                } else {
-                    lineStyle.setColor(fallBack);
-                }
-            // fallback on Europe
-            } else {
-                if (difficulty == "novice") {
-                    lineStyle.setColor(green);
-                } else if (difficulty == "easy") {
-                    lineStyle.setColor(blue);
-                } else if (difficulty == "intermediate") {
-                    lineStyle.setColor(red);
-                } else if (difficulty == "advanced") {
-                    lineStyle.setColor(black);
-                } else if (difficulty == "expert") {
-                    // scandinavian countries have different colors then the rest of Europe
-                    if (country == QLocale::Denmark ||
-                        country == QLocale::Norway ||
-                        country == QLocale::Sweden) {
-                        lineStyle.setColor(black);
-                    } else {
-                        lineStyle.setColor(orange);
-                    }
-                } else if (difficulty == "freeride") {
-                    lineStyle.setColor(yellow);
-                } else {
-                    lineStyle.setColor(fallBack);
-                }
-            }
-
-            polyStyle.setColor(lineStyle.color());
-        }
-
-        if (adjustStyle) {
-            GeoDataStyle::Ptr newStyle(new GeoDataStyle(*style));
-            newStyle->setPolyStyle(polyStyle);
-            newStyle->setLineStyle(lineStyle);
-            newStyle->setLabelStyle(labelStyle);
-            newStyle->setIconStyle(iconStyle);
-            style = newStyle;
-            if (cacheSpecialStyle) {
-                d->m_specialStyleCache.insert(specialStyleCacheKey, newStyle);
-            }
-        }
-
-
-    } else if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType) {
-        GeoDataPolyStyle polyStyle = style->polyStyle();
-        GeoDataLineStyle lineStyle = style->lineStyle();
-        bool adjustStyle = false;
-        if (visualCategory == GeoDataPlacemark::Bathymetry) {
-            auto tagIter = osmData.findTag(QStringLiteral("ele"));
-            if (tagIter != osmData.tagsEnd()) {
-                const QString& elevation = tagIter.value();
-                if (elevation == QLatin1String("4000")) {
-                    polyStyle.setColor("#a5c9c9");
-                    lineStyle.setColor("#a5c9c9");
-                    adjustStyle = true;
-                }
-            }
-        }
-
-        if (adjustStyle) {
-            GeoDataStyle::Ptr newStyle(new GeoDataStyle(*style));
-            newStyle->setPolyStyle(polyStyle);
-            newStyle->setLineStyle(lineStyle);
-            style = newStyle;
-        }
-
-    }
-
-    return style;
+    return d->createPlacemarkStyle(parameters);
 }
 
 GeoDataStyle::ConstPtr StyleBuilder::Private::presetStyle(GeoDataPlacemark::GeoDataVisualCategory visualCategory) const
@@ -2091,19 +2092,6 @@ QStringList StyleBuilder::renderOrder() const
             paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataPlacemark::GeoDataVisualCategory)i, "label");
         }
 
-        for ( int i = GeoDataPlacemark::AerialwayCableCar; i <= GeoDataPlacemark::AerialwayGoods; ++i ) {
-            paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataPlacemark::GeoDataVisualCategory)i, "outline");
-            paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataPlacemark::GeoDataVisualCategory)i, "inline");
-        }
-        for ( int i = GeoDataPlacemark::PisteDownhill; i <= GeoDataPlacemark::PisteSkiJump; ++i ) {
-            paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataPlacemark::GeoDataVisualCategory)i, "outline");
-            paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataPlacemark::GeoDataVisualCategory)i, "inline");
-        }
-        // Aerialway labels should be drawn above the piste, that's why here and not above
-        for ( int i = GeoDataPlacemark::AerialwayCableCar; i <= GeoDataPlacemark::AerialwayGoods; ++i ) {
-            paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataPlacemark::GeoDataVisualCategory)i, "label");
-        }
-
         paintLayerOrder << Private::createPaintLayerItem("LineString", GeoDataPlacemark::NaturalReef, "outline");
         paintLayerOrder << Private::createPaintLayerItem("LineString", GeoDataPlacemark::NaturalReef, "inline");
         paintLayerOrder << Private::createPaintLayerItem("LineString", GeoDataPlacemark::NaturalReef, "label");
@@ -2139,6 +2127,17 @@ QStringList StyleBuilder::renderOrder() const
         paintLayerOrder << Private::createPaintLayerItem("LineString", GeoDataPlacemark::TransportPlatform, "outline");
         paintLayerOrder << Private::createPaintLayerItem("LineString", GeoDataPlacemark::TransportPlatform, "inline");
         paintLayerOrder << Private::createPaintLayerItem("LineString", GeoDataPlacemark::TransportPlatform, "label");
+
+        for ( int i = GeoDataPlacemark::PisteDownhill; i <= GeoDataPlacemark::PisteSkiJump; ++i ) {
+            paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataPlacemark::GeoDataVisualCategory)i, "outline");
+            paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataPlacemark::GeoDataVisualCategory)i, "inline");
+            paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataPlacemark::GeoDataVisualCategory)i, "label");
+        }
+        for ( int i = GeoDataPlacemark::AerialwayCableCar; i <= GeoDataPlacemark::AerialwayGoods; ++i ) {
+            paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataPlacemark::GeoDataVisualCategory)i, "outline");
+            paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataPlacemark::GeoDataVisualCategory)i, "inline");
+            paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataPlacemark::GeoDataVisualCategory)i, "label");
+        }
 
         for ( int i = GeoDataPlacemark::AdminLevel1; i <= GeoDataPlacemark::AdminLevel11; i++ ) {
             paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataPlacemark::GeoDataVisualCategory)i, "outline");
