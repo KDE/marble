@@ -101,6 +101,7 @@ GeoDataRelation::RelationType GeoDataRelation::relationType() const
         map["detour"] = RouteDetour;
         map["ferry"] = RouteFerry;
         map["train"] = RouteTrain;
+        map["subway"] = RouteSubway;
         map["tram"] = RouteTram;
         map["bus"] = RouteBus;
         map["trolleybus"] = RouteTrolleyBus;
@@ -110,12 +111,23 @@ GeoDataRelation::RelationType GeoDataRelation::relationType() const
         map["hiking"] = GeoDataRelation::RouteHiking;
         map["horse"] = RouteHorse;
         map["inline_skates"] = RouteInlineSkates;
-        map["ski"] = RouteSki;
     }
 
     Q_D(const GeoDataRelation);
     if (d->m_osmData.containsTag(QStringLiteral("type"), QStringLiteral("route"))) {
         auto const route = d->m_osmData.tagValue(QStringLiteral("route"));
+        if (route == QStringLiteral("piste")) {
+            auto const piste = d->m_osmData.tagValue(QStringLiteral("piste:type"));
+            if (piste == QStringLiteral("downhill")) {
+                return RouteSkiDownhill;
+            } else if (piste == QStringLiteral("nordic")) {
+                return RouteSkiNordic;
+            } else if (piste == QStringLiteral("skitour")) {
+                return RouteSkitour;
+            } else if (piste == QStringLiteral("sled")) {
+                return RouteSled;
+            }
+        }
         return GeoDataRelationPrivate::s_relationTypes.value(route, UnknownType);
     }
 

@@ -28,6 +28,7 @@ public:
         RouteDetour,
         RouteFerry,
         RouteTrain,
+        RouteSubway,
         RouteTram,
         RouteBus,
         RouteTrolleyBus,
@@ -37,7 +38,10 @@ public:
         RouteHiking,
         RouteHorse,
         RouteInlineSkates,
-        RouteSki
+        RouteSkiDownhill,
+        RouteSkiNordic,
+        RouteSkitour,
+        RouteSled,
     };
 
     GeoDataRelation();
