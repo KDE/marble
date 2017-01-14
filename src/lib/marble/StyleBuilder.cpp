@@ -2085,7 +2085,6 @@ QStringList StyleBuilder::renderOrder() const
         paintLayerOrder << Private::createPaintLayerItem("LineString", GeoDataPlacemark::Landmass);
 
         paintLayerOrder << Private::createPaintLayerItem("Polygon", GeoDataPlacemark::NaturalWater);
-        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataPlacemark::WaterwayWeir);
         for (int i = GeoDataPlacemark::WaterwayCanal; i <= GeoDataPlacemark::WaterwayStream; ++i) {
             paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataPlacemark::GeoDataVisualCategory)i, "outline");
             paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataPlacemark::GeoDataVisualCategory)i, "inline");
@@ -2148,36 +2147,6 @@ QStringList StyleBuilder::renderOrder() const
         for ( int i = GeoDataPlacemark::AdminLevel1; i <= GeoDataPlacemark::AdminLevel11; i++ ) {
             paintLayerOrder << Private::createPaintLayerItem("LineString", (GeoDataPlacemark::GeoDataVisualCategory)i, "label");
         }
-        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataPlacemark::Bathymetry);
-        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataPlacemark::AmenityGraveyard);
-        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataPlacemark::NaturalWood);
-        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataPlacemark::NaturalBeach);
-        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataPlacemark::NaturalWetland);
-        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataPlacemark::NaturalGlacier);
-        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataPlacemark::NaturalIceShelf);
-        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataPlacemark::NaturalScrub);
-        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataPlacemark::LeisureMarina);
-        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataPlacemark::LeisurePark);
-        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataPlacemark::LeisurePlayground);
-        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataPlacemark::LeisurePitch);
-        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataPlacemark::LeisureSportsCentre);
-        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataPlacemark::LeisureStadium);
-        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataPlacemark::LeisureTrack);
-        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataPlacemark::TransportParking);
-        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataPlacemark::ManmadeBridge);
-        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataPlacemark::BarrierCityWall);
-        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataPlacemark::NaturalWater);
-        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataPlacemark::NaturalReef);
-        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataPlacemark::Landmass);
-        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataPlacemark::NaturalCliff);
-        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataPlacemark::NaturalPeak);
-        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataPlacemark::AmenityKindergarten);
-        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataPlacemark::EducationCollege);
-        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataPlacemark::EducationSchool);
-        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataPlacemark::EducationUniversity);
-        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataPlacemark::HealthHospital);
-        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataPlacemark::TransportSpeedCamera);
-        paintLayerOrder << Private::createPaintLayerItem("Point", GeoDataPlacemark::MilitaryDangerArea);
 
         paintLayerOrder << QStringLiteral("Polygon/Building/frame");
         paintLayerOrder << QStringLiteral("Polygon/Building/roof");

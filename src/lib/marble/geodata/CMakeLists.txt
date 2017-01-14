@@ -230,7 +230,6 @@ SET ( geodata_writers_dgml_SRCS
 SET( geodata_graphicsitem_SRCS
     geodata/graphicsitem/GeoLineStringGraphicsItem.cpp
     geodata/graphicsitem/GeoPhotoGraphicsItem.cpp
-    geodata/graphicsitem/GeoPointGraphicsItem.cpp
     geodata/graphicsitem/GeoPolygonGraphicsItem.cpp
     geodata/graphicsitem/AbstractGeoPolygonGraphicsItem.cpp
     geodata/graphicsitem/BuildingGeoPolygonGraphicsItem.cpp
