@@ -20,21 +20,17 @@ class Comment
 {
 public:
     Comment();
-    Comment(QDateTime date, QString text, QString user, int uid);
-    void setDate(const QDateTime& date){m_date = date;};
-    void setText(const QString& text){m_text = text;};
-    void setUser(const QString& user){m_user = user;};
-    void setUid(const int uid){m_uid = uid;};
-    QDateTime getDate() const {return m_date;};
-    QString getText() const {return m_text;};
-    QString getUser() const {return m_user;};
-    int getUid() const {return m_uid;};
+    Comment(const QDateTime &date, const QString &text, const QString &user, int uid);
+    QDateTime date() const;
+    QString text() const;
+    QString user() const;
+    int uid() const;
+
 private:
     QDateTime m_date;
     QString m_text;
     QString m_user;
     int m_uid;
-
 };
 
 namespace Marble
@@ -63,13 +59,7 @@ public:
 
     void setDateClosed(const QDateTime& dataClosed);
 
-    void addLatestComment(const Comment& comment);
-
-    void setComment(const Comment& comment);
-
-    qreal width();
-
-    qreal height();
+    void addComment(const Comment& comment);
 
 private:
     QPixmap m_pixmap_open;

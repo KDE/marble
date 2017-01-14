@@ -7,23 +7,20 @@
 
 #include "NotesItem.h"
 #include "MarbleDirs.h"
-#include "MarbleDebug.h"
 
 #include <QPainter>
 #include <QRect>
 
 using namespace Marble;
 
-const QFont NotesItem::s_font = QFont( QStringLiteral( "Sans Serif" ), 10 );
+const QFont NotesItem::s_font = QFont(QStringLiteral("Sans Serif"), 10);
 const int NotesItem::s_labelOutlineWidth = 5;
 
 NotesItem::NotesItem(QObject *parent)
     : AbstractDataPluginItem(parent),
-      m_pixmap_open(QPixmap(MarbleDirs::path("bitmaps/notes_open.png")).scaled(30, 30)),
-      m_pixmap_closed(QPixmap(MarbleDirs::path("bitmaps/notes_closed.png")).scaled(30, 30))
+      m_pixmap_open(QPixmap(MarbleDirs::path("bitmaps/notes_open.png"))),
+      m_pixmap_closed(QPixmap(MarbleDirs::path("bitmaps/notes_closed.png")))
 {
-    MarbleDebug::setEnabled(true);
-
     setSize(m_pixmap_open.size());
     setAlignment(Qt::AlignHCenter | Qt::AlignTop);
     setCacheMode(ItemCoordinateCache);
@@ -49,31 +46,28 @@ void NotesItem::paint(QPainter *painter)
 
     painter->setFont(s_font);
     const int fontAscent = painter->fontMetrics().ascent();
-    QPen outlinepen( Qt::white );
-    outlinepen.setWidthF( s_labelOutlineWidth );
-    QBrush  outlinebrush( Qt::black );
+    QPen outlinepen(Qt::white);
+    outlinepen.setWidthF(s_labelOutlineWidth);
+    QBrush  outlinebrush(Qt::black);
 
-    const QPointF baseline( s_labelOutlineWidth / 2.0, fontAscent );
+    const QPointF baseline(s_labelOutlineWidth / 2.0, fontAscent);
 
     QPainterPath outlinepath;
-    outlinepath.addText( baseline, painter->font(), m_labelText );
+    outlinepath.addText(baseline, painter->font(), m_labelText);
 
-    painter->setRenderHint( QPainter::Antialiasing, true );
-    painter->setPen( outlinepen );
-    painter->setBrush( outlinebrush );
-    painter->drawPath( outlinepath );
-    painter->setPen( Qt::NoPen );
-    painter->drawPath( outlinepath );
-    painter->setRenderHint( QPainter::Antialiasing, false );
+    painter->setRenderHint(QPainter::Antialiasing, true);
+    painter->setPen(outlinepen);
+    painter->setBrush(outlinebrush);
+    painter->drawPath(outlinepath);
+    painter->setPen(Qt::NoPen);
+    painter->drawPath(outlinepath);
+    painter->setRenderHint(QPainter::Antialiasing, false);
 
     int const y = qMax(0, int(size().width() - m_pixmap_open.width()) / 2);
 
     //The two pixmaps have the same dimensions, so all the logic for one works for the other
-    if (m_noteStatus == "open") {
-        painter->drawPixmap(y, 2 + painter->fontMetrics().height(), m_pixmap_open);
-    } else if (m_noteStatus == "closed") {
-        painter->drawPixmap(y, 2 + painter->fontMetrics().height(), m_pixmap_closed);
-    }
+    QPixmap const & pixmap = m_noteStatus == "closed" ? m_pixmap_closed : m_pixmap_open;
+    painter->drawPixmap(y, 2 + painter->fontMetrics().height(), pixmap);
 
     painter->restore();
 }
@@ -93,41 +87,56 @@ void NotesItem::setNoteStatus(const QString& noteStatus)
     m_noteStatus = noteStatus;
 }
 
-void NotesItem::addLatestComment(const Comment& comment)
+void NotesItem::addComment(const Comment& comment)
 {
     m_commentsList.push_back(comment);
-    std::sort(m_commentsList.begin(), m_commentsList.end(), [] (const Comment& a, const Comment& b) {return a.getDate() < b.getDate();} );
-    setComment(m_commentsList.back());
-}
+    std::sort(m_commentsList.begin(), m_commentsList.end(), [](const Comment & a, const Comment & b) {
+        return a.date() > b.date();
+    });
 
-void NotesItem::setComment(const Comment& comment)
-{
+    QStringList toolTip;
+    for (auto const &entry: m_commentsList) {
+        QString const date = entry.date().toString(Qt::SystemLocaleShortDate);
+        QString const user = entry.user().isEmpty() ? tr("anonymous", "The author name is not known") : entry.user();
+        toolTip << QStringLiteral("%1\n--%2, %3").arg(entry.text().trimmed()).arg(user).arg(date);
+    }
+    setToolTip(toolTip.join(QStringLiteral("\n\n")));
     QFontMetrics fontmet(s_font);
-    m_labelText = fontmet.elidedText(comment.getText(), Qt::ElideRight, 125);
+    m_labelText = fontmet.elidedText(m_commentsList.front().text(), Qt::ElideRight, 125);
     auto const width = qMax(fontmet.width(m_labelText), m_pixmap_open.width());
     setSize(QSizeF(width, fontmet.height() + 2 + m_pixmap_open.height()));
 }
 
-qreal NotesItem::width()
-{
-    return m_pixmap_open.size().width();
-}
-
-qreal NotesItem::height()
-{
-    return m_pixmap_open.size().height();
-}
-
-Comment::Comment()
+Comment::Comment() : m_uid(0)
 {
 }
 
-Comment::Comment(QDateTime date, QString text, QString user, int uid)
+Comment::Comment(const QDateTime &date, const QString &text, const QString &user, int uid)
     : m_date(date)
     , m_text(text)
     , m_user(user)
 {
     m_uid = uid;
+}
+
+QDateTime Comment::date() const
+{
+    return m_date;
+}
+
+QString Comment::text() const
+{
+    return m_text;
+}
+
+QString Comment::user() const
+{
+    return m_user;
+}
+
+int Comment::uid() const
+{
+    return m_uid;
 }
 
 #include "moc_NotesItem.cpp"

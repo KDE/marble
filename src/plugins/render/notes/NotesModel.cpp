@@ -60,12 +60,12 @@ void NotesModel::parseFile(const QByteArray& file)
         QList<AbstractDataPluginItem*> items;
 
         QJsonArray jsonArray = features.toArray();
-        for (auto jsonRef : jsonArray) {
+        for (auto const jsonRef : jsonArray) {
             QJsonObject jsonObj = jsonRef.toObject();
             QJsonObject geometry = jsonObj.value(QStringLiteral("geometry")).toObject();
             QJsonArray coordinates = geometry.value(QStringLiteral("coordinates")).toArray();
-            double longitude = coordinates.at(0).toDouble();
-            double latitude = coordinates.at(1).toDouble();
+            double lon = coordinates.at(0).toDouble();
+            double lat = coordinates.at(1).toDouble();
 
             QJsonObject noteProperties = jsonObj.value(QStringLiteral("properties")).toObject();
             QJsonArray noteComments = noteProperties.value(QStringLiteral("comments")).toArray();
@@ -78,20 +78,19 @@ void NotesModel::parseFile(const QByteArray& file)
 
             NotesItem *item = new NotesItem(this);
             item->setId(id);
-            GeoDataCoordinates coordinateset(longitude, latitude, 0.0, GeoDataCoordinates::Degree);
-            item->setCoordinate(coordinateset);
+            item->setCoordinate(GeoDataCoordinates(lon, lat, 0.0, GeoDataCoordinates::Degree));
             item->setDateCreated(dateCreated);
             item->setNoteStatus(noteStatus);
             item->setDateClosed(dateClosed);
 
-            for (auto commentRef : noteComments) {
+            for (auto const commentRef : noteComments) {
                 QJsonObject commentObj = commentRef.toObject();
                 QDateTime date = QDateTime::fromString(commentObj.value("date").toString(), Qt::ISODate);
                 QString user = commentObj.value("user").toString();
                 QString text = commentObj.value("text").toString();
                 int uid = commentObj.value("uid").toInt();
                 Comment comment(date, text, user, uid);
-                item->addLatestComment(comment);
+                item->addComment(comment);
             }
 
             items << item;

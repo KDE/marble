@@ -36,12 +36,12 @@ void NotesPlugin::initialize()
 
 QString NotesPlugin::name() const
 {
-    return tr("Notes Plugin");
+    return tr("OSM Mapper Notes");
 }
 
 QString NotesPlugin::guiString() const
 {
-    return tr("Notes");
+    return name();
 }
 
 QString NotesPlugin::nameId() const
@@ -67,7 +67,7 @@ QVector<PluginAuthor> NotesPlugin::pluginAuthors() const
 
 QString NotesPlugin::description() const
 {
-    return tr("Show OpenStreetMap Notes.");
+    return tr("Display OpenStreetMap Mapper Notes.");
 }
 
 QIcon NotesPlugin::icon() const
