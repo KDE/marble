@@ -66,18 +66,34 @@ Item {
             font.pointSize: 20
         }
 
-        ListView {
-            model: placemark ? placemark.relationModel : undefined
-            header: Text { text: "Appears in these relations:" }
-            width: parent.width
-            height: 150
-            delegate: Text { text: name }
-        }
-
         IconText {
             width: parent.width
             visible: text.length > 0
             text: placemark === null ? "" : placemark.description
+        }
+
+        ListView {
+            model: placemark ? placemark.routeRelationModel : undefined
+            width: parent.width
+            height: Math.min(Screen.pixelDensity * 25, contentHeight)
+            clip: true
+            delegate: Row {
+                spacing: Screen.pixelDensity * 1
+                Image {
+                    source: "file:/" + iconSource
+                    height: text.height
+                    width: height
+                    sourceSize.height: height
+                    sourceSize.width: width
+                    fillMode: Image.PreserveAspectFit
+                }
+                Text {
+                    id: text
+                    font.pointSize: 14
+                    text: display
+                }
+            }
+            ScrollBar.vertical: ScrollBar {}
         }
 
         IconText {

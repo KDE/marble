@@ -21,22 +21,23 @@ namespace Marble {
 class RouteRelationModel : public QAbstractListModel
 {
     Q_OBJECT
+
 public:
-    enum RelationRoles {
-        RelationName = Qt::UserRole + 1
+    enum RouteRelationRoles {
+        IconSource = Qt::UserRole + 1
     };
 
     RouteRelationModel(QObject* parent = 0);
     
     void setRelations(const QVector<const Marble::GeoDataRelation*> &relations);
     
-    int rowCount(const QModelIndex & parent = QModelIndex()) const;
+    int rowCount(const QModelIndex & parent = QModelIndex()) const override;
     
-    QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
-
+    QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const override;
+    
 protected:
     QHash<int, QByteArray> roleNames() const;
-    
+
 private:
     QVector<const Marble::GeoDataRelation*> m_relations;
 };

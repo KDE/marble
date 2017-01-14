@@ -592,10 +592,9 @@ void Placemark::setName(const QString & name)
 void Placemark::setRelations(const QVector<const Marble::GeoDataRelation*> &relations)
 {
     m_relationModel.setRelations(relations);
-    emit relationModelChanged();
 }
 
-RouteRelationModel* Placemark::relationModel()
+RouteRelationModel* Placemark::routeRelationModel()
 {
     return &m_relationModel;
 }

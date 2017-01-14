@@ -40,7 +40,7 @@ class Placemark : public QObject
     Q_PROPERTY(double latitude READ latitude NOTIFY coordinatesChanged)
     Q_PROPERTY(QStringList tags READ tags NOTIFY tagsChanged)
 
-    Q_PROPERTY(RouteRelationModel* relationModel READ relationModel NOTIFY relationModelChanged)
+    Q_PROPERTY(RouteRelationModel* routeRelationModel READ routeRelationModel CONSTANT)
 
 public:
     /** Constructor */
@@ -65,7 +65,7 @@ public:
     const QStringList & tags() const;
 
     void setRelations(const QVector<const Marble::GeoDataRelation*> &relations);
-    RouteRelationModel* relationModel();
+    RouteRelationModel* routeRelationModel();
 
 public Q_SLOTS:
     void setName(const QString &name);
@@ -82,7 +82,7 @@ Q_SIGNALS:
     void wifiAvailabilityChanged();
     void tagsChanged();
 
-    void relationModelChanged();
+    void routeRelationModelChanged();
 
 private:
     bool addTagValue(QString &target, const QString &key, const QString &format=QString(), const QString separator = QStringLiteral(" · ")) const;
