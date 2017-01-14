@@ -15,7 +15,6 @@
 #include "MarbleModel.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataLatLonAltBox.h"
-#include "MarbleDebug.h"
 #include "Planet.h"
 
 #include <QString>
@@ -68,12 +67,32 @@ void NotesModel::parseFile(const QByteArray& file)
             double longitude = coordinates.at(0).toDouble();
             double latitude = coordinates.at(1).toDouble();
 
-            GeoDataCoordinates coordinateset(longitude, latitude, 0.0, GeoDataCoordinates::Degree);
-            QString id = QString::number(jsonObj.value(QStringLiteral("properties")).toObject().value(QStringLiteral("id")).toInt());
+            QJsonObject noteProperties = jsonObj.value(QStringLiteral("properties")).toObject();
+            QJsonArray noteComments = noteProperties.value(QStringLiteral("comments")).toArray();
+
+            QString id = QString::number(noteProperties.value(QStringLiteral("id")).toInt());
+
+            QDateTime dateCreated = QDateTime::fromString(noteProperties.value(QStringLiteral("date_created")).toString(), Qt::ISODate);
+            QDateTime dateClosed = QDateTime::fromString(noteProperties.value(QStringLiteral("closed_at")).toString(), Qt::ISODate);
+            QString noteStatus = noteProperties.value(QStringLiteral("status")).toString();
 
             NotesItem *item = new NotesItem(this);
             item->setId(id);
+            GeoDataCoordinates coordinateset(longitude, latitude, 0.0, GeoDataCoordinates::Degree);
             item->setCoordinate(coordinateset);
+            item->setDateCreated(dateCreated);
+            item->setNoteStatus(noteStatus);
+            item->setDateClosed(dateClosed);
+
+            for (auto commentRef : noteComments) {
+                QJsonObject commentObj = commentRef.toObject();
+                QDateTime date = QDateTime::fromString(commentObj.value("date").toString(), Qt::ISODate);
+                QString user = commentObj.value("user").toString();
+                QString text = commentObj.value("text").toString();
+                int uid = commentObj.value("uid").toInt();
+                Comment comment(date, text, user, uid);
+                item->addLatestComment(comment);
+            }
 
             items << item;
         }

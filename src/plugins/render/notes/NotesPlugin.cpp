@@ -10,6 +10,7 @@
 
 #include "NotesPlugin.h"
 #include "NotesModel.h"
+#include "MarbleDirs.h"
 
 #include <QIcon>
 
@@ -71,7 +72,7 @@ QString NotesPlugin::description() const
 
 QIcon NotesPlugin::icon() const
 {
-    return QIcon();
+    return QIcon(MarbleDirs::path("bitmaps/notes_open.png"));
 }
 
 #include "moc_NotesPlugin.cpp"

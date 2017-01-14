@@ -13,6 +13,29 @@
 
 #include "AbstractDataPluginItem.h"
 #include <QPixmap>
+#include <QLabel>
+#include <QDateTime>
+
+class Comment
+{
+public:
+    Comment();
+    Comment(QDateTime date, QString text, QString user, int uid);
+    void setDate(const QDateTime& date){m_date = date;};
+    void setText(const QString& text){m_text = text;};
+    void setUser(const QString& user){m_user = user;};
+    void setUid(const int uid){m_uid = uid;};
+    QDateTime getDate() const {return m_date;};
+    QString getText() const {return m_text;};
+    QString getUser() const {return m_user;};
+    int getUid() const {return m_uid;};
+private:
+    QDateTime m_date;
+    QString m_text;
+    QString m_user;
+    int m_uid;
+
+};
 
 namespace Marble
 {
@@ -22,7 +45,7 @@ class NotesItem : public AbstractDataPluginItem
     Q_OBJECT
 
 public:
-    explicit NotesItem(QObject *parent);
+    explicit NotesItem(QObject* parent);
 
     ~NotesItem() override;
 
@@ -32,9 +55,33 @@ public:
 
     bool operator<(const AbstractDataPluginItem *other) const override;
 
-private:
-    QPixmap m_pixmap;
-};
+    void setAuthor(const QString &author);
 
+    void setDateCreated(const QDateTime& dateCreated);
+
+    void setNoteStatus(const QString& noteStatus);
+
+    void setDateClosed(const QDateTime& dataClosed);
+
+    void addLatestComment(const Comment& comment);
+
+    void setComment(const Comment& comment);
+
+    qreal width();
+
+    qreal height();
+
+private:
+    QPixmap m_pixmap_open;
+    QPixmap m_pixmap_closed;
+    QVector<Comment> m_commentsList;
+    QDateTime m_dateCreated;
+    QString m_noteStatus;
+    QDateTime m_dateClosed;
+    QString m_labelText;
+
+    static const QFont s_font;
+    static const int s_labelOutlineWidth;
+};
 }
 #endif // NOTESITEM_H
