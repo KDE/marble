@@ -66,6 +66,14 @@ Item {
             font.pointSize: 20
         }
 
+        ListView {
+            model: placemark ? placemark.relationModel : undefined
+            header: Text { text: "Appears in these relations:" }
+            width: parent.width
+            height: 150
+            delegate: Text { text: name }
+        }
+
         IconText {
             width: parent.width
             visible: text.length > 0

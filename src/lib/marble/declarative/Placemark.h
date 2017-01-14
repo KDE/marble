@@ -12,6 +12,7 @@
 #define MARBLE_DECLARATIVE_PLACEMARK_H
 
 #include "GeoDataPlacemark.h"
+#include "RouteRelationModel.h"
 
 #include <QObject>
 #include <QtQml>
@@ -39,6 +40,8 @@ class Placemark : public QObject
     Q_PROPERTY(double latitude READ latitude NOTIFY coordinatesChanged)
     Q_PROPERTY(QStringList tags READ tags NOTIFY tagsChanged)
 
+    Q_PROPERTY(RouteRelationModel* relationModel READ relationModel NOTIFY relationModelChanged)
+
 public:
     /** Constructor */
     explicit Placemark( QObject *parent = 0 );
@@ -61,6 +64,9 @@ public:
     double latitude() const;
     const QStringList & tags() const;
 
+    void setRelations(const QVector<const Marble::GeoDataRelation*> &relations);
+    RouteRelationModel* relationModel();
+
 public Q_SLOTS:
     void setName(const QString &name);
 
@@ -75,6 +81,8 @@ Q_SIGNALS:
     void wheelchairInfoChanged();
     void wifiAvailabilityChanged();
     void tagsChanged();
+
+    void relationModelChanged();
 
 private:
     bool addTagValue(QString &target, const QString &key, const QString &format=QString(), const QString separator = QStringLiteral(" · ")) const;
@@ -94,6 +102,8 @@ private:
     mutable QString m_wheelchairInfo;
     mutable QString m_wifiAvailable;
     QStringList m_tags;
+
+    RouteRelationModel m_relationModel;
 };
 
 }

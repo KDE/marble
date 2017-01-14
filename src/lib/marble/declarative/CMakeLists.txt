@@ -27,6 +27,7 @@ add_library( marbledeclarative SHARED
     OfflineDataModel.cpp
     RouteRequestModel.cpp
     Settings.cpp
+    RouteRelationModel.cpp
 )
 
 generate_export_header(marbledeclarative BASE_NAME marble_declarative)

@@ -66,6 +66,8 @@ void MarbleDeclarativePlugin::registerTypes( const char *uri )
                                                              QStringLiteral("MarblePlacemarkModel is not instantiable"));
     qmlRegisterUncreatableType<Marble::RoutingModel>(uri, 0, 20, "RoutingModel",
                                                      QStringLiteral("RoutingModel is not instantiable"));
+    qmlRegisterUncreatableType<Marble::RouteRelationModel>(uri, 0, 20, "RouteRelationModel",
+                                                           QStringLiteral("RouteRelationModel is not instantiable"));
     qmlRegisterUncreatableType<Marble::BookmarksModel>(uri, 0, 20, "BookmarksModel",
                                                        QStringLiteral("Do not create"));
     qmlRegisterUncreatableType<Marble::AbstractFloatItem>(uri, 0, 20, "FloatItem",
