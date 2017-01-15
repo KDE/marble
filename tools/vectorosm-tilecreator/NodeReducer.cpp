@@ -177,7 +177,7 @@ void NodeReducer::setBorderPoints(OsmPlacemarkData &osmData, const QVector<int> 
     }
 
     if (wraps > 1) {
-        qDebug() << "Wrong border points sequence:" <<  borderPoints;
+        //qDebug() << "Wrong border points sequence:" <<  borderPoints;
         return;
     }
 
