@@ -837,7 +837,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::Bookmark]->iconStyle().setScale(0.75);
 
     QColor const shopColor("#ac39ac");
-    QColor const transportationColor("#0066ff");
+    QColor const transportationColor("#0092da");
     QColor const amenityColor("#734a08");
     QColor const healthColor("#da0092");
     QColor const airTransportColor("#8461C4");
