@@ -303,7 +303,15 @@ GeoDataCoordinates GeoDataPlacemark::coordinate( const QDateTime &dateTime, bool
             coord = track->coordinatesAt( dateTime );
         } else if (d->m_geometry->nodeType() == GeoDataTypes::GeoDataLineStringType) {
             GeoDataLineString const *lineString = static_cast<const GeoDataLineString *>(d->m_geometry);
-            coord = lineString->isEmpty() ? GeoDataCoordinates() : lineString->at(lineString->size() / 2);
+            auto const size = lineString->size();
+            if (size == 0) {
+                return GeoDataCoordinates();
+            } else if (size < 3) {
+                // Approximate center if there are just two coordinates
+                return lineString->latLonAltBox().center();
+            } else {
+                lineString->at(size / 2);
+            }
         } else {
             coord = d->m_geometry->latLonAltBox().center();
         }
