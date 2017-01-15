@@ -55,6 +55,13 @@ GeoDataPlacemark *OsmNode::create() const
     } else {
         placemark->setName(m_osmData.tagValue(QStringLiteral("name")));
     }
+    if (category == GeoDataPlacemark::AerialwayStation && coordinates.altitude() != 0.0) {
+        if (placemark->name().isEmpty()) {
+            placemark->setName(QStringLiteral("%1 m"));
+        } else {
+            placemark->setName(QStringLiteral("%1 (%2 m)").arg(placemark->name()).arg(coordinates.altitude()));
+        }
+    }
     if (placemark->name().isEmpty()) {
         placemark->setName(m_osmData.tagValue(QStringLiteral("ref")));
     }
