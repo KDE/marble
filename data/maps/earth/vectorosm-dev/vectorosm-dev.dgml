@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     This xml file is free software licensed under the GNU LGPL. You can
+     find a copy of this license in LICENSE.txt in the top directory of
+     the source code.
+-->
+<dgml xmlns="http://edu.kde.org/marble/dgml/2.0">
+  <document>
+    <head>
+      <!-- The license here applies to the actual map content, not this dgml file. See the license header above for the dgml file license -->
+      <!-- The content that this license refers to is not distributed with this package -->
+      <license short="© OpenStreetMap contributors">Source: © OpenStreetMap contributors, License: Creative Commons Attribution-ShareAlike 2.0 (CC BY-SA)</license>
+      <name>Vector OSM (Development)</name>
+      <target>earth</target>
+      <theme>vectorosm-dev</theme>
+      <icon pixmap="vectorosm-dev-preview.png"/>
+      <visible>true</visible>
+      <description><![CDATA[<p>A <i>global roadmap</i> created by the OpenStreetMap (OSM) project.</p><p>OSM is an open community which creates free editable maps.</p>]]></description>
+      <zoom>
+        <minimum>900</minimum>
+        <maximum>3850</maximum>
+        <discrete>false</discrete>
+      </zoom>
+    </head>
+    <map bgcolor="#b5d0d0">
+        <canvas/>
+        <target/>
+      <layer name="vectorosm-dev" backend="vectortile">
+          <vectortile name="geojson_data" expire="604800">
+              <sourcedir format="O5M">earth/vectorosm-dev</sourcedir>
+              <storageLayout levelZeroColumns="1" levelZeroRows="1" tileLevels="1,3,5,7,9,11,13,15,17" mode="OpenStreetMap" />
+              <projection name="Mercator" />
+              <downloadUrl protocol="http" host="maps.kde.org" path="/earth/vectorosm/dev/" />
+              <downloadPolicy usage="Browse" maximumConnections="20" />
+              <downloadPolicy usage="Bulk" maximumConnections="2" />
+          </vectortile>
+      </layer>
+      <layer name="standardplaces" backend="geodata">
+        <geodata name="baseplacemarks">
+          <sourcefile>baseplacemarks.cache</sourcefile>
+        </geodata>
+        <geodata name="boundaryplacemarks">
+          <sourcefile>boundaryplacemarks.cache</sourcefile>
+        </geodata>
+      </layer>
+    </map>
+    <settings>
+      <property name="coordinate-grid">
+        <value>false</value>
+        <available>true</available>
+      </property>
+      <property name="overviewmap">
+        <value>true</value>
+        <available>true</available>
+      </property>
+      <property name="compass">
+        <value>false</value>
+        <available>true</available>
+      </property>
+      <property name="scalebar">
+        <value>true</value>
+        <available>true</available>
+      </property>
+      <group name="Places">
+        <property name="places">
+          <value>true</value>
+          <available>true</available>
+        </property>
+        <property name="cities">
+          <value>true</value>
+          <available>true</available>
+        </property>
+        <property name="terrain">
+          <value>false</value>
+          <available>false</available>
+        </property>
+        <property name="otherplaces">
+          <value>false</value>
+          <available>false</available>
+        </property>
+      </group>
+    </settings>
+    <legend>
+
+      <section name="Tours">
+        <heading>Explore the Earth</heading>
+        <item name="earthlandingsites">
+          <text><![CDATA[<a href="tour://earth/openstreetmap/tour.kml">Play a tour of popular places.</a>]]></text>
+        </item>
+      </section>
+
+      <section name="coordinate-grid" checkable="true" connect="coordinate-grid" spacing="12">
+        <heading>Coordinate Grid</heading>
+      </section>
+
+    </legend>
+  </document>
+</dgml>

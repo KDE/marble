@@ -65,7 +65,8 @@ GeoDataDocument* mergeDocuments(GeoDataDocument* map1, GeoDataDocument* map2)
 QString tileFileName(const QCommandLineParser &parser, int x, int y, int zoomLevel)
 {
     QString const extension = parser.value("extension");
-    QString const outputDir = QString("%1/%2/%3").arg(parser.value("output")).arg(zoomLevel).arg(x);
+    QString const output = parser.isSet("development") ? QString("%1/maps/earth/vectorosm-dev").arg(MarbleDirs::localPath()) : parser.value("output");
+    QString const outputDir = QString("%1/%2/%3").arg(output).arg(zoomLevel).arg(x);
     QString const outputFile = QString("%1/%2.%3").arg(outputDir).arg(y).arg(extension);
     return outputFile;
 }
@@ -139,6 +140,7 @@ int main(int argc, char *argv[])
                           {{"m", "mbtile"}, "Store tiles at level 15 onwards in a mbtile database.", "mbtile"},
                           {{"s", "spellcheck"}, "Use this geonames.org cities file for spell-checking city names", "spellcheck"},
                           {"verbose", "Increase amount of shell output information"},
+                          {{"d", "development"}, "Use local development vector osm map theme as output storage"},
                           {{"z", "zoom-level"}, "Zoom level according to which OSM information has to be processed.", "levels", "11,13,15,17"},
                           {{"o", "output"}, "Output file or directory", "output", QString("%1/maps/earth/vectorosm").arg(MarbleDirs::localPath())},
                           {{"e", "extension"}, "Output file type: o5m (default), osm or kml", "file extension", "o5m"}
