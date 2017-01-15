@@ -1926,16 +1926,16 @@ void StyleBuilder::Private::initializeMinimumZoomLevels()
     s_defaultMinZoomLevels[GeoDataPlacemark::AerialwayPylon] = 16;
     s_defaultMinZoomLevels[GeoDataPlacemark::AerialwayCableCar] = 15;
     s_defaultMinZoomLevels[GeoDataPlacemark::AerialwayGondola] = 15;
-    s_defaultMinZoomLevels[GeoDataPlacemark::AerialwayChairLift] = 16;
-    s_defaultMinZoomLevels[GeoDataPlacemark::AerialwayMixedLift] = 16;
-    s_defaultMinZoomLevels[GeoDataPlacemark::AerialwayDragLift] = 16;
-    s_defaultMinZoomLevels[GeoDataPlacemark::AerialwayTBar] = 16;
-    s_defaultMinZoomLevels[GeoDataPlacemark::AerialwayJBar] = 16;
-    s_defaultMinZoomLevels[GeoDataPlacemark::AerialwayPlatter] = 16;
-    s_defaultMinZoomLevels[GeoDataPlacemark::AerialwayRopeTow] = 16;
-    s_defaultMinZoomLevels[GeoDataPlacemark::AerialwayMagicCarpet] = 16;
-    s_defaultMinZoomLevels[GeoDataPlacemark::AerialwayZipLine] = 16;
-    s_defaultMinZoomLevels[GeoDataPlacemark::AerialwayGoods] = 16;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AerialwayChairLift] = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AerialwayMixedLift] = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AerialwayDragLift] = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AerialwayTBar] = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AerialwayJBar] = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AerialwayPlatter] = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AerialwayRopeTow] = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AerialwayMagicCarpet] = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AerialwayZipLine] = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::AerialwayGoods] = 15;
 
     for (int i = GeoDataPlacemark::PlaceCity; i < GeoDataPlacemark::LastIndex; i++) {
         if (s_defaultMinZoomLevels[i] < 0) {
