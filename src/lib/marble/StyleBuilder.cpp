@@ -77,6 +77,7 @@ public:
                                      bool fill = true, bool outline = true,
                                      Qt::BrushStyle brushStyle = Qt::SolidPattern,
                                      const QString& texturePath = QString()) const;
+    GeoDataStyle::Ptr createIconWayStyle(const QColor& color, const QFont &font, const QColor &textColor, double lineWidth=1.0, const QString& iconPath = QString()) const;
 
     GeoDataStyle::ConstPtr createRelationStyle(const StyleParameters &parameters);
     GeoDataStyle::ConstPtr createPlacemarkStyle(const StyleParameters &parameters);
@@ -194,6 +195,14 @@ GeoDataStyle::Ptr StyleBuilder::Private::createWayStyle(const QColor& color, con
         bool fill, bool outline, Qt::BrushStyle brushStyle, const QString& texturePath) const
 {
     return createStyle(1, 0, color, outlineColor, fill, outline, brushStyle, Qt::SolidLine, Qt::RoundCap, false, QVector<qreal>(), m_defaultFont, Qt::black, texturePath);
+}
+
+GeoDataStyle::Ptr StyleBuilder::Private::createIconWayStyle(const QColor &color, const QFont &font, const QColor &textColor, double lineWidth, const QString &iconPath) const
+{
+    auto const path = iconPath.isEmpty() ? iconPath : MarbleDirs::path(iconPath);
+    auto style = createPOIStyle(font, path, textColor, color, color, true, true);
+    style->lineStyle().setWidth(float(lineWidth));
+    return style;
 }
 
 GeoDataStyle::ConstPtr StyleBuilder::Private::createRelationStyle(const StyleParameters &parameters)
@@ -1166,18 +1175,18 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::AerialwayStation]->iconStyle().setScale(0.33f);
     m_defaultStyle[GeoDataPlacemark::AerialwayPylon]           = createOsmPOIStyle(osmFont, "individual/pylon", QColor("#dddddd"));
     m_defaultStyle[GeoDataPlacemark::AerialwayPylon]->iconStyle().setScale(0.33f);
-    m_defaultStyle[GeoDataPlacemark::AerialwayCableCar]        = createWayStyle("#dddddd", "#bbbbbb", false, true);
-    m_defaultStyle[GeoDataPlacemark::AerialwayGondola]         = createWayStyle("#dddddd", "#bbbbbb", false, true);
-    m_defaultStyle[GeoDataPlacemark::AerialwayChairLift]       = createWayStyle("#dddddd", "#bbbbbb", false, true);
-    m_defaultStyle[GeoDataPlacemark::AerialwayMixedLift]       = createWayStyle("#dddddd", "#bbbbbb", false, true);
-    m_defaultStyle[GeoDataPlacemark::AerialwayDragLift]        = createWayStyle("#dddddd", "#bbbbbb", false, true);
-    m_defaultStyle[GeoDataPlacemark::AerialwayTBar]            = createWayStyle("#dddddd", "#bbbbbb", false, true);
-    m_defaultStyle[GeoDataPlacemark::AerialwayJBar]            = createWayStyle("#dddddd", "#bbbbbb", false, true);
-    m_defaultStyle[GeoDataPlacemark::AerialwayPlatter]         = createWayStyle("#dddddd", "#bbbbbb", false, true);
-    m_defaultStyle[GeoDataPlacemark::AerialwayRopeTow]         = createWayStyle("#dddddd", "#bbbbbb", false, true);
-    m_defaultStyle[GeoDataPlacemark::AerialwayMagicCarpet]     = createWayStyle("#dddddd", "#bbbbbb", false, true);
-    m_defaultStyle[GeoDataPlacemark::AerialwayZipLine]         = createWayStyle("#dddddd", "#bbbbbb", false, true);
-    m_defaultStyle[GeoDataPlacemark::AerialwayGoods]           = createWayStyle("#dddddd", "#bbbbbb", false, true);
+    m_defaultStyle[GeoDataPlacemark::AerialwayCableCar]        = createIconWayStyle("#bbbbbb", osmFont, transportationColor, 1.0, QStringLiteral("svg/thenounproject/transportation-583813-cable-car.svg"));
+    m_defaultStyle[GeoDataPlacemark::AerialwayGondola]         = createIconWayStyle("#bbbbbb", osmFont, transportationColor, 1.0, QStringLiteral("svg/thenounproject/transportation-21636-gondola.svg"));
+    m_defaultStyle[GeoDataPlacemark::AerialwayChairLift]       = createIconWayStyle("#bbbbbb", osmFont, transportationColor, 1.0, QStringLiteral("svg/thenounproject/transportation-231-chair-lift.svg"));
+    m_defaultStyle[GeoDataPlacemark::AerialwayMixedLift]       = createIconWayStyle("#bbbbbb", osmFont, transportationColor);
+    m_defaultStyle[GeoDataPlacemark::AerialwayDragLift]        = createIconWayStyle("#bbbbbb", osmFont, transportationColor, 1.0, QStringLiteral("svg/thenounproject/transportation-8803-platter-lift.svg"));
+    m_defaultStyle[GeoDataPlacemark::AerialwayTBar]            = createIconWayStyle("#bbbbbb", osmFont, transportationColor, 1.0, QStringLiteral("svg/thenounproject/transportation-8803-platter-lift.svg"));
+    m_defaultStyle[GeoDataPlacemark::AerialwayJBar]            = createIconWayStyle("#bbbbbb", osmFont, transportationColor, 1.0, QStringLiteral("svg/thenounproject/transportation-8803-platter-lift.svg"));
+    m_defaultStyle[GeoDataPlacemark::AerialwayPlatter]         = createIconWayStyle("#bbbbbb", osmFont, transportationColor, 1.0, QStringLiteral("svg/thenounproject/transportation-8803-platter-lift.svg"));
+    m_defaultStyle[GeoDataPlacemark::AerialwayRopeTow]         = createIconWayStyle("#bbbbbb", osmFont, transportationColor);
+    m_defaultStyle[GeoDataPlacemark::AerialwayMagicCarpet]     = createIconWayStyle("#bbbbbb", osmFont, transportationColor);
+    m_defaultStyle[GeoDataPlacemark::AerialwayZipLine]         = createIconWayStyle("#bbbbbb", osmFont, transportationColor);
+    m_defaultStyle[GeoDataPlacemark::AerialwayGoods]           = createIconWayStyle("#bbbbbb", osmFont, transportationColor);
 
     m_defaultStyle[GeoDataPlacemark::PisteDownhill]            = createStyle(9, 0.0, "#dddddd", Qt::transparent, true, false, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false, QVector< qreal >(), osmFont, Qt::transparent);
     m_defaultStyle[GeoDataPlacemark::PisteNordic]              = createStyle(3, 0.0, "#006666", "#006666", true, false, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false, QVector< qreal >(), osmFont, Qt::transparent);
