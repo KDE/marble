@@ -1197,7 +1197,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::PisteIceSkate]            = m_defaultStyle[GeoDataPlacemark::PisteNordic];
     m_defaultStyle[GeoDataPlacemark::PisteSnowPark]            = m_defaultStyle[GeoDataPlacemark::PisteNordic];
     m_defaultStyle[GeoDataPlacemark::PistePlayground]          = m_defaultStyle[GeoDataPlacemark::PisteNordic];
-    m_defaultStyle[GeoDataPlacemark::PisteSkiJump]             = m_defaultStyle[GeoDataPlacemark::PisteNordic];
+    m_defaultStyle[GeoDataPlacemark::PisteSkiJump]             = createIconWayStyle("#bbbbbb", osmFont, transportationColor, 1.0, QStringLiteral("svg/thenounproject/sports-245-ski-jump.svg"));
 
     m_defaultStyle[GeoDataPlacemark::AdminLevel1]              = createStyle(0.0, 0.0, "#DF9CCF", "#DF9CCF", false, true, Qt::SolidPattern, Qt::CustomDashLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3, osmFont);
     m_defaultStyle[GeoDataPlacemark::AdminLevel2]              = createStyle(2.0, 0.0, "#DF9CCF", "#DF9CCF", false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3, osmFont);
