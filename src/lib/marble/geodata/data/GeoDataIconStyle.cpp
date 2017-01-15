@@ -29,6 +29,7 @@ class GeoDataIconStylePrivate
     GeoDataIconStylePrivate()
         : m_scale( 1.0 ),
         m_size(0, 0),
+        m_aspectRatioMode(Qt::KeepAspectRatio),
         m_iconPath(),
         m_heading( 0 )
     {
@@ -37,6 +38,7 @@ class GeoDataIconStylePrivate
     GeoDataIconStylePrivate( const QString& iconPath, const QPointF &hotSpot )
         : m_scale( 1.0 ),
           m_size(0, 0),
+          m_aspectRatioMode(Qt::KeepAspectRatio),
           m_iconPath( iconPath ),
           m_hotSpot( hotSpot ),
           m_heading( 0 )
@@ -80,8 +82,10 @@ class GeoDataIconStylePrivate
             // Icons from the local file system
             if (!size.isNull()) {
                 QImageReader imageReader;
-                imageReader.setScaledSize(size);
                 imageReader.setFileName(path);
+                auto const imageSize = imageReader.size();
+                auto const finalSize = imageSize.scaled(size, m_aspectRatioMode);
+                imageReader.setScaledSize(finalSize);
                 QImage icon = imageReader.read();
                 if (icon.isNull()) {
                     mDebug() << "GeoDataIconStyle: Failed to read image " << path << ": " << imageReader.errorString();
@@ -108,6 +112,7 @@ class GeoDataIconStylePrivate
 
     QImage           m_icon;
     QSize            m_size;
+    Qt::AspectRatioMode m_aspectRatioMode;
     QImage           m_scaledIcon;
     QString          m_iconPath;
     GeoDataHotSpot   m_hotSpot;
@@ -214,12 +219,13 @@ QPointF GeoDataIconStyle::hotSpot( GeoDataHotSpot::Units &xunits, GeoDataHotSpot
     return d->m_hotSpot.hotSpot( xunits, yunits );
 }
 
-void GeoDataIconStyle::setSize(const QSize &size)
+void GeoDataIconStyle::setSize(const QSize &size, Qt::AspectRatioMode aspectRatioMode)
 {
-    if (size == d->m_size) {
+    if (size == d->m_size && aspectRatioMode == d->m_aspectRatioMode) {
         return;
     }
 
+    d->m_aspectRatioMode = aspectRatioMode;
     d->m_size = QSize(size.width() - size.width() % 2, size.height() - size.height() % 2);
     if (!d->m_size.isNull() && !d->m_icon.isNull()) {
         // Resize existing icon that cannot be restored from an image path

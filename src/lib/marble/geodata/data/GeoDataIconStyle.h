@@ -76,7 +76,7 @@ class GEODATA_EXPORT GeoDataIconStyle : public GeoDataColorStyle
      * @param size Size in pixel that @see icon() should have. When the icon was previously set by @setIcon,
      * it is resized unless a null size is passed. Otherwise icon() will be scaled to the given size.
      */
-    void setSize(const QSize &size);
+    void setSize(const QSize &size, Qt::AspectRatioMode aspectRatioMode=Qt::KeepAspectRatio);
 
     /**
      * @brief size Returns the size @see icon() will have if it can be loaded from @see iconPath.
