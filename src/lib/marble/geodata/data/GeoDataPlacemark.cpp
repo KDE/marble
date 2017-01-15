@@ -310,7 +310,7 @@ GeoDataCoordinates GeoDataPlacemark::coordinate( const QDateTime &dateTime, bool
                 // Approximate center if there are just two coordinates
                 return lineString->latLonAltBox().center();
             } else {
-                lineString->at(size / 2);
+                return lineString->at(size / 2);
             }
         } else {
             coord = d->m_geometry->latLonAltBox().center();
