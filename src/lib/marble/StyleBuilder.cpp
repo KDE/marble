@@ -1178,15 +1178,15 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::AerialwayGoods]           = createWayStyle("#dddddd", "#bbbbbb", false, true);
 
     m_defaultStyle[GeoDataPlacemark::PisteDownhill]            = createStyle(9, 0.0, "#dddddd", Qt::transparent, true, false, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false, QVector< qreal >(), osmFont, Qt::transparent);
-    m_defaultStyle[GeoDataPlacemark::PisteNordic]              = m_defaultStyle[GeoDataPlacemark::PisteDownhill];
-    m_defaultStyle[GeoDataPlacemark::PisteSkitour]             = m_defaultStyle[GeoDataPlacemark::PisteDownhill];
-    m_defaultStyle[GeoDataPlacemark::PisteSled]                = m_defaultStyle[GeoDataPlacemark::PisteDownhill];
-    m_defaultStyle[GeoDataPlacemark::PisteHike]                = m_defaultStyle[GeoDataPlacemark::PisteDownhill];
-    m_defaultStyle[GeoDataPlacemark::PisteSleigh]              = m_defaultStyle[GeoDataPlacemark::PisteDownhill];
-    m_defaultStyle[GeoDataPlacemark::PisteIceSkate]            = m_defaultStyle[GeoDataPlacemark::PisteDownhill];
-    m_defaultStyle[GeoDataPlacemark::PisteSnowPark]            = m_defaultStyle[GeoDataPlacemark::PisteDownhill];
-    m_defaultStyle[GeoDataPlacemark::PistePlayground]          = m_defaultStyle[GeoDataPlacemark::PisteDownhill];
-    m_defaultStyle[GeoDataPlacemark::PisteSkiJump]             = m_defaultStyle[GeoDataPlacemark::PisteDownhill]; 
+    m_defaultStyle[GeoDataPlacemark::PisteNordic]              = createStyle(3, 0.0, "#006666", "#006666", true, false, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false, QVector< qreal >(), osmFont, Qt::transparent);
+    m_defaultStyle[GeoDataPlacemark::PisteSkitour]             = m_defaultStyle[GeoDataPlacemark::PisteNordic];
+    m_defaultStyle[GeoDataPlacemark::PisteSled]                = m_defaultStyle[GeoDataPlacemark::PisteNordic];
+    m_defaultStyle[GeoDataPlacemark::PisteHike]                = m_defaultStyle[GeoDataPlacemark::PisteNordic];
+    m_defaultStyle[GeoDataPlacemark::PisteSleigh]              = m_defaultStyle[GeoDataPlacemark::PisteNordic];
+    m_defaultStyle[GeoDataPlacemark::PisteIceSkate]            = m_defaultStyle[GeoDataPlacemark::PisteNordic];
+    m_defaultStyle[GeoDataPlacemark::PisteSnowPark]            = m_defaultStyle[GeoDataPlacemark::PisteNordic];
+    m_defaultStyle[GeoDataPlacemark::PistePlayground]          = m_defaultStyle[GeoDataPlacemark::PisteNordic];
+    m_defaultStyle[GeoDataPlacemark::PisteSkiJump]             = m_defaultStyle[GeoDataPlacemark::PisteNordic];
 
     m_defaultStyle[GeoDataPlacemark::AdminLevel1]              = createStyle(0.0, 0.0, "#DF9CCF", "#DF9CCF", false, true, Qt::SolidPattern, Qt::CustomDashLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3, osmFont);
     m_defaultStyle[GeoDataPlacemark::AdminLevel2]              = createStyle(2.0, 0.0, "#DF9CCF", "#DF9CCF", false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector< qreal >() << 0.3 << 0.3, osmFont);
