@@ -79,7 +79,7 @@ public:
 
     GeoDataStyle::ConstPtr createRelationStyle(const StyleParameters &parameters);
     GeoDataStyle::ConstPtr createPlacemarkStyle(const StyleParameters &parameters);
-    GeoDataStyle::ConstPtr adjustPisteStyle(const StyleParameters &parameters, GeoDataStyle::ConstPtr &style);
+    GeoDataStyle::ConstPtr adjustPisteStyle(const StyleParameters &parameters, const GeoDataStyle::ConstPtr &style);
 
     // Having an outline with the same color as the fill results in degraded
     // performance and degraded display quality for no good reason
@@ -508,7 +508,7 @@ GeoDataStyle::ConstPtr StyleBuilder::Private::createPlacemarkStyle(const StylePa
     return style;
 }
 
-GeoDataStyle::ConstPtr StyleBuilder::Private::adjustPisteStyle(const StyleParameters &parameters, GeoDataStyle::ConstPtr &style)
+GeoDataStyle::ConstPtr StyleBuilder::Private::adjustPisteStyle(const StyleParameters &parameters, const GeoDataStyle::ConstPtr &style)
 {
     // Take cached Style instance if possible
     auto const & osmData = parameters.placemark->osmData();
@@ -583,9 +583,8 @@ GeoDataStyle::ConstPtr StyleBuilder::Private::adjustPisteStyle(const StyleParame
     GeoDataStyle::Ptr newStyle(new GeoDataStyle(*style));
     newStyle->setPolyStyle(polyStyle);
     newStyle->setLineStyle(lineStyle);
-    style = newStyle;
     m_styleCache.insert(styleCacheKey, newStyle);
-    return style;
+    return newStyle;
 }
 
 GeoDataStyle::Ptr StyleBuilder::Private::createStyle( qreal width, qreal realWidth, const QColor& color,
