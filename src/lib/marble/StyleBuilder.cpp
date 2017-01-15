@@ -328,7 +328,7 @@ GeoDataStyle::ConstPtr StyleBuilder::Private::createPlacemarkStyle(const StylePa
                     adjustStyle = true;
                 }
             }
-        } else if (visualCategory >= GeoDataPlacemark::PisteDownhill && visualCategory <= GeoDataPlacemark::PisteSkiJump) {
+        } else if (visualCategory == GeoDataPlacemark::PisteDownhill) {
             return adjustPisteStyle(parameters, style);
         }
 
@@ -461,7 +461,7 @@ GeoDataStyle::ConstPtr StyleBuilder::Private::createPlacemarkStyle(const StylePa
                 float const width = widthValue.toFloat(&ok);
                 lineStyle.setPhysicalWidth(ok ? qBound(0.1f, width, 200.0f) : 0.0f);
             }
-        } else if (visualCategory >= GeoDataPlacemark::PisteDownhill && visualCategory <= GeoDataPlacemark::PisteSkiJump) {
+        } else if (visualCategory == GeoDataPlacemark::PisteDownhill) {
             return adjustPisteStyle(parameters, style);
         }
 
@@ -492,7 +492,7 @@ GeoDataStyle::ConstPtr StyleBuilder::Private::createPlacemarkStyle(const StylePa
                     adjustStyle = true;
                 }
             }
-        } else if (visualCategory >= GeoDataPlacemark::PisteDownhill && visualCategory <= GeoDataPlacemark::PisteSkiJump) {
+        } else if (visualCategory == GeoDataPlacemark::PisteDownhill) {
             return adjustPisteStyle(parameters, style);
         }
 
