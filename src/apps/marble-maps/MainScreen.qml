@@ -56,6 +56,9 @@ ApplicationWindow {
         colorGroup: SystemPalette.Active
     }
 
+    Settings {
+        id: settings
+    }
 
     Item {
         id: mapItem
@@ -91,7 +94,7 @@ ApplicationWindow {
 
                 // Theme settings.
                 projection: smallZoom ? MarbleItem.Spherical : MarbleItem.Mercator
-                mapThemeId: "earth/vectorosm/vectorosm.dgml"
+                mapThemeId: settings.value("MarbleMaps", "mapThemeId", "earth/vectorosm/vectorosm.dgml")
 
                 // Visibility of layers/plugins.
                 showFrameRate: false

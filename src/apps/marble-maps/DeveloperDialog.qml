@@ -29,6 +29,7 @@ Item {
         id: settings
 
         Component.onDestruction: {
+            settings.setValue("MarbleMaps", "mapThemeId", marbleMaps.mapThemeId)
             settings.setValue("localization", "translationsDisabled", ignoreTranslations.checked ? "true" : "false")
             settings.setValue("localization", "translationFile", localizationItem.translationFile)
             settings.setValue("Developer", "inertialGlobeRotation", marbleMaps.inertialGlobeRotation)
@@ -73,10 +74,17 @@ Item {
                         text: "Tools"
                     }
                     Grid {
-                        columns: 2
+                        columns: 3
                         flow: Grid.TopToBottom
                         rowSpacing: Screen.pixelDensity * 0.5
                         columnSpacing: Screen.pixelDensity * 2
+
+                        CheckBox {
+                            id: mapTheme
+                            text: "Development Tiles"
+                            checked: settings.value("MarbleMaps", "mapThemeId") === "earth/vectorosm-dev/vectorosm-dev.dgml"
+                            onCheckedChanged: marbleMaps.mapThemeId = checked ? "earth/vectorosm-dev/vectorosm-dev.dgml" : "earth/vectorosm/vectorosm.dgml"
+                        }
 
                         CheckBox {
                             id: debugTags
