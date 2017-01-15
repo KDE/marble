@@ -28,7 +28,9 @@
 namespace Marble
 {
 
-const void *GeoLineStringGraphicsItem::s_previousStyle = 0;
+const GeoDataStyle *GeoLineStringGraphicsItem::s_previousStyle = 0;
+bool GeoLineStringGraphicsItem::s_paintInline = true;
+bool GeoLineStringGraphicsItem::s_paintOutline = true;
 
 GeoLineStringGraphicsItem::GeoLineStringGraphicsItem(const GeoDataPlacemark *placemark,
                                                      const GeoDataLineString *lineString) :
@@ -194,15 +196,13 @@ void GeoLineStringGraphicsItem::paintInline(GeoPainter* painter, const ViewportP
         return;
     }
 
-    bool isValid = true;
     if (s_previousStyle != style().data()) {
-        isValid = configurePainterForLine(painter, viewport, false);
+        s_paintInline = configurePainterForLine(painter, viewport, false);
     }
     s_previousStyle = style().data();
 
-    m_renderLabel = painter->pen().widthF() >= 6.0f;
-
-    if (isValid) {
+    if (s_paintInline) {
+      m_renderLabel = painter->pen().widthF() >= 6.0f;
       m_penWidth = painter->pen().widthF();
       foreach(const QPolygonF* itPolygon, m_cachedPolygons) {
           painter->drawPolyline(*itPolygon);
@@ -216,13 +216,12 @@ void GeoLineStringGraphicsItem::paintOutline(GeoPainter *painter, const Viewport
         return;
     }
 
-    bool isValid = true;
     if (s_previousStyle != style().data()) {
-        isValid = configurePainterForLine(painter, viewport, true);
+        s_paintOutline = configurePainterForLine(painter, viewport, true);
     }
     s_previousStyle = style().data();
 
-    if (isValid) {
+    if (s_paintOutline) {
         foreach(const QPolygonF* itPolygon, m_cachedPolygons) {
             painter->drawPolyline(*itPolygon);
         }

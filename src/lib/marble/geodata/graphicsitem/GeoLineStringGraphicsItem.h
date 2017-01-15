@@ -40,7 +40,9 @@ public:
     void paint(GeoPainter* painter, const ViewportParams *viewport, const QString &layer, int tileZoomLevel) override;
     bool contains(const QPoint &screenPosition, const ViewportParams *viewport) const override;
 
-    static const void *s_previousStyle;
+    static const GeoDataStyle *s_previousStyle;
+    static bool s_paintInline;
+    static bool s_paintOutline;
 
 private:
     void paintOutline(GeoPainter *painter, const ViewportParams *viewport) const;
