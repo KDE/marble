@@ -1189,7 +1189,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::AerialwayGoods]           = createIconWayStyle("#bbbbbb", osmFont, transportationColor);
 
     m_defaultStyle[GeoDataPlacemark::PisteDownhill]            = createStyle(9, 0.0, "#dddddd", Qt::transparent, true, false, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false, QVector< qreal >(), osmFont, Qt::transparent);
-    m_defaultStyle[GeoDataPlacemark::PisteNordic]              = createStyle(3, 0.0, "#006666", "#006666", true, false, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false, QVector< qreal >(), osmFont, Qt::transparent);
+    m_defaultStyle[GeoDataPlacemark::PisteNordic]              = createStyle(3, 0.0, "#fffafa", "#006666", true, false, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false, QVector< qreal >(), osmFont, Qt::transparent, MarbleDirs::path("bitmaps/osmcarto/patterns/ice.png"));
     m_defaultStyle[GeoDataPlacemark::PisteSkitour]             = m_defaultStyle[GeoDataPlacemark::PisteNordic];
     m_defaultStyle[GeoDataPlacemark::PisteSled]                = m_defaultStyle[GeoDataPlacemark::PisteNordic];
     m_defaultStyle[GeoDataPlacemark::PisteHike]                = m_defaultStyle[GeoDataPlacemark::PisteNordic];
