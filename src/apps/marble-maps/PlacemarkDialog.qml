@@ -80,7 +80,7 @@ Item {
             delegate: Row {
                 spacing: Screen.pixelDensity * 1
                 Image {
-                    source: "file:/" + iconSource
+                    source: iconSource
                     height: text.height
                     width: height
                     sourceSize.height: height

@@ -39,6 +39,8 @@ protected:
     QHash<int, QByteArray> roleNames() const;
 
 private:
+    QString svgFile(const QString &path) const;
+
     QVector<const Marble::GeoDataRelation*> m_relations;
 };
 
