@@ -57,7 +57,7 @@ GeoDataPlacemark *OsmNode::create() const
     }
     if (category == GeoDataPlacemark::AerialwayStation && coordinates.altitude() != 0.0) {
         if (placemark->name().isEmpty()) {
-            placemark->setName(QStringLiteral("%1 m"));
+            placemark->setName(QStringLiteral("%1 m").arg(coordinates.altitude()));
         } else {
             placemark->setName(QStringLiteral("%1 (%2 m)").arg(placemark->name()).arg(coordinates.altitude()));
         }
