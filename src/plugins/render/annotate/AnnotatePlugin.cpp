@@ -107,7 +107,9 @@ AnnotatePlugin::~AnnotatePlugin()
 
     delete m_clipboardItem;
 
-    disconnect( this, SIGNAL(mouseMoveGeoPosition(QString)), m_marbleWidget, SIGNAL(mouseMoveGeoPosition(QString)) );
+    if ( m_marbleWidget ) {
+        disconnect( this, SIGNAL(mouseMoveGeoPosition(QString)), m_marbleWidget, SIGNAL(mouseMoveGeoPosition(QString)) );
+    }
 }
 
 QStringList AnnotatePlugin::backendTypes() const
