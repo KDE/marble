@@ -499,15 +499,18 @@
          </para>
          <para>
            You can keep using &marble; while the <guilabel>Download Region</guilabel> dialog is open. This is useful to queue several downloads for different regions or different tile ranges. Just select <guilabel>Apply</guilabel> instead of <guilabel>OK</guilabel> to trigger the map region download.
-         </para>	 
+         </para>
+         </chapter>
+         
      <chapter id="recording-movie">
-       <sect1 id="recording-movie-recording">
 	 	<title>Recording a movie with &marble;</title>
+       <sect1 id="recording-movie-recording">
+           <title>Recording a movie with &marble;</title>
 	 	<para>
 	 	  To record a movie with Marble, use this function for recording.
 	 	</para>
 	 	<para>
-	 	  Begin recording from the <guilabel>Record Movie</guilabel> dialog in the <guilabel>Edit</guilabel> menu. Or you can start it by pressing <keycombo>Ctrl + Shift + R</keycombo>. You will see a dialog like this:
+	 	  Begin recording from the <guilabel>Record Movie</guilabel> dialog in the <guilabel>Edit</guilabel> menu. Or you can start it by pressing <keycombo>&Ctrl; &Shift;<keycap>R</keycap></keycombo>. You will see a dialog like this:
 	 	</para>
 	 	<screenshot>
          	    <screeninfo>&marble; Record Movie dialog</screeninfo>
@@ -523,15 +526,17 @@
 		  When all is set, you can start recording. To start, click the <guilabel>Start</guilabel> button. Once this is done you can zoom and pan around and Marble will capture a video of your journey across the globe.
 		</para>
 	 	<para>
-	 	  To stop recording of the movie and save it, click <guilabel>Stop Recording</guilabel> in the <guilabel>Edit</guilabel> menu or press <keycombo>Ctrl + Shift + S</keycombo>.
+	 	  To stop recording of the movie and save it, click <guilabel>Stop Recording</guilabel> in the <guilabel>Edit</guilabel> menu or press <keycombo>&Ctrl; &Shift;<keycap>S</keycap></keycombo>.
 	 	</para>
+        
+        <sect2 id="recording-movie-troubleshooting">
+        <title>Troubleshooting</title>
+        <para>
+            There may appear an error message because avconv or ffmpeg are not installed. Download from <ulink url="http://ffmpeg.org/download.html">ffmpeg's downloads page</ulink> and <ulink url="https://libav.org/download.html">avconv's downloads page</ulink> or use packages from your distribution.
+        </para>
+        </sect2>
 	</sect1>
-	<sect2 id="recording-movie-troubleshooting">
-	  <title>Troubleshooting</title>
-	  <para>
-	    There may appear an error message because avconv or ffmpeg are not installed. Download from <link linkend="http://ffmpeg.org/download.html">ffmpeg's downloads page</link> and <link linkend="https://libav.org/download.html">avconv's downloads page</link> or use packages from your distribution.
-	  </para>
-	</sect2>
+	
      </chapter>
 
 	 <chapter id="commands">
