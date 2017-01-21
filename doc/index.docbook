@@ -499,7 +499,39 @@
          </para>
          <para>
            You can keep using &marble; while the <guilabel>Download Region</guilabel> dialog is open. This is useful to queue several downloads for different regions or different tile ranges. Just select <guilabel>Apply</guilabel> instead of <guilabel>OK</guilabel> to trigger the map region download.
-         </para>
+         </para>	 
+     <chapter id="recording-movie">
+       <sect1 id="recording-movie-recording">
+	 	<title>Recording a movie with &marble;</title>
+	 	<para>
+	 	  To record a movie with Marble, use this function for recording.
+	 	</para>
+	 	<para>
+	 	  Begin recording from the <guilabel>Record Movie</guilabel> dialog in the <guilabel>Edit</guilabel> menu. Or you can start it by pressing <keycombo>Ctrl + Shift + R</keycombo>. You will see a dialog like this:
+	 	</para>
+	 	<screenshot>
+         	    <screeninfo>&marble; Record Movie dialog</screeninfo>
+         	    <mediaobject>
+         	        <imageobject><imagedata fileref="movie-1.png" format="PNG" /></imageobject>
+         	        <textobject><phrase>&marble;'s Record Movie dialog</phrase></textobject>
+         	    </mediaobject>
+         	</screenshot>
+	 	<para>
+	 	  Press the <guilabel>Open</guilabel> button to choose the name and destination directory of the movie. Also you can change the frames per second (FPS) of the movie between 1 and 60.
+	 	</para>
+		<para>
+		  When all is set, you can start recording. To start, click the <guilabel>Start</guilabel> button. Once this is done you can zoom and pan around and Marble will capture a video of your journey across the globe.
+		</para>
+	 	<para>
+	 	  To stop recording of the movie and save it, click <guilabel>Stop Recording</guilabel> in the <guilabel>Edit</guilabel> menu or press <keycombo>Ctrl + Shift + S</keycombo>.
+	 	</para>
+	</sect1>
+	<sect2 id="recording-movie-troubleshooting">
+	  <title>Troubleshooting</title>
+	  <para>
+	    There may appear an error message because avconv or ffmpeg are not installed. Download from <link linkend="http://ffmpeg.org/download.html">ffmpeg's downloads page</link> and <link linkend="https://libav.org/download.html">avconv's downloads page</link> or use packages from your distribution.
+	  </para>
+	</sect2>
      </chapter>
 
 	 <chapter id="commands">
@@ -637,6 +669,26 @@
                                  <guimenuitem>Edit Map</guimenuitem>
                          </menuchoice></term>
 			 <listitem><para><action>Allows</action> you to open the current map in the external map editor. The current version supports <application>Potlatch</application> (in a web browser), <application>Merkaartor</application> and <application>JOSM</application> map editors.</para></listitem>
+                     </varlistentry>
+		     <varlistentry>
+                         <term><menuchoice>
+			         <shortcut>
+                                     <keycombo action="simul">&Ctrl; &Shift;<keycap>R</keycap></keycombo>
+                                 </shortcut>
+                                 <guimenu>Edit</guimenu>
+                                 <guimenuitem>Record Movie</guimenuitem>
+                         </menuchoice></term>
+                         <listitem><para><action>Records</action> a movie with Marble.</para></listitem>
+                     </varlistentry>
+		     <varlistentry>
+                         <term><menuchoice>
+                                 <shortcut>
+                                     <keycombo action="simul">&Ctrl; &Shift;<keycap>S</keycap></keycombo>
+                                 </shortcut>
+			         <guimenu>Edit</guimenu>
+                                 <guimenuitem>Stop Recording</guimenuitem>
+                         </menuchoice></term>
+                         <listitem><para><action>Stops</action> the current recording of movie.</para></listitem>
                      </varlistentry>
                  </variablelist>
 
