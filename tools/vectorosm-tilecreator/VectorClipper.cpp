@@ -86,13 +86,7 @@ GeoDataDocument *VectorClipper::clipTo(const GeoDataLatLonBox &tileBoundary, int
     }
 
     for (auto relation: m_relations) {
-        bool const hasMember =
-#if QT_VERSION >= 0x050600 // intersects was introduced in Qt 5.6.
-        relation->memberIds().intersects(osmIds);
-#else
-        !relation->memberIds().intersect(osmIds).isEmpty();
-#endif
-        if (hasMember) {
+        if (relation->containsAnyOf(osmIds)) {
             GeoDataRelation* multi = new GeoDataRelation;
             multi->osmData() = relation->osmData();
             tile->append(multi);

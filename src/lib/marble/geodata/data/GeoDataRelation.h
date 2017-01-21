@@ -59,6 +59,7 @@ public:
 
     RelationType relationType() const;
     QSet<qint64> memberIds() const;
+    bool containsAnyOf(const QSet<qint64> &memberIds) const;
 
 private:
     GeoDataRelationPrivate* d_ptr;

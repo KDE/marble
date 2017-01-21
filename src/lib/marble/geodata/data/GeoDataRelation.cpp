@@ -140,4 +140,14 @@ QSet<qint64> GeoDataRelation::memberIds() const
     return d->m_memberIds;
 }
 
+bool GeoDataRelation::containsAnyOf(const QSet<qint64> &memberIds) const
+{
+    Q_D(const GeoDataRelation);
+#if QT_VERSION >= 0x050600 // intersects was introduced in Qt 5.6.
+        return d->m_memberIds.intersects(memberIds);
+#else
+        return !(d->m_memberIds.intersect(memberIds).isEmpty());
+#endif
+}
+
 }
