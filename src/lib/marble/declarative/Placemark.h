@@ -64,7 +64,6 @@ public:
     double latitude() const;
     const QStringList & tags() const;
 
-    void setRelations(const QVector<const Marble::GeoDataRelation*> &relations);
     RouteRelationModel* routeRelationModel();
 
 public Q_SLOTS:
@@ -92,6 +91,7 @@ private:
     QString addressFromOsmData() const;
     QString formatStreet(const QString &street, const QString &houseNumber) const;
     void updateTags();
+    void updateRelations(const GeoDataPlacemark &placemark);
 
     Marble::GeoDataPlacemark m_placemark;
     mutable QString m_address; // mutable to allow lazy calculation in the getter

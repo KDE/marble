@@ -11,6 +11,7 @@
 #include "RouteRelationModel.h"
 
 #include "MarbleDirs.h"
+#include "osm/OsmPlacemarkData.h"
 
 namespace Marble
 {
@@ -21,7 +22,7 @@ RouteRelationModel::RouteRelationModel(QObject *parent) :
     // nothing to do
 }
 
-void RouteRelationModel::setRelations(const QVector<const GeoDataRelation*> &relations)
+void RouteRelationModel::setRelations(const QSet<const GeoDataRelation*> &relations)
 {
     if (!m_relations.isEmpty()) {
         beginRemoveRows(QModelIndex(), 0, m_relations.count() - 1);

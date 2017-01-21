@@ -12,7 +12,7 @@
 #define MARBLE_DECLARATIVE_ROUTERELATIONMODEL_H
 
 #include <QAbstractListModel>
-#include <QVector>
+#include <QSet>
 
 #include "GeoDataRelation.h"
 
@@ -29,14 +29,14 @@ public:
 
     RouteRelationModel(QObject* parent = 0);
     
-    void setRelations(const QVector<const Marble::GeoDataRelation*> &relations);
+    void setRelations(const QSet<const GeoDataRelation *> &relations);
     
     int rowCount(const QModelIndex & parent = QModelIndex()) const override;
     
     QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const override;
     
 protected:
-    QHash<int, QByteArray> roleNames() const;
+    QHash<int, QByteArray> roleNames() const override;
 
 private:
     QString svgFile(const QString &path) const;

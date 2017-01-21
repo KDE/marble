@@ -18,6 +18,8 @@
 #include <osm/OsmPlacemarkData.h>
 #include "GeoDataStyle.h"
 #include "GeoDataIconStyle.h"
+#include "GeoDataTypes.h"
+#include "GeoDataDocument.h"
 
 namespace Marble {
 
@@ -38,6 +40,7 @@ void Placemark::setGeoDataPlacemark( const Marble::GeoDataPlacemark &placemark )
     m_wheelchairInfo = QString();
     m_wifiAvailable = QString();
     updateTags();
+    updateRelations(placemark);
     emit coordinatesChanged();
     emit nameChanged();
     emit descriptionChanged();
@@ -589,11 +592,6 @@ void Placemark::setName(const QString & name)
     emit nameChanged();
 }
 
-void Placemark::setRelations(const QVector<const Marble::GeoDataRelation*> &relations)
-{
-    m_relationModel.setRelations(relations);
-}
-
 RouteRelationModel* Placemark::routeRelationModel()
 {
     return &m_relationModel;
@@ -683,6 +681,44 @@ void Placemark::updateTags()
     QString const tag = QStringLiteral("%1 = %2");
     for (auto iter = m_placemark.osmData().tagsBegin(), end = m_placemark.osmData().tagsEnd(); iter != end; ++iter) {
         m_tags << tag.arg(iter.key()).arg(iter.value());
+    }
+}
+
+void Placemark::updateRelations(const Marble::GeoDataPlacemark &placemark)
+{
+    if (placemark.parent() && placemark.parent()->nodeType() == GeoDataTypes::GeoDataDocumentType) {
+        QVector<const GeoDataRelation*> allRelations;
+        QSet<const GeoDataRelation*> relevantRelations;
+        auto const document = static_cast<const GeoDataDocument*>(placemark.parent());
+        QSet<qint64> placemarkIds;
+        auto const & osmData = placemark.osmData();
+        placemarkIds << osmData.oid();
+        bool const searchRelations = osmData.tagValue(QStringLiteral("highway")) == QStringLiteral("bus_stop") ||
+                osmData.tagValue(QStringLiteral("public_transport")) == QStringLiteral("station") ||
+                osmData.tagValue(QStringLiteral("railway")) == QStringLiteral("station");
+        for (auto feature: document->featureList()) {
+            if (feature->nodeType() == GeoDataTypes::GeoDataRelationType) {
+                auto relation = static_cast<const GeoDataRelation*>(feature);
+                allRelations << relation;
+                if (searchRelations && relation->memberIds().contains(osmData.oid())) {
+                    if (relation->osmData().containsTag(QStringLiteral("type"), QStringLiteral("public_transport")) &&
+                        relation->osmData().containsTag(QStringLiteral("public_transport"), QStringLiteral("stop_area"))) {
+                        for (auto iter = relation->osmData().relationReferencesBegin(), end = relation->osmData().relationReferencesEnd();
+                             iter != end; ++iter) {
+                            if (iter.value() == QStringLiteral("stop") || iter.value() == QStringLiteral("platform")) {
+                                placemarkIds << iter.key();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        for (auto relation: allRelations) {
+            if (relation->containsAnyOf(placemarkIds)) {
+                relevantRelations << relation;
+            }
+        }
+        m_relationModel.setRelations(relevantRelations);
     }
 }
 
