@@ -482,7 +482,7 @@ void BookmarkManagerDialogPrivate::importBookmarksRecursively( GeoDataContainer 
                 QAbstractButton *replaceAllButton = messageBox->addButton(tr( "Replace All" ), QMessageBox::ActionRole );
                 QAbstractButton *skipButton       = messageBox->addButton(tr( "Skip" ),        QMessageBox::ActionRole );
                 QAbstractButton *skipAllButton    = messageBox->addButton(tr( "Skip All" ),    QMessageBox::ActionRole );
-                                                    messageBox->addButton(tr( "Cancel" ),      QMessageBox::RejectRole );
+                                                    messageBox->addButton( QMessageBox::Cancel );
                 messageBox->setIcon( QMessageBox::Question );
 
                 if ( !replaceAll ) {
