@@ -39,6 +39,14 @@ void RouteRelationModel::setRelations(const QSet<const GeoDataRelation*> &relati
         });
         std::sort(m_relations.begin(), m_relations.end(),
         [](const GeoDataRelation * a, const GeoDataRelation * b) {
+            if (a->relationType() == b->relationType()) {
+                auto const refA = a->osmData().tagValue(QStringLiteral("ref"));
+                auto const refB = b->osmData().tagValue(QStringLiteral("ref"));
+                if (refA == refB) {
+                    return a->name() < b->name();
+                }
+                return refA < refB;
+            }
             return a->relationType() < b->relationType();
         });
         endInsertRows();
