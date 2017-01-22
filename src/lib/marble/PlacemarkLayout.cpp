@@ -235,25 +235,28 @@ void PlacemarkLayout::addPlacemarks( const QModelIndex& parent, int first, int l
     for( int i=first; i<=last; ++i ) {
         QModelIndex index = m_placemarkModel->index( i, 0, parent );
         Q_ASSERT( index.isValid() );
-        const GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
-        const GeoDataCoordinates coordinates = placemarkIconCoordinates( placemark );
-        if ( !coordinates.isValid() ) {
-            continue;
-        }
-
-        if (placemark->hasOsmData()) {
-            qint64 const osmId = placemark->osmData().id();
-            if (osmId > 0) {
-                if (m_osmIds.contains(osmId)) {
-                    continue; // placemark is already shown
-                }
-                m_osmIds << osmId;
+        auto const object = qvariant_cast<GeoDataObject*>(index.data(MarblePlacemarkModel::ObjectPointerRole));
+        if (object->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
+            const GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(object);
+            const GeoDataCoordinates coordinates = placemarkIconCoordinates( placemark );
+            if ( !coordinates.isValid() ) {
+                continue;
             }
-        }
 
-        int zoomLevel = placemark->zoomLevel();
-        TileId key = TileId::fromCoordinates( coordinates, zoomLevel );
-        m_placemarkCache[key].append( placemark );
+            if (placemark->hasOsmData()) {
+                qint64 const osmId = placemark->osmData().id();
+                if (osmId > 0) {
+                    if (m_osmIds.contains(osmId)) {
+                        continue; // placemark is already shown
+                    }
+                    m_osmIds << osmId;
+                }
+            }
+
+            int zoomLevel = placemark->zoomLevel();
+            TileId key = TileId::fromCoordinates( coordinates, zoomLevel );
+            m_placemarkCache[key].append( placemark );
+        }
     }
     emit repaintNeeded();
 }
