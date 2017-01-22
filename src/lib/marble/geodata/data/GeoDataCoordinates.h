@@ -424,7 +424,7 @@ class GEODATA_EXPORT GeoDataCoordinates
     static const GeoDataCoordinates null;
 };
 
-uint qHash(const GeoDataCoordinates& coordinates );
+GEODATA_EXPORT uint qHash(const GeoDataCoordinates& coordinates );
 
 
 }
