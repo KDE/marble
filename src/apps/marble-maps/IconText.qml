@@ -37,7 +37,7 @@ Item {
         anchors.left: icon.right
         anchors.right: parent.right
         anchors.leftMargin: icon.width === 0 ? 0 : Screen.pixelDensity * 1
-        font.pointSize: 14
+        font.pointSize: 16
         wrapMode: Text.WordWrap
         elide: Text.ElideRight
 
