@@ -24,7 +24,15 @@ class RouteRelationModel : public QAbstractListModel
 
 public:
     enum RouteRelationRoles {
-        IconSource = Qt::UserRole + 1
+        IconSource = Qt::UserRole + 1,
+        Description,
+        Network,
+        RouteColor,
+        TextColor,
+        RouteFrom,
+        RouteTo,
+        RouteRef,
+        RouteVia
     };
 
     RouteRelationModel(QObject* parent = 0);
@@ -34,7 +42,7 @@ public:
     int rowCount(const QModelIndex & parent = QModelIndex()) const override;
     
     QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const override;
-    
+
 protected:
     QHash<int, QByteArray> roleNames() const override;
 
@@ -42,6 +50,7 @@ private:
     QString svgFile(const QString &path) const;
 
     QVector<const Marble::GeoDataRelation*> m_relations;
+    QMap<QString, QString> m_networks;
 };
 
 }

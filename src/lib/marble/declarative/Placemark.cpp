@@ -693,16 +693,25 @@ void Placemark::updateRelations(const Marble::GeoDataPlacemark &placemark)
         QSet<qint64> placemarkIds;
         auto const & osmData = placemark.osmData();
         placemarkIds << osmData.oid();
-        bool const searchRelations = osmData.tagValue(QStringLiteral("highway")) == QStringLiteral("bus_stop") ||
-                osmData.tagValue(QStringLiteral("public_transport")) == QStringLiteral("station") ||
-                osmData.tagValue(QStringLiteral("railway")) == QStringLiteral("station");
+        bool searchRelations = true;
         for (auto feature: document->featureList()) {
             if (feature->nodeType() == GeoDataTypes::GeoDataRelationType) {
                 auto relation = static_cast<const GeoDataRelation*>(feature);
                 allRelations << relation;
-                if (searchRelations && relation->memberIds().contains(osmData.oid())) {
-                    if (relation->osmData().containsTag(QStringLiteral("type"), QStringLiteral("public_transport")) &&
-                        relation->osmData().containsTag(QStringLiteral("public_transport"), QStringLiteral("stop_area"))) {
+                if (relation->memberIds().contains(osmData.oid())) {
+                    relevantRelations << relation;
+                    auto const isRoute = relation->osmData().tagValue(QStringLiteral("type")) == QStringLiteral("route");
+                    searchRelations &= !isRoute;
+                }
+            }
+        }
+        if (searchRelations) {
+            for (auto feature: document->featureList()) {
+                if (feature->nodeType() == GeoDataTypes::GeoDataRelationType) {
+                    auto relation = static_cast<const GeoDataRelation*>(feature);
+                    if (relevantRelations.contains(relation) &&
+                            relation->osmData().containsTag(QStringLiteral("type"), QStringLiteral("public_transport")) &&
+                            relation->osmData().containsTag(QStringLiteral("public_transport"), QStringLiteral("stop_area"))) {
                         for (auto iter = relation->osmData().relationReferencesBegin(), end = relation->osmData().relationReferencesEnd();
                              iter != end; ++iter) {
                             if (iter.value() == QStringLiteral("stop") || iter.value() == QStringLiteral("platform")) {

@@ -9,9 +9,10 @@
 //
 
 import QtQuick 2.3
-import QtQuick.Controls 1.3
 import QtQuick.Window 2.2
 import QtQuick.Controls 2.0
+import QtQuick.Layouts 1.3
+import QtQuick.Dialogs 1.2
 
 import org.kde.marble 0.20
 
@@ -72,35 +73,20 @@ Item {
             text: placemark === null ? "" : placemark.description
         }
 
-        ListView {
-            model: placemark ? placemark.routeRelationModel : undefined
-            width: parent.width
-            height: Math.min(Screen.pixelDensity * 25, contentHeight)
-            clip: true
-            delegate: Row {
-                spacing: Screen.pixelDensity * 1
-                Image {
-                    source: iconSource
-                    height: text.height
-                    width: height
-                    sourceSize.height: height
-                    sourceSize.width: width
-                    fillMode: Image.PreserveAspectFit
-                }
-                Text {
-                    id: text
-                    font.pointSize: 14
-                    text: display
-                }
-            }
-            ScrollBar.vertical: ScrollBar {}
-        }
-
         IconText {
             width: parent.width
             visible: text.length > 0
             text: placemark === null ? "" : placemark.address
             maximumLineCount: 4
+        }
+
+        IconText {
+            width: parent.width
+            visible: routesItem.count > 0
+            text: "<a href=\"#\">Part of " + routesItem.count + " routes</a>"
+            maximumLineCount: 4
+            linkColor: palette.text
+            onLinkActivated: routesDialog.open()
         }
 
         IconText {
@@ -196,6 +182,16 @@ Item {
                 }
                 bookmarkButton.bookmark = !bookmarkButton.bookmark
             }
+        }
+    }
+
+    Dialog {
+        id: routesDialog
+        title: qsTr("Routes")
+        RoutesItem {
+            id: routesItem
+            implicitWidth: parent.width
+            model: placemark === null ? undefined : placemark.routeRelationModel
         }
     }
 }

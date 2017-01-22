@@ -19,7 +19,22 @@ namespace Marble
 RouteRelationModel::RouteRelationModel(QObject *parent) :
     QAbstractListModel(parent)
 {
-    // nothing to do
+    m_networks[QStringLiteral("iwn")] = tr("International walking route");
+    m_networks[QStringLiteral("nwn")] = tr("National walking route");
+    m_networks[QStringLiteral("rwn")] = tr("Regional walking route");
+    m_networks[QStringLiteral("lwn")] = tr("Local walking route");
+    m_networks[QStringLiteral("icn")] = tr("International cycling route");
+    m_networks[QStringLiteral("ncn")] = tr("National cycling route");
+    m_networks[QStringLiteral("rcn")] = tr("Regional cycling route");
+    m_networks[QStringLiteral("lcn")] = tr("Local cycling route");
+    m_networks[QStringLiteral("US:TX:FM")] = tr("Farm to Market Road", "State or county road in Texas, USA");
+    m_networks[QStringLiteral("regional")] = tr("Regional route");
+    m_networks[QStringLiteral("national")] = tr("National route");
+    m_networks[QStringLiteral("municipal")] = tr("Municipal route");
+    m_networks[QStringLiteral("territorial")] = tr("Territorial route");
+    m_networks[QStringLiteral("local")] = tr("Local route");
+    m_networks[QStringLiteral("prefectural")] = tr("Prefectural route");
+    m_networks[QStringLiteral("US")] = tr("United States route");
 }
 
 void RouteRelationModel::setRelations(const QSet<const GeoDataRelation*> &relations)
@@ -88,6 +103,43 @@ QVariant RouteRelationModel::data(const QModelIndex & index, int role) const
         case GeoDataRelation::RouteSled:         return svgFile("thenounproject/365217-sled.svg");
         case GeoDataRelation::UnknownType:       return QVariant(QString());
         }
+    } else if (role == Description) {
+        return m_relations.at(index.row())->osmData().tagValue(QStringLiteral("description"));
+    } else if (role == Network) {
+        auto const network = m_relations.at(index.row())->osmData().tagValue(QStringLiteral("network"));
+        auto iter = m_networks.find(network);
+        if (iter != m_networks.end()) {
+            return *iter;
+        }
+        auto const fields = network.split(':', QString::SkipEmptyParts);
+        for (auto const &field: fields) {
+            auto iter = m_networks.find(field);
+            if (iter != m_networks.end()) {
+                return *iter;
+            }
+        }
+        return network;
+    } else if (role == RouteColor) {
+        auto const color = m_relations.at(index.row())->osmData().tagValue(QStringLiteral("colour"));
+        return color.isEmpty() ? QStringLiteral("white") : color;
+    } else if (role == TextColor) {
+        auto const colorValue = m_relations.at(index.row())->osmData().tagValue(QStringLiteral("colour"));
+        auto const color = QColor(colorValue.isEmpty() ? QStringLiteral("white") : colorValue);
+        return color.valueF() > 0.85 ? QStringLiteral("black") : QStringLiteral("white");
+    } else if (role == RouteFrom) {
+        return m_relations.at(index.row())->osmData().tagValue(QStringLiteral("from"));
+    } else if (role == RouteTo) {
+        return m_relations.at(index.row())->osmData().tagValue(QStringLiteral("to"));
+    } else if (role == RouteRef) {
+        auto const ref = m_relations.at(index.row())->osmData().tagValue(QStringLiteral("ref"));
+        return ref.isEmpty() ? m_relations.at(index.row())->name() : ref;
+    } else if (role == RouteVia) {
+        auto const viaValue = m_relations.at(index.row())->osmData().tagValue(QStringLiteral("via"));
+        auto viaList = viaValue.split(';', QString::SkipEmptyParts);
+        for (auto &via: viaList) {
+            via = via.trimmed();
+        }
+        return viaList;
     }
 
     return QVariant();
@@ -98,6 +150,14 @@ QHash<int, QByteArray> RouteRelationModel::roleNames() const
     QHash<int, QByteArray> roles;
     roles[Qt::DisplayRole] = "display";
     roles[IconSource] = "iconSource";
+    roles[Description] = "description";
+    roles[Network] = "network";
+    roles[RouteColor] = "routeColor";
+    roles[TextColor] = "textColor";
+    roles[RouteFrom] = "routeFrom";
+    roles[RouteTo] = "routeTo";
+    roles[RouteRef] = "routeRef";
+    roles[RouteVia] = "routeVia";
     return roles;
 }
 

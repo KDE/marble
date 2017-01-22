@@ -20,6 +20,7 @@
         <file>ProfileSelectorMenu.qml</file>
         <file>FloatingMenuButton.qml</file>
         <file>RouteEditor.qml</file>
+        <file>RoutesItem.qml</file>
         <file>NavigationInfoBar.qml</file>
         <file>NavigationManager.qml</file>
         <file>PositionMarker.qml</file>
