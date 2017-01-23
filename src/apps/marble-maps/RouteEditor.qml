@@ -162,7 +162,7 @@ Item {
                 }
             }
 
-            ScrollBar {
+            MarbleScrollBar {
                 id: scrollBar
                 flickableItem: waypointList
             }

@@ -70,6 +70,6 @@
         <file alias="konqi/globe.png">konqi/konqi-globe.png</file>
         <file alias="konqi/books.png">konqi/konqi-books.png</file>
         <file>RouteProfileRadioButton.qml</file>
-        <file>ScrollBar.qml</file>
+        <file>MarbleScrollBar.qml</file>
     </qresource>
 </RCC>

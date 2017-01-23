@@ -91,7 +91,7 @@ Item {
         }
     }
 
-    ScrollBar {
+    MarbleScrollBar {
         id: scrollBar
         flickableItem: view
     }
