@@ -192,6 +192,7 @@ Item {
             id: routesItem
             implicitWidth: parent.width
             model: placemark === null ? undefined : placemark.routeRelationModel
+            onHighlightChanged: map.highlightRouteRelation(oid, enabled)
         }
     }
 }

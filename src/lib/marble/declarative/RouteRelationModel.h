@@ -32,7 +32,9 @@ public:
         RouteFrom,
         RouteTo,
         RouteRef,
-        RouteVia
+        RouteVia,
+        OsmId,
+        RouteVisible
     };
 
     RouteRelationModel(QObject* parent = 0);

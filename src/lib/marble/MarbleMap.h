@@ -695,6 +695,8 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
     void downloadRegion( QVector<TileCoordsPyramid> const & );
 
+    void highlightRouteRelation(qint64 osmId, bool enabled);
+
  Q_SIGNALS:
     void tileLevelChanged( int level );
 

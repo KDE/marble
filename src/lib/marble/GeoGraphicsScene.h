@@ -75,6 +75,8 @@ public:
      */
     QList<GeoGraphicsItem*> selectedItems() const;
 
+    void resetStyle();
+
 public Q_SLOTS:
     void applyHighlight( const QVector<GeoDataPlacemark*>& );
 

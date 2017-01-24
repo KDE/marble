@@ -53,6 +53,8 @@ public:
 
     QVector<const GeoDataFeature*> whichFeatureAt( const QPoint& curpos, const ViewportParams * viewport );
 
+    void highlightRouteRelation(qint64 osmId, bool enabled);
+
 public Q_SLOTS:
     void addPlacemarks( const QModelIndex& index, int first, int last );
     void removePlacemarks( const QModelIndex& index, int first, int last );

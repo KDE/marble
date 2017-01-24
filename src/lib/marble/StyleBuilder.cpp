@@ -210,8 +210,9 @@ GeoDataStyle::ConstPtr StyleBuilder::Private::createRelationStyle(const StylePar
     Q_ASSERT(parameters.relation);
     const GeoDataPlacemark *const placemark = parameters.placemark;
     auto const visualCategory = placemark->visualCategory();
-    if (visualCategory >= GeoDataPlacemark::HighwaySteps &&
-        visualCategory <= GeoDataPlacemark::HighwayMotorway) {
+    bool const isHighway = visualCategory >= GeoDataPlacemark::HighwaySteps && visualCategory <= GeoDataPlacemark::HighwayMotorway;
+    bool const isRailway = visualCategory >= GeoDataPlacemark::RailwayRail && visualCategory <= GeoDataPlacemark::RailwayFunicular;
+    if (isHighway || isRailway) {
         if (parameters.relation->relationType() == GeoDataRelation::RouteHiking &&
             parameters.relation->osmData().containsTagKey(QStringLiteral("osmc:symbol"))) {
             QString const osmcSymbolValue = parameters.relation->osmData().tagValue(QStringLiteral("osmc:symbol"));
@@ -235,7 +236,7 @@ GeoDataStyle::ConstPtr StyleBuilder::Private::createRelationStyle(const StylePar
             return style;
         }
 
-        if (parameters.relation->relationType() >= GeoDataRelation::RouteBus &&
+        if (parameters.relation->relationType() >= GeoDataRelation::RouteRoad &&
             parameters.relation->relationType() <= GeoDataRelation::RouteInlineSkates) {
             auto const colorValue = parameters.relation->osmData().tagValue(QStringLiteral("colour"));
             QString const color = QColor::isValidColor(colorValue) ? colorValue : QStringLiteral("salmon");

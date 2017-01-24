@@ -110,6 +110,8 @@ class MARBLE_EXPORT GeoGraphicsItem
      */
     void setStyleBuilder(const StyleBuilder *styleBuilder);
 
+    void resetStyle();
+
     /**
      * Set the style which will be used when
      * placemark is highlighted.

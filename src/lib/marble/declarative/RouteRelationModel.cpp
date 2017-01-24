@@ -140,6 +140,10 @@ QVariant RouteRelationModel::data(const QModelIndex & index, int role) const
             via = via.trimmed();
         }
         return viaList;
+    } else if (role == OsmId) {
+        return m_relations.at(index.row())->osmData().oid();
+    } else if (role == RouteVisible) {
+        return m_relations.at(index.row())->isVisible();
     }
 
     return QVariant();
@@ -158,6 +162,8 @@ QHash<int, QByteArray> RouteRelationModel::roleNames() const
     roles[RouteTo] = "routeTo";
     roles[RouteRef] = "routeRef";
     roles[RouteVia] = "routeVia";
+    roles[OsmId] = "oid";
+    roles[RouteVisible] = "routeVisible";
     return roles;
 }
 

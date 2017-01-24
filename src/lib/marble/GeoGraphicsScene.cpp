@@ -157,6 +157,16 @@ QList< GeoGraphicsItem* > GeoGraphicsScene::selectedItems() const
     return d->m_selectedItems;
 }
 
+void GeoGraphicsScene::resetStyle()
+{
+    for (auto const & items: d->m_tiledItems) {
+        for (auto item: items) {
+            item->resetStyle();
+        }
+    }
+    emit repaintNeeded();
+}
+
 void GeoGraphicsScene::applyHighlight( const QVector< GeoDataPlacemark* > &selectedPlacemarks )
 {
     /**

@@ -967,6 +967,11 @@ namespace Marble
         d->m_map.reload();
     }
 
+    void MarbleQuickItem::highlightRouteRelation(qint64 osmId, bool enabled)
+    {
+        d->m_map.highlightRouteRelation(osmId, enabled);
+    }
+
     QObject *MarbleQuickItem::getEventFilter() const
     {   //We would want to install the same event filter for abstract layer QuickItems such as PinchArea
         return &d->m_inputHandler;

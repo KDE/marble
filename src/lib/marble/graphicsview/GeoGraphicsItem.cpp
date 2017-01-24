@@ -110,6 +110,11 @@ void GeoGraphicsItem::setStyleBuilder(const StyleBuilder *styleBuilder)
     d->m_styleBuilder = styleBuilder;
 }
 
+void GeoGraphicsItem::resetStyle()
+{
+    d->m_style = GeoDataStyle::ConstPtr();
+}
+
 qreal GeoGraphicsItem::zValue() const
 {
     return d->m_zValue;

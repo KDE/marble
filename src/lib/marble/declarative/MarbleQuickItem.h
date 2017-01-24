@@ -139,6 +139,7 @@ namespace Marble
         Q_INVOKABLE void writeSettings();
 
         Q_INVOKABLE void reloadTiles();
+        Q_INVOKABLE void highlightRouteRelation(qint64 osmId, bool enabled);
 
     public:
         void paint(QPainter *painter) override;

@@ -22,6 +22,8 @@ Item {
 
     implicitHeight: Math.min(0.75 * Screen.height, listView.contentHeight)
 
+    signal highlightChanged(int oid, bool enabled)
+
     ListView {
         id: listView
         anchors.fill: parent
@@ -46,6 +48,7 @@ Item {
                 Column {
                     id: column
                     width: parent.width
+                    spacing: Screen.pixelDensity * 1
 
                     Item {
                         width: parent.width
@@ -91,7 +94,7 @@ Item {
                             Text {
                                 visible: text.length > 2
                                 font.pointSize: 16
-                                text: "  " + routeFrom
+                                text: "● " + routeFrom
                                 width: parent.width
                                 wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                             }
@@ -100,7 +103,7 @@ Item {
                                 model: routeCard.expanded ? routeVia : undefined
                                 Text {
                                     font.pointSize: 16
-                                    text: "◯ " + modelData
+                                    text: "○ " + modelData
                                     width: parent.width
                                     wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                                 }
@@ -109,7 +112,7 @@ Item {
                             Text {
                                 visible: text.length > 2
                                 font.pointSize: 16
-                                text: "→ " + routeTo
+                                text: "● " + routeTo
                                 width: parent.width
                                 wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                             }
@@ -148,8 +151,7 @@ Item {
                     }
 
                     Item {
-                        // TODO Add support for route highlighting in ~GeometryLayer
-                        visible: false && routeCard.expanded
+                        visible: routeCard.expanded
 
                         anchors.left: parent.left
                         anchors.right: parent.right
@@ -157,14 +159,23 @@ Item {
                         height: childrenRect.height
 
                         Switch {
+                            id: highlightSwitch
                             anchors.right: switchText.left
                             anchors.verticalCenter: switchText.verticalCenter
+
+                            checked: routeVisible
+                            onCheckedChanged: root.highlightChanged(oid, checked)
                         }
 
                         Text {
                             id: switchText
                             anchors.right: parent.right
                             text: "Highlight in Map"
+
+                            MouseArea {
+                                anchors.fill: parent
+                                onClicked: highlightSwitch.checked = !highlightSwitch.checked
+                            }
                         }
                     }
                 }

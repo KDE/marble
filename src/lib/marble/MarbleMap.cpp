@@ -571,6 +571,11 @@ void MarbleMap::downloadRegion( QVector<TileCoordsPyramid> const & pyramid )
     mDebug() << "MarbleMap::downloadRegion:" << tilesCount << "tiles, " << elapsedMs << "ms";
 }
 
+void MarbleMap::highlightRouteRelation(qint64 osmId, bool enabled)
+{
+    d->m_geometryLayer.highlightRouteRelation(osmId, enabled);
+}
+
 bool MarbleMap::propertyValue( const QString& name ) const
 {
     bool value;

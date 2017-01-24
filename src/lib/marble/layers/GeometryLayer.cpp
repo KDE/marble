@@ -105,6 +105,7 @@ public:
     QList<LayerItem> m_cachedDefaultLayer;
     QDateTime m_cachedDateTime;
     GeoDataLatLonBox m_cachedLatLonBox;
+    QSet<qint64> m_highlightedRouteRelations;
 };
 
 GeometryLayerPrivate::GeometryLayerPrivate(const QAbstractItemModel *model, const StyleBuilder *styleBuilder) :
@@ -311,6 +312,9 @@ void GeometryLayerPrivate::createGraphicsItems(const GeoDataObject *object, Feat
         for (auto feature: document->featureList()) {
             if (feature->nodeType() == GeoDataTypes::GeoDataRelationType) {
                 auto relation = static_cast<GeoDataRelation*>(feature);
+                if (m_highlightedRouteRelations.contains(relation->osmData().oid())) {
+                    relation->setVisible(true);
+                }
                 for (auto member: relation->members()) {
                     relations[member] << relation;
                 }
@@ -569,6 +573,16 @@ QVector<const GeoDataFeature*> GeometryLayer::whichFeatureAt(const QPoint &curpo
     }
 
     return result;
+}
+
+void GeometryLayer::highlightRouteRelation(qint64 osmId, bool enabled)
+{
+    if (enabled) {
+        d->m_highlightedRouteRelations << osmId;
+    } else {
+        d->m_highlightedRouteRelations.remove(osmId);
+    }
+    d->m_scene.resetStyle();
 }
 
 void GeometryLayer::handleHighlight(qreal lon, qreal lat, GeoDataCoordinates::Unit unit)
