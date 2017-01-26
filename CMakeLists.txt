@@ -246,6 +246,7 @@ add_definitions(
     -DQT_NO_CAST_TO_ASCII
     -DQT_NO_CAST_FROM_BYTEARRAY
     -DQT_STRICT_ITERATORS
+    -DQT_DISABLE_DEPRECATED_BEFORE=0x050700
 )
 
 ####################################################

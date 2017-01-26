@@ -426,7 +426,7 @@ void AbstractDataPluginModel::addItemsToList( const QList<AbstractDataPluginItem
         mDebug() << "New item " << item->id();
 
         // This find the right position in the sorted to insert the new item
-        QList<AbstractDataPluginItem*>::iterator i = qLowerBound( d->m_itemSet.begin(),
+        QList<AbstractDataPluginItem*>::iterator i = std::lower_bound( d->m_itemSet.begin(),
                                                                   d->m_itemSet.end(),
                                                                   item,
                                                                   lessThanByPointer );

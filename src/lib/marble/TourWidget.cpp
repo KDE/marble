@@ -564,7 +564,7 @@ void TourWidgetPrivate::deleteSelected()
             GeoDataPlaylist *playlist = static_cast<GeoDataPlaylist*>( rootObject );
             QModelIndex playlistIndex = m_widget->model()->treeModel()->index( playlist );
             QModelIndexList selected = m_tourUi.m_listView->selectionModel()->selectedIndexes();
-            std::sort( selected.begin(), selected.end(), qGreater<QModelIndex>() );
+            std::sort( selected.begin(), selected.end(), [](const QModelIndex &a, const QModelIndex &b) { return b < a; } );
             QModelIndexList::iterator end = selected.end();
             QModelIndexList::iterator iter = selected.begin();
             for( ; iter != end; ++iter ) {
@@ -586,7 +586,7 @@ void TourWidgetPrivate::updateButtonsStates()
         m_tourUi.m_actionMoveUp->setEnabled( false );
     } else {
         m_tourUi.m_actionDelete->setEnabled( true );
-        std::sort( selectedIndexes.begin(), selectedIndexes.end(), qLess<QModelIndex>() );
+        std::sort( selectedIndexes.begin(), selectedIndexes.end(), std::less<QModelIndex>() );
         QModelIndexList::iterator end = selectedIndexes.end()-1;
         QModelIndexList::iterator start = selectedIndexes.begin();
         m_tourUi.m_actionMoveUp->setEnabled( ( start->row() != 0 ) ); // if we can move up enable action else disable.
@@ -605,7 +605,7 @@ void TourWidgetPrivate::moveUp()
         GeoDataPlaylist *playlist = static_cast<GeoDataPlaylist*>( rootObject );
         QModelIndex playlistIndex = m_widget->model()->treeModel()->index( playlist );
         QModelIndexList selected = m_tourUi.m_listView->selectionModel()->selectedIndexes();
-        std::sort( selected.begin(), selected.end(), qLess<QModelIndex>() );
+        std::sort( selected.begin(), selected.end(), std::less<QModelIndex>() );
         QModelIndexList::iterator end = selected.end();
         QModelIndexList::iterator iter = selected.begin();
         for( ; iter != end; ++iter ) {
@@ -626,7 +626,7 @@ void TourWidgetPrivate::moveDown()
         GeoDataPlaylist *playlist = static_cast<GeoDataPlaylist*>( rootObject );
         QModelIndex playlistIndex = m_widget->model()->treeModel()->index( playlist );
         QModelIndexList selected = m_tourUi.m_listView->selectionModel()->selectedIndexes();
-        std::sort( selected.begin(), selected.end(), qGreater<QModelIndex>() );
+        std::sort( selected.begin(), selected.end(), [](const QModelIndex &a, const QModelIndex &b) { return b < a; } );
         QModelIndexList::iterator end = selected.end();
         QModelIndexList::iterator iter = selected.begin();
         for( ; iter != end; ++iter ) {

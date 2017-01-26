@@ -14,6 +14,8 @@
 #include "RenderPlugin.h"
 #include "DialogConfigurationInterface.h"
 
+#include <QHash>
+
 class QMenu;
 
 namespace Ui {

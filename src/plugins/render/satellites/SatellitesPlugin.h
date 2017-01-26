@@ -17,6 +17,8 @@
 #include "DialogConfigurationInterface.h"
 #include "SatellitesModel.h"
 
+#include <QHash>
+
 namespace Marble
 {
 

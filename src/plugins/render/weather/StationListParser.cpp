@@ -135,7 +135,7 @@ void StationListParser::readStation()
     }
 
     // This find the right position in the sorted to insert the new item
-    QList<BBCStation>::iterator i = qLowerBound( m_list.begin(),
+    QList<BBCStation>::iterator i = std::lower_bound( m_list.begin(),
                                                  m_list.end(),
                                                  station );
     // Insert the item on the right position in the list
