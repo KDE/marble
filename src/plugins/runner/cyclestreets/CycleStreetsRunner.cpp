@@ -95,7 +95,7 @@ void CycleStreetsRunner::retrieveRoute( const RouteRequest *route )
     queryStrings["itinerarypoints"] = itinerarypoints;
 
 	QUrlQuery urlQuery;
-	Q_FOREACH( const QString& key, queryStrings.keys()){
+    for( const QString& key: queryStrings.keys()){
 		urlQuery.addQueryItem(key, queryStrings.value(key));
 	}
 	url.setQuery( urlQuery);

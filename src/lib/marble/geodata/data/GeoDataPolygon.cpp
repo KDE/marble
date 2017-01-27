@@ -234,7 +234,7 @@ bool GeoDataPolygon::contains( const GeoDataCoordinates &coordinates ) const
         return false;
     }
 
-    foreach( const GeoDataLinearRing &ring, innerBoundaries() ) {
+    for( const GeoDataLinearRing &ring: innerBoundaries() ) {
         if ( ring.contains( coordinates ) ) {
             // Inside the polygon, but in one of its holes
             return false;

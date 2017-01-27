@@ -104,8 +104,9 @@ bool MonavPluginPrivate::isDaemonRunning()
 bool MonavPluginPrivate::isDaemonInstalled()
 {
     QString path = QProcessEnvironment::systemEnvironment().value(QStringLiteral("PATH"), QStringLiteral("/usr/local/bin:/usr/bin:/bin"));
-    foreach( const QString &application, QStringList() << "monav-daemon" << "MoNavD" ) {
-        foreach( const QString &dir, path.split( QLatin1Char( ':' ) ) ) {
+    auto const applications = QStringList() << "monav-daemon" << "MoNavD";
+    for( const QString &application: applications ) {
+        for( const QString &dir: path.split( QLatin1Char( ':' ) ) ) {
             QFileInfo executable( QDir( dir ), application );
             if ( executable.exists() ) {
                 return true;
@@ -160,7 +161,7 @@ void MonavPluginPrivate::loadMaps()
 {
     if ( m_maps.isEmpty() ) {
         QStringList const baseDirs = QStringList() << MarbleDirs::systemPath() << MarbleDirs::localPath();
-        foreach ( const QString &baseDir, baseDirs ) {
+        for ( const QString &baseDir: baseDirs ) {
             const QString base = baseDir + QLatin1String("/maps/earth/monav/");
             loadMap( base );
             QDir::Filters filters = QDir::AllDirs | QDir::Readable | QDir::NoDotAndDotDot;

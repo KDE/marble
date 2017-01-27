@@ -38,7 +38,7 @@ RoutingProfileSettingsDialog::RoutingProfileSettingsDialog( const PluginManager 
     }
 
     QList<RoutingRunnerPlugin*> allPlugins = pluginManager->routingRunnerPlugins();
-    foreach( RoutingRunnerPlugin* plugin, allPlugins ) {
+    for( RoutingRunnerPlugin* plugin: allPlugins ) {
         m_plugins << plugin;
         RoutingRunnerPlugin::ConfigWidget* configWidget = plugin->configWidget();
         if ( configWidget ) {
@@ -96,7 +96,7 @@ void RoutingProfileSettingsDialog::editProfile( int profileIndex )
     m_ui->name->setText( profiles.at( profileIndex ).name() );
 
     m_servicesModel->clear();
-    foreach( RoutingRunnerPlugin *plugin,  m_plugins ) {
+    for( RoutingRunnerPlugin *plugin:  m_plugins ) {
         QStandardItem *item = new QStandardItem( plugin->guiString() );
         item->setCheckable( true );
         if ( profiles[ profileIndex ].pluginSettings().contains( plugin->nameId() ) ) {

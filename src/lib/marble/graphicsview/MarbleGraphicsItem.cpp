@@ -84,24 +84,24 @@ bool MarbleGraphicsItem::paintEvent( QPainter *painter, const ViewportParams *vi
             paint( &pixmapPainter );
 
             // Paint children
-            foreach (MarbleGraphicsItem *item, d->m_children) {
+            for (MarbleGraphicsItem *item: d->m_children) {
                 item->paintEvent( &pixmapPainter, viewport );
             }
         }
 
-        foreach (const QPointF& position, d->positions()) {
+        for (const QPointF& position: d->positions()) {
             painter->drawPixmap(position, d->m_pixmap);
         }
     }
     else {
-        foreach (const QPointF& position, d->positions()) {
+        for (const QPointF& position: d->positions()) {
             painter->save();
 
             painter->translate( position );
             paint( painter );
 
             // Paint children
-            foreach (MarbleGraphicsItem *item, d->m_children) {
+            for (MarbleGraphicsItem *item: d->m_children) {
                 item->paintEvent( painter, viewport );
             }
 
@@ -115,7 +115,7 @@ bool MarbleGraphicsItem::paintEvent( QPainter *painter, const ViewportParams *vi
 bool MarbleGraphicsItem::contains( const QPointF& point ) const
 {
     Q_D(const MarbleGraphicsItem);
-    foreach (const QRectF& rect, d->boundingRects()) {
+    for (const QRectF& rect: d->boundingRects()) {
         if( rect.contains( point ) )
             return true;
     }
@@ -129,7 +129,7 @@ QVector<QRectF> MarbleGraphicsItemPrivate::boundingRects() const
     QVector<QRectF> list;
     list.reserve(positions.count());
 
-    foreach (const QPointF &point, positions) {
+    for (const QPointF &point: positions) {
         QRectF rect( point, m_size );
         if( rect.x() < 0 )
             rect.setLeft( 0 );
@@ -256,14 +256,14 @@ bool MarbleGraphicsItem::eventFilter( QObject *object, QEvent *e )
     if (!d->m_children.isEmpty()) {
         const QVector<QPointF> absolutePositions = d->absolutePositions();
 
-        foreach( const QPointF& absolutePosition, absolutePositions ) {
+        for( const QPointF& absolutePosition: absolutePositions ) {
             QPoint shiftedPos = event->pos() - absolutePosition.toPoint();
             
             if ( QRect( QPoint( 0, 0 ), size().toSize() ).contains( shiftedPos ) ) {
-                foreach (MarbleGraphicsItem *child, d->m_children) {
+                for (MarbleGraphicsItem *child: d->m_children) {
                     const QVector<QRectF> childRects = child->d_func()->boundingRects();
                     
-                    foreach( const QRectF& childRect, childRects ) {
+                    for( const QRectF& childRect: childRects ) {
                         if( childRect.toRect().contains( shiftedPos ) ) {
                             if( child->eventFilter( object, e ) ) {
                                 return true;

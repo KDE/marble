@@ -31,7 +31,7 @@ bool GeoDataDocumentWriter::write(QIODevice *device, const GeoDataDocument &docu
         writer.setDocumentType(documentIdentifier);
         return writer.write(device, &document);
     } else {
-        foreach(const auto &backend, s_backends) {
+        for(const auto &backend: s_backends) {
             if (backend.first == documentIdentifier) {
                 backend.second->write(device, document);
                 return true;
@@ -77,7 +77,7 @@ QString GeoDataDocumentWriter::determineDocumentIdentifier(const QString &filena
         return "0.6";
     }
 
-    foreach(const auto &backend, s_backends) {
+    for(const auto &backend: s_backends) {
         if (backend.first == fileExtension) {
             return backend.first;
         }

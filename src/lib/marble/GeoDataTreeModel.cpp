@@ -93,7 +93,7 @@ void GeoDataTreeModel::Private::checkParenting( GeoDataObject *object )
     if(    object->nodeType() == GeoDataTypes::GeoDataDocumentType
         || object->nodeType() == GeoDataTypes::GeoDataFolderType ) {
         GeoDataContainer *container = static_cast<GeoDataContainer*>( object );
-        foreach( GeoDataFeature *child, container->featureList() ) {
+        for( GeoDataFeature *child: container->featureList() ) {
             if ( child->parent() != container ) {
                 qWarning() << "Parenting mismatch for " << child->name();
                 Q_ASSERT( 0 );

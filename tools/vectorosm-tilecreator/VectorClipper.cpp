@@ -69,7 +69,7 @@ GeoDataDocument *VectorClipper::clipTo(const GeoDataLatLonBox &tileBoundary, int
     ring << GeoDataCoordinates(tileBoundary.west(), tileBoundary.south());
     qreal const minArea = filterSmallAreas ? 0.01 * area(ring) : 0.0;
     QSet<qint64> osmIds;
-    foreach (GeoDataPlacemark const * placemark, potentialIntersections(tileBoundary)) {
+    for (GeoDataPlacemark const * placemark: potentialIntersections(tileBoundary)) {
         GeoDataGeometry const * const geometry = placemark ? placemark->geometry() : nullptr;
         if (geometry && tileBoundary.intersects(geometry->latLonAltBox())) {
             if(geometry->nodeType() == GeoDataTypes::GeoDataPolygonType) {
@@ -232,7 +232,7 @@ void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const Clipper
     }
     using namespace ClipperLib;
     Path path;
-    foreach(auto const & node, polygon->outerBoundary()) {
+    for(auto const & node: polygon->outerBoundary()) {
         path << IntPoint(&node);
     }
 
@@ -244,7 +244,7 @@ void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const Clipper
     clipper.AddPath(path, ptSubject, true);
     Paths paths;
     clipper.Execute(ctIntersection, paths);
-    foreach(const auto &path, paths) {
+    for(const auto &path: paths) {
         GeoDataPlacemark* newPlacemark = new GeoDataPlacemark;
         newPlacemark->setVisible(placemark->isVisible());
         newPlacemark->setVisualCategory(placemark->visualCategory());
@@ -255,7 +255,7 @@ void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const Clipper
         OsmPlacemarkData const & outerRingOsmData = placemarkOsmData.memberReference(index);
         OsmPlacemarkData & newOuterRingOsmData = newPlacemarkOsmData.memberReference(index);
         int nodeIndex = 0;
-        foreach(const auto &point, path) {
+        for(const auto &point: path) {
             GeoDataCoordinates const coordinates = point.coordinates();
             outerRing << coordinates;
             auto const originalOsmData = outerRingOsmData.nodeReference(coordinates);
@@ -288,18 +288,18 @@ void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const Clipper
             clipper.Clear();
             clipper.AddPath(path, ptClip, true);
             Path innerPath;
-            foreach(auto const & node, innerBoundary) {
+            for(auto const & node: innerBoundary) {
                 innerPath << IntPoint(&node);
             }
             clipper.AddPath(innerPath, ptSubject, true);
             Paths innerPaths;
             clipper.Execute(ctIntersection, innerPaths);
-            foreach(auto const &innerPath, innerPaths) {
+            for(auto const &innerPath: innerPaths) {
                 int const newIndex = newPolygon->innerBoundaries().size();
                 auto & newInnerRingOsmData = newPlacemarkOsmData.memberReference(newIndex);
                 GeoDataLinearRing innerRing;
                 nodeIndex = 0;
-                foreach(const auto &point, innerPath) {
+                for(const auto &point: innerPath) {
                     GeoDataCoordinates const coordinates = point.coordinates();
                     innerRing << coordinates;
                     auto const originalOsmData = innerRingOsmData.nodeReference(coordinates);

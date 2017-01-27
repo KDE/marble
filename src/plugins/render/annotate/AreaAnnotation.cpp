@@ -613,7 +613,7 @@ bool AreaAnnotation::isValidPolygon() const
     const GeoDataPolygon *poly = static_cast<const GeoDataPolygon*>( placemark()->geometry() );
     const QVector<GeoDataLinearRing> &innerRings = poly->innerBoundaries();
 
-    foreach ( const GeoDataLinearRing &innerRing, innerRings ) {
+    for ( const GeoDataLinearRing &innerRing: innerRings ) {
         for ( int i = 0; i < innerRing.size(); ++i ) {
             if ( !poly->outerBoundary().contains( innerRing.at(i) ) ) {
                 return false;
@@ -643,7 +643,7 @@ void AreaAnnotation::setupRegionsLists( GeoPainter *painter )
         m_outerNodesList.append( newNode );
     }
 
-    foreach ( const GeoDataLinearRing &innerRing, innerRings ) {
+    for ( const GeoDataLinearRing &innerRing: innerRings ) {
         QVector<GeoDataCoordinates>::ConstIterator itBegin = innerRing.constBegin();
         QVector<GeoDataCoordinates>::ConstIterator itEnd = innerRing.constEnd();
         QVector<PolylineNode> innerNodes;
@@ -704,7 +704,7 @@ void AreaAnnotation::updateRegions( GeoPainter *painter )
     m_boundariesList.reserve(1 + innerRings.size());
 
     m_boundariesList.append( painter->regionFromPolygon( outerRing, Qt::OddEvenFill ) );
-    foreach ( const GeoDataLinearRing &ring, innerRings ) {
+    for ( const GeoDataLinearRing &ring: innerRings ) {
         m_boundariesList.append( painter->regionFromPolygon( ring, Qt::OddEvenFill ) );
     }
 

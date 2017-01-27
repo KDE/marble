@@ -47,7 +47,7 @@ class GeoDataMultiGeometryPrivate : public GeoDataGeometryPrivate
 
         m_vector.reserve(other.m_vector.size());
 
-        foreach( GeoDataGeometry *geometry, other.m_vector ) {
+        for( GeoDataGeometry *geometry: other.m_vector ) {
             GeoDataGeometry *newGeometry;
 
             // This piece of code has been used for a couple of times. Isn't it possible

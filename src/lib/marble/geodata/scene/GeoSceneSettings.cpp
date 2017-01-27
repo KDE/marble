@@ -166,7 +166,7 @@ QVector<const GeoSceneProperty*> GeoSceneSettings::allProperties() const
     }
 
     allProperties.reserve(allProperties.size() + d->m_properties.size());
-    foreach ( const GeoSceneProperty *property, d->m_properties ) {
+    for ( const GeoSceneProperty *property: d->m_properties ) {
         allProperties << property;
     }
 

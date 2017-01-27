@@ -32,7 +32,7 @@ NodeReducer::NodeReducer(GeoDataDocument* document, const TileId &tileId) :
     tileBoundary.scale(1.0-1e-4, 1.0-1e-4);
     tileBoundary.boundaries(m_tileBoundary[North], m_tileBoundary[South], m_tileBoundary[East], m_tileBoundary[West]);
 
-    foreach (GeoDataPlacemark* placemark, document->placemarkList()) {
+    for (GeoDataPlacemark* placemark: document->placemarkList()) {
         GeoDataGeometry const * const geometry = placemark->geometry();
         auto const visualCategory = placemark->visualCategory();
         if(geometry->nodeType() == GeoDataTypes::GeoDataLineStringType) {

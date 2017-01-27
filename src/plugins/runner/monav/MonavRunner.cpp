@@ -68,7 +68,7 @@ bool MonavRunnerPrivate::retrieveData( const RouteRequest *route, RoutingResult*
     // for performance reasons. Do not merge both.
     QStringList alternatives = m_plugin->mapDirectoriesForRequest( route );
     alternatives.removeOne( mapDir );
-    foreach( const QString &mapDir, alternatives ) {
+    for( const QString &mapDir: alternatives ) {
         if ( retrieveData( route, mapDir, reply ) ) {
             return true;
         }
@@ -212,7 +212,7 @@ GeoDataDocument* MonavRunnerPrivate::createDocument( Marble::GeoDataLineString* 
     routePlacemark->setExtendedData( data );
     result->append( routePlacemark );
 
-    foreach( GeoDataPlacemark* placemark, instructions ) {
+    for( GeoDataPlacemark* placemark: instructions ) {
         result->append( placemark );
     }
 

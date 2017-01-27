@@ -1424,7 +1424,7 @@ void StyleBuilder::Private::initializeOsmVisualCategories()
 
 
     // Default for all other shops
-    foreach (const QString &value, shopValues()) {
+    for (const QString &value: shopValues()) {
         s_visualCategories[OsmTag("shop", value)]               = GeoDataPlacemark::Shop;
     }
 
@@ -1642,7 +1642,7 @@ void StyleBuilder::Private::initializeOsmVisualCategories()
     s_visualCategories[OsmTag("marble:feature", "bathymetry")]  = GeoDataPlacemark::Bathymetry;
 
     // Default for buildings
-    foreach (const auto &tag, buildingTags()) {
+    for (const auto &tag: buildingTags()) {
         s_visualCategories[tag]                                 = GeoDataPlacemark::Building;
     }
 }

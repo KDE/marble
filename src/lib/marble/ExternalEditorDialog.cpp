@@ -36,10 +36,11 @@ ExternalEditorDialogPrivate::ExternalEditorDialogPrivate() :
         m_defaultEditor( potlatch )
 {
     QString path = QProcessEnvironment::systemEnvironment().value(QStringLiteral("PATH"), QStringLiteral("/usr/local/bin:/usr/bin:/bin"));
-    foreach( const QString &application, QStringList() << merkaartor << josm ) {
+    auto const applications = QStringList() << merkaartor << josm;
+    for( const QString &application: applications ) {
         m_installedEditors[application] = false;
         /** @todo: what's the qt way to get the path entry separator? Will be a semicolon on Windows */
-        foreach( const QString &dir, path.split( QLatin1Char( ':' ) ) ) {
+        for( const QString &dir: path.split( QLatin1Char( ':' ) ) ) {
             QFileInfo executable( QDir( dir ), application );
             if ( executable.exists() ) {
                 m_installedEditors[application] = true;

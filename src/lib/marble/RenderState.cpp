@@ -90,7 +90,7 @@ RenderState::Private::Private( const QString &name, RenderStatus status ) :
 RenderStatus RenderState::Private::status() const
 {
     RenderStatus status = Complete;
-    foreach( const RenderState &child, m_children ) {
+    for( const RenderState &child: m_children ) {
         status = minimumStatus( status, child.status() );
     }
     return minimumStatus( status, m_status );
@@ -126,7 +126,7 @@ QString RenderState::Private::toString( const RenderState &state, int level ) co
     QString const name = ( state.name().isEmpty() ? "Anonymous renderer" : state.name() );
     QString result = QString("%1%2%3: %4").arg( prefix ).arg( indent ).arg( name ).arg( status );
 
-    foreach( const RenderState &child, state.d->m_children ) {
+    for( const RenderState &child: state.d->m_children ) {
         result += toString( child, level+1 );
     }
     return result;

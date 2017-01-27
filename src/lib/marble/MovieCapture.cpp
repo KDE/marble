@@ -115,7 +115,7 @@ QVector<MovieFormat> MovieCapture::availableFormats()
     static QVector<MovieFormat> availableFormats;
     if ( availableFormats.isEmpty() && checkToolsAvailability() ) {
         QProcess encoder(this);
-        foreach ( const MovieFormat &format, m_supportedFormats ) {
+        for ( const MovieFormat &format: m_supportedFormats ) {
             QString type = format.type();
             QStringList args;
             args << "-h" << QLatin1String("muxer=") + type;

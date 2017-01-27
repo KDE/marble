@@ -244,7 +244,7 @@ void MainWindow::initObject(const QVariantMap& cmdLineSettings)
     setupStatusBar();
     readSettings(cmdLineSettings);
 
-    foreach ( const QString &path, m_commandlineFilePaths ) {
+    for ( const QString &path: m_commandlineFilePaths ) {
         m_controlView->marbleModel()->addGeoDataFile( path );
     }
 
@@ -473,7 +473,7 @@ void MainWindow::createMenus( const QList<QAction*> &panelActions )
         connect( m_bookmarkMenu, SIGNAL(aboutToShow()), this, SLOT(createBookmarkMenu()) );
 
         m_panelMenu = new QMenu(tr("&Panels"), this);
-        foreach( QAction* action, panelActions ) {
+        for( QAction* action: panelActions ) {
             m_panelMenu->addAction( action );
         }
 
@@ -564,7 +564,7 @@ void MainWindow::createBookmarksListMenu( QMenu *bookmarksListMenu, const GeoDat
 
     QVector<GeoDataPlacemark*> bookmarks = container->placemarkList();
 
-    foreach ( const GeoDataPlacemark *placemark, bookmarks ) {
+    for ( const GeoDataPlacemark *placemark: bookmarks ) {
         QAction *bookmarkAction = new QAction( placemark->name(), this );
         QVariant var;
 
@@ -607,7 +607,7 @@ void MainWindow::createFolderList( QMenu *bookmarksListMenu, const GeoDataContai
         createBookmarksListMenu( bookmarksListMenu, folders.first() );
     }
     else {
-        foreach ( const GeoDataFolder *folder, folders ) {
+        for ( const GeoDataFolder *folder: folders ) {
             QMenu *subMenu = bookmarksListMenu->addMenu(QIcon(QStringLiteral(":/icons/folder-bookmark.png")), folder->name());
             createFolderList( subMenu, folder );
             connect( subMenu, SIGNAL(triggered(QAction*)),
@@ -693,11 +693,11 @@ void MainWindow::createPluginMenus()
         // menus
         const QList<QActionGroup*> *tmp_actionGroups = (*i)->actionGroups();
         if ((*i)->enabled() && tmp_actionGroups && (*i)->nameId() != QLatin1String("annotation")) {
-           foreach( QActionGroup *ag, *tmp_actionGroups ) {
+           for( QActionGroup *ag: *tmp_actionGroups ) {
                if( !ag->actions().isEmpty() ) {
                    m_pluginMenus.append( m_viewMenu->addSeparator() );
                }
-               foreach( QAction *action, ag->actions() ) {
+               for( QAction *action: ag->actions() ) {
                    m_viewMenu->addAction( action );
                    m_pluginMenus.append( action );
                }
@@ -710,7 +710,7 @@ void MainWindow::createPluginMenus()
             QToolBar* toolbar = new QToolBar(this);
             toolbar->setObjectName(QLatin1String("plugin-toolbar-") + (*i)->nameId());
 
-            foreach( QActionGroup* ag, *tmp_toolbarActionGroups ) {
+            for( QActionGroup* ag: *tmp_toolbarActionGroups ) {
                 toolbar->addActions( ag->actions() );
                 if ( tmp_toolbarActionGroups->last() != ag ) {
                     toolbar->addSeparator();
@@ -974,7 +974,7 @@ void MainWindow::openFile()
 
     QStringList allFileExtensions;
     QStringList filters;
-    foreach ( const ParseRunnerPlugin *plugin, pluginManager->parsingRunnerPlugins() ) {
+    for ( const ParseRunnerPlugin *plugin: pluginManager->parsingRunnerPlugins() ) {
         if (plugin->nameId() == QLatin1String("Cache"))
             continue;
 
@@ -998,7 +998,7 @@ void MainWindow::openFile()
         m_lastFileOpenPath = QFileInfo( firstFile ).absolutePath();
     }
 
-    foreach( const QString &fileName, fileNames ) {
+    for( const QString &fileName: fileNames ) {
         m_controlView->marbleModel()->addGeoDataFile( fileName );
     }
 }
@@ -1264,10 +1264,10 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
             settings.beginGroup( QString( "Profile %0" ).arg(i) );
             QString name = settings.value( "Name", tr( "Unnamed" ) ).toString();
             RoutingProfile profile( name );
-            foreach ( const QString& pluginName, settings.childGroups() ) {
+            for ( const QString& pluginName: settings.childGroups() ) {
                 settings.beginGroup( pluginName );
                 profile.pluginSettings().insert( pluginName, QHash<QString, QVariant>() );
-                foreach ( const QString& key, settings.childKeys() ) {
+                for ( const QString& key: settings.childKeys() ) {
                     if (key != QLatin1String("Enabled")) {
                         profile.pluginSettings()[ pluginName ].insert( key, settings.value( key ) );
                     }
@@ -1295,7 +1295,7 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
     QString positionProvider = settings.value( "activePositionTrackingPlugin", QString() ).toString();
     if ( !positionProvider.isEmpty() ) {
         const PluginManager* pluginManager = m_controlView->marbleModel()->pluginManager();
-        foreach( const PositionProviderPlugin* plugin, pluginManager->positionProviderPlugins() ) {
+        for( const PositionProviderPlugin* plugin: pluginManager->positionProviderPlugins() ) {
             if ( plugin->nameId() == positionProvider ) {
                 PositionProviderPlugin* instance = plugin->newInstance();
                 tracking->setPositionProviderPlugin( instance );
@@ -1401,15 +1401,15 @@ void MainWindow::writeSettings()
          settings.beginGroup( QString( "Profile %0" ).arg(i) );
          const RoutingProfile& profile = profiles.at( i );
          settings.setValue( "Name", profile.name() );
-         foreach ( const QString& pluginName, settings.childGroups() ) {
+         for ( const QString& pluginName: settings.childGroups() ) {
              settings.beginGroup( pluginName );
              settings.remove(QString()); //remove all keys
              settings.endGroup();
          }
-         foreach ( const QString &key, profile.pluginSettings().keys() ) {
+         for ( const QString &key: profile.pluginSettings().keys() ) {
              settings.beginGroup( key );
              settings.setValue( "Enabled", true );
-             foreach ( const QString& settingKey, profile.pluginSettings()[ key ].keys() ) {
+             for ( const QString& settingKey: profile.pluginSettings()[ key ].keys() ) {
                  Q_ASSERT(settingKey != QLatin1String("Enabled"));
                  settings.setValue( settingKey, profile.pluginSettings()[ key ][ settingKey ] );
              }

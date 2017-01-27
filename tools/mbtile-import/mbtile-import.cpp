@@ -30,7 +30,7 @@ void importTiles(const QString &tileDirectory, MbTileWriter &tileWriter, const Q
     QString const extension = "o5m";
     QDir tileDir(tileDirectory);
     auto const strip = 1+tileDir.absolutePath().size();
-    foreach(const auto &entryInfo, tileDir.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot)) {
+    for(const auto &entryInfo: tileDir.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot)) {
         bool isNumber;
         int const z = entryInfo.baseName().toInt(&isNumber);
         if (isNumber && tileLevels.first <= z && z <= tileLevels.second) {

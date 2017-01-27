@@ -65,10 +65,10 @@ void BookmarkManagerPrivate::resetBookmarkDocument()
 }
 
 void BookmarkManagerPrivate::setVisualCategory( GeoDataContainer *container ) {
-    foreach( GeoDataFolder* folder, container->folderList() ) {
+    for( GeoDataFolder* folder: container->folderList() ) {
         setVisualCategory( folder );
     }
-    foreach( GeoDataPlacemark* placemark, container->placemarkList() ) {
+    for( GeoDataPlacemark* placemark: container->placemarkList() ) {
         placemark->setVisualCategory(GeoDataPlacemark::Bookmark);
         placemark->setZoomLevel( 1 );
     }
@@ -163,13 +163,13 @@ void BookmarkManager::removeBookmark( GeoDataPlacemark *bookmark )
 
 GeoDataPlacemark* BookmarkManager::bookmarkAt(GeoDataContainer *container, const GeoDataCoordinates &coordinate)
 {
-    foreach ( GeoDataFolder *folder, container->folderList() ) {
+    for ( GeoDataFolder *folder: container->folderList() ) {
         GeoDataPlacemark *placemark = bookmarkAt(folder, coordinate);
         if ( placemark )
             return placemark;
     }
 
-    foreach ( GeoDataPlacemark *placemark, container->placemarkList() ) {
+    for ( GeoDataPlacemark *placemark: container->placemarkList() ) {
         if ( placemark->coordinate() == coordinate )
             return placemark;
     }
@@ -310,7 +310,7 @@ GeoDataDocument* BookmarkManager::openFile( const QString &fileName )
     }
 
     result->setDocumentRole( BookmarkDocument );
-    foreach( GeoDataFolder* folder, result->folderList() ) {
+    for( GeoDataFolder* folder: result->folderList() ) {
         BookmarkManagerPrivate::setVisualCategory( folder );
     }
 

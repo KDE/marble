@@ -83,7 +83,7 @@ class MarbleGraphicsItemPrivate
     void updateChildPositions()
     {
         // This has to be done recursively because we need a correct size from all children.
-        foreach ( MarbleGraphicsItem *item, m_children ) {
+        for ( MarbleGraphicsItem *item: m_children ) {
             item->d_func()->updateChildPositions();
         }
 

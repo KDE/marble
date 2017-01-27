@@ -119,7 +119,7 @@ QVector<QRectF> BillboardGraphicsItem::boundingRects() const
     rects.reserve(d->m_positions.size());
 
     QSizeF const size = d->m_size;
-    foreach (const QPointF &point, d->m_positions) {
+    for (const QPointF &point: d->m_positions) {
         rects << QRectF(point, size);
     }
     return rects;
@@ -127,7 +127,7 @@ QVector<QRectF> BillboardGraphicsItem::boundingRects() const
 
 QRectF BillboardGraphicsItem::containsRect( const QPointF &point ) const
 {
-    foreach( const QRectF &rect, boundingRects() ) {
+    for( const QRectF &rect: boundingRects() ) {
         if( rect.contains( point ) )
             return rect;
     }

@@ -106,7 +106,7 @@ bool KmlOsmPlacemarkDataTagWriter::writeOsmData( const GeoDataGeometry *geometry
             writer.writeEndElement();
 
             // Writing the innerBoundaries
-            foreach ( const GeoDataLinearRing &innerRing, polygon->innerBoundaries() ) {
+            for ( const GeoDataLinearRing &innerRing: polygon->innerBoundaries() ) {
                 const OsmPlacemarkData &innerRingOsmData = osmData.memberReference( ++memberIndex );
                 writer.writeStartElement( kml::kmlTag_nameSpaceMx, kml::kmlTag_member );
                 writer.writeAttribute( "index", QString::number( memberIndex ) );

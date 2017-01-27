@@ -153,7 +153,7 @@ void Way::setPosition( const QHash<int, Coordinate> &database, OsmPlacemark &pla
     if ( !nodes.isEmpty() ) {
         if ( nodes.first() == nodes.last() && database.contains( nodes.first() ) ) {
             GeoDataLinearRing ring;
-            foreach( int id, nodes ) {
+            for( int id: nodes ) {
                 if ( database.contains( id ) ) {
                     const Coordinate &node = database[id];
                     GeoDataCoordinates coordinates( node.lon, node.lat, 0.0, GeoDataCoordinates::Degree );
@@ -182,14 +182,14 @@ void Way::setPosition( const QHash<int, Coordinate> &database, OsmPlacemark &pla
 void Way::setRegion( const QHash<int, Node> &database,  const OsmRegionTree & tree, QList<OsmOsmRegion> & osmOsmRegions, OsmPlacemark &placemark ) const
 {
     if ( !city.isEmpty() ) {
-        foreach( const OsmOsmRegion & region, osmOsmRegions ) {
+        for( const OsmOsmRegion & region: osmOsmRegions ) {
             if ( region.region.name() == city ) {
                 placemark.setRegionId( region.region.identifier() );
                 return;
             }
         }
 
-        foreach( const Node & node, database ) {
+        for( const Node & node: database ) {
             if ( node.category >= OsmPlacemark::PlacesRegion &&
                     node.category <= OsmPlacemark::PlacesIsland &&
                     node.name == city ) {
@@ -273,7 +273,7 @@ void OsmParser::read( const QFileInfo &content, const QString &areaName )
         for ( int level=m_osmOsmRegions[i].region.adminLevel()-1; level >= 0 && parent == 0; --level ) {
             QList<int> candidates = sortedRegions.values( level );
             qDebug() << "Examining " << candidates.count() << "admin regions on level" << level;
-            foreach( int j, candidates ) {
+            for( int j: candidates ) {
                 GeoDataLinearRing const & outer = m_osmOsmRegions[j].region.geometry().outerBoundary();
                 if ( contains<GeoDataLinearRing, GeoDataLinearRing>( outer, ring ) ) {
                     if ( parent == 0 || contains<GeoDataLinearRing, GeoDataLinearRing>( parent->region.geometry().outerBoundary(), outer ) ) {
@@ -299,7 +299,7 @@ void OsmParser::read( const QFileInfo &content, const QString &areaName )
     mainArea.setName( areaName );
     mainArea.setAdminLevel( 1 );
     QPair<float, float> minLon( -180.0, 180.0 ), minLat( -90.0, 90.0 );
-    foreach( const Coordinate & node, m_coordinates ) {
+    for( const Coordinate & node: m_coordinates ) {
         minLon.first  = qMin( node.lon, minLon.first );
         minLon.second = qMax( node.lon, minLon.second );
         minLat.first  = qMin( node.lat, minLat.first );
@@ -311,7 +311,7 @@ void OsmParser::read( const QFileInfo &content, const QString &areaName )
     mainArea.setLatitude( center.center().latitude( GeoDataCoordinates::Degree ) );
 
     QList<OsmRegion> regions;
-    foreach( const OsmOsmRegion & region, m_osmOsmRegions ) {
+    for( const OsmOsmRegion & region: m_osmOsmRegions ) {
         regions << region.region;
     }
 
@@ -324,7 +324,7 @@ void OsmParser::read( const QFileInfo &content, const QString &areaName )
 
     qWarning() << "Step 4: Creating placemarks from" << m_nodes.size() << "nodes";
 
-    foreach( const Node & node, m_nodes ) {
+    for( const Node & node: m_nodes ) {
         if ( node.save ) {
             OsmPlacemark placemark = node;
             GeoDataCoordinates position( node.lon, node.lat, 0.0, GeoDataCoordinates::Degree );
@@ -346,7 +346,7 @@ void OsmParser::read( const QFileInfo &content, const QString &areaName )
 
     qWarning() << "Step 5: Creating placemarks from" << m_ways.size() << "ways";
     QMultiMap<QString, Way> waysByName;
-    foreach ( const Way & way, m_ways ) {
+    for ( const Way & way: m_ways ) {
         if ( way.save ) {
             if ( !way.name.isEmpty() && !way.nodes.isEmpty() ) {
                 waysByName.insert( way.name, way );
@@ -361,9 +361,9 @@ void OsmParser::read( const QFileInfo &content, const QString &areaName )
     }
 
     QSet<QString> keys = QSet<QString>::fromList( waysByName.keys() );
-    foreach( const QString & key, keys ) {
+    for( const QString & key: keys ) {
         QList<QList<Way> > merged = merge( waysByName.values( key ) );
-        foreach( const QList<Way> & ways, merged ) {
+        for( const QList<Way> & ways: merged ) {
             Q_ASSERT( !ways.isEmpty() );
             OsmPlacemark placemark = ways.first();
             ways.first().setPosition( m_coordinates, placemark );
@@ -392,7 +392,7 @@ void OsmParser::read( const QFileInfo &content, const QString &areaName )
     m_ways.clear();
 
     Q_ASSERT( regions.isEmpty() );
-    foreach( const OsmOsmRegion & region, m_osmOsmRegions ) {
+    for( const OsmOsmRegion & region: m_osmOsmRegions ) {
         regions << region.region;
     }
 
@@ -406,15 +406,15 @@ void OsmParser::read( const QFileInfo &content, const QString &areaName )
 
     qWarning() << "Step 6: " << m_statistic.mergedWays << " ways merged," << m_statistic.uselessWays << "useless ways."
                << "Now serializing" << regions.size() << "regions";
-    foreach( const OsmRegion & region, regions ) {
-        foreach( Writer * writer, m_writers ) {
+    for( const OsmRegion & region: regions ) {
+        for( Writer * writer: m_writers ) {
             writer->addOsmRegion( region );
         }
     }
 
     qWarning() << "Step 7: Serializing" << m_placemarks.size() << "placemarks";
-    foreach( const OsmPlacemark & placemark, m_placemarks ) {
-        foreach( Writer * writer, m_writers ) {
+    for( const OsmPlacemark & placemark: m_placemarks ) {
+        for( Writer * writer: m_writers ) {
             Q_ASSERT( !placemark.name().isEmpty() );
             writer->addOsmPlacemark( placemark );
         }
@@ -428,7 +428,7 @@ QList< QList<Way> > OsmParser::merge( const QList<Way> &ways ) const
 {
     QList<WayMerger> mergers;
 
-    foreach( const Way & way, ways ) {
+    for( const Way & way: ways ) {
         mergers << WayMerger( way );
     }
 
@@ -447,7 +447,7 @@ QList< QList<Way> > OsmParser::merge( const QList<Way> &ways ) const
     } while ( moved );
 
     QList< QList<Way> > result;
-    foreach( const WayMerger & merger, mergers ) {
+    for( const WayMerger & merger: mergers ) {
         result << merger.ways;
     }
     m_statistic.mergedWays += ( ways.size() - result.size() );
@@ -461,7 +461,7 @@ void OsmParser::importMultipolygon( const Relation &relation )
     typedef QPair<int, RelationRole> RelationPair;
     QVector<GeoDataLineString> outer;
     QVector<GeoDataLineString> inner;
-    foreach( const RelationPair & pair, relation.ways ) {
+    for( const RelationPair & pair: relation.ways ) {
         if ( pair.second == Outer ) {
             importWay( outer, pair.first );
         } else if ( pair.second == Inner ) {
@@ -471,7 +471,7 @@ void OsmParser::importMultipolygon( const Relation &relation )
         }
     }
 
-    foreach( const GeoDataLineString & string, outer ) {
+    for( const GeoDataLineString & string: outer ) {
         if ( string.isEmpty() || !( string.first() == string.last() ) ) {
             qDebug() << "Ignoring open polygon in relation " << relation.name << ". Check data.";
             continue;
@@ -481,7 +481,7 @@ void OsmParser::importMultipolygon( const Relation &relation )
         polygon.setOuterBoundary(GeoDataLinearRing(string));
         Q_ASSERT( polygon.outerBoundary().size() > 0 );
 
-        foreach( const GeoDataLineString & hole, inner ) {
+        for( const GeoDataLineString & hole: inner ) {
             if ( contains<GeoDataLinearRing, GeoDataLineString>( polygon.outerBoundary(), hole ) ) {
                 polygon.appendInnerBoundary(GeoDataLinearRing(hole));
             }
@@ -504,7 +504,7 @@ void OsmParser::importWay( QVector<GeoDataLineString> &ways, int id )
     }
 
     GeoDataLineString way;
-    foreach( int node, m_ways[id].nodes ) {
+    for( int node: m_ways[id].nodes ) {
         if ( !m_coordinates.contains( node ) ) {
             qDebug() << "Skipping unknown node " << node << ". Check data.";
         } else {
@@ -535,7 +535,7 @@ void OsmParser::importWay( QVector<GeoDataLineString> &ways, int id )
             }
         }
 
-        foreach( int key, remove ) {
+        for( int key: remove ) {
             ways.remove( key );
         }
     } while ( !remove.isEmpty() );
@@ -704,7 +704,7 @@ void OsmParser::writeKml( const QString &area, const QString &version, const QSt
 {
     GeoDataDocument* document = new GeoDataDocument;
 
-    //foreach( const OsmOsmRegion & region, m_osmOsmRegions ) {
+    //for( const OsmOsmRegion & region: m_osmOsmRegions ) {
     GeoDataPlacemark* placemark = new GeoDataPlacemark;
     placemark->setName( area );
     if ( !version.isEmpty() ) {

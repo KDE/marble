@@ -98,7 +98,7 @@ void TourPlayback::handleFinishedItem( int index )
 
 void TourPlayback::stopTour()
 {
-    foreach( SoundTrack* track, d->m_soundTracks ){
+    for( SoundTrack* track: d->m_soundTracks ){
         track->stop();
         track->setPaused( false );
     }
@@ -180,10 +180,10 @@ void TourPlayback::play()
     lookat->setAltitude( lookat->range() );
     d->m_mapCenter.setView( lookat );
     d->m_mainTrack.play();
-    foreach( SoundTrack* track, d->m_soundTracks) {
+    for( SoundTrack* track: d->m_soundTracks) {
         track->play();
     }
-    foreach( AnimatedUpdateTrack* track, d->m_animatedUpdateTracks) {
+    for( AnimatedUpdateTrack* track: d->m_animatedUpdateTracks) {
         track->play();
     }
 }
@@ -192,10 +192,10 @@ void TourPlayback::pause()
 {
     d->m_pause = true;
     d->m_mainTrack.pause();
-    foreach( SoundTrack* track, d->m_soundTracks) {
+    for( SoundTrack* track: d->m_soundTracks) {
         track->pause();
     }
-    foreach( AnimatedUpdateTrack* track, d->m_animatedUpdateTracks) {
+    for( AnimatedUpdateTrack* track: d->m_animatedUpdateTracks) {
         track->pause();
     }
 }
@@ -204,7 +204,7 @@ void TourPlayback::stop()
 {
     d->m_pause = true;
     d->m_mainTrack.stop();
-    foreach( SoundTrack* track, d->m_soundTracks) {
+    for( SoundTrack* track: d->m_soundTracks) {
         track->stop();
     }
     for( int i = d->m_animatedUpdateTracks.size()-1; i >= 0; i-- ){
@@ -217,10 +217,10 @@ void TourPlayback::seek( double value )
 {
     double const offset = qBound( 0.0, value, d->m_mainTrack.duration() );
     d->m_mainTrack.seek( offset );
-    foreach( SoundTrack* track, d->m_soundTracks ){
+    for( SoundTrack* track: d->m_soundTracks ){
         track->seek( offset );
     }
-    foreach( AnimatedUpdateTrack* track, d->m_animatedUpdateTracks ){
+    for( AnimatedUpdateTrack* track: d->m_animatedUpdateTracks ){
         track->seek( offset );
     }
 }

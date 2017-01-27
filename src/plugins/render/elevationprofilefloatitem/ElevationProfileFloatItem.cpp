@@ -233,7 +233,7 @@ void ElevationProfileFloatItem::paintContent( QPainter *painter )
     QRect labelRect( 0, 0, m_leftGraphMargin - 1, m_fontHeight + 2 );
     lastStringEnds = m_eleGraphHeight + m_fontHeight;
 //     painter->drawText(m_leftGraphMargin + 1, m_fontHeight, QLatin1Char('[') + m_axisY.unit() + QLatin1Char(']'));
-    foreach ( const AxisTick &tick, m_axisY.ticks() ) {
+    for ( const AxisTick &tick: m_axisY.ticks() ) {
         const int posY = m_eleGraphHeight - tick.position;
         painter->setPen( dashedPen );
         painter->drawLine( m_leftGraphMargin, posY, contentSize().width(), posY );
@@ -257,7 +257,7 @@ void ElevationProfileFloatItem::paintContent( QPainter *painter )
     painter->setPen( QColor( Qt::black ) );
     labelRect.moveTop( m_eleGraphHeight + 1 );
     lastStringEnds = 0;
-    foreach ( const AxisTick &tick, m_axisX.ticks() ) {
+    for ( const AxisTick &tick: m_axisX.ticks() ) {
         const int posX = m_leftGraphMargin + tick.position;
         painter->setPen( dashedPen );
         painter->drawLine( posX, 0, posX, m_eleGraphHeight );
@@ -545,7 +545,7 @@ void ElevationProfileFloatItem::updateVisiblePoints()
     routeSegments.append( currentRouteSegment ); // in case the route ends on screen
 
     int maxLenght = 0;
-    foreach ( const QList<int> &currentRouteSegment, routeSegments ) {
+    for ( const QList<int> &currentRouteSegment: routeSegments ) {
         if ( currentRouteSegment.size() > maxLenght ) {
             maxLenght = currentRouteSegment.size() ;
             m_firstVisiblePoint = currentRouteSegment.first();

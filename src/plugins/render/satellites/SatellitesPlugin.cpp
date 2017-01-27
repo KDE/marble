@@ -217,10 +217,10 @@ bool SatellitesPlugin::eventFilter( QObject *object, QEvent *event )
     if( mouseEvent->button() == Qt::LeftButton ) {
         m_trackerList.clear();
         QVector<const GeoDataFeature*> vector = widget->whichFeatureAt( mouseEvent->pos() );
-        foreach (const GeoDataFeature *feature, vector) {
+        for (const GeoDataFeature *feature: vector) {
             const GeoDataPlacemark* placemark = dynamic_cast<const GeoDataPlacemark*>(feature);
             if ( placemark ) {
-                foreach (TrackerPluginItem *obj, m_satModel->items() ) {
+                for (TrackerPluginItem *obj: m_satModel->items() ) {
                     if( obj->placemark() == placemark ) {
                         m_showOrbitAction->data() = m_trackerList.size();
                         m_showOrbitAction->setChecked( obj->isTrackVisible() );
@@ -353,7 +353,7 @@ void SatellitesPlugin::updateSettings()
     QStringList dsList = m_settings[QStringLiteral("dataSources")].toStringList();
     dsList << m_settings[QStringLiteral("userDataSources")].toStringList();
     dsList.removeDuplicates();
-    foreach( const QString &ds, dsList ) {
+    for( const QString &ds: dsList ) {
         mDebug() << "Loading satellite data from:" << ds;
         m_satModel->downloadFile( QUrl( ds ), ds );
     }
@@ -409,7 +409,7 @@ void SatellitesPlugin::updateDataSourceConfig( const QString &source )
 {
     mDebug() << "Updating orbiter configuration";
 
-    foreach( TrackerPluginItem *obj, m_satModel->items() ) {
+    for( TrackerPluginItem *obj: m_satModel->items() ) {
         // catalog items
         SatellitesMSCItem *item = dynamic_cast<SatellitesMSCItem*>( obj );
         if( ( item != NULL ) && ( item->catalog() == source ) ) {

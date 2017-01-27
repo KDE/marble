@@ -92,7 +92,7 @@ public:
     }
 
     bool compatible( const Way &aWay ) const {
-        foreach( const Way & way, ways ) {
+        for( const Way & way: ways ) {
             if ( way.nodes.first() == aWay.nodes.first() ) return true;
             if ( way.nodes.last()  == aWay.nodes.first() ) return true;
             if ( way.nodes.first() == aWay.nodes.last() ) return true;
@@ -103,7 +103,7 @@ public:
     }
 
     bool compatible( const WayMerger &other ) const {
-        foreach( const Way & way, ways ) {
+        for( const Way & way: ways ) {
             if ( other.compatible( way ) ) {
                 return true;
             }

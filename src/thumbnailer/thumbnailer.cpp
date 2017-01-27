@@ -39,7 +39,7 @@ GeoDataThumbnailer::GeoDataThumbnailer()
     m_marbleMap.setProjection(Equirectangular);
     m_marbleMap.setMapQualityForViewContext( PrintQuality, Still );
     m_marbleMap.setViewContext( Still );
-    foreach( RenderPlugin* plugin, m_marbleMap.renderPlugins() ) {
+    for( RenderPlugin* plugin: m_marbleMap.renderPlugins() ) {
         plugin->setEnabled( false );
     }
 

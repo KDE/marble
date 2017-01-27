@@ -93,7 +93,7 @@ void SatellitesModel::updateVisibility()
 {
     beginUpdateItems();
 
-    foreach( TrackerPluginItem *obj, items() ) {
+    for( TrackerPluginItem *obj: items() ) {
         SatellitesMSCItem *oItem = dynamic_cast<SatellitesMSCItem*>(obj);
         if( oItem != NULL ) {
             bool enabled = ( ( oItem->relatedBody().toLower() == m_lcPlanet ) &&

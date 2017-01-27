@@ -62,7 +62,7 @@ void RenderPluginModel::setRenderPlugins( const QList<RenderPlugin *> &renderPlu
     std::sort( d->m_renderPlugins.begin(), d->m_renderPlugins.end(), Private::renderPluginGuiStringLessThan );
 
     QStandardItem *parentItem = invisibleRootItem();
-    foreach ( RenderPlugin *plugin, d->m_renderPlugins ) {
+    for ( RenderPlugin *plugin: d->m_renderPlugins ) {
         parentItem->appendRow( plugin->item() );
     }
 }
@@ -92,14 +92,14 @@ DialogConfigurationInterface *RenderPluginModel::pluginDialogConfigurationInterf
 
 void RenderPluginModel::retrievePluginState()
 {
-    foreach ( RenderPlugin *plugin, d->m_renderPlugins ) {
+    for ( RenderPlugin *plugin: d->m_renderPlugins ) {
         plugin->retrieveItemState();
     }
 }
 
 void RenderPluginModel::applyPluginState()
 {
-    foreach ( RenderPlugin *plugin, d->m_renderPlugins ) {
+    for ( RenderPlugin *plugin: d->m_renderPlugins ) {
         plugin->applyItemState();
     }
 }

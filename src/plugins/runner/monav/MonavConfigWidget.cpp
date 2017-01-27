@@ -258,7 +258,7 @@ bool MonavConfigWidgetPrivate::fillComboBox( QStringList items, QComboBox* combo
 bool MonavConfigWidgetPrivate::updateContinents( QComboBox* comboBox )
 {
     QSet<QString> continents;
-    foreach( const MonavStuffEntry &map, m_remoteMaps ) {
+    for( const MonavStuffEntry &map: m_remoteMaps ) {
         Q_ASSERT( map.isValid() );
         continents << map.continent();
     }
@@ -269,7 +269,7 @@ bool MonavConfigWidgetPrivate::updateContinents( QComboBox* comboBox )
 bool MonavConfigWidgetPrivate::updateStates( const QString &continent, QComboBox* comboBox )
 {
     QSet<QString> states;
-    foreach( const MonavStuffEntry &map, m_remoteMaps ) {
+    for( const MonavStuffEntry &map: m_remoteMaps ) {
         Q_ASSERT( map.isValid() );
         if ( map.continent() == continent ) {
             states << map.state();
@@ -283,7 +283,7 @@ bool MonavConfigWidgetPrivate::updateRegions( const QString &continent, const QS
 {
     comboBox->clear();
     QMap<QString,QString> regions;
-    foreach( const MonavStuffEntry &map, m_remoteMaps ) {
+    for( const MonavStuffEntry &map: m_remoteMaps ) {
         Q_ASSERT( map.isValid() );
         if ( map.continent() == continent && map.state() == state ) {
             QString item = "%1 - %2";
@@ -308,7 +308,7 @@ bool MonavConfigWidgetPrivate::updateRegions( const QString &continent, const QS
 
 MonavStuffEntry MonavConfigWidgetPrivate::map( const QString &continent, const QString &state, const QString &region ) const
 {
-    foreach( const MonavStuffEntry &entry, m_remoteMaps ) {
+    for( const MonavStuffEntry &entry: m_remoteMaps ) {
         if ( continent == entry.continent() && state == entry.state() && region == entry.region() ) {
             return entry;
         }
@@ -548,7 +548,7 @@ void MonavConfigWidget::updateProgressBar( qint64 bytesReceived, qint64 bytesTot
 bool MonavConfigWidgetPrivate::canExecute( const QString &executable )
 {
     QString path = QProcessEnvironment::systemEnvironment().value(QStringLiteral("PATH"), QStringLiteral("/usr/local/bin:/usr/bin:/bin"));
-    foreach( const QString &dir, path.split( QLatin1Char( ':' ) ) ) {
+    for( const QString &dir: path.split( QLatin1Char( ':' ) ) ) {
         QFileInfo application( QDir( dir ), executable );
         if ( application.exists() ) {
             return true;
@@ -661,7 +661,7 @@ void MonavConfigWidget::upgradeMap( int index )
 {
     QString payload = d->m_mapsModel->payload( index );
     if ( !payload.isEmpty() ) {
-        foreach( const MonavStuffEntry &entry, d->m_remoteMaps ) {
+        for( const MonavStuffEntry &entry: d->m_remoteMaps ) {
             if (entry.payload().endsWith(QLatin1Char('/') + payload)) {
                 d->m_currentDownload = entry.payload();
                 d->install();

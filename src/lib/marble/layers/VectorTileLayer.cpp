@@ -79,7 +79,7 @@ VectorTileLayer::Private::~Private()
 
 void VectorTileLayer::Private::updateTile(const TileId &tileId, GeoDataDocument* document)
 {
-    foreach (VectorTileModel *mapper, m_activeTileModels) {
+    for (VectorTileModel *mapper: m_activeTileModels) {
         mapper->updateTile(tileId, document);
     }
 }
@@ -88,7 +88,7 @@ void VectorTileLayer::Private::updateLayerSettings()
 {
     m_activeTileModels.clear();
 
-    foreach (VectorTileModel *candidate, m_tileModels) {
+    for (VectorTileModel *candidate: m_tileModels) {
         bool enabled = true;
         if (m_layerSettings) {
             const bool propertyExists = m_layerSettings->propertyValue(candidate->name(), enabled);
@@ -134,7 +134,7 @@ RenderState VectorTileLayer::renderState() const
 int VectorTileLayer::tileZoomLevel() const
 {
     int level = 0;
-    foreach (const auto *mapper, d->m_activeTileModels) {
+    for (const auto *mapper: d->m_activeTileModels) {
         level = qMax(level, mapper->tileZoomLevel());
     }
     return level;
@@ -143,7 +143,7 @@ int VectorTileLayer::tileZoomLevel() const
 QString VectorTileLayer::runtimeTrace() const
 {
     int tiles = 0;
-    foreach (const auto *mapper, d->m_activeTileModels) {
+    for (const auto *mapper: d->m_activeTileModels) {
         tiles += mapper->cachedDocuments();
     }
     int const layers = d->m_activeTileModels.size();
@@ -159,7 +159,7 @@ bool VectorTileLayer::render(GeoPainter *painter, ViewportParams *viewport,
 
     int const oldLevel = tileZoomLevel();
     int level = 0;
-    foreach (VectorTileModel *mapper, d->m_activeTileModels) {
+    for (VectorTileModel *mapper: d->m_activeTileModels) {
         mapper->setViewport(viewport->viewLatLonAltBox());
         level = qMax(level, mapper->tileZoomLevel());
     }
@@ -179,7 +179,7 @@ void VectorTileLayer::reload()
 
 void VectorTileLayer::reset()
 {
-    foreach (VectorTileModel *mapper, d->m_tileModels) {
+    for (VectorTileModel *mapper: d->m_tileModels) {
         mapper->clear();
     }
 }
@@ -190,7 +190,7 @@ void VectorTileLayer::setMapTheme(const QVector<const GeoSceneVectorTileDataset 
     d->m_tileModels.clear();
     d->m_activeTileModels.clear();
 
-    foreach (const GeoSceneVectorTileDataset *layer, textures) {
+    for (const GeoSceneVectorTileDataset *layer: textures) {
         d->m_tileModels << new VectorTileModel(&d->m_loader, layer, d->m_treeModel, &d->m_threadPool);
     }
 

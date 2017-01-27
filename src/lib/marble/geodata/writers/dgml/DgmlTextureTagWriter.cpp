@@ -69,7 +69,7 @@ bool DgmlTextureTagWriter::write(const GeoNode *node, GeoWriter& writer) const
         }
     }
     
-    foreach( const DownloadPolicy *policy, texture->downloadPolicies() )
+    for( const DownloadPolicy *policy: texture->downloadPolicies() )
     {
         writer.writeStartElement( dgml::dgmlTag_DownloadPolicy );
         

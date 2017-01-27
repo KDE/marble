@@ -107,7 +107,7 @@ void LocalOsmSearchRunner::search( const QString &searchTerm, const GeoDataLatLo
     QVector<OsmPlacemark> placemarks = m_database.find( userQuery );
 
     QVector<GeoDataPlacemark*> result;
-    foreach( const OsmPlacemark &placemark, placemarks ) {
+    for( const OsmPlacemark &placemark: placemarks ) {
         GeoDataPlacemark* hit = new GeoDataPlacemark;
         hit->setName( placemark.name() );
         if ( placemark.category() == OsmPlacemark::Address && !placemark.houseNumber().isEmpty() ) {

@@ -29,7 +29,7 @@ class GeoDataContainerPrivate : public GeoDataFeaturePrivate
       : GeoDataFeaturePrivate(other)
     {
         m_vector.reserve(other.m_vector.size());
-        foreach (GeoDataFeature *feature, other.m_vector) {
+        for (GeoDataFeature *feature: other.m_vector) {
             m_vector.append(feature->clone());
         }
     }
@@ -45,7 +45,7 @@ class GeoDataContainerPrivate : public GeoDataFeaturePrivate
         qDeleteAll( m_vector );
         m_vector.clear();
         m_vector.reserve(other.m_vector.size());
-        foreach( GeoDataFeature *feature, other.m_vector )
+        for( GeoDataFeature *feature: other.m_vector )
         {
             m_vector.append(feature->clone());
         }
@@ -59,7 +59,7 @@ class GeoDataContainerPrivate : public GeoDataFeaturePrivate
 
     void setParent(GeoDataObject *parent)
     {
-        foreach (GeoDataFeature *feature, m_vector) {
+        for (GeoDataFeature *feature: m_vector) {
             feature->setParent(parent);
         }
     }

@@ -81,7 +81,7 @@ bool GeoUriParser::parse()
             for ( int i = 4; i <= geoUriRegexp.captureCount(); ++i )
             {
                 if (geoUriRegexp.capturedTexts()[i] == QLatin1String("crs")) {
-                    foreach ( const QString& str, PlanetFactory::planetList()) {
+                    for ( const QString& str: PlanetFactory::planetList()) {
                         if ( geoUriRegexp.captureCount() < i+1 ) {
                             i = geoUriRegexp.captureCount() + 1;
                             break;
@@ -117,7 +117,7 @@ bool GeoUriParser::parse()
         //QString layer = worldwindUrl.queryItemValue("layer");
         QString world = queryValue(worldwindUrl, "world");
 
-        foreach ( const QString& str, PlanetFactory::planetList()) {
+        for ( const QString& str: PlanetFactory::planetList()) {
             if ( world.contains(str, Qt::CaseInsensitive) ) {
                 m_planet = PlanetFactory::construct( str );
                 break;

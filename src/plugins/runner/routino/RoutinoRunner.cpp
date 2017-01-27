@@ -73,7 +73,7 @@ public:
     ~TemporaryDir() {
         QDir dir( m_dirName );
         QFileInfoList entries = dir.entryInfoList( QDir::Files );
-        foreach ( const QFileInfo &file, entries ) {
+        for ( const QFileInfo &file: entries ) {
             QFile( file.absoluteFilePath() ).remove();
         }
         dir.rmdir( dir.absolutePath() );
@@ -130,7 +130,7 @@ GeoDataLineString* RoutinoRunnerPrivate::parseRoutinoOutput( const QByteArray &c
 
     const QStringList lines = QString::fromUtf8(content).split(QLatin1Char('\n'));
     mDebug() << lines.count() << "lines";
-    foreach( const QString &line, lines ) {
+    for( const QString &line: lines ) {
         if (line.startsWith(QLatin1Char('#'))) {
             //skip comment
             continue;
@@ -203,7 +203,7 @@ GeoDataDocument* RoutinoRunnerPrivate::createDocument( GeoDataLineString* routeW
     }
     result->setName( name.arg( length, 0, 'f', 1 ).arg( unit ) );
 
-    foreach( GeoDataPlacemark* placemark, instructions )
+    for( GeoDataPlacemark* placemark: instructions )
     {
         result->append( placemark );
     }

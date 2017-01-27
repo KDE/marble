@@ -91,7 +91,7 @@ void OsmTagEditorWidgetPrivate::populateCurrentTagsList()
 void OsmTagEditorWidgetPrivate::populatePresetTagsList()
 {
     QList<OsmTag> tags = recommendedTags();
-    foreach (const OsmTag &tag, tags) {
+    for (const OsmTag &tag: tags) {
         QTreeWidgetItem *tagItem = tagWidgetItem( tag );
         m_recommendedTagsList->addTopLevelItem( tagItem );
     }
@@ -124,7 +124,7 @@ QList<OsmTagEditorWidgetPrivate::OsmTag> OsmTagEditorWidgetPrivate::recommendedT
         }
     }
 
-    foreach (const auto additionalOsmTag, additionalOsmTags) {
+    for (const auto additionalOsmTag: additionalOsmTags) {
         if (filter.contains(additionalOsmTag.first)) {
             recommendedTags += additionalOsmTag;
         }
@@ -327,7 +327,7 @@ QStringList OsmTagEditorWidgetPrivate::generateTagFilter() const
 
 bool OsmTagEditorWidgetPrivate::containsAny( const OsmPlacemarkData &osmData, const QStringList &tags ) const
 {
-    foreach ( const QString &tag, tags ) {
+    for ( const QString &tag: tags ) {
         const QStringList tagSplit = tag.split(QLatin1Char('='));
 
         // Only "key=value" mappings should be checked
@@ -348,7 +348,7 @@ bool OsmTagEditorWidgetPrivate::containsAny( const OsmPlacemarkData &osmData, co
 
 void OsmTagEditorWidgetPrivate::addPattern( QStringList &filter, const OsmPlacemarkData &osmData, const QStringList &tags ) const
 {
-    foreach ( const QString &tag, tags ) {
+    for ( const QString &tag: tags ) {
         const QStringList tagSplit = tag.split(QLatin1Char('='));
         QString key = tagSplit.at( 0 );
         if ( !osmData.containsTagKey( key ) ) {

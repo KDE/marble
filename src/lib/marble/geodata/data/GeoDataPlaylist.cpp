@@ -27,7 +27,7 @@ bool GeoDataPlaylist::operator==(const GeoDataPlaylist& other) const
     }
     else{
         int index = 0;
-        foreach( GeoDataTourPrimitive* m_primitive, m_primitives ){
+        for( GeoDataTourPrimitive* m_primitive: m_primitives ){
             if( m_primitive->nodeType() != other.m_primitives.at( index )->nodeType() ){
                 return false;
             }else{

@@ -223,7 +223,7 @@ bool MapItemDelegate::editorEvent(QEvent *event, QAbstractItemModel *, const QSt
                 QRect openRect = position( OpenButton, option );
                 if ( openRect.contains( mouseEvent->pos() ) ) {
                     QStringList const files = index.data( NewstuffModel::InstalledFiles ).toStringList();
-                    foreach( const QString &file, files ) {
+                    for( const QString &file: files ) {
                         if ( file.endsWith( QLatin1String( ".dgml" ) ) ) {
                             QFileInfo dgmlFile( file );
                             QDir baseDir = dgmlFile.dir();

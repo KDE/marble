@@ -223,7 +223,7 @@ void FileLoaderPrivate::documentParsed( GeoDataDocument* doc, const QString& err
         }
 
         if (m_renderOrder != 0) {
-            foreach (GeoDataPlacemark* placemark, doc->placemarkList()) {
+            for (GeoDataPlacemark* placemark: doc->placemarkList()) {
                 if (placemark->geometry() && placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType) {
                     GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>(placemark->geometry());
                     polygon->setRenderOrder(m_renderOrder);

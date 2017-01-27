@@ -61,7 +61,7 @@ QList<const ReverseGeocodingRunnerPlugin *> ReverseGeocodingRunnerManager::Priva
 {
     QList<const ReverseGeocodingRunnerPlugin *> result;
 
-    foreach( const ReverseGeocodingRunnerPlugin *plugin, plugins ) {
+    for( const ReverseGeocodingRunnerPlugin *plugin: plugins ) {
         if ( ( m_marbleModel && m_marbleModel->workOffline() && !plugin->canWorkOffline() ) ) {
             continue;
         }
@@ -136,14 +136,14 @@ void ReverseGeocodingRunnerManager::reverseGeocoding( const GeoDataCoordinates &
     }
 #endif
     QList<const ReverseGeocodingRunnerPlugin*> plugins = d->plugins( d->m_pluginManager->reverseGeocodingRunnerPlugins() );
-    foreach( const ReverseGeocodingRunnerPlugin* plugin, plugins ) {
+    for( const ReverseGeocodingRunnerPlugin* plugin: plugins ) {
         ReverseGeocodingTask* task = new ReverseGeocodingTask( plugin->newRunner(), this, d->m_marbleModel, coordinates );
         connect( task, SIGNAL(finished(ReverseGeocodingTask*)), this, SLOT(cleanupReverseGeocodingTask(ReverseGeocodingTask*)) );
         mDebug() << "reverse task " << plugin->nameId() << " " << (quintptr)task;
         d->m_reverseTasks << task;
     }
 
-    foreach( ReverseGeocodingTask* task, d->m_reverseTasks ) {
+    for( ReverseGeocodingTask* task: d->m_reverseTasks ) {
         QThreadPool::globalInstance()->start( task );
     }
 

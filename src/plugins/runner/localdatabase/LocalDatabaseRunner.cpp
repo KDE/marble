@@ -51,7 +51,7 @@ void LocalDatabaseRunner::search( const QString &searchTerm, const GeoDataLatLon
                                     Qt::MatchStartsWith );
 
             bool const searchEverywhere = preferred.isEmpty();
-            foreach ( const QModelIndex& index, resultList ) {
+            for ( const QModelIndex& index: resultList ) {
                 if( !index.isValid() ) {
                     mDebug() << "invalid index!!!";
                     continue;

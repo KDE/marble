@@ -77,7 +77,7 @@ template<typename T>
 QList<T*> SearchRunnerManager::Private::plugins( const QList<T*> &plugins ) const
 {
     QList<T*> result;
-    foreach( T* plugin, plugins ) {
+    for( T* plugin: plugins ) {
         if ( ( m_marbleModel && m_marbleModel->workOffline() && !plugin->canWorkOffline() ) ) {
             continue;
         }
@@ -197,14 +197,14 @@ void SearchRunnerManager::findPlacemarks( const QString &searchTerm, const GeoDa
     }
 
     QList<const SearchRunnerPlugin *> plugins = d->plugins( d->m_pluginManager->searchRunnerPlugins() );
-    foreach( const SearchRunnerPlugin *plugin, plugins ) {
+    for( const SearchRunnerPlugin *plugin: plugins ) {
         SearchTask *task = new SearchTask( plugin->newRunner(), this, d->m_marbleModel, searchTerm, preferred );
         connect( task, SIGNAL(finished(SearchTask*)), this, SLOT(cleanupSearchTask(SearchTask*)) );
         d->m_searchTasks << task;
         mDebug() << "search task " << plugin->nameId() << " " << (quintptr)task;
     }
 
-    foreach( SearchTask *task, d->m_searchTasks ) {
+    for( SearchTask *task: d->m_searchTasks ) {
         QThreadPool::globalInstance()->start( task );
     }
 

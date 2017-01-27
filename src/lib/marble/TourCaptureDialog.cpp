@@ -87,7 +87,7 @@ void TourCaptureDialog::loadDestinationFile()
     }
 
     bool supported = false;
-    foreach(const MovieFormat &format, formats) {
+    for(const MovieFormat &format: formats) {
         if (destination.endsWith(QLatin1Char('.') + format.extension())) {
             supported = true;
             break;

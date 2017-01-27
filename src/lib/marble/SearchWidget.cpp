@@ -75,7 +75,7 @@ void SearchWidgetPrivate::setSearchResult( const QVector<GeoDataPlacemark *>& lo
     treeModel->removeDocument( m_document );
     m_document->clear();
     m_document->setName( QString( QObject::tr( "Search for '%1'" ) ).arg( m_searchField->text() ) );
-    foreach (GeoDataPlacemark *placemark, locations ) {
+    for (GeoDataPlacemark *placemark: locations ) {
         m_document->append( new GeoDataPlacemark( *placemark ) );
     }
     treeModel->addDocument( m_document );

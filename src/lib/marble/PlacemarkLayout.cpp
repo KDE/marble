@@ -212,7 +212,7 @@ QVector<const GeoDataFeature*> PlacemarkLayout::whichPlacemarkAt( const QPoint& 
 
     QVector<const GeoDataFeature*> ret;
 
-    foreach( VisiblePlacemark* mark, m_paintOrder ) {
+    for( VisiblePlacemark* mark: m_paintOrder ) {
         if ( mark->labelRect().contains( curpos ) || mark->symbolRect().contains( curpos ) ) {
             ret.append( mark->placemark() );
         }
@@ -321,7 +321,7 @@ QSet<TileId> PlacemarkLayout::visibleTiles( const ViewportParams *viewport, int 
         geoRects << QRectF(west, north, M_PI - west, south - north);
         geoRects << QRectF(-M_PI, north, east + M_PI, south - north);
     }
-    foreach( const QRectF &geoRect, geoRects ) {
+    for( const QRectF &geoRect: geoRects ) {
         TileId key;
         QRect rect;
 
@@ -418,12 +418,12 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParam
         const QItemSelection selection = m_selectionModel->selection();
 
         placemarkList.clear();
-        foreach ( const TileId &tileId, visibleTiles( viewport, tileLevel ) ) {
+        for ( const TileId &tileId: visibleTiles( viewport, tileLevel ) ) {
             placemarkList += m_placemarkCache.value( tileId );
         }
         std::sort(placemarkList.begin(), placemarkList.end(), GeoDataPlacemark::placemarkLayoutOrderCompare);
 
-        foreach ( const GeoDataPlacemark *placemark, placemarkList ) {
+        for ( const GeoDataPlacemark *placemark: placemarkList ) {
             const GeoDataCoordinates coordinates = placemarkIconCoordinates( placemark );
             if ( !coordinates.isValid() ) {
                 continue;
@@ -491,7 +491,7 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParam
             // Assuming that only a small amount of places is selected
             // we check for the selected state after all other filters
             bool isSelected = false;
-            foreach ( const QModelIndex &index, selection.indexes() ) {
+            for ( const QModelIndex &index: selection.indexes() ) {
                 const GeoDataPlacemark *mark = static_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) ));
                 if (mark == placemark ) {
                     isSelected = true;
@@ -548,7 +548,7 @@ bool PlacemarkLayout::hasPlacemarkAt(const QPoint &pos)
         return true;
     }
 
-    foreach(VisiblePlacemark* mark, m_paintOrder) {
+    for(VisiblePlacemark* mark: m_paintOrder) {
         if (mark->labelRect().contains(pos) || mark->symbolRect().contains(pos)) {
             m_lastPlacemarkAt = mark;
             return true;

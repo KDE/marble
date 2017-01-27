@@ -328,7 +328,7 @@ GeoDataDocument *TileLoader::openVectorFile(const QString &fileName) const
     const QString suffix = fileInfo.suffix().toLower();
     const QString completeSuffix = fileInfo.completeSuffix().toLower();
 
-    foreach( const ParseRunnerPlugin *plugin, plugins ) {
+    for( const ParseRunnerPlugin *plugin: plugins ) {
         QStringList const extensions = plugin->fileExtensions();
         if ( extensions.contains( suffix ) || extensions.contains( completeSuffix ) ) {
             ParsingRunner* runner = plugin->newRunner();

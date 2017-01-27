@@ -108,7 +108,7 @@ QString VoiceNavigationModelPrivate::audioFile( const QString &name ) const
     QStringList const formats = QStringList() << "ogg" << "mp3" << "wav";
     if ( m_speakerEnabled ) {
         QString const audioTemplate = "%1/%2.%3";
-        foreach( const QString &format, formats ) {
+        for( const QString &format: formats ) {
             QString const result = audioTemplate.arg( m_speaker ).arg( name ).arg( format );
             QFileInfo audioFile( result );
             if ( audioFile.exists() ) {
@@ -118,7 +118,7 @@ QString VoiceNavigationModelPrivate::audioFile( const QString &name ) const
     }
 
     QString const audioTemplate = "audio/%1.%2";
-    foreach( const QString &format, formats ) {
+    for( const QString &format: formats ) {
         QString const result = MarbleDirs::path( audioTemplate.arg( name ).arg( format ) );
         if ( !result.isEmpty() ) {
             return result;
@@ -136,7 +136,7 @@ QString VoiceNavigationModelPrivate::distanceAudioFile( qreal dest ) const
         int targetDistance = 0;
         QVector<int> distances;
         distances << 50 << 80 << 100 << 200 << 300 << 400 << 500 << 600 << 700 << 800;
-        foreach( int distance, distances ) {
+        for( int distance: distances ) {
             QString file = audioFile( QString::number( distance ) );
             qreal currentDistance = qAbs( distance - dest );
             if ( !file.isEmpty() && ( minDistance == 0.0 || currentDistance < minDistance ) ) {

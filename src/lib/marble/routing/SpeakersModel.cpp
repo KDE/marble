@@ -74,12 +74,12 @@ void SpeakersModelPrivate::fillModel()
     m_speakers.clear();
 
     QStringList const baseDirs = QStringList() << MarbleDirs::systemPath() << MarbleDirs::localPath();
-    foreach ( const QString &baseDir, baseDirs ) {
+    for ( const QString &baseDir: baseDirs ) {
         const QString base = baseDir + QLatin1String("/audio/speakers/");
 
         QDir::Filters filter = QDir::Readable | QDir::Dirs | QDir::NoDotAndDotDot;
         QFileInfoList subdirs = QDir( base ).entryInfoList( filter, QDir::Name );
-        foreach( const QFileInfo &file, subdirs ) {
+        for( const QFileInfo &file: subdirs ) {
             SpeakersModelItem item;
             item.m_file = file;
             m_speakers << item;

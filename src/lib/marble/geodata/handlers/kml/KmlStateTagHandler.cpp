@@ -35,7 +35,7 @@ GeoNode* KmlstateTagHandler::parse( GeoParser& parser ) const
         QString value = parser.readElementText().trimmed();
         QStringList iconStateTextList = value.split(QLatin1Char(' '));
 
-        foreach( const QString &value, iconStateTextList ) {
+        for( const QString &value: iconStateTextList ) {
             if (value == QLatin1String("open")) {
                 itemIconState |= GeoDataItemIcon::Open;
             } else if (value == QLatin1String("closed")) {

@@ -229,7 +229,7 @@ void PluginManagerPrivate::loadPlugins()
     Q_ASSERT( m_parsingRunnerPlugins.isEmpty() );
 
     bool foundPlugin = false;
-    foreach( const QString &fileName, pluginFileNameList ) {
+    for( const QString &fileName: pluginFileNameList ) {
         QString const baseName = QFileInfo(fileName).baseName();
         if (!m_whitelist.isEmpty() && !m_whitelist.contains(baseName)) {
             mDebug() << "Ignoring non-whitelisted plugin " << fileName;
@@ -316,11 +316,11 @@ void PluginManagerPrivate::loadPlugins()
 
         QStringList pluginNameFilter = QStringList() << "lib*.so";
         QStringList const existingPlugins = QDir(MarbleDirs::pluginLocalPath()).entryList(pluginNameFilter, QDir::Files);
-        foreach(const QString &existingPlugin, existingPlugins) {
+        for(const QString &existingPlugin: existingPlugins) {
             QFile::remove(existingPlugin);
         }
 
-        foreach (const QString & file, copyList) {
+        for (const QString & file: copyList) {
             QString const target = MarbleDirs::pluginLocalPath() + QLatin1Char('/') + file;
             if (QFileInfo(MarbleDirs::pluginSystemPath() + QLatin1Char('/') + file).isDir()) {
                 pluginHome.mkpath(target);

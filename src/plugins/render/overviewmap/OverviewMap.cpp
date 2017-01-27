@@ -318,7 +318,7 @@ void OverviewMap::setSettings( const QHash<QString,QVariant> &settings )
     m_settings.insert(QStringLiteral("width"), settings.value(QStringLiteral("width"), m_defaultSize.toSize().width()));
     m_settings.insert(QStringLiteral("height"), settings.value(QStringLiteral("height"), m_defaultSize.toSize().height()));
 
-    foreach ( const QString& planet, PlanetFactory::planetList() ) {
+    for ( const QString& planet: PlanetFactory::planetList() ) {
         QString mapFile = MarbleDirs::path(QLatin1String("svg/") + planet + QLatin1String("map.svg"));
 
         if (planet == QLatin1String("moon")) {
@@ -363,7 +363,7 @@ void OverviewMap::writeSettings()
     m_settings.insert(QStringLiteral("height"), contentRect().height());
 
     QStringList const planets = PlanetFactory::planetList();
-    foreach( const QString &planet, planets ) {
+    for( const QString &planet: planets ) {
         m_settings.insert(QLatin1String("path_") + planet, m_svgPaths[planet]);
     }
 
@@ -375,7 +375,7 @@ void OverviewMap::writeSettings()
 void OverviewMap::updateSettings()
 {
     QStringList const planets = PlanetFactory::planetList();
-    foreach( const QString &planet, planets ) {
+    for( const QString &planet: planets ) {
         m_svgPaths.insert(planet, m_settings.value(QLatin1String("path_") + planet, QString()).toString());
     }
 
@@ -457,7 +457,7 @@ void OverviewMap::setCurrentWidget( QSvgWidget *widget )
 
 void OverviewMap::loadPlanetMaps()
 {
-    foreach( const QString& planet, m_planetID ) {
+    for( const QString& planet: m_planetID ) {
         if ( m_svgWidgets.contains( planet) ) {
             m_svgWidgets[planet]->load( m_svgPaths[planet] );
         } else {

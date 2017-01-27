@@ -43,7 +43,7 @@ public:
 
     ~FileManagerPrivate()
     {
-        foreach ( FileLoader *loader, m_loaderList ) {
+        for ( FileLoader *loader: m_loaderList ) {
             if ( loader ) {
                 loader->wait();
             }
@@ -83,7 +83,7 @@ void FileManager::addFile( const QString& filepath, const QString& property, con
             return;  // already loaded
     }
 
-    foreach ( const FileLoader *loader, d->m_loaderList ) {
+    for ( const FileLoader *loader: d->m_loaderList ) {
         if ( loader->path() == filepath )
             return;  // currently loading
     }
@@ -112,7 +112,7 @@ void FileManagerPrivate::appendLoader( FileLoader *loader )
 
 void FileManager::removeFile( const QString& key )
 {
-    foreach ( FileLoader *loader, d->m_loaderList ) {
+    for ( FileLoader *loader: d->m_loaderList ) {
         if ( loader->path() == key ) {
             disconnect( loader, 0, this, 0 );
             loader->wait();

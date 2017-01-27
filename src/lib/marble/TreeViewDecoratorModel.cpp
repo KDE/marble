@@ -65,7 +65,7 @@ QVariant TreeViewDecoratorModel::data( const QModelIndex &proxyIndex, int role) 
 
     bool const expandedState = m_expandedRows.contains( QPersistentModelIndex( proxyIndex ) );
 
-    foreach (GeoDataItemIcon *icon, folder->style()->listStyle().itemIconList()) {
+    for (GeoDataItemIcon *icon: folder->style()->listStyle().itemIconList()) {
         if ( ! expandedState ) {
             if ( icon->state() == GeoDataItemIcon::Closed ) {
                 return icon->icon();

@@ -575,7 +575,7 @@ GeoDataLatLonBox GeoDataLatLonBox::toCircumscribedRectangle() const
     bool eastSet = false;
     bool westSet = false;
 
-    foreach ( const GeoDataCoordinates& coord, coordinates ) {
+    for ( const GeoDataCoordinates& coord: coordinates ) {
 
         const qreal lon = coord.longitude();
         const qreal lat = coord.latitude();

@@ -82,7 +82,7 @@ class ScreenGraphicsItemPrivate : public MarbleGraphicsItemPrivate
 
         QVector<QPointF> absolutePositions;
         absolutePositions.reserve(parentPositions.size());
-        foreach( const QPointF &point, parentPositions ) {
+        for( const QPointF &point: parentPositions ) {
             absolutePositions.append( point + relativePosition );
         }
 

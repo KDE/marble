@@ -130,7 +130,7 @@ void RoutingProfilesModel::loadDefaultProfiles()
         ProfileTemplate tpl = static_cast<ProfileTemplate>( i );
         RoutingProfile profile( templateName( tpl ) );
         bool profileSupportedByAtLeastOnePlugin = false;
-        foreach( RoutingRunnerPlugin* plugin, m_pluginManager->routingRunnerPlugins() ) {
+        for( RoutingRunnerPlugin* plugin: m_pluginManager->routingRunnerPlugins() ) {
             if ( plugin->supportsTemplate( tpl ) ) {
                 profileSupportedByAtLeastOnePlugin = true;
                 break;
@@ -139,7 +139,7 @@ void RoutingProfilesModel::loadDefaultProfiles()
         if ( !profileSupportedByAtLeastOnePlugin ) {
             continue;
         }
-        foreach( RoutingRunnerPlugin* plugin, m_pluginManager->routingRunnerPlugins() ) {
+        for( RoutingRunnerPlugin* plugin: m_pluginManager->routingRunnerPlugins() ) {
             if ( plugin->supportsTemplate( tpl ) ) {
                 profile.pluginSettings()[plugin->nameId()] = plugin->templateSettings( tpl );
             }

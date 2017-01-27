@@ -116,7 +116,7 @@ void Route::updatePosition() const
         }
 
         GeoDataCoordinates closest, interpolated;
-        foreach( int i, candidates ) {
+        for( int i: candidates ) {
             qreal const dist = m_segments[i].distanceTo( m_position, closest, interpolated );
             if ( distance < 0.0 || dist < distance ) {
                 distance = dist;

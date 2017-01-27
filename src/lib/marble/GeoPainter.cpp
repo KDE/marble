@@ -583,7 +583,7 @@ void GeoPainter::drawPolyline ( const GeoDataLineString & lineString,
     polygonsFromLineString(lineString, polygons);
     if (polygons.empty()) return;
 
-    foreach(const QPolygonF* itPolygon, polygons) {
+    for(const QPolygonF* itPolygon: polygons) {
         ClipPainter::drawPolyline(*itPolygon);
     }
 
@@ -624,7 +624,7 @@ void GeoPainter::drawLabelsForPolygons( const QVector<QPolygonF*> &polygons,
 
         QVector<QPointF> labelNodes;
         QRectF viewportRect = QRectF(QPointF(0, 0), d->m_viewport->size());
-        foreach( QPolygonF* itPolygon, polygons ) {
+        for( QPolygonF* itPolygon: polygons ) {
             if (!itPolygon->boundingRect().intersects(viewportRect)) {
                 continue;
             }
@@ -692,11 +692,11 @@ void GeoPainter::drawLabelsForPolygons( const QVector<QPolygonF*> &polygons,
         int labelAscent = fontMetrics().ascent();
 
         QVector<QPointF> labelNodes;
-        foreach( QPolygonF* itPolygon, polygons ) {
+        for( QPolygonF* itPolygon: polygons ) {
             labelNodes.clear();
             ClipPainter::labelPosition( *itPolygon, labelNodes, labelPositionFlags );
             if (!labelNodes.isEmpty()) {
-                foreach ( const QPointF& labelNode, labelNodes ) {
+                for ( const QPointF& labelNode: labelNodes ) {
                     QPointF labelPosition = labelNode + QPointF( 3.0, -2.0 );
 
                     // FIXME: This is a Q&D fix.
@@ -721,7 +721,7 @@ void GeoPainter::drawPolyline(const GeoDataLineString& lineString)
     polygonsFromLineString(lineString, polygons);
     if (polygons.empty()) return;
 
-    foreach(const QPolygonF* itPolygon, polygons) {
+    for(const QPolygonF* itPolygon: polygons) {
         ClipPainter::drawPolyline(*itPolygon);
     }
 
@@ -748,7 +748,7 @@ QRegion GeoPainter::regionFromPolyline ( const GeoDataLineString & lineString,
     QVector<QPolygonF*> polygons;
     d->m_viewport->screenCoordinates( lineString, polygons );
 
-    foreach( QPolygonF* itPolygon, polygons ) {
+    for( QPolygonF* itPolygon: polygons ) {
         painterPath.addPolygon( *itPolygon );
     }
 
@@ -779,7 +779,7 @@ void GeoPainter::drawPolygon ( const GeoDataLinearRing & linearRing,
     QVector<QPolygonF*> polygons;
     d->m_viewport->screenCoordinates( linearRing, polygons );
 
-    foreach( QPolygonF* itPolygon, polygons ) {
+    for( QPolygonF* itPolygon: polygons ) {
         ClipPainter::drawPolygon( *itPolygon, fillRule );
     }
 
@@ -807,13 +807,13 @@ QRegion GeoPainter::regionFromPolygon ( const GeoDataLinearRing & linearRing,
 
     if ( strokeWidth == 0 ) {
         // This is the faster way
-        foreach( QPolygonF* itPolygon, polygons ) {
+        for( QPolygonF* itPolygon: polygons ) {
             regions += QRegion ( (*itPolygon).toPolygon(), fillRule );
         }
     }
     else {
         QPainterPath painterPath;
-        foreach( QPolygonF* itPolygon, polygons ) {
+        for( QPolygonF* itPolygon: polygons ) {
             painterPath.addPolygon( *itPolygon );
         }
 
@@ -857,7 +857,7 @@ void GeoPainter::drawPolygon ( const GeoDataPolygon & polygon,
         QVector<GeoDataLinearRing> const & innerBoundaries = polygon.innerBoundaries();
 
         const GeoDataLatLonAltBox & viewLatLonAltBox = d->m_viewport->viewLatLonAltBox();
-        foreach( const GeoDataLinearRing& itInnerBoundary, innerBoundaries ) {
+        for( const GeoDataLinearRing& itInnerBoundary: innerBoundaries ) {
             if ( viewLatLonAltBox.intersects(itInnerBoundary.latLonAltBox())
                  && d->m_viewport->resolves(itInnerBoundary.latLonAltBox()), 4 )  {
                 innerBoundariesOnScreen = true;
@@ -867,12 +867,12 @@ void GeoPainter::drawPolygon ( const GeoDataPolygon & polygon,
 
         if (innerBoundariesOnScreen) {
             // Create the inner screen polygons
-            foreach( const GeoDataLinearRing& itInnerBoundary, innerBoundaries ) {
+            for( const GeoDataLinearRing& itInnerBoundary: innerBoundaries ) {
                 QVector<QPolygonF*> innerPolygonsPerBoundary;
 
                 d->m_viewport->screenCoordinates( itInnerBoundary, innerPolygonsPerBoundary );
 
-                foreach( QPolygonF* innerPolygonPerBoundary, innerPolygonsPerBoundary ) {
+                for( QPolygonF* innerPolygonPerBoundary: innerPolygonsPerBoundary ) {
                     innerPolygons << innerPolygonPerBoundary;
                 }
             }
@@ -881,16 +881,16 @@ void GeoPainter::drawPolygon ( const GeoDataPolygon & polygon,
             QVector<QPolygonF*> fillPolygons = createFillPolygons( outerPolygons,
                                                                    innerPolygons );
 
-            foreach( const QPolygonF* fillPolygon, fillPolygons ) {
+            for( const QPolygonF* fillPolygon: fillPolygons ) {
                 ClipPainter::drawPolygon(*fillPolygon, fillRule);
             }
 
             setPen(currentPen);
 
-            foreach( const QPolygonF* outerPolygon, outerPolygons ) {
+            for( const QPolygonF* outerPolygon: outerPolygons ) {
                 ClipPainter::drawPolyline( *outerPolygon );
             }
-            foreach( const QPolygonF* innerPolygon, innerPolygons ) {
+            for( const QPolygonF* innerPolygon: innerPolygons ) {
                 ClipPainter::drawPolyline( *innerPolygon );
             }
 
@@ -912,12 +912,12 @@ QVector<QPolygonF*> GeoPainter::createFillPolygons( const QVector<QPolygonF*> & 
     QVector<QPolygonF*> fillPolygons;
     fillPolygons.reserve(outerPolygons.size());
 
-    foreach( const QPolygonF* outerPolygon, outerPolygons ) {
+    for( const QPolygonF* outerPolygon: outerPolygons ) {
         QPolygonF* fillPolygon = new QPolygonF;
         *fillPolygon << *outerPolygon;
         *fillPolygon << outerPolygon->first();
 
-        foreach( const QPolygonF* innerPolygon, innerPolygons ) {
+        for( const QPolygonF* innerPolygon: innerPolygons ) {
             *fillPolygon << *innerPolygon;
             *fillPolygon << innerPolygon->first();
             *fillPolygon << outerPolygon->first();

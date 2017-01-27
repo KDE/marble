@@ -69,7 +69,7 @@ template<typename T>
 QList<T*> RoutingRunnerManager::Private::plugins( const QList<T*> &plugins ) const
 {
     QList<T*> result;
-    foreach( T* plugin, plugins ) {
+    for( T* plugin: plugins ) {
         if ( ( m_marbleModel && m_marbleModel->workOffline() && !plugin->canWorkOffline() ) ) {
             continue;
         }
@@ -133,7 +133,7 @@ void RoutingRunnerManager::retrieveRoute( const RouteRequest *request )
     d->m_routingResult.clear();
 
     QList<RoutingRunnerPlugin*> plugins = d->plugins( d->m_pluginManager->routingRunnerPlugins() );
-    foreach( RoutingRunnerPlugin* plugin, plugins ) {
+    for( RoutingRunnerPlugin* plugin: plugins ) {
         if ( !profile.name().isEmpty() && !profile.pluginSettings().contains( plugin->nameId() ) ) {
             continue;
         }
@@ -144,7 +144,7 @@ void RoutingRunnerManager::retrieveRoute( const RouteRequest *request )
         d->m_routingTasks << task;
     }
 
-    foreach( RoutingTask* task, d->m_routingTasks ) {
+    for( RoutingTask* task: d->m_routingTasks ) {
         QThreadPool::globalInstance()->start( task );
     }
 

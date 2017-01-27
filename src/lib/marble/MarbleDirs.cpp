@@ -275,7 +275,7 @@ QStringList MarbleDirs::oldLocalPaths()
 
     QString currentLocalPath = QDir( MarbleDirs::localPath() ).canonicalPath();
     QStringList oldPaths;
-    foreach( const QString& possibleOldPath, possibleOldPaths ) {
+    for( const QString& possibleOldPath: possibleOldPaths ) {
         if( !QDir().exists( possibleOldPath ) ) {
             continue;
         }

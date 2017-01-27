@@ -188,7 +188,7 @@ bool MapThemeManager::Private::deleteDirectory( const QString& directory )
     bool result = true;
 
     if ( dir.exists() ) {
-        Q_FOREACH( const QFileInfo &info, dir.entryInfoList(
+        for( const QFileInfo &info: dir.entryInfoList(
             QDir::NoDotAndDotDot | QDir::System | QDir::Hidden |
             QDir::AllDirs | QDir::Files,
             QDir::DirsFirst ) ) {
@@ -418,7 +418,7 @@ void MapThemeManager::Private::updateMapThemeModel()
         }
     }
 
-    foreach ( const QString &mapThemeId, stringlist ) {
+    for ( const QString &mapThemeId: stringlist ) {
         const QString celestialBodyId = mapThemeId.section(QLatin1Char('/'), 0, 0);
         QString celestialBodyName = PlanetFactory::localizedName( celestialBodyId );
 
@@ -438,7 +438,7 @@ void MapThemeManager::Private::watchPaths()
     QStringList const directories = m_fileSystemWatcher.directories();
     // Check each resource to add that it is not being watched already,
     // otherwise some qWarning appears
-    foreach( const QString &resource, paths ) {
+    for( const QString &resource: paths ) {
         if ( !directories.contains( resource ) && !files.contains( resource ) ) {
             m_fileSystemWatcher.addPath( resource );
         }

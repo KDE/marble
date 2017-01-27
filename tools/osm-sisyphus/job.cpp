@@ -181,7 +181,7 @@ bool Job::monav()
     QFileInfo subdir = QFileInfo(monavDir().absoluteFilePath() + QLatin1String("/routing_") + m_transport.toLower());
     if (subdir.exists() && subdir.isDir()) {
         QFileInfoList files = QDir(subdir.absoluteFilePath()).entryInfoList(QDir::Files);
-        foreach(const QFileInfo &file, files) {
+        for(const QFileInfo &file: files) {
             if (!QFile::rename(file.absoluteFilePath(), monavDir().absoluteFilePath() + QLatin1Char('/') + file.fileName())) {
                 changeStatus(Error, "Unable to move monav files to target directory.");
                 return false;
@@ -279,7 +279,7 @@ bool Job::cleanup()
     QFileInfo subdir = QFileInfo(monavDir().absoluteFilePath());
     if (subdir.exists() && subdir.isDir()) {
         QFileInfoList files = QDir(subdir.absoluteFilePath()).entryInfoList(QDir::Files);
-        foreach(const QFileInfo &file, files) {
+        for(const QFileInfo &file: files) {
             QFile::remove(file.absoluteFilePath());
         }
     }

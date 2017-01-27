@@ -215,7 +215,7 @@ void PlaybackAnimatedUpdateItem::stop()
         }
     }
 
-    foreach( GeoDataFeature* feature, m_deletedObjects ) {
+    for( GeoDataFeature* feature: m_deletedObjects ) {
         if( feature->targetId().isEmpty() ) {
             continue;
         }

@@ -321,7 +321,7 @@ void NewstuffModelPrivate::handleProviderData(QNetworkReply *reply)
 bool NewstuffModelPrivate::canExecute( const QString &executable )
 {
     QString path = QProcessEnvironment::systemEnvironment().value(QStringLiteral("PATH"), QStringLiteral("/usr/local/bin:/usr/bin:/bin"));
-    foreach( const QString &dir, path.split( QLatin1Char( ':' ) ) ) {
+    for( const QString &dir: path.split( QLatin1Char( ':' ) ) ) {
         QFileInfo application( QDir( dir ), executable );
         if ( application.exists() ) {
             return true;
@@ -360,7 +360,7 @@ void NewstuffModelPrivate::unzip()
 {
     MarbleZipReader zipReader(m_currentFile->fileName());
     QStringList files;
-    foreach(const MarbleZipReader::FileInfo &fileInfo, zipReader.fileInfoList()) {
+    for(const MarbleZipReader::FileInfo &fileInfo: zipReader.fileInfoList()) {
         files << fileInfo.filePath;
     }
     updateRegistry(files);
@@ -425,7 +425,7 @@ void NewstuffModelPrivate::uninstall( int index )
 
     QStringList directories;
     QStringList const files = m_items[index].installedFiles();
-    foreach( const QString &file, files ) {
+    for( const QString &file: files ) {
         if (file.endsWith(QLatin1Char('/'))) {
             directories << file;
         } else {
@@ -434,7 +434,7 @@ void NewstuffModelPrivate::uninstall( int index )
     }
 
     std::sort( directories.begin(), directories.end(), NewstuffItem::deeperThan );
-    foreach( const QString &dir, directories ) {
+    for( const QString &dir: directories ) {
         QDir::root().rmdir( dir );
     }
 
@@ -881,7 +881,7 @@ void NewstuffModelPrivate::updateRegistry(const QStringList &files)
             }
         }
 
-        foreach( const QString &file, files ) {
+        for( const QString &file: files ) {
             QDomNode fileNode = node.appendChild( m_registryDocument.createElement( "installedfile" ) );
             fileNode.appendChild(m_registryDocument.createTextNode(m_targetDirectory + QLatin1Char('/') + file));
         }
@@ -949,7 +949,7 @@ bool NewstuffModelPrivate::isTransitioning( int index ) const
         return true;
     }
 
-    foreach( const Action &action, m_actionQueue ) {
+    for( const Action &action: m_actionQueue ) {
         if ( action.first == index ) {
             return true;
         }

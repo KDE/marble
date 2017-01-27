@@ -38,7 +38,7 @@ bool SVGXmlHandler::startElement(const QString& /*nspace*/,
 
         int  count = 0;
         qDebug() << "Starting to write path" << atts.value( "id" );
-        foreach ( const QString& str, stringlist ) {
+        for ( const QString& str: stringlist ) {
             float  x;
             float  y;
             x = str.section(QLatin1Char(','), 0, 0).toFloat();

@@ -273,7 +273,7 @@ void MarbleMapPrivate::updateProperty( const QString &name, bool show )
         m_textureLayer.setShowRelief( show );
     }
 
-    foreach(RenderPlugin *renderPlugin, m_renderPlugins) {
+    for(RenderPlugin *renderPlugin: m_renderPlugins) {
         if ( name == renderPlugin->nameId() ) {
             if ( renderPlugin->visible() == show ) {
                 break;
@@ -288,9 +288,9 @@ void MarbleMapPrivate::updateProperty( const QString &name, bool show )
 
 void MarbleMapPrivate::addPlugins()
 {
-    foreach (const RenderPlugin *factory, m_model->pluginManager()->renderPlugins()) {
+    for (const RenderPlugin *factory: m_model->pluginManager()->renderPlugins()) {
         bool alreadyCreated = false;
-        foreach(const RenderPlugin *existing, m_renderPlugins) {
+        for(const RenderPlugin *existing: m_renderPlugins) {
             if (existing->nameId() == factory->nameId()) {
                 alreadyCreated = true;
                 break;
@@ -788,13 +788,13 @@ void MarbleMapPrivate::setDocument( QString key )
 
     GeoDataDocument* doc = m_model->fileManager()->at( key );
 
-    foreach ( const GeoSceneLayer *layer, m_model->mapTheme()->map()->layers() ) {
+    for ( const GeoSceneLayer *layer: m_model->mapTheme()->map()->layers() ) {
         if ( layer->backend() != dgml::dgmlValue_geodata
              && layer->backend() != dgml::dgmlValue_vector )
             continue;
 
         // look for documents
-        foreach ( const GeoSceneAbstractDataset *dataset, layer->datasets() ) {
+        for ( const GeoSceneAbstractDataset *dataset: layer->datasets() ) {
             const GeoSceneGeodata *data = static_cast<const GeoSceneGeodata*>( dataset );
             QString containername = data->sourceFile();
             QString colorize = data->colorize();
@@ -912,10 +912,10 @@ void MarbleMapPrivate::updateMapTheme()
         QVector<const GeoSceneTextureTileDataset *> textures;
         QVector<const GeoSceneVectorTileDataset *> vectorTiles;
 
-        foreach( GeoSceneLayer* layer, m_model->mapTheme()->map()->layers() ){
+        for( GeoSceneLayer* layer: m_model->mapTheme()->map()->layers() ){
             if ( layer->backend() == dgml::dgmlValue_texture ){
 
-                foreach ( const GeoSceneAbstractDataset *pos, layer->datasets() ) {
+                for ( const GeoSceneAbstractDataset *pos: layer->datasets() ) {
                     const GeoSceneTextureTileDataset *const texture = dynamic_cast<GeoSceneTextureTileDataset const *>( pos );
                     if ( !texture )
                         continue;
@@ -961,7 +961,7 @@ void MarbleMapPrivate::updateMapTheme()
             }
             else if ( layer->backend() == dgml::dgmlValue_vectortile ){
 
-                foreach ( const GeoSceneAbstractDataset *pos, layer->datasets() ) {
+                for ( const GeoSceneAbstractDataset *pos: layer->datasets() ) {
                     const GeoSceneVectorTileDataset *const vectorTile = dynamic_cast<GeoSceneVectorTileDataset const *>( pos );
                     if ( !vectorTile )
                         continue;
@@ -1014,7 +1014,7 @@ void MarbleMapPrivate::updateMapTheme()
             if (filter->type() == QLatin1String("colorize")) {
                 //no need to look up with MarbleDirs twice so they are left null for now
                 QList<const GeoScenePalette*> palette = filter->palette();
-                foreach (const GeoScenePalette *curPalette, palette ) {
+                for (const GeoScenePalette *curPalette: palette ) {
 
                     if (curPalette->type() == QLatin1String("sea")) {
                         seafile = MarbleDirs::path( curPalette->file() );
@@ -1064,7 +1064,7 @@ void MarbleMapPrivate::updateMapTheme()
     m_styleBuilder.setDefaultLabelColor(m_model->mapTheme()->map()->labelColor());
     m_placemarkLayer.requestStyleReset();
 
-    foreach (RenderPlugin *renderPlugin, m_renderPlugins) {
+    for (RenderPlugin *renderPlugin: m_renderPlugins) {
         bool propertyAvailable = false;
         m_model->mapTheme()->settings()->propertyAvailable( renderPlugin->nameId(), propertyAvailable );
         bool propertyValue = false;
@@ -1113,7 +1113,7 @@ void MarbleMap::setShowCompass( bool visible )
 
 void MarbleMap::setShowAtmosphere( bool visible )
 {
-    foreach ( RenderPlugin *plugin, renderPlugins() ) {
+    for ( RenderPlugin *plugin: renderPlugins() ) {
         if (plugin->nameId() == QLatin1String("atmosphere")) {
             plugin->setVisible( visible );
         }
@@ -1368,7 +1368,7 @@ QList<AbstractFloatItem *> MarbleMap::floatItems() const
 
 AbstractFloatItem * MarbleMap::floatItem( const QString &nameId ) const
 {
-    foreach ( AbstractFloatItem * floatItem, floatItems() ) {
+    for ( AbstractFloatItem * floatItem: floatItems() ) {
         if ( floatItem && floatItem->nameId() == nameId ) {
             return floatItem;
         }

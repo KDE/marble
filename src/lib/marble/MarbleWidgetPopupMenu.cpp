@@ -271,7 +271,7 @@ void MarbleWidgetPopupMenu::Private::setupDialogOsm( PopupLayer *popup, const Ge
         << QStringLiteral("city");
     bool hasAddressItem = false;
     QStringList addressItems;
-    foreach (const QString& key, addressItemKeys) {
+    for (const QString& key: addressItemKeys) {
         const QString item = data.tagValue(QLatin1String("addr:") + key);
         if (!item.isEmpty()) {
             hasAddressItem = true;
@@ -296,7 +296,8 @@ void MarbleWidgetPopupMenu::Private::setupDialogOsm( PopupLayer *popup, const Ge
     }
 
     QString websiteData;
-    foreach(const QString &tag, QStringList() << "website" << "contact:website" << "facebook" << "contact:facebook" << "url") {
+    auto const tags = QStringList() << "website" << "contact:website" << "facebook" << "contact:facebook" << "url";
+    for(const QString &tag: tags) {
         websiteData = data.tagValue(tag);
         if (!websiteData.isEmpty()) {
             break;
@@ -591,7 +592,7 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
     QList<AbstractDataPluginItem *>::const_iterator const itWEnd = d->m_itemList.constEnd();
     for (; itW != itWEnd; ++itW )
     {
-        foreach ( QAction* action, (*itW)->actions() ) {
+        for ( QAction* action: (*itW)->actions() ) {
             d->m_lmbMenu.addAction( action );
         }
     }
@@ -670,7 +671,7 @@ void MarbleWidgetPopupMenu::slotInfoDialog()
         recognizedTags << "smoking" << "website" << "contact:website" << "facebook";
         recognizedTags << "contact:facebook" << "url";
 
-        foreach(const QString &tag, recognizedTags) {
+        for(const QString &tag: recognizedTags) {
             if (data.containsTagKey(tag)) {
                 hasOsmData = true;
                 break;

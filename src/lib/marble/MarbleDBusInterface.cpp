@@ -99,7 +99,7 @@ QStringList MarbleDBusInterface::properties() const
     QStringList properties;
     GeoSceneDocument const * const mapTheme = d->m_marbleWidget->model()->mapTheme();
     if ( mapTheme ) {
-        foreach( const GeoSceneProperty* property, mapTheme->settings()->allProperties() ) {
+        for( const GeoSceneProperty* property: mapTheme->settings()->allProperties() ) {
             properties << property->name();
         }
     }

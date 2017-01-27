@@ -297,7 +297,7 @@ void TileDirectory::createTiles() const
     QSharedPointer<VectorClipper> clipper;
     TileIterator iter(m_boundingBox, m_zoomLevel);
     qint64 count = 0;
-    foreach(auto const &tileId, iter) {
+    for(auto const &tileId: iter) {
         ++count;
         QString const outputDir = QString("%1/%2").arg(m_baseDir).arg(tileId.x());
         QString const outputFile = QString("%1/%2.o5m").arg(outputDir).arg(tileId.y());
@@ -343,7 +343,7 @@ void TileDirectory::createOsmTiles() const
         }
 
         TileIterator iter(m_boundingBox, zoomLevel);
-        foreach(auto const &tileId, iter) {
+        for(auto const &tileId: iter) {
             tileLevels[zoomLevel] << TileId(0, zoomLevel, tileId.x(), tileId.y());
         }
     }
@@ -426,7 +426,7 @@ int TileDirectory::innerNodes(const TileId &tile) const
 
     int innerNodes = 0;
     if (m_boundingPolygon.isEmpty()) {
-        foreach(auto const &coordinate, bounds) {
+        for(auto const &coordinate: bounds) {
             if (m_boundingBox.contains(coordinate)) {
                 ++innerNodes;
             }
@@ -434,8 +434,8 @@ int TileDirectory::innerNodes(const TileId &tile) const
         return innerNodes;
     }
 
-    foreach(auto const &coordinate, bounds) {
-        foreach(auto const &ring, m_boundingPolygon) {
+    for(auto const &coordinate: bounds) {
+        for(auto const &ring: m_boundingPolygon) {
             if (ring.contains(coordinate)) {
                 ++innerNodes;
             }
@@ -471,7 +471,7 @@ GeoDataLatLonBox TileDirectory::boundingBox(const QString &filename) const
     osmconvert.waitForFinished(10*60*1000);
     QStringList const output = QString(osmconvert.readAllStandardOutput()).split('\n');
     GeoDataLatLonBox boundingBox;
-    foreach(QString const &line, output) {
+    for(QString const &line: output) {
         if (line.startsWith("lon min:")) {
             boundingBox.setWest(line.mid(8).toDouble(), GeoDataCoordinates::Degree);
         } else if (line.startsWith("lon max")) {

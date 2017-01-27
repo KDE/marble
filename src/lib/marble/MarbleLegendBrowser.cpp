@@ -104,7 +104,7 @@ void MarbleLegendBrowser::initTheme()
 
         d->m_checkBoxMap.clear();
 
-        foreach ( const GeoSceneProperty *property, currentMapTheme->settings()->allProperties() ) {
+        for ( const GeoSceneProperty *property: currentMapTheme->settings()->allProperties() ) {
             if ( property->available() ) {
                 d->m_checkBoxMap[ property->name() ] = property->value();
             }
@@ -265,7 +265,7 @@ QString MarbleLegendBrowser::generateSectionsHtml()
      * do it, anyway. It's complicated a lot, the most important
      * thing is to understand everything.
      */
-    foreach ( const GeoSceneSection *section, currentMapTheme->legend()->sections() ) {
+    for ( const GeoSceneSection *section: currentMapTheme->legend()->sections() ) {
         // Each section is divided into the "well"
         // Well is like a block of data with rounded corners
         customLegendString += QLatin1String("<div class=\"well well-small well-legend\">");
@@ -304,7 +304,7 @@ QString MarbleLegendBrowser::generateSectionsHtml()
             customLegendString += QLatin1String("<h4 class=\"section-head\">") + heading + QLatin1String("</h4>");
         }
 
-        foreach (const GeoSceneItem *item, section->items()) {
+        for (const GeoSceneItem *item: section->items()) {
 
             // checkbox for item
             QString checkBoxString;

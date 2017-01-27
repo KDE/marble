@@ -41,7 +41,7 @@ bool KmzHandler::open(const QString &kmz, QString &error)
         return false;
     }
 
-    foreach(const MarbleZipReader::FileInfo &fileInfo, zip.fileInfoList()) {
+    for(const MarbleZipReader::FileInfo &fileInfo: zip.fileInfoList()) {
         //if (!fileInfo.isFile) {
         //    continue;
         //}

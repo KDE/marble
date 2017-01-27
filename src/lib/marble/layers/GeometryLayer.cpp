@@ -190,13 +190,13 @@ bool GeometryLayer::render(GeoPainter *painter, ViewportParams *viewport,
         d->m_cachedDefaultLayer.clear();
         d->m_cachedPaintFragments.clear();
         QSet<QString> const knownLayers = QSet<QString>::fromList(d->m_styleBuilder->renderOrder());
-        foreach (GeoGraphicsItem* item, items) {
+        for (GeoGraphicsItem* item: items) {
             QStringList paintLayers = item->paintLayers();
             if (paintLayers.isEmpty()) {
                 mDebug() << item << " provides no paint layers, so I force one onto it.";
                 paintLayers << QString();
             }
-            foreach (const auto &layer, paintLayers) {
+            for (const auto &layer: paintLayers) {
                 if (knownLayers.contains(layer)) {
                     GeometryLayerPrivate::PaintFragments & fragments = d->m_cachedPaintFragments[layer];
                     double const zValue = item->zValue();
@@ -222,7 +222,7 @@ bool GeometryLayer::render(GeoPainter *painter, ViewportParams *viewport,
             }
         }
         // Sort each fragment by z-level
-        foreach (const QString &layer, d->m_styleBuilder->renderOrder()) {
+        for (const QString &layer: d->m_styleBuilder->renderOrder()) {
             GeometryLayerPrivate::PaintFragments & layerItems = d->m_cachedPaintFragments[layer];
             std::sort(layerItems.negative.begin(), layerItems.negative.end(), GeoGraphicsItem::zValueLessThan);
             // The idea here is that layerItems.null has most items and does not need to be sorted by z-value
@@ -232,26 +232,26 @@ bool GeometryLayer::render(GeoPainter *painter, ViewportParams *viewport,
         }
     }
 
-    foreach (const QString &layer, d->m_styleBuilder->renderOrder()) {
+    for (const QString &layer: d->m_styleBuilder->renderOrder()) {
         GeometryLayerPrivate::PaintFragments & layerItems = d->m_cachedPaintFragments[layer];
         AbstractGeoPolygonGraphicsItem::s_previousStyle = 0;
         GeoLineStringGraphicsItem::s_previousStyle = 0;
-        foreach (auto item, layerItems.negative) {
+        for (auto item: layerItems.negative) {
             item->paint(painter, viewport, layer, d->m_tileLevel);
         }
-        foreach (auto item, layerItems.null) {
+        for (auto item: layerItems.null) {
             item->paint(painter, viewport, layer, d->m_tileLevel);
         }
-        foreach (auto item, layerItems.positive) {
+        for (auto item: layerItems.positive) {
             item->paint(painter, viewport, layer, d->m_tileLevel);
         }
     }
 
-    foreach (const auto & item, d->m_cachedDefaultLayer) {
+    for (const auto & item: d->m_cachedDefaultLayer) {
         item.second->paint(painter, viewport, item.first, d->m_tileLevel);
     }
 
-    foreach (ScreenOverlayGraphicsItem* item, d->m_screenOverlays) {
+    for (ScreenOverlayGraphicsItem* item: d->m_screenOverlays) {
         item->paintEvent(painter, viewport);
     }
 
@@ -482,11 +482,11 @@ void GeometryLayerPrivate::removeGraphicsItems(const GeoDataFeature *feature)
     } else if (feature->nodeType() == GeoDataTypes::GeoDataFolderType
                || feature->nodeType() == GeoDataTypes::GeoDataDocumentType) {
         const GeoDataContainer *container = static_cast<const GeoDataContainer*>(feature);
-        foreach (const GeoDataFeature *child, container->featureList()) {
+        for (const GeoDataFeature *child: container->featureList()) {
             removeGraphicsItems(child);
         }
     } else if (feature->nodeType() == GeoDataTypes::GeoDataScreenOverlayType) {
-        foreach (ScreenOverlayGraphicsItem  *item, m_screenOverlays) {
+        for (ScreenOverlayGraphicsItem  *item: m_screenOverlays) {
             if (item->screenOverlay() == feature) {
                 m_screenOverlays.removeAll(item);
             }
@@ -599,7 +599,7 @@ void GeometryLayer::handleHighlight(qreal lon, qreal lat, GeoDataCoordinates::Un
             GeoDataDocument* doc = static_cast<GeoDataDocument*>(object);
             bool isHighlight = false;
 
-            foreach (const GeoDataStyleMap &styleMap, doc->styleMaps()) {
+            for (const GeoDataStyleMap &styleMap: doc->styleMaps()) {
                 if (styleMap.contains(QStringLiteral("highlight"))) {
                     isHighlight = true;
                     break;

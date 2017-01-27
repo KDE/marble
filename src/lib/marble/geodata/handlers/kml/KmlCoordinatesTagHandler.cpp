@@ -104,7 +104,7 @@ GeoNode* KmlcoordinatesTagHandler::parse( GeoParser& parser ) const
         }
         coordinatesLines.append( text.mid( index ) );
         int coordinatesIndex = 0;
-        Q_FOREACH( const QString& line, coordinatesLines ) {
+        for( const QString& line: coordinatesLines ) {
             const QStringList coordinates = line.trimmed().split(QLatin1Char(','));
             if ( parentItem.represents( kmlTag_Point ) && parentItem.is<GeoDataFeature>() ) {
                 GeoDataCoordinates coord;

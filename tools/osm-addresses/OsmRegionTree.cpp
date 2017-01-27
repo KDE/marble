@@ -36,13 +36,13 @@ const QVector<OsmRegionTree> & OsmRegionTree::children() const
 
 void OsmRegionTree::append( QList<OsmRegion> &regions )
 {
-    foreach( const OsmRegion &candidate, regions ) {
+    for( const OsmRegion &candidate: regions ) {
         if ( candidate.parentIdentifier() == m_node.identifier() ) {
             m_children << OsmRegionTree( candidate );
         }
     }
 
-    foreach( const OsmRegionTree & child, m_children ) {
+    for( const OsmRegionTree & child: m_children ) {
         regions.removeAll( child.node() );
     }
 
@@ -74,7 +74,7 @@ OsmRegionTree::operator QList<OsmRegion>() const
 void OsmRegionTree::enumerate( QList<OsmRegion> &list ) const
 {
     list << m_node;
-    foreach( const OsmRegionTree & child, m_children ) {
+    for( const OsmRegionTree & child: m_children ) {
         child.enumerate( list );
     }
 }
@@ -89,7 +89,7 @@ int OsmRegionTree::smallestRegionId( const GeoDataCoordinates &coordinates, int 
 {
     int maxLevel = m_node.adminLevel();
     int minId = m_node.identifier();
-    foreach( const OsmRegionTree & child, m_children ) {
+    for( const OsmRegionTree & child: m_children ) {
         if ( child.node().geometry().contains( coordinates ) ) {
             int childLevel = level;
             int id = child.smallestRegionId( coordinates, childLevel );

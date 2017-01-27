@@ -42,7 +42,7 @@ bool KmlListStyleTagWriter::write( const GeoNode *node,
     QString const color = KmlColorStyleTagWriter::formatColor( listStyle->backgroundColor() );
     writer.writeOptionalElement( kml::kmlTag_bgColor, color, "ffffffff" );
 
-    foreach( GeoDataItemIcon* icon, listStyle->itemIconList() ) {
+    for( GeoDataItemIcon* icon: listStyle->itemIconList() ) {
         writer.writeStartElement(kml::kmlTag_ItemIcon);
         QString const state = iconStateToString( icon->state() );
         writer.writeOptionalElement( kml::kmlTag_state, state, "open" );

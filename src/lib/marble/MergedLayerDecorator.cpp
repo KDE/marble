@@ -171,7 +171,7 @@ StackedTile *MergedLayerDecorator::Private::createTile( const QVector<QSharedPoi
     // if there are more than one active texture layers, we have to convert the
     // result tile into QImage::Format_ARGB32_Premultiplied to make blending possible
     const bool withConversion = tiles.count() > 1 || m_showSunShading || m_showTileId || !m_groundOverlays.isEmpty();
-    foreach ( const QSharedPointer<TextureTile> &tile, tiles ) {
+    for ( const QSharedPointer<TextureTile> &tile: tiles ) {
 
         // Image blending. If there are several images in the same tile (like clouds
         // or hillshading images over the map) blend them all into only one image
@@ -307,7 +307,7 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId )
     QVector<QSharedPointer<TextureTile> > tiles;
     tiles.reserve(textureLayers.size());
 
-    foreach ( const GeoSceneTextureTileDataset *layer, textureLayers ) {
+    for ( const GeoSceneTextureTileDataset *layer: textureLayers ) {
         const TileId tileId( layer->sourceDir(), stackedTileId.zoomLevel(),
                              stackedTileId.x(), stackedTileId.y() );
 
@@ -338,7 +338,7 @@ RenderState MergedLayerDecorator::renderState( const TileId &stackedTileId ) con
                        .arg( stackedTileId.x() )
                        .arg( stackedTileId.y() ) );
     const QVector<const GeoSceneTextureTileDataset *> textureLayers = d->findRelevantTextureLayers( stackedTileId );
-    foreach ( const GeoSceneTextureTileDataset *layer, textureLayers ) {
+    for ( const GeoSceneTextureTileDataset *layer: textureLayers ) {
         const TileId tileId( layer->sourceDir(), stackedTileId.zoomLevel(),
                              stackedTileId.x(), stackedTileId.y() );
         RenderStatus tileStatus = Complete;
@@ -388,7 +388,7 @@ void MergedLayerDecorator::downloadStackedTile( const TileId &id, DownloadUsage 
 {
     const QVector<const GeoSceneTextureTileDataset *> textureLayers = d->findRelevantTextureLayers( id );
 
-    foreach ( const GeoSceneTextureTileDataset *textureLayer, textureLayers ) {
+    for ( const GeoSceneTextureTileDataset *textureLayer: textureLayers ) {
         if ( TileLoader::tileStatus( textureLayer, id ) != TileLoader::Available || usage == DownloadBrowse ) {
             d->m_tileLoader->downloadTile( textureLayer, id, usage );
         }
@@ -577,7 +577,7 @@ QVector<const GeoSceneTextureTileDataset *> MergedLayerDecorator::Private::findR
 {
     QVector<const GeoSceneTextureTileDataset *> result;
 
-    foreach ( const GeoSceneTextureTileDataset *candidate, m_textureLayers ) {
+    for ( const GeoSceneTextureTileDataset *candidate: m_textureLayers ) {
         Q_ASSERT( candidate );
         // check, if layer provides tiles for the current level
         if ( !candidate->hasMaximumTileLevel() ||

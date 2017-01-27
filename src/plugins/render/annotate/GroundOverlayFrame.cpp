@@ -198,7 +198,7 @@ void GroundOverlayFrame::paint(GeoPainter *painter, const ViewportParams *viewpo
 
 bool GroundOverlayFrame::containsPoint( const QPoint &eventPos ) const
 {
-    foreach ( const QRegion &region, m_regionList ) {
+    for ( const QRegion &region: m_regionList ) {
         if ( region.contains( eventPos ) ) {
             return true;
         }

@@ -23,7 +23,7 @@ JobQueue::JobQueue(QObject *parent) :
 void JobQueue::addJob(Job *newJob)
 {
     QList<Job*> const allJobs = m_jobs + m_runningJobs;
-    foreach(Job* job, allJobs) {
+    for(Job* job: allJobs) {
         if (*job == *newJob) {
             qDebug() << "Ignoring job, still running";
             return;

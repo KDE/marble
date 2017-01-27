@@ -459,7 +459,8 @@ QString Placemark::website() const
     if (!m_website.isEmpty()) {
         return m_website;
     }
-    foreach(const QString &tag, QStringList() << "website" << "contact:website" << "facebook" << "contact:facebook" << "url") {
+    auto const tags = QStringList() << "website" << "contact:website" << "facebook" << "contact:facebook" << "url";
+    for(const QString &tag: tags) {
         QString const value = m_placemark.osmData().tagValue(tag);
         if (!value.isEmpty()) {
             QUrl url = QUrl(value);
@@ -538,7 +539,7 @@ QString Placemark::wheelchairInfo() const
     auto const & osmData = m_placemark.osmData();
     QStringList const uiLanguages = QLocale::system().uiLanguages();
     const QString tag = QLatin1String("wheelchair:description:");
-    foreach (const QString &uiLanguage, uiLanguages) {
+    for (const QString &uiLanguage: uiLanguages) {
         for (auto tagIter = osmData.tagsBegin(), end = osmData.tagsEnd(); tagIter != end; ++tagIter) {
             if (tagIter.key().startsWith(tag)) {
                 QStringRef const tagLanguage = tagIter.key().midRef(tag.length());

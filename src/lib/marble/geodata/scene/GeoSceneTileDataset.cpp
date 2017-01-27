@@ -151,7 +151,7 @@ void GeoSceneTileDataset::setTileLevels(const QString &tileLevels)
     }
 
     const QStringList values = tileLevels.split(QLatin1Char(','));
-    foreach(const QString &value, values) {
+    for(const QString &value: values) {
         bool canParse(false);
         int const tileLevel = value.trimmed().toInt(&canParse);
         if (canParse && tileLevel >= 0 && tileLevel < 100) {

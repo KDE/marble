@@ -51,7 +51,7 @@ WeatherModel::~WeatherModel()
 void WeatherModel::setFavoriteItems( const QStringList& list )
 {
     if ( favoriteItems() != list ) {
-        foreach ( AbstractWeatherService *service, m_services ) {
+        for ( AbstractWeatherService *service: m_services ) {
             service->setFavoriteItems( list );
         }
 
@@ -93,21 +93,21 @@ void WeatherModel::downloadItemData( const QUrl& url,
 void WeatherModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
                                qint32 number )
 {
-    foreach ( AbstractWeatherService *service, m_services ) {
+    for ( AbstractWeatherService *service: m_services ) {
         service->getAdditionalItems( box, number );
     }
 }
 
 void WeatherModel::getItem( const QString &id )
 {
-    foreach( AbstractWeatherService* service, m_services ) {
+    for( AbstractWeatherService* service: m_services ) {
         service->getItem( id );
     }
 }
 
 void WeatherModel::parseFile( const QByteArray& file )
 {
-    foreach ( AbstractWeatherService *service, m_services ) {
+    for ( AbstractWeatherService *service: m_services ) {
         service->parseFile( file );
     }
 }
@@ -119,7 +119,7 @@ void WeatherModel::downloadDescriptionFileRequested( const QUrl& url )
 
 void WeatherModel::setMarbleWidget(MarbleWidget *widget)
 {
-    foreach ( AbstractWeatherService* service, m_services ) {
+    for ( AbstractWeatherService* service: m_services ) {
         service->setMarbleWidget( widget );
     }
 }

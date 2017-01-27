@@ -266,10 +266,10 @@ bool PositionTracking::saveTrack( const QString& fileName )
     QFileInfo fileInfo( fileName );
     QString name = fileInfo.baseName();
     document->setName( name );
-    foreach( const GeoDataStyle::Ptr &style, d->m_document.styles() ) {
+    for( const GeoDataStyle::Ptr &style: d->m_document.styles() ) {
         document->addStyle( style );
     }
-    foreach( const GeoDataStyleMap &map, d->m_document.styleMaps() ) {
+    for( const GeoDataStyleMap &map: d->m_document.styleMaps() ) {
         document->addStyleMap( map );
     }
     GeoDataPlacemark *track = new GeoDataPlacemark( *d->m_currentTrackPlacemark );

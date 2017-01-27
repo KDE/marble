@@ -239,7 +239,7 @@ bool MarblePart::openFile()
 
     QStringList allFileExtensions;
     QStringList filters;
-    foreach ( const ParseRunnerPlugin *plugin, pluginManager->parsingRunnerPlugins() ) {
+    for ( const ParseRunnerPlugin *plugin: pluginManager->parsingRunnerPlugins() ) {
         if (plugin->nameId() == QLatin1String("Cache"))
             continue;
 
@@ -264,7 +264,7 @@ bool MarblePart::openFile()
         m_lastFileOpenPath = QFileInfo( firstFile ).absolutePath();
     }
 
-    foreach( const QString &fileName, fileNames ) {
+    for( const QString &fileName: fileNames ) {
         openUrl( QUrl::fromLocalFile(fileName) );
     }
 
@@ -482,10 +482,10 @@ void MarblePart::readSettings()
             KConfigGroup profileGroup = profilesGroup.group( QString( "Profile %0" ).arg(i) );
             QString name = profileGroup.readEntry( "Name", i18n( "Unnamed" ) );
             RoutingProfile profile( name );
-            foreach ( const QString& pluginName, profileGroup.groupList() ) {
+            for ( const QString& pluginName: profileGroup.groupList() ) {
                 KConfigGroup pluginGroup = profileGroup.group( pluginName );
                 profile.pluginSettings().insert( pluginName, QHash<QString, QVariant>() );
-                foreach ( const QString& key, pluginGroup.keyList() ) {
+                for ( const QString& key: pluginGroup.keyList() ) {
                     if (key != QLatin1String("Enabled")) {
                         profile.pluginSettings()[ pluginName ].insert( key, pluginGroup.readEntry( key ) );
                     }
@@ -508,7 +508,7 @@ void MarblePart::readSettings()
     QString positionProvider = MarbleSettings::activePositionTrackingPlugin();
     if ( !positionProvider.isEmpty() ) {
         const PluginManager* pluginManager = m_controlView->marbleModel()->pluginManager();
-        foreach( const PositionProviderPlugin* plugin, pluginManager->positionProviderPlugins() ) {
+        for( const PositionProviderPlugin* plugin: pluginManager->positionProviderPlugins() ) {
             if ( plugin->nameId() == positionProvider ) {
                 PositionProviderPlugin* instance = plugin->newInstance();
                 tracking->setPositionProviderPlugin( instance );
@@ -1083,7 +1083,7 @@ void MarblePart::createPluginMenus()
         // menus
         const QList<QActionGroup*> *tmp_actionGroups = (*i)->actionGroups();
         if( (*i)->enabled() && tmp_actionGroups ) {
-            foreach( QActionGroup *ag, *tmp_actionGroups ) {
+            for( QActionGroup *ag: *tmp_actionGroups ) {
                 plugActionList( "plugins_menuactionlist", ag->actions() );
             }
         }
@@ -1092,7 +1092,7 @@ void MarblePart::createPluginMenus()
         const QList<QActionGroup*> *tmp_toolbarActionGroups = (*i)->toolbarActionGroups();
         if ( (*i)->enabled() && tmp_toolbarActionGroups ) {
 
-            foreach( QActionGroup* ag, *tmp_toolbarActionGroups ) {
+            for( QActionGroup* ag: *tmp_toolbarActionGroups ) {
                 plugActionList( "plugins_actionlist", ag->actions() );
             }
         }
@@ -1502,13 +1502,13 @@ void MarblePart::applyPluginState()
         KConfigGroup profileGroup = profilesGroup.group( QString( "Profile %0" ).arg(i) );
         RoutingProfile profile = profiles.at( i );
         profileGroup.writeEntry( "Name", profile.name() );
-        foreach ( const QString &pluginName, profileGroup.groupList() ) {
+        for ( const QString &pluginName: profileGroup.groupList() ) {
             profileGroup.group( pluginName ).deleteGroup();
         }
-        foreach ( const QString &key, profile.pluginSettings().keys() ) {
+        for ( const QString &key: profile.pluginSettings().keys() ) {
             KConfigGroup pluginGroup = profileGroup.group( key );
             pluginGroup.writeEntry( "Enabled", true );
-            foreach ( const QString& settingKey, profile.pluginSettings()[ key ].keys() ) {
+            for ( const QString& settingKey: profile.pluginSettings()[ key ].keys() ) {
                 Q_ASSERT(settingKey != QLatin1String("Enabled"));
                 pluginGroup.writeEntry( settingKey, profile.pluginSettings()[ key ][ settingKey ] );
             }
@@ -1623,7 +1623,7 @@ void MarblePart::writePluginSettings()
 {
     KSharedConfig::Ptr sharedConfig = KSharedConfig::openConfig();
 
-    foreach( RenderPlugin *plugin, m_controlView->marbleWidget()->renderPlugins() ) {
+    for( RenderPlugin *plugin: m_controlView->marbleWidget()->renderPlugins() ) {
         KConfigGroup group = sharedConfig->group( QString( "plugin_" ) + plugin->nameId() );
 
         const QHash<QString,QVariant> hash = plugin->settings();
@@ -1644,12 +1644,12 @@ void MarblePart::readPluginSettings()
 
     KSharedConfig::Ptr sharedConfig = KSharedConfig::openConfig();
 
-    foreach( RenderPlugin *plugin, m_controlView->marbleWidget()->renderPlugins() ) {
+    for( RenderPlugin *plugin: m_controlView->marbleWidget()->renderPlugins() ) {
         KConfigGroup group = sharedConfig->group( QString( "plugin_" ) + plugin->nameId() );
 
         QHash<QString,QVariant> hash;
 
-        foreach ( const QString& key, group.keyList() ) {
+        for ( const QString& key: group.keyList() ) {
             hash.insert( key, group.readEntry( key ) );
         }
 

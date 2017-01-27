@@ -349,13 +349,13 @@ void RoutingManagerPrivate::setCurrentRoute( GeoDataDocument *document )
     RouteSegment outline;
 
     QVector<GeoDataFolder*> folders = document->folderList();
-    foreach( const GeoDataFolder *folder, folders ) {
-        foreach( const GeoDataPlacemark *placemark, folder->placemarkList() ) {
+    for( const GeoDataFolder *folder: folders ) {
+        for( const GeoDataPlacemark *placemark: folder->placemarkList() ) {
             importPlacemark( outline, segments, placemark );
         }
     }
 
-    foreach( const GeoDataPlacemark *placemark, document->placemarkList() ) {
+    for( const GeoDataPlacemark *placemark: document->placemarkList() ) {
         importPlacemark( outline, segments, placemark );
     }
 
@@ -390,7 +390,7 @@ void RoutingManagerPrivate::setCurrentRoute( GeoDataDocument *document )
     }
 
     if ( segments.size() > 0 ) {
-        foreach( const RouteSegment &segment, segments ) {
+        for( const RouteSegment &segment: segments ) {
             route.addRouteSegment( segment );
         }
     }
@@ -482,7 +482,7 @@ RoutingProfile RoutingManager::defaultProfile( RoutingProfile::TransportType tra
         break;
     }
 
-    foreach( RoutingRunnerPlugin* plugin, d->m_pluginManager->routingRunnerPlugins() ) {
+    for( RoutingRunnerPlugin* plugin: d->m_pluginManager->routingRunnerPlugins() ) {
         if ( plugin->supportsTemplate( tpl ) ) {
             profile.pluginSettings()[plugin->nameId()] = plugin->templateSettings( tpl );
         }

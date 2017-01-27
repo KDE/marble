@@ -377,7 +377,7 @@ void MapScaleFloatItem::contextMenuEvent( QWidget *w, QContextMenuEvent *e )
     if ( !m_contextMenu ) {
         m_contextMenu = contextMenu();
 
-        foreach( QAction *action, m_contextMenu->actions() ) {
+        for( QAction *action: m_contextMenu->actions() ) {
             if ( action->text() == tr( "&Configure..." ) ) {
                 m_contextMenu->removeAction( action );
                 break;

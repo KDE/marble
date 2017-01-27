@@ -137,7 +137,7 @@ QVector<RouteItem> RouteSyncManager::cachedRouteList() const
 {
     QVector<RouteItem> routeList;
     QStringList cachedRoutes = d->m_cacheDir.entryList( QStringList() << "*.kml", QDir::Files );
-    foreach ( const QString &routeFilename, cachedRoutes ) {
+    for ( const QString &routeFilename: cachedRoutes ) {
         QFile file(d->m_cacheDir.absolutePath() + QLatin1Char('/') + routeFilename);
         file.open( QFile::ReadOnly );
 
@@ -153,7 +153,7 @@ QVector<RouteItem> RouteSyncManager::cachedRouteList() const
         GeoDataDocument *container = dynamic_cast<GeoDataDocument*>( geoDoc );
         if ( container && container->size() > 0 ) {
             GeoDataFolder *folder = container->folderList().at( 0 );
-            foreach ( GeoDataPlacemark *placemark, folder->placemarkList() ) {
+            for ( GeoDataPlacemark *placemark: folder->placemarkList() ) {
                 routeName += placemark->name() + QLatin1String(" - ");
             }
         }
@@ -199,7 +199,7 @@ void RouteSyncManager::prepareRouteList()
     d->m_routeList.clear();
 
     QVector<RouteItem> cachedRoutes = cachedRouteList();
-    foreach( const RouteItem &item, cachedRoutes ) {
+    for( const RouteItem &item: cachedRoutes ) {
         d->m_routeList.append( item );
     }
 
@@ -251,7 +251,7 @@ void RouteSyncManager::setRouteModelItems( const QVector<RouteItem> &routeList )
 {
     if( d->m_routeList.count() > 0 ) {
         QStringList cloudRoutes;
-        foreach( const RouteItem &item, routeList ) {
+        for( const RouteItem &item: routeList ) {
             cloudRoutes.append( item.identifier() );
         }
 
@@ -262,17 +262,17 @@ void RouteSyncManager::setRouteModelItems( const QVector<RouteItem> &routeList )
         }
 
         QStringList cachedRoutes;
-        foreach( const RouteItem &item, d->m_routeList ) {
+        for( const RouteItem &item: d->m_routeList ) {
             cachedRoutes.append( item.identifier() );
         }
 
-        foreach( const RouteItem &item, routeList ) {
+        for( const RouteItem &item: routeList ) {
             if( !cachedRoutes.contains( item.identifier() ) ) {
                 d->m_routeList.append( item );
             }
         }
     } else {
-        foreach( const RouteItem &item, routeList ) {
+        for( const RouteItem &item: routeList ) {
             d->m_routeList.append( item );
         }
     }

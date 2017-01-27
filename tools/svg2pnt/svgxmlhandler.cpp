@@ -54,7 +54,7 @@ bool SVGXmlHandler::startElement(const QString& nspace,
 
         int  count = 0;
         qDebug() << "Starting to write path" << atts.value( "id" );
-        foreach ( const QString& str, stringlist ) {
+        for ( const QString& str: stringlist ) {
             // qDebug()<<str;
             float  x;
             float  y;

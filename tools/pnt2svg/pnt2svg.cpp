@@ -143,7 +143,7 @@ int main(int argc, char *argv[])
 
         out << "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>" << endl;
         out << "<svg width=\"432.00000px\" height=\"216.00000px\">" << endl;
-        foreach ( const QString & path, pathList)
+        for ( const QString & path: pathList)
             out << path << endl;
         out << "</svg>" << endl;
         qDebug() << "Done!";

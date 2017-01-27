@@ -38,7 +38,7 @@ class GeoDataMultiTrackPrivate : public GeoDataGeometryPrivate
         m_vector.clear();
 
         m_vector.reserve(other.m_vector.size());
-        foreach( GeoDataTrack *track, other.m_vector ) {
+        for( GeoDataTrack *track: other.m_vector ) {
             m_vector.append( new GeoDataTrack( *track ) );
         }
         return *this;

@@ -144,7 +144,7 @@ void ClipPainter::drawPolygon ( const QPolygonF & polygon,
 
         d->clipPolyObject( polygon, clippedPolyObjects, true );
 
-        foreach( const QPolygonF & clippedPolyObject, clippedPolyObjects ) { 
+        for( const QPolygonF & clippedPolyObject: clippedPolyObjects ) { 
             if ( clippedPolyObject.size() > 2 ) {
                 // mDebug() << "Size: " << clippedPolyObject.size();
                 if (d->m_debugPolygonsLevel) {
@@ -196,7 +196,7 @@ void ClipPainter::drawPolyline( const QPolygonF & polygon )
 
         d->clipPolyObject( polygon, clippedPolyObjects, false );
 
-        foreach( const QPolygonF & clippedPolyObject, clippedPolyObjects ) { 
+        for( const QPolygonF & clippedPolyObject: clippedPolyObjects ) { 
             if ( clippedPolyObject.size() > 1 ) {
                 if (d->m_debugPolygonsLevel) {
                     QPen pen = QPainter::pen();
@@ -248,7 +248,7 @@ void ClipPainter::drawPolyline(const QPolygonF & polygon, QVector<QPointF>& labe
 
         d->clipPolyObject( polygon, clippedPolyObjects, false );
 
-        foreach( const QPolygonF & clippedPolyObject, clippedPolyObjects ) { 
+        for( const QPolygonF & clippedPolyObject: clippedPolyObjects ) { 
             if (d->m_debugPolygonsLevel) {
                 QPen pen = QPainter::pen();
                 QPen originalPen = pen;

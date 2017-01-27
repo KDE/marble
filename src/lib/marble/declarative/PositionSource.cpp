@@ -92,7 +92,7 @@ void PositionSource::start()
     }
 
     const PluginManager* pluginManager = m_marbleQuickItem->model()->pluginManager();
-    foreach( const Marble::PositionProviderPlugin *plugin, pluginManager->positionProviderPlugins() ) {
+    for( const Marble::PositionProviderPlugin *plugin: pluginManager->positionProviderPlugins() ) {
         if ( m_source.isEmpty() || plugin->nameId() == m_source ) {
             PositionProviderPlugin* instance = plugin->newInstance();
             PositionTracking *tracking = m_marbleQuickItem->model()->positionTracking();

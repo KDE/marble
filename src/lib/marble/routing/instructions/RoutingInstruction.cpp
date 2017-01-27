@@ -510,7 +510,7 @@ QTextStream& operator<<( QTextStream& stream, const RoutingInstruction &i )
 
     if (QCoreApplication::instance()->arguments().contains(QStringLiteral("--csv")) &&
         QCoreApplication::instance()->arguments().contains(QStringLiteral("--intersection-points"))) {
-        foreach( const RoutingPoint &point, i.intersectionPoints() ) {
+        for ( const RoutingPoint &point: i.intersectionPoints() ) {
             stream << ',' << point.lat() << ',' << point.lon();
         }
     }

@@ -138,7 +138,7 @@ void TextureLayer::Private::updateTextureLayers()
 {
     QVector<GeoSceneTextureTileDataset const *> result;
 
-    foreach ( const GeoSceneTextureTileDataset *candidate, m_textures ) {
+    for ( const GeoSceneTextureTileDataset *candidate: m_textures ) {
         bool enabled = true;
         if ( m_textureLayerSettings ) {
             const bool propertyExists = m_textureLayerSettings->propertyValue( candidate->name(), enabled );
@@ -234,7 +234,7 @@ void TextureLayer::Private::updateGroundOverlays()
 void TextureLayer::Private::addCustomTextures()
 {
     m_textures.reserve(m_textures.size() + m_customTextures.size());
-    foreach (GeoSceneTextureTileDataset *t, m_customTextures)
+    for (GeoSceneTextureTileDataset *t: m_customTextures)
     {
         m_textures.append(t);
     }
@@ -454,7 +454,7 @@ void TextureLayer::reset()
 
 void TextureLayer::reload()
 {
-    foreach ( const TileId &id, d->m_tileLoader.visibleTiles() ) {
+    for ( const TileId &id: d->m_tileLoader.visibleTiles() ) {
         // it's debatable here, whether DownloadBulk or DownloadBrowse should be used
         // but since "reload" or "refresh" seems to be a common action of a browser and it
         // allows for more connections (in our model), use "DownloadBrowse"

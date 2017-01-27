@@ -62,8 +62,8 @@ bool Bookmarks::isBookmark( qreal longitude, qreal latitude ) const
     Marble::GeoDataCoordinates const compareTo( longitude, latitude, 0.0, Marble::GeoDataCoordinates::Degree );
 
     qreal planetRadius = m_marbleQuickItem->model()->planet()->radius();
-    foreach( const Marble::GeoDataFolder* folder, bookmarks->folderList() ) {
-        foreach( const Marble::GeoDataPlacemark * const placemark, folder->placemarkList() ) {
+    for( const Marble::GeoDataFolder* folder: bookmarks->folderList() ) {
+        for( const Marble::GeoDataPlacemark * const placemark: folder->placemarkList() ) {
             if ( distanceSphere( placemark->coordinate(), compareTo ) * planetRadius < 5 ) {
                 return true;
             }
@@ -96,7 +96,7 @@ void Bookmarks::addBookmark(Placemark *placemark, const QString &folderName )
     Marble::BookmarkManager* manager = m_marbleQuickItem->model()->bookmarkManager();
     Marble::GeoDataDocument *bookmarks = manager->document();
     Marble::GeoDataContainer *target = 0;
-    foreach( Marble::GeoDataFolder* const folder, bookmarks->folderList() ) {
+    for( Marble::GeoDataFolder* const folder: bookmarks->folderList() ) {
         if ( folder->name() == folderName ) {
             target = folder;
             break;
@@ -106,7 +106,7 @@ void Bookmarks::addBookmark(Placemark *placemark, const QString &folderName )
     if ( !target ) {
         manager->addNewBookmarkFolder( bookmarks, folderName );
 
-        foreach( Marble::GeoDataFolder* const folder, bookmarks->folderList() ) {
+        for( Marble::GeoDataFolder* const folder: bookmarks->folderList() ) {
             if ( folder->name() == folderName ) {
                 target = folder;
                 break;
@@ -139,8 +139,8 @@ void Bookmarks::removeBookmark( qreal longitude, qreal latitude )
     Marble::GeoDataCoordinates const compareTo( longitude, latitude, 0.0, Marble::GeoDataCoordinates::Degree );
 
     qreal planetRadius = m_marbleQuickItem->model()->planet()->radius();
-    foreach( const Marble::GeoDataFolder* folder, bookmarks->folderList() ) {
-        foreach( Marble::GeoDataPlacemark * placemark, folder->placemarkList() ) {
+    for( const Marble::GeoDataFolder* folder: bookmarks->folderList() ) {
+        for( Marble::GeoDataPlacemark * placemark: folder->placemarkList() ) {
             if ( distanceSphere( placemark->coordinate(), compareTo ) * planetRadius < 5 ) {
                 manager->removeBookmark( placemark );
                 return;

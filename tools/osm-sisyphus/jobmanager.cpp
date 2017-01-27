@@ -75,7 +75,7 @@ void JobManager::setRegionsFile(const QString &filename)
         }
         if (!node.namedItem("transport").isNull()) {
             QStringList input = node.namedItem("transport").toElement().text().split(QLatin1Char(','), QString::SkipEmptyParts);
-            foreach( const QString &value, input ) {
+            for( const QString &value: input ) {
                 if (!region.continent().isEmpty() && !region.name().isEmpty()) {
                     PendingJob job;
                     job.m_region = region;
@@ -112,7 +112,7 @@ void JobManager::setJobParameters(const JobParameters &parameters)
 void JobManager::update()
 {
     bool resume = m_resumeId.isEmpty();
-    foreach(const PendingJob &job, m_pendingJobs) {
+    for(const PendingJob &job: m_pendingJobs) {
         resume = resume || job.m_region.id() == m_resumeId;
         if (resume) {
             addJob(job);

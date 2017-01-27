@@ -43,7 +43,7 @@ void TemplateDocumentPrivate::processTemplateIncludes(QString &input)
         pos += rx.matchedLength();
     }
 
-    foreach (const QString &include, includes) {
+    for (const QString &include: includes) {
         QFile includeFile(QLatin1String(":/htmlfeatures/includes/") + include + QLatin1String(".inc"));
         if (includeFile.open(QIODevice::ReadOnly)) {
             input.replace(QLatin1String("%!{") + include + QLatin1String("}%"), includeFile.readAll());

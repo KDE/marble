@@ -29,7 +29,7 @@ SatellitesConfigNodeItem::~SatellitesConfigNodeItem()
 
 void SatellitesConfigNodeItem::loadSettings(const QHash<QString, QVariant> &settings)
 {
-    foreach( SatellitesConfigAbstractItem *item, m_children ) {
+    for( SatellitesConfigAbstractItem *item: m_children ) {
         item->loadSettings( settings );
     }
 }
@@ -45,7 +45,7 @@ QVariant SatellitesConfigNodeItem::data( int column, int role ) const
     case IdListRole:
     case UrlListRole: {
         QStringList list;
-        foreach( SatellitesConfigAbstractItem *item, m_children ) {
+        for( SatellitesConfigAbstractItem *item: m_children ) {
             if ( item->data( column, Qt::CheckStateRole ).toInt() != Qt::Unchecked ) {
                 list.append( item->data( column, role).toStringList() );
             }
@@ -54,7 +54,7 @@ QVariant SatellitesConfigNodeItem::data( int column, int role ) const
     }
     case FullIdListRole: {
         QStringList fullIdList;
-        foreach( SatellitesConfigAbstractItem *item, m_children ) {
+        for( SatellitesConfigAbstractItem *item: m_children ) {
             fullIdList.append( item->data( column, role ).toStringList() );
         }
         return fullIdList;
@@ -62,7 +62,7 @@ QVariant SatellitesConfigNodeItem::data( int column, int role ) const
     case Qt::CheckStateRole: {
         bool oneChecked = false;
         bool oneUnchecked = false;
-        foreach( SatellitesConfigAbstractItem *item, m_children ) {         
+        for( SatellitesConfigAbstractItem *item: m_children ) {         
             switch ( item->data( column, Qt::CheckStateRole ).toInt() ) {
             case Qt::Checked:
                 oneChecked = true;
@@ -94,7 +94,7 @@ bool SatellitesConfigNodeItem::setData( int column, int role, const QVariant &da
         case 0:
             // fall through
         case 1:
-            foreach( SatellitesConfigAbstractItem *item, m_children ) {
+            for( SatellitesConfigAbstractItem *item: m_children ) {
                 item->setData( column, role, data );
             }
             return true;

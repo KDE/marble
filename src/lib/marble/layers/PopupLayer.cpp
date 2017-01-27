@@ -63,7 +63,7 @@ PopupLayer::PopupLayer( MarbleWidget *marbleWidget, QObject *parent ) :
     QObject( parent ),
     d( new Private( marbleWidget, this ) )
 {
-    foreach (const RenderPlugin *renderPlugin, d->m_widget->renderPlugins()) {
+    for (const RenderPlugin *renderPlugin: d->m_widget->renderPlugins()) {
         if (renderPlugin->nameId() == QLatin1String("crosshairs")) {
             d->m_hasCrosshairsPlugin = true;
             break;

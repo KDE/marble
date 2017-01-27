@@ -203,7 +203,7 @@ QList<GeoDataStyle::ConstPtr> GeoDataDocument::styles() const
 {
     Q_D(const GeoDataDocument);
     QList<GeoDataStyle::ConstPtr> result;
-    foreach(auto const & style, d->m_styleHash.values()) {
+    for(auto const & style: d->m_styleHash.values()) {
         result << style;
     }
 

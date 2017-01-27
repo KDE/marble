@@ -197,7 +197,7 @@ namespace Marble
         setOpaquePainting(true);
         qRegisterMetaType<Placemark*>("Placemark*");
 
-        foreach (AbstractFloatItem *item, d->m_map.floatItems()) {
+        for (AbstractFloatItem *item: d->m_map.floatItems()) {
             if (item->nameId() == QLatin1String("license")) {
                 item->setPosition(QPointF(5.0, -10.0));
             } else {
@@ -403,7 +403,7 @@ namespace Marble
     bool MarbleQuickItem::showPositionMarker() const
     {
         QList<RenderPlugin *> plugins = d->m_map.renderPlugins();
-        foreach (const RenderPlugin * plugin, plugins) {
+        for (const RenderPlugin * plugin: plugins) {
             if (plugin->nameId() == QLatin1String("positionMarker")) {
                 return plugin->visible();
             }
@@ -593,13 +593,13 @@ namespace Marble
     {
         auto features = d->m_map.whichFeatureAt(QPoint(x, y));
         QVector<GeoDataPlacemark const *> placemarks;
-        foreach(auto feature, features) {
+        for(auto feature: features) {
             if (feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
                 placemarks << static_cast<const GeoDataPlacemark*>(feature);
             }
         }
 
-        foreach(auto placemark, placemarks) {
+        for(auto placemark: placemarks) {
             if (d->m_placemark && placemark->coordinate() == d->m_placemark->placemark().coordinate()) {
                 d->m_placemark->deleteLater();
                 d->m_placemark = nullptr;
@@ -818,7 +818,7 @@ namespace Marble
         }
 
         QList<RenderPlugin *> plugins = d->m_map.renderPlugins();
-        foreach ( RenderPlugin * plugin, plugins ) {
+        for ( RenderPlugin * plugin: plugins ) {
             if (plugin->nameId() == QLatin1String("positionMarker")) {
                 plugin->setVisible(showPositionMarker);
                 break;
@@ -844,7 +844,7 @@ namespace Marble
         }
 
         QList<const PositionProviderPlugin*> plugins = d->m_model.pluginManager()->positionProviderPlugins();
-        foreach (const PositionProviderPlugin* plugin, plugins) {
+        for (const PositionProviderPlugin* plugin: plugins) {
             if ( plugin->nameId() == positionProvider) {
                 PositionProviderPlugin * newPlugin = plugin->newInstance();
                 d->m_model.positionTracking()->setPositionProviderPlugin(newPlugin);
@@ -877,7 +877,7 @@ namespace Marble
 
     void MarbleQuickItem::setPluginSetting(const QString &pluginId, const QString &key, const QString &value)
     {
-        foreach (RenderPlugin* plugin, d->m_map.renderPlugins()) {
+        for (RenderPlugin* plugin: d->m_map.renderPlugins()) {
             if (plugin->nameId() == pluginId) {
                 plugin->setSetting(key, value);
             }

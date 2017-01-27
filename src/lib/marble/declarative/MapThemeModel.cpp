@@ -111,7 +111,7 @@ void MapThemeModel::handleChangedThemes()
 
     m_streetMapThemeIds.clear();
     QStringList const themes = m_themeManager->mapThemeIds();
-    foreach( const QString &theme, themes ) {
+    for( const QString &theme: themes ) {
         Marble::GeoSceneDocument* document = Marble::MapThemeManager::loadMapTheme( theme );
         if ( document && document->head()->zoom()->maximum() > 3000 ) {
             m_streetMapThemeIds << document->head()->mapThemeId();

@@ -352,7 +352,7 @@ QString GeoDataPlacemark::displayName() const
     if (hasOsmData()) {
         OsmPlacemarkData const &data = osmData();
         QStringList const uiLanguages = QLocale::system().uiLanguages();
-        foreach (const QString &uiLanguage, uiLanguages) {
+        for (const QString &uiLanguage: uiLanguages) {
             for (auto tagIter = data.tagsBegin(), end = data.tagsEnd(); tagIter != end; ++tagIter) {
                 if (tagIter.key().startsWith(QLatin1String("name:"))) {
                     QStringRef const tagLanguage = tagIter.key().midRef(5);

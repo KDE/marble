@@ -111,7 +111,7 @@ bool MonavMap::containsPoint( const GeoDataCoordinates &point ) const
     // must be ignored.
     GeoDataCoordinates flatPosition = point;
     flatPosition.setAltitude( 0.0 );
-    foreach( const GeoDataLinearRing & box, m_tiles ) {
+    for( const GeoDataLinearRing & box: m_tiles ) {
         if ( box.contains( flatPosition ) ) {
             return true;
         }
@@ -123,7 +123,7 @@ bool MonavMap::containsPoint( const GeoDataCoordinates &point ) const
 qint64 MonavMap::size() const
 {
     qint64 result = 0;
-    foreach( const QFileInfo & file, files() ) {
+    for( const QFileInfo & file: files() ) {
         result += file.size();
     }
 
@@ -134,12 +134,12 @@ QList<QFileInfo> MonavMap::files() const
 {
     QList<QFileInfo> files;
     QStringList fileNames = QStringList() << "config" << "edges" << "names" << "paths" << "types";
-    foreach( const QString & file, fileNames ) {
+    for( const QString & file: fileNames ) {
         files << QFileInfo(m_directory, QLatin1String("Contraction Hierarchies_") + file);
     }
 
     fileNames = QStringList() << "config" << "grid" << "index_1" << "index_2" << "index_3";
-    foreach( const QString & file, fileNames ) {
+    for( const QString & file: fileNames ) {
         files << QFileInfo(m_directory, QLatin1String("GPSGrid_") + file);
     }
 
@@ -154,7 +154,7 @@ QList<QFileInfo> MonavMap::files() const
 
 void MonavMap::remove() const
 {
-    foreach( const QFileInfo & file, files() ) {
+    for( const QFileInfo & file: files() ) {
         QFile ( file.absoluteFilePath() ).remove();
     }
 }

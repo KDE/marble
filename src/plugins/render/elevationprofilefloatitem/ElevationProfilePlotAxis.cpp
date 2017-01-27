@@ -100,7 +100,7 @@ void ElevationProfilePlotAxis::updateTicks()
 
     qreal stepWidth = niceIntervals.last();
     qreal error = tickRange;
-    foreach ( const int i, niceIntervals ) {
+    for ( const int i: niceIntervals ) {
         const qreal numTicks = tickRange / i;
         if ( numTicks < m_minTickCount || numTicks > m_maxTickCount ) {
             continue;

@@ -83,7 +83,7 @@ QVector<OsmPlacemark> OsmDatabase::find( const DatabaseQuery &userQuery )
     QVector<OsmPlacemark> result;
     QTime timer;
     timer.start();
-    foreach( const QString &databaseFile, m_databaseFiles ) {
+    for( const QString &databaseFile: m_databaseFiles ) {
         database.setDatabaseName( databaseFile );
         if ( !database.open() ) {
             qWarning() << "Failed to connect to database" << databaseFile;

@@ -120,7 +120,7 @@ void SerialTrack::seek( double offset )
 double SerialTrack::duration() const
 {
     double duration = 0.0;
-    foreach (PlaybackItem* item, m_items) {
+    for (PlaybackItem* item: m_items) {
         duration += item->duration();
     }
     return duration;

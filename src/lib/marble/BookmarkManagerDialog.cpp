@@ -446,10 +446,10 @@ void BookmarkManagerDialog::importBookmarks()
 
 void BookmarkManagerDialogPrivate::importBookmarksRecursively( GeoDataContainer *source, GeoDataContainer *destination, bool &replaceAll, bool &skipAll )
 {
-    foreach( GeoDataFolder *newFolder, source->folderList() ) {
+    for( GeoDataFolder *newFolder: source->folderList() ) {
         GeoDataFolder *existingFolder = m_manager->addNewBookmarkFolder(destination, newFolder->name());
         importBookmarksRecursively(newFolder, existingFolder, skipAll, replaceAll);
-        foreach( GeoDataPlacemark* newPlacemark, newFolder->placemarkList() ) {
+        for( GeoDataPlacemark* newPlacemark: newFolder->placemarkList() ) {
             bool added = skipAll;
 
             GeoDataCoordinates newCoordinate = newPlacemark->coordinate();

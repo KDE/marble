@@ -61,7 +61,7 @@ RoutingWaypoints WaypointParser::parse( QTextStream &stream ) const
     RoutingWaypoints result;
     QString input = stream.readAll();
     QStringList lines = input.split( m_lineSeparator );
-    foreach( const QString &line, lines ) {
+    for( const QString &line: lines ) {
         if ( !line.trimmed().isEmpty() &&
              !line.trimmed().startsWith(QLatin1Char('#')) &&
              !line.startsWith( QLatin1String( "Content-Type: text/plain" ) ) ) {

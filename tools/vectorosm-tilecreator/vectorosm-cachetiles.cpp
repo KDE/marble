@@ -41,7 +41,7 @@ GeoDataDocument* mergeDocuments(GeoDataDocument* map1, GeoDataDocument* map2)
 
     OsmPlacemarkData marbleLand;
     marbleLand.addTag("marble_land","landmass");
-    foreach (auto placemark, map2->placemarkList()) {
+    for (auto placemark: map2->placemarkList()) {
         GeoDataPlacemark* land = new GeoDataPlacemark(*placemark);
         if(land->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType) {
             land->setOsmData(marbleLand);

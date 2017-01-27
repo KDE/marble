@@ -86,7 +86,7 @@ void LocalOsmSearchPlugin::addDatabaseDirectory( const QString &path )
     QDir directory( path );
     QStringList const nameFilters = QStringList() << "*.sqlite";
     QStringList const files( directory.entryList( nameFilters, QDir::Files ) );
-    foreach( const QString &file, files ) {
+    for( const QString &file: files ) {
         m_databaseFiles << directory.filePath( file );
     }
 }
@@ -107,7 +107,7 @@ void LocalOsmSearchPlugin::updateDatabase()
 {
     m_databaseFiles.clear();
     QStringList const baseDirs = QStringList() << MarbleDirs::systemPath() << MarbleDirs::localPath();
-    foreach ( const QString &baseDir, baseDirs ) {
+    for ( const QString &baseDir: baseDirs ) {
         const QString base = baseDir + QLatin1String("/maps/earth/placemarks/");
         addDatabaseDirectory( base );
         QDir::Filters filters = QDir::AllDirs | QDir::Readable | QDir::NoDotAndDotDot;

@@ -58,7 +58,7 @@ int main(int argc, char** argv)
     MarbleWidget *mapWidget = new MarbleWidget;
     mapWidget->setMapThemeId( argv[1] );
     QStringList const features = QStringList() << "atmosphere";
-    foreach( RenderPlugin* plugin, mapWidget->renderPlugins() ) {
+    for( RenderPlugin* plugin: mapWidget->renderPlugins() ) {
         if ( !features.contains( plugin->nameId() ) ) {
             plugin->setEnabled( false );
         }

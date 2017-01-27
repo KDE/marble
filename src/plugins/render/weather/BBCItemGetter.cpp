@@ -49,7 +49,7 @@ void BBCItemGetter::setStationList( const QList<BBCStation>& items )
 BBCStation BBCItemGetter::station( const QString &id )
 {
     QString const bbcIdTemplate = QString( "bbc%1" );
-    foreach( const BBCStation &station, m_items ) {
+    for( const BBCStation &station: m_items ) {
         if ( bbcIdTemplate.arg( station.bbcId() ) == id ) {
             return station;
         }

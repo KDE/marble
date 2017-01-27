@@ -138,7 +138,7 @@ QList< GeoGraphicsItem* > GeoGraphicsScene::items( const GeoDataLatLonBox &box, 
             for ( int y = y1; y <= y2; ++y ) {
                 bool const isBorder = isBorderX || y == y1 || y == y2;
                 const TileId tileId = TileId( 0, level, x, y );
-                foreach(GeoGraphicsItem *object, d->m_tiledItems.value( tileId )) {
+                for(GeoGraphicsItem *object: d->m_tiledItems.value( tileId )) {
                     if (object->minZoomLevel() <= zoomLevel && object->visible()) {
                         if (!isBorder || object->latLonAltBox().intersects(box)) {
                             result.push_back(object);
@@ -173,7 +173,7 @@ void GeoGraphicsScene::applyHighlight( const QVector< GeoDataPlacemark* > &selec
      * First set the items, which were selected previously, to
      * use normal style
      */
-    foreach ( GeoGraphicsItem *item, d->m_selectedItems ) {
+    for ( GeoGraphicsItem *item: d->m_selectedItems ) {
         item->setHighlighted( false );
     }
 
@@ -185,7 +185,7 @@ void GeoGraphicsScene::applyHighlight( const QVector< GeoDataPlacemark* > &selec
      * while clicking, and update corresponding graphics
      * items to use highlight style
      */
-    foreach( const GeoDataPlacemark *placemark, selectedPlacemarks ) {
+    for( const GeoDataPlacemark *placemark: selectedPlacemarks ) {
         for (auto tileIter = d->m_features.find(placemark); tileIter != d->m_features.end(); ++tileIter) {
             auto const & clickedItems = d->m_tiledItems[*tileIter];
             auto iter = clickedItems.find(placemark);
@@ -213,7 +213,7 @@ void GeoGraphicsScene::applyHighlight( const QVector< GeoDataPlacemark* > &selec
                             * highlight styleId
                             */
                         else {
-                            foreach ( const GeoDataStyleMap &styleMap, doc->styleMaps() ) {
+                            for ( const GeoDataStyleMap &styleMap: doc->styleMaps() ) {
                                 GeoDataStyle::Ptr style = d->highlightStyle( doc, styleMap );
                                 if ( style ) {
                                     d->selectItem( item );
@@ -248,7 +248,7 @@ void GeoGraphicsScene::removeItem( const GeoDataFeature* feature )
 
 void GeoGraphicsScene::clear()
 {
-    foreach(auto const &list, d->m_tiledItems.values()) {
+    for(auto const &list: d->m_tiledItems.values()) {
         qDeleteAll(list.values());
     }
     d->m_tiledItems.clear();

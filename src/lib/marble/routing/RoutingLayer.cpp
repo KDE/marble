@@ -410,7 +410,7 @@ QColor RoutingLayerPrivate::alphaAdjusted( const QColor &color, int alpha )
 
 bool RoutingLayerPrivate::handleMouseButtonPress( QMouseEvent *e )
 {
-    foreach( const RequestRegion &region, m_regions ) {
+    for( const RequestRegion &region: m_regions ) {
         if ( region.region.contains( e->pos() ) ) {
             if ( e->button() == Qt::LeftButton ) {
                 m_movingIndex = region.index;
@@ -427,7 +427,7 @@ bool RoutingLayerPrivate::handleMouseButtonPress( QMouseEvent *e )
         }
     }
 
-    foreach( const ModelRegion &region, m_instructionRegions ) {
+    for( const ModelRegion &region: m_instructionRegions ) {
         if ( region.region.contains( e->pos() ) && m_selectionModel ) {
             if ( e->button() == Qt::LeftButton ) {
                 QItemSelectionModel::SelectionFlag command = QItemSelectionModel::ClearAndSelect;
@@ -467,14 +467,14 @@ bool RoutingLayerPrivate::handleMouseButtonPress( QMouseEvent *e )
         return false;
     }
 
-    foreach( const RequestRegion &region, m_alternativeRouteRegions ) {
+    for( const RequestRegion &region: m_alternativeRouteRegions ) {
         if ( region.region.contains( e->pos() ) ) {
             m_alternativeRoutesModel->setCurrentRoute( region.index );
             return true;
         }
     }
 
-    foreach( const ModelRegion &region, m_placemarks ) {
+    for( const ModelRegion &region: m_placemarks ) {
         if ( region.region.contains( e->pos() ) ) {
             emit q->placemarkSelected( region.index );
             return true;
@@ -567,13 +567,13 @@ bool RoutingLayerPrivate::handleMouseMove( QMouseEvent *e )
 
 bool RoutingLayerPrivate::isInfoPoint( const QPoint &point )
 {
-    foreach( const RequestRegion &region, m_regions ) {
+    for( const RequestRegion &region: m_regions ) {
         if ( region.region.contains( point ) ) {
             return true;
         }
     }
 
-    foreach( const ModelRegion &region, m_instructionRegions ) {
+    for( const ModelRegion &region: m_instructionRegions ) {
         if ( region.region.contains( point ) ) {
             return true;
         }
@@ -584,7 +584,7 @@ bool RoutingLayerPrivate::isInfoPoint( const QPoint &point )
 
  bool RoutingLayerPrivate::isAlternativeRoutePoint( const QPoint &point )
  {
-     foreach( const RequestRegion &region, m_alternativeRouteRegions ) {
+     for( const RequestRegion &region: m_alternativeRouteRegions ) {
          if ( region.region.contains( point ) ) {
              return true;
          }

@@ -70,7 +70,7 @@ GeoNode* DgmlBrushTagHandler::parse(GeoParser& parser) const
 
             QVector<QColor> colorList;
             colorList.reserve(colorString.size());
-            foreach(const QString& colorName, colorString) {
+            for(const QString& colorName: colorString) {
                 colorList.append(QColor(colorName));
             }
             geodata->setColors( colorList );

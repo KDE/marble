@@ -19,7 +19,7 @@ namespace Marble
 
 KmlDocument::~KmlDocument()
 {
-    foreach( const QString &file, m_files ) {
+    for( const QString &file: m_files ) {
         if ( !QFile::remove( file ) ) {
             mDebug() << "Failed to remove temporary file" << file;
         }
@@ -38,7 +38,7 @@ void KmlDocument::setFiles( const QString &path, const QStringList &files )
 void KmlDocument::removeDirectoryRecursively( const QString &path )
 {
     QStringList const subdirs = QDir( path ).entryList( QDir::Dirs | QDir::NoSymLinks | QDir::NoDotAndDotDot );
-    foreach( const QString &subdir, subdirs ) {
+    for( const QString &subdir: subdirs ) {
         removeDirectoryRecursively(path + QLatin1Char('/') + subdir);
     }
     QDir::root().rmdir( path );

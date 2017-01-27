@@ -23,7 +23,7 @@ namespace Marble {
 TagsFilter::TagsFilter(GeoDataDocument *document, const Tags &tagsList, FilterFlag filterFlag)
     : m_accepted(new GeoDataDocument)
 {
-    foreach (GeoDataFeature *feature, document->featureList()) {
+    for (GeoDataFeature *feature: document->featureList()) {
         if (feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
             GeoDataPlacemark* placemark = static_cast<GeoDataPlacemark*>(feature);
             bool acceptPlacemark = false;
@@ -83,7 +83,7 @@ GeoDataDocument *TagsFilter::accepted()
 
 void TagsFilter::removeAnnotationTags(GeoDataDocument *document)
 {
-    foreach (auto placemark, document->placemarkList()) {
+    for (auto placemark: document->placemarkList()) {
         auto & osmData = placemark->osmData();
         removeAnnotationTags(osmData);
         for (auto & reference: osmData.nodeReferences()) {

@@ -84,7 +84,7 @@ void PlasmaRunner::match(Plasma::RunnerContext &context)
     BookmarkManager bookmarkManager(new GeoDataTreeModel);
     bookmarkManager.loadFile( QStringLiteral("bookmarks/bookmarks.kml") );
 
-    foreach (GeoDataFolder* folder, bookmarkManager.folders()) {
+    for (GeoDataFolder* folder: bookmarkManager.folders()) {
         collectMatches(matches, query, folder);
     }
 

@@ -114,7 +114,7 @@ TargetModel::TargetModel( MarbleModel *marbleModel, QObject * parent ) :
     m_showRoutingItems( true )
 {
     BookmarkManager* manager = m_marbleModel->bookmarkManager();
-    foreach( GeoDataFolder * folder, manager->folders() ) {
+    for( GeoDataFolder * folder: manager->folders() ) {
         QVector<GeoDataPlacemark*> bookmarks = folder->placemarkList();
         QVector<GeoDataPlacemark*>::const_iterator iter = bookmarks.constBegin();
         QVector<GeoDataPlacemark*>::const_iterator end = bookmarks.constEnd();
@@ -340,7 +340,7 @@ void GoToDialogPrivate::updateSearchResult( const QVector<GeoDataPlacemark*>& pl
 {
     m_searchResultModel.setRootDocument( 0 );
     m_searchResult->clear();
-    foreach (GeoDataPlacemark *placemark, placemarks) {
+    for (GeoDataPlacemark *placemark: placemarks) {
         m_searchResult->append( new GeoDataPlacemark( *placemark ) );
     }
     m_searchResultModel.setRootDocument( m_searchResult );

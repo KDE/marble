@@ -83,7 +83,7 @@ void OsmObjectManager::initializeOsmData( GeoDataPlacemark* placemark )
         }
 
         // Each inner boundary
-        foreach( const GeoDataLinearRing &innerRing, polygon->innerBoundaries() ) {
+        for( const GeoDataLinearRing &innerRing: polygon->innerBoundaries() ) {
             ++index;
             OsmPlacemarkData &innerRingData = osmData.memberReference( index );
             if (innerRingData.isNull()) {

@@ -56,7 +56,7 @@ class MarbleWidgetInputHandlerPrivate
             ,m_selectionRubber(widget)
             ,m_debugModeEnabled(false)
         {         
-            foreach(RenderPlugin *renderPlugin, widget->renderPlugins())
+            for(RenderPlugin *renderPlugin: widget->renderPlugins())
             {
                 if(renderPlugin->isInitialized())
                 {

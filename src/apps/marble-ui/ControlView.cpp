@@ -179,7 +179,7 @@ QString ControlView::defaultMapThemeId() const
 
     const QStringList installedThemes = m_mapThemeManager->mapThemeIds();
 
-    foreach(const QString &fallback, fallBackThemes) {
+    for(const QString &fallback: fallBackThemes) {
         if (installedThemes.contains(fallback)) {
             return fallback;
         }
@@ -260,7 +260,7 @@ bool ControlView::openGeoUri( const QString& geoUriString )
     if ( success ) {
         if ( uriParser.planet().id() != marbleModel()->planet()->id() ) {
             MapThemeManager *manager = mapThemeManager();
-            foreach( const QString& planetName, manager->mapThemeIds()) {
+            for( const QString& planetName: manager->mapThemeIds()) {
                 if ( planetName.startsWith(uriParser.planet().id(), Qt::CaseInsensitive)) {
                     m_marbleWidget->setMapThemeId(planetName);
                     break;
@@ -729,7 +729,7 @@ QList<QAction*> ControlView::setupDockWidgets( QMainWindow *mainWindow )
     m_panelActions << m_annotationDock->toggleViewAction();
     m_panelActions << legendDock->toggleViewAction();
     m_panelActions << tourDock->toggleViewAction();
-    foreach( QAction* action, m_panelActions ) {
+    for( QAction* action: m_panelActions ) {
         m_panelVisibility << action->isVisible();
     }
 
@@ -748,7 +748,7 @@ QList<QAction*> ControlView::setupDockWidgets( QMainWindow *mainWindow )
     QList<QAction*> panelMenuActions;
     panelMenuActions << m_togglePanelVisibilityAction;
     panelMenuActions << panelSeparatorAct;
-    foreach( QAction* action, m_panelActions ) {
+    for( QAction* action: m_panelActions ) {
         panelMenuActions << action;
     }
 
@@ -828,7 +828,7 @@ void ControlView::updateAnnotationDock()
     QSpacerItem *spacer = new QSpacerItem( 0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding);
     if( !tmp_actionGroups->isEmpty() ) {
         bool firstToolbarFilled = false;
-        foreach( QAction *action, tmp_actionGroups->first()->actions() ) {
+        for( QAction *action: tmp_actionGroups->first()->actions() ) {
             if (action->objectName() == QLatin1String("toolbarSeparator")) {
                 firstToolbarFilled = true;
             } else {
@@ -916,7 +916,7 @@ void ControlView::dragEnterEvent(QDragEnterEvent *event)
     // prefer urls
     if (mimeData->hasUrls()) {
         // be generous and take the first usable url
-        foreach(const QUrl& url, mimeData->urls()) {
+        for(const QUrl& url: mimeData->urls()) {
             uriParser.setGeoUri(url.url());
             success = uriParser.parse();
             if (success) {
@@ -951,7 +951,7 @@ void ControlView::dropEvent(QDropEvent *event)
     // prefer urls
     if (mimeData->hasUrls()) {
         // be generous and take the first usable url
-        foreach(const QUrl& url, mimeData->urls()) {
+        for(const QUrl& url: mimeData->urls()) {
             success = openGeoUri(url.url());
             if (success) {
                 break;

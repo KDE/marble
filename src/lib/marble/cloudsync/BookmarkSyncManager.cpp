@@ -355,7 +355,7 @@ void BookmarkSyncManager::Private::clearCache()
                 QStringList() << "*.kml",
                 QDir::NoFilter, QDir::Name );
     if( !fileInfoList.isEmpty() ) {
-        foreach ( const QFileInfo& fileInfo, fileInfoList ) {
+        for ( const QFileInfo& fileInfo: fileInfoList ) {
             QFile file( fileInfo.absoluteFilePath() );
             bool removed = file.remove();
             if( !removed ) {
@@ -382,7 +382,7 @@ QString BookmarkSyncManager::Private::lastSyncedKmlPath() const
 QList<DiffItem> BookmarkSyncManager::Private::getPlacemarks( GeoDataDocument *document, GeoDataDocument *other, DiffItem::Status diffDirection )
 {
     QList<DiffItem> diffItems;
-    foreach ( GeoDataFolder *folder, document->folderList() ) {
+    for ( GeoDataFolder *folder: document->folderList() ) {
         QString path = QString( "/%0" ).arg( folder->name() );
         diffItems.append( getPlacemarks( folder, path, other, diffDirection ) );
     }
@@ -393,12 +393,12 @@ QList<DiffItem> BookmarkSyncManager::Private::getPlacemarks( GeoDataDocument *do
 QList<DiffItem> BookmarkSyncManager::Private::getPlacemarks( GeoDataFolder *folder, QString &path, GeoDataDocument *other, DiffItem::Status diffDirection )
 {
     QList<DiffItem> diffItems;
-    foreach ( GeoDataFolder *folder, folder->folderList() ) {
+    for ( GeoDataFolder *folder: folder->folderList() ) {
         QString newPath = QString( "%0/%1" ).arg( path, folder->name() );
         diffItems.append( getPlacemarks( folder, newPath, other, diffDirection ) );
     }
 
-    foreach( GeoDataPlacemark *placemark, folder->placemarkList() ) {
+    for( GeoDataPlacemark *placemark: folder->placemarkList() ) {
         DiffItem diffItem;
         diffItem.m_path = path;
         diffItem.m_placemarkA = *placemark;
@@ -426,13 +426,13 @@ QList<DiffItem> BookmarkSyncManager::Private::getPlacemarks( GeoDataFolder *fold
 
 const GeoDataPlacemark* BookmarkSyncManager::Private::findPlacemark( GeoDataContainer* container, const GeoDataPlacemark &bookmark ) const
 {
-    foreach( GeoDataPlacemark* placemark, container->placemarkList() ) {
+    for( GeoDataPlacemark* placemark: container->placemarkList() ) {
         if ( EARTH_RADIUS * distanceSphere( placemark->coordinate(), bookmark.coordinate() ) <= 1 ) {
             return placemark;
         }
     }
 
-    foreach( GeoDataFolder* folder, container->folderList() ) {
+    for( GeoDataFolder* folder: container->folderList() ) {
         const GeoDataPlacemark* placemark = findPlacemark( folder, bookmark );
         if ( placemark ) {
             return placemark;
@@ -533,13 +533,13 @@ QList<DiffItem> BookmarkSyncManager::Private::diff( QIODevice *fileA, QIODevice 
 
 void BookmarkSyncManager::Private::merge()
 {
-    foreach( const DiffItem &itemA, m_diffA ) {
+    for( const DiffItem &itemA: m_diffA ) {
         if( itemA.m_action == DiffItem::NoAction ) {
             bool deleted = false;
             bool changed = false;
             DiffItem other;
 
-            foreach( const DiffItem &itemB, m_diffB ) {
+            for( const DiffItem &itemB: m_diffB ) {
                 if( EARTH_RADIUS * distanceSphere( itemA.m_placemarkA.coordinate(), itemB.m_placemarkA.coordinate() ) <= 1 ) {
                     if( itemB.m_action == DiffItem::Deleted ) {
                         deleted = true;
@@ -560,7 +560,7 @@ void BookmarkSyncManager::Private::merge()
             bool conflict = false;
             DiffItem other;
 
-            foreach( const DiffItem &itemB, m_diffB ) {
+            for( const DiffItem &itemB: m_diffB ) {
                 if( EARTH_RADIUS * distanceSphere( itemA.m_placemarkB.coordinate(), itemB.m_placemarkB.coordinate() ) <= 1 ) {
                     if( ( itemA.m_action == DiffItem::Changed && ( itemB.m_action == DiffItem::Changed || itemB.m_action == DiffItem::Deleted ) )
                             || ( itemA.m_action == DiffItem::Deleted && itemB.m_action == DiffItem::Changed ) ) {
@@ -612,7 +612,7 @@ void BookmarkSyncManager::Private::merge()
         }
     }
 
-    foreach( const DiffItem &itemB, m_diffB ) {
+    for( const DiffItem &itemB: m_diffB ) {
         if( itemB.m_action == DiffItem::Created ) {
             m_merged.append( itemB );
         }
@@ -627,7 +627,7 @@ GeoDataFolder* BookmarkSyncManager::Private::createFolders( GeoDataContainer *co
     if( pathList.count() > 0 ) {
         QString name = pathList.takeFirst();
 
-        foreach( GeoDataFolder *otherFolder, container->folderList() ) {
+        for( GeoDataFolder *otherFolder: container->folderList() ) {
             if( otherFolder->name() == name ) {
                 folder = otherFolder;
             }
@@ -652,7 +652,7 @@ GeoDataDocument* BookmarkSyncManager::Private::constructDocument( const QList<Di
     GeoDataDocument *document = new GeoDataDocument();
     document->setName( tr( "Bookmarks" ) );
 
-    foreach( const DiffItem &item, mergedList ) {
+    for( const DiffItem &item: mergedList ) {
         GeoDataPlacemark *placemark = new GeoDataPlacemark( item.m_placemarkA );
         QStringList splitten = item.m_path.split(QLatin1Char('/'), QString::SkipEmptyParts);
         GeoDataFolder *folder = createFolders( document, splitten );
@@ -738,7 +738,7 @@ void BookmarkSyncManager::Private::continueSynchronization()
         } else {
             QList<DiffItem> diffList = diff( lastSyncedPath, m_localBookmarksPath );
             bool localModified = false;
-            foreach( const DiffItem &item, diffList ) {
+            for( const DiffItem &item: diffList ) {
                 if( item.m_action != DiffItem::NoAction ) {
                     localModified = true;
                 }

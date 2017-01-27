@@ -114,7 +114,7 @@ QList<AbstractDataPluginItem *> LayerManager::whichItemAt( const QPoint& curpos 
 {
     QList<AbstractDataPluginItem *> itemList;
 
-    foreach( auto *plugin, d->m_dataPlugins ) {
+    for( auto *plugin: d->m_dataPlugins ) {
         itemList.append( plugin->whichItemAt( curpos ) );
     }
     return itemList;
@@ -145,11 +145,11 @@ void LayerManager::renderLayers( GeoPainter *painter, ViewportParams *viewport )
         << QStringLiteral("USER_TOOLS");
 
     QStringList traceList;
-    foreach( const auto& renderPosition, renderPositions ) {
+    for( const auto& renderPosition: renderPositions ) {
         QList<LayerInterface*> layers;
 
         // collect all RenderPlugins of current renderPosition
-        foreach( auto *renderPlugin, d->m_renderPlugins ) {
+        for( auto *renderPlugin: d->m_renderPlugins ) {
             if ( renderPlugin && renderPlugin->renderPosition().contains( renderPosition ) ) {
                 if ( renderPlugin->enabled() && renderPlugin->visible() ) {
                     if ( !renderPlugin->isInitialized() ) {
@@ -162,7 +162,7 @@ void LayerManager::renderLayers( GeoPainter *painter, ViewportParams *viewport )
         }
 
         // collect all internal LayerInterfaces of current renderPosition
-        foreach( auto *layer, d->m_internalLayers ) {
+        for( auto *layer: d->m_internalLayers ) {
             if ( layer && layer->renderPosition().contains( renderPosition ) ) {
                 layers.push_back( layer );
             }
@@ -176,7 +176,7 @@ void LayerManager::renderLayers( GeoPainter *painter, ViewportParams *viewport )
 
         // render the layers of the current renderPosition
         QTime timer;
-        foreach( auto *layer, layers ) {
+        for( auto *layer: layers ) {
             timer.start();
             layer->render( painter, viewport, renderPosition, 0 );
             d->m_renderState.addChild( layer->renderState() );
@@ -197,7 +197,7 @@ void LayerManager::renderLayers( GeoPainter *painter, ViewportParams *viewport )
         int i=0;
         int const top = 150;
         int const lineHeight = painter->fontMetrics().height();
-        foreach ( const auto &text, traceList ) {
+        for ( const auto &text: traceList ) {
             painter->setPen( Qt::black );
             painter->drawText( QPoint(10,top+1+lineHeight*i), text );
             painter->setPen( Qt::white );

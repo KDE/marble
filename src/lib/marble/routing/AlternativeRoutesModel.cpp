@@ -249,8 +249,8 @@ qreal AlternativeRoutesModel::Private::instructionScore( const GeoDataDocument* 
 
     QStringList blacklist = QStringList() << "" << "Route" << "Tessellated";
     QVector<GeoDataFolder*> folders = document->folderList();
-    foreach( const GeoDataFolder *folder, folders ) {
-        foreach( const GeoDataPlacemark *placemark, folder->placemarkList() ) {
+    for( const GeoDataFolder *folder: folders ) {
+        for( const GeoDataPlacemark *placemark: folder->placemarkList() ) {
             if ( !blacklist.contains( placemark->name() ) ) {
                 hasInstructions = true;
                 break;
@@ -258,7 +258,7 @@ qreal AlternativeRoutesModel::Private::instructionScore( const GeoDataDocument* 
         }
     }
 
-    foreach( const GeoDataPlacemark *placemark, document->placemarkList() ) {
+    for( const GeoDataPlacemark *placemark: document->placemarkList() ) {
         if ( !blacklist.contains( placemark->name() ) ) {
             hasInstructions = true;
 
@@ -274,8 +274,8 @@ qreal AlternativeRoutesModel::Private::instructionScore( const GeoDataDocument* 
 const GeoDataLineString* AlternativeRoutesModel::Private::waypoints( const GeoDataDocument* document )
 {
     QVector<GeoDataFolder*> folders = document->folderList();
-    foreach( const GeoDataFolder *folder, folders ) {
-        foreach( const GeoDataPlacemark *placemark, folder->placemarkList() ) {
+    for( const GeoDataFolder *folder: folders ) {
+        for( const GeoDataPlacemark *placemark: folder->placemarkList() ) {
             const GeoDataGeometry* geometry = placemark->geometry();
             const GeoDataLineString* lineString = dynamic_cast<const GeoDataLineString*>( geometry );
             if ( lineString ) {
@@ -284,7 +284,7 @@ const GeoDataLineString* AlternativeRoutesModel::Private::waypoints( const GeoDa
         }
     }
 
-    foreach( const GeoDataPlacemark *placemark, document->placemarkList() ) {
+    for( const GeoDataPlacemark *placemark: document->placemarkList() ) {
         const GeoDataGeometry* geometry = placemark->geometry();
         const GeoDataLineString* lineString = dynamic_cast<const GeoDataLineString*>( geometry );
         if ( lineString ) {
@@ -350,7 +350,7 @@ void AlternativeRoutesModel::addRestrainedRoutes()
     Q_ASSERT( d->m_routes.isEmpty() );
     std::sort( d->m_restrainedRoutes.begin(), d->m_restrainedRoutes.end(), Private::higherScore );
 
-    foreach( GeoDataDocument* route, d->m_restrainedRoutes ) {
+    for( GeoDataDocument* route: d->m_restrainedRoutes ) {
         if ( !d->filter( route ) ) {
             int affected = d->m_routes.size();
             beginInsertRows( QModelIndex(), affected, affected );

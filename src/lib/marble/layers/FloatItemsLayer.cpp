@@ -36,7 +36,7 @@ bool FloatItemsLayer::render(GeoPainter *painter,
     Q_UNUSED(renderPos)
     Q_UNUSED(layer)
 
-    foreach (AbstractFloatItem *item, m_floatItems) {
+    for (AbstractFloatItem *item: m_floatItems) {
         if (!item->enabled()) {
             continue;
         }

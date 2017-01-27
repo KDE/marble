@@ -51,7 +51,7 @@ GeoDataDocument* mergeDocuments(GeoDataDocument* map1, GeoDataDocument* map2)
 
     OsmPlacemarkData marbleLand;
     marbleLand.addTag("marble_land","landmass");
-    foreach (auto placemark, map2->placemarkList()) {
+    for (auto placemark: map2->placemarkList()) {
         GeoDataPlacemark* land = new GeoDataPlacemark(*placemark);
         if(land->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType) {
             land->setOsmData(marbleLand);
@@ -85,7 +85,7 @@ QSharedPointer<GeoDataDocument> mergeBoundaryTiles(const QSharedPointer<GeoDataD
     GeoDataDocument* mergedMap = new GeoDataDocument;
     OsmPlacemarkData marbleLand;
     marbleLand.addTag("marble_land","landmass");
-    foreach (auto placemark, background->placemarkList()) {
+    for (auto placemark: background->placemarkList()) {
         GeoDataPlacemark* land = new GeoDataPlacemark(*placemark);
         if(land->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType) {
             land->setOsmData(marbleLand);
@@ -95,12 +95,12 @@ QSharedPointer<GeoDataDocument> mergeBoundaryTiles(const QSharedPointer<GeoDataD
 
     QString const extension = parser.value("extension");
     QString const boundaryDir = QString("%1/boundaries").arg(parser.value("cache-directory"));
-    foreach(auto const &dir, QDir(boundaryDir).entryList(QDir::Dirs | QDir::NoDotAndDotDot)) {
+    for(auto const &dir: QDir(boundaryDir).entryList(QDir::Dirs | QDir::NoDotAndDotDot)) {
         QString const file = QString("%1/%2/%3/%4/%5.%6").arg(boundaryDir).arg(dir).arg(zoomLevel).arg(x).arg(y).arg(extension);
         if (QFileInfo(file).exists()) {
             auto tile = TileDirectory::open(file, manager);
             if (tile) {
-                foreach (auto placemark, tile->placemarkList()) {
+                for (auto placemark: tile->placemarkList()) {
                     mergedMap->append(placemark->clone());
                 }
             }
@@ -161,7 +161,7 @@ int main(int argc, char *argv[])
     auto const levels = parser.value("zoom-level").split(',');
     QVector<unsigned int> zoomLevels;
     int maxZoomLevel = 0;
-    foreach(auto const &level, levels) {
+    for(auto const &level: levels) {
         int const zoomLevel = level.toInt();
         maxZoomLevel = qMax(zoomLevel, maxZoomLevel);
         zoomLevels << zoomLevel;
@@ -200,11 +200,11 @@ int main(int argc, char *argv[])
             spellChecker.setVerbose(parser.isSet("verbose"));
             spellChecker.correctPlaceLabels(map.data()->placemarkList());
         }
-        foreach(auto zoomLevel, zoomLevels) {
+        for(auto zoomLevel: zoomLevels) {
             TileIterator iter(world, zoomLevel);
             qint64 count = 0;
             qint64 const total = iter.total();
-            foreach(auto const &tileId, iter) {
+            for(auto const &tileId: iter) {
                 ++count;
                 QString const filename = tileFileName(parser, tileId.x(), tileId.y(), zoomLevel);
                 if (!overwriteTiles && QFileInfo(filename).exists()) {
@@ -246,10 +246,10 @@ int main(int argc, char *argv[])
 
         qint64 total = 0;
         QSet<QString> boundaryTiles;
-        foreach(auto zoomLevel, zoomLevels) {
+        for(auto zoomLevel: zoomLevels) {
             TileIterator iter(mapTiles.boundingBox(), zoomLevel);
             total += iter.total();
-            foreach(auto const &tileId, iter) {
+            for(auto const &tileId: iter) {
                 auto const tile = TileId(0, zoomLevel, tileId.x(), tileId.y());
                 int const innerNodes = mapTiles.innerNodes(tile);
                 if (innerNodes > 0) {
@@ -267,7 +267,7 @@ int main(int argc, char *argv[])
 
         qint64 count = 0;
         for (auto iter = tiles.begin(), end = tiles.end(); iter != end; ++iter) {
-            foreach(auto const &tileId, iter.value()) {
+            for(auto const &tileId: iter.value()) {
                 ++count;
                 int const zoomLevel = tileId.zoomLevel();
                 QString const filename = tileFileName(parser, tileId.x(), tileId.y(), zoomLevel);

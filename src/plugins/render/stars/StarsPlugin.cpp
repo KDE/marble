@@ -206,7 +206,7 @@ QHash<QString, QVariant> StarsPlugin::settings() const
     settings.insert(QStringLiteral("renderMoon"), m_renderMoon);
 
     QStringList planetState;
-    foreach (const QString &key, m_renderPlanet.keys())
+    for (const QString &key: m_renderPlanet.keys())
         planetState += key + QLatin1Char(':') + QString::number((int)m_renderPlanet[key]);
     settings.insert(QStringLiteral("renderPlanet"), planetState.join(QLatin1Char('|')));
 
@@ -242,7 +242,7 @@ void StarsPlugin::setSettings( const QHash<QString, QVariant> &settings )
     m_renderPlanet.clear();
     const QString renderPlanet = readSetting<QString>(settings, QStringLiteral("renderPlanet"), QString());
     const QStringList renderStates = renderPlanet.split(QLatin1Char('|'));
-    foreach(const QString &state, renderStates) {
+    for(const QString &state: renderStates) {
         const QStringList stateList = state.split(QLatin1Char(':'));
         if (stateList.size() == 2)
             m_renderPlanet[stateList[0]] = (bool)stateList[1].toInt();
@@ -1246,7 +1246,7 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
             }
         }
 
-        foreach(const QString &planet, m_renderPlanet.keys()) {
+        for(const QString &planet: m_renderPlanet.keys()) {
             if (m_renderPlanet[planet])
                 renderPlanet(planet, painter, sys, viewport, skyRadius, skyAxisMatrix);
         }
@@ -1432,7 +1432,7 @@ bool StarsPlugin::eventFilter( QObject *object, QEvent *e )
                 return false;
             }
 
-            foreach ( AbstractFloatItem *floatItem, widget->floatItems() ) {
+            for ( AbstractFloatItem *floatItem: widget->floatItems() ) {
                 if ( floatItem->enabled() && floatItem->visible()
                      && floatItem->contains( menuEvent->pos() ) )
                 {

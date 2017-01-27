@@ -288,13 +288,13 @@ void MarbleModel::setMapTheme( GeoSceneDocument *document )
     // find the list of previous theme's geodata
     QList<GeoSceneGeodata> currentDatasets;
     if ( d->m_mapTheme ) {
-        foreach ( GeoSceneLayer *layer, d->m_mapTheme->map()->layers() ) {
+        for ( GeoSceneLayer *layer: d->m_mapTheme->map()->layers() ) {
             if ( layer->backend() != dgml::dgmlValue_geodata
                  && layer->backend() != dgml::dgmlValue_vector )
                 continue;
 
             // look for documents
-            foreach ( GeoSceneAbstractDataset *dataset, layer->datasets() ) {
+            for ( GeoSceneAbstractDataset *dataset: layer->datasets() ) {
                 GeoSceneGeodata *data = dynamic_cast<GeoSceneGeodata*>( dataset );
                 Q_ASSERT( data );
                 currentDatasets << *data;
@@ -343,13 +343,13 @@ void MarbleModel::setMapTheme( GeoSceneDocument *document )
     bool skip = false;
     bool sourceFileMatch = false;
     int datasetIndex = -1;
-    foreach ( GeoSceneLayer *layer, d->m_mapTheme->map()->layers() ) {
+    for ( GeoSceneLayer *layer: d->m_mapTheme->map()->layers() ) {
         if ( layer->backend() != dgml::dgmlValue_geodata
              && layer->backend() != dgml::dgmlValue_vector )
             continue;
 
         // look for datasets which are different from currentDatasets
-        foreach ( const GeoSceneAbstractDataset *dataset, layer->datasets() ) {
+        for ( const GeoSceneAbstractDataset *dataset: layer->datasets() ) {
             const GeoSceneGeodata *data = dynamic_cast<const GeoSceneGeodata*>( dataset );
             Q_ASSERT( data );
             skip = false;
@@ -424,7 +424,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument *document )
         }
     }
     // unload old currentDatasets which are not part of the new map
-    foreach(const GeoSceneGeodata &data, currentDatasets) {
+    for(const GeoSceneGeodata &data: currentDatasets) {
         d->m_fileManager.removeFile( data.sourceFile() );
     }
     // load new datasets
@@ -797,7 +797,7 @@ void MarbleModel::removeGeoData( const QString& fileName )
 
 void MarbleModel::updateProperty( const QString &property, bool value )
 {
-    foreach( GeoDataFeature *feature, d->m_treeModel.rootDocument()->featureList()) {
+    for( GeoDataFeature *feature: d->m_treeModel.rootDocument()->featureList()) {
         if( feature->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
             GeoDataDocument *document = static_cast<GeoDataDocument*>( feature );
             if( document->property() == property ){
@@ -809,11 +809,11 @@ void MarbleModel::updateProperty( const QString &property, bool value )
 }
 
 void MarbleModelPrivate::assignFillColors( const QString &filePath ) {
-    foreach( GeoSceneLayer *layer, m_mapTheme->map()->layers() ) {
+    for( GeoSceneLayer *layer: m_mapTheme->map()->layers() ) {
         if ( layer->backend() == dgml::dgmlValue_geodata 
              || layer->backend() == dgml::dgmlValue_vector )
         {
-            foreach( GeoSceneAbstractDataset *dataset, layer->datasets() ) {
+            for( GeoSceneAbstractDataset *dataset: layer->datasets() ) {
                 GeoSceneGeodata *data = static_cast<GeoSceneGeodata*>( dataset );
                 if ( data ) {
                     if ( data->sourceFile() == filePath ) {

@@ -58,7 +58,7 @@ private:
         auto const & osmData = placemark->osmData();
         using namespace ClipperLib;
         Path subject;
-        foreach(auto const & node, *ring) {
+        for(auto const & node: *ring) {
             subject << IntPoint(&node);
         }
         cInt minX, maxX, minY, maxY;
@@ -76,13 +76,13 @@ private:
         } else {
             OpenPathsFromPolyTree(tree, paths);
         }
-        foreach(const auto &path, paths) {
+        for(const auto &path: paths) {
             GeoDataPlacemark* newPlacemark = new GeoDataPlacemark;
             newPlacemark->setVisible(placemark->isVisible());
             newPlacemark->setVisualCategory(placemark->visualCategory());
             T* newRing = new T;
             int index = 0;
-            foreach(const auto &point, path) {
+            for(const auto &point: path) {
                 GeoDataCoordinates const coordinates = point.coordinates();
                 *newRing << coordinates;
                 auto const originalOsmData = osmData.nodeReference(coordinates);

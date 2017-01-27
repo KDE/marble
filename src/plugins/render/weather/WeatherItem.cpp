@@ -139,7 +139,7 @@ class WeatherItemPrivate
             toolTip += QLatin1Char('\n');
 
             QDate const minDate = QDate::currentDate();
-            foreach( const WeatherData& data, m_forecastWeather ) {
+            for( const WeatherData& data: m_forecastWeather ) {
                 QDate date = data.dataDate();
                 if( date >= minDate
                     && data.hasValidCondition()
@@ -419,7 +419,7 @@ void WeatherItem::setForecastWeather( const QMap<QDate, WeatherData>& forecasts 
 
 void WeatherItem::addForecastWeather( const QList<WeatherData>& forecasts )
 {
-    foreach( const WeatherData& data, forecasts ) {
+    for( const WeatherData& data: forecasts ) {
         QDate date = data.dataDate();
         WeatherData other = d->m_forecastWeather.value( date );
         if ( !other.isValid() ) {
@@ -522,7 +522,7 @@ QString WeatherItem::createFromTemplate(const QString &templateHtml)
 
     int forecastNumber = 0;
 
-    foreach ( const WeatherData &forecast, d->m_forecastWeather ) {
+    for ( const WeatherData &forecast: d->m_forecastWeather ) {
         forecastNumber++;
         const QString suffix = QString::number(forecastNumber);
         QDate date = forecast.dataDate();

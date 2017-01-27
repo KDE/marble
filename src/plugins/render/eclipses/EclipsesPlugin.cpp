@@ -248,7 +248,7 @@ bool EclipsesPlugin::render( GeoPainter *painter,
     Q_UNUSED( layer );
 
     if (marbleModel()->planetId() == QLatin1String("earth")) {
-        foreach( EclipsesItem *item, m_model->items() ) {
+        for( EclipsesItem *item: m_model->items() ) {
             if( item->takesPlaceAt( marbleModel()->clock()->dateTime() ) ) {
                 return renderItem( painter, item );
             }
@@ -436,7 +436,7 @@ void EclipsesPlugin::updateEclipses()
     if( ( m_menuYear != year ) || ( m_model->withLunarEclipses() != lun ) ) {
 
         // remove old menus
-        foreach( QAction *action, m_eclipsesListMenu->actions() ) {
+        for( QAction *action: m_eclipsesListMenu->actions() ) {
             m_eclipsesListMenu->removeAction( action );
             delete action;
         }
@@ -454,7 +454,7 @@ void EclipsesPlugin::updateEclipses()
 
         m_eclipsesListMenu->setTitle( tr("Eclipses in %1").arg( year ) );
 
-        foreach( EclipsesItem *item, m_model->items() ) {
+        for( EclipsesItem *item: m_model->items() ) {
             QAction *action = m_eclipsesListMenu->addAction(
                         item->dateMaximum().date().toString() );
             action->setData( QVariant( 1000 * item->dateMaximum().date().year() +  item->index() ) );

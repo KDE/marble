@@ -111,7 +111,7 @@ void CurrentLocationWidget::setMarbleWidget( MarbleWidget *widget )
 
     const PluginManager* pluginManager = d->m_widget->model()->pluginManager();
     d->m_positionProviderPlugins = pluginManager->positionProviderPlugins();
-    foreach( const PositionProviderPlugin *plugin, d->m_positionProviderPlugins ) {
+    for( const PositionProviderPlugin *plugin: d->m_positionProviderPlugins ) {
         d->m_currentLocationUi.positionTrackingComboBox->addItem( plugin->guiString() );
     }
     if ( d->m_positionProviderPlugins.isEmpty() ) {
@@ -318,7 +318,7 @@ void CurrentLocationWidgetPrivate::receiveGpsCoordinates( const GeoDataCoordinat
 
 void CurrentLocationWidgetPrivate::changePositionProvider( const QString &provider )
 {
-    foreach( const PositionProviderPlugin* plugin, m_positionProviderPlugins ) {
+    for( const PositionProviderPlugin* plugin: m_positionProviderPlugins ) {
         if ( plugin->guiString() == provider ) {
             m_currentLocationUi.locationLabel->setEnabled( true );
             PositionProviderPlugin* instance = plugin->newInstance();

@@ -366,7 +366,7 @@ void PbfParser::parseWay()
                 way.nodes << nodes.last();
             }
 
-            foreach( int node, way.nodes ) {
+            for( int node: way.nodes ) {
                 m_referencedNodes << node;
             }
 

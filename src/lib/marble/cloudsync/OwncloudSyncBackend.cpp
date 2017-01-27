@@ -233,7 +233,7 @@ void OwncloudSyncBackend::deleteRoute( const QString &timestamp )
 QPixmap OwncloudSyncBackend::createPreview( const QString &timestamp ) const
 {
     MarbleWidget mapWidget;
-    foreach( RenderPlugin* plugin, mapWidget.renderPlugins() ) {
+    for( RenderPlugin* plugin: mapWidget.renderPlugins() ) {
         plugin->setEnabled( false );
     }
 
@@ -274,7 +274,7 @@ QString OwncloudSyncBackend::routeName( const QString &timestamp ) const
     GeoDataDocument *container = dynamic_cast<GeoDataDocument*>( geoDoc );
     if ( container && container->size() > 0 ) {
         GeoDataFolder *folder = container->folderList().at( 0 );
-        foreach ( GeoDataPlacemark *placemark, folder->placemarkList() ) {
+        for ( GeoDataPlacemark *placemark: folder->placemarkList() ) {
             routeName.append( placemark->name() );
             routeName.append( " - " );
         }

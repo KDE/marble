@@ -413,7 +413,7 @@ void AnnotatePlugin::loadAnnotationFile()
 
     // FIXME: The same problem as in the case of copying/cutting graphic items applies here:
     // the files do not load properly because the geometry copy is not a deep copy.
-    foreach ( GeoDataFeature *feature, document->featureList() ) {
+    for ( GeoDataFeature *feature: document->featureList() ) {
 
         if ( feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
             GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( feature );
@@ -570,7 +570,7 @@ bool AnnotatePlugin::eventFilter( QObject *watched, QEvent *event )
     }
 
     // Pass the event to Graphic Items.
-    foreach ( SceneGraphicsItem *item, m_graphicsItems ) {
+    for ( SceneGraphicsItem *item: m_graphicsItems ) {
         if ( !item->containsPoint( mouseEvent->pos() ) ) {
             continue;
         }
@@ -1274,7 +1274,7 @@ void AnnotatePlugin::updateOverlayFrame( GeoDataGroundOverlay *overlay )
 
 void AnnotatePlugin::clearOverlayFrames()
 {
-    foreach ( GeoDataGroundOverlay *overlay, m_groundOverlayFrames.keys() ) {
+    for ( GeoDataGroundOverlay *overlay: m_groundOverlayFrames.keys() ) {
         GroundOverlayFrame *frame = static_cast<GroundOverlayFrame *>( m_groundOverlayFrames.value( overlay ) );
         m_graphicsItems.removeAll( m_groundOverlayFrames.value( overlay ) );
         m_marbleWidget->model()->treeModel()->removeFeature( frame->placemark() );
@@ -1676,7 +1676,7 @@ void AnnotatePlugin::addRelation( const OsmPlacemarkData &relationData )
 
 void AnnotatePlugin::announceStateChanged( SceneGraphicsItem::ActionState newState )
 {
-    foreach ( SceneGraphicsItem *item, m_graphicsItems ) {
+    for ( SceneGraphicsItem *item: m_graphicsItems ) {
         item->setState( newState );
         m_marbleWidget->model()->treeModel()->updateFeature( item->placemark() );
     }

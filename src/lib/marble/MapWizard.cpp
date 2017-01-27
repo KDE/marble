@@ -149,7 +149,7 @@ bool PreviewDialog::deleteTheme( const QString &directory )
     bool result = true;
  
     if (dir.exists(directory)) {
-        Q_FOREACH(const QFileInfo& info, dir.entryInfoList(QDir::NoDotAndDotDot | QDir::System | QDir::Hidden  | QDir::AllDirs | QDir::Files, QDir::DirsFirst)) {
+        for(const QFileInfo& info: dir.entryInfoList(QDir::NoDotAndDotDot | QDir::System | QDir::Hidden  | QDir::AllDirs | QDir::Files, QDir::DirsFirst)) {
             if (info.isDir()) {
                 result = deleteTheme(info.absoluteFilePath());
             } else {

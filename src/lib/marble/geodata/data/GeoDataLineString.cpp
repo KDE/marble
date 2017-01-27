@@ -437,7 +437,7 @@ void GeoDataLineString::append(const QVector<GeoDataCoordinates>& values)
     d->m_vector.append(values);
 #else
     d->m_vector.reserve(d->m_vector.size() + values.size());
-    foreach (const GeoDataCoordinates &coordinates, values) {
+    for (const GeoDataCoordinates &coordinates: values) {
         d->m_vector.append(coordinates);
     }
 #endif

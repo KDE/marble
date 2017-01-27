@@ -78,7 +78,7 @@ void PluginAboutDialog::setAboutText( const QString& about )
 void PluginAboutDialog::setAuthors(const QVector<PluginAuthor>& authors)
 {
     QString string;
-    foreach ( const PluginAuthor& author, authors ) {
+    for ( const PluginAuthor& author: authors ) {
         string += author.name +  QLatin1String("\n    ") +
                   author.email + QLatin1String("\n    ") +
                   author.task +  QLatin1String("\n\n");

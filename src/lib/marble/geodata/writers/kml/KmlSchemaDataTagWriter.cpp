@@ -35,7 +35,7 @@ bool KmlSchemaDataTagWriter::write( const GeoNode *node, GeoWriter& writer ) con
     QString schemaUrl = schemaData->schemaUrl();
     writer.writeAttribute( "schemaUrl", schemaUrl );
 
-    foreach( const GeoDataSimpleData& data, schemaData->simpleDataList() ) {
+    for( const GeoDataSimpleData& data: schemaData->simpleDataList() ) {
         writeElement( &data, writer );
     }
     writer.writeEndElement();

@@ -161,7 +161,7 @@ void Tracking::setShowPositionMarkerPlugin( bool visible )
 {
     if ( m_marbleQuickItem ) {
         QList<RenderPlugin*> const renderPlugins = m_marbleQuickItem->map()->renderPlugins();
-        foreach( RenderPlugin* renderPlugin, renderPlugins ) {
+        for( RenderPlugin* renderPlugin: renderPlugins ) {
             Q_ASSERT( renderPlugin );
             if (renderPlugin->nameId() == QLatin1String("positionMarker")) {
                 renderPlugin->setEnabled( true );
