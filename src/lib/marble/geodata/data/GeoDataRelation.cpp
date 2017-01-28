@@ -24,6 +24,8 @@ public:
     OsmPlacemarkData m_osmData;
     QSet<qint64> m_memberIds;
 
+    mutable GeoDataRelation::RelationType m_relationType = GeoDataRelation::UnknownType;
+    mutable bool m_relationTypeDirty = true;
     static QHash<QString, GeoDataRelation::RelationType> s_relationTypes;
 };
 
@@ -84,6 +86,7 @@ QSet<const GeoDataFeature *> GeoDataRelation::members() const
 OsmPlacemarkData &GeoDataRelation::osmData()
 {
     Q_D(GeoDataRelation);
+    d->m_relationTypeDirty = true;
     return d->m_osmData;
 }
 
@@ -95,6 +98,11 @@ const OsmPlacemarkData &GeoDataRelation::osmData() const
 
 GeoDataRelation::RelationType GeoDataRelation::relationType() const
 {
+    Q_D(const GeoDataRelation);
+    if (!d->m_relationTypeDirty) {
+        return d->m_relationType;
+    }
+
     if (GeoDataRelationPrivate::s_relationTypes.isEmpty()) {
         auto &map = GeoDataRelationPrivate::s_relationTypes;
         map["road"] = RouteRoad;
@@ -113,25 +121,27 @@ GeoDataRelation::RelationType GeoDataRelation::relationType() const
         map["inline_skates"] = RouteInlineSkates;
     }
 
-    Q_D(const GeoDataRelation);
+    d->m_relationType = GeoDataRelation::UnknownType;
+    d->m_relationTypeDirty = false;
     if (d->m_osmData.containsTag(QStringLiteral("type"), QStringLiteral("route"))) {
         auto const route = d->m_osmData.tagValue(QStringLiteral("route"));
         if (route == QStringLiteral("piste")) {
             auto const piste = d->m_osmData.tagValue(QStringLiteral("piste:type"));
             if (piste == QStringLiteral("downhill")) {
-                return RouteSkiDownhill;
+                d->m_relationType = RouteSkiDownhill;
             } else if (piste == QStringLiteral("nordic")) {
-                return RouteSkiNordic;
+                d->m_relationType = RouteSkiNordic;
             } else if (piste == QStringLiteral("skitour")) {
-                return RouteSkitour;
+                d->m_relationType = RouteSkitour;
             } else if (piste == QStringLiteral("sled")) {
-                return RouteSled;
+                d->m_relationType = RouteSled;
             }
+        } else {
+            d->m_relationType = GeoDataRelationPrivate::s_relationTypes.value(route, UnknownType);
         }
-        return GeoDataRelationPrivate::s_relationTypes.value(route, UnknownType);
     }
 
-    return UnknownType;
+    return d->m_relationType;
 }
 
 QSet<qint64> GeoDataRelation::memberIds() const
