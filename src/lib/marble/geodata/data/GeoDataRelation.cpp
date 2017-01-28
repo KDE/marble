@@ -50,6 +50,9 @@ GeoDataRelation::GeoDataRelation(const GeoDataRelation &other) :
     Q_D(GeoDataRelation);
     d->m_features = other.d_func()->m_features;
     d->m_osmData = other.d_func()->m_osmData;
+    d->m_memberIds = other.d_func()->m_memberIds;
+    d->m_relationType = other.d_func()->m_relationType;
+    d->m_relationTypeDirty = other.d_func()->m_relationTypeDirty;
 }
 
 GeoDataRelation &GeoDataRelation::operator=(GeoDataRelation other) // passed by value
