@@ -577,12 +577,13 @@ QVector<const GeoDataFeature*> GeometryLayer::whichFeatureAt(const QPoint &curpo
             continue;
         }
         auto & layerItems = d->m_cachedPaintFragments[renderOrder[i]];
-        for (auto iter = layerItems.crbegin(), end = layerItems.crend(); iter != end; ++iter) {
-            if (!checked.contains(*iter)) {
-                if ((*iter)->contains(curpos, viewport)) {
-                    result << (*iter)->feature();
+        for (auto j = layerItems.size()-1; j >= 0; --j) {
+            auto const & layerItem = layerItems[j];
+            if (!checked.contains(layerItem)) {
+                if (layerItem->contains(curpos, viewport)) {
+                    result << layerItem->feature();
                 }
-                checked << *iter;
+                checked << layerItem;
             }
         }
     }
