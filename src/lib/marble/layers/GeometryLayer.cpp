@@ -581,21 +581,35 @@ QVector<const GeoDataFeature*> GeometryLayer::whichFeatureAt(const QPoint &curpo
 {
     QVector<const GeoDataFeature*> result;
     auto const renderOrder = d->m_styleBuilder->renderOrder();
-    for (int i = renderOrder.size() - 1; i >= 0; --i) {
+    QString const label = QStringLiteral("/label");
+    QSet<GeoGraphicsItem*> checked;
+    for (int i = renderOrder.size()-1; i >= 0; --i) {
+        if (renderOrder[i].endsWith(label)) {
+            continue;
+        }
         GeometryLayerPrivate::PaintFragments & layerItems = d->m_cachedPaintFragments[renderOrder[i]];
-        for (auto item : layerItems.positive) {
-            if (item->contains(curpos, viewport)) {
-                result << item->feature();
+        for (auto iter = layerItems.positive.crbegin(), end = layerItems.positive.crend(); iter != end; ++iter) {
+            if (!checked.contains(*iter)) {
+                if ((*iter)->contains(curpos, viewport)) {
+                    result << (*iter)->feature();
+                }
+                checked << *iter;
             }
         }
-        for (auto item : layerItems.null) {
-            if (item->contains(curpos, viewport)) {
-                result << item->feature();
+        for (auto iter = layerItems.null.crbegin(), end = layerItems.null.crend(); iter != end; ++iter) {
+            if (!checked.contains(*iter)) {
+                if ((*iter)->contains(curpos, viewport)) {
+                    result << (*iter)->feature();
+                }
+                checked << *iter;
             }
         }
-        for (auto item : layerItems.negative) {
-            if (item->contains(curpos, viewport)) {
-                result << item->feature();
+        for (auto iter = layerItems.negative.crbegin(), end = layerItems.negative.crend(); iter != end; ++iter) {
+            if (!checked.contains(*iter)) {
+                if ((*iter)->contains(curpos, viewport)) {
+                    result << (*iter)->feature();
+                }
+                checked << *iter;
             }
         }
     }
