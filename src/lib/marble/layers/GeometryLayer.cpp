@@ -67,6 +67,7 @@ public:
     typedef QVector<GeoLineStringGraphicsItem*> OsmLineStringItems;
     typedef QSet<const GeoDataRelation *> Relations;
     typedef QHash<const GeoDataFeature *, Relations> FeatureRelationHash;
+    typedef QVector<GeoGraphicsItem*> GeoGraphicItems;
 
     struct PaintFragments {
         // Three lists for different z values
@@ -102,7 +103,7 @@ public:
 
     bool m_dirty;
     int m_cachedItemCount;
-    QHash<QString, GeometryLayerPrivate::PaintFragments> m_cachedPaintFragments;
+    QHash<QString, GeoGraphicItems> m_cachedPaintFragments;
     typedef QPair<QString, GeoGraphicsItem*> LayerItem;
     QList<LayerItem> m_cachedDefaultLayer;
     QDateTime m_cachedDateTime;
@@ -193,6 +194,7 @@ bool GeometryLayer::render(GeoPainter *painter, ViewportParams *viewport,
         d->m_cachedItemCount = items.size();
         d->m_cachedDefaultLayer.clear();
         d->m_cachedPaintFragments.clear();
+        QHash<QString, GeometryLayerPrivate::PaintFragments> paintFragments;
         QSet<QString> const knownLayers = QSet<QString>::fromList(d->m_styleBuilder->renderOrder());
         for (GeoGraphicsItem* item: items) {
             QStringList paintLayers = item->paintLayers();
@@ -202,7 +204,7 @@ bool GeometryLayer::render(GeoPainter *painter, ViewportParams *viewport,
             }
             for (const auto &layer: paintLayers) {
                 if (knownLayers.contains(layer)) {
-                    GeometryLayerPrivate::PaintFragments & fragments = d->m_cachedPaintFragments[layer];
+                    GeometryLayerPrivate::PaintFragments &fragments = paintFragments[layer];
                     double const zValue = item->zValue();
                     // assign subway stations
                     if (zValue == 0.0) {
@@ -227,26 +229,25 @@ bool GeometryLayer::render(GeoPainter *painter, ViewportParams *viewport,
         }
         // Sort each fragment by z-level
         for (const QString &layer: d->m_styleBuilder->renderOrder()) {
-            GeometryLayerPrivate::PaintFragments & layerItems = d->m_cachedPaintFragments[layer];
+            GeometryLayerPrivate::PaintFragments & layerItems = paintFragments[layer];
             std::sort(layerItems.negative.begin(), layerItems.negative.end(), GeoGraphicsItem::zValueLessThan);
             // The idea here is that layerItems.null has most items and does not need to be sorted by z-value
             // since they are all equal (=0). We do sort them by style pointer though for batch rendering
             std::sort(layerItems.null.begin(), layerItems.null.end(), GeoGraphicsItem::styleLessThan);
             std::sort(layerItems.positive.begin(), layerItems.positive.end(), GeoGraphicsItem::zValueAndStyleLessThan);
+            auto const count = layerItems.negative.size() + layerItems.null.size() + layerItems.positive.size();
+            d->m_cachedPaintFragments[layer].reserve(count);
+            d->m_cachedPaintFragments[layer] << layerItems.negative;
+            d->m_cachedPaintFragments[layer] << layerItems.null;
+            d->m_cachedPaintFragments[layer] << layerItems.positive;
         }
     }
 
     for (const QString &layer: d->m_styleBuilder->renderOrder()) {
-        GeometryLayerPrivate::PaintFragments & layerItems = d->m_cachedPaintFragments[layer];
+        auto & layerItems = d->m_cachedPaintFragments[layer];
         AbstractGeoPolygonGraphicsItem::s_previousStyle = 0;
         GeoLineStringGraphicsItem::s_previousStyle = 0;
-        for (auto item: layerItems.negative) {
-            item->paint(painter, viewport, layer, d->m_tileLevel);
-        }
-        for (auto item: layerItems.null) {
-            item->paint(painter, viewport, layer, d->m_tileLevel);
-        }
-        for (auto item: layerItems.positive) {
+        for (auto item: layerItems) {
             item->paint(painter, viewport, layer, d->m_tileLevel);
         }
     }
@@ -284,20 +285,8 @@ bool GeometryLayer::hasFeatureAt(const QPoint &curpos, const ViewportParams *vie
 
     auto const renderOrder = d->m_styleBuilder->renderOrder();
     for (int i = renderOrder.size() - 1; i >= 0; --i) {
-        GeometryLayerPrivate::PaintFragments & layerItems = d->m_cachedPaintFragments[renderOrder[i]];
-        for (auto item : layerItems.positive) {
-            if (item->contains(curpos, viewport)) {
-                d->m_lastFeatureAt = item;
-                return true;
-            }
-        }
-        for (auto item : layerItems.null) {
-            if (item->contains(curpos, viewport)) {
-                d->m_lastFeatureAt = item;
-                return true;
-            }
-        }
-        for (auto item : layerItems.negative) {
+        auto & layerItems = d->m_cachedPaintFragments[renderOrder[i]];
+        for (auto item : layerItems) {
             if (item->contains(curpos, viewport)) {
                 d->m_lastFeatureAt = item;
                 return true;
@@ -587,24 +576,8 @@ QVector<const GeoDataFeature*> GeometryLayer::whichFeatureAt(const QPoint &curpo
         if (renderOrder[i].endsWith(label)) {
             continue;
         }
-        GeometryLayerPrivate::PaintFragments & layerItems = d->m_cachedPaintFragments[renderOrder[i]];
-        for (auto iter = layerItems.positive.crbegin(), end = layerItems.positive.crend(); iter != end; ++iter) {
-            if (!checked.contains(*iter)) {
-                if ((*iter)->contains(curpos, viewport)) {
-                    result << (*iter)->feature();
-                }
-                checked << *iter;
-            }
-        }
-        for (auto iter = layerItems.null.crbegin(), end = layerItems.null.crend(); iter != end; ++iter) {
-            if (!checked.contains(*iter)) {
-                if ((*iter)->contains(curpos, viewport)) {
-                    result << (*iter)->feature();
-                }
-                checked << *iter;
-            }
-        }
-        for (auto iter = layerItems.negative.crbegin(), end = layerItems.negative.crend(); iter != end; ++iter) {
+        auto & layerItems = d->m_cachedPaintFragments[renderOrder[i]];
+        for (auto iter = layerItems.crbegin(), end = layerItems.crend(); iter != end; ++iter) {
             if (!checked.contains(*iter)) {
                 if ((*iter)->contains(curpos, viewport)) {
                     result << (*iter)->feature();
