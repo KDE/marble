@@ -62,6 +62,20 @@ GeoDataRelation &GeoDataRelation::operator=(GeoDataRelation other) // passed by 
     return *this;
 }
 
+bool GeoDataRelation::operator<(const GeoDataRelation &other) const
+{
+    if (relationType() == other.relationType()) {
+        Q_D(const GeoDataRelation);
+        auto const refA = d->m_osmData.tagValue(QStringLiteral("ref"));
+        auto const refB = other.osmData().tagValue(QStringLiteral("ref"));
+        if (refA == refB) {
+            return name() < other.name();
+        }
+        return refA < refB;
+    }
+    return relationType() < other.relationType();
+}
+
 const char *GeoDataRelation::nodeType() const
 {
     return GeoDataTypes::GeoDataRelationType;

@@ -48,6 +48,8 @@ public:
     ~GeoDataRelation();
     GeoDataRelation(const GeoDataRelation &other);
     GeoDataRelation & operator=(GeoDataRelation other);
+    bool operator<(const GeoDataRelation &other) const;
+
     const char* nodeType() const override;
     GeoDataFeature * clone() const override;
 
