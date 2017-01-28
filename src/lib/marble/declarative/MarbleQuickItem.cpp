@@ -224,24 +224,15 @@ namespace Marble
 
     void MarbleQuickItem::resizeMap()
     {
-        const int minWidth = 100;
-        const int minHeight = 100;
-        int newWidth = width() > minWidth ? (int)width() : minWidth;
-        int newHeight = height() > minHeight ? (int)height() : minHeight;
-
-        d->m_map.setSize(newWidth, newHeight);
+        d->m_map.setSize(qMax(100, int(width())), qMax(100, int(height())));
         update();
         updatePositionVisibility();
     }
 
     void MarbleQuickItem::positionDataStatusChanged(PositionProviderStatus status)
     {
-        if (status == PositionProviderStatusAvailable) {
-            emit positionAvailableChanged(true);
-        }
-        else {
-            emit positionAvailableChanged(false);
-        }
+        bool const positionAvailable = status == PositionProviderStatusAvailable;
+        emit positionAvailableChanged(positionAvailable);
         updatePositionVisibility();
     }
 
