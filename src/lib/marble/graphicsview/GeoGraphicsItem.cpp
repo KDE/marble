@@ -90,7 +90,16 @@ GeoDataStyle::ConstPtr GeoGraphicsItem::style() const
         if (d->m_feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
             const GeoDataPlacemark *placemark = static_cast<const GeoDataPlacemark*>(d->m_feature);
             auto styling = StyleParameters(placemark, d->m_renderContext.tileLevel());
-            for (auto relation: d->m_relations) {
+            QVector<const GeoDataRelation*> relations;
+            std::copy_if(d->m_relations.begin(), d->m_relations.end(), std::back_inserter(relations),
+            [](const GeoDataRelation * relation) {
+                return relation->isVisible();
+            });
+            std::sort(relations.begin(), relations.end(),
+            [](const GeoDataRelation * a, const GeoDataRelation * b) {
+                return *a < *b;
+            });
+            for (auto relation: relations) {
                 if (relation->isVisible()) {
                     styling.relation = relation;
                     break;
