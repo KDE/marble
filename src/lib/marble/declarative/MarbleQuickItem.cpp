@@ -208,13 +208,13 @@ namespace Marble
         d->m_model.positionTracking()->setTrackVisible(false);
 
         connect(&d->m_map, SIGNAL(repaintNeeded(QRegion)), this, SLOT(update()));
-        connect(this, SIGNAL(widthChanged()), this, SLOT(resizeMap()));
-        connect(this, SIGNAL(heightChanged()), this, SLOT(resizeMap()));
-        connect(&d->m_map, SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)), this, SLOT(updatePositionVisibility()));
-        connect(&d->m_map, SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)), this, SIGNAL(visibleLatLonAltBoxChanged()));
-        connect(&d->m_map, SIGNAL(radiusChanged(int)), this, SIGNAL(radiusChanged(int)));
-        connect(&d->m_map, SIGNAL(radiusChanged(int)), this, SIGNAL(zoomChanged()));
-        connect(&d->m_map, SIGNAL(showPublicTransportChanged(bool)), this, SIGNAL(showPublicTransportChanged(bool)));
+        connect(this, &MarbleQuickItem::widthChanged, this, &MarbleQuickItem::resizeMap);
+        connect(this, &MarbleQuickItem::heightChanged, this, &MarbleQuickItem::resizeMap);
+        connect(&d->m_map, &MarbleMap::visibleLatLonAltBoxChanged, this, &MarbleQuickItem::updatePositionVisibility);
+        connect(&d->m_map, &MarbleMap::visibleLatLonAltBoxChanged, this, &MarbleQuickItem::visibleLatLonAltBoxChanged);
+        connect(&d->m_map, &MarbleMap::radiusChanged, this, &MarbleQuickItem::radiusChanged);
+        connect(&d->m_map, &MarbleMap::radiusChanged, this, &MarbleQuickItem::zoomChanged);
+        connect(&d->m_map, &MarbleMap::showPublicTransportChanged, this, &MarbleQuickItem::showPublicTransportChanged);
         connect(&d->m_reverseGeocoding, SIGNAL(reverseGeocodingFinished(GeoDataCoordinates,GeoDataPlacemark)),
                 this, SLOT(handleReverseGeocoding(GeoDataCoordinates,GeoDataPlacemark)));
 
