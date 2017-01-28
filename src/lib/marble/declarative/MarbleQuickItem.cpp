@@ -339,7 +339,7 @@ namespace Marble
 
     MarbleQuickItem::Projection MarbleQuickItem::projection() const
     {
-        return (Projection)d->m_map.projection();
+        return Projection(d->m_map.projection());
     }
 
     QString MarbleQuickItem::mapThemeId() const
@@ -472,7 +472,7 @@ namespace Marble
 
     qreal MarbleQuickItem::angle() const
     {
-        bool routeExists = d->m_model.routingManager()->routingModel()->route().distance() != 0;
+        bool routeExists = d->m_model.routingManager()->routingModel()->route().distance() != 0.0;
         bool onRoute = !d->m_model.routingManager()->routingModel()->deviatedFromRoute();
         if ( routeExists && onRoute) {
             GeoDataCoordinates curPoint = d->m_model.positionTracking()->positionProviderPlugin()->position();
@@ -690,7 +690,7 @@ namespace Marble
             return;
         }
 
-        d->m_map.setProjection((Marble::Projection)projection);
+        d->m_map.setProjection(Marble::Projection(projection));
         emit projectionChanged(projection);
     }
 
