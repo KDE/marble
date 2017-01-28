@@ -393,9 +393,9 @@ QList<DiffItem> BookmarkSyncManager::Private::getPlacemarks( GeoDataDocument *do
 QList<DiffItem> BookmarkSyncManager::Private::getPlacemarks( GeoDataFolder *folder, QString &path, GeoDataDocument *other, DiffItem::Status diffDirection )
 {
     QList<DiffItem> diffItems;
-    for ( GeoDataFolder *folder: folder->folderList() ) {
-        QString newPath = QString( "%0/%1" ).arg( path, folder->name() );
-        diffItems.append( getPlacemarks( folder, newPath, other, diffDirection ) );
+    for ( GeoDataFolder *subFolder: folder->folderList() ) {
+        QString newPath = QString( "%0/%1" ).arg( path, subFolder->name() );
+        diffItems.append( getPlacemarks( subFolder, newPath, other, diffDirection ) );
     }
 
     for( GeoDataPlacemark *placemark: folder->placemarkList() ) {
