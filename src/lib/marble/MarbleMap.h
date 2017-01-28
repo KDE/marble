@@ -360,6 +360,8 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
     bool showBackground() const;
 
+    bool showPublicTransport() const;
+
     /**
      * @brief  Returns the limit in kilobytes of the volatile (in RAM) tile cache.
      * @return the limit of volatile tile cache in kilobytes.
@@ -670,6 +672,8 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
     void setShowBackground( bool visible );
 
+    void setShowPublicTransport(bool show);
+
      /**
      * @brief used to notify about the position of the mouse click
       */
@@ -750,6 +754,8 @@ class MARBLE_EXPORT MarbleMap : public QObject
     void highlightedPlacemarksChanged( qreal, qreal, GeoDataCoordinates::Unit );
 
     void viewContextChanged(ViewContext viewContext);
+
+    void showPublicTransportChanged(bool showPublicTransport);
 
  protected:
 

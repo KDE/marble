@@ -53,6 +53,7 @@ namespace Marble
         Q_PROPERTY(bool showScaleBar READ showScaleBar WRITE setShowScaleBar NOTIFY showScaleBarChanged)
         Q_PROPERTY(bool showBackground READ showBackground WRITE setShowBackground NOTIFY showBackgroundChanged)
         Q_PROPERTY(bool showPositionMarker READ showPositionMarker WRITE setShowPositionMarker NOTIFY showPositionMarkerChanged)
+        Q_PROPERTY(bool showPublicTransport READ showPublicTransport WRITE setShowPublicTransport NOTIFY showPublicTransportChanged)
         Q_PROPERTY(QString positionProvider READ positionProvider WRITE setPositionProvider NOTIFY positionProviderChanged)
         Q_PROPERTY(bool positionAvailable READ positionAvailable NOTIFY positionAvailableChanged)
         Q_PROPERTY(bool positionVisible READ positionVisible NOTIFY positionVisibleChanged)
@@ -118,6 +119,7 @@ namespace Marble
         void setShowScaleBar(bool showScaleBar);
         void setShowBackground(bool showBackground);
         void setShowPositionMarker(bool showPositionMarker);
+        void setShowPublicTransport(bool showPublicTransport);
         void setPositionProvider(const QString & positionProvider);
 
         void setInertialGlobeRotation(bool inertialGlobeRotation);
@@ -167,6 +169,7 @@ namespace Marble
         bool showScaleBar() const;
         bool showBackground() const;
         bool showPositionMarker() const;
+        bool showPublicTransport() const;
         QString positionProvider() const;
         bool positionAvailable() const;
         bool positionVisible();
@@ -204,6 +207,7 @@ namespace Marble
         void showScaleBarChanged(bool showScaleBar);
         void showBackgroundChanged(bool showBackground);
         void showPositionMarkerChanged(bool showPositionMarker);
+        void showPublicTransportChanged(bool showPublicTransport);
         void positionProviderChanged(const QString & positionProvider);
         void positionAvailableChanged(bool positionAvailable);
         void positionVisibleChanged(bool positionVisible);

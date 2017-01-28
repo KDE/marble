@@ -55,6 +55,8 @@ public:
 
     void highlightRouteRelation(qint64 osmId, bool enabled);
 
+    void setShowPublicTransport(bool showPublicTransport);
+
 public Q_SLOTS:
     void addPlacemarks( const QModelIndex& index, int first, int last );
     void removePlacemarks( const QModelIndex& index, int first, int last );

@@ -87,6 +87,8 @@ public:
     void updateTiledLineStrings(const GeoDataPlacemark *placemark, GeoLineStringGraphicsItem* lineStringItem);
     void updateTiledLineStrings(OsmLineStringItems &lineStringItems);
     void clearCache();
+    bool showRelation(const GeoDataRelation* relation) const;
+    void updateRelationVisibility();
 
     const QAbstractItemModel *const m_model;
     const StyleBuilder *const m_styleBuilder;
@@ -106,6 +108,7 @@ public:
     QDateTime m_cachedDateTime;
     GeoDataLatLonBox m_cachedLatLonBox;
     QSet<qint64> m_highlightedRouteRelations;
+    bool m_showPublicTransport;
 };
 
 GeometryLayerPrivate::GeometryLayerPrivate(const QAbstractItemModel *model, const StyleBuilder *styleBuilder) :
@@ -114,7 +117,8 @@ GeometryLayerPrivate::GeometryLayerPrivate(const QAbstractItemModel *model, cons
     m_tileLevel(0),
     m_lastFeatureAt(nullptr),
     m_dirty(true),
-    m_cachedItemCount(0)
+    m_cachedItemCount(0),
+    m_showPublicTransport(false)
 {
 }
 
@@ -312,9 +316,7 @@ void GeometryLayerPrivate::createGraphicsItems(const GeoDataObject *object, Feat
         for (auto feature: document->featureList()) {
             if (feature->nodeType() == GeoDataTypes::GeoDataRelationType) {
                 auto relation = static_cast<GeoDataRelation*>(feature);
-                if (m_highlightedRouteRelations.contains(relation->osmData().oid())) {
-                    relation->setVisible(true);
-                }
+                relation->setVisible(showRelation(relation));
                 for (auto member: relation->members()) {
                     relations[member] << relation;
                 }
@@ -383,6 +385,32 @@ void GeometryLayerPrivate::clearCache()
     m_cachedPaintFragments.clear();
     m_cachedDefaultLayer.clear();
     m_cachedLatLonBox = GeoDataLatLonBox();
+}
+
+inline bool GeometryLayerPrivate::showRelation(const GeoDataRelation *relation) const
+{
+    return (m_showPublicTransport
+            && relation->relationType() >= GeoDataRelation::RouteTrain
+            && relation->relationType() <= GeoDataRelation::RouteTrolleyBus)
+            || m_highlightedRouteRelations.contains(relation->osmData().oid());
+}
+
+void GeometryLayerPrivate::updateRelationVisibility()
+{
+    for (int i = 0; i < m_model->rowCount(); ++i) {
+        QVariant const data = m_model->data(m_model->index(i, 0), MarblePlacemarkModel::ObjectPointerRole);
+        GeoDataObject *object = qvariant_cast<GeoDataObject*> (data);
+        if (object->nodeType() == GeoDataTypes::GeoDataDocumentType) {
+            GeoDataDocument* doc = static_cast<GeoDataDocument*>(object);
+            for (auto feature: doc->featureList()) {
+                if (feature->nodeType() == GeoDataTypes::GeoDataRelationType) {
+                    auto relation = static_cast<GeoDataRelation*>(feature);
+                    relation->setVisible(showRelation(relation));
+                }
+            }
+        }
+    }
+    m_scene.resetStyle();
 }
 
 void GeometryLayerPrivate::createGraphicsItemFromGeometry(const GeoDataGeometry* object, const GeoDataPlacemark *placemark, const Relations &relations)
@@ -582,7 +610,17 @@ void GeometryLayer::highlightRouteRelation(qint64 osmId, bool enabled)
     } else {
         d->m_highlightedRouteRelations.remove(osmId);
     }
-    d->m_scene.resetStyle();
+    d->updateRelationVisibility();
+}
+
+void GeometryLayer::setShowPublicTransport(bool showPublicTransport)
+{
+    if (showPublicTransport == d->m_showPublicTransport) {
+        return;
+    }
+
+    d->m_showPublicTransport = showPublicTransport;
+    d->updateRelationVisibility();
 }
 
 void GeometryLayer::handleHighlight(qreal lon, qreal lat, GeoDataCoordinates::Unit unit)

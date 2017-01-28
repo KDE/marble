@@ -214,6 +214,7 @@ namespace Marble
         connect(&d->m_map, SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)), this, SIGNAL(visibleLatLonAltBoxChanged()));
         connect(&d->m_map, SIGNAL(radiusChanged(int)), this, SIGNAL(radiusChanged(int)));
         connect(&d->m_map, SIGNAL(radiusChanged(int)), this, SIGNAL(zoomChanged()));
+        connect(&d->m_map, SIGNAL(showPublicTransportChanged(bool)), this, SIGNAL(showPublicTransportChanged(bool)));
         connect(&d->m_reverseGeocoding, SIGNAL(reverseGeocodingFinished(GeoDataCoordinates,GeoDataPlacemark)),
                 this, SLOT(handleReverseGeocoding(GeoDataCoordinates,GeoDataPlacemark)));
 
@@ -409,6 +410,11 @@ namespace Marble
             }
         }
         return false;
+    }
+
+    bool MarbleQuickItem::showPublicTransport() const
+    {
+        return d->m_map.showPublicTransport();
     }
 
     QString MarbleQuickItem::positionProvider() const
@@ -826,6 +832,11 @@ namespace Marble
         }
 
         emit showPositionMarkerChanged(showPositionMarker);
+    }
+
+    void MarbleQuickItem::setShowPublicTransport(bool enabled)
+    {
+        d->m_map.setShowPublicTransport(enabled);
     }
 
     void MarbleQuickItem::setPositionProvider(const QString &positionProvider)

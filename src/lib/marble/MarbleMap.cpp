@@ -140,6 +140,7 @@ public:
     bool             m_showFrameRate;
     bool             m_showDebugPolygons;
     bool             m_showDebugBatchRender;
+    bool m_showPublicTransport;
     StyleBuilder     m_styleBuilder;
 
     QList<RenderPlugin *> m_renderPlugins;
@@ -167,6 +168,7 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model ) :
     m_showFrameRate( false ),
     m_showDebugPolygons( false ),
     m_showDebugBatchRender( false ),
+    m_showPublicTransport(false),
     m_styleBuilder(),
     m_layerManager( parent ),
     m_customPaintLayer( parent ),
@@ -708,6 +710,11 @@ bool MarbleMap::showFrameRate() const
 bool MarbleMap::showBackground() const
 {
     return d->m_layerManager.showBackground();
+}
+
+bool MarbleMap::showPublicTransport() const
+{
+    return d->m_showPublicTransport;
 }
 
 quint64 MarbleMap::volatileTileCacheLimit() const
@@ -1294,6 +1301,15 @@ bool MarbleMap::showDebugPlacemarks() const
 void MarbleMap::setShowBackground( bool visible )
 {
     d->m_layerManager.setShowBackground( visible );
+}
+
+void MarbleMap::setShowPublicTransport(bool showPublicTransport)
+{
+    if (d->m_showPublicTransport != showPublicTransport) {
+        d->m_showPublicTransport = showPublicTransport;
+        d->m_geometryLayer.setShowPublicTransport(showPublicTransport);
+        emit showPublicTransportChanged(showPublicTransport);
+    }
 }
 
 void MarbleMap::notifyMouseClick( int x, int y )
