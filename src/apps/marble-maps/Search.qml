@@ -153,27 +153,6 @@ Item {
                     source: "qrc:/konqi/books.png"
                 }
             }
-
-            Rectangle {
-                height: 1
-                width: parent.width
-                color: "gray"
-            }
-
-            Text {
-                font.pointSize: 18
-                color: palette.text
-                width: parent.width
-                text: qsTr("About Marble Maps…")
-                elide: Text.ElideRight
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        app.state = "about"
-                        dialogLoader.focus = true
-                    }
-                }
-            }
         }
     }
 

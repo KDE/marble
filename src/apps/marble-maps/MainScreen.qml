@@ -12,7 +12,7 @@
 
 
 import QtQuick 2.3
-import QtQuick.Controls 1.3
+import QtQuick.Controls 2.0
 import QtQuick.Window 2.2
 
 import org.kde.marble 0.20
@@ -372,6 +372,7 @@ ApplicationWindow {
               dialogLoader.item.map = marbleMaps
               dialogLoader.item.placemark = app.selectedPlacemark
               dialogLoader.item.showOsmTags = app.showOsmTags
+              dialogLoader.item.showAccessibility = accessibilityMenu.checked
           } else if (app.state === "route") {
               item.routingManager = routingManager
               item.routingProfile = routingManager.routingProfile
@@ -395,6 +396,18 @@ ApplicationWindow {
         anchors.margins: -14
         border { top: 14; left: 14; right: 14; bottom: 14 }
         source: "qrc:///border_shadow.png"
+    }
+
+    SidePanel {
+        id: drawer
+        width: 0.65 * app.width
+        height: app.height
+        marbleMaps: marbleMaps
+
+        onAboutActionTriggered: {
+            app.state = "about"
+            dialogLoader.focus = true
+        }
     }
 
     BoxedText {

@@ -22,6 +22,7 @@ Item {
     property var placemark: null
     property variant map
     property alias showOsmTags: tagsView.visible
+    property bool showAccessibility: false
 
     height: placemark === null ? 0 : Screen.pixelDensity * 4 +
                                  (infoLayout.height > bookmarkButton.height ? infoLayout.height : bookmarkButton.height)
@@ -118,7 +119,7 @@ Item {
 
         IconText {
             width: parent.width
-            visible: text.length > 0
+            visible: root.showAccessibility && text.length > 0
             text: placemark === null ? "" : placemark.wheelchairInfo
             icon: "qrc:/material/wheelchair.svg"
         }
