@@ -186,7 +186,7 @@ void GeoGraphicsScene::applyHighlight( const QVector< GeoDataPlacemark* > &selec
      * items to use highlight style
      */
     for( const GeoDataPlacemark *placemark: selectedPlacemarks ) {
-        for (auto tileIter = d->m_features.find(placemark); tileIter != d->m_features.end(); ++tileIter) {
+        for (auto tileIter = d->m_features.find(placemark); tileIter != d->m_features.end() && tileIter.key() == placemark; ++tileIter) {
             auto const & clickedItems = d->m_tiledItems[*tileIter];
             auto iter = clickedItems.find(placemark);
             if (iter != clickedItems.end()) {
@@ -232,7 +232,7 @@ void GeoGraphicsScene::applyHighlight( const QVector< GeoDataPlacemark* > &selec
 
 void GeoGraphicsScene::removeItem( const GeoDataFeature* feature )
 {
-    for (auto tileIter = d->m_features.find(feature), end = d->m_features.end(); tileIter != end;) {
+    for (auto tileIter = d->m_features.find(feature), end = d->m_features.end(); tileIter != end && tileIter.key() == feature;) {
         auto & tileList = d->m_tiledItems[*tileIter];
         auto iter = tileList.find(feature);
         if (iter != tileList.end()) {
