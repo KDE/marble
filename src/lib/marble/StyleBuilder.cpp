@@ -82,6 +82,7 @@ public:
     GeoDataStyle::ConstPtr createRelationStyle(const StyleParameters &parameters);
     GeoDataStyle::ConstPtr createPlacemarkStyle(const StyleParameters &parameters);
     GeoDataStyle::ConstPtr adjustPisteStyle(const StyleParameters &parameters, const GeoDataStyle::ConstPtr &style);
+    void adjustWayWidth(const StyleParameters &parameters, GeoDataLineStyle &lineStyle) const;
 
     // Having an outline with the same color as the fill results in degraded
     // performance and degraded display quality for no good reason
@@ -224,6 +225,9 @@ GeoDataStyle::ConstPtr StyleBuilder::Private::createRelationStyle(const StylePar
 
             auto style = presetStyle(visualCategory);
             auto lineStyle = style->lineStyle();
+            if (isHighway) {
+                adjustWayWidth(parameters, lineStyle);
+            }
             auto iconStyle = style->iconStyle();
             GeoDataStyle::Ptr newStyle(new GeoDataStyle(*style));
             OsmcSymbol symbol = OsmcSymbol(osmcSymbolValue);
@@ -248,6 +252,9 @@ GeoDataStyle::ConstPtr StyleBuilder::Private::createRelationStyle(const StylePar
 
             auto style = presetStyle(visualCategory);
             auto lineStyle = style->lineStyle();
+            if (isHighway) {
+                adjustWayWidth(parameters, lineStyle);
+            }
             GeoDataStyle::Ptr newStyle(new GeoDataStyle(*style));
             lineStyle.setColor(QColor(color));
             newStyle->setLineStyle(lineStyle);
@@ -389,39 +396,8 @@ GeoDataStyle::ConstPtr StyleBuilder::Private::createPlacemarkStyle(const StylePa
             }
 
             adjustStyle = true;
-
-            if (parameters.tileLevel <= 8) {
-                /** @todo: Dummy implementation for dynamic style changes based on tile level, replace with sane values */
-                lineStyle.setPhysicalWidth(0.0);
-                lineStyle.setWidth(2.0);
-                styleCacheKey = QStringLiteral("%1/%2").arg(parameters.tileLevel).arg(visualCategory);
-            } else if (parameters.tileLevel <= 10) {
-                /** @todo: Dummy implementation for dynamic style changes based on tile level, replace with sane values */
-                lineStyle.setPhysicalWidth(0.0);
-                lineStyle.setWidth(3.0);
-                styleCacheKey = QStringLiteral("%1/%2").arg(parameters.tileLevel).arg(visualCategory);
-            } else if (parameters.tileLevel <= 12) {
-                /** @todo: Dummy implementation for dynamic style changes based on tile level, replace with sane values */
-                lineStyle.setPhysicalWidth(0.0);
-                lineStyle.setWidth(4.0);
-                styleCacheKey = QStringLiteral("%1/%2").arg(parameters.tileLevel).arg(visualCategory);
-            } else {
-                auto tagIter = osmData.findTag(QStringLiteral("width"));
-                if (tagIter != osmData.tagsEnd()) {
-                    QString const widthValue = QString(tagIter.value()).remove(QStringLiteral(" meters")).remove(QStringLiteral(" m"));
-                    bool ok;
-                    float const width = widthValue.toFloat(&ok);
-                    lineStyle.setPhysicalWidth(ok ? qBound(0.1f, width, 200.0f) : 0.0f);
-                } else {
-                    bool const isOneWay = osmData.containsTag(QStringLiteral("oneway"), QStringLiteral("yes")) ||
-                                          osmData.containsTag(QStringLiteral("oneway"), QStringLiteral("-1"));
-                    int const lanes = isOneWay ? 1 : 2; // also for motorway which implicitly is one way, but has two lanes and each direction has its own highway
-                    double const laneWidth = 3.0;
-                    double const margins = visualCategory == GeoDataPlacemark::HighwayMotorway ? 2.0 : (isOneWay ? 1.0 : 0.0);
-                    double const physicalWidth = margins + lanes * laneWidth;
-                    lineStyle.setPhysicalWidth(physicalWidth);
-                }
-            }
+            styleCacheKey = QStringLiteral("%1/%2").arg(parameters.tileLevel).arg(visualCategory);
+            adjustWayWidth(parameters, lineStyle);
 
             QString const accessValue = osmData.tagValue(QStringLiteral("access"));
             if (accessValue == QLatin1String("private") ||
@@ -596,6 +572,38 @@ GeoDataStyle::ConstPtr StyleBuilder::Private::adjustPisteStyle(const StyleParame
     newStyle->setLineStyle(lineStyle);
     m_styleCache.insert(styleCacheKey, newStyle);
     return newStyle;
+}
+
+void StyleBuilder::Private::adjustWayWidth(const StyleParameters &parameters, GeoDataLineStyle &lineStyle) const
+{
+    auto const & osmData = parameters.placemark->osmData();
+    auto const visualCategory = parameters.placemark->visualCategory();
+    if (parameters.tileLevel <= 8) {
+        lineStyle.setPhysicalWidth(0.0);
+        lineStyle.setWidth(2.0);
+    } else if (parameters.tileLevel <= 10) {
+        lineStyle.setPhysicalWidth(0.0);
+        lineStyle.setWidth(3.0);
+    } else if (parameters.tileLevel <= 12) {
+        lineStyle.setPhysicalWidth(0.0);
+        lineStyle.setWidth(4.0);
+    } else {
+        auto tagIter = osmData.findTag(QStringLiteral("width"));
+        if (tagIter != osmData.tagsEnd()) {
+            QString const widthValue = QString(tagIter.value()).remove(QStringLiteral(" meters")).remove(QStringLiteral(" m"));
+            bool ok;
+            float const width = widthValue.toFloat(&ok);
+            lineStyle.setPhysicalWidth(ok ? qBound(0.1f, width, 200.0f) : 0.0f);
+        } else {
+            bool const isOneWay = osmData.containsTag(QStringLiteral("oneway"), QStringLiteral("yes")) ||
+                                  osmData.containsTag(QStringLiteral("oneway"), QStringLiteral("-1"));
+            int const lanes = isOneWay ? 1 : 2; // also for motorway which implicitly is one way, but has two lanes and each direction has its own highway
+            double const laneWidth = 3.0;
+            double const margins = visualCategory == GeoDataPlacemark::HighwayMotorway ? 2.0 : (isOneWay ? 1.0 : 0.0);
+            double const physicalWidth = margins + lanes * laneWidth;
+            lineStyle.setPhysicalWidth(physicalWidth);
+        }
+    }
 }
 
 GeoDataStyle::Ptr StyleBuilder::Private::createStyle(qreal width, qreal realWidth, const QColor& color,
