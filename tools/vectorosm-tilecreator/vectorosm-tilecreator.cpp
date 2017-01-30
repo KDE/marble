@@ -280,53 +280,58 @@ int main(int argc, char *argv[])
                 }
 
                 typedef QSharedPointer<GeoDataDocument> GeoDocPtr;
-                GeoDocPtr tile1 = GeoDocPtr(mapTiles.clip(zoomLevel, tileId.x(), tileId.y()));
-                TagsFilter::removeAnnotationTags(tile1.data());
-                int originalWays = 0;
-                int mergedWays = 0;
-                if (zoomLevel < 17) {
-                    WayConcatenator concatenator(tile1.data());
-                    originalWays = concatenator.originalWays();
-                    mergedWays = concatenator.mergedWays();
-                }
-                NodeReducer nodeReducer(tile1.data(), tileId);
                 GeoDocPtr tile2 = GeoDocPtr(loader.clip(zoomLevel, tileId.x(), tileId.y()));
-                if (tile1->size() > 0 && tile2->size() > 0) {
-                    GeoDocPtr combined = GeoDocPtr(mergeDocuments(tile1.data(), tile2.data()));
-
-                    if (boundaryTiles.contains(iter.key())) {
-                        writeBoundaryTile(tile1.data(), region, parser, tileId.x(), tileId.y(), zoomLevel);
-                        if (mergeTiles) {
-                            combined = mergeBoundaryTiles(tile2, manager, parser, tileId.x(), tileId.y(), zoomLevel);
-                        }
+                if (tile2->size() > 0) {
+                    GeoDocPtr tile1 = GeoDocPtr(mapTiles.clip(zoomLevel, tileId.x(), tileId.y()));
+                    TagsFilter::removeAnnotationTags(tile1.data());
+                    int originalWays = 0;
+                    int mergedWays = 0;
+                    if (zoomLevel < 17) {
+                        WayConcatenator concatenator(tile1.data());
+                        originalWays = concatenator.originalWays();
+                        mergedWays = concatenator.mergedWays();
                     }
+                    NodeReducer nodeReducer(tile1.data(), tileId);
+                    if (tile1->size() > 0 && tile2->size() > 0) {
+                        GeoDocPtr combined = GeoDocPtr(mergeDocuments(tile1.data(), tile2.data()));
 
-                    if (zoomLevel > 13 && mbtileWriter) {
-                        QBuffer buffer;
-                        buffer.open(QBuffer::ReadWrite);
-                        if (GeoDataDocumentWriter::write(&buffer, *combined, extension)) {
-                            buffer.seek(0);
-                            mbtileWriter->addTile(&buffer, tileId.x(), tileId.y(), zoomLevel);
+                        if (boundaryTiles.contains(iter.key())) {
+                            writeBoundaryTile(tile1.data(), region, parser, tileId.x(), tileId.y(), zoomLevel);
+                            if (mergeTiles) {
+                                combined = mergeBoundaryTiles(tile2, manager, parser, tileId.x(), tileId.y(), zoomLevel);
+                            }
+                        }
+
+                        if (zoomLevel > 13 && mbtileWriter) {
+                            QBuffer buffer;
+                            buffer.open(QBuffer::ReadWrite);
+                            if (GeoDataDocumentWriter::write(&buffer, *combined, extension)) {
+                                buffer.seek(0);
+                                mbtileWriter->addTile(&buffer, tileId.x(), tileId.y(), zoomLevel);
+                            } else {
+                                qWarning() << "Could not write the tile " << combined->name();
+                            }
                         } else {
-                            qWarning() << "Could not write the tile " << combined->name();
+                            if (!writeTile(combined.data(), filename)) {
+                                return 4;
+                            }
+                        }
+
+                        TileDirectory::printProgress(count / double(total));
+                        std::cout << "  Tile " << count << "/" << total << " (";
+                        std::cout << combined->name().toStdString() << ").";
+                        double const reduction = nodeReducer.removedNodes() / qMax(1.0, double(nodeReducer.remainingNodes() + nodeReducer.removedNodes()));
+                        std::cout << " Node reduction: " << qRound(reduction * 100.0) << "%";
+                        if (originalWays > 0) {
+                            std::cout << " , " << originalWays << " ways merged to " << mergedWays;
                         }
                     } else {
-                        if (!writeTile(combined.data(), filename)) {
-                            return 4;
-                        }
-                    }
-
-                    TileDirectory::printProgress(count / double(total));
-                    std::cout << "  Tile " << count << "/" << total << " (";
-                    std::cout << combined->name().toStdString() << ").";
-                    double const reduction = nodeReducer.removedNodes() / qMax(1.0, double(nodeReducer.remainingNodes() + nodeReducer.removedNodes()));
-                    std::cout << " Node reduction: " << qRound(reduction * 100.0) << "%";
-                    if (originalWays > 0) {
-                        std::cout << " , " << originalWays << " ways merged to " << mergedWays;
+                        TileDirectory::printProgress(count / double(total));
+                        std::cout << "  Skipping empty tile " << count << "/" << total << " (" << tile1->name().toStdString() << ").";
                     }
                 } else {
                     TileDirectory::printProgress(count / double(total));
-                    std::cout << "  Skipping empty tile " << count << "/" << total << " (" << tile1->name().toStdString() << ").";
+                    std::cout << "  Skipping sea tile " << count << "/" << total << " (" << tile2->name().toStdString() << ").";
                 }
 
                 std::cout << std::string(20, ' ') << '\r';
