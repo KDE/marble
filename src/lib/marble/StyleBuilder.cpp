@@ -243,7 +243,36 @@ GeoDataStyle::ConstPtr StyleBuilder::Private::createRelationStyle(const StylePar
         if (parameters.relation->relationType() >= GeoDataRelation::RouteRoad &&
             parameters.relation->relationType() <= GeoDataRelation::RouteInlineSkates) {
             auto const colorValue = parameters.relation->osmData().tagValue(QStringLiteral("colour"));
-            QString const color = QColor::isValidColor(colorValue) ? colorValue : QStringLiteral("salmon");
+            QString color = colorValue;
+            if (!QColor::isValidColor(colorValue)) {
+                switch (parameters.relation->relationType()) {
+                case GeoDataRelation::RouteTrain:
+                    color = QStringLiteral("navy"); break;
+                case GeoDataRelation::RouteSubway:
+                    color = QStringLiteral("cornflowerblue"); break;
+                case GeoDataRelation::RouteTram:
+                    color = QStringLiteral("steelblue"); break;
+                case GeoDataRelation::RouteBus:
+                case GeoDataRelation::RouteTrolleyBus:
+                    color = QStringLiteral("tomato"); break;
+                case GeoDataRelation::RouteBicycle:
+                case GeoDataRelation::RouteMountainbike:
+                case GeoDataRelation::RouteFoot:
+                case GeoDataRelation::RouteHiking:
+                case GeoDataRelation::RouteHorse:
+                case GeoDataRelation::RouteInlineSkates:
+                    color = QStringLiteral("paleturquoise"); break;
+                case GeoDataRelation::UnknownType:
+                case GeoDataRelation:: RouteRoad:
+                case GeoDataRelation::RouteDetour:
+                case GeoDataRelation::RouteFerry:
+                case GeoDataRelation::RouteSkiDownhill:
+                case GeoDataRelation::RouteSkiNordic:
+                case GeoDataRelation::RouteSkitour:
+                case GeoDataRelation::RouteSled:
+                    color = QString(); break;
+                }
+            }
             // Take cached Style instance if possible
             QString const cacheKey = QStringLiteral("/route/%1/%2").arg(parameters.relation->relationType()).arg(color);
             if (m_styleCache.contains(cacheKey)) {
@@ -256,7 +285,9 @@ GeoDataStyle::ConstPtr StyleBuilder::Private::createRelationStyle(const StylePar
                 adjustWayWidth(parameters, lineStyle);
             }
             GeoDataStyle::Ptr newStyle(new GeoDataStyle(*style));
-            lineStyle.setColor(QColor(color));
+            if (!color.isEmpty()) {
+                lineStyle.setColor(QColor(color));
+            }
             newStyle->setLineStyle(lineStyle);
             style = newStyle;
             m_styleCache.insert(cacheKey, newStyle);
