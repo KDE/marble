@@ -245,7 +245,7 @@ GeoDataStyle::ConstPtr StyleBuilder::Private::createRelationStyle(const StylePar
             auto const colorValue = parameters.relation->osmData().tagValue(QStringLiteral("colour"));
             QString const color = QColor::isValidColor(colorValue) ? colorValue : QStringLiteral("salmon");
             // Take cached Style instance if possible
-            QString const cacheKey = QStringLiteral("/route/hiking/%1").arg(color);
+            QString const cacheKey = QStringLiteral("/route/%1/%2").arg(parameters.relation->relationType()).arg(color);
             if (m_styleCache.contains(cacheKey)) {
                 return m_styleCache[cacheKey];
             }
