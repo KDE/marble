@@ -44,6 +44,9 @@ public:
     static bool s_paintInline;
     static bool s_paintOutline;
 
+protected:
+    void handleRelationUpdate(const QVector<const GeoDataRelation *> &relations) override;
+
 private:
     void paintOutline(GeoPainter *painter, const ViewportParams *viewport) const;
     void paintInline(GeoPainter *painter, const ViewportParams *viewport);
@@ -61,6 +64,7 @@ private:
     bool m_renderLabel;
     qreal m_penWidth;
     mutable QRegion m_cachedRegion;
+    QString m_name;
 };
 
 }

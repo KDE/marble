@@ -46,7 +46,7 @@ class GeoGraphicsItemPrivate
     RenderContext m_renderContext;
     GeoDataStyle::ConstPtr m_style;
     const StyleBuilder *m_styleBuilder;
-    QSet<const GeoDataRelation*> m_relations;
+    QVector<const GeoDataRelation*> m_relations;
 
     QStringList m_paintLayers;
 

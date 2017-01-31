@@ -90,16 +90,7 @@ GeoDataStyle::ConstPtr GeoGraphicsItem::style() const
         if (d->m_feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
             const GeoDataPlacemark *placemark = static_cast<const GeoDataPlacemark*>(d->m_feature);
             auto styling = StyleParameters(placemark, d->m_renderContext.tileLevel());
-            QVector<const GeoDataRelation*> relations;
-            std::copy_if(d->m_relations.begin(), d->m_relations.end(), std::back_inserter(relations),
-            [](const GeoDataRelation * relation) {
-                return relation->isVisible();
-            });
-            std::sort(relations.begin(), relations.end(),
-            [](const GeoDataRelation * a, const GeoDataRelation * b) {
-                return *a < *b;
-            });
-            for (auto relation: relations) {
+            for (auto relation: d->m_relations) {
                 if (relation->isVisible()) {
                     styling.relation = relation;
                     break;
@@ -122,6 +113,7 @@ void GeoGraphicsItem::setStyleBuilder(const StyleBuilder *styleBuilder)
 void GeoGraphicsItem::resetStyle()
 {
     d->m_style = GeoDataStyle::ConstPtr();
+    handleRelationUpdate(d->m_relations);
 }
 
 qreal GeoGraphicsItem::zValue() const
@@ -169,8 +161,20 @@ bool GeoGraphicsItem::contains(const QPoint &, const ViewportParams *) const
 
 void GeoGraphicsItem::setRelations(const QSet<const GeoDataRelation*> &relations)
 {
-    d->m_relations = relations;
+    d->m_relations.clear();
+    std::copy(relations.begin(), relations.end(), std::back_inserter(d->m_relations));
+    std::sort(d->m_relations.begin(), d->m_relations.end(),
+    [](const GeoDataRelation * a, const GeoDataRelation * b) {
+        return *a < *b;
+    });
+
     d->m_style = GeoDataStyle::ConstPtr();
+    handleRelationUpdate(d->m_relations);
+}
+
+void GeoGraphicsItem::handleRelationUpdate(const QVector<const GeoDataRelation *> &)
+{
+    // does nothing
 }
 
 int GeoGraphicsItem::minZoomLevel() const

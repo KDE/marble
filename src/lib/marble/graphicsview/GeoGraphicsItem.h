@@ -163,6 +163,8 @@ class MARBLE_EXPORT GeoGraphicsItem
     void setRelations(const QSet<const GeoDataRelation *> &relations);
 
  protected:
+    virtual void handleRelationUpdate(const QVector<const GeoDataRelation *> &relations);
+
     GeoGraphicsItemPrivate *const d;
 };
 

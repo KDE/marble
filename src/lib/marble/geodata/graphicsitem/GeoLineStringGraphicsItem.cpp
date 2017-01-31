@@ -21,6 +21,7 @@
 #include "GeoDataStyle.h"
 #include "MarbleDebug.h"
 #include "MarbleMath.h"
+#include "OsmPlacemarkData.h"
 
 #include <qmath.h>
 #include <QPainterPathStroker>
@@ -38,13 +39,14 @@ GeoLineStringGraphicsItem::GeoLineStringGraphicsItem(const GeoDataPlacemark *pla
     m_lineString(lineString),
     m_renderLineString(lineString),
     m_renderLabel(false),
-    m_penWidth(0.0)
+    m_penWidth(0.0),
+    m_name(placemark->name())
 {
     QString const category = StyleBuilder::visualCategoryName(placemark->visualCategory());
     QStringList paintLayers;
     paintLayers << QLatin1String("LineString/") + category + QLatin1String("/outline");
     paintLayers << QLatin1String("LineString/") + category + QLatin1String("/inline");
-    if (!feature()->name().isEmpty()) {
+    if (!m_name.isEmpty()) {
         paintLayers << QLatin1String("LineString/") + category + QLatin1String("/label");
     }
     setPaintLayers(paintLayers);
@@ -190,6 +192,29 @@ bool GeoLineStringGraphicsItem::contains(const QPoint &screenPosition, const Vie
     return m_cachedRegion.contains(screenPosition);
 }
 
+void GeoLineStringGraphicsItem::handleRelationUpdate(const QVector<const GeoDataRelation *> &relations)
+{
+    QStringList names;
+    for (auto relation: relations) {
+        auto const ref = relation->osmData().tagValue(QStringLiteral("ref"));
+        if (relation->isVisible() && !ref.isEmpty()) {
+            names << ref;
+        }
+    }
+    if (names.isEmpty()) {
+        m_name = feature()->name();
+    } else {
+        std::sort(names.begin(), names.end());
+        auto const last = std::unique(names.begin(), names.end());
+        names.erase(last, names.end());
+        if (feature()->name().isEmpty()) {
+            m_name = names.join(',');
+        } else {
+            m_name = QStringLiteral("%1 (%2)").arg(feature()->name(), names.join(','));
+        }
+    }
+}
+
 void GeoLineStringGraphicsItem::paintInline(GeoPainter* painter, const ViewportParams* viewport)
 {
     if ( ( !viewport->resolves( m_renderLineString->latLonAltBox(), 2) ) ) {
@@ -249,7 +274,7 @@ void GeoLineStringGraphicsItem::paintLabel(GeoPainter *painter, const ViewportPa
         //painter->setBackgroundMode(Qt::OpaqueMode);
 
         const GeoDataLabelStyle& labelStyle = style->labelStyle();
-        painter->drawLabelsForPolygons(m_cachedPolygons, feature()->name(), FollowLine,
+        painter->drawLabelsForPolygons(m_cachedPolygons, m_name, FollowLine,
                                labelStyle.paintedColor());
     }
 }
