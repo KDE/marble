@@ -107,6 +107,7 @@ ApplicationWindow {
                 showOtherPlaces: false
                 showScaleBar: false
                 showBackground: smallZoom
+                showPublicTransport: settings.value("MarbleMaps", "showPublicTransport", "false") === "true"
                 positionProvider: suspended ? "" : currentPositionProvider
                 keepScreenOn: !suspended && navigationManager.guidanceModeEnabled
                 showPositionMarker: false
