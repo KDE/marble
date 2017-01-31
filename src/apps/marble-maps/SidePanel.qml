@@ -17,8 +17,8 @@ Drawer {
     id: root
 
     property var marbleMaps
+    property alias showAccessibility: accessibilityAction.checked
     signal aboutActionTriggered()
-
 
     Settings {
         id: settings

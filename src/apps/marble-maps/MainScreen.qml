@@ -373,7 +373,7 @@ ApplicationWindow {
               dialogLoader.item.map = marbleMaps
               dialogLoader.item.placemark = app.selectedPlacemark
               dialogLoader.item.showOsmTags = app.showOsmTags
-              dialogLoader.item.showAccessibility = accessibilityMenu.checked
+              dialogLoader.item.showAccessibility = drawer.showAccessibility
           } else if (app.state === "route") {
               item.routingManager = routingManager
               item.routingProfile = routingManager.routingProfile
