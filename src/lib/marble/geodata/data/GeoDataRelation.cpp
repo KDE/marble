@@ -173,9 +173,12 @@ bool GeoDataRelation::containsAnyOf(const QSet<qint64> &memberIds) const
 #if QT_VERSION >= 0x050600 // intersects was introduced in Qt 5.6.
         return d->m_memberIds.intersects(memberIds);
 #else
-        auto intersection = d->m_memberIds;
-        intersection.intersect(memberIds);
-        return !(intersection.isEmpty());
+    for (auto memberId: memberIds) {
+        if (d->m_memberIds.contains(memberId)) {
+            return true;
+        }
+    }
+    return false;
 #endif
 }
 
