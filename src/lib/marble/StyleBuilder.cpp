@@ -2954,6 +2954,15 @@ GeoDataPlacemark::GeoDataVisualCategory StyleBuilder::determineVisualCategory(co
 
     Private::initializeOsmVisualCategories();
 
+    auto const pisteType = osmData.tagValue(QStringLiteral("piste:type"));
+    if (!pisteType.isEmpty()) {
+        auto const tag = OsmTag(QStringLiteral("piste:type"), pisteType);
+        auto category = Private::s_visualCategories.value(tag, GeoDataPlacemark::None);
+        if (category != GeoDataPlacemark::None) {
+            return category;
+        }
+    }
+
     QString const capital(QStringLiteral("capital"));
     QString const admin_level(QStringLiteral("admin_level"));
     // National capitals have admin_level=2
