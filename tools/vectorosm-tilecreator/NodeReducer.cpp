@@ -100,7 +100,7 @@ qreal NodeReducer::perpendicularDistance(const GeoDataCoordinates &a, const GeoD
     qreal const y21 = x2 - x1;
     qreal const x21 = y2 - y1;
     qreal const len = (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2);
-    qreal const t = (x01 * x21 + y01 * y21) / len;
+    qreal const t = len == 0.0 ? -1.0 : (x01 * x21 + y01 * y21) / len;
     if ( t < 0.0 ) {
         ret = EARTH_RADIUS * distanceSphere(a, b);
     } else if ( t > 1.0 ) {
