@@ -48,10 +48,11 @@ void RouteRelationModel::setRelations(const QSet<const GeoDataRelation*> &relati
     if (!relations.isEmpty()) {
         beginInsertRows(QModelIndex(), 0, relations.count() - 1);
         m_relations.reserve(relations.size());
-        std::copy_if(relations.begin(), relations.end(), std::back_inserter(m_relations),
-        [](const GeoDataRelation * relation) {
-            return relation->relationType() >= GeoDataRelation::RouteRoad && relation->relationType() <= GeoDataRelation::RouteSled;
-        });
+        for (auto relation: relations) {
+            if (relation->relationType() >= GeoDataRelation::RouteRoad && relation->relationType() <= GeoDataRelation::RouteSled) {
+                m_relations << new GeoDataRelation(*relation);
+            }
+        }
         std::sort(m_relations.begin(), m_relations.end(),
         [](const GeoDataRelation * a, const GeoDataRelation * b) {
             return *a < *b;
