@@ -462,7 +462,6 @@ void BookmarkManagerDialogPrivate::importBookmarksRecursively( GeoDataContainer 
                 // Avoid message boxes for equal bookmarks, just skip them
                 if ( existingPlacemark->name() == newPlacemark->name() &&
                     existingPlacemark->description() == newPlacemark->description() ) {
-                    added = true;
                     continue;
                 }
 
@@ -494,7 +493,6 @@ void BookmarkManagerDialogPrivate::importBookmarksRecursively( GeoDataContainer 
                     skipAll = true;
                     added = true;
                 } else if ( messageBox->clickedButton() == skipButton ) {
-                    added = true;
                     delete messageBox;
                     continue;
                 } else if ( messageBox->clickedButton() != replaceButton ) {
@@ -507,7 +505,6 @@ void BookmarkManagerDialogPrivate::importBookmarksRecursively( GeoDataContainer 
                     m_manager->addBookmark( existingFolder, *newPlacemark );
 
                     mDebug() << "Placemark " << newPlacemark->name() << " replaces " << existingPlacemark->name();
-                    added = true;
                     delete messageBox;
                     break;
                 }
