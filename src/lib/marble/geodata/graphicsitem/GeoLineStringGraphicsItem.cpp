@@ -19,6 +19,7 @@
 #include "StyleBuilder.h"
 #include "ViewportParams.h"
 #include "GeoDataStyle.h"
+#include "GeoDataColorStyle.h"
 #include "MarbleDebug.h"
 #include "MarbleMath.h"
 #include "OsmPlacemarkData.h"
@@ -194,23 +195,53 @@ bool GeoLineStringGraphicsItem::contains(const QPoint &screenPosition, const Vie
 
 void GeoLineStringGraphicsItem::handleRelationUpdate(const QVector<const GeoDataRelation *> &relations)
 {
-    QStringList names;
+    QHash<GeoDataRelation::RelationType, QStringList> names;
     for (auto relation: relations) {
         auto const ref = relation->osmData().tagValue(QStringLiteral("ref"));
         if (relation->isVisible() && !ref.isEmpty()) {
-            names << ref;
+            names[relation->relationType()] << ref;
         }
     }
     if (names.isEmpty()) {
         m_name = feature()->name();
     } else {
-        std::sort(names.begin(), names.end());
-        auto const last = std::unique(names.begin(), names.end());
-        names.erase(last, names.end());
+        QStringList namesList;
+        for (auto iter = names.begin(); iter != names.end(); ++iter) {
+            QString value;
+            switch (iter.key()) {
+            case GeoDataRelation::UnknownType:
+            case GeoDataRelation::RouteRoad: break;
+            case GeoDataRelation::RouteDetour: value = tr("Detour"); break;
+            case GeoDataRelation::RouteFerry: value = tr("Ferry Route"); break;
+            case GeoDataRelation::RouteTrain: value = tr("Train"); break;
+            case GeoDataRelation::RouteSubway: value = tr("Subway"); break;
+            case GeoDataRelation::RouteTram: value = tr("Tram"); break;
+            case GeoDataRelation::RouteBus: value = tr("Bus"); break;
+            case GeoDataRelation::RouteTrolleyBus: value = tr("Trolley Bus"); break;
+            case GeoDataRelation::RouteBicycle: value = tr("Bicycle Route"); break;
+            case GeoDataRelation::RouteMountainbike: value = tr("Mountainbike Route"); break;
+            case GeoDataRelation::RouteFoot: value = tr("Walking Route"); break;
+            case GeoDataRelation::RouteHiking: value = tr("Hiking Route"); break;
+            case GeoDataRelation::RouteHorse: value = tr("Bridleway"); break;
+            case GeoDataRelation::RouteInlineSkates: value = tr("Inline Skates Route"); break;
+            case GeoDataRelation::RouteSkiDownhill: value = tr("Downhill Piste"); break;
+            case GeoDataRelation::RouteSkiNordic: value = tr("Nordic Ski Trail"); break;
+            case GeoDataRelation::RouteSkitour: value = tr("Skitour"); break;
+            case GeoDataRelation::RouteSled: value = tr("Sled Trail"); break;
+            }
+
+            QStringList &references = iter.value();
+            std::sort(references.begin(), references.end());
+            auto const last = std::unique(references.begin(), references.end());
+            references.erase(last, references.end());
+            auto const routes = references.join(", ");
+            namesList << (value.isEmpty() ? routes : QStringLiteral("%1 %2").arg(value).arg(routes));
+        }
+        auto const allRoutes = namesList.join(QStringLiteral("; "));
         if (feature()->name().isEmpty()) {
-            m_name = names.join(',');
+            m_name = allRoutes;
         } else {
-            m_name = QStringLiteral("%1 (%2)").arg(feature()->name(), names.join(','));
+            m_name = QStringLiteral("%1 (%2)").arg(feature()->name(), allRoutes);
         }
     }
 }

@@ -26,6 +26,8 @@ class GeoDataPlacemark;
 
 class MARBLE_EXPORT GeoLineStringGraphicsItem : public GeoGraphicsItem
 {
+    Q_DECLARE_TR_FUNCTIONS(GeoLineStringGraphicsItem)
+
 public:
     explicit GeoLineStringGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataLineString *lineString);
     ~GeoLineStringGraphicsItem() override;
