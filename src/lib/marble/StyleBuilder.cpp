@@ -287,6 +287,9 @@ GeoDataStyle::ConstPtr StyleBuilder::Private::createRelationStyle(const StylePar
             GeoDataStyle::Ptr newStyle(new GeoDataStyle(*style));
             if (!color.isEmpty()) {
                 lineStyle.setColor(QColor(color));
+                auto labelStyle = style->labelStyle();
+                labelStyle.setColor(GeoDataColorStyle::contrastColor(color));
+                newStyle->setLabelStyle(labelStyle);
             }
             newStyle->setLineStyle(lineStyle);
             style = newStyle;

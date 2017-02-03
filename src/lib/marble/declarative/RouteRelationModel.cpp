@@ -12,6 +12,7 @@
 
 #include "MarbleDirs.h"
 #include "osm/OsmPlacemarkData.h"
+#include "GeoDataColorStyle.h"
 
 namespace Marble
 {
@@ -118,7 +119,7 @@ QVariant RouteRelationModel::data(const QModelIndex & index, int role) const
     } else if (role == TextColor) {
         auto const colorValue = m_relations.at(index.row())->osmData().tagValue(QStringLiteral("colour"));
         auto const color = QColor(colorValue.isEmpty() ? QStringLiteral("white") : colorValue);
-        return color.valueF() > 0.85 ? QStringLiteral("black") : QStringLiteral("white");
+        return GeoDataColorStyle::contrastColor(color);
     } else if (role == RouteFrom) {
         return m_relations.at(index.row())->osmData().tagValue(QStringLiteral("from"));
     } else if (role == RouteTo) {

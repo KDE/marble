@@ -118,6 +118,11 @@ class GEODATA_EXPORT GeoDataColorStyle : public GeoDataObject
 
     ~GeoDataColorStyle() override;
 
+    /**
+     * @return Returns a foreground color suitable for e.g. text display on top of the given background color
+     */
+    static QString contrastColor(const QColor &color);
+
   private:
     GeoDataColorStylePrivate * const d;
 };

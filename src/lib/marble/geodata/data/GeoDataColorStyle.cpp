@@ -132,7 +132,12 @@ void GeoDataColorStyle::unpack( QDataStream& stream )
 
     stream >> d->m_color;
     // FIXME: Why is not colorMode saved?
-//    stream >> m_colorMode;
+    //    stream >> m_colorMode;
+}
+
+QString Marble::GeoDataColorStyle::contrastColor(const QColor &color)
+{
+    return color.valueF() > 0.85 ? QStringLiteral("black") : QStringLiteral("white");
 }
 
 }
