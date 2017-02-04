@@ -338,7 +338,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
 };
 
 #define MARBLE_PLUGIN(T) public:\
-    virtual RenderPlugin* newInstance( const MarbleModel *marbleModel ) const { return new T( marbleModel ); }
+    RenderPlugin* newInstance( const MarbleModel *marbleModel ) const override { return new T( marbleModel ); }
 }
 
 #endif
