@@ -100,7 +100,7 @@ message PrimitiveBlock {
 
   // Granularity, units of nanodegrees, used to store coordinates in this block
   optional int32 granularity = 17 [default=100]; 
-  // Offset value between the output coordinates coordinates and the granularity grid in unites of nanodegrees.
+  // Offset value between the output coordinates and the granularity grid in unites of nanodegrees.
   optional int64 lat_offset = 19 [default=0];
   optional int64 lon_offset = 20 [default=0]; 
 

@@ -549,7 +549,7 @@ void MarbleDefaultInputHandler::handleMouseButtonRelease(QMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
     {
-        //emit current coordinates to be be interpreted
+        //emit current coordinates to be interpreted
         //as requested
         emit mouseClickScreenPosition(d->m_leftPressedX, d->m_leftPressedY);
 

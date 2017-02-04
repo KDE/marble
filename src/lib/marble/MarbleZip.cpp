@@ -574,7 +574,7 @@ void MarbleZipReaderPrivate::scanFiles()
         l = readUShort(header.h.file_comment_length);
         header.file_comment = device->read(l);
         if (header.file_comment.length() != l) {
-            qWarning() << "QZip: Failed to read read file comment, index may be incomplete";
+            qWarning() << "QZip: Failed to read file comment, index may be incomplete";
             break;
         }
 
