@@ -164,7 +164,7 @@ Item {
                             anchors.verticalCenter: switchText.verticalCenter
 
                             checked: routeVisible
-                            onCheckedChanged: root.highlightChanged(oid, checked)
+                            onClicked: root.highlightChanged(oid, checked)
                         }
 
                         Text {
