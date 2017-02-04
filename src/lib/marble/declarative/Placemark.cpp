@@ -416,7 +416,9 @@ QString Placemark::description() const
             addTagDescription(m_description, "aerialway:summer:access", "no", tr("No entry or exit during summer", "Transit only station of an aerialway during summer"));
         }
 
-        addTagValue(m_description, QStringLiteral("ele"), tr("Elevation: %1 m"));
+        if (category != GeoDataPlacemark::AerialwayStation) {
+            addTagValue(m_description, QStringLiteral("ele"), tr("Elevation: %1 m"));
+        }
 
         addTagDescription(m_description, "access", "customers", tr("Customers only"));
         addTagDescription(m_description, QStringLiteral("access"), QStringLiteral("yes"), tr("Accessible by anyone", "The public has an official, legally-enshrined right of access; i.e., it's a right of way"));
