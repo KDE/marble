@@ -30,6 +30,7 @@
         <file>SidePanel.qml</file>
         <file>drawer.svg</file>
         <file alias="search.png">../../../data/android/drawable-xxxhdpi/search.png</file>
+        <file alias="menu.png">../../../data/android/drawable-xxxhdpi/ic_menu_black_48dp.png</file>
         <file alias="gps_fixed.png">../../../data/android/drawable-xxxhdpi/gps_fixed.png</file>
         <file alias="gps_not_fixed.png">../../../data/android/drawable-xxxhdpi/gps_not_fixed.png</file>
         <file alias="backdrop.png">../../../data/android/drawable-xxxhdpi/backdrop.png</file>

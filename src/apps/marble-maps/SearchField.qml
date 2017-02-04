@@ -27,6 +27,7 @@ Item {
     signal searchRequested(string query)
     signal completionRequested(string query)
     signal cleared()
+    signal menuButtonClicked()
 
     function search(query) {
         routingManager.clearSearchResultPlacemarks();
@@ -52,9 +53,24 @@ Item {
         border.width: 1
     }
 
+    FlatButton {
+        id: menuButton
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.left: parent.left
+        anchors.leftMargin: 10
+        height: 0.7 * field.height
+        width: height
+        imageSource: "qrc:///menu.png"
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: root.menuButtonClicked()
+        }
+    }
+
     TextField {
         id: field
-        anchors.left: parent.left
+        anchors.left: menuButton.right
         anchors.right: parent.right
 
         placeholderText: qsTr("Search")

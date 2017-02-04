@@ -354,6 +354,7 @@ ApplicationWindow {
             app.selectedPlacemark = suggestedPlacemark;
             app.state = "place"
         }
+        onMenuButtonClicked: drawer.open()
     }
 
     Loader {

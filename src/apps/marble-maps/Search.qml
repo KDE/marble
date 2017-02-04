@@ -20,6 +20,7 @@ Item {
     property var marbleQuickItem: null
 
     signal itemSelected(var suggestedPlacemark)
+    signal menuButtonClicked()
     readonly property alias searchResultPlacemark: backend.selectedPlacemark
     readonly property alias searchResultsVisible: searchResults.visible
 
@@ -180,6 +181,7 @@ Item {
         onSearchRequested: backend.search(query)
         onCompletionRequested: backend.setCompletionPrefix(query)
         onCleared: searchResults.visible = false
+        onMenuButtonClicked: root.menuButtonClicked()
     }
 
     Bookmarks {
