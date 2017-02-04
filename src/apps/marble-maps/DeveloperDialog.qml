@@ -57,6 +57,45 @@ Item {
         height: infoItem.height
 
         Item {
+            id: tilesItem
+            height: childrenRect.height
+
+            Item {
+                height: childrenRect.height
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.top: parent.top
+                anchors.margins: Screen.pixelDensity * 2
+
+                Column {
+                    spacing: Screen.pixelDensity * 1
+
+                    Text {
+                        text: "Tiles"
+                    }
+                    Grid {
+                        columns: 2
+                        flow: Grid.TopToBottom
+                        rowSpacing: Screen.pixelDensity * 0.5
+                        columnSpacing: Screen.pixelDensity * 2
+
+                        CheckBox {
+                            id: mapTheme
+                            text: "Development Tiles"
+                            checked: settings.value("MarbleMaps", "mapThemeId") === "earth/vectorosm-dev/vectorosm-dev.dgml"
+                            onCheckedChanged: marbleMaps.mapThemeId = checked ? "earth/vectorosm-dev/vectorosm-dev.dgml" : "earth/vectorosm/vectorosm.dgml"
+                        }
+
+                        Button {
+                            text: "Reload Tiles"
+                            onClicked: marbleMaps.reloadTiles()
+                        }
+                    }
+                }
+            }
+        }
+
+        Item {
             id: toolsItem
             height: childrenRect.height
 
@@ -74,17 +113,10 @@ Item {
                         text: "Tools"
                     }
                     Grid {
-                        columns: 3
+                        columns: 2
                         flow: Grid.TopToBottom
                         rowSpacing: Screen.pixelDensity * 0.5
                         columnSpacing: Screen.pixelDensity * 2
-
-                        CheckBox {
-                            id: mapTheme
-                            text: "Development Tiles"
-                            checked: settings.value("MarbleMaps", "mapThemeId") === "earth/vectorosm-dev/vectorosm-dev.dgml"
-                            onCheckedChanged: marbleMaps.mapThemeId = checked ? "earth/vectorosm-dev/vectorosm-dev.dgml" : "earth/vectorosm/vectorosm.dgml"
-                        }
 
                         CheckBox {
                             id: debugTags
@@ -134,7 +166,7 @@ Item {
                     }
 
                     Grid {
-                        columns: 3
+                        columns: 2
                         flow: Grid.TopToBottom
                         rowSpacing: Screen.pixelDensity * 0.5
                         columnSpacing: Screen.pixelDensity * 2
@@ -165,11 +197,6 @@ Item {
                             text: "Placemarks"
                             checked: settings.value("Developer", "debugPlacemarks") === "true"
                             onCheckedChanged: marbleMaps.setShowDebugPlacemarks(checked)
-                        }
-
-                        Button {
-                            text: "Reload Tiles"
-                            onClicked: marbleMaps.reloadTiles()
                         }
                     }
                 }
