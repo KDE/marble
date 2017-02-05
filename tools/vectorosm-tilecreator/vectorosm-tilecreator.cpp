@@ -140,6 +140,7 @@ int main(int argc, char *argv[])
                           {{"m", "mbtile"}, "Store tiles at level 15 onwards in a mbtile database.", "mbtile"},
                           {{"s", "spellcheck"}, "Use this geonames.org cities file for spell-checking city names", "spellcheck"},
                           {"verbose", "Increase amount of shell output information"},
+                          {"boundaries", "Write boundary tiles (implied by conflict-resolution=merge)"},
                           {{"d", "development"}, "Use local development vector osm map theme as output storage"},
                           {{"z", "zoom-level"}, "Zoom level according to which OSM information has to be processed.", "levels", "11,13,15,17"},
                           {{"o", "output"}, "Output file or directory", "output", QString("%1/maps/earth/vectorosm").arg(MarbleDirs::localPath())},
@@ -174,6 +175,7 @@ int main(int argc, char *argv[])
 
     bool const overwriteTiles = parser.value("conflict-resolution") == "overwrite";
     bool const mergeTiles = parser.value("conflict-resolution") == "merge";
+    bool const writeBoundaries = mergeTiles || parser.isSet("boundaries");
     QSharedPointer<MbTileWriter> mbtileWriter;
     if (parser.isSet("mbtile")) {
         QString const mbtile = parser.value("mbtile");
@@ -295,7 +297,7 @@ int main(int argc, char *argv[])
                     if (tile1->size() > 0 && tile2->size() > 0) {
                         GeoDocPtr combined = GeoDocPtr(mergeDocuments(tile1.data(), tile2.data()));
 
-                        if (boundaryTiles.contains(iter.key())) {
+                        if (writeBoundaries && boundaryTiles.contains(iter.key())) {
                             writeBoundaryTile(tile1.data(), region, parser, tileId.x(), tileId.y(), zoomLevel);
                             if (mergeTiles) {
                                 combined = mergeBoundaryTiles(tile2, manager, parser, tileId.x(), tileId.y(), zoomLevel);
