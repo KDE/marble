@@ -52,6 +52,8 @@ class GeoSceneFilter : public GeoNode
     void addPalette( const GeoScenePalette *palette );
     int removePalette( const GeoScenePalette *palette ); //returns # of items removed
 
+    const char *nodeType() const override;
+
  private:
     QString m_name;
     QString m_type;

@@ -21,6 +21,8 @@
 
 #include "GeoSceneIcon.h"
 
+#include "GeoSceneTypes.h"
+
 namespace Marble
 {
 
@@ -51,6 +53,11 @@ QColor GeoSceneIcon::color() const
 void GeoSceneIcon::setColor( const QColor& color )
 {
     m_color = color;
+}
+
+const char *GeoSceneIcon::nodeType() const
+{
+    return GeoSceneTypes::GeoSceneIconType;
 }
 
 }

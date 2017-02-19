@@ -24,6 +24,7 @@
 #include "MarbleDebug.h"
 
 #include "GeoSceneProperty.h"
+#include "GeoSceneTypes.h"
 
 namespace Marble
 {
@@ -158,6 +159,11 @@ QVector<const GeoSceneProperty*> GeoSceneGroup::properties() const
 QString GeoSceneGroup::name() const
 {
     return m_name;
+}
+
+const char *GeoSceneGroup::nodeType() const
+{
+    return GeoSceneTypes::GeoSceneGroupType;
 }
 
 }

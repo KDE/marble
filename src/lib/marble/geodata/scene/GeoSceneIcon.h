@@ -47,6 +47,8 @@ class GEODATA_EXPORT GeoSceneIcon : public GeoNode
     QColor color() const;
     void setColor(const QColor&);
 
+    const char *nodeType() const override;
+
  private:
     // FIXME: d-pointerfy
 

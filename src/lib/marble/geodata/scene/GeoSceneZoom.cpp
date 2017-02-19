@@ -21,6 +21,8 @@
 
 #include "GeoSceneZoom.h"
 
+#include "GeoSceneTypes.h"
+
 namespace Marble
 {
 
@@ -61,6 +63,11 @@ bool GeoSceneZoom::discrete() const
 void GeoSceneZoom::setDiscrete( bool discrete )
 {
     m_discrete = discrete;
+}
+
+const char *GeoSceneZoom::nodeType() const
+{
+    return GeoSceneTypes::GeoSceneZoomType;
 }
 
 }

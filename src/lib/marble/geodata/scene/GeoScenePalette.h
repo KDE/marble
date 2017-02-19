@@ -46,6 +46,8 @@ class GeoScenePalette : public GeoNode
 
     bool operator==( const GeoScenePalette& rhs ) const;
 
+    const char *nodeType() const override;
+
  private:
     QString m_type;
     QString m_file;

@@ -28,6 +28,7 @@ extern const char GeoSceneIconType[];
 extern const char GeoSceneItemType[];
 extern const char GeoSceneLayerType[];
 extern const char GeoSceneLegendType[];
+extern const char GeoSceneLicenseType[];
 extern const char GeoSceneMapType[];
 extern const char GeoScenePaletteType[];
 extern const char GeoScenePropertyType[];

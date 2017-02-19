@@ -24,6 +24,7 @@ const char GeoSceneIconType[] = "GeoSceneIcon";
 const char GeoSceneItemType[] = "GeoSceneItem";
 const char GeoSceneLayerType[] = "GeoSceneLayer";
 const char GeoSceneLegendType[] = "GeoSceneLegend";
+const char GeoSceneLicenseType[] = "GeoSceneLicense";
 const char GeoSceneMapType[] = "GoeSceneMap";
 const char GeoScenePaletteType[] = "GeoScenePalette";
 const char GeoScenePropertyType[] = "GeoSceneProperty";

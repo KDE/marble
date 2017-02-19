@@ -10,6 +10,8 @@
 
 #include "GeoSceneLicense.h"
 
+#include "GeoSceneTypes.h"
+
 namespace Marble
 {
 
@@ -47,6 +49,11 @@ void GeoSceneLicense::setShortLicense( const QString &license )
 void GeoSceneLicense::setAttribution(Attribution attr )
 {
     m_attribution = attr;
+}
+
+const char *GeoSceneLicense::nodeType() const
+{
+    return GeoSceneTypes::GeoSceneLicenseType;
 }
 
 }

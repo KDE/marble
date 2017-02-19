@@ -85,6 +85,8 @@ class GeoSceneGroup : public QObject,
 
     QString name() const;
 
+    const char *nodeType() const override;
+
  Q_SIGNALS:
     void valueChanged( const QString&, bool );
 
