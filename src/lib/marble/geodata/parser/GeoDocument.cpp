@@ -53,9 +53,4 @@ GeoNode::~GeoNode()
 {
 }
 
-const char* GeoNode::nodeType() const
-{
-    return "GeoNode";
-}
-
 }

@@ -51,7 +51,9 @@ class GEODATA_EXPORT GeoNode
 public:
     GeoNode();
     virtual ~GeoNode();
-    virtual const char* nodeType() const;
+
+    /// Provides type information for downcasting a GeoNode
+    virtual const char* nodeType() const = 0;
 };
 
 }

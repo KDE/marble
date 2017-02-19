@@ -54,9 +54,6 @@ public:
     GeoDataObject & operator=( const GeoDataObject & );
     ~GeoDataObject() override;
 
-    /// Provides type information for downcasting a GeoNode
-    const char* nodeType() const override = 0;
-
     /// Provides the parent of the object in GeoDataContainers
     virtual GeoDataObject *parent() const;
 
