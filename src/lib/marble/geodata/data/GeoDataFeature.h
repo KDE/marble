@@ -59,9 +59,6 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
 
     GeoDataFeature& operator=( const GeoDataFeature& other );
 
-    /// Provides type information for downcasting a GeoData
-    const char* nodeType() const override;
-
     EnumFeatureId featureId() const;
 
     /**
@@ -260,7 +257,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     void setStyleMap( const GeoDataStyleMap* map );
 
     /// Duplicate into another equal instance
-    virtual GeoDataFeature * clone() const;
+    virtual GeoDataFeature * clone() const = 0;
 
 
     /// Serialize the contents of the feature to @p stream.

@@ -49,11 +49,6 @@ GeoDataOverlay &GeoDataOverlay::operator=( const GeoDataOverlay &other )
     return *this;
 }
 
-GeoDataFeature * GeoDataOverlay::clone() const
-{
-    return new GeoDataOverlay(*this);
-}
-
 QColor GeoDataOverlay::color() const
 {
     Q_D(const GeoDataOverlay);

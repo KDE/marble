@@ -55,10 +55,6 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
 
     GeoDataContainer& operator=(const GeoDataContainer& other);
 
-    const char* nodeType() const override;
-
-    GeoDataFeature * clone() const override;
-
     /**
      * @brief A convenience function that returns the LatLonAltBox of all
      * placemarks in this container.

@@ -117,16 +117,6 @@ bool GeoDataFeature::equals( const GeoDataFeature &other ) const
     return true;
 }
 
-GeoDataFeature * GeoDataFeature::clone() const
-{
-    return new GeoDataFeature(*this);
-}
-
-const char* GeoDataFeature::nodeType() const
-{
-    return GeoDataTypes::GeoDataFeatureType;
-}
-
 EnumFeatureId GeoDataFeature::featureId() const
 {
     Q_D(const GeoDataFeature);

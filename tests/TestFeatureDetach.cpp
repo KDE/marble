@@ -13,6 +13,7 @@
 #include "GeoDataContainer.h"
 #include "GeoDataPoint.h"
 #include "GeoDataPlacemark.h"
+#include "GeoDataRelation.h"
 #include "GeoDataCamera.h"
 #include "MarbleGlobal.h"
 #include "GeoDataPlaylist.h"
@@ -33,16 +34,16 @@ private Q_SLOTS:
      * GeoDataFeature::set/abstractView() doesn't help because the object
      * isn't deep-copied in the private class.
      *
-     * @brief testFeature shows that getting the abstractView() of a copied
+     * @brief testRelation shows that getting the abstractView() of a copied
      * feature and modifying it doesn't modify the original one.
      */
-    void testFeature();
+    void testRelation();
 
     /**
-     * @brief testContainer shows that getting some child and modifying it,
+     * @brief testDocument shows that getting some child and modifying it,
      * doesn't modify the child at the same position in the original container.
      */
-    void testContainer();
+    void testDocument();
 
     /**
      * @brief testPlacemark shows that getting the geometry() and modifying it
@@ -70,31 +71,31 @@ private Q_SLOTS:
 
 };
 
-void TestFeatureDetach::testFeature()
+void TestFeatureDetach::testRelation()
 {
-    GeoDataFeature feat1;
+    GeoDataRelation feat1;
     GeoDataCamera *view1 = new GeoDataCamera();
     view1->setAltitudeMode(Absolute);
     feat1.setAbstractView(view1);
 
-    GeoDataFeature feat2 = feat1;
+    GeoDataRelation feat2 = feat1;
     feat2.abstractView()->setAltitudeMode(ClampToSeaFloor);
     // FIXME: See above (method description).
     // QVERIFY(feat1.abstractView()->altitudeMode() == Absolute);
 }
 
-void TestFeatureDetach::testContainer()
+void TestFeatureDetach::testDocument()
 {
-    GeoDataContainer cont1;
-    GeoDataFeature *feat1 = new GeoDataFeature();
+    GeoDataDocument cont1;
+    GeoDataFeature *feat1 = new GeoDataPlacemark();
     feat1->setName("Feat1");
     cont1.insert(0, feat1);
 
-    GeoDataContainer cont2 = cont1;
+    GeoDataDocument cont2 = cont1;
     cont2.child(0)->setName("Feat2");
     QCOMPARE(cont1.child(0)->name(), QLatin1String("Feat1"));
 
-    const GeoDataContainer cont3 = cont1;
+    const GeoDataDocument cont3 = cont1;
     QCOMPARE(cont3.child(0)->name(), QLatin1String("Feat1"));
 }
 
