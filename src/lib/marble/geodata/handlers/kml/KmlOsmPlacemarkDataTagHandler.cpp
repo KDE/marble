@@ -39,13 +39,10 @@ GeoNode* KmlOsmPlacemarkDataTagHandler::parse( GeoParser& parser ) const
      *          <mx:OsmPlacemarkData>
      * ...
      */
-    if( parser.parentElement().is<GeoDataExtendedData>() ) {
-        GeoDataExtendedData *extendedData = parser.parentElement().nodeAs<GeoDataExtendedData>();
-        if (extendedData->parent() && extendedData->parent()->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
-            auto placemark = static_cast<GeoDataPlacemark*>(extendedData->parent());
-            placemark->setOsmData(osmData);
-            return &placemark->osmData();
-        }
+    if (parser.parentElement().is<GeoDataExtendedData>() && parser.parentElement(1).is<GeoDataPlacemark>()) {
+        auto placemark = parser.parentElement(1).nodeAs<GeoDataPlacemark>();
+        placemark->setOsmData(osmData);
+        return &placemark->osmData();
     }
     /* Case 2: This is the OsmPlacemarkData of a Nd
      * <Placemark>
