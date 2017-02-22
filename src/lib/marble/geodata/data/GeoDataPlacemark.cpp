@@ -112,66 +112,8 @@ bool GeoDataPlacemark::operator==( const GeoDataPlacemark& other ) const
         return false;
     }
 
-    if (d->m_geometry->nodeType() != other_d->m_geometry->nodeType()) {
+    if (*d->m_geometry != *other_d->m_geometry) {
         return false;
-    }
-
-    if (d->m_geometry->nodeType() == GeoDataTypes::GeoDataPolygonType) {
-        GeoDataPolygon *thisPoly = dynamic_cast<GeoDataPolygon*>(d->m_geometry);
-        GeoDataPolygon *otherPoly = dynamic_cast<GeoDataPolygon*>(other_d->m_geometry);
-        Q_ASSERT( thisPoly && otherPoly );
-
-        if ( *thisPoly != *otherPoly ) {
-            return false;
-        }
-    } else if (d->m_geometry->nodeType() == GeoDataTypes::GeoDataLineStringType) {
-        GeoDataLineString *thisLine = dynamic_cast<GeoDataLineString*>(d->m_geometry);
-        GeoDataLineString *otherLine = dynamic_cast<GeoDataLineString*>(other_d->m_geometry);
-        Q_ASSERT( thisLine && otherLine );
-
-        if ( *thisLine != *otherLine ) {
-            return false;
-        }
-    } else if (d->m_geometry->nodeType() == GeoDataTypes::GeoDataModelType) {
-        GeoDataModel *thisModel = dynamic_cast<GeoDataModel*>(d->m_geometry);
-        GeoDataModel *otherModel = dynamic_cast<GeoDataModel*>(other_d->m_geometry);
-        Q_ASSERT( thisModel && otherModel );
-
-        if ( *thisModel != *otherModel ) {
-            return false;
-        }
-    /*} else if (d->m_geometry->nodeType() == GeoDataTypes::GeoDataMultiGeometryType) {
-        GeoDataMultiGeometry *thisMG = dynamic_cast<GeoDataMultiGeometry*>(d->m_geometry);
-        GeoDataMultiGeometry *otherMG = dynamic_cast<GeoDataMultiGeometry*>(other_d->m_geometry);
-        Q_ASSERT( thisMG && otherMG );
-
-        if ( *thisMG != *otherMG ) {
-            return false;
-        } */ // Does not have equality operators. I guess they need to be implemented soon.
-    } else if (d->m_geometry->nodeType() == GeoDataTypes::GeoDataTrackType) {
-        GeoDataTrack *thisTrack = dynamic_cast<GeoDataTrack*>(d->m_geometry);
-        GeoDataTrack *otherTrack = dynamic_cast<GeoDataTrack*>(other_d->m_geometry);
-        Q_ASSERT( thisTrack && otherTrack );
-
-        if ( *thisTrack != *otherTrack ) {
-            return false;
-        }
-    } else if (d->m_geometry->nodeType() == GeoDataTypes::GeoDataMultiTrackType) {
-        GeoDataMultiTrack *thisMT = dynamic_cast<GeoDataMultiTrack*>(d->m_geometry);
-        GeoDataMultiTrack *otherMT = dynamic_cast<GeoDataMultiTrack*>(other_d->m_geometry);
-        Q_ASSERT( thisMT && otherMT );
-
-        if ( *thisMT != *otherMT ) {
-            return false;
-        }
-    } else if (d->m_geometry->nodeType() == GeoDataTypes::GeoDataPointType) {
-        GeoDataPoint *thisPoint = dynamic_cast<GeoDataPoint*>(d->m_geometry);
-        GeoDataPoint *otherPoint = dynamic_cast<GeoDataPoint*>(other_d->m_geometry);
-        Q_ASSERT( thisPoint && otherPoint );
-
-        if ( *thisPoint != *otherPoint ) {
-            return false;
-        }
     }
 
     return true;

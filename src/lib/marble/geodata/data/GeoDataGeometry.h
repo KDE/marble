@@ -49,6 +49,9 @@ class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject
 
     virtual GeoDataGeometry *copy() const = 0;
 
+    bool operator==(const GeoDataGeometry &other) const;
+    inline bool operator!=(const GeoDataGeometry &other) const { return !(*this == other); }
+
     bool extrude() const;
     void setExtrude( bool extrude );
 

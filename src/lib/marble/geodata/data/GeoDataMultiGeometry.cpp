@@ -55,6 +55,24 @@ GeoDataGeometry *GeoDataMultiGeometry::copy() const
     return new GeoDataMultiGeometry(*this);
 }
 
+bool GeoDataMultiGeometry::operator==(const GeoDataMultiGeometry &other) const
+{
+    Q_D(const GeoDataMultiGeometry);
+    const GeoDataMultiGeometryPrivate *const other_d = other.d_func();
+    QVector<GeoDataGeometry*>::const_iterator thisBegin = d->m_vector.constBegin();
+    QVector<GeoDataGeometry*>::const_iterator thisEnd = d->m_vector.constEnd();
+    QVector<GeoDataGeometry*>::const_iterator otherBegin = other_d->m_vector.constBegin();
+    QVector<GeoDataGeometry*>::const_iterator otherEnd = other_d->m_vector.constEnd();
+
+    for (; thisBegin != thisEnd && otherBegin != otherEnd; ++thisBegin, ++otherBegin) {
+        if (**thisBegin != **otherBegin) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 const GeoDataLatLonAltBox& GeoDataMultiGeometry::latLonAltBox() const
 {
     Q_D(const GeoDataMultiGeometry);

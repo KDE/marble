@@ -44,6 +44,9 @@ class GEODATA_EXPORT GeoDataMultiGeometry : public GeoDataGeometry
 
     GeoDataGeometry *copy() const override;
 
+    bool operator==(const GeoDataMultiGeometry &other) const;
+    bool operator!=(const GeoDataMultiGeometry &other) const { return !(*this == other); }
+
     const GeoDataLatLonAltBox& latLonAltBox() const override;
 
     int size() const;
