@@ -59,6 +59,9 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
 
     GeoDataFeature& operator=( const GeoDataFeature& other );
 
+    bool operator==(const GeoDataFeature &other) const;
+    inline bool operator!=(const GeoDataFeature &other) const { return !(*this == other); }
+
     EnumFeatureId featureId() const;
 
     /**

@@ -24,6 +24,14 @@
 
 #include "GeoDataContainer.h"
 #include "GeoDataDocument.h"
+#include "GeoDataFolder.h"
+#include "GeoDataGroundOverlay.h"
+#include "GeoDataNetworkLink.h"
+#include "GeoDataNetworkLinkControl.h"
+#include "GeoDataPhotoOverlay.h"
+#include "GeoDataPlacemark.h"
+#include "GeoDataScreenOverlay.h"
+#include "GeoDataTour.h"
 #include "GeoDataRegion.h"
 #include "GeoDataCamera.h"
 
@@ -75,6 +83,62 @@ GeoDataFeature& GeoDataFeature::operator=( const GeoDataFeature& other )
     }
 
     return *this;
+}
+
+bool GeoDataFeature::operator==(const GeoDataFeature &other) const
+{
+    if (nodeType() != other.nodeType()) {
+        return false;
+    }
+
+    if (nodeType() == GeoDataTypes::GeoDataDocumentType) {
+        const GeoDataDocument &thisDoc = static_cast<const GeoDataDocument &>(*this);
+        const GeoDataDocument &otherDoc = static_cast<const GeoDataDocument &>(other);
+
+        return thisDoc == otherDoc;
+    } else if (nodeType() == GeoDataTypes::GeoDataFolderType) {
+        const GeoDataFolder &thisFolder = static_cast<const GeoDataFolder &>(*this);
+        const GeoDataFolder &otherFolder = static_cast<const GeoDataFolder &>(other);
+
+        return thisFolder == otherFolder;
+    } else if (nodeType() == GeoDataTypes::GeoDataGroundOverlayType) {
+        const GeoDataGroundOverlay &thisGO = static_cast<const GeoDataGroundOverlay &>(*this);
+        const GeoDataGroundOverlay &otherGO = static_cast<const GeoDataGroundOverlay &>(other);
+
+        return thisGO == otherGO;
+    } else if (nodeType() == GeoDataTypes::GeoDataNetworkLinkType) {
+        const GeoDataNetworkLink &thisNetLink = static_cast<const GeoDataNetworkLink &>(*this);
+        const GeoDataNetworkLink &otherNetLink = static_cast<const GeoDataNetworkLink &>(other);
+
+        return thisNetLink == otherNetLink;
+    } else if (nodeType() == GeoDataTypes::GeoDataNetworkLinkControlType) {
+        const GeoDataNetworkLinkControl &thisNLC = static_cast<const GeoDataNetworkLinkControl &>(*this);
+        const GeoDataNetworkLinkControl &otherNLC = static_cast<const GeoDataNetworkLinkControl &>(other);
+
+        return thisNLC == otherNLC;
+    } else if (nodeType() == GeoDataTypes::GeoDataPhotoOverlayType) {
+        const GeoDataPhotoOverlay &thisPO = static_cast<const GeoDataPhotoOverlay &>(*this);
+        const GeoDataPhotoOverlay &otherPO = static_cast<const GeoDataPhotoOverlay &>(other);
+
+        return thisPO == otherPO;
+    } else if (nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
+        const GeoDataPlacemark &thisPM = static_cast<const GeoDataPlacemark &>(*this);
+        const GeoDataPlacemark &otherPM = static_cast<const GeoDataPlacemark &>(other);
+
+        return thisPM == otherPM;
+    } else if (nodeType() == GeoDataTypes::GeoDataScreenOverlayType) {
+        const GeoDataScreenOverlay &thisSO = static_cast<const GeoDataScreenOverlay &>(*this);
+        const GeoDataScreenOverlay &otherSO = static_cast<const GeoDataScreenOverlay &>(other);
+
+        return thisSO == otherSO;
+    } else if (nodeType() == GeoDataTypes::GeoDataTourType) {
+        const GeoDataTour &thisTour = static_cast<const GeoDataTour &>(*this);
+        const GeoDataTour &otherTour = static_cast<const GeoDataTour &>(other);
+
+        return thisTour == otherTour;
+    }
+
+    return false;
 }
 
 bool GeoDataFeature::equals( const GeoDataFeature &other ) const
