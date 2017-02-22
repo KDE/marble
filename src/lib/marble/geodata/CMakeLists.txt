@@ -18,6 +18,7 @@ SET ( geodata_data_SRCS
         geodata/data/GeoDataContainer.cpp
         geodata/data/GeoDataItemIcon.cpp
         geodata/data/GeoDataTour.cpp
+        geodata/data/GeoDataTourPrimitive.cpp
         geodata/data/GeoDataOverlay.cpp
         geodata/data/GeoDataListStyle.cpp
         geodata/data/GeoDataFlyTo.cpp
