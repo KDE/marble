@@ -11,9 +11,7 @@
 #include "GeoDataNetworkLinkControl.h"
 #include "GeoDataNetworkLinkControl_p.h"
 
-#include "GeoDataCamera.h"
-#include "GeoDataLookAt.h"
-
+#include "GeoDataAbstractView.h"
 
 namespace Marble
 {
@@ -66,26 +64,8 @@ bool GeoDataNetworkLinkControl::operator==( const GeoDataNetworkLinkControl &oth
         return false;
     }
 
-    if (d->m_abstractView->nodeType() != other_d->m_abstractView->nodeType()) {
+    if (*d->m_abstractView != *other_d->m_abstractView) {
         return false;
-    }
-
-    if ( d->m_abstractView->nodeType() == GeoDataTypes::GeoDataCameraType ) {
-        GeoDataCamera *thisCam = dynamic_cast<GeoDataCamera*>( d->m_abstractView );
-        GeoDataCamera *otherCam = dynamic_cast<GeoDataCamera*>(other_d->m_abstractView);
-        Q_ASSERT(thisCam && otherCam);
-
-        if ( *thisCam != *otherCam ) {
-            return false;
-        }
-    } else if ( d->m_abstractView->nodeType() == GeoDataTypes::GeoDataLookAtType ) {
-        GeoDataLookAt *thisLookAt = dynamic_cast<GeoDataLookAt*>( d->m_abstractView );
-        GeoDataLookAt *otherLookAt = dynamic_cast<GeoDataLookAt*>(other_d->m_abstractView);
-        Q_ASSERT(thisLookAt && otherLookAt);
-
-        if ( *thisLookAt != *otherLookAt ) {
-            return false;
-        }
     }
 
     return true;

@@ -37,6 +37,9 @@ class GEODATA_EXPORT GeoDataAbstractView : public GeoDataObject
 
     GeoDataAbstractView& operator=( const GeoDataAbstractView &other );
 
+    bool operator==(const GeoDataAbstractView &other) const;
+    inline bool operator!=(const GeoDataAbstractView &other) const { return !(*this == other); }
+
     virtual GeoDataAbstractView *copy() const = 0;
 
     const GeoDataTimeSpan& timeSpan() const;

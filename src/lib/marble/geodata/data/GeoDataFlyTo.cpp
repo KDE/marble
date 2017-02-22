@@ -11,8 +11,6 @@
 #include "GeoDataFlyTo.h"
 #include "GeoDataTypes.h"
 #include "GeoDataAbstractView.h"
-#include "GeoDataCamera.h"
-#include "GeoDataLookAt.h"
 
 namespace Marble {
 
@@ -67,26 +65,8 @@ bool GeoDataFlyTo::operator==( const GeoDataFlyTo& other ) const
         return true;
     }
 
-    if ( d->m_view->nodeType() != other.d->m_view->nodeType() ) {
+    if (*d->m_view != *other.d->m_view) {
         return false;
-    }
-
-    if ( d->m_view->nodeType() == GeoDataTypes::GeoDataCameraType ) {
-        GeoDataCamera *thisCam = dynamic_cast<GeoDataCamera*>( d->m_view );
-        GeoDataCamera *otherCam = dynamic_cast<GeoDataCamera*>( other.d->m_view );
-        Q_ASSERT( thisCam && otherCam );
-
-        if ( *thisCam != *otherCam ) {
-            return false;
-        }
-    } else if ( d->m_view->nodeType() == GeoDataTypes::GeoDataLookAtType ) {
-        GeoDataLookAt *thisLookAt = dynamic_cast<GeoDataLookAt*>( d->m_view );
-        GeoDataLookAt *otherLookAt = dynamic_cast<GeoDataLookAt*>( other.d->m_view );
-        Q_ASSERT( thisLookAt && otherLookAt );
-
-        if ( *thisLookAt != *otherLookAt ) {
-            return false;
-        }
     }
 
     return true;

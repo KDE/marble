@@ -62,6 +62,27 @@ GeoDataAbstractView &GeoDataAbstractView::operator =( const GeoDataAbstractView 
     return *this;
 }
 
+bool GeoDataAbstractView::operator==(const GeoDataAbstractView &other) const
+{
+    if (nodeType() != other.nodeType()) {
+        return false;
+    }
+
+    if (nodeType() == GeoDataTypes::GeoDataCameraType) {
+        const GeoDataCamera &thisCam = static_cast<const GeoDataCamera &>(*this);
+        const GeoDataCamera &otherCam = static_cast<const GeoDataCamera &>(other);
+
+        return thisCam == otherCam;
+    } else if (nodeType() == GeoDataTypes::GeoDataLookAtType) {
+        const GeoDataLookAt &thisLookAt = static_cast<const GeoDataLookAt &>(*this);
+        const GeoDataLookAt &otherLookAt = static_cast<const GeoDataLookAt &>(other);
+
+        return thisLookAt == otherLookAt;
+    }
+
+    return false;
+}
+
 GeoDataCoordinates GeoDataAbstractView::coordinates() const
 {
     if ( nodeType() == GeoDataTypes::GeoDataLookAtType) {

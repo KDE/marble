@@ -102,26 +102,8 @@ public:
         }
 
         if (m_abstractView && other.m_abstractView) {
-            if ( m_abstractView->nodeType() != other.m_abstractView->nodeType() ) {
+            if (*m_abstractView != *other.m_abstractView) {
                 return false;
-            }
-
-            if ( m_abstractView->nodeType() == GeoDataTypes::GeoDataCameraType ) {
-                GeoDataCamera *thisCam = dynamic_cast<GeoDataCamera*>( m_abstractView );
-                GeoDataCamera *otherCam = dynamic_cast<GeoDataCamera*>( other.m_abstractView );
-                Q_ASSERT(thisCam && otherCam);
-
-                if ( *thisCam != *otherCam ) {
-                    return false;
-                }
-            } else if ( m_abstractView->nodeType() == GeoDataTypes::GeoDataLookAtType ) {
-                GeoDataLookAt *thisLookAt = dynamic_cast<GeoDataLookAt*>( m_abstractView );
-                GeoDataLookAt *otherLookAt = dynamic_cast<GeoDataLookAt*>( other.m_abstractView );
-                Q_ASSERT(thisLookAt && otherLookAt);
-
-                if ( *thisLookAt != *otherLookAt ) {
-                    return false;
-                }
             }
         }
 
