@@ -110,7 +110,7 @@ void PlaybackAnimatedUpdateItem::play()
                 continue;
             }
             GeoDataFeature* feature = findFeature( m_rootDocument, targetId );
-            if( feature && canDelete( feature->nodeType() ) ) {
+            if (feature && canDelete(*feature)) {
                 m_deletedObjects.append( feature );
                 emit removed( feature );
                 if( feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType )
@@ -241,8 +241,10 @@ bool PlaybackAnimatedUpdateItem::isApplied() const
     return m_playing;
 }
 
-bool PlaybackAnimatedUpdateItem::canDelete(const char *nodeType) const
+bool PlaybackAnimatedUpdateItem::canDelete(const GeoDataFeature &feature)
 {
+    const char *nodeType = feature.nodeType();
+
     return  nodeType == GeoDataTypes::GeoDataDocumentType ||
             nodeType == GeoDataTypes::GeoDataFolderType ||
             nodeType == GeoDataTypes::GeoDataGroundOverlayType ||

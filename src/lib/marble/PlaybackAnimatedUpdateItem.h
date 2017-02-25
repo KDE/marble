@@ -35,7 +35,7 @@ public:
     bool isApplied() const;
 
 private:
-    bool canDelete( const char* nodeType ) const;
+    static bool canDelete(const GeoDataFeature &feature);
     GeoDataDocument* rootDocument( GeoDataObject *object ) const;
     GeoDataFeature* findFeature( GeoDataFeature* feature, const QString& id ) const;
     GeoDataAnimatedUpdate* m_animatedUpdate;
