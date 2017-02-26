@@ -16,6 +16,7 @@
 #include "GeoDataLinearRing.h"
 #include "GeoDataPoint.h"
 #include "GeoDataPolygon.h"
+#include "GeoDataTypes.h"
 
 #include "MarbleDebug.h"
 
@@ -37,6 +38,21 @@ GeoDataMultiGeometry::GeoDataMultiGeometry( const GeoDataGeometry& other )
 
 GeoDataMultiGeometry::~GeoDataMultiGeometry()
 {
+}
+
+const char *GeoDataMultiGeometry::nodeType() const
+{
+    return GeoDataTypes::GeoDataMultiGeometryType;
+}
+
+EnumGeometryId GeoDataMultiGeometry::geometryId() const
+{
+    return GeoDataMultiGeometryId;
+}
+
+GeoDataGeometry *GeoDataMultiGeometry::copy() const
+{
+    return new GeoDataMultiGeometry(*this);
 }
 
 const GeoDataLatLonAltBox& GeoDataMultiGeometry::latLonAltBox() const
@@ -66,20 +82,11 @@ int GeoDataMultiGeometry::size() const
     return d->m_vector.size();
 }
 
-QVector<GeoDataGeometry> GeoDataMultiGeometry::vector() const
+QVector<GeoDataGeometry *> GeoDataMultiGeometry::vector()
 {
     Q_D(const GeoDataMultiGeometry);
-    QVector<GeoDataGeometry> results;
 
-    QVector<GeoDataGeometry*>::const_iterator it = d->m_vector.constBegin();
-    QVector<GeoDataGeometry*>::const_iterator end = d->m_vector.constEnd();
-
-    for (; it != end; ++it) {
-            GeoDataGeometry f = **it;
-            results.append( f );
-    }
-
-    return results;
+    return d->m_vector;
 }
 
 GeoDataGeometry& GeoDataMultiGeometry::at( int pos )
@@ -216,7 +223,7 @@ GeoDataMultiGeometry& GeoDataMultiGeometry::operator << ( const GeoDataGeometry&
     detach();
 
     Q_D(GeoDataMultiGeometry);
-    GeoDataGeometry *g = new GeoDataGeometry( value );
+    GeoDataGeometry *g = value.copy();
     g->setParent( this );
     d->m_vector.append(g);
     return *this;

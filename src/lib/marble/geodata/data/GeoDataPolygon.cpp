@@ -13,6 +13,7 @@
 #include "GeoDataCoordinates.h"
 #include "GeoDataPolygon.h"
 #include "GeoDataPolygon_p.h"
+#include "GeoDataTypes.h"
 #include "MarbleDebug.h"
 
 #include <algorithm>
@@ -39,6 +40,21 @@ GeoDataPolygon::~GeoDataPolygon()
 #ifdef DEBUG_GEODATA
     mDebug() << "delete polygon";
 #endif
+}
+
+const char *GeoDataPolygon::nodeType() const
+{
+    return GeoDataTypes::GeoDataPolygonType;
+}
+
+EnumGeometryId GeoDataPolygon::geometryId() const
+{
+    return GeoDataPolygonId;
+}
+
+GeoDataGeometry *GeoDataPolygon::copy() const
+{
+    return new GeoDataPolygon(*this);
 }
 
 bool GeoDataPolygon::operator==( const GeoDataPolygon &other ) const

@@ -37,6 +37,12 @@ public:
 
     GeoDataModel& operator=( const GeoDataModel &other );
 
+    const char *nodeType() const override;
+
+    EnumGeometryId geometryId() const override;
+
+    GeoDataGeometry *copy() const override;
+
     bool operator==( const GeoDataModel &other ) const;
     bool operator!=( const GeoDataModel &other ) const;
 

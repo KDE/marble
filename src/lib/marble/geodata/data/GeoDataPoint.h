@@ -67,6 +67,10 @@ class GEODATA_EXPORT GeoDataPoint : public GeoDataGeometry
 
     ~GeoDataPoint() override;
 
+    EnumGeometryId geometryId() const override;
+
+    GeoDataGeometry *copy() const override;
+
     bool operator==( const GeoDataPoint &other ) const;
     bool operator!=( const GeoDataPoint &other ) const;
 

@@ -25,16 +25,11 @@ public:
     {
     }
 
-    GeoDataGeometryPrivate* copy() override
+    GeoDataGeometryPrivate *copy() const override
     { 
         GeoDataPointPrivate* copy = new  GeoDataPointPrivate;
         *copy = *this;
         return copy;
-    }
-
-    EnumGeometryId geometryId() const override
-    {
-        return GeoDataPointId;
     }
 };
 

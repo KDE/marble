@@ -55,21 +55,11 @@ class GeoDataLineStringPrivate : public GeoDataGeometryPrivate
     }
 
 
-    GeoDataGeometryPrivate* copy() override
+    GeoDataGeometryPrivate *copy() const override
     { 
         GeoDataLineStringPrivate* copy = new GeoDataLineStringPrivate;
         *copy = *this;
         return copy;
-    }
-
-    const char* nodeType() const override
-    {
-        return GeoDataTypes::GeoDataLineStringType;
-    }
-
-    EnumGeometryId geometryId() const override 
-    {
-        return GeoDataLineStringId;
     }
 
     void toPoleCorrected( const GeoDataLineString & q, GeoDataLineString & poleCorrected ) const;

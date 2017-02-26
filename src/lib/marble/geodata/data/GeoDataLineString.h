@@ -95,6 +95,12 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry
 */
     ~GeoDataLineString() override;
 
+    const char *nodeType() const override;
+
+    EnumGeometryId geometryId() const override;
+
+    GeoDataGeometry *copy() const override;
+
 /*!
     \brief Returns whether a LineString is a closed polygon.
 

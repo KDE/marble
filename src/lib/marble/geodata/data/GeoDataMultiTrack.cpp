@@ -15,6 +15,7 @@
 #include "GeoDataPoint.h"
 #include "GeoDataPolygon.h"
 #include "GeoDataTrack.h"
+#include "GeoDataTypes.h"
 
 #include "MarbleDebug.h"
 
@@ -36,6 +37,21 @@ GeoDataMultiTrack::GeoDataMultiTrack( const GeoDataGeometry& other )
 
 GeoDataMultiTrack::~GeoDataMultiTrack()
 {
+}
+
+const char *GeoDataMultiTrack::nodeType() const
+{
+    return GeoDataTypes::GeoDataMultiTrackType;
+}
+
+EnumGeometryId GeoDataMultiTrack::geometryId() const
+{
+    return GeoDataMultiTrackId;
+}
+
+GeoDataGeometry *GeoDataMultiTrack::copy() const
+{
+    return new GeoDataMultiTrack(*this);
 }
 
 bool GeoDataMultiTrack::operator==( const GeoDataMultiTrack& other ) const

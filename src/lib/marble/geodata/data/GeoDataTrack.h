@@ -61,6 +61,12 @@ public:
 
     GeoDataTrack &operator=( const GeoDataTrack &other );
 
+    const char *nodeType() const override;
+
+    EnumGeometryId geometryId() const override;
+
+    GeoDataGeometry *copy() const override;
+
     /**
      * Returns the number of points in the track
      */

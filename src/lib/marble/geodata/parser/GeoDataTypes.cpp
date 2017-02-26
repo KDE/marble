@@ -38,7 +38,6 @@ const char GeoDataDocumentType[] = "GeoDataDocument";
 const char GeoDataExtendedDataType[] = "GeoDataExtendedData";
 const char GeoDataFlyToType[] = "GeoDataFlyTo";
 const char GeoDataFolderType[] = "GeoDataFolder";
-const char GeoDataGeometryType[] = "GeoDataGeometry";
 const char GeoDataGroundOverlayType[] = "GeoDataGroundOverlay";
 const char GeoDataHotspotType[] = "GeoDataHotspot";
 const char GeoDataIconStyleType[] = "GeoDataIconStyle";

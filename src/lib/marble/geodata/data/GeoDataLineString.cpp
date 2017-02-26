@@ -14,6 +14,7 @@
 #include "GeoDataLineString_p.h"
 
 #include "GeoDataLinearRing.h"
+#include "GeoDataTypes.h"
 #include "MarbleMath.h"
 #include "Quaternion.h"
 #include "MarbleDebug.h"
@@ -46,6 +47,21 @@ GeoDataLineString::~GeoDataLineString()
 #ifdef DEBUG_GEODATA
     mDebug() << "delete Linestring";
 #endif
+}
+
+const char *GeoDataLineString::nodeType() const
+{
+    return GeoDataTypes::GeoDataLineStringType;
+}
+
+EnumGeometryId GeoDataLineString::geometryId() const
+{
+    return GeoDataLineStringId;
+}
+
+GeoDataGeometry *GeoDataLineString::copy() const
+{
+    return new GeoDataLineString(*this);
 }
 
 void GeoDataLineStringPrivate::interpolateDateLine( const GeoDataCoordinates & previousCoords,

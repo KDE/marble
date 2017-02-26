@@ -38,6 +38,12 @@ class GEODATA_EXPORT GeoDataMultiGeometry : public GeoDataGeometry
 
     ~GeoDataMultiGeometry() override;
 
+    const char *nodeType() const override;
+
+    EnumGeometryId geometryId() const override;
+
+    GeoDataGeometry *copy() const override;
+
     const GeoDataLatLonAltBox& latLonAltBox() const override;
 
     int size() const;
@@ -78,7 +84,7 @@ class GEODATA_EXPORT GeoDataMultiGeometry : public GeoDataGeometry
     QVector<GeoDataGeometry*>::ConstIterator constBegin() const;
     QVector<GeoDataGeometry*>::ConstIterator constEnd() const;
     void clear();
-    QVector<GeoDataGeometry> vector() const;
+    QVector<GeoDataGeometry *> vector();
 
     QVector<GeoDataGeometry*>::Iterator erase ( QVector<GeoDataGeometry*>::Iterator pos );
     QVector<GeoDataGeometry*>::Iterator erase ( QVector<GeoDataGeometry*>::Iterator begin,

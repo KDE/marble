@@ -12,7 +12,6 @@
 
 #include "GeoDataGeometry_p.h"
 
-#include "GeoDataTypes.h"
 #include "GeoDataTrack.h"
 
 namespace Marble
@@ -44,22 +43,13 @@ class GeoDataMultiTrackPrivate : public GeoDataGeometryPrivate
         return *this;
     }
 
-    GeoDataGeometryPrivate* copy() override
+    GeoDataGeometryPrivate *copy() const override
     { 
          GeoDataMultiTrackPrivate* copy = new GeoDataMultiTrackPrivate;
         *copy = *this;
         return copy;
     }
 
-    const char* nodeType() const override
-    {
-        return GeoDataTypes::GeoDataMultiTrackType;
-    }
-
-    EnumGeometryId geometryId() const override
-    {
-        return GeoDataMultiTrackId;
-    }
     QVector<GeoDataTrack*>  m_vector;
 };
 

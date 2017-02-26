@@ -33,11 +33,7 @@ public:
     {
     }
 
-    const char *nodeType() const override { return GeoDataTypes::GeoDataTrackType; }
-
-    GeoDataGeometryPrivate *copy() override { return new GeoDataTrackPrivate( *this ); }
-
-    EnumGeometryId geometryId() const override { return GeoDataTrackId; }
+    GeoDataGeometryPrivate *copy() const override { return new GeoDataTrackPrivate( *this ); }
 
     void equalizeWhenSize()
     {
@@ -76,6 +72,21 @@ GeoDataTrack &GeoDataTrack::operator=( const GeoDataTrack &other )
     GeoDataGeometry::operator=( other );
 
     return *this;
+}
+
+const char *GeoDataTrack::nodeType() const
+{
+    return GeoDataTypes::GeoDataTrackType;
+}
+
+EnumGeometryId GeoDataTrack::geometryId() const
+{
+    return GeoDataTrackId;
+}
+
+GeoDataGeometry *GeoDataTrack::copy() const
+{
+    return new GeoDataTrack(*this);
 }
 
 

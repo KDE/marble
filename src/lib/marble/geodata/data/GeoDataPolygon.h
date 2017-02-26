@@ -92,12 +92,16 @@ class GEODATA_EXPORT GeoDataPolygon : public GeoDataGeometry
 */
     explicit GeoDataPolygon( const GeoDataGeometry &other );
 
-    
 /*!
     \brief Destroys a Polygon.
 */
     ~GeoDataPolygon() override;
 
+    const char *nodeType() const override;
+
+    EnumGeometryId geometryId() const override;
+
+    GeoDataGeometry *copy() const override;
 
 /*!
     \brief Returns true/false depending on whether this and other are/are not equal.

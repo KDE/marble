@@ -13,7 +13,6 @@
 
 #include "GeoDataGeometry_p.h"
 
-#include "GeoDataTypes.h"
 #include "GeoDataLinearRing.h"
 
 namespace Marble
@@ -34,21 +33,11 @@ class GeoDataPolygonPrivate : public GeoDataGeometryPrivate
     {
     }
 
-    GeoDataGeometryPrivate* copy() override
+    GeoDataGeometryPrivate *copy() const override
     { 
          GeoDataPolygonPrivate* copy = new  GeoDataPolygonPrivate;
         *copy = *this;
         return copy;
-    }
-
-    const char* nodeType() const override
-    {
-        return GeoDataTypes::GeoDataPolygonType;
-    }
-
-    EnumGeometryId geometryId() const override
-    {
-        return GeoDataPolygonId;
     }
 
     GeoDataLinearRing           outer;

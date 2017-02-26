@@ -13,8 +13,6 @@
 
 #include "GeoDataLineString_p.h"
 
-#include "GeoDataTypes.h"
-
 namespace Marble
 {
 
@@ -30,21 +28,11 @@ class GeoDataLinearRingPrivate : public GeoDataLineStringPrivate
     {
     }
 
-    GeoDataGeometryPrivate* copy() override
+    GeoDataGeometryPrivate *copy() const override
     { 
         GeoDataLinearRingPrivate* copy = new GeoDataLinearRingPrivate;
         *copy = *this;
         return copy;
-    }
-
-    const char* nodeType() const override
-    {
-        return GeoDataTypes::GeoDataLinearRingType;
-    }
-
-    EnumGeometryId geometryId() const override
-    {
-        return GeoDataLinearRingId;
     }
 };
 

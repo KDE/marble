@@ -65,6 +65,16 @@ GeoDataPoint::~GeoDataPoint()
     // nothing to do
 }
 
+EnumGeometryId GeoDataPoint::geometryId() const
+{
+    return GeoDataPointId;
+}
+
+GeoDataGeometry *GeoDataPoint::copy() const
+{
+    return new GeoDataPoint(*this);
+}
+
 bool GeoDataPoint::operator==( const GeoDataPoint &other ) const
 {
     return equals(other) &&

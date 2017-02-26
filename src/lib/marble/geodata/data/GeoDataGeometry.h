@@ -43,15 +43,11 @@ class GeoDataMultiGeometry;
 class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject
 {
  public:
-    GeoDataGeometry();
-    GeoDataGeometry( const GeoDataGeometry& other );
-    GeoDataGeometry& operator=( const GeoDataGeometry& other );
-    
     ~GeoDataGeometry() override;
 
-    /// Provides type information for downcasting a GeoData
-    const char* nodeType() const override;
-    virtual EnumGeometryId geometryId() const;
+    virtual EnumGeometryId geometryId() const = 0;
+
+    virtual GeoDataGeometry *copy() const = 0;
 
     bool extrude() const;
     void setExtrude( bool extrude );
@@ -70,6 +66,8 @@ class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject
 
  protected:
     explicit GeoDataGeometry( GeoDataGeometryPrivate* priv );
+    explicit GeoDataGeometry(const GeoDataGeometry &other);
+    GeoDataGeometry& operator=(const GeoDataGeometry &other);
 
     bool equals(const GeoDataGeometry &other) const;
 

@@ -32,6 +32,12 @@ public:
 
     ~GeoDataMultiTrack() override;
 
+    const char *nodeType() const override;
+
+    EnumGeometryId geometryId() const override;
+
+    GeoDataGeometry *copy() const override;
+
     bool operator==( const GeoDataMultiTrack& other ) const;
     bool operator!=( const GeoDataMultiTrack& other ) const;
 

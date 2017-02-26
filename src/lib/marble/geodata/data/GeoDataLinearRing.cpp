@@ -12,6 +12,7 @@
 #include "GeoDataLinearRing.h"
 #include "GeoDataLinearRing_p.h"
 
+#include "GeoDataTypes.h"
 #include "MarbleMath.h"
 #include "MarbleDebug.h"
 
@@ -30,6 +31,21 @@ GeoDataLinearRing::GeoDataLinearRing( const GeoDataGeometry & other )
 
 GeoDataLinearRing::~GeoDataLinearRing()
 {
+}
+
+const char *GeoDataLinearRing::nodeType() const
+{
+    return GeoDataTypes::GeoDataLinearRingType;
+}
+
+EnumGeometryId GeoDataLinearRing::geometryId() const
+{
+    return GeoDataLinearRingId;
+}
+
+GeoDataGeometry *GeoDataLinearRing::copy() const
+{
+    return new GeoDataLinearRing(*this);
 }
 
 bool GeoDataLinearRing::operator==( const GeoDataLinearRing &other ) const

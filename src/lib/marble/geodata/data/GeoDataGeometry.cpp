@@ -27,12 +27,6 @@
 namespace Marble
 {
 
-GeoDataGeometry::GeoDataGeometry()
-    : d_ptr(new GeoDataGeometryPrivate())
-{
-    d_ptr->ref.ref();
-}
-
 GeoDataGeometry::GeoDataGeometry( const GeoDataGeometry& other )
     : GeoDataObject(),
       d_ptr(other.d_ptr)
@@ -66,16 +60,6 @@ void GeoDataGeometry::detach()
 
     d_ptr = new_d;
     d_ptr->ref.ref();
-}
-
-const char* GeoDataGeometry::nodeType() const
-{
-    return d_ptr->nodeType();
-}
-
-EnumGeometryId GeoDataGeometry::geometryId() const
-{
-    return d_ptr->geometryId();
 }
 
 GeoDataGeometry& GeoDataGeometry::operator=( const GeoDataGeometry& other )
