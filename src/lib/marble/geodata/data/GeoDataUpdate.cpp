@@ -91,7 +91,12 @@ void GeoDataUpdate::setTargetHref( const QString &targetHref )
     d->m_targetHref = targetHref;
 }
 
-GeoDataChange* GeoDataUpdate::change() const
+const GeoDataChange *GeoDataUpdate::change() const
+{
+    return d->m_change;
+}
+
+GeoDataChange *GeoDataUpdate::change()
 {
     return d->m_change;
 }
@@ -105,7 +110,12 @@ void GeoDataUpdate::setChange( GeoDataChange* change )
     }
 }
 
-GeoDataCreate* GeoDataUpdate::create() const
+const GeoDataCreate *GeoDataUpdate::create() const
+{
+    return d->m_create;
+}
+
+GeoDataCreate *GeoDataUpdate::create()
 {
     return d->m_create;
 }
@@ -119,7 +129,12 @@ void GeoDataUpdate::setCreate( GeoDataCreate* create )
     }
 }
 
-GeoDataDelete* GeoDataUpdate::getDelete() const
+const GeoDataDelete *GeoDataUpdate::getDelete() const
+{
+    return d->m_delete;
+}
+
+GeoDataDelete *GeoDataUpdate::getDelete()
 {
     return d->m_delete;
 }

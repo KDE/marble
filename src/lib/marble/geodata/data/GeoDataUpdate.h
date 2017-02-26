@@ -43,13 +43,16 @@ public:
     QString targetHref() const;
     void setTargetHref( const QString &targetHref );
 
-    GeoDataChange* change() const;
+    const GeoDataChange *change() const;
+    GeoDataChange *change();
     void setChange( GeoDataChange* change );
 
-    GeoDataCreate* create() const;
+    const GeoDataCreate *create() const;
+    GeoDataCreate *create();
     void setCreate( GeoDataCreate* create );
 
-    GeoDataDelete* getDelete() const;
+    const GeoDataDelete *getDelete() const;
+    GeoDataDelete *getDelete();
     void setDelete( GeoDataDelete* dataDelete );
 
 private:
