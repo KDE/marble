@@ -169,7 +169,6 @@ void TourItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &opt
     } else if ( object->nodeType() == GeoDataTypes::GeoDataAnimatedUpdateType && !m_editingIndices.contains( index ) ){
         GeoDataAnimatedUpdate *animUpdate = static_cast<GeoDataAnimatedUpdate*>( object );
         GeoDataUpdate *update = animUpdate->update();
-        QString text;
         bool ok = false;
         QString iconString;
         if( update && update->create() && update->create()->size() != 0
@@ -208,6 +207,7 @@ void TourItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &opt
         QIcon const icon = QIcon( iconString );
         painter->drawPixmap( iconRect, icon.pixmap( iconRect.size() ) );
     }
+
     QApplication::style()->drawControl( QStyle::CE_PushButton, &button, painter );
 }
 
