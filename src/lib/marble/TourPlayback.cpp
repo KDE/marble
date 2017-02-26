@@ -136,8 +136,8 @@ void TourPlayback::setMarbleWidget(MarbleWidget* widget)
 
     connect( this, SIGNAL(added(GeoDataContainer*,GeoDataFeature*,int)),
                       d->m_widget->model()->treeModel(), SLOT(addFeature(GeoDataContainer*,GeoDataFeature*,int)) );
-    connect( this, SIGNAL(removed(const GeoDataFeature*)),
-                      d->m_widget->model()->treeModel(), SLOT(removeFeature(const GeoDataFeature*)) );
+    connect( this, SIGNAL(removed(GeoDataFeature*)),
+                      d->m_widget->model()->treeModel(), SLOT(removeFeature(GeoDataFeature*)) );
     connect( this, SIGNAL(updated(GeoDataFeature*)),
                       d->m_widget->model()->treeModel(), SLOT(updateFeature(GeoDataFeature*)) );
 }

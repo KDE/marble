@@ -91,7 +91,7 @@ public Q_SLOTS:
 
     bool removeFeature( GeoDataContainer *parent, int index );
 
-    int removeFeature( const GeoDataFeature *feature );
+    int removeFeature(GeoDataFeature *feature);
 
     void updateFeature( GeoDataFeature *feature );
 

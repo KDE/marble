@@ -868,7 +868,7 @@ bool GeoDataTreeModel::removeFeature( GeoDataContainer *parent, int row )
     return false; //Tried to remove a row that is not contained in the parent.
 }
 
-int GeoDataTreeModel::removeFeature( const GeoDataFeature *feature )
+int GeoDataTreeModel::removeFeature(GeoDataFeature *feature)
 {
     if ( feature && ( feature!=d->m_rootDocument ) )  {
 
