@@ -85,10 +85,10 @@ void TourItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &opt
 
     QRect const iconRect = position( GeoDataElementIcon, option );
 
-    GeoDataObject *object = qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) );
+    const GeoDataObject *object = qvariant_cast<GeoDataObject*>(index.data(MarblePlacemarkModel::ObjectPointerRole));
     if (!m_editingIndices.contains(index)) {
         if (object->nodeType() == GeoDataTypes::GeoDataTourControlType) {
-            GeoDataTourControl *tourControl = static_cast<GeoDataTourControl*> ( object );
+            const GeoDataTourControl *tourControl = static_cast<const GeoDataTourControl*>(object);
             GeoDataTourControl::PlayMode const playMode = tourControl->playMode();
 
             if ( playMode == GeoDataTourControl::Play ) {
@@ -126,7 +126,7 @@ void TourItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &opt
             QIcon const icon = QIcon(QStringLiteral(":/marble/flag.png"));
             painter->drawPixmap( iconRect, icon.pixmap( iconRect.size() ) );
         } else if (object->nodeType() == GeoDataTypes::GeoDataWaitType) {
-            GeoDataWait *wait = static_cast<GeoDataWait*> ( object );
+            const GeoDataWait *wait = static_cast<const GeoDataWait*>(object);
             label.setHtml( tr("Wait for %1 seconds").arg( QString::number( wait->duration() ) ) );
 
             painter->save();
@@ -143,7 +143,7 @@ void TourItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &opt
             QIcon const icon = QIcon(QStringLiteral(":/marble/player-time.png"));
             painter->drawPixmap( iconRect, icon.pixmap( iconRect.size() ) );
         } else if (object->nodeType() == GeoDataTypes::GeoDataSoundCueType) {
-            GeoDataSoundCue *soundCue = static_cast<GeoDataSoundCue*>( object );
+            const GeoDataSoundCue *soundCue = static_cast<const GeoDataSoundCue*>(object);
             label.setHtml(soundCue->href().section(QLatin1Char('/'), -1));
 
             painter->save();
@@ -166,14 +166,14 @@ void TourItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &opt
             QIcon const icon = QIcon(QStringLiteral(":/marble/audio-x-generic.png"));
             painter->drawPixmap( iconRect, icon.pixmap( iconRect.size() ) );
         } else if (object->nodeType() == GeoDataTypes::GeoDataAnimatedUpdateType) {
-            GeoDataAnimatedUpdate *animUpdate = static_cast<GeoDataAnimatedUpdate*>( object );
-            GeoDataUpdate *update = animUpdate->update();
+            const GeoDataAnimatedUpdate *animUpdate = static_cast<const GeoDataAnimatedUpdate*>(object);
+            const GeoDataUpdate *update = animUpdate->update();
             bool ok = false;
             QString iconString;
             if( update && update->create() && update->create()->size() != 0
                        && ( update->create()->first().nodeType() == GeoDataTypes::GeoDataFolderType ||
                             update->create()->first().nodeType() == GeoDataTypes::GeoDataDocumentType ) ) {
-                GeoDataContainer *container = static_cast<GeoDataContainer*>( update->create()->child( 0 ) );
+                const GeoDataContainer *container = static_cast<const GeoDataContainer*>(update->create()->child(0));
                 if( container->size() > 0 ) {
                     label.setHtml( tr( "Create item %1" ).arg( container->first().id() ) );
                     ok = true;
