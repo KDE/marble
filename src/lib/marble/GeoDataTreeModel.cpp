@@ -119,7 +119,7 @@ GeoDataTreeModel::~GeoDataTreeModel()
 
 bool GeoDataTreeModel::hasChildren( const QModelIndex &parent ) const
 {
-    GeoDataObject *parentItem;
+    const GeoDataObject *parentItem;
     if ( parent.column() > 0 ) {
         return false;
     }
@@ -127,7 +127,7 @@ bool GeoDataTreeModel::hasChildren( const QModelIndex &parent ) const
     if ( !parent.isValid() ) {
         parentItem = d->m_rootDocument;
     } else {
-        parentItem = static_cast<GeoDataObject*>( parent.internalPointer() );
+        parentItem = static_cast<const GeoDataObject *>(parent.internalPointer());
     }
 
     if ( !parentItem ) {
@@ -135,28 +135,28 @@ bool GeoDataTreeModel::hasChildren( const QModelIndex &parent ) const
     }
 
     if ( parentItem->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
-        GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( parentItem );
+        const GeoDataPlacemark *placemark = static_cast<const GeoDataPlacemark *>(parentItem);
         return dynamic_cast<const GeoDataMultiGeometry*>( placemark->geometry() );
     }
 
     if ( parentItem->nodeType() == GeoDataTypes::GeoDataFolderType
          || parentItem->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
-        GeoDataContainer *container = static_cast<GeoDataContainer*>( parentItem );
+        const GeoDataContainer *container = static_cast<const GeoDataContainer *>(parentItem);
         return container->size();
     }
 
     if ( parentItem->nodeType() == GeoDataTypes::GeoDataMultiGeometryType ) {
-        GeoDataMultiGeometry *geometry = static_cast<GeoDataMultiGeometry*>( parentItem );
+        const GeoDataMultiGeometry *geometry = static_cast<const GeoDataMultiGeometry *>(parentItem);
         return geometry->size();
     }
 
     if ( parentItem->nodeType() == GeoDataTypes::GeoDataTourType ) {
-        GeoDataTour *tour = static_cast<GeoDataTour*>( parentItem );
+        const GeoDataTour *tour = static_cast<const GeoDataTour *>(parentItem);
         return tour->playlist();
     }
 
     if ( parentItem->nodeType() == GeoDataTypes::GeoDataPlaylistType ) {
-        GeoDataPlaylist *playlist = static_cast<GeoDataPlaylist*>( parentItem );
+        const GeoDataPlaylist *playlist = static_cast<const GeoDataPlaylist *>(parentItem);
         return playlist->size();
     }
 
@@ -166,7 +166,7 @@ bool GeoDataTreeModel::hasChildren( const QModelIndex &parent ) const
 int GeoDataTreeModel::rowCount( const QModelIndex &parent ) const
 {
 //    mDebug() << "rowCount";
-    GeoDataObject *parentItem;
+    const GeoDataObject *parentItem;
     if ( parent.column() > 0 ) {
 //        mDebug() << "rowCount bad column";
         return 0;
@@ -176,7 +176,7 @@ int GeoDataTreeModel::rowCount( const QModelIndex &parent ) const
 //        mDebug() << "rowCount root parent";
         parentItem = d->m_rootDocument;
     } else {
-        parentItem = static_cast<GeoDataObject*>( parent.internalPointer() );
+        parentItem = static_cast<const GeoDataObject *>(parent.internalPointer());
     }
 
     if ( !parentItem ) {
@@ -186,7 +186,7 @@ int GeoDataTreeModel::rowCount( const QModelIndex &parent ) const
 
     if ( parentItem->nodeType() == GeoDataTypes::GeoDataFolderType
          || parentItem->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
-        GeoDataContainer *container = static_cast<GeoDataContainer*>( parentItem );
+        const GeoDataContainer *container = static_cast<const GeoDataContainer *>(parentItem);
 //        mDebug() << "rowCount " << type << "(" << parentItem << ") =" << container->size();
         return container->size();
 //    } else {
@@ -194,7 +194,7 @@ int GeoDataTreeModel::rowCount( const QModelIndex &parent ) const
     }
 
     if ( parentItem->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
-        GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( parentItem );
+        const GeoDataPlacemark *placemark = static_cast<const GeoDataPlacemark *>(parentItem);
         if ( dynamic_cast<const GeoDataMultiGeometry*>( placemark->geometry() ) ) {
 //            mDebug() << "rowCount " << type << "(" << parentItem << ") = 1";
             return 1;
@@ -202,7 +202,7 @@ int GeoDataTreeModel::rowCount( const QModelIndex &parent ) const
     }
 
     if ( parentItem->nodeType() == GeoDataTypes::GeoDataMultiGeometryType ) {
-        GeoDataMultiGeometry *geometry = static_cast<GeoDataMultiGeometry*>( parentItem );
+        const GeoDataMultiGeometry *geometry = static_cast<const GeoDataMultiGeometry *>(parentItem);
 //        mDebug() << "rowCount " << parent << " " << type << " " << geometry->size();
         return geometry->size();
 //    } else {
@@ -210,8 +210,8 @@ int GeoDataTreeModel::rowCount( const QModelIndex &parent ) const
     }
 
     if ( parentItem->nodeType() == GeoDataTypes::GeoDataTourType ) {
-        GeoDataTour *tour = static_cast<GeoDataTour*>( parentItem );
-        GeoDataPlaylist *playlist = tour->playlist();
+        const GeoDataTour *tour = static_cast<const GeoDataTour *>(parentItem);
+        const GeoDataPlaylist *playlist = tour->playlist();
         if ( playlist ) {
 //            mDebug() << "rowCount " << parent << " Playlist " << 1;
             return 1;
@@ -219,7 +219,7 @@ int GeoDataTreeModel::rowCount( const QModelIndex &parent ) const
     }
 
     if ( parentItem->nodeType() == GeoDataTypes::GeoDataPlaylistType ) {
-        GeoDataPlaylist *playlist = static_cast<GeoDataPlaylist*>( parentItem );
+        const GeoDataPlaylist *playlist = static_cast<const GeoDataPlaylist *>(parentItem);
 //         mDebug() << "rowCount " << parent << " Playlist " << playlist->size();
         return playlist->size();
     }
@@ -648,19 +648,19 @@ Qt::ItemFlags GeoDataTreeModel::flags ( const QModelIndex & index ) const
     if ( !index.isValid() )
         return Qt::NoItemFlags;
 
-    GeoDataObject *object = static_cast<GeoDataObject*>( index.internalPointer() );
+    const GeoDataObject *object = static_cast<const GeoDataObject *>(index.internalPointer());
     if ( object->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
-        GeoDataDocument *document = static_cast<GeoDataDocument*>( object );
+        const GeoDataDocument *document = static_cast<const GeoDataDocument *>(object);
         if( document->documentRole() == UserDocument ) {
             return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable | Qt::ItemIsEditable;
         }
     }
     if ( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
-        GeoDataFeature *feature = static_cast<GeoDataFeature*>( object );
-        GeoDataObject *parent = feature->parent();
+        const GeoDataFeature *feature = static_cast<const GeoDataFeature *>(object);
+        const GeoDataObject *parent = feature->parent();
 
         if ( parent->nodeType() == GeoDataTypes::GeoDataFolderType ) {
-            GeoDataFolder *parentfolder = static_cast<GeoDataFolder *>( parent );
+            const GeoDataFolder *parentfolder = static_cast<const GeoDataFolder *>(parent);
             if ( parentfolder->style()->listStyle().listItemType() == GeoDataListStyle::RadioFolder ) {
                 return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable | Qt::ItemIsEditable;
             } else if ( parentfolder->style()->listStyle().listItemType() == GeoDataListStyle::CheckHideChildren ) {
@@ -669,13 +669,13 @@ Qt::ItemFlags GeoDataTreeModel::flags ( const QModelIndex & index ) const
         }
     }
     if ( object->nodeType() == GeoDataTypes::GeoDataFolderType ) {
-        GeoDataFolder *folder = static_cast<GeoDataFolder *>( object );
+        const GeoDataFolder *folder = static_cast<const GeoDataFolder *>(object);
         if ( folder->style()->listStyle().listItemType() == GeoDataListStyle::RadioFolder) {
             return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable | Qt::ItemIsEditable; 
         } else if ( folder->style()->listStyle().listItemType() == GeoDataListStyle::CheckOffOnly ) {
-            QVector<GeoDataFeature *>::Iterator i = folder->begin();
+            QVector<GeoDataFeature *>::ConstIterator i = folder->constBegin();
             bool allVisible = true;
-            for(; i < folder->end(); ++i) {
+            for (; i < folder->constEnd(); ++i) {
                 if( ! (*i)->isVisible() ) {
                     allVisible = false;
                     break;
@@ -692,12 +692,12 @@ Qt::ItemFlags GeoDataTreeModel::flags ( const QModelIndex & index ) const
     }
     if ( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType
      || object->nodeType() == GeoDataTypes::GeoDataFolderType ) {
-        GeoDataFeature *feature = static_cast<GeoDataFeature*>( object );
-        GeoDataObject *parent = feature->parent();
+        const GeoDataFeature *feature = static_cast<const GeoDataFeature *>(object);
+        const GeoDataObject *parent = feature->parent();
         while( parent->nodeType() != GeoDataTypes::GeoDataDocumentType ) {
             parent = parent->parent();
         }
-        GeoDataDocument *document = static_cast<GeoDataDocument*>( parent );
+        const GeoDataDocument *document = static_cast<const GeoDataDocument *>(parent);
         if( document->documentRole() == UserDocument ) {
             return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable | Qt::ItemIsEditable;;
         }
