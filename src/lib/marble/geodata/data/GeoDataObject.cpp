@@ -62,7 +62,12 @@ GeoDataObject::~GeoDataObject()
     delete d;
 }
 
-GeoDataObject *GeoDataObject::parent() const
+const GeoDataObject *GeoDataObject::parent() const
+{
+    return d->m_parent;
+}
+
+GeoDataObject *GeoDataObject::parent()
 {
     return d->m_parent;
 }

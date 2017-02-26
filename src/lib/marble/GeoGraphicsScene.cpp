@@ -190,11 +190,11 @@ void GeoGraphicsScene::applyHighlight( const QVector< GeoDataPlacemark* > &selec
             auto const & clickedItems = d->m_tiledItems[*tileIter];
             auto iter = clickedItems.find(placemark);
             if (iter != clickedItems.end()) {
-                GeoDataObject *parent = placemark->parent();
+                const GeoDataObject *parent = placemark->parent();
                 if ( parent ) {
                     auto item = *iter;
                     if ( parent->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
-                        GeoDataDocument *doc = static_cast<GeoDataDocument*>( parent );
+                        const GeoDataDocument *doc = static_cast<const GeoDataDocument *>(parent);
                         QString styleUrl = placemark->styleUrl();
                         styleUrl.remove(QLatin1Char('#'));
                         if ( !styleUrl.isEmpty() ) {

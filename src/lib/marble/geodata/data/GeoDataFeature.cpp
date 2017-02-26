@@ -373,7 +373,7 @@ bool GeoDataFeature::isGloballyVisible() const
     if ( parent() == 0 ) {
         return d->m_visible;
     }
-    GeoDataContainer *container = static_cast<GeoDataContainer*>( parent() );
+    const GeoDataContainer *container = static_cast<const GeoDataContainer*>(parent());
     return d->m_visible && container->isGloballyVisible();
 }
 

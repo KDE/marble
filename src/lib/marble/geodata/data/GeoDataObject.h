@@ -55,7 +55,8 @@ public:
     ~GeoDataObject() override;
 
     /// Provides the parent of the object in GeoDataContainers
-    GeoDataObject *parent() const;
+    const GeoDataObject *parent() const;
+    GeoDataObject *parent();
 
     /// Sets the parent of the object
     void setParent(GeoDataObject *parent);
