@@ -73,7 +73,7 @@ private Q_SLOTS:
 
 private:
     static QRect position( Element element, const QStyleOptionViewItem &option );
-    QStringList findIds( GeoDataPlaylist *playlist, bool onlyFeatures = false ) const;
+    static QStringList findIds(const GeoDataPlaylist &playlist, bool onlyFeatures = false);
     GeoDataPlaylist *playlist() const;
     QList<QPersistentModelIndex> m_editingIndices;
     QListView* m_listView;

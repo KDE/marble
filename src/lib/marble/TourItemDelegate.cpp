@@ -234,21 +234,18 @@ QRect TourItemDelegate::position( Element element, const QStyleOptionViewItem &o
     return QRect();
 }
 
-QStringList TourItemDelegate::findIds(GeoDataPlaylist *playlist, bool onlyFeatures) const
+QStringList TourItemDelegate::findIds(const GeoDataPlaylist &playlist, bool onlyFeatures)
 {
-    if( playlist == 0 ) {
-        return QStringList();
-    }
     QStringList result;
-    for( int i = 0; i < playlist->size(); ++i ) {
-        GeoDataTourPrimitive *primitive = playlist->primitive( i );
+    for (int i = 0; i < playlist.size(); ++i) {
+        const GeoDataTourPrimitive *primitive = playlist.primitive(i);
         if( !primitive->id().isEmpty() && !onlyFeatures ) {
             result << primitive->id();
         }
         if( primitive->nodeType() == GeoDataTypes::GeoDataAnimatedUpdateType ) {
-            GeoDataAnimatedUpdate *animatedUpdate = static_cast<GeoDataAnimatedUpdate*>( primitive );
+            const GeoDataAnimatedUpdate *animatedUpdate = static_cast<const GeoDataAnimatedUpdate *>(primitive);
             if( animatedUpdate->update() != 0 ) {
-                GeoDataUpdate *update = animatedUpdate->update();
+                const GeoDataUpdate *update = animatedUpdate->update();
                 if( !update->id().isEmpty() && !onlyFeatures ) {
                     result << update->id();
                 }
@@ -343,7 +340,7 @@ QWidget* TourItemDelegate::createEditor(QWidget* parent, const QStyleOptionViewI
         RemoveItemEditWidget* widget = new RemoveItemEditWidget(index, parent);
         GeoDataPlaylist *playlistObject = playlist();
         if( playlistObject != 0 ) {
-            widget->setFeatureIds( findIds( playlistObject ) );
+            widget->setFeatureIds(findIds(*playlistObject));
         }
         widget->setDefaultFeatureId( m_defaultFeatureId );
         connect(widget, SIGNAL(editingDone(QModelIndex)), this, SLOT(closeEditor(QModelIndex)));
@@ -424,7 +421,7 @@ bool TourItemDelegate::editAnimatedUpdate(GeoDataAnimatedUpdate *animatedUpdate,
     }
     GeoDataPlaylist* playlistObject = playlist();
     if( playlistObject != 0 ) {
-        ids.append( findIds( playlistObject, true ) );
+        ids.append(findIds(*playlistObject, true));
     }
     ids.removeOne( placemark->id() );
     if( create ) {
@@ -495,7 +492,7 @@ void TourItemDelegate::setFirstFlyTo(const QPersistentModelIndex &index )
 void TourItemDelegate::setDefaultFeatureId(const QString &id)
 {
     m_defaultFeatureId = id;
-    QStringList ids = findIds( playlist() );
+    const QStringList ids = playlist() ? findIds(*playlist()) : QStringList();
     emit featureIdsChanged( ids );
     emit defaultFeatureIdChanged( id );
 }
