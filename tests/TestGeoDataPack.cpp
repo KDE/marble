@@ -41,30 +41,6 @@ class TestGeoDataPack : public QObject
         QTime timer;
 };
 
-bool comparePlacemarks( GeoDataPlacemark *left, GeoDataPlacemark *right )
-{
-    bool equal = true;
-    equal &= ( left != 0 );
-    equal &= ( right != 0 );
-    equal &= ( left->name() == right->name() );
-    equal &= ( left->coordinate() == right->coordinate() );
-    equal &= ( left->geometry()->nodeType() == right->geometry()->nodeType() );
-    return equal;
-}
-
-bool compareDocuments( GeoDataDocument *left, GeoDataDocument *right )
-{
-    bool equal = true;
-    equal &= ( left->size() == right->size() );
-    for( int i=0; i< left->size(); ++i ) {
-        if ( left->at(i).nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
-            equal &= comparePlacemarks( dynamic_cast<GeoDataPlacemark*>( left->featureList()[i] ),
-                                        dynamic_cast<GeoDataPlacemark*>( right->featureList()[i] ) );
-        }
-    }
-    return equal;
-}
-
 void TestGeoDataPack::initTestCase()
 {
     MarbleDirs::setMarbleDataPath( DATA_PATH );
@@ -159,7 +135,7 @@ void TestGeoDataPack::loadKMLFromCache()
     QVERIFY( document );
     qDebug() << "parse Timer " << timer.elapsed();
     GeoDataDocument *dataDocument = static_cast<GeoDataDocument*>( document );
-    QVERIFY( compareDocuments( cacheDocument, dataDocument ) );
+    QCOMPARE(*cacheDocument, *dataDocument);
     qDebug() << "compare Timer " << timer.elapsed();
 
     delete document;
