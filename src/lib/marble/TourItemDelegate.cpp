@@ -86,126 +86,126 @@ void TourItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &opt
     QRect const iconRect = position( GeoDataElementIcon, option );
 
     GeoDataObject *object = qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) );
-    if ( object->nodeType() == GeoDataTypes::GeoDataTourControlType && !m_editingIndices.contains( index ) ) {
-        GeoDataTourControl *tourControl = static_cast<GeoDataTourControl*> ( object );
-        GeoDataTourControl::PlayMode const playMode = tourControl->playMode();
+    if (!m_editingIndices.contains(index)) {
+        if (object->nodeType() == GeoDataTypes::GeoDataTourControlType) {
+            GeoDataTourControl *tourControl = static_cast<GeoDataTourControl*> ( object );
+            GeoDataTourControl::PlayMode const playMode = tourControl->playMode();
 
-        if ( playMode == GeoDataTourControl::Play ) {
-            label.setHtml( tr("Play the tour") );
-        } else if ( playMode == GeoDataTourControl::Pause ) {
-            label.setHtml( tr("Pause the tour") );
-        }
-        painter->save();
-        painter->translate( labelRect.topLeft() );
-        painter->setClipRect( 0, 0, labelRect.width(), labelRect.height() );
-        label.documentLayout()->draw( painter, paintContext );
-        painter->restore();
-        button.icon = QIcon(QStringLiteral(":/marble/document-edit.png"));
-
-        QRect const buttonRect = position( EditButton, option );;
-        button.rect = buttonRect;
-
-        QIcon const icon = QIcon(QStringLiteral(":/marble/media-playback-pause.png"));
-        painter->drawPixmap( iconRect, icon.pixmap( iconRect.size() ) );
-
-    } else if ( object->nodeType() == GeoDataTypes::GeoDataFlyToType && !m_editingIndices.contains( index ) ) {
-        GeoDataCoordinates const flyToCoords = index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoDataCoordinates>();
-        label.setHtml( flyToCoords.toString() );
-        button.icon = QIcon(QStringLiteral(":/marble/document-edit.png"));
-
-        painter->save();
-        painter->translate( labelRect.topLeft() );
-        painter->setClipRect( 0, 0, labelRect.width(), labelRect.height() );
-        label.documentLayout()->draw( painter, paintContext );
-        painter->restore();
-
-        QRect const buttonRect = position( EditButton, option );
-        button.rect = buttonRect;
-
-        QIcon const icon = QIcon(QStringLiteral(":/marble/flag.png"));
-        painter->drawPixmap( iconRect, icon.pixmap( iconRect.size() ) );
-
-    } else if ( object->nodeType() == GeoDataTypes::GeoDataWaitType && !m_editingIndices.contains( index ) ) {
-        GeoDataWait *wait = static_cast<GeoDataWait*> ( object );
-        label.setHtml( tr("Wait for %1 seconds").arg( QString::number( wait->duration() ) ) );
-
-        painter->save();
-        painter->translate( labelRect.topLeft() );
-        painter->setClipRect( 0, 0, labelRect.width(), labelRect.height() );
-        label.documentLayout()->draw( painter, paintContext );
-        painter->restore();
-
-        button.icon = QIcon(QStringLiteral(":/marble/document-edit.png"));
-
-        QRect const buttonRect = position( EditButton, option );
-        button.rect = buttonRect;
-
-        QIcon const icon = QIcon(QStringLiteral(":/marble/player-time.png"));
-        painter->drawPixmap( iconRect, icon.pixmap( iconRect.size() ) );
-
-    } else if ( object->nodeType() == GeoDataTypes::GeoDataSoundCueType && !m_editingIndices.contains( index ) ) {
-        GeoDataSoundCue *soundCue = static_cast<GeoDataSoundCue*>( object );
-        label.setHtml(soundCue->href().section(QLatin1Char('/'), -1));
-
-        painter->save();
-        painter->translate( labelRect.topLeft() );
-        painter->setClipRect( 0, 0, labelRect.width(), labelRect.height() );
-        label.documentLayout()->draw( painter, paintContext );
-        painter->restore();
-
-        QStyleOptionButton playButton = button;
-
-        button.icon = QIcon(QStringLiteral(":/marble/document-edit.png"));
-        QRect const buttonRect = position( EditButton, option );
-        button.rect = buttonRect;
-
-        playButton.icon = QIcon(QStringLiteral(":/marble/playback-play.png"));
-        QRect const playButtonRect = position( ActionButton, option );
-        playButton.rect = playButtonRect;
-        QApplication::style()->drawControl( QStyle::CE_PushButton, &playButton, painter );
-
-        QIcon const icon = QIcon(QStringLiteral(":/marble/audio-x-generic.png"));
-        painter->drawPixmap( iconRect, icon.pixmap( iconRect.size() ) );
-    } else if ( object->nodeType() == GeoDataTypes::GeoDataAnimatedUpdateType && !m_editingIndices.contains( index ) ){
-        GeoDataAnimatedUpdate *animUpdate = static_cast<GeoDataAnimatedUpdate*>( object );
-        GeoDataUpdate *update = animUpdate->update();
-        bool ok = false;
-        QString iconString;
-        if( update && update->create() && update->create()->size() != 0
-                   && ( update->create()->first().nodeType() == GeoDataTypes::GeoDataFolderType ||
-                        update->create()->first().nodeType() == GeoDataTypes::GeoDataDocumentType ) ) {
-            GeoDataContainer *container = static_cast<GeoDataContainer*>( update->create()->child( 0 ) );
-            if( container->size() > 0 ) {
-                label.setHtml( tr( "Create item %1" ).arg( container->first().id() ) );
-                ok = true;
-                iconString = QStringLiteral(":/icons/add-placemark.png");
+            if ( playMode == GeoDataTourControl::Play ) {
+                label.setHtml( tr("Play the tour") );
+            } else if ( playMode == GeoDataTourControl::Pause ) {
+                label.setHtml( tr("Pause the tour") );
             }
-        } else if( update && update->getDelete() && update->getDelete()->size() != 0 ){
-            label.setHtml( tr( "Remove item %1" ).arg( update->getDelete()->first().targetId() ) );
-            ok = true;
-            iconString = QStringLiteral(":/icons/remove.png");
-        } else if( update && update->change() && update->change()->size() != 0 ){
-            label.setHtml( tr( "Change item %1" ).arg( update->change()->first().targetId() ) );
-            ok = true;
-            iconString = QStringLiteral(":/marble/document-edit.png");
+            painter->save();
+            painter->translate( labelRect.topLeft() );
+            painter->setClipRect( 0, 0, labelRect.width(), labelRect.height() );
+            label.documentLayout()->draw( painter, paintContext );
+            painter->restore();
+            button.icon = QIcon(QStringLiteral(":/marble/document-edit.png"));
+
+            QRect const buttonRect = position( EditButton, option );;
+            button.rect = buttonRect;
+
+            QIcon const icon = QIcon(QStringLiteral(":/marble/media-playback-pause.png"));
+            painter->drawPixmap( iconRect, icon.pixmap( iconRect.size() ) );
+
+        } else if (object->nodeType() == GeoDataTypes::GeoDataFlyToType) {
+            GeoDataCoordinates const flyToCoords = index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoDataCoordinates>();
+            label.setHtml( flyToCoords.toString() );
+            button.icon = QIcon(QStringLiteral(":/marble/document-edit.png"));
+
+            painter->save();
+            painter->translate( labelRect.topLeft() );
+            painter->setClipRect( 0, 0, labelRect.width(), labelRect.height() );
+            label.documentLayout()->draw( painter, paintContext );
+            painter->restore();
+
+            QRect const buttonRect = position( EditButton, option );
+            button.rect = buttonRect;
+
+            QIcon const icon = QIcon(QStringLiteral(":/marble/flag.png"));
+            painter->drawPixmap( iconRect, icon.pixmap( iconRect.size() ) );
+        } else if (object->nodeType() == GeoDataTypes::GeoDataWaitType) {
+            GeoDataWait *wait = static_cast<GeoDataWait*> ( object );
+            label.setHtml( tr("Wait for %1 seconds").arg( QString::number( wait->duration() ) ) );
+
+            painter->save();
+            painter->translate( labelRect.topLeft() );
+            painter->setClipRect( 0, 0, labelRect.width(), labelRect.height() );
+            label.documentLayout()->draw( painter, paintContext );
+            painter->restore();
+
+            button.icon = QIcon(QStringLiteral(":/marble/document-edit.png"));
+
+            QRect const buttonRect = position( EditButton, option );
+            button.rect = buttonRect;
+
+            QIcon const icon = QIcon(QStringLiteral(":/marble/player-time.png"));
+            painter->drawPixmap( iconRect, icon.pixmap( iconRect.size() ) );
+        } else if (object->nodeType() == GeoDataTypes::GeoDataSoundCueType) {
+            GeoDataSoundCue *soundCue = static_cast<GeoDataSoundCue*>( object );
+            label.setHtml(soundCue->href().section(QLatin1Char('/'), -1));
+
+            painter->save();
+            painter->translate( labelRect.topLeft() );
+            painter->setClipRect( 0, 0, labelRect.width(), labelRect.height() );
+            label.documentLayout()->draw( painter, paintContext );
+            painter->restore();
+
+            QStyleOptionButton playButton = button;
+
+            button.icon = QIcon(QStringLiteral(":/marble/document-edit.png"));
+            QRect const buttonRect = position( EditButton, option );
+            button.rect = buttonRect;
+
+            playButton.icon = QIcon(QStringLiteral(":/marble/playback-play.png"));
+            QRect const playButtonRect = position( ActionButton, option );
+            playButton.rect = playButtonRect;
+            QApplication::style()->drawControl( QStyle::CE_PushButton, &playButton, painter );
+
+            QIcon const icon = QIcon(QStringLiteral(":/marble/audio-x-generic.png"));
+            painter->drawPixmap( iconRect, icon.pixmap( iconRect.size() ) );
+        } else if (object->nodeType() == GeoDataTypes::GeoDataAnimatedUpdateType) {
+            GeoDataAnimatedUpdate *animUpdate = static_cast<GeoDataAnimatedUpdate*>( object );
+            GeoDataUpdate *update = animUpdate->update();
+            bool ok = false;
+            QString iconString;
+            if( update && update->create() && update->create()->size() != 0
+                       && ( update->create()->first().nodeType() == GeoDataTypes::GeoDataFolderType ||
+                            update->create()->first().nodeType() == GeoDataTypes::GeoDataDocumentType ) ) {
+                GeoDataContainer *container = static_cast<GeoDataContainer*>( update->create()->child( 0 ) );
+                if( container->size() > 0 ) {
+                    label.setHtml( tr( "Create item %1" ).arg( container->first().id() ) );
+                    ok = true;
+                    iconString = QStringLiteral(":/icons/add-placemark.png");
+                }
+            } else if( update && update->getDelete() && update->getDelete()->size() != 0 ){
+                label.setHtml( tr( "Remove item %1" ).arg( update->getDelete()->first().targetId() ) );
+                ok = true;
+                iconString = QStringLiteral(":/icons/remove.png");
+            } else if( update && update->change() && update->change()->size() != 0 ){
+                label.setHtml( tr( "Change item %1" ).arg( update->change()->first().targetId() ) );
+                ok = true;
+                iconString = QStringLiteral(":/marble/document-edit.png");
+            }
+            if( update && !ok ) {
+                label.setHtml( tr( "Update items" ) );
+                button.state &= ~QStyle::State_Enabled & ~QStyle::State_Sunken;
+            }
+
+            painter->save();
+            painter->translate( labelRect.topLeft() );
+            painter->setClipRect( 0, 0, labelRect.width(), labelRect.height() );
+            label.documentLayout()->draw( painter, paintContext );
+            painter->restore();
+
+            button.icon = QIcon(QStringLiteral(":/marble/document-edit.png"));
+            QRect const buttonRect = position( EditButton, option );
+            button.rect = buttonRect;
+
+            QIcon const icon = QIcon( iconString );
+            painter->drawPixmap( iconRect, icon.pixmap( iconRect.size() ) );
         }
-        if( update && !ok ) {
-            label.setHtml( tr( "Update items" ) );
-            button.state &= ~QStyle::State_Enabled & ~QStyle::State_Sunken;
-        }
-
-        painter->save();
-        painter->translate( labelRect.topLeft() );
-        painter->setClipRect( 0, 0, labelRect.width(), labelRect.height() );
-        label.documentLayout()->draw( painter, paintContext );
-        painter->restore();
-
-        button.icon = QIcon(QStringLiteral(":/marble/document-edit.png"));
-        QRect const buttonRect = position( EditButton, option );
-        button.rect = buttonRect;
-
-        QIcon const icon = QIcon( iconString );
-        painter->drawPixmap( iconRect, icon.pixmap( iconRect.size() ) );
     }
 
     QApplication::style()->drawControl( QStyle::CE_PushButton, &button, painter );
