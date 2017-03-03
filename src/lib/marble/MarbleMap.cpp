@@ -1444,6 +1444,19 @@ const StyleBuilder* MarbleMap::styleBuilder() const
     return &d->m_styleBuilder;
 }
 
+qreal MarbleMap::heading() const
+{
+    return d->m_viewport.heading() * RAD2DEG;
+}
+
+void MarbleMap::setHeading( qreal heading )
+{
+    d->m_viewport.setHeading( heading * DEG2RAD );
+    d->m_textureLayer.setNeedsUpdate();
+
+    emit visibleLatLonAltBoxChanged( d->m_viewport.viewLatLonAltBox() );
+}
+
 }
 
 #include "moc_MarbleMap.cpp"

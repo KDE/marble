@@ -219,6 +219,8 @@ class MARBLE_EXPORT MarbleMap : public QObject
      */
     qreal centerLatitude() const;
 
+    qreal heading() const;
+
     /**
      * @since 0.26.0
      */
@@ -443,6 +445,8 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @param  radius  The new globe radius value in pixels.
      */
     void setRadius( int radius );
+
+    void setHeading( qreal heading );
 
     /**
      * @brief  Rotate the view by the two angles phi and theta.

@@ -1217,6 +1217,16 @@ const StyleBuilder* MarbleWidget::styleBuilder() const
     return d->m_map.styleBuilder();
 }
 
+void MarbleWidget::setHeading( qreal heading )
+{
+    d->m_map.setHeading( heading );
+}
+
+qreal MarbleWidget::heading() const
+{
+    return d->m_map.heading();
+}
+
 }
 
 #include "moc_MarbleWidget.cpp"
