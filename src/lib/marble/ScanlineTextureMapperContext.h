@@ -74,7 +74,7 @@ private:
 private:
     StackedTileLoader *const m_tileLoader;
     GeoSceneAbstractTileProjection::Type const m_textureProjection;
-    /// size of the tiles of of the current texture layer
+    /// size of the tiles of the current texture layer
     QSize const m_tileSize;
 
     int const        m_tileLevel;

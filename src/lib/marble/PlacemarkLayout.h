@@ -124,7 +124,7 @@ class PlacemarkLayout : public QObject
     /**
      * Returns the coordinates at which an icon should be drawn for the @p placemark.
      * @p ok is set to true if the coordinates are valid and should be used for drawing,
-     * it it set to false otherwise.
+     * it is set to false otherwise.
      */
     GeoDataCoordinates placemarkIconCoordinates( const GeoDataPlacemark *placemark ) const;
 

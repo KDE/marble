@@ -104,7 +104,7 @@ class MARBLE_EXPORT QtMarbleConfigDialog : public QDialog
 
     Q_SIGNALS:
     /**
-     * This signal is emitted when when the loaded settings were changed.
+     * This signal is emitted when the loaded settings were changed.
      * Either by the user or by loading them initially from disk.
      */
     void settingsChanged();
