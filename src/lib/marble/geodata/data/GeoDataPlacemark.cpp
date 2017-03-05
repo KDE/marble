@@ -89,10 +89,16 @@ bool GeoDataPlacemark::operator==( const GeoDataPlacemark& other ) const
         return false;
     }
 
-    if ((d->m_placemarkExtendedData && !other_d->m_placemarkExtendedData) ||
-        (!d->m_placemarkExtendedData && other_d->m_placemarkExtendedData)) {
+    if ((d->m_placemarkExtendedData && !other_d->m_placemarkExtendedData) &&
+        (*d->m_placemarkExtendedData != GeoDataPlacemarkExtendedData())) {
         return false;
     }
+
+    if ((!d->m_placemarkExtendedData && other_d->m_placemarkExtendedData) &&
+        (GeoDataPlacemarkExtendedData() != *other_d->m_placemarkExtendedData)) {
+        return false;
+    }
+
     if (d->m_placemarkExtendedData && other_d->m_placemarkExtendedData &&
             !(*d->m_placemarkExtendedData == *other_d->m_placemarkExtendedData)) {
         return false;

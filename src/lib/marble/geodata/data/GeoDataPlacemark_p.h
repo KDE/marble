@@ -50,6 +50,11 @@ public:
                 m_state == other.m_state;
     }
 
+    bool operator!=(const GeoDataPlacemarkExtendedData &other) const
+    {
+        return !(*this == other);
+    }
+
     QString             m_countrycode;  // Country code.
     qreal               m_area;         // Area in square kilometer
     QString             m_state;        // State
