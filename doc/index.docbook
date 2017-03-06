@@ -1,7 +1,5 @@
 <?xml version="1.0" ?>
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
-<!ENTITY kappname "&marble;"><!-- replace kapp here -->
- <!ENTITY package "kdeedu">
  <!ENTITY % addindex "IGNORE">
  <!ENTITY % English "INCLUDE"><!-- change language only here -->
  ]>
@@ -881,7 +879,8 @@ If a GPS device is connected with your computer, &marble; displays longitude and
 
 			 <sect2>
 				 <title>The Help Menu</title>
-				 &help.menu.documentation;
+				 <para>&marble; has the common &kde; <guimenu>Help</guimenu> menu item, for more information read the section
+				 about the <ulink url="help:/fundamentals/ui.html#menus-help">Help Menu</ulink> of the &kde; Fundamentals.</para>
 			 </sect2>
 		 </sect1>
 	 </chapter>
@@ -1488,13 +1487,6 @@ url="https://owncloud.com/">ownClowd official website</ulink>.</para>
 
 	 <appendix id="installation">
 		 <title>Installation</title>
-
-		 <sect1 id="getting-marble">
-			 <title>How to obtain &marble;</title>
-
-			 &install.intro.documentation;
-
-		 </sect1>
 
 		 <sect1 id="requirements">
 			 <title>Requirements</title>
