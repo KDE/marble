@@ -44,8 +44,7 @@ void TestGeoData::nodeTypeTest()
     GeoDataDocument document;
     document.append( folder );
     GeoDataFeature &featureRef = document.last();
-    QCOMPARE( featureRef.nodeType(), folderType );
-    QCOMPARE( static_cast<GeoDataObject*>(&featureRef)->nodeType(), folderType );
+    QVERIFY(geodata_cast<GeoDataFolder>(&featureRef));
 }
 
 void TestGeoData::parentingTest()
@@ -72,7 +71,7 @@ void TestGeoData::parentingTest()
 
     /// retrieve child and check it matches placemark
     GeoDataPlacemark *placemarkPtr;
-    QCOMPARE(document->child(0)->nodeType(), placemark->nodeType());
+    QVERIFY(geodata_cast<GeoDataPlacemark>(document->child(0)));
     placemarkPtr = static_cast<GeoDataPlacemark*>(document->child(0));
     QCOMPARE(placemarkPtr, placemark);
 
@@ -82,7 +81,7 @@ void TestGeoData::parentingTest()
 
     /// retrieve child two and check it matches folder
     GeoDataFolder *folderPtr;
-    QCOMPARE(document->child(1)->nodeType(), folder->nodeType());
+    QVERIFY(geodata_cast<GeoDataFolder>(document->child(1)));
     folderPtr = static_cast<GeoDataFolder*>(document->child(1));
     QCOMPARE(folderPtr, folder);
 

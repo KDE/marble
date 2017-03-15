@@ -10,7 +10,6 @@
 
 #include "KmlFeatureTagWriter.h"
 
-#include "GeoDataTypes.h"
 #include "GeoDataOverlay.h"
 #include "GeoDataTimeStamp.h"
 #include "GeoDataTimeSpan.h"
@@ -19,6 +18,7 @@
 #include "GeoDataStyleMap.h"
 #include "GeoDataExtendedData.h"
 #include "GeoDataLookAt.h"
+#include "GeoDataPlacemark.h"
 #include "GeoDataCamera.h"
 #include "GeoWriter.h"
 #include "GeoDataRegion.h"
@@ -41,9 +41,7 @@ KmlFeatureTagWriter::KmlFeatureTagWriter(const QString &elementName)
 
 bool KmlFeatureTagWriter::write( const Marble::GeoNode *node, GeoWriter &writer ) const
 {
-    if ( node->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
-        const GeoDataDocument *document = static_cast<const GeoDataDocument*>(node);
-
+    if (const GeoDataDocument *document = geodata_cast<GeoDataDocument>(node)) {
         // when a document has only one feature and no styling
         // the document tag is excused
         if( (document->id().isEmpty())
@@ -100,7 +98,7 @@ bool KmlFeatureTagWriter::write( const Marble::GeoNode *node, GeoWriter &writer 
 
     bool const result = writeMid( node, writer );
 
-    if (feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
+    if (geodata_cast<GeoDataPlacemark>(feature)) {
         KmlOsmPlacemarkDataTagWriter::write(feature, writer);
     }
 

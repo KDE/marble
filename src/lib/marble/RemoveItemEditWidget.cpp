@@ -16,7 +16,6 @@
 #include "RemoveItemEditWidget.h"
 #include "MarbleWidget.h"
 #include "geodata/data/GeoDataAnimatedUpdate.h"
-#include "GeoDataTypes.h"
 #include "GeoDataUpdate.h"
 #include "GeoDataDelete.h"
 #include "MarblePlacemarkModel.h"
@@ -85,8 +84,9 @@ GeoDataAnimatedUpdate* RemoveItemEditWidget::animatedUpdateElement()
 {
     GeoDataObject *object = qvariant_cast<GeoDataObject*>(m_index.data( MarblePlacemarkModel::ObjectPointerRole ) );
     Q_ASSERT( object );
-    Q_ASSERT( object->nodeType() == GeoDataTypes::GeoDataAnimatedUpdateType );
-    return static_cast<GeoDataAnimatedUpdate*>( object );
+    auto animatedUpdate = geodata_cast<GeoDataAnimatedUpdate>(object);
+    Q_ASSERT(animatedUpdate);
+    return animatedUpdate;
 }
 
 } // namespace Marble

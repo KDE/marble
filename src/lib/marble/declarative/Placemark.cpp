@@ -689,17 +689,15 @@ void Placemark::updateTags()
 
 void Placemark::updateRelations(const Marble::GeoDataPlacemark &placemark)
 {
-    if (placemark.parent() && placemark.parent()->nodeType() == GeoDataTypes::GeoDataDocumentType) {
+    if (const auto document = (placemark.parent() ? geodata_cast<GeoDataDocument>(placemark.parent()) : 0)) {
         QVector<const GeoDataRelation*> allRelations;
         QSet<const GeoDataRelation*> relevantRelations;
-        auto const document = static_cast<const GeoDataDocument*>(placemark.parent());
         QSet<qint64> placemarkIds;
         auto const & osmData = placemark.osmData();
         placemarkIds << osmData.oid();
         bool searchRelations = true;
         for (auto feature: document->featureList()) {
-            if (feature->nodeType() == GeoDataTypes::GeoDataRelationType) {
-                auto relation = static_cast<const GeoDataRelation*>(feature);
+            if (const auto relation = geodata_cast<GeoDataRelation>(feature)) {
                 allRelations << relation;
                 if (relation->memberIds().contains(osmData.oid())) {
                     relevantRelations << relation;
@@ -710,8 +708,7 @@ void Placemark::updateRelations(const Marble::GeoDataPlacemark &placemark)
         }
         if (searchRelations) {
             for (auto feature: document->featureList()) {
-                if (feature->nodeType() == GeoDataTypes::GeoDataRelationType) {
-                    auto relation = static_cast<const GeoDataRelation*>(feature);
+                if (const auto relation = geodata_cast<GeoDataRelation>(feature)) {
                     if (relevantRelations.contains(relation) &&
                             relation->osmData().containsTag(QStringLiteral("type"), QStringLiteral("public_transport")) &&
                             relation->osmData().containsTag(QStringLiteral("public_transport"), QStringLiteral("stop_area"))) {

@@ -19,7 +19,6 @@
 #include <marble/GeoDataTreeModel.h>
 #include <marble/MarblePlacemarkModel.h>
 #include <marble/GeoDataLinearRing.h>
-#include <marble/GeoDataTypes.h>
 #include <marble/MarbleMath.h>
 #include <marble/ViewportParams.h>
 
@@ -153,8 +152,7 @@ void MyPaintLayer::addRandomCity ( double minDistance, double maxDistance )
         QVariant const data = tree->data ( tree->index ( i, 0 ), MarblePlacemarkModel::ObjectPointerRole );
         GeoDataObject *object = qvariant_cast<GeoDataObject*> ( data );
         Q_ASSERT ( object );
-        if ( object->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
-            GeoDataDocument* document = static_cast<GeoDataDocument*> ( object );
+        if (const auto document = geodata_cast<GeoDataDocument>(object)) {
             if (document->name() == QLatin1String("cityplacemarks")) {
                 QVector<GeoDataPlacemark*> placemarks = document->placemarkList();
                 for ( int i = qrand() % placemarks.size(); i < placemarks.size(); ++i ) {

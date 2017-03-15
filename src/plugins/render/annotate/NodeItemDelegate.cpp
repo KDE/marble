@@ -18,7 +18,6 @@
 // Marble
 #include "LatLonEdit.h"
 #include "GeoDataPlacemark.h"
-#include "GeoDataTypes.h"
 #include "GeoDataLineString.h"
 #include "GeoDataLinearRing.h"
 #include "GeoDataPolygon.h"
@@ -54,10 +53,7 @@ void NodeItemDelegate::setEditorData(QWidget *editor, const QModelIndex &index) 
     LatLonEdit *latLonEditWidget = static_cast<LatLonEdit*>(editor);
     qreal value = 0;
 
-    if( m_placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
-
-        GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( m_placemark->geometry() );
-
+    if (const auto polygon = geodata_cast<GeoDataPolygon>(m_placemark->geometry())) {
         GeoDataLinearRing outerBoundary = polygon->outerBoundary();
 
         // Setting the latlonedit spinboxes values
@@ -70,10 +66,7 @@ void NodeItemDelegate::setEditorData(QWidget *editor, const QModelIndex &index) 
             value = outerBoundary.at( index.row() ).latitude( GeoDataCoordinates::Degree );
         }
     }
-    else if ( m_placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType ) {
-
-        GeoDataLineString *lineString = static_cast<GeoDataLineString*>( m_placemark->geometry() );
-
+    else if (const auto lineString = geodata_cast<GeoDataLineString>(m_placemark->geometry())) {
         // Setting the latlonedit spinboxes values
         if( index.column() == 1 ) {
             latLonEditWidget->setDimension( Marble::Longitude );
@@ -105,8 +98,7 @@ void NodeItemDelegate::setModelData( QWidget* editor, QAbstractItemModel *model,
 
 void NodeItemDelegate::previewNodeMove( qreal value )
 {
-    if( m_placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
-        GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( m_placemark->geometry() );
+    if (const auto polygon = geodata_cast<GeoDataPolygon>(m_placemark->geometry())) {
         GeoDataLinearRing outerBoundary = polygon->outerBoundary();
 
         GeoDataCoordinates* coordinates = new GeoDataCoordinates( outerBoundary[m_indexBeingEdited.row()] );
@@ -121,9 +113,7 @@ void NodeItemDelegate::previewNodeMove( qreal value )
         outerBoundary[ m_indexBeingEdited.row() ] = *coordinates;
         polygon->setOuterBoundary( outerBoundary );
     }
-    else if ( m_placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType ) {
-
-        GeoDataLineString *lineString = static_cast<GeoDataLineString*>( m_placemark->geometry() );
+    else if (const auto lineString = geodata_cast<GeoDataLineString>(m_placemark->geometry())) {
         GeoDataCoordinates* coordinates = new GeoDataCoordinates( lineString->at( m_indexBeingEdited.row() ) );
 
         if( m_indexBeingEdited.column() == 1) {

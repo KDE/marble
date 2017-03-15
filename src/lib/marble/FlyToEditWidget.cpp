@@ -20,7 +20,6 @@
 #include "MarbleWidget.h"
 #include "geodata/data/GeoDataFlyTo.h"
 #include "GeoDataLookAt.h"
-#include "GeoDataTypes.h"
 #include "GeoDataCamera.h"
 #include "MarblePlacemarkModel.h"
 
@@ -120,14 +119,12 @@ void FlyToEditWidget::save()
 {
     if (flyToElement()->view() != 0 && m_coord != GeoDataCoordinates()) {
         GeoDataCoordinates coords = m_coord;
-        if ( flyToElement()->view()->nodeType() == GeoDataTypes::GeoDataCameraType ) {
-            GeoDataCamera* camera = dynamic_cast<GeoDataCamera*>( flyToElement()->view() );
+        if (auto camera = geodata_cast<GeoDataCamera>(flyToElement()->view())) {
             camera->setCoordinates( coords );
-        } else if ( flyToElement()->view()->nodeType() == GeoDataTypes::GeoDataLookAtType ) {
-            GeoDataLookAt* lookAt = dynamic_cast<GeoDataLookAt*>( flyToElement()->view() );
+        } else if (auto lookAt = geodata_cast<GeoDataLookAt>(flyToElement()->view())) {
             lookAt->setCoordinates( coords );
         } else{
-            GeoDataLookAt* lookAt = new GeoDataLookAt;
+            lookAt = new GeoDataLookAt;
             lookAt->setCoordinates( coords );
             flyToElement()->setView( lookAt );
         }
@@ -148,8 +145,9 @@ GeoDataFlyTo* FlyToEditWidget::flyToElement()
 {
     GeoDataObject *object = qvariant_cast<GeoDataObject*>(m_index.data( MarblePlacemarkModel::ObjectPointerRole ) );
     Q_ASSERT( object );
-    Q_ASSERT( object->nodeType() == GeoDataTypes::GeoDataFlyToType );
-    return static_cast<GeoDataFlyTo*>( object );
+    auto flyTo = geodata_cast<GeoDataFlyTo>(object);
+    Q_ASSERT(flyTo);
+    return flyTo;
 }
 
 } // namespace Marble

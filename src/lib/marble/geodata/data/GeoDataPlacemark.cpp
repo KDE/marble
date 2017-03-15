@@ -225,32 +225,28 @@ GeoDataCoordinates GeoDataPlacemark::coordinate( const QDateTime &dateTime, bool
  
     if (d->m_geometry) {
         // Beware: comparison between pointers, not strings.
-        if (d->m_geometry->nodeType() == GeoDataTypes::GeoDataPointType
-                || d->m_geometry->nodeType() == GeoDataTypes::GeoDataPolygonType
-                || d->m_geometry->nodeType() == GeoDataTypes::GeoDataLinearRingType) {
+        if (geodata_cast<GeoDataPoint>(d->m_geometry)
+                || geodata_cast<GeoDataPolygon>(d->m_geometry)
+                || geodata_cast<GeoDataLinearRing>(d->m_geometry)) {
             hasIcon = true;
             coord = d->m_geometry->latLonAltBox().center();
-        } else if (d->m_geometry->nodeType() == GeoDataTypes::GeoDataMultiGeometryType) {
-            const GeoDataMultiGeometry *multiGeometry = static_cast<const GeoDataMultiGeometry *>(d->m_geometry);
-
+        } else if (const auto multiGeometry = geodata_cast<GeoDataMultiGeometry>(d->m_geometry)) {
             QVector<GeoDataGeometry*>::ConstIterator it = multiGeometry->constBegin();
             QVector<GeoDataGeometry*>::ConstIterator end = multiGeometry->constEnd();
             for ( ; it != end; ++it ) {
-                if ((*it)->nodeType() == GeoDataTypes::GeoDataPointType
-                        || (*it)->nodeType() == GeoDataTypes::GeoDataPolygonType
-                        || (*it)->nodeType() == GeoDataTypes::GeoDataLinearRingType) {
+                if (geodata_cast<GeoDataPoint>(*it)
+                        || geodata_cast<GeoDataPolygon>(*it)
+                        || geodata_cast<GeoDataLinearRing>(*it)) {
                     hasIcon = true;
                     break;
                 }
             }
 
             coord = d->m_geometry->latLonAltBox().center();
-        } else if (d->m_geometry->nodeType() == GeoDataTypes::GeoDataTrackType) {
-            const GeoDataTrack *track = static_cast<const GeoDataTrack *>(d->m_geometry);
+        } else if (const auto track = geodata_cast<GeoDataTrack>(d->m_geometry)) {
             hasIcon = track->size() != 0 && track->firstWhen() <= dateTime;
             coord = track->coordinatesAt( dateTime );
-        } else if (d->m_geometry->nodeType() == GeoDataTypes::GeoDataLineStringType) {
-            GeoDataLineString const *lineString = static_cast<const GeoDataLineString *>(d->m_geometry);
+        } else if (const auto lineString = geodata_cast<GeoDataLineString>(d->m_geometry)) {
             auto const size = lineString->size();
             if (size == 0) {
                 return GeoDataCoordinates();

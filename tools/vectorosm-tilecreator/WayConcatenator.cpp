@@ -12,7 +12,6 @@
 #include <QHash>
 #include <QSet>
 
-#include "GeoDataTypes.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataDocument.h"
 #include "GeoDataObject.h"
@@ -33,10 +32,9 @@ WayConcatenator::WayConcatenator(GeoDataDocument *document) :
 {
     typedef QSharedPointer<GeoDataPlacemark> PlacemarkPtr;
     for (GeoDataFeature *feature: document->featureList()) {
-        if (feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
-            GeoDataPlacemark* original = static_cast<GeoDataPlacemark*>(feature);
+        if (const auto original = geodata_cast<GeoDataPlacemark>(feature)) {
             bool isWay = false;
-            if (original->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType) {
+            if (geodata_cast<GeoDataLineString>(original->geometry())) {
                 PlacemarkPtr placemark = PlacemarkPtr(new GeoDataPlacemark(*original));
                 OsmObjectManager::initializeOsmData(placemark.data());
                 OsmPlacemarkData const & osmData = placemark->osmData();

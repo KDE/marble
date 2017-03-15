@@ -19,7 +19,6 @@
 #include "SoundCueEditWidget.h"
 #include "MarbleWidget.h"
 #include "geodata/data/GeoDataSoundCue.h"
-#include "GeoDataTypes.h"
 #include "MarblePlacemarkModel.h"
 
 namespace Marble {
@@ -79,8 +78,9 @@ GeoDataSoundCue* SoundCueEditWidget::soundCueElement()
 {
     GeoDataObject *object = qvariant_cast<GeoDataObject*>(m_index.data( MarblePlacemarkModel::ObjectPointerRole ) );
     Q_ASSERT( object );
-    Q_ASSERT( object->nodeType() == GeoDataTypes::GeoDataSoundCueType );
-    return static_cast<GeoDataSoundCue*>( object );
+    auto soundCue = geodata_cast<GeoDataSoundCue>(object);
+    Q_ASSERT(soundCue);
+    return soundCue;
 }
 
 } // namespace Marble

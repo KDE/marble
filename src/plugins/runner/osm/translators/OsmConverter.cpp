@@ -23,7 +23,6 @@
 #include "GeoDataPolygon.h"
 #include "GeoDataRelation.h"
 #include "GeoDataLinearRing.h"
-#include "GeoDataTypes.h"
 #include "osm/OsmPlacemarkData.h"
 #include "osm/OsmObjectManager.h"
 #include "OsmRelationTagWriter.h"
@@ -41,28 +40,24 @@ void OsmConverter::read(const GeoDataDocument *document)
 
     // Writing all the component nodes ( points, nodes of polylines, nodes of polygons )
     for (auto feature: document->featureList()) {
-        if (feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
-            GeoDataPlacemark* placemark = static_cast<GeoDataPlacemark*>(feature);
+        if (auto placemark = geodata_cast<GeoDataPlacemark>(feature)) {
             // If the placemark's osmData is not complete, it is initialized by the OsmObjectManager
             OsmObjectManager::initializeOsmData( placemark );
             const OsmPlacemarkData & osmData = placemark->osmData();
 
-            if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPointType ) {
+            if (geodata_cast<GeoDataPoint>(placemark->geometry())) {
                 m_nodes << OsmConverter::Node(placemark->coordinate(), osmData);
-            } else if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType ) {
-                const GeoDataLineString* lineString = static_cast<const GeoDataLineString*>( placemark->geometry() );
+            } else if (const auto lineString = geodata_cast<GeoDataLineString>(placemark->geometry())) {
                 for (auto const &coordinates: *lineString) {
                     m_nodes << OsmConverter::Node(coordinates, osmData.nodeReference(coordinates));
                 }
                 m_ways << OsmConverter::Way(lineString, osmData);
-            } else if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLinearRingType ) {
-                const GeoDataLinearRing* linearRing = static_cast<const GeoDataLinearRing*>( placemark->geometry() );
+            } else if (const auto linearRing = geodata_cast<GeoDataLinearRing>(placemark->geometry())) {
                 for (auto const &coordinates: *linearRing) {
                     m_nodes << OsmConverter::Node(coordinates, osmData.nodeReference(coordinates));
                 }
                 m_ways << OsmConverter::Way(linearRing, osmData);
-            } else if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
-                const GeoDataPolygon *polygon = static_cast<const GeoDataPolygon*>( placemark->geometry() );
+            } else if (const auto polygon = geodata_cast<GeoDataPolygon>(placemark->geometry())) {
                 int index = -1;
 
                 // Writing all the outerRing's nodes
@@ -84,8 +79,7 @@ void OsmConverter::read(const GeoDataDocument *document)
                 }
                 m_relations.append(OsmConverter::Relation(placemark, osmData));
             }
-        } else if (feature->nodeType() == GeoDataTypes::GeoDataRelationType) {
-            GeoDataRelation* placemark = static_cast<GeoDataRelation*>(feature);
+        } else if (const auto placemark = geodata_cast<GeoDataRelation>(feature)) {
             m_relations.append(OsmConverter::Relation(placemark, placemark->osmData()));
         }
     }

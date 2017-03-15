@@ -10,7 +10,6 @@
 
 #include "PlaybackFlyToItem.h"
 
-#include "GeoDataTypes.h"
 #include "GeoDataLookAt.h"
 #include "GeoDataCamera.h"
 #include "GeoDataFlyTo.h"

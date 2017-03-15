@@ -18,15 +18,20 @@
 #include "GeoDataParser.h"
 #include "GeoDataDocument.h"
 #include "GeoDataFolder.h"
+#include "GeoDataGroundOverlay.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataData.h"
 #include "GeoDataExtendedData.h"
 #include "GeoDataStyle.h"
 #include "GeoDataStyleMap.h"
+#include "GeoDataPhotoOverlay.h"
+#include "GeoDataPoint.h"
 #include "GeoDataPolyStyle.h"
 #include "GeoDataLineStyle.h"
 #include "GeoDataPolygon.h"
-#include "GeoDataTypes.h"
+#include "GeoDataScreenOverlay.h"
+#include "GeoDataTour.h"
+#include "GeoDataTrack.h"
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
 #include "MarbleModel.h"
@@ -224,8 +229,7 @@ void FileLoaderPrivate::documentParsed( GeoDataDocument* doc, const QString& err
 
         if (m_renderOrder != 0) {
             for (GeoDataPlacemark* placemark: doc->placemarkList()) {
-                if (placemark->geometry() && placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType) {
-                    GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>(placemark->geometry());
+                if (GeoDataPolygon *polygon = geodata_cast<GeoDataPolygon>(placemark->geometry())) {
                     polygon->setRenderOrder(m_renderOrder);
                 }
             }
@@ -246,22 +250,19 @@ void FileLoaderPrivate::createFilterProperties( GeoDataContainer *container )
     for (; i != end; ++i ) {
         if (auto child = dynamic_cast<GeoDataContainer *>(*i)) {
             createFilterProperties( child );
-        } else if (    (*i)->nodeType() == GeoDataTypes::GeoDataTourType
-                    || (*i)->nodeType() == GeoDataTypes::GeoDataGroundOverlayType
-                    || (*i)->nodeType() == GeoDataTypes::GeoDataPhotoOverlayType
-                    || (*i)->nodeType() == GeoDataTypes::GeoDataScreenOverlayType ) {
+        } else if (geodata_cast<GeoDataTour>(*i)
+                    || geodata_cast<GeoDataGroundOverlay>(*i)
+                    || geodata_cast<GeoDataPhotoOverlay>(*i)
+                    || geodata_cast<GeoDataScreenOverlay>(*i)) {
             /** @todo: How to handle this ? */
-        } else if ( (*i)->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
-            Q_ASSERT( dynamic_cast<GeoDataPlacemark*>( *i ) );
-
-            GeoDataPlacemark* placemark = static_cast<GeoDataPlacemark*>( *i );
+        } else if (auto placemark = geodata_cast<GeoDataPlacemark>(*i)) {
             const QString placemarkRole = placemark->role();
             Q_ASSERT( placemark->geometry() );
 
             bool hasPopularity = false;
 
-            if ( placemark->geometry()->nodeType() != GeoDataTypes::GeoDataTrackType &&
-                placemark->geometry()->nodeType() != GeoDataTypes::GeoDataPointType
+            if (!geodata_cast<GeoDataTrack>(placemark->geometry()) &&
+                !geodata_cast<GeoDataPoint>(placemark->geometry())
                  && m_documentRole == MapDocument
                  && m_style ) {
                 placemark->setStyleUrl(styleUrl);

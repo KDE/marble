@@ -78,9 +78,7 @@ const GeoDataLatLonAltBox& GeoDataRegion::latLonAltBox() const
         // If there is a parent try to 
         if ( d->m_parent ) {
 
-            if ( d->m_parent->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
-
-                GeoDataPlacemark * placemark = dynamic_cast<GeoDataPlacemark*>( d->m_parent );
+            if (const GeoDataPlacemark *placemark = geodata_cast<GeoDataPlacemark>(d->m_parent)) {
                 const GeoDataGeometry * geometry = placemark->geometry();
                 if ( geometry ) {
                     d->m_latLonAltBox = new GeoDataLatLonAltBox( placemark->geometry()->latLonAltBox() );

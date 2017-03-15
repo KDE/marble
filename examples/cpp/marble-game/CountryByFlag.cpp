@@ -98,8 +98,7 @@ void CountryByFlag::initiateGame()
             GeoDataObject *object = qvariant_cast<GeoDataObject*>( data );
             Q_ASSERT_X( object, "CountryByFlag::initiateGame",
                         "failed to get valid data from treeModel for GeoDataObject" );
-            if ( object->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
-                GeoDataDocument *doc = static_cast<GeoDataDocument*>( object );
+            if (auto doc = geodata_cast<GeoDataDocument>(object)) {
                 QFileInfo fileInfo( doc->fileName() );
                 if (fileInfo.fileName() == QLatin1String("boundaryplacemarks.cache")) {
                     d->m_countryNames = doc;

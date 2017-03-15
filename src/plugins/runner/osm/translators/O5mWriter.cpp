@@ -10,7 +10,6 @@
 
 #include "O5mWriter.h"
 
-#include "GeoDataTypes.h"
 #include "GeoDataDocument.h"
 #include "GeoDataLineString.h"
 #include "GeoDataLinearRing.h"
@@ -171,13 +170,11 @@ void O5mWriter::writeRelations(const OsmConverter::Relations &relations, QDataSt
         QBuffer referencesBuffer;
         referencesBuffer.open(QIODevice::WriteOnly);
         QDataStream referencesStream(&referencesBuffer);
-        if (relation.first->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
-            auto placemark = static_cast<const GeoDataPlacemark*>(relation.first);
-            Q_ASSERT(placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType);
-            auto polygon = static_cast<const GeoDataPolygon*>(placemark->geometry());
+        if (const auto placemark = geodata_cast<GeoDataPlacemark>(relation.first)) {
+            auto polygon = geodata_cast<GeoDataPolygon>(placemark->geometry());
+            Q_ASSERT(polygon);
             writeMultipolygonMembers(*polygon, lastReferenceId, osmData, stringTable, referencesStream);
-        } else if (relation.first->nodeType() == GeoDataTypes::GeoDataRelationType) {
-            auto placemark = static_cast<const GeoDataRelation*>(relation.first);
+        } else if (const auto placemark = geodata_cast<GeoDataRelation>(relation.first)) {
             writeRelationMembers(placemark, lastReferenceId, osmData, stringTable, referencesStream);
         } else {
             Q_ASSERT(false);

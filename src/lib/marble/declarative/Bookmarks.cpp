@@ -79,8 +79,7 @@ Placemark *Bookmarks::placemark(int row)
 
     QModelIndex index = model()->index(row, 0);
     GeoDataObject *object = model()->data(index, MarblePlacemarkModel::ObjectPointerRole ).value<GeoDataObject*>();
-    if (object->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
-        GeoDataPlacemark *geoDataPlacemark = static_cast<GeoDataPlacemark*>(object);
+    if (GeoDataPlacemark *geoDataPlacemark = geodata_cast<GeoDataPlacemark>(object)) {
         placemark->setGeoDataPlacemark(*geoDataPlacemark);
     }
 

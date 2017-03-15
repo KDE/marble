@@ -12,7 +12,7 @@
 #include "GeoDataGeometry.h"
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataPlacemark.h"
-#include "GeoDataTypes.h"
+#include "GeoDataPolygon.h"
 #include "MarbleDirs.h"
 #include "MarbleModel.h"
 #include "MbTileWriter.h"
@@ -43,7 +43,7 @@ GeoDataDocument* mergeDocuments(GeoDataDocument* map1, GeoDataDocument* map2)
     marbleLand.addTag("marble_land","landmass");
     for (auto placemark: map2->placemarkList()) {
         GeoDataPlacemark* land = new GeoDataPlacemark(*placemark);
-        if(land->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType) {
+        if (geodata_cast<GeoDataPolygon>(land->geometry())) {
             land->setOsmData(marbleLand);
         }
         mergedMap->append(land);

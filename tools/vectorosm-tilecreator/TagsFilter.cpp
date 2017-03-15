@@ -16,7 +16,6 @@
 #include "GeoDataDocument.h"
 #include "OsmPlacemarkData.h"
 #include "GeoDataPlacemark.h"
-#include "GeoDataTypes.h"
 
 namespace Marble {
 
@@ -24,8 +23,7 @@ TagsFilter::TagsFilter(GeoDataDocument *document, const Tags &tagsList, FilterFl
     : m_accepted(new GeoDataDocument)
 {
     for (GeoDataFeature *feature: document->featureList()) {
-        if (feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
-            GeoDataPlacemark* placemark = static_cast<GeoDataPlacemark*>(feature);
+        if (const auto placemark = geodata_cast<GeoDataPlacemark>(feature)) {
             bool acceptPlacemark = false;
             auto const & osmData = placemark->osmData();
 

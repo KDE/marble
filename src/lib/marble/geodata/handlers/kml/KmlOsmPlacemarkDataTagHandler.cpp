@@ -18,7 +18,6 @@
 #include "GeoDataPolygon.h"
 #include "GeoDataData.h"
 #include "GeoParser.h"
-#include "GeoDataTypes.h"
 #include "GeoDataPoint.h"
 #include "osm/OsmPlacemarkData.h"
 
@@ -76,10 +75,10 @@ GeoNode* KmlOsmPlacemarkDataTagHandler::parse( GeoParser& parser ) const
         OsmPlacemarkData *placemarkOsmData = parser.parentElement( 1 ).nodeAs<OsmPlacemarkData>();
         GeoDataPlacemark *placemark = parser.parentElement( 3 ).nodeAs<GeoDataPlacemark>();
         GeoDataLinearRing &ring = *parser.parentElement().nodeAs<GeoDataLinearRing>();
-        if ( placemark->geometry()->nodeType() != GeoDataTypes::GeoDataPolygonType ) {
+        GeoDataPolygon *polygon = geodata_cast<GeoDataPolygon>(placemark->geometry());
+        if (!polygon) {
             return 0;
         }
-        GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( placemark->geometry() );
 
         /* The QVector's indexOf function is perfect: returns the index of the ring
          * within the vector if the ring is an innerBoundary;

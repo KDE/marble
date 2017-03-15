@@ -34,7 +34,6 @@
 #include "RoutingProfileSettingsDialog.h"
 #include "GeoDataDocument.h"
 #include "GeoDataTreeModel.h"
-#include "GeoDataTypes.h"
 #include "GeoDataCreate.h"
 #include "GeoDataUpdate.h"
 #include "GeoDataDelete.h"

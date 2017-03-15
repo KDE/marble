@@ -100,6 +100,49 @@ public:
     virtual bool equals(const GeoDataObject &other) const;
 };
 
+
+/**
+ * Returns the given node cast to type T if the node was instantiated as type T; otherwise returns 0.
+ * If node is 0 then it will also return 0.
+ *
+ * @param node pointer to GeoNode object to be casted
+ * @return the given node as type T if cast is successfull, otherwise 0
+ */
+template<typename T>
+T *geodata_cast(GeoNode *node)
+{
+    if (node == nullptr) {
+        return nullptr;
+    }
+
+    if (node->nodeType() == T().nodeType()) {
+        return static_cast<T *>(node);
+    }
+
+    return nullptr;
+}
+
+/**
+ * Returns the given node cast to type const T if the node was instantiated as type T; otherwise returns 0.
+ * If node is 0 then it will also return 0.
+ *
+ * @param node pointer to GeoNode object to be casted
+ * @return the given node as type const T if cast is successfull, otherwise 0
+ */
+template<typename T>
+const T *geodata_cast(const GeoNode *node)
+{
+    if (node == nullptr) {
+        return nullptr;
+    }
+
+    if (node->nodeType() == T().nodeType()) {
+        return static_cast<const T *>(node);
+    }
+
+    return nullptr;
+}
+
 }
 
 Q_DECLARE_METATYPE( Marble::GeoDataObject* )

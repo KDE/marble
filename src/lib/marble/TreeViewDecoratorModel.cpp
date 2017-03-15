@@ -10,7 +10,6 @@
 #include "TreeViewDecoratorModel.h"
 #include "MarbleDebug.h"
 #include "GeoDataFolder.h"
-#include "GeoDataTypes.h"
 #include "GeoDataObject.h"
 #include "GeoDataContainer.h"
 #include "GeoDataStyle.h"
@@ -55,7 +54,7 @@ QVariant TreeViewDecoratorModel::data( const QModelIndex &proxyIndex, int role) 
         return QSortFilterProxyModel::data(proxyIndex, role);
     }
 
-    if ( object->nodeType() != GeoDataTypes::GeoDataFolderType ) {
+    if (geodata_cast<GeoDataFolder>(object)) {
         return QSortFilterProxyModel::data(proxyIndex, role);
     }
 

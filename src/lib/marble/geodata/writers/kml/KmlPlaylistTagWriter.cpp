@@ -10,6 +10,8 @@
 
 #include "KmlPlaylistTagWriter.h"
 
+#include "GeoDataAnimatedUpdate.h"
+#include "GeoDataFlyTo.h"
 #include "GeoDataPlaylist.h"
 #include "GeoDataTypes.h"
 #include "GeoDataSoundCue.h"
@@ -44,20 +46,20 @@ bool KmlPlaylistTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
 void KmlPlaylistTagWriter::writeTourPrimitive( const GeoNode *primitive, GeoWriter& writer ) const
 {
 
-    if ( primitive->nodeType() == GeoDataTypes::GeoDataTourControlType ) {
-        writeTourControl(*static_cast<const GeoDataTourControl *>(primitive), writer);
+    if (const auto tourControl = geodata_cast<GeoDataTourControl>(primitive)) {
+        writeTourControl(*tourControl, writer);
     }
-    else if ( primitive->nodeType() == GeoDataTypes::GeoDataWaitType ) {
-        writeWait(*static_cast<const GeoDataWait *>(primitive), writer);
+    else if (const auto wait = geodata_cast<GeoDataWait>(primitive)) {
+        writeWait(*wait, writer);
     }
-    else if ( primitive->nodeType() == GeoDataTypes::GeoDataFlyToType ) {
-        writeElement( primitive, writer );
+    else if (const auto flyTo = geodata_cast<GeoDataFlyTo>(primitive)) {
+        writeElement(flyTo, writer);
     }
-    else if ( primitive->nodeType() == GeoDataTypes::GeoDataSoundCueType ) {
-        writeSoundCue(*static_cast<const GeoDataSoundCue *>(primitive), writer );
+    else if (const auto soundCue = geodata_cast<GeoDataSoundCue>(primitive)) {
+        writeSoundCue(*soundCue, writer);
     }
-    else if ( primitive->nodeType() == GeoDataTypes::GeoDataAnimatedUpdateType ) {
-        writeElement( primitive, writer );
+    else if (const auto animatedUpdate = geodata_cast<GeoDataAnimatedUpdate>(primitive)) {
+        writeElement(animatedUpdate, writer);
     }
 }
 

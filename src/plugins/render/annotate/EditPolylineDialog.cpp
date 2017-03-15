@@ -21,7 +21,6 @@
 #include "GeoDataLineString.h"
 #include "GeoDataStyle.h"
 #include "GeoDataLineStyle.h"
-#include "GeoDataTypes.h"
 #include "NodeModel.h"
 #include "FormattedTextWidget.h"
 #include "NodeItemDelegate.h"
@@ -153,8 +152,7 @@ EditPolylineDialog::EditPolylineDialog( GeoDataPlacemark *placemark,
     connect( d->m_linesDialog, SIGNAL(colorSelected(QColor)), this, SLOT(updateLinesDialog(QColor)) );
     connect( d->m_linesDialog, SIGNAL(colorSelected(QColor)), this, SLOT(handleChangingStyle()) );
 
-    if( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType ) {
-        GeoDataLineString *lineString = static_cast<GeoDataLineString*>( placemark->geometry() );
+    if (const auto lineString = geodata_cast<GeoDataLineString>(placemark->geometry())) {
         for( int i = 0; i < lineString->size(); ++i ) {
             d->m_nodeModel->addNode( lineString->at( i ) );
         }
@@ -190,8 +188,7 @@ void EditPolylineDialog::handleItemMoving( GeoDataPlacemark *item )
 {
     if( item == d->m_placemark ) {
         d->m_nodeModel->clear();
-        if( d->m_placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType ) {
-            GeoDataLineString *lineString = static_cast<GeoDataLineString*>( d->m_placemark->geometry() );
+        if (const auto lineString = geodata_cast<GeoDataLineString>(d->m_placemark->geometry())) {
             for( int i = 0; i < lineString->size(); ++i ) {
                 d->m_nodeModel->addNode( lineString->at( i ) );
             }
@@ -282,8 +279,7 @@ void EditPolylineDialog::checkFields()
                               tr( "Please specify a name for this polyline." ) );
         ok = false;
     } else {
-        if ( d->m_placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType ) {
-            GeoDataLineString *lineString = static_cast<GeoDataLineString*>( d->m_placemark->geometry() );
+        if (const auto lineString = geodata_cast<GeoDataLineString>(d->m_placemark->geometry())) {
             if( lineString->size() < 2 ) {
                 QMessageBox::warning( this,
                                       tr( "Not enough nodes specified." ),

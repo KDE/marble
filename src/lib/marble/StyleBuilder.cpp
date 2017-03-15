@@ -16,9 +16,12 @@
 #include "MarbleDirs.h"
 #include "OsmPlacemarkData.h"
 #include "OsmcSymbol.h"
-#include "GeoDataTypes.h"
 #include "GeoDataGeometry.h"
+#include "GeoDataLinearRing.h"
+#include "GeoDataLineString.h"
 #include "GeoDataPlacemark.h"
+#include "GeoDataPoint.h"
+#include "GeoDataPolygon.h"
 #include "GeoDataIconStyle.h"
 #include "GeoDataLabelStyle.h"
 #include "GeoDataLineStyle.h"
@@ -321,7 +324,7 @@ GeoDataStyle::ConstPtr StyleBuilder::Private::createPlacemarkStyle(const StylePa
 
     GeoDataStyle::ConstPtr style = presetStyle(visualCategory);
 
-    if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPointType) {
+    if (geodata_cast<GeoDataPoint>(placemark->geometry())) {
         if (visualCategory == GeoDataPlacemark::NaturalTree) {
             GeoDataCoordinates const coordinates = placemark->coordinate();
             qreal const lat = coordinates.latitude(GeoDataCoordinates::Degree);
@@ -344,7 +347,7 @@ GeoDataStyle::ConstPtr StyleBuilder::Private::createPlacemarkStyle(const StylePa
                 }
             }
         }
-    } else if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLinearRingType) {
+    } else if (geodata_cast<GeoDataLinearRing>(placemark->geometry())) {
         bool adjustStyle = false;
 
         GeoDataPolyStyle polyStyle = style->polyStyle();
@@ -401,7 +404,7 @@ GeoDataStyle::ConstPtr StyleBuilder::Private::createPlacemarkStyle(const StylePa
                 style = newStyle;
             }
         }
-    } else if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType) {
+    } else if (geodata_cast<GeoDataLineString>(placemark->geometry())) {
         GeoDataPolyStyle polyStyle = style->polyStyle();
         GeoDataLineStyle lineStyle = style->lineStyle();
         GeoDataLabelStyle labelStyle = style->labelStyle();
@@ -499,7 +502,7 @@ GeoDataStyle::ConstPtr StyleBuilder::Private::createPlacemarkStyle(const StylePa
         }
 
 
-    } else if (placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType) {
+    } else if (geodata_cast<GeoDataPolygon>(placemark->geometry())) {
         GeoDataPolyStyle polyStyle = style->polyStyle();
         GeoDataLineStyle lineStyle = style->lineStyle();
         bool adjustStyle = false;

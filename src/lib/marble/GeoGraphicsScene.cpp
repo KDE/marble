@@ -16,7 +16,6 @@
 #include "GeoDataStyleMap.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataDocument.h"
-#include "GeoDataTypes.h"
 #include "GeoGraphicsItem.h"
 #include "TileId.h"
 #include "TileCoordsPyramid.h"
@@ -193,8 +192,7 @@ void GeoGraphicsScene::applyHighlight( const QVector< GeoDataPlacemark* > &selec
                 const GeoDataObject *parent = placemark->parent();
                 if ( parent ) {
                     auto item = *iter;
-                    if ( parent->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
-                        const GeoDataDocument *doc = static_cast<const GeoDataDocument *>(parent);
+                    if (const GeoDataDocument *doc = geodata_cast<GeoDataDocument>(parent)) {
                         QString styleUrl = placemark->styleUrl();
                         styleUrl.remove(QLatin1Char('#'));
                         if ( !styleUrl.isEmpty() ) {

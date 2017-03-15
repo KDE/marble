@@ -42,8 +42,10 @@
 #include "GeoDataDocument.h"
 #include "GeoDataFeature.h"
 #include "GeoDataPlacemark.h"
+#include "GeoDataPoint.h"
 #include "GeoDataStyle.h"
 #include "GeoDataStyleMap.h"
+#include "GeoDataTrack.h"
 #include "GeoDataLineStyle.h"
 #include "GeoDataPolyStyle.h"
 #include "GeoDataTypes.h"
@@ -487,14 +489,11 @@ void MarbleModelPrivate::assignNewStyle( const QString &filePath, const GeoDataS
     QVector<GeoDataFeature*>::iterator const end = doc->end();
 
     for ( ; iter != end; ++iter ) {
-        if ( (*iter)->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
-            GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( *iter );
-            if ( placemark ) {
-                if ( placemark->geometry()->nodeType() != GeoDataTypes::GeoDataTrackType &&
-                    placemark->geometry()->nodeType() != GeoDataTypes::GeoDataPointType )
-                {
-                    placemark->setStyleUrl(styleUrl);
-                }
+        if (auto placemark = geodata_cast<GeoDataPlacemark>(*iter)) {
+            if (!geodata_cast<GeoDataTrack>(placemark->geometry()) &&
+                !geodata_cast<GeoDataPoint>(placemark->geometry()))
+            {
+                placemark->setStyleUrl(styleUrl);
             }
         }
     }
@@ -798,8 +797,7 @@ void MarbleModel::removeGeoData( const QString& fileName )
 void MarbleModel::updateProperty( const QString &property, bool value )
 {
     for( GeoDataFeature *feature: d->m_treeModel.rootDocument()->featureList()) {
-        if( feature->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
-            GeoDataDocument *document = static_cast<GeoDataDocument*>( feature );
+        if (auto document = geodata_cast<GeoDataDocument>(feature)) {
             if( document->property() == property ){
                 document->setVisible( value );
                 d->m_treeModel.updateFeature( document );
@@ -879,11 +877,9 @@ void MarbleModelPrivate::assignFillColors( const QString &filePath ) {
                             QVector<GeoDataFeature*>::iterator const end = doc->end();
 
                             for ( ; iter != end; ++iter ) {
-                                if ( (*iter)->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
-                                    GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>( *iter );
-                                    Q_ASSERT( placemark );
-                                    if ( placemark->geometry()->nodeType() != GeoDataTypes::GeoDataTrackType &&
-                                        placemark->geometry()->nodeType() != GeoDataTypes::GeoDataPointType )
+                                if (auto placemark = geodata_cast<GeoDataPlacemark>(*iter)) {
+                                    if (!geodata_cast<GeoDataTrack>(placemark->geometry()) &&
+                                        !geodata_cast<GeoDataPoint>(placemark->geometry()))
                                     {
                                         placemark->setStyleUrl(styleUrl);
                                     }

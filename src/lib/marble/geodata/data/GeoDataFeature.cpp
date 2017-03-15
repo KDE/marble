@@ -338,8 +338,7 @@ void GeoDataFeature::setStyleUrl( const QString &value )
     GeoDataObject *object = parent();
     bool found = false;
     while ( object && !found ) {
-        if( object->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
-            GeoDataDocument *doc = static_cast<GeoDataDocument*> ( object );
+        if (GeoDataDocument *doc = geodata_cast<GeoDataDocument>(object)) {
             GeoDataStyleMap &styleMap = doc->styleMap( styleUrl );
             const QString normalStyleUrl = styleMap.value(QStringLiteral("normal"));
             if (!normalStyleUrl.isEmpty()) {

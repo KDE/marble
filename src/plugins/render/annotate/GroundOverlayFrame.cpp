@@ -14,7 +14,6 @@
 // Marble
 #include "GeoDataPlacemark.h"
 #include "GeoDataGroundOverlay.h"
-#include "GeoDataTypes.h"
 #include "GeoDataLinearRing.h"
 #include "GeoDataPolygon.h"
 #include "GeoPainter.h"
@@ -108,9 +107,8 @@ void GroundOverlayFrame::paint(GeoPainter *painter, const ViewportParams *viewpo
     m_regionList.clear();
 
     painter->save();
-    if ( placemark()->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
-        GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( placemark()->geometry() );
-        GeoDataLinearRing &ring = polygon->outerBoundary();
+    if (const auto polygon = geodata_cast<GeoDataPolygon>(placemark()->geometry())) {
+        const GeoDataLinearRing &ring = polygon->outerBoundary();
         QVector<GeoDataCoordinates> coordinateList;
         coordinateList.reserve(8);
 
@@ -279,7 +277,7 @@ bool GroundOverlayFrame::mouseMoveEvent( QMouseEvent *event )
         m_editStatusChangeNeeded = false;
     }
 
-    if ( placemark()->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
+    if (geodata_cast<GeoDataPolygon>(placemark()->geometry())) {
         qreal lon, lat;
         m_viewport->geoCoordinates( event->pos().x(),
                                     event->pos().y(),

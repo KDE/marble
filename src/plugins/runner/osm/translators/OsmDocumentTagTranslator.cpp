@@ -55,10 +55,9 @@ bool OsmDocumentTagTranslator::write( const GeoNode *node, GeoWriter& writer ) c
     }
 
     for (auto const & relation: converter.relations()) {
-        if (relation.first->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
-            auto placemark = static_cast<const GeoDataPlacemark*>(relation.first);
-            Q_ASSERT(placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType);
-            auto polygon = static_cast<const GeoDataPolygon*>(placemark->geometry());
+        if (auto placemark = geodata_cast<GeoDataPlacemark>(relation.first)) {
+            auto polygon = geodata_cast<GeoDataPolygon>(placemark->geometry());
+            Q_ASSERT(polygon);
             OsmRelationTagWriter::writeMultipolygon(*polygon, relation.second, writer );
         }
     }

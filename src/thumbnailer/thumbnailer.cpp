@@ -23,7 +23,7 @@
 #include <ViewportParams.h>
 #include <RenderPlugin.h>
 #include <GeoDataTreeModel.h>
-#include <GeoDataTypes.h>
+
 // Qt
 #include <QPainter>
 
@@ -100,11 +100,12 @@ static qreal radius(qreal zoom)
 
 void GeoDataThumbnailer::onGeoDataObjectAdded( GeoDataObject* object )
 {
-    if ( object->nodeType() != GeoDataTypes::GeoDataDocumentType ) {
+    const auto document = geodata_cast<GeoDataDocument>(object);
+
+    if (!document) {
         return;
     }
 
-    const GeoDataDocument *document = static_cast<GeoDataDocument*>(object);
     if (document->fileName() != m_currentFilename) {
         return;
     }

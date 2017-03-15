@@ -21,7 +21,6 @@
 
 // Marble
 #include "GeoDataPlacemark.h"
-#include "GeoDataTypes.h"
 #include "GeoDataLinearRing.h"
 #include "GeoDataPolygon.h"
 #include "GeoPainter.h"
@@ -64,7 +63,7 @@ void AreaAnnotation::paint(GeoPainter *painter, const ViewportParams *viewport ,
     Q_UNUSED(layer);
     Q_UNUSED(tileZoomLevel);
     m_viewport = viewport;
-    Q_ASSERT( placemark()->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType );
+    Q_ASSERT(geodata_cast<GeoDataPolygon>(placemark()->geometry()));
 
     painter->save();
     if ( state() == SceneGraphicsItem::DrawingPolygon || !m_regionsInitialized ) {

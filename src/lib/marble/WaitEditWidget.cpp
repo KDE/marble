@@ -17,7 +17,6 @@
 
 #include "WaitEditWidget.h"
 #include "MarblePlacemarkModel.h"
-#include "GeoDataTypes.h"
 #include "GeoDataTourControl.h"
 #include "geodata/data/GeoDataWait.h"
 
@@ -72,8 +71,9 @@ GeoDataWait* WaitEditWidget::waitElement()
 {
     GeoDataObject *object = qvariant_cast<GeoDataObject*>(m_index.data( MarblePlacemarkModel::ObjectPointerRole ) );
     Q_ASSERT( object );
-    Q_ASSERT( object->nodeType() == GeoDataTypes::GeoDataWaitType );
-    return static_cast<GeoDataWait*>( object );
+    auto wait = geodata_cast<GeoDataWait>(object);
+    Q_ASSERT(wait);
+    return wait;
 }
 
 } // namespace Marble

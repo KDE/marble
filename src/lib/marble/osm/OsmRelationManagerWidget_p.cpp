@@ -14,7 +14,6 @@
 
 // Marble
 #include "GeoDataPlacemark.h"
-#include "GeoDataTypes.h"
 #include "GeoDataStyle.h"
 #include "OsmPlacemarkData.h"
 #include "MarbleDebug.h"

@@ -106,9 +106,7 @@ GeoDataLatLonAltBox GeoDataContainer::latLonAltBox() const
     for (; it != end; ++it) {
 
         // Get all the placemarks from GeoDataContainer
-        if ( (*it)->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
-            GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(*it);
-
+        if (const GeoDataPlacemark *placemark = geodata_cast<GeoDataPlacemark>(*it)) {
             // Only use visible placemarks for extracting their latLonAltBox and
             // making an union with the global latLonAltBox Marble will fit its
             // zoom to
@@ -155,8 +153,8 @@ QVector<GeoDataPlacemark*> GeoDataContainer::placemarkList() const
     Q_D(const GeoDataContainer);
     QVector<GeoDataPlacemark*> results;
     for (auto it = d->m_vector.constBegin(), end = d->m_vector.constEnd(); it != end; ++it) {
-        if ((*it)->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
-            results.append(static_cast<GeoDataPlacemark*>(*it));
+        if (GeoDataPlacemark *placemark = geodata_cast<GeoDataPlacemark>(*it)) {
+            results.append(placemark);
         }
     }
     return results;

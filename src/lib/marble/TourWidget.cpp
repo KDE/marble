@@ -23,7 +23,6 @@
 #include "GeoDataPlaylist.h"
 #include "GeoDataTour.h"
 #include "GeoDataTreeModel.h"
-#include "GeoDataTypes.h"
 #include "GeoDataFlyTo.h"
 #include "GeoDataWait.h"
 #include "GeoDataCamera.h"
@@ -246,9 +245,7 @@ bool TourWidget::eventFilter( QObject *watched, QEvent *event )
              && !selectedIndexes.isEmpty() )
         {
             QModelIndexList::iterator end = selectedIndexes.end() - 1;
-            if ( rootObject && rootObject->nodeType() == GeoDataTypes::GeoDataPlaylistType ) {
-                GeoDataPlaylist *playlist = static_cast<GeoDataPlaylist*>( rootObject );
-
+            if (const GeoDataPlaylist *playlist = (rootObject ? geodata_cast<GeoDataPlaylist>(rootObject) : 0)) {
                 if ( end->row() != playlist->size() - 1 ) {
                     moveDown();
                 }
@@ -399,8 +396,8 @@ bool TourWidgetPrivate::openFile( const QString &filename )
 
 GeoDataTour *TourWidgetPrivate::findTour( GeoDataFeature *feature ) const
 {
-    if ( feature && feature->nodeType() == GeoDataTypes::GeoDataTourType ) {
-        return static_cast<GeoDataTour*>( feature );
+    if (GeoDataTour *tour = (feature ? geodata_cast<GeoDataTour>(feature) : 0)) {
+        return tour;
     }
 
     GeoDataContainer *container = dynamic_cast<GeoDataContainer*>( feature );
@@ -514,8 +511,7 @@ void TourWidgetPrivate::addChangePlacemark()
     GeoDataChange *change = new GeoDataChange;
     GeoDataPlacemark *placemark = 0;
     GeoDataFeature *lastFeature = m_delegate->findFeature( m_delegate->defaultFeatureId() );
-    if( lastFeature != 0 && lastFeature->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
-        GeoDataPlacemark *target = static_cast<GeoDataPlacemark*>( lastFeature );
+    if (GeoDataPlacemark *target = (lastFeature != 0 ? geodata_cast<GeoDataPlacemark>(lastFeature) : 0)) {
         placemark = new GeoDataPlacemark( *target );
         placemark->setTargetId( m_delegate->defaultFeatureId() );
         placemark->setId(QString());
@@ -533,8 +529,7 @@ void TourWidgetPrivate::addChangePlacemark()
 void TourWidgetPrivate::addTourPrimitive( GeoDataTourPrimitive *primitive )
 {
     GeoDataObject *rootObject =  rootIndexObject();
-    if ( rootObject->nodeType() == GeoDataTypes::GeoDataPlaylistType ) {
-        GeoDataPlaylist *playlist = static_cast<GeoDataPlaylist*>( rootObject );
+    if (auto playlist = geodata_cast<GeoDataPlaylist>(rootObject)) {
         QModelIndex currentIndex = m_tourUi.m_listView->currentIndex();
         QModelIndex playlistIndex = m_widget->model()->treeModel()->index( playlist );
         int row = currentIndex.isValid() ? currentIndex.row()+1 : playlist->size();
@@ -560,8 +555,7 @@ void TourWidgetPrivate::deleteSelected()
     dialog->setDefaultButton( QMessageBox::No );
     if ( dialog->exec() == QMessageBox::Yes ) {
         GeoDataObject *rootObject =  rootIndexObject();
-        if ( rootObject && rootObject->nodeType() == GeoDataTypes::GeoDataPlaylistType ) {
-            GeoDataPlaylist *playlist = static_cast<GeoDataPlaylist*>( rootObject );
+        if (GeoDataPlaylist *playlist = (rootObject ? geodata_cast<GeoDataPlaylist>(rootObject) : 0)) {
             QModelIndex playlistIndex = m_widget->model()->treeModel()->index( playlist );
             QModelIndexList selected = m_tourUi.m_listView->selectionModel()->selectedIndexes();
             std::sort( selected.begin(), selected.end(), [](const QModelIndex &a, const QModelIndex &b) { return b < a; } );
@@ -591,8 +585,7 @@ void TourWidgetPrivate::updateButtonsStates()
         QModelIndexList::iterator start = selectedIndexes.begin();
         m_tourUi.m_actionMoveUp->setEnabled( ( start->row() != 0 ) ); // if we can move up enable action else disable.
         GeoDataObject *rootObject =  rootIndexObject();
-        if ( rootObject && rootObject->nodeType() == GeoDataTypes::GeoDataPlaylistType ) {
-            GeoDataPlaylist *playlist = static_cast<GeoDataPlaylist*>( rootObject );
+        if (GeoDataPlaylist *playlist = (rootObject ? geodata_cast<GeoDataPlaylist>(rootObject) : 0)) {
             m_tourUi.m_actionMoveDown->setEnabled( ( end->row() != playlist->size()-1 ) ); // if we can move down enable action else disable.
         }
     }
@@ -601,8 +594,7 @@ void TourWidgetPrivate::updateButtonsStates()
 void TourWidgetPrivate::moveUp()
 {
     GeoDataObject *rootObject =  rootIndexObject();
-    if ( rootObject && rootObject->nodeType() == GeoDataTypes::GeoDataPlaylistType ) {
-        GeoDataPlaylist *playlist = static_cast<GeoDataPlaylist*>( rootObject );
+    if (GeoDataPlaylist *playlist = (rootObject ? geodata_cast<GeoDataPlaylist>(rootObject) : 0)) {
         QModelIndex playlistIndex = m_widget->model()->treeModel()->index( playlist );
         QModelIndexList selected = m_tourUi.m_listView->selectionModel()->selectedIndexes();
         std::sort( selected.begin(), selected.end(), std::less<QModelIndex>() );
@@ -622,8 +614,7 @@ void TourWidgetPrivate::moveUp()
 void TourWidgetPrivate::moveDown()
 {
     GeoDataObject *rootObject = rootIndexObject();
-    if ( rootObject && rootObject->nodeType() == GeoDataTypes::GeoDataPlaylistType ) {
-        GeoDataPlaylist *playlist = static_cast<GeoDataPlaylist*>( rootObject );
+    if (GeoDataPlaylist *playlist = (rootObject ? geodata_cast<GeoDataPlaylist>(rootObject) : 0)) {
         QModelIndex playlistIndex = m_widget->model()->treeModel()->index( playlist );
         QModelIndexList selected = m_tourUi.m_listView->selectionModel()->selectedIndexes();
         std::sort( selected.begin(), selected.end(), [](const QModelIndex &a, const QModelIndex &b) { return b < a; } );
@@ -643,11 +634,10 @@ void TourWidgetPrivate::moveDown()
 GeoDataFeature* TourWidgetPrivate::getPlaylistFeature() const
 {
     GeoDataObject *rootObject = rootIndexObject();
-    if ( rootObject && rootObject->nodeType() == GeoDataTypes::GeoDataPlaylistType ) {
-        GeoDataPlaylist *playlist = static_cast<GeoDataPlaylist*>( rootObject );
+    if (GeoDataPlaylist *playlist = (rootObject ? geodata_cast<GeoDataPlaylist>(rootObject) : 0)) {
         GeoDataObject *object = playlist->parent();
-        if ( object && object->nodeType() == GeoDataTypes::GeoDataTourType ) {
-            return static_cast<GeoDataFeature*>( object );
+        if (GeoDataTour *tour = (object ? geodata_cast<GeoDataTour>(object) : 0)) {
+            return tour;
         }
     }
     return 0;
@@ -683,7 +673,7 @@ void TourWidgetPrivate::updateRootIndex()
             if( dynamic_cast<PlaybackFlyToItem*>( m_playback.mainTrackItemAt( 0 ) ) ) {
                 QModelIndex playlistIndex = m_widget->model()->treeModel()->index( playlist );
                 for( int i = 0; playlist && i < playlist->size(); ++i ) {
-                    if( playlist->primitive( i )->nodeType() == GeoDataTypes::GeoDataFlyToType ) {
+                    if (geodata_cast<GeoDataFlyTo>(playlist->primitive(i))) {
                         m_delegate->setFirstFlyTo( m_widget->model()->treeModel()->index( i, 0, playlistIndex ) );
                         break;
                     }
@@ -942,8 +932,8 @@ void TourWidget::setHighlightedItemIndex( int index )
         QModelIndex currentIndex = d->m_widget->model()->treeModel()->index( i, 0, playlistIndex );
         GeoDataObject* object = qvariant_cast<GeoDataObject*>(currentIndex.data( MarblePlacemarkModel::ObjectPointerRole ) );
 
-        if ( object->nodeType() == GeoDataTypes::GeoDataFlyToType
-          || object->nodeType() == GeoDataTypes::GeoDataWaitType )
+        if (geodata_cast<GeoDataFlyTo>(object)
+          || geodata_cast<GeoDataWait>(object))
                 ++searchedIndex;
 
         if ( index == searchedIndex ) {

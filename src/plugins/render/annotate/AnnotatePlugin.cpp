@@ -34,9 +34,9 @@
 #include "GeoDataStyle.h"
 #include "GeoDataLabelStyle.h"
 #include "GeoDataLineStyle.h"
+#include "GeoDataPoint.h"
 #include "GeoDataPolyStyle.h"
 #include "GeoDataTreeModel.h"
-#include "GeoDataTypes.h"
 #include "GeoPainter.h"
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataLinearRing.h"
@@ -415,21 +415,20 @@ void AnnotatePlugin::loadAnnotationFile()
     // the files do not load properly because the geometry copy is not a deep copy.
     for ( GeoDataFeature *feature: document->featureList() ) {
 
-        if ( feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
-            GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( feature );
+        if (const GeoDataPlacemark *placemark = geodata_cast<GeoDataPlacemark>(feature)) {
             GeoDataPlacemark *newPlacemark = new GeoDataPlacemark( *placemark );
 
-            if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPointType ) {
+            if (geodata_cast<GeoDataPoint>(placemark->geometry())) {
                 PlacemarkTextAnnotation *placemark = new PlacemarkTextAnnotation( newPlacemark );
                 m_graphicsItems.append( placemark );
-            } else if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
+            } else if (geodata_cast<GeoDataPolygon>(placemark->geometry())) {
                 newPlacemark->setParent( m_annotationDocument );
                 if ( !placemark->styleUrl().isEmpty() ) {
                     newPlacemark->setStyleUrl( placemark->styleUrl() );
                 }
                 AreaAnnotation *polygonAnnotation = new AreaAnnotation( newPlacemark );
                 m_graphicsItems.append( polygonAnnotation );
-            } else if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType ) {
+            } else if (geodata_cast<GeoDataLineString>(placemark->geometry())) {
                 newPlacemark->setParent( m_annotationDocument );
                 if ( !placemark->styleUrl().isEmpty() ) {
                     newPlacemark->setStyleUrl( placemark->styleUrl() );
@@ -438,8 +437,7 @@ void AnnotatePlugin::loadAnnotationFile()
                 m_graphicsItems.append( polylineAnnotation );
             }
             m_marbleWidget->model()->treeModel()->addFeature( m_annotationDocument, newPlacemark );
-        } else if ( feature->nodeType() == GeoDataTypes::GeoDataGroundOverlayType ) {
-            GeoDataGroundOverlay *overlay = static_cast<GeoDataGroundOverlay*>( feature );
+        } else if (const GeoDataGroundOverlay *overlay = geodata_cast<GeoDataGroundOverlay>(feature)) {
             GeoDataGroundOverlay *newOverlay = new GeoDataGroundOverlay( *overlay );
             m_marbleWidget->model()->treeModel()->addFeature( m_annotationDocument, newOverlay );
             displayOverlayFrame( newOverlay );

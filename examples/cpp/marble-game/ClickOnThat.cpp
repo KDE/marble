@@ -36,8 +36,6 @@
 #include <marble/GeoDataPolygon.h>
 #include <marble/GeoDataMultiGeometry.h>
 
-#include <marble/GeoDataTypes.h>
-
 namespace Marble
 {
 class ClickOnThatPrivate
@@ -150,8 +148,7 @@ void ClickOnThat::initiateGame()
             GeoDataObject *object = qvariant_cast<GeoDataObject*>( data );
             Q_ASSERT_X( object, "CountryByShape::initiateGame",
                         "failed to get valid data from treeModel for GeoDataObject" );
-            if ( object->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
-                GeoDataDocument *doc = static_cast<GeoDataDocument*>( object );
+            if (auto doc = geodata_cast<GeoDataDocument>(object)) {
                 QFileInfo fileInfo( doc->fileName() );
                 if (fileInfo.fileName() == QLatin1String("boundaryplacemarks.cache")) {
                     d->m_countryNames = doc;
@@ -168,8 +165,7 @@ void ClickOnThat::initiateGame()
             GeoDataObject *object = qvariant_cast<GeoDataObject*>( data );
             Q_ASSERT_X( object, "MainWindow::initiateGame",
                         "failed to get valid data from treeModel for GeoDataObject" );
-            if ( object->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
-                GeoDataDocument *const doc = static_cast<GeoDataDocument*>( object );
+            if (auto doc = geodata_cast<GeoDataDocument>(object)) {
                 QFileInfo fileInfo( doc->fileName() );
                 if (fileInfo.fileName() == QLatin1String("ne_50m_admin_0_countries.pn2")) {
                     d->m_countryBoundaries = doc;

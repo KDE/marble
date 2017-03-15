@@ -49,7 +49,6 @@
 #include <marble/GeoDataPolygon.h>
 #include <marble/GeoDataLinearRing.h>
 #include <marble/GeoDataLatLonAltBox.h>
-#include <marble/GeoDataTypes.h>
 
 namespace Marble {
 
@@ -198,8 +197,7 @@ void MainWindow::browseMapButtonClicked()
         GeoDataObject *object = qvariant_cast<GeoDataObject*>( data );
         Q_ASSERT_X( object, "MainWindow::browseMapButtonClicked",
                     "failed to get valid data from treeModel for GeoDataObject" );
-        if ( object->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
-            GeoDataDocument *doc = static_cast<GeoDataDocument*>( object );
+        if (auto doc = geodata_cast<GeoDataDocument>(object)) {
             QFileInfo fileInfo( doc->fileName() );
             QString fileName = fileInfo.fileName();
             if (fileName == QLatin1String("boundaryplacemarks.cache")) {

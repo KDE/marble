@@ -15,7 +15,6 @@
 #include "GeoDataSchemaData.h"
 #include "GeoDataExtendedData.h"
 #include "GeoDataFeature.h"
-#include "GeoDataTypes.h"
 #include "GeoDataLinearRing.h"
 #include "GeoDataPolygon.h"
 #include "GeoWriter.h"
@@ -28,10 +27,12 @@ namespace Marble
 bool KmlOsmPlacemarkDataTagWriter::write( const GeoDataFeature *feature,
                                           GeoWriter& writer )
 {
-    if ( feature->nodeType() != GeoDataTypes::GeoDataPlacemarkType ) {
+    const GeoDataPlacemark *placemark = geodata_cast<GeoDataPlacemark>(feature);
+
+    if (!placemark) {
         return false;
     }
-    const GeoDataPlacemark *placemark = static_cast<const GeoDataPlacemark*>( feature );
+
     const OsmPlacemarkData &osmData = placemark->osmData();
     if (osmData.isNull()) {
         return true;
@@ -91,11 +92,10 @@ bool KmlOsmPlacemarkDataTagWriter::writeOsmData( const GeoDataGeometry *geometry
             }
         }
         // Polygons
-        else if ( geometry->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
+        else if (const GeoDataPolygon *polygon = geodata_cast<GeoDataPolygon>(geometry)) {
             int memberIndex = -1;
 
             // Writing the outerBoundary osmData
-            const GeoDataPolygon *polygon = static_cast<const GeoDataPolygon*>( geometry );
             const GeoDataLinearRing &outerRing = polygon->outerBoundary();
             const OsmPlacemarkData &outerRingOsmData = osmData.memberReference( memberIndex );
             writer.writeStartElement( kml::kmlTag_nameSpaceMx, kml::kmlTag_member );

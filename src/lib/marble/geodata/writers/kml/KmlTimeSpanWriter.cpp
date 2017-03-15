@@ -28,9 +28,8 @@ static GeoTagWriterRegistrar s_writerLookAt(
 bool KmlTimeSpanWriter::write( const GeoNode *node,
 			       GeoWriter& writer ) const
 {
-    Q_ASSERT( node->nodeType() == GeoDataTypes::GeoDataTimeSpanType );
-    const GeoDataTimeSpan *timespan =
-	static_cast<const GeoDataTimeSpan*>( node );
+    const GeoDataTimeSpan *timespan = geodata_cast<GeoDataTimeSpan>(node);
+    Q_ASSERT(timespan);
 
     writer.writeStartElement( kml::kmlTag_TimeSpan );
     KmlObjectTagWriter::writeIdentifiers( writer, timespan );

@@ -43,10 +43,10 @@ GeoNode* KmlmemberTagHandler::parse( GeoParser& parser ) const
     */
     if( parser.parentElement( 2 ).is<GeoDataPlacemark>() ) {
         GeoDataPlacemark *placemark = parser.parentElement( 2 ).nodeAs<GeoDataPlacemark>();
-        if ( placemark->geometry()->nodeType() != GeoDataTypes::GeoDataPolygonType ) {
+        GeoDataPolygon *polygon = geodata_cast<GeoDataPolygon>(placemark->geometry());
+        if (polygon) {
             return 0;
         }
-        GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( placemark->geometry() );
 
         // The memberIndex is used to determine which member this tag represents
         if ( memberIndex == -1 ) {

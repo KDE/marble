@@ -13,14 +13,16 @@
 #include "OsmTagEditorWidget.h"
 
 // Marble
+#include "GeoDataLineString.h"
+#include "GeoDataPolygon.h"
 #include "GeoDataPlacemark.h"
-#include "GeoDataTypes.h"
 #include "GeoDataStyle.h"
 #include "GeoDataIconStyle.h"
 #include "OsmPlacemarkData.h"
 #include "GeoDataExtendedData.h"
 #include "GeoDataData.h"
 #include "GeoDataGeometry.h"
+#include "GeoDataPoint.h"
 #include "StyleBuilder.h"
 
 // Qt
@@ -55,7 +57,7 @@ void OsmTagEditorWidgetPrivate::populateCurrentTagsList()
     }
 
     // Multipolygon type tag
-    if ( m_placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
+    if (geodata_cast<GeoDataPolygon>(m_placemark->geometry())) {
         QStringList itemText;
         // "type" is a standard OSM tag, don't translate
         itemText<< "type" << "multipolygon";
@@ -142,15 +144,7 @@ QStringList OsmTagEditorWidgetPrivate::generateTagFilter() const
     // Contains all keys that should pass through the filter ( eg. { "amenity", "landuse", etc.. } )
     QStringList filter;
 
-    bool condition;
     QStringList tags, tagsAux;
-    QString type;
-    if (m_placemark->extendedData().value(QStringLiteral("osmRelation")).value().toString() == QLatin1String("yes")) {
-        type = "Relation";
-    }
-    else {
-        type = m_placemark->geometry()->nodeType();
-    }
     OsmPlacemarkData osmData;
     if ( m_placemark->hasOsmData() ) {
         osmData = m_placemark->osmData();
@@ -164,8 +158,7 @@ QStringList OsmTagEditorWidgetPrivate::generateTagFilter() const
 
     // If the placemark is a node, and it doesn't already have any node-specific tags, recommend all node-specific tags
     tags      = QStringList() << "amenity=*" << "shop=*" << "transport=*" << "tourism=*" << "historic=*" << "power=*" << "barrier=*";
-    condition = ( type == GeoDataTypes::GeoDataPointType ) && !containsAny( osmData, tags );
-    if ( condition ) {
+    if (geodata_cast<GeoDataPoint>(m_placemark->geometry()) && !containsAny(osmData, tags)) {
         addPattern( filter, osmData, tags );
     }
 
@@ -173,8 +166,7 @@ QStringList OsmTagEditorWidgetPrivate::generateTagFilter() const
 
     // If the placemark is a way, and it doesn't already have any way-specific tags, recommend all way-specific tags
     tags      = QStringList() << "highway=*" << "waterway=*" << "railway=*";
-    condition = ( type == GeoDataTypes::GeoDataLineStringType ) && !containsAny( osmData, tags );
-    if ( condition ) {
+    if (geodata_cast<GeoDataLineString>(m_placemark->geometry()) && !containsAny(osmData, tags)) {
         addPattern( filter, osmData, tags );
     }
 
@@ -182,8 +174,7 @@ QStringList OsmTagEditorWidgetPrivate::generateTagFilter() const
 
     // If the placemark is a polygon, and it doesn't already have any polygon-specific tags, recommend all polygon-specific tags
     tags      = QStringList() << "landuse=*" << "leisure=*";
-    condition = ( type == GeoDataTypes::GeoDataPolygonType ) && !containsAny( osmData, tags );
-    if ( condition ) {
+    if (geodata_cast<GeoDataPolygon>(m_placemark->geometry()) && !containsAny(osmData, tags)) {
         addPattern( filter, osmData, tags );
     }
 
@@ -191,8 +182,7 @@ QStringList OsmTagEditorWidgetPrivate::generateTagFilter() const
 
     // If the placemark is a relation, recommend type=*
     tags      = QStringList() << "type=*";
-    condition = (type == QLatin1String("Relation"));
-    if ( condition ) {
+    if (m_placemark->extendedData().value(QStringLiteral("osmRelation")).value().toString() == QLatin1String("yes")) {
         addPattern( filter, osmData, tags );
     }
 
@@ -201,8 +191,7 @@ QStringList OsmTagEditorWidgetPrivate::generateTagFilter() const
     // If the placemark has type=route, recommend route=*, network=*, ref=*, operator=*
     tags      = QStringList() << "type=route";
     tagsAux   = QStringList() << "route=*" << "network=*" << "ref=*" << "operator=*";
-    condition = containsAny( osmData, tags );
-    if ( condition ) {
+    if (containsAny(osmData, tags)) {
         addPattern( filter, osmData, tagsAux );
     }
 
@@ -211,8 +200,7 @@ QStringList OsmTagEditorWidgetPrivate::generateTagFilter() const
     // If the placemark has type=route_master, recommend route_master=*,
     tags      = QStringList() << "type=route_master";
     tagsAux   = QStringList() << "route_master=*";
-    condition = containsAny( osmData, tags );
-    if ( condition ) {
+    if (containsAny(osmData, tags)) {
         addPattern( filter, osmData, tagsAux );
     }
 
@@ -221,8 +209,7 @@ QStringList OsmTagEditorWidgetPrivate::generateTagFilter() const
     // If the placemark has type=public_transport, recommend public_transport=*,
     tags      = QStringList() << "type=public_transport";
     tagsAux   = QStringList() << "public_transport=*";
-    condition = containsAny( osmData, tags );
-    if ( condition ) {
+    if (containsAny(osmData, tags)) {
         addPattern( filter, osmData, tagsAux );
     }
 
@@ -231,8 +218,7 @@ QStringList OsmTagEditorWidgetPrivate::generateTagFilter() const
     // If the placemark has type=waterway, recommend waterway=*,
     tags      = QStringList() << "type=waterway";
     tagsAux   = QStringList() << "waterway=*";
-    condition = containsAny( osmData, tags );
-    if ( condition ) {
+    if (containsAny(osmData, tags)) {
         addPattern( filter, osmData, tagsAux );
     }
 
@@ -241,8 +227,7 @@ QStringList OsmTagEditorWidgetPrivate::generateTagFilter() const
     // If the placemark has type=enforcement, recommend enforcement=*,
     tags      = QStringList() << "type=enforcement";
     tagsAux   = QStringList() << "enforcement=*";
-    condition = containsAny( osmData, tags );
-    if ( condition ) {
+    if (containsAny(osmData, tags)) {
         addPattern( filter, osmData, tagsAux );
     }
 
@@ -251,8 +236,7 @@ QStringList OsmTagEditorWidgetPrivate::generateTagFilter() const
     // If the placemark has amenity=place_of_worship, recommend religion=*
     tags      = QStringList() << "amenity=place_of_worship";
     tagsAux   = QStringList() << "religion=*";
-    condition = containsAny( osmData, tags );
-    if ( condition ) {
+    if (containsAny(osmData, tags)) {
         addPattern( filter, osmData, tagsAux );
     }
 
@@ -261,8 +245,7 @@ QStringList OsmTagEditorWidgetPrivate::generateTagFilter() const
     // If the placemark has amenity=toilets, recommend drinking_water=*, indoor=*
     tags      = QStringList() << "amenity=toilets";
     tagsAux   = QStringList() << "drinking_water=*" << "indoor=*";
-    condition = containsAny( osmData, tags );
-    if ( condition ) {
+    if (containsAny(osmData, tags)) {
         addPattern( filter, osmData, tagsAux );
     }
 
@@ -271,8 +254,7 @@ QStringList OsmTagEditorWidgetPrivate::generateTagFilter() const
     // If the placemark has  tourism=hostel, tourism=hotel or tourism=motel, recommend rooms=*, beds=*, wheelchair=*
     tags      = QStringList() << "tourism=hotel" << "tourism=hostel" << "tourism=motel";
     tagsAux   = QStringList() << "rooms=*" << "beds=*" << "wheelchair=*";
-    condition = containsAny( osmData, tags );
-    if ( condition ) {
+    if (containsAny(osmData, tags)) {
         addPattern( filter, osmData, tagsAux );
     }
 
@@ -281,8 +263,7 @@ QStringList OsmTagEditorWidgetPrivate::generateTagFilter() const
     // If the placemark has  tourism=*, shop=*, amenity=*, recommend website=*, email=*, fee=*
     tags      = QStringList() << "tourism=*" << "shop=*" << "amenity=*";
     tagsAux   = QStringList() << "website=*" << "email=*" << "fee=*";
-    condition = containsAny( osmData, tags );
-    if ( condition ) {
+    if (containsAny(osmData, tags)) {
         addPattern( filter, osmData, tagsAux );
     }
 
@@ -291,8 +272,7 @@ QStringList OsmTagEditorWidgetPrivate::generateTagFilter() const
     // If the placemark has amenity=* shop=*, recommend building=*
     tags      = QStringList() << "amenity=*" << "shop=*";
     tagsAux   = QStringList() << "building=*";
-    condition = containsAny( osmData, tags );
-    if ( condition ) {
+    if (containsAny(osmData, tags)) {
         addPattern( filter, osmData, tagsAux );
     }
 
@@ -301,8 +281,7 @@ QStringList OsmTagEditorWidgetPrivate::generateTagFilter() const
     // If the placemark has highway=*, recommend "lanes=*", "maxspeed=*", "oneway=*", "service=*", "bridge=*", "tunnel=*"
     tags      = QStringList() << "highway=*";
     tagsAux   = QStringList() << "lanes=*" << "maxspeed=*" << "maxheight=*" << "maxweight=*" << "abutters=*" << "oneway=*" << "service=*" << "bridge=*" << "tunnel=*";
-    condition = ( type == GeoDataTypes::GeoDataLineStringType ) && containsAny( osmData, tags );
-    if ( condition ) {
+    if (geodata_cast<GeoDataLineString>(m_placemark->geometry()) && containsAny(osmData, tags)) {
         addPattern( filter, osmData, tagsAux );
     }
 
@@ -310,8 +289,7 @@ QStringList OsmTagEditorWidgetPrivate::generateTagFilter() const
 
     // If the placemark is a polygon, recommend "surface=*"
     tags      = QStringList() << "surface=*";
-    condition = ( type == GeoDataTypes::GeoDataPolygonType );
-    if ( condition ) {
+    if (geodata_cast<GeoDataPolygon>(m_placemark->geometry())) {
         addPattern( filter, osmData, tags );
     }
 

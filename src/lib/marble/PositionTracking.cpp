@@ -21,7 +21,6 @@
 #include "GeoDataStyleMap.h"
 #include "GeoDataTrack.h"
 #include "GeoDataTreeModel.h"
-#include "GeoDataTypes.h"
 #include "GeoDataLineString.h"
 #include "GeoDataAccuracy.h"
 #include "GeoDataDocumentWriter.h"

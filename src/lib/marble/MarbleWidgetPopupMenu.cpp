@@ -31,7 +31,6 @@
 #include "GeoDataBalloonStyle.h"
 #include "GeoDataIconStyle.h"
 #include "GeoDataPoint.h"
-#include "GeoDataTypes.h"
 #include "GeoDataPhotoOverlay.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
@@ -848,7 +847,7 @@ GeoDataCoordinates MarbleWidgetPopupMenu::Private::mouseCoordinates( QAction* da
         return GeoDataCoordinates();
     }
 
-    if ( !m_featurelist.isEmpty() && m_featurelist.first()->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
+    if ( !m_featurelist.isEmpty() && geodata_cast<GeoDataPlacemark>(m_featurelist.first())) {
         const GeoDataPlacemark * placemark =  static_cast<const GeoDataPlacemark*>( m_featurelist.first() );
         return placemark->coordinate( m_model->clock()->dateTime() );
     } else {

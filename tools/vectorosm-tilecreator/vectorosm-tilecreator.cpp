@@ -9,12 +9,12 @@
 // Copyright 2016      Dennis Nienhüser <nienhueser@kde.org>
 //
 
-#include "GeoDataTypes.h"
 #include "GeoDataDocumentWriter.h"
 #include "MarbleModel.h"
 #include "ParsingRunnerManager.h"
 #include "GeoDataGeometry.h"
 #include "GeoDataPlacemark.h"
+#include "GeoDataPolygon.h"
 #include "GeoDataLatLonAltBox.h"
 #include "TileId.h"
 #include "MarbleDirs.h"
@@ -53,7 +53,7 @@ GeoDataDocument* mergeDocuments(GeoDataDocument* map1, GeoDataDocument* map2)
     marbleLand.addTag("marble_land","landmass");
     for (auto placemark: map2->placemarkList()) {
         GeoDataPlacemark* land = new GeoDataPlacemark(*placemark);
-        if(land->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType) {
+        if (geodata_cast<GeoDataPolygon>(land->geometry())) {
             land->setOsmData(marbleLand);
         }
         mergedMap->append(land);
@@ -87,7 +87,7 @@ QSharedPointer<GeoDataDocument> mergeBoundaryTiles(const QSharedPointer<GeoDataD
     marbleLand.addTag("marble_land","landmass");
     for (auto placemark: background->placemarkList()) {
         GeoDataPlacemark* land = new GeoDataPlacemark(*placemark);
-        if(land->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType) {
+        if (geodata_cast<GeoDataPolygon>(land->geometry())) {
             land->setOsmData(marbleLand);
         }
         mergedMap->append(land);

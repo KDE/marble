@@ -23,7 +23,6 @@
 #include "MarbleMath.h"
 #include "GeoDataLineString.h"
 #include "GeoDataPlacemark.h"
-#include "GeoDataTypes.h"
 #include "ViewportParams.h"
 #include "MergingPolylineNodesAnimation.h"
 #include "osm/OsmPlacemarkData.h"
@@ -63,7 +62,7 @@ void PolylineAnnotation::paint(GeoPainter *painter, const ViewportParams *viewpo
     Q_UNUSED(layer);
     Q_UNUSED(tileZoomLevel);
     m_viewport = viewport;
-    Q_ASSERT( placemark()->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType );
+    Q_ASSERT(geodata_cast<GeoDataLineString>(placemark()->geometry()));
 
     painter->save();
     if ( state() == SceneGraphicsItem::DrawingPolyline || !m_regionsInitialized ) {

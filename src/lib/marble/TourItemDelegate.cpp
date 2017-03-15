@@ -20,6 +20,7 @@
 #include "TourItemDelegate.h"
 #include "MarblePlacemarkModel.h"
 #include "geodata/data/GeoDataContainer.h"
+#include "geodata/data/GeoDataFlyTo.h"
 #include "geodata/data/GeoDataObject.h"
 #include "geodata/data/GeoDataTourControl.h"
 #include "geodata/data/GeoDataWait.h"
@@ -32,7 +33,6 @@
 #include "WaitEditWidget.h"
 #include "RemoveItemEditWidget.h"
 #include "GeoDataPlacemark.h"
-#include "GeoDataTypes.h"
 #include "GeoDataCreate.h"
 #include "GeoDataUpdate.h"
 #include "GeoDataDelete.h"
@@ -88,8 +88,7 @@ void TourItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &opt
 
     const GeoDataObject *object = qvariant_cast<GeoDataObject*>(index.data(MarblePlacemarkModel::ObjectPointerRole));
     if (!m_editingIndices.contains(index)) {
-        if (object->nodeType() == GeoDataTypes::GeoDataTourControlType) {
-            const GeoDataTourControl *tourControl = static_cast<const GeoDataTourControl*>(object);
+        if (const GeoDataTourControl *tourControl = geodata_cast<GeoDataTourControl>(object)) {
             GeoDataTourControl::PlayMode const playMode = tourControl->playMode();
 
             if ( playMode == GeoDataTourControl::Play ) {
@@ -110,7 +109,7 @@ void TourItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &opt
             QIcon const icon = QIcon(QStringLiteral(":/marble/media-playback-pause.png"));
             painter->drawPixmap( iconRect, icon.pixmap( iconRect.size() ) );
 
-        } else if (object->nodeType() == GeoDataTypes::GeoDataFlyToType) {
+        } else if (geodata_cast<GeoDataFlyTo>(object)) {
             GeoDataCoordinates const flyToCoords = index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoDataCoordinates>();
             label.setHtml( flyToCoords.toString() );
             button.icon = QIcon(QStringLiteral(":/marble/document-edit.png"));
@@ -126,8 +125,7 @@ void TourItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &opt
 
             QIcon const icon = QIcon(QStringLiteral(":/marble/flag.png"));
             painter->drawPixmap( iconRect, icon.pixmap( iconRect.size() ) );
-        } else if (object->nodeType() == GeoDataTypes::GeoDataWaitType) {
-            const GeoDataWait *wait = static_cast<const GeoDataWait*>(object);
+        } else if (const GeoDataWait *wait = geodata_cast<GeoDataWait>(object)) {
             label.setHtml( tr("Wait for %1 seconds").arg( QString::number( wait->duration() ) ) );
 
             painter->save();
@@ -143,8 +141,7 @@ void TourItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &opt
 
             QIcon const icon = QIcon(QStringLiteral(":/marble/player-time.png"));
             painter->drawPixmap( iconRect, icon.pixmap( iconRect.size() ) );
-        } else if (object->nodeType() == GeoDataTypes::GeoDataSoundCueType) {
-            const GeoDataSoundCue *soundCue = static_cast<const GeoDataSoundCue*>(object);
+        } else if (const GeoDataSoundCue *soundCue = geodata_cast<GeoDataSoundCue>(object)) {
             label.setHtml(soundCue->href().section(QLatin1Char('/'), -1));
 
             painter->save();
@@ -166,8 +163,7 @@ void TourItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &opt
 
             QIcon const icon = QIcon(QStringLiteral(":/marble/audio-x-generic.png"));
             painter->drawPixmap( iconRect, icon.pixmap( iconRect.size() ) );
-        } else if (object->nodeType() == GeoDataTypes::GeoDataAnimatedUpdateType) {
-            const GeoDataAnimatedUpdate *animUpdate = static_cast<const GeoDataAnimatedUpdate*>(object);
+        } else if (const GeoDataAnimatedUpdate *animUpdate = geodata_cast<GeoDataAnimatedUpdate>(object)) {
             const GeoDataUpdate *update = animUpdate->update();
             bool ok = false;
             QString iconString;
@@ -242,8 +238,7 @@ QStringList TourItemDelegate::findIds(const GeoDataPlaylist &playlist, bool only
         if( !primitive->id().isEmpty() && !onlyFeatures ) {
             result << primitive->id();
         }
-        if( primitive->nodeType() == GeoDataTypes::GeoDataAnimatedUpdateType ) {
-            const GeoDataAnimatedUpdate *animatedUpdate = static_cast<const GeoDataAnimatedUpdate *>(primitive);
+        if (const GeoDataAnimatedUpdate *animatedUpdate = geodata_cast<GeoDataAnimatedUpdate>(primitive)) {
             if( animatedUpdate->update() != 0 ) {
                 const GeoDataUpdate *update = animatedUpdate->update();
                 if( !update->id().isEmpty() && !onlyFeatures ) {
@@ -290,8 +285,7 @@ GeoDataPlaylist *TourItemDelegate::playlist() const
     QModelIndex const rootIndex = m_listView->rootIndex();
     if( rootIndex.isValid() ) {
         GeoDataObject *rootObject = static_cast<GeoDataObject*>( rootIndex.internalPointer() );
-        if ( rootObject->nodeType() == GeoDataTypes::GeoDataPlaylistType ) {
-            GeoDataPlaylist *playlist = static_cast<GeoDataPlaylist*>( rootObject );
+        if (GeoDataPlaylist *playlist = geodata_cast<GeoDataPlaylist>(rootObject)) {
             return playlist;
         }
     }
@@ -310,7 +304,7 @@ QWidget* TourItemDelegate::createEditor(QWidget* parent, const QStyleOptionViewI
 {
     Q_UNUSED( option );
     GeoDataObject *object = qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) );
-    if ( object->nodeType() == GeoDataTypes::GeoDataFlyToType ) {
+    if (geodata_cast<GeoDataFlyTo>(object)) {
         FlyToEditWidget* widget = new FlyToEditWidget(index, m_widget, parent);
         widget->setFirstFlyTo( m_firstFlyTo );
         connect(widget, SIGNAL(editingDone(QModelIndex)), this, SLOT(closeEditor(QModelIndex)));
@@ -318,25 +312,25 @@ QWidget* TourItemDelegate::createEditor(QWidget* parent, const QStyleOptionViewI
         connect( this, SIGNAL(firstFlyToChanged(QPersistentModelIndex)), widget, SLOT(setFirstFlyTo(QPersistentModelIndex)) );
         return widget;
 
-    } else if ( object->nodeType() == GeoDataTypes::GeoDataTourControlType ) {
+    } else if (geodata_cast<GeoDataTourControl>(object)) {
         TourControlEditWidget* widget = new TourControlEditWidget(index, parent);
         connect(widget, SIGNAL(editingDone(QModelIndex)), this, SLOT(closeEditor(QModelIndex)));
         connect( this, SIGNAL(editableChanged(bool)), widget, SLOT(setEditable(bool)) );
         return widget;
 
-    } else if ( object->nodeType() == GeoDataTypes::GeoDataWaitType ) {
+    } else if (geodata_cast<GeoDataWait>(object)) {
         WaitEditWidget* widget = new WaitEditWidget(index, parent);
         connect(widget, SIGNAL(editingDone(QModelIndex)), this, SLOT(closeEditor(QModelIndex)));
         connect( this, SIGNAL(editableChanged(bool)), widget, SLOT(setEditable(bool)) );
         return widget;
 
-    } else if ( object->nodeType() == GeoDataTypes::GeoDataSoundCueType ) {
+    } else if (geodata_cast<GeoDataSoundCue>(object)) {
         SoundCueEditWidget* widget = new SoundCueEditWidget(index, parent);
         connect(widget, SIGNAL(editingDone(QModelIndex)), this, SLOT(closeEditor(QModelIndex)));
         connect( this, SIGNAL(editableChanged(bool)), widget, SLOT(setEditable(bool)) );
         return widget;
 
-    } else if ( object->nodeType() == GeoDataTypes::GeoDataAnimatedUpdateType ) {
+    } else if (geodata_cast<GeoDataAnimatedUpdate>(object)) {
         RemoveItemEditWidget* widget = new RemoveItemEditWidget(index, parent);
         GeoDataPlaylist *playlistObject = playlist();
         if( playlistObject != 0 ) {
@@ -399,8 +393,7 @@ bool TourItemDelegate::editAnimatedUpdate(GeoDataAnimatedUpdate *animatedUpdate,
     if( !create ) {
         if( placemark->targetId().isEmpty() && !defaultFeatureId().isEmpty() ) {
             GeoDataFeature *feature = findFeature( defaultFeatureId() );
-            if( feature != 0 && feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
-                GeoDataPlacemark *targetPlacemark = static_cast<GeoDataPlacemark*>( feature );
+            if (GeoDataPlacemark *targetPlacemark = (feature != 0 ? geodata_cast<GeoDataPlacemark>(feature) : 0)) {
                 animatedUpdate->update()->change()->placemarkList().remove( 0 );
                 delete placemark;
                 placemark = new GeoDataPlacemark( *targetPlacemark );
@@ -452,8 +445,7 @@ GeoDataFeature *TourItemDelegate::findFeature(const QString &id) const
     GeoDataFeature *result = 0;
     for( int i = 0; i < playlistObject->size(); ++i ) {
         GeoDataTourPrimitive *primitive = playlistObject->primitive( i );
-        if( primitive->nodeType() == GeoDataTypes::GeoDataAnimatedUpdateType ) {
-            GeoDataAnimatedUpdate *animatedUpdate = static_cast<GeoDataAnimatedUpdate*>( primitive );
+        if (GeoDataAnimatedUpdate *animatedUpdate = geodata_cast<GeoDataAnimatedUpdate>(primitive)) {
             if( animatedUpdate->update() != 0 ) {
                 GeoDataUpdate *update = animatedUpdate->update();
                 if( update->create() != 0 ) {
@@ -510,8 +502,7 @@ bool TourItemDelegate::editorEvent( QEvent* event, QAbstractItemModel* model, co
                 return true;
             }else{
                 GeoDataObject *object = qvariant_cast<GeoDataObject*>(index.data( MarblePlacemarkModel::ObjectPointerRole ) );
-                if( object->nodeType() == GeoDataTypes::GeoDataAnimatedUpdateType ) {
-                    GeoDataAnimatedUpdate *animatedUpdate = static_cast<GeoDataAnimatedUpdate*>( object );
+                if (GeoDataAnimatedUpdate *animatedUpdate = geodata_cast<GeoDataAnimatedUpdate>(object)) {
                     if( animatedUpdate->update() && animatedUpdate->update()->create() ) {
                         if( editAnimatedUpdate( animatedUpdate ) ) {
                             setDefaultFeatureId( m_defaultFeatureId );

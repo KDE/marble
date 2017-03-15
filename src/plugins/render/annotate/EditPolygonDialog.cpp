@@ -21,7 +21,6 @@
 #include "GeoDataStyle.h"
 #include "GeoDataLineStyle.h"
 #include "GeoDataPolyStyle.h"
-#include "GeoDataTypes.h"
 #include "GeoDataLinearRing.h"
 #include "GeoDataPolygon.h"
 #include "NodeModel.h"
@@ -179,8 +178,7 @@ EditPolygonDialog::EditPolygonDialog( GeoDataPlacemark *placemark,
     d->m_nodeView->setEditTriggers( QAbstractItemView::AllEditTriggers );
 
     // Populating the model
-    if( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
-        GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( placemark->geometry() );
+    if (const GeoDataPolygon *polygon = geodata_cast<GeoDataPolygon>(placemark->geometry())) {
         GeoDataLinearRing outerBoundary = polygon->outerBoundary();
         for( int i = 0; i < outerBoundary.size(); ++i ) {
             d->m_nodeModel->addNode( outerBoundary.at( i ) );
@@ -219,8 +217,7 @@ void EditPolygonDialog::handleItemMoving( GeoDataPlacemark *item )
 {
     if( item == d->m_placemark ) {
         d->m_nodeModel->clear();
-        if( d->m_placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
-            GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( d->m_placemark->geometry() );
+        if (const auto polygon = geodata_cast<GeoDataPolygon>(d->m_placemark->geometry())) {
             GeoDataLinearRing outerBoundary = polygon->outerBoundary();
             for( int i = 0; i < outerBoundary.size(); ++i ) {
                 d->m_nodeModel->addNode( outerBoundary.at( i ) );
@@ -295,8 +292,7 @@ void EditPolygonDialog::checkFields()
                               tr( "Please specify a name for this polygon." ) );
         ok = false;
     } else {
-        if ( d->m_placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
-            GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( d->m_placemark->geometry() );
+        if (const auto polygon = geodata_cast<GeoDataPolygon>(d->m_placemark->geometry())) {
             if( polygon->outerBoundary().size() < 3 ) {
                 QMessageBox::warning( this,
                                       tr( "Not enough nodes specified." ),

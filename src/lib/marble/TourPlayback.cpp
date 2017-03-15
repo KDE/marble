@@ -29,7 +29,6 @@
 #include "GeoDataAnimatedUpdate.h"
 #include "MarbleModel.h"
 #include "GeoDataTreeModel.h"
-#include "GeoDataTypes.h"
 #include "PlaybackFlyToItem.h"
 #include "PlaybackAnimatedUpdateItem.h"
 #include "PlaybackWaitItem.h"
@@ -241,31 +240,24 @@ void TourPlayback::updateTracks()
     double delay = 0;
     for( int i = 0; i < d->m_tour->playlist()->size(); i++){
         GeoDataTourPrimitive* primitive = d->m_tour->playlist()->primitive( i );
-        if( primitive->nodeType() == GeoDataTypes::GeoDataFlyToType ){
-            const GeoDataFlyTo *flyTo = dynamic_cast<const GeoDataFlyTo*>(primitive);
+        if (const auto flyTo = geodata_cast<GeoDataFlyTo>(primitive)){
             d->m_mainTrack.append( new PlaybackFlyToItem( flyTo ) );
             delay += flyTo->duration();
         }
-        else if( primitive->nodeType() == GeoDataTypes::GeoDataWaitType ){
-            const GeoDataWait *wait = dynamic_cast<const GeoDataWait*>(primitive);
-
+        else if (const auto wait = geodata_cast<GeoDataWait>(primitive)) {
             d->m_mainTrack.append( new PlaybackWaitItem( wait ) );
             delay += wait->duration();
         }
-        else if( primitive->nodeType() == GeoDataTypes::GeoDataTourControlType ){
-            const GeoDataTourControl *tourControl = dynamic_cast<const GeoDataTourControl*>(primitive);
-
+        else if (const auto tourControl = geodata_cast<GeoDataTourControl>(primitive)) {
             d->m_mainTrack.append( new PlaybackTourControlItem( tourControl ) );
         }
-        else if( primitive->nodeType() == GeoDataTypes::GeoDataSoundCueType ){
-            const GeoDataSoundCue *soundCue = dynamic_cast<const GeoDataSoundCue*>(primitive);
+        else if (const auto soundCue = geodata_cast<GeoDataSoundCue>(primitive)) {
             PlaybackSoundCueItem *item = new PlaybackSoundCueItem( soundCue );
             SoundTrack *track = new SoundTrack( item );
             track->setDelayBeforeTrackStarts( delay );
             d->m_soundTracks.append( track );
         }
-        else if( primitive->nodeType() == GeoDataTypes::GeoDataAnimatedUpdateType ){
-            GeoDataAnimatedUpdate *animatedUpdate = dynamic_cast<GeoDataAnimatedUpdate*>(primitive);
+        else if (const auto animatedUpdate = geodata_cast<GeoDataAnimatedUpdate>(primitive)) {
             PlaybackAnimatedUpdateItem *item = new PlaybackAnimatedUpdateItem( animatedUpdate );
             AnimatedUpdateTrack *track = new AnimatedUpdateTrack( item );
             track->setDelayBeforeTrackStarts( delay + animatedUpdate->delayedStart() );

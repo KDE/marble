@@ -19,7 +19,6 @@
 #include <QDebug>
 
 // Marble
-#include "GeoDataTypes.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataGeometry.h"
 #include "OsmPlacemarkData.h"

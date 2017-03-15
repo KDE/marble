@@ -13,7 +13,6 @@
 
 #include "TileId.h"
 
-#include "GeoDataTypes.h"
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataPolygon.h"
 #include "GeoDataPlacemark.h"
@@ -35,8 +34,7 @@ VectorClipper::VectorClipper(GeoDataDocument* document, int maxZoomLevel) :
     m_maxZoomLevel(maxZoomLevel)
 {
     for (auto feature: document->featureList()) {
-        if (feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
-            GeoDataPlacemark* placemark = static_cast<GeoDataPlacemark*>(feature);
+        if (const auto placemark = geodata_cast<GeoDataPlacemark>(feature)) {
             // Select zoom level such that the placemark fits in a single tile
             int zoomLevel;
             qreal north, south, east, west;
@@ -49,8 +47,8 @@ VectorClipper::VectorClipper(GeoDataDocument* document, int maxZoomLevel) :
             }
             TileId const key = TileId::fromCoordinates(GeoDataCoordinates(west, north), zoomLevel);
             m_items[key] << placemark;
-        } else if (feature->nodeType() == GeoDataTypes::GeoDataRelationType) {
-            m_relations << static_cast<GeoDataRelation*>(feature);
+        } else if (GeoDataRelation *relation = geodata_cast<GeoDataRelation>(feature)) {
+            m_relations << relation;
         } else {
             Q_ASSERT(false && "only placemark variants are supported so far");
         }
@@ -72,11 +70,11 @@ GeoDataDocument *VectorClipper::clipTo(const GeoDataLatLonBox &tileBoundary, int
     for (GeoDataPlacemark const * placemark: potentialIntersections(tileBoundary)) {
         GeoDataGeometry const * const geometry = placemark ? placemark->geometry() : nullptr;
         if (geometry && tileBoundary.intersects(geometry->latLonAltBox())) {
-            if(geometry->nodeType() == GeoDataTypes::GeoDataPolygonType) {
+            if (geodata_cast<GeoDataPolygon>(geometry)) {
                 clipPolygon(placemark, clip, minArea, tile, osmIds);
-            } else if (geometry->nodeType() == GeoDataTypes::GeoDataLineStringType) {
+            } else if (geodata_cast<GeoDataLineString>(geometry)) {
                 clipString<GeoDataLineString>(placemark, clip, minArea, tile, osmIds);
-            } else if (geometry->nodeType() == GeoDataTypes::GeoDataLinearRingType) {
+            } else if (geodata_cast<GeoDataLinearRing>(geometry)) {
                 clipString<GeoDataLinearRing>(placemark, clip, minArea, tile, osmIds);
             } else {
                 tile->append(placemark->clone());

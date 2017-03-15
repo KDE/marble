@@ -14,7 +14,6 @@
 #include "GeoDataDocument.h"
 #include "GeoDataLatLonBox.h"
 #include "GeoDataTreeModel.h"
-#include "GeoDataTypes.h"
 #include "GeoSceneVectorTileDataset.h"
 #include "MarbleGlobal.h"
 #include "MarbleDebug.h"
@@ -218,8 +217,7 @@ void VectorTileModel::queryTiles(int tileZoomLevel, const QRect &rect)
 
 void VectorTileModel::cleanupTile(GeoDataObject *object)
 {
-    if (object->nodeType() == GeoDataTypes::GeoDataDocumentType) {
-        GeoDataDocument* document = static_cast<GeoDataDocument*>(object);
+    if (GeoDataDocument *document = geodata_cast<GeoDataDocument>(object)) {
         if (m_garbageQueue.contains(document)) {
             m_garbageQueue.removeAll(document);
             delete document;

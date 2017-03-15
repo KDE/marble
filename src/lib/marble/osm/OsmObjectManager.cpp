@@ -15,7 +15,6 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataLinearRing.h"
 #include "GeoDataPolygon.h"
-#include "GeoDataTypes.h"
 #include "osm/OsmPlacemarkData.h"
 
 namespace Marble {
@@ -34,8 +33,7 @@ void OsmObjectManager::initializeOsmData( GeoDataPlacemark* placemark )
     }
 
     // Assigning osmData to each of the line's nodes ( if they don't already have data )
-    if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType ) {
-        const GeoDataLineString* lineString = static_cast<GeoDataLineString*>( placemark->geometry() );
+    if (const auto lineString = geodata_cast<GeoDataLineString>(placemark->geometry())) {
         QVector<GeoDataCoordinates>::const_iterator it =  lineString->constBegin();
         QVector<GeoDataCoordinates>::ConstIterator const end = lineString->constEnd();
 
@@ -47,8 +45,7 @@ void OsmObjectManager::initializeOsmData( GeoDataPlacemark* placemark )
     }
 
     // Assigning osmData to each of the line's nodes ( if they don't already have data )
-    if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLinearRingType ) {
-        const GeoDataLinearRing* lineString = static_cast<GeoDataLinearRing*>( placemark->geometry() );
+    if (const auto lineString = geodata_cast<GeoDataLinearRing>(placemark->geometry())) {
         for (auto it =lineString->constBegin(), end = lineString->constEnd(); it != end; ++it ) {
             if (osmData.nodeReference(*it).isNull()) {
                 osmData.nodeReference(*it).setId(--m_minId);
@@ -58,8 +55,7 @@ void OsmObjectManager::initializeOsmData( GeoDataPlacemark* placemark )
 
     // Assigning osmData to each of the polygons boundaries, and to each of the
     // nodes that are part of those boundaries ( if they don't already have data )
-    if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
-        const GeoDataPolygon* polygon = static_cast<GeoDataPolygon*>( placemark->geometry() );
+    if (const auto polygon = geodata_cast<GeoDataPolygon>(placemark->geometry())) {
         const GeoDataLinearRing &outerBoundary = polygon->outerBoundary();
         int index = -1;
         if ( isNull ) {

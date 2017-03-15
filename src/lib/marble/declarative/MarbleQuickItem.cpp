@@ -32,7 +32,6 @@
 #include <MarbleMath.h>
 #include <GeoDataLatLonAltBox.h>
 #include <GeoDataCoordinates.h>
-#include <GeoDataTypes.h>
 #include <ReverseGeocodingRunnerManager.h>
 #include <routing/RoutingManager.h>
 #include <routing/RoutingModel.h>
@@ -591,8 +590,8 @@ namespace Marble
         auto features = d->m_map.whichFeatureAt(QPoint(x, y));
         QVector<GeoDataPlacemark const *> placemarks;
         for(auto feature: features) {
-            if (feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
-                placemarks << static_cast<const GeoDataPlacemark*>(feature);
+            if (const auto placemark = geodata_cast<GeoDataPlacemark>(feature)) {
+                placemarks << placemark;
             }
         }
 

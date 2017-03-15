@@ -26,7 +26,6 @@
 #include "GeoDataStyle.h"
 #include "GeoDataIconStyle.h"
 #include "GeoDataLabelStyle.h"
-#include "GeoDataTypes.h"
 #include "OsmPlacemarkData.h"
 
 #include "MarbleDebug.h"
@@ -236,8 +235,7 @@ void PlacemarkLayout::addPlacemarks( const QModelIndex& parent, int first, int l
         QModelIndex index = m_placemarkModel->index( i, 0, parent );
         Q_ASSERT( index.isValid() );
         auto const object = qvariant_cast<GeoDataObject*>(index.data(MarblePlacemarkModel::ObjectPointerRole));
-        if (object->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
-            const GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(object);
+        if (const GeoDataPlacemark *placemark = geodata_cast<GeoDataPlacemark>(object)) {
             const GeoDataCoordinates coordinates = placemarkIconCoordinates( placemark );
             if ( !coordinates.isValid() ) {
                 continue;

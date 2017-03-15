@@ -9,7 +9,6 @@
 //
 
 #include "SerialTrack.h"
-#include "GeoDataTypes.h"
 #include "PlaybackFlyToItem.h"
 #include "PlaybackWaitItem.h"
 #include "PlaybackTourControlItem.h"

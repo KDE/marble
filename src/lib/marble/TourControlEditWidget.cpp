@@ -17,7 +17,6 @@
 
 #include "TourControlEditWidget.h"
 #include "MarblePlacemarkModel.h"
-#include "GeoDataTypes.h"
 #include "GeoDataTourControl.h"
 
 namespace Marble
@@ -80,8 +79,9 @@ GeoDataTourControl* TourControlEditWidget::tourControlElement()
 {
     GeoDataObject *object = qvariant_cast<GeoDataObject*>(m_index.data( MarblePlacemarkModel::ObjectPointerRole ) );
     Q_ASSERT( object );
-    Q_ASSERT( object->nodeType() == GeoDataTypes::GeoDataTourControlType );
-    return static_cast<GeoDataTourControl*>( object );
+    auto tourControl = geodata_cast<GeoDataTourControl>(object);
+    Q_ASSERT(tourControl);
+    return tourControl;
 }
 
 } // namespace Marble

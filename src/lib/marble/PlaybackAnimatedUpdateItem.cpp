@@ -13,11 +13,14 @@
 #include "GeoDataAnimatedUpdate.h"
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
-#include "GeoDataTypes.h"
 #include "GeoDataCreate.h"
 #include "GeoDataUpdate.h"
 #include "GeoDataDelete.h"
 #include "GeoDataChange.h"
+#include "GeoDataFolder.h"
+#include "GeoDataGroundOverlay.h"
+#include "GeoDataPhotoOverlay.h"
+#include "GeoDataScreenOverlay.h"
 
 #include <QString>
 
@@ -62,8 +65,8 @@ void PlaybackAnimatedUpdateItem::play()
             }
             if( placemark->isBalloonVisible() ){
                 GeoDataFeature* feature = findFeature( m_rootDocument, targetId );
-                if( feature && feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType ){
-                    emit balloonShown( static_cast<GeoDataPlacemark*>( feature ) );
+                if (auto placemark = geodata_cast<GeoDataPlacemark>(feature)) {
+                    emit balloonShown(placemark);
                 }
             } else {
                 emit balloonHidden();
@@ -76,20 +79,19 @@ void PlaybackAnimatedUpdateItem::play()
         for( int index = 0; index < m_animatedUpdate->update()->create()->size(); ++index ) {
             GeoDataFeature* child = m_animatedUpdate->update()->create()->child( index );
             if( child &&
-                    ( child->nodeType() == GeoDataTypes::GeoDataDocumentType ||
-                      child->nodeType() == GeoDataTypes::GeoDataFolderType ) ) {
+                    (geodata_cast<GeoDataDocument>(child)||
+                     geodata_cast<GeoDataFolder>(child))) {
                 GeoDataContainer *addContainer = static_cast<GeoDataContainer*>( child );
                 QString targetId = addContainer->targetId();
                 GeoDataFeature* feature = findFeature( m_rootDocument, targetId );
                 if( feature &&
-                        ( feature->nodeType() == GeoDataTypes::GeoDataDocumentType ||
-                          feature->nodeType() == GeoDataTypes::GeoDataFolderType ) ) {
+                        (geodata_cast<GeoDataDocument>(feature) ||
+                         geodata_cast<GeoDataFolder>(feature))) {
                     GeoDataContainer* container = static_cast<GeoDataContainer*>( feature );
                     for( int i = 0; i < addContainer->size(); ++i ) {
                         emit added( container, addContainer->child( i ), -1 );
-                        if( addContainer->child( i )->nodeType() == GeoDataTypes::GeoDataPlacemarkType )
+                        if (auto placemark = geodata_cast<GeoDataPlacemark>(addContainer->child(i)))
                         {
-                            GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( addContainer->child( i ) );
                             if( placemark->isBalloonVisible() ) {
                                 emit balloonShown( placemark );
                             }
@@ -113,9 +115,8 @@ void PlaybackAnimatedUpdateItem::play()
             if (feature && canDelete(*feature)) {
                 m_deletedObjects.append( feature );
                 emit removed( feature );
-                if( feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType )
+                if (auto placemark = geodata_cast<GeoDataPlacemark>(feature))
                 {
-                    GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( feature );
                     if( placemark->isBalloonVisible() ) {
                         emit balloonHidden();
                     }
@@ -184,7 +185,7 @@ void PlaybackAnimatedUpdateItem::stop()
             }
             GeoDataFeature* feature = findFeature( m_rootDocument, targetId );
             if( placemark->isBalloonVisible() ){
-                if( feature && feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType ){
+                if (geodata_cast<GeoDataPlacemark>(feature)) {
                     emit balloonHidden();
                 }
             } else {
@@ -197,15 +198,14 @@ void PlaybackAnimatedUpdateItem::stop()
         for( int index = 0; index < m_animatedUpdate->update()->create()->size(); ++index ) {
             GeoDataFeature* feature = m_animatedUpdate->update()->create()->child( index );
             if( feature &&
-                    ( feature->nodeType() == GeoDataTypes::GeoDataDocumentType ||
-                      feature->nodeType() == GeoDataTypes::GeoDataFolderType ) ) {
+                    (geodata_cast<GeoDataDocument>(feature) ||
+                     geodata_cast<GeoDataFolder>(feature))) {
                 GeoDataContainer* container = static_cast<GeoDataContainer*>( feature );
                 for( int i = 0; i < container->size(); ++i ) {
 
                     emit removed( container->child( i ) );
-                    if( container->child( i )->nodeType() == GeoDataTypes::GeoDataPlacemarkType )
+                    if (auto placemark = geodata_cast<GeoDataPlacemark>(container->child(i)))
                     {
-                        GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( container->child( i ) );
                         if( placemark->isBalloonVisible() ) {
                             emit balloonHidden();
                         }
@@ -224,9 +224,8 @@ void PlaybackAnimatedUpdateItem::stop()
             /** @todo Do we have to note the original row position and restore it? */
             Q_ASSERT( dynamic_cast<GeoDataContainer*>( target ) );
             emit added( static_cast<GeoDataContainer*>( target ), feature, -1 );
-            if( feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType )
+            if (auto placemark = geodata_cast<GeoDataPlacemark>(feature))
             {
-                GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( feature );
                 if( placemark->isBalloonVisible() ) {
                     emit balloonShown( placemark );
                 }
@@ -243,14 +242,12 @@ bool PlaybackAnimatedUpdateItem::isApplied() const
 
 bool PlaybackAnimatedUpdateItem::canDelete(const GeoDataFeature &feature)
 {
-    const char *nodeType = feature.nodeType();
-
-    return  nodeType == GeoDataTypes::GeoDataDocumentType ||
-            nodeType == GeoDataTypes::GeoDataFolderType ||
-            nodeType == GeoDataTypes::GeoDataGroundOverlayType ||
-            nodeType == GeoDataTypes::GeoDataPlacemarkType ||
-            nodeType == GeoDataTypes::GeoDataScreenOverlayType ||
-            nodeType == GeoDataTypes::GeoDataPhotoOverlayType;
+    return  geodata_cast<GeoDataDocument>(&feature) ||
+            geodata_cast<GeoDataFolder>(&feature) ||
+            geodata_cast<GeoDataGroundOverlay>(&feature) ||
+            geodata_cast<GeoDataPlacemark>(&feature) ||
+            geodata_cast<GeoDataScreenOverlay>(&feature) ||
+            geodata_cast<GeoDataPhotoOverlay>(&feature);
 }
 
 }

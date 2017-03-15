@@ -12,7 +12,6 @@
 #include "GeoGraphicsItem.h"
 #include "GeoGraphicsItem_p.h"
 
-#include "GeoDataTypes.h"
 #include "GeoDataPlacemark.h"
 
 // Qt
@@ -87,8 +86,7 @@ GeoDataStyle::ConstPtr GeoGraphicsItem::style() const
     }
 
     if (!d->m_style) {
-        if (d->m_feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType) {
-            const GeoDataPlacemark *placemark = static_cast<const GeoDataPlacemark*>(d->m_feature);
+        if (const GeoDataPlacemark *placemark = geodata_cast<GeoDataPlacemark>(d->m_feature)) {
             auto styling = StyleParameters(placemark, d->m_renderContext.tileLevel());
             for (auto relation: d->m_relations) {
                 if (relation->isVisible()) {

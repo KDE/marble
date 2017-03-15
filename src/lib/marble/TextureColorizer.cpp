@@ -32,7 +32,6 @@
 #include "GeoDataLinearRing.h"
 #include "GeoDataPolygon.h"
 #include "GeoDataFeature.h"
-#include "GeoDataTypes.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataDocument.h"
 #include "AbstractProjection.h"
@@ -185,23 +184,17 @@ void TextureColorizer::drawIndividualDocument( GeoPainter *painter, const GeoDat
     QVector<GeoDataFeature*>::ConstIterator end = document->constEnd();
 
     for ( ; i != end; ++i ) {
-        if ( (*i)->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
-
-            const GeoDataPlacemark *placemark = static_cast<const GeoDataPlacemark*>( *i );
-
-            if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType ) {
-                const GeoDataLineString *child = static_cast<const GeoDataLineString*>( placemark->geometry() );
+        if (const GeoDataPlacemark *placemark = geodata_cast<GeoDataPlacemark>(*i)) {
+            if (const GeoDataLineString *child = geodata_cast<GeoDataLineString>(placemark->geometry())) {
                 const GeoDataLinearRing ring( *child );
                 painter->drawPolygon( ring );
             }
 
-            if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType ) {
-                const GeoDataPolygon *child = static_cast<const GeoDataPolygon*>( placemark->geometry() );
+            if (const GeoDataPolygon *child = geodata_cast<GeoDataPolygon>(placemark->geometry())) {
                 painter->drawPolygon( *child );
             }
 
-            if ( placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLinearRingType ) {
-                const GeoDataLinearRing *child = static_cast<const GeoDataLinearRing*>( placemark->geometry() );
+            if (const GeoDataLinearRing *child = geodata_cast<GeoDataLinearRing>(placemark->geometry())) {
                 painter->drawPolygon( *child );
             }
         }

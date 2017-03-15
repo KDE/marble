@@ -9,7 +9,6 @@
 //
 
 #include "GeoDataPlacemark.h"
-#include "GeoDataTypes.h"
 #include "GeoDataLineString.h"
 #include "GeoDataPolygon.h"
 #include "GeoDataCoordinates.h"
@@ -35,20 +34,17 @@ NodeReducer::NodeReducer(GeoDataDocument* document, const TileId &tileId) :
     for (GeoDataPlacemark* placemark: document->placemarkList()) {
         GeoDataGeometry const * const geometry = placemark->geometry();
         auto const visualCategory = placemark->visualCategory();
-        if(geometry->nodeType() == GeoDataTypes::GeoDataLineStringType) {
-            GeoDataLineString const * prevLine = static_cast<GeoDataLineString const *>(geometry);
+        if (const auto prevLine = geodata_cast<GeoDataLineString>(geometry)) {
             GeoDataLineString* reducedLine = new GeoDataLineString;
             reduce(*prevLine, placemark->osmData(), visualCategory, reducedLine);
             placemark->setGeometry(reducedLine);
         } else if (m_zoomLevel < 17) {
-            if(geometry->nodeType() == GeoDataTypes::GeoDataLinearRingType) {
-                GeoDataLinearRing const * prevRing = static_cast<GeoDataLinearRing const *>(geometry);
+            if (const auto prevRing = geodata_cast<GeoDataLinearRing>(geometry)) {
                 GeoDataLinearRing* reducedRing = new GeoDataLinearRing;
                 reduce(*prevRing, placemark->osmData(), visualCategory, reducedRing);
                 placemark->setGeometry(reducedRing);
-            } else if(geometry->nodeType() == GeoDataTypes::GeoDataPolygonType) {
+            } else if (const auto prevPolygon = geodata_cast<GeoDataPolygon>(geometry)) {
                 GeoDataPolygon* reducedPolygon = new GeoDataPolygon;
-                GeoDataPolygon const * prevPolygon = static_cast<GeoDataPolygon const *>(geometry);
                 GeoDataLinearRing const * prevRing = &(prevPolygon->outerBoundary());
                 GeoDataLinearRing reducedRing;
                 reduce(*prevRing, placemark->osmData().memberReference(-1), visualCategory, &reducedRing);
