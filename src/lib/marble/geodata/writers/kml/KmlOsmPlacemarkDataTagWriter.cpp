@@ -76,12 +76,10 @@ bool KmlOsmPlacemarkDataTagWriter::writeOsmData( const GeoDataGeometry *geometry
     if ( geometry ) {
 
         // Ways
-        if ( geometry->nodeType() == GeoDataTypes::GeoDataLineStringType ||
-             geometry->nodeType() == GeoDataTypes::GeoDataLinearRingType ) {
+        if (const GeoDataLineString *lineString = dynamic_cast<const GeoDataLineString *>(geometry)) {
             int ndIndex = 0;
 
             // Writing the component nodes
-            const GeoDataLineString *lineString = static_cast<const GeoDataLineString*>( geometry );
             QVector<GeoDataCoordinates>::const_iterator nodeIt = lineString->begin();
             QVector<GeoDataCoordinates>::const_iterator nodeEnd = lineString->end();
             for ( ; nodeIt != nodeEnd; ++nodeIt ) {
