@@ -649,12 +649,7 @@ Qt::ItemFlags GeoDataTreeModel::flags ( const QModelIndex & index ) const
         return Qt::NoItemFlags;
 
     const GeoDataObject *object = static_cast<const GeoDataObject *>(index.internalPointer());
-    if ( object->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
-        const GeoDataDocument *document = static_cast<const GeoDataDocument *>(object);
-        if( document->documentRole() == UserDocument ) {
-            return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable | Qt::ItemIsEditable;
-        }
-    }
+
     if ( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
         const GeoDataFeature *feature = static_cast<const GeoDataFeature *>(object);
         const GeoDataObject *parent = feature->parent();
@@ -690,10 +685,11 @@ Qt::ItemFlags GeoDataTreeModel::flags ( const QModelIndex & index ) const
             return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable | Qt::ItemIsEditable; 
         }
     }
-    if ( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType
-     || object->nodeType() == GeoDataTypes::GeoDataFolderType ) {
-        const GeoDataFeature *feature = static_cast<const GeoDataFeature *>(object);
-        const GeoDataObject *parent = feature->parent();
+
+    if (object->nodeType() == GeoDataTypes::GeoDataPlacemarkType
+         || object->nodeType() == GeoDataTypes::GeoDataFolderType
+         || object->nodeType() == GeoDataTypes::GeoDataDocumentType) {
+        const GeoDataObject *parent = object;
         while( parent->nodeType() != GeoDataTypes::GeoDataDocumentType ) {
             parent = parent->parent();
         }
@@ -701,11 +697,7 @@ Qt::ItemFlags GeoDataTreeModel::flags ( const QModelIndex & index ) const
         if( document->documentRole() == UserDocument ) {
             return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable | Qt::ItemIsEditable;;
         }
-    }
 
-    if ( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType
-         || object->nodeType() == GeoDataTypes::GeoDataFolderType
-         || object->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
         return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable;
     }
 
