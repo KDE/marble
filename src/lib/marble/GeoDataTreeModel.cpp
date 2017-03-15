@@ -285,10 +285,8 @@ QVariant GeoDataTreeModel::data( const QModelIndex &index, int role ) const
                     return QVariant( placemark->zoomLevel() );
                 }
         }
-        if ( object->nodeType() == GeoDataTypes::GeoDataFolderType
-             || object->nodeType() == GeoDataTypes::GeoDataDocumentType
-             || object->nodeType() == GeoDataTypes::GeoDataTourType ) {
-            GeoDataFeature *feature = static_cast<GeoDataFeature*>( object );
+
+        if (const auto feature = dynamic_cast<const GeoDataFeature *>(object)) {
             if ( index.column() == 0 ){
                 return QVariant( feature->name() );
             }
@@ -317,7 +315,6 @@ QVariant GeoDataTreeModel::data( const QModelIndex &index, int role ) const
               && index.column() == 0 ) {
         if ( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType ) {
             GeoDataPlacemark *feature = static_cast<GeoDataPlacemark*>( object );
-            const char* type = feature->geometry()->nodeType();
             if ( feature->parent()->nodeType() == GeoDataTypes::GeoDataFolderType ) {
                 GeoDataFolder *folder = static_cast<GeoDataFolder *>( feature->parent() );
                 if ( folder->style()->listStyle().listItemType() == GeoDataListStyle::RadioFolder 
@@ -329,20 +326,16 @@ QVariant GeoDataTreeModel::data( const QModelIndex &index, int role ) const
                     }
                 }
             }
-            if ( type == GeoDataTypes::GeoDataLineStringType
-                 || type == GeoDataTypes::GeoDataPolygonType
-                 || type == GeoDataTypes::GeoDataLinearRingType
-                 || type == GeoDataTypes::GeoDataMultiGeometryType
-                 || type == GeoDataTypes::GeoDataTrackType
-                 ) {
-                if ( feature->isGloballyVisible() ) {
-                    return QVariant( Qt::Checked );
-                } else if ( feature->isVisible() ) {
-                    return QVariant( Qt::PartiallyChecked );
-                } else {
-                    return QVariant( Qt::Unchecked );
-                }
+
+            if (feature->isGloballyVisible()) {
+                return QVariant(Qt::Checked);
             }
+
+            if (feature->isVisible()) {
+                return QVariant(Qt::PartiallyChecked);
+            }
+
+            return QVariant(Qt::Unchecked);
         } else if ( object->nodeType() == GeoDataTypes::GeoDataFolderType
                     || object->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
             GeoDataFeature *feature = static_cast<GeoDataFeature*>( object );
@@ -393,21 +386,16 @@ QVariant GeoDataTreeModel::data( const QModelIndex &index, int role ) const
     }
     else if ( role == Qt::DecorationRole
               && index.column() == 0 ) {
-        if ( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType
-             || object->nodeType() == GeoDataTypes::GeoDataFolderType
-             || object->nodeType() == GeoDataTypes::GeoDataDocumentType
-             || object->nodeType() == GeoDataTypes::GeoDataTourType ) {
-            GeoDataFeature *feature = static_cast<GeoDataFeature*>( object );
-            if (feature->style()->iconStyle().icon().isNull()) return QImage();
+        if (const auto feature = dynamic_cast<const GeoDataFeature *>(object)) {
+            if (feature->style()->iconStyle().icon().isNull()) {
+                return QImage();
+            }
+
             return QVariant(feature->style()->iconStyle().icon().scaled( QSize(16,16), Qt::KeepAspectRatio, Qt::SmoothTransformation ));
 	    }
     } else if ( role == Qt::ToolTipRole
               && index.column() == 0 ) {
-        if ( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType
-             || object->nodeType() == GeoDataTypes::GeoDataFolderType
-             || object->nodeType() == GeoDataTypes::GeoDataDocumentType
-             || object->nodeType() == GeoDataTypes::GeoDataTourType ) {
-            GeoDataFeature *feature = static_cast<GeoDataFeature*>( object );
+        if (const auto feature = dynamic_cast<const GeoDataFeature *>(object)) {
             return QVariant( feature->description() );
         }
     } else if ( role == MarblePlacemarkModel::ObjectPointerRole ) {
@@ -592,10 +580,7 @@ bool GeoDataTreeModel::setData ( const QModelIndex & index, const QVariant & val
 
     GeoDataObject *object = static_cast<GeoDataObject*>( index.internalPointer() );
     if ( role == Qt::CheckStateRole ) {
-        if ( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType
-             || object->nodeType() == GeoDataTypes::GeoDataFolderType
-             || object->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
-            GeoDataFeature *feature = static_cast<GeoDataFeature*>( object );
+        if (auto feature = dynamic_cast<GeoDataFeature *>(object)) {
             bool bValue = value.toBool();
             if (feature->parent()->nodeType() == GeoDataTypes::GeoDataFolderType) {
                 GeoDataFolder *pfolder = static_cast<GeoDataFolder *>(feature->parent());
@@ -628,11 +613,7 @@ bool GeoDataTreeModel::setData ( const QModelIndex & index, const QVariant & val
             return true;
         }
     } else if ( role == Qt::EditRole ) {
-        if ( object->nodeType() == GeoDataTypes::GeoDataPlacemarkType
-             || object->nodeType() == GeoDataTypes::GeoDataFolderType
-             || object->nodeType() == GeoDataTypes::GeoDataDocumentType
-             || object->nodeType() == GeoDataTypes::GeoDataTourType ) {
-            GeoDataFeature *feature = static_cast<GeoDataFeature*>( object );
+        if (auto feature = dynamic_cast<GeoDataFeature *>(object)) {
             feature->setName( value.toString() );
             mDebug() << "setData " << feature->name() << " " << value.toString();
             updateFeature( feature );
@@ -686,9 +667,11 @@ Qt::ItemFlags GeoDataTreeModel::flags ( const QModelIndex & index ) const
         }
     }
 
-    if (object->nodeType() == GeoDataTypes::GeoDataPlacemarkType
-         || object->nodeType() == GeoDataTypes::GeoDataFolderType
-         || object->nodeType() == GeoDataTypes::GeoDataDocumentType) {
+    if (object->nodeType() == GeoDataTypes::GeoDataTourType) {
+        return Qt::ItemIsSelectable | Qt::ItemIsEditable | Qt::ItemIsEnabled;
+    }
+
+    if (dynamic_cast<const GeoDataFeature *>(object)) {
         const GeoDataObject *parent = object;
         while( parent->nodeType() != GeoDataTypes::GeoDataDocumentType ) {
             parent = parent->parent();
@@ -699,10 +682,6 @@ Qt::ItemFlags GeoDataTreeModel::flags ( const QModelIndex & index ) const
         }
 
         return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable;
-    }
-
-    if ( object->nodeType() == GeoDataTypes::GeoDataTourType ) {
-        return Qt::ItemIsSelectable | Qt::ItemIsEditable | Qt::ItemIsEnabled;
     }
 
     if ( object->nodeType() == GeoDataTypes::GeoDataWaitType
