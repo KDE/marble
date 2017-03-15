@@ -244,9 +244,7 @@ void FileLoaderPrivate::createFilterProperties( GeoDataContainer *container )
     QVector<GeoDataFeature*>::Iterator i = container->begin();
     QVector<GeoDataFeature*>::Iterator const end = container->end();
     for (; i != end; ++i ) {
-        if ( (*i)->nodeType() == GeoDataTypes::GeoDataFolderType
-             || (*i)->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
-            GeoDataContainer *child = static_cast<GeoDataContainer*>( *i );
+        if (auto child = dynamic_cast<GeoDataContainer *>(*i)) {
             createFilterProperties( child );
         } else if (    (*i)->nodeType() == GeoDataTypes::GeoDataTourType
                     || (*i)->nodeType() == GeoDataTypes::GeoDataGroundOverlayType

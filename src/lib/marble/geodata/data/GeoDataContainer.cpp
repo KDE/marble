@@ -121,9 +121,7 @@ GeoDataLatLonAltBox GeoDataContainer::latLonAltBox() const
                 }
             }
         }
-        else if ( (*it)->nodeType() == GeoDataTypes::GeoDataFolderType
-                 || (*it)->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
-            GeoDataContainer *container = static_cast<GeoDataContainer*>(*it);
+        else if (const GeoDataContainer *container = dynamic_cast<GeoDataContainer *>(*it)) {
             if (result.isEmpty()) {
                 result = container->latLonAltBox();
             } else {

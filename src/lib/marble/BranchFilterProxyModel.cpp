@@ -10,10 +10,9 @@
 
 #include "BranchFilterProxyModel.h"
 
-#include "GeoDataTypes.h"
 #include "MarblePlacemarkModel.h"
+#include "GeoDataContainer.h"
 #include "GeoDataTreeModel.h"
-#include "GeoDataObject.h"
 
 namespace Marble
 {
@@ -52,8 +51,7 @@ bool BranchFilterProxyModel::filterAcceptsRow( int sourceRow, const QModelIndex 
     // return true for all non folder children of m_branchIndex
     if( sourceParent == m_branchIndex ) {
         GeoDataObject* obj = qvariant_cast<GeoDataObject*>( rowIndex.data( MarblePlacemarkModel::ObjectPointerRole ) );
-        return( obj->nodeType() != GeoDataTypes::GeoDataFolderType
-                && obj->nodeType() != GeoDataTypes::GeoDataDocumentType );
+        return dynamic_cast<const GeoDataContainer *>(obj);
     }
 
     // return true if rowIndex is a parent of m_branchIndex

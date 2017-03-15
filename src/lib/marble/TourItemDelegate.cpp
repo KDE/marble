@@ -19,6 +19,7 @@
 
 #include "TourItemDelegate.h"
 #include "MarblePlacemarkModel.h"
+#include "geodata/data/GeoDataContainer.h"
 #include "geodata/data/GeoDataObject.h"
 #include "geodata/data/GeoDataTourControl.h"
 #include "geodata/data/GeoDataWait.h"
@@ -171,8 +172,7 @@ void TourItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &opt
             bool ok = false;
             QString iconString;
             if( update && update->create() && update->create()->size() != 0
-                       && ( update->create()->first().nodeType() == GeoDataTypes::GeoDataFolderType ||
-                            update->create()->first().nodeType() == GeoDataTypes::GeoDataDocumentType ) ) {
+                       && (dynamic_cast<const GeoDataContainer *>(&update->create()->first()))) {
                 const GeoDataContainer *container = static_cast<const GeoDataContainer*>(update->create()->child(0));
                 if( container->size() > 0 ) {
                     label.setHtml( tr( "Create item %1" ).arg( container->first().id() ) );

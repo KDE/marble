@@ -33,11 +33,9 @@ bool TreeViewDecoratorModel::filterAcceptsRow( int sourceRow, const QModelIndex 
 {
     QModelIndex rowIndex = sourceModel()->index( sourceRow, 0, sourceParent );
 
-    GeoDataObject* object = qvariant_cast<GeoDataObject*>( rowIndex.data( MarblePlacemarkModel::ObjectPointerRole ) );
-    GeoDataObject* parent = object->parent();
-    if ( parent->nodeType() == GeoDataTypes::GeoDataFolderType ||
-         parent->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
-        GeoDataContainer *container = static_cast<GeoDataContainer *>( parent );
+    const GeoDataObject* object = qvariant_cast<GeoDataObject*>( rowIndex.data( MarblePlacemarkModel::ObjectPointerRole ) );
+    const GeoDataObject* parent = object->parent();
+    if (const auto container = dynamic_cast<const GeoDataContainer *>(parent)) {
         if ( container->style()->listStyle().listItemType() == GeoDataListStyle::CheckHideChildren ) {
             return false;
         }

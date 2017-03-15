@@ -496,9 +496,7 @@ void GeometryLayerPrivate::removeGraphicsItems(const GeoDataFeature *feature)
             updateTiledLineStrings(items);
         }
         m_scene.removeItem(feature);
-    } else if (feature->nodeType() == GeoDataTypes::GeoDataFolderType
-               || feature->nodeType() == GeoDataTypes::GeoDataDocumentType) {
-        const GeoDataContainer *container = static_cast<const GeoDataContainer*>(feature);
+    } else if (const auto container = dynamic_cast<const GeoDataContainer*>(feature)) {
         for (const GeoDataFeature *child: container->featureList()) {
             removeGraphicsItems(child);
         }
