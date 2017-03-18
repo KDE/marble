@@ -13,7 +13,7 @@
 #define MARBLE_GLOBAL_H
 
 
-#include <math.h>
+#include <cmath>
 
 #include <QString>
 

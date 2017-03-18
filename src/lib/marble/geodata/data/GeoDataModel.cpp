@@ -19,7 +19,7 @@
 #include "GeoDataResourceMap.h"
 #include "GeoDataScale.h"
 
-#include "stdio.h"
+#include <cstdio>
 
 namespace Marble {
 

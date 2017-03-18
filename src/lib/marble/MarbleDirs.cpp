@@ -19,7 +19,7 @@
 #include <QStringList>
 #include <QCoreApplication>
 
-#include <stdlib.h>
+#include <cstdlib>
 
 #include <QStandardPaths>
 

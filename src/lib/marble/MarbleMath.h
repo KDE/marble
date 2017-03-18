@@ -15,7 +15,7 @@
 #include <QtGlobal>
 
 #include "GeoDataCoordinates.h"
-#include <math.h>
+#include <cmath>
 
 
 namespace

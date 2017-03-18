@@ -44,8 +44,8 @@
 *                           original baseline
 *       ----------------------------------------------------------------      */
 
-#include <math.h>
-#include <stdio.h>
+#include <cmath>
+#include <cstdio>
 #define SGP4Version  "SGP4 Version 2008-11-03"
 
 #ifndef M_PI

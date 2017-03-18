@@ -22,8 +22,8 @@
 *                           original baseline
 *       ----------------------------------------------------------------      */
 
-#include <string.h>
-#include <math.h>
+#include <cstring>
+#include <cmath>
 
 #include "sgp4unit.h"
 

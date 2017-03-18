@@ -20,8 +20,8 @@
 #ifndef O5MREADER_H
 #define O5MREADER_H
 
-#include <stdint.h>
-#include <stdio.h>
+#include <cstdint>
+#include <cstdio>
 
 
 #define O5MREADER_RET_OK 1

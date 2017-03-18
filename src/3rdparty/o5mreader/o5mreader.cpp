@@ -18,11 +18,11 @@
 
 
 #include "o5mreader.h"
-#include <stdint.h>
-#include <stdio.h>
-#include <string.h>
-#include <errno.h>
-#include <stdlib.h>
+#include <cstdint>
+#include <cstdio>
+#include <cstring>
+#include <cerrno>
+#include <cstdlib>
 
 
 #define STR_PAIR_TABLE_SIZE 15000

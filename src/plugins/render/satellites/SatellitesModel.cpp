@@ -25,7 +25,7 @@
 #include <planetarySats.h>
 #include <sgp4io.h>
 
-#include <locale.h>
+#include <clocale>
 
 namespace Marble {
 

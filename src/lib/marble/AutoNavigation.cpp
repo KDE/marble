@@ -27,7 +27,7 @@
 #include <QRect>
 #include <QPointF>
 #include <QTimer>
-#include <math.h>
+#include <cmath>
 
 namespace Marble {
 

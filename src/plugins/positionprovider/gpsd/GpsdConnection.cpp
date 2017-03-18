@@ -15,7 +15,7 @@
 
 #include <QTime>
 
-#include <errno.h>
+#include <cerrno>
 #include <clocale>
 
 using namespace Marble;

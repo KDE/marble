@@ -11,7 +11,7 @@
 #include "FlightGearPositionProviderPlugin.h"
 
 #include "MarbleDebug.h"
-#include <math.h>
+#include <cmath>
 
 #include <QUdpSocket>
 #include <QIcon>
