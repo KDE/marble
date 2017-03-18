@@ -108,7 +108,7 @@ public:
 RoutingManagerPrivate::RoutingManagerPrivate( MarbleModel *model, RoutingManager* manager, QObject *parent ) :
         q( manager ),
         m_routeRequest( manager ),
-        m_routingModel( &m_routeRequest, model, manager ),
+        m_routingModel(&m_routeRequest, model->positionTracking(), manager),
         m_profilesModel( model->pluginManager() ),
         m_state( RoutingManager::Retrieved ),
         m_pluginManager( model->pluginManager() ),

@@ -16,7 +16,6 @@
 #include "Route.h"
 #include "RouteRequest.h"
 #include "PositionTracking.h"
-#include "MarbleModel.h"
 #include "MarbleGlobal.h"
 #include "GeoDataAccuracy.h"
 
@@ -68,9 +67,9 @@ void RoutingModelPrivate::updateViaPoints( const GeoDataCoordinates &position )
     }
 }
 
-RoutingModel::RoutingModel( RouteRequest* request, MarbleModel *model, QObject *parent ) :
+RoutingModel::RoutingModel(RouteRequest *request, PositionTracking *positionTracking, QObject *parent) :
     QAbstractListModel(parent),
-    d(new RoutingModelPrivate(model->positionTracking(), request))
+    d(new RoutingModelPrivate(positionTracking, request))
 {
     QObject::connect( d->m_positionTracking, SIGNAL(gpsLocation(GeoDataCoordinates,qreal)),
              this, SLOT(updatePosition(GeoDataCoordinates,qreal)) );

@@ -29,8 +29,8 @@ namespace Marble
 class RoutingModelPrivate;
 class Route;
 class RouteRequest;
-class MarbleModel;
 class GeoDataCoordinates;
+class PositionTracking;
 
 class MARBLE_EXPORT RoutingModel : public QAbstractListModel
 {
@@ -47,7 +47,7 @@ public:
     };
 
     /** Constructor */
-    explicit RoutingModel( RouteRequest* request, MarbleModel *model, QObject *parent = 0 );
+    explicit RoutingModel(RouteRequest *request, PositionTracking *positionTracking, QObject *parent = 0);
 
     /** Destructor */
     ~RoutingModel() override;
