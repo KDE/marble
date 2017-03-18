@@ -29,7 +29,7 @@ class PbfParser : public Marble::OsmParser
 public:
     PbfParser();
 
-    virtual bool parse( const QFileInfo &file, int pass, bool &needAnotherPass );
+    bool parse( const QFileInfo &file, int pass, bool &needAnotherPass ) override;
 
 private:
     enum Mode {

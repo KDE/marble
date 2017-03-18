@@ -10,7 +10,7 @@ class IntegerInterpolation: public InterpolationMethod
 public:
     explicit IntegerInterpolation( ReadOnlyMapImage * const mapImage = NULL );
 
-    virtual QRgb interpolate( double const x, double const y );
+    QRgb interpolate( double const x, double const y ) override;
 };
 
 #endif

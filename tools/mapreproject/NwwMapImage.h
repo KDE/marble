@@ -18,12 +18,12 @@ class NwwMapImage: public ReadOnlyMapImage
 public:
     NwwMapImage( QDir const & baseDirectory, int const tileLevel );
 
-    virtual QRgb pixel( double const lonRad, double const latRad );
-    virtual QRgb pixel( int const x, int const y );
+    QRgb pixel( double const lonRad, double const latRad ) override;
+    QRgb pixel( int const x, int const y ) override;
 
     void setBaseDirectory( QDir const & baseDirectory );
     void setCacheSizeBytes( int const cacheSizeBytes );
-    void setInterpolationMethod( InterpolationMethod * const method );
+    void setInterpolationMethod( InterpolationMethod * const method ) override;
     void setTileLevel( int const level );
 
 private:

@@ -33,7 +33,7 @@ class GpsdPositionProviderPlugin: public PositionProviderPlugin
 
  public:
     GpsdPositionProviderPlugin();
-    virtual ~GpsdPositionProviderPlugin();
+    ~GpsdPositionProviderPlugin() override;
 
     QString name() const override;
     QString nameId() const override;

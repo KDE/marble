@@ -31,9 +31,9 @@ class GpsdThread: public QThread
  public:
     GpsdThread();
 
-    ~GpsdThread();
+    ~GpsdThread() override;
 
-    virtual void run();
+    void run() override;
 
     QString error() const;
 

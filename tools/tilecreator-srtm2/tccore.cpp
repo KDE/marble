@@ -29,12 +29,12 @@ public:
     {
     }
 
-    virtual QSize fullImageSize() const
+    QSize fullImageSize() const override
     {
         return QSize( 512*c_defaultTileSize*2, 512*c_defaultTileSize ); //512: 2**9 (9 zoom levels)
     }
 
-    virtual QImage tile( int n, int m, int maxTileLevel )
+    QImage tile( int n, int m, int maxTileLevel ) override
     {
         Q_ASSERT( maxTileLevel == 9 );
 

@@ -45,7 +45,7 @@ public:
     };
 
     GeoDataRelation();
-    ~GeoDataRelation();
+    ~GeoDataRelation() override;
     GeoDataRelation(const GeoDataRelation &other);
     GeoDataRelation & operator=(GeoDataRelation other);
     bool operator<(const GeoDataRelation &other) const;

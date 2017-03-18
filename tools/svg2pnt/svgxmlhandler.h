@@ -23,8 +23,8 @@ class SVGXmlHandler : public QXmlDefaultHandler
     explicit SVGXmlHandler(const QString&);
     // virtual bool startDocument();
     // virtual bool endDocument();
-    virtual bool  startElement(const QString&, const QString&, const QString&,
-                               const QXmlAttributes&);
+    bool  startElement(const QString&, const QString&, const QString&,
+                               const QXmlAttributes&) override;
     // virtual bool endElement();
 
  private:

@@ -53,7 +53,7 @@ class Thread: public QThread
 
 public:
     explicit Thread( QObject * const parent = NULL );
-    ~Thread();
+    ~Thread() override;
 
     void launchWorker( QObject * const worker );
     void stop();

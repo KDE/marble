@@ -19,7 +19,7 @@ class TextToSpeechClient : public QObject
 
 public:
     explicit TextToSpeechClient(QObject * parent = 0);
-    ~TextToSpeechClient();
+    ~TextToSpeechClient() override;
 
 public Q_SLOTS:
     Q_INVOKABLE void readText(const QString & text);

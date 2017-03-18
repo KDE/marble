@@ -29,7 +29,7 @@ class QtPositioningPositionProviderPlugin: public PositionProviderPlugin
 
 public:
     QtPositioningPositionProviderPlugin();
-    virtual ~QtPositioningPositionProviderPlugin();
+    ~QtPositioningPositionProviderPlugin() override;
 
     // Implementing PluginInterface
     QString name() const override;

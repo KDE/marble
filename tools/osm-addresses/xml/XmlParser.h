@@ -31,12 +31,12 @@ public:
     explicit XmlParser( QObject *parent = 0 );
 
 protected:
-    virtual bool parse( const QFileInfo &file, int pass, bool &needAnotherPass );
+    bool parse( const QFileInfo &file, int pass, bool &needAnotherPass ) override;
 
 private:
-    virtual bool startElement ( const QString & namespaceURI, const QString & localName, const QString & qName, const QXmlAttributes & atts );
+    bool startElement ( const QString & namespaceURI, const QString & localName, const QString & qName, const QXmlAttributes & atts ) override;
 
-    virtual bool endElement ( const QString & namespaceURI, const QString & localName, const QString & qName );
+    bool endElement ( const QString & namespaceURI, const QString & localName, const QString & qName ) override;
 
     Node m_node;
 

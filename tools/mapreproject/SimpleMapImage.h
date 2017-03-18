@@ -14,9 +14,9 @@ class SimpleMapImage: public ReadOnlyMapImage
 public:
     explicit SimpleMapImage( QString const & fileName );
 
-    virtual QRgb pixel( double const lonRad, double const latRad );
-    virtual QRgb pixel( int const x, int const y );
-    virtual void setInterpolationMethod( InterpolationMethod * const interpolationMethod );
+    QRgb pixel( double const lonRad, double const latRad ) override;
+    QRgb pixel( int const x, int const y ) override;
+    void setInterpolationMethod( InterpolationMethod * const interpolationMethod ) override;
 
 private:
     double lonRadToPixelX( double const lonRad ) const;

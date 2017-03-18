@@ -28,7 +28,7 @@ public:
 private:
     explicit Logger(QObject *parent = 0);
 
-    ~Logger();
+    ~Logger() override;
 
     LoggerPrivate* const d;
 };

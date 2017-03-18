@@ -26,30 +26,30 @@ class WlocatePositionProviderPlugin: public PositionProviderPlugin
 
 public:
     WlocatePositionProviderPlugin();
-    virtual ~WlocatePositionProviderPlugin();
+    ~WlocatePositionProviderPlugin() override;
 
     // Implementing PluginInterface
-    virtual QString name() const;
-    virtual QString nameId() const;
-    virtual QString guiString() const;
-    virtual QString version() const;
-    virtual QString description() const;
-    virtual QString copyrightYears() const;
+    QString name() const override;
+    QString nameId() const override;
+    QString guiString() const override;
+    QString version() const override;
+    QString description() const override;
+    QString copyrightYears() const override;
     QVector<PluginAuthor> pluginAuthors() const override;
-    virtual QIcon icon() const;
-    virtual void initialize();
-    virtual bool isInitialized() const;
+    QIcon icon() const override;
+    void initialize() override;
+    bool isInitialized() const override;
 
     // Implementing PositionProviderPlugin
-    virtual PositionProviderPlugin * newInstance() const;
+    PositionProviderPlugin * newInstance() const override;
 
     // Implementing PositionProviderPluginInterface
-    virtual PositionProviderStatus status() const;
-    virtual GeoDataCoordinates position() const;
-    virtual qreal speed() const;
-    virtual qreal direction() const;
-    virtual GeoDataAccuracy accuracy() const;
-    virtual QDateTime timestamp() const;
+    PositionProviderStatus status() const override;
+    GeoDataCoordinates position() const override;
+    qreal speed() const override;
+    qreal direction() const override;
+    GeoDataAccuracy accuracy() const override;
+    QDateTime timestamp() const override;
 
 private Q_SLOTS:
     void update();

@@ -51,7 +51,7 @@ public:
 
     bool operator==(const Job &other) const;
 
-    virtual void run();
+    void run() override;
 
 Q_SIGNALS:
     void finished(Job* job);

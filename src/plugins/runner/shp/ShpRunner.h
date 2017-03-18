@@ -20,8 +20,8 @@ class ShpRunner : public ParsingRunner
     Q_OBJECT
 public:
     explicit ShpRunner(QObject *parent = 0);
-    ~ShpRunner();
-    GeoDataDocument* parseFile( const QString &fileName, DocumentRole role, QString& error );
+    ~ShpRunner() override;
+    GeoDataDocument* parseFile( const QString &fileName, DocumentRole role, QString& error ) override;
 };
 
 }
