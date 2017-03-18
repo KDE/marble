@@ -172,8 +172,10 @@ namespace Marble
                             GeoDataRelation::RouteSubway |
                             GeoDataRelation::RouteTram |
                             GeoDataRelation::RouteBus |
-                            GeoDataRelation::RouteTrolleyBus),
-            m_showPublicTransport(false)
+                            GeoDataRelation::RouteTrolleyBus |
+                            GeoDataRelation::RouteHiking),
+            m_showPublicTransport(false),
+            m_showOutdoorActivities(false)
         {
             m_currentPosition.setName(QObject::tr("Current Location"));
             m_relationTypeConverter["road"] = GeoDataRelation::RouteRoad;
@@ -217,6 +219,7 @@ namespace Marble
         QMap<QString, GeoDataRelation::RelationType> m_relationTypeConverter;
         GeoDataRelation::RelationTypes m_enabledRelationTypes;
         bool m_showPublicTransport;
+        bool m_showOutdoorActivities;
     };
 
     MarbleQuickItem::MarbleQuickItem(QQuickItem *parent) : QQuickPaintedItem(parent)
@@ -434,6 +437,11 @@ namespace Marble
     bool MarbleQuickItem::showPublicTransport() const
     {
         return d->m_showPublicTransport;
+    }
+
+    bool MarbleQuickItem::showOutdoorActivities() const
+    {
+        return d->m_showOutdoorActivities;
     }
 
     QString MarbleQuickItem::positionProvider() const
@@ -862,6 +870,15 @@ namespace Marble
         }
     }
 
+    void MarbleQuickItem::setShowOutdoorActivities(bool showOutdoorActivities)
+    {
+        if (d->m_showOutdoorActivities != showOutdoorActivities) {
+            d->m_showOutdoorActivities = showOutdoorActivities;
+            d->updateVisibleRoutes();
+            emit showOutdoorActivitiesChanged(showOutdoorActivities);
+        }
+    }
+
     void MarbleQuickItem::setPositionProvider(const QString &positionProvider)
     {
         QString name;
@@ -979,7 +996,7 @@ namespace Marble
         if (zoom > 0) {
             setZoom(zoom);
         }
-        auto const defaultRelationTypes = QStringList() << "ferry" << "train" << "subway" << "tram" << "bus" << "trolley-bus";
+        auto const defaultRelationTypes = QStringList() << "ferry" << "train" << "subway" << "tram" << "bus" << "trolley-bus" << "hiking";
         auto const visibleRelationTypes = settings.value(QStringLiteral("visibleRelationTypes"), defaultRelationTypes).toStringList();
         d->m_enabledRelationTypes = GeoDataRelation::UnknownType;
         for (auto const &route: visibleRelationTypes) {
@@ -1089,6 +1106,18 @@ namespace Marble
             relationTypes &= ~GeoDataRelation::RouteTram;
             relationTypes &= ~GeoDataRelation::RouteBus;
             relationTypes &= ~GeoDataRelation::RouteTrolleyBus;
+        }
+        if (!m_showOutdoorActivities) {
+            relationTypes &= ~GeoDataRelation::RouteBicycle;
+            relationTypes &= ~GeoDataRelation::RouteMountainbike;
+            relationTypes &= ~GeoDataRelation::RouteFoot;
+            relationTypes &= ~GeoDataRelation::RouteHiking;
+            relationTypes &= ~GeoDataRelation::RouteHorse;
+            relationTypes &= ~GeoDataRelation::RouteInlineSkates;
+            relationTypes &= ~GeoDataRelation::RouteSkiDownhill;
+            relationTypes &= ~GeoDataRelation::RouteSkiNordic;
+            relationTypes &= ~GeoDataRelation::RouteSkitour;
+            relationTypes &= ~GeoDataRelation::RouteSled;
         }
         m_map.setVisibleRelationTypes(relationTypes);
     }

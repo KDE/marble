@@ -65,6 +65,27 @@ Drawer {
         }
 
         MenuIcon {
+            id: outdoorActivitiesAction
+            anchors.leftMargin: Screen.pixelDensity * 2
+            anchors.rightMargin: anchors.leftMargin
+
+            checkable: true
+            checked: marbleMaps.showOutdoorActivities
+            hasSettings: true
+            text: qsTr("Outdoor Activities")
+            icon: "qrc:/material/directions-run.svg"
+            onTriggered: {
+                root.close()
+                root.marbleMaps.showOutdoorActivities = checked
+            }
+            onSettingsTriggered: {
+                root.close()
+                outdoorActivitiesLoader.source = "OutdoorActivities.qml"
+                outdoorActivitiesDialog.open()
+            }
+        }
+
+        MenuIcon {
             id: accessibilityAction
             anchors.leftMargin: Screen.pixelDensity * 2
             anchors.rightMargin: anchors.leftMargin
@@ -98,6 +119,19 @@ Drawer {
 
         Loader {
             id: publicTransportLoader
+            onLoaded: {
+                item.implicitWidth = parent.width
+                item.marbleMaps = root.marbleMaps
+            }
+        }
+    }
+
+    Dialog {
+        id: outdoorActivitiesDialog
+        title: qsTr("Outdoor Activities")
+
+        Loader {
+            id: outdoorActivitiesLoader
             onLoaded: {
                 item.implicitWidth = parent.width
                 item.marbleMaps = root.marbleMaps

@@ -29,6 +29,7 @@
         <file>CurrentPosition.qml</file>
         <file>SidePanel.qml</file>
         <file>PublicTransport.qml</file>
+        <file>OutdoorActivities.qml</file>
         <file>drawer.svg</file>
         <file alias="search.png">../../../data/android/drawable-xxxhdpi/search.png</file>
         <file alias="menu.png">../../../data/android/drawable-xxxhdpi/ic_menu_black_48dp.png</file>
@@ -68,6 +69,10 @@
         <file alias="material/directions-subway.svg">../../../data/svg/material/maps/ic_directions_subway_48px.svg</file>
         <file alias="material/directions-walk.svg">../../../data/svg/material/maps/ic_directions_walk_48px.svg</file>
         <file alias="material/directions-tram.svg">../../../data/svg/material/maps/ic_tram_48px.svg</file>
+        <file alias="thenounproject/hiker.svg">../../../data/svg/thenounproject/204712-hiker.svg</file>
+        <file alias="thenounproject/mountain-biking.svg">../../../data/svg/thenounproject/61698-mountain-biking.svg</file>
+        <file alias="thenounproject/inline-skater.svg">../../../data/svg/thenounproject/101965-inline-skater.svg</file>
+        <file alias="thenounproject/horse-riding.svg">../../../data/svg/thenounproject/78374-horse-riding.svg</file>
         <file alias="material/navigation.svg">material-icons/ic_navigation_48px.svg</file>
         <file alias="material/access_time.svg">material-icons/ic_access_time_48px.svg</file>
         <file alias="material/wheelchair.svg">material-icons/ic_accessible_black_48px.svg</file>

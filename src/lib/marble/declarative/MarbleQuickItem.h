@@ -54,6 +54,7 @@ namespace Marble
         Q_PROPERTY(bool showBackground READ showBackground WRITE setShowBackground NOTIFY showBackgroundChanged)
         Q_PROPERTY(bool showPositionMarker READ showPositionMarker WRITE setShowPositionMarker NOTIFY showPositionMarkerChanged)
         Q_PROPERTY(bool showPublicTransport READ showPublicTransport WRITE setShowPublicTransport NOTIFY showPublicTransportChanged)
+        Q_PROPERTY(bool showOutdoorActivities READ showOutdoorActivities WRITE setShowOutdoorActivities NOTIFY showOutdoorActivitiesChanged)
         Q_PROPERTY(QString positionProvider READ positionProvider WRITE setPositionProvider NOTIFY positionProviderChanged)
         Q_PROPERTY(bool positionAvailable READ positionAvailable NOTIFY positionAvailableChanged)
         Q_PROPERTY(bool positionVisible READ positionVisible NOTIFY positionVisibleChanged)
@@ -120,6 +121,7 @@ namespace Marble
         void setShowBackground(bool showBackground);
         void setShowPositionMarker(bool showPositionMarker);
         void setShowPublicTransport(bool showPublicTransport);
+        void setShowOutdoorActivities(bool showOutdoorActivities);
         void setPositionProvider(const QString & positionProvider);
 
         void setInertialGlobeRotation(bool inertialGlobeRotation);
@@ -172,6 +174,7 @@ namespace Marble
         bool showBackground() const;
         bool showPositionMarker() const;
         bool showPublicTransport() const;
+        bool showOutdoorActivities() const;
         QString positionProvider() const;
         bool positionAvailable() const;
         bool positionVisible();
@@ -210,6 +213,7 @@ namespace Marble
         void showBackgroundChanged(bool showBackground);
         void showPositionMarkerChanged(bool showPositionMarker);
         void showPublicTransportChanged(bool showPublicTransport);
+        void showOutdoorActivitiesChanged(bool showOutdoorActivities);
         void positionProviderChanged(const QString & positionProvider);
         void positionAvailableChanged(bool positionAvailable);
         void positionVisibleChanged(bool positionVisible);
