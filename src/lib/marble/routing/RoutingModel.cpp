@@ -11,6 +11,7 @@
 #include "RoutingModel.h"
 
 #include "Planet.h"
+#include "PlanetFactory.h"
 #include "MarbleMath.h"
 #include "Route.h"
 #include "RouteRequest.h"
@@ -35,7 +36,6 @@ public:
     };
 
     explicit RoutingModelPrivate( RouteRequest* request );
-    MarbleModel *m_marbleModel;
 
     Route m_route;
 
@@ -71,7 +71,6 @@ void RoutingModelPrivate::updateViaPoints( const GeoDataCoordinates &position )
 RoutingModel::RoutingModel( RouteRequest* request, MarbleModel *model, QObject *parent ) :
         QAbstractListModel( parent ), d( new RoutingModelPrivate( request ) )
 {
-    d->m_marbleModel = model;
     d->m_positionTracking = model->positionTracking();
     QObject::connect( d->m_positionTracking, SIGNAL(gpsLocation(GeoDataCoordinates,qreal)),
              this, SLOT(updatePosition(GeoDataCoordinates,qreal)) );
@@ -288,7 +287,7 @@ void RoutingModel::updatePosition( GeoDataCoordinates location, qreal speed )
     d->m_route.setPosition( location );
 
     d->updateViaPoints( location );
-    qreal planetRadius = d->m_marbleModel->planet()->radius();
+    const qreal planetRadius = PlanetFactory::construct("earth").radius();
     qreal distance = planetRadius * distanceSphere( location, d->m_route.positionOnRoute() );
     emit positionChanged();
 
