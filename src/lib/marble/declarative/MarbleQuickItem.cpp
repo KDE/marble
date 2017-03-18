@@ -1003,6 +1003,7 @@ namespace Marble
             d->m_enabledRelationTypes |= d->m_relationTypeConverter.value(route, GeoDataRelation::UnknownType);
         }
         setShowPublicTransport(settings.value(QStringLiteral("showPublicTransport"), false).toBool());
+        setShowOutdoorActivities(settings.value(QStringLiteral("showOutdoorActivities"), false).toBool());
         settings.endGroup();
         d->m_model.routingManager()->readSettings();
         d->m_model.bookmarkManager()->loadFile(QStringLiteral("bookmarks/bookmarks.kml"));
@@ -1029,6 +1030,7 @@ namespace Marble
         }
         settings.setValue(QStringLiteral("visibleRelationTypes"), enabledRoutes);
         settings.setValue(QStringLiteral("showPublicTransport"), d->m_showPublicTransport);
+        settings.setValue(QStringLiteral("showOutdoorActivities"), d->m_showOutdoorActivities);
 
         settings.endGroup();
         d->m_model.routingManager()->writeSettings();
