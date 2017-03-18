@@ -11,6 +11,7 @@
 import QtQuick 2.3
 import QtQuick.Controls 2.0
 import QtQuick.Window 2.2
+import QtQuick.Dialogs 1.2
 import org.kde.marble 0.20
 
 Drawer {
@@ -27,7 +28,6 @@ Drawer {
 
         Component.onDestruction: {
             settings.setValue("MarbleMaps", "showAccessibility", accessibilityAction.checked ? "true" : "false")
-            settings.setValue("MarbleMaps", "showPublicTransport", publicTransportAction.checked ? "true" : "false")
         }
     }
 
@@ -49,12 +49,18 @@ Drawer {
             anchors.rightMargin: anchors.leftMargin
 
             checkable: true
-            checked: settings.value("MarbleMaps", "showPublicTransport", "false") === "true"
+            checked: marbleMaps.showPublicTransport
+            hasSettings: true
             text: qsTr("Public Transport")
-            icon: "qrc:/material/bus.svg"
+            icon: "qrc:/material/directions-bus.svg"
             onTriggered: {
-                root.marbleMaps.showPublicTransport = checked
                 root.close()
+                root.marbleMaps.showPublicTransport = checked
+            }
+            onSettingsTriggered: {
+                root.close()
+                publicTransportLoader.source = "PublicTransport.qml"
+                publicTransportDialog.open()
             }
         }
 
@@ -86,4 +92,16 @@ Drawer {
         }
     }
 
+    Dialog {
+        id: publicTransportDialog
+        title: qsTr("Public Transport")
+
+        Loader {
+            id: publicTransportLoader
+            onLoaded: {
+                item.implicitWidth = parent.width
+                item.marbleMaps = root.marbleMaps
+            }
+        }
+    }
 }

@@ -142,6 +142,8 @@ namespace Marble
 
         Q_INVOKABLE void reloadTiles();
         Q_INVOKABLE void highlightRouteRelation(qint64 osmId, bool enabled);
+        Q_INVOKABLE void setRelationTypeVisible(const QString &relationType, bool visible);
+        Q_INVOKABLE bool isRelationTypeVisible(const QString &relationType) const;
 
     public:
         void paint(QPainter *painter) override;

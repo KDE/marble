@@ -140,7 +140,7 @@ public:
     bool             m_showFrameRate;
     bool             m_showDebugPolygons;
     bool             m_showDebugBatchRender;
-    bool m_showPublicTransport;
+    GeoDataRelation::RelationTypes m_visibleRelationTypes;
     StyleBuilder     m_styleBuilder;
 
     QList<RenderPlugin *> m_renderPlugins;
@@ -168,7 +168,7 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model ) :
     m_showFrameRate( false ),
     m_showDebugPolygons( false ),
     m_showDebugBatchRender( false ),
-    m_showPublicTransport(false),
+    m_visibleRelationTypes(GeoDataRelation::RouteFerry),
     m_styleBuilder(),
     m_layerManager( parent ),
     m_customPaintLayer( parent ),
@@ -712,9 +712,9 @@ bool MarbleMap::showBackground() const
     return d->m_layerManager.showBackground();
 }
 
-bool MarbleMap::showPublicTransport() const
+GeoDataRelation::RelationTypes MarbleMap::visibleRelationTypes() const
 {
-    return d->m_showPublicTransport;
+    return d->m_visibleRelationTypes;
 }
 
 quint64 MarbleMap::volatileTileCacheLimit() const
@@ -1303,12 +1303,12 @@ void MarbleMap::setShowBackground( bool visible )
     d->m_layerManager.setShowBackground( visible );
 }
 
-void MarbleMap::setShowPublicTransport(bool showPublicTransport)
+void MarbleMap::setVisibleRelationTypes(GeoDataRelation::RelationTypes relationTypes)
 {
-    if (d->m_showPublicTransport != showPublicTransport) {
-        d->m_showPublicTransport = showPublicTransport;
-        d->m_geometryLayer.setShowPublicTransport(showPublicTransport);
-        emit showPublicTransportChanged(showPublicTransport);
+    if (d->m_visibleRelationTypes != relationTypes) {
+        d->m_visibleRelationTypes = relationTypes;
+        d->m_geometryLayer.setVisibleRelationTypes(relationTypes);
+        emit visibleRelationTypesChanged(d->m_visibleRelationTypes);
     }
 }
 

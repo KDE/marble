@@ -402,7 +402,7 @@ ApplicationWindow {
 
     SidePanel {
         id: drawer
-        width: 0.7 * app.width
+        width: 0.67 * app.width
         height: app.height
         marbleMaps: marbleMaps
 

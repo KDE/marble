@@ -166,10 +166,37 @@ namespace Marble
             m_placemarkItem(nullptr),
             m_placemark(nullptr),
             m_reverseGeocoding(&m_model),
-            m_showScaleBar(false)
+            m_showScaleBar(false),
+            m_enabledRelationTypes(GeoDataRelation::RouteFerry |
+                            GeoDataRelation::RouteTrain |
+                            GeoDataRelation::RouteSubway |
+                            GeoDataRelation::RouteTram |
+                            GeoDataRelation::RouteBus |
+                            GeoDataRelation::RouteTrolleyBus),
+            m_showPublicTransport(false)
         {
             m_currentPosition.setName(QObject::tr("Current Location"));
+            m_relationTypeConverter["road"] = GeoDataRelation::RouteRoad;
+            m_relationTypeConverter["detour"] = GeoDataRelation::RouteDetour;
+            m_relationTypeConverter["ferry"] = GeoDataRelation::RouteFerry;
+            m_relationTypeConverter["train"] = GeoDataRelation::RouteTrain;
+            m_relationTypeConverter["subway"] = GeoDataRelation::RouteSubway;
+            m_relationTypeConverter["tram"] = GeoDataRelation::RouteTram;
+            m_relationTypeConverter["bus"] = GeoDataRelation::RouteBus;
+            m_relationTypeConverter["trolley-bus"] = GeoDataRelation::RouteTrolleyBus;
+            m_relationTypeConverter["bicycle"] = GeoDataRelation::RouteBicycle;
+            m_relationTypeConverter["mountainbike"] = GeoDataRelation::RouteMountainbike;
+            m_relationTypeConverter["foot"] = GeoDataRelation::RouteFoot;
+            m_relationTypeConverter["hiking"] = GeoDataRelation::RouteHiking;
+            m_relationTypeConverter["horse"] = GeoDataRelation::RouteHorse;
+            m_relationTypeConverter["inline-skates"] = GeoDataRelation::RouteInlineSkates;
+            m_relationTypeConverter["downhill"] = GeoDataRelation::RouteSkiDownhill;
+            m_relationTypeConverter["ski-nordic"] = GeoDataRelation::RouteSkiNordic;
+            m_relationTypeConverter["skitour"] = GeoDataRelation::RouteSkitour;
+            m_relationTypeConverter["sled"] = GeoDataRelation::RouteSled;
         }
+
+        void updateVisibleRoutes();
 
     private:
         MarbleQuickItem *m_marble;
@@ -187,6 +214,9 @@ namespace Marble
         ReverseGeocodingRunnerManager m_reverseGeocoding;
 
         bool m_showScaleBar;
+        QMap<QString, GeoDataRelation::RelationType> m_relationTypeConverter;
+        GeoDataRelation::RelationTypes m_enabledRelationTypes;
+        bool m_showPublicTransport;
     };
 
     MarbleQuickItem::MarbleQuickItem(QQuickItem *parent) : QQuickPaintedItem(parent)
@@ -213,7 +243,6 @@ namespace Marble
         connect(&d->m_map, &MarbleMap::visibleLatLonAltBoxChanged, this, &MarbleQuickItem::visibleLatLonAltBoxChanged);
         connect(&d->m_map, &MarbleMap::radiusChanged, this, &MarbleQuickItem::radiusChanged);
         connect(&d->m_map, &MarbleMap::radiusChanged, this, &MarbleQuickItem::zoomChanged);
-        connect(&d->m_map, &MarbleMap::showPublicTransportChanged, this, &MarbleQuickItem::showPublicTransportChanged);
         connect(&d->m_reverseGeocoding, SIGNAL(reverseGeocodingFinished(GeoDataCoordinates,GeoDataPlacemark)),
                 this, SLOT(handleReverseGeocoding(GeoDataCoordinates,GeoDataPlacemark)));
 
@@ -404,7 +433,7 @@ namespace Marble
 
     bool MarbleQuickItem::showPublicTransport() const
     {
-        return d->m_map.showPublicTransport();
+        return d->m_showPublicTransport;
     }
 
     QString MarbleQuickItem::positionProvider() const
@@ -826,7 +855,11 @@ namespace Marble
 
     void MarbleQuickItem::setShowPublicTransport(bool enabled)
     {
-        d->m_map.setShowPublicTransport(enabled);
+        if (d->m_showPublicTransport != enabled) {
+            d->m_showPublicTransport = enabled;
+            d->updateVisibleRoutes();
+            emit showPublicTransportChanged(enabled);
+        }
     }
 
     void MarbleQuickItem::setPositionProvider(const QString &positionProvider)
@@ -946,10 +979,18 @@ namespace Marble
         if (zoom > 0) {
             setZoom(zoom);
         }
+        auto const defaultRelationTypes = QStringList() << "ferry" << "train" << "subway" << "tram" << "bus" << "trolley-bus";
+        auto const visibleRelationTypes = settings.value(QStringLiteral("visibleRelationTypes"), defaultRelationTypes).toStringList();
+        d->m_enabledRelationTypes = GeoDataRelation::UnknownType;
+        for (auto const &route: visibleRelationTypes) {
+            d->m_enabledRelationTypes |= d->m_relationTypeConverter.value(route, GeoDataRelation::UnknownType);
+        }
+        setShowPublicTransport(settings.value(QStringLiteral("showPublicTransport"), false).toBool());
         settings.endGroup();
         d->m_model.routingManager()->readSettings();
         d->m_model.bookmarkManager()->loadFile(QStringLiteral("bookmarks/bookmarks.kml"));
         d->m_model.bookmarkManager()->setShowBookmarks(true);
+        d->updateVisibleRoutes();
     }
 
     void MarbleQuickItem::writeSettings()
@@ -959,6 +1000,19 @@ namespace Marble
         settings.setValue(QStringLiteral("centerLon"), QVariant(d->m_map.centerLongitude()));
         settings.setValue(QStringLiteral("centerLat"), QVariant(d->m_map.centerLatitude()));
         settings.setValue(QStringLiteral("zoom"), QVariant(zoom()));
+        QStringList enabledRoutes;
+        QMap<GeoDataRelation::RelationType, QString> relationConverter;
+        for (auto iter = d->m_relationTypeConverter.cbegin(), end = d->m_relationTypeConverter.cend(); iter != end; ++iter) {
+            relationConverter[iter.value()] = iter.key();
+        }
+        for (auto iter = relationConverter.cbegin(), end = relationConverter.cend(); iter != end; ++iter) {
+            if (d->m_enabledRelationTypes & iter.key()) {
+                enabledRoutes << iter.value();
+            }
+        }
+        settings.setValue(QStringLiteral("visibleRelationTypes"), enabledRoutes);
+        settings.setValue(QStringLiteral("showPublicTransport"), d->m_showPublicTransport);
+
         settings.endGroup();
         d->m_model.routingManager()->writeSettings();
     }
@@ -971,6 +1025,23 @@ namespace Marble
     void MarbleQuickItem::highlightRouteRelation(qint64 osmId, bool enabled)
     {
         d->m_map.highlightRouteRelation(osmId, enabled);
+    }
+
+    void MarbleQuickItem::setRelationTypeVisible(const QString &relationType, bool visible)
+    {
+        auto const relation = d->m_relationTypeConverter.value(relationType, GeoDataRelation::UnknownType);
+        if (visible) {
+            d->m_enabledRelationTypes |= relation;
+        } else {
+            d->m_enabledRelationTypes &= ~relation;
+        }
+        d->updateVisibleRoutes();
+    }
+
+    bool MarbleQuickItem::isRelationTypeVisible(const QString &relationType) const
+    {
+        auto const relation = d->m_relationTypeConverter.value(relationType, GeoDataRelation::UnknownType);
+        return d->m_enabledRelationTypes & relation;
     }
 
     QObject *MarbleQuickItem::getEventFilter() const
@@ -1007,6 +1078,19 @@ namespace Marble
         m_visible(false)
     {
         // nothing to do
+    }
+
+    void MarbleQuickItemPrivate::updateVisibleRoutes()
+    {
+        GeoDataRelation::RelationTypes relationTypes = m_enabledRelationTypes;
+        if (!m_showPublicTransport) {
+            relationTypes &= ~GeoDataRelation::RouteTrain;
+            relationTypes &= ~GeoDataRelation::RouteSubway;
+            relationTypes &= ~GeoDataRelation::RouteTram;
+            relationTypes &= ~GeoDataRelation::RouteBus;
+            relationTypes &= ~GeoDataRelation::RouteTrolleyBus;
+        }
+        m_map.setVisibleRelationTypes(relationTypes);
     }
 
 }

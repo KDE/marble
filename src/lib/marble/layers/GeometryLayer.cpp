@@ -108,7 +108,7 @@ public:
     QDateTime m_cachedDateTime;
     GeoDataLatLonBox m_cachedLatLonBox;
     QSet<qint64> m_highlightedRouteRelations;
-    bool m_showPublicTransport;
+    GeoDataRelation::RelationTypes m_visibleRelationTypes;
 };
 
 GeometryLayerPrivate::GeometryLayerPrivate(const QAbstractItemModel *model, const StyleBuilder *styleBuilder) :
@@ -118,7 +118,7 @@ GeometryLayerPrivate::GeometryLayerPrivate(const QAbstractItemModel *model, cons
     m_lastFeatureAt(nullptr),
     m_dirty(true),
     m_cachedItemCount(0),
-    m_showPublicTransport(false)
+    m_visibleRelationTypes(GeoDataRelation::RouteFerry)
 {
 }
 
@@ -374,10 +374,8 @@ void GeometryLayerPrivate::clearCache()
 
 inline bool GeometryLayerPrivate::showRelation(const GeoDataRelation *relation) const
 {
-    return (m_showPublicTransport
-            && relation->relationType() >= GeoDataRelation::RouteTrain
-            && relation->relationType() <= GeoDataRelation::RouteTrolleyBus)
-            || m_highlightedRouteRelations.contains(relation->osmData().oid());
+    return (m_visibleRelationTypes.testFlag(relation->relationType())
+            || m_highlightedRouteRelations.contains(relation->osmData().oid()));
 }
 
 void GeometryLayerPrivate::updateRelationVisibility()
@@ -584,14 +582,12 @@ void GeometryLayer::highlightRouteRelation(qint64 osmId, bool enabled)
     d->updateRelationVisibility();
 }
 
-void GeometryLayer::setShowPublicTransport(bool showPublicTransport)
+void GeometryLayer::setVisibleRelationTypes(GeoDataRelation::RelationTypes relationTypes)
 {
-    if (showPublicTransport == d->m_showPublicTransport) {
-        return;
+    if (relationTypes != d->m_visibleRelationTypes) {
+        d->m_visibleRelationTypes = relationTypes;
+        d->updateRelationVisibility();
     }
-
-    d->m_showPublicTransport = showPublicTransport;
-    d->updateRelationVisibility();
 }
 
 void GeometryLayer::handleHighlight(qreal lon, qreal lat, GeoDataCoordinates::Unit unit)

@@ -182,4 +182,6 @@ bool GeoDataRelation::containsAnyOf(const QSet<qint64> &memberIds) const
 #endif
 }
 
+Q_DECLARE_OPERATORS_FOR_FLAGS(GeoDataRelation::RelationTypes)
+
 }

@@ -23,26 +23,28 @@ class GEODATA_EXPORT GeoDataRelation: public GeoDataFeature
 {
 public:
     enum RelationType {
-        UnknownType,
-        RouteRoad,
-        RouteDetour,
-        RouteFerry,
-        RouteTrain,
-        RouteSubway,
-        RouteTram,
-        RouteBus,
-        RouteTrolleyBus,
-        RouteBicycle,
-        RouteMountainbike,
-        RouteFoot,
-        RouteHiking,
-        RouteHorse,
-        RouteInlineSkates,
-        RouteSkiDownhill,
-        RouteSkiNordic,
-        RouteSkitour,
-        RouteSled,
+        UnknownType = 0,
+        RouteRoad = 1 << 1,
+        RouteDetour = 1 << 2,
+        RouteFerry = 1 << 3,
+        RouteTrain = 1 << 4,
+        RouteSubway = 1 << 5,
+        RouteTram = 1 << 6,
+        RouteBus = 1 << 7,
+        RouteTrolleyBus = 1 << 8,
+        RouteBicycle = 1 << 9,
+        RouteMountainbike = 1 << 10,
+        RouteFoot = 1 << 11,
+        RouteHiking = 1 << 12,
+        RouteHorse = 1 << 13,
+        RouteInlineSkates = 1 << 14,
+        RouteSkiDownhill = 1 << 15,
+        RouteSkiNordic = 1 << 16,
+        RouteSkitour = 1 << 17,
+        RouteSled = 1 << 18
     };
+
+    Q_DECLARE_FLAGS(RelationTypes, RelationType)
 
     GeoDataRelation();
     ~GeoDataRelation() override;

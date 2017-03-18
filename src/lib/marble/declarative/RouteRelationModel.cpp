@@ -77,24 +77,24 @@ QVariant RouteRelationModel::data(const QModelIndex & index, int role) const
         return m_relations.at(index.row())->name();
     } else if (role == IconSource) {
         switch (m_relations.at(index.row())->relationType()) {
-        case GeoDataRelation::RouteRoad:         return svgFile("material/maps/ic_directions_car_48px.svg");
-        case GeoDataRelation::RouteDetour:       return svgFile("material/maps/ic_directions_car_48px.svg");
-        case GeoDataRelation::RouteFerry:        return svgFile("material/maps/ic_directions_boat_48px.svg");
-        case GeoDataRelation::RouteTrain:        return svgFile("material/maps/ic_directions_railway_48px.svg");
-        case GeoDataRelation::RouteSubway:       return svgFile("material/maps/ic_directions_subway_48px.svg");
-        case GeoDataRelation::RouteTram:         return svgFile("material/maps/ic_tram_48px.svg");
-        case GeoDataRelation::RouteBus:          return svgFile("material/maps/ic_directions_bus_48px.svg");
-        case GeoDataRelation::RouteTrolleyBus:   return svgFile("material/maps/ic_directions_bus_48px.svg");
-        case GeoDataRelation::RouteBicycle:      return svgFile("material/maps/ic_directions_bike_48px.svg");
-        case GeoDataRelation::RouteMountainbike: return svgFile("material/maps/ic_directions_bike_48px.svg");
-        case GeoDataRelation::RouteFoot:         return svgFile("material/maps/ic_directions_walk_48px.svg");
-        case GeoDataRelation::RouteHiking:       return svgFile("thenounproject/204712-hiker.svg");
-        case GeoDataRelation::RouteHorse:        return svgFile("thenounproject/78374-horse-riding.svg");
-        case GeoDataRelation::RouteInlineSkates: return svgFile("thenounproject/101965-inline-skater.svg");
-        case GeoDataRelation::RouteSkiDownhill:  return svgFile("thenounproject/2412-skiing-downhill.svg");
-        case GeoDataRelation::RouteSkiNordic:    return svgFile("thenounproject/30231-skiing-cross-country.svg");
-        case GeoDataRelation::RouteSkitour:      return svgFile("thenounproject/29366-skitour.svg");
-        case GeoDataRelation::RouteSled:         return svgFile("thenounproject/365217-sled.svg");
+        case GeoDataRelation::RouteRoad:         return QStringLiteral("material/directions-car.svg");
+        case GeoDataRelation::RouteDetour:       return QStringLiteral("material/directions-car.svg");
+        case GeoDataRelation::RouteFerry:        return QStringLiteral("material/directions-boat.svg");
+        case GeoDataRelation::RouteTrain:        return QStringLiteral("material/directions-railway.svg");
+        case GeoDataRelation::RouteSubway:       return QStringLiteral("material/directions-subway.svg");
+        case GeoDataRelation::RouteTram:         return QStringLiteral("material/directions-tram.svg");
+        case GeoDataRelation::RouteBus:          return QStringLiteral("material/directions-bus.svg");
+        case GeoDataRelation::RouteTrolleyBus:   return QStringLiteral("material/directions-bus.svg");
+        case GeoDataRelation::RouteBicycle:      return QStringLiteral("material/directions-bike.svg");
+        case GeoDataRelation::RouteMountainbike: return QStringLiteral("material/directions-bike.svg");
+        case GeoDataRelation::RouteFoot:         return QStringLiteral("material/directions-walk.svg");
+        case GeoDataRelation::RouteHiking:       return QStringLiteral("thenounproject/204712-hiker.svg");
+        case GeoDataRelation::RouteHorse:        return QStringLiteral("thenounproject/78374-horse-riding.svg");
+        case GeoDataRelation::RouteInlineSkates: return QStringLiteral("thenounproject/101965-inline-skater.svg");
+        case GeoDataRelation::RouteSkiDownhill:  return QStringLiteral("thenounproject/2412-skiing-downhill.svg");
+        case GeoDataRelation::RouteSkiNordic:    return QStringLiteral("thenounproject/30231-skiing-cross-country.svg");
+        case GeoDataRelation::RouteSkitour:      return QStringLiteral("thenounproject/29366-skitour.svg");
+        case GeoDataRelation::RouteSled:         return QStringLiteral("thenounproject/365217-sled.svg");
         case GeoDataRelation::UnknownType:       return QVariant(QString());
         }
     } else if (role == Description) {

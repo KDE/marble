@@ -10,19 +10,22 @@
 
 import QtQuick 2.3
 import QtQuick.Window 2.2
+import QtQuick.Layouts 1.3
 
 Item {
     id: root
     anchors.left: parent.left
     anchors.right: parent.right
-    height: childrenRect.height
+    height: container.height + 2 * Screen.pixelDensity
 
     property bool checkable: false
     property bool checked: false
+    property bool hasSettings: false
     property alias text: text.text
     property alias icon: image.source
 
     signal triggered()
+    signal settingsTriggered()
 
     Rectangle {
         anchors.fill: parent
@@ -37,36 +40,54 @@ Item {
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
-        height: childrenRect.height + padding
+        height: row.height
         anchors.margins: padding
 
-        Row {
-            anchors.leftMargin: Screen.pixelDensity * 4
-            spacing: Screen.pixelDensity * 2
+        RowLayout {
             id: row
+            anchors.left: parent.left
+            anchors.right: settingsButton.left
+            spacing: Screen.pixelDensity * 2
 
             Image {
                 id: image
                 sourceSize.height: text.height
                 fillMode: Image.PreserveAspectFit
-                anchors.verticalCenter: text.verticalCenter
+                anchors.verticalCenter: parent.verticalCenter
             }
 
             Text {
                 id: text
+                Layout.fillWidth: true
                 font.pointSize: 18
                 color: root.checkable && root.checked ? palette.highlightedText : palette.text
+                elide: Text.ElideRight
             }
         }
-    }
 
-    MouseArea {
-        anchors.fill: parent
-        onClicked: {
-            if (root.checkable) {
-                root.checked = !root.checked
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                if (root.checkable) {
+                    root.checked = !root.checked
+                }
+                root.triggered()
             }
-            root.triggered()
+        }
+
+        Image {
+            id: settingsButton
+            visible: root.hasSettings
+            anchors.right: parent.right
+            anchors.verticalCenter: parent.verticalCenter
+            sourceSize.height: 0.67 * text.height
+            fillMode: Image.PreserveAspectFit
+
+            source: "qrc:/settings.png"
+            MouseArea {
+                anchors.fill: parent
+                onClicked: root.settingsTriggered()
+            }
         }
     }
 }

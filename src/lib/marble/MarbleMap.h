@@ -24,6 +24,7 @@
 
 #include "marble_export.h"
 #include "GeoDataCoordinates.h"       // In geodata/data/
+#include "GeoDataRelation.h"
 
 // Qt
 #include <QObject>
@@ -360,7 +361,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
     bool showBackground() const;
 
-    bool showPublicTransport() const;
+    GeoDataRelation::RelationTypes visibleRelationTypes() const;
 
     /**
      * @brief  Returns the limit in kilobytes of the volatile (in RAM) tile cache.
@@ -672,7 +673,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
     void setShowBackground( bool visible );
 
-    void setShowPublicTransport(bool show);
+    void setVisibleRelationTypes(GeoDataRelation::RelationTypes relationTypes);
 
      /**
      * @brief used to notify about the position of the mouse click
@@ -755,7 +756,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
     void viewContextChanged(ViewContext viewContext);
 
-    void showPublicTransportChanged(bool showPublicTransport);
+    void visibleRelationTypesChanged(GeoDataRelation::RelationTypes relationTypes);
 
  protected:
 

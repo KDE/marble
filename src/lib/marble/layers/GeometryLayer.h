@@ -16,6 +16,7 @@
 #include <QObject>
 #include "LayerInterface.h"
 #include "GeoDataCoordinates.h"
+#include "GeoDataRelation.h"
 
 class QAbstractItemModel;
 class QModelIndex;
@@ -55,7 +56,7 @@ public:
 
     void highlightRouteRelation(qint64 osmId, bool enabled);
 
-    void setShowPublicTransport(bool showPublicTransport);
+    void setVisibleRelationTypes(GeoDataRelation::RelationTypes relationTypes);
 
 public Q_SLOTS:
     void addPlacemarks( const QModelIndex& index, int first, int last );
