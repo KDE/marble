@@ -39,18 +39,18 @@ public:
 
     Route m_route;
 
-    RouteDeviation m_deviation;
     PositionTracking* m_positionTracking;
     RouteRequest* const m_request;
     QHash<int, QByteArray> m_roleNames;
+    RouteDeviation m_deviation;
 
     void updateViaPoints( const GeoDataCoordinates &position );
 };
 
-RoutingModelPrivate::RoutingModelPrivate( RouteRequest* request )
-    : m_deviation( Unknown ),
-      m_positionTracking( 0 ),
-      m_request( request )
+RoutingModelPrivate::RoutingModelPrivate(RouteRequest *request) :
+    m_positionTracking(0),
+    m_request(request),
+    m_deviation(Unknown)
 {
     // nothing to do
 }
