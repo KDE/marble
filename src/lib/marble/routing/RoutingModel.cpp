@@ -35,11 +35,11 @@ public:
         OffRoute
     };
 
-    explicit RoutingModelPrivate( RouteRequest* request );
+    explicit RoutingModelPrivate(PositionTracking *positionTracking, RouteRequest *request);
 
     Route m_route;
 
-    PositionTracking* m_positionTracking;
+    PositionTracking *const m_positionTracking;
     RouteRequest* const m_request;
     QHash<int, QByteArray> m_roleNames;
     RouteDeviation m_deviation;
@@ -47,8 +47,8 @@ public:
     void updateViaPoints( const GeoDataCoordinates &position );
 };
 
-RoutingModelPrivate::RoutingModelPrivate(RouteRequest *request) :
-    m_positionTracking(0),
+RoutingModelPrivate::RoutingModelPrivate(PositionTracking *positionTracking, RouteRequest *request) :
+    m_positionTracking(positionTracking),
     m_request(request),
     m_deviation(Unknown)
 {
@@ -69,9 +69,9 @@ void RoutingModelPrivate::updateViaPoints( const GeoDataCoordinates &position )
 }
 
 RoutingModel::RoutingModel( RouteRequest* request, MarbleModel *model, QObject *parent ) :
-        QAbstractListModel( parent ), d( new RoutingModelPrivate( request ) )
+    QAbstractListModel(parent),
+    d(new RoutingModelPrivate(model->positionTracking(), request))
 {
-    d->m_positionTracking = model->positionTracking();
     QObject::connect( d->m_positionTracking, SIGNAL(gpsLocation(GeoDataCoordinates,qreal)),
              this, SLOT(updatePosition(GeoDataCoordinates,qreal)) );
 
