@@ -218,7 +218,7 @@ GeoDataDocument *ShpRunner::parseFile(const QString &fileName, DocumentRole role
 
     DBFClose( dbfhandle );
 
-    if ( document->size() ) {
+    if (!document->isEmpty()) {
         document->setFileName( fileName );
         return document;
     } else {

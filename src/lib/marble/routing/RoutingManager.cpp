@@ -209,7 +209,7 @@ void RoutingManagerPrivate::loadRoute(const QString &filename)
     bool loaded = false;
 
     GeoDataDocument* container = dynamic_cast<GeoDataDocument*>( doc );
-    if ( container && container->size() > 0 ) {
+    if (container && !container->isEmpty()) {
         GeoDataFolder* viaPoints = dynamic_cast<GeoDataFolder*>( &container->first() );
         if ( viaPoints ) {
             loaded = true;

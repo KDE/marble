@@ -203,7 +203,7 @@ void ElevationProfileMarker::onGeoObjectAdded( GeoDataObject *object )
     if (document->name() != QLatin1String("Elevation Profile"))
         return;
 
-    if ( document->size() < 1 )
+    if (document->isEmpty())
         return;
 
     m_markerPlacemark = dynamic_cast<GeoDataPlacemark *>( document->child( 0 ) );

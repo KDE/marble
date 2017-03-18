@@ -213,7 +213,7 @@ int main(int argc, char *argv[])
                     continue;
                 }
                 GeoDataDocument* tile = processor.clipTo(zoomLevel, tileId.x(), tileId.y());
-                if (tile->size() > 0) {
+                if (!tile->isEmpty()) {
                     NodeReducer nodeReducer(tile, TileId(0, zoomLevel, tileId.x(), tileId.y()));
                     if (!writeTile(tile, filename)) {
                         return 4;
@@ -283,7 +283,7 @@ int main(int argc, char *argv[])
 
                 typedef QSharedPointer<GeoDataDocument> GeoDocPtr;
                 GeoDocPtr tile2 = GeoDocPtr(loader.clip(zoomLevel, tileId.x(), tileId.y()));
-                if (tile2->size() > 0) {
+                if (!tile2->isEmpty()) {
                     GeoDocPtr tile1 = GeoDocPtr(mapTiles.clip(zoomLevel, tileId.x(), tileId.y()));
                     TagsFilter::removeAnnotationTags(tile1.data());
                     int originalWays = 0;
@@ -294,7 +294,7 @@ int main(int argc, char *argv[])
                         mergedWays = concatenator.mergedWays();
                     }
                     NodeReducer nodeReducer(tile1.data(), tileId);
-                    if (tile1->size() > 0 && tile2->size() > 0) {
+                    if (!tile1->isEmpty() && !tile2->isEmpty()) {
                         GeoDocPtr combined = GeoDocPtr(mergeDocuments(tile1.data(), tile2.data()));
 
                         if (writeBoundaries && boundaryTiles.contains(iter.key())) {

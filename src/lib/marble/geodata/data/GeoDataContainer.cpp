@@ -295,6 +295,11 @@ int GeoDataContainer::size() const
     return d->m_vector.size();
 }
 
+bool GeoDataContainer::isEmpty() const
+{
+    return size() == 0;
+}
+
 GeoDataFeature& GeoDataContainer::at( int pos )
 {
     Q_D(GeoDataContainer);

@@ -135,6 +135,11 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
     int size() const;
 
     /**
+     * @brief Returns true if the container has size 0; otherwise returns false.
+     */
+    bool isEmpty() const;
+
+    /**
     * @brief return the reference of the element at a specific position
     */
     GeoDataFeature& at( int pos );

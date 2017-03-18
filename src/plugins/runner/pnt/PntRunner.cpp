@@ -82,7 +82,7 @@ GeoDataDocument *PntRunner::parseFile(const QString &fileName, DocumentRole role
             error = true;
         }
 
-        if ( header >= 1000 && document->size() > 0 ) {
+        if (header >= 1000 && !document->isEmpty()) {
             GeoDataLineString *const polyline = static_cast<GeoDataLineString*>( placemark->geometry() );
             if ( polyline->size() == 1 ) {
                 mDebug() << Q_FUNC_INFO << fileName << "contains single-point polygon at" << count << ". Aborting.";
@@ -198,7 +198,7 @@ GeoDataDocument *PntRunner::parseFile(const QString &fileName, DocumentRole role
     }
 
     file.close();
-    if ( document->size() == 0 || error ) {
+    if (document->isEmpty() || error) {
         delete document;
         document = 0;
         return nullptr;
