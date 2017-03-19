@@ -72,6 +72,10 @@ public:
 
     QPixmap m_targetPixmap;
 
+    QPixmap m_standardRoutePoint;
+
+    QPixmap m_activeRoutePoint;
+
     QRect m_dirtyRect;
 
     QPoint m_dropStopOver;
@@ -116,6 +120,8 @@ public:
 
     /** Returns the same color as the given one with its alpha channel adjusted to the given value */
     static inline QColor alphaAdjusted( const QColor &color, int alpha );
+
+    static QPixmap createRoutePoint(const QColor &penColor, const QColor &brushColor);
 
     /**
       * Returns the start or destination position if Ctrl key is among the
@@ -163,6 +169,10 @@ public:
 RoutingLayerPrivate::RoutingLayerPrivate( RoutingLayer *parent, MarbleWidget *widget ) :
         q( parent ), m_movingIndex( -1 ), m_marbleWidget( widget ),
         m_targetPixmap(QStringLiteral(":/data/bitmaps/routing_pick.png")),
+        m_standardRoutePoint(createRoutePoint(widget->model()->routingManager()->routeColorStandard(),
+                                              widget->model()->routingManager()->routeColorAlternative())),
+        m_activeRoutePoint(createRoutePoint(widget->model()->routingManager()->routeColorHighlighted(),
+                                            alphaAdjusted(Oxygen::hotOrange4, 200))),
         m_dragStopOverRightIndex(-1),
         m_routingModel( widget->model()->routingManager()->routingModel() ),
         m_placemarkModel( 0 ),
@@ -185,7 +195,6 @@ RoutingLayerPrivate::RoutingLayerPrivate( RoutingLayer *parent, MarbleWidget *wi
     if ( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
         m_pixmapSize = QSize( 38, 38 );
     }
-
 }
 
 int RoutingLayerPrivate::viaInsertPosition( Qt::KeyboardModifiers modifiers ) const
@@ -314,28 +323,29 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
 
     if( m_routingModel->rowCount() == m_routingModel->route().size() ) {
         m_instructionRegions.clear();
+
+        QPen activeRouteSegmentPen(m_marbleWidget->model()->routingManager()->routeColorHighlighted());
+        activeRouteSegmentPen.setWidth(6);
+        if (m_marbleWidget->model()->routingManager()->state() == RoutingManager::Downloading) {
+            activeRouteSegmentPen.setStyle(Qt::DotLine);
+        }
+        painter->setPen(activeRouteSegmentPen);
+
         for ( int i = 0; i < m_routingModel->rowCount(); ++i ) {
             QModelIndex index = m_routingModel->index( i, 0 );
             GeoDataCoordinates pos = index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoDataCoordinates>();
 
-            painter->setBrush( QBrush( m_marbleWidget->model()->routingManager()->routeColorAlternative() ) );
             if ( m_selectionModel && m_selectionModel->selection().contains( index ) ) {
                 const RouteSegment &segment = m_routingModel->route().at( i );
                 const GeoDataLineString currentRoutePoints = segment.path();
 
-                QPen activeRouteSegmentPen( m_marbleWidget->model()->routingManager()->routeColorHighlighted() );
-
-                activeRouteSegmentPen.setWidth( 6 );
-                if ( m_marbleWidget->model()->routingManager()->state() == RoutingManager::Downloading ) {
-                    activeRouteSegmentPen.setStyle( Qt::DotLine );
-                }
-                painter->setPen( activeRouteSegmentPen );
                 painter->drawPolyline( currentRoutePoints );
 
-                painter->setPen( standardRoutePen );
-                painter->setBrush( QBrush( alphaAdjusted( Oxygen::hotOrange4, 200 ) ) );
+                painter->drawPixmap(pos, m_activeRoutePoint);
             }
-            painter->drawEllipse( pos, 6, 6 );
+            else {
+                painter->drawPixmap(pos, m_standardRoutePoint);
+            }
 
             if ( m_isInteractive ) {
                 QRegion region = painter->regionFromEllipse( pos, 12, 12 );
@@ -348,8 +358,7 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
         GeoDataCoordinates location = m_routingModel->route().currentSegment().nextRouteSegment().maneuver().position();
         QString nextInstruction = m_routingModel->route().currentSegment().nextRouteSegment().maneuver().instructionText();
         if( !nextInstruction.isEmpty() ) {
-            painter->setBrush( QBrush( Oxygen::hotOrange4 ) );
-            painter->drawEllipse( location, 6, 6 );
+            painter->drawPixmap(location, m_activeRoutePoint);
         }
     }
 }
@@ -406,6 +415,25 @@ QColor RoutingLayerPrivate::alphaAdjusted( const QColor &color, int alpha )
     QColor result( color );
     result.setAlpha( alpha );
     return result;
+}
+
+QPixmap RoutingLayerPrivate::createRoutePoint(const QColor &penColor, const QColor &brushColor)
+{
+     QPen pen(penColor);
+     pen.setWidth(2);
+
+     const QBrush brush(brushColor);
+
+     QPixmap routePoint(QSize(8, 8));
+     routePoint.fill(Qt::transparent);
+
+     QPainter painter(&routePoint);
+     painter.setRenderHint(QPainter::Antialiasing, true);
+     painter.setPen(pen);
+     painter.setBrush(brush);
+     painter.drawEllipse(1, 1, 6, 6);
+
+     return routePoint;
 }
 
 bool RoutingLayerPrivate::handleMouseButtonPress( QMouseEvent *e )
