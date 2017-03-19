@@ -832,7 +832,7 @@ Vec3 HorEqu (double jd, double ep2, double lat, double lng, Vec3 r)
 /*--------------------- Function AppPos ----------------------------------*/
 
 void AppPos (double jd, double ep2, double lat, double lng, double ht,
-				 int solsys, Vec3 r, double& azim, double& elev, double& dist)
+				 int solsys, const Vec3& r, double& azim, double& elev, double& dist)
  {
   /* get apparent position in the horizontal system
 	  jd = MJD-time (UT)

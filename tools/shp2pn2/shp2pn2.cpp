@@ -90,7 +90,7 @@ qint8 printFormat8( qreal X ) {
     return ( ( qint8 )( X * 120 ) );
 }
 
-quint32 getParentNodes( QVector<GeoDataCoordinates>::Iterator begin, QVector<GeoDataCoordinates>::Iterator end )
+quint32 getParentNodes( const QVector<GeoDataCoordinates>::Iterator& begin, const QVector<GeoDataCoordinates>::Iterator& end )
 {
     quint32 parentNodes = 0;
 
@@ -107,7 +107,7 @@ quint32 getParentNodes( QVector<GeoDataCoordinates>::Iterator begin, QVector<Geo
     return parentNodes;
 }
 
-void printAllNodes( QVector<GeoDataCoordinates>::Iterator begin, QVector<GeoDataCoordinates>::Iterator end, QDataStream &stream ) 
+void printAllNodes( const QVector<GeoDataCoordinates>::Iterator& begin, const QVector<GeoDataCoordinates>::Iterator& end, QDataStream &stream ) 
 {
 
     qint16 nrChildNodes; 

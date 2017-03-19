@@ -615,7 +615,7 @@ const QStringList &Placemark::tags() const
     return m_tags;
 }
 
-bool Placemark::addTagValue(QString &target, const QString &key, const QString &format, const QString separator) const
+bool Placemark::addTagValue(QString &target, const QString &key, const QString &format, const QString& separator) const
 {
     auto const & osmData = m_placemark.osmData();
     QString const value = osmData.tagValue(key);

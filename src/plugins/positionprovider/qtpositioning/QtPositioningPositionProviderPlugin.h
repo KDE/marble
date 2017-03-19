@@ -57,7 +57,7 @@ public:
 private Q_SLOTS:
     /** Regular (each second) position and status update */
     void update();
-    void update(QGeoPositionInfo position);
+    void update(const QGeoPositionInfo& position);
 
 private:
     QtPositioningPositionProviderPluginPrivate* const d;

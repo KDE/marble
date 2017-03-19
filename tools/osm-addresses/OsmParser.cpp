@@ -58,7 +58,7 @@ namespace {
     };
 }
 
-bool moreImportantAdminArea( const OsmRegion &a, const OsmRegion b )
+bool moreImportantAdminArea( const OsmRegion &a, const OsmRegion& b )
 {
     return a.adminLevel() < b.adminLevel();
 }

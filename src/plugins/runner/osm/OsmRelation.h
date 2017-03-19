@@ -31,7 +31,7 @@ public:
     void parseMember(const QXmlStreamAttributes &attributes);
     void addMember(qint64 reference, const QString &role, const QString &type);
     void createMultipolygon(GeoDataDocument* document, OsmWays &ways, const OsmNodes &nodes, QSet<qint64> &usedNodes, QSet<qint64> &usedWays) const;
-    void createRelation(GeoDataDocument* document, const QHash<qint64, GeoDataPlacemark*> wayPlacemarks) const;
+    void createRelation(GeoDataDocument* document, const QHash<qint64, GeoDataPlacemark*>& wayPlacemarks) const;
 
     const OsmPlacemarkData & osmData() const;
 

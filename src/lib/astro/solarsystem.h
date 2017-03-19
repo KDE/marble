@@ -100,7 +100,7 @@ class ASTROLIB_EXPORT SolarSystem     // Calculate Positions of Solar System Bod
     void ssinit();  // initialize SolarSystem
     double atan23 (double y, double x);  // atan without singularity for x,y=0
     void DefTime ();  // Get System Time and Date
-    void getRaDec (Vec3 r1, double& ra, double& decl); // convert r1 into RA and DEC
+    void getRaDec (const Vec3& r1, double& ra, double& decl); // convert r1 into RA and DEC
     void updateSolar();  // update all positions of planets according to current MJD.
    
     void MoonDetails();

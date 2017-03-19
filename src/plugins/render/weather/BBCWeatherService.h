@@ -41,7 +41,7 @@ class BBCWeatherService : public AbstractWeatherService
 
  private Q_SLOTS:
     void fetchStationList();
-    void createItem( BBCStation station );
+    void createItem( const BBCStation& station );
 
  private:
     QList<BBCStation> m_stationList;

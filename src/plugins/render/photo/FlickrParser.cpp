@@ -28,7 +28,7 @@ FlickrParser::FlickrParser( MarbleWidget *widget,
 {
 }
 
-bool FlickrParser::read( QByteArray data )
+bool FlickrParser::read( const QByteArray& data )
 {
     addData( data );
 

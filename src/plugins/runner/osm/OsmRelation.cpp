@@ -162,7 +162,7 @@ void OsmRelation::createMultipolygon(GeoDataDocument *document, OsmWays &ways, c
     }
 }
 
-void OsmRelation::createRelation(GeoDataDocument *document, const QHash<qint64, GeoDataPlacemark*> placemarks) const
+void OsmRelation::createRelation(GeoDataDocument *document, const QHash<qint64, GeoDataPlacemark*>& placemarks) const
 {
     if (m_osmData.containsTag(QStringLiteral("type"), QStringLiteral("multipolygon"))) {
         return;

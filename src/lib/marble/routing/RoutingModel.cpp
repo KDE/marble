@@ -281,7 +281,7 @@ int RoutingModel::rightNeighbor( const GeoDataCoordinates &position, RouteReques
     return route->size()-1;
 }
 
-void RoutingModel::updatePosition( GeoDataCoordinates location, qreal speed )
+void RoutingModel::updatePosition( const GeoDataCoordinates& location, qreal speed )
 {
     d->m_route.setPosition( location );
 

@@ -192,7 +192,7 @@ QString ControlView::defaultMapThemeId() const
     return QString();
 }
 
-void ControlView::printMapScreenShot( QPointer<QPrintDialog> printDialog)
+void ControlView::printMapScreenShot( const QPointer<QPrintDialog>& printDialog)
 {
 #ifndef QT_NO_PRINTER
         PrintOptionsWidget* printOptions = new PrintOptionsWidget( this );

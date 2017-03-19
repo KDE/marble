@@ -135,7 +135,7 @@ bool OsmcSymbol::parseBackground(const QString &bg)
     return true;
 }
 
-void setXMLAttribute(QDomElement &elem, QString tag, QString attr, QString attrValue);
+void setXMLAttribute(QDomElement &elem, const QString& tag, const QString& attr, const QString& attrValue);
 
 QSvgRenderer* OsmcSymbol::parseForeground(const QString &fg)
 {
@@ -234,7 +234,7 @@ QColor OsmcSymbol::wayColor() const
     return m_wayColor;
 }
 
-void setXMLAttribute(QDomElement &elem, QString tag, QString attr, QString attrValue)
+void setXMLAttribute(QDomElement &elem, const QString& tag, const QString& attr, const QString& attrValue)
 {
     // If elem's tag is equal to the provided one then overwrite desired attribute
     if (elem.tagName() == tag) {

@@ -84,7 +84,7 @@ Q_SIGNALS:
     void routeRelationModelChanged();
 
 private:
-    bool addTagValue(QString &target, const QString &key, const QString &format=QString(), const QString separator = QStringLiteral(" · ")) const;
+    bool addTagValue(QString &target, const QString &key, const QString &format=QString(), const QString& separator = QStringLiteral(" · ")) const;
     void addFirstTagValueOf(QString &target, const QStringList &keys) const;
     void addTagDescription(QString &target, const QString &key, const QString &value, const QString &description) const;
     void append(QString &target, const QString &value) const;

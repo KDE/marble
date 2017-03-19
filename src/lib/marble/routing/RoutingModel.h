@@ -102,7 +102,7 @@ public Q_SLOTS:
       */
     void setRoute( const Route &route );
 
-    void updatePosition( GeoDataCoordinates, qreal );
+    void updatePosition( const GeoDataCoordinates&, qreal );
 
 Q_SIGNALS:
    /**

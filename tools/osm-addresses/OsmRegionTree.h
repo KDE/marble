@@ -25,7 +25,7 @@ public:
 
     const OsmRegion &node() const;
 
-    void setChildren( const QVector<OsmRegionTree> children );
+    void setChildren( const QVector<OsmRegionTree>& children );
 
     const QVector<OsmRegionTree> & children() const;
 

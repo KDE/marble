@@ -1265,7 +1265,7 @@ void EclSolar::moonph()
 }
 
 double EclSolar::getlocmag(double jd, double ep2, double phi, double lamda,
-                 double height, Vec3 rs, Vec3 rm, int& totflg)
+                 double height, const Vec3& rs, const Vec3& rm, int& totflg)
  {
   /* get magnitude of solar eclipse at local position.
      jd : MJD (UT) of event

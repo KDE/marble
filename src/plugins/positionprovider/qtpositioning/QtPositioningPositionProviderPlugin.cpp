@@ -197,7 +197,7 @@ void QtPositioningPositionProviderPlugin::update()
     }
 }
 
-void QtPositioningPositionProviderPlugin::update(QGeoPositionInfo geoPositionInfo)
+void QtPositioningPositionProviderPlugin::update(const QGeoPositionInfo& geoPositionInfo)
 {
     PositionProviderStatus newStatus = geoPositionInfo.isValid() ?
                 PositionProviderStatusAvailable :

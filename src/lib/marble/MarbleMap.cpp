@@ -122,7 +122,7 @@ public:
 
     void updateProperty( const QString &, bool );
 
-    void setDocument( QString key );
+    void setDocument( const QString& key );
 
     void updateTileLevel();
 
@@ -780,7 +780,7 @@ bool MarbleMap::geoCoordinates( int x, int y,
     return d->m_viewport.geoCoordinates( x, y, lon, lat, unit );
 }
 
-void MarbleMapPrivate::setDocument( QString key )
+void MarbleMapPrivate::setDocument( const QString& key )
 {
     if ( !m_model->mapTheme() ) {
         // Happens if no valid map theme is set or at application startup

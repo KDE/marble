@@ -29,7 +29,7 @@ public:
     FlickrParser( Marble::MarbleWidget *widget,
                   QList<PhotoPluginItem *> *list, QObject *parent );
 
-    bool read( QByteArray data );
+    bool read( const QByteArray& data );
 
 private:
     void readUnknownElement();

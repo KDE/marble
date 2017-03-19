@@ -364,14 +364,14 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry
 /*!
     \brief Removes the node at the given position and returns it.
 */
-    QVector<GeoDataCoordinates>::Iterator erase ( QVector<GeoDataCoordinates>::Iterator position );
+    QVector<GeoDataCoordinates>::Iterator erase ( const QVector<GeoDataCoordinates>::Iterator& position );
 
 
 /*!
     \brief Removes the nodes within the given range and returns them.
 */
-    QVector<GeoDataCoordinates>::Iterator erase ( QVector<GeoDataCoordinates>::Iterator begin,
-                                                  QVector<GeoDataCoordinates>::Iterator end );
+    QVector<GeoDataCoordinates>::Iterator erase ( const QVector<GeoDataCoordinates>::Iterator& begin,
+                                                  const QVector<GeoDataCoordinates>::Iterator& end );
 
 
 /*!

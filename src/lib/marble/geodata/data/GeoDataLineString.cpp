@@ -869,7 +869,7 @@ qreal GeoDataLineString::length( qreal planetRadius, int offset ) const
     return planetRadius * length;
 }
 
-QVector<GeoDataCoordinates>::Iterator GeoDataLineString::erase ( QVector<GeoDataCoordinates>::Iterator pos )
+QVector<GeoDataCoordinates>::Iterator GeoDataLineString::erase ( const QVector<GeoDataCoordinates>::Iterator& pos )
 {
     detach();
 
@@ -881,8 +881,8 @@ QVector<GeoDataCoordinates>::Iterator GeoDataLineString::erase ( QVector<GeoData
     return d->m_vector.erase( pos );
 }
 
-QVector<GeoDataCoordinates>::Iterator GeoDataLineString::erase ( QVector<GeoDataCoordinates>::Iterator begin,
-                                                                 QVector<GeoDataCoordinates>::Iterator end )
+QVector<GeoDataCoordinates>::Iterator GeoDataLineString::erase ( const QVector<GeoDataCoordinates>::Iterator& begin,
+                                                                 const QVector<GeoDataCoordinates>::Iterator& end )
 {
     detach();
 

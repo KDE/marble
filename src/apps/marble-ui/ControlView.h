@@ -107,7 +107,7 @@ class ControlView : public QWidget
     static QActionGroup* createViewSizeActionGroup( QObject* parent );
 
  public Q_SLOTS:
-    void printMapScreenShot( QPointer<QPrintDialog> dialog );
+    void printMapScreenShot( const QPointer<QPrintDialog>& dialog );
     void printPreview();
     void paintPrintPreview( QPrinter * printer );
 

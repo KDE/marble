@@ -34,7 +34,7 @@ private:
      * Makes a GeoDataPolygon which contains the boundary points of the
      * boundingBox parameter.
      */
-    GeoDataPolygon polygonFromLatLonBox( const GeoDataLatLonBox boundingBox ) const;
+    GeoDataPolygon polygonFromLatLonBox( const GeoDataLatLonBox& boundingBox ) const;
 
     /**
      * Decode a valid open location code string into a GeoDataLatLonBox.

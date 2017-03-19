@@ -75,7 +75,7 @@ class ASTROLIB_EXPORT EclSolar     // Calculate Solar Eclipses
     void moonph();  // calculate phases of the Moon
     void eclStart();   // initialize detailed calcs for selected eclipse
     static double getlocmag(double jd, double ep2, double phi, double lamda,
-                     double height, Vec3 rs, Vec3 rm, int& totflg);
+                     double height, const Vec3& rs, const Vec3& rm, int& totflg);
     static int iscrs(double vrc0, double vrc1, double dpn,
                            double& vrx0, double& vrx1, double& vrx20, double& vrx21);
     void InitBound(); // initialize boundary calcs

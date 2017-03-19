@@ -591,7 +591,7 @@ void SolarSystem::updateSolar()
    };
 }
 
-void SolarSystem::getRaDec(Vec3 r1, double& ra, double& decl)
+void SolarSystem::getRaDec(const Vec3& r1, double& ra, double& decl)
 {
   // convert equatorial vector r1 into RA and DEC (in HH.MMSS and DD.MMSS)
 

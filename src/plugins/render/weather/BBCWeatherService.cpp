@@ -100,7 +100,7 @@ void BBCWeatherService::fetchStationList()
     m_parser = 0;
 }
 
-void BBCWeatherService::createItem( BBCStation station )
+void BBCWeatherService::createItem( const BBCStation& station )
 {
     BBCWeatherItem *item = new BBCWeatherItem( this );
     item->setMarbleWidget( marbleWidget() );

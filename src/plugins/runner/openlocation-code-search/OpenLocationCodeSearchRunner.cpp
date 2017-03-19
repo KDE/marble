@@ -64,7 +64,7 @@ void OpenLocationCodeSearchRunner::search( const QString &searchTerm, const GeoD
     emit searchFinished( result );
 }
 
-GeoDataPolygon OpenLocationCodeSearchRunner::polygonFromLatLonBox( const GeoDataLatLonBox boundingBox ) const
+GeoDataPolygon OpenLocationCodeSearchRunner::polygonFromLatLonBox( const GeoDataLatLonBox& boundingBox ) const
 {
     if( boundingBox.isEmpty() ) {
         return GeoDataPolygon();

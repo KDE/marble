@@ -47,7 +47,7 @@
  ASTROLIB_EXPORT Vec3 EquHor (double jd, double ep2, double lat, double lng, Vec3 r);
  ASTROLIB_EXPORT Vec3 HorEqu (double jd, double ep2, double lat, double lng, Vec3 r);
  ASTROLIB_EXPORT void AppPos (double jd, double ep2, double lat, double lng, double ht,
-             int solsys, Vec3 r, double& azim, double& elev, double& dist);
+             int solsys, const Vec3& r, double& azim, double& elev, double& dist);
  ASTROLIB_EXPORT void AppRADec (double jd, double ep2, double lat, double lng,
                double azim, double elev, double& ra, double& dec);
  ASTROLIB_EXPORT double Refract (double h, double p = 1015.0, double t = 15.0); // refraction
