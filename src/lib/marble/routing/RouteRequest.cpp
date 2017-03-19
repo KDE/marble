@@ -326,12 +326,10 @@ bool RouteRequest::visited( int index ) const
 
 void RouteRequest::reverse()
 {
+    std::reverse(d->m_route.begin(), d->m_route.end());
     int const total = d->m_route.size();
-    int const upper = total / 2;
-    for( int i=0; i<upper; ++i ) {
-        qSwap( d->m_route[i], d->m_route[total-i-1] );
+    for (int i = 0; i < total; ++i) {
         setVisited( i, false );
-        setVisited( total-i-1, false );
     }
 }
 
