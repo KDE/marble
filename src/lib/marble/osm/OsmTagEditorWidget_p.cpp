@@ -126,7 +126,7 @@ QList<OsmTagEditorWidgetPrivate::OsmTag> OsmTagEditorWidgetPrivate::recommendedT
         }
     }
 
-    for (const auto additionalOsmTag: additionalOsmTags) {
+    for (const auto& additionalOsmTag: additionalOsmTags) {
         if (filter.contains(additionalOsmTag.first)) {
             recommendedTags += additionalOsmTag;
         }
