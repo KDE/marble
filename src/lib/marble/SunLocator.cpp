@@ -36,9 +36,6 @@ namespace Marble
 {
 
 using std::sin;
-using std::cos;
-using std::asin;
-using std::abs;
 
 class SunLocatorPrivate
 {
