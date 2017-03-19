@@ -43,10 +43,7 @@ GeoDataCreate &GeoDataCreate::operator=( const GeoDataCreate &other )
 
 bool GeoDataCreate::operator==( const GeoDataCreate &other ) const
 {
-    if ( !GeoDataContainer::equals(other) ){
-        return false;
-    }
-    return true;
+    return GeoDataContainer::equals(other);
 }
 
 bool GeoDataCreate::operator!=( const GeoDataCreate &other ) const

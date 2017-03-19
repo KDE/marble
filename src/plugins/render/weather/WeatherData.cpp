@@ -196,10 +196,7 @@ class WeatherDataPrivate
     static bool isPositiveValue( qreal value )
     {
         // A small tolerance
-        if( value > -0.5 ) {
-            return true;
-        }
-        return false;
+        return value > -0.5;
     }
     
     static QString generateTemperatureString( qreal temp, WeatherData::TemperatureUnit format )

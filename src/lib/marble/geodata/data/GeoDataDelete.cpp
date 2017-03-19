@@ -43,10 +43,7 @@ GeoDataDelete &GeoDataDelete::operator=( const GeoDataDelete &other )
 
 bool GeoDataDelete::operator==( const GeoDataDelete &other ) const
 {
-    if ( !GeoDataContainer::equals(other) ){
-        return false;
-    }
-    return true;
+    return GeoDataContainer::equals(other);
 }
 
 bool GeoDataDelete::operator!=( const GeoDataDelete &other ) const

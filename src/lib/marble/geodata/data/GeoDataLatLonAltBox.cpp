@@ -279,10 +279,7 @@ QString GeoDataLatLonAltBox::toString( GeoDataCoordinates::Unit unit ) const
 
 bool GeoDataLatLonAltBox::isNull() const
 {
-    if ( GeoDataLatLonBox::isNull() && d->m_maxAltitude == d->m_minAltitude ) 
-        return true;
-
-    return false;
+    return GeoDataLatLonBox::isNull() && d->m_maxAltitude == d->m_minAltitude;
 }
 
 void GeoDataLatLonAltBox::clear()

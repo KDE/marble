@@ -64,18 +64,12 @@ Pn2Runner::~Pn2Runner()
 
 bool Pn2Runner::errorCheckLat( qint16 lat ) 
 {
-    if ( lat >= -10800 && lat <= +10800 )
-        return false;
-    else
-        return true;
+    return !(lat >= -10800 && lat <= +10800);
 }
 
 bool Pn2Runner::errorCheckLon( qint16 lon )
 {
-    if ( lon >= -21600 && lon <= +21600 )
-        return false;
-    else
-        return true;
+    return !(lon >= -21600 && lon <= +21600);
 }
 
 bool Pn2Runner::importPolygon( QDataStream &stream, GeoDataLineString* linestring, quint32 nrAbsoluteNodes ) 

@@ -158,7 +158,7 @@ void AbstractFloatItem::setPositionLocked( bool lock )
 
 bool AbstractFloatItem::positionLocked() const
 {
-    return ( flags() & ScreenGraphicsItem::ItemIsMovable ) ? false : true;
+    return ( flags() & ScreenGraphicsItem::ItemIsMovable ) == 0;
 }
 
 bool AbstractFloatItem::eventFilter( QObject *object, QEvent *e )

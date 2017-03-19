@@ -59,10 +59,7 @@ bool BranchFilterProxyModel::filterAcceptsRow( int sourceRow, const QModelIndex 
     while ( tmpIndex.isValid() && tmpIndex != rowIndex ) {
         tmpIndex = tmpIndex.parent();
     }
-    if( tmpIndex == rowIndex ) {
-        return true;
-    }
-    return false;
+    return tmpIndex == rowIndex;
 }
 
 }

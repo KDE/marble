@@ -306,10 +306,7 @@ bool GeoDataLatLonBox::crossesDateLine() const
 
 bool GeoDataLatLonBox::crossesDateLine(qreal east, qreal west)
 {
-    if ( east < west || ( east == M_PI && west == -M_PI ) ) {
-        return true;
-    }
-    return false;
+    return east < west || ( east == M_PI && west == -M_PI );
 }
 
 GeoDataCoordinates GeoDataLatLonBox::center() const
@@ -808,10 +805,7 @@ GeoDataLatLonBox GeoDataLatLonBox::fromLineString(  const GeoDataLineString& lin
 
 bool GeoDataLatLonBox::isNull() const
 {
-    if ( d->m_north == d->m_south && d->m_east == d->m_west )
-        return true;
-
-    return false;
+    return d->m_north == d->m_south && d->m_east == d->m_west;
 }
 
 bool GeoDataLatLonBox::isEmpty() const

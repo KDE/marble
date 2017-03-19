@@ -157,7 +157,7 @@ bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &coordinate
 
         pointRepeatNum = itNum;
 
-        return visible && true;
+        return visible;
     }
 
     // the requested point is out of the visible y range:
@@ -268,8 +268,5 @@ bool MercatorProjection::mapCoversViewport( const ViewportParams *viewport ) con
     int yTop          = height / 2 - 2 * radius + yCenterOffset;
     int yBottom       = yTop + 4 * radius;
 
-    if ( yTop >= 0 || yBottom < height )
-        return false;
-
-    return true;
+    return !(yTop >= 0 || yBottom < height);
 }

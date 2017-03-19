@@ -279,8 +279,5 @@ bool EquirectProjection::mapCoversViewport( const ViewportParams *viewport ) con
     int yTop          = halfImageHeight - radius + yCenterOffset;
     int yBottom       = yTop + 2 * radius;
 
-    if ( yTop >= 0 || yBottom < height )
-        return false;
-
-    return true;
+    return !(yTop >= 0 || yBottom < height);
 }

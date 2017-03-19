@@ -412,11 +412,8 @@ void ClipPainterPrivate::labelPosition(const QPolygonF & polygon, QVector<QPoint
 bool ClipPainterPrivate::pointAllowsLabel( const QPointF& point )
 {
 
-    if ( point.x() > m_labelAreaMargin && point.x() < q->viewport().width() - m_labelAreaMargin 
-         && point.y() > m_labelAreaMargin && point.y() < q->viewport().height() - m_labelAreaMargin ) {
-        return true;
-    }
-    return false;
+    return point.x() > m_labelAreaMargin && point.x() < q->viewport().width() - m_labelAreaMargin 
+         && point.y() > m_labelAreaMargin && point.y() < q->viewport().height() - m_labelAreaMargin;
 }
 
 QPointF ClipPainterPrivate::interpolateLabelPoint( const QPointF& previousPoint, 

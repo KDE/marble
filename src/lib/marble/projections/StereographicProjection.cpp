@@ -120,11 +120,7 @@ bool StereographicProjection::screenCoordinates( const GeoDataCoordinates &coord
     y = viewport->height() / 2 - y;
 
     // Skip placemarks that are outside the screen area
-    if ( x < 0 || x >= viewport->width() || y < 0 || y >= viewport->height() ) {
-        return false;
-    }
-
-    return true;
+    return !(x < 0 || x >= viewport->width() || y < 0 || y >= viewport->height());
 }
 
 bool StereographicProjection::screenCoordinates( const GeoDataCoordinates &coordinates,

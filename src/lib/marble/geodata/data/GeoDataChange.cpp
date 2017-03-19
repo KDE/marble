@@ -43,10 +43,7 @@ GeoDataChange &GeoDataChange::operator=( const GeoDataChange &other )
 
 bool GeoDataChange::operator==( const GeoDataChange &other ) const
 {
-    if ( !GeoDataContainer::equals(other) ){
-        return false;
-    }
-    return true;
+    return GeoDataContainer::equals(other);
 }
 
 bool GeoDataChange::operator!=( const GeoDataChange &other ) const
