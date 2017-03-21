@@ -555,6 +555,7 @@ install( FILES
     geodata/data/GeoDataPolygon.h
     geodata/data/GeoDataPolyStyle.h
     geodata/data/GeoDataRegion.h
+    geodata/data/GeoDataRelation.h
     geodata/data/GeoDataSnippet.h
     geodata/data/GeoDataStyle.h
     geodata/data/GeoDataStyleMap.h
