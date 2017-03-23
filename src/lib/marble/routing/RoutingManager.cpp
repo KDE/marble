@@ -84,7 +84,7 @@ public:
 
     QColor m_routeColorAlternative;
 
-    RoutingManagerPrivate( MarbleModel *marbleModel, RoutingManager* manager, QObject *parent );
+    RoutingManagerPrivate(MarbleModel *marbleModel, RoutingManager *manager);
 
     GeoDataFolder* routeRequest() const;
 
@@ -105,7 +105,7 @@ public:
     static void importPlacemark( RouteSegment &outline, QVector<RouteSegment> &segments, const GeoDataPlacemark *placemark );
 };
 
-RoutingManagerPrivate::RoutingManagerPrivate( MarbleModel *model, RoutingManager* manager, QObject *parent ) :
+RoutingManagerPrivate::RoutingManagerPrivate(MarbleModel *model, RoutingManager *manager) :
         q( manager ),
         m_routeRequest( manager ),
         m_routingModel(&m_routeRequest, model->positionTracking(), manager),
@@ -114,8 +114,8 @@ RoutingManagerPrivate::RoutingManagerPrivate( MarbleModel *model, RoutingManager
         m_pluginManager( model->pluginManager() ),
         m_treeModel( model->treeModel() ),
         m_positionTracking( model->positionTracking() ),
-        m_alternativeRoutesModel( parent ),
-        m_runnerManager( model, q ),
+        m_alternativeRoutesModel(manager),
+        m_runnerManager(model, manager),
         m_haveRoute( false ),
         m_guidanceModeEnabled( false ),
         m_shutdownPositionTracking( false ),
@@ -257,8 +257,9 @@ void RoutingManagerPrivate::loadRoute(const QString &filename)
     }
 }
 
-RoutingManager::RoutingManager( MarbleModel *marbleModel, QObject *parent ) : QObject( parent ),
-        d( new RoutingManagerPrivate( marbleModel, this, this ) )
+RoutingManager::RoutingManager(MarbleModel *marbleModel, QObject *parent) :
+    QObject(parent),
+    d(new RoutingManagerPrivate(marbleModel, this))
 {
     connect( &d->m_runnerManager, SIGNAL(routeRetrieved(GeoDataDocument*)),
              this, SLOT(addRoute(GeoDataDocument*)) );
