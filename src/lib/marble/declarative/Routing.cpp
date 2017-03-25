@@ -502,7 +502,7 @@ void Routing::openRoute( const QString &fileName )
         routingManager->clearRoute();
         QString target = fileName.startsWith( QLatin1String( "file://" ) ) ? fileName.mid( 7 ) : fileName;
         routingManager->loadRoute( target );
-        Marble::GeoDataDocument* route = routingManager->alternativeRoutesModel()->currentRoute();
+        const Marble::GeoDataDocument *route = routingManager->alternativeRoutesModel()->currentRoute();
         if ( route ) {
             const Marble::GeoDataLineString* waypoints = Marble::AlternativeRoutesModel::waypoints( route );
             if ( waypoints ) {

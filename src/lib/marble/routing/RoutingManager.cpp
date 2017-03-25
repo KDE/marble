@@ -98,7 +98,7 @@ public:
 
     void routingFinished();
 
-    void setCurrentRoute( GeoDataDocument *route );
+    void setCurrentRoute(const GeoDataDocument *route);
 
     void recalculateRoute( bool deviated );
 
@@ -179,7 +179,7 @@ void RoutingManagerPrivate::saveRoute(const QString &filename)
         container.append( request );
     }
 
-    GeoDataDocument *route = m_alternativeRoutesModel.currentRoute();
+    const GeoDataDocument *route = m_alternativeRoutesModel.currentRoute();
     if ( route ) {
         container.append( new GeoDataDocument( *route ) );
     }
@@ -265,8 +265,8 @@ RoutingManager::RoutingManager(MarbleModel *marbleModel, QObject *parent) :
              this, SLOT(addRoute(GeoDataDocument*)) );
     connect( &d->m_runnerManager, SIGNAL(routingFinished()),
              this, SLOT(routingFinished()) );
-    connect( &d->m_alternativeRoutesModel, SIGNAL(currentRouteChanged(GeoDataDocument*)),
-             this, SLOT(setCurrentRoute(GeoDataDocument*)) );
+    connect(&d->m_alternativeRoutesModel, SIGNAL(currentRouteChanged(const GeoDataDocument*)),
+            this, SLOT(setCurrentRoute(const GeoDataDocument*)));
     connect( &d->m_routingModel, SIGNAL(deviatedFromRoute(bool)),
              this, SLOT(recalculateRoute(bool)) );
 }
@@ -343,7 +343,7 @@ void RoutingManagerPrivate::routingFinished()
     emit q->stateChanged( m_state );
 }
 
-void RoutingManagerPrivate::setCurrentRoute( GeoDataDocument *document )
+void RoutingManagerPrivate::setCurrentRoute(const GeoDataDocument *document)
 {
     QVector<RouteSegment> segments;
     RouteSegment outline;

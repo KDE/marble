@@ -243,7 +243,7 @@ void RoutingLayerPrivate::renderAlternativeRoutes( GeoPainter *painter )
     painter->setPen( alternativeRoutePen );
 
     for ( int i=0; i<m_alternativeRoutesModel->rowCount(); ++i ) {
-        GeoDataDocument* route = m_alternativeRoutesModel->route( i );
+        const GeoDataDocument *route = m_alternativeRoutesModel->route(i);
         if ( route && route != m_alternativeRoutesModel->currentRoute() ) {
             const GeoDataLineString* points = AlternativeRoutesModel::waypoints( route );
             if ( points ) {
@@ -645,9 +645,9 @@ RoutingLayer::RoutingLayer( MarbleWidget *widget, QWidget *parent ) :
              this, SLOT(updateRouteState()) );
     connect( widget, SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)),
             this, SLOT(setViewportChanged()) );
-    connect( widget->model()->routingManager()->alternativeRoutesModel(), SIGNAL(currentRouteChanged(GeoDataDocument*)),
+    connect(widget->model()->routingManager()->alternativeRoutesModel(), SIGNAL(currentRouteChanged(const GeoDataDocument*)),
             this, SLOT(setViewportChanged()) );
-    connect( widget->model()->routingManager()->alternativeRoutesModel(), SIGNAL(currentRouteChanged(GeoDataDocument*)),
+    connect(widget->model()->routingManager()->alternativeRoutesModel(), SIGNAL(currentRouteChanged(const GeoDataDocument*)),
              this, SIGNAL(repaintNeeded()) );
     connect( widget->model()->routingManager()->alternativeRoutesModel(), SIGNAL(rowsInserted(QModelIndex,int,int)),
              this, SLOT(showAlternativeRoutes()) );

@@ -55,7 +55,7 @@ public:
     /** Overload of QAbstractListModel */
     QVariant data ( const QModelIndex &index, int role = Qt::DisplayRole ) const override;
 
-    GeoDataDocument* route( int index );
+    const GeoDataDocument *route(int index) const;
 
     // Model data filling
 
@@ -75,7 +75,7 @@ public:
     /** Remove all alternative routes from the model */
     void clear();
 
-    GeoDataDocument* currentRoute();
+    const GeoDataDocument *currentRoute() const;
 
     /** Returns the waypoints contained in the route as a linestring */
     static const GeoDataLineString* waypoints( const GeoDataDocument* document );
@@ -84,7 +84,7 @@ public Q_SLOTS:
     void setCurrentRoute( int index );
 
 Q_SIGNALS:
-    void currentRouteChanged( GeoDataDocument* newRoute );
+    void currentRouteChanged(const GeoDataDocument *newRoute);
     void currentRouteChanged( int index );
 
 private Q_SLOTS:

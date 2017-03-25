@@ -329,7 +329,7 @@ QVariant AlternativeRoutesModel::data ( const QModelIndex &index, int role ) con
     return result;
 }
 
-GeoDataDocument* AlternativeRoutesModel::route( int index )
+const GeoDataDocument *AlternativeRoutesModel::route(int index) const
 {
     if ( index >= 0 && index < d->m_routes.size() ) {
         return d->m_routes.at(index);
@@ -415,9 +415,9 @@ void AlternativeRoutesModel::setCurrentRoute( int index )
     }
 }
 
-GeoDataDocument * AlternativeRoutesModel::currentRoute()
+const GeoDataDocument *AlternativeRoutesModel::currentRoute() const
 {
-    GeoDataDocument* result = 0;
+    const GeoDataDocument *result = 0;
     if ( d->m_currentIndex >= 0 && d->m_currentIndex < rowCount() ) {
         result = d->m_routes[d->m_currentIndex];
     }
