@@ -367,24 +367,20 @@ void AlternativeRoutesModel::addRestrainedRoutes()
 
 void AlternativeRoutesModel::addRoute( GeoDataDocument* document, WritePolicy policy )
 {
-    if ( policy == Instant ) {
-        int affected = d->m_routes.size();
-        beginInsertRows( QModelIndex(), affected, affected );
-        d->m_routes.push_back( document );
-        endInsertRows();
-        return;
-    }
+    if (policy != Instant) {
+        if (d->m_routes.isEmpty()) {
+            d->m_restrainedRoutes.push_back(document);
 
-    if ( d->m_routes.isEmpty() && d->m_restrainedRoutes.isEmpty() ) {
-        // First
-        int responseTime = d->m_responseTime.elapsed();
-        d->m_restrainedRoutes.push_back( document );
-        int timeout = qMin<int>( 500, qMax<int>( 50,  responseTime * 2 ) );
-        QTimer::singleShot( timeout, this, SLOT(addRestrainedRoutes()) );
-        return;
-    } else if ( d->m_routes.isEmpty() && !d->m_restrainedRoutes.isEmpty() ) {
-        d->m_restrainedRoutes.push_back( document );
-    } else {
+            if (d->m_restrainedRoutes.isEmpty()) {
+                // First
+                const int responseTime = d->m_responseTime.elapsed();
+                const int timeout = qMin<int>(500, qMax<int>(50, responseTime * 2));
+                QTimer::singleShot(timeout, this, SLOT(addRestrainedRoutes()));
+
+                return;
+            }
+        }
+
         for ( int i=0; i<d->m_routes.size(); ++i ) {
             qreal similarity = Private::similarity( document, d->m_routes.at( i ) );
             if ( similarity > 0.8 ) {
@@ -397,13 +393,12 @@ void AlternativeRoutesModel::addRoute( GeoDataDocument* document, WritePolicy po
                 return;
             }
         }
-
-        Q_ASSERT( !d->m_routes.isEmpty() );
-        int affected = d->m_routes.size();
-        beginInsertRows( QModelIndex(), affected, affected );
-        d->m_routes.push_back( document );
-        endInsertRows();
     }
+
+    const int affected = d->m_routes.size();
+    beginInsertRows(QModelIndex(), affected, affected);
+    d->m_routes.push_back(document);
+    endInsertRows();
 }
 
 const GeoDataLineString* AlternativeRoutesModel::waypoints( const GeoDataDocument* document )
