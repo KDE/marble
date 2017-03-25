@@ -611,7 +611,7 @@ Qt::ItemFlags GeoDataTreeModel::flags ( const QModelIndex & index ) const
 }
 
 
-QModelIndex GeoDataTreeModel::index( GeoDataObject *object ) const
+QModelIndex GeoDataTreeModel::index(const GeoDataObject *object) const
 {
     if ( object == 0 )
         return QModelIndex();
@@ -644,9 +644,9 @@ QModelIndex GeoDataTreeModel::index( GeoDataObject *object ) const
               || geodata_cast<GeoDataMultiGeometry>(object));
 
 
-    QList< GeoDataObject* > ancestors;
+    QList<const GeoDataObject *> ancestors;
 
-    GeoDataObject *itup = object; //Iterator to reach the top of the GeoDataDocument (bottom-up)
+    const GeoDataObject *itup = object; //Iterator to reach the top of the GeoDataDocument (bottom-up)
 
     while ( itup && ( itup != d->m_rootDocument ) ) {//We reach up to the rootDocument
 
@@ -657,16 +657,16 @@ QModelIndex GeoDataTreeModel::index( GeoDataObject *object ) const
     QModelIndex itdown;
     if ( !ancestors.isEmpty() ) {
 
-        itdown = index( d->m_rootDocument->childPosition( static_cast<GeoDataFeature*>( ancestors.last() ) ),0,QModelIndex());//Iterator to go top down
+        itdown = index(d->m_rootDocument->childPosition(static_cast<const GeoDataFeature *>(ancestors.last())), 0, QModelIndex());//Iterator to go top down
 
         while ( ( ancestors.size() > 1 ) ) {
 
-            GeoDataObject *parent = static_cast<GeoDataObject*>( ancestors.last() );
+            const GeoDataObject *parent = static_cast<const GeoDataObject*>(ancestors.last());
 
             if (const auto container = dynamic_cast<const GeoDataContainer *>(parent)) {
 
                 ancestors.removeLast();
-                itdown = index(container->childPosition(static_cast<GeoDataFeature*>(ancestors.last())), 0, itdown);
+                itdown = index(container->childPosition(static_cast<const GeoDataFeature *>(ancestors.last())), 0, itdown);
             } else if (geodata_cast<GeoDataPlacemark>(parent)) {
                 //The only child of the model is a Geometry or MultiGeometry object
                 //If it is a geometry object, we should be on the bottom of the list
@@ -679,7 +679,7 @@ QModelIndex GeoDataTreeModel::index( GeoDataObject *object ) const
             }  else if (auto multiGeometry = geodata_cast<GeoDataMultiGeometry>(parent)) {
                 //The child is one of the geometry children of MultiGeometry
                 ancestors.removeLast();
-                itdown = index(multiGeometry->childPosition( static_cast<GeoDataGeometry*>(ancestors.last()) ) , 0, itdown );
+                itdown = index(multiGeometry->childPosition(static_cast<const GeoDataGeometry *>(ancestors.last())), 0, itdown);
             } else if (geodata_cast<GeoDataTour>(parent)) {
                 ancestors.removeLast();
                 itdown = index( 0, 0, itdown );
