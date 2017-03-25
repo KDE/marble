@@ -117,50 +117,6 @@ GeoDataTreeModel::~GeoDataTreeModel()
     delete d;
 }
 
-bool GeoDataTreeModel::hasChildren( const QModelIndex &parent ) const
-{
-    const GeoDataObject *parentItem;
-    if ( parent.column() > 0 ) {
-        return false;
-    }
-
-    if ( !parent.isValid() ) {
-        parentItem = d->m_rootDocument;
-    } else {
-        parentItem = static_cast<const GeoDataObject *>(parent.internalPointer());
-    }
-
-    if ( !parentItem ) {
-        return false;
-    }
-
-    if (const auto placemark = geodata_cast<GeoDataPlacemark>(parentItem)) {
-        return dynamic_cast<const GeoDataMultiGeometry*>( placemark->geometry() );
-    }
-
-    if (const auto folder = geodata_cast<GeoDataFolder>(parentItem)) {
-        return folder->size();
-    }
-
-    if (const auto document = geodata_cast<GeoDataDocument>(parentItem)) {
-        return document->size();
-    }
-
-    if (const auto geometry = geodata_cast<GeoDataMultiGeometry>(parentItem)) {
-        return geometry->size();
-    }
-
-    if (const auto tour = geodata_cast<GeoDataTour>(parentItem)) {
-        return tour->playlist();
-    }
-
-    if (const auto playlist = geodata_cast<GeoDataPlaylist>(parentItem)) {
-        return playlist->size();
-    }
-
-    return false;
-}
-
 int GeoDataTreeModel::rowCount( const QModelIndex &parent ) const
 {
 //    mDebug() << "rowCount";
