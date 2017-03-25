@@ -345,19 +345,20 @@ void RoutingManagerPrivate::routingFinished()
 
 void RoutingManagerPrivate::setCurrentRoute( GeoDataDocument *document )
 {
-    Route route;
     QVector<RouteSegment> segments;
     RouteSegment outline;
 
-    QVector<GeoDataFolder*> folders = document->folderList();
-    for( const GeoDataFolder *folder: folders ) {
-        for( const GeoDataPlacemark *placemark: folder->placemarkList() ) {
-            importPlacemark( outline, segments, placemark );
+    if (document != nullptr) {
+        const auto folders = document->folderList();
+        for (const auto folder : folders) {
+            for (const auto placemark : folder->placemarkList()) {
+                importPlacemark(outline, segments, placemark);
+            }
         }
-    }
 
-    for( const GeoDataPlacemark *placemark: document->placemarkList() ) {
-        importPlacemark( outline, segments, placemark );
+        for (const auto placemark : document->placemarkList()) {
+            importPlacemark(outline, segments, placemark);
+        }
     }
 
     if ( segments.isEmpty() ) {
@@ -389,6 +390,8 @@ void RoutingManagerPrivate::setCurrentRoute( GeoDataDocument *document )
             }
         }
     }
+
+    Route route;
 
     if ( segments.size() > 0 ) {
         for( const RouteSegment &segment: segments ) {
