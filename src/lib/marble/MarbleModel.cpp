@@ -127,9 +127,9 @@ class MarbleModelPrivate
      * in theme file.
      */
     void assignFillColors( const QString &filePath );
-    void assignFillColors(GeoDataDocument *doc, const GeoSceneGeodata &data);
+    void assignFillColors(GeoDataDocument *doc, const GeoSceneGeodata &data) const;
 
-    void addHighlightStyle( GeoDataDocument *doc );
+    void addHighlightStyle(GeoDataDocument *doc) const;
 
     // Misc stuff.
     MarbleClock              m_clock;
@@ -407,7 +407,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument *document )
     emit themeChanged( mapTheme->head()->mapThemeId() );
 }
 
-void MarbleModelPrivate::addHighlightStyle(GeoDataDocument* doc)
+void MarbleModelPrivate::addHighlightStyle(GeoDataDocument *doc) const
 {
     if ( doc ) {
         /*
@@ -780,7 +780,7 @@ void MarbleModelPrivate::assignFillColors(const QString &filePath)
     assignFillColors(doc, *data);
 }
 
-void MarbleModelPrivate::assignFillColors(GeoDataDocument *doc, const GeoSceneGeodata &data)
+void MarbleModelPrivate::assignFillColors(GeoDataDocument *doc, const GeoSceneGeodata &data) const
 {
     addHighlightStyle( doc );
 
