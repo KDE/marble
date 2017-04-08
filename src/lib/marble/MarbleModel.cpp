@@ -342,9 +342,6 @@ void MarbleModel::setMapTheme( GeoSceneDocument *document )
     QList<GeoDataStyle::Ptr> styleList;
     QList<int> renderOrderList;
 
-    bool skip = false;
-    bool sourceFileMatch = false;
-    int datasetIndex = -1;
     for ( GeoSceneLayer *layer: d->m_mapTheme->map()->layers() ) {
         if ( layer->backend() != dgml::dgmlValue_geodata
              && layer->backend() != dgml::dgmlValue_vector )
@@ -354,8 +351,9 @@ void MarbleModel::setMapTheme( GeoSceneDocument *document )
         for ( const GeoSceneAbstractDataset *dataset: layer->datasets() ) {
             const GeoSceneGeodata *data = dynamic_cast<const GeoSceneGeodata*>( dataset );
             Q_ASSERT( data );
-            skip = false;
-            sourceFileMatch = false;
+            bool skip = false;
+            bool sourceFileMatch = false;
+            int datasetIndex = -1;
             for ( int i = 0; i < currentDatasets.size(); ++i ) {
                 if ( currentDatasets[i] == *data ) {
                     currentDatasets.removeAt( i );
