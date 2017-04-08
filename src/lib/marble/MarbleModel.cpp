@@ -804,89 +804,102 @@ void MarbleModel::updateProperty( const QString &property, bool value )
     }
 }
 
-void MarbleModelPrivate::assignFillColors( const QString &filePath ) {
-    for( GeoSceneLayer *layer: m_mapTheme->map()->layers() ) {
-        if ( layer->backend() == dgml::dgmlValue_geodata 
-             || layer->backend() == dgml::dgmlValue_vector )
-        {
-            for( GeoSceneAbstractDataset *dataset: layer->datasets() ) {
-                GeoSceneGeodata *data = static_cast<GeoSceneGeodata*>( dataset );
-                if ( data ) {
-                    if ( data->sourceFile() == filePath ) {
-                        GeoDataDocument *doc = m_fileManager.at( filePath );
-                        Q_ASSERT( doc );
+void MarbleModelPrivate::assignFillColors(const QString &filePath)
+{
+    const GeoSceneGeodata *data = nullptr;
 
-                        addHighlightStyle( doc );
+    for (auto layer : m_mapTheme->map()->layers()) {
+        if (layer->backend() != dgml::dgmlValue_geodata
+            && layer->backend() != dgml::dgmlValue_vector) {
+            continue;
+        }
 
-                        QPen pen = data->pen();
-                        QBrush brush = data->brush();
-                        const QVector<QColor> colors = data->colors();
-                        GeoDataLineStyle lineStyle( pen.color() );
-                        lineStyle.setPenStyle( pen.style() );
-                        lineStyle.setWidth( pen.width() );
-
-                        if ( !colors.isEmpty() ) {
-                            qreal alpha = data->alpha();
-                            QVector<GeoDataFeature*>::iterator it = doc->begin();
-                            QVector<GeoDataFeature*>::iterator const itEnd = doc->end();
-                            for ( ; it != itEnd; ++it ) {
-                                GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>( *it );
-                                if ( placemark ) {
-                                    GeoDataStyle::Ptr style(new GeoDataStyle);
-                                    style->setId(QStringLiteral("normal"));
-                                    style->setLineStyle( lineStyle );
-                                    quint8 colorIndex = placemark->style()->polyStyle().colorIndex();
-                                    GeoDataPolyStyle polyStyle;
-                                    // Set the colorIndex so that it's not lost after setting new style.
-                                    polyStyle.setColorIndex( colorIndex );
-                                    QColor color;
-                                    // color index having value 99 is undefined
-                                    Q_ASSERT( colors.size() );
-                                    if ( colorIndex > colors.size() || ( colorIndex - 1 ) < 0 )
-                                    {
-                                        color = colors[0];      // Assign the first color as default
-                                    }
-                                    else {
-                                        color = colors[colorIndex-1];
-                                    }
-                                    color.setAlphaF( alpha );
-                                    polyStyle.setColor( color );
-                                    polyStyle.setFill( true );
-                                    style->setPolyStyle( polyStyle );
-                                    placemark->setStyle( style );
-                                }
-                            }
-                        }
-                        else {
-                            GeoDataStyle::Ptr style(new GeoDataStyle);
-                            GeoDataPolyStyle polyStyle( brush.color() );
-                            polyStyle.setFill( true );
-                            style->setLineStyle( lineStyle );
-                            style->setPolyStyle( polyStyle );
-                            style->setId(QStringLiteral("default"));
-                            GeoDataStyleMap styleMap;
-                            styleMap.setId(QStringLiteral("default-map"));
-                            styleMap.insert(QStringLiteral("normal"), QLatin1Char('#') + style->id());
-                            doc->addStyle( style );
-                            doc->addStyleMap( styleMap );
-
-                            const QString styleUrl = QLatin1Char('#') + styleMap.id();
-                            QVector<GeoDataFeature*>::iterator iter = doc->begin();
-                            QVector<GeoDataFeature*>::iterator const end = doc->end();
-
-                            for ( ; iter != end; ++iter ) {
-                                if (auto placemark = geodata_cast<GeoDataPlacemark>(*iter)) {
-                                    if (!geodata_cast<GeoDataTrack>(placemark->geometry()) &&
-                                        !geodata_cast<GeoDataPoint>(placemark->geometry()))
-                                    {
-                                        placemark->setStyleUrl(styleUrl);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+        for (auto dataset: layer->datasets()) {
+            data = dynamic_cast<const GeoSceneGeodata *>(dataset);
+            if (data != nullptr && data->sourceFile() == filePath) {
+                break;
             }
+        }
+
+        if (data) {
+            break;
+        }
+    }
+
+    if (data == nullptr) {
+        return;
+    }
+
+    GeoDataDocument *doc = m_fileManager.at(filePath);
+    Q_ASSERT( doc );
+
+    addHighlightStyle( doc );
+
+    QPen pen = data->pen();
+    QBrush brush = data->brush();
+    const QVector<QColor> colors = data->colors();
+    GeoDataLineStyle lineStyle( pen.color() );
+    lineStyle.setPenStyle( pen.style() );
+    lineStyle.setWidth( pen.width() );
+
+    if (!colors.isEmpty()) {
+        qreal alpha = data->alpha();
+        for (auto feature : *doc) {
+            auto placemark = geodata_cast<GeoDataPlacemark>(feature);
+            if (placemark == nullptr) {
+                continue;
+            }
+
+            GeoDataStyle::Ptr style(new GeoDataStyle);
+            style->setId(QStringLiteral("normal"));
+            style->setLineStyle( lineStyle );
+            quint8 colorIndex = placemark->style()->polyStyle().colorIndex();
+            GeoDataPolyStyle polyStyle;
+            // Set the colorIndex so that it's not lost after setting new style.
+            polyStyle.setColorIndex( colorIndex );
+            QColor color;
+            // color index having value 99 is undefined
+            Q_ASSERT( colors.size() );
+            if (colorIndex > colors.size() || (colorIndex - 1) < 0) {
+                color = colors[0];      // Assign the first color as default
+            }
+            else {
+                color = colors[colorIndex-1];
+            }
+            color.setAlphaF( alpha );
+            polyStyle.setColor( color );
+            polyStyle.setFill( true );
+            style->setPolyStyle( polyStyle );
+            placemark->setStyle( style );
+        }
+    }
+    else {
+        GeoDataStyle::Ptr style(new GeoDataStyle);
+        GeoDataPolyStyle polyStyle( brush.color() );
+        polyStyle.setFill( true );
+        style->setLineStyle( lineStyle );
+        style->setPolyStyle( polyStyle );
+        style->setId(QStringLiteral("default"));
+        GeoDataStyleMap styleMap;
+        styleMap.setId(QStringLiteral("default-map"));
+        styleMap.insert(QStringLiteral("normal"), QLatin1Char('#') + style->id());
+        doc->addStyle( style );
+        doc->addStyleMap( styleMap );
+
+        const QString styleUrl = QLatin1Char('#') + styleMap.id();
+
+        for (auto feature : *doc) {
+            auto placemark = geodata_cast<GeoDataPlacemark>(feature);
+            if (placemark == nullptr) {
+                continue;
+            }
+
+            if (geodata_cast<GeoDataTrack>(placemark->geometry()) ||
+                geodata_cast<GeoDataPoint>(placemark->geometry())) {
+                continue;
+            }
+
+            placemark->setStyleUrl(styleUrl);
         }
     }
 }
