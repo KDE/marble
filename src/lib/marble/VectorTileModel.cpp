@@ -131,7 +131,7 @@ void VectorTileModel::removeTilesOutOfView(const GeoDataLatLonBox &boundingBox)
 {
     GeoDataLatLonBox const extendedViewport = boundingBox.scaled(2.0, 2.0);
     for (auto iter = m_documents.begin(); iter != m_documents.end();) {
-        bool const isOutOfView = !extendedViewport.intersects(iter.value()->m_boundingBox);
+        bool const isOutOfView = !extendedViewport.intersects(iter.value()->latLonBox());
         if (isOutOfView) {
             iter = m_documents.erase(iter);
         } else {

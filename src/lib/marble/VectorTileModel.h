@@ -93,12 +93,14 @@ private:
         /** Remove the document from the tree and delete the document */
         ~CacheDocument();
 
-        GeoDataDocument *const m_document;
-        VectorTileModel *m_vectorTileModel;
-        GeoDataLatLonBox m_boundingBox;
+        GeoDataLatLonBox latLonBox() const { return m_boundingBox; }
 
     private:
         Q_DISABLE_COPY( CacheDocument )
+
+        GeoDataDocument *const m_document;
+        VectorTileModel *const m_vectorTileModel;
+        GeoDataLatLonBox m_boundingBox;
     };
 
     TileLoader *const m_loader;
