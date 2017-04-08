@@ -136,7 +136,7 @@ class MarbleModelPrivate
      * load of parsing the data file again.
      * @see assignFillColors()
      */
-    void assignNewStyle(const QString &filePath, const GeoDataStyle::Ptr &style );
+    void assignNewStyle(GeoDataDocument *doc, const GeoDataStyle::Ptr &style);
 
     /**
      * @brief Assigns each placemark an inline
@@ -145,6 +145,7 @@ class MarbleModelPrivate
      * in theme file.
      */
     void assignFillColors( const QString &filePath );
+    void assignFillColors(GeoDataDocument *doc, const GeoSceneGeodata &data);
 
     void addHighlightStyle( GeoDataDocument *doc );
 
@@ -352,7 +353,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument *document )
             const GeoSceneGeodata *data = dynamic_cast<const GeoSceneGeodata*>( dataset );
             Q_ASSERT( data );
             bool skip = false;
-            bool sourceFileMatch = false;
+            GeoDataDocument *doc = nullptr;
             int datasetIndex = -1;
             for ( int i = 0; i < currentDatasets.size(); ++i ) {
                 if ( currentDatasets[i] == *data ) {
@@ -366,7 +367,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument *document )
                  * i.e. <brush> and <pen> values of already parsed file. assignNewStyle() does that
                  */
                 if ( currentDatasets[i].sourceFile() == data->sourceFile() ) {
-                    sourceFileMatch = true;
+                    doc = d->m_fileManager.at(data->sourceFile());
                     datasetIndex = i;
                 }
             }
@@ -401,7 +402,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument *document )
                 style->setId(QStringLiteral("default"));
             }
 
-            if ( sourceFileMatch && !currentDatasets[datasetIndex].colors().isEmpty() ) {
+            if (doc && !currentDatasets[datasetIndex].colors().isEmpty()) {
                 /*
                  * if new theme file doesn't specify any colorMap for data
                  * then assignNewStyle otherwise assignFillColors.
@@ -409,10 +410,10 @@ void MarbleModel::setMapTheme( GeoSceneDocument *document )
                 currentDatasets.removeAt( datasetIndex );
                 if ( style ) {
                     mDebug() << "setMapThemeId-> color: " << style->polyStyle().color() << " file: " << filename;
-                    d->assignNewStyle( filename, style );
+                    d->assignNewStyle(doc, style);
                 }
                 else {
-                    d->assignFillColors( data->sourceFile() );
+                    d->assignFillColors(doc, *data);
                 }
             }
             else {
@@ -470,9 +471,8 @@ void MarbleModelPrivate::addHighlightStyle(GeoDataDocument* doc)
     }
 }
 
-void MarbleModelPrivate::assignNewStyle( const QString &filePath, const GeoDataStyle::Ptr &style )
+void MarbleModelPrivate::assignNewStyle(GeoDataDocument *doc, const GeoDataStyle::Ptr &style)
 {
-    GeoDataDocument *doc = m_fileManager.at( filePath );
     Q_ASSERT( doc );
     GeoDataStyleMap styleMap;
     styleMap.setId(QStringLiteral("default-map"));
@@ -833,17 +833,22 @@ void MarbleModelPrivate::assignFillColors(const QString &filePath)
     GeoDataDocument *doc = m_fileManager.at(filePath);
     Q_ASSERT( doc );
 
+    assignFillColors(doc, *data);
+}
+
+void MarbleModelPrivate::assignFillColors(GeoDataDocument *doc, const GeoSceneGeodata &data)
+{
     addHighlightStyle( doc );
 
-    QPen pen = data->pen();
-    QBrush brush = data->brush();
-    const QVector<QColor> colors = data->colors();
+    const QPen pen = data.pen();
+    const QBrush brush = data.brush();
+    const QVector<QColor> colors = data.colors();
     GeoDataLineStyle lineStyle( pen.color() );
     lineStyle.setPenStyle( pen.style() );
     lineStyle.setWidth( pen.width() );
 
     if (!colors.isEmpty()) {
-        qreal alpha = data->alpha();
+        const qreal alpha = data.alpha();
         for (auto feature : *doc) {
             auto placemark = geodata_cast<GeoDataPlacemark>(feature);
             if (placemark == nullptr) {
