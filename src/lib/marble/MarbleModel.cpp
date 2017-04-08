@@ -410,7 +410,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument *document )
                  */
                 currentDatasets.removeAt( datasetIndex );
                 if ( style ) {
-                    qDebug() << "setMapThemeId-> color: " << style->polyStyle().color() << " file: " << filename;
+                    mDebug() << "setMapThemeId-> color: " << style->polyStyle().color() << " file: " << filename;
                     d->assignNewStyle( filename, style );
                 }
                 else {
