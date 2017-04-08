@@ -336,7 +336,6 @@ void MarbleModel::setMapTheme( GeoSceneDocument *document )
             Q_ASSERT( data );
             bool skip = false;
             GeoDataDocument *doc = nullptr;
-            int datasetIndex = -1;
             for ( int i = 0; i < currentDatasets.size(); ++i ) {
                 if ( currentDatasets[i] == *data ) {
                     currentDatasets.removeAt( i );
@@ -350,15 +349,14 @@ void MarbleModel::setMapTheme( GeoSceneDocument *document )
                  */
                 if ( currentDatasets[i].sourceFile() == data->sourceFile() ) {
                     doc = d->m_fileManager.at(data->sourceFile());
-                    datasetIndex = i;
+                    currentDatasets.removeAt(i);
                 }
             }
             if ( skip ) {
                 continue;
             }
 
-            if (doc && !currentDatasets[datasetIndex].colors().isEmpty()) {
-                currentDatasets.removeAt( datasetIndex );
+            if (doc) {
                 d->assignFillColors(doc, *data);
             }
             else {
