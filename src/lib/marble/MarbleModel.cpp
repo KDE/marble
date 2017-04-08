@@ -362,7 +362,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument *document )
                     skip = true;
                     break;
                 }
-                /**
+                /*
                  * If the sourcefile of data matches any in the currentDatasets then there
                  * is no need to parse the file again just update the style
                  * i.e. <brush> and <pen> values of already parsed file. assignNewStyle() does that
@@ -383,7 +383,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument *document )
             GeoDataStyle::Ptr style;
             int renderOrder = data->renderOrder();
 
-            /**
+            /*
              * data->colors() are the colorMap values from dgml file. If this is not
              * empty then we are supposed to assign every placemark a different style
              * by giving it a color from colorMap values based on color index
@@ -404,7 +404,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument *document )
             }
 
             if ( sourceFileMatch && !currentDatasets[datasetIndex].colors().isEmpty() ) {
-                /**
+                /*
                  * if new theme file doesn't specify any colorMap for data
                  * then assignNewStyle otherwise assignFillColors.
                  */
@@ -441,7 +441,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument *document )
 void MarbleModelPrivate::addHighlightStyle(GeoDataDocument* doc)
 {
     if ( doc ) {
-        /**
+        /*
          * Add a highlight style to GeoDataDocument if
          *the theme file specifies any highlight color.
          */
