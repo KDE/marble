@@ -120,24 +120,6 @@ class MarbleModelPrivate
         delete m_mapTheme;
         delete m_legend;
     }
-
-    /**
-     * @brief When applying a new theme, if the old theme
-     * contains any data whose source file is same
-     * as any of the source file in new theme, don't parse
-     * the source file again. Instead just update the
-     * styling info, based on <brush> and <pen>
-     * value for that source file in new theme, in
-     * the already parsed data. If the <brush> element
-     * in new theme has some value for colorMap attribute
-     * then we go for assignFillColors() which assigns each
-     * placemark an inline style based on colors specified
-     * in colorMap attribute. This avoid extra CPU
-     * load of parsing the data file again.
-     * @see assignFillColors()
-     */
-    void assignNewStyle(GeoDataDocument *doc, const GeoDataStyle::Ptr &style);
-
     /**
      * @brief Assigns each placemark an inline
      * style based on the color values specified
@@ -375,48 +357,38 @@ void MarbleModel::setMapTheme( GeoSceneDocument *document )
                 continue;
             }
 
-            QString filename = data->sourceFile();
-            QString property = data->property();
-            QPen pen = data->pen();
-            QBrush brush = data->brush();
-            GeoDataStyle::Ptr style;
-            int renderOrder = data->renderOrder();
-
-            /*
-             * data->colors() are the colorMap values from dgml file. If this is not
-             * empty then we are supposed to assign every placemark a different style
-             * by giving it a color from colorMap values based on color index
-             * of that placemark. See assignFillColors() for details. So, we need to
-             * send an empty style to fileManeger otherwise the FileLoader::createFilterProperties()
-             * will overwrite the parsed value of color index ( GeoDataPolyStyle::d->m_colorIndex ).
-             */
-            if ( data->colors().isEmpty() ) {
-                GeoDataLineStyle lineStyle( pen.color() );
-                lineStyle.setPenStyle( pen.style() );
-                lineStyle.setWidth( pen.width() );
-                GeoDataPolyStyle polyStyle( brush.color() );
-                polyStyle.setFill( true );
-                style = GeoDataStyle::Ptr(new GeoDataStyle);
-                style->setLineStyle( lineStyle );
-                style->setPolyStyle( polyStyle );
-                style->setId(QStringLiteral("default"));
-            }
-
             if (doc && !currentDatasets[datasetIndex].colors().isEmpty()) {
-                /*
-                 * if new theme file doesn't specify any colorMap for data
-                 * then assignNewStyle otherwise assignFillColors.
-                 */
                 currentDatasets.removeAt( datasetIndex );
-                if ( style ) {
-                    mDebug() << "setMapThemeId-> color: " << style->polyStyle().color() << " file: " << filename;
-                    d->assignNewStyle(doc, style);
-                }
-                else {
-                    d->assignFillColors(doc, *data);
-                }
+                d->assignFillColors(doc, *data);
             }
             else {
+                const QString filename = data->sourceFile();
+                const QString property = data->property();
+                const QPen pen = data->pen();
+                const QBrush brush = data->brush();
+                GeoDataStyle::Ptr style;
+                const int renderOrder = data->renderOrder();
+
+                /*
+                 * data->colors() are the colorMap values from dgml file. If this is not
+                 * empty then we are supposed to assign every placemark a different style
+                 * by giving it a color from colorMap values based on color index
+                 * of that placemark. See assignFillColors() for details. So, we need to
+                 * send an empty style to fileManeger otherwise the FileLoader::createFilterProperties()
+                 * will overwrite the parsed value of color index ( GeoDataPolyStyle::d->m_colorIndex ).
+                 */
+                if ( data->colors().isEmpty() ) {
+                    GeoDataLineStyle lineStyle( pen.color() );
+                    lineStyle.setPenStyle( pen.style() );
+                    lineStyle.setWidth( pen.width() );
+                    GeoDataPolyStyle polyStyle( brush.color() );
+                    polyStyle.setFill( true );
+                    style = GeoDataStyle::Ptr(new GeoDataStyle);
+                    style->setLineStyle( lineStyle );
+                    style->setPolyStyle( polyStyle );
+                    style->setId(QStringLiteral("default"));
+                }
+
                 fileList << filename;
                 propertyList << property;
                 styleList << style;
@@ -467,32 +439,6 @@ void MarbleModelPrivate::addHighlightStyle(GeoDataDocument* doc)
             styleMap.insert(QStringLiteral("highlight"), QLatin1Char('#') + highlightStyle->id());
             doc->addStyle( highlightStyle );
             doc->addStyleMap( styleMap );
-        }
-    }
-}
-
-void MarbleModelPrivate::assignNewStyle(GeoDataDocument *doc, const GeoDataStyle::Ptr &style)
-{
-    Q_ASSERT( doc );
-    GeoDataStyleMap styleMap;
-    styleMap.setId(QStringLiteral("default-map"));
-    styleMap.insert(QStringLiteral("normal"), QLatin1Char('#') + style->id());
-    doc->addStyleMap( styleMap );
-    doc->addStyle( style );
-
-    addHighlightStyle( doc );
-
-    const QString styleUrl = QLatin1Char('#') + styleMap.id();
-    QVector<GeoDataFeature*>::iterator iter = doc->begin();
-    QVector<GeoDataFeature*>::iterator const end = doc->end();
-
-    for ( ; iter != end; ++iter ) {
-        if (auto placemark = geodata_cast<GeoDataPlacemark>(*iter)) {
-            if (!geodata_cast<GeoDataTrack>(placemark->geometry()) &&
-                !geodata_cast<GeoDataPoint>(placemark->geometry()))
-            {
-                placemark->setStyleUrl(styleUrl);
-            }
         }
     }
 }
