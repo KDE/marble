@@ -402,6 +402,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument *document )
                 style->setPolyStyle( polyStyle );
                 style->setId(QStringLiteral("default"));
             }
+
             if ( sourceFileMatch && !currentDatasets[datasetIndex].colors().isEmpty() ) {
                 /**
                  * if new theme file doesn't specify any colorMap for data
@@ -411,7 +412,6 @@ void MarbleModel::setMapTheme( GeoSceneDocument *document )
                 if ( style ) {
                     qDebug() << "setMapThemeId-> color: " << style->polyStyle().color() << " file: " << filename;
                     d->assignNewStyle( filename, style );
-                    style = GeoDataStyle::Ptr();
                 }
                 else {
                     d->assignFillColors( data->sourceFile() );
