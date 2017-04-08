@@ -44,17 +44,17 @@ class FileLoaderPrivate
 {
 public:
     FileLoaderPrivate( FileLoader* parent, const PluginManager *pluginManager, bool recenter,
-                       const QString& file, const QString& property, const GeoDataStyle::Ptr &style, DocumentRole role, int renderOrder )
-        : q( parent),
-          m_runner( pluginManager ),
-          m_recenter( recenter ),
-          m_filepath ( file ),
-          m_property( property ),
-          m_style( style ),
-          m_documentRole ( role ),
-          m_styleMap( new GeoDataStyleMap ),
-          m_document( 0 ),
-          m_renderOrder( renderOrder )
+                       const QString &file, const QString &property, const GeoDataStyle::Ptr &style, DocumentRole role, int renderOrder) :
+        q(parent),
+        m_runner(pluginManager),
+        m_filepath (file),
+        m_property(property),
+        m_style(style),
+        m_styleMap(new GeoDataStyleMap),
+        m_document(0),
+        m_renderOrder(renderOrder),
+        m_documentRole(role),
+        m_recenter(recenter)
     {
         if( m_style ) {
             m_styleMap->setId(QStringLiteral("default-map"));
@@ -63,15 +63,15 @@ public:
     }
 
     FileLoaderPrivate( FileLoader* parent, const PluginManager *pluginManager,
-                       const QString& contents, const QString& file, DocumentRole role )
-        : q( parent ),
-          m_runner( pluginManager ),
-          m_recenter( false ),
-          m_filepath ( file ),
-          m_contents ( contents ),
-          m_documentRole ( role ),
-          m_styleMap( 0 ),
-          m_document( 0 )
+                       const QString &contents, const QString &file, DocumentRole role) :
+        q(parent),
+        m_runner(pluginManager),
+        m_filepath(file),
+        m_contents(contents),
+        m_styleMap(0),
+        m_document(0),
+        m_documentRole(role),
+        m_recenter(false)
     {
     }
 
@@ -89,16 +89,16 @@ public:
 
     FileLoader *q;
     ParsingRunnerManager m_runner;
-    bool m_recenter;
     QString m_filepath;
     QString m_contents;
     QString m_property;
     GeoDataStyle::Ptr m_style;
-    DocumentRole m_documentRole;
     GeoDataStyleMap* m_styleMap;
     GeoDataDocument *m_document;
     QString m_error;
     int m_renderOrder;
+    DocumentRole m_documentRole;
+    bool m_recenter;
 };
 
 FileLoader::FileLoader( QObject* parent, const PluginManager *pluginManager, bool recenter, const QString& file,
