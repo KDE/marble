@@ -94,7 +94,7 @@ ViewportParamsPrivate::ViewportParamsPrivate( Projection projection,
       m_planetAxis(),
       m_planetAxisMatrix(),
       m_radius( radius ),
-      m_angularResolution(4.0 / fabs(m_radius)),
+      m_angularResolution(4.0 / abs(m_radius)),
       m_size( size ),
       m_dirtyBox( true ),
       m_viewLatLonAltBox()
