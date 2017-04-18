@@ -273,7 +273,7 @@ void TileLoader::triggerDownload( GeoSceneTileDataset const *tileData, TileId co
 
     QUrl const sourceUrl = tileData->downloadUrl( id );
     QString const destFileName = tileData->relativeTileFileName( id );
-    QString const idStr = QString( "%1:%2:%3:%4:%5" ).arg( tileData->nodeType()).arg( tileData->sourceDir() ).arg( id.zoomLevel() ).arg( id.x() ).arg( id.y() );
+    QString const idStr = QString( "%1:%2:%3:%4:%5" ).arg( tileData->nodeType(), tileData->sourceDir() ).arg( id.zoomLevel() ).arg( id.x() ).arg( id.y() );
     emit downloadTile( sourceUrl, destFileName, idStr, usage );
 }
 
@@ -335,7 +335,7 @@ GeoDataDocument *TileLoader::openVectorFile(const QString &fileName) const
             QString error;
             GeoDataDocument* document = runner->parseFile(fileName, UserDocument, error);
             if (!document && !error.isEmpty()) {
-                mDebug() << QString("Failed to open vector tile %1: %2").arg(fileName).arg(error);
+                mDebug() << QString("Failed to open vector tile %1: %2").arg(fileName, error);
             }
             delete runner;
             return document;

@@ -144,10 +144,10 @@ QUrl WmsServerLayout::downloadUrl( const QUrl &prototypeUrl, const Marble::TileI
         url.addQueryItem( "layers", m_textureLayer->name() );
     url.addQueryItem( "width", QString::number( m_textureLayer->tileSize().width() ) );
     url.addQueryItem( "height", QString::number( m_textureLayer->tileSize().height() ) );
-    url.addQueryItem( "bbox", QString( "%1,%2,%3,%4" ).arg( QString::number( box.west( GeoDataCoordinates::Degree ), 'f', 12 ) )
-                                                      .arg( QString::number( box.south( GeoDataCoordinates::Degree ), 'f', 12 ) )
-                                                      .arg( QString::number( box.east( GeoDataCoordinates::Degree ), 'f', 12 ) )
-                                                      .arg( QString::number( box.north( GeoDataCoordinates::Degree ), 'f', 12 ) ) );
+    url.addQueryItem( "bbox", QString( "%1,%2,%3,%4" ).arg( QString::number( box.west( GeoDataCoordinates::Degree ), 'f', 12 ),
+                                                            QString::number( box.south( GeoDataCoordinates::Degree ), 'f', 12 ),
+                                                            QString::number( box.east( GeoDataCoordinates::Degree ), 'f', 12 ),
+                                                            QString::number( box.north( GeoDataCoordinates::Degree ), 'f', 12 ) ) );
     QUrl finalUrl = prototypeUrl;
     finalUrl.setQuery(url);
     return finalUrl;

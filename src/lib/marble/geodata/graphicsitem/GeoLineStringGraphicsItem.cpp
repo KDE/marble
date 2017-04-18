@@ -235,7 +235,7 @@ void GeoLineStringGraphicsItem::handleRelationUpdate(const QVector<const GeoData
             auto const last = std::unique(references.begin(), references.end());
             references.erase(last, references.end());
             auto const routes = references.join(", ");
-            namesList << (value.isEmpty() ? routes : QStringLiteral("%1 %2").arg(value).arg(routes));
+            namesList << (value.isEmpty() ? routes : QStringLiteral("%1 %2").arg(value, routes));
         }
         auto const allRoutes = namesList.join(QStringLiteral("; "));
         if (feature()->name().isEmpty()) {

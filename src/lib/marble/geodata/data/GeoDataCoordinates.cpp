@@ -412,7 +412,7 @@ QString GeoDataCoordinates::toString( GeoDataCoordinates::Notation notation, int
             QString eastingString  = QString::number(GeoDataCoordinatesPrivate::lonLatToEasting(d->m_lon, d->m_lat), 'f', 2);
             QString northingString = QString::number(GeoDataCoordinatesPrivate::lonLatToNorthing(d->m_lon, d->m_lat), 'f', 2);
 
-            return QString("%1%2 %3 m E, %4 m N").arg(zoneString).arg(bandString).arg(eastingString).arg(northingString);
+            return QString("%1%2 %3 m E, %4 m N").arg(zoneString, bandString, eastingString, northingString);
         }
         else{
             coordString = lonToString( d->m_lon, notation, Radian, precision )

@@ -472,9 +472,9 @@ void BookmarkManagerDialogPrivate::importBookmarksRecursively( GeoDataContainer 
                 QString const question = tr( "Do you want to replace the existing bookmark with the imported one?" );
                 QString html = QLatin1String("<p>%1</p><table><tr><td>%2</td><td><b>%3 / %4</b></td></tr>"
                                                 "<tr><td>%5</td><td><b>%6 / %7</b></td></tr></table><p>%8</p>");
-                html = html.arg( intro ).arg( existingBookmark ).arg( existingFolder->name() );
-                html = html.arg( existingPlacemark->name() ).arg( newBookmark ).arg( newFolder->name() );
-                html = html.arg( newPlacemark->name() ).arg( question );
+                html = html.arg( intro, existingBookmark, existingFolder->name(),
+                                 existingPlacemark->name(), newBookmark, newFolder->name(),
+                                 newPlacemark->name(), question );
                 messageBox->setText( html );
 
                 QAbstractButton *replaceButton    = messageBox->addButton(tr( "Replace" ),     QMessageBox::ActionRole );

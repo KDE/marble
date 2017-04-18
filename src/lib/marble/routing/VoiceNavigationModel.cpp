@@ -109,7 +109,7 @@ QString VoiceNavigationModelPrivate::audioFile( const QString &name ) const
     if ( m_speakerEnabled ) {
         QString const audioTemplate = "%1/%2.%3";
         for( const QString &format: formats ) {
-            QString const result = audioTemplate.arg( m_speaker ).arg( name ).arg( format );
+            QString const result = audioTemplate.arg( m_speaker, name, format );
             QFileInfo audioFile( result );
             if ( audioFile.exists() ) {
                 return result;
@@ -119,7 +119,7 @@ QString VoiceNavigationModelPrivate::audioFile( const QString &name ) const
 
     QString const audioTemplate = "audio/%1.%2";
     for( const QString &format: formats ) {
-        QString const result = MarbleDirs::path( audioTemplate.arg( name ).arg( format ) );
+        QString const result = MarbleDirs::path( audioTemplate.arg( name, format ) );
         if ( !result.isEmpty() ) {
             return result;
         }

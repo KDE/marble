@@ -101,7 +101,7 @@ void SpeakersModelPrivate::fillModel()
         if ( !exists ) {
             SpeakersModelItem item;
             QString const path = "%1/audio/speakers/%2";
-            item.m_file = QFileInfo( path.arg( MarbleDirs::localPath() ).arg( name ) );
+            item.m_file = QFileInfo( path.arg( MarbleDirs::localPath(), name ) );
             item.m_newstuffIndex = i;
             m_speakers << item;
         }

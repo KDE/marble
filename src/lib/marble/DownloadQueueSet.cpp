@@ -154,7 +154,7 @@ void DownloadQueueSet::retryOrBlacklistJob( HttpJob * job, const int errorCode )
 
     if ( job->tryAgain() ) {
         mDebug() << QString( "Download of %1 to %2 failed, but trying again soon" )
-            .arg( job->sourceUrl().toString() ).arg( job->destinationFileName() );
+            .arg( job->sourceUrl().toString(), job->destinationFileName() );
         m_retryQueue.enqueue( job );
         emit jobRetry();
     }
