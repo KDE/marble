@@ -29,6 +29,7 @@
 #include "StereographicProjection.h"
 #include "VerticalPerspectiveProjection.h"
 
+#include <cmath>
 
 namespace Marble
 {
@@ -94,7 +95,7 @@ ViewportParamsPrivate::ViewportParamsPrivate( Projection projection,
       m_planetAxis(),
       m_planetAxisMatrix(),
       m_radius( radius ),
-      m_angularResolution(4.0 / fabs(m_radius)),
+      m_angularResolution(4.0 / std::abs(m_radius)),
       m_size( size ),
       m_dirtyBox( true ),
       m_viewLatLonAltBox()
