@@ -129,12 +129,10 @@ bool LonLatParser::parse(const QString& string)
 
     // #1: Just two numbers, no directions, e.g. 74.2245 -32.2434 (assumes lat lon)
     {
-        const QString numberCapExp = QStringLiteral(
-            "\\A(?:"
-            "([-+]?\\d{1,3}%1?\\d*(?:[eE][+-]?\\d+)?)(?:,|;|\\s)\\s*"
-            "([-+]?\\d{1,3}%1?\\d*(?:[eE][+-]?\\d+)?)"
-            ")\\z"
-            ).arg(m_decimalPointExp);
+        const QString numberCapExp = QStringLiteral("\\A(?:") +
+            QStringLiteral("([-+]?\\d{1,3}%1?\\d*(?:[eE][+-]?\\d+)?)(?:,|;|\\s)\\s*").arg(m_decimalPointExp) +
+            QStringLiteral("([-+]?\\d{1,3}%1?\\d*(?:[eE][+-]?\\d+)?)").arg(m_decimalPointExp) +
+            QStringLiteral(")\\z");
 
         const QRegularExpression regex(numberCapExp);
         QRegularExpressionMatch match = regex.match(input);
@@ -179,22 +177,20 @@ bool LonLatParser::parse(const QString& string)
 bool LonLatParser::tryMatchFromDms(const QString& input, DirPosition dirPosition)
 {
     // direction as postfix
-    const QString postfixCapExp = QStringLiteral(
-        "\\A(?:"
-        "([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2})(?:%4|\\s)\\s*"
-        "(\\d{1,2}%1?\\d*)(?:%5)?\\s*%2[,;]?\\s*"
-        "([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2})(?:%4|\\s)\\s*"
-        "(\\d{1,2}%1?\\d*)(?:%5)?\\s*%2"
-        ")\\z");
+    const QString postfixCapExp = QStringLiteral("\\A(?:") +
+		QStringLiteral("([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2})(?:%4|\\s)\\s*") +
+		QStringLiteral("(\\d{1,2}%1?\\d*)(?:%5)?\\s*%2[,;]?\\s*") +
+		QStringLiteral("([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2})(?:%4|\\s)\\s*") +
+		QStringLiteral("(\\d{1,2}%1?\\d*)(?:%5)?\\s*%2") +
+		QStringLiteral(")\\z");
 
     // direction as prefix
-    const QString prefixCapExp = QStringLiteral(
-        "\\A(?:"
-        "%2\\s*([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2})(?:%4|\\s)\\s*"
-        "(\\d{1,2}%1?\\d*)(?:%5)?\\s*(?:,|;|\\s)\\s*"
-        "%2\\s*([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2})(?:%4|\\s)\\s*"
-        "(\\d{1,2}%1?\\d*)(?:%5)?"
-        ")\\z");
+    const QString prefixCapExp = QStringLiteral("\\A(?:") +
+		QStringLiteral("%2\\s*([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2})(?:%4|\\s)\\s*") +
+		QStringLiteral("(\\d{1,2}%1?\\d*)(?:%5)?\\s*(?:,|;|\\s)\\s*") +
+		QStringLiteral("%2\\s*([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2})(?:%4|\\s)\\s*") +
+		QStringLiteral("(\\d{1,2}%1?\\d*)(?:%5)?") +
+		QStringLiteral(")\\z");
 
     const QString &expTemplate = (dirPosition == PostfixDir) ? postfixCapExp
                                                              : prefixCapExp;
@@ -232,18 +228,16 @@ bool LonLatParser::tryMatchFromDms(const QString& input, DirPosition dirPosition
 bool LonLatParser::tryMatchFromDm(const QString& input, DirPosition dirPosition)
 {
     // direction as postfix
-    const QString postfixCapExp = QStringLiteral(
-        "\\A(?:"
-        "([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2}%1?\\d*)(?:%4)?\\s*%2[,;]?\\s*"
-        "([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2}%1?\\d*)(?:%4)?\\s*%2"
-        ")\\z");
+    const QString postfixCapExp = QStringLiteral("\\A(?:") +
+		QStringLiteral("([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2}%1?\\d*)(?:%4)?\\s*%2[,;]?\\s*") +
+		QStringLiteral("([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2}%1?\\d*)(?:%4)?\\s*%2") +
+		QStringLiteral(")\\z");
 
     // direction as prefix
-    const QString prefixCapExp = QStringLiteral(
-        "\\A(?:"
-        "%2\\s*([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2}%1?\\d*)(?:%4)?\\s*(?:,|;|\\s)\\s*"
-        "%2\\s*([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2}%1?\\d*)(?:%4)?"
-        ")\\z");
+    const QString prefixCapExp = QStringLiteral("\\A(?:") +
+		QStringLiteral("%2\\s*([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2}%1?\\d*)(?:%4)?\\s*(?:,|;|\\s)\\s*") +
+		QStringLiteral("%2\\s*([-+]?)(\\d{1,3})(?:%3|\\s)\\s*(\\d{1,2}%1?\\d*)(?:%4)?") +
+		QStringLiteral(")\\z");
 
     const QString& expTemplate = (dirPosition == PostfixDir) ? postfixCapExp
                                                              : prefixCapExp;
@@ -280,18 +274,16 @@ bool LonLatParser::tryMatchFromDm(const QString& input, DirPosition dirPosition)
 bool LonLatParser::tryMatchFromD(const QString& input, DirPosition dirPosition)
 {
     // direction as postfix, e.g. 74.2245 N 32.2434 W
-    const QString postfixCapExp = QStringLiteral(
-        "\\A(?:"
-        "([-+]?\\d{1,3}%1?\\d*)(?:%3)?(?:\\s*)%2(?:,|;|\\s)\\s*"
-        "([-+]?\\d{1,3}%1?\\d*)(?:%3)?(?:\\s*)%2"
-        ")\\z");
+    const QString postfixCapExp = QStringLiteral("\\A(?:") +
+		QStringLiteral("([-+]?\\d{1,3}%1?\\d*)(?:%3)?(?:\\s*)%2(?:,|;|\\s)\\s*") +
+		QStringLiteral("([-+]?\\d{1,3}%1?\\d*)(?:%3)?(?:\\s*)%2") +
+		QStringLiteral(")\\z");
 
     // direction as prefix, e.g. N 74.2245 W 32.2434
-    const QString prefixCapExp = QStringLiteral(
-        "\\A(?:"
-        "%2\\s*([-+]?\\d{1,3}%1?\\d*)(?:%3)?\\s*(?:,|;|\\s)\\s*"
-        "%2\\s*([-+]?\\d{1,3}%1?\\d*)(?:%3)?"
-        ")\\z");
+    const QString prefixCapExp = QStringLiteral("\\A(?:") +
+		QStringLiteral("%2\\s*([-+]?\\d{1,3}%1?\\d*)(?:%3)?\\s*(?:,|;|\\s)\\s*") +
+		QStringLiteral("%2\\s*([-+]?\\d{1,3}%1?\\d*)(?:%3)?") +
+		QStringLiteral(")\\z");
 
     const QString& expTemplate = (dirPosition == PostfixDir) ? postfixCapExp
                                                              : prefixCapExp;
