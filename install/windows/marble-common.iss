@@ -1,4 +1,4 @@
-#define MyAppVersion "1.14.1"
+#define MyAppVersion "2.2.0"
 
 #define MySrcDir SourcePath + "\..\..\"
 #define MyAppName "Marble"
