@@ -35,39 +35,6 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 [Files]
 Source: "{#MySrcDir}\marble.kde.org.url"; DestDir: "{app}"
 Source: "{#MyBuildDir}\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "{#MyQtDir}\bin\icudt54.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#MyQtDir}\bin\icuin54.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#MyQtDir}\bin\icuuc54.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#MyQtDir}\bin\Qt5Core.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#MyQtDir}\bin\Qt5Gui.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#MyQtDir}\bin\Qt5DBus.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#MyQtDir}\bin\Qt5Multimedia.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#MyQtDir}\bin\Qt5MultimediaWidgets.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#MyQtDir}\bin\Qt5Network.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#MyQtDir}\bin\Qt5OpenGL.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#MyQtDir}\bin\Qt5Positioning.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#MyQtDir}\bin\Qt5PrintSupport.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#MyQtDir}\bin\Qt5Qml.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#MyQtDir}\bin\Qt5Quick.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#MyQtDir}\bin\Qt5Script.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#MyQtDir}\bin\Qt5Sensors.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#MyQtDir}\bin\Qt5Sql.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#MyQtDir}\bin\Qt5Svg.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#MyQtDir}\bin\Qt5WebChannel.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#MyQtDir}\bin\Qt5WebKit.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#MyQtDir}\bin\Qt5WebKitWidgets.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#MyQtDir}\bin\Qt5Widgets.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#MyQtDir}\bin\Qt5Xml.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#MyQtDir}\plugins\platforms\qminimal.dll"; DestDir: "{app}\platforms"; Flags: ignoreversion
-Source: "{#MyQtDir}\plugins\platforms\qwindows.dll"; DestDir: "{app}\platforms"; Flags: ignoreversion
-Source: "{#MyQtDir}\plugins\imageformats\qjpeg.dll"; DestDir: "{app}\imageformats"; Flags: ignoreversion
-Source: "{#MyQtDir}\plugins\imageformats\qsvg.dll"; DestDir: "{app}\imageformats"; Flags: ignoreversion
-Source: "{#MyQtDir}\plugins\imageformats\qtiff.dll"; DestDir: "{app}\imageformats"; Flags: ignoreversion
-Source: "{#MyQtDir}\plugins\imageformats\qgif.dll"; DestDir: "{app}\imageformats"; Flags: ignoreversion
-Source: "{#MyQtDir}\plugins\bearer\qgenericbearer.dll"; DestDir: "{app}\bearer"; Flags: ignoreversion
-Source: "{#MyQtDir}\plugins\bearer\qnativewifibearer.dll"; DestDir: "{app}\bearer"; Flags: ignoreversion
-Source: "{#MyQtDir}\plugins\printsupport\windowsprintersupport.dll"; DestDir: "{app}\printsupport"; Flags: ignoreversion
-Source: "{#MyQtDir}\plugins\sqldrivers\qsqlite.dll"; DestDir: "{app}\sqldrivers"; Flags: ignoreversion
 
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
