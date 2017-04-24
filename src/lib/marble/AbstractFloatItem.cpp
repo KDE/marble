@@ -73,16 +73,24 @@ AbstractFloatItem::~AbstractFloatItem()
 QHash<QString,QVariant> AbstractFloatItem::settings() const
 {
     QHash<QString,QVariant> updated = RenderPlugin::settings();
+#ifdef Q_OS_OSX
+    updated.insert(QStringLiteral("position"), position().toPoint());
+#else
     updated.insert(QStringLiteral("position"), position());
+#endif
     return updated;
 }
 
 void AbstractFloatItem::setSettings(const QHash<QString, QVariant> &settings)
 {
     if (settings.value(QStringLiteral("position")).type() == QVariant::String) {
+#ifdef Q_OS_OSX
+        setPosition(settings.value(QStringLiteral("position"), position()).toPointF());
+#else
         // work around KConfig turning QPointFs into QStrings
         const QStringList coordinates = settings.value(QStringLiteral("position")).toString().split(QLatin1Char(','));
         setPosition( QPointF( coordinates.at( 0 ).toFloat(), coordinates.at( 1 ).toFloat() ) );
+#endif
     }
     else {
         setPosition(settings.value(QStringLiteral("position"), position()).toPointF());
