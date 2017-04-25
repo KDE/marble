@@ -2,7 +2,9 @@
 
 set(MARBLE_NO_WEBKITWIDGETS @MARBLE_NO_WEBKITWIDGETS@)
 
-if(NOT CMAKE_MINIMUM_REQUIRED_VERSION VERSION_LESS 2.8.13)
+include(CMakeFindDependencyMacro OPTIONAL RESULT_VARIABLE _CMakeFindDependencyMacro_FOUND)
+
+if (_CMakeFindDependencyMacro_FOUND)
     find_dependency(Qt5Xml @REQUIRED_QT_VERSION@)
     find_dependency(Qt5Widgets @REQUIRED_QT_VERSION@)
     if (NOT MARBLE_NO_WEBKITWIDGETS)
