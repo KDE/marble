@@ -336,6 +336,30 @@ if(BUILD_MARBLE_EXAMPLES)
 endif()
 
 ####################################################
+# Handle translation catalogs of KDE Application release tarball of marble
+# (for custom bundle translation handling see data/lang/README)
+
+# KDE Application release tarballs have the respective po files added on tarball creation,
+# which are otherwise stored and edited separately on the KDE svn servers.
+# Toplevel subdir "poqm/" holds all the po files which should be processed and installed as qm files
+marble_install_po_files_as_qm(poqm)
+
+# Toplevel subdir "po/" holds all the po files which should be processed and installed as mo files
+# Those are used by app and plugin code building against KI18n.
+# So the respective macro ki18n_install can be used.
+# Just, the macro is not available here in the toplevel CMakeLists.txt file.
+# As a temporary hack (your task to improve it, dear reader :) ) the macro
+# is called only from src/apps/marble-kde/CMakeLists.txt.
+# That should catch 99.9 % cases of builds from released tarball, where all the
+# KF5-dependant apps and plugins will be built and installed together.
+# Currently these are:
+# src/apps/marble-kde
+# src/plasmarunner
+# src/plasma/applets/worldclock
+# src/plasma/wallpapers/worldmap
+
+
+####################################################
 # Install extra files
 install(FILES LICENSE.txt DESTINATION ${MARBLE_DATA_INSTALL_PATH})
 
