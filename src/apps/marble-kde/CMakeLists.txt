@@ -80,3 +80,7 @@ install(FILES marble.kcfg DESTINATION ${KDE_INSTALL_KCFGDIR})
 # register marble app as schemehandler
 install(FILES marble_geo.desktop DESTINATION ${KDE_INSTALL_APPDIR})
 install(FILES marble_worldwind.desktop DESTINATION ${KDE_INSTALL_APPDIR})
+
+# Handle mo-targetted translation catalogs as added for release tarballs
+# see toplevel CMakeLists.txt for further explanation why it is done here
+ki18n_install(${CMAKE_SOURCE_DIR}/po)
