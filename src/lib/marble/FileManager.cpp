@@ -23,8 +23,6 @@
 #include "GeoDataDocument.h"
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataStyle.h"
-#include "GeoDataDocumentWriter.h"
-#include <KmlElementDictionary.h>
 
 
 using namespace Marble;
@@ -138,13 +136,6 @@ void FileManagerPrivate::closeFile( const QString& key )
         emit q->fileRemoved( key );
         delete doc;
         m_fileItemHash.remove( key );
-    }
-}
-
-void FileManager::saveFile( const QString &fileName, const GeoDataDocument *document )
-{
-    if (document) {
-        GeoDataDocumentWriter::write(fileName, *document, kml::kmlTag_nameSpaceOgc22);
     }
 }
 
