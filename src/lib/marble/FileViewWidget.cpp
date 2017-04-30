@@ -146,7 +146,7 @@ void FileViewWidgetPrivate::saveFile()
         = index.model()->data( index, MarblePlacemarkModel::ObjectPointerRole ).value<GeoDataObject*>();
     GeoDataDocument *document = dynamic_cast<GeoDataDocument*>(object);
     if ( document && !document->fileName().isEmpty() ) {
-        const QString saveFileName = QFileDialog::getSaveFileName(q, "Select filename for KML document");
+        const QString saveFileName = QFileDialog::getSaveFileName(q, QObject::tr("Select filename for KML document"));
         GeoDataDocumentWriter::write(saveFileName, *document, kml::kmlTag_nameSpaceOgc22);
     }
 }
