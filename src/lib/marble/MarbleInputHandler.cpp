@@ -453,6 +453,7 @@ void MarbleDefaultInputHandler::handleMouseButtonPress(QMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton )
     {
+        d->m_pressAndHoldTimer.start();
        handleLeftMouseButtonPress(event);
     }
 
@@ -544,6 +545,7 @@ void MarbleDefaultInputHandler::handleMouseButtonRelease(QMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
     {
+        d->m_pressAndHoldTimer.stop();
         //emit current coordinates to be interpreted
         //as requested
         emit mouseClickScreenPosition(d->m_leftPressedX, d->m_leftPressedY);
@@ -781,13 +783,11 @@ bool MarbleDefaultInputHandler::handleMouseEvent(QMouseEvent *event)
     {
         if (event->type() == QEvent::MouseButtonPress)
         {
-            d->m_pressAndHoldTimer.start();
             handleMouseButtonPress(event);
         }
 
         if (event->type() == QEvent::MouseButtonRelease)
         {
-            d->m_pressAndHoldTimer.stop();
             handleMouseButtonRelease(event);
         }
 
