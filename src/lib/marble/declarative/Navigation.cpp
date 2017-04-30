@@ -237,7 +237,9 @@ QPointF NavigationPrivate::positionOnRoute() const
     GeoDataCoordinates  coordinates = routingModel->route().positionOnRoute();
     qreal x = 0;
     qreal y = 0;
-    m_marbleQuickItem->map()->viewport()->screenCoordinates(coordinates, x, y);
+    if (coordinates.isValid()) {
+        m_marbleQuickItem->map()->viewport()->screenCoordinates(coordinates, x, y);
+    }
     return QPointF(x,y);
 }
 
