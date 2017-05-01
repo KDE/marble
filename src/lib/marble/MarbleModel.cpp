@@ -759,8 +759,9 @@ void MarbleModelPrivate::assignFillColors(const QString &filePath)
         }
 
         for (auto dataset: layer->datasets()) {
-            data = dynamic_cast<const GeoSceneGeodata *>(dataset);
-            if (data != nullptr && data->sourceFile() == filePath) {
+            auto sceneData = dynamic_cast<const GeoSceneGeodata *>(dataset);
+            if (sceneData != nullptr && sceneData->sourceFile() == filePath) {
+                data = sceneData;
                 break;
             }
         }
