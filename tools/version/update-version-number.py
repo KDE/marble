@@ -91,6 +91,8 @@ libVersionFile = os.path.join(rootDir, 'src', 'lib', 'marble', 'MarbleGlobal.h')
 ensureCleanOrExit(rootDir, libVersionFile)
 appVersionFile = os.path.join(rootDir, 'src', 'apps', 'marble-ui', 'ControlView.cpp')
 ensureCleanOrExit(rootDir, appVersionFile)
+winappVersionFile = os.path.join(rootDir, 'install', 'windows', 'marble-common.iss')
+ensureCleanOrExit(rootDir, winappVersionFile)
 
 replaceInFile(libFileName, 
               'set\\(MARBLE_LIB_VERSION_MAJOR "[0-9]"\\)',
@@ -118,7 +120,11 @@ appVersionOld = '    return "[0-5]\\.[0-9]+\\.[0-9]+ (.*)";'
 appVersionNew = '    return "{}";'.format(generateVersionString(major+2, minor-25, patch))
 replaceInFile(appVersionFile, appVersionOld, appVersionNew)
 
+winappVersionOld = '#define MyAppVersion "[0-5]\\.[0-9]+\\.[0-9]+"'
+winappVersionNew = '#define MyAppVersion "{}.{}.{}"'.format(major+2, minor-25, patch)
+replaceInFile(winappVersionFile, winappVersionOld, winappVersionNew)
+
 if args.commit:
     versionStringNew = generateVersionString(major, minor, patch)
-    subprocess.call(['git', 'commit', '--message=Version bump to {}'.format(versionStringNew), libFileName, libVersionFile, appVersionFile], cwd=rootDir)
+    subprocess.call(['git', 'commit', '--message=Version bump to {}'.format(versionStringNew), libFileName, libVersionFile, appVersionFile], winappVersionFile, cwd=rootDir)
     print ('Version bump committed. Please check the output of "git show HEAD".')
