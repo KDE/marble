@@ -357,6 +357,9 @@ marble_install_po_files_as_qm(poqm)
 # src/plasmarunner
 # src/plasma/applets/worldclock
 # src/plasma/wallpapers/worldmap
+#
+# Let releaseme know about this:
+# SKIP_PO_INSTALL
 
 
 ####################################################
