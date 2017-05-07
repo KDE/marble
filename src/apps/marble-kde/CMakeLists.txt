@@ -81,6 +81,13 @@ install(FILES marble.kcfg DESTINATION ${KDE_INSTALL_KCFGDIR})
 install(FILES marble_geo.desktop DESTINATION ${KDE_INSTALL_APPDIR})
 install(FILES marble_worldwind.desktop DESTINATION ${KDE_INSTALL_APPDIR})
 
-# Handle mo-targetted translation catalogs as added for release tarballs
-# see toplevel CMakeLists.txt for further explanation why it is done here
+# Handle mo-targetted translation catalogs and translated user documentation
+# as added for release tarballs.
+# See toplevel CMakeLists.txt for further explanation why it is done here
 ki18n_install(${CMAKE_SOURCE_DIR}/po)
+
+macro_optional_find_package(KF5 ${REQUIRED_KF5_VERSION} QUIET COMPONENTS DocTools)
+
+if (KF5DocTools_FOUND)
+    kdoctools_install(${CMAKE_SOURCE_DIR}/po)
+endif()
