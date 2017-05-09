@@ -204,6 +204,11 @@ function(marble_process_po_files_as_qm lang po_file)
     set(build_dir ${CMAKE_CURRENT_BINARY_DIR}/locale/${lang})
     set(ts_file ${build_dir}/${filename_base}.ts)
     set(qm_file ${build_dir}/${filename_base}.qm)
+    if(CMAKE_SYSTEM_NAME STREQUAL Android)
+        set(qm_install_dir "${locale_dir}/${lang}")
+    else()
+        set(qm_install_dir "${locale_dir}/${lang}/LC_MESSAGES")
+    endif()
 
     file(MAKE_DIRECTORY ${build_dir})
 
@@ -217,7 +222,7 @@ function(marble_process_po_files_as_qm lang po_file)
     )
     install(
         FILES ${qm_file}
-        DESTINATION ${data_dir}/locale/${lang}
+        DESTINATION ${qm_install_dir}
         OPTIONAL # if not build, ignore it
     )
 
