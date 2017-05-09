@@ -182,6 +182,7 @@ endif()
 
 if(WIN32)
     set(data_dir data)
+    set(locale_dir "${data_dir}/locale")
     set(plugin_dir plugins)
 elseif(APPLE)
     # needed for finding bundle path in e.g. katlasdir.h
@@ -196,12 +197,15 @@ elseif(APPLE)
       install(FILES src/mac/Info.plist DESTINATION ${CMAKE_INSTALL_PREFIX}/Marble.app/Contents)
       #SET (lib_dir ${CMAKE_INSTALL_PREFIX}/Marble.app/Contents/MacOS/lib)
       SET (data_dir   ${CMAKE_INSTALL_PREFIX}/Marble.app/Contents/MacOS/resources/data)
+      set(locale_dir "${data_dir}/locale")
       SET (plugin_dir   ${CMAKE_INSTALL_PREFIX}/Marble.app/Contents/MacOS/resources/plugins)
 elseif(CMAKE_SYSTEM_NAME STREQUAL Android)
       set(plugin_dir "${CMAKE_INSTALL_PREFIX}/assets/plugins")
       set(data_dir "${CMAKE_INSTALL_PREFIX}/assets/data")
+      set(locale_dir "${data_dir}/locale")
 else() # Linux / bsd etc...
       set(data_dir ${CMAKE_INSTALL_FULL_DATAROOTDIR}/marble/data)
+      set(locale_dir "${CMAKE_INSTALL_FULL_DATAROOTDIR}/locale")
       set(plugin_dir ${CMAKE_INSTALL_FULL_LIBDIR}/marble/plugins)
 endif()
 
