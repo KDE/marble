@@ -56,6 +56,7 @@ public Q_SLOTS:
     void setDuration(int ms);
     void setPosition(const QPointF& position);
     void setPosition(qreal posX, qreal posY);
+    void setHeading(qreal heading);
     void jumpToPosition(const QPointF& position);
     void jumpToPosition(qreal posX, qreal posY);
     void setUpdateInterval(int ms);
@@ -64,6 +65,7 @@ public Q_SLOTS:
 
 Q_SIGNALS:
     void positionChanged( qreal lon, qreal lat );
+    void headingChanged( qreal heading );
     void finished();
 
 private Q_SLOTS:

@@ -131,6 +131,7 @@ class ViewportParams;
         void centerOn(const GeoDataCoordinates &point, bool animated = false);
         void centerOn(const GeoDataLatLonBox& box, bool animated = false);
         void centerOn(const GeoDataPlacemark& placemark, bool animated = false);
+        void headingOn(qreal heading);
         void setCenterLatitude(qreal lat, FlyToMode mode);
         void setCenterLongitude(qreal lon, FlyToMode mode);
 

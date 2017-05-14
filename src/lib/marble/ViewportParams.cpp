@@ -51,6 +51,7 @@ public:
     // Parameters that determine the painting
     qreal                m_centerLongitude;
     qreal                m_centerLatitude;
+    qreal                m_heading;
     Quaternion           m_planetAxis;   // Position, coded in a quaternion
     matrix               m_planetAxisMatrix;
     int                  m_radius;       // Zoom level (pixels / globe radius)
@@ -91,6 +92,7 @@ ViewportParamsPrivate::ViewportParamsPrivate( Projection projection,
       m_currentProjection( abstractProjection( projection ) ),
       m_centerLongitude( centerLongitude ),
       m_centerLatitude( centerLatitude ),
+      m_heading( 0 ),
       m_planetAxis(),
       m_planetAxisMatrix(),
       m_radius( radius ),
@@ -255,11 +257,39 @@ void ViewportParams::centerOn( qreal lon, qreal lat )
     d->m_centerLongitude = lon;
     d->m_centerLatitude = lat;
 
-    d->m_planetAxis = Quaternion::fromEuler( -lat, lon, 0.0 );
+    const Quaternion roll = Quaternion::fromEuler( 0, 0, d->m_heading );
+    const Quaternion quat = Quaternion::fromEuler( -lat, lon, 0.0 );
+
+    d->m_planetAxis = quat * roll;
     d->m_planetAxis.normalize();
 
     d->m_dirtyBox = true;
     d->m_planetAxis.inverse().toMatrix( d->m_planetAxisMatrix );
+    d->m_planetAxis.normalize();
+}
+
+void ViewportParams::setHeading( qreal heading )
+{
+    d->m_heading = heading;
+
+    const Quaternion roll = Quaternion::fromEuler( 0, 0, heading );
+
+    const qreal centerLat = centerLatitude();
+    const qreal centerLon = centerLongitude();
+
+    const Quaternion quat = Quaternion::fromEuler( -centerLat, centerLon, 0 );
+
+    d->m_planetAxis = quat * roll;
+    d->m_planetAxis.normalize();
+
+    d->m_dirtyBox = true;
+    d->m_planetAxis.inverse().toMatrix( d->m_planetAxisMatrix );
+    d->m_planetAxis.normalize();
+}
+
+qreal ViewportParams::heading() const
+{
+    return d->m_heading;
 }
 
 Quaternion ViewportParams::planetAxis() const
