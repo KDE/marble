@@ -467,6 +467,11 @@ namespace Marble
         }
     }
 
+    void MarbleAbstractPresenter::headingOn(qreal heading)
+    {
+        map()->setHeading(heading);
+    }
+
     void MarbleAbstractPresenter::setCenterLatitude(qreal lat, FlyToMode mode)
     {
         centerOn(centerLongitude(), lat, mode);
