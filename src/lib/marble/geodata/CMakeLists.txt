@@ -239,6 +239,7 @@ SET( geodata_graphicsitem_SRCS
 )
 
 SET ( geodata_handlers_kml_SRCS
+geodata/handlers/kml/KmlAddressTagHandler.cpp
 geodata/handlers/kml/KmlAltitudeModeTagHandler.cpp
 geodata/handlers/kml/KmlAltitudeTagHandler.cpp
 geodata/handlers/kml/KmlAnimatedUpdateTagHandler.cpp
