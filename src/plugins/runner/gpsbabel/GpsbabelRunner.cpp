@@ -62,13 +62,20 @@ GeoDataDocument *GpsbabelRunner::parseFile(const QString &fileName, DocumentRole
     QFile kmlFile( tempKmlFile.fileName() );
 
     // Set up gpsbabel command line
-    const QString command =
-        QLatin1String("gpsbabel -i ") + inputFileType +
-        QLatin1String(" -f ") + fileName + QLatin1String(" -o kml -F ") +
-        tempKmlFile.fileName();
+    const QString command = QLatin1String("gpsbabel");
+    const QStringList args = QStringList()
+        << QLatin1String("-i")
+        << inputFileType
+        << QLatin1String("-f")
+        << fileName
+        << QLatin1String("-o")
+        << QLatin1String("kml")
+        << QLatin1String("-F")
+        << tempKmlFile.fileName()
+    ;
 
     // Execute gpsbabel to parse the input file
-    int const exitStatus = QProcess::execute( command );
+    int const exitStatus = QProcess::execute( command, args );
     if ( exitStatus == 0 ) {
         kmlFile.open( QIODevice::ReadWrite );
         GeoDataParser parser( GeoData_KML );

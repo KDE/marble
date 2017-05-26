@@ -120,11 +120,10 @@ bool MonavPluginPrivate::isDaemonInstalled()
 bool MonavPluginPrivate::startDaemon()
 {
     if ( !isDaemonRunning() ) {
-        QProcess process;
-        if ( process.startDetached( m_monavDaemonProcess ) ) {
+        if ( QProcess::startDetached( m_monavDaemonProcess, QStringList() ) ) {
             m_ownsServer = true;
         } else {
-            if ( process.startDetached( "MoNavD" ) ) {
+            if ( QProcess::startDetached( "MoNavD", QStringList() ) ) {
                 m_ownsServer = true;
                 m_monavDaemonProcess = "MoNavD";
                 m_monavVersion = MonavPlugin::Monav_0_2;
@@ -152,8 +151,7 @@ void MonavPluginPrivate::stopDaemon()
 {
     if ( m_ownsServer ) {
         m_ownsServer = false;
-        QProcess process;
-        process.startDetached( m_monavDaemonProcess, QStringList() << "-t" );
+        QProcess::startDetached( m_monavDaemonProcess, QStringList() << "-t" );
     }
 }
 

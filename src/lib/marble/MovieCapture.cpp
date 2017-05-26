@@ -143,13 +143,13 @@ bool MovieCapture::checkToolsAvailability()
     static bool toolsAvailable = false;
     if (toolsAvailable == false) {
         QProcess encoder(this);
-        encoder.start("avconv -version");
+        encoder.start("avconv", QStringList() << "-version");
         encoder.waitForFinished();
         if ( !encoder.readAll().isEmpty() ) { // avconv have output when it's here
             d->encoderExec = "avconv";
             toolsAvailable = true;
         } else {
-            encoder.start("ffmpeg -version");
+            encoder.start("ffmpeg", QStringList() << "-version");
             encoder.waitForFinished();
             if ( !encoder.readAll().isEmpty() ) {
                 d->encoderExec = "ffmpeg";
