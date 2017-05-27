@@ -11,11 +11,13 @@ set( annotate_UI
   EditGroundOverlayDialog.ui
   EditPolygonDialog.ui
   EditPolylineDialog.ui
+  DownloadOsmDialog.ui
 )
 
 set( annotate_SRCS
   AnnotatePlugin.cpp
   AreaAnnotation.cpp
+  DownloadOsmDialog.cpp
   EditGroundOverlayDialog.cpp
   EditPolygonDialog.cpp
   NodeItemDelegate.cpp

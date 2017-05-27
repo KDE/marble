@@ -96,6 +96,7 @@ private Q_SLOTS:
     void clearAnnotations();
     void saveAnnotationFile();
     void loadAnnotationFile();
+    void openAnnotationFile(const QString&);
     void copyItem();
     void cutItem();
     void pasteItem();
@@ -126,6 +127,7 @@ private Q_SLOTS:
     void setPolylineAvailable();
 
     void addRelation( const OsmPlacemarkData &relationOsmData );
+    void downloadOsm();
 
 protected:
     bool eventFilter( QObject *watched, QEvent *event ) override;

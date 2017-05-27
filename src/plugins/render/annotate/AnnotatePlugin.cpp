@@ -59,6 +59,7 @@
 #include "ParsingRunnerManager.h"
 #include "ViewportParams.h"
 #include "osm/OsmPlacemarkData.h"
+#include "DownloadOsmDialog.h"
 
 namespace Marble
 {
@@ -406,14 +407,30 @@ void AnnotatePlugin::loadAnnotationFile()
     if ( filename.isNull() ) {
         return;
     }
+    else{
+        openAnnotationFile(filename);
+    }
+}
 
-    ParsingRunnerManager manager( m_marbleWidget->model()->pluginManager() );
-    GeoDataDocument *document = manager.openFile( filename );
+void AnnotatePlugin::downloadOsm()
+{
+    QPointer<DownloadOsmDialog> dialog=new DownloadOsmDialog(m_marbleWidget,this);
+    dialog->show();
+}
+
+void AnnotatePlugin::openAnnotationFile(const QString& filename)
+{
+
+    if ( filename.isNull() ) {
+        return;
+    }
+    ParsingRunnerManager manager( m_marbleWidget->model()->pluginManager(),this );
+    GeoDataDocument *document = manager.openFile( filename);
     Q_ASSERT( document );
 
     // FIXME: The same problem as in the case of copying/cutting graphic items applies here:
     // the files do not load properly because the geometry copy is not a deep copy.
-    for ( GeoDataFeature *feature: document->featureList() ) {
+    foreach ( GeoDataFeature *feature, document->featureList() ) {
 
         if (const GeoDataPlacemark *placemark = geodata_cast<GeoDataPlacemark>(feature)) {
             GeoDataPlacemark *newPlacemark = new GeoDataPlacemark( *placemark );
@@ -943,6 +960,11 @@ void AnnotatePlugin::setupActions( MarbleWidget *widget )
     QAction *clearAnnotations = new QAction( QIcon(QStringLiteral(":/icons/remove.png")),
                                              tr("Clear all Annotations"),
                                              this );
+    QAction *downloadOsm = new QAction( QIcon(":/icons/download.png"),
+                                           tr("Download OpenStreetMap Data"),
+                                           this );
+    connect( downloadOsm, SIGNAL(triggered(bool)), this, SLOT(downloadOsm()) );
+    downloadOsm->setToolTip(tr("Download OpenStreetMap data of the visible region"));
     connect( drawPolygon, SIGNAL(toggled(bool)), clearAnnotations, SLOT(setDisabled(bool)) );
     connect( clearAnnotations, SIGNAL(triggered()), this, SLOT(clearAnnotations()) );
 
@@ -972,6 +994,7 @@ void AnnotatePlugin::setupActions( MarbleWidget *widget )
     group->addAction( removeItem );
     group->addAction( sep3 );
     group->addAction( clearAnnotations );
+    group->addAction(downloadOsm);
     group->addAction( sep4 );
 
     m_actions.append( group );
