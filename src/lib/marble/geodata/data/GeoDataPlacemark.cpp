@@ -380,6 +380,7 @@ QString GeoDataPlacemark::categoryName() const
     case NaturalCliff: return GeoDataPlacemarkPrivate::tr("Cliff");
     case NaturalHeath: return GeoDataPlacemarkPrivate::tr("Heath");
     case HighwayTrafficSignals: return GeoDataPlacemarkPrivate::tr("Traffic Signals");
+    case HighwayElevator: return GeoDataPlacemarkPrivate::tr("Elevator");
     case HighwaySteps: return GeoDataPlacemarkPrivate::tr("Steps");
     case HighwayUnknown: return GeoDataPlacemarkPrivate::tr("Unknown Road");
     case HighwayPath: return GeoDataPlacemarkPrivate::tr("Path");

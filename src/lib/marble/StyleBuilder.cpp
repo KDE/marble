@@ -1086,6 +1086,9 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::HighwayTrafficSignals]    = createOsmPOIStyle(osmFont, "individual/traffic_light");
     m_defaultStyle[GeoDataPlacemark::HighwayTrafficSignals]->iconStyle().setScale(0.75);
 
+    m_defaultStyle[GeoDataPlacemark::HighwayElevator]    = createOsmPOIStyle(osmFont, "transportation/elevator-12", transportationColor);
+    m_defaultStyle[GeoDataPlacemark::HighwayElevator]->iconStyle().setScale(0.75);
+
     m_defaultStyle[GeoDataPlacemark::PowerTower]               = createOsmPOIStyle(osmFont, "individual/power_tower", QColor("#888888"));
     m_defaultStyle[GeoDataPlacemark::PowerTower]->iconStyle().setScale(0.6f);
 
@@ -1511,6 +1514,7 @@ void StyleBuilder::Private::initializeOsmVisualCategories()
     s_visualCategories[OsmTag("barrier", "wall")]               = GeoDataPlacemark::BarrierWall;
 
     s_visualCategories[OsmTag("highway", "traffic_signals")]    = GeoDataPlacemark::HighwayTrafficSignals;
+    s_visualCategories[OsmTag("highway", "elevator")]           = GeoDataPlacemark::HighwayElevator;
 
     s_visualCategories[OsmTag("highway", "cycleway")]           = GeoDataPlacemark::HighwayCycleway;
     s_visualCategories[OsmTag("highway", "footway")]            = GeoDataPlacemark::HighwayFootway;
@@ -1803,6 +1807,7 @@ void StyleBuilder::Private::initializeMinimumZoomLevels()
     s_defaultMinZoomLevels[GeoDataPlacemark::HighwayUnclassified] = 16;
     s_defaultMinZoomLevels[GeoDataPlacemark::HighwayTrafficSignals]      = 17;
     s_defaultMinZoomLevels[GeoDataPlacemark::HighwayCorridor]     = 18;
+    s_defaultMinZoomLevels[GeoDataPlacemark::HighwayElevator] = 17;
 
     s_defaultMinZoomLevels[GeoDataPlacemark::AccomodationCamping] = 16;
     s_defaultMinZoomLevels[GeoDataPlacemark::AccomodationHostel] = 16;
@@ -2418,6 +2423,7 @@ qint64 StyleBuilder::popularity(const GeoDataPlacemark *placemark)
         popularities << GeoDataPlacemark::CrossingSignals;
         popularities << GeoDataPlacemark::CrossingZebra;
         popularities << GeoDataPlacemark::HighwayTrafficSignals;
+        popularities << GeoDataPlacemark::HighwayElevator;
 
         popularities << GeoDataPlacemark::BarrierGate;
         popularities << GeoDataPlacemark::BarrierLiftGate;
@@ -2539,6 +2545,7 @@ QString StyleBuilder::visualCategoryName(GeoDataPlacemark::GeoDataVisualCategory
         visualCategoryNames[GeoDataPlacemark::HighwayMotorwayLink] = "HighwayMotorwayLink";
         visualCategoryNames[GeoDataPlacemark::HighwayMotorway] = "HighwayMotorway";
         visualCategoryNames[GeoDataPlacemark::HighwayCorridor] = "HighwayCorridor";
+        visualCategoryNames[GeoDataPlacemark::HighwayElevator] = "HighwayElevator";
         visualCategoryNames[GeoDataPlacemark::Building] = "Building";
         visualCategoryNames[GeoDataPlacemark::AccomodationCamping] = "AccomodationCamping";
         visualCategoryNames[GeoDataPlacemark::AccomodationHostel] = "AccomodationHostel";

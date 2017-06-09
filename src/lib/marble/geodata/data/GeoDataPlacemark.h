@@ -181,6 +181,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
         NaturalHeath,
 
         HighwayTrafficSignals,
+        HighwayElevator,
 
         // OpenStreetMap highways
         HighwaySteps, // please keep order (used in for loops)
