@@ -180,6 +180,15 @@ ApplicationWindow {
                 }
                 Component.onDestruction: marbleMaps.writeSettings()
 
+                Connections {
+                    target: Qt.application
+                    onStateChanged: {
+                        if (Qt.application.state === Qt.ApplicationInactive || Qt.application.state === Qt.ApplicationSuspended) {
+                            marbleMaps.writeSettings()
+                        }
+                    }
+                }
+
                 function updateIndicator() {
                     if ( !positionVisible && positionAvailable ) {
                         zoomToPositionButton.updateIndicator();
