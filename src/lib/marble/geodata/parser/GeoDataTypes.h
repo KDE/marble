@@ -101,6 +101,7 @@ GEODATA_EXPORT extern const char GeoDataImagePyramidType[];
 GEODATA_EXPORT extern const char GeoDataViewVolumeType[];
 GEODATA_EXPORT extern const char GeoDataNetworkLinkControlType[];
 GEODATA_EXPORT extern const char GeoDataUpdateType[];
+GEODATA_EXPORT extern const char GeoDataBuildingType[];
 }
 
 }
