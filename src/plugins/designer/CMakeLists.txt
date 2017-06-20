@@ -4,7 +4,7 @@ if (WITH_DESIGNER_PLUGIN)
   find_package(Qt5 ${REQUIRED_QT_VERSION} QUIET COMPONENTS Designer)
   marble_set_package_properties( Qt5Designer PROPERTIES TYPE OPTIONAL PURPOSE "Required to build Qt Designer plugins" )
 
-if(NOT Qt5Designer_VERSION_STRING VERSION_LESS 5.5.0)
+if(NOT Qt5Designer_VERSION VERSION_LESS 5.5.0)
     find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG QUIET COMPONENTS UiPlugin)
     set_package_properties(Qt5UiPlugin PROPERTIES TYPE OPTIONAL
         PURPOSE "Required to build Qt Designer plugins"
