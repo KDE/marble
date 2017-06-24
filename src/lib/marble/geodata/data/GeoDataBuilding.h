@@ -14,6 +14,7 @@
 #include <QVector>
 
 #include "GeoDataGeometry.h"
+#include "GeoDataCoordinates.h"
 
 #include "geodata_export.h"
 
@@ -36,6 +37,11 @@ public:
     explicit GeoDataBuilding(const GeoDataGeometry &other);
     explicit GeoDataBuilding(const GeoDataBuilding &other);
 
+    struct NamedEntry {
+        GeoDataCoordinates point;
+        QString label;
+    };
+
     GeoDataBuilding& operator=(const GeoDataBuilding &other);
 
     const char *nodeType() const override;
@@ -43,6 +49,8 @@ public:
     EnumGeometryId geometryId() const override;
 
     GeoDataGeometry *copy() const override;
+
+    static double parseBuildingHeight(const QString& buildingHeight);
 
     /*!
     Destroys the GeoDataBuilding
@@ -103,9 +111,32 @@ public:
 
 
 /*!
- * @return the multigeometry associated with the building
+    @return the multigeometry associated with the building
  */
     GeoDataMultiGeometry* multiGeometry() const;
+
+
+/*!
+    @return the latlonaltbox for the contained multigeometry
+ */
+    const GeoDataLatLonAltBox& latLonAltBox() const override;
+
+
+/*!
+    @return the name of the building
+ */
+    QString name() const;
+
+
+/*!
+    Sets the name of the building
+    @param name
+ */
+    void setName(const QString& name);
+
+    QVector<NamedEntry> entries() const;
+
+    void setEntries(const QVector<NamedEntry>& entries);
 
 private:
     GeoDataBuildingPrivate* const d;

@@ -10,7 +10,7 @@
 
 #include "GeoPolygonGraphicsItem.h"
 
-#include "BuildingGeoPolygonGraphicsItem.h"
+#include "BuildingGraphicsItem.h"
 #include "GeoDataPlacemark.h"
 #include "StyleBuilder.h"
 
@@ -19,20 +19,18 @@ namespace Marble
 
 AbstractGeoPolygonGraphicsItem *GeoPolygonGraphicsItem::createGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataPolygon *polygon)
 {
-    if (placemark->visualCategory() == GeoDataPlacemark::Building) {
-        return new BuildingGeoPolygonGraphicsItem(placemark, polygon);
-    }
     return new GeoPolygonGraphicsItem(placemark, polygon);
 }
 
 AbstractGeoPolygonGraphicsItem *GeoPolygonGraphicsItem::createGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataLinearRing *ring)
 {
-    if (placemark->visualCategory() == GeoDataPlacemark::Building) {
-        return new BuildingGeoPolygonGraphicsItem(placemark, ring);
-    }
     return new GeoPolygonGraphicsItem(placemark, ring);
 }
 
+AbstractGeoPolygonGraphicsItem *GeoPolygonGraphicsItem::createGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataBuilding *building)
+{
+    return new BuildingGraphicsItem(placemark, building);
+}
 
 GeoPolygonGraphicsItem::GeoPolygonGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataPolygon *polygon) :
     AbstractGeoPolygonGraphicsItem(placemark, polygon)

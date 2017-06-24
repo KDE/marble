@@ -38,6 +38,8 @@ public:
     int m_maxLevel;
     QVector<int> m_nonExistentLevels;
     GeoDataMultiGeometry m_multiGeometry;
+    QString m_name;
+    QVector<GeoDataBuilding::NamedEntry> m_entries;
 };
 
 }

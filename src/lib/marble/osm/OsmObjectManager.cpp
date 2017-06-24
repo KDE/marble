@@ -15,6 +15,8 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataLinearRing.h"
 #include "GeoDataPolygon.h"
+#include "GeoDataBuilding.h"
+#include "GeoDataMultiGeometry.h"
 #include "osm/OsmPlacemarkData.h"
 
 namespace Marble {
@@ -44,8 +46,16 @@ void OsmObjectManager::initializeOsmData( GeoDataPlacemark* placemark )
         }
     }
 
+    const auto building = geodata_cast<GeoDataBuilding>(placemark->geometry());
+
+    GeoDataLinearRing* lineString;
+    if (building) {
+        lineString = geodata_cast<GeoDataLinearRing>(&building->multiGeometry()->at(0));
+    } else {
+        lineString = geodata_cast<GeoDataLinearRing>(placemark->geometry());
+    }
     // Assigning osmData to each of the line's nodes ( if they don't already have data )
-    if (const auto lineString = geodata_cast<GeoDataLinearRing>(placemark->geometry())) {
+    if (lineString) {
         for (auto it =lineString->constBegin(), end = lineString->constEnd(); it != end; ++it ) {
             if (osmData.nodeReference(*it).isNull()) {
                 osmData.nodeReference(*it).setId(--m_minId);
@@ -53,9 +63,15 @@ void OsmObjectManager::initializeOsmData( GeoDataPlacemark* placemark )
         }
     }
 
+    GeoDataPolygon* polygon;
+    if (building) {
+        polygon = geodata_cast<GeoDataPolygon>(&building->multiGeometry()->at(0));
+    } else {
+        polygon = geodata_cast<GeoDataPolygon>(placemark->geometry());
+    }
     // Assigning osmData to each of the polygons boundaries, and to each of the
     // nodes that are part of those boundaries ( if they don't already have data )
-    if (const auto polygon = geodata_cast<GeoDataPolygon>(placemark->geometry())) {
+    if (polygon) {
         const GeoDataLinearRing &outerBoundary = polygon->outerBoundary();
         int index = -1;
         if ( isNull ) {

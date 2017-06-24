@@ -30,6 +30,13 @@ private:
     bool touchesTileBorder(const GeoDataCoordinates &coordinates) const;
     void setBorderPoints(OsmPlacemarkData &osmData, const QVector<int> &borderPoints, int length) const;
 
+    GeoDataLinearRing* reducedRing(const GeoDataLinearRing& prevRing,
+                                   GeoDataPlacemark* placemark,
+                                   const GeoDataPlacemark::GeoDataVisualCategory& visualCategory);
+    GeoDataPolygon* reducedPolygon(const GeoDataPolygon& prevPolygon,
+                                   GeoDataPlacemark* placemark,
+                                   const GeoDataPlacemark::GeoDataVisualCategory& visualCategory);
+
     template<class T>
     void reduce(T const & lineString, OsmPlacemarkData& osmData, GeoDataPlacemark::GeoDataVisualCategory visualCategory, T* reducedLine)
     {

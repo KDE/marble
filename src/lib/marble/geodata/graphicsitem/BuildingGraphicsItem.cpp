@@ -8,7 +8,7 @@
 // Copyright 2011      Konstantin Oblaukhov <oblaukhov.konstantin@gmail.com>
 //
 
-#include "BuildingGeoPolygonGraphicsItem.h"
+#include "BuildingGraphicsItem.h"
 
 #include "MarbleDebug.h"
 #include "ViewportParams.h"
@@ -16,6 +16,8 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataLinearRing.h"
 #include "GeoDataPolygon.h"
+#include "GeoDataBuilding.h"
+#include "GeoDataMultiGeometry.h"
 #include "GeoDataPolyStyle.h"
 #include "OsmPlacemarkData.h"
 #include "GeoPainter.h"
@@ -26,16 +28,17 @@
 namespace Marble
 {
 
-BuildingGeoPolygonGraphicsItem::BuildingGeoPolygonGraphicsItem(const GeoDataPlacemark *placemark,
-                                                               const GeoDataPolygon *polygon)
-    : AbstractGeoPolygonGraphicsItem(placemark, polygon)
-    , m_buildingHeight(extractBuildingHeight(*placemark))
-    , m_buildingText(extractBuildingLabel(*placemark))
-    , m_entries(extractNamedEntries(*placemark))
-    , m_hasInnerBoundaries(false)
+BuildingGraphicsItem::BuildingGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataBuilding *building)
+    : AbstractGeoPolygonGraphicsItem(placemark, building)
 {
-    setZValue(m_buildingHeight);
-    Q_ASSERT(m_buildingHeight > 0.0);
+    if (const auto ring = geodata_cast<GeoDataLinearRing>(&building->multiGeometry()->at(0))) {
+        setLinearRing(ring);
+    } else if (const auto poly = geodata_cast<GeoDataPolygon>(&building->multiGeometry()->at(0))) {
+        setPolygon(poly);
+    }
+
+    setZValue(building->height());
+    Q_ASSERT(building->height() > 0.0);
 
     QStringList paintLayers;
     paintLayers << QStringLiteral("Polygon/Building/frame")
@@ -43,23 +46,7 @@ BuildingGeoPolygonGraphicsItem::BuildingGeoPolygonGraphicsItem(const GeoDataPlac
     setPaintLayers(paintLayers);
 }
 
-BuildingGeoPolygonGraphicsItem::BuildingGeoPolygonGraphicsItem(const GeoDataPlacemark *placemark,
-                                                               const GeoDataLinearRing* ring)
-    : AbstractGeoPolygonGraphicsItem(placemark, ring)
-    , m_buildingHeight(extractBuildingHeight(*placemark))
-    , m_buildingText(extractBuildingLabel(*placemark))
-    , m_entries(extractNamedEntries(*placemark))
-{
-    setZValue(m_buildingHeight);
-    Q_ASSERT(m_buildingHeight > 0.0);
-
-    QStringList paintLayers;
-    paintLayers << QStringLiteral("Polygon/Building/frame")
-                << QStringLiteral("Polygon/Building/roof");
-    setPaintLayers(paintLayers);
-}
-
-BuildingGeoPolygonGraphicsItem::~BuildingGeoPolygonGraphicsItem()
+BuildingGraphicsItem::~BuildingGraphicsItem()
 {
     qDeleteAll(m_cachedOuterPolygons);
     qDeleteAll(m_cachedInnerPolygons);
@@ -67,8 +54,8 @@ BuildingGeoPolygonGraphicsItem::~BuildingGeoPolygonGraphicsItem()
     qDeleteAll(m_cachedInnerRoofPolygons);
 }
 
-void BuildingGeoPolygonGraphicsItem::initializeBuildingPainting(const GeoPainter* painter, const ViewportParams *viewport,
-                                                                bool &drawAccurate3D, bool &isCameraAboveBuilding ) const
+void BuildingGraphicsItem::initializeBuildingPainting(const GeoPainter* painter, const ViewportParams *viewport,
+                                                      bool &drawAccurate3D, bool &isCameraAboveBuilding ) const
 {
     drawAccurate3D = false;
     isCameraAboveBuilding = false;
@@ -82,10 +69,10 @@ void BuildingGeoPolygonGraphicsItem::initializeBuildingPainting(const GeoPainter
     drawAccurate3D = painter->mapQuality() == HighQuality ? maxOffset > pixelSize : maxOffset > 1.5 * pixelSize;
 }
 
-void BuildingGeoPolygonGraphicsItem::updatePolygons( const ViewportParams *viewport,
-                                                     QVector<QPolygonF*>& outerPolygons,
-                                                     QVector<QPolygonF*>& innerPolygons,
-                                                     bool &hasInnerBoundaries )
+void BuildingGraphicsItem::updatePolygons(const ViewportParams *viewport,
+                                          QVector<QPolygonF*>& outerPolygons,
+                                          QVector<QPolygonF*>& innerPolygons,
+                                          bool &hasInnerBoundaries )
 {
     // Since subtracting one fully contained polygon from another results in a single
     // polygon with a "connecting line" between the inner and outer part we need
@@ -103,7 +90,7 @@ void BuildingGeoPolygonGraphicsItem::updatePolygons( const ViewportParams *viewp
     }
 }
 
-QPointF BuildingGeoPolygonGraphicsItem::centroid(const QPolygonF &polygon, double &area)
+QPointF BuildingGraphicsItem::centroid(const QPolygonF &polygon, double &area)
 {
     auto centroid = QPointF(0.0, 0.0);
     area = 0.0;
@@ -123,11 +110,11 @@ QPointF BuildingGeoPolygonGraphicsItem::centroid(const QPolygonF &polygon, doubl
     return area != 0 ? centroid / (6.0*area) : polygon.boundingRect().center();
 }
 
-QPointF BuildingGeoPolygonGraphicsItem::buildingOffset(const QPointF &point, const ViewportParams *viewport, bool* isCameraAboveBuilding) const
+QPointF BuildingGraphicsItem::buildingOffset(const QPointF &point, const ViewportParams *viewport, bool* isCameraAboveBuilding) const
 {
     qreal const cameraFactor = 0.5 * tan(0.5 * 110 * DEG2RAD);
-    Q_ASSERT(m_buildingHeight > 0.0);
-    qreal const buildingFactor = m_buildingHeight / EARTH_RADIUS;
+    Q_ASSERT(building()->height() > 0.0);
+    qreal const buildingFactor = building()->height() / EARTH_RADIUS;
 
     qreal const cameraHeightPixel = viewport->width() * cameraFactor;
     qreal buildingHeightPixel = viewport->radius() * buildingFactor;
@@ -155,67 +142,7 @@ QPointF BuildingGeoPolygonGraphicsItem::buildingOffset(const QPointF &point, con
     return QPointF(shiftX, shiftY);
 }
 
-double BuildingGeoPolygonGraphicsItem::extractBuildingHeight(const GeoDataPlacemark &placemark)
-{
-    double height = 8.0;
-
-    const OsmPlacemarkData &osmData = placemark.osmData();
-
-    QHash<QString, QString>::const_iterator tagIter;
-    if ((tagIter = osmData.findTag(QStringLiteral("height"))) != osmData.tagsEnd()) {
-        /** @todo Also parse non-SI units, see https://wiki.openstreetmap.org/wiki/Key:height#Height_of_buildings */
-        QString const heightValue = QString(tagIter.value()).remove(QStringLiteral(" meters")).remove(QStringLiteral(" m"));
-        bool extracted = false;
-        double extractedHeight = heightValue.toDouble(&extracted);
-        if (extracted) {
-            height = extractedHeight;
-        }
-    } else if ((tagIter = osmData.findTag(QStringLiteral("building:levels"))) != osmData.tagsEnd()) {
-        int const levels = tagIter.value().toInt();
-        int const skipLevels = osmData.tagValue(QStringLiteral("building:min_level")).toInt();
-        /** @todo Is 35 as an upper bound for the number of levels sane? */
-        height = 3.0 * qBound(1, 1+levels-skipLevels, 35);
-    }
-
-    return qBound(1.0, height, 1000.0);
-}
-
-QString BuildingGeoPolygonGraphicsItem::extractBuildingLabel(const GeoDataPlacemark &placemark)
-{
-    const OsmPlacemarkData &osmData = placemark.osmData();
-
-    auto tagIter = osmData.findTag(QStringLiteral("addr:housename"));
-    if (tagIter != osmData.tagsEnd()) {
-        return tagIter.value();
-    }
-
-    tagIter = osmData.findTag(QStringLiteral("addr:housenumber"));
-    if (tagIter != osmData.tagsEnd()) {
-        return tagIter.value();
-    }
-
-    return QString();
-}
-
-QVector<BuildingGeoPolygonGraphicsItem::NamedEntry> BuildingGeoPolygonGraphicsItem::extractNamedEntries(const GeoDataPlacemark &placemark)
-{
-    QVector<NamedEntry> entries;
-
-    const auto end = placemark.osmData().nodeReferencesEnd();
-    for (auto iter = placemark.osmData().nodeReferencesBegin(); iter != end; ++iter) {
-        const auto tagIter = iter.value().findTag(QStringLiteral("addr:housenumber"));
-        if (tagIter != iter.value().tagsEnd()) {
-            NamedEntry entry;
-            entry.point = iter.key();
-            entry.label = tagIter.value();
-            entries.push_back(entry);
-        }
-    }
-
-    return entries;
-}
-
-void BuildingGeoPolygonGraphicsItem::paint(GeoPainter* painter, const ViewportParams* viewport, const QString &layer, int tileZoomLevel)
+void BuildingGraphicsItem::paint(GeoPainter* painter, const ViewportParams* viewport, const QString &layer, int tileZoomLevel)
 {
     // Just display flat buildings for tile level 17
     if (tileZoomLevel == 17) {
@@ -225,7 +152,7 @@ void BuildingGeoPolygonGraphicsItem::paint(GeoPainter* painter, const ViewportPa
         }
         return;
     }
-    setZValue(m_buildingHeight);
+    setZValue(building()->height());
 
     // For level 18, 19 .. render 3D buildings in perspective
     if (layer.endsWith(QLatin1String("/frame"))) {
@@ -254,7 +181,7 @@ void BuildingGeoPolygonGraphicsItem::paint(GeoPainter* painter, const ViewportPa
     }
 }
 
-void BuildingGeoPolygonGraphicsItem::paintRoof(GeoPainter* painter, const ViewportParams* viewport)
+void BuildingGraphicsItem::paintRoof(GeoPainter* painter, const ViewportParams* viewport)
 {
     bool drawAccurate3D;
     bool isCameraAboveBuilding;
@@ -354,7 +281,7 @@ void BuildingGeoPolygonGraphicsItem::paintRoof(GeoPainter* painter, const Viewpo
         QPointF roofCenter;
 
         // Label position calculation
-        if (!m_buildingText.isEmpty() || !m_entries.isEmpty()) {
+        if (!building()->name().isEmpty() || !building()->entries().isEmpty()) {
             QSizeF const polygonSize = outerRoof->boundingRect().size();
             qreal size = polygonSize.width() * polygonSize.height();
             if (size > maxSize) {
@@ -366,8 +293,8 @@ void BuildingGeoPolygonGraphicsItem::paintRoof(GeoPainter* painter, const Viewpo
         }
 
         // Draw the housenumber labels
-        if (drawAccurate3D && !m_buildingText.isEmpty() && !roofCenter.isNull()) {
-            double const w2 = 0.5 * painter->fontMetrics().width(m_buildingText);
+        if (drawAccurate3D && !building()->name().isEmpty() && !roofCenter.isNull()) {
+            double const w2 = 0.5 * painter->fontMetrics().width(building()->name());
             double const ascent = painter->fontMetrics().ascent();
             double const descent = painter->fontMetrics().descent();
             double const a2 = 0.5 * painter->fontMetrics().ascent();
@@ -377,30 +304,30 @@ void BuildingGeoPolygonGraphicsItem::paintRoof(GeoPainter* painter, const Viewpo
                     && outerRoof->containsPoint(textPosition + QPointF(2+2*w2, descent), Qt::OddEvenFill)
                     && outerRoof->containsPoint(textPosition + QPointF(2+2*w2, -ascent), Qt::OddEvenFill)
                     ) {
-                painter->drawTextFragment(roofCenter.toPoint(), m_buildingText,
+                painter->drawTextFragment(roofCenter.toPoint(), building()->name(),
                                          painter->font().pointSize(), painter->brush().color());
             }
         }
     }
 
     // Render additional housenumbers at building entries
-    if (!m_entries.isEmpty() && maxArea > 1600 * m_entries.size()) {
-        for(const auto &entry: m_entries) {
+    if (!building()->entries().isEmpty() && maxArea > 1600 * building()->entries().size()) {
+        for(const auto &entry: building()->entries()) {
             qreal x, y;
             viewport->screenCoordinates(entry.point, x, y);
             QPointF point(x, y);
             point += buildingOffset(point, viewport);
             painter->drawTextFragment(point.toPoint(),
-                                     m_buildingText, painter->font().pointSize(), painter->brush().color(),
+                                     building()->name(), painter->font().pointSize(), painter->brush().color(),
                                      GeoPainter::RoundFrame);
         }
     }
 }
 
-void BuildingGeoPolygonGraphicsItem::paintFrame(GeoPainter *painter, const ViewportParams *viewport)
+void BuildingGraphicsItem::paintFrame(GeoPainter *painter, const ViewportParams *viewport)
 {
     // TODO: how does this match the Q_ASSERT in the constructor?
-    if (m_buildingHeight == 0.0) {
+    if (building()->height() == 0.0) {
         return;
     }
 
@@ -492,7 +419,7 @@ void BuildingGeoPolygonGraphicsItem::paintFrame(GeoPainter *painter, const Viewp
     }
 }
 
-void BuildingGeoPolygonGraphicsItem::screenPolygons(const ViewportParams *viewport, const GeoDataPolygon *polygon,
+void BuildingGraphicsItem::screenPolygons(const ViewportParams *viewport, const GeoDataPolygon *polygon,
                                                     QVector<QPolygonF *> &innerPolygons,
                                                     QVector<QPolygonF *> &outerPolygons
                                                     )
@@ -513,7 +440,7 @@ void BuildingGeoPolygonGraphicsItem::screenPolygons(const ViewportParams *viewpo
     }
 }
 
-bool BuildingGeoPolygonGraphicsItem::contains(const QPoint &screenPosition, const ViewportParams *viewport) const
+bool BuildingGraphicsItem::contains(const QPoint &screenPosition, const ViewportParams *viewport) const
 {
     if (m_cachedOuterPolygons.isEmpty()) {
         // Level 17
@@ -544,7 +471,7 @@ bool BuildingGeoPolygonGraphicsItem::contains(const QPoint &screenPosition, cons
     return false;
 }
 
-bool BuildingGeoPolygonGraphicsItem::configurePainterForFrame(GeoPainter *painter) const
+bool BuildingGraphicsItem::configurePainterForFrame(GeoPainter *painter) const
 {
     QPen currentPen = painter->pen();
 

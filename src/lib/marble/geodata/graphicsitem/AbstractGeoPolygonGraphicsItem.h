@@ -23,18 +23,23 @@ namespace Marble
 class GeoDataLinearRing;
 class GeoDataPlacemark;
 class GeoDataPolygon;
+class GeoDataBuilding;
 
 class MARBLE_EXPORT AbstractGeoPolygonGraphicsItem : public GeoGraphicsItem
 {
 protected:
-    explicit AbstractGeoPolygonGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataPolygon *polygon);
-    explicit AbstractGeoPolygonGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataLinearRing *ring);
+    AbstractGeoPolygonGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataPolygon *polygon);
+    AbstractGeoPolygonGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataLinearRing *ring);
+    AbstractGeoPolygonGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataBuilding *building);
     ~AbstractGeoPolygonGraphicsItem() override;
 
 public:
     const GeoDataLatLonAltBox& latLonAltBox() const override;
     void paint(GeoPainter* painter, const ViewportParams *viewport, const QString &layer, int tileZoomLevel) override;
     bool contains(const QPoint &screenPosition, const ViewportParams *viewport) const override;
+
+    void setLinearRing(GeoDataLinearRing* ring);
+    void setPolygon(GeoDataPolygon* polygon);
 
     static const void *s_previousStyle;
 
@@ -44,14 +49,17 @@ protected:
     const GeoDataPolygon *polygon() const { return m_polygon; }
     inline
     const GeoDataLinearRing *ring() const { return m_ring; }
+    inline
+    const GeoDataBuilding *building() const { return m_building; }
 
     static int extractElevation(const GeoDataPlacemark &placemark);
 
 private:
     QPixmap texture(const QString &path, const QColor &color);
 
-    const GeoDataPolygon *const m_polygon;
-    const GeoDataLinearRing *const m_ring;
+    const GeoDataPolygon * m_polygon;
+    const GeoDataLinearRing * m_ring;
+    const GeoDataBuilding *const m_building;
 };
 
 }

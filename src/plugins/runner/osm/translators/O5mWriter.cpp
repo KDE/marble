@@ -16,6 +16,8 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataRelation.h"
 #include "GeoDataPolygon.h"
+#include "GeoDataBuilding.h"
+#include "GeoDataMultiGeometry.h"
 #include "GeoWriter.h"
 #include "osm/OsmPlacemarkData.h"
 
@@ -171,9 +173,15 @@ void O5mWriter::writeRelations(const OsmConverter::Relations &relations, QDataSt
         referencesBuffer.open(QIODevice::WriteOnly);
         QDataStream referencesStream(&referencesBuffer);
         if (const auto placemark = geodata_cast<GeoDataPlacemark>(relation.first)) {
-            auto polygon = geodata_cast<GeoDataPolygon>(placemark->geometry());
-            Q_ASSERT(polygon);
-            writeMultipolygonMembers(*polygon, lastReferenceId, osmData, stringTable, referencesStream);
+            if (const auto building = geodata_cast<GeoDataBuilding>(placemark->geometry())) {
+                auto polygon = geodata_cast<GeoDataPolygon>(&building->multiGeometry()->at(0));
+                Q_ASSERT(polygon);
+                writeMultipolygonMembers(*polygon, lastReferenceId, osmData, stringTable, referencesStream);
+            } else {
+                auto polygon = geodata_cast<GeoDataPolygon>(placemark->geometry());
+                Q_ASSERT(polygon);
+                writeMultipolygonMembers(*polygon, lastReferenceId, osmData, stringTable, referencesStream);
+            }
         } else if (const auto placemark = geodata_cast<GeoDataRelation>(relation.first)) {
             writeRelationMembers(placemark, lastReferenceId, osmData, stringTable, referencesStream);
         } else {

@@ -76,6 +76,12 @@ GeoDataDocument *VectorClipper::clipTo(const GeoDataLatLonBox &tileBoundary, int
                 clipString<GeoDataLineString>(placemark, clip, minArea, tile, osmIds);
             } else if (geodata_cast<GeoDataLinearRing>(geometry)) {
                 clipString<GeoDataLinearRing>(placemark, clip, minArea, tile, osmIds);
+            } else if (const auto building = geodata_cast<GeoDataBuilding>(geometry)) {
+                if (geodata_cast<GeoDataPolygon>(&building->multiGeometry()->at(0))) {
+                    clipPolygon(placemark, clip, minArea, tile, osmIds);
+                } else if (geodata_cast<GeoDataLinearRing>(&building->multiGeometry()->at(0))) {
+                    clipString<GeoDataLinearRing>(placemark, clip, minArea, tile, osmIds);
+                }
             } else {
                 tile->append(placemark->clone());
                 osmIds << placemark->osmData().id();
@@ -224,7 +230,16 @@ void VectorClipper::getBounds(const ClipperLib::Path &path, ClipperLib::cInt &mi
 void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const ClipperLib::Path &tileBoundary, qreal minArea,
                                 GeoDataDocument *document, QSet<qint64> &osmIds)
 {
-    const GeoDataPolygon* polygon = static_cast<const GeoDataPolygon*>(placemark->geometry());
+    bool isBuilding = false;
+    GeoDataPolygon* polygon;
+    if (const auto building = geodata_cast<GeoDataBuilding>(placemark->geometry())) {
+        polygon = geodata_cast<GeoDataPolygon>(&building->multiGeometry()->at(0));
+        isBuilding = true;
+    } else {
+        GeoDataPlacemark* copyPlacemark = new GeoDataPlacemark(*placemark);
+        polygon = geodata_cast<GeoDataPolygon>(copyPlacemark->geometry());
+    }
+
     if (minArea > 0.0 && area(polygon->outerBoundary()) < minArea) {
         return;
     }
@@ -265,7 +280,15 @@ void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const Clipper
 
         GeoDataPolygon* newPolygon = new GeoDataPolygon;
         newPolygon->setOuterBoundary(outerRing);
-        newPlacemark->setGeometry(newPolygon);
+        if (isBuilding) {
+            const auto building = geodata_cast<GeoDataBuilding>(placemark->geometry());
+            GeoDataBuilding* newBuilding = new GeoDataBuilding(*building);
+            newBuilding->multiGeometry()->clear();
+            newBuilding->multiGeometry()->append(newPolygon);
+            newPlacemark->setGeometry(newBuilding);
+        } else {
+            newPlacemark->setGeometry(newPolygon);
+        }
         if (placemarkOsmData.id() > 0) {
             newPlacemarkOsmData.addTag(QStringLiteral("mx:oid"), QString::number(placemarkOsmData.id()));
         }

@@ -18,7 +18,9 @@ namespace Marble
 
 class GeoDataLineString;
 class GeoDataDocument;
+class GeoDataLinearRing;
 class GeoDataPolygon;
+class GeoDataPlacemark;
 class GeoDataFeature;
 class OsmPlacemarkData;
 
@@ -45,6 +47,12 @@ private:
     Nodes m_nodes;
     Ways m_ways;
     Relations m_relations;
+
+    void processLinearRing(GeoDataLinearRing *linearRing,
+                           const OsmPlacemarkData& osmData);
+    void processPolygon(GeoDataPolygon *polygon,
+                        const OsmPlacemarkData& osmData,
+                        GeoDataPlacemark* placemark);
 };
 
 }

@@ -23,6 +23,8 @@
 #include "GeoDataPolygon.h"
 #include "GeoDataRelation.h"
 #include "GeoDataLinearRing.h"
+#include "GeoDataBuilding.h"
+#include "GeoDataMultiGeometry.h"
 #include "osm/OsmPlacemarkData.h"
 #include "osm/OsmObjectManager.h"
 #include "OsmRelationTagWriter.h"
@@ -53,31 +55,15 @@ void OsmConverter::read(const GeoDataDocument *document)
                 }
                 m_ways << OsmConverter::Way(lineString, osmData);
             } else if (const auto linearRing = geodata_cast<GeoDataLinearRing>(placemark->geometry())) {
-                for (auto const &coordinates: *linearRing) {
-                    m_nodes << OsmConverter::Node(coordinates, osmData.nodeReference(coordinates));
-                }
-                m_ways << OsmConverter::Way(linearRing, osmData);
+                processLinearRing(linearRing, osmData);
             } else if (const auto polygon = geodata_cast<GeoDataPolygon>(placemark->geometry())) {
-                int index = -1;
-
-                // Writing all the outerRing's nodes
-                const GeoDataLinearRing &outerRing = polygon->outerBoundary();
-                const OsmPlacemarkData outerRingOsmData = osmData.memberReference( index );
-                for (auto const &coordinates: outerRing) {
-                    m_nodes << OsmConverter::Node(coordinates, outerRingOsmData.nodeReference(coordinates));
+                processPolygon(polygon, osmData, placemark);
+            } else if (const auto building = geodata_cast<GeoDataBuilding>(placemark->geometry())) {
+                if (const auto linearRing = geodata_cast<GeoDataLinearRing>(&building->multiGeometry()->at(0))) {
+                    processLinearRing(linearRing, osmData);
+                } else if (const auto polygon = geodata_cast<GeoDataPolygon>(&building->multiGeometry()->at(0))) {
+                    processPolygon(polygon, osmData, placemark);
                 }
-                m_ways << OsmConverter::Way(&outerRing, outerRingOsmData);
-
-                // Writing all nodes for each innerRing
-                for (auto const &innerRing: polygon->innerBoundaries() ) {
-                    ++index;
-                    const OsmPlacemarkData innerRingOsmData = osmData.memberReference( index );
-                    for (auto const &coordinates: innerRing) {
-                        m_nodes << OsmConverter::Node(coordinates, innerRingOsmData.nodeReference(coordinates));
-                    }
-                    m_ways << OsmConverter::Way(&innerRing, innerRingOsmData);
-                }
-                m_relations.append(OsmConverter::Relation(placemark, osmData));
             }
         } else if (const auto placemark = geodata_cast<GeoDataRelation>(feature)) {
             m_relations.append(OsmConverter::Relation(placemark, placemark->osmData()));
@@ -103,6 +89,41 @@ const OsmConverter::Ways &OsmConverter::ways() const
 const OsmConverter::Relations &OsmConverter::relations() const
 {
     return m_relations;
+}
+
+void OsmConverter::processLinearRing(GeoDataLinearRing *linearRing,
+                                     const OsmPlacemarkData& osmData)
+{
+    for (auto const &coordinates: *linearRing) {
+        m_nodes << OsmConverter::Node(coordinates, osmData.nodeReference(coordinates));
+    }
+    m_ways << OsmConverter::Way(linearRing, osmData);
+}
+
+void OsmConverter::processPolygon(GeoDataPolygon *polygon,
+                                  const OsmPlacemarkData& osmData,
+                                  GeoDataPlacemark* placemark)
+{
+    int index = -1;
+
+    // Writing all the outerRing's nodes
+    const GeoDataLinearRing &outerRing = polygon->outerBoundary();
+    const OsmPlacemarkData outerRingOsmData = osmData.memberReference( index );
+    for (auto const &coordinates: outerRing) {
+        m_nodes << OsmConverter::Node(coordinates, outerRingOsmData.nodeReference(coordinates));
+    }
+    m_ways << OsmConverter::Way(&outerRing, outerRingOsmData);
+
+    // Writing all nodes for each innerRing
+    for (auto const &innerRing: polygon->innerBoundaries() ) {
+        ++index;
+        const OsmPlacemarkData innerRingOsmData = osmData.memberReference( index );
+        for (auto const &coordinates: innerRing) {
+            m_nodes << OsmConverter::Node(coordinates, innerRingOsmData.nodeReference(coordinates));
+        }
+        m_ways << OsmConverter::Way(&innerRing, innerRingOsmData);
+    }
+    m_relations.append(OsmConverter::Relation(placemark, osmData));
 }
 
 }

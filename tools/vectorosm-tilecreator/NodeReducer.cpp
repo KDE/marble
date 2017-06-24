@@ -11,6 +11,8 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataLineString.h"
 #include "GeoDataPolygon.h"
+#include "GeoDataBuilding.h"
+#include "GeoDataMultiGeometry.h"
 #include "GeoDataCoordinates.h"
 #include "MarbleMath.h"
 #include "NodeReducer.h"
@@ -40,23 +42,23 @@ NodeReducer::NodeReducer(GeoDataDocument* document, const TileId &tileId) :
             placemark->setGeometry(reducedLine);
         } else if (m_zoomLevel < 17) {
             if (const auto prevRing = geodata_cast<GeoDataLinearRing>(geometry)) {
-                GeoDataLinearRing* reducedRing = new GeoDataLinearRing;
-                reduce(*prevRing, placemark->osmData(), visualCategory, reducedRing);
-                placemark->setGeometry(reducedRing);
+                placemark->setGeometry(reducedRing(*prevRing, placemark, visualCategory));
             } else if (const auto prevPolygon = geodata_cast<GeoDataPolygon>(geometry)) {
-                GeoDataPolygon* reducedPolygon = new GeoDataPolygon;
-                GeoDataLinearRing const * prevRing = &(prevPolygon->outerBoundary());
-                GeoDataLinearRing reducedRing;
-                reduce(*prevRing, placemark->osmData().memberReference(-1), visualCategory, &reducedRing);
-                reducedPolygon->setOuterBoundary(reducedRing);
-                QVector<GeoDataLinearRing> const & innerBoundaries = prevPolygon->innerBoundaries();
-                for(int i = 0; i < innerBoundaries.size(); i++) {
-                    prevRing = &innerBoundaries[i];
-                    GeoDataLinearRing reducedInnerRing;
-                    reduce(*prevRing, placemark->osmData().memberReference(i), visualCategory, &reducedInnerRing);
-                    reducedPolygon->appendInnerBoundary(reducedInnerRing);
+                placemark->setGeometry(reducedPolygon(*prevPolygon, placemark, visualCategory));
+            } else if (const auto building = geodata_cast<GeoDataBuilding>(geometry)) {
+                if (const auto prevRing = geodata_cast<GeoDataLinearRing>(&building->multiGeometry()->at(0))) {
+                    GeoDataLinearRing* ring = reducedRing(*prevRing, placemark, visualCategory);
+                    GeoDataBuilding* newBuilding = new GeoDataBuilding(*building);
+                    newBuilding->multiGeometry()->clear();
+                    newBuilding->multiGeometry()->append(ring);
+                    placemark->setGeometry(newBuilding);
+                } else if (const auto prevPolygon = geodata_cast<GeoDataPolygon>(&building->multiGeometry()->at(0))) {
+                    GeoDataPolygon* poly = reducedPolygon(*prevPolygon, placemark, visualCategory);
+                    GeoDataBuilding* newBuilding = new GeoDataBuilding(*building);
+                    newBuilding->multiGeometry()->clear();
+                    newBuilding->multiGeometry()->append(poly);
+                    placemark->setGeometry(newBuilding);
                 }
-                placemark->setGeometry(reducedPolygon);
             }
         }
     }
@@ -185,6 +187,34 @@ void NodeReducer::setBorderPoints(OsmPlacemarkData &osmData, const QVector<int> 
         value = value % QStringLiteral(";") % QString::number(segment.first) % QStringLiteral("+") % QString::number(diff);
     }
     osmData.addTag(QStringLiteral("mx:bp"), value.mid(1));
+}
+
+GeoDataLinearRing *NodeReducer::reducedRing(const GeoDataLinearRing& prevRing,
+                                            GeoDataPlacemark* placemark,
+                                            const GeoDataPlacemark::GeoDataVisualCategory& visualCategory)
+{
+    GeoDataLinearRing* reducedRing = new GeoDataLinearRing;
+    reduce(prevRing, placemark->osmData(), visualCategory, reducedRing);
+    return reducedRing;
+}
+
+GeoDataPolygon *NodeReducer::reducedPolygon(const GeoDataPolygon& prevPolygon,
+                                            GeoDataPlacemark* placemark,
+                                            const GeoDataPlacemark::GeoDataVisualCategory& visualCategory)
+{
+    GeoDataPolygon* reducedPolygon = new GeoDataPolygon;
+    GeoDataLinearRing const * prevRing = &(prevPolygon.outerBoundary());
+    GeoDataLinearRing reducedRing;
+    reduce(*prevRing, placemark->osmData().memberReference(-1), visualCategory, &reducedRing);
+    reducedPolygon->setOuterBoundary(reducedRing);
+    QVector<GeoDataLinearRing> const & innerBoundaries = prevPolygon.innerBoundaries();
+    for(int i = 0; i < innerBoundaries.size(); i++) {
+        prevRing = &innerBoundaries[i];
+        GeoDataLinearRing reducedInnerRing;
+        reduce(*prevRing, placemark->osmData().memberReference(i), visualCategory, &reducedInnerRing);
+        reducedPolygon->appendInnerBoundary(reducedInnerRing);
+    }
+    return reducedPolygon;
 }
 
 }

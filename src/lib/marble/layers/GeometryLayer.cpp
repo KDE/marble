@@ -24,6 +24,7 @@
 #include "GeoDataLinearRing.h"
 #include "GeoDataMultiGeometry.h"
 #include "GeoDataPolygon.h"
+#include "GeoDataBuilding.h"
 #include "GeoDataPolyStyle.h"
 #include "GeoDataStyle.h"
 #include "GeoDataIconStyle.h"
@@ -412,6 +413,8 @@ void GeometryLayerPrivate::createGraphicsItemFromGeometry(const GeoDataGeometry*
         if (item->zValue() == 0) {
             item->setZValue(poly->renderOrder());
         }
+    } else if (const auto building = geodata_cast<GeoDataBuilding>(object)) {
+        item = GeoPolygonGraphicsItem::createGraphicsItem(placemark, building);
     } else if (const auto multigeo = geodata_cast<GeoDataMultiGeometry>(object)) {
         int rowCount = multigeo->size();
         for (int row = 0; row < rowCount; ++row) {

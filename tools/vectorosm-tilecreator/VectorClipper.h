@@ -17,6 +17,8 @@
 #include <GeoDataLatLonBox.h>
 #include "GeoDataPlacemark.h"
 #include "GeoDataLinearRing.h"
+#include "GeoDataBuilding.h"
+#include "GeoDataMultiGeometry.h"
 #include <TileId.h>
 #include <GeoSceneMercatorTileProjection.h>
 #include <OsmObjectManager.h>
@@ -50,7 +52,15 @@ private:
     void clipString(const GeoDataPlacemark *placemark, const ClipperLib::Path &tileBoundary, qreal minArea,
                     GeoDataDocument* document, QSet<qint64> &osmIds)
     {
-        const T* ring = static_cast<const T*>(placemark->geometry());
+        bool isBuilding = false;
+        T* ring;
+        if (const auto building = geodata_cast<GeoDataBuilding>(placemark->geometry())) {
+            ring = geodata_cast<T>(&building->multiGeometry()->at(0));
+            isBuilding = true;
+        } else {
+            GeoDataPlacemark* copyPlacemark = new GeoDataPlacemark(*placemark);
+            ring = geodata_cast<T>(copyPlacemark->geometry());
+        }
         bool const isClosed = ring->isClosed() && canBeArea(placemark->visualCategory());
         if (isClosed && minArea > 0.0 && area(*static_cast<const GeoDataLinearRing*>(ring)) < minArea) {
             return;
@@ -92,7 +102,15 @@ private:
                 ++index;
             }
 
-            newPlacemark->setGeometry(newRing);
+            if (isBuilding) {
+                const auto building = geodata_cast<GeoDataBuilding>(placemark->geometry());
+                GeoDataBuilding* newBuilding = new GeoDataBuilding(*building);
+                newBuilding->multiGeometry()->clear();
+                newBuilding->multiGeometry()->append(newRing);
+                newPlacemark->setGeometry(newBuilding);
+            } else {
+                newPlacemark->setGeometry(newRing);
+            }
             if (placemark->osmData().id() > 0) {
                 newPlacemark->osmData().addTag(QStringLiteral("mx:oid"), QString::number(placemark->osmData().id()));
             }

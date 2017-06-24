@@ -12,6 +12,7 @@
 #define MARBLE_OSMWAY
 
 #include "OsmNode.h"
+#include "GeoDataBuilding.h"
 #include <osm/OsmPlacemarkData.h>
 #include <StyleBuilder.h>
 
@@ -38,10 +39,19 @@ private:
 
     static bool isAreaTag(const StyleBuilder::OsmTag &keyValue);
 
+    bool isBuilding() const;
+
+    static bool isBuildingTag(const StyleBuilder::OsmTag &keyValue);
+
     OsmPlacemarkData m_osmData;
     QVector<qint64> m_references;
 
     static QSet<StyleBuilder::OsmTag> s_areaTags;
+    static QSet<StyleBuilder::OsmTag> s_buildingTags;
+
+    QString extractBuildingName() const;
+    double extractBuildingHeight() const;
+    QVector<GeoDataBuilding::NamedEntry> extractNamedEntries() const;
 };
 
 typedef QHash<qint64,OsmWay> OsmWays;

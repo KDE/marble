@@ -234,7 +234,7 @@ SET( geodata_graphicsitem_SRCS
     geodata/graphicsitem/GeoPhotoGraphicsItem.cpp
     geodata/graphicsitem/GeoPolygonGraphicsItem.cpp
     geodata/graphicsitem/AbstractGeoPolygonGraphicsItem.cpp
-    geodata/graphicsitem/BuildingGeoPolygonGraphicsItem.cpp
+    geodata/graphicsitem/BuildingGraphicsItem.cpp
     geodata/graphicsitem/GeoTrackGraphicsItem.cpp
     geodata/graphicsitem/ScreenOverlayGraphicsItem.cpp
 )

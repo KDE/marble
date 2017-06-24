@@ -12,6 +12,7 @@
 
 #include "GeoDataLinearRing.h"
 #include "GeoDataPolygon.h"
+#include "GeoDataBuilding.h"
 #include "GeoPainter.h"
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataStyle.h"
@@ -36,14 +37,24 @@ const void *AbstractGeoPolygonGraphicsItem::s_previousStyle = 0;
 AbstractGeoPolygonGraphicsItem::AbstractGeoPolygonGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataPolygon *polygon) :
     GeoGraphicsItem(placemark),
     m_polygon(polygon),
-    m_ring(0)
+    m_ring(0),
+    m_building(0)
 {
 }
 
 AbstractGeoPolygonGraphicsItem::AbstractGeoPolygonGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataLinearRing *ring) :
     GeoGraphicsItem(placemark),
     m_polygon(0),
-    m_ring(ring)
+    m_ring(ring),
+    m_building(0)
+{
+}
+
+AbstractGeoPolygonGraphicsItem::AbstractGeoPolygonGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataBuilding *building) :
+    GeoGraphicsItem(placemark),
+    m_polygon(0),
+    m_ring(0),
+    m_building(building)
 {
 }
 
@@ -53,11 +64,13 @@ AbstractGeoPolygonGraphicsItem::~AbstractGeoPolygonGraphicsItem()
 
 const GeoDataLatLonAltBox& AbstractGeoPolygonGraphicsItem::latLonAltBox() const
 {
-    if( m_polygon ) {
+    if(m_polygon) {
         return m_polygon->latLonAltBox();
+    } else if (m_ring) {
+        return m_ring->latLonAltBox();
     }
 
-    return m_ring->latLonAltBox();
+    return m_building->latLonAltBox();
 }
 
 void AbstractGeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportParams* viewport, const QString &layer, int tileZoomLevel)
@@ -208,6 +221,20 @@ QPixmap AbstractGeoPolygonGraphicsItem::texture(const QString &texturePath, cons
         QPixmapCache::insert(key, texture);
     }
     return texture;
+}
+
+void AbstractGeoPolygonGraphicsItem::setLinearRing(GeoDataLinearRing *ring)
+{
+    Q_ASSERT(m_building);
+    Q_ASSERT(!m_polygon);
+    m_ring = ring;
+}
+
+void AbstractGeoPolygonGraphicsItem::setPolygon(GeoDataPolygon *polygon)
+{
+    Q_ASSERT(m_building);
+    Q_ASSERT(!m_ring);
+    m_polygon = polygon;
 }
 
 }

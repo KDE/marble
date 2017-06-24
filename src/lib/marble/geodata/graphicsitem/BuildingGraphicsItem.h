@@ -19,22 +19,16 @@ class QPointF;
 namespace Marble
 {
 
-class MARBLE_EXPORT BuildingGeoPolygonGraphicsItem : public AbstractGeoPolygonGraphicsItem
+class MARBLE_EXPORT BuildingGraphicsItem : public AbstractGeoPolygonGraphicsItem
 {
 public:
-    explicit BuildingGeoPolygonGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataPolygon *polygon);
-    explicit BuildingGeoPolygonGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataLinearRing *ring);
-    ~BuildingGeoPolygonGraphicsItem() override;
+    BuildingGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataBuilding *building);
+    ~BuildingGraphicsItem() override;
 
 public:
     void paint(GeoPainter* painter, const ViewportParams *viewport, const QString &layer, int tileZoomLevel) override;
 
 private:
-    struct NamedEntry {
-        GeoDataCoordinates point;
-        QString label;
-    };
-
     void paintFrame(GeoPainter* painter, const ViewportParams *viewport);
 
     void paintRoof(GeoPainter* painter, const ViewportParams *viewport);
@@ -56,14 +50,7 @@ private:
 
     bool contains(const QPoint &screenPosition, const ViewportParams *viewport) const override;
 
-    static double extractBuildingHeight(const GeoDataPlacemark &placemark);
-    static QString extractBuildingLabel(const GeoDataPlacemark &placemark);
-    static QVector<NamedEntry> extractNamedEntries(const GeoDataPlacemark &placemark);
-
 private:
-    const double m_buildingHeight;
-    const QString m_buildingText;
-    const QVector<NamedEntry> m_entries;
     QVector<QPolygonF*> m_cachedOuterPolygons;
     QVector<QPolygonF*> m_cachedInnerPolygons;
     QVector<QPolygonF*> m_cachedOuterRoofPolygons;

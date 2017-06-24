@@ -210,6 +210,9 @@ const qreal FT2M = 1.0 / M2FT;
 const qreal M2IN = 39.3701;
 const qreal IN2M = 1.0 / M2IN;
 
+// Interconversion between Imperial System: feet vs inch
+const qreal FT2IN = 12.0;
+
 // Conversion Metric / Imperial System: meter vs yard
 const qreal M2YD = 1.09361;
 const qreal YD2M = 1.0 / M2YD;

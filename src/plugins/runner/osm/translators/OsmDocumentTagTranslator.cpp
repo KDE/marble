@@ -20,6 +20,8 @@
 #include "GeoDataGeometry.h"
 #include "GeoDataPoint.h"
 #include "GeoDataPolygon.h"
+#include "GeoDataBuilding.h"
+#include "GeoDataMultiGeometry.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataLinearRing.h"
 #include "GeoDataTypes.h"
@@ -56,9 +58,15 @@ bool OsmDocumentTagTranslator::write( const GeoNode *node, GeoWriter& writer ) c
 
     for (auto const & relation: converter.relations()) {
         if (auto placemark = geodata_cast<GeoDataPlacemark>(relation.first)) {
-            auto polygon = geodata_cast<GeoDataPolygon>(placemark->geometry());
-            Q_ASSERT(polygon);
-            OsmRelationTagWriter::writeMultipolygon(*polygon, relation.second, writer );
+            if (const auto building = geodata_cast<GeoDataBuilding>(placemark->geometry())) {
+                auto polygon = geodata_cast<GeoDataPolygon>(&building->multiGeometry()->at(0));
+                Q_ASSERT(polygon);
+                OsmRelationTagWriter::writeMultipolygon(*polygon, relation.second, writer );
+            } else {
+                auto polygon = geodata_cast<GeoDataPolygon>(placemark->geometry());
+                Q_ASSERT(polygon);
+                OsmRelationTagWriter::writeMultipolygon(*polygon, relation.second, writer );
+            }
         }
     }
 
