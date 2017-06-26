@@ -22,6 +22,7 @@
 // Qt
 #include <QTime>
 #include <QRegion>
+#include <QtMath>
 
 // Marble
 #include "layers/FloatItemsLayer.h"
@@ -209,10 +210,6 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model ) :
 
     QObject::connect( &m_geometryLayer, SIGNAL(repaintNeeded()),
                       parent, SIGNAL(repaintNeeded()));
-    QObject::connect(&m_vectorTileLayer, SIGNAL(tileLevelChanged(int)), &m_geometryLayer, SLOT(setTileLevel(int)));
-    QObject::connect(&m_vectorTileLayer, SIGNAL(tileLevelChanged(int)), &m_placemarkLayer, SLOT(setTileLevel(int)));
-    QObject::connect(&m_textureLayer, SIGNAL(tileLevelChanged(int)), &m_placemarkLayer, SLOT(setTileLevel(int)));
-    QObject::connect(&m_textureLayer, SIGNAL(tileLevelChanged(int)), &m_geometryLayer, SLOT(setTileLevel(int)));
 
     /*
      * Slot handleHighlight finds all placemarks
@@ -239,9 +236,11 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model ) :
                       parent, SLOT(updateTileLevel()) );
     QObject::connect( &m_vectorTileLayer, SIGNAL(tileLevelChanged(int)),
                       parent, SLOT(updateTileLevel()) );
+    QObject::connect( parent, SIGNAL(radiusChanged(int)),
+                      parent, SLOT(updateTileLevel()) );
+
     QObject::connect( &m_textureLayer, SIGNAL(repaintNeeded()),
                       parent, SIGNAL(repaintNeeded()) );
-
     QObject::connect( parent, SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)),
                       parent, SIGNAL(repaintNeeded()) );
 
@@ -466,7 +465,8 @@ int MarbleMap::preferredRadiusFloor( int radius )
 
 int MarbleMap::tileZoomLevel() const
 {
-    return qMax(d->m_textureLayer.tileZoomLevel(), d->m_vectorTileLayer.tileZoomLevel());
+    auto const tileZoomLevel = qMax(d->m_textureLayer.tileZoomLevel(), d->m_vectorTileLayer.tileZoomLevel());
+    return tileZoomLevel >= 0 ? tileZoomLevel : qMin<int>(qMax<int>(qLn(d->m_viewport.radius()*4/256)/qLn(2.0), 1), d->m_styleBuilder.maximumZoomLevel());
 }
 
 
@@ -828,7 +828,10 @@ void MarbleMapPrivate::setDocument( const QString& key )
 
 void MarbleMapPrivate::updateTileLevel()
 {
-    emit q->tileLevelChanged(q->tileZoomLevel());
+    auto const tileZoomLevel = q->tileZoomLevel();
+    m_geometryLayer.setTileLevel(tileZoomLevel);
+    m_placemarkLayer.setTileLevel(tileZoomLevel);
+    emit q->tileLevelChanged(tileZoomLevel);
 }
 
 // Used to be paintEvent()

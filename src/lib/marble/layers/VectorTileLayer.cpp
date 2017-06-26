@@ -133,7 +133,7 @@ RenderState VectorTileLayer::renderState() const
 
 int VectorTileLayer::tileZoomLevel() const
 {
-    int level = 0;
+    int level = -1;
     for (const auto *mapper: d->m_activeTileModels) {
         level = qMax(level, mapper->tileZoomLevel());
     }
@@ -163,7 +163,7 @@ bool VectorTileLayer::render(GeoPainter *painter, ViewportParams *viewport,
         mapper->setViewport(viewport->viewLatLonAltBox());
         level = qMax(level, mapper->tileZoomLevel());
     }
-    if (oldLevel != level) {
+    if (oldLevel != level && level >= 0) {
         emit tileLevelChanged(level);
     }
 
@@ -202,7 +202,10 @@ void VectorTileLayer::setMapTheme(const QVector<const GeoSceneVectorTileDataset 
     }
 
     d->updateLayerSettings();
-    emit tileLevelChanged(tileZoomLevel());
+    auto const level = tileZoomLevel();
+    if (level >= 0) {
+        emit tileLevelChanged(level);
+    }
 }
 
 }
