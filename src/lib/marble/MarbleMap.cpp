@@ -212,6 +212,7 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model ) :
     QObject::connect(&m_vectorTileLayer, SIGNAL(tileLevelChanged(int)), &m_geometryLayer, SLOT(setTileLevel(int)));
     QObject::connect(&m_vectorTileLayer, SIGNAL(tileLevelChanged(int)), &m_placemarkLayer, SLOT(setTileLevel(int)));
     QObject::connect(&m_textureLayer, SIGNAL(tileLevelChanged(int)), &m_placemarkLayer, SLOT(setTileLevel(int)));
+    QObject::connect(&m_textureLayer, SIGNAL(tileLevelChanged(int)), &m_geometryLayer, SLOT(setTileLevel(int)));
 
     /*
      * Slot handleHighlight finds all placemarks
