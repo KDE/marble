@@ -34,7 +34,6 @@ add_subdirectory(foursquare)
 # and terms of service of opencaching are cleared up.
 #add_subdirectory( opencaching )
 if(NOT MARBLE_NO_WEBKITWIDGETS)
-add_subdirectory( opencachingcom )
 add_subdirectory( opendesktop )
 add_subdirectory( photo )
 endif()
