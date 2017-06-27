@@ -102,6 +102,16 @@ Item {
 
         IconText {
             width: parent.width
+            visible: phone.length > 0
+            property string phone: placemark === null ? "" : placemark.phone
+            text: "<a href=\"tel:" + phone + "\">" + phone + "</a>"
+            icon: "qrc:/material/phone.svg"
+            maximumLineCount: 1
+            onLinkActivated: Qt.openUrlExternally(link)
+        }
+
+        IconText {
+            width: parent.width
             visible: url.length > 0
             property string url: placemark === null ? "" : placemark.wikipedia
             text:  "<a href=\"" + url + "\">Wikipedia</a>"

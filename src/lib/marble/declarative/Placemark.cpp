@@ -39,6 +39,7 @@ void Placemark::setGeoDataPlacemark( const Marble::GeoDataPlacemark &placemark )
     m_openingHours = QString();
     m_wheelchairInfo = QString();
     m_wifiAvailable = QString();
+    m_phone = QString();
     updateTags();
     updateRelations(placemark);
     emit coordinatesChanged();
@@ -50,6 +51,7 @@ void Placemark::setGeoDataPlacemark( const Marble::GeoDataPlacemark &placemark )
     emit openingHoursChanged();
     emit wheelchairInfoChanged();
     emit wifiAvailabilityChanged();
+    emit phoneChanged();
     emit tagsChanged();
 }
 
@@ -583,6 +585,16 @@ QString Placemark::wifiAvailable() const
     }
 
     return m_wifiAvailable;
+}
+
+QString Placemark::phone() const
+{
+    if (!m_phone.isEmpty()) {
+        return m_phone;
+    }
+
+    addTagValue(m_phone, "phone");
+    return m_phone;
 }
 
 void Placemark::setName(const QString & name)
