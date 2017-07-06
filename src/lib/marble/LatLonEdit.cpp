@@ -562,21 +562,23 @@ void LatLonEdit::setNotation(GeoDataCoordinates::Notation notation)
         d->m_inputHandler = new DMInputHandler(d);
         break;
     case GeoDataCoordinates::UTM:
-        /** @todo implement */
+        /** @todo see below */
         break;
     case GeoDataCoordinates::Astro:
-        /** @todo implement */
+        /** @todo see below */
         break;
     }
 
-    if (d->m_inputHandler) {
-        d->m_notation = notation;
-        d->m_inputHandler->setupUi();
-        d->m_inputHandler->setupMinMax(d->m_dimension);
-        d->m_inputHandler->setValue(d->m_value);
-    } else {
-        Q_ASSERT(false && "Support for this notation has not been implemented yet");
+    if (!d->m_inputHandler) {
+        /** @todo Temporary fallback to DecimalInputHandler
+         *        Implement proper handlers for UTM and Astro */
+        d->m_inputHandler = new DecimalInputHandler(d);
     }
+
+    d->m_notation = notation;
+    d->m_inputHandler->setupUi();
+    d->m_inputHandler->setupMinMax(d->m_dimension);
+    d->m_inputHandler->setValue(d->m_value);
 }
 
 void LatLonEdit::checkFloatValueOverflow()
