@@ -26,6 +26,7 @@ MovieCaptureDialog::MovieCaptureDialog(MarbleWidget *widget, QWidget *parent) :
 {
     ui->setupUi(this);
     m_recorder->setSnapshotMethod(MovieCapture::TimeDriven);
+    QPushButton *startButton = ui->buttonBox->addButton(tr("&Start", "Start recording a movie"), QDialogButtonBox::ActionRole);
 
     connect(ui->fpsSlider, SIGNAL(valueChanged(int)),
             ui->fpsSpin, SLOT(setValue(int)));
@@ -36,10 +37,10 @@ MovieCaptureDialog::MovieCaptureDialog(MarbleWidget *widget, QWidget *parent) :
     connect(ui->fpsSlider, SIGNAL(valueChanged(int)),
             m_recorder, SLOT(setFps(int)));
 
-    connect(ui->cancelButton, SIGNAL(clicked()),
+    connect(ui->buttonBox, SIGNAL(rejected()),
             this, SLOT(close()));
 
-    connect(ui->startButton, SIGNAL(clicked()),
+    connect(startButton, SIGNAL(clicked()),
             this, SLOT(startRecording()));
 
     connect(ui->openButton, SIGNAL(clicked()),
