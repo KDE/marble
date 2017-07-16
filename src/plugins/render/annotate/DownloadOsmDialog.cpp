@@ -37,7 +37,6 @@ DownloadOsmDialog::DownloadOsmDialog(MarbleWidget *parent,AnnotatePlugin *annota
     m_marbleWidget(parent),
     m_latLonBoxWidget(new LatLonBoxWidget)
 {
-    QPushButton *m_quitButton;
     setupUi(this);
     horizontalLayout->addWidget(m_latLonBoxWidget);
     this->setWindowTitle("Download");
@@ -49,14 +48,11 @@ DownloadOsmDialog::DownloadOsmDialog(MarbleWidget *parent,AnnotatePlugin *annota
 
     m_downloadButton = new QPushButton(tr("Download"));
     m_downloadButton->setDefault(true);
-    m_quitButton = new QPushButton(tr("Cancel"));
-    m_quitButton->setAutoDefault(false);
 
     buttonBox->addButton(m_downloadButton,QDialogButtonBox::ActionRole);
-    buttonBox->addButton(m_quitButton,QDialogButtonBox::RejectRole);
 
     connect( m_downloadButton, SIGNAL(clicked(bool)), this, SLOT(downloadFile()) );
-    connect( m_quitButton, SIGNAL(clicked(bool)), this, SLOT(close()) );
+    connect( buttonBox, SIGNAL(reject()), this, SLOT(close()) );
     connect( this, SIGNAL(openFile(QString)), annotatePlugin, SLOT(openAnnotationFile(QString)) );
 
     progressBar->hide();
