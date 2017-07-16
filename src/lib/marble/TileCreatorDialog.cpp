@@ -14,6 +14,7 @@
 #include "TileCreatorDialog.h"
 
 // Qt
+#include <QPushButton>
 #include <QTimer>
 
 // Marble
@@ -44,7 +45,7 @@ TileCreatorDialog::TileCreatorDialog(TileCreator *creator, QWidget *parent)
 
     connect( d->m_creator, SIGNAL(progress(int)),
              this, SLOT(setProgress(int)), Qt::QueuedConnection );
-    connect( d->uiWidget.cancelButton, SIGNAL(clicked()),
+    connect( d->uiWidget.buttonBox, SIGNAL(reject()),
              this, SLOT(cancelTileCreation()) );
 
     // Start the creation process
@@ -53,7 +54,7 @@ TileCreatorDialog::TileCreatorDialog(TileCreator *creator, QWidget *parent)
 
 void TileCreatorDialog::cancelTileCreation()
 {
-    d->uiWidget.cancelButton->setEnabled( false );
+    d->uiWidget.buttonBox->button(QDialogButtonBox::Cancel)->setEnabled( false );
 
     /** @todo: Cancelling mostly crashes Marble. Fix that and uncomment below */
     // d->m_creator->cancelTileCreation();
