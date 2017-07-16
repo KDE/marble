@@ -13,6 +13,7 @@
 #include "ui_TimeControlWidget.h"
 
 // Qt
+#include <QPushButton>
 #include <QShowEvent>
 
 // Marble
@@ -32,13 +33,13 @@ TimeControlWidget::TimeControlWidget( MarbleClock* clock, QWidget* parent )
 
     connect( m_uiWidget->speedSlider, SIGNAL(valueChanged(int)), this, SLOT(updateSpeedLabel(int)) );
     connect( m_uiWidget->nowToolButton, SIGNAL(clicked()), this, SLOT(nowClicked()) );
-    connect( m_uiWidget->applyButton, SIGNAL(clicked()), this, SLOT(apply()) );
-    connect( m_uiWidget->cancelButton, SIGNAL(clicked()), this, SLOT(reject()) );
-    connect( m_uiWidget->okButton, SIGNAL(clicked()), this, SLOT(apply()) );
-    connect( m_uiWidget->okButton, SIGNAL(clicked()), this, SLOT(accept()) );
+    connect( m_uiWidget->buttonBox->button(QDialogButtonBox::Apply), SIGNAL(clicked()), this, SLOT(apply()) );
+    connect( m_uiWidget->buttonBox, SIGNAL(reject()), this, SLOT(reject()) );
+    connect( m_uiWidget->buttonBox->button(QDialogButtonBox::Ok), SIGNAL(clicked()), this, SLOT(apply()) );
+    connect( m_uiWidget->buttonBox->button(QDialogButtonBox::Ok), SIGNAL(clicked()), this, SLOT(accept()) );
     connect( m_clock, SIGNAL(timeChanged()), this, SLOT(updateDateTime()) );
     connect( m_clock, SIGNAL(updateIntervalChanged(int)), this, SLOT(updateRefreshRate(int)) );
- 
+
     setModal( false );
 
 }

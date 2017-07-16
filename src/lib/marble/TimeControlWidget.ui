@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>421</width>
-    <height>217</height>
+    <height>247</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,7 +23,7 @@
       <item row="1" column="0">
        <widget class="QLabel" name="newLabel">
         <property name="text">
-         <string>New Date Time      :</string>
+         <string>&amp;New Date Time      :</string>
         </property>
         <property name="buddy">
          <cstring>newDateTimeEdit</cstring>
@@ -33,7 +33,7 @@
       <item row="2" column="0">
        <widget class="QLabel" name="refreshIntervalLabel">
         <property name="text">
-         <string>Refresh Interval     :</string>
+         <string>Refresh &amp;Interval     :</string>
         </property>
         <property name="buddy">
          <cstring>refreshIntervalSpinBox</cstring>
@@ -120,7 +120,7 @@
          <bool>true</bool>
         </property>
         <property name="text">
-         <string>Current Date Time :</string>
+         <string>Current &amp;Date Time :</string>
         </property>
         <property name="buddy">
          <cstring>currentDateTimeEdit</cstring>
@@ -175,51 +175,11 @@
     </widget>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Expanding</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QPushButton" name="okButton">
-       <property name="text">
-        <string>OK</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="applyButton">
-       <property name="text">
-        <string>Apply</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="cancelButton">
-       <property name="focusPolicy">
-        <enum>Qt::StrongFocus</enum>
-       </property>
-       <property name="text">
-        <string>Cancel</string>
-       </property>
-       <property name="checkable">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-    </layout>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>
