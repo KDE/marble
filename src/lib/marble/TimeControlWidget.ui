@@ -23,7 +23,7 @@
       <item row="1" column="0">
        <widget class="QLabel" name="newLabel">
         <property name="text">
-         <string>&amp;New Date Time      :</string>
+         <string>&amp;New date and time:</string>
         </property>
         <property name="buddy">
          <cstring>newDateTimeEdit</cstring>
@@ -33,7 +33,7 @@
       <item row="2" column="0">
        <widget class="QLabel" name="refreshIntervalLabel">
         <property name="text">
-         <string>Refresh &amp;Interval     :</string>
+         <string>Refresh &amp;interval:</string>
         </property>
         <property name="buddy">
          <cstring>refreshIntervalSpinBox</cstring>
@@ -120,7 +120,7 @@
          <bool>true</bool>
         </property>
         <property name="text">
-         <string>Current &amp;Date Time :</string>
+         <string>Current &amp;date and time:</string>
         </property>
         <property name="buddy">
          <cstring>currentDateTimeEdit</cstring>
