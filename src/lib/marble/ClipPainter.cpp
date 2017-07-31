@@ -75,13 +75,13 @@ class ClipPainterPrivate
                                 bool isClosed ) const;
 
 
-    void labelPosition(const QPolygonF& polygon, QVector<QPointF>& labelNodes,
-                                LabelPositionFlags labelPositionFlags);
+    void labelPosition(const QPolygonF &polygon, QVector<QPointF> &labelNodes,
+                                LabelPositionFlags labelPositionFlags) const;
 
-    bool pointAllowsLabel( const QPointF& point );
-    QPointF interpolateLabelPoint( const QPointF& previousPoint, 
-                                   const QPointF& currentPoint,
-                                   LabelPositionFlags labelPositionFlags );
+    bool pointAllowsLabel(const QPointF &point) const;
+    QPointF interpolateLabelPoint(const QPointF &previousPoint,
+                                  const QPointF &currentPoint,
+                                  LabelPositionFlags labelPositionFlags) const;
 
     static inline qreal _m( const QPointF & start, const QPointF & end );
 
@@ -291,8 +291,9 @@ void ClipPainter::drawPolyline(const QPolygonF & polygon, QVector<QPointF>& labe
     }
 }
 
-void ClipPainter::labelPosition(const QPolygonF & polygon, QVector<QPointF>& labelNodes,
-                                       LabelPositionFlags labelPositionFlags) {
+void ClipPainter::labelPosition(const QPolygonF &polygon, QVector<QPointF> &labelNodes,
+                                       LabelPositionFlags labelPositionFlags) const
+{
     d->labelPosition(polygon, labelNodes, labelPositionFlags);
 }
 
@@ -351,8 +352,8 @@ void ClipPainter::setBrush(const QBrush & brush) {
     }
 }
 
-void ClipPainterPrivate::labelPosition(const QPolygonF & polygon, QVector<QPointF>& labelNodes,
-                                       LabelPositionFlags labelPositionFlags)
+void ClipPainterPrivate::labelPosition(const QPolygonF &polygon, QVector<QPointF> &labelNodes,
+                                       LabelPositionFlags labelPositionFlags) const
 {
     if ( labelPositionFlags.testFlag( LineCenter ) ) {
         // The Label at the center of the polyline:
@@ -404,16 +405,15 @@ void ClipPainterPrivate::labelPosition(const QPolygonF & polygon, QVector<QPoint
     }
 }
 
-bool ClipPainterPrivate::pointAllowsLabel( const QPointF& point )
+bool ClipPainterPrivate::pointAllowsLabel(const QPointF &point) const
 {
-
     return point.x() > m_labelAreaMargin && point.x() < q->viewport().width() - m_labelAreaMargin 
          && point.y() > m_labelAreaMargin && point.y() < q->viewport().height() - m_labelAreaMargin;
 }
 
-QPointF ClipPainterPrivate::interpolateLabelPoint( const QPointF& previousPoint, 
-                                                   const QPointF& currentPoint,
-                                                   LabelPositionFlags labelPositionFlags )
+QPointF ClipPainterPrivate::interpolateLabelPoint(const QPointF &previousPoint,
+                                                  const QPointF &currentPoint,
+                                                  LabelPositionFlags labelPositionFlags) const
 {
     qreal m = _m( previousPoint, currentPoint );
     if ( previousPoint.x() <= m_labelAreaMargin ) {
