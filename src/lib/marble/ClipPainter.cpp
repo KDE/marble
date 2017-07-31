@@ -354,8 +354,6 @@ void ClipPainter::setBrush(const QBrush & brush) {
 void ClipPainterPrivate::labelPosition(const QPolygonF & polygon, QVector<QPointF>& labelNodes,
                                        LabelPositionFlags labelPositionFlags)
 {
-    bool currentAllowsLabel = false;
-
     if ( labelPositionFlags.testFlag( LineCenter ) ) {
         // The Label at the center of the polyline:
         if ( polygon.size() > 0 ) {
@@ -371,7 +369,7 @@ void ClipPainterPrivate::labelPosition(const QPolygonF & polygon, QVector<QPoint
 
         // The Label at the start of the polyline:
         for ( int it = 1; it < polygon.size(); ++it ) {
-            currentAllowsLabel = pointAllowsLabel( polygon.at( it ) );
+            const bool currentAllowsLabel = pointAllowsLabel(polygon.at(it));
 
             if ( currentAllowsLabel ) {
                 // As polygon.size() > 0 it's ensured that it-1 exists.
@@ -392,7 +390,7 @@ void ClipPainterPrivate::labelPosition(const QPolygonF & polygon, QVector<QPoint
 
         // The Label at the end of the polyline:
         for ( int it = polygon.size() - 2; it > 0; --it ) {
-            currentAllowsLabel = pointAllowsLabel( polygon.at( it ) );
+            const bool currentAllowsLabel = pointAllowsLabel(polygon.at(it));
 
             if ( currentAllowsLabel ) {
                 QPointF node = interpolateLabelPoint( polygon.at( it + 1 ), polygon.at( it ),
