@@ -950,6 +950,16 @@ bool MarbleWidget::showDebugPlacemarks() const
     return d->m_map.showDebugPlacemarks();
 }
 
+void MarbleWidget::setDebugLevelTags(bool visible)
+{
+    d->m_map.setLevelTagDebugModeEnabled(visible);
+}
+
+bool MarbleWidget::debugLevelTags() const
+{
+    return d->m_map.levelTagDebugModeEnabled();
+}
+
 void MarbleWidget::setShowTileId( bool visible )
 {
     d->m_map.setShowTileId( visible );
@@ -1225,6 +1235,16 @@ void MarbleWidget::setHeading( qreal heading )
 qreal MarbleWidget::heading() const
 {
     return d->m_map.heading();
+}
+
+void MarbleWidget::setLevelToDebug(int level)
+{
+    d->m_map.setDebugLevelTag(level);
+}
+
+int MarbleWidget::levelToDebug() const
+{
+    return d->m_map.debugLevelTag();
 }
 
 }

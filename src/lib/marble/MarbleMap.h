@@ -675,6 +675,21 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
     bool showDebugPlacemarks() const;
 
+
+    /**
+     * @brief Set whether to enter the debug mode for
+     * level tags
+     * @param visible visibility according to OSM level tags
+     */
+    void setLevelTagDebugModeEnabled(bool visible);
+
+    bool levelTagDebugModeEnabled() const;
+
+    void setDebugLevelTag(int level);
+
+    int debugLevelTag() const;
+
+
     void setShowBackground( bool visible );
 
     void setVisibleRelationTypes(GeoDataRelation::RelationTypes relationTypes);

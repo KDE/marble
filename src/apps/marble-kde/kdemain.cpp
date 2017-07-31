@@ -333,6 +333,8 @@ int main ( int argc, char *argv[] )
 
     QCommandLineOption debugOption( "debug-info", i18n( "Enable debug output" ) );
     parser.addOption( debugOption );
+    QCommandLineOption levelOption( "debug-levels", i18n( "Display OSM placemarks according to the level selected" ) );
+    parser.addOption( levelOption );
     QCommandLineOption timeOption( "timedemo", i18n( "Make a time measurement to check performance" ) );
     parser.addOption( timeOption );
     QCommandLineOption fpsOption( "fps", i18n( "Show frame rate" ) );
@@ -397,6 +399,10 @@ int main ( int argc, char *argv[] )
 
     if ( parser.isSet( fpsOption ) ) {
         window->marbleControl()->marbleWidget()->setShowFrameRate( true );
+    }
+
+    if (parser.isSet(levelOption)) {
+        window->marbleWidget()->setDebugLevelTags(true);
     }
 
     if ( parser.isSet( tileOption ) ) {

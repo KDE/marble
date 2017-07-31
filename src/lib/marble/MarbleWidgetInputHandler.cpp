@@ -106,22 +106,66 @@ void MarbleWidgetInputHandler::setCursor(const QCursor &cursor)
 bool MarbleWidgetInputHandler::handleKeyPress(QKeyEvent *event)
 {
     if (d->m_debugModeEnabled) {
-        switch(event->key()) {
-        case Qt::Key_I:
-            MarbleDebug::setEnabled(!MarbleDebug::isEnabled());
-            break;
-        case Qt::Key_R:
-            d->m_marbleWidget->setShowRuntimeTrace(!d->m_marbleWidget->showRuntimeTrace());
-            break;
-        case Qt::Key_O:
-            d->m_marbleWidget->setShowDebugPlacemarks(!d->m_marbleWidget->showDebugPlacemarks());
-            break;
-        case Qt::Key_P:
-            d->m_marbleWidget->setShowDebugPolygons(!d->m_marbleWidget->showDebugPolygons());
-            break;
-        case Qt::Key_B:
-            d->m_marbleWidget->setShowDebugBatchRender(!d->m_marbleWidget->showDebugBatchRender());
-            break;
+        if (event->modifiers() == Qt::ControlModifier && d->m_marbleWidget->debugLevelTags()) {
+            switch(event->key()) {
+                case Qt::Key_0:
+                    d->m_marbleWidget->setLevelToDebug(0);
+                    break;
+                case Qt::Key_1:
+                    d->m_marbleWidget->setLevelToDebug(1);
+                    break;
+                case Qt::Key_2:
+                    d->m_marbleWidget->setLevelToDebug(2);
+                    break;
+                case Qt::Key_3:
+                    d->m_marbleWidget->setLevelToDebug(3);
+                    break;
+                case Qt::Key_4:
+                    d->m_marbleWidget->setLevelToDebug(4);
+                    break;
+                case Qt::Key_5:
+                    d->m_marbleWidget->setLevelToDebug(5);
+                    break;
+                case Qt::Key_6:
+                    d->m_marbleWidget->setLevelToDebug(6);
+                    break;
+                case Qt::Key_7:
+                    d->m_marbleWidget->setLevelToDebug(7);
+                    break;
+                case Qt::Key_8:
+                    d->m_marbleWidget->setLevelToDebug(8);
+                    break;
+                case Qt::Key_9:
+                    d->m_marbleWidget->setLevelToDebug(9);
+                    break;
+                case Qt::Key_Plus:
+                    d->m_marbleWidget->setLevelToDebug(d->m_marbleWidget->levelToDebug() + 1);
+                    break;
+                case Qt::Key_Minus:
+                    d->m_marbleWidget->setLevelToDebug(d->m_marbleWidget->levelToDebug() - 1);
+                    break;
+            }
+        } else {
+            switch(event->key()) {
+                case Qt::Key_I:
+                    MarbleDebug::setEnabled(!MarbleDebug::isEnabled());
+                    break;
+                case Qt::Key_R:
+                    d->m_marbleWidget->setShowRuntimeTrace(!d->m_marbleWidget->showRuntimeTrace());
+                    break;
+                case Qt::Key_O:
+                    d->m_marbleWidget->setShowDebugPlacemarks(!d->m_marbleWidget->showDebugPlacemarks());
+                    break;
+                case Qt::Key_P:
+                    d->m_marbleWidget->setShowDebugPolygons(!d->m_marbleWidget->showDebugPolygons());
+                    break;
+                case Qt::Key_B:
+                    d->m_marbleWidget->setShowDebugBatchRender(!d->m_marbleWidget->showDebugBatchRender());
+                    break;
+                case Qt::Key_L:
+                    d->m_marbleWidget->setDebugLevelTags(!d->m_marbleWidget->debugLevelTags());
+                    break;
+            }
         }
     }
     return MarbleDefaultInputHandler::handleKeyPress(event);
