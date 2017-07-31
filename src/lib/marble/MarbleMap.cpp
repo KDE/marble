@@ -1302,6 +1302,29 @@ bool MarbleMap::showDebugPlacemarks() const
     return d->m_placemarkLayer.isDebugModeEnabled();
 }
 
+void MarbleMap::setLevelTagDebugModeEnabled(bool visible)
+{
+    if (visible != d->m_geometryLayer.levelTagDebugModeEnabled()) {
+        d->m_geometryLayer.setLevelTagDebugModeEnabled(visible);
+        emit repaintNeeded();
+    }
+}
+
+bool MarbleMap::levelTagDebugModeEnabled() const
+{
+    return d->m_geometryLayer.levelTagDebugModeEnabled();
+}
+
+void MarbleMap::setDebugLevelTag(int level)
+{
+    d->m_geometryLayer.setDebugLevelTag(level);
+}
+
+int MarbleMap::debugLevelTag() const
+{
+    return d->m_geometryLayer.debugLevelTag();
+}
+
 void MarbleMap::setShowBackground( bool visible )
 {
     d->m_layerManager.setShowBackground( visible );

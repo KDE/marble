@@ -970,6 +970,22 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     bool showDebugPlacemarks() const;
 
     /**
+     * @brief Set whether to render according to OSM indoor level tags
+     * @param visible visibility of entities (placemarks, buildings etc.) level-wise
+     */
+    void setDebugLevelTags(bool visible);
+
+    bool debugLevelTags() const;
+
+    /**
+     * @brief Set the level to debug
+     * @param level the level to debug
+     */
+    void setLevelToDebug(int level);
+
+    int levelToDebug() const;
+
+        /**
      * @brief Set the map quality for the specified view context.
      *
      * @param quality map quality for the specified view context
@@ -1150,7 +1166,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     friend class CustomPaintLayer;
 
     friend class MarbleWidgetDefaultInputHandler;
-};
+    };
 
 }
 

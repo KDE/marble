@@ -158,7 +158,8 @@ int main(int argc, char *argv[])
         qWarning() << "  --runtimeTrace.............. Show the time spent and other debug info of each layer";
         qWarning() << "  --tile-id................... Write the identifier of texture tiles on top of them";
         qWarning() << "  --timedemo ................. Measure the paint performance while moving the map and quit";
-        qWarning() << "  --debug-polygons .............Display the polygon nodes and their index for debugging";
+        qWarning() << "  --debug-polygons ........... Display the polygon nodes and their index for debugging";
+        qWarning() << "  --debug-levels ............. Display OSM placemarks according to the level selected";
         qWarning();
         qWarning() << "profile options (note that marble should automatically detect which profile to use. Override that with the options below):";
         qWarning() << "  --highresolution ........... Enforce the profile for devices with high resolution (e.g. desktop computers)";
@@ -278,7 +279,8 @@ int main(int argc, char *argv[])
             marbleTest.timeDemo();
             return 0;
         }
-        else if (arg == QLatin1String("--fps")) {
+
+        if (arg == QLatin1String("--fps")) {
             window->marbleControl()->marbleWidget()->setShowFrameRate( true );
         }
         else if (arg == QLatin1String("--tile-id")) {
@@ -290,12 +292,17 @@ int main(int argc, char *argv[])
         else if (arg == QLatin1String("--debug-polygons")) {
             window->marbleControl()->marbleWidget()->setShowDebugPolygons( true );
         }
-        else if ( i != dataPathIndex && QFile::exists( arg ) )
-            window->addGeoDataFile( arg );
+        else if ( i != dataPathIndex && QFile::exists( arg ) ) {
+            window->addGeoDataFile(arg);
+        }
+        else if (arg == QLatin1String("--debug-levels")) {
+            window->marbleWidget()->setDebugLevelTags(true);
+        }
     }
 
     auto const marbleWidget = window->marbleControl()->marbleWidget();
-    bool const debugModeEnabled = marbleWidget->showRuntimeTrace() || marbleWidget->showDebugPolygons() || MarbleDebug::isEnabled();
+    bool const debugModeEnabled = marbleWidget->showRuntimeTrace() || marbleWidget->showDebugPolygons() ||
+            marbleWidget->debugLevelTags() || MarbleDebug::isEnabled();
     marbleWidget->inputHandler()->setDebugModeEnabled(debugModeEnabled);
 
     return app.exec();
