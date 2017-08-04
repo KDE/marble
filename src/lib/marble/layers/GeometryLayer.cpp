@@ -254,16 +254,14 @@ bool GeometryLayer::render(GeoPainter *painter, ViewportParams *viewport,
         for (auto item: layerItems) {
             if (d->m_levelTagDebugModeEnabled) {
                 if (const auto placemark = geodata_cast<GeoDataPlacemark>(item->feature())) {
-                    if (!placemark->hasOsmData()) {
-                        continue;
-                    }
-                    QHash<QString, QString>::const_iterator tagIter = placemark->osmData().findTag(QStringLiteral("level"));
-                    if (tagIter == placemark->osmData().tagsEnd()) {
-                        continue;
-                    }
-                    const int val = tagIter.value().toInt();
-                    if (val != d->m_levelToDebug) {
-                        continue;
+                    if (placemark->hasOsmData()) {
+                        QHash<QString, QString>::const_iterator tagIter = placemark->osmData().findTag(QStringLiteral("level"));
+                        if (tagIter != placemark->osmData().tagsEnd()) {
+                            const int val = tagIter.value().toInt();
+                            if (val != d->m_levelToDebug) {
+                                continue;
+                            }
+                        }
                     }
                 }
             }
