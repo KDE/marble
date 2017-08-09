@@ -23,6 +23,7 @@
 #include "ViewportParams.h"
 #include "VisiblePlacemark.h"
 #include "RenderState.h"
+#include "osm/OsmPlacemarkData.h"
 
 #define BATCH_RENDERING
 
@@ -37,7 +38,9 @@ PlacemarkLayer::PlacemarkLayer(QAbstractItemModel *placemarkModel,
     QObject( parent ),
     m_layout( placemarkModel, selectionModel, clock, styleBuilder ),
     m_debugModeEnabled(false),
-    m_tileLevel(0)
+    m_levelTagDebugModeEnabled(false),
+    m_tileLevel(0),
+    m_debugLevelTag(0)
 {
     m_useXWorkaround = testXBug();
     mDebug() << "Use workaround: " << ( m_useXWorkaround ? "1" : "0" );
@@ -83,6 +86,17 @@ bool PlacemarkLayer::render( GeoPainter *geoPainter, ViewportParams *viewport,
         --visit;
 
         VisiblePlacemark *const mark = *visit;
+        if (m_levelTagDebugModeEnabled) {
+            if (mark->placemark()->hasOsmData()) {
+                QHash<QString, QString>::const_iterator tagIter = mark->placemark()->osmData().findTag(QStringLiteral("level"));
+                if (tagIter != mark->placemark()->osmData().tagsEnd()) {
+                    const int val = tagIter.value().toInt();
+                    if (val != m_debugLevelTag) {
+                        continue;
+                    }
+                }
+            }
+        }
 
         // Intentionally converting positions from floating point to pixel aligned screen grid below
         QRect labelRect( mark->labelRect().toRect() );
@@ -335,6 +349,27 @@ void PlacemarkLayer::renderDebug(GeoPainter *painter, ViewportParams *viewport, 
     }
 
     painter->restore();
+}
+
+void PlacemarkLayer::setLevelTagDebugModeEnabled(bool enabled)
+{
+    if (m_levelTagDebugModeEnabled != enabled) {
+        m_levelTagDebugModeEnabled = enabled;
+        emit repaintNeeded();
+    }
+}
+
+bool PlacemarkLayer::levelTagDebugModeEnabled() const
+{
+    return m_levelTagDebugModeEnabled;
+}
+
+void PlacemarkLayer::setDebugLevelTag(int level)
+{
+    if (m_debugLevelTag != level) {
+        m_debugLevelTag = level;
+        emit repaintNeeded();
+    }
 }
 
 #include "moc_PlacemarkLayer.cpp"

@@ -1306,18 +1306,21 @@ void MarbleMap::setLevelTagDebugModeEnabled(bool visible)
 {
     if (visible != d->m_geometryLayer.levelTagDebugModeEnabled()) {
         d->m_geometryLayer.setLevelTagDebugModeEnabled(visible);
+        d->m_placemarkLayer.setLevelTagDebugModeEnabled(visible);
         emit repaintNeeded();
     }
 }
 
 bool MarbleMap::levelTagDebugModeEnabled() const
 {
-    return d->m_geometryLayer.levelTagDebugModeEnabled();
+    return d->m_geometryLayer.levelTagDebugModeEnabled() &&
+           d->m_placemarkLayer.levelTagDebugModeEnabled();
 }
 
 void MarbleMap::setDebugLevelTag(int level)
 {
     d->m_geometryLayer.setDebugLevelTag(level);
+    d->m_placemarkLayer.setDebugLevelTag(level);
 }
 
 int MarbleMap::debugLevelTag() const

@@ -111,7 +111,7 @@ public:
     QSet<qint64> m_highlightedRouteRelations;
     GeoDataRelation::RelationTypes m_visibleRelationTypes;
     bool m_levelTagDebugModeEnabled;
-    int m_levelToDebug;
+    int m_debugLevelTag;
 };
 
 GeometryLayerPrivate::GeometryLayerPrivate(const QAbstractItemModel *model, const StyleBuilder *styleBuilder) :
@@ -123,7 +123,7 @@ GeometryLayerPrivate::GeometryLayerPrivate(const QAbstractItemModel *model, cons
     m_cachedItemCount(0),
     m_visibleRelationTypes(GeoDataRelation::RouteFerry),
     m_levelTagDebugModeEnabled(false),
-    m_levelToDebug(0)
+    m_debugLevelTag(0)
 {
 }
 
@@ -258,7 +258,7 @@ bool GeometryLayer::render(GeoPainter *painter, ViewportParams *viewport,
                         QHash<QString, QString>::const_iterator tagIter = placemark->osmData().findTag(QStringLiteral("level"));
                         if (tagIter != placemark->osmData().tagsEnd()) {
                             const int val = tagIter.value().toInt();
-                            if (val != d->m_levelToDebug) {
+                            if (val != d->m_debugLevelTag) {
                                 continue;
                             }
                         }
@@ -699,15 +699,15 @@ bool GeometryLayer::levelTagDebugModeEnabled() const
 
 void GeometryLayer::setDebugLevelTag(int level)
 {
-    if (d->m_levelToDebug != level) {
-        d->m_levelToDebug = level;
+    if (d->m_debugLevelTag != level) {
+        d->m_debugLevelTag = level;
         emit repaintNeeded();
     }
 }
 
 int GeometryLayer::debugLevelTag() const
 {
-    return d->m_levelToDebug;
+    return d->m_debugLevelTag;
 }
 
 }

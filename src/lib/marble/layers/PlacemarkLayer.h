@@ -89,6 +89,10 @@ class PlacemarkLayer : public QObject, public LayerInterface
     bool isDebugModeEnabled() const;
     void setDebugModeEnabled(bool enabled);
 
+    void setLevelTagDebugModeEnabled(bool enabled);
+    bool levelTagDebugModeEnabled() const;
+    void setDebugLevelTag(int level);
+
     static bool m_useXWorkaround;  // Indicates need for an X windows workaround.
  public Q_SLOTS:
    // earth
@@ -114,7 +118,9 @@ class PlacemarkLayer : public QObject, public LayerInterface
 
     PlacemarkLayout m_layout;
     bool m_debugModeEnabled;
+    bool m_levelTagDebugModeEnabled;
     int m_tileLevel;
+    int m_debugLevelTag;
 };
 
 }
