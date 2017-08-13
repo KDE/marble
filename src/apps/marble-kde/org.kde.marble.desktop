@@ -88,5 +88,5 @@ Comment[x-test]=xxNavigation and Mapsxx
 Comment[zh_TW]=導覽地圖
 Icon=marble
 Terminal=false
-Categories=Qt;KDE;Education;Geoscience;Geography;Science;
+Categories=Qt;KDE;Education;Geoscience;Geography;Science;Maps;
 X-DocPath=marble/index.html
