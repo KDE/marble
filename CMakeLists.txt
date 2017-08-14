@@ -1,5 +1,8 @@
 cmake_minimum_required(VERSION 2.8.12)
 
+# Set minimum OS X target
+set(CMAKE_OSX_DEPLOYMENT_TARGET 10.9)
+
 project(marble)
 
 ####################################################
