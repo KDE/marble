@@ -49,7 +49,7 @@ Name[uk]=Світовий годинник
 Name[x-test]=xxWorld Clockxx
 Name[zh_CN]=世界时钟
 Name[zh_TW]=世界時鐘
-# not yet... Comment=Shows the time in different parts of the world
+Comment=Shows the time in different parts of the world
 
 Icon=marble
 Type=Service
