@@ -16,8 +16,9 @@ import QtQuick.Controls 2.0
 import QtQuick.Window 2.2
 
 import org.kde.marble 0.20
+import org.kde.kirigami 2.0 as Kirigami
 
-ApplicationWindow {
+Kirigami.ApplicationWindow {
     id: app
     title: qsTr("Marble Maps")
     visible: true
