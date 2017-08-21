@@ -127,6 +127,15 @@ Kirigami.ApplicationWindow {
                 }
             },
             Kirigami.Action {
+                text: "Bookmarks"
+                iconName: "qrc:///material/star.svg"
+                onTriggered: {
+                    app.state = "bookmarks"
+                    sidePanel.close()
+                    app.pageStack.push("qrc:///Bookmarks.qml")
+                }
+            },
+            Kirigami.Action {
                 text: "Layer Options"
                 iconName: "qrc:///settings.png"
                 onTriggered: {
@@ -136,6 +145,13 @@ Kirigami.ApplicationWindow {
                 }
             }
         ]
+
+        Binding {
+            target: pageStack.currentItem
+            property: "marbleQuickItem"
+            value: marbleMaps
+            when: app.state === "bookmarks"
+        }
     }
 
     pageStack.initialPage: page
@@ -458,8 +474,9 @@ Kirigami.ApplicationWindow {
 
     Loader {
         id: dialogLoader
-
         focus: true
+        width: childrenRect.width
+        height : childrenRect.height
 
         anchors {
             left: parent.left
@@ -560,6 +577,10 @@ Kirigami.ApplicationWindow {
           },
           State {
               name: "options"
+              PropertyChanges { target: dialogLoader; source: "" }
+          },
+          State {
+              name: "bookmarks"
               PropertyChanges { target: dialogLoader; source: "" }
           }
       ]
