@@ -125,11 +125,21 @@ Kirigami.ApplicationWindow {
                     source = ""
                     app.pageStack.push("qrc:///AboutDialog.qml")
                 }
+            },
+            Kirigami.Action {
+                text: "Layer Options"
+                iconName: "qrc:///settings.png"
+                onTriggered: {
+                    app.state = "options"
+                    sidePanel.close()
+                    app.pageStack.push("qrc:///Options.qml")
+                }
             }
         ]
     }
 
     pageStack.initialPage: page
+    pageStack.interactive: false
 
     Kirigami.Page {
         id: page
@@ -547,6 +557,10 @@ Kirigami.ApplicationWindow {
           State {
               name: "developer"
               PropertyChanges { target: dialogLoader; source: "DeveloperDialog.qml" }
+          },
+          State {
+              name: "options"
+              PropertyChanges { target: dialogLoader; source: "" }
           }
       ]
     }

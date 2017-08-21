@@ -30,6 +30,7 @@
         <file>SidePanel.qml</file>
         <file>PublicTransport.qml</file>
         <file>OutdoorActivities.qml</file>
+        <file>Options.qml</file>
         <file>drawer.svg</file>
         <file alias="search.png">../../../data/android/drawable-xxxhdpi/search.png</file>
         <file alias="menu.png">../../../data/android/drawable-xxxhdpi/ic_menu_black_48dp.png</file>
