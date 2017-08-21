@@ -114,7 +114,18 @@ Kirigami.ApplicationWindow {
 
                 }
             },
-            Kirigami.Action{ enabled: false}
+            Kirigami.Action{ enabled: false},
+            Kirigami.Action {
+                text: "About"
+                iconName: "qrc:///marble.svg"
+                visible: true
+                onTriggered: {
+                    app.state = "about"
+                    sidePanel.close()
+                    source = ""
+                    app.pageStack.push("qrc:///AboutDialog.qml")
+                }
+            }
         ]
     }
 
@@ -527,7 +538,7 @@ Kirigami.ApplicationWindow {
           },
           State {
               name: "about"
-              PropertyChanges { target: dialogLoader; source: "AboutDialog.qml" }
+              PropertyChanges { target: dialogLoader; source: "" }
           },
           State {
               name: "settings"
