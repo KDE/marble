@@ -55,6 +55,7 @@
         <file alias="ic_place_via.png">../../../data/android/drawable-xxxhdpi/ic_place_via.png</file>
         <file alias="add.png">../../../data/android/drawable-xxxhdpi/ic_add_black_48dp.png</file>
         <file alias="settings.png">../../../data/android/drawable-xxxhdpi/ic_settings_black_48dp.png</file>
+        <file alias="marble.svg">icons/marble-lineart-simplified-logo.svg</file>
         <file alias="material/gas_station.svg">material-icons/ic_local_gas_station_48px.svg</file>
         <file alias="material/browser.svg">material-icons/ic_open_in_browser_48px.svg</file>
         <file alias="material/volume-off.svg">material-icons/ic_volume_off_48px.svg</file>
