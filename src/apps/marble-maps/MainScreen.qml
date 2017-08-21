@@ -61,6 +61,74 @@ Kirigami.ApplicationWindow {
         id: settings
     }
 
+    globalDrawer: Kirigami.GlobalDrawer {
+        id: sidePanel
+        title: "Settings"
+
+        handleVisible: false
+        property alias showAccessibility: accessibilityAction.checked
+
+        Settings {
+            id: sidePanelSettings
+            property bool showUpdateInfo: Number(value("MarbleMaps", "updateInfoVersion", "0")) < 1
+            Component.onDestruction: {
+                sidePanelSettings.setValue("MarbleMaps", "showAccessibility", accessibilityAction.checked ? "true" : "false")
+            }
+        }
+
+        actions: [
+            Kirigami.Action {
+                id: publicTransportAction
+                text: qsTr("Public Transport")
+                checkable: true
+                checked: marbleMaps.showPublicTransport
+                iconName: "qrc:///material/directions-bus.svg"
+                visible: true
+                onTriggered: {
+                    sidePanel.close()
+                    marbleMaps.showPublicTransport = checked
+                    publicTransportDialog.open()
+                }
+            },
+            Kirigami.Action {
+                id: outdoorActivitiesAction
+                checkable: true
+                checked: marbleMaps.showOutdoorActivities
+                text: qsTr("Outdoor Activities")
+                visible: true
+                iconName: "qrc:///material/directions-run.svg"
+                onTriggered: {
+                    sidePanel.close()
+                    marbleMaps.showOutdoorActivities = checked
+                }
+            },
+            Kirigami.Action {
+                id: accessibilityAction
+                checkable: true
+                checked: settings.value("MarbleMaps", "showAccessibility", "false") === "true"
+                text: qsTr("Accessibility")
+                visible: true
+                iconName: "qrc:///material/wheelchair.svg"
+                onTriggered: {
+                    sidePanelSettings.value("MarbleMaps", "showAccessibility", "false") === "true"
+
+                }
+            },
+            Kirigami.Action{ enabled: false}
+        ]
+    }
+
+    pageStack.initialPage: page
+
+    Kirigami.Page {
+        id: page
+        padding: 0
+        topPadding: 0
+        leftPadding: 0
+        rightPadding: 0
+        bottomPadding: 0
+        title: "Marble Maps"
+
     Item {
         id: mapItem
         anchors {
@@ -364,7 +432,7 @@ Kirigami.ApplicationWindow {
             app.selectedPlacemark = suggestedPlacemark;
             app.state = "place"
         }
-        onMenuButtonClicked: drawer.open()
+        onMenuButtonClicked: sidePanel.open()
     }
 
     Loader {
@@ -384,7 +452,7 @@ Kirigami.ApplicationWindow {
               dialogLoader.item.map = marbleMaps
               dialogLoader.item.placemark = app.selectedPlacemark
               dialogLoader.item.showOsmTags = app.showOsmTags
-              dialogLoader.item.showAccessibility = drawer.showAccessibility
+              dialogLoader.item.showAccessibility = sidePanel.showAccessibility
           } else if (app.state === "route") {
               item.routingManager = routingManager
               item.routingProfile = routingManager.routingProfile
@@ -410,18 +478,6 @@ Kirigami.ApplicationWindow {
         source: "qrc:///border_shadow.png"
     }
 
-    SidePanel {
-        id: drawer
-        width: 0.67 * app.width
-        height: app.height
-        marbleMaps: marbleMaps
-
-        onAboutActionTriggered: {
-            app.state = "about"
-            dialogLoader.focus = true
-        }
-    }
-
     BoxedText {
         id: quitHelper
         visible: false
@@ -445,23 +501,6 @@ Kirigami.ApplicationWindow {
                 quitHelper.visible = false
             }
         }
-    }
-
-    property bool aboutToQuit: false
-
-    onClosing: {
-        if (app.aboutToQuit === true) {
-            close.accepted = true // we will quit
-            return
-        } else if (navigationManager.visible) {
-            navigationManager.visible = false
-        } else if (app.state !== "none") {
-            app.state = "none"
-        } else {
-            app.aboutToQuit = true
-            quitHelper.visible = true
-        }
-        close.accepted = false
     }
 
     Item {
@@ -499,5 +538,28 @@ Kirigami.ApplicationWindow {
               PropertyChanges { target: dialogLoader; source: "DeveloperDialog.qml" }
           }
       ]
+    }
+}
+
+    property bool aboutToQuit: false
+
+    onClosing: {
+        if (app.aboutToQuit === true) {
+            close.accepted = true // we will quit
+            return
+        } else if (navigationManager.visible) {
+            navigationManager.visible = false
+        } else if (sidePanel.drawerOpen) {
+            sidePanel.close()
+        } else if (pageStack.depth > 1) {
+            pageStack.pop()
+        }
+        else if (app.state !== "none") {
+            app.state = "none"
+        } else {
+            app.aboutToQuit = true
+            quitHelper.visible = true
+        }
+        close.accepted = false
     }
 }
