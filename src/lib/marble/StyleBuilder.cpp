@@ -1022,6 +1022,8 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::ShopDeli]                 = createOsmPOIStyle(osmFont, "shop/deli", shopColor);
     m_defaultStyle[GeoDataPlacemark::ShopTobacco]              = createOsmPOIStyle(osmFont, "shop/tobacco", shopColor);
     m_defaultStyle[GeoDataPlacemark::ShopTea]                  = createOsmPOIStyle(osmFont, "shop/tea", shopColor);
+    m_defaultStyle[GeoDataPlacemark::ShopComputer]             = createOsmPOIStyle(osmFont, "shop/computer-14", shopColor);
+    m_defaultStyle[GeoDataPlacemark::ShopGardenCentre]         = createOsmPOIStyle(osmFont, "shop/garden_centre-14", shopColor);
     m_defaultStyle[GeoDataPlacemark::Shop]                     = createOsmPOIStyle(osmFont, "shop/shop-14", shopColor);
 
     m_defaultStyle[GeoDataPlacemark::ManmadeBridge]            = createWayStyle(QColor("#b8b8b8"), Qt::transparent, true, true);
@@ -1029,6 +1031,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::ManmadePier]              = createStyle(0.0, 3.0, "#f2efe9", "#f2efe9", true, false, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector<qreal>(), osmFont);
     m_defaultStyle[GeoDataPlacemark::ManmadeWaterTower]        = createOsmPOIStyle(osmFont, "amenity/water_tower.16", amenityColor);
     m_defaultStyle[GeoDataPlacemark::ManmadeWindMill]          = createOsmPOIStyle(osmFont, "amenity/windmill.16", amenityColor);
+    m_defaultStyle[GeoDataPlacemark::ManmadeCommunicationsTower] = createOsmPOIStyle(osmFont, "manmade/communications.16", amenityColor);
 
     m_defaultStyle[GeoDataPlacemark::HistoricCastle]           = createOsmPOIRingStyle(osmFont, "amenity/cinema.16", amenityColor);
     m_defaultStyle[GeoDataPlacemark::HistoricMemorial]         = createOsmPOIStyle(osmFont, "amenity/tourist_memorial.16", amenityColor);
@@ -1072,7 +1075,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::TransportRentalSki]       = createOsmPOIStyle(osmFont, "transportation/rental_ski.16", transportationColor);
     m_defaultStyle[GeoDataPlacemark::TransportTaxiRank]        = createOsmPOIStyle(osmFont, "transportation/taxi.16", transportationColor);
     m_defaultStyle[GeoDataPlacemark::TransportSubwayEntrance]  = createOsmPOIStyle(osmFont, "transportation/subway_entrance", transportationColor);
-    m_defaultStyle[GeoDataPlacemark::ReligionPlaceOfWorship]   = createOsmPOIStyle(osmFont, QString() /* "black/place_of_worship.16" */);
+    m_defaultStyle[GeoDataPlacemark::ReligionPlaceOfWorship]   = createOsmPOIStyle(osmFont, "black/place_of_worship.16");
     m_defaultStyle[GeoDataPlacemark::ReligionBahai]            = createOsmPOIStyle(osmFont, QString());
     m_defaultStyle[GeoDataPlacemark::ReligionBuddhist]         = createOsmPOIStyle(osmFont, "black/buddhist.16");
     m_defaultStyle[GeoDataPlacemark::ReligionChristian]        = createOsmPOIStyle(osmFont, "black/christian.16");
@@ -1082,6 +1085,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::ReligionJewish]           = createOsmPOIStyle(osmFont, "black/jewish.16");
     m_defaultStyle[GeoDataPlacemark::ReligionShinto]           = createOsmPOIStyle(osmFont, "black/shintoist.16");
     m_defaultStyle[GeoDataPlacemark::ReligionSikh]             = createOsmPOIStyle(osmFont, "black/sikhist.16");
+    m_defaultStyle[GeoDataPlacemark::ReligionTaoist]           = createOsmPOIStyle(osmFont, "black/taoist.16");
 
     m_defaultStyle[GeoDataPlacemark::HighwayTrafficSignals]    = createOsmPOIStyle(osmFont, "individual/traffic_light");
     m_defaultStyle[GeoDataPlacemark::HighwayTrafficSignals]->iconStyle().setScale(0.75);
@@ -1465,6 +1469,8 @@ void StyleBuilder::Private::initializeOsmVisualCategories()
     s_visualCategories[OsmTag("shop", "stationery")]            = GeoDataPlacemark::ShopStationery;
     s_visualCategories[OsmTag("shop", "supermarket")]           = GeoDataPlacemark::ShopSupermarket;
     s_visualCategories[OsmTag("shop", "tea")]                   = GeoDataPlacemark::ShopTea;
+    s_visualCategories[OsmTag("shop", "computer")]              = GeoDataPlacemark::ShopComputer;
+    s_visualCategories[OsmTag("shop", "garden_centre")]         = GeoDataPlacemark::ShopGardenCentre;
     s_visualCategories[OsmTag("shop", "tobacco")]               = GeoDataPlacemark::ShopTobacco;
     s_visualCategories[OsmTag("shop", "toys")]                  = GeoDataPlacemark::ShopToys;
     s_visualCategories[OsmTag("shop", "travel_agency")]         = GeoDataPlacemark::ShopTravelAgency;
@@ -1481,6 +1487,8 @@ void StyleBuilder::Private::initializeOsmVisualCategories()
     s_visualCategories[OsmTag("man_made", "pier")]              = GeoDataPlacemark::ManmadePier;
     s_visualCategories[OsmTag("man_made", "water_tower")]       = GeoDataPlacemark::ManmadeWaterTower;
     s_visualCategories[OsmTag("man_made", "windmill")]          = GeoDataPlacemark::ManmadeWindMill;
+    s_visualCategories[OsmTag("man_made", "communications_tower")] = GeoDataPlacemark::ManmadeCommunicationsTower;
+    s_visualCategories[OsmTag("tower:type", "communication")]   = GeoDataPlacemark::ManmadeCommunicationsTower;
 
     s_visualCategories[OsmTag("religion", "")]                  = GeoDataPlacemark::ReligionPlaceOfWorship;
     s_visualCategories[OsmTag("religion", "bahai")]             = GeoDataPlacemark::ReligionBahai;
@@ -1492,6 +1500,7 @@ void StyleBuilder::Private::initializeOsmVisualCategories()
     s_visualCategories[OsmTag("religion", "muslim")]            = GeoDataPlacemark::ReligionMuslim;
     s_visualCategories[OsmTag("religion", "shinto")]            = GeoDataPlacemark::ReligionShinto;
     s_visualCategories[OsmTag("religion", "sikh")]              = GeoDataPlacemark::ReligionSikh;
+    s_visualCategories[OsmTag("religion", "taoist")]            = GeoDataPlacemark::ReligionTaoist;
 
     s_visualCategories[OsmTag("tourism", "camp_site")]          = GeoDataPlacemark::AccomodationCamping;
     s_visualCategories[OsmTag("tourism", "guest_house")]        = GeoDataPlacemark::AccomodationGuestHouse;
@@ -1857,6 +1866,7 @@ void StyleBuilder::Private::initializeMinimumZoomLevels()
     s_defaultMinZoomLevels[GeoDataPlacemark::ManmadePier]       = 15;
     s_defaultMinZoomLevels[GeoDataPlacemark::ManmadeWaterTower]       = 15;
     s_defaultMinZoomLevels[GeoDataPlacemark::ManmadeWindMill]       = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::ManmadeCommunicationsTower]       = 15;
 
     s_defaultMinZoomLevels[GeoDataPlacemark::MilitaryDangerArea]  = 11;
 
@@ -1953,7 +1963,7 @@ void StyleBuilder::Private::initializeMinimumZoomLevels()
     s_defaultMinZoomLevels[GeoDataPlacemark::TransportMotorcycleParking]  = 17;
     s_defaultMinZoomLevels[GeoDataPlacemark::TransportSubwayEntrance]  = 17;
 
-    for (int religion = GeoDataPlacemark::ReligionPlaceOfWorship; religion <= GeoDataPlacemark::ReligionSikh; ++religion) {
+    for (int religion = GeoDataPlacemark::ReligionPlaceOfWorship; religion <= GeoDataPlacemark::ReligionTaoist; ++religion) {
         s_defaultMinZoomLevels[religion] = 17;
     }
 
@@ -2316,6 +2326,7 @@ qint64 StyleBuilder::popularity(const GeoDataPlacemark *placemark)
         popularities << GeoDataPlacemark::ManmadePier;
         popularities << GeoDataPlacemark::ManmadeWaterTower;
         popularities << GeoDataPlacemark::ManmadeWindMill;
+        popularities << GeoDataPlacemark::ManmadeCommunicationsTower;
 
         popularities << GeoDataPlacemark::TourismAttraction;
         popularities << GeoDataPlacemark::TourismArtwork;
@@ -2406,6 +2417,8 @@ qint64 StyleBuilder::popularity(const GeoDataPlacemark *placemark)
         popularities << GeoDataPlacemark::ShopDeli;
         popularities << GeoDataPlacemark::ShopTobacco;
         popularities << GeoDataPlacemark::ShopTea;
+        popularities << GeoDataPlacemark::ShopComputer;
+        popularities << GeoDataPlacemark::ShopGardenCentre;
         popularities << GeoDataPlacemark::Shop;
 
         popularities << GeoDataPlacemark::LeisureGolfCourse;
@@ -2656,12 +2669,15 @@ QString StyleBuilder::visualCategoryName(GeoDataPlacemark::GeoDataVisualCategory
         visualCategoryNames[GeoDataPlacemark::ShopDeli] = "ShopDeli";
         visualCategoryNames[GeoDataPlacemark::ShopTobacco] = "ShopTobacco";
         visualCategoryNames[GeoDataPlacemark::ShopTea] = "ShopTea";
+        visualCategoryNames[GeoDataPlacemark::ShopComputer] = "ShopComputer";
+        visualCategoryNames[GeoDataPlacemark::ShopGardenCentre] = "ShopGardenCentre";
         visualCategoryNames[GeoDataPlacemark::Shop] = "Shop";
         visualCategoryNames[GeoDataPlacemark::ManmadeBridge] = "ManmadeBridge";
         visualCategoryNames[GeoDataPlacemark::ManmadeLighthouse] = "ManmadeLighthouse";
         visualCategoryNames[GeoDataPlacemark::ManmadePier] = "ManmadePier";
         visualCategoryNames[GeoDataPlacemark::ManmadeWaterTower] = "ManmadeWaterTower";
         visualCategoryNames[GeoDataPlacemark::ManmadeWindMill] = "ManmadeWindMill";
+        visualCategoryNames[GeoDataPlacemark::ManmadeCommunicationsTower] = "ManmadeCommunicationsTower";
         visualCategoryNames[GeoDataPlacemark::TourismAttraction] = "TouristAttraction";
         visualCategoryNames[GeoDataPlacemark::TourismArtwork] = "TouristArtwork";
         visualCategoryNames[GeoDataPlacemark::HistoricArchaeologicalSite] = "HistoricArchaeologicalSite";
@@ -2712,6 +2728,7 @@ QString StyleBuilder::visualCategoryName(GeoDataPlacemark::GeoDataVisualCategory
         visualCategoryNames[GeoDataPlacemark::ReligionJewish] = "ReligionJewish";
         visualCategoryNames[GeoDataPlacemark::ReligionShinto] = "ReligionShinto";
         visualCategoryNames[GeoDataPlacemark::ReligionSikh] = "ReligionSikh";
+        visualCategoryNames[GeoDataPlacemark::ReligionTaoist] = "ReligionTaoist";
         visualCategoryNames[GeoDataPlacemark::LeisureGolfCourse] = "LeisureGolfCourse";
         visualCategoryNames[GeoDataPlacemark::LeisureMarina] = "LeisureMarina";
         visualCategoryNames[GeoDataPlacemark::LeisurePark] = "LeisurePark";
@@ -2827,9 +2844,9 @@ QStringList StyleBuilder::shopValues()
             << "baby_goods" << "boutique" << "fabric" << "leather" << "tailor" << "watches"
             << "charity" << "second_hand" << "erotic" << "hearing_aids" << "herbalist" << "massage"
             << "medical_supply" << "tattoo" << "bathroom_furnishing" << "electrical" << "energy" << "furnace"
-            << "garden_centre" << "garden_furniture" << "gas" << "glaziery" << "houseware" << "locksmith"
+            << "garden_furniture" << "gas" << "glaziery" << "houseware" << "locksmith"
             << "paint" << "trade" << "antiques" << "bed" << "candles" << "carpet"
-            << "curtain" << "interior_decoration" << "kitchen" << "lamps" << "window_blind" << "computer"
+            << "curtain" << "interior_decoration" << "kitchen" << "lamps" << "window_blind"
             << "radiotechnics" << "vacuum_cleaner" << "fishing" << "free_flying" << "hunting" << "outdoor"
             << "scuba_diving" << "sports" << "tyres" << "swimming_pool" << "art" << "craft"
             << "frame" << "games" << "model" << "music" << "trophy" << "video"

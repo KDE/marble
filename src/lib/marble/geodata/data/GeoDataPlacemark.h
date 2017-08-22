@@ -338,6 +338,8 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
         ShopDeli,
         ShopTobacco,
         ShopTea,
+        ShopComputer,
+        ShopGardenCentre,
         Shop, // please keep order (used in for loops)
 
         ManmadeBridge,
@@ -345,6 +347,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
         ManmadePier,
         ManmadeWaterTower,
         ManmadeWindMill,
+        ManmadeCommunicationsTower,
 
         // OpenStreetMap category Tourist
         TourismArtwork,
@@ -401,6 +404,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
         ReligionJewish,
         ReligionShinto,
         ReligionSikh,
+        ReligionTaoist,
 
         // OpenStreetMap category Leisure
         LeisureGolfCourse,
