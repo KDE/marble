@@ -8,17 +8,20 @@
 // Copyright 2016      Dennis Nienhüser <nienhueser@kde.org>
 //
 
-import QtQuick 2.4
-import QtQuick.Controls 1.4
+import QtQuick 2.8
+import QtQuick.Controls 2.2
 import QtQuick.Window 2.2
 import QtQuick.Layouts 1.3
+import QtQml.Models 2.1
 import QtGraphicalEffects 1.0
 
 import org.kde.kirigami 2.0 as Kirigami
 
 import org.kde.marble 0.20
 Kirigami.ScrollablePage {
-    id: root
+    id: bookmarkPage
+    title: "Bookmarks"
+
     property int currentIndex: 0
     property var marbleQuickItem: null
 
@@ -49,57 +52,104 @@ Kirigami.ScrollablePage {
             interactive: false
             spacing: 5
             height: contentHeight
-            model: bookmarks.model
 
-            delegate:
-                Rectangle {
-                width: parent.width
-                height: Screen.pixelDensity * 2 + Math.max(text.height, imageButton.height)
-                color: palette.base
+            model: DelegateModel {
+                id: visualModel
+                model: bookmarks.model
+                delegate: MouseArea {
+                    id: delegateRoot
+                    property int visualIndex: DelegateModel.itemsIndex
+                    width: bookmarksView.width
+                    height:  100
+                    drag.target: bookmarkRectangle
+                    drag.axis: Drag.YAxis
 
-                Image {
-                    id: imageButton
-                    anchors {
-                        left: parent.left
-                        verticalCenter: parent.verticalCenter
+                    Rectangle {
+                        id: bookmarkRectangle
+                        width: parent.width
+                        height: Screen.pixelDensity * 2 + Math.max(text.height, imageButton.height)
+                        color: palette.base
+
+                        anchors {
+                            horizontalCenter: parent.horizontalCenter;
+                            verticalCenter: parent.verticalCenter
+                        }
+
+                        Drag.active: delegateRoot.drag.active
+                        Drag.source: delegateRoot
+                        Drag.hotSpot.x: 36
+                        Drag.hotSpot.y: 36
+
+                        Text {
+                            id: text
+                            anchors {
+                                left: imageButton.right
+                                right: dragButton.left
+                                leftMargin: parent.width * 0.05
+                                verticalCenter: parent.verticalCenter
+                            }
+                            elide: Text.ElideMiddle
+                            text: model.display
+                            font.pointSize: 12
+                            color: palette.text
+                        }
+
+                        Image {
+                            id: imageButton
+                            anchors {
+                                left: bookmarksView.left
+                                verticalCenter: parent.verticalCenter
+                            }
+                            source: "qrc:///material/place.svg"
+                            width: Screen.pixelDensity * 6
+                            height: width
+                            smooth: true
+                        }
+
+                        ColorOverlay{
+                            anchors.fill: imageButton
+                            source: imageButton
+                            color: palette.highlight
+                        }
+
+                        Image {
+                            id: dragButton
+                            anchors{
+                                verticalCenter: parent.verticalCenter
+                                right: parent.right
+                            }
+                            width: Screen.pixelDensity * 6
+                            height: width
+                            source: "qrc:///material/drag.png"
+                            smooth: true
+                        }
+
+                        states: [
+                            State {
+                                when: bookmarkRectangle.Drag.active
+                                ParentChange {
+                                    target: bookmarkRectangle
+                                    parent: column
+                                }
+
+                                AnchorChanges {
+                                    target: bookmarkRectangle;
+                                    anchors.horizontalCenter: undefined;
+                                    anchors.verticalCenter: undefined
+                                }
+                            }
+                        ]
                     }
-                    source: "qrc:///material/place.svg"
-                    width: Screen.pixelDensity * 6
-                    height: width
-                    smooth: true
-                }
 
-                ColorOverlay{
-                    anchors.fill: imageButton
-                    source: imageButton
-                    color: palette.highlight
-                }
-
-                Text {
-                    id: text
-                    anchors {
-                        left: imageButton.right
-                        leftMargin: parent.width * 0.05
-                        verticalCenter: parent.verticalCenter
+                    DropArea {
+                        anchors.fill: parent
+                        onEntered: visualModel.items.move(drag.source.visualIndex, delegateRoot.visualIndex)
                     }
-                    elide: Text.ElideMiddle
-                    text: model.display
-                    font.pointSize: 12
-                    color: palette.text
                 }
+            }
 
-
-                Image {
-                    id: upButton
-                    anchors{
-                        verticalCenter: parent.verticalCenter
-                        right: parent.right
-                    }
-                    width: Screen.pixelDensity * 6
-                    height: width
-                    source: "qrc:///material/drag.png"
-                    smooth: true
-                }
+            displaced: Transition {
+                NumberAnimation { properties: "x,y"; easing.type: Easing.OutQuad }
             }
         }
 
@@ -118,7 +168,7 @@ Kirigami.ScrollablePage {
 
             Image {
                 anchors.right: parent.right
-                anchors.bottom: root.bottom
+                anchors.bottom: column.bottom
                 width: 0.3 * parent.width
                 fillMode: Image.PreserveAspectFit
                 source: "qrc:/konqi/books.png"
@@ -128,7 +178,7 @@ Kirigami.ScrollablePage {
 
     Bookmarks {
         id: bookmarks
-        map: root.marbleQuickItem
+        map: marbleQuickItem
     }
 }
 
