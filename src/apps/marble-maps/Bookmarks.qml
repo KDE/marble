@@ -64,65 +64,137 @@ Kirigami.ScrollablePage {
                     drag.target: bookmarkRectangle
                     drag.axis: Drag.YAxis
 
-                    Rectangle {
-                        id: bookmarkRectangle
+                    SwipeDelegate {
+                        id: delegate
+                        text: model.display
                         width: parent.width
-                        height: Screen.pixelDensity * 2 + Math.max(text.height, imageButton.height)
-                        color: palette.base
 
-                        anchors {
-                            horizontalCenter: parent.horizontalCenter;
-                            verticalCenter: parent.verticalCenter
-                        }
-
-                        Drag.active: delegateRoot.drag.active
-                        Drag.source: delegateRoot
-                        Drag.hotSpot.x: 36
-                        Drag.hotSpot.y: 36
-
-                        Text {
-                            id: text
+                        contentItem: Rectangle {
+                            id: bookmarkRectangle
+                            width: parent.width
+                            height: Screen.pixelDensity * 2 + Math.max(text.height, imageButton.height)
+                            color: palette.basefconte
                             anchors {
-                                left: imageButton.right
-                                right: dragButton.left
-                                leftMargin: parent.width * 0.05
-                                verticalCenter: parent.verticalCenter
+                                horizontalCenter: parent.horizontalCenter;
                             }
-                            elide: Text.ElideMiddle
-                            text: model.display
-                            font.pointSize: 12
-                            color: palette.text
+
+                            Drag.active: delegateRoot.drag.active
+                            Drag.source: delegateRoot
+                            Drag.hotSpot.x: 36
+                            Drag.hotSpot.y: 36
+
+                            Text {
+                                id: text
+                                anchors {
+                                    left: imageButton.right
+                                    right: dragButton.left
+                                    leftMargin: parent.width * 0.05
+                                    verticalCenter: parent.verticalCenter
+                                }
+                                elide: Text.ElideMiddle
+                                text: model.display
+                                verticalAlignment: Qt.AlignVCenter
+
+                                font.pointSize: 12
+                                color: palette.text
+                            }
+
+                            Image {
+                                id: imageButton
+                                anchors {
+                                    left: bookmarksView.left
+                                    verticalCenter: parent.verticalCenter
+                                }
+                                source: "qrc:///material/place.svg"
+                                width: Screen.pixelDensity * 6
+                                verticalAlignment: Qt.AlignVCenter
+
+                                height: width
+                                smooth: true
+                            }
+
+                            ColorOverlay{
+                                anchors.fill: imageButton
+                                source: imageButton
+                                color: palette.highlight
+                            }
+
+                            Image {
+                                id: dragButton
+                                anchors{
+                                    verticalCenter: parent.verticalCenter
+                                    right: parent.right
+                                }
+                                width: Screen.pixelDensity * 6
+                                height: width
+                                source: "qrc:///material/drag.png"
+                                verticalAlignment: Qt.AlignVCenter
+
+                                smooth: true
+                            }
                         }
 
-                        Image {
-                            id: imageButton
-                            anchors {
-                                left: bookmarksView.left
-                                verticalCenter: parent.verticalCenter
-                            }
-                            source: "qrc:///material/place.svg"
-                            width: Screen.pixelDensity * 6
-                            height: width
-                            smooth: true
+                        background: Rectangle {
+                            width: parent.width
+                            height: parent.height
+                            opacity: enabled ? 1 : 0.3
+                            color: delegate.down ? "#dddedf" : "transparent"
                         }
 
-                        ColorOverlay{
-                            anchors.fill: imageButton
-                            source: imageButton
-                            color: palette.highlight
+
+                        swipe.behind: Rectangle {
+                            id: rect
+                            width: parent.width
+                            height: Screen.pixelDensity * 4
+                            clip: true
+                            color: SwipeDelegate.pressed ? "#555" : "transparent"
+
+                            Label {
+                                font.family: "Fontello"
+                                text: delegate.swipe.complete ? "\ue805" // icon-cw-circled
+                                                              : "\ue801" // icon-cancel-circled-1
+                                anchors.fill: parent
+                                horizontalAlignment: Qt.AlignRight
+
+                                opacity: 2 * -delegate.swipe.position
+                                color: Material.Red
+                                Behavior on color { ColorAnimation { } }
+                            }
+
+                            Rectangle{
+                                width: parent.width
+                                color: "#333333"
+                                height: parent.height
+                                z: 200
+                                Text {
+                                    font.pointSize: 10
+                                    text: qsTr("Removed")
+                                    color: "white"
+                                    padding: 20
+                                    anchors.fill: parent
+                                    horizontalAlignment: Qt.AlignRight
+                                    opacity: delegate.swipe.complete ? 1 : 0
+                                    Behavior on opacity {
+                                        NumberAnimation {}
+                                    }
+                                }
+
+                            }
+
+                            SwipeDelegate.onClicked: delegate.swipe.close()
+                            SwipeDelegate.onPressedChanged: undoTimer.stop()
                         }
 
-                        Image {
-                            id: dragButton
-                            anchors{
-                                verticalCenter: parent.verticalCenter
-                                right: parent.right
+                        Timer {
+                            id: undoTimer
+                            interval: 3600
+                            onTriggered: {
+                                var currentBookmark = bookmarks.placemark(index)
+                                bookmarks.removeBookmark(currentBookmark.longitude, currentBookmark.latitude)
                             }
-                            width: Screen.pixelDensity * 6
-                            height: width
-                            source: "qrc:///material/drag.png"
-                            smooth: true
                         }
+
+                        swipe.onCompleted: undoTimer.start()
 
                         states: [
                             State {
@@ -145,6 +217,13 @@ Kirigami.ScrollablePage {
                         anchors.fill: parent
                         onEntered: visualModel.items.move(drag.source.visualIndex, delegateRoot.visualIndex)
                     }
+                }
+            }
+
+            remove: Transition {
+                SequentialAnimation {
+                    PauseAnimation { duration: 125 }
+                    NumberAnimation { property: "height"; to: 0; easing.type: Easing.InOutQuad }
                 }
             }
 
