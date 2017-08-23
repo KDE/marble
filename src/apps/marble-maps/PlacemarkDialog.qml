@@ -24,14 +24,8 @@ Item {
     property alias showOsmTags: tagsView.visible
     property bool showAccessibility: false
 
-    height: placemark === null ? 0 : Screen.pixelDensity * 4 +
-                                 (infoLayout.height > bookmarkButton.height ? infoLayout.height : bookmarkButton.height)
+    height: placemark === null ? 0 : Screen.pixelDensity * 4 +infoLayout.height
 
-    onPlacemarkChanged: {
-        if (placemark) {
-            bookmarkButton.bookmark = bookmarks.isBookmark(placemark.longitude, placemark.latitude)
-        }
-    }
 
     SystemPalette {
         id: palette
@@ -55,7 +49,7 @@ Item {
         anchors {
             top: parent.top
             left: parent.left
-            right: bookmarkButton.left
+            right: parent.right
             margins: Screen.pixelDensity * 2
         }
 
@@ -167,34 +161,6 @@ Item {
         }
     }
 
-    Image {
-        id: bookmarkButton
-        anchors.right: parent.right
-        anchors.top: parent.top
-        anchors.margins: Screen.pixelDensity * 2
-        visible: root.height > 0
-
-        property bool bookmark: false
-
-        width: Screen.pixelDensity * 6
-        height: width
-        sourceSize.height: height
-        sourceSize.width: width
-        source: bookmark ? "qrc:/material/star.svg" : "qrc:/material/star_border.svg"
-
-        MouseArea {
-            id: touchArea
-            anchors.fill: parent
-            onClicked: {
-                if (bookmarkButton.bookmark) {
-                    bookmarks.removeBookmark(root.placemark.longitude, root.placemark.latitude)
-                } else {
-                    bookmarks.addBookmark(root.placemark, "Default")
-                }
-                bookmarkButton.bookmark = !bookmarkButton.bookmark
-            }
-        }
-    }
 
     Dialog {
         id: routesDialog

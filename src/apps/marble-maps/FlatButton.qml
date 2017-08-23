@@ -23,13 +23,15 @@ Button {
     }
 
     style: ButtonStyle {
-        background: Rectangle {
+        background: Item {
             anchors.fill: parent
-            color: root.pressed ? palette.highlight : palette.base
             Image {
                 id: icon
                 anchors.fill: parent
                 source: root.imageSource
+                smooth: true
+                sourceSize.width: width
+                sourceSize.height: height
             }
         }
     }

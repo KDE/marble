@@ -74,7 +74,7 @@ Item {
         anchors.right: parent.right
 
         placeholderText: qsTr("Search")
-        font.pointSize: 18
+        font.pointSize: 16
         textColor: palette.text
         inputMethodHints: Qt.ImhNoPredictiveText
         onAccepted: root.search(text)
@@ -137,7 +137,6 @@ Item {
             visible: !root.busy
             enabled: field.text !== ""
             imageSource: "qrc:///search.png"
-
             onClicked: root.search(field.text)
         }
     }

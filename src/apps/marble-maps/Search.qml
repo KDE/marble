@@ -8,7 +8,7 @@
 // Copyright 2015      Gábor Péterffy <peterffy95@gmail.com>
 //
 
-import QtQuick 2.3
+import QtQuick 2.7
 import QtQuick.Controls 2.0
 import QtQuick.Window 2.2
 
@@ -73,10 +73,8 @@ Item {
 
         Column {
             anchors.top: parent.top
-            anchors.topMargin: background.itemSpacing
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.margins: background.itemSpacing
             spacing: background.itemSpacing
 
             ListView {
@@ -92,6 +90,9 @@ Item {
                     width: bookmarksView.width
                     height: background.itemSpacing + Math.max(bookmarkIcon.height, bookmarkText.height)
                     spacing: background.itemSpacing
+
+                    leftPadding: 10
+                    rightPadding: 10
 
                     Image {
                         id: bookmarkIcon
@@ -109,7 +110,7 @@ Item {
                         anchors.leftMargin: Screen.pixelDensity * 2
                         width: bookmarksView.width - bookmarksView.spacing - bookmarkIcon.width
                         text: display
-                        font.pointSize: 18
+                        font.pointSize: 14
                         color: palette.text
                         elide: Text.ElideMiddle
 
@@ -136,20 +137,29 @@ Item {
             Row {
                 visible: bookmarksView.model.count === 0
                 width: parent.width
+                anchors.left: parent.left
+                anchors.right: parent.right
+                spacing: Screen.pixelDensity * 2
+                anchors.margins: Screen.pixelDensity * 2
 
                 Text {
                     anchors.bottom: parent.bottom
-                    width: 0.8 * parent.width
-                    font.pointSize: 18
+                    leftPadding: 10
+                    bottomPadding: 3
+                    width: parent.width - Screen.pixelDensity * 2 - emptyImage.width
+                    font.pointSize: 14
                     color: paletteDisabled.text
                     text: qsTr("Your bookmarks will appear here.")
+
                     wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                     elide: Text.ElideRight
                 }
 
                 Image {
+                    id: emptyImage
                     anchors.bottom: parent.bottom
-                    width: 0.2 * parent.width
+                    width: Screen.pixelDensity* 10
+
                     fillMode: Image.PreserveAspectFit
                     source: "qrc:/konqi/books.png"
                 }
@@ -169,13 +179,11 @@ Item {
 
     SearchField {
         id: searchField
-        width: parent.width - 2 * anchors.margins <= Screen.pixelDensity * 70 ?
-                   parent.width - 2 * anchors.margins
-                 : Screen.pixelDensity * 50
+        width: parent.width
         anchors {
             top: parent.top
             left: parent.left
-            margins: Screen.pixelDensity * 3
+            right: parent.right
         }
         completionModel: backend.completionModel
         onSearchRequested: backend.search(query)

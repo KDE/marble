@@ -93,5 +93,6 @@
         <file>MarbleScrollBar.qml</file>
         <file alias="material/phone.svg">material-icons/ic_phone_black_48px.svg</file>
         <file alias="material/drag.png">material-icons/ic_drag_handle_black_48dp.png</file>
+        <file>qtquickcontrols2.conf</file>
     </qresource>
 </RCC>
