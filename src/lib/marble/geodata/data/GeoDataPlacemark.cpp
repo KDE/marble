@@ -516,12 +516,15 @@ QString GeoDataPlacemark::categoryName() const
     case ShopDeli: return GeoDataPlacemarkPrivate::tr("Deli");
     case ShopTobacco: return GeoDataPlacemarkPrivate::tr("Tobacco Shop");
     case ShopTea: return GeoDataPlacemarkPrivate::tr("Tea Shop");
+    case ShopComputer: return GeoDataPlacemarkPrivate::tr("Computer Shop");
+    case ShopGardenCentre: return GeoDataPlacemarkPrivate::tr("Garden Centre");
     case Shop: return GeoDataPlacemarkPrivate::tr("Shop");
     case ManmadeBridge: return GeoDataPlacemarkPrivate::tr("Bridge");
     case ManmadeLighthouse: return GeoDataPlacemarkPrivate::tr("Lighthouse");
     case ManmadePier: return GeoDataPlacemarkPrivate::tr("Pier");
     case ManmadeWaterTower: return GeoDataPlacemarkPrivate::tr("Water Tower");
     case ManmadeWindMill: return GeoDataPlacemarkPrivate::tr("Wind Mill");
+    case ManmadeCommunicationsTower: return GeoDataPlacemarkPrivate::tr("Communications Tower");
     case TourismAttraction: return GeoDataPlacemarkPrivate::tr("Tourist Attraction");
     case TourismArtwork: return GeoDataPlacemarkPrivate::tr("Artwork");
     case HistoricCastle: return GeoDataPlacemarkPrivate::tr("Castle");
@@ -571,6 +574,7 @@ QString GeoDataPlacemark::categoryName() const
     case ReligionJewish: return GeoDataPlacemarkPrivate::tr("Jewish");
     case ReligionShinto: return GeoDataPlacemarkPrivate::tr("Shinto");
     case ReligionSikh: return GeoDataPlacemarkPrivate::tr("Sikh");
+    case ReligionTaoist: return GeoDataPlacemarkPrivate::tr("Taoist");
     case LeisureGolfCourse: return GeoDataPlacemarkPrivate::tr("Golf Course");
     case LeisureMarina: return GeoDataPlacemarkPrivate::tr("Marina");
     case LeisurePark: return GeoDataPlacemarkPrivate::tr("Park");
