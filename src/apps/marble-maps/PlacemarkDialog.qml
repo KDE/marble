@@ -166,7 +166,7 @@ Item {
     Kirigami.OverlaySheet {
         id: routesDialog
         ColumnLayout {
-            property int implicitWidth: root.width//Units.gridUnit * 30
+            property int implicitWidth: root.width
             id: columnLayout
             Label{
                 Layout.fillWidth: true
