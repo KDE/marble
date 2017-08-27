@@ -14,6 +14,8 @@ import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.3
 import QtQuick.Dialogs 1.2
 
+import org.kde.kirigami 2.0 as Kirigami
+
 import org.kde.marble 0.20
 
 Item {
@@ -161,15 +163,23 @@ Item {
         }
     }
 
-
-    Dialog {
+    Kirigami.OverlaySheet {
         id: routesDialog
-        title: qsTr("Routes")
-        RoutesItem {
-            id: routesItem
-            implicitWidth: parent.width
-            model: placemark === null ? undefined : placemark.routeRelationModel
-            onHighlightChanged: map.highlightRouteRelation(oid, enabled)
+        ColumnLayout {
+            property int implicitWidth: root.width//Units.gridUnit * 30
+            id: columnLayout
+            Label{
+                Layout.fillWidth: true
+                text: qsTr("<h2>Routes</h2>")
+
+            }
+            RoutesItem {
+                id: routesItem
+                Layout.fillWidth: true
+                model: placemark === null ? undefined : placemark.routeRelationModel
+                onHighlightChanged: map.highlightRouteRelation(oid, enabled)
+            }
+
         }
     }
 }
