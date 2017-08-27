@@ -87,8 +87,8 @@ Kirigami.Page {
 
                                 Drag.active: delegateRoot.drag.active
                                 Drag.source: delegateRoot
-                                Drag.hotSpot.x: 50 //150
-                                Drag.hotSpot.y: 50 //150
+                                Drag.hotSpot.x: 50
+                                Drag.hotSpot.y: 50
                                 color: "transparent"
 
                                 Text{
@@ -242,6 +242,4 @@ Kirigami.Page {
         id: bookmarks
         map: marbleQuickItem
     }
-
-    //onMapChanged: bookmarks.map = map
 }
