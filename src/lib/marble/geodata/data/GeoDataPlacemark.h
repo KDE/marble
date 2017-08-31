@@ -512,6 +512,10 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
 
         BoundaryMaritime,
 
+        IndoorDoor,
+        IndoorWall,
+        IndoorRoom,
+
         //Custom OSM Tags
         Landmass,
         UrbanArea,

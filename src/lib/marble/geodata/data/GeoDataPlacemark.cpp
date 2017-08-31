@@ -667,6 +667,9 @@ QString GeoDataPlacemark::categoryName() const
     case CrossingIsland: return GeoDataPlacemarkPrivate::tr("Crosswalk");
     case CrossingZebra: return GeoDataPlacemarkPrivate::tr("Crosswalk");
     case CrossingRailway: return GeoDataPlacemarkPrivate::tr("Railway Crossing");
+    case IndoorDoor: return GeoDataPlacemarkPrivate::tr("Door");
+    case IndoorWall: return GeoDataPlacemarkPrivate::tr("Wall");
+    case IndoorRoom: return GeoDataPlacemarkPrivate::tr("Room");
 
     case Default:
     case Unknown:

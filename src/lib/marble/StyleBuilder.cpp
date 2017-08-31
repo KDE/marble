@@ -1087,6 +1087,10 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::ReligionSikh]             = createOsmPOIStyle(osmFont, "black/sikhist.16");
     m_defaultStyle[GeoDataPlacemark::ReligionTaoist]           = createOsmPOIStyle(osmFont, "black/taoist.16");
 
+    m_defaultStyle[GeoDataPlacemark::IndoorDoor]               = createOsmPOIRingStyle(osmFont, "indoor/door_b.16");
+    m_defaultStyle[GeoDataPlacemark::IndoorWall]               = createOsmPOIStyle(osmFont, "indoor/wall_b.16");
+    m_defaultStyle[GeoDataPlacemark::IndoorRoom]               = createWayStyle(buildingColor.darker(), QColor(Qt::black));
+
     m_defaultStyle[GeoDataPlacemark::HighwayTrafficSignals]    = createOsmPOIStyle(osmFont, "individual/traffic_light");
     m_defaultStyle[GeoDataPlacemark::HighwayTrafficSignals]->iconStyle().setScale(0.75);
 
@@ -1693,6 +1697,10 @@ void StyleBuilder::Private::initializeOsmVisualCategories()
     s_visualCategories[OsmTag("aerialway", "zip_line")]         = GeoDataPlacemark::AerialwayZipLine;
     s_visualCategories[OsmTag("aerialway", "goods")]            = GeoDataPlacemark::AerialwayGoods;
 
+    s_visualCategories[OsmTag("indoor", "door")]                = GeoDataPlacemark::IndoorDoor;
+    s_visualCategories[OsmTag("indoor", "wall")]                = GeoDataPlacemark::IndoorWall;
+    s_visualCategories[OsmTag("indoor", "room")]                = GeoDataPlacemark::IndoorRoom;
+
     //Custom Marble OSM Tags
     s_visualCategories[OsmTag("marble_land", "landmass")]       = GeoDataPlacemark::Landmass;
     s_visualCategories[OsmTag("settlement", "yes")]             = GeoDataPlacemark::UrbanArea;
@@ -2006,6 +2014,10 @@ void StyleBuilder::Private::initializeMinimumZoomLevels()
     s_defaultMinZoomLevels[GeoDataPlacemark::AerialwayMagicCarpet] = 15;
     s_defaultMinZoomLevels[GeoDataPlacemark::AerialwayZipLine] = 15;
     s_defaultMinZoomLevels[GeoDataPlacemark::AerialwayGoods] = 15;
+
+    s_defaultMinZoomLevels[GeoDataPlacemark::IndoorDoor] = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::IndoorWall] = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::IndoorRoom] = 15;
 
     for (int i = GeoDataPlacemark::PlaceCity; i < GeoDataPlacemark::LastIndex; i++) {
         if (s_defaultMinZoomLevels[i] < 0) {
@@ -2822,6 +2834,9 @@ QString StyleBuilder::visualCategoryName(GeoDataPlacemark::GeoDataVisualCategory
         visualCategoryNames[GeoDataPlacemark::CrossingRailway] = "CrossingRailway";
         visualCategoryNames[GeoDataPlacemark::CrossingSignals] = "CrossingSignals";
         visualCategoryNames[GeoDataPlacemark::CrossingZebra] = "CrossingZebra";
+        visualCategoryNames[GeoDataPlacemark::IndoorDoor] = "IndoorDoor";
+        visualCategoryNames[GeoDataPlacemark::IndoorWall] = "IndoorWall";
+        visualCategoryNames[GeoDataPlacemark::IndoorRoom] = "IndoorRoom";
         visualCategoryNames[GeoDataPlacemark::LastIndex] = "LastIndex";
     }
 
