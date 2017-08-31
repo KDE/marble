@@ -14,6 +14,8 @@ import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.3
 import QtQuick.Dialogs 1.2
 
+import org.kde.kirigami 2.0 as Kirigami
+
 import org.kde.marble 0.20
 
 Item {
@@ -24,14 +26,8 @@ Item {
     property alias showOsmTags: tagsView.visible
     property bool showAccessibility: false
 
-    height: placemark === null ? 0 : Screen.pixelDensity * 4 +
-                                 (infoLayout.height > bookmarkButton.height ? infoLayout.height : bookmarkButton.height)
+    height: placemark === null ? 0 : Screen.pixelDensity * 4 +infoLayout.height
 
-    onPlacemarkChanged: {
-        if (placemark) {
-            bookmarkButton.bookmark = bookmarks.isBookmark(placemark.longitude, placemark.latitude)
-        }
-    }
 
     SystemPalette {
         id: palette
@@ -55,7 +51,7 @@ Item {
         anchors {
             top: parent.top
             left: parent.left
-            right: bookmarkButton.left
+            right: parent.right
             margins: Screen.pixelDensity * 2
         }
 
@@ -167,43 +163,23 @@ Item {
         }
     }
 
-    Image {
-        id: bookmarkButton
-        anchors.right: parent.right
-        anchors.top: parent.top
-        anchors.margins: Screen.pixelDensity * 2
-        visible: root.height > 0
-
-        property bool bookmark: false
-
-        width: Screen.pixelDensity * 6
-        height: width
-        sourceSize.height: height
-        sourceSize.width: width
-        source: bookmark ? "qrc:/material/star.svg" : "qrc:/material/star_border.svg"
-
-        MouseArea {
-            id: touchArea
-            anchors.fill: parent
-            onClicked: {
-                if (bookmarkButton.bookmark) {
-                    bookmarks.removeBookmark(root.placemark.longitude, root.placemark.latitude)
-                } else {
-                    bookmarks.addBookmark(root.placemark, "Default")
-                }
-                bookmarkButton.bookmark = !bookmarkButton.bookmark
-            }
-        }
-    }
-
-    Dialog {
+    Kirigami.OverlaySheet {
         id: routesDialog
-        title: qsTr("Routes")
-        RoutesItem {
-            id: routesItem
-            implicitWidth: parent.width
-            model: placemark === null ? undefined : placemark.routeRelationModel
-            onHighlightChanged: map.highlightRouteRelation(oid, enabled)
+        ColumnLayout {
+            property int implicitWidth: root.width
+            id: columnLayout
+            Label{
+                Layout.fillWidth: true
+                text: qsTr("<h2>Routes</h2>")
+
+            }
+            RoutesItem {
+                id: routesItem
+                Layout.fillWidth: true
+                model: placemark === null ? undefined : placemark.routeRelationModel
+                onHighlightChanged: map.highlightRouteRelation(oid, enabled)
+            }
+
         }
     }
 }

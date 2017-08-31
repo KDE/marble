@@ -30,6 +30,8 @@
         <file>SidePanel.qml</file>
         <file>PublicTransport.qml</file>
         <file>OutdoorActivities.qml</file>
+        <file>Options.qml</file>
+        <file>Bookmarks.qml</file>
         <file>drawer.svg</file>
         <file alias="search.png">../../../data/android/drawable-xxxhdpi/search.png</file>
         <file alias="menu.png">../../../data/android/drawable-xxxhdpi/ic_menu_black_48dp.png</file>
@@ -90,5 +92,6 @@
         <file>RouteProfileRadioButton.qml</file>
         <file>MarbleScrollBar.qml</file>
         <file alias="material/phone.svg">material-icons/ic_phone_black_48px.svg</file>
+        <file alias="material/drag.png">material-icons/ic_drag_handle_black_48dp.png</file>
     </qresource>
 </RCC>

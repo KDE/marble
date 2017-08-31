@@ -12,5 +12,7 @@
  "android-package": "@QT_ANDROID_APP_PACKAGE_NAME@",
  "android-app-name": "@QT_ANDROID_APP_NAME@",
  "android-extra-libs": "@QT_ANDROID_APP_EXTRA_LIBS@",
+ "qml-root-path": "@QML_ROOT_PATH@",
+ "android-extra-plugins": "@QT_ANDROID_APP_EXTRA_PLUGINS@",
  "android-package-source-directory": "@QT_ANDROID_APP_PACKAGE_SOURCE_ROOT@"
 }
