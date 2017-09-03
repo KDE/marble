@@ -219,6 +219,7 @@ QVariant TargetModel::bookmarkData ( int index, int role ) const
         if ( folder ) {
             return QString(folder->name() + QLatin1String(" / ") + m_bookmarks[index]->name());
         }
+        return QVariant();
     }
     case Qt::DecorationRole: return QIcon(QStringLiteral(":/icons/bookmarks.png"));
     case MarblePlacemarkModel::CoordinateRole: return qVariantFromValue( m_bookmarks[index]->lookAt()->coordinates() );
