@@ -1088,7 +1088,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::ReligionTaoist]           = createOsmPOIStyle(osmFont, "black/taoist.16");
 
     m_defaultStyle[GeoDataPlacemark::IndoorDoor]               = createOsmPOIRingStyle(osmFont, "indoor/door_b.16");
-    m_defaultStyle[GeoDataPlacemark::IndoorWall]               = createOsmPOIStyle(osmFont, "indoor/wall_b.16");
+    m_defaultStyle[GeoDataPlacemark::IndoorWall]               = createOsmPOIStyle(osmFont, QString());
     m_defaultStyle[GeoDataPlacemark::IndoorRoom]               = createWayStyle(buildingColor.darker(), QColor(Qt::black));
 
     m_defaultStyle[GeoDataPlacemark::HighwayTrafficSignals]    = createOsmPOIStyle(osmFont, "individual/traffic_light");
@@ -2015,9 +2015,9 @@ void StyleBuilder::Private::initializeMinimumZoomLevels()
     s_defaultMinZoomLevels[GeoDataPlacemark::AerialwayZipLine] = 15;
     s_defaultMinZoomLevels[GeoDataPlacemark::AerialwayGoods] = 15;
 
-    s_defaultMinZoomLevels[GeoDataPlacemark::IndoorDoor] = 15;
-    s_defaultMinZoomLevels[GeoDataPlacemark::IndoorWall] = 15;
-    s_defaultMinZoomLevels[GeoDataPlacemark::IndoorRoom] = 15;
+    s_defaultMinZoomLevels[GeoDataPlacemark::IndoorDoor] = 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::IndoorWall] = 17;
+    s_defaultMinZoomLevels[GeoDataPlacemark::IndoorRoom] = 17;
 
     for (int i = GeoDataPlacemark::PlaceCity; i < GeoDataPlacemark::LastIndex; i++) {
         if (s_defaultMinZoomLevels[i] < 0) {
