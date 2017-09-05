@@ -85,6 +85,7 @@ Notes:
     <comment xml:lang="nb">OSM-data</comment>
     <comment xml:lang="nds">OSM-Daten</comment>
     <comment xml:lang="nl">OSM-gegevens</comment>
+    <comment xml:lang="nn">OSM-data</comment>
     <comment xml:lang="pl">Dane OSM</comment>
     <comment xml:lang="pt">Dados do OSM</comment>
     <comment xml:lang="pt_BR">Dados OSM</comment>
@@ -133,6 +134,7 @@ Notes:
     <comment xml:lang="nb">ESRI formfil</comment>
     <comment xml:lang="nds">ESRI-Ümreetdatei</comment>
     <comment xml:lang="nl">ESRI vormbestand</comment>
+    <comment xml:lang="nn">ESRI-shapefile</comment>
     <comment xml:lang="pl">Plik kształtu ESRI</comment>
     <comment xml:lang="pt">Ficheiro de formas da ESRI</comment>
     <comment xml:lang="pt_BR">Shapefile ESRI</comment>
@@ -176,6 +178,7 @@ Notes:
     <comment xml:lang="nb">ESRI formfil-indeks</comment>
     <comment xml:lang="nds">ESRI-Ümreetdatei-Index</comment>
     <comment xml:lang="nl">Index van ESRI vormbestand</comment>
+    <comment xml:lang="nn">ESRI-shapefile-indeks</comment>
     <comment xml:lang="pl">Indeks pliku kształtu ESRI</comment>
     <comment xml:lang="pt">Índice de formas da ESRI</comment>
     <comment xml:lang="pt_BR">Índice de Shapefile ESRI</comment>
