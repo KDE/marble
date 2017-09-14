@@ -186,9 +186,10 @@ void GeoGraphicsScene::applyHighlight( const QVector< GeoDataPlacemark* > &selec
      */
     for( const GeoDataPlacemark *placemark: selectedPlacemarks ) {
         for (auto tileIter = d->m_features.find(placemark); tileIter != d->m_features.end() && tileIter.key() == placemark; ++tileIter) {
-            auto const & clickedItems = d->m_tiledItems[*tileIter];
-            auto iter = clickedItems.find(placemark);
-            if (iter != clickedItems.end()) {
+            auto const & clickedItemsList = d->m_tiledItems.values(*tileIter);
+            for (auto const & clickedItems: clickedItemsList) { //iterate through FeatureItemMap clickedItems (QHash)
+                for (auto iter = clickedItems.find(placemark); iter != clickedItems.end(); ++iter) {
+                    if ( iter.key() == placemark ) {
                 const GeoDataObject *parent = placemark->parent();
                 if ( parent ) {
                     auto item = *iter;
@@ -218,6 +219,8 @@ void GeoGraphicsScene::applyHighlight( const QVector< GeoDataPlacemark* > &selec
                                     d->applyHighlightStyle( item, style );
                                     break;
                                 }
+                            }
+                        }
                             }
                         }
                     }
@@ -270,7 +273,7 @@ void GeoGraphicsScene::addItem( GeoGraphicsItem* item )
 
     auto & tileList = d->m_tiledItems[key];
     auto feature = item->feature();
-    tileList.insert(feature, item);
+    tileList.insertMulti(feature, item);
     d->m_features.insert(feature, key );
 }
 
