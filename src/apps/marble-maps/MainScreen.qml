@@ -72,7 +72,7 @@ Kirigami.ApplicationWindow {
     property bool aboutToQuit: false
 
     onClosing: {
-        if (app.aboutToQuit === true) {
+        if (app.aboutToQuit) {
             close.accepted = true // we will quit
             return
         } else if (sidePanel.drawerOpen) {
@@ -83,12 +83,11 @@ Kirigami.ApplicationWindow {
             navigationManager.visible = false
         } else if (app.state !== "none") {
             app.state = "none"
-        }
-        else if(search.searchResultsVisible.visible === true && !sidePanel.drawerOpen){
+        } else if(search.searchResultsVisible.visible){
             search.searchResultsVisible = false
         }
         else {
-            if(search.searchResultsVisible === true){
+            if(search.searchResultsVisible){
                 search.searchResultsVisible = false
             }
             app.aboutToQuit = true
@@ -449,99 +448,99 @@ Kirigami.ApplicationWindow {
         }
 
 
+        Row {
+            id: bottomMenu
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.bottom: dialogLoader.top
+            width: parent.width
+            height: bottomMenu.visible ? routeEditorButton.height + Screen.pixelDensity * 2 : 0
+            anchors.topMargin: app.animatedMargin
+            visible: app.state === "place" || app.state === "route"
+
+            onVisibleChanged: bottomMenuAnimation.start()
+
+            NumberAnimation {
+                id: bottomMenuAnimation
+                target: bottomMenu
+                property: "y"
+                from: app.height - bottomMenu.height
+                to: 0
+                duration: 500
+                easing.type: Easing.InExpo
+            }
+
+            Item {
+                id: bottomMenuBackground
+                anchors.fill: parent
+                Rectangle {
+                    color: Material.accent
+                    anchors.fill : parent
+                }
+            }
+
             Row {
-                id: bottomMenu
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.bottom: dialogLoader.top
-                width: parent.width
-                height: bottomMenu.visible ? routeEditorButton.height + Screen.pixelDensity * 2 : 0
-                anchors.topMargin: app.animatedMargin
-                visible: app.state === "place" || app.state === "route"
+                anchors.centerIn: parent
+                spacing: Kirigami.Units.gridUnit * 2
 
-                onVisibleChanged: bottomMenuAnimation.start()
+                FlatButton {
+                    id: routeEditorButton
+                    property string currentProfileIcon: "qrc:///material/directions-car.svg"
+                    height: Screen.pixelDensity * 6
+                    width: height
+                    enabled: app.state !== "route" || routingManager.hasRoute
+                    imageSource: "qrc:///material/directions.svg"
 
-                NumberAnimation {
-                    id: bottomMenuAnimation
-                    target: bottomMenu
-                    property: "y"
-                    from: app.height - bottomMenu.height
-                    to: 0
-                    duration: 500
-                    easing.type: Easing.InExpo
+                    onClicked: {
+                        if (app.state === "route") {
+                            app.state = "none"
+                            navigationManager.visible = true
+                        } else if (app.state === "place") {
+                            app.state = "route"
+                            routingManager.addToRoute()
+                        } else {
+                            app.state = "route"
+                            navigationManager.visible = false
+                        }
+                    }
+                    states: [
+                        State {
+                            name: ""
+                            PropertyChanges { target: routeEditorButton; imageSource: "qrc:///material/directions.svg"; }
+                        },
+                        State {
+                            name: "routingAction"
+                            when: app.state === "route"
+                            PropertyChanges { target: routeEditorButton; imageSource: "qrc:///material/navigation.svg"; }
+                        },
+                        State {
+                            name: "placeAction"
+                            when: app.state === "place"
+                            PropertyChanges { target: routeEditorButton; imageSource: "qrc:///material/directions.svg" }
+                        }
+                    ]
                 }
 
-                Item {
-                    id: bottomMenuBackground
-                    anchors.fill: parent
-                    Rectangle {
-                        color: Material.accent
-                        anchors.fill : parent
-                    }
-                }
-
-                Row {
-                    anchors.centerIn: parent
-                    spacing: Kirigami.Units.gridUnit * 2
-
-                    FlatButton {
-                        id: routeEditorButton
-                        property string currentProfileIcon: "qrc:///material/directions-car.svg"
-                        height: Screen.pixelDensity * 6
-                        width: height
-                        enabled: app.state !== "route" || routingManager.hasRoute
-                        imageSource: "qrc:///material/directions.svg"
-
-                        onClicked: {
-                            if (app.state === "route") {
-                                app.state = "none"
-                                navigationManager.visible = true
-                            } else if (app.state === "place") {
-                                app.state = "route"
-                                routingManager.addToRoute()
-                            } else {
-                                app.state = "route"
-                                navigationManager.visible = false
-                            }
+                FlatButton {
+                    id: bookmarkButton
+                    anchors.verticalCenter: parent.verticalCenter
+                    height: Screen.pixelDensity * 6
+                    width: height
+                    property bool bookmark: bookmarks.isBookmark(app.selectedPlacemark.longitude, app.selectedPlacemark.latitude)
+                    enabled: app.state === "place"
+                    visible: app.state === "place"
+                    imageSource: bookmark ? "qrc:///material/star.svg" : "qrc:///material/star_border.svg"
+                    onClicked: {
+                        if (bookmarkButton.bookmark) {
+                            bookmarks.removeBookmark(app.selectedPlacemark.longitude, app.selectedPlacemark.latitude)
+                        } else {
+                            bookmarks.addBookmark(app.selectedPlacemark, "Default")
                         }
-                        states: [
-                            State {
-                                name: ""
-                                PropertyChanges { target: routeEditorButton; imageSource: "qrc:///material/directions.svg"; }
-                            },
-                            State {
-                                name: "routingAction"
-                                when: app.state === "route"
-                                PropertyChanges { target: routeEditorButton; imageSource: "qrc:///material/navigation.svg"; }
-                            },
-                            State {
-                                name: "placeAction"
-                                when: app.state === "place"
-                                PropertyChanges { target: routeEditorButton; imageSource: "qrc:///material/directions.svg" }
-                            }
-                        ]
-                    }
-
-                    FlatButton {
-                        id: bookmarkButton
-                        anchors.verticalCenter: parent.verticalCenter
-                        height: Screen.pixelDensity * 6
-                        width: height
-                        property bool bookmark: bookmarks.isBookmark(app.selectedPlacemark.longitude, app.selectedPlacemark.latitude)
-                        enabled: app.state === "place"
-                        visible: app.state === "place"
-                        imageSource: bookmark ? "qrc:///material/star.svg" : "qrc:///material/star_border.svg"
-                        onClicked: {
-                            if (bookmarkButton.bookmark) {
-                                bookmarks.removeBookmark(app.selectedPlacemark.longitude, app.selectedPlacemark.latitude)
-                            } else {
-                                bookmarks.addBookmark(app.selectedPlacemark, "Default")
-                            }
-                            bookmarkButton.bookmark = !bookmarkButton.bookmark
-                        }
+                        bookmarkButton.bookmark = !bookmarkButton.bookmark
                     }
                 }
             }
+        }
 
 
         BorderImage {
