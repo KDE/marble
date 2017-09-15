@@ -22,6 +22,7 @@
 #include <QSet>
 #include <QMap>
 #include <QVector>
+#include <QPointer>
 
 #include "GeoDataPlacemark.h"
 #include <GeoDataStyle.h>
@@ -167,7 +168,7 @@ class PlacemarkLayout : public QObject
     int     m_maxLabelHeight;
     bool    m_styleResetRequested;
     const StyleBuilder* m_styleBuilder;
-    VisiblePlacemark* m_lastPlacemarkAt;
+    QPointer<VisiblePlacemark> m_lastPlacemarkAt;
 };
 
 }
