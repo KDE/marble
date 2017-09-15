@@ -64,7 +64,7 @@ Item {
         anchors.top: searchField.bottom
         anchors.left: searchField.left
         width: searchField.width
-        height: childrenRect.height + 2 * itemSpacing
+        height: childrenRect.height
         color: palette.base
 
         property int delegateHeight: 0
@@ -81,11 +81,25 @@ Item {
                 id: bookmarksView
                 anchors.left: parent.left
                 anchors.right: parent.right
-                height: background.delegateHeight * Math.min(6, model.count)
+                height: background.delegateHeight * Math.min(6, model.count) + 2 * background.itemSpacing
                 clip: true
                 ScrollIndicator.vertical: ScrollIndicator { }
 
                 model: bookmarks.model
+
+                MouseArea {
+                    anchors.bottom: parent.bottom
+                    height: 2 * background.itemSpacing
+                    width: parent.width
+                    visible: bookmarks.model.count <= 6
+                    onClicked: {
+                        app.selectedPlacemark = bookmarks.placemark(bookmarks.model.count - 1)
+                        itemSelected(bookmarks.placemark(bookmarks.model.count - 1))
+                        marbleMaps.centerOn(selectedPlacemark.longitude, selectedPlacemark.latitude)
+                        dialogLoader.focus = true
+                    }
+                }
+
                 delegate: Row {
                     width: bookmarksView.width
                     height: background.itemSpacing + Math.max(bookmarkIcon.height, bookmarkText.height)
