@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle" >
+            <solid android:color="#FFFFFF"/>
+        </shape>
+    </item>
+    <item android:width="100dp" android:height="100dp" android:gravity="center">
+        <bitmap
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/marblelogo" />
+    </item>
+</layer-list>
