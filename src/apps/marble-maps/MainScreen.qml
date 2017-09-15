@@ -19,7 +19,7 @@ import QtQuick.Controls.Material 2.0
 import org.kde.marble 0.20
 import org.kde.kirigami 2.0 as Kirigami
 
-Kirigami.ApplicationWindow {
+Kirigami.AbstractApplicationWindow {
     id: app
     title: qsTr("Marble Maps")
     visible: true
@@ -196,8 +196,10 @@ Kirigami.ApplicationWindow {
         }
     }
 
-    pageStack.initialPage: page
-    pageStack.interactive: false
+    pageStack: StackView {
+        anchors.fill: parent
+        initialItem: page
+    }
 
     Kirigami.Page {
         id: page
