@@ -123,7 +123,7 @@ PlacemarkLayout::PlacemarkLayout( QAbstractItemModel  *placemarkModel,
       m_maxLabelHeight(maxLabelHeight()),
       m_styleResetRequested( true ),
       m_styleBuilder(styleBuilder),
-      m_lastPlacemarkAt(nullptr)
+      m_lastPlacemarkAvailable(false)
 {
     Q_ASSERT(m_placemarkModel);
 
@@ -197,7 +197,9 @@ void PlacemarkLayout::styleReset()
 void PlacemarkLayout::clearCache()
 {
     m_paintOrder.clear();
-    m_lastPlacemarkAt = nullptr;
+    m_lastPlacemarkAvailable = false;
+    m_lastPlacemarkLabelRect = QRectF();
+    m_lastPlacemarkSymbolRect = QRectF();
     m_labelArea = 0;
     qDeleteAll( m_visiblePlacemarks );
     m_visiblePlacemarks.clear();
@@ -376,7 +378,9 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParam
         m_rowsection.resize(secnumber);
 
         m_paintOrder.clear();
-        m_lastPlacemarkAt = nullptr;
+        m_lastPlacemarkAvailable = false;
+        m_lastPlacemarkLabelRect = QRectF();
+        m_lastPlacemarkSymbolRect = QRectF();
         m_labelArea = 0;
 
         // First handle the selected placemarks as they have the highest priority.
@@ -541,14 +545,16 @@ bool PlacemarkLayout::hasPlacemarkAt(const QPoint &pos)
         styleReset();
     }
 
-    if (m_lastPlacemarkAt &&
-            (m_lastPlacemarkAt->labelRect().contains(pos) || m_lastPlacemarkAt->symbolRect().contains(pos))) {
+    if (m_lastPlacemarkAvailable &&
+            (m_lastPlacemarkLabelRect.contains(pos) || m_lastPlacemarkSymbolRect.contains(pos))) {
         return true;
     }
 
     for(VisiblePlacemark* mark: m_paintOrder) {
         if (mark->labelRect().contains(pos) || mark->symbolRect().contains(pos)) {
-            m_lastPlacemarkAt = mark;
+            m_lastPlacemarkLabelRect = mark->labelRect();
+            m_lastPlacemarkSymbolRect = mark->symbolRect();
+            m_lastPlacemarkAvailable = true;
             return true;
         }
     }

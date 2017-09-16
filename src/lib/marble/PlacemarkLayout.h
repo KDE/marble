@@ -168,7 +168,11 @@ class PlacemarkLayout : public QObject
     int     m_maxLabelHeight;
     bool    m_styleResetRequested;
     const StyleBuilder* m_styleBuilder;
-    QPointer<VisiblePlacemark> m_lastPlacemarkAt;
+    // Referencing these properties by value
+    // instead of using a more fragile pointer
+    bool m_lastPlacemarkAvailable;
+    QRectF m_lastPlacemarkLabelRect;
+    QRectF m_lastPlacemarkSymbolRect;
 };
 
 }
