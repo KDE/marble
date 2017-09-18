@@ -5,11 +5,11 @@
             <solid android:color="#FFFFFF"/>
         </shape>
     </item>
-    <item android:width="100dp" android:height="100dp" android:gravity="center">
+    <item android:width="256dp" android:height="256dp" android:gravity="center">
         <bitmap
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:scaleType="fitXY"
-            android:src="@drawable/marblelogo" />
+            android:src="@drawable/splash_logo" />
     </item>
 </layer-list>
