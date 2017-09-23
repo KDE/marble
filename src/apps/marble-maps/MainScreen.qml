@@ -146,7 +146,6 @@ Kirigami.AbstractApplicationWindow {
                 iconName: "qrc:///material/wheelchair.svg"
                 onTriggered: {
                     sidePanelSettings.value("MarbleMaps", "showAccessibility", "false") === "true"
-
                 }
             },
             Kirigami.Action{ enabled: false},
@@ -214,8 +213,7 @@ Kirigami.AbstractApplicationWindow {
             id: mapItem
 
             width: parent.width
-            height: dialogLoader.height === 0 ? parent.height - bottomMenu.height : parent.height - dialogLoader.height - bottomMenu.height
-
+            height: parent.height - dialogLoader.height - bottomMenu.height
 
             PinchArea {
                 anchors.fill: parent
@@ -233,7 +231,6 @@ Kirigami.AbstractApplicationWindow {
                     property bool smallZoom : radius < 2 * Math.max(app.width, app.height)
 
                     anchors.fill: parent
-
                     visible: true
 
                     // Theme settings.
@@ -397,8 +394,6 @@ Kirigami.AbstractApplicationWindow {
                             mouse.accepted = false;
                         }
                     }
-
-
                 }
 
                 NavigationManager {
