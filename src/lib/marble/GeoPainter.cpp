@@ -548,7 +548,7 @@ QRegion GeoPainter::regionFromPixmapRect(const GeoDataCoordinates & centerCoordi
 }
 
 void GeoPainter::polygonsFromLineString( const GeoDataLineString &lineString,
-                                         QVector<QPolygonF*> &polygons )
+                                         QVector<QPolygonF*> &polygons ) const
 {
     // Immediately leave this method now if:
     // - the object is not visible in the viewport or if

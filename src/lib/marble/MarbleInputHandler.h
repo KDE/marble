@@ -130,9 +130,9 @@ class MARBLE_EXPORT MarbleDefaultInputHandler  : public MarbleInputHandler
     bool handlePinch(const QPointF &center, qreal scaleFactor, Qt::GestureState state);
 
     //FIXME - refactor (abstraction & composition)
-    QPointer<AbstractDataPluginItem> lastToolTipItem();
+    const AbstractDataPluginItem *lastToolTipItem() const;
     QTimer* toolTipTimer();
-    QPoint toolTipPosition();
+    QPoint toolTipPosition() const;
 
     virtual bool handleKeyPress(QKeyEvent *e);
     virtual void handleMouseButtonPressAndHold(const QPoint &position);

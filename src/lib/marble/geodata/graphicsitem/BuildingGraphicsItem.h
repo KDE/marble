@@ -35,10 +35,10 @@ private:
     bool configurePainterForFrame(GeoPainter *painter) const;
     void initializeBuildingPainting(const GeoPainter* painter, const ViewportParams *viewport,
                                     bool &drawAccurate3D, bool &isCameraAboveBuilding) const;
-    void updatePolygons( const ViewportParams *viewport,
+    void updatePolygons(const ViewportParams &viewport,
                          QVector<QPolygonF*>& outlinePolygons,
                          QVector<QPolygonF*>& innerPolygons,
-                         bool &hasInnerBoundaries);
+                         bool &hasInnerBoundaries) const;
 
     QPointF buildingOffset(const QPointF &point, const ViewportParams *viewport, bool* isCameraAboveBuilding = nullptr) const;
 

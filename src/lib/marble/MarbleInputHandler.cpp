@@ -973,7 +973,7 @@ void MarbleDefaultInputHandler::handlePressAndHold()
     handleMouseButtonPressAndHold(QPoint(d->m_leftPressedX, d->m_leftPressedY));
 }
 
-QPointer<AbstractDataPluginItem> MarbleDefaultInputHandler::lastToolTipItem()
+const AbstractDataPluginItem *MarbleDefaultInputHandler::lastToolTipItem() const
 {
     return d->m_lastToolTipItem;
 }
@@ -983,7 +983,7 @@ QTimer* MarbleDefaultInputHandler::toolTipTimer()
     return &d->m_toolTipTimer;
 }
 
-QPoint MarbleDefaultInputHandler::toolTipPosition()
+QPoint MarbleDefaultInputHandler::toolTipPosition() const
 {
     return d->m_toolTipPosition;
 }

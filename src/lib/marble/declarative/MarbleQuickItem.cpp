@@ -523,7 +523,7 @@ namespace Marble
         return d->m_model.positionTracking()->status() == PositionProviderStatusAvailable;
     }
 
-    bool MarbleQuickItem::positionVisible()
+    bool MarbleQuickItem::positionVisible() const
     {
         return d->m_positionVisible;
     }

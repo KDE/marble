@@ -80,7 +80,7 @@ void AbstractGeoPolygonGraphicsItem::paint( GeoPainter* painter, const ViewportP
 
     bool isValid = true;
     if (s_previousStyle != style().data()) {
-        isValid = configurePainter(painter, viewport);
+        isValid = configurePainter(painter, *viewport);
     }
     s_previousStyle = style().data();
 
@@ -127,7 +127,7 @@ bool AbstractGeoPolygonGraphicsItem::contains(const QPoint &screenPosition, cons
     return false;
 }
 
-bool AbstractGeoPolygonGraphicsItem::configurePainter(GeoPainter *painter, const ViewportParams *viewport)
+bool AbstractGeoPolygonGraphicsItem::configurePainter(GeoPainter *painter, const ViewportParams &viewport) const
 {
     QPen currentPen = painter->pen();
     GeoDataStyle::ConstPtr style = this->style();
@@ -173,7 +173,7 @@ bool AbstractGeoPolygonGraphicsItem::configurePainter(GeoPainter *painter, const
                 if (!polyStyle.texturePath().isEmpty() || !polyStyle.textureImage().isNull()) {
                     GeoDataCoordinates coords = latLonAltBox().center();
                     qreal x, y;
-                    viewport->screenCoordinates(coords, x, y);
+                    viewport.screenCoordinates(coords, x, y);
                     QBrush brush(texture(polyStyle.texturePath(), paintedColor));
                     painter->setBrush(brush);
                     painter->setBrushOrigin(QPoint(x,y));
@@ -202,7 +202,7 @@ int AbstractGeoPolygonGraphicsItem::extractElevation(const GeoDataPlacemark &pla
     return elevation;
 }
 
-QPixmap AbstractGeoPolygonGraphicsItem::texture(const QString &texturePath, const QColor &color)
+QPixmap AbstractGeoPolygonGraphicsItem::texture(const QString &texturePath, const QColor &color) const
 {
     QString const key = QString::number(color.rgba()) + '/' + texturePath;
     QPixmap texture;

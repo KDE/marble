@@ -176,7 +176,7 @@ class GraticulePlugin : public RenderPlugin, public DialogConfigurationInterface
                               qreal step, qreal skipStep,
                               qreal northPolarGap = 0.0, qreal southPolarGap = 0.0,
                               LabelPositionFlags labelPositionFlags = LineCenter
-                             );
+                             ) const;
 
     /**
      * @brief Renders UTM exceptions that are visible within the defined view bounding box.

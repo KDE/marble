@@ -177,7 +177,7 @@ namespace Marble
         bool showOutdoorActivities() const;
         QString positionProvider() const;
         bool positionAvailable() const;
-        bool positionVisible();
+        bool positionVisible() const;
         Q_INVOKABLE qreal distanceFromPointToCurrentLocation(const QPoint & position) const;
         Q_INVOKABLE qreal angleFromPointToCurrentLocation(const QPoint & position) const;
         Placemark* currentPosition() const;

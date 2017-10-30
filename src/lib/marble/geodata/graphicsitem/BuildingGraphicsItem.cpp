@@ -69,10 +69,10 @@ void BuildingGraphicsItem::initializeBuildingPainting(const GeoPainter* painter,
     drawAccurate3D = painter->mapQuality() == HighQuality ? maxOffset > pixelSize : maxOffset > 1.5 * pixelSize;
 }
 
-void BuildingGraphicsItem::updatePolygons(const ViewportParams *viewport,
+void BuildingGraphicsItem::updatePolygons(const ViewportParams &viewport,
                                           QVector<QPolygonF*>& outerPolygons,
                                           QVector<QPolygonF*>& innerPolygons,
-                                          bool &hasInnerBoundaries )
+                                          bool &hasInnerBoundaries) const
 {
     // Since subtracting one fully contained polygon from another results in a single
     // polygon with a "connecting line" between the inner and outer part we need
@@ -80,13 +80,13 @@ void BuildingGraphicsItem::updatePolygons(const ViewportParams *viewport,
     hasInnerBoundaries = polygon() ? !polygon()->innerBoundaries().isEmpty() : false;
     if (polygon()) {
         if (hasInnerBoundaries) {
-            screenPolygons(*viewport, polygon(), innerPolygons, outerPolygons);
+            screenPolygons(viewport, polygon(), innerPolygons, outerPolygons);
         }
         else {
-            viewport->screenCoordinates(polygon()->outerBoundary(), outerPolygons);
+            viewport.screenCoordinates(polygon()->outerBoundary(), outerPolygons);
         }
     } else if (ring()) {
-        viewport->screenCoordinates(*ring(), outerPolygons);
+        viewport.screenCoordinates(*ring(), outerPolygons);
     }
 }
 
@@ -164,7 +164,7 @@ void BuildingGraphicsItem::paint(GeoPainter* painter, const ViewportParams* view
         m_cachedInnerPolygons.clear();
         m_cachedOuterRoofPolygons.clear();
         m_cachedInnerRoofPolygons.clear();
-        updatePolygons(viewport, m_cachedOuterPolygons,
+        updatePolygons(*viewport, m_cachedOuterPolygons,
                                  m_cachedInnerPolygons,
                                  m_hasInnerBoundaries);
         if (m_cachedOuterPolygons.isEmpty()) {
@@ -192,7 +192,7 @@ void BuildingGraphicsItem::paintRoof(GeoPainter* painter, const ViewportParams* 
 
     bool isValid = true;
     if (s_previousStyle != style().data()) {
-        isValid = configurePainter(painter, viewport);
+        isValid = configurePainter(painter, *viewport);
 
         QFont font = painter->font(); // TODO: better font configuration
         if (font.pointSize() != 10) {

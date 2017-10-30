@@ -321,7 +321,7 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     \see GeoDataLineString
 */
     void polygonsFromLineString( const GeoDataLineString &lineString,
-                                       QVector<QPolygonF*> &polygons );
+                                       QVector<QPolygonF*> &polygons) const;
 
 
 /*!

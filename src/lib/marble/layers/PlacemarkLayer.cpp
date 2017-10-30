@@ -310,7 +310,7 @@ bool PlacemarkLayer::testXBug()
     return true;
 }
 
-void PlacemarkLayer::renderDebug(GeoPainter *painter, ViewportParams *viewport, const QVector<VisiblePlacemark *> &placemarks)
+void PlacemarkLayer::renderDebug(GeoPainter *painter, ViewportParams *viewport, const QVector<VisiblePlacemark *> &placemarks) const
 {
     painter->save();
     painter->setFont(QFont(QStringLiteral("Sans Serif"), 7));

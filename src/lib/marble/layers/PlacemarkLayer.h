@@ -113,7 +113,7 @@ class PlacemarkLayer : public QObject, public LayerInterface
    void repaintNeeded();
 
  private:
-    void renderDebug(GeoPainter *painter, ViewportParams *viewport, const QVector<VisiblePlacemark*> & placemarks);
+    void renderDebug(GeoPainter *painter, ViewportParams *viewport, const QVector<VisiblePlacemark*> & placemarks) const;
     static bool testXBug();
 
     PlacemarkLayout m_layout;

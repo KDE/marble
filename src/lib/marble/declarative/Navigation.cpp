@@ -47,7 +47,7 @@ public:
     double m_screenAccuracy;
     QPointF m_screenPosition;
 
-    RouteSegment nextRouteSegment();
+    RouteSegment nextRouteSegment() const;
 
     void updateNextInstructionDistance( const Route &route );
 
@@ -110,7 +110,7 @@ MarbleModel * NavigationPrivate::model() const
     return m_marbleQuickItem ? m_marbleQuickItem->model() : nullptr;
 }
 
-RouteSegment NavigationPrivate::nextRouteSegment()
+RouteSegment NavigationPrivate::nextRouteSegment() const
 {
     // Not using m_currentSegment on purpose
     return m_marbleQuickItem ? model()->routingManager()->routingModel()->route().currentSegment().nextRouteSegment() : RouteSegment();

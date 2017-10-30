@@ -591,7 +591,7 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
                                             const GeoDataLatLonAltBox& viewLatLonAltBox, 
                                             qreal step, qreal skipStep,
                                             qreal northPolarGap, qreal southPolarGap,
-                                            LabelPositionFlags labelPositionFlags )
+                                            LabelPositionFlags labelPositionFlags) const
 {
     if ( step <= 0 ) {
         return;

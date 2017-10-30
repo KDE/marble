@@ -171,7 +171,7 @@ private:
     void announceStateChanged( SceneGraphicsItem::ActionState newState );
     void setupCursor( SceneGraphicsItem *item );
 
-    const GeoDataCoordinates mouseGeoDataCoordinates( QMouseEvent *mouseEvent );
+    const GeoDataCoordinates mouseGeoDataCoordinates(QMouseEvent *mouseEvent) const;
 
     bool m_isInitialized;
     bool m_widgetInitialized;

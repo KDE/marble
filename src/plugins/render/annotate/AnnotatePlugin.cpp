@@ -1777,7 +1777,7 @@ void AnnotatePlugin::pasteItem()
     m_pasteGraphicItem->setVisible( false );
 }
 
-const GeoDataCoordinates AnnotatePlugin::mouseGeoDataCoordinates( QMouseEvent *mouseEvent )
+const GeoDataCoordinates AnnotatePlugin::mouseGeoDataCoordinates(QMouseEvent *mouseEvent) const
 {
     qreal lon, lat;
     m_marbleWidget->geoCoordinates( mouseEvent->pos().x(),

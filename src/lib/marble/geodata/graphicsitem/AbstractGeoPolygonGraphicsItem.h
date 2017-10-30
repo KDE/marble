@@ -44,7 +44,7 @@ public:
     static const void *s_previousStyle;
 
 protected:
-    bool configurePainter(GeoPainter* painter, const ViewportParams *viewport);
+    bool configurePainter(GeoPainter* painter, const ViewportParams &viewport) const;
     inline
     const GeoDataPolygon *polygon() const { return m_polygon; }
     inline
@@ -55,7 +55,7 @@ protected:
     static int extractElevation(const GeoDataPlacemark &placemark);
 
 private:
-    QPixmap texture(const QString &path, const QColor &color);
+    QPixmap texture(const QString &path, const QColor &color) const;
 
     const GeoDataPolygon * m_polygon;
     const GeoDataLinearRing * m_ring;

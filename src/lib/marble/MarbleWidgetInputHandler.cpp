@@ -217,7 +217,7 @@ void MarbleWidgetInputHandler::showRmbMenu(int x, int y)
 
 void MarbleWidgetInputHandler::openItemToolTip()
 {
-    if (!lastToolTipItem().isNull())
+    if (lastToolTipItem())
     {
         QToolTip::showText(d->m_marbleWidget->mapToGlobal(toolTipPosition()),
                             lastToolTipItem()->toolTip(),
