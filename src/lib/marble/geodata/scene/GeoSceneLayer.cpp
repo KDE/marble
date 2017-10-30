@@ -31,28 +31,49 @@ namespace Marble
 class GeoSceneLayerPrivate
 {
   public:
-    GeoSceneLayerPrivate(){}
-    ~GeoSceneLayerPrivate(){}
+    GeoSceneLayerPrivate(const QString &name);
+    ~GeoSceneLayerPrivate();
     
     const char* nodeType() const
     {
         return GeoSceneTypes::GeoSceneLayerType;
     }
+
+    /// The vector holding all the data in the layer.
+    /// (We want to preserve the order and don't care
+    /// much about speed here), so we don't use a hash
+    QVector<GeoSceneAbstractDataset *> m_datasets;
+
+    GeoSceneFilter  *m_filter;
+
+    QString          m_name;
+    QString          m_backend;
+    QString          m_role;
+
+    bool             m_tiled;
 };
 
-GeoSceneLayer::GeoSceneLayer( const QString& name )
-    : m_filter( 0 ),
-      m_name( name ),
-      m_backend(),
-      m_role(),
-      m_tiled( true ),
-      d( new GeoSceneLayerPrivate )
+GeoSceneLayerPrivate::GeoSceneLayerPrivate(const QString &name) :
+    m_filter(nullptr),
+    m_name(name),
+    m_backend(),
+    m_role(),
+    m_tiled(true)
+{
+}
+
+GeoSceneLayerPrivate::~GeoSceneLayerPrivate()
+{
+    qDeleteAll(m_datasets);
+}
+
+GeoSceneLayer::GeoSceneLayer(const QString &name) :
+    d(new GeoSceneLayerPrivate(name))
 {
 }
 
 GeoSceneLayer::~GeoSceneLayer()
 {
-   qDeleteAll( m_datasets );
    delete d;
 }
 
@@ -64,12 +85,12 @@ const char* GeoSceneLayer::nodeType() const
 void GeoSceneLayer::addDataset( GeoSceneAbstractDataset* dataset )
 {
     // Remove any dataset that has the same name
-    QVector<GeoSceneAbstractDataset *>::iterator it = m_datasets.begin();
-    while (it != m_datasets.end()) {
+    QVector<GeoSceneAbstractDataset *>::iterator it = d->m_datasets.begin();
+    while (it != d->m_datasets.end()) {
         GeoSceneAbstractDataset * currentAbstractDataset = *it;
         if ( currentAbstractDataset->name() == dataset->name() ) {
             delete currentAbstractDataset;
-            m_datasets.erase(it);
+            d->m_datasets.erase(it);
             break;
         }
         else {
@@ -78,16 +99,16 @@ void GeoSceneLayer::addDataset( GeoSceneAbstractDataset* dataset )
      }
 
     if ( dataset ) {
-        m_datasets.append( dataset );
+        d->m_datasets.append( dataset );
     }
 }
 
 const GeoSceneAbstractDataset* GeoSceneLayer::dataset( const QString& name ) const
 {
-    GeoSceneAbstractDataset* dataset = 0;
+    GeoSceneAbstractDataset* dataset = nullptr;
 
-    QVector<GeoSceneAbstractDataset*>::const_iterator it = m_datasets.constBegin();
-    QVector<GeoSceneAbstractDataset*>::const_iterator end = m_datasets.constEnd();
+    QVector<GeoSceneAbstractDataset*>::const_iterator it = d->m_datasets.constBegin();
+    QVector<GeoSceneAbstractDataset*>::const_iterator end = d->m_datasets.constEnd();
     for (; it != end; ++it) {
         if ( (*it)->name() == name ) {
             dataset = *it;
@@ -107,10 +128,10 @@ GeoSceneAbstractDataset* GeoSceneLayer::dataset( const QString& name )
 
 const GeoSceneAbstractDataset * GeoSceneLayer::groundDataset() const
 {
-    if ( m_datasets.isEmpty() )
-        return 0;
+    if (d->m_datasets.isEmpty())
+        return nullptr;
 
-    return m_datasets.first();
+    return d->m_datasets.first();
 }
 
 // implement non-const method by means of const method,
@@ -123,63 +144,63 @@ GeoSceneAbstractDataset * GeoSceneLayer::groundDataset()
 
 QVector<GeoSceneAbstractDataset *> GeoSceneLayer::datasets() const
 {
-    return m_datasets;
+    return d->m_datasets;
 }
 
 QString GeoSceneLayer::name() const
 {
-    return m_name;
+    return d->m_name;
 }
 
 QString GeoSceneLayer::backend() const
 {
-    return m_backend;
+    return d->m_backend;
 }
 
 void GeoSceneLayer::setBackend( const QString& backend )
 {
-    m_backend = backend;
+    d->m_backend = backend;
 }
 
 bool GeoSceneLayer::isTiled() const
 {
-    return m_tiled;
+    return d->m_tiled;
 }
 
 void GeoSceneLayer::setTiled( bool tiled )
 {
-    m_tiled = tiled;
+    d->m_tiled = tiled;
 }
 
 QString GeoSceneLayer::role() const
 {
-    return m_role;
+    return d->m_role;
 }
 
 void GeoSceneLayer::setRole( const QString& role )
 {
-    m_role = role;
+    d->m_role = role;
 }
 
 const GeoSceneFilter* GeoSceneLayer::filter() const
 {
-    return m_filter;
+    return d->m_filter;
 }
 
 GeoSceneFilter* GeoSceneLayer::filter()
 {
-    return m_filter;
+    return d->m_filter;
 }
 
 void GeoSceneLayer::addFilter( GeoSceneFilter * filter )
 {
-    m_filter = filter;
+    d->m_filter = filter;
 }
 
 void GeoSceneLayer::removeFilter( GeoSceneFilter * filter )
 {
-    if ( filter == m_filter ) {
-        m_filter = 0;
+    if (filter == d->m_filter) {
+        d->m_filter = nullptr;
     }
 }
 

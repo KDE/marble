@@ -84,19 +84,6 @@ class GEODATA_EXPORT GeoSceneLayer : public GeoNode
  private:
     Q_DISABLE_COPY( GeoSceneLayer )
 
-    /// The vector holding all the data in the layer.
-    /// (We want to preserve the order and don't care 
-    /// much about speed here), so we don't use a hash
-    QVector<GeoSceneAbstractDataset *> m_datasets;
-
-    GeoSceneFilter  *m_filter;
-
-    QString          m_name;
-    QString          m_backend;
-    QString          m_role;
-
-    bool             m_tiled;
-    
     GeoSceneLayerPrivate * const d;
 };
 
