@@ -33,7 +33,7 @@ public:
 
 private:
     friend class OsmTagEditorWidget;
-    QTreeWidgetItem *tagWidgetItem( const OsmTag &tag ) const;
+    static QTreeWidgetItem *tagWidgetItem(const OsmTag &tag);
 
     /**
      * @brief recommendedTags builds a list of tags that are recommended by osm standards
@@ -51,13 +51,13 @@ private:
      * @brief containsAny convenience function that determines whether the placemark contains
      * any of the given parameter tags
      */
-    bool containsAny( const OsmPlacemarkData &osmData, const QStringList &tags ) const;
+    static bool containsAny(const OsmPlacemarkData &osmData, const QStringList &tags);
 
     /**
      * @brief addPattern convenience function that takes a list of OsmTags
      * and adds their keys to the filter, if the placemark doesn't already have them
      */
-    void addPattern( QStringList &filter, const OsmPlacemarkData &osmData, const QStringList &pattern ) const;
+    static void addPattern(QStringList &filter, const OsmPlacemarkData &osmData, const QStringList &pattern);
 
     /**
      * @brief returns a list of useful, popular osm tags that currently don't have a visual category associated with them

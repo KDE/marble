@@ -471,7 +471,7 @@ void MergedLayerDecorator::Private::paintSunShading( QImage *tileImage, const Ti
                 }
                 if ( shade == lastShade && shade == 0.0 ) {
                     for ( int t = 0; t < n; ++t ) {
-                        m_sunLocator->shadePixel( *scanline, shade );
+                        SunLocator::shadePixel(*scanline, shade);
                         ++scanline;
                     }
                     cur_x += n;
@@ -480,7 +480,7 @@ void MergedLayerDecorator::Private::paintSunShading( QImage *tileImage, const Ti
                 for ( int t = 0; t < n ; ++t ) {
                     const qreal lon   = lon_scale * ( id.x() * tileWidth + cur_x );
                     shade = m_sunLocator->shading( lon, a, c );
-                    m_sunLocator->shadePixel( *scanline, shade );
+                    SunLocator::shadePixel(*scanline, shade);
                     ++scanline;
                     ++cur_x;
                 }
@@ -491,7 +491,7 @@ void MergedLayerDecorator::Private::paintSunShading( QImage *tileImage, const Ti
                 if ( cur_x < tileWidth ) {
                     const qreal lon   = lon_scale * ( id.x() * tileWidth + cur_x );
                     shade = m_sunLocator->shading( lon, a, c );
-                    m_sunLocator->shadePixel( *scanline, shade );
+                    SunLocator::shadePixel(*scanline, shade);
                     ++scanline;
                     ++cur_x;
                 }

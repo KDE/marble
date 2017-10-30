@@ -62,7 +62,7 @@ public:
     
     ~AbstractDataPluginModelPrivate();
 
-    QString generateFilename( const QString& id, const QString& type ) const;
+    static QString generateFilename(const QString &id, const QString &type);
     QString generateFilepath( const QString& id, const QString& type ) const;
 
     void updateFavoriteItems();
@@ -523,7 +523,7 @@ void AbstractDataPluginModel::scheduleItemSort()
     d->m_needsSorting = true;
 }
 
-QString AbstractDataPluginModelPrivate::generateFilename( const QString& id, const QString& type ) const
+QString AbstractDataPluginModelPrivate::generateFilename(const QString &id, const QString &type)
 {
     QString name;
     name += id;

@@ -514,7 +514,7 @@ void MeasureToolPlugin::drawSegments( GeoPainter* painter )
     }
 }
 
-QString MeasureToolPlugin::meterToPreferredUnit(qreal meters, bool isSquare) const
+QString MeasureToolPlugin::meterToPreferredUnit(qreal meters, bool isSquare)
 {
     MarbleLocale *locale = MarbleGlobal::getInstance()->locale();
     const MarbleLocale::MeasurementSystem measurementSystem = locale->measurementSystem();

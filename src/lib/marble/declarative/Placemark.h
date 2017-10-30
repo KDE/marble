@@ -90,9 +90,9 @@ private:
     bool addTagValue(QString &target, const QString &key, const QString &format=QString(), const QString& separator = QStringLiteral(" · ")) const;
     void addFirstTagValueOf(QString &target, const QStringList &keys) const;
     void addTagDescription(QString &target, const QString &key, const QString &value, const QString &description) const;
-    void append(QString &target, const QString &value) const;
+    static void append(QString &target, const QString &value);
     QString addressFromOsmData() const;
-    QString formatStreet(const QString &street, const QString &houseNumber) const;
+    static QString formatStreet(const QString &street, const QString &houseNumber);
     void updateTags();
     void updateRelations(const GeoDataPlacemark &placemark);
 

@@ -63,9 +63,9 @@ class MARBLE_EXPORT MarbleLegendBrowser : public MarbleWebView
 
  protected:
     bool event( QEvent * event ) override;
-    QString  readHtml( const QUrl & name );
+    static QString readHtml(const QUrl &name);
     QString  generateSectionsHtml();
-    void  translateHtml( QString & html );
+    static void translateHtml(QString &html);
 
  private:
     void reverseSupportCheckboxes( QString &html );

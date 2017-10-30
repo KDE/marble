@@ -54,7 +54,7 @@ public Q_SLOTS:
     void updateSearchResult(QAbstractItemModel *result);
 
 private:
-    GeoDataPlacemark *placemarkFromQVariant(const QVariant &data) const;
+    static GeoDataPlacemark *placemarkFromQVariant(const QVariant &data);
     QSortFilterProxyModel m_model;
     SearchRunnerManager *m_searchManager;
     MarbleQuickItem *m_marbleQuickItem;

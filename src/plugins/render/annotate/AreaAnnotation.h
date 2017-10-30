@@ -202,15 +202,15 @@ private:
      * @brief These are the event handlers for the AddingPolygonHole state.
      */
     bool processAddingHoleOnPress( QMouseEvent *mouseEvent );
-    bool processAddingHoleOnMove( QMouseEvent *mouseEvent );
-    bool processAddingHoleOnRelease( QMouseEvent *mouseEvent );
+    static bool processAddingHoleOnMove(QMouseEvent *mouseEvent);
+    static bool processAddingHoleOnRelease(QMouseEvent *mouseEvent);
 
     /**
      * @brief These are the event handlers for the MergingPolylineNodes state.
      */
     bool processMergingOnPress( QMouseEvent *mouseEvent );
     bool processMergingOnMove( QMouseEvent *mouseEvent );
-    bool processMergingOnRelease( QMouseEvent *mouseEvent );
+    static bool processMergingOnRelease(QMouseEvent *mouseEvent);
 
     /**
      * @brief These are the event handlers for the AddingPolylineNodes state.

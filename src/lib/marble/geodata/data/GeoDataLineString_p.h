@@ -78,7 +78,7 @@ class GeoDataLineStringPrivate : public GeoDataGeometryPrivate
                        int recursionCounter ) const;
 
     quint8 levelForResolution(qreal resolution) const;
-    qreal resolutionForLevel(int level) const;
+    static qreal resolutionForLevel(int level);
     void optimize(GeoDataLineString& lineString) const;
 
     QVector<GeoDataCoordinates> m_vector;

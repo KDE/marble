@@ -164,7 +164,8 @@ quint8 GeoDataLineStringPrivate::levelForResolution(qreal resolution) const {
     return m_level;
 }
 
-qreal GeoDataLineStringPrivate::resolutionForLevel(int level) const {
+qreal GeoDataLineStringPrivate::resolutionForLevel(int level)
+{
     switch (level) {
         case 0:
             return 0.0655360;

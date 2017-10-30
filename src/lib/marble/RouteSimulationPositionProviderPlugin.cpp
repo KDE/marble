@@ -270,7 +270,7 @@ GeoDataCoordinates RouteSimulationPositionProviderPlugin::addNoise(const Marble:
     return position.moveByBearing(randomBearing, randomDistance);
 }
 
-qreal RouteSimulationPositionProviderPlugin::addNoise(qreal bearing) const
+qreal RouteSimulationPositionProviderPlugin::addNoise(qreal bearing)
 {
     qreal const maxBearingError = 30.0;
     return bearing + static_cast<qreal>(qrand()) / (static_cast<qreal>(RAND_MAX/maxBearingError/2.0)) - maxBearingError / 2.0;

@@ -135,8 +135,8 @@ protected:
 private:
     void addContextItems();
     void setupActions( MarbleWidget *marbleWidget );
-    void disableActions( QActionGroup *group );
-    void enableAllActions( QActionGroup *group );
+    static void disableActions(QActionGroup *group);
+    static void enableAllActions(QActionGroup *group);
     void enableActionsOnItemType( const QString &type );
     void disableFocusActions();
 

@@ -161,7 +161,7 @@ QHash<int, QByteArray> RouteRelationModel::roleNames() const
     return roles;
 }
 
-QString RouteRelationModel::svgFile(const QString &path) const
+QString RouteRelationModel::svgFile(const QString &path)
 {
 #ifdef Q_OS_ANDROID
     return MarbleDirs::path(QStringLiteral("svg/%1").arg(path));

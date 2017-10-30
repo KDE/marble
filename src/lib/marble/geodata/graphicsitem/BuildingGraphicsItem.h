@@ -43,7 +43,7 @@ private:
     QPointF buildingOffset(const QPointF &point, const ViewportParams *viewport, bool* isCameraAboveBuilding = nullptr) const;
 
     static QPointF centroid(const QPolygonF &polygon, double &area);
-    void screenPolygons(const ViewportParams *viewport, const GeoDataPolygon* polygon,
+    static void screenPolygons(const ViewportParams &viewport, const GeoDataPolygon *polygon,
                                QVector<QPolygonF*> &polygons,
                                QVector<QPolygonF*> &outlines
                                );

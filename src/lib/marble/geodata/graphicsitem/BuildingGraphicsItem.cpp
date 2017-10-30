@@ -80,7 +80,7 @@ void BuildingGraphicsItem::updatePolygons(const ViewportParams *viewport,
     hasInnerBoundaries = polygon() ? !polygon()->innerBoundaries().isEmpty() : false;
     if (polygon()) {
         if (hasInnerBoundaries) {
-            screenPolygons(viewport, polygon(), innerPolygons, outerPolygons);
+            screenPolygons(*viewport, polygon(), innerPolygons, outerPolygons);
         }
         else {
             viewport->screenCoordinates(polygon()->outerBoundary(), outerPolygons);
@@ -419,19 +419,19 @@ void BuildingGraphicsItem::paintFrame(GeoPainter *painter, const ViewportParams 
     }
 }
 
-void BuildingGraphicsItem::screenPolygons(const ViewportParams *viewport, const GeoDataPolygon *polygon,
+void BuildingGraphicsItem::screenPolygons(const ViewportParams &viewport, const GeoDataPolygon *polygon,
                                                     QVector<QPolygonF *> &innerPolygons,
                                                     QVector<QPolygonF *> &outerPolygons
                                                     )
 {
     Q_ASSERT(polygon);
 
-    viewport->screenCoordinates( polygon->outerBoundary(), outerPolygons );
+    viewport.screenCoordinates(polygon->outerBoundary(), outerPolygons);
 
     QVector<GeoDataLinearRing> const & innerBoundaries = polygon->innerBoundaries();
     for (const GeoDataLinearRing &innerBoundary: innerBoundaries) {
         QVector<QPolygonF*> innerPolygonsPerBoundary;
-        viewport->screenCoordinates(innerBoundary, innerPolygonsPerBoundary);
+        viewport.screenCoordinates(innerBoundary, innerPolygonsPerBoundary);
 
         innerPolygons.reserve(innerPolygons.size() + innerPolygonsPerBoundary.size());
         for( QPolygonF* innerPolygonPerBoundary: innerPolygonsPerBoundary ) {

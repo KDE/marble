@@ -97,7 +97,7 @@ void SunLightBlending::blend( QImage * const tileImage, TextureTile const * cons
                 }
                 if ( shade == lastShade && shade == 0.0 ) {
                     for ( int t = 0; t < n; ++t ) {
-                        m_sunLocator->shadePixelComposite( *scanline, *nscanline, shade );
+                        SunLocator::shadePixelComposite(*scanline, *nscanline, shade);
                         ++scanline;
                         ++nscanline;
                     }
@@ -108,7 +108,7 @@ void SunLightBlending::blend( QImage * const tileImage, TextureTile const * cons
                 qreal lon = lon_scale * (id.x() * tileWidth + cur_x);
                 for ( int t = 0; t < n ; ++t ) {
                     shade = m_sunLocator->shading( lon, a, c );
-                    m_sunLocator->shadePixelComposite( *scanline, *nscanline, shade );
+                    SunLocator::shadePixelComposite(*scanline, *nscanline, shade);
                     ++scanline;
                     ++nscanline;
                     lon += lon_scale;
@@ -121,7 +121,7 @@ void SunLightBlending::blend( QImage * const tileImage, TextureTile const * cons
                 if ( cur_x < tileWidth ) {
                     qreal lon   = lon_scale * ( id.x() * tileWidth + cur_x );
                     shade = m_sunLocator->shading( lon, a, c );
-                    m_sunLocator->shadePixelComposite( *scanline, *nscanline, shade );
+                    SunLocator::shadePixelComposite(*scanline, *nscanline, shade);
                     ++scanline;
                     ++nscanline;
                     ++cur_x;

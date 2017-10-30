@@ -66,7 +66,7 @@ class RemoteIconLoaderPrivate
         /**
          * Returns a name with which downloaded icon will be saved on disk
          */
-        QString cacheFileName( const QUrl& url ) const;
+        static QString cacheFileName(const QUrl &url);
 };
 
 bool RemoteIconLoaderPrivate::isCached( const QUrl& url ) const
@@ -98,7 +98,7 @@ void RemoteIconLoaderPrivate::initiateDownload( const QUrl& url )
     m_downloadManager.addJob(url, fileName, url.toString(), usage );
 }
 
-QString RemoteIconLoaderPrivate::cacheFileName( const QUrl& url ) const
+QString RemoteIconLoaderPrivate::cacheFileName(const QUrl &url)
 {
     const QString suffix = QFileInfo(url.path()).suffix();
     const QByteArray hash = QCryptographicHash::hash( url.toEncoded(), QCryptographicHash::Md5 ).toHex();

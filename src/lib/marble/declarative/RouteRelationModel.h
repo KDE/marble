@@ -49,7 +49,7 @@ protected:
     QHash<int, QByteArray> roleNames() const override;
 
 private:
-    QString svgFile(const QString &path) const;
+    static QString svgFile(const QString &path);
 
     QVector<const Marble::GeoDataRelation*> m_relations;
     QMap<QString, QString> m_networks;

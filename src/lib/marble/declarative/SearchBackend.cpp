@@ -152,7 +152,7 @@ void SearchBackend::updateSearchResult(QAbstractItemModel *result)
     emit searchResultChanged(m_placemarkModel);
 }
 
-GeoDataPlacemark *SearchBackend::placemarkFromQVariant(const QVariant &data) const
+GeoDataPlacemark *SearchBackend::placemarkFromQVariant(const QVariant &data)
 {
     if( !data.isValid() ) {
         return nullptr;

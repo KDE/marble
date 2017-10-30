@@ -189,7 +189,7 @@ class MarblePart: public KParts::ReadOnlyPart
     /** Only updates member variable m_tileZoomLevel, does not trigger screen
         update. */
     void  updateTileZoomLevel();
-    void migrateNewstuffConfigFiles() const;
+    static void migrateNewstuffConfigFiles();
     static void repairNode( QDomNode node, const QString &child );
 
   private:

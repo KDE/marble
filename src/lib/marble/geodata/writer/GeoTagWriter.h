@@ -52,7 +52,7 @@ protected:
     GeoTagWriter();
     virtual ~GeoTagWriter();
 
-    bool writeElement( const GeoNode* object, GeoWriter& writer ) const;
+    static bool writeElement(const GeoNode *object, GeoWriter &writer);
 
 private:
     // Only our registrar is allowed to register tag writers.

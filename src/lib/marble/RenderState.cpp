@@ -23,7 +23,7 @@ public:
 
     Private( const QString &name=QString(), RenderStatus status=Complete );
     RenderStatus status() const;
-    RenderStatus minimumStatus( RenderStatus a, RenderStatus b ) const;
+    static RenderStatus minimumStatus(RenderStatus a, RenderStatus b);
     QString toString( const RenderState &state, int indent ) const;
 };
 
@@ -96,7 +96,7 @@ RenderStatus RenderState::Private::status() const
     return minimumStatus( status, m_status );
 }
 
-RenderStatus RenderState::Private::minimumStatus( RenderStatus a, RenderStatus b ) const
+RenderStatus RenderState::Private::minimumStatus(RenderStatus a, RenderStatus b)
 {
     if ( a == Incomplete || b == Incomplete ) {
         return Incomplete;

@@ -38,8 +38,8 @@ class MARBLE_EXPORT SunLocator : public QObject
     ~SunLocator() override;
 
     qreal shading(qreal lon, qreal a, qreal c) const;
-    void  shadePixel(QRgb& pixcol, qreal shade) const;
-    void  shadePixelComposite(QRgb& pixcol, const QRgb& dpixcol, qreal shade) const;
+    static void shadePixel(QRgb &pixcol, qreal shade);
+    static void shadePixelComposite(QRgb &pixcol, const QRgb &dpixcol, qreal shade);
 
     void  setPlanet( const Planet *planet );
 

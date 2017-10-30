@@ -657,7 +657,7 @@ void Placemark::addTagDescription(QString &target, const QString &key, const QSt
     }
 }
 
-void Placemark::append(QString &target, const QString &value) const
+void Placemark::append(QString &target, const QString &value)
 {
     if (!target.isEmpty()) {
         target += QStringLiteral(" · "); // non-latin1
@@ -684,7 +684,7 @@ QString Placemark::addressFromOsmData() const
 #endif
 }
 
-QString Placemark::formatStreet(const QString &street, const QString &houseNumber) const
+QString Placemark::formatStreet(const QString &street, const QString &houseNumber)
 {
     return houseNumber.isEmpty() ? street : tr("%1 %2",
                                                "House number (first argument) and street name (second argument) in an address").arg(houseNumber).arg(street).trimmed();

@@ -86,7 +86,7 @@ public:
     void createGraphicsItemFromOverlay(const GeoDataOverlay *overlay);
     void removeGraphicsItems(const GeoDataFeature *feature);
     void updateTiledLineStrings(const GeoDataPlacemark *placemark, GeoLineStringGraphicsItem* lineStringItem);
-    void updateTiledLineStrings(OsmLineStringItems &lineStringItems);
+    static void updateTiledLineStrings(OsmLineStringItems &lineStringItems);
     void clearCache();
     bool showRelation(const GeoDataRelation* relation) const;
     void updateRelationVisibility();

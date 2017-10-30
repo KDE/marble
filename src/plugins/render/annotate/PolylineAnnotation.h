@@ -184,7 +184,7 @@ private:
      */
     bool processMergingOnPress( QMouseEvent *mouseEvent );
     bool processMergingOnMove( QMouseEvent *mouseEvent );
-    bool processMergingOnRelease( QMouseEvent *mouseEvent );
+    static bool processMergingOnRelease(QMouseEvent *mouseEvent);
 
     /**
      * @brief These are the event handlers for the AddingPolylineNodes state.

@@ -99,7 +99,7 @@ void OsmTagEditorWidgetPrivate::populatePresetTagsList()
     }
 }
 
-QTreeWidgetItem *OsmTagEditorWidgetPrivate::tagWidgetItem( const OsmTag &tag ) const
+QTreeWidgetItem *OsmTagEditorWidgetPrivate::tagWidgetItem(const OsmTag &tag)
 {
     QStringList itemText;
 
@@ -303,7 +303,7 @@ QStringList OsmTagEditorWidgetPrivate::generateTagFilter() const
     return filter;
 }
 
-bool OsmTagEditorWidgetPrivate::containsAny( const OsmPlacemarkData &osmData, const QStringList &tags ) const
+bool OsmTagEditorWidgetPrivate::containsAny(const OsmPlacemarkData &osmData, const QStringList &tags)
 {
     for ( const QString &tag: tags ) {
         const QStringList tagSplit = tag.split(QLatin1Char('='));
@@ -324,7 +324,7 @@ bool OsmTagEditorWidgetPrivate::containsAny( const OsmPlacemarkData &osmData, co
     return false;
 }
 
-void OsmTagEditorWidgetPrivate::addPattern( QStringList &filter, const OsmPlacemarkData &osmData, const QStringList &tags ) const
+void OsmTagEditorWidgetPrivate::addPattern(QStringList &filter, const OsmPlacemarkData &osmData, const QStringList &tags)
 {
     for ( const QString &tag: tags ) {
         const QStringList tagSplit = tag.split(QLatin1Char('='));

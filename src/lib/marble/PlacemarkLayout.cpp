@@ -222,7 +222,7 @@ QVector<const GeoDataFeature*> PlacemarkLayout::whichPlacemarkAt( const QPoint& 
     return ret;
 }
 
-int PlacemarkLayout::maxLabelHeight() const
+int PlacemarkLayout::maxLabelHeight()
 {
     QFont const standardFont(QStringLiteral("Sans Serif"));
     return QFontMetrics(standardFont).height();
@@ -302,7 +302,7 @@ void PlacemarkLayout::resetCacheData()
     emit repaintNeeded();
 }
 
-QSet<TileId> PlacemarkLayout::visibleTiles( const ViewportParams *viewport, int zoomLevel ) const
+QSet<TileId> PlacemarkLayout::visibleTiles(const ViewportParams &viewport, int zoomLevel)
 {
     /*
      * rely on m_placemarkCache to find the placemarks for the tiles which
@@ -312,7 +312,7 @@ QSet<TileId> PlacemarkLayout::visibleTiles( const ViewportParams *viewport, int 
      */
 
     qreal north, south, east, west;
-    viewport->viewLatLonAltBox().boundaries(north, south, east, west);
+    viewport.viewLatLonAltBox().boundaries(north, south, east, west);
     QSet<TileId> tileIdSet;
     QVector<QRectF> geoRects;
     if( west <= east ) {
@@ -420,7 +420,7 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout( const ViewportParam
         const QItemSelection selection = m_selectionModel->selection();
 
         placemarkList.clear();
-        for ( const TileId &tileId: visibleTiles( viewport, tileLevel ) ) {
+        for (const TileId &tileId: visibleTiles(*viewport, tileLevel)) {
             placemarkList += m_placemarkCache.value( tileId );
         }
         std::sort(placemarkList.begin(), placemarkList.end(), GeoDataPlacemark::placemarkLayoutOrderCompare);

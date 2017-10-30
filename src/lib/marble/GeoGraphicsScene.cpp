@@ -48,10 +48,10 @@ public:
     // Stores the items which have been clicked;
     QList<GeoGraphicsItem*> m_selectedItems;
 
-    GeoDataStyle::Ptr highlightStyle(const GeoDataDocument *document, const GeoDataStyleMap &styleMap);
+    static GeoDataStyle::Ptr highlightStyle(const GeoDataDocument *document, const GeoDataStyleMap &styleMap);
 
     void selectItem( GeoGraphicsItem *item );
-    void applyHighlightStyle(GeoGraphicsItem *item, const GeoDataStyle::Ptr &style );
+    static void applyHighlightStyle(GeoGraphicsItem *item, const GeoDataStyle::Ptr &style);
 };
 
 GeoDataStyle::Ptr GeoGraphicsScenePrivate::highlightStyle( const GeoDataDocument *document,

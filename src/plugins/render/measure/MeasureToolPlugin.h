@@ -101,7 +101,7 @@ class MeasureToolPlugin : public RenderPlugin, public DialogConfigurationInterfa
  private:
     Q_DISABLE_COPY( MeasureToolPlugin )
 
-    QString meterToPreferredUnit(qreal meters, bool isSquare = false) const;
+    static QString meterToPreferredUnit(qreal meters, bool isSquare = false);
 
     // The line strings in the distance path.
     GeoDataLineString m_measureLineString;

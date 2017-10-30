@@ -1111,7 +1111,7 @@ void MarblePart::updateTileZoomLevel()
     }
 }
 
-void MarblePart::migrateNewstuffConfigFiles() const
+void MarblePart::migrateNewstuffConfigFiles()
 {
     // Newstuff config files used to be in the KDE data directory of the user, but are now
     // shared between Marble KDE and Marble Qt in Marble's data path of the user.

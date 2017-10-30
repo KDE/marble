@@ -114,12 +114,12 @@ class PlacemarkLayout : public QObject
      * FIXME: Once a StyleManager that manages all styles has been implemented
      * just traverse all existing styles.
      */
-    int maxLabelHeight() const;
+    static int maxLabelHeight();
 
     void styleReset();
     void clearCache();
 
-    QSet<TileId> visibleTiles( const ViewportParams *viewport, int tileLevel ) const;
+    static QSet<TileId> visibleTiles(const ViewportParams &viewport, int tileLevel);
     bool layoutPlacemark(const GeoDataPlacemark *placemark, const GeoDataCoordinates &coordinates, qreal x, qreal y, bool selected );
 
     /**
