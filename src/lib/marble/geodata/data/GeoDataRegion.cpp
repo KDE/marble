@@ -54,7 +54,7 @@ GeoDataRegion::~GeoDataRegion()
 
 const char* GeoDataRegion::nodeType() const
 {
-    return d->nodeType();
+    return GeoDataTypes::GeoDataRegionType;
 }
 
 bool GeoDataRegion::operator==(const GeoDataRegion& other) const

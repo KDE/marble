@@ -51,12 +51,7 @@ class GeoSceneDocumentPrivate
         delete m_settings;
         delete m_legend;
     }
-    
-    const char* nodeType() const
-    {
-        return GeoSceneTypes::GeoSceneDocumentType;
-    }
-    
+
     GeoSceneHead*     m_head;
     GeoSceneMap*      m_map;
     GeoSceneSettings* m_settings;
@@ -80,7 +75,7 @@ GeoSceneDocument::~GeoSceneDocument()
 
 const char* GeoSceneDocument::nodeType() const
 {
-    return d->nodeType();
+    return GeoSceneTypes::GeoSceneDocumentType;
 }
 
 const GeoSceneHead* GeoSceneDocument::head() const

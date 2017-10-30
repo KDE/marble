@@ -42,7 +42,7 @@ GeoDataTimeSpan::~GeoDataTimeSpan()
 
 const char* GeoDataTimeSpan::nodeType() const
 {
-    return d->nodeType();
+    return GeoDataTypes::GeoDataTimePrimitiveType;
 }
 
 const GeoDataTimeStamp & GeoDataTimeSpan::end() const

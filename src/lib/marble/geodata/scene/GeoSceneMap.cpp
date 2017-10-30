@@ -45,11 +45,6 @@ class GeoSceneMapPrivate
         qDeleteAll( m_layers );
         qDeleteAll( m_filters );
     }
-    
-    const char* nodeType() const
-    {
-        return GeoSceneTypes::GeoSceneMapType;
-    }
 
     /// The vector holding all the sections in the legend.
     /// (We want to preserve the order and don't care 
@@ -81,7 +76,7 @@ GeoSceneMap::~GeoSceneMap()
 
 const char* GeoSceneMap::nodeType() const
 {
-    return d->nodeType();
+    return GeoSceneTypes::GeoSceneMapType;
 }
 
 void GeoSceneMap::addLayer( GeoSceneLayer* layer )

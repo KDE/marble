@@ -53,11 +53,6 @@ class GeoSceneHeadPrivate
         delete m_zoom;
         delete m_license;
     }
-    
-    const char* nodeType() const
-    {
-        return GeoSceneTypes::GeoSceneHeadType;
-    }
 
     GeoSceneZoom* m_zoom;
     GeoSceneIcon* m_icon;
@@ -85,7 +80,7 @@ GeoSceneHead::~GeoSceneHead()
 
 const char* GeoSceneHead::nodeType() const
 {
-    return d->nodeType();
+    return GeoSceneTypes::GeoSceneHeadType;
 }
 
 QString GeoSceneHead::name() const

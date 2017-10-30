@@ -33,11 +33,6 @@ class GeoDataLatLonAltBoxPrivate
     {
     }
 
-    const char* nodeType() const
-    {
-        return GeoDataTypes::GeoDataLatLonAltBoxType;
-    }
-
     qreal m_minAltitude;
     qreal m_maxAltitude;
     AltitudeMode m_altitudeMode;
@@ -122,7 +117,7 @@ GeoDataLatLonAltBox::~GeoDataLatLonAltBox()
 
 const char* GeoDataLatLonAltBox::nodeType() const
 {
-    return d->nodeType();
+    return GeoDataTypes::GeoDataLatLonAltBoxType;
 }
 
 qreal GeoDataLatLonAltBox::minAltitude() const

@@ -26,12 +26,6 @@ namespace Marble
 class GeoDataExtendedDataPrivate
 {
   public:
-
-    const char* nodeType() const
-    {
-        return GeoDataTypes::GeoDataExtendedDataType;
-    }
-
     QHash< QString, GeoDataData > hash;
     QHash< QString, GeoDataSimpleArrayData* > arrayHash;
     QHash< QString, GeoDataSchemaData> schemaDataHash;

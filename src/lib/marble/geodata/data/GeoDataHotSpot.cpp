@@ -33,11 +33,6 @@ class GeoDataHotSpotPrivate
     {
     }
 
-    const char* nodeType() const
-    {
-        return GeoDataTypes::GeoDataHotspotType;
-    }
-
     QPointF m_hotSpot;
     GeoDataHotSpot::Units m_xunits;
     GeoDataHotSpot::Units m_yunits;
@@ -97,7 +92,7 @@ void GeoDataHotSpot::setHotSpot( const QPointF& hotSpot, Units xunits, Units yun
 
 const char* GeoDataHotSpot::nodeType() const
 {
-    return d->nodeType();
+    return GeoDataTypes::GeoDataHotspotType;
 }
 
 void GeoDataHotSpot::pack( QDataStream& stream ) const

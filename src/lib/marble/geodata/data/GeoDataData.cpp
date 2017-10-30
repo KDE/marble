@@ -63,7 +63,7 @@ GeoDataData::GeoDataData( const QString &name, const QVariant &value )
 
 const char* GeoDataData::nodeType() const
 {
-    return d->nodeType();
+    return GeoDataTypes::GeoDataDataType;
 }
 
 QVariant GeoDataData::value() const

@@ -33,11 +33,6 @@ class GeoSceneLayerPrivate
   public:
     GeoSceneLayerPrivate(const QString &name);
     ~GeoSceneLayerPrivate();
-    
-    const char* nodeType() const
-    {
-        return GeoSceneTypes::GeoSceneLayerType;
-    }
 
     /// The vector holding all the data in the layer.
     /// (We want to preserve the order and don't care
@@ -79,7 +74,7 @@ GeoSceneLayer::~GeoSceneLayer()
 
 const char* GeoSceneLayer::nodeType() const
 {
-    return d->nodeType();
+    return GeoSceneTypes::GeoSceneLayerType;
 }
 
 void GeoSceneLayer::addDataset( GeoSceneAbstractDataset* dataset )

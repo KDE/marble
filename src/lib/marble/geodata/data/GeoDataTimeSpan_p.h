@@ -20,11 +20,6 @@ namespace Marble
 class GeoDataTimeSpanPrivate
 {
   public:
-    const char* nodeType() const
-    {
-        return GeoDataTypes::GeoDataTimeSpanType;
-    }
-
     GeoDataTimeStamp m_begin;
     GeoDataTimeStamp m_end;
 };

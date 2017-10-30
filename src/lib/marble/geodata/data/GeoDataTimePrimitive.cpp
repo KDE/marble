@@ -47,7 +47,7 @@ GeoDataTimePrimitive& GeoDataTimePrimitive::operator=( const GeoDataTimePrimitiv
 
 const char* GeoDataTimePrimitive::nodeType() const
 {
-    return d->nodeType();
+    return GeoDataTypes::GeoDataTimePrimitiveType;
 }
 
 void GeoDataTimePrimitive::pack( QDataStream& stream ) const

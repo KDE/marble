@@ -39,11 +39,6 @@ class GeoDataStylePrivate
     {
     }
 
-    const char* nodeType() const
-    {
-        return GeoDataTypes::GeoDataStyleType;
-    }
-
     GeoDataIconStyle   m_iconStyle;
     GeoDataLabelStyle  m_labelStyle;
     GeoDataLineStyle   m_lineStyle;
@@ -101,7 +96,7 @@ bool GeoDataStyle::operator!=( const GeoDataStyle &other ) const
 
 const char* GeoDataStyle::nodeType() const
 {
-    return d->nodeType();
+    return GeoDataTypes::GeoDataStyleType;
 }
 
 void GeoDataStyle::setIconStyle( const GeoDataIconStyle& style )

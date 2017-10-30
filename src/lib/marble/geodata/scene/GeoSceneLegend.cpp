@@ -39,11 +39,6 @@ class GeoSceneLegendPrivate
     /// (We want to preserve the order and don't care 
     /// much about speed here), so we don't use a hash
     QVector<const GeoSceneSection*> m_sections;
-    
-    const char* nodeType() const
-    {
-        return GeoSceneTypes::GeoSceneLegendType;
-    }
 };
 
 
@@ -59,7 +54,7 @@ GeoSceneLegend::~GeoSceneLegend()
 
 const char* GeoSceneLegend::nodeType() const
 {
-    return d->nodeType();
+    return GeoSceneTypes::GeoSceneLegendType;
 }
 
 void GeoSceneLegend::addSection( const GeoSceneSection* section )

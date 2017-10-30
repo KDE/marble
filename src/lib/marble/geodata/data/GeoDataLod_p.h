@@ -29,11 +29,6 @@ class GeoDataLodPrivate
     {
     }
 
-    const char* nodeType() const
-    {
-        return GeoDataTypes::GeoDataLodType;
-    }
-
     qreal m_minLodPixels;
     qreal m_maxLodPixels;
     qreal m_minFadeExtent;

@@ -20,11 +20,6 @@ namespace Marble
 class GeoDataStyleMapPrivate
 {
   public:
-    const char* nodeType() const
-    {
-        return GeoDataTypes::GeoDataStyleMapType;
-    }
-
     QString lastKey;
 };
 
@@ -47,7 +42,7 @@ GeoDataStyleMap::~GeoDataStyleMap()
 
 const char* GeoDataStyleMap::nodeType() const
 {
-    return d->nodeType();
+    return GeoDataTypes::GeoDataStyleMapType;
 }
 
 QString GeoDataStyleMap::lastKey() const

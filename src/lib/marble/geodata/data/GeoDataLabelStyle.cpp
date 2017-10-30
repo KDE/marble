@@ -45,11 +45,6 @@ class GeoDataLabelStylePrivate
     {
     }
 
-    const char* nodeType() const
-    {
-        return GeoDataTypes::GeoDataLabelStyleType;
-    }
-
     /// The current scale of the label
     float  m_scale;
     /// The current alignment of the label
@@ -108,7 +103,7 @@ bool GeoDataLabelStyle::operator!=( const GeoDataLabelStyle &other ) const
 
 const char* GeoDataLabelStyle::nodeType() const
 {
-    return d->nodeType();
+    return GeoDataTypes::GeoDataLabelStyleType;
 }
 
 void GeoDataLabelStyle::setAlignment( GeoDataLabelStyle::Alignment alignment )

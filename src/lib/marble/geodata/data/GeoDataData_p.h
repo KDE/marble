@@ -22,11 +22,6 @@ namespace Marble
 class GeoDataDataPrivate
 {
   public:
-    const char* nodeType() const
-    {
-        return GeoDataTypes::GeoDataDataType;
-    }
-
     QVariant m_value;
     QString  m_name;
     QString  m_displayName;

@@ -55,7 +55,7 @@ bool GeoDataExtendedData::operator!=( const GeoDataExtendedData &other ) const
 
 const char* GeoDataExtendedData::nodeType() const
 {
-    return d->nodeType();
+    return GeoDataTypes::GeoDataExtendedDataType;
 }
 
 GeoDataData& GeoDataExtendedData::valueRef( const QString& key ) const

@@ -42,11 +42,6 @@ class GeoSceneSettingsPrivate
     /// The hash table holding all the properties in the settings.
     QVector<GeoSceneProperty*> m_properties;
     QVector<GeoSceneGroup*> m_groups;
-    
-    const char* nodeType() const
-    {
-        return GeoSceneTypes::GeoSceneSettingsType;
-    }
 };
 
 
@@ -62,7 +57,7 @@ GeoSceneSettings::~GeoSceneSettings()
 
 const char* GeoSceneSettings::nodeType() const
 {
-    return d->nodeType();
+    return GeoSceneTypes::GeoSceneSettingsType;
 }
 
 bool GeoSceneSettings::propertyAvailable( const QString& name, bool& available ) const

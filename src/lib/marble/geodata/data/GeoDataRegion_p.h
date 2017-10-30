@@ -62,12 +62,6 @@ class GeoDataRegionPrivate
         delete m_lod;
     }
 
-
-    const char* nodeType() const
-    {
-        return GeoDataTypes::GeoDataRegionType;
-    }
-
     GeoDataFeature * m_parent;
     GeoDataLatLonAltBox * m_latLonAltBox;
     GeoDataLod * m_lod;

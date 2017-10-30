@@ -30,11 +30,6 @@ class GeoDataPolyStylePrivate
     {
     }
 
-    const char* nodeType() const
-    {
-        return GeoDataTypes::GeoDataPolyStyleType;
-    }
-
     /// whether to fill the polygon
     bool  m_fill;
     /// whether to draw the outline
@@ -92,7 +87,7 @@ bool GeoDataPolyStyle::operator!=( const GeoDataPolyStyle &other ) const
 
 const char* GeoDataPolyStyle::nodeType() const
 {
-    return d->nodeType();
+    return GeoDataTypes::GeoDataPolyStyleType;
 }
 
 void GeoDataPolyStyle::setFill(bool fill)

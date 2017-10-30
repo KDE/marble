@@ -28,11 +28,6 @@ class GeoDataLineStylePrivate
     {
     }
 
-    const char* nodeType() const
-    {
-        return GeoDataTypes::GeoDataLineStyleType;
-    }
-
     /// The current width of the line
     float  m_width;
     /// The current real width of the line
@@ -93,7 +88,7 @@ bool GeoDataLineStyle::operator!=( const GeoDataLineStyle &other ) const
 
 const char* GeoDataLineStyle::nodeType() const
 {
-    return d->nodeType();
+    return GeoDataTypes::GeoDataLineStyleType;
 }
 
 void GeoDataLineStyle::setWidth(float width)

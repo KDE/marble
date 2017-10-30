@@ -37,11 +37,6 @@ class GeoDataLatLonBoxPrivate
     {
     }
 
-    const char* nodeType() const
-    {
-        return GeoDataTypes::GeoDataLatLonBoxType;
-    }
-
     qreal m_north;
     qreal m_south;
     qreal m_east;
@@ -89,7 +84,7 @@ GeoDataLatLonBox::~GeoDataLatLonBox()
 
 const char* GeoDataLatLonBox::nodeType() const
 {
-    return d->nodeType();
+    return GeoDataTypes::GeoDataLatLonBoxType;
 }
 
 qreal GeoDataLatLonBox::north( GeoDataCoordinates::Unit unit ) const

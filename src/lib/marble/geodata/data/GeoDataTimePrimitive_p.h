@@ -18,12 +18,6 @@ namespace Marble
 
 class GeoDataTimePrimitivePrivate
 {
-  public:
-    const char* nodeType() const
-    {
-        return GeoDataTypes::GeoDataTimePrimitiveType;
-    }
-
 };
 
 } // namespace Marble

@@ -45,11 +45,6 @@ class GeoDataIconStylePrivate
     {
     }
 
-    const char* nodeType() const
-    {
-        return GeoDataTypes::GeoDataIconStyleType;
-    }
-
     RemoteIconLoader* remoteIconLoader() const
     {
         static RemoteIconLoader *remoteIconLoader = new RemoteIconLoader();
@@ -167,7 +162,7 @@ bool GeoDataIconStyle::operator!=( const GeoDataIconStyle &other ) const
 
 const char* GeoDataIconStyle::nodeType() const
 {
-    return d->nodeType();
+    return GeoDataTypes::GeoDataIconStyleType;
 }
 
 void GeoDataIconStyle::setIcon(const QImage &icon)

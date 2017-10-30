@@ -29,11 +29,6 @@ class GeoDataColorStylePrivate
     {
     }
 
-    const char* nodeType() const
-    {
-        return GeoDataTypes::GeoDataColorStyleType;
-    }
-
     /// stores the current color
     QColor     m_color;
 
@@ -80,7 +75,7 @@ bool GeoDataColorStyle::operator!=( const GeoDataColorStyle &other ) const
 
 const char* GeoDataColorStyle::nodeType() const
 {
-    return d->nodeType();
+    return GeoDataTypes::GeoDataColorStyleType;
 }
 
 void GeoDataColorStyle::setColor( const QColor &value )

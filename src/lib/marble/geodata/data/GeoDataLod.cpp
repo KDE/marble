@@ -49,7 +49,7 @@ bool GeoDataLod::operator!=(const GeoDataLod& other) const
 
 const char* GeoDataLod::nodeType() const
 {
-    return d->nodeType();
+    return GeoDataTypes::GeoDataLodType;
 }
 
 
