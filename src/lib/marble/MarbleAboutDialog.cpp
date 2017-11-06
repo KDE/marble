@@ -193,6 +193,11 @@ void MarbleAboutDialogPrivate::loadPageContents( int idx )
         QObject::tr("<b>Google Summer of Code</b>")+
         QObject::tr("<p> The Marble Team would like to thank its members who participated "
            "in the Google Summer of Code for their successful work on Marble:</p>")+
+        QObject::tr( "<p><b>2017</b></p>" ) +
+        QObject::tr( "<p>Mohammed Nafees <a href=\"mailto:nafees.technocool@gmail.com\">nafees.technocool@gmail.com</a><br />"
+           "<i>Project: Marble Indoor Maps</i></p>" ) +
+        QObject::tr( "<p>Judit Bartha <a href=\"mailto:bartha.m.judit@gmail.com\">bartha.m.judit@gmail.com</a><br />"
+           "<i>Project: Marble Material Maps</i></p>" ) +
         QObject::tr( "<p><b>2016</b></p>" ) +
         QObject::tr( "<p>Dávid Kolozsvári <a href=\"freedawson@gmail.com\">freedawson@gmail.com</a><br />"
            "<i>Project: Fluent graphics across every tile level in Marble's OSM vector map</i></p>" ) +
