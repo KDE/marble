@@ -16,6 +16,7 @@
 
 #include <QtGlobal>
 
+class QDateTime;
 class QStringList;
 class QColor;
 
@@ -77,6 +78,15 @@ public:
     QString name() const;
     /** The internal, nonlocalized name of the planet */
     QString id() const;
+
+    /**
+     * Fills the longitude and latitude with the planet's sun position.
+     *
+     * @param lon the latitude of the sun, in radian
+     * @param lat the longitude of the sun, in radian
+     * @param dateTime the time for which the sun position is to be calculated
+     */
+    void sunPosition(qreal &lon, qreal &lat, const QDateTime &dateTime) const;
 
     /* Setter functions */
     void setM_0( qreal M_0 );

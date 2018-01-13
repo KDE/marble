@@ -53,8 +53,6 @@ class MARBLE_EXPORT SunLocator : public QObject
     void positionChanged( qreal lon, qreal lat );
 
  private:
-    void updatePosition();
-
     SunLocatorPrivate * const d;
 
     Q_DISABLE_COPY( SunLocator )

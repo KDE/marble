@@ -10,12 +10,15 @@
 //
 #include "Planet.h"
 
-#include <QString>
-
 #include "PlanetFactory.h"
 #include "MarbleDebug.h"
 #include "MarbleGlobal.h"
 #include "MarbleColors.h"
+
+#include "src/lib/astro/solarsystem.h"
+
+#include <QDateTime>
+#include <QString>
 
 namespace Marble
 {
@@ -158,6 +161,28 @@ QString Planet::id() const
     return d->id;
 }
 
+void Planet::sunPosition(qreal &lon, qreal &lat, const QDateTime &dateTime) const
+{
+    SolarSystem sys;
+    sys.setCurrentMJD(
+                dateTime.date().year(), dateTime.date().month(), dateTime.date().day(),
+                dateTime.time().hour(), dateTime.time().minute(),
+                (double)dateTime.time().second());
+    const QString pname = d->id.at(0).toUpper() + d->id.right(d->id.size() - 1);
+    QByteArray name = pname.toLatin1();
+    sys.setCentralBody( name.data() );
+
+    double ra = 0.0;
+    double decl = 0.0;
+    sys.getSun(ra, decl);
+
+    double _lon = 0.0;
+    double _lat = 0.0;
+    sys.getPlanetographic(ra, decl, _lon, _lat);
+
+    lon = _lon * DEG2RAD;
+    lat = _lat * DEG2RAD;
+}
 
     /* Setter functions */
 void Planet::setM_0( qreal M_0 )
