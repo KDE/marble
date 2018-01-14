@@ -22,6 +22,10 @@
 
 // #define QT_STRICT_ITERATORS
 
+/* M_PI is a #define that may or may not be handled in <cmath> */
+#ifndef M_PI
+#define M_PI 3.14159265358979323846264338327950288419717
+#endif
 
 namespace Marble
 {
@@ -244,6 +248,8 @@ const qreal SEC2MIN = 1.0 / MIN2SEC;
 //Conversion hour vs second
 const qreal HOUR2SEC = 3600.0;
 const qreal SEC2HOUR = 1.0 / HOUR2SEC;
+
+const qreal TWOPI = 2 * M_PI;
 
 // Version definitions to use with an external application (as digiKam)
 

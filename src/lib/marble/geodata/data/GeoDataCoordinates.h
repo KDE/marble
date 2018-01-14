@@ -19,13 +19,6 @@
 #include <QMetaType>
 #include <QVector>
 
-#include <cmath>
-
-/* M_PI is a #define that may or may not be handled in <cmath> */
-#ifndef M_PI
-#define M_PI 3.14159265358979323846264338327950288419717
-#endif
-
 #include "geodata_export.h"
 #include "MarbleGlobal.h"
 
@@ -33,8 +26,6 @@ class QString;
 
 namespace Marble
 {
-
-const qreal TWOPI = 2 * M_PI;
 
 class GeoDataCoordinatesPrivate;
 class Quaternion;
