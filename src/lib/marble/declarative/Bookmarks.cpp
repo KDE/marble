@@ -64,7 +64,7 @@ bool Bookmarks::isBookmark( qreal longitude, qreal latitude ) const
     qreal planetRadius = m_marbleQuickItem->model()->planet()->radius();
     for( const Marble::GeoDataFolder* folder: bookmarks->folderList() ) {
         for( const Marble::GeoDataPlacemark * const placemark: folder->placemarkList() ) {
-            if ( distanceSphere( placemark->coordinate(), compareTo ) * planetRadius < 5 ) {
+            if (placemark->coordinate().sphericalDistanceTo(compareTo) * planetRadius < 5) {
                 return true;
             }
         }
@@ -140,7 +140,7 @@ void Bookmarks::removeBookmark( qreal longitude, qreal latitude )
     qreal planetRadius = m_marbleQuickItem->model()->planet()->radius();
     for( const Marble::GeoDataFolder* folder: bookmarks->folderList() ) {
         for( Marble::GeoDataPlacemark * placemark: folder->placemarkList() ) {
-            if ( distanceSphere( placemark->coordinate(), compareTo ) * planetRadius < 5 ) {
+            if (placemark->coordinate().sphericalDistanceTo(compareTo) * planetRadius < 5) {
                 manager->removeBookmark( placemark );
                 return;
             }

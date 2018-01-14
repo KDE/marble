@@ -180,18 +180,18 @@ GeoDataCoordinates AlternativeRoutesModel::Private::coordinates( const GeoDataCo
 
 qreal AlternativeRoutesModel::Private::distance( const GeoDataCoordinates &satellite, const GeoDataCoordinates &lineA, const GeoDataCoordinates &lineB )
 {
-    qreal dist = distanceSphere( lineA, satellite );
+    const qreal dist = lineA.sphericalDistanceTo(satellite);
     qreal bearA = bearing( lineA, satellite );
     qreal bearB = bearing( lineA, lineB );
     qreal result = asin( sin ( dist ) * sin( bearB - bearA ) );
-    Q_ASSERT( qMax<qreal>( distanceSphere(satellite, lineA), distanceSphere(satellite, lineB) ) >= qAbs<qreal>(result) );
+    Q_ASSERT(qMax<qreal>(satellite.sphericalDistanceTo(lineA), satellite.sphericalDistanceTo(lineB)) >= qAbs<qreal>(result));
 
     result = acos( cos( dist ) / cos( result ) );
     /** @todo: This is a naive approach. Look into the maths. */
-    qreal final = qMin<qreal>( distanceSphere( satellite, lineA ), distanceSphere( satellite, lineB ) );
-    if ( result >= 0 && result <= distanceSphere( lineA, lineB ) ) {
+    const qreal final = qMin<qreal>(satellite.sphericalDistanceTo(lineA), satellite.sphericalDistanceTo(lineB));
+    if ( result >= 0 && result <= lineA.sphericalDistanceTo(lineB)) {
         GeoDataCoordinates nearest = coordinates( lineA, result, bearB );
-        return qMin<qreal>( final, distanceSphere( satellite, nearest ) );
+        return qMin<qreal>(final, satellite.sphericalDistanceTo(nearest));
     } else {
         return final;
     }

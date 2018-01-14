@@ -60,7 +60,7 @@ void RoutingModelPrivate::updateViaPoints( const GeoDataCoordinates &position )
     qreal const threshold = 500 / EARTH_RADIUS;
     for( int i=0; i<m_request->size(); ++i ) {
         if ( !m_request->visited( i ) ) {
-            if ( distanceSphere( position, m_request->at( i ) ) < threshold ) {
+            if (position.sphericalDistanceTo(m_request->at(i)) < threshold) {
                 m_request->setVisited( i, true );
             }
         }
@@ -246,7 +246,7 @@ int RoutingModel::rightNeighbor( const GeoDataCoordinates &position, RouteReques
     for ( int j=1; j<route->size()-1; ++j ) {
         qreal minDistance = -1.0;
         for ( int i=mapping[j-1]; i<points.size(); ++i ) {
-            qreal distance = distanceSphere( points[i], route->at(j) );
+            const qreal distance = points[i].sphericalDistanceTo(route->at(j));
             if (minDistance < 0.0 || distance < minDistance ) {
                 mapping[j] = i;
                 minDistance = distance;
@@ -258,7 +258,7 @@ int RoutingModel::rightNeighbor( const GeoDataCoordinates &position, RouteReques
     qreal minWaypointDistance = -1.0;
     int waypoint=0;
     for ( int i=0; i<points.size(); ++i ) {
-        qreal waypointDistance = distanceSphere( points[i], position );
+        const qreal waypointDistance = points[i].sphericalDistanceTo(position);
         if ( minWaypointDistance < 0.0 || waypointDistance < minWaypointDistance ) {
             minWaypointDistance = waypointDistance;
             waypoint = i;
@@ -287,7 +287,7 @@ void RoutingModel::updatePosition( const GeoDataCoordinates& location, qreal spe
 
     d->updateViaPoints( location );
     const qreal planetRadius = PlanetFactory::construct("earth").radius();
-    qreal distance = planetRadius * distanceSphere( location, d->m_route.positionOnRoute() );
+    const qreal distance = planetRadius * location.sphericalDistanceTo(d->m_route.positionOnRoute());
     emit positionChanged();
 
     qreal deviation = 0.0;

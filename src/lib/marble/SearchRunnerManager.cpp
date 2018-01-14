@@ -111,8 +111,7 @@ void SearchRunnerManager::Private::addSearchResult( const QVector<GeoDataPlacema
         bool same = false;
         for ( int j=0; j<m_placemarkContainer.size(); ++j ) {
             if ( distanceCompare &&
-                 ( distanceSphere( result[i]->coordinate(),
-                                   m_placemarkContainer[j]->coordinate() )
+                 (result[i]->coordinate().sphericalDistanceTo(m_placemarkContainer[j]->coordinate())
                    * m_marbleModel->planet()->radius() < 1 ) ) {
                 same = true;
             }

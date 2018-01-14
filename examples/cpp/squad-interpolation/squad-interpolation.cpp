@@ -156,7 +156,7 @@ void MyPaintLayer::addRandomCity ( double minDistance, double maxDistance )
             if (document->name() == QLatin1String("cityplacemarks")) {
                 QVector<GeoDataPlacemark*> placemarks = document->placemarkList();
                 for ( int i = qrand() % placemarks.size(); i < placemarks.size(); ++i ) {
-                    double const distance = EARTH_RADIUS * distanceSphere ( m_cities.last(), placemarks[i]->coordinate() );
+                    const double distance = EARTH_RADIUS * m_cities.last().sphericalDistanceTo(placemarks[i]->coordinate());
                     if ( distance >= minDistance && distance <= maxDistance ) {
                         m_cities << placemarks[i]->coordinate();
                         return;

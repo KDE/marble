@@ -50,7 +50,7 @@ void SpellChecker::correctPlaceLabels(const QVector<GeoDataPlacemark*> &placemar
                 ++validated;
                 isValid = true;
             } else {
-                if (distanceSphere(match->coordinate(), place->coordinate()) < maxDistance) {
+                if (match->coordinate().sphericalDistanceTo(place->coordinate()) < maxDistance) {
                     if (levenshteinDistance(places.first()->name(), placeName) < 6) {
                         if (m_verbose) {
                             qDebug() << "Correcting" << placeName << "to" << match->name();
@@ -65,7 +65,7 @@ void SpellChecker::correctPlaceLabels(const QVector<GeoDataPlacemark*> &placemar
                 if (m_verbose && !hasMatch) {
                     qDebug() << "No match for " << placeName << ", candidates: ";
                     for (auto candidate: places) {
-                        qDebug() << distanceSphere(candidate->coordinate(), place->coordinate()) * EARTH_RADIUS << " m, "
+                        qDebug() << candidate->coordinate().sphericalDistanceTo(place->coordinate()) * EARTH_RADIUS << " m, "
                                  << "levenshtein distance " << levenshteinDistance(placeName, candidate->name()) << ":" << candidate->name();
                     }
                 }

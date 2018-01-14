@@ -917,7 +917,7 @@ void RoutingWidget::initializeTour()
     qreal planetRadius = d->m_widget->model()->planet()->radius();
     for( int i=1; i<path.size(); ++i ){
         GeoDataCoordinates coordinates = path.at( i );
-        totalDistance += planetRadius * distanceSphere( path.at( i-1 ), coordinates ); // Distance to route start
+        totalDistance += planetRadius * path.at(i - 1).sphericalDistanceTo(coordinates); // Distance to route start
         while (totalDistance >= allWaypoints[j].distance && j+1<allWaypoints.size()) {
             ++j;
         }
@@ -927,7 +927,7 @@ void RoutingWidget::initializeTour()
         double const waypointDistance = qMin( lastDistance, nextDistance ); // distance to closest waypoint
         double const step = qBound( 100.0, waypointDistance*2, 1000.0 ); // support point distance (higher density close to waypoints)
 
-        double const distance = planetRadius * distanceSphere( last, coordinates );
+        double const distance = planetRadius * last.sphericalDistanceTo(coordinates);
         if( i > 1 && distance < step ){
             continue;
         }

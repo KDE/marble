@@ -76,7 +76,7 @@ qreal Coordinate::distance( qreal longitude, qreal latitude ) const
 {
     GeoDataCoordinates::Unit deg = GeoDataCoordinates::Degree;
     GeoDataCoordinates other( longitude, latitude, 0, deg );
-    return EARTH_RADIUS * distanceSphere( coordinates(), other );
+    return EARTH_RADIUS * coordinates().sphericalDistanceTo(other);
 }
 
 qreal Coordinate::bearing( qreal longitude, qreal latitude ) const

@@ -24,6 +24,7 @@
 
 #include "MarbleGlobal.h"
 #include "MarbleDebug.h"
+#include "MarbleMath.h"
 
 #include "Quaternion.h"
 
@@ -875,6 +876,16 @@ bool GeoDataCoordinates::isPole( Pole pole ) const
             }            
         }
     }
+}
+
+qreal GeoDataCoordinates::sphericalDistanceTo(const GeoDataCoordinates &other) const
+{
+    qreal lon2, lat2;
+    other.geoCoordinates( lon2, lat2 );
+
+    // FIXME: Take the altitude into account!
+
+    return distanceSphere(d->m_lon, d->m_lat, lon2, lat2);
 }
 
 GeoDataCoordinates& GeoDataCoordinates::operator=( const GeoDataCoordinates &other )

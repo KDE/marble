@@ -64,8 +64,8 @@ void MergingPolygonNodesAnimation::startAnimation()
 void MergingPolygonNodesAnimation::updateNodes()
 {
     static const qreal ratio = 0.05;
-    const qreal distanceOffset = distanceSphere( m_firstInitialCoords.interpolate( m_secondInitialCoords, ratio ),
-                                                 m_firstInitialCoords ) + 0.001;
+    const qreal distanceOffset = m_firstInitialCoords.interpolate(m_secondInitialCoords, ratio)
+                                                     .sphericalDistanceTo(m_firstInitialCoords) + 0.001;
 
     if ( nodesDistance() <  distanceOffset ) {
         if ( m_boundary == OuterBoundary ) {
@@ -100,8 +100,8 @@ GeoDataCoordinates MergingPolygonNodesAnimation::newCoords()
 qreal MergingPolygonNodesAnimation::nodesDistance()
 {
     return m_boundary == OuterBoundary ?
-                distanceSphere( outerRing.at(first_i), outerRing.at(second_i) ) :
-                distanceSphere( innerRings.at(first_i).at(first_j), innerRings.at(second_i).at(second_j) );
+                outerRing.at(first_i).sphericalDistanceTo(outerRing.at(second_i)) :
+                innerRings.at(first_i).at(first_j).sphericalDistanceTo(innerRings.at(second_i).at(second_j));
 }
 
 } // namespace Marble

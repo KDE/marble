@@ -270,7 +270,7 @@ void GeoDataLineStringPrivate::optimize (GeoDataLineString& lineString) const
                 maxLevel = currentLevel;
                 continue;
             }
-            if (distanceSphere( currentCoords, *itCoords ) < resolutionForLevel(currentLevel + 1)) {
+            if (currentCoords.sphericalDistanceTo(*itCoords) < resolutionForLevel(currentLevel + 1)) {
                 itCoords->setDetail(currentLevel + 1);
             }
             else {
@@ -862,7 +862,7 @@ qreal GeoDataLineString::length( qreal planetRadius, int offset ) const
     int const end = d->m_vector.size();
     for( int i=start; i<end; ++i )
     {
-        length += distanceSphere( vector[i-1], vector[i] );
+        length += vector[i-1].sphericalDistanceTo(vector[i]);
     }
 
     return planetRadius * length;

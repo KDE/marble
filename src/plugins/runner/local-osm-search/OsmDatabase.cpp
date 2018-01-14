@@ -227,7 +227,7 @@ void OsmDatabase::makeUnique( QVector<OsmPlacemark> &placemarks )
 
 QString OsmDatabase::formatDistance( const GeoDataCoordinates &a, const GeoDataCoordinates &b )
 {
-    qreal distance = EARTH_RADIUS * distanceSphere( a, b);
+    qreal distance = EARTH_RADIUS * a.sphericalDistanceTo(b);
 
     int precision = 0;
     QString distanceUnit = QLatin1String( "m" );

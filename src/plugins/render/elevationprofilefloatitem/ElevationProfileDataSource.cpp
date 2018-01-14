@@ -48,7 +48,7 @@ QVector<QPointF> ElevationProfileDataSource::calculateElevationData(const GeoDat
         const qreal ele = getElevation( lineString[i] );
 
         if ( i ) {
-            distance += EARTH_RADIUS * distanceSphere( lineString[i-1], lineString[i] );
+            distance += EARTH_RADIUS * lineString[i-1].sphericalDistanceTo(lineString[i]);
         }
 
         if ( ele != invalidElevationData ) { // skip no data

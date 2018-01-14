@@ -173,7 +173,7 @@ void PlacemarkPositionProviderPlugin::updatePosition()
 
     if ( m_timestamp.isValid() ) {
         const qreal averageAltitude = ( m_coordinates.altitude() + m_coordinates.altitude() ) / 2.0 + m_marbleModel->planetRadius();
-        const qreal distance = distanceSphere( previousCoordinates, m_coordinates ) * averageAltitude;
+        const qreal distance = previousCoordinates.sphericalDistanceTo(m_coordinates) * averageAltitude;
         const qreal seconds = m_timestamp.msecsTo( m_marbleModel->clockDateTime() ) / 1000.0;
         m_speed = ( seconds > 0 ) ? ( distance / seconds ) : 0;
     }

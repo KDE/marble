@@ -275,7 +275,7 @@ void AutoNavigation::Private::adjustZoom( const GeoDataCoordinates &currentPosit
 
     const GeoDataCoordinates destination = findIntersection( currentX, currentY );
 
-    qreal greatCircleDistance = distanceSphere( currentPosition, destination );
+    const qreal greatCircleDistance = currentPosition.sphericalDistanceTo(destination);
     qreal radius = m_model->planetRadius();
     qreal distance = greatCircleDistance *  radius;
 

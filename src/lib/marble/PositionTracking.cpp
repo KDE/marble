@@ -86,7 +86,7 @@ void PositionTrackingPrivate::updatePosition()
     if ( m_positionProvider->status() == PositionProviderStatusAvailable ) {
         if ( accuracy.horizontal < 250 ) {
             if ( m_currentTrack->size() ) {
-                m_length += distanceSphere( m_currentTrack->coordinatesAt( m_currentTrack->size() - 1 ), position );
+                m_length += m_currentTrack->coordinatesAt(m_currentTrack->size() - 1).sphericalDistanceTo(position);
             }
             m_currentTrack->addPoint( timestamp, position );
         }

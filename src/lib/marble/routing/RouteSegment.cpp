@@ -110,9 +110,9 @@ qreal RouteSegment::distancePointToLine(const GeoDataCoordinates &p, const GeoDa
     qreal const len =(x1-x2)*(x1-x2)+(y1-y2)*(y1-y2);
     qreal const t = (x01*x21 + y01*y21) / len;
     if ( t<0.0 ) {
-        return EARTH_RADIUS * distanceSphere(p, a);
+        return EARTH_RADIUS * p.sphericalDistanceTo(a);
     } else if ( t > 1.0 ) {
-        return EARTH_RADIUS * distanceSphere(p, b);
+        return EARTH_RADIUS * p.sphericalDistanceTo(b);
     } else {
         qreal const nom = qAbs( x21 * y10 - x10 * y21 );
         qreal const den = sqrt( x21 * x21 + y21 * y21 );
@@ -153,7 +153,7 @@ qreal RouteSegment::distanceTo( const GeoDataCoordinates &point, GeoDataCoordina
 
     if ( m_path.size() == 1 ) {
         closest = m_path.first();
-        return EARTH_RADIUS * distanceSphere( m_path.first(), point );
+        return EARTH_RADIUS * m_path.first().sphericalDistanceTo(point);
     }
 
     qreal minDistance = -1.0;

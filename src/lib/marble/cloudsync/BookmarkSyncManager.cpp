@@ -427,7 +427,7 @@ QList<DiffItem> BookmarkSyncManager::Private::getPlacemarks( GeoDataFolder *fold
 const GeoDataPlacemark* BookmarkSyncManager::Private::findPlacemark( GeoDataContainer* container, const GeoDataPlacemark &bookmark ) const
 {
     for( GeoDataPlacemark* placemark: container->placemarkList() ) {
-        if ( EARTH_RADIUS * distanceSphere( placemark->coordinate(), bookmark.coordinate() ) <= 1 ) {
+        if (EARTH_RADIUS * placemark->coordinate().sphericalDistanceTo(bookmark.coordinate()) <= 1) {
             return placemark;
         }
     }
@@ -520,8 +520,8 @@ QList<DiffItem> BookmarkSyncManager::Private::diff( QIODevice *fileA, QIODevice 
         for( int p = i + 1; p < diffItems.count(); p++ ) {
             if( ( diffItems[i].m_origin == DiffItem::Source )
                     && ( diffItems[i].m_action == DiffItem::NoAction )
-                    && ( EARTH_RADIUS * distanceSphere( diffItems[i].m_placemarkA.coordinate(), diffItems[p].m_placemarkB.coordinate() ) <= 1 )
-                    && ( EARTH_RADIUS * distanceSphere( diffItems[i].m_placemarkB.coordinate(), diffItems[p].m_placemarkA.coordinate() ) <= 1 )
+                    && ( EARTH_RADIUS * diffItems[i].m_placemarkA.coordinate().sphericalDistanceTo(diffItems[p].m_placemarkB.coordinate()) <= 1 )
+                    && ( EARTH_RADIUS * diffItems[i].m_placemarkB.coordinate().sphericalDistanceTo(diffItems[p].m_placemarkA.coordinate()) <= 1 )
                     && ( diffItems[i].m_path != diffItems[p].m_path ) ) {
                 diffItems[p].m_action = DiffItem::Changed;
             }
@@ -540,7 +540,7 @@ void BookmarkSyncManager::Private::merge()
             DiffItem other;
 
             for( const DiffItem &itemB: m_diffB ) {
-                if( EARTH_RADIUS * distanceSphere( itemA.m_placemarkA.coordinate(), itemB.m_placemarkA.coordinate() ) <= 1 ) {
+                if( EARTH_RADIUS * itemA.m_placemarkA.coordinate().sphericalDistanceTo(itemB.m_placemarkA.coordinate()) <= 1 ) {
                     if( itemB.m_action == DiffItem::Deleted ) {
                         deleted = true;
                     } else if( itemB.m_action == DiffItem::Changed ) {
@@ -561,7 +561,7 @@ void BookmarkSyncManager::Private::merge()
             DiffItem other;
 
             for( const DiffItem &itemB: m_diffB ) {
-                if( EARTH_RADIUS * distanceSphere( itemA.m_placemarkB.coordinate(), itemB.m_placemarkB.coordinate() ) <= 1 ) {
+                if (EARTH_RADIUS * itemA.m_placemarkB.coordinate().sphericalDistanceTo(itemB.m_placemarkB.coordinate()) <= 1) {
                     if( ( itemA.m_action == DiffItem::Changed && ( itemB.m_action == DiffItem::Changed || itemB.m_action == DiffItem::Deleted ) )
                             || ( itemA.m_action == DiffItem::Deleted && itemB.m_action == DiffItem::Changed ) ) {
                         conflict = true;

@@ -309,6 +309,12 @@ class GEODATA_EXPORT GeoDataCoordinates
     bool isPole( Pole = AnyPole ) const;
 
     /**
+     * @brief This method calculates the shortest distance between two points on a sphere.
+     * @brief See: http://en.wikipedia.org/wiki/Great-circle_distance
+     */
+    qreal sphericalDistanceTo(const GeoDataCoordinates &other) const;
+
+    /**
     * @brief return Notation of string representation
     */
     static GeoDataCoordinates::Notation defaultNotation();

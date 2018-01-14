@@ -68,7 +68,7 @@ qreal GeoDataLinearRing::length( qreal planetRadius, int offset ) const
 {
     qreal  length = GeoDataLineString::length( planetRadius, offset );
 
-    return length + planetRadius * distanceSphere( last(), first() );
+    return length + planetRadius * last().sphericalDistanceTo(first());
 }
 
 bool GeoDataLinearRing::contains( const GeoDataCoordinates &coordinates ) const

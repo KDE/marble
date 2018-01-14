@@ -174,7 +174,7 @@ void RouteSimulationPositionProviderPlugin::update()
             //Max speed is set on points (m_lineStringInterpolated) based on formula. (max speed before points is calculated so the acceleration won't be exceeded)
             const qreal acceleration = 1.5;
             const qreal lookForwardDistance = 1000;
-            qreal checkedDistance = distanceSphere( m_currentPosition, m_lineStringInterpolated.at(m_currentIndex) )* m_marbleModel->planetRadius();
+            qreal checkedDistance = m_currentPosition.sphericalDistanceTo(m_lineStringInterpolated.at(m_currentIndex))* m_marbleModel->planetRadius();
             const qreal maxSpeed = 25;
             const qreal minSpeed = 2;
             qreal newSpeed = qMin((m_speed + acceleration*time), maxSpeed);
@@ -206,15 +206,15 @@ void RouteSimulationPositionProviderPlugin::update()
                     qreal maxCurrentSpeed = maxSpeedAtTurn + acceleration*t;
                     newSpeed = qMin(newSpeed, maxCurrentSpeed);
                     previousHeading = newHeading;
-                    curveLength += distanceSphere( m_lineStringInterpolated.at( j-1 ), m_lineStringInterpolated.at( j ) )* m_marbleModel->planetRadius();
+                    curveLength += m_lineStringInterpolated.at(j - 1).sphericalDistanceTo(m_lineStringInterpolated.at(j)) * m_marbleModel->planetRadius();
                 }
-                checkedDistance += distanceSphere( m_lineStringInterpolated.at( i ), m_lineStringInterpolated.at( i+1 ) )* m_marbleModel->planetRadius();
+                checkedDistance += m_lineStringInterpolated.at(i).sphericalDistanceTo(m_lineStringInterpolated.at(i + 1)) * m_marbleModel->planetRadius();
             }
             m_speed=newSpeed;
 
             //Assume the car's moving at m_speed m/s. The distance moved will be speed*time which is equal to the speed of the car if time is equal to one.
             //If the function isn't called once exactly after a second, multiplying by the time will compensate for the error and maintain the speed.
-            qreal fraction = m_speed*time/(distanceSphere( m_currentPosition, newPosition )* m_marbleModel->planetRadius());
+            qreal fraction = m_speed*time/(m_currentPosition.sphericalDistanceTo(newPosition) * m_marbleModel->planetRadius());
 
             //Interpolate and find the next point to move to if needed.
             if(fraction>0 && fraction <1){
@@ -231,7 +231,7 @@ void RouteSimulationPositionProviderPlugin::update()
                     }
 
                     newPosition = m_lineStringInterpolated.at( m_currentIndex );
-                    fraction = m_speed*time / (distanceSphere( m_currentPosition, newPosition )* m_marbleModel->planetRadius());
+                    fraction = m_speed*time / (m_currentPosition.sphericalDistanceTo(newPosition) * m_marbleModel->planetRadius());
                 }
 
                 if ( isCurrentIndexValid ) {

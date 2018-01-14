@@ -506,7 +506,7 @@ bool GeoLineStringGraphicsItem::configurePainterForLabel(GeoPainter *painter,  c
 
 bool GeoLineStringGraphicsItem::canMerge(const GeoDataCoordinates &a, const GeoDataCoordinates &b)
 {
-    return distanceSphere(a, b) * EARTH_RADIUS < 0.1;
+    return a.sphericalDistanceTo(b) * EARTH_RADIUS < 0.1;
 }
 
 }

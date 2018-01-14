@@ -24,7 +24,7 @@ PeakAnalyzer::Peaks PeakAnalyzer::peaksNear(const GeoDataPlacemark* placemark, c
     // https://github.com/jlblancoc/nanoflann to speed it up.
     Peaks neighbors;
     for (auto peak: peaks) {
-        if (distanceSphere(peak->coordinate(), placemark->coordinate()) < maxDistance) {
+        if (peak->coordinate().sphericalDistanceTo(placemark->coordinate()) < maxDistance) {
             neighbors << peak;
         }
     }
@@ -49,7 +49,7 @@ void PeakAnalyzer::dbScan(const Peaks &peaks, double maxDistance, int minPoints)
             PeakCluster* fit = nullptr;
             for (auto &cluster: clusters) {
                 for (auto placemark: cluster) {
-                    if (distanceSphere(peak->coordinate(), placemark->coordinate()) < maxDistance) {
+                    if (peak->coordinate().sphericalDistanceTo(placemark->coordinate()) < maxDistance) {
                         fit = &cluster;
                     }
                 }

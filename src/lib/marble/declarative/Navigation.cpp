@@ -78,7 +78,7 @@ void NavigationPrivate::updateNextInstructionDistance( const Route &route )
     if (model()){
         planetRadius = model()->planet()->radius();
     }
-    qreal distance = planetRadius * ( distanceSphere( position, interpolated ) + distanceSphere( interpolated, onRoute ) );
+    qreal distance = planetRadius * (position.sphericalDistanceTo(interpolated) + interpolated.sphericalDistanceTo(onRoute));
     qreal remaining = 0.0;
     const RouteSegment &segment = route.currentSegment();
     for ( int i=0; i<segment.path().size(); ++i ) {

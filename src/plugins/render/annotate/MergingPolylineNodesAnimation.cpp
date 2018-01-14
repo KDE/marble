@@ -51,8 +51,8 @@ void MergingPolylineNodesAnimation::startAnimation()
 void MergingPolylineNodesAnimation::updateNodes()
 {
     static const qreal ratio = 0.05;
-    const qreal distanceOffset = distanceSphere( m_firstInitialCoords.interpolate( m_secondInitialCoords, ratio ),
-                                                 m_firstInitialCoords ) + 0.001;
+    const qreal distanceOffset = m_firstInitialCoords.interpolate(m_secondInitialCoords, ratio)
+                                                     .sphericalDistanceTo(m_firstInitialCoords) + 0.001;
 
     if ( nodesDistance() <  distanceOffset ) {
         m_lineString->at(m_secondNodeIndex) = newCoords();
@@ -77,7 +77,7 @@ GeoDataCoordinates MergingPolylineNodesAnimation::newCoords()
 
 qreal MergingPolylineNodesAnimation::nodesDistance()
 {
-    return distanceSphere( m_lineString->at(m_firstNodeIndex), m_lineString->at(m_secondNodeIndex) );
+    return m_lineString->at(m_firstNodeIndex).sphericalDistanceTo(m_lineString->at(m_secondNodeIndex));
 }
 
 } // namespace Marble

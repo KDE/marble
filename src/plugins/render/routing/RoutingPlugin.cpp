@@ -294,7 +294,7 @@ void RoutingPluginPrivate::updateDestinationInformation()
         qreal planetRadius = m_marbleWidget->model()->planet()->radius();
         GeoDataCoordinates const onRoute = m_routingModel->route().positionOnRoute();
         GeoDataCoordinates const ego = m_routingModel->route().position();
-        qreal const distanceToRoute = planetRadius * distanceSphere( ego, onRoute );
+        qreal const distanceToRoute = planetRadius * ego.sphericalDistanceTo(onRoute);
 
         if ( !m_routingModel->route().currentSegment().isValid() ) {
             m_widget.instructionLabel->setText( richText( QObject::tr( "Calculate a route to get directions." ) ) );
@@ -374,7 +374,7 @@ qreal RoutingPluginPrivate::nextInstructionDistance() const
     GeoDataCoordinates interpolated = m_routingModel->route().positionOnRoute();
     GeoDataCoordinates onRoute = m_routingModel->route().currentWaypoint();
     qreal planetRadius = m_marbleWidget->model()->planet()->radius();
-    qreal distance = planetRadius * ( distanceSphere( position, interpolated ) + distanceSphere( interpolated, onRoute ) );
+    const qreal distance = planetRadius * (position.sphericalDistanceTo(interpolated) + interpolated.sphericalDistanceTo(onRoute));
     const RouteSegment &segment = m_routingModel->route().currentSegment();
     for (int i=0; i<segment.path().size(); ++i) {
         if (segment.path()[i] == onRoute) {
