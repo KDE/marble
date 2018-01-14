@@ -58,22 +58,22 @@ void NodeItemDelegate::setEditorData(QWidget *editor, const QModelIndex &index) 
 
         // Setting the latlonedit spinboxes values
         if( index.column() == 1 ) {
-            latLonEditWidget->setDimension( Marble::Longitude );
+            latLonEditWidget->setDimension(LatLonEdit::Longitude);
             value = outerBoundary.at( index.row() ).longitude( GeoDataCoordinates::Degree );
         }
         else {
-            latLonEditWidget->setDimension( Marble::Latitude );
+            latLonEditWidget->setDimension(LatLonEdit::Latitude);
             value = outerBoundary.at( index.row() ).latitude( GeoDataCoordinates::Degree );
         }
     }
     else if (const auto lineString = geodata_cast<GeoDataLineString>(m_placemark->geometry())) {
         // Setting the latlonedit spinboxes values
         if( index.column() == 1 ) {
-            latLonEditWidget->setDimension( Marble::Longitude );
+            latLonEditWidget->setDimension(LatLonEdit::Longitude);
             value = lineString->at( index.row() ).longitude( GeoDataCoordinates::Degree );
         }
         else {
-            latLonEditWidget->setDimension( Marble::Latitude );
+            latLonEditWidget->setDimension(LatLonEdit::Latitude);
             value = lineString->at( index.row() ).latitude(GeoDataCoordinates::Degree );
         }
     }

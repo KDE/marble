@@ -30,6 +30,14 @@ class MARBLE_EXPORT  LatLonEdit : public QWidget
     //Q_PROPERTY( int dimension READ dimension WRITE setDimension )
 
 public:
+    /**
+     * @brief This enum is used to choose the dimension.
+     */
+    enum Dimension {
+        Latitude,             ///< Latitude
+        Longitude            ///< Longitude
+    };
+
     explicit LatLonEdit(QWidget *parent = 0, Dimension dimension = Longitude,
                         GeoDataCoordinates::Notation notation = GeoDataCoordinates::DMS);
     ~LatLonEdit() override;

@@ -57,16 +57,6 @@ enum Projection {
 };
 
 /**
- * @brief This enum is used to choose the dimension.
- */
-enum Dimension {
-    Latitude,             ///< Latitude
-    Longitude            ///< Longitude
-};
-
-Q_DECLARE_FLAGS(Dimensions, Dimension)
-
-/**
  * @brief This enum is used to choose the unit chosen to measure angles.
  */
 enum AngleUnit {

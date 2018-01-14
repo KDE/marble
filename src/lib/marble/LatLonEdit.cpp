@@ -46,7 +46,7 @@ public:
 
 public: // API to be implemented
     virtual void setupUi() = 0;
-    virtual void setupMinMax(Dimension dimension) = 0;
+    virtual void setupMinMax(LatLonEdit::Dimension dimension) = 0;
     virtual void setValue(qreal value) = 0;
     virtual void handleIntEditChange() = 0;
     virtual void handleUIntEditChange() = 0;
@@ -63,7 +63,7 @@ public:
     explicit DecimalInputHandler(LatLonEditPrivate *ui) : AbstractInputHandler(ui) {}
 public: // AbstractInputHandler API
     void setupUi() override;
-    void setupMinMax(Dimension dimension) override;
+    void setupMinMax(LatLonEdit::Dimension dimension) override;
     void setValue(qreal value) override;
     void handleIntEditChange() override;
     void handleUIntEditChange() override;
@@ -77,7 +77,7 @@ public:
     explicit DMSInputHandler(LatLonEditPrivate *ui) : AbstractInputHandler(ui) {}
 public: // AbstractInputHandler API
     void setupUi() override;
-    void setupMinMax(Dimension dimension) override;
+    void setupMinMax(LatLonEdit::Dimension dimension) override;
     void setValue(qreal value) override;
     void handleIntEditChange() override;
     void handleUIntEditChange() override;
@@ -91,7 +91,7 @@ public:
     explicit DMInputHandler(LatLonEditPrivate *ui) : AbstractInputHandler(ui) {}
 public: // AbstractInputHandler API
     void setupUi() override;
-    void setupMinMax(Dimension dimension) override;
+    void setupMinMax(LatLonEdit::Dimension dimension) override;
     void setValue(qreal value) override;
     void handleIntEditChange() override;
     void handleUIntEditChange() override;
@@ -107,7 +107,7 @@ class LatLonEditPrivate : public Ui::LatLonEditPrivate
     friend class DMInputHandler;
 
 public:
-    Dimension m_dimension;
+    LatLonEdit::Dimension m_dimension;
     qreal m_value;
     GeoDataCoordinates::Notation m_notation;
     AbstractInputHandler *m_inputHandler;
@@ -140,9 +140,9 @@ void DecimalInputHandler::setupUi()
     m_ui->m_uintValueEditor->hide();
 }
 
-void DecimalInputHandler::setupMinMax(Dimension dimension)
+void DecimalInputHandler::setupMinMax(LatLonEdit::Dimension dimension)
 {
-    const qreal maxValue = (dimension == Longitude) ? 180.0 : 90.0;
+    const qreal maxValue = (dimension == LatLonEdit::Longitude) ? 180.0 : 90.0;
 
     m_ui->m_floatValueEditor->setMinimum(-maxValue);
     m_ui->m_floatValueEditor->setMaximum( maxValue);
@@ -191,9 +191,9 @@ void DMSInputHandler::setupUi()
     m_ui->m_uintValueEditor->show();
 }
 
-void DMSInputHandler::setupMinMax(Dimension dimension)
+void DMSInputHandler::setupMinMax(LatLonEdit::Dimension dimension)
 {
-    const int maxValue = (dimension == Longitude) ? 180 : 90;
+    const int maxValue = (dimension == LatLonEdit::Longitude) ? 180 : 90;
 
     m_ui->m_intValueEditor->setMinimum(-maxValue);
     m_ui->m_intValueEditor->setMaximum( maxValue);
@@ -349,9 +349,9 @@ void DMInputHandler::setupUi()
     m_ui->m_uintValueEditor->hide();
 }
 
-void DMInputHandler::setupMinMax(Dimension dimension)
+void DMInputHandler::setupMinMax(LatLonEdit::Dimension dimension)
 {
-    const int maxValue = (dimension == Longitude) ? 180 : 90;
+    const int maxValue = (dimension == LatLonEdit::Longitude) ? 180 : 90;
 
     m_ui->m_intValueEditor->setMinimum(-maxValue);
     m_ui->m_intValueEditor->setMaximum( maxValue);
@@ -448,7 +448,7 @@ qreal DMInputHandler::calculateValue() const
 
 
 LatLonEditPrivate::LatLonEditPrivate()
-    : m_dimension(Latitude)
+    : m_dimension(LatLonEdit::Latitude)
     , m_value(0.0)
     , m_notation(GeoDataCoordinates::DMS)
     , m_inputHandler(new DMSInputHandler(this))
@@ -467,7 +467,7 @@ void LatLonEditPrivate::init(QWidget* parent) { setupUi(parent); }
 
 using namespace Marble;
 
-LatLonEdit::LatLonEdit(QWidget *parent, Dimension dimension, GeoDataCoordinates::Notation notation)
+LatLonEdit::LatLonEdit(QWidget *parent, LatLonEdit::Dimension dimension, GeoDataCoordinates::Notation notation)
     : QWidget( parent ), d(new LatLonEditPrivate())
 {
     d->init(this);

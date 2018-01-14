@@ -78,8 +78,8 @@ PlacemarkEditHeaderPrivate::~PlacemarkEditHeaderPrivate()
 void PlacemarkEditHeaderPrivate::init(QWidget* parent)
 {
     setupUi(parent);
-    m_longitude->setDimension( Longitude );
-    m_latitude->setDimension( Latitude );
+    m_longitude->setDimension(LatLonEdit::Longitude);
+    m_latitude->setDimension(LatLonEdit::Latitude);
     m_targetId->setVisible(false);
     targetIdLabel->setVisible(false);
     setNotation(GeoDataCoordinates::DMS);
