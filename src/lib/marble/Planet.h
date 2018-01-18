@@ -70,6 +70,9 @@ public:
     /// the radius of the planet, in metres
     qreal radius() const;
 
+    /// the twilight zone of the planet, in radians
+    qreal twilightZone() const;
+
     /** The user visible name of the planet */
     QString name() const;
     /** The internal, nonlocalized name of the planet */
@@ -94,6 +97,8 @@ public:
     void setTheta_1( qreal theta_1 );
 
     void setRadius( qreal radius );
+
+    void setTwilightZone(qreal twilightZone);
 
     void setName( const QString& name );
     void setId( const QString& id );

@@ -43,7 +43,7 @@ public:
     SunLocatorPrivate( const MarbleClock *clock, const Planet *planet )
         : m_lon( 0.0 ),
           m_lat( 0.0 ),
-          m_twilightZone( 0.0 ),
+          m_twilightZone(planet->twilightZone()),
           m_clock( clock ),
           m_planet( planet )
     {
@@ -63,7 +63,6 @@ SunLocator::SunLocator( const MarbleClock *clock, const Planet *planet )
   : QObject(),
     d( new SunLocatorPrivate( clock, planet ))
 {
-    updateTwilightZone();
 }
 
 SunLocator::~SunLocator()
@@ -93,22 +92,6 @@ void SunLocator::updatePosition()
     sys.getPlanetographic (ra, decl, lon, lat);
     d->m_lon = lon * DEG2RAD;
     d->m_lat = lat * DEG2RAD;
-}
-
-void SunLocator::updateTwilightZone()
-{
-    const QString planetId = d->m_planet->id();
-
-    if (planetId == QLatin1String("earth") || planetId == QLatin1String("venus")) {
-        d->m_twilightZone = 0.1; // this equals 18 deg astronomical twilight.
-    }
-    else if (planetId == QLatin1String("mars")) {
-        d->m_twilightZone = 0.05;
-    }
-    else {
-        d->m_twilightZone = 0.0;
-    }
-
 }
 
 qreal SunLocator::shading(qreal lon, qreal a, qreal c) const
@@ -208,7 +191,7 @@ void SunLocator::setPlanet( const Planet *planet )
 
     mDebug() << "SunLocator::setPlanet(Planet*)";
     d->m_planet = planet;
-    updateTwilightZone();
+    d->m_twilightZone = planet->twilightZone();
     updatePosition();
 
     // Initially there might be no planet set.

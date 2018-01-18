@@ -74,6 +74,7 @@ Planet PlanetFactory::construct( const QString &id )
         planet.setTheta_0( 215.2995*DEG2RAD );
         planet.setTheta_1( -1.4813688*DEG2RAD );
         planet.setRadius( 6051800.0 );
+        planet.setTwilightZone(18*DEG2RAD);
         planet.setName(QStringLiteral("Venus"));
         planet.setHasAtmosphere( true );
         planet.setAtmosphereColor( Oxygen::sunYellow4 );
@@ -91,6 +92,7 @@ Planet PlanetFactory::construct( const QString &id )
         planet.setTheta_0( 280.1600*DEG2RAD );
         planet.setTheta_1( 360.9856235*DEG2RAD );
         planet.setRadius( 6378137.0 );
+        planet.setTwilightZone(18*DEG2RAD);
         planet.setName(QStringLiteral("Earth"));
         planet.setHasAtmosphere( true );
         planet.setAtmosphereColor( Qt::white );
@@ -108,6 +110,7 @@ Planet PlanetFactory::construct( const QString &id )
         planet.setTheta_0( 313.4803*DEG2RAD );
         planet.setTheta_1( 350.89198226*DEG2RAD );
         planet.setRadius( 3397000.0 );
+        planet.setTwilightZone(9.0*DEG2RAD);
         planet.setName(QStringLiteral("Mars"));
         planet.setHasAtmosphere( true );
         planet.setAtmosphereColor( Oxygen::hotOrange2 );

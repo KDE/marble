@@ -29,6 +29,7 @@ public:
     qreal epsilon; // obliquity of the ecliptic plane
     qreal theta_0, theta_1; // for calculating sidereal time
     qreal radius; //in metres
+    qreal twilightZone;
     QString name, id; //localized and nonlocalized names
     bool atmosphere;
     QColor atmosphereColor;
@@ -38,6 +39,7 @@ public:
         Pi(0.0), epsilon(0.0),
         theta_0(0.0), theta_1(0.0),
         radius(10000000.0),
+        twilightZone(0),
         name(), id(),
         atmosphere(false)
     {
@@ -140,6 +142,11 @@ qreal Planet::radius() const
     return d->radius;
 }
 
+qreal Planet::twilightZone() const
+{
+    return d->twilightZone;
+}
+
 
 QString Planet::name() const
 {
@@ -209,6 +216,11 @@ void Planet::setTheta_1( qreal theta_1 )
 void Planet::setRadius( qreal radius )
 {
     d->radius = radius;
+}
+
+void Planet::setTwilightZone(qreal twilightZone)
+{
+    d->twilightZone = twilightZone;
 }
 
 void Planet::setName( const QString& name )
