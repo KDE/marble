@@ -151,15 +151,19 @@ QRect GeoSceneMercatorTileProjection::tileIndexes(const GeoDataLatLonBox &latLon
     return QRect(QPoint(westX, northY), QPoint(eastX, southY));
 }
 
-void GeoSceneMercatorTileProjection::geoCoordinates(int zoomLevel,
-                                                    int x, int y,
-                                                    qreal& westernTileEdgeLon, qreal& northernTileEdgeLat) const
+
+GeoDataLatLonBox GeoSceneMercatorTileProjection::geoCoordinates(int zoomLevel, int x, int y) const
 {
     const unsigned int xTileCount = (1 << zoomLevel) * levelZeroColumns();
-    westernTileEdgeLon = lonFromTileX(x, xTileCount);
-
     const unsigned int yTileCount = (1 << zoomLevel) * levelZeroRows();
-    northernTileEdgeLat = latFromTileY(y, yTileCount);
+
+    const qreal west = lonFromTileX(x, xTileCount);
+    const qreal north = latFromTileY(y, yTileCount);
+
+    const qreal east = lonFromTileX(x + 1, xTileCount);
+    const qreal south = latFromTileY(y + 1, yTileCount);
+
+    return GeoDataLatLonBox(north, south, east, west);
 }
 
 }

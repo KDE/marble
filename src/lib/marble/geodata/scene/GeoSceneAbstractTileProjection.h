@@ -94,20 +94,6 @@ public:
      virtual QRect tileIndexes(const GeoDataLatLonBox &latLonBox, int zoomLevel) const = 0;
 
     /**
-     * @brief Get the north-west geo coordinates corresponding to a tile.
-     * If @p x, @p y or @p zoomLevel have values out-of-bounds, the behaviour is undefined.
-     *
-     * @param zoomLevel the zoomlevel of the tile
-     * @param x         the x index of the tile
-     * @param y         the y index of the tile
-     * @param westernTileEdgeLon  the longitude angle in radians of the western tile edge tis returned through this parameter
-     * @param northernTileEdgeLat the latitude angle in radians of the northern tile edge is returned through this parameter
-     */
-    virtual void geoCoordinates(int zoomLevel,
-                                int x, int y,
-                                qreal& westernTileEdgeLon, qreal& northernTileEdgeLat) const = 0;
-
-    /**
      * @brief Get the boundary geo coordinates corresponding to a tile.
      * If @p x, @p y or @p zoomLevel have values out-of-bounds, the behaviour is undefined.
      *
@@ -117,7 +103,7 @@ public:
      *
      * @return geographic bounding box covered by the given tile
      */
-    GeoDataLatLonBox geoCoordinates(int zoomLevel, int x, int y) const;
+    virtual GeoDataLatLonBox geoCoordinates(int zoomLevel, int x, int y) const = 0;
 
     /**
      * @brief Get the boundary geo coordinates corresponding to a tile.

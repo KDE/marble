@@ -129,17 +129,18 @@ QRect GeoSceneEquirectTileProjection::tileIndexes(const GeoDataLatLonBox &latLon
     return QRect(QPoint(westX, northY), QPoint(eastX, southY));
 }
 
-void GeoSceneEquirectTileProjection::geoCoordinates(int zoomLevel,
-                                                    int x, int y,
-                                                    qreal& westernTileEdgeLon, qreal& northernTileEdgeLat) const
+GeoDataLatLonBox GeoSceneEquirectTileProjection::geoCoordinates(int zoomLevel, int x, int y) const
 {
-    qreal radius = (1 << zoomLevel) * levelZeroColumns() / 2.0;
+    const qreal radiusX = (1 << zoomLevel) * levelZeroColumns() / 2.0;
+    const qreal radiusY = (1 << zoomLevel) * levelZeroRows() / 2.0;
 
-    westernTileEdgeLon  = (x - radius ) / radius * M_PI;
+    const qreal west  = (x - radiusX) / radiusX * M_PI;
+    const qreal north = (radiusY - y) / radiusY * M_PI / 2.0;
 
-    radius = (1 << zoomLevel) * levelZeroRows() / 2.0;
+    const qreal east  = ((x + 1) - radiusX) / radiusX * M_PI;
+    const qreal south = (radiusY - (y + 1)) / radiusY * M_PI / 2.0;
 
-    northernTileEdgeLat = (radius - y) / radius *  M_PI / 2.0;
+    return GeoDataLatLonBox(north, south, east, west);
 }
 
 }

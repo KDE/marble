@@ -66,9 +66,7 @@ public:
     /**
      * @copydoc
      */
-    void geoCoordinates(int zoomLevel,
-                        int x, int y,
-                        qreal& westernTileEdgeLon, qreal& northernTileEdgeLat) const override;
+    GeoDataLatLonBox geoCoordinates(int zoomLevel, int x, int y) const override;
 
     using GeoSceneAbstractTileProjection::geoCoordinates;
 

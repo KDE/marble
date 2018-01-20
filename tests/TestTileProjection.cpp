@@ -411,16 +411,7 @@ void TileProjectionTest::testGeoCoordinatesEquirect()
     QFETCH(qreal, expectedEasternTileEdgeLon);
     QFETCH(qreal, expectedSouthernTileEdgeLat);
 
-    GeoSceneEquirectTileProjection projection;
-
-    qreal westernTileEdgeLon;
-    qreal northernTileEdgeLat;
-
-    // method variant with zoomLevel, tileX, tileY
-    projection.geoCoordinates(zoomLevel, tileX, tileY, westernTileEdgeLon, northernTileEdgeLat);
-
-    QCOMPARE(westernTileEdgeLon, expectedWesternTileEdgeLon);
-    QCOMPARE(northernTileEdgeLat, expectedNorthernTileEdgeLat);
+    const GeoSceneEquirectTileProjection projection;
 
     // method variants with GeoDataLatLonBox
     const GeoDataLatLonBox latLonBox = projection.geoCoordinates(zoomLevel, tileX, tileY);
@@ -487,16 +478,7 @@ void TileProjectionTest::testGeoCoordinatesMercator()
     QFETCH(qreal, expectedEasternTileEdgeLon);
     QFETCH(qreal, expectedSouthernTileEdgeLat);
 
-    GeoSceneMercatorTileProjection projection;
-
-    qreal westernTileEdgeLon;
-    qreal northernTileEdgeLat;
-
-    // method variant with zoomLevel, tileX, tileY
-    projection.geoCoordinates(zoomLevel, tileX, tileY, westernTileEdgeLon, northernTileEdgeLat);
-
-    QCOMPARE(westernTileEdgeLon, expectedWesternTileEdgeLon);
-    QFUZZYCOMPARE(northernTileEdgeLat, expectedNorthernTileEdgeLat, 0.00001);
+    const GeoSceneMercatorTileProjection projection;
 
     // method variants with GeoDataLatLonBox
     const GeoDataLatLonBox latLonBox = projection.geoCoordinates(zoomLevel, tileX, tileY);
