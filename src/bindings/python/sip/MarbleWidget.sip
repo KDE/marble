@@ -133,7 +133,7 @@ public:
     void                    setInputEnabled (bool);
     void                    centerOn (const Marble::GeoDataLatLonBox& box, bool animated = 0);
 signals:
-//ig    void                    regionSelected (const QList<double>&);
+//ig    void                    regionSelected (const Marble::GeoDataLatLonBox &);
     void                    pluginSettingsChanged ();
     void                    renderPluginInitialized (Marble::RenderPlugin* renderPlugin);
 protected:

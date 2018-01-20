@@ -1087,11 +1087,12 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     void framesPerSecond( qreal fps );
 
-    /** This signal is emit when a new rectangle region is selected over the map 
-     *  The list of double values include coordinates in degrees using this order:
-     *  lon1, lat1, lon2, lat2 (or West, North, East, South) as left/top, right/bottom rectangle.
+    /**
+     * This signal is emit when a new rectangle region is selected over the map.
+     *
+     * @param boundingBox The geographical coordinates of the selected region
      */
-    void regionSelected( const QList<double>& );
+    void regionSelected(const GeoDataLatLonBox &boundingBox);
 
     /**
      * This signal is emit when the settings of a plugin changed.

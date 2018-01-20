@@ -36,11 +36,12 @@ class ViewportParams;
         void zoomChanged(int zoom);
         void distanceChanged(const QString& distanceString);
 
-        /** This signal is emitted when a new rectangle region is selected over the map
-        *  The list of double values includes coordinates in degrees using the following:
-        *  lon1, lat1, lon2, lat2 (or West, North, East, South) as left/top, right/bottom rectangle.
-        */
-        void regionSelected(const QList<double>&);
+        /**
+         * This signal is emit when a new rectangle region is selected over the map.
+         *
+         * @param boundingBox The geographical coordinates of the selected region
+         */
+        void regionSelected(const GeoDataLatLonBox &boundingBox);
 
     public:
         explicit MarbleAbstractPresenter(MarbleMap *map, QObject *parent = 0);

@@ -185,7 +185,7 @@ void MarbleWidgetPrivate::construct()
     m_map.setShowFrameRate( false );  // never let the map draw the frame rate,
                                        // we do this differently here in the widget
 
-    m_widget->connect( &m_presenter, SIGNAL(regionSelected(QList<double>)), m_widget, SIGNAL(regionSelected(QList<double>)) );
+    m_widget->connect( &m_presenter, SIGNAL(regionSelected(GeoDataLatLonBox)), m_widget, SIGNAL(regionSelected(GeoDataLatLonBox)) );
 
     m_widget->connect( &m_presenter, SIGNAL(zoomChanged(int)), m_widget, SIGNAL(zoomChanged(int)) );
     m_widget->connect( &m_presenter, SIGNAL(distanceChanged(QString)), m_widget, SIGNAL(distanceChanged(QString)) );
