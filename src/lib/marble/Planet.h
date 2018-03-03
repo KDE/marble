@@ -82,8 +82,8 @@ public:
     /**
      * Fills the longitude and latitude with the planet's sun position.
      *
-     * @param lon the latitude of the sun, in radian
-     * @param lat the longitude of the sun, in radian
+     * @param lon the longitude of the sun, in radian
+     * @param lat the latitude of the sun, in radian
      * @param dateTime the time for which the sun position is to be calculated
      */
     void sunPosition(qreal &lon, qreal &lat, const QDateTime &dateTime) const;
