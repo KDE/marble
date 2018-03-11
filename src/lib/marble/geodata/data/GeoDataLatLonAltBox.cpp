@@ -251,27 +251,6 @@ GeoDataLatLonAltBox GeoDataLatLonAltBox::fromLineString(  const GeoDataLineStrin
     return temp;
 }
 
-QString GeoDataLatLonAltBox::toString( GeoDataCoordinates::Unit unit ) const
-{
-    switch( unit ){
-    case GeoDataCoordinates::Radian:
-        return QString( "North: %1; West: %2 MaxAlt: %3\n South: %4; East: %5 MinAlt: %6" )
-	    .arg( north() ).arg( west() )
-	    .arg( d->m_maxAltitude ).arg( south() )
-	    .arg( east() ).arg( d->m_minAltitude ); 
-        break;
-    case GeoDataCoordinates::Degree:
-        return QString( "North: %1; West: %2 MaxAlt: %3\n South: %4; East: %5 MinAlt: %6" )
-            .arg( north() * RAD2DEG ).arg( west() * RAD2DEG )
-	    .arg( d->m_maxAltitude ).arg( south() * RAD2DEG )
-	    .arg( east() * RAD2DEG ).arg( d->m_minAltitude ); 
-        break;
-    }
-
-    return QString( "GeoDataLatLonAltBox::text(): Error in unit: %1\n" )
-	.arg( unit );
-}
-
 bool GeoDataLatLonAltBox::isNull() const
 {
     return GeoDataLatLonBox::isNull() && d->m_maxAltitude == d->m_minAltitude;

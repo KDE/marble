@@ -193,11 +193,6 @@ class GEODATA_EXPORT GeoDataLatLonBox : public GeoDataObject
     static GeoDataLatLonBox fromLineString( const GeoDataLineString& lineString );
 
     /**
-     * @brief Creates a text string of the bounding box
-     */
-    virtual QString toString( GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian ) const;
-
-    /**
      * @brief Indicates whether the bounding box only contains a single 2D point ("singularity").
      * @return Return value is true if the height and the width of the bounding box equal zero.
      */
