@@ -1002,21 +1002,21 @@ QPointF GeoDataCoordinatesPrivate::mapLonLatToXY( qreal lambda, qreal phi, qreal
     // Equation (10.15)
 
     // Precalculate second numerical eccentricity
-    qreal const ep2 = (qPow (GeoDataCoordinatesPrivate::sm_semiMajorAxis, 2.0) - qPow (GeoDataCoordinatesPrivate::sm_semiMinorAxis, 2.0))
-                    / qPow (GeoDataCoordinatesPrivate::sm_semiMinorAxis, 2.0);
+    const qreal ep2 = (qPow(GeoDataCoordinatesPrivate::sm_semiMajorAxis, 2.0) - qPow(GeoDataCoordinatesPrivate::sm_semiMinorAxis, 2.0))
+                    / qPow(GeoDataCoordinatesPrivate::sm_semiMinorAxis, 2.0);
 
     // Precalculate the square of nu, just an auxiliar quantity
-    qreal const nu2 = ep2 * qPow (qCos(phi), 2.0);
+    const qreal nu2 = ep2 * qPow(qCos(phi), 2.0);
 
     // Precalculate the radius of curvature in prime vertical
-    qreal const N = qPow (GeoDataCoordinatesPrivate::sm_semiMajorAxis, 2.0) / (GeoDataCoordinatesPrivate::sm_semiMinorAxis * qSqrt (1 + nu2));
+    const qreal N = qPow(GeoDataCoordinatesPrivate::sm_semiMajorAxis, 2.0) / (GeoDataCoordinatesPrivate::sm_semiMinorAxis * qSqrt(1 + nu2));
 
     // Precalculate the tangent of phi and its square
-    qreal const t = qTan (phi);
-    qreal const t2 = t * t;
+    const qreal t = qTan(phi);
+    const qreal t2 = t * t;
 
     // Precalculate longitude difference
-    qreal const l = lambda - lambda0;
+    const qreal l = lambda - lambda0;
 
     /*
      * Precalculate coefficients for l**n in the equations below
@@ -1028,36 +1028,28 @@ QPointF GeoDataCoordinatesPrivate::mapLonLatToXY( qreal lambda, qreal phi, qreal
      * follow the meaningful nomenclature in equation 10.15
      * (coef[n] corresponds to qPow(l,n) factor)
      */
-    QVector<qreal> coef(9);
 
-    coef[0] = coef[1] = coef[2] = 1.0;
-
-    coef[3] = 1.0 - t2 + nu2;
-
-    coef[4] = 5.0 - t2 + 9 * nu2 + 4.0 * (nu2 * nu2);
-
-    coef[5] = 5.0 - 18.0 * t2 + (t2 * t2) + 14.0 * nu2
-            - 58.0 * t2 * nu2;
-
-    coef[6] = 61.0 - 58.0 * t2 + (t2 * t2) + 270.0 * nu2
-            - 330.0 * t2 * nu2;
-
-    coef[7] = 61.0 - 479.0 * t2 + 179.0 * (t2 * t2) - (t2 * t2 * t2);
-
-    coef[8] = 1385.0 - 3111.0 * t2 + 543.0 * (t2 * t2) - (t2 * t2 * t2);
+    const qreal coef1 = 1;
+    const qreal coef2 = 1;
+    const qreal coef3 = 1.0 - t2 + nu2;
+    const qreal coef4 = 5.0 - t2 + 9 * nu2 + 4.0 * (nu2 * nu2);
+    const qreal coef5 = 5.0 - 18.0 * t2 + (t2 * t2) + 14.0 * nu2 - 58.0 * t2 * nu2;
+    const qreal coef6 = 61.0 - 58.0 * t2 + (t2 * t2) + 270.0 * nu2 - 330.0 * t2 * nu2;
+    const qreal coef7 = 61.0 - 479.0 * t2 + 179.0 * (t2 * t2) - (t2 * t2 * t2);
+    const qreal coef8 = 1385.0 - 3111.0 * t2 + 543.0 * (t2 * t2) - (t2 * t2 * t2);
 
     // Calculate easting (x)
-    qreal easting = N * qCos(phi) * coef[1] * l
-        + (N / 6.0 * qPow (qCos(phi), 3.0) * coef[3] * qPow (l, 3.0))
-        + (N / 120.0 * qPow (qCos(phi), 5.0) * coef[5] * qPow (l, 5.0))
-        + (N / 5040.0 * qPow (qCos(phi), 7.0) * coef[7] * qPow (l, 7.0));
+    const qreal easting = N * qCos(phi) * coef1 * l
+        + (N / 6.0 * qPow(qCos(phi), 3.0) * coef3 * qPow(l, 3.0))
+        + (N / 120.0 * qPow(qCos(phi), 5.0) * coef5 * qPow(l, 5.0))
+        + (N / 5040.0 * qPow(qCos(phi), 7.0) * coef7 * qPow(l, 7.0));
 
     // Calculate northing (y)
-    qreal northing = arcLengthOfMeridian (phi)
-        + (t / 2.0 * N * qPow (qCos(phi), 2.0) * coef[2] * qPow (l, 2.0))
-        + (t / 24.0 * N * qPow (qCos(phi), 4.0) * coef[4] * qPow (l, 4.0))
-        + (t / 720.0 * N * qPow (qCos(phi), 6.0) * coef[6] * qPow (l, 6.0))
-        + (t / 40320.0 * N * qPow (qCos(phi), 8.0) * coef[8] * qPow (l, 8.0));
+    const qreal northing = arcLengthOfMeridian (phi)
+        + (t / 2.0 * N * qPow(qCos(phi), 2.0) * coef2 * qPow(l, 2.0))
+        + (t / 24.0 * N * qPow(qCos(phi), 4.0) * coef4 * qPow(l, 4.0))
+        + (t / 720.0 * N * qPow(qCos(phi), 6.0) * coef6 * qPow(l, 6.0))
+        + (t / 40320.0 * N * qPow(qCos(phi), 8.0) * coef8 * qPow(l, 8.0));
 
     return QPointF(easting, northing);
 }
