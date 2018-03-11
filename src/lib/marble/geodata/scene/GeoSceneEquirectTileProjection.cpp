@@ -22,7 +22,6 @@
 #include "GeoSceneEquirectTileProjection.h"
 
 #include <GeoDataLatLonBox.h>
-#include <MarbleMath.h>
 
 namespace Marble
 {

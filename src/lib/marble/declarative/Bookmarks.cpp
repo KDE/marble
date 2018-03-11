@@ -13,7 +13,6 @@
 #include "Planet.h"
 #include "MarbleQuickItem.h"
 #include "MarbleModel.h"
-#include "MarbleMath.h"
 #include "MarblePlacemarkModel.h"
 #include "BookmarkManager.h"
 #include "GeoDataDocument.h"

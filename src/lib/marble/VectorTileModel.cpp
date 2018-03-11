@@ -18,7 +18,6 @@
 #include "MarbleGlobal.h"
 #include "MarbleDebug.h"
 #include "MathHelper.h"
-#include "MarbleMath.h"
 #include "TileId.h"
 #include "TileLoader.h"
 

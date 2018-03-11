@@ -26,7 +26,6 @@
 #include "GeoPainter.h"
 #include "ViewportParams.h"
 #include "SceneGraphicsTypes.h"
-#include "MarbleMath.h"
 #include "MergingPolygonNodesAnimation.h"
 #include "PolylineNode.h"
 #include "osm/OsmPlacemarkData.h"

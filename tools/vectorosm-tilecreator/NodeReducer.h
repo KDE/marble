@@ -11,7 +11,6 @@
 #ifndef MARBLE_NODEREDUCER_H
 #define MARBLE_NODEREDUCER_H
 
-#include "MarbleMath.h"
 #include "OsmPlacemarkData.h"
 #include "VectorClipper.h"
 

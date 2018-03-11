@@ -26,7 +26,6 @@
 #include "GeoDataDocumentWriter.h"
 #include "KmlElementDictionary.h"
 #include "FileManager.h"
-#include "MarbleMath.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "PositionProviderPlugin.h"

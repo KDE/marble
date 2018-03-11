@@ -10,7 +10,6 @@
 
 #include "RouteSegment.h"
 
-#include "MarbleMath.h"
 #include "GeoDataLatLonAltBox.h"
 
 namespace Marble

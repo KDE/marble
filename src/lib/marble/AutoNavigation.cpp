@@ -16,7 +16,6 @@
 #include "PositionTracking.h"
 #include "MarbleDebug.h"
 #include "MarbleModel.h"
-#include "MarbleMath.h"
 #include "ViewportParams.h"
 #include "MarbleGlobal.h"
 #include "RoutingManager.h"

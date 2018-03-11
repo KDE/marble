@@ -27,7 +27,6 @@
 
 #include "GeoDataLatLonAltBox.h"
 #include "MarbleDebug.h"
-#include "MarbleMath.h"
 #include "MarbleModel.h"
 #include "MarbleWidget.h"
 #include "LatLonBoxWidget.h"

@@ -15,7 +15,6 @@
 
 #include "GeoDataLinearRing.h"
 #include "GeoDataTypes.h"
-#include "MarbleMath.h"
 #include "Quaternion.h"
 #include "MarbleDebug.h"
 

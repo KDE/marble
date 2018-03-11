@@ -12,7 +12,6 @@
 
 #include "MarbleGlobal.h"
 #include "MarbleLocale.h"
-#include "MarbleMath.h"
 
 #include <qmath.h>
 

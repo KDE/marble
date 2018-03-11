@@ -12,7 +12,6 @@
 
 #include "Planet.h"
 #include "PlanetFactory.h"
-#include "MarbleMath.h"
 #include "Route.h"
 #include "RouteRequest.h"
 #include "PositionTracking.h"

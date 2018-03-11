@@ -22,7 +22,6 @@
 #include "MarbleGraphicsGridLayout.h"
 #include "MarbleModel.h"
 #include "MarbleWidget.h"
-#include "MarbleMath.h"
 #include "MarbleLocale.h"
 #include "MarbleDirs.h"
 #include "PluginManager.h"

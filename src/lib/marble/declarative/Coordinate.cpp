@@ -10,7 +10,7 @@
 
 #include "Coordinate.h"
 
-#include "MarbleMath.h"
+#include "MarbleGlobal.h"
 
 using Marble::GeoDataCoordinates;
 using Marble::EARTH_RADIUS;

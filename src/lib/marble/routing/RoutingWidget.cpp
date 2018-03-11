@@ -43,7 +43,6 @@
 #include "CloudSyncManager.h"
 #include "PlaybackAnimatedUpdateItem.h"
 #include "GeoDataAnimatedUpdate.h"
-#include "MarbleMath.h"
 #include "Planet.h"
 
 #include <QTimer>

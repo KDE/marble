@@ -11,7 +11,6 @@
 #include "BookmarkSyncManager.h"
 
 #include "GeoWriter.h"
-#include "MarbleMath.h"
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
 #include "GeoDataParser.h"

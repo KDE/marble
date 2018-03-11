@@ -21,7 +21,6 @@
 #include "GeoDataStyle.h"
 #include "GeoDataColorStyle.h"
 #include "MarbleDebug.h"
-#include "MarbleMath.h"
 #include "OsmPlacemarkData.h"
 
 #include <qmath.h>

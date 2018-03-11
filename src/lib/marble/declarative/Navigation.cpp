@@ -17,7 +17,6 @@
 #include "routing/RoutingManager.h"
 #include "routing/RoutingModel.h"
 #include "PositionTracking.h"
-#include "MarbleMath.h"
 #include "AutoNavigation.h"
 #include "routing/VoiceNavigationModel.h"
 #include "ViewportParams.h"

@@ -13,7 +13,6 @@
 
 #include "GeoDataPlacemark.h"
 #include "MarbleClock.h"
-#include "MarbleMath.h"
 #include "MarbleModel.h"
 #include "MarbleDebug.h"
 

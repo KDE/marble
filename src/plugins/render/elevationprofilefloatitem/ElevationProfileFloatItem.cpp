@@ -23,7 +23,6 @@
 #include "MarbleDirs.h"
 #include "ElevationModel.h"
 #include "MarbleGraphicsGridLayout.h"
-#include "MarbleMath.h"
 #include "MarbleDebug.h"
 #include "routing/RoutingManager.h"
 #include "routing/RoutingModel.h"

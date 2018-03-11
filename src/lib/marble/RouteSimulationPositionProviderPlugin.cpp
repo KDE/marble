@@ -12,7 +12,6 @@
 
 #include "RouteSimulationPositionProviderPlugin.h"
 
-#include "MarbleMath.h"
 #include "MarbleModel.h"
 #include "routing/Route.h"
 #include "routing/RoutingManager.h"

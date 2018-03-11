@@ -13,7 +13,6 @@
 #include "GeoDataLinearRing_p.h"
 
 #include "GeoDataTypes.h"
-#include "MarbleMath.h"
 #include "MarbleDebug.h"
 
 namespace Marble

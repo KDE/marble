@@ -20,7 +20,6 @@
 #include "SceneGraphicsTypes.h"
 #include "GeoPainter.h"
 #include "PolylineNode.h"
-#include "MarbleMath.h"
 #include "GeoDataLineString.h"
 #include "GeoDataPlacemark.h"
 #include "ViewportParams.h"
