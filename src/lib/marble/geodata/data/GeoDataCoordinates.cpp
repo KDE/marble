@@ -812,6 +812,19 @@ GeoDataCoordinates GeoDataCoordinates::interpolate( const GeoDataCoordinates &ta
     return GeoDataCoordinates( lon, lat, alt );
 }
 
+GeoDataCoordinates GeoDataCoordinates::nlerp(const GeoDataCoordinates &target, double t) const
+{
+    qreal  lon = 0.0;
+    qreal  lat = 0.0;
+
+    const Quaternion itpos = Quaternion::nlerp(quaternion(), target.quaternion(), t);
+    itpos.getSpherical(lon, lat);
+
+    const qreal altitude = 0.5 * (d->m_altitude + target.altitude());
+
+    return GeoDataCoordinates(lon, lat, altitude);
+}
+
 GeoDataCoordinates GeoDataCoordinates::interpolate( const GeoDataCoordinates &before, const GeoDataCoordinates &target, const GeoDataCoordinates &after, double t_ ) const
 {
     double const t = qBound( 0.0, t_, 1.0 );

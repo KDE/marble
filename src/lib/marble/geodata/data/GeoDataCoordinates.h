@@ -296,6 +296,14 @@ class GEODATA_EXPORT GeoDataCoordinates
     GeoDataCoordinates interpolate( const GeoDataCoordinates &target, double t ) const;
 
     /**
+     * @brief nlerp (normalized linear interpolation) between this coordinates and the given target coordinates
+     * @param target Destination coordinates
+     * @param t Fraction 0..1 to weight between this and target
+     * @return Interpolated coordinate between this (t<=0.0) and target (t>=1.0)
+     */
+    GeoDataCoordinates nlerp(const GeoDataCoordinates &target, double t) const;
+
+    /**
      * @brief squad (spherical and quadrangle) interpolation between b and c
      * @param before First base point
      * @param target Third base point (second interpolation point)

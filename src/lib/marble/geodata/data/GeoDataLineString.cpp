@@ -110,17 +110,7 @@ GeoDataCoordinates GeoDataLineStringPrivate::findDateLine( const GeoDataCoordina
     }
     ++recursionCounter;
 
-    qreal  lon = 0.0;
-    qreal  lat = 0.0;
-
-    qreal altDiff = currentCoords.altitude() - previousCoords.altitude();
-
-    const Quaternion itpos = Quaternion::nlerp( previousCoords.quaternion(), currentCoords.quaternion(), 0.5 );
-    itpos.getSpherical( lon, lat );
-
-    qreal altitude = previousCoords.altitude() + 0.5 * altDiff;
-
-    GeoDataCoordinates interpolatedCoords( lon, lat, altitude );
+    const GeoDataCoordinates interpolatedCoords = previousCoords.nlerp(currentCoords, 0.5);
 
     int interpolatedSign = ( interpolatedCoords.longitude() < 0.0 ) ? -1 : +1 ;
 

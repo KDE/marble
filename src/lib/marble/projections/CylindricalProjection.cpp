@@ -192,32 +192,34 @@ int CylindricalProjectionPrivate::processTessellation( const GeoDataCoordinates 
         }
     }
 
-    const qreal altDiff = currentCoords.altitude() - previousCoords.altitude();
-
     // Create the tessellation nodes.
     GeoDataCoordinates previousTessellatedCoords = previousCoords;
     for ( int i = 1; i <= tessellatedNodes; ++i ) {
         const qreal t = (qreal)(i) / (qreal)( tessellatedNodes + 1 );
 
-        // interpolate the altitude, too
-        const qreal altitude = clampToGround ? 0 : altDiff * t + previousCoords.altitude();
+        GeoDataCoordinates currentTessellatedCoords;
 
-        qreal lon = 0.0;
-        qreal lat = 0.0;
         if ( followLatitudeCircle ) {
             // To tessellate along latitude circles use the
             // linear interpolation of the longitude.
-            lon = lonDiff * t + previousCoords.longitude();
-            lat = previousTessellatedCoords.latitude();
+            // interpolate the altitude, too
+            const qreal altDiff = currentCoords.altitude() - previousCoords.altitude();
+            const qreal altitude = altDiff * t + previousCoords.altitude();
+            const qreal lon = lonDiff * t + previousCoords.longitude();
+            const qreal lat = previousTessellatedCoords.latitude();
+
+            currentTessellatedCoords = GeoDataCoordinates(lon, lat, altitude);
         }
         else {
             // To tessellate along great circles use the
             // normalized linear interpolation ("NLERP") for latitude and longitude.
-            const Quaternion itpos = Quaternion::nlerp( previousCoords.quaternion(), currentCoords.quaternion(), t );
-            itpos. getSpherical( lon, lat );
+            currentTessellatedCoords = previousCoords.nlerp(currentCoords, t);
         }
 
-        const GeoDataCoordinates currentTessellatedCoords( lon, lat, altitude );
+        if (clampToGround) {
+            currentTessellatedCoords.setAltitude(0);
+        }
+
         Q_Q(const CylindricalProjection);
         qreal bx, by;
         q->screenCoordinates( currentTessellatedCoords, viewport, bx, by );
