@@ -261,6 +261,8 @@ class GEODATA_EXPORT GeoDataCoordinates
      */
     GeoDataCoordinates rotateAround( const GeoDataCoordinates &axis, qreal angle, Unit unit = Radian ) const;
 
+    GeoDataCoordinates rotateAround(const Quaternion &rotAxis) const;
+
     /**
      * @brief Returns the bearing (true bearing, the angle between the line defined
      * by this point and the other and the prime meridian)

@@ -166,13 +166,8 @@ void AreaAnnotation::move( const GeoDataCoordinates &source, const GeoDataCoordi
     Quaternion lonAxis = Quaternion::fromEuler(0, deltaLon, 0);
     Quaternion rotAxis = latRectAxis * latAxis * latRectAxis.inverse() * lonAxis;
 
-    qreal lonRotated, latRotated;
-
     for ( int i = 0; i < outerRing.size(); ++i ) {
-        Quaternion qpos = outerRing.at(i).quaternion();
-        qpos.rotateAroundAxis(rotAxis);
-        qpos.getSpherical( lonRotated, latRotated );
-        GeoDataCoordinates movedPoint( lonRotated, latRotated, 0 );
+        const GeoDataCoordinates movedPoint = outerRing.at(i).rotateAround(rotAxis);
         // Keeping the OsmPlacemarkData synchronized with the geometry
         if ( osmData ) {
             osmData->memberReference( -1 ).changeNodeReference( outerRing.at( i ), movedPoint );
@@ -183,10 +178,7 @@ void AreaAnnotation::move( const GeoDataCoordinates &source, const GeoDataCoordi
     for ( int i = 0; i < innerRings.size(); ++i ) {
         GeoDataLinearRing newRing( Tessellate );
         for ( int j = 0; j < innerRings.at(i).size(); ++j ) {
-            Quaternion qpos = innerRings.at(i).at(j).quaternion();
-            qpos.rotateAroundAxis(rotAxis);
-            qpos.getSpherical( lonRotated, latRotated );
-            GeoDataCoordinates movedPoint( lonRotated, latRotated, 0 );
+            const GeoDataCoordinates movedPoint = innerRings.at(i).at(j).rotateAround(rotAxis);
             if ( osmData ) {
                 osmData->memberReference( i ).changeNodeReference( innerRings.at( i ).at( j ), movedPoint );
             }
@@ -1043,13 +1035,8 @@ bool AreaAnnotation::processEditingOnMove( QMouseEvent *mouseEvent )
         polygon->outerBoundary().clear();
         polygon->innerBoundaries().clear();
 
-        qreal lonRotated, latRotated;
-
         for ( int i = 0; i < outerRing.size(); ++i ) {
-            Quaternion qpos = outerRing.at(i).quaternion();
-            qpos.rotateAroundAxis(rotAxis);
-            qpos.getSpherical( lonRotated, latRotated );
-            GeoDataCoordinates movedPoint( lonRotated, latRotated, 0 );
+            const GeoDataCoordinates movedPoint = outerRing.at(i).rotateAround(rotAxis);
             if ( osmData ) {
                 osmData->memberReference( -1 ).changeNodeReference( outerRing.at( i ), movedPoint );
             }
@@ -1059,10 +1046,7 @@ bool AreaAnnotation::processEditingOnMove( QMouseEvent *mouseEvent )
         for ( int i = 0; i < innerRings.size(); ++i ) {
             GeoDataLinearRing newRing( Tessellate );
             for ( int j = 0; j < innerRings.at(i).size(); ++j ) {
-                Quaternion qpos = innerRings.at(i).at(j).quaternion();
-                qpos.rotateAroundAxis(rotAxis);
-                qpos.getSpherical( lonRotated, latRotated );
-                GeoDataCoordinates movedPoint( lonRotated, latRotated, 0 );
+                const GeoDataCoordinates movedPoint = innerRings.at(i).at(j).rotateAround(rotAxis);
                 if ( osmData ) {
                     osmData->memberReference( i ).changeNodeReference( innerRings.at( i ).at( j ) , movedPoint );
                 }

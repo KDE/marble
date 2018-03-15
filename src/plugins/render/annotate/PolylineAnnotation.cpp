@@ -291,12 +291,8 @@ void PolylineAnnotation::move( const GeoDataCoordinates &source, const GeoDataCo
     Quaternion lonAxis = Quaternion::fromEuler(0, deltaLon, 0);
     Quaternion rotAxis = latRectAxis * latAxis * latRectAxis.inverse() * lonAxis;
 
-    qreal lonRotated, latRotated;
     for ( int i = 0; i < oldLineString.size(); ++i ) {
-        Quaternion qpos = oldLineString.at(i).quaternion();
-        qpos.rotateAroundAxis(rotAxis);
-        qpos.getSpherical( lonRotated, latRotated );
-        GeoDataCoordinates movedPoint( lonRotated, latRotated, 0 );
+        const GeoDataCoordinates movedPoint = oldLineString.at(i).rotateAround(rotAxis);
         if ( osmData ) {
             osmData->changeNodeReference( oldLineString.at( i ), movedPoint );
         }
@@ -623,12 +619,8 @@ bool PolylineAnnotation::processEditingOnMove( QMouseEvent *mouseEvent )
         Quaternion lonAxis = Quaternion::fromEuler(0, deltaLon, 0);
         Quaternion rotAxis = latRectAxis * latAxis * latRectAxis.inverse() * lonAxis;
 
-        qreal lonRotated, latRotated;
         for ( int i = 0; i < oldLineString.size(); ++i ) {
-            Quaternion qpos = oldLineString.at(i).quaternion();
-            qpos.rotateAroundAxis(rotAxis);
-            qpos.getSpherical( lonRotated, latRotated );
-            GeoDataCoordinates movedPoint( lonRotated, latRotated, 0 );
+            const GeoDataCoordinates movedPoint = oldLineString.at(i).rotateAround(rotAxis);
             if ( osmData ) {
                 osmData->changeNodeReference( oldLineString.at( i ), movedPoint );
             }

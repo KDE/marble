@@ -759,8 +759,13 @@ GeoDataCoordinates GeoDataCoordinates::rotateAround( const GeoDataCoordinates &a
     const Quaternion rotationAmount = Quaternion::fromEuler( 0, 0, unit == Radian ? angle : angle * DEG2RAD );
     const Quaternion resultAxis = quatAxis * rotationAmount * quatAxis.inverse();
 
+    return rotateAround(resultAxis);
+}
+
+GeoDataCoordinates GeoDataCoordinates::rotateAround(const Quaternion &rotAxis) const
+{
     Quaternion rotatedQuat = quaternion();
-    rotatedQuat.rotateAroundAxis(resultAxis);
+    rotatedQuat.rotateAroundAxis(rotAxis);
     qreal rotatedLon, rotatedLat;
     rotatedQuat.getSpherical(rotatedLon, rotatedLat);
     return GeoDataCoordinates(rotatedLon, rotatedLat, altitude());
