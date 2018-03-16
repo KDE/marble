@@ -49,7 +49,7 @@ int DownloadRegionPrivate::rad2PixelX( qreal const lon, const TextureLayer *text
 {
     qreal const globalWidth = textureLayer->tileSize().width()
             * textureLayer->tileColumnCount( m_visibleTileLevel );
-    return static_cast<int>( globalWidth * 0.5 + lon * ( globalWidth / ( 2.0 * M_PI ) ) );
+    return static_cast<int>(globalWidth * 0.5 * (1 + lon / M_PI));
 }
 
 // copied from AbstractScanlineTextureMapper and slightly adjusted
@@ -57,17 +57,16 @@ int DownloadRegionPrivate::rad2PixelY( qreal const lat, const TextureLayer *text
 {
     qreal const globalHeight = textureLayer->tileSize().height()
             * textureLayer->tileRowCount( m_visibleTileLevel );
-    qreal const normGlobalHeight = globalHeight / M_PI;
     switch (textureLayer->tileProjection()->type()) {
     case GeoSceneAbstractTileProjection::Equirectangular:
-        return static_cast<int>( globalHeight * 0.5 - lat * normGlobalHeight );
+        return static_cast<int>(globalHeight * (0.5 - lat / M_PI));
     case GeoSceneAbstractTileProjection::Mercator:
         if ( fabs( lat ) < 1.4835 )
-            return static_cast<int>( globalHeight * 0.5 - gdInv( lat ) * 0.5 * normGlobalHeight );
+            return static_cast<int>(globalHeight * 0.5 * (1 - gdInv(lat) / M_PI));
         if ( lat >= +1.4835 )
-            return static_cast<int>( globalHeight * 0.5 - 3.1309587 * 0.5 * normGlobalHeight );
+            return static_cast<int>(globalHeight * 0.5 * (1 - 3.1309587 / M_PI));
         if ( lat <= -1.4835 )
-            return static_cast<int>( globalHeight * 0.5 + 3.1309587 * 0.5 * normGlobalHeight );
+            return static_cast<int>(globalHeight * 0.5 * (1 + 3.1309587 / M_PI));
     }
 
     // Dummy value to avoid a warning.
