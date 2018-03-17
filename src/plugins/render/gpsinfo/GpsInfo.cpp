@@ -12,6 +12,8 @@
 
 #include "ui_GpsInfoPlugin.h"
 
+#include <QIcon>
+
 #include "MarbleDebug.h"
 #include "MarbleLocale.h"
 #include "MarbleModel.h"

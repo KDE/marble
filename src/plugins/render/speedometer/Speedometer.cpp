@@ -10,6 +10,8 @@
 
 #include "Speedometer.h"
 
+#include <QIcon>
+
 #include "MarbleGlobal.h"
 #include "MarbleDebug.h"
 #include "MarbleLocale.h"

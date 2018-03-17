@@ -25,6 +25,7 @@
 
 #include "ui_SatellitesConfigDialog.h"
 
+#include <QAction>
 #include <QUrl>
 #include <QMouseEvent>
 
