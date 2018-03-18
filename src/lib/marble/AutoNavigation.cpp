@@ -235,7 +235,7 @@ GeoDataCoordinates AutoNavigation::Private::findIntersection( qreal currentX, qr
         destinationVertical.setY( currentY );
         crossVertical = true;
     }
-    else if( direction == 190 ) {
+    else if( direction == 180 ) {
         destinationHorizontal.setX( currentX );
         destinationHorizontal.setY( height );
         crossHorizontal = true;
