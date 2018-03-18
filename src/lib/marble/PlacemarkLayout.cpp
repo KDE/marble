@@ -22,6 +22,7 @@
 #include <qmath.h>
 
 #include "GeoDataLatLonAltBox.h"
+#include "GeoDataLatLonBox.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
 #include "GeoDataIconStyle.h"
@@ -314,22 +315,23 @@ QSet<TileId> PlacemarkLayout::visibleTiles(const ViewportParams &viewport, int z
     qreal north, south, east, west;
     viewport.viewLatLonAltBox().boundaries(north, south, east, west);
     QSet<TileId> tileIdSet;
-    QVector<QRectF> geoRects;
+    QVector<GeoDataLatLonBox> geoRects;
     if( west <= east ) {
-        geoRects << QRectF(west, north, east - west, south - north);
+        geoRects << GeoDataLatLonBox(north, south, east, west);
     } else {
-        geoRects << QRectF(west, north, M_PI - west, south - north);
-        geoRects << QRectF(-M_PI, north, east + M_PI, south - north);
+        geoRects << GeoDataLatLonBox(north, south, M_PI, west);
+        geoRects << GeoDataLatLonBox(north, south, east, -M_PI);
     }
-    for( const QRectF &geoRect: geoRects ) {
+
+    for (const GeoDataLatLonBox &geoRect : geoRects) {
         TileId key;
         QRect rect;
 
-        key = TileId::fromCoordinates( GeoDataCoordinates(geoRect.left(), north, 0), zoomLevel);
+        key = TileId::fromCoordinates(GeoDataCoordinates(geoRect.west(), north), zoomLevel);
         rect.setLeft( key.x() );
         rect.setTop( key.y() );
 
-        key = TileId::fromCoordinates( GeoDataCoordinates(geoRect.right(), south, 0), zoomLevel);
+        key = TileId::fromCoordinates(GeoDataCoordinates(geoRect.east(), south), zoomLevel);
         rect.setRight( key.x() );
         rect.setBottom( key.y() );
 
