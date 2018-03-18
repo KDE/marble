@@ -134,7 +134,7 @@ GeoDataCoordinates AutoNavigation::Private::findIntersection( qreal currentX, qr
 
     //calculation of intersection point
     if( 0 < direction && direction < 90 ) {
-        const qreal angle = direction;
+        const qreal angle = direction * DEG2RAD;
 
         //Intersection with line x = width
         intercept.setX( width - currentX );
@@ -157,7 +157,7 @@ GeoDataCoordinates AutoNavigation::Private::findIntersection( qreal currentX, qr
 
     }
     else if( 270 < direction && direction < 360 ) {
-        const qreal angle = direction - 270;
+        const qreal angle = (direction - 270) * DEG2RAD;
 
         //Intersection with line y = 0
         intercept.setY( currentY );
@@ -180,7 +180,7 @@ GeoDataCoordinates AutoNavigation::Private::findIntersection( qreal currentX, qr
 
     }
     else if( 180 < direction && direction < 270  ) {
-        const qreal angle = direction - 180;
+        const qreal angle = (direction - 180) * DEG2RAD;
 
         //Intersection with line x = 0
         intercept.setX( currentX );
@@ -203,7 +203,7 @@ GeoDataCoordinates AutoNavigation::Private::findIntersection( qreal currentX, qr
 
     }
     else if( 90 < direction && direction < 180  ) {
-        const qreal angle = direction - 90;
+        const qreal angle = (direction - 90) * DEG2RAD;
 
         //Intersection with line y = height
         intercept.setY( height - currentY );
