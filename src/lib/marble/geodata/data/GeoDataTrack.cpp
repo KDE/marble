@@ -14,7 +14,6 @@
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataTypes.h"
 #include "MarbleDebug.h"
-#include "Quaternion.h"
 
 #include "GeoDataLineString.h"
 #include "GeoDataExtendedData.h"
@@ -213,13 +212,7 @@ GeoDataCoordinates GeoDataTrack::coordinatesAt( const QDateTime &when ) const
     int position = previousWhen.msecsTo( when );
     qreal t = (qreal)position / (qreal)interval;
 
-    const Quaternion interpolated = Quaternion::slerp( previousCoord.quaternion(), nextCoord.quaternion(), t );
-    qreal lon, lat;
-    interpolated.getSpherical( lon, lat );
-
-    qreal alt = previousCoord.altitude() + ( nextCoord.altitude() - previousCoord.altitude() ) * t;
-
-    return GeoDataCoordinates( lon, lat, alt );
+    return previousCoord.interpolate(nextCoord, t);
 }
 
 GeoDataCoordinates GeoDataTrack::coordinatesAt( int index ) const
