@@ -58,15 +58,6 @@ public:
         itpos.getSpherical( lon, lat );
     }
 
-    qreal totalDistance() const
-    {
-        GeoDataLineString measure;
-        GeoDataCoordinates sourcePosition(m_source.longitude(), m_source.latitude());
-        GeoDataCoordinates targetPosition(m_target.longitude(), m_target.latitude());
-        measure << sourcePosition << targetPosition;
-        return measure.length(m_planetRadius);
-    }
-
     qreal suggestedRange(qreal t) const
     {
         Q_ASSERT( m_mode == Linear || m_mode == Jump);
@@ -82,11 +73,12 @@ public:
             qreal jumpDuration = m_timeline.duration();
 
             // Purely cinematic approach to calculate the jump path        
+            const qreal totalDistance = m_planetRadius * m_source.coordinates().sphericalDistanceTo(m_target.coordinates());
             qreal g = qMin(m_source.range(), m_target.range()); // Min altitude
             qreal k = qMax(m_source.range(), m_target.range()); // Base altitude
             qreal d = t > 0.5 ? m_source.range() - g : m_target.range() - g; // Base difference
             qreal c = d * 2 * qAbs(t - 0.5); // Correction factor
-            qreal h = qMin(1000*3000.0, totalDistance() / 2.0); // Jump height
+            qreal h = qMin(1000*3000.0, totalDistance / 2.0); // Jump height
 
             // Parameters for the parabolic function that has the maximum at
             // the point H ( 0.5 * m_jumpDuration, g + h )
