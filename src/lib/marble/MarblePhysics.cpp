@@ -45,19 +45,6 @@ public:
         m_timeline.setCurveShape( QTimeLine::EaseInOutCurve );
     }
 
-    void suggestedPos(qreal t, qreal &lon, qreal &lat) const
-    {
-        Q_ASSERT( 0 <= t && t <= 1.0 );
-
-        GeoDataCoordinates sourcePosition(m_source.longitude(), m_source.latitude());
-        GeoDataCoordinates targetPosition(m_target.longitude(), m_target.latitude());
-
-        // Spherical interpolation for current position between source position
-        // and target position. We can't use Nlerp here, as the "t-velocity" needs to be constant.
-        const Quaternion itpos = Quaternion::slerp( sourcePosition.quaternion(), targetPosition.quaternion(), t );
-        itpos.getSpherical( lon, lat );
-    }
-
     qreal suggestedRange(qreal t) const
     {
         Q_ASSERT( m_mode == Linear || m_mode == Jump);
@@ -178,14 +165,11 @@ void MarblePhysics::updateProgress(qreal progress)
     }
 
     Q_ASSERT(progress >= 0.0 && progress < 1.0);
-    qreal lon(0.0), lat(0.0);
-    d->suggestedPos(progress, lon, lat);
+    const GeoDataCoordinates interpolated = d->m_source.coordinates().interpolate(d->m_target.coordinates(), progress);
     qreal range = d->suggestedRange(progress);
 
     GeoDataLookAt intermediate;
-    intermediate.setLongitude(lon, GeoDataCoordinates::Radian);
-    intermediate.setLatitude(lat, GeoDataCoordinates::Radian);
-    intermediate.setAltitude(0.0);
+    intermediate.setCoordinates(interpolated);
     intermediate.setRange(range);
 
     d->m_presenter->setViewContext( Marble::Animation );
