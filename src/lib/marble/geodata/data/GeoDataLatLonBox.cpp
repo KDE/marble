@@ -596,10 +596,8 @@ GeoDataLatLonBox GeoDataLatLonBox::toCircumscribedRectangle() const
         }
     }
 
-    box.setBoundaries( GeoDataCoordinates::normalizeLat( box.north() ),
-                       GeoDataCoordinates::normalizeLat( box.south() ),
-                       GeoDataCoordinates::normalizeLon( box.east()  ),
-                       GeoDataCoordinates::normalizeLon( box.west()  )  );
+    box.setBoundaries(box.north(), box.south(), box.east(), box.west());
+
     return box;
 }
 
@@ -833,8 +831,6 @@ bool GeoDataLatLonBox::fuzzyCompare(const GeoDataLatLonBox& lhs,
         if (fabs(lhsEast - rhsEast) > lonDelta) equal = false;
     }
     else {
-        lhsEast = GeoDataCoordinates::normalizeLat( lhsEast );
-        rhsEast = GeoDataCoordinates::normalizeLat( rhsEast );
         if (lhsEast < 0 && rhsEast > 0) {
             lhsEast += 2 * M_PI;
             if (fabs(lhsEast - rhsEast) > lonDelta) equal = false;
@@ -852,8 +848,6 @@ bool GeoDataLatLonBox::fuzzyCompare(const GeoDataLatLonBox& lhs,
        if (fabs(lhsWest - rhsWest) > lonDelta) equal = false;
     }
     else {
-        lhsWest = GeoDataCoordinates::normalizeLat( lhsWest );
-        rhsWest = GeoDataCoordinates::normalizeLat( rhsWest );
         if (lhsWest < 0 && rhsWest > 0) {
             lhsWest += 2 * M_PI;
             if (fabs(lhsWest - rhsWest) > lonDelta) equal = false;
