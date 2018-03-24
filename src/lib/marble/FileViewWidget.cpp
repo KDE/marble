@@ -212,16 +212,15 @@ void FileViewWidget::mapCenterOnTreeViewModel( const QModelIndex &index )
     if( !index.isValid() ) {
         return;
     }
-    GeoDataObject *object
+
+    const GeoDataObject *object
         = index.model()->data( index, MarblePlacemarkModel::ObjectPointerRole ).value<GeoDataObject*>();
-    if ( dynamic_cast<GeoDataPlacemark*>(object) )
-    {
-        GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(object);
+    if (const GeoDataPlacemark *placemark = geodata_cast<GeoDataPlacemark>(object)) {
         d->m_widget->model()->placemarkSelectionModel()->select( index, QItemSelectionModel::ClearAndSelect );
         emit centerOn( *placemark, true );
     }
-    else if ( dynamic_cast<GeoDataContainer*>(object) ) {
-        GeoDataLatLonAltBox box = dynamic_cast<GeoDataContainer*>( object )->latLonAltBox();
+    else if (const GeoDataContainer *container = dynamic_cast<const GeoDataContainer *>(object)) {
+        const GeoDataLatLonAltBox box = container->latLonAltBox();
         emit centerOn( box, true );
     }
 }
