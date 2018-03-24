@@ -303,4 +303,15 @@ void GeoDataLatLonAltBox::unpack( QDataStream& stream )
     d->m_altitudeMode = static_cast<AltitudeMode>( a );
 }
 
+uint qHash(const GeoDataLatLonAltBox &box, uint seed)
+{
+    seed = ::qHash(box.east(), seed);
+    seed = ::qHash(box.west(), seed);
+    seed = ::qHash(box.south(), seed);
+    seed = ::qHash(box.north(), seed);
+    seed = ::qHash(box.maxAltitude(), seed);
+
+    return ::qHash(box.minAltitude(), seed);
+}
+
 }

@@ -144,9 +144,7 @@ class GEODATA_EXPORT GeoDataLatLonAltBox : public GeoDataLatLonBox
     GeoDataLatLonAltBoxPrivate  * const d;
 };
 
-inline uint qHash( const GeoDataLatLonAltBox & r ){
-    return ::qHash(r.toString());
-}
+uint GEODATA_EXPORT qHash(const GeoDataLatLonAltBox &box, uint seed = 0);
 
 bool GEODATA_EXPORT operator==( GeoDataLatLonAltBox const& lhs, GeoDataLatLonAltBox const& rhs );
 

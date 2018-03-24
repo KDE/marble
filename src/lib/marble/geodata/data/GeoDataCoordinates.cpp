@@ -1170,11 +1170,10 @@ qreal GeoDataCoordinatesPrivate::lonLatToNorthing( qreal lon, qreal lat ){
 
 uint qHash(const GeoDataCoordinates &coordinates)
 {
-    QString lon, lat, alt;
-    lon.setNum(coordinates.longitude(), 'f', 10);
-    lat.setNum(coordinates.latitude(), 'f', 10);
-    alt.setNum(coordinates.altitude(), 'f', 3);
-    return qHash(lon % lat % alt);
+    uint seed = ::qHash(coordinates.altitude());
+    seed = ::qHash(coordinates.latitude(), seed);
+
+    return ::qHash(coordinates.longitude(), seed);
 }
 
 }
