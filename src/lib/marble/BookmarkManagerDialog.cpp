@@ -163,7 +163,7 @@ void BookmarkManagerDialogPrivate::addNewFolder()
 
 void BookmarkManagerDialogPrivate::renameFolder()
 {
-    GeoDataFolder *folder = dynamic_cast<GeoDataFolder*>(selectedFolder());
+    GeoDataFolder *folder = geodata_cast<GeoDataFolder>(selectedFolder());
     if ( folder ) {
         QPointer<NewBookmarkFolderDialog> dialog = new NewBookmarkFolderDialog( m_parent );
         dialog->setFolderName( folder->name() );
@@ -178,7 +178,7 @@ void BookmarkManagerDialogPrivate::renameFolder()
 
 void BookmarkManagerDialogPrivate::deleteFolder()
 {
-    GeoDataFolder *folder = dynamic_cast<GeoDataFolder*>(selectedFolder());
+    GeoDataFolder *folder = geodata_cast<GeoDataFolder>(selectedFolder());
     if ( folder ) {
         if ( folder->size() > 0 ) {
             QString const text = tr( "The folder %1 is not empty. Removing it will delete all bookmarks it contains. Are you sure you want to delete the folder?" ).arg( folder->name() );
@@ -203,7 +203,7 @@ void BookmarkManagerDialogPrivate::editBookmark()
         Q_ASSERT( index.isValid() );
         GeoDataObject* object = qvariant_cast<GeoDataObject*>( index.data( MarblePlacemarkModel::ObjectPointerRole ) );
         Q_ASSERT( object );
-        GeoDataPlacemark* bookmark = dynamic_cast<GeoDataPlacemark*>( object );
+        GeoDataPlacemark *bookmark = geodata_cast<GeoDataPlacemark>(object);
         // do not try to edit folders
         if ( !bookmark ) {
             return;
@@ -215,7 +215,7 @@ void BookmarkManagerDialogPrivate::editBookmark()
         Q_ASSERT( folderIndex.isValid() );
         GeoDataObject* folderObject = qvariant_cast<GeoDataObject*>( folderIndex.data( MarblePlacemarkModel::ObjectPointerRole ) );
         Q_ASSERT( folderObject );
-        GeoDataFolder* folder = dynamic_cast<GeoDataFolder*>( folderObject );
+        GeoDataFolder* folder = geodata_cast<GeoDataFolder>(folderObject);
         Q_ASSERT( folder );
 
         QPointer<EditBookmarkDialog> dialog = new EditBookmarkDialog( m_manager, m_parent );
@@ -264,12 +264,12 @@ void BookmarkManagerDialogPrivate::deleteBookmark()
     }
 
     const QModelIndex bookmarkIndex = m_branchFilterModel.mapToSource(selection.first());
-    GeoDataFolder *folder = dynamic_cast<GeoDataFolder *>(selectedFolder());
+    GeoDataFolder *folder = geodata_cast<GeoDataFolder>(selectedFolder());
     if (!folder) {
         return;
     }
 
-    GeoDataPlacemark *bookmark = dynamic_cast<GeoDataPlacemark *>(folder->child(bookmarkIndex.row()));
+    GeoDataPlacemark *bookmark = geodata_cast<GeoDataPlacemark>(folder->child(bookmarkIndex.row()));
     if (!bookmark) {
         return;
     }

@@ -142,9 +142,9 @@ void FileViewWidgetPrivate::setFileManager( FileManager *manager )
 void FileViewWidgetPrivate::saveFile()
 {
     QModelIndex index = m_fileViewUi.m_treeView->selectionModel()->selectedRows().first();
-    GeoDataObject *object
+    const GeoDataObject *object
         = index.model()->data( index, MarblePlacemarkModel::ObjectPointerRole ).value<GeoDataObject*>();
-    GeoDataDocument *document = dynamic_cast<GeoDataDocument*>(object);
+    const GeoDataDocument *document = geodata_cast<GeoDataDocument>(object);
     if ( document && !document->fileName().isEmpty() ) {
         const QString saveFileName = QFileDialog::getSaveFileName(q, QObject::tr("Select filename for KML document"));
         GeoDataDocumentWriter::write(saveFileName, *document, kml::kmlTag_nameSpaceOgc22);
@@ -156,7 +156,7 @@ void FileViewWidgetPrivate::closeFile()
     QModelIndex index = m_fileViewUi.m_treeView->selectionModel()->selectedRows().first();
     GeoDataObject *object
         = index.model()->data( index, MarblePlacemarkModel::ObjectPointerRole ).value<GeoDataObject*>();
-    GeoDataDocument *document = dynamic_cast<GeoDataDocument*>(object);
+    GeoDataDocument *document = geodata_cast<GeoDataDocument>(object);
     if ( document ) {
         m_fileManager->closeFile( document );
     }
@@ -167,9 +167,9 @@ void FileViewWidgetPrivate::enableFileViewActions()
     bool isUserDocument = false;
     if ( !m_fileViewUi.m_treeView->selectionModel()->selectedRows().isEmpty() ) {
         QModelIndex index = m_fileViewUi.m_treeView->selectionModel()->selectedRows().first();
-        GeoDataObject *object
+        const GeoDataObject *object
             = index.model()->data( index, MarblePlacemarkModel::ObjectPointerRole ).value<GeoDataObject*>();
-        GeoDataDocument *document = dynamic_cast<GeoDataDocument*>(object);
+        const GeoDataDocument *document = geodata_cast<GeoDataDocument>(object);
         if ( document ) {
             isUserDocument = document->documentRole() == Marble::UserDocument;
         }
@@ -183,8 +183,8 @@ void FileViewWidgetPrivate::contextMenu(const QPoint &pt)
     const QModelIndex index = m_fileViewUi.m_treeView->indexAt(pt);
     const QAbstractItemModel *model = m_fileViewUi.m_treeView->model();
     if (index.isValid()) {
-        GeoDataObject *obj = model->data(index, MarblePlacemarkModel::ObjectPointerRole).value<GeoDataObject*>();
-        const GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(obj);
+        const GeoDataObject *obj = model->data(index, MarblePlacemarkModel::ObjectPointerRole).value<GeoDataObject*>();
+        const GeoDataPlacemark *placemark = geodata_cast<GeoDataPlacemark>(obj);
 
         if (placemark) {
             m_contextMenu->popup(m_fileViewUi.m_treeView->mapToGlobal(pt));
@@ -198,7 +198,7 @@ void FileViewWidgetPrivate::showPlacemarkDialog()
     const QAbstractItemModel *model = m_fileViewUi.m_treeView->model();
 
     GeoDataObject *obj = model->data(index, MarblePlacemarkModel::ObjectPointerRole).value<GeoDataObject*>();
-    GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(obj);
+    GeoDataPlacemark *placemark = geodata_cast<GeoDataPlacemark>(obj);
     if (placemark) {
         QPointer<EditPlacemarkDialog> dialog = new EditPlacemarkDialog(placemark, nullptr, q);
         dialog->setReadOnly(true);

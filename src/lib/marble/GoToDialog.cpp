@@ -214,7 +214,7 @@ QVariant TargetModel::bookmarkData ( int index, int role ) const
 {
     switch( role ) {
     case Qt::DisplayRole: {
-        GeoDataFolder* folder = dynamic_cast<GeoDataFolder*>( m_bookmarks[index]->parent() );
+        const GeoDataFolder *folder = geodata_cast<GeoDataFolder>(m_bookmarks[index]->parent());
         Q_ASSERT( folder && "Internal bookmark representation has changed. Please report this as a bug at http://bugs.kde.org." );
         if ( folder ) {
             return QString(folder->name() + QLatin1String(" / ") + m_bookmarks[index]->name());

@@ -146,7 +146,7 @@ int GeoDataTreeModel::rowCount( const QModelIndex &parent ) const
     }
 
     if (const auto placemark = geodata_cast<GeoDataPlacemark>(parentItem)) {
-        if ( dynamic_cast<const GeoDataMultiGeometry*>( placemark->geometry() ) ) {
+        if (geodata_cast<GeoDataMultiGeometry>(placemark->geometry())) {
 //            mDebug() << "rowCount " << type << "(" << parentItem << ") = 1";
             return 1;
         }
@@ -247,14 +247,13 @@ QVariant GeoDataTreeModel::data( const QModelIndex &index, int role ) const
             return QVariant( geometry->nodeType() );
         }
 
-        GeoDataPlaylist *playlist = dynamic_cast<GeoDataPlaylist*>( object );
+        GeoDataPlaylist *playlist = geodata_cast<GeoDataPlaylist>(object);
         if ( playlist && index.column() == 0 ) {
             return tr( "Playlist" );
         }
 
-        GeoDataObject *item = dynamic_cast<GeoDataObject*>( object );
-        if ( item && index.column() == 1 ){
-            return QVariant( item->nodeType() );
+        if (object && index.column() == 1) {
+            return QVariant(object->nodeType());
         }
 
     }
@@ -405,7 +404,7 @@ QModelIndex GeoDataTreeModel::index( int row, int column, const QModelIndex &par
 
     if (const auto placemark = geodata_cast<GeoDataPlacemark>(parentItem)) {
         childItem = placemark->geometry();
-        if ( dynamic_cast<GeoDataMultiGeometry*>( childItem ) ) {
+        if (geodata_cast<GeoDataMultiGeometry>(childItem)) {
             return createIndex( row, column, childItem );
         }
     }
