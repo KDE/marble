@@ -35,8 +35,8 @@ class EditPolygonDialog : public QDialog
 
 public:
     EditPolygonDialog( GeoDataPlacemark *placemark,
-                       const QHash<qint64, OsmPlacemarkData> *relations = 0,
-                       QWidget *parent = 0 );
+                       const QHash<qint64, OsmPlacemarkData> *relations = nullptr,
+                       QWidget *parent = nullptr );
     ~EditPolygonDialog() override;
 
 public Q_SLOTS:

@@ -22,7 +22,7 @@ class CloudRoutesDialog : public QDialog
     Q_OBJECT
     
 public:
-    explicit CloudRoutesDialog( CloudRouteModel *model, QWidget *parent = 0 );
+    explicit CloudRoutesDialog( CloudRouteModel *model, QWidget *parent = nullptr );
     ~CloudRoutesDialog() override;
     CloudRouteModel *model();
 

@@ -195,9 +195,9 @@ bool MonavStuffEntry::isValid() const
 }
 
 MonavConfigWidgetPrivate::MonavConfigWidgetPrivate( MonavConfigWidget* parent, MonavPlugin* plugin ) :
-        m_parent( parent ), m_plugin( plugin ), m_networkAccessManager( 0 ),
-        m_currentReply( 0 ), m_unpackProcess( 0 ), m_filteredModel( new QSortFilterProxyModel( parent) ),
-        m_mapsModel( 0 ), m_initialized( false )
+        m_parent( parent ), m_plugin( plugin ), m_networkAccessManager( nullptr ),
+        m_currentReply( nullptr ), m_unpackProcess( nullptr ), m_filteredModel( new QSortFilterProxyModel( parent) ),
+        m_mapsModel( nullptr ), m_initialized( false )
 {
     m_filteredModel->setFilterKeyColumn( 1 );
 }
@@ -421,7 +421,7 @@ void MonavConfigWidget::retrieveData()
             d->m_currentFile.write( d->m_currentReply->readAll() );
             if ( d->m_currentReply->isFinished() ) {
                 d->m_currentReply->deleteLater();
-                d->m_currentReply = 0;
+                d->m_currentReply = nullptr;
                 d->m_currentFile.close();
                 d->installMap();
                 d->m_currentDownload.clear();
@@ -476,7 +476,7 @@ void MonavConfigWidget::cancelOperation()
     if ( !d->m_currentDownload.isEmpty() || d->m_currentFile.isOpen() ) {
         d->m_currentReply->abort();
         d->m_currentReply->deleteLater();
-        d->m_currentReply = 0;
+        d->m_currentReply = nullptr;
         d->m_currentDownload.clear();
         d->setBusy( false );
         d->m_currentFile.close();
@@ -511,7 +511,7 @@ void MonavConfigWidgetPrivate::installMap()
     if ( m_unpackProcess ) {
         m_unpackProcess->close();
         delete m_unpackProcess;
-        m_unpackProcess = 0;
+        m_unpackProcess = nullptr;
         m_parent->m_installButton->setEnabled( true );
     } else if ( m_currentFile.fileName().endsWith( QLatin1String( "tar.gz" ) ) && canExecute( "tar" ) ) {
         QFileInfo file( m_currentFile );
@@ -560,7 +560,7 @@ bool MonavConfigWidgetPrivate::canExecute( const QString &executable )
 
 void MonavConfigWidget::mapInstalled( int exitStatus )
 {
-    d->m_unpackProcess = 0;
+    d->m_unpackProcess = nullptr;
     d->m_currentFile.remove();
     d->setBusy( false );
 

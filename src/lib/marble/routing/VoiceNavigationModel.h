@@ -33,7 +33,7 @@ class MARBLE_EXPORT VoiceNavigationModel : public QObject
 
 public:
     /** Constructor */
-    explicit VoiceNavigationModel( QObject *parent = 0 );
+    explicit VoiceNavigationModel( QObject *parent = nullptr );
 
     /** Destructor */
     ~VoiceNavigationModel() override;

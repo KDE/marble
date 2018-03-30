@@ -42,7 +42,7 @@ public:
       *   and repainting of (small) areas. Must not be null
       * @param parent Optional parent widget
       */
-    explicit RoutingLayer( MarbleWidget *widget, QWidget *parent = 0 );
+    explicit RoutingLayer( MarbleWidget *widget, QWidget *parent = nullptr );
 
     /** Destructor */
     ~RoutingLayer() override;
@@ -55,7 +55,7 @@ public:
 
     /** Reimplemented from LayerInterface. Paints route items and placemarks */
     bool render( GeoPainter *painter, ViewportParams *viewport,
-                 const QString &renderPos = "NONE", GeoSceneLayer *layer = 0 ) override;
+                 const QString &renderPos = "NONE", GeoSceneLayer *layer = nullptr ) override;
 
     RenderState renderState() const override;
 

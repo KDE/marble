@@ -69,8 +69,8 @@ void TestGroundOverlay::simpleParseTest()
     QCOMPARE( folder->size(), 2 );
     GeoDataGroundOverlay *overlayFirst = dynamic_cast<GeoDataGroundOverlay*>( folder->child( 0 ) );
     GeoDataGroundOverlay *overlaySecond = dynamic_cast<GeoDataGroundOverlay*>( folder->child( 1 ) );
-    QVERIFY( overlayFirst != 0 );
-    QVERIFY( overlaySecond != 0 );
+    QVERIFY( overlayFirst != nullptr );
+    QVERIFY( overlaySecond != nullptr );
 
     QFUZZYCOMPARE( overlayFirst->altitude(), 0.0, 0.0001 );
 

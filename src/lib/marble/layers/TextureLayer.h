@@ -96,7 +96,7 @@ class MARBLE_EXPORT TextureLayer : public QObject, public LayerInterface
 
     bool render( GeoPainter *painter, ViewportParams *viewport,
                          const QString &renderPos = QLatin1String("NONE"),
-                         GeoSceneLayer *layer = 0 ) override;
+                         GeoSceneLayer *layer = nullptr ) override;
 
 public Q_SLOTS:
     void setShowRelief( bool show );

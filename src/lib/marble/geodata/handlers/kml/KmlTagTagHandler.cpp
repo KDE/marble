@@ -30,7 +30,7 @@ GeoNode* KmltagTagHandler::parse( GeoParser& parser ) const
         osmData->addTag( key, value );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

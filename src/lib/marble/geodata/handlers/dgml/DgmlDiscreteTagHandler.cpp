@@ -44,7 +44,7 @@ GeoNode* DgmlDiscreteTagHandler::parse(GeoParser& parser) const
         parentItem.nodeAs<GeoSceneZoom>()->setDiscrete(parsedText == dgmlValue_true || parsedText == dgmlValue_on);
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

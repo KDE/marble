@@ -34,7 +34,7 @@ GeoNode* GPXeleTagHandler::parse(GeoParser& parser) const
         track->appendAltitude( parser.readElementText().trimmed().toDouble() );
         return track;
     }
-    return 0;
+    return nullptr;
 }
 
 } // namespace gpx

@@ -44,7 +44,7 @@ GeoNode* KmlnameTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataFeature>()->setName( name );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

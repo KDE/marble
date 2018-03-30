@@ -47,7 +47,7 @@ GeoNode* KmlCountryNameCodeTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataPlacemark>()->setCountryCode( countrycode );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

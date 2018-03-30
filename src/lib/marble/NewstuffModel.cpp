@@ -224,8 +224,8 @@ void FetchPreviewJob::run( const QByteArray &data )
 }
 
 NewstuffModelPrivate::NewstuffModelPrivate( NewstuffModel* parent ) : m_parent( parent ),
-    m_networkAccessManager( 0 ), m_currentReply( 0 ), m_currentFile( 0 ),
-    m_idTag( NewstuffModel::PayloadTag ), m_currentAction( -1, Install ), m_unpackProcess( 0 )
+    m_networkAccessManager( nullptr ), m_currentReply( nullptr ), m_currentFile( nullptr ),
+    m_idTag( NewstuffModel::PayloadTag ), m_currentAction( -1, Install ), m_unpackProcess( nullptr )
 {
     // nothing to do
 }
@@ -336,7 +336,7 @@ void NewstuffModelPrivate::installMap()
     if ( m_unpackProcess ) {
         m_unpackProcess->close();
         delete m_unpackProcess;
-        m_unpackProcess = 0;
+        m_unpackProcess = nullptr;
     } else if ( m_currentFile->fileName().endsWith( QLatin1String( "zip" ) ) ) {
         unzip();
     }
@@ -701,18 +701,18 @@ void NewstuffModel::cancel( int index )
                 if ( d->m_currentReply ) {
                     d->m_currentReply->abort();
                     d->m_currentReply->deleteLater();
-                    d->m_currentReply = 0;
+                    d->m_currentReply = nullptr;
                 }
 
                 if ( d->m_unpackProcess ) {
                     d->m_unpackProcess->terminate();
                     d->m_unpackProcess->deleteLater();
-                    d->m_unpackProcess = 0;
+                    d->m_unpackProcess = nullptr;
                 }
 
                 if ( d->m_currentFile ) {
                     d->m_currentFile->deleteLater();
-                    d->m_currentFile = 0;
+                    d->m_currentFile = nullptr;
                 }
 
                 d->m_items[d->m_currentAction.first].m_downloadedSize = 0;
@@ -767,7 +767,7 @@ void NewstuffModel::retrieveData()
             d->m_currentFile->write( d->m_currentReply->readAll() );
             if ( d->m_currentReply->isFinished() ) {
                 d->m_currentReply->deleteLater();
-                d->m_currentReply = 0;
+                d->m_currentReply = nullptr;
                 d->m_currentFile->flush();
                 d->installMap();
             }
@@ -779,12 +779,12 @@ void NewstuffModel::mapInstalled( int exitStatus )
 {
     if ( d->m_unpackProcess ) {
         d->m_unpackProcess->deleteLater();
-        d->m_unpackProcess = 0;
+        d->m_unpackProcess = nullptr;
     }
 
     if ( d->m_currentFile ) {
         d->m_currentFile->deleteLater();
-        d->m_currentFile = 0;
+        d->m_currentFile = nullptr;
     }
 
     emit installationProgressed( d->m_currentAction.first, 1.0 );

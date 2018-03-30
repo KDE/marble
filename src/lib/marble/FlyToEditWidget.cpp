@@ -117,7 +117,7 @@ void FlyToEditWidget::updateCoordinates()
 
 void FlyToEditWidget::save()
 {
-    if (flyToElement()->view() != 0 && m_coord != GeoDataCoordinates()) {
+    if (flyToElement()->view() != nullptr && m_coord != GeoDataCoordinates()) {
         GeoDataCoordinates coords = m_coord;
         if (auto camera = geodata_cast<GeoDataCamera>(flyToElement()->view())) {
             camera->setCoordinates( coords );

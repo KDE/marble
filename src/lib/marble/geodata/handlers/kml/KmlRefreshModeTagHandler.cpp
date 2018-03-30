@@ -33,7 +33,7 @@ GeoNode* KmlrefreshModeTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataLink>()->setRefreshMode( mode );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

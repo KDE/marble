@@ -33,7 +33,7 @@ class EclipsesBrowserDialog : public QDialog
 
 public:
     explicit EclipsesBrowserDialog( const MarbleModel *model,
-                                    QWidget *parent = 0 );
+                                    QWidget *parent = nullptr );
 
     ~EclipsesBrowserDialog() override;
 

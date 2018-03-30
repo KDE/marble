@@ -53,7 +53,7 @@ public:
 WlocatePositionProviderPluginPrivate::WlocatePositionProviderPluginPrivate() :
         m_status( PositionProviderStatusAcquiring ), m_speed( 0 ), m_direction( 0 ),
         m_longitude( 0.0 ), m_latitude( 0.0 ), m_initialized( false ),
-        m_quality( 0 ), m_ccode( 0 ), m_futureWatcher( 0 )
+        m_quality( 0 ), m_ccode( 0 ), m_futureWatcher( nullptr )
 {
     // nothing to do
 }

@@ -102,7 +102,7 @@ void GeoSceneMap::addLayer( GeoSceneLayer* layer )
 
 GeoSceneLayer* GeoSceneMap::layer( const QString& name )
 {
-    GeoSceneLayer* layer = 0;
+    GeoSceneLayer* layer = nullptr;
 
     QVector<GeoSceneLayer*>::const_iterator it = d->m_layers.constBegin();
     QVector<GeoSceneLayer*>::const_iterator end = d->m_layers.constEnd();
@@ -123,7 +123,7 @@ GeoSceneLayer* GeoSceneMap::layer( const QString& name )
 
 const GeoSceneLayer* GeoSceneMap::layer( const QString& name ) const
 {
-    const GeoSceneLayer* layer = 0;
+    const GeoSceneLayer* layer = nullptr;
 
     QVector<GeoSceneLayer*>::const_iterator it = d->m_layers.constBegin();
     QVector<GeoSceneLayer*>::const_iterator end = d->m_layers.constEnd();
@@ -164,7 +164,7 @@ void GeoSceneMap::addFilter( GeoSceneFilter* filter )
 
 GeoSceneFilter* GeoSceneMap::filter( const QString& name )
 {
-    GeoSceneFilter* filter = 0;
+    GeoSceneFilter* filter = nullptr;
 
     QVector<GeoSceneFilter*>::const_iterator it = d->m_filters.constBegin();
     QVector<GeoSceneFilter*>::const_iterator end = d->m_filters.constEnd();

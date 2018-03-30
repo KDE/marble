@@ -26,7 +26,7 @@ class PhotoPluginModel : public AbstractDataPluginModel
     Q_OBJECT
     
  public:
-    explicit PhotoPluginModel( const MarbleModel *marbleModel, QObject *parent = 0 );
+    explicit PhotoPluginModel( const MarbleModel *marbleModel, QObject *parent = nullptr );
     
     static QUrl generateUrl( const QString& service,
                              const QString& method,

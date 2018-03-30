@@ -22,7 +22,7 @@ class KmlPlugin : public ParseRunnerPlugin
     Q_INTERFACES( Marble::ParseRunnerPlugin )
 
 public:
-    explicit KmlPlugin( QObject *parent = 0 );
+    explicit KmlPlugin( QObject *parent = nullptr );
 
     QString name() const override;
 

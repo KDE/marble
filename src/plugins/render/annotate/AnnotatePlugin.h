@@ -47,7 +47,7 @@ class AnnotatePlugin :  public RenderPlugin
     MARBLE_PLUGIN( AnnotatePlugin )
 
 public:
-    explicit AnnotatePlugin(const MarbleModel *model = 0);
+    explicit AnnotatePlugin(const MarbleModel *model = nullptr);
     ~AnnotatePlugin() override;
 
     QStringList backendTypes() const override;
@@ -81,7 +81,7 @@ public:
     const QList<QActionGroup*> *actionGroups() const override;
 
     bool render( GeoPainter *painter, ViewportParams *viewport,
-                 const QString &renderPos, GeoSceneLayer *layer = 0 ) override;
+                 const QString &renderPos, GeoSceneLayer *layer = nullptr ) override;
 
 Q_SIGNALS:
     void placemarkMoved();

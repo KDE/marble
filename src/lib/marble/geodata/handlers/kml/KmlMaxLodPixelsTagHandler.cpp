@@ -34,7 +34,7 @@ GeoNode* KmlmaxLodPixelsTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataLod>()->setMaxLodPixels( maxLodPixels );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

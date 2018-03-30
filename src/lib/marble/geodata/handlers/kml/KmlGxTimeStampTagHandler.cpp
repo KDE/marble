@@ -41,7 +41,7 @@ GeoNode* KmlTimeStampTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataAbstractView>()->setTimeStamp( timestamp );
         return &parentItem.nodeAs<GeoDataAbstractView>()->timeStamp();
     }
-    return 0;
+    return nullptr;
 }
 
 }

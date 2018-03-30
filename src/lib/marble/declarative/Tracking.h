@@ -42,7 +42,7 @@ public:
         Arrow
     };
 
-    explicit Tracking( QObject* parent = 0 );
+    explicit Tracking( QObject* parent = nullptr );
 
     bool showTrack() const;
 

@@ -42,7 +42,7 @@ GeoNode *KmladdressTagHandler::parse(GeoParser &parser) const
         parentItem.nodeAs<GeoDataFeature>()->setAddress(address);
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

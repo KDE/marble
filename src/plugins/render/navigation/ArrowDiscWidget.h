@@ -24,7 +24,7 @@ class ArrowDiscWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit ArrowDiscWidget( QWidget *parent = 0 );
+    explicit ArrowDiscWidget( QWidget *parent = nullptr );
     ~ArrowDiscWidget() override;
 
     void setMarbleWidget( MarbleWidget *marbleWidget );

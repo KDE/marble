@@ -116,19 +116,19 @@ K_EXPORT_PLUGIN(MarblePartFactory("marble"))
 
 MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QVariantList &arguments )
   : KParts::ReadOnlyPart( parent ),
-    m_sunControlDialog( 0 ),
-    m_timeControlDialog( 0 ),
-    m_downloadRegionDialog( 0 ),
-    m_movieCaptureDialog( 0 ),
-    m_externalMapEditorAction( 0 ),
-    m_recordMovieAction( 0 ),
-    m_stopRecordingAction( 0 ),
-    m_recentFilesAction( 0 ),
-    m_configDialog( 0 ),
+    m_sunControlDialog( nullptr ),
+    m_timeControlDialog( nullptr ),
+    m_downloadRegionDialog( nullptr ),
+    m_movieCaptureDialog( nullptr ),
+    m_externalMapEditorAction( nullptr ),
+    m_recordMovieAction( nullptr ),
+    m_stopRecordingAction( nullptr ),
+    m_recentFilesAction( nullptr ),
+    m_configDialog( nullptr ),
     m_position( QCoreApplication::translate( "Marble", NOT_AVAILABLE ) ),
     m_tileZoomLevel( QCoreApplication::translate( "Marble", NOT_AVAILABLE ) ),
-    m_positionLabel( 0 ),
-    m_distanceLabel( 0 )
+    m_positionLabel( nullptr ),
+    m_distanceLabel( nullptr )
 {
     // only set marble data path when a path was given
     if ( arguments.count() != 0 && !arguments.first().toString().isEmpty() )
@@ -278,7 +278,7 @@ void MarblePart::exportMapScreenShot()
 
     if ( !fileName.isEmpty() ) {
         // Take the case into account where no file format is indicated
-        const char * format = 0;
+        const char * format = nullptr;
         if ( !fileName.endsWith(QLatin1String( "png" ), Qt::CaseInsensitive)
            && !fileName.endsWith(QLatin1String( "jpg" ), Qt::CaseInsensitive) )
         {
@@ -787,7 +787,7 @@ void MarblePart::setupActions()
     KStandardAction::showStatusbar( this, SLOT(showStatusBar(bool)),
                                     actionCollection() );
 
-    m_fullScreenAct = KStandardAction::fullScreen( 0, 0, widget(),
+    m_fullScreenAct = KStandardAction::fullScreen( nullptr, nullptr, widget(),
                                                    actionCollection() );
     connect( m_fullScreenAct, SIGNAL(triggered(bool)),
              this,            SLOT(showFullScreen(bool)) );
@@ -1398,7 +1398,7 @@ void MarblePart::editSettings()
 
     // view page
     Ui_MarbleViewSettingsWidget  ui_viewSettings;
-    QWidget                     *w_viewSettings = new QWidget( 0 );
+    QWidget                     *w_viewSettings = new QWidget( nullptr );
 
     w_viewSettings->setObjectName( "view_page" );
     ui_viewSettings.setupUi( w_viewSettings );
@@ -1409,7 +1409,7 @@ void MarblePart::editSettings()
 
     // navigation page
     Ui_MarbleNavigationSettingsWidget  ui_navigationSettings;
-    QWidget                           *w_navigationSettings = new QWidget( 0 );
+    QWidget                           *w_navigationSettings = new QWidget( nullptr );
 
     w_navigationSettings->setObjectName( "navigation_page" );
     ui_navigationSettings.setupUi( w_navigationSettings );
@@ -1420,7 +1420,7 @@ void MarblePart::editSettings()
 
     // cache page
     Ui_MarbleCacheSettingsWidget  ui_cacheSettings;
-    QWidget                      *w_cacheSettings = new QWidget( 0 );
+    QWidget                      *w_cacheSettings = new QWidget( nullptr );
 
     w_cacheSettings->setObjectName( "cache_page" );
     ui_cacheSettings.setupUi( w_cacheSettings );
@@ -1433,14 +1433,14 @@ void MarblePart::editSettings()
 
     // time page
     Ui_MarbleTimeSettingsWidget ui_timeSettings;
-    QWidget *w_timeSettings = new QWidget( 0 );
+    QWidget *w_timeSettings = new QWidget( nullptr );
 
     w_timeSettings->setObjectName( "time_page" );
     ui_timeSettings.setupUi( w_timeSettings );
     m_configDialog->addPage( w_timeSettings, i18n( "Date & Time" ), "clock" );
     
     // Sync page
-    QWidget *w_cloudSyncSettings = new QWidget( 0 );
+    QWidget *w_cloudSyncSettings = new QWidget( nullptr );
 
     w_cloudSyncSettings->setObjectName( "sync_page" );
     m_ui_cloudSyncSettings.setupUi( w_cloudSyncSettings );
@@ -1804,7 +1804,7 @@ void MarblePart::fallBackToDefaultTheme()
 
 void MarblePart::showMovieCaptureDialog()
 {
-    if (m_movieCaptureDialog == 0) {
+    if (m_movieCaptureDialog == nullptr) {
         m_movieCaptureDialog = new MovieCaptureDialog(m_controlView->marbleWidget(),
                                                       m_controlView->marbleWidget());
         connect( m_movieCaptureDialog, SIGNAL(started()), this, SLOT(changeRecordingState()));

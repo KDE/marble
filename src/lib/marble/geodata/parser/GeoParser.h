@@ -99,7 +99,7 @@ class GeoStackItem
  public:
     GeoStackItem()
         : m_qualifiedName(),
-          m_node( 0 )
+          m_node( nullptr )
     {
     }
 
@@ -119,14 +119,14 @@ class GeoStackItem
     template<class T>
     T* nodeAs()
     {
-        Q_ASSERT( dynamic_cast<T*>( m_node ) != 0 );
+        Q_ASSERT( dynamic_cast<T*>( m_node ) != nullptr );
         return static_cast<T*>(m_node);
     }
     
     template<class T>
     bool is() const
     {
-        return 0 != dynamic_cast<T*>(m_node);
+        return nullptr != dynamic_cast<T*>(m_node);
     }
 
     GeoParser::QualifiedName qualifiedName() const { return m_qualifiedName; }

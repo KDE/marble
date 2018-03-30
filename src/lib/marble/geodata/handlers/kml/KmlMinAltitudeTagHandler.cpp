@@ -34,7 +34,7 @@ GeoNode* KmlminAltitudeTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataLatLonAltBox>()->setMinAltitude( minAltitude );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

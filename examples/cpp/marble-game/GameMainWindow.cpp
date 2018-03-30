@@ -55,7 +55,7 @@ namespace Marble {
 class Private : public Ui_MainWindow
 {
 public:
-    Private( QWidget *parent = 0 );
+    Private( QWidget *parent = nullptr );
 
     MarbleWidget *m_marbleWidget;
     QWidget *m_parent;

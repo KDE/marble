@@ -258,7 +258,7 @@ void GeoDataDocument::removeSchema( const QString& schemaId )
 {
     Q_D(GeoDataDocument);
     GeoDataSchema schema = d->m_schemaHash.take(schemaId);
-    schema.setParent( 0 );
+    schema.setParent( nullptr );
 }
 
 GeoDataSchema GeoDataDocument::schema( const QString& schemaId ) const

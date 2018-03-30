@@ -35,7 +35,7 @@ class MapScaleFloatItem : public AbstractFloatItem, public DialogConfigurationIn
     Q_INTERFACES( Marble::DialogConfigurationInterface )
     MARBLE_PLUGIN( MapScaleFloatItem )
  public:
-    explicit MapScaleFloatItem( const MarbleModel *marbleModel = 0 );
+    explicit MapScaleFloatItem( const MarbleModel *marbleModel = nullptr );
     ~MapScaleFloatItem() override;
 
     QStringList backendTypes() const override;

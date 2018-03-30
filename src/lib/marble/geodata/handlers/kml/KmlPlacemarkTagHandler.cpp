@@ -55,7 +55,7 @@ GeoNode* KmlPlacemarkTagHandler::parse( GeoParser& parser ) const
         return placemark;
     } else {
         delete placemark;
-        return 0;
+        return nullptr;
     }
 }
 

@@ -25,7 +25,7 @@ class WidgetGraphicsItemPrivate;
 class MARBLE_EXPORT WidgetGraphicsItem : public ScreenGraphicsItem
 {
  public:
-    explicit WidgetGraphicsItem( MarbleGraphicsItem *parent = 0 );
+    explicit WidgetGraphicsItem( MarbleGraphicsItem *parent = nullptr );
 
     ~WidgetGraphicsItem() override;
 

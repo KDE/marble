@@ -43,12 +43,12 @@ MeasureToolPlugin::MeasureToolPlugin( const MarbleModel *marbleModel )
 #endif
       m_fontascent(-1),
       m_pen( Qt::red ),
-      m_addMeasurePointAction( 0 ),
-      m_removeLastMeasurePointAction( 0 ),
-      m_removeMeasurePointsAction( 0 ),
-      m_separator( 0 ),
-      m_marbleWidget( 0 ),
-      m_configDialog( 0 ),
+      m_addMeasurePointAction( nullptr ),
+      m_removeLastMeasurePointAction( nullptr ),
+      m_removeMeasurePointsAction( nullptr ),
+      m_separator( nullptr ),
+      m_marbleWidget( nullptr ),
+      m_configDialog( nullptr ),
       m_showDistanceLabel( true ),
       m_showBearingLabel( true ),
       m_showBearingChangeLabel( true ),
@@ -680,7 +680,7 @@ void MeasureToolPlugin::setNumberOfMeasurePoints( int newNumber )
 bool MeasureToolPlugin::eventFilter( QObject *object, QEvent *e )
 {
     if ( m_marbleWidget && !enabled() ) {
-        m_marbleWidget = 0;
+        m_marbleWidget = nullptr;
         removeContextItems();
         m_measureLineString.clear();
     }

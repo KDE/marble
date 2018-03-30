@@ -416,7 +416,7 @@ void TestGeoDataCopy::copyPlacemark()
         GeoDataPlacemark other(placemark);
 
         QCOMPARE(other.id(), QString());
-        QCOMPARE(other.parent(), static_cast<GeoDataObject *>(0));
+        QCOMPARE(other.parent(), static_cast<GeoDataObject *>(nullptr));
         QCOMPARE(other.coordinate(), coord1);
         QCOMPARE(static_cast<GeoDataPoint*>(other.geometry())->coordinates(), coord1);
         QCOMPARE(static_cast<GeoDataPoint*>(other.geometry())->coordinates().detail(), coord1.detail());
@@ -440,12 +440,12 @@ void TestGeoDataCopy::copyPlacemark()
     {
         GeoDataPlacemark other;
 
-        QCOMPARE(other.parent(), static_cast<GeoDataObject *>(0)); // add a check before assignment to avoid compiler optimizing to copy c'tor
+        QCOMPARE(other.parent(), static_cast<GeoDataObject *>(nullptr)); // add a check before assignment to avoid compiler optimizing to copy c'tor
 
         other = placemark;
 
         QCOMPARE(other.id(), QString());
-        QCOMPARE(other.parent(), static_cast<GeoDataObject *>(0));
+        QCOMPARE(other.parent(), static_cast<GeoDataObject *>(nullptr));
         QCOMPARE(other.coordinate(), coord1);
         QCOMPARE(static_cast<GeoDataPoint*>(other.geometry())->coordinates(), coord1);
         QCOMPARE(static_cast<GeoDataPoint*>(other.geometry())->coordinates().detail(), coord1.detail());

@@ -49,7 +49,7 @@ GeoNode* KmlroleTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataPlacemark>()->setRole( role );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

@@ -21,7 +21,7 @@ using namespace Marble;
 static const uint **jumpTableFromQImage32( const QImage &img )
 {
     if ( img.depth() != 48 && img.depth() != 32 )
-        return 0;
+        return nullptr;
 
     const int  height = img.height();
     const int  bpl    = img.bytesPerLine() / 4;
@@ -40,7 +40,7 @@ static const uint **jumpTableFromQImage32( const QImage &img )
 static const uchar **jumpTableFromQImage8( const QImage &img )
 {
     if ( img.depth() != 8 && img.depth() != 1 )
-        return 0;
+        return nullptr;
 
     const int  height = img.height();
     const int  bpl    = img.bytesPerLine();
@@ -69,7 +69,7 @@ StackedTile::StackedTile( const TileId &id, const QImage &resultImage, QVector<Q
 {
     Q_ASSERT( !tiles.isEmpty() );
 
-    if ( jumpTable32 == 0 && jumpTable8 == 0 ) {
+    if ( jumpTable32 == nullptr && jumpTable8 == nullptr ) {
         qWarning() << "Color depth" << m_depth << " is not supported.";
     }
 }

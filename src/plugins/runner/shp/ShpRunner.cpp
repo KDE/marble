@@ -54,7 +54,7 @@ GeoDataDocument *ShpRunner::parseFile(const QString &fileName, DocumentRole role
     }
     int entities;
     int shapeType;
-    SHPGetInfo( handle, &entities, &shapeType, NULL, NULL );
+    SHPGetInfo( handle, &entities, &shapeType, nullptr, nullptr );
     mDebug() << " SHP info " << entities << " Entities "
              << shapeType << " Shape Type ";
 
@@ -78,7 +78,7 @@ GeoDataDocument *ShpRunner::parseFile(const QString &fileName, DocumentRole role
     }
 
     for ( int i=0; i< entities; ++i ) {
-        GeoDataPlacemark  *placemark = 0;
+        GeoDataPlacemark  *placemark = nullptr;
         placemark = new GeoDataPlacemark;
         document->append( placemark );
 
@@ -163,7 +163,7 @@ GeoDataDocument *ShpRunner::parseFile(const QString &fileName, DocumentRole role
                 if ( shape->nParts != 1 ) {
                     bool isRingClockwise = false;
                     GeoDataMultiGeometry *multigeom = new GeoDataMultiGeometry;
-                    GeoDataPolygon *poly = 0;
+                    GeoDataPolygon *poly = nullptr;
                     int polygonCount = 0;
                     for( int j=0; j<shape->nParts; ++j ) {
                         GeoDataLinearRing ring;
@@ -193,7 +193,7 @@ GeoDataDocument *ShpRunner::parseFile(const QString &fileName, DocumentRole role
                     else {
                         placemark->setGeometry( poly );
                         delete multigeom;
-                        multigeom = 0;
+                        multigeom = nullptr;
                     }
                     mDebug() << "donut " << placemark->name() << " " << shape->nParts;
 

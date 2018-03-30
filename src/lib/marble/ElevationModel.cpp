@@ -36,8 +36,8 @@ public:
     ElevationModelPrivate( ElevationModel *_q, HttpDownloadManager *downloadManager, PluginManager* pluginManager )
         : q( _q ),
           m_tileLoader( downloadManager, pluginManager ),
-          m_textureLayer( 0 ),
-          m_srtmTheme(0)
+          m_textureLayer( nullptr ),
+          m_srtmTheme(nullptr)
     {
         m_cache.setMaxCost( 10 ); //keep 10 tiles in memory (~17MB)
 
@@ -132,7 +132,7 @@ qreal ElevationModel::height( qreal lon, qreal lat ) const
         //mDebug() << "LAT" << lat << "LON" << lon << "tile" << ( x % ( numTilesX * width ) ) / width << ( y % ( numTilesY * height ) ) / height;
 
         const QImage *image = d->m_cache[id];
-        if ( image == 0 ) {
+        if ( image == nullptr ) {
             image = new QImage( d->m_tileLoader.loadTileImage( d->m_textureLayer, id, DownloadBrowse ) );
             d->m_cache.insert( id, image );
         }

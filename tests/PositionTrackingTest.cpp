@@ -47,7 +47,7 @@ public:
     qreal direction() const override { return m_direction; }
     QDateTime timestamp() const override { return m_timestamp; }
 
-    Marble::PositionProviderPlugin *newInstance() const override { return 0; }
+    Marble::PositionProviderPlugin *newInstance() const override { return nullptr; }
 
     void setStatus( Marble::PositionProviderStatus status );
     void setPosition( const Marble::GeoDataCoordinates &position,
@@ -123,7 +123,7 @@ void PositionTrackingTest::construct()
     GeoDataTreeModel treeModel;
     const PositionTracking tracking( &treeModel );
 
-    QCOMPARE( const_cast<PositionTracking &>( tracking ).positionProviderPlugin(), static_cast<PositionProviderPlugin *>( 0 ) );
+    QCOMPARE( const_cast<PositionTracking &>( tracking ).positionProviderPlugin(), static_cast<PositionProviderPlugin *>( nullptr ) );
     QCOMPARE( tracking.speed(), qreal( 0 ) );
     QCOMPARE( tracking.direction(), qreal( 0 ) );
     QCOMPARE( tracking.timestamp(), QDateTime() );
@@ -198,7 +198,7 @@ void PositionTrackingTest::setPositionProviderPlugin()
     QCOMPARE( tracking.timestamp(), timestamp );
     QCOMPARE( gpsLocationSpy.count(), 1 );
 
-    tracking.setPositionProviderPlugin( 0 );
+    tracking.setPositionProviderPlugin( nullptr );
 
     QVERIFY( provider.isNull() );
 }

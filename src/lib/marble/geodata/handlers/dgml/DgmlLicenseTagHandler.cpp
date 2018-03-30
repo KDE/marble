@@ -49,7 +49,7 @@ GeoNode* DgmlLicenseTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoSceneHead>()->license()->setLicense( fullLicense );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

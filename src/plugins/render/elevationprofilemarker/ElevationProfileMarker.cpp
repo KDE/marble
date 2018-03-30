@@ -28,7 +28,7 @@ namespace Marble
 
 ElevationProfileMarker::ElevationProfileMarker( const MarbleModel *marbleModel )
         : RenderPlugin( marbleModel ),
-        m_markerPlacemark( 0 ),
+        m_markerPlacemark( nullptr ),
         m_markerItem(),
         m_markerIcon( &m_markerItem ),
         m_markerText( &m_markerItem )
@@ -208,7 +208,7 @@ void ElevationProfileMarker::onGeoObjectAdded( GeoDataObject *object )
 
     m_markerPlacemark = dynamic_cast<GeoDataPlacemark *>( document->child( 0 ) );
 
-    setVisible( m_markerPlacemark != 0 );
+    setVisible( m_markerPlacemark != nullptr );
 }
 
 void ElevationProfileMarker::onGeoObjectRemoved( GeoDataObject *object )
@@ -220,7 +220,7 @@ void ElevationProfileMarker::onGeoObjectRemoved( GeoDataObject *object )
     if (document->name() != QLatin1String("Elevation Profile"))
         return;
 
-    m_markerPlacemark = 0;
+    m_markerPlacemark = nullptr;
 
     emit repaintNeeded();
 }

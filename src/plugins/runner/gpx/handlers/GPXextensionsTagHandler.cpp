@@ -36,7 +36,7 @@ GeoNode* GPXextensionsTagHandler::parse( GeoParser& parser ) const
         return track;
     }
 
-    return 0;
+    return nullptr;
 }
 
 } // namespace gpx

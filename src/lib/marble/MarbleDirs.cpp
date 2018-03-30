@@ -47,7 +47,7 @@ namespace
 }
 
 MarbleDirs::MarbleDirs()
-    : d( 0 )
+    : d( nullptr )
 {
 }
 

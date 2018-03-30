@@ -319,7 +319,7 @@ void MarbleRunnerManagerTest::testSyncParsing()
     GeoDataDocument* file = m_runnerManager.openFile( fileName );
 
     QCOMPARE( resultSpy.count(), resultCount );
-    QCOMPARE( file != 0, resultCount > 0 );
+    QCOMPARE( file != nullptr, resultCount > 0 );
     QCOMPARE( finishSpy.count(), 1 );
 }
 

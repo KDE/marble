@@ -50,7 +50,7 @@ ParsingRunnerManager::Private::Private( ParsingRunnerManager *parent, const Plug
     q( parent ),
     m_pluginManager( pluginManager ),
     m_parsingTasks(0),
-    m_fileResult( 0 )
+    m_fileResult( nullptr )
 {
     qRegisterMetaType<GeoDataDocument*>( "GeoDataDocument*" );
 }

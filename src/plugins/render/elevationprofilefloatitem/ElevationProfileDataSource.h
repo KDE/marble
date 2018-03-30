@@ -36,7 +36,7 @@ class ElevationProfileDataSource : public QObject
     Q_OBJECT
 
 public:
-    explicit ElevationProfileDataSource( QObject *parent = 0 );
+    explicit ElevationProfileDataSource( QObject *parent = nullptr );
 
     /**
      * @brief isDataAvailable
@@ -64,7 +64,7 @@ class ElevationProfileTrackDataSource : public ElevationProfileDataSource
     Q_OBJECT
 
 public:
-    explicit ElevationProfileTrackDataSource( const GeoDataTreeModel *treeModel, QObject *parent = 0 );
+    explicit ElevationProfileTrackDataSource( const GeoDataTreeModel *treeModel, QObject *parent = nullptr );
 
     bool isDataAvailable() const override;
 
@@ -99,7 +99,7 @@ class ElevationProfileRouteDataSource : public ElevationProfileDataSource
     Q_OBJECT
 
 public:
-    ElevationProfileRouteDataSource( const RoutingModel *routingModel, const ElevationModel *elevationModel, QObject *parent = 0 );
+    ElevationProfileRouteDataSource( const RoutingModel *routingModel, const ElevationModel *elevationModel, QObject *parent = nullptr );
 
     bool isDataAvailable() const override;
 

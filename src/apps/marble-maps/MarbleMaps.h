@@ -23,7 +23,7 @@ class MarbleMaps : public MarbleQuickItem
     Q_PROPERTY(bool keepScreenOn READ keepScreenOn WRITE setKeepScreenOn NOTIFY keepScreenOnChanged)
 
 public:
-    explicit MarbleMaps(QQuickItem *parent = 0);
+    explicit MarbleMaps(QQuickItem *parent = nullptr);
 
     bool isSuspended() const;
 

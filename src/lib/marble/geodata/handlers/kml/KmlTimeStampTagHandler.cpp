@@ -35,7 +35,7 @@ GeoNode* KmlTimeStampTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataFeature>()->setTimeStamp( timestamp );
         return &parentItem.nodeAs<GeoDataFeature>()->timeStamp();
     }
-    return 0;
+    return nullptr;
 }
 
 }

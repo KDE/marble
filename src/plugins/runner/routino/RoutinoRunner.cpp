@@ -101,7 +101,7 @@ QByteArray RoutinoRunnerPrivate::retrieveWaypoints( const QStringList &params ) 
     routinoProcess.start( "routino-router", routinoParams );
     if ( !routinoProcess.waitForStarted( 5000 ) ) {
         mDebug() << "Couldn't start routino-router from the current PATH. Install it to retrieve routing results from routino.";
-        return 0;
+        return nullptr;
     }
 
     if ( routinoProcess.waitForFinished(60 * 1000) ) {
@@ -121,7 +121,7 @@ QByteArray RoutinoRunnerPrivate::retrieveWaypoints( const QStringList &params ) 
     else {
         mDebug() << "Couldn't stop routino";
     }
-    return 0;
+    return nullptr;
 }
 
 GeoDataLineString* RoutinoRunnerPrivate::parseRoutinoOutput( const QByteArray &content )
@@ -185,7 +185,7 @@ QVector<GeoDataPlacemark*> RoutinoRunnerPrivate::parseRoutinoInstructions( const
 GeoDataDocument* RoutinoRunnerPrivate::createDocument( GeoDataLineString* routeWaypoints, const QVector<GeoDataPlacemark*> instructions )
 {
     if ( !routeWaypoints || routeWaypoints->isEmpty() ) {
-        return 0;
+        return nullptr;
     }
 
     GeoDataDocument* result = new GeoDataDocument();
@@ -230,7 +230,7 @@ void RoutinoRunner::retrieveRoute( const RouteRequest *route )
 
     if ( ! QFileInfo( d->m_mapDir, "nodes.mem" ).exists() )
     {
-        emit routeCalculated( 0 );
+        emit routeCalculated( nullptr );
         return;
     }
 

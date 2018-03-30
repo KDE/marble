@@ -41,7 +41,7 @@ GeoNode* KmlviewRefreshModeTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataLink>()->setViewRefreshMode( mode );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

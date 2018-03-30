@@ -30,7 +30,7 @@ GeoNode *KmlCameraTagHandler::parse( GeoParser & parser ) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_Camera)));
 
-    GeoDataCamera* camera = 0;
+    GeoDataCamera* camera = nullptr;
     GeoStackItem parentItem = parser.parentElement();
 
     if ( parentItem.is<GeoDataFeature>() ) {

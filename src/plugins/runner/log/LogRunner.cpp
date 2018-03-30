@@ -89,7 +89,7 @@ GeoDataDocument *LogRunner::parseFile(const QString &fileName, DocumentRole role
     file.close();
     if ( track->size() == 0 || error ) {
         delete document;
-        document = 0;
+        document = nullptr;
         return nullptr;
     }
 

@@ -48,7 +48,7 @@ GeoNode* KmlrotationTagHandler::parse( GeoParser& parser ) const
 
         parentItem.nodeAs<GeoDataPhotoOverlay>()->setRotation( rotation );
     }
-    return 0;
+    return nullptr;
 }
 
 }

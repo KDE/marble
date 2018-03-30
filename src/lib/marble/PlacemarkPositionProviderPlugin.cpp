@@ -23,7 +23,7 @@ using namespace Marble;
 PlacemarkPositionProviderPlugin::PlacemarkPositionProviderPlugin( MarbleModel *marbleModel, QObject* parent )
     : PositionProviderPlugin(parent),
       m_marbleModel( marbleModel ),
-      m_placemark( 0 ),
+      m_placemark( nullptr ),
       m_speed( 0 ),
       m_direction( 0.0 ),
       m_status( PositionProviderStatusUnavailable ),
@@ -130,7 +130,7 @@ void PlacemarkPositionProviderPlugin::setPlacemark( const GeoDataPlacemark *plac
 {
     const GeoDataPlacemark *const oldPlacemark = m_placemark;
 
-    if ( oldPlacemark != 0 ) {
+    if ( oldPlacemark != nullptr ) {
         emit statusChanged( PositionProviderStatusUnavailable );
     }
 
@@ -149,7 +149,7 @@ void PlacemarkPositionProviderPlugin::setPlacemark( const GeoDataPlacemark *plac
         connect( m_marbleModel->clock(), SIGNAL(timeChanged()), this, SLOT(updatePosition()) );
     }
 
-    if ( oldPlacemark != m_placemark && m_placemark != 0 ) {
+    if ( oldPlacemark != m_placemark && m_placemark != nullptr ) {
         emit statusChanged( m_status );
     }
 
@@ -160,7 +160,7 @@ void PlacemarkPositionProviderPlugin::setPlacemark( const GeoDataPlacemark *plac
 
 void PlacemarkPositionProviderPlugin::updatePosition()
 {
-    if ( m_placemark == 0 ) {
+    if ( m_placemark == nullptr ) {
         return;
     }
 

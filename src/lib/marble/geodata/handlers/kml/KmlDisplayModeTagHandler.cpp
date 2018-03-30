@@ -40,7 +40,7 @@ GeoNode* KmldisplayModeTagHandler::parse( GeoParser& parser ) const
 
         parentItem.nodeAs<GeoDataBalloonStyle>()->setDisplayMode( displayMode );
     }
-    return 0;
+    return nullptr;
 }
 
 }

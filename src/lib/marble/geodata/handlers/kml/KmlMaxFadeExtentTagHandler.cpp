@@ -34,7 +34,7 @@ GeoNode* KmlmaxFadeExtentTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataLod>()->setMaxFadeExtent( maxFadeExtent );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

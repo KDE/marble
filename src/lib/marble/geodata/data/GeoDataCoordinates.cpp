@@ -70,7 +70,7 @@ GeoDataCoordinates::GeoDataCoordinates()
 GeoDataCoordinates::~GeoDataCoordinates()
 {
     delete d->m_q;
-    d->m_q = 0;
+    d->m_q = nullptr;
 
     if (!d->ref.deref())
         delete d;
@@ -94,7 +94,7 @@ bool GeoDataCoordinates::isValid() const
 void GeoDataCoordinates::detach()
 {    
     delete d->m_q;
-    d->m_q = 0;
+    d->m_q = nullptr;
 
     if(d->ref.load() == 1) {
         return;
@@ -791,7 +791,7 @@ GeoDataCoordinates GeoDataCoordinates::moveByBearing( qreal bearing, qreal dista
 
 const Quaternion& GeoDataCoordinates::quaternion() const
 {
-    if (d->m_q == 0) {
+    if (d->m_q == nullptr) {
         d->m_q = new Quaternion(Quaternion::fromSpherical( d->m_lon , d->m_lat ));
     }
     return *d->m_q;

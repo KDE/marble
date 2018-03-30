@@ -47,7 +47,7 @@ GeoNode* KmlIconStyleTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataStyle>()->setIconStyle( style );
         return &parentItem.nodeAs<GeoDataStyle>()->iconStyle();
     }
-    return 0;
+    return nullptr;
 }
 
 }

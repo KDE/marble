@@ -38,7 +38,7 @@ GeoNode* KmlLinkTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataModel>()->setLink(link);
         return &parentItem.nodeAs<GeoDataModel>()->link();
     }else{
-        return 0;
+        return nullptr;
     }
 }
 

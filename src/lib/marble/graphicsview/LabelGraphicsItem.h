@@ -33,7 +33,7 @@ class LabelGraphicsItemPrivate;
 class MARBLE_EXPORT LabelGraphicsItem : public FrameGraphicsItem
 {
  public:
-    explicit LabelGraphicsItem( MarbleGraphicsItem *parent = 0 );
+    explicit LabelGraphicsItem( MarbleGraphicsItem *parent = nullptr );
     ~LabelGraphicsItem() override;
 
     void setContentSize( const QSizeF &contentSize ) override;

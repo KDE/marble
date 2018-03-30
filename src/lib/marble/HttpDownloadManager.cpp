@@ -85,7 +85,7 @@ HttpDownloadManager::Private::~Private()
 DownloadQueueSet *HttpDownloadManager::Private::findQueues( const QString& hostName,
                                                             const DownloadUsage usage )
 {
-    DownloadQueueSet * result = 0;
+    DownloadQueueSet * result = nullptr;
     QList<QPair<DownloadPolicyKey, DownloadQueueSet*> >::iterator pos = m_queueSets.begin();
     QList<QPair<DownloadPolicyKey, DownloadQueueSet*> >::iterator const end = m_queueSets.end();
     for (; pos != end; ++pos ) {

@@ -31,7 +31,7 @@ class FoursquareItem : public AbstractDataPluginItem
     Q_PROPERTY( QString categoryLargeIconUrl READ categoryLargeIconUrl NOTIFY categoryLargeIconUrlChanged )
     
 public:
-    explicit FoursquareItem( QObject *parent=0 );
+    explicit FoursquareItem( QObject *parent=nullptr );
  
     ~FoursquareItem() override;
  

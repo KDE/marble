@@ -41,7 +41,7 @@ class MARBLE_EXPORT BookmarkManager : public QObject
 
  public:
 
-    explicit BookmarkManager( GeoDataTreeModel *treeModel, QObject *parent = 0 );
+    explicit BookmarkManager( GeoDataTreeModel *treeModel, QObject *parent = nullptr );
 
     ~BookmarkManager() override;
 

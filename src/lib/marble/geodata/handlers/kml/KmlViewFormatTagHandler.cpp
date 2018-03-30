@@ -31,7 +31,7 @@ GeoNode* KmlviewFormatTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataLink>()->setViewFormat(content);
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

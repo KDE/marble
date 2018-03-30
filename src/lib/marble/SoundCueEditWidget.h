@@ -29,7 +29,7 @@ class SoundCueEditWidget: public QWidget
     Q_OBJECT
 
 public:
-    explicit SoundCueEditWidget( const QModelIndex& index, QWidget* parent=0 );
+    explicit SoundCueEditWidget( const QModelIndex& index, QWidget* parent=nullptr );
     bool editable() const;
 
 Q_SIGNALS:

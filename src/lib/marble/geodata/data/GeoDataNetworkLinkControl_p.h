@@ -47,7 +47,7 @@ GeoDataNetworkLinkControlPrivate::GeoDataNetworkLinkControlPrivate() :
     m_maxLines( 2 ),
     m_expires(),
     m_update(),
-    m_abstractView( 0 )
+    m_abstractView( nullptr )
 {
 }
 
@@ -63,7 +63,7 @@ GeoDataNetworkLinkControlPrivate::GeoDataNetworkLinkControlPrivate( const GeoDat
     m_maxLines(other.m_maxLines),
     m_expires(other.m_expires),
     m_update(other.m_update),
-    m_abstractView(other.m_abstractView ? other.m_abstractView->copy() : 0)
+    m_abstractView(other.m_abstractView ? other.m_abstractView->copy() : nullptr)
 {
 }
 
@@ -87,7 +87,7 @@ GeoDataNetworkLinkControlPrivate& GeoDataNetworkLinkControlPrivate::operator=(co
     m_update = other.m_update;
 
     delete m_abstractView;
-    m_abstractView = other.m_abstractView ? other.m_abstractView->copy() : 0;
+    m_abstractView = other.m_abstractView ? other.m_abstractView->copy() : nullptr;
 
     return *this;
 }

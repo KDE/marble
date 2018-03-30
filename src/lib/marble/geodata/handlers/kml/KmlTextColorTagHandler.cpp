@@ -34,7 +34,7 @@ GeoNode* KmltextColorTagHandler::parse( GeoParser& parser ) const
         QColor const color = KmlcolorTagHandler::parseColor( parser.readElementText().trimmed() );
         parentItem.nodeAs<GeoDataBalloonStyle>()->setTextColor( color );
     }
-    return 0;
+    return nullptr;
 }
 
 }

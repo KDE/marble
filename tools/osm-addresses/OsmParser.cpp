@@ -64,7 +64,7 @@ bool moreImportantAdminArea( const OsmRegion &a, const OsmRegion& b )
 }
 
 OsmParser::OsmParser( QObject *parent ) :
-    QObject( parent ), m_convexHull( 0 )
+    QObject( parent ), m_convexHull( nullptr )
 {
     m_categoryMap["tourism/camp_site"] = OsmPlacemark::AccomodationCamping;
     m_categoryMap["tourism/hostel"] = OsmPlacemark::AccomodationHostel;
@@ -268,15 +268,15 @@ void OsmParser::read( const QFileInfo &content, const QString &areaName )
 
     for ( int i = 0; i < m_osmOsmRegions.size(); ++i ) {
         GeoDataLinearRing const & ring = m_osmOsmRegions[i].region.geometry().outerBoundary();
-        OsmOsmRegion* parent = 0;
+        OsmOsmRegion* parent = nullptr;
         qDebug() << "Examining admin region " << i << " of " << m_osmOsmRegions.count();
-        for ( int level=m_osmOsmRegions[i].region.adminLevel()-1; level >= 0 && parent == 0; --level ) {
+        for ( int level=m_osmOsmRegions[i].region.adminLevel()-1; level >= 0 && parent == nullptr; --level ) {
             QList<int> candidates = sortedRegions.values( level );
             qDebug() << "Examining " << candidates.count() << "admin regions on level" << level;
             for( int j: candidates ) {
                 GeoDataLinearRing const & outer = m_osmOsmRegions[j].region.geometry().outerBoundary();
                 if ( contains<GeoDataLinearRing, GeoDataLinearRing>( outer, ring ) ) {
-                    if ( parent == 0 || contains<GeoDataLinearRing, GeoDataLinearRing>( parent->region.geometry().outerBoundary(), outer ) ) {
+                    if ( parent == nullptr || contains<GeoDataLinearRing, GeoDataLinearRing>( parent->region.geometry().outerBoundary(), outer ) ) {
                         qDebug() << "Parent found: " << m_osmOsmRegions[i].region.name() << ", level " << m_osmOsmRegions[i].region.adminLevel()
                                    << "is a child of " << m_osmOsmRegions[j].region.name() << ", level " << m_osmOsmRegions[j].region.adminLevel();
                         parent = &m_osmOsmRegions[j];

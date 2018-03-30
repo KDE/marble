@@ -45,7 +45,7 @@ GeoNode *KmlTrackTagHandler::parse( GeoParser &parser ) const
         delete track;
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

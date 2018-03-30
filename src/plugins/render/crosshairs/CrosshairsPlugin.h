@@ -80,7 +80,7 @@ class CrosshairsPlugin : public RenderPlugin, public DialogConfigurationInterfac
 
     bool isInitialized () const override;
 
-    bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 ) override;
+    bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = nullptr ) override;
 
     QDialog *configDialog() override;
 

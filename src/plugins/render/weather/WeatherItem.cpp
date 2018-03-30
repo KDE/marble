@@ -49,7 +49,7 @@ class WeatherItemPrivate
     
  public:
     WeatherItemPrivate( WeatherItem *parent )
-        : m_marbleWidget( 0 ),
+        : m_marbleWidget( nullptr ),
           m_priority( 0 ),
           m_browserAction( tr( "Weather" ), parent ),
           m_favoriteAction( parent ),

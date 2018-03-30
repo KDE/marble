@@ -33,7 +33,7 @@ GeoNode* KmlmessageTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataNetworkLinkControl>()->setMessage( message );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

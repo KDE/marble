@@ -47,7 +47,7 @@ public:
         CopyrightYears                   // QString
     };
 
-    explicit RenderPluginModel( QObject *parent = 0 );
+    explicit RenderPluginModel( QObject *parent = nullptr );
 
     ~RenderPluginModel() override;
 

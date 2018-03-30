@@ -28,7 +28,7 @@ GeoNode* DgmlTileSizeTagHandler::parse( GeoParser& parser ) const
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
     if ( !parentItem.represents( dgmlTag_Texture ) && !parentItem.represents( dgmlTag_Vectortile ))
-        return 0;
+        return nullptr;
 
     int width = parser.attribute(dgmlAttr_width).toInt();
     int height = parser.attribute(dgmlAttr_height).toInt();
@@ -37,7 +37,7 @@ GeoNode* DgmlTileSizeTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoSceneTileDataset>()->setTileSize( size );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

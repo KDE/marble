@@ -23,8 +23,8 @@ namespace Marble {
 
 ConflictDialog::ConflictDialog( QWidget *parent ) :
     QDialog( parent ),
-    m_mergeItem( 0 ),
-    m_box( 0 ),
+    m_mergeItem( nullptr ),
+    m_box( nullptr ),
     m_resolveAction(ConflictDialog::AskUser)
 {
     // nothing to do
@@ -42,7 +42,7 @@ void ConflictDialog::stopAutoResolve()
 
 void ConflictDialog::open()
 {
-    if( m_mergeItem == 0 ) {
+    if( m_mergeItem == nullptr ) {
         return;
     }
 

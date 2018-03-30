@@ -24,7 +24,7 @@ class RoutinoPlugin : public RoutingRunnerPlugin
     Q_INTERFACES( Marble::RoutingRunnerPlugin )
 
 public:
-    explicit RoutinoPlugin( QObject *parent = 0 );
+    explicit RoutinoPlugin( QObject *parent = nullptr );
 
     QString name() const override;
 

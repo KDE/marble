@@ -21,8 +21,8 @@ namespace Marble
 {
 PlaybackFlyToItem::PlaybackFlyToItem( const GeoDataFlyTo* flyTo ):
         m_flyTo( flyTo ),
-        m_before( 0 ),
-        m_next( 0 ),
+        m_before( nullptr ),
+        m_next( nullptr ),
         m_isPlaying( false ),
         m_isFirst( false )
 {

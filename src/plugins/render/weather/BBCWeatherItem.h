@@ -24,7 +24,7 @@ class BBCWeatherItem : public WeatherItem
     Q_OBJECT
 
  public:
-    explicit BBCWeatherItem( QObject *parent = 0 );
+    explicit BBCWeatherItem( QObject *parent = nullptr );
     ~BBCWeatherItem() override;
     
     bool request( const QString& type ) override;

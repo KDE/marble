@@ -33,7 +33,7 @@ GeoNode* KmlsourceHrefTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataAlias>()->setSourceHref( content );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

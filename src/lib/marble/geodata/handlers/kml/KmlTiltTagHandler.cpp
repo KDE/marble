@@ -37,7 +37,7 @@ GeoNode* KmltiltTagHandler::parse( GeoParser& parser ) const
         double tilt = parser.readElementText().trimmed().toDouble();
 	parentItem.nodeAs<GeoDataOrientation>()->setTilt(tilt);
     }
-    return 0;
+    return nullptr;
 }
 
 }

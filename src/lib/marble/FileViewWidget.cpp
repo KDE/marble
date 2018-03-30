@@ -68,8 +68,8 @@ class FileViewWidgetPrivate
 
 FileViewWidgetPrivate::FileViewWidgetPrivate( FileViewWidget *parent )
     :q( parent ),
-    m_widget( 0 ),
-    m_fileManager( 0 )
+    m_widget( nullptr ),
+    m_fileManager( nullptr )
 {
     m_contextMenu = new QMenu(q);
     m_viewPropertiesAction = new QAction(q);

@@ -26,7 +26,7 @@ class HostipRunner : public SearchRunner
 {
     Q_OBJECT
 public:
-    explicit HostipRunner(QObject *parent = 0);
+    explicit HostipRunner(QObject *parent = nullptr);
 
     ~HostipRunner() override;
 

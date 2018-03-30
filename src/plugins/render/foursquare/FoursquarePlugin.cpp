@@ -17,7 +17,7 @@
 namespace Marble {
 
 FoursquarePlugin::FoursquarePlugin()
-    : AbstractDataPlugin( 0 )
+    : AbstractDataPlugin( nullptr )
 {
 }
 

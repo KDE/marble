@@ -21,7 +21,7 @@ class NodeModel : public QAbstractListModel
 {
     Q_OBJECT
 public:
-    explicit NodeModel( QObject *parent = 0 );
+    explicit NodeModel( QObject *parent = nullptr );
     int rowCount( const QModelIndex &parent ) const override;
     int columnCount( const QModelIndex &parent ) const override;
     QVariant data( const QModelIndex &index, int role ) const override;

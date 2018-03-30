@@ -97,7 +97,7 @@ class FavoritesModel : public QAbstractListModel
 public:
     AbstractDataPluginModelPrivate* d;
 
-    explicit FavoritesModel( AbstractDataPluginModelPrivate* d, QObject* parent = 0 );
+    explicit FavoritesModel( AbstractDataPluginModelPrivate* d, QObject* parent = nullptr );
 
     int rowCount ( const QModelIndex & parent = QModelIndex() ) const override;
 
@@ -128,7 +128,7 @@ AbstractDataPluginModelPrivate::AbstractDataPluginModelPrivate( const QString& n
       m_favoriteItemsOnly( false ),
       m_storagePolicy(MarbleDirs::localPath() + QLatin1String("/cache/") + m_name + QLatin1Char('/')),
       m_downloadManager( &m_storagePolicy ),
-      m_favoritesModel( 0 ),
+      m_favoritesModel( nullptr ),
       m_hasMetaObject( false ),
       m_needsSorting( false )
 {
@@ -253,7 +253,7 @@ AbstractDataPluginModel::AbstractDataPluginModel( const QString &name, const Mar
     : QObject(  parent ),
       d( new AbstractDataPluginModelPrivate( name, marbleModel, this ) )
 {
-    Q_ASSERT( marbleModel != 0 );
+    Q_ASSERT( marbleModel != nullptr );
 
     // Initializing file and download System
     connect( &d->m_downloadManager, SIGNAL(downloadComplete(QString,QString)),
@@ -546,7 +546,7 @@ AbstractDataPluginItem *AbstractDataPluginModel::findItem( const QString& id ) c
         }
     }
     
-    return 0;
+    return nullptr;
 }
 
 bool AbstractDataPluginModel::itemExists( const QString& id ) const

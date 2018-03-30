@@ -80,7 +80,7 @@ GeoNode* DgmlPenTagHandler::parse(GeoParser& parser) const
         geodata->setPen( pen );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

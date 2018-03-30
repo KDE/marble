@@ -34,7 +34,7 @@ GeoNode* KmlminLodPixelsTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataLod>()->setMinLodPixels( minLodPixels );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

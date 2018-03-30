@@ -40,7 +40,7 @@ GeoNode* KmlwhenTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataTrack>()->appendWhen( when );
     }
 
-    return 0;
+    return nullptr;
 }
 
 QDateTime KmlwhenTagHandler::parse( const QString &dateTime )

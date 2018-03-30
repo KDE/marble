@@ -47,7 +47,7 @@ public:
         m_descriptionCDATA(false),
         m_address(),
         m_phoneNumber(),
-        m_abstractView( 0 ),
+        m_abstractView( nullptr ),
         m_timeSpan(),
         m_timeStamp(),
         m_region()
@@ -126,8 +126,8 @@ class GeoDataFeaturePrivate
         m_zoomLevel( 1 ),
         m_visible( true ),
         m_role(" "),
-        m_style( 0 ),
-        m_styleMap( 0 ),
+        m_style( nullptr ),
+        m_styleMap( nullptr ),
         m_extendedData(),
         m_featureExtendedData(nullptr)
     {

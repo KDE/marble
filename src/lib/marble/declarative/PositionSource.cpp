@@ -23,7 +23,7 @@ PositionSource::PositionSource( QObject* parent) : QObject( parent ),
     m_active( false ),
     m_hasPosition( false ),
     m_position( 0 ),
-    m_marbleQuickItem( 0 ),
+    m_marbleQuickItem( nullptr ),
     m_speed( 0.0 )
 {
   // nothing to do
@@ -41,7 +41,7 @@ void PositionSource::setActive( bool active )
             start();
         } else if ( m_marbleQuickItem ) {
             PositionTracking *tracking = m_marbleQuickItem->model()->positionTracking();
-            tracking->setPositionProviderPlugin( 0 );
+            tracking->setPositionProviderPlugin( nullptr );
         }
 
         if ( m_hasPosition ) {

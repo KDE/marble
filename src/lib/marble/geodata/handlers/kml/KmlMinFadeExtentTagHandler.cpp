@@ -34,7 +34,7 @@ GeoNode* KmlminFadeExtentTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataLod>()->setMinFadeExtent( minFadeExtent );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

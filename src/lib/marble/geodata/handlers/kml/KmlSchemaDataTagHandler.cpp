@@ -39,7 +39,7 @@ GeoNode* KmlSchemaDataTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataExtendedData>()->addSchemaData( schemaData );
         return &parentItem.nodeAs<GeoDataExtendedData>()->schemaData( schemaUrl );
     }
-    return 0;
+    return nullptr;
 }
 
 } //namespace kml

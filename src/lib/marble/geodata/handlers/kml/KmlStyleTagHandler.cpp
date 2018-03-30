@@ -56,7 +56,7 @@ GeoNode* KmlStyleTagHandler::parse( GeoParser& parser ) const
         return style.data();
     }
     // FIXME: KMLStyle can be contained in MultiGeometry as well
-    return 0;
+    return nullptr;
 }
 
 }

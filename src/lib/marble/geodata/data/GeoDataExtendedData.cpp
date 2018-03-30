@@ -110,7 +110,7 @@ void GeoDataExtendedData::setSimpleArrayData( const QString& key, GeoDataSimpleA
 
 GeoDataSimpleArrayData* GeoDataExtendedData::simpleArrayData( const QString& key ) const
 {
-    if ( !d->arrayHash.contains( key ) ) return 0;
+    if ( !d->arrayHash.contains( key ) ) return nullptr;
     return d->arrayHash[ key ];
 }
 
@@ -128,7 +128,7 @@ void GeoDataExtendedData::addSchemaData( const GeoDataSchemaData& schemaData )
 void GeoDataExtendedData::removeSchemaData( const QString& schemaUrl )
 {
     GeoDataSchemaData schemaData = d->schemaDataHash.take( schemaUrl );
-    schemaData.setParent( 0 );
+    schemaData.setParent( nullptr );
 }
 
 QList<GeoDataSchemaData> GeoDataExtendedData::schemaDataList() const

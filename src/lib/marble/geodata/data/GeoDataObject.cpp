@@ -30,7 +30,7 @@ class GeoDataObjectPrivate
     GeoDataObjectPrivate()
         : m_id(),
           m_targetId(),
-          m_parent(0)
+          m_parent(nullptr)
     {
     }
 

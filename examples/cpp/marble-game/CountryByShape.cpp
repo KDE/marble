@@ -41,10 +41,10 @@ class CountryByShapePrivate
 {
 public:
     CountryByShapePrivate( MarbleWidget *marbleWidget )
-    : m_parent( 0 ),
+    : m_parent( nullptr ),
       m_marbleWidget( marbleWidget ),
-      m_countryNames( 0 ),
-      m_countryBoundaries( 0 )
+      m_countryNames( nullptr ),
+      m_countryBoundaries( nullptr )
     {
         m_continentsAndOceans
             << QStringLiteral("Asia") << QStringLiteral("Africa")
@@ -160,8 +160,8 @@ void CountryByShape::postQuestion( QObject *gameObject )
     qsrand( randomSeed );
 
     bool found = false;
-    GeoDataPlacemark *placemark =0;
-    GeoDataPoint *point = 0;
+    GeoDataPlacemark *placemark =nullptr;
+    GeoDataPoint *point = nullptr;
     GeoDataCoordinates coord;
     GeoDataLatLonAltBox box;
     QVariantList answerOptions;

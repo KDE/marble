@@ -26,7 +26,7 @@ class RemoteIconLoader : public QObject
 {
     Q_OBJECT;
 public:
-    explicit RemoteIconLoader( QObject *parent = 0 );
+    explicit RemoteIconLoader( QObject *parent = nullptr );
     ~RemoteIconLoader() override;
 
     /**

@@ -989,7 +989,7 @@ public:
     FromStringRegExpTranslator(const QString& _degree, const QString& _minutes, const QString& _seconds,
                                const QString& _north, const QString& _south,
                                const QString& _east, const QString& _west)
-    : QTranslator((QObject*)0)
+    : QTranslator((QObject*)nullptr)
     , degree( _degree )
     , minutes( _minutes )
     , seconds( _seconds )
@@ -1002,7 +1002,7 @@ public:
 public: // QTranslator API
     bool isEmpty() const override { return false; }
     QString translate( const char* context, const char* sourceText,
-                               const char* disambiguation = 0, int n = -1 ) const override;
+                               const char* disambiguation = nullptr, int n = -1 ) const override;
 private:
     const QString degree;
     const QString minutes;

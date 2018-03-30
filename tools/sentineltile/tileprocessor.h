@@ -20,7 +20,7 @@ class TileProcessor : public QObject
 {
     Q_OBJECT
 public:
-    explicit TileProcessor(QObject *parent = 0);
+    explicit TileProcessor(QObject *parent = nullptr);
 
 public:
 

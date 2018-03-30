@@ -65,7 +65,7 @@ GeoNode* GPXwptTagHandler::parse(GeoParser& parser) const
         doc->append(placemark);
         return placemark;
     }
-    return 0;
+    return nullptr;
 }
 
 } // namespace gpx

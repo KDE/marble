@@ -35,7 +35,7 @@ GeoNode* KmllinkSnippetTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataNetworkLinkControl>()->setMaxLines( maxLines );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

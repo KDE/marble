@@ -50,7 +50,7 @@ GeoNode* KmlndTagHandler::parse( GeoParser& parser ) const
             GeoDataPoint *point = new GeoDataPoint( lineString->at( ndIndex ) );
             return point;
         }
-        return 0;
+        return nullptr;
     }
     /* Case 2: node of a polygon's boundary
     *...
@@ -70,7 +70,7 @@ GeoNode* KmlndTagHandler::parse( GeoParser& parser ) const
         GeoDataPoint *point = new GeoDataPoint( linearRing->at( ndIndex ) );
         return point;
     }
-    return 0;
+    return nullptr;
 }
 }
 }

@@ -22,7 +22,7 @@ class MarbleDemoItem : public MarbleQuickItem
 Q_OBJECT
 
 public:
-    MarbleDemoItem(QQuickItem *parent = 0) : MarbleQuickItem(parent)
+    MarbleDemoItem(QQuickItem *parent = nullptr) : MarbleQuickItem(parent)
     {
         // nothing to do
     }

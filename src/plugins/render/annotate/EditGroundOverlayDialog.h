@@ -24,7 +24,7 @@ class EditGroundOverlayDialog : public QDialog
     Q_OBJECT
 
 public:
-    EditGroundOverlayDialog( GeoDataGroundOverlay *overlay, TextureLayer *textureLayer, QWidget *parent = 0 );
+    EditGroundOverlayDialog( GeoDataGroundOverlay *overlay, TextureLayer *textureLayer, QWidget *parent = nullptr );
     ~EditGroundOverlayDialog() override;
 
 private Q_SLOTS:

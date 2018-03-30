@@ -112,7 +112,7 @@ bool SatellitesConfigNodeItem::isLeaf() const
 SatellitesConfigAbstractItem *SatellitesConfigNodeItem::childAt( int row ) const
 {
     if ( m_children.size() <= row ) {
-        return 0;
+        return nullptr;
     }
 
     return m_children.at( row );

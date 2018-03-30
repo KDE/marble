@@ -26,24 +26,24 @@ namespace Marble
 {
 
 CompassFloatItem::CompassFloatItem()
-    : AbstractFloatItem( 0 ),
-      m_svgobj( 0 ),
+    : AbstractFloatItem( nullptr ),
+      m_svgobj( nullptr ),
       m_polarity( 0 ),
       m_themeIndex( 0 ),
-      m_configDialog( 0 ),
-      m_uiConfigWidget( 0 )
+      m_configDialog( nullptr ),
+      m_uiConfigWidget( nullptr )
 {
 }
 
 CompassFloatItem::CompassFloatItem( const MarbleModel *marbleModel )
     : AbstractFloatItem( marbleModel, QPointF( -1.0, 10.0 ), QSizeF( 75.0, 75.0 ) ),
       m_isInitialized( false ),
-      m_svgobj( 0 ),
+      m_svgobj( nullptr ),
       m_compass(),
       m_polarity( 0 ),
       m_themeIndex( 0 ),
-      m_configDialog( 0 ),
-      m_uiConfigWidget( 0 )
+      m_configDialog( nullptr ),
+      m_uiConfigWidget( nullptr )
 {
 }
 

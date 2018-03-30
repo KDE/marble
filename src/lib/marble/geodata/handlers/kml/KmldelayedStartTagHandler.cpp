@@ -35,7 +35,7 @@ GeoNode* KmldelayedStartTagHandler::parse(GeoParser &parser) const
         parentItem.nodeAs<GeoDataAnimatedUpdate>()->setDelayedStart(delay);
     }
 
-    return 0;
+    return nullptr;
 }
 
 } // namespace kml

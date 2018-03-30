@@ -55,7 +55,7 @@ GeoNode* KmlstyleUrlTagHandler::parse( GeoParser& parser ) const
 
         parentItem.nodeAs<GeoDataFeature>()->setStyleUrl( content );
     }
-    return 0;
+    return nullptr;
 }
 
 }

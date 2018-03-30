@@ -58,7 +58,7 @@ public:
     };
 
     /** Constructor */
-    explicit NewstuffModel( QObject *parent = 0 );
+    explicit NewstuffModel( QObject *parent = nullptr );
 
     /** Destructor */
     ~NewstuffModel() override;

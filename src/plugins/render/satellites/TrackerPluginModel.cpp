@@ -32,7 +32,7 @@ public:
           m_treeModel( treeModel ),
           m_document( new GeoDataDocument() ),
           m_storagePolicy(MarbleDirs::localPath() + QLatin1String("/cache/")),
-          m_downloadManager( 0 )
+          m_downloadManager( nullptr )
     {
     }
 

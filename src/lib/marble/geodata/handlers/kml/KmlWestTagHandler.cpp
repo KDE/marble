@@ -35,7 +35,7 @@ GeoNode* KmlwestTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataLatLonBox>()->setWest( west, GeoDataCoordinates::Degree );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

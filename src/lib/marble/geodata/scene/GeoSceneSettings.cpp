@@ -195,7 +195,7 @@ void GeoSceneSettings::addGroup( GeoSceneGroup* group )
 
 const GeoSceneGroup* GeoSceneSettings::group( const QString& name ) const
 {
-    GeoSceneGroup* group = 0;
+    GeoSceneGroup* group = nullptr;
 
     QVector<GeoSceneGroup*>::const_iterator it = d->m_groups.constBegin();
     QVector<GeoSceneGroup*>::const_iterator groupEnd = d->m_groups.constEnd();
@@ -244,7 +244,7 @@ void GeoSceneSettings::addProperty( GeoSceneProperty* property )
 
 const GeoSceneProperty* GeoSceneSettings::property( const QString& name ) const
 {
-    GeoSceneProperty* property = 0;
+    GeoSceneProperty* property = nullptr;
 
     QVector<GeoSceneProperty*>::const_iterator it = d->m_properties.constBegin();
     QVector<GeoSceneProperty*>::const_iterator propEnd = d->m_properties.constEnd();

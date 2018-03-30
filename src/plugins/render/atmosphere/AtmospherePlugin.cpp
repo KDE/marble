@@ -27,7 +27,7 @@ namespace Marble
 {
 
 AtmospherePlugin::AtmospherePlugin() :
-    RenderPlugin( 0 ),
+    RenderPlugin( nullptr ),
     m_renderRadius(-1)
 {
 }

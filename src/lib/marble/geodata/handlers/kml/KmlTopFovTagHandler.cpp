@@ -32,7 +32,7 @@ GeoNode* KmltopFovTagHandler::parse( GeoParser& parser ) const
 
         parentItem.nodeAs<GeoDataViewVolume>()->setTopFov( topFov );
     }
-    return 0;
+    return nullptr;
 }
 
 }

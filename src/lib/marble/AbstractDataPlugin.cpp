@@ -31,7 +31,7 @@ class AbstractDataPluginPrivate
 {
  public:
     AbstractDataPluginPrivate()
-        : m_model( 0 ),
+        : m_model( nullptr ),
           m_numberOfItems( 10 )
     {
       m_updateTimer.setSingleShot( true );
@@ -60,7 +60,7 @@ AbstractDataPlugin::~AbstractDataPlugin()
 
 bool AbstractDataPlugin::isInitialized() const
 {
-    return model() != 0;
+    return model() != nullptr;
 }
 
 QStringList AbstractDataPlugin::backendTypes() const
@@ -167,7 +167,7 @@ bool AbstractDataPlugin::isFavoriteItemsOnly() const
 
 QObject *AbstractDataPlugin::favoritesModel()
 {
-    return d->m_model ? d->m_model->favoritesModel() : 0;
+    return d->m_model ? d->m_model->favoritesModel() : nullptr;
 }
 
 void AbstractDataPlugin::favoriteItemsChanged( const QStringList& favoriteItems )

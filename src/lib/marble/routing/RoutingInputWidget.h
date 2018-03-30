@@ -39,7 +39,7 @@ class RoutingInputWidget : public QWidget
 public:
 
     /** Constructor */
-    explicit RoutingInputWidget( MarbleModel* model, int index, QWidget *parent = 0 );
+    explicit RoutingInputWidget( MarbleModel* model, int index, QWidget *parent = nullptr );
 
     /** Destructor */
     ~RoutingInputWidget() override;

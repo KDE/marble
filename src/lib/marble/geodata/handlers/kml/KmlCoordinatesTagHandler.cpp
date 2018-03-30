@@ -190,7 +190,7 @@ GeoNode* KmlcoordinatesTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataTrack>()->appendCoordinates( coord );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

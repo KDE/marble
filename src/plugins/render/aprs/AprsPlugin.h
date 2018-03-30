@@ -44,7 +44,7 @@ namespace Marble
         MARBLE_PLUGIN( AprsPlugin )
 
             public:
-        explicit AprsPlugin( const MarbleModel *marbleModel=0 );
+        explicit AprsPlugin( const MarbleModel *marbleModel=nullptr );
         ~AprsPlugin() override;
         QStringList backendTypes() const override;
         QString renderPolicy() const override;
@@ -65,7 +65,7 @@ namespace Marble
 
         void initialize () override;
         bool isInitialized () const override;
-        bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 ) override;
+        bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = nullptr ) override;
 
         QDialog *configDialog() override;
         QAction       *action() const;

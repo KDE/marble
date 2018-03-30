@@ -187,8 +187,8 @@ GeoDataDocument *OSRMRunner::parse( const QByteArray &input ) const
     QJsonDocument jsonDoc = QJsonDocument::fromJson(input);
     QJsonObject data = jsonDoc.object();
 
-    GeoDataDocument* result = 0;
-    GeoDataLineString* routeWaypoints = 0;
+    GeoDataDocument* result = nullptr;
+    GeoDataLineString* routeWaypoints = nullptr;
     QJsonValue routeGeometryValue = data.value(QStringLiteral("routes"));
     if (routeGeometryValue.isArray()) {
         auto routes = routeGeometryValue.toArray();

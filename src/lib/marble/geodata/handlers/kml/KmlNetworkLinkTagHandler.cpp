@@ -38,7 +38,7 @@ GeoNode* KmlNetworkLinkTagHandler::parse( GeoParser& parser ) const
         return networkLink;
     } else {
         delete networkLink;
-        return 0;
+        return nullptr;
     }
 }
 

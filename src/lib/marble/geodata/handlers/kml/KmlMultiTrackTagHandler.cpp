@@ -43,7 +43,7 @@ GeoNode* KmlMultiTrackTagHandler::parse( GeoParser& parser ) const
         return geom;
     } else {
         delete geom;
-        return 0;
+        return nullptr;
     }
 }
 

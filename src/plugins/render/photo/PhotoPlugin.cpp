@@ -30,16 +30,16 @@ using namespace Marble;
 const quint32 maximumNumberOfItems = 99;
 
 PhotoPlugin::PhotoPlugin()
-    : AbstractDataPlugin( 0 ),
-      ui_configWidget( 0 ),
-      m_configDialog( 0 )
+    : AbstractDataPlugin( nullptr ),
+      ui_configWidget( nullptr ),
+      m_configDialog( nullptr )
 {    
 }
 
 PhotoPlugin::PhotoPlugin( const MarbleModel *marbleModel )
     : AbstractDataPlugin( marbleModel ),
-      ui_configWidget( 0 ),
-      m_configDialog( 0 )
+      ui_configWidget( nullptr ),
+      m_configDialog( nullptr )
 {
     // Plugin is enabled by default
     setEnabled( true );
@@ -248,7 +248,7 @@ void PhotoPlugin::writeSettings()
 void PhotoPlugin::updateSettings()
 {
     AbstractDataPluginModel *abstractModel = model();
-    if ( abstractModel != 0 ) {
+    if ( abstractModel != nullptr ) {
         abstractModel->setItemSettings( settings() );
     }
 

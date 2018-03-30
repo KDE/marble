@@ -34,7 +34,7 @@ public:
      * @param pluginManager The plugin manager that gives access to RunnerPlugins
      * @param parent Optional parent object
      */
-    explicit ParsingRunnerManager( const PluginManager *pluginManager, QObject *parent = 0 );
+    explicit ParsingRunnerManager( const PluginManager *pluginManager, QObject *parent = nullptr );
 
     ~ParsingRunnerManager() override;
 

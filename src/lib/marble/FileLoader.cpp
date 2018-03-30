@@ -51,7 +51,7 @@ public:
         m_property(property),
         m_style(style),
         m_styleMap(new GeoDataStyleMap),
-        m_document(0),
+        m_document(nullptr),
         m_renderOrder(renderOrder),
         m_documentRole(role),
         m_recenter(recenter)
@@ -68,8 +68,8 @@ public:
         m_runner(pluginManager),
         m_filepath(file),
         m_contents(contents),
-        m_styleMap(0),
-        m_document(0),
+        m_styleMap(nullptr),
+        m_document(nullptr),
         m_documentRole(role),
         m_recenter(false)
     {

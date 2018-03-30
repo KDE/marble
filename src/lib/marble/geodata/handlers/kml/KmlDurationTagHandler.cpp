@@ -43,7 +43,7 @@ GeoNode *KmldurationTagHandler::parse(GeoParser & parser) const
     if ( parentItem.is<GeoDataAnimatedUpdate>() ){
 		parentItem.nodeAs<GeoDataAnimatedUpdate>()->setDuration( duration );
 	}
-    return 0;
+    return nullptr;
 }
 
 }

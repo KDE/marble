@@ -55,7 +55,7 @@ GeoNode* KmlDocumentTagHandler::parse(GeoParser& parser) const
             return doc;
         }
     }
-    return 0;
+    return nullptr;
 }
 
 }

@@ -55,7 +55,7 @@ GeoNode* KmlPolygonTagHandler::parse( GeoParser& parser ) const
     return polygon;
     } else {
         delete polygon;
-        return 0;
+        return nullptr;
     }
 }
 

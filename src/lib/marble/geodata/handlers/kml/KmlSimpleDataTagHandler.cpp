@@ -39,7 +39,7 @@ GeoNode* KmlSimpleDataTagHandler::parse( GeoParser& parser ) const
         simpleData.setData( data );
         parentItem.nodeAs<GeoDataSchemaData>()->addSimpleData( simpleData );
     }
-    return 0;
+    return nullptr;
 }
 
 }

@@ -23,7 +23,7 @@ class OpenDesktopModel : public AbstractDataPluginModel
     Q_OBJECT
  
 public:
-    explicit OpenDesktopModel( const MarbleModel *marbleModel, QObject *parent = 0 );
+    explicit OpenDesktopModel( const MarbleModel *marbleModel, QObject *parent = nullptr );
     ~OpenDesktopModel() override;
 
     void setMarbleWidget(MarbleWidget *widget);

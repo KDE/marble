@@ -356,7 +356,7 @@ QVariant GeoDataTreeModel::data( const QModelIndex &index, int role ) const
         } else if (const auto flyTo = geodata_cast<GeoDataFlyTo>(object)) {
             if (const auto camera = geodata_cast<GeoDataCamera>(flyTo->view())) {
                 return QVariant::fromValue<GeoDataCoordinates>( camera->coordinates() );
-            } else if (const auto lookAt = (flyTo->view() ? geodata_cast<GeoDataLookAt>(flyTo->view()) : 0)) {
+            } else if (const auto lookAt = (flyTo->view() ? geodata_cast<GeoDataLookAt>(flyTo->view()) : nullptr)) {
                 return QVariant::fromValue<GeoDataCoordinates>( lookAt->coordinates() );
             }
         }
@@ -395,7 +395,7 @@ QModelIndex GeoDataTreeModel::index( int row, int column, const QModelIndex &par
         return QModelIndex();
     }
 
-    GeoDataObject *childItem = 0;
+    GeoDataObject *childItem = nullptr;
 
 
     if (auto container = dynamic_cast<GeoDataContainer *>(parentItem)) {
@@ -450,7 +450,7 @@ QModelIndex GeoDataTreeModel::parent( const QModelIndex &index ) const
         GeoDataObject *greatParentObject = parentObject->parent();
 
         // Avoid crashing when there is no grandparent
-        if ( greatParentObject == 0 )
+        if ( greatParentObject == nullptr )
         {
             return QModelIndex();
         }
@@ -557,7 +557,7 @@ Qt::ItemFlags GeoDataTreeModel::flags ( const QModelIndex & index ) const
             if ( parentfolder->style()->listStyle().listItemType() == GeoDataListStyle::RadioFolder ) {
                 return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable | Qt::ItemIsEditable;
             } else if ( parentfolder->style()->listStyle().listItemType() == GeoDataListStyle::CheckHideChildren ) {
-                return 0;
+                return nullptr;
             }
         }
     }
@@ -613,7 +613,7 @@ Qt::ItemFlags GeoDataTreeModel::flags ( const QModelIndex & index ) const
 
 QModelIndex GeoDataTreeModel::index(const GeoDataObject *object) const
 {
-    if ( object == 0 )
+    if ( object == nullptr )
         return QModelIndex();
 
     //It first runs bottom-top, storing every ancestor of the object, and
@@ -808,7 +808,7 @@ void GeoDataTreeModel::setRootDocument( GeoDataDocument* document )
         delete d->m_rootDocument;
     }
 
-    d->m_ownsRootDocument = ( document == 0 );
+    d->m_ownsRootDocument = ( document == nullptr );
     d->m_rootDocument = document ? document : new GeoDataDocument;
     endResetModel();
 }
@@ -836,7 +836,7 @@ int GeoDataTreeModel::addTourPrimitive( const QModelIndex &parent, GeoDataTourPr
 bool GeoDataTreeModel::removeTourPrimitive( const QModelIndex &parent , int index)
 {
     GeoDataObject *parentObject = static_cast<GeoDataObject*>( parent.internalPointer() );
-    if (auto playlist = (parent.isValid() ? geodata_cast<GeoDataPlaylist>(parentObject) : 0)) {
+    if (auto playlist = (parent.isValid() ? geodata_cast<GeoDataPlaylist>(parentObject) : nullptr)) {
         if( playlist->size() > index ) {
             beginRemoveRows( parent, index, index );
             playlist->removePrimitiveAt( index );
@@ -850,7 +850,7 @@ bool GeoDataTreeModel::removeTourPrimitive( const QModelIndex &parent , int inde
 bool GeoDataTreeModel::swapTourPrimitives( const QModelIndex &parent, int indexA, int indexB )
 {
     GeoDataObject *parentObject = static_cast<GeoDataObject*>( parent.internalPointer() );
-    if (auto playlist = (parent.isValid() ? geodata_cast<GeoDataPlaylist>(parentObject) : 0)) {
+    if (auto playlist = (parent.isValid() ? geodata_cast<GeoDataPlaylist>(parentObject) : nullptr)) {
         if( indexA > indexB ) {
             qSwap(indexA, indexB);
         }

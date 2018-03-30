@@ -65,7 +65,7 @@ GeoNode* KmlhrefTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataSoundCue>()->setHref( content );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

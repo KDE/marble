@@ -38,7 +38,7 @@ class MARBLE_EXPORT AbstractWorkerThread : public QThread
     Q_OBJECT
 
  public:
-    explicit AbstractWorkerThread( QObject *parent = 0 );
+    explicit AbstractWorkerThread( QObject *parent = nullptr );
     ~AbstractWorkerThread() override;
 
     void ensureRunning();

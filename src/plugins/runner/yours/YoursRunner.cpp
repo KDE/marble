@@ -119,7 +119,7 @@ void YoursRunner::retrieveData( QNetworkReply *reply )
             qreal length = distance( result );
             if ( length == 0.0 ) {
                 delete result;
-                emit routeCalculated( 0 );
+                emit routeCalculated( nullptr );
                 return;
             } else if ( length >= 1000 ) {
                 length /= 1000.0;
@@ -134,7 +134,7 @@ void YoursRunner::retrieveData( QNetworkReply *reply )
 void YoursRunner::handleError( QNetworkReply::NetworkError error )
 {
     mDebug() << " Error when retrieving yournavigation.org route: " << error;
-    emit routeCalculated( 0 );
+    emit routeCalculated( nullptr );
 }
 
 GeoDataDocument* YoursRunner::parse( const QByteArray &content )
@@ -148,7 +148,7 @@ GeoDataDocument* YoursRunner::parse( const QByteArray &content )
 
     if ( !parser.read( &buffer ) ) {
         mDebug() << "Cannot parse kml data! Input is " << content ;
-        return 0;
+        return nullptr;
     }
     GeoDataDocument* document = static_cast<GeoDataDocument*>( parser.releaseDocument() );
     return document;

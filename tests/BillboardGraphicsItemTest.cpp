@@ -37,7 +37,7 @@ void BillboardGraphicsItemTest::defaultConstructorValues()
     const BillboardGraphicsItem item;
 
     // MarbleGraphicsItem
-    QCOMPARE( item.layout(), static_cast<AbstractMarbleGraphicsLayout *>( 0 ) );
+    QCOMPARE( item.layout(), static_cast<AbstractMarbleGraphicsLayout *>( nullptr ) );
     QCOMPARE( item.cacheMode(), BillboardGraphicsItem::NoCache );
     QCOMPARE( item.visible(), true );
     QCOMPARE( item.size(), QSizeF() );

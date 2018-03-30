@@ -28,7 +28,7 @@ class MARBLE_EXPORT SearchRunnerPlugin : public QObject, public PluginInterface
 
 public:
     /** Constructor with optional parent object */
-    explicit SearchRunnerPlugin( QObject* parent = 0 );
+    explicit SearchRunnerPlugin( QObject* parent = nullptr );
 
     /** Destructor */
     ~SearchRunnerPlugin() override;

@@ -45,7 +45,7 @@ GeoNode* KmlwidthTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataLineStyle>()->setWidth( width );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

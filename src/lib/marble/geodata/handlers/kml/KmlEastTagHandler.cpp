@@ -35,7 +35,7 @@ GeoNode* KmleastTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataLatLonBox>()->setEast( east, GeoDataCoordinates::Degree );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

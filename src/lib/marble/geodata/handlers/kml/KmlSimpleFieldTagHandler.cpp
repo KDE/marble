@@ -51,7 +51,7 @@ GeoNode* KmlSimpleFieldTagHandler::parse( GeoParser& parser ) const
         return &parentItem.nodeAs<GeoDataSchema>()->simpleField( name );
     }
 
-    return 0;
+    return nullptr;
 }
 
 GeoDataSimpleField::SimpleFieldType KmlSimpleFieldTagHandler::resolveType( const QString& type )

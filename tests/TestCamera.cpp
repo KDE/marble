@@ -52,7 +52,7 @@ void TestCamera::simpleParseTest()
     GeoDataDocument* dataDocument = parseKml( kmlContent );
     GeoDataCamera *camera = dynamic_cast<GeoDataCamera*>( dataDocument->abstractView() );
 
-    QVERIFY( camera != 0);
+    QVERIFY( camera != nullptr);
 
     GeoDataCoordinates::Unit const degree = GeoDataCoordinates::Degree;
     QCOMPARE( camera->longitude( degree ), 1.0 );

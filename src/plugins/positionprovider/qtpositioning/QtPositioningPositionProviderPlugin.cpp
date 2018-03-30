@@ -99,7 +99,7 @@ PositionProviderStatus QtPositioningPositionProviderPlugin::status() const
 
 GeoDataCoordinates QtPositioningPositionProviderPlugin::position() const
 {
-    if ( d->m_source == 0 ) {
+    if ( d->m_source == nullptr ) {
         return GeoDataCoordinates();
     }
 
@@ -114,7 +114,7 @@ GeoDataCoordinates QtPositioningPositionProviderPlugin::position() const
 
 GeoDataAccuracy QtPositioningPositionProviderPlugin::accuracy() const
 {
-    if ( d->m_source == 0 ) {
+    if ( d->m_source == nullptr ) {
         return GeoDataAccuracy();
     }
 
@@ -152,12 +152,12 @@ void QtPositioningPositionProviderPlugin::initialize()
 
 bool QtPositioningPositionProviderPlugin::isInitialized() const
 {
-    return d->m_source != 0;
+    return d->m_source != nullptr;
 }
 
 qreal QtPositioningPositionProviderPlugin::speed() const
 {
-    if ( d->m_source == 0 ) {
+    if ( d->m_source == nullptr ) {
         return 0.0;
     }
 
@@ -170,7 +170,7 @@ qreal QtPositioningPositionProviderPlugin::speed() const
 
 qreal QtPositioningPositionProviderPlugin::direction() const
 {
-    if ( d->m_source == 0 ) {
+    if ( d->m_source == nullptr ) {
         return 0.0;
     }
 
@@ -183,7 +183,7 @@ qreal QtPositioningPositionProviderPlugin::direction() const
 
 QDateTime QtPositioningPositionProviderPlugin::timestamp() const
 {
-    if ( d->m_source == 0 ) {
+    if ( d->m_source == nullptr ) {
         return QDateTime();
     }
 

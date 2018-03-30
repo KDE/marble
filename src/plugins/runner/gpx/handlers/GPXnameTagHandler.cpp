@@ -50,7 +50,7 @@ GeoNode* GPXnameTagHandler::parse(GeoParser& parser) const
         GeoDataFeature* route = parentItem.nodeAs<GeoDataFeature>();
         route->setName(parser.readElementText().trimmed());
     }
-    return 0;
+    return nullptr;
 }
 
 } // namespace gpx

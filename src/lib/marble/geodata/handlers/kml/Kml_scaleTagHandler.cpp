@@ -51,7 +51,7 @@ GeoNode* KmlscaleTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataLabelStyle>()->setScale( 
         parser.readElementText().trimmed().toFloat() );
     }
-    return 0;
+    return nullptr;
 }
 
 }

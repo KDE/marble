@@ -35,7 +35,7 @@ GeoNode* KmlFlyToTagHandler::parse( GeoParser& parser ) const
         return flyTo;
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

@@ -35,7 +35,7 @@ GeoNode* KmlDeleteTagHandler::parse( GeoParser& parser ) const
         return dataDelete;
     } else {
         delete dataDelete;
-        return 0;
+        return nullptr;
     }
 }
 

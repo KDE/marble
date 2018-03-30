@@ -22,7 +22,7 @@ class LogfilePlugin : public ParseRunnerPlugin
     Q_INTERFACES( Marble::ParseRunnerPlugin )
 
 public:
-    explicit LogfilePlugin( QObject *parent = 0 );
+    explicit LogfilePlugin( QObject *parent = nullptr );
 
     QString name() const override;
 

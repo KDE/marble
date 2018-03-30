@@ -20,16 +20,16 @@
 using namespace Marble;
 
 OpenDesktopPlugin::OpenDesktopPlugin()
-    : AbstractDataPlugin( 0 ),
-      m_configDialog( 0 ),
-      m_uiConfigWidget( 0 )
+    : AbstractDataPlugin( nullptr ),
+      m_configDialog( nullptr ),
+      m_uiConfigWidget( nullptr )
 {
 }
 
 OpenDesktopPlugin::OpenDesktopPlugin( const MarbleModel *marbleModel )
     : AbstractDataPlugin( marbleModel ),
-      m_configDialog( 0 ),
-      m_uiConfigWidget( 0 )
+      m_configDialog( nullptr ),
+      m_uiConfigWidget( nullptr )
 {
     setEnabled( true ); // Plugin is enabled by default
     setVisible( false ); // Plugin is invisible by default

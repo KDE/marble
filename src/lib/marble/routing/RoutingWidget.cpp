@@ -148,31 +148,31 @@ RoutingWidgetPrivate::RoutingWidgetPrivate( RoutingWidget *parent, MarbleWidget 
         m_widget( marbleWidget ),
         m_routingManager( marbleWidget->model()->routingManager() ),
         m_routingLayer( marbleWidget->routingLayer() ),
-        m_activeInput( 0 ),
-        m_inputRequest( 0 ),
+        m_activeInput( nullptr ),
+        m_inputRequest( nullptr ),
         m_routingModel( m_routingManager->routingModel() ),
         m_routeRequest( marbleWidget->model()->routingManager()->routeRequest() ),
-        m_routeSyncManager( 0 ),
+        m_routeSyncManager( nullptr ),
         m_zoomRouteAfterDownload( false ),
-        m_document( 0 ),
-        m_tour( 0 ),
-        m_playback( 0 ),
+        m_document( nullptr ),
+        m_tour( nullptr ),
+        m_playback( nullptr ),
         m_currentFrame( 0 ),
         m_iconSize( 16 ),
         m_collapse_width( 0 ),
         m_playing( false ),
         m_planetId(marbleWidget->model()->planetId()),
-        m_toolBar( 0 ),
-        m_openRouteButton( 0 ),
-        m_saveRouteButton( 0 ),
-        m_cloudSyncSeparator( 0 ),
-        m_uploadToCloudAction( 0 ),
-        m_openCloudRoutesAction( 0 ),
-        m_addViaButton( 0 ),
-        m_reverseRouteButton( 0 ),
-        m_clearRouteButton( 0 ),
-        m_configureButton( 0 ),
-        m_routeUploadDialog( 0 ),
+        m_toolBar( nullptr ),
+        m_openRouteButton( nullptr ),
+        m_saveRouteButton( nullptr ),
+        m_cloudSyncSeparator( nullptr ),
+        m_uploadToCloudAction( nullptr ),
+        m_openCloudRoutesAction( nullptr ),
+        m_addViaButton( nullptr ),
+        m_reverseRouteButton( nullptr ),
+        m_clearRouteButton( nullptr ),
+        m_configureButton( nullptr ),
+        m_routeUploadDialog( nullptr ),
         m_parent( parent )
 {
     createProgressAnimation();
@@ -432,10 +432,10 @@ void RoutingWidget::retrieveRoute()
         }
     }
 
-    d->m_activeInput = 0;
+    d->m_activeInput = nullptr;
     if ( d->m_routeRequest->size() > 1 ) {
         d->m_zoomRouteAfterDownload = true;
-        d->m_routingLayer->setPlacemarkModel( 0 );
+        d->m_routingLayer->setPlacemarkModel( nullptr );
         d->m_routingManager->retrieveRoute();
         d->m_ui.directionsListView->setModel( d->m_routingModel );
         d->m_routingLayer->synchronizeWith( d->m_ui.directionsListView->selectionModel() );
@@ -564,8 +564,8 @@ void RoutingWidget::removeInputWidget( int index )
         d->m_ui.inputLayout->removeWidget( widget );
         widget->deleteLater();
         if ( widget == d->m_activeInput ) {
-            d->m_activeInput = 0;
-            d->m_routingLayer->setPlacemarkModel( 0 );
+            d->m_activeInput = nullptr;
+            d->m_routingLayer->setPlacemarkModel( nullptr );
             d->m_ui.directionsListView->setModel( d->m_routingModel );
             d->m_routingLayer->synchronizeWith( d->m_ui.directionsListView->selectionModel() );
         }
@@ -621,7 +621,7 @@ void RoutingWidget::retrieveSelectedPoint( const GeoDataCoordinates &coordinates
         d->m_widget->update();
     }
 
-    d->m_inputRequest = 0;
+    d->m_inputRequest = nullptr;
     d->m_widget->removeEventFilter( this );
 }
 
@@ -636,7 +636,7 @@ void RoutingWidget::pointSelectionCanceled()
         d->m_inputRequest->abortMapInputRequest();
     }
 
-    d->m_inputRequest = 0;
+    d->m_inputRequest = nullptr;
     d->m_widget->removeEventFilter( this );
 }
 
@@ -811,7 +811,7 @@ bool RoutingWidget::eventFilter( QObject *o, QEvent *event )
         return QWidget::eventFilter( o, event );
     }
 
-    Q_ASSERT( d->m_inputRequest != 0 );
+    Q_ASSERT( d->m_inputRequest != nullptr );
     Q_ASSERT( d->m_inputWidgets.contains( d->m_inputRequest ) );
 
     if ( event->type() == QEvent::MouseButtonPress ) {
@@ -996,12 +996,12 @@ void RoutingWidget::clearTour()
     d->m_playing = false;
     d->m_playButton->setIcon(QIcon(QStringLiteral(":/marble/playback-play.png")));
     delete d->m_playback;
-    d->m_playback = 0;
+    d->m_playback = nullptr;
     if( d->m_document ){
         d->m_widget->model()->treeModel()->removeDocument( d->m_document );
         delete d->m_document;
-        d->m_document = 0;
-        d->m_tour = 0;
+        d->m_document = nullptr;
+        d->m_tour = nullptr;
     }
 }
 

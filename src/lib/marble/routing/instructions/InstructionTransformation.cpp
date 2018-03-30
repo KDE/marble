@@ -35,8 +35,8 @@ RoutingInstructions InstructionTransformation::process( const RoutingWaypoints &
     }
 
     for ( int i = 0; i < result.size(); ++i ) {
-        result[i].setSuccessor( i < result.size() - 1 ? &result[i+1] : 0 );
-        result[i].setPredecessor( i ? &result[i-1] : 0 );
+        result[i].setSuccessor( i < result.size() - 1 ? &result[i+1] : nullptr );
+        result[i].setPredecessor( i ? &result[i-1] : nullptr );
     }
 
     return result;

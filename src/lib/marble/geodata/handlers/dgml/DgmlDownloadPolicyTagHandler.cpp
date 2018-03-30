@@ -46,7 +46,7 @@ GeoNode* DgmlDownloadPolicyTagHandler::parse( GeoParser& parser ) const
     GeoStackItem parentItem = parser.parentElement();
     if ( !parentItem.represents( dgmlTag_Texture ) && !parentItem.represents( dgmlTag_Vectortile ) ) {
         qCritical( "Parse error: parent element is not 'texture' or 'vectortile'" );
-        return 0;
+        return nullptr;
     }
 
     // Attribute usage
@@ -58,7 +58,7 @@ GeoNode* DgmlDownloadPolicyTagHandler::parse( GeoParser& parser ) const
         usage = DownloadBulk;
     else {
         qCritical( "Parse error: invalid attribute downloadPolicy/@usage" );
-        return 0;
+        return nullptr;
     }
 
     // Attribute maximumConnections
@@ -67,11 +67,11 @@ GeoNode* DgmlDownloadPolicyTagHandler::parse( GeoParser& parser ) const
     const int maximumConnections = maximumConnectionsStr.toInt( &ok );
     if ( !ok ) {
         qCritical( "Parse error: invalid attribute downloadPolicy/@maximumConnections" );
-        return 0;
+        return nullptr;
     }
 
     parentItem.nodeAs<GeoSceneTileDataset>()->addDownloadPolicy( usage, maximumConnections );
-    return 0;
+    return nullptr;
 }
 
 }

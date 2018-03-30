@@ -24,7 +24,7 @@ class GeoDataTourPrivate : public GeoDataFeaturePrivate
 {
 public:
     GeoDataTourPrivate()
-        : m_playlist( 0 )
+        : m_playlist( nullptr )
     {
         // nothing to do
     }
@@ -50,7 +50,7 @@ public:
 
         GeoDataFeaturePrivate::operator=( other );
 
-        GeoDataPlaylist *newPlaylist = 0;
+        GeoDataPlaylist *newPlaylist = nullptr;
         if ( other.m_playlist ) {
             newPlaylist = new GeoDataPlaylist( *other.m_playlist );
         }

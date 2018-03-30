@@ -105,7 +105,7 @@ void TestGeoData::parentingTest()
     GeoDataStyle::Ptr style(new GeoDataStyle);
     style->setId( "mystyle" );
     style->setIconStyle( iconStyle );
-    GeoDataObject* noParent = 0;
+    GeoDataObject* noParent = nullptr;
     QCOMPARE( style->parent(), noParent );
     QCOMPARE( iconStyle.parent(), noParent );
     document->setStyle( style );

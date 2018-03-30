@@ -22,7 +22,7 @@ class ShpPlugin : public ParseRunnerPlugin
     Q_INTERFACES( Marble::ParseRunnerPlugin )
 
 public:
-    explicit ShpPlugin( QObject *parent = 0 );
+    explicit ShpPlugin( QObject *parent = nullptr );
 
     QString name() const override;
 

@@ -39,7 +39,7 @@ GeoNode* KmlLocationTagHandler::parse( GeoParser& parser ) const
 	return &parentItem.nodeAs<GeoDataModel>()->location();
     }
     else{
-        return 0;
+        return nullptr;
     }
 }
 

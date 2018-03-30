@@ -43,7 +43,7 @@ GeoNode* DgmlGroupTagHandler::parse(GeoParser& parser) const
 
     QString name      = parser.attribute(dgmlAttr_name);
 
-    GeoSceneGroup* group = 0;
+    GeoSceneGroup* group = nullptr;
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();

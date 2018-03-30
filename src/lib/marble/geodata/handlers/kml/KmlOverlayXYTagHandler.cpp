@@ -38,7 +38,7 @@ GeoNode* KmloverlayXYTagHandler::parse( GeoParser& parser ) const
 
         parentItem.nodeAs<GeoDataScreenOverlay>()->setOverlayXY( vec2 );
     }
-    return 0;
+    return nullptr;
 }
 
 }

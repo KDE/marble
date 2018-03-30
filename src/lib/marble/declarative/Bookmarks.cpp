@@ -29,7 +29,7 @@
 namespace Marble {
 
 Bookmarks::Bookmarks( QObject* parent ) : QObject( parent ),
-    m_marbleQuickItem( 0 ), m_proxyModel( 0 )
+    m_marbleQuickItem( nullptr ), m_proxyModel( nullptr )
 {
     // nothing to do
 }
@@ -93,7 +93,7 @@ void Bookmarks::addBookmark(Placemark *placemark, const QString &folderName )
 
     Marble::BookmarkManager* manager = m_marbleQuickItem->model()->bookmarkManager();
     Marble::GeoDataDocument *bookmarks = manager->document();
-    Marble::GeoDataContainer *target = 0;
+    Marble::GeoDataContainer *target = nullptr;
     for( Marble::GeoDataFolder* const folder: bookmarks->folderList() ) {
         if ( folder->name() == folderName ) {
             target = folder;

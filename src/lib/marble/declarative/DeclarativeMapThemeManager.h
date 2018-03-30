@@ -38,7 +38,7 @@ class MapThemeManager : public QObject
 
 public:
     /** Constructor. Map themes are loaded later on demand. */
-    explicit MapThemeManager( QObject *parent = 0 );
+    explicit MapThemeManager( QObject *parent = nullptr );
 
     /**
       * A list of all installed map theme ids, each entry has the form

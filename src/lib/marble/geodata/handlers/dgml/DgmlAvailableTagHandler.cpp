@@ -46,7 +46,7 @@ GeoNode* DgmlAvailableTagHandler::parse(GeoParser& parser) const
         parentItem.nodeAs<GeoSceneProperty>()->setAvailable(parsedText == dgmlValue_true || parsedText == dgmlValue_on);
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

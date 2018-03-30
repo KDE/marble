@@ -39,7 +39,7 @@ class MarbleGraphicsGridLayoutPrivate
         }
         for ( int row = 0; row < rows; row++ ) {
             for ( int column = 0; column < columns; column++ ) {
-                m_items[row][column] = 0;
+                m_items[row][column] = nullptr;
             }
         }
     }
@@ -89,7 +89,7 @@ void MarbleGraphicsGridLayout::updatePositions( MarbleGraphicsItem *parent )
     // Determining the cell sizes
     for ( int row = 0; row < d->m_rows; row++ ) {
         for ( int column = 0; column < d->m_columns; column++ ) {
-            if ( d->m_items[row][column] == 0 ) {
+            if ( d->m_items[row][column] == nullptr ) {
                 continue;
             }
 
@@ -143,7 +143,7 @@ void MarbleGraphicsGridLayout::updatePositions( MarbleGraphicsItem *parent )
     // Setting the positions
     for ( int row = 0; row < d->m_rows; row++ ) {
         for ( int column = 0; column < d->m_columns; column++ ) {
-            if ( d->m_items[row][column] == 0 ) {
+            if ( d->m_items[row][column] == nullptr ) {
                 continue;
             }
 

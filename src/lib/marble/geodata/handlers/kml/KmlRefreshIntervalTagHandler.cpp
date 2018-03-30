@@ -29,7 +29,7 @@ KML_DEFINE_TAG_HANDLER( refreshInterval )
             parentItem.nodeAs<GeoDataLink>()->setRefreshInterval( refreshInterval );
         }
 
-      return 0;
+      return nullptr;
     }
 }
 }

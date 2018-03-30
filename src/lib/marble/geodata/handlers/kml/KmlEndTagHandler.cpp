@@ -35,7 +35,7 @@ GeoNode* KmlendTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataTimeSpan>()->setEnd( endStamp );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

@@ -42,7 +42,7 @@ GeoNode* KmlflyToModeTagHandler::parse( GeoParser& parser ) const
          parentItem.nodeAs<GeoDataFlyTo>()->setFlyToMode( mode );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

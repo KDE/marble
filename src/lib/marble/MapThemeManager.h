@@ -49,7 +49,7 @@ class MARBLE_EXPORT MapThemeManager : public QObject
     Q_OBJECT
 
  public:
-    explicit MapThemeManager(QObject *parent = 0);
+    explicit MapThemeManager(QObject *parent = nullptr);
     ~MapThemeManager() override;
 
     /**

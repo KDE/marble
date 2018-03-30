@@ -36,12 +36,12 @@ namespace Marble
 {
 
 GraticulePlugin::GraticulePlugin()
-    : RenderPlugin( 0 ),
+    : RenderPlugin( nullptr ),
       m_showPrimaryLabels( true ),
       m_showSecondaryLabels( true ),
       m_isInitialized( false ),
-      ui_configWidget( 0 ),
-      m_configDialog( 0 )
+      ui_configWidget( nullptr ),
+      m_configDialog( nullptr )
 {
 }
 
@@ -53,8 +53,8 @@ GraticulePlugin::GraticulePlugin( const MarbleModel *marbleModel )
       m_showPrimaryLabels( true ),
       m_showSecondaryLabels( true ),
       m_isInitialized( false ),
-      ui_configWidget( 0 ),
-      m_configDialog( 0 )
+      ui_configWidget( nullptr ),
+      m_configDialog( nullptr )
 {
 }
 
@@ -215,7 +215,7 @@ void GraticulePlugin::readSettings()
 
 void GraticulePlugin::gridGetColor()
 {
-    const QColor c = QColorDialog::getColor( m_gridCirclePen.color(), 0, tr("Please choose the color for the coordinate grid.") );
+    const QColor c = QColorDialog::getColor( m_gridCirclePen.color(), nullptr, tr("Please choose the color for the coordinate grid.") );
 
     if ( c.isValid() ) {
         QPalette palette = ui_configWidget->gridPushButton->palette();
@@ -226,7 +226,7 @@ void GraticulePlugin::gridGetColor()
 
 void GraticulePlugin::tropicsGetColor()
 {
-    const QColor c = QColorDialog::getColor( m_tropicsCirclePen.color(), 0, tr("Please choose the color for the tropic circles.") );
+    const QColor c = QColorDialog::getColor( m_tropicsCirclePen.color(), nullptr, tr("Please choose the color for the tropic circles.") );
 
     if ( c.isValid() ) {
         QPalette palette = ui_configWidget->tropicsPushButton->palette();
@@ -237,7 +237,7 @@ void GraticulePlugin::tropicsGetColor()
 
 void GraticulePlugin::equatorGetColor()
 {
-    const QColor c = QColorDialog::getColor( m_equatorCirclePen.color(), 0, tr("Please choose the color for the equator.") );
+    const QColor c = QColorDialog::getColor( m_equatorCirclePen.color(), nullptr, tr("Please choose the color for the equator.") );
 
     if ( c.isValid() ) {
         QPalette palette = ui_configWidget->equatorPushButton->palette();

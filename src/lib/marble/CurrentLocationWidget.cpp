@@ -70,8 +70,8 @@ class CurrentLocationWidgetPrivate
 };
 
 CurrentLocationWidgetPrivate::CurrentLocationWidgetPrivate()
-    : m_widget( 0 ),
-      m_adjustNavigation( 0 ),
+    : m_widget( nullptr ),
+      m_adjustNavigation( nullptr ),
       m_positionProviderPlugins(),
       m_currentPosition(),
       m_lastOpenPath(),
@@ -331,7 +331,7 @@ void CurrentLocationWidgetPrivate::changePositionProvider( const QString &provid
 
     // requested provider not found -> disable position tracking
     m_currentLocationUi.locationLabel->setEnabled( false );
-    m_widget->model()->positionTracking()->setPositionProviderPlugin( 0 );
+    m_widget->model()->positionTracking()->setPositionProviderPlugin( nullptr );
     m_widget->update();
 }
 

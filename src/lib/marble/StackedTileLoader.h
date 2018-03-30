@@ -67,7 +67,7 @@ class StackedTileLoader : public QObject
          * @param downloadManager The download manager that shall be used to fetch
          *                        the tiles from a remote resource.
          */
-        explicit StackedTileLoader( MergedLayerDecorator *mergedLayerDecorator, QObject *parent = 0 );
+        explicit StackedTileLoader( MergedLayerDecorator *mergedLayerDecorator, QObject *parent = nullptr );
         ~StackedTileLoader() override;
 
         int tileColumnCount( int level ) const;

@@ -28,7 +28,7 @@ class XmlParser : public OsmParser, private QXmlDefaultHandler
 {
     Q_OBJECT
 public:
-    explicit XmlParser( QObject *parent = 0 );
+    explicit XmlParser( QObject *parent = nullptr );
 
 protected:
     bool parse( const QFileInfo &file, int pass, bool &needAnotherPass ) override;

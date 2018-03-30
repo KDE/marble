@@ -202,7 +202,7 @@ int MonavRunnerPrivate::retrieveRoute( const Marble::RouteRequest* route, QVecto
 GeoDataDocument* MonavRunnerPrivate::createDocument( Marble::GeoDataLineString* geometry, const QVector< Marble::GeoDataPlacemark* >& instructions, const QString& name, const Marble::GeoDataExtendedData& data )
 {
     if ( !geometry || geometry->isEmpty() ) {
-        return 0;
+        return nullptr;
     }
 
     GeoDataDocument* result = new GeoDataDocument;

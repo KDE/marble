@@ -32,7 +32,7 @@ class MainWindow : public KXmlGuiWindow
 
  public:
     explicit MainWindow( const QString& marbleDataPath = QString(), 
-                         QWidget *parent = 0 );
+                         QWidget *parent = nullptr );
     ~MainWindow() override;
 
     ControlView* marbleControl() const;

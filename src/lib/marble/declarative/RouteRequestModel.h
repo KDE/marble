@@ -32,7 +32,7 @@ public:
     };
 
     /** Constructor */
-    explicit RouteRequestModel( QObject *parent = 0 );
+    explicit RouteRequestModel( QObject *parent = nullptr );
 
     /** Destructor */
     ~RouteRequestModel() override;

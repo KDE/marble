@@ -18,7 +18,7 @@ class TextToSpeechClient : public QObject
     Q_OBJECT
 
 public:
-    explicit TextToSpeechClient(QObject * parent = 0);
+    explicit TextToSpeechClient(QObject * parent = nullptr);
     ~TextToSpeechClient() override;
 
 public Q_SLOTS:

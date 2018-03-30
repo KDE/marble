@@ -35,7 +35,7 @@ class MARBLE_EXPORT RouteRequest: public QObject
 public:
 
     /** Constructor */
-    explicit RouteRequest( QObject *parent = 0 );
+    explicit RouteRequest( QObject *parent = nullptr );
 
     /** Destructor */
     ~RouteRequest() override;

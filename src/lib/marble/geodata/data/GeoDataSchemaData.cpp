@@ -26,7 +26,7 @@ class GeoDataSchemaDataPrivate
 {
 public:
     GeoDataSchemaDataPrivate()
-    : m_parent( 0 )
+    : m_parent( nullptr )
     {
         // nothing to do
     }

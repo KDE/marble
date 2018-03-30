@@ -26,7 +26,7 @@
 
 namespace Marble {
 
-JsonParser::JsonParser() : m_document( 0 )
+JsonParser::JsonParser() : m_document( nullptr )
 {
 }
 
@@ -38,7 +38,7 @@ JsonParser::~JsonParser()
 GeoDataDocument *JsonParser::releaseDocument()
 {
     GeoDataDocument* document = m_document;
-    m_document = 0;
+    m_document = nullptr;
     return document;
 }
 

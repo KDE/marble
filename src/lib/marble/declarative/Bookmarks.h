@@ -26,7 +26,7 @@ class BookmarksModel: public QSortFilterProxyModel
     Q_PROPERTY( int count READ count NOTIFY countChanged )
 
 public:
-    explicit BookmarksModel( QObject *parent = 0 );
+    explicit BookmarksModel( QObject *parent = nullptr );
 
     int count() const;
 
@@ -49,7 +49,7 @@ class Bookmarks : public QObject
     Q_PROPERTY( BookmarksModel* model READ model NOTIFY modelChanged )
 
 public:
-    explicit Bookmarks( QObject* parent = 0 );
+    explicit Bookmarks( QObject* parent = nullptr );
 
     MarbleQuickItem* map();
 

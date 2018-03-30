@@ -48,7 +48,7 @@ GeoNode* KmlareaTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataPlacemark>()->setArea( ar );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

@@ -17,7 +17,7 @@
 using namespace Marble;
 
 NotesPlugin::NotesPlugin()
-    : AbstractDataPlugin(0)
+    : AbstractDataPlugin(nullptr)
 {
 }
 

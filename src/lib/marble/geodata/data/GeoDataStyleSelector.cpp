@@ -23,13 +23,13 @@ class GeoDataStyleSelectorPrivate
 
 GeoDataStyleSelector::GeoDataStyleSelector() :
     GeoDataObject(),
-    d( 0 )
+    d( nullptr )
 {
 }
 
 GeoDataStyleSelector::GeoDataStyleSelector( const GeoDataStyleSelector& other ) :
     GeoDataObject( other ),
-    d( 0 )
+    d( nullptr )
 {
 }
 

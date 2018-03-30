@@ -56,7 +56,7 @@ GeoNode* KmlstateTagHandler::parse( GeoParser& parser ) const
 
         parentItem.nodeAs<GeoDataItemIcon>()->setState( itemIconState );
     }
-    return 0;
+    return nullptr;
 }
 
 }

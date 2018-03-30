@@ -25,7 +25,7 @@ class MapQuestRunner : public RoutingRunner
     Q_OBJECT
 
 public:
-    explicit MapQuestRunner(QObject *parent = 0);
+    explicit MapQuestRunner(QObject *parent = nullptr);
 
     ~MapQuestRunner() override;
 

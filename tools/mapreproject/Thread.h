@@ -52,7 +52,7 @@ class Thread: public QThread
     Q_OBJECT
 
 public:
-    explicit Thread( QObject * const parent = NULL );
+    explicit Thread( QObject * const parent = nullptr );
     ~Thread() override;
 
     void launchWorker( QObject * const worker );

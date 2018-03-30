@@ -24,7 +24,7 @@ class NasaWorldWindToOpenStreetMapConverter: public QObject
     Q_OBJECT
 
 public:
-    explicit NasaWorldWindToOpenStreetMapConverter( QObject * const parent = NULL );
+    explicit NasaWorldWindToOpenStreetMapConverter( QObject * const parent = nullptr );
 
     void setMapSources( QVector<ReadOnlyMapDefinition> const & mapSources );
     void setOsmBaseDirectory( QDir const & nwwBaseDirectory );

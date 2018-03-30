@@ -74,7 +74,7 @@ bool GeoPhotoGraphicsItem::contains(const QPoint &curpos, const ViewportParams *
     qreal x(0.0), y( 0.0 );
     viewport->screenCoordinates(m_point.coordinates(), x, y);
     auto itemStyle = style();
-    if (itemStyle != 0 && !itemStyle->iconStyle().icon().isNull()) {
+    if (itemStyle != nullptr && !itemStyle->iconStyle().icon().isNull()) {
         int halfIconWidth = itemStyle->iconStyle().icon().size().width() / 2;
         int halfIconHeight = itemStyle->iconStyle().icon().size().height() / 2;
 

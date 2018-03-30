@@ -78,7 +78,7 @@ GeoNode* DgmlStorageLayoutTagHandler::parse(GeoParser& parser) const
 
         // Attribute mode
         GeoSceneTileDataset::StorageLayout storageLayout = GeoSceneTileDataset::OpenStreetMap;
-        ServerLayout *serverLayout = 0;
+        ServerLayout *serverLayout = nullptr;
         const QString modeStr = parser.attribute(dgmlAttr_mode).trimmed();
         if (modeStr == QLatin1String("OpenStreetMap"))
             serverLayout = new OsmServerLayout( texture );
@@ -110,7 +110,7 @@ GeoNode* DgmlStorageLayoutTagHandler::parse(GeoParser& parser) const
         texture->setServerLayout( serverLayout );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

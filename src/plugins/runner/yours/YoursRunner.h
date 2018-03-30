@@ -26,7 +26,7 @@ class YoursRunner : public RoutingRunner
     Q_OBJECT
 
 public:
-    explicit YoursRunner( QObject *parent = 0 );
+    explicit YoursRunner( QObject *parent = nullptr );
 
     ~YoursRunner() override;
 

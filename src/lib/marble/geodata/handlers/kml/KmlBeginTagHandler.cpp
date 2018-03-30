@@ -35,7 +35,7 @@ GeoNode* KmlbeginTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataTimeSpan>()->setBegin( beginStamp );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

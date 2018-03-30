@@ -34,7 +34,7 @@ class ElevationProfileMarker : public RenderPlugin
     MARBLE_PLUGIN( ElevationProfileMarker )
 
  public:
-    explicit ElevationProfileMarker( const MarbleModel *marbleModel = 0 );
+    explicit ElevationProfileMarker( const MarbleModel *marbleModel = nullptr );
     ~ElevationProfileMarker() override;
 
     QStringList backendTypes() const override;
@@ -66,7 +66,7 @@ class ElevationProfileMarker : public RenderPlugin
     bool isInitialized() const override;
 
     bool render( GeoPainter *painter, ViewportParams *viewport,
-                 const QString &renderPos, GeoSceneLayer *layer = 0 ) override;
+                 const QString &renderPos, GeoSceneLayer *layer = nullptr ) override;
 
  private Q_SLOTS:
     void onGeoObjectAdded( GeoDataObject *object );

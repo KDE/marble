@@ -32,28 +32,28 @@
 namespace Marble
 {
 
-const void *AbstractGeoPolygonGraphicsItem::s_previousStyle = 0;
+const void *AbstractGeoPolygonGraphicsItem::s_previousStyle = nullptr;
 
 AbstractGeoPolygonGraphicsItem::AbstractGeoPolygonGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataPolygon *polygon) :
     GeoGraphicsItem(placemark),
     m_polygon(polygon),
-    m_ring(0),
-    m_building(0)
+    m_ring(nullptr),
+    m_building(nullptr)
 {
 }
 
 AbstractGeoPolygonGraphicsItem::AbstractGeoPolygonGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataLinearRing *ring) :
     GeoGraphicsItem(placemark),
-    m_polygon(0),
+    m_polygon(nullptr),
     m_ring(ring),
-    m_building(0)
+    m_building(nullptr)
 {
 }
 
 AbstractGeoPolygonGraphicsItem::AbstractGeoPolygonGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataBuilding *building) :
     GeoGraphicsItem(placemark),
-    m_polygon(0),
-    m_ring(0),
+    m_polygon(nullptr),
+    m_ring(nullptr),
     m_building(building)
 {
 }

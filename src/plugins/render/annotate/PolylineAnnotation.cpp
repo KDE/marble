@@ -39,7 +39,7 @@ const QColor PolylineAnnotation::mergedColor = Oxygen::emeraldGreen6;
 
 PolylineAnnotation::PolylineAnnotation( GeoDataPlacemark *placemark ) :
     SceneGraphicsItem( placemark ),
-    m_viewport( 0 ),
+    m_viewport( nullptr ),
     m_regionsInitialized( false ),
     m_busy( false ),
     m_interactingObj( InteractingNothing ),
@@ -276,7 +276,7 @@ void PolylineAnnotation::move( const GeoDataCoordinates &source, const GeoDataCo
 {
     GeoDataLineString *lineString = static_cast<GeoDataLineString*>( placemark()->geometry() );
     GeoDataLineString oldLineString = *lineString;
-    OsmPlacemarkData *osmData = 0;
+    OsmPlacemarkData *osmData = nullptr;
     if ( placemark()->hasOsmData() ) {
         osmData = &placemark()->osmData();
     }
@@ -352,7 +352,7 @@ void PolylineAnnotation::deleteAllSelectedNodes()
     }
 
     GeoDataLineString *line = static_cast<GeoDataLineString*>( placemark()->geometry() );
-    OsmPlacemarkData *osmData = 0;
+    OsmPlacemarkData *osmData = nullptr;
     if ( placemark()->hasOsmData() ) {
         osmData = &placemark()->osmData();
     }
@@ -379,7 +379,7 @@ void PolylineAnnotation::deleteClickedNode()
     }
 
     GeoDataLineString *line = static_cast<GeoDataLineString*>( placemark()->geometry() );
-    OsmPlacemarkData *osmData = 0;
+    OsmPlacemarkData *osmData = nullptr;
     if ( placemark()->hasOsmData() ) {
         osmData = &placemark()->osmData();
     }
@@ -529,7 +529,7 @@ void PolylineAnnotation::dealWithStateChange( SceneGraphicsItem::ActionState pre
         m_firstMergedNode = -1;
         m_secondMergedNode = -1;
         m_hoveredNodeIndex = -1;
-        m_animation = 0;
+        m_animation = nullptr;
     } else if ( state() == SceneGraphicsItem::AddingNodes ) {
         m_virtualHoveredNode = -1;
         m_adjustedNode = -1;
@@ -593,7 +593,7 @@ bool PolylineAnnotation::processEditingOnMove( QMouseEvent *mouseEvent )
 
     if ( m_interactingObj == InteractingNode ) {
         GeoDataLineString *line = static_cast<GeoDataLineString*>( placemark()->geometry() );
-        OsmPlacemarkData *osmData = 0;
+        OsmPlacemarkData *osmData = nullptr;
         if ( placemark()->hasOsmData() ) {
             osmData = &placemark()->osmData();
         }
@@ -607,7 +607,7 @@ bool PolylineAnnotation::processEditingOnMove( QMouseEvent *mouseEvent )
         return true;
     } else if ( m_interactingObj == InteractingPolyline ) {
         GeoDataLineString *lineString = static_cast<GeoDataLineString*>( placemark()->geometry() );
-        OsmPlacemarkData *osmData = 0;
+        OsmPlacemarkData *osmData = nullptr;
         if ( placemark()->hasOsmData() ) {
             osmData = &placemark()->osmData();
         }

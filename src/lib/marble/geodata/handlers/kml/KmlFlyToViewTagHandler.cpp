@@ -31,7 +31,7 @@ GeoNode* KmlflyToViewTagHandler::parse( GeoParser& parser ) const
         networkLink->setFlyToView(content == QLatin1String("1"));
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

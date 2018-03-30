@@ -37,7 +37,7 @@ public:
 
 FormattedTextWidget::Private::Private() :
     Ui::FormattedTextWidget(),
-    m_textColorDialog( 0 )
+    m_textColorDialog( nullptr )
 {
     //nothing to do
 }

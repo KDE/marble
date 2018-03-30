@@ -44,7 +44,7 @@ namespace kml
             parentItem.nodeAs<GeoDataLocation>()->setLongitude(longitude, GeoDataCoordinates::Degree);
         }
 
-      return 0;
+      return nullptr;
     }
 
 }

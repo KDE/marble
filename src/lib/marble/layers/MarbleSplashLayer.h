@@ -27,7 +27,7 @@ public:
 
     bool render( GeoPainter *painter, ViewportParams *viewport,
                          const QString &renderPos = QLatin1String("SURFACE"),
-                         GeoSceneLayer *layer = 0 ) override;
+                         GeoSceneLayer *layer = nullptr ) override;
 
     RenderState renderState() const override;
 

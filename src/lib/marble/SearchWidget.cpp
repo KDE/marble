@@ -49,10 +49,10 @@ public:
 };
 
 SearchWidgetPrivate::SearchWidgetPrivate() :
-    m_runnerManager( 0 ),
-    m_searchField( 0 ),
-    m_searchResultView( 0 ),
-    m_widget( 0 ),
+    m_runnerManager( nullptr ),
+    m_searchField( nullptr ),
+    m_searchResultView( nullptr ),
+    m_widget( nullptr ),
     m_branchfilter(),
     m_sortproxy(),
     m_document( new GeoDataDocument )

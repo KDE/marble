@@ -45,7 +45,7 @@ GeoNode* GPXurlTagHandler::parse(GeoParser& parser) const
         placemark->setExtendedData(extendedData);
     }
 
-    return 0;
+    return nullptr;
 }
 
 } // namespace gpx

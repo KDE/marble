@@ -125,7 +125,7 @@ void AbstractDataPluginItem::setSettings( const QHash<QString, QVariant>& settin
 
 QAction *AbstractDataPluginItem::action()
 {
-    return 0;
+    return nullptr;
 }
 
 void AbstractDataPluginItem::addDownloadedFile( const QString& url, const QString& type )

@@ -58,10 +58,10 @@ public:
 };
 
 TourPlaybackPrivate::TourPlaybackPrivate() :
-    m_tour( 0 ),
+    m_tour( nullptr ),
     m_pause( false ),
     m_mainTrack(),
-    m_widget( 0 )
+    m_widget( nullptr )
 {
     // do nothing
 }
@@ -282,7 +282,7 @@ void TourPlayback::updateTracks()
             before = item;
         }
     }
-    PlaybackFlyToItem* next = 0;
+    PlaybackFlyToItem* next = nullptr;
     for ( int i=d->m_mainTrack.size()-1; i>=0; --i ) {
         PlaybackFlyToItem* item = qobject_cast<PlaybackFlyToItem*>( d->m_mainTrack.at(i) );
         if ( item ) {

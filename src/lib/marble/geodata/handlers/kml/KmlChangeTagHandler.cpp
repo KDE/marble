@@ -35,7 +35,7 @@ GeoNode* KmlChangeTagHandler::parse( GeoParser& parser ) const
         return change;
     } else {
         delete change;
-        return 0;
+        return nullptr;
     }
 }
 

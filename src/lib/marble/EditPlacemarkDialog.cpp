@@ -71,10 +71,10 @@ public:
 EditPlacemarkDialog::Private::Private( GeoDataPlacemark *placemark ) :
     Ui::UiEditPlacemarkDialog(),
     m_placemark( placemark ),
-    m_iconColorDialog( 0 ),
-    m_labelColorDialog( 0 ),
-    m_osmTagEditorWidget( 0 ),
-    m_osmRelationManagerWidget( 0 )
+    m_iconColorDialog( nullptr ),
+    m_labelColorDialog( nullptr ),
+    m_osmTagEditorWidget( nullptr ),
+    m_osmRelationManagerWidget( nullptr )
 {
     // nothing to do
 }
@@ -123,7 +123,7 @@ EditPlacemarkDialog::EditPlacemarkDialog( GeoDataPlacemark *placemark,
     d->m_header->setTargetId( placemark->targetId() );
     d->m_initialTargetId = placemark->targetId();
     MarbleWidget* marbleWidget = dynamic_cast<MarbleWidget*>( parent );
-    if( marbleWidget != 0 ) {
+    if( marbleWidget != nullptr ) {
         const AngleUnit defaultAngleUnit = marbleWidget->defaultAngleUnit();
         const GeoDataCoordinates::Notation notation =
             (defaultAngleUnit == DecimalDegree) ? GeoDataCoordinates::Decimal :

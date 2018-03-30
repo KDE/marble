@@ -34,7 +34,7 @@ GeoNode* KmlmaxHeightTagHandler::parse( GeoParser& parser ) const
 
         parentItem.nodeAs<GeoDataImagePyramid>()->setMaxHeight( maxHeight );
     }
-    return 0;
+    return nullptr;
 }
 
 }

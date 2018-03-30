@@ -8,7 +8,7 @@ class ReadOnlyMapImage;
 class IntegerInterpolation: public InterpolationMethod
 {
 public:
-    explicit IntegerInterpolation( ReadOnlyMapImage * const mapImage = NULL );
+    explicit IntegerInterpolation( ReadOnlyMapImage * const mapImage = nullptr );
 
     QRgb interpolate( double const x, double const y ) override;
 };

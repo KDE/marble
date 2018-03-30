@@ -35,7 +35,7 @@ class OpenRouteServiceRunner : public RoutingRunner
     };
 
 public:
-    explicit OpenRouteServiceRunner(QObject *parent = 0);
+    explicit OpenRouteServiceRunner(QObject *parent = nullptr);
 
     // Overriding MarbleAbstractRunner
     void retrieveRoute( const RouteRequest *request ) override;

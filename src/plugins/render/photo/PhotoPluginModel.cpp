@@ -35,7 +35,7 @@ const QString flickrApiKey( "620131a1b82b000c9582b94effcdc636" );
 
 PhotoPluginModel::PhotoPluginModel( const MarbleModel *marbleModel, QObject *parent )
     : AbstractDataPluginModel( "photo", marbleModel, parent ),
-      m_marbleWidget( 0 )
+      m_marbleWidget( nullptr )
 {
 }
 

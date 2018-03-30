@@ -28,7 +28,7 @@ class GeoDataCoordinatesPrivate
     * needs this name. Maybe we can rename it to our scheme later on.
     */
     GeoDataCoordinatesPrivate()
-        : m_q( 0 ),
+        : m_q( nullptr ),
           m_lon( 0 ),
           m_lat( 0 ),
           m_altitude( 0 ),
@@ -47,7 +47,7 @@ class GeoDataCoordinatesPrivate
     GeoDataCoordinatesPrivate( qreal _lon, qreal _lat, qreal _alt,
                         GeoDataCoordinates::Unit unit,
                         int _detail )
-        : m_q( 0 ),
+        : m_q( nullptr ),
           m_altitude( _alt ),
           m_detail( _detail ),
           ref( 0 )
@@ -70,7 +70,7 @@ class GeoDataCoordinatesPrivate
     * initialize the reference with the value of the other
     */
     GeoDataCoordinatesPrivate( const GeoDataCoordinatesPrivate &other )
-        : m_q( 0 ),
+        : m_q( nullptr ),
           m_lon( other.m_lon ),
           m_lat( other.m_lat ),
           m_altitude( other.m_altitude ),
@@ -90,7 +90,7 @@ class GeoDataCoordinatesPrivate
         m_detail = other.m_detail;
         ref = 0;
         delete m_q;
-        m_q = 0;
+        m_q = nullptr;
         return *this;
     }
 

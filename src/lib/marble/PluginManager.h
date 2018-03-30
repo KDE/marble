@@ -46,7 +46,7 @@ class MARBLE_EXPORT PluginManager : public QObject
     Q_OBJECT
 
  public:
-    explicit PluginManager( QObject* parent = 0 );
+    explicit PluginManager( QObject* parent = nullptr );
 
     ~PluginManager() override;
 

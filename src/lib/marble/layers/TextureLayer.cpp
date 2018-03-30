@@ -98,9 +98,9 @@ TextureLayer::Private::Private( HttpDownloadManager *downloadManager,
     , m_tileLoader( &m_layerDecorator )
     , m_centerCoordinates()
     , m_tileZoomLevel( -1 )
-    , m_texmapper( 0 )
-    , m_texcolorizer( 0 )
-    , m_textureLayerSettings( 0 )
+    , m_texmapper( nullptr )
+    , m_texcolorizer( nullptr )
+    , m_textureLayerSettings( nullptr )
     , m_repaintTimer()
 {
     m_groundOverlayModel.setSourceModel( groundOverlayModel );
@@ -427,7 +427,7 @@ void TextureLayer::setProjection( Projection projection )
             d->m_texmapper = new GenericScanlineTextureMapper( &d->m_tileLoader );
             break;
         default:
-            d->m_texmapper = 0;
+            d->m_texmapper = nullptr;
     }
     Q_ASSERT( d->m_texmapper );
 }
@@ -470,7 +470,7 @@ void TextureLayer::downloadStackedTile( const TileId &stackedTileId )
 void TextureLayer::setMapTheme( const QVector<const GeoSceneTextureTileDataset *> &textures, const GeoSceneGroup *textureLayerSettings, const QString &seaFile, const QString &landFile )
 {
     delete d->m_texcolorizer;
-    d->m_texcolorizer = 0;
+    d->m_texcolorizer = nullptr;
 
     if ( QFileInfo( seaFile ).isReadable() || QFileInfo( landFile ).isReadable() ) {
         d->m_texcolorizer = new TextureColorizer( seaFile, landFile );

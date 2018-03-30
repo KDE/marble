@@ -39,10 +39,10 @@ GeoNode* KmlTourTagHandler::parse(GeoParser &parser) const
         return tour;
     } else {
         delete tour;
-        return 0;
+        return nullptr;
     }
 
-    return 0;
+    return nullptr;
 }
 
 } // namespace kml

@@ -31,12 +31,12 @@ class FloatItemsLayer : public QObject, public LayerInterface
     Q_OBJECT
 
  public:
-    explicit FloatItemsLayer(QObject *parent = 0);
+    explicit FloatItemsLayer(QObject *parent = nullptr);
 
     QStringList renderPosition() const override;
 
     bool render(GeoPainter *painter, ViewportParams *viewport,
-       const QString &renderPos = "NONE", GeoSceneLayer *layer = 0) override;
+       const QString &renderPos = "NONE", GeoSceneLayer *layer = nullptr) override;
 
     void addFloatItem(AbstractFloatItem *floatItem);
 

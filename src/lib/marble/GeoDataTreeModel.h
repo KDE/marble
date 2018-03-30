@@ -41,7 +41,7 @@ class MARBLE_EXPORT GeoDataTreeModel : public QAbstractItemModel
      *
      * @param parent The parent object.
      */
-    explicit GeoDataTreeModel( QObject *parent = 0 );
+    explicit GeoDataTreeModel( QObject *parent = nullptr );
 
     /**
      * Destroys the GeoDataModel.

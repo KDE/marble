@@ -54,7 +54,7 @@ GeoNode* KmlheadingTagHandler::parse( GeoParser& parser ) const
         mDebug() << "Invalid heading value " << heading << ", must be within 0..360. Using 0 instead.";
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

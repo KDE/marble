@@ -24,7 +24,7 @@ class HostipPlugin : public SearchRunnerPlugin
     Q_INTERFACES( Marble::SearchRunnerPlugin )
 
 public:
-    explicit HostipPlugin( QObject *parent = 0 );
+    explicit HostipPlugin( QObject *parent = nullptr );
 
     QString name() const override;
 

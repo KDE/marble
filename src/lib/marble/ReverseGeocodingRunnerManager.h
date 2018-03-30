@@ -37,7 +37,7 @@ public:
      * @param pluginManager The plugin manager that gives access to RunnerPlugins
      * @param parent Optional parent object
      */
-    explicit ReverseGeocodingRunnerManager( const MarbleModel *marbleModel, QObject *parent = 0 );
+    explicit ReverseGeocodingRunnerManager( const MarbleModel *marbleModel, QObject *parent = nullptr );
 
     ~ReverseGeocodingRunnerManager() override;
 

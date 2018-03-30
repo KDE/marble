@@ -33,7 +33,7 @@ GeoNode *KmlrefreshVisibilityTagHandler::parse(GeoParser & parser) const
         networkLink->setRefreshVisibility(content == QLatin1String("1"));
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

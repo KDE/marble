@@ -37,7 +37,7 @@ class MARBLE_EXPORT CloudSyncManager : public QObject
     Q_PROPERTY( RouteSyncManager* routeSyncManager READ routeSyncManager NOTIFY routeSyncManagerChanged )
 
 public:
-    explicit CloudSyncManager( QObject *parent = 0 );
+    explicit CloudSyncManager( QObject *parent = nullptr );
     ~CloudSyncManager() override;
 
     /**

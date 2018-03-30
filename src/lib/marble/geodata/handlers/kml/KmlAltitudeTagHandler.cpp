@@ -45,7 +45,7 @@ KML_DEFINE_TAG_HANDLER( altitude )
 	    parentItem.nodeAs<GeoDataLocation>()->setAltitude( altitude );
         }
 
-      return 0;
+      return nullptr;
     }
 }
 }

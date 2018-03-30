@@ -162,7 +162,7 @@ void TileScalingTextureMapper::mapTexture( GeoPainter *painter, const ViewportPa
 
                 const QPixmap *const im_cached = m_cache[cacheId];
                 const QPixmap *im = im_cached;
-                if ( im == 0 ) {
+                if ( im == nullptr ) {
                     im = new QPixmap( QPixmap::fromImage( tile->resultImage()->scaled( size, Qt::IgnoreAspectRatio, Qt::SmoothTransformation ) ) );
                 }
                 painter->drawPixmap( rect.topLeft(), *im );

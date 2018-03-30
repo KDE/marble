@@ -31,7 +31,7 @@ class MARBLE_EXPORT OsmTagEditorWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit OsmTagEditorWidget( GeoDataPlacemark *placemark, QWidget *parent = 0 );
+    explicit OsmTagEditorWidget( GeoDataPlacemark *placemark, QWidget *parent = nullptr );
     ~OsmTagEditorWidget() override;
 
     /**

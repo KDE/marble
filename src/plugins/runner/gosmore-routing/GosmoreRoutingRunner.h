@@ -24,7 +24,7 @@ class RouteRequest;
 class GosmoreRunner : public RoutingRunner
 {
 public:
-    explicit GosmoreRunner(QObject *parent = 0);
+    explicit GosmoreRunner(QObject *parent = nullptr);
 
     ~GosmoreRunner() override;
 

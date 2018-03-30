@@ -36,7 +36,7 @@ public:
      * @param pluginManager The plugin manager that gives access to RunnerPlugins
      * @param parent Optional parent object
      */
-    explicit RoutingRunnerManager( const MarbleModel *marbleModel, QObject *parent = 0 );
+    explicit RoutingRunnerManager( const MarbleModel *marbleModel, QObject *parent = nullptr );
 
     ~RoutingRunnerManager() override;
 

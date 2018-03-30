@@ -40,7 +40,7 @@ class PositionMarker  : public RenderPlugin, public DialogConfigurationInterface
     Q_INTERFACES( Marble::DialogConfigurationInterface )
     MARBLE_PLUGIN( PositionMarker )
  public:
-    explicit PositionMarker(const MarbleModel *marbleModel = 0 );
+    explicit PositionMarker(const MarbleModel *marbleModel = nullptr );
     ~PositionMarker () override;
 
     QStringList renderPosition() const override;
@@ -72,7 +72,7 @@ class PositionMarker  : public RenderPlugin, public DialogConfigurationInterface
     bool isInitialized () const override;
 
     bool render( GeoPainter *painter, ViewportParams *viewport,
-                 const QString& renderPos, GeoSceneLayer * layer = 0 ) override;
+                 const QString& renderPos, GeoSceneLayer * layer = nullptr ) override;
 
     // Overriding LayerInterface to paint on top of the route
     qreal zValue() const override;

@@ -37,13 +37,13 @@ GeoNode* DgmlBlendingTagHandler::parse( GeoParser& parser ) const
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
     if ( !parentItem.represents( dgmlTag_Texture ) && !parentItem.represents( dgmlTag_Vectortile ))
-        return 0;
+        return nullptr;
 
     // Attribute name, default to ""
     const QString name = parser.attribute( dgmlAttr_name ).trimmed();
     mDebug() << "DgmlBlendingTagHandler::parse" << name;
     parentItem.nodeAs<GeoSceneTileDataset>()->setBlending( name );
-    return 0;
+    return nullptr;
 }
 
 

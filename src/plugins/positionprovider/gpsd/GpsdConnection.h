@@ -26,7 +26,7 @@ class GpsdConnection : public QObject
     Q_OBJECT
 
  public:
-    explicit GpsdConnection( QObject* parent = 0 );
+    explicit GpsdConnection( QObject* parent = nullptr );
 
     ~GpsdConnection() override;
 

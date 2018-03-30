@@ -29,7 +29,7 @@ class RoutingProfileSettingsDialog : public QDialog
 {
     Q_OBJECT
 public:
-    RoutingProfileSettingsDialog( const PluginManager *pluginManager, RoutingProfilesModel *profilesModel, QWidget *parent = 0 );
+    RoutingProfileSettingsDialog( const PluginManager *pluginManager, RoutingProfilesModel *profilesModel, QWidget *parent = nullptr );
     ~RoutingProfileSettingsDialog() override;
 
     void editProfile( int profileIndex );

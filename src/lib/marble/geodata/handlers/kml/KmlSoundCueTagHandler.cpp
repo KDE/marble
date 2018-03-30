@@ -35,7 +35,7 @@ GeoNode* KmlSoundCueTagHandler::parse(GeoParser &parser) const
         return cue;
     }
 
-    return 0;
+    return nullptr;
 }
 
 } // namespace kml

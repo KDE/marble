@@ -25,7 +25,7 @@ class LatLonEditPlugin : public QObject,
     Q_PLUGIN_METADATA(IID "org.kde.marble.LatLonEditPlugin")
 	Q_INTERFACES(QDesignerCustomWidgetInterface)
 public:
-	explicit LatLonEditPlugin(QObject *parent = 0);
+	explicit LatLonEditPlugin(QObject *parent = nullptr);
 
 	bool isContainer() const override;
 	bool isInitialized() const override;

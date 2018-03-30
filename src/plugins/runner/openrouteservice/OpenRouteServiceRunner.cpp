@@ -151,7 +151,7 @@ GeoDataDocument* OpenRouteServiceRunner::parse( const QByteArray &content ) cons
     QDomDocument xml;
     if ( !xml.setContent( content ) ) {
         mDebug() << "Cannot parse xml file with routing instructions.";
-        return 0;
+        return nullptr;
     }
 
     QDomElement root = xml.documentElement();
@@ -161,7 +161,7 @@ GeoDataDocument* OpenRouteServiceRunner::parse( const QByteArray &content ) cons
 
     QDomNodeList errors = root.elementsByTagName(QStringLiteral("xls:Error"));
     if ( errors.size() > 0 ) {
-        return 0;
+        return nullptr;
         // Returning early because fallback routing providers are used now
         // The code below can be used to parse OpenGis errors reported by ORS
         // and may be useful in the future

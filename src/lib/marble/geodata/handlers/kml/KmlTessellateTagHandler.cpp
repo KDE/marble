@@ -65,7 +65,7 @@ GeoNode* KmltessellateTagHandler::parse( GeoParser& parser ) const
         polygon->setTessellate(tesselate);
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

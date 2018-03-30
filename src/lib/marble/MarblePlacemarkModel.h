@@ -71,7 +71,7 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
      *
      * @param parent The parent object.
      */
-    explicit MarblePlacemarkModel( QObject *parent = 0 );
+    explicit MarblePlacemarkModel( QObject *parent = nullptr );
 
     /**
      * Destroys the place mark model.

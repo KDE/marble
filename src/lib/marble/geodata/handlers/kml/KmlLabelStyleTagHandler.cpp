@@ -48,7 +48,7 @@ GeoNode* KmlLabelStyleTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataStyle>()->setLabelStyle( style );
         return &parentItem.nodeAs<GeoDataStyle>()->labelStyle();
     }
-    return 0;
+    return nullptr;
 }
 
 }

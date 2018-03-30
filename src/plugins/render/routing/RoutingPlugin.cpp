@@ -98,15 +98,15 @@ private:
 };
 
 RoutingPluginPrivate::RoutingPluginPrivate( RoutingPlugin *parent ) :
-    m_marbleWidget( 0 ),
-    m_widgetItem( 0 ),
-    m_routingModel( 0 ),
+    m_marbleWidget( nullptr ),
+    m_widgetItem( nullptr ),
+    m_routingModel( nullptr ),
     m_nearNextInstruction( false ),
     m_guidanceModeEnabled( false ),
     m_audio( new AudioOutput( parent ) ),
-    m_configDialog( 0 ),
+    m_configDialog( nullptr ),
     m_routeCompleted( false ),
-    m_speakersModel( 0 ),
+    m_speakersModel( nullptr ),
     m_parent( parent )
 {
     m_audio->setMuted( false );
@@ -328,13 +328,13 @@ void RoutingPluginPrivate::updateDestinationInformation()
 
 void RoutingPluginPrivate::updateGpsButton( PositionProviderPlugin *activePlugin )
 {
-    m_widget.gpsButton->setChecked( activePlugin != 0 );
+    m_widget.gpsButton->setChecked( activePlugin != nullptr );
     forceRepaint();
 }
 
 void RoutingPluginPrivate::togglePositionTracking( bool enabled )
 {
-    PositionProviderPlugin* plugin = 0;
+    PositionProviderPlugin* plugin = nullptr;
     if ( enabled ) {
         const PluginManager* pluginManager = m_marbleWidget->model()->pluginManager();
         QList<const PositionProviderPlugin*> plugins = pluginManager->positionProviderPlugins();
@@ -419,8 +419,8 @@ void RoutingPlugin::writeSettings()
 
 
 RoutingPlugin::RoutingPlugin() :
-    AbstractFloatItem( 0 ),
-    d( 0 )
+    AbstractFloatItem( nullptr ),
+    d( nullptr )
 {
 }
 

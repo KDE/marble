@@ -33,7 +33,7 @@ public:
         Error
     };
 
-    explicit Job(const Region &region, const JobParameters &parameters, QObject *parent = 0);
+    explicit Job(const Region &region, const JobParameters &parameters, QObject *parent = nullptr);
 
     Status status() const;
 

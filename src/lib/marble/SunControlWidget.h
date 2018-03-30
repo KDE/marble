@@ -31,7 +31,7 @@ class MARBLE_EXPORT SunControlWidget : public QDialog
     Q_OBJECT
 	
  public:
-    explicit SunControlWidget( MarbleWidget *marbleWidget, QWidget* parent = 0 );
+    explicit SunControlWidget( MarbleWidget *marbleWidget, QWidget* parent = nullptr );
     ~SunControlWidget() override;
     void setSunShading( bool );
 

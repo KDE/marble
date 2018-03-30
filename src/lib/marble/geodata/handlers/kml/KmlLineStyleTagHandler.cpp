@@ -47,7 +47,7 @@ GeoNode* KmlLineStyleTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataStyle>()->setLineStyle( style );
         return &parentItem.nodeAs<GeoDataStyle>()->lineStyle();
     }
-    return 0;
+    return nullptr;
 }
 
 }

@@ -45,7 +45,7 @@ private:
         bool operator==(const Package &other) const;
     };
 
-    explicit Upload(QObject *parent = 0);
+    explicit Upload(QObject *parent = nullptr);
 
     void changeStatus( const Package &package, const QString &status, const QString &message );
 

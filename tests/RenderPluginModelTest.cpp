@@ -22,7 +22,7 @@ class RenderPluginModelTest : public QObject
 
  public:
     RenderPluginModelTest() :
-        m_map( 0 )
+        m_map( nullptr )
     {}
 
  private Q_SLOTS:

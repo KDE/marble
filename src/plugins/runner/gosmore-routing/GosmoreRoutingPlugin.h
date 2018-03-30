@@ -24,7 +24,7 @@ class GosmorePlugin : public RoutingRunnerPlugin
     Q_INTERFACES( Marble::RoutingRunnerPlugin )
 
 public:
-    explicit GosmorePlugin( QObject *parent = 0 );
+    explicit GosmorePlugin( QObject *parent = nullptr );
 
     QString name() const override;
 

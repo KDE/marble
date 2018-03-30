@@ -30,7 +30,7 @@ KML_DEFINE_TAG_HANDLER (range)
             parentItem.nodeAs<GeoDataLookAt>()->setRange( range );
         }
 
-      return 0;
+      return nullptr;
     }
 }
 }

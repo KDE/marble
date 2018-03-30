@@ -27,7 +27,7 @@ using namespace Marble;
 WidgetGraphicsItemPrivate::WidgetGraphicsItemPrivate(WidgetGraphicsItem *widgetGraphicsItem,
                                                      MarbleGraphicsItem *parent)
     : ScreenGraphicsItemPrivate(widgetGraphicsItem, parent),
-    m_widget(0), m_marbleWidget(0), m_activeWidget( 0 )
+    m_widget(nullptr), m_marbleWidget(nullptr), m_activeWidget( nullptr )
 {
     // nothing to do
 }
@@ -67,7 +67,7 @@ QWidget *WidgetGraphicsItem::widget() const
 void WidgetGraphicsItem::paint( QPainter *painter )
 {
     Q_D(WidgetGraphicsItem);
-    if( d->m_widget == 0 )
+    if( d->m_widget == nullptr )
         return;
 
     // Paint widget without a background
@@ -77,7 +77,7 @@ void WidgetGraphicsItem::paint( QPainter *painter )
 bool WidgetGraphicsItem::eventFilter( QObject *object, QEvent *e )
 {
     Q_D(WidgetGraphicsItem);
-    if ( !visible() || d->m_widget == 0 ) {
+    if ( !visible() || d->m_widget == nullptr ) {
         return false;
     }
 
@@ -143,7 +143,7 @@ bool WidgetGraphicsItem::eventFilter( QObject *object, QEvent *e )
             if ( d->m_activeWidget ) {
                 QEvent leaveEvent( QEvent::Leave );
                 QApplication::sendEvent( d->m_activeWidget, &leaveEvent );
-                d->m_activeWidget = 0;
+                d->m_activeWidget = nullptr;
             }
         }
     }

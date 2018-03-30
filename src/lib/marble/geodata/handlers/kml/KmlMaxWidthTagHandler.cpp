@@ -34,7 +34,7 @@ GeoNode* KmlmaxWidthTagHandler::parse( GeoParser& parser ) const
 
         parentItem.nodeAs<GeoDataImagePyramid>()->setMaxWidth( maxWidth );
     }
-    return 0;
+    return nullptr;
 }
 
 }

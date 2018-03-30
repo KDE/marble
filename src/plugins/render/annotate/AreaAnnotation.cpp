@@ -42,7 +42,7 @@ const QColor AreaAnnotation::mergedColor = Oxygen::emeraldGreen6;
 
 AreaAnnotation::AreaAnnotation( GeoDataPlacemark *placemark ) :
     SceneGraphicsItem( placemark ),
-    m_viewport( 0 ),
+    m_viewport( nullptr ),
     m_regionsInitialized( false ),
     m_busy( false ),
     m_hoveredNode( -1, -1 ),
@@ -149,7 +149,7 @@ void AreaAnnotation::move( const GeoDataCoordinates &source, const GeoDataCoordi
     GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( placemark()->geometry() );
     GeoDataLinearRing outerRing = polygon->outerBoundary();
     QVector<GeoDataLinearRing> innerRings = polygon->innerBoundaries();
-    OsmPlacemarkData *osmData = 0;
+    OsmPlacemarkData *osmData = nullptr;
     if ( placemark()->hasOsmData() ) {
         osmData = &placemark()->osmData();
     }
@@ -269,7 +269,7 @@ void AreaAnnotation::deleteAllSelectedNodes()
     GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( placemark()->geometry() );
     GeoDataLinearRing &outerRing = polygon->outerBoundary();
     QVector<GeoDataLinearRing> &innerRings = polygon->innerBoundaries();
-    OsmPlacemarkData *osmData = 0;
+    OsmPlacemarkData *osmData = nullptr;
     OsmPlacemarkData initialOsmData;
     if ( placemark()->hasOsmData() ) {
         osmData = &placemark()->osmData();
@@ -342,7 +342,7 @@ void AreaAnnotation::deleteClickedNode()
     GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( placemark()->geometry() );
     GeoDataLinearRing &outerRing = polygon->outerBoundary();
     QVector<GeoDataLinearRing> &innerRings = polygon->innerBoundaries();
-    OsmPlacemarkData *osmData = 0;
+    OsmPlacemarkData *osmData = nullptr;
     OsmPlacemarkData initialOsmData;
     if ( placemark()->hasOsmData() ) {
         osmData = &placemark()->osmData();
@@ -594,7 +594,7 @@ void AreaAnnotation::dealWithStateChange( SceneGraphicsItem::ActionState previou
         m_firstMergedNode = QPair<int, int>( -1, -1 );
         m_secondMergedNode = QPair<int, int>( -1, -1 );
         m_hoveredNode = QPair<int, int>( -1, -1 );
-        m_animation = 0;
+        m_animation = nullptr;
     } else if ( state() == SceneGraphicsItem::AddingNodes ) {
         m_virtualHovered = QPair<int, int>( -1, -1 );
         m_adjustedNode = -2;
@@ -1001,7 +1001,7 @@ bool AreaAnnotation::processEditingOnMove( QMouseEvent *mouseEvent )
         GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( placemark()->geometry() );
         GeoDataLinearRing &outerRing = polygon->outerBoundary();
         QVector<GeoDataLinearRing> &innerRings = polygon->innerBoundaries();
-        OsmPlacemarkData *osmData = 0;
+        OsmPlacemarkData *osmData = nullptr;
         if ( placemark()->hasOsmData() ) {
             osmData = &placemark()->osmData();
         }
@@ -1028,7 +1028,7 @@ bool AreaAnnotation::processEditingOnMove( QMouseEvent *mouseEvent )
         GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( placemark()->geometry() );
         GeoDataLinearRing outerRing = polygon->outerBoundary();
         QVector<GeoDataLinearRing> innerRings = polygon->innerBoundaries();
-        OsmPlacemarkData *osmData = 0;
+        OsmPlacemarkData *osmData = nullptr;
         if ( placemark()->hasOsmData() ) {
             osmData = &placemark()->osmData();
         }
@@ -1163,7 +1163,7 @@ bool AreaAnnotation::processMergingOnPress( QMouseEvent *mouseEvent )
 
     GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( placemark()->geometry() );
     GeoDataLinearRing initialOuterRing = polygon->outerBoundary();
-    OsmPlacemarkData *osmData = 0;
+    OsmPlacemarkData *osmData = nullptr;
     OsmPlacemarkData initialOsmData;
     if ( placemark()->hasOsmData() ) {
         osmData = &placemark()->osmData();

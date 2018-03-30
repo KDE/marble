@@ -68,18 +68,18 @@ AnnotatePlugin::AnnotatePlugin( const MarbleModel *model )
     : RenderPlugin( model ),
       m_isInitialized( false ),
       m_widgetInitialized( false ),
-      m_marbleWidget( 0 ),
+      m_marbleWidget( nullptr ),
       m_overlayRmbMenu(nullptr),
       m_polygonRmbMenu(nullptr),
       m_nodeRmbMenu(nullptr),
       m_textAnnotationRmbMenu(nullptr),
       m_polylineRmbMenu(nullptr),
       m_annotationDocument(nullptr),
-      m_movedItem( 0 ),
-      m_focusItem( 0 ),
-      m_polylinePlacemark( 0 ),
-      m_polygonPlacemark( 0 ),
-      m_clipboardItem( 0 ),
+      m_movedItem( nullptr ),
+      m_focusItem( nullptr ),
+      m_polylinePlacemark( nullptr ),
+      m_polygonPlacemark( nullptr ),
+      m_clipboardItem( nullptr ),
       m_drawingPolygon( false ),
       m_drawingPolyline( false ),
       m_addingPlacemark( false ),
@@ -176,10 +176,10 @@ void AnnotatePlugin::initialize()
         m_widgetInitialized = false;
 
         delete m_polygonPlacemark;
-        m_polygonPlacemark = 0;
+        m_polygonPlacemark = nullptr;
 
         delete m_movedItem;
-        m_movedItem = 0;
+        m_movedItem = nullptr;
 
         m_drawingPolygon = false;
         m_drawingPolyline = false;
@@ -261,7 +261,7 @@ void AnnotatePlugin::enableModel( bool enabled )
             m_marbleWidget->model()->treeModel()->addDocument( m_annotationDocument );
         }
     } else {
-        setupActions( 0 );
+        setupActions( nullptr );
         if ( m_marbleWidget ) {
             m_marbleWidget->model()->treeModel()->removeDocument( m_annotationDocument );
         }
@@ -340,8 +340,8 @@ void AnnotatePlugin::removeFocusItem()
 
         delete m_focusItem->placemark();
         delete m_focusItem;
-        m_movedItem = 0;
-        m_focusItem = 0;
+        m_movedItem = nullptr;
+        m_focusItem = nullptr;
     }
 }
 
@@ -361,15 +361,15 @@ void AnnotatePlugin::clearAnnotations()
         m_annotationDocument->clear();
         m_marbleWidget->model()->treeModel()->addDocument( m_annotationDocument );
 
-        m_movedItem = 0;
-        m_focusItem = 0;
+        m_movedItem = nullptr;
+        m_focusItem = nullptr;
     }
 }
 
 void AnnotatePlugin::saveAnnotationFile()
 {
 
-    const QString filename = QFileDialog::getSaveFileName( 0,
+    const QString filename = QFileDialog::getSaveFileName( nullptr,
                                                            tr("Save Annotation File"),
                                                            QString(),
                                                            tr("All Supported Files (*.kml *.osm);;"
@@ -398,7 +398,7 @@ void AnnotatePlugin::saveAnnotationFile()
 
 void AnnotatePlugin::loadAnnotationFile()
 {
-    const QString filename = QFileDialog::getOpenFileName( 0,
+    const QString filename = QFileDialog::getOpenFileName( nullptr,
                                                            tr("Open Annotation File"),
                                                            QString(),
                                                            tr("All Supported Files (*.kml *.osm);;"
@@ -534,7 +534,7 @@ bool AnnotatePlugin::eventFilter( QObject *watched, QEvent *event )
             disableFocusActions();
             m_focusItem->setFocus( false );
             m_marbleWidget->model()->treeModel()->updateFeature( m_focusItem->placemark() );
-            m_focusItem = 0;
+            m_focusItem = nullptr;
             return true;
         }
 
@@ -647,7 +647,7 @@ bool AnnotatePlugin::handleDrawingPolygon( QMouseEvent *mouseEvent )
     const GeoDataCoordinates coords = mouseGeoDataCoordinates( mouseEvent );
 
     if ( mouseEvent->type() == QEvent::MouseMove ) {
-        setupCursor( 0 );
+        setupCursor( nullptr );
 
         emit mouseMoveGeoPosition( coords.toString() );
 
@@ -672,7 +672,7 @@ bool AnnotatePlugin::handleDrawingPolyline( QMouseEvent *mouseEvent )
     const GeoDataCoordinates coords = mouseGeoDataCoordinates( mouseEvent );
 
     if ( mouseEvent->type() == QEvent::MouseMove ) {
-        setupCursor( 0 );
+        setupCursor( nullptr );
 
         emit mouseMoveGeoPosition( coords.toString() );
 
@@ -757,7 +757,7 @@ void AnnotatePlugin::handleSuccessfulReleaseEvent( QMouseEvent *mouseEvent, Scen
 {
     Q_UNUSED( mouseEvent );
     // The item gets 'deselected' (from moving) at mouse release.
-    m_movedItem = 0;
+    m_movedItem = nullptr;
 
     // Update the item's placemark.
     m_marbleWidget->model()->treeModel()->updateFeature( item->placemark() );
@@ -875,7 +875,7 @@ void AnnotatePlugin::handleUncaughtEvents( QMouseEvent *mouseEvent )
             return;
         }
 
-        m_focusItem->dealWithItemChange( 0 );
+        m_focusItem->dealWithItemChange( nullptr );
         m_marbleWidget->model()->treeModel()->updateFeature( m_focusItem->placemark() );
 
         if ( mouseEvent->type() == QEvent::MouseButtonPress ) {
@@ -883,7 +883,7 @@ void AnnotatePlugin::handleUncaughtEvents( QMouseEvent *mouseEvent )
             disableFocusActions();
             announceStateChanged( SceneGraphicsItem::Editing );
             m_marbleWidget->model()->treeModel()->updateFeature( m_focusItem->placemark() );
-            m_focusItem = 0;
+            m_focusItem = nullptr;
         }
     }
 }
@@ -897,7 +897,7 @@ void AnnotatePlugin::setupActions( MarbleWidget *widget )
         return;
     }
 
-    QActionGroup *group = new QActionGroup( 0 );
+    QActionGroup *group = new QActionGroup( nullptr );
     group->setExclusive( true );
 
 
@@ -1159,7 +1159,7 @@ void AnnotatePlugin::addTextAnnotation()
 void AnnotatePlugin::stopEditingTextAnnotation( int result )
 {
     m_focusItem = m_editedItem;
-    m_editedItem = 0;
+    m_editedItem = nullptr;
     announceStateChanged( SceneGraphicsItem::Editing );
     enableAllActions( m_actions.first() );
     disableFocusActions();
@@ -1304,7 +1304,7 @@ void AnnotatePlugin::clearOverlayFrames()
     }
 
     m_groundOverlayFrames.clear();
-    m_focusItem = 0;
+    m_focusItem = nullptr;
     disableFocusActions();
 }
 
@@ -1411,7 +1411,7 @@ void AnnotatePlugin::addPolygon()
 void AnnotatePlugin::stopEditingPolygon( int result )
 {
     m_focusItem = m_editedItem;
-    m_editedItem = 0;
+    m_editedItem = nullptr;
     announceStateChanged( SceneGraphicsItem::Editing );
     enableAllActions( m_actions.first() );
     disableFocusActions();
@@ -1424,7 +1424,7 @@ void AnnotatePlugin::stopEditingPolygon( int result )
 
     m_editingDialogIsShown = false;
     m_drawingPolygon = false;
-    m_polygonPlacemark = 0;
+    m_polygonPlacemark = nullptr;
 }
 
 void AnnotatePlugin::deselectNodes()
@@ -1674,7 +1674,7 @@ void AnnotatePlugin::addPolyline()
 void AnnotatePlugin::stopEditingPolyline( int result )
 {
     m_focusItem = m_editedItem;
-    m_editedItem = 0;
+    m_editedItem = nullptr;
     announceStateChanged( SceneGraphicsItem::Editing );
     enableAllActions( m_actions.first() );
     disableFocusActions();
@@ -1687,7 +1687,7 @@ void AnnotatePlugin::stopEditingPolyline( int result )
 
     m_editingDialogIsShown = false;
     m_drawingPolyline = false;
-    m_polylinePlacemark = 0;
+    m_polylinePlacemark = nullptr;
 }
 
 void AnnotatePlugin::addRelation( const OsmPlacemarkData &relationData )
@@ -1721,7 +1721,7 @@ void AnnotatePlugin::cutItem()
     if ( m_clipboardItem ) {
         delete m_clipboardItem->placemark();
         delete m_clipboardItem;
-        m_clipboardItem = 0;
+        m_clipboardItem = nullptr;
     }
 
     m_clipboardItem = m_focusItem;
@@ -1730,7 +1730,7 @@ void AnnotatePlugin::cutItem()
     m_graphicsItems.removeAll( m_focusItem );
     m_marbleWidget->model()->treeModel()->removeFeature( m_focusItem->placemark() );
 
-    m_focusItem = 0;
+    m_focusItem = nullptr;
 }
 
 void AnnotatePlugin::copyItem()
@@ -1738,7 +1738,7 @@ void AnnotatePlugin::copyItem()
     if ( m_clipboardItem ) {
         delete m_clipboardItem->placemark();
         delete m_clipboardItem;
-        m_clipboardItem = 0;
+        m_clipboardItem = nullptr;
     }
 
     // Just copy the placemark and instantiate a new object based on its graphic type.
@@ -1772,7 +1772,7 @@ void AnnotatePlugin::pasteItem()
     m_clipboardItem->setFocus( true );
     enableActionsOnItemType( m_clipboardItem->graphicType() );
     m_focusItem = m_clipboardItem;
-    m_clipboardItem = 0;
+    m_clipboardItem = nullptr;
 
     m_pasteGraphicItem->setVisible( false );
 }

@@ -33,7 +33,7 @@ class License : public AbstractFloatItem
     Q_INTERFACES( Marble::RenderPluginInterface )
     MARBLE_PLUGIN( License )
 public:
-    explicit License( const MarbleModel *marbleModel=0 );
+    explicit License( const MarbleModel *marbleModel=nullptr );
     ~License() override;
 
     QStringList backendTypes() const override;

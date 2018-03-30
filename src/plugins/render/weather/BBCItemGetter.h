@@ -30,7 +30,7 @@ class BBCItemGetter : public AbstractWorkerThread
     Q_OBJECT
 
  public:
-    explicit BBCItemGetter( QObject *parent = 0 );
+    explicit BBCItemGetter( QObject *parent = nullptr );
     ~BBCItemGetter() override;
 
     void setSchedule( const GeoDataLatLonBox& box,

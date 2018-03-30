@@ -19,8 +19,8 @@
 
 RouteRequestModel::RouteRequestModel( QObject *parent ) :
     QAbstractListModel( parent ),
-    m_request( 0 ),
-    m_routing( 0 )
+    m_request( nullptr ),
+    m_routing( nullptr )
 {
     QHash<int,QByteArray> roles;
     roles[Qt::DisplayRole] = "name";

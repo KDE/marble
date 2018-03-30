@@ -20,7 +20,7 @@ class GpsbabelRunner : public ParsingRunner
     Q_OBJECT
 
 public:
-    explicit GpsbabelRunner( QObject *parent = 0 );
+    explicit GpsbabelRunner( QObject *parent = nullptr );
 
     GeoDataDocument* parseFile( const QString &fileName, DocumentRole role, QString& error ) override;
 

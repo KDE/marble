@@ -41,7 +41,7 @@ GeoNode* DgmlVectortileTagHandler::parse( GeoParser& parser ) const
     if ( !expireStr.isEmpty() )
         expire = expireStr.toInt();
 
-    GeoSceneTileDataset *texture = 0;
+    GeoSceneTileDataset *texture = nullptr;
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();

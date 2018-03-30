@@ -181,7 +181,7 @@ AbstractDataPluginItem *GeoNamesWeatherService::parse(const QJsonObject &weather
         item->setCurrentWeather( data );
         return item;
     } else {
-        return 0;
+        return nullptr;
     }
 }
 

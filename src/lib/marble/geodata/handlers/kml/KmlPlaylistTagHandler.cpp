@@ -35,7 +35,7 @@ GeoNode* KmlPlaylistTagHandler::parse(GeoParser &parser) const
         return playlist;
     }
 
-    return 0;
+    return nullptr;
 }
 
 } // namespace kml

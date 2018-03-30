@@ -40,7 +40,7 @@ GeoNode* KmlTourControlTagHandler::parse(GeoParser &parser) const
         delete tourControl;
     }
 
-    return 0;
+    return nullptr;
 }
 
 } // namespace kml

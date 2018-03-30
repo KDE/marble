@@ -38,8 +38,8 @@ class CountryByFlagPrivate
 public:
     CountryByFlagPrivate( MarbleWidget *marbleWidget )
     : m_marbleWidget( marbleWidget ),
-      m_parent( 0 ),
-      m_countryNames( 0 )
+      m_parent( nullptr ),
+      m_countryNames( nullptr )
     {
         m_continentsAndOceans
             << QStringLiteral("Asia") << QStringLiteral("Africa")
@@ -131,7 +131,7 @@ void CountryByFlag::postQuestion( QObject *gameObject )
     qsrand( randomSeed );
 
     bool found = false;
-    GeoDataPlacemark *placemark = 0;
+    GeoDataPlacemark *placemark = nullptr;
     QVariantList answerOptions;
     QString flagPath;
 

@@ -38,7 +38,7 @@ GeoNode* KmlLatLonBoxTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataGroundOverlay>()->setLatLonBox( box );
         return &parentItem.nodeAs<GeoDataGroundOverlay>()->latLonBox();
     } else {
-        return 0;
+        return nullptr;
     }
 }
 

@@ -103,7 +103,7 @@ void RoutingRunnerManager::Private::cleanupRoutingTask( RoutingTask *task )
     mDebug() << "removing task" << m_routingTasks.size() << " " << (quintptr)task;
     if ( m_routingTasks.isEmpty() ) {
         if ( m_routingResult.isEmpty() ) {
-            emit q->routeRetrieved( 0 );
+            emit q->routeRetrieved( nullptr );
         }
 
         emit q->routingFinished();
@@ -149,7 +149,7 @@ void RoutingRunnerManager::retrieveRoute( const RouteRequest *request )
 
     if ( d->m_routingTasks.isEmpty() ) {
         mDebug() << "No suitable routing plugins found, cannot retrieve a route";
-        d->cleanupRoutingTask( 0 );
+        d->cleanupRoutingTask( nullptr );
     }
 }
 

@@ -46,7 +46,7 @@ GeoNode* DgmlPaletteTagHandler::parse(GeoParser& parser) const
     QString type      = parser.attribute(dgmlAttr_type).toLower().trimmed();
     QString file      = parser.readElementText().trimmed();
 
-    GeoScenePalette *palette = 0;
+    GeoScenePalette *palette = nullptr;
 
     // Checking for parent palette
     GeoStackItem parentItem = parser.parentElement();

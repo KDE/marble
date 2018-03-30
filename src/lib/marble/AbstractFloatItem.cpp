@@ -30,7 +30,7 @@ namespace Marble
 class AbstractFloatItemPrivate
 {
   public:
-    AbstractFloatItemPrivate() : m_contextMenu( 0 )
+    AbstractFloatItemPrivate() : m_contextMenu( nullptr )
     {
     }
 
@@ -179,7 +179,7 @@ bool AbstractFloatItem::eventFilter( QObject *object, QEvent *e )
     {
         QWidget *widget = qobject_cast<QWidget *>( object );
         QContextMenuEvent *menuEvent = dynamic_cast<QContextMenuEvent *> ( e );
-        if( widget != NULL && menuEvent != NULL && contains( menuEvent->pos() ) )
+        if( widget != nullptr && menuEvent != nullptr && contains( menuEvent->pos() ) )
         {
             contextMenuEvent( widget, menuEvent );
             return true;
@@ -189,7 +189,7 @@ bool AbstractFloatItem::eventFilter( QObject *object, QEvent *e )
     else if( e->type() == QEvent::ToolTip )
     {
         QHelpEvent *helpEvent = dynamic_cast<QHelpEvent *>( e );
-        if( helpEvent != NULL && contains( helpEvent->pos() ) )
+        if( helpEvent != nullptr && contains( helpEvent->pos() ) )
         {
             toolTipEvent( helpEvent );
             return true;
@@ -248,7 +248,7 @@ QMenu* AbstractFloatItem::contextMenu()
         }
 
         DialogConfigurationInterface *configInterface = qobject_cast<DialogConfigurationInterface *>( this );
-        QDialog *dialog = configInterface ? configInterface->configDialog() : 0;
+        QDialog *dialog = configInterface ? configInterface->configDialog() : nullptr;
         if( dialog )
         {
             d->m_contextMenu->addSeparator();

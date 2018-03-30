@@ -29,7 +29,7 @@ class PluginItemDelegate : public QAbstractItemDelegate
     Q_OBJECT
 
  public:
-    explicit PluginItemDelegate( QAbstractItemView *view, QObject * parent = 0 );
+    explicit PluginItemDelegate( QAbstractItemView *view, QObject * parent = nullptr );
     ~PluginItemDelegate() override;
     
     void paint( QPainter *painter,

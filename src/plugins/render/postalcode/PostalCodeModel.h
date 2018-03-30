@@ -20,7 +20,7 @@ class PostalCodeModel : public AbstractDataPluginModel
     Q_OBJECT
 
  public:
-    explicit PostalCodeModel( const MarbleModel *marbleModel, QObject *parent = 0 );
+    explicit PostalCodeModel( const MarbleModel *marbleModel, QObject *parent = nullptr );
     ~PostalCodeModel() override;
 
  protected:

@@ -53,7 +53,7 @@ public:
 RouteSyncManager::Private::Private( CloudSyncManager *cloudSyncManager ) :
     m_routeSyncEnabled( false ),
     m_cloudSyncManager( cloudSyncManager ),
-    m_routingManager( 0 ),
+    m_routingManager( nullptr ),
     m_model( new CloudRouteModel() ),
     m_owncloudBackend( cloudSyncManager )
 {

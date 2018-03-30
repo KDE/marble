@@ -196,8 +196,8 @@ SatellitesConfigNodeItem* SatellitesConfigDialog::getSatellitesCategoryItem(
     SatellitesConfigNodeItem *catalogItem;
     catalogItem = getSatellitesBodyItem( body, create );
 
-    if( catalogItem == NULL ) {
-        return NULL;
+    if( catalogItem == nullptr ) {
+        return nullptr;
     }
 
     // find category
@@ -215,7 +215,7 @@ SatellitesConfigNodeItem* SatellitesConfigDialog::getSatellitesCategoryItem(
         return newItem;
     }
 
-    return NULL; // not found, not created
+    return nullptr; // not found, not created
 }
 
 SatellitesConfigNodeItem* SatellitesConfigDialog::getSatellitesBodyItem(
@@ -242,7 +242,7 @@ SatellitesConfigNodeItem* SatellitesConfigDialog::getSatellitesBodyItem(
         return newItem;
     }
 
-    return NULL; // not found, not created
+    return nullptr; // not found, not created
 }
 
 void SatellitesConfigDialog::reloadDataSources()

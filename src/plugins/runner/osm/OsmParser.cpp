@@ -34,7 +34,7 @@ GeoDataDocument *OsmParser::parse(const QString &filename, QString &error)
     QFileInfo const fileInfo(filename);
     if (!fileInfo.exists() || !fileInfo.isReadable()) {
         error = QString("Cannot read file %1").arg(filename);
-        return 0;
+        return nullptr;
     }
 
     if (fileInfo.completeSuffix() == QLatin1String("o5m")) {
@@ -147,7 +147,7 @@ GeoDataDocument* OsmParser::parseXml(const QString &filename, QString &error)
         parser.setDevice(&file);
     }
 
-    OsmPlacemarkData* osmData(0);
+    OsmPlacemarkData* osmData(nullptr);
     QString parentTag;
     qint64 parentId(0);
     // share string data on the heap at least for this file

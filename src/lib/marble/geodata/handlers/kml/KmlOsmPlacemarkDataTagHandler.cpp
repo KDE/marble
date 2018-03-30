@@ -77,7 +77,7 @@ GeoNode* KmlOsmPlacemarkDataTagHandler::parse( GeoParser& parser ) const
         GeoDataLinearRing &ring = *parser.parentElement().nodeAs<GeoDataLinearRing>();
         GeoDataPolygon *polygon = geodata_cast<GeoDataPolygon>(placemark->geometry());
         if (!polygon) {
-            return 0;
+            return nullptr;
         }
 
         /* The QVector's indexOf function is perfect: returns the index of the ring
@@ -89,7 +89,7 @@ GeoNode* KmlOsmPlacemarkDataTagHandler::parse( GeoParser& parser ) const
         placemarkOsmData->addMemberReference( memberIndex, osmData );
         return &placemarkOsmData->memberReference( memberIndex );
     }
-    return 0;
+    return nullptr;
 }
 }
 }

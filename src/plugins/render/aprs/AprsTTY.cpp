@@ -55,7 +55,7 @@ AprsTTY::openSocket()
         mDebug() << "connected to " << m_ttyName.toLocal8Bit().data();
     } else {
         delete m_port;
-        m_port = 0;
+        m_port = nullptr;
         mDebug() << "**** failed to open terminal " << m_ttyName.toLocal8Bit().data() << " ****";
     }
     return m_port;

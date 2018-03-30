@@ -27,7 +27,7 @@ class WikipediaModel : public AbstractDataPluginModel
     Q_OBJECT
     
  public:
-    explicit WikipediaModel( const MarbleModel *marbleModel, QObject *parent = 0 );
+    explicit WikipediaModel( const MarbleModel *marbleModel, QObject *parent = nullptr );
     ~WikipediaModel() override;
 
     void setShowThumbnail( bool show );

@@ -65,7 +65,7 @@ const GeoTagWriter* GeoTagWriter::recognizes( const QualifiedName &qname )
     TagHash* hash = tagWriterHash();
 
     if( !hash->contains( qname ) ) {
-        return 0;
+        return nullptr;
     }
 
     return hash->value( qname );

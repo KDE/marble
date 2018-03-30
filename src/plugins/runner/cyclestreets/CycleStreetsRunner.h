@@ -25,7 +25,7 @@ class CycleStreetsRunner : public RoutingRunner
     Q_OBJECT
 
 public:
-    explicit CycleStreetsRunner(QObject *parent = 0);
+    explicit CycleStreetsRunner(QObject *parent = nullptr);
 
     ~CycleStreetsRunner() override;
 

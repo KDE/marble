@@ -32,7 +32,7 @@ GeoNode* KmlAliasTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataResourceMap>()->setAlias(alias);
 	    return &parentItem.nodeAs<GeoDataResourceMap>()->alias();
     } else {
-        return 0;
+        return nullptr;
     }
 }
 

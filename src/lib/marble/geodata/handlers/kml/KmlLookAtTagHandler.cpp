@@ -40,7 +40,7 @@ GeoNode *KmlLookAtTagHandler::parse( GeoParser & parser ) const
         return lookAt;
     } else {
         delete lookAt;
-        return 0;
+        return nullptr;
     }
 }
 

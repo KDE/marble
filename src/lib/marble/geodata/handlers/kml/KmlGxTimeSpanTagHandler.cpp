@@ -45,7 +45,7 @@ GeoNode* KmlTimeSpanTagHandler::parse( GeoParser& parser ) const
         return &parentItem.nodeAs<GeoDataAbstractView>()->timeSpan();
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

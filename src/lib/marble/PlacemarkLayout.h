@@ -63,7 +63,7 @@ class PlacemarkLayout : public QObject
                      QItemSelectionModel *selectionModel,
                      MarbleClock *clock,
                      const StyleBuilder* styleBuilder,
-                     QObject *parent = 0 );
+                     QObject *parent = nullptr );
 
     /**
      * Destroys the place mark painter.

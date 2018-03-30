@@ -43,7 +43,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(const QString& marbleDataPath = QString(),
                         const QVariantMap& cmdLineSettings = QVariantMap(),
-                        QWidget *parent=0);
+                        QWidget *parent=nullptr);
     ~MainWindow() override;
 
 

@@ -37,7 +37,7 @@ GeoNode* KmlScaleTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataModel>()->setScale(scale);
         return &parentItem.nodeAs<GeoDataModel>()->scale();
     } else {
-        return 0;
+        return nullptr;
     }
 }
 

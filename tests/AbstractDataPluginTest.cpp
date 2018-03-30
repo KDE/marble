@@ -53,12 +53,12 @@ void AbstractDataPluginTest::initialize()
     RenderPlugin *const instance = factory->newInstance( &m_model );
     AbstractDataPlugin *const dataInstance = qobject_cast<AbstractDataPlugin *>( instance );
 
-    QVERIFY( dataInstance != 0 );
-    QVERIFY( dataInstance->model() == 0 );
+    QVERIFY( dataInstance != nullptr );
+    QVERIFY( dataInstance->model() == nullptr );
 
     dataInstance->initialize();
 
-    QVERIFY( dataInstance->model() != 0 );
+    QVERIFY( dataInstance->model() != nullptr );
 }
 
 }

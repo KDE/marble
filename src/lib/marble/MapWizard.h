@@ -34,7 +34,7 @@ class MARBLE_EXPORT MapWizard : public QWizard
     Q_OBJECT
 
 public:
-    explicit MapWizard(QWidget *parent = 0);
+    explicit MapWizard(QWidget *parent = nullptr);
     ~MapWizard() override;
 
     QStringList wmsServers() const;
@@ -65,7 +65,7 @@ public Q_SLOTS:
     // Other
     void autoFillDetails();
     void downloadLevelZero();
-    void createLevelZero( QNetworkReply* reply = 0 );
+    void createLevelZero( QNetworkReply* reply = nullptr );
     void showPreview();
 
 private:

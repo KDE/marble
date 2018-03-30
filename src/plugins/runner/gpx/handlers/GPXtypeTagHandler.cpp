@@ -45,7 +45,7 @@ GeoNode* GPXtypeTagHandler::parse(GeoParser& parser) const
         route->setRole(parser.readElementText().trimmed());
     }
     // TODO: tracks, link
-    return 0;
+    return nullptr;
 }
 
 } // namespace gpx

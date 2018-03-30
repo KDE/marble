@@ -41,7 +41,7 @@ class MeasureToolPlugin : public RenderPlugin, public DialogConfigurationInterfa
     MARBLE_PLUGIN( MeasureToolPlugin )
 
  public:
-    explicit MeasureToolPlugin( const MarbleModel *marbleModel = 0 );
+    explicit MeasureToolPlugin( const MarbleModel *marbleModel = nullptr );
 
     enum PaintMode {
         Polygon = 0,
@@ -69,7 +69,7 @@ class MeasureToolPlugin : public RenderPlugin, public DialogConfigurationInterfa
 
     bool isInitialized () const override;
 
-    bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 ) override;
+    bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = nullptr ) override;
 
     QDialog *configDialog() override;
     QHash<QString,QVariant> settings() const override;

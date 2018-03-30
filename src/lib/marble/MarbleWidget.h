@@ -155,7 +155,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * MarbleWidget.  The widget will create its own MarbleModel when
      * created.
      */
-    explicit MarbleWidget( QWidget *parent = 0 );
+    explicit MarbleWidget( QWidget *parent = nullptr );
 
     ~MarbleWidget() override;
 

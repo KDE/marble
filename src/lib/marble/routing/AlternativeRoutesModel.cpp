@@ -291,7 +291,7 @@ const GeoDataLineString* AlternativeRoutesModel::Private::waypoints( const GeoDa
         }
     }
 
-    return 0;
+    return nullptr;
 }
 
 AlternativeRoutesModel::AlternativeRoutesModel( QObject *parent ) :
@@ -334,7 +334,7 @@ const GeoDataDocument *AlternativeRoutesModel::route(int index) const
         return d->m_routes.at(index);
     }
 
-    return 0;
+    return nullptr;
 }
 
 void AlternativeRoutesModel::newRequest( RouteRequest * )
@@ -416,7 +416,7 @@ void AlternativeRoutesModel::setCurrentRoute( int index )
 
 const GeoDataDocument *AlternativeRoutesModel::currentRoute() const
 {
-    const GeoDataDocument *result = 0;
+    const GeoDataDocument *result = nullptr;
     if ( d->m_currentIndex >= 0 && d->m_currentIndex < rowCount() ) {
         result = d->m_routes[d->m_currentIndex];
     }

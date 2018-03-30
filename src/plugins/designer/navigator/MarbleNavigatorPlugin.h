@@ -29,7 +29,7 @@ class MarbleNavigatorPlugin : public QObject, public QDesignerCustomWidgetInterf
     Q_INTERFACES(QDesignerCustomWidgetInterface)
 
 public:
-    explicit MarbleNavigatorPlugin(QObject *parent = 0);
+    explicit MarbleNavigatorPlugin(QObject *parent = nullptr);
 
     bool isContainer() const override;
     bool isInitialized() const override;

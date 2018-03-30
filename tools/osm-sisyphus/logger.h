@@ -26,7 +26,7 @@ public:
     void setStatus(const QString &id, const QString &name, const QString &status, const QString &message);
     
 private:
-    explicit Logger(QObject *parent = 0);
+    explicit Logger(QObject *parent = nullptr);
 
     ~Logger() override;
 

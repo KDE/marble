@@ -26,8 +26,8 @@ class EditPolylineDialog : public QDialog
     Q_OBJECT
 public:
     EditPolylineDialog( GeoDataPlacemark *placemark,
-                        const QHash<qint64, OsmPlacemarkData> *relations = 0,
-                        QWidget *parent = 0 );
+                        const QHash<qint64, OsmPlacemarkData> *relations = nullptr,
+                        QWidget *parent = nullptr );
     ~EditPolylineDialog() override;
 
 public Q_SLOTS:

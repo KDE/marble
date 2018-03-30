@@ -25,7 +25,7 @@ class FileStorageWatcherThread : public QObject
     Q_OBJECT
     
     public:
-	explicit FileStorageWatcherThread( const QString &dataDirectory, QObject * parent = 0 );
+	explicit FileStorageWatcherThread( const QString &dataDirectory, QObject * parent = nullptr );
 	
 	~FileStorageWatcherThread() override;
     
@@ -103,7 +103,7 @@ class FileStorageWatcher : public QThread
 	 * @param dataDirectory The directory where the data is stored
 	 * @param parent The parent of the object.
 	 */
-	explicit FileStorageWatcher( const QString &dataDirectory = QString(), QObject * parent = 0 );
+	explicit FileStorageWatcher( const QString &dataDirectory = QString(), QObject * parent = nullptr );
 	
 	~FileStorageWatcher() override;
 	

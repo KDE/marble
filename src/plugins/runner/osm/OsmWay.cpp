@@ -28,7 +28,7 @@ QSet<StyleBuilder::OsmTag> OsmWay::s_buildingTags;
 GeoDataPlacemark *OsmWay::create(const OsmNodes &nodes, QSet<qint64> &usedNodes) const
 {
     OsmPlacemarkData osmData = m_osmData;
-    GeoDataGeometry *geometry = 0;
+    GeoDataGeometry *geometry = nullptr;
 
     if (isArea()) {
         GeoDataLinearRing linearRing;

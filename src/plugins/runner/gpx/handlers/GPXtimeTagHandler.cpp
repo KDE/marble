@@ -36,7 +36,7 @@ GeoNode* GPXtimeTagHandler::parse(GeoParser& parser) const
         QDateTime dateTime = QDateTime::fromString( parser.readElementText().trimmed(), Qt::ISODate );
         track->appendWhen( dateTime );
     }
-    return 0;
+    return nullptr;
 }
 
 } // namespace gpx

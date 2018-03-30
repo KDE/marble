@@ -56,7 +56,7 @@ GeoNode* KmlPointTagHandler::parse( GeoParser& parser ) const
         KmlObjectTagHandler::parseIdentifiers( parser, point );
         return point;
     }
-    return 0;
+    return nullptr;
 }
 
 }

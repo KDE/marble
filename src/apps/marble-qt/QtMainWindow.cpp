@@ -89,78 +89,78 @@ using namespace Marble;
 
 MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLineSettings, QWidget *parent) :
         QMainWindow(parent),
-        m_controlView( 0 ),
+        m_controlView( nullptr ),
         m_savedSize( QSize(-1, -1) ),
-        m_sunControlDialog( 0 ),
-        m_timeControlDialog( 0 ),
-        m_configDialog( 0 ),
-        m_downloadRegionDialog( 0 ),
-        m_movieCaptureDialog( 0 ),
+        m_sunControlDialog( nullptr ),
+        m_timeControlDialog( nullptr ),
+        m_configDialog( nullptr ),
+        m_downloadRegionDialog( nullptr ),
+        m_movieCaptureDialog( nullptr ),
 
         // File Menu
-        m_fileMenu( 0 ),
-        m_viewMenu( 0 ),
-        m_helpMenu( 0 ),
-        m_settingsMenu( 0 ),
-        m_panelMenu( 0 ),
-        m_viewSizeMenu( 0 ),
-        m_infoBoxesMenu( 0 ),
-        m_onlineServicesMenu( 0 ),
-        m_bookmarkMenu( 0 ),
-        m_openAction( 0 ),
-        m_exportMapAction( 0 ),
-        m_downloadAction( 0 ),
-        m_downloadRegionAction( 0 ),
-        m_printPreviewAction( 0 ),
-        m_printAction( 0 ),
-        m_workOfflineAction( 0 ),
-        m_quitAction( 0 ),
-        m_mapWizardAction( 0 ),
+        m_fileMenu( nullptr ),
+        m_viewMenu( nullptr ),
+        m_helpMenu( nullptr ),
+        m_settingsMenu( nullptr ),
+        m_panelMenu( nullptr ),
+        m_viewSizeMenu( nullptr ),
+        m_infoBoxesMenu( nullptr ),
+        m_onlineServicesMenu( nullptr ),
+        m_bookmarkMenu( nullptr ),
+        m_openAction( nullptr ),
+        m_exportMapAction( nullptr ),
+        m_downloadAction( nullptr ),
+        m_downloadRegionAction( nullptr ),
+        m_printPreviewAction( nullptr ),
+        m_printAction( nullptr ),
+        m_workOfflineAction( nullptr ),
+        m_quitAction( nullptr ),
+        m_mapWizardAction( nullptr ),
 
         // Edit Menu
-        m_copyMapAction( 0 ),
-        m_copyCoordinatesAction( 0 ),
-        m_osmEditAction( 0 ),
-        m_recordMovieAction( 0 ),
-        m_stopRecordingAction( 0 ),
+        m_copyMapAction( nullptr ),
+        m_copyCoordinatesAction( nullptr ),
+        m_osmEditAction( nullptr ),
+        m_recordMovieAction( nullptr ),
+        m_stopRecordingAction( nullptr ),
 
         // View Menu
-        m_showCloudsAction( 0 ),\
-        m_controlSunAction( 0 ),
-        m_controlTimeAction( 0 ),
-        m_reloadAction( 0 ),
+        m_showCloudsAction( nullptr ),\
+        m_controlSunAction( nullptr ),
+        m_controlTimeAction( nullptr ),
+        m_reloadAction( nullptr ),
 
         // Settings Menu
-        m_fullScreenAction( 0 ),
-        m_statusBarAction( 0 ),
-        m_configDialogAction( 0 ),
-        m_viewSizeActsGroup( 0 ),
+        m_fullScreenAction( nullptr ),
+        m_statusBarAction( nullptr ),
+        m_configDialogAction( nullptr ),
+        m_viewSizeActsGroup( nullptr ),
 
         // Help Menu
-        m_whatsThisAction( 0 ),
-        m_aboutMarbleAction( 0 ),
-        m_aboutQtAction( 0 ),
-        m_lockFloatItemsAction( 0 ),
-        m_handbookAction( 0 ),
-        m_forumAction( 0 ),
+        m_whatsThisAction( nullptr ),
+        m_aboutMarbleAction( nullptr ),
+        m_aboutQtAction( nullptr ),
+        m_lockFloatItemsAction( nullptr ),
+        m_handbookAction( nullptr ),
+        m_forumAction( nullptr ),
 
         // Status Bar
-        m_positionLabel( 0 ),
-        m_distanceLabel( 0 ),
-        m_zoomLabel( 0 ),
-        m_clockLabel( 0 ),
-        m_downloadProgressBar( 0 ),
-        m_toggleTileLevelAction( 0 ),
-        m_angleDisplayUnitActionGroup( 0 ),
-        m_dmsDegreeAction( 0 ),
-        m_decimalDegreeAction( 0 ),
-        m_utmAction( 0 ),
+        m_positionLabel( nullptr ),
+        m_distanceLabel( nullptr ),
+        m_zoomLabel( nullptr ),
+        m_clockLabel( nullptr ),
+        m_downloadProgressBar( nullptr ),
+        m_toggleTileLevelAction( nullptr ),
+        m_angleDisplayUnitActionGroup( nullptr ),
+        m_dmsDegreeAction( nullptr ),
+        m_decimalDegreeAction( nullptr ),
+        m_utmAction( nullptr ),
 
         //Bookmark Menu
-        m_addBookmarkAction( 0 ),
-        m_setHomeAction( 0 ),
-        m_toggleBookmarkDisplayAction( 0 ),
-        m_manageBookmarksAction( 0 )
+        m_addBookmarkAction( nullptr ),
+        m_setHomeAction( nullptr ),
+        m_toggleBookmarkDisplayAction( nullptr ),
+        m_manageBookmarksAction( nullptr )
 {
     setUpdatesEnabled( false );
 
@@ -747,7 +747,7 @@ void MainWindow::exportMapScreenShot()
     if ( !fileName.isEmpty() )
     {
         // Take the case into account where no file format is indicated
-        const char * format = 0;
+        const char * format = nullptr;
         if ( !fileName.endsWith(QLatin1String( "png" ), Qt::CaseInsensitive)
            && !fileName.endsWith(QLatin1String( "jpg" ), Qt::CaseInsensitive) )
         {
@@ -1574,7 +1574,7 @@ void MainWindow::updateMapEditButtonVisibility( const QString &mapTheme )
 
 void MainWindow::showMovieCaptureDialog()
 {
-    if (m_movieCaptureDialog == 0) {
+    if (m_movieCaptureDialog == nullptr) {
         m_movieCaptureDialog = new MovieCaptureDialog(m_controlView->marbleWidget(),
                                                       m_controlView->marbleWidget());
         connect( m_movieCaptureDialog, SIGNAL(started()), this, SLOT(changeRecordingState()));

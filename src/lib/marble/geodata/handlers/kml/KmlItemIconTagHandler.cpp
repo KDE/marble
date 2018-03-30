@@ -34,7 +34,7 @@ GeoNode* KmlItemIconTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataListStyle>()->append( itemIcon );
         return itemIcon;
     }
-    return 0;
+    return nullptr;
 }
 
 }

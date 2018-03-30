@@ -51,7 +51,7 @@ GeoNode* DgmlMinimumTagHandler::parse(GeoParser& parser) const
     }
 
 
-    return 0;
+    return nullptr;
 }
 
 }

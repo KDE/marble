@@ -25,7 +25,7 @@ class YoursPlugin : public RoutingRunnerPlugin
     Q_INTERFACES( Marble::RoutingRunnerPlugin )
 
 public:
-    explicit YoursPlugin( QObject *parent = 0 );
+    explicit YoursPlugin( QObject *parent = nullptr );
 
     QString name() const override;
 

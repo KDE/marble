@@ -44,7 +44,7 @@ GeoNode* DgmlVisibleTagHandler::parse(GeoParser& parser) const
         parentItem.nodeAs<GeoSceneHead>()->setVisible(parsedText == dgmlValue_true || parsedText == dgmlValue_on);
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

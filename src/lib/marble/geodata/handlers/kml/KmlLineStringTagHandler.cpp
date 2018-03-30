@@ -56,7 +56,7 @@ GeoNode* KmlLineStringTagHandler::parse( GeoParser& parser ) const
 
     } else {
         delete lineString;
-        return 0;
+        return nullptr;
     }
 }
 

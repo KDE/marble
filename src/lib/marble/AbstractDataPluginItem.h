@@ -34,7 +34,7 @@ class MARBLE_EXPORT AbstractDataPluginItem : public QObject, public BillboardGra
     Q_PROPERTY( bool sticky READ isSticky WRITE setSticky NOTIFY stickyChanged )
 
  public:
-    explicit AbstractDataPluginItem( QObject *parent = 0 );
+    explicit AbstractDataPluginItem( QObject *parent = nullptr );
     ~AbstractDataPluginItem() override;
 
     /**

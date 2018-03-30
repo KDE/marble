@@ -32,7 +32,7 @@ class MARBLE_EXPORT SearchInputWidget : public MarbleLineEdit
     Q_OBJECT
 
 public:
-    explicit SearchInputWidget( QWidget* parent = 0 );
+    explicit SearchInputWidget( QWidget* parent = nullptr );
 
     void setCompletionModel( QAbstractItemModel *completionModel );
 

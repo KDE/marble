@@ -19,7 +19,7 @@ RouteSegment::RouteSegment() :
     m_valid( false ),
     m_distance( 0.0 ),
     m_travelTime( 0 ),
-    m_nextRouteSegment( 0 )
+    m_nextRouteSegment( nullptr )
 {
     // nothing to do
 }

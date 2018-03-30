@@ -95,9 +95,9 @@ void TestTour::simpleParseTest()
     GeoDataTour *tour_2 = dynamic_cast<GeoDataTour*>(folder->child(1));
     GeoDataTour *tour_3 = dynamic_cast<GeoDataTour*>(folder->child(2));
 
-    QVERIFY(tour_1 != 0);
-    QVERIFY(tour_2 != 0);
-    QVERIFY(tour_3 != 0);
+    QVERIFY(tour_1 != nullptr);
+    QVERIFY(tour_2 != nullptr);
+    QVERIFY(tour_3 != nullptr);
 
     QCOMPARE(tour_1->id(), QString(""));
     QCOMPARE(tour_1->name(), QString("My Tour"));
@@ -112,19 +112,19 @@ void TestTour::simpleParseTest()
     QCOMPARE(tour_3->description(), QString("Tour with AnimatedUpdate"));
 
     GeoDataPlaylist *playlist = tour_2->playlist();
-    QVERIFY(playlist != 0);
+    QVERIFY(playlist != nullptr);
 
     GeoDataTourControl *control = dynamic_cast<GeoDataTourControl*>(
                 playlist->primitive(0));
-    QVERIFY(control != 0);
+    QVERIFY(control != nullptr);
     QCOMPARE(control->id(), QString("space"));
     QCOMPARE(control->playMode(), GeoDataTourControl::Pause);
 
     GeoDataPlaylist *playlist2 = tour_3->playlist();
-    QVERIFY(playlist2 != 0);
+    QVERIFY(playlist2 != nullptr);
 
     GeoDataAnimatedUpdate *update = dynamic_cast<GeoDataAnimatedUpdate*>(playlist2->primitive(0));
-    QVERIFY(update != 0);
+    QVERIFY(update != nullptr);
     QCOMPARE(update->duration(),5.0);
     QCOMPARE(update->update()->targetHref(),QString("Whatever.jpg"));
 

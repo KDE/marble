@@ -42,10 +42,10 @@ AprsPlugin::AprsPlugin( const MarbleModel *marbleModel )
     : RenderPlugin( marbleModel ),
       m_mutex( new QMutex ),
       m_initialized( false ),
-      m_tcpipGatherer( 0 ),
-      m_ttyGatherer( 0 ),
-      m_fileGatherer( 0 ),
-      m_action( 0 ),
+      m_tcpipGatherer( nullptr ),
+      m_ttyGatherer( nullptr ),
+      m_fileGatherer( nullptr ),
+      m_action( nullptr ),
       m_useInternet( true ),
       m_useTty( false ),
       m_useFile( false ),
@@ -58,8 +58,8 @@ AprsPlugin::AprsPlugin( const MarbleModel *marbleModel )
       m_dumpFile( false ),
       m_fadeTime( 10 ),
       m_hideTime( 45 ),
-      m_configDialog( 0 ),
-      ui_configWidget( 0 )
+      m_configDialog( nullptr ),
+      ui_configWidget( nullptr )
 {
     setEnabled( true );
     setVisible( false );
@@ -193,9 +193,9 @@ void AprsPlugin::stopGatherers()
         if ( m_fileGatherer->wait(2000) )
             delete m_fileGatherer;
 
-    m_tcpipGatherer = 0;
-    m_ttyGatherer = 0;
-    m_fileGatherer = 0;
+    m_tcpipGatherer = nullptr;
+    m_ttyGatherer = nullptr;
+    m_fileGatherer = nullptr;
 }
 
 void AprsPlugin::restartGatherers()
@@ -217,7 +217,7 @@ void AprsPlugin::restartGatherers()
     if ( m_useTty ) {
         m_ttyGatherer =
             new AprsGatherer( new AprsTTY( m_tncTty ),
-                              &m_objects, m_mutex, NULL);
+                              &m_objects, m_mutex, nullptr);
 
         m_ttyGatherer->setSeenFrom( GeoAprsCoordinates::FromTTY );
         m_ttyGatherer->setDumpOutput( m_dumpTty );
@@ -231,7 +231,7 @@ void AprsPlugin::restartGatherers()
     if ( m_useFile ) {
         m_fileGatherer = 
             new AprsGatherer( new AprsFile( m_aprsFile ),
-                              &m_objects, m_mutex, NULL);
+                              &m_objects, m_mutex, nullptr);
 
         m_fileGatherer->setSeenFrom( GeoAprsCoordinates::FromFile );
         m_fileGatherer->setDumpOutput( m_dumpFile );

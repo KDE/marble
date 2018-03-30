@@ -48,7 +48,7 @@ GeoNode* KmlopenTagHandler::parse( GeoParser& parser ) const
             parentItem.nodeAs<GeoDataFeature>()->setOpen( false );*/
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

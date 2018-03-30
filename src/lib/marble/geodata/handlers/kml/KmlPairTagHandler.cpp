@@ -44,7 +44,7 @@ GeoNode* KmlPairTagHandler::parse( GeoParser& parser ) const
     if( parentItem.represents( kmlTag_StyleMap ) ) {
         return parentItem.nodeAs<GeoDataStyleMap>();
     }
-    return 0;
+    return nullptr;
 }
 
 }

@@ -40,7 +40,7 @@ GeoNode* KmlExtendedDataTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataTrack>()->setExtendedData( extendedData );
         return static_cast<GeoDataExtendedData*>( &parentItem.nodeAs<GeoDataTrack>()->extendedData() );
     } else {
-        return 0;
+        return nullptr;
     }
 
 }

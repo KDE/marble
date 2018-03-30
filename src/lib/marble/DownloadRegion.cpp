@@ -38,7 +38,7 @@ public:
     int rad2PixelY( qreal const lat, const TextureLayer *textureLayer ) const;
 };
 
-DownloadRegionPrivate::DownloadRegionPrivate() : m_marbleModel( 0 ),
+DownloadRegionPrivate::DownloadRegionPrivate() : m_marbleModel( nullptr ),
     m_tileLevelRange( 0, 0 ), m_visibleTileLevel( 0 )
 {
     // nothing to do

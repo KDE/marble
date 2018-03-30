@@ -48,7 +48,7 @@ GeoNode* DgmlMapTagHandler::parse(GeoParser& parser) const
     QColor highlightBrushColor = QColor ( parser.attribute(dgmlAttr_highlightBrush).trimmed() );
     QColor highlightPenColor = QColor ( parser.attribute(dgmlAttr_highlightPen).trimmed() );
 
-    GeoSceneMap* map = 0;
+    GeoSceneMap* map = nullptr;
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();

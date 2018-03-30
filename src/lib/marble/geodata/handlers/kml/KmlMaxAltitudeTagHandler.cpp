@@ -34,7 +34,7 @@ GeoNode* KmlmaxAltitudeTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataLatLonAltBox>()->setMaxAltitude( maxAltitude );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

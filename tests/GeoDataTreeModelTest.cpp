@@ -41,12 +41,12 @@ void GeoDataTreeModelTest::defaultConstructor()
     QCOMPARE( model.headerData( 3, Qt::Horizontal, Qt::DisplayRole ), QVariant( tr( "PopIndex", "Popularity index" ) ) );
 
     QCOMPARE( model.index( 0, 0 ), QModelIndex() );
-    QCOMPARE( model.index( 0 ), QModelIndex() );
+    QCOMPARE( model.index( nullptr ), QModelIndex() );
     QCOMPARE( model.parent( QModelIndex() ), QModelIndex() );
     QCOMPARE( model.data( QModelIndex(), Qt::DisplayRole ), QVariant() );
     QCOMPARE( model.flags( QModelIndex() ), Qt::NoItemFlags );
 
-    QVERIFY( const_cast<GeoDataTreeModel *>( &model )->rootDocument() != 0 );
+    QVERIFY( const_cast<GeoDataTreeModel *>( &model )->rootDocument() != nullptr );
 }
 
 void GeoDataTreeModelTest::setRootDocument()

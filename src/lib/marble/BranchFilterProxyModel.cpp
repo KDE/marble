@@ -18,7 +18,7 @@ namespace Marble
 {
 
 BranchFilterProxyModel::BranchFilterProxyModel( QObject *parent ) :
-    QSortFilterProxyModel( parent ), m_treeModel( 0 )
+    QSortFilterProxyModel( parent ), m_treeModel( nullptr )
 {
     // nothing to do
 }

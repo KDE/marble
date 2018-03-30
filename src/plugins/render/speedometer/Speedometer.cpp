@@ -25,16 +25,16 @@ namespace Marble
 {
 
 Speedometer::Speedometer()
-    : AbstractFloatItem( 0 ),
-      m_locale( 0 ),
-      m_widgetItem( 0 )
+    : AbstractFloatItem( nullptr ),
+      m_locale( nullptr ),
+      m_widgetItem( nullptr )
 {
 }
 
 Speedometer::Speedometer( const MarbleModel *marbleModel )
     : AbstractFloatItem( marbleModel, QPointF( 10.5, 110 ), QSizeF( 135.0, 80.0 ) ),
-      m_locale( 0 ),
-      m_widgetItem( 0 )
+      m_locale( nullptr ),
+      m_widgetItem( nullptr )
 {
     setVisible( false );
 

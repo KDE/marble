@@ -86,20 +86,20 @@ class MarbleModelPrivate
           m_pluginManager(),
           m_homePoint( -9.4, 54.8, 0.0, GeoDataCoordinates::Degree ),  // Some point that tackat defined. :-)
           m_homeZoom( 1050 ),
-          m_mapTheme( 0 ),
+          m_mapTheme( nullptr ),
           m_storagePolicy( MarbleDirs::localPath() ),
           m_downloadManager( &m_storagePolicy ),
           m_storageWatcher( MarbleDirs::localPath() ),
           m_treeModel(),
           m_descendantProxy(),
           m_placemarkProxyModel(),
-          m_placemarkSelectionModel( 0 ),
+          m_placemarkSelectionModel( nullptr ),
           m_fileManager( &m_treeModel, &m_pluginManager ),
           m_positionTracking( &m_treeModel ),
-          m_trackedPlacemark( 0 ),
+          m_trackedPlacemark( nullptr ),
           m_bookmarkManager( &m_treeModel ),
-          m_routingManager( 0 ),
-          m_legend( 0 ),
+          m_routingManager( nullptr ),
+          m_legend( nullptr ),
           m_workOffline( false ),
           m_elevationModel( &m_downloadManager, &m_pluginManager )
     {
@@ -592,7 +592,7 @@ void MarbleModel::clearPersistentTileCache()
                                      (role == QLatin1String("dem")) ? "true" : "false" );
             tileCreator->setTileFormat( texture->fileFormat().toLower() );
 
-            QPointer<TileCreatorDialog> tileCreatorDlg = new TileCreatorDialog( tileCreator, 0 );
+            QPointer<TileCreatorDialog> tileCreatorDlg = new TileCreatorDialog( tileCreator, nullptr );
             tileCreatorDlg->setSummary( d->m_mapTheme->head()->name(),
                                         d->m_mapTheme->head()->description() );
             tileCreatorDlg->exec();

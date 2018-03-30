@@ -64,7 +64,7 @@ private:
 };
 
 EditBookmarkDialogPrivate::EditBookmarkDialogPrivate( EditBookmarkDialog* q_, BookmarkManager *bookmarkManager ) :
-        m_widget( 0 ), m_manager( 0 ), m_bookmarkManager( bookmarkManager ), m_range( 0 ), q( q_ )
+        m_widget( nullptr ), m_manager( nullptr ), m_bookmarkManager( bookmarkManager ), m_range( 0 ), q( q_ )
 {
     // nothing to do
 }
@@ -270,7 +270,7 @@ GeoDataPlacemark EditBookmarkDialog::bookmark() const
 
     bookmark.extendedData().addValue(GeoDataData(QStringLiteral("isBookmark"), true));
 
-    if(d->m_widget != 0) {
+    if(d->m_widget != nullptr) {
         const QString celestialName = d->m_widget->model()->planetId();
         if (celestialName != QLatin1String("earth")) {
             bookmark.extendedData().addValue(GeoDataData(QStringLiteral("celestialBody"), celestialName));

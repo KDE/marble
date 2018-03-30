@@ -112,7 +112,7 @@ void FileManager::removeFile( const QString& key )
 {
     for ( FileLoader *loader: d->m_loaderList ) {
         if ( loader->path() == key ) {
-            disconnect( loader, 0, this, 0 );
+            disconnect( loader, nullptr, this, nullptr );
             loader->wait();
             d->m_loaderList.removeAll( loader );
             delete loader->document();
@@ -161,7 +161,7 @@ GeoDataDocument * FileManager::at( const QString &key )
     if ( d->m_fileItemHash.contains( key ) ) {
         return d->m_fileItemHash.value( key );
     }
-    return 0;
+    return nullptr;
 }
 
 int FileManager::pendingFiles() const

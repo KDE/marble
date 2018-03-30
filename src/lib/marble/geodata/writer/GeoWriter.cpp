@@ -39,7 +39,7 @@ bool GeoWriter::write(QIODevice* device, const GeoNode *feature)
     const GeoTagWriter* writer = GeoTagWriter::recognizes(name);
     if( writer ) {
         //FIXME is this too much of a hack?
-        writer->write(/* node = */ 0, *this); // node is never used in write()
+        writer->write(/* node = */ nullptr, *this); // node is never used in write()
     } else {
         mDebug() << "There is no GeoWriter registered for: " << name;
         return false;

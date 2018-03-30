@@ -20,9 +20,9 @@ namespace Marble {
 ElevationProfileContextMenu::ElevationProfileContextMenu(ElevationProfileFloatItem *floatItem):
     QObject(floatItem),
     m_floatItem(floatItem),
-    m_sourceGrp(0),
-    m_contextMenu(0),
-    m_trackMapper(0)
+    m_sourceGrp(nullptr),
+    m_contextMenu(nullptr),
+    m_trackMapper(nullptr)
 {
 }
 

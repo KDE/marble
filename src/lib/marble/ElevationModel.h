@@ -35,7 +35,7 @@ class MARBLE_EXPORT ElevationModel : public QObject
 {
     Q_OBJECT
 public:
-    explicit ElevationModel( HttpDownloadManager *downloadManager, PluginManager* pluginManager, QObject *parent = 0 );
+    explicit ElevationModel( HttpDownloadManager *downloadManager, PluginManager* pluginManager, QObject *parent = nullptr );
     ~ElevationModel() override;
 
     qreal height( qreal lon, qreal lat ) const;

@@ -42,7 +42,7 @@ class PopupItem : public QObject, public BillboardGraphicsItem
 {
     Q_OBJECT
 public:
-    explicit PopupItem( QObject* parent = 0 );
+    explicit PopupItem( QObject* parent = nullptr );
     ~PopupItem() override;
 
     /**

@@ -46,7 +46,7 @@ GeoNode* KmlshapeTagHandler::parse( GeoParser& parser ) const
 
         parentItem.nodeAs<GeoDataPhotoOverlay>()->setShape( shape );
     }
-    return 0;
+    return nullptr;
 }
 
 }

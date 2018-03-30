@@ -36,7 +36,7 @@ class EclipsesModel : public QAbstractItemModel
     Q_OBJECT
 
 public:
-    explicit EclipsesModel( const MarbleModel *model, QObject *parent = 0 );
+    explicit EclipsesModel( const MarbleModel *model, QObject *parent = nullptr );
 
     ~EclipsesModel() override;
 

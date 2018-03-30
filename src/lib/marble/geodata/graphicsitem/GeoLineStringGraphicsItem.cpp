@@ -29,7 +29,7 @@
 namespace Marble
 {
 
-const GeoDataStyle *GeoLineStringGraphicsItem::s_previousStyle = 0;
+const GeoDataStyle *GeoLineStringGraphicsItem::s_previousStyle = nullptr;
 bool GeoLineStringGraphicsItem::s_paintInline = true;
 bool GeoLineStringGraphicsItem::s_paintOutline = true;
 

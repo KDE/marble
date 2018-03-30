@@ -94,7 +94,7 @@ EclipsesItem* EclipsesModel::eclipseWithIndex( int index )
         }
     }
 
-    return NULL;
+    return nullptr;
 }
 
 QList<EclipsesItem*> EclipsesModel::items() const

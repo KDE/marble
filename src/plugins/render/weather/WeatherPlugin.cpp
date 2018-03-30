@@ -33,9 +33,9 @@ using namespace Marble;
 const quint32 numberOfStationsPerFetch = 20;
 
 WeatherPlugin::WeatherPlugin()
-    : AbstractDataPlugin( 0 ),
-      m_configDialog( 0 ),
-      ui_configWidget( 0 )
+    : AbstractDataPlugin( nullptr ),
+      m_configDialog( nullptr ),
+      ui_configWidget( nullptr )
 {
 }
 
@@ -43,8 +43,8 @@ WeatherPlugin::WeatherPlugin( const MarbleModel *marbleModel )
     : AbstractDataPlugin( marbleModel ),
       m_updateInterval( 0 ),
       m_icon(MarbleDirs::path(QStringLiteral("weather/weather-clear.png"))),
-      m_configDialog( 0 ),
-      ui_configWidget( 0 ),
+      m_configDialog( nullptr ),
+      ui_configWidget( nullptr ),
       m_settings()
 {
     // Plugin is enabled by default
@@ -305,7 +305,7 @@ void WeatherPlugin::updateSettings()
 void WeatherPlugin::updateItemSettings()
 {
     AbstractDataPluginModel *abstractModel = model();
-    if( abstractModel != 0 ) {
+    if( abstractModel != nullptr ) {
         abstractModel->setItemSettings( m_settings );
     }
 }

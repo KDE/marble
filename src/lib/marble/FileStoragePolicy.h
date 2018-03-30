@@ -26,7 +26,7 @@ class FileStoragePolicy : public StoragePolicy
          *
          * @param dataDirectory The directory where the data should go to.
          */
-        explicit FileStoragePolicy( const QString &dataDirectory = QString(), QObject *parent = 0 );
+        explicit FileStoragePolicy( const QString &dataDirectory = QString(), QObject *parent = nullptr );
 
         /**
          * Destroys the cache storage policy.

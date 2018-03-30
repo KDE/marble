@@ -44,7 +44,7 @@ GeoNode* KmlPhotoOverlayTagHandler::parse( GeoParser& parser ) const
         return overlay;
     } else {
         delete overlay;
-        return 0;
+        return nullptr;
     }
 }
 

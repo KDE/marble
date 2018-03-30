@@ -51,7 +51,7 @@ GeoNode* KmlIconTagHandler::parse( GeoParser& parser ) const
     }  else if ( parentItem.represents( kmlTag_ScreenOverlay ) ) {
         return parentItem.nodeAs<GeoDataScreenOverlay>();
     }
-    return 0;
+    return nullptr;
 }
 
 }

@@ -22,7 +22,7 @@ class Pn2Plugin : public ParseRunnerPlugin
     Q_INTERFACES( Marble::ParseRunnerPlugin )
 
 public:
-    explicit Pn2Plugin( QObject *parent = 0 );
+    explicit Pn2Plugin( QObject *parent = nullptr );
 
     QString name() const override;
 

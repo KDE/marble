@@ -35,7 +35,7 @@ GeoNode* KmlCreateTagHandler::parse( GeoParser& parser ) const
         return create;
     } else {
         delete create;
-        return 0;
+        return nullptr;
     }
 }
 

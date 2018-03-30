@@ -24,11 +24,11 @@ InterpolationMethod * ReadOnlyMapDefinition::createInterpolationMethod() const
     case NearestNeighborInterpolationMethod:
         return new NearestNeighborInterpolation;
     case AverageInterpolationMethod:
-        return NULL;
+        return nullptr;
     case BilinearInterpolationMethod:
         return new BilinearInterpolation;
     default:
-        return NULL;
+        return nullptr;
     }
 }
 
@@ -53,6 +53,6 @@ ReadOnlyMapImage * ReadOnlyMapDefinition::createReadOnlyMap() const
     }
     else {
         delete interpolationMethod;
-        return NULL;
+        return nullptr;
     }
 }

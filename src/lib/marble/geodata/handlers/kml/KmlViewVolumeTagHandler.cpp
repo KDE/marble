@@ -30,7 +30,7 @@ GeoNode* KmlViewVolumeTagHandler::parse( GeoParser& parser ) const
     if ( parentItem.represents( kmlTag_PhotoOverlay ) ) {
         return &parentItem.nodeAs<GeoDataPhotoOverlay>()->viewVolume();
     }
-    return 0;
+    return nullptr;
 }
 
 }

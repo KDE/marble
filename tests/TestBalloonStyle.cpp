@@ -65,7 +65,7 @@ void TestBalloonStyle::simpleParseTest()
     GeoDataFolder *folder = dataDocument->folderList().at( 0 );
     QCOMPARE( folder->size(), 1 );
     GeoDataPlacemark *placemark1 = dynamic_cast<GeoDataPlacemark*>( folder->child( 0 ) );
-    QVERIFY( placemark1 != 0 );
+    QVERIFY( placemark1 != nullptr );
 
     QCOMPARE( placemark1->name(), QString( "The first placemark" ) );
     QCOMPARE( placemark1->style()->balloonStyle().backgroundColor().red(), 51 );

@@ -43,11 +43,11 @@ class ClickOnThatPrivate
 public:
     ClickOnThatPrivate( MarbleWidget *marbleWidget )
     : m_marbleWidget( marbleWidget ),
-      m_parent( 0 ),
-      m_correctAnswerPlacemark( 0 ),
-      m_selectPinDocument( 0 ),
-      m_countryNames( 0 ),
-      m_countryBoundaries( 0 )
+      m_parent( nullptr ),
+      m_correctAnswerPlacemark( nullptr ),
+      m_selectPinDocument( nullptr ),
+      m_countryNames( nullptr ),
+      m_countryBoundaries( nullptr )
       {
         m_continentsAndOceans
             << QStringLiteral("Asia") << QStringLiteral("Africa")
@@ -227,8 +227,8 @@ void ClickOnThat::postQuestion( QObject *gameObject )
     uint randomSeed = uint(QTime::currentTime().msec());
     qsrand( randomSeed );
 
-    GeoDataPlacemark *placemark = 0;
-    GeoDataPoint *point = 0;
+    GeoDataPlacemark *placemark = nullptr;
+    GeoDataPoint *point = nullptr;
     bool found = false;
     while( !found ) {
         placemark = countryPlacemarks[qrand()%countryPlacemarks.size()];

@@ -23,7 +23,7 @@ class GosmoreRunnerPrivate;
 class GosmoreRunner : public ReverseGeocodingRunner
 {
 public:
-    explicit GosmoreRunner(QObject *parent = 0);
+    explicit GosmoreRunner(QObject *parent = nullptr);
 
     ~GosmoreRunner() override;
 

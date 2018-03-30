@@ -55,7 +55,7 @@ class PlacemarkLayer : public QObject, public LayerInterface
                     QItemSelectionModel *selectionModel,
                     MarbleClock *clock,
                     const StyleBuilder *styleBuilder,
-                    QObject *parent = 0 );
+                    QObject *parent = nullptr );
     ~PlacemarkLayer() override;
 
     /**
@@ -73,7 +73,7 @@ class PlacemarkLayer : public QObject, public LayerInterface
      */
     bool render( GeoPainter *painter, ViewportParams *viewport,
                  const QString &renderPos = QLatin1String("NONE"),
-                 GeoSceneLayer *layer = 0 ) override;
+                 GeoSceneLayer *layer = nullptr ) override;
 
     RenderState renderState() const override;
 

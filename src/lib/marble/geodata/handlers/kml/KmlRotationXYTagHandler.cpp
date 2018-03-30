@@ -37,7 +37,7 @@ GeoNode* KmlrotationXYTagHandler::parse( GeoParser& parser ) const
 
         parentItem.nodeAs<GeoDataScreenOverlay>()->setRotationXY( vec2 );
     }
-    return 0;
+    return nullptr;
 }
 
 }

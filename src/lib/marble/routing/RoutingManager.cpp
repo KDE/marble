@@ -333,7 +333,7 @@ void RoutingManagerPrivate::addRoute( GeoDataDocument* route )
     }
 
     if ( !m_haveRoute ) {
-        m_haveRoute = route != 0;
+        m_haveRoute = route != nullptr;
     }
 
     emit q->routeRetrieved( route );
@@ -545,7 +545,7 @@ void RoutingManager::setGuidanceModeEnabled( bool enabled )
         d->m_shutdownPositionTracking = true;
     } else if ( positionProvider && !enabled && d->m_shutdownPositionTracking ) {
         d->m_shutdownPositionTracking = false;
-        d->m_positionTracking->setPositionProviderPlugin( 0 );
+        d->m_positionTracking->setPositionProviderPlugin( nullptr );
     }
 
     emit guidanceModeEnabledChanged( d->m_guidanceModeEnabled );

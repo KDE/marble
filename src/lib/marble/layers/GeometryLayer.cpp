@@ -249,8 +249,8 @@ bool GeometryLayer::render(GeoPainter *painter, ViewportParams *viewport,
 
     for (const QString &layer: d->m_styleBuilder->renderOrder()) {
         auto & layerItems = d->m_cachedPaintFragments[layer];
-        AbstractGeoPolygonGraphicsItem::s_previousStyle = 0;
-        GeoLineStringGraphicsItem::s_previousStyle = 0;
+        AbstractGeoPolygonGraphicsItem::s_previousStyle = nullptr;
+        GeoLineStringGraphicsItem::s_previousStyle = nullptr;
         for (auto item: layerItems) {
             if (d->m_levelTagDebugModeEnabled) {
                 if (const auto placemark = geodata_cast<GeoDataPlacemark>(item->feature())) {
@@ -418,7 +418,7 @@ void GeometryLayerPrivate::createGraphicsItemFromGeometry(const GeoDataGeometry*
         return; // Reconsider this when visibility can be changed dynamically
     }
 
-    GeoGraphicsItem *item = 0;
+    GeoGraphicsItem *item = nullptr;
     if (const auto line = geodata_cast<GeoDataLineString>(object)) {
         auto lineStringItem = new GeoLineStringGraphicsItem(placemark, line);
         item = lineStringItem;
@@ -461,7 +461,7 @@ void GeometryLayerPrivate::createGraphicsItemFromOverlay(const GeoDataOverlay *o
         return; // Reconsider this when visibility can be changed dynamically
     }
 
-    GeoGraphicsItem* item = 0;
+    GeoGraphicsItem* item = nullptr;
     if (const auto photoOverlay = geodata_cast<GeoDataPhotoOverlay>(overlay)) {
         GeoPhotoGraphicsItem *photoItem = new GeoPhotoGraphicsItem(overlay);
         photoItem->setPoint(photoOverlay->point());
@@ -536,7 +536,7 @@ void GeometryLayer::removePlacemarks(const QModelIndex& parent, int first, int l
         Q_ASSERT(index.isValid());
         const GeoDataObject *object = qvariant_cast<GeoDataObject*>(index.data(MarblePlacemarkModel::ObjectPointerRole));
         const GeoDataFeature *feature = dynamic_cast<const GeoDataFeature*>(object);
-        if (feature != 0) {
+        if (feature != nullptr) {
             d->removeGraphicsItems(feature);
             isRepaintNeeded = true;
         }

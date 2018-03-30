@@ -53,7 +53,7 @@ class Window : public QWidget
 {
     Q_OBJECT
 public:
-    explicit Window(QWidget *parent = 0);
+    explicit Window(QWidget *parent = nullptr);
     void startCars();
 
 public Q_SLOTS:

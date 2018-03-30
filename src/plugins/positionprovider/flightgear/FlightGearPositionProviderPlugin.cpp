@@ -22,7 +22,7 @@ using namespace Marble;
 using namespace std;
 
 FlightGearPositionProviderPlugin::FlightGearPositionProviderPlugin()
-  : m_socket(0), m_speed( 0.0 ), m_track( 0.0 )
+  : m_socket(nullptr), m_speed( 0.0 ), m_track( 0.0 )
 {
 }
 
@@ -152,7 +152,7 @@ void FlightGearPositionProviderPlugin::parseNmeaSentence( const QString &sentenc
     } else if ( sentence.startsWith( QLatin1String( "$GPGGA" ) ) ) {
         QStringList const values = sentence.split(QLatin1Char(','));
         if ( values.size() > 10 ) {
-            if ( values[6] == 0 ) {
+            if ( values[6] == nullptr ) {
                 m_status = PositionProviderStatusAcquiring; // no fix
             } else {
                 double const lat = parsePosition(values[2], values[3] == QLatin1String("S"));

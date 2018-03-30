@@ -25,7 +25,7 @@ class NominatimPlugin : public ReverseGeocodingRunnerPlugin
     Q_INTERFACES( Marble::ReverseGeocodingRunnerPlugin )
 
 public:
-    explicit NominatimPlugin( QObject *parent = 0 );
+    explicit NominatimPlugin( QObject *parent = nullptr );
 
     QString name() const override;
 

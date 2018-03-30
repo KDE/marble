@@ -57,7 +57,7 @@ GeoNode* DgmlGeodataTagHandler::parse(GeoParser& parser) const
     if ( !expireStr.isEmpty() )
         expire = expireStr.toInt();
 
-    GeoSceneGeodata *dataSource = 0;
+    GeoSceneGeodata *dataSource = nullptr;
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();

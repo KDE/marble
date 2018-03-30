@@ -53,7 +53,7 @@ class ElevationProfileFloatItem : public AbstractFloatItem, public DialogConfigu
     MARBLE_PLUGIN( ElevationProfileFloatItem )
 
  public:
-    explicit ElevationProfileFloatItem( const MarbleModel *marbleModel = 0 );
+    explicit ElevationProfileFloatItem( const MarbleModel *marbleModel = nullptr );
     ~ElevationProfileFloatItem() override;
 
     QStringList backendTypes() const override;

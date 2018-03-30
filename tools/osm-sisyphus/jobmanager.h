@@ -27,7 +27,7 @@ class JobManager : public QObject
 {
     Q_OBJECT
 public:
-    explicit JobManager(QObject *parent = 0);
+    explicit JobManager(QObject *parent = nullptr);
     
     void run();
 

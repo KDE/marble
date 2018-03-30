@@ -105,7 +105,7 @@ void SearchRunnerManager::Private::addSearchResult( const QVector<GeoDataPlacema
     m_modelMutex.lock();
     int start = m_placemarkContainer.size();
     int count = 0;
-    bool distanceCompare = m_marbleModel->planet() != 0;
+    bool distanceCompare = m_marbleModel->planet() != nullptr;
     for( int i=0; i<result.size(); ++i ) {
         bool same = false;
         for ( int j=0; j<m_placemarkContainer.size(); ++j ) {
@@ -207,7 +207,7 @@ void SearchRunnerManager::findPlacemarks( const QString &searchTerm, const GeoDa
     }
 
     if ( plugins.isEmpty() ) {
-        d->cleanupSearchTask( 0 );
+        d->cleanupSearchTask( nullptr );
     }
 }
 

@@ -38,7 +38,7 @@ GeoNode* KmltargetHrefTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataUpdate>()->setTargetHref( content );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

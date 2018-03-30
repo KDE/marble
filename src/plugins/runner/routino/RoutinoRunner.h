@@ -23,7 +23,7 @@ class RoutinoRunner : public RoutingRunner
 {
     Q_OBJECT
 public:
-    explicit RoutinoRunner(QObject *parent = 0);
+    explicit RoutinoRunner(QObject *parent = nullptr);
 
     ~RoutinoRunner() override;
 

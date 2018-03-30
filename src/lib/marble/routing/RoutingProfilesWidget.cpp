@@ -51,7 +51,7 @@ RoutingProfilesWidget::Private::Private( MarbleModel *marbleModel, RoutingProfil
 }
 
 RoutingProfilesWidget::RoutingProfilesWidget( MarbleModel *marbleModel )
-    : QWidget( 0 ),
+    : QWidget( nullptr ),
       d( new Private( marbleModel, this ) )
 {
     d->m_ui.setupUi( this );

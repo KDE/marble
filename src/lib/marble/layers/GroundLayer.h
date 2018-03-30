@@ -30,7 +30,7 @@ class GroundLayer : public LayerInterface
 
     bool render( GeoPainter *painter, ViewportParams *viewport,
                          const QString& renderPos = QLatin1String("NONE"),
-                         GeoSceneLayer * layer = 0 ) override;
+                         GeoSceneLayer * layer = nullptr ) override;
 
     qreal zValue() const override;
 

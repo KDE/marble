@@ -21,7 +21,7 @@ class GeoDataTreeModel;
 class BranchFilterProxyModel : public QSortFilterProxyModel
 {
 public:
-    explicit BranchFilterProxyModel( QObject *parent = 0 );
+    explicit BranchFilterProxyModel( QObject *parent = nullptr );
 
     void setBranchIndex( GeoDataTreeModel *sourceModel, const QModelIndex &index );
 

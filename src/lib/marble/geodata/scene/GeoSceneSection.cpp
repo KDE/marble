@@ -69,7 +69,7 @@ void GeoSceneSection::addItem( GeoSceneItem* item )
 
 GeoSceneItem* GeoSceneSection::item( const QString& name )
 {
-    GeoSceneItem* item = 0;
+    GeoSceneItem* item = nullptr;
 
     QVector<GeoSceneItem*>::const_iterator it = m_items.constBegin();
     QVector<GeoSceneItem*>::const_iterator end = m_items.constEnd();

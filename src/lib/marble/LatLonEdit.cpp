@@ -549,7 +549,7 @@ void LatLonEdit::setDimension( Dimension dimension )
 void LatLonEdit::setNotation(GeoDataCoordinates::Notation notation)
 {
     delete d->m_inputHandler;
-    d->m_inputHandler = 0;
+    d->m_inputHandler = nullptr;
 
     switch (notation) {
     case GeoDataCoordinates::Decimal:

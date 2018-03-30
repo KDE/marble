@@ -23,7 +23,7 @@ class NullFloatItem : public AbstractFloatItem
 {
  public:
     NullFloatItem() :
-        AbstractFloatItem( 0 )
+        AbstractFloatItem( nullptr )
     {}
 
     NullFloatItem( const MarbleModel *model ) :
@@ -44,7 +44,7 @@ class NullFloatItem : public AbstractFloatItem
     bool isInitialized() const override { return true; }
     QStringList backendTypes() const override { return QStringList(QStringLiteral("null")); }
     QString guiString() const override { return QStringLiteral("Null"); }
-    RenderPlugin *newInstance( const MarbleModel * ) const override { return 0; }
+    RenderPlugin *newInstance( const MarbleModel * ) const override { return nullptr; }
 };
 
 class AbstractFloatItemTest : public QObject
@@ -136,7 +136,7 @@ void AbstractFloatItemTest::setSettings()
 
     AbstractFloatItem *const instance = qobject_cast<AbstractFloatItem *>( factory->newInstance( &m_model ) );
 
-    QVERIFY( instance != 0 );
+    QVERIFY( instance != nullptr );
 
     const QPointF position( 1.318, 4.005 );
 
@@ -172,7 +172,7 @@ void AbstractFloatItemTest::setPosition()
 
     AbstractFloatItem *const instance = qobject_cast<AbstractFloatItem *>( factory->newInstance( &m_model ) );
 
-    QVERIFY( instance != 0 );
+    QVERIFY( instance != nullptr );
 
     const QPointF position( 1.318, 4.005 );
 

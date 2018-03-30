@@ -35,7 +35,7 @@ GeoNode* KmlexpiresTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataNetworkLinkControl>()->setExpires( time );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

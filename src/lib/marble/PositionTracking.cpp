@@ -45,8 +45,8 @@ class PositionTrackingPrivate
         m_currentTrackPlacemark( new GeoDataPlacemark ),
         m_trackSegments( new GeoDataMultiTrack ),
         m_document(),
-        m_currentTrack( 0 ),
-        m_positionProvider( 0 ),
+        m_currentTrack( nullptr ),
+        m_positionProvider( nullptr ),
         m_length( 0.0 )
     {
     }
@@ -76,7 +76,7 @@ class PositionTrackingPrivate
 
 void PositionTrackingPrivate::updatePosition()
 {
-    Q_ASSERT( m_positionProvider != 0 );
+    Q_ASSERT( m_positionProvider != nullptr );
 
     const GeoDataAccuracy accuracy = m_positionProvider->accuracy();
     const GeoDataCoordinates position = m_positionProvider->position();
@@ -103,7 +103,7 @@ void PositionTrackingPrivate::updatePosition()
 
 void PositionTrackingPrivate::updateStatus()
 {
-    Q_ASSERT( m_positionProvider != 0 );
+    Q_ASSERT( m_positionProvider != nullptr );
 
     const PositionProviderStatus status = m_positionProvider->status();
 

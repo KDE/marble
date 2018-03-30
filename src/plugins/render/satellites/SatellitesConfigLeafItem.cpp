@@ -89,7 +89,7 @@ bool SatellitesConfigLeafItem::isLeaf() const
 SatellitesConfigAbstractItem *SatellitesConfigLeafItem::childAt( int row ) const
 {
     Q_UNUSED( row )
-    return 0;
+    return nullptr;
 }
 
 int SatellitesConfigLeafItem::indexOf( const SatellitesConfigAbstractItem *child ) const

@@ -33,7 +33,7 @@ GeoNode* KmlLatLonQuadTagHandler::parse( GeoParser& parser ) const
         return quad;
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

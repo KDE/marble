@@ -25,7 +25,7 @@ class MARBLE_EXPORT SearchWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit SearchWidget( QWidget * parent = 0, Qt::WindowFlags flags = 0 );
+    explicit SearchWidget( QWidget * parent = nullptr, Qt::WindowFlags flags = nullptr );
 
     void setMarbleWidget( MarbleWidget* widget );
 

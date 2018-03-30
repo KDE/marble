@@ -33,7 +33,7 @@ void ScreenGraphicsItemTest::defaultConstructorValues()
 {
     const ScreenGraphicsItem item;
 
-    QCOMPARE( item.layout(), static_cast<AbstractMarbleGraphicsLayout *>( 0 ) );
+    QCOMPARE( item.layout(), static_cast<AbstractMarbleGraphicsLayout *>( nullptr ) );
     QCOMPARE( item.cacheMode(), ScreenGraphicsItem::NoCache );
     QCOMPARE( item.visible(), true );
     QCOMPARE( item.size(), QSizeF() );
@@ -57,7 +57,7 @@ void ScreenGraphicsItemTest::constructorValuesScreenParent()
 
     const ScreenGraphicsItem item( &screenParent );
 
-    QCOMPARE( item.layout(), static_cast<AbstractMarbleGraphicsLayout *>( 0 ) );
+    QCOMPARE( item.layout(), static_cast<AbstractMarbleGraphicsLayout *>( nullptr ) );
     QCOMPARE( item.cacheMode(), ScreenGraphicsItem::NoCache );
     QCOMPARE( item.visible(), true );
     QCOMPARE( item.size(), QSizeF() );
@@ -82,7 +82,7 @@ void ScreenGraphicsItemTest::setLayout()
 
     const ScreenGraphicsItem item( &screenParent );
 
-    QCOMPARE( item.layout(), static_cast<AbstractMarbleGraphicsLayout *>( 0 ) );
+    QCOMPARE( item.layout(), static_cast<AbstractMarbleGraphicsLayout *>( nullptr ) );
     QCOMPARE( item.cacheMode(), ScreenGraphicsItem::NoCache );
     QCOMPARE( item.visible(), true );
     QCOMPARE( item.size(), QSizeF() );

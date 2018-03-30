@@ -41,7 +41,7 @@ GeoNode* DgmlDescriptionTagHandler::parse(GeoParser& parser) const
     if (parentItem.represents(dgmlTag_Head))
         parentItem.nodeAs<GeoSceneHead>()->setDescription( parser.readElementText().trimmed() );
 
-    return 0;
+    return nullptr;
 }
 
 }

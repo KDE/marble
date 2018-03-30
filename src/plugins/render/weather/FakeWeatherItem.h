@@ -21,7 +21,7 @@ namespace Marble
 class FakeWeatherItem : public WeatherItem
 {
  public:
-    explicit FakeWeatherItem( QObject *parent = 0 );
+    explicit FakeWeatherItem( QObject *parent = nullptr );
     ~FakeWeatherItem() override;
     
     QString service() const override;

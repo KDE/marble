@@ -37,7 +37,7 @@ class TargetModel : public QAbstractListModel
 {
     Q_OBJECT
 public:
-    TargetModel( MarbleModel* marbleModel, QObject * parent = 0 );
+    TargetModel( MarbleModel* marbleModel, QObject * parent = nullptr );
 
     int rowCount ( const QModelIndex & parent = QModelIndex() ) const override;
 
@@ -339,7 +339,7 @@ void GoToDialogPrivate::startSearch()
 
 void GoToDialogPrivate::updateSearchResult( const QVector<GeoDataPlacemark*>& placemarks )
 {
-    m_searchResultModel.setRootDocument( 0 );
+    m_searchResultModel.setRootDocument( nullptr );
     m_searchResult->clear();
     for (GeoDataPlacemark *placemark: placemarks) {
         m_searchResult->append( new GeoDataPlacemark( *placemark ) );

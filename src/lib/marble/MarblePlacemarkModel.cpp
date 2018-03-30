@@ -35,7 +35,7 @@ class Q_DECL_HIDDEN MarblePlacemarkModel::Private
  public:
     Private()
       : m_size(0),
-        m_placemarkContainer( 0 )
+        m_placemarkContainer( nullptr )
     {
     }
 

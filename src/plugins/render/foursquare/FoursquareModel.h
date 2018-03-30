@@ -20,7 +20,7 @@ class FoursquareModel : public AbstractDataPluginModel
     Q_OBJECT
     
 public:
-    explicit FoursquareModel( const MarbleModel *marbleModel, QObject *parent = 0 );
+    explicit FoursquareModel( const MarbleModel *marbleModel, QObject *parent = nullptr );
     ~FoursquareModel() override;
 
 protected:

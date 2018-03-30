@@ -24,7 +24,7 @@ class Writer : public QObject
     Q_OBJECT
 
 public:
-    explicit Writer( QObject* parent = 0 );
+    explicit Writer( QObject* parent = nullptr );
 
     virtual void addOsmRegion( const OsmRegion &region ) = 0;
 

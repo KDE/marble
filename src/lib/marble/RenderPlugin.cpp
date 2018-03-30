@@ -34,7 +34,7 @@ class Q_DECL_HIDDEN RenderPlugin::Private
   public:
     Private( const MarbleModel *marbleModel )
         : m_marbleModel( marbleModel ),
-          m_action(0),
+          m_action(nullptr),
           m_item(),
           m_enabled(true),
           m_visible(true),
@@ -98,12 +98,12 @@ QAction* RenderPlugin::action() const
 
 const QList<QActionGroup*>* RenderPlugin::actionGroups() const
 {
-    return 0;
+    return nullptr;
 }
 
 const QList<QActionGroup*>* RenderPlugin::toolbarActionGroups() const
 {
-    return 0;
+    return nullptr;
 }
 
 QStandardItem* RenderPlugin::item()

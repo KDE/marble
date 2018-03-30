@@ -36,7 +36,7 @@ class Routing : public QQuickItem
 public:
     enum RoutingProfile { Motorcar, Bicycle, Pedestrian };
 
-    explicit Routing( QQuickItem* parent = 0 );
+    explicit Routing( QQuickItem* parent = nullptr );
 
     ~Routing() override;
 

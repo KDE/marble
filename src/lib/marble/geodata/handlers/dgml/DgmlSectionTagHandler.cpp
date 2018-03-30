@@ -48,7 +48,7 @@ GeoNode* DgmlSectionTagHandler::parse(GeoParser& parser) const
     QString radio = parser.attribute(dgmlAttr_radio);
     int     spacing   = parser.attribute(dgmlAttr_spacing).toInt();
 
-    GeoSceneSection* section = 0;
+    GeoSceneSection* section = nullptr;
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();

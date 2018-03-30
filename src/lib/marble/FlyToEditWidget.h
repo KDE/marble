@@ -33,7 +33,7 @@ class FlyToEditWidget: public QWidget
     Q_OBJECT
 
 public:
-    FlyToEditWidget( const QModelIndex& index, MarbleWidget* widget, QWidget* parent=0 );
+    FlyToEditWidget( const QModelIndex& index, MarbleWidget* widget, QWidget* parent=nullptr );
     bool editable() const;
 
 Q_SIGNALS:

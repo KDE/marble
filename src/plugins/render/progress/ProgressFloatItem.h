@@ -34,7 +34,7 @@ class ProgressFloatItem  : public AbstractFloatItem
     MARBLE_PLUGIN( ProgressFloatItem )
 
  public:
-    explicit ProgressFloatItem( const MarbleModel *marbleModel = 0 );
+    explicit ProgressFloatItem( const MarbleModel *marbleModel = nullptr );
     ~ProgressFloatItem () override;
 
     QStringList backendTypes() const override;

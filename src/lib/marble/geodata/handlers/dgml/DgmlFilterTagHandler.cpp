@@ -47,7 +47,7 @@ GeoNode* DgmlFilterTagHandler::parse(GeoParser& parser) const
     QString name      = parser.attribute(dgmlAttr_name).trimmed();
     QString type      = parser.attribute(dgmlAttr_type).toLower().trimmed();
 
-    GeoSceneFilter *filter = 0;
+    GeoSceneFilter *filter = nullptr;
 
     // Checking for parent layer
     GeoStackItem parentItem = parser.parentElement();

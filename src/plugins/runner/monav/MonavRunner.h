@@ -23,7 +23,7 @@ class MonavRunner : public RoutingRunner
 {
     Q_OBJECT
 public:
-    explicit MonavRunner( const MonavPlugin* plugin, QObject *parent = 0 );
+    explicit MonavRunner( const MonavPlugin* plugin, QObject *parent = nullptr );
 
     ~MonavRunner() override;
 

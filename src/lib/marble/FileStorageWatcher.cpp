@@ -194,7 +194,7 @@ FileStorageWatcher::FileStorageWatcher( const QString &dataDirectory, QObject * 
     m_started = false;
     m_limitMutex = new QMutex();
     
-    m_thread = 0;
+    m_thread = nullptr;
     m_quitting = false;
 }
 
@@ -271,7 +271,7 @@ void FileStorageWatcher::run()
         m_started = false;
     }
     delete m_thread;
-    m_thread = 0;
+    m_thread = nullptr;
 }
 // End of all methods
 

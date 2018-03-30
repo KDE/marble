@@ -151,7 +151,7 @@ void ReverseGeocodingRunnerManager::reverseGeocoding( const GeoDataCoordinates &
         GeoDataPlacemark anonymous;
         anonymous.setCoordinate( coordinates );
         emit reverseGeocodingFinished( coordinates, anonymous );
-        d->cleanupReverseGeocodingTask( 0 );
+        d->cleanupReverseGeocodingTask( nullptr );
     }
 }
 

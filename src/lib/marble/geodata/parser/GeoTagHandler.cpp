@@ -33,7 +33,7 @@ namespace Marble
 // Set to a value greater than 0, to dump tag handlers as they get registered
 #define DUMP_TAG_HANDLER_REGISTRATION 0
 
-GeoTagHandler::TagHash* GeoTagHandler::s_tagHandlerHash = 0;
+GeoTagHandler::TagHash* GeoTagHandler::s_tagHandlerHash = nullptr;
 
 GeoTagHandler::GeoTagHandler()
 {
@@ -80,7 +80,7 @@ const GeoTagHandler* GeoTagHandler::recognizes(const GeoParser::QualifiedName& q
     TagHash* hash = tagHandlerHash();
 
     if (!hash->contains(qName))
-        return 0;
+        return nullptr;
 
     return (*hash)[qName];
 }

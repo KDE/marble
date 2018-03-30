@@ -41,7 +41,7 @@ public:
         PreferCloud
     };
 
-    explicit ConflictDialog( QWidget *parent = 0 );
+    explicit ConflictDialog( QWidget *parent = nullptr );
     void setMergeItem( MergeItem *item );
 
 public Q_SLOTS:

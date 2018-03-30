@@ -39,7 +39,7 @@ GeoNode* KmlgridOriginTagHandler::parse( GeoParser& parser ) const
 
         parentItem.nodeAs<GeoDataImagePyramid>()->setGridOrigin( gridOrigin );
     }
-    return 0;
+    return nullptr;
 }
 
 }

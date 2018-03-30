@@ -37,7 +37,7 @@ GeoNode* KmlRegionTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataFeature>()->setRegion( region );
         return &parentItem.nodeAs<GeoDataFeature>()->region();
     } else {
-        return 0;
+        return nullptr;
     }
 }
 

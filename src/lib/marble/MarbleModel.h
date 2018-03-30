@@ -102,7 +102,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @brief  Construct a new MarbleModel.
      * @param parent the parent widget
      */
-    explicit MarbleModel( QObject *parent = 0 );
+    explicit MarbleModel( QObject *parent = nullptr );
     ~MarbleModel() override;
 
     /**

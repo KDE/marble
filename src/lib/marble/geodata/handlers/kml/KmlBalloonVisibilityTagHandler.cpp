@@ -37,7 +37,7 @@ GeoNode* KmlballoonVisibilityTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataPlacemark>()->setBalloonVisible( visible );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

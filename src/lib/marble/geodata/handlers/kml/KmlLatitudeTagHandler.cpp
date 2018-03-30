@@ -43,7 +43,7 @@ namespace kml
 	        qreal latitude = parser.readElementText().trimmed().toDouble();
 	        parentItem.nodeAs<GeoDataLocation>()->setLatitude(latitude, GeoDataCoordinates::Degree);
 	}
-        return 0;
+        return nullptr;
     }
   }
 }

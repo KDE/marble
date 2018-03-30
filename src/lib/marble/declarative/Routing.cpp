@@ -76,7 +76,7 @@ Routing::~Routing()
 
 QSGNode * Routing::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *) {
     if (!d->m_marbleMap) {
-        return 0;
+        return nullptr;
     }
 
     QOpenGLPaintDevice paintDevice(QSize(width(), height()));
@@ -86,7 +86,7 @@ QSGNode * Routing::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *) {
     GeoDataLineString const & waypoints = routingManager->routingModel()->route().path();
 
     if (waypoints.isEmpty()) {
-      return 0;
+      return nullptr;
     }
 
     int const dpi = qMax(paintDevice.logicalDpiX(), paintDevice.logicalDpiY());
@@ -151,7 +151,7 @@ QSGNode * Routing::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *) {
 
 QObject* Routing::waypointModel()
 {
-    return d->m_marbleMap ? d->m_marbleMap->model()->routingManager()->routingModel() : 0;
+    return d->m_marbleMap ? d->m_marbleMap->model()->routingManager()->routingModel() : nullptr;
 }
 
 void Routing::setWaypointDelegate(QQmlComponent *waypointDelegate)
@@ -373,7 +373,7 @@ bool Routing::hasWaypoints() const
 
 RoutingModel *Routing::routingModel()
 {
-    return d->m_marbleMap == 0 ? 0 : d->m_marbleMap->model()->routingManager()->routingModel();
+    return d->m_marbleMap == nullptr ? nullptr : d->m_marbleMap->model()->routingManager()->routingModel();
 }
 
 QQmlComponent *Routing::waypointDelegate() const

@@ -54,7 +54,7 @@ Q_SIGNALS:
     void parsedFile();
 
 private:
-    explicit BBCParser( QObject *parent = 0 );
+    explicit BBCParser( QObject *parent = nullptr );
     QList<WeatherData> read( QIODevice *device );
 
     void readUnknownElement();

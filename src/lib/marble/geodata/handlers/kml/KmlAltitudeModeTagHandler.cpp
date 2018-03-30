@@ -76,7 +76,7 @@ GeoNode* KmlaltitudeModeTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataModel>()->setAltitudeMode( mode );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

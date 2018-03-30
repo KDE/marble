@@ -37,7 +37,7 @@ GeoNode* KmlUpdateTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataAnimatedUpdate>()->setUpdate( update );
         return update;
     }
-    return 0;
+    return nullptr;
 }
 
 }

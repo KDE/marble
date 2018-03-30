@@ -45,7 +45,7 @@ GeoNode* KmlmemberTagHandler::parse( GeoParser& parser ) const
         GeoDataPlacemark *placemark = parser.parentElement( 2 ).nodeAs<GeoDataPlacemark>();
         GeoDataPolygon *polygon = geodata_cast<GeoDataPolygon>(placemark->geometry());
         if (!polygon) {
-            return 0;
+            return nullptr;
         }
 
         // The memberIndex is used to determine which member this tag represents
@@ -54,13 +54,13 @@ GeoNode* KmlmemberTagHandler::parse( GeoParser& parser ) const
         }
         else {
             if ( memberIndex >= polygon->innerBoundaries().size() ) {
-                return 0;
+                return nullptr;
             }
             return &polygon->innerBoundaries()[ memberIndex ];
         }
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

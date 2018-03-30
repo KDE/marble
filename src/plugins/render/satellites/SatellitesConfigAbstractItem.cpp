@@ -18,7 +18,7 @@ namespace Marble {
 
 SatellitesConfigAbstractItem::SatellitesConfigAbstractItem( const QString &name )
     : m_name( name ),
-      m_parent( 0 ),
+      m_parent( nullptr ),
       m_flags( Qt::ItemIsEnabled | Qt::ItemIsUserCheckable )
 {
 }
@@ -34,7 +34,7 @@ QString SatellitesConfigAbstractItem::name() const
 
 int SatellitesConfigAbstractItem::row() const
 {
-    if ( m_parent != 0 ) {
+    if ( m_parent != nullptr ) {
         return m_parent->indexOf( this );
     }
 

@@ -42,7 +42,7 @@ public:
     };
 
     /** Constructor */
-    explicit RoutingManager( MarbleModel *marbleModel, QObject *parent = 0 );
+    explicit RoutingManager( MarbleModel *marbleModel, QObject *parent = nullptr );
 
     /** Destructor */
     ~RoutingManager() override;

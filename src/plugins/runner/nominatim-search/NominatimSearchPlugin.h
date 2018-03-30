@@ -25,7 +25,7 @@ class NominatimPlugin : public SearchRunnerPlugin
     Q_INTERFACES( Marble::SearchRunnerPlugin )
 
 public:
-    explicit NominatimPlugin( QObject *parent = 0 );
+    explicit NominatimPlugin( QObject *parent = nullptr );
 
     QString name() const override;
 

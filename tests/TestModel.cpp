@@ -79,7 +79,7 @@ void TestModel::simpleParseTest()
 
     GeoDataModel *model = dynamic_cast<GeoDataModel*>( placemark->geometry() );
 
-    QVERIFY( model != 0 );
+    QVERIFY( model != nullptr );
 
     QCOMPARE( model->altitudeMode(), RelativeToGround);
 

@@ -59,7 +59,7 @@ GeoDataDocument *PntRunner::parseFile(const QString &fileName, DocumentRole role
 
     GeoDataDocument *document = new GeoDataDocument();
     document->setDocumentRole( role );
-    GeoDataPlacemark  *placemark = 0;
+    GeoDataPlacemark  *placemark = nullptr;
 
     int count = 0;
     bool error = false;
@@ -200,7 +200,7 @@ GeoDataDocument *PntRunner::parseFile(const QString &fileName, DocumentRole role
     file.close();
     if (document->isEmpty() || error) {
         delete document;
-        document = 0;
+        document = nullptr;
         return nullptr;
     }
     document->setFileName( fileName );

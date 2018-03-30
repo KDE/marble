@@ -26,7 +26,7 @@ namespace Marble {
 
 RoutingProfileSettingsDialog::RoutingProfileSettingsDialog( const PluginManager *pluginManager, RoutingProfilesModel *profilesModel, QWidget* parent )
     : QDialog( parent ),
-    m_profilesModel ( profilesModel ), m_dialog( 0 ), m_dialogLayout( 0 )
+    m_profilesModel ( profilesModel ), m_dialog( nullptr ), m_dialogLayout( nullptr )
 {
     m_ui = new Ui_RoutingProfileSettingsDialog();
     m_ui->setupUi( this );

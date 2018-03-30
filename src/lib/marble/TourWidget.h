@@ -32,7 +32,7 @@ class MARBLE_EXPORT TourWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit TourWidget( QWidget *parent = 0, Qt::WindowFlags f = 0 );
+    explicit TourWidget( QWidget *parent = nullptr, Qt::WindowFlags f = nullptr );
     ~TourWidget() override;
 
     void setMarbleWidget( MarbleWidget *widget );

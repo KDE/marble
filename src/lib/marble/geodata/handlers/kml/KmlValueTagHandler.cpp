@@ -39,7 +39,7 @@ GeoNode* KmlvalueTagHandler::parse( GeoParser& parser ) const
         QString value = parser.readElementText().trimmed();
         parentItem.nodeAs<GeoDataSimpleArrayData>()->append( QVariant( value ) );
     }
-    return 0;
+    return nullptr;
 }
 
 }

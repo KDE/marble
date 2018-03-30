@@ -59,7 +59,7 @@ GeoNode* GPXlinkTagHandler::parse(GeoParser& parser) const
         placemark->setDescriptionCDATA(true);
     }
 
-    return 0;
+    return nullptr;
 }
 
 } // namespace gpx

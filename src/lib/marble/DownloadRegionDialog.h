@@ -32,8 +32,8 @@ class MARBLE_EXPORT DownloadRegionDialog: public QDialog
  public:
     enum SelectionMethod { VisibleRegionMethod, SpecifiedRegionMethod, RouteDownloadMethod };
 
-    explicit DownloadRegionDialog( MarbleWidget *const widget, QWidget * const parent = 0,
-                                   Qt::WindowFlags const f = 0 );
+    explicit DownloadRegionDialog( MarbleWidget *const widget, QWidget * const parent = nullptr,
+                                   Qt::WindowFlags const f = nullptr );
     ~DownloadRegionDialog() override;
     void setAllowedTileLevelRange( int const minimumTileLevel,
                                    int const maximumTileLevel );

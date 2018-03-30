@@ -30,7 +30,7 @@ class MARBLE_EXPORT ReverseGeocodingRunnerPlugin : public QObject, public Plugin
 
 public:
     /** Constructor with optional parent object */
-    explicit ReverseGeocodingRunnerPlugin( QObject* parent = 0 );
+    explicit ReverseGeocodingRunnerPlugin( QObject* parent = nullptr );
 
     /** Destructor */
     ~ReverseGeocodingRunnerPlugin() override;

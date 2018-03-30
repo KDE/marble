@@ -46,7 +46,7 @@ public:
 };
 
 AudioOutputPrivate::AudioOutputPrivate( AudioOutput* parent ) :
-    q( parent ), m_output( 0 ), m_muted( false )
+    q( parent ), m_output( nullptr ), m_muted( false )
 {
     QObject::connect( &m_voiceNavigation, SIGNAL(instructionChanged()),
                       q, SLOT(playInstructions()) );

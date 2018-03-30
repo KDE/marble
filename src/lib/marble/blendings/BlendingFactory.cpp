@@ -31,7 +31,7 @@ void BlendingFactory::setLevelZeroLayout( int levelZeroColumns, int levelZeroRow
 Blending const * BlendingFactory::findBlending( QString const & name ) const
 {
     if ( name.isEmpty() )
-        return 0;
+        return nullptr;
 
     Blending const * const result = m_blendings.value( name, 0 );
     if ( !result )

@@ -24,7 +24,7 @@ class LocalDatabasePlugin : public SearchRunnerPlugin
     Q_INTERFACES( Marble::SearchRunnerPlugin )
 
 public:
-    explicit LocalDatabasePlugin(QObject *parent = 0);
+    explicit LocalDatabasePlugin(QObject *parent = nullptr);
 
     QString name() const override;
 

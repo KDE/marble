@@ -82,7 +82,7 @@ bool RoutingRunnerPlugin::canWork() const
 
 RoutingRunnerPlugin::ConfigWidget *RoutingRunnerPlugin::configWidget()
 {
-    return 0;
+    return nullptr;
 }
 
 bool RoutingRunnerPlugin::supportsTemplate( RoutingProfilesModel::ProfileTemplate ) const

@@ -44,7 +44,7 @@ class ViewportParams;
         void regionSelected(const GeoDataLatLonBox &boundingBox);
 
     public:
-        explicit MarbleAbstractPresenter(MarbleMap *map, QObject *parent = 0);
+        explicit MarbleAbstractPresenter(MarbleMap *map, QObject *parent = nullptr);
         ~MarbleAbstractPresenter() override;
 
         qreal moveStep() const;

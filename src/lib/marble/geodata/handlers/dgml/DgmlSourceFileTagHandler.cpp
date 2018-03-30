@@ -41,12 +41,12 @@ GeoNode* DgmlSourceFileTagHandler::parse(GeoParser& parser) const
     GeoStackItem parentItem = parser.parentElement();
     if ( parentItem.represents( dgmlTag_Vector )
          || parentItem.represents( dgmlTag_Geodata ) ) {
-        GeoSceneGeodata *dataSource = 0;
+        GeoSceneGeodata *dataSource = nullptr;
         dataSource = parentItem.nodeAs<GeoSceneGeodata>();
         dataSource->setSourceFile( parser.readElementText().trimmed() );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

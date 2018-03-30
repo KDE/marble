@@ -31,7 +31,7 @@ class DownloadOsmDialog : public QDialog,private Ui::DownloadOsmDialog
     Q_OBJECT
 
 public:
-    explicit DownloadOsmDialog(MarbleWidget *parent = 0,AnnotatePlugin *annotatePlugin = 0);
+    explicit DownloadOsmDialog(MarbleWidget *parent = nullptr,AnnotatePlugin *annotatePlugin = nullptr);
     ~DownloadOsmDialog();
 
 Q_SIGNALS:

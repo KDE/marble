@@ -66,7 +66,7 @@ VectorTileLayer::Private::Private(HttpDownloadManager *downloadManager,
     m_loader(downloadManager, pluginManager),
     m_tileModels(),
     m_activeTileModels(),
-    m_layerSettings(0),
+    m_layerSettings(nullptr),
     m_treeModel(treeModel)
 {
     m_threadPool.setMaxThreadCount(1);

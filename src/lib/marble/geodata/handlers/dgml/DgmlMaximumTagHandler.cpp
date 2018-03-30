@@ -50,7 +50,7 @@ GeoNode* DgmlMaximumTagHandler::parse(GeoParser& parser) const
             parser.raiseWarning(QObject::tr("Could not convert <maximum> child text content to integer. Was: '%1'").arg(parsedText));
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

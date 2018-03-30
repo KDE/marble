@@ -48,7 +48,7 @@ GeoNode* KmlpopTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataPlacemark>()->setPopulation( pop );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

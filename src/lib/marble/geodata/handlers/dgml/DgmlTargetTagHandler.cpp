@@ -55,7 +55,7 @@ GeoNode* DgmlTargetTagHandler::parse(GeoParser& parser) const
         parentItem.nodeAs<GeoSceneMap>()->addLayer( layer );*/
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

@@ -38,7 +38,7 @@ GeoNode* KmlOrientationTagHandler::parse( GeoParser& parser ) const
         return &parentItem.nodeAs<GeoDataModel>()->orientation();
     }
     else{
-        return 0;
+        return nullptr;
     }
 }
 

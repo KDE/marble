@@ -239,12 +239,12 @@ QStringList TourItemDelegate::findIds(const GeoDataPlaylist &playlist, bool only
             result << primitive->id();
         }
         if (const GeoDataAnimatedUpdate *animatedUpdate = geodata_cast<GeoDataAnimatedUpdate>(primitive)) {
-            if( animatedUpdate->update() != 0 ) {
+            if( animatedUpdate->update() != nullptr ) {
                 const GeoDataUpdate *update = animatedUpdate->update();
                 if( !update->id().isEmpty() && !onlyFeatures ) {
                     result << update->id();
                 }
-                if( update->create() != 0 ) {
+                if( update->create() != nullptr ) {
                     if( !update->create()->id().isEmpty() && !onlyFeatures ) {
                         result << update->create()->id();
                     }
@@ -254,7 +254,7 @@ QStringList TourItemDelegate::findIds(const GeoDataPlaylist &playlist, bool only
                         }
                     }
                 }
-                if( update->change() != 0 ) {
+                if( update->change() != nullptr ) {
                     if( !update->change()->id().isEmpty() && !onlyFeatures ) {
                         result << update->change()->id();
                     }
@@ -264,7 +264,7 @@ QStringList TourItemDelegate::findIds(const GeoDataPlaylist &playlist, bool only
                         }
                     }
                 }
-                if( update->getDelete() != 0 ) {
+                if( update->getDelete() != nullptr ) {
                     if( !update->getDelete()->id().isEmpty() && !onlyFeatures ) {
                         result << update->getDelete()->id();
                     }
@@ -289,7 +289,7 @@ GeoDataPlaylist *TourItemDelegate::playlist() const
             return playlist;
         }
     }
-    return 0;
+    return nullptr;
 }
 
 
@@ -333,7 +333,7 @@ QWidget* TourItemDelegate::createEditor(QWidget* parent, const QStyleOptionViewI
     } else if (geodata_cast<GeoDataAnimatedUpdate>(object)) {
         RemoveItemEditWidget* widget = new RemoveItemEditWidget(index, parent);
         GeoDataPlaylist *playlistObject = playlist();
-        if( playlistObject != 0 ) {
+        if( playlistObject != nullptr ) {
             widget->setFeatureIds(findIds(*playlistObject));
         }
         widget->setDefaultFeatureId( m_defaultFeatureId );
@@ -344,7 +344,7 @@ QWidget* TourItemDelegate::createEditor(QWidget* parent, const QStyleOptionViewI
         return widget;
 
     }
-    return 0;
+    return nullptr;
 }
 
 bool TourItemDelegate::editable() const
@@ -367,22 +367,22 @@ QModelIndex TourItemDelegate::firstFlyTo() const
 
 bool TourItemDelegate::editAnimatedUpdate(GeoDataAnimatedUpdate *animatedUpdate, bool create)
 {
-    if( animatedUpdate->update() == 0 ) {
+    if( animatedUpdate->update() == nullptr ) {
         return false;
     }
-    GeoDataFeature *feature = 0;
-    if( create && !( animatedUpdate->update()->create() == 0 || animatedUpdate->update()->create()->size() == 0 ) ) {
+    GeoDataFeature *feature = nullptr;
+    if( create && !( animatedUpdate->update()->create() == nullptr || animatedUpdate->update()->create()->size() == 0 ) ) {
         GeoDataContainer *container = dynamic_cast<GeoDataContainer*>( animatedUpdate->update()->create()->child( 0 ) );
-        if( container != 0 && container->size() ) {
+        if( container != nullptr && container->size() ) {
             feature = container->child( 0 );
         }
-    } else if ( !create && !( animatedUpdate->update()->change() == 0 || animatedUpdate->update()->change()->size() == 0 ) ) {
+    } else if ( !create && !( animatedUpdate->update()->change() == nullptr || animatedUpdate->update()->change()->size() == 0 ) ) {
         GeoDataContainer *container = dynamic_cast<GeoDataContainer*>( animatedUpdate->update()->change()->child( 0 ) );
-        if( container != 0 && container->size() ) {
+        if( container != nullptr && container->size() ) {
             feature = container->child( 0 );
         }
     }
-    if( feature == 0 ) {
+    if( feature == nullptr ) {
         return false;
     }
 
@@ -393,7 +393,7 @@ bool TourItemDelegate::editAnimatedUpdate(GeoDataAnimatedUpdate *animatedUpdate,
     if( !create ) {
         if( placemark->targetId().isEmpty() && !defaultFeatureId().isEmpty() ) {
             GeoDataFeature *feature = findFeature( defaultFeatureId() );
-            if (GeoDataPlacemark *targetPlacemark = (feature != 0 ? geodata_cast<GeoDataPlacemark>(feature) : 0)) {
+            if (GeoDataPlacemark *targetPlacemark = (feature != nullptr ? geodata_cast<GeoDataPlacemark>(feature) : nullptr)) {
                 animatedUpdate->update()->change()->placemarkList().remove( 0 );
                 delete placemark;
                 placemark = new GeoDataPlacemark( *targetPlacemark );
@@ -413,7 +413,7 @@ bool TourItemDelegate::editAnimatedUpdate(GeoDataAnimatedUpdate *animatedUpdate,
         dialog->setIdFieldVisible( false );
     }
     GeoDataPlaylist* playlistObject = playlist();
-    if( playlistObject != 0 ) {
+    if( playlistObject != nullptr ) {
         ids.append(findIds(*playlistObject, true));
     }
     ids.removeOne( placemark->id() );
@@ -439,30 +439,30 @@ QString TourItemDelegate::defaultFeatureId() const
 GeoDataFeature *TourItemDelegate::findFeature(const QString &id) const
 {
     GeoDataPlaylist *playlistObject = playlist();
-    if( playlistObject == 0 ) {
-        return 0;
+    if( playlistObject == nullptr ) {
+        return nullptr;
     }
-    GeoDataFeature *result = 0;
+    GeoDataFeature *result = nullptr;
     for( int i = 0; i < playlistObject->size(); ++i ) {
         GeoDataTourPrimitive *primitive = playlistObject->primitive( i );
         if (GeoDataAnimatedUpdate *animatedUpdate = geodata_cast<GeoDataAnimatedUpdate>(primitive)) {
-            if( animatedUpdate->update() != 0 ) {
+            if( animatedUpdate->update() != nullptr ) {
                 GeoDataUpdate *update = animatedUpdate->update();
-                if( update->create() != 0 ) {
+                if( update->create() != nullptr ) {
                     for( int j = 0; j < update->create()->featureList().size(); ++j ) {
                         if( update->create()->at( j ).id() == id ) {
                             result = update->create()->featureList().at( j );
                         }
                     }
                 }
-                if( update->change() != 0 ) {
+                if( update->change() != nullptr ) {
                     for( int j = 0; j < update->change()->featureList().size(); ++j ) {
                         if( update->change()->at( j ).id() == id ) {
                             result = update->change()->featureList().at( j );
                         }
                     }
                 }
-                if( update->getDelete() != 0 ) {
+                if( update->getDelete() != nullptr ) {
                     for( int j = 0; j < update->getDelete()->featureList().size(); ++j ) {
                         if( update->getDelete()->at( j ).id() == id ) {
                             result = update->getDelete()->featureList().at( j );

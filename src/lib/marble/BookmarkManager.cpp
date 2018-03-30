@@ -30,7 +30,7 @@ namespace Marble
 
 BookmarkManagerPrivate::BookmarkManagerPrivate( GeoDataTreeModel *treeModel ) :
     m_treeModel( treeModel ),
-    m_bookmarkDocument( 0 ),
+    m_bookmarkDocument( nullptr ),
     m_bookmarkFileRelativePath( "bookmarks/bookmarks.kml" ),
     m_styleBuilder(nullptr)
 {
@@ -296,17 +296,17 @@ GeoDataDocument* BookmarkManager::openFile( const QString &fileName )
     QFile file( fileName );
 
     if ( !file.exists() ) {
-        return 0;
+        return nullptr;
     }
 
     if ( !file.open( QIODevice::ReadOnly ) || !parser.read( &file ) ) {
         mDebug() << "Could not open/parse file" << fileName;
-        return 0;
+        return nullptr;
     }
 
     GeoDataDocument *result = dynamic_cast<GeoDataDocument*>( parser.releaseDocument() );
     if ( !result ) {
-        return 0;
+        return nullptr;
     }
 
     result->setDocumentRole( BookmarkDocument );

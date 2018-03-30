@@ -25,7 +25,7 @@ public Q_SLOTS:
     void trackCollapsedState( const QModelIndex &index );
 
 public:
-    explicit TreeViewDecoratorModel( QObject *parent = 0 );
+    explicit TreeViewDecoratorModel( QObject *parent = nullptr );
     QVariant data( const QModelIndex & proxyIndex, int role = Qt::DisplayRole ) const override;
 
 protected:

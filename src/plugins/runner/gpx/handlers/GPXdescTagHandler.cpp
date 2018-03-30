@@ -55,7 +55,7 @@ GeoNode* GPXdescTagHandler::parse(GeoParser& parser) const
         route->setDescription(desc.append(parser.readElementText().trimmed().replace(QLatin1Char('\n'),QLatin1String("\n<br/>"))));
         route->setDescriptionCDATA(true);
     }
-    return 0;
+    return nullptr;
 }
 
 } // namespace gpx

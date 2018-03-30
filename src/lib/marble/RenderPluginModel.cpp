@@ -81,10 +81,10 @@ QVector<PluginAuthor> RenderPluginModel::pluginAuthors( const QModelIndex &index
 DialogConfigurationInterface *RenderPluginModel::pluginDialogConfigurationInterface( const QModelIndex &index )
 {
     if ( !index.isValid() )
-        return 0;
+        return nullptr;
 
     if ( index.row() < 0 || index.row() >= d->m_renderPlugins.count() )
-        return 0;
+        return nullptr;
 
     RenderPlugin *plugin = d->m_renderPlugins.at( index.row() );
     return qobject_cast<DialogConfigurationInterface *>( plugin );

@@ -61,11 +61,11 @@ public:
 EditPolygonDialog::Private::Private( GeoDataPlacemark *placemark ) :
     Ui::UiEditPolygonDialog(),
     m_placemark( placemark ),
-    m_linesDialog( 0 ),
-    m_polyDialog( 0 ),
+    m_linesDialog( nullptr ),
+    m_polyDialog( nullptr ),
     m_nodeModel( new NodeModel ),
-    m_osmTagEditorWidget( 0 ),
-    m_osmRelationManagerWidget( 0 )
+    m_osmTagEditorWidget( nullptr ),
+    m_osmRelationManagerWidget( nullptr )
 {
     // nothing to do
 }

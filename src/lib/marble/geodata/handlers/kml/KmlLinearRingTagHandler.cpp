@@ -69,7 +69,7 @@ GeoNode* KmlLinearRingTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataMultiGeometry>()->append( linearRing );
         return linearRing;
     } else
-        return 0;
+        return nullptr;
 }
 
 }

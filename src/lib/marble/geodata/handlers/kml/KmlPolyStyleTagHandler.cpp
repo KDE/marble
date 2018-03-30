@@ -48,7 +48,7 @@ GeoNode* KmlPolyStyleTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataStyle>()->setPolyStyle( style );
         return &parentItem.nodeAs<GeoDataStyle>()->polyStyle();
     }
-    return 0;
+    return nullptr;
 }
 
 }

@@ -67,7 +67,7 @@ namespace Marble
         Q_PROPERTY(QQmlComponent* placemarkDelegate READ placemarkDelegate WRITE setPlacemarkDelegate NOTIFY placemarkDelegateChanged)
 
     public:
-        explicit MarbleQuickItem(QQuickItem *parent = 0);
+        explicit MarbleQuickItem(QQuickItem *parent = nullptr);
 
         enum Projection{
             Spherical = Marble::Spherical,

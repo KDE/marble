@@ -37,7 +37,7 @@ GeoNode* KmlBalloonStyleTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataStyle>()->setBalloonStyle( style );
         return &parentItem.nodeAs<GeoDataStyle>()->balloonStyle();
     }
-    return 0;
+    return nullptr;
 }
 
 }

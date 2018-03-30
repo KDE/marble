@@ -30,7 +30,7 @@ class MARBLE_EXPORT BookmarkManagerDialog : public QDialog, private Ui::UiBookma
 
  public:
     /** Constructor. The model is used to retrieve the bookmark manager */
-    explicit BookmarkManagerDialog( MarbleModel* model, QWidget *parent = 0 );
+    explicit BookmarkManagerDialog( MarbleModel* model, QWidget *parent = nullptr );
 
     /** Destructor */
     ~BookmarkManagerDialog() override;

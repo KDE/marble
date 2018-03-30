@@ -44,7 +44,7 @@ class FileManager : public QObject
      *
      * @param parent The parent object.
      */
-    explicit FileManager( GeoDataTreeModel *treeModel, const PluginManager *pluginManager, QObject *parent = 0 );
+    explicit FileManager( GeoDataTreeModel *treeModel, const PluginManager *pluginManager, QObject *parent = nullptr );
 
     /**
      * Destroys the file manager.

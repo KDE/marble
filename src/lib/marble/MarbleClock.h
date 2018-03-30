@@ -28,7 +28,7 @@ class GEODATA_EXPORT MarbleClock : public QObject
     Q_OBJECT
 
  public:
-    explicit MarbleClock( QObject* parent = 0 );
+    explicit MarbleClock( QObject* parent = nullptr );
 
     ~MarbleClock() override;
 

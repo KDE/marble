@@ -55,7 +55,7 @@ public:
 MarbleInputHandler::Protected::Protected(MarbleAbstractPresenter *marblePresenter)
     : m_marblePresenter( marblePresenter ),
       m_positionSignalConnected( false ),
-      m_mouseWheelTimer( 0 ),
+      m_mouseWheelTimer( nullptr ),
       m_disabledMouseButtons( Qt::NoButton ),
       m_wheelZoomTargetDistance( 0.0 ),
       m_panViaArrowsEnabled( true ),

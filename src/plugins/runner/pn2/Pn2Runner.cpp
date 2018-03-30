@@ -233,7 +233,7 @@ GeoDataDocument* Pn2Runner::parseForVersion1(const QString& fileName, DocumentRo
 
     if ( error ) {
         delete document;
-        document = 0;
+        document = nullptr;
         return nullptr;
     }
     document->setFileName( fileName );
@@ -254,7 +254,7 @@ GeoDataDocument* Pn2Runner::parseForVersion2( const QString &fileName, DocumentR
 
     GeoDataPolygon *polygon = new GeoDataPolygon;
     GeoDataStyle::Ptr style;
-    GeoDataPlacemark *placemark =0; // new GeoDataPlacemark;
+    GeoDataPlacemark *placemark =nullptr; // new GeoDataPlacemark;
 
     quint32 currentPoly;
     for ( currentPoly = 1; ( currentPoly <= m_fileHeaderPolygons ) && ( !error ) && ( !m_stream.atEnd() ); currentPoly++ ) {
@@ -395,7 +395,7 @@ GeoDataDocument* Pn2Runner::parseForVersion2( const QString &fileName, DocumentR
 
     if ( error ) {
         delete document;
-        document = 0;
+        document = nullptr;
         return nullptr;
     }
     document->setFileName( fileName );

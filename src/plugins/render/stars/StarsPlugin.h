@@ -132,7 +132,7 @@ class StarsPlugin : public RenderPlugin, public DialogConfigurationInterface
     Q_INTERFACES( Marble::DialogConfigurationInterface )
     MARBLE_PLUGIN(StarsPlugin)
 public:
-    explicit StarsPlugin( const MarbleModel *marbleModel=0 );
+    explicit StarsPlugin( const MarbleModel *marbleModel=nullptr );
     ~StarsPlugin() override;
 
     QStringList backendTypes() const override;
@@ -163,7 +163,7 @@ public:
 
     bool isInitialized() const override;
 
-    bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 ) override;
+    bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = nullptr ) override;
 
     QDialog *configDialog() override;
 

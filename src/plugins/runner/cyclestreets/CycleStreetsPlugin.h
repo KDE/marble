@@ -24,7 +24,7 @@ class CycleStreetsPlugin : public RoutingRunnerPlugin
     Q_INTERFACES( Marble::RoutingRunnerPlugin )
 
 public:
-    explicit CycleStreetsPlugin( QObject *parent = 0 );
+    explicit CycleStreetsPlugin( QObject *parent = nullptr );
 
     QString name() const override;
 

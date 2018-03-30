@@ -34,7 +34,7 @@ GeoNode* KmltileSizeTagHandler::parse( GeoParser& parser ) const
 
         parentItem.nodeAs<GeoDataImagePyramid>()->setTileSize( tileSize );
     }
-    return 0;
+    return nullptr;
 }
 
 }

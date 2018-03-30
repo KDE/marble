@@ -37,7 +37,7 @@ GeoNode* KmlsizeTagHandler::parse( GeoParser& parser ) const
 
         parentItem.nodeAs<GeoDataScreenOverlay>()->setSize( vec2 );
     }
-    return 0;
+    return nullptr;
 }
 
 }

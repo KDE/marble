@@ -49,7 +49,7 @@ GeoNode* KmlcolorTagHandler::parse( GeoParser& parser ) const
             parentItem.nodeAs<GeoDataOverlay>()->setColor( color );
         }
     }
-    return 0;
+    return nullptr;
 }
 
 QColor KmlcolorTagHandler::parseColor( const QString &colorString )

@@ -42,7 +42,7 @@ class MARBLE_EXPORT PluginAboutDialog : public QDialog
 //        License_LGPL_V3 = 7
     };
 
-    explicit PluginAboutDialog( QWidget *parent = 0 );
+    explicit PluginAboutDialog( QWidget *parent = nullptr );
     ~PluginAboutDialog() override;
 
     /**

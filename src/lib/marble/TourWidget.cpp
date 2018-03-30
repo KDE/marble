@@ -125,12 +125,12 @@ public:
 
 TourWidgetPrivate::TourWidgetPrivate( TourWidget *parent )
     : q( parent ),
-      m_widget( 0 ),
-      m_playback( 0 ),
-      m_delegate( 0 ),
+      m_widget( nullptr ),
+      m_playback( nullptr ),
+      m_delegate( nullptr ),
       m_isChanged( false ),
       m_playState( false ),
-      m_document( 0 ),
+      m_document( nullptr ),
       m_addPrimitiveButton( new QToolButton )
 {
     m_tourUi.setupUi( parent );
@@ -245,7 +245,7 @@ bool TourWidget::eventFilter( QObject *watched, QEvent *event )
              && !selectedIndexes.isEmpty() )
         {
             QModelIndexList::iterator end = selectedIndexes.end() - 1;
-            if (const GeoDataPlaylist *playlist = (rootObject ? geodata_cast<GeoDataPlaylist>(rootObject) : 0)) {
+            if (const GeoDataPlaylist *playlist = (rootObject ? geodata_cast<GeoDataPlaylist>(rootObject) : nullptr)) {
                 if ( end->row() != playlist->size() - 1 ) {
                     moveDown();
                 }
@@ -396,7 +396,7 @@ bool TourWidgetPrivate::openFile( const QString &filename )
 
 GeoDataTour *TourWidgetPrivate::findTour( GeoDataFeature *feature ) const
 {
-    if (GeoDataTour *tour = (feature ? geodata_cast<GeoDataTour>(feature) : 0)) {
+    if (GeoDataTour *tour = (feature ? geodata_cast<GeoDataTour>(feature) : nullptr)) {
         return tour;
     }
 
@@ -411,7 +411,7 @@ GeoDataTour *TourWidgetPrivate::findTour( GeoDataFeature *feature ) const
             }
         }
     }
-    return 0;
+    return nullptr;
 }
 
 void TourWidgetPrivate::mapCenterOn( const QModelIndex &index )
@@ -509,9 +509,9 @@ void TourWidgetPrivate::addRemovePlacemark()
 void TourWidgetPrivate::addChangePlacemark()
 {
     GeoDataChange *change = new GeoDataChange;
-    GeoDataPlacemark *placemark = 0;
+    GeoDataPlacemark *placemark = nullptr;
     GeoDataFeature *lastFeature = m_delegate->findFeature( m_delegate->defaultFeatureId() );
-    if (GeoDataPlacemark *target = (lastFeature != 0 ? geodata_cast<GeoDataPlacemark>(lastFeature) : 0)) {
+    if (GeoDataPlacemark *target = (lastFeature != nullptr ? geodata_cast<GeoDataPlacemark>(lastFeature) : nullptr)) {
         placemark = new GeoDataPlacemark( *target );
         placemark->setTargetId( m_delegate->defaultFeatureId() );
         placemark->setId(QString());
@@ -555,7 +555,7 @@ void TourWidgetPrivate::deleteSelected()
     dialog->setDefaultButton( QMessageBox::No );
     if ( dialog->exec() == QMessageBox::Yes ) {
         GeoDataObject *rootObject =  rootIndexObject();
-        if (GeoDataPlaylist *playlist = (rootObject ? geodata_cast<GeoDataPlaylist>(rootObject) : 0)) {
+        if (GeoDataPlaylist *playlist = (rootObject ? geodata_cast<GeoDataPlaylist>(rootObject) : nullptr)) {
             QModelIndex playlistIndex = m_widget->model()->treeModel()->index( playlist );
             QModelIndexList selected = m_tourUi.m_listView->selectionModel()->selectedIndexes();
             std::sort( selected.begin(), selected.end(), [](const QModelIndex &a, const QModelIndex &b) { return b < a; } );
@@ -585,7 +585,7 @@ void TourWidgetPrivate::updateButtonsStates()
         QModelIndexList::iterator start = selectedIndexes.begin();
         m_tourUi.m_actionMoveUp->setEnabled( ( start->row() != 0 ) ); // if we can move up enable action else disable.
         GeoDataObject *rootObject =  rootIndexObject();
-        if (GeoDataPlaylist *playlist = (rootObject ? geodata_cast<GeoDataPlaylist>(rootObject) : 0)) {
+        if (GeoDataPlaylist *playlist = (rootObject ? geodata_cast<GeoDataPlaylist>(rootObject) : nullptr)) {
             m_tourUi.m_actionMoveDown->setEnabled( ( end->row() != playlist->size()-1 ) ); // if we can move down enable action else disable.
         }
     }
@@ -594,7 +594,7 @@ void TourWidgetPrivate::updateButtonsStates()
 void TourWidgetPrivate::moveUp()
 {
     GeoDataObject *rootObject =  rootIndexObject();
-    if (GeoDataPlaylist *playlist = (rootObject ? geodata_cast<GeoDataPlaylist>(rootObject) : 0)) {
+    if (GeoDataPlaylist *playlist = (rootObject ? geodata_cast<GeoDataPlaylist>(rootObject) : nullptr)) {
         QModelIndex playlistIndex = m_widget->model()->treeModel()->index( playlist );
         QModelIndexList selected = m_tourUi.m_listView->selectionModel()->selectedIndexes();
         std::sort( selected.begin(), selected.end(), std::less<QModelIndex>() );
@@ -614,7 +614,7 @@ void TourWidgetPrivate::moveUp()
 void TourWidgetPrivate::moveDown()
 {
     GeoDataObject *rootObject = rootIndexObject();
-    if (GeoDataPlaylist *playlist = (rootObject ? geodata_cast<GeoDataPlaylist>(rootObject) : 0)) {
+    if (GeoDataPlaylist *playlist = (rootObject ? geodata_cast<GeoDataPlaylist>(rootObject) : nullptr)) {
         QModelIndex playlistIndex = m_widget->model()->treeModel()->index( playlist );
         QModelIndexList selected = m_tourUi.m_listView->selectionModel()->selectedIndexes();
         std::sort( selected.begin(), selected.end(), [](const QModelIndex &a, const QModelIndex &b) { return b < a; } );
@@ -634,13 +634,13 @@ void TourWidgetPrivate::moveDown()
 GeoDataFeature* TourWidgetPrivate::getPlaylistFeature() const
 {
     GeoDataObject *rootObject = rootIndexObject();
-    if (GeoDataPlaylist *playlist = (rootObject ? geodata_cast<GeoDataPlaylist>(rootObject) : 0)) {
+    if (GeoDataPlaylist *playlist = (rootObject ? geodata_cast<GeoDataPlaylist>(rootObject) : nullptr)) {
         GeoDataObject *object = playlist->parent();
-        if (GeoDataTour *tour = (object ? geodata_cast<GeoDataTour>(object) : 0)) {
+        if (GeoDataTour *tour = (object ? geodata_cast<GeoDataTour>(object) : nullptr)) {
             return tour;
         }
     }
-    return 0;
+    return nullptr;
 }
 
 void TourWidgetPrivate::updateRootIndex()
@@ -773,7 +773,7 @@ void TourWidget::moveUp()
 GeoDataObject *TourWidgetPrivate::rootIndexObject() const
 {
     QModelIndex const rootIndex = m_tourUi.m_listView->rootIndex();
-    return rootIndex.isValid() ? static_cast<GeoDataObject*>( rootIndex.internalPointer() ) : 0;
+    return rootIndex.isValid() ? static_cast<GeoDataObject*>( rootIndex.internalPointer() ) : nullptr;
 }
 
 void TourWidgetPrivate::createTour()

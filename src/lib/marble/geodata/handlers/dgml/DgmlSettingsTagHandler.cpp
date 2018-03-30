@@ -43,7 +43,7 @@ GeoNode* DgmlSettingsTagHandler::parse(GeoParser& parser) const
     if (parentItem.represents(dgmlTag_Document))
         return parentItem.nodeAs<GeoSceneDocument>()->settings();
 
-    return 0;
+    return nullptr;
 }
 
 }

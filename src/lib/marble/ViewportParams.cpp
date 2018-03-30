@@ -124,7 +124,7 @@ const AbstractProjection *ViewportParamsPrivate::abstractProjection(Projection p
         return &s_verticalPerspectiveProjection;
     }
 
-    return 0;
+    return nullptr;
 }
 
 

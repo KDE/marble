@@ -27,17 +27,17 @@ using namespace Marble;
 const quint32 maximumNumberOfItems = 99;
 
 WikipediaPlugin::WikipediaPlugin()
-    : AbstractDataPlugin( 0 ),
-      ui_configWidget( 0 ),
-      m_configDialog( 0 )
+    : AbstractDataPlugin( nullptr ),
+      ui_configWidget( nullptr ),
+      m_configDialog( nullptr )
 {
 }
 
 WikipediaPlugin::WikipediaPlugin( const MarbleModel *marbleModel )
     : AbstractDataPlugin( marbleModel ),
       m_icon(MarbleDirs::path(QStringLiteral("svg/wikipedia_shadow.svg"))),
-      ui_configWidget( 0 ),
-      m_configDialog( 0 ),
+      ui_configWidget( nullptr ),
+      m_configDialog( nullptr ),
       m_showThumbnails( true )
 {
     // Plugin is enabled by default
@@ -188,7 +188,7 @@ void WikipediaPlugin::writeSettings()
 void WikipediaPlugin::updateSettings()
 {
     AbstractDataPluginModel *abstractModel = model();
-    if ( abstractModel != 0 ) {
+    if ( abstractModel != nullptr ) {
         abstractModel->setItemSettings( settings() );
     }
     

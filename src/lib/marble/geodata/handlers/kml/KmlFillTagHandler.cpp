@@ -45,7 +45,7 @@ GeoNode* KmlfillTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataPolyStyle>()->setFill( fill );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

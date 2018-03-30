@@ -33,7 +33,7 @@ GeoNode* KmlzTagHandler::parse( GeoParser& parser ) const
         double z = parser.readElementText().trimmed().toDouble();
     parentItem.nodeAs<GeoDataScale>()->setZ( z );
     }
-    return 0;
+    return nullptr;
 }
 
 }

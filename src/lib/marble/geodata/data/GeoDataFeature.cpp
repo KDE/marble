@@ -367,7 +367,7 @@ void GeoDataFeature::setVisible( bool value )
 bool GeoDataFeature::isGloballyVisible() const
 {
     Q_D(const GeoDataFeature);
-    if ( parent() == 0 ) {
+    if ( parent() == nullptr ) {
         return d->m_visible;
     }
     const GeoDataContainer *container = static_cast<const GeoDataContainer*>(parent());

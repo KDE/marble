@@ -15,7 +15,7 @@ namespace Marble
 
 PolylineNode::PolylineNode( const QRegion& region ) :
     m_region( region  ),
-    m_flags( 0 )
+    m_flags( nullptr )
 {
     // nothing to do
 }

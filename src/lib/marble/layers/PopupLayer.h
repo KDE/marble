@@ -37,7 +37,7 @@ class MARBLE_EXPORT PopupLayer : public QObject, public LayerInterface
 {
     Q_OBJECT
 public:
-    explicit PopupLayer( MarbleWidget *widget, QObject* parent = 0 );
+    explicit PopupLayer( MarbleWidget *widget, QObject* parent = nullptr );
     ~PopupLayer() override;
 
     QStringList renderPosition() const override;

@@ -32,7 +32,7 @@ ScanlineTextureMapperContext::ScanlineTextureMapperContext( StackedTileLoader * 
       m_globalHeight( m_tileSize.height() * m_tileLoader->tileRowCount( m_tileLevel ) ),
       m_normGlobalWidth( m_globalWidth / ( 2 * M_PI ) ),
       m_normGlobalHeight( m_globalHeight /  M_PI ),
-      m_tile( 0 ),
+      m_tile( nullptr ),
       m_tilePosX( 65535 ),
       m_tilePosY( 65535 ),
       m_toTileCoordinatesLon( 0.5 * m_globalWidth  - m_tilePosX ),

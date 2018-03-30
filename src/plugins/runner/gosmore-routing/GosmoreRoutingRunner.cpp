@@ -164,7 +164,7 @@ QVector<GeoDataPlacemark*> GosmoreRunnerPrivate::parseGosmoreInstructions( const
 GeoDataDocument* GosmoreRunnerPrivate::createDocument( GeoDataLineString* routeWaypoints, const QVector<GeoDataPlacemark*> instructions )
 {
     if ( !routeWaypoints || routeWaypoints->isEmpty() ) {
-        return 0;
+        return nullptr;
     }
 
     GeoDataDocument* result = new GeoDataDocument();
@@ -208,7 +208,7 @@ void GosmoreRunner::retrieveRoute( const RouteRequest *route )
 {
     if ( !d->m_gosmoreMapFile.exists() )
     {
-        emit routeCalculated( 0 );
+        emit routeCalculated( nullptr );
         return;
     }
 

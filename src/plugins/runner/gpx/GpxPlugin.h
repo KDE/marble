@@ -22,7 +22,7 @@ class GpxPlugin : public ParseRunnerPlugin
     Q_INTERFACES( Marble::ParseRunnerPlugin )
 
 public:
-    explicit GpxPlugin( QObject *parent = 0 );
+    explicit GpxPlugin( QObject *parent = nullptr );
 
     QString name() const override;
 

@@ -31,7 +31,7 @@ public:
 };
 
 GeoDataUpdatePrivate::GeoDataUpdatePrivate() :
-    m_create( 0 ), m_delete( 0 ), m_change( 0 )
+    m_create( nullptr ), m_delete( nullptr ), m_change( nullptr )
 {
 }
 

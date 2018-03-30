@@ -20,7 +20,7 @@ class JobQueue : public QObject
 {
     Q_OBJECT
 public:
-    explicit JobQueue(QObject *parent = 0);
+    explicit JobQueue(QObject *parent = nullptr);
 
     void addJob(Job* job);
 

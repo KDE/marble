@@ -33,7 +33,7 @@ GeoNode* KmllinkDescriptionTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataNetworkLinkControl>()->setLinkDescription( linkDescription );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

@@ -24,7 +24,7 @@ class OpenRouteServicePlugin : public RoutingRunnerPlugin
     Q_INTERFACES( Marble::RoutingRunnerPlugin )
 
 public:
-    explicit OpenRouteServicePlugin( QObject *parent = 0 );
+    explicit OpenRouteServicePlugin( QObject *parent = nullptr );
 
     QString name() const override;
 

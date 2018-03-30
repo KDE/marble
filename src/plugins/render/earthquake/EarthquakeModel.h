@@ -22,7 +22,7 @@ class EarthquakeModel : public AbstractDataPluginModel
     Q_OBJECT
 
 public:
-    explicit EarthquakeModel( const MarbleModel *marbleModel, QObject *parent = 0 );
+    explicit EarthquakeModel( const MarbleModel *marbleModel, QObject *parent = nullptr );
     ~EarthquakeModel() override;
 
     void setMinMagnitude( double minMagnitude );

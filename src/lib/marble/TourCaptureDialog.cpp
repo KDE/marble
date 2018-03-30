@@ -25,7 +25,7 @@ TourCaptureDialog::TourCaptureDialog(MarbleWidget *widget, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::TourCaptureDialog),
     m_recorder(new MovieCapture(widget, parent)),
-    m_playback(0),
+    m_playback(nullptr),
     m_writingPossible( true ),
     m_current_position( 0.0 )
 {

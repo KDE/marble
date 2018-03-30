@@ -33,7 +33,7 @@ GeoNode* KmlcookieTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataNetworkLinkControl>()->setCookie( cookie );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

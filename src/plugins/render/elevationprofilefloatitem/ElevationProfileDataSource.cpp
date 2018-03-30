@@ -146,7 +146,7 @@ void ElevationProfileTrackDataSource::handleObjectAdded(GeoDataObject *object)
     // update internal datastructures
     m_trackHash.insert(document->fileName(), trackList);
 
-    const GeoDataTrack *selectedTrack = 0;
+    const GeoDataTrack *selectedTrack = nullptr;
     if ( 0 <= m_currentSourceIndex && m_currentSourceIndex < m_trackList.size() ) {
         selectedTrack = m_trackList[m_currentSourceIndex];
     }

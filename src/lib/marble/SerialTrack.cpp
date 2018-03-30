@@ -41,7 +41,7 @@ void SerialTrack::append(PlaybackItem* item)
     m_items.append( item );
     if( m_items.size() == 1 ) {
         PlaybackFlyToItem *flyTo = dynamic_cast<PlaybackFlyToItem*>( item );
-        if( flyTo != 0 ) {
+        if( flyTo != nullptr ) {
             flyTo->setFirst( true )
 ;        }
     }

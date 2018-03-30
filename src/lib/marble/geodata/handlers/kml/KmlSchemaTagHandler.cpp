@@ -51,7 +51,7 @@ GeoNode* KmlSchemaTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataDocument>()->addSchema( schema );
         return &parentItem.nodeAs<GeoDataDocument>()->schema( schema.id() );
     }
-    return 0;
+    return nullptr;
 
 }
 

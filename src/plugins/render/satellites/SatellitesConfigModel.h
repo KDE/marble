@@ -21,7 +21,7 @@ class SatellitesConfigModel : public QAbstractItemModel
 {
     Q_OBJECT
 public:
-    explicit SatellitesConfigModel( QObject *parent = 0 );
+    explicit SatellitesConfigModel( QObject *parent = nullptr );
     ~SatellitesConfigModel() override;
 
     void loadSettings(const QHash<QString, QVariant> &settings);

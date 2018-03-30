@@ -415,7 +415,7 @@ void GeoDataLineString::insert( int index, const GeoDataCoordinates& value )
 
     Q_D(GeoDataLineString);
     delete d->m_rangeCorrected;
-    d->m_rangeCorrected = 0;
+    d->m_rangeCorrected = nullptr;
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
     d->m_vector.insert( index, value );
@@ -427,7 +427,7 @@ void GeoDataLineString::append ( const GeoDataCoordinates& value )
 
     Q_D(GeoDataLineString);
     delete d->m_rangeCorrected;
-    d->m_rangeCorrected = 0;
+    d->m_rangeCorrected = nullptr;
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
     d->m_vector.append( value );
@@ -445,7 +445,7 @@ void GeoDataLineString::append(const QVector<GeoDataCoordinates>& values)
 
     Q_D(GeoDataLineString);
     delete d->m_rangeCorrected;
-    d->m_rangeCorrected = 0;
+    d->m_rangeCorrected = nullptr;
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
 
@@ -465,7 +465,7 @@ GeoDataLineString& GeoDataLineString::operator << ( const GeoDataCoordinates& va
 
     Q_D(GeoDataLineString);
     delete d->m_rangeCorrected;
-    d->m_rangeCorrected = 0;
+    d->m_rangeCorrected = nullptr;
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
     d->m_vector.append( value );
@@ -478,7 +478,7 @@ GeoDataLineString& GeoDataLineString::operator << ( const GeoDataLineString& val
 
     Q_D(GeoDataLineString);
     delete d->m_rangeCorrected;
-    d->m_rangeCorrected = 0;
+    d->m_rangeCorrected = nullptr;
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
 
@@ -530,7 +530,7 @@ void GeoDataLineString::clear()
 
     Q_D(GeoDataLineString);
     delete d->m_rangeCorrected;
-    d->m_rangeCorrected = 0;
+    d->m_rangeCorrected = nullptr;
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
 
@@ -585,7 +585,7 @@ void GeoDataLineString::reverse()
 
     Q_D(GeoDataLineString);
     delete d->m_rangeCorrected;
-    d->m_rangeCorrected = 0;
+    d->m_rangeCorrected = nullptr;
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
     std::reverse(begin(), end());
@@ -747,7 +747,7 @@ void GeoDataLineStringPrivate::toDateLineCorrected(
 
     TessellationFlags f = q.tessellationFlags();
 
-    GeoDataLineString * unfinishedLineString = 0;
+    GeoDataLineString * unfinishedLineString = nullptr;
 
     GeoDataLineString * dateLineCorrected = isClosed ? new GeoDataLinearRing( f )
                                                      : new GeoDataLineString( f );
@@ -873,7 +873,7 @@ QVector<GeoDataCoordinates>::Iterator GeoDataLineString::erase ( const QVector<G
 
     Q_D(GeoDataLineString);
     delete d->m_rangeCorrected;
-    d->m_rangeCorrected = 0;
+    d->m_rangeCorrected = nullptr;
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
     return d->m_vector.erase( pos );
@@ -886,7 +886,7 @@ QVector<GeoDataCoordinates>::Iterator GeoDataLineString::erase ( const QVector<G
 
     Q_D(GeoDataLineString);
     delete d->m_rangeCorrected;
-    d->m_rangeCorrected = 0;
+    d->m_rangeCorrected = nullptr;
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
     return d->m_vector.erase( begin, end );

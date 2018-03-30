@@ -28,7 +28,7 @@ class AudioOutput : public QObject
 
 public:
     /** Constructor */
-    explicit AudioOutput( QObject* parent = 0 );
+    explicit AudioOutput( QObject* parent = nullptr );
 
     /** Destructor */
     ~AudioOutput() override;

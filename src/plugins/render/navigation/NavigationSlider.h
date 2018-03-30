@@ -21,7 +21,7 @@ class NavigationSlider : public QAbstractSlider
 {
     Q_OBJECT
 public:
-    explicit NavigationSlider( QWidget *parent = 0 );
+    explicit NavigationSlider( QWidget *parent = nullptr );
     ~NavigationSlider() override;
 
 Q_SIGNALS:

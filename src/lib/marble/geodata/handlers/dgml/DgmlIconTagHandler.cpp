@@ -51,7 +51,7 @@ GeoNode* DgmlIconTagHandler::parse(GeoParser& parser) const
         color.setNamedColor(parser.attribute(dgmlAttr_color).trimmed());
     }
 
-    GeoSceneIcon *icon = 0;
+    GeoSceneIcon *icon = nullptr;
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
@@ -66,7 +66,7 @@ GeoNode* DgmlIconTagHandler::parse(GeoParser& parser) const
         icon->setColor( color );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

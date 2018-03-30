@@ -38,7 +38,7 @@ public:
         Longitude            ///< Longitude
     };
 
-    explicit LatLonEdit(QWidget *parent = 0, Dimension dimension = Longitude,
+    explicit LatLonEdit(QWidget *parent = nullptr, Dimension dimension = Longitude,
                         GeoDataCoordinates::Notation notation = GeoDataCoordinates::DMS);
     ~LatLonEdit() override;
     qreal value() const;

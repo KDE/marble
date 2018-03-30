@@ -35,7 +35,7 @@ public:
     };
 
     /** Constructor */
-    explicit SpeakersModel( QObject *parent = 0 );
+    explicit SpeakersModel( QObject *parent = nullptr );
 
     /** Destructor */
     ~SpeakersModel() override;

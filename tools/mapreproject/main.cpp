@@ -127,7 +127,7 @@ ReadOnlyMapDefinition parseInput( char * subopts )
         optionTileLevel,
         optionInterpolationMethod,
         optionCacheSize,
-        NULL
+        nullptr
     };
 
     ReadOnlyMapDefinition mapDefinition;
@@ -196,14 +196,14 @@ int main( int argc, char *argv[] )
            SimulateOption };
 
     static struct option long_options[] = {
-        {"help",              no_argument,       NULL, HelpOption },
-        {"input",             required_argument, NULL, InputOption },
-        {"output-directory",  required_argument, NULL, OutputDirectoryOption },
-        {"output-tile-level", required_argument, NULL, OutputTileLevelOption },
-        {"jobs",              required_argument, NULL, JobsOption },
-        {"cluster-size",      required_argument, NULL, ClusterSizeOption },
-        {"simulate",          no_argument,       NULL, SimulateOption },
-        {0, 0, 0, 0 }
+        {"help",              no_argument,       nullptr, HelpOption },
+        {"input",             required_argument, nullptr, InputOption },
+        {"output-directory",  required_argument, nullptr, OutputDirectoryOption },
+        {"output-tile-level", required_argument, nullptr, OutputTileLevelOption },
+        {"jobs",              required_argument, nullptr, JobsOption },
+        {"cluster-size",      required_argument, nullptr, ClusterSizeOption },
+        {"simulate",          no_argument,       nullptr, SimulateOption },
+        {nullptr, 0, nullptr, 0 }
     };
 
     while ( true ) {

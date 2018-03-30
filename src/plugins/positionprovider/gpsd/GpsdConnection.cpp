@@ -29,9 +29,9 @@ GpsdConnection::GpsdConnection( QObject* parent )
 #if defined( GPSD_API_MAJOR_VERSION ) && ( GPSD_API_MAJOR_VERSION >= 5 )
       m_gpsd( "localhost", DEFAULT_GPSD_PORT ),
 #endif
-      m_timer( 0 )
+      m_timer( nullptr )
 {
-    m_oldLocale = setlocale( LC_NUMERIC, NULL );
+    m_oldLocale = setlocale( LC_NUMERIC, nullptr );
     setlocale( LC_NUMERIC, "C" );
     connect( &m_timer, SIGNAL(timeout()), this, SLOT(update()) );
 }
@@ -53,7 +53,7 @@ void GpsdConnection::initialize()
 #endif
 #if defined( GPSD_API_MAJOR_VERSION ) && ( GPSD_API_MAJOR_VERSION >= 3 ) && defined( WATCH_ENABLE )
     if ( success ) {
-        success = (m_gpsd.stream( WATCH_ENABLE ) != NULL);
+        success = (m_gpsd.stream( WATCH_ENABLE ) != nullptr);
     }
 #endif
     if ( success ) {
@@ -98,7 +98,7 @@ void GpsdConnection::initialize()
 void GpsdConnection::update()
 {
 #if defined( GPSD_API_MAJOR_VERSION ) && ( GPSD_API_MAJOR_VERSION >= 4 ) && defined( PACKET_SET )
-    gps_data_t *data = 0;
+    gps_data_t *data = nullptr;
 
     QTime watchdog;
     watchdog.start();

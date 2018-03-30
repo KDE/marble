@@ -38,7 +38,7 @@ GeoNode* KmlDataTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs< GeoDataExtendedData >()->addValue( data );
         return static_cast<GeoDataData*>( &parentItem.nodeAs<GeoDataExtendedData>()->valueRef( name ) );
     } else {
-        return 0;
+        return nullptr;
     }
 
 }

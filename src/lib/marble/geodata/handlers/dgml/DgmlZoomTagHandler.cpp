@@ -43,7 +43,7 @@ GeoNode* DgmlZoomTagHandler::parse(GeoParser& parser) const
     if (parentItem.represents(dgmlTag_Head))
         return parentItem.nodeAs<GeoSceneHead>()->zoom();
 
-    return 0;
+    return nullptr;
 }
 
 }

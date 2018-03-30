@@ -36,7 +36,7 @@ class MARBLE_EXPORT RoutingRunnerPlugin : public QObject, public PluginInterface
 
 public:
     /** Constructor with optional parent object */
-    explicit RoutingRunnerPlugin( QObject* parent = 0 );
+    explicit RoutingRunnerPlugin( QObject* parent = nullptr );
 
     /** Destructor */
     ~RoutingRunnerPlugin() override;

@@ -178,7 +178,7 @@ void LayerManager::renderLayers( GeoPainter *painter, ViewportParams *viewport )
         QTime timer;
         for( auto *layer: layers ) {
             timer.start();
-            layer->render( painter, viewport, renderPosition, 0 );
+            layer->render( painter, viewport, renderPosition, nullptr );
             d->m_renderState.addChild( layer->renderState() );
             traceList.append( QString("%2 ms %3").arg( timer.elapsed(),3 ).arg( layer->runtimeTrace() ) );
         }

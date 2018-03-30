@@ -43,7 +43,7 @@ class NavigationFloatItem: public AbstractFloatItem
 MARBLE_PLUGIN( NavigationFloatItem )
 
  public:
-    explicit NavigationFloatItem( const MarbleModel *marbleModel = 0 );
+    explicit NavigationFloatItem( const MarbleModel *marbleModel = nullptr );
     ~NavigationFloatItem() override;
 
     QStringList backendTypes() const override;

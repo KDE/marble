@@ -61,7 +61,7 @@ public:
 };
 
 NavigationPrivate::NavigationPrivate() :
-    m_marbleQuickItem( nullptr ), m_muted( false ), m_autoNavigation( 0 ), m_nextInstructionDistance( 0.0 ),
+    m_marbleQuickItem( nullptr ), m_muted( false ), m_autoNavigation( nullptr ), m_nextInstructionDistance( 0.0 ),
     m_destinationDistance( 0.0 ), m_screenAccuracy(0)
 {
     // nothing to do

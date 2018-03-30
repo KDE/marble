@@ -25,7 +25,7 @@ class MARBLE_EXPORT ParsingRunner : public QObject
     Q_OBJECT
 
 public:
-    explicit ParsingRunner( QObject *parent = 0 );
+    explicit ParsingRunner( QObject *parent = nullptr );
 
     /**
       * Start a file parsing.

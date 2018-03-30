@@ -261,7 +261,7 @@ GeoDataCoordinates GeoDataPlacemark::coordinate( const QDateTime &dateTime, bool
         }
     }
 
-    if ( iconAtCoordinates != 0 ) {
+    if ( iconAtCoordinates != nullptr ) {
         *iconAtCoordinates = hasIcon;
     }
     return coord;

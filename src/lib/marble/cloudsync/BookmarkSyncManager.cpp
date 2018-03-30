@@ -210,7 +210,7 @@ public:
 BookmarkSyncManager::Private::Private(BookmarkSyncManager *parent, CloudSyncManager *cloudSyncManager ) :
   m_q( parent ),
   m_cloudSyncManager( cloudSyncManager ),
-  m_bookmarkManager( 0 ),
+  m_bookmarkManager( nullptr ),
   m_bookmarkSyncEnabled( false )
 {
     m_cachePath = MarbleDirs::localPath() + QLatin1String("/cloudsync/cache/bookmarks");
@@ -438,14 +438,14 @@ const GeoDataPlacemark* BookmarkSyncManager::Private::findPlacemark( GeoDataCont
         }
     }
 
-    return 0;
+    return nullptr;
 }
 
 void BookmarkSyncManager::Private::determineDiffStatus( DiffItem &item, GeoDataDocument *document ) const
 {
     const GeoDataPlacemark *match = findPlacemark( document, item.m_placemarkA );
 
-    if( match != 0 ) {
+    if( match != nullptr ) {
         item.m_placemarkB = *match;
         bool nameChanged = item.m_placemarkA.name() != item.m_placemarkB.name();
         bool descChanged = item.m_placemarkA.description() != item.m_placemarkB.description();
@@ -622,7 +622,7 @@ void BookmarkSyncManager::Private::merge()
 
 GeoDataFolder* BookmarkSyncManager::Private::createFolders( GeoDataContainer *container, QStringList &pathList )
 {
-    GeoDataFolder *folder = 0;
+    GeoDataFolder *folder = nullptr;
     if( pathList.count() > 0 ) {
         QString name = pathList.takeFirst();
 
@@ -632,7 +632,7 @@ GeoDataFolder* BookmarkSyncManager::Private::createFolders( GeoDataContainer *co
             }
         }
 
-        if( folder == 0 ) {
+        if( folder == nullptr ) {
             folder = new GeoDataFolder();
             folder->setName( name );
             container->append( folder );

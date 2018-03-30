@@ -47,7 +47,7 @@ const char *GeoDataPlaylist::nodeType() const
 GeoDataTourPrimitive* GeoDataPlaylist::primitive(int id)
 {
     if (size() <= id || id < 0) {
-        return 0;
+        return nullptr;
     }
     return m_primitives.at(id);
 }
@@ -55,7 +55,7 @@ GeoDataTourPrimitive* GeoDataPlaylist::primitive(int id)
 const GeoDataTourPrimitive* GeoDataPlaylist::primitive(int id) const
 {
     if (size() <= id || id < 0) {
-        return 0;
+        return nullptr;
     }
     return m_primitives.at(id);
 }

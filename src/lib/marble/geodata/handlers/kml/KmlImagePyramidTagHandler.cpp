@@ -30,7 +30,7 @@ GeoNode* KmlImagePyramidTagHandler::parse( GeoParser& parser ) const
     if ( parentItem.represents( kmlTag_PhotoOverlay ) ) {
         return &parentItem.nodeAs<GeoDataPhotoOverlay>()->imagePyramid();
     }
-    return 0;
+    return nullptr;
 }
 
 }

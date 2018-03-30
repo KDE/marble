@@ -33,7 +33,7 @@ GeoNode* KmltextTagHandler::parse( GeoParser& parser ) const
         QString text = parser.readElementText().trimmed();
         parentItem.nodeAs<GeoDataBalloonStyle>()->setText( text );
     }
-    return 0;
+    return nullptr;
 }
 
 }

@@ -54,7 +54,7 @@ GeoNode* KmlFolderTagHandler::parse(GeoParser& parser) const
         return folder;
     } else {
         delete folder;
-        return 0;
+        return nullptr;
     }
 }
 

@@ -17,7 +17,7 @@
 namespace Marble
 {
 
-GpsdThread::GpsdThread() : m_connection( 0 )
+GpsdThread::GpsdThread() : m_connection( nullptr )
 {
     // nothing to do
 }

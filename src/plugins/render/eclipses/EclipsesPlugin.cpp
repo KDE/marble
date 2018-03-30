@@ -31,36 +31,36 @@ namespace Marble
 {
 
 EclipsesPlugin::EclipsesPlugin()
-    : RenderPlugin( 0 ),
+    : RenderPlugin( nullptr ),
       m_isInitialized( false ),
-      m_marbleWidget( 0 ),
-      m_model( 0 ),
-      m_eclipsesActionGroup( 0 ),
-      m_eclipsesMenuAction( 0 ),
-      m_eclipsesListMenu( 0 ),
+      m_marbleWidget( nullptr ),
+      m_model( nullptr ),
+      m_eclipsesActionGroup( nullptr ),
+      m_eclipsesMenuAction( nullptr ),
+      m_eclipsesListMenu( nullptr ),
       m_menuYear( 0 ),
-      m_configDialog( 0 ),
-      m_configWidget( 0 ),
-      m_browserDialog( 0 ),
-      m_reminderDialog( 0 ),
-      m_reminderWidget( 0 )
+      m_configDialog( nullptr ),
+      m_configWidget( nullptr ),
+      m_browserDialog( nullptr ),
+      m_reminderDialog( nullptr ),
+      m_reminderWidget( nullptr )
 {
 }
 
 EclipsesPlugin::EclipsesPlugin( const MarbleModel *marbleModel )
     : RenderPlugin( marbleModel ),
      m_isInitialized( false ),
-     m_marbleWidget( 0 ),
-     m_model( 0 ),
-     m_eclipsesActionGroup( 0 ),
-     m_eclipsesMenuAction( 0 ),
-     m_eclipsesListMenu( 0 ),
+     m_marbleWidget( nullptr ),
+     m_model( nullptr ),
+     m_eclipsesActionGroup( nullptr ),
+     m_eclipsesMenuAction( nullptr ),
+     m_eclipsesListMenu( nullptr ),
      m_menuYear( 0 ),
-     m_configDialog( 0 ),
-     m_configWidget( 0 ),
-     m_browserDialog( 0 ),
-     m_reminderDialog( 0 ),
-     m_reminderWidget( 0 )
+     m_configDialog( nullptr ),
+     m_configWidget( nullptr ),
+     m_browserDialog( nullptr ),
+     m_reminderDialog( nullptr ),
+     m_reminderWidget( nullptr )
 {
     connect( this, SIGNAL(settingsChanged(QString)),
                    SLOT(updateSettings()) );

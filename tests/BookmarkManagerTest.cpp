@@ -40,7 +40,7 @@ void BookmarkManagerTest::construct()
 
         QCOMPARE( model.rowCount(), 1 );
 
-        QVERIFY( manager.document() != 0 );
+        QVERIFY( manager.document() != nullptr );
         QCOMPARE( manager.folders().count(), 1 );
         QCOMPARE( manager.folders().first()->size(), 0 );
         QCOMPARE( manager.showBookmarks(), true );
@@ -79,7 +79,7 @@ void BookmarkManagerTest::loadFile()
     const bool fileLoaded = manager.loadFile( relativePath );
 
     QCOMPARE( fileLoaded, expected );
-    QVERIFY( manager.document() != 0 );
+    QVERIFY( manager.document() != nullptr );
 
     QCOMPARE( model.rowCount(), 1 );
 }

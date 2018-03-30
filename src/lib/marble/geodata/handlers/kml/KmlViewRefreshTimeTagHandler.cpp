@@ -31,7 +31,7 @@ GeoNode *KmlviewRefreshTimeTagHandler::parse(GeoParser & parser) const
         parentItem.nodeAs<GeoDataLink>()->setViewRefreshTime( viewRefreshTime );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

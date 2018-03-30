@@ -315,7 +315,7 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId )
 
         // Blending (how to merge the images into an only image)
         const Blending *blending = d->m_blendingFactory.findBlending( layer->blending() );
-        if ( blending == 0 && !layer->blending().isEmpty() ) {
+        if ( blending == nullptr && !layer->blending().isEmpty() ) {
             mDebug() << Q_FUNC_INFO << "could not find blending" << layer->blending();
         }
 

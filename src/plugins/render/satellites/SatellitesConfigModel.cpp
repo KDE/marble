@@ -103,7 +103,7 @@ int SatellitesConfigModel::rowCount( const QModelIndex &parent ) const
         return 0;
     }
 
-    SatellitesConfigAbstractItem *parentItem = 0;
+    SatellitesConfigAbstractItem *parentItem = nullptr;
     if ( !parent.isValid() ) {
         parentItem = m_rootItem;
     } else {
@@ -138,7 +138,7 @@ QModelIndex SatellitesConfigModel::index( int row, int column,
         return QModelIndex();
     }
 
-    SatellitesConfigAbstractItem *parentItem = 0;
+    SatellitesConfigAbstractItem *parentItem = nullptr;
     if ( !parent.isValid() ) {
         parentItem = m_rootItem;
     } else {
@@ -176,7 +176,7 @@ QVariant SatellitesConfigModel::headerData( int section,
 Qt::ItemFlags SatellitesConfigModel::flags( const QModelIndex &index ) const
 {
     if ( !index.isValid() ) {
-        return 0;
+        return nullptr;
     }
 
     SatellitesConfigAbstractItem *item =

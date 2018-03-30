@@ -46,8 +46,8 @@ PositionMarker::PositionMarker( const MarbleModel *marbleModel )
       m_useCustomCursor( false ),
       m_defaultCursorPath(MarbleDirs::path(QStringLiteral("svg/track_turtle.svg"))),
       m_lastBoundingBox(),
-      ui_configWidget( 0 ),
-      m_configDialog( 0 ),
+      ui_configWidget( nullptr ),
+      m_configDialog( nullptr ),
       m_cursorPath( m_defaultCursorPath ),
       m_cursorSize( 1.0 ),
       m_accuracyColor( Oxygen::brickRed4 ),
@@ -179,7 +179,7 @@ bool PositionMarker::render( GeoPainter *painter,
     Q_UNUSED( renderPos )
     Q_UNUSED( layer )
 
-    bool const gpsActive = marbleModel()->positionTracking()->positionProviderPlugin() != 0;
+    bool const gpsActive = marbleModel()->positionTracking()->positionProviderPlugin() != nullptr;
     bool const positionAvailable = marbleModel()->positionTracking()->status() == PositionProviderStatusAvailable;
     bool const positionValid = m_currentPosition.isValid();
     if ( gpsActive && positionAvailable && positionValid ) {
@@ -391,7 +391,7 @@ void PositionMarker::setPosition( const GeoDataCoordinates &position )
 
 void PositionMarker::chooseCustomCursor()
 {
-    QString filename = QFileDialog::getOpenFileName( NULL, tr( "Choose Custom Cursor" ) );
+    QString filename = QFileDialog::getOpenFileName( nullptr, tr( "Choose Custom Cursor" ) );
     if( !filename.isEmpty() )
         loadCustomCursor( filename, true );
 }
@@ -435,7 +435,7 @@ void PositionMarker::chooseColor()
     else if( sender() == ui_configWidget->m_trailColorChooserButton ) {
         initialColor = m_trailColor;
     }
-    QColor color = QColorDialog::getColor( initialColor, NULL, 
+    QColor color = QColorDialog::getColor( initialColor, nullptr, 
                                            tr( "Please choose a color" ), 
                                            QColorDialog::ShowAlphaChannel );
     if( color.isValid() )

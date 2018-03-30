@@ -34,7 +34,7 @@ class MARBLE_EXPORT TileCreatorDialog : public QDialog
     Q_OBJECT
 
  public:
-    explicit TileCreatorDialog( TileCreator *creator, QWidget *parent = 0 );
+    explicit TileCreatorDialog( TileCreator *creator, QWidget *parent = nullptr );
     ~TileCreatorDialog() override;
 
  public Q_SLOTS:

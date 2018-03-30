@@ -61,7 +61,7 @@ class SunPlugin : public RenderPlugin
 
     bool isInitialized () const override;
 
-    bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 ) override;
+    bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = nullptr ) override;
 
 private:
     QPixmap m_pixmap;

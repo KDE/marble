@@ -34,7 +34,7 @@ namespace Marble
 
 MapScaleFloatItem::MapScaleFloatItem( const MarbleModel *marbleModel )
     : AbstractFloatItem( marbleModel, QPointF( 10.5, -10.5 ), QSizeF( 0.0, 40.0 ) ),
-      m_configDialog(0),
+      m_configDialog(nullptr),
       m_radius(0),
       m_target(QString()),
       m_leftBarMargin(0),
@@ -48,7 +48,7 @@ MapScaleFloatItem::MapScaleFloatItem( const MarbleModel *marbleModel )
       m_valueInterval(0),
       m_scaleInitDone( false ),
       m_showRatioScale( false ),
-      m_contextMenu( 0 ),
+      m_contextMenu( nullptr ),
       m_minimized(false),
       m_widthScaleFactor(2)
 {

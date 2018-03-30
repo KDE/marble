@@ -31,13 +31,13 @@ class MarbleGraphicsItemPrivate
 {
  public:
     explicit MarbleGraphicsItemPrivate( MarbleGraphicsItem *marbleGraphicsItem,
-                                        MarbleGraphicsItem *parent = 0 )
+                                        MarbleGraphicsItem *parent = nullptr )
         : m_repaintNeeded( true ),
           m_cacheMode( MarbleGraphicsItem::NoCache ),
           m_visibility( true ),
           m_parent( parent ),
           m_children(),
-          m_layout( 0 ),
+          m_layout( nullptr ),
           m_marbleGraphicsItem( marbleGraphicsItem )
     {
         if ( m_parent ) {

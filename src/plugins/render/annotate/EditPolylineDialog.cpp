@@ -58,9 +58,9 @@ public:
 
 EditPolylineDialog::Private::Private( GeoDataPlacemark *placemark ) :
     Ui::UiEditPolylineDialog(),
-    m_linesDialog( 0 ),
-    m_osmTagEditorWidget( 0 ),
-    m_osmRelationManagerWidget( 0 ),
+    m_linesDialog( nullptr ),
+    m_osmTagEditorWidget( nullptr ),
+    m_osmRelationManagerWidget( nullptr ),
     m_placemark( placemark ),
     m_nodeModel( new NodeModel )
 {

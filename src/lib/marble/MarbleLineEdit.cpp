@@ -155,7 +155,7 @@ void MarbleLineEdit::updateClearButtonIcon( const QString& text )
 void MarbleLineEdit::updateClearButton()
 {
     const QSize geom = size();
-    const int frameWidth = style()->pixelMetric( QStyle::PM_DefaultFrameWidth, 0, this );
+    const int frameWidth = style()->pixelMetric( QStyle::PM_DefaultFrameWidth, nullptr, this );
     const int pixmapSize = d->m_clearButton->pixmap()->width() + 1;
     const int decoratorSize = d->m_decoratorPixmap.width() + 1;
 

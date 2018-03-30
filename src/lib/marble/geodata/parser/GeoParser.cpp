@@ -38,7 +38,7 @@ namespace Marble
 
 GeoParser::GeoParser( GeoDataGenericSourceType source )
     : QXmlStreamReader(),
-      m_document( 0 ),
+      m_document( nullptr ),
       m_source( source )
 {
 }
@@ -148,7 +148,7 @@ void GeoParser::parseDocument()
     if( tokenType() == QXmlStreamReader::Invalid )
         raiseWarning( QString( "%1: %2" ).arg( error() ).arg( errorString() ) );
 
-    GeoStackItem stackItem( qName, 0 );
+    GeoStackItem stackItem( qName, nullptr );
 
     if ( const GeoTagHandler* handler = GeoTagHandler::recognizes( qName )) {
         stackItem.assignNode( handler->parse( *this ));
@@ -209,7 +209,7 @@ QString GeoParser::attribute( const char* attributeName ) const
 GeoDocument* GeoParser::releaseDocument()
 {
     GeoDocument* document = m_document;
-    m_document = 0;
+    m_document = nullptr;
     return document;
 }
 

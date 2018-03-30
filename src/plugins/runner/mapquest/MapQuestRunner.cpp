@@ -204,7 +204,7 @@ GeoDataDocument* MapQuestRunner::parse( const QByteArray &content ) const
     QDomDocument xml;
     if ( !xml.setContent( content ) ) {
         mDebug() << "Cannot parse xml file with routing instructions.";
-        return 0;
+        return nullptr;
     }
 
     // mDebug() << xml.toString(2);
@@ -296,7 +296,7 @@ GeoDataDocument* MapQuestRunner::parse( const QByteArray &content ) const
 
     if ( routeWaypoints->size() < 1 ) {
         delete result;
-        result = 0;
+        result = nullptr;
     }
 
     return result;

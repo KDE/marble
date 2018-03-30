@@ -125,7 +125,7 @@ void PopupItem::setContent( const QString &html, const QUrl &baseUrl )
 
 void PopupItem::setTextColor(const QColor &color)
 {
-    if(color.isValid() && m_ui.titleText != 0) {
+    if(color.isValid() && m_ui.titleText != nullptr) {
         m_textColor = color;
         QPalette palette(m_ui.titleText->palette());
         palette.setColor(QPalette::WindowText, m_textColor);
@@ -334,7 +334,7 @@ QWidget* PopupItem::transform( QPoint &point ) const
             return child;
         }
     }
-    return 0;
+    return nullptr;
 }
 
 void PopupItem::clearHistory()

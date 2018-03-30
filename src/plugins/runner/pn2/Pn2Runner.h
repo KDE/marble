@@ -25,7 +25,7 @@ class Pn2Runner : public ParsingRunner
 {
     Q_OBJECT
 public:
-    explicit Pn2Runner(QObject *parent = 0);
+    explicit Pn2Runner(QObject *parent = nullptr);
     ~Pn2Runner() override;
     GeoDataDocument* parseFile( const QString &fileName, DocumentRole role, QString& error ) override;
 

@@ -117,7 +117,7 @@ void GeoSceneGroup::addProperty( GeoSceneProperty* property )
 
 const GeoSceneProperty* GeoSceneGroup::property( const QString& name ) const
 {
-    GeoSceneProperty* property = 0;
+    GeoSceneProperty* property = nullptr;
 
     QVector<GeoSceneProperty*>::const_iterator it = m_properties.constBegin();
     QVector<GeoSceneProperty*>::const_iterator end = m_properties.constEnd();

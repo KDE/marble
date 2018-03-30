@@ -44,7 +44,7 @@ GeoNode* DgmlVectorTagHandler::parse(GeoParser& parser) const
     QString name      = parser.attribute(dgmlAttr_name).trimmed();
     QString feature   = parser.attribute(dgmlAttr_feature).trimmed();
 
-    GeoSceneGeodata *vector = 0;
+    GeoSceneGeodata *vector = nullptr;
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();

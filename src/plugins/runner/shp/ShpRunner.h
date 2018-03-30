@@ -19,7 +19,7 @@ class ShpRunner : public ParsingRunner
 {
     Q_OBJECT
 public:
-    explicit ShpRunner(QObject *parent = 0);
+    explicit ShpRunner(QObject *parent = nullptr);
     ~ShpRunner() override;
     GeoDataDocument* parseFile( const QString &fileName, DocumentRole role, QString& error ) override;
 };

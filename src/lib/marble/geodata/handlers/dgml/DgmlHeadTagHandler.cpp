@@ -43,7 +43,7 @@ GeoNode* DgmlHeadTagHandler::parse(GeoParser& parser) const
     if (parentItem.represents(dgmlTag_Document))
         return parentItem.nodeAs<GeoSceneDocument>()->head();
 
-    return 0;
+    return nullptr;
 }
 
 }

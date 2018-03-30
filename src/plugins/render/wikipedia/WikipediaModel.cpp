@@ -35,7 +35,7 @@ using namespace Marble;
 
 WikipediaModel::WikipediaModel( const MarbleModel *marbleModel, QObject *parent )
     : AbstractDataPluginModel( "wikipedia", marbleModel, parent ),
-      m_marbleWidget( 0 ),
+      m_marbleWidget( nullptr ),
       m_wikipediaIcon(MarbleDirs::path(QStringLiteral("svg/wikipedia_shadow.svg"))),
       m_showThumbnail( true )
 {

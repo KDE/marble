@@ -22,7 +22,7 @@ class GeoDataLineStringPrivate : public GeoDataGeometryPrivate
 {
   public:
     explicit GeoDataLineStringPrivate( TessellationFlags f )
-        :  m_rangeCorrected( 0 ),
+        :  m_rangeCorrected( nullptr ),
            m_dirtyRange( true ),
            m_dirtyBox( true ),
            m_tessellationFlags( f ),
@@ -32,7 +32,7 @@ class GeoDataLineStringPrivate : public GeoDataGeometryPrivate
     }
 
     GeoDataLineStringPrivate()
-         : m_rangeCorrected( 0 ),
+         : m_rangeCorrected( nullptr ),
            m_dirtyRange( true ),
            m_dirtyBox( true )
     {
@@ -47,7 +47,7 @@ class GeoDataLineStringPrivate : public GeoDataGeometryPrivate
     {
         GeoDataGeometryPrivate::operator=( other );
         m_vector = other.m_vector;
-        m_rangeCorrected = 0;
+        m_rangeCorrected = nullptr;
         m_dirtyRange = true;
         m_dirtyBox = other.m_dirtyBox;
         m_tessellationFlags = other.m_tessellationFlags;

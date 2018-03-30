@@ -29,7 +29,7 @@ class MARBLE_EXPORT SearchRunner : public QObject
     Q_OBJECT
 
 public:
-    explicit SearchRunner( QObject *parent = 0 );
+    explicit SearchRunner( QObject *parent = nullptr );
 
     /**
      * Stores a pointer to the currently used model

@@ -30,7 +30,7 @@ class MARBLE_EXPORT ParseRunnerPlugin : public QObject, public PluginInterface
 
 public:
     /** Constructor with optional parent object */
-    explicit ParseRunnerPlugin( QObject* parent = 0 );
+    explicit ParseRunnerPlugin( QObject* parent = nullptr );
 
     /** Destructor */
     ~ParseRunnerPlugin() override;

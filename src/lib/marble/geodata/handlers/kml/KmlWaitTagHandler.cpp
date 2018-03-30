@@ -39,7 +39,7 @@ GeoNode* KmlWaitTagHandler::parse(GeoParser &parser) const
         delete wait;
     }
 
-    return 0;
+    return nullptr;
 }
 
 } // namespace kml

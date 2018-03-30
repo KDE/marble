@@ -23,7 +23,7 @@ RoutingInstruction::RoutingInstruction( const RoutingWaypoint &item ) :
         m_roadName( item.roadName() ), m_roadType( item.roadType() ),
         m_secondsLeft( item.secondsRemaining() ),
         m_angleToPredecessor( 0.0 ), m_roundaboutExit( 0 ),
-        m_predecessor( 0 ), m_successor( 0 )
+        m_predecessor( nullptr ), m_successor( nullptr )
 {
     m_points.append( item );
 }

@@ -39,7 +39,7 @@ public:
         IsOnCloud
     };
 
-    explicit CloudRouteModel( QObject *parent = 0 );
+    explicit CloudRouteModel( QObject *parent = nullptr );
     ~CloudRouteModel() override;
 
     QVariant data( const QModelIndex& index, int role = Qt::DisplayRole ) const override;

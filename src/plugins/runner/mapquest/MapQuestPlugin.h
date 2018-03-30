@@ -24,7 +24,7 @@ class MapQuestPlugin : public RoutingRunnerPlugin
     Q_INTERFACES( Marble::RoutingRunnerPlugin )
 
 public:
-    explicit MapQuestPlugin( QObject *parent = 0 );
+    explicit MapQuestPlugin( QObject *parent = nullptr );
 
     QString name() const override;
 

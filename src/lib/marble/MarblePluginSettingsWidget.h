@@ -41,7 +41,7 @@ class MARBLE_EXPORT MarblePluginSettingsWidget : public QWidget
     Q_OBJECT
 
  public:
-    explicit MarblePluginSettingsWidget( QWidget *parent = 0 );
+    explicit MarblePluginSettingsWidget( QWidget *parent = nullptr );
     ~MarblePluginSettingsWidget() override;
 
     void setModel( RenderPluginModel* pluginModel );

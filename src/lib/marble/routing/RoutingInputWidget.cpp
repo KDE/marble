@@ -52,7 +52,7 @@ namespace Marble
 class RoutingInputLineEdit : public MarbleLineEdit
 {
 public:
-    explicit RoutingInputLineEdit( QWidget *parent = 0 );
+    explicit RoutingInputLineEdit( QWidget *parent = nullptr );
 
 protected:
     void keyPressEvent(QKeyEvent *) override;
@@ -155,13 +155,13 @@ void RoutingInputLineEdit::keyPressEvent(QKeyEvent *event)
 
 RoutingInputWidgetPrivate::RoutingInputWidgetPrivate( MarbleModel* model, int index, QWidget *parent ) :
         m_marbleModel( model ),
-        m_lineEdit( 0 ),
+        m_lineEdit( nullptr ),
         m_placemarkRunnerManager( m_marbleModel ),
         m_reverseGeocodingRunnerManager( m_marbleModel ),
-        m_placemarkModel( 0 ), m_route( m_marbleModel->routingManager()->routeRequest() ), m_index( index ),
-        m_bookmarkAction( 0 ), m_mapInput( 0 ), m_currentLocationAction( 0 ),
-        m_centerAction( 0 ),
-        m_menu( 0 )
+        m_placemarkModel( nullptr ), m_route( m_marbleModel->routingManager()->routeRequest() ), m_index( index ),
+        m_bookmarkAction( nullptr ), m_mapInput( nullptr ), m_currentLocationAction( nullptr ),
+        m_centerAction( nullptr ),
+        m_menu( nullptr )
 {
     m_lineEdit = new RoutingInputLineEdit( parent );
     m_lineEdit->setDecorator( addDropDownIndicator( m_route->pixmap( m_index ) ) );

@@ -41,8 +41,8 @@ namespace Marble
 StarsPlugin::StarsPlugin( const MarbleModel *marbleModel )
     : RenderPlugin( marbleModel ),
       m_nameIndex( 0 ),
-      m_configDialog( 0 ),
-      ui_configWidget( 0 ),
+      m_configDialog( nullptr ),
+      ui_configWidget( nullptr ),
       m_renderStars( true ),
       m_renderConstellationLines( true ),
       m_renderConstellationLabels( true ),
@@ -67,11 +67,11 @@ StarsPlugin::StarsPlugin( const MarbleModel *marbleModel )
       m_eclipticBrush( Marble::Oxygen::aluminumGray5 ),
       m_celestialEquatorBrush( Marble::Oxygen::aluminumGray5 ),
       m_celestialPoleBrush( Marble::Oxygen::aluminumGray5 ),
-      m_contextMenu(0),
-      m_constellationsAction(0),
-      m_sunMoonAction(0),
-      m_planetsAction(0),
-      m_dsoAction(0),
+      m_contextMenu(nullptr),
+      m_constellationsAction(nullptr),
+      m_sunMoonAction(nullptr),
+      m_planetsAction(nullptr),
+      m_dsoAction(nullptr),
       m_doRender( false )
 {
     bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
@@ -464,7 +464,7 @@ void StarsPlugin::writeSettings()
 
 void StarsPlugin::constellationGetColor()
 {
-    const QColor c = QColorDialog::getColor( m_constellationBrush.color(), 0, tr("Please choose the color for the constellation lines.") );
+    const QColor c = QColorDialog::getColor( m_constellationBrush.color(), nullptr, tr("Please choose the color for the constellation lines.") );
 
     if ( c.isValid() ) {
         QPalette palette = ui_configWidget->m_constellationColorButton->palette();
@@ -475,7 +475,7 @@ void StarsPlugin::constellationGetColor()
 
 void StarsPlugin::constellationLabelGetColor()
 {
-    const QColor c = QColorDialog::getColor( m_constellationLabelBrush.color(), 0, tr("Please choose the color for the constellation labels.") );
+    const QColor c = QColorDialog::getColor( m_constellationLabelBrush.color(), nullptr, tr("Please choose the color for the constellation labels.") );
 
     if ( c.isValid() ) {
         QPalette palette = ui_configWidget->m_constellationLabelColorButton->palette();
@@ -486,7 +486,7 @@ void StarsPlugin::constellationLabelGetColor()
 
 void StarsPlugin::dsoLabelGetColor()
 {
-    const QColor c = QColorDialog::getColor( m_dsoLabelBrush.color(), 0, tr("Please choose the color for the dso labels.") );
+    const QColor c = QColorDialog::getColor( m_dsoLabelBrush.color(), nullptr, tr("Please choose the color for the dso labels.") );
 
     if ( c.isValid() ) {
         QPalette palette = ui_configWidget->m_dsoLabelColorButton->palette();
@@ -497,7 +497,7 @@ void StarsPlugin::dsoLabelGetColor()
 
 void StarsPlugin::eclipticGetColor()
 {
-    const QColor c = QColorDialog::getColor( m_eclipticBrush.color(), 0, tr("Please choose the color for the ecliptic.") );
+    const QColor c = QColorDialog::getColor( m_eclipticBrush.color(), nullptr, tr("Please choose the color for the ecliptic.") );
 
     if ( c.isValid() ) {
         QPalette palette = ui_configWidget->m_eclipticColorButton->palette();
@@ -508,7 +508,7 @@ void StarsPlugin::eclipticGetColor()
 
 void StarsPlugin::celestialEquatorGetColor()
 {
-    const QColor c = QColorDialog::getColor( m_celestialEquatorBrush.color(), 0, tr("Please choose the color for the celestial equator.") );
+    const QColor c = QColorDialog::getColor( m_celestialEquatorBrush.color(), nullptr, tr("Please choose the color for the celestial equator.") );
 
     if ( c.isValid() ) {
         QPalette palette = ui_configWidget->m_celestialEquatorColorButton->palette();
@@ -519,7 +519,7 @@ void StarsPlugin::celestialEquatorGetColor()
 
 void StarsPlugin::celestialPoleGetColor()
 {
-    const QColor c = QColorDialog::getColor( m_celestialPoleBrush.color(), 0, tr("Please choose the color for the celestial equator.") );
+    const QColor c = QColorDialog::getColor( m_celestialPoleBrush.color(), nullptr, tr("Please choose the color for the celestial equator.") );
 
     if ( c.isValid() ) {
         QPalette palette = ui_configWidget->m_celestialPoleColorButton->palette();

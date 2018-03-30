@@ -34,7 +34,7 @@ public:
      * @param widget the marble widget. It cannot be null.
      * @param parent optional parent object
      */
-    explicit AutoNavigation( MarbleModel *model, const ViewportParams *viewport, QObject *parent = 0 );
+    explicit AutoNavigation( MarbleModel *model, const ViewportParams *viewport, QObject *parent = nullptr );
 
     /** Destructor */
     ~AutoNavigation() override;

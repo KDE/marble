@@ -32,7 +32,7 @@ using namespace Marble;
 BBCWeatherService::BBCWeatherService( const MarbleModel *model, QObject *parent )
     : AbstractWeatherService( model, parent ),
       m_parsingStarted( false ),
-      m_parser( 0 ),
+      m_parser( nullptr ),
       m_itemGetter( new BBCItemGetter( this ) )
 {
      qRegisterMetaType<BBCStation>("BBCStation");
@@ -97,7 +97,7 @@ void BBCWeatherService::fetchStationList()
     m_itemGetter->setStationList( m_stationList );
 
     delete m_parser;
-    m_parser = 0;
+    m_parser = nullptr;
 }
 
 void BBCWeatherService::createItem( const BBCStation& station )

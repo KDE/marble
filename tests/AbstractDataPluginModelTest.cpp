@@ -26,7 +26,7 @@ class TestDataPluginItem : public AbstractDataPluginItem
     Q_OBJECT
 
 public:
-    TestDataPluginItem( QObject *parent = 0 ) :
+    TestDataPluginItem( QObject *parent = nullptr ) :
         AbstractDataPluginItem( parent ),
         m_initialized( false )
     {}
@@ -45,7 +45,7 @@ class TestDataPluginModel : public AbstractDataPluginModel
     Q_OBJECT
 
 public:
-    TestDataPluginModel( const MarbleModel *marbleModel, QObject *parent = 0 ) :
+    TestDataPluginModel( const MarbleModel *marbleModel, QObject *parent = nullptr ) :
         AbstractDataPluginModel( "test", marbleModel, parent )
     {}
 
@@ -62,7 +62,7 @@ class AbstractDataPluginModelTest : public QObject
     Q_OBJECT
 
 public:
-    AbstractDataPluginModelTest( QObject *parent = 0 ) :
+    AbstractDataPluginModelTest( QObject *parent = nullptr ) :
         QObject( parent )
     {}
 
@@ -150,7 +150,7 @@ void AbstractDataPluginModelTest::addItemToList()
 
     QVERIFY( model.isFavoriteItemsOnly() == false );
     QVERIFY( !model.itemExists( "foo" ) );
-    QVERIFY( model.findItem( "foo" ) == 0 );
+    QVERIFY( model.findItem( "foo" ) == nullptr );
 
     TestDataPluginItem *item = new TestDataPluginItem();
     item->setInitialized( initialized );
@@ -242,7 +242,7 @@ void AbstractDataPluginModelTest::switchMapTheme()
     QCOMPARE( marbleModel.mapThemeId(), mapThemeId );
 
     if ( planetChanged ) {
-        QCOMPARE( model.findItem( "foo" ), static_cast<AbstractDataPluginItem *>( 0 ) );
+        QCOMPARE( model.findItem( "foo" ), static_cast<AbstractDataPluginItem *>( nullptr ) );
     }
     else {
         QCOMPARE( model.findItem( "foo" ), item );

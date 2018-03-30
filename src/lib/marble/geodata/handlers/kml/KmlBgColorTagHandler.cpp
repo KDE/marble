@@ -41,7 +41,7 @@ GeoNode* KmlbgColorTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataListStyle>()->setBackgroundColor( color );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

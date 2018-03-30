@@ -49,7 +49,7 @@ AprsFile::openSocket()
     if ( !file->open( QFile::ReadOnly ) ) {
         mDebug() << "opening File failed";
         delete file;
-        return 0;
+        return nullptr;
     }
     mDebug() << "Opened " << m_fileName.toLocal8Bit().data();
     return file;

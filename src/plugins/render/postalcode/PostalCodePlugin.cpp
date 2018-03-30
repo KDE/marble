@@ -16,7 +16,7 @@
 using namespace Marble;
 
 PostalCodePlugin::PostalCodePlugin()
-    : AbstractDataPlugin( 0 )
+    : AbstractDataPlugin( nullptr )
 {
 }
 

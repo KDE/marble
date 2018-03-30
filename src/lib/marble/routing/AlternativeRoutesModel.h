@@ -39,7 +39,7 @@ public:
     };
 
     /** Constructor */
-    explicit AlternativeRoutesModel( QObject *parent = 0 );
+    explicit AlternativeRoutesModel( QObject *parent = nullptr );
 
     /** Destructor */
     ~AlternativeRoutesModel() override;

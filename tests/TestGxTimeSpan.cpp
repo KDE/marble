@@ -56,7 +56,7 @@ void TestGxTimeSpan::simpleParseTest()
     GeoDataDocument* dataDocument = parseKml( centerContent );
     QCOMPARE( dataDocument->placemarkList().size(), 1 );
     GeoDataPlacemark *placemark = dataDocument->placemarkList().at( 0 );
-    QVERIFY( placemark->lookAt() != 0 );
+    QVERIFY( placemark->lookAt() != nullptr );
     QCOMPARE( placemark->lookAt()->timeSpan().begin().when(), QDateTime::fromString( "2010-05-28T02:02:09Z", Qt::ISODate) );
     QCOMPARE( placemark->lookAt()->timeSpan().end().when(), QDateTime::fromString( "2010-05-28T02:02:56Z", Qt::ISODate) );
 

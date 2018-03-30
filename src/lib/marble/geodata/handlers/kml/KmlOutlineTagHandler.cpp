@@ -45,7 +45,7 @@ GeoNode* KmloutlineTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataPolyStyle>()->setOutline( outline );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

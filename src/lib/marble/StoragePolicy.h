@@ -26,7 +26,7 @@ class StoragePolicy : public QObject
     Q_OBJECT
     
     public:
-        explicit StoragePolicy( QObject *parent = 0 );
+        explicit StoragePolicy( QObject *parent = nullptr );
 	
         ~StoragePolicy() override {}
 

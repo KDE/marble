@@ -48,7 +48,7 @@ HttpJobPrivate::HttpJobPrivate( const QUrl & sourceUrl, const QString & destFile
       // results in valid user agent string
       m_userAgent( "unknown" ),
       m_networkAccessManager( networkAccessManager ),
-      m_networkReply( 0 )
+      m_networkReply( nullptr )
 {
 }
 
@@ -195,7 +195,7 @@ void HttpJob::finished()
     d->m_networkReply->disconnect( this );
     // No delete. This method is called by a signal QNetworkReply::finished.
     d->m_networkReply->deleteLater();
-    d->m_networkReply = 0;
+    d->m_networkReply = nullptr;
 }
 
 #include "moc_HttpJob.cpp"

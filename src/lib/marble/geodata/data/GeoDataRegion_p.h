@@ -24,9 +24,9 @@ class GeoDataRegionPrivate
 {
   public:
     GeoDataRegionPrivate()
-         : m_parent( 0 ),
-           m_latLonAltBox( 0 ),
-           m_lod( 0 )
+         : m_parent( nullptr ),
+           m_latLonAltBox( nullptr ),
+           m_lod( nullptr )
     {
     }
 
@@ -37,22 +37,22 @@ class GeoDataRegionPrivate
             m_latLonAltBox = new GeoDataLatLonAltBox( *other.m_latLonAltBox );
         }
         else {
-            m_latLonAltBox = 0;
+            m_latLonAltBox = nullptr;
         }
 
         if ( other.m_lod ) {
             m_lod = new GeoDataLod( *other.m_lod );
         }
         else {
-            m_lod = 0;
+            m_lod = nullptr;
         }
     }
 
 
     explicit GeoDataRegionPrivate( GeoDataFeature * feature )
          : m_parent( feature ),
-           m_latLonAltBox( 0 ),
-           m_lod( 0 )
+           m_latLonAltBox( nullptr ),
+           m_lod( nullptr )
     {
     }
 

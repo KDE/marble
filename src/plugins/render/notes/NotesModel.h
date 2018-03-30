@@ -21,7 +21,7 @@ class NotesModel : public AbstractDataPluginModel
     Q_OBJECT
 
 public:
-    explicit NotesModel(const MarbleModel *marbleModel, QObject *parent = 0);
+    explicit NotesModel(const MarbleModel *marbleModel, QObject *parent = nullptr);
 
 protected:
     void getAdditionalItems(const GeoDataLatLonAltBox& box, qint32 number = 10) override;

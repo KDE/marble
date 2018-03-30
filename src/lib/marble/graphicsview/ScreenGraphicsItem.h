@@ -32,7 +32,7 @@ class MARBLE_EXPORT ScreenGraphicsItem : public MarbleGraphicsItem
     };
     Q_DECLARE_FLAGS(GraphicsItemFlags, GraphicsItemFlag)
 
-    explicit ScreenGraphicsItem( MarbleGraphicsItem *parent = 0 );
+    explicit ScreenGraphicsItem( MarbleGraphicsItem *parent = nullptr );
 
     ~ScreenGraphicsItem() override;
 

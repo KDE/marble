@@ -16,7 +16,7 @@ class OsmTileClusterRenderer: public QObject
     Q_OBJECT
 
 public:
-    explicit OsmTileClusterRenderer( QObject * const parent = NULL );
+    explicit OsmTileClusterRenderer( QObject * const parent = nullptr );
 
     void setClusterEdgeLengthTiles( int const clusterEdgeLengthTiles );
     void setMapSources( QVector<ReadOnlyMapDefinition> const & mapSources );

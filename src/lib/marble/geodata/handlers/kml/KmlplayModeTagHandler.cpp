@@ -36,7 +36,7 @@ GeoNode* KmlplayModeTagHandler::parse(GeoParser &parser) const
         }
     }
 
-    return 0;
+    return nullptr;
 }
 
 } // namespace kml

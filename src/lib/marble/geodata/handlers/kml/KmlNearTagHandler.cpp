@@ -32,7 +32,7 @@ GeoNode* KmlnearTagHandler::parse( GeoParser& parser ) const
 
         parentItem.nodeAs<GeoDataViewVolume>()->setNear( near );
     }
-    return 0;
+    return nullptr;
 }
 
 }

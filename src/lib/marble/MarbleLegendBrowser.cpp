@@ -63,7 +63,7 @@ MarbleLegendBrowser::MarbleLegendBrowser( QWidget *parent )
     : MarbleWebView( parent ),
       d( new MarbleLegendBrowserPrivate )
 {
-    d->m_marbleModel = 0;
+    d->m_marbleModel = nullptr;
 
 #ifndef MARBLE_NO_WEBKITWIDGETS
     QWebFrame *frame = page()->mainFrame();
@@ -98,7 +98,7 @@ QSize MarbleLegendBrowser::sizeHint() const
 void MarbleLegendBrowser::initTheme()
 {
     // Check for a theme specific legend.html first
-    if ( d->m_marbleModel != 0 && d->m_marbleModel->mapTheme() != 0 )
+    if ( d->m_marbleModel != nullptr && d->m_marbleModel->mapTheme() != nullptr )
     {
         const GeoSceneDocument *currentMapTheme = d->m_marbleModel->mapTheme();
 
@@ -110,7 +110,7 @@ void MarbleLegendBrowser::initTheme()
             }
         }
 
-        disconnect ( currentMapTheme, SIGNAL(valueChanged(QString,bool)), 0, 0 );
+        disconnect ( currentMapTheme, SIGNAL(valueChanged(QString,bool)), nullptr, nullptr );
         connect ( currentMapTheme, SIGNAL(valueChanged(QString,bool)),
                   this, SLOT(setCheckedProperty(QString,bool)) );
     }
@@ -137,7 +137,7 @@ void MarbleLegendBrowser::loadLegend()
     QString legendPath;
 
     // Check for a theme specific legend.html first
-    if (d->m_marbleModel->mapTheme() != 0 ) {
+    if (d->m_marbleModel->mapTheme() != nullptr ) {
         const GeoSceneDocument *currentMapTheme = d->m_marbleModel->mapTheme();
 
         legendPath = MarbleDirs::path(QLatin1String("maps/") +
@@ -253,7 +253,7 @@ QString MarbleLegendBrowser::generateSectionsHtml()
 
     QString customLegendString;
 
-    if ( d->m_marbleModel == 0 || d->m_marbleModel->mapTheme() == 0 )
+    if ( d->m_marbleModel == nullptr || d->m_marbleModel->mapTheme() == nullptr )
         return QString();
 
     const GeoSceneDocument *currentMapTheme = d->m_marbleModel->mapTheme();

@@ -168,7 +168,7 @@ QStringList MapThemeManager::mapThemeIds() const
 GeoSceneDocument* MapThemeManager::loadMapTheme( const QString& mapThemeStringID )
 {
     if ( mapThemeStringID.isEmpty() )
-        return 0;
+        return nullptr;
 
     return Private::loadMapThemeFile( mapThemeStringID );
 }
@@ -223,7 +223,7 @@ GeoSceneDocument* MapThemeManager::Private::loadMapThemeFile( const QString& map
     QFile file( dgmlPath );
     if ( !file.exists() ) {
         qWarning() << "Map theme file does not exist:" << dgmlPath;
-        return 0;
+        return nullptr;
     }
 
     // Open file in right mode
@@ -231,14 +231,14 @@ GeoSceneDocument* MapThemeManager::Private::loadMapThemeFile( const QString& map
 
     if ( !fileReadable ) {
         qWarning() << "Map theme file not readable:" << dgmlPath;
-        return 0;
+        return nullptr;
     }
 
     GeoSceneParser parser( GeoScene_DGML );
 
     if ( !parser.read( &file )) {
         qWarning() << "Map theme file not well-formed:" << dgmlPath;
-        return 0;
+        return nullptr;
     }
 
     mDebug() << "Map theme file successfully loaded:" << dgmlPath;

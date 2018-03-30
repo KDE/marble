@@ -34,9 +34,9 @@ namespace Marble
 {
 
 OverviewMap::OverviewMap()
-    : AbstractFloatItem( 0 ),
-      ui_configWidget( 0 ),
-      m_configDialog( 0 ),
+    : AbstractFloatItem( nullptr ),
+      ui_configWidget( nullptr ),
+      m_configDialog( nullptr ),
       m_mapChanged( false )
 {
 }
@@ -46,8 +46,8 @@ OverviewMap::OverviewMap( const MarbleModel *marbleModel )
       m_target(),
       m_planetID( PlanetFactory::planetList() ),
       m_defaultSize( AbstractFloatItem::size() ),
-      ui_configWidget( 0 ),
-      m_configDialog( 0 ),
+      ui_configWidget( nullptr ),
+      m_configDialog( nullptr ),
       m_mapChanged( false )
 {
     // cache is no needed because:
@@ -513,7 +513,7 @@ void OverviewMap::showCurrentPlanetPreview() const
 
 void OverviewMap::choosePositionIndicatorColor()
 {
-    QColor c = QColorDialog::getColor( m_posColor, 0, 
+    QColor c = QColorDialog::getColor( m_posColor, nullptr, 
                                        tr( "Please choose the color for the position indicator" ), 
                                        QColorDialog::ShowAlphaChannel );
     if( c.isValid() )

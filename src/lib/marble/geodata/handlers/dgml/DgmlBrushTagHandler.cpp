@@ -78,7 +78,7 @@ GeoNode* DgmlBrushTagHandler::parse(GeoParser& parser) const
         geodata->setAlpha( alpha );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

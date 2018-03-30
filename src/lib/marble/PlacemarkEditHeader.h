@@ -27,7 +27,7 @@ class MARBLE_EXPORT PlacemarkEditHeader : public QWidget
     Q_OBJECT
 
 public:
-    explicit PlacemarkEditHeader(QWidget *parent = 0,
+    explicit PlacemarkEditHeader(QWidget *parent = nullptr,
                         GeoDataCoordinates::Notation notation = GeoDataCoordinates::DMS,
                         const QString& name = QString(),
                         const QString& iconLink = QString(),

@@ -30,7 +30,7 @@ GeoNode *KmlviewBoundScaleTagHandler::parse(GeoParser & parser) const
         parentItem.nodeAs<GeoDataLink>()->setViewBoundScale( viewBoundScale );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

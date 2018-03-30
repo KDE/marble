@@ -39,7 +39,7 @@ GeoNode* KmlAnimatedUpdateTagHandler::parse( GeoParser& parser ) const
         delete animatedUpdate;
     }
 
-    return 0;
+    return nullptr;
 }
 }
 }

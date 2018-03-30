@@ -97,13 +97,13 @@ QString Placemark::description() const
             if (rooms > 0) {
                 //~ singular %n room
                 //~ plural %n rooms
-                addTagValue(m_description, QStringLiteral("rooms"), tr("%n rooms", 0, rooms));
+                addTagValue(m_description, QStringLiteral("rooms"), tr("%n rooms", nullptr, rooms));
             }
             int const beds = m_placemark.osmData().tagValue(QStringLiteral("beds")).toInt();
             if (beds > 0) {
                 //~ singular %n bed
                 //~ plural %n beds
-                addTagValue(m_description, QStringLiteral("beds"), tr("%n beds", 0, beds));
+                addTagValue(m_description, QStringLiteral("beds"), tr("%n beds", nullptr, beds));
             }
         }
 
@@ -701,7 +701,7 @@ void Placemark::updateTags()
 
 void Placemark::updateRelations(const Marble::GeoDataPlacemark &placemark)
 {
-    if (const auto document = (placemark.parent() ? geodata_cast<GeoDataDocument>(placemark.parent()) : 0)) {
+    if (const auto document = (placemark.parent() ? geodata_cast<GeoDataDocument>(placemark.parent()) : nullptr)) {
         QVector<const GeoDataRelation*> allRelations;
         QSet<const GeoDataRelation*> relevantRelations;
         QSet<qint64> placemarkIds;

@@ -29,7 +29,7 @@ class OsmNominatimRunner : public SearchRunner
 {
     Q_OBJECT
 public:
-    explicit OsmNominatimRunner(QObject *parent = 0);
+    explicit OsmNominatimRunner(QObject *parent = nullptr);
 
     ~OsmNominatimRunner() override;
 

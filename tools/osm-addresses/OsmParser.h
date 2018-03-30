@@ -44,7 +44,7 @@ struct OsmOsmRegion {
     OsmOsmRegion* parent;
     OsmRegion region;
 
-    OsmOsmRegion() : parent( 0 ) {}
+    OsmOsmRegion() : parent( nullptr ) {}
 };
 
 struct Element {
@@ -147,7 +147,7 @@ class OsmParser : public QObject
 {
     Q_OBJECT
 public:
-    explicit OsmParser( QObject *parent = 0 );
+    explicit OsmParser( QObject *parent = nullptr );
 
     void addWriter( Writer* writer );
 

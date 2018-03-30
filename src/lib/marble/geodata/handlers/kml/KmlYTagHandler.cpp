@@ -33,7 +33,7 @@ GeoNode* KmlyTagHandler::parse( GeoParser& parser ) const
         double y = parser.readElementText().trimmed().toDouble();
 	parentItem.nodeAs<GeoDataScale>()->setY( y );
     }
-    return 0;
+    return nullptr;
 }
 
 }

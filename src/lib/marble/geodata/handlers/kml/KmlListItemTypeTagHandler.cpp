@@ -48,7 +48,7 @@ GeoNode* KmllistItemTypeTagHandler::parse( GeoParser& parser ) const
         }
         parentItem.nodeAs<GeoDataListStyle>()->setListItemType( type );
     }
-    return 0;
+    return nullptr;
 }
 
 }

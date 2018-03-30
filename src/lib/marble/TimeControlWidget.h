@@ -33,7 +33,7 @@ class MARBLE_EXPORT TimeControlWidget : public QDialog
     Q_OBJECT
 
  public:
-    explicit TimeControlWidget( MarbleClock* clock, QWidget* parent = 0 );
+    explicit TimeControlWidget( MarbleClock* clock, QWidget* parent = nullptr );
     ~TimeControlWidget() override;
 
  private Q_SLOTS:

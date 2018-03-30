@@ -110,10 +110,10 @@ MarbleWidgetPopupMenu::Private::Private( MarbleWidget *widget, const MarbleModel
     m_widget(widget),
     m_lmbMenu( m_widget ),
     m_rmbMenu( m_widget ),
-    m_directionsFromHereAction( 0 ),
-    m_directionsToHereAction( 0 ),
+    m_directionsFromHereAction( nullptr ),
+    m_directionsToHereAction( nullptr ),
     m_copyCoordinateAction(new QAction(QIcon(QStringLiteral(":/icons/copy-coordinates.png")), tr("Copy Coordinates"), parent)),
-    m_rmbExtensionPoint( 0 ),
+    m_rmbExtensionPoint( nullptr ),
     m_runnerManager( model )
 {
     // Property actions (Left mouse button)
@@ -578,7 +578,7 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
         d->m_infoDialogAction->setText( name );
         d->m_infoDialogAction->setIcon( icon );
         // Insert as first action in the menu
-        QAction *firstAction = 0;
+        QAction *firstAction = nullptr;
         if( !d->m_lmbMenu.actions().isEmpty() ) {
             firstAction = d->m_lmbMenu.actions().first();
         }
@@ -644,7 +644,7 @@ void MarbleWidgetPopupMenu::resetMenu()
 void MarbleWidgetPopupMenu::slotInfoDialog()
 {
     QAction *action = qobject_cast<QAction *>( sender() );
-    if ( action == 0 ) {
+    if ( action == nullptr ) {
         mDebug() << "Warning: slotInfoDialog should be called by a QAction signal";
         return;
     }
@@ -711,7 +711,7 @@ void MarbleWidgetPopupMenu::slotInfoDialog()
         }
 
         if ( placemark ) {
-            if ( placemark->style() == 0 ) {
+            if ( placemark->style() == nullptr ) {
                 popup->setBackgroundColor(QColor(Qt::white));
                 popup->setTextColor(QColor(Qt::black));
                 return;

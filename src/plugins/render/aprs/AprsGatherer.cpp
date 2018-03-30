@@ -22,7 +22,7 @@ AprsGatherer::AprsGatherer( AprsSource *from,
                             QMutex *mutex,
                             QString *filter )
     : m_source( from ),
-      m_socket( 0 ),
+      m_socket( nullptr ),
       m_filter( filter ),
       m_running( true ),
       m_dumpOutput( false ),
@@ -39,7 +39,7 @@ AprsGatherer::AprsGatherer( QIODevice *from,
                             QMap<QString, AprsObject *> *objects,
                             QMutex *mutex,
                             QString *filter ) 
-    : m_source( 0 ),
+    : m_source( nullptr ),
       m_socket( from ),
       m_filter( filter ),
       m_running( true ),
@@ -87,7 +87,7 @@ AprsGatherer::run()
             // connection closed; attempt to reopen
             mDebug() << "aprs: socket closed; attempting to reopen";
             delete m_socket;
-            m_socket = 0;
+            m_socket = nullptr;
         }
         
             
@@ -120,7 +120,7 @@ AprsGatherer::run()
             continue;
         }
 
-        if ( m_socket && m_filter != NULL ) {
+        if ( m_socket && m_filter != nullptr ) {
             QMutexLocker locker( m_mutex );
             if ( m_filter->length() > 0 ) {
                 m_socket->write( m_filter->toLocal8Bit().data(),
@@ -191,7 +191,7 @@ AprsGatherer::run()
         }
 
         // If the filter should be changed, send it out the socket
-        if ( m_filter != NULL ) {
+        if ( m_filter != nullptr ) {
             QMutexLocker locker( m_mutex );
             if ( m_filter->length() > 0 ) {
                 m_socket->write( m_filter->toLocal8Bit().data(),

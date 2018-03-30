@@ -8,7 +8,7 @@ class ReadOnlyMapImage;
 class BilinearInterpolation: public InterpolationMethod
 {
 public:
-    explicit BilinearInterpolation( ReadOnlyMapImage * const mapImage = NULL );
+    explicit BilinearInterpolation( ReadOnlyMapImage * const mapImage = nullptr );
 
     QRgb interpolate( double const x, double const y ) override;
 };

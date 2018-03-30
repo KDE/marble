@@ -198,7 +198,7 @@ void StackedTileLoader::updateTile( TileId const &tileId, QImage const &tileImag
         d->m_tilesOnDisplay.insert( stackedTileId, stackedTile );
 
         delete displayedTile;
-        displayedTile = 0;
+        displayedTile = nullptr;
 
         emit tileLoaded( stackedTileId );
     } else {

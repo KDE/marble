@@ -333,7 +333,7 @@ MarbleMap::MarbleMap(MarbleModel *model)
 
 MarbleMap::~MarbleMap()
 {
-    MarbleModel *model = d->m_modelIsOwned ? d->m_model : 0;
+    MarbleModel *model = d->m_modelIsOwned ? d->m_model : nullptr;
 
     d->m_layerManager.removeLayer( &d->m_customPaintLayer );
     d->m_layerManager.removeLayer( &d->m_geometryLayer );
@@ -912,8 +912,8 @@ void MarbleMapPrivate::updateMapTheme()
     // Check whether there is a texture layer and vectortile layer available:
     if ( m_model->mapTheme()->map()->hasTextureLayers() ) {
         const GeoSceneSettings *const settings = m_model->mapTheme()->settings();
-        const GeoSceneGroup *const textureLayerSettings = settings ? settings->group( "Texture Layers" ) : 0;
-        const GeoSceneGroup *const vectorTileLayerSettings = settings ? settings->group( "VectorTile Layers" ) : 0;
+        const GeoSceneGroup *const textureLayerSettings = settings ? settings->group( "Texture Layers" ) : nullptr;
+        const GeoSceneGroup *const vectorTileLayerSettings = settings ? settings->group( "VectorTile Layers" ) : nullptr;
 
         bool textureLayersOk = true;
         bool vectorTileLayersOk = true;
@@ -949,7 +949,7 @@ void MarbleMapPrivate::updateMapTheme()
                                     (role == QLatin1String("dem")) ? "true" : "false" );
                         tileCreator->setTileFormat( texture->fileFormat().toLower() );
 
-                        QPointer<TileCreatorDialog> tileCreatorDlg = new TileCreatorDialog( tileCreator, 0 );
+                        QPointer<TileCreatorDialog> tileCreatorDlg = new TileCreatorDialog( tileCreator, nullptr );
                         tileCreatorDlg->setSummary( m_model->mapTheme()->head()->name(),
                                                     m_model->mapTheme()->head()->description() );
                         tileCreatorDlg->exec();
@@ -995,7 +995,7 @@ void MarbleMapPrivate::updateMapTheme()
                                     (role == QLatin1String("dem")) ? "true" : "false" );
                         tileCreator->setTileFormat( vectorTile->fileFormat().toLower() );
 
-                        QPointer<TileCreatorDialog> tileCreatorDlg = new TileCreatorDialog( tileCreator, 0 );
+                        QPointer<TileCreatorDialog> tileCreatorDlg = new TileCreatorDialog( tileCreator, nullptr );
                         tileCreatorDlg->setSummary( m_model->mapTheme()->head()->name(),
                                                     m_model->mapTheme()->head()->description() );
                         tileCreatorDlg->exec();
@@ -1058,8 +1058,8 @@ void MarbleMapPrivate::updateMapTheme()
     }
     else {
         m_layerManager.addLayer( &m_groundLayer );
-        m_textureLayer.setMapTheme( QVector<const GeoSceneTextureTileDataset *>(), 0, "", "" );
-        m_vectorTileLayer.setMapTheme( QVector<const GeoSceneVectorTileDataset *>(), 0 );
+        m_textureLayer.setMapTheme( QVector<const GeoSceneTextureTileDataset *>(), nullptr, "", "" );
+        m_vectorTileLayer.setMapTheme( QVector<const GeoSceneVectorTileDataset *>(), nullptr );
     }
 
     // earth
@@ -1420,7 +1420,7 @@ AbstractFloatItem * MarbleMap::floatItem( const QString &nameId ) const
         }
     }
 
-    return 0; // No item found
+    return nullptr; // No item found
 }
 
 QList<AbstractDataPlugin *> MarbleMap::dataPlugins()  const

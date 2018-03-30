@@ -67,7 +67,7 @@ GeoNode* KmlhotSpotTagHandler::parse( GeoParser& parser ) const
 
         parentItem.nodeAs<GeoDataIconStyle>()->setHotSpot( pf, xunits, yunits );
     }
-    return 0;
+    return nullptr;
 }
 
 }

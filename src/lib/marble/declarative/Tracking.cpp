@@ -21,11 +21,11 @@ namespace Marble {
 
 Tracking::Tracking( QObject* parent) : QObject( parent ),
     m_showTrack( true ),
-    m_positionSource( 0 ),
-    m_positionMarker( 0 ),
-    m_marbleQuickItem( 0 ),
+    m_positionSource( nullptr ),
+    m_positionMarker( nullptr ),
+    m_marbleQuickItem( nullptr ),
     m_hasLastKnownPosition( false ),
-    m_autoNavigation( 0 ),
+    m_autoNavigation( nullptr ),
     m_positionMarkerType( None )
 {
     connect( &m_lastKnownPosition, SIGNAL(longitudeChanged()), this, SLOT(setHasLastKnownPosition()) );
@@ -111,7 +111,7 @@ QObject* Tracking::positionMarker()
 void Tracking::updatePositionMarker()
 {
     if ( m_marbleQuickItem && m_positionMarker && m_positionMarkerType == Circle ) {
-        Coordinate* position = 0;
+        Coordinate* position = nullptr;
         bool visible = (m_marbleQuickItem->model()->planetId() == QLatin1String("earth"));
         if ( m_positionSource && m_positionSource->hasPosition() ) {
             position = m_positionSource->position();

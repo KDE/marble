@@ -21,7 +21,7 @@ class OpenLocationCodeSearchPlugin : public SearchRunnerPlugin
     Q_INTERFACES( Marble::SearchRunnerPlugin )
 
 public:
-    explicit OpenLocationCodeSearchPlugin(QObject *parent = 0);
+    explicit OpenLocationCodeSearchPlugin(QObject *parent = nullptr);
 
     QString name() const override;
 

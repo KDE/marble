@@ -42,7 +42,7 @@ GeoNode* DgmlProjectionTagHandler::parse( GeoParser& parser ) const
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
     if ( !parentItem.represents( dgmlTag_Texture ) && !parentItem.represents( dgmlTag_Vectortile))
-        return 0;
+        return nullptr;
 
     // Attribute name, default to "Equirectangular"
     const QString nameStr = parser.attribute( dgmlAttr_name ).trimmed();
@@ -58,7 +58,7 @@ GeoNode* DgmlProjectionTagHandler::parse( GeoParser& parser ) const
 
         parentItem.nodeAs<GeoSceneTileDataset>()->setTileProjection(tileProjectionType);
     }
-    return 0;
+    return nullptr;
 }
 
 }

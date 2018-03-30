@@ -33,7 +33,7 @@ GeoNode* KmlSnippetTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataFeature>()->setSnippet( GeoDataSnippet(text, maxLines) );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

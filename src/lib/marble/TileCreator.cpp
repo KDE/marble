@@ -159,8 +159,8 @@ private:
 
 TileCreator::TileCreator(const QString& sourceDir, const QString& installMap,
                          const QString& dem, const QString& targetDir)
-    : QThread(0),
-      d( new TileCreatorPrivate( 0, dem, targetDir ) )
+    : QThread(nullptr),
+      d( new TileCreatorPrivate( nullptr, dem, targetDir ) )
 
 {
     mDebug() << "Prefix: " << sourceDir
@@ -192,7 +192,7 @@ TileCreator::TileCreator(const QString& sourceDir, const QString& installMap,
 }
 
 TileCreator::TileCreator( TileCreatorSource* source, const QString& dem, const QString& targetDir )
-    : QThread(0),
+    : QThread(nullptr),
       d( new TileCreatorPrivate( source, dem, targetDir ) )
 {
     setTerminationEnabled( true );

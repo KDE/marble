@@ -24,7 +24,7 @@ class OSRMPlugin : public RoutingRunnerPlugin
     Q_INTERFACES( Marble::RoutingRunnerPlugin )
 
 public:
-    explicit OSRMPlugin( QObject *parent = 0 );
+    explicit OSRMPlugin( QObject *parent = nullptr );
 
     QString name() const override;
 

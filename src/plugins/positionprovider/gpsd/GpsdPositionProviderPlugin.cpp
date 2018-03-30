@@ -150,7 +150,7 @@ GeoDataAccuracy GpsdPositionProviderPlugin::accuracy() const
     return m_accuracy;
 }
 
-GpsdPositionProviderPlugin::GpsdPositionProviderPlugin() : m_thread( 0 ),
+GpsdPositionProviderPlugin::GpsdPositionProviderPlugin() : m_thread( nullptr ),
     m_speed( 0.0 ),
     m_track( 0.0 )
 {

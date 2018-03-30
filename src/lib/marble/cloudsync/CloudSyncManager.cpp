@@ -51,8 +51,8 @@ CloudSyncManager::Private::Private() :
     m_owncloudPassword(),
     m_status(),
     m_status_type( CloudSyncManager::Unknown),
-    m_routeSyncManager( 0 ),
-    m_bookmarkSyncManager( 0 )
+    m_routeSyncManager( nullptr ),
+    m_bookmarkSyncManager( nullptr )
 {
 }
 

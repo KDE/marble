@@ -552,7 +552,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
      *
      * @see GeoDataTrack::GeoDataTrack
      */
-    GeoDataCoordinates coordinate( const QDateTime &dateTime = QDateTime(), bool *iconAtCoordinates = 0 ) const;
+    GeoDataCoordinates coordinate( const QDateTime &dateTime = QDateTime(), bool *iconAtCoordinates = nullptr ) const;
 
     /**
      * The geometry of the GeoDataPlacemark is to be rendered to the marble map

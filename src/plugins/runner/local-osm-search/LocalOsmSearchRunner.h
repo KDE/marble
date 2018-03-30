@@ -27,7 +27,7 @@ class LocalOsmSearchRunner : public SearchRunner
 {
     Q_OBJECT
 public:
-    explicit LocalOsmSearchRunner( const QStringList &databaseFiles, QObject *parent = 0 );
+    explicit LocalOsmSearchRunner( const QStringList &databaseFiles, QObject *parent = nullptr );
 
     ~LocalOsmSearchRunner() override;
 

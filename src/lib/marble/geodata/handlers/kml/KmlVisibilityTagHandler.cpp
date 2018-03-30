@@ -45,7 +45,7 @@ GeoNode* KmlvisibilityTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataFeature>()->setVisible(visible);
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

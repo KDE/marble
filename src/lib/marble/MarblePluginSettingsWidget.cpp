@@ -30,7 +30,7 @@ class MarblePluginSettingsWidgetPrivate : public Ui::MarblePluginSettingsWidget
  public:
     explicit MarblePluginSettingsWidgetPrivate( Marble::MarblePluginSettingsWidget *parent ) :
         q( parent ),
-        m_itemDelegate( 0 )
+        m_itemDelegate( nullptr )
     {}
 
     /**
@@ -73,7 +73,7 @@ void MarblePluginSettingsWidgetPrivate::showPluginConfigDialog( const QModelInde
         return;
 
     DialogConfigurationInterface *configInterface = m_pluginModel->pluginDialogConfigurationInterface( index );;
-    QDialog *configDialog = configInterface ? configInterface->configDialog() : 0;
+    QDialog *configDialog = configInterface ? configInterface->configDialog() : nullptr;
     if ( configDialog ) {
         configDialog->show();
     }
@@ -111,7 +111,7 @@ void MarblePluginSettingsWidget::setConfigIcon( const QIcon& icon )
 void MarblePluginSettingsWidget::setModel( RenderPluginModel* pluginModel )
 {
     if ( !d->m_pluginModel.isNull() ) {
-        disconnect( d->m_pluginModel.data(), 0, this, 0 );
+        disconnect( d->m_pluginModel.data(), nullptr, this, nullptr );
     }
 
     d->m_pluginModel = pluginModel;

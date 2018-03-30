@@ -35,7 +35,7 @@ GeoNode* KmlrollTagHandler::parse( GeoParser& parser ) const
         qreal roll = parser.readElementText().trimmed().toDouble();
         parentItem.nodeAs<GeoDataOrientation>()->setRoll(roll);
     }
-    return 0;
+    return nullptr;
 }
 
 }

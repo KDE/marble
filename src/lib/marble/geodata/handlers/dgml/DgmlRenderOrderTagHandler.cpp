@@ -30,12 +30,12 @@ GeoNode* DgmlRenderOrderTagHandler::parse(GeoParser& parser) const
     GeoStackItem parentItem = parser.parentElement();
     if ( parentItem.represents( dgmlTag_Vector )
          || parentItem.represents( dgmlTag_Geodata ) ) {
-        GeoSceneGeodata *dataSource = 0;
+        GeoSceneGeodata *dataSource = nullptr;
         dataSource = parentItem.nodeAs<GeoSceneGeodata>();
         dataSource->setRenderOrder( parser.readElementText().trimmed().toInt() );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

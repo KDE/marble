@@ -60,7 +60,7 @@ public:
      * @param ecl The EclSolar backend
      * @param parent The parent object
      */
-    explicit EclipsesItem( EclSolar *ecl, int index, QObject *parent = 0 );
+    explicit EclipsesItem( EclSolar *ecl, int index, QObject *parent = nullptr );
 
     ~EclipsesItem() override;
 

@@ -29,7 +29,7 @@ class MARBLE_EXPORT MovieCaptureDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit MovieCaptureDialog(MarbleWidget *widget, QWidget *parent = 0);
+    explicit MovieCaptureDialog(MarbleWidget *widget, QWidget *parent = nullptr);
     ~MovieCaptureDialog() override;
 
 public Q_SLOTS:

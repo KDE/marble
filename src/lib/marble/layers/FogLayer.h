@@ -28,7 +28,7 @@ public:
 
     bool render( GeoPainter *painter, ViewportParams *viewport,
                          const QString& renderPos = QLatin1String("NONE"),
-                         GeoSceneLayer * layer = 0 ) override;
+                         GeoSceneLayer * layer = nullptr ) override;
 
     RenderState renderState() const override;
     QString runtimeTrace() const override { return QStringLiteral("FogLayer"); }

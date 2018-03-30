@@ -37,7 +37,7 @@ GeoNode* KmlListStyleTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataStyle>()->setListStyle( style );
         return &parentItem.nodeAs<GeoDataStyle>()->listStyle();
     }
-    return 0;
+    return nullptr;
 }
 
 }

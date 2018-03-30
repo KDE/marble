@@ -30,7 +30,7 @@ class OSRMRunner : public RoutingRunner
     Q_OBJECT
 
 public:
-    explicit OSRMRunner(QObject *parent = 0);
+    explicit OSRMRunner(QObject *parent = nullptr);
 
     ~OSRMRunner() override;
 

@@ -35,7 +35,7 @@ GeoNode* KmldisplayNameTagHandler::parse( GeoParser& parser ) const
         QString displayName = parser.readElementText().trimmed();
         parentItem.nodeAs<GeoDataSimpleField>()->setDisplayName( displayName );
     }
-    return 0;
+    return nullptr;
 }
 
 }

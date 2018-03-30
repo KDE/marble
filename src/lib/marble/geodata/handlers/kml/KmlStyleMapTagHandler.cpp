@@ -53,7 +53,7 @@ GeoNode* KmlStyleMapTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataFeature>()->setStyleMap( styleMap );*/
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

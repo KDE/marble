@@ -32,7 +32,7 @@ GeoNode* KmlbottomFovTagHandler::parse( GeoParser& parser ) const
 
         parentItem.nodeAs<GeoDataViewVolume>()->setBottomFov( bottomFov );
     }
-    return 0;
+    return nullptr;
 }
 
 }

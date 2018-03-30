@@ -35,7 +35,7 @@ class MARBLE_EXPORT FrameGraphicsItem : public ScreenGraphicsItem
         ShadowFrame
     };
 
-    explicit FrameGraphicsItem( MarbleGraphicsItem *parent = 0 );
+    explicit FrameGraphicsItem( MarbleGraphicsItem *parent = nullptr );
 
     ~FrameGraphicsItem() override;
 

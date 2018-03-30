@@ -25,7 +25,7 @@ public:
 };
 
 GeoDataAnimatedUpdatePrivate::GeoDataAnimatedUpdatePrivate() :
-    m_duration( 0.0 ), m_delayedStart( 0 ), m_update( 0 )
+    m_duration( 0.0 ), m_delayedStart( 0 ), m_update( nullptr )
 {
 
 }

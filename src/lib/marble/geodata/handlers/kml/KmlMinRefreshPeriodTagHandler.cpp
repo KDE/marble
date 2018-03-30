@@ -33,7 +33,7 @@ GeoNode* KmlminRefreshPeriodTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataNetworkLinkControl>()->setMinRefreshPeriod( minRefreshPeriod );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

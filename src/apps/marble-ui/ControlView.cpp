@@ -80,14 +80,14 @@ namespace Marble
 ControlView::ControlView( QWidget *parent )
    : QWidget( parent ),
      m_mapThemeManager( new MapThemeManager( this ) ),
-     m_searchDock( 0 ),
-     m_locationWidget( 0 ),
-     m_conflictDialog( 0 ),
-     m_togglePanelVisibilityAction( 0 ),
+     m_searchDock( nullptr ),
+     m_locationWidget( nullptr ),
+     m_conflictDialog( nullptr ),
+     m_togglePanelVisibilityAction( nullptr ),
      m_isPanelVisible( true ),
-     m_tourWidget( 0 ),
-     m_annotationDock( 0 ),
-     m_annotationPlugin( 0 )
+     m_tourWidget( nullptr ),
+     m_annotationDock( nullptr ),
+     m_annotationPlugin( nullptr )
 {
     setWindowTitle( tr( "Marble - Virtual Globe" ) );
 
@@ -198,7 +198,7 @@ void ControlView::printMapScreenShot( const QPointer<QPrintDialog>& printDialog)
         PrintOptionsWidget* printOptions = new PrintOptionsWidget( this );
         bool const mapCoversViewport = m_marbleWidget->viewport()->mapCoversViewport();
         printOptions->setBackgroundControlsEnabled( !mapCoversViewport );
-        bool hasLegend = m_marbleWidget->model()->legend() != 0;
+        bool hasLegend = m_marbleWidget->model()->legend() != nullptr;
         printOptions->setLegendControlsEnabled( hasLegend );
         bool hasRoute = marbleWidget()->model()->routingManager()->routingModel()->rowCount() > 0;
         printOptions->setPrintRouteSummary( hasRoute );
@@ -808,7 +808,7 @@ void ControlView::showConflictDialog( MergeItem *item )
 
 void ControlView::updateAnnotationDockVisibility()
 {
-    if( m_annotationPlugin != 0 && m_annotationDock != 0 ) {
+    if( m_annotationPlugin != nullptr && m_annotationDock != nullptr ) {
         if( m_annotationPlugin->visible() && m_annotationPlugin->enabled() ) {
             m_annotationDock->toggleViewAction()->setVisible( true );
         } else {

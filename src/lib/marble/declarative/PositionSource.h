@@ -31,7 +31,7 @@ class PositionSource : public QObject
     Q_PROPERTY( qreal speed READ speed NOTIFY speedChanged )
 
 public:
-    explicit PositionSource( QObject* parent = 0);
+    explicit PositionSource( QObject* parent = nullptr);
 
     bool active() const;
 

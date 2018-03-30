@@ -43,7 +43,7 @@ class MARBLE_EXPORT OsmRelationManagerWidget : public QWidget
 public:
     explicit OsmRelationManagerWidget( GeoDataPlacemark *placemark,
                                        const QHash<qint64, OsmPlacemarkData> *relations,
-                                       QWidget *parent = 0 );
+                                       QWidget *parent = nullptr );
     ~OsmRelationManagerWidget() override;
 
 public Q_SLOTS:

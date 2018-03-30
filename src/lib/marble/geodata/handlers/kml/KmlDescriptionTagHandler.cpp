@@ -73,7 +73,7 @@ GeoNode* KmldescriptionTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataFeature>()->setDescriptionCDATA( isCDATA );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

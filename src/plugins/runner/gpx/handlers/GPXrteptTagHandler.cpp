@@ -63,7 +63,7 @@ GeoNode* GPXrteptTagHandler::parse(GeoParser& parser) const
         linestring->append(coord);
 
     }
-    return 0;
+    return nullptr;
 }
 
 } // namespace gpx

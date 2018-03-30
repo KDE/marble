@@ -34,11 +34,11 @@ using namespace Marble;
 
 NavigationFloatItem::NavigationFloatItem( const MarbleModel *marbleModel )
     : AbstractFloatItem( marbleModel, QPointF( -10, -30 ) ),
-      m_marbleWidget( 0 ),
-      m_widgetItem( 0 ),
-      m_navigationWidget( 0 ),
+      m_marbleWidget( nullptr ),
+      m_widgetItem( nullptr ),
+      m_navigationWidget( nullptr ),
       m_oldViewportRadius( 0 ),
-      m_contextMenu( 0 ),
+      m_contextMenu( nullptr ),
       m_showHomeButton( true )
 {
     // Plugin is visible by default on desktop systems
@@ -106,7 +106,7 @@ QIcon NavigationFloatItem::icon() const
 
 void NavigationFloatItem::initialize()
 {
-    QWidget *navigationParent = new QWidget( 0 );
+    QWidget *navigationParent = new QWidget( nullptr );
     navigationParent->setAttribute( Qt::WA_NoSystemBackground, true );
 
     m_navigationWidget = new Ui::Navigation;

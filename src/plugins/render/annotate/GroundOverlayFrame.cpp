@@ -40,7 +40,7 @@ GroundOverlayFrame::GroundOverlayFrame( GeoDataPlacemark *placemark,
     m_editStatus( Resize ),
     m_editStatusChangeNeeded( false ),
     m_previousRotation( 0.0 ),
-    m_viewport( 0 )
+    m_viewport( nullptr )
 {
     m_resizeIcons.reserve(16);
     // NorthWest

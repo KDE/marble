@@ -114,7 +114,7 @@ int main( int argc, char *argv[] )
         return 2;
     }
 
-    OsmParser* parser = 0;
+    OsmParser* parser = nullptr;
     if ( file.fileName().endsWith( QLatin1String( ".osm" ) ) ) {
         parser = new XmlParser;
     } else if ( file.fileName().endsWith( QLatin1String( ".pbf" ) ) ) {

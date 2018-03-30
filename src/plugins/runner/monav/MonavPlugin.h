@@ -33,7 +33,7 @@ public:
         Monav_0_3
     };
 
-    explicit MonavPlugin( QObject *parent = 0 );
+    explicit MonavPlugin( QObject *parent = nullptr );
 
     QString name() const override;
 

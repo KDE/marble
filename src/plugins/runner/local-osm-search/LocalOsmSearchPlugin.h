@@ -28,7 +28,7 @@ class LocalOsmSearchPlugin : public SearchRunnerPlugin
     Q_INTERFACES( Marble::SearchRunnerPlugin )
 
 public:
-    explicit LocalOsmSearchPlugin( QObject *parent = 0 );
+    explicit LocalOsmSearchPlugin( QObject *parent = nullptr );
 
     QString name() const override;
 

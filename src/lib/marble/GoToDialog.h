@@ -35,7 +35,7 @@ class MARBLE_EXPORT GoToDialog: public QDialog
     Q_OBJECT
 
 public:
-    explicit GoToDialog( MarbleModel* marbleModel, QWidget * parent = 0, Qt::WindowFlags f = 0 );
+    explicit GoToDialog( MarbleModel* marbleModel, QWidget * parent = nullptr, Qt::WindowFlags f = nullptr );
 
     ~GoToDialog() override;
 

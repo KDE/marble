@@ -42,7 +42,7 @@ GeoNode* DgmlHeadingTagHandler::parse(GeoParser& parser) const
     if (parentItem.represents(dgmlTag_Section))
         parentItem.nodeAs<GeoSceneSection>()->setHeading(parser.readElementText().trimmed());
 
-    return 0;
+    return nullptr;
 }
 
 }

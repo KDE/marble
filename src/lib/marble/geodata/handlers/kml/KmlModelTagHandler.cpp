@@ -44,7 +44,7 @@ GeoNode* KmlModelTagHandler::parse( GeoParser& parser ) const
 
     } else {
         delete model;
-        return 0;
+        return nullptr;
     }
 
 }

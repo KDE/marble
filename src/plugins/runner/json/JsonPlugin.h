@@ -23,7 +23,7 @@ class JsonPlugin : public ParseRunnerPlugin
     Q_INTERFACES( Marble::ParseRunnerPlugin )
 
 public:
-    explicit JsonPlugin( QObject *parent = 0 );
+    explicit JsonPlugin( QObject *parent = nullptr );
 
     QString name() const override;
 

@@ -25,7 +25,7 @@ class GosmorePlugin : public ReverseGeocodingRunnerPlugin
     Q_INTERFACES( Marble::ReverseGeocodingRunnerPlugin )
 
 public:
-    explicit GosmorePlugin( QObject *parent = 0 );
+    explicit GosmorePlugin( QObject *parent = nullptr );
 
     QString name() const override;
 

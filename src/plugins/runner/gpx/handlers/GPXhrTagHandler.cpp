@@ -41,10 +41,10 @@ GeoNode* GPXhrTagHandler::parse(GeoParser& parser) const
         }
         QVariant value( parser.readElementText().toInt() );
         arrayData->append( value );
-        return 0;
+        return nullptr;
     }
 
-    return 0;
+    return nullptr;
 }
 
 } // namespace gpx

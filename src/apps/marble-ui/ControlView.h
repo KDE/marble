@@ -47,7 +47,7 @@ class ControlView : public QWidget
     Q_OBJECT
 
  public:
-    explicit ControlView( QWidget * = 0 );
+    explicit ControlView( QWidget * = nullptr );
     ~ControlView() override;
 
     /**

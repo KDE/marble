@@ -22,7 +22,7 @@ class CachePlugin : public ParseRunnerPlugin
     Q_INTERFACES( Marble::ParseRunnerPlugin )
 
 public:
-    explicit CachePlugin( QObject *parent = 0 );
+    explicit CachePlugin( QObject *parent = nullptr );
 
     QString name() const override;
 

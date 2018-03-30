@@ -716,7 +716,7 @@ void TestEquality::tourTest()
     QVERIFY( tour1 != tour2 );
 
     tour1.setAbstractView( &lookAt );
-    tour1.setStyleMap( 0 );
+    tour1.setStyleMap( nullptr );
     QVERIFY(tour1 != tour2 );
 
     tour1.setStyleMap( &styleMap1 );
@@ -2217,8 +2217,8 @@ void TestEquality::networkLinkControlTest()
     netLC1.setMaxLines( 50 );
     QVERIFY( netLC1 != netLC2 );
 
-    netLC1.setStyleMap(0);
-    netLC2.setStyleMap(0);
+    netLC1.setStyleMap(nullptr);
+    netLC2.setStyleMap(nullptr);
 
     GeoDataStyleMap styleMap1, styleMap2;
     styleMap1["germany"] = "gst1";

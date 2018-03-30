@@ -30,8 +30,8 @@ class MARBLE_EXPORT EditPlacemarkDialog : public QDialog
 
 public:
     EditPlacemarkDialog( GeoDataPlacemark *placemark,
-                         const QHash<qint64,OsmPlacemarkData> *relations = 0,
-                         QWidget *parent = 0 );
+                         const QHash<qint64,OsmPlacemarkData> *relations = nullptr,
+                         QWidget *parent = nullptr );
     ~EditPlacemarkDialog() override;
 
     /**

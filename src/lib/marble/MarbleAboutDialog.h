@@ -39,7 +39,7 @@ public:
         License
     };
 
-    explicit MarbleAboutDialog(QWidget *parent = 0);
+    explicit MarbleAboutDialog(QWidget *parent = nullptr);
     ~MarbleAboutDialog() override;
 
     /**

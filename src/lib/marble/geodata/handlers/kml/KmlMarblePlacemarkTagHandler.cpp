@@ -49,7 +49,7 @@ GeoNode* KmlMarblePlacemarkTagHandler::parse( GeoParser& parser ) const
         return placemark;
 
     } else {
-        return 0;
+        return nullptr;
     }
 }
 

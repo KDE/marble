@@ -72,7 +72,7 @@ GeoNode* KmlextrudeTagHandler::parse( GeoParser& parser ) const
         geometry->setExtrude(extrude);
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

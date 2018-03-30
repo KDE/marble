@@ -143,7 +143,7 @@ GeoDataFeature* PlaybackAnimatedUpdateItem::findFeature(GeoDataFeature* feature,
             }
         }
     }
-    return 0;
+    return nullptr;
 }
 
 GeoDataDocument *PlaybackAnimatedUpdateItem::rootDocument( GeoDataObject* object ) const
@@ -154,7 +154,7 @@ GeoDataDocument *PlaybackAnimatedUpdateItem::rootDocument( GeoDataObject* object
     } else {
         return rootDocument( object->parent() );
     }
-    return 0;
+    return nullptr;
 }
 
 void PlaybackAnimatedUpdateItem::pause()

@@ -46,7 +46,7 @@ GeoNode* DgmlLayerTagHandler::parse(GeoParser& parser) const
     QString backend    = parser.attribute(dgmlAttr_backend).toLower().trimmed();
     QString role      = parser.attribute(dgmlAttr_role).toLower().trimmed();
 
-    GeoSceneLayer *layer = 0;
+    GeoSceneLayer *layer = nullptr;
 
     // Checking for parent layer
     GeoStackItem parentItem = parser.parentElement();

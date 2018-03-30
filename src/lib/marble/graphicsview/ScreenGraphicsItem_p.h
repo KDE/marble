@@ -30,7 +30,7 @@ class ScreenGraphicsItemPrivate : public MarbleGraphicsItemPrivate
           m_position(),
           m_viewportSize(),
           m_floatItemMoving( false ),
-          m_flags( 0 )
+          m_flags( nullptr )
     {
     }
 
@@ -65,7 +65,7 @@ class ScreenGraphicsItemPrivate : public MarbleGraphicsItemPrivate
 
     QVector<QPointF> absolutePositions() const override
     {
-        if( m_parent == 0 ) {
+        if( m_parent == nullptr ) {
             return positions();
         }
 
@@ -92,7 +92,7 @@ class ScreenGraphicsItemPrivate : public MarbleGraphicsItemPrivate
     void setProjection(const ViewportParams *viewport) override
     {
         // If we have no parent
-        if( m_parent == 0 ) {
+        if( m_parent == nullptr ) {
             // Saving the screen size needed for positions()
             m_viewportSize = viewport->size();
         }

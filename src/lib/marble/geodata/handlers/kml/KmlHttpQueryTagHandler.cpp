@@ -31,7 +31,7 @@ GeoNode* KmlhttpQueryTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataLink>()->setHttpQuery(content);
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

@@ -93,11 +93,11 @@ class MarbleWidgetPrivate
           m_model(),
           m_map( &m_model ),
           m_presenter( &m_map ),
-          m_inputhandler( 0 ),
-          m_routingLayer( 0 ),
-          m_mapInfoDialog( 0 ),
+          m_inputhandler( nullptr ),
+          m_routingLayer( nullptr ),
+          m_mapInfoDialog( nullptr ),
           m_customPaintLayer( parent ),
-          m_popupmenu( 0 ),
+          m_popupmenu( nullptr ),
           m_showFrameRate( false )
     {
     }
@@ -157,7 +157,7 @@ MarbleWidget::~MarbleWidget()
 {
     // Remove and delete an existing InputHandler
     // initialized in d->construct()
-    setInputHandler( 0 );
+    setInputHandler( nullptr );
 
     delete d;
 }
@@ -234,7 +234,7 @@ void MarbleWidgetPrivate::construct()
     m_popupmenu = new MarbleWidgetPopupMenu( m_widget, &m_model );
 
     m_routingLayer = new RoutingLayer( m_widget, m_widget );
-    m_routingLayer->setPlacemarkModel( 0 );
+    m_routingLayer->setPlacemarkModel( nullptr );
     QObject::connect( m_routingLayer, SIGNAL(repaintNeeded(QRect)),
                       m_widget, SLOT(update()) );
 

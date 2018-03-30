@@ -28,21 +28,21 @@ namespace Marble
 {
 
 CrosshairsPlugin::CrosshairsPlugin()
-    : RenderPlugin( 0 ),
-      m_svgobj( 0 ),
+    : RenderPlugin( nullptr ),
+      m_svgobj( nullptr ),
       m_themeIndex( 0 ),
-      m_configDialog( 0 ),
-      m_uiConfigWidget( 0 )
+      m_configDialog( nullptr ),
+      m_uiConfigWidget( nullptr )
 {
 }
 
 CrosshairsPlugin::CrosshairsPlugin( const MarbleModel *marbleModel )
     : RenderPlugin( marbleModel ),
       m_isInitialized( false ),
-      m_svgobj( 0 ),
+      m_svgobj( nullptr ),
       m_themeIndex( 0 ),
-      m_configDialog( 0 ),
-      m_uiConfigWidget( 0 )
+      m_configDialog( nullptr ),
+      m_uiConfigWidget( nullptr )
 {
 }
 

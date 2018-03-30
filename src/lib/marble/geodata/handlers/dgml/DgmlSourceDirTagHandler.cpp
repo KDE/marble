@@ -47,7 +47,7 @@ GeoNode* DgmlSourceDirTagHandler::parse(GeoParser& parser) const
         texture->setFileFormat(format);
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

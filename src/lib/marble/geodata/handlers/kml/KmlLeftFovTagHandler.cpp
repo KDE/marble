@@ -32,7 +32,7 @@ GeoNode* KmlleftFovTagHandler::parse( GeoParser& parser ) const
 
         parentItem.nodeAs<GeoDataViewVolume>()->setLeftFov( leftFov );
     }
-    return 0;
+    return nullptr;
 }
 
 }

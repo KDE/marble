@@ -37,7 +37,7 @@ class Navigation : public QObject
     Q_PROPERTY(QPointF screenPosition READ screenPosition NOTIFY screenPositionChanged)
 
 public:
-    explicit Navigation( QObject* parent = 0 );
+    explicit Navigation( QObject* parent = nullptr );
 
     ~Navigation() override;
 

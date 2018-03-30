@@ -24,7 +24,7 @@ class LatLonPlugin : public SearchRunnerPlugin
     Q_INTERFACES( Marble::SearchRunnerPlugin )
 
 public:
-    explicit LatLonPlugin( QObject *parent = 0 );
+    explicit LatLonPlugin( QObject *parent = nullptr );
 
     QString name() const override;
 

@@ -47,7 +47,7 @@ public:
     };
 
     /** Constructor */
-    explicit RoutingModel(RouteRequest *request, PositionTracking *positionTracking, QObject *parent = 0);
+    explicit RoutingModel(RouteRequest *request, PositionTracking *positionTracking, QObject *parent = nullptr);
 
     /** Destructor */
     ~RoutingModel() override;

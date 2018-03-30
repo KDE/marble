@@ -41,7 +41,7 @@ GeoNode* DgmlInstallMapTagHandler::parse(GeoParser& parser) const
     if (parentItem.represents(dgmlTag_Texture) || parentItem.represents(dgmlTag_Vectortile))
         parentItem.nodeAs<GeoSceneTileDataset>()->setInstallMap( parser.readElementText().trimmed() );
 
-    return 0;
+    return nullptr;
 }
 
 }

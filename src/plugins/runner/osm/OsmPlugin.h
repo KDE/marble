@@ -22,7 +22,7 @@ class OsmPlugin : public ParseRunnerPlugin
     Q_INTERFACES( Marble::ParseRunnerPlugin )
 
 public:
-    explicit OsmPlugin( QObject *parent = 0 );
+    explicit OsmPlugin( QObject *parent = nullptr );
 
     QString name() const override;
 

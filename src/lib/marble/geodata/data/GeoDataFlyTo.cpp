@@ -27,7 +27,7 @@ public:
 };
 
 GeoDataFlyToPrivate::GeoDataFlyToPrivate() :
-    m_duration( 0.0 ), m_flyToMode(), m_view( 0 )
+    m_duration( 0.0 ), m_flyToMode(), m_view( nullptr )
 {
 
 }

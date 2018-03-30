@@ -23,7 +23,7 @@ namespace Marble
 {
 
 SunPlugin::SunPlugin()
-    : RenderPlugin( 0 )
+    : RenderPlugin( nullptr )
 {
 }
 

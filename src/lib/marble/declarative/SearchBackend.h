@@ -33,7 +33,7 @@ class SearchBackend : public QObject
     Q_PROPERTY(Placemark* selectedPlacemark READ selectedPlacemark NOTIFY selectedPlacemarkChanged)
 
 public:
-    explicit SearchBackend(QObject *parent = 0);
+    explicit SearchBackend(QObject *parent = nullptr);
     Q_INVOKABLE void search(const QString &place);
     Q_INVOKABLE void setCompletionPrefix(const QString &prefix);
     QObject *marbleQuickItem();

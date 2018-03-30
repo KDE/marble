@@ -37,7 +37,7 @@ GeoNode* KmlLodTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataRegion>()->setLod( lod );
         return &parentItem.nodeAs<GeoDataRegion>()->lod();
     } else {
-        return 0;
+        return nullptr;
     }
 }
 

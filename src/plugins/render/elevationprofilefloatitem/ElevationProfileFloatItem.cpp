@@ -39,11 +39,11 @@ namespace Marble
 
 ElevationProfileFloatItem::ElevationProfileFloatItem( const MarbleModel *marbleModel )
         : AbstractFloatItem( marbleModel, QPointF( 220, 10.5 ), QSizeF( 0.0, 50.0 ) ),
-        m_activeDataSource(0),
-        m_routeDataSource( marbleModel ? marbleModel->routingManager()->routingModel() : 0, marbleModel ? marbleModel->elevationModel() : 0, this ),
-        m_trackDataSource( marbleModel ? marbleModel->treeModel() : 0, this ),
-        m_configDialog( 0 ),
-        ui_configWidget( 0 ),
+        m_activeDataSource(nullptr),
+        m_routeDataSource( marbleModel ? marbleModel->routingManager()->routingModel() : nullptr, marbleModel ? marbleModel->elevationModel() : nullptr, this ),
+        m_trackDataSource( marbleModel ? marbleModel->treeModel() : nullptr, this ),
+        m_configDialog( nullptr ),
+        ui_configWidget( nullptr ),
         m_leftGraphMargin( 0 ),
         m_eleGraphWidth( 0 ),
         m_viewportWidth( 0 ),
@@ -53,8 +53,8 @@ ElevationProfileFloatItem::ElevationProfileFloatItem( const MarbleModel *marbleM
         m_documentIndex( -1 ),
         m_cursorPositionX( 0 ),
         m_isInitialized( false ),
-        m_contextMenu( 0 ),
-        m_marbleWidget( 0 ),
+        m_contextMenu( nullptr ),
+        m_marbleWidget( nullptr ),
         m_firstVisiblePoint( 0 ),
         m_lastVisiblePoint( 0 ),
         m_zoomToViewport( false )
@@ -716,7 +716,7 @@ void ElevationProfileFloatItem::switchToTrackDataSource(int index)
 void ElevationProfileFloatItem::switchDataSource(ElevationProfileDataSource* source)
 {
     if (m_activeDataSource) {
-        disconnect(m_activeDataSource, SIGNAL(dataUpdated(GeoDataLineString,QVector<QPointF>)),0,0);
+        disconnect(m_activeDataSource, SIGNAL(dataUpdated(GeoDataLineString,QVector<QPointF>)),nullptr,nullptr);
     }
     m_activeDataSource = source;
     connect(m_activeDataSource, SIGNAL(dataUpdated(GeoDataLineString,QVector<QPointF>)), this, SLOT(handleDataUpdate(GeoDataLineString,QVector<QPointF>)));

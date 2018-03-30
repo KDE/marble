@@ -37,7 +37,7 @@ class MARBLE_EXPORT TinyWebBrowser : public QWebView
     Q_OBJECT
 
  public:
-    explicit TinyWebBrowser( QWidget* parent = 0 );
+    explicit TinyWebBrowser( QWidget* parent = nullptr );
     ~TinyWebBrowser() override;
 
  public Q_SLOTS:

@@ -33,7 +33,7 @@ GeoNode* KmlmaxSessionLengthTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataNetworkLinkControl>()->setMaxSessionLength( maxSessionLength );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

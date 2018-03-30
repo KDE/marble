@@ -24,7 +24,7 @@ ArrowDiscWidget::ArrowDiscWidget( QWidget *parent ) :
     QWidget( parent ),
     m_arrowPressed( Qt::NoArrow ),
     m_repetitions( 0 ),
-    m_marbleWidget( 0 ),
+    m_marbleWidget( nullptr ),
     m_imagePath( "marble/navigation/navigational_arrows" )
 {
     setMouseTracking( true );

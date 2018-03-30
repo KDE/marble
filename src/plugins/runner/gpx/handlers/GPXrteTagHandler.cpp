@@ -52,7 +52,7 @@ GeoNode* GPXrteTagHandler::parse(GeoParser& parser) const
 
         return placemark;
     }
-    return 0;
+    return nullptr;
 }
 
 } // namespace gpx

@@ -49,7 +49,7 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
     Q_PROPERTY( QObject* favoritesModel READ favoritesModel CONSTANT )
  
  public:
-    explicit AbstractDataPluginModel( const QString& name, const MarbleModel *marbleModel, QObject *parent = 0 );
+    explicit AbstractDataPluginModel( const QString& name, const MarbleModel *marbleModel, QObject *parent = nullptr );
     ~AbstractDataPluginModel() override;
         
     const MarbleModel *marbleModel() const;

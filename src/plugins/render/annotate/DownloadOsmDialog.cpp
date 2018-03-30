@@ -161,9 +161,9 @@ void DownloadOsmDialog::httpFinished()
         emit openFile(m_file->fileName());
     }
     m_reply->deleteLater();
-    m_reply=0;
+    m_reply=nullptr;
     delete m_file;
-    m_file=0;
+    m_file=nullptr;
     if( m_isDownloadSuccess ) {
         this->close();
     }

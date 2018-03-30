@@ -35,7 +35,7 @@ GeoNode* KmlsouthTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataLatLonBox>()->setSouth( south, GeoDataCoordinates::Degree );
     }
 
-    return 0;
+    return nullptr;
 }
 
 }

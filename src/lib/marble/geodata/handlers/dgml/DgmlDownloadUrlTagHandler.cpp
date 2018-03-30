@@ -46,7 +46,7 @@ GeoNode* DgmlDownloadUrlTagHandler::parse( GeoParser& parser ) const
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
     if ( !parentItem.represents( dgmlTag_Texture ) &&  !parentItem.represents( dgmlTag_Vectortile ) )
-        return 0;
+        return nullptr;
 
     QUrl url;
 
@@ -89,7 +89,7 @@ GeoNode* DgmlDownloadUrlTagHandler::parse( GeoParser& parser ) const
     }
 
     parentItem.nodeAs<GeoSceneTileDataset>()->addDownloadUrl( url );
-    return 0;
+    return nullptr;
 }
 
 }
