@@ -55,8 +55,8 @@ class GeoDataStylePrivate;
 class GEODATA_EXPORT GeoDataStyle : public GeoDataStyleSelector
 {
   public:
-    typedef QSharedPointer<GeoDataStyle> Ptr;
-    typedef QSharedPointer<const GeoDataStyle> ConstPtr;
+    using Ptr = QSharedPointer<GeoDataStyle>;
+    using ConstPtr = QSharedPointer<const GeoDataStyle>;
 
     /// Construct a default style
     GeoDataStyle();

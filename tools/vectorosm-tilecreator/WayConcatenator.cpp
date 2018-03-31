@@ -30,7 +30,7 @@ WayConcatenator::WayConcatenator(GeoDataDocument *document) :
     m_originalWays(0),
     m_mergedWays(0)
 {
-    typedef QSharedPointer<GeoDataPlacemark> PlacemarkPtr;
+    using PlacemarkPtr = QSharedPointer<GeoDataPlacemark>;
     for (GeoDataFeature *feature: document->featureList()) {
         if (const auto original = geodata_cast<GeoDataPlacemark>(feature)) {
             bool isWay = false;

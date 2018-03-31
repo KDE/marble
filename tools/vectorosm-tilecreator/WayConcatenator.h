@@ -19,7 +19,7 @@ namespace Marble {
 class WayConcatenator
 {
 private:
-    typedef QSharedPointer<GeoDataPlacemark> PlacemarkPtr;
+    using PlacemarkPtr = QSharedPointer<GeoDataPlacemark>;
 
 public:
     WayConcatenator(GeoDataDocument *document);

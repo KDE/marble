@@ -317,7 +317,7 @@ void PlacemarkLayer::renderDebug(GeoPainter *painter, ViewportParams *viewport, 
     painter->setBrush(QBrush(Qt::NoBrush));
     auto const latLonAltBox = viewport->viewLatLonAltBox();
 
-    typedef QSet<VisiblePlacemark*> Placemarks;
+    using Placemarks = QSet<VisiblePlacemark *>;
     Placemarks const hidden = Placemarks::fromList(m_layout.visiblePlacemarks()).subtract(Placemarks::fromList(placemarks.toList()));
 
     for (auto placemark: hidden) {

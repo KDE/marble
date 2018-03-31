@@ -20,9 +20,9 @@ public:
     static void determineZoomLevel(const QVector<GeoDataPlacemark*> &placemarks);
 
 private:
-    typedef QVector<GeoDataPlacemark*> Peaks;
-    typedef QVector<GeoDataPlacemark*> PeakCluster;
-    typedef QVector<PeakCluster> PeakClusters;
+    using Peaks = QVector<GeoDataPlacemark *>;
+    using PeakCluster = QVector<GeoDataPlacemark *>;
+    using PeakClusters = QVector<PeakCluster>;
 
     static Peaks peaksNear(const GeoDataPlacemark* placemark, const Peaks &peaks, double maxDistance);
     static void dbScan(const Peaks &peaks, double maxDistance, int minPoints);

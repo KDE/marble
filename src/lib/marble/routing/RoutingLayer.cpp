@@ -50,8 +50,8 @@ class RoutingLayerPrivate
         }
     };
 
-    typedef PaintRegion<QModelIndex> ModelRegion;
-    typedef PaintRegion<int> RequestRegion;
+    using ModelRegion = PaintRegion<QModelIndex>;
+    using RequestRegion = PaintRegion<int>;
 
 public:
     RoutingLayer *const q;

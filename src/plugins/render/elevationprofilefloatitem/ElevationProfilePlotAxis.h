@@ -33,7 +33,7 @@ struct AxisTick {
         // nothing to do
     }
 };
-typedef QVector<AxisTick> AxisTickList;
+using AxisTickList = QVector<AxisTick>;
 
  /**
  * @short A helper class handling a plot axis for the Elevation Profile

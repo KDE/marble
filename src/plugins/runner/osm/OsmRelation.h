@@ -37,7 +37,7 @@ public:
 
 private:
     typedef QPair<GeoDataLinearRing, OsmPlacemarkData> OsmRing;
-    typedef QVector<OsmRing> OsmRings;
+    using OsmRings = QVector<OsmRing>;
 
     struct OsmMember
     {

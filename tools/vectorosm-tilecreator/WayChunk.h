@@ -23,10 +23,10 @@ class GeoDataPlacemark;
 class WayChunk
 {
 private:
-    typedef QSharedPointer<GeoDataPlacemark> PlacemarkPtr;
+    using PlacemarkPtr = QSharedPointer<GeoDataPlacemark>;
 
 public:
-    typedef QSharedPointer<WayChunk> Ptr;
+    using Ptr = QSharedPointer<WayChunk>;
 
     WayChunk(const PlacemarkPtr &placemark, qint64 first, qint64 last );
     ~WayChunk();

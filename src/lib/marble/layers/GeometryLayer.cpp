@@ -64,10 +64,10 @@ namespace Marble
 class GeometryLayerPrivate
 {
 public:
-    typedef QVector<GeoLineStringGraphicsItem*> OsmLineStringItems;
-    typedef QSet<const GeoDataRelation *> Relations;
+    using OsmLineStringItems = QVector<GeoLineStringGraphicsItem *>;
+    using Relations = QSet<const GeoDataRelation *>;
     typedef QHash<const GeoDataFeature *, Relations> FeatureRelationHash;
-    typedef QVector<GeoGraphicsItem*> GeoGraphicItems;
+    using GeoGraphicItems = QVector<GeoGraphicsItem *>;
 
     struct PaintFragments {
         // Three lists for different z values

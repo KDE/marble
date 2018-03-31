@@ -76,11 +76,11 @@ enum PolyFillType { pftEvenOdd, pftNonZero, pftPositive, pftNegative };
   static cInt const loRange = 0x7FFF;
   static cInt const hiRange = 0x7FFF;
 #else
-  typedef signed long long cInt;
+  using cInt = long long;
   static cInt const loRange = 0x3FFFFFFF;
   static cInt const hiRange = 0x3FFFFFFFFFFFFFFFLL;
-  typedef signed long long long64;     //used by Int128 class
-  typedef unsigned long long ulong64;
+  using long64 = long long;     //used by Int128 class
+  using ulong64 = unsigned long long;
 
 #endif
 
@@ -113,8 +113,8 @@ private:
 };
 //------------------------------------------------------------------------------
 
-typedef std::vector< IntPoint > Path;
-typedef std::vector< Path > Paths;
+using Path = std::vector<IntPoint>;
+using Paths = std::vector<Path>;
 
 inline Path& operator <<(Path& poly, const IntPoint& p) {poly.push_back(p); return poly;}
 inline Paths& operator <<(Paths& polys, const Path& p) {polys.push_back(p); return polys;}
@@ -141,7 +141,7 @@ enum JoinType {jtSquare, jtRound, jtMiter};
 enum EndType {etClosedPolygon, etClosedLine, etOpenButt, etOpenSquare, etOpenRound};
 
 class PolyNode;
-typedef std::vector< PolyNode* > PolyNodes;
+using PolyNodes = std::vector<PolyNode *>;
 
 class PolyNode 
 { 
@@ -215,10 +215,10 @@ struct OutPt;
 struct OutRec;
 struct Join;
 
-typedef std::vector < OutRec* > PolyOutList;
-typedef std::vector < TEdge* > EdgeList;
-typedef std::vector < Join* > JoinList;
-typedef std::vector < IntersectNode* > IntersectList;
+using PolyOutList = std::vector<OutRec *>;
+using EdgeList = std::vector<TEdge *>;
+using JoinList = std::vector<Join *>;
+using IntersectList = std::vector<IntersectNode *>;
 
 //------------------------------------------------------------------------------
 
@@ -252,7 +252,7 @@ protected:
   void DeleteFromAEL(TEdge *e);
   void UpdateEdgeIntoAEL(TEdge *&e);
 
-  typedef std::vector<LocalMinimum> MinimaList;
+  using MinimaList = std::vector<LocalMinimum>;
   MinimaList::iterator m_CurrentLM;
   MinimaList           m_MinimaList;
 
@@ -263,7 +263,7 @@ protected:
   PolyOutList       m_PolyOuts;
   TEdge           *m_ActiveEdges;
 
-  typedef std::priority_queue<cInt> ScanbeamList;
+  using ScanbeamList = std::priority_queue<cInt>;
   ScanbeamList     m_Scanbeam;
 };
 //------------------------------------------------------------------------------
@@ -301,7 +301,7 @@ private:
   JoinList         m_GhostJoins;
   IntersectList    m_IntersectList;
   ClipType         m_ClipType;
-  typedef std::list<cInt> MaximaList;
+  using MaximaList = std::list<cInt>;
   MaximaList       m_Maxima;
   TEdge           *m_SortedEdges;
   bool             m_ExecuteLocked;

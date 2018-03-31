@@ -26,7 +26,7 @@ class TagsFilter
 {
 public:
     typedef QPair<QString, QString> Tag;
-    typedef QVector<Tag> Tags;
+    using Tags = QVector<Tag>;
 
     enum FilterFlag {
         NoFlag = 0,

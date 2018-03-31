@@ -242,7 +242,7 @@ namespace Marble
         void handleReverseGeocoding(const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark);
 
     private:
-        typedef QSharedPointer<MarbleQuickItemPrivate> MarbleQuickItemPrivatePtr;
+        using MarbleQuickItemPrivatePtr = QSharedPointer<MarbleQuickItemPrivate>;
         MarbleQuickItemPrivatePtr d;
         friend class MarbleQuickItemPrivate;
     };

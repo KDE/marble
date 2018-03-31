@@ -554,7 +554,7 @@ GeoDataLineString OsmParser::reverse( const GeoDataLineString & string )
 
 bool OsmParser::shouldSave( ElementType /*type*/, const QString &key, const QString &value )
 {
-    typedef QList<QString> Dictionary;
+    using Dictionary = QList<QString>;
     static QHash<QString, Dictionary> interestingTags;
     if ( interestingTags.isEmpty() ) {
         Dictionary highways;

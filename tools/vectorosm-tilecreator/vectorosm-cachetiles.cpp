@@ -136,7 +136,7 @@ int main(int argc, char *argv[])
                 continue;
             }
 
-            typedef QSharedPointer<GeoDataDocument> GeoDocPtr;
+            using GeoDocPtr = QSharedPointer<GeoDataDocument>;
             GeoDocPtr tile1 = GeoDocPtr(mapTiles.clip(tileId.zoomLevel(), tileId.x(), tileId.y()));
             TagsFilter::removeAnnotationTags(tile1.data());
             if (tileId.zoomLevel() < 17) {

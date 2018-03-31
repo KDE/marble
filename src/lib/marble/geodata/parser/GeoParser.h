@@ -31,7 +31,7 @@
 namespace Marble
 {
 
-typedef int GeoDataGenericSourceType;
+using GeoDataGenericSourceType = int;
 
 class GeoDocument;
 class GeoNode;

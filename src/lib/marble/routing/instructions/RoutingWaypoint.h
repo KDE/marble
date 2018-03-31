@@ -73,7 +73,7 @@ private:
     QString m_roadName;
 };
 
-typedef QVector<RoutingWaypoint> RoutingWaypoints;
+using RoutingWaypoints = QVector<RoutingWaypoint>;
 
 } // namespace Marble
 

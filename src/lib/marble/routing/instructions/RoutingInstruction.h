@@ -155,7 +155,7 @@ private:
 
 QTextStream& operator<<( QTextStream& stream, const RoutingInstruction &i );
 
-typedef QVector<RoutingInstruction> RoutingInstructions;
+using RoutingInstructions = QVector<RoutingInstruction>;
 
 } // namespace Marble
 

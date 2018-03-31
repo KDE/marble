@@ -281,7 +281,7 @@ int main(int argc, char *argv[])
                     }
                 }
 
-                typedef QSharedPointer<GeoDataDocument> GeoDocPtr;
+                using GeoDocPtr = QSharedPointer<GeoDataDocument>;
                 GeoDocPtr tile2 = GeoDocPtr(loader.clip(zoomLevel, tileId.x(), tileId.y()));
                 if (!tile2->isEmpty()) {
                     GeoDocPtr tile1 = GeoDocPtr(mapTiles.clip(zoomLevel, tileId.x(), tileId.y()));

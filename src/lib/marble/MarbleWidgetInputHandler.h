@@ -45,7 +45,7 @@ private:
     AbstractSelectionRubber *selectionRubber() override;
     bool layersEventFilter(QObject *o, QEvent *e) override;
 
-    typedef QSharedPointer<MarbleWidgetInputHandlerPrivate> MarbleWidgetInputHandlerPrivatePtr;
+    using MarbleWidgetInputHandlerPrivatePtr = QSharedPointer<MarbleWidgetInputHandlerPrivate>;
     MarbleWidgetInputHandlerPrivatePtr d;
     friend class MarbleWidgetInputHandlerPrivate;
 

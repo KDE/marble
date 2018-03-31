@@ -138,7 +138,7 @@ void NodeReducer::setBorderPoints(OsmPlacemarkData &osmData, const QVector<int> 
     }
 
     typedef QPair<int, int> Segment;
-    typedef QVector<Segment> Segments;
+    using Segments = QVector<Segment>;
     Segments segments;
     Segment currentSegment;
     currentSegment.first = borderPoints.first();

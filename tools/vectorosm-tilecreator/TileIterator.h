@@ -19,7 +19,7 @@ namespace Marble {
 
 class TileIterator {
 public:
-    typedef TileIterator const_iterator;
+    using const_iterator = TileIterator;
 
     const const_iterator& operator*();
     bool operator!=( const const_iterator& ) const;

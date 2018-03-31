@@ -86,8 +86,8 @@ class KBiAssociativeContainer
         }
     };
 public:
-    typedef typename RightContainer::mapped_type left_type;
-    typedef typename LeftContainer::mapped_type right_type;
+    using left_type = typename QMap<int, QPersistentModelIndex>::mapped_type;
+    using right_type = typename QHash<QPersistentModelIndex, int>::mapped_type;
 
     template <typename Container>
     class _iterator : public _iterator_impl_ctor<Container, typename Container::key_type, typename Container::mapped_type>
@@ -119,10 +119,10 @@ public:
 #endif
     };
 
-    typedef _iterator<LeftContainer>                      left_iterator;
-    typedef typename LeftContainer::const_iterator        left_const_iterator;
-    typedef _iterator<RightContainer>                     right_iterator;
-    typedef typename RightContainer::const_iterator       right_const_iterator;
+    using left_iterator = _iterator<QHash<QPersistentModelIndex, int> >;
+    using left_const_iterator = typename QHash<QPersistentModelIndex, int>::const_iterator;
+    using right_iterator = _iterator<QMap<int, QPersistentModelIndex> >;
+    using right_const_iterator = typename QMap<int, QPersistentModelIndex>::const_iterator;
 
     inline KBiAssociativeContainer() {}
     inline KBiAssociativeContainer(const KBiAssociativeContainer<LeftContainer, RightContainer> &other) {

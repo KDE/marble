@@ -92,8 +92,8 @@ class GEODATA_EXPORT GeoDataCoordinates
     };
 
     // Type definitions
-    typedef QVector<GeoDataCoordinates> Vector;
-    typedef QVector<GeoDataCoordinates*> PtrVector;
+    using Vector = QVector<GeoDataCoordinates>;
+    using PtrVector = QVector<GeoDataCoordinates *>;
 
     GeoDataCoordinates( const GeoDataCoordinates& other );
 

@@ -47,8 +47,8 @@ class GeoDataPointPrivate;
 class GEODATA_EXPORT GeoDataPoint : public GeoDataGeometry
 {
  public:
-    typedef GeoDataCoordinates::Notation Notation;
-    typedef GeoDataCoordinates::Unit Unit;
+    using Notation = GeoDataCoordinates::Notation;
+    using Unit = GeoDataCoordinates::Unit;
 
     GeoDataPoint( const GeoDataPoint& other );
     explicit GeoDataPoint( const GeoDataCoordinates& other );
@@ -82,7 +82,7 @@ class GEODATA_EXPORT GeoDataPoint : public GeoDataGeometry
     const char* nodeType() const override;
 
     // Type definitions
-    typedef QVector<GeoDataPoint> Vector;
+    using Vector = QVector<GeoDataPoint>;
 
 
     // Serialize the Placemark to @p stream

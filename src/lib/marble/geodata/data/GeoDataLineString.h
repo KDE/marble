@@ -73,9 +73,9 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry
 {
 
  public:
-    typedef QVector<GeoDataCoordinates>::Iterator Iterator;
-    typedef QVector<GeoDataCoordinates>::ConstIterator ConstIterator;
-    typedef QVector<GeoDataCoordinates>::const_iterator const_iterator;
+    using Iterator = QVector<GeoDataCoordinates>::Iterator;
+    using ConstIterator = QVector<GeoDataCoordinates>::ConstIterator;
+    using const_iterator = QVector<GeoDataCoordinates>::const_iterator;
 
 
 /*!
