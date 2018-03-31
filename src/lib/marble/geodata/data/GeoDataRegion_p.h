@@ -68,7 +68,7 @@ class GeoDataRegionPrivate
 
   private:
     // Preventing usage of operator=
-    GeoDataRegionPrivate &operator=( const GeoDataRegionPrivate& );
+    GeoDataRegionPrivate &operator=( const GeoDataRegionPrivate& ) = delete;
 };
 
 } // namespace Marble

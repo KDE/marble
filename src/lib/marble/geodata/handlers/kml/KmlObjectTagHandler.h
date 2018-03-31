@@ -27,7 +27,7 @@ public:
     static void parseIdentifiers( const GeoParser &parser, GeoDataObject* object );
 
 private:
-    KmlObjectTagHandler(); // not implemented
+    KmlObjectTagHandler() = delete; // not implemented
 };
 
 }

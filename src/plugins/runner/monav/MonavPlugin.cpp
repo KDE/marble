@@ -41,7 +41,7 @@ public:
     }
 
 private:
-    MonavWaiter();
+    MonavWaiter() = delete;
     Q_DISABLE_COPY( MonavWaiter )
 };
 

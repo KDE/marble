@@ -50,8 +50,8 @@ protected: // This base class is not directly constructable nor is it copyable.
     virtual ~GeoTagHandler();
 
 private:
-    GeoTagHandler(const GeoTagHandler&);
-    GeoTagHandler& operator=(const GeoTagHandler&);
+    GeoTagHandler(const GeoTagHandler&) = delete;
+    GeoTagHandler& operator=(const GeoTagHandler&) = delete;
 
 private: // Only our registrar is allowed to register tag handlers.
     friend struct GeoTagHandlerRegistrar;

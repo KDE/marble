@@ -27,7 +27,7 @@ public:
     static void writeIdentifiers( GeoWriter &writer, const GeoDataObject* object );
 
 private:
-    KmlObjectTagWriter(); // not implemented
+    KmlObjectTagWriter() = delete; // not implemented
 };
 
 }

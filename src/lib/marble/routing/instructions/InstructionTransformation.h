@@ -29,7 +29,7 @@ public:
 
 private:
     // Pure static usage
-    InstructionTransformation();
+    InstructionTransformation() = delete;
     Q_DISABLE_COPY( InstructionTransformation )
 };
 
