@@ -27,7 +27,7 @@ public:
         // nothing to do
     }
 
-    void componentComplete()
+    void componentComplete() override
     {
         QQuickItem *pinch = findChild<QQuickItem*>(QStringLiteral("pinchArea"));
         if (pinch)

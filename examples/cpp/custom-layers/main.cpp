@@ -29,14 +29,14 @@ public:
     MyPaintLayer(MarbleWidget* widget);
 
     // Implemented from LayerInterface
-    virtual QStringList renderPosition() const;
+    QStringList renderPosition() const override;
 
     // Implemented from LayerInterface
-    virtual bool render( GeoPainter *painter, ViewportParams *viewport,
-                        const QString &renderPos, GeoSceneLayer *layer);
+    bool render( GeoPainter *painter, ViewportParams *viewport,
+                        const QString &renderPos, GeoSceneLayer *layer) override;
 
     // Overriding QObject
-    virtual bool eventFilter(QObject *obj, QEvent *event);
+    bool eventFilter(QObject *obj, QEvent *event) override;
 
     static GeoDataCoordinates approximate(const GeoDataCoordinates &base, qreal angle, qreal dist);
 

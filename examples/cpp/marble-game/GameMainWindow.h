@@ -27,7 +27,7 @@ class MainWindow: public QMainWindow
     Q_OBJECT
 public:
     explicit MainWindow( const QString &marbleDataPath, QWidget *parent = nullptr, Qt::WindowFlags flags = nullptr );
-    virtual ~MainWindow();
+    ~MainWindow() override;
     MarbleWidget *marbleWidget();
 
 Q_SIGNALS:
@@ -44,7 +44,7 @@ private Q_SLOTS:
     void displayResult( bool );
 
 protected:
-    void resizeEvent( QResizeEvent *event );
+    void resizeEvent( QResizeEvent *event ) override;
 
 private:
     Private * const d;

@@ -24,7 +24,7 @@ class CountryByFlag : public QObject
     Q_OBJECT;
 public:
     explicit CountryByFlag( MarbleWidget *marbleWidget );
-    ~CountryByFlag();
+    ~CountryByFlag() override;
 
 public Q_SLOTS:
     void initiateGame();

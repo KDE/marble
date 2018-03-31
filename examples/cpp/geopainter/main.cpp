@@ -18,7 +18,7 @@ using namespace Marble;
 class MyMarbleWidget : public MarbleWidget
 {
 public:
-    virtual void customPaint(GeoPainter* painter);
+    void customPaint(GeoPainter* painter) override;
 };
 
 void MyMarbleWidget::customPaint(GeoPainter* painter)

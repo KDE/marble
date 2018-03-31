@@ -32,7 +32,7 @@ class DownloadOsmDialog : public QDialog,private Ui::DownloadOsmDialog
 
 public:
     explicit DownloadOsmDialog(MarbleWidget *parent = nullptr,AnnotatePlugin *annotatePlugin = nullptr);
-    ~DownloadOsmDialog();
+    ~DownloadOsmDialog() override;
 
 Q_SIGNALS:
     void openFile(const QString &filename);

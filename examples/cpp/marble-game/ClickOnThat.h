@@ -28,7 +28,7 @@ class ClickOnThat : public QObject
     Q_OBJECT
 public:
     explicit ClickOnThat( MarbleWidget *marbleWidget );
-    ~ClickOnThat();
+    ~ClickOnThat() override;
 
     /**
      * disable the GeoDataDocument which

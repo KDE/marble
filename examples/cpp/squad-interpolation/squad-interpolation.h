@@ -31,9 +31,9 @@ public:
     explicit MyPaintLayer( MarbleWidget* widget );
 
     // LayerInterface
-    QStringList renderPosition() const;
+    QStringList renderPosition() const override;
     bool render( GeoPainter *painter, ViewportParams *viewport,
-                const QString &renderPos, GeoSceneLayer *layer);
+                const QString &renderPos, GeoSceneLayer *layer) override;
     GeoDataLatLonBox center() const;
 
 private Q_SLOTS:

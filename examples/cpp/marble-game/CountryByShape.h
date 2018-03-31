@@ -27,7 +27,7 @@ class CountryByShape : public QObject
     Q_OBJECT
 public:
     explicit CountryByShape( MarbleWidget *widget );
-    ~CountryByShape();
+    ~CountryByShape() override;
 
 Q_SIGNALS:
     void gameInitialized();
