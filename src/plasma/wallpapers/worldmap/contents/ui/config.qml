@@ -25,20 +25,22 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 
 ColumnLayout {
     id: root
+
     property int cfg_projection: wallpaper.configuration.projection // Enum needs manual set/get for now
     property int cfg_centerMode: wallpaper.configuration.centerMode // Enum needs manual set/get for now
     property alias cfg_fixedLongitude: longitudeSpinBox.value
 
+    // To allow aligned integration in the settings form,
+    // "formAlignment" is a property injected by the config containment
+    // which defines the offset of the value fields
+    readonly property int labelWidth: formAlignment - units.largeSpacing
+
     RowLayout {
         spacing: units.largeSpacing / 2
 
-        // To allow aligned integration in the settings form,
-        // "formAlignment" is a property injected by the config containment
-        // which defines the offset of the value fields
         QtControls.Label {
-            Layout.minimumWidth: width
-            Layout.maximumWidth: width
-            width: formAlignment - units.largeSpacing
+            Layout.minimumWidth: labelWidth
+            Layout.maximumWidth: labelWidth
             horizontalAlignment: Text.AlignRight
             anchors {
                 verticalCenter: projectionComboBox.verticalCenter
@@ -65,9 +67,8 @@ ColumnLayout {
         spacing: units.largeSpacing / 2
 
         QtControls.Label {
-            Layout.minimumWidth: width
-            Layout.maximumWidth: width
-            width: formAlignment - units.largeSpacing
+            Layout.minimumWidth: labelWidth
+            Layout.maximumWidth: labelWidth
             horizontalAlignment: Text.AlignRight
             anchors {
                 verticalCenter: centerModeComboBox.verticalCenter
@@ -95,9 +96,8 @@ ColumnLayout {
         spacing: units.largeSpacing / 2
 
          QtControls.Label {
-            Layout.minimumWidth: width
-            Layout.maximumWidth: width
-            width: formAlignment - units.largeSpacing
+            Layout.minimumWidth: labelWidth
+            Layout.maximumWidth: labelWidth
             horizontalAlignment: Text.AlignRight
             anchors {
                 verticalCenter: longitudeSpinBox.verticalCenter
