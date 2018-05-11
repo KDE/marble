@@ -1119,8 +1119,7 @@ QString MainWindow::readMarbleDataPath()
      QSettings settings;
 
      settings.beginGroup("MarbleWidget");
-         QString marbleDataPath;
-         marbleDataPath = settings.value("marbleDataPath", "").toString(),
+     const auto marbleDataPath = settings.value("marbleDataPath", "").toString();
      settings.endGroup();
 
      return marbleDataPath;
