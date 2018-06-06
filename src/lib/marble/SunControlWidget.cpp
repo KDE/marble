@@ -37,7 +37,7 @@ SunControlWidget::SunControlWidget( MarbleWidget* marbleWidget, QWidget* parent 
     m_uiWidget->lockWarningLabel->hide();
 	
     connect( m_uiWidget->buttonBox->button(QDialogButtonBox::Apply), SIGNAL(clicked()), this, SLOT(apply()) );
-    connect( m_uiWidget->buttonBox, SIGNAL(reject()), this, SLOT(reject()) );
+    connect( m_uiWidget->buttonBox, SIGNAL(rejected()), this, SLOT(reject()) );
     connect( m_uiWidget->buttonBox->button(QDialogButtonBox::Ok), SIGNAL(clicked()), this, SLOT(apply()) );
     connect( m_uiWidget->buttonBox->button(QDialogButtonBox::Ok), SIGNAL(clicked()), this, SLOT(accept()) );
     

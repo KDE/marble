@@ -45,7 +45,7 @@ TileCreatorDialog::TileCreatorDialog(TileCreator *creator, QWidget *parent)
 
     connect( d->m_creator, SIGNAL(progress(int)),
              this, SLOT(setProgress(int)), Qt::QueuedConnection );
-    connect( d->uiWidget.buttonBox, SIGNAL(reject()),
+    connect( d->uiWidget.buttonBox, SIGNAL(rejected()),
              this, SLOT(cancelTileCreation()) );
 
     // Start the creation process
