@@ -63,6 +63,17 @@ if (CMAKE_SYSTEM_NAME STREQUAL Android)
     configure_file(package/deploy-marble-maps.json.in ${CMAKE_CURRENT_BINARY_DIR}/deploy-marble-maps.json @ONLY)
     install(FILES ${CMAKE_CURRENT_BINARY_DIR}/deploy-marble-maps.json DESTINATION "${CMAKE_INSTALL_PREFIX}/share")
     install(TARGETS ${TARGET} LIBRARY DESTINATION libs/${ANDROID_ABI})
+    if (TARGET create-apk-Marble)
+        set(PACKAGE_DIR "${CMAKE_BINARY_DIR}/Marble_projects/")
+        set_target_properties(create-apk-Marble PROPERTIES ANDROID_APK_DIR "${PACKAGE_DIR}")
+        add_custom_target(marble-move-metadata ALL
+            COMMAND cmake -E echo "Moving Marble shared Android resources"
+            COMMAND cmake -E remove_directory "${PACKAGE_DIR}"
+            COMMAND cmake -E copy_directory "${CMAKE_CURRENT_SOURCE_DIR}/package" "${PACKAGE_DIR}"
+            COMMAND cmake -E copy_directory "${CMAKE_SOURCE_DIR}/data/android/" "${PACKAGE_DIR}/res"
+        )
+        add_dependencies(create-apk-Marble marble-move-metadata)
+    endif()
 else()
     if(MARBLE_INSTALL_ANDROID_APPS)
         if(APPS_INSTALL_DIR)
