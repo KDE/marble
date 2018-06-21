@@ -529,64 +529,76 @@ quint64 MarbleWidget::volatileTileCacheLimit() const
 
 void MarbleWidget::setZoom( int newZoom, FlyToMode mode )
 {
+    d->m_inputhandler->stopInertialEarthRotation();
     d->m_presenter.setZoom( newZoom, mode );
 }
 
 void MarbleWidget::zoomView( int zoom, FlyToMode mode )
 {
+    d->m_inputhandler->stopInertialEarthRotation();
     d->m_presenter.zoomView( zoom, mode );
 }
 
 
 void MarbleWidget::zoomViewBy( int zoomStep, FlyToMode mode )
 {
+    d->m_inputhandler->stopInertialEarthRotation();
     d->m_presenter.zoomViewBy( zoomStep, mode );
 }
 
 
 void MarbleWidget::zoomIn( FlyToMode mode )
 {
+    d->m_inputhandler->stopInertialEarthRotation();
     d->m_presenter.zoomIn( mode );
 }
 
 void MarbleWidget::zoomOut( FlyToMode mode )
 {
+    d->m_inputhandler->stopInertialEarthRotation();
     d->m_presenter.zoomOut( mode );
 }
 
 void MarbleWidget::rotateBy( const qreal deltaLon, const qreal deltaLat, FlyToMode mode )
 {
+    d->m_inputhandler->stopInertialEarthRotation();
     d->m_presenter.rotateBy( deltaLon, deltaLat, mode );
 }
 
 
 void MarbleWidget::centerOn( const qreal lon, const qreal lat, bool animated )
 {
+    d->m_inputhandler->stopInertialEarthRotation();
     d->m_presenter.centerOn( lon, lat, animated );
 }
 
 void MarbleWidget::centerOn( const GeoDataCoordinates &position, bool animated )
 {
+    d->m_inputhandler->stopInertialEarthRotation();
     d->m_presenter.centerOn( position, animated );
 }
 
 void MarbleWidget::centerOn( const GeoDataLatLonBox &box, bool animated )
 {
+    d->m_inputhandler->stopInertialEarthRotation();
    d->m_presenter.centerOn( box, animated );
 }
 
 void MarbleWidget::centerOn( const GeoDataPlacemark& placemark, bool animated )
 {
+    d->m_inputhandler->stopInertialEarthRotation();
     d->m_presenter.centerOn( placemark, animated );
 }
 
 void MarbleWidget::setCenterLatitude( qreal lat, FlyToMode mode )
 {
+    d->m_inputhandler->stopInertialEarthRotation();
     d->m_presenter.setCenterLatitude( lat, mode );
 }
 
 void MarbleWidget::setCenterLongitude( qreal lon, FlyToMode mode )
 {
+    d->m_inputhandler->stopInertialEarthRotation();
     d->m_presenter.setCenterLongitude( lon, mode );
 }
 
@@ -607,21 +619,25 @@ void MarbleWidget::setProjection( int projection )
 
 void MarbleWidget::moveLeft( FlyToMode mode )
 {
+    d->m_inputhandler->stopInertialEarthRotation();
     d->m_presenter.moveByStep( -1, 0, mode );
 }
 
 void MarbleWidget::moveRight( FlyToMode mode )
 {
+    d->m_inputhandler->stopInertialEarthRotation();
     d->m_presenter.moveByStep( 1, 0, mode );
 }
 
 void MarbleWidget::moveUp( FlyToMode mode )
 {
+    d->m_inputhandler->stopInertialEarthRotation();
     d->m_presenter.moveByStep( 0, -1, mode );
 }
 
 void MarbleWidget::moveDown( FlyToMode mode )
 {
+    d->m_inputhandler->stopInertialEarthRotation();
     d->m_presenter.moveByStep( 0, 1, mode );
 }
 
@@ -742,6 +758,7 @@ void MarbleWidget::customPaint( GeoPainter *painter )
 
 void MarbleWidget::goHome( FlyToMode mode )
 {
+    d->m_inputhandler->stopInertialEarthRotation();
     d->m_presenter.goHome( mode );
 }
 
@@ -1159,6 +1176,7 @@ void MarbleWidget::changeEvent( QEvent * event )
 
 void MarbleWidget::flyTo( const GeoDataLookAt &newLookAt, FlyToMode mode )
 {
+    d->m_inputhandler->stopInertialEarthRotation();
     d->m_presenter.flyTo( newLookAt, mode );
 }
 

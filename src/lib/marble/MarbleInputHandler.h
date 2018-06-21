@@ -76,6 +76,9 @@ class MARBLE_EXPORT MarbleInputHandler  : public QObject
      */
     bool inertialEarthRotationEnabled() const;
 
+    /// should the map do kinetic scrolling, this would stop the operation
+    virtual void stopInertialEarthRotation();
+
  Q_SIGNALS:
     // Mouse button menus
     void lmbRequest( int, int );
@@ -123,6 +126,8 @@ class MARBLE_EXPORT MarbleDefaultInputHandler  : public MarbleInputHandler
  public:
     explicit MarbleDefaultInputHandler( MarbleAbstractPresenter* marblePresenter);
     ~MarbleDefaultInputHandler() override;
+
+    void stopInertialEarthRotation() override;
 
  protected:
     bool eventFilter( QObject *, QEvent * ) override;

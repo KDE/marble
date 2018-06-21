@@ -127,6 +127,10 @@ bool MarbleInputHandler::inertialEarthRotationEnabled() const
     return d->m_inertialEarthRotation;
 }
 
+void MarbleInputHandler::stopInertialEarthRotation()
+{
+}
+
 class Q_DECL_HIDDEN MarbleDefaultInputHandler::Private
 {
  public:
@@ -246,6 +250,11 @@ MarbleDefaultInputHandler::MarbleDefaultInputHandler(MarbleAbstractPresenter *ma
 MarbleDefaultInputHandler::~MarbleDefaultInputHandler()
 {
     delete d;
+}
+
+void MarbleDefaultInputHandler::stopInertialEarthRotation()
+{
+    d->m_kineticSpinning.stop();
 }
 
 void MarbleDefaultInputHandler::lmbTimeout()
@@ -929,28 +938,35 @@ bool MarbleDefaultInputHandler::handleKeyPress(QKeyEvent* event)
         bool handled = true;
         switch ( event->key() ) {
         case Qt::Key_Left:
+            stopInertialEarthRotation();
             marblePresenter->moveByStep(-1, 0);
             break;
         case Qt::Key_Right:
+            stopInertialEarthRotation();
             marblePresenter->moveByStep(1, 0);
             break;
         case Qt::Key_Up:
+            stopInertialEarthRotation();
             marblePresenter->moveByStep(0, -1);
             break;
         case Qt::Key_Down:
+            stopInertialEarthRotation();
             marblePresenter->moveByStep(0, 1);
             break;
         case Qt::Key_Plus:
             if (event->modifiers() != Qt::ControlModifier) {
+                stopInertialEarthRotation();
                 marblePresenter->zoomIn();
             }
             break;
         case Qt::Key_Minus:
             if (event->modifiers() != Qt::ControlModifier) {
+                stopInertialEarthRotation();
                 marblePresenter->zoomOut();
             }
             break;
         case Qt::Key_Home:
+            stopInertialEarthRotation();
             marblePresenter->goHome();
             break;
         default:
