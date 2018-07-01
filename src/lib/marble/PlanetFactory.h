@@ -40,8 +40,6 @@ public:
     static QString localizedName( const QString &id );
 };
 
-typedef PlanetFactory Magrathea;
-
 }
 
 #endif

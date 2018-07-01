@@ -313,7 +313,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument *document )
     qreal const radiusAttributeValue = d->m_mapTheme->head()->radius();
     if( d->m_mapTheme->head()->target().toLower() != d->m_planet.id() || radiusAttributeValue != d->m_planet.radius() ) {
         mDebug() << "Changing Planet";
-        d->m_planet = Magrathea::construct( d->m_mapTheme->head()->target().toLower() );
+        d->m_planet = PlanetFactory::construct(d->m_mapTheme->head()->target().toLower());
         if ( radiusAttributeValue > 0.0 ) {
             d->m_planet.setRadius( radiusAttributeValue );
         }
