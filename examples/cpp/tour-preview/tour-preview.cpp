@@ -77,7 +77,7 @@ GeoDataTour* createTour( const Route &route )
     GeoDataCoordinates last = path.at( 0 );
     for ( int i=1; i<path.size(); ++i ) {
         GeoDataCoordinates coordinates = path.at( i );
-        double const distance = EARTH_RADIUS * distanceSphere( last, coordinates );
+        double const distance = EARTH_RADIUS * last.sphericalDistanceTo( coordinates );
         if ( i > 1 && distance < 500 ) {
             // Ignore waypoints that are quite close
             continue;
