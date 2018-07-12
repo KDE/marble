@@ -70,11 +70,11 @@ PopupItem::PopupItem( QObject* parent ) :
     m_ui.webView->setAttribute(Qt::WA_OpaquePaintEvent, false);
     m_ui.webView->setUrl( QUrl( "about:blank" ) );
 
-    connect( m_ui.webView, SIGNAL(titleChanged(QString)), m_ui.titleText, SLOT(setText(QString)) );
-    connect( m_ui.webView, SIGNAL(urlChanged(QUrl)), this, SLOT(updateBackButton()) );
     connect( m_ui.hideButton, SIGNAL(clicked()), this, SIGNAL(hide()) );
 
 #ifndef MARBLE_NO_WEBKITWIDGETS
+    connect( m_ui.webView, SIGNAL(titleChanged(QString)), m_ui.titleText, SLOT(setText(QString)) );
+    connect( m_ui.webView, SIGNAL(urlChanged(QUrl)), this, SLOT(updateBackButton()) );
     // Update the popupitem on changes while loading the webpage
     connect( m_ui.webView->page(), SIGNAL(repaintRequested(QRect)), this, SLOT(requestUpdate()) );
     connect(m_ui.webView->page(), SIGNAL(linkClicked(QUrl)), this, SLOT(openUrl(QUrl)));
