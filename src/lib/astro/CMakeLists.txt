@@ -36,11 +36,13 @@ if(WIN32)
   TARGET_LINK_LIBRARIES(astro ws2_32 imm32 winmm)
 endif(WIN32)
 
-set_target_properties(astro PROPERTIES
-    EXPORT_NAME "Astro"
-    VERSION ${ASTRO_LIB_VERSION}
-    SOVERSION ${ASTRO_LIB_SOVERSION}
-)
+if (NOT (CMAKE_SYSTEM_NAME STREQUAL Android))
+  set_target_properties(astro PROPERTIES
+      EXPORT_NAME "Astro"
+      VERSION ${ASTRO_LIB_VERSION}
+      SOVERSION ${ASTRO_LIB_SOVERSION}
+  )
+endif()
 
 target_include_directories(astro
     INTERFACE "$<INSTALL_INTERFACE:${INCLUDE_INSTALL_DIR}>"

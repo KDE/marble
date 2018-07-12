@@ -429,10 +429,15 @@ endif(WIN32)
 set_target_properties(marblewidget  PROPERTIES
     EXPORT_NAME "Marble"
     OUTPUT_NAME marblewidget-qt5
-    VERSION ${MARBLE_LIB_VERSION}
-    SOVERSION ${MARBLE_ABI_VERSION}
     COMPILE_FLAGS "-DKML_LAZY_IMP"
 )
+
+if (NOT (CMAKE_SYSTEM_NAME STREQUAL Android))
+  set_target_properties(marblewidget  PROPERTIES
+    VERSION ${MARBLE_LIB_VERSION}
+    SOVERSION ${MARBLE_ABI_VERSION}
+  )
+endif()
 
 target_include_directories(marblewidget
     INTERFACE "$<INSTALL_INTERFACE:${INCLUDE_INSTALL_DIR}>"
