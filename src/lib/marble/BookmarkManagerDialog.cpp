@@ -257,17 +257,24 @@ void BookmarkManagerDialogPrivate::editBookmark()
 
 void BookmarkManagerDialogPrivate::deleteBookmark()
 {
-    QModelIndexList selection = m_parent->bookmarksListView->selectionModel()->selectedIndexes();
-    if ( selection.size() == 1 ) {
-        QModelIndex bookmarkIndex = m_branchFilterModel.mapToSource( selection.first() );
-        GeoDataFolder* folder = dynamic_cast<GeoDataFolder*>( selectedFolder() );
-        if ( folder ) {
-            GeoDataPlacemark* bookmark = dynamic_cast<GeoDataPlacemark*>( folder->child( bookmarkIndex.row() ) );
-            if ( bookmark ) {
-                m_manager->removeBookmark( bookmark );
-            }
-        }
+    const QModelIndexList selection = m_parent->bookmarksListView->selectionModel()->selectedIndexes();
+
+    if (selection.size() != 1) {
+        return;
     }
+
+    const QModelIndex bookmarkIndex = m_branchFilterModel.mapToSource(selection.first());
+    GeoDataFolder *folder = dynamic_cast<GeoDataFolder *>(selectedFolder());
+    if (!folder) {
+        return;
+    }
+
+    GeoDataPlacemark *bookmark = dynamic_cast<GeoDataPlacemark *>(folder->child(bookmarkIndex.row()));
+    if (!bookmark) {
+        return;
+    }
+
+    m_manager->removeBookmark(bookmark);
 }
 
 void BookmarkManagerDialogPrivate::discardChanges()
