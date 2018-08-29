@@ -95,6 +95,7 @@ AnnotatePlugin::~AnnotatePlugin()
     qDeleteAll( m_graphicsItems );
     if ( m_marbleWidget ) {
         m_marbleWidget->model()->treeModel()->removeDocument( m_annotationDocument );
+        disconnect( this, SIGNAL(mouseMoveGeoPosition(QString)), m_marbleWidget, SIGNAL(mouseMoveGeoPosition(QString)) );
     }
 
     delete m_overlayRmbMenu;
@@ -108,8 +109,6 @@ AnnotatePlugin::~AnnotatePlugin()
 
     delete m_clipboardItem;
     qDeleteAll(m_actions);
-
-    disconnect( this, SIGNAL(mouseMoveGeoPosition(QString)), m_marbleWidget, SIGNAL(mouseMoveGeoPosition(QString)) );
 }
 
 QStringList AnnotatePlugin::backendTypes() const
