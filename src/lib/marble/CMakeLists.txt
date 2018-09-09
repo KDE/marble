@@ -457,7 +457,7 @@ endif()
 
 ########### install headers & cmake config files ###############
 
-if (WIN32 OR APPLE)
+if (APPLE)
     # TODO: find how to install & deploy library, headers and config files as bundle for development
     return()
 endif()
@@ -655,11 +655,13 @@ install(FILES
     DESTINATION ${MARBLE_INSTALL_CMAKECONFIGDIR}
 )
 
-install(
-    EXPORT MarbleTargets
-    FILE ${MARBLE_CMAKECONFIGNAME}Targets.cmake
-    DESTINATION ${MARBLE_INSTALL_CMAKECONFIGDIR}
-)
+if (UNIX)
+    install(
+        EXPORT MarbleTargets
+        FILE ${MARBLE_CMAKECONFIGNAME}Targets.cmake
+        DESTINATION ${MARBLE_INSTALL_CMAKECONFIGDIR}
+    )
+endif()
 
 
 ########### Qt Pri file ###############
