@@ -655,14 +655,11 @@ install(FILES
     DESTINATION ${MARBLE_INSTALL_CMAKECONFIGDIR}
 )
 
-if (UNIX)
-    install(
-        EXPORT MarbleTargets
-        FILE ${MARBLE_CMAKECONFIGNAME}Targets.cmake
-        DESTINATION ${MARBLE_INSTALL_CMAKECONFIGDIR}
-    )
-endif()
-
+install(
+    EXPORT MarbleTargets
+    FILE ${MARBLE_CMAKECONFIGNAME}Targets.cmake
+    DESTINATION ${MARBLE_INSTALL_CMAKECONFIGDIR}
+)
 
 ########### Qt Pri file ###############
 
