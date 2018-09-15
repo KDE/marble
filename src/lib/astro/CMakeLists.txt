@@ -50,7 +50,7 @@ target_include_directories(astro
 
 # choose the correct target install library path
 if(WIN32)
-  INSTALL(TARGETS astro RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX} ARCHIVE DESTINATION lib)
+  INSTALL(TARGETS astro EXPORT AstroTargets RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX} ARCHIVE DESTINATION lib)
 elseif(APPLE)
   INSTALL(TARGETS astro LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/Marble.app/Contents/MacOS/lib)
 else()
@@ -62,7 +62,7 @@ endif()
 
 ########### install headers & cmake config files ###############
 
-if (WIN32 OR APPLE)
+if (APPLE)
     # TODO: find how to install & deploy library, headers and config files as bundle for development
     return()
 endif()
