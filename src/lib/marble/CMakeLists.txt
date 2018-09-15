@@ -445,7 +445,7 @@ target_include_directories(marblewidget
 
 # choose the correct target install library path
 if(WIN32)
-  install(TARGETS marblewidget RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX} ARCHIVE DESTINATION lib)
+  install(TARGETS marblewidget EXPORT MarbleTargets RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX} ARCHIVE DESTINATION lib)
 elseif(APPLE)
   install(TARGETS marblewidget LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/Marble.app/Contents/MacOS/lib)
 else()
