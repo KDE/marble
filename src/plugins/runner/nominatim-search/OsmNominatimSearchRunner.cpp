@@ -49,7 +49,7 @@ void OsmNominatimRunner::returnNoResults()
 
 void OsmNominatimRunner::search( const QString &searchTerm, const GeoDataLatLonBox &preferred )
 {    
-    QString base = "http://nominatim.openstreetmap.org/search?";
+    QString base = "https://nominatim.openstreetmap.org/search?";
     QString query = "q=%1&format=xml&addressdetails=1&accept-language=%2";
     QString url = QString(base + query).arg(searchTerm).arg(MarbleLocale::languageCode());
     if( !preferred.isEmpty() ) {
@@ -106,6 +106,7 @@ void OsmNominatimRunner::handleResult( QNetworkReply* reply )
     QDomDocument xml;
     if (!xml.setContent(reply->readAll())) {
         qWarning() << "Cannot parse osm nominatim result";
+        qWarning() << reply->error();
         returnNoResults();
         return;
     }

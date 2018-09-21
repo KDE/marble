@@ -48,7 +48,7 @@ void OsmNominatimRunner::returnNoReverseGeocodingResult()
 void OsmNominatimRunner::reverseGeocoding( const GeoDataCoordinates &coordinates )
 {
     m_coordinates = coordinates;
-    QString base = "http://nominatim.openstreetmap.org/reverse?format=xml&addressdetails=1";
+    QString base = "https://nominatim.openstreetmap.org/reverse?format=xml&addressdetails=1";
     // @todo: Alternative URI with addressdetails=1 could be used for shorther placemark name
     QString query = "&lon=%1&lat=%2&accept-language=%3";
     double lon = coordinates.longitude( GeoDataCoordinates::Degree );
