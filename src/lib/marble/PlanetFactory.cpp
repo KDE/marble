@@ -88,7 +88,7 @@ Planet PlanetFactory::construct( const QString &id )
         planet.setC_5( 0 );
         planet.setC_6( 0 );
         planet.setPi( 102.9372*DEG2RAD );
-        planet.setEpsilon( 23.45*DEG2RAD );
+        planet.setEpsilon( 23.43686*DEG2RAD );
         planet.setTheta_0( 280.1600*DEG2RAD );
         planet.setTheta_1( 360.9856235*DEG2RAD );
         planet.setRadius( 6378137.0 );
