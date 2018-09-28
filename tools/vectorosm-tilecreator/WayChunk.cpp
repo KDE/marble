@@ -8,11 +8,12 @@
 // Copyright 2016      Akshat Tandon <akshat.tandon@research.iiit.ac.in>
 //
 
+#include "WayChunk.h"
+
 #include <QList>
 #include <QVector>
 #include <QDebug>
 
-#include "WayChunk.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataLineString.h"

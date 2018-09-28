@@ -212,7 +212,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
         //OSM building
         Building,
 
-        // OpenStreetMap category Accomodation
+        // OpenStreetMap category Accommodation
         AccomodationCamping,
         AccomodationHostel,
         AccomodationHotel,

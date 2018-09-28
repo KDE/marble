@@ -8,13 +8,14 @@
 // Copyright 2014      Levente Kurusa <levex@linux.com>
 //
 
+#include "GeoUriParser.h"
+
 #include <QString>
 #include <QUrl>
 #include <QUrlQuery>
 
 #include "Planet.h"
 #include "PlanetFactory.h"
-#include "GeoUriParser.h"
 #include "MarbleDebug.h"
 
 namespace Marble {
@@ -93,7 +94,7 @@ bool GeoUriParser::parse()
                     }
                     ++i;
                 } else if (geoUriRegexp.capturedTexts()[i] == QLatin1String("u")) {
-                    mDebug() << "Captured uncertainity parameter, but this is not supported by Marble (yet).";
+                    mDebug() << "Captured uncertainty parameter, but this is not supported by Marble (yet).";
                     ++i;
                 }
             }

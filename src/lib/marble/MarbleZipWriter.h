@@ -49,8 +49,8 @@
 ** $QT_END_LICENSE$
 **
 ****************************************************************************/
-#ifndef QZIPWRITER_H
-#define QZIPWRITER_H
+#ifndef MARBLEZIPWRITER_H
+#define MARBLEZIPWRITER_H
 #ifndef QT_NO_TEXTODFWRITER
 
 //
@@ -64,8 +64,8 @@
 // We mean it.
 //
 
-#include <QtCore/qstring.h>
-#include <QtCore/qfile.h>
+#include <QString>
+#include <QFile>
 
 #include <marble_export.h>
 
@@ -126,4 +126,4 @@ private:
 }
 
 #endif // QT_NO_TEXTODFWRITER
-#endif // QZIPWRITER_H
+#endif // MARBLEZIPWRITER_H

@@ -74,7 +74,7 @@ public:
          * we can highlight and zoom in
          * ( to fit in the current view port )
          * to this placemark when user
-         * choses to view the right answer.
+         * chooses to view the right answer.
          */
         GeoDataPlacemark *m_correctAnswerPlacemark;
         GeoDataCoordinates m_correctAnswer;

@@ -17,15 +17,14 @@
  ***********************************************************************/
 
 //#include <iostream>
+#include "attlib.h"
 #include <cmath>
 using namespace std;
                        
-#include "attlib.h"
-
 /*********************************************************************/
 double atan20 (double y, double x)
 {
- /* redefine atan2 so that it does'nt crash when both x and y are 0 */
+ /* redefine atan2 so that it doesn't crash when both x and y are 0 */
  double result;
 
  if ((x == 0) && (y == 0)) result = 0;

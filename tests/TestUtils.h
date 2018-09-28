@@ -8,8 +8,8 @@
 // Copyright 2013      Dennis Nienhüser <nienhueser@kde.org>
 //
 
-#ifndef MARBLE_MARBLETEST_H
-#define MARBLE_MARBLETEST_H
+#ifndef MARBLE_TESTUTILS_H
+#define MARBLE_TESTUTILS_H
 
 #include "GeoDataDocument.h"
 #include "GeoDataParser.h"

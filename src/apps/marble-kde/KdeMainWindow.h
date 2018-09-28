@@ -10,8 +10,8 @@
 //
 
 
-#ifndef MARBLE_MAINWINDOW_H
-#define MARBLE_MAINWINDOW_H
+#ifndef MARBLE_KDEMAINWINDOW_H
+#define MARBLE_KDEMAINWINDOW_H
  
 
 #include <KXmlGui/KXmlGuiWindow>

@@ -1005,7 +1005,7 @@ QPointF GeoDataCoordinatesPrivate::mapLonLatToXY( qreal lambda, qreal phi, qreal
     const qreal ep2 = (qPow(GeoDataCoordinatesPrivate::sm_semiMajorAxis, 2.0) - qPow(GeoDataCoordinatesPrivate::sm_semiMinorAxis, 2.0))
                     / qPow(GeoDataCoordinatesPrivate::sm_semiMinorAxis, 2.0);
 
-    // Precalculate the square of nu, just an auxiliar quantity
+    // Precalculate the square of nu, just an auxilar quantity
     const qreal nu2 = ep2 * qPow(qCos(phi), 2.0);
 
     // Precalculate the radius of curvature in prime vertical

@@ -9,9 +9,10 @@
 //
 
 
+#include "GeoDataIconStyle.h"
+
 #include <QUrl>
 
-#include "GeoDataIconStyle.h"
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
 #include "RemoteIconLoader.h"
@@ -178,7 +179,7 @@ void GeoDataIconStyle::setIconPath( const QString& filename )
     /**
      * Set the m_icon to be a default-constructed icon
      * so that m_icon is null and icon() doesn't return
-     * prevously loaded icon.
+     * previously loaded icon.
      */
     d->m_icon = QImage();
     d->m_scaledIcon = QImage();

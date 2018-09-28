@@ -12,6 +12,9 @@
 #define REMOVEITEMEDITWIDGET_H
 
 #include <QWidget>
+#include <QPersistentModelIndex>
+#include <QToolButton>
+#include <QComboBox>
 
 class QToolButton;
 class QComboBox;

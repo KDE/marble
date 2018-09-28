@@ -153,14 +153,14 @@ EditPlacemarkDialog::EditPlacemarkDialog( GeoDataPlacemark *placemark,
         // Adding the osm tag editor widget tab
         d->m_osmTagEditorWidget = new OsmTagEditorWidget( placemark, this );
         d->tabWidget->addTab( d->m_osmTagEditorWidget, tr( "Tags" ) );
-        QObject::connect( d->m_osmTagEditorWidget, SIGNAL( placemarkChanged( GeoDataFeature* ) ),
-                          this, SLOT( updateTextAnnotation() ) );
+        QObject::connect( d->m_osmTagEditorWidget, SIGNAL(placemarkChanged(GeoDataFeature*)),
+                          this, SLOT(updateTextAnnotation()) );
 
         // Adding the osm relation editor widget tab
         d->m_osmRelationManagerWidget = new OsmRelationManagerWidget( placemark, relations, this );
         d->tabWidget->addTab( d->m_osmRelationManagerWidget, tr( "Relations" ) );
-        QObject::connect( d->m_osmRelationManagerWidget, SIGNAL( relationCreated( const OsmPlacemarkData& ) ),
-                          this, SIGNAL( relationCreated( const OsmPlacemarkData& ) ) );
+        QObject::connect( d->m_osmRelationManagerWidget, SIGNAL(relationCreated(OsmPlacemarkData)),
+                          this, SIGNAL(relationCreated(OsmPlacemarkData)) );
     }
 
     // Adding the elevation widget tab

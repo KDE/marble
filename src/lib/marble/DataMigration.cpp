@@ -83,7 +83,7 @@ void DataMigration::moveFiles( const QString& source, const QString& target )
     // Trying to simply rename the directory. This is the fastest method, but it is not always
     // possible. For example when the directories are on different file systems.
     // If the renaming of the directory is not successful, we have to copy and delete each
-    // file separatetly.
+    // file separately.
     mDebug() << "Rename" << source << "to" << target;
     if( !QDir().rename( source, target ) ) {
         mDebug() << "Simple renaming of the data directory failed. Moving single files";

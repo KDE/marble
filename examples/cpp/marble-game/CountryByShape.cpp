@@ -235,7 +235,7 @@ void CountryByShape::postQuestion( QObject *gameObject )
 
     /**
      * Now disable the highlight feature so that
-     * the user click doesn't disturbe the highlight
+     * the user click doesn't disturb the highlight
      * we did to ask question.
      */ 
     d->m_marbleWidget->setHighlightEnabled( false );

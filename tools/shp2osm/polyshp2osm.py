@@ -14,7 +14,7 @@ or at least skim, the code up until it says:
  
   DO NOT CHANGE AFTER THIS LINE.
  
-to accomodate your own data. 
+to accommodate your own data. 
 """
  
 __author__ = "Christopher Schmidt <crschmidt@crschmidt.net>"
@@ -418,7 +418,7 @@ def close_file():
         open_file.close()
  
 def start_new_file():
-    """ Internal. Open a new file, closing existing file if neccesary."""
+    """ Internal. Open a new file, closing existing file if necessary."""
     global open_file, file_counter, node_dict, file_name
     file_counter += 1
     if open_file:

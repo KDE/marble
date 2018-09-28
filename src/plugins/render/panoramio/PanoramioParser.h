@@ -11,7 +11,7 @@
 #ifndef PANORAMIOPARSER_H
 #define PANORAMIOPARSER_H
 
-#include <QtScript>
+#include <QScriptEngine>
 #include <QList>
 
 /**

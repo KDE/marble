@@ -8,10 +8,11 @@
 // Copyright 2016      Akshat Tandon <akshat.tandon@research.iiit.ac.in>
 //
 
+#include "TagsFilter.h"
+
 #include <QString>
 #include <QStringList>
 
-#include "TagsFilter.h"
 #include "GeoDataObject.h"
 #include "GeoDataDocument.h"
 #include "OsmPlacemarkData.h"

@@ -8,6 +8,8 @@
 // Copyright 2014 Abhinav Gangwar <abhgang@gmail.com>
 //
 
+#include "RemoteIconLoader.h"
+
 // Qt
 #include <QDebug>
 #include <QString>
@@ -19,8 +21,6 @@
 #include <QCryptographicHash>
 
 // Marble
-#include "RemoteIconLoader.h"
-
 #include "HttpDownloadManager.h"
 #include "FileStoragePolicy.h"
 #include "MarbleDirs.h"

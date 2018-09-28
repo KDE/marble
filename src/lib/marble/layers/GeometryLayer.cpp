@@ -51,7 +51,6 @@
 #include <OsmPlacemarkData.h>
 #include "StyleBuilder.h"
 #include "AbstractGeoPolygonGraphicsItem.h"
-#include "GeoLineStringGraphicsItem.h"
 #include "GeoDataRelation.h"
 
 // Qt
@@ -141,12 +140,12 @@ GeometryLayer::GeometryLayer(const QAbstractItemModel *model, const StyleBuilder
         d->createGraphicsItems(object->parent());
     }
 
-    connect(model, SIGNAL(dataChanged(QModelIndex, QModelIndex)),
+    connect(model, SIGNAL(dataChanged(QModelIndex,QModelIndex)),
             this, SLOT(resetCacheData()));
-    connect(model, SIGNAL(rowsInserted(QModelIndex, int, int)),
-            this, SLOT(addPlacemarks(QModelIndex, int, int)));
-    connect(model, SIGNAL(rowsAboutToBeRemoved(QModelIndex, int, int)),
-            this, SLOT(removePlacemarks(QModelIndex, int, int)));
+    connect(model, SIGNAL(rowsInserted(QModelIndex,int,int)),
+            this, SLOT(addPlacemarks(QModelIndex,int,int)));
+    connect(model, SIGNAL(rowsAboutToBeRemoved(QModelIndex,int,int)),
+            this, SLOT(removePlacemarks(QModelIndex,int,int)));
     connect(model, SIGNAL(modelReset()),
             this, SLOT(resetCacheData()));
     connect(this, SIGNAL(highlightedPlacemarksChanged(QVector<GeoDataPlacemark*>)),

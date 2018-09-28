@@ -46,13 +46,13 @@ public:
     enum Status { Unknown, Success, Error };
 
     /**
-     * Getter for offine mode.
+     * Getter for offline mode.
      * @return true if offline mode enabled
      */
     bool workOffline() const;
 
     /**
-     * Setter for offine mode.
+     * Setter for offline mode.
      * @param offline Status of offline mode
      */
     void setWorkOffline( bool offline );

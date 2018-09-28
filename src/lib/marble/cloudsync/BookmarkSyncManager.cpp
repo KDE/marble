@@ -117,7 +117,7 @@ public:
 
     /**
      * Removes all KMLs in the cache except the
-     * one with yougnest timestamp.
+     * one with youngest timestamp.
      */
     void clearCache();
 

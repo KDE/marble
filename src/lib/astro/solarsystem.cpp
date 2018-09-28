@@ -30,6 +30,7 @@
 ***************************************************************************/
 
 /*------------ include files and definitions -----------------------------*/
+#include "solarsystem.h"
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
@@ -37,7 +38,6 @@
 #include <ctime>
 using namespace std;
 
-#include "solarsystem.h"
 #include "astrolib.h"
 #include "astr2lib.h"
 #include "attlib.h"
@@ -58,7 +58,7 @@ SolarSystem::~SolarSystem()
 
 double SolarSystem::atan23 (double y, double x)
  {
-  /* redefine atan2 so that it does'nt crash when both x and y are 0 */
+  /* redefine atan2 so that it doesn't crash when both x and y are 0 */
   double result;
 
   if ((x == 0) && (y == 0)) result = 0;

@@ -85,7 +85,7 @@ void MonavMap::parseBoundingBox( const QFileInfo &file )
         // The bounding box polygon is rather complicated, therefore not allowing a quick check
         // and also occupying memory. Discard the polygon and only store the rectangular bounding
         // box. Only happens for non-simplified bounding box polygons.
-        mDebug() << "Discarding too large bounding box poylgon for " << file.absoluteFilePath() << ". Please check for a map update.";
+        mDebug() << "Discarding too large bounding box polygon for " << file.absoluteFilePath() << ". Please check for a map update.";
         m_tiles.clear();
     }
 }

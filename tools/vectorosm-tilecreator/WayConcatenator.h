@@ -22,7 +22,7 @@ private:
     using PlacemarkPtr = QSharedPointer<GeoDataPlacemark>;
 
 public:
-    WayConcatenator(GeoDataDocument *document);
+    explicit WayConcatenator(GeoDataDocument *document);
 
     int originalWays() const;
     int mergedWays() const;

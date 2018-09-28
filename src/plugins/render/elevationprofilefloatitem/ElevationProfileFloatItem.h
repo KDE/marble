@@ -38,7 +38,7 @@ class GeoDataPlacemark;
 class MarbleWidget;
 
 /**
- * @short The class that creates an interactive elvation profile.
+ * @short The class that creates an interactive elevation profile.
  *
  */
 

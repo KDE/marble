@@ -31,7 +31,7 @@ EclipsesModel::EclipsesModel( const MarbleModel *model, QObject *parent )
     m_ecl->setTimezone( model->clock()->timezone() / 3600. );
     m_ecl->setLunarEcl( m_withLunarEclipses );
 
-    // oberservation point defaults to home location
+    // observation point defaults to home location
     qreal lon, lat;
     int zoom;
     m_marbleModel->home( lon, lat, zoom );

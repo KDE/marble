@@ -143,7 +143,7 @@ bool VerticalPerspectiveProjection::screenCoordinates( const GeoDataCoordinates 
         globeHidesPoint = true;
         return false;
     }
-    // The remaining placemarks are definetely not on the Earth's backside
+    // The remaining placemarks are definitely not on the Earth's backside
     globeHidesPoint = false;
 
     x += viewport->width() / 2;

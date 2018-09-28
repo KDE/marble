@@ -7,8 +7,8 @@
 //
 // Copyright 2014 Illya Kovalevskyy <illya.kovalevskyy@gmail.com>
 
-#include <QPushButton>
 #include "MeasureConfigDialog.h"
+#include <QPushButton>
 
 namespace Marble {
 

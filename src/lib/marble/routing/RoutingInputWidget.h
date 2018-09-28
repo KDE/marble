@@ -128,7 +128,7 @@ private Q_SLOTS:
     /** All runners have completed */
     void finishSearch();
 
-    /** Mark ourself dirty (no target) */
+    /** Mark ourselves dirty (no target) */
     void setInvalid();
 
     /** Set the target position (dragging) */

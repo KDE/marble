@@ -898,11 +898,11 @@ void TestEquality::polygonTest()
 
     QCOMPARE( polygon1 == polygon2, false );
 
-    /* Prepare for unequality test */
+    /* Prepare for inequality test */
     polygon2.appendInnerBoundary(innerBoundary11);
     QVERIFY( polygon1 == polygon2 );
 
-    /* Test for unequality: make sure polygon's coordinates are not equal */
+    /* Test for inequality: make sure polygon's coordinates are not equal */
     polygon2.appendInnerBoundary(innerBoundary11);
     coord111.set(100,1);
     innerBoundary11.clear();

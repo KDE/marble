@@ -8,6 +8,7 @@
 // Copyright 2016      Akshat Tandon <akshat.tandon@research.iiit.ac.in>
 //
 
+#include "NodeReducer.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataLineString.h"
 #include "GeoDataPolygon.h"
@@ -15,7 +16,6 @@
 #include "GeoDataMultiGeometry.h"
 #include "GeoDataCoordinates.h"
 #include "MarbleMath.h"
-#include "NodeReducer.h"
 #include "OsmPlacemarkData.h"
 
 #include <QDebug>

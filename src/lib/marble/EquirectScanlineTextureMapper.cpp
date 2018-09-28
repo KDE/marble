@@ -164,7 +164,7 @@ void EquirectScanlineTextureMapper::RenderJob::run()
     const qint64  radius  = m_viewport->radius();
     // Calculate how many degrees are being represented per pixel.
     const qreal rad2Pixel = (qreal)( 2 * radius ) / M_PI;
-    const float pixel2Rad = 1.0/rad2Pixel;  // FIXME chainging to qreal may crash Marble when the equator is visible
+    const float pixel2Rad = 1.0/rad2Pixel;  // FIXME changing to qreal may crash Marble when the equator is visible
 
     const bool interlaced   = ( m_mapQuality == LowQuality );
     const bool highQuality  = ( m_mapQuality == HighQuality

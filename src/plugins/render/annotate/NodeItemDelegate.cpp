@@ -127,7 +127,7 @@ void NodeItemDelegate::previewNodeMove( qreal value )
 
     }
 
-    // Updating chagnes ( repainting graphics )
+    // Updating changes ( repainting graphics )
     emit geometryChanged();
 }
 

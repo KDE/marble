@@ -366,7 +366,7 @@ void AreaAnnotation::deleteClickedNode()
             return;
         }
 
-        // Keep the OsmPlacemarkData synchronized with the geometrys
+        // Keep the OsmPlacemarkData synchronized with the geometry
         if ( osmData ) {
             osmData->removeNodeReference( outerRing.at( i ) );
         }

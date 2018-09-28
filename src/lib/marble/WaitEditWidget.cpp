@@ -10,12 +10,13 @@
 // Copyright 2014 Illya Kovalevskyy <illya.kovalevskyy@gmail.com>
 //
 
+#include "WaitEditWidget.h"
+
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QToolButton>
 #include <QDoubleSpinBox>
 
-#include "WaitEditWidget.h"
 #include "MarblePlacemarkModel.h"
 #include "GeoDataTourControl.h"
 #include "geodata/data/GeoDataWait.h"

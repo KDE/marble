@@ -8,9 +8,9 @@
 // Copyright 2014 Abhinav Gangwar <abhgang@gmail.com>
 //
 
-#include <QString>
-
 #include "KmlSimpleFieldTagWriter.h"
+
+#include <QString>
 
 #include "GeoDataTypes.h"
 #include "GeoWriter.h"

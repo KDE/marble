@@ -87,7 +87,7 @@ public:
     int year() const;
 
     /**
-     * @brief Set if lunar eclipses are enbled
+     * @brief Set if lunar eclipses are enabled
      * @param enable Indicates whether or not to allow lunar eclipses
      *
      * Allows to enable or disable inclusion of lunar eclipses.

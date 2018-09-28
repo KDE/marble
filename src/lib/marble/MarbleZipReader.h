@@ -51,8 +51,8 @@
 **
 ****************************************************************************/
 
-#ifndef QZIPREADER_H
-#define QZIPREADER_H
+#ifndef MARBLEZIPREADER_H
+#define MARBLEZIPREADER_H
 
 #ifndef QT_NO_TEXTODFWRITER
 
@@ -67,9 +67,9 @@
 // We mean it.
 //
 
-#include <QtCore/qdatetime.h>
-#include <QtCore/qfile.h>
-#include <QtCore/qstring.h>
+#include <QDateTime>
+#include <QFile>
+#include <QString>
 
 #include <marble_export.h>
 
@@ -135,4 +135,4 @@ private:
 }
 
 #endif // QT_NO_TEXTODFWRITER
-#endif // QZIPREADER_H
+#endif // MARBLEZIPREADER_H

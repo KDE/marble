@@ -8,12 +8,13 @@
 // Copyright 2014 Abhinav Gangwar <abhgang@gmail.com>
 //
 
+#include "GeoDataSimpleField.h"
+
 // Qt
 #include <QDataStream>
 #include <QString>
 
 // Marble
-#include "GeoDataSimpleField.h"
 #include "GeoDataTypes.h"
 
 

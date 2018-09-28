@@ -72,7 +72,7 @@ AprsGatherer::run()
 
     // If a source can directly receive a signal (as opposed to
     // through a relay like the internet) will return true.  This
-    // prevents accidentially coloring signals heard over some sources
+    // prevents accidentally coloring signals heard over some sources
     // as heard directly where it's never possible (such as over the
     // internet).
     Q_ASSERT(m_source);

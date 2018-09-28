@@ -1402,7 +1402,7 @@ Vec3 Sun200::position (double t)   // position of the Sun at time t
 void Sun200::state (double t, Vec3& rs, Vec3& vs)
  {
   /* State vector rs (position) and vs (velocity) of the Sun in
-	  ecliptic of date coordinates at time t (in Julian Centruries
+	  ecliptic of date coordinates at time t (in Julian Centuries
 	  since J2000).
 	 */
 	 const double  p2 = 2.0 * M_PI;

@@ -8,12 +8,12 @@
 // Copyright 2017      Sergey Popov <sergobot@protonmail.com>
 //
 
+#include "OsmcSymbol.h"
+
 #include <QDebug>
 #include <QDomDocument>
 #include <QFile>
 #include <QPainter>
-
-#include "OsmcSymbol.h"
 
 OsmcSymbol::OsmcSymbol(const QString &tag, int size)
     : m_wayColor(Qt::white)
@@ -155,7 +155,7 @@ QSvgRenderer* OsmcSymbol::parseForeground(const QString &fg)
         QDomDocument doc;
         doc.setContent(baData);
 
-        // Recurively change color
+        // Recursively change color
         QDomElement rootElement = doc.documentElement();
         setXMLAttribute(rootElement, "path", "fill", color);
 

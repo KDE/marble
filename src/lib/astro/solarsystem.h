@@ -115,20 +115,20 @@ class ASTROLIB_EXPORT SolarSystem     // Calculate Positions of Solar System Bod
     void getConstVenus();  // Venus planetary constants
     void getConstEarth();  // Earth planetary constants
     void getConstMars();  // Mars planetary constants
-    void getConstJupiter(); // Jupiter planerary constants
-    void getConstSaturn(); // Saturn planerary constants
-    void getConstUranus(); // Uranus planerary constants
-    void getConstNeptune(); // Neptune planerary constants
-    void getConstIo(); // Io planerary constants
-    void getConstEuropa(); // Europa planerary constants
-    void getConstGanymede(); // Ganymede planerary constants
-    void getConstCallisto(); // Callisto planerary constants
-    void getConstRhea(); // Rhea planerary constants
-    void getConstTitan(); // Titan planerary constants
-    void getConstMimas(); // Mimas planerary constants
-    void getConstEnceladus(); // Enceladus planerary constants
-    void getConstDione(); // Dione planerary constants
-    void getConstUser(); // User planerary constants
+    void getConstJupiter(); // Jupiter planetary constants
+    void getConstSaturn(); // Saturn planetary constants
+    void getConstUranus(); // Uranus planetary constants
+    void getConstNeptune(); // Neptune planetary constants
+    void getConstIo(); // Io planetary constants
+    void getConstEuropa(); // Europa planetary constants
+    void getConstGanymede(); // Ganymede planetary constants
+    void getConstCallisto(); // Callisto planetary constants
+    void getConstRhea(); // Rhea planetary constants
+    void getConstTitan(); // Titan planetary constants
+    void getConstMimas(); // Mimas planetary constants
+    void getConstEnceladus(); // Enceladus planetary constants
+    void getConstDione(); // Dione planetary constants
+    void getConstUser(); // User planetary constants
 
     void getPlanMat();  // get Matrix to convert from J2000.0 into planetary coordinates
 
@@ -136,7 +136,7 @@ class ASTROLIB_EXPORT SolarSystem     // Calculate Positions of Solar System Bod
 
       bool ss_update_called;  // true if updateSolar() has already been called
       bool ss_moon_called;    // true if special Moon calculation called
-      bool ss_planmat_called; // true if matrix for planetary coordintes called
+      bool ss_planmat_called; // true if matrix for planetary coordinates called
       bool ss_kepler_stored;  // true if Kepler elements for comet or asteroid stored
       bool ss_kepler_called;  // true if comet or asteroid position calculated
       bool ss_user_stored;    // true if orbit elements for user defined object stored
@@ -170,7 +170,7 @@ class ASTROLIB_EXPORT SolarSystem     // Calculate Positions of Solar System Bod
      double ss_moon_ildisk; // fraction of Moon's illuminated disk
      double ss_moon_phase;  // phase of Moon
 
-     double ss_GM;  // graviatational constant (m^3/s^2)
+     double ss_GM;  // gravitational constant (m^3/s^2)
      double ss_J2;  // J2 gravitational term
      double ss_R0; // equatorial radius (km)
      double ss_flat;  // flattening factor
@@ -182,7 +182,7 @@ class ASTROLIB_EXPORT SolarSystem     // Calculate Positions of Solar System Bod
      double ss_Wd;   // daily variation of W.
 
      // data for user defined object:
-     double ss_user_GM;  // graviatational constant (m^3/s^2)
+     double ss_user_GM;  // gravitational constant (m^3/s^2)
      double ss_user_J2;  // J2 gravitational term
      double ss_user_R0; // equatorial radius (km)
      double ss_user_flat;  // flattening factor

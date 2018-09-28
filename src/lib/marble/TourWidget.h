@@ -48,7 +48,7 @@ public Q_SLOTS:
     void stopPlaying();
     void handleSliderMove( int );
     /**
-     * Highlights the item curently being played.
+     * Highlights the item currently being played.
      */
     void setHighlightedItemIndex( int index );
 

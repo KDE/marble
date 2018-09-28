@@ -13,7 +13,7 @@
 
 #include "PlaybackItem.h"
 
-#include "config-phonon.h"
+#include <config-phonon.h>
 
 #ifdef HAVE_PHONON
 #include <phonon/MediaObject>

@@ -9,8 +9,8 @@
 // Copyright 2016      David Kolozsvari <freedawson@gmail.com>
 //
 
-#ifndef TINYPLANETPROCESSOR_H
-#define TINYPLANETPROCESSOR_H
+#ifndef VECTORCLIPPER_H
+#define VECTORCLIPPER_H
 
 #include "OsmPlacemarkData.h"
 
@@ -136,4 +136,4 @@ private:
 
 }
 
-#endif // TINYPLANETPROCESSOR_H
+#endif // VECTORCLIPPER_H

@@ -34,7 +34,7 @@ public:
     /**
      * Generates an endpoint URL by appending endpoint name to API URL
      * @param endpoint Endpoint name which will be appended to API URL
-     * @return QUrl which can be used for ineractions with API
+     * @return QUrl which can be used for interactions with API
      */
     QUrl endpointUrl( const QString &endpoint ) const;
 
@@ -42,7 +42,7 @@ public:
      * Generates an endpoint URL by appending endpoint name and parameter to API URL
      * @param endpoint Endpoint name which will be appended to API URL
      * @param parameter Parameter which will be appended to API URL right after endpoint
-     * @return QUrl which can be used for ineractions with API
+     * @return QUrl which can be used for interactions with API
      */
     QUrl endpointUrl( const QString &endpoint, const QString &parameter ) const;
 

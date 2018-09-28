@@ -204,7 +204,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
 
  public Q_SLOTS:
     /**
-     * @brief settting enabled
+     * @brief setting enabled
      *
      * If @p enabled = true, plugin will be enabled
      *
@@ -217,7 +217,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
     void    setEnabled( bool enabled );
 
     /**
-     * @brief settting visible
+     * @brief setting visible
      *
      * If @p visible = true, plugin will be visible
      *
@@ -227,7 +227,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
     void    setVisible( bool visible );
 
     /**
-     * @brief settting user checkable
+     * @brief setting user checkable
      *
      * If @p isUserCheckable = true, user will get an
      * option to control visibility in application menu

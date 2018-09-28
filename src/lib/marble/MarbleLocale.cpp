@@ -9,9 +9,9 @@
 // Copyright 2015 Ilya Kowalewski <illya.kovalevskyy@gmail.com>
 //
 
-#include "MarbleGlobal.h"
 #include "MarbleLocale.h"
 #include "MarbleLocale_p.h"
+#include "MarbleGlobal.h"
 #include "MarbleDebug.h"
 
 // Qt

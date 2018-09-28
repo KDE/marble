@@ -1202,7 +1202,7 @@ static void initl
      getgravconst( whichconst, tumin, mu, radiusearthkm, xke, j2, j3, j4, j3oj2 );
      x2o3   = 2.0 / 3.0;
 
-     /* ------------- calculate auxillary epoch quantities ---------- */
+     /* ------------- calculate auxilary epoch quantities ---------- */
      eccsq  = ecco * ecco;
      omeosq = 1.0 - eccsq;
      rteosq = sqrt(omeosq);
@@ -2029,7 +2029,7 @@ double  gstime
 *                           function getgravconst
 *
 *  this function gets constants for the propagator. note that mu is identified to
-*    facilitiate comparisons with newer models. the common useage is wgs72.
+*    facilitiate comparisons with newer models. the common usage is wgs72.
 *
 *  author        : david vallado                  719-573-2600   21 jul 2006
 *

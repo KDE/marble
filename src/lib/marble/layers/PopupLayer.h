@@ -99,7 +99,7 @@ public:
      *
      * @see PopupItem::setUrl();
      *
-     * @param url url for web brower
+     * @param url url for web browser
      */
     void setUrl( const QUrl &url );
 

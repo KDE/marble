@@ -37,7 +37,7 @@ public:
         RouteVisible
     };
 
-    RouteRelationModel(QObject* parent = nullptr);
+    explicit RouteRelationModel(QObject* parent = nullptr);
     
     void setRelations(const QSet<const GeoDataRelation *> &relations);
     

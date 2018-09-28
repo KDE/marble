@@ -10,13 +10,14 @@
 // Copyright 2014 Illya Kovalevskyy <illya.kovalevskyy@gmail.com>
 //
 
+#include "SoundCueEditWidget.h"
+
 #include <QToolButton>
 #include <QLabel>
 #include <QHBoxLayout>
 #include <QLineEdit>
 #include <QFileDialog>
 
-#include "SoundCueEditWidget.h"
 #include "MarbleWidget.h"
 #include "geodata/data/GeoDataSoundCue.h"
 #include "MarblePlacemarkModel.h"

@@ -8,12 +8,9 @@
 // Copyright 2014 Abhinav Gangwar <abhgang@gmail.com>
 //
 
-// Qt
-#include <QString>
-#include <QDataStream>
+#include "GeoDataSimpleData.h"
 
 // Marble
-#include "GeoDataSimpleData.h"
 #include "GeoDataTypes.h"
 
 namespace Marble

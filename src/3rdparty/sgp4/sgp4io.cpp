@@ -93,7 +93,7 @@ void twoline2rv
 
        satrec.error = 0;
 
-       // set the implied decimal points since doing a formated read
+       // set the implied decimal points since doing a formatted read
        // fixes for bad input data values (missing, ...)
        for (j = 10; j <= 15; j++)
            if (longstr1[j] == ' ')

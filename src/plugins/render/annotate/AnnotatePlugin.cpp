@@ -1098,8 +1098,8 @@ void AnnotatePlugin::editTextAnnotation()
              dialog, SLOT(updateDialogFields()) );
     connect( dialog, SIGNAL(finished(int)),
              this, SLOT(stopEditingTextAnnotation(int)) );
-    connect( dialog, SIGNAL( relationCreated( const OsmPlacemarkData& ) ),
-             this, SLOT( addRelation( const OsmPlacemarkData& ) ) );
+    connect( dialog, SIGNAL(relationCreated(OsmPlacemarkData)),
+             this, SLOT(addRelation(OsmPlacemarkData)) );
 
     dialog->setLabelColor(dynamic_cast<PlacemarkTextAnnotation*>(m_focusItem)->labelColor());
 
@@ -1137,8 +1137,8 @@ void AnnotatePlugin::addTextAnnotation()
              dialog, SLOT(updateDialogFields()) );
     connect( dialog, SIGNAL(finished(int)),
              this, SLOT(stopEditingTextAnnotation(int)) );
-    connect( dialog, SIGNAL( relationCreated( const OsmPlacemarkData& ) ),
-             this, SLOT( addRelation( const OsmPlacemarkData& ) ) );
+    connect( dialog, SIGNAL(relationCreated(OsmPlacemarkData)),
+             this, SLOT(addRelation(OsmPlacemarkData)) );
 
     if ( m_focusItem ) {
         m_focusItem->setFocus( false );
@@ -1387,8 +1387,8 @@ void AnnotatePlugin::addPolygon()
     connect( dialog, SIGNAL(finished(int)),
              this, SLOT(stopEditingPolygon(int)) );
     connect( this, SIGNAL(nodeAdded(GeoDataCoordinates)), dialog, SLOT(handleAddingNode(GeoDataCoordinates)) );
-    connect( dialog, SIGNAL( relationCreated( const OsmPlacemarkData& ) ),
-             this, SLOT( addRelation( const OsmPlacemarkData& ) ) );
+    connect( dialog, SIGNAL(relationCreated(OsmPlacemarkData)),
+             this, SLOT(addRelation(OsmPlacemarkData)) );
 
     // If there is another graphic item marked as 'selected' when pressing 'Add Polygon', change the focus of
     // that item.
@@ -1478,8 +1478,8 @@ void AnnotatePlugin::editPolygon()
     connect( dialog, SIGNAL(finished(int)),
              this, SLOT(stopEditingPolygon(int)) );
     connect( this, SIGNAL(itemMoved(GeoDataPlacemark*)), dialog, SLOT(handleItemMoving(GeoDataPlacemark*)) );
-    connect( dialog, SIGNAL( relationCreated( const OsmPlacemarkData& ) ),
-             this, SLOT( addRelation( const OsmPlacemarkData& ) ) );
+    connect( dialog, SIGNAL(relationCreated(OsmPlacemarkData)),
+             this, SLOT(addRelation(OsmPlacemarkData)) );
 
     disableActions( m_actions.first() );
 
@@ -1619,8 +1619,8 @@ void AnnotatePlugin::editPolyline()
     connect( dialog, SIGNAL(finished(int)),
              this, SLOT(stopEditingPolyline(int)) );
     connect( this, SIGNAL(itemMoved(GeoDataPlacemark*)), dialog, SLOT(handleItemMoving(GeoDataPlacemark*)) );
-    connect( dialog, SIGNAL( relationCreated( const OsmPlacemarkData& ) ),
-             this, SLOT( addRelation( const OsmPlacemarkData& ) ) );
+    connect( dialog, SIGNAL(relationCreated(OsmPlacemarkData)),
+             this, SLOT(addRelation(OsmPlacemarkData)) );
 
     disableActions( m_actions.first() );
     dialog->show();
@@ -1652,8 +1652,8 @@ void AnnotatePlugin::addPolyline()
     connect( dialog, SIGNAL(finished(int)),
              this, SLOT(stopEditingPolyline(int)) );
     connect( this, SIGNAL(nodeAdded(GeoDataCoordinates)), dialog, SLOT(handleAddingNode(GeoDataCoordinates)) );
-    connect( dialog, SIGNAL( relationCreated( const OsmPlacemarkData& ) ),
-             this, SLOT( addRelation( const OsmPlacemarkData& ) ) );
+    connect( dialog, SIGNAL(relationCreated(OsmPlacemarkData)),
+             this, SLOT(addRelation(OsmPlacemarkData)) );
 
     if ( m_focusItem ) {
         m_focusItem->setFocus( false );

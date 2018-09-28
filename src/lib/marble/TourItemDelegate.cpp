@@ -10,6 +10,8 @@
 // Copyright 2014 Illya Kovalevskyy <illya.kovalevskyy@gmail.com>
 //
 
+#include "TourItemDelegate.h"
+
 #include <QAbstractTextDocumentLayout>
 #include <QStyleOptionButton>
 #include <QPainter>
@@ -17,7 +19,6 @@
 #include <QListView>
 #include <QPointer>
 
-#include "TourItemDelegate.h"
 #include "MarblePlacemarkModel.h"
 #include "geodata/data/GeoDataContainer.h"
 #include "geodata/data/GeoDataFlyTo.h"

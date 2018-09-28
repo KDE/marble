@@ -11,8 +11,8 @@
 //
 
 
-#ifndef MARBLE_MAINWINDOW_H
-#define MARBLE_MAINWINDOW_H
+#ifndef MARBLE_QTMAINWINDOW_H
+#define MARBLE_QTMAINWINDOW_H
 
 
 #include <QMainWindow>

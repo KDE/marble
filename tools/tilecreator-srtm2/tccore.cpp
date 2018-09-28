@@ -159,7 +159,7 @@ private:
         }
         QString fileName = hgtFileName( lng, lat );
         if ( fileName.isNull() ) {
-            //qDebug() << lng << lat << "hgt file does not exist, returing null image";
+            //qDebug() << lng << lat << "hgt file does not exist, returning null image";
             return QImage();
         } else {
             //qDebug() << lng << lat << "reading hgt file" << fileName;

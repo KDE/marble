@@ -14,6 +14,10 @@
 #include "GeoDocument.h"
 #include "geodata_export.h"
 
+// Qt
+#include <QString>
+#include <QDataStream>
+
 class QString;
 
 namespace Marble

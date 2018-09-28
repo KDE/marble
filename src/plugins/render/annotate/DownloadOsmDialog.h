@@ -14,7 +14,8 @@
 #include <QDialog>
 #include <QPushButton>
 #include <GeoDataLatLonAltBox.h>
-#include <QtNetwork>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
 #include <QProgressDialog>
 #include <QTemporaryFile>
 

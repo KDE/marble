@@ -10,12 +10,13 @@
 // Copyright 2014 Illya Kovalevskyy <illya.kovalevskyy@gmail.com>
 //
 
+#include "TourControlEditWidget.h"
+
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QToolButton>
 #include <QRadioButton>
 
-#include "TourControlEditWidget.h"
 #include "MarblePlacemarkModel.h"
 #include "GeoDataTourControl.h"
 

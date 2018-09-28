@@ -113,7 +113,7 @@ VectorTileLayer::VectorTileLayer(HttpDownloadManager *downloadManager,
     qRegisterMetaType<TileId>("TileId");
     qRegisterMetaType<GeoDataDocument*>("GeoDataDocument*");
 
-    connect(&d->m_loader, SIGNAL(tileCompleted(TileId, GeoDataDocument*)), this, SLOT(updateTile(TileId, GeoDataDocument*)));
+    connect(&d->m_loader, SIGNAL(tileCompleted(TileId,GeoDataDocument*)), this, SLOT(updateTile(TileId,GeoDataDocument*)));
 }
 
 VectorTileLayer::~VectorTileLayer()
@@ -197,7 +197,7 @@ void VectorTileLayer::setMapTheme(const QVector<const GeoSceneVectorTileDataset 
     d->m_layerSettings = textureLayerSettings;
 
     if (d->m_layerSettings) {
-        connect(d->m_layerSettings, SIGNAL(valueChanged(QString, bool)),
+        connect(d->m_layerSettings, SIGNAL(valueChanged(QString,bool)),
                 this,                      SLOT(updateLayerSettings()));
     }
 

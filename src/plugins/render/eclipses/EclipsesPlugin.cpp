@@ -471,7 +471,7 @@ void EclipsesPlugin::updateMenuItemState()
         return;
     }
 
-    // eclipses are only supported for earth based obervers at the moment
+    // eclipses are only supported for earth based observers at the moment
     // so we disable the menu items for other celestial bodies
 
     const bool active = (marbleModel()->planetId() == QLatin1String("earth"));

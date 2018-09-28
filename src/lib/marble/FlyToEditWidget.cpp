@@ -10,13 +10,14 @@
 // Copyright 2014 Illya Kovalevskyy <illya.kovalevskyy@gmail.com>
 //
 
+#include "FlyToEditWidget.h"
+
 #include <QDoubleSpinBox>
 #include <QToolButton>
 #include <QLabel>
 #include <QHBoxLayout>
 #include <QComboBox>
 
-#include "FlyToEditWidget.h"
 #include "MarbleWidget.h"
 #include "geodata/data/GeoDataFlyTo.h"
 #include "GeoDataLookAt.h"

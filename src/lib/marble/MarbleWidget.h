@@ -836,7 +836,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     /**
      * @brief  Set the globe locked to the sub solar point
-     * @param  vsible if globe is locked to the sub solar point
+     * @param  visible if globe is locked to the sub solar point
      */
     void setLockToSubSolarPoint( bool visible );
 

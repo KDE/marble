@@ -8,6 +8,9 @@
 // Copyright 2016      Dennis Nienhüser <nienhueser@kde.org>
 //
 
+#ifndef PEAKANALYZER_H
+#define PEAKANALYZER_H
+
 #include <QVector>
 
 namespace Marble {
@@ -29,3 +32,4 @@ private:
 };
 
 }
+#endif

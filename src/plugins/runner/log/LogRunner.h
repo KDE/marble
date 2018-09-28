@@ -7,8 +7,8 @@
 //
 // Copyright 2012      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 
-#ifndef MARBLE_LOGFILE_RUNNER_H
-#define MARBLE_LOGFILE_RUNNER_H
+#ifndef MARBLE_LOG_RUNNER_H
+#define MARBLE_LOG_RUNNER_H
 
 #include "ParsingRunner.h"
 

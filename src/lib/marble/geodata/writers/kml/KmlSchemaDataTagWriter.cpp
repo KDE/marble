@@ -8,9 +8,10 @@
 // Copyright 2014 Abhinav Gangwar <abhgang@gmail.com>
 //
 
+#include "KmlSchemaDataTagWriter.h"
+
 #include <QString>
 
-#include "KmlSchemaDataTagWriter.h"
 #include "KmlElementDictionary.h"
 
 #include "GeoWriter.h"

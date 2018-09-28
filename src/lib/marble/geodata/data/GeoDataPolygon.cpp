@@ -10,9 +10,9 @@
 //
 
 
-#include "GeoDataCoordinates.h"
 #include "GeoDataPolygon.h"
 #include "GeoDataPolygon_p.h"
+#include "GeoDataCoordinates.h"
 #include "GeoDataTypes.h"
 #include "MarbleDebug.h"
 

@@ -8,12 +8,11 @@
 // Copyright 2015 Mihail Ivchenko <ematirov@gmail.com>
 //
 
-#include <QToolButton>
+#include "RemoveItemEditWidget.h"
+
 #include <QLabel>
 #include <QHBoxLayout>
-#include <QComboBox>
 
-#include "RemoveItemEditWidget.h"
 #include "MarbleWidget.h"
 #include "geodata/data/GeoDataAnimatedUpdate.h"
 #include "GeoDataUpdate.h"

@@ -8,6 +8,8 @@
 // Copyright 2016      Akshat Tandon <akshat.tandon@research.iiit.ac.in>
 //
 
+#include "WayConcatenator.h"
+
 #include <QList>
 #include <QHash>
 #include <QSet>
@@ -20,7 +22,6 @@
 #include "StyleBuilder.h"
 #include "OsmObjectManager.h"
 
-#include "WayConcatenator.h"
 #include "WayChunk.h"
 #include "TagsFilter.h"
 

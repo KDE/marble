@@ -1352,7 +1352,7 @@ void StarsPlugin::toggleSunMoon(bool on)
 void StarsPlugin::toggleDsos(bool on)
 {
     m_renderDsos = on;
-    // only enable lables if set to true
+    // only enable labels if set to true
     if (on) {
         m_renderDsoLabels = true;
     }

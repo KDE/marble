@@ -16,7 +16,6 @@
 #include <QDialogButtonBox>
 #include <QPushButton>
 #include <QTemporaryFile>
-#include <QTemporaryFile>
 #include  <QDir>
 
 //Marble
@@ -39,11 +38,11 @@ DownloadOsmDialog::DownloadOsmDialog(MarbleWidget *parent,AnnotatePlugin *annota
 {
     setupUi(this);
     horizontalLayout->addWidget(m_latLonBoxWidget);
-    this->setWindowTitle("Download");
+    this->setWindowTitle(tr("Download"));
     connect(m_marbleWidget,
             SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)),
             this,
-            SLOT(updateCoordinates(GeoDataLatLonAltBox) )
+            SLOT(updateCoordinates(GeoDataLatLonAltBox))
             );
 
     m_downloadButton = new QPushButton(tr("Download"));
@@ -87,7 +86,7 @@ void DownloadOsmDialog::downloadFile()
     if(!m_file->open())
     {
         QMessageBox::information(this, tr("ERROR"),
-                                 "Unable to create temporary file to download OSM data to.");
+                                 tr("Unable to create temporary file to download OSM data to."));
         this->close();
     }
     m_downloadButton->setEnabled(false);
@@ -135,19 +134,19 @@ void DownloadOsmDialog::httpFinished()
         {
         case 400:
             QMessageBox::information(this, tr("ERROR"),
-                                     "The selected region contains too much data.Please select a smaller region and try again.");
+                                     tr("The selected region contains too much data. Please select a smaller region and try again."));
             m_downloadButton->setEnabled(true);
             m_isDownloadSuccess=false;
             break;
         case 509:
             QMessageBox::information(this, tr("ERROR"),
-                                     "The bandwidth limit exceeded.Please try again later.");
+                                     tr("The bandwidth limit exceeded. Please try again later."));
             m_downloadButton->setEnabled(true);
             m_isDownloadSuccess=false;
             break;
         default:
-            QMessageBox::information(this, tr("ERROR"),"Sorry, a network error occured.Please check your internet connection"
-                                                       " or try again later.");
+            QMessageBox::information(this, tr("ERROR"),tr("Sorry, a network error occurred. Please check your internet connection"
+                                                       " or try again later."));
             m_downloadButton->setEnabled(true);
             m_isDownloadSuccess=false;
             break;

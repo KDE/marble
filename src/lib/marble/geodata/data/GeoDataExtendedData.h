@@ -82,7 +82,7 @@ class GEODATA_EXPORT GeoDataExtendedData : public GeoDataObject
     int size( ) const;
 
     /**
-      * @brief return wthethe QHash is empty or not
+      * @brief return whether QHash is empty or not
       */
     bool isEmpty( ) const;
 

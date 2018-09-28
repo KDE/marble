@@ -92,14 +92,14 @@ EditPolygonDialog::EditPolygonDialog( GeoDataPlacemark *placemark,
         // Adding the osm tag editor widget tab
         d->m_osmTagEditorWidget = new OsmTagEditorWidget( placemark, this );
         d->tabWidget->addTab( d->m_osmTagEditorWidget, tr( "Tags" ) );
-        QObject::connect( d->m_osmTagEditorWidget, SIGNAL( placemarkChanged( GeoDataFeature* ) ),
-                          this, SLOT( updatePolygon() ) );
+        QObject::connect( d->m_osmTagEditorWidget, SIGNAL(placemarkChanged(GeoDataFeature*)),
+                          this, SLOT(updatePolygon()) );
 
         // Adding the osm relation editor widget tab
         d->m_osmRelationManagerWidget = new OsmRelationManagerWidget( placemark, relations, this );
         d->tabWidget->addTab( d->m_osmRelationManagerWidget, tr( "Relations" ) );
-        QObject::connect( d->m_osmRelationManagerWidget, SIGNAL( relationCreated( const OsmPlacemarkData& ) ),
-                          this, SIGNAL( relationCreated( const OsmPlacemarkData& ) ) );
+        QObject::connect( d->m_osmRelationManagerWidget, SIGNAL(relationCreated(OsmPlacemarkData)),
+                          this, SIGNAL(relationCreated(OsmPlacemarkData)) );
 
         adjustSize();
     }
@@ -130,7 +130,7 @@ EditPolygonDialog::EditPolygonDialog( GeoDataPlacemark *placemark,
 
     d->m_linesWidth->setRange( 0.1, 5.0 );
     d->m_linesWidth->setValue( lineStyle.width() );
-    connect( d->m_linesWidth, SIGNAL(valueChanged(double)), this, SLOT( handleChangingStyle() ) );
+    connect( d->m_linesWidth, SIGNAL(valueChanged(double)), this, SLOT(handleChangingStyle()) );
 
     // Adjust the "Filled"/"Not Filled" option according to its current fill.
     if ( polyStyle.fill() ) {
@@ -138,7 +138,7 @@ EditPolygonDialog::EditPolygonDialog( GeoDataPlacemark *placemark,
     } else {
         d->m_filledColor->setCurrentIndex( 1 );
     }
-    connect( d->m_filledColor, SIGNAL(currentIndexChanged(int)), this, SLOT( handleChangingStyle() ) );
+    connect( d->m_filledColor, SIGNAL(currentIndexChanged(int)), this, SLOT(handleChangingStyle()) );
 
     // Adjust the color buttons' icons to the current lines and polygon colors.
     QPixmap linesPixmap( d->m_linesColorButton->iconSize().width(),
@@ -157,14 +157,14 @@ EditPolygonDialog::EditPolygonDialog( GeoDataPlacemark *placemark,
     d->m_linesDialog->setCurrentColor( lineStyle.color() );
     connect( d->m_linesColorButton, SIGNAL(clicked()), d->m_linesDialog, SLOT(exec()) );
     connect( d->m_linesDialog, SIGNAL(colorSelected(QColor)), this, SLOT(updateLinesDialog(QColor)) );
-    connect( d->m_linesDialog, SIGNAL(colorSelected(QColor)), this, SLOT( handleChangingStyle() ) );
+    connect( d->m_linesDialog, SIGNAL(colorSelected(QColor)), this, SLOT(handleChangingStyle()) );
 
     d->m_polyDialog = new QColorDialog( this );
     d->m_polyDialog->setOption( QColorDialog::ShowAlphaChannel );
     d->m_polyDialog->setCurrentColor( polyStyle.color() );
     connect( d->m_polyColorButton, SIGNAL(clicked()), d->m_polyDialog, SLOT(exec()) );
     connect( d->m_polyDialog, SIGNAL(colorSelected(QColor)), this, SLOT(updatePolyDialog(QColor)) );
-    connect( d->m_polyDialog, SIGNAL(colorSelected(QColor)), this, SLOT( handleChangingStyle() ) );
+    connect( d->m_polyDialog, SIGNAL(colorSelected(QColor)), this, SLOT(handleChangingStyle()) );
 
     // Setting the NodeView's delegate: mainly used for the editing the polygon's nodes
     d->m_delegate = new NodeItemDelegate( d->m_placemark, d->m_nodeView );

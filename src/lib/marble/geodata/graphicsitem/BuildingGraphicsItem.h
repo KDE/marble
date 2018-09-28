@@ -8,8 +8,8 @@
 // Copyright 2011      Konstantin Oblaukhov <oblaukhov.konstantin@gmail.com>
 //
 
-#ifndef MARBLE_BUILDINGGEOPOLYGONGRAPHICSITEM_H
-#define MARBLE_BUILDINGGEOPOLYGONGRAPHICSITEM_H
+#ifndef MARBLE_BUILDINGGRAPHICSITEM_H
+#define MARBLE_BUILDINGGRAPHICSITEM_H
 
 #include "AbstractGeoPolygonGraphicsItem.h"
 #include "GeoDataCoordinates.h"

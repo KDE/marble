@@ -43,7 +43,7 @@ GeoNode* KmllistItemTypeTagHandler::parse( GeoParser& parser ) const
         }
         else
         {
-            mDebug() << "listItemType value is inavlid"
+            mDebug() << "listItemType value is invalid"
                      << "falling back to default - check";
         }
         parentItem.nodeAs<GeoDataListStyle>()->setListItemType( type );

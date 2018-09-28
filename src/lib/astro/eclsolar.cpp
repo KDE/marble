@@ -58,7 +58,7 @@ EclSolar::~EclSolar()
 
 double EclSolar::atan23 (double y, double x)
  {
-  /* redefine atan2 so that it does'nt crash when both x and y are 0 */
+  /* redefine atan2 so that it doesn't crash when both x and y are 0 */
   double result;
 
   if ((x == 0) && (y == 0)) result = 0;
@@ -725,7 +725,7 @@ void EclSolar::nextEcl()
 
 void EclSolar::previousEcl()
 {
- // select the prevoius eclipse for detailed calculations
+ // select the previous eclipse for detailed calculations
  int k, j, es;
 
  if (!eb_moonph_called) moonph();  // calculate the eclipses of the year
@@ -861,7 +861,7 @@ void EclSolar::setPenumbraAngle(double pa, int mode)
 
 }
 
-// -------- auxilliary functions --------------------------------
+// -------- auxilary functions --------------------------------
 void EclSolar::GetMonth (int mm, char* mchr)
  {
   // get three letter designation of month
@@ -1227,7 +1227,7 @@ void EclSolar::moonph()
     ckphase(minmjd,maxmjd,yr,deltdut, mp25, p25, 0.25);
     ckphase(minmjd,maxmjd,yr,deltdut, mp5, p5, 0.5);
     ckphase(minmjd,maxmjd,yr,deltdut, mp75, p75, 0.75);
-    yr+=0.02;  // incease by 1/50th of a year (about two weeks) 
+    yr+=0.02;  // increase by 1/50th of a year (about two weeks) 
    };
 
   for (j=0; j<eb_numecl; j++)

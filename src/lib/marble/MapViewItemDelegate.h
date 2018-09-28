@@ -9,7 +9,7 @@
 // Copyright 2007      Inge Wallin   <ingwa@kde.org>
 // Copyright 2007      Thomas Zander <zander@kde.org>
 // Copyright 2010      Bastian Holst <bastianholst@gmx.de>
-// Coprright 2011-2013 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+// Copyright 2011-2013 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 // Copyright 2012      Illya Kovalevskyy  <illya.kovalevskyy@gmail.com>
 //
 

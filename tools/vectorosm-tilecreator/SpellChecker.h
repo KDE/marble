@@ -8,6 +8,9 @@
 // Copyright 2016      Dennis Nienhüser <nienhueser@kde.org>
 //
 
+#ifndef TOOLS_SPELLCHECKER_H
+#define TOOLS_SPELLCHECKER_H
+
 #include <TileId.h>
 #include "GeoDataPlacemark.h"
 
@@ -20,7 +23,7 @@ class GeoDataPlacemark;
 class SpellChecker
 {
 public:
-    SpellChecker(const QString &citiesFile);
+    explicit SpellChecker(const QString &citiesFile);
     void setVerbose(bool verbose);
 
     void correctPlaceLabels(const QVector<GeoDataPlacemark*> &placemarks);
@@ -40,3 +43,4 @@ private:
 };
 
 }
+#endif

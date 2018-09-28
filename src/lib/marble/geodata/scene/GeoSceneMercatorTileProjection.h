@@ -28,7 +28,7 @@ namespace Marble
 {
 
 /**
- * Convertes the x and y indizes of tiles to and from geo coordinates.
+ * Converts the x and y indices of tiles to and from geo coordinates.
  * For tiles of maps in Mercator projection.
  *
  * Tiles do have the same width and the same height per zoomlevel.

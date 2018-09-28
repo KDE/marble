@@ -185,7 +185,7 @@ void AtmospherePlugin::repaintPixmap(const ViewportParams *viewParams)
     renderPainter.setPen(Qt::NoPen);
     renderPainter.setRenderHint(QPainter::Antialiasing, false);
 
-    // Let's paint elipse we want in this::render(..) on pixmap from point (0;0)
+    // Let's paint ellipse we want in this::render(..) on pixmap from point (0;0)
     renderPainter.drawEllipse(0, 0, diameter, diameter);
 }
 

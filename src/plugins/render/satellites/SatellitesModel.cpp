@@ -123,7 +123,7 @@ void SatellitesModel::updateVisibility()
 void SatellitesModel::parseFile( const QString &id,
                                  const QByteArray &data )
 {
-    // catalog files are comma serparated while tle files
+    // catalog files are comma separated while tle files
     // are not allowed to contain commas, so we use this
     // to distinguish between those two
     if( data.contains( ',' ) ) {

@@ -106,7 +106,7 @@ public:
  * If node is 0 then it will also return 0.
  *
  * @param node pointer to GeoNode object to be casted
- * @return the given node as type T if cast is successfull, otherwise 0
+ * @return the given node as type T if cast is successful, otherwise 0
  */
 template<typename T>
 T *geodata_cast(GeoNode *node)
@@ -127,7 +127,7 @@ T *geodata_cast(GeoNode *node)
  * If node is 0 then it will also return 0.
  *
  * @param node pointer to GeoNode object to be casted
- * @return the given node as type const T if cast is successfull, otherwise 0
+ * @return the given node as type const T if cast is successful, otherwise 0
  */
 template<typename T>
 const T *geodata_cast(const GeoNode *node)

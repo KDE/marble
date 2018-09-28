@@ -207,7 +207,7 @@ void VectorTileModel::queryTiles(int tileZoomLevel, const QRect &rect)
             if (!m_documents.contains(tileId) && !m_pendingDocuments.contains(tileId)) {
                 m_pendingDocuments << tileId;
                 TileRunner *job = new TileRunner(m_loader, m_layer, tileId);
-                connect(job, SIGNAL(documentLoaded(TileId, GeoDataDocument*)), this, SLOT(updateTile(TileId, GeoDataDocument*)));
+                connect(job, SIGNAL(documentLoaded(TileId,GeoDataDocument*)), this, SLOT(updateTile(TileId,GeoDataDocument*)));
                 m_threadPool->start(job);
             }
         }
