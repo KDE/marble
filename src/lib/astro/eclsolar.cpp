@@ -861,7 +861,7 @@ void EclSolar::setPenumbraAngle(double pa, int mode)
 
 }
 
-// -------- auxilary functions --------------------------------
+// -------- auxiliary functions --------------------------------
 void EclSolar::GetMonth (int mm, char* mchr)
  {
   // get three letter designation of month
