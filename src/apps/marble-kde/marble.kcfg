@@ -197,7 +197,7 @@
    <label>Display animation on voyage to target.</label>
    <default>false</default>
   </entry>
-  <entry key="externalMapEditor" type="int" >
+  <entry key="externalMapEditor" type="Int" >
    <label>The external OpenStreetMap editor application</label>
    <default>0</default>
   </entry>
