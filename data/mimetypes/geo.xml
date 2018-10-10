@@ -59,7 +59,6 @@ Notes:
   <mime-type type="application/x-osm+xml">
     <sub-class-of type="application/xml"/>
     <comment>OSM Data</comment>
-    <comment xml:lang="ast">Datos OSM</comment>
     <comment xml:lang="bg">Данни OSM</comment>
     <comment xml:lang="bs">OSM podaci</comment>
     <comment xml:lang="ca">Dades OSM</comment>
