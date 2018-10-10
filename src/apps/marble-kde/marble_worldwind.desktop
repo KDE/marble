@@ -2,7 +2,6 @@
 Type=Application
 Exec=marble --geo-uri=%u
 Name=Marble
-Name[ast]=Marble
 Name[bg]=Marble
 Name[bs]=Marble
 Name[ca]=Marble

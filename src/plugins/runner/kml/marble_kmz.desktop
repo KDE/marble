@@ -3,7 +3,6 @@ Type=Application
 TryExec=marble
 Exec=marble %F
 Name=Marble
-Name[ast]=Marble
 Name[bg]=Marble
 Name[bs]=Marble
 Name[ca]=Marble
