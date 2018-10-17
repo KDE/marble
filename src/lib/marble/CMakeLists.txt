@@ -394,7 +394,8 @@ target_link_libraries(marblewidget
 if (NOT MARBLE_NO_WEBKITWIDGETS)
     target_link_libraries(marblewidget
         LINK_PUBLIC
-            Qt5::WebKitWidgets
+            Qt5::WebEngineWidgets
+            Qt5::WebEngine
     )
 endif ()
 if (NOT MARBLE_NO_DBUS)

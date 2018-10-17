@@ -22,8 +22,6 @@ using namespace Marble;
 #include "ui_LegendWidget.h"
 #endif
 
-#include "MarbleLegendBrowser.h"
-
 namespace Marble
 {
 

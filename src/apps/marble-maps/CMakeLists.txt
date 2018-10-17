@@ -30,6 +30,8 @@ if (CMAKE_SYSTEM_NAME STREQUAL Android)
         Qt5::AndroidExtras
         Qt5::Multimedia
         Qt5::QuickControls2
+        Qt5::WebEngineWidgets
+        Qt5::WebEngine
     )
 else()
     set(TARGET marble-maps)

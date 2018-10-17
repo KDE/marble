@@ -24,8 +24,9 @@
 #include <QRegExp>
 
 #ifndef MARBLE_NO_WEBKITWIDGETS
-#include <QWebFrame>
-#include <QWebElement>
+#include <QWebEnginePage>
+#include <QWebChannel>
+#include "MarbleWebView.h"
 #endif
 
 #include <QTextDocument>
@@ -49,10 +50,11 @@ namespace Marble
 class MarbleLegendBrowserPrivate
 {
  public:
-    MarbleModel        *m_marbleModel;
+    MarbleModel            *m_marbleModel;
     QMap<QString, bool>     m_checkBoxMap;
     QMap<QString, QPixmap>  m_symbolMap;
     QString                 m_currentThemeId;
+    MarbleJsWrapper        *m_jsWrapper;
 };
 
 
@@ -64,14 +66,7 @@ MarbleLegendBrowser::MarbleLegendBrowser( QWidget *parent )
       d( new MarbleLegendBrowserPrivate )
 {
     d->m_marbleModel = nullptr;
-
-#ifndef MARBLE_NO_WEBKITWIDGETS
-    QWebFrame *frame = page()->mainFrame();
-    connect(frame, SIGNAL(javaScriptWindowObjectCleared()),
-            this, SLOT(injectCheckBoxChecker()));
-    page()->setLinkDelegationPolicy( QWebPage::DelegateAllLinks );
-    connect( this, SIGNAL(linkClicked(QUrl)), this, SLOT(openLinkExternally(QUrl)) );
-#endif
+    d->m_jsWrapper = new MarbleJsWrapper(this);
 }
 
 MarbleLegendBrowser::~MarbleLegendBrowser()
@@ -92,7 +87,7 @@ void MarbleLegendBrowser::setMarbleModel( MarbleModel *marbleModel )
 
 QSize MarbleLegendBrowser::sizeHint() const
 {
-    return QSize( 180, 320 );
+    return QSize( 320, 320 );
 }
 
 void MarbleLegendBrowser::initTheme()
@@ -153,6 +148,7 @@ void MarbleLegendBrowser::loadLegend()
     TemplateDocument doc(finalHtml);
     finalHtml = doc.finalText();
 
+    injectWebChannel(finalHtml);
     reverseSupportCheckboxes(finalHtml);
 
     // Generate some parts of the html from the MapTheme <Legend> tag.
@@ -166,18 +162,20 @@ void MarbleLegendBrowser::loadLegend()
     QUrl baseUrl = QUrl::fromLocalFile( legendPath );
 
     // Set the html string in the QTextBrowser.
-    setHtml(finalHtml, baseUrl);
+    MarbleWebPage * page = new MarbleWebPage(this);
+    connect( page, SIGNAL(linkClicked(QUrl)), this, SLOT(openLinkExternally(QUrl)) );
+    page->setHtml(finalHtml, baseUrl);
+    setPage(page);
 
-    QTextDocument *document = new QTextDocument(page()->mainFrame()->toHtml());
-    d->m_marbleModel->setLegend( document );
-#endif
-}
+    QWebChannel *channel = new QWebChannel(page);
+    channel->registerObject(QStringLiteral("Marble"), d->m_jsWrapper);
+    page->setWebChannel(channel);
 
-void MarbleLegendBrowser::injectCheckBoxChecker()
-{
-#ifndef MARBLE_NO_WEBKITWIDGETS
-    QWebFrame *frame = page()->mainFrame();
-    frame->addToJavaScriptWindowObject( "Marble", this );
+    if ( d->m_marbleModel ) {
+        page->toHtml([=]( QString document ) {
+            d->m_marbleModel->setLegend( new QTextDocument(document) );
+        });
+    }
 #endif
 }
 
@@ -194,6 +192,7 @@ bool MarbleLegendBrowser::event( QEvent * event )
 {
     // "Delayed initialization": legend gets created only 
     if ( event->type() == QEvent::Show ) {
+        setVisible(true);
         loadLegend();
         return true;
     }
@@ -218,8 +217,7 @@ QString MarbleLegendBrowser::readHtml( const QUrl & name )
 void MarbleLegendBrowser::translateHtml( QString & html )
 {
     // must match string extraction in Messages.sh
-    // TODO: html.remove also changes html, is that intended?
-    QString s = html.remove(0, html.indexOf(QLatin1String("<body>")));
+    QString s = html;
     QRegExp rx( "</?\\w+((\\s+\\w+(\\s*=\\s*(?:\".*\"|'.*'|[^'\">\\s]+))?)+\\s*|\\s*)/?>" );
     rx.setMinimal( true );
     s.replace( rx, "\n" );
@@ -232,6 +230,18 @@ void MarbleLegendBrowser::translateHtml( QString & html )
         html.replace(*i, QCoreApplication::translate("Legends", (*i).toUtf8().constData()));
 }
 
+void MarbleLegendBrowser::injectWebChannel(QString &html)
+{
+  QString webChannelCode = "<script type=\"text/javascript\" src=\"qrc:///qtwebchannel/qwebchannel.js\"></script>";
+  webChannelCode += "<script> document.addEventListener(\"DOMContentLoaded\", function() {"
+                      "new QWebChannel(qt.webChannelTransport, function (channel) {"
+                      "Marble = channel.objects.Marble;"
+                      "});"
+                     "}); </script>"
+                     "</head>";
+  html.replace("</head>", webChannelCode);
+}
+
 void MarbleLegendBrowser::reverseSupportCheckboxes(QString &html)
 {
     const QString old = "<a href=\"checkbox:cities\"/>";
@@ -241,7 +251,7 @@ void MarbleLegendBrowser::reverseSupportCheckboxes(QString &html)
         checked = "checked";
 
     const QString repair = QLatin1String(
-            "<input type=\"checkbox\" "
+            "<input style=\"position: relative; top: -4px;\" type=\"checkbox\" "
             "onchange=\"Marble.setCheckedProperty(this.name, this.checked);\" ") + checked + QLatin1String(" name=\"cities\"/>");
 
     html.replace(old, repair);
@@ -283,7 +293,7 @@ QString MarbleLegendBrowser::generateSectionsHtml()
             if(!section->radio().isEmpty()) {
                 checkBoxString = QLatin1String(
                         "<label class=\"section-head\">"
-                        "<input type=\"radio\" "
+                        "<input style=\"position: relative; top: -4px;\" type=\"radio\" "
                         "onchange=\"Marble.setRadioCheckedProperty(this.value, this.name ,this.checked);\" ") +
                         checked + QLatin1String(" value=\"") + section->connectTo() + QLatin1String("\" name=\"") + section->radio() + QLatin1String("\" /><span>")
                         + heading +
@@ -292,7 +302,7 @@ QString MarbleLegendBrowser::generateSectionsHtml()
             } else {
                 checkBoxString = QLatin1String(
                         "<label class=\"section-head\">"
-                        "<input type=\"checkbox\" "
+                        "<input style=\"position: relative; top: -4px;\" type=\"checkbox\" "
                         "onchange=\"Marble.setCheckedProperty(this.name, this.checked);\" ") + checked + QLatin1String(" name=\"") + section->connectTo() + QLatin1String("\" /><span>")
                         + heading +
                         QLatin1String("</span></label>");
@@ -330,20 +340,24 @@ QString MarbleLegendBrowser::generateSectionsHtml()
                 src = QUrl::fromLocalFile( path ).toString();
                 styleDiv = QLatin1String("width: ") + QString::number(pixmapWidth) + QLatin1String("px; height: ") +
                         QString::number(pixmapHeight) + QLatin1String("px;");
+            } else {
+              // Workaround for rendered border around empty images in webkit
+              src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
             }
             // NOTICE. There are some pixmaps without image, so we should
             //         create just a plain rectangle with set color
-            else if (item->icon()->color().isValid()) {
+            if (QColor(item->icon()->color()).isValid()) {
                 const QColor color = item->icon()->color();
                 styleDiv = QLatin1String("width: ") + QString::number(pixmapWidth) + QLatin1String("px; height: ") +
                         QString::number(pixmapHeight) + QLatin1String("px; background-color: ") + color.name() + QLatin1Char(';');
             }
+            styleDiv += " position: relative; top: -3px;";
             const QString text = QCoreApplication::translate("DGML", item->text().toUtf8().constData());
             QString html = QLatin1String(
                     "<div class=\"legend-entry\">"
                     "  <label>") + checkBoxString + QLatin1String(
                     "    <img class=\"image-pic\" src=\"") + src + QLatin1String("\" style=\"") + styleDiv + QLatin1String("\"/>"
-                    "    <span class=\"notation\">") + text + QLatin1String("</span>"
+                    "    <span class=\"kotation\" >") + text + QLatin1String("</span>"
                     "  </label>"
                     "</div>");
             customLegendString += html;
@@ -356,39 +370,19 @@ QString MarbleLegendBrowser::generateSectionsHtml()
 
 void MarbleLegendBrowser::setCheckedProperty( const QString& name, bool checked )
 {
-#ifndef MARBLE_NO_WEBKITWIDGETS
-    QWebElement box = page()->mainFrame()->findFirstElement(QLatin1String("input[name=") + name + QLatin1Char(']'));
-    if (!box.isNull()) {
-        if (checked != d->m_checkBoxMap[name]) {
-            d->m_checkBoxMap[name] = checked;
-            emit toggledShowProperty( name, checked );
-        }
+    if (checked != d->m_checkBoxMap[name]) {
+        d->m_checkBoxMap[name] = checked;
+        emit toggledShowProperty( name, checked );
     }
-
-    update();
-#endif
 }
 
 void MarbleLegendBrowser::setRadioCheckedProperty( const QString& value, const QString& name , bool checked )
 {
-#ifndef MARBLE_NO_WEBKITWIDGETS
-    QWebElement box = page()->mainFrame()->findFirstElement(QLatin1String("input[value=") + value + QLatin1Char(']'));
-    QWebElementCollection boxes = page()->mainFrame()->findAllElements(QLatin1String("input[name=") + name + QLatin1Char(']'));
-    QString currentValue;
-    for(int i=0; i<boxes.count(); ++i) {
-        currentValue = boxes.at(i).attribute("value");
-        d->m_checkBoxMap[currentValue]=false;
-        emit toggledShowProperty( currentValue, false );
-    }
-    if (!box.isNull()) {
-        if (checked != d->m_checkBoxMap[value]) {
-            d->m_checkBoxMap[value] = checked;
-            emit toggledShowProperty( value, checked );
-        }
-    }
-
-    update();
-#endif
+  Q_UNUSED(value)
+  if (checked != d->m_checkBoxMap[name]) {
+      d->m_checkBoxMap[name] = checked;
+      emit toggledShowProperty( name, checked );
+  }
 }
 
 }

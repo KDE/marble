@@ -5,7 +5,7 @@
 #ifdef MARBLE_NO_WEBKITWIDGETS
 #include <QWidget>
 #else
-#include <QWebView>
+#include <QWebEngineView>
 #endif
 
 #include <QApplication>

@@ -35,7 +35,7 @@ namespace Marble
  * This class represents graphics item for information bubble.
  * Mostly used by @see MapInfoDialog.
  *
- * It has nice API for QWebView and methods for styling it.
+ * It has nice API for QWebEngineView and methods for styling it.
  *
  */
 class PopupItem : public QObject, public BillboardGraphicsItem
@@ -49,7 +49,7 @@ public:
      * @brief Print button visibility indicator
      *
      * There is a button in the header of item with print icon.
-     * It used to print the content of QWebView inside.
+     * It used to print the content of QWebEngineView inside.
      * This method indicates visibility of this button.
      *
      * @see setPrintButtonVisible();
@@ -62,7 +62,7 @@ public:
      * @brief Sets visibility of the print button
      *
      * There is a button in the header of item with print icon.
-     * It used to print the content of QWebView inside
+     * It used to print the content of QWebEngineView inside
      *
      * This method sets visibility of this button.
      *

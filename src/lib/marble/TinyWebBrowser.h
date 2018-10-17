@@ -13,7 +13,7 @@
 #define MARBLE_TINYWEBBROWSER_H
 
 // Qt
-#include <QWebView>
+#include <QWebEngineView>
 
 // Marble
 #include "marble_export.h"
@@ -27,12 +27,12 @@ namespace Marble
 class TinyWebBrowserPrivate;
 
 /**
- * This class provides a tiny web browser based on QWebView (WebKit).
- * It is different from QWebView as it has the button "Open in new Window"
+ * This class provides a tiny web browser based on QWebEngineView (WebKit).
+ * It is different from QWebEngineView as it has the button "Open in new Window"
  * disabled per default and instead opens every link in the default web
  * browser of the user.
  */
-class MARBLE_EXPORT TinyWebBrowser : public QWebView
+class MARBLE_EXPORT TinyWebBrowser : public QWebEngineView
 {
     Q_OBJECT
 
@@ -48,7 +48,7 @@ class MARBLE_EXPORT TinyWebBrowser : public QWebView
     void statusMessage( const QString& );
 
  protected:
-    QWebView *createWindow( QWebPage::WebWindowType type ) override;
+    QWebEngineView *createWindow( QWebEnginePage::WebWindowType type ) override;
 
  private Q_SLOTS:
     void openExternalLink( const QUrl& );

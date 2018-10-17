@@ -26,6 +26,7 @@
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "MarbleLocale.h"
+#include "MarbleWebView.h"
 
 namespace Marble
 {
@@ -42,20 +43,22 @@ static QString guessWikipediaDomain()
 }
 
 TinyWebBrowser::TinyWebBrowser( QWidget* parent )
-    : QWebView( parent ),
+    : QWebEngineView( parent ),
       d( nullptr )
 {
+    MarbleWebPage * page = new MarbleWebPage();
+    setPage(page);
+
     connect( this, SIGNAL(statusBarMessage(QString)),
              this, SIGNAL(statusMessage(QString)) );
 
-    page()->setLinkDelegationPolicy( QWebPage::DelegateAllLinks );
-    connect( this, SIGNAL(linkClicked(QUrl)),
+    connect( page, SIGNAL(linkClicked(QUrl)),
              this, SLOT(openExternalLink(QUrl)) );
     connect( this, SIGNAL(titleChanged(QString)),
              this, SLOT(setWindowTitle(QString)) );
 
-    pageAction( QWebPage::OpenLinkInNewWindow )->setEnabled( false );
-    pageAction( QWebPage::OpenLinkInNewWindow )->setVisible( false );
+    pageAction( QWebEnginePage::OpenLinkInNewWindow )->setEnabled( false );
+    pageAction( QWebEnginePage::OpenLinkInNewWindow )->setVisible( false );
 }
 
 TinyWebBrowser::~TinyWebBrowser()
@@ -79,19 +82,15 @@ void TinyWebBrowser::print()
 
     QPointer<QPrintDialog> dlg = new QPrintDialog( &printer, this );
     if ( dlg->exec() )
-        QWebView::print( &printer );
+        page()->print( &printer,  [=](bool){} );
     delete dlg;
 #endif
 }
 
-QWebView *TinyWebBrowser::createWindow( QWebPage::WebWindowType type )
+QWebEngineView *TinyWebBrowser::createWindow( QWebEnginePage::WebWindowType type )
 {
+    Q_UNUSED(type)
     TinyWebBrowser *view = new TinyWebBrowser( this );
-
-    if ( type == QWebPage::WebModalDialog ) {
-        view->setWindowModality( Qt::WindowModal );
-    }
-
     return view;
 }
 

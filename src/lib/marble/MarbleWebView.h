@@ -11,11 +11,32 @@
 #ifndef MARBLEWEBVIEW_H
 #define MARBLEWEBVIEW_H
 
-#include <QWebView>
+#include <QWebEngineView>
+#include <QWebEnginePage>
+#include <QPaintEvent>
 
 #include "marble_export.h"
 
-class MARBLE_EXPORT MarbleWebView : public QWebView
+class MARBLE_EXPORT MarbleWebPage : public QWebEnginePage
+{
+    Q_OBJECT
+public:
+    explicit MarbleWebPage(QObject *parent = nullptr)  : QWebEnginePage(parent){}
+
+Q_SIGNALS:
+    void linkClicked(const QUrl & url);
+protected:
+    bool acceptNavigationRequest(const QUrl &url, QWebEnginePage::NavigationType type, bool isMainFrame) override {
+        Q_UNUSED(isMainFrame)
+        if (type == QWebEnginePage::NavigationTypeLinkClicked) {
+            emit linkClicked(url);
+            return false;
+        }
+        return true;
+    }
+};
+
+class MARBLE_EXPORT MarbleWebView : public QWebEngineView
 {
     Q_OBJECT
 public:

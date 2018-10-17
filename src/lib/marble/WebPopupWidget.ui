@@ -18,9 +18,6 @@
      </property>
     </widget>
    </item>
-   <item row="1" column="0" colspan="4">
-    <widget class="MarbleWebView" name="webView" native="true"/>
-   </item>
    <item row="0" column="0">
     <widget class="QToolButton" name="goBackButton">
      <property name="text">
@@ -58,11 +55,20 @@
       <iconset resource="libmarble.qrc">
        <normaloff>:/marble/webpopup/icon-remove.png</normaloff>:/marble/webpopup/icon-remove.png</iconset>
      </property>
+     <property name="popupMode">
+      <enum>QToolButton::DelayedPopup</enum>
+     </property>
      <property name="autoRaise">
       <bool>true</bool>
      </property>
-    </widget>
+     <property name="arrowType">
+      <enum>Qt::NoArrow</enum>
+     </property>
+     </widget>
    </item>
+   <item row="1" column="0" colspan="4">
+    <widget class="MarbleWebView" name="webView" native="true"/>
+   </item>   
   </layout>
  </widget>
  <customwidgets>

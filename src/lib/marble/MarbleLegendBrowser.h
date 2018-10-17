@@ -46,19 +46,17 @@ class MARBLE_EXPORT MarbleLegendBrowser : public MarbleWebView
     void setMarbleModel( MarbleModel *marbleModel );
     QSize sizeHint() const override;
 
- public Q_SLOTS:
-    void setCheckedProperty( const QString& name, bool checked );
-    void setRadioCheckedProperty( const QString& value,const QString& name, bool checked );
-
-
  Q_SIGNALS:
     void toggledShowProperty( const QString&, bool );
     void tourLinkClicked( const QString &url );
 
+ public Q_SLOTS:
+    void setCheckedProperty( const QString& name, bool checked );
+    void setRadioCheckedProperty( const QString& value,const QString& name, bool checked );
+
  private Q_SLOTS:
     void initTheme();
     void loadLegend();
-    void injectCheckBoxChecker();
     void openLinkExternally( const QUrl &url );
 
  protected:
@@ -68,11 +66,30 @@ class MARBLE_EXPORT MarbleLegendBrowser : public MarbleWebView
     static void translateHtml(QString &html);
 
  private:
+    void injectWebChannel( QString &html );
     void reverseSupportCheckboxes( QString &html );
-
  private:
     Q_DISABLE_COPY( MarbleLegendBrowser )
     MarbleLegendBrowserPrivate  * const d;
+};
+
+class MarbleJsWrapper : public QObject
+{
+    Q_OBJECT
+public:
+    explicit MarbleJsWrapper( MarbleLegendBrowser* parent ) : m_parent(parent) {}
+
+public Q_SLOTS:
+    void setCheckedProperty( const QString& name, bool checked )
+    {
+        m_parent->setCheckedProperty(name, checked);
+    }
+    void setRadioCheckedProperty( const QString& value,const QString& name, bool checked )
+    {
+        m_parent->setRadioCheckedProperty(value, name, checked);
+    }
+private:
+    MarbleLegendBrowser * m_parent;
 };
 
 }

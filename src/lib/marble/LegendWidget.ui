@@ -28,7 +28,7 @@
  <customwidgets>
   <customwidget>
    <class>MarbleLegendBrowser</class>
-   <extends>QWebView</extends>
+   <extends>QWebEngineView</extends>
    <header>MarbleLegendBrowser.h</header>
   </customwidget>
  </customwidgets>

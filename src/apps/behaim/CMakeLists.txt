@@ -25,6 +25,8 @@ if (CMAKE_SYSTEM_NAME STREQUAL Android)
         Qt5::Positioning
         Qt5::AndroidExtras
         Qt5::Multimedia
+        Qt5::WebEngineWidgets
+        Qt5::WebEngine
     )
 else()
     set(TARGET marble-behaim)

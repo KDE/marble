@@ -16,7 +16,7 @@
 #include <QClipboard>
 
 MarbleWebView::MarbleWebView(QWidget *parent) :
-    QWebView(parent),
+    QWebEngineView(parent),
     m_contextMenu(new QMenu(this)),
     m_copyAction(new QAction(this))
 {
@@ -52,7 +52,7 @@ void MarbleWebView::keyPressEvent(QKeyEvent *event)
         return;
     }
 
-    QWebView::keyPressEvent(event);
+    QWebEngineView::keyPressEvent(event);
 }
 
 #include "moc_MarbleWebView.cpp"
