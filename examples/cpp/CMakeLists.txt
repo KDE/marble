@@ -55,7 +55,7 @@ set( MARBLE_EXAMPLES_INSTALL_DIR ${CMAKE_INSTALL_FULL_DATAROOTDIR}/apps/marble/e
 
 add_subdirectory( hello-marble )
 add_subdirectory( map-properties )
-add_subdirectory( custom-layers )
+add_subdirectory( drawing-places )
 add_subdirectory( kml-inspector )
 add_subdirectory( map-controls )
 add_subdirectory( overlay-rendering )

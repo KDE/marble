@@ -23,7 +23,9 @@ int main(int argc, char** argv)
 
     // Load the OpenStreetMap map
     mapWidget->setMapThemeId(QStringLiteral("earth/openstreetmap/openstreetmap.dgml"));
-
+//    mapWidget->setMapThemeId(QStringLiteral("earth/vectorosm/vectorosm.dgml"));
+    mapWidget->centerOn(11.19, 47.68);
+    mapWidget->zoomView(2900);
     mapWidget->show();
 
     return app.exec();

@@ -1,4 +1,4 @@
-SET (TARGET custom-layers)
+SET (TARGET drawing-places)
 PROJECT (${TARGET})
 
 include_directories(

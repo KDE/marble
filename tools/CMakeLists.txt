@@ -25,7 +25,7 @@ add_subdirectory( vectorosm-tilecreator )
 find_package(Protobuf)
 find_package(ZLIB)
 if(PROTOBUF_FOUND AND ZLIB_FOUND)
-  add_subdirectory( osm-addresses )
+  # add_subdirectory( osm-addresses )
   # osm-sisyphus does not depend on zlib and protobuf, but osm-addresses
   add_subdirectory( osm-sisyphus )
 endif()
