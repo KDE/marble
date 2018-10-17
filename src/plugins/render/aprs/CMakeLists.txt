@@ -1,6 +1,6 @@
 PROJECT(AprsPlugin)
 
-find_package(Qt5 ${REQUIRED_QT_VERSION} COMPONENTS SerialPort)
+find_package(Qt5 ${REQUIRED_QT_VERSION} COMPONENTS SerialPort QUIET)
 marble_set_package_properties( Qt5SerialPort PROPERTIES DESCRIPTION "Provides access to hardware and virtual serial ports." )
 marble_set_package_properties( Qt5SerialPort PROPERTIES TYPE OPTIONAL PURPOSE "Reading from serial port in APRS plugin" )
 
@@ -27,6 +27,8 @@ set( aprs_SRCS AprsPlugin.cpp
 	       AprsFile.cpp
 
 	       ${serial_src} )
+
+set_property(SOURCE ${CMAKE_CURRENT_BINARY_DIR}/AprsGatherer_mic_e.cpp PROPERTY SKIP_AUTOMOC ON)
 
 set( aprs_UI AprsConfigWidget.ui )
 qt_wrap_ui( aprs_SRCS ${aprs_UI} )
