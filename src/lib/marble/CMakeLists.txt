@@ -688,7 +688,7 @@ endif()
 
 set(PRI_DEPS "xml gui widgets network")
 if (NOT MARBLE_NO_WEBKITWIDGETS)
-    set(PRI_DEPS "${PRI_DEPS} webkitwidgets")
+    set(PRI_DEPS "${PRI_DEPS} webenginewidgets")
 endif()
 
 file(GENERATE
