@@ -159,6 +159,7 @@
   <url type="donation">https://www.kde.org/community/donations/</url>
   <screenshots>
     <screenshot type="default">
+      <caption>Earth globe in Marble</caption>
       <image>https://marble.kde.org/img/gallery/marble-desktop-satellite-clouds.png</image>
     </screenshot>
   </screenshots>
