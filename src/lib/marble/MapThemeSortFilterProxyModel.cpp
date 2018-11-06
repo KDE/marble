@@ -38,7 +38,7 @@ bool MapThemeSortFilterProxyModel::lessThan ( const QModelIndex & left, const QM
             return false;
         }
     }
-    return sourceModel()->data( left ).toString() < sourceModel()->data( right ).toString();;
+    return sourceModel()->data( left ).toString() < sourceModel()->data( right ).toString();
 }
 
 bool MapThemeSortFilterProxyModel::filterAcceptsRow( int sourceRow, const QModelIndex &sourceParent ) const

@@ -104,7 +104,7 @@ void TourItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &opt
             painter->restore();
             button.icon = QIcon(QStringLiteral(":/marble/document-edit.png"));
 
-            QRect const buttonRect = position( EditButton, option );;
+            QRect const buttonRect = position( EditButton, option );
             button.rect = buttonRect;
 
             QIcon const icon = QIcon(QStringLiteral(":/marble/media-playback-pause.png"));

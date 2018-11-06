@@ -119,7 +119,7 @@ void EquirectScanlineTextureMapper::mapTexture( const ViewportParams *viewport, 
 
     // Calculate y-range the represented by the center point, yTop and
     // what actually can be painted
-    const int yTop     = imageHeight / 2 - radius + yCenterOffset;;
+    const int yTop     = imageHeight / 2 - radius + yCenterOffset;
     int yPaintedTop    = imageHeight / 2 - radius + yCenterOffset;
     int yPaintedBottom = imageHeight / 2 + radius + yCenterOffset;
  

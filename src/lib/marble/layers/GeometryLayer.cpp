@@ -190,7 +190,7 @@ bool GeometryLayer::render(GeoPainter *painter, ViewportParams *viewport,
         d->m_dirty = false;
 
         const int maxZoomLevel = qMin(d->m_tileLevel, d->m_styleBuilder->maximumZoomLevel());
-        auto const items = d->m_scene.items(box, maxZoomLevel);;
+        auto const items = d->m_scene.items(box, maxZoomLevel);
         d->m_cachedLatLonBox = box;
         d->m_cachedDateTime = now;
 

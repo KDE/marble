@@ -595,7 +595,7 @@ Qt::ItemFlags GeoDataTreeModel::flags ( const QModelIndex & index ) const
         }
         const GeoDataDocument *document = static_cast<const GeoDataDocument *>(parent);
         if( document->documentRole() == UserDocument ) {
-            return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable | Qt::ItemIsEditable;;
+            return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable | Qt::ItemIsEditable;
         }
 
         return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable;

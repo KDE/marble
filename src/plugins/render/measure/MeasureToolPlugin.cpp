@@ -314,11 +314,11 @@ void MeasureToolPlugin::drawSegments( GeoPainter* painter )
 
             qreal iterBearing = previousBearing;
             while ( iterBearing < currentBearing ) {
-                ring << currentCoordinates.moveByBearing( iterBearing, angleLength );;
+                ring << currentCoordinates.moveByBearing( iterBearing, angleLength );
                 iterBearing += 0.1;
             }
 
-            ring << currentCoordinates.moveByBearing( currentBearing, angleLength );;
+            ring << currentCoordinates.moveByBearing( currentBearing, angleLength );
 
             painter->drawPolygon( ring );
 

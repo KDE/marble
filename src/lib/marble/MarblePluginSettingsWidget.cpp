@@ -72,7 +72,7 @@ void MarblePluginSettingsWidgetPrivate::showPluginConfigDialog( const QModelInde
     if ( m_pluginModel.isNull() )
         return;
 
-    DialogConfigurationInterface *configInterface = m_pluginModel->pluginDialogConfigurationInterface( index );;
+    DialogConfigurationInterface *configInterface = m_pluginModel->pluginDialogConfigurationInterface( index );
     QDialog *configDialog = configInterface ? configInterface->configDialog() : nullptr;
     if ( configDialog ) {
         configDialog->show();

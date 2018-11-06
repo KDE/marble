@@ -444,7 +444,7 @@ void EclSolar::getDatefromMJD(double mjd, int &year, int &month, int &day, int &
 
     caldat((mjd + eb_tzone/24.0), day, month, year, magn);
     dms (magn,hour,min,sec);
-    if (sec>30.0) min++;;
+    if (sec>30.0) min++;
     if (min>59)
      {
       hour++;
@@ -582,7 +582,7 @@ int EclSolar::getEclYearInfo(int k, int &yr, int &month, int &day,
   // convert MJD into corresponding date and time
   caldat((eb_eclmjd[j] + eb_tzone/24.0), day, month, yr, magn);
   dms (magn,hour,min,sec);
-  if (sec>30.0) min++;;
+  if (sec>30.0) min++;
   if (min>59)
    {
     hour++;

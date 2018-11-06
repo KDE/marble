@@ -154,7 +154,7 @@ void PlanetarySats::getDatefromMJD(double mjd, int &year, int &month, int &day, 
 
     caldat((mjd), day, month, year, magn);
     dms (magn,hour,min,sec);
-    if (sec>30.0) min++;;
+    if (sec>30.0) min++;
     if (min>59)
      {
       hour++;

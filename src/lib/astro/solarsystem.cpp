@@ -264,7 +264,7 @@ void SolarSystem::getDatefromMJD(double mjd, int &year, int &month, int &day, in
 
     caldat((mjd + ss_tzone/24.0), day, month, year, magn);
     dms (magn,hour,min,sec);
-    if (sec>30.0) min++;;
+    if (sec>30.0) min++;
     if (min>59)
      {
       hour++;

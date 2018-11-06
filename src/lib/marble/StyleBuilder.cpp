@@ -545,7 +545,7 @@ GeoDataStyle::ConstPtr StyleBuilder::Private::adjustPisteStyle(const StyleParame
 
     GeoDataLineStyle lineStyle = style->lineStyle();
 
-    auto green = QColor("#006600");;
+    auto green = QColor("#006600");
     auto red = QColor("#cc0000");
     auto black = QColor("#151515");
     auto yellow = Qt::yellow;
