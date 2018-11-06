@@ -2,7 +2,7 @@
 <component type="desktop">
   <id>org.kde.marble.desktop</id>
   <metadata_license>CC0-1.0</metadata_license>
-  <project_license>LGPL</project_license>
+  <project_license>LGPL-2.1-or-later</project_license>
   <name>Marble</name>
   <name xml:lang="bs">Marble</name>
   <name xml:lang="ca">Marble</name>
@@ -70,7 +70,7 @@
   <summary xml:lang="zh-CN">虚拟地球仪</summary>
   <summary xml:lang="zh-TW">虛擬地球儀</summary>
   <description>
-    <p>Marble is a virtual globe and world atlas — your swiss army knife for maps.</p>
+    <p>Marble is a virtual globe and world atlas — your swiss army knife for maps that you can use to learn more about the Earth and other planets.</p>
     <p xml:lang="bs">Marble je virtualni globus i atlas svijeta — vaš švicarski nož na mape.</p>
     <p xml:lang="ca">El Marble és un globus terraqüi virtual i un atles mundial — la navalla suïssa dels mapes.</p>
     <p xml:lang="ca-valencia">El Marble és un globus terraqüi virtual i un atles mundial — la navalla suïssa dels mapes.</p>
