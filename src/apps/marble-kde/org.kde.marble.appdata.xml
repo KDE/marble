@@ -128,7 +128,7 @@
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=marble</url>
   <url type="faq">https://techbase.kde.org/Projects/Marble/FAQ</url>
   <url type="help">https://marble.kde.org/support.php</url>
-  <url type="donation">https://www.kde.org/community/donations/</url>
+  <url type="donation">https://www.kde.org/community/donations/?app=marble&amp;source=appdata</url>
   <screenshots>
     <screenshot type="default">
       <caption>Earth globe in Marble</caption>
