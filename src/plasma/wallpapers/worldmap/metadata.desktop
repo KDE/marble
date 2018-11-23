@@ -27,6 +27,12 @@ Name[x-test]=xxWorld Mapxx
 Name[zh_CN]=世界地图
 Name[zh_TW]=世界地圖
 Comment=Our beautiful globe as your wallpaper
+Comment[ca]=El nostre globus com a fons de pantalla
+Comment[gl]=O noso fermoso globo terráqueo como fondo de escritorio
+Comment[nl]=Onze prachtige wereldbol als uw achtergrondafbeelding
+Comment[pt]=O nosso bonito globo como papel de parede
+Comment[uk]=Наша чудова планета на шпалерах вашої стільниці
+Comment[x-test]=xxOur beautiful globe as your wallpaperxx
 Type=Service
 Icon=marble
 
