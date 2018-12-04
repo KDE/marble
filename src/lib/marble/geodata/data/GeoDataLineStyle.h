@@ -69,7 +69,7 @@ class GEODATA_EXPORT GeoDataLineStyle : public GeoDataColorStyle
     
     /**
      * @brief Set the physical width of the line (in meters)
-     * @param  width  the new width
+     * @param  realWidth  the new width
      */
     void setPhysicalWidth(float realWidth);
     /**

@@ -107,12 +107,12 @@ class GEODATA_EXPORT GeoDataCoordinates
 
     /**
      * @brief create a geocoordinate from longitude and latitude
-     * @param _lon longitude
-     * @param _lat latitude
+     * @param lon longitude
+     * @param lat latitude
      * @param alt altitude in meters (default: 0)
-     * @param _unit units that lon and lat get measured in
+     * @param unit units that lon and lat get measured in
      * (default for Radian: north pole at pi/2, southpole at -pi/2)
-     * @param _detail detail (default: 0)
+     * @param detail detail (default: 0)
      */
     GeoDataCoordinates( qreal lon, qreal lat, qreal alt = 0,
                         GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian,
@@ -131,10 +131,10 @@ class GEODATA_EXPORT GeoDataCoordinates
 
     /**
     * @brief (re)set the coordinates in a GeoDataCoordinates object
-    * @param _lon longitude
-    * @param _lat latitude
+    * @param lon longitude
+    * @param lat latitude
     * @param alt altitude in meters (default: 0)
-    * @param _unit units that lon and lat get measured in
+    * @param unit units that lon and lat get measured in
     * (default for Radian: north pole at pi/2, southpole at -pi/2)
     */
     void set( qreal lon, qreal lat, qreal alt = 0,
@@ -165,8 +165,8 @@ class GEODATA_EXPORT GeoDataCoordinates
 
     /**
     * @brief set the longitude in a GeoDataCoordinates object
-    * @param _lon longitude
-    * @param _unit units that lon and lat get measured in
+    * @param lon longitude
+    * @param unit units that lon and lat get measured in
     * (default for Radian: north pole at pi/2, southpole at -pi/2)
     */
     void setLongitude( qreal lon,
@@ -194,8 +194,8 @@ class GEODATA_EXPORT GeoDataCoordinates
 
     /**
     * @brief set the longitude in a GeoDataCoordinates object
-    * @param _lat longitude
-    * @param _unit units that lon and lat get measured in
+    * @param lat longitude
+    * @param unit units that lon and lat get measured in
     * (default for Radian: north pole at pi/2, southpole at -pi/2)
     */
     void setLatitude( qreal lat,
@@ -248,7 +248,7 @@ class GEODATA_EXPORT GeoDataCoordinates
 
     /**
     * @brief set the detail flag
-    * @param det detail
+    * @param detail detail
     */
     void setDetail(quint8 detail);
 

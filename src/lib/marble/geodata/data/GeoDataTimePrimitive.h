@@ -26,8 +26,8 @@ class GeoDataTimePrimitivePrivate;
  * A GeoDataTimePrimitive is a base class for the time classes TimeSpan
  * and TimeStamp classes.
  *
- * @See GeoDataTimeSpan
- * @See GeoDataTimeStamp
+ * @see GeoDataTimeSpan
+ * @see GeoDataTimeStamp
  */
 class GEODATA_EXPORT GeoDataTimePrimitive : public GeoDataObject
 {

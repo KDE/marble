@@ -130,7 +130,7 @@ public:
 
     /**
      * @brief Add a style to the style storage
-     * @param style  the new style
+     * @param styleId  the new style
      */
     void removeStyle( const QString& styleId );
 

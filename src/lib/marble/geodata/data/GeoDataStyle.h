@@ -63,7 +63,7 @@ class GEODATA_EXPORT GeoDataStyle : public GeoDataStyleSelector
     GeoDataStyle( const GeoDataStyle& other );
     /**
      * @brief Construct a new style
-     * @param  icon   used to construct the icon style
+     * @param  iconPath used to construct the icon style
      * @param  font   used to construct the label styles
      * @param  color  used to construct the label styles
      */

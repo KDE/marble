@@ -45,9 +45,10 @@ public:
     /**
      * @brief create a starpoint from rectaszension and declination
      * @param  rect rectaszension
-     * @param  lat declination
+     * @param  decl declination
      * @param  mag magnitude
      * (default for Radian: north pole at pi/2, southpole at -pi/2)
+     * @param  colorId color
      */
     StarPoint(int id, qreal rect, qreal decl, qreal mag, int colorId) :
         m_id( id ),

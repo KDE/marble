@@ -65,7 +65,7 @@ class GEODATA_EXPORT GeoDataTimeSpan : public GeoDataTimePrimitive
 
     /**
     * @brief Set the ending instant of a timespan
-    * @param begin the ending instant of a timespan
+    * @param end the ending instant of a timespan
     */
     void setEnd( const GeoDataTimeStamp& end );
 

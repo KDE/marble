@@ -29,7 +29,7 @@ class GeoDataExtendedDataPrivate;
 /**
  * @short a class which allows to add custom data to KML Feature.
  *
- * @See GeoDataData
+ * @see GeoDataData
  */
 class GEODATA_EXPORT GeoDataExtendedData : public GeoDataObject
 {

@@ -84,7 +84,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
      * @brief A short description of the feature.
      *
      * HTML markup is not supported.
-     * @TODO When the Snippet is not supplied, the first lines of description should be used.
+     * @todo When the Snippet is not supplied, the first lines of description should be used.
      * @return The name of this feature
      */
     GeoDataSnippet snippet() const;
@@ -114,8 +114,8 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
      * CDATA allows for special characters to be included in XML and also allows
      * for other XML formats to be embedded in the XML without interfering with
      * parser namespace.
-     * @return @true if the description should be treated as CDATA
-     *         @false if the description is a plain string
+     * @return @c true if the description should be treated as CDATA
+     *         @c false if the description is a plain string
      */
     bool descriptionIsCDATA() const;
     /// Set the description to be CDATA See: @see descriptionIsCDATA()

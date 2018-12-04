@@ -65,7 +65,7 @@ public:
 
     /**
      * @brief Returns the zoom level from which on the given visual category will be visible.
-     * @param category the visual category for which the minimum zoom level shall be returned
+     * @param placemark the placemark for which the minimum zoom level shall be returned
      * @return zoom level from which on the given visual category will be visible
      */
     int minimumZoomLevel(const GeoDataPlacemark &placemark) const;

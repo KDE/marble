@@ -414,7 +414,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
     /**
      * @brief Removes a texture sublayer
-     * @param Key that was returned from corresponding addTextureLayer
+     * @param key a key that was returned from corresponding addTextureLayer
      */
     void removeTextureLayer(const QString &key);
 
@@ -535,7 +535,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
     /**
      * @brief  Set whether the night shadow is visible.
-     * @param  visibile visibility of shadow
+     * @param  visible visibility of shadow
      */
     void setShowSunShading( bool visible );
 
@@ -702,7 +702,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
     void clearVolatileTileCache();
     /**
      * @brief  Set the limit of the volatile (in RAM) tile cache.
-     * @param  bytes The limit in kilobytes.
+     * @param  kiloBytes The limit in kilobytes.
      */
     void setVolatileTileCacheLimit( quint64 kiloBytes );
 

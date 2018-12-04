@@ -72,7 +72,7 @@ class GEODATA_EXPORT GeoDataLabelStyle : public GeoDataColorStyle
     float scale() const;
     /**
      * @brief Set the alignment of the label
-     * @param  int the alignment
+     * @param alignment the alignment
      */
     void setAlignment ( GeoDataLabelStyle::Alignment alignment );
     /**

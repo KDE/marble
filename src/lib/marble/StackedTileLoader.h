@@ -64,8 +64,9 @@ class StackedTileLoader : public QObject
         /**
          * Creates a new tile loader.
          *
-         * @param downloadManager The download manager that shall be used to fetch
-         *                        the tiles from a remote resource.
+         * @param mergedLayerDecorator The decorator that shall be used to decorate
+         *                        the layer.
+         * @param parent The parent widget.
          */
         explicit StackedTileLoader( MergedLayerDecorator *mergedLayerDecorator, QObject *parent = nullptr );
         ~StackedTileLoader() override;
@@ -117,7 +118,7 @@ class StackedTileLoader : public QObject
 
         /**
          * @brief Set the limit of the volatile (in RAM) cache.
-         * @param bytes The limit in kilobytes.
+         * @param kiloBytes The limit in kilobytes.
          */
         void setVolatileCacheLimit( quint64 kiloBytes );
 

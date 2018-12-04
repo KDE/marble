@@ -49,8 +49,8 @@ class GEODATA_EXPORT GeoSceneLayer : public GeoNode
     const char* nodeType() const override;
 
     /**
-     * @brief  Add a section to the legend
-     * @param  section  the new section
+     * @brief  Add a data set to the legend
+     * @param  dataset  the new data set
      */
     void addDataset( GeoSceneAbstractDataset* );
 

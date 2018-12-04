@@ -31,8 +31,8 @@ class GeoDataStyleMapPrivate;
  * context. Besides GeoDataStyleSelector it derives from
  * QMap<QString, QString>.
  *
- * @See GeoDataStyle
- * @See GeoDataStyleSelector
+ * @see GeoDataStyle
+ * @see GeoDataStyleSelector
  */
 class GEODATA_EXPORT GeoDataStyleMap : public GeoDataStyleSelector,
                                        public QMap<QString, QString>

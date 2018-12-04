@@ -73,7 +73,7 @@ class GEODATA_EXPORT GeoDataIconStyle : public GeoDataColorStyle
      * @brief setSize Change the size of @see icon(). A null size (0, 0) is treated as a request to keep
      * the original icon size. Otherwise the icon will be scaled to the given size. This is especially useful
      * for vector graphics like .svg or to keep the memory footprint low when loading large images.
-     * @param size Size in pixel that @see icon() should have. When the icon was previously set by @setIcon,
+     * @param size Size in pixel that @see icon() should have. When the icon was previously set by #setIcon,
      * it is resized unless a null size is passed. Otherwise icon() will be scaled to the given size.
      */
     void setSize(const QSize &size, Qt::AspectRatioMode aspectRatioMode=Qt::KeepAspectRatio);

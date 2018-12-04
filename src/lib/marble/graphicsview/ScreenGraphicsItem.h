@@ -38,7 +38,7 @@ class MARBLE_EXPORT ScreenGraphicsItem : public MarbleGraphicsItem
 
     /**
      * @brief Set the position of the ScreenGraphicsItem
-     * @param pos Position
+     * @param position Position
      *
      * Positive x-coordinates are counted left-aligned from the left border of the parent item.
      * Negative x-coordinates are counted right-aligned from the right border of the parent item.

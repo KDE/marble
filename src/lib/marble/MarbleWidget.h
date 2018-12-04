@@ -705,7 +705,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief Center the view on a placemark according to the following logic:
      * - if the placemark has a lookAt, zoom and center on that lookAt
      * - otherwise use the placemark geometry's latLonAltBox
-     * @param box The GeoDataPlacemark to zoom and move the MarbleWidget to.
+     * @param placemark The GeoDataPlacemark to zoom and move the MarbleWidget to.
+     * @param animated Whether the centering is animated.
      */
     void centerOn( const GeoDataPlacemark& placemark, bool animated = false );
 
@@ -824,7 +825,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     /**
      * @brief  Set whether the night shadow is visible.
-     * @param  visibile visibility of shadow
+     * @param  visible visibility of shadow
      */
     void setShowSunShading( bool visible );
 
@@ -1011,7 +1012,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void clearVolatileTileCache();
     /**
      * @brief  Set the limit of the volatile (in RAM) tile cache.
-     * @param  kilobytes The limit in kilobytes.
+     * @param  kiloBytes The limit in kilobytes.
      */
     void setVolatileTileCacheLimit( quint64 kiloBytes );
 

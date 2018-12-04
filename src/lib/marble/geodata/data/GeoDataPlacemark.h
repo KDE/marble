@@ -534,8 +534,8 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     GeoDataVisualCategory visualCategory() const;
 
     /**
-     * Sets the symbol @p index of the placemark.
-     * @param  category  the new category to be used.
+     * Sets the symbol @p category of the placemark.
+     * @param category  the new category to be used.
      */
     void setVisualCategory(GeoDataVisualCategory category);
 

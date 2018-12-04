@@ -106,7 +106,7 @@ namespace Marble
         
         /**
         * @brief set the GeoDataCoordinates object
-        * @param GeoDataCoordinates
+        * @param coordinates GeoDataCoordinates
         * @see GeoDataCoordinates
         */
         void setCoordinates( const GeoDataCoordinates& coordinates );

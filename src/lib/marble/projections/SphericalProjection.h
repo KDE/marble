@@ -64,8 +64,8 @@ class SphericalProjection : public AzimuthalProjection
 
     /**
      * @brief Get the screen coordinates corresponding to geographical coordinates in the map.
-     * @param lon    the lon coordinate of the requested pixel position
-     * @param lat    the lat coordinate of the requested pixel position
+     * @param coordinates  the coordinates of the requested pixel position
+     * @param params the viewport parameters
      * @param x      the x coordinate of the pixel is returned through this parameter
      * @param y      the y coordinate of the pixel is returned through this parameter
      * @return @c true  if the geographical coordinates are visible on the screen

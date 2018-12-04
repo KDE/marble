@@ -45,7 +45,7 @@ public:
 
     /**
      * @brief Returns the current template value of @p key
-     * @param key template key (%<here>%)
+     * @param key template key (\<here\>)
      * @return value of the template
      */
     QString value(const QString &key) const;

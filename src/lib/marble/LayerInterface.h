@@ -39,7 +39,7 @@ public:
      *
      * Gives a preferred level in the existing layer stack where
      * the render() method of this plugin should get executed.
-     *.
+     *
      * Possible Values:
      * "NONE"
      * "STARS"

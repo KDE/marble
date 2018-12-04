@@ -62,7 +62,7 @@ class GEODATA_EXPORT GeoSceneMap : public GeoNode
     void setHighlightPenColor( const QColor& );
     /**
      * @brief  Add a new layer to the map
-     * @param  section  The new layer
+     * @param  layer  The new layer
      */
     void addLayer( GeoSceneLayer* );
 
@@ -82,7 +82,7 @@ class GEODATA_EXPORT GeoSceneMap : public GeoNode
 
     /**
      * @brief  Add a new filter to the map
-     * @param  section  The new filter
+     * @param  filter  The new filter
      */
     void addFilter( GeoSceneFilter* );
 

@@ -38,7 +38,7 @@ class RenderPluginInterface: public PluginInterface, public LayerInterface
 
     /**
      * @brief Returns the name(s) of the backend that the plugin can render
-     *.
+     *
      * This method should return the name of the backend that the plugin
      * can render. The string has to be the same one that is given
      * for the attribute in the layer element of the DGML file that
@@ -53,7 +53,7 @@ class RenderPluginInterface: public PluginInterface, public LayerInterface
      * @brief Return how the plugin settings should be used.
      *
      * FIXME: Document this
-     *.
+     *
      * Possible Values:
      * "ALWAYS"            -- the plugin renders at the preferred position
      *                        no matter what got specified in the DGML file.

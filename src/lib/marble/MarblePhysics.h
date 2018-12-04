@@ -29,7 +29,7 @@ class MarblePhysics : public QObject
  public:
     /**
       * @brief Constructor
-      * @param widget the MarbleWidget that is being animated
+      * @param presenter the MarbleWidget that is being animated
       */
     explicit MarblePhysics( MarbleAbstractPresenter *presenter );
 

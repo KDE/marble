@@ -154,8 +154,8 @@ class MARBLE_EXPORT GeoGraphicsItem
 
     /**
      * @brief contains Returns true if the item contains the given coordinates
-     * @param coordinates
      * @param screenPosition
+     * @param viewport
      * @return
      */
     virtual bool contains(const QPoint &screenPosition, const ViewportParams *viewport) const;

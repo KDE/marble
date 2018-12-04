@@ -67,10 +67,12 @@ public:
     void move( const GeoDataCoordinates &source, const GeoDataCoordinates &destination ) override;
 
     /**
-     * @brief Changes the busy state of the object according to @param enabled. It is mostly
+     * @brief Changes the busy state of the object according to @p enabled. It is mostly
      * used by Annotate Plugin to not send events to this object anymore but is different than
      * the focus property (you can have a focused polygon which does not accept events because
      * is busy).
+     *
+     * @param enabled the busy state of the object
      */
     void setBusy( bool enabled );
 

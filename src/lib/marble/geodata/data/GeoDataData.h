@@ -80,7 +80,7 @@ class GEODATA_EXPORT GeoDataData : public GeoDataObject
 
     /**
     * @brief set the displayName of data
-    * @param value the displayName to be set
+    * @param displayName the displayName to be set
     */
     void setDisplayName( const QString& displayName );
 

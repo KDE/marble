@@ -38,9 +38,10 @@ public:
       * No notification will be generated if the turn point with the given index is too far away,
       * has been announced previously, if the output is @see setMuted or the needed sounds cannot
       * be found in the Marble data path.
-      * @param index The index of the next turn point
-      * @param distance The distance in meters to the next turn point
-      * @param turnType The turn type to execute at the next turn point
+      * @param route The route
+      * @param distanceManeuver The distance in meters to the next turn point
+      * @param distanceTarget The distance to the target
+      * @param deviated Whether the route is deviated
       */
     void update( const Route &route, qreal distanceManeuver, qreal distanceTarget, bool deviated );
 

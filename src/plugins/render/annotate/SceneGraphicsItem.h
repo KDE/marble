@@ -133,7 +133,9 @@ public:
     bool hasFocus() const;
 
     /**
-     * @brief Sets the focus of this item according to the @param enabled.
+     * @brief Sets the focus of this item according to the @p enabled.
+     *
+     * @param enabled whether the item is to be focussed
      */
     void setFocus( bool enabled );
 

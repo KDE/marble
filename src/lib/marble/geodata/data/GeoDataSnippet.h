@@ -21,7 +21,10 @@ class GEODATA_EXPORT GeoDataSnippet
 {
 public:
     /**
-     * Create a new snippet with the given @text text and @maxLines maximum of lines.
+     * Create a new snippet with the given @p text and @p maxLines maximum of lines.
+     *
+     * @param text the text
+     * @param maxLines the maximum nuber of lines
      */
     explicit GeoDataSnippet( const QString &text = QString() , int maxLines = 0 );
 

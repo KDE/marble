@@ -150,7 +150,7 @@ void OsmRelation::createMultipolygon(GeoDataDocument *document, OsmWays &ways, c
         placemark->setVisible(outerCategory != GeoDataPlacemark::None);
         placemark->setGeometry(polygon);
         if (hasMultipleOuterRings) {
-            /** @TODO Use a GeoDataMultiGeometry to keep the ID? */
+            /** @todo Use a GeoDataMultiGeometry to keep the ID? */
             osmData.setId(0);
             OsmObjectManager::initializeOsmData(placemark);
         } else {

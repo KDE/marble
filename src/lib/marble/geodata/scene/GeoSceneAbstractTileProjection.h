@@ -76,7 +76,7 @@ public:
     /**
      * @brief Sets the number of tiles on level 0 in y dimension
      *
-     * @param levelZeroColumns new number of tiles on level 0 in y dimension
+     * @param levelZeroRows new number of tiles on level 0 in y dimension
      *
      * Default value of the levelZeroRows property is 1.
      */
