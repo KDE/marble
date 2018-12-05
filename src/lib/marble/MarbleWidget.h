@@ -338,6 +338,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @param y      the y coordinate of the pixel
      * @param lon    the longitude angle is returned through this parameter
      * @param lat    the latitude angle is returned through this parameter
+     * @param unit   the angle unit
      * @return @c true  if the pixel (x, y) is within the globe
      *         @c false if the pixel (x, y) is outside the globe, i.e. in space.
      */

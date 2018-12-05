@@ -135,7 +135,7 @@ public:
     /**
      * @brief Sets the focus of this item according to the @p enabled.
      *
-     * @param enabled whether the item is to be focussed
+     * @param enabled whether the item is to be focused
      */
     void setFocus( bool enabled );
 

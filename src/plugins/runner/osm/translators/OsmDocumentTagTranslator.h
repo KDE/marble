@@ -18,13 +18,14 @@ namespace Marble
 /**
      This helper class organizes a GeoDataDocument to
      meet the following OSM standard structure:
-
+@code
      <xml>
      <bounds>
 
      block of nodes: ( <node>...) 1st
      block of ways:  ( <way> ...) 2nd
      block of relations: ( <relation> ...) 3rd
+@endcode
 
      See http://wiki.openstreetmap.org/wiki/OSM_XML#Contents
 

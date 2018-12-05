@@ -92,10 +92,10 @@ class DsoPoint
 public:
     DsoPoint() {}
     /**
-     * @brief create a dsopoint from rectaszension and declination
-     * @param  rect rectaszension
-     * @param  lat declination
-     * @param  mag
+     * @brief create a dsopoint from right ascension and declination
+     * @param  id point identifier
+     * @param  rect right ascension
+     * @param  decl declination
      * (default for Radian: north pole at pi/2, southpole at -pi/2)
      */
     DsoPoint(const QString& id, qreal rect, qreal decl) {

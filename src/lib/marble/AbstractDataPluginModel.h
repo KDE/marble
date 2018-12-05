@@ -138,7 +138,7 @@ public Q_SLOTS:
     /**
      * Downloads the file from @p url. @p item -> addDownloadedFile() will be called when the
      * download is finished.
-     * @param: The type of the download (to be specified by the subclasser)
+     * @param type The type of the download (to be specified by the subclasser)
      **/
     void downloadItem( const QUrl& url, const QString& type, AbstractDataPluginItem *item );
 

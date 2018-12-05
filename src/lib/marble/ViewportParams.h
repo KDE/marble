@@ -157,6 +157,7 @@ class MARBLE_EXPORT ViewportParams
      * @param y      the y coordinate of the pixel is returned through this parameter
      * @param pointRepeatNum      the amount of times that a single geographical
                                   point gets represented on the map
+     * @param size   the size of the point
      * @param globeHidesPoint  whether the point gets hidden on the far side of the earth
      *
      * @return @c true  if the geographical coordinates are visible on the screen

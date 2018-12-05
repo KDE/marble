@@ -45,7 +45,7 @@ class WeatherModel : public AbstractDataPluginModel
      * Downloads the file from @p url. @p item -> addDownloadedFile() will be called when the
      * download is finished. Additionally initialized() items will be added to the item list
      * after the download.
-     * @param: The type of the download
+     * @param type The type of the download
      **/
     void downloadItemData( const QUrl& url, const QString& type, AbstractDataPluginItem *item );
     

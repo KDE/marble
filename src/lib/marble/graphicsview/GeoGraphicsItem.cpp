@@ -70,7 +70,7 @@ void GeoGraphicsItem::setHighlightStyle( const GeoDataStyle::ConstPtr &highlight
 {
     /**
      * Delete any previously set style
-     * and assign the new style #highlightStyle
+     * and assign the new style highlightStyle
      */
     d->m_highlightStyle = highlightStyle;
 }

@@ -29,7 +29,7 @@ namespace Marble
 /**
  * This class is used to encapsulate the osm data fields kept within a placemark's extendedData.
  * It stores OSM server generated data: id, version, changeset, uid, visible, user, timestamp;
- * It also stores a hash map of <tags> ( key-value mappings ) and a hash map of component osm
+ * It also stores a hash map of \<tags\> ( key-value mappings ) and a hash map of component osm
  * placemarks @see m_nodeReferences @see m_memberReferences
  *
  * The usual workflow with osmData goes as follows:
@@ -82,7 +82,7 @@ public:
 
     /**
      * @brief addTag this function inserts a string key=value mapping,
-     * equivalent to the <tag k="@p key" v="@p value"> osm core data
+     * equivalent to the \<tag k="@p key" v="@p value"\> osm core data
      * element
      */
     void addTag( const QString& key, const QString& value );
@@ -125,7 +125,7 @@ public:
 
     /**
      * @brief addRef this function inserts a GeoDataCoordinates = OsmPlacemarkData
-     * mapping into the reference hash, equivalent to the <member ref="@p key" >
+     * mapping into the reference hash, equivalent to the \<member ref="@p key" \>
      * osm core data element
      */
     void addNodeReference( const GeoDataCoordinates& key, const OsmPlacemarkData &value );
@@ -158,7 +158,7 @@ public:
 
     /**
      * @brief addRef this function inserts a int = OsmplacemarkData
-     * mapping into the reference hash, equivalent to the osm <nd ref="@p boundary of index @key" >
+     * mapping into the reference hash, equivalent to the osm \<nd ref="@p boundary of index @key" \>
      * core data element
      * @see m_memberReferences
      */

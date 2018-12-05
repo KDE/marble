@@ -114,7 +114,7 @@ class GEODATA_EXPORT GeoDataLineStyle : public GeoDataColorStyle
     
      /**
      * @brief Set whether to draw the solid background
-     * @param bool
+     * @param background @c true if the background should be solid
      */
     void setBackground( bool background );
     

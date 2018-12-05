@@ -25,6 +25,7 @@ class FileStoragePolicy : public StoragePolicy
          * Creates a new file storage policy.
          *
          * @param dataDirectory The directory where the data should go to.
+         * @param parent The parent object.
          */
         explicit FileStoragePolicy( const QString &dataDirectory = QString(), QObject *parent = nullptr );
 

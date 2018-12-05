@@ -31,8 +31,8 @@ class GeoDataStyleSelectorPrivate;
  * derived from StyleSelector is uniquely identified by its id and its
  * url.
  *
- * @See GeoDataStyle
- * @See GeoDataStyleMap
+ * @sa GeoDataStyle
+ * @sa GeoDataStyleMap
  */
 class GEODATA_EXPORT GeoDataStyleSelector : public GeoDataObject
 {

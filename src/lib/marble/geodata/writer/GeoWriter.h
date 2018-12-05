@@ -50,19 +50,19 @@ public:
     void setDocumentType( const QString& documentType );
 
     /**
-     * @brief Convenience method to write <key>value</key> with key prefixed format
+     * @brief Convenience method to write \<key\>value\</key\> with key prefixed format
      * @p namespaceUri
      */
     void writeElement( const QString &namespaceUri, const QString &key, const QString &value );
 
     /**
-     * @brief Convenience method to write <key>value</key>
+     * @brief Convenience method to write \<key\>value\</key\>
      *
      **/
     void writeElement( const QString &key, const QString &value );
 
     /**
-     * @brief Convenience method to write <key>value</key> if value is
+     * @brief Convenience method to write \<key\>value\</key\> if value is
      *   not equal to defaultValue. Otherwise, nothing is written.
      *
      **/

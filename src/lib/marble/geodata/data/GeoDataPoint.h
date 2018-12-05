@@ -59,7 +59,7 @@ class GEODATA_EXPORT GeoDataPoint : public GeoDataGeometry
      * @param lon longitude
      * @param lat latitude
      * @param alt altitude (default: 0)
-     * @param unit units that lon and lat get measured in
+     * @param _unit units that lon and lat get measured in
      * (default for Radian: north pole at pi/2, southpole at -pi/2)
      */
     GeoDataPoint( qreal lon, qreal lat, qreal alt = 0,

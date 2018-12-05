@@ -86,6 +86,7 @@ class MARBLE_EXPORT BookmarkManager : public QObject
 
     /**
       * @brief add a folder
+      * @param container geodata container
       * @param name name of folder to be created
       * @return pointer to the newly added folder
       */

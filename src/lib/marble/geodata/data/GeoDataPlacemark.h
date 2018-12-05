@@ -535,9 +535,9 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
 
     /**
      * Sets the symbol @p category of the placemark.
-     * @param category  the new category to be used.
+     * @param index  the new category to be used.
      */
-    void setVisualCategory(GeoDataVisualCategory category);
+    void setVisualCategory(GeoDataVisualCategory index);
 
     /**
      * Return the coordinates of the placemark at time @p dateTime as a GeoDataCoordinates

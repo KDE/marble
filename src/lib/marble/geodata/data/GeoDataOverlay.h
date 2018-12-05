@@ -56,7 +56,7 @@ class GEODATA_EXPORT GeoDataOverlay: public GeoDataFeature
     /**
       * Returns the #iconFile as an absolute filename. Relative files are
       * resolved relative to the directory of the GeoDataDocument this overlay
-      * is part of (see #fileName of #GeoDataDocument)
+      * is part of (@see fileName of GeoDataDocument)
       */
     QString absoluteIconFile() const;
 

@@ -33,6 +33,7 @@ public:
      * @see https://developers.google.com/kml/documentation/extendeddata#opaquedata
      *
      * The custom schema has the following structure ( most complex one, for polygons ):
+     *@code
      *<Placemark>
      *    ...
      *    <ExtendedData xmlns:mx="http://marble.kde.org">
@@ -59,6 +60,7 @@ public:
      *        </mx:OsmPlacemarkData>
      *    </ExtendedData>
      * </Placemark>
+     *@endcode
      */
      static bool write( const GeoDataFeature *feature, GeoWriter& writer );
      static bool writeOsmData( const GeoDataGeometry *geometry, const OsmPlacemarkData &osmData, GeoWriter& writer );

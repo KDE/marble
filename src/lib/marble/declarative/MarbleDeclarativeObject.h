@@ -39,7 +39,7 @@ public Q_SLOTS:
      * @param path Relative path to a file installed in Marble's data path
      * @return The absolute path to the given file, or an empty string if the
      * relative path cannot be resolved
-     * @see #MarbleDirs
+     * @see MarbleDirs
      */
     QString resolvePath( const QString &path ) const;
 

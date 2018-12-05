@@ -302,7 +302,8 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     /**
      * @brief Signal that the MarbleModel has started to create a new set of tiles.
-     * @param
+     * @param name name of the set
+     * @param description the set description
      */
     void creatingTilesStart( TileCreator*, const QString& name, const QString& description );
 

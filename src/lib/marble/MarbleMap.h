@@ -201,6 +201,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @param y      the y coordinate of the pixel
      * @param lon    the longitude angle is returned through this parameter
      * @param lat    the latitude angle is returned through this parameter
+     * @param unit   the angle units
      * @return @c true  if the pixel (x, y) is within the globe
      *         @c false if the pixel (x, y) is outside the globe, i.e. in space.
      */
@@ -502,6 +503,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
     /**
      * @brief  Sets the value of a map theme property
+     * @param  name   name of the property
      * @param  value  value of the property (usually: visibility)
      * 
      * Later on we might add a "setPropertyType and a QVariant

@@ -92,6 +92,7 @@ public:
      * This method sets custom @p html for its window
      *
      * @param html custom html for popup
+     * @param baseUrl base URL for popup
      */
     void setContent( const QString &html, const QUrl & baseUrl = QUrl() );
 

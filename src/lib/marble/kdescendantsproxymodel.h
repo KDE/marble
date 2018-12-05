@@ -37,8 +37,6 @@ A KDescendantsProxyModel may be used to alter how the items in the tree are pres
 
 Given a model which is represented as a tree:
 
-\image html entitytreemodel.png "A plain EntityTreeModel in a view"
-
 The KDescendantsProxyModel restructures the sourceModel to represent it as a flat list.
 
 @code
@@ -47,8 +45,6 @@ KDescendantsProxyModel *descProxy = new KDescendantsProxyModel(this);
 descProxy->setSourceModel(entityTree);
 view->setModel(descProxy);
 @endcode
-
-\image html descendantentitiesproxymodel.png "A KDescendantsProxyModel."
 
 KDescendantEntitiesProxyModel can also display the ancestors of the index in the source model as part of its display.
 
@@ -64,8 +60,6 @@ descProxy->setDisplayAncestorSeparator(QString(" / "));
 view->setModel(descProxy);
 
 @endcode
-
-\image html descendantentitiesproxymodel-withansecnames.png "A KDescendantsProxyModel with ancestor names."
 
 @since 4.6
 @author Stephen Kelly <steveire@gmail.com>

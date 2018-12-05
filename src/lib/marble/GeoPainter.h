@@ -490,6 +490,7 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     Unlike in QPainter::drawRoundedRect() the rounded corners are not specified
     in percentage but in pixels to provide for optimal aesthetics.
 
+    \param centerPosition Position of rectangle center
     \param width Width of the rectangle in pixels
     \param height Height of the rectangle in pixels
     \param xRnd Specifies the geometry of the rounded corners in pixels along
