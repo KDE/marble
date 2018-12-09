@@ -18,20 +18,23 @@
 namespace Marble
 {
 
-GeoDataExtendedData::GeoDataExtendedData()
-    : GeoDataObject(), d( new GeoDataExtendedDataPrivate )
+GeoDataExtendedData::GeoDataExtendedData() :
+    GeoNode(),
+    Serializable(),
+    d(new GeoDataExtendedDataPrivate)
 {
 }
 
-GeoDataExtendedData::GeoDataExtendedData( const GeoDataExtendedData& other )
-    : GeoDataObject( other ), d( new GeoDataExtendedDataPrivate( *other.d ) )
+GeoDataExtendedData::GeoDataExtendedData(const GeoDataExtendedData &other) :
+    GeoNode(other),
+    Serializable(),
+    d(new GeoDataExtendedDataPrivate(*other.d))
 {
 }
 
 bool GeoDataExtendedData::operator==( const GeoDataExtendedData& other ) const
 {
-    return equals(other) &&
-           d->hash == other.d->hash &&
+    return d->hash == other.d->hash &&
            d->arrayHash == other.d->arrayHash;
 }
 
@@ -43,7 +46,7 @@ GeoDataExtendedData::~GeoDataExtendedData()
 
 GeoDataExtendedData& GeoDataExtendedData::operator=( const GeoDataExtendedData& other )
 {
-    GeoDataObject::operator=( other );
+    GeoNode::operator=(other);
     *d = *other.d;
     return *this;
 }
@@ -138,12 +141,12 @@ QList<GeoDataSchemaData> GeoDataExtendedData::schemaDataList() const
 
 void GeoDataExtendedData::pack( QDataStream& stream ) const
 {
-    GeoDataObject::pack( stream );
+    Q_UNUSED(stream)
 }
 
 void GeoDataExtendedData::unpack( QDataStream& stream )
 {
-    GeoDataObject::unpack( stream );
+    Q_UNUSED(stream)
 }
 
 }

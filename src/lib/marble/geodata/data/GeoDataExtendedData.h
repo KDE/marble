@@ -12,7 +12,8 @@
 #ifndef MARBLE_GEODATAEXTENDEDDATA_H
 #define MARBLE_GEODATAEXTENDEDDATA_H
 
-#include "GeoDataObject.h"
+#include "GeoDocument.h"
+#include "Serializable.h"
 
 #include "geodata_export.h"
 #include <QHash>
@@ -31,7 +32,7 @@ class GeoDataExtendedDataPrivate;
  *
  * @see GeoDataData
  */
-class GEODATA_EXPORT GeoDataExtendedData : public GeoDataObject
+class GEODATA_EXPORT GeoDataExtendedData : public GeoNode, public Serializable
 {
   public:
     GeoDataExtendedData();
