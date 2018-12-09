@@ -26,7 +26,7 @@ static GeoTagWriterRegistrar s_writerAnimatedUpdate( GeoTagWriter::QualifiedName
 
 bool KmlAnimatedUpdateTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
 {
-    Q_ASSERT(geodata_cast<GeoDataAnimatedUpdate>(node));
+    Q_ASSERT(dynamic_cast<const GeoDataAnimatedUpdate *>(node));
     const GeoDataAnimatedUpdate *animUpdate = static_cast<const GeoDataAnimatedUpdate*>( node );
     writer.writeStartElement( kml::kmlTag_nameSpaceGx22, kml::kmlTag_AnimatedUpdate );
     KmlObjectTagWriter::writeIdentifiers( writer, animUpdate );

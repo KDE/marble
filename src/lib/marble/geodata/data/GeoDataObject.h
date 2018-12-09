@@ -109,7 +109,7 @@ public:
  * @return the given node as type T if cast is successful, otherwise 0
  */
 template<typename T>
-T *geodata_cast(GeoNode *node)
+T *geodata_cast(GeoDataObject *node)
 {
     if (node == nullptr) {
         return nullptr;
@@ -130,7 +130,7 @@ T *geodata_cast(GeoNode *node)
  * @return the given node as type const T if cast is successful, otherwise 0
  */
 template<typename T>
-const T *geodata_cast(const GeoNode *node)
+const T *geodata_cast(const GeoDataObject *node)
 {
     if (node == nullptr) {
         return nullptr;

@@ -41,7 +41,9 @@ KmlFeatureTagWriter::KmlFeatureTagWriter(const QString &elementName)
 
 bool KmlFeatureTagWriter::write( const Marble::GeoNode *node, GeoWriter &writer ) const
 {
-    if (const GeoDataDocument *document = geodata_cast<GeoDataDocument>(node)) {
+    const GeoDataFeature *feature = static_cast<const GeoDataFeature*>(node);
+
+    if (const GeoDataDocument *document = geodata_cast<GeoDataDocument>(feature)) {
         // when a document has only one feature and no styling
         // the document tag is excused
         if( (document->id().isEmpty())
@@ -58,7 +60,6 @@ bool KmlFeatureTagWriter::write( const Marble::GeoNode *node, GeoWriter &writer 
 
     writer.writeStartElement( m_elementName );
 
-    GeoDataFeature const *feature = static_cast<const GeoDataFeature*>(node);
     KmlObjectTagWriter::writeIdentifiers( writer, feature );
 
     writer.writeOptionalElement( kml::kmlTag_name, feature->name() );
