@@ -20,7 +20,6 @@
 #include "GeoDataLineStyle.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataPolyStyle.h"
-#include "GeoDataTypes.h"
 #include "OsmPlacemarkData.h"
 #include "MarbleDebug.h"
 #include "ViewportParams.h"

@@ -12,7 +12,6 @@
 
 #include "MarbleDebug.h"
 #include "ViewportParams.h"
-#include "GeoDataTypes.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataLinearRing.h"
 #include "GeoDataPolygon.h"

@@ -18,7 +18,6 @@
 #include <osm/OsmPlacemarkData.h>
 #include "GeoDataStyle.h"
 #include "GeoDataIconStyle.h"
-#include "GeoDataTypes.h"
 #include "GeoDataDocument.h"
 
 namespace Marble {

@@ -16,7 +16,6 @@
 #include "osm/OsmObjectManager.h"
 #include "GeoDataDocument.h"
 #include "GeoDataPoint.h"
-#include "GeoDataTypes.h"
 #include "GeoDataStyle.h"
 #include "GeoDataPolyStyle.h"
 #include <MarbleZipReader.h>

@@ -29,7 +29,6 @@
 
 #include <marble/GeoDataDocument.h>
 #include <marble/GeoDataPlacemark.h>
-#include <marble/GeoDataTypes.h>
 
 namespace Marble
 {
