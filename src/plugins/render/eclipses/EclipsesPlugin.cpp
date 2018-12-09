@@ -11,6 +11,7 @@
 #include "EclipsesPlugin.h"
 
 #include "MarbleWidget.h"
+#include "MarbleColors.h"
 #include "MarbleDebug.h"
 #include "MarbleModel.h"
 #include "MarbleClock.h"

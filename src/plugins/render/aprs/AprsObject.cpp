@@ -12,6 +12,7 @@
 
 #include <QPixmap>
 
+#include "MarbleColors.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "GeoDataLineString.h"

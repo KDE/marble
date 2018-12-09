@@ -25,6 +25,7 @@
 #include <GeoDataExtendedData.h>
 #include <GeoDataData.h>
 #include <geodata/handlers/kml/KmlElementDictionary.h>
+#include <MarbleColors.h>
 
 #include <QDebug>
 #include <QTime>

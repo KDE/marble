@@ -14,6 +14,7 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataData.h"
 #include "GeoDataExtendedData.h"
+#include "MarbleColors.h"
 #include "MarbleDirs.h"
 
 #include <QMap>

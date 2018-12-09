@@ -12,6 +12,7 @@
 
 #include "PlanetFactory.h"
 #include "Planet.h"
+#include "MarbleColors.h"
 #include "MarbleDebug.h"
 #include "MarbleGlobal.h"
 

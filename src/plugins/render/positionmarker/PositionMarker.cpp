@@ -24,6 +24,7 @@
 #include <cmath>
 
 #include "ui_PositionMarkerConfigWidget.h"
+#include "MarbleColors.h"
 #include "MarbleModel.h"
 #include "MarbleDirs.h"
 #include "GeoPainter.h"

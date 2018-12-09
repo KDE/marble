@@ -16,6 +16,7 @@
 #include "SatellitesTLEItem.h"
 
 #include "MarbleClock.h"
+#include "MarbleColors.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
 #include "GeoDataIconStyle.h"

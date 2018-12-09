@@ -24,6 +24,7 @@
 #include "GeoDataParser.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataTreeModel.h"
+#include "MarbleColors.h"
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
 #include "PositionTracking.h"

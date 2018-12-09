@@ -13,6 +13,7 @@
 #include "GeoDataCoordinates.h"
 #include "GeoDataLineString.h"
 #include "GeoPainter.h"
+#include "MarbleColors.h"
 #include "MarblePlacemarkModel.h"
 #include "MarbleWidget.h"
 #include "MarbleWidgetPopupMenu.h"

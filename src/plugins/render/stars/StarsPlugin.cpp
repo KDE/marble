@@ -22,6 +22,7 @@
 #include <qmath.h>
 
 #include "MarbleClock.h"
+#include "MarbleColors.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "MarbleModel.h"

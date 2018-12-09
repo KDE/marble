@@ -20,6 +20,7 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataTreeModel.h"
 #include "ViewportParams.h"
+#include "MarbleColors.h"
 #include "MarbleDirs.h"
 #include "ElevationModel.h"
 #include "MarbleGraphicsGridLayout.h"

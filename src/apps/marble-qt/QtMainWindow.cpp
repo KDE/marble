@@ -73,6 +73,7 @@
 #include "PositionTracking.h"
 #include "PositionProviderPlugin.h"
 #include "PluginManager.h"
+#include "MarbleColors.h"
 #include "MapThemeDownloadDialog.h"
 #include "MapWizard.h"
 #include "MarbleWidgetInputHandler.h"

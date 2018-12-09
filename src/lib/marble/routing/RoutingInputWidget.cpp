@@ -31,6 +31,7 @@
 #include "PositionTracking.h"
 #include "ReverseGeocodingRunnerManager.h"
 #include "SearchRunnerManager.h"
+#include "MarbleColors.h"
 #include "MarbleLineEdit.h"
 #include "GoToDialog.h"
 

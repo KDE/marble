@@ -23,6 +23,7 @@
 #include "GeoDataLineString.h"
 #include "GeoDataPlacemark.h"
 #include "ViewportParams.h"
+#include "MarbleColors.h"
 #include "MergingPolylineNodesAnimation.h"
 #include "osm/OsmPlacemarkData.h"
 

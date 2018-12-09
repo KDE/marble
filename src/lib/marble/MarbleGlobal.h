@@ -18,7 +18,6 @@
 #include <QString>
 
 #include "marble_export.h"
-#include "MarbleColors.h"
 
 // #define QT_STRICT_ITERATORS
 

@@ -10,6 +10,7 @@
 
 #include "RouteRelationModel.h"
 
+#include "MarbleColors.h"
 #include "MarbleDirs.h"
 #include "osm/OsmPlacemarkData.h"
 #include "GeoDataColorStyle.h"

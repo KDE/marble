@@ -27,6 +27,7 @@
 #include "geodata/data/GeoDataExtendedData.h"
 #include "geodata/writer/GeoWriter.h"
 #include "geodata/handlers/kml/KmlElementDictionary.h"
+#include "MarbleColors.h"
 
 using namespace Marble;
 

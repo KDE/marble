@@ -22,6 +22,7 @@
 #include <MarbleZipReader.h>
 #include "o5mreader.h"
 
+#include <QColor>
 #include <QFile>
 #include <QFileInfo>
 #include <QBuffer>

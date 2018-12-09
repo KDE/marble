@@ -11,11 +11,13 @@
 #ifndef GEODATALISTSTYLE_H
 #define GEODATALISTSTYLE_H
 
-#include <QVector>
-
 #include "MarbleGlobal.h"
 #include "GeoDataObject.h"
 #include "geodata_export.h"
+
+#include <QColor>
+#include <QVector>
+
 
 namespace Marble
 {

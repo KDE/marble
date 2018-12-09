@@ -33,6 +33,7 @@
 #include "GeoDataLineStyle.h"
 #include "GeoDataStyleMap.h"
 #include "GeoDataHotSpot.h"
+#include "MarbleColors.h"
 #include "MarbleDirs.h"
 #include "MarbleGlobal.h"
 

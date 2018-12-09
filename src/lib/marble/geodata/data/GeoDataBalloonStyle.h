@@ -15,6 +15,8 @@
 #include "GeoDataColorStyle.h"
 #include "geodata_export.h"
 
+#include <QColor>
+
 namespace Marble
 {
 

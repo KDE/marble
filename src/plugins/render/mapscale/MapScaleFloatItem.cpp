@@ -21,6 +21,7 @@
 #include <QToolTip>
 
 #include "ui_MapScaleConfigWidget.h"
+#include "MarbleColors.h"
 #include "MarbleDebug.h"
 #include "MarbleGlobal.h"
 #include "projections/AbstractProjection.h"

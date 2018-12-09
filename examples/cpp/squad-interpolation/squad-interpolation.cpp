@@ -19,6 +19,7 @@
 #include <marble/GeoDataTreeModel.h>
 #include <marble/MarblePlacemarkModel.h>
 #include <marble/GeoDataLinearRing.h>
+#include <marble/MarbleColors.h>
 #include <marble/MarbleMath.h>
 #include <marble/ViewportParams.h>
 

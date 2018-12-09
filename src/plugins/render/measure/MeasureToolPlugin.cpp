@@ -18,6 +18,7 @@
 
 #include "GeoPainter.h"
 #include "GeoDataLinearRing.h"
+#include "MarbleColors.h"
 #include "MarbleDebug.h"
 #include "MarbleWidgetPopupMenu.h"
 #include "MarbleModel.h"

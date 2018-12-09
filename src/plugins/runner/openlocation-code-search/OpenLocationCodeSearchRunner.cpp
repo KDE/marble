@@ -10,6 +10,7 @@
 
 //self
 #include "OpenLocationCodeSearchRunner.h"
+
 #include "GeoDataPlacemark.h"
 #include "GeoDataLinearRing.h"
 #include "GeoDataPolygon.h"
@@ -18,6 +19,7 @@
 #include "GeoDataPolyStyle.h"
 
 //Qt
+#include <QColor>
 #include <QVector>
 
 namespace Marble
