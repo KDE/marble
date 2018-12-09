@@ -43,7 +43,7 @@ bool KmlPlaylistTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
     return true;
 }
 
-void KmlPlaylistTagWriter::writeTourPrimitive(const GeoNode *primitive, GeoWriter &writer)
+void KmlPlaylistTagWriter::writeTourPrimitive(const GeoDataTourPrimitive *primitive, GeoWriter &writer)
 {
 
     if (const auto tourControl = geodata_cast<GeoDataTourControl>(primitive)) {

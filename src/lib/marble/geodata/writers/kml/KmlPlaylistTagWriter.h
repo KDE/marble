@@ -26,7 +26,7 @@ public:
     bool write( const GeoNode *node, GeoWriter& writer ) const override;
 
 private:
-    static void writeTourPrimitive(const GeoNode *primitive, GeoWriter &writer);
+    static void writeTourPrimitive(const GeoDataTourPrimitive *primitive, GeoWriter &writer);
     static void writeTourControl(const GeoDataTourControl &tourControl, GeoWriter& writer );
     static void writeWait(const GeoDataWait &wait, GeoWriter &writer);
     static void writeSoundCue(const GeoDataSoundCue &cue, GeoWriter &writer);
