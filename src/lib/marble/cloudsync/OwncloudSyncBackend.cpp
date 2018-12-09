@@ -26,7 +26,6 @@
 #include "CloudRouteModel.h"
 #include "GeoDataPlacemark.h"
 #include "CloudSyncManager.h"
-#include "GeoDataTypes.h"
 #include "GeoDataExtendedData.h"
 #include "GeoDataData.h"
 
@@ -142,14 +141,14 @@ void OwncloudSyncBackend::uploadRoute( const QString &timestamp )
         return;
     }
 
-    GeoDataDocument *doc = dynamic_cast<GeoDataDocument*>(root->child(1));
-    if (!doc || doc->nodeType() != GeoDataTypes::GeoDataDocumentType || doc->size() < 1) {
+    GeoDataDocument *doc = geodata_cast<GeoDataDocument>(root->child(1));
+    if (!doc || doc->size() < 1) {
         mDebug() << "[OwncloudSyncBackend] Tracking document is broken";
         return;
     }
 
-    GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(doc->child(0));
-    if (!placemark || placemark->nodeType() != GeoDataTypes::GeoDataPlacemarkType) {
+    GeoDataPlacemark *placemark = geodata_cast<GeoDataPlacemark>(doc->child(0));
+    if (!placemark) {
         mDebug() << "[OwncloudSyncBackend] Placemark is broken";
         return;
     }
