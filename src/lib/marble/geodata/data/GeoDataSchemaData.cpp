@@ -33,7 +33,7 @@ public:
 
     QString m_schemaUrl;
     QHash<QString, GeoDataSimpleData> m_simpleData;   // Map for name and SimpleData
-    GeoNode *m_parent;
+    GeoDataExtendedData *m_parent;
 };
 
 GeoDataSchemaData::GeoDataSchemaData()
@@ -108,17 +108,17 @@ QList<GeoDataSimpleData> GeoDataSchemaData::simpleDataList() const
     return d->m_simpleData.values();
 }
 
-void GeoDataSchemaData::setParent( GeoNode *parent )
+void GeoDataSchemaData::setParent(GeoDataExtendedData *parent)
 {
     d->m_parent = parent;
 }
 
-const GeoNode *GeoDataSchemaData::parent() const
+const GeoDataExtendedData *GeoDataSchemaData::parent() const
 {
     return d->m_parent;
 }
 
-GeoNode *GeoDataSchemaData::parent()
+GeoDataExtendedData *GeoDataSchemaData::parent()
 {
     return d->m_parent;
 }

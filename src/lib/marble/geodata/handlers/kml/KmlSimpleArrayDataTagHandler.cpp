@@ -42,13 +42,11 @@ GeoNode* KmlSimpleArrayDataTagHandler::parse( GeoParser& parser ) const
     }
 
     if ( parentItem.is<GeoDataSchemaData>() ) {
-        GeoNode *parent = parentItem.nodeAs<GeoDataSchemaData>()->parent();
-        if (GeoDataExtendedData *extendedData = geodata_cast<GeoDataExtendedData>(parent)) {
-            GeoDataSimpleArrayData *arrayData = new GeoDataSimpleArrayData;
-            const QString name = parser.attribute("name").trimmed();
-            extendedData->setSimpleArrayData(name, arrayData);
-            return arrayData;
-        }
+        GeoDataExtendedData *extendedData = parentItem.nodeAs<GeoDataSchemaData>()->parent();
+        GeoDataSimpleArrayData *arrayData = new GeoDataSimpleArrayData;
+        const QString name = parser.attribute("name").trimmed();
+        extendedData->setSimpleArrayData(name, arrayData);
+        return arrayData;
     }
 
     return nullptr;

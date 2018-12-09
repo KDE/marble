@@ -22,6 +22,7 @@
 namespace Marble
 {
 
+class GeoDataExtendedData;
 class GeoDataSchemaDataPrivate;
 class GeoDataSimpleData;
 
@@ -65,13 +66,13 @@ public:
     /*
      * @brief Set the parent @parent
      */
-    void setParent( GeoNode *parent );
+    void setParent(GeoDataExtendedData *parent);
 
     /*
      * @brief Get the parent
      */
-    const GeoNode *parent() const;
-    GeoNode *parent();
+    const GeoDataExtendedData *parent() const;
+    GeoDataExtendedData *parent();
 
     /*
      * @brief Provides information for downcasting a GeoNode
