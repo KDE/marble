@@ -83,6 +83,7 @@
     <p xml:lang="sv">Marble är en virtuell jordglob och världsatlas - det generella kartverktyget som kan användas för att lära sig mer om jorden och andra planeter.</p>
     <p xml:lang="uk">Marble — віртуальний глобус та атлас світу, — ваш універсальний інструмент для роботи з картами, яким ви можете скористатися для вивчення Землі та інших планет.</p>
     <p xml:lang="x-test">xxMarble is a virtual globe and world atlas — your swiss army knife for maps that you can use to learn more about the Earth and other planets.xx</p>
+    <p xml:lang="zh-CN">Marble 是一个虚拟地球和世界地图集——您的地图的瑞士军刀，可以用来了解地球和其他星球的更多知识。</p>
     <p xml:lang="zh-TW">Marble 是一套虛擬地球儀與世界地圖集 — 如同您的地圖瑞士軍刀，能學習關於地球和其他星球的更多資訊。</p>
     <p>Explore the neighborhood with Marble's rich set of city and street level maps. Search for addresses and places of interest. Marble takes care of querying various search backends and presents their results in a unified view. Calculate pedestrian, bike and motorcar routes with ease — online and offline, with an arbitrary number of via points.</p>
     <p xml:lang="bs">Istražite komšiluk sa bogatim skupom Marble gradskih mapa do nivoa ulice. Tražite adrese i znamenitosti. Marble brine o upitu različitih pretražnih pozadina i predstavlja svoje rezultate u jedinstvenom prikazu. Izračunajte pješačke, biciklističke i automobilske puteve sa lakoćom - sa i bez mreže sa proizvoljnim brojem tačaka preko kojih se prelazi.</p>
@@ -157,6 +158,7 @@
       <caption xml:lang="sv">Jordgloben i Marble</caption>
       <caption xml:lang="uk">Глобус Землі у вікні Marble</caption>
       <caption xml:lang="x-test">xxEarth globe in Marblexx</caption>
+      <caption xml:lang="zh-CN">Marble 中的地球</caption>
       <caption xml:lang="zh-TW">Marble 中的球狀地球</caption>
       <image>https://marble.kde.org/img/gallery/marble-desktop-satellite-clouds.png</image>
     </screenshot>
