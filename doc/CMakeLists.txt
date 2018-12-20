@@ -9,7 +9,7 @@ endif()
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
 include(KDEInstallDirs)
 
-macro_optional_find_package(KF5 ${REQUIRED_KF5_VERSION} QUIET COMPONENTS DocTools)
+macro_optional_find_package(KF5 ${REQUIRED_KF5_MIN_VERSION} QUIET COMPONENTS DocTools)
 
 if(KF5_FOUND)
     kdoctools_create_handbook(index.docbook INSTALL_DESTINATION ${KDE_INSTALL_DOCBUNDLEDIR}/en SUBDIR marble)

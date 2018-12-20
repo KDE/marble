@@ -11,7 +11,7 @@ set(LIB_INSTALL_DIR ${KDE_INSTALL_LIBDIR})
 include(KDECMakeSettings)
 include(ECMInstallIcons)
 
-macro_optional_find_package(KF5 ${REQUIRED_KF5_VERSION} QUIET COMPONENTS Crash NewStuff Parts CoreAddons I18n)
+macro_optional_find_package(KF5 ${REQUIRED_KF5_MIN_VERSION} QUIET COMPONENTS Crash NewStuff Parts CoreAddons I18n)
 
 if(NOT KF5_FOUND)
     return()
@@ -86,7 +86,7 @@ install(FILES marble_worldwind.desktop DESTINATION ${KDE_INSTALL_APPDIR})
 # See toplevel CMakeLists.txt for further explanation why it is done here
 ki18n_install(${CMAKE_SOURCE_DIR}/po)
 
-macro_optional_find_package(KF5 ${REQUIRED_KF5_VERSION} QUIET COMPONENTS DocTools)
+macro_optional_find_package(KF5 ${REQUIRED_KF5_MIN_VERSION} QUIET COMPONENTS DocTools)
 
 if (KF5DocTools_FOUND)
     kdoctools_install(${CMAKE_SOURCE_DIR}/po)

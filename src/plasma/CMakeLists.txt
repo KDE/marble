@@ -13,7 +13,7 @@ set(SERVICES_INSTALL_DIR ${KDE_INSTALL_KSERVICES5DIR})
 set(DATA_INSTALL_DIR ${KDE_INSTALL_DATADIR})
 include(KDECMakeSettings)
 
-macro_optional_find_package(KF5 ${REQUIRED_KF5_VERSION} QUIET COMPONENTS Plasma)
+macro_optional_find_package(KF5 ${REQUIRED_KF5_MIN_VERSION} QUIET COMPONENTS Plasma)
 
 if (NOT KF5_FOUND)
   return()

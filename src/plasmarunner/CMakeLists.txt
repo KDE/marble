@@ -13,7 +13,7 @@ include(KDEInstallDirs)
 set(LIB_INSTALL_DIR ${KDE_INSTALL_LIBDIR})
 include(KDECMakeSettings)
 
-macro_optional_find_package(KF5 ${REQUIRED_KF5_VERSION} QUIET COMPONENTS Runner I18n)
+macro_optional_find_package(KF5 ${REQUIRED_KF5_MIN_VERSION} QUIET COMPONENTS Runner I18n)
 
 if(NOT KF5_FOUND)
   return()
