@@ -266,6 +266,7 @@ class GEODATA_EXPORT GeoDataCoordinates
      * by this point and the other and the prime meridian)
      * @param other The second point that, together with this point, defines a line
      * @param unit Unit of the result
+     * @param type Type of the bearing
      * @return The true bearing in the requested unit, not range normalized,
      * in clockwise direction, with the value 0 corresponding to north
      */
@@ -328,6 +329,7 @@ class GEODATA_EXPORT GeoDataCoordinates
     /**
      * @brief normalize the longitude to always be -M_PI <= lon <= +M_PI (Radian).
      * @param lon longitude
+     * @param unit unit of the result
      */
     static qreal normalizeLon( qreal lon,
                                GeoDataCoordinates::Unit = GeoDataCoordinates::Radian );
@@ -335,6 +337,7 @@ class GEODATA_EXPORT GeoDataCoordinates
     /**
      * @brief normalize latitude to always be in -M_PI / 2. <= lat <= +M_PI / 2 (Radian).
      * @param lat latitude
+     * @param unit unit of the result
      */
     static qreal normalizeLat( qreal lat,
                                GeoDataCoordinates::Unit = GeoDataCoordinates::Radian );
@@ -351,12 +354,14 @@ class GEODATA_EXPORT GeoDataCoordinates
      * normalizeLon() instead.  
      * @param lon the longitude value
      * @param lat the latitude value
+     * @param unit unit of the result
      */
     static void normalizeLonLat( qreal &lon, qreal &lat,
                                  GeoDataCoordinates::Unit = GeoDataCoordinates::Radian );
     
     /**
      * @brief try to parse the string into a coordinate pair
+     * @param string the string
      * @param successful becomes true if the conversion succeeds
      * @return the geodatacoordinates
      */     

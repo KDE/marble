@@ -626,6 +626,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /**
      * @brief  Zoom the view to a certain zoomlevel
      * @param  zoom  the new zoom level.
+     * @param  mode  the FlyToMode that will be used.
      *
      * The zoom level is an abstract value without physical
      * interpretation.  A zoom value around 1000 lets the viewer see
@@ -641,6 +642,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /**
      * @brief  Zoom the view by a certain step
      * @param  zoomStep  the difference between the old zoom and the new
+     * @param  mode  the FlyToMode that will be used.
      */
     void zoomViewBy( int zoomStep, FlyToMode mode = Instant );
 
@@ -663,6 +665,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief  Rotate the view by the two angles phi and theta.
      * @param  deltaLon  an angle that specifies the change in terms of longitude
      * @param  deltaLat  an angle that specifies the change in terms of latitude
+     * @param  mode  the FlyToMode that will be used
      *
      * This function rotates the view by two angles,
      * deltaLon ("theta") and deltaLat ("phi").
@@ -678,6 +681,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      *              +90(N) - -90(S)
      * @param  lon  an angle in degrees parallel to the longitude lines
      *              +180(W) - -180(E)
+     * @param  animated whether to use animation
      */
     void centerOn( const qreal lon, const qreal lat, bool animated = false );
 
@@ -690,6 +694,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * then use @see centerOn(qreal, qreal, bool)
      * @param point the point in 3 dimensions above the globe to move the view
      *              to. It will always be looking vertically down.
+     * @param  animated whether to use animation
      */
     void centerOn( const GeoDataCoordinates &point, bool animated = false );
 
@@ -699,6 +704,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * adjusts the zoom of the marble widget so that the LatLon box provided fills
      * the viewport.
      * @param box The GeoDataLatLonBox to zoom and move the MarbleWidget to.
+     * @param  animated whether to use animation.
      */
     void centerOn( const GeoDataLatLonBox& box, bool animated = false );
 
@@ -793,9 +799,10 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     /**
      * @brief  Sets the value of a map theme property
+     * @param  name   name of the property
      * @param  value  value of the property (usually: visibility)
      * 
-     * Later on we might add a "setPropertyType and a QVariant
+     * Later on we might add a setPropertyType and a QVariant
      * if needed.
      */
     void setPropertyValue( const QString& name, bool value );

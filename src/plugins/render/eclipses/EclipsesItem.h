@@ -58,6 +58,7 @@ public:
     /**
      * @brief Construct the EclipseItem object and trigger basic calculations
      * @param ecl The EclSolar backend
+     * @param index The object index
      * @param parent The parent object
      */
     explicit EclipsesItem( EclSolar *ecl, int index, QObject *parent = nullptr );

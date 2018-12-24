@@ -75,6 +75,7 @@ class GEODATA_EXPORT GeoDataIconStyle : public GeoDataColorStyle
      * for vector graphics like .svg or to keep the memory footprint low when loading large images.
      * @param size Size in pixel that @see icon() should have. When the icon was previously set by #setIcon,
      * it is resized unless a null size is passed. Otherwise icon() will be scaled to the given size.
+     * @param aspectRatioMode Aspect ratio mode.
      */
     void setSize(const QSize &size, Qt::AspectRatioMode aspectRatioMode=Qt::KeepAspectRatio);
 

@@ -70,6 +70,7 @@ class MercatorProjection : public CylindricalProjection
      * @param params the viewport parameters
      * @param x      the x coordinate of the pixel is returned through this parameter
      * @param y      the y coordinate of the pixel is returned through this parameter
+     * @param globeHidesPoint whether the globe hides the point
      * @return @c true  if the geographical coordinates are visible on the screen
      *         @c false if the geographical coordinates are not visible on the screen
      */
@@ -93,8 +94,10 @@ class MercatorProjection : public CylindricalProjection
      *
      * @param x      the x coordinate of the pixel
      * @param y      the y coordinate of the pixel
+     * @param params the viewport parameters
      * @param lon    the longitude angle is returned through this parameter
      * @param lat    the latitude angle is returned through this parameter
+     * @param unit   the unit
      * @return @c true  if the pixel (x, y) is within the globe
      *         @c false if the pixel (x, y) is outside the globe, i.e. in space.
      */

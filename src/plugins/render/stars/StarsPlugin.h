@@ -43,8 +43,9 @@ class StarPoint
 public:
     StarPoint() {}
     /**
-     * @brief create a starpoint from rectaszension and declination
-     * @param  rect rectaszension
+     * @brief create a starpoint from right ascension and declination
+     * @param  id identifier
+     * @param  rect right ascension
      * @param  decl declination
      * @param  mag magnitude
      * (default for Radian: north pole at pi/2, southpole at -pi/2)

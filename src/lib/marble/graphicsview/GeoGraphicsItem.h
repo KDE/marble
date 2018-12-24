@@ -70,6 +70,7 @@ class MARBLE_EXPORT GeoGraphicsItem
 
     /**
      * Set or unset a single flag
+     * @param flag the flag
      * @param enabled sets if the flag is to be set or unset
      */
     void setFlag( GeoGraphicsItemFlag flag, bool enabled = true );

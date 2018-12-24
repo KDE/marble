@@ -42,6 +42,8 @@ class FileManager : public QObject
     /**
      * Creates a new file manager.
      *
+     * @param treeModel The GeoDataTreeModel model.
+     * @param pluginManager The plugin manager.
      * @param parent The parent object.
      */
     explicit FileManager( GeoDataTreeModel *treeModel, const PluginManager *pluginManager, QObject *parent = nullptr );
