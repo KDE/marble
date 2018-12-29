@@ -150,7 +150,7 @@ Kirigami.AbstractApplicationWindow {
             },
             Kirigami.Action{ enabled: false},
             Kirigami.Action {
-                text: "About"
+                text: qsTr("About")
                 iconName: "qrc:///marble.svg"
                 visible: true
                 onTriggered: {
@@ -161,7 +161,7 @@ Kirigami.AbstractApplicationWindow {
                 }
             },
             Kirigami.Action {
-                text: "Bookmarks"
+                text: qsTr("Bookmarks")
                 iconName: "qrc:///material/star.svg"
                 onTriggered: {
                     app.state = "bookmarks"
@@ -170,7 +170,7 @@ Kirigami.AbstractApplicationWindow {
                 }
             },
             Kirigami.Action {
-                text: "Layer Options"
+                text: qsTr("Layer Options")
                 iconName: "qrc:///settings.png"
                 onTriggered: {
                     app.state = "options"
@@ -179,7 +179,7 @@ Kirigami.AbstractApplicationWindow {
                 }
             },
             Kirigami.Action {
-                text: "Routing"
+                text: qsTr("Routing")
                 iconName: "qrc:///material/directions.svg"
                 onTriggered: {
                     app.state = "route"
@@ -207,7 +207,7 @@ Kirigami.AbstractApplicationWindow {
         leftPadding: 0
         rightPadding: 0
         bottomPadding: 0
-        title: "Marble Maps"
+        title: qsTr("Marble Maps")
 
         Item {
             id: mapItem

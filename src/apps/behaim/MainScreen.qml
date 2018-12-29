@@ -86,7 +86,7 @@ Kirigami.ApplicationWindow {
         ]
         actions: [
             Kirigami.Action {
-                text: "Information"
+                text: qsTr("Information")
                 onTriggered: {
                     infoDrawer.open()
                     if(aboutDrawer.drawerOpen){
@@ -95,7 +95,7 @@ Kirigami.ApplicationWindow {
                 }
             },
             Kirigami.Action {
-                text: "About"
+                text: qsTr("About")
                 iconSource: "menu.png"
                 onTriggered: {
                     aboutDrawer.open()
