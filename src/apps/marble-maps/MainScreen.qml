@@ -98,7 +98,7 @@ Kirigami.AbstractApplicationWindow {
 
     globalDrawer: Kirigami.GlobalDrawer {
         id: sidePanel
-        title: "Settings"
+        title: qsTr("Settings")
 
         handleVisible: false
         property alias showAccessibility: accessibilityAction.checked
