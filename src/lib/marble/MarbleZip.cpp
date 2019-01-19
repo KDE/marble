@@ -1104,11 +1104,16 @@ bool MarbleZipWriter::exists() const
 
     The following status values are possible:
 
-    NoError  No error occurred.
-    FileWriteError    An error occurred when writing to the device.
-    FileOpenError    The file could not be opened.
-    FilePermissionsError The file could not be accessed.
-    FileError        Another file error occurred.
+    \var NoError
+    No error occurred.
+    \var FileWriteError
+    An error occurred when writing to the device.
+    \var FileOpenError
+    The file could not be opened.
+    \var FilePermissionsError
+    The file could not be accessed.
+    \var FileError
+    Another file error occurred.
 */
 
 /*!
@@ -1121,11 +1126,14 @@ MarbleZipWriter::Status MarbleZipWriter::status() const
 }
 
 /*!
-    CompressionPolicy
+    \enum CompressionPolicy
 
-    AlwaysCompress   A file that is added is compressed.
-    NeverCompress    A file that is added will be stored without changes.
-    AutoCompress     A file that is added will be compressed only if that will give a smaller file.
+    \var AlwaysCompress
+    A file that is added is compressed.
+    \var NeverCompress
+    A file that is added will be stored without changes.
+    \var AutoCompress
+    A file that is added will be compressed only if that will give a smaller file.
 */
 
 /*!
