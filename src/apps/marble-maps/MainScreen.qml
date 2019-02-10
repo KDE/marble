@@ -72,7 +72,7 @@ Kirigami.AbstractApplicationWindow {
     property bool aboutToQuit: false
 
     onClosing: {
-        if (app.aboutToQuit) {
+        if (app.aboutToQuit || Qt.platform.os !== "android") {
             close.accepted = true // we will quit
             return
         } else if (sidePanel.drawerOpen) {
