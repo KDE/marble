@@ -30,9 +30,11 @@ if (CMAKE_SYSTEM_NAME STREQUAL Android)
         Qt5::AndroidExtras
         Qt5::Multimedia
         Qt5::QuickControls2
-        Qt5::WebEngineWidgets
-        Qt5::WebEngine
     )
+
+    if (TARGET Qt5::WebEngineWidgets)
+        target_link_libraries(${TARGET} Qt5::WebEngineWidgets Qt5::WebEngine)
+    endif()
 else()
     set(TARGET marble-maps)
     add_executable (${TARGET} ${marble_SRCS} ${marble_QRCS})
