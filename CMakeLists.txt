@@ -121,18 +121,13 @@ find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED
 )
 
 if(CMAKE_SYSTEM_NAME STREQUAL Android)
-    find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED
-        COMPONENTS
-            Positioning
-            Multimedia
-    )
+    find_package(Qt5Positioning ${REQUIRED_QT_VERSION} REQUIRED)
+    find_package(Qt5Multimedia ${REQUIRED_QT_VERSION} REQUIRED)
+
    set ( MARBLE_NO_WEBKITWIDGETS TRUE )
 else()
-   find_package(Qt5 ${REQUIRED_QT_VERSION}
-        COMPONENTS
-            WebEngine
-            WebEngineWidgets
-    )
+    find_package(Qt5WebEngine ${REQUIRED_QT_VERSION})
+    find_package(Qt5WebEngineWidgets ${REQUIRED_QT_VERSION})
 
    if ( NOT Qt5WebEngineWidgets_FOUND )
      set ( MARBLE_NO_WEBKITWIDGETS TRUE )
@@ -140,7 +135,7 @@ else()
 endif()
 
 if (BUILD_WITH_DBUS)
-  find_package(Qt5 ${REQUIRED_QT_VERSION} COMPONENTS DBus)
+  find_package(Qt5DBus ${REQUIRED_QT_VERSION})
   if (NOT Qt5DBus_FOUND)
     set(MARBLE_NO_DBUS TRUE)
   endif()
