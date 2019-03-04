@@ -13,6 +13,10 @@ endif()
 CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/config-phonon.h.cmake
                ${CMAKE_CURRENT_BINARY_DIR}/config-phonon.h)
 
+if(MARBLE_NO_WEBKITWIDGETS)
+    add_definitions(-DMARBLE_NO_WEBKITWIDGETS)
+endif()
+
 INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}
  ${CMAKE_CURRENT_BINARY_DIR}
@@ -46,10 +50,6 @@ set(MARBLE_LIB_VERSION "${MARBLE_LIB_VERSION_MAJOR}.${MARBLE_LIB_VERSION_MINOR}.
 set(MARBLE_ABI_VERSION "28")
 
 ########### next target ###############
-
-if(MARBLE_NO_WEBKITWIDGETS)
-add_definitions(-DMARBLE_NO_WEBKITWIDGETS)
-endif()
 
 set(marblewidget_SRCS
     ${geodata_SRCS}
