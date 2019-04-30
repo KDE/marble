@@ -44,7 +44,7 @@ if( BUILD_MARBLE_TESTS )
                                      marblewidget )
     set_target_properties( TestTrack PROPERTIES
                             COMPILE_FLAGS "-DDATA_PATH=\"\\\"${DATA_PATH}\\\"\" -DPLUGIN_PATH=\"\\\"${PLUGIN_PATH}\\\"\"" )
-    add_test( TestTrack TestTrack )
+		    add_test( NAME TestTrack COMMAND TestTrack )
 endif( BUILD_MARBLE_TESTS )
 
 
