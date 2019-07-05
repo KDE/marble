@@ -28,7 +28,7 @@ cat data/legend.html \
         -e 's/<!--[- "&'\''./0-9:;<=>A-Z_a-z]*-->[\t ]*/\n/g' \
         -e 's/<[A-Za-z0-9]*\( [a-z:]*=\"[-A-Za-z0-9:/_.% ]*\"\)*>[\t ]*/\n/g' \
         -e 's/<\/[A-Za-z0-9]*>[\t ]*/\n/g' \
-  | sed -e 's/^ *//' -e 's/ *$//' -e 's/^&nbsp;$//' -e '/^$/d' \
+  | sed -e 's/^ *//' -e 's/ *$//' -e 's/^&nbsp;$//' -e '/^$/d' -e 's/"/\\"/g' \
   | sed -e 's/^\(.*\)$/\/\/: file data\/legend.html\nQCoreApplication::translate(\"Legends\", \"\1\");/' \
   >> rc.cpp
 
