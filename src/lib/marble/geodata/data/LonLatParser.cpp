@@ -109,15 +109,15 @@ void LonLatParser::initAll()
     // u2033: ″ DOUBLE PRIME (seconds)
     // u201D: ” RIGHT DOUBLE QUOTATION MARK
 
-    m_degreeExp = QStringLiteral("\u00B0|\u00BA");
+    m_degreeExp = QStringLiteral(u"\u00B0|\u00BA");
     for(const QString& symbol: m_degreeLocale) {
         m_degreeExp += QLatin1Char('|') + QRegularExpression::escape(symbol);
     }
-    m_minutesExp = QStringLiteral("'|\u2032|\u00B4|\u20C2|\u2019");
+    m_minutesExp = QStringLiteral(u"'|\u2032|\u00B4|\u20C2|\u2019");
     for(const QString& symbol: m_minutesLocale) {
         m_minutesExp += QLatin1Char('|') + QRegularExpression::escape(symbol);
     }
-    m_secondsExp = QStringLiteral("\"|\u2033|\u201D|''|\u2032\u2032|\u00B4\u00B4|\u20C2\u20C2|\u2019\u2019");
+    m_secondsExp = QStringLiteral(u"\"|\u2033|\u201D|''|\u2032\u2032|\u00B4\u00B4|\u20C2\u20C2|\u2019\u2019");
     for(const QString& symbol: m_secondsLocale) {
         m_secondsExp += QLatin1Char('|') + QRegularExpression::escape(symbol);
     }
