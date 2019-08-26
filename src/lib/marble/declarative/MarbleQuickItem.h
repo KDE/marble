@@ -15,6 +15,7 @@
 #include <QSharedPointer>
 #include <QQuickPaintedItem>
 #include "GeoDataAccuracy.h"
+#include "GeoDataLineString.h"
 #include "MarbleGlobal.h"
 #include "PositionProviderPluginInterface.h"
 #include "MarbleMap.h"
@@ -64,6 +65,7 @@ namespace Marble
         Q_PROPERTY(qreal angle READ angle NOTIFY angleChanged)
         Q_PROPERTY(bool inertialGlobeRotation READ inertialGlobeRotation WRITE setInertialGlobeRotation NOTIFY inertialGlobeRotationChanged)
         Q_PROPERTY(bool animationViewContext READ animationViewContext WRITE setAnimationViewContext NOTIFY animationViewContextChanged)
+        Q_PROPERTY(bool animationsEnabled READ animationsEnabled WRITE setAnimationsEnabled NOTIFY animationsEnabledChanged)
         Q_PROPERTY(QQmlComponent* placemarkDelegate READ placemarkDelegate WRITE setPlacemarkDelegate NOTIFY placemarkDelegateChanged)
 
     public:
@@ -126,6 +128,7 @@ namespace Marble
 
         void setInertialGlobeRotation(bool inertialGlobeRotation);
         void setAnimationViewContext(bool animationViewContext);
+        void setAnimationsEnabled(bool animationsEnabled);
 
         void setPluginSetting(const QString &plugin, const QString &key, const QString &value);
 
@@ -146,6 +149,7 @@ namespace Marble
         Q_INVOKABLE void highlightRouteRelation(qint64 osmId, bool enabled);
         Q_INVOKABLE void setRelationTypeVisible(const QString &relationType, bool visible);
         Q_INVOKABLE bool isRelationTypeVisible(const QString &relationType) const;
+
 
     public:
         void paint(QPainter *painter) override;
@@ -182,6 +186,9 @@ namespace Marble
         Q_INVOKABLE qreal angleFromPointToCurrentLocation(const QPoint & position) const;
         Placemark* currentPosition() const;
         Q_INVOKABLE QPointF screenCoordinatesFromCoordinate(Coordinate * coordinate) const;
+        Q_INVOKABLE QPointF screenCoordinatesFromGeoDataCoordinates(const GeoDataCoordinates & coordinates) const;
+        Q_INVOKABLE bool screenCoordinatesFromGeoDataLineString(const GeoDataLineString &lineString, QVector<QPolygonF*> &polygons ) const;
+
         qreal speed() const;
         qreal angle() const;
 
@@ -193,6 +200,8 @@ namespace Marble
 
         bool inertialGlobeRotation() const;
         bool animationViewContext() const;
+        bool animationsEnabled() const;
+
         QQmlComponent* placemarkDelegate() const;
         void reverseGeocoding(const QPoint &point);
 
@@ -227,6 +236,8 @@ namespace Marble
         void inertialGlobeRotationChanged(bool inertialGlobeRotation);
         void animationViewContextChanged(bool animationViewContext);
         void placemarkDelegateChanged(QQmlComponent* placemarkDelegate);
+
+        void animationsEnabledChanged(bool animationsEnabled);
 
     protected:
         QObject *getEventFilter() const;

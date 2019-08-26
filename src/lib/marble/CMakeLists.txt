@@ -477,6 +477,7 @@ endif()
 
 install( FILES
     ${CMAKE_CURRENT_BINARY_DIR}/marble_export.h
+    ${CMAKE_CURRENT_BINARY_DIR}/declarative/marble_declarative_export.h
     ${graphicsview_HDRS}
     ${marble_WebKit}
     AutoNavigation.h
@@ -627,6 +628,9 @@ install( FILES
     routing/RoutingProfile.h
 
     OsmcSymbol.h
+
+
+    declarative/MarbleDeclarativePlugin.h
 
     DESTINATION ${INCLUDE_INSTALL_DIR}/marble
 )

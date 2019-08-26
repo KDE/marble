@@ -228,6 +228,7 @@ namespace Marble
         setRenderTarget(QQuickPaintedItem::FramebufferObject);
         setOpaquePainting(true);
         qRegisterMetaType<Placemark*>("Placemark*");
+        d->m_map.setMapQualityForViewContext(NormalQuality, Animation);
 
         for (AbstractFloatItem *item: d->m_map.floatItems()) {
             if (item->nameId() == QLatin1String("license")) {
@@ -483,6 +484,11 @@ namespace Marble
         return d->m_map.viewContext() == Animation;
     }
 
+    bool MarbleQuickItem::animationsEnabled() const
+    {
+        return d->m_presenter.animationsEnabled();
+    }
+
     QQmlComponent *MarbleQuickItem::placemarkDelegate() const
     {
         return d->m_placemarkDelegate;
@@ -500,6 +506,7 @@ namespace Marble
         d->m_placemark->placemark().setCoordinate(coordinates);
         d->m_reverseGeocoding.reverseGeocoding(coordinates);
     }
+
 
     qreal MarbleQuickItem::speed() const
     {
@@ -562,10 +569,24 @@ namespace Marble
 
     QPointF MarbleQuickItem::screenCoordinatesFromCoordinate(Coordinate * coordinate) const
     {
-        qreal x;
-        qreal y;
-        d->m_map.viewport()->screenCoordinates(coordinate->coordinates(), x, y);
-        return QPointF(x, y);
+        qreal x, y;
+        bool globeHidesPoint;
+        bool const valid = d->m_map.viewport()->screenCoordinates(coordinate->coordinates(), x, y, globeHidesPoint);
+        bool isVisible = valid && !globeHidesPoint;
+        return isVisible ? QPointF(x, y) : QPointF();
+    }
+
+    QPointF MarbleQuickItem::screenCoordinatesFromGeoDataCoordinates(const GeoDataCoordinates & coordinates) const
+    {
+        qreal x, y;
+        bool globeHidesPoint;
+        d->m_map.viewport()->screenCoordinates(coordinates, x, y, globeHidesPoint);
+        return !globeHidesPoint ? QPointF(x, y) : QPointF();
+    }
+
+    bool MarbleQuickItem::screenCoordinatesFromGeoDataLineString(const GeoDataLineString &lineString, QVector<QPolygonF *> &polygons) const
+    {
+        return d->m_map.viewport()->screenCoordinates(lineString, polygons);
     }
 
     void MarbleQuickItem::setRadius(int radius)
@@ -924,6 +945,15 @@ namespace Marble
         d->m_map.setViewContext(animationViewContext ? Animation : Still );
 
         emit inertialGlobeRotationChanged(animationViewContext);
+    }
+
+    void MarbleQuickItem::setAnimationsEnabled(bool animationsEnabled)
+    {
+        if (d->m_presenter.animationsEnabled() == animationsEnabled)
+            return;
+
+        d->m_presenter.setAnimationsEnabled(animationsEnabled);
+        emit animationsEnabledChanged(d->m_presenter.animationsEnabled());
     }
 
     void MarbleQuickItem::setPluginSetting(const QString &pluginId, const QString &key, const QString &value)

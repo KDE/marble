@@ -13,6 +13,8 @@ INCLUDE_DIRECTORIES(
 add_library( marbledeclarative SHARED
     Bookmarks.cpp
     Coordinate.cpp
+    GeoItem.cpp
+    GeoPolyline.cpp
     DeclarativeMapThemeManager.cpp
     MapThemeModel.cpp
     MarbleDeclarativeObject.cpp

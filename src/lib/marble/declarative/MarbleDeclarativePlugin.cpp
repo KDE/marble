@@ -32,6 +32,8 @@
 #include "MarblePlacemarkModel.h"
 #include "SearchBackend.h"
 #include "MarbleQuickItem.h"
+#include "GeoItem.h"
+#include "GeoPolyline.h"
 
 #include <QQmlEngine>
 #include <QQmlContext>
@@ -61,6 +63,9 @@ void MarbleDeclarativePlugin::registerTypes( const char *uri )
     qmlRegisterType<Marble::SearchBackend>(uri, 0, 20, "SearchBackend");
     qRegisterMetaType<Marble::MarblePlacemarkModel*>("MarblePlacemarkModel*");
     qmlRegisterType<Marble::MarbleQuickItem>(uri, 0, 20, "MarbleItem");
+    qmlRegisterType<Marble::GeoItem>(uri, 0, 20, "GeoItem");
+    qmlRegisterType<Marble::GeoPolyline>(uri, 0, 20, "GeoPolyline");
+
 
     qmlRegisterUncreatableType<Marble::MarblePlacemarkModel>(uri, 1, 0, "MarblePlacemarkModel",
                                                              QStringLiteral("MarblePlacemarkModel is not instantiable"));
