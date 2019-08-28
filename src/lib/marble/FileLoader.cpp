@@ -29,6 +29,7 @@
 #include "GeoDataPolyStyle.h"
 #include "GeoDataLineStyle.h"
 #include "GeoDataPolygon.h"
+#include "GeoDataRelation.h"
 #include "GeoDataScreenOverlay.h"
 #include "GeoDataTour.h"
 #include "GeoDataTrack.h"
@@ -251,6 +252,7 @@ void FileLoaderPrivate::createFilterProperties( GeoDataContainer *container )
         if (auto child = dynamic_cast<GeoDataContainer *>(*i)) {
             createFilterProperties( child );
         } else if (geodata_cast<GeoDataTour>(*i)
+                    || geodata_cast<GeoDataRelation>(*i)
                     || geodata_cast<GeoDataGroundOverlay>(*i)
                     || geodata_cast<GeoDataPhotoOverlay>(*i)
                     || geodata_cast<GeoDataScreenOverlay>(*i)) {
