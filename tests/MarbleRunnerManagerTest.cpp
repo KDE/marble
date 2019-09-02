@@ -295,7 +295,7 @@ void MarbleRunnerManagerTest::testSyncParsing_data()
 
     addNamedRow("cache") << QString( MARBLE_SRC_DIR ).append( "/data/placemarks/otherplacemarks.cache" ) << 1;
     addNamedRow("gpx") << QString( MARBLE_SRC_DIR ).append( "/examples/gpx/mjolby.gpx") << 1;
-    //json
+    addNamedRow("json") << QString( MARBLE_SRC_DIR ).append( "/examples/json/rfc7946-example.geojson") << 1;
     addNamedRow("kml") << QString( MARBLE_SRC_DIR ).append( "/examples/kml/NewYork.kml") << 1;
     //log
     addNamedRow("osm") << QString( MARBLE_SRC_DIR ).append( "/examples/osm/map.osm") << 1;
