@@ -1,11 +1,12 @@
 /*
- This file is part of the Marble Virtual Globe.
+    This file is part of the Marble Virtual Globe.
 
- This program is free software licensed under the GNU LGPL. You can
- find a copy of this license in LICENSE.txt in the top directory of
- the source code.
+    This program is free software licensed under the GNU LGPL. You can
+    find a copy of this license in LICENSE.txt in the top directory of
+    the source code.
 
- Copyright 2013 Ander Pijoan <ander.pijoan@deusto.es>
+    Copyright 2013 Ander Pijoan <ander.pijoan@deusto.es>
+    Copyright 2019 John Zaitseff <J.Zaitseff@zap.org.au>
 */
 
 #include "JsonPlugin.h"
@@ -31,7 +32,7 @@ QString JsonPlugin::nameId() const
 
 QString JsonPlugin::version() const
 {
-    return QStringLiteral("1.0");
+    return QStringLiteral("2.0");
 }
 
 QString JsonPlugin::description() const
@@ -41,13 +42,14 @@ QString JsonPlugin::description() const
 
 QString JsonPlugin::copyrightYears() const
 {
-    return QStringLiteral("2012");
+    return QStringLiteral("2012, 2019");
 }
 
 QVector<PluginAuthor> JsonPlugin::pluginAuthors() const
 {
     return QVector<PluginAuthor>()
-            << PluginAuthor(QStringLiteral("Ander Pijoan"), QStringLiteral("ander.pijoan@deusto.es"));
+            << PluginAuthor(QStringLiteral("Ander Pijoan"), QStringLiteral("ander.pijoan@deusto.es"))
+	    << PluginAuthor(QStringLiteral("John Zaitseff"), QStringLiteral("J.Zaitseff@zap.org.au"));
 }
 
 QString JsonPlugin::fileFormatDescription() const
@@ -68,4 +70,3 @@ ParsingRunner* JsonPlugin::newRunner() const
 }
 
 #include "moc_JsonPlugin.cpp"
-
