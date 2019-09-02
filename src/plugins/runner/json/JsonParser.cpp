@@ -1,11 +1,16 @@
 /*
- This file is part of the Marble Virtual Globe.
+    This file is part of the Marble Virtual Globe.
 
- This program is free software licensed under the GNU LGPL. You can
- find a copy of this license in LICENSE.txt in the top directory of
- the source code.
+    The JsonParser class reads in a GeoJSON document that conforms to
+    RFC7946 (including relevant errata).  Attributes are stored as OSM
+    tags.
 
- Copyright 2013 Ander Pijoan <ander.pijoan@deusto.es>
+    This program is free software licensed under the GNU LGPL. You can
+    find a copy of this license in LICENSE.txt in the top directory of
+    the source code.
+
+    Copyright 2013 Ander Pijoan <ander.pijoan@deusto.es>
+    Copyright 2019 John Zaitseff <J.Zaitseff@zap.org.au>
 */
 
 #include "JsonParser.h"
@@ -14,6 +19,7 @@
 #include "GeoDataPolygon.h"
 #include "GeoDataLinearRing.h"
 #include "GeoDataPoint.h"
+#include "GeoDataMultiGeometry.h"
 #include "MarbleDebug.h"
 #include "StyleBuilder.h"
 #include "osm/OsmPlacemarkData.h"
@@ -44,274 +50,316 @@ GeoDataDocument *JsonParser::releaseDocument()
 
 bool JsonParser::read( QIODevice* device )
 {
-    // Assert previous document got released.
+    // Release the previous document if required
     delete m_document;
     m_document = new GeoDataDocument;
     Q_ASSERT( m_document );
 
-    // Read file data
+    // Read JSON file data
     QJsonParseError error;
     const QJsonDocument jsonDoc = QJsonDocument::fromJson(device->readAll(), &error);
 
     if (jsonDoc.isNull()) {
-        qDebug() << "Error parsing GeoJSON : " << error.errorString();
+        qDebug() << "Error parsing GeoJSON:" << error.errorString();
+        return false;
+    } else if (! jsonDoc.isObject()) {
+        qDebug() << "Invalid file, does not contain a GeoJSON object";
         return false;
     }
 
-    // Start parsing
-    const QJsonValue featuresValue = jsonDoc.object().value(QStringLiteral("features"));
+    // Valid GeoJSON documents may not always contain a FeatureCollection object with subsidiary
+    // Feature objects, or even a single Feature object: they might contain just a single geometry
+    // object.  Handle such cases by creating a wrapper Feature object if required.
 
-    // In GeoJSON format, geometries are stored in features, so we iterate on features
-    if (featuresValue.isArray()) {
-        const QJsonArray featureArray = featuresValue.toArray();
+    const QString jsonObjectType = jsonDoc.object().value(QStringLiteral("type")).toString();
 
-        // Parse each feature
+    if (jsonObjectType == QStringLiteral("FeatureCollection")
+        || jsonObjectType == QStringLiteral("Feature")) {
+
+        // A normal GeoJSON document: parse it recursively
+        return parseGeoJsonTopLevel(jsonDoc.object());
+
+    } else {
+        // Create a wrapper Feature object and parse that
+
+        QJsonObject jsonWrapper;
+        QJsonObject jsonWrapperProperties;
+
+        jsonWrapper["type"] = QStringLiteral("Feature");
+        jsonWrapper["geometry"] = jsonDoc.object();
+        jsonWrapper["properties"] = jsonWrapperProperties;
+
+        return parseGeoJsonTopLevel(jsonWrapper);
+    }
+}
+
+bool JsonParser::parseGeoJsonTopLevel( const QJsonObject& jsonObject )
+{
+    // Every GeoJSON object must have a case-sensitive "type" member (see RFC7946 section 3)
+    const QString jsonObjectType = jsonObject.value(QStringLiteral("type")).toString();
+
+    if (jsonObjectType == QStringLiteral("FeatureCollection")) {
+        // Handle the FeatureCollection object, which may contain multiple Feature objects in it
+
+        const QJsonArray featureArray = jsonObject.value(QStringLiteral("features")).toArray();
         for (int featureIndex = 0; featureIndex < featureArray.size(); ++featureIndex) {
-            const QJsonObject featureObject = featureArray[featureIndex].toObject();
-
-            // Check if the feature contains a geometry
-            const QJsonValue geometryValue = featureObject.value(QStringLiteral("geometry"));
-            if (geometryValue.isObject()) {
-                const QJsonObject geometryObject = geometryValue.toObject();
-
-                // Variables for creating the geometry
-                QList<GeoDataGeometry*> geometryList;
-                QList<GeoDataPlacemark*> placemarkList;
-
-                // Create the different geometry types
-                const QString geometryType = geometryObject.value(QStringLiteral("type")).toString().toUpper();
-
-                if (geometryType == QLatin1String("POLYGON")) {
-                    // Check first that there are coordinates
-                    const QJsonValue coordinatesValue = geometryObject.value(QStringLiteral("coordinates"));
-                    if (coordinatesValue.isArray()) {
-                        const QJsonArray coordinateArray = coordinatesValue.toArray();
-
-                        GeoDataPolygon * geom = new GeoDataPolygon( RespectLatitudeCircle | Tessellate );
-
-                        // Coordinates first array will be the outer boundary, if there are more
-                        // positions those will be inner holes
-                        for (int ringIndex = 0 ; ringIndex < coordinateArray.size(); ++ringIndex) {
-                            const QJsonArray ringArray = coordinateArray[ringIndex].toArray();
-
-                            GeoDataLinearRing linearRing;
-
-                            for (int coordinatePairIndex = 0; coordinatePairIndex < ringArray.size(); ++coordinatePairIndex) {
-                                const QJsonArray coordinatePairArray = ringArray[coordinatePairIndex].toArray();
-
-                                const qreal longitude = coordinatePairArray.at(0).toDouble();
-                                const qreal latitude = coordinatePairArray.at(1).toDouble();
-
-                                linearRing.append( GeoDataCoordinates( longitude , latitude , 0 , GeoDataCoordinates::Degree ) );
-                            }
-
-                            // Outer ring
-                            if (ringIndex == 0) {
-                                geom->setOuterBoundary( linearRing );
-                            }
-                            // Inner holes
-                            else {
-                                geom->appendInnerBoundary( linearRing );
-                            }
-                        }
-                        geometryList.append( geom );
-                    }
-
-                } else if (geometryType == QLatin1String("MULTIPOLYGON")) {
-                    // Check first that there are coordinates
-                    const QJsonValue coordinatesValue = geometryObject.value(QStringLiteral("coordinates"));
-                    if (coordinatesValue.isArray()) {
-                        const QJsonArray coordinateArray = coordinatesValue.toArray();
-
-                        for (int polygonIndex = 0; polygonIndex < coordinateArray.size(); ++polygonIndex) {
-                            const QJsonArray polygonArray = coordinateArray[polygonIndex].toArray();
-
-                            GeoDataPolygon * geom = new GeoDataPolygon( RespectLatitudeCircle | Tessellate );
-
-                            // Coordinates first array will be the outer boundary, if there are more
-                            // positions those will be inner holes
-                            for (int ringIndex = 0 ; ringIndex < polygonArray.size(); ++ringIndex) {
-                                const QJsonArray ringArray = polygonArray[ringIndex].toArray();
-
-                                GeoDataLinearRing linearRing;
-
-                                for (int coordinatePairIndex = 0; coordinatePairIndex < ringArray.size(); ++coordinatePairIndex) {
-                                    const QJsonArray coordinatePairArray = ringArray[coordinatePairIndex].toArray();
-
-                                    const qreal longitude = coordinatePairArray.at(0).toDouble();
-                                    const qreal latitude = coordinatePairArray.at(1).toDouble();
-
-                                    linearRing.append( GeoDataCoordinates( longitude , latitude , 0 , GeoDataCoordinates::Degree ) );
-                                }
-
-                                // Outer ring
-                                if (ringIndex == 0) {
-                                    geom->setOuterBoundary( linearRing );
-                                }
-                                // Inner holes
-                                else {
-                                    geom->appendInnerBoundary( linearRing );
-                                }
-                            }
-                            geometryList.append( geom );
-                        }
-                    }
-
-                } else if (geometryType == QLatin1String("LINESTRING")) {
-
-                    // Check first that there are coordinates
-                    const QJsonValue coordinatesValue = geometryObject.value(QStringLiteral("coordinates"));
-                    if (coordinatesValue.isArray()) {
-                        const QJsonArray coordinateArray = coordinatesValue.toArray();
-
-                        GeoDataLineString * geom = new GeoDataLineString( RespectLatitudeCircle | Tessellate );
-
-                        for (int coordinatePairIndex = 0; coordinatePairIndex < coordinateArray.size(); ++coordinatePairIndex) {
-                            const QJsonArray coordinatePairArray = coordinateArray[coordinatePairIndex].toArray();
-
-                            const qreal longitude = coordinatePairArray.at(0).toDouble();
-                            const qreal latitude = coordinatePairArray.at(1).toDouble();
-
-                            geom->append( GeoDataCoordinates( longitude , latitude , 0 , GeoDataCoordinates::Degree ) );
-                        }
-                        geometryList.append( geom );
-                    }
-
-                } else if (geometryType == QLatin1String("MULTILINESTRING")) {
-
-                    // Check first that there are coordinates
-                    const QJsonValue coordinatesValue = geometryObject.value(QStringLiteral("coordinates"));
-                    if (coordinatesValue.isArray()) {
-                        const QJsonArray coordinateArray = coordinatesValue.toArray();
-
-                        for (int lineStringIndex = 0; lineStringIndex < coordinateArray.size(); ++lineStringIndex) {
-                            const QJsonArray lineStringArray = coordinateArray[lineStringIndex].toArray();
-
-                            GeoDataLineString * geom = new GeoDataLineString( RespectLatitudeCircle | Tessellate );
-
-                            for (int coordinatePairIndex = 0; coordinatePairIndex < lineStringArray.size(); ++coordinatePairIndex) {
-                                const QJsonArray coordinatePairArray = lineStringArray[coordinatePairIndex].toArray();
-
-                                const qreal longitude = coordinatePairArray.at(0).toDouble();
-                                const qreal latitude = coordinatePairArray.at(1).toDouble();
-
-                                geom->append( GeoDataCoordinates( longitude , latitude , 0 , GeoDataCoordinates::Degree ) );
-                            }
-                            geometryList.append( geom );
-                        }
-                    }
-
-                } else if (geometryType == QLatin1String("POINT")) {
-
-                    // Check first that there are coordinates
-                    const QJsonValue coordinatesValue = geometryObject.value(QStringLiteral("coordinates"));
-                    if (coordinatesValue.isArray()) {
-                        const QJsonArray coordinatePairArray = coordinatesValue.toArray();
-
-                        GeoDataPoint * geom = new GeoDataPoint();
-
-                        const qreal longitude = coordinatePairArray.at(0).toDouble();
-                        const qreal latitude = coordinatePairArray.at(1).toDouble();
-
-                        geom->setCoordinates( GeoDataCoordinates( longitude , latitude , 0 , GeoDataCoordinates::Degree ) );
-
-                        geometryList.append( geom );
-                    }
-                } else if (geometryType == QLatin1String("MULTIPOINT")) {
-
-                    // Check first that there are coordinates
-                    const QJsonValue coordinatesValue = geometryObject.value(QStringLiteral("coordinates"));
-                    if (coordinatesValue.isArray()) {
-                        const QJsonArray coordinateArray = coordinatesValue.toArray();
-
-                        for (int pointIndex = 0; pointIndex < coordinateArray.size(); ++pointIndex) {
-                            const QJsonArray coordinatePairArray = coordinateArray[pointIndex].toArray();
-
-                            GeoDataPoint * geom = new GeoDataPoint();
-
-                            const qreal longitude = coordinatePairArray.at(0).toDouble();
-                            const qreal latitude = coordinatePairArray.at(1).toDouble();
-
-                            geom->setCoordinates( GeoDataCoordinates( longitude , latitude , 0 , GeoDataCoordinates::Degree ) );
-
-                            geometryList.append( geom );
-                        }
-                    }
-                }
-
-
-                // Parse the features properties
-                const QJsonValue propertiesValue = featureObject.value(QStringLiteral("properties"));
-                if (!geometryList.isEmpty() && propertiesValue.isObject()) {
-                    const QJsonObject propertiesObject = propertiesValue.toObject();
-
-                    // First create a placemark for each geometry, there could be multi geometries
-                    // that are translated into more than one geometry/placemark
-                    for ( int numberGeometries = 0 ; numberGeometries < geometryList.length() ; numberGeometries++ ) {
-                        GeoDataPlacemark * placemark = new GeoDataPlacemark();
-                        placemarkList.append( placemark );
-                    }
-
-                    OsmPlacemarkData osmData;
-
-                    QJsonObject::ConstIterator it = propertiesObject.begin();
-                    const QJsonObject::ConstIterator end = propertiesObject.end();
-                    for ( ; it != end; ++it) {
-                        if (it.value().isObject() || it.value().isArray()) {
-                            qDebug() << "Skipping property, values of type arrays and objects not supported:" << it.key();
-                            continue;
-                        }
-
-                        // pass value through QVariant to also get bool & numbers
-                        osmData.addTag(it.key(), it.value().toVariant().toString());
-                    }
-
-                    // If the property read, is the features name
-                    const auto tagIter = osmData.findTag(QStringLiteral("name"));
-                    if (tagIter != osmData.tagsEnd()) {
-                        const QString& name = tagIter.value();
-                        for (int pl = 0 ; pl < placemarkList.length(); ++pl) {
-                            placemarkList.at(pl)->setName(name);
-                        }
-                    }
-
-                    const GeoDataPlacemark::GeoDataVisualCategory category = StyleBuilder::determineVisualCategory(osmData);
-                    if (category != GeoDataPlacemark::None) {
-                        // Add the visual category to all the placemarks
-                        for (int pl = 0 ; pl < placemarkList.length(); ++pl) {
-                            placemarkList.at(pl)->setVisualCategory(category);
-                            placemarkList.at(pl)->setOsmData(osmData);
-                        }
-                    }
-                }
-
-                // Add the geometry to the document
-                if ( geometryList.length() == placemarkList.length() ) {
-
-                    while( placemarkList.length() > 0 ) {
-
-                        GeoDataPlacemark * placemark = placemarkList.last();
-                        placemarkList.pop_back();
-
-                        GeoDataGeometry * geom = geometryList.last();
-                        geometryList.pop_back();
-
-                        placemark->setGeometry( geom );
-                        placemark->setVisible( true );
-                        m_document->append( placemark );
-                    }
-                }
-
-                // If geometries or placemarks missing inside the lists, delete them
-                qDeleteAll( geometryList.begin(), geometryList.end() );
-                geometryList.clear();
-                qDeleteAll( placemarkList.begin(), placemarkList.end() );
-                placemarkList.clear();
+            if (! parseGeoJsonTopLevel( featureArray[featureIndex].toObject() )) {
+                return false;
             }
         }
+        return true;
+
+    } else if (jsonObjectType == QStringLiteral("Feature")) {
+        // Handle the Feature object, which contains a single geometry object and possibly
+        // associated properties.  Note that only Feature objects can have recognised properties.
+
+        QVector<GeoDataGeometry*> geometryList;     // Populated by parseGeoJsonSubLevel()
+
+        if (! parseGeoJsonSubLevel( jsonObject.value(QStringLiteral("geometry")).toObject(),
+                geometryList )) {
+            return false;
+        }
+
+        // Create the placemark for this feature object with appropriate geometry
+
+        GeoDataPlacemark* placemark = new GeoDataPlacemark();
+
+        if (geometryList.length() < 1) {
+            // No geometries available to add to the placemark
+            ;
+
+        } else if (geometryList.length() == 1) {
+            // Single geometry
+            placemark->setGeometry(geometryList[0]);
+
+        } else {
+            // Multiple geometries require a GeoDataMultiGeometry class
+
+            GeoDataMultiGeometry* geom = new GeoDataMultiGeometry();
+            for (int i = 0; i < geometryList.length(); ++i) {
+                geom->append(geometryList[i]);
+            }
+            placemark->setGeometry(geom);
+        }
+
+        // Parse any associated properties
+
+        const QJsonObject propertiesObject = jsonObject.value(QStringLiteral("properties")).toObject();
+        QJsonObject::ConstIterator iter = propertiesObject.begin();
+	const QJsonObject::ConstIterator end = propertiesObject.end();
+
+	OsmPlacemarkData osmData;
+
+	for ( ; iter != end; ++iter) {
+	    // Pass the value through QVariant to also get booleans and numbers
+	    const QString propertyValue = iter.value().toVariant().toString();
+	    const QString propertyKey = iter.key();
+
+	    if (iter.value().isObject() || iter.value().isArray()) {
+		qDebug() << "Skipping unsupported JSON property containing an object or array:" << propertyKey;
+		continue;
+	    }
+
+	    osmData.addTag(propertyKey, propertyValue);
+
+	    if (propertyKey == QStringLiteral("name")) {
+		placemark->setName(propertyValue);
+	    }
+	}
+
+	placemark->setOsmData(osmData);
+	placemark->setVisible(true);
+
+	const GeoDataPlacemark::GeoDataVisualCategory category =
+	    StyleBuilder::determineVisualCategory(osmData);
+	if (category != GeoDataPlacemark::None) {
+	    placemark->setVisualCategory(category);
+	}
+
+	m_document->append(placemark);
+	return true;
+
+    } else {
+	qDebug() << "Missing FeatureCollection or Feature object in GeoJSON file";
+	return false;
     }
-    return true;
+}
+
+bool JsonParser::parseGeoJsonSubLevel( const QJsonObject& jsonObject,
+				       QVector<GeoDataGeometry*>& geometryList )
+{
+    // The GeoJSON object type
+    const QString jsonObjectType = jsonObject.value(QStringLiteral("type")).toString();
+
+    if (jsonObjectType == QStringLiteral("FeatureCollection")
+	|| jsonObjectType == QStringLiteral("Feature")) {
+
+	qDebug() << "Cannot have FeatureCollection or Feature objects at this level of the GeoJSON file";
+	return false;
+
+    } else if (jsonObjectType == QStringLiteral("GeometryCollection")) {
+	// Handle the GeometryCollection object, which may contain multiple geometry objects
+
+	const QJsonArray geometryArray = jsonObject.value(QStringLiteral("geometries")).toArray();
+	for (int geometryIndex = 0; geometryIndex < geometryArray.size(); ++geometryIndex) {
+	    if (! parseGeoJsonSubLevel( geometryArray[geometryIndex].toObject(), geometryList )) {
+		return false;
+	    }
+	}
+
+	return true;
+    }
+
+    // Handle remaining GeoJSON objects, which each have a "coordinates" member (an array)
+
+    const QJsonArray coordinateArray = jsonObject.value(QStringLiteral("coordinates")).toArray();
+
+    if (jsonObjectType == QStringLiteral("Point")) {
+	// A Point object has a single GeoJSON position: an array of at least two values
+
+	GeoDataPoint* geom = new GeoDataPoint();
+	const qreal lon = coordinateArray.at(0).toDouble();
+	const qreal lat = coordinateArray.at(1).toDouble();
+	const qreal alt = coordinateArray.at(2).toDouble();	// If missing, uses 0 as the default
+
+	geom->setCoordinates( GeoDataCoordinates( lon, lat, alt, GeoDataCoordinates::Degree ));
+	geometryList.append(geom);
+
+	return true;
+
+    } else if (jsonObjectType == QStringLiteral("MultiPoint")) {
+	// A MultiPoint object has an array of GeoJSON positions (ie, a two-level array)
+
+	for (int positionIndex = 0; positionIndex < coordinateArray.size(); ++positionIndex) {
+	    const QJsonArray positionArray = coordinateArray[positionIndex].toArray();
+
+	    GeoDataPoint* geom = new GeoDataPoint();
+	    const qreal lon = positionArray.at(0).toDouble();
+	    const qreal lat = positionArray.at(1).toDouble();
+	    const qreal alt = positionArray.at(2).toDouble();
+
+	    geom->setCoordinates( GeoDataCoordinates( lon, lat, alt, GeoDataCoordinates::Degree ));
+	    geometryList.append(geom);
+	}
+
+	return true;
+
+    } else if (jsonObjectType == QStringLiteral("LineString")) {
+	// A LineString object has an array of GeoJSON positions (ie, a two-level array)
+
+	GeoDataLineString* geom = new GeoDataLineString( RespectLatitudeCircle | Tessellate );
+
+	for (int positionIndex = 0; positionIndex < coordinateArray.size(); ++positionIndex) {
+	    const QJsonArray positionArray = coordinateArray[positionIndex].toArray();
+
+	    const qreal lon = positionArray.at(0).toDouble();
+	    const qreal lat = positionArray.at(1).toDouble();
+	    const qreal alt = positionArray.at(2).toDouble();
+
+	    geom->append( GeoDataCoordinates( lon, lat, alt, GeoDataCoordinates::Degree ));
+	}
+	geometryList.append(geom);
+
+	return true;
+
+    } else if (jsonObjectType == QStringLiteral("MultiLineString")) {
+	// A MultiLineString object has an array of arrays of GeoJSON positions (three-level)
+
+	for (int lineStringIndex = 0; lineStringIndex < coordinateArray.size(); ++lineStringIndex) {
+	    const QJsonArray lineStringArray = coordinateArray[lineStringIndex].toArray();
+
+	    GeoDataLineString* geom = new GeoDataLineString( RespectLatitudeCircle | Tessellate );
+
+	    for (int positionIndex = 0; positionIndex < lineStringArray.size(); ++positionIndex) {
+		const QJsonArray positionArray = lineStringArray[positionIndex].toArray();
+
+		const qreal lon = positionArray.at(0).toDouble();
+		const qreal lat = positionArray.at(1).toDouble();
+		const qreal alt = positionArray.at(2).toDouble();
+
+		geom->append( GeoDataCoordinates( lon, lat, alt, GeoDataCoordinates::Degree ));
+	    }
+	    geometryList.append(geom);
+	}
+
+	return true;
+
+    } else if (jsonObjectType == QStringLiteral("Polygon")) {
+	// A Polygon object has an array of arrays of GeoJSON positions: the first array within the
+	// top-level Polygon coordinates array is the outer boundary, following arrays are inner
+	// holes (if any)
+
+	GeoDataPolygon* geom = new GeoDataPolygon( RespectLatitudeCircle | Tessellate );
+
+	for (int ringIndex = 0; ringIndex < coordinateArray.size(); ++ringIndex) {
+	    const QJsonArray ringArray = coordinateArray[ringIndex].toArray();
+
+	    GeoDataLinearRing linearRing;
+
+	    for (int positionIndex = 0; positionIndex < ringArray.size(); ++positionIndex) {
+		const QJsonArray positionArray = ringArray[positionIndex].toArray();
+
+		const qreal lon = positionArray.at(0).toDouble();
+		const qreal lat = positionArray.at(1).toDouble();
+		const qreal alt = positionArray.at(2).toDouble();
+
+		linearRing.append( GeoDataCoordinates( lon, lat, alt, GeoDataCoordinates::Degree ));
+	    }
+
+	    if (ringIndex == 0) {
+		// Outer boundary of the polygon
+		geom->setOuterBoundary(linearRing);
+	    } else {
+		geom->appendInnerBoundary(linearRing);
+	    }
+	}
+	geometryList.append(geom);
+
+	return true;
+
+    } else if (jsonObjectType == QStringLiteral("MultiPolygon")) {
+	// A MultiPolygon object has an array of Polygon arrays (ie, a four-level array)
+
+	for (int polygonIndex = 0; polygonIndex < coordinateArray.size(); ++polygonIndex) {
+	    const QJsonArray polygonArray = coordinateArray[polygonIndex].toArray();
+
+	    GeoDataPolygon* geom = new GeoDataPolygon( RespectLatitudeCircle | Tessellate );
+
+	    for (int ringIndex = 0; ringIndex < polygonArray.size(); ++ringIndex) {
+		const QJsonArray ringArray = polygonArray[ringIndex].toArray();
+
+		GeoDataLinearRing linearRing;
+
+		for (int positionIndex = 0; positionIndex < ringArray.size(); ++positionIndex) {
+		    const QJsonArray positionArray = ringArray[positionIndex].toArray();
+
+		    const qreal lon = positionArray.at(0).toDouble();
+		    const qreal lat = positionArray.at(1).toDouble();
+		    const qreal alt = positionArray.at(2).toDouble();
+
+		    linearRing.append( GeoDataCoordinates( lon, lat, alt, GeoDataCoordinates::Degree ));
+		}
+
+		if (ringIndex == 0) {
+		    // Outer boundary of the polygon
+		    geom->setOuterBoundary(linearRing);
+		} else {
+		    geom->appendInnerBoundary(linearRing);
+		}
+	    }
+	    geometryList.append(geom);
+	}
+
+	return true;
+
+    } else if (jsonObjectType == QStringLiteral("")) {
+	// Unlocated Feature objects have a null value for "geometry" (RFC7946 section 3.2)
+	return true;
+
+    } else {
+	qDebug() << "Unknown GeoJSON object type" << jsonObjectType;
+	return false;
+    }
 }
 
 }
-

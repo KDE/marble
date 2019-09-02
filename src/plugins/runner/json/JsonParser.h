@@ -1,21 +1,26 @@
 /*
- This file is part of the Marble Virtual Globe.
+    This file is part of the Marble Virtual Globe.
 
- This program is free software licensed under the GNU LGPL. You can
- find a copy of this license in LICENSE.txt in the top directory of
- the source code.
+    This program is free software licensed under the GNU LGPL. You can
+    find a copy of this license in LICENSE.txt in the top directory of
+    the source code.
 
- Copyright 2013 Ander Pijoan <ander.pijoan@deusto.es>
+    Copyright 2013 Ander Pijoan <ander.pijoan@deusto.es>
+    Copyright 2019 John Zaitseff <J.Zaitseff@zap.org.au>
 */
 
 #ifndef MARBLE_JSONPARSER_H
 #define MARBLE_JSONPARSER_H
 
 class QIODevice;
+class QJsonObject;
+
+#include <QVector>
 
 namespace Marble {
 
 class GeoDataDocument;
+class GeoDataGeometry;
 
 class JsonParser
 {
@@ -24,8 +29,8 @@ public:
     ~JsonParser();
 
     /**
-     * @brief parse the json file
-     * @return true if the parsed has been successful
+     * @brief parse the GeoJSON file
+     * @return true if parsing of the file was successful
      */
     bool read(QIODevice*);
 
@@ -39,6 +44,21 @@ public:
 private:
 
     GeoDataDocument* m_document;
+
+    /**
+     * @brief parse a top-level GeoJSON object (FeatureCollection or Feature)
+     * @param jsonObject  the object to parse
+     * @return true if parsing of the top-level object was successful
+     */
+    bool parseGeoJsonTopLevel(const QJsonObject&);
+
+    /**
+      * @brief parse a sub-level GeoJSON object
+      * @param jsonObject    the object to parse
+      * @param geometryList  a list of geometries pass back to the caller
+      * @return true if parsing of the object was successful
+      */
+    bool parseGeoJsonSubLevel(const QJsonObject&, QVector<GeoDataGeometry*>&);
 };
 
 }
