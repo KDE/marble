@@ -2,8 +2,10 @@
     This file is part of the Marble Virtual Globe.
 
     The JsonParser class reads in a GeoJSON document that conforms to
-    RFC7946 (including relevant errata).  Attributes are stored as OSM
-    tags.
+    RFC7946 (including relevant errata) and optionally contains
+    attributes from the Simplestyle specification version 1.1.0
+    ((https://github.com/mapbox/simplestyle-spec).  Attributes are also
+    stored as OSM tags as required.
 
     This program is free software licensed under the GNU LGPL. You can
     find a copy of this license in LICENSE.txt in the top directory of
@@ -28,6 +30,15 @@
 #include <QJsonDocument>
 #include <QJsonArray>
 #include <QJsonObject>
+#include <QApplication>
+#include <QPalette>
+#include <QColor>
+
+#include "GeoDataStyle.h"
+#include "GeoDataIconStyle.h"
+#include "GeoDataLabelStyle.h"
+#include "GeoDataLineStyle.h"
+#include "GeoDataPolyStyle.h"
 
 
 namespace Marble {
@@ -142,6 +153,31 @@ bool JsonParser::parseGeoJsonTopLevel( const QJsonObject& jsonObject )
             placemark->setGeometry(geom);
         }
 
+	// Set default style properties using the Simplestyle specification 1.1.0
+
+	GeoDataStyle::Ptr style(new GeoDataStyle(*(placemark->style())));
+	GeoDataIconStyle iconStyle = style->iconStyle();
+	GeoDataLabelStyle labelStyle = style->labelStyle();
+	GeoDataLineStyle lineStyle = style->lineStyle();
+	GeoDataPolyStyle polyStyle = style->polyStyle();
+
+	// TODO: Handle "marker-size": "medium" and "marker-symbol": ""
+	iconStyle.setColor(QColor("#ff7e7e7e"));  // "marker-color": "#7e7e7e"
+
+	lineStyle.setColor(QColor("#ff555555"));  // "stroke": "#555555" and "stroke-opacity": 1.0
+	lineStyle.setWidth(2.5);		  // "stroke-width": 2 (increased to 2.5 due to
+						  // problems with antialiased lines disappearing
+
+	polyStyle.setColor(QColor("#99555555"));  // "fill": "#555555" and "fill-opacity": 0.6
+
+	// Set visual properties not part of the Simplestyle spec
+
+	labelStyle.setColor(QApplication::palette().brightText().color());
+	labelStyle.setGlow(true);
+
+	polyStyle.setFill(true);
+	polyStyle.setOutline(true);
+
         // Parse any associated properties
 
         const QJsonObject propertiesObject = jsonObject.value(QStringLiteral("properties")).toObject();
@@ -160,12 +196,98 @@ bool JsonParser::parseGeoJsonTopLevel( const QJsonObject& jsonObject )
 		continue;
 	    }
 
-	    osmData.addTag(propertyKey, propertyValue);
-
 	    if (propertyKey == QStringLiteral("name")) {
+		// The "name" property is not defined in the Simplestyle specification, but is used
+		// extensively in the wild.  Treat "name" and "title" essentially the same for the
+		// purposes of placemarks (although osmData tags will preserve the distinction).
+
 		placemark->setName(propertyValue);
+		osmData.addTag(propertyKey, propertyValue);
+
+	    } else if (propertyKey == QStringLiteral("title")) {
+		placemark->setName(propertyValue);
+		osmData.addTag(propertyKey, propertyValue);
+
+	    } else if (propertyKey == QStringLiteral("description")) {
+		placemark->setDescription(propertyValue);
+		osmData.addTag(propertyKey, propertyValue);
+
+	    } else if (propertyKey == QStringLiteral("marker-size")) {
+		// TODO: Implement marker-size handling
+
+	    } else if (propertyKey == QStringLiteral("marker-symbol")) {
+		// TODO: Implement marker-symbol handling
+
+	    } else if (propertyKey == QStringLiteral("marker-color")) {
+		// Even though the Simplestyle spec allows colors to omit the leading "#", this
+		// implementation assumes it is always present, as this then allows named colors
+		// understood by QColor as an extension
+		QColor color = QColor(propertyValue);
+		if (color.isValid()) {
+		    iconStyle.setColor(color);
+		} else {
+		    qDebug() << "Ignoring invalid marker-color property:" << propertyValue;
+		}
+
+	    } else if (propertyKey == QStringLiteral("stroke")) {
+		QColor color = QColor(propertyValue);	// Assume leading "#" is present
+		if (color.isValid()) {
+		    color.setAlpha(lineStyle.color().alpha());
+		    lineStyle.setColor(color);
+		} else {
+		    qDebug() << "Ignoring invalid stroke property:" << propertyValue;
+		}
+
+	    } else if (propertyKey == QStringLiteral("stroke-opacity")) {
+		bool ok;
+		float opacity = propertyValue.toFloat(&ok);
+		if (ok && opacity >= 0.0 && opacity <= 1.0) {
+		    QColor color = lineStyle.color();
+		    color.setAlphaF(opacity);
+		    lineStyle.setColor(color);
+		} else {
+		    qDebug() << "Ignoring invalid stroke-opacity property:" << propertyValue;
+		}
+
+	    } else if (propertyKey == QStringLiteral("stroke-width")) {
+		bool ok;
+		float width = propertyValue.toFloat(&ok);
+		if (ok && width >= 0.0) {
+		    lineStyle.setWidth(width);
+		} else {
+		    qDebug() << "Ignoring invalid stroke-width property:" << propertyValue;
+		}
+
+	    } else if (propertyKey == QStringLiteral("fill")) {
+		QColor color = QColor(propertyValue);	// Assume leading "#" is present
+		if (color.isValid()) {
+		    color.setAlpha(polyStyle.color().alpha());
+		    polyStyle.setColor(color);
+		} else {
+		    qDebug() << "Ignoring invalid fill property:" << propertyValue;
+		}
+
+	    } else if (propertyKey == QStringLiteral("fill-opacity")) {
+		bool ok;
+		float opacity = propertyValue.toFloat(&ok);
+		if (ok && opacity >= 0.0 && opacity <= 1.0) {
+		    QColor color = polyStyle.color();
+		    color.setAlphaF(opacity);
+		    polyStyle.setColor(color);
+		} else {
+		    qDebug() << "Ignoring invalid fill-opacity property:" << propertyValue;
+		}
+
+	    } else {
+		// Property is not defined by the Simplestyle spec
+		osmData.addTag(propertyKey, propertyValue);
 	    }
 	}
+
+	style->setIconStyle(iconStyle);
+	style->setLineStyle(lineStyle);
+	style->setPolyStyle(polyStyle);
+	placemark->setStyle(style);
 
 	placemark->setOsmData(osmData);
 	placemark->setVisible(true);
