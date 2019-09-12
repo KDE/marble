@@ -127,6 +127,15 @@ QString MarbleDirs::systemPath()
 
     QString systempath;
 
+#ifdef MARBLE_DATA_PATH
+    //MARBLE_DATA_PATH is a compiler define set by cmake
+    QString compileTimeMarbleDataPath(MARBLE_DATA_PATH);
+
+    if(QDir(compileTimeMarbleDataPath).exists())
+        return compileTimeMarbleDataPath;
+#endif  // MARBLE_DATA_PATH
+
+
 #ifdef Q_OS_WIN
 	return QCoreApplication::applicationDirPath() + QDir::separator() + QLatin1String("data");
 #endif
@@ -158,14 +167,6 @@ QString MarbleDirs::systemPath()
     return systempath;
 #endif
 
-#ifdef MARBLE_DATA_PATH
-    //MARBLE_DATA_PATH is a compiler define set by cmake
-    QString compileTimeMarbleDataPath(MARBLE_DATA_PATH);
-
-    if(QDir(compileTimeMarbleDataPath).exists())
-        return compileTimeMarbleDataPath;
-#endif  // MARBLE_DATA_PATH
-
     return QDir( QCoreApplication::applicationDirPath() 
 
 // TODO: QTONLY definition was removed during Qt5/KF5 port, check what code should do
@@ -184,6 +185,14 @@ QString MarbleDirs::pluginSystemPath()
     }
 
     QString systempath;
+
+#ifdef MARBLE_PLUGIN_PATH
+    //MARBLE_PLUGIN_PATH is a compiler define set by cmake
+    QString compileTimeMarblePluginPath(MARBLE_PLUGIN_PATH);
+
+    if(QDir(compileTimeMarblePluginPath).exists())
+        return compileTimeMarblePluginPath;
+#endif  // MARBLE_PLUGIN_PATH
 
 #ifdef Q_OS_MACX
     //
@@ -214,14 +223,6 @@ QString MarbleDirs::pluginSystemPath()
 #ifdef Q_OS_ANDROID
     return "assets:/plugins";
 #endif
-
-#ifdef MARBLE_PLUGIN_PATH
-    //MARBLE_PLUGIN_PATH is a compiler define set by cmake
-    QString compileTimeMarblePluginPath(MARBLE_PLUGIN_PATH);
-
-    if(QDir(compileTimeMarblePluginPath).exists())
-        return compileTimeMarblePluginPath;
-#endif  // MARBLE_PLUGIN_PATH
 
     return QDir( QCoreApplication::applicationDirPath() 
 
