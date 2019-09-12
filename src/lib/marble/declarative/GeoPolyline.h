@@ -34,8 +34,6 @@ namespace Marble
         Q_PROPERTY( qreal width READ readonlyWidth NOTIFY readonlyWidthChanged )
         Q_PROPERTY( qreal height READ readonlyHeight NOTIFY readonlyHeightChanged )
 
-        Q_PROPERTY( qreal lineWidth READ lineWidth WRITE setLineWidth NOTIFY lineWidthChanged )
-
         Q_PROPERTY( Marble::MarbleQuickItem* map READ map WRITE setMap NOTIFY mapChanged )
 
         Q_PROPERTY( QVariantList geoCoordinates READ geoCoordinates WRITE setGeoCoordinates NOTIFY geoCoordinatesChanged )
