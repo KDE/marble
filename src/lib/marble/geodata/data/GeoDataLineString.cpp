@@ -742,14 +742,13 @@ void GeoDataLineStringPrivate::toDateLineCorrected(
     GeoDataLineString * dateLineCorrected = isClosed ? new GeoDataLinearRing( f )
                                                      : new GeoDataLineString( f );
 
-    qreal currentLon = 0.0;
     qreal previousLon = 0.0;
     int previousSign = 1;
 
     bool unfinished = false;
 
     for (; itPoint != itEndPoint; ++itPoint ) {
-        currentLon = itPoint->longitude();
+        const qreal currentLon = itPoint->longitude();
 
         int currentSign = ( currentLon < 0.0 ) ? -1 : +1 ;
 
