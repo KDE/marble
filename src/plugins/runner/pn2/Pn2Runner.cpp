@@ -136,9 +136,7 @@ GeoDataDocument *Pn2Runner::parseFile(const QString &fileName, DocumentRole role
 
     switch( m_fileHeaderVersion ) {
         case 1: return parseForVersion1( fileName, role );
-                break;
         case 2: return parseForVersion2( fileName, role );
-                break;
         default: qDebug() << "File can't be parsed. We don't have parser for file header version:" << m_fileHeaderVersion;
                 break;
     }

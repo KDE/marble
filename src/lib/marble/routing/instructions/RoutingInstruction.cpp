@@ -414,7 +414,6 @@ QString RoutingInstruction::generateRoadInstruction( RoutingInstruction::TurnTyp
         case RoundaboutThirdExit:
             Q_ASSERT( false && "Internal error: Unknown/Roundabout should have been handled earlier." );
             return QString();
-            break;
         case ExitLeft:
             return QObject::tr( "Take the exit to the left." );
         case ExitRight:
@@ -450,7 +449,6 @@ QString RoutingInstruction::generateRoadInstruction( RoutingInstruction::TurnTyp
         case RoundaboutThirdExit:
             Q_ASSERT( false && "Internal error: Unknown/Roundabout should have been handled earlier." );
             return QString();
-            break;
         case ExitLeft:
             return QObject::tr( "Take the exit to the left onto %1." ).arg( roadName );
         case ExitRight:

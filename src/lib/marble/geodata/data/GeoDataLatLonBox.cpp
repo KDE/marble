@@ -322,15 +322,12 @@ bool GeoDataLatLonBox::containsPole( Pole pole ) const
     switch ( pole ) {
       case NorthPole:
         return ( 2 * north() == +M_PI );
-        break;
       case SouthPole:
         return ( 2 * south() == -M_PI );
-        break;
       default:
       case AnyPole:
         return (    2 * north() == +M_PI
                  || 2 * south() == -M_PI );
-        break;
     }
 
     mDebug() << Q_FUNC_INFO << "Invalid pole";

@@ -112,38 +112,31 @@ QVariant RoutingModel::data ( const QModelIndex & index, int role ) const
         case Qt::DisplayRole:
         case Qt::ToolTipRole:
             return segment.maneuver().instructionText();
-            break;
         case Qt::DecorationRole:
             {
                 bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
                 if ( segment.maneuver().hasWaypoint() ) {
                     int const size = smallScreen ? 64 : 32;
                     return d->m_request->pixmap( segment.maneuver().waypointIndex(), size, size/4 );
-                } else {
-                    QPixmap const pixmap = segment.maneuver().directionPixmap();
-                    return smallScreen ? pixmap : pixmap.scaled( 32, 32 );
                 }
+
+                QPixmap const pixmap = segment.maneuver().directionPixmap();
+                return smallScreen ? pixmap : pixmap.scaled( 32, 32 );
             }
-            break;
         case Qt::SizeHintRole:
             {
                 bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
                 int const size = smallScreen ? 64 : 32;
                 return QSize( size, size );
             }
-            break;
         case RoutingModel::CoordinateRole:
             return QVariant::fromValue( segment.maneuver().position() );
-            break;
         case RoutingModel::LongitudeRole:
             return QVariant(segment.maneuver().position().longitude(GeoDataCoordinates::Degree));
-            break;
         case RoutingModel::LatitudeRole:
             return QVariant(segment.maneuver().position().latitude(GeoDataCoordinates::Degree));
-            break;
         case RoutingModel::TurnTypeIconRole:
             return segment.maneuver().directionPixmap();
-            break;
         default:
             return QVariant();
         }

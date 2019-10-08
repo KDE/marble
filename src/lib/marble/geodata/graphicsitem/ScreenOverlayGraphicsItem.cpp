@@ -52,13 +52,10 @@ qreal ScreenOverlayGraphicsItem::pixelValue( GeoDataVec2::Unit unit, qreal scree
     switch (unit) {
     case GeoDataVec2::Pixels:
         return imageSize;
-        break;
     case GeoDataVec2::Fraction:
         return value * screenSize;
-        break;
     case GeoDataVec2::InsetPixels:
         return screenSize - imageSize - value;
-        break;
     }
 
     Q_ASSERT( false );

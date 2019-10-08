@@ -111,19 +111,15 @@ bool MonavRunnerPrivate::retrieveData( const RouteRequest *route, const QString 
             case RoutingResult::LoadFailed:
                 mDebug() << "failed to load monav map from " << mapDir;
                 return false;
-                break;
             case RoutingResult::RouteFailed:
                 mDebug() << "failed to retrieve route from monav daemon";
                 return false;
-                break;
             case RoutingResult::TypeLookupFailed:
                 mDebug() << "failed to lookup type from monav daemon";
                 return false;
-                break;
             case RoutingResult::NameLookupFailed:
                 mDebug() << "failed to lookup name from monav daemon";
                 return false;
-                break;
             case RoutingResult::Success:
                 return true;
             }

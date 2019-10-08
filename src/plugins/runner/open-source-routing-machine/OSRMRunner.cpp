@@ -165,9 +165,9 @@ RoutingInstruction::TurnType OSRMRunner::parseTurnType( const QString &instructi
     } else if (instruction.startsWith(QLatin1String("11-"))) {
         int const exit = instruction.mid( 3 ).toInt();
         switch ( exit ) {
-        case 1: return RoutingInstruction::RoundaboutFirstExit; break;
-        case 2: return RoutingInstruction::RoundaboutSecondExit; break;
-        case 3: return RoutingInstruction::RoundaboutThirdExit; break;
+        case 1: return RoutingInstruction::RoundaboutFirstExit;
+        case 2: return RoutingInstruction::RoundaboutSecondExit;
+        case 3: return RoutingInstruction::RoundaboutThirdExit;
         default: return RoutingInstruction::RoundaboutExit;
         }
     } else if (instruction == QLatin1String("12")) {

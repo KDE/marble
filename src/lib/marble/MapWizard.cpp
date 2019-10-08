@@ -736,15 +736,12 @@ int MapWizard::nextId() const
 
     case 2: // WMS
         return 5;
-        break;
 
     case 3: // Static Image
         return 5;
-        break;
 
     case 7: // Finish
         return -1;
-        break;
 
     default:
         break;

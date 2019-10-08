@@ -334,7 +334,6 @@ QVector<TileCoordsPyramid> DownloadRegionDialog::region() const
         }
         const GeoDataLineString waypoints = d->m_model->routingManager()->routingModel()->route().path();
         return d->m_downloadRegion.fromPath( d->m_textureLayer, offset, waypoints );
-        break;
     }
 
     return d->m_downloadRegion.region( d->m_textureLayer, downloadRegion );

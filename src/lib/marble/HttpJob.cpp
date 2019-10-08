@@ -124,10 +124,8 @@ QByteArray HttpJob::userAgent() const
     switch ( d->m_downloadUsage ) {
     case DownloadBrowse:
         return HttpDownloadManager::userAgent("Browser", d->m_userAgent);
-        break;
     case DownloadBulk:
         return HttpDownloadManager::userAgent("BulkDownloader", d->m_userAgent);
-        break;
     default:
         qCritical() << "Unknown download usage value:" << d->m_downloadUsage;
         return HttpDownloadManager::userAgent("unknown", d->m_userAgent);

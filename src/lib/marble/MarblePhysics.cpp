@@ -132,7 +132,6 @@ void MarblePhysics::flyTo( const GeoDataLookAt &target, FlyToMode mode )
     case Instant:
         d->m_presenter->flyTo( target, Instant );
         return;
-        break;
     case Linear:
         d->m_timeline.setDuration(300);
         d->m_timeline.setCurveShape( QTimeLine::EaseOutCurve );

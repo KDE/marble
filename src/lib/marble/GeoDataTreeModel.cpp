@@ -184,16 +184,12 @@ QVariant GeoDataTreeModel::headerData(int section, Qt::Orientation orientation,
         switch ( section ) {
         case 0:
             return tr("Name");
-            break;
         case 1:
              return tr("Type");
-             break;
         case 2:
             return tr("Popularity");
-            break;
         case 3:
             return tr("PopIndex", "Popularity index");
-            break;
         }
     }
     return QVariant();
