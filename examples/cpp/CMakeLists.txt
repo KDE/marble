@@ -24,12 +24,14 @@ generateFakeHeaders(geodata/data
     GeoDataLatLonAltBox.h
     GeoDataLinearRing.h
     GeoDataLineString.h
+    GeoDataLineStyle.h
     GeoDataLookAt.h
     GeoDataMultiGeometry.h
     GeoDataPlacemark.h
     GeoDataPlaylist.h
     GeoDataPoint.h
     GeoDataPolygon.h
+    GeoDataPolyStyle.h
     GeoDataStyle.h
     GeoDataStyleMap.h
     GeoDataTour.h
