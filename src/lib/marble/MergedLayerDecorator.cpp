@@ -249,14 +249,9 @@ void MergedLayerDecorator::Private::renderGroundOverlays( QImage *tileImage, con
         for ( int y = 0; y < tileImage->height(); ++y ) {
              QRgb *scanLine = ( QRgb* ) ( tileImage->scanLine( y ) );
 
-             qreal lat = 0;
-
-             if (isMercatorTileProjection) {
-                  lat = gd(2 * (latPixelPosition - y) * pixel2Rad );
-             }
-             else {
-                  lat = tileLatLonBox.north() - y * pixelToLat;
-             }
+             const qreal lat = isMercatorTileProjection
+                     ? gd(2 * (latPixelPosition - y) * pixel2Rad )
+                     : tileLatLonBox.north() - y * pixelToLat;
 
              for ( int x = 0; x < tileImage->width(); ++x, ++scanLine ) {
                  qreal lon = GeoDataCoordinates::normalizeLon( tileLatLonBox.west() + x * pixelToLon );
