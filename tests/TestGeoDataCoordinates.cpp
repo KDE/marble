@@ -46,8 +46,10 @@ private Q_SLOTS:
     void testNormalizeLat();
     void testNormalizeLon_data();
     void testNormalizeLon();
-    void testNormalize_data();
-    void testNormalize();
+    void testNormalizeDegree_data();
+    void testNormalizeDegree();
+    void testNormalizeRadian_data();
+    void testNormalizeRadian();
     void testFromStringDMS_data();
     void testFromStringDMS();
     void testFromStringDM_data();
@@ -466,50 +468,65 @@ void TestGeoDataCoordinates::testNormalizeLon()
 /*
  * test data for testNormalize()
  */
-void TestGeoDataCoordinates::testNormalize_data()
+void TestGeoDataCoordinates::testNormalizeDegree_data()
 {
     QTest::addColumn<qreal>("lon");
     QTest::addColumn<qreal>("lat");
-    QTest::addColumn<QString>("unit");
 
-    QTest::newRow("deg") << qreal(200.0) << qreal(130.0) << "degree";
-    QTest::newRow("rad") << qreal(3.6) << qreal(2.7)  << "radian";
+    QTest::newRow("deg") << qreal(200.0) << qreal(130.0);
 }
 
 /*
  * test normalizeLon(), normalizeLat() and normalizeLonLat()
  */
-void TestGeoDataCoordinates::testNormalize()
+void TestGeoDataCoordinates::testNormalizeDegree()
 {
     QFETCH(qreal, lon);
     QFETCH(qreal, lat);
-    QFETCH(QString, unit);
 
-    if (unit == QLatin1String("degree")) {
-        QCOMPARE(GeoDataCoordinates::normalizeLon(lon, GeoDataCoordinates::Degree), qreal(-160));
-        QCOMPARE(GeoDataCoordinates::normalizeLat(lat, GeoDataCoordinates::Degree), qreal(50));
+    QCOMPARE(GeoDataCoordinates::normalizeLon(lon, GeoDataCoordinates::Degree), qreal(-160));
+    QCOMPARE(GeoDataCoordinates::normalizeLat(lat, GeoDataCoordinates::Degree), qreal(50));
 
-        qreal normalized_lon = lon;
-        qreal normalized_lat = lat;
+    qreal normalized_lon = lon;
+    qreal normalized_lat = lat;
 
-        GeoDataCoordinates::normalizeLonLat( normalized_lon, normalized_lat, GeoDataCoordinates::Degree);
-        QCOMPARE(normalized_lon, qreal(20));
-        QCOMPARE(normalized_lat, qreal(50));
-    } else if (unit == QLatin1String("radian")) {
-        // Compare up to three decimals
-        qreal value = GeoDataCoordinates::normalizeLon(lon, GeoDataCoordinates::Radian);
-        QCOMPARE(ceil(value * 1000) / 1000, qreal(-2.683));
+    GeoDataCoordinates::normalizeLonLat( normalized_lon, normalized_lat, GeoDataCoordinates::Degree);
+    QCOMPARE(normalized_lon, qreal(20));
+    QCOMPARE(normalized_lat, qreal(50));
+}
 
-        value = GeoDataCoordinates::normalizeLat(lat, GeoDataCoordinates::Radian);
-        QCOMPARE(ceil(value * 1000) / 1000, qreal(0.442));
+/*
+ * test data for testNormalize()
+ */
+void TestGeoDataCoordinates::testNormalizeRadian_data()
+{
+    QTest::addColumn<qreal>("lon");
+    QTest::addColumn<qreal>("lat");
 
-        qreal normalized_lon = lon;
-        qreal normalized_lat = lat;
+    QTest::newRow("rad") << qreal(3.6) << qreal(2.7);
+}
 
-        GeoDataCoordinates::normalizeLonLat( normalized_lon, normalized_lat, GeoDataCoordinates::Radian);
-        QCOMPARE(ceil(normalized_lon * 1000) / 1000, qreal(0.459));
-        QCOMPARE(ceil(normalized_lat * 1000) / 1000, qreal(0.442));
-     }
+/*
+ * test normalizeLon(), normalizeLat() and normalizeLonLat()
+ */
+void TestGeoDataCoordinates::testNormalizeRadian()
+{
+    QFETCH(qreal, lon);
+    QFETCH(qreal, lat);
+
+    // Compare up to three decimals
+    qreal value = GeoDataCoordinates::normalizeLon(lon, GeoDataCoordinates::Radian);
+    QCOMPARE(ceil(value * 1000) / 1000, qreal(-2.683));
+
+    value = GeoDataCoordinates::normalizeLat(lat, GeoDataCoordinates::Radian);
+    QCOMPARE(ceil(value * 1000) / 1000, qreal(0.442));
+
+    qreal normalized_lon = lon;
+    qreal normalized_lat = lat;
+
+    GeoDataCoordinates::normalizeLonLat( normalized_lon, normalized_lat, GeoDataCoordinates::Radian);
+    QCOMPARE(ceil(normalized_lon * 1000) / 1000, qreal(0.459));
+    QCOMPARE(ceil(normalized_lat * 1000) / 1000, qreal(0.442));
 }
 
 enum SignType {NoSign, PositiveSign, NegativeSign};
