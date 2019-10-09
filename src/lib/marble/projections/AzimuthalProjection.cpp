@@ -25,16 +25,6 @@
 
 namespace Marble {
 
-qreal AzimuthalProjection::maxValidLat() const
-{
-    return +90.0 * DEG2RAD;
-}
-
-qreal AzimuthalProjection::minValidLat() const
-{
-    return -90.0 * DEG2RAD;
-}
-
 bool AzimuthalProjection::isClippedToSphere() const
 {
     return true;

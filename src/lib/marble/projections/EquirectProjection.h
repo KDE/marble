@@ -60,9 +60,6 @@ class EquirectProjection : public CylindricalProjection
      */
     QIcon icon() const override;
 
-    qreal  maxValidLat() const override;
-    qreal  minValidLat() const override;
-
     PreservationType preservationType() const override { return NoPreservation; }
 
     /**

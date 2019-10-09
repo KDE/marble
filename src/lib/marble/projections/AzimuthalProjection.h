@@ -37,8 +37,6 @@ class AzimuthalProjection : public AbstractProjection
     ~AzimuthalProjection() override;
 
     bool repeatableX() const override { return false; }
-    qreal  maxValidLat() const override;
-    qreal  minValidLat() const override;
 
     bool traversablePoles()  const override { return true; }
     bool traversableDateLine()  const override { return true; }

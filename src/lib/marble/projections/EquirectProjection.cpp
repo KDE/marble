@@ -50,16 +50,6 @@ QIcon EquirectProjection::icon() const
     return QIcon(QStringLiteral(":/icons/map-flat.png"));
 }
 
-qreal EquirectProjection::maxValidLat() const
-{
-    return +90.0 * DEG2RAD;
-}
-
-qreal EquirectProjection::minValidLat() const
-{
-    return -90.0 * DEG2RAD;
-}
-
 bool EquirectProjection::screenCoordinates( const GeoDataCoordinates &geopoint, 
                                             const ViewportParams *viewport,
                                             qreal &x, qreal &y, bool &globeHidesPoint ) const
