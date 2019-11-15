@@ -85,7 +85,7 @@
            <string extracomment="Mark the point on the globe where the sun crosses the zenith during noon and doesn't cast a shadow."/>
           </property>
           <property name="text">
-           <string>Display &lt;a href=&quot;http://en.wikipedia.org/wiki/Subsolar_point&quot;&gt;Subsolar Point&lt;/a&gt; icon</string>
+           <string>Display &lt;a href=&quot;https://en.wikipedia.org/wiki/Subsolar_point&quot;&gt;Subsolar Point&lt;/a&gt; icon</string>
           </property>
           <property name="openExternalLinks">
            <bool>true</bool>
@@ -128,7 +128,7 @@
            <string extracomment="Lock the globe so that only the daytime hemisphere is shown."/>
           </property>
           <property name="text">
-           <string>&lt;b&gt;Lock&lt;/b&gt; map view to &lt;a href=&quot;http://en.wikipedia.org/wiki/Subsolar_point&quot;&gt;Subsolar Point&lt;/a&gt;.</string>
+           <string>&lt;b&gt;Lock&lt;/b&gt; map view to &lt;a href=&quot;https://en.wikipedia.org/wiki/Subsolar_point&quot;&gt;Subsolar Point&lt;/a&gt;.</string>
           </property>
           <property name="openExternalLinks">
            <bool>true</bool>

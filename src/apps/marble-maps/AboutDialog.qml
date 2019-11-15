@@ -118,7 +118,7 @@ Kirigami.Page {
 
                     wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                     width: parent.width
-                    text: qsTr("<h3>Attribution</h3><p>The map is based on data from the <a href=\"https://www.openstreetmap.org\">OpenStreetMap</a> project, available under the <a href=\"http://opendatacommons.org/licenses/odbl/\">Open Database License</a>. Additionally public domain data from the <a href=\"http://www.naturalearthdata.com/\">Natural Earth</a> project is used. The map style is influenced by and uses icons from <a href=\"https://github.com/gravitystorm/openstreetmap-carto\">OpenStreetMap Carto</a> (<a href=\"http://creativecommons.org/publicdomain/zero/1.0/\">CC0 Public Domain)</a>.</p>")
+                    text: qsTr("<h3>Attribution</h3><p>The map is based on data from the <a href=\"https://www.openstreetmap.org\">OpenStreetMap</a> project, available under the <a href=\"https://opendatacommons.org/licenses/odbl/\">Open Database License</a>. Additionally public domain data from the <a href=\"https://www.naturalearthdata.com/\">Natural Earth</a> project is used. The map style is influenced by and uses icons from <a href=\"https://github.com/gravitystorm/openstreetmap-carto\">OpenStreetMap Carto</a> (<a href=\"https://creativecommons.org/publicdomain/zero/1.0/\">CC0 Public Domain)</a>.</p>")
                     onLinkActivated: Qt.openUrlExternally(link)
                 }
 

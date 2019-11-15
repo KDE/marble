@@ -93,7 +93,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>An AppKey is required for MapQuest routing to work. You can register one &lt;a href=&quot;http://developer.mapquest.com/web/products/open&quot;&gt;here&lt;/a&gt;.</string>
+      <string>An AppKey is required for MapQuest routing to work. You can register one &lt;a href=&quot;https://developer.mapquest.com/plan_purchase/steps/business_edition/business_edition_free/register&quot;&gt;here&lt;/a&gt;.</string>
      </property>
      <property name="wordWrap">
       <bool>true</bool>

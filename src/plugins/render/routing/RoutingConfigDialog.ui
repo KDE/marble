@@ -85,7 +85,7 @@
    <item>
     <widget class="QLabel" name="label_2">
      <property name="text">
-      <string>&lt;a href=&quot;http://userbase.kde.org/Marble/CustomSpeakers&quot;&gt;Get more speakers&lt;/a&gt;</string>
+      <string>&lt;a href=&quot;https://userbase.kde.org/Marble/CustomSpeakers&quot;&gt;Get more speakers&lt;/a&gt;</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

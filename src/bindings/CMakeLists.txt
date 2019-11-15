@@ -22,7 +22,7 @@ endif()
 set(PythonSupport_FOUND FALSE)
 
 set_package_properties(EXPERIMENTAL_PYTHON_BINDINGS PROPERTIES
-                       URL "http://techbase.kde.org/Development/Languages/Python"
+                       URL "https://techbase.kde.org/Development/Languages/Python"
                        TYPE OPTIONAL
                        PURPOSE "Experimental Python binding support for the Marble library. To activate it pass -DEXPERIMENTAL_PYTHON_BINDINGS=TRUE to cmake."
                       )
@@ -44,7 +44,7 @@ if(EXPERIMENTAL_PYTHON_BINDINGS)
         set(PYQT4BUILD)
     endif(PYQT4BUILD AND PYQT4_VERSION STRLESS "040804")
     set_package_properties(PYTHONQT4BUILD PROPERTIES
-                             URL "http://www.riverbankcomputing.co.uk/software/pyqt/intro"
+                             URL "https://riverbankcomputing.com/software/pyqt/intro"
                              TYPE OPTIONAL
                              PURPOSE "PyQt4"
                             )
@@ -54,7 +54,7 @@ if(EXPERIMENTAL_PYTHON_BINDINGS)
     endif (PYTHONLIBRARY_FOUND AND SIP_FOUND AND PYQT4BUILD)
 
     set_package_properties(PythonSupport_FOUND PROPERTIES
-                              URL "http://techbase.kde.org/Development/Languages/Python"
+                              URL "https://techbase.kde.org/Development/Languages/Python"
                               TYPE OPTIONAL
                               PURPOSE "Needed for Python bindings to the marble widget."
                              )

@@ -208,9 +208,9 @@ Item {
 
                     text: qsTr("<h3>Germanisches Nationalmuseum</h3>\
                    <p>The original Behaim globe can be visited in the
-                   <a href=\"http://www.gnm.de/\">Germanisches Nationalmuseum</a> in Nuremberg, Germany.</p>\
+                   <a href=\"https://www.gnm.de/\">Germanisches Nationalmuseum</a> in Nuremberg, Germany.</p>\
                    <h3>KDE Marble</h3>\
-                   <p>This app is part of the <a href=\"http://marble.kde.org\">Marble</a> project.\
+                   <p>This app is part of the <a href=\"https://marble.kde.org\">Marble</a> project.\
                    The Marble community works on maps and virtual globes with the goal to produce visually appealing, easy-to-use Free Software.</p>\
                    <h3>Map Content</h3>\
                    <p>Digitized map based on orthophotographic gores by TU Vienna, 1990. Germanisches Nationalmuseum and\

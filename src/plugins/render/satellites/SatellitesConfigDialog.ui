@@ -229,7 +229,7 @@
           </font>
          </property>
          <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Supported formats: &lt;a href=&quot;http://techbase.kde.org/Projects/Marble/SatelliteCatalogFormat&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Marble Satellite Catalogue&lt;/span&gt;&lt;/a&gt;, &lt;a href=&quot;http://en.wikipedia.org/wiki/Two-line_element_set&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Two-Line-Element Set&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Supported formats: &lt;a href=&quot;https://techbase.kde.org/Projects/Marble/SatelliteCatalogFormat&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Marble Satellite Catalogue&lt;/span&gt;&lt;/a&gt;, &lt;a href=&quot;https://en.wikipedia.org/wiki/Two-line_element_set&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Two-Line-Element Set&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="textFormat">
           <enum>Qt::RichText</enum>
