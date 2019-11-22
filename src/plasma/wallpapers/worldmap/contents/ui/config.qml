@@ -17,105 +17,54 @@
 
 import QtQuick 2.1
 import QtQuick.Layouts 1.0
-import QtQuick.Controls 1.0 as QtControls
-
-// for "units"
-import org.kde.plasma.core 2.0 as PlasmaCore
+import QtQuick.Controls 2.5 as QQC2
+import org.kde.kirigami 2.5 as Kirigami
 
 
-ColumnLayout {
+Kirigami.FormLayout {
     id: root
+    twinFormLayouts: globalSettingsLayout
 
     property int cfg_projection: wallpaper.configuration.projection // Enum needs manual set/get for now
     property int cfg_centerMode: wallpaper.configuration.centerMode // Enum needs manual set/get for now
     property alias cfg_fixedLongitude: longitudeSpinBox.value
 
-    // To allow aligned integration in the settings form,
-    // "formAlignment" is a property injected by the config containment
-    // which defines the offset of the value fields
-    readonly property int labelWidth: formAlignment - units.largeSpacing
-
-    RowLayout {
-        spacing: units.largeSpacing / 2
-
-        QtControls.Label {
-            Layout.minimumWidth: labelWidth
-            Layout.maximumWidth: labelWidth
-            horizontalAlignment: Text.AlignRight
-            anchors {
-                verticalCenter: projectionComboBox.verticalCenter
-            }
-
-            // use i18nd, as textdomain otherwise would be defined by config containment
-            text: i18nd("plasma_wallpaper_org.kde.plasma.worldmap", "Projection:")
+    QQC2.ComboBox {
+        id: projectionComboBox
+        Kirigami.FormData.label: i18nd("plasma_wallpaper_org.kde.plasma.worldmap", "Projection:")
+        model: [
+            i18nd("plasma_wallpaper_org.kde.plasma.worldmap", "Equirectangular"),
+            i18nd("plasma_wallpaper_org.kde.plasma.worldmap", "Mercator")
+        ]
+        onCurrentIndexChanged: {
+            cfg_projection = currentIndex;
         }
-        QtControls.ComboBox {
-            id: projectionComboBox
-            model: [
-                i18nd("plasma_wallpaper_org.kde.plasma.worldmap", "Equirectangular"),
-                i18nd("plasma_wallpaper_org.kde.plasma.worldmap", "Mercator")
-            ]
-            onCurrentIndexChanged: {
-                cfg_projection = currentIndex;
-            }
-            Component.onCompleted: {
-                currentIndex = wallpaper.configuration.projection;
-            }
-        }
-    }
-    RowLayout {
-        spacing: units.largeSpacing / 2
-
-        QtControls.Label {
-            Layout.minimumWidth: labelWidth
-            Layout.maximumWidth: labelWidth
-            horizontalAlignment: Text.AlignRight
-            anchors {
-                verticalCenter: centerModeComboBox.verticalCenter
-            }
-            text: i18nd("plasma_wallpaper_org.kde.plasma.worldmap", "Center on:")
-        }
-
-        QtControls.ComboBox {
-            id: centerModeComboBox
-            model: [
-                i18nd("plasma_wallpaper_org.kde.plasma.worldmap", "Daylight"),
-                i18nd("plasma_wallpaper_org.kde.plasma.worldmap", "Longitude"),
-                i18nd("plasma_wallpaper_org.kde.plasma.worldmap", "Location")
-            ]
-            onCurrentIndexChanged: {
-                cfg_centerMode = currentIndex;
-            }
-            Component.onCompleted: {
-                currentIndex = wallpaper.configuration.centerMode;
-            }
-        }
-
-    }
-    RowLayout {
-        spacing: units.largeSpacing / 2
-
-         QtControls.Label {
-            Layout.minimumWidth: labelWidth
-            Layout.maximumWidth: labelWidth
-            horizontalAlignment: Text.AlignRight
-            anchors {
-                verticalCenter: longitudeSpinBox.verticalCenter
-            }
-            enabled: (cfg_centerMode === 1)
-            text: i18nd("plasma_wallpaper_org.kde.plasma.worldmap", "Longitude:")
-        }
-
-        QtControls.SpinBox {
-            enabled: (cfg_centerMode === 1)
-            id: longitudeSpinBox
-            maximumValue: 180.0
-            minimumValue: -180.0
-            decimals: 5
+        Component.onCompleted: {
+            currentIndex = wallpaper.configuration.projection;
         }
     }
 
-    Item { // tighten layout
-        Layout.fillHeight: true
+    QQC2.ComboBox {
+        id: centerModeComboBox
+        Kirigami.FormData.label: i18nd("plasma_wallpaper_org.kde.plasma.worldmap", "Center on:")
+        model: [
+            i18nd("plasma_wallpaper_org.kde.plasma.worldmap", "Daylight"),
+            i18nd("plasma_wallpaper_org.kde.plasma.worldmap", "Longitude"),
+            i18nd("plasma_wallpaper_org.kde.plasma.worldmap", "Location")
+        ]
+        onCurrentIndexChanged: {
+            cfg_centerMode = currentIndex;
+        }
+        Component.onCompleted: {
+            currentIndex = wallpaper.configuration.centerMode;
+        }
+    }
+
+    QQC2.SpinBox {
+        id: longitudeSpinBox
+        Kirigami.FormData.label: i18nd("plasma_wallpaper_org.kde.plasma.worldmap", "Longitude:")
+        from: -180
+        to: 180
+        enabled: (cfg_centerMode === 1)
     }
 }
