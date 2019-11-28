@@ -628,8 +628,7 @@ install( FILES
     routing/RoutingProfile.h
 
     OsmcSymbol.h
-
-
+	
     declarative/MarbleDeclarativePlugin.h
 
     DESTINATION ${INCLUDE_INSTALL_DIR}/marble
