@@ -216,7 +216,7 @@ QUrl TmsServerLayout::downloadUrl( const QUrl &prototypeUrl, const TileId &id ) 
     // y coordinate in TMS start at the bottom of the map (South) and go upwards,
     // opposed to OSM which start at the top.
     //
-    // http://wiki.osgeo.org/wiki/Tile_Map_Service_Specification
+    // https://wiki.osgeo.org/wiki/Tile_Map_Service_Specification
     int y_frombottom = ( 1<<id.zoomLevel() ) - id.y() - 1 ;
 
     const QString path = QString( "%1/%2/%3.%4" ).arg( id.zoomLevel() )

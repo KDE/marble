@@ -47,7 +47,7 @@ MbTileWriter::MbTileWriter(const QString &filename, const QString &extension) :
         setMetaData("version", "1.0");
         setMetaData("description", "A global roadmap created by the OpenStreetMap (OSM) project");
         setMetaData("format", extension);
-        setMetaData("attribution", "Data from <a href=\"http://openstreetmap.org/\">OpenStreetMap</a> and <a href=\"http://www.naturalearthdata.com/\">Natural Earth</a> contributors");
+        setMetaData("attribution", "Data from <a href=\"https://openstreetmap.org/\">OpenStreetMap</a> and <a href=\"https://www.naturalearthdata.com/\">Natural Earth</a> contributors");
     }
     execQuery("BEGIN TRANSACTION");
 }

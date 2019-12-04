@@ -42,7 +42,7 @@ namespace Marble
 
 /**
  * @brief This method calculates the shortest distance between two points on a sphere.
- * @brief See: http://en.wikipedia.org/wiki/Great-circle_distance
+ * @brief See: https://en.wikipedia.org/wiki/Great-circle_distance
  * @param lon1 longitude of first point in radians
  * @param lat1 latitude of first point in radians
  * @param lon2 longitude of second point in radians
@@ -62,7 +62,7 @@ inline qreal distanceSphere( qreal lon1, qreal lat1, qreal lon2, qreal lat2 ) {
  * @brief This method roughly calculates the shortest distance between two points on a sphere.
  * @brief It's probably faster than distanceSphere(...) but for 7 significant digits only has
  * @brief an accuracy of about 1 arcmin.
- * @brief See: http://en.wikipedia.org/wiki/Great-circle_distance
+ * @brief See: https://en.wikipedia.org/wiki/Great-circle_distance
  */
 inline qreal distanceSphereApprox( qreal lon1, qreal lat1, qreal lon2, qreal lat2 ) {
     return acos( sin( lat1 ) * sin( lat2 ) + cos( lat1 ) * cos( lat2 ) * cos( lon1 - lon2 ) );
@@ -73,7 +73,7 @@ inline qreal distanceSphereApprox( qreal lon1, qreal lat1, qreal lon2, qreal lat
  * @brief This method is a fast Mac Laurin power series approximation of the 
  * @brief inverse Gudermannian. The inverse Gudermannian gives the vertical 
  * @brief position y in the Mercator projection in terms of the latitude.
- * @brief See: http://en.wikipedia.org/wiki/Mercator_projection
+ * @brief See: https://en.wikipedia.org/wiki/Mercator_projection
  */
 inline qreal gdInv( qreal x ) {
         const qreal x2 = x * x;
@@ -91,7 +91,7 @@ inline qreal gdInv( qreal x ) {
  * @brief This method is a fast Mac Laurin power series approximation of the
  *        Gudermannian. The Gudermannian gives the latitude
  *        in the Mercator projection in terms of the vertical position y.
- *        See: http://en.wikipedia.org/wiki/Mercator_projection
+ *        See: https://en.wikipedia.org/wiki/Mercator_projection
  */
 inline qreal gd( qreal x ) {
 

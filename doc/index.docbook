@@ -154,7 +154,7 @@
              </listitem>
              <listitem>
                 <para>
-		  <guilabel>Satellite View</guilabel>: Earth as seen from Space. The map is based on NASA's beautiful <ulink url="http://earthobservatory.nasa.gov/Features/BlueMarble/">Blue &marble; Next Generation</ulink> pictures. Credits: NASA’s Earth Observatory
+		  <guilabel>Satellite View</guilabel>: Earth as seen from Space. The map is based on NASA's beautiful <ulink url="https://earthobservatory.nasa.gov/Features/BlueMarble/">Blue &marble; Next Generation</ulink> pictures. Credits: NASA’s Earth Observatory
                 </para>
              </listitem>
              <listitem>
@@ -204,7 +204,7 @@
          <title>Searching places using &marble;</title>
          <para>
             &marble; comes with a small database of more than 12,000 cities ( from
-            <ulink url="http://www.worldgazetteer.com"/> ) and a few mountains and volcanoes.
+            <ulink url="https://www.populationdata.net/monde/"/> ) and a few mountains and volcanoes.
             You can find a location by entering its name into the search line on the
             top of the toolbox (&marble; always uses the native name in Latin letters). As you start
             typing, suggestions below the search line will appear like this:
@@ -224,11 +224,11 @@
         <itemizedlist>
           <listitem>
             <para>Nominatim: An online search and reverse geocoding service, using data from
-            <ulink url="http://www.openstreetmap.org"/></para>
+            <ulink url="https://www.openstreetmap.org"/></para>
           </listitem>
           <listitem>
             <para>HostIP: A reverse geocoding based on IP address, using data from
-            <ulink url="http://www.hostip.info"/></para>
+            <ulink url="https://www.hostip.info"/></para>
           </listitem>
         </itemizedlist>
 
@@ -349,7 +349,7 @@
              <listitem>
                <para>MapQuest: An online router which provides advanced turn-by-turn instructions</para>
 	       <note>
-		 <para>An AppKey is required for MapQuest routing to work. You can register the AppKey <ulink url="http://developer.mapquest.com/web/products/open">here</ulink>.</para>
+		 <para>An AppKey is required for MapQuest routing to work. You can register the AppKey <ulink url="https://developer.mapquest.com/plan_purchase/steps/business_edition/business_edition_free/register">here</ulink>.</para>
 	       </note>
 	     </listitem>
              <listitem>
@@ -530,7 +530,7 @@
         <sect2 id="recording-movie-troubleshooting">
         <title>Troubleshooting</title>
         <para>
-            There may appear an error message because avconv or ffmpeg are not installed. Download from <ulink url="http://ffmpeg.org/download.html">ffmpeg's downloads page</ulink> and <ulink url="https://libav.org/download.html">avconv's downloads page</ulink> or use packages from your distribution.
+            There may appear an error message because avconv or ffmpeg are not installed. Download from <ulink url="https://ffmpeg.org/download.html">ffmpeg's downloads page</ulink> and <ulink url="https://libav.org/download.html">avconv's downloads page</ulink> or use packages from your distribution.
         </para>
         </sect2>
 	</sect1>
@@ -1051,7 +1051,7 @@ If a GPS device is connected with your computer, &marble; displays longitude and
 <varlistentry>
 <term><guilabel>Time Zone</guilabel></term>
 <listitem>
-  <para>Here, you can choose a time zone for &marble;: <ulink url="http://en.wikipedia.org/wiki/Coordinated_Universal_Time">UTC</ulink>, system time zone or choose custom time zone. The chosen option changes the map view only if the map can show the light conditions on the surface.</para>
+  <para>Here, you can choose a time zone for &marble;: <ulink url="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">UTC</ulink>, system time zone or choose custom time zone. The chosen option changes the map view only if the map can show the light conditions on the surface.</para>
 </listitem>
 </varlistentry>
 
@@ -1264,7 +1264,7 @@ url="https://owncloud.com/">ownClowd official website</ulink>.</para>
 <varlistentry>
 <term><guilabel>GpsInfo</guilabel></term>
 <listitem>
-  <para>Displays a float item that provides <ulink url="http://en.wikipedia.org/wiki/Global_Positioning_System">GPS</ulink> information.</para>
+  <para>Displays a float item that provides <ulink url="https://en.wikipedia.org/wiki/Global_Positioning_System">GPS</ulink> information.</para>
 </listitem>
 </varlistentry>
 
@@ -1293,14 +1293,14 @@ url="https://owncloud.com/">ownClowd official website</ulink>.</para>
 <varlistentry>
 <term><guilabel>OpenCaching.com</guilabel></term>
 <listitem>
-  <para>Displays the <ulink url="http://en.wikipedia.org/wiki/Geocaching">geocaching</ulink> markers on the map.</para>
+  <para>Displays the <ulink url="https://en.wikipedia.org/wiki/Geocaching">geocaching</ulink> markers on the map.</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term><guilabel>OpenDesktop Items</guilabel></term>
 <listitem>
-  <para>Shows <ulink url="http://opendesktop.org/">OpenDesktop</ulink> users' avatars and some extra information about them on the map.</para>
+  <para>Shows <ulink url="https://opendesktop.org/">OpenDesktop</ulink> users' avatars and some extra information about them on the map.</para>
 </listitem>
 </varlistentry>
 
@@ -1328,14 +1328,14 @@ url="https://owncloud.com/">ownClowd official website</ulink>.</para>
 <varlistentry>
 <term><guilabel>Position Marker</guilabel></term>
 <listitem>
-  <para>Draws a marker at the current <ulink url="http://en.wikipedia.org/wiki/Global_Positioning_System">GPS</ulink> position.</para>
+  <para>Draws a marker at the current <ulink url="https://en.wikipedia.org/wiki/Global_Positioning_System">GPS</ulink> position.</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term><guilabel>Postal Codes</guilabel></term>
 <listitem>
-  <para>Shows <ulink url="http://en.wikipedia.org/wiki/Postal_code">postal codes</ulink> of the area on the map.</para>
+  <para>Shows <ulink url="https://en.wikipedia.org/wiki/Postal_code">postal codes</ulink> of the area on the map.</para>
 </listitem>
 </varlistentry>
 
@@ -1363,7 +1363,7 @@ url="https://owncloud.com/">ownClowd official website</ulink>.</para>
 <varlistentry>
 <term><guilabel>Speedometer</guilabel></term>
 <listitem>
-  <para>Displays the current cruising speed. Needs some <ulink url="http://en.wikipedia.org/wiki/Global_Positioning_System">GPS</ulink> data.</para>
+  <para>Displays the current cruising speed. Needs some <ulink url="https://en.wikipedia.org/wiki/Global_Positioning_System">GPS</ulink> data.</para>
 </listitem>
 </varlistentry>
 
@@ -1439,7 +1439,7 @@ url="https://owncloud.com/">ownClowd official website</ulink>.</para>
 				 <answer>
 					 <para>
                          No, never. But the authors always welcome feedback. &marble; is licensed 
-			under the <ulink url="http://www.gnu.org/licenses/licenses.html#LGPL">LGPL</ulink>, so you will never have to pay for this program.
+			under the <ulink url="https://www.gnu.org/licenses/licenses.html#LGPL">LGPL</ulink>, so you will never have to pay for this program.
                      </para>
 				 </answer>
 			 </qandaentry>
@@ -1493,7 +1493,7 @@ url="https://owncloud.com/">ownClowd official website</ulink>.</para>
 
 			 <para>
 				 &marble; itself can be found on the <ulink
-					 url="http://marble.kde.org">&marble; website</ulink> and
+					 url="https://marble.kde.org">&marble; website</ulink> and
 				 is part of the &kde;-Edu project</para>
 
 			 <para>You can find a list of changes in the file
@@ -1506,7 +1506,7 @@ url="https://owncloud.com/">ownClowd official website</ulink>.</para>
 
              <para>
                  &marble; can be compiled as a &Qt; 5-only version as well as featuring &kde; &frameworks; 5 usage.
-                 To compile &marble; with &Qt; 5-only support check out &marble; from its &kde; Git repository into ~/marble and just do: <command>cmake -DWITH_KF5=FALSE ~/marble</command> and <command>sudo make install</command>. To compile &marble; with &kde; &frameworks; 5 usage check instructions on how to compile &kde; applications at <ulink url="http://techbase.kde.org/">&kde;'s TechBase</ulink>.
+                 To compile &marble; with &Qt; 5-only support check out &marble; from its &kde; Git repository into ~/marble and just do: <command>cmake -DWITH_KF5=FALSE ~/marble</command> and <command>sudo make install</command>. To compile &marble; with &kde; &frameworks; 5 usage check instructions on how to compile &kde; applications at <ulink url="https://techbase.kde.org/">&kde;'s TechBase</ulink>.
              </para> 
 		 </sect1>
 

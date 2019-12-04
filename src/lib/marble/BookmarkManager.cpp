@@ -39,7 +39,7 @@ BookmarkManagerPrivate::BookmarkManagerPrivate( GeoDataTreeModel *treeModel ) :
 
 BookmarkManagerPrivate::~BookmarkManagerPrivate()
 {
-    Q_ASSERT( m_bookmarkDocument && "BookmarkManagerPrivate::m_bookmarkDocument is 0. Please report a Marble bug at http://bugs.kde.org" );
+    Q_ASSERT( m_bookmarkDocument && "BookmarkManagerPrivate::m_bookmarkDocument is 0. Please report a Marble bug at https://bugs.kde.org" );
     if ( m_bookmarkDocument )
     {
         m_treeModel->removeDocument( m_bookmarkDocument );
@@ -122,7 +122,7 @@ bool BookmarkManager::loadFile( const QString &relativeFilePath )
         d->resetBookmarkDocument();
         updateBookmarkFile();
     } else {
-        Q_ASSERT( d->m_bookmarkDocument && "d->m_bookmarkDocument is 0 but must not be. Please report a bug at http://bugs.kde.org" );
+        Q_ASSERT( d->m_bookmarkDocument && "d->m_bookmarkDocument is 0 but must not be. Please report a bug at https://bugs.kde.org" );
         d->m_treeModel->addDocument( d->m_bookmarkDocument );
     }
     ensureDefaultFolder();

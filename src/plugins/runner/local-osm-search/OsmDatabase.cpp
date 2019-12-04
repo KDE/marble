@@ -93,7 +93,7 @@ QVector<OsmPlacemark> OsmDatabase::find( const DatabaseQuery &userQuery )
         if ( !userQuery.region().isEmpty() ) {
             QTime regionTimer;
             regionTimer.start();
-            // Nested set model to support region hierarchies, see http://en.wikipedia.org/wiki/Nested_set_model
+            // Nested set model to support region hierarchies, see https://en.wikipedia.org/wiki/Nested_set_model
             const QString regionsQueryString = QLatin1String("SELECT lft, rgt FROM regions WHERE name LIKE '%") + userQuery.region() + QLatin1String("%';");
             QSqlQuery regionsQuery( regionsQueryString, database );
             if ( regionsQuery.lastError().isValid() ) {

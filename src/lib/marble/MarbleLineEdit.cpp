@@ -7,7 +7,7 @@
 //
 // The code in this file is largely based on KDE's KLineEdit class
 // as included in KDE 4.5. See there for its authors:
-// http://api.kde.org/4.x-api/kdelibs-apidocs/kdeui/html/klineedit_8cpp.html
+// https://api.kde.org/4.x-api/kdelibs-apidocs/kdeui/html/klineedit_8cpp.html
 //
 // Copyright 2010,2012      Dennis Nienhüser <nienhueser@kde.org>
 //

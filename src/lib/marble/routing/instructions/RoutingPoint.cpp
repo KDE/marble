@@ -34,7 +34,7 @@ qreal RoutingPoint::lat() const
     return m_lat;
 }
 
-// Code based on http://www.movable-type.co.uk/scripts/latlong.html
+// Code based on https://www.movable-type.co.uk/scripts/latlong.html
 qreal RoutingPoint::bearing( const RoutingPoint &other ) const
 {
     qreal deltaLon = other.m_lonRad - m_lonRad;

@@ -261,8 +261,8 @@ void CurrentLocationWidgetPrivate::receiveGpsCoordinates( const GeoDataCoordinat
 
     QString html = QLatin1String("<html><body>"
         "<table cellspacing=\"2\" cellpadding=\"2\">"
-        "<tr><td>Longitude</td><td><a href=\"http://edu.kde.org/marble\">%1</a></td></tr>"
-        "<tr><td>Latitude</td><td><a href=\"http://edu.kde.org/marble\">%2</a></td></tr>"
+        "<tr><td>Longitude</td><td><a href=\"https://edu.kde.org/marble\">%1</a></td></tr>"
+        "<tr><td>Latitude</td><td><a href=\"https://edu.kde.org/marble\">%2</a></td></tr>"
         "<tr><td>Altitude</td><td>%3</td></tr>"
         "<tr><td>Speed</td><td>%4</td></tr>"
         "<tr><td>Distance</td><td>%5</td></tr>"

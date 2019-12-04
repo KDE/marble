@@ -70,7 +70,7 @@ class MARBLE_EXPORT ViewportParams
     // - to display two points as distinct points if they are separated by a 
     //   an angular distance that is smaller. Instead only one point should be shown.
     // So this method helps to filter out details.
-    // It's somewhat related to http://en.wikipedia.org/wiki/Angular_resolution
+    // It's somewhat related to https://en.wikipedia.org/wiki/Angular_resolution
 
     qreal angularResolution() const;
 

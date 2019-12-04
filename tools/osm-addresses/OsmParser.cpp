@@ -631,7 +631,7 @@ void OsmParser::setCategory( Element &element, const QString &key, const QString
     }
 }
 
-// From http://en.wikipedia.org/wiki/Graham_scan#Pseudocode
+// From https://en.wikipedia.org/wiki/Graham_scan#Pseudocode
 GeoDataLinearRing* OsmParser::convexHull() const
 {
     Q_ASSERT(m_coordinates.size()>2);

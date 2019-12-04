@@ -153,7 +153,7 @@ void createLegalFiles( const QString &directory, const QString &name, const QStr
     if ( licenseFile.open( QFile::WriteOnly | QFile::Truncate ) ) {
         QTextStream stream( &licenseFile );
         stream << "The ogg files in this directory are licensed under the creative commons Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0) license. ";
-        stream << "See http://creativecommons.org/licenses/by-sa/3.0/ and the file CC-BY-SA-3.0 in this directory.";
+        stream << "See https://creativecommons.org/licenses/by-sa/3.0/ and the file CC-BY-SA-3.0 in this directory.";
     }
     licenseFile.close();
 
@@ -163,7 +163,7 @@ void createLegalFiles( const QString &directory, const QString &name, const QStr
         stream << "To install this voice guidance speaker in Marble, copy the entire directory to the audio/speakers/ directory in Marble's data path.\n\n";
         stream << "For example, if this directory is called 'MySpeaker' and you want to use it on the Nokia N900, copy the directory with all files to /home/user/MyDocs/.local/share/marble/audio/speakers/MySpeaker\n\n";
         stream << "Afterwards start Marble on the N900 and press the routing info box (four icons on the bottom) for two seconds with the pen. Enter the configuration dialog and choose the 'MySpeaker' speaker.\n\n";
-        stream << "Check http://edu.kde.org/marble/speakers.php for updates and more speakers.";
+        stream << "Check https://edu.kde.org/marble/speakers.php for updates and more speakers.";
     }
     installFile.close();
 }

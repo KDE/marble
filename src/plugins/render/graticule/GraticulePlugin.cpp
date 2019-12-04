@@ -554,7 +554,7 @@ void GraticulePlugin::renderUtmExceptions( GeoPainter *painter,
                                             LabelPositionFlags labelPositionFlags )
 {
     // This code renders the so called "exceptions" in the UTM coordinate grid
-    // See: http://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system#Exceptions
+    // See: https://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system#Exceptions
     if ( northPolarGap == 6.0 && southPolarGap == 162.0) {
         if (label == QLatin1String("33")) {
             renderLongitudeLine( painter, itStep-3.0, viewLatLonAltBox, northPolarGap,

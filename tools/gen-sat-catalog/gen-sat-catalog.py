@@ -10,7 +10,7 @@
 #
 
 # Create a Marble Satellite Catalog file with data from various sources.
-# See also: http://techbase.kde.org/Projects/Marble/SatelliteCatalogFormat
+# See also: https://techbase.kde.org/Projects/Marble/SatelliteCatalogFormat
 
 from __future__ import print_function
 

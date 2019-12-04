@@ -121,11 +121,10 @@ QString SatellitesPlugin::aboutDataText() const
 {
     return tr(
         "Earth-Satellites orbital elements from <ul><li>"
-        "<a href=\"http://www.celestrak.com\">http://www.celestrak.com</a>"
+        "<a href=\"https://www.celestrak.com\">https://www.celestrak.com</a>"
         "</li></ul>"
         "Planetary-Satellites orbital elements from <ul><li>"
-        "<a href=\"http://tasc.esa.int/\">ESA TASC service</a></li><li>"
-        "<a href=\"http://ssd.jpl.nasa.gov/?horizons\">"
+        "<a href=\"https://ssd.jpl.nasa.gov/?horizons\">"
         "JPL Horizons</a></li></ul>" );
 }
 
@@ -284,7 +283,7 @@ void SatellitesPlugin::setSettings( const QHash<QString, QVariant> &settings )
     // add default data sources
     if (!settings.contains(QStringLiteral("dataSources"))) {
         QStringList dsList;
-        dsList << QStringLiteral("http://www.celestrak.com/NORAD/elements/visual.txt");
+        dsList << QStringLiteral("https://www.celestrak.com/NORAD/elements/visual.txt");
         m_settings.insert(QStringLiteral("dataSources"), dsList);
         m_settings.insert(QStringLiteral("idList"), dsList);
     }
@@ -447,54 +446,54 @@ void SatellitesPlugin::addBuiltInDataSources()
     QString currentCategory;
 
     currentCategory = tr("Special-Interest Satellites" );
-    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Last 30 Days' Launches", "Name of a satellite group" ), "http://www.celestrak.com/NORAD/elements/tle-new.txt" );
-    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Space Stations", "Name of a satellite group" ), "http://www.celestrak.com/NORAD/elements/stations.txt" );
-    m_configDialog->addTLESatelliteItem( currentCategory, tr( "100 (or so) Brightest", "Name of a satellite group" ), "http://www.celestrak.com/NORAD/elements/visual.txt" );
-    m_configDialog->addTLESatelliteItem( currentCategory, tr( "FENGYUN 1C Debris", "Name of a satellite group" ), "http://www.celestrak.com/NORAD/elements/1999-025.txt" );
-    m_configDialog->addTLESatelliteItem( currentCategory, tr( "IRIDIUM 33 Debris", "Name of a satellite group" ), "http://www.celestrak.com/NORAD/elements/iridium-33-debris.txt" );
-    m_configDialog->addTLESatelliteItem( currentCategory, tr( "COSMOS 2251 Debris", "Name of a satellite group" ), "http://www.celestrak.com/NORAD/elements/cosmos-2251-debris.txt" );
+    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Last 30 Days' Launches", "Name of a satellite group" ), "https://www.celestrak.com/NORAD/elements/tle-new.txt" );
+    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Space Stations", "Name of a satellite group" ), "https://www.celestrak.com/NORAD/elements/stations.txt" );
+    m_configDialog->addTLESatelliteItem( currentCategory, tr( "100 (or so) Brightest", "Name of a satellite group" ), "https://www.celestrak.com/NORAD/elements/visual.txt" );
+    m_configDialog->addTLESatelliteItem( currentCategory, tr( "FENGYUN 1C Debris", "Name of a satellite group" ), "https://www.celestrak.com/NORAD/elements/1999-025.txt" );
+    m_configDialog->addTLESatelliteItem( currentCategory, tr( "IRIDIUM 33 Debris", "Name of a satellite group" ), "https://www.celestrak.com/NORAD/elements/iridium-33-debris.txt" );
+    m_configDialog->addTLESatelliteItem( currentCategory, tr( "COSMOS 2251 Debris", "Name of a satellite group" ), "https://www.celestrak.com/NORAD/elements/cosmos-2251-debris.txt" );
 
     currentCategory = tr( "Weather & Earth Resources Satellites" );
-    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Weather", "Name of a satellite group" ), "http://www.celestrak.com/NORAD/elements/weather.txt" );
-    m_configDialog->addTLESatelliteItem( currentCategory, tr( "NOAA", "Name of a satellite group" ), "http://www.celestrak.com/NORAD/elements/noaa.txt" );
-    m_configDialog->addTLESatelliteItem( currentCategory, tr( "GOES", "Name of a satellite group" ), "http://www.celestrak.com/NORAD/elements/goes.txt" );
-    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Earth Resources", "Name of a satellite group" ), "http://www.celestrak.com/NORAD/elements/resource.txt" );
-    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Search & Rescue (SARSAT)", "Name of a satellite group" ), "http://www.celestrak.com/NORAD/elements/sarsat.txt" );
-    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Disaster Monitoring", "Name of a satellite group" ), "http://www.celestrak.com/NORAD/elements/dmc.txt" );
-    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Tracking and Data Relay Satellite System (TDRSS)", "Name of a satellite group" ), "http://www.celestrak.com/NORAD/elements/tdrss.txt" );
+    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Weather", "Name of a satellite group" ), "https://www.celestrak.com/NORAD/elements/weather.txt" );
+    m_configDialog->addTLESatelliteItem( currentCategory, tr( "NOAA", "Name of a satellite group" ), "https://www.celestrak.com/NORAD/elements/noaa.txt" );
+    m_configDialog->addTLESatelliteItem( currentCategory, tr( "GOES", "Name of a satellite group" ), "https://www.celestrak.com/NORAD/elements/goes.txt" );
+    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Earth Resources", "Name of a satellite group" ), "https://www.celestrak.com/NORAD/elements/resource.txt" );
+    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Search & Rescue (SARSAT)", "Name of a satellite group" ), "https://www.celestrak.com/NORAD/elements/sarsat.txt" );
+    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Disaster Monitoring", "Name of a satellite group" ), "https://www.celestrak.com/NORAD/elements/dmc.txt" );
+    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Tracking and Data Relay Satellite System (TDRSS)", "Name of a satellite group" ), "https://www.celestrak.com/NORAD/elements/tdrss.txt" );
 
     currentCategory = tr( "Communications Satellites" );
-    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Geostationary", "Name of a satellite group" ), "http://www.celestrak.com/NORAD/elements/geo.txt" );
-    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Intelsat", "Name of a satellite group" ), "http://www.celestrak.com/NORAD/elements/intelsat.txt" );
-    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Gorizont", "Name of a satellite group" ), "http://www.celestrak.com/NORAD/elements/gorizont.txt" );
-    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Raduga", "Name of a satellite group" ), "http://www.celestrak.com/NORAD/elements/raduga.txt" );
-    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Molniya", "Name of a satellite group" ), "http://www.celestrak.com/NORAD/elements/molniya.txt" );
-    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Iridium", "Name of a satellite group" ), "http://www.celestrak.com/NORAD/elements/iridium.txt" );
-    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Orbcomm", "Name of a satellite group" ), "http://www.celestrak.com/NORAD/elements/orbcomm.txt" );
-    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Globalstar", "Name of a satellite group" ), "http://www.celestrak.com/NORAD/elements/globalstar.txt" );
-    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Amateur radio", "Name of a satellite group" ), "http://www.celestrak.com/NORAD/elements/amateur.txt" );
-    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Experimental", "Name of a satellite group" ), "http://www.celestrak.com/NORAD/elements/x-comm.txt" );
-    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Other", "Name of a satellite group" ), "http://www.celestrak.com/NORAD/elements/other-comm.txt" );
+    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Geostationary", "Name of a satellite group" ), "https://www.celestrak.com/NORAD/elements/geo.txt" );
+    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Intelsat", "Name of a satellite group" ), "https://www.celestrak.com/NORAD/elements/intelsat.txt" );
+    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Gorizont", "Name of a satellite group" ), "https://www.celestrak.com/NORAD/elements/gorizont.txt" );
+    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Raduga", "Name of a satellite group" ), "https://www.celestrak.com/NORAD/elements/raduga.txt" );
+    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Molniya", "Name of a satellite group" ), "https://www.celestrak.com/NORAD/elements/molniya.txt" );
+    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Iridium", "Name of a satellite group" ), "https://www.celestrak.com/NORAD/elements/iridium.txt" );
+    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Orbcomm", "Name of a satellite group" ), "https://www.celestrak.com/NORAD/elements/orbcomm.txt" );
+    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Globalstar", "Name of a satellite group" ), "https://www.celestrak.com/NORAD/elements/globalstar.txt" );
+    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Amateur radio", "Name of a satellite group" ), "https://www.celestrak.com/NORAD/elements/amateur.txt" );
+    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Experimental", "Name of a satellite group" ), "https://www.celestrak.com/NORAD/elements/x-comm.txt" );
+    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Other", "Name of a satellite group" ), "https://www.celestrak.com/NORAD/elements/other-comm.txt" );
 
     currentCategory = tr( "Navigation Satellites" );
-    m_configDialog->addTLESatelliteItem( currentCategory, tr( "GPS Operational", "Name of a satellite group" ), "http://www.celestrak.com/NORAD/elements/gps-ops.txt" );
-    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Glonass Operational", "Name of a satellite group" ), "http://www.celestrak.com/NORAD/elements/glo-ops.txt" );
-    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Galileo", "Name of a satellite group" ), "http://www.celestrak.com/NORAD/elements/galileo.txt" );
-    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Satellite-Based Augmentation System (WAAS/EGNOS/MSAS)", "Name of a satellite group" ), "http://www.celestrak.com/NORAD/elements/sbas.txt" );
-    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Navy Navigation Satellite System (NNSS)", "Name of a satellite group" ), "http://www.celestrak.com/NORAD/elements/nnss.txt" );
-    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Russian LEO Navigation", "Name of a satellite group" ), "http://www.celestrak.com/NORAD/elements/musson.txt" );
+    m_configDialog->addTLESatelliteItem( currentCategory, tr( "GPS Operational", "Name of a satellite group" ), "https://www.celestrak.com/NORAD/elements/gps-ops.txt" );
+    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Glonass Operational", "Name of a satellite group" ), "https://www.celestrak.com/NORAD/elements/glo-ops.txt" );
+    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Galileo", "Name of a satellite group" ), "https://www.celestrak.com/NORAD/elements/galileo.txt" );
+    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Satellite-Based Augmentation System (WAAS/EGNOS/MSAS)", "Name of a satellite group" ), "https://www.celestrak.com/NORAD/elements/sbas.txt" );
+    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Navy Navigation Satellite System (NNSS)", "Name of a satellite group" ), "https://www.celestrak.com/NORAD/elements/nnss.txt" );
+    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Russian LEO Navigation", "Name of a satellite group" ), "https://www.celestrak.com/NORAD/elements/musson.txt" );
 
     currentCategory = tr( "Scientific Satellites" );
-    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Space & Earth Science", "Name of a satellite group" ), "http://www.celestrak.com/NORAD/elements/science.txt" );
-    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Geodetic", "Name of a satellite group" ), "http://www.celestrak.com/NORAD/elements/geodetic.txt" );
-    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Engineering", "Name of a satellite group" ), "http://www.celestrak.com/NORAD/elements/engineering.txt" );
-    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Education", "Name of a satellite group" ), "http://www.celestrak.com/NORAD/elements/education.txt" );
+    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Space & Earth Science", "Name of a satellite group" ), "https://www.celestrak.com/NORAD/elements/science.txt" );
+    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Geodetic", "Name of a satellite group" ), "https://www.celestrak.com/NORAD/elements/geodetic.txt" );
+    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Engineering", "Name of a satellite group" ), "https://www.celestrak.com/NORAD/elements/engineering.txt" );
+    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Education", "Name of a satellite group" ), "https://www.celestrak.com/NORAD/elements/education.txt" );
 
     currentCategory = tr( "Miscellaneous Satellites" );
-    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Miscellaneous Military", "Name of a satellite group" ), "http://www.celestrak.com/NORAD/elements/military.txt" );
-    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Radar Calibration", "Name of a satellite group" ), "http://www.celestrak.com/NORAD/elements/radar.txt" );
-    m_configDialog->addTLESatelliteItem( currentCategory, tr( "CubeSats", "Name of a satellite group" ), "http://www.celestrak.com/NORAD/elements/cubesat.txt" );
-    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Other", "Name of a satellite group" ), "http://www.celestrak.com/NORAD/elements/other.txt" );
+    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Miscellaneous Military", "Name of a satellite group" ), "https://www.celestrak.com/NORAD/elements/military.txt" );
+    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Radar Calibration", "Name of a satellite group" ), "https://www.celestrak.com/NORAD/elements/radar.txt" );
+    m_configDialog->addTLESatelliteItem( currentCategory, tr( "CubeSats", "Name of a satellite group" ), "https://www.celestrak.com/NORAD/elements/cubesat.txt" );
+    m_configDialog->addTLESatelliteItem( currentCategory, tr( "Other", "Name of a satellite group" ), "https://www.celestrak.com/NORAD/elements/other.txt" );
 
     readSettings();
     m_configDialog->update();

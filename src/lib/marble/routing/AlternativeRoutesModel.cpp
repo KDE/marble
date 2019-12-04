@@ -48,7 +48,7 @@ public:
 
     /**
       * Returns the bearing of the great circle path defined by the coordinates one and two
-      * Based on http://www.movable-type.co.uk/scripts/latlong.html
+      * Based on https://www.movable-type.co.uk/scripts/latlong.html
       */
     static qreal bearing( const GeoDataCoordinates &one, const GeoDataCoordinates &two );
 

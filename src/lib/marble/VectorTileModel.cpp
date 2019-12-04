@@ -104,8 +104,8 @@ void VectorTileModel::setViewport(const GeoDataLatLonBox &latLonBox)
     /** LOGIC FOR DOWNLOADING ALL THE TILES THAT ARE INSIDE THE SCREEN AT THE CURRENT ZOOM LEVEL **/
 
     // New tiles X and Y for moved screen coordinates
-    // More info: http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#Subtiles
-    // More info: http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#C.2FC.2B.2B
+    // More info: https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#Subtiles
+    // More info: https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#C.2FC.2B.2B
     const QRect rect = m_layer->tileProjection()->tileIndexes(latLonBox, tileLoadLevel);
 
     // Download tiles and send them to VectorTileLayer

@@ -1097,8 +1097,8 @@ int GeoDataCoordinatesPrivate::lonLatToZone( qreal lon, qreal lat ){
     }
 
     // Obtains the zone number handling all the so called "exceptions"
-    // See problem: http://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system#Exceptions
-    // See solution: http://gis.stackexchange.com/questions/13291/computing-utm-zone-from-lat-long-point
+    // See problem: https://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system#Exceptions
+    // See solution: https://gis.stackexchange.com/questions/13291/computing-utm-zone-from-lat-long-point
 
     // General
     int zoneNumber = static_cast<int>( (lonDeg+180) / 6.0 ) + 1;

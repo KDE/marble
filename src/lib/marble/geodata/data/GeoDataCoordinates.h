@@ -321,7 +321,7 @@ class GEODATA_EXPORT GeoDataCoordinates
 
     /**
      * @brief This method calculates the shortest distance between two points on a sphere.
-     * @brief See: http://en.wikipedia.org/wiki/Great-circle_distance
+     * @brief See: https://en.wikipedia.org/wiki/Great-circle_distance
      */
     qreal sphericalDistanceTo(const GeoDataCoordinates &other) const;
 

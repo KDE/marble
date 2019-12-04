@@ -3011,7 +3011,7 @@ GeoDataPlacemark::GeoDataVisualCategory StyleBuilder::determineVisualCategory(co
     QString const capital(QStringLiteral("capital"));
     QString const admin_level(QStringLiteral("admin_level"));
     // National capitals have admin_level=2
-    // More at http://wiki.openstreetmap.org/wiki/Key:capital#Using_relations_for_capitals
+    // More at https://wiki.openstreetmap.org/wiki/Key:capital#Using_relations_for_capitals
     QString const national_level(QStringLiteral("2"));
 
     for (auto iter = osmData.tagsBegin(), end = osmData.tagsEnd(); iter != end; ++iter) {

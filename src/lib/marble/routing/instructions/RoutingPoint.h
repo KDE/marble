@@ -37,14 +37,14 @@ public:
     /**
       * Calculates the bearing of the line defined by this point
       * and the given other point.
-      * Code based on http://www.movable-type.co.uk/scripts/latlong.html
+      * Code based on https://www.movable-type.co.uk/scripts/latlong.html
       */
     qreal bearing( const RoutingPoint &other ) const;
 
     /**
       * Calculates the distance in meter between this point and the
       * given other point.
-      * Code based on http://www.movable-type.co.uk/scripts/latlong.html
+      * Code based on https://www.movable-type.co.uk/scripts/latlong.html
       */
     qreal distance( const RoutingPoint &other ) const;
 

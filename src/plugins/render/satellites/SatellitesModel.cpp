@@ -140,7 +140,7 @@ void SatellitesModel::parseCatalog( const QString &id,
                                     const QByteArray &data )
 {
     // For details see:
-    // http://techbase.kde.org/Projects/Marble/SatelliteCatalogFormat
+    // https://techbase.kde.org/Projects/Marble/SatelliteCatalogFormat
 
     mDebug() << "Reading satellite catalog from:" << id;
 

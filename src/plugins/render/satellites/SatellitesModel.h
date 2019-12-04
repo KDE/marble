@@ -42,7 +42,7 @@ protected:
     /**
      * Parse the Marble Satellite Catalog @p id with content @p data.
      * A description of the Marble Satellites Catalog format can be found at:
-     * http://techbase.kde.org/Projects/Marble/SatelliteCatalogFormat
+     * https://techbase.kde.org/Projects/Marble/SatelliteCatalogFormat
      */
     void parseCatalog( const QString &id, const QByteArray &data );
     /**

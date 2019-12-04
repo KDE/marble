@@ -176,7 +176,7 @@ GeoDataCoordinates SatellitesTLEItem::fromTEME( double x,
     double lat = atan2( z, sqrt( x*x + y*y ) );
 
     //TODO: determine if this is worth the extra precision
-    // Algorithm from http://celestrak.com/columns/v02n03/
+    // Algorithm from https://celestrak.com/columns/v02n03/
     //TODO: demonstrate it.
     double a = m_earthSemiMajorAxis;
     double planetRadius = sqrt( x*x + y*y );

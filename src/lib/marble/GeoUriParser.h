@@ -19,7 +19,7 @@ namespace Marble {
 
 /**
  * A class for parsing Geo: URIs.
- * Wikipage: http://en.wikipedia.org/wiki/Geo_URI
+ * Wikipage: https://en.wikipedia.org/wiki/Geo_URI
  * RFC: 5870 (8 June 2010)
  */
 class MARBLE_EXPORT GeoUriParser {

@@ -59,7 +59,7 @@ void MarblePluginSettingsWidgetPrivate::showPluginAboutDialog( const QModelIndex
     aboutDialog->setIcon( qvariant_cast<QIcon>( m_pluginModel->data( index, RenderPluginModel::Icon ) ) );
     aboutDialog->setVersion( m_pluginModel->data( index, RenderPluginModel::Version ).toString() );
     aboutDialog->setDataText( m_pluginModel->data( index, RenderPluginModel::AboutDataText ).toString() );
-    const QString copyrightText = QObject::tr( "<br/>(c) %1 The Marble Project<br /><br/><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>" );
+    const QString copyrightText = QObject::tr( "<br/>(c) %1 The Marble Project<br /><br/><a href=\"https://edu.kde.org/marble\">https://edu.kde.org/marble</a>" );
     aboutDialog->setAboutText( copyrightText.arg( m_pluginModel->data( index, RenderPluginModel::CopyrightYears ).toString() ) );
     aboutDialog->setAuthors( m_pluginModel->pluginAuthors( index ) );
 

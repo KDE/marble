@@ -43,7 +43,7 @@ Planet PlanetFactory::construct( const QString &id )
     Planet planet;
     planet.setId( id );
 
-    // constants taken from http://aa.quae.nl/en/reken/zonpositie.html
+    // constants taken from https://aa.quae.nl/en/reken/zonpositie.html
 
     if (id == QLatin1String("mercury")) {
         planet.setM_0( 174.7948*DEG2RAD );
