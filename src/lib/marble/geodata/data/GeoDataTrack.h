@@ -30,7 +30,7 @@ class GeoDataCoordinates;
  *
  * GeoDataTrack implements the Track tag defined in Google's extension of the
  * Open Geospatial Consortium standard KML 2.2 at
- * http://code.google.com/apis/kml/documentation/kmlreference.html#gxtrack .
+ * https://developers.google.com/kml/documentation/kmlreference#gxtrack .
  *
  * A track is made of points, each point has a coordinates and a time value
  * associated with the coordinates. New points can be added using the addPoint()

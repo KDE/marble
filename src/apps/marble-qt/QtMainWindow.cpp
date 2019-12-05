@@ -899,12 +899,12 @@ void MainWindow::handbook()
 {
     const QString code = MarbleLocale::languageCode();
 
-    QUrl handbookLocation(QLatin1String("http://docs.kde.org/stable/") + code + QLatin1String("/kdeedu/marble/index.html"));
+    QUrl handbookLocation(QLatin1String("https://docs.kde.org/stable/") + code + QLatin1String("/kdeedu/marble/index.html"));
 
     // TODO: this logic seems broken. Should that check "code.isEmpty()" instead?
-    // and how do we konw there is a doc for the code?
+    // and how do we know there is a doc for the code?
     if ( handbookLocation.isEmpty() )
-        handbookLocation = QUrl("http://docs.kde.org/stable/en/kdeedu/marble/index.html");
+        handbookLocation = QUrl("https://docs.kde.org/stable/en/kdeedu/marble/index.html");
 
     if( !QDesktopServices::openUrl( handbookLocation ) )
     qDebug() << "URL not opened";

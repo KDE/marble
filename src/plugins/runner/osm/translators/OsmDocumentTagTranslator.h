@@ -27,7 +27,7 @@ namespace Marble
      block of relations: ( <relation> ...) 3rd
 @endcode
 
-     See http://wiki.openstreetmap.org/wiki/OSM_XML#Contents
+     See https://wiki.openstreetmap.org/wiki/OSM_XML#Contents
 
 */
 

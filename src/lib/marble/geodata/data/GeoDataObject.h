@@ -34,7 +34,7 @@ class GeoDataObjectPrivate;
  *
  * The Geodata objects are all modeled after the Google KML files as
  * defined in
- * http://code.google.com/apis/kml/documentation/kml_tags_21.html.
+ * https://developers.google.com/kml/documentation/kmlreference.
  *
  * A GeoDataObject contains 2 properties, both corresponding directly
  * to tags in the KML files: the <b>id</b>, which is a unique

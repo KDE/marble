@@ -108,7 +108,7 @@ public:
 
     /**
      * @brief Change the URI for resolving relative paths.
-     * See http://tools.ietf.org/html/rfc3986#section-5
+     * See https://tools.ietf.org/html/rfc3986#section-5
      */
     void setBaseUri( const QString &baseUri );
 

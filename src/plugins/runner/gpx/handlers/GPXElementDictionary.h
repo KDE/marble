@@ -26,7 +26,7 @@
 namespace Marble
 {
 
-// Lists all known GPX 1.1 tags (http://www.topografix.com/GPX/1/1/)
+// Lists all known GPX 1.1 tags (https://www.topografix.com/GPX/1/1/)
 namespace gpx
 {
     extern const char gpxTag_nameSpace10[];

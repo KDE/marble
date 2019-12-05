@@ -154,7 +154,7 @@ bool OsmWay::isAreaTag(const StyleBuilder::OsmTag &keyValue)
 {
     if (s_areaTags.isEmpty()) {
         // All these tags can be found updated at
-        // http://wiki.openstreetmap.org/wiki/Map_Features#Landuse
+        // https://wiki.openstreetmap.org/wiki/Map_Features#Landuse
 
         s_areaTags.insert(StyleBuilder::OsmTag(QStringLiteral("natural"), QStringLiteral("water")));
         s_areaTags.insert(StyleBuilder::OsmTag(QStringLiteral("natural"), QStringLiteral("wood")));

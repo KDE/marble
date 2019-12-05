@@ -139,7 +139,7 @@ QList<OsmTagEditorWidgetPrivate::OsmTag> OsmTagEditorWidgetPrivate::recommendedT
 QStringList OsmTagEditorWidgetPrivate::generateTagFilter() const
 {
     // TO DO: implement more dynamic criteria for the filter
-    // based on https://taginfo.openstreetmap.org/ and http://wiki.openstreetmap.org/wiki/
+    // based on https://taginfo.openstreetmap.org/ and https://wiki.openstreetmap.org/wiki/
 
     // Contains all keys that should pass through the filter ( eg. { "amenity", "landuse", etc.. } )
     QStringList filter;

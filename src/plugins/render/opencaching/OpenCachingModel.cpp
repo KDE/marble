@@ -147,7 +147,7 @@ void OpenCachingModel::getAdditionalItems( const GeoDataLatLonAltBox& box, const
         return;
     }
 
-    // http://www.opencaching.de/doc/xml/xml11.htm
+    // https://www.opencaching.de/doc/xml/xml11.htm
     const QString openCachingUrl(QLatin1String("http://www.opencaching.de/xml/ocxml11.php") +
         QLatin1String("?modifiedsince=") + m_startDate.toString("yyyyMMddhhmmss") +
         QLatin1String("&cache=1&cachedesc=1&picture=0&cachelog=1&removedobject=0") +

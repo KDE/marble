@@ -16,7 +16,7 @@ namespace osm
 {
 
 // OSM data primitives and what they represent
-// http://wiki.openstreetmap.org/wiki/Elements
+// https://wiki.openstreetmap.org/wiki/Elements
 const char osmTag_version06[] = "0.6";
 
 // KML to OSM translators

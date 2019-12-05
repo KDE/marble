@@ -99,7 +99,7 @@ int main ( int argc, char *argv[] )
                           KAboutLicense::LGPL_V2,
                           i18n( "(c) 2007-%1", QLatin1String("2016") ),
                           QString(),
-                          "http://marble.kde.org/" );
+                          "https://marble.kde.org/" );
 
     // Active Development Team of Marble
     aboutData.addAuthor( i18n( "Torsten Rahn" ),
@@ -113,7 +113,7 @@ int main ( int argc, char *argv[] )
                          "tgridel@free.fr" );
     aboutData.addAuthor( i18n( "Jens-Michael Hoffmann" ),
                          i18n( "OpenStreetMap Integration, OSM Namefinder, Download Management" ),
-                         "jmho@c-xx.com", "http://www.c-xx.com" );
+                         "jmho@c-xx.com" );
     aboutData.addAuthor( i18n( "Florian E&szlig;er" ),
                          i18n( "Elevation Profile" ),
                          "f.esser@rwth-aachen.de" );

@@ -87,7 +87,7 @@ QUrl BBCWeatherItem::forecastUrl() const
 
 QString BBCWeatherItem::creditHtml() const
 {
-    return tr( "Supported by <a href=\"http://backstage.bbc.co.uk\" target=\"_BLANK\">backstage.bbc.co.uk</a>.<br>Weather data from UK MET Office" );
+    return tr( "Supported by <a href=\"https://www.bbc.co.uk/blogs/bbcbackstage\" target=\"_BLANK\">backstage.bbc.co.uk</a>.<br>Weather data from UK MET Office" );
 }
 
 #include "moc_BBCWeatherItem.cpp"

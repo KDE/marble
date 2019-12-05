@@ -326,7 +326,7 @@ void ControlView::printPixmap( QPrinter * printer, const QPixmap& pixmap  )
 #endif
 }
 
-// QPointer is used because of issues described in http://www.kdedevelopers.org/node/3919
+// QPointer is used because of issues described in https://blogs.kde.org/2009/03/26/how-crash-almost-every-qtkde-application-and-how-fix-it-0
 void ControlView::printPreview()
 {
 #ifndef QT_NO_PRINTER

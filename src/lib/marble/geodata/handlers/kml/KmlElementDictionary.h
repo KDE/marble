@@ -27,7 +27,7 @@
 namespace Marble
 {
 
-// Lists all known KML 2.1 tags (http://code.google.com/apis/kml/documentation/kmlTag_tags_21.html)
+// Lists all known KML 2.1 tags (https://developers.google.com/kml/documentation/kmlreferencel)
 namespace kml
 {
     GEODATA_EXPORT extern const char kmlTag_nameSpace20[];
@@ -213,7 +213,7 @@ namespace kml
     GEODATA_EXPORT extern const char kmlTag_z[];
 
 
-    // Google KML Extension Namespace (http://code.google.com/apis/kml/documentation/kmlreference.html#kmlextensions)
+    // Google KML Extension Namespace (https://developers.google.com/kml/documentation/kmlreference#kml-extension-namespace-and-the-gx-prefix)
     GEODATA_EXPORT extern const char kmlTag_AnimatedUpdate[];
     GEODATA_EXPORT extern const char kmlTag_FlyTo[];
     GEODATA_EXPORT extern const char kmlTag_MultiTrack[];
