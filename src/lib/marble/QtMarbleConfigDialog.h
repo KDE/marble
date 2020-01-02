@@ -48,6 +48,7 @@ class MARBLE_EXPORT QtMarbleConfigDialog : public QDialog
     bool animateTargetVoyage() const;
     QString externalMapEditor() const;
     bool inertialEarthRotation() const;
+    bool mouseViewRotation() const;
 
     // Cache Settings
     int volatileTileCacheLimit() const;

@@ -300,6 +300,7 @@ void QtMarbleConfigDialog::readSettings()
     d->ui_navigationSettings.kcfg_dragLocation->setCurrentIndex( Marble::KeepAxisVertically );
     d->ui_navigationSettings.kcfg_onStartup->setCurrentIndex( onStartup() );
     d->ui_navigationSettings.kcfg_inertialEarthRotation->setChecked( inertialEarthRotation() );
+    d->ui_navigationSettings.kcfg_mouseViewRotation->setChecked( mouseViewRotation() );
     d->ui_navigationSettings.kcfg_animateTargetVoyage->setChecked( animateTargetVoyage() );
     int editorIndex = 0;
     if (externalMapEditor() == QLatin1String("potlatch")) {
@@ -393,6 +394,7 @@ void QtMarbleConfigDialog::writeSettings()
     d->m_settings.beginGroup( "Navigation" );
     d->m_settings.setValue( "onStartup", d->ui_navigationSettings.kcfg_onStartup->currentIndex() );
     d->m_settings.setValue( "inertialEarthRotation", d->ui_navigationSettings.kcfg_inertialEarthRotation->isChecked() );
+    d->m_settings.setValue( "mouseViewRotation", d->ui_navigationSettings.kcfg_mouseViewRotation->isChecked() );
     d->m_settings.setValue( "animateTargetVoyage", d->ui_navigationSettings.kcfg_animateTargetVoyage->isChecked() );
     if( d->ui_navigationSettings.kcfg_externalMapEditor->currentIndex() == 0 ) {
         d->m_settings.setValue( "externalMapEditor", "" );
@@ -507,6 +509,11 @@ bool QtMarbleConfigDialog::animateTargetVoyage() const
 bool QtMarbleConfigDialog::inertialEarthRotation() const
 {
     return d->m_settings.value( "Navigation/inertialEarthRotation", true ).toBool();
+}
+
+bool QtMarbleConfigDialog::mouseViewRotation() const
+{
+    return d->m_settings.value( "Navigation/mouseViewRotation", true ).toBool();
 }
 
 int QtMarbleConfigDialog::volatileTileCacheLimit() const

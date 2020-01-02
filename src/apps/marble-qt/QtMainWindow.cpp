@@ -1494,6 +1494,7 @@ void MainWindow::updateSettings()
 
     m_controlView->marbleWidget()->setAnimationsEnabled( m_configDialog->animateTargetVoyage() );
     m_controlView->marbleWidget()->inputHandler()->setInertialEarthRotationEnabled( m_configDialog->inertialEarthRotation() );
+    m_controlView->marbleWidget()->inputHandler()->setMouseViewRotationEnabled( m_configDialog->mouseViewRotation() );
     if ( !m_configDialog->externalMapEditor().isEmpty() ) {
         m_controlView->setExternalMapEditor( m_configDialog->externalMapEditor() );
     }

@@ -48,6 +48,7 @@ public:
     qreal m_wheelZoomTargetDistance;
     bool m_panViaArrowsEnabled;
     bool m_inertialEarthRotation;
+    bool m_mouseViewRotation;
     int m_steps;
     const int m_discreteZoomSteps = 120;
 };
@@ -60,6 +61,7 @@ MarbleInputHandler::Protected::Protected(MarbleAbstractPresenter *marblePresente
       m_wheelZoomTargetDistance( 0.0 ),
       m_panViaArrowsEnabled( true ),
       m_inertialEarthRotation( true ),
+      m_mouseViewRotation( true ),
       m_steps(0)
 {
 }
@@ -125,6 +127,16 @@ void MarbleInputHandler::setInertialEarthRotationEnabled(bool enabled)
 bool MarbleInputHandler::inertialEarthRotationEnabled() const
 {
     return d->m_inertialEarthRotation;
+}
+
+void MarbleInputHandler::setMouseViewRotationEnabled(bool enabled)
+{
+    d->m_mouseViewRotation = enabled;
+}
+
+bool MarbleInputHandler::mouseViewRotationEnabled() const
+{
+    return d->m_mouseViewRotation;
 }
 
 void MarbleInputHandler::stopInertialEarthRotation()
@@ -837,7 +849,7 @@ bool MarbleDefaultInputHandler::handleMouseEvent(QMouseEvent *event)
             MarbleInputHandler::d->m_marblePresenter->setRadius(d->m_startingRadius * pow(1.005, dy));
         }
 
-        if (d->m_rightPressed)
+        if (d->m_rightPressed && MarbleInputHandler::d->m_mouseViewRotation)
         {
             qreal centerX, centerY;
             MarbleInputHandler::d->m_marblePresenter->map()->screenCoordinates(

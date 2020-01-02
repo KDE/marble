@@ -194,6 +194,9 @@
   <entry key="inertialEarthRotation" type="Bool" >
    <default>true</default>
   </entry>
+  <entry key="mouseViewRotation" type="Bool" >
+   <default>true</default>
+  </entry>
   <entry key="animateTargetVoyage" type="Bool" >
    <label>Display animation on voyage to target.</label>
    <default>false</default>

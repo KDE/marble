@@ -1609,6 +1609,7 @@ void MarblePart::updateSettings()
     // External map editor
     m_controlView->setExternalMapEditor( m_externalEditorMapping[MarbleSettings::externalMapEditor()] );
     m_controlView->marbleWidget()->inputHandler()->setInertialEarthRotationEnabled( MarbleSettings::inertialEarthRotation() );
+    m_controlView->marbleWidget()->inputHandler()->setMouseViewRotationEnabled( MarbleSettings::mouseViewRotation() );
 
     CloudSyncManager* cloudSyncManager = m_controlView->cloudSyncManager();
     cloudSyncManager->setOwncloudCredentials( MarbleSettings::owncloudServer(),

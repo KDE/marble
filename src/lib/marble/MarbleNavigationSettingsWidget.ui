@@ -90,6 +90,16 @@ p, li { white-space: pre-wrap; }
         </property>
        </widget>
       </item>
+      <item>
+       <widget class="QCheckBox" name="kcfg_mouseViewRotation">
+        <property name="toolTip">
+         <string>Use right mouse button to rotate the camera around</string>
+        </property>
+        <property name="text">
+         <string>&amp;Mouse view rotation</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
