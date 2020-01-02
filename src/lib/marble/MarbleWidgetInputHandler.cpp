@@ -19,7 +19,10 @@
 #include "MarbleGlobal.h"
 #include "MarbleDebug.h"
 #include "MarbleWidget.h"
+#include "MarbleMap.h"
+#include "ViewportParams.h"
 #include "AbstractDataPluginItem.h"
+#include "MarbleAbstractPresenter.h"
 #include "MarbleWidgetPopupMenu.h"
 #include "PopupLayer.h"
 #include "RenderPlugin.h"
@@ -50,12 +53,14 @@ class MarbleWidgetInputHandlerPrivate
     };
 
     public:
-        MarbleWidgetInputHandlerPrivate(MarbleWidgetInputHandler *handler, MarbleWidget *widget)
+        MarbleWidgetInputHandlerPrivate(MarbleWidgetInputHandler *handler, MarbleWidget *widget,
+                                        MarbleAbstractPresenter *presenter)
             : m_inputHandler(handler)
             ,m_marbleWidget(widget)
+            ,m_marblePresenter(presenter)
             ,m_selectionRubber(widget)
             ,m_debugModeEnabled(false)
-        {         
+        {
             for(RenderPlugin *renderPlugin: widget->renderPlugins())
             {
                 if(renderPlugin->isInitialized())
@@ -93,8 +98,11 @@ class MarbleWidgetInputHandlerPrivate
 
         MarbleWidgetInputHandler *m_inputHandler;
         MarbleWidget *m_marbleWidget;
+        MarbleAbstractPresenter *m_marblePresenter;
         MarbleWidgetSelectionRubber m_selectionRubber;
         bool m_debugModeEnabled;
+        bool m_pinchDetected = false;
+        bool m_panDetected = false;
 };
 
 
@@ -171,6 +179,103 @@ bool MarbleWidgetInputHandler::handleKeyPress(QKeyEvent *event)
     return MarbleDefaultInputHandler::handleKeyPress(event);
 }
 
+bool MarbleWidgetInputHandler::handleTouch(QTouchEvent *event)
+{
+    event->accept();
+
+    if (event->touchPoints().count() == 1)
+    {
+        QTouchEvent::TouchPoint p = event->touchPoints().at(0);
+        if (event->type() == QEvent::TouchBegin)
+        {
+            d->m_pinchDetected = false;
+            d->m_panDetected = false;
+            QMouseEvent press(QMouseEvent::MouseButtonPress, p.pos(),
+                              Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+            handleMouseEvent(&press);
+        }
+        else if (event->type() == QEvent::TouchUpdate)
+        {
+            if (!d->m_pinchDetected)
+            {
+                d->m_panDetected = true;
+                QMouseEvent move(QMouseEvent::MouseMove, p.pos(),
+                                 Qt::NoButton, Qt::LeftButton, Qt::NoModifier);
+                handleMouseEvent(&move);
+            }
+        }
+        else if (event->type() == QEvent::TouchEnd)
+        {
+            // avoid triggering mouse clicked signal when we just changed the viewport
+            if (d->m_pinchDetected || d->m_panDetected)
+                blockSignals(true);
+
+            QMouseEvent release(QMouseEvent::MouseButtonRelease, p.pos(),
+                                Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+            handleMouseEvent(&release);
+
+            if (d->m_pinchDetected || d->m_panDetected)
+            {
+                if (d->m_pinchDetected)
+                    stopInertialEarthRotation();  // ensures we keep the viewport
+
+                blockSignals(false);
+            }
+        }
+    }
+    return true;
+}
+
+bool MarbleWidgetInputHandler::handleGesture(QGestureEvent *e)
+{
+    QPinchGesture *pinch = static_cast<QPinchGesture*>(e->gesture(Qt::PinchGesture));
+    if (pinch && !d->m_panDetected)
+    {
+        d->m_pinchDetected = true;
+        handlePinchGesture(pinch);
+        return true;
+    }
+
+    return false;
+}
+
+void MarbleWidgetInputHandler::handlePinchGesture(QPinchGesture *pinch)
+{
+    MarbleAbstractPresenter *marblePresenter = d->m_marblePresenter;
+
+    switch (pinch->state())
+    {
+    case Qt::NoGesture:
+        break;
+    case Qt::GestureStarted:
+        marblePresenter->setViewContext(Animation);
+        break;
+    case Qt::GestureUpdated:
+    {
+        qreal scaleFactor = pinch->scaleFactor();
+        QPoint center = d->m_marbleWidget->mapFromGlobal(pinch->centerPoint().toPoint());
+
+        if (scaleFactor > 1.0)
+            scaleFactor = 0.2;
+        else if (scaleFactor < 1.0)
+            scaleFactor = -0.2;
+        else return;  // 1 .. no change
+
+        qreal zoom = marblePresenter->zoom();
+        bool oldAnim = marblePresenter->animationsEnabled();
+        qreal newDistance = marblePresenter->distanceFromZoom(zoom + 20 * scaleFactor);
+        marblePresenter->setAnimationsEnabled(false);
+        marblePresenter->zoomAt(center, newDistance);
+        marblePresenter->setAnimationsEnabled(oldAnim);
+        break;
+    }
+    case Qt::GestureFinished:
+    case Qt::GestureCanceled:
+        restoreViewContext();
+        break;
+    }
+}
+
 AbstractSelectionRubber *MarbleWidgetInputHandler::selectionRubber()
 {
     return &d->m_selectionRubber;
@@ -188,7 +293,7 @@ void MarbleWidgetInputHandler::installPluginEventFilter(RenderPlugin *renderPlug
 
 MarbleWidgetInputHandler::MarbleWidgetInputHandler(MarbleAbstractPresenter *marblePresenter, MarbleWidget *widget)
     : MarbleDefaultInputHandler(marblePresenter)
-    ,d(new MarbleWidgetInputHandlerPrivate(this, widget))
+    ,d(new MarbleWidgetInputHandlerPrivate(this, widget, marblePresenter))
 {
 }
 
@@ -200,7 +305,7 @@ void MarbleWidgetInputHandler::setDebugModeEnabled(bool enabled)
 //FIXME - these should be moved to superclass and popupMenu should be abstracted in MarbleAbstractPresenter
 void MarbleWidgetInputHandler::showLmbMenu(int x, int y)
 {
-    if (isMouseButtonPopupEnabled(Qt::LeftButton))
+    if (isMouseButtonPopupEnabled(Qt::LeftButton) && !d->m_pinchDetected && !d->m_panDetected)
     {
         d->m_marbleWidget->popupMenu()->showLmbMenu(x, y);
         toolTipTimer()->stop();

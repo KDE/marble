@@ -15,6 +15,7 @@
 
 #include <QObject>
 #include <QSharedPointer>
+#include <QPinchGesture>
 #include "MarbleInputHandler.h"
 
 namespace Marble
@@ -42,8 +43,12 @@ private Q_SLOTS:
 
 private:
     bool handleKeyPress(QKeyEvent* event) override;
+    bool handleTouch(QTouchEvent *event) override;
+    bool handleGesture(QGestureEvent *e) override;
     AbstractSelectionRubber *selectionRubber() override;
     bool layersEventFilter(QObject *o, QEvent *e) override;
+
+    void handlePinchGesture(QPinchGesture *pinch);
 
     using MarbleWidgetInputHandlerPrivatePtr = QSharedPointer<MarbleWidgetInputHandlerPrivate>;
     MarbleWidgetInputHandlerPrivatePtr d;
