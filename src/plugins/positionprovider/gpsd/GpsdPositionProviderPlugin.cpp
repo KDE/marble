@@ -113,9 +113,17 @@ void GpsdPositionProviderPlugin::update( gps_data_t data )
             m_track = data.fix.track;
         }
 
+#if defined( GPSD_API_MAJOR_VERSION ) && ( GPSD_API_MAJOR_VERSION >= 9 )
+        if ( !std::isnan( data.fix.time.tv_sec ) )
+#else
         if ( !std::isnan( data.fix.time ) )
+#endif
         {
+#if defined( GPSD_API_MAJOR_VERSION ) && ( GPSD_API_MAJOR_VERSION >= 9 )
+            m_timestamp = QDateTime::fromMSecsSinceEpoch( data.fix.time.tv_sec * 1000 + data.fix.time.tv_nsec / 1000000 );
+#else
             m_timestamp = QDateTime::fromMSecsSinceEpoch( data.fix.time * 1000 );
+#endif
         }
     }
     if (m_status != oldStatus)
