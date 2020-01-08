@@ -324,8 +324,6 @@ int main ( int argc, char *argv[] )
     QApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("marble")));
 
     QCommandLineParser parser;
-    parser.addHelpOption();
-    parser.addVersionOption();
     aboutData.setupCommandLine(&parser);
 
     // Autodetect profiles
