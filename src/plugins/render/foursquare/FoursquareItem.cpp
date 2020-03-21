@@ -13,6 +13,7 @@
 #include "ViewportParams.h"
 
 #include <QFontMetrics>
+#include <QPainterPath>
  
 namespace Marble
 {

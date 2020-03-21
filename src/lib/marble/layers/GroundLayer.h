@@ -14,6 +14,7 @@
 #include "LayerInterface.h"
 
 #include <QColor>
+#include <QPainterPath>
 
 namespace Marble
 {

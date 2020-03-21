@@ -17,6 +17,7 @@
 // Qt
 #include <QFontMetrics>
 #include <QPainter>
+#include <QPainterPath>
 
 using namespace Marble;
 

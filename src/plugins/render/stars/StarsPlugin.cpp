@@ -19,6 +19,7 @@
 #include <QContextMenuEvent>
 #include <QMenu>
 #include <QColorDialog>
+#include <QPainterPath>
 #include <qmath.h>
 
 #include "MarbleClock.h"

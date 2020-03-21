@@ -18,6 +18,7 @@
 // Qt
 #include <QSizeF>
 #include <QPainter>
+#include <QPainterPath>
 #include <QPixmapCache>
 #include <QMargins>
 #include <qdrawutil.h>

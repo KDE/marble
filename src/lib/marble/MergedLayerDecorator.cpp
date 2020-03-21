@@ -36,6 +36,7 @@
 
 #include <QPointer>
 #include <QPainter>
+#include <QPainterPath>
 
 using namespace Marble;
 

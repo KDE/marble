@@ -22,6 +22,7 @@
 #include <QColor>
 #include <QPaintDevice>
 #include <QPainter>
+#include <QPainterPath>
 
 namespace Marble
 {

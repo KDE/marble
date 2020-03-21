@@ -9,6 +9,7 @@
 #include "MarbleDirs.h"
 
 #include <QPainter>
+#include <QPainterPath>
 #include <QRect>
 
 using namespace Marble;
