@@ -90,6 +90,7 @@
     <p xml:lang="pt">O Marble é um globo virtual e um atlas mundial — o seu canivete-suíço para mapas, que poderá usar para aprender mais sobre a Terra e os outros planetas.</p>
     <p xml:lang="pt-BR">Marble é um globo virtual e um atlas mundial — seu canivete-suíço para mapas que você pode usar para aprender mais sobre a Terra e outros planetas.</p>
     <p xml:lang="sk">Marble je virtuálny glóbus a atlas sveta - váš švajčiarsky nožík pre mapy, ktorý môžete použiť na získanie ďalších informácií o Zemi a ostatných planétach.</p>
+    <p xml:lang="sl">Marble je navidezni globus in atlas sveta - vaš švicarski nož za zemljevide, da se lahko naučite več o Zemlji in drugih planetih.</p>
     <p xml:lang="sv">Marble är en virtuell jordglob och världsatlas - det generella kartverktyget som kan användas för att lära sig mer om jorden och andra planeter.</p>
     <p xml:lang="uk">Marble — віртуальний глобус та атлас світу, — ваш універсальний інструмент для роботи з картами, яким ви можете скористатися для вивчення Землі та інших планет.</p>
     <p xml:lang="x-test">xxMarble is a virtual globe and world atlas — your swiss army knife for maps that you can use to learn more about the Earth and other planets.xx</p>
@@ -174,6 +175,7 @@
       <caption xml:lang="pt">Globo terrestre no Marble</caption>
       <caption xml:lang="pt-BR">Globo terrestre no Marble</caption>
       <caption xml:lang="sk">Zemeguľa v Marble</caption>
+      <caption xml:lang="sl">Globus v Marble</caption>
       <caption xml:lang="sv">Jordgloben i Marble</caption>
       <caption xml:lang="uk">Глобус Землі у вікні Marble</caption>
       <caption xml:lang="x-test">xxEarth globe in Marblexx</caption>
