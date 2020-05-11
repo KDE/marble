@@ -78,6 +78,7 @@
     <p xml:lang="ca">El Marble és un globus terraqüi virtual i un atles mundial — la navalla suïssa dels mapes que es pot usar per aprendre més quant a la Terra i altres planetes.</p>
     <p xml:lang="ca-valencia">El Marble és un globus terraqüi virtual i un atles mundial — la navalla suïssa dels mapes que es pot usar per aprendre més quant a la Terra i altres planetes.</p>
     <p xml:lang="de">Marble ist ein virtueller Globus und Weltatlas — Ihr leistungsfähiges Werkzeug für Karten. Sie können das Programm benutzen, um mehr der die Erde und andere Planeten zu lernen.</p>
+    <p xml:lang="el">Το Marble είναι μια εικονική υδρόγειος σφαίρα και παγκόσμιος άτλας — το απόλυτο εργαλείο για χάρτες με το οποίο μπορείτε να μάθετε για τη Γη και για άλλους πλανήτες.</p>
     <p xml:lang="en-GB">Marble is a virtual globe and world atlas — your Swiss army knife for maps that you can use to learn more about the Earth and other planets.</p>
     <p xml:lang="es">Marble es un globo virtual y atlas mundial: su navaja suiza para los mapas que puede usar para aprender más sobre la Tierra y otros planetas.</p>
     <p xml:lang="et">Marble kujutab endast virtuaalset gloobust ja maailmaatlast - sinu parimat tööriista, kui tahad õppida lähemalt tundma maakera ja teisi planeete.</p>
@@ -162,6 +163,7 @@
       <caption xml:lang="ca">Globus terraqüi al Marble</caption>
       <caption xml:lang="ca-valencia">Globus terraqüi al Marble</caption>
       <caption xml:lang="de">Erdglobus in Marble</caption>
+      <caption xml:lang="el">Η υδρόγειος στο Marble</caption>
       <caption xml:lang="en-GB">Earth globe in Marble</caption>
       <caption xml:lang="es">Globo terrestre en Marble</caption>
       <caption xml:lang="et">Maakera Marbles</caption>
