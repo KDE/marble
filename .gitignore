@@ -4,3 +4,4 @@ src/apps/marble_maps/Marble.keystore
 # kde-style translation system folders
 po
 enpo
+.cmake/
