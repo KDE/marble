@@ -126,6 +126,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL Android)
 
    set ( MARBLE_NO_WEBKITWIDGETS TRUE )
 else()
+    find_package(Qt5WebChannel ${REQUIRED_QT_VERSION})
     find_package(Qt5WebEngine ${REQUIRED_QT_VERSION})
     find_package(Qt5WebEngineWidgets ${REQUIRED_QT_VERSION})
 

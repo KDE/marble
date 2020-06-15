@@ -395,6 +395,7 @@ target_link_libraries(marblewidget
 if (NOT MARBLE_NO_WEBKITWIDGETS)
     target_link_libraries(marblewidget
         LINK_PUBLIC
+            Qt5::WebChannel
             Qt5::WebEngineWidgets
             Qt5::WebEngine
     )
