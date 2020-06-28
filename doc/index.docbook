@@ -1485,33 +1485,6 @@ url="https://owncloud.com/">ownClowd official website</ulink>.</para>
 
 	 </chapter>
 
-	 <appendix id="installation">
-		 <title>Installation</title>
-
-		 <sect1 id="requirements">
-			 <title>Requirements</title>
-
-			 <para>
-				 &marble; itself can be found on the <ulink
-					 url="https://marble.kde.org">&marble; website</ulink> and
-				 is part of the &kde;-Edu project</para>
-
-			 <para>You can find a list of changes in the file
-				 <filename>ChangeLog</filename> in the distribution of
-				 &marble;.</para>
-		 </sect1>
-
-		 <sect1 id="compilation">
-			 <title>Compilation and Installation</title>
-
-             <para>
-                 &marble; can be compiled as a &Qt; 5-only version as well as featuring &kde; &frameworks; 5 usage.
-                 To compile &marble; with &Qt; 5-only support check out &marble; from its &kde; Git repository into ~/marble and just do: <command>cmake -DWITH_KF5=FALSE ~/marble</command> and <command>sudo make install</command>. To compile &marble; with &kde; &frameworks; 5 usage check instructions on how to compile &kde; applications at <ulink url="https://techbase.kde.org/">&kde;'s TechBase</ulink>.
-             </para> 
-		 </sect1>
-
-	 </appendix>
-
 	 &documentation.index;
  </book>
  <!--
