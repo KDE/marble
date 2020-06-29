@@ -67,6 +67,8 @@ void O5mWriter::writeNodes(const OsmConverter::Nodes &nodes, QDataStream &stream
     double lastLon = 0.0;
     double lastLat = 0.0;
 
+    QByteArray bufferData;
+    QBuffer buffer(&bufferData);
     for(auto const & node: nodes) {
         if (node.second.id() == lastId) {
             continue;
@@ -74,7 +76,7 @@ void O5mWriter::writeNodes(const OsmConverter::Nodes &nodes, QDataStream &stream
 
         stream << qint8(0x10); // node section start indicator
 
-        QBuffer buffer;
+        bufferData.clear();
         buffer.open(QIODevice::WriteOnly);
         QDataStream bufferStream(&buffer);
 
@@ -89,8 +91,9 @@ void O5mWriter::writeNodes(const OsmConverter::Nodes &nodes, QDataStream &stream
         writeSigned(deltaTo(lat, lastLat), bufferStream);
         writeTags(osmData, stringTable, bufferStream);
 
-        writeUnsigned(buffer.size(), stream);
-        stream.writeRawData(buffer.data().constData(), buffer.size());
+        buffer.close();
+        writeUnsigned(bufferData.size(), stream);
+        stream.writeRawData(bufferData.constData(), bufferData.size());
 
         lastId = osmData.id();
         lastLon = lon;
@@ -109,6 +112,10 @@ void O5mWriter::writeWays(const OsmConverter::Ways &ways, QDataStream &stream) c
     qint64 lastId = 0;
     qint64 lastReferenceId = 0;
 
+    QByteArray bufferData;
+    QBuffer buffer(&bufferData);
+    QByteArray referencesBufferData;
+    QBuffer referencesBuffer(&referencesBufferData);
     for (auto const & way: ways) {
         Q_ASSERT(way.first);
         if (way.second.id() == lastId) {
@@ -118,7 +125,7 @@ void O5mWriter::writeWays(const OsmConverter::Ways &ways, QDataStream &stream) c
         stream << qint8(0x11); // way start indicator
         OsmPlacemarkData const & osmData = way.second;
 
-        QBuffer buffer;
+        bufferData.clear();
         buffer.open(QIODevice::WriteOnly);
         QDataStream bufferStream(&buffer);
 
@@ -127,17 +134,19 @@ void O5mWriter::writeWays(const OsmConverter::Ways &ways, QDataStream &stream) c
         lastId = osmData.id();
         writeVersion(osmData, bufferStream);
 
-        QBuffer referencesBuffer;
+        referencesBufferData.clear();
         referencesBuffer.open(QIODevice::WriteOnly);
         QDataStream referencesStream(&referencesBuffer);
         writeReferences(*way.first, lastReferenceId, osmData, referencesStream);
-        writeUnsigned(referencesBuffer.size(), bufferStream);
-        bufferStream.writeRawData(referencesBuffer.data().constData(), referencesBuffer.size());
+        referencesBuffer.close();
+        writeUnsigned(referencesBufferData.size(), bufferStream);
+        bufferStream.writeRawData(referencesBufferData.constData(), referencesBufferData.size());
 
         writeTags(osmData, stringTable, bufferStream);
 
-        writeUnsigned(buffer.size(), stream);
-        stream.writeRawData(buffer.data().constData(), buffer.size());
+        buffer.close();
+        writeUnsigned(bufferData.size(), stream);
+        stream.writeRawData(bufferData.constData(), bufferData.size());
     }
 }
 
@@ -152,6 +161,10 @@ void O5mWriter::writeRelations(const OsmConverter::Relations &relations, QDataSt
     qint64 lastId = 0;
     qint64 lastReferenceId = 0;
 
+    QByteArray bufferData;
+    QBuffer buffer(&bufferData);
+    QByteArray referencesBufferData;
+    QBuffer referencesBuffer(&referencesBufferData);
     for (auto const & relation: relations) {
         if (relation.second.id() == lastId) {
             continue;
@@ -160,7 +173,7 @@ void O5mWriter::writeRelations(const OsmConverter::Relations &relations, QDataSt
         stream << qint8(0x12); // relation start indicator
         OsmPlacemarkData const & osmData = relation.second;
 
-        QBuffer buffer;
+        bufferData.clear();
         buffer.open(QIODevice::WriteOnly);
         QDataStream bufferStream(&buffer);
 
@@ -169,12 +182,12 @@ void O5mWriter::writeRelations(const OsmConverter::Relations &relations, QDataSt
         lastId = osmData.id();
         writeVersion(osmData, bufferStream);
 
-        QBuffer referencesBuffer;
+        referencesBufferData.clear();
         referencesBuffer.open(QIODevice::WriteOnly);
         QDataStream referencesStream(&referencesBuffer);
         if (const auto placemark = geodata_cast<GeoDataPlacemark>(relation.first)) {
             if (const auto building = geodata_cast<GeoDataBuilding>(placemark->geometry())) {
-                auto polygon = geodata_cast<GeoDataPolygon>(&building->multiGeometry()->at(0));
+                auto polygon = geodata_cast<GeoDataPolygon>(& static_cast<const GeoDataMultiGeometry*>(building->multiGeometry())->at(0));
                 Q_ASSERT(polygon);
                 writeMultipolygonMembers(*polygon, lastReferenceId, osmData, stringTable, referencesStream);
             } else {
@@ -187,13 +200,15 @@ void O5mWriter::writeRelations(const OsmConverter::Relations &relations, QDataSt
         } else {
             Q_ASSERT(false);
         }
-        writeUnsigned(referencesBuffer.size(), bufferStream);
-        bufferStream.writeRawData(referencesBuffer.data().constData(), referencesBuffer.size());
+        referencesBuffer.close();
+        writeUnsigned(referencesBufferData.size(), bufferStream);
+        bufferStream.writeRawData(referencesBufferData.constData(), referencesBufferData.size());
 
         writeTags(osmData, stringTable, bufferStream);
 
-        writeUnsigned(buffer.size(), stream);
-        stream.writeRawData(buffer.data().constData(), buffer.size());
+        buffer.close();
+        writeUnsigned(bufferData.size(), stream);
+        stream.writeRawData(bufferData.constData(), bufferData.size());
     }
 }
 
@@ -284,15 +299,15 @@ void O5mWriter::writeStringPair(const StringPair &pair, StringTable &stringTable
     Q_ASSERT(stringTable.size() <= 15000);
     auto const iter = stringTable.constFind(pair);
     if (iter == stringTable.cend()) {
-        QByteArray data;
-        data.push_back(char(0x00));
-        data.push_back(pair.first.toUtf8());
+        m_stringPairBuffer.clear();
+        m_stringPairBuffer.push_back(char(0x00));
+        m_stringPairBuffer.push_back(pair.first.toUtf8());
         if (!pair.second.isEmpty()) {
-            data.push_back(char(0x00));
-            data.push_back(pair.second.toUtf8());
+            m_stringPairBuffer.push_back(char(0x00));
+            m_stringPairBuffer.push_back(pair.second.toUtf8());
         }
-        data.push_back(char(0x00));
-        stream.writeRawData(data.constData(), data.size());
+        m_stringPairBuffer.push_back(char(0x00));
+        stream.writeRawData(m_stringPairBuffer.constData(), m_stringPairBuffer.size());
         bool const tooLong = pair.first.size() + pair.second.size() > 250;
         bool const tableFull = stringTable.size() > 15000;
         if (!tooLong && !tableFull) {

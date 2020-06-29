@@ -49,6 +49,8 @@ private:
   qint32 deltaTo(double value, double previous) const;
 
   static QSet<QString> m_blacklistedTags;
+
+  mutable QByteArray m_stringPairBuffer;
 };
 
 }
