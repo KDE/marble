@@ -48,9 +48,9 @@ void OsmObjectManager::initializeOsmData( GeoDataPlacemark* placemark )
 
     const auto building = geodata_cast<GeoDataBuilding>(placemark->geometry());
 
-    GeoDataLinearRing* lineString;
+    const GeoDataLinearRing* lineString;
     if (building) {
-        lineString = geodata_cast<GeoDataLinearRing>(&building->multiGeometry()->at(0));
+        lineString = geodata_cast<GeoDataLinearRing>(&static_cast<const GeoDataMultiGeometry*>(building->multiGeometry())->at(0));
     } else {
         lineString = geodata_cast<GeoDataLinearRing>(placemark->geometry());
     }
@@ -63,9 +63,9 @@ void OsmObjectManager::initializeOsmData( GeoDataPlacemark* placemark )
         }
     }
 
-    GeoDataPolygon* polygon;
+    const GeoDataPolygon* polygon;
     if (building) {
-        polygon = geodata_cast<GeoDataPolygon>(&building->multiGeometry()->at(0));
+        polygon = geodata_cast<GeoDataPolygon>(&static_cast<const GeoDataMultiGeometry*>(building->multiGeometry())->at(0));
     } else {
         polygon = geodata_cast<GeoDataPolygon>(placemark->geometry());
     }

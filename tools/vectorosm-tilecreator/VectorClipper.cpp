@@ -77,9 +77,9 @@ GeoDataDocument *VectorClipper::clipTo(const GeoDataLatLonBox &tileBoundary, int
             } else if (geodata_cast<GeoDataLinearRing>(geometry)) {
                 clipString<GeoDataLinearRing>(placemark, clip, minArea, tile, osmIds);
             } else if (const auto building = geodata_cast<GeoDataBuilding>(geometry)) {
-                if (geodata_cast<GeoDataPolygon>(&building->multiGeometry()->at(0))) {
+                if (geodata_cast<GeoDataPolygon>(&static_cast<const GeoDataMultiGeometry*>(building->multiGeometry())->at(0))) {
                     clipPolygon(placemark, clip, minArea, tile, osmIds);
-                } else if (geodata_cast<GeoDataLinearRing>(&building->multiGeometry()->at(0))) {
+                } else if (geodata_cast<GeoDataLinearRing>(&static_cast<const GeoDataMultiGeometry*>(building->multiGeometry())->at(0))) {
                     clipString<GeoDataLinearRing>(placemark, clip, minArea, tile, osmIds);
                 }
             } else {
@@ -233,7 +233,7 @@ void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const Clipper
     bool isBuilding = false;
     GeoDataPolygon* polygon;
     if (const auto building = geodata_cast<GeoDataBuilding>(placemark->geometry())) {
-        polygon = geodata_cast<GeoDataPolygon>(&building->multiGeometry()->at(0));
+        polygon = geodata_cast<GeoDataPolygon>(&static_cast<GeoDataMultiGeometry*>(building->multiGeometry())->at(0));
         isBuilding = true;
     } else {
         GeoDataPlacemark* copyPlacemark = new GeoDataPlacemark(*placemark);
