@@ -12,6 +12,8 @@
 #include <QDebug>
 #include "GeoDataDocument.h"
 #include "GeoDataFolder.h"
+#include "GeoDataLinearRing.h"
+#include "GeoDataLineString.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataLatLonAltBox.h"
@@ -30,6 +32,7 @@ class TestGeoData : public QObject
 private Q_SLOTS:
     void nodeTypeTest();
     void parentingTest();
+    void testCast();
 };
 
 /// test the nodeType function through various construction tests
@@ -128,6 +131,26 @@ void TestGeoData::parentingTest()
     QCOMPARE( placemark2->style()->parent(), document ); // Parent is document, not placemark2
     QCOMPARE( iconStyle.iconPath(), QString( "myicon.png" ) );
     QCOMPARE( placemark2->style()->iconStyle().iconPath(), QString( "myicon.png" ) );
+}
+
+void TestGeoData::testCast()
+{
+    GeoDataLineString obj;
+    GeoDataObject *base = &obj;
+    QCOMPARE(geodata_cast<GeoDataObject>(base), nullptr);
+    QCOMPARE(geodata_cast<GeoDataGeometry>(base), nullptr);
+    QCOMPARE(geodata_cast<GeoDataLineString>(base), &obj);
+    QCOMPARE(geodata_cast<GeoDataLinearRing>(base), nullptr);
+    QCOMPARE(geodata_cast<GeoDataPlacemark>(base), nullptr);
+
+    const GeoDataObject *cbase = &obj;
+    QCOMPARE(geodata_cast<GeoDataObject>(cbase), nullptr);
+    QCOMPARE(geodata_cast<GeoDataGeometry>(cbase), nullptr);
+    QCOMPARE(geodata_cast<GeoDataLineString>(cbase), &obj);
+    QCOMPARE(geodata_cast<GeoDataLinearRing>(cbase), nullptr);
+    QCOMPARE(geodata_cast<GeoDataPlacemark>(cbase), nullptr);
+
+    QCOMPARE(geodata_cast<GeoDataPlacemark>(static_cast<GeoDataObject*>(nullptr)), nullptr);
 }
 
 }

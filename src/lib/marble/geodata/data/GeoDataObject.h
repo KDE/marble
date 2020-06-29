@@ -115,7 +115,7 @@ T *geodata_cast(GeoDataObject *node)
         return nullptr;
     }
 
-    if (node->nodeType() == T().nodeType()) {
+    if (typeid(*node) == typeid(T)) {
         return static_cast<T *>(node);
     }
 
@@ -136,7 +136,7 @@ const T *geodata_cast(const GeoDataObject *node)
         return nullptr;
     }
 
-    if (node->nodeType() == T().nodeType()) {
+    if (typeid(*node) == typeid(T)) {
         return static_cast<const T *>(node);
     }
 
