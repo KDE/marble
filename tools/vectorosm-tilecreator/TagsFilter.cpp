@@ -96,17 +96,17 @@ void TagsFilter::removeAnnotationTags(GeoDataDocument *document)
 
 void TagsFilter::removeAnnotationTags(OsmPlacemarkData &osmData)
 {
-    osmData.removeTag(QLatin1String("comment"));
-    osmData.removeTag(QLatin1String("note"));
-    osmData.removeTag(QLatin1String("note:de"));
-    osmData.removeTag(QLatin1String("fixme"));
-    osmData.removeTag(QLatin1String("todo"));
-    osmData.removeTag(QLatin1String("source"));
-    osmData.removeTag(QLatin1String("source:geometry"));
-    osmData.removeTag(QLatin1String("source:name"));
-    osmData.removeTag(QLatin1String("source:addr"));
-    osmData.removeTag(QLatin1String("source:ref"));
-    osmData.removeTag(QLatin1String("source_ref"));
+    osmData.removeTag(QStringLiteral("comment"));
+    osmData.removeTag(QStringLiteral("note"));
+    osmData.removeTag(QStringLiteral("note:de"));
+    osmData.removeTag(QStringLiteral("fixme"));
+    osmData.removeTag(QStringLiteral("todo"));
+    osmData.removeTag(QStringLiteral("source"));
+    osmData.removeTag(QStringLiteral("source:geometry"));
+    osmData.removeTag(QStringLiteral("source:name"));
+    osmData.removeTag(QStringLiteral("source:addr"));
+    osmData.removeTag(QStringLiteral("source:ref"));
+    osmData.removeTag(QStringLiteral("source_ref"));
 }
 
 }
