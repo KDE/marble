@@ -55,7 +55,7 @@ TileDirectory::TileDirectory(TileType tileType, const QString &cacheDir, Parsing
         m_inputFile = QString("%1/land_polygons.shp").arg(landmassDir);
         auto const landmassZip = QString("%1/%2").arg(m_cacheDir).arg(m_landmassFile);
         if (!QFileInfo(landmassZip).exists()) {
-            QString const url = QString("http://data.openstreetmapdata.com/%1").arg(m_landmassFile);
+            QString const url = QString("https://osmdata.openstreetmap.de/download/%1").arg(m_landmassFile);
             download(url, landmassZip);
         }
 
