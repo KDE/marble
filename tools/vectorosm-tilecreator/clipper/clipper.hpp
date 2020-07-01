@@ -87,7 +87,8 @@ enum PolyFillType { pftEvenOdd, pftNonZero, pftPositive, pftNegative };
 struct IntPoint {
   cInt X;
   cInt Y;
-  constexpr static qint64 const scale = 10000000;
+  // convert radian-based coordinates to 10^-7 degree (100 nanodegree) integer coordinates used by the clipper library
+  constexpr static qint64 const scale = 10000000 / M_PI * 180;
 #ifdef use_xyz
   cInt Z;
   IntPoint(cInt x = 0, cInt y = 0, cInt z = 0): X(x), Y(y), Z(z) {};
