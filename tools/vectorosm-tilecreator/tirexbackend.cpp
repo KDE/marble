@@ -43,11 +43,7 @@ TirexBackend::TirexBackend(QObject *parent)
     }
 
     // read map configuration
-    const auto configFiles = getenv("TIREX_BACKEND_MAP_CONFIGS");
-    if (configFiles) {
-        QSettings settings(QString::fromUtf8(configFiles), QSettings::IniFormat);
-        m_tileDir = settings.value(QLatin1String("tiledir")).toString();
-    }
+    m_tileDir = configValue(QStringLiteral("tiledir")).toString();
 }
 
 TirexBackend::~TirexBackend() = default;
@@ -132,9 +128,14 @@ void TirexBackend::tileError(const TirexMetatileRequest &req, const QString &err
     m_commandSocket.writeDatagram(reply);
 }
 
-QString TirexBackend::tileDir() const
+QVariant TirexBackend::configValue(const QString &key) const
 {
-    return m_tileDir;
+    const auto configFiles = getenv("TIREX_BACKEND_MAP_CONFIGS");
+    if (configFiles) {
+        QSettings settings(QString::fromUtf8(configFiles), QSettings::IniFormat);
+        return settings.value(key);
+    }
+    return {};
 }
 
 QString TirexBackend::metatileFileName(const TirexMetatileRequest &req)
@@ -148,7 +149,8 @@ QString TirexBackend::metatileFileName(const TirexMetatileRequest &req)
         y >>= 4;
     }
 
-    QString path = m_tileDir + QLatin1Char('/') + QString::number(req.tile.z) + QLatin1Char('/') +
+    QString path = m_tileDir + QLatin1Char('/') +
+        QString::number(req.tile.z) + QLatin1Char('/') +
         QString::number(hash[4]) + QLatin1Char('/') +
         QString::number(hash[3]) + QLatin1Char('/') +
         QString::number(hash[2]) + QLatin1Char('/') +

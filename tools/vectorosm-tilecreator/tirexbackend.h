@@ -48,8 +48,8 @@ public:
     /** Indicate a render request failed. */
     void tileError(const TirexMetatileRequest &req, const QString &errMsg);
 
-    /** The base directory for tile output. */
-    QString tileDir() const;
+    /** Returns the value of the entry @p key from the corresponding map configuration file of Tirex. */
+    QVariant configValue(const QString &key) const;
     /** Returns the full file name of the requested meta tile. */
     QString metatileFileName(const TirexMetatileRequest &req);
 
