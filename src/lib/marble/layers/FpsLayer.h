@@ -12,7 +12,7 @@
 #define MARBLE_FPSLAYER_H
 
 class QPainter;
-class QTime;
+class QElapsedTimer;
 
 namespace Marble
 {
@@ -20,12 +20,12 @@ namespace Marble
 class FpsLayer
 {
 public:
-    explicit FpsLayer( QTime *time );
+    explicit FpsLayer( QElapsedTimer *time );
 
     void paint( QPainter *painter ) const;
 
 private:
-    QTime *const m_time;
+    QElapsedTimer *const m_time;
 };
 
 }

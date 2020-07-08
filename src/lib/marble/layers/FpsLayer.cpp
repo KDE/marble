@@ -13,14 +13,14 @@
 #include "FpsLayer.h"
 
 #include <QPoint>
-#include <QTime>
+#include <QElapsedTimer>
 #include <QFont>
 #include <QPainter>
 
 namespace Marble
 {
 
-FpsLayer::FpsLayer( QTime *time )
+FpsLayer::FpsLayer( QElapsedTimer *time )
     : m_time( time )
 {
 }

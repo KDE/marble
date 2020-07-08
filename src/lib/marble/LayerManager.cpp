@@ -23,6 +23,7 @@
 #include "LayerInterface.h"
 #include "RenderState.h"
 
+#include <QElapsedTimer>
 #include <QTime>
 
 namespace Marble
@@ -175,7 +176,7 @@ void LayerManager::renderLayers( GeoPainter *painter, ViewportParams *viewport )
         } );
 
         // render the layers of the current renderPosition
-        QTime timer;
+        QElapsedTimer timer;
         for( auto *layer: layers ) {
             timer.start();
             layer->render( painter, viewport, renderPosition, nullptr );

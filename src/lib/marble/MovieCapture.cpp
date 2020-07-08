@@ -16,7 +16,7 @@
 #include <QProcess>
 #include <QMessageBox>
 #include <QTimer>
-#include <QTime>
+#include <QElapsedTimer>
 #include <QFile>
 
 namespace Marble
@@ -177,10 +177,13 @@ void MovieCapture::recordFrame()
         d->process.start( d->encoderExec, arguments );
         connect(&d->process, SIGNAL(finished(int)), this, SLOT(processWrittenMovie(int)));
     }
+#if QT_VERSION >= 0x051000
+    d->process.write( (char*) screenshot.bits(), screenshot.sizeInBytes() );
+#else
     d->process.write( (char*) screenshot.bits(), screenshot.byteCount() );
-
+#endif
     for (int i=0; i<30 && d->process.bytesToWrite()>0; ++i) {
-        QTime t;
+        QElapsedTimer t;
         int then = d->process.bytesToWrite();
         t.start();
         d->process.waitForBytesWritten( 100 );

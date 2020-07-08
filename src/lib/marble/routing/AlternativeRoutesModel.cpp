@@ -17,6 +17,7 @@
 #include "GeoDataLineString.h"
 #include "GeoDataPlacemark.h"
 
+#include <QElapsedTimer>
 #include <QTimer>
 #include <QPainter>
 
@@ -92,7 +93,7 @@ public:
     QVector<GeoDataDocument*> m_restrainedRoutes;
 
     /** Counts the time between route request and first result */
-    QTime m_responseTime;
+    QElapsedTimer m_responseTime;
 
     int m_currentIndex;
 };

@@ -12,7 +12,7 @@
 #include "MarbleTest.h"
 
 #include <QCoreApplication>
-#include <QTime>
+#include <QElapsedTimer>
 #include <QMessageBox>
 
 #include <MarbleGlobal.h>
@@ -46,7 +46,7 @@ void MarbleTest::timeDemo()
 
     qDebug() << "Starting Performance Test";
 
-    QTime t;
+    QElapsedTimer t;
     t.start();
 
     for ( int j = 0; j < 10; ++j ) {

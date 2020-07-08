@@ -25,6 +25,7 @@
 
 #include <QListView>
 #include <QVBoxLayout>
+#include <QElapsedTimer>
 
 namespace Marble {
 
@@ -66,7 +67,7 @@ void SearchWidgetPrivate::setSearchResult( const QVector<GeoDataPlacemark *>& lo
         return;
     }
 
-    QTime timer;
+    QElapsedTimer timer;
     timer.start();
 
     // fill the local document with results

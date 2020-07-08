@@ -20,7 +20,7 @@
 #include "PositionTracking.h"
 
 #include <QDataStream>
-#include <QTime>
+#include <QElapsedTimer>
 
 #include <QSqlDatabase>
 #include <QSqlQuery>
@@ -81,7 +81,7 @@ QVector<OsmPlacemark> OsmDatabase::find( const DatabaseQuery &userQuery )
     QSqlDatabase database = QSqlDatabase::addDatabase( "QSQLITE", QString( "marble/local-osm-search-%1" ).arg( reinterpret_cast<size_t>( this ) ) );
 
     QVector<OsmPlacemark> result;
-    QTime timer;
+    QElapsedTimer timer;
     timer.start();
     for( const QString &databaseFile: m_databaseFiles ) {
         database.setDatabaseName( databaseFile );
@@ -91,7 +91,7 @@ QVector<OsmPlacemark> OsmDatabase::find( const DatabaseQuery &userQuery )
 
         QString regionRestriction;
         if ( !userQuery.region().isEmpty() ) {
-            QTime regionTimer;
+            QElapsedTimer regionTimer;
             regionTimer.start();
             // Nested set model to support region hierarchies, see https://en.wikipedia.org/wiki/Nested_set_model
             const QString regionsQueryString = QLatin1String("SELECT lft, rgt FROM regions WHERE name LIKE '%") + userQuery.region() + QLatin1String("%';");
@@ -165,7 +165,7 @@ QVector<OsmPlacemark> OsmDatabase::find( const DatabaseQuery &userQuery )
 
         QSqlQuery query( database );
         query.setForwardOnly( true );
-        QTime queryTimer;
+        QElapsedTimer queryTimer;
         queryTimer.start();
         if ( !query.exec( queryString ) ) {
             qWarning() << query.lastError() << "in" << databaseFile << "with query" << query.lastQuery();

@@ -205,7 +205,7 @@ QPixmap AbstractGeoPolygonGraphicsItem::texture(const QString &texturePath, cons
 {
     QString const key = QString::number(color.rgba()) + '/' + texturePath;
     QPixmap texture;
-    if (!QPixmapCache::find(key, texture)) {
+    if (!QPixmapCache::find(key, &texture)) {
         QImageReader imageReader(style()->polyStyle().resolvePath(texturePath));
         texture = QPixmap::fromImageReader(&imageReader);
 

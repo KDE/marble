@@ -15,7 +15,7 @@
 #include "MarblePlacemarkModel_P.h"
 
 // Qt
-#include <QTime>
+#include <QElapsedTimer>
 #include <QImage>
 
 // Marble
@@ -210,7 +210,7 @@ void MarblePlacemarkModel::addPlacemarks( int start,
 // MarbleControlBox::m_sortproxy as a sorting customer.
 // I leave the balance search as an exercise to the reader...
 
-    QTime t;
+    QElapsedTimer t;
     t.start();
 //    beginInsertRows( QModelIndex(), start, start + length );
     d->m_size += length;

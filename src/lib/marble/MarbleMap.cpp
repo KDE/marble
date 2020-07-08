@@ -20,7 +20,7 @@
 #include <cmath>
 
 // Qt
-#include <QTime>
+#include <QElapsedTimer>
 #include <QRegion>
 #include <QtMath>
 
@@ -530,7 +530,7 @@ void MarbleMap::downloadRegion( QVector<TileCoordsPyramid> const & pyramid )
 {
     Q_ASSERT( textureLayer() );
     Q_ASSERT( !pyramid.isEmpty() );
-    QTime t;
+    QElapsedTimer t;
     t.start();
 
     // When downloading a region (the author of these lines thinks) most users probably expect
@@ -855,7 +855,7 @@ void MarbleMap::paint( GeoPainter &painter, const QRect &dirtyRect )
         return;
     }
 
-    QTime t;
+    QElapsedTimer t;
     t.start();
 
     RenderStatus const oldRenderStatus = d->m_renderState.status();

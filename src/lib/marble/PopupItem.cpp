@@ -398,7 +398,7 @@ void PopupItem::openUrl(const QUrl &url)
 QPixmap PopupItem::pixmap( const QString &imageId ) const
 {
   QPixmap result;
-  if ( !QPixmapCache::find( imageId, result ) ) {
+  if ( !QPixmapCache::find( imageId, &result ) ) {
     QImage bottom = QImage(QLatin1String(":/") + imageId + QLatin1String("_shadow.png"));
     QImage top =    QImage(QLatin1String(":/") + imageId + QLatin1String(".png"));
     colorize( top, m_backColor );

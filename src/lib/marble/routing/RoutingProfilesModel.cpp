@@ -77,7 +77,11 @@ bool RoutingProfilesModel::moveUp( int row )
         Q_ASSERT( false );
         return false;
     }
+#if QT_VERSION >= 0x051300
+    m_profiles.swapItemsAt( row, row-1 );
+#else
     m_profiles.swap( row, row-1 );
+#endif
     endMoveRows();
     return true;
 }

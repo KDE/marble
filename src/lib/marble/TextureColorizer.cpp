@@ -18,7 +18,7 @@
 #include <QSharedPointer>
 #include <QString>
 #include <QVector>
-#include <QTime>
+#include <QElapsedTimer>
 #include <QColor>
 #include <QImage>
 #include <QPainter>
@@ -72,7 +72,7 @@ TextureColorizer::TextureColorizer( const QString &seafile,
       m_landColor(qRgb( 255, 0, 0 ) ),
       m_seaColor( qRgb( 0, 255, 0 ) )
 {
-    QTime t;
+    QElapsedTimer t;
     t.start();
 
     QImage   gradientImage ( 256, 1, QImage::Format_RGB32 );

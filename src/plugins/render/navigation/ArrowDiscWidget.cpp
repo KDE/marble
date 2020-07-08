@@ -55,7 +55,7 @@ void ArrowDiscWidget::setMarbleWidget( MarbleWidget *marbleWidget )
 QPixmap ArrowDiscWidget::pixmap( const QString &id )
 {
     QPixmap result;
-    if ( !QPixmapCache::find( id, result ) ) {
+    if ( !QPixmapCache::find( id, &result ) ) {
         result = QPixmap(QLatin1String(":/") + id + QLatin1String(".png"));
         QPixmapCache::insert( id, result );
     }

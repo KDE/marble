@@ -81,7 +81,12 @@ void GeoDataPlaylist::removePrimitiveAt(int position)
 void GeoDataPlaylist::swapPrimitives( int positionA, int positionB )
 {
     if ( qMin( positionA, positionB ) >= 0 && qMax( positionA, positionB ) < m_primitives.size() ) {
+
+#if QT_VERSION >= 0x051300
+        m_primitives.swapItemsAt( positionA, positionB );
+#else
         m_primitives.swap( positionA, positionB );
+#endif
     }
 }
 

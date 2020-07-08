@@ -12,7 +12,7 @@
 #include "FileManager.h"
 
 #include <QFileInfo>
-#include <QTime>
+#include <QElapsedTimer>
 #include <QMessageBox>
 
 #include "FileLoader.h"
@@ -59,7 +59,7 @@ public:
     QList<FileLoader*> m_loaderList;
     QHash < QString, GeoDataDocument* > m_fileItemHash;
     GeoDataLatLonBox m_latLonBox;
-    QTime m_timer;
+    QElapsedTimer m_timer;
 };
 }
 

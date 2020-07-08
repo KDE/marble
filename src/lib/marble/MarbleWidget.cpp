@@ -16,7 +16,7 @@
 #include <qmath.h>
 #include <QHash>
 #include <QSettings>
-#include <QTime>
+#include <QElapsedTimer>
 #include <QPaintEvent>
 #include <QPaintEngine>
 #include <QRegion>
@@ -699,7 +699,7 @@ QRegion MarbleWidget::mapRegion() const
 
 void MarbleWidget::paintEvent( QPaintEvent *evt )
 {
-    QTime t;
+    QElapsedTimer t;
     t.start();
 
     QPaintDevice *paintDevice = this;

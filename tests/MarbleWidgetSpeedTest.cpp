@@ -16,7 +16,7 @@
 
 #include <QtGui> //needed because this is a gui test
 #include <QtCore>
-#include <QTime>
+#include <QElapsedTimer>
 #include <QTest>
 
 namespace Marble
@@ -52,7 +52,7 @@ void MarbleWidgetSpeedTest::timeTest()
     m_marbleWidget->setZoom( 1500 );
 //    m_marbleWidget->resize( 800, 600 );
 
-    QTime t;
+    QElapsedTimer t;
     //m_marbleWidget->setMapTheme( "plain/plain.dgml" );
     //m_marbleWidget->setMapTheme( "bluemarble/bluemarble.dgml" );
 

@@ -16,7 +16,7 @@
 // Qt
 #include <QList>
 #include <QPluginLoader>
-#include <QTime>
+#include <QElapsedTimer>
 #include <QMessageBox>
 
 // Local dir
@@ -213,7 +213,7 @@ void PluginManagerPrivate::loadPlugins()
         return;
     }
 
-    QTime t;
+    QElapsedTimer t;
     t.start();
     mDebug() << "Starting to load Plugins.";
 

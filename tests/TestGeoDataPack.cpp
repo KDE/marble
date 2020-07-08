@@ -38,7 +38,7 @@ class TestGeoDataPack : public QObject
 
     private:
         QString content;
-        QTime timer;
+        QElapsedTimer timer;
 };
 
 void TestGeoDataPack::initTestCase()
