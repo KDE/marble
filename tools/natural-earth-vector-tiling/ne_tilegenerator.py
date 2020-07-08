@@ -112,7 +112,6 @@ if __name__ == "__main__":
 	parser.add_argument('-ow', '--overwrite', action='store_true', help='Create tiles even if they exist already')
 	args = parser.parse_args()
 
-	exception_names = ['ne_50m_admin_1_states_provinces_lines']
 	check_existence('cities15000.txt', args.in_dir)
 
 	level_info = parse_file(args.file, args.in_dir)
@@ -124,10 +123,8 @@ if __name__ == "__main__":
 			check_existence(filename, args.in_dir)
 			if filename == 'ne_10m_parks_and_protected_lands':
 				path = os.path.join(args.in_dir, filename) + '/' + filename + '_area.shp'
-			elif filename not in exception_names:
-				path = os.path.join(args.in_dir, filename) + '/' + filename + '.shp'
 			else:
-				path = os.path.join(args.in_dir, filename) + '/' + filename + '_shp.shp'
+				path = os.path.join(args.in_dir, filename) + '/' + filename + '.shp'
 			abs_file_paths.append(path)
 		target = 'tiny_planet_{}.1.osm'.format(level)
 		if args.overwrite or not os.path.exists(target):
