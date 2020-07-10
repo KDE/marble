@@ -133,5 +133,7 @@ if __name__ == "__main__":
 		    f = open('bound_info_{}'.format(level), "w")
 		    print('tiny_planet_{}.1.osm;Level;-180.0;-86.0;180.0;86.0'.format(level), file=f)
 		    f.close()
+		o5m_target = 'tiny_planet_{}.1.o5m'.format(level)
+		call(['osmconvert', target, '--out-o5m', '-o={}'.format(o5m_target)])
 		spellcheck = [] if level < 6 else ['-s', os.path.join(args.in_dir, 'cities15000.txt', 'cities15000.txt')]
-		call(["marble-vectorosm-tilecreator", "-e", "o5m", "-z", str(level)] + spellcheck + ["-o", args.out_dir, target])
+		call(["marble-vectorosm-tilecreator", "-e", "o5m", "-z", str(level)] + spellcheck + ["-o", args.out_dir, o5m_target])
