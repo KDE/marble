@@ -171,7 +171,7 @@ int MonavRunnerPrivate::retrieveRoute( const Marble::RouteRequest* route, QVecto
             GeoDataExtendedData extendedData;
             GeoDataData turnType;
             turnType.setName(QStringLiteral("turnType"));
-            turnType.setValue( qVariantFromValue<int>( int( directions[i].turnType() ) ) );
+            turnType.setValue( QVariant::fromValue( int( directions[i].turnType() ) ) );
             extendedData.addValue( turnType );
             GeoDataData roadName;
             roadName.setName(QStringLiteral("roadName"));

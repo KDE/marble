@@ -80,7 +80,7 @@ void OsmTagEditorWidgetPrivate::populateCurrentTagsList()
     // Custom tag adder item
     QTreeWidgetItem *adderItem = new QTreeWidgetItem();
     adderItem->setText( 0, m_customTagAdderText );
-    adderItem->setTextColor( 0, Qt::gray );
+    adderItem->setForeground( 0, Qt::gray );
     adderItem->setIcon(0, QIcon(QStringLiteral(":marble/list-add.png")));
     adderItem->setFlags( adderItem->flags() | Qt::ItemIsEditable );
     m_currentTagsList->addTopLevelItem( adderItem );

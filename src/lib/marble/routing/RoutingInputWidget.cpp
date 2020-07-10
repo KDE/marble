@@ -234,7 +234,7 @@ void RoutingInputWidgetPrivate::createBookmarkActions( QMenu* menu, GeoDataFolde
 
     for (; i != end; ++i ) {
         QAction *bookmarkAction = new QAction( (*i)->name(), parent );
-        bookmarkAction->setData( qVariantFromValue( (*i)->coordinate() ) );
+        bookmarkAction->setData( QVariant::fromValue( (*i)->coordinate() ) );
         menu->addAction( bookmarkAction );
         QObject::connect( menu, SIGNAL(triggered(QAction*)), parent, SLOT(setBookmarkPosition(QAction*)) );
     }

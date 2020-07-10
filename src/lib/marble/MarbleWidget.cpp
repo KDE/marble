@@ -385,7 +385,7 @@ Marble::TextureLayer* MarbleWidget::textureLayer() const
 
 QPixmap MarbleWidget::mapScreenShot()
 {
-    return QPixmap::grabWidget( this );
+    return grab();
 }
 
 RenderStatus MarbleWidget::renderStatus() const

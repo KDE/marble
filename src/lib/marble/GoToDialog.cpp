@@ -170,7 +170,7 @@ QVariant TargetModel::currentLocationData ( int role ) const
         case Qt::DisplayRole: return tr( "Current Location: %1" ).arg( currentLocation.toString() ) ;
         case Qt::DecorationRole: return QIcon(QStringLiteral(":/icons/gps.png"));
         case MarblePlacemarkModel::CoordinateRole: {
-            return qVariantFromValue( currentLocation );
+            return QVariant::fromValue( currentLocation );
         }
         }
     }
@@ -186,7 +186,7 @@ QVariant TargetModel::routeData ( const QVector<GeoDataPlacemark> &via, int inde
     case Qt::DecorationRole: return QIcon( request->pixmap( index ) );
     case MarblePlacemarkModel::CoordinateRole: {
         const GeoDataCoordinates coordinates = via.at( index ).coordinate();
-        return qVariantFromValue( coordinates );
+        return QVariant::fromValue( coordinates );
     }
     }
 
@@ -203,7 +203,7 @@ QVariant TargetModel::homeData ( int role ) const
         int zoom( 0 );
         m_marbleModel->home( lon, lat, zoom );
         const GeoDataCoordinates coordinates = GeoDataCoordinates( lon, lat, 0, GeoDataCoordinates::Degree );
-        return qVariantFromValue( coordinates );
+        return QVariant::fromValue( coordinates );
     }
     }
 
@@ -222,7 +222,7 @@ QVariant TargetModel::bookmarkData ( int index, int role ) const
         return QVariant();
     }
     case Qt::DecorationRole: return QIcon(QStringLiteral(":/icons/bookmarks.png"));
-    case MarblePlacemarkModel::CoordinateRole: return qVariantFromValue( m_bookmarks[index]->lookAt()->coordinates() );
+    case MarblePlacemarkModel::CoordinateRole: return QVariant::fromValue( m_bookmarks[index]->lookAt()->coordinates() );
     }
 
     return QVariant();
