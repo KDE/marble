@@ -170,7 +170,7 @@ QSet<qint64> GeoDataRelation::memberIds() const
 bool GeoDataRelation::containsAnyOf(const QSet<qint64> &memberIds) const
 {
     Q_D(const GeoDataRelation);
-#if QT_VERSION >= 0x050600 // intersects was introduced in Qt 5.6.
+#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
         return d->m_memberIds.intersects(memberIds);
 #else
     for (auto memberId: memberIds) {

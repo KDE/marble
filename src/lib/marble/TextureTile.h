@@ -96,7 +96,7 @@ inline Blending const * TextureTile::blending() const
 
 inline int TextureTile::byteCount() const
 {
-#if QT_VERSION >= 0x051000
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
     return m_image.sizeInBytes();
 #else
     return m_image.byteCount();

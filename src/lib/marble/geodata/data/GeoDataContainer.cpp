@@ -231,25 +231,7 @@ void GeoDataContainer::remove(int index, int count)
 int	GeoDataContainer::removeAll(GeoDataFeature *feature)
 {
     Q_D(GeoDataContainer);
-#if QT_VERSION >= 0x050400
     return d->m_vector.removeAll(feature);
-#else
-    int count = 0;
-
-    QVector<GeoDataFeature*> &vector = d->m_vector;
-    QVector<GeoDataFeature*>::iterator it = vector.begin();
-
-    while(it != vector.end()) {
-        if (*it == feature) {
-            it = vector.erase(it);
-            ++count;
-        } else {
-            ++it;
-        }
-    }
-
-    return count;
-#endif
 }
 
 void GeoDataContainer::removeAt(int index)
@@ -273,20 +255,7 @@ void GeoDataContainer::removeLast()
 bool GeoDataContainer::removeOne( GeoDataFeature *feature )
 {
     Q_D(GeoDataContainer);
-#if QT_VERSION >= 0x050400
     return d->m_vector.removeOne( feature );
-#else
-    QVector<GeoDataFeature*> &vector = d->m_vector;
-
-    const int i = vector.indexOf(feature);
-    if (i < 0) {
-        return false;
-    }
-
-    vector.remove(i);
-
-    return true;
-#endif
 }
 
 int GeoDataContainer::size() const

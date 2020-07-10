@@ -89,7 +89,7 @@ int main(int argc, char *argv[])
     app.setApplicationName( "Marble Virtual Globe" );
     app.setOrganizationName( "KDE" );
     app.setOrganizationDomain( "kde.org" );
-#if QT_VERSION >= 0x050700
+#if QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
     app.setDesktopFileName(QStringLiteral("org.kde.marble-qt"));
 #endif
 

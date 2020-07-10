@@ -177,7 +177,7 @@ void MovieCapture::recordFrame()
         d->process.start( d->encoderExec, arguments );
         connect(&d->process, SIGNAL(finished(int)), this, SLOT(processWrittenMovie(int)));
     }
-#if QT_VERSION >= 0x051000
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
     d->process.write( (char*) screenshot.bits(), screenshot.sizeInBytes() );
 #else
     d->process.write( (char*) screenshot.bits(), screenshot.byteCount() );

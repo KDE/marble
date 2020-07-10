@@ -65,10 +65,17 @@ void LonLatParser::initAll()
     // use a set to remove duplicates
     QSet<QString> dirs = QSet<QString>()
         << m_north << m_east << m_south << m_west;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    dirs += QSet<QString>( m_northLocale.begin(), m_northLocale.end() );
+    dirs += QSet<QString>( m_eastLocale.begin(), m_eastLocale.end() );
+    dirs += QSet<QString>( m_southLocale.begin(), m_southLocale.end() );
+    dirs += QSet<QString>( m_westLocale.begin(), m_westLocale.end() );
+#else
     dirs += m_northLocale.toSet();
     dirs += m_eastLocale.toSet();
     dirs += m_southLocale.toSet();
     dirs += m_westLocale.toSet();
+#endif
 
     QString fullNamesExp;
     QString simpleLetters;

@@ -77,7 +77,7 @@ bool RoutingProfilesModel::moveUp( int row )
         Q_ASSERT( false );
         return false;
     }
-#if QT_VERSION >= 0x051300
+#if QT_VERSION >= QT_VERSION_CHECK(5, 13, 0)
     m_profiles.swapItemsAt( row, row-1 );
 #else
     m_profiles.swap( row, row-1 );

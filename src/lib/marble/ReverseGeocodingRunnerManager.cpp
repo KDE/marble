@@ -121,20 +121,8 @@ void ReverseGeocodingRunnerManager::reverseGeocoding( const GeoDataCoordinates &
 {
     d->m_reverseTasks.clear();
     d->m_reverseGeocodingResult.clear();
-#if QT_VERSION >= 0x050400
     d->m_reverseGeocodingResults.removeAll( coordinates );
-#else
-    QVector<GeoDataCoordinates> &vector = d->m_reverseGeocodingResults;
-    QVector<GeoDataCoordinates>::iterator it = vector.begin();
 
-    while (it != vector.end()) {
-        if (*it == coordinates) {
-            it = vector.erase(it);
-        } else {
-            ++it;
-        }
-    }
-#endif
     QList<const ReverseGeocodingRunnerPlugin*> plugins = d->plugins( d->m_pluginManager->reverseGeocodingRunnerPlugins() );
     for( const ReverseGeocodingRunnerPlugin* plugin: plugins ) {
         ReverseGeocodingTask* task = new ReverseGeocodingTask( plugin->newRunner(), this, d->m_marbleModel, coordinates );

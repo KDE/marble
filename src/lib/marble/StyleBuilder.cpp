@@ -141,7 +141,7 @@ StyleBuilder::Private::Private() :
             QLocale::WallisAndFutunaIslands, QLocale::NorfolkIsland
 })
 {
-#if QT_VERSION >= 0x050700
+#if QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
     m_oceanianCountries << QLocale::TuvaluCountry << QLocale::OutlyingOceania;
 #else
     m_oceanianCountries << QLocale::Tuvalu;

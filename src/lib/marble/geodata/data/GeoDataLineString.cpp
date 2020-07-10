@@ -421,14 +421,7 @@ void GeoDataLineString::append(const QVector<GeoDataCoordinates>& values)
     d->m_dirtyRange = true;
     d->m_dirtyBox = true;
 
-#if QT_VERSION >= 0x050500
     d->m_vector.append(values);
-#else
-    d->m_vector.reserve(d->m_vector.size() + values.size());
-    for (const GeoDataCoordinates &coordinates: values) {
-        d->m_vector.append(coordinates);
-    }
-#endif
 }
 
 GeoDataLineString& GeoDataLineString::operator << ( const GeoDataCoordinates& value )
