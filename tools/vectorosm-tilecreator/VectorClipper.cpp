@@ -246,7 +246,7 @@ void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const Clipper
     }
     using namespace ClipperLib;
     Path path;
-    for(auto const & node: polygon->outerBoundary()) {
+    for(auto const & node: qAsConst(polygon)->outerBoundary()) {
         path << IntPoint(&node);
     }
 
@@ -299,7 +299,7 @@ void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const Clipper
             newOuterRingOsmData.addTag(QStringLiteral("mx:oid"), QString::number(outerRingOsmData.id()));
         }
 
-        auto const & innerBoundaries = polygon->innerBoundaries();
+        auto const & innerBoundaries = qAsConst(polygon)->innerBoundaries();
         for (index = 0; index < innerBoundaries.size(); ++index) {
             auto const & innerBoundary = innerBoundaries.at(index);
             if (minArea > 0.0 && area(innerBoundary) < minArea) {
