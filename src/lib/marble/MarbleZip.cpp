@@ -56,11 +56,11 @@
 
 #include "MarbleZipReader.h"
 #include "MarbleZipWriter.h"
-#include <qdatetime.h>
+#include <QDateTime>
 #include <qplatformdefs.h>
 #include <qendian.h>
-#include <qdebug.h>
-#include <qdir.h>
+#include <QDebug>
+#include <QDir>
 
 #include <zlib.h>
 

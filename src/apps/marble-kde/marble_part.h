@@ -17,7 +17,7 @@
 #include <kparts/readonlypart.h>
 #include <QHash>
 #include "MarbleGlobal.h"
-#include <krecentfilesaction.h>
+#include <KRecentFilesAction>
 #include <QDomNode>
 
 #include "ui_MarbleCloudSyncSettingsWidget.h"

@@ -33,16 +33,16 @@
 #include <QStatusBar>
 
 // KF
-#include <kaboutdata.h>
-#include <kactioncollection.h>
-#include <kconfigdialog.h>
-#include <klocalizedstring.h>
-#include <kmessagebox.h>
-#include <kpluginfactory.h>
+#include <KAboutData>
+#include <KActionCollection>
+#include <KConfigDialog>
+#include <KLocalizedString>
+#include <KMessageBox>
+#include <KPluginFactory>
 #include <kparts/statusbarextension.h>
-#include <kstandardaction.h>
-#include <ktoggleaction.h>
-#include <ktogglefullscreenaction.h>
+#include <KStandardAction>
+#include <KToggleAction>
+#include <KToggleFullScreenAction>
 #include <kns3/knewstuffaction.h>
 #include <kns3/uploaddialog.h>
 

@@ -69,7 +69,7 @@
 #include <TileCreator.h>
 #include <TileLevelRangeWidget.h>
 #include <TinyWebBrowser.h>
-#include <qobject.h>
+#include <QObject>
 %End
 
 namespace Marble

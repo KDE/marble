@@ -10,11 +10,11 @@
 // Copyright 2009      Jens-Michael Hoffmann <jensmh@gmx.de>
 //
 
-#include <kaboutdata.h>
+#include <KAboutData>
 #include <KConfig>
 #include <KConfigGroup>
-#include <kcrash.h>
-#include <klocalizedstring.h>
+#include <KCrash>
+#include <KLocalizedString>
 #include <KSharedConfig>
 
 #include <QFile>

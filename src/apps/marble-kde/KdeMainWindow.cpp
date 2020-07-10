@@ -19,8 +19,8 @@
 #include <QCloseEvent>
 
 // KF
-#include <klocalizedstring.h>
-#include <kactioncollection.h>
+#include <KLocalizedString>
+#include <KActionCollection>
 #include <kparts/part.h>
 #include <kxmlguifactory.h>
 
