@@ -54,11 +54,12 @@ private:
     {
         bool isBuilding = false;
         const T* ring;
+        std::unique_ptr<GeoDataPlacemark> copyPlacemark;
         if (const auto building = geodata_cast<GeoDataBuilding>(placemark->geometry())) {
             ring = geodata_cast<T>(&static_cast<const GeoDataMultiGeometry*>(building->multiGeometry())->at(0));
             isBuilding = true;
         } else {
-            GeoDataPlacemark* copyPlacemark = new GeoDataPlacemark(*placemark);
+            copyPlacemark.reset(new GeoDataPlacemark(*placemark));
             ring = geodata_cast<T>(copyPlacemark->geometry());
         }
         bool const isClosed = ring->isClosed() && canBeArea(placemark->visualCategory());

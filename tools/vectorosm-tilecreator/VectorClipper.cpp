@@ -232,11 +232,12 @@ void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const Clipper
 {
     bool isBuilding = false;
     GeoDataPolygon* polygon;
+    std::unique_ptr<GeoDataPlacemark> copyPlacemark;
     if (const auto building = geodata_cast<GeoDataBuilding>(placemark->geometry())) {
         polygon = geodata_cast<GeoDataPolygon>(&static_cast<GeoDataMultiGeometry*>(building->multiGeometry())->at(0));
         isBuilding = true;
     } else {
-        GeoDataPlacemark* copyPlacemark = new GeoDataPlacemark(*placemark);
+        copyPlacemark.reset(new GeoDataPlacemark(*placemark));
         polygon = geodata_cast<GeoDataPolygon>(copyPlacemark->geometry());
     }
 
