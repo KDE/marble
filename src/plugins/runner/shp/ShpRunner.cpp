@@ -82,7 +82,7 @@ GeoDataDocument *ShpRunner::parseFile(const QString &fileName, DocumentRole role
         placemark = new GeoDataPlacemark;
         document->append( placemark );
 
-        SHPObject *shape = SHPReadObject( handle, i );
+        std::unique_ptr<SHPObject, decltype(&SHPDestroyObject)> shape(SHPReadObject( handle, i ), &SHPDestroyObject);
         if (nameField != -1) {
             const char* info = DBFReadStringAttribute( dbfhandle, i, nameField );
             // TODO: defaults to utf-8 encoding, but could be also something else, optionally noted in a .cpg file
