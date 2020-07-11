@@ -318,7 +318,7 @@ void TileDirectory::createTiles() const
             }
             clipper = QSharedPointer<VectorClipper>(new VectorClipper(map.data(), m_zoomLevel));
         }
-        auto tile = clipper->clipTo(m_zoomLevel, tileId.x(), tileId.y());
+        std::unique_ptr<GeoDataDocument> tile(clipper->clipTo(m_zoomLevel, tileId.x(), tileId.y()));
         if (!GeoDataDocumentWriter::write(outputFile, *tile)) {
             qWarning() << "Failed to write tile" << outputFile;
         }
