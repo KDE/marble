@@ -118,8 +118,8 @@ int main(int argc, char *argv[])
         parser.showHelp(1);
     }
 
-    TileDirectory mapTiles(TileDirectory::OpenStreetMap, cacheDirectory, manager, extension, centerTile.zoomLevel());
-    TileDirectory landTiles(TileDirectory::Landmass, cacheDirectory, manager, extension, centerTile.zoomLevel());
+    TileDirectory mapTiles(TileDirectory::OpenStreetMap, cacheDirectory, manager, centerTile.zoomLevel());
+    TileDirectory landTiles(TileDirectory::Landmass, cacheDirectory, manager, centerTile.zoomLevel());
 
     int const offset = 3;
     int const N = pow(2,centerTile.zoomLevel());

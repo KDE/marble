@@ -56,7 +56,15 @@ public:
         OpenStreetMap
     };
 
-    TileDirectory(TileType tileType, const QString &cacheDir, ParsingRunnerManager &manager, const QString &extension, int maxZoomLevel);
+    TileDirectory(TileType tileType, const QString &cacheDir, ParsingRunnerManager &manager, int maxZoomLevel);
+    /** Create a tile directory for loading data from an OSMX file.
+     *  @param maxZoomLevel The output zoom level.
+     *  @param loadZoomLevel The zoom level at which the input data should be loaded.
+     *  This must be smaller or equal to maxZoomLevel. Using a smaller value can be more efficient when
+     *  generating a larger batch of tiles that fall within a lower zoom level tile, but comes at a greater
+     *  cost for memory and clipping operations.
+     */
+    TileDirectory(const QString &cacheDir, const QString &osmxFile, ParsingRunnerManager &manager, int maxZoomLevel, int loadZoomLevel);
 
     QSharedPointer<GeoDataDocument> load(int zoomLevel, int tileX, int tileY);
     void setInputFile(const QString &filename);
@@ -88,13 +96,13 @@ private:
 
     QString m_cacheDir;
     QString m_baseDir;
+    QString m_osmxFile;
     ParsingRunnerManager &m_manager;
     QSharedPointer<GeoDataDocument> m_landmass;
-    int m_zoomLevel;
-    int m_tileX;
-    int m_tileY;
-    int m_tagZoomLevel;
-    QString m_extension;
+    int m_zoomLevel = -1;
+    int m_tileX = -1;
+    int m_tileY = -1;
+    int m_tagZoomLevel = -1;
     QSharedPointer<VectorClipper> m_clipper;
     QSharedPointer<TagsFilter> m_tagsFilter;
     TileType m_tileType;

@@ -43,7 +43,7 @@ int main(int argc, char **argv)
     }
 
     GeoDataLatLonBox world(85.0, -85.0, 180.0, -180.0, GeoDataCoordinates::Degree);
-    TileDirectory loader(TileDirectory::Landmass, cacheDirectory, manager, QStringLiteral("o5m"), 17);
+    TileDirectory loader(TileDirectory::Landmass, cacheDirectory, manager, 17);
     loader.setBoundingBox(world);
     loader.createTiles();
     return 0;

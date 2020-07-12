@@ -234,12 +234,12 @@ int main(int argc, char *argv[])
     } else {
         QString const region = QFileInfo(inputFileName).fileName();
         QString const regionDir = QString("%1/%2").arg(cacheDirectory).arg(QFileInfo(inputFileName).baseName());
-        TileDirectory mapTiles(TileDirectory::OpenStreetMap, regionDir, manager, extension, maxZoomLevel);
+        TileDirectory mapTiles(TileDirectory::OpenStreetMap, regionDir, manager, maxZoomLevel);
         mapTiles.setInputFile(inputFileName);
         mapTiles.createTiles();
         auto const boundingBox = mapTiles.boundingBox();
 
-        TileDirectory loader(TileDirectory::Landmass, cacheDirectory, manager, extension, maxZoomLevel);
+        TileDirectory loader(TileDirectory::Landmass, cacheDirectory, manager, maxZoomLevel);
         loader.setBoundingBox(boundingBox);
         loader.createTiles();
 

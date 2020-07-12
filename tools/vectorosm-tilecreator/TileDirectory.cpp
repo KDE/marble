@@ -24,6 +24,7 @@
 #include <QUrl>
 #include <QNetworkRequest>
 #include <QNetworkReply>
+#include <QTemporaryFile>
 #include <QThread>
 
 #include <iostream>
@@ -35,15 +36,9 @@ namespace Marble {
 
 QMap<int, TagsFilter::Tags> TileDirectory::m_tags;
 
-TileDirectory::TileDirectory(TileType tileType, const QString &cacheDir, ParsingRunnerManager &manager, QString const &extension, int maxZoomLevel) :
+TileDirectory::TileDirectory(TileType tileType, const QString &cacheDir, ParsingRunnerManager &manager, int maxZoomLevel) :
     m_cacheDir(cacheDir),
-    m_baseDir(),
     m_manager(manager),
-    m_zoomLevel(-1),
-    m_tileX(-1),
-    m_tileY(-1),
-    m_tagZoomLevel(-1),
-    m_extension(extension),
     m_tileType(tileType),
     m_landmassFile("land-polygons-split-4326.zip"),
     m_maxZoomLevel(maxZoomLevel)
@@ -72,6 +67,16 @@ TileDirectory::TileDirectory(TileType tileType, const QString &cacheDir, Parsing
     QDir().mkpath(m_baseDir);
 }
 
+TileDirectory::TileDirectory(const QString &cacheDir, const QString &osmxFile, ParsingRunnerManager &manager, int maxZoomLevel, int loadZoomLevel) :
+    m_cacheDir(cacheDir),
+    m_osmxFile(osmxFile),
+    m_manager(manager),
+    m_zoomLevel(loadZoomLevel),
+    m_tileType(OpenStreetMap),
+    m_maxZoomLevel(maxZoomLevel)
+{
+}
+
 TileId TileDirectory::tileFor(int zoomLevel, int tileX, int tileY) const
 {
     int const zoomDiff = zoomLevel - m_zoomLevel;
@@ -86,11 +91,38 @@ QSharedPointer<GeoDataDocument> TileDirectory::load(int zoomLevel, int tileX, in
     if (tile.x() == m_tileX && tile.y() == m_tileY) {
         return m_landmass;
     }
-
     m_tileX = tile.x();
     m_tileY = tile.y();
-    QString const filename = QString("%1/%2/%3.%4").arg(m_baseDir).arg(tile.x()).arg(tile.y()).arg("o5m");
-    m_landmass = open(filename, m_manager);
+
+    if (!m_osmxFile.isEmpty()) {
+        const auto tileBox = m_tileProjection.geoCoordinates(tile);
+        const QString bbox = QString::number(tileBox.south(GeoDataCoordinates::Degree))
+            + QLatin1Char(',') + QString::number(tileBox.west(GeoDataCoordinates::Degree))
+            + QLatin1Char(',') + QString::number(tileBox.north(GeoDataCoordinates::Degree))
+            + QLatin1Char(',') + QString::number(tileBox.east(GeoDataCoordinates::Degree));
+
+        // TODO the following could be optimized by directly reading via OSMX API
+        QTemporaryFile tempPbfFile(m_cacheDir + "/tmp/XXXXXX.osm.pbf");
+        if (!tempPbfFile.open()) {
+            qCritical() << "Failed to open temporary file!" << tempPbfFile.errorString() << m_cacheDir;
+            return {};
+        }
+
+        QProcess osmx;
+        osmx.start("osmx", QStringList({ "extract" , (m_cacheDir + QLatin1Char('/') + m_osmxFile), tempPbfFile.fileName(), "--noUserData", "--bbox", bbox }));
+        osmx.waitForFinished(5*60*1000);
+        if (osmx.exitCode() != 0) {
+            qWarning() << osmx.readAllStandardError();
+            qWarning() << "osmx failed: " << osmx.errorString() << osmx.exitStatus() << osmx.exitCode();
+            return {};
+        }
+
+        m_landmass = open(tempPbfFile.fileName(), m_manager);
+    } else {
+        QString const filename = QString("%1/%2/%3.%4").arg(m_baseDir).arg(tile.x()).arg(tile.y()).arg("o5m");
+        m_landmass = open(filename, m_manager);
+    }
+
     if (m_landmass) {
         PeakAnalyzer::determineZoomLevel(m_landmass->placemarkList());
     }
