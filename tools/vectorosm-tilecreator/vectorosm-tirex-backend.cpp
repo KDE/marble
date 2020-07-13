@@ -20,6 +20,7 @@
 #include <QCoreApplication>
 #include <QDebug>
 #include <QFile>
+#include <QSaveFile>
 
 using namespace Marble;
 
@@ -61,7 +62,7 @@ int main(int argc, char **argv)
         TileDirectory mapTiles(cacheDirectory, QStringLiteral("planet.osmx"), manager, req.tile.z, loadZ);
         TileDirectory landTiles(TileDirectory::Landmass, cacheDirectory, manager, req.tile.z);
 
-        QFile f(backend.metatileFileName(req));
+        QSaveFile f(backend.metatileFileName(req));
         if (!f.open(QFile::WriteOnly)) {
             backend.tileError(req, f.errorString());
             return;
@@ -89,6 +90,7 @@ int main(int argc, char **argv)
                 }
             }
         }
+        f.commit();
         backend.tileDone(req);
     });
 
