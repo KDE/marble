@@ -188,10 +188,6 @@ bool VectorClipper::canBeArea(GeoDataPlacemark::GeoDataVisualCategory visualCate
 
 qreal VectorClipper::area(const GeoDataLinearRing &ring)
 {
-    auto const iter = m_areas.find(&ring);
-    if (iter != m_areas.end()) {
-        return *iter;
-    }
     int const n = ring.size();
     qreal area = 0;
     if (n<3) {
@@ -202,7 +198,6 @@ qreal VectorClipper::area(const GeoDataLinearRing &ring)
     }
     area += (ring[0].longitude() - ring[n-1].longitude() ) * (ring[0].latitude() + ring[n-1].latitude());
     qreal const result = EARTH_RADIUS * EARTH_RADIUS * qAbs(area * 0.5);
-    m_areas.insert(&ring, result);
     return result;
 }
 

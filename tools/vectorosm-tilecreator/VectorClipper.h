@@ -131,7 +131,6 @@ private:
     QMap<TileId, QVector<GeoDataPlacemark*> > m_items;
     int m_maxZoomLevel;
     GeoSceneMercatorTileProjection m_tileProjection;
-    QHash<const GeoDataLinearRing*, qreal> m_areas;
     QSet<GeoDataRelation*> m_relations;
 };
 
