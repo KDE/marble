@@ -11,7 +11,10 @@
 #include <QNetworkDatagram>
 #include <QObject>
 #include <QTimer>
-#include <QUdpSocket>
+
+#include <netinet/in.h>
+
+class QSocketNotifier;
 
 /** A Tirex meta tile. */
 class TirexMetatile
@@ -29,7 +32,8 @@ public:
     TirexMetatile tile;
     QByteArray id;
     QByteArray map;
-    QNetworkDatagram reply;
+    sockaddr_in addr;
+    socklen_t  addrSize;
 };
 
 
@@ -76,7 +80,8 @@ Q_SIGNALS:
 private:
     void commandReadyRead();
 
-    QUdpSocket m_commandSocket;
+    int m_commandSocketFd = -1;
+    QSocketNotifier *m_socketNotifier = nullptr;
     QTimer m_heartbeatTimer;
     QString m_tileDir;
     QElapsedTimer m_renderTime;

@@ -8,6 +8,7 @@
 
 #include <QDir>
 #include <QSettings>
+#include <QSocketNotifier>
 
 #include <cstdlib>
 #include <cstring>
@@ -18,14 +19,13 @@ TirexBackend::TirexBackend(QObject *parent)
 {
     // setup command socket
     const auto socketFd = getenv("TIREX_BACKEND_SOCKET_FILENO");
-    if (!socketFd) {
+    if (socketFd) {
+        m_commandSocketFd = std::atoi(socketFd);
+        m_socketNotifier = new QSocketNotifier(m_commandSocketFd, QSocketNotifier::Read, this);
+        connect(m_socketNotifier, &QSocketNotifier::activated, this, &TirexBackend::commandReadyRead);
+    } else {
         qFatal("TIREX_BACKEND_SOCKET_FILENO not set!");
     }
-    const auto cmdSocketResult = m_commandSocket.setSocketDescriptor(std::atoi(socketFd));
-    if (!cmdSocketResult) {
-        qFatal("Failed to use command socket fd: %s", qPrintable(m_commandSocket.errorString()));
-    }
-    connect(&m_commandSocket, &QUdpSocket::readyRead, this, &TirexBackend::commandReadyRead);
 
     // setup heartbeat pipe and timer
     const auto pipeFd = getenv("TIREX_BACKEND_PIPE_FILENO");
@@ -50,28 +50,35 @@ TirexBackend::~TirexBackend() = default;
 
 void TirexBackend::commandReadyRead()
 {
-    while (m_commandSocket.hasPendingDatagrams()) {
+    while (true) {
         m_renderTime.restart();
-        const auto dgram = m_commandSocket.receiveDatagram();
-
         TirexMetatileRequest req;
+        req.addrSize = sizeof(req.addr);
+        bzero(&req.addr, req.addrSize);
+        QByteArray data(0xffff, 0);
+        auto n = recvfrom(m_commandSocketFd, data.data(), 0xffff, MSG_DONTWAIT, reinterpret_cast<sockaddr*>(&req.addr), &req.addrSize);
+        if (n <= 0) {
+            break;
+        }
+        data.resize(n);
+
         int nextIdx = 0;
         const char *type = nullptr;
         int typeLen = 0;
 
-        while (nextIdx < dgram.data().size() && nextIdx >= 0) {
-            const auto endIdx = dgram.data().indexOf('\n', nextIdx);
+        while (nextIdx < data.size() && nextIdx >= 0) {
+            const auto endIdx = data.indexOf('\n', nextIdx);
             if (endIdx < 0) {
                 break;
             }
-            const auto midIdx = dgram.data().indexOf('=', nextIdx);
+            const auto midIdx = data.indexOf('=', nextIdx);
             if (midIdx < 0 || midIdx >= endIdx) {
                 break;
             }
 
-            const auto key = dgram.data().constData() + nextIdx;
+            const auto key = data.constData() + nextIdx;
             const auto keyLen = midIdx - nextIdx;
-            const auto value = dgram.data().constData() + midIdx + 1;
+            const auto value = data.constData() + midIdx + 1;
             const auto valueLen = endIdx - midIdx - 1;
 
             if (keyLen == 4 && std::strncmp(key, "type", 4) == 0) {
@@ -97,12 +104,10 @@ void TirexBackend::commandReadyRead()
             errorMsg += "id=" + req.id + "\n";
             errorMsg += "type=" + QByteArray(type, typeLen) + "\n";
             errorMsg += "result=error\nerrormsg=unsupported requested\n";
-            auto msg = dgram.makeReply(errorMsg);
-            m_commandSocket.writeDatagram(msg);
+            sendto(m_commandSocketFd, errorMsg.constData(), errorMsg.size(), 0, reinterpret_cast<const sockaddr*>(&req.addr), req.addrSize);
             continue;
         }
 
-        req.reply = dgram.makeReply({});
         emit tileRequested(req);
     }
 }
@@ -115,17 +120,13 @@ void TirexBackend::tileDone(const TirexMetatileRequest &req)
         + "\nz=" + QByteArray::number(req.tile.z)
         + "\nmetatile=" + metatileFileName(req).toUtf8()
         + "\nrender_time=" + QByteArray::number(m_renderTime.elapsed()) + "\n";
-    auto reply = std::move(req.reply);
-    reply.setData(msg);
-    m_commandSocket.writeDatagram(reply);
+    sendto(m_commandSocketFd, msg.constData(), msg.size(), 0, reinterpret_cast<const sockaddr*>(&req.addr), req.addrSize);
 }
 
 void TirexBackend::tileError(const TirexMetatileRequest &req, const QString &errMsg)
 {
     QByteArray msg = "id=" + req.id + "\ntype=metatile_render_request\nresult=error\nerrmsg=" + errMsg.toUtf8() + "\n";
-    auto reply = std::move(req.reply);
-    reply.setData(msg);
-    m_commandSocket.writeDatagram(reply);
+    sendto(m_commandSocketFd, msg.constData(), msg.size(), 0, reinterpret_cast<const sockaddr*>(&req.addr), req.addrSize);
 }
 
 QVariant TirexBackend::configValue(const QString &key) const
