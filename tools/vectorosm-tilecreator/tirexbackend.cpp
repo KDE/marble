@@ -7,6 +7,7 @@
 #include "tirexbackend.h"
 
 #include <QDir>
+#include <QScopedValueRollback>
 #include <QSettings>
 #include <QSocketNotifier>
 
@@ -50,6 +51,11 @@ TirexBackend::~TirexBackend() = default;
 
 void TirexBackend::commandReadyRead()
 {
+    if (m_recursionLock) {
+        return;
+    }
+    QScopedValueRollback<bool> lock(m_recursionLock, true);
+
     while (true) {
         m_renderTime.restart();
         TirexMetatileRequest req;

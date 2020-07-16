@@ -86,6 +86,7 @@ private:
     QString m_tileDir;
     QElapsedTimer m_renderTime;
     int m_heartbeatFd = -1;
+    bool m_recursionLock = false;
     static constexpr const int m_metatileRows = 8; // TODO read from config eventually
     static constexpr const int m_metatileCols = 8;
 };
