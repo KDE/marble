@@ -45,6 +45,9 @@ TirexBackend::TirexBackend(QObject *parent)
 
     // read map configuration
     m_tileDir = configValue(QStringLiteral("tiledir")).toString();
+    if (m_tileDir.isEmpty()) {
+        m_tileDir = QStringLiteral("output/");
+    }
 }
 
 TirexBackend::~TirexBackend() = default;

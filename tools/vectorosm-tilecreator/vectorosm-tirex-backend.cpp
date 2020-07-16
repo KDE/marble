@@ -17,6 +17,7 @@
 #include "VectorClipper.h"
 #include "WayConcatenator.h"
 
+#include <QCommandLineParser>
 #include <QCoreApplication>
 #include <QDebug>
 #include <QFile>
@@ -46,11 +47,25 @@ int main(int argc, char **argv)
     setenv("QT_LOGGING_TO_CONSOLE", "0", true); // redirects qDebug to syslog
 
     QCoreApplication app(argc, argv);
+
+    // for stand-alone testing only, in normal operation this is entirely controlled via the Tirex command socket
+    QCommandLineParser parser;
+    parser.addOptions({
+                      {{"c", "cache-directory"}, "Directory for temporary data.", "cache"},
+                      {"x", "x coordinate of the requested tile", "x"},
+                      {"y", "y coordinate of the requested tile", "y"},
+                      {"z", "zoom level of the requested tile", "z"},
+                      });
+    parser.process(app);
+
     TirexBackend backend;
 
     MarbleModel model;
     ParsingRunnerManager manager(model.pluginManager());
-    const auto cacheDirectory = backend.configValue(QStringLiteral("cache-directory")).toString();
+    auto cacheDirectory = backend.configValue(QStringLiteral("cache-directory")).toString();
+    if (cacheDirectory.isEmpty()) {
+        cacheDirectory = parser.value("cache-directory");
+    }
 
     QObject::connect(&backend, &TirexBackend::tileRequested, &app, [&](const TirexMetatileRequest &req) {
         // assuming the requested meta tile is a square power of two, we break that down into square power-of-two blocks
@@ -109,6 +124,15 @@ int main(int argc, char **argv)
         f.commit();
         backend.tileDone(req);
     });
+
+    if (parser.isSet("x") && parser.isSet("y") && parser.isSet("z")) {
+        TirexMetatileRequest req;
+        req.tile.x = parser.value("x").toInt();
+        req.tile.y = parser.value("y").toInt();
+        req.tile.z = parser.value("z").toInt();
+        emit backend.tileRequested(req);
+        return 0;
+    }
 
     return app.exec();
 }
