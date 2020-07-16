@@ -53,12 +53,20 @@ int main(int argc, char **argv)
     const auto cacheDirectory = backend.configValue(QStringLiteral("cache-directory")).toString();
 
     QObject::connect(&backend, &TirexBackend::tileRequested, &app, [&](const TirexMetatileRequest &req) {
-        // load bigger tiles at high-z levels, it's more efficient there
-        // that however assumes we are rendering square power of two meta-tiles with proper alignment
+        // assuming the requested meta tile is a square power of two, we break that down into square power-of-two blocks
+        // for high zoom levels using few (or even just one block is most efficient), for lower zoom levels we need to use
+        // more blocks to reduce memory use
+        // to avoid TileDirectory reloading the same block multiple times, we need to do the below processing in the proper order
         int loadZ = req.tile.z;
-        if (backend.metatileColumns() == backend.metatileRows() && backend.metatileRows() == 8 && req.tile.z <= 15) {
+        if (backend.metatileColumns() == backend.metatileRows() && backend.metatileRows() == 8) {
             loadZ = req.tile.z - 3;
+            loadZ = std::max(11, loadZ);
+            loadZ = std::min(req.tile.z, loadZ);
         }
+        const int blockSize = 1 << (req.tile.z - loadZ);
+        const int blockColumns = backend.metatileColumns() / blockSize;
+        const int blockRows = backend.metatileRows() / blockSize;
+
         TileDirectory mapTiles(cacheDirectory, QStringLiteral("planet.osmx"), manager, req.tile.z, loadZ);
         TileDirectory landTiles(TileDirectory::Landmass, cacheDirectory, manager, req.tile.z);
 
@@ -69,27 +77,35 @@ int main(int argc, char **argv)
         }
 
         backend.writeMetatileHeader(&f, req.tile);
-        for (int x = 0; x < backend.metatileColumns(); ++x) {
-            for (int y = 0; y < backend.metatileRows(); ++y) {
-                auto const tileId = TileId (0, req.tile.z, x + req.tile.x, y + req.tile.y);
-                using GeoDocPtr = QSharedPointer<GeoDataDocument>;
-                GeoDocPtr tile1 = GeoDocPtr(mapTiles.clip(tileId.zoomLevel(), tileId.x(), tileId.y()));
-                TagsFilter::removeAnnotationTags(tile1.data());
-                if (tileId.zoomLevel() < 17) {
-                    WayConcatenator concatenator(tile1.data());
-                }
-                NodeReducer nodeReducer(tile1.data(), tileId);
-                GeoDocPtr tile2 = GeoDocPtr(landTiles.clip(tileId.zoomLevel(), tileId.x(), tileId.y()));
-                GeoDocPtr combined = GeoDocPtr(mergeDocuments(tile1.data(), tile2.data()));
+        for (int blockX = 0; blockX < blockColumns; ++blockX) {
+            for (int blockY = 0; blockY < blockRows; ++blockY) {
+                for (int tileX = 0; tileX < blockSize; ++tileX) {
+                    for (int tileY = 0; tileY < blockSize; ++tileY) {
+                        const auto x = blockX * blockSize + tileX;
+                        const auto y = blockY * blockSize + tileY;
 
-                const auto offset = f.pos();
-                if (GeoDataDocumentWriter::write(&f, *combined, QStringLiteral("o5m"))) {
-                    backend.writeMetatileEntry(&f, x * backend.metatileColumns() + y, offset, f.pos() - offset);
-                } else {
-                    qWarning() << "Could not write the tile " << combined->name();
+                        auto const tileId = TileId (0, req.tile.z, x + req.tile.x, y + req.tile.y);
+                        using GeoDocPtr = QSharedPointer<GeoDataDocument>;
+                        GeoDocPtr tile1 = GeoDocPtr(mapTiles.clip(tileId.zoomLevel(), tileId.x(), tileId.y()));
+                        TagsFilter::removeAnnotationTags(tile1.data());
+                        if (tileId.zoomLevel() < 17) {
+                            WayConcatenator concatenator(tile1.data());
+                        }
+                        NodeReducer nodeReducer(tile1.data(), tileId);
+                        GeoDocPtr tile2 = GeoDocPtr(landTiles.clip(tileId.zoomLevel(), tileId.x(), tileId.y()));
+                        GeoDocPtr combined = GeoDocPtr(mergeDocuments(tile1.data(), tile2.data()));
+
+                        const auto offset = f.pos();
+                        if (GeoDataDocumentWriter::write(&f, *combined, QStringLiteral("o5m"))) {
+                            backend.writeMetatileEntry(&f, x * backend.metatileColumns() + y, offset, f.pos() - offset);
+                        } else {
+                            qWarning() << "Could not write the tile " << combined->name();
+                        }
+                    }
                 }
             }
         }
+
         f.commit();
         backend.tileDone(req);
     });
