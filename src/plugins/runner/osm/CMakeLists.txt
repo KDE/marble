@@ -6,7 +6,17 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}/writers
  ${CMAKE_CURRENT_SOURCE_DIR}/translators
  ${CMAKE_CURRENT_BINARY_DIR}
+ ${Protobuf_INCLUDE_DIRS}
 )
+
+if (Protobuf_FOUND)
+    PROTOBUF_GENERATE_CPP(pbf_srcs pbf_hdrs
+        ${CMAKE_SOURCE_DIR}/tools/osm-addresses/pbf/fileformat.proto
+        ${CMAKE_SOURCE_DIR}/tools/osm-addresses/pbf/osmformat.proto
+    )
+    set(EXTRA_LIBS ${Protobuf_LIBRARIES} ${ZLIB_LIBRARIES})
+    add_definitions(-DHAVE_PROTOBUF)
+endif()
 
 set( osm_writers_SRCS
         writers/OsmObjectAttributeWriter.cpp
@@ -30,10 +40,12 @@ set( osm_SRCS
   OsmWay.cpp
   OsmRelation.cpp
   OsmElementDictionary.cpp
+  OsmPbfParser.cpp
+  ${pbf_srcs}
 )
 
 marble_add_plugin( OsmPlugin ${osm_SRCS} ${osm_writers_SRCS} ${osm_translators_SRCS} )
-target_link_libraries(OsmPlugin o5mreader)
+target_link_libraries(OsmPlugin o5mreader ${EXTRA_LIBS})
 
 find_package(ECM ${REQUIRED_ECM_VERSION} QUIET)
 if(NOT ECM_FOUND)

@@ -32,6 +32,7 @@ public:
 private:
     static GeoDataDocument* parseXml(const QString &filename, QString &error);
     static GeoDataDocument* parseO5m(const QString &filename, QString &error);
+    static GeoDataDocument* parseOsmPbf(const QString &filename, QString &error);
     static GeoDataDocument *createDocument(OsmNodes &nodes, OsmWays &way, OsmRelations &relations);
 };
 

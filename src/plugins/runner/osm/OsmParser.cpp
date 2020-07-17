@@ -20,6 +20,7 @@
 #include "GeoDataPolyStyle.h"
 #include <MarbleZipReader.h>
 #include "o5mreader.h"
+#include "OsmPbfParser.h"
 
 #include <QColor>
 #include <QFile>
@@ -39,6 +40,8 @@ GeoDataDocument *OsmParser::parse(const QString &filename, QString &error)
 
     if (fileInfo.suffix() == QLatin1String("o5m")) {
         return parseO5m(filename, error);
+    } else if (filename.endsWith(QLatin1String(".osm.pbf"))) {
+        return parseOsmPbf(filename, error);
     } else {
         return parseXml(filename, error);
     }
@@ -198,6 +201,20 @@ GeoDataDocument* OsmParser::parseXml(const QString &filename, QString &error)
     }
 
     return createDocument(m_nodes, m_ways, m_relations);
+}
+
+GeoDataDocument* OsmParser::parseOsmPbf(const QString &filename, QString &error)
+{
+    QFile f(filename);
+    if (!f.open(QFile::ReadOnly)) {
+        error = f.errorString();
+        return nullptr;
+    }
+
+    const auto data = f.map(0, f.size());
+    OsmPbfParser p;
+    p.parse(data, f.size());
+    return createDocument(p.m_nodes, p.m_ways, p.m_relations);
 }
 
 GeoDataDocument *OsmParser::createDocument(OsmNodes &nodes, OsmWays &ways, OsmRelations &relations)

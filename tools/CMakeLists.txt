@@ -22,7 +22,6 @@ add_subdirectory( stars )
 add_subdirectory( sentineltile )
 add_subdirectory( vectorosm-tilecreator )
 
-find_package(Protobuf)
 find_package(ZLIB)
 if(PROTOBUF_FOUND AND ZLIB_FOUND)
   # add_subdirectory( osm-addresses )

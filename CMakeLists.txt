@@ -98,6 +98,9 @@ endif()
 #######################################################
 # Find Qt dependencies
 
+find_package(Protobuf)
+set_package_properties(Protobuf PROPERTIES TYPE OPTIONAL PURPOSE "Parsing of OSM PBF files.")
+
 if(CMAKE_SYSTEM_NAME STREQUAL Android)
     set(REQUIRED_QT_VERSION 5.7.0)
    # TODO: still needed with ECM toolchain?
