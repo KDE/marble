@@ -46,6 +46,6 @@ target_link_libraries(marble-vectorosm-process-land-polygons vectorosm-toolchain
 
 add_executable(marble-vectorosm-tirex-backend
     vectorosm-tirex-backend.cpp
-    tirexbackend.cpp
+    TirexBackend.cpp
 )
 target_link_libraries(marble-vectorosm-tirex-backend vectorosm-toolchain)

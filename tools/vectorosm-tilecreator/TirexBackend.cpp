@@ -4,7 +4,7 @@
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-#include "tirexbackend.h"
+#include "TirexBackend.h"
 
 #include <QDir>
 #include <QScopedValueRollback>
