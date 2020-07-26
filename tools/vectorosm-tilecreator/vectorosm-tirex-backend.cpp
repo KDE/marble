@@ -28,6 +28,9 @@ using namespace Marble;
 GeoDataDocument* mergeDocuments(GeoDataDocument* map1, GeoDataDocument* map2)
 {
     GeoDataDocument* mergedMap = new GeoDataDocument(*map1);
+    if (!map2) {
+        return mergedMap;
+    }
 
     OsmPlacemarkData marbleLand;
     marbleLand.addTag("marble_land","landmass");
