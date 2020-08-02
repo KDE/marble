@@ -17,6 +17,10 @@ if (Protobuf_FOUND)
     )
     set(EXTRA_LIBS ${Protobuf_LIBRARIES} ${ZLIB_LIBRARIES})
     add_definitions(-DHAVE_PROTOBUF)
+
+	if(MSVC)
+	add_definitions(-DPROTOBUF_USE_DLLS)
+	endif()
 endif()
 
 set( osm_writers_SRCS
