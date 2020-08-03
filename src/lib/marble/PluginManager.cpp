@@ -173,31 +173,14 @@ void PluginManager::whitelistPlugin(const QString &filename)
 }
 
 /** Append obj to the given plugins list if it inherits both T and U */
-template<class T, class U>
-bool appendPlugin( QObject * obj, QPluginLoader* &loader, QList<T*> &plugins )
+template<class Iface, class Plugin>
+bool appendPlugin( QObject * obj, const QPluginLoader *loader, QList<Plugin> &plugins )
 {
-    if ( qobject_cast<T*>( obj ) && qobject_cast<U*>( obj ) ) {
+    if ( qobject_cast<Iface*>( obj ) && qobject_cast<Plugin>( obj ) ) {
         Q_ASSERT( obj->metaObject()->superClass() ); // all our plugins have a super class
         mDebug() <<  obj->metaObject()->superClass()->className()
-                << "plugin loaded from" << loader->fileName();
-        T* plugin = qobject_cast<T*>( obj );
-        Q_ASSERT( plugin ); // checked above
-        plugins << plugin;
-        return true;
-    }
-
-    return false;
-}
-
-/** Append obj to the given plugins list if it inherits both T and U */
-template<class T, class U>
-bool appendPlugin( QObject * obj, QPluginLoader* &loader, QList<const T*> &plugins )
-{
-    if ( qobject_cast<T*>( obj ) && qobject_cast<U*>( obj ) ) {
-        Q_ASSERT( obj->metaObject()->superClass() ); // all our plugins have a super class
-        mDebug() <<  obj->metaObject()->superClass()->className()
-                << "plugin loaded from" << loader->fileName();
-        T* plugin = qobject_cast<T*>( obj );
+                << "plugin loaded from" << (loader ? loader->fileName() : "<static>");
+        auto plugin = qobject_cast<Plugin>( obj );
         Q_ASSERT( plugin ); // checked above
         plugins << plugin;
         return true;
@@ -255,17 +238,17 @@ void PluginManagerPrivate::loadPlugins()
         QObject * obj = loader->instance();
 
         if ( obj ) {
-            bool isPlugin = appendPlugin<RenderPlugin, RenderPluginInterface>
+            bool isPlugin = appendPlugin<RenderPluginInterface>
                        ( obj, loader, m_renderPluginTemplates );
-            isPlugin = isPlugin || appendPlugin<PositionProviderPlugin, PositionProviderPluginInterface>
+            isPlugin = isPlugin || appendPlugin<PositionProviderPluginInterface>
                        ( obj, loader, m_positionProviderPluginTemplates );
-            isPlugin = isPlugin || appendPlugin<SearchRunnerPlugin, SearchRunnerPlugin>
+            isPlugin = isPlugin || appendPlugin<SearchRunnerPlugin>
                        ( obj, loader, m_searchRunnerPlugins ); // intentionally T==U
-            isPlugin = isPlugin || appendPlugin<ReverseGeocodingRunnerPlugin, ReverseGeocodingRunnerPlugin>
+            isPlugin = isPlugin || appendPlugin<ReverseGeocodingRunnerPlugin>
                        ( obj, loader, m_reverseGeocodingRunnerPlugins ); // intentionally T==U
-            isPlugin = isPlugin || appendPlugin<RoutingRunnerPlugin, RoutingRunnerPlugin>
+            isPlugin = isPlugin || appendPlugin<RoutingRunnerPlugin>
                        ( obj, loader, m_routingRunnerPlugins ); // intentionally T==U
-            isPlugin = isPlugin || appendPlugin<ParseRunnerPlugin, ParseRunnerPlugin>
+            isPlugin = isPlugin || appendPlugin<ParseRunnerPlugin>
                        ( obj, loader, m_parsingRunnerPlugins ); // intentionally T==U
             if ( !isPlugin ) {
                 qWarning() << "Ignoring the following plugin since it couldn't be loaded:" << path;
