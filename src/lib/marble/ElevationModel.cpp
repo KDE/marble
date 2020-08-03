@@ -54,6 +54,10 @@ public:
         Q_ASSERT( map );
 
         const GeoSceneLayer *sceneLayer = map->layer( head->theme() );
+        if (!sceneLayer) {
+            mDebug() << "Failed to instantiate elevation map. No elevation will be returned.";
+            return;
+        }
         Q_ASSERT( sceneLayer );
 
         m_textureLayer = dynamic_cast<GeoSceneTextureTileDataset*>( sceneLayer->datasets().first() );
