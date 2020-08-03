@@ -68,7 +68,7 @@ target_link_libraries (
     )
 
 ## this works for win32 only because FindQt does not handle this correct
-if(STATIC_BUILD)
+if(STATIC_BUILD AND WIN32)
     target_link_libraries(marble ${QT_PLUGINS_DIR}/imageformats/qjpeg.lib)
     target_link_libraries(marble ${QT_PLUGINS_DIR}/imageformats/qsvg.lib)
 endif(STATIC_BUILD)

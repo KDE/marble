@@ -19,7 +19,7 @@ SET(astrolib_SRCS
   solarsystem.cpp
 )
 
-ADD_LIBRARY(astro SHARED ${astrolib_SRCS})
+ADD_LIBRARY(astro ${astrolib_SRCS})
 generate_export_header(astro BASE_NAME astrolib)
 target_include_directories(astro PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>)
 
@@ -57,6 +57,7 @@ else()
   install(TARGETS astro
     EXPORT AstroTargets
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
   )
 endif()
 

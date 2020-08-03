@@ -263,7 +263,10 @@ endif()
 ####################################################
 # Options for static build
 if(STATIC_BUILD)
+  set(BUILD_SHARED_LIBS FALSE)
   add_definitions(-DSTATIC_BUILD=1)
+else()
+  set(BUILD_SHARED_LIBS TRUE)
 endif(STATIC_BUILD)
 
 #############################################################

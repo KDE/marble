@@ -49,3 +49,6 @@ add_executable(marble-vectorosm-tirex-backend
     TirexBackend.cpp
 )
 target_link_libraries(marble-vectorosm-tirex-backend vectorosm-toolchain)
+if (STATIC_BUILD)
+    target_link_libraries(marble-vectorosm-tirex-backend OsmPlugin ShpPlugin)
+endif()

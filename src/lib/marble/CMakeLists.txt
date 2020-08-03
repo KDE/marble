@@ -365,7 +365,7 @@ qt_add_resources(marblewidget_SRCS libmarble.qrc ../../apps/marble-ui/marble.qrc
 
 qt_wrap_ui(marblewidget_SRCS ${marblewidget_UI})
 
-add_library(marblewidget SHARED ${marblewidget_SRCS} ${SOURCES_UI_HDRS})
+add_library(marblewidget ${marblewidget_SRCS} ${SOURCES_UI_HDRS})
 
 generate_export_header(marblewidget BASE_NAME marble)
 
@@ -454,7 +454,8 @@ elseif(APPLE)
 else()
   install(TARGETS marblewidget
     EXPORT MarbleTargets
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
 endif()
 
 

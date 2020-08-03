@@ -22,6 +22,12 @@
 #include <QDebug>
 #include <QFile>
 #include <QSaveFile>
+#include <QtPlugin>
+
+#ifdef STATIC_BUILD
+Q_IMPORT_PLUGIN(OsmPlugin)
+Q_IMPORT_PLUGIN(ShpPlugin)
+#endif
 
 using namespace Marble;
 

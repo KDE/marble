@@ -42,8 +42,8 @@ if(WIN32)
 endif(WIN32)
 
 ## this works for win32 only because FindQt does not handle this correct
-if(STATIC_BUILD)
+if(STATIC_BUILD AND WIN32)
     # TODO: PUBLIC or can be PRIVATE?
-    target_link_libraries(marble LINK_PUBLIC ${QT_PLUGINS_DIR}/imageformats/qjpeg.lib)
-    target_link_libraries(marble LINK_PUBLIC ${QT_PLUGINS_DIR}/imageformats/qsvg.lib)
+    target_link_libraries(marbleui LINK_PUBLIC ${QT_PLUGINS_DIR}/imageformats/qjpeg.lib)
+    target_link_libraries(marbleui LINK_PUBLIC ${QT_PLUGINS_DIR}/imageformats/qsvg.lib)
 endif(STATIC_BUILD)

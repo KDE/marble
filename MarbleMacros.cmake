@@ -35,7 +35,12 @@ endmacro()
 # this is needed to minimize the amount of errors to do
 macro( marble_add_plugin _target_name )
 set( _src ${ARGN} )
-add_library( ${_target_name} MODULE ${_src} )
+if (STATIC_BUILD)
+    add_library(${_target_name} ${_src})
+    target_compile_definitions(${_target_name} PRIVATE -DQT_STATICPLUGIN)
+else()
+    add_library(${_target_name} MODULE ${_src})
+endif()
 target_link_libraries( ${_target_name} ${${_target_name}_LIBS}
                                        marblewidget )
 install( TARGETS ${_target_name} DESTINATION ${MARBLE_PLUGIN_INSTALL_PATH} )
