@@ -45,6 +45,7 @@ class PluginManagerPrivate
     ~PluginManagerPrivate();
 
     void loadPlugins();
+    bool addPlugin(QObject *obj, const QPluginLoader *loader);
 
     bool m_pluginsLoaded;
     QList<const RenderPlugin *> m_renderPluginTemplates;
@@ -189,6 +190,28 @@ bool appendPlugin( QObject * obj, const QPluginLoader *loader, QList<Plugin> &pl
     return false;
 }
 
+bool PluginManagerPrivate::addPlugin(QObject *obj, const QPluginLoader *loader)
+{
+    bool isPlugin = appendPlugin<RenderPluginInterface>
+                ( obj, loader, m_renderPluginTemplates );
+    isPlugin = isPlugin || appendPlugin<PositionProviderPluginInterface>
+                ( obj, loader, m_positionProviderPluginTemplates );
+    isPlugin = isPlugin || appendPlugin<SearchRunnerPlugin>
+                ( obj, loader, m_searchRunnerPlugins );
+    isPlugin = isPlugin || appendPlugin<ReverseGeocodingRunnerPlugin>
+                ( obj, loader, m_reverseGeocodingRunnerPlugins );
+    isPlugin = isPlugin || appendPlugin<RoutingRunnerPlugin>
+                ( obj, loader, m_routingRunnerPlugins );
+    isPlugin = isPlugin || appendPlugin<ParseRunnerPlugin>
+                ( obj, loader, m_parsingRunnerPlugins );
+    if ( !isPlugin ) {
+        qWarning() << "Ignoring the following plugin since it couldn't be loaded:" << (loader ? loader->fileName() : "<static>");
+        mDebug() << "Plugin failure:" << (loader ? loader->fileName() : "<static>") << "is a plugin, but it does not implement the "
+                << "right interfaces or it was compiled against an old version of Marble. Ignoring it.";
+    }
+    return isPlugin;
+}
+
 void PluginManagerPrivate::loadPlugins()
 {
     if (m_pluginsLoaded)
@@ -238,22 +261,8 @@ void PluginManagerPrivate::loadPlugins()
         QObject * obj = loader->instance();
 
         if ( obj ) {
-            bool isPlugin = appendPlugin<RenderPluginInterface>
-                       ( obj, loader, m_renderPluginTemplates );
-            isPlugin = isPlugin || appendPlugin<PositionProviderPluginInterface>
-                       ( obj, loader, m_positionProviderPluginTemplates );
-            isPlugin = isPlugin || appendPlugin<SearchRunnerPlugin>
-                       ( obj, loader, m_searchRunnerPlugins ); // intentionally T==U
-            isPlugin = isPlugin || appendPlugin<ReverseGeocodingRunnerPlugin>
-                       ( obj, loader, m_reverseGeocodingRunnerPlugins ); // intentionally T==U
-            isPlugin = isPlugin || appendPlugin<RoutingRunnerPlugin>
-                       ( obj, loader, m_routingRunnerPlugins ); // intentionally T==U
-            isPlugin = isPlugin || appendPlugin<ParseRunnerPlugin>
-                       ( obj, loader, m_parsingRunnerPlugins ); // intentionally T==U
-            if ( !isPlugin ) {
-                qWarning() << "Ignoring the following plugin since it couldn't be loaded:" << path;
-                mDebug() << "Plugin failure:" << path << "is a plugin, but it does not implement the "
-                        << "right interfaces or it was compiled against an old version of Marble. Ignoring it.";
+            bool isPlugin = addPlugin(obj, loader);
+            if (!isPlugin) {
                 delete loader;
             } else {
                 foundPlugin = true;
@@ -262,6 +271,13 @@ void PluginManagerPrivate::loadPlugins()
             qWarning() << "Ignoring to load the following file since it doesn't look like a valid Marble plugin:" << path << endl
                        << "Reason:" << loader->errorString();
             delete loader;
+        }
+    }
+
+    const auto staticPlugins = QPluginLoader::staticInstances();
+    for (auto obj : staticPlugins) {
+        if (addPlugin(obj, nullptr)) {
+            foundPlugin = true;
         }
     }
 
