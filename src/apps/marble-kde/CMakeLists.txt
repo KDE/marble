@@ -1,15 +1,6 @@
-find_package(ECM ${REQUIRED_ECM_VERSION} QUIET)
 if(NOT ECM_FOUND)
     return()
 endif()
-
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
-
-include(KDEInstallDirs)
-# KDECMakeSettings expexts LIB_INSTALL_DIR set
-set(LIB_INSTALL_DIR ${KDE_INSTALL_LIBDIR})
-include(KDECMakeSettings)
-include(ECMInstallIcons)
 
 macro_optional_find_package(KF5 ${REQUIRED_KF5_MIN_VERSION} QUIET COMPONENTS Crash NewStuff Parts CoreAddons I18n)
 

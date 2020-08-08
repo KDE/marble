@@ -305,6 +305,16 @@ set(KDE_INSTALL_DIRS_NO_DEPRECATED TRUE)
 set(KDE_SKIP_UNINSTALL_TARGET ON CACHE BOOL "KDE uninstall target must be disabled")
 set(REQUIRED_KF5_MIN_VERSION 5.7.0)
 
+find_package(ECM ${REQUIRED_ECM_VERSION} QUIET)
+if(ECM_FOUND)
+  set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
+
+  include(KDEInstallDirs)
+  # KDECMakeSettings expexts LIB_INSTALL_DIR set
+  set(LIB_INSTALL_DIR ${KDE_INSTALL_LIBDIR})
+  include(KDECMakeSettings)
+  include(ECMInstallIcons)
+endif()
 
 ####################################################
 # Add the include directories

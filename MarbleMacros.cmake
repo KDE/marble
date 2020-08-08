@@ -80,10 +80,6 @@ macro( marble_add_test TEST_NAME )
         set_target_properties( ${TEST_NAME} PROPERTIES 
                                COMPILE_FLAGS "-DDATA_PATH=\"\\\"${DATA_PATH}\\\"\" -DPLUGIN_PATH=\"\\\"${PLUGIN_PATH}\\\"\"" )
         add_test( ${TEST_NAME} ${TEST_NAME} )
-    if( ECM_ENABLE_SANITIZERS )
-        set_property(TEST ${TEST_NAME} PROPERTY ENVIRONMENT "LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libasan.2.0.0")
-    endif( ECM_ENABLE_SANITIZERS )
-      
     endif( BUILD_MARBLE_TESTS )
 endmacro( marble_add_test TEST_NAME )
 
