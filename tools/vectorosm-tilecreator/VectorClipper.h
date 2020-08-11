@@ -28,6 +28,8 @@
 #include <QMap>
 #include <QSet>
 
+#include <memory>
+
 namespace Marble {
 
 class GeoDataLinearRing;

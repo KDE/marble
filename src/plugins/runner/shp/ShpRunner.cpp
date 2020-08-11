@@ -25,6 +25,8 @@
 
 #include <shapefil.h>
 
+#include <memory>
+
 namespace Marble
 {
 
