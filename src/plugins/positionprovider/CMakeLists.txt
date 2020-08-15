@@ -9,7 +9,7 @@ IF(LIBGPS_FOUND)
 ENDIF(LIBGPS_FOUND)
 
 find_package(Qt5 ${REQUIRED_QT_VERSION}
-    COMPONENTS
+    OPTIONAL_COMPONENTS
         Positioning
 )
 marble_set_package_properties( Qt5Positioning PROPERTIES DESCRIPTION "a collection of APIs and frameworks" )
