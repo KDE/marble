@@ -16,6 +16,9 @@
 #include "TileId.h"
 #include "VectorClipper.h"
 #include "WayConcatenator.h"
+#ifdef STATIC_BUILD
+#include "src/plugins/runner/osm/translators/O5mWriter.h"
+#endif
 
 #include <QCommandLineParser>
 #include <QCoreApplication>
@@ -66,6 +69,11 @@ int main(int argc, char **argv)
                       {"z", "zoom level of the requested tile", "z"},
                       });
     parser.process(app);
+
+    // work around MARBLE_ADD_WRITER not working for static builds
+#ifdef STATIC_BUILD
+    GeoDataDocumentWriter::registerWriter(new O5mWriter, QStringLiteral("o5m"));
+#endif
 
     TirexBackend backend;
 

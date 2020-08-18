@@ -50,8 +50,12 @@ private:
     QString m_fileExtension;
 };
 
+#ifndef STATIC_BUILD
 #define MARBLE_ADD_WRITER(Class, fileExtension) \
     static GeoWriterBackendRegistrar s_##Class##Registrar(new Class, fileExtension);
+#else
+#define MARBLE_ADD_WRITER(Class, fileExtension)
+#endif
 
 }
 
