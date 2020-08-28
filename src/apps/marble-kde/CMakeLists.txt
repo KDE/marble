@@ -40,7 +40,11 @@ target_link_libraries(marble_part
 install(TARGETS marble_part DESTINATION ${KDE_INSTALL_PLUGINDIR})
 install(FILES marble_part.desktop DESTINATION ${KDE_INSTALL_KSERVICES5DIR})
 install(FILES marble_part.rc marbleui.rc DESTINATION ${KDE_INSTALL_KXMLGUI5DIR}/marble)
-install(FILES marble.knsrc DESTINATION ${KDE_INSTALL_CONFDIR})
+if(KF5NewStuff_VERSION VERSION_GREATER "5.56.0")
+    install(FILES marble.knsrc DESTINATION ${KDE_INSTALL_KNSRCDIR})
+else()
+    install(FILES marble.knsrc DESTINATION ${KDE_INSTALL_CONFDIR})
+endif()
 
 ki18n_wrap_ui(marble_kde_SRCS ${marble_UI})
 kconfig_add_kcfg_files(marble_kde_SRCS settings.kcfgc)
