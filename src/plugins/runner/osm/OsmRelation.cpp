@@ -221,16 +221,20 @@ OsmRelation::OsmRings OsmRelation::rings(const QStringList &roles, const OsmWays
             unclosedWays.append(way);
             continue;
         }
+
+        OsmPlacemarkData placemarkData = way.osmData();
         for(auto id: way.references()) {
             if (!nodes.contains(id)) {
                 // A node is missing. Return nothing.
                 return OsmRings();
             }
-            ring << nodes[id].coordinates();
+            const auto &node = nodes[id];
+            ring << node.coordinates();
+            placemarkData.addNodeReference(node.coordinates(), node.osmData());
         }
         Q_ASSERT(ways.contains(wayId));
         currentWays << wayId;
-        result << OsmRing(GeoDataLinearRing(ring.optimized()), way.osmData());
+        result << OsmRing(GeoDataLinearRing(ring.optimized()), placemarkData);
     }
 
     if( !unclosedWays.isEmpty() ) {
@@ -239,6 +243,7 @@ OsmRelation::OsmRings OsmRelation::rings(const QStringList &roles, const OsmWays
             GeoDataLinearRing ring;
             qint64 firstReference = unclosedWays.first().references().first();
             qint64 lastReference = firstReference;
+            OsmPlacemarkData placemarkData;
             bool ok = true;
             while( ok ) {
                 ok = false;
@@ -256,7 +261,9 @@ OsmRelation::OsmRings OsmRelation::rings(const QStringList &roles, const OsmWays
                                 return OsmRings();
                             }
                             if ( id != lastReference ) {
-                                ring << nodes[id].coordinates();
+                                const auto &node = nodes[id];
+                                ring << node.coordinates();
+                                placemarkData.addNodeReference(node.coordinates(), node.osmData());
                                 currentNodes << id;
                             }
                         }
@@ -277,7 +284,7 @@ OsmRelation::OsmRings OsmRelation::rings(const QStringList &roles, const OsmWays
                 return OsmRings();
             } else {
                 /** @todo Merge tags common to all rings into the new osm data? */
-                result << OsmRing(GeoDataLinearRing(ring.optimized()), OsmPlacemarkData());
+                result << OsmRing(GeoDataLinearRing(ring.optimized()), placemarkData);
             }
         }
     }
