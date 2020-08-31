@@ -464,7 +464,7 @@ void MarbleDefaultInputHandler::checkReleasedMove(QMouseEvent *event)
             }
         }
     }
-    if (event->type() == QEvent::MouseMove && !(event->buttons() & Qt::MidButton))
+    if (event->type() == QEvent::MouseMove && !(event->buttons() & Qt::MiddleButton))
     {
         d->m_midPressed = false;
     }
@@ -478,7 +478,7 @@ void MarbleDefaultInputHandler::handleMouseButtonPress(QMouseEvent *event)
        handleLeftMouseButtonPress(event);
     }
 
-    if ( event->button() == Qt::MidButton )
+    if ( event->button() == Qt::MiddleButton )
     {
        handleMiddleMouseButtonPress(event);
     }
@@ -582,7 +582,7 @@ void MarbleDefaultInputHandler::handleMouseButtonRelease(QMouseEvent *event)
         }
     }
 
-    if (event->button() == Qt::MidButton)
+    if (event->button() == Qt::MiddleButton)
     {
         d->m_midPressed = false;
 

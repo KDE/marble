@@ -182,7 +182,7 @@ void MarbleLineEdit::mouseReleaseEvent( QMouseEvent* e )
 {
     if ( d->m_clearButton == childAt( e->pos() ) ) {
         QString newText;
-        if ( e->button() == Qt::MidButton ) {
+        if ( e->button() == Qt::MiddleButton ) {
             newText = QApplication::clipboard()->text( QClipboard::Selection );
             setText( newText );
         } else {
