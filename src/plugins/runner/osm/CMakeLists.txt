@@ -10,7 +10,7 @@ INCLUDE_DIRECTORIES(
  ${ZLIB_INCLUDE_DIRS}
 )
 
-if (Protobuf_FOUND)
+if (Protobuf_FOUND AND Protobuf_PROTOC_EXECUTABLE)
     PROTOBUF_GENERATE_CPP(pbf_srcs pbf_hdrs
         ${CMAKE_SOURCE_DIR}/tools/osm-addresses/pbf/fileformat.proto
         ${CMAKE_SOURCE_DIR}/tools/osm-addresses/pbf/osmformat.proto
