@@ -75,7 +75,7 @@ target_link_libraries (
 if(STATIC_BUILD AND WIN32)
     target_link_libraries(marble ${QT_PLUGINS_DIR}/imageformats/qjpeg.lib)
     target_link_libraries(marble ${QT_PLUGINS_DIR}/imageformats/qsvg.lib)
-endif(STATIC_BUILD)
+endif()
 
 install(TARGETS marble ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 install(PROGRAMS org.kde.marble.desktop DESTINATION ${KDE_INSTALL_APPDIR})

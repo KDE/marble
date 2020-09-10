@@ -45,7 +45,7 @@ endif(WIN32)
 if(STATIC_BUILD AND WIN32)
     target_link_libraries(marble-qt ${QT_PLUGINS_DIR}/imageformats/qjpeg.lib)
     target_link_libraries(marble-qt ${QT_PLUGINS_DIR}/imageformats/qsvg.lib)
-endif(STATIC_BUILD)
+endif()
 
 if(WIN32)
 install (TARGETS marble-qt RUNTIME DESTINATION .)

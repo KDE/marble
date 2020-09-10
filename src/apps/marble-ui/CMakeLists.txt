@@ -46,4 +46,4 @@ if(STATIC_BUILD AND WIN32)
     # TODO: PUBLIC or can be PRIVATE?
     target_link_libraries(marbleui LINK_PUBLIC ${QT_PLUGINS_DIR}/imageformats/qjpeg.lib)
     target_link_libraries(marbleui LINK_PUBLIC ${QT_PLUGINS_DIR}/imageformats/qsvg.lib)
-endif(STATIC_BUILD)
+endif()
