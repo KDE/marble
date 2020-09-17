@@ -48,8 +48,6 @@
 #include <ostream>
 #include <functional>
 
-#include <MarbleMath.h>
-
 namespace ClipperLib {
 
 static double const pi = 3.141592653589793238;
@@ -553,8 +551,8 @@ bool SlopesEqual(const TEdge &e1, const TEdge &e2, bool UseFullInt64Range)
 }
 //------------------------------------------------------------------------------
 
-bool SlopesEqual(const IntPoint &pt1, const IntPoint &pt2,
-  const IntPoint &pt3, bool UseFullInt64Range)
+bool SlopesEqual(const IntPoint pt1, const IntPoint pt2,
+  const IntPoint pt3, bool UseFullInt64Range)
 {
 #ifndef use_int32
   if (UseFullInt64Range)
@@ -565,8 +563,8 @@ bool SlopesEqual(const IntPoint &pt1, const IntPoint &pt2,
 }
 //------------------------------------------------------------------------------
 
-bool SlopesEqual(const IntPoint &pt1, const IntPoint &pt2,
-  const IntPoint &pt3, const IntPoint &pt4, bool UseFullInt64Range)
+bool SlopesEqual(const IntPoint pt1, const IntPoint pt2,
+  const IntPoint pt3, const IntPoint pt4, bool UseFullInt64Range)
 {
 #ifndef use_int32
   if (UseFullInt64Range)
@@ -583,7 +581,7 @@ inline bool IsHorizontal(TEdge &e)
 }
 //------------------------------------------------------------------------------
 
-inline double GetDx(const IntPoint &pt1, const IntPoint &pt2)
+inline double GetDx(const IntPoint pt1, const IntPoint pt2)
 {
   return (pt1.Y == pt2.Y) ?
     HORIZONTAL : (double)(pt2.X - pt1.X) / (pt2.Y - pt1.Y);
@@ -859,8 +857,8 @@ OutPt* GetBottomPt(OutPt *pp)
 }
 //------------------------------------------------------------------------------
 
-bool Pt2IsBetweenPt1AndPt3(const IntPoint &pt1,
-  const IntPoint &pt2, const IntPoint &pt3)
+bool Pt2IsBetweenPt1AndPt3(const IntPoint pt1,
+  const IntPoint pt2, const IntPoint pt3)
 {
   if ((pt1 == pt3) || (pt1 == pt2) || (pt3 == pt2))
     return false;
@@ -1941,7 +1939,7 @@ void Clipper::CopyAELToSEL()
 }
 //------------------------------------------------------------------------------
 
-void Clipper::AddJoin(OutPt *op1, OutPt *op2, const IntPoint &OffPt)
+void Clipper::AddJoin(OutPt *op1, OutPt *op2, const IntPoint OffPt)
 {
   Join* j = new Join;
   j->OutPt1 = op1;
@@ -1967,7 +1965,7 @@ void Clipper::ClearGhostJoins()
 }
 //------------------------------------------------------------------------------
 
-void Clipper::AddGhostJoin(OutPt *op, const IntPoint &OffPt)
+void Clipper::AddGhostJoin(OutPt *op, const IntPoint OffPt)
 {
   Join* j = new Join;
   j->OutPt1 = op;
@@ -3371,7 +3369,7 @@ OutPt* DupOutPt(OutPt* outPt, bool InsertAfter)
 //------------------------------------------------------------------------------
 
 bool JoinHorz(OutPt* op1, OutPt* op1b, OutPt* op2, OutPt* op2b,
-  const IntPoint &Pt, bool DiscardLeft)
+  const IntPoint Pt, bool DiscardLeft)
 {
   Direction Dir1 = (op1->Pt.X > op1b->Pt.X ? dRightToLeft : dLeftToRight);
   Direction Dir2 = (op2->Pt.X > op2b->Pt.X ? dRightToLeft : dLeftToRight);
@@ -4522,7 +4520,7 @@ void MinkowskiSum(const Path& pattern, const Path& path, Paths& solution, bool p
 }
 //------------------------------------------------------------------------------
 
-void TranslatePath(const Path& input, Path& output, const IntPoint &delta)
+void TranslatePath(const Path& input, Path& output, const IntPoint delta)
 {
   //precondition: input != output
   output.resize(input.size());
@@ -4626,34 +4624,6 @@ std::ostream& operator <<(std::ostream &s, const Paths &p)
   s << "\n";
   return s;
 }
-
-IntPoint::IntPoint(const Marble::GeoDataCoordinates *coordinates) :
-    X(qRound64(coordinates->longitude() * scale)),
-    Y(qRound64(coordinates->latitude() * scale)),
-    m_coordinates(coordinates)
-{
-    // nothing to do
-}
-
-Marble::GeoDataCoordinates IntPoint::coordinates() const
-{
-    using namespace Marble;
-    GeoDataCoordinates const coords = GeoDataCoordinates(double(X) / scale, double(Y) / scale);
-    if (m_coordinates) {
-        bool const clipperKeptTheNode = qRound64(m_coordinates->longitude() * scale) == X &&
-                qRound64(m_coordinates->latitude() * scale) == Y;
-        if (clipperKeptTheNode) {
-            return *m_coordinates;
-        }
-    }
-    return coords;
-}
-
-bool IntPoint::isInside(const cInt &minX, const cInt &maxX, const cInt &minY, const cInt &maxY) const
-{
-    return X > minX && X < maxX && Y > minY && Y < maxY;
-}
-
 //------------------------------------------------------------------------------
 
 } //ClipperLib namespace

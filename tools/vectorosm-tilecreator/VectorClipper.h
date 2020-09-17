@@ -50,6 +50,36 @@ private:
     qreal area(const GeoDataLinearRing &ring);
     void getBounds(const ClipperLib::Path &path, ClipperLib::cInt &minX, ClipperLib::cInt &maxX, ClipperLib::cInt &minY, ClipperLib::cInt &maxY) const;
 
+    // convert radian-based coordinates to 10^-7 degree (100 nanodegree) integer coordinates used by the clipper library
+    constexpr static qint64 const s_pointScale = 10000000 / M_PI * 180;
+    static inline ClipperLib::IntPoint coordinateToPoint(const GeoDataCoordinates &c)
+    {
+        return ClipperLib::IntPoint(qRound64(c.longitude() * s_pointScale), qRound64(c.latitude() * s_pointScale));
+    }
+    static inline GeoDataCoordinates pointToCoordinate(ClipperLib::IntPoint p)
+    {
+        return GeoDataCoordinates((double)p.X / s_pointScale, (double)p.Y / s_pointScale);
+    }
+
+    template<class T>
+    static void pathToRing(const ClipperLib::Path &path, T *ring, const OsmPlacemarkData &originalOsmData, OsmPlacemarkData &newOsmData, const QHash<std::pair<ClipperLib::cInt, ClipperLib::cInt>, const GeoDataCoordinates*> &coordMap)
+    {
+        int index = 0;
+        for(const auto &point: path) {
+            const auto it = coordMap.find(std::make_pair(point.X, point.Y));
+            if (it != coordMap.end()) {
+                *ring << *it.value();
+                auto const data = originalOsmData.nodeReference(*it.value());
+                if (data.id() > 0) {
+                    newOsmData.addNodeReference(*it.value(), data);
+                }
+            } else {
+                *ring << pointToCoordinate(point);
+            }
+            ++index;
+        }
+    }
+
     template<class T>
     void clipString(const GeoDataPlacemark *placemark, const ClipperLib::Path &tileBoundary, qreal minArea,
                     GeoDataDocument* document, QSet<qint64> &osmIds)
@@ -71,8 +101,11 @@ private:
         auto const & osmData = placemark->osmData();
         using namespace ClipperLib;
         Path subject;
+        QHash<std::pair<cInt, cInt>, const GeoDataCoordinates*> coordMap;
         for(auto const & node: *ring) {
-            subject << IntPoint(&node);
+            auto p = coordinateToPoint(node);
+            coordMap.insert(std::make_pair(p.X, p.Y), &node);
+            subject.push_back(std::move(p));
         }
         cInt minX, maxX, minY, maxY;
         getBounds(tileBoundary, minX, maxX, minY, maxY);
@@ -94,16 +127,7 @@ private:
             newPlacemark->setVisible(placemark->isVisible());
             newPlacemark->setVisualCategory(placemark->visualCategory());
             T* newRing = new T;
-            int index = 0;
-            for(const auto &point: path) {
-                GeoDataCoordinates const coordinates = point.coordinates();
-                *newRing << coordinates;
-                auto const originalOsmData = osmData.nodeReference(coordinates);
-                if (originalOsmData.id() > 0) {
-                    newPlacemark->osmData().addNodeReference(coordinates, originalOsmData);
-                }
-                ++index;
-            }
+            pathToRing(path, newRing, osmData, newPlacemark->osmData(), coordMap);
 
             if (isBuilding) {
                 const auto building = geodata_cast<GeoDataBuilding>(placemark->geometry());

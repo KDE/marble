@@ -59,8 +59,6 @@
 #include <functional>
 #include <queue>
 
-#include <GeoDataCoordinates.h>
-
 namespace ClipperLib {
 
 enum ClipType { ctIntersection, ctUnion, ctDifference, ctXor };
@@ -87,14 +85,11 @@ enum PolyFillType { pftEvenOdd, pftNonZero, pftPositive, pftNegative };
 struct IntPoint {
   cInt X;
   cInt Y;
-  // convert radian-based coordinates to 10^-7 degree (100 nanodegree) integer coordinates used by the clipper library
-  constexpr static qint64 const scale = 10000000 / M_PI * 180;
 #ifdef use_xyz
   cInt Z;
   IntPoint(cInt x = 0, cInt y = 0, cInt z = 0): X(x), Y(y), Z(z) {};
 #else
-  IntPoint(cInt x = 0, cInt y = 0): X(x), Y(y) {}
-  IntPoint(const Marble::GeoDataCoordinates* coordinates);
+  IntPoint(cInt x = 0, cInt y = 0): X(x), Y(y) {};
 #endif
 
   friend inline bool operator== (const IntPoint& a, const IntPoint& b)
@@ -105,12 +100,6 @@ struct IntPoint {
   {
     return a.X != b.X  || a.Y != b.Y; 
   }
-
-  Marble::GeoDataCoordinates coordinates() const;
-  bool isInside(const cInt &minX, const cInt &maxX, const cInt &minY, const cInt &maxY) const;
-
-private:
-  const Marble::GeoDataCoordinates * m_coordinates = nullptr;
 };
 //------------------------------------------------------------------------------
 
@@ -129,7 +118,7 @@ struct DoublePoint
   double X;
   double Y;
   DoublePoint(double x = 0, double y = 0) : X(x), Y(y) {}
-  DoublePoint(const IntPoint &ip) : X((double)ip.X), Y((double)ip.Y) {}
+  DoublePoint(IntPoint ip) : X((double)ip.X), Y((double)ip.Y) {}
 };
 //------------------------------------------------------------------------------
 
@@ -350,10 +339,10 @@ private:
   bool IsHole(TEdge *e);
   bool FindOwnerFromSplitRecs(OutRec &outRec, OutRec *&currOrfl);
   void FixHoleLinkage(OutRec &outrec);
-  void AddJoin(OutPt *op1, OutPt *op2, const IntPoint &offPt);
+  void AddJoin(OutPt *op1, OutPt *op2, const IntPoint offPt);
   void ClearJoins();
   void ClearGhostJoins();
-  void AddGhostJoin(OutPt *op, const IntPoint &offPt);
+  void AddGhostJoin(OutPt *op, const IntPoint offPt);
   bool JoinPoints(Join *j, OutRec* outRec1, OutRec* outRec2);
   void JoinCommonEdges();
   void DoSimplePolygons();
