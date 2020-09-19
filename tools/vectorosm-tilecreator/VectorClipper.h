@@ -94,11 +94,11 @@ private:
             copyPlacemark.reset(new GeoDataPlacemark(*placemark));
             ring = geodata_cast<T>(copyPlacemark->geometry());
         }
-        bool const isClosed = ring->isClosed() && canBeArea(placemark->visualCategory());
+        auto const & osmData = placemark->osmData();
+        bool const isClosed = ring->isClosed() && (canBeArea(placemark->visualCategory()) || osmData.tagValue(QStringLiteral("area")) == QLatin1String("yes"));
         if (isClosed && minArea > 0.0 && area(*static_cast<const GeoDataLinearRing*>(ring)) < minArea) {
             return;
         }
-        auto const & osmData = placemark->osmData();
         using namespace ClipperLib;
         Path subject;
         QHash<std::pair<cInt, cInt>, const GeoDataCoordinates*> coordMap;
