@@ -38,7 +38,7 @@ GeoDataPlacemark *OsmNode::create() const
 {
     GeoDataPlacemark::GeoDataVisualCategory const category = StyleBuilder::determineVisualCategory(m_osmData);
 
-    if (category == GeoDataPlacemark::None) {
+    if (category == GeoDataPlacemark::None && m_osmData.isEmpty()) {
         return nullptr;
     }
 

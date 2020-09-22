@@ -2091,7 +2091,7 @@ GeoDataStyle::ConstPtr StyleBuilder::Private::presetStyle(GeoDataPlacemark::GeoD
         const_cast<StyleBuilder::Private *>(this)->initializeDefaultStyles(); // const cast due to lazy initialization
     }
 
-    if (visualCategory != GeoDataPlacemark::None && m_defaultStyle[visualCategory]) {
+    if (m_defaultStyle[visualCategory]) {
         return m_defaultStyle[visualCategory];
     } else {
         return m_defaultStyle[GeoDataPlacemark::Default];
