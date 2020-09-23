@@ -90,8 +90,9 @@ void OsmRelation::createMultipolygon(GeoDataDocument *document, OsmWays &ways, c
 
     for (auto wayId: outerWays) {
         Q_ASSERT(ways.contains(wayId));
-        GeoDataPlacemark::GeoDataVisualCategory const category = StyleBuilder::determineVisualCategory(ways[wayId].osmData());
-        if (category == GeoDataPlacemark::None || category == outerCategory) {
+        const auto &osmData = ways[wayId].osmData();
+        GeoDataPlacemark::GeoDataVisualCategory const category = StyleBuilder::determineVisualCategory(osmData);
+        if ((category == GeoDataPlacemark::None || category == outerCategory) && osmData.isEmpty()) {
             // Schedule way for removal: It's a non-styled way only used to create the outer boundary in this polygon
             usedWays << wayId;
         } // else we keep it
