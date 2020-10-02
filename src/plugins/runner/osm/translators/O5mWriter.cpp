@@ -159,7 +159,7 @@ void O5mWriter::writeRelations(const OsmConverter::Relations &relations, QDataSt
     stream << qint8(0xff); // reset delta encoding counters
     StringTable stringTable;
     qint64 lastId = 0;
-    qint64 lastReferenceId = 0;
+    qint64 lastReferenceId[3] = { 0, 0, 0 };
 
     QByteArray bufferData;
     QBuffer buffer(&bufferData);
@@ -217,32 +217,32 @@ void O5mWriter::writeTrailer(QDataStream &stream) const
     stream << qint8(0xfe); // o5m file end indicator
 }
 
-void O5mWriter::writeMultipolygonMembers(const GeoDataPolygon &polygon, qint64 &lastId, const OsmPlacemarkData &osmData, StringTable &stringTable, QDataStream &stream) const
+void O5mWriter::writeMultipolygonMembers(const GeoDataPolygon &polygon, qint64 (&lastId)[3], const OsmPlacemarkData &osmData, StringTable &stringTable, QDataStream &stream) const
 {
     qint64 id = osmData.memberReference(-1).id();
-    qint64 idDiff = id - lastId;
+    qint64 idDiff = id - lastId[(int)OsmType::Way];
     writeSigned(idDiff, stream);
-    lastId = id;
+    lastId[(int)OsmType::Way] = id;
     writeStringPair(StringPair("1outer", QString()), stringTable, stream); // type=way, role=outer
     for (int index = 0; index < polygon.innerBoundaries().size(); ++index) {
         id = osmData.memberReference( index ).id();
-        qint64 idDiff = id - lastId;
+        qint64 idDiff = id - lastId[(int)OsmType::Way];
         writeSigned(idDiff, stream);
         writeStringPair(StringPair("1inner", QString()), stringTable, stream); // type=way, role=inner
-        lastId = id;
+        lastId[(int)OsmType::Way] = id;
     }
 }
 
-void O5mWriter::writeRelationMembers(const GeoDataRelation *relation, qint64 &lastId, const OsmPlacemarkData &osmData, O5mWriter::StringTable &stringTable, QDataStream &stream) const
+void O5mWriter::writeRelationMembers(const GeoDataRelation *relation, qint64 (&lastId)[3], const OsmPlacemarkData &osmData, O5mWriter::StringTable &stringTable, QDataStream &stream) const
 {
     Q_UNUSED(relation);
     for (auto iter = osmData.relationReferencesBegin(), end = osmData.relationReferencesEnd(); iter != end; ++iter) {
-        qint64 id = iter.key();
-        qint64 idDiff = id - lastId;
+        qint64 id = iter.key().id;
+        qint64 idDiff = id - lastId[(int)iter.key().type];
         writeSigned(idDiff, stream);
-        auto const key = QString("1%1").arg(iter.value());
-        writeStringPair(StringPair(key, QString()), stringTable, stream); // type=way, role=...
-        lastId = id;
+        const QString key = QLatin1Char('0' + (int)iter.key().type) + iter.value();
+        writeStringPair(StringPair(key, QString()), stringTable, stream);
+        lastId[(int)iter.key().type] = id;
     }
 }
 

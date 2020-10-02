@@ -26,6 +26,27 @@ class QXmlStreamAttributes;
 namespace Marble
 {
 
+/** Type of OSM element. */
+enum class OsmType {
+    Node,
+    Way,
+    Relation
+};
+
+/** Identifier for an OSM element.
+ *  @note OSM uses distinct id spaces for all its three basic element types, so just the numeric id
+ *  on its own doesn't identify an element without knowing its type.
+ */
+struct OsmIdentifier {
+    inline OsmIdentifier() = default;
+    inline OsmIdentifier(qint64 _id, OsmType _type) : id(_id), type(_type) {}
+
+    qint64 id = 0;
+    OsmType type = OsmType::Way;
+
+    inline bool operator==(OsmIdentifier other) const { return id == other.id && type == other.type; }
+};
+
 /**
  * This class is used to encapsulate the osm data fields kept within a placemark's extendedData.
  * It stores OSM server generated data: id, version, changeset, uid, visible, user, timestamp;
@@ -174,12 +195,12 @@ public:
      * @brief addRelation calling this makes the osm placemark a member of the relation
      * with @p id as id, while having the role @p role
      */
-    void addRelation( qint64 id, const QString &role );
+    void addRelation( qint64 id, OsmType type, const QString &role );
     void removeRelation( qint64 id );
     bool containsRelation( qint64 id ) const;
 
-    QHash< qint64, QString >::const_iterator relationReferencesBegin() const;
-    QHash< qint64, QString >::const_iterator relationReferencesEnd() const;
+    QHash< OsmIdentifier, QString >::const_iterator relationReferencesBegin() const;
+    QHash< OsmIdentifier, QString >::const_iterator relationReferencesEnd() const;
 
     /**
      * @brief isNull returns false if the osmData is loaded from a source
@@ -223,7 +244,7 @@ private:
      * Eg. an entry ( "123", "stop" ) means that the parent placemark is a member of
      * the relation with id "123", while having the "stop" role
      */
-    QHash<qint64, QString> m_relationReferences;
+    QHash<OsmIdentifier, QString> m_relationReferences;
 
 };
 

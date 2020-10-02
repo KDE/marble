@@ -86,11 +86,11 @@ GeoDataFeature *GeoDataRelation::clone() const
     return new GeoDataRelation(*this);
 }
 
-void GeoDataRelation::addMember(const GeoDataFeature *feature, qint64 id, const QString &role)
+void GeoDataRelation::addMember(const GeoDataFeature *feature, qint64 id, OsmType type, const QString &role)
 {
     Q_D(GeoDataRelation);
     d->m_features << feature;
-    d->m_osmData.addRelation(id, role);
+    d->m_osmData.addRelation(id, type, role);
     d->m_memberIds << id;
 }
 

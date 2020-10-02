@@ -19,6 +19,11 @@
 namespace Marble
 {
 
+inline uint qHash(Marble::OsmIdentifier ident, uint seed)
+{
+    return ::qHash(ident.id, seed) ^ ::qHash((int)ident.type, seed);
+}
+
 OsmPlacemarkData::OsmPlacemarkData():
     m_id( 0 )
 {
@@ -260,27 +265,35 @@ QHash< int, OsmPlacemarkData >::const_iterator OsmPlacemarkData::memberReference
     return m_memberReferences.constEnd();
 }
 
-void OsmPlacemarkData::addRelation( qint64 id, const QString &role )
+void OsmPlacemarkData::addRelation( qint64 id, OsmType type, const QString &role )
 {
-    m_relationReferences.insert( id, role );
+    m_relationReferences.insert( { id, type }, role );
 }
 
 void OsmPlacemarkData::removeRelation( qint64 id )
 {
-    m_relationReferences.remove( id );
+    /// ### this is wrong and just done this way for backward behavior compatible
+    /// ### this method should probably take type as an additional argument
+    m_relationReferences.remove( { id, OsmType::Node } );
+    m_relationReferences.remove( { id, OsmType::Way } );
+    m_relationReferences.remove( { id, OsmType::Relation } );
 }
 
 bool OsmPlacemarkData::containsRelation( qint64 id ) const
 {
-    return m_relationReferences.contains( id );
+    /// ### this is wrong and just done this way for backward behavior compatible
+    /// ### this method should probably take type as an additional argument
+    return m_relationReferences.contains( { id, OsmType::Node } )
+        || m_relationReferences.contains( { id, OsmType::Way } )
+        || m_relationReferences.contains( { id, OsmType::Relation } );
 }
 
-QHash< qint64, QString >::const_iterator OsmPlacemarkData::relationReferencesBegin() const
+QHash< OsmIdentifier, QString >::const_iterator OsmPlacemarkData::relationReferencesBegin() const
 {
     return m_relationReferences.begin();
 }
 
-QHash< qint64, QString >::const_iterator OsmPlacemarkData::relationReferencesEnd() const
+QHash< OsmIdentifier, QString >::const_iterator OsmPlacemarkData::relationReferencesEnd() const
 {
     return m_relationReferences.constEnd();
 }

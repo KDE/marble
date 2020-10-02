@@ -38,8 +38,8 @@ private:
   void writeRelations(const OsmConverter::Relations &relations, QDataStream& stream) const;
   void writeTrailer(QDataStream& stream) const;
 
-  void writeMultipolygonMembers(const GeoDataPolygon &polygon, qint64 &lastId, const OsmPlacemarkData &osmData, StringTable &stringTable, QDataStream &stream) const;
-  void writeRelationMembers(const GeoDataRelation *relation, qint64 &lastId, const OsmPlacemarkData &osmData, StringTable &stringTable, QDataStream &stream) const;
+  void writeMultipolygonMembers(const GeoDataPolygon &polygon, qint64 (&lastId)[3], const OsmPlacemarkData &osmData, StringTable &stringTable, QDataStream &stream) const;
+  void writeRelationMembers(const GeoDataRelation *relation, qint64 (&lastId)[3], const OsmPlacemarkData &osmData, StringTable &stringTable, QDataStream &stream) const;
   void writeReferences(const GeoDataLineString &lineString, qint64 &lastId, const OsmPlacemarkData &osmData, QDataStream &stream) const;
   void writeVersion(const OsmPlacemarkData &osmData, QDataStream &stream) const;
   void writeTags(const OsmPlacemarkData &osmData, StringTable &stringTable, QDataStream &stream) const;

@@ -136,7 +136,7 @@ void OsmRelationManagerWidget::handleItemChange( QTreeWidgetItem *item, int colu
     QString role = item->text( Column::Role );
     qint64 id = item->data( Column::Name, Qt::UserRole ).toLongLong();
 
-    d->m_placemark->osmData().addRelation( id, role );
+    d->m_placemark->osmData().addRelation( id, OsmType::Way, role );
     update();
 }
 

@@ -46,17 +46,17 @@ void OsmRelationManagerWidgetPrivate::populateRelationsList()
 
     if ( m_placemark->hasOsmData() ) {
         const OsmPlacemarkData &osmData = m_placemark->osmData();
-        QHash< qint64, QString >::const_iterator it = osmData.relationReferencesBegin();
-        QHash< qint64, QString >::const_iterator end = osmData.relationReferencesEnd();
+        auto it = osmData.relationReferencesBegin();
+        const auto end = osmData.relationReferencesEnd();
 
         for ( ; it != end; ++it ) {
 
-            if ( !m_allRelations->contains( it.key() ) ) {
-                mDebug()<< QString( "Relation %1 is not loaded in the Annotate Plugin" ).arg( it.key() );
+            if ( !m_allRelations->contains( it.key().id ) ) {
+                mDebug()<< QString( "Relation %1 is not loaded in the Annotate Plugin" ).arg( it.key().id );
                 continue;
             }
 
-            const OsmPlacemarkData &relationData = m_allRelations->value( it.key() );
+            const OsmPlacemarkData &relationData = m_allRelations->value( it.key().id );
 
             QTreeWidgetItem *newItem = new QTreeWidgetItem();
             QString name = relationData.tagValue(QStringLiteral("name"));

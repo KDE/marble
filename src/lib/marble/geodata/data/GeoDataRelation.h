@@ -12,6 +12,7 @@
 
 #include "GeoDataCoordinates.h"
 #include "GeoDataPlacemark.h"
+#include "osm/OsmPlacemarkData.h"
 
 #include "geodata_export.h"
 
@@ -55,7 +56,7 @@ public:
     const char* nodeType() const override;
     GeoDataFeature * clone() const override;
 
-    void addMember(const GeoDataFeature* feature, qint64 id, const QString &role);
+    void addMember(const GeoDataFeature* feature, qint64 id, OsmType type, const QString &role);
     QSet<const GeoDataFeature*> members() const;
 
     OsmPlacemarkData &osmData();

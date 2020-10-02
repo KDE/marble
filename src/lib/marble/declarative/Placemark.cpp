@@ -726,7 +726,7 @@ void Placemark::updateRelations(const Marble::GeoDataPlacemark &placemark)
                         for (auto iter = relation->osmData().relationReferencesBegin(), end = relation->osmData().relationReferencesEnd();
                              iter != end; ++iter) {
                             if (iter.value() == QStringLiteral("stop") || iter.value() == QStringLiteral("platform")) {
-                                placemarkIds << iter.key();
+                                placemarkIds << iter.key().id;
                             }
                         }
                     }

@@ -162,6 +162,17 @@ void OsmRelation::createMultipolygon(GeoDataDocument *document, OsmWays &ways, c
     }
 }
 
+static OsmType stringToType(const QString &str)
+{
+    if (str == "relation") {
+        return OsmType::Relation;
+    }
+    if (str == "node") {
+        return OsmType::Node;
+    }
+    return OsmType::Way;
+}
+
 void OsmRelation::createRelation(GeoDataDocument *document, const QHash<qint64, GeoDataPlacemark*>& placemarks) const
 {
     if (m_osmData.containsTag(QStringLiteral("type"), QStringLiteral("multipolygon"))) {
@@ -180,7 +191,7 @@ void OsmRelation::createRelation(GeoDataDocument *document, const QHash<qint64, 
     for (auto const &member: m_members) {
         auto const iter = placemarks.find(member.reference);
         if (iter != placemarks.constEnd()) {
-            relation->addMember(*iter, member.reference, member.role);
+            relation->addMember(*iter, member.reference, stringToType(member.type), member.role);
         }
     }
 
