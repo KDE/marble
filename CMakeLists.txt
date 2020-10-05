@@ -313,10 +313,11 @@ if(ECM_FOUND)
   set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
 
   include(KDEInstallDirs)
-  # KDECMakeSettings expexts LIB_INSTALL_DIR set
+  # KDECMakeSettings expects LIB_INSTALL_DIR set
   set(LIB_INSTALL_DIR ${KDE_INSTALL_LIBDIR})
   include(KDECMakeSettings)
   include(ECMInstallIcons)
+  include(ECMEnableSanitizers)
 endif()
 
 ####################################################
