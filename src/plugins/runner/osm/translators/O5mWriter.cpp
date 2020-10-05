@@ -308,8 +308,9 @@ void O5mWriter::writeStringPair(const StringPair &pair, StringTable &stringTable
         }
         m_stringPairBuffer.push_back(char(0x00));
         stream.writeRawData(m_stringPairBuffer.constData(), m_stringPairBuffer.size());
-        bool const tooLong = pair.first.size() + pair.second.size() > 250;
+        bool const tooLong = (m_stringPairBuffer.size() - (pair.second.isEmpty() ? 2 : 3)) > 250;
         bool const tableFull = stringTable.size() > 15000;
+        Q_ASSERT(!tableFull);
         if (!tooLong && !tableFull) {
             /* When the table is full, old values could be re-used.
              * See o5m spec. This is only relevant for large files and would
@@ -318,7 +319,8 @@ void O5mWriter::writeStringPair(const StringPair &pair, StringTable &stringTable
         }
     } else {
         auto const reference = stringTable.size() - iter.value();
-        Q_ASSERT(reference >= 0);
+        Q_ASSERT(reference > 0);
+        Q_ASSERT(reference <= stringTable.size());
         writeUnsigned(reference, stream);
     }
 }
