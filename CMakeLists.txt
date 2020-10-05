@@ -318,6 +318,7 @@ if(ECM_FOUND)
   include(KDECMakeSettings)
   include(ECMInstallIcons)
   include(ECMEnableSanitizers)
+  include(ECMCoverageOption)
 endif()
 
 ####################################################
