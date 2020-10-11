@@ -487,6 +487,7 @@ install( FILES
     BookmarkManager.h
     DownloadRegion.h
     DownloadRegionDialog.h
+    FileManager.h
     LatLonBoxWidget.h
     MarbleWidget.h
     MarbleMap.h
