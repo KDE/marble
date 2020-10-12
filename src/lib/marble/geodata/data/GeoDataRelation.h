@@ -12,13 +12,13 @@
 
 #include "GeoDataCoordinates.h"
 #include "GeoDataPlacemark.h"
-#include "osm/OsmPlacemarkData.h"
 
 #include "geodata_export.h"
 
 namespace Marble
 {
 class GeoDataRelationPrivate;
+enum class OsmType;
 
 class GEODATA_EXPORT GeoDataRelation: public GeoDataFeature
 {
