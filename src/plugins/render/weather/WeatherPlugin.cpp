@@ -24,7 +24,6 @@
 
 // Qt
 #include <QDialog>
-#include <QIcon>
 #include <QPushButton>
 
 using namespace Marble;

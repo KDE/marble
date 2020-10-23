@@ -20,7 +20,6 @@
 #include "StyleBuilder.h"
 #include "osm/OsmPlacemarkData.h"
 
-#include <QString>
 #include <QVector>
 #include <QUrl>
 #include <QTimer>

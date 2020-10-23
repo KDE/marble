@@ -23,7 +23,6 @@
 #include <QString>
 #include <QVector>
 #include <QUrl>
-#include <QNetworkReply>
 #include <QBuffer>
 #include <QTimer>
 

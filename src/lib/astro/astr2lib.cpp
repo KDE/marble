@@ -22,7 +22,6 @@
 #include <cmath>
 using namespace std;
 
-#include "attlib.h"
 #include "astrolib.h"
 
 extern double frac (double f);

@@ -14,7 +14,6 @@
 #include "PluginManager.h"
 
 // Qt
-#include <QList>
 #include <QPluginLoader>
 #include <QElapsedTimer>
 #include <QMessageBox>

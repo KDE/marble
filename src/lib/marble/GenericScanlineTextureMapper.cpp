@@ -17,7 +17,6 @@
 // Qt
 #include <qmath.h>
 #include <QRunnable>
-#include <QImage>
 
 // Marble
 #include "GeoPainter.h"

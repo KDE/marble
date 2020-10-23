@@ -10,14 +10,12 @@
 
 #include "AprsObject.h"
 
-#include <QPixmap>
 
 #include "MarbleColors.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "GeoDataLineString.h"
 #include "GeoPainter.h"
-#include "GeoAprsCoordinates.h"
 
 using namespace Marble;
 

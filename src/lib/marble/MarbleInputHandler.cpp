@@ -25,7 +25,6 @@
 #include "MarbleGlobal.h"
 #include "MarbleDebug.h"
 #include "MarbleMap.h"
-#include "GeoDataCoordinates.h"
 #include "MarbleAbstractPresenter.h"
 #include "ViewportParams.h"
 #include "AbstractFloatItem.h"

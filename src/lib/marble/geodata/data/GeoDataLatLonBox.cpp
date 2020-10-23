@@ -13,7 +13,6 @@
 #include "GeoDataLatLonBox.h"
 
 #include "MarbleDebug.h"
-#include "GeoDataCoordinates.h"
 #include "GeoDataLineString.h"
 
 #include "GeoDataTypes.h"

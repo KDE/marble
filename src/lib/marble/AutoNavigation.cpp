@@ -17,7 +17,6 @@
 #include "MarbleDebug.h"
 #include "MarbleModel.h"
 #include "ViewportParams.h"
-#include "MarbleGlobal.h"
 #include "RoutingManager.h"
 #include "RoutingModel.h"
 #include "Route.h"

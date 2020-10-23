@@ -24,7 +24,6 @@
 #include "kdescendantsproxymodel.h"
 #include "osm/OsmPlacemarkData.h"
 
-#include <QSortFilterProxyModel>
 
 namespace Marble {
 

@@ -10,7 +10,6 @@
 
 #include "GpsInfo.h"
 
-#include "ui_GpsInfoPlugin.h"
 
 #include <QIcon>
 

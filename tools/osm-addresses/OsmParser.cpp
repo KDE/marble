@@ -9,7 +9,6 @@
 //
 
 #include "OsmParser.h"
-#include "OsmRegionTree.h"
 
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataLinearRing.h"

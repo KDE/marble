@@ -18,10 +18,8 @@
 #include "PhotoPluginModel.h"
 
 // Marble
-#include "AbstractDataPluginItem.h"
 #include "GeoDataCoordinates.h"
 #include "GeoPainter.h"
-#include "LabelGraphicsItem.h"
 #include "MarbleGraphicsGridLayout.h"
 #include "TinyWebBrowser.h"
 #include "ViewportParams.h"

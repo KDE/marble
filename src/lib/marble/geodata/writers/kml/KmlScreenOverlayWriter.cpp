@@ -14,7 +14,6 @@
 #include "GeoDataTypes.h"
 #include "GeoWriter.h"
 #include "GeoTagWriter.h"
-#include "KmlOverlayTagWriter.h"
 #include "KmlElementDictionary.h"
 
 namespace Marble

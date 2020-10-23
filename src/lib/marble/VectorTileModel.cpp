@@ -12,13 +12,11 @@
 #include "VectorTileModel.h"
 
 #include "GeoDataDocument.h"
-#include "GeoDataLatLonBox.h"
 #include "GeoDataTreeModel.h"
 #include "GeoSceneVectorTileDataset.h"
 #include "MarbleGlobal.h"
 #include "MarbleDebug.h"
 #include "MathHelper.h"
-#include "TileId.h"
 #include "TileLoader.h"
 
 #include <qmath.h>

@@ -19,7 +19,6 @@
 #include "ViewParams.h"
 #include "ViewportParams.h"
 
-#include <QImage>
 
 using namespace Marble;
 

@@ -26,7 +26,6 @@
 #ifndef MARBLE_NO_WEBKITWIDGETS
 #include <QWebEnginePage>
 #include <QWebChannel>
-#include "MarbleWebView.h"
 #endif
 
 #include <QTextDocument>

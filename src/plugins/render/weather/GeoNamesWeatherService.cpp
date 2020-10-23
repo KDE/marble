@@ -10,7 +10,6 @@
 
 #include "GeoNamesWeatherService.h"
 
-#include "WeatherData.h"
 #include "GeoNamesWeatherItem.h"
 #include "GeoDataLatLonAltBox.h"
 #include "MarbleModel.h"

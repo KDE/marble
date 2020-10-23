@@ -12,7 +12,6 @@
 
 #include <QDebug>
 #include <QSqlDatabase>
-#include <QSqlQuery>
 #include <QSqlError>
 
 namespace Marble

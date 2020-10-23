@@ -28,7 +28,6 @@
 #include "RouteRequest.h"
 #include "RoutingInputWidget.h"
 #include "RoutingLayer.h"
-#include "RoutingManager.h"
 #include "RoutingModel.h"
 #include "RoutingProfilesModel.h"
 #include "RoutingProfileSettingsDialog.h"

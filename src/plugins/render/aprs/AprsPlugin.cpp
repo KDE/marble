@@ -23,9 +23,7 @@
 #include "GeoPainter.h"
 #include "GeoDataCoordinates.h"
 #include "MarbleModel.h"
-#include "GeoDataLatLonAltBox.h"
 #include "ViewportParams.h"
-#include "AprsGatherer.h"
 #include "AprsTCPIP.h"
 #include "AprsFile.h"
 

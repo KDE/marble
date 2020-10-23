@@ -20,7 +20,6 @@
 #include "MarbleModel.h"
 #include "GeoDataTreeModel.h"
 
-#include "GeoDataDocument.h"
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataStyle.h"
 

@@ -11,11 +11,9 @@
 #include "PlacemarkEditHeader.h"
 #include "ui_PlacemarkEditHeader.h"
 
-#include <QWidget>
 #include <QFileDialog>
 #include "MarbleDebug.h"
 
-#include "MarbleGlobal.h"
 
 
 namespace Marble

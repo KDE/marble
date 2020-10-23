@@ -13,7 +13,6 @@
 #include "ParsingRunnerManager.h"
 
 #include "MarbleDebug.h"
-#include "GeoDataDocument.h"
 #include "PluginManager.h"
 #include "ParseRunnerPlugin.h"
 #include "RunnerTask.h"

@@ -26,7 +26,6 @@
 #include "GeoDataPoint.h"
 #include "GeoDataPolygon.h"
 
-#include "MarbleGlobal.h"
 #include "ViewportParams.h"
 #include "AbstractProjection.h"
 

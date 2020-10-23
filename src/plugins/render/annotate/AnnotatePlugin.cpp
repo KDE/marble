@@ -27,7 +27,6 @@
 #include "EditPlacemarkDialog.h"
 #include "EditPolygonDialog.h"
 #include "GeoDataDocument.h"
-#include "GeoDataGroundOverlay.h"
 #include "GeoDataLatLonBox.h"
 #include "GeoDataParser.h"
 #include "GeoDataPlacemark.h"

@@ -14,7 +14,6 @@
 #include <QUrl>
 #include <QUrlQuery>
 
-#include "Planet.h"
 #include "PlanetFactory.h"
 #include "MarbleDebug.h"
 

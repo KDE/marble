@@ -13,7 +13,6 @@
 #include "GeoDataLod.h"
 #include "GeoDataTypes.h"
 #include "GeoWriter.h"
-#include "GeoTagWriter.h"
 #include "KmlElementDictionary.h"
 #include "KmlObjectTagWriter.h"
 

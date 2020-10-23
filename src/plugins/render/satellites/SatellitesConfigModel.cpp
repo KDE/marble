@@ -10,7 +10,6 @@
 
 #include "SatellitesConfigModel.h"
 
-#include "SatellitesConfigNodeItem.h"
 #include "SatellitesConfigLeafItem.h"
 #include "MarbleDebug.h"
 

@@ -14,7 +14,6 @@
 #include "ui_OsmRelationManagerWidget.h"
 
 // Qt
-#include <QWidget>
 #include <QTreeWidget>
 #include <QMenu>
 #include <QPointer>

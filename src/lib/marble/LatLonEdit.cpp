@@ -12,10 +12,8 @@
 #include "LatLonEdit.h"
 #include "ui_LatLonEdit.h"
 
-#include <QWidget>
 #include "MarbleDebug.h"
 
-#include "MarbleGlobal.h"
 
 
 namespace Marble

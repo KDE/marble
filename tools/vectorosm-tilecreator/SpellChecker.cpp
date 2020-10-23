@@ -9,7 +9,6 @@
 //
 
 #include "SpellChecker.h"
-#include "GeoDataPlacemark.h"
 #include "MarbleMath.h"
 #include "OsmPlacemarkData.h"
 #include "MarbleDirs.h"

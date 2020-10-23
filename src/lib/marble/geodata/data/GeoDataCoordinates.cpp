@@ -22,7 +22,6 @@
 #include <QDataStream>
 #include <QPointF>
 
-#include "MarbleGlobal.h"
 #include "MarbleDebug.h"
 #include "MarbleMath.h"
 

@@ -16,7 +16,6 @@
 #include "GeoDataMultiGeometry.h"
 #include "GeoDataCoordinates.h"
 #include "MarbleMath.h"
-#include "OsmPlacemarkData.h"
 
 #include <QDebug>
 #include <QVector>

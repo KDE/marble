@@ -10,12 +10,10 @@
 
 #include "TagsFilter.h"
 
-#include <QString>
 #include <QStringList>
 
 #include "GeoDataObject.h"
 #include "GeoDataDocument.h"
-#include "OsmPlacemarkData.h"
 #include "GeoDataPlacemark.h"
 
 namespace Marble {

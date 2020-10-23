@@ -45,7 +45,6 @@
 #include <marble/GeoDataGeometry.h>
 #include <marble/GeoDataMultiGeometry.h>
 #include <marble/GeoDataPoint.h>
-#include <marble/GeoDataCoordinates.h>
 #include <marble/GeoDataPolygon.h>
 #include <marble/GeoDataLinearRing.h>
 #include <marble/GeoDataLatLonAltBox.h>

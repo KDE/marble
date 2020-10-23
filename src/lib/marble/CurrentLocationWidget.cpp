@@ -15,7 +15,6 @@
 #include "CurrentLocationWidget.h"
 
 // Marble
-#include "AutoNavigation.h"
 #include "MarbleDebug.h"
 #include "MarbleLocale.h"
 #include "MarbleModel.h"

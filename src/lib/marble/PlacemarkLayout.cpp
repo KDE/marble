@@ -23,7 +23,6 @@
 
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataLatLonBox.h"
-#include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
 #include "GeoDataIconStyle.h"
 #include "GeoDataLabelStyle.h"

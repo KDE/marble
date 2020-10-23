@@ -13,7 +13,6 @@
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataTypes.h"
 #include "GeoWriter.h"
-#include "GeoTagWriter.h"
 #include "KmlGroundOverlayWriter.h"
 #include "KmlElementDictionary.h"
 #include "KmlObjectTagWriter.h"

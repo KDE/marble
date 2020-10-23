@@ -14,12 +14,9 @@
 //Qt
 #include <QMessageBox>
 #include <QDialogButtonBox>
-#include <QPushButton>
-#include <QTemporaryFile>
 #include  <QDir>
 
 //Marble
-#include "ui_DownloadOsmDialog.h"
 #include "MarbleWidget.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
@@ -27,7 +24,6 @@
 #include "GeoDataLatLonBox.h"
 #include "MarbleGlobal.h"
 #include "AnnotatePlugin.h"
-#include "LatLonBoxWidget.h"
 
 namespace Marble
 {

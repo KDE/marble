@@ -13,7 +13,6 @@
 
 // Marble
 #include "PolylineAnnotation.h"
-#include "GeoDataCoordinates.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataLineString.h"
 

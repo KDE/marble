@@ -11,8 +11,6 @@
 
 #include "KmlListStyleTagWriter.h"
 
-#include "GeoDataListStyle.h"
-#include "GeoDataItemIcon.h"
 #include "GeoDataTypes.h"
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"

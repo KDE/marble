@@ -21,7 +21,6 @@
 
 // Qt
 #include <QElapsedTimer>
-#include <QRegion>
 #include <QtMath>
 
 // Marble

@@ -16,7 +16,6 @@
 
 // Marble
 #include "MarbleDebug.h"
-#include "GeoDataFeature.h"
 #include "GeoDataFolder.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataDocument.h"

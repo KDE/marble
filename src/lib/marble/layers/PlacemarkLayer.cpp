@@ -13,7 +13,6 @@
 #include "PlacemarkLayer.h"
 
 #include <QPoint>
-#include <QPainter>
 
 #include "MarbleDebug.h"
 #include "AbstractProjection.h"

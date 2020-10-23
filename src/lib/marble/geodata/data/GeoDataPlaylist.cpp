@@ -10,7 +10,6 @@
 
 #include "GeoDataPlaylist.h"
 
-#include "GeoDataTourPrimitive.h"
 #include "GeoDataTypes.h"
 
 namespace Marble

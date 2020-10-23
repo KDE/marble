@@ -27,7 +27,6 @@
 #include <ctime>
 using namespace std;
 
-#include "attlib.h"
 #include "astrolib.h"
 
 // ################ Planetary Sats Class ####################

@@ -23,7 +23,6 @@
 #include <cmath>
 using namespace std;
 
-#include "attlib.h"
 #include "astrolib.h"
 
 double frac (double f)

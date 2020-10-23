@@ -19,7 +19,6 @@
 #include <QPrinter>
 #include <QPainter>
 #include <QTextDocument>
-#include <QPointer>
 #include <QUrl>
 #include <QDesktopServices>
 #include <QNetworkAccessManager>
@@ -45,7 +44,6 @@
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
 #include "GeoUriParser.h"
-#include "MarbleWidget.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "MarbleModel.h"

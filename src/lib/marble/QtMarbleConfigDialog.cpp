@@ -30,11 +30,9 @@
 #include <QTimer>
 
 // Marble
-#include "MarbleGlobal.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "MarblePluginSettingsWidget.h"
-#include "MarbleLocale.h"
 #include "MarbleWidget.h"
 #include "MarbleModel.h"
 #include "RenderPlugin.h"

@@ -10,7 +10,6 @@
 
 #include "MergeItem.h"
 
-#include "GeoDataPlacemark.h"
 
 namespace Marble {
 

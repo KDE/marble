@@ -10,7 +10,6 @@
 
 #include "region.h"
 
-#include <QFileInfo>
 
 Region::Region()
 {

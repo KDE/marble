@@ -17,7 +17,6 @@
 #include "HttpDownloadManager.h"
 
 #include <QNetworkAccessManager>
-#include <QNetworkReply>
 
 using namespace Marble;
 

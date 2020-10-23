@@ -10,12 +10,10 @@
 
 #include "WayChunk.h"
 
-#include <QList>
 #include <QVector>
 #include <QDebug>
 
 #include "GeoDataCoordinates.h"
-#include "GeoDataPlacemark.h"
 #include "GeoDataLineString.h"
 #include "OsmPlacemarkData.h"
 

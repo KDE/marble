@@ -15,7 +15,6 @@
 #include "GeoDataTypes.h"
 #include "GeoDataLod.h"
 #include "GeoWriter.h"
-#include "GeoTagWriter.h"
 #include "KmlElementDictionary.h"
 #include "KmlLatLonAltBoxWriter.h"
 #include "KmlLodTagWriter.h"

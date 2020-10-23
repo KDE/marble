@@ -33,7 +33,6 @@
 #include <QDate>
 #include <QSet>
 #include <QScreen>
-#include <QHash>
 #include <QDebug>
 
 namespace Marble

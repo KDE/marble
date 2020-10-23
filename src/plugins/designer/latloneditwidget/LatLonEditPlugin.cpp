@@ -16,7 +16,6 @@
 #include <QtPlugin>
 #include <QWidget>
 #include <QIcon>
-#include <QDesignerCustomWidgetInterface>
 
 LatLonEditPlugin::LatLonEditPlugin(QObject *parent) :
   QObject(parent),

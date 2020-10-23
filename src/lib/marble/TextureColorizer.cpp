@@ -16,14 +16,10 @@
 #include <qmath.h>
 #include <QFile>
 #include <QSharedPointer>
-#include <QString>
 #include <QVector>
 #include <QElapsedTimer>
-#include <QColor>
-#include <QImage>
 #include <QPainter>
 
-#include "MarbleGlobal.h"
 #include "GeoPainter.h"
 #include "MarbleDebug.h"
 #include "ViewParams.h"
@@ -33,7 +29,6 @@
 #include "GeoDataPolygon.h"
 #include "GeoDataFeature.h"
 #include "GeoDataPlacemark.h"
-#include "GeoDataDocument.h"
 #include "AbstractProjection.h"
 
 namespace Marble

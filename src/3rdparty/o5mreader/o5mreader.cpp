@@ -18,8 +18,6 @@
 
 
 #include "o5mreader.h"
-#include <cstdint>
-#include <cstdio>
 #include <cstring>
 #include <cerrno>
 #include <cstdlib>

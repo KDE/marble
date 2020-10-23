@@ -11,7 +11,6 @@
 #include "WaypointParser.h"
 
 #include <QDebug>
-#include <QStringList>
 
 namespace Marble
 {

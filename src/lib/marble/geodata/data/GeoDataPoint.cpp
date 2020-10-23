@@ -13,9 +13,7 @@
 
 #include "GeoDataPoint.h"
 #include "GeoDataPoint_p.h"
-#include "GeoDataCoordinates.h"
 
-#include <cmath>
 
 #include "MarbleDebug.h"
 #include "MarbleGlobal.h"

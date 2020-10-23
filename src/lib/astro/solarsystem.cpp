@@ -40,7 +40,6 @@ using namespace std;
 
 #include "astrolib.h"
 #include "astr2lib.h"
-#include "attlib.h"
 
 const double degrad = M_PI / 180.0;
 

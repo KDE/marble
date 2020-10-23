@@ -12,7 +12,6 @@
 #include "MarbleDebug.h"
 #include "GeoDataPlacemark.h"
 
-#include <QString>
 #include <QTimer>
 #include <QVector>
 #include <QUrl>

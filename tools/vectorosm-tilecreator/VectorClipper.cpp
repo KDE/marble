@@ -15,13 +15,10 @@
 
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataPolygon.h"
-#include "GeoDataPlacemark.h"
 #include "GeoDataRelation.h"
-#include "OsmPlacemarkData.h"
 #include "OsmObjectManager.h"
 #include "TileCoordsPyramid.h"
 
-#include "clipper/clipper.hpp"
 
 #include <QDebug>
 #include <QPolygonF>

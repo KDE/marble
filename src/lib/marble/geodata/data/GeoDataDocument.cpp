@@ -23,7 +23,6 @@
 #include "GeoDataDocument.h"
 #include "GeoDataDocument_p.h"
 
-#include "GeoDataStyle.h"
 #include "GeoDataStyleMap.h"
 #include "GeoDataNetworkLinkControl.h"
 #include "GeoDataSchema.h"

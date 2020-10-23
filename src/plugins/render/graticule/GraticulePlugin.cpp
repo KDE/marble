@@ -20,14 +20,12 @@
 #include "PluginAboutDialog.h"
 
 #include "ViewportParams.h"
-#include "GeoDataLatLonAltBox.h"
 
 // Qt
 #include <QPushButton>
 #include <QRect>
 #include <QColor>
 #include <QBrush>
-#include <QColorDialog>
 #include <QDebug>
 
 

@@ -14,7 +14,6 @@
 #include <QStandardItemModel>
 
 #include "MarbleGlobal.h"
-#include "RoutingRunnerPlugin.h"
 #include "MarbleDebug.h"
 #include "RoutingProfilesModel.h"
 #include "PluginManager.h"

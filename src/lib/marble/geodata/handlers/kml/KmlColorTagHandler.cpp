@@ -21,7 +21,6 @@
 
 #include "KmlColorTagHandler.h"
 
-#include <QColor>
 
 #include "MarbleDebug.h"
 #include "KmlElementDictionary.h"

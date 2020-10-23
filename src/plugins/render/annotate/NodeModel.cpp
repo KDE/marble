@@ -11,7 +11,6 @@
 #include "NodeModel.h"
 
 #include "MarbleLocale.h"
-#include "GeoDataCoordinates.h"
 
 namespace Marble
 {

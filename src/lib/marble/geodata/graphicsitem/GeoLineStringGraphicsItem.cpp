@@ -10,7 +10,6 @@
 
 #include "GeoLineStringGraphicsItem.h"
 
-#include "GeoDataLineString.h"
 #include "GeoDataLineStyle.h"
 #include "GeoDataLabelStyle.h"
 #include "GeoDataPlacemark.h"

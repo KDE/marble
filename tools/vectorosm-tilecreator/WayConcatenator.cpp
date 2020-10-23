@@ -22,8 +22,6 @@
 #include "StyleBuilder.h"
 #include "OsmObjectManager.h"
 
-#include "WayChunk.h"
-#include "TagsFilter.h"
 
 namespace Marble {
 

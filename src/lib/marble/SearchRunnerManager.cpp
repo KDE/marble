@@ -26,9 +26,7 @@
 #include "routing/RouteRequest.h"
 #include "routing/RoutingProfilesModel.h"
 
-#include <QObject>
 #include <QString>
-#include <QVector>
 #include <QThreadPool>
 #include <QTimer>
 #include <QMutex>

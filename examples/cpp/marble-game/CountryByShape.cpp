@@ -32,7 +32,6 @@
 #include <marble/GeoDataLinearRing.h>
 #include <marble/GeoDataMultiGeometry.h>
 #include <marble/GeoDataPoint.h>
-#include <marble/GeoDataCoordinates.h>
 #include <marble/GeoDataLatLonAltBox.h>
 
 namespace Marble

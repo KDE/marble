@@ -17,7 +17,6 @@
 #include <GeoDataDocument.h>
 #include <osm/OsmObjectManager.h>
 #include <MarbleDirs.h>
-#include <StyleBuilder.h>
 #include <GeoDataMultiGeometry.h>
 
 namespace Marble {

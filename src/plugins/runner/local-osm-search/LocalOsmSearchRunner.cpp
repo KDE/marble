@@ -13,7 +13,6 @@
 #include "DatabaseQuery.h"
 
 #include "MarbleDebug.h"
-#include "GeoDataPlacemark.h"
 #include "GeoDataPoint.h"
 
 #include <QString>

@@ -25,7 +25,6 @@
 #include <QUrl>
 #include <QTime>
 #include <QTimer>
-#include <QNetworkReply>
 #include <QDomDocument>
 
 #include <QUrlQuery>

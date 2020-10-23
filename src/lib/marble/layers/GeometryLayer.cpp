@@ -51,7 +51,6 @@
 #include <OsmPlacemarkData.h>
 #include "StyleBuilder.h"
 #include "AbstractGeoPolygonGraphicsItem.h"
-#include "GeoDataRelation.h"
 
 // Qt
 #include <qmath.h>

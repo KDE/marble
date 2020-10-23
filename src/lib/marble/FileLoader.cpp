@@ -13,10 +13,8 @@
 #include <QBuffer>
 #include <QDataStream>
 #include <QFile>
-#include <QThread>
 
 #include "GeoDataParser.h"
-#include "GeoDataDocument.h"
 #include "GeoDataFolder.h"
 #include "GeoDataGroundOverlay.h"
 #include "GeoDataPlacemark.h"

@@ -20,12 +20,10 @@
 #include "routing/RouteRequest.h"
 #include "HttpDownloadManager.h"
 
-#include <QString>
 #include <QVector>
 #include <QUrl>
 #include <QTime>
 #include <QTimer>
-#include <QNetworkReply>
 #include <QJsonDocument>
 #include <QJsonArray>
 #include <QJsonObject>

@@ -12,7 +12,6 @@
 
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
-#include "routing/RouteRequest.h"
 #include "GeoDataDocument.h"
 #include "GeoDataParser.h"
 

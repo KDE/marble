@@ -18,12 +18,10 @@
 #include "GeoDataLineString.h"
 #include "routing/RouteRequest.h"
 
-#include <QString>
 #include <QUrl>
 #include <QUrlQuery>
 #include <QTime>
 #include <QTimer>
-#include <QNetworkReply>
 #include <QDomDocument>
 
 namespace Marble

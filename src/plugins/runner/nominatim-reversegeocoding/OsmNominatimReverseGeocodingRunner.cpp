@@ -18,7 +18,6 @@
 #include "HttpDownloadManager.h"
 #include "osm/OsmPlacemarkData.h"
 
-#include <QString>
 #include <QUrl>
 #include <QTimer>
 #include <QNetworkReply>

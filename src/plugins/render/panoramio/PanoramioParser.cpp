@@ -12,7 +12,6 @@
 #include "PanoramioParser.h"
 
 #include <QScriptValue>
-#include <QScriptEngine>
 
 PanoramioParser::PanoramioParser() :
     dataStorage()

@@ -11,7 +11,6 @@
 #include <OsmNode.h>
 
 #include "osm/OsmObjectManager.h"
-#include <GeoDataPlacemark.h>
 #include <GeoDataStyle.h>
 #include <GeoDataIconStyle.h>
 #include <GeoDataDocument.h>

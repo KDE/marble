@@ -12,7 +12,6 @@
 
 #include "Quaternion.h"
 
-#include <cmath>
 using namespace std;
 
 #include <QString>

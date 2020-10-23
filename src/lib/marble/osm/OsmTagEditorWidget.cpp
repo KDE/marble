@@ -14,7 +14,6 @@
 #include "ui_OsmTagEditorWidget.h"
 
 // Qt
-#include <QWidget>
 #include <QTreeWidget>
 #include <QDebug>
 

@@ -13,7 +13,6 @@
 #include "GeoDataCoordinates.h"
 
 #include "MarbleDebug.h"
-#include <QString>
 #include <QVector>
 
 #include <QtDebug>
