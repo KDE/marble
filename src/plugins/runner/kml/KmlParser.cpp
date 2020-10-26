@@ -7,6 +7,7 @@
 //
 // Copyright 2011 Thibaut Gridel <tgridel@free.fr>
 
+#include "GeoDataDocument.h"
 #include "KmlParser.h"
 #include "KmlElementDictionary.h"
 
@@ -41,7 +42,7 @@ bool KmlParser::isValidElement(const QString& tagName) const
 
 GeoDocument* KmlParser::createDocument() const
 {
-    return new KmlDocument;
+    return new GeoDataDocument;
 }
 
 }

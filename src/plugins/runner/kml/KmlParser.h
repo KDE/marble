@@ -11,7 +11,6 @@
 #define KMLPARSER_H
 
 #include "GeoParser.h"
-#include "KmlDocument.h"
 
 namespace Marble {
 
