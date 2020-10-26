@@ -6,7 +6,7 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_SOURCE_DIR}/src/lib/marble/geodata/handlers/kml
 )
 
-set( kml_SRCS KmlDocument.cpp KmlParser.cpp KmlPlugin.cpp KmlRunner.cpp KmzHandler.cpp )
+set( kml_SRCS KmlParser.cpp KmlPlugin.cpp KmlRunner.cpp)
 
 marble_add_plugin( KmlPlugin ${kml_SRCS} )
 
