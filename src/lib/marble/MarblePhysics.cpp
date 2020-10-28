@@ -42,7 +42,7 @@ public:
           m_planetRadius( EARTH_RADIUS )
     {
         m_timeline.setDuration(2000);
-        m_timeline.setCurveShape( QTimeLine::EaseInOutCurve );
+        m_timeline.setEasingCurve(QEasingCurve::InOutSine);
     }
 
     qreal suggestedRange(qreal t) const
@@ -134,13 +134,13 @@ void MarblePhysics::flyTo( const GeoDataLookAt &target, FlyToMode mode )
         return;
     case Linear:
         d->m_timeline.setDuration(300);
-        d->m_timeline.setCurveShape( QTimeLine::EaseOutCurve );
+        d->m_timeline.setEasingCurve(QEasingCurve::OutCurve);
         break;
     case Jump:
         {
             qreal duration = invisible ? 2000 : 1000;
             d->m_timeline.setDuration(duration);
-            d->m_timeline.setCurveShape( QTimeLine::EaseInOutCurve );
+            d->m_timeline.setEasingCurve(QEasingCurve::InOutSine);
         }
         break;
     case Automatic:
