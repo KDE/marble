@@ -13,6 +13,7 @@ Notes:
     <comment xml:lang="lt">GPX geografiniai duomenys</comment>
     <comment xml:lang="nl">Geografische gegevens GPX</comment>
     <comment xml:lang="pt">Dados geográficos GPX</comment>
+    <comment xml:lang="sl">Geografski podatki GPX</comment>
     <comment xml:lang="sv">GPX-geografisk data</comment>
     <comment xml:lang="uk">географічні дані GPX</comment>
     <acronym>GPX</acronym>
@@ -33,6 +34,7 @@ Notes:
     <comment xml:lang="lt">OSM duomenys</comment>
     <comment xml:lang="nl">Gegevens OSM</comment>
     <comment xml:lang="pt">Dados do OSM</comment>
+    <comment xml:lang="sl">Podatki OSM</comment>
     <comment xml:lang="sv">OSM-data</comment>
     <comment xml:lang="uk">дані OSM</comment>
     <acronym>OSM</acronym>
@@ -52,6 +54,7 @@ Notes:
     <comment xml:lang="ca@valencia">Fitxers de formes ESRI</comment>
     <comment xml:lang="nl">Vormbestand ESRI</comment>
     <comment xml:lang="pt">Ficheiro de formas da ESRI</comment>
+    <comment xml:lang="sl">ESRI Shapefile</comment>
     <comment xml:lang="sv">ESRI-formfil</comment>
     <comment xml:lang="uk">файл форм ESRI</comment>
     <generic-icon name="application-vnd-google-earth-kml"/>
@@ -66,6 +69,7 @@ Notes:
     <comment xml:lang="ca@valencia">Índex de fitxer de formes ESRI</comment>
     <comment xml:lang="nl">Index vormbestand ESRI</comment>
     <comment xml:lang="pt">Índice de formas da ESRI</comment>
+    <comment xml:lang="sl">Kazalo ESRI Shapefile</comment>
     <comment xml:lang="sv">ESRI-formfilindex</comment>
     <comment xml:lang="uk">покажчик файла форм ESRI</comment>
     <generic-icon name="application-octet-stream"/>
