@@ -24,9 +24,6 @@
 #include <RenderPlugin.h>
 #include <GeoDataTreeModel.h>
 
-// Qt
-#include <QPainter>
-
 static const int timeoutTime = 5000; // in msec
 
 namespace Marble {
