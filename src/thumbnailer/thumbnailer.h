@@ -45,10 +45,9 @@ public: // ThumbCreator API
     bool create(const QString &path, int width, int height, QImage &image) override;
     Flags flags() const override;
 
-private Q_SLOTS:
+private:
     void onGeoDataObjectAdded(GeoDataObject *object);
 
-private:
     MarbleMap m_marbleMap;
 
     QString m_currentFilename;
