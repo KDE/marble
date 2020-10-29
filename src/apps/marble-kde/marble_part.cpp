@@ -53,6 +53,7 @@
 #include "BookmarkManagerDialog.h"
 #include "CurrentLocationWidget.h"
 #include "DownloadRegionDialog.h"
+#include "FileManager.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataFolder.h"
 #include "GeoDataLatLonAltBox.h"
@@ -166,6 +167,13 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QVariantLi
 
     m_statusBarExtension = new KParts::StatusBarExtension( this );
     m_statusBarExtension->statusBar()->setUpdatesEnabled( false );
+
+    connect(m_controlView->marbleModel()->fileManager(), &FileManager::fileError, this,
+        [this](const QString& path, const QString& error) {
+	    KMessageBox::error( widget(),
+		i18n( "Sorry, unable to open '%1':\n'%2'", path, error),
+		i18n( "File not readable" ) );
+        });
 
     // Load bookmark file. If it does not exist, a default one will be used.
     m_controlView->marbleModel()->bookmarkManager()->loadFile( "bookmarks/bookmarks.kml" );

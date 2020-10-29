@@ -54,6 +54,7 @@
 #include "AbstractFloatItem.h"
 #include "MarbleModel.h"
 #include "MarbleClock.h"
+#include "FileManager.h"
 #include "HttpDownloadManager.h"
 #include "BookmarkManager.h"
 #include "NewBookmarkFolderDialog.h"
@@ -193,6 +194,13 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
              m_controlView->cloudSyncManager()->bookmarkSyncManager(), SLOT(startBookmarkSync()) );
     connect(m_configDialog, SIGNAL(syncNowClicked()),
             m_configDialog, SLOT(disableSyncNow()));
+
+    connect(m_controlView->marbleModel()->fileManager(), &FileManager::fileError, this,
+        [this](const QString& path, const QString& error) {
+            QMessageBox::warning(this, tr("Marble"), // krazy:exclude=qclasses
+                   tr("Sorry, unable to open '%1':\n'%2'").arg(path).arg(error),
+                   QMessageBox::Ok);
+        });
 
     // Load bookmark file. If it does not exist, a default one will be used.
     m_controlView->marbleModel()->bookmarkManager()->loadFile( "bookmarks/bookmarks.kml" );

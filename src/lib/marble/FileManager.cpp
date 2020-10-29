@@ -13,7 +13,6 @@
 
 #include <QFileInfo>
 #include <QElapsedTimer>
-#include <QMessageBox>
 
 #include "FileLoader.h"
 #include "MarbleDebug.h"
@@ -187,11 +186,6 @@ void FileManagerPrivate::cleanupLoader( FileLoader* loader )
             }
         }
         if ( !loader->error().isEmpty() ) {
-            QMessageBox errorBox;
-            errorBox.setWindowTitle( QObject::tr("File Parsing Error"));
-            errorBox.setText( loader->error() );
-            errorBox.setIcon( QMessageBox::Warning );
-            errorBox.exec();
             qWarning() << "Failed to parse" << loader->path() << loader->error();
             emit q->fileError(loader->path(), loader->error());
         }
