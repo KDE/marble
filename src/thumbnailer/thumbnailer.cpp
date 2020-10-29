@@ -17,6 +17,7 @@
 
 // Marble
 #include <MarbleModel.h>
+#include <FileManager.h>
 #include <GeoDataDocument.h>
 #include <GeoPainter.h>
 #include <GeoDataLatLonAltBox.h>
@@ -46,6 +47,12 @@ GeoDataThumbnailer::GeoDataThumbnailer()
 
     MarbleModel *const model = m_marbleMap.model();
     connect(model->treeModel(), &GeoDataTreeModel::added, this, &GeoDataThumbnailer::onGeoDataObjectAdded);
+    connect(model->fileManager(), &FileManager::fileError, this,
+        [this](const QString& path, const QString& error) {
+           m_hadErrors = true;
+           m_outtimer.stop();
+           m_eventLoop.quit();
+        });
 }
 
 
@@ -61,11 +68,12 @@ bool GeoDataThumbnailer::create(const QString &path, int width, int height, QIma
 
     // load the document content
     m_loadingCompleted = false;
+    m_hadErrors = false;
 
     m_currentFilename = path;
     model->addGeoDataFile(path);
 
-    if (! m_loadingCompleted) {
+    if ((!m_loadingCompleted) && (!m_hadErrors)) {
         // loading is done async, so wait here for a while
         // Using a QEventLoop here seems fine, thumbnailers are only used inside the
         // thumbnail protocol slave, it seems

@@ -52,6 +52,7 @@ private:
 
     QString m_currentFilename;
     bool m_loadingCompleted :1;
+    bool m_hadErrors :1;
     QEventLoop m_eventLoop;
     QTimer m_outtimer;
 };
