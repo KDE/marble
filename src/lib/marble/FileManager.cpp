@@ -192,7 +192,8 @@ void FileManagerPrivate::cleanupLoader( FileLoader* loader )
             errorBox.setText( loader->error() );
             errorBox.setIcon( QMessageBox::Warning );
             errorBox.exec();
-            qWarning() << "File Parsing error " << loader->error();
+            qWarning() << "Failed to parse" << loader->path() << loader->error();
+            emit q->fileError(loader->path(), loader->error());
         }
         delete loader;
     }

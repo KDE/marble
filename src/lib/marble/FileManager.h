@@ -34,7 +34,7 @@ class PluginManager;
  * The loaded data are accessible via
  * various models in MarbleModel.
  */
-class FileManager : public QObject
+class MARBLE_EXPORT FileManager : public QObject
 {
     Q_OBJECT
 
@@ -81,6 +81,7 @@ class FileManager : public QObject
     void fileAdded( const QString &key );
     void fileRemoved( const QString &key );
     void centeredDocument( const GeoDataLatLonBox& );
+    void fileError(const QString &key, const QString& error);
 
  private:
 
