@@ -42,7 +42,8 @@ See configuration files in the etc/ subdir.
 
 ### Static low-z tile generation
 
-run ne_tilegenerator.py from ../natural-earth-vector-tiling.
+run ne_tilegenerator.py from ../natural-earth-vector-tiling. For this to work, all its dependencies (including marble-vectorosm-tilecreator)
+have to be in `PATH`.
 
 ```
 mkdir -p /k/osm/htdocs/earth/vectorosm/v1/
@@ -52,18 +53,23 @@ mkdir -p /k/osm/cache/natural_earth
 
 TODO: this still generates files in its source dir, so probably this is better run inside the cache directory instead?
 
-The source data updates infrequently, so a low-frequency cron job is an option.
+The source data updates infrequently, so a low-frequency cron job is an option. This can also be done locally or otherwise
+off the live system, the resulting amount of data is small enough to be rsync'ed.
 
 ### Dynamic high-z tile generation
 
 Preparing the land polygon input data by running:
 `marble-vectorosm-process-land-polygons -c /k/osm/cache`
 
+This step can also be done offline and the result copied to the production system.
+
 Preparing the OSMX database:
 
 * Download the latest full planet data dump (in PBF format!) from a mirror listed here: https://wiki.openstreetmap.org/wiki/Planet.osm
 * Run `osmx expand planet.osm.pbf /k/osm/cache/planet.osmx` to create the OSMX database.
 * The downloaded data dump can be discarded afterwards to free some disk space.
+
+This step produces by far the most data, doing this on a different system is probably not feasible in most cases.
 
 Initial pre-generation of level 11 tiles:
 
@@ -115,7 +121,7 @@ For input data updates:
 * Initial creation of the OSMX database takes 6h, needs 8GB RAM and generates 700GB on disk in a single file.
 * Incremental updates: 100MB download and about 20s CPU time per day, and 6GB RAM peak during that.
 * Land polygons:
-    * 600MB download
-    * 600MB disk space, 16k inodes
+    * 700MB download
+    * 1GB disk space, 16k inodes
     * and an addtional 1.5GB temporary disk use during generation
     * generation takes 2-3 minutes and 4.5GB RAM
