@@ -1,7 +1,9 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 RUN apt-get update
-RUN apt-get -y install \
+RUN export DEBIAN_FRONTEND=noninteractive; \
+    export DEBCONF_NONINTERACTIVE_SEEN=true; \
+    apt-get -y install \
     cmake \
     g++ \
     git \
