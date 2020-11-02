@@ -18,6 +18,9 @@
 #include "GeoDataLatLonAltBox.h"
 #include "TileId.h"
 #include "MarbleDirs.h"
+#ifdef STATIC_BUILD
+#include "src/plugins/runner/osm/translators/O5mWriter.h"
+#endif
 
 #include <QApplication>
 #include <QCommandLineParser>
@@ -40,6 +43,12 @@
 #include "TileDirectory.h"
 #include "MbTileWriter.h"
 #include "SpellChecker.h"
+
+#ifdef STATIC_BUILD
+#include <QtPlugin>
+Q_IMPORT_PLUGIN(OsmPlugin)
+Q_IMPORT_PLUGIN(ShpPlugin)
+#endif
 
 #include <iostream>
 
@@ -172,6 +181,11 @@ int main(int argc, char *argv[])
         parser.showHelp(1);
         return 1;
     }
+
+    // work around MARBLE_ADD_WRITER not working for static builds
+#ifdef STATIC_BUILD
+    GeoDataDocumentWriter::registerWriter(new O5mWriter, QStringLiteral("o5m"));
+#endif
 
     bool const overwriteTiles = parser.value("conflict-resolution") == "overwrite";
     bool const mergeTiles = parser.value("conflict-resolution") == "merge";

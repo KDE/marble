@@ -35,6 +35,9 @@ target_link_libraries(${TARGET} marblewidget Qt5::Sql)
 
 add_executable(marble-vectorosm-tilecreator vectorosm-tilecreator.cpp)
 target_link_libraries(marble-vectorosm-tilecreator ${TARGET})
+if (STATIC_BUILD)
+    target_link_libraries(marble-vectorosm-tilecreator OsmPlugin ShpPlugin)
+endif()
 
 add_executable(marble-vectorosm-cachetiles vectorosm-cachetiles.cpp)
 target_link_libraries(marble-vectorosm-cachetiles ${TARGET})
@@ -43,6 +46,9 @@ add_executable(marble-vectorosm-process-land-polygons
     vectorosm-process-land-polygons.cpp
 )
 target_link_libraries(marble-vectorosm-process-land-polygons vectorosm-toolchain)
+if (STATIC_BUILD)
+    target_link_libraries(marble-vectorosm-process-land-polygons OsmPlugin ShpPlugin)
+endif()
 
 add_executable(marble-vectorosm-tirex-backend
     vectorosm-tirex-backend.cpp

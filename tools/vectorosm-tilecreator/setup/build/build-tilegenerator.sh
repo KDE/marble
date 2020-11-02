@@ -19,3 +19,4 @@ make -j 4
 mkdir -p /output/usr/bin
 cp tools/vectorosm-tilecreator/marble-vectorosm-tirex-backend /output/usr/bin/
 cp tools/vectorosm-tilecreator/marble-vectorosm-process-land-polygons /output/usr/bin/
+cp tools/vectorosm-tilecreator/marble-vectorosm-tilecreator /output/usr/bin/

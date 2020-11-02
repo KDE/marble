@@ -7,14 +7,24 @@
 #include "TileDirectory.h"
 
 #include "GeoDataLatLonAltBox.h"
+#include "GeoDataDocumentWriter.h"
 #include "MarbleModel.h"
 #include "ParsingRunnerManager.h"
+#ifdef STATIC_BUILD
+#include "src/plugins/runner/osm/translators/O5mWriter.h"
+#endif
 
 #include <QCoreApplication>
 #include <QCommandLineParser>
 #include <QDebug>
 #include <QDir>
 #include <QFileInfo>
+
+#ifdef STATIC_BUILD
+#include <QtPlugin>
+Q_IMPORT_PLUGIN(OsmPlugin)
+Q_IMPORT_PLUGIN(ShpPlugin)
+#endif
 
 using namespace Marble;
 
@@ -32,6 +42,11 @@ int main(int argc, char **argv)
         {{"c", "cache-directory"}, "Directory for temporary data.", "cache", "cache"},
     });
     parser.process(app);
+
+    // work around MARBLE_ADD_WRITER not working for static builds
+#ifdef STATIC_BUILD
+    GeoDataDocumentWriter::registerWriter(new O5mWriter, QStringLiteral("o5m"));
+#endif
 
     MarbleModel model;
     ParsingRunnerManager manager(model.pluginManager());
