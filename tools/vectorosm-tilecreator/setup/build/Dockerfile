@@ -5,8 +5,12 @@ RUN export DEBIAN_FRONTEND=noninteractive; \
     export DEBCONF_NONINTERACTIVE_SEEN=true; \
     apt-get -y install \
     cmake \
+    debhelper \
+    devscripts \
     g++ \
     git \
+    libboost-program-options-dev \
+    libmapnik-dev \
     libprotobuf-dev \
     libqt5svg5-dev \
     libshp-dev \
@@ -14,4 +18,4 @@ RUN export DEBIAN_FRONTEND=noninteractive; \
     qtbase5-dev \
     qtdeclarative5-dev
 
-COPY build-tilegenerator.sh /usr/bin/
+COPY build-tilegenerator.sh build-tirex.sh /usr/bin/

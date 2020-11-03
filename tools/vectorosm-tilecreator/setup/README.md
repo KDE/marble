@@ -23,18 +23,23 @@ database, which allows for fast spatial queries and efficient incremental update
 
 The following components are assumed to be on the server:
 * Apache2
+* mod_tile - https://wiki.openstreetmap.org/wiki/Mod_tile
+* Tirex - https://wiki.openstreetmap.org/wiki/Tirex
+* osmx and osmx-update - https://github.com/protomaps/OSMExpress (static binary of osmx available there, osmx-update is a Python script)
+* marble-vectorosm-tirex-backend
+
+The following components are needed for the static/low-z tile generation and can be run on a different machine:
 * Python 3
-* For tile generation in general
-    * osmctools - https://gitlab.com/osm-c-tools/osmctools
-* For the static/low-z tile generation (could be done on a different machine if needed):
-    * ogr2ogr from gdal (?)
-    * ne_tilegenerator.py
-    * marble-vectorosm-tilecreator
-* For the dynamic/high-z tile generation:
-    * mod_tile - https://wiki.openstreetmap.org/wiki/Mod_tile
-    * Tirex - https://wiki.openstreetmap.org/wiki/Tirex
-    * osmx and osmx-update - https://github.com/protomaps/OSMExpress (static binary of osmx available there, osmx-update is a Python script)
-    * marble-vectorosm-tirex-backend
+* osmctools - https://gitlab.com/osm-c-tools/osmctools
+* ogr2ogr from gdal (?)
+* ne_tilegenerator.py
+* marble-vectorosm-tilecreator
+* marble-vectorosm-process-land-polygons
+
+Precompiled packages:
+* mod_tile: PPA by OSM admin team: https://launchpad.net/~osmadmins/+archive/ubuntu/ppa
+* Tirex: PPA by the author: https://launchpad.net/~framm/+archive/ubuntu/tirex - unfortunately only for Ubuntu 18.04
+  To work around this, Debian packages can be built by running `make` in the `build` sub-directory of this folder as well.
 
 ## Setup
 
