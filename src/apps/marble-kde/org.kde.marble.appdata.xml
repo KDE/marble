@@ -92,6 +92,7 @@
     <p xml:lang="pl">Marble jest wirtualną kulą ziemską i atlasem świata - twoim scyzorykiem od map, którego możesz wykorzystać do większego poznania Ziemi i innych planet.</p>
     <p xml:lang="pt">O Marble é um globo virtual e um atlas mundial — o seu canivete-suíço para mapas, que poderá usar para aprender mais sobre a Terra e os outros planetas.</p>
     <p xml:lang="pt-BR">Marble é um globo virtual e um atlas mundial — seu canivete-suíço para mapas que você pode usar para aprender mais sobre a Terra e outros planetas.</p>
+    <p xml:lang="ru">Marble — виртуальный глобус и атлас мира, многофункциональная программа для работы с картами, позволяющая узнать больше о планете Земля и других планетах.</p>
     <p xml:lang="sk">Marble je virtuálny glóbus a atlas sveta - váš švajčiarsky nožík pre mapy, ktorý môžete použiť na získanie ďalších informácií o Zemi a ostatných planétach.</p>
     <p xml:lang="sl">Marble je navidezni globus in atlas sveta - vaš švicarski nož za zemljevide, da se lahko naučite več o Zemlji in drugih planetih.</p>
     <p xml:lang="sv">Marble är en virtuell jordglob och världsatlas - det generella kartverktyget som kan användas för att lära sig mer om jorden och andra planeter.</p>
@@ -182,6 +183,7 @@
       <caption xml:lang="pl">Ziemia w Marble</caption>
       <caption xml:lang="pt">Globo terrestre no Marble</caption>
       <caption xml:lang="pt-BR">Globo terrestre no Marble</caption>
+      <caption xml:lang="ru">Земной шар в Marble</caption>
       <caption xml:lang="sk">Zemeguľa v Marble</caption>
       <caption xml:lang="sl">Globus v Marble</caption>
       <caption xml:lang="sv">Jordgloben i Marble</caption>
