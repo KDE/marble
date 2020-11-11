@@ -8,15 +8,6 @@ Notes:
   <mime-type type="application/x-gpx+xml">
     <sub-class-of type="application/xml"/>
     <comment>GPX geographic data</comment>
-    <comment xml:lang="ca">Dades geogràfiques GPX</comment>
-    <comment xml:lang="es">Datos geográficos GPX</comment>
-    <comment xml:lang="fi">GPX-paikkatieto</comment>
-    <comment xml:lang="nb">GPX geografiske data</comment>
-    <comment xml:lang="nl">GPX geografische gegevens</comment>
-    <comment xml:lang="nn">GPX-geografidata</comment>
-    <comment xml:lang="pt_BR">Dados geográficos GPX</comment>
-    <comment xml:lang="sv">GPX-geografisk data</comment>
-    <comment xml:lang="uk">географічні дані GPX</comment>
     <acronym>GPX</acronym>
     <expanded-acronym>GPS eXchange Format</expanded-acronym>
     <generic-icon name="application-vnd-google-earth-kml"/>
@@ -30,15 +21,6 @@ Notes:
   <mime-type type="application/x-osm+xml">
     <sub-class-of type="application/xml"/>
     <comment>OSM Data</comment>
-    <comment xml:lang="ca">Dades OSM</comment>
-    <comment xml:lang="es">Datos OSM</comment>
-    <comment xml:lang="fi">OSM-data</comment>
-    <comment xml:lang="nb">OSM-data</comment>
-    <comment xml:lang="nl">OSM-gegevens</comment>
-    <comment xml:lang="nn">OSM-data</comment>
-    <comment xml:lang="pt_BR">Dados OSM</comment>
-    <comment xml:lang="sv">OSM-data</comment>
-    <comment xml:lang="uk">дані OSM</comment>
     <acronym>OSM</acronym>
     <expanded-acronym>OpenStreetMap</expanded-acronym>
     <generic-icon name="application-vnd-google-earth-kml"/>
@@ -52,15 +34,6 @@ Notes:
   <mime-type type="application/x-esri-shape">
     <generic-icon name="application-vnd-google-earth-kml"/>
     <comment>ESRI Shapefile</comment>
-    <comment xml:lang="ca">Fitxers de formes ESRI</comment>
-    <comment xml:lang="es">Archivo de formas ESRI</comment>
-    <comment xml:lang="fi">ESRI Shapefile</comment>
-    <comment xml:lang="nb">ESRI formfil</comment>
-    <comment xml:lang="nl">ESRI vormbestand</comment>
-    <comment xml:lang="nn">ESRI-shapefile</comment>
-    <comment xml:lang="pt_BR">Shapefile ESRI</comment>
-    <comment xml:lang="sv">ESRI-formfil</comment>
-    <comment xml:lang="uk">файл форм ESRI</comment>
     <generic-icon name="application-vnd-google-earth-kml"/>
     <glob pattern="*.shp"/>
     <magic priority="50">
@@ -69,15 +42,6 @@ Notes:
   </mime-type>
   <mime-type type="application/x-esri-shape-index">
     <comment>ESRI Shapefile Index</comment>
-    <comment xml:lang="ca">Índex de fitxer de formes ESRI</comment>
-    <comment xml:lang="es">Índice de archivo de formas ESRI</comment>
-    <comment xml:lang="fi">ESRI Shapefile -hakemisto</comment>
-    <comment xml:lang="nb">ESRI formfil-indeks</comment>
-    <comment xml:lang="nl">Index van ESRI vormbestand</comment>
-    <comment xml:lang="nn">ESRI-shapefile-indeks</comment>
-    <comment xml:lang="pt_BR">Índice de shapefile ESRI</comment>
-    <comment xml:lang="sv">ESRI-formfilindex</comment>
-    <comment xml:lang="uk">покажчик файла форм ESRI</comment>
     <generic-icon name="application-octet-stream"/>
     <glob pattern="*.shx"/>
     <magic priority="50">
