@@ -9,6 +9,7 @@ Notes:
     <sub-class-of type="application/xml"/>
     <comment>GPX geographic data</comment>
     <comment xml:lang="ca">Dades geogràfiques GPX</comment>
+    <comment xml:lang="en_GB">GPX geographic data</comment>
     <comment xml:lang="es">Datos geográficos GPX</comment>
     <comment xml:lang="it">Dati geografici GPX</comment>
     <comment xml:lang="nl">GPX geografische gegevens</comment>
@@ -29,6 +30,7 @@ Notes:
     <sub-class-of type="application/xml"/>
     <comment>OSM Data</comment>
     <comment xml:lang="ca">Dades OSM</comment>
+    <comment xml:lang="en_GB">OSM Data</comment>
     <comment xml:lang="es">Datos OSM</comment>
     <comment xml:lang="it">Dati OSM</comment>
     <comment xml:lang="nl">OSM-gegevens</comment>
@@ -49,6 +51,7 @@ Notes:
     <generic-icon name="application-vnd-google-earth-kml"/>
     <comment>ESRI Shapefile</comment>
     <comment xml:lang="ca">Fitxers de formes ESRI</comment>
+    <comment xml:lang="en_GB">ESRI Shapefile</comment>
     <comment xml:lang="es">Archivo de formas ESRI</comment>
     <comment xml:lang="it">Shapefile ESRI</comment>
     <comment xml:lang="nl">ESRI vormbestand</comment>
@@ -64,6 +67,7 @@ Notes:
   <mime-type type="application/x-esri-shape-index">
     <comment>ESRI Shapefile Index</comment>
     <comment xml:lang="ca">Índex de fitxer de formes ESRI</comment>
+    <comment xml:lang="en_GB">ESRI Shapefile Index</comment>
     <comment xml:lang="es">Índice de archivo de formas ESRI</comment>
     <comment xml:lang="it">Indice Shapefile ESRI</comment>
     <comment xml:lang="nl">Index van ESRI vormbestand</comment>
