@@ -25,3 +25,7 @@ RUN export DEBIAN_FRONTEND=noninteractive; \
 RUN useradd -d /home/user/ -u 1000 --user-group --create-home -G video user
 
 COPY build-tilegenerator.sh build-tirex.sh /usr/bin/
+
+# Make SSH in services available
+EXPOSE 22
+CMD ["/usr/sbin/sshd", "-D"]
