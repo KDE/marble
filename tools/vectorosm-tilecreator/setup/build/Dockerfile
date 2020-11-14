@@ -16,6 +16,12 @@ RUN export DEBIAN_FRONTEND=noninteractive; \
     libshp-dev \
     protobuf-compiler \
     qtbase5-dev \
-    qtdeclarative5-dev
+    qtdeclarative5-dev \
+    openssh-server \
+    openjdk-8-jre-headless \
+    && dpkg-reconfigure openssh-server && mkdir -p /var/run/sshd && apt-get -qq clean
+
+# Setup a user account for everything else to be done under
+RUN useradd -d /home/user/ -u 1000 --user-group --create-home -G video user
 
 COPY build-tilegenerator.sh build-tirex.sh /usr/bin/
