@@ -80,15 +80,15 @@ Initial pre-generation of level 11 tiles:
 
 ```
 # North America
-tirex-batch -f not-exists map=vectorosm x=310-680 y=660-940 z=11
+tirex-batch -f not-exists map=vectorosm/v1 x=310-680 y=660-940 z=11
 # South America
-tirex-batch -f not-exists map=vectorosm x=560-824 y=1024-1400 z=11
+tirex-batch -f not-exists map=vectorosm/v1 x=560-824 y=1024-1400 z=11
 # North Africa, Asia, Europe
-tirex-batch -f not-exists map=vectorosm x=920-2047 y=432-1000 z=11
+tirex-batch -f not-exists map=vectorosm/v1 x=920-2047 y=432-1000 z=11
 # South Africa
-tirex-batch -f not-exists map=vectorosm x=1072-1312 y=1000-1232 z=11
+tirex-batch -f not-exists map=vectorosm/v1 x=1072-1312 y=1000-1232 z=11
 # Australia
-tirex-batch -f not-exists map=vectorosm x=1560-2032 y=1000-1320 z=11
+tirex-batch -f not-exists map=vectorosm/v1 x=1560-2032 y=1000-1320 z=11
 ```
 
 This enqueues batch jobs for generating all level 11 tiles that don't exist yet. Due to the existance filter this could be re-run
