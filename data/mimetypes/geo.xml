@@ -12,6 +12,7 @@ Notes:
     <comment xml:lang="ca@valencia">Dades geogràfiques GPX</comment>
     <comment xml:lang="en_GB">GPX geographic data</comment>
     <comment xml:lang="es">Datos geográficos GPX</comment>
+    <comment xml:lang="fr">Données géographiques « GPX »</comment>
     <comment xml:lang="it">Dati geografici GPX</comment>
     <comment xml:lang="nl">GPX geografische gegevens</comment>
     <comment xml:lang="nn">GPX-geografidata</comment>
@@ -34,6 +35,7 @@ Notes:
     <comment xml:lang="ca@valencia">Dades OSM</comment>
     <comment xml:lang="en_GB">OSM Data</comment>
     <comment xml:lang="es">Datos OSM</comment>
+    <comment xml:lang="fr">Données « OSM »</comment>
     <comment xml:lang="it">Dati OSM</comment>
     <comment xml:lang="nl">OSM-gegevens</comment>
     <comment xml:lang="nn">OSM-data</comment>
@@ -56,6 +58,7 @@ Notes:
     <comment xml:lang="ca@valencia">Fitxers de formes ESRI</comment>
     <comment xml:lang="en_GB">ESRI Shapefile</comment>
     <comment xml:lang="es">Archivo de formas ESRI</comment>
+    <comment xml:lang="fr">Fichier de formes « ESRI »</comment>
     <comment xml:lang="it">Shapefile ESRI</comment>
     <comment xml:lang="nl">ESRI vormbestand</comment>
     <comment xml:lang="nn">ESRI-shapefile</comment>
@@ -73,6 +76,7 @@ Notes:
     <comment xml:lang="ca@valencia">Índex de fitxer de formes ESRI</comment>
     <comment xml:lang="en_GB">ESRI Shapefile Index</comment>
     <comment xml:lang="es">Índice de archivo de formas ESRI</comment>
+    <comment xml:lang="fr">Index du fichier de formes « ESRI »</comment>
     <comment xml:lang="it">Indice Shapefile ESRI</comment>
     <comment xml:lang="nl">Index van ESRI vormbestand</comment>
     <comment xml:lang="nn">ESRI-shapefile-indeks</comment>
