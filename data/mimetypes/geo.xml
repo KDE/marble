@@ -19,6 +19,7 @@ Notes:
     <comment xml:lang="pt_BR">Dados geográficos GPX</comment>
     <comment xml:lang="sv">GPX-geografisk data</comment>
     <comment xml:lang="uk">географічні дані GPX</comment>
+    <comment xml:lang="zh_CN">GPX 地理数据</comment>
     <acronym>GPX</acronym>
     <expanded-acronym>GPS eXchange Format</expanded-acronym>
     <generic-icon name="application-vnd-google-earth-kml"/>
@@ -43,6 +44,7 @@ Notes:
     <comment xml:lang="pt_BR">Dados OSM</comment>
     <comment xml:lang="sv">OSM-data</comment>
     <comment xml:lang="uk">дані OSM</comment>
+    <comment xml:lang="zh_CN">OSM 数据</comment>
     <acronym>OSM</acronym>
     <expanded-acronym>OpenStreetMap</expanded-acronym>
     <generic-icon name="application-vnd-google-earth-kml"/>
@@ -67,6 +69,7 @@ Notes:
     <comment xml:lang="pt_BR">Shapefile ESRI</comment>
     <comment xml:lang="sv">ESRI-formfil</comment>
     <comment xml:lang="uk">файл форм ESRI</comment>
+    <comment xml:lang="zh_CN">ESRI 形状文件</comment>
     <generic-icon name="application-vnd-google-earth-kml"/>
     <glob pattern="*.shp"/>
     <magic priority="50">
@@ -86,6 +89,7 @@ Notes:
     <comment xml:lang="pt_BR">Índice de shapefile ESRI</comment>
     <comment xml:lang="sv">ESRI-formfilindex</comment>
     <comment xml:lang="uk">покажчик файла форм ESRI</comment>
+    <comment xml:lang="zh_CN">ESRI 形状文件索引</comment>
     <generic-icon name="application-octet-stream"/>
     <glob pattern="*.shx"/>
     <magic priority="50">
