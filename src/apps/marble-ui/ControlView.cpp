@@ -643,7 +643,7 @@ QList<QAction*> ControlView::setupDockWidgets( QMainWindow *mainWindow )
     mainWindow->tabifyDockWidget( routingDock, locationDock );
     m_searchDock->raise();
 
-    QKeySequence searchSequence( Qt::CTRL + Qt::Key_F );
+    QKeySequence searchSequence( Qt::CTRL | Qt::Key_F );
     searchWidget->setToolTip( tr( "Search for cities, addresses, points of interest and more (%1)" ).arg( searchSequence.toString() ) );
     QShortcut* searchShortcut = new QShortcut( mainWindow );
     connect( searchShortcut, SIGNAL(activated()), this, SLOT(showSearch()) );

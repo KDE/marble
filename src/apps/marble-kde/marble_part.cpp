@@ -734,7 +734,7 @@ void MarblePart::setupActions()
     actionCollection()->addAction( "exportMap", m_exportMapAction );
     m_exportMapAction->setText( i18nc( "Action for saving the map to a file", "&Export Map..." ) );
     m_exportMapAction->setIcon( QIcon::fromTheme( "document-save-as" ) );
-    actionCollection()->setDefaultShortcut( m_exportMapAction, Qt::CTRL + Qt::Key_S );
+    actionCollection()->setDefaultShortcut( m_exportMapAction, Qt::CTRL | Qt::Key_S );
     connect( m_exportMapAction, SIGNAL(triggered(bool)),
              this,              SLOT(exportMapScreenShot()) );
 
@@ -778,7 +778,7 @@ void MarblePart::setupActions()
     connect(m_newStuffAction, &QAction::triggered, this, &MarblePart::showNewStuffDialog);
     m_newStuffAction->setStatusTip( i18nc( "Status tip", "Download new maps"));
     actionCollection()->addAction(QStringLiteral("new_stuff"), m_newStuffAction);
-    actionCollection()->setDefaultShortcut( m_newStuffAction, Qt::CTRL + Qt::Key_N );
+    actionCollection()->setDefaultShortcut( m_newStuffAction, Qt::CTRL | Qt::Key_N );
 
     // Action: Create a New Map
     m_mapWizardAct = new QAction( i18nc( "Action for creating new maps",
@@ -887,7 +887,7 @@ void MarblePart::setupActions()
     actionCollection()->addAction( "add_bookmark", m_addBookmarkAction );
     m_addBookmarkAction->setText( i18nc( "Add Bookmark", "&Add Bookmark" ) );
     m_addBookmarkAction->setIcon(QIcon(QStringLiteral(":/icons/bookmark-new.png")));
-    actionCollection()->setDefaultShortcut( m_addBookmarkAction, Qt::CTRL + Qt::Key_B );
+    actionCollection()->setDefaultShortcut( m_addBookmarkAction, Qt::CTRL | Qt::Key_B );
     connect( m_addBookmarkAction, SIGNAL(triggered()),
              this,                SLOT(openEditBookmarkDialog()) );
 
@@ -923,7 +923,7 @@ void MarblePart::setupActions()
     actionCollection()->addAction( "external_editor", m_externalMapEditorAction );
     m_externalMapEditorAction->setText( i18nc( "Edit the map in an external application", "&Edit Map" ) );
     m_externalMapEditorAction->setIcon(QIcon(QStringLiteral(":/icons/edit-map.png")));
-    actionCollection()->setDefaultShortcut( m_externalMapEditorAction, Qt::CTRL + Qt::Key_E );
+    actionCollection()->setDefaultShortcut( m_externalMapEditorAction, Qt::CTRL | Qt::Key_E );
     connect( m_externalMapEditorAction, SIGNAL(triggered()),
              m_controlView, SLOT(launchExternalMapEditor()) );
     connect( m_controlView->marbleWidget(), SIGNAL(themeChanged(QString)),
@@ -932,7 +932,7 @@ void MarblePart::setupActions()
      m_recordMovieAction = new QAction( i18n( "&Record Movie" ), this );
      actionCollection()->addAction( "record_movie" , m_recordMovieAction );
      m_recordMovieAction->setStatusTip( i18n( "Records a movie of the globe" ) );
-     actionCollection()->setDefaultShortcut( m_recordMovieAction, Qt::CTRL + Qt::SHIFT + Qt::Key_R );
+     actionCollection()->setDefaultShortcut( m_recordMovieAction, Qt::CTRL | Qt::SHIFT | Qt::Key_R );
      m_recordMovieAction->setIcon(QIcon(QStringLiteral(":/icons/animator.png")));
      connect( m_recordMovieAction, SIGNAL(triggered()),
              this, SLOT(showMovieCaptureDialog()) );
@@ -940,7 +940,7 @@ void MarblePart::setupActions()
      m_stopRecordingAction = new QAction( i18n( "&Stop recording" ), this );
      actionCollection()->addAction( "stop_recording" , m_stopRecordingAction );
      m_stopRecordingAction->setStatusTip( i18n( "Stop recording a movie of the globe" ) );
-     actionCollection()->setDefaultShortcut( m_recordMovieAction, Qt::CTRL + Qt::SHIFT + Qt::Key_S );
+     actionCollection()->setDefaultShortcut( m_recordMovieAction, Qt::CTRL | Qt::SHIFT | Qt::Key_S );
      m_stopRecordingAction->setEnabled( false );
      connect( m_stopRecordingAction, SIGNAL(triggered()),
              this, SLOT(stopRecording()) );
