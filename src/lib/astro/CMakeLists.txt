@@ -50,7 +50,7 @@ target_include_directories(astro
 
 # choose the correct target install library path
 if(WIN32)
-  INSTALL(TARGETS astro EXPORT AstroTargets RUNTIME DESTINATION . ARCHIVE DESTINATION lib)
+  INSTALL(TARGETS astro EXPORT AstroTargets RUNTIME DESTINATION bin ARCHIVE DESTINATION lib)
 elseif(APPLE)
   INSTALL(TARGETS astro LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/Marble.app/Contents/MacOS/lib)
 else()

@@ -53,7 +53,7 @@ if(Qt5Positioning_FOUND)
 endif()
 
 if(WIN32)
-  install(TARGETS marbledeclarative RUNTIME DESTINATION . ARCHIVE DESTINATION lib)
+  install(TARGETS marbledeclarative RUNTIME DESTINATION bin ARCHIVE DESTINATION lib)
 else()
   install(TARGETS marbledeclarative LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
 endif()

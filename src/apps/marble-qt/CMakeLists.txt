@@ -47,15 +47,9 @@ if(STATIC_BUILD AND WIN32)
     target_link_libraries(marble-qt ${QT_PLUGINS_DIR}/imageformats/qsvg.lib)
 endif()
 
-if(WIN32)
-install (TARGETS marble-qt RUNTIME DESTINATION .)
-else(WIN32)
-if (APPLE)
-  # No need for this when installing to a bundle
-else (APPLE)
+if (NOT APPLE)
     install (TARGETS marble-qt RUNTIME DESTINATION bin )
-endif (APPLE)
-endif(WIN32)
+endif (NOT APPLE)
 
 if(APPS_INSTALL_DIR)
   install(PROGRAMS org.kde.marble-qt.desktop DESTINATION ${APPS_INSTALL_DIR})
