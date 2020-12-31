@@ -29,6 +29,7 @@
 #include "ViewportParams.h"
 #include "AbstractFloatItem.h"
 #include "AbstractDataPluginItem.h"
+#include "AbstractProjection.h"
 #include "RenderPlugin.h"
 
 namespace Marble {
@@ -811,6 +812,8 @@ bool MarbleDefaultInputHandler::handleMouseEvent(QMouseEvent *event)
             handleMouseButtonRelease(event);
         }
 
+        const bool supportsViewportRotation = MarbleInputHandler::d->m_marblePresenter->map()->projection() == Spherical;
+
         // Regarding all kinds of mouse moves:
         if (d->m_leftPressed && !selectionRubber()->isVisible())
         {
@@ -826,9 +829,12 @@ bool MarbleDefaultInputHandler::handleMouseEvent(QMouseEvent *event)
 
                 d->m_pressAndHoldTimer.stop();
                 d->m_lmbTimer.stop();
-                const Quaternion rotation = Quaternion::fromEuler( 0, 0, MarbleInputHandler::d->m_marblePresenter->map()->heading() * DEG2RAD );
                 Quaternion quat = Quaternion::fromSpherical( - M_PI/2 * deltax / radius, + M_PI/2 * deltay / radius );
-                quat.rotateAroundAxis( rotation );
+                if (supportsViewportRotation) {
+                    const qreal heading = MarbleInputHandler::d->m_marblePresenter->map()->heading();
+                    const Quaternion rotation = Quaternion::fromEuler( 0, 0, heading * DEG2RAD );
+                    quat.rotateAroundAxis( rotation );
+                }
                 qreal lon, lat;
                 quat.getSpherical( lon, lat );
                 const qreal posLon = d->m_leftPressedLon + RAD2DEG * lon;
@@ -848,7 +854,7 @@ bool MarbleDefaultInputHandler::handleMouseEvent(QMouseEvent *event)
             MarbleInputHandler::d->m_marblePresenter->setRadius(d->m_startingRadius * pow(1.005, dy));
         }
 
-        if (d->m_rightPressed && MarbleInputHandler::d->m_mouseViewRotation)
+        if (d->m_rightPressed && supportsViewportRotation && MarbleInputHandler::d->m_mouseViewRotation)
         {
             qreal centerX, centerY;
             MarbleInputHandler::d->m_marblePresenter->map()->screenCoordinates(
