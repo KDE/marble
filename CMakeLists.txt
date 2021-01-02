@@ -78,6 +78,10 @@ include( MarbleMacros )
 option(MOBILE "Create a Marble version optimized for handheld devices")
 
 ####################################################
+# Provide opt-in switch for mobile variant, which is not only useful for Android.
+option(BUILD_TOUCH "Build touch-friendly Marble version (on Android this option is bypassed)" OFF)
+
+####################################################
 # Build a D-Bus interface for the Marble widget
 # This is disabled by default for all win32, apple and Android
 if(WIN32 OR APPLE OR CMAKE_SYSTEM_NAME STREQUAL Android)
