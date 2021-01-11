@@ -964,11 +964,11 @@ QRegion GeoPainter::regionFromRect ( const GeoDataCoordinates & centerCoordinate
 {
     if ( !isGeoProjected ) {
         int pointRepeatNum;
-        qreal y;
+        qreal centerY;
         bool globeHidesPoint;
 
         bool visible = d->m_viewport->screenCoordinates( centerCoordinates,
-                       d->m_x, y, pointRepeatNum, QSizeF( width, height ), globeHidesPoint );
+                       d->m_x, centerY, pointRepeatNum, QSizeF( width, height ), globeHidesPoint );
 
         QRegion regions;
 
@@ -977,13 +977,14 @@ QRegion GeoPainter::regionFromRect ( const GeoDataCoordinates & centerCoordinate
             const bool antialiased = testRenderHint(QPainter::Antialiasing);
 
             const qreal halfStrokeWidth = strokeWidth/2.0;
-            const int startY = antialiased ? (qFloor(y - halfStrokeWidth)) : (qFloor(y+0.5 - halfStrokeWidth));
-            const int endY = antialiased ? (qCeil(y + height + halfStrokeWidth)) : (qFloor(y+0.5 + height + halfStrokeWidth));
+            const int topY = centerY - height/2.0;
+            const int startY = antialiased ? (qFloor(topY - halfStrokeWidth)) : (qFloor(topY+0.5 - halfStrokeWidth));
+            const int endY = antialiased ? (qCeil(topY + height + halfStrokeWidth)) : (qFloor(centerY+0.5 + height + halfStrokeWidth));
             // Draw all the x-repeat-instances of the point on the screen
             for( int it = 0; it < pointRepeatNum; ++it ) {
-                const qreal x = d->m_x[it];
-                const int startX = antialiased ? (qFloor(x - halfStrokeWidth)) : (qFloor(x+0.5 - halfStrokeWidth));
-                const int endX = antialiased ? (qCeil(x + width + halfStrokeWidth)) : (qFloor(x+0.5 + width +  halfStrokeWidth));
+                const qreal leftX = d->m_x[it] - width/2.0;
+                const int startX = antialiased ? (qFloor(leftX - halfStrokeWidth)) : (qFloor(leftX+0.5 - halfStrokeWidth));
+                const int endX = antialiased ? (qCeil(leftX + width + halfStrokeWidth)) : (qFloor(leftX+0.5 + width +  halfStrokeWidth));
                 regions += QRegion(startX, startY, endX - startX, endY - startY);
             }
         }
