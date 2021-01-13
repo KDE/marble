@@ -112,7 +112,7 @@ void animatedFlight( MarbleWidget *mapWidget, GeoDataTour* tour )
     double const shift = 1.0 / fps;
     double const duration = playback->duration();
 
-    VideoWriter videoWriter( videoFile, CV_FOURCC('D','I','V','X'), fps, frameSize );
+    VideoWriter videoWriter( videoFile, cv::VideoWriter::fourcc('D','I','V','X'), fps, frameSize );
     Mat buffer;
     buffer.create(frameSize, CV_8UC3);
     for ( double position = 0.0; position <= duration; position += shift ) {
@@ -123,7 +123,7 @@ void animatedFlight( MarbleWidget *mapWidget, GeoDataTour* tour )
         QImage screenshot = QPixmap::grabWidget( mapWidget ).toImage().convertToFormat( QImage::Format_RGB888 );
         Mat converter( frameSize, CV_8UC3 );
         converter.data = screenshot.bits();
-        cvtColor( converter, buffer, CV_RGB2BGR );
+        cvtColor( converter, buffer, COLOR_RGB2BGR );
         videoWriter.write( buffer );
     }
 

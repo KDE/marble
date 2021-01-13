@@ -79,7 +79,7 @@ void interpolate( MarbleWidget* widget, qreal value )
 void animatedFlight( MarbleWidget *mapWidget )
 {
     mapWidget->resize( frameSize.width, frameSize.height );
-    VideoWriter videoWriter( videoFile, CV_FOURCC('D','I','V','X'), fps, frameSize );
+    VideoWriter videoWriter( videoFile, cv::VideoWriter::fourcc('D','I','V','X'), fps, frameSize );
     Mat buffer;
     buffer.create(frameSize, CV_8UC3);
     timeLine.setCurveShape( QTimeLine::EaseInOutCurve );
@@ -91,7 +91,7 @@ void animatedFlight( MarbleWidget *mapWidget )
         QImage screenshot = QPixmap::grabWidget( mapWidget ).toImage().convertToFormat( QImage::Format_RGB888 );
         Mat converter( frameSize, CV_8UC3 );
         converter.data = screenshot.bits();
-        cvtColor( converter, buffer, CV_RGB2BGR );
+        cvtColor( converter, buffer, COLOR_RGB2BGR );
         videoWriter.write( buffer );
     }
     for ( int i=0; i<fps; ++i ) {
