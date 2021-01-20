@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component type="desktop">
+  <id>org.kde.marble.behaim.desktop</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>LGPL-2.1-or-later</project_license>
+  <name>Behaim Globe</name>
+  <summary>Martin Behaim's Erdapfel</summary>
+  <description>
+      <p>The oldest existent globe of the Earth. Martin Behaim and collaborators created the globe around 1492 at the time of Columbus' first sea travel to the west.</p>
+  </description>
+  <url type="homepage">https://marble.kde.org/</url>
+  <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=marble</url>
+  <url type="faq">https://techbase.kde.org/Projects/Marble/FAQ</url>
+  <url type="help">https://marble.kde.org/support.php</url>
+  <url type="donation">https://www.kde.org/community/donations/?app=marble&amp;source=appdata</url>
+  <project_group>KDE</project_group>
+  <provides>
+    <binary>MarbleBehaim</binary>
+  </provides>
+  <content_rating type="oars-1.1"/>
+</component>
