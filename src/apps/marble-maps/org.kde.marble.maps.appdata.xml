@@ -5,6 +5,7 @@
   <project_license>LGPL-2.1-or-later</project_license>
   <name>Marble Maps</name>
   <name xml:lang="ca">Mapes del Marble</name>
+  <name xml:lang="ca-valencia">Mapes del Marble</name>
   <name xml:lang="es">Mapas de Marble</name>
   <name xml:lang="nl">Kaarten van Marble</name>
   <name xml:lang="pt">Mapas do Marble</name>
@@ -13,6 +14,7 @@
   <name xml:lang="x-test">xxMarble Mapsxx</name>
   <summary>Find your way</summary>
   <summary xml:lang="ca">Trobeu el camí</summary>
+  <summary xml:lang="ca-valencia">Trobeu el camí</summary>
   <summary xml:lang="es">Encuentre la ruta</summary>
   <summary xml:lang="nl">Uw weg vinden</summary>
   <summary xml:lang="pt">Descubra o seu caminho</summary>
@@ -22,7 +24,9 @@
   <description>
     <p>OpenStreetMap Navigation.</p>
     <p xml:lang="ca">Navegació de l'OpenStreetMap.</p>
+    <p xml:lang="ca-valencia">Navegació de l'OpenStreetMap.</p>
     <p xml:lang="es">Navegación de OpenStreetMap.</p>
+    <p xml:lang="nl">Navigeren met OpenStreetMap.</p>
     <p xml:lang="pt">Navegação com o OpenStreetMap.</p>
     <p xml:lang="sv">Navigering med OpenStreetMap.</p>
     <p xml:lang="uk">Навігація OpenStreetMap.</p>
