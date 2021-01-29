@@ -23,6 +23,7 @@ Notes:
     <comment xml:lang="pt">Dados geográficos GPX</comment>
     <comment xml:lang="pt_BR">Dados geográficos GPX</comment>
     <comment xml:lang="ru">Географические данные GPX</comment>
+    <comment xml:lang="sk">Zemepisné dáta GPX</comment>
     <comment xml:lang="sl">Geografski podatki GPX</comment>
     <comment xml:lang="sv">GPX-geografisk data</comment>
     <comment xml:lang="uk">географічні дані GPX</comment>
@@ -55,6 +56,7 @@ Notes:
     <comment xml:lang="pt">Dados do OSM</comment>
     <comment xml:lang="pt_BR">Dados OSM</comment>
     <comment xml:lang="ru">Данные OSM</comment>
+    <comment xml:lang="sk">Dáta OSM</comment>
     <comment xml:lang="sl">Podatki OSM</comment>
     <comment xml:lang="sv">OSM-data</comment>
     <comment xml:lang="uk">дані OSM</comment>
@@ -86,6 +88,7 @@ Notes:
     <comment xml:lang="pt">Ficheiro de formas da ESRI</comment>
     <comment xml:lang="pt_BR">Shapefile ESRI</comment>
     <comment xml:lang="ru">Файл фигуры ESRI</comment>
+    <comment xml:lang="sk">Súbor tvarov ESRI</comment>
     <comment xml:lang="sl">ESRI Shapefile</comment>
     <comment xml:lang="sv">ESRI-formfil</comment>
     <comment xml:lang="uk">файл форм ESRI</comment>
@@ -112,6 +115,7 @@ Notes:
     <comment xml:lang="pt">Índice de formas da ESRI</comment>
     <comment xml:lang="pt_BR">Índice de shapefile ESRI</comment>
     <comment xml:lang="ru">Индекс файла фигуры ESRI</comment>
+    <comment xml:lang="sk">Index súboru tvarov ESRI</comment>
     <comment xml:lang="sl">Kazalo ESRI Shapefile</comment>
     <comment xml:lang="sv">ESRI-formfilindex</comment>
     <comment xml:lang="uk">покажчик файла форм ESRI</comment>
