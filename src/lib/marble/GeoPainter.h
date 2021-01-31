@@ -507,7 +507,7 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
 
     void drawTextFragment(const QPoint &position, const QString &text,
                           const qreal fontSize, const QColor &color = Qt::black,
-                          const Frames &flags = nullptr);
+                          const Frames &flags = Frames());
 
 
     // Reenabling QPainter+ClipPainter methods.
