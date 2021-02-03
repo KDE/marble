@@ -69,6 +69,7 @@ public:
     {
         MarbleDeclarativePlugin plugin;
         plugin.registerTypes("org.kde.marble");
+        qmlRegisterType<MarbleDemoItem>("org.kde.marble", 0, 20, "MarbleDemoItem");
         setSource(QUrl(QStringLiteral("qrc:/main.qml")));
 
         if(status()!=QQuickView::Ready)
