@@ -176,7 +176,7 @@ add_feature_info("Qt Designer plugins" WITH_DESIGNER_PLUGIN "Marble widget suppo
 
 set(EXEC_INSTALL_PREFIX  ${CMAKE_INSTALL_PREFIX} CACHE PATH  "Base directory for executables and libraries" FORCE)
 if (NOT QT_PLUGINS_DIR)
-   set(QT_PLUGINS_DIR ${CMAKE_INSTALL_LIBDIR}/plugins)
+   set(QT_PLUGINS_DIR ${KDE_INSTALL_LIBDIR}/plugins)
 endif()
 
 ####################################################
