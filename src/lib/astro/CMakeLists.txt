@@ -45,7 +45,7 @@ if (NOT (CMAKE_SYSTEM_NAME STREQUAL Android))
 endif()
 
 target_include_directories(astro
-    INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR}>"
+    INTERFACE "$<INSTALL_INTERFACE:${INCLUDE_INSTALL_DIR}>"
 )
 
 # choose the correct target install library path
@@ -56,8 +56,8 @@ elseif(APPLE)
 else()
   install(TARGETS astro
     EXPORT AstroTargets
-    LIBRARY DESTINATION ${KDE_INSTALL_LIBDIR}
-    ARCHIVE DESTINATION ${KDE_INSTALL_LIBDIR}
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
   )
 endif()
 
@@ -78,7 +78,7 @@ endif()
     solarsystem.h
     ${CMAKE_CURRENT_BINARY_DIR}/astrolib_export.h
 
-    DESTINATION ${KDE_INSTALL_INCLUDEDIR}/astro
+    DESTINATION ${INCLUDE_INSTALL_DIR}/astro
 )
 
 ########### CMake Config files ###############
@@ -86,7 +86,7 @@ endif()
 include(CMakePackageConfigHelpers)
 
 set(ASTRO_CMAKECONFIGNAME Astro)
-set(ASTRO_INSTALL_CMAKECONFIGDIR ${KDE_INSTALL_LIBDIR}/cmake/${ASTRO_CMAKECONFIGNAME})
+set(ASTRO_INSTALL_CMAKECONFIGDIR ${CMAKE_INSTALL_LIBDIR}/cmake/${ASTRO_CMAKECONFIGNAME})
 
 configure_package_config_file(AstroConfig.cmake.in
     ${CMAKE_CURRENT_BINARY_DIR}/${ASTRO_CMAKECONFIGNAME}Config.cmake
