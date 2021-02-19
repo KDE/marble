@@ -8,6 +8,7 @@
   <name xml:lang="ca-valencia">Mapes del Marble</name>
   <name xml:lang="en-GB">Marble Maps</name>
   <name xml:lang="es">Mapas de Marble</name>
+  <name xml:lang="fr">Cartes de Marble</name>
   <name xml:lang="id">Marble Maps</name>
   <name xml:lang="nl">Kaarten van Marble</name>
   <name xml:lang="pt">Mapas do Marble</name>
@@ -21,6 +22,7 @@
   <summary xml:lang="ca-valencia">Trobeu el camí</summary>
   <summary xml:lang="en-GB">Find your way</summary>
   <summary xml:lang="es">Encuentre la ruta</summary>
+  <summary xml:lang="fr">Trouver votre chemin</summary>
   <summary xml:lang="id">Temukan jalanmu</summary>
   <summary xml:lang="nl">Uw weg vinden</summary>
   <summary xml:lang="pt">Descubra o seu caminho</summary>
@@ -35,6 +37,7 @@
     <p xml:lang="ca-valencia">Navegació de l'OpenStreetMap.</p>
     <p xml:lang="en-GB">OpenStreetMap Navigation.</p>
     <p xml:lang="es">Navegación de OpenStreetMap.</p>
+    <p xml:lang="fr">Navigation avec OpenStreetMap.</p>
     <p xml:lang="id">Navigasi OpenStreetMap.</p>
     <p xml:lang="nl">Navigeren met OpenStreetMap.</p>
     <p xml:lang="pt">Navegação com o OpenStreetMap.</p>
