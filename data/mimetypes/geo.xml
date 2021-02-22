@@ -13,6 +13,7 @@ Notes:
     <comment xml:lang="en_GB">GPX geographic data</comment>
     <comment xml:lang="es">Datos geográficos GPX</comment>
     <comment xml:lang="eu">GPX datu geografikoak</comment>
+    <comment xml:lang="fi">GPX-paikkatieto</comment>
     <comment xml:lang="fr">Données géographiques « GPX »</comment>
     <comment xml:lang="it">Dati geografici GPX</comment>
     <comment xml:lang="nl">GPX geografische gegevens</comment>
@@ -41,6 +42,7 @@ Notes:
     <comment xml:lang="en_GB">OSM Data</comment>
     <comment xml:lang="es">Datos OSM</comment>
     <comment xml:lang="eu">OSM datuak</comment>
+    <comment xml:lang="fi">OSM-data</comment>
     <comment xml:lang="fr">Données « OSM »</comment>
     <comment xml:lang="it">Dati OSM</comment>
     <comment xml:lang="nl">OSM-gegevens</comment>
