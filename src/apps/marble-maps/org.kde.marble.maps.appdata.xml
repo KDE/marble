@@ -13,6 +13,7 @@
   <name xml:lang="id">Marble Maps</name>
   <name xml:lang="nl">Kaarten van Marble</name>
   <name xml:lang="pt">Mapas do Marble</name>
+  <name xml:lang="pt-BR">Marble Maps</name>
   <name xml:lang="ru">Карты Marble</name>
   <name xml:lang="sk">Marble mapy</name>
   <name xml:lang="sv">Marble-kartor</name>
@@ -28,6 +29,7 @@
   <summary xml:lang="id">Temukan jalanmu</summary>
   <summary xml:lang="nl">Uw weg vinden</summary>
   <summary xml:lang="pt">Descubra o seu caminho</summary>
+  <summary xml:lang="pt-BR">Descubra o seu caminho</summary>
   <summary xml:lang="ru">Планирование маршрута</summary>
   <summary xml:lang="sk">Nájdite svoju cestu</summary>
   <summary xml:lang="sv">Hitta rätt</summary>
@@ -44,6 +46,7 @@
     <p xml:lang="id">Navigasi OpenStreetMap.</p>
     <p xml:lang="nl">Navigeren met OpenStreetMap.</p>
     <p xml:lang="pt">Navegação com o OpenStreetMap.</p>
+    <p xml:lang="pt-BR">Navegação com o OpenStreetMap.</p>
     <p xml:lang="ru">Навигация с OpenStreetMap.</p>
     <p xml:lang="sk">Navigácia OpenStreetMap</p>
     <p xml:lang="sv">Navigering med OpenStreetMap.</p>
