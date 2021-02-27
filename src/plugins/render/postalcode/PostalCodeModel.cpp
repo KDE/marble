@@ -52,7 +52,7 @@ void PostalCodeModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
     double const lon = box.center().longitude( GeoDataCoordinates::Degree );
     double const radius = qMin<double>( 30.0, box.height() * marbleModel()->planet()->radius() * METER2KM );
 
-    QUrl geonamesUrl( "http://ws.geonames.org/findNearbyPostalCodesJSON" );
+    QUrl geonamesUrl( "http://api.geonames.org/findNearbyPostalCodesJSON" );
     QUrlQuery urlQuery;
     urlQuery.addQueryItem( "lat", QString::number( lat ) );
     urlQuery.addQueryItem( "lng", QString::number( lon ) );
