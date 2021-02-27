@@ -60,7 +60,7 @@ void EarthquakeModel::getAdditionalItems( const GeoDataLatLonAltBox& box, qint32
         return;
     }
 
-    const QString geonamesUrl( QLatin1String("http://ws.geonames.org/earthquakesJSON") +
+    const QString geonamesUrl( QLatin1String("http://api.geonames.org/earthquakesJSON") +
         QLatin1String("?north=")   + QString::number(box.north() * RAD2DEG) +
         QLatin1String("&south=")   + QString::number(box.south() * RAD2DEG) +
         QLatin1String("&east=")    + QString::number(box.east() * RAD2DEG) +

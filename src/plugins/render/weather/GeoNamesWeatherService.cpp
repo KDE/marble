@@ -47,7 +47,7 @@ void GeoNamesWeatherService::getAdditionalItems( const GeoDataLatLonAltBox& box,
         return;
     }
 
-    QUrl geonamesUrl( "http://ws.geonames.org/weatherJSON" );
+    QUrl geonamesUrl( "http://api.geonames.org/weatherJSON" );
     QUrlQuery urlQuery;
     urlQuery.addQueryItem( "north", QString::number( box.north( GeoDataCoordinates::Degree ) ) );
     urlQuery.addQueryItem( "south", QString::number( box.south( GeoDataCoordinates::Degree ) ) );
@@ -67,7 +67,7 @@ void GeoNamesWeatherService::getItem( const QString &id )
     }
 
     if ( id.startsWith(QLatin1String("geonames_") ) ) {
-        QUrl geonamesUrl( "http://ws.geonames.org/weatherIcaoJSON" );
+        QUrl geonamesUrl( "http://api.geonames.org/weatherIcaoJSON" );
         QUrlQuery urlQuery;
         urlQuery.addQueryItem( "ICAO", id.mid( 9 ) );
         urlQuery.addQueryItem( "username", "marble" );

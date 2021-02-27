@@ -59,7 +59,7 @@ void WikipediaModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
         return;
     }
         
-    QUrl geonamesUrl( "http://ws.geonames.org/wikipediaBoundingBox" );
+    QUrl geonamesUrl( "http://api.geonames.org/wikipediaBoundingBox" );
     QUrlQuery urlQuery;
     urlQuery.addQueryItem( "north", QString::number( box.north( GeoDataCoordinates::Degree ) ) );
     urlQuery.addQueryItem( "south", QString::number( box.south( GeoDataCoordinates::Degree ) ) );
