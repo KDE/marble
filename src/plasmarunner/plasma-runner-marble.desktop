@@ -89,7 +89,7 @@ Icon=marble
 Type=Service
 X-KDE-ServiceTypes=Plasma/Runner
 
-X-KDE-Library=plasma_runner_marble
+X-KDE-Library=kf5/krunner/plasma_runner_marble
 
 X-KDE-PluginInfo-Author=Friedrich W. H. Kossebau
 X-KDE-PluginInfo-Email=kossebau@kde.org

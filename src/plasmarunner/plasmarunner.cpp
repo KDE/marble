@@ -37,12 +37,14 @@ namespace Marble
 
 static const int minContainsMatchLength = 3;
 
-PlasmaRunner::PlasmaRunner(QObject *parent, const QVariantList &args)
+#if KRUNNER_VERSION >= QT_VERSION_CHECK(5, 77, 0)
+    PlasmaRunner::PlasmaRunner(QObject *parent, const KPluginMetaData &pluginMetaData, const QVariantList &args)
+  : AbstractRunner(parent, pluginMetaData, args)
+#else
+    PlasmaRunner::PlasmaRunner(QObject *parent, const QVariantList &args)
   : AbstractRunner(parent, args)
+#endif
 {
-    setIgnoredTypes(Plasma::RunnerContext::NetworkLocation |
-                    Plasma::RunnerContext::FileSystem |
-                    Plasma::RunnerContext::Help);
     addSyntax(Plasma::RunnerSyntax(QStringLiteral(":q:"), i18n("Shows the coordinates :q: in OpenStreetMap with Marble.")));
     addSyntax(Plasma::RunnerSyntax(QStringLiteral(":q:"), i18n("Shows the geo bookmark containing :q: in OpenStreetMap with Marble.")));
 }

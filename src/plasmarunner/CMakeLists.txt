@@ -34,5 +34,9 @@ target_link_libraries(plasma_runner_marble
   KF5::I18n
 )
 
-install(TARGETS plasma_runner_marble DESTINATION ${KDE_INSTALL_PLUGINDIR})
-install(FILES plasma-runner-marble.desktop DESTINATION ${KDE_INSTALL_KSERVICES5DIR})
+install(TARGETS plasma_runner_marble DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf5/krunner)
+if(KF5Runner_VERSION VERSION_LESS 5.72.0)
+  install(FILES plasma-runner-marble.desktop DESTINATION ${KDE_INSTALL_KSERVICES5DIR})
+else()
+  kcoreaddons_desktop_to_json(plasma_runner_marble plasma-runner-marble.desktop)
+endif()

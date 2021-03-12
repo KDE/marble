@@ -19,6 +19,7 @@
 
 // Plasma
 #include <KRunner/AbstractRunner>
+#include <krunner_version.h>
 
 
 namespace Marble
@@ -31,7 +32,11 @@ class PlasmaRunner : public Plasma::AbstractRunner
     Q_OBJECT
 
 public:
+#if KRUNNER_VERSION >= QT_VERSION_CHECK(5, 77, 0)
+    PlasmaRunner(QObject *parent, const KPluginMetaData &pluginMetaData, const QVariantList &args);
+#else
     PlasmaRunner(QObject *parent, const QVariantList &args);
+#endif
 
 public: // Plasma::AbstractRunner API
     void match(Plasma::RunnerContext &context) override;
