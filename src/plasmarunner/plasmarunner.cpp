@@ -43,13 +43,8 @@ PlasmaRunner::PlasmaRunner(QObject *parent, const QVariantList &args)
     setIgnoredTypes(Plasma::RunnerContext::NetworkLocation |
                     Plasma::RunnerContext::FileSystem |
                     Plasma::RunnerContext::Help);
-
-    QList<Plasma::RunnerSyntax> syntaxes;
-    syntaxes << Plasma::RunnerSyntax(QStringLiteral(":q:"),
-                                     i18n("Shows the coordinates :q: in OpenStreetMap with Marble."));
-    syntaxes << Plasma::RunnerSyntax(QStringLiteral(":q:"),
-                                     i18n("Shows the geo bookmark containing :q: in OpenStreetMap with Marble."));
-    setSyntaxes(syntaxes);
+    addSyntax(Plasma::RunnerSyntax(QStringLiteral(":q:"), i18n("Shows the coordinates :q: in OpenStreetMap with Marble.")));
+    addSyntax(Plasma::RunnerSyntax(QStringLiteral(":q:"), i18n("Shows the geo bookmark containing :q: in OpenStreetMap with Marble.")));
 }
 
 void PlasmaRunner::match(Plasma::RunnerContext &context)
