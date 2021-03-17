@@ -6,6 +6,7 @@
   <name>Marble Maps</name>
   <name xml:lang="ca">Mapes del Marble</name>
   <name xml:lang="ca-valencia">Mapes del Marble</name>
+  <name xml:lang="cs">Mapy Marble</name>
   <name xml:lang="en-GB">Marble Maps</name>
   <name xml:lang="es">Mapas de Marble</name>
   <name xml:lang="fi">Marble-kartat</name>
@@ -23,6 +24,7 @@
   <summary>Find your way</summary>
   <summary xml:lang="ca">Trobeu el camí</summary>
   <summary xml:lang="ca-valencia">Trobeu el camí</summary>
+  <summary xml:lang="cs">Najděte si cestu</summary>
   <summary xml:lang="en-GB">Find your way</summary>
   <summary xml:lang="es">Encuentre la ruta</summary>
   <summary xml:lang="fi">Löydä reittisi</summary>
@@ -41,6 +43,7 @@
     <p>OpenStreetMap Navigation.</p>
     <p xml:lang="ca">Navegació de l'OpenStreetMap.</p>
     <p xml:lang="ca-valencia">Navegació de l'OpenStreetMap.</p>
+    <p xml:lang="cs">Navigace OpenStreetMap.</p>
     <p xml:lang="en-GB">OpenStreetMap Navigation.</p>
     <p xml:lang="es">Navegación de OpenStreetMap.</p>
     <p xml:lang="fi">OpenStreetMap-navigointi.</p>
