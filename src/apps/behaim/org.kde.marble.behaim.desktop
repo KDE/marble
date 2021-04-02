@@ -1,5 +1,11 @@
 [Desktop Entry]
 Type=Application
 Name=Marble Behaim
+Name[ca]=Marble de Behaim
+Name[es]=Marble Behaim
+Name[nl]=Marble Behaim
+Name[sv]=Marble Behaim
+Name[uk]=Бегайм-Marble
+Name[x-test]=xxMarble Behaimxx
 Exec=marble-Behaim
 Icon=marble
