@@ -244,14 +244,14 @@ const qreal TWOPI = 2 * M_PI;
 
 // String for about dialog and http user agent
 // FIXME: check if blanks are allowed in user agent version numbers
-const QString MARBLE_VERSION_STRING = QString::fromLatin1( "0.27.20 (0.28 development version)" );
+const QString MARBLE_VERSION_STRING = QString::fromLatin1("21.04");
 
 // API Version id:
 // form : 0xMMmmpp
 //        MM = major revision.
 //        mm = minor revision.
 //        pp = patch revision.
-#define MARBLE_VERSION 0x001b14
+#define MARBLE_VERSION QT_VERSION_CHECK(21, 4, 0)
 
 static const char NOT_AVAILABLE[] = QT_TRANSLATE_NOOP("Marble", "not available");
 
