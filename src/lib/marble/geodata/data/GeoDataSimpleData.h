@@ -18,7 +18,6 @@
 #include <QString>
 #include <QDataStream>
 
-class QString;
 
 namespace Marble
 {

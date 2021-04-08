@@ -26,7 +26,6 @@
 #include "DialogConfigurationInterface.h"
 
 class QMenu;
-class QVariant;
 
 class SolarSystem;
 

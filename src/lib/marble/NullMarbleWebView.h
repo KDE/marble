@@ -16,7 +16,6 @@
 
 #include "marble_export.h"
 
-class QUrl;
 
 class MARBLE_EXPORT MarbleWebView : public QWidget
 {

@@ -16,8 +16,6 @@
 #include <QToolButton>
 #include <QComboBox>
 
-class QToolButton;
-class QComboBox;
 class QModelIndex;
 
 namespace Marble

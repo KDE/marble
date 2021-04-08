@@ -14,7 +14,6 @@
 
 #include <QDataStream>
 
-class QDataStream;
 
 namespace Marble
 {
