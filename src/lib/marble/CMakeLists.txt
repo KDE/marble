@@ -1,4 +1,5 @@
-PROJECT(marblewidget)
+PROJECT(marblewidget VERSION ${RELEASE_SERVICE_VERSION})
+set(MARBLE_CMAKECONFIGNAME Marble)
 
 macro_optional_find_package(Phonon4Qt5 QUIET)
 marble_set_package_properties( Phonon4Qt5 PROPERTIES
@@ -43,11 +44,14 @@ INCLUDE(graphicsview/CMakeLists.txt)
 INCLUDE(layers/CMakeLists.txt)
 INCLUDE(osm/CMakeLists.txt)
 
-set(MARBLE_LIB_VERSION_MAJOR "21")
-set(MARBLE_LIB_VERSION_MINOR "4")
-set(MARBLE_LIB_VERSION_PATCH "0")
-set(MARBLE_LIB_VERSION "${MARBLE_LIB_VERSION_MAJOR}.${MARBLE_LIB_VERSION_MINOR}.${MARBLE_LIB_VERSION_PATCH}")
-set(MARBLE_ABI_VERSION "28")
+include(ECMSetupVersion)
+ecm_setup_version(PROJECT
+    VARIABLE_PREFIX MARBLE_LIB
+    VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/marble_version.h"
+    PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/${MARBLE_CMAKECONFIGNAME}ConfigVersion.cmake"
+    COMPATIBILITY SameMajorVersion
+    SOVERSION 28
+    )
 
 ########### next target ###############
 
@@ -437,8 +441,8 @@ set_target_properties(marblewidget  PROPERTIES
 
 if (NOT (CMAKE_SYSTEM_NAME STREQUAL Android))
   set_target_properties(marblewidget  PROPERTIES
-    VERSION ${MARBLE_LIB_VERSION}
-    SOVERSION ${MARBLE_ABI_VERSION}
+    VERSION ${MARBLE_LIB_VERSION_STRING}
+    SOVERSION ${MARBLE_LIB_SOVERSION}
   )
 endif()
 
@@ -479,6 +483,7 @@ else()
 endif()
 
 install( FILES
+    ${CMAKE_CURRENT_BINARY_DIR}/marble_version.h
     ${CMAKE_CURRENT_BINARY_DIR}/marble_export.h
     ${CMAKE_CURRENT_BINARY_DIR}/declarative/marble_declarative_export.h
     ${graphicsview_HDRS}
@@ -644,17 +649,11 @@ install( FILES
 
 include(CMakePackageConfigHelpers)
 
-set(MARBLE_CMAKECONFIGNAME Marble)
 set(MARBLE_INSTALL_CMAKECONFIGDIR ${CMAKE_INSTALL_LIBDIR}/cmake/${MARBLE_CMAKECONFIGNAME})
 
 configure_package_config_file(MarbleConfig.cmake.in
     ${CMAKE_CURRENT_BINARY_DIR}/${MARBLE_CMAKECONFIGNAME}Config.cmake
     INSTALL_DESTINATION ${MARBLE_INSTALL_CMAKECONFIGDIR}
-)
-
-write_basic_package_version_file(${CMAKE_CURRENT_BINARY_DIR}/${MARBLE_CMAKECONFIGNAME}ConfigVersion.cmake
-    VERSION ${MARBLE_LIB_VERSION}
-    COMPATIBILITY SameMajorVersion
 )
 
 install(FILES
@@ -702,7 +701,7 @@ endif()
 file(GENERATE
     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/qt_Marble.pri
     CONTENT
-"QT.Marble.VERSION = ${MARBLE_LIB_VERSION}
+"QT.Marble.VERSION = ${MARBLE_LIB_VERSION_STRING}
 QT.Marble.MAJOR_VERSION = ${MARBLE_LIB_VERSION_MAJOR}
 QT.Marble.MINOR_VERSION = ${MARBLE_LIB_VERSION_MINOR}
 QT.Marble.PATCH_VERSION = ${MARBLE_LIB_VERSION_PATCH}

@@ -1,12 +1,19 @@
-PROJECT(astro)
+PROJECT(astro VERSION ${RELEASE_SERVICE_VERSION})
 
 INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}
  ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-set(ASTRO_LIB_VERSION "0.17.20")
-set(ASTRO_LIB_SOVERSION "1")
+set(ASTRO_CMAKECONFIGNAME Astro)
+include(ECMSetupVersion)
+ecm_setup_version(PROJECT
+    VARIABLE_PREFIX ASTRO_LIB
+    VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/astro_version.h"
+    PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/${ASTRO_CMAKECONFIGNAME}ConfigVersion.cmake"
+    COMPATIBILITY SameMajorVersion
+    SOVERSION 1
+    )
 
 ADD_DEFINITIONS(-O3)
 
@@ -39,7 +46,7 @@ endif(WIN32)
 if (NOT (CMAKE_SYSTEM_NAME STREQUAL Android))
   set_target_properties(astro PROPERTIES
       EXPORT_NAME "Astro"
-      VERSION ${ASTRO_LIB_VERSION}
+      VERSION ${ASTRO_LIB_VERSION_STRING}
       SOVERSION ${ASTRO_LIB_SOVERSION}
   )
 endif()
@@ -77,6 +84,7 @@ endif()
     planetarySats.h
     solarsystem.h
     ${CMAKE_CURRENT_BINARY_DIR}/astrolib_export.h
+    ${CMAKE_CURRENT_BINARY_DIR}/astro_version.h
 
     DESTINATION ${INCLUDE_INSTALL_DIR}/astro
 )
@@ -85,17 +93,11 @@ endif()
 
 include(CMakePackageConfigHelpers)
 
-set(ASTRO_CMAKECONFIGNAME Astro)
 set(ASTRO_INSTALL_CMAKECONFIGDIR ${CMAKE_INSTALL_LIBDIR}/cmake/${ASTRO_CMAKECONFIGNAME})
 
 configure_package_config_file(AstroConfig.cmake.in
     ${CMAKE_CURRENT_BINARY_DIR}/${ASTRO_CMAKECONFIGNAME}Config.cmake
     INSTALL_DESTINATION ${ASTRO_INSTALL_CMAKECONFIGDIR}
-)
-
-write_basic_package_version_file(${CMAKE_CURRENT_BINARY_DIR}/${ASTRO_CMAKECONFIGNAME}ConfigVersion.cmake
-    VERSION ${ASTRO_LIB_VERSION}
-    COMPATIBILITY SameMajorVersion
 )
 
 install(FILES

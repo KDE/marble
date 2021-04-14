@@ -3,7 +3,13 @@ cmake_minimum_required(VERSION 3.5)
 # Set minimum OS X target
 set(CMAKE_OSX_DEPLOYMENT_TARGET 10.9)
 
-project(marble)
+# KDE Application Version, managed by release script
+set (RELEASE_SERVICE_VERSION_MAJOR "21")
+set (RELEASE_SERVICE_VERSION_MINOR "04")
+set (RELEASE_SERVICE_VERSION_MICRO "00")
+set (RELEASE_SERVICE_VERSION "${RELEASE_SERVICE_VERSION_MAJOR}.${RELEASE_SERVICE_VERSION_MINOR}.${RELEASE_SERVICE_VERSION_MICRO}")
+
+project(marble VERSION ${RELEASE_SERVICE_VERSION})
 
 ####################################################
 # CMake Settings
