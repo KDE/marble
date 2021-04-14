@@ -18,6 +18,7 @@
 #include <QString>
 
 #include "marble_export.h"
+#include "marble_version.h"
 
 // #define QT_STRICT_ITERATORS
 
@@ -243,15 +244,12 @@ const qreal TWOPI = 2 * M_PI;
 // Version definitions to use with an external application (as digiKam)
 
 // String for about dialog and http user agent
-// FIXME: check if blanks are allowed in user agent version numbers
-const QString MARBLE_VERSION_STRING = QString::fromLatin1("21.04");
+const QString MARBLE_VERSION_STRING = QString::fromLatin1( MARBLE_LIB_VERSION_STRING );
 
 // API Version id:
-// form : 0xMMmmpp
-//        MM = major revision.
-//        mm = minor revision.
-//        pp = patch revision.
-#define MARBLE_VERSION QT_VERSION_CHECK(21, 4, 0)
+// up until the 21.04 release, this was supposed to be 0xMMmmpp (major,minor,patch), but in reality it was stuck at version 0.27.0
+// now it is  ((major<<16)|(minor<<8)|(patch))
+#define MARBLE_VERSION MARBLE_LIB_VERSION
 
 static const char NOT_AVAILABLE[] = QT_TRANSLATE_NOOP("Marble", "not available");
 
