@@ -251,7 +251,7 @@ const QString MARBLE_VERSION_STRING = QString::fromLatin1("21.04");
 //        MM = major revision.
 //        mm = minor revision.
 //        pp = patch revision.
-#define MARBLE_VERSION QT_VERSION_CHECK(21, 4, 0)
+#define MARBLE_VERSION 0x150400
 
 static const char NOT_AVAILABLE[] = QT_TRANSLATE_NOOP("Marble", "not available");
 
