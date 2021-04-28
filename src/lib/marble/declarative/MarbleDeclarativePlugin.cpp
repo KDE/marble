@@ -44,6 +44,8 @@ void MarbleDeclarativePlugin::registerTypes( const char *uri )
 
     //@uri org.kde.marble
     qmlRegisterType<Coordinate>( uri, 0, 20, "Coordinate" );
+    qRegisterMetaType<Coordinate::Notation>();
+
     qmlRegisterType<Marble::Placemark>( uri, 0, 20, "Placemark" );
     qmlRegisterType<Marble::PositionSource>( uri, 0, 20, "PositionSource" );
     qmlRegisterType<Marble::Bookmarks>( uri, 0, 20, "Bookmarks" );
@@ -64,8 +66,7 @@ void MarbleDeclarativePlugin::registerTypes( const char *uri )
     qRegisterMetaType<Marble::MarblePlacemarkModel*>("MarblePlacemarkModel*");
     qmlRegisterType<Marble::MarbleQuickItem>(uri, 0, 20, "MarbleItem");
     qmlRegisterType<Marble::GeoItem>(uri, 0, 20, "GeoItem");
-    qmlRegisterType<Marble::GeoPolyline>(uri, 0, 20, "GeoPolyline");
-
+    qmlRegisterType<Marble::GeoPolyline>(uri, 0, 20, "GeoPolyline");    
 
     qmlRegisterUncreatableType<Marble::MarblePlacemarkModel>(uri, 1, 0, "MarblePlacemarkModel",
                                                              QStringLiteral("MarblePlacemarkModel is not instantiable"));

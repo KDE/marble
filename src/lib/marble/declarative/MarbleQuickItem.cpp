@@ -88,9 +88,12 @@ namespace Marble
         void showLmbMenu(int x, int y) override
         {
             m_marbleQuick->selectPlacemarkAt(x, y);
+            emit m_marbleQuick->lmbMenuRequested(QPoint(x,y));
         }
 
-        void showRmbMenu(int, int) override {}
+        void showRmbMenu(int x, int y) override {
+            emit m_marbleQuick->rmbMenuRequested(QPoint(x,y));
+        }
         void openItemToolTip() override {}
         void setCursor(const QCursor &cursor) override
         {
@@ -175,7 +178,9 @@ namespace Marble
                             GeoDataRelation::RouteTrolleyBus |
                             GeoDataRelation::RouteHiking),
             m_showPublicTransport(false),
-            m_showOutdoorActivities(false)
+            m_showOutdoorActivities(false),
+            m_heading(0.0),
+            m_hoverEnabled(false)
         {
             m_currentPosition.setName(QObject::tr("Current Location"));
             m_relationTypeConverter["road"] = GeoDataRelation::RouteRoad;
@@ -220,6 +225,8 @@ namespace Marble
         GeoDataRelation::RelationTypes m_enabledRelationTypes;
         bool m_showPublicTransport;
         bool m_showOutdoorActivities;
+        qreal m_heading;
+        bool m_hoverEnabled;
     };
 
     MarbleQuickItem::MarbleQuickItem(QQuickItem *parent) : QQuickPaintedItem(parent)
@@ -354,9 +361,16 @@ namespace Marble
     {
     }
 
+    void Marble::MarbleQuickItem::MarbleQuickItem::hoverMoveEvent(QHoverEvent *event) {
+        if (d->m_hoverEnabled) {
+            emit hoverPositionChanged(event->pos());
+        }
+        QQuickItem::hoverMoveEvent(event);
+    }
+
     int MarbleQuickItem::mapWidth() const
     {
-       return d->m_map.width();
+        return d->m_map.width();
     }
 
     int MarbleQuickItem::mapHeight() const
@@ -507,6 +521,10 @@ namespace Marble
         d->m_reverseGeocoding.reverseGeocoding(coordinates);
     }
 
+    bool MarbleQuickItem::hoverEnabled() const
+    {
+        return d->m_hoverEnabled;
+    }
 
     qreal MarbleQuickItem::speed() const
     {
@@ -589,9 +607,60 @@ namespace Marble
         return d->m_map.viewport()->screenCoordinates(lineString, polygons);
     }
 
+    bool MarbleQuickItem::screenCoordinatesToCoordinate(const QPoint & point, Coordinate * coordinate)
+    {
+        GeoDataCoordinates geoDataCoordinates;
+        bool success = screenCoordinatesToGeoDataCoordinates(point, geoDataCoordinates);
+        if (!qobject_cast<Coordinate*>(coordinate)){
+            Coordinate * tmp(coordinate);
+            coordinate = new Coordinate(geoDataCoordinates.longitude(), geoDataCoordinates.latitude(), 0, nullptr);
+            QQmlEngine::setObjectOwnership(coordinate, QQmlEngine::JavaScriptOwnership);
+            delete tmp;
+        }
+        else {
+            coordinate->setLongitude(geoDataCoordinates.longitude());
+            coordinate->setLatitude(geoDataCoordinates.latitude());
+        }
+
+        return success;
+    }
+
+    bool MarbleQuickItem::screenCoordinatesToGeoDataCoordinates(const QPoint & point, GeoDataCoordinates & coordinates)
+    {
+        qreal lon = 0.0 , lat = 0.0;
+        bool const valid = d->m_map.viewport()->geoCoordinates(point.x(), point.y(), lon, lat);
+        coordinates.setLongitude(lon);
+        coordinates.setLatitude(lat);
+        return valid;
+    }
+
     void MarbleQuickItem::setRadius(int radius)
     {
         d->m_map.setRadius(radius);
+    }
+
+    void MarbleQuickItem::setHeading(qreal heading)
+    {
+        if (qFuzzyCompare(d->m_heading, heading))
+            return;
+
+        d->m_map.setHeading(heading);
+        d->m_heading = heading;
+
+        emit headingChanged(d->m_heading);
+    }
+
+    void MarbleQuickItem::setHoverEnabled(bool hoverEnabled)
+    {
+        if (d->m_hoverEnabled == hoverEnabled)
+            return;
+
+        d->m_hoverEnabled = hoverEnabled;
+
+        setAcceptHoverEvents(hoverEnabled);
+        setFlag(ItemAcceptsInputMethod, hoverEnabled);
+
+        emit hoverEnabledChanged(d->m_hoverEnabled);
     }
 
     void MarbleQuickItem::setZoom(int newZoom, FlyToMode mode)
@@ -1112,6 +1181,12 @@ namespace Marble
     {
         return d->m_map.radius();
     }
+
+    qreal MarbleQuickItem::heading() const
+    {
+        return d->m_map.heading();
+    }
+
 
     int MarbleQuickItem::zoom() const
     {

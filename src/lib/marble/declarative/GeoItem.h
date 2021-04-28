@@ -45,6 +45,9 @@ namespace Marble
         /** Constructor */
         explicit GeoItem( QQuickItem *parent = nullptr );
 
+
+        Q_INVOKABLE bool moveToScreenCoordinates(qreal x, qreal y);
+
         /** Provides access to the longitude (degree) of the coordinate */
         qreal longitude() const;
 

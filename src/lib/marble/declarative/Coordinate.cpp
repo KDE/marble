@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2011      Dennis Nienhüser <nienhueser@kde.org>
+// Copyright 2021      Torsten Rahn
 //
 
 #include "Coordinate.h"
@@ -72,6 +73,11 @@ void Coordinate::setCoordinates( const GeoDataCoordinates &coordinates )
     m_coordinate = coordinates;
 }
 
+QString Coordinate::toGeoString(Coordinate::Notation notation, int precision) const
+{
+    return m_coordinate.toString(static_cast<GeoDataCoordinates::Notation>(notation), precision);
+}
+
 qreal Coordinate::distance( qreal longitude, qreal latitude ) const
 {
     GeoDataCoordinates::Unit deg = GeoDataCoordinates::Degree;
@@ -96,6 +102,19 @@ bool Coordinate::operator == ( const Coordinate &other ) const
 bool Coordinate::operator != ( const Coordinate &other ) const
 {
     return !operator == ( other );
+}
+
+Coordinate::Notation Coordinate::defaultNotation()
+{
+    return static_cast<Coordinate::Notation>(GeoDataCoordinates::defaultNotation());
+}
+
+void Coordinate::setDefaultNotation(Coordinate::Notation defaultNotation)
+{
+    if (GeoDataCoordinates::defaultNotation() == static_cast<GeoDataCoordinates::Notation>(defaultNotation))
+        return;
+    GeoDataCoordinates::setDefaultNotation(static_cast<GeoDataCoordinates::Notation>(defaultNotation));
+    emit defaultNotationChanged(defaultNotation);
 }
 
 #include "moc_Coordinate.cpp"

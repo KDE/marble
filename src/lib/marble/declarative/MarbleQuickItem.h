@@ -41,6 +41,8 @@ namespace Marble
         Q_PROPERTY(int mapHeight READ mapHeight WRITE setMapHeight NOTIFY mapHeightChanged)
         Q_PROPERTY(int zoom READ zoom WRITE setZoom NOTIFY zoomChanged)
         Q_PROPERTY(int radius READ radius WRITE setRadius NOTIFY radiusChanged)
+        Q_PROPERTY(qreal heading READ heading WRITE setHeading NOTIFY headingChanged)
+
         Q_PROPERTY(bool showFrameRate READ showFrameRate WRITE setShowFrameRate NOTIFY showFrameRateChanged)
         Q_PROPERTY(Projection projection READ projection WRITE setProjection NOTIFY projectionChanged)
         Q_PROPERTY(QString mapThemeId READ mapThemeId WRITE setMapThemeId NOTIFY mapThemeIdChanged)
@@ -67,6 +69,7 @@ namespace Marble
         Q_PROPERTY(bool animationViewContext READ animationViewContext WRITE setAnimationViewContext NOTIFY animationViewContextChanged)
         Q_PROPERTY(bool animationsEnabled READ animationsEnabled WRITE setAnimationsEnabled NOTIFY animationsEnabledChanged)
         Q_PROPERTY(QQmlComponent* placemarkDelegate READ placemarkDelegate WRITE setPlacemarkDelegate NOTIFY placemarkDelegateChanged)
+        Q_PROPERTY(bool hoverEnabled READ hoverEnabled WRITE setHoverEnabled NOTIFY hoverEnabledChanged)
 
     public:
         explicit MarbleQuickItem(QQuickItem *parent = nullptr);
@@ -151,6 +154,9 @@ namespace Marble
         Q_INVOKABLE bool isRelationTypeVisible(const QString &relationType) const;
 
 
+        void setHeading(qreal heading);
+        void setHoverEnabled(bool hoverEnabled);
+
     public:
         void paint(QPainter *painter) override;
 
@@ -159,11 +165,15 @@ namespace Marble
         void classBegin() override;
         void componentComplete() override;
 
+        void hoverMoveEvent(QHoverEvent* event) override;
+
     public:
         virtual bool layersEventFilter(QObject *o, QEvent *e);
 
         int mapWidth() const;
         int mapHeight() const;
+        qreal heading() const;
+
         bool showFrameRate() const;
         Projection projection() const;
         QString mapThemeId() const;
@@ -189,6 +199,8 @@ namespace Marble
         Q_INVOKABLE QPointF screenCoordinatesFromGeoDataCoordinates(const GeoDataCoordinates & coordinates) const;
         Q_INVOKABLE bool screenCoordinatesFromGeoDataLineString(const GeoDataLineString &lineString, QVector<QPolygonF*> &polygons ) const;
 
+        Q_INVOKABLE bool screenCoordinatesToGeoDataCoordinates(const QPoint & point, GeoDataCoordinates & coordinates);
+        Q_INVOKABLE bool screenCoordinatesToCoordinate(const QPoint & point, Coordinate * coordinate);
         qreal speed() const;
         qreal angle() const;
 
@@ -204,6 +216,8 @@ namespace Marble
 
         QQmlComponent* placemarkDelegate() const;
         void reverseGeocoding(const QPoint &point);
+
+        bool hoverEnabled() const;
 
     Q_SIGNALS:
         void mapWidthChanged(int mapWidth);
@@ -231,6 +245,7 @@ namespace Marble
         void currentPositionChanged(Placemark* currentPosition);
         void angleChanged();
         void speedChanged();
+        void headingChanged(qreal heading);
         void zoomChanged();
         void radiusChanged(int radius);
         void inertialGlobeRotationChanged(bool inertialGlobeRotation);
@@ -238,6 +253,12 @@ namespace Marble
         void placemarkDelegateChanged(QQmlComponent* placemarkDelegate);
 
         void animationsEnabledChanged(bool animationsEnabled);
+
+        void hoverEnabledChanged(bool hoverEnabled);
+
+        void lmbMenuRequested(const QPoint& point);
+        void rmbMenuRequested(const QPoint& point);
+        void hoverPositionChanged(const QPoint& point);
 
     protected:
         QObject *getEventFilter() const;

@@ -31,6 +31,14 @@ namespace Marble
         connect(this, &QQuickItem::heightChanged, this, &GeoItem::updateScreenPosition);
     }
 
+    bool GeoItem::moveToScreenCoordinates(qreal x, qreal y)
+    {
+        return m_map->screenCoordinatesToGeoDataCoordinates(QPoint(x,y), m_coordinate);
+        updateScreenPosition();
+        emit longitudeChanged();
+        emit latitudeChanged();
+    }
+
     qreal GeoItem::longitude() const
     {
         return m_coordinate.longitude( GeoDataCoordinates::Degree );

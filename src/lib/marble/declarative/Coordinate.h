@@ -28,7 +28,18 @@ class Coordinate : public QObject
     Q_PROPERTY( qreal latitude  READ latitude  WRITE setLatitude  NOTIFY latitudeChanged )
     Q_PROPERTY( qreal altitude  READ altitude  WRITE setAltitude  NOTIFY altitudeChanged )
 
+    Q_PROPERTY( Notation defaultNotation READ defaultNotation WRITE setDefaultNotation NOTIFY defaultNotationChanged )
+
 public:
+    enum Notation{
+        Decimal, ///< "Decimal" notation (base-10)
+        DMS,     ///< "Sexagesimal DMS" notation (base-60)
+        DM,      ///< "Sexagesimal DM" notation (base-60)
+        UTM,
+        Astro    /// < "RA and DEC" notation (used for astronomical sky coordinates)
+    };
+    Q_ENUM(Notation)
+
     /** Constructor */
     explicit Coordinate( qreal lon = 0.0, qreal lat = 0.0, qreal altitude = 0.0, QObject *parent = nullptr );
     explicit Coordinate( const Marble::GeoDataCoordinates & coordinates );
@@ -57,6 +68,8 @@ public:
     /** Change all coordinates at once */
     void setCoordinates( const Marble::GeoDataCoordinates &coordinates );
 
+    Q_INVOKABLE QString toGeoString( Coordinate::Notation notation = Coordinate::DMS, int precision = -1 ) const;
+
     /** Distance (in meter) to the given coordinate */
     Q_INVOKABLE qreal distance( qreal longitude, qreal latitude ) const;
 
@@ -67,13 +80,19 @@ public:
 
     bool operator != ( const Coordinate &other ) const;
 
+    Notation defaultNotation();
+    void setDefaultNotation(Notation defaultNotation);
+
 Q_SIGNALS:
     void longitudeChanged();
     void latitudeChanged();
     void altitudeChanged();
 
+    void defaultNotationChanged(Notation defaultNotation);
+
 private:
     Marble::GeoDataCoordinates m_coordinate;
+    Notation m_defaultNotation;
 };
 
 QML_DECLARE_TYPE( Coordinate )
