@@ -187,7 +187,7 @@ endif()
 # Detect default for the user configurable MARBLE_DATA_PATH option
 
 if(WIN32)
-    set(data_dir ../data)
+    set(data_dir data)
     set(locale_dir "${data_dir}/locale")
     set(plugin_dir plugins)
 elseif(APPLE)

@@ -103,8 +103,9 @@ int main(int argc, char *argv[])
     // plugins. In mac be sure to look in the
     // application bundle...
 
-#ifdef Q_OS_WIN
-    QApplication::addLibraryPath( QApplication::applicationDirPath() );
+#ifdef Q_WS_WIN
+    QApplication::addLibraryPath( QApplication::applicationDirPath() 
+        + QDir::separator() + QLatin1String("plugins"));
 #endif
 #ifdef Q_OS_MACX
     QApplication::instance()->setAttribute(Qt::AA_DontShowIconsInMenus);
