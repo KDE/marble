@@ -40,6 +40,8 @@ namespace Marble
         Q_PROPERTY(int mapWidth READ mapWidth WRITE setMapWidth NOTIFY mapWidthChanged)
         Q_PROPERTY(int mapHeight READ mapHeight WRITE setMapHeight NOTIFY mapHeightChanged)
         Q_PROPERTY(int zoom READ zoom WRITE setZoom NOTIFY zoomChanged)
+        Q_PROPERTY(int minimumZoom READ minimumZoom NOTIFY minimumZoomChanged)
+        Q_PROPERTY(int maximumZoom READ maximumZoom NOTIFY maximumZoomChanged)
         Q_PROPERTY(int radius READ radius WRITE setRadius NOTIFY radiusChanged)
         Q_PROPERTY(qreal heading READ heading WRITE setHeading NOTIFY headingChanged)
 
@@ -153,7 +155,6 @@ namespace Marble
         Q_INVOKABLE void setRelationTypeVisible(const QString &relationType, bool visible);
         Q_INVOKABLE bool isRelationTypeVisible(const QString &relationType) const;
 
-
         void setHeading(qreal heading);
         void setHoverEnabled(bool hoverEnabled);
 
@@ -219,6 +220,16 @@ namespace Marble
 
         bool hoverEnabled() const;
 
+        Q_INVOKABLE void moveUp();
+        Q_INVOKABLE void moveDown();
+        Q_INVOKABLE void moveLeft();
+        Q_INVOKABLE void moveRight();
+
+
+        int minimumZoom() const;
+
+        int maximumZoom() const;
+
     Q_SIGNALS:
         void mapWidthChanged(int mapWidth);
         void mapHeightChanged(int mapHeight);
@@ -259,6 +270,9 @@ namespace Marble
         void lmbMenuRequested(const QPoint& point);
         void rmbMenuRequested(const QPoint& point);
         void hoverPositionChanged(const QPoint& point);
+
+        void minimumZoomChanged(int minimumZoom);
+        void maximumZoomChanged(int maximumZoom);
 
     protected:
         QObject *getEventFilter() const;

@@ -526,6 +526,26 @@ namespace Marble
         return d->m_hoverEnabled;
     }
 
+    void MarbleQuickItem::moveUp()
+    {
+        d->m_presenter.moveByStep( 0, -1, Marble::Automatic );
+    }
+
+    void MarbleQuickItem::moveDown()
+    {
+        d->m_presenter.moveByStep( 0, 1, Marble::Automatic );
+    }
+
+    void MarbleQuickItem::moveLeft()
+    {
+        d->m_presenter.moveByStep( -1, 0, Marble::Automatic );
+    }
+
+    void MarbleQuickItem::moveRight()
+    {
+        d->m_presenter.moveByStep( 1, 0, Marble::Automatic );
+    }
+
     qreal MarbleQuickItem::speed() const
     {
         return d->m_model.positionTracking()->speed();
@@ -1191,6 +1211,16 @@ namespace Marble
     int MarbleQuickItem::zoom() const
     {
         return d->m_presenter.logzoom();
+    }
+
+    int MarbleQuickItem::minimumZoom() const
+    {
+        return d->m_presenter.minimumZoom();
+    }
+
+    int MarbleQuickItem::maximumZoom() const
+    {
+        return d->m_presenter.maximumZoom();
     }
 
     bool MarbleQuickItem::layersEventFilter(QObject *, QEvent *)
