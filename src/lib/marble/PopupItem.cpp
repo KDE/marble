@@ -63,6 +63,7 @@ PopupItem::PopupItem( QObject* parent ) :
     m_widget->setVisible(true);
     m_widget->setAttribute(Qt::WA_DontShowOnScreen);
     m_widget->setAttribute( Qt::WA_NoSystemBackground, true );
+    m_widget->setAttribute(Qt::WA_QuitOnClose, false);
     QPalette palette = m_ui.webView->palette();
     palette.setBrush(QPalette::Base, Qt::transparent);
 #ifndef MARBLE_NO_WEBKITWIDGETS

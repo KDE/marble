@@ -265,42 +265,41 @@ int main(int argc, char *argv[])
 
     cmdLineSettings.insert( QLatin1String("geo-uri"), QVariant(geoUriString) );
 
-    MainWindow *window = new MainWindow( marbleDataPath, cmdLineSettings );
-    window->setAttribute( Qt::WA_DeleteOnClose, true );
+    MainWindow window( marbleDataPath, cmdLineSettings );
 
-//    window->marbleWidget()->rotateTo( 0, 0, -90 );
-//    window->show();
+//    window.marbleWidget()->rotateTo( 0, 0, -90 );
+//    window.show();
 
     for ( int i = 1; i < args.count(); ++i ) {
         const QString arg = args.at(i);
         if (arg == QLatin1String("--timedemo")) {
-            window->resize(900, 640);
-            MarbleTest marbleTest( window->marbleWidget() );
+            window.resize(900, 640);
+            MarbleTest marbleTest( window.marbleWidget() );
             marbleTest.timeDemo();
             return 0;
         }
 
         if (arg == QLatin1String("--fps")) {
-            window->marbleControl()->marbleWidget()->setShowFrameRate( true );
+            window.marbleControl()->marbleWidget()->setShowFrameRate( true );
         }
         else if (arg == QLatin1String("--tile-id")) {
-            window->marbleControl()->marbleWidget()->setShowTileId(true);
+            window.marbleControl()->marbleWidget()->setShowTileId(true);
         }
         else if (arg == QLatin1String("--runtimeTrace")) {
-            window->marbleControl()->marbleWidget()->setShowRuntimeTrace( true );
+            window.marbleControl()->marbleWidget()->setShowRuntimeTrace( true );
         }
         else if (arg == QLatin1String("--debug-polygons")) {
-            window->marbleControl()->marbleWidget()->setShowDebugPolygons( true );
+            window.marbleControl()->marbleWidget()->setShowDebugPolygons( true );
         }
         else if ( i != dataPathIndex && QFile::exists( arg ) ) {
-            window->addGeoDataFile(arg);
+            window.addGeoDataFile(arg);
         }
         else if (arg == QLatin1String("--debug-levels")) {
-            window->marbleWidget()->setDebugLevelTags(true);
+            window.marbleWidget()->setDebugLevelTags(true);
         }
     }
 
-    auto const marbleWidget = window->marbleControl()->marbleWidget();
+    auto const marbleWidget = window.marbleControl()->marbleWidget();
     bool const debugModeEnabled = marbleWidget->showRuntimeTrace() || marbleWidget->showDebugPolygons() ||
             marbleWidget->debugLevelTags() || MarbleDebug::isEnabled();
     marbleWidget->inputHandler()->setDebugModeEnabled(debugModeEnabled);
