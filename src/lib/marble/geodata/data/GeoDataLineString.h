@@ -384,6 +384,11 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry
     */
     GeoDataLineString optimized() const;
 
+    /*!
+        \brief Returns a javascript-style list (that can be used e.g. with the QML GeoPolyline element).
+    */
+    QVariantList toVariantList() const;
+
     // Serialization
 /*!
     \brief Serialize the LineString to a stream.

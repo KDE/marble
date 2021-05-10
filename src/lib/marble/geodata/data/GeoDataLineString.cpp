@@ -881,6 +881,30 @@ GeoDataLineString GeoDataLineString::optimized () const
     }
 }
 
+QVariantList GeoDataLineString::toVariantList() const
+{
+    Q_D(const GeoDataLineString);
+
+    QVariantList variantList;
+    for( const GeoDataCoordinates & itCoords : d->m_vector ) {
+        QVariantMap map;
+        map.insert("lon", itCoords.longitude(GeoDataCoordinates::Degree));
+        map.insert("lat", itCoords.latitude(GeoDataCoordinates::Degree));
+        map.insert("alt", itCoords.altitude());
+        variantList << map;
+    }
+
+    if (isClosed()) {
+        QVariantMap map;
+        map.insert("lon", d->m_vector.first().longitude(GeoDataCoordinates::Degree));
+        map.insert("lat", d->m_vector.first().latitude(GeoDataCoordinates::Degree));
+        map.insert("alt", d->m_vector.first().altitude());
+        variantList << map;
+    }
+
+    return variantList;
+}
+
 void GeoDataLineString::pack( QDataStream& stream ) const
 {
     Q_D(const GeoDataLineString);
