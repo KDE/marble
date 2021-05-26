@@ -24,6 +24,7 @@
   <name xml:lang="sv">Marble-kartor</name>
   <name xml:lang="uk">Карти Marble</name>
   <name xml:lang="x-test">xxMarble Mapsxx</name>
+  <name xml:lang="zh-CN">Marble 地图</name>
   <summary>Find your way</summary>
   <summary xml:lang="ca">Trobeu el camí</summary>
   <summary xml:lang="ca-valencia">Trobeu el camí</summary>
@@ -45,6 +46,7 @@
   <summary xml:lang="sv">Hitta rätt</summary>
   <summary xml:lang="uk">Знайдіть ваш шлях</summary>
   <summary xml:lang="x-test">xxFind your wayxx</summary>
+  <summary xml:lang="zh-CN">查找路线</summary>
   <description>
     <p>OpenStreetMap Navigation.</p>
     <p xml:lang="ca">Navegació de l'OpenStreetMap.</p>
@@ -67,6 +69,7 @@
     <p xml:lang="sv">Navigering med OpenStreetMap.</p>
     <p xml:lang="uk">Навігація OpenStreetMap.</p>
     <p xml:lang="x-test">xxOpenStreetMap Navigation.xx</p>
+    <p xml:lang="zh-CN">OpenStreetMap 导航。</p>
   </description>
   <url type="homepage">https://marble.kde.org/</url>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=marble</url>
