@@ -14,6 +14,7 @@
   <name xml:lang="fr">Cartes de Marble</name>
   <name xml:lang="id">Marble Maps</name>
   <name xml:lang="it">Marble Maps</name>
+  <name xml:lang="ko">Marble 지도</name>
   <name xml:lang="nl">Kaarten van Marble</name>
   <name xml:lang="pl">Mapy Marble</name>
   <name xml:lang="pt">Mapas do Marble</name>
@@ -35,6 +36,7 @@
   <summary xml:lang="fr">Trouver votre chemin</summary>
   <summary xml:lang="id">Temukan jalanmu</summary>
   <summary xml:lang="it">Trova la via</summary>
+  <summary xml:lang="ko">길 찾기</summary>
   <summary xml:lang="nl">Uw weg vinden</summary>
   <summary xml:lang="pl">Znajdź swoją drogę</summary>
   <summary xml:lang="pt">Descubra o seu caminho</summary>
@@ -57,6 +59,7 @@
     <p xml:lang="fr">Navigation avec OpenStreetMap.</p>
     <p xml:lang="id">Navigasi OpenStreetMap.</p>
     <p xml:lang="it">Navigazione con OpenStreetMap.</p>
+    <p xml:lang="ko">OpenStreetMap 내비게이션입니다.</p>
     <p xml:lang="nl">Navigeren met OpenStreetMap.</p>
     <p xml:lang="pl">Nawigacja OpenStreetMap.</p>
     <p xml:lang="pt">Navegação com o OpenStreetMap.</p>

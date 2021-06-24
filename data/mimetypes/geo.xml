@@ -18,6 +18,7 @@ Notes:
     <comment xml:lang="fi">GPX-paikkatieto</comment>
     <comment xml:lang="fr">Données géographiques « GPX »</comment>
     <comment xml:lang="it">Dati geografici GPX</comment>
+    <comment xml:lang="ko">GPX 지리 데이터</comment>
     <comment xml:lang="lt">GPX geografiniai duomenys</comment>
     <comment xml:lang="nl">Geografische gegevens GPX</comment>
     <comment xml:lang="nn">GPX-geografidata</comment>
@@ -54,6 +55,7 @@ Notes:
     <comment xml:lang="fi">OSM-data</comment>
     <comment xml:lang="fr">Données « OSM »</comment>
     <comment xml:lang="it">Dati OSM</comment>
+    <comment xml:lang="ko">OSM 데이터</comment>
     <comment xml:lang="lt">OSM duomenys</comment>
     <comment xml:lang="nl">Gegevens OSM</comment>
     <comment xml:lang="nn">OSM-data</comment>
@@ -89,6 +91,7 @@ Notes:
     <comment xml:lang="eu">ESRI forma-fitxategia</comment>
     <comment xml:lang="fr">Fichier de formes « ESRI »</comment>
     <comment xml:lang="it">Shapefile ESRI</comment>
+    <comment xml:lang="ko">ESRI 모양 파일</comment>
     <comment xml:lang="nl">Vormbestand ESRI</comment>
     <comment xml:lang="nn">ESRI-shapefile</comment>
     <comment xml:lang="pa">ESRI ਸ਼ਕਲ-ਫਾਇਲ</comment>
@@ -118,6 +121,7 @@ Notes:
     <comment xml:lang="eu">ESRI forma-fitxategiaren indizea</comment>
     <comment xml:lang="fr">Index du fichier de formes « ESRI »</comment>
     <comment xml:lang="it">Indice Shapefile ESRI</comment>
+    <comment xml:lang="ko">ESRI 모양 파일 인덱스</comment>
     <comment xml:lang="nl">Index vormbestand ESRI</comment>
     <comment xml:lang="nn">ESRI-shapefile-indeks</comment>
     <comment xml:lang="pa">ESRI ਸ਼ਕਲ-ਫਾਇਲ ਇੰਡੈਕਸ</comment>
