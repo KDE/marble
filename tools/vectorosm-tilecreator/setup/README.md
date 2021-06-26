@@ -1,7 +1,6 @@
 # Server-side setup notes
 
-Note: so far this is the prototype setup for a proposed dynamic generation of high-z tiles, not what is
-actually deployed as of mid 2020.
+Note: this has been deployed to maps.kde.org in November 2020.
 
 ## Overview
 
