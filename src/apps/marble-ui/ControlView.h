@@ -127,7 +127,6 @@ class ControlView : public QWidget
 
 Q_SIGNALS:
     void showMapWizard();
-    void showUploadDialog();
     void mapThemeDeleted();
 
 protected:

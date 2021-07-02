@@ -660,8 +660,6 @@ void MapViewWidget::Private::showContextMenu( const QPoint& pos )
     if (QFileInfo(MarbleDirs::localPath() + QLatin1String("/maps/") + currentThemePath()).exists()) {
         menu.addAction( tr( "&Delete Map Theme" ), q, SLOT(deleteMap()) );
     }
-    menu.addAction( tr( "&Upload Map..." ), q, SIGNAL(showUploadDialog()) );
-    menu.exec( m_mapViewUi.marbleThemeSelectView->mapToGlobal( pos ) );
 }
 
 void MapViewWidget::Private::deleteMap()
