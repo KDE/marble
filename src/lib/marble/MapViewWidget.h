@@ -75,7 +75,6 @@ private Q_SLOTS:
     void mapThemeIdChanged( const QString& );
     void projectionChanged( Projection );
     void showMapWizard();
-    void showUploadDialog();
     void mapThemeDeleted();
 
  private:

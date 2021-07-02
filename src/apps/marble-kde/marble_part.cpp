@@ -198,7 +198,6 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QVariantLi
         break;
     }
 
-    connect( m_controlView, SIGNAL(showUploadDialog()), this, SLOT(showUploadNewStuffDialog()) );
     connect( m_controlView, SIGNAL(showMapWizard()), this, SLOT(showMapWizard()) );
     connect( m_controlView, SIGNAL(mapThemeDeleted()), this, SLOT(fallBackToDefaultTheme()) );
 }
@@ -1318,19 +1317,6 @@ void MarblePart::showNewStuffDialog()
 {
     QPointer<MapThemeDownloadDialog> dialog( new MapThemeDownloadDialog( m_controlView->marbleWidget() ) );
     dialog->exec();
-    delete dialog;
-}
-
-void MarblePart::showUploadNewStuffDialog()
-{
-    QString  newStuffConfig = QStandardPaths::locate( QStandardPaths::GenericDataLocation, "marble/marble.knsrc" );
-    qDebug() << "KNS config file:" << newStuffConfig;
-
-    QPointer<KNS3::UploadDialog> dialog( new KNS3::UploadDialog( newStuffConfig, m_controlView ) );
-    qDebug() << "Creating the archive";
-    dialog->setUploadFile( QUrl( MapWizard::createArchive( m_controlView, m_controlView->marbleWidget()->mapThemeId() ) ) );
-    dialog->exec();
-    MapWizard::deleteArchive( m_controlView->marbleWidget()->mapThemeId() );
     delete dialog;
 }
 

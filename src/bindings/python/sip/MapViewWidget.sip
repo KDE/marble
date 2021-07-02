@@ -31,7 +31,6 @@ public:
     void                    setMarbleWidget (Marble::MarbleWidget* widget);
 signals:
     void                    showMapWizard ();
-    void                    showUploadDialog ();
 public:
     void                    setMapThemeId (const QString&);
     void                    setProjection (Marble::Projection projection);
