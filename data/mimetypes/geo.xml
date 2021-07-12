@@ -89,6 +89,7 @@ Notes:
     <comment xml:lang="en_GB">ESRI Shapefile</comment>
     <comment xml:lang="es">Archivo de formas ESRI</comment>
     <comment xml:lang="eu">ESRI forma-fitxategia</comment>
+    <comment xml:lang="fi">ESRI Shapefile</comment>
     <comment xml:lang="fr">Fichier de formes « ESRI »</comment>
     <comment xml:lang="it">Shapefile ESRI</comment>
     <comment xml:lang="ko">ESRI 모양 파일</comment>
@@ -119,6 +120,7 @@ Notes:
     <comment xml:lang="en_GB">ESRI Shapefile Index</comment>
     <comment xml:lang="es">Índice de archivo de formas ESRI</comment>
     <comment xml:lang="eu">ESRI forma-fitxategiaren indizea</comment>
+    <comment xml:lang="fi">ESRI Shapefile -hakemisto</comment>
     <comment xml:lang="fr">Index du fichier de formes « ESRI »</comment>
     <comment xml:lang="it">Indice Shapefile ESRI</comment>
     <comment xml:lang="ko">ESRI 모양 파일 인덱스</comment>
