@@ -166,15 +166,17 @@ QString MarbleDirs::systemPath()
     return systempath;
 #endif
 
-    return QDir( QCoreApplication::applicationDirPath() 
+    // This is the preferred fallback location if no marbleDataPath is set.
+    systempath = QDir( QCoreApplication::applicationDirPath() + QLatin1String( "/data" ) ).canonicalPath();
 
-// TODO: QTONLY definition was removed during Qt5/KF5 port, check what code should do
-#if defined(QTONLY)
-                     + QLatin1String( "/data" )
-#else
-                     + QLatin1String( "/../share/apps/marble/data" )
-#endif
-                     ).canonicalPath();
+    if ( QFile::exists( systempath ) ){
+      return systempath;
+    }
+
+    // This fallback location is for compatibility with KDE installations.
+    return QDir( QCoreApplication::applicationDirPath()
+                 + QLatin1String( "/../share/apps/marble/data" )
+                 ).canonicalPath();
 }
 
 QString MarbleDirs::pluginSystemPath()
@@ -223,15 +225,17 @@ QString MarbleDirs::pluginSystemPath()
     return "assets:/plugins";
 #endif
 
-    return QDir( QCoreApplication::applicationDirPath() 
+    // This is the preferred fallback location if no marblePluginPath is set.
+    systempath = QDir( QCoreApplication::applicationDirPath() + QLatin1String( "/plugins" ) ).canonicalPath();
 
-// TODO: QTONLY definition was removed during Qt5/KF5 port, check what code should do
-#if defined(QTONLY)
-                     + QLatin1String( "/plugins" )
-#else
-                     + QLatin1String( "/../lib/kde4/plugins/marble" )
-#endif
-                     ).canonicalPath();
+    if ( QFile::exists( systempath ) ){
+      return systempath;
+    }
+
+    // This ultimate fallback location is for compatibility with KDE installations.
+    return QDir( QCoreApplication::applicationDirPath()
+                 + QLatin1String( "/../lib/kde4/plugins/marble" )
+                 ).canonicalPath();
 }
 
 QString MarbleDirs::localPath() 
