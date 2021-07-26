@@ -256,6 +256,7 @@ namespace Marble
         connect(&d->m_map, &MarbleMap::radiusChanged, this, &MarbleQuickItem::zoomChanged);
         connect(&d->m_reverseGeocoding, SIGNAL(reverseGeocodingFinished(GeoDataCoordinates,GeoDataPlacemark)),
                 this, SLOT(handleReverseGeocoding(GeoDataCoordinates,GeoDataPlacemark)));
+        connect(&d->m_map, &MarbleMap::visibleLatLonAltBoxChanged, this, &MarbleQuickItem::handleVisibleLatLonAltBoxChanged);
 
         setAcceptedMouseButtons(Qt::AllButtons);
         installEventFilter(&d->m_inputHandler);
@@ -337,6 +338,16 @@ namespace Marble
         if (d->m_placemark && d->m_placemark->placemark().coordinate() == coordinates) {
             d->m_placemark->setGeoDataPlacemark(placemark);
             updatePlacemarks();
+        }
+    }
+
+    void MarbleQuickItem::handleVisibleLatLonAltBoxChanged(const GeoDataLatLonAltBox &latLonAltBox)
+    {
+        Q_UNUSED(latLonAltBox)
+
+        if (d->m_heading != d->m_map.heading()) {
+            d->m_heading = d->m_map.heading();
+            emit headingChanged(d->m_heading);
         }
     }
 

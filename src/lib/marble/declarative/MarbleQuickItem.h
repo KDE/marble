@@ -286,6 +286,7 @@ namespace Marble
         void updateCurrentPosition(const GeoDataCoordinates & coordinates);
         void updatePlacemarks();
         void handleReverseGeocoding(const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark);
+        void handleVisibleLatLonAltBoxChanged(const GeoDataLatLonAltBox& latLonAltBox);
 
     private:
         using MarbleQuickItemPrivatePtr = QSharedPointer<MarbleQuickItemPrivate>;
