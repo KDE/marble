@@ -1,0 +1,13 @@
+# SPDX-FileCopyrightText: none
+# SPDX-License-Identifier: CC0-1.0
+include:
+  - https://invent.kde.org/sysadmin/ci-tooling/raw/master/invent/ci-before.yml
+  - https://invent.kde.org/sysadmin/ci-tooling/raw/master/invent/ci-applications-linux.yml
+
+build:suse:
+  stage: build
+  image: "kdeorg/ci-suse-qt515"
+  extends: .linux
+  variables:
+    PLATFORM: SUSEQt5.15
+    BRANCH_GROUP: kf5-qt5
