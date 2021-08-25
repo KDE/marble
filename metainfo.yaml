@@ -5,7 +5,7 @@ logo: data/icons/128-apps-marble.png
 platforms:
     - name: Linux
     - name: Windows
-    - name: MacOSX
+    - name: macOS
     - name: Android
 
 public_lib: true
