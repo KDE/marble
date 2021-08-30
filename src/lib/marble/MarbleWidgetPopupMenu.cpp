@@ -72,6 +72,7 @@ public:
     QAction *m_directionsToHereAction;
 
     QAction *const m_copyCoordinateAction;
+    QAction *const m_copyGeoAction;
 
     QAction *m_rmbExtensionPoint;
 
@@ -108,6 +109,7 @@ MarbleWidgetPopupMenu::Private::Private( MarbleWidget *widget, const MarbleModel
     m_directionsFromHereAction( nullptr ),
     m_directionsToHereAction( nullptr ),
     m_copyCoordinateAction(new QAction(QIcon(QStringLiteral(":/icons/copy-coordinates.png")), tr("Copy Coordinates"), parent)),
+    m_copyGeoAction(new QAction(QIcon(QStringLiteral(":/icons/copy-coordinates.png")), tr("Copy geo: URL"), parent)),
     m_rmbExtensionPoint( nullptr ),
     m_runnerManager( model )
 {
@@ -145,6 +147,7 @@ MarbleWidgetPopupMenu::Private::Private( MarbleWidget *widget, const MarbleModel
     m_rmbMenu.addAction( addBookmark );
     if ( !smallScreen ) {
         m_rmbMenu.addAction( m_copyCoordinateAction );
+        m_rmbMenu.addAction( m_copyGeoAction );
     }
     m_rmbMenu.addAction(QIcon(QStringLiteral(":/icons/addressbook-details.png")), tr("&Address Details"), parent, SLOT(startReverseGeocoding()));
     m_rmbMenu.addSeparator();
@@ -162,6 +165,7 @@ MarbleWidgetPopupMenu::Private::Private( MarbleWidget *widget, const MarbleModel
     parent->connect( addBookmark, SIGNAL(triggered()), SLOT(addBookmark()) );
     parent->connect( aboutDialogAction, SIGNAL(triggered()), SLOT(slotAboutDialog()) );
     parent->connect( m_copyCoordinateAction, SIGNAL(triggered()), SLOT(slotCopyCoordinates()) );
+    parent->connect( m_copyGeoAction, SIGNAL(triggered()), SLOT(slotCopyGeo()) );
     parent->connect( m_infoDialogAction, SIGNAL(triggered()), SLOT(slotInfoDialog()) );
     parent->connect( fullscreenAction, SIGNAL(triggered(bool)), parent, SLOT(toggleFullscreen(bool)) );
 
@@ -618,6 +622,7 @@ void MarbleWidgetPopupMenu::showRmbMenu( int xpos, int ypos )
 
     QPoint curpos = QPoint( xpos, ypos );
     d->m_copyCoordinateAction->setData( curpos );
+    d->m_copyGeoAction->setData( curpos );
 
     bool const showDirectionButtons = d->m_widget->routingLayer() && d->m_widget->routingLayer()->isInteractive();
     d->m_directionsFromHereAction->setVisible( showDirectionButtons );
@@ -785,6 +790,22 @@ void MarbleWidgetPopupMenu::slotCopyCoordinates()
 	    clipboard->setMimeData(myMimeData);
     }
 }
+
+void MarbleWidgetPopupMenu::slotCopyGeo()
+{
+    const GeoDataCoordinates coordinates = d->mouseCoordinates( d->m_copyCoordinateAction );
+    if ( coordinates.isValid() ) {
+        const qreal latitude_degrees = coordinates.latitude(GeoDataCoordinates::Degree);
+        const qreal longitude_degrees = coordinates.longitude(GeoDataCoordinates::Degree);
+
+        QMimeData * const myMimeData = new QMimeData();
+        QList<QUrl> urls = { QUrl(QString("geo:%1,%2").arg(latitude_degrees, 0, 'f', 10).arg(longitude_degrees, 0, 'f', 10)) };
+        myMimeData->setUrls(urls);
+        QClipboard * const clipboard = QApplication::clipboard();
+        clipboard->setMimeData(myMimeData);
+    }
+}
+
 
 void MarbleWidgetPopupMenu::slotAboutDialog()
 {
