@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     This xml file is free software licensed under the GNU LGPL. You can
-     find a copy of this license in LICENSE.txt in the top directory of
-     the source code.
+    SPDX-License-Identifier: LGPL-2.1-or-later
+    SPDX-FileCopyrightText: 2015 Torsten Rahn <tackat@kde.org>
 -->
 <dgml xmlns="http://edu.kde.org/marble/dgml/2.0">
     <document>
