@@ -1,14 +1,6 @@
 /*
-
-    Author    :  Angus Johnson
-    Version   :  6.4.2
-    Date      :  27 February 2017
-    Website   :  http://www.angusj.com
-    Copyright :  Angus Johnson 2010-2017
-
-    License:
-    Use, modification & distribution is subject to Boost Software License Ver 1.
-    https://www.boost.org/LICENSE_1_0.txt
+    SPDX-FileCopyrightText: 2010-2017 Angus Johnson <http://www.angusj.com>
+    SPDX-License-Identifier: MIT
 
     Attributions:
     The code in this library is an extension of Bala Vatti's clipping algorithm:
