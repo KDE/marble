@@ -4,11 +4,9 @@
 #
 # This file is part of the Marble Virtual Globe.  
 #
-# This program is free software licensed under the GNU LGPL. You can
-# find a copy of this license in LICENSE.txt in the top directory of
-# the source code.
+# SPDX-License-Identifier: LGPL-2.1-or-later
 #
-# Copyright 2016 Akshat Tandon <akshat.tandon@research.iiit.ac.in>
+# SPDX-FileCopyrightText: 2016 Akshat Tandon <akshat.tandon@research.iiit.ac.in>
 #
 """
 Generates low level tiles for Marble using Natural Earth data

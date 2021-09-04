@@ -1,14 +1,12 @@
 //
 // This file is part of the Marble Virtual Globe.
 //
-// This program is free software licensed under the GNU LGPL. You can
-// find a copy of this license in LICENSE.txt in the top directory of
-// the source code.
+// SPDX-License-Identifier: LGPL-2.1-or-later
 //
-// Copyright 2007      Murad Tagirov <tmurad@gmail.com>
-// Copyright 2009      Patrick Spendrin <ps_ml@gmx.de>
-// Copyright 2015      Marius-Valeriu Stanciu <stanciumarius94@gmail.com>
-// Copyright 2016      Dennis Nienhüser <nienhueser@kde.org>
+// SPDX-FileCopyrightText: 2007 Murad Tagirov <tmurad@gmail.com>
+// SPDX-FileCopyrightText: 2009 Patrick Spendrin <ps_ml@gmx.de>
+// SPDX-FileCopyrightText: 2015 Marius-Valeriu Stanciu <stanciumarius94@gmail.com>
+// SPDX-FileCopyrightText: 2016 Dennis Nienhüser <nienhueser@kde.org>
 //
 
 #include "StyleBuilder.h"

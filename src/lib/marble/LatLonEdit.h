@@ -1,12 +1,10 @@
 //
 // This file is part of the Marble Virtual Globe.
 //
-// This program is free software licensed under the GNU LGPL. You can
-// find a copy of this license in LICENSE.txt in the top directory of
-// the source code.
+// SPDX-License-Identifier: LGPL-2.1-or-later
 //
-// Copyright 2008 Henry de Valence <hdevalence@gmail.com>
-// Copyright 2011 Friedrich W. H. Kossebau <kossebau@kde.org>
+// SPDX-FileCopyrightText: 2008 Henry de Valence <hdevalence@gmail.com>
+// SPDX-FileCopyrightText: 2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
 #ifndef MARBLE_LATLONEDIT_H
 #define MARBLE_LATLONEDIT_H

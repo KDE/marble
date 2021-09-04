@@ -1,6 +1,6 @@
 /*
-    Copyright (C) 2008 Patrick Spendrin <ps_ml@gmx.de>
-    Copyright (C) 2009 Bastian Holst <bastianholst@gmx.de>
+    SPDX-FileCopyrightText: 2008 Patrick Spendrin <ps_ml@gmx.de>
+    SPDX-FileCopyrightText: 2009 Bastian Holst <bastianholst@gmx.de>
 
     This file is part of the KDE project
 

@@ -1,14 +1,12 @@
 //
 // This file is part of the Marble Virtual Globe.
 //
-// This program is free software licensed under the GNU LGPL. You can
-// find a copy of this license in LICENSE.txt in the top directory of
-// the source code.
+// SPDX-License-Identifier: LGPL-2.1-or-later
 //
-// Copyright 2007-2010  Torsten Rahn <tackat@kde.org>
-// Copyright 2007       Inge Wallin  <ingwa@kde.org>
-// Copyright 2010       Jens-Michael Hoffmann <jensmh@gmx.de>
-// Copyright 2010-2013 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+// SPDX-FileCopyrightText: 2007-2010 Torsten Rahn <tackat@kde.org>
+// SPDX-FileCopyrightText: 2007 Inge Wallin <ingwa@kde.org>
+// SPDX-FileCopyrightText: 2010 Jens-Michael Hoffmann <jensmh@gmx.de>
+// SPDX-FileCopyrightText: 2010-2013 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #ifndef MARBLE_STACKEDTILE_H

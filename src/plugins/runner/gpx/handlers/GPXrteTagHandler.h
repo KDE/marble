@@ -14,8 +14,8 @@
     You should have received a copy of the GNU Library General Public License
     along with this library. If not, see <http://www.gnu.org/licenses/>.
 
-    Copyright 2010 Thibaut GRIDEL <tgridel@free.fr>
-    Copyright 2011 Anders Lund <anders@alweb.dk>
+    SPDX-FileCopyrightText: 2010 Thibaut GRIDEL <tgridel@free.fr>
+    SPDX-FileCopyrightText: 2011 Anders Lund <anders@alweb.dk>
 */
 
 #ifndef MARBLE_GPX_RTETAGHANDLER_H

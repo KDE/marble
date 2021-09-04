@@ -1,5 +1,5 @@
 /*
-Copyright 2010  Christian Vetter veaac.fdirct@gmail.com
+SPDX-FileCopyrightText: 2010 Christian Vetter veaac.fdirct @gmail.com
 
 This file is part of MoNav.
 

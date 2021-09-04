@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE->txt in the top directory of
 // the source code->
 //
-// Copyright 2012      Mohammed Nafees <nafees.technocool@gmail.com>
+// SPDX-FileCopyrightText: 2012 Mohammed Nafees <nafees.technocool@gmail.com>
 //
 
 #ifndef GEODATASCREENOVERLAY_P_H

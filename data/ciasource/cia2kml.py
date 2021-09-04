@@ -2,16 +2,14 @@
 # -*- coding: iso-8859-1 -*-
 # This file is part of the Marble Virtual Globe.
 #
-# This program is free software licensed under the GNU LGPL. You can
-# find a copy of this license in LICENSE.txt in the top directory of
-# the source code.
+# SPDX-License-Identifier: LGPL-2.1-or-later
 #
 # This python script parses the CIA Factbook 2007 for country data and 
 # saves it in KML format
 # Place this script in the root directory of the CIA Factbook 
 # (usually "factbook") and run it.
 #
-# Copyright 2004-2007 Torsten Rahn  <tackat@kde.org>"
+# SPDX-FileCopyrightText: 2004-2007 Torsten Rahn <tackat@kde.org>"
 #
 
 import urllib, urllib2, re

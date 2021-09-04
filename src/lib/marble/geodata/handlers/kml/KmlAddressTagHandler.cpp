@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2017 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+    SPDX-FileCopyrightText: 2017 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 
     This file is part of the KDE project
 

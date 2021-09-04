@@ -14,7 +14,7 @@
     You should have received a copy of the GNU Library General Public License
     along with this library. If not, see <http://www.gnu.org/licenses/>.
 
-    Copyright 2009 Thibaut GRIDEL <tgridel@free.fr>
+    SPDX-FileCopyrightText: 2009 Thibaut GRIDEL <tgridel@free.fr>
 */
 
 #ifndef MARBLE_GPX_WPTTAGHANDLER_H

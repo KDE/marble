@@ -1,6 +1,6 @@
 #!env python
 #
-#    Copyright 2008 Simon Edwards <simon@simonzone.com>
+#    SPDX-FileCopyrightText: 2008 Simon Edwards <simon@simonzone.com>
 #
 #    This file is part of the Marble Virtual Globe.
 #

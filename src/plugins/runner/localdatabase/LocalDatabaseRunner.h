@@ -1,11 +1,9 @@
 //
 // This file is part of the Marble Virtual Globe.
 //
-// This program is free software licensed under the GNU LGPL. You can
-// find a copy of this license in LICENSE.txt in the top directory of
-// the source code.
+// SPDX-License-Identifier: LGPL-2.1-or-later
 //
-// Copyright 2010 Torsten Rahn <rahn@kde.org>
+// SPDX-FileCopyrightText: 2010 Torsten Rahn <rahn@kde.org>
 //
 
 #ifndef MARBLE_LOCALDATABASERUNNER_H

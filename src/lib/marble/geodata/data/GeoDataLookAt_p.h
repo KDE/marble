@@ -1,12 +1,10 @@
 //
 // This file is part of the Marble Virtual Globe.
 //
-// This program is free software licensed under the GNU LGPL. You can
-// find a copy of this license in LICENSE.txt in the top directory of
-// the source code.
+// SPDX-License-Identifier: LGPL-2.1-or-later
 //
-// Copyright 2009      Gaurav Gupta <1989.gaurav@googlemail.com>
-// Copyright 2010      Bastian Holst <bastianholst@gmx.de>
+// SPDX-FileCopyrightText: 2009 Gaurav Gupta <1989.gaurav@googlemail.com>
+// SPDX-FileCopyrightText: 2010 Bastian Holst <bastianholst@gmx.de>
 //
 
 #ifndef MARBLE_GEODATALOOKAT_P_H

@@ -1,9 +1,7 @@
 //
 // This file is part of the Marble Virtual Globe.
 //
-// This program is free software licensed under the GNU LGPL. You can
-// find a copy of this license in LICENSE.txt in the top directory of
-// the source code.
+// SPDX-License-Identifier: LGPL-2.1-or-later
 //
 // This file is based on qzipreader_p.h from Qt with the original license
 // below, taken from
@@ -12,7 +10,7 @@
 
 /****************************************************************************
 **
-** Copyright (C) 2015 The Qt Company Ltd.
+** SPDX-FileCopyrightText: 2015 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of the QtGui module of the Qt Toolkit.

@@ -1,10 +1,8 @@
 // This file is part of the Marble Virtual Globe.
 //
-// This program is free software licensed under the GNU LGPL. You can
-// find a copy of this license in LICENSE.txt in the top directory of
-// the source code.
+// SPDX-License-Identifier: LGPL-2.1-or-later
 //
-// Copyright 2011      Dennis Nienhüser <nienhueser@kde.org>
+// SPDX-FileCopyrightText: 2011 Dennis Nienhüser <nienhueser@kde.org>
 
 // A (gps) tracking example. Shows the current (gps) position on the map
 // using a small ghost image. The visibility of the track can be toggled.

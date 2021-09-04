@@ -1,13 +1,11 @@
 //
 // This file is part of the Marble Virtual Globe.
 //
-// This program is free software licensed under the GNU LGPL. You can
-// find a copy of this license in LICENSE.txt in the top directory of
-// the source code.
+// SPDX-License-Identifier: LGPL-2.1-or-later
 //
-// Copyright 2008      Patrick Spendrin  <ps_ml@gmx.de>
-// Copyright 2010      Thibaut Gridel  <tgridel@free.fr>
-// Copyright 2011-2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+// SPDX-FileCopyrightText: 2008 Patrick Spendrin <ps_ml@gmx.de>
+// SPDX-FileCopyrightText: 2010 Thibaut Gridel <tgridel@free.fr>
+// SPDX-FileCopyrightText: 2011-2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #ifndef MARBLE_GEOMETRYLAYER_H

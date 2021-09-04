@@ -1,13 +1,11 @@
 //
 // This file is part of the Marble Virtual Globe.
 //
-// This program is free software licensed under the GNU LGPL. You can
-// find a copy of this license in LICENSE.txt in the top directory of
-// the source code.
+// SPDX-License-Identifier: LGPL-2.1-or-later
 //
-// Copyright 2007      Murad Tagirov <tmurad@gmail.com>
-// Copyright 2007      Inge Wallin   <inge@lysator.liu.se>
-// Copyright 2009      Patrick Spendrin <ps_ml@gmx.de>
+// SPDX-FileCopyrightText: 2007 Murad Tagirov <tmurad@gmail.com>
+// SPDX-FileCopyrightText: 2007 Inge Wallin <inge@lysator.liu.se>
+// SPDX-FileCopyrightText: 2009 Patrick Spendrin <ps_ml@gmx.de>
 //
 
 

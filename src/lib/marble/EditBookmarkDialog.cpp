@@ -1,13 +1,11 @@
 //
 // This file is part of the Marble Virtual Globe.
 //
-// This program is free software licensed under the GNU LGPL. You can
-// find a copy of this license in LICENSE.txt in the top directory of
-// the source code.
+// SPDX-License-Identifier: LGPL-2.1-or-later
 //
-// Copyright 2010 Gaurav Gupta <1989.gaurav@googlemail.com>
-// Copyright 2011 Friedrich W. H. Kossebau <kossebau@kde.org>
-// Copyright 2012 Thibaut Gridel <tgridel@free.fr>
+// SPDX-FileCopyrightText: 2010 Gaurav Gupta <1989.gaurav@googlemail.com>
+// SPDX-FileCopyrightText: 2011 Friedrich W. H. Kossebau <kossebau@kde.org>
+// SPDX-FileCopyrightText: 2012 Thibaut Gridel <tgridel@free.fr>
 //
 
 #include "EditBookmarkDialog.h"

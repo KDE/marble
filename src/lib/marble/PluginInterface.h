@@ -1,15 +1,13 @@
 //
 // This file is part of the Marble Virtual Globe.
 //
-// This program is free software licensed under the GNU LGPL. You can
-// find a copy of this license in LICENSE.txt in the top directory of
-// the source code.
+// SPDX-License-Identifier: LGPL-2.1-or-later
 //
 // Most of the code is taken from MarbleRenderPluginInterface.h
 // by Torsten Rahn and Inge Wallin.
 //
-// Copyright 2009 Jens-Michael Hoffmann <jensmh@gmx.de>
-// Copyright 2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+// SPDX-FileCopyrightText: 2009 Jens-Michael Hoffmann <jensmh@gmx.de>
+// SPDX-FileCopyrightText: 2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 #ifndef MARBLE_PLUGININTERFACE_H
 #define MARBLE_PLUGININTERFACE_H

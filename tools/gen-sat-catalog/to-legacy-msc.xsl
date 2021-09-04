@@ -19,7 +19,7 @@
         xsltproc to-legacy-msc.xsl PlanetarySatellites.xml \
             > PlanetarySatellites.msc
 
-    Copyright 2013 Rene Kuettner <rene@bitkanal.net>
+    SPDX-FileCopyrightText: 2013 Rene Kuettner <rene@bitkanal.net>
 -->
 <xsl:stylesheet
     version="1.0"

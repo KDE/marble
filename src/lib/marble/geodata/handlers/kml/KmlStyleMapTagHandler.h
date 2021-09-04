@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2008 Patrick Spendrin <ps_ml@gmx.de>
+    SPDX-FileCopyrightText: 2008 Patrick Spendrin <ps_ml@gmx.de>
 
     This file is part of the KDE project
 

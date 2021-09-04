@@ -1,6 +1,6 @@
 /*
-    Copyright (C) 2007 Nikolas Zimmermann <zimmermann@kde.org>
-    Copyright (C) 2007 Murad Tagirov <tmurad@gmail.com>
+    SPDX-FileCopyrightText: 2007 Nikolas Zimmermann <zimmermann@kde.org>
+    SPDX-FileCopyrightText: 2007 Murad Tagirov <tmurad@gmail.com>
 
     This file is part of the KDE project
 

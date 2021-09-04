@@ -1,6 +1,6 @@
 /*
-    Copyright (C) 2008 Nikolas Zimmermann <zimmermann@kde.org>
-    Copyright (C) 2008 Jens-Michael Hoffmann <jensmh@gmx.de>
+    SPDX-FileCopyrightText: 2008 Nikolas Zimmermann <zimmermann@kde.org>
+    SPDX-FileCopyrightText: 2008 Jens-Michael Hoffmann <jensmh@gmx.de>
 
     This file is part of the KDE project
 

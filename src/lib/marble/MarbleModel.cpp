@@ -1,16 +1,14 @@
 //
 // This file is part of the Marble Virtual Globe.
 //
-// This program is free software licensed under the GNU LGPL. You can
-// find a copy of this license in LICENSE.txt in the top directory of
-// the source code.
+// SPDX-License-Identifier: LGPL-2.1-or-later
 //
-// Copyright 2006-2007 Torsten Rahn <tackat@kde.org>
-// Copyright 2007      Inge Wallin  <ingwa@kde.org>
-// Copyright 2008, 2009, 2010 Jens-Michael Hoffmann <jmho@c-xx.com>
-// Copyright 2008-2009      Patrick Spendrin <ps_ml@gmx.de>
-// Copyright 2010-2013  Bernhard Beschow  <bbeschow@cs.tu-berlin.de>
-// Copyright 2014 Abhinav Gangwar <abhgang@gmail.com>
+// SPDX-FileCopyrightText: 2006-2007 Torsten Rahn <tackat@kde.org>
+// SPDX-FileCopyrightText: 2007 Inge Wallin <ingwa@kde.org>
+// SPDX-FileCopyrightText: 2008, 2009, 2010 Jens-Michael Hoffmann <jmho@c-xx.com>
+// SPDX-FileCopyrightText: 2008-2009 Patrick Spendrin <ps_ml@gmx.de>
+// SPDX-FileCopyrightText: 2010-2013 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+// SPDX-FileCopyrightText: 2014 Abhinav Gangwar <abhgang@gmail.com>
 //
 
 #include "MarbleModel.h"

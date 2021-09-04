@@ -1,13 +1,11 @@
 //
 // This file is part of the Marble Project.
 //
-// This program is free software licensed under the GNU LGPL. You can
-// find a copy of this license in LICENSE.txt in the top directory of
-// the source code.
+// SPDX-License-Identifier: LGPL-2.1-or-later
 //
-// Copyright 2006-2007 Torsten Rahn <tackat@kde.org>
-// Copyright 2007-2008 Inge Wallin  <ingwa@kde.org>
-// Copyright 2011 Niko Sams <niko.sams@gmail.com>
+// SPDX-FileCopyrightText: 2006-2007 Torsten Rahn <tackat@kde.org>
+// SPDX-FileCopyrightText: 2007-2008 Inge Wallin <ingwa@kde.org>
+// SPDX-FileCopyrightText: 2011 Niko Sams <niko.sams@gmail.com>
 //
 
 #include "TileCreator.h"

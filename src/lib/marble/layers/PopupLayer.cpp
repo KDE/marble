@@ -1,14 +1,12 @@
 //
 // This file is part of the Marble Virtual Globe.
 //
-// This program is free software licensed under the GNU LGPL. You can
-// find a copy of this license in LICENSE.txt in the top directory of
-// the source code.
+// SPDX-License-Identifier: LGPL-2.1-or-later
 //
-// Copyright 2012   Mohammed Nafees   <nafees.technocool@gmail.com>
-// Copyright 2012   Dennis Nienhüser  <nienhueser@kde.org>
-// Copyright 2012   Illya Kovalevskyy <illya.kovalevskyy@gmail.com>
-// Copyright 2015   Imran Tatriev     <itatriev@gmail.com>
+// SPDX-FileCopyrightText: 2012 Mohammed Nafees <nafees.technocool@gmail.com>
+// SPDX-FileCopyrightText: 2012 Dennis Nienhüser <nienhueser@kde.org>
+// SPDX-FileCopyrightText: 2012 Illya Kovalevskyy <illya.kovalevskyy@gmail.com>
+// SPDX-FileCopyrightText: 2015 Imran Tatriev <itatriev@gmail.com>
 //
 
 #include "PopupLayer.h"

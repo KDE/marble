@@ -1,5 +1,5 @@
 /*
-    Copyright 2016 Friedrich W. H. Kossebau  <kossebau@kde.org>
+    SPDX-FileCopyrightText: 2016 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This file is part of the KDE project
 

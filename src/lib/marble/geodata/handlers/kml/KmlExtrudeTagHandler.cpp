@@ -1,6 +1,6 @@
 /*
-    Copyright (C) 2008 Patrick Spendrin <ps_ml@gmx.de>
-    Copyright (C) 2014 Marek Hakala <hakala.marek@gmail.com>
+    SPDX-FileCopyrightText: 2008 Patrick Spendrin <ps_ml@gmx.de>
+    SPDX-FileCopyrightText: 2014 Marek Hakala <hakala.marek@gmail.com>
 
     This file is part of the KDE project
 

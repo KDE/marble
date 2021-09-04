@@ -1,9 +1,7 @@
 //
 // This file is part of the Marble Virtual Globe.
 //
-// This program is free software licensed under the GNU LGPL. You can
-// find a copy of this license in LICENSE.txt in the top directory of
-// the source code.
+// SPDX-License-Identifier: LGPL-2.1-or-later
 //
 //
 // For the Natural Earth Layer providing the Default data set at 0.5 arcminute resolution should be enough. 
@@ -28,9 +26,9 @@
 //
 // The parser has to convert these relative coordinates to absolute coordinates.
 //
-// Copyright 2012 Torsten Rahn <rahn@kde.org>
-// Copyright 2012 Cezar Mocan <mocancezar@gmail.com>
-// Copyright 2014 Abhinav Gangwar <abhgang@gmail.com>
+// SPDX-FileCopyrightText: 2012 Torsten Rahn <rahn@kde.org>
+// SPDX-FileCopyrightText: 2012 Cezar Mocan <mocancezar@gmail.com>
+// SPDX-FileCopyrightText: 2014 Abhinav Gangwar <abhgang@gmail.com>
 //
 
 #include "Pn2Runner.h"

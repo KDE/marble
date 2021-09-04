@@ -1,6 +1,6 @@
 /*
-    Copyright (C) 2007 Nikolas Zimmermann <zimmermann@kde.org>
-    Copyright (C) 2007 Torsten Rahn <rahn@kde.org>
+    SPDX-FileCopyrightText: 2007 Nikolas Zimmermann <zimmermann@kde.org>
+    SPDX-FileCopyrightText: 2007 Torsten Rahn <rahn@kde.org>
 
     This file is part of the KDE project
 

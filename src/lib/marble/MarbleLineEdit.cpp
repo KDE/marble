@@ -1,15 +1,13 @@
 //
 // This file is part of the Marble Virtual Globe.
 //
-// This program is free software licensed under the GNU LGPL. You can
-// find a copy of this license in LICENSE.txt in the top directory of
-// the source code.
+// SPDX-License-Identifier: LGPL-2.1-or-later
 //
 // The code in this file is largely based on KDE's KLineEdit class
 // as included in KDE 4.5. See there for its authors:
 // https://api.kde.org/4.x-api/kdelibs-apidocs/kdeui/html/klineedit_8cpp.html
 //
-// Copyright 2010,2012      Dennis Nienhüser <nienhueser@kde.org>
+// SPDX-FileCopyrightText: 2010, 2012 Dennis Nienhüser <nienhueser@kde.org>
 //
 
 #include "MarbleLineEdit.h"

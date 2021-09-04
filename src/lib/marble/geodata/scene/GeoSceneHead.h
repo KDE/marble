@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2008 Torsten Rahn <rahn@kde.org>
+    SPDX-FileCopyrightText: 2008 Torsten Rahn <rahn@kde.org>
 
     This file is part of the KDE project
 

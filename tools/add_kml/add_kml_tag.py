@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#    Copyright (C) 2008 Patrick Spendrin <ps_ml@gmx.de>
+#    SPDX-FileCopyrightText: 2008 Patrick Spendrin <ps_ml@gmx.de>
 #
 #    This file is part of the KDE project
 #
@@ -155,7 +155,7 @@ z,Scale
 
 # the template header file
 HEADER="""/*
-    Copyright (C) 2008 Patrick Spendrin <ps_ml@gmx.de>
+    SPDX-FileCopyrightText: 2008 Patrick Spendrin <ps_ml@gmx.de>
 
     This file is part of the KDE project
 
@@ -195,7 +195,7 @@ public:
 
 # the template source file
 SOURCE="""/*
-    Copyright (C) 2008 Patrick Spendrin <ps_ml@gmx.de>
+    SPDX-FileCopyrightText: 2008 Patrick Spendrin <ps_ml@gmx.de>
 
     This file is part of the KDE project
 

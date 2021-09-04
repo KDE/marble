@@ -1,16 +1,14 @@
 //
 // This file is part of the Marble Virtual Globe.
 //
-// This program is free software licensed under the GNU LGPL. You can
-// find a copy of this license in LICENSE.txt in the top directory of
-// the source code.
+// SPDX-License-Identifier: LGPL-2.1-or-later
 //
-// Copyright 2004-2007 Torsten Rahn <tackat@kde.org>
-// Copyright 2007-2008 Inge Wallin  <ingwa@kde.org>
-// Copyright 2008      Patrick Spendrin <ps_ml@gmx.de>
-// Copyright 2011      Friedrich W. H. Kossebau <kossebau@kde.org>
-// Copyright 2011      Bernhard Beschow <bbeschow@cs.tu-berlin.de>
-// Copyright 2015      Alejandro Garcia Montoro <alejandro.garciamontoro@gmail.com>
+// SPDX-FileCopyrightText: 2004-2007 Torsten Rahn <tackat@kde.org>
+// SPDX-FileCopyrightText: 2007-2008 Inge Wallin <ingwa@kde.org>
+// SPDX-FileCopyrightText: 2008 Patrick Spendrin <ps_ml@gmx.de>
+// SPDX-FileCopyrightText: 2011 Friedrich W. H. Kossebau <kossebau@kde.org>
+// SPDX-FileCopyrightText: 2011 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+// SPDX-FileCopyrightText: 2015 Alejandro Garcia Montoro <alejandro.garciamontoro@gmail.com>
 //
 
 #include "LonLatParser_p.h"
