@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2006-2010 Alexander Neundorf <neundorf@kde.org>
+# SPDX-License-Identifier: BSD-3-Clause
+
 include(FeatureSummary)
 if( COMMAND set_package_properties )
   macro( marble_set_package_properties )
@@ -100,11 +103,6 @@ endmacro()
 # or via -DWITH_<name>=OFF
 # The standard <name>_FOUND variables can be used in the same way
 # as when using the normal FIND_PACKAGE()
-
-# SPDX-FileCopyrightText: 2006-2010 Alexander Neundorf <neundorf@kde.org>
-#
-# Redistribution and use is allowed according to the terms of the BSD license.
-# For details see the accompanying COPYING-CMAKE-SCRIPTS file.
 
 # This is just a helper macro to set a bunch of variables empty.
 # We don't know whether the package uses UPPERCASENAME or CamelCaseName, so we try both:
