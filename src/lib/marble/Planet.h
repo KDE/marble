@@ -1,9 +1,6 @@
 // SPDX-FileCopyrightText: 2009 Henry de Valence <hdevalence@gmail.com>
 // SPDX-FileCopyrightText: 2009 David Roberts <dvdr18@gmail.com>
 // SPDX-FileCopyrightText: 2012 Mohammed Nafees <nafees.technocool@gmail.com>
-//
-// This file is part of the Marble Virtual Globe.
-//
 // SPDX-License-Identifier: LGPL-2.1-or-later
 //
 

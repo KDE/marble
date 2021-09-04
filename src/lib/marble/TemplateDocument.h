@@ -1,10 +1,6 @@
-//
-// This file is part of the Marble Project.
-//
-// SPDX-License-Identifier: LGPL-2.1-or-later
-//
 // SPDX-FileCopyrightText: 2012 Illya Kovalevskyy <illya.kovalevskyy@gmail.com>
 //
+// SPDX-License-Identifier: LGPL-2.1-or-later
 
 #ifndef MARBLE_TEMPLATEDOCUMENT_H
 #define MARBLE_TEMPLATEDOCUMENT_H

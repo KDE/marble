@@ -1,6 +1,3 @@
-//
-// This file is part of the Marble Virtual Globe.
-//
 // SPDX-License-Identifier: LGPL-2.1-or-later
 //
 // This file is based on qzipwriter_p.h from Qt with the original license

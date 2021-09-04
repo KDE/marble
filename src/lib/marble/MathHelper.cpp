@@ -1,6 +1,4 @@
 /*
-    This file is part of the Marble Virtual Globe.
-
     SPDX-FileCopyrightText: 2008 Torsten Rahn <tackat@kde.org>
 
     SPDX-License-Identifier: LGPL-2.0-or-later

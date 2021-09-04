@@ -1,6 +1,3 @@
-//
-// This file is part of the Marble Virtual Globe.
-//
 // SPDX-License-Identifier: LGPL-2.1-or-later
 //
 // SPDX-FileCopyrightText: 2013 Sanjiban Bairagya <sanjiban22393@gmail.com>

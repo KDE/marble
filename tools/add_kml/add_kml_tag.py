@@ -1,7 +1,6 @@
 #!/usr/bin/env python
+
 #    SPDX-FileCopyrightText: 2008 Patrick Spendrin <ps_ml@gmx.de>
-#
-#    This file is part of the KDE project
 #
 #    This library is free software you can redistribute it and/or
 #    modify it under the terms of the GNU Library General Public
@@ -157,8 +156,6 @@ z,Scale
 HEADER="""/*
     SPDX-FileCopyrightText: 2008 Patrick Spendrin <ps_ml@gmx.de>
 
-    This file is part of the KDE project
-
     This library is free software you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
     License as published by the Free Software Foundation either
@@ -196,8 +193,6 @@ public:
 # the template source file
 SOURCE="""/*
     SPDX-FileCopyrightText: 2008 Patrick Spendrin <ps_ml@gmx.de>
-
-    This file is part of the KDE project
 
     This library is free software you can redistribute it and/or
     modify it under the terms of the GNU Library General Public

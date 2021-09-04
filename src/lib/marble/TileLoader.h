@@ -1,6 +1,3 @@
-//
-// This file is part of the Marble Virtual Globe.
-//
 // SPDX-FileCopyrightText: 2010 Jens-Michael Hoffmann <jmho@c-xx.com>
 // SPDX-FileCopyrightText: 2010-2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //

@@ -1,8 +1,5 @@
 #ifndef FOURSQUAREITEM_H
 #define FOURSQUAREITEM_H
-//
-// This file is part of the Marble Virtual Globe.
-//
 // SPDX-License-Identifier: LGPL-2.1-or-later
 //
 // SPDX-FileCopyrightText: 2012 Utku Aydın <utkuaydin34@gmail.com>

@@ -1,14 +1,9 @@
-//
-// This file is part of the Marble Project.
-//
-// SPDX-License-Identifier: LGPL-2.1-or-later
-//
 // SPDX-FileCopyrightText: 2006-2007 Torsten Rahn <tackat@kde.org>
 // SPDX-FileCopyrightText: 2007 Inge Wallin <ingwa@kde.org>
 // SPDX-FileCopyrightText: 2012 Illya Kovalevskyy <illya.kovalevskyy@gmail.com>
 // SPDX-FileCopyrightText: 2013 Yazeed Zoabi <yazeedz.zoabi@gmail.com>
 //
-
+// SPDX-License-Identifier: LGPL-2.1-or-later
 
 #include "MarbleLegendBrowser.h"
 

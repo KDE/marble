@@ -1,6 +1,4 @@
 /*
-    This file is part of the Marble Virtual Globe.
-
     SPDX-FileCopyrightText: 2005-2007 Torsten Rahn <tackat@kde.org>
     SPDX-FileCopyrightText: 2007 Inge Wallin <ingwa@kde.org>
     SPDX-FileCopyrightText: 2008 Patrick Spendrin <ps_ml@gmx.de>

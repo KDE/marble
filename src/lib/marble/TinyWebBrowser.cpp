@@ -1,12 +1,8 @@
-//
-// This file is part of the Marble Project.
-//
-// SPDX-License-Identifier: LGPL-2.1-or-later
-//
 // SPDX-FileCopyrightText: 2006-2007 Torsten Rahn <tackat@kde.org>
 // SPDX-FileCopyrightText: 2007 Inge Wallin <ingwa@kde.org>
 // SPDX-FileCopyrightText: 2008 Simon Hausmann <hausmann@kde.org>
 //
+// SPDX-License-Identifier: LGPL-2.1-or-later
 
 // Self
 #include "TinyWebBrowser.h"

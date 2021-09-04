@@ -1,6 +1,4 @@
 /*
-    This file is part of the Marble Virtual Globe.
-
     The JsonParser class reads in a GeoJSON document that conforms to
     RFC7946 (including relevant errata) and optionally contains
     attributes from the Simplestyle specification version 1.1.0

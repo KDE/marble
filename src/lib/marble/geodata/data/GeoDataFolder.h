@@ -3,8 +3,6 @@
     SPDX-FileCopyrightText: 2007 Murad Tagirov <tmurad@gmail.com>
     SPDX-FileCopyrightText: 2007 Inge Wallin <inge@lysator.liu.se>
 
-    This file is part of the KDE project
-
     This library is free software you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
     License as published by the Free Software Foundation either

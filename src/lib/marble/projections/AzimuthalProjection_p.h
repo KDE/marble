@@ -1,6 +1,3 @@
-//
-// This file is part of the Marble Virtual Globe.
-//
 // SPDX-License-Identifier: LGPL-2.1-or-later
 // Copyright 2014	   Gábor Péterffy <peterffy95@gmail.com>
 //

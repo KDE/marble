@@ -1,12 +1,8 @@
-//
-// This file is part of the Marble Project.
-//
-// SPDX-License-Identifier: LGPL-2.1-or-later
-//
 // SPDX-FileCopyrightText: 2006-2007 Torsten Rahn <tackat@kde.org>
 // SPDX-FileCopyrightText: 2007-2008 Inge Wallin <ingwa@kde.org>
 // SPDX-FileCopyrightText: 2011 Niko Sams <niko.sams@gmail.com>
 //
+// SPDX-License-Identifier: LGPL-2.1-or-later
 
 #include "TileCreator.h"
 
