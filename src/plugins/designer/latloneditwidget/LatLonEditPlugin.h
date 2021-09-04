@@ -1,7 +1,5 @@
-/*                                                                                                             
-// SPDX-License-Identifier: LGPL-2.1-or-later
-*/
 //SPDX-FileCopyrightText: 2008 Henry de Valence <hdevalence@gmail.com>
+// SPDX-License-Identifier: LGPL-2.1-or-later
 
 #ifndef LATLONEDITPLUGIN_H
 #define LATLONEDITPLUGIN_H

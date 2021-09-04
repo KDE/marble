@@ -1,6 +1,5 @@
 #! /usr/bin/env python
 # -*- coding: iso-8859-1 -*-
-# This file is part of the Marble Virtual Globe.
 #
 # SPDX-License-Identifier: LGPL-2.1-or-later
 #

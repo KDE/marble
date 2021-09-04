@@ -2,7 +2,7 @@
 //
 // SPDX-FileCopyrightText: 2007 Inge Wallin <ingwa@kde.org>
 // SPDX-FileCopyrightText: 2007-2012 Torsten Rahn <rahn@kde.org>
-// Copyright 2012		Cezar Mocan	<mocancezar@gmail.com>
+// SPDX-FileCopyrightText: 2012 Cezar Mocan <mocancezar@gmail.com>
 //
 
 #ifndef MARBLE_CYLINDRICALPROJECTION_H

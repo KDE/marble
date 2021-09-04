@@ -1,5 +1,4 @@
-/* This file is part of the KDE project
-
+/*
     SPDX-FileCopyrightText: 2004-2007 Torsten Rahn <tackat@kde.org>
     SPDX-FileCopyrightText: 2007 Inge Wallin <ingwa@kde.org>
 

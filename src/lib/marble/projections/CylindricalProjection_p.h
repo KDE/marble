@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 //
 // SPDX-FileCopyrightText: 2009 Patrick Spendrin <ps_ml@gmx.de>
-// Copyright 2012	   Cezar Mocan <mocancezar@gmail.com>
+// SPDX-FileCopyrightText: 2012 Cezar Mocan <mocancezar@gmail.com>
 //
 
 #ifndef MARBLE_CYLINDRICALPROJECTIONPRIVATE_H

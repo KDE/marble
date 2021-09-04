@@ -1,11 +1,9 @@
 /*
-    SPDX-License-Identifier: LGPL-2.1-or-later
-
     SPDX-FileCopyrightText: 2008 Torsten Rahn <rahn@kde.org>
-
     SPDX-FileCopyrightText: 2008 Jens-Michael Hoffmann <jensmh@gmx.de>
-
     SPDX-FileCopyrightText: 2012 Ander Pijoan <ander.pijoan@deusto.es>
+
+    SPDX-License-Identifier: LGPL-2.1-or-later
 */
 
 #ifndef MARBLE_GEOSCENETEXTURETILEDATASET_H
