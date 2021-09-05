@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2012-2015 Pavel Klinger
+# SPDX-License-Identifier: MIT
+
 project(o5mreader)
 
 include_directories(
