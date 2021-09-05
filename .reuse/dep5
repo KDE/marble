@@ -11,3 +11,7 @@ Files: data/bitmaps/osmcarto/*/*
 Copyright: Andy Allan <andy@gravitystorm.co.uk> and contributors, based on original cartography by Steve Chilton and others.
 License: CC0-1.0
 
+Files: data/svg/osmc-symbols/3rdparty/*
+Copyright: See COPYRIGHT file
+License: CC0-1.0
+
