@@ -15,3 +15,7 @@ Files: data/svg/osmc-symbols/3rdparty/*
 Copyright: See COPYRIGHT file
 License: CC0-1.0
 
+Files: data/svg/osmc-symbols/*
+Copyright: OpenStreetMap contributors <data@osmfoundation.org>
+License: CC0-1.0
+
