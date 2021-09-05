@@ -7,3 +7,7 @@ Files: data/flags/*
 Copyright: none
 License: CC0-1.0
 
+Files: data/bitmaps/osmcarto/*/*
+Copyright: Andy Allan <andy@gravitystorm.co.uk> and contributors, based on original cartography by Steve Chilton and others.
+License: CC0-1.0
+
