@@ -1,9 +1,8 @@
 /*
-SPDX-FileCopyrightText: 2010 Jens-Michael Hoffmann <jmho@c-xx.com>
+    SPDX-FileCopyrightText: 2010 Jens-Michael Hoffmann <jmho@c-xx.com>
+    SPDX-FileCopyrightText: 2012 Ander Pijoan <ander.pijoan@deusto.es>
 
-SPDX-FileCopyrightText: 2012 Ander Pijoan <ander.pijoan@deusto.es>
-
-SPDX-License-Identifier: LGPL-2.1-or-later
+    SPDX-License-Identifier: LGPL-2.1-or-later
 */
 
 #ifndef MARBLE_TEXTURETILE_H

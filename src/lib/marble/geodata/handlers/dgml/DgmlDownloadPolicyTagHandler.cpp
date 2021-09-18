@@ -1,5 +1,5 @@
 /*
-SPDX-FileCopyrightText: 2009, 2010 Jens-Michael Hoffmann <jmho@c-xx.com>
+    SPDX-FileCopyrightText: 2009, 2010 Jens-Michael Hoffmann <jmho@c-xx.com>
 
     SPDX-License-Identifier: LGPL-2.1-or-later
 */

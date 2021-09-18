@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 //
-// SPDX-FileCopyrightText: 2014 Calin Cruceru <crucerucalincristian@gmail.com
+// SPDX-FileCopyrightText: 2014 Calin Cruceru <crucerucalincristian@gmail.com>
 //
 
 #ifndef MARBLE_SCENEGRAPHICSTYPES_H

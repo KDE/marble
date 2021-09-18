@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 //
-// SPDX-FileCopyrightText: 2009 Bastian Holst <bastianholst@gmx.de
+// SPDX-FileCopyrightText: 2009 Bastian Holst <bastianholst@gmx.de>
 //
 
 // Own
