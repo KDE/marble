@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: (LGPL-2.1-only WITH Qt-LGPL-exception-1.1 OR LGPL-3.0-only WITH Qt-LGPL-exception-1.1) OR GPL-3.0-only OR LicenseRef-Qt-Commercial
+// SPDX-License-Identifier: LGPL-2.1-only WITH Qt-LGPL-exception-1.1 OR LGPL-3.0-only WITH Qt-LGPL-exception-1.1 OR GPL-3.0-only OR LicenseRef-Qt-Commercial
 //
 // SPDX-FileCopyrightText: 2015 The Qt Company Ltd. <https://www.qt.io/licensing/>
 // This file is based on qzip.cpp from Qt with the original license

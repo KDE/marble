@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 //
 // SPDX-FileCopyrightText: 2013 Mayank Madan <maddiemadan@gmail.com>
-//                     Sanjiban Bairagya <sanjiban22393@gmail.com>
+// SPDX-FileCopyrightText: Sanjiban Bairagya <sanjiban22393@gmail.com>
 //
 
 #include "GeoDataScale.h"

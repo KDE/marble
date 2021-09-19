@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 //
-// SPDX-FileCopyrightText: 2014 Adam Dabrowski <adabrowski@piap.pl> <adamdbrw@gmail.com>
+// SPDX-FileCopyrightText: 2014 Adam Dabrowski <adabrowski@piap.pl, adamdbrw@gmail.com>
 //
 
 #ifndef MARBLEQUICKITEM_H
