@@ -281,7 +281,7 @@ set(marblewidget_SRCS
     OsmcSymbol.cpp
 
     StyleBuilder.cpp
-    
+
     cloudsync/CloudSyncManager.cpp
     cloudsync/RouteSyncManager.cpp
     cloudsync/OwncloudSyncBackend.cpp

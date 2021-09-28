@@ -85,7 +85,7 @@ macro( marble_add_test TEST_NAME )
             Qt5::Test
         )
 
-        set_target_properties( ${TEST_NAME} PROPERTIES 
+        set_target_properties( ${TEST_NAME} PROPERTIES
                                COMPILE_FLAGS "-DDATA_PATH=\"\\\"${DATA_PATH}\\\"\" -DPLUGIN_PATH=\"\\\"${PLUGIN_PATH}\\\"\"" )
         add_test( ${TEST_NAME} ${TEST_NAME} )
     endif( BUILD_MARBLE_TESTS )

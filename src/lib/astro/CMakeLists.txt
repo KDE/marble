@@ -18,7 +18,7 @@ write_basic_package_version_file("${CMAKE_CURRENT_BINARY_DIR}/${ASTRO_CMAKECONFI
 
 ADD_DEFINITIONS(-O3)
 
-SET(astrolib_SRCS 
+SET(astrolib_SRCS
   astrolib.cpp
   astr2lib.cpp
   attlib.cpp
