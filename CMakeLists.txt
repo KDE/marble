@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.7)
 
 # Set minimum OS X target
 set(CMAKE_OSX_DEPLOYMENT_TARGET 10.9)
@@ -90,7 +90,7 @@ option(BUILD_TOUCH "Build touch-friendly Marble version (on Android this option 
 ####################################################
 # Build a D-Bus interface for the Marble widget
 # This is disabled by default for all win32, apple and Android
-if(WIN32 OR APPLE OR CMAKE_SYSTEM_NAME STREQUAL Android)
+if(WIN32 OR APPLE OR ANDROID)
     option(BUILD_WITH_DBUS "Build the D-Bus interface for the Marble widget" OFF)
 else()
     option(BUILD_WITH_DBUS "Build the D-Bus interface for the Marble widget" ON)
@@ -100,7 +100,7 @@ endif()
 #######################################################
 # Specific options for building for different platforms
 
-if(CMAKE_SYSTEM_NAME STREQUAL Android)
+if(ANDROID)
    add_definitions(-DANDROID)
 endif()
 
@@ -111,7 +111,7 @@ endif()
 find_package(Protobuf)
 set_package_properties(Protobuf PROPERTIES TYPE OPTIONAL PURPOSE "Parsing of OSM PBF files.")
 
-if(CMAKE_SYSTEM_NAME STREQUAL Android)
+if(ANDROID)
     set(REQUIRED_QT_VERSION 5.7.0)
    # TODO: still needed with ECM toolchain?
    SET(QT_QMAKE_EXECUTABLE "$ENV{Qt5_android}/bin/qmake")
@@ -133,7 +133,7 @@ find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED
         PrintSupport
 )
 
-if(CMAKE_SYSTEM_NAME STREQUAL Android)
+if(ANDROID)
     find_package(Qt5Positioning ${REQUIRED_QT_VERSION} REQUIRED)
     find_package(Qt5Multimedia ${REQUIRED_QT_VERSION} REQUIRED)
 
@@ -211,7 +211,7 @@ elseif(APPLE)
       SET (data_dir   ${CMAKE_INSTALL_PREFIX}/Marble.app/Contents/MacOS/resources/data)
       set(locale_dir "${data_dir}/locale")
       SET (plugin_dir   ${CMAKE_INSTALL_PREFIX}/Marble.app/Contents/MacOS/resources/plugins)
-elseif(CMAKE_SYSTEM_NAME STREQUAL Android)
+elseif(ANDROID)
       set(plugin_dir "${CMAKE_INSTALL_PREFIX}/assets/plugins")
       set(data_dir "${CMAKE_INSTALL_PREFIX}/assets/data")
       set(locale_dir "${data_dir}/locale")

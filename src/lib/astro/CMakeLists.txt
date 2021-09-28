@@ -44,7 +44,7 @@ if(WIN32)
   TARGET_LINK_LIBRARIES(astro ws2_32 imm32 winmm)
 endif(WIN32)
 
-if (NOT (CMAKE_SYSTEM_NAME STREQUAL Android))
+if (NOT ANDROID)
   set_target_properties(astro PROPERTIES
       EXPORT_NAME "Astro"
       VERSION ${ASTRO_LIB_VERSION}

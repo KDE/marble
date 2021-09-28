@@ -3,7 +3,7 @@ qt5_add_resources(marble_QRCS MarbleBehaim.qrc)
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
-if (CMAKE_SYSTEM_NAME STREQUAL Android)
+if (ANDROID)
     set(TARGET MarbleBehaim)
 
     find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED COMPONENTS AndroidExtras)
@@ -43,7 +43,7 @@ target_link_libraries (
 FILE(GLOB QML_FILES *.qml)
 add_custom_target(marble-behaim_resources ALL SOURCES ${QML_FILES} package/AndroidManifest.xml)
 
-if (CMAKE_SYSTEM_NAME STREQUAL Android)
+if (ANDROID)
     install(DIRECTORY "../../../data/android/" DESTINATION "${CMAKE_INSTALL_PREFIX}/res")
     set(ABSOLUTE_INSTALL_PATH "${CMAKE_INSTALL_PREFIX}")
     if(NOT IS_ABSOLUTE "${ABSOLUTE_INSTALL_PATH}")

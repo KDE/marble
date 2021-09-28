@@ -441,7 +441,7 @@ set_target_properties(marblewidget  PROPERTIES
     COMPILE_FLAGS "-DKML_LAZY_IMP"
 )
 
-if (NOT (CMAKE_SYSTEM_NAME STREQUAL Android))
+if (NOT ANDROID)
   set_target_properties(marblewidget  PROPERTIES
     VERSION ${MARBLE_LIB_VERSION}
     SOVERSION ${MARBLE_LIB_SOVERSION}
