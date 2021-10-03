@@ -401,7 +401,9 @@ marble_install_po_files_as_qm(poqm)
 
 ####################################################
 # Install extra files
-install(FILES LICENSE.txt DESTINATION ${MARBLE_DATA_INSTALL_PATH})
+install(FILES LICENSES/LGPL-2.1-or-later.txt
+        DESTINATION ${MARBLE_DATA_INSTALL_PATH}
+        RENAME LICENSE.txt)
 
 ############################################################
 # Uninstall stuff
