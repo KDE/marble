@@ -115,3 +115,12 @@ lat     latitude
 As parameters (and preferably in other places as well) 
 longitude and latitude should appear in lon-lat order
 (not lat-lon!).
+
+
+Dependencies
+------------
+
+Marble has a policy to be buildable using only recent versions of Qt and cmake.
+I.e. to compile Marble with its basic functionality (library or app) no other dependencies are required.
+
+However, certain features may only be enabled if additional optional dependencies are available.
