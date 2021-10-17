@@ -42,8 +42,8 @@
 
     <legalnotice>&FDLNotice;</legalnotice>
 
-    <date>2021-01-31</date>
-    <releaseinfo>2.2 (Applications 12.20)</releaseinfo>
+    <date>2021-10-17</date>
+    <releaseinfo>2.2 (KDE Gear 21.08)</releaseinfo>
 
     <abstract>
       <para>&marble; is a geographical atlas and a virtual globe which lets you quickly explore places on our home planet. You can use &marble; to look up addresses, to easily create maps, measure distances and to retrieve detail information about locations that you have just heard about in the news or on the Internet. The user interface is clean, simple and easy to use.
@@ -71,7 +71,7 @@
       </mediaobject>
     </screenshot>
 
-    <para>Welcome to &marble;, a small interactive globe and geographical atlas that puts the world at your fingertips. Just like a real atlas or a conventional globe &marble; allows you to freely move across its map and lookup places. Furthermore &marble; allows you to zoom in and have many different views on the surface for the <guilabel>Earth</guilabel> or the <guilabel>Moon</guilabel> (with his view). In its default configuration &marble; offers 14 different views: <guilabel>Atlas</guilabel>, <guilabel>OpenStreetMap</guilabel>, <guilabel>Satellite View</guilabel>, <guilabel>Earth at Night</guilabel>, <guilabel>Behaim Globe 1492</guilabel>, <guilabel>Sentinel2 Satellite Map</guilabel>, <guilabel>Historical Map 1689</guilabel>, <guilabel>Political Map</guilabel>, <guilabel>Plain Map</guilabel>, <guilabel>Precipitation (December)</guilabel>, <guilabel>Precipitation (July)</guilabel>, <guilabel>Temperature (December)</guilabel>, <guilabel>Temperature (July)</guilabel> and <guilabel>Vector OSM</guilabel>.
+    <para>Welcome to &marble;, a small interactive globe and geographical atlas that puts the world at your fingertips. Just like a real atlas or a conventional globe &marble; allows you to freely move across its map and lookup places. Furthermore &marble; allows you to zoom in and have many different views on the surface for the <guilabel>Earth</guilabel> or the <guilabel>Moon</guilabel> (with his view). In its default configuration &marble; offers 15 different views: <guilabel>Atlas</guilabel>, <guilabel>OpenStreetMap</guilabel>, <guilabel>Satellite View</guilabel>, <guilabel>Earth at Night</guilabel>, <guilabel>Behaim Globe 1492</guilabel>, <guilabel>Sentinel2 Satellite Map</guilabel>, <guilabel>Historical Map 1689</guilabel>, <guilabel>Political Map</guilabel>, <guilabel>Plain Map</guilabel>, <guilabel>Precipitation (December)</guilabel>, <guilabel>Precipitation (July)</guilabel>, <guilabel>Temperature (December)</guilabel>, <guilabel>Temperature (July)</guilabel>, <guilabel>Vector OSM</guilabel> and <guilabel>Moon</guilabel>.
     </para>
 
     <para>&marble; comes with a small database of more than 12,000 locations (cities, mountains, volcanoes) which can be searched for and which are integrated with Wikipedia. Additionally you can measure distances using &marble; between multiple measure points which can be set freely.
@@ -85,7 +85,7 @@
   <chapter id="quick-start">
   <title>&marble; quick start guide: Navigation</title>
 
-    <para>Here is &marble; the first time you run it, either with <menuchoice><guimenu>Applications</guimenu><guisubmenu>Education</guisubmenu><guimenuitem>Marble (Desktop Globe)</guimenuitem></menuchoice> from the &kmenu; or with <keycombo action="simul">&Alt;<keycap>F2</keycap></keycombo> and entering <command>marble</command> into the field.</para>
+    <para>Here is &marble; the first time you run it, either with <menuchoice><guimenu>Education</guimenu> <guimenuitem>&kde; &marble; (Virtual Globe)</guimenuitem></menuchoice> from the global menu or with <keycombo action="simul">&Alt;<keycap>F2</keycap></keycombo> and entering <command>marble</command> into the field.</para>
 
     <screenshot>
       <screeninfo>&marble; main window</screeninfo>
@@ -107,7 +107,7 @@
     <para>Depending on the map's resolution zooming in will provide you with more detail. Smaller cities will appear and using the topographic map you might notice that coastlines are provided as vector graphics.
     </para>
 
-    <para>In case you should get lost you can always reset the viewing angle and zoom level back to the point where we started off: Just hit the <guilabel>Home</guilabel> button (or the &Home; button on your keyboard). To set the home location to the current position (center of the map) click on <guimenuitem>Set Home Location</guimenuitem> in the <guimenu>Bookmarks</guimenu> menu.
+    <para>In case you should get lost you can always reset the viewing angle and zoom level back to the point where we started off: Just hit the <guilabel>Home</guilabel> button (or the &Home; button on your keyboard). To set the home location to the current position (center of the map) click on the <menuchoice><guimenu>Bookmarks</guimenu> <guimenuitem>Set Home Location</guimenuitem></menuchoice> menu item.
     </para>
 
     <para>A click onto the status bar using the &RMB; offers a menu which lets you customize the appearance of the status bar. You can show the position, altitude, the current tile level and a progress indicator that displays the status of the map data download.
@@ -117,7 +117,7 @@
   <chapter id="map-views">
   <title>Choosing different map views for &marble;</title>
 
-    <para>&marble; comes with 11 different views: <guilabel>Atlas</guilabel>, <guilabel>OpenStreetMap</guilabel>, <guilabel>Satellite View</guilabel>, <guilabel>Earth at Night</guilabel>, <guilabel>Historical Map 1689</guilabel>, <guilabel>Moon</guilabel>, <guilabel>Plain Map</guilabel>, <guilabel>Precipitation (December)</guilabel>, <guilabel>Precipitation (July)</guilabel>, <guilabel>Temperature (December)</guilabel> and <guilabel>Temperature (July)</guilabel>. You can choose among these by pressing the <guilabel>Map View</guilabel> tab on the bottom of &marble;'s toolbox:
+    <para>&marble; comes with 15 different views: <guilabel>Atlas</guilabel>, <guilabel>OpenStreetMap</guilabel>, <guilabel>Satellite View</guilabel>, <guilabel>Earth at Night</guilabel>, <guilabel>Behaim Globe 1492</guilabel>, <guilabel>Sentinel2 Satellite Map</guilabel>, <guilabel>Historical Map 1689</guilabel>, <guilabel>Political Map</guilabel>, <guilabel>Plain Map</guilabel>, <guilabel>Precipitation (December)</guilabel>, <guilabel>Precipitation (July)</guilabel>, <guilabel>Temperature (December)</guilabel>, <guilabel>Temperature (July)</guilabel> <guilabel>Vector OSM</guilabel> and <guilabel>Moon</guilabel>. You can choose among these by pressing the <guilabel>Map View</guilabel> tab on the top of &marble;'s toolbox:
     </para>
 
     <screenshot>
@@ -133,30 +133,38 @@
 
       <listitem><para><guilabel>OpenStreetMap</guilabel>: A global roadmap created by the OpenStreetMap (OSM) project. OSM is an open community which creates free editable maps. The OSM data was rendered using Mapnik.</para></listitem>
 
-      <listitem><para><guilabel>Satellite View</guilabel>: Earth as seen from Space. The map is based on NASA's beautiful <ulink url="https://earthobservatory.nasa.gov/Features/BlueMarble/">Blue &marble; Next Generation</ulink> pictures. Credits: NASA’s Earth Observatory</para></listitem>
+      <listitem><para><guilabel>Satellite View</guilabel>: Earth as seen from Space. The map is based on NASA's beautiful <ulink url="https://earthobservatory.nasa.gov/features/BlueMarble/">Blue &marble; Next Generation</ulink> pictures. Credits: NASA’s Earth Observatory</para></listitem>
 
       <listitem><para><guilabel>Earth at Night</guilabel>: This image of Earth’s city lights was created with data from the Defense Meteorological Satellite Program (DMSP) Operational Linescan System (OLS).</para></listitem>
 
+      <listitem><para><guilabel>Behaim Globe 1492</guilabel>: Produced by Martin Behaim from 1490–1492, it is the oldest surviving terrestrial globe.</para></listitem>
+
+      <listitem><para><guilabel>Sentinel2 Satellite Map</guilabel>: Based on the Sentinel data, see more information <ulink url="https://community.kde.org/Marble/Sentinel2MapTheme">here</ulink>.</para></listitem>
+
       <listitem><para><guilabel>Historical Map 1689</guilabel>: A historical world map from the year 1689 created by G. van Schagen in Amsterdam.</para></listitem>
 
-      <listitem><para><guilabel>Moon</guilabel>: A map of the moon. The map is based on data from the Clementine Moon mission (UVVIS Basemap Mosaic). Credits: NASA/SDIO, Courtesy USGS Astrogeology Research Program.</para></listitem>
+      <listitem><para><guilabel>Political Map</guilabel>: A simple map with the current frontiers of countries.</para></listitem>
 
       <listitem><para><guilabel>Plain Map</guilabel>: A plain map. It uses vector lines to mark coastlines and country borders &etc;</para></listitem>
 
       <listitem><para><guilabel>Precipitation (December)</guilabel>: A map which shows the average precipitation in December.</para></listitem>
 
-      <listitem><para><guilabel>Precipitation (July)</guilabel>: A map which shows the average precipitation (rain/snow/hail/&etc;) in July.</para></listitem>
+      <listitem><para><guilabel>Precipitation (July)</guilabel>: A map which shows the average precipitation (rain, snow, hail, &etc;) in July.</para></listitem>
 
       <listitem><para><guilabel>Temperature (December)</guilabel>: A map which shows the average temperature in December.</para></listitem>
 
       <listitem><para><guilabel>Temperature (July)</guilabel>: A map which shows the average temperature in July.</para></listitem>
+
+      <listitem><para><guilabel>Vector OSM</guilabel>: Vector map from the <ulink url="https://www.openstreetmap.org/">OpenStreetMap project</ulink>.</para></listitem>
+
+      <listitem><para><guilabel>Moon</guilabel>: A map of the moon. The map is based on data from the Clementine Moon mission (UVVIS Basemap Mosaic). Credits: NASA/SDIO, Courtesy USGS Astrogeology Research Program.</para></listitem>
     </itemizedlist>
   </chapter>
 
   <chapter id="search-places">
   <title>Searching places using &marble;</title>
 
-    <para>&marble; comes with a small database of more than 12,000 cities ( from <ulink url="https://www.populationdata.net/monde/"/> ) and a few mountains and volcanoes. You can find a location by entering its name into the search line on the top of the toolbox (&marble; always uses the native name in Latin letters). As you start typing, suggestions below the search line will appear like this:
+    <para>&marble; comes with a small database of more than 12,000 cities (from <ulink url="https://www.populationdata.net/monde/"/>) and a few mountains and volcanoes. You can find a location by entering its name into the search line on the top of the toolbox (&marble; always uses the native name in Latin letters). As you start typing, suggestions below the search line will appear like this:
     </para>
 
     <screenshot>
@@ -337,7 +345,7 @@
       <para>Existing via points can be moved freely across the map. Move the mouse pointer above a via point and drag it to its new location. Once released, the route will be updated automatically.
       </para>
 
-      <para>To exclude via points from the route, remove them. This can be done using either the <guilabel>Remove</guilabel> button next to the via point input field or by clicking with the &RMB; on the via point in the map. In the context menu, choose <guilabel>Remove this destination</guilabel>. To start an entirely new route, remove all via points.
+      <para>To exclude via points from the route, remove them. This can be done using either the <guilabel>Remove</guilabel> button next to the via point input field or by clicking with the &RMB; on the via point in the map. In the context menu, choose <guimenuitem>Remove this Destination</guimenuitem>. To start an entirely new route, remove all via points.
       </para>
     </sect1>
 
@@ -347,7 +355,7 @@
       <para>You can save routes in <acronym>kml</acronym> (Keyhole Markup Language) format and load them again at a later point - on the same computer or a different device running &marble;, or share them with your friends or other applications which are able to read kml files (like <application>Google Earth</application>). To save a route to a <literal role="extension">.kml</literal> file, click on the <guilabel>Save</guilabel> icon on the bottom of the routing tab. The upcoming save dialog allows you to choose a file name to save the route to. Similarly loading a route is initiated with the <guilabel>Open</guilabel> icon on the bottom of the routing tab. Select the <literal role="extension">.kml</literal> route file to open in the upcoming open dialog and &marble; loads the route from it.
       </para>
 
-      <para>Routes planned in &marble; can be used in other applications or navigation devices which support <acronym>gpx</acronym> (GPS eXchange Format) or equivalent formats. If your navigation device does not support <acronym>gpx</acronym> directly, you can use a conversion utility like <command>gpsbabel</command> to convert a <acronym>gpx</acronym> file exported by &marble; to a suitable format. The export of a route in &marble; is initiated from the routing context menu in the map. Click with the &RMB; on any point of the route in the map. In the context menu that appears, choose <guilabel>Export route...</guilabel>:
+      <para>Routes planned in &marble; can be used in other applications or navigation devices which support <acronym>gpx</acronym> (GPS eXchange Format) or equivalent formats. If your navigation device does not support <acronym>gpx</acronym> directly, you can use a conversion utility like <command>gpsbabel</command> to convert a <acronym>gpx</acronym> file exported by &marble; to a suitable format. The export of a route in &marble; is initiated from the routing context menu in the map. Click with the &RMB; on any point of the route in the map. In the context menu that appears, choose <guimenuitem>Export Route...</guimenuitem>:
       </para>
 
       <screenshot>
@@ -366,7 +374,7 @@
   <chapter id="measure-distances">
   <title>Measuring distances with &marble;</title>
 
-    <para>As mentioned already &marble; always displays a dynamic scale bar on the lower left to estimate distances on the map. Together with the windrose in the top right corner these overlays are provided for better orientation. But there's more: &marble; allows you to measure distances between two or more points on earth. To do so click the respective points in correct order on the globe using the &RMB;. On each click a popup menu will appear which allows you to add a  measure point (<guilabel>Add Measure Point</guilabel>) or to remove all measure points altogether (<guilabel>Remove Measure Points</guilabel>):
+    <para>As mentioned already &marble; always displays a dynamic scale bar on the lower left to estimate distances on the map. Together with the windrose in the top right corner these overlays are provided for better orientation. But there's more: &marble; allows you to measure distances between two or more points on earth. To do so click the respective points in correct order on the globe using the &RMB;. On each click a popup menu will appear which allows you to add a  measure point (<guimenuitem>Add Measure Point</guimenuitem>) or to remove all measure points altogether (<guimenuitem>Remove Measure Points</guimenuitem>):
     </para>
 
     <screenshot>
@@ -414,7 +422,7 @@
     <para>When downloading a map region for offline usage, you need to download all tiles in the desired region for all tile levels you plan to use. Because of the connection between tile levels and zoom levels, you can think of it as downloading all tiles in the zoom levels you plan to use.
     </para>
 
-    <para>To accomplish this for a certain region, make that region visible in the screen by zooming and moving the Globe. Now open the <guilabel>Download Region...</guilabel> dialog in the <guilabel>File</guilabel> menu. Keep the <guilabel>Visible region</guilabel> option selected to download those tiles that correspond to the map region visible in the screen. Next, select the tile level range (zoom range) you wish to download. The first field corresponds to the smallest, the second field corresponds to the largest tile level that will be downloaded. Tile levels in between will be downloaded as well. &marble; shows how many tiles (images) need to be downloaded and updates this number whenever you change the region or tile level range.
+    <para>To accomplish this for a certain region, make that region visible in the screen by zooming and moving the Globe. Now select the <menuchoice><guilabel>File</guilabel> <guilabel>Download Region...</guilabel></menuchoice> menu item to open the <guilabel>Download Region</guilabel> dialog. Keep the <guilabel>Visible region</guilabel> option selected to download those tiles that correspond to the map region visible in the screen. Next, select the <guilabel>Tile level range:</guilabel> (zoom range) you wish to download. The first field corresponds to the smallest, the second field corresponds to the largest tile level that will be downloaded. Tile levels in between will be downloaded as well. &marble; shows how many tiles (images) need to be downloaded and updates this number whenever you change the region or tile level range.
     </para>
 
     <screenshot>
@@ -428,13 +436,13 @@
     <para>The tile level corresponding to the current zoom level is shown in the status bar on the bottom. Please note that you may have to configure &marble; to show that information: Click with the &RMB; on the status bar and select <guilabel>Show Tile Zoom Level</guilabel>.
     </para>
 
-    <para>Select <guilabel>OK</guilabel> to trigger the map region download. The progress bar of &marble; will show the download progress (if activated).
+    <para>Select <guibutton>OK</guibutton> to trigger the map region download. The progress bar of &marble; will show the download progress (if activated).
     </para>
 
     <para>In case you do know the coordinates of the map region to download, you can enter them by clicking on the <guilabel>Specify region</guilabel> option. The map region visible in the screen will be ignored in that case.
     </para>
 
-    <para>You can keep using &marble; while the <guilabel>Download Region</guilabel> dialog is open. This is useful to queue several downloads for different regions or different tile ranges. Just select <guilabel>Apply</guilabel> instead of <guilabel>OK</guilabel> to trigger the map region download.
+    <para>You can keep using &marble; while the <guilabel>Download Region</guilabel> dialog is open. This is useful to queue several downloads for different regions or different tile ranges. Just select <guibutton>Apply</guibutton> instead of <guibutton>OK</guibutton> to trigger the map region download.
     </para>
   </chapter>
 
@@ -447,7 +455,7 @@
       <para>To record a movie with &marble;, use this function for recording.
       </para>
 
-      <para>Begin recording from the <guilabel>Record Movie</guilabel> dialog in the <guilabel>Edit</guilabel> menu. Or you can start it by pressing <keycombo>&Ctrl; &Shift;<keycap>R</keycap></keycombo>. You will see a dialog like this:
+      <para>Begin recording from the <menuchoice><shortcut> <keycombo action="simul">&Ctrl;&Shift;<keycap>R</keycap></keycombo> </shortcut> <guimenu>Edit</guimenu> <guimenuitem>Record Movie</guimenuitem></menuchoice> menu item to open the <guilabel>Record Movie</guilabel> dialog. You will see a dialog like this:
       </para>
 
       <screenshot>
@@ -458,13 +466,13 @@
         </mediaobject>
       </screenshot>
 
-      <para>Press the <guilabel>Open</guilabel> button to choose the name and destination folder of the movie. Also you can change the frames per second (FPS) of the movie between 1 and 60.
+      <para>Press the <guibutton>Open...</guibutton> button to choose the name and destination folder of the movie. Also you can change the frames per second (FPS) of the movie between 1 and 60.
       </para>
 
-      <para>When all is set, you can start recording. To start, click the <guilabel>Start</guilabel> button. Once this is done you can zoom and pan around and &marble; will capture a video of your journey across the globe.
+      <para>When all is set, you can start recording. To start, click the <guibutton>Start</guibutton> button. Once this is done you can zoom and pan around and &marble; will capture a video of your journey across the globe.
       </para>
 
-      <para>To stop recording of the movie and save it, click <guilabel>Stop Recording</guilabel> in the <guilabel>Edit</guilabel> menu or press <keycombo>&Ctrl; &Shift;<keycap>S</keycap></keycombo>.
+      <para>To stop recording of the movie and save it, click the <menuchoice><guimenu>Edit</guimenu> <guimenuitem>Stop Recording</guimenuitem></menuchoice> menu item.
       </para>
 
       <sect2 id="recording-movie-troubleshooting">
@@ -587,21 +595,20 @@
             <term><menuchoice>
             <shortcut><keycombo action="simul">&Ctrl;<keycap>E</keycap></keycombo> </shortcut>
             <guimenu>Edit</guimenu>
-            <guimenuitem>Edit Map</guimenuitem></menuchoice></term>
+            <guimenuitem>Edit Map...</guimenuitem></menuchoice></term>
             <listitem><para><action>Allows</action> you to open the current map in the external map editor. The current version supports <application>Potlatch</application> (in a web browser), <application>Merkaartor</application> and <application>JOSM</application> map editors.</para></listitem>
           </varlistentry>
 
           <varlistentry>
             <term><menuchoice>
-            <shortcut><keycombo action="simul">&Ctrl; &Shift;<keycap>R</keycap></keycombo> </shortcut>
+            <shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>R</keycap></keycombo> </shortcut>
             <guimenu>Edit</guimenu>
             <guimenuitem>Record Movie</guimenuitem></menuchoice></term>
-            <listitem><para><action>Records</action> a movie with Marble.</para></listitem>
+            <listitem><para><action>Records</action> a movie with &marble;.</para></listitem>
           </varlistentry>
 
           <varlistentry>
             <term><menuchoice>
-            <shortcut><keycombo action="simul">&Ctrl; &Shift;<keycap>S</keycap></keycombo> </shortcut>
             <guimenu>Edit</guimenu>
             <guimenuitem>Stop Recording</guimenuitem></menuchoice></term>
             <listitem><para><action>Stops</action> the current recording of movie.</para></listitem>
@@ -631,7 +638,7 @@
             <term><menuchoice>
             <shortcut><keycap>F5</keycap></shortcut>
             <guimenu>View</guimenu>
-            <guimenuitem>Redisplay</guimenuitem></menuchoice></term>
+            <guimenuitem>Refresh</guimenuitem></menuchoice></term>
             <listitem><para>The currently visible part of the map is downloaded again and refreshed on the screen.</para></listitem>
           </varlistentry>
 
@@ -705,6 +712,47 @@
       </sect2>
 
       <sect2>
+      <title>The Bookmarks Menu</title>
+        <variablelist>
+          <varlistentry>
+            <term><menuchoice>
+            <shortcut><keycombo action="simul">&Ctrl;<keycap>B</keycap></keycombo> </shortcut>
+            <guimenu>Bookmarks</guimenu>
+            <guimenuitem>Add Bookmark...</guimenuitem></menuchoice></term>
+            <listitem><para><action>Open the <guilabel>Edit Bookmark</guilabel> dialog</action> to manage a bookmark.</para></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term><menuchoice>
+            <guimenu>Bookmarks</guimenu>
+            <guimenuitem>Show Bookmarks</guimenuitem></menuchoice></term>
+            <listitem><para>A check box for <action>enable the bookmarks visualization on the map.</action></para></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term><menuchoice>
+            <guimenu>Bookmarks</guimenu>
+            <guimenuitem>Set Home Location</guimenuitem></menuchoice></term>
+            <listitem><para><action>Set the current position as your house.</action></para></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term><menuchoice>
+            <guimenu>Bookmarks</guimenu>
+            <guimenuitem>Manage Bookmarks...</guimenuitem></menuchoice></term>
+            <listitem><para><action>Open the <guilabel>Manage Bookmarks</guilabel> dialog</action> to manage all bookmarks.</para></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term><menuchoice>
+            <guimenu>Bookmarks</guimenu>
+            <guisubmenu>Default</guisubmenu></menuchoice></term>
+            <listitem><para><action>This submenu shows your default locations.</action></para></listitem>
+          </varlistentry>
+        </variablelist>
+      </sect2>
+
+      <sect2>
       <title>The Settings Menu</title>
 
         <variablelist>
@@ -749,7 +797,7 @@
           <varlistentry>
             <term><menuchoice>
             <guimenu>Settings</guimenu>
-            <guimenuitem>Configure &marble; Desktop Globe...</guimenuitem></menuchoice></term>
+            <guimenuitem>Configure &marble; Virtual Globe...</guimenuitem></menuchoice></term>
             <listitem><para><action>Display</action> the <link linkend="configure">&marble; configuration</link> dialog.</para></listitem>
           </varlistentry>
 
@@ -782,32 +830,32 @@
 
       <variablelist>
         <varlistentry>
-          <term><guilabel>Distance</guilabel></term>
+          <term><guilabel>Distance:</guilabel></term>
           <listitem><para>The unit that gets used to measure altitude, lengths and distances (&eg; km, mi, ft).</para></listitem>
         </varlistentry>
 
         <varlistentry>
-          <term><guilabel>Angle</guilabel></term>
+          <term><guilabel>Angle:</guilabel></term>
           <listitem><para>Specifies the notation of angles in coordinates: By default the Degree-Minute-Second notation (&eg; 54°30'00" ) gets used. As an alternative you can choose decimal degrees (&eg; 54.5°).</para></listitem>
         </varlistentry>
 
         <varlistentry>
-          <term><guilabel>Still image</guilabel></term>
+          <term><guilabel>Still image:</guilabel></term>
           <listitem><para>Specifies the map quality that gets displayed while there is no user input. Usually this allows for high map quality as speed is no concern.</para></listitem>
         </varlistentry>
 
         <varlistentry>
-          <term><guilabel>During animations</guilabel></term>
+          <term><guilabel>During animations:</guilabel></term>
           <listitem><para>Specifies the map quality that gets displayed during map animations (&eg; while dragging the globe). Especially on slow machines it is advisable to set this option to <guilabel>Low Quality</guilabel> as this will give better speed.</para></listitem>
         </varlistentry>
 
-        <varlistentry>
-          <term><guilabel>Place names</guilabel></term>
+<!--         <varlistentry>
+          <term><guilabel>Place names:</guilabel></term>
           <listitem><para>Places often have different names in different languages. The label on the map can show the name in the user's language. Alternatively it can display the name in the official language and glyphs of that place.</para></listitem>
-        </varlistentry>
+        </varlistentry>-->
 
         <varlistentry>
-          <term><guilabel>Default map font</guilabel></term>
+          <term><guilabel>Default map font:</guilabel></term>
           <listitem><para>The default font that gets used on the map.</para></listitem>
         </varlistentry>
       </variablelist>
@@ -825,13 +873,13 @@
       </screenshot>
 
       <variablelist>
-        <varlistentry>
-          <term><guilabel>Drag location</guilabel></term>
+<!--        <varlistentry>
+          <term><guilabel>Drag location:</guilabel></term>
           <listitem><para>While dragging the mouse there are two standard behaviors when dealing with a virtual globe: The location below mouse pointer will follow the cursor exactly: As a result &eg; the north pole will not stay at the top which can lead to confusion. By default &marble; makes sure that north is always up which results in a dragging behavior where the location below the mouse pointer slightly "detaches" from the cursor.</para></listitem>
-        </varlistentry>
+        </varlistentry>-->
 
         <varlistentry>
-          <term><guilabel>Inertial Globe Rotation</guilabel></term>
+          <term><guilabel>Inertial globe rotation</guilabel></term>
           <listitem><para>By default &marble; will use kinetic spinning while dragging the map. You can turn this behavior off using this check box.</para></listitem>
         </varlistentry>
 
@@ -841,12 +889,17 @@
         </varlistentry>
 
         <varlistentry>
-          <term><guilabel>On Startup</guilabel></term>
+          <term><guilabel>Mouse view rotation</guilabel></term>
+          <listitem><para>The map and mouse movement is aligned while panning.</para></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term><guilabel>On Startup:</guilabel></term>
           <listitem><para>By default &marble; will display the home location immediately after the application has started. As an alternative it can also show the last position that was active when the user left the application.</para></listitem>
         </varlistentry>
 
         <varlistentry>
-          <term><guilabel>External Editor</guilabel></term>
+          <term><guilabel>External editor:</guilabel></term>
           <listitem><para>Here, you can define the default editor for the maps or choose <guilabel>Always ask</guilabel> if &marble; should ask you to choose before starting the external editor.</para></listitem>
         </varlistentry>
       </variablelist>
@@ -866,7 +919,7 @@
       <variablelist>
         <varlistentry>
           <term><guilabel>Cache</guilabel></term>
-          <listitem><para>There are two caches being used for &marble;: The physical memory which is needed to keep map data in the computer's memory. Increasing the value will make the application more responsive. The hard disc memory cache is used by download contents from the Internet (&eg; Wikipedia data or map data). Decrease this value if you want to save space on the hard disc and if high usage of the Internet is not an issue.</para></listitem>
+          <listitem><para>There are two caches being used for &marble;: The <guilabel>Physical memory:</guilabel> which is needed to keep map data in the computer's memory. Increasing the value will make the application more responsive. The <guilabel>Hard disc:</guilabel> memory cache is used by download contents from the Internet (&eg; Wikipedia data or map data). Decrease this value if you want to save space on the hard disc and if high usage of the Internet is not an issue.</para></listitem>
         </varlistentry>
 
         <varlistentry>
@@ -940,12 +993,12 @@
 
       <variablelist>
         <varlistentry>
-          <term><guilabel>Add</guilabel></term>
+          <term><guibutton>Add...</guibutton></term>
           <listitem><para>Opens a window where you can add a new routing profile.</para></listitem>
         </varlistentry>
 
         <varlistentry>
-          <term><guilabel>Configure</guilabel></term>
+          <term><guilabel>Configure...</guilabel></term>
           <listitem><para>Opens a window where the currently selected routing profile can be configured.</para></listitem>
         </varlistentry>
 
@@ -1062,9 +1115,14 @@
         </varlistentry>
 
         <varlistentry>
+          <term><guilabel>OSM Mapper Notes</guilabel></term>
+          <listitem><para>Implementation of geocoding notes.</para></listitem>
+        </varlistentry>
+
+<!--        <varlistentry>
           <term><guilabel>OpenCaching.com</guilabel></term>
           <listitem><para>Displays the <ulink url="https://en.wikipedia.org/wiki/Geocaching">geocaching</ulink> markers on the map.</para></listitem>
-        </varlistentry>
+        </varlistentry>-->
 
         <varlistentry>
           <term><guilabel>OpenDesktop Items</guilabel></term>
