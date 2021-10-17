@@ -22,7 +22,7 @@
      <item row="0" column="0">
       <widget class="QLabel" name="description_lbl">
        <property name="text">
-        <string>&amp;Description</string>
+        <string>&amp;Description:</string>
        </property>
        <property name="buddy">
         <cstring>m_description</cstring>
@@ -54,7 +54,7 @@ p, li { white-space: pre-wrap; }
      <item row="1" column="0">
       <widget class="QLabel" name="folder_lbl">
        <property name="text">
-        <string>&amp;Folder</string>
+        <string>&amp;Folder:</string>
        </property>
        <property name="buddy">
         <cstring>m_folders</cstring>
@@ -76,7 +76,7 @@ p, li { white-space: pre-wrap; }
        <item>
         <widget class="QPushButton" name="m_newFolderButton">
          <property name="text">
-          <string>&amp;Add Folder</string>
+          <string>&amp;Add Folder...</string>
          </property>
         </widget>
        </item>

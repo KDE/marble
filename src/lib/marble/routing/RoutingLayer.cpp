@@ -182,10 +182,10 @@ RoutingLayerPrivate::RoutingLayerPrivate( RoutingLayer *parent, MarbleWidget *wi
         m_isInteractive( true )
 {
     m_contextMenu = new MarbleWidgetPopupMenu( m_marbleWidget, m_marbleWidget->model() );
-    m_removeViaPointAction = new QAction( QObject::tr( "&Remove this destination" ), q );
+    m_removeViaPointAction = new QAction( QObject::tr( "&Remove this Destination" ), q );
     QObject::connect( m_removeViaPointAction, SIGNAL(triggered()), q, SLOT(removeViaPoint()) );
     m_contextMenu->addAction( Qt::RightButton, m_removeViaPointAction );
-    QAction *exportAction = new QAction( QObject::tr( "&Export route..." ), q );
+    QAction *exportAction = new QAction( QObject::tr( "&Export Route..." ), q );
     QObject::connect( exportAction, SIGNAL(triggered()), q, SLOT(exportRoute()) );
     m_contextMenu->addAction( Qt::RightButton, exportAction );
     if ( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {

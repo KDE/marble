@@ -73,7 +73,7 @@ p, li { white-space: pre-wrap; }
          <string>Use kinetic spinning when dragging the map</string>
         </property>
         <property name="text">
-         <string>&amp;Inertial Globe Rotation</string>
+         <string>&amp;Inertial globe rotation</string>
         </property>
        </widget>
       </item>
@@ -181,7 +181,7 @@ p, li { white-space: pre-wrap; }
         </size>
        </property>
        <property name="text">
-        <string>&amp;External Editor:</string>
+        <string>&amp;External editor:</string>
        </property>
        <property name="buddy">
         <cstring>kcfg_onStartup</cstring>

@@ -78,7 +78,7 @@
        <item row="1" column="0">
         <widget class="QLabel" name="iconLinkLabel">
          <property name="text">
-          <string>Icon Link:</string>
+          <string>Icon link:</string>
          </property>
         </widget>
        </item>

@@ -299,7 +299,7 @@ void MainWindow::createActions()
      m_copyMapAction->setStatusTip(tr("Copy a screenshot of the map"));
      connect(m_copyMapAction, SIGNAL(triggered()), this, SLOT(copyMap()));
 
-     m_osmEditAction = new QAction(QIcon(QStringLiteral(":/icons/edit-map.png")), tr("&Edit Map"), this );
+     m_osmEditAction = new QAction(QIcon(QStringLiteral(":/icons/edit-map.png")), tr("&Edit Map..."), this );
      m_osmEditAction->setShortcut(tr( "Ctrl+E" ) );
      m_osmEditAction->setStatusTip(tr( "Edit the current map region in an external editor" ) );
      updateMapEditButtonVisibility( m_controlView->marbleWidget()->mapThemeId() );
@@ -389,7 +389,7 @@ void MainWindow::createActions()
      connect(m_aboutQtAction, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
 
      //Bookmark Actions
-     m_addBookmarkAction = new QAction(QIcon(QStringLiteral(":/icons/bookmark-new.png")), tr("&Add Bookmark"), this);
+     m_addBookmarkAction = new QAction(QIcon(QStringLiteral(":/icons/bookmark-new.png")), tr("Add &Bookmark..."), this);
      m_addBookmarkAction->setShortcut(tr("Ctrl+B"));
      m_addBookmarkAction->setStatusTip(tr("Add Bookmark"));
      connect( m_addBookmarkAction, SIGNAL(triggered()), this, SLOT(openEditBookmarkDialog()) );
@@ -403,7 +403,7 @@ void MainWindow::createActions()
      m_toggleBookmarkDisplayAction->setCheckable( true );
      connect( m_toggleBookmarkDisplayAction, SIGNAL(triggered(bool)), this, SLOT(showBookmarks(bool)) );
 
-     m_manageBookmarksAction = new QAction(QIcon(QStringLiteral(":/icons/bookmarks-organize.png")), tr("&Manage Bookmarks"), this);
+     m_manageBookmarksAction = new QAction(QIcon(QStringLiteral(":/icons/bookmarks-organize.png")), tr("&Manage Bookmarks..."), this);
      m_manageBookmarksAction->setStatusTip( tr( "Manage Bookmarks" ) );
      connect( m_manageBookmarksAction, SIGNAL(triggered()), this, SLOT(manageBookmarks()) );
      

@@ -22,7 +22,7 @@
         <item>
          <widget class="QLabel" name="tileLevelLabel">
           <property name="text">
-           <string>&amp;Tile Level Range:</string>
+           <string>&amp;Tile level range:</string>
           </property>
           <property name="buddy">
            <cstring>topSpinBox</cstring>

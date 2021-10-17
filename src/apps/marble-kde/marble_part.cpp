@@ -256,7 +256,7 @@ bool MarblePart::openFile()
     filters.prepend( allFileTypes );
     const QString filter = filters.join( ";;" );
 
-    QStringList fileNames = QFileDialog::getOpenFileNames( widget(), i18n("Open File"),
+    QStringList fileNames = QFileDialog::getOpenFileNames( widget(), i18nc("@title:window", "Open File"),
                                                            m_lastFileOpenPath, filter );
 
     if ( !fileNames.isEmpty() ) {
@@ -273,7 +273,7 @@ bool MarblePart::openFile()
 
 void MarblePart::exportMapScreenShot()
 {
-    QString  fileName = QFileDialog::getSaveFileName( widget(), i18n("Export Map"), QDir::homePath(),
+    QString  fileName = QFileDialog::getSaveFileName( widget(), i18nc("@title:window", "Export Map"), QDir::homePath(),
                                                       i18n( "Images *.jpg *.png" ) );
 
     if ( !fileName.isEmpty() ) {
@@ -878,7 +878,7 @@ void MarblePart::setupActions()
 
     m_addBookmarkAction = new QAction( this );
     actionCollection()->addAction( "add_bookmark", m_addBookmarkAction );
-    m_addBookmarkAction->setText( i18nc( "Add Bookmark", "&Add Bookmark" ) );
+    m_addBookmarkAction->setText( i18nc( "Add Bookmark", "Add &Bookmark..." ) );
     m_addBookmarkAction->setIcon(QIcon(QStringLiteral(":/icons/bookmark-new.png")));
     actionCollection()->setDefaultShortcut( m_addBookmarkAction, Qt::CTRL | Qt::Key_B );
     connect( m_addBookmarkAction, SIGNAL(triggered()),
@@ -902,7 +902,7 @@ void MarblePart::setupActions()
 
     m_manageBookmarksAction = new QAction( this );
     actionCollection()->addAction( "manage_bookmarks", m_manageBookmarksAction );
-    m_manageBookmarksAction->setText( i18nc( "Manage Bookmarks", "&Manage Bookmarks" ) );
+    m_manageBookmarksAction->setText( i18nc( "Manage Bookmarks", "&Manage Bookmarks..." ) );
     m_manageBookmarksAction->setIcon(QIcon(QStringLiteral(":/icons/bookmarks-organize.png")));
     connect( m_manageBookmarksAction, SIGNAL(triggered()),
              this,                SLOT(openManageBookmarksDialog()) );
@@ -914,7 +914,7 @@ void MarblePart::setupActions()
 
     m_externalMapEditorAction = new QAction( this );
     actionCollection()->addAction( "external_editor", m_externalMapEditorAction );
-    m_externalMapEditorAction->setText( i18nc( "Edit the map in an external application", "&Edit Map" ) );
+    m_externalMapEditorAction->setText( i18nc( "Edit the map in an external application", "&Edit Map..." ) );
     m_externalMapEditorAction->setIcon(QIcon(QStringLiteral(":/icons/edit-map.png")));
     actionCollection()->setDefaultShortcut( m_externalMapEditorAction, Qt::CTRL | Qt::Key_E );
     connect( m_externalMapEditorAction, SIGNAL(triggered()),
@@ -930,7 +930,7 @@ void MarblePart::setupActions()
      connect( m_recordMovieAction, SIGNAL(triggered()),
              this, SLOT(showMovieCaptureDialog()) );
 
-     m_stopRecordingAction = new QAction( i18n( "&Stop recording" ), this );
+     m_stopRecordingAction = new QAction( i18n( "&Stop Recording" ), this );
      actionCollection()->addAction( "stop_recording" , m_stopRecordingAction );
      m_stopRecordingAction->setStatusTip( i18n( "Stop recording a movie of the globe" ) );
      actionCollection()->setDefaultShortcut( m_recordMovieAction, Qt::CTRL | Qt::SHIFT | Qt::Key_S );

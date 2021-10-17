@@ -19,7 +19,7 @@
      <item>
       <widget class="QLabel" name="m_namelbl">
        <property name="text">
-        <string>&amp;Folder Name</string>
+        <string>&amp;Folder name:</string>
        </property>
        <property name="buddy">
         <cstring>m_name</cstring>
