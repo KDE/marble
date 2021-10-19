@@ -85,7 +85,7 @@
   <chapter id="quick-start">
   <title>&marble; quick start guide: Navigation</title>
 
-  <para>Here is &marble; the first time you run it, either with <menuchoice><guimenu>Applications<guimenu> <guisubmenu>Education</guisubmenu> <guimenuitem>&kde; &marble; (Virtual Globe)</guimenuitem></menuchoice> from the global menu or with <keycombo action="simul">&Alt;<keycap>F2</keycap></keycombo> and entering <command>marble</command> into the input field.</para>
+  <para>Here is &marble; the first time you run it, either with <menuchoice><guimenu>Applications</guimenu> <guisubmenu>Education</guisubmenu> <guimenuitem>&kde; &marble; (Virtual Globe)</guimenuitem></menuchoice> from the global menu or with <keycombo action="simul">&Alt;<keycap>F2</keycap></keycombo> and entering <command>marble</command> into the input field.</para>
 
     <screenshot>
       <screeninfo>&marble; main window</screeninfo>
