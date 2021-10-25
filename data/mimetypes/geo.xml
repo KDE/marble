@@ -114,7 +114,7 @@ Notes:
   <mime-type type="application/x-esri-shape-index">
     <comment>ESRI Shapefile Index</comment>
     <comment xml:lang="ca">Índex del fitxer de formes ESRI</comment>
-    <comment xml:lang="ca@valencia">Índex de fitxer de formes ESRI</comment>
+    <comment xml:lang="ca@valencia">Índex del fitxer de formes ESRI</comment>
     <comment xml:lang="cs">Index souboru tvaru ESRI</comment>
     <comment xml:lang="de">ESRI-Shapefile-Index</comment>
     <comment xml:lang="en_GB">ESRI Shapefile Index</comment>
