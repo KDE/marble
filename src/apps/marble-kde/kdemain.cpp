@@ -379,31 +379,31 @@ int main ( int argc, char *argv[] )
     MarbleGlobal::getInstance()->setProfiles( profiles );
 
     QString marbleDataPath = parser.value( dataPathOption );
-    MainWindow window( marbleDataPath );
-    window.show();
+    MainWindow *window = new MainWindow(marbleDataPath);
+    window->show();
 
     if ( parser.isSet( timeOption ) ) {
-        window.resize(900, 640);
-        MarbleTest test( window.marbleWidget() );
+        window->resize(900, 640);
+        MarbleTest test(window->marbleWidget());
         test.timeDemo();
         return 0;
     }
 
     if ( parser.isSet( fpsOption ) ) {
-        window.marbleControl()->marbleWidget()->setShowFrameRate( true );
+        window->marbleControl()->marbleWidget()->setShowFrameRate(true);
     }
 
     if (parser.isSet(levelOption)) {
-        window.marbleWidget()->setDebugLevelTags(true);
+        window->marbleWidget()->setDebugLevelTags(true);
     }
 
     if ( parser.isSet( tileOption ) ) {
-        window.marbleControl()->marbleWidget()->setShowTileId( true );
+        window->marbleControl()->marbleWidget()->setShowTileId(true);
     }
 
     const QString map = parser.value( mapIdOption );
     if ( !map.isEmpty() ) {
-        window.marbleWidget()->setMapThemeId(map);
+        window->marbleWidget()->setMapThemeId(map);
     }
 
     const QString coordinatesString = parser.value( coordinatesOption );
@@ -413,13 +413,13 @@ int main ( int argc, char *argv[] )
         if ( success ) {
             const qreal longitude = coordinates.longitude(GeoDataCoordinates::Degree);
             const qreal latitude = coordinates.latitude(GeoDataCoordinates::Degree);
-            window.marbleWidget()->centerOn(longitude, latitude);
+            window->marbleWidget()->centerOn(longitude, latitude);
         }
     }
 
     const QString geoUriString = parser.value( geoUriOption );
     if ( !geoUriString.isEmpty() ) {
-        window.marbleControl()->openGeoUri( geoUriString );
+        window->marbleControl()->openGeoUri(geoUriString);
     }
 
     const QString distance = parser.value( distanceOption );
@@ -427,14 +427,14 @@ int main ( int argc, char *argv[] )
         bool success = false;
         const qreal distanceValue = distance.toDouble(&success);
         if ( success )
-            window.marbleWidget()->setDistance(distanceValue);
+            window->marbleWidget()->setDistance(distanceValue);
     }
 
     // Read the files that are given on the command line.
     for( const QString &file: parser.positionalArguments() ) {
         // FIXME: Use openUrl( args->url(i) ) instead?
         if ( QFile::exists( file ) ) {
-            window.marbleControl()->addGeoDataFile( file );
+            window->marbleControl()->addGeoDataFile(file);
         }
     }
 
