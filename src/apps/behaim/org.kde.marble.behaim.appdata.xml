@@ -84,4 +84,7 @@
     <binary>MarbleBehaim</binary>
   </provides>
   <content_rating type="oars-1.1"/>
+  <releases>
+    <release version="21.12.0" date="2021-12-09"/>
+  </releases>
 </component>
