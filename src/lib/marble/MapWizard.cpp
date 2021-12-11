@@ -221,7 +221,9 @@ void MapWizard::queryServerCapabilities()
 
     QNetworkRequest request;
     request.setUrl( url );
+    request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
 
+    mDebug() << "for url" << url;
     d->xmlAccessManager.get( request );
 }
 
@@ -229,6 +231,7 @@ void MapWizard::parseServerCapabilities( QNetworkReply* reply )
 {
     button( MapWizard::NextButton )->setEnabled( true );
 
+    mDebug() << "received reply from" << reply->url();
     QString result( reply->readAll() );
     QDomDocument xml;
     if( !xml.setContent( result ) )
@@ -458,6 +461,7 @@ void MapWizard::downloadLevelZero()
         downloadUrl.addQueryItem( "styles", "" );
 
         finalDownloadUrl.setQuery( downloadUrl );
+        mDebug() << "requesting WMS" << finalDownloadUrl;
 
         QNetworkRequest request( finalDownloadUrl );
 
@@ -475,6 +479,7 @@ void MapWizard::downloadLevelZero()
         downloadUrl.setUrl( server );
 
         QNetworkRequest request( downloadUrl );
+        mDebug() << "requesting static map" << downloadUrl;
         d->levelZeroAccessManager.get( request );
     }
 }
