@@ -2227,7 +2227,8 @@ QStringList StyleBuilder::renderOrder() const
 
         paintLayerOrder << QStringLiteral("Photo");
 
-        Q_ASSERT(QSet<QString>::fromList(paintLayerOrder).size() == paintLayerOrder.size());
+        // This assert checks that all the values in paintLayerOrder are unique.
+        Q_ASSERT(QSet<QString>(paintLayerOrder.constBegin(), paintLayerOrder.constEnd()).size() == paintLayerOrder.size());
     }
 
     return paintLayerOrder;

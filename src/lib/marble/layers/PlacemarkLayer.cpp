@@ -312,7 +312,9 @@ void PlacemarkLayer::renderDebug(GeoPainter *painter, ViewportParams *viewport, 
     auto const latLonAltBox = viewport->viewLatLonAltBox();
 
     using Placemarks = QSet<VisiblePlacemark *>;
-    Placemarks const hidden = Placemarks::fromList(m_layout.visiblePlacemarks()).subtract(Placemarks::fromList(placemarks.toList()));
+    const auto visiblePlacemarks = m_layout.visiblePlacemarks();
+    Placemarks const hidden = Placemarks(visiblePlacemarks.constBegin(), visiblePlacemarks.constEnd())
+        .subtract(Placemarks(placemarks.constBegin(), placemarks.constEnd()));
 
     for (auto placemark: hidden) {
         bool const inside = latLonAltBox.contains(placemark->coordinates());

@@ -192,7 +192,8 @@ bool GeometryLayer::render(GeoPainter *painter, ViewportParams *viewport,
         d->m_cachedDefaultLayer.clear();
         d->m_cachedPaintFragments.clear();
         QHash<QString, GeometryLayerPrivate::PaintFragments> paintFragments;
-        QSet<QString> const knownLayers = QSet<QString>::fromList(d->m_styleBuilder->renderOrder());
+        const QStringList &renderOrder = d->m_styleBuilder->renderOrder();
+        QSet<QString> const knownLayers(renderOrder.constBegin(), renderOrder.constEnd());
         for (GeoGraphicsItem* item: items) {
             QStringList paintLayers = item->paintLayers();
             if (paintLayers.isEmpty()) {
