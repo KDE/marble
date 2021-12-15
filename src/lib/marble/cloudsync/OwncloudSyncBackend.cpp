@@ -242,7 +242,7 @@ QPixmap OwncloudSyncBackend::createPreview( const QString &timestamp ) const
         mapWidget.centerOn( bbox );
     }
 
-    QPixmap pixmap = QPixmap::grabWidget( &mapWidget );
+    QPixmap pixmap = mapWidget.grab();
     QDir( d->m_cacheDir.absolutePath() ).mkpath( "preview" );
     pixmap.save(d->m_cacheDir.absolutePath() + QLatin1String("/preview/") + timestamp + QLatin1String(".jpg"));
 
