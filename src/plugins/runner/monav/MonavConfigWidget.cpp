@@ -258,7 +258,7 @@ bool MonavConfigWidgetPrivate::updateContinents( QComboBox* comboBox )
         continents << map.continent();
     }
 
-    return fillComboBox( continents.toList(), comboBox );
+    return fillComboBox( continents.values(), comboBox );
 }
 
 bool MonavConfigWidgetPrivate::updateStates( const QString &continent, QComboBox* comboBox )
@@ -271,7 +271,7 @@ bool MonavConfigWidgetPrivate::updateStates( const QString &continent, QComboBox
         }
     }
 
-    return fillComboBox( states.toList(), comboBox );
+    return fillComboBox( states.values(), comboBox );
 }
 
 bool MonavConfigWidgetPrivate::updateRegions( const QString &continent, const QString &state, QComboBox* comboBox )
@@ -362,7 +362,7 @@ void MonavConfigWidgetPrivate::updateTransportPreference()
             QModelIndex index = m_mapsModel->index( i, 1 );
             transportTypes << m_mapsModel->data( index ).toString();
         }
-        m_parent->m_transportTypeComboBox->addItems( transportTypes.toList() );
+        m_parent->m_transportTypeComboBox->addItems( transportTypes.values() );
         m_parent->m_transportTypeComboBox->blockSignals( false );
 
         if ( !m_transport.isEmpty() && m_parent->m_transportTypeComboBox ) {

@@ -48,7 +48,7 @@ class MarbleGraphicsItemPrivate
         }
 
         // Delete all children
-        qDeleteAll( m_children.toList() ); // delete using a copy, since children may invalidate m_children's iterator
+        qDeleteAll( m_children.values() ); // delete using a copy, since children may invalidate m_children's iterator
 
         // Delete Layout
         delete m_layout;
