@@ -233,7 +233,7 @@ QDateTime BookmarkSyncManager::lastSync() const
     const QString last = d->lastSyncedKmlPath();
     if (last.isEmpty())
         return QDateTime();
-    return QFileInfo(last).created();
+    return QFileInfo(last).metadataChangeTime();
 }
 
 bool BookmarkSyncManager::isBookmarkSyncEnabled() const
