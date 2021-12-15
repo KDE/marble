@@ -42,7 +42,7 @@ void MapViewItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &
     bool const hover = styleOption.state & QStyle::State_MouseOver;
     QPalette::ColorGroup const colorGroup = active ? QPalette::Active : QPalette::Inactive;
     if ( selected || hover ) {
-        styleOption.features &= ~QStyleOptionViewItemV2::Alternate;
+        styleOption.features &= ~QStyleOptionViewItem::Alternate;
         QPalette::ColorRole colorRole = selected ? QPalette::Highlight : QPalette::Midlight;
         painter->fillRect( styleOption.rect, styleOption.palette.color( colorGroup, colorRole ) );
     }
