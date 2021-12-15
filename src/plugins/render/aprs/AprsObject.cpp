@@ -44,8 +44,7 @@ AprsObject::setLocation( const GeoAprsCoordinates &location )
         mDebug() << "  moved: " << m_myName.toLocal8Bit().data();
     } else {
         int index = m_history.indexOf( location );
-        QTime now;
-        m_history[index].setTimestamp( now );
+        m_history[index].resetTimestamp();
         m_history[index].addSeenFrom( location.seenFrom() );
     }
 
@@ -67,7 +66,7 @@ AprsObject::setPixmapId( QString &pixmap )
 }
 
 QColor
-AprsObject::calculatePaintColor( int from, const QTime &time, int fadeTime )
+AprsObject::calculatePaintColor( int from, const QElapsedTimer &time, int fadeTime )
 {
     QColor color;
     if ( from & GeoAprsCoordinates::Directly ) {

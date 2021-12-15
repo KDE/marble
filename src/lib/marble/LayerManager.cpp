@@ -19,7 +19,6 @@
 #include "RenderState.h"
 
 #include <QElapsedTimer>
-#include <QTime>
 
 namespace Marble
 {
@@ -119,7 +118,8 @@ QList<AbstractDataPluginItem *> LayerManager::whichItemAt( const QPoint& curpos 
 void LayerManager::renderLayers( GeoPainter *painter, ViewportParams *viewport )
 {
     d->m_renderState = RenderState(QStringLiteral("Marble"));
-    const QTime totalTime = QTime::currentTime();
+    QElapsedTimer totalTime;
+    totalTime.start();
 
     QStringList renderPositions;
 

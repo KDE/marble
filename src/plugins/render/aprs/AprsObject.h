@@ -28,7 +28,7 @@ class GeoPainter;
         void setPixmapId( QString &pixmap );
         GeoAprsCoordinates location() const;
 
-        static QColor calculatePaintColor( int from, const QTime &time, int fadetime = 10*60*1000 );
+        static QColor calculatePaintColor( int from, const QElapsedTimer &time, int fadetime = 10*60*1000 );
         void render( GeoPainter *painter, ViewportParams *viewport,
                      int fadeTime = 10*60, int hideTime = 30*60 );
 

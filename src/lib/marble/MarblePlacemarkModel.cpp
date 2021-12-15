@@ -221,7 +221,7 @@ void  MarblePlacemarkModel::removePlacemarks( const QString &containerName,
                                               int length )
 {
     if ( length > 0 ) {
-        QTime t;
+        QElapsedTimer t;
         t.start();
         beginRemoveRows( QModelIndex(), start, start + length );
         d->m_size -= length;

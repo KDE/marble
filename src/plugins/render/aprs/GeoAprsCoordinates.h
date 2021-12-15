@@ -6,7 +6,7 @@
 #ifndef GEOAPRSCOORDINATES_H
 #define GEOAPRSCOORDINATES_H
 
-#include <QTime>
+#include <QElapsedTimer>
 #include "GeoDataCoordinates.h"
 
 namespace Marble
@@ -28,12 +28,12 @@ namespace Marble
 
         void  addSeenFrom( int where );
         int   seenFrom() const;
-        void  setTimestamp( const QTime &t );        
-        const QTime &timestamp() const;
+        void  resetTimestamp();
+        const QElapsedTimer &timestamp() const;
 
       private:
         int   m_seenFrom;
-        QTime m_timestamp;
+        QElapsedTimer m_timestamp;
     };
 }
 

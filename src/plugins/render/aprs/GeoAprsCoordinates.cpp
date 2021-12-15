@@ -11,7 +11,6 @@ GeoAprsCoordinates::GeoAprsCoordinates( qreal lon, qreal lat, int where )
     : GeoDataCoordinates( lon, lat, 0, GeoDataCoordinates::Degree ),
       m_seenFrom( where )
 {
-    m_timestamp = QTime::currentTime();
     m_timestamp.start();
 }
 
@@ -32,13 +31,12 @@ GeoAprsCoordinates::seenFrom() const
 }
 
 void
-GeoAprsCoordinates::setTimestamp( const QTime &t )
+GeoAprsCoordinates::resetTimestamp()
 {
-    m_timestamp = t;
     m_timestamp.start();
 }
 
-const QTime &
+const QElapsedTimer &
 GeoAprsCoordinates::timestamp() const
 {
     return m_timestamp;
