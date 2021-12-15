@@ -644,10 +644,10 @@ QRectF PlacemarkLayout::roomForLabel( const GeoDataStyle::ConstPtr &style,
     int textWidth;
     if ( style->labelStyle().glow() ) {
         labelFont.setWeight( 75 ); // Needed to calculate the correct pixmap size;
-        textWidth = ( QFontMetrics( labelFont ).width( labelText )
+        textWidth = ( QFontMetrics( labelFont ).horizontalAdvance( labelText )
             + qRound( 2 * s_labelOutlineWidth ) );
     } else {
-        textWidth = ( QFontMetrics( labelFont ).width( labelText ) );
+        textWidth = ( QFontMetrics( labelFont ).horizontalAdvance( labelText ) );
     }
 
     const QVector<VisiblePlacemark*> currentsec = m_rowsection.at( y / m_maxLabelHeight );

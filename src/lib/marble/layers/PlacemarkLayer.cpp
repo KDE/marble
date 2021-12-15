@@ -279,7 +279,7 @@ bool PlacemarkLayer::testXBug()
     QFont    font( "Sans Serif", 10 );
 
     int fontheight = QFontMetrics( font ).height();
-    int fontwidth  = QFontMetrics( font ).width(testchar);
+    int fontwidth  = QFontMetrics( font ).horizontalAdvance(testchar);
     int fontascent = QFontMetrics( font ).ascent();
 
     QPixmap  pixmap( fontwidth, fontheight );

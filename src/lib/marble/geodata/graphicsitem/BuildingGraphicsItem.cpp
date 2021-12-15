@@ -288,7 +288,7 @@ void BuildingGraphicsItem::paintRoof(GeoPainter* painter, const ViewportParams* 
 
         // Draw the housenumber labels
         if (drawAccurate3D && !building()->name().isEmpty() && !roofCenter.isNull()) {
-            double const w2 = 0.5 * painter->fontMetrics().width(building()->name());
+            double const w2 = 0.5 * painter->fontMetrics().horizontalAdvance(building()->name());
             double const ascent = painter->fontMetrics().ascent();
             double const descent = painter->fontMetrics().descent();
             double const a2 = 0.5 * painter->fontMetrics().ascent();

@@ -102,7 +102,7 @@ void NotesItem::addComment(const Comment& comment)
     setToolTip(toolTip.join(QStringLiteral("\n\n")));
     QFontMetrics fontmet(s_font);
     m_labelText = fontmet.elidedText(m_commentsList.front().text(), Qt::ElideRight, 125);
-    auto const width = qMax(fontmet.width(m_labelText), m_pixmap_open.width());
+    auto const width = qMax(fontmet.horizontalAdvance(m_labelText), m_pixmap_open.width());
     setSize(QSizeF(width, fontmet.height() + 2 + m_pixmap_open.height()));
 }
 

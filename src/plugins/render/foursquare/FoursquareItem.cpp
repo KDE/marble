@@ -48,7 +48,7 @@ void FoursquareItem::setName(const QString& name)
     if( name != m_name ) {
         m_name = name;
         QFontMetrics const fontMetrics( s_font );
-        setSize( QSizeF( fontMetrics.width( m_name ) + 10, fontMetrics.height() + 10 ) );
+        setSize( QSizeF( fontMetrics.horizontalAdvance( m_name ) + 10, fontMetrics.height() + 10 ) );
         emit nameChanged();
     }
 }

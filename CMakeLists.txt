@@ -112,11 +112,11 @@ find_package(Protobuf)
 set_package_properties(Protobuf PROPERTIES TYPE OPTIONAL PURPOSE "Parsing of OSM PBF files.")
 
 if(ANDROID)
-    set(REQUIRED_QT_VERSION 5.7.0)
+    set(REQUIRED_QT_VERSION 5.11.0)
    # TODO: still needed with ECM toolchain?
    SET(QT_QMAKE_EXECUTABLE "$ENV{Qt5_android}/bin/qmake")
 else()
-    set(REQUIRED_QT_VERSION 5.7.0)
+    set(REQUIRED_QT_VERSION 5.11.0)
 endif()
 
 find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED

@@ -296,7 +296,7 @@ void GeoPainter::drawText ( const GeoDataCoordinates & position,
     qreal y;
     bool globeHidesPoint;
 
-    QSizeF textSize( fontMetrics().width( text ), fontMetrics().height() );  
+    QSizeF textSize( fontMetrics().horizontalAdvance( text ), fontMetrics().height() );
 
     bool visible = d->m_viewport->screenCoordinates( position, d->m_x, y, pointRepeatNum, textSize, globeHidesPoint );
 
@@ -610,7 +610,7 @@ void GeoPainter::drawLabelsForPolygons( const QVector<QPolygonF*> &polygons,
         QFont font = this->font();
         font.setPointSizeF(fontSize);
         setFont(font);
-        int labelWidth = fontMetrics().width( labelText );
+        int labelWidth = fontMetrics().horizontalAdvance( labelText );
         if (labelText.size() < 20) {
             labelWidth *= (20.0 / labelText.size());
         }
@@ -661,7 +661,7 @@ void GeoPainter::drawLabelsForPolygons( const QVector<QPolygonF*> &polygons,
                             d->drawTextRotated(point, angle, labelText);
                         } else {
                             for (int i = 0; i < labelText.length(); ++i) {
-                                qreal currentGlyphTextLength = fontMetrics().width(labelText.left(i)) / pathLength;
+                                qreal currentGlyphTextLength = fontMetrics().horizontalAdvance(labelText.left(i)) / pathLength;
 
                                 if ( !upsideDown ) {
                                     angle = -path.angleAtPercent(startPercent + currentGlyphTextLength);
@@ -682,7 +682,7 @@ void GeoPainter::drawLabelsForPolygons( const QVector<QPolygonF*> &polygons,
     } else {
         setPen(labelColor);
 
-        int labelWidth = fontMetrics().width( labelText );
+        int labelWidth = fontMetrics().horizontalAdvance( labelText );
         int labelAscent = fontMetrics().ascent();
 
         QVector<QPointF> labelNodes;
@@ -1032,7 +1032,7 @@ void GeoPainter::drawTextFragment(const QPoint &position, const QString &text,
         const QFontMetrics metrics = textPainter.fontMetrics();
         textPainter.end();
 
-        const int width = metrics.width(text);
+        const int width = metrics.horizontalAdvance(text);
         const int height = metrics.height();
         const QSize size = hasRoundFrame
                               ? QSize(qMax(1.2*width, 1.1*height), 1.2*height)

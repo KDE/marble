@@ -277,7 +277,7 @@ void MapScaleFloatItem::paintContent( QPainter *painter )
         if ( j == 0 ) {
             const QString text = QLatin1String("0 ") + unit;
             painter->drawText(0, fontHeight, text);
-            lastStringEnds = QFontMetrics(font()).width(text);
+            lastStringEnds = QFontMetrics(font()).horizontalAdvance(text);
             continue;
         }
 
@@ -287,16 +287,16 @@ void MapScaleFloatItem::paintContent( QPainter *painter )
         }
         else {
             currentStringBegin = ( j * m_pixelInterval
-                                   - QFontMetrics( font() ).width( intervalStr ) / 2 );
+                                   - QFontMetrics( font() ).horizontalAdvance( intervalStr ) / 2 );
         }
 
         if ( lastStringEnds < currentStringBegin ) {
             painter->drawText( currentStringBegin, fontHeight, intervalStr );
-            lastStringEnds = currentStringBegin + QFontMetrics( font() ).width( intervalStr );
+            lastStringEnds = currentStringBegin + QFontMetrics( font() ).horizontalAdvance( intervalStr );
         }
     }
 
-    int leftRatioIndent = m_leftBarMargin + (m_scaleBarWidth - QFontMetrics( font() ).width(m_ratioString) ) / 2;
+    int leftRatioIndent = m_leftBarMargin + (m_scaleBarWidth - QFontMetrics( font() ).horizontalAdvance(m_ratioString) ) / 2;
     painter->drawText( leftRatioIndent, fontHeight + 3 + m_scaleBarHeight + fontHeight + 5, m_ratioString );
 
     painter->restore();

@@ -178,7 +178,7 @@ QPixmap RouteRequest::pixmap(int position, int size, int margin ) const
         while ( fontSize-- > 0 ) {
             font.setPointSize( fontSize );
             QFontMetrics const fontMetric( font );
-            if ( fontMetric.width( text ) <= iconSize && fontMetric.height( ) <= iconSize ) {
+            if ( fontMetric.horizontalAdvance( text ) <= iconSize && fontMetric.height( ) <= iconSize ) {
                 break;
             }
         }

@@ -181,7 +181,7 @@ void OsmcSymbol::render()
         QFontMetrics fm = QFontMetrics(font);
 
         h = fm.height();
-        w = qMax(h, fm.width(m_text));
+        w = qMax(h, fm.horizontalAdvance(m_text));
     }
 
     const QRect bgRect = QRect((m_side - w) / 2, (m_side - h) / 2, w, h);
