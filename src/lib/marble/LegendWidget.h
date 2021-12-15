@@ -24,7 +24,7 @@ class MARBLE_EXPORT LegendWidget : public QWidget
     Q_OBJECT
 
  public:
-    explicit LegendWidget( QWidget *parent = nullptr, Qt::WindowFlags f = nullptr );
+    explicit LegendWidget( QWidget *parent = nullptr, Qt::WindowFlags f = Qt::WindowFlags() );
     ~LegendWidget() override;
 
     /**

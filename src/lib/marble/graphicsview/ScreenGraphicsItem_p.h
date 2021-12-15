@@ -25,7 +25,7 @@ class ScreenGraphicsItemPrivate : public MarbleGraphicsItemPrivate
           m_position(),
           m_viewportSize(),
           m_floatItemMoving( false ),
-          m_flags( nullptr )
+          m_flags( ScreenGraphicsItem::GraphicsItemFlags() )
     {
     }
 

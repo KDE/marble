@@ -15,7 +15,7 @@ class MARBLE_EXPORT TileLevelRangeWidget: public QWidget
     Q_OBJECT
 
  public:
-    explicit TileLevelRangeWidget( QWidget * const parent = nullptr, Qt::WindowFlags const f = nullptr );
+    explicit TileLevelRangeWidget( QWidget * const parent = nullptr, Qt::WindowFlags const f = Qt::WindowFlags() );
     ~TileLevelRangeWidget() override;
 
     QSize sizeHint() const override;

@@ -547,7 +547,7 @@ Qt::ItemFlags GeoDataTreeModel::flags ( const QModelIndex & index ) const
             if ( parentfolder->style()->listStyle().listItemType() == GeoDataListStyle::RadioFolder ) {
                 return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable | Qt::ItemIsEditable;
             } else if ( parentfolder->style()->listStyle().listItemType() == GeoDataListStyle::CheckHideChildren ) {
-                return nullptr;
+                return Qt::NoItemFlags;
             }
         }
     }

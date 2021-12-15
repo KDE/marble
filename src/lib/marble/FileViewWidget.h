@@ -28,7 +28,7 @@ class MARBLE_EXPORT FileViewWidget : public QWidget
     Q_OBJECT
 
  public:
-    explicit FileViewWidget( QWidget *parent = nullptr, Qt::WindowFlags f = nullptr );
+    explicit FileViewWidget( QWidget *parent = nullptr, Qt::WindowFlags f = Qt::WindowFlags() );
     ~FileViewWidget() override;
 
 

@@ -170,7 +170,7 @@ QVariant SatellitesConfigModel::headerData( int section,
 Qt::ItemFlags SatellitesConfigModel::flags( const QModelIndex &index ) const
 {
     if ( !index.isValid() ) {
-        return nullptr;
+        return Qt::ItemFlags();
     }
 
     SatellitesConfigAbstractItem *item =

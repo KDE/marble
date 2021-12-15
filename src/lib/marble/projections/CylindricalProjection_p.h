@@ -32,7 +32,7 @@ class CylindricalProjectionPrivate : public AbstractProjectionPrivate
                                 qreal bx, qreal by,
                                 QVector<QPolygonF*> &polygons,
                                 const ViewportParams *viewport,
-                                TessellationFlags f = nullptr,
+                                TessellationFlags f = TessellationFlags(),
                                 int mirrorCount = 0,
                                 qreal repeatDistance = 0 ) const;
 
@@ -41,7 +41,7 @@ class CylindricalProjectionPrivate : public AbstractProjectionPrivate
                                int count,
                                QVector<QPolygonF*> &polygons,
                                const ViewportParams *viewport,
-                               TessellationFlags f = nullptr,
+                               TessellationFlags f = TessellationFlags(),
                                int mirrorCount = 0,
                                qreal repeatDistance = 0 ) const;
 

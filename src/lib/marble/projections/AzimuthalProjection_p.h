@@ -53,7 +53,7 @@ public:
                                 qreal bx, qreal by,
                                 QVector<QPolygonF*> &polygons,
                                 const ViewportParams *viewport,
-                                TessellationFlags f = nullptr,
+                                TessellationFlags f = TessellationFlags(),
                                 bool allowLatePolygonCut = false ) const;
 
     void processTessellation(   const GeoDataCoordinates &previousCoords,
@@ -61,7 +61,7 @@ public:
                                int count,
                                QVector<QPolygonF*> &polygons,
                                const ViewportParams *viewport,
-                               TessellationFlags f = nullptr,
+                               TessellationFlags f = TessellationFlags(),
                                bool allowLatePolygonCut = false ) const;
 
     void crossHorizon( const GeoDataCoordinates & bCoord,
@@ -82,7 +82,7 @@ public:
     GeoDataCoordinates findHorizon( const GeoDataCoordinates & previousCoords,
                                     const GeoDataCoordinates & currentCoords,
                                     const ViewportParams *viewport,
-                                    TessellationFlags f = nullptr) const;
+                                    TessellationFlags f = TessellationFlags()) const;
 
     GeoDataCoordinates doFindHorizon(const GeoDataCoordinates & previousCoords,
                                      const GeoDataCoordinates & currentCoords,

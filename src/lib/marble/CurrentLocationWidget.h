@@ -27,7 +27,7 @@ class MARBLE_EXPORT CurrentLocationWidget : public QWidget
     Q_OBJECT
 
  public:
-    explicit CurrentLocationWidget( QWidget *parent = nullptr, Qt::WindowFlags f = nullptr );
+    explicit CurrentLocationWidget( QWidget *parent = nullptr, Qt::WindowFlags f = Qt::WindowFlags() );
     ~CurrentLocationWidget() override;
 
     /**

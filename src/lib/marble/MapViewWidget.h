@@ -26,7 +26,7 @@ class MARBLE_EXPORT MapViewWidget : public QWidget
 {
     Q_OBJECT
  public:
-    explicit MapViewWidget( QWidget *parent = nullptr, Qt::WindowFlags f = nullptr );
+    explicit MapViewWidget( QWidget *parent = nullptr, Qt::WindowFlags f = Qt::WindowFlags() );
     ~MapViewWidget() override;
 
     /**

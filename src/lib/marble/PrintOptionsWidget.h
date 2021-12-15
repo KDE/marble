@@ -20,7 +20,7 @@ class MARBLE_EXPORT PrintOptionsWidget: public QWidget, private Ui::PrintOptions
     Q_OBJECT
 
 public:
-    explicit PrintOptionsWidget( QWidget * parent = nullptr, Qt::WindowFlags f = nullptr );
+    explicit PrintOptionsWidget( QWidget * parent = nullptr, Qt::WindowFlags f = Qt::WindowFlags() );
 
     bool printMap() const;
 
