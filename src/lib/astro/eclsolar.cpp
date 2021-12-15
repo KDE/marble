@@ -454,7 +454,7 @@ void EclSolar::getEclYearInfo(char* wbuf)
  {
   // output the eclipse dates in buffer wbuf accurate to the minute.
 
-  char dts[13];
+  char dts[15];
   char outbuf[127];
   char magbuf[30];
   int j, p, kecl;
