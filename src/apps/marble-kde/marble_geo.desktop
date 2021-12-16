@@ -57,6 +57,6 @@ Name[x-test]=xxMarblexx
 Name[zh_CN]=Marble
 Name[zh_TW]=地理_Marble
 MimeType=x-scheme-handler/geo;
-Terminal=true
+Terminal=false
 NoDisplay=true
 
