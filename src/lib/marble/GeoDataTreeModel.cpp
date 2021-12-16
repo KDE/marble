@@ -331,7 +331,7 @@ QVariant GeoDataTreeModel::data( const QModelIndex &index, int role ) const
             return QVariant( feature->description() );
         }
     } else if ( role == MarblePlacemarkModel::ObjectPointerRole ) {
-        return qVariantFromValue( object );
+        return QVariant::fromValue( object );
     } else if ( role == MarblePlacemarkModel::PopularityIndexRole ) {
         if (const auto placemark = geodata_cast<GeoDataPlacemark>(object)) {
             return QVariant( placemark->zoomLevel() );
@@ -342,7 +342,7 @@ QVariant GeoDataTreeModel::data( const QModelIndex &index, int role ) const
         }
     } else if ( role == MarblePlacemarkModel::CoordinateRole ) {
         if (const auto placemark = geodata_cast<GeoDataPlacemark>(object)) {
-            return qVariantFromValue( placemark->coordinate() );
+            return QVariant::fromValue( placemark->coordinate() );
         } else if (const auto flyTo = geodata_cast<GeoDataFlyTo>(object)) {
             if (const auto camera = geodata_cast<GeoDataCamera>(flyTo->view())) {
                 return QVariant::fromValue<GeoDataCoordinates>( camera->coordinates() );
