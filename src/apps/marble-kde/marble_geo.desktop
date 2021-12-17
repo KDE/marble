@@ -1,6 +1,7 @@
 [Desktop Entry]
 Type=Application
 Exec=marble --geo-uri=%u
+Icon=marble
 Name=Marble
 Name[bg]=Marble
 Name[bs]=Marble
