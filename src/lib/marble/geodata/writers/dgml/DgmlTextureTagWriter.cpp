@@ -52,12 +52,17 @@ bool DgmlTextureTagWriter::write(const GeoNode *node, GeoWriter& writer) const
         {
             QString protocol = texture->downloadUrls().at(i).toString().left(texture->downloadUrls().at(i).toString().indexOf(QLatin1Char(':')));
             QString host =  QString( texture->downloadUrls().at(i).host() );
+            int port =  texture->downloadUrls().at(i).port();
             QString path =  QString( texture->downloadUrls().at(i).path() );
             QString query = texture->downloadUrls().at(i).query(QUrl::FullyEncoded);
 
             writer.writeStartElement( dgml::dgmlTag_DownloadUrl );
             writer.writeAttribute( "protocol", protocol );
             writer.writeAttribute( "host", host );
+            if( port != -1 )
+            {
+                writer.writeAttribute( "port", QString::number( port ) );
+            }
             writer.writeAttribute( "path", path );
             writer.writeAttribute( "query", query );
             writer.writeEndElement();
