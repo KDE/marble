@@ -3,6 +3,7 @@ Type=Application
 Exec=marble --geo-uri=%u
 Icon=marble
 Name=Marble
+Name[ar]=ماربل
 Name[bg]=Marble
 Name[bs]=Marble
 Name[ca]=Marble

@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=World Clock
+Name[ar]=ساعة العالم
 Name[bg]=Световен часовник
 Name[bs]=Svijetski Sat
 Name[ca]=Rellotge mundial
@@ -50,6 +51,7 @@ Name[x-test]=xxWorld Clockxx
 Name[zh_CN]=世界时钟
 Name[zh_TW]=世界時鐘
 Comment=Shows the time in different parts of the world
+Comment[ar]=تعرض الوقت في مختلف أرجاء العالم
 Comment[bg]=Показва времето в различни краища на света
 Comment[bs]=Prikazuje vrijeme u različitim dijelovima svijeta
 Comment[ca]=Mostra l'hora en diverses parts del món

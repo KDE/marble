@@ -1,6 +1,7 @@
 [Desktop Entry]
 Type=Service
 Name=GeoJSON Geographic Data
+Name[ar]=بيانات جغرافية GeoJSON
 Name[ca]=Dades geogràfiques GeoJSON
 Name[ca@valencia]=Dades geogràfiques GeoJSON
 Name[cs]=Zeměpisná data GeoJSON
