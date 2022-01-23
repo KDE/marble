@@ -8,6 +8,7 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LGPL-2.1-or-later</project_license>
   <name>Marble</name>
+  <name xml:lang="ar">ماربل</name>
   <name xml:lang="bs">Marble</name>
   <name xml:lang="ca">Marble</name>
   <name xml:lang="ca-valencia">Marble</name>
@@ -43,6 +44,7 @@
   <name xml:lang="zh-CN">Marble</name>
   <name xml:lang="zh-TW">地球儀_Marble</name>
   <summary>Virtual Globe</summary>
+  <summary xml:lang="ar">كرة أرضية افتراضية</summary>
   <summary xml:lang="bs">Virtualni globus</summary>
   <summary xml:lang="ca">Globus terraqüi virtual</summary>
   <summary xml:lang="ca-valencia">Globus terraqüi virtual</summary>
@@ -79,6 +81,7 @@
   <summary xml:lang="zh-TW">虛擬地球儀</summary>
   <description>
     <p>Marble is a virtual globe and world atlas — your swiss army knife for maps that you can use to learn more about the Earth and other planets.</p>
+    <p xml:lang="ar">ماربل هو أطلس العالم وكرة أرضية - سكين الجيش السويسري الخاص بك للخرائط التي يمكنك استخدامها لمعرفة المزيد عن الأرض والكواكب الأخرى.</p>
     <p xml:lang="ca">El Marble és un globus terraqüi virtual i un atles mundial: la navalla suïssa dels mapes que es pot utilitzar per a aprendre més quant a la Terra i altres planetes.</p>
     <p xml:lang="ca-valencia">El Marble és un globus terraqüi virtual i un atles mundial: la navalla suïssa dels mapes que es pot utilitzar per a aprendre més quant a la Terra i altres planetes.</p>
     <p xml:lang="da">Marble er en virtuelt globus og verdensatlas — din personlige schweizerkniv til kort, som du kan bruge til at lære nyt om Jorden og andre planeter.</p>
@@ -106,6 +109,7 @@
     <p xml:lang="zh-CN">Marble 是一款虚拟地球仪和世界地图应用程序。它具备与地图相关的各种功能，为用户了解地球以及其他行星提供了有力工具。</p>
     <p xml:lang="zh-TW">Marble 是一套虛擬地球儀與世界地圖集 — 如同您的地圖瑞士軍刀，能學習關於地球和其他星球的更多資訊。</p>
     <p>Explore the neighborhood with Marble's rich set of city and street level maps. Search for addresses and places of interest. Marble takes care of querying various search backends and presents their results in a unified view. Calculate pedestrian, bike and motorcar routes with ease — online and offline, with an arbitrary number of via points.</p>
+    <p xml:lang="ar">استكشف الحي مع مجموعة ماربل الغنية من خرائط مستوى المدينة والشارع. ابحث عن العناوين والأماكن التي تهمك. يعتني ماربل بالاستعلام خلفيات البحث المختلفة وعرض نتائجها في منظور موحد. احسب مسارات المشاة والدراجات والسيارات بسهولة - عبر الإنترنت وغير متصل، مع عدد عشوائي من نِقَاط عبر.</p>
     <p xml:lang="bs">Istražite komšiluk sa bogatim skupom Marble gradskih mapa do nivoa ulice. Tražite adrese i znamenitosti. Marble brine o upitu različitih pretražnih pozadina i predstavlja svoje rezultate u jedinstvenom prikazu. Izračunajte pješačke, biciklističke i automobilske puteve sa lakoćom - sa i bez mreže sa proizvoljnim brojem tačaka preko kojih se prelazi.</p>
     <p xml:lang="ca">Exploreu el veïnat amb el conjunt de mapes de carrers i ciutats del Marble. Cerqueu adreces i llocs d'interès. El Marble té cura de consultar diversos motors de cerca i mostra els seus resultats en una vista unificada. Calcula rutes a peu, en bicicleta i en automòbil amb facilitat: en línia i desconnectat, amb un nombre arbitrari de punts de pas.</p>
     <p xml:lang="ca-valencia">Exploreu el veïnat amb el conjunt de mapes de carrers i ciutats del Marble. Cerqueu adreces i llocs d'interés. El Marble té cura de consultar diversos motors de cerca i mostra els seus resultats en una vista unificada. Calcula rutes a peu, en bicicleta i en automòbil amb facilitat: en línia i desconnectat, amb un nombre arbitrari de punts de pas.</p>
@@ -137,6 +141,7 @@
     <p xml:lang="zh-CN">Marble 提供了丰富多彩的城市和街道地图来帮助您探索周边区域，搜索地址和名胜。Marble 可以管理多种不同后端程序的查询请求，并在统一的视图中显示结果。它还能够简便地计算步行、骑行和驾驶路线，支持在线和离线使用，并可设置途径点。</p>
     <p xml:lang="zh-TW">透過 Marble 豐富的城市與街道地圖來探索您的鄰近地區。可以搜尋地址與有趣的地方。Marble 有多個不同的搜尋後端介面，並將它們的搜尋結果在統一的檢視介面中顯示。您也可以輕鬆計算走路、騎車或開車的路徑，設定經過點，甚至可以離線作業。</p>
     <p>Start exploring the world. View clouds and sun shadow, follow satellites and space stations and display their orbits, all updated in real-time. Travel back in time and learn about historic views of our planet using maps from past centuries. Earth is not enough? Marble also offers maps of the moon and other planets.</p>
+    <p xml:lang="ar">ابدأ في استكشاف العالم. اعرض الغيوم وظلال الشمس، وتابع الأقمار الصناعية والمحطات الفضائية واعرض مداراتها، وكلها محدثة في الوقت الفعلي. سافر عبر الزمن إلى الوراء وتعرف إلى المناظر التاريخية لكوكبنا باستخدام خرائط من القرون الماضية. الأرض لا تكفي؟ يقدم ماربل أيضًا خرائط للقمر والكواكب الأخرى.</p>
     <p xml:lang="bs">Počnite istraživanje svijeta. Pogledajte oblake i sunčeve sijenke, pratite satelita i svemirske stanice i prikazujte njihove orbite, sve ažurirano u realnom vremenu. Putujte u prošlost i uče o istorijskim pogledima naše planete koristeći se kartama iz prošlih vijekova. Zemlja nije dovoljna? Marble takođe nudi mape Meseca i drugih planeta.</p>
     <p xml:lang="ca">Comenceu explorant el món. Vegeu els núvols i les ombres del sol, seguiu els satèl·lits i les estacions espacials, i visualitzeu les seves òrbites actualitzades en temps real. Viatgeu enrere en el temps i apreneu de les vistes històriques del nostre planeta utilitzant mapes de segles passats. La Terra no és suficient? El Marble també ofereix mapes de la Lluna i d'altres planetes.</p>
     <p xml:lang="ca-valencia">Comenceu explorant el món. Vegeu els núvols i les ombres del sol, seguiu els satèl·lits i les estacions espacials, i visualitzeu les seues òrbites actualitzades en temps real. Viatgeu arrere en el temps i apreneu de les vistes històriques del nostre planeta utilitzant mapes de segles passats. La Terra no és suficient? El Marble també ofereix mapes de la Lluna i d'altres planetes.</p>
@@ -176,6 +181,7 @@
   <screenshots>
     <screenshot type="default">
       <caption>Earth globe in Marble</caption>
+      <caption xml:lang="ar">الكرة الأرضية في ماربل</caption>
       <caption xml:lang="ca">Globus terraqüi al Marble</caption>
       <caption xml:lang="ca-valencia">Globus terraqüi al Marble</caption>
       <caption xml:lang="da">Jordglobus i Marble</caption>
