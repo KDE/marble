@@ -199,13 +199,13 @@ GeoDataDocument* OpenRouteServiceRunner::parse( const QByteArray &content ) cons
                 switch ( matches.size() ) {
                 case 5:
                     // days    = regexp.cap( matches.size() - 4 ).toInt();
-                    // Intentionally no break
+                    Q_FALLTHROUGH();
                 case 4:
                     hours   = regexp.cap( matches.size() - 3 ).toInt();
-                    // Intentionally no break
+                    Q_FALLTHROUGH();
                 case 3:
                     minutes = regexp.cap( matches.size() - 2 ).toInt();
-                    // Intentionally no break
+                    Q_FALLTHROUGH();
                 case 2:
                     seconds = regexp.cap( matches.size() - 1 ).toInt();
                     break;

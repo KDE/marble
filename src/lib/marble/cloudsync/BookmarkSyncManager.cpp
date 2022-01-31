@@ -666,6 +666,7 @@ void BookmarkSyncManager::resolveConflict( MergeItem *item )
             diffItem = d->m_diffA.first();
             break;
         }
+        Q_FALLTHROUGH();
     case MergeItem::B:
         diffItem = d->m_conflictItem;
         break;
