@@ -303,7 +303,7 @@ public:
         return _leftToRight.isEmpty();
     }
 
-    const right_type operator[](const left_type &t) const {
+    right_type operator[](const left_type &t) const {
         return _leftToRight.operator[](t);
     }
 
