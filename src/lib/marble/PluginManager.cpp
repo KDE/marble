@@ -231,11 +231,12 @@ void PluginManagerPrivate::loadPlugins()
     bool foundPlugin = false;
     for( const QString &fileName: pluginFileNameList ) {
         QString const baseName = QFileInfo(fileName).baseName();
-        if (!m_whitelist.isEmpty() && !m_whitelist.contains(baseName)) {
+        QString const libBaseName = MARBLE_SHARED_LIBRARY_PREFIX + QFileInfo(fileName).baseName();
+        if (!m_whitelist.isEmpty() && !m_whitelist.contains(baseName) && !m_whitelist.contains(libBaseName)) {
             mDebug() << "Ignoring non-whitelisted plugin " << fileName;
             continue;
         }
-        if (m_blacklist.contains(baseName)) {
+        if (m_blacklist.contains(baseName) || m_blacklist.contains(libBaseName)) {
             mDebug() << "Ignoring blacklisted plugin " << fileName;
             continue;
         }
