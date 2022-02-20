@@ -16,6 +16,7 @@
 #include "MarbleMap.h"
 #include "Placemark.h"
 #include "Coordinate.h"
+#include "MapTheme.h"
 
 namespace Marble
 {
@@ -42,6 +43,8 @@ namespace Marble
 
         Q_PROPERTY(bool showFrameRate READ showFrameRate WRITE setShowFrameRate NOTIFY showFrameRateChanged)
         Q_PROPERTY(Projection projection READ projection WRITE setProjection NOTIFY projectionChanged)
+
+        Q_PROPERTY(Marble::MapTheme* mapTheme READ mapTheme NOTIFY mapThemeChanged)
         Q_PROPERTY(QString mapThemeId READ mapThemeId WRITE setMapThemeId NOTIFY mapThemeIdChanged)
         Q_PROPERTY(bool showAtmosphere READ showAtmosphere WRITE setShowAtmosphere NOTIFY showAtmosphereChanged)
         Q_PROPERTY(bool showCompass READ showCompass WRITE setShowCompass NOTIFY showCompassChanged)
@@ -173,6 +176,7 @@ namespace Marble
         bool showFrameRate() const;
         Projection projection() const;
         QString mapThemeId() const;
+        Marble::MapTheme * mapTheme() const;
         bool showAtmosphere() const;
         bool showCompass() const;
         bool showClouds() const;
@@ -231,6 +235,7 @@ namespace Marble
         void showFrameRateChanged(bool showFrameRate);
         void projectionChanged(Projection projection);
         void mapThemeIdChanged(const QString& mapThemeId);
+        void mapThemeChanged();
         void showAtmosphereChanged(bool showAtmosphere);
         void showCompassChanged(bool showCompass);
         void showCloudsChanged(bool showClouds);

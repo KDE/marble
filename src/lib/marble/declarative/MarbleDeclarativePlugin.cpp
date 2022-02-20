@@ -6,6 +6,7 @@
 #include "MarbleDeclarativePlugin.h"
 
 #include "Coordinate.h"
+#include "MapTheme.h"
 #include "DeclarativeMapThemeManager.h"
 #include "MarbleDeclarativeObject.h"
 #include "PositionSource.h"
@@ -35,11 +36,12 @@
 
 void MarbleDeclarativePlugin::registerTypes( const char *uri )
 {
-    qRegisterMetaType<Marble::MarbleMap*>("MarbleMap*");
+    qRegisterMetaType<Marble::MarbleMap*>("MarbleMap");
 
     //@uri org.kde.marble
     qmlRegisterType<Coordinate>( uri, 0, 20, "Coordinate" );
     qRegisterMetaType<Coordinate::Notation>();
+    qRegisterMetaType<Marble::MapTheme*>("MapTheme");
 
     qmlRegisterType<Marble::Placemark>( uri, 0, 20, "Placemark" );
     qmlRegisterType<Marble::PositionSource>( uri, 0, 20, "PositionSource" );

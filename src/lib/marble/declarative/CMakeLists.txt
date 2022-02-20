@@ -16,6 +16,7 @@ add_library( marbledeclarative SHARED
     GeoItem.cpp
     GeoPolyline.cpp
     DeclarativeMapThemeManager.cpp
+    MapTheme.cpp
     MapThemeModel.cpp
     MarbleDeclarativeObject.cpp
     MarbleDeclarativePlugin.cpp

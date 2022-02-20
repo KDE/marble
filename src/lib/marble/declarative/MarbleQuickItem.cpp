@@ -146,7 +146,7 @@ namespace Marble
 
         MarbleQuickItem *m_marbleQuick;
         QuickItemSelectionRubber m_selectionRubber;
-        bool m_usePinchArea;
+//        bool m_usePinchArea;
     };
 
     class MarbleQuickItemPrivate
@@ -205,6 +205,7 @@ namespace Marble
         friend class MarbleQuickItem;
         MarbleModel m_model;
         MarbleMap m_map;
+        Marble::MapTheme m_mapTheme;
         MarbleAbstractPresenter m_presenter;
         bool m_positionVisible;
         Placemark m_currentPosition;
@@ -241,6 +242,7 @@ namespace Marble
         }
 
         d->m_model.positionTracking()->setTrackVisible(false);
+        d->m_mapTheme.setMap(this);
 
         connect(&d->m_map, SIGNAL(repaintNeeded(QRegion)), this, SLOT(update()));
         connect(this, &MarbleQuickItem::widthChanged, this, &MarbleQuickItem::resizeMap);
@@ -397,6 +399,11 @@ namespace Marble
     QString MarbleQuickItem::mapThemeId() const
     {
         return d->m_map.mapThemeId();
+    }
+
+    Marble::MapTheme *MarbleQuickItem::mapTheme() const
+    {
+        return &d->m_mapTheme;
     }
 
     bool MarbleQuickItem::showAtmosphere() const
@@ -1264,5 +1271,4 @@ namespace Marble
         }
         m_map.setVisibleRelationTypes(relationTypes);
     }
-
 }
