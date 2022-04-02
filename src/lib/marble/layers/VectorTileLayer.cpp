@@ -17,6 +17,7 @@
 #include "GeoSceneGroup.h"
 #include "GeoSceneTypes.h"
 #include "GeoSceneVectorTileDataset.h"
+#include "GeoSceneAbstractTileProjection.h"
 #include "MarbleDebug.h"
 #include "TileLoader.h"
 #include "ViewportParams.h"
@@ -24,6 +25,7 @@
 #include "GeoDataDocument.h"
 #include "GeoDataLatLonAltBox.h"
 #include "HttpDownloadManager.h"
+#include "TileLoaderHelper.h"
 
 namespace Marble
 {
@@ -40,6 +42,8 @@ public:
 
     void updateTile(const TileId &tileId, GeoDataDocument* document);
     void updateLayerSettings();
+
+    QVector<const GeoSceneVectorTileDataset *> findRelevantVectorLayers( const TileId &stackedTileId ) const;
 
 public:
     VectorTileLayer  *const m_parent;
@@ -103,7 +107,7 @@ void VectorTileLayer::Private::updateLayerSettings()
 VectorTileLayer::VectorTileLayer(HttpDownloadManager *downloadManager,
                                  const PluginManager *pluginManager,
                                  GeoDataTreeModel *treeModel)
-    : QObject()
+    : TileLayer()
     , d(new Private(downloadManager, pluginManager, this, treeModel))
 {
     qRegisterMetaType<TileId>("TileId");
@@ -115,11 +119,6 @@ VectorTileLayer::VectorTileLayer(HttpDownloadManager *downloadManager,
 VectorTileLayer::~VectorTileLayer()
 {
     delete d;
-}
-
-QStringList VectorTileLayer::renderPosition() const
-{
-    return QStringList(QStringLiteral("SURFACE"));
 }
 
 RenderState VectorTileLayer::renderState() const
@@ -173,6 +172,43 @@ void VectorTileLayer::reload()
     }
 }
 
+QSize VectorTileLayer::tileSize() const
+{
+    return QSize(256, 256);
+}
+
+const GeoSceneAbstractTileProjection *VectorTileLayer::tileProjection() const
+{
+    if (!d->m_activeTileModels.isEmpty())
+        return d->m_activeTileModels.first()->layer()->tileProjection();
+    return 0;
+}
+
+int VectorTileLayer::tileColumnCount(int level) const
+{
+    // So far we only support Vector tiles with a single level zero tile
+    return TileLoaderHelper::levelToColumn( 1, level );
+}
+
+int VectorTileLayer::tileRowCount(int level) const
+{
+    // So far we only support Vector tiles with a single level zero tile
+    return TileLoaderHelper::levelToRow( 1, level );
+}
+
+void VectorTileLayer::downloadTile(const TileId &id)
+{
+    const QVector<const GeoSceneVectorTileDataset *> vectorLayers = d->findRelevantVectorLayers( id );
+
+    for ( const GeoSceneVectorTileDataset *vectorLayer: vectorLayers ) {
+        if (vectorLayer->tileLevels().isEmpty() || vectorLayer->tileLevels().contains(id.zoomLevel())) {
+            if ( TileLoader::tileStatus( vectorLayer, id ) != TileLoader::Available ) {
+                d->m_loader.downloadTile( vectorLayer, id, DownloadBulk );
+            }
+        }
+    }
+}
+
 void VectorTileLayer::reset()
 {
     for (VectorTileModel *mapper: d->m_tileModels) {
@@ -203,6 +239,34 @@ void VectorTileLayer::setMapTheme(const QVector<const GeoSceneVectorTileDataset 
         emit tileLevelChanged(level);
     }
 }
+
+QVector<const GeoSceneVectorTileDataset *> VectorTileLayer::Private::findRelevantVectorLayers( const TileId &tileId ) const
+{
+    QVector<const GeoSceneVectorTileDataset *> result;
+
+    for (VectorTileModel * candidate: m_activeTileModels) {
+        Q_ASSERT( candidate );
+        const GeoSceneVectorTileDataset * vectorTileDataset = candidate->layer();
+        // check, if layer provides tiles for the current level
+        if ( !vectorTileDataset->hasMaximumTileLevel() ||
+             vectorTileDataset->maximumTileLevel() >= tileId.zoomLevel() ) {
+            //check if the tile intersects with texture bounds
+            if (vectorTileDataset->latLonBox().isNull()) {
+                result.append(vectorTileDataset);
+            }
+            else {
+                const GeoDataLatLonBox bbox = vectorTileDataset->tileProjection()->geoCoordinates(tileId);
+
+                if (vectorTileDataset->latLonBox().intersects(bbox)) {
+                    result.append( vectorTileDataset );
+                }
+            }
+        }
+    }
+
+    return result;
+}
+
 
 }
 

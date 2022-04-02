@@ -374,8 +374,10 @@ void MergedLayerDecorator::downloadStackedTile( const TileId &id, DownloadUsage 
     const QVector<const GeoSceneTextureTileDataset *> textureLayers = d->findRelevantTextureLayers( id );
 
     for ( const GeoSceneTextureTileDataset *textureLayer: textureLayers ) {
-        if ( TileLoader::tileStatus( textureLayer, id ) != TileLoader::Available || usage == DownloadBrowse ) {
-            d->m_tileLoader->downloadTile( textureLayer, id, usage );
+        if (textureLayer->tileLevels().isEmpty() || textureLayer->tileLevels().contains(id.zoomLevel())) {
+            if ( TileLoader::tileStatus( textureLayer, id ) != TileLoader::Available || usage == DownloadBrowse ) {
+                d->m_tileLoader->downloadTile( textureLayer, id, usage );
+            }
         }
     }
 }

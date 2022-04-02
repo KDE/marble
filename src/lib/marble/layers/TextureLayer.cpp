@@ -239,7 +239,7 @@ TextureLayer::TextureLayer( HttpDownloadManager *downloadManager,
                             PluginManager* pluginManager,
                             const SunLocator *sunLocator,
                             QAbstractItemModel *groundOverlayModel )
-    : QObject()
+    : TileLayer()
     , d( new Private( downloadManager, pluginManager, sunLocator, groundOverlayModel, this ) )
 {
     connect( &d->m_loader, SIGNAL(tileCompleted(TileId,QImage)),
@@ -258,11 +258,6 @@ TextureLayer::~TextureLayer()
     delete d->m_texmapper;
     delete d->m_texcolorizer;
     delete d;
-}
-
-QStringList TextureLayer::renderPosition() const
-{
-    return QStringList(QStringLiteral("SURFACE"));
 }
 
 void TextureLayer::addSeaDocument( const GeoDataDocument *seaDocument )

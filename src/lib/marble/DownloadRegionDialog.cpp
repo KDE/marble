@@ -25,7 +25,9 @@
 #include "MarbleModel.h"
 #include "MarbleWidget.h"
 #include "LatLonBoxWidget.h"
+#include "TileLayer.h"
 #include "TextureLayer.h"
+#include "VectorTileLayer.h"
 #include "TileId.h"
 #include "TileCoordsPyramid.h"
 #include "TileLevelRangeWidget.h"
@@ -70,6 +72,7 @@ public:
     QPushButton * m_okButton;
     QPushButton * m_applyButton;
     TextureLayer const * m_textureLayer;
+    VectorTileLayer const * m_vectorTileLayer;
     int m_visibleTileLevel;
     MarbleModel const*const m_model;
     MarbleWidget *const m_widget;
@@ -94,6 +97,7 @@ DownloadRegionDialog::Private::Private( MarbleWidget * const widget,
       m_okButton( nullptr ),
       m_applyButton( nullptr ),
       m_textureLayer( widget->textureLayer() ),
+      m_vectorTileLayer( widget->vectorTileLayer() ),
       m_visibleTileLevel( m_textureLayer->tileZoomLevel() ),
       m_model( widget->model() ),
       m_widget( widget ),
@@ -310,6 +314,9 @@ QVector<TileCoordsPyramid> DownloadRegionDialog::region() const
         return QVector<TileCoordsPyramid>();
     }
 
+    const TileLayer * tileLayer = d->m_textureLayer->textureLayerCount() > 0 ? dynamic_cast<const TileLayer *>(d->m_textureLayer) : dynamic_cast<const TileLayer *>(d->m_vectorTileLayer);
+
+    // TODO: enhance for VectorLayer support
     d->m_downloadRegion.setTileLevelRange( d->m_tileLevelRangeWidget->topLevel(),
                                            d->m_tileLevelRangeWidget->bottomLevel() );
     d->m_downloadRegion.setVisibleTileLevel( d->m_visibleTileLevel );
@@ -328,10 +335,10 @@ QVector<TileCoordsPyramid> DownloadRegionDialog::region() const
             offset *= KM2METER;
         }
         const GeoDataLineString waypoints = d->m_model->routingManager()->routingModel()->route().path();
-        return d->m_downloadRegion.fromPath( d->m_textureLayer, offset, waypoints );
+        return d->m_downloadRegion.fromPath( tileLayer, offset, waypoints );
     }
 
-    return d->m_downloadRegion.region( d->m_textureLayer, downloadRegion );
+    return d->m_downloadRegion.region( tileLayer, downloadRegion );
 }
 
 void DownloadRegionDialog::setSpecifiedLatLonAltBox( GeoDataLatLonAltBox const & region )

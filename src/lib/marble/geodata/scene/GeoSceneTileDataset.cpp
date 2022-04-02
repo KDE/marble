@@ -200,6 +200,16 @@ const QSize GeoSceneTileDataset::tileSize() const
     return m_tileSize;
 }
 
+GeoDataLatLonBox GeoSceneTileDataset::latLonBox() const
+{
+    return m_latLonBox;
+}
+
+void GeoSceneTileDataset::setLatLonBox( const GeoDataLatLonBox &box )
+{
+    m_latLonBox = box;
+}
+
 void GeoSceneTileDataset::setTileSize( const QSize &tileSize )
 {
     if ( tileSize.isEmpty() ) {

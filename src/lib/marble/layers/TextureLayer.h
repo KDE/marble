@@ -6,8 +6,7 @@
 #ifndef MARBLE_MARBLETEXTURELAYER_H
 #define MARBLE_MARBLETEXTURELAYER_H
 
-#include "LayerInterface.h"
-#include <QObject>
+#include "TileLayer.h"
 
 #include "MarbleGlobal.h"
 
@@ -29,7 +28,7 @@ class TileId;
 class ViewportParams;
 class PluginManager;
 
-class MARBLE_EXPORT TextureLayer : public QObject, public LayerInterface
+class MARBLE_EXPORT TextureLayer : public TileLayer
 {
     Q_OBJECT
 
@@ -40,8 +39,6 @@ class MARBLE_EXPORT TextureLayer : public QObject, public LayerInterface
                   QAbstractItemModel *groundOverlayModel );
 
     ~TextureLayer() override;
-
-    QStringList renderPosition() const override;
 
     void addSeaDocument( const GeoDataDocument *seaDocument );
 

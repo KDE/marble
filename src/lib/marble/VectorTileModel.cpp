@@ -138,6 +138,11 @@ QString VectorTileModel::name() const
     return m_layer->name();
 }
 
+const GeoSceneVectorTileDataset *VectorTileModel::layer() const
+{
+    return m_layer;
+}
+
 void VectorTileModel::removeTile(GeoDataDocument *document)
 {
     emit tileRemoved(document);

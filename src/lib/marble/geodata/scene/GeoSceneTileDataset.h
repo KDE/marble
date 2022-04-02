@@ -16,6 +16,7 @@
 #include "GeoSceneAbstractDataset.h"
 #include "GeoSceneAbstractTileProjection.h"
 #include "MarbleGlobal.h"
+#include "GeoDataLatLonBox.h"
 
 class QStringList;
 class QUrl;
@@ -77,6 +78,13 @@ class GEODATA_EXPORT GeoSceneTileDataset : public GeoSceneAbstractDataset
     const QSize tileSize() const;
     void setTileSize( const QSize &tileSize );
 
+    /**
+     * @brief set bounds for the texture. Tiles outside of these bounds won't be searched in this texture.
+     * Null box means no bounds.
+     */
+    void setLatLonBox( const GeoDataLatLonBox &box );
+    GeoDataLatLonBox latLonBox() const;
+
     void setTileProjection(GeoSceneAbstractTileProjection::Type projectionType);
 
     const GeoSceneAbstractTileProjection * tileProjection() const;
@@ -115,6 +123,7 @@ class GEODATA_EXPORT GeoSceneTileDataset : public GeoSceneAbstractDataset
     int m_maximumTileLevel;
     QVector<int> m_tileLevels;
     mutable QSize m_tileSize;
+    GeoDataLatLonBox m_latLonBox;
     GeoSceneAbstractTileProjection *m_tileProjection;
     QString m_blending;
 

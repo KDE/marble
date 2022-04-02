@@ -28,9 +28,9 @@ public:
 
     DownloadRegionPrivate();
 
-    int rad2PixelX( qreal const lon, const TextureLayer *textureLayer ) const;
+    int rad2PixelX( qreal const lon, const TileLayer *tileLayer ) const;
 
-    int rad2PixelY( qreal const lat, const TextureLayer *textureLayer ) const;
+    int rad2PixelY( qreal const lat, const TileLayer *tileLayer ) const;
 };
 
 DownloadRegionPrivate::DownloadRegionPrivate() : m_marbleModel( nullptr ),
@@ -40,19 +40,23 @@ DownloadRegionPrivate::DownloadRegionPrivate() : m_marbleModel( nullptr ),
 }
 
 // copied from AbstractScanlineTextureMapper and slightly adjusted
-int DownloadRegionPrivate::rad2PixelX( qreal const lon, const TextureLayer *textureLayer ) const
+int DownloadRegionPrivate::rad2PixelX( qreal const lon, const TileLayer *tileLayer ) const
 {
-    qreal const globalWidth = textureLayer->tileSize().width()
-            * textureLayer->tileColumnCount( m_visibleTileLevel );
+    const TextureLayer * textureLayer = dynamic_cast<const TextureLayer *>(tileLayer);
+
+    qreal tileWidth = textureLayer && textureLayer->textureLayerCount() > 0 ? textureLayer->tileSize().width() : 256;
+    qreal const globalWidth = tileWidth * tileLayer->tileColumnCount( m_visibleTileLevel );
     return static_cast<int>(globalWidth * 0.5 * (1 + lon / M_PI));
 }
 
 // copied from AbstractScanlineTextureMapper and slightly adjusted
-int DownloadRegionPrivate::rad2PixelY( qreal const lat, const TextureLayer *textureLayer ) const
+int DownloadRegionPrivate::rad2PixelY( qreal const lat, const TileLayer *tileLayer ) const
 {
-    qreal const globalHeight = textureLayer->tileSize().height()
-            * textureLayer->tileRowCount( m_visibleTileLevel );
-    switch (textureLayer->tileProjection()->type()) {
+    const TextureLayer * textureLayer = dynamic_cast<const TextureLayer *>(tileLayer);
+    qreal tileHeight = textureLayer && textureLayer->textureLayerCount() > 0 ? textureLayer->tileSize().height() : 256;
+    qreal const globalHeight = tileHeight * tileLayer->tileRowCount( m_visibleTileLevel );
+
+    switch (tileLayer->tileProjection()->type()) {
     case GeoSceneAbstractTileProjection::Equirectangular:
         return static_cast<int>(globalHeight * (0.5 - lat / M_PI));
     case GeoSceneAbstractTileProjection::Mercator:
@@ -93,13 +97,14 @@ void DownloadRegion::setTileLevelRange( const int minimumTileLevel, const int ma
     d->m_tileLevelRange.second = maximumTileLevel;
 }
 
-QVector<TileCoordsPyramid> DownloadRegion::region( const TextureLayer *textureLayer, const GeoDataLatLonAltBox &downloadRegion ) const
+QVector<TileCoordsPyramid> DownloadRegion::region( const TileLayer *tileLayer, const GeoDataLatLonAltBox &downloadRegion ) const
 {
-    Q_ASSERT( textureLayer );
-    int const westX = d->rad2PixelX( downloadRegion.west(), textureLayer );
-    int const northY = d->rad2PixelY( downloadRegion.north(), textureLayer );
-    int const eastX = d->rad2PixelX( downloadRegion.east(), textureLayer );
-    int const southY = d->rad2PixelY( downloadRegion.south(), textureLayer );
+    Q_ASSERT( tileLayer );
+
+    int const westX = d->rad2PixelX( downloadRegion.west(), tileLayer );
+    int const northY = d->rad2PixelY( downloadRegion.north(), tileLayer );
+    int const eastX = d->rad2PixelX( downloadRegion.east(), tileLayer );
+    int const southY = d->rad2PixelY( downloadRegion.south(), tileLayer );
 
     // FIXME: remove this stuff
     mDebug() << "DownloadRegionDialog downloadRegion:"
@@ -110,8 +115,8 @@ QVector<TileCoordsPyramid> DownloadRegion::region( const TextureLayer *textureLa
     mDebug() << "north/west (x/y):" << westX << northY;
     mDebug() << "south/east (x/y):" << eastX << southY;
 
-    int const tileWidth = textureLayer->tileSize().width();
-    int const tileHeight = textureLayer->tileSize().height();
+    int const tileWidth = tileLayer->tileSize().width();
+    int const tileHeight = tileLayer->tileSize().height();
     mDebug() << "DownloadRegionDialog downloadRegion: tileSize:" << tileWidth << tileHeight;
 
     int const visibleLevelX1 = qMin( westX, eastX );
@@ -169,7 +174,7 @@ void DownloadRegion::setVisibleTileLevel(const int tileLevel)
     d->m_visibleTileLevel = tileLevel;
 }
 
-QVector<TileCoordsPyramid> DownloadRegion::fromPath( const TextureLayer *textureLayer, qreal offset, const GeoDataLineString &waypoints ) const
+QVector<TileCoordsPyramid> DownloadRegion::fromPath( const TileLayer *tileLayer, qreal offset, const GeoDataLineString &waypoints ) const
 {
     if ( !d->m_marbleModel ) {
         return QVector<TileCoordsPyramid>();
@@ -179,8 +184,8 @@ QVector<TileCoordsPyramid> DownloadRegion::fromPath( const TextureLayer *texture
     int const bottomLevel = d->m_tileLevelRange.second;
     TileCoordsPyramid coordsPyramid( topLevel, bottomLevel );
 
-    int const tileWidth = textureLayer->tileSize().width();
-    int const tileHeight = textureLayer->tileSize().height();
+    int const tileWidth = tileLayer->tileSize().width();
+    int const tileHeight = tileLayer->tileSize().height();
 
     qreal radius = d->m_marbleModel->planetRadius();
     QVector<TileCoordsPyramid> pyramid;
@@ -199,10 +204,10 @@ QVector<TileCoordsPyramid> DownloadRegion::fromPath( const TextureLayer *texture
         qreal dlonEast =  atan2( sin( 3*M_PI/4 ) * sin( radianOffset ) * cos( latCenter ),  cos( radianOffset ) -  sin( latCenter ) * sin( latSouth ) );
         qreal lonEast  = fmod( lonCenter - dlonEast+M_PI, 2*M_PI ) - M_PI;
 
-        int const northY = d->rad2PixelY( latNorth, textureLayer );
-        int const southY = d->rad2PixelY( latSouth, textureLayer );
-        int const eastX =  d->rad2PixelX( lonEast, textureLayer );
-        int const westX =  d->rad2PixelX( lonWest, textureLayer );
+        int const northY = d->rad2PixelY( latNorth, tileLayer );
+        int const southY = d->rad2PixelY( latSouth, tileLayer );
+        int const eastX =  d->rad2PixelX( lonEast, tileLayer );
+        int const westX =  d->rad2PixelX( lonWest, tileLayer );
 
         int const west  = qMin( westX, eastX );
         int const north = qMin( northY, southY );

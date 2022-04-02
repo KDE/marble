@@ -22,15 +22,4 @@ const char* GeoSceneTextureTileDataset::nodeType() const
     return GeoSceneTypes::GeoSceneTextureTileType;
 }
 
-GeoDataLatLonBox GeoSceneTextureTileDataset::latLonBox() const
-{
-    return m_latLonBox;
-}
-
-void GeoSceneTextureTileDataset::setLatLonBox( const GeoDataLatLonBox &box )
-{
-    m_latLonBox = box;
-}
-
-
 }

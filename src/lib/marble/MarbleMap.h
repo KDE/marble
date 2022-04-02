@@ -47,6 +47,7 @@ class AbstractDataPlugin;
 class AbstractDataPluginItem;
 class AbstractFloatItem;
 class TextureLayer;
+class VectorTileLayer;
 class TileCoordsPyramid;
 class GeoSceneTextureTileDataset;
 class StyleBuilder;
@@ -396,6 +397,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
     QFont defaultFont() const;
 
     TextureLayer *textureLayer() const;
+    VectorTileLayer * vectorTileLayer() const;
 
     /**
      * @brief Add a layer to be included in rendering.

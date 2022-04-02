@@ -559,6 +559,8 @@ void MarbleMap::downloadRegion( QVector<TileCoordsPyramid> const & pyramid )
         while( i.hasNext() ) {
             TileId const tileId = i.next();
             d->m_textureLayer.downloadStackedTile( tileId );
+            d->m_vectorTileLayer.downloadTile(tileId);
+            mDebug() << "TileDownload" << tileId;
         }
         tilesCount += tileIdSet.count();
     }
@@ -1461,6 +1463,11 @@ void  MarbleMap::removeTextureLayer(const QString &key)
 TextureLayer *MarbleMap::textureLayer() const
 {
     return &d->m_textureLayer;
+}
+
+VectorTileLayer *MarbleMap::vectorTileLayer() const
+{
+    return &d->m_vectorTileLayer;
 }
 
 const StyleBuilder* MarbleMap::styleBuilder() const

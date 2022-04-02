@@ -18,6 +18,7 @@ class GeoDataLatLonAltBox;
 class GeoDataLineString;
 class TileCoordsPyramid;
 class MarbleModel;
+class TileLayer;
 class TextureLayer;
 
 class MARBLE_EXPORT DownloadRegion : public QObject
@@ -33,14 +34,14 @@ class MARBLE_EXPORT DownloadRegion : public QObject
 
     void setTileLevelRange( int const minimumTileLevel, int const maximumTileLevel );
 
-    QVector<TileCoordsPyramid> region( const TextureLayer *textureLayer, const GeoDataLatLonAltBox &region ) const;
+    QVector<TileCoordsPyramid> region( const TileLayer *tileLayer, const GeoDataLatLonAltBox &region ) const;
 
     void setVisibleTileLevel( int const tileLevel );
 
     /**
       * @brief calculates the region to be downloaded around a path
       */
-    QVector<TileCoordsPyramid> fromPath( const TextureLayer *textureLayer, qreal offset, const GeoDataLineString &path ) const;
+    QVector<TileCoordsPyramid> fromPath( const TileLayer *tileLayer, qreal offset, const GeoDataLineString &path ) const;
 
   private:
     DownloadRegionPrivate* const d;

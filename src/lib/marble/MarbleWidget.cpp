@@ -378,6 +378,11 @@ Marble::TextureLayer* MarbleWidget::textureLayer() const
     return d->m_map.textureLayer();
 }
 
+VectorTileLayer *MarbleWidget::vectorTileLayer() const
+{
+    return d->m_map.vectorTileLayer();
+}
+
 QPixmap MarbleWidget::mapScreenShot()
 {
     return grab();

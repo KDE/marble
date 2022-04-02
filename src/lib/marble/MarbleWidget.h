@@ -46,6 +46,7 @@ class RenderPlugin;
 class RenderState;
 class RoutingLayer;
 class TextureLayer;
+class VectorTileLayer;
 class TileCoordsPyramid;
 class TileCreator;
 class ViewportParams;
@@ -1061,6 +1062,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void setInputEnabled( bool );
 
     TextureLayer *textureLayer() const;
+
+    VectorTileLayer *vectorTileLayer() const;
 
     //@}
 

@@ -10,8 +10,7 @@
 #ifndef MARBLE_VECTORTILELAYER_H
 #define MARBLE_VECTORTILELAYER_H
 
-#include "LayerInterface.h"
-#include <QObject>
+#include "TileLayer.h"
 
 #include "MarbleGlobal.h"
 
@@ -28,7 +27,7 @@ class HttpDownloadManager;
 class ViewportParams;
 class TileId;
 
-class VectorTileLayer : public QObject, public LayerInterface
+class MARBLE_EXPORT VectorTileLayer : public TileLayer
 {
     Q_OBJECT
 
@@ -38,8 +37,6 @@ public:
                     GeoDataTreeModel *treeModel);
 
     ~VectorTileLayer() override;
-
-    QStringList renderPosition() const override;
 
     RenderState renderState() const override;
 
@@ -52,6 +49,14 @@ public:
                 GeoSceneLayer *layer = nullptr) override;
 
     void reload();
+
+    QSize tileSize() const;
+    const GeoSceneAbstractTileProjection *tileProjection() const;
+
+    int tileColumnCount( int level ) const;
+    int tileRowCount( int level ) const;
+
+    void downloadTile( const TileId &stackedTileId );
 
 Q_SIGNALS:
     void tileLevelChanged(int tileLevel);

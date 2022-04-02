@@ -55,6 +55,8 @@ public:
 
     QString name() const;
 
+    const GeoSceneVectorTileDataset *layer() const;
+
     void removeTile(GeoDataDocument* document);
 
     int tileZoomLevel() const;
