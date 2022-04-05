@@ -74,10 +74,9 @@ void GpsdPositionProviderPlugin::update( gps_data_t data )
 {
     PositionProviderStatus oldStatus = m_status;
     GeoDataCoordinates oldPosition = m_position;
-#if defined(STATUS_UNK) // STATUS_NO_FIX was renamed to STATUS_UNK without bumping API version
-    if ( data.fix.status == STATUS_UNK || std::isnan( data.fix.longitude ) || std::isnan( data.fix.latitude ) )
-#elif defined( GPSD_API_MAJOR_VERSION ) && ( GPSD_API_MAJOR_VERSION >= 10 )
-    if ( data.fix.status == STATUS_NO_FIX || std::isnan( data.fix.longitude ) || std::isnan( data.fix.latitude ) )
+
+#if defined( GPSD_API_MAJOR_VERSION ) && ( GPSD_API_MAJOR_VERSION >= 10 )
+    if ( data.fix.mode <= MODE_NO_FIX || std::isnan( data.fix.longitude ) || std::isnan( data.fix.latitude ) )
 #else
     if ( data.status == STATUS_NO_FIX || std::isnan( data.fix.longitude ) || std::isnan( data.fix.latitude ) )
 #endif

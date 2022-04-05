@@ -92,6 +92,22 @@ void GpsdConnection::initialize()
 
 void GpsdConnection::update()
 {
+#if defined( GPSD_API_MAJOR_VERSION ) && ( GPSD_API_MAJOR_VERSION >= 12 ) && defined( PACKET_SET )
+    gps_data_t* data = nullptr;
+
+    if ( m_gpsd.waiting(gpsUpdateInterval * 1000) )
+    {
+        gps_data_t *currentData = m_gpsd.read();
+
+        if( currentData && currentData->set & PACKET_SET ) {
+            data = currentData;
+        }
+    }
+
+    if ( data ) {
+        emit gpsdInfo( *data );
+    }
+#else
 #if defined( GPSD_API_MAJOR_VERSION ) && ( GPSD_API_MAJOR_VERSION >= 4 ) && defined( PACKET_SET )
     gps_data_t *data = nullptr;
 
@@ -128,6 +144,7 @@ void GpsdConnection::update()
         mDebug() << "Lost connection to gpsd, trying to re-open.";
         initialize();
     }
+#endif
 #endif
 }
 
