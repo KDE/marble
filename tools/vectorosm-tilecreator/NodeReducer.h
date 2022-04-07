@@ -101,7 +101,14 @@ private:
         T result;
         result << lineString[0];
         for (int i=1; i<end; ++i) {
-            bool const keepNode = touchesTileBorder(lineString[i]) || !osmData.nodeReference(lineString[i]).isEmpty();
+            // even if under the Douglas Peucker threshold, we keep the following nodes:
+            // - nodes at a tile border
+            // - nodes containing any OSM tag themselves
+            // - nodes adjacent to synthetic nodes introduced by clipping. This is to avoid
+            //   synthetic only line segments that geometry reassembly on the client might
+            //   remove entirely and thus distort the original geometry.
+            bool const keepNode = touchesTileBorder(lineString[i]) || !osmData.nodeReference(lineString[i]).isEmpty()
+                || osmData.nodeReference(lineString[i-1]).id() < 0 || ((i + 1) < end && osmData.nodeReference(lineString[i+1]).id() < 0);
             if (keepNode) {
                 result << lineString[i];
             }
