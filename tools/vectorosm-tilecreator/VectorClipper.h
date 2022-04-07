@@ -79,6 +79,9 @@ private:
     void clipString(const GeoDataPlacemark *placemark, const ClipperLib::Path &tileBoundary, qreal minArea,
                     GeoDataDocument* document, QSet<qint64> &osmIds)
     {
+        if (osmIds.contains(placemark->osmData().id())) {
+            return;
+        }
         bool isBuilding = false;
         const T* ring;
         std::unique_ptr<GeoDataPlacemark> copyPlacemark;

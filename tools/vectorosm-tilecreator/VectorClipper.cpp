@@ -277,6 +277,7 @@ void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const Clipper
         copyTags(outerRingOsmData, newOuterRingOsmData);
         if (outerRingOsmData.id() > 0) {
             newOuterRingOsmData.addTag(QStringLiteral("mx:oid"), QString::number(outerRingOsmData.id()));
+            osmIds.insert(outerRingOsmData.id());
         }
 
         auto const & innerBoundaries = qAsConst(polygon)->innerBoundaries();
@@ -307,6 +308,7 @@ void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const Clipper
                 newPolygon->appendInnerBoundary(innerRing);
                 if (innerRingOsmData.id() > 0) {
                     newInnerRingOsmData.addTag(QStringLiteral("mx:oid"), QString::number(innerRingOsmData.id()));
+                    osmIds.insert(innerRingOsmData.id());
                 }
                 copyTags(innerRingOsmData, newInnerRingOsmData);
             }
