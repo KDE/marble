@@ -33,8 +33,6 @@
 namespace Marble
 {
 
-const QSharedPointer<const GeoDataStyle> GeoDataFeaturePrivate::s_defaultStyle(new GeoDataStyle);
-
 GeoDataFeature::GeoDataFeature()
     : d_ptr(new GeoDataFeaturePrivate())
 {
@@ -419,7 +417,8 @@ GeoDataStyle::ConstPtr GeoDataFeature::style() const
         return d->m_style;
     }
 
-    return GeoDataFeaturePrivate::s_defaultStyle;
+    static const QSharedPointer<const GeoDataStyle> s_defaultStyle(new GeoDataStyle);
+    return s_defaultStyle;
 }
 
 GeoDataStyle::ConstPtr GeoDataFeature::customStyle() const

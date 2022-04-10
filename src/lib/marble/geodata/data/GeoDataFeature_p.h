@@ -203,9 +203,6 @@ class GeoDataFeaturePrivate
 
     GeoDataExtendedData m_extendedData;
     mutable GeoDataFeatureExtendedData* m_featureExtendedData;
-
-    // Static members
-    static const QSharedPointer<const GeoDataStyle> s_defaultStyle;
 };
 
 
