@@ -34,6 +34,7 @@ Name[zh_CN]=GeoJSON 地理数据
 Name[zh_TW]=GeoJSON 地理資料
 
 X-KDE-ServiceTypes=ThumbCreator
+X-KDE-PluginInfo-Name=marble_thumbnail_geojson
 MimeType=application/geo+json;
 
 X-KDE-Library=marblethumbnail
