@@ -39,6 +39,7 @@ Name[zh_CN]=ESRI 形状文件
 Name[zh_TW]=ESRI Shapefile
 
 X-KDE-ServiceTypes=ThumbCreator
+X-KDE-PluginInfo-Name=marble_thumbnail_shp
 MimeType=application/x-esri-shape;
 
 X-KDE-Library=marblethumbnail

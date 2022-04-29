@@ -39,6 +39,7 @@ Name[zh_CN]=GPX 地理数据
 Name[zh_TW]=GPX 地理資料
 
 X-KDE-ServiceTypes=ThumbCreator
+X-KDE-PluginInfo-Name=marble_thumbnail_gpx
 MimeType=application/gpx+xml;
 
 X-KDE-Library=marblethumbnail

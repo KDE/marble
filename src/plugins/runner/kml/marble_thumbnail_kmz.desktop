@@ -39,6 +39,7 @@ Name[zh_CN]=KML 压缩地理数据
 Name[zh_TW]=KML 地理壓縮資料
 
 X-KDE-ServiceTypes=ThumbCreator
+X-KDE-PluginInfo-Name=marble_thumbnail_kmz
 MimeType=application/vnd.google-earth.kmz;
 
 X-KDE-Library=marblethumbnail
