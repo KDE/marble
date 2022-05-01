@@ -54,9 +54,8 @@ namespace Marble
 
         GeoDataLookAt target = lookAt();
         GeoDataCoordinates coords(map()->viewport()->centerLongitude(), map()->viewport()->centerLatitude());
-
         GeoDataCoordinates movedCoords = coords.moveByBearing(-map()->heading() * DEG2RAD, -deltaLat * DEG2RAD);
-        movedCoords = movedCoords.moveByBearing((-map()->heading() - 90) * DEG2RAD, -deltaLon * DEG2RAD);
+        movedCoords = movedCoords.moveByBearing((-map()->heading() - 90) * DEG2RAD, -deltaLon * DEG2RAD * map()->viewport()->polarity());
 
         target.setLongitude(movedCoords.longitude());
         target.setLatitude(movedCoords.latitude());
