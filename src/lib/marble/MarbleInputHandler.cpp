@@ -951,19 +951,19 @@ bool MarbleDefaultInputHandler::handleKeyPress(QKeyEvent* event)
         switch ( event->key() ) {
         case Qt::Key_Left:
             stopInertialEarthRotation();
-            marblePresenter->moveByStep(-1, 0);
+            marblePresenter->moveByStep(-1, 0, Marble::Linear);
             break;
         case Qt::Key_Right:
             stopInertialEarthRotation();
-            marblePresenter->moveByStep(1, 0);
+            marblePresenter->moveByStep(1, 0, Marble::Linear);
             break;
         case Qt::Key_Up:
             stopInertialEarthRotation();
-            marblePresenter->moveByStep(0, -1);
+            marblePresenter->moveByStep(0, -1, Marble::Linear);
             break;
         case Qt::Key_Down:
             stopInertialEarthRotation();
-            marblePresenter->moveByStep(0, 1);
+            marblePresenter->moveByStep(0, 1, Marble::Linear);
             break;
         case Qt::Key_Plus:
             if (event->modifiers() != Qt::ControlModifier) {

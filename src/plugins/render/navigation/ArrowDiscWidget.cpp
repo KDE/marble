@@ -73,19 +73,19 @@ void ArrowDiscWidget::mousePressEvent( QMouseEvent *mouseEvent )
             break;
         case Qt::UpArrow:
             m_imagePath = "marble/navigation/navigational_arrows_press_top";
-            m_marbleWidget->moveUp();
+            m_marbleWidget->moveUp(Marble::Linear);
             break;
         case Qt::DownArrow:
             m_imagePath = "marble/navigation/navigational_arrows_press_bottom";
-            m_marbleWidget->moveDown();
+            m_marbleWidget->moveDown(Marble::Linear);
             break;
         case Qt::LeftArrow:
             m_imagePath = "marble/navigation/navigational_arrows_press_left";
-            m_marbleWidget->moveLeft();
+            m_marbleWidget->moveLeft(Marble::Linear);
             break;
         case Qt::RightArrow:
             m_imagePath = "marble/navigation/navigational_arrows_press_right";
-            m_marbleWidget->moveRight();
+            m_marbleWidget->moveRight(Marble::Linear);
             break;
         }
     }

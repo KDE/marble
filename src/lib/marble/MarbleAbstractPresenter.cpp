@@ -51,19 +51,16 @@ namespace Marble
 
     void MarbleAbstractPresenter::rotateBy(const qreal deltaLon, const qreal deltaLat, FlyToMode mode)
     {
-        Quaternion rotPhi(1.0, deltaLat / 180.0, 0.0, 0.0);
-        Quaternion rotTheta(1.0, 0.0, deltaLon / 180.0, 0.0);
-
-        Quaternion axis = map()->viewport()->planetAxis();
-        axis = rotTheta * axis;
-        axis *= rotPhi;
-        axis.normalize();
-        const qreal lat = -axis.pitch();
-        const qreal lon = axis.yaw();
 
         GeoDataLookAt target = lookAt();
-        target.setLongitude(lon);
-        target.setLatitude(lat);
+        GeoDataCoordinates coords(map()->viewport()->centerLongitude(), map()->viewport()->centerLatitude());
+
+        GeoDataCoordinates movedCoords = coords.moveByBearing(-map()->heading() * DEG2RAD, -deltaLat * DEG2RAD);
+        movedCoords = movedCoords.moveByBearing((-map()->heading() - 90) * DEG2RAD, -deltaLon * DEG2RAD);
+
+        target.setLongitude(movedCoords.longitude());
+        target.setLatitude(movedCoords.latitude());
+
         flyTo(target, mode);
     }
 

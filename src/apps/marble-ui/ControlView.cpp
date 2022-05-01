@@ -145,22 +145,22 @@ void ControlView::zoomOut()
 
 void ControlView::moveLeft()
 {
-    m_marbleWidget->moveLeft();
+    m_marbleWidget->moveLeft(Marble::Linear);
 }
 
 void ControlView::moveRight()
 {
-    m_marbleWidget->moveRight();
+    m_marbleWidget->moveRight(Marble::Linear);
 }
 
 void ControlView::moveUp()
 {
-    m_marbleWidget->moveUp();
+    m_marbleWidget->moveUp(Marble::Linear);
 }
 
 void ControlView::moveDown()
 {
-    m_marbleWidget->moveDown();
+    m_marbleWidget->moveDown(Marble::Linear);
 }
 
 QString ControlView::defaultMapThemeId() const

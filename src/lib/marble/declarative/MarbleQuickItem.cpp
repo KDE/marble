@@ -541,22 +541,22 @@ namespace Marble
 
     void MarbleQuickItem::moveUp()
     {
-        d->m_presenter.moveByStep( 0, -1, Marble::Automatic );
+        d->m_presenter.moveByStep( 0, -1, Marble::Linear );
     }
 
     void MarbleQuickItem::moveDown()
     {
-        d->m_presenter.moveByStep( 0, 1, Marble::Automatic );
+        d->m_presenter.moveByStep( 0, 1, Marble::Linear );
     }
 
     void MarbleQuickItem::moveLeft()
     {
-        d->m_presenter.moveByStep( -1, 0, Marble::Automatic );
+        d->m_presenter.moveByStep( -1, 0, Marble::Linear );
     }
 
     void MarbleQuickItem::moveRight()
     {
-        d->m_presenter.moveByStep( 1, 0, Marble::Automatic );
+        d->m_presenter.moveByStep( 1, 0, Marble::Linear );
     }
 
     qreal MarbleQuickItem::speed() const
