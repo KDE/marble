@@ -129,3 +129,38 @@ For input data updates:
     * 1GB disk space, 16k inodes
     * and an addtional 1.5GB temporary disk use during generation
     * generation takes 2-3 minutes and 4.5GB RAM
+
+## OSMX Database Rebuilds
+
+Incremental updates of the OSMX database seem to cause that to grow faster than what a clean import produces, and there is
+no built-in database compaction command. We therefore have to rebuild it from scratch every couple of months to avoid running
+out of disk space.
+
+```
+ssh mapsadmin@telemid.kde.org
+
+# Make sure to start the lengthy process in a screen session independent of the SSH session
+screen
+
+# Check the scratch space has at least 1TB of free space
+cd /mnt/scratch-space/
+
+# Download the latest OSM data dump (~15min)
+wget https://ftp5.gwdg.de/pub/misc/openstreetmap/planet.openstreetmap.org/pbf/planet-latest.osm.pbf
+
+# Import the OSM dump into the OSMX database (6-9h)
+/opt/osm/bin/osmx expand planet-latest.osm.pbf planet.osmx
+
+# Replace the previous OSMX database with the new one (1-2h)
+# The server is not able to generate new tiles during this period
+cd /var/lib/tirex/cache/
+rm planet.osmx planet.osmx-lock
+cp /mnt/scratch-space/planet.osmx .
+
+# Check that both the tirex and mapsadmin user can access the OSMX db ("osmx query planet.osmx" must not fail)
+chmod 664 planet.osmx-lock
+chown mapsadmin:tirex planet.osmx-lock
+
+# Clean up scratch space again
+rm /mnt/scratch-space/planet.osmx /mnt/scratch-space/planet.osmx-lock /mnt/scratch-space/planet-latest.osm.pbf
+```
