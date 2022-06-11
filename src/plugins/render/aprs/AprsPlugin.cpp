@@ -24,7 +24,7 @@
 
 #include <aprsconfig.h>
 
-#ifdef HAVE_QTSERIALPORT
+#if HAVE_QTSERIALPORT
 #include "AprsTTY.h"
 #endif
 
@@ -163,7 +163,7 @@ void AprsPlugin::stopGatherers()
     if ( m_tcpipGatherer )
         m_tcpipGatherer->shutDown();
 
-#ifdef HAVE_QTSERIALPORT
+#if HAVE_QTSERIALPORT
     if ( m_ttyGatherer )
         m_ttyGatherer->shutDown();
 #endif
@@ -176,7 +176,7 @@ void AprsPlugin::stopGatherers()
         if ( m_tcpipGatherer->wait(2000) )
             delete m_tcpipGatherer;
 
-#ifdef HAVE_QTSERIALPORT
+#if HAVE_QTSERIALPORT
     if ( m_ttyGatherer )
         if ( m_ttyGatherer->wait(2000) )
             delete m_ttyGatherer;
@@ -206,7 +206,7 @@ void AprsPlugin::restartGatherers()
         mDebug() << "started TCPIP gatherer";
     }
 
-#ifdef HAVE_QTSERIALPORT
+#if HAVE_QTSERIALPORT
     if ( m_useTty ) {
         m_ttyGatherer =
             new AprsGatherer( new AprsTTY( m_tncTty ),

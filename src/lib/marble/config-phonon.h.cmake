@@ -1,1 +1,1 @@
-#cmakedefine HAVE_PHONON 1
+#cmakedefine01 HAVE_PHONON

@@ -10,7 +10,7 @@
 
 #include <config-phonon.h>
 
-#ifdef HAVE_PHONON
+#if HAVE_PHONON
 #include <phonon/MediaObject>
 #endif
 
@@ -33,7 +33,7 @@ public:
 private:
     const GeoDataSoundCue* m_soundCue;
     QString m_href;
-#ifdef HAVE_PHONON
+#if HAVE_PHONON
     Phonon::MediaObject m_mediaObject;
 #endif
 };
