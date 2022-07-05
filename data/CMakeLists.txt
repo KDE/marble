@@ -294,8 +294,7 @@ endif()
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
 include(KDEInstallDirs) # for KDE_INSTALL_MIMEDIR
-# shared-mime-info 0.40 is mandatory for generic-icon
-set( SHARED_MIME_INFO_MINIMUM_VERSION "0.40" )
+set( SHARED_MIME_INFO_MINIMUM_VERSION "1.8" )
 find_package( SharedMimeInfo QUIET )
 if(SharedMimeInfo_FOUND)
     install(FILES mimetypes/geo.xml  DESTINATION ${KDE_INSTALL_MIMEDIR})
