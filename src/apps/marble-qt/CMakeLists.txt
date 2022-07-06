@@ -17,7 +17,7 @@ else (WIN32)
     if (APPLE)
         add_executable (marble-qt ${marble_SRCS})
         # For Mac OS X, the executable must be at the root of the bundle's executable folder
-        INSTALL(TARGETS marble-qt RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/Marble.app/Contents/MacOS)
+        INSTALL(TARGETS marble-qt RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/Marble.app/Contents/MacOS BUNDLE DESTINATION "/Applications/Marble")
     else (APPLE)
         add_executable (marble-qt ${marble_SRCS})
     endif (APPLE)
@@ -53,7 +53,7 @@ else(WIN32)
 if (APPLE)
   # No need for this when installing to a bundle
 else (APPLE)
-    install (TARGETS marble-qt RUNTIME DESTINATION bin )
+  install (TARGETS marble-qt RUNTIME DESTINATION bin)
 endif (APPLE)
 endif(WIN32)
 
