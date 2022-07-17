@@ -1,5 +1,0 @@
-[KNewStuff3]
-ProvidersUrl=http://edu.kde.org/marble/newstuff/providers-4.5.xml
-Categories=Marble Map
-XdgTargetDir=marble/maps
-Uncompress=archive
