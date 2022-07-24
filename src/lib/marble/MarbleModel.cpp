@@ -717,7 +717,7 @@ void MarbleModel::setLegend( QTextDocument * legend )
 
 void MarbleModel::addGeoDataFile( const QString& filename )
 {
-    d->m_fileManager.addFile( filename, filename, GeoDataStyle::Ptr(), UserDocument, true );
+    d->m_fileManager.addFile( filename, filename, GeoDataStyle::Ptr(), UserDocument, 0, true );
 }
 
 void MarbleModel::addGeoDataString( const QString& data, const QString& key )
