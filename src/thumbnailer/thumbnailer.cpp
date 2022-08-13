@@ -127,9 +127,4 @@ void GeoDataThumbnailer::onGeoDataObjectAdded( GeoDataObject* object )
     m_eventLoop.quit();
 }
 
-ThumbCreator::Flags GeoDataThumbnailer::flags() const
-{
-    return DrawFrame;
-}
-
 }
