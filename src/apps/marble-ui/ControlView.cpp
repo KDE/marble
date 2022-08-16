@@ -125,7 +125,7 @@ ControlView::~ControlView()
 
 QString ControlView::applicationVersion()
 {
-    return "2.2.20 (2.3 development version)";
+    return MARBLE_VERSION_STRING;
 }
 
 MapThemeManager *ControlView::mapThemeManager()
