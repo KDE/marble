@@ -38,17 +38,14 @@ target_include_directories(marbledeclarative PUBLIC $<BUILD_INTERFACE:${CMAKE_CU
 
 marble_add_project_resources(qmldir)
 
-# TODO: use PUBLIC/PRIVATE everywhere instead of LINK_PUBLIC/LINK_PRIVATE
-# once SailfishOS has cmake >= 2.8.12
-
 target_link_libraries( marbledeclarative
-    LINK_PUBLIC
+    PUBLIC
         marblewidget
         Qt5::Quick
 )
 if(Qt5Positioning_FOUND)
     target_link_libraries( marbledeclarative
-        LINK_PRIVATE
+        PRIVATE
             Qt5::Positioning
     )
 endif()

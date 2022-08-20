@@ -375,24 +375,20 @@ add_library(marblewidget ${marblewidget_SRCS} ${SOURCES_UI_HDRS})
 
 generate_export_header(marblewidget BASE_NAME marble)
 
-
-# TODO: use PUBLIC/PRIVATE everywhere instead of LINK_PUBLIC/LINK_PRIVATE
-# once SailfishOS has cmake >= 2.8.12
-
 # link with libastro
-target_link_libraries(marblewidget LINK_PRIVATE astro)
+target_link_libraries(marblewidget PRIVATE astro)
 
 # link against zlib
-target_link_libraries(marblewidget LINK_PRIVATE ${ZLIB_LIBRARIES})
+target_link_libraries(marblewidget PRIVATE ${ZLIB_LIBRARIES})
 
 # link with release version of Qt libs
 target_link_libraries(marblewidget
-    LINK_PUBLIC
+    PUBLIC
         Qt5::Xml
         Qt5::Gui
         Qt5::Widgets
         Qt5::Network
-    LINK_PRIVATE
+    PRIVATE
         Qt5::Core
         Qt5::Svg
         Qt5::PrintSupport
@@ -400,7 +396,7 @@ target_link_libraries(marblewidget
 )
 if (NOT MARBLE_NO_WEBKITWIDGETS)
     target_link_libraries(marblewidget
-        LINK_PUBLIC
+        PUBLIC
             Qt5::WebChannel
             Qt5::WebEngineWidgets
             Qt5::WebEngine
@@ -408,13 +404,13 @@ if (NOT MARBLE_NO_WEBKITWIDGETS)
 endif ()
 if (NOT MARBLE_NO_DBUS)
     target_link_libraries(marblewidget
-        LINK_PRIVATE
+        PRIVATE
             Qt5::DBus
     )
 endif ()
 if (Phonon4Qt5_FOUND)
     target_link_libraries(marblewidget
-        LINK_PRIVATE
+        PRIVATE
             Phonon::phonon4qt5
     )
 endif()
@@ -422,17 +418,17 @@ endif()
 if (APPLE)
   # TODO: PUBLIC or can be PRIVATE?
   #defined in top level makefile
-  target_link_libraries(marblewidget LINK_PUBLIC ${MAC_EXTRA_LIBS} )
+  target_link_libraries(marblewidget PUBLIC ${MAC_EXTRA_LIBS} )
 endif (APPLE)
 
 # TODO: still supported?
 if (CMAKE_SYSTEM_NAME MATCHES "SunOS")
-  target_link_libraries(marblewidget LINK_PUBLIC m)
+  target_link_libraries(marblewidget PUBLIC m)
 endif (CMAKE_SYSTEM_NAME MATCHES "SunOS")
 
 if(WIN32)
   # TODO: PUBLIC or can be PRIVATE?
-  target_link_libraries(marblewidget LINK_PUBLIC ws2_32 imm32 winmm)
+  target_link_libraries(marblewidget PUBLIC ws2_32 imm32 winmm)
 endif(WIN32)
 
 set_target_properties(marblewidget  PROPERTIES
