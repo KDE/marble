@@ -19,6 +19,7 @@ Notes:
     <comment xml:lang="fi">OSM-data</comment>
     <comment xml:lang="fr">Données « OSM »</comment>
     <comment xml:lang="id">Data OSM</comment>
+    <comment xml:lang="is">OSM-gögn</comment>
     <comment xml:lang="it">Dati OSM</comment>
     <comment xml:lang="ko">OSM 데이터</comment>
     <comment xml:lang="lt">OSM duomenys</comment>
@@ -59,6 +60,7 @@ Notes:
     <comment xml:lang="fi">ESRI Shapefile</comment>
     <comment xml:lang="fr">Fichier de formes « ESRI »</comment>
     <comment xml:lang="id">Shapefile ESRI</comment>
+    <comment xml:lang="is">ESRI Shapefile-skrá</comment>
     <comment xml:lang="it">Shapefile ESRI</comment>
     <comment xml:lang="ko">ESRI 모양 파일</comment>
     <comment xml:lang="nl">Vormbestand ESRI</comment>
@@ -93,6 +95,7 @@ Notes:
     <comment xml:lang="fi">ESRI Shapefile -hakemisto</comment>
     <comment xml:lang="fr">Index du fichier de formes « ESRI »</comment>
     <comment xml:lang="id">Indeks Shapefile ESRI</comment>
+    <comment xml:lang="is">ESRI Shapefile-atriðaskrá</comment>
     <comment xml:lang="it">Indice Shapefile ESRI</comment>
     <comment xml:lang="ko">ESRI 모양 파일 인덱스</comment>
     <comment xml:lang="nl">Index vormbestand ESRI</comment>

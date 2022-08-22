@@ -24,6 +24,7 @@
   <name xml:lang="fr">Marble</name>
   <name xml:lang="gl">Marble</name>
   <name xml:lang="id">Marble</name>
+  <name xml:lang="is">Marble</name>
   <name xml:lang="it">Marble</name>
   <name xml:lang="ko">Marble</name>
   <name xml:lang="lt">Marble</name>
@@ -60,6 +61,7 @@
   <summary xml:lang="fr">Globe terrestre virtuel</summary>
   <summary xml:lang="gl">Globo virtual</summary>
   <summary xml:lang="id">Globe Virtual</summary>
+  <summary xml:lang="is">Sýndarhnöttur</summary>
   <summary xml:lang="it">Globo virtuale</summary>
   <summary xml:lang="ko">가상 지구본</summary>
   <summary xml:lang="lt">Virtualus gaublys</summary>
@@ -195,6 +197,7 @@
       <caption xml:lang="fr">Globe terrestre dans Marble</caption>
       <caption xml:lang="gl">Globo terráqueo en Marble</caption>
       <caption xml:lang="id">Globe bumi di Marble</caption>
+      <caption xml:lang="is">Hnattlíkan í Marble</caption>
       <caption xml:lang="it">Il globo terrestre in Marble</caption>
       <caption xml:lang="ko">Marble로 본 지구본</caption>
       <caption xml:lang="nl">Wereldbol in Marble</caption>

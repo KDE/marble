@@ -18,6 +18,7 @@
   <name xml:lang="fi">Marble-kartat</name>
   <name xml:lang="fr">Cartes de Marble</name>
   <name xml:lang="id">Marble Maps</name>
+  <name xml:lang="is">Marble-landakort</name>
   <name xml:lang="it">Marble Maps</name>
   <name xml:lang="ko">Marble 지도</name>
   <name xml:lang="nl">Kaarten van Marble</name>
@@ -43,6 +44,7 @@
   <summary xml:lang="fi">Löydä reittisi</summary>
   <summary xml:lang="fr">Trouver votre chemin</summary>
   <summary xml:lang="id">Temukan jalan Anda</summary>
+  <summary xml:lang="is">Rataðu leiðina þína</summary>
   <summary xml:lang="it">Trova la via</summary>
   <summary xml:lang="ko">길 찾기</summary>
   <summary xml:lang="nl">Uw weg vinden</summary>
@@ -69,6 +71,7 @@
     <p xml:lang="fi">OpenStreetMap-navigointi.</p>
     <p xml:lang="fr">Navigation avec OpenStreetMap.</p>
     <p xml:lang="id">Navigasi OpenStreetMap.</p>
+    <p xml:lang="is">OpenStreetMap leiðsögn.</p>
     <p xml:lang="it">Navigazione con OpenStreetMap.</p>
     <p xml:lang="ko">OpenStreetMap 내비게이션입니다.</p>
     <p xml:lang="nl">Navigeren met OpenStreetMap.</p>
