@@ -105,5 +105,4 @@ GenericName[zh_CN]=虚拟地球仪
 GenericName[zh_TW]=虛擬地球儀
 MimeType=application/x-esri-shape;
 Icon=marble
-Terminal=false
 Categories=Qt;KDE;Education;Geography;
