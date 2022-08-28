@@ -26,6 +26,7 @@
   <name xml:lang="id">Marble</name>
   <name xml:lang="is">Marble</name>
   <name xml:lang="it">Marble</name>
+  <name xml:lang="ka">Marble</name>
   <name xml:lang="ko">Marble</name>
   <name xml:lang="lt">Marble</name>
   <name xml:lang="nds">Marble</name>
@@ -63,6 +64,7 @@
   <summary xml:lang="id">Globe Virtual</summary>
   <summary xml:lang="is">Sýndarhnöttur</summary>
   <summary xml:lang="it">Globo virtuale</summary>
+  <summary xml:lang="ka">ვირტუალური გლობუსი</summary>
   <summary xml:lang="ko">가상 지구본</summary>
   <summary xml:lang="lt">Virtualus gaublys</summary>
   <summary xml:lang="nds">Virtuell Globus</summary>
@@ -199,6 +201,7 @@
       <caption xml:lang="id">Globe bumi di Marble</caption>
       <caption xml:lang="is">Hnattlíkan í Marble</caption>
       <caption xml:lang="it">Il globo terrestre in Marble</caption>
+      <caption xml:lang="ka">დედამიწის გლობუსი Marble-ში</caption>
       <caption xml:lang="ko">Marble로 본 지구본</caption>
       <caption xml:lang="nl">Wereldbol in Marble</caption>
       <caption xml:lang="pa">ਮਾਰਬਲ ਵਿੱਚ ਧਰਤੀ ਦਾ ਗਲੋਬ</caption>
