@@ -50,33 +50,45 @@ namespace Marble
     }
 
     void GeoPolyline::updateScreenPositions() {
+        GeoDataLineString lineString(m_lineString);
+
         if (m_map) {
-            qDeleteAll(m_screenPolygons);
+            QPolygonF displayPolygon;
+            displayPolygon << QPointF(0,0) << QPointF(m_map->mapWidth(), 0)
+                           << QPointF(m_map->mapWidth(), m_map->mapHeight()) << QPointF(0, m_map->mapHeight());
             m_screenPolygons.clear();
-            m_map->screenCoordinatesFromGeoDataLineString(m_lineString, m_screenPolygons);
+            QVector<QPolygonF*> fullScreenPolygons;
+            bool success = m_map->screenCoordinatesFromGeoDataLineString(lineString, fullScreenPolygons);
+            for (auto reducedPolygon : qAsConst(fullScreenPolygons)) {
+                m_screenPolygons << reducedPolygon->intersected(displayPolygon);
+            }
+
+            QVariantList previousScreenCoordinates;
+            previousScreenCoordinates = m_screenCoordinates;
             m_screenCoordinates.clear();
-            int i = 0;
-            for (auto polygon : m_screenPolygons) {
-                QVariantList m_polyline;
-                QPolygonF screenPolygon = *polygon;
-                for (auto node : screenPolygon) {
-                    QVariantMap vmap;
-                    vmap["x"] = node.x();
-                    vmap["y"] = node.y();
-                    m_polyline.append(vmap);
+            if (success) {
+                int i = 0;
+                for (auto screenPolygon : qAsConst(m_screenPolygons)) {
+                    QVariantList polyline;
+                    for (auto node : screenPolygon) {
+                        QVariantMap vmap;
+                        vmap["x"] = node.x();
+                        vmap["y"] = node.y();
+                        polyline.append(vmap);
+                    }
+                    m_screenCoordinates.insert(i, polyline);
+                    ++i;
                 }
-                m_screenCoordinates.insert(i, m_polyline);
-                ++i;
             }
 
             QRectF polygonBoundingRect;
             if (m_screenPolygons.length() == 1) {
-                polygonBoundingRect = m_screenPolygons[0]->boundingRect();
+                polygonBoundingRect = m_screenPolygons[0].boundingRect();
             }
             else {
                 QPolygonF polygons;
-                for (auto polygon : m_screenPolygons) {
-                    polygons << *polygon;
+                for (auto polygon : qAsConst(m_screenPolygons)) {
+                    polygons << polygon;
                 }
                 polygonBoundingRect = polygons.boundingRect();
             }
@@ -85,7 +97,9 @@ namespace Marble
             setWidth(polygonBoundingRect.width());
             setHeight(polygonBoundingRect.height());
 
-            emit screenCoordinatesChanged();
+            if (m_screenCoordinates != previousScreenCoordinates) {
+                emit screenCoordinatesChanged();
+            }
             emit readonlyXChanged();
             emit readonlyYChanged();
             emit readonlyWidthChanged();
@@ -203,12 +217,12 @@ namespace Marble
         if (m_screenPolygons.isEmpty()) return oldNode;
 
         for(int i = 0; i < m_screenPolygons.length(); ++i) {
-            QPolygonF * polygon = m_screenPolygons[i];
+            QPolygonF polygon = m_screenPolygons[i];
             QVector<QVector2D> normals;
-            int segmentCount = polygon->size() - 1;
+            int segmentCount = polygon.size() - 1;
             normals.reserve(segmentCount);
             for(int i = 0; i < segmentCount; ++i) {
-                normals << QVector2D(polygon->at(i+1) - polygon->at(i)).normalized();
+                normals << QVector2D(polygon.at(i+1) - polygon.at(i)).normalized();
             }
             QSGGeometryNode* lineNode = new QSGGeometryNode;
 
@@ -228,7 +242,7 @@ namespace Marble
             auto points = lineNodeGeo->vertexDataAsPoint2D();
             int k = -1;
             for(int i = 0; i < segmentCount + 1; ++i) {
-                auto const & a = mapFromItem(m_map, polygon->at(i));
+                auto const & a = mapFromItem(m_map, polygon.at(i));
                 auto const & n = normals[qMin(i, segmentCount - 1)].toPointF();
                 points[++k].set(a.x() - halfWidth * n.y(), a.y() + halfWidth * n.x());
                 points[++k].set(a.x() + halfWidth * n.y(), a.y() - halfWidth * n.x());
