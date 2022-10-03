@@ -54,8 +54,8 @@ namespace Marble
 
         if (m_map) {
             QPolygonF displayPolygon;
-            displayPolygon << QPointF(0,0) << QPointF(m_map->mapWidth(), 0)
-                           << QPointF(m_map->mapWidth(), m_map->mapHeight()) << QPointF(0, m_map->mapHeight());
+            displayPolygon << QPointF(-10,-10) << QPointF(m_map->mapWidth() + 10, -10)
+                           << QPointF(m_map->mapWidth() + 10, m_map->mapHeight() + 10) << QPointF(-10, m_map->mapHeight() + 10);
             m_screenPolygons.clear();
             QVector<QPolygonF*> fullScreenPolygons;
             bool success = m_map->screenCoordinatesFromGeoDataLineString(lineString, fullScreenPolygons);
